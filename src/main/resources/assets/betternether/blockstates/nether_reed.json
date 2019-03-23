@@ -1,0 +1,6 @@
+{
+	"variants": {
+        "shape=top":  { "model": "betternether:nether_reed_top" },
+        "shape=bottom":  { "model": "betternether:nether_reed" }
+    }
+}

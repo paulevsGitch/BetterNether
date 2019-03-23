@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:blocks/reeds_block_side",
+        "down": "betternether:blocks/reeds_block_top",
+        "up": "betternether:blocks/reeds_block_top",
+        "north": "betternether:blocks/reeds_block_side",
+        "east": "betternether:blocks/reeds_block_side",
+        "south": "betternether:blocks/reeds_block_side",
+        "west": "betternether:blocks/reeds_block_side"
+    }
+}

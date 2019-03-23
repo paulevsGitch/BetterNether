@@ -1,0 +1,14 @@
+{
+	"variants":
+	{
+        "normal":  [
+			{ "model": "betternether:bone_block" },
+			{ "model": "betternether:bone_block", "x": 180 },
+			{ "model": "betternether:bone_block", "y": 180 },
+			{ "model": "betternether:bone_block", "z": 180 },
+			{ "model": "betternether:bone_block", "x": 180, "y": 180 },
+			{ "model": "betternether:bone_block", "z": 180, "y": 180 },
+			{ "model": "betternether:bone_block", "x": 180, "z": 180 }
+		]
+    }
+}

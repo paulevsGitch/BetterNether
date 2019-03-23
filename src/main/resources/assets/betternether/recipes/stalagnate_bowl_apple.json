@@ -1,0 +1,1 @@
+{  "type": "minecraft:crafting_shaped",  "pattern": [    "W",    "#"  ],  "key": {    "#": {      "item": "betternether:stalagnate_bowl"    },	"W": {      "item": "betternether:black_apple"    }  },  "result": {    "item": "betternether:stalagnate_bowl_apple"  }}

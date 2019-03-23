@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_gate_open",
+    "textures": {
+        "texture": "betternether:blocks/reeds_block_side"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "betternether:blocks/stalagnate_seed"
+    }
+}

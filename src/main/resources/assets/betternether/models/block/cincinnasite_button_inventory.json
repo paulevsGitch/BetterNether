@@ -1,0 +1,6 @@
+{
+    "parent": "block/button_inventory",
+    "textures": {
+        "texture": "betternether:blocks/cincinnasite_plate_up"
+    }
+}

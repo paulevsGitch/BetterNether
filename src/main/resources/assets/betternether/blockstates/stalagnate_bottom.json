@@ -1,0 +1,14 @@
+{
+    "multipart":
+	[
+        {
+			"apply": { "model": "betternether:stalagnate_bottom" }
+		},
+		{
+			"apply": { "model": "betternether:stalagnate_roots" }
+		},
+		{
+			"apply": { "model": "betternether:stalagnate_roots_2" }
+		}
+    ]
+}

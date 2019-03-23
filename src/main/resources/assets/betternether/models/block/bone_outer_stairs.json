@@ -1,0 +1,8 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": {
+        "bottom": "betternether:blocks/bone_block",
+        "top": "betternether:blocks/bone_block",
+        "side": "betternether:blocks/bone_block"
+    }
+}

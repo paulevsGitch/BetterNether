@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+	"#G#",
+	" # "
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    },
+	"G": {
+      "item": "minecraft:glowstone",
+	  "data": 32767
+    }
+  },
+  "result": {
+    "item": "betternether:cincinnasite_lantern"
+  }
+}

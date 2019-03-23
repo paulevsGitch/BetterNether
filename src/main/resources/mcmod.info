@@ -1,0 +1,23 @@
+{
+	"modListVersion": 2,
+	"modList": [
+		{
+			"modid": "betternether",
+			"name": "Better Nether",
+			"description": "Mod that improves Nether",
+			"mcversion": "1.12.2",
+			"version": "${version}",
+			"authorList": [ "paulevs" ],
+			"credits": "paulevs",
+			"dependants": [],
+			"dependencies": [ "forge@[14.23.4.2705,)" ],
+			"parent": "",
+			"requiredMods": [ "forge@[14.23.4.2705,)" ],
+			"logoFile": "logo.png",
+			"screenshots": [],
+			"updateUrl": "",
+			"url": "",
+			"useDependencyInformation": true
+		}
+	]
+}

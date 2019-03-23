@@ -1,0 +1,11 @@
+{
+    "variants":
+	{
+        "normal": [
+			{ "model": "betternether:black_apple" },
+			{ "model": "betternether:black_apple", "y": 90 },
+			{ "model": "betternether:black_apple", "y": 180 },
+			{ "model": "betternether:black_apple", "y": 270 }
+		]
+    }
+}

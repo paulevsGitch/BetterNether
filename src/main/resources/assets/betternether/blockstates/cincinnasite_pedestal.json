@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+        "normal":  [
+			{ "model": "betternether:cincinnasite_pedestal" }
+		]
+    }
+}

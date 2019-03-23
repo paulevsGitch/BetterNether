@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "betternether:blocks/reeds_block_top",
+        "top": "betternether:blocks/reeds_block_top",
+        "side": "betternether:blocks/reeds_block_side"
+    }
+}

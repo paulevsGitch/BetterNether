@@ -1,0 +1,7 @@
+{
+    "variants":
+	{
+        "half=bottom": { "model": "betternether:reeds_half_slab" },
+        "half=top": { "model": "betternether:reeds_half_slab", "x": 180, "uvlock": true }
+    }
+}

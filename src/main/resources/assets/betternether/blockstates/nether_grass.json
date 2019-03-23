@@ -1,0 +1,10 @@
+{
+    "variants":
+	{
+        "normal": [
+			{ "model": "betternether:nether_grass_1" },
+			{ "model": "betternether:nether_grass_2" },
+			{ "model": "betternether:nether_grass_3" }
+		]
+    }
+}

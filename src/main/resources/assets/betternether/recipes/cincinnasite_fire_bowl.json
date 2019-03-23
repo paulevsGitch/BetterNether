@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#N#",
+	" # "
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    },
+	"N": {
+      "item": "minecraft:netherrack"
+    }
+  },
+  "result": {
+    "item": "betternether:cincinnasite_fire_bowl"
+  }
+}

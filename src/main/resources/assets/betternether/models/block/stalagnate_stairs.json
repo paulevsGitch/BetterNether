@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "betternether:blocks/stalagnate_planks",
+        "top": "betternether:blocks/stalagnate_planks",
+        "side": "betternether:blocks/stalagnate_planks"
+    }
+}

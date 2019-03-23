@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:blocks/nether_moss_side",
+        "down": "blocks/netherrack",
+        "up": "betternether:blocks/nether_moss_top",
+        "north": "betternether:blocks/nether_moss_side",
+        "east": "betternether:blocks/nether_moss_side",
+        "south": "betternether:blocks/nether_moss_side",
+        "west": "betternether:blocks/nether_moss_side"
+    }
+}

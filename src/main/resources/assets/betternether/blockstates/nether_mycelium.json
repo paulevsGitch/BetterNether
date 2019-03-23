@@ -1,0 +1,11 @@
+{
+    "variants":
+	{
+        "normal": [
+			{ "model": "betternether:nether_mycelium" },
+			{ "model": "betternether:nether_mycelium", "y": 90 },
+			{ "model": "betternether:nether_mycelium", "y": 180 },
+			{ "model": "betternether:nether_mycelium", "y": 270 }
+		]
+    }
+}

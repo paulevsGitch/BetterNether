@@ -1,0 +1,7 @@
+{
+	"variants": {
+        "shape=top":  { "model": "betternether:red_mushroom_top" },
+		"shape=middle":  { "model": "betternether:red_mushroom_middle" },
+        "shape=bottom":  { "model": "betternether:red_mushroom_bottom" }
+    }
+}

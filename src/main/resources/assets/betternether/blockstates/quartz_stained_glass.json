@@ -1,0 +1,27 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cube_all",
+		"transform": "forge:default-block",
+		"textures": { "all": "betternether:blocks/quartz_stained_glass_white" }
+	},
+	"variants": {
+		"inventory": [{}],
+		"color=black": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_black" } }],
+		"color=blue": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_blue" } }],
+		"color=brown": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_brown" } }],
+		"color=cyan": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_cyan" } }],
+		"color=gray": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_gray" } }],
+		"color=green": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_green" } }],
+		"color=light_blue": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_light_blue" } }],
+		"color=lime": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_lime" } }],
+		"color=magenta": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_magenta" } }],
+		"color=orange": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_orange" } }],
+		"color=pink": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_pink" } }],
+		"color=purple": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_purple" } }],
+		"color=red": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_red" } }],
+		"color=silver": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_silver" } }],
+		"color=white": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_white" } }],
+		"color=yellow": [{ "textures": { "all": "betternether:blocks/quartz_stained_glass_yellow" } }]
+	}
+}

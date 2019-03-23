@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "betternether:stalagnate_bark" },
+        "axis=z": { "model": "betternether:stalagnate_bark", "x": 90 },
+        "axis=x": { "model": "betternether:stalagnate_bark", "x": 90, "y": 90 }
+    }
+}
