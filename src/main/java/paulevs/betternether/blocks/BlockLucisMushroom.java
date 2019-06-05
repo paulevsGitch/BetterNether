@@ -59,7 +59,7 @@ public class BlockLucisMushroom extends Block
 	@Override
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
 	{
-		if (!worldIn.isRemote && worldIn.rand.nextInt(4) == 0)
+		if (!worldIn.isRemote && worldIn.rand.nextBoolean())
 			spawnSeeds(worldIn, pos);
 		worldIn.destroyBlock(pos, true);
 	}

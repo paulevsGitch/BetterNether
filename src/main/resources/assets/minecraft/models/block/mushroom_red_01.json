@@ -1,8 +1,8 @@
 {
 	"__comment": "Designed by Paulevs with BDcraft Cubik PRO 0.93 Beta - http://bdcraft.net",
 	"textures": {
-		"particle": "blocks/mushroom_red",
-		"texture": "blocks/mushroom_red",
+		"particle": "blocks/mushroom_red_new",
+		"texture": "blocks/mushroom_red_new",
 		"mushroom_block_inside": "blocks/mushroom_block_inside"
 	},
 	"elements": [ 	 

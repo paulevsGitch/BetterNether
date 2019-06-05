@@ -39,6 +39,7 @@ public class TileEntityChestUniversal extends TileEntityLockableLoot implements 
 	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(27, ItemStack.EMPTY);
 	/** The number of players currently using this chest */
 	public int numPlayersUsing;
+	private boolean open = false;
 
 	public TileEntityChestUniversal()
 	{
@@ -178,13 +179,15 @@ public class TileEntityChestUniversal extends TileEntityLockableLoot implements 
 	@Override
 	public void update()
 	{
-		if (numPlayersUsing < 1 && world.getBlockState(pos).getValue(BlockInventoryUniversal.OPEN))
+		if (numPlayersUsing < 1 && open)
 		{
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(BlockInventoryUniversal.OPEN, false), 3);
+			open = false;
 		}
-		else if (numPlayersUsing > 0 && !world.getBlockState(pos).getValue(BlockInventoryUniversal.OPEN))
+		else if (numPlayersUsing > 0 && !open)
 		{
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(BlockInventoryUniversal.OPEN, true), 3);
+			open = true;
 		}
 	}
 	

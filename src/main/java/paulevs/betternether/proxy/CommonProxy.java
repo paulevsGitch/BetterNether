@@ -11,6 +11,7 @@ import paulevs.betternether.entities.EntityRegister;
 import paulevs.betternether.events.EventsHandler;
 import paulevs.betternether.items.ItemsRegister;
 import paulevs.betternether.recipes.RecipeRegister;
+import paulevs.betternether.sounds.SoundRegister;
 import paulevs.betternether.tileentities.TileEntityRegister;
 import paulevs.betternether.world.BNWorldGenerator;
 
@@ -26,10 +27,9 @@ public class CommonProxy
 		BiomeRegister.registerBiomes();
 		ConfigLoader.postBiomeInit();
 		RecipeRegister.register();
-		BNWorldGenerator.updateGenSettings();
+		SoundRegister.register();
 		EntityRegister.register();
 		TileEntityRegister.register();
-		ConfigLoader.dispose();
 		MinecraftForge.EVENT_BUS.register(new EventsHandler());
 	}
 
@@ -40,6 +40,7 @@ public class CommonProxy
 
 	public void postInit(FMLPostInitializationEvent event)
 	{
-
+		BNWorldGenerator.updateGenSettings();
+		ConfigLoader.dispose();
 	}
 }

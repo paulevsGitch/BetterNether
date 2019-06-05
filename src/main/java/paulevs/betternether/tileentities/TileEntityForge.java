@@ -208,7 +208,7 @@ public class TileEntityForge extends TileEntityFurnace
 		boolean flag = this.isBurning();
 		boolean flag1 = false;
 
-		if (this.isBurning() && !this.furnaceItemStacks.get(0).isEmpty())
+		if (this.isBurning())
 		{
 			--this.furnaceBurnTime;
 		}
@@ -246,7 +246,7 @@ public class TileEntityForge extends TileEntityFurnace
 				{
 					++this.cookTime;
 
-					if (this.cookTime == this.totalCookTime)
+					if (this.cookTime >= this.totalCookTime)
 					{
 						this.cookTime = 0;
 						this.totalCookTime = this.getCookTime(this.furnaceItemStacks.get(0));
@@ -266,7 +266,7 @@ public class TileEntityForge extends TileEntityFurnace
 
 			if (flag != this.isBurning())
 			{
-				flag1 = true && !this.furnaceItemStacks.get(1).isEmpty();
+				flag1 = true;
 				world.setBlockState(pos, world.getBlockState(pos).withProperty(BlockCincinnasiteForge.ACTIVE, this.isBurning()), 3);
 			}
 		}

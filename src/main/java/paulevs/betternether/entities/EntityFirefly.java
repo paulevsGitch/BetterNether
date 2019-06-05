@@ -32,6 +32,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import paulevs.betternether.biomes.BiomeRegister;
 import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.sounds.SoundRegister;
 import paulevs.betternether.world.BNWorldGenerator;
 
 @Optional.Interface(iface="elucent.albedo.lighting.ILightProvider", modid="albedo")
@@ -48,8 +49,6 @@ public class EntityFirefly extends EntityAmbientCreature implements IAnimals, IL
 	private boolean wantToSit;
 	private float sitY;
 	private float test;
-	
-	private static final SoundEvent FLY_SOUND = new SoundEvent(new ResourceLocation("betternether", "mob.firefly.fly"));
 
 	public EntityFirefly(World worldIn)
 	{
@@ -319,7 +318,7 @@ public class EntityFirefly extends EntityAmbientCreature implements IAnimals, IL
     @Nullable
     public SoundEvent getAmbientSound()
     {
-        return this.sitting ? null : FLY_SOUND;
+        return this.sitting ? null : SoundRegister.FLY_SOUND;
     }
     
     protected float getSoundVolume()
