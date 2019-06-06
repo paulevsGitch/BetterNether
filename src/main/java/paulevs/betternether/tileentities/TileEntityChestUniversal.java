@@ -139,16 +139,12 @@ public class TileEntityChestUniversal extends TileEntityLockableLoot implements 
 
 	public void closeInventory(EntityPlayer player)
 	{
-		if (!player.isSpectator() && this.getBlockType() instanceof BlockChest)
+		if (!player.isSpectator() && this.getBlockType() instanceof BlockInventoryUniversal)
 		{
 			--this.numPlayersUsing;
 			this.world.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
 			this.world.notifyNeighborsOfStateChange(this.pos, this.getBlockType(), false);
 		}
-		/*if (numPlayersUsing < 1)
-		{
-			world.setBlockState(pos, world.getBlockState(pos).withProperty(BlockInventoryUniversal.OPEN, false), 3);
-		}*/
 	}
 
 	/**
