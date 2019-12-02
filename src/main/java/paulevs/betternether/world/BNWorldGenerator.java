@@ -97,7 +97,7 @@ public class BNWorldGenerator
 	
 	private static CityStructureManager cityManager;
 	private static BlockPos pos;
-	private static MutableBlockPos populator = new MutableBlockPos();
+	private static MutableBlockPos popPos = new MutableBlockPos();
 	
 	private static NetherBiome[][][] biomeArray = new NetherBiome[8][64][8];
 
@@ -214,59 +214,59 @@ public class BNWorldGenerator
 					for (int y = 5; y < 126; y++)
 					{
 						//pos = new BlockPos(wx, y, wz);
-						populator.setPos(wx, y, wz);
-						if (world.getBlockState(populator).isFullBlock())
+						popPos.setPos(wx, y, wz);
+						if (world.getBlockState(popPos).isFullBlock())
 						{
 							
 							biome = getBiomeLocal(x, y, z, random);
 							
 							// Ground Generation
-							if (world.getBlockState(populator.up()).getBlock() == Blocks.AIR)
+							if (world.getBlockState(popPos.up()).getBlock() == Blocks.AIR)
 							{
-								biome.genSurfColumn(world, populator, random);
+								biome.genSurfColumn(world, popPos, random);
 								if (random.nextFloat() <= plantDensity)
-									biome.genFloorObjects(world, populator, random);
+									biome.genFloorObjects(world, popPos, random);
 							}
 							
 							// Ceiling Generation
-							else if (world.getBlockState(populator.down()).getBlock() == Blocks.AIR)
+							else if (world.getBlockState(popPos.down()).getBlock() == Blocks.AIR)
 							{
 								if (random.nextFloat() <= plantDensity)
-									biome.genCeilObjects(world, populator, random);
+									biome.genCeilObjects(world, popPos, random);
 							}
 							
 							// Wall Generation
 							else if (((x + y + z) & 1) == 0)
 							{
-								boolean bNorth = world.getBlockState(populator.north()).getBlock() == Blocks.AIR;
-								boolean bSouth = world.getBlockState(populator.south()).getBlock() == Blocks.AIR;
-								boolean bEast = world.getBlockState(populator.east()).getBlock() == Blocks.AIR;
-								boolean bWest = world.getBlockState(populator.west()).getBlock() == Blocks.AIR;
+								boolean bNorth = world.getBlockState(popPos.north()).getBlock() == Blocks.AIR;
+								boolean bSouth = world.getBlockState(popPos.south()).getBlock() == Blocks.AIR;
+								boolean bEast = world.getBlockState(popPos.east()).getBlock() == Blocks.AIR;
+								boolean bWest = world.getBlockState(popPos.west()).getBlock() == Blocks.AIR;
 								if (bNorth || bSouth || bEast || bWest)
 								{
 									BlockPos objPos = null;
 									if (bNorth)
-										objPos = populator.north();
+										objPos = popPos.north();
 									else if (bSouth)
-										objPos = populator.south();
+										objPos = popPos.south();
 									else if (bEast)
-										objPos = populator.east();
+										objPos = popPos.east();
 									else
-										objPos = populator.west();
+										objPos = popPos.west();
 									boolean bDown = world.getBlockState(objPos.up()).getBlock() == Blocks.AIR;
 									boolean bUp = world.getBlockState(objPos.down()).getBlock() == Blocks.AIR;
 									if (bDown && bUp)
 									{
 										if (random.nextFloat() <= plantDensity)
-											biome.genWallObjects(world, populator, objPos, random);
-										if (y < 37 && world.getBlockState(populator).getBlock() instanceof BlockNetherBrick && random.nextInt(512) == 0)
-											wartCapGen.generate(world, populator, random);
+											biome.genWallObjects(world, popPos, objPos, random);
+										if (y < 37 && world.getBlockState(popPos).getBlock() instanceof BlockNetherBrick && random.nextInt(512) == 0)
+											wartCapGen.generate(world, popPos, random);
 									}
 								}
 							}
 						}
 						if (BlocksRegister.BLOCK_CINCINNASITE_ORE != Blocks.AIR && random.nextInt(1024) == 0)
-							spawnOre(BlocksRegister.BLOCK_CINCINNASITE_ORE.getDefaultState(), world, populator, random);
+							spawnOre(BlocksRegister.BLOCK_CINCINNASITE_ORE.getDefaultState(), world, popPos, random);
 					}
 				}
 			}
@@ -298,7 +298,6 @@ public class BNWorldGenerator
 			int wx = (cx << 4) | 8;
 			int wz = (cz << 4) | 8;
 			List<BlockPos> pos = new ArrayList<BlockPos>();
-			BlockPos block;
 			BlockPos up;
 			BlockPos down;
 			BlockPos north;
@@ -310,29 +309,29 @@ public class BNWorldGenerator
 				for (int x = 0; x < 16; x++)
 					for (int z = 0; z < 16; z++)
 					{
-						block = new BlockPos(x + wx, y, z + wz);
-						if (canReplace(world, block))
+						popPos.setPos(x + wx, y, z + wz);
+						if (canReplace(world, popPos))
 						{
-							up = block.up();
-							down = block.down();
-							north = block.north();
-							south = block.south();
-							east = block.east();
-							west = block.west();
+							up = popPos.up();
+							down = popPos.down();
+							north = popPos.north();
+							south = popPos.south();
+							east = popPos.east();
+							west = popPos.west();
 							if (isAir(world, north) && isAir(world, south))
-								pos.add(block);
+								pos.add(popPos);
 							else if (isAir(world, east) && isAir(world, west))
-								pos.add(block);
+								pos.add(popPos);
 							else if (isAir(world, up) && isAir(world, down))
-								pos.add(block);
-							else if (isAir(world, block.north().east().down()) && isAir(world, block.south().west().up()))
-								pos.add(block);
-							else if (isAir(world, block.south().east().down()) && isAir(world, block.north().west().up()))
-								pos.add(block);
-							else if (isAir(world, block.north().west().down()) && isAir(world, block.south().east().up()))
-								pos.add(block);
-							else if (isAir(world, block.south().west().down()) && isAir(world, block.north().east().up()))
-								pos.add(block);
+								pos.add(popPos);
+							else if (isAir(world, popPos.north().east().down()) && isAir(world, popPos.south().west().up()))
+								pos.add(popPos);
+							else if (isAir(world, popPos.south().east().down()) && isAir(world, popPos.north().west().up()))
+								pos.add(popPos);
+							else if (isAir(world, popPos.north().west().down()) && isAir(world, popPos.south().east().up()))
+								pos.add(popPos);
+							else if (isAir(world, popPos.south().west().down()) && isAir(world, popPos.north().east().up()))
+								pos.add(popPos);
 						}
 					}
 			}
