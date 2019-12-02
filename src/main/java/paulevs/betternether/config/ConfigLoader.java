@@ -34,18 +34,23 @@ public class ConfigLoader
 	private static Map<String, Boolean> registerBlocks;
 	
 	private static boolean hasCleaningPass;
+	private static boolean hasNetherWart;
+	
+	private static int cityDistance;
+	private static boolean hasCities;
 	
 	public static void load(File file)
 	{
 		List<Boolean> items= new ArrayList<Boolean>();
 		config = new Configuration(file);
 		config.load();
-		//Biome Size and Pass
 		biomeSizeXZ = config.getInt("BiomeSizeXZ", "Generator", 100, 1, 4096, "Defines size in horisontal space");
 		biomeSizeY = config.getInt("BiomeSizeY", "Generator", 32, 1, 4096, "Defines size in vertical space");
 		hasCleaningPass = config.getBoolean("SecondPass", "Generator", true, "Enables|Disables second pass for smooth terrain");
+		hasNetherWart = config.getBoolean("NetherWartGeneration", "Generator", true, "Enables|Disables vanilla nether wart generation in biomes");
+		cityDistance = config.getInt("CityGridSize", "Cities", 80, 8, 2048, "City grid size in chunks");
+		hasCities = config.getBoolean("CityEnabled", "Cities", true, "Enables|Disables cities");
 		
-		// Biomes
 		for (Field f : BiomeRegister.class.getDeclaredFields())
 			if (f.getType().isAssignableFrom(NetherBiome.class))
 				items.add(config.getBoolean(f.getName().toLowerCase(), "Biomes", true, "Enables|Disables biome"));
@@ -53,21 +58,12 @@ public class ConfigLoader
 		for (int i = 0; i < items.size(); i++)
 			registerBiomes[i] = items.get(i);
 		items.clear();
-		
-		// Blocks
+
 		registerBlocks = new HashMap<String, Boolean>();
 		for (Field f : BlocksRegister.class.getDeclaredFields())
 			if (f.getType().isAssignableFrom(Block.class))
 				registerBlocks.put(f.getName().toLowerCase(), config.getBoolean(f.getName().toLowerCase(), "Blocks", true, "Enables|Disables block"));
-				//items.add(config.getBoolean(f.getName().toLowerCase(), "Blocks", true, "Enables|Disables block"));
-		//registerBlocks = new boolean[items.size()];
 		
-		//for (int i = 0; i < items.size(); i++)
-			//registerBlocks[i] = items.get(i);
-			
-		//items.clear();
-		
-		//Items
 		for (Field f : ItemsRegister.class.getDeclaredFields())
 			if (f.getType().isAssignableFrom(Item.class))
 				items.add(config.getBoolean(f.getName().toLowerCase(), "Items", true, "Enables|Disables item"));
@@ -77,19 +73,17 @@ public class ConfigLoader
 		items.clear();
 		items = null;
 		
-		//Damage
 		BNWorldGenerator.enablePlayerDamage = config.getBoolean("DamagePlayer", "EggplantDamage", true, "Damage for players");
 		BNWorldGenerator.enableMobDamage = config.getBoolean("DamageMobs", "EggplantDamage", true, "Damage for mobs");
 		
 		resetBiomeIndex();
-		//resetBlockIndex();
 		resetItemIndex();
 	}
 	
 	public static void postBiomeInit()
 	{
-		//Plant density
-		BNWorldGenerator.setDensity(config.getFloat("GlobalDensity", "Generator", 1, 0, 1, "Global plant density, multiplied on other"));
+		BNWorldGenerator.setPlantDensity(config.getFloat("GlobalDensity", "Generator", 1, 0, 1, "Global plant density, multiplied on other"));
+		BNWorldGenerator.setStructureDensity(config.getFloat("StructureDensity", "Generator", 1F / 16F, 0, 1, "Structure density for random world structures"));
 		for (NetherBiome biome : BiomeRegister.getBiomes())
 		{
 			biome.setDensity(config.getFloat(biome.getName().replace(" ", "") + "Density", "Generator", 1, 0, 1, "Density for " + biome.getName() + " biome"));
@@ -154,5 +148,20 @@ public class ConfigLoader
 	public static boolean hasCleaningPass()
 	{
 		return hasCleaningPass;
+	}
+	
+	public static boolean hasNetherWart()
+	{
+		return hasNetherWart;
+	}
+	
+	public static int getCityDistance()
+	{
+		return cityDistance;
+	}
+	
+	public static boolean hasCities()
+	{
+		return hasCities;
 	}
 }

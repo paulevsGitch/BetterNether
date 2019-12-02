@@ -13,6 +13,8 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
@@ -27,6 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.entities.EntityFirefly;
 import paulevs.betternether.world.BNWorldGenerator;
 
 public class BlockEggPlant extends Block
@@ -87,6 +90,8 @@ public class BlockEggPlant extends Block
 	{
 		if (BNWorldGenerator.enableMobDamage && entityIn instanceof EntityLiving && !((EntityLiving) entityIn).isPotionActive(potion))
 		{
+			if (entityIn instanceof EntityGhast || entityIn instanceof EntityPigZombie || entityIn instanceof EntityFirefly)
+				return;
 			((EntityLiving) entityIn).addPotionEffect(new PotionEffect(potion, 100, 3));
 		}
 		else if (BNWorldGenerator.enablePlayerDamage && entityIn instanceof EntityPlayer && !((EntityPlayer) entityIn).isPotionActive(potion))

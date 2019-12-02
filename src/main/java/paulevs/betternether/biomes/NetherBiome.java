@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import paulevs.betternether.world.BNWorldGenerator;
 
@@ -28,20 +28,18 @@ public class NetherBiome
 		subbiomes = new ArrayList<NetherBiome>();
 	}
 	
-	public void genSurfColumn(Chunk chunk, BlockPos pos, Random random) {}
+	public void genSurfColumn(World world, BlockPos pos, Random random) {}
 	
-	public void genFloorObjects(Chunk chunk, BlockPos pos, Random random) {}
+	public void genFloorObjects(World world, BlockPos pos, Random random) {}
 	
-	public void genWallObjects(Chunk chunk, BlockPos origin, BlockPos pos, Random random) {}
+	public void genWallObjects(World world, BlockPos origin, BlockPos pos, Random random) {}
 	
-	public void genCeilObjects(Chunk chunk, BlockPos pos, Random random) {}
+	public void genCeilObjects(World world, BlockPos pos, Random random) {}
 	
-	protected double getFeatureNoise(BlockPos pos, int cx, int cz)
+	protected double getFeatureNoise(BlockPos pos)
 	{
 		double[] value = new double[1];
-		int ofx = cx << 4 | pos.getX();
-		int ofz = cz << 4 | pos.getZ();
-		value = featureScatter.generateNoiseOctaves(value, ofx, ofz, 1, 1, 0.1, 0.1, 1.0);
+		value = featureScatter.generateNoiseOctaves(value, pos.getX(), pos.getZ(), 1, 1, 0.1, 0.1, 1.0);
 		return value[0];
 	}
 	

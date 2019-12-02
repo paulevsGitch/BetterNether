@@ -5,7 +5,9 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockNetherrack;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.command.ServerCommandManager;
 import net.minecraft.init.Blocks;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
@@ -20,48 +22,57 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.BlocksRegister;
+import paulevs.betternether.commands.CommandsRegister;
 import paulevs.betternether.world.BNWorldGenerator;
 
 public class EventsHandler
 {
 	static NoiseGeneratorOctaves featureScatter;
-	private static boolean worldLoaded;
+	static MinecraftServer server;
 
 	public static void init()
 	{
 		featureScatter = new NoiseGeneratorOctaves(new Random(1337), 3);
-		worldLoaded = false;
 	}
 
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event)
 	{
-		if (!worldLoaded && event.getWorld().provider.getDimensionType() == DimensionType.NETHER)
+		if (event.getWorld().provider.getDimensionType() == DimensionType.NETHER && !event.getWorld().isRemote)
 		{
-			BNWorldGenerator.init(event.getWorld().getSeed());
-			worldLoaded = true;
+			BNWorldGenerator.init(event.getWorld());
+			server = event.getWorld().getMinecraftServer();
+			CommandsRegister.register((ServerCommandManager) server.getCommandManager());
+		}
+	}
+	
+	@SubscribeEvent
+	public void onWorldSave(WorldEvent.Save event)
+	{
+		if (event.getWorld().provider.getDimensionType() == DimensionType.NETHER && !event.getWorld().isRemote)
+		{
+			BNWorldGenerator.save(event.getWorld());
 		}
 	}
 
 	@SubscribeEvent
 	public void onPopulate(PopulateChunkEvent.Post event)
 	{
-		if (event.getWorld().provider.getDimensionType() == DimensionType.NETHER)
+		if (!event.getWorld().isRemote && event.getWorld().provider.getDimensionType() == DimensionType.NETHER)
 		{
 			Random random = event.getRand();
 			World world = event.getWorld();
-			Chunk chunk = world.getChunkFromChunkCoords(event.getChunkX(), event.getChunkZ());
-			BNWorldGenerator.generate(world, chunk, world.rand);
+			BNWorldGenerator.generate(world, event.getChunkX(), event.getChunkZ(), world.rand);
 		}
 	}
 	
-	@SubscribeEvent (priority = EventPriority.HIGH)
+	@SubscribeEvent (priority = EventPriority.HIGHEST)
 	public void onPrePopulate(PopulateChunkEvent.Pre event)
 	{
-		if (event.getWorld().provider.getDimensionType() == DimensionType.NETHER)
+		if (!event.getWorld().isRemote && event.getWorld().provider.getDimensionType() == DimensionType.NETHER)
 		{
 			Chunk chunk = event.getWorld().getChunkFromChunkCoords(event.getChunkX(), event.getChunkZ());
-			BNWorldGenerator.smoothChunk(chunk);
+			BNWorldGenerator.smoothChunk(event.getWorld(), event.getChunkX(), event.getChunkZ());
 		}
 	}
 
@@ -213,26 +224,4 @@ public class EventsHandler
 			}
 		}
 	}
-	
-	/*@SubscribeEvent
-	public void entityJoinWorld(EntityJoinWorldEvent e)
-	{
-		if (e.getEntity() instanceof NetherCreature)
-		{
-			//NetherCreature data = (NetherCreature) e.getEntity();
-			//data.entitySpawned();
-			e.getEntity().readFromNBT(e.getEntity().serializeNBT());
-		}
-	}*/
-
-	/*@SubscribeEvent
-	public void playerStartedTracking(PlayerEvent.StartTracking e)
-	{
-		if (e.getEntity() instanceof BNCreatures)
-		{
-			BNCreatures data = (BNCreatures) e.getEntity();
-			if (data != null)
-				data.playerStartedTracking(e.getEntityPlayer());
-		}
-	}*/
 }

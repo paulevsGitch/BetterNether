@@ -128,4 +128,9 @@ public class StructureNBT
 			return new BlockPos(z, size.getY(), x);
 		}
 	}
+	
+	public String getName()
+	{
+		return location.getResourcePath();
+	}
 }

@@ -1,0 +1,165 @@
+# Made by kralrindo1
+# https://www.curseforge.com/members/kralrindo1
+
+container.forge=Forge
+container.chest_of_drawers=Sandık Çekmecesi
+
+entity.firefly.name=Ateş Böceği
+
+item.black_apple.name=Koyu Elma
+
+item.cincinnasite.name=Cincinnati
+item.cincinnasite_axe.name=Cincinnati Balta
+item.cincinnasite_axe_diamond.name=Cincinnati-Elmas Balta
+item.cincinnasite_pickaxe.name=Cincinnati Kazma
+item.cincinnasite_pickaxe_diamond.name=Cincinnati-Elmas Kazma
+
+item.stalagnate_bowl.name=Rezzan Kase
+item.stalagnate_bowl_apple.name=Koyu Elma
+item.stalagnate_bowl_mushroom.name=Mantar Sote
+item.stalagnate_bowl_wart.name=Wart Çorbası
+
+itemGroup.better_nether=Daha İyi Nether
+
+message.spawn_help=§c§lBurada bir üreme noktası belirlemek için Işıktaşı Tozu tutmalısı
+message.spawn_set=§2§lIşınlanma noktan belirlendi
+
+tile.agave.name=Sabır Otu
+
+tile.barrel_cactus.name=Namlu kaktüs
+
+tile.black_apple_seed.name=Koyu Elma Tohumu
+tile.black_bush.name=Kara Bush
+
+tile.block_eyeball.name=Göztopu Bloğu
+tile.block_eyeball_small.name=Küçük Göztopu Bloğu
+
+tile.bone_block.name=Kemik Bloğu
+tile.bone_button.name=Kemik Tuş
+tile.bone_cincinnasite_door.name=Kemik-Cincinnati Kapısı
+tile.bone_mushroom.name=Kemikli Mantar Sporları
+tile.bone_plate.name=Kemik Basınç Plakası
+tile.bone_reed_door.name=Kemik-Kamış Kapı
+tile.bone_slab_half.name=Kemik Basamak
+tile.bone_stairs.name=Kemik Merdiven
+tile.bone_tile.name=Kemik Tuğla
+tile.bone_wall.name=Kemik Duvar
+
+tile.cincinnasite_bars.name=Cincinnati Parmaklık
+tile.cincinnasite_block.name=Cincinnati Blok
+tile.cincinnasite_brick_plate.name=Cincinnati Tuğla Basamak
+tile.cincinnasite_bricks.name=Cincinnati Tuğla
+tile.cincinnasite_bricks_pillar.name=Cincinnati Tuğla Kiriş
+tile.cincinnasite_button.name=Cincinnati Buton
+tile.cincinnasite_carved.name=Cincinnati Oyma
+tile.cincinnasite_fire_bowl.name=Cincinnati Yangın Kasesi
+tile.cincinnasite_forge.name=Cincinnati Demirhane
+tile.cincinnasite_forged.name=Demirhane Cincinnati Bloğu
+tile.cincinnasite_frame.name=Cincinnati Çerçeve
+tile.cincinnasite_lantern.name=Cincinnati Fener
+tile.cincinnasite_ore.name=Cincinnati Cevheri
+tile.cincinnasite_pedestal.name=Cincinnati Zemin
+tile.cincinnasite_pillar.name=Cincinnati Sütun
+tile.cincinnasite_plate.name=Cincinnati Plaka
+tile.cincinnasite_pot.name=Cincinnati Kap
+tile.cincinnasite_slab_half.name=Cincinnati Basamak
+tile.cincinnasite_stairs.name=Cincinnati Merdiven
+tile.cincinnasite_tile_large.name=Büyük Cincinnati Tuğla
+tile.cincinnasite_tile_small.name=Küçük Cincinnati Tuğla
+tile.cincinnasite_wall.name=Cincinnati Duvar
+
+tile.egg_plant.name=Patlıcan
+
+tile.eye_seed.name=Göz Tohumu
+
+tile.gray_mold.name=Gri Küf
+
+tile.ink_bush.name=Mürekkeplenmiş Çalı
+tile.ink_bush_seed.name=Mürekkeplenmiş Çalı Tohumu
+
+tile.lucis_spore.name=Lucis Tohumu
+
+tile.magma_flower.name=Magma çiçeği tohumu
+
+tile.nether_brick_tile_large.name=Büyük Nether Tuğla Basamak
+tile.nether_brick_tile_slab_half.name=Küçük Nether Tuğla Basamak
+tile.nether_brick_tile_small.name=Küçük Nether Tuğla Basamak
+tile.nether_brick_tile_stairs.name=Küçük Nether Tuğla Basamak Merdiven
+tile.nether_brick_wall.name=Nether Tuğlası Duvarı
+tile.nether_cactus.name=Nether Kaktüs
+tile.nether_grass.name=Nether Çimen
+tile.nether_mycelium.name=Nether Miselyum
+tile.nether_reed.name=Nether Reed
+tile.netherrack_furnace.name=Nether Taşı Fırını
+tile.netherrack_moss.name=Nether Yosun
+
+tile.orange_mushroom.name=Turuncu Mantar
+
+tile.pig_statue_01.name=Yeniden Doğma Durumu
+
+tile.potted_plant_1.name=Saksı Bitkisi
+
+tile.quartz_glass.name=Kuvars Camı
+tile.quartz_glass_framed.name=İnce Kuvars Camı
+tile.quartz_glass_framed_pane.name=İnce Kuvars Camı Pane
+tile.quartz_glass_pane.name=Kuvars Camı Pane
+tile.quartz_stained_glass.black.name=Kuvars Siyah Renkli Cam Black
+tile.quartz_stained_glass.blue.name=Kuvars Mavi Renkli Cam Blue
+tile.quartz_stained_glass.brown.name=Kuvars Kahverengi Renkli Cam Brown
+tile.quartz_stained_glass.cyan.name=Kuvars Camgöbeği Renkli Cam Cyan
+tile.quartz_stained_glass.gray.name=Kuvars Gri Renkli Cam Gray
+tile.quartz_stained_glass.green.name=Kuvars Yeşil Renkli Cam Green
+tile.quartz_stained_glass.lightBlue.name=Kuvars Açık Mavi Renkli Cam Light Blue
+tile.quartz_stained_glass.lime.name=Kuvars Ihlamur Renkli Cam Lime
+tile.quartz_stained_glass.magenta.name=Kuvars Magenta Renkli Cam Magenta
+tile.quartz_stained_glass.orange.name=Kuvars Turuncu Renkli Cam Orange
+tile.quartz_stained_glass.pink.name=Kuvars Pembe Renkli Cam Pink
+tile.quartz_stained_glass.purple.name=Kuvars Mor Renkli Cam Purple
+tile.quartz_stained_glass.red.name=Kuvars Kırmızı Renkli Cam Red
+tile.quartz_stained_glass.silver.name=Kuvars Gümüş Renkli Cam Silver
+tile.quartz_stained_glass.white.name=Kuvars Beyaz Renkli Cam White
+tile.quartz_stained_glass.yellow.name=Kuvars Sarı Renkli Cam Yellow
+tile.quartz_stained_glass_framed.black.name=İnce Kuvars Siyah Renkli Cam Black
+tile.quartz_stained_glass_framed.blue.name=İnce Kuvars Mavi Renkli Cam Blue
+tile.quartz_stained_glass_framed.brown.name=İnce Kuvars Kahverengi Renkli Cam Brown
+tile.quartz_stained_glass_framed.cyan.name=İnce Kuvars Camgöbeği Renkli Cam Cyan
+tile.quartz_stained_glass_framed.gray.name=İnce Kuvars Gri Renkli Cam Gray
+tile.quartz_stained_glass_framed.green.name=İnce Kuvars Yeşil Renkli Cam Green
+tile.quartz_stained_glass_framed.lightBlue.name=İnce Kuvars Açık Mavi Renkli Cam Light Blue
+tile.quartz_stained_glass_framed.lime.name=İnce Kuvars Ihlamur Renkli Cam Lime
+tile.quartz_stained_glass_framed.magenta.name=İnce Kuvars Magenta Renkli Cam Magenta
+tile.quartz_stained_glass_framed.orange.name=İnce Kuvars Turuncu Renkli Cam Orange
+tile.quartz_stained_glass_framed.pink.name=İnce Kuvars Pembe Renkli Cam Pink
+tile.quartz_stained_glass_framed.purple.name=İnce Kuvars Mor Renkli Cam Purple
+tile.quartz_stained_glass_framed.red.name=İnce Kuvars Kırmızı Renkli Cam Red
+tile.quartz_stained_glass_framed.silver.name=İnce Kuvars Gümüş Renkli Cam Silver
+tile.quartz_stained_glass_framed.white.name=İnce Kuvars Beyaz Renkli Cam White
+tile.quartz_stained_glass_framed.yellow.name=İnce Kuvars Sarı Renkli Cam Yellow
+
+tile.red_mold.name=Kırmızı Kalıp
+
+tile.reeds_block.name=Hasır Bloğu
+tile.reeds_button.name=Hasır Buton
+tile.reeds_fence.name=Hasır Çit
+tile.reeds_gate.name=Hasır Geçit
+tile.reeds_ladder.name=Hasır Merdiven
+tile.reeds_plate.name=Hasır Basınç Plakası
+tile.reeds_slab_half.name=Hasır Basamak
+tile.reeds_stairs.name=Hasır Merdiven
+
+tile.smoker.name=Sigara Tiryakisi
+
+tile.stalagnate.name=Rezzan
+tile.stalagnate_bark.name=Rezzan Kabuk
+tile.stalagnate_bowl_placed.name=Rezzan Kase
+tile.stalagnate_planks.name=Rezzan Tahta
+tile.stalagnate_planks_button.name=Rezzan Buton
+tile.stalagnate_planks_fence.name=Rezzan Çit
+tile.stalagnate_planks_gate.name=Rezzan Kapı
+tile.stalagnate_planks_plate.name=Rezzan Basınç Plakası
+tile.stalagnate_planks_slab_half.name=Rezzan Basamak
+tile.stalagnate_planks_stairs.name=Rezzan Merdiven
+tile.stalagnate_seed.name=Rezzan Tohumu
+tile.wart_seed.name=Wart Tohumu
+
+#translate by kralrindo

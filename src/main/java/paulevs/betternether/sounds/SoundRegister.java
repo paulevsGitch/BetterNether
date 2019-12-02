@@ -1,12 +1,8 @@
 package paulevs.betternether.sounds;
 
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import paulevs.betternether.entities.EntityFirefly;
 
 public class SoundRegister
 {

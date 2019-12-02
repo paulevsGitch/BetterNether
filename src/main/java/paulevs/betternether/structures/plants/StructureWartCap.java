@@ -1,4 +1,4 @@
-package paulevs.betternether.structures;
+package paulevs.betternether.structures.plants;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
+import paulevs.betternether.structures.IStructure;
 
 public class StructureWartCap implements IStructure
 {
@@ -20,10 +20,8 @@ public class StructureWartCap implements IStructure
 			.getDefaultState();
 	
 	@Override
-	public void generate(Chunk chunk, BlockPos pos, Random random)
+	public void generate(World world, BlockPos pos, Random random)
 	{
-		pos = pos.add(chunk.x << 4, 0, chunk.z << 4);
-		World world = chunk.getWorld();
 		int radius = 3 + random.nextInt(3);
 		int r2 = radius * radius;
 		int r3 = r2 >> 1;
@@ -43,17 +41,17 @@ public class StructureWartCap implements IStructure
 	{
 		if (world.getBlockState(pos).getBlock() == Blocks.AIR || world.getBlockState(pos) == skin)
 		{
-			setBlockAndNotifyAdequately(world, pos, inside);
+			world.setBlockState(pos, inside);
 			if (world.getBlockState(pos.up()).getBlock() == Blocks.AIR)
-				setBlockAndNotifyAdequately(world, pos.up(), skin);
+				world.setBlockState(pos.up(), skin);
 			if (world.getBlockState(pos.north()).getBlock() == Blocks.AIR)
-				setBlockAndNotifyAdequately(world, pos.north(), skin);
+				world.setBlockState(pos.north(), skin);
 			if (world.getBlockState(pos.south()).getBlock() == Blocks.AIR)
-				setBlockAndNotifyAdequately(world, pos.south(), skin);
+				world.setBlockState(pos.south(), skin);
 			if (world.getBlockState(pos.east()).getBlock() == Blocks.AIR)
-				setBlockAndNotifyAdequately(world, pos.east(), skin);
+				world.setBlockState(pos.east(), skin);
 			if (world.getBlockState(pos.west()).getBlock() == Blocks.AIR)
-				setBlockAndNotifyAdequately(world, pos.west(), skin);
+				world.setBlockState(pos.west(), skin);
 		}
 	}
 }

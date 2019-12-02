@@ -13,8 +13,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import paulevs.betternether.biomes.BiomeRegister;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.blocks.BlocksRegister;
@@ -23,23 +23,23 @@ import paulevs.betternether.noise.Dither;
 import paulevs.betternether.noise.WorleyNoiseIDDistorted3D;
 import paulevs.betternether.structures.IStructureWorld;
 import paulevs.betternether.structures.StructureAltar;
-import paulevs.betternether.structures.StructureBlackApple;
 import paulevs.betternether.structures.StructureBuilding;
-import paulevs.betternether.structures.StructureEggPlant;
-import paulevs.betternether.structures.StructureEye;
-import paulevs.betternether.structures.StructureGrayMold;
-import paulevs.betternether.structures.StructureInkBush;
-import paulevs.betternether.structures.StructureLucis;
-import paulevs.betternether.structures.StructureMagmaFlower;
-import paulevs.betternether.structures.StructureMedBrownMushroom;
-import paulevs.betternether.structures.StructureMedRedMushroom;
-import paulevs.betternether.structures.StructureOrangeMushroom;
-import paulevs.betternether.structures.StructureRedMold;
-import paulevs.betternether.structures.StructureSmoker;
-import paulevs.betternether.structures.StructureStalagnate;
-import paulevs.betternether.structures.StructureWartCap;
-import paulevs.betternether.structures.StructureWartTree;
-import paulevs.betternether.structures.city.CityGenerator;
+import paulevs.betternether.structures.city.CityStructureManager;
+import paulevs.betternether.structures.plants.StructureBlackApple;
+import paulevs.betternether.structures.plants.StructureEggPlant;
+import paulevs.betternether.structures.plants.StructureEye;
+import paulevs.betternether.structures.plants.StructureGrayMold;
+import paulevs.betternether.structures.plants.StructureInkBush;
+import paulevs.betternether.structures.plants.StructureLucis;
+import paulevs.betternether.structures.plants.StructureMagmaFlower;
+import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
+import paulevs.betternether.structures.plants.StructureMedRedMushroom;
+import paulevs.betternether.structures.plants.StructureOrangeMushroom;
+import paulevs.betternether.structures.plants.StructureRedMold;
+import paulevs.betternether.structures.plants.StructureSmoker;
+import paulevs.betternether.structures.plants.StructureStalagnate;
+import paulevs.betternether.structures.plants.StructureWartCap;
+import paulevs.betternether.structures.plants.StructureWartTree;
 
 public class BNWorldGenerator
 {
@@ -58,7 +58,6 @@ public class BNWorldGenerator
 	public static StructureRedMold redMoldGen = new StructureRedMold();
 	public static StructureGrayMold grayMoldGen = new StructureGrayMold();
 	public static StructureWartCap wartCapGen = new StructureWartCap();
-	public static CityGenerator cityGenerator;
 	
 	public static IStructureWorld[] globalStructuresLand;
 	public static IStructureWorld[] globalStructuresLava;
@@ -79,6 +78,7 @@ public class BNWorldGenerator
 	public static boolean hasOrangeMushroomGen = true;
 	public static boolean hasRedMoldGen = true;
 	public static boolean hasGrayMoldGen = true;
+	public static boolean hasWartsGen = true;
 	
 	private static WorleyNoiseIDDistorted3D noise3d;
 	private static WorleyNoiseIDDistorted3D subbiomesNoise;
@@ -87,65 +87,102 @@ public class BNWorldGenerator
 	private static double biomeSizeY;
 	private static double subBiomeSize;
 	private static float plantDensity = 1;
+	private static float structueDensity = 1F / 64F;
 	
 	public static boolean enablePlayerDamage;
 	public static boolean enableMobDamage;
 	
 	private static Random coordinateRandom;
+	private static IBlockState state_air = Blocks.AIR.getDefaultState();
+	
+	private static CityStructureManager cityManager;
+	private static BlockPos pos;
+	private static MutableBlockPos populator = new MutableBlockPos();
+	
+	private static NetherBiome[][][] biomeArray = new NetherBiome[8][64][8];
 
-	public static void init(long seed)
+	public static void init(World world)
 	{
+		long seed = world.getSeed();
 		noise3d = new WorleyNoiseIDDistorted3D(seed, BiomeRegister.biomeCount);
 		subbiomesNoise = new WorleyNoiseIDDistorted3D(~seed, 256);
 		dither = new Dither(seed);
 		coordinateRandom = new Random();
-	}
-
-	public static void generate(World world, Chunk chunk, Random random)
-	{
-		NetherBiome biome;
-		int id;
-		if (!world.isRemote)
+		if (ConfigLoader.hasCities())
 		{
-			int sx = chunk.x << 4;
-			int sz = chunk.z << 4;
-			
-			//Structure Generator
-			coordinateRandom.setSeed((long) chunk.x * 341873128712L + (long) chunk.z * 132897987541L);
-			if ((chunk.x & 31) == 0 && (chunk.z & 31) == 0 && coordinateRandom.nextBoolean())
+			cityManager = new CityStructureManager(seed);
+			cityManager.load(world);
+			cityManager.setDistance(ConfigLoader.getCityDistance());
+		}
+	}
+	
+	public static void save(World world)
+	{
+		cityManager.save(world);
+	}
+	
+	private static void makeBiomeArray(int sx, int sz)
+	{
+		int id;
+		int wx, wy, wz;
+		for (int x = 0; x < 8; x++)
+		{
+			wx = sx | (x << 1);
+			for (int y = 0; y < 64; y++)
 			{
-				BlockPos start = new BlockPos(8, 32, 8);
-				if (world.getBlockState(start.down()).getMaterial() == Material.LAVA)
+				wy = (y << 1);
+				for (int z = 0; z < 8; z++)
 				{
-					boolean generate = true;
-					for (int y = 0; y < 20; y++)
-					{
-						if (chunk.getBlockState(start.up(y)).getBlock() != Blocks.AIR)
-						{
-							generate = false;
-							break;
-						}
-					}
-					if (generate)
-					{
-						cityGenerator.generate(world, start.add(sx, 16 + coordinateRandom.nextInt(8), sz), coordinateRandom);
-					}
+					wz = sx | (z << 1);
+					id = getBiome(wx, wy, wz);
+					biomeArray[x][y][z] = BiomeRegister.getBiomeID(id);
+					if (isEdge(id, wx, y, wz, biomeArray[x][y][z].getEdgeSize()))
+						biomeArray[x][y][z] = biomeArray[x][y][z].getEdge();
+					else
+						biomeArray[x][y][z] = biomeArray[x][y][z].getSubBiome(wx, y, wz);
 				}
 			}
-			if (coordinateRandom.nextInt(16) == 0)
+		}
+	}
+	
+	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random)
+	{
+		x = (x + random.nextInt(2)) >> 1;
+		if (x > 7)
+			x = 7;
+		y = (y + random.nextInt(2)) >> 1;
+		if (y > 63)
+			y = 63;
+		z = (z + random.nextInt(2)) >> 1;
+		if (z > 7)
+			z = 7;
+		return biomeArray[x][y][z];
+	}
+
+	public static void generate(World world, int cx, int cz, Random random)
+	{
+		if (!world.isRemote)
+		{
+			
+			NetherBiome biome;
+			int sx = (cx << 4) | 8;
+			int sz = (cz << 4) | 8;
+			
+			//Structure Generator
+			if (coordinateRandom.nextFloat() < structueDensity)
 			{
-				BlockPos start = new BlockPos(coordinateRandom.nextInt(16), 32 + coordinateRandom.nextInt(120 - 32), coordinateRandom.nextInt(16));
-				while (chunk.getBlockState(start).getBlock() != Blocks.AIR && start.getY() > 32)
+				pos = new BlockPos(sx + coordinateRandom.nextInt(8), 32 + coordinateRandom.nextInt(120 - 32), sz + coordinateRandom.nextInt(8));
+				while (world.getBlockState(pos).getBlock() != Blocks.AIR && pos.getY() > 32)
 				{
-					start = start.down();
+					pos = pos.down();
 				}
-				start = downRay(chunk, start);
-				if (start != null)
+				pos = downRay(world, pos);
+				if (pos != null)
 				{
 					boolean terrain = true;
 					for (int y = 1; y < 8; y++)
 					{
-						if (chunk.getBlockState(start.up(y)).getBlock() != Blocks.AIR)
+						if (world.getBlockState(pos.up(y)).getBlock() != Blocks.AIR)
 						{
 							terrain = false;
 							break;
@@ -153,88 +190,86 @@ public class BNWorldGenerator
 					}
 					if (terrain)
 					{
-						if (globalStructuresLava.length > 0 && chunk.getBlockState(start).getMaterial() == Material.LAVA);
-							//globalStructuresLava[coordinateRandom.nextInt(globalStructuresLava.length)].generate(chunk.getWorld(), start.add(sx, 1, sz), coordinateRandom);
+						if (globalStructuresLava.length > 0 && world.getBlockState(pos).getMaterial() == Material.LAVA)
+							globalStructuresLava[coordinateRandom.nextInt(globalStructuresLava.length)].generateLava(world, pos.up(), coordinateRandom);
 						else if (globalStructuresLand.length > 0)
-							globalStructuresLand[coordinateRandom.nextInt(globalStructuresLand.length)].generateSurface(chunk.getWorld(), start.add(sx, 1, sz), coordinateRandom);//.generate(chunk.getWorld(), start.add(sx, 1, sz), coordinateRandom);
+							globalStructuresLand[coordinateRandom.nextInt(globalStructuresLand.length)].generateSurface(world, pos.up(), coordinateRandom);
 					}
 					else if (globalStructuresCave.length > 0)
 					{
-						globalStructuresCave[coordinateRandom.nextInt(globalStructuresCave.length)].generateSubterrain(chunk.getWorld(), start.add(sx, 0, sz), coordinateRandom);
+						globalStructuresCave[coordinateRandom.nextInt(globalStructuresCave.length)].generateSubterrain(world, pos, coordinateRandom);
 					}
 				}
 			}
 			
+			makeBiomeArray(sx, sz);
+			
 			// Total Populator
 			for (int x = 0; x < 16; x++)
 			{
-				int wx = sx | x;
+				int wx = sx + x;
 				for (int z = 0; z < 16; z++)
 				{
-					int wz = sz | z;
+					int wz = sz + z;
 					for (int y = 5; y < 126; y++)
 					{
-						if (chunk.getBlockState(x, y, z).isFullBlock())
+						//pos = new BlockPos(wx, y, wz);
+						populator.setPos(wx, y, wz);
+						if (world.getBlockState(populator).isFullBlock())
 						{
-							id = getBiome(wx, y, wz);
-							biome = BiomeRegister.getBiomeID(id);
-							if (isEdge(id, wx, y, wz, biome.getEdgeSize()))
-								biome = biome.getEdge();
-							else
-								biome = biome.getSubBiome(wx, y, wz);
+							
+							biome = getBiomeLocal(x, y, z, random);
 							
 							// Ground Generation
-							if (chunk.getBlockState(x, y + 1, z).getBlock() == Blocks.AIR)
+							if (world.getBlockState(populator.up()).getBlock() == Blocks.AIR)
 							{
-								biome.genSurfColumn(chunk, new BlockPos(x, y, z), random);
+								biome.genSurfColumn(world, populator, random);
 								if (random.nextFloat() <= plantDensity)
-									biome.genFloorObjects(chunk, new BlockPos(x, y, z), random);
+									biome.genFloorObjects(world, populator, random);
 							}
 							
 							// Ceiling Generation
-							else if (chunk.getBlockState(x, y - 1, z).getBlock() == Blocks.AIR)
+							else if (world.getBlockState(populator.down()).getBlock() == Blocks.AIR)
 							{
 								if (random.nextFloat() <= plantDensity)
-									biome.genCeilObjects(chunk, new BlockPos(x, y, z), random);
+									biome.genCeilObjects(world, populator, random);
 							}
 							
 							// Wall Generation
-							else if (x > 1 && z > 1 && x < 14 && z < 14)
+							else if (((x + y + z) & 1) == 0)
 							{
-								BlockPos origin = new BlockPos(x, y, z);
-								boolean bNorth = chunk.getBlockState(x + 1, y, z).getBlock() == Blocks.AIR;
-								boolean bSouth = chunk.getBlockState(x - 1, y, z).getBlock() == Blocks.AIR;
-								boolean bEast = chunk.getBlockState(x, y, z + 1).getBlock() == Blocks.AIR;
-								boolean bWest = chunk.getBlockState(x, y, z - 1).getBlock() == Blocks.AIR;
+								boolean bNorth = world.getBlockState(populator.north()).getBlock() == Blocks.AIR;
+								boolean bSouth = world.getBlockState(populator.south()).getBlock() == Blocks.AIR;
+								boolean bEast = world.getBlockState(populator.east()).getBlock() == Blocks.AIR;
+								boolean bWest = world.getBlockState(populator.west()).getBlock() == Blocks.AIR;
 								if (bNorth || bSouth || bEast || bWest)
 								{
-									BlockPos pos = null;
+									BlockPos objPos = null;
 									if (bNorth)
-										pos = origin.north();
+										objPos = populator.north();
 									else if (bSouth)
-										pos = origin.south();
+										objPos = populator.south();
 									else if (bEast)
-										pos = origin.east();
+										objPos = populator.east();
 									else
-										pos = origin.west();
-									boolean bDown = chunk.getBlockState(pos.up()).getBlock() == Blocks.AIR;
-									boolean bUp = chunk.getBlockState(pos.down()).getBlock() == Blocks.AIR;
+										objPos = populator.west();
+									boolean bDown = world.getBlockState(objPos.up()).getBlock() == Blocks.AIR;
+									boolean bUp = world.getBlockState(objPos.down()).getBlock() == Blocks.AIR;
 									if (bDown && bUp)
 									{
 										if (random.nextFloat() <= plantDensity)
-											biome.genWallObjects(chunk, origin, pos, random);
-										if (y < 50 && chunk.getBlockState(x, y, z).getBlock() instanceof BlockNetherBrick && random.nextInt(16) == 0)
-											wartCapGen.generate(chunk, origin, random);
+											biome.genWallObjects(world, populator, objPos, random);
+										if (y < 37 && world.getBlockState(populator).getBlock() instanceof BlockNetherBrick && random.nextInt(512) == 0)
+											wartCapGen.generate(world, populator, random);
 									}
 								}
 							}
 						}
 						if (BlocksRegister.BLOCK_CINCINNASITE_ORE != Blocks.AIR && random.nextInt(1024) == 0)
-							spawnOre(BlocksRegister.BLOCK_CINCINNASITE_ORE.getDefaultState(), chunk, x, y, z, random);
+							spawnOre(BlocksRegister.BLOCK_CINCINNASITE_ORE.getDefaultState(), world, populator, random);
 					}
 				}
 			}
-			
 		}
 	}
 	
@@ -256,77 +291,81 @@ public class BNWorldGenerator
 		return noise3d.GetValue(px, py, pz);
 	}
 	
-	public static void smoothChunk(Chunk chunk)
+	public static void smoothChunk(World world, int cx, int cz)
 	{
 		if (hasCleaningPass)
 		{
+			int wx = (cx << 4) | 8;
+			int wz = (cz << 4) | 8;
 			List<BlockPos> pos = new ArrayList<BlockPos>();
+			BlockPos block;
+			BlockPos up;
+			BlockPos down;
+			BlockPos north;
+			BlockPos south;
+			BlockPos east;
+			BlockPos west;
 			for (int y = 32; y < 110; y++)
 			{
-				for (int x = 1; x < 15; x++)
-					for (int z = 1; z < 15; z++)
-						if (canReplace(chunk, x, y, z))
+				for (int x = 0; x < 16; x++)
+					for (int z = 0; z < 16; z++)
+					{
+						block = new BlockPos(x + wx, y, z + wz);
+						if (canReplace(world, block))
 						{
-							if (isAir(chunk, x - 1, y, z) && isAir(chunk, x + 1, y, z))
-								pos.add(new BlockPos(x, y, z));
-							else if (isAir(chunk, x, y - 1, z) && isAir(chunk, x, y + 1, z))
-								pos.add(new BlockPos(x, y, z));
-							else if (isAir(chunk, x, y, z - 1) && isAir(chunk, x, y, z + 1))
-								pos.add(new BlockPos(x, y, z));
-							else if (isAir(chunk, x - 1, y - 1, z - 1) && isAir(chunk, x + 1, y + 1, z + 1))
-								pos.add(new BlockPos(x, y, z));
-							else if (isAir(chunk, x + 1, y - 1, z - 1) && isAir(chunk, x - 1, y + 1, z + 1))
-								pos.add(new BlockPos(x, y, z));
-							else if (isAir(chunk, x + 1, y - 1, z + 1) && isAir(chunk, x - 1, y + 1, z - 1))
-								pos.add(new BlockPos(x, y, z));
-							else if (isAir(chunk, x - 1, y - 1, z + 1) && isAir(chunk, x + 1, y + 1, z - 1))
-								pos.add(new BlockPos(x, y, z));
+							up = block.up();
+							down = block.down();
+							north = block.north();
+							south = block.south();
+							east = block.east();
+							west = block.west();
+							if (isAir(world, north) && isAir(world, south))
+								pos.add(block);
+							else if (isAir(world, east) && isAir(world, west))
+								pos.add(block);
+							else if (isAir(world, up) && isAir(world, down))
+								pos.add(block);
+							else if (isAir(world, block.north().east().down()) && isAir(world, block.south().west().up()))
+								pos.add(block);
+							else if (isAir(world, block.south().east().down()) && isAir(world, block.north().west().up()))
+								pos.add(block);
+							else if (isAir(world, block.north().west().down()) && isAir(world, block.south().east().up()))
+								pos.add(block);
+							else if (isAir(world, block.south().west().down()) && isAir(world, block.north().east().up()))
+								pos.add(block);
 						}
-				for (int i = 0; i < 16; i++)
-				{
-					if (canReplace(chunk, i, y, 0) && isAir(chunk, i, y - 1, 0) && isAir(chunk, i, y + 1, 0))
-						pos.add(new BlockPos(i, y, 0));
-					if (canReplace(chunk, i, y, 15) && isAir(chunk, i, y - 1, 15) && isAir(chunk, i, y + 1, 15))
-						pos.add(new BlockPos(i, y, 15));
-				}
-				for (int i = 1; i < 15; i++)
-				{
-					if (canReplace(chunk, 0, y, i) && isAir(chunk, 0, y - 1, i) && isAir(chunk, 0, y + 1, i))
-						pos.add(new BlockPos(0, y, i));
-					if (canReplace(chunk, 15, y, i) && isAir(chunk, 15, y - 1, i) && isAir(chunk, 15, y + 1, i))
-						pos.add(new BlockPos(15, y, i));
-				}		
+					}
 			}
 			for (BlockPos p : pos)
 			{
-				chunk.setBlockState(p, Blocks.AIR.getDefaultState());
+				world.setBlockState(p, state_air);
 			}
 		}
+		if (cityManager != null)
+			cityManager.generate(world, cx, cz);
 	}
 	
-	private static boolean isAir(Chunk chunk, int x, int y, int z)
+	private static boolean isAir(World chunk, BlockPos pos)
 	{
-		return chunk.getBlockState(x, y, z).getBlock() == Blocks.AIR;
+		return chunk.getBlockState(pos).getBlock() == Blocks.AIR;
 	}
 	
-	private static boolean canReplace(Chunk chunk, int x, int y, int z)
+	private static boolean canReplace(World chunk, BlockPos pos)
 	{
-		return !isAir(chunk, x, y, z) && (
-				chunk.getBlockState(x, y, z).getBlock() instanceof BlockNetherrack ||
-				chunk.getBlockState(x, y, z).getBlock() instanceof BlockSoulSand ||
-				chunk.getBlockState(x, y, z).getBlock() instanceof BlockGravel);
+		return !isAir(chunk, pos) && (
+				chunk.getBlockState(pos).getBlock() instanceof BlockNetherrack ||
+				chunk.getBlockState(pos).getBlock() instanceof BlockSoulSand ||
+				chunk.getBlockState(pos).getBlock() instanceof BlockGravel);
 	}
 	
-	private static void spawnOre(IBlockState state, Chunk chunk, int x, int y, int z, Random random)
+	private static void spawnOre(IBlockState state, World world, BlockPos pos, Random random)
 	{
 		for (int i = 0; i < 6 + random.nextInt(11); i++)
 		{
-			int px = x + random.nextInt(3);
-			int py = y + random.nextInt(3);
-			int pz = z + random.nextInt(3);
-			if (chunk.getBlockState(px, py, pz).getBlock() == Blocks.NETHERRACK)
+			BlockPos local = pos.add(random.nextInt(3), random.nextInt(3), random.nextInt(3));
+			if (world.getBlockState(local).getBlock() == Blocks.NETHERRACK)
 			{
-				chunk.setBlockState(new BlockPos(px, py, pz), state);
+				world.setBlockState(local, state);
 			}
 		}
 	}
@@ -355,6 +394,7 @@ public class BNWorldGenerator
 		hasOrangeMushroomGen = BlocksRegister.BLOCK_ORANGE_MUSHROOM != Blocks.AIR;
 		hasRedMoldGen = BlocksRegister.BLOCK_RED_MOLD != Blocks.AIR;
 		hasGrayMoldGen = BlocksRegister.BLOCK_GRAY_MOLD != Blocks.AIR;
+		hasWartsGen = ConfigLoader.hasNetherWart();
 		
 		globalStructuresLand = new IStructureWorld[] {
 				new StructureAltar(),
@@ -378,18 +418,18 @@ public class BNWorldGenerator
 		globalStructuresCave = new IStructureWorld[] {
 				new StructureBuilding("room_01", -5),
 		};
-		
-		cityGenerator = new CityGenerator();
 	}
 	
-	private static BlockPos downRay(Chunk chunk, BlockPos start)
+	private static BlockPos downRay(World world, BlockPos start)
 	{
 		int dist = 0;
 		Block b;
+		BlockPos p;
 		for (int j = start.getY(); j > 31; j--)
 		{
-			b = chunk.getBlockState(start.getX(), j, start.getZ()).getBlock();
-			if (b != Blocks.AIR && (b instanceof BlockNetherrack || b instanceof BlockSoulSand || chunk.getBlockState(start.getX(), j, start.getZ()).getMaterial() == Material.LAVA))
+			p = new BlockPos(start.getX(), j, start.getZ());
+			b = world.getBlockState(p).getBlock();
+			if (b != Blocks.AIR && (b instanceof BlockNetherrack || b instanceof BlockSoulSand || world.getBlockState(p).getMaterial() == Material.LAVA))
 			{
 				return new BlockPos(start.getX(), j, start.getZ());
 			}
@@ -397,9 +437,14 @@ public class BNWorldGenerator
 		return null;
 	}
 	
-	public static void setDensity(float density)
+	public static void setPlantDensity(float density)
 	{
 		plantDensity = density;
+	}
+	
+	public static void setStructureDensity(float density)
+	{
+		structueDensity = density;
 	}
 	
 	public static int getSubBiome(int x, int y, int z, int count)
@@ -419,5 +464,10 @@ public class BNWorldGenerator
 		else
 			biome = biome.getSubBiome(pos.getX(), pos.getY(), pos.getZ());
 		return biome;
+	}
+	
+	public static BlockPos getNearestCity(World world, int cx, int cz)
+	{
+		return cityManager.getNearestStructure(world, cx, cz);
 	}
 }

@@ -10,11 +10,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.template.Template;
 import paulevs.betternether.structures.StructureNBT;
 
 public class StructureCityBuilding extends StructureNBT
 {
+	protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
+	
 	private BoundingBox bb;
 	private BlockPos[] ends;
 	private EnumFacing[] dirs;
@@ -80,18 +83,6 @@ public class StructureCityBuilding extends StructureNBT
 				return EnumFacing.NORTH;
 		}
 	}
-	
-	/*private EnumFacing getDir(BlockPos pos)
-	{
-		if (pos.getX() == 0)
-		{
-			return EnumFacing.WEST;
-		}
-		else if (pos.getX() > 0)
-		{
-			return EnumFacing.WEST;
-		}
-	}*/
 
 	public BoundingBox getBoungingBox()
 	{
@@ -101,10 +92,10 @@ public class StructureCityBuilding extends StructureNBT
 	public void place(World world, BlockPos pos)
 	{
 		BlockPos p = pos.add(rotationOffset);
-		template.addBlocksToWorld(world, p, DEFAULT_SETTINGS.setRotation(rotation));
+		template.addBlocksToWorld(world, p, DEFAULT_SETTINGS.copy().setRotation(rotation));
 		for (BlockPos rep : ends)
 		{
-			world.setBlockState(rep.add(pos), Blocks.AIR.getDefaultState());
+			world.setBlockState(rep.add(pos), AIR);
 		}
 		IBlockState state;
 		int d;
@@ -125,6 +116,54 @@ public class StructureCityBuilding extends StructureNBT
 						world.setBlockState(p.down(y), state);
 					}
 				}
+			}
+	}
+	
+	protected Rotation mirrorRotation(Rotation r)
+	{
+		switch (r)
+		{
+		case CLOCKWISE_90:
+			return Rotation.COUNTERCLOCKWISE_90;
+		default:
+			return r;
+		}
+	}
+	
+	public void placeInChunk(World world, BlockPos pos, StructureBoundingBox boundingBox)
+	{
+		BlockPos p = pos.add(rotationOffset);
+		template.addBlocksToWorld(world, p, DEFAULT_SETTINGS.copy().setRotation(rotation).setBoundingBox(boundingBox));
+		for (BlockPos rep : ends)
+		{
+			BlockPos repPos = rep.add(pos);
+			if (repPos.getX() >= boundingBox.minX && repPos.getX() <= boundingBox.maxX)
+				if (repPos.getZ() >= boundingBox.minZ && repPos.getZ() <= boundingBox.maxZ)
+					world.setBlockState(repPos, AIR);
+		}
+		IBlockState state;
+		int d;
+		for (int x = 0; x < bb.x2; x++)
+			for (int z = 0; z < bb.z2; z++)
+			{
+				p = pos.add(x, 0, z);
+				if (p.getX() >= boundingBox.minX && p.getX() <= boundingBox.maxX)
+					if (p.getZ() >= boundingBox.minZ && p.getZ() <= boundingBox.maxZ)
+					{
+						state = world.getBlockState(p);
+						if (state.isFullBlock())
+						{
+							for (d = 1; d < pos.getY() - 5; d++)
+							{
+								if (world.getBlockState(p.down(d)).isFullBlock())
+									break;
+							}
+							for (int y = 1; y < d; y++)
+							{
+								world.setBlockState(p.down(y), state);
+							}
+						}
+					}
 			}
 	}
 
@@ -208,5 +247,10 @@ public class StructureCityBuilding extends StructureNBT
 	public int getYOffset()
 	{
 		return offsetY;
+	}
+
+	public Rotation getRotation()
+	{
+		return rotation;
 	}
 }

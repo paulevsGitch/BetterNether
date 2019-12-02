@@ -54,4 +54,10 @@ public interface IStructureWorld
 			generate(world, pos, rotation);
 		}
 	}
+	
+	default void generateLava(World world, BlockPos pos, Random random)
+	{
+		Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
+		generate(world, pos, rotation);
+	}
 }

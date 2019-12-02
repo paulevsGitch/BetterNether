@@ -81,6 +81,7 @@ public class BlockEyeSeed extends Block implements IGrowable
 			h = (h2 >> 2) + rand.nextInt(h2 >> 2);
 			if (h < 5)
 				h = 5;
+			h -= 1;
 		}
 		IBlockState vineState = BlocksRegister.BLOCK_EYE_VINE.getDefaultState();
 		IBlockState eyeState = null;

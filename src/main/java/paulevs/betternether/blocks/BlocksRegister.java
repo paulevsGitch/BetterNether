@@ -265,17 +265,19 @@ public class BlocksRegister
 
 	public static void registerOreDictionary()
 	{
-		addToDictionary("blockWood", BLOCK_STALAGNATE_STEM);
-		addToDictionary("blockPlanks", BLOCK_STALAGNATE_PLANKS);
-		addToDictionary("blockPlanks", BLOCK_REEDS_BLOCK);
-		addToDictionary("slabPlanks", BLOCK_STALAGNATE_PLANKS_SLAB_HALF);
-		addToDictionary("slabPlanks", BLOCK_REEDS_SLAB_HALF);
+		addToDictionary("logWood", BLOCK_STALAGNATE_STEM);
+		addToDictionary("plankWood", BLOCK_STALAGNATE_PLANKS);
+		addToDictionary("plankWood", BLOCK_REEDS_BLOCK);
+		addToDictionary("slabWood", BLOCK_STALAGNATE_PLANKS_SLAB_HALF);
+		addToDictionary("slabWood", BLOCK_REEDS_SLAB_HALF);
 		addToDictionary("paneQuartzGlass", BLOCK_QUARTZ_GLASS_PANE);
 		addToDictionary("blockQuartzGlass", BLOCK_QUARTZ_GLASS);
 		addToDictionary("blockCincinnasite", BLOCK_CINCINNASITE_FORGED);
 		addToDictionary("blockCincinnasite", BLOCK_CINCINNASITE_PILLAR);
 		addToDictionary("blockCincinnasite", BLOCK_CINCINNASITE_TILE_LARGE);
 		addToDictionary("blockCincinnasite", BLOCK_CINCINNASITE_TILE_SMALL);
+		addToDictionary("oreCincinnasite", BLOCK_CINCINNASITE_ORE);
+		addToDictionary("sugarcane", BLOCK_NETHER_REED);
 	}
 	
 	private static void addToDictionary(String name, Block block)

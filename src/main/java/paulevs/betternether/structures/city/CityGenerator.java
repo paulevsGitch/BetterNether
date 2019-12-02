@@ -6,50 +6,53 @@ import java.util.Random;
 
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class CityGenerator
 {
-	private List<StructureCityBuilding> buildings;
-	private List<StructureCityBuilding> roadEnds;
-	private List<BoundingBox> bounds;
-	private List<BlockPos> ends;
-	private List<BlockPos> add;
-	private List<BlockPos> rem;
+	private List<StructureCityBuilding> centers = new ArrayList<StructureCityBuilding>();
+	private List<StructureCityBuilding> buildings = new ArrayList<StructureCityBuilding>();
+	private List<StructureCityBuilding> roadEnds = new ArrayList<StructureCityBuilding>();
+	private List<StructureCityBuilding> total = new ArrayList<StructureCityBuilding>();
+	private List<BoundingBox> bounds = new ArrayList<BoundingBox>();
+	private List<BlockPos> ends = new ArrayList<BlockPos>();
+	private List<BlockPos> add = new ArrayList<BlockPos>();
+	private List<BlockPos> rem = new ArrayList<BlockPos>();
 	
 	public CityGenerator()
 	{
-		buildings = new ArrayList<StructureCityBuilding>();
-		roadEnds = new ArrayList<StructureCityBuilding>();
-		bounds = new ArrayList<BoundingBox>();
-		ends = new ArrayList<BlockPos>();
-		add = new ArrayList<BlockPos>();
-		rem = new ArrayList<BlockPos>();
+		addBuildingToList("city_center_01", -10, centers);
+		addBuildingToList("city_center_02", -10, centers);
 		
-		addBuildingToList("city_center", -10);
-		addBuildingToList("city_library_01");
-		addBuildingToList("city_building_01");
-		addBuildingToList("city_building_02");
-		addBuildingToList("city_building_03");
-		addBuildingToList("city_building_04");
-		addBuildingToList("city_building_05");
-		addBuildingToList("city_building_06");
-		addBuildingToList("city_enchanter_01");
+		addBuildingToList("city_library_01", buildings);
+		addBuildingToList("city_tower_01", buildings);
+		addBuildingToList("city_tower_02", buildings);
+		addBuildingToList("city_building_01", buildings);
+		addBuildingToList("city_building_02", buildings);
+		addBuildingToList("city_building_03", buildings);
+		addBuildingToList("city_building_04", buildings);
+		addBuildingToList("city_building_05", buildings);
+		addBuildingToList("city_building_06", buildings);
+		addBuildingToList("city_building_07", buildings);
+		addBuildingToList("city_building_08", buildings);
+		addBuildingToList("city_building_09", buildings);
+		addBuildingToList("city_building_10", buildings);
+		addBuildingToList("city_enchanter_01", buildings);
+		addBuildingToList("city_hall", buildings);
 		
-		addRoadEndToList("road_end_01");
-		addRoadEndToList("road_end_02", -2);
+		addBuildingToList("road_end_01", roadEnds);
+		addBuildingToList("road_end_02", -2, roadEnds);
+		
+		total.addAll(centers);
+		total.addAll(buildings);
+		total.addAll(roadEnds);
 	}
 	
-	private void addBuildingToList(String name)
+	private void addBuildingToList(String name, List<StructureCityBuilding> buildings)
 	{
-		StructureCityBuilding building = new StructureCityBuilding("city/" + name);
-		buildings.add(building);
-		buildings.add(building.getRotated(Rotation.CLOCKWISE_90));
-		buildings.add(building.getRotated(Rotation.CLOCKWISE_180));
-		buildings.add(building.getRotated(Rotation.COUNTERCLOCKWISE_90));
+		addBuildingToList(name, 0, buildings);
 	}
 	
-	private void addBuildingToList(String name, int offsetY)
+	private void addBuildingToList(String name, int offsetY, List<StructureCityBuilding> buildings)
 	{
 		StructureCityBuilding building = new StructureCityBuilding("city/" + name, offsetY);
 		buildings.add(building);
@@ -58,53 +61,40 @@ public class CityGenerator
 		buildings.add(building.getRotated(Rotation.COUNTERCLOCKWISE_90));
 	}
 	
-	private void addRoadEndToList(String name)
-	{
-		StructureCityBuilding building = new StructureCityBuilding("city/" + name);
-		roadEnds.add(building);
-		roadEnds.add(building.getRotated(Rotation.CLOCKWISE_90));
-		roadEnds.add(building.getRotated(Rotation.CLOCKWISE_180));
-		roadEnds.add(building.getRotated(Rotation.COUNTERCLOCKWISE_90));
-	}
-	
-	private void addRoadEndToList(String name, int offsetY)
-	{
-		StructureCityBuilding building = new StructureCityBuilding("city/" + name, offsetY);
-		roadEnds.add(building);
-		roadEnds.add(building.getRotated(Rotation.CLOCKWISE_90));
-		roadEnds.add(building.getRotated(Rotation.CLOCKWISE_180));
-		roadEnds.add(building.getRotated(Rotation.COUNTERCLOCKWISE_90));
-	}
-	
-	private void placeCenterBuilding(World world, BlockPos pos, StructureCityBuilding building)
+	private void placeCenterBuilding(BlockPos pos, StructureCityBuilding building, ArrayList<BuildingInfo> city)
 	{
 		BoundingBox bb = building.getBoungingBox().offset(pos);
 		bounds.add(bb);
-		building.place(world, pos.add(0, building.getYOffset(), 0));
+		city.add(new BuildingInfo(building, pos.add(0, building.getYOffset(), 0)));
 		for (int i = 0; i < building.getEndsCount(); i++)
 			ends.add(pos.add(building.getOffsettedPos(i).add(0, building.getYOffset(), 0)));
 	}
 	
-	private void attachBuildings(World world, Random random)
+	private void attachBuildings(Random random, ArrayList<BuildingInfo> city)
 	{
 		for (BlockPos pos : ends)
 		{
-			for (int n = 0; n < 8; n++)
+			boolean generate = true;
+			for (int n = 0; n < 8 && generate; n++)
 			{
-				StructureCityBuilding building = buildings.get(4 + random.nextInt(buildings.size() - 4));
-				int index = random.nextInt(building.getEndsCount());
-				BlockPos offset = building.getPos(index);
-				BoundingBox bb = building.getBoungingBox().offset(pos).offsetNegative(offset);
-				if (noCollisions(bb))
+				int b = random.nextInt(buildings.size() >> 2) << 2;
+				for (int r = 0; r < 4 && generate; r++)
 				{
-					BlockPos npos = new BlockPos(bb.x1, pos.getY() - offset.getY() + building.getYOffset(), bb.z1);
-					bounds.add(bb);
-					rem.add(pos);
-					for (int i = 0; i < building.getEndsCount(); i++)
-						if (i != index)
-							add.add(npos.add(building.getOffsettedPos(i)));
-					building.place(world, npos);
-					break;
+					StructureCityBuilding building = buildings.get(b | r);
+					int index = random.nextInt(building.getEndsCount());
+					BlockPos offset = building.getPos(index);
+					BoundingBox bb = building.getBoungingBox().offset(pos).offsetNegative(offset);
+					if (noCollisions(bb))
+					{
+						BlockPos npos = new BlockPos(bb.x1, pos.getY() - offset.getY() + building.getYOffset(), bb.z1);
+						bounds.add(bb);
+						rem.add(pos);
+						for (int i = 0; i < building.getEndsCount(); i++)
+							if (i != index)
+								add.add(npos.add(building.getOffsettedPos(i)));
+						city.add(new BuildingInfo(building, npos));
+						generate = false;
+					}
 				}
 			}
 		}
@@ -114,7 +104,7 @@ public class CityGenerator
 		add.clear();
 	}
 	
-	private void closeRoads(World world)
+	private void closeRoads(ArrayList<BuildingInfo> city)
 	{
 		for (BlockPos pos : ends)
 		{
@@ -127,7 +117,7 @@ public class CityGenerator
 				{
 					BlockPos npos = new BlockPos(bb.x1, pos.getY() - offset.getY() + building.getYOffset(), bb.z1);
 					bounds.add(bb);
-					building.place(world, npos);
+					city.add(new BuildingInfo(building, npos));
 					break;
 				}
 			}
@@ -138,12 +128,14 @@ public class CityGenerator
 		add.clear();
 	}
 	
-	public void generate(World world, BlockPos pos, Random random)
+	public ArrayList<BuildingInfo> generate(BlockPos pos, Random random)
 	{
-		placeCenterBuilding(world, pos, buildings.get(random.nextInt(4)));
+		ArrayList<BuildingInfo> city = new ArrayList<BuildingInfo>();
+		placeCenterBuilding(pos, centers.get(random.nextInt(centers.size())), city);
 		for (int i = 0; i < 2 + random.nextInt(4); i++)
-			attachBuildings(world, random);
-		closeRoads(world);
+			attachBuildings(random, city);
+		closeRoads(city);
+		return city;
 	}
 	
 	private boolean noCollisions(BoundingBox bb)
@@ -152,5 +144,10 @@ public class CityGenerator
 			if (bb.isColliding(b))
 				return false;
 		return true;
+	}
+	
+	public List<StructureCityBuilding> getBuildings()
+	{
+		return total;
 	}
 }

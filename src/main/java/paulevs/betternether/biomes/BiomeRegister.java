@@ -30,7 +30,7 @@ public class BiomeRegister
 		BIOME_GRASSLANDS = registerBiome(new NetherGrasslands("Nether Grasslands"), biomes);
 		BIOME_MUSHROOM_FOREST = registerBiome(new NetherMushroomForest("Nether Mushroom Forest"), biomes);
 		BIOME_MUSHROOM_FOREST_EDGE = registerEdgeBiome(new NetherMushroomForestEdge("Nether Mushroom Forest Edge"), BIOME_MUSHROOM_FOREST, 10);
-		BIOME_WART_FOREST_EDGE = registerEdgeBiome(new NetherWartForestEdge("Nether Mushroom Forest Edge"), BIOME_WART_FOREST, 9);
+		BIOME_WART_FOREST_EDGE = registerEdgeBiome(new NetherWartForestEdge("Nether Wart Forest Edge"), BIOME_WART_FOREST, 9);
 		BIOME_BONE_REEF = registerSubBiome(new NetherBoneReef("Bone Reef"), BIOME_GRASSLANDS);
 		BIOME_POOR_GRASSLANDS = registerSubBiome(new NetherPoorGrasslands("Poor Nether Grasslands"), BIOME_GRASSLANDS);
 		biomeCount = biomes.size();

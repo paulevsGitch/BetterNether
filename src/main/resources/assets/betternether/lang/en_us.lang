@@ -158,3 +158,7 @@ tile.stalagnate_planks_slab_half.name=Stalagnate Slab
 tile.stalagnate_planks_stairs.name=Stalagnate Stairs
 tile.stalagnate_seed.name=Stalagnate Seed
 tile.wart_seed.name=Wart Seed
+
+commands.findnethercity.usage.console=No coordinates in input
+commands.findnethercity.usage.coordinates=Wrong coordinates
+commands.findnethercity.usage=Wrong usage, must be /findNetherCity or /findNetherCity x y z

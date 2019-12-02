@@ -8,7 +8,7 @@ import net.minecraft.block.BlockNetherrack;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.World;
 import paulevs.betternether.blocks.BNBlockBone;
 import paulevs.betternether.blocks.BlockBoneMushroom;
 import paulevs.betternether.blocks.BlocksRegister;
@@ -27,12 +27,8 @@ public class NetherBoneReef extends NetherGrasslands
 		super(name);
 	}
 	
-	/*public void genSurfColumn(Chunk chunk, BlockPos pos, Random random) 
-	{
-		chunk.setBlockState(pos, Blocks.DIAMOND_BLOCK.getDefaultState());
-	}*/
-	
-	public void genFloorObjects(Chunk chunk, BlockPos pos, Random random)
+	@Override
+	public void genFloorObjects(World chunk, BlockPos pos, Random random)
 	{
 		Block ground = chunk.getBlockState(pos).getBlock();
 		if (random.nextFloat() <= plantDensity)
@@ -40,8 +36,11 @@ public class NetherBoneReef extends NetherGrasslands
 			if (ground instanceof BlockNetherrack || ground == Blocks.SOUL_SAND)
 			{
 				if (random.nextInt(20) == 0)
-					bones[random.nextInt(bones.length)]
-							.generateCentered(chunk.getWorld(), pos.add(chunk.x << 4, -random.nextInt(4), chunk.z << 4), random);
+					bones[random.nextInt(bones.length)].generateCentered(
+							chunk,
+							pos.down(random.nextInt(4)),
+							random
+							);
 				else if (BlocksRegister.BLOCK_NETHER_GRASS != Blocks.AIR && random.nextInt(4) != 0)
 					chunk.setBlockState(pos.up(), BlocksRegister.BLOCK_NETHER_GRASS.getDefaultState());
 			}
@@ -55,14 +54,14 @@ public class NetherBoneReef extends NetherGrasslands
 	}
 	
 	@Override
-	public void genWallObjects(Chunk chunk, BlockPos origin, BlockPos pos, Random random)
+	public void genWallObjects(World world, BlockPos origin, BlockPos pos, Random random)
 	{
 		if (random.nextFloat() <= plantDensity && BlocksRegister.BLOCK_BONE_MUSHROOM != Blocks.AIR && random.nextBoolean() &&
-				(chunk.getBlockState(origin).getBlock() == Blocks.BONE_BLOCK || chunk.getBlockState(origin).getBlock() == BlocksRegister.BLOCK_BONE))
+				(world.getBlockState(origin).getBlock() == Blocks.BONE_BLOCK || world.getBlockState(origin).getBlock() == BlocksRegister.BLOCK_BONE))
 		{
 			BlockPos dir = pos.subtract(origin);
 			EnumFacing facing = EnumFacing.getFacingFromVector(dir.getX(), dir.getY(), dir.getZ());
-			chunk.setBlockState(pos, BlocksRegister
+			world.setBlockState(pos, BlocksRegister
 					.BLOCK_BONE_MUSHROOM
 					.getDefaultState()
 					.withProperty(BlockBoneMushroom.FACING, facing)

@@ -68,4 +68,39 @@ public class BoundingBox
 		x2 = nx2 - nx1;
 		z2 = nz2 - nz1;
 	}
+
+	public BlockPos getCenter()
+	{
+		return new BlockPos((x2 + x1) * 0.5, 0, (z2 + z1) * 0.5);
+	}
+	
+	public int getSideX()
+	{
+		return x2 - x1;
+	}
+	
+	public int getSideZ()
+	{
+		return z2 - z1;
+	}
+	
+	public int getMinX()
+	{
+		return x1;
+	}
+
+	public int getMaxX()
+	{
+		return x2;
+	}
+	
+	public int getMinZ()
+	{
+		return z1;
+	}
+
+	public int getMaxZ()
+	{
+		return z2;
+	}
 }

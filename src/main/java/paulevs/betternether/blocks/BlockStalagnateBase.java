@@ -103,17 +103,23 @@ public class BlockStalagnateBase extends Block
 	@Override
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
     {
-		if (worldIn.rand.nextInt(4) == 0)
-			spawnSeeds(worldIn, pos);
-		worldIn.destroyBlock(pos, true);
+		if (!worldIn.isRemote)
+		{
+			if (worldIn.rand.nextInt(4) == 0)
+				spawnSeeds(worldIn, pos);
+			worldIn.destroyBlock(pos, true);
+		}
     }
 	
 	@Override
 	public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
     {
-		if (worldIn.rand.nextInt(4) == 0)
-			spawnSeeds(worldIn, pos);
-		worldIn.destroyBlock(pos, true);
+		if (!worldIn.isRemote)
+		{
+			if (worldIn.rand.nextInt(4) == 0)
+				spawnSeeds(worldIn, pos);
+			worldIn.destroyBlock(pos, true);
+		}
     }
 	
 	private void spawnSeeds(World world, BlockPos pos)
