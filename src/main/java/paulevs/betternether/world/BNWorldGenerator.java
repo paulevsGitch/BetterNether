@@ -88,6 +88,7 @@ public class BNWorldGenerator
 	private static double subBiomeSize;
 	private static float plantDensity = 1;
 	private static float structueDensity = 1F / 64F;
+	private static float oreDensity = 1F / 1024F;
 	
 	public static boolean enablePlayerDamage;
 	public static boolean enableMobDamage;
@@ -469,5 +470,10 @@ public class BNWorldGenerator
 	public static BlockPos getNearestCity(World world, int cx, int cz)
 	{
 		return cityManager.getNearestStructure(world, cx, cz);
+	}
+
+	public static void setOreDensity(float density)
+	{
+		oreDensity = density;
 	}
 }

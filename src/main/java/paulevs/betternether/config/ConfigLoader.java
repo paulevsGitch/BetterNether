@@ -84,6 +84,7 @@ public class ConfigLoader
 	{
 		BNWorldGenerator.setPlantDensity(config.getFloat("GlobalDensity", "Generator", 1, 0, 1, "Global plant density, multiplied on other"));
 		BNWorldGenerator.setStructureDensity(config.getFloat("StructureDensity", "Generator", 1F / 16F, 0, 1, "Structure density for random world structures"));
+		BNWorldGenerator.setOreDensity(config.getFloat("OreDensity", "Generator", 1F / 1024F, 0, 1, "Cincinnasite ore density"));
 		for (NetherBiome biome : BiomeRegister.getBiomes())
 		{
 			biome.setDensity(config.getFloat(biome.getName().replace(" ", "") + "Density", "Generator", 1, 0, 1, "Density for " + biome.getName() + " biome"));

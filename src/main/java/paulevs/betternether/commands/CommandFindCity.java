@@ -3,6 +3,7 @@ package paulevs.betternether.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -14,14 +15,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import paulevs.betternether.world.BNWorldGenerator;
 
-public class CommandFindCity implements ICommand
+public class CommandFindCity extends CommandBase
 {
-	@Override
-	public int compareTo(ICommand o)
-	{
-		return 0;
-	}
-
 	@Override
 	public String getName()
 	{
@@ -32,14 +27,6 @@ public class CommandFindCity implements ICommand
 	public String getUsage(ICommandSender sender)
 	{
 		return "/findNetherCity or /findNetherCity x y z";
-	}
-
-	@Override
-	public List<String> getAliases()
-	{
-		List<String> aliases = new ArrayList<String>();
-		aliases.add("fns");
-		return aliases;
 	}
 
 	@Override
@@ -81,18 +68,6 @@ public class CommandFindCity implements ICommand
 	}
 
 	@Override
-	public boolean checkPermission(MinecraftServer server, ICommandSender sender)
-	{
-		if (sender instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer) sender;
-			boolean op = server.getPlayerList().getOppedPlayers().getEntry(((EntityPlayer) sender).getGameProfile()) != null;
-			return op || player.isSpectator() || player.isCreative();
-		}
-		return true;
-	}
-
-	@Override
 	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos targetPos)
 	{
 		List<String> tabs = new ArrayList<String>();
@@ -106,12 +81,6 @@ public class CommandFindCity implements ICommand
 				tabs.add(Double.toString(sender.getPosition().getZ()));
 		}
 		return tabs;
-	}
-
-	@Override
-	public boolean isUsernameIndex(String[] args, int index)
-	{
-		return false;
 	}
 	
 	private void sendMessage(String message, ICommandSender sender)
