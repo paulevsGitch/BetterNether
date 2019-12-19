@@ -118,7 +118,8 @@ public class BNWorldGenerator
 	
 	public static void save(World world)
 	{
-		cityManager.save(world);
+		if (cityManager != null)
+			cityManager.save(world);
 	}
 	
 	private static void makeBiomeArray(int sx, int sz)

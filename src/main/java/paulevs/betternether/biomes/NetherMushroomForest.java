@@ -28,7 +28,8 @@ public class NetherMushroomForest extends NetherBiome
 			{
 			case 0:
 				world.setBlockState(pos, Blocks.SOUL_SAND.getDefaultState());
-				world.setBlockState(pos.up(), Blocks.NETHER_WART
+				if (BNWorldGenerator.hasWartsGen)
+					world.setBlockState(pos.up(), Blocks.NETHER_WART
 						.getDefaultState()
 						.withProperty(BlockNetherWart.AGE, Integer.valueOf(random.nextInt(4))));
 				break;

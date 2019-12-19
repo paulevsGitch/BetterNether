@@ -18,7 +18,7 @@ item.stalagnate_bowl_wart.name=Wart Soup
 
 itemGroup.better_nether=Better Nether
 
-message.spawn_help=§c§lYou must held a Glowstone Dust to set spawn point here
+message.spawn_help=§c§lYou must hold Glowstone Dust to set your spawn point here
 message.spawn_set=§2§lYour spawn point was set here
 
 tile.agave.name=Agave
