@@ -1,0 +1,6 @@
+{
+    "parent": "betternether:block/quartz_glass",
+	"textures": {
+        "all": "betternether:item/quartz_glass"
+    }
+}

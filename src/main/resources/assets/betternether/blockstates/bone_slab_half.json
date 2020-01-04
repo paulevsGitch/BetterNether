@@ -1,0 +1,7 @@
+{
+    "variants":
+	{
+        "half=bottom": { "model": "betternether:block/bone_half_slab" },
+        "half=top": { "model": "betternether:block/bone_half_slab", "x": 180, "uvlock": true }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "variants":
+	{
+        "":
+		[
+			{ "model": "betternether:block/stalagnate_stem_1" },
+			{ "model": "betternether:block/stalagnate_stem_3" }
+		]
+    }
+}

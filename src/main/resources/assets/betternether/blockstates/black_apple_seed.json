@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": { "model": "betternether:block/black_apple_seed" }
+    }
+}

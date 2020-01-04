@@ -1,0 +1,7 @@
+{
+    "variants":
+	{
+        "half=top": { "model": "betternether:block/nether_brick_tile_double_slab" },
+        "half=bottom": { "model": "betternether:block/nether_brick_tile_double_slab" }
+    }
+}

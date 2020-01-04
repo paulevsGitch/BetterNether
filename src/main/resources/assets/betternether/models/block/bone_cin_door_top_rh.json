@@ -1,0 +1,7 @@
+{
+    "parent": "betternether:block/bn_door_top_rh",
+    "textures": {
+        "front": "betternether:block/bone_cin_door_upper",
+        "side": "betternether:block/cincinnasite_forged"
+    }
+}

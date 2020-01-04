@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/nether_brick_tile_small",
+        "down": "betternether:block/nether_brick_tile_small",
+        "up": "betternether:block/nether_brick_tile_small",
+        "north": "betternether:block/nether_brick_tile_slab_side",
+        "east": "betternether:block/nether_brick_tile_slab_side",
+        "south": "betternether:block/nether_brick_tile_slab_side",
+        "west": "betternether:block/nether_brick_tile_slab_side"
+    }
+}

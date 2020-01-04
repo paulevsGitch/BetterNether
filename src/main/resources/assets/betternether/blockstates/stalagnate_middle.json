@@ -1,0 +1,25 @@
+{
+    "multipart": [
+        {
+			"apply":
+				[
+					{ "model": "betternether:block/stalagnate_stem_1" },
+					{ "model": "betternether:block/stalagnate_stem_2" },
+					{ "model": "betternether:block/stalagnate_stem_2" },
+					{ "model": "betternether:block/stalagnate_stem_2" },
+					{ "model": "betternether:block/stalagnate_stem_3" },
+					{ "model": "betternether:block/stalagnate_stem_4" },
+					{ "model": "betternether:block/stalagnate_stem_4" },
+					{ "model": "betternether:block/stalagnate_stem_4" }
+				]
+		},
+		{
+			"apply":
+				[
+					{ "model": "betternether:block/stalagnate_leaves_1" },
+					{ "model": "betternether:block/stalagnate_leaves_2" },
+					{ "model": "minecraft:block" }
+				]
+		}
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/gray_mold" },
+			{ "model": "betternether:block/gray_mold", "y": 90 },
+			{ "model": "betternether:block/gray_mold", "y": 180 },
+			{ "model": "betternether:block/gray_mold", "y": 270 }
+		]
+    }
+}

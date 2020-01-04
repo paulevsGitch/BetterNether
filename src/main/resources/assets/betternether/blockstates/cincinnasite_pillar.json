@@ -1,0 +1,8 @@
+{
+	"variants": {
+        "shape=top":  { "model": "betternether:block/cincinnasite_pillar_top" },
+        "shape=bottom":  { "model": "betternether:block/cincinnasite_pillar_bottom" },
+        "shape=middle":  { "model": "betternether:block/cincinnasite_pillar_middle" },
+        "shape=small":  { "model": "betternether:block/cincinnasite_pillar_small" }
+    }
+}

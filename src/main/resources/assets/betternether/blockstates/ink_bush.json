@@ -1,0 +1,11 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/ink_bush" },
+			{ "model": "betternether:block/ink_bush", "y": 90 },
+			{ "model": "betternether:block/ink_bush", "y": 180 },
+			{ "model": "betternether:block/ink_bush", "y": 270 }
+		]
+    }
+}

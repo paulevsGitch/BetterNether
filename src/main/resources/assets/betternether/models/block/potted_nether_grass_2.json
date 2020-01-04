@@ -1,0 +1,6 @@
+{
+    "parent": "betternether:block/grass_pot",
+    "textures": {
+        "texture": "betternether:block/ngrass_2"
+    }
+}

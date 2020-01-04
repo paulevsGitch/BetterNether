@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "facing=north,shape=corner":  { "model": "betternether:block/glowmushroom_corner" },
+        "facing=south,shape=corner":  { "model": "betternether:block/glowmushroom_corner", "y": 180 },
+        "facing=east,shape=corner":  { "model": "betternether:block/glowmushroom_corner", "y": 90 },
+        "facing=west,shape=corner":  { "model": "betternether:block/glowmushroom_corner", "y": 270 },
+		"facing=north,shape=side":  { "model": "betternether:block/glowmushroom_side", "y": 180 },
+        "facing=south,shape=side":  { "model": "betternether:block/glowmushroom_side" },
+        "facing=east,shape=side":  { "model": "betternether:block/glowmushroom_side", "y": 270 },
+        "facing=west,shape=side":  { "model": "betternether:block/glowmushroom_side", "y": 90 },
+		"facing=north,shape=center":  { "model": "betternether:block/glowmushroom_center" },
+        "facing=south,shape=center":  { "model": "betternether:block/glowmushroom_center" },
+        "facing=east,shape=center":  { "model": "betternether:block/glowmushroom_center" },
+        "facing=west,shape=center":  { "model": "betternether:block/glowmushroom_center" }
+    }
+}

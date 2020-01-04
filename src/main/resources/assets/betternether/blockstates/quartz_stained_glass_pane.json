@@ -1,0 +1,97 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"edge": "betternether:block/blocks/quartz_glass",
+			"pane": "betternether:block/blocks/quartz_glass"
+		},
+		"model": "betternether:block/quartz_glass_pane_post",
+		"uvlock": true
+	},
+  "variants": {
+    "north": [{
+      "true": {
+        "submodel": {
+          "nside": {
+            "model": "betternether:block/quartz_glass_pane_side"
+          }
+        }
+      },
+      "false": {
+        "submodel": {
+          "nsidens": {
+            "model": "betternether:block/quartz_glass_pane_noside"
+          }
+        }
+      }
+    }],
+    "south": [{
+      "true": {
+        "submodel": {
+          "sside": {
+            "model": "betternether:block/quartz_glass_pane_side_alt"
+          }
+        }
+      },
+      "false": {
+        "submodel": {
+          "ssidens": {
+            "model": "betternether:block/quartz_glass_pane_noside_alt",
+            "y": 90
+          }
+        }
+      }
+    }],
+    "east": [{
+      "true": {
+        "submodel": {
+          "eside": {
+            "model": "betternether:block/quartz_glass_pane_side",
+            "y": 90
+          }
+        }
+      },
+      "false": {
+        "submodel": {
+          "esidens": {
+            "model": "betternether:block/quartz_glass_pane_noside_alt"
+          }
+        }
+      }
+    }],
+    "west": [{
+      "true": {
+        "submodel": {
+          "wside": {
+            "model": "betternether:block/quartz_glass_pane_side_alt",
+            "y": 90
+          }
+        }
+      },
+      "false": {
+        "submodel": {
+          "wsidens": {
+            "model": "betternether:block/quartz_glass_pane_noside",
+            "y": 270
+          }
+        }
+      }
+    }],
+	"color=black": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_black" } }],
+	"color=blue": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_blue" } }],
+	"color=brown": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_brown" } }],
+	"color=cyan": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_cyan" } }],
+	"color=gray": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_gray" } }],
+	"color=green": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_green" } }],
+	"color=light_blue": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_light_blue" } }],
+	"color=lime": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_lime" } }],
+	"color=magenta": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_magenta" } }],
+	"color=orange": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_orange" } }],
+	"color=pink": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_pink" } }],
+	"color=purple": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_purple" } }],
+	"color=red": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_red" } }],
+	"color=silver": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_silver" } }],
+	"color=white": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_white" } }],
+	"color=yellow": [{ "textures": { "pane": "betternether:block/blocks/quartz_stained_glass_yellow" } }]
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "variants":
+	{
+        "half=top": { "model": "betternether:block/stalagnate_planks" },
+        "half=bottom": { "model": "betternether:block/stalagnate_planks" }
+    }
+}

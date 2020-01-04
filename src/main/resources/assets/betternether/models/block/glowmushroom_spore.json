@@ -1,0 +1,36 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "betternether:block/glowmushroom_side_top",
+		"top": "betternether:block/glowmushroom_spore_top",
+		"bottom": "betternether:block/glowmushroom_spore_bottom"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 4, 7, 0 ],
+			"to": [ 12, 9, 8 ],
+			"faces": {
+				"down": { "uv": [ 4, 4, 12, 12 ], "texture": "#bottom" },
+				"up": { "uv": [ 4, 4, 12, 12 ], "texture": "#top" },
+				"north": { "uv": [ 4, 11, 12, 13 ], "texture": "#top", "cullface": "north" },
+				"south": { "uv": [ 4, 11, 12, 13 ], "texture": "#top" },
+				"west": { "uv": [ 4, 11, 12, 13 ], "texture": "#top" },
+				"east": { "uv": [ 4, 11, 12, 13 ], "texture": "#top" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 5, 9, 1 ],
+			"to": [ 11, 10, 7 ],
+			"faces": {
+				"up": { "uv": [ 5, 5, 11, 11 ], "texture": "#top" },
+				"north": { "uv": [ 5, 5, 11, 6 ], "texture": "#top" },
+				"south": { "uv": [ 5, 10, 11, 11 ], "texture": "#top" },
+				"west": { "uv": [ 5, 5, 11, 6 ], "texture": "#top" },
+				"east": { "uv": [ 5, 10, 11, 11 ], "texture": "#top" }
+			}
+		}
+	]
+}

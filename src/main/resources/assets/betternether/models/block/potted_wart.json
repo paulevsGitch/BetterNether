@@ -1,0 +1,22 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "block/nether_wart_block",
+		"texture": "block/nether_wart_block"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 2, -8, 2 ],
+			"to": [ 14, 4, 14 ],
+			"faces": {
+				"down": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture" },
+				"up": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture" },
+				"north": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture" },
+				"south": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture" },
+				"west": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture" },
+				"east": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture" }
+			}
+		}
+	]
+}

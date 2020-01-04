@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "paulevs.betternether.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ChunkPopulateMixin",
+    "LadderMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

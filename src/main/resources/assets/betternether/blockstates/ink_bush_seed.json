@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": { "model": "betternether:block/ink_bush_seed" }
+    }
+}

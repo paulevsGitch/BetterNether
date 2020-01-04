@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "betternether:block/pig_statue_01", "y": 90 },
+        "facing=south": { "model": "betternether:block/pig_statue_01", "y": 270 },
+        "facing=west":  { "model": "betternether:block/pig_statue_01" },
+        "facing=east":  { "model": "betternether:block/pig_statue_01", "y": 180 }
+    }
+}

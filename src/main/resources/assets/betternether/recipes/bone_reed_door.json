@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AB",
+	"BB",
+	"BA"
+  ],
+  "key": {
+    "A": {
+		"item": "betternether:reeds_block"
+    },
+	"B": {
+      "item": "betternether:bone_block"
+    }
+  },
+  "result": {
+    "item": "betternether:bone_reed_door",
+	"count": 3
+  }
+}

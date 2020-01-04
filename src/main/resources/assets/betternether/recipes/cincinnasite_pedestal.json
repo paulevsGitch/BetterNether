@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+	"##",
+	"##"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    }
+  },
+  "result": {
+    "item": "betternether:cincinnasite_pedestal",
+    "count": 2
+  }
+}

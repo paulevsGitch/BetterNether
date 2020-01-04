@@ -1,0 +1,165 @@
+# Made by yorusora_nk
+# https://www.curseforge.com/members/yorusora_nk
+
+container.forge=Forge
+container.chest_of_drawers=抽屉柜
+
+entity.firefly.name=飞虫
+
+item.black_apple.name=黑苹果
+
+item.cincinnasite.name=辛辛纳酸盐
+item.cincinnasite_axe.name=辛辛纳酸盐 斧
+item.cincinnasite_axe_diamond.name=辛辛纳酸盐-钻石 斧
+item.cincinnasite_pickaxe.name=辛辛纳酸盐 镐
+item.cincinnasite_pickaxe_diamond.name=辛辛纳酸盐-钻石 镐
+
+item.stalagnate_bowl.name=石碗
+item.stalagnate_bowl_apple.name=黑苹果煲
+item.stalagnate_bowl_mushroom.name=蘑菇煲
+item.stalagnate_bowl_wart.name=地狱疣汤
+
+itemGroup.better_nether=更好的下界
+
+message.spawn_help=&sect;c&sect;l你必须拿着一块荧石粉来在这里设置重生点
+message.spawn_set=&sect;2&sect;l你的重生点被设置在这里
+
+tile.agave.name=龙舌兰
+
+tile.barrel_cactus.name=圆筒掌
+
+tile.black_apple_seed.name=黑苹果种子
+tile.black_bush.name=黑灌木
+
+tile.block_eyeball.name=眼球块
+tile.block_eyeball_small.name=小眼球块
+
+tile.bone_block.name=骨岩
+tile.bone_button.name=骨制按钮
+tile.bone_cincinnasite_door.name=骨-辛辛纳酸盐 门
+tile.bone_mushroom.name=骨蘑菇孢子
+tile.bone_plate.name=骨制压力板
+tile.bone_reed_door.name=骨-芦苇 门
+tile.bone_slab_half.name=骨制台阶
+tile.bone_stairs.name=骨制楼梯
+tile.bone_tile.name=骨砖
+tile.bone_wall.name=骨制栏杆
+
+tile.cincinnasite_bars.name=辛辛纳酸盐 栏杆
+tile.cincinnasite_block.name=辛辛纳酸盐 块
+tile.cincinnasite_brick_plate.name=辛辛纳酸盐 砖板
+tile.cincinnasite_bricks.name=辛辛纳酸盐 砖
+tile.cincinnasite_bricks_pillar.name=辛辛纳酸盐 砖柱
+tile.cincinnasite_button.name=辛辛纳酸盐 按钮
+tile.cincinnasite_carved.name=辛辛纳酸盐 雕塑
+tile.cincinnasite_fire_bowl.name=辛辛纳酸盐 火盆
+tile.cincinnasite_forge.name=辛辛纳酸盐 锻造
+tile.cincinnasite_forged.name=锻造的 辛辛纳酸盐 块
+tile.cincinnasite_frame.name=辛辛纳酸盐 火焰
+tile.cincinnasite_lantern.name=辛辛纳酸盐 灯
+tile.cincinnasite_ore.name=辛辛纳酸盐 矿石
+tile.cincinnasite_pedestal.name=辛辛纳酸盐 基座
+tile.cincinnasite_pillar.name=辛辛纳酸盐 石柱
+tile.cincinnasite_plate.name=辛辛纳酸盐 压力板
+tile.cincinnasite_pot.name=辛辛纳酸盐 盆
+tile.cincinnasite_slab_half.name=辛辛纳酸盐 台阶
+tile.cincinnasite_stairs.name=辛辛纳酸盐 楼梯
+tile.cincinnasite_tile_large.name=辛辛纳酸盐 砖
+tile.cincinnasite_tile_small.name=十字 辛辛纳酸盐 砖
+tile.cincinnasite_wall.name=辛辛纳酸盐 栏杆
+
+tile.chest_of_drawers.name=抽屉柜
+
+tile.egg_plant.name=茄子
+
+tile.eye_seed.name=眼珠
+
+tile.gray_mold.name=Gray Mold
+
+tile.ink_bush.name=墨色灌木
+tile.ink_bush_seed.name=墨色灌木种子
+
+tile.lucis_spore.name=透明孢子
+
+tile.magma_flower.name=岩浆花种子
+
+tile.nether_brick_tile_large.name=地狱 砖
+tile.nether_brick_tile_slab_half.name=地狱砖板
+tile.nether_brick_tile_small.name=十字 地狱 砖
+tile.nether_brick_tile_stairs.name=地狱砖楼梯
+tile.nether_brick_wall.name=地狱栏杆
+tile.nether_cactus.name=地狱仙人掌
+tile.nether_grass.name=地狱草
+tile.nether_mycelium.name=地狱菌丝
+tile.nether_reed.name=地狱芦苇
+tile.netherrack_furnace.name=地狱岩 熔炉
+tile.netherrack_moss.name=地狱苔藓
+
+tile.orange_mushroom.name=紫蘑菇
+
+tile.pig_statue_01.name=重生者雕塑
+
+tile.potted_plant_1.name=盆栽植物
+
+tile.quartz_glass.name=石英玻璃
+tile.quartz_glass_framed.name=框架石英玻璃
+tile.quartz_glass_framed_pane.name=框架石英窗板
+tile.quartz_glass_pane.name=石英窗板
+tile.quartz_stained_glass.black.name=黑色石英玻璃
+tile.quartz_stained_glass.blue.name=蓝色石英玻璃
+tile.quartz_stained_glass.brown.name=棕色石英玻璃
+tile.quartz_stained_glass.cyan.name=青色石英玻璃
+tile.quartz_stained_glass.gray.name=灰色石英玻璃
+tile.quartz_stained_glass.green.name=绿色石英玻璃
+tile.quartz_stained_glass.lightBlue.name=浅蓝色石英玻璃
+tile.quartz_stained_glass.lime.name=浅绿色石英玻璃
+tile.quartz_stained_glass.magenta.name=品红色石英玻璃
+tile.quartz_stained_glass.orange.name=橙色石英玻璃
+tile.quartz_stained_glass.pink.name=粉色石英玻璃
+tile.quartz_stained_glass.purple.name=紫色石英玻璃
+tile.quartz_stained_glass.red.name=红色石英玻璃
+tile.quartz_stained_glass.silver.name=银白色石英玻璃
+tile.quartz_stained_glass.white.name=白色石英玻璃
+tile.quartz_stained_glass.yellow.name=黄色石英玻璃
+tile.quartz_stained_glass_framed.black.name=黑色框架石英玻璃
+tile.quartz_stained_glass_framed.blue.name=蓝色框架石英玻璃
+tile.quartz_stained_glass_framed.brown.name=棕色框架石英玻璃
+tile.quartz_stained_glass_framed.cyan.name=青色框架石英玻璃
+tile.quartz_stained_glass_framed.gray.name=灰色框架石英玻璃
+tile.quartz_stained_glass_framed.green.name=绿色框架石英玻璃
+tile.quartz_stained_glass_framed.lightBlue.name=浅蓝色框架石英玻璃
+tile.quartz_stained_glass_framed.lime.name=浅绿色框架石英玻璃
+tile.quartz_stained_glass_framed.magenta.name=品红色框架石英玻璃
+tile.quartz_stained_glass_framed.orange.name=橙色框架石英玻璃
+tile.quartz_stained_glass_framed.pink.name=粉色框架石英玻璃
+tile.quartz_stained_glass_framed.purple.name=紫色框架石英玻璃
+tile.quartz_stained_glass_framed.red.name=红色框架石英玻璃
+tile.quartz_stained_glass_framed.silver.name=银白色框架石英玻璃
+tile.quartz_stained_glass_framed.white.name=白色框架石英玻璃
+tile.quartz_stained_glass_framed.yellow.name=黄色框架石英玻璃
+
+tile.red_mold.name=Red Mold
+
+tile.reeds_block.name=芦苇块
+tile.reeds_button.name=芦苇按钮
+tile.reeds_fence.name=芦苇栅栏
+tile.reeds_gate.name=芦苇栅栏门
+tile.reeds_ladder.name=芦苇梯子
+tile.reeds_plate.name=芦苇压板
+tile.reeds_slab_half.name=芦苇板
+tile.reeds_stairs.name=芦苇楼梯
+
+tile.smoker.name=烟草
+
+tile.stalagnate.name=石笋
+tile.stalagnate_bark.name=石笋皮
+tile.stalagnate_bowl_placed.name=石笋碗
+tile.stalagnate_planks.name=石笋木板
+tile.stalagnate_planks_button.name=石笋按钮
+tile.stalagnate_planks_fence.name=石笋栅栏
+tile.stalagnate_planks_gate.name=石笋门
+tile.stalagnate_planks_plate.name=石笋压力板
+tile.stalagnate_planks_slab_half.name=石笋台阶
+tile.stalagnate_planks_stairs.name=石笋楼梯
+tile.stalagnate_seed.name=石笋种子
+tile.wart_seed.name=疣子

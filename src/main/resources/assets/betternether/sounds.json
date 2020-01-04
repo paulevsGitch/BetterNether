@@ -1,0 +1,11 @@
+{
+  "mob.firefly.fly": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "betternether:mob/firefly/fly",
+        "stream": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+	"variants": {
+        "shape=top":  { "model": "betternether:block/brown_mushroom_top_center" },
+		"shape=side_n":  { "model": "betternether:block/brown_mushroom_top_side" },
+		"shape=side_s":  { "model": "betternether:block/brown_mushroom_top_side", "y": 180, "uvlock": true },
+		"shape=side_e":  { "model": "betternether:block/brown_mushroom_top_side", "y": 90, "uvlock": true },
+		"shape=side_w":  { "model": "betternether:block/brown_mushroom_top_side", "y": 270, "uvlock": true },
+		"shape=corner_n":  { "model": "betternether:block/brown_mushroom_top_corner", "y": 90, "uvlock": true },
+		"shape=corner_s":  { "model": "betternether:block/brown_mushroom_top_corner", "y": 270, "uvlock": true },
+		"shape=corner_e":  { "model": "betternether:block/brown_mushroom_top_corner", "y": 180, "uvlock": true },
+		"shape=corner_w":  { "model": "betternether:block/brown_mushroom_top_corner" },
+		"shape=middle":  [
+			{ "model": "betternether:block/brown_mushroom_middle_01" },
+			{ "model": "betternether:block/brown_mushroom_middle_02" },
+			{ "model": "betternether:block/brown_mushroom_middle_03" },
+			{ "model": "betternether:block/brown_mushroom_middle_01", "y": 90, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_middle_02", "y": 90, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_middle_03", "y": 90, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_middle_01", "y": 180, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_middle_02", "y": 180, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_middle_03", "y": 180, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_middle_01", "y": 270, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_middle_02", "y": 270, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_middle_03", "y": 270, "uvlock": true }
+		],
+        "shape=bottom":  [
+			{ "model": "betternether:block/brown_mushroom_bottom" },
+			{ "model": "betternether:block/brown_mushroom_bottom", "y": 90, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_bottom", "y": 180, "uvlock": true },
+			{ "model": "betternether:block/brown_mushroom_bottom", "y": 270, "uvlock": true }
+		]
+    }
+}

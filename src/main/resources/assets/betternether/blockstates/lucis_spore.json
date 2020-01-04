@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north":  { "model": "betternether:block/glowmushroom_spore", "y": 180 },
+        "facing=south":  { "model": "betternether:block/glowmushroom_spore" },
+        "facing=east":  { "model": "betternether:block/glowmushroom_spore", "y": 270 },
+        "facing=west":  { "model": "betternether:block/glowmushroom_spore", "y": 90 }
+    }
+}

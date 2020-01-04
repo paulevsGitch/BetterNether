@@ -1,0 +1,11 @@
+{
+	"variants":
+	{
+        "":  [
+			{ "model": "betternether:block/barrel_cactus" },
+			{ "model": "betternether:block/barrel_cactus", "y": 90 },
+			{ "model": "betternether:block/barrel_cactus", "y": 180 },
+			{ "model": "betternether:block/barrel_cactus", "y": 270 }
+		]
+    }
+}

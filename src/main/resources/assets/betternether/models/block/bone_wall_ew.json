@@ -1,0 +1,6 @@
+{
+    "parent": "betternether:block/bone_wall_ns",
+    "textures": {
+        "top": "betternether:block/bone_wall_top_ew"
+    }
+}

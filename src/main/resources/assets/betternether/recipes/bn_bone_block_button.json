@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:bone_block"
+    }
+  },
+  "result": {
+    "item": "betternether:bone_button"
+  }
+}

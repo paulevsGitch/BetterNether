@@ -1,0 +1,34 @@
+{
+    "variants": {
+        "facing=up":  [
+			{ "model": "betternether:block/wart_seed_01" },
+			{ "model": "betternether:block/wart_seed_02" },
+			{ "model": "betternether:block/wart_seed_03" }
+		],
+        "facing=down":  [
+			{ "model": "betternether:block/wart_seed_01", "x": 180 },
+			{ "model": "betternether:block/wart_seed_02", "x": 180 },
+			{ "model": "betternether:block/wart_seed_03", "x": 180 }
+		],
+        "facing=north":  [
+			{ "model": "betternether:block/wart_seed_01", "x": 90 },
+			{ "model": "betternether:block/wart_seed_02", "x": 90 },
+			{ "model": "betternether:block/wart_seed_03", "x": 90 }
+		],
+        "facing=south":  [
+			{ "model": "betternether:block/wart_seed_01", "x": 90, "y": 180 },
+			{ "model": "betternether:block/wart_seed_02", "x": 90, "y": 180 },
+			{ "model": "betternether:block/wart_seed_03", "x": 90, "y": 180 }
+		],
+        "facing=east":  [
+			{ "model": "betternether:block/wart_seed_01", "x": 90, "y": 90 },
+			{ "model": "betternether:block/wart_seed_02", "x": 90, "y": 90 },
+			{ "model": "betternether:block/wart_seed_03", "x": 90, "y": 90 }
+		],
+        "facing=west":  [
+			{ "model": "betternether:block/wart_seed_01", "x": 90, "y": 270 },
+			{ "model": "betternether:block/wart_seed_02", "x": 90, "y": 270 },
+			{ "model": "betternether:block/wart_seed_03", "x": 90, "y": 270 }
+		]
+    }
+}

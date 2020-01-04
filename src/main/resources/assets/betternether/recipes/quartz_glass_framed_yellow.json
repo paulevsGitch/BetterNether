@@ -1,0 +1,1 @@
+{  "type": "minecraft:crafting_shaped",  "pattern": [    "###",    "#D#",    "###"  ],  "key": {    "#": {      "item": "betternether:quartz_glass_framed",      "data": 32767    },  "D": {      "type": "forge:ore_dict",      "ore": "dyeYellow"    }  },  "result": {    "item": "betternether:quartz_stained_glass_framed",    "data": 4,    "count": 8  }}

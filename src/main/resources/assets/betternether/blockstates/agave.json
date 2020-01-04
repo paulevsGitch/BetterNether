@@ -1,0 +1,11 @@
+{
+	"variants":
+	{
+        "":  [
+			{ "model": "betternether:block/agave" },
+			{ "model": "betternether:block/agave", "y": 90 },
+			{ "model": "betternether:block/agave", "y": 180 },
+			{ "model": "betternether:block/agave", "y": 270 }
+		]
+    }
+}

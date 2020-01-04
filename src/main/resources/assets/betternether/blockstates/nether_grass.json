@@ -1,0 +1,10 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/nether_grass_1" },
+			{ "model": "betternether:block/nether_grass_2" },
+			{ "model": "betternether:block/nether_grass_3" }
+		]
+    }
+}

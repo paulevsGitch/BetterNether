@@ -1,0 +1,17 @@
+{
+    "variants": {
+        "shape=top":  { "model": "betternether:block/smoker_top" },
+        "shape=middle":  [
+			{ "model": "betternether:block/smoker_middle" },
+			{ "model": "betternether:block/smoker_middle", "y": 90 },
+			{ "model": "betternether:block/smoker_middle", "y": 180 },
+			{ "model": "betternether:block/smoker_middle", "y": 270 }
+		],
+        "shape=bottom":  [
+			{ "model": "betternether:block/smoker_bottom" },
+			{ "model": "betternether:block/smoker_bottom", "y": 90 },
+			{ "model": "betternether:block/smoker_bottom", "y": 180 },
+			{ "model": "betternether:block/smoker_bottom", "y": 270 }
+		]
+    }
+}

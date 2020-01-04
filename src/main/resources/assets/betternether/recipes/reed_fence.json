@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#l#",
+	"#l#"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:reeds_block"
+    },
+	"l": {
+      "item": "minecraft:stick",
+	  "data": 32767
+    }
+  },
+  "result": {
+    "item": "betternether:reeds_fence"
+  }
+}

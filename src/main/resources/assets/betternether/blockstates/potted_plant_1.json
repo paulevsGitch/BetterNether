@@ -1,0 +1,51 @@
+{
+    "variants": {
+        "plant=0": { "model": "betternether:block/potted_agave" },
+		"plant=1": { "model": "betternether:block/potted_cactus_barrel" },
+		"plant=2": [
+			{ "model": "betternether:block/potted_black_apple" },
+			{ "model": "betternether:block/potted_black_apple", "y": 90 },
+			{ "model": "betternether:block/potted_black_apple", "y": 180 },
+			{ "model": "betternether:block/potted_black_apple", "y": 270 }
+		],
+		"plant=3": { "model": "betternether:block/potted_black_bush" },
+		"plant=4": { "model": "betternether:block/potted_egg_plant" },
+		"plant=5": [
+			{ "model": "betternether:block/potted_ink_bush" },
+			{ "model": "betternether:block/potted_ink_bush", "y": 90 },
+			{ "model": "betternether:block/potted_ink_bush", "y": 180 },
+			{ "model": "betternether:block/potted_ink_bush", "y": 270 }
+		],
+		"plant=6": { "model": "betternether:block/potted_reeds" },
+		"plant=7": { "model": "betternether:block/potted_nether_cactus" },
+		"plant=8": [
+			{ "model": "betternether:block/potted_nether_grass_1" },
+			{ "model": "betternether:block/potted_nether_grass_2" },
+			{ "model": "betternether:block/potted_nether_grass_3" }
+		],
+		"plant=9": [
+			{ "model": "betternether:block/potted_orange_mushroom_01" },
+			{ "model": "betternether:block/potted_orange_mushroom_02" },
+			{ "model": "betternether:block/potted_orange_mushroom_03" }
+		],
+		"plant=10": [
+			{ "model": "betternether:block/potted_red_mold" },
+			{ "model": "betternether:block/potted_red_mold", "y": 90 },
+			{ "model": "betternether:block/potted_red_mold", "y": 180 },
+			{ "model": "betternether:block/potted_red_mold", "y": 270 }
+		],
+		"plant=11": [
+			{ "model": "betternether:block/potted_gray_mold" },
+			{ "model": "betternether:block/potted_gray_mold", "y": 90 },
+			{ "model": "betternether:block/potted_gray_mold", "y": 180 },
+			{ "model": "betternether:block/potted_gray_mold", "y": 270 }
+		],
+		"plant=12": [
+			{ "model": "betternether:block/potted_magma_flower" },
+			{ "model": "betternether:block/potted_magma_flower", "y": 90 },
+			{ "model": "betternether:block/potted_magma_flower", "y": 180 },
+			{ "model": "betternether:block/potted_magma_flower", "y": 270 }
+		],
+		"plant=13": { "model": "betternether:block/potted_wart" }
+    }
+}
