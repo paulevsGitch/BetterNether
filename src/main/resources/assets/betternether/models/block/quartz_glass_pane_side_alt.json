@@ -1,7 +1,0 @@
-{
-    "parent": "block/pane_side_alt",
-    "textures": {
-        "edge": "betternether:blocks/quartz_glass",
-        "pane": "betternether:blocks/quartz_glass"
-    }
-}

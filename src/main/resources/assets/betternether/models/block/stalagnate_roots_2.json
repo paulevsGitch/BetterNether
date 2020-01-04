@@ -1,6 +1,0 @@
-{
-    "parent": "block/wheat_stage7",
-	"textures": {
-        "crop": "betternether:blocks/stalagnate_roots"
-    }
-}

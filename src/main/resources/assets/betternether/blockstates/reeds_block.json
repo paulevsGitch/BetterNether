@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "axis=y": { "model": "betternether:reeds_block" },
-        "axis=z": { "model": "betternether:reeds_block", "x": 90 },
-        "axis=x": { "model": "betternether:reeds_block", "x": 90, "y": 90 }
-    }
-}

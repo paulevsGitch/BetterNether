@@ -1,8 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "betternether:blocks/nether_brick_tile_small",
-        "top": "betternether:blocks/nether_brick_tile_small",
-        "side": "betternether:blocks/nether_brick_tile_small"
-    }
-}

@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "axis=y": { "model": "betternether:cincinnasite_bricks_pillar" },
-        "axis=z": { "model": "betternether:cincinnasite_bricks_pillar", "x": 90 },
-        "axis=x": { "model": "betternether:cincinnasite_bricks_pillar", "x": 90, "y": 90 }
-    }
-}

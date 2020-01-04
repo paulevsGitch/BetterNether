@@ -1,7 +1,0 @@
-{
-    "parent": "betternether:block/bn_door_top",
-    "textures": {
-        "front": "betternether:blocks/bone_reed_door_upper",
-        "side": "betternether:blocks/reeds_block_side"
-    }
-}

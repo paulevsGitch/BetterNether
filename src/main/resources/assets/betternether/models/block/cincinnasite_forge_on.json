@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "betternether:blocks/cincinnasite_forge_top",
-        "front": "betternether:blocks/cincinnasite_forge_front_on",
-        "side": "betternether:blocks/cincinnasite_forge_side"
-    }
-}

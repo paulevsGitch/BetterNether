@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "powered=false": { "model": "betternether:stalagnate_pressure_plate_up" },
-        "powered=true": { "model": "betternether:stalagnate_pressure_plate_down" }
-    }
-}

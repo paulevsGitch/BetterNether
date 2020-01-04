@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "state=false": { "model": "betternether:cincinnasite_fire_bowl_off" },
-        "state=true": { "model": "betternether:cincinnasite_fire_bowl_on" }
-    }
-}

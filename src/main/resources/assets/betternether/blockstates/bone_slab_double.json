@@ -1,7 +1,0 @@
-{
-    "variants":
-	{
-        "half=top": { "model": "betternether:bone_double_slab" },
-        "half=bottom": { "model": "betternether:bone_double_slab" }
-    }
-}

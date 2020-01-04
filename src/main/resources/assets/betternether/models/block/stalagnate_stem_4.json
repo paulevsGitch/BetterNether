@@ -1,7 +1,0 @@
-{
-    "parent": "betternether:block/stalagnate_stem_2",
-	"textures":
-	{
-        "side": "betternether:blocks/stalagnate_trunk_middle_2"
-    }
-}

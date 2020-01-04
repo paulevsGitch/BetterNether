@@ -1,7 +1,0 @@
-{
-    "variants":
-	{
-        "half=bottom": { "model": "betternether:cincinnasite_half_slab" },
-        "half=top": { "model": "betternether:cincinnasite_half_slab", "x": 180, "uvlock": true }
-    }
-}
