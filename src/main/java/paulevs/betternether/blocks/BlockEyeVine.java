@@ -31,9 +31,10 @@ public class BlockEyeVine extends BlockBaseNotFull
 				.nonOpaque()
 				.build());
 		this.setClimmable(true);
-		this.setRenderLayer(BlockRenderLayer.CUTOUT);
+		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 
+	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
 		return SHAPE;
@@ -45,6 +46,7 @@ public class BlockEyeVine extends BlockBaseNotFull
 		return 1.0F;
 	}
 
+	@Override
 	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos)
 	{
 		return true;

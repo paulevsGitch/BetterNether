@@ -37,7 +37,7 @@ public class BlockEyeSeed extends BlockBaseNotFull implements Fertilizable
 				.noCollision()
 				.ticksRandomly()
 				.build());
-		this.setRenderLayer(BlockRenderLayer.CUTOUT);
+		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)

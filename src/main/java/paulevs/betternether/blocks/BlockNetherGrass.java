@@ -13,7 +13,7 @@ public class BlockNetherGrass extends BlockBase
 	public BlockNetherGrass()
 	{
 		super(FabricBlockSettings.copy(Blocks.TALL_GRASS).build());
-		this.setRenderLayer(BlockRenderLayer.CUTOUT);
+		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	
 	@Environment(EnvType.CLIENT)

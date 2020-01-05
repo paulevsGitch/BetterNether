@@ -1,5 +1,5 @@
 {
-    "parent": "block/half_slab",
+    "parent": "block/slab",
     "textures": {
         "bottom": "betternether:block/nether_brick_tile_small",
         "top": "betternether:block/nether_brick_tile_small",

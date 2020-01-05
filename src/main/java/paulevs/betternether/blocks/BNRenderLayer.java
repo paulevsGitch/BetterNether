@@ -1,6 +1,6 @@
 package paulevs.betternether.blocks;
 
-public enum BlockRenderLayer
+public enum BNRenderLayer
 {
 	SOLID,
 	CUTOUT;

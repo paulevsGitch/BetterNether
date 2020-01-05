@@ -1,5 +1,5 @@
 {
-    "parent": "block/half_slab",
+    "parent": "block/slab",
     "textures": {
         "bottom": "betternether:block/cincinnasite_plate_up",
         "top": "betternether:block/cincinnasite_plate_up",

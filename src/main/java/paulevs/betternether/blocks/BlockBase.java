@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 public class BlockBase extends Block
 {
 	private boolean isClimmable = false;
-	private BlockRenderLayer layer = BlockRenderLayer.SOLID;
+	private BNRenderLayer layer = BNRenderLayer.SOLID;
 	
 	public BlockBase(Settings settings)
 	{
@@ -22,12 +22,12 @@ public class BlockBase extends Block
 		return isClimmable;
 	}
 	
-	public void setRenderLayer(BlockRenderLayer layer)
+	public void setRenderLayer(BNRenderLayer layer)
 	{
 		this.layer = layer;
 	}
 	
-	public BlockRenderLayer getRenderLayer()
+	public BNRenderLayer getRenderLayer()
 	{
 		return layer;
 	}

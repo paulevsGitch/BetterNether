@@ -35,7 +35,7 @@ public class BlockNetherReed extends BlockBase
 				.nonOpaque()
 				.ticksRandomly()
 				.build());
-		this.setRenderLayer(BlockRenderLayer.CUTOUT);
+		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(TOP, true));
 	}
 	

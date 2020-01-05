@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "facing=north,half=bottom,open=false": { "model": "betternether:block/stalagnate_planks_trapdoor" },
+        "facing=south,half=bottom,open=false": { "model": "betternether:block/stalagnate_planks_trapdoor", "y": 180, "uvlock": "true" },
+        "facing=east,half=bottom,open=false": { "model": "betternether:block/stalagnate_planks_trapdoor", "y": 90, "uvlock": "true" },
+        "facing=west,half=bottom,open=false": { "model": "betternether:block/stalagnate_planks_trapdoor", "y": 270, "uvlock": "true" },
+        "facing=north,half=top,open=false": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 180, "uvlock": "true" },
+        "facing=south,half=top,open=false": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 180, "y": 180, "uvlock": "true" },
+        "facing=east,half=top,open=false": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 180, "y": 90, "uvlock": "true" },
+        "facing=west,half=top,open=false": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 180, "y": 270, "uvlock": "true" },
+        "facing=north,half=bottom,open=true": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 90, "uvlock": "true" },
+        "facing=south,half=bottom,open=true": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 90, "y": 180, "uvlock": "true" },
+        "facing=east,half=bottom,open=true": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 90, "y": 90, "uvlock": "true" },
+        "facing=west,half=bottom,open=true": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 90, "y": 270, "uvlock": "true" },
+        "facing=north,half=top,open=true": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 270, "y": 180, "uvlock": "true" },
+        "facing=south,half=top,open=true": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 270, "y": 0, "uvlock": "true" },
+        "facing=east,half=top,open=true": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 270, "y": 270, "uvlock": "true" },
+        "facing=west,half=top,open=true": { "model": "betternether:block/stalagnate_planks_trapdoor", "x": 270, "y": 90, "uvlock": "true" }
+    }
+}

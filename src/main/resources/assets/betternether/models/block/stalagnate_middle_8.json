@@ -1,0 +1,9 @@
+{
+    "parent": "betternether:block/stalagnate_middle_small",
+	"textures":
+	{
+        "side": "betternether:block/stalagnate_trunk_middle_2",
+        "top": "betternether:block/stalagnate_top",
+		"leaves": "betternether:block/stalagnate_trunk_leaves"
+    }
+}
