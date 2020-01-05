@@ -1,0 +1,7 @@
+{
+    "parent": "betternether:block/stalagnate_planks_door_top",
+    "textures": {
+        "texture": "betternether:block/reeds_door_top",
+        "particle": "betternether:block/reeds_door_top"
+    }
+}

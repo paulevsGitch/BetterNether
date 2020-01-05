@@ -1,6 +1,7 @@
 {
 	"replace": "false",
 	"values": [
-		"betternether:stalagnate_planks_fence"
+		"betternether:stalagnate_planks_fence",
+		"betternether:reeds_fence"
 	]
 }

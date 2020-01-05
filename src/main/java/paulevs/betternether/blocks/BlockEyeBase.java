@@ -15,6 +15,7 @@ public class BlockEyeBase extends BlockBase
 	public BlockEyeBase(Settings settings)
 	{
 		super(settings);
+		setDropItself(false);
 	}
 	
 	public boolean allowsSpawning(BlockState state, BlockView view, BlockPos pos, EntityType<?> type)

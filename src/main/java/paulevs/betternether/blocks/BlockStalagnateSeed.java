@@ -78,10 +78,14 @@ public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizabl
 	@Override
 	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
 	{
-		if (state.get(TOP).booleanValue())
-			return BlocksHelper.downRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
-		else
-			return BlocksHelper.upRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
+		if (random.nextInt(16) == 0)
+		{
+			if (state.get(TOP).booleanValue())
+				return BlocksHelper.downRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
+			else
+				return BlocksHelper.upRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
+		}
+		return false;
 	}
 
 	@Override
@@ -122,7 +126,7 @@ public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizabl
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
 		super.scheduledTick(state, world, pos, random);
-		if (random.nextInt(16) == 0 && canGrow(world, random, pos, state))
+		if (canGrow(world, random, pos, state))
 		{
 			grow(world, random, pos, state);
 		}

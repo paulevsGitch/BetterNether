@@ -5,7 +5,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.property.Property;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import paulevs.betternether.registers.BlocksRegister;
 
@@ -51,5 +55,15 @@ public class BlocksHelper
 		for (int j = 1; j < maxDist && (world.getBlockState(pos.down(j)).getBlock() == Blocks.AIR); j++)
 			length ++;
 		return length;
+	}
+
+	public static BlockState rotateHorizontal(BlockState state, BlockRotation rotation, Property<Direction> facing)
+	{
+		return (BlockState)state.with(facing, rotation.rotate((Direction)state.get(facing)));
+	}
+
+	public static BlockState mirrorHorizontal(BlockState state, BlockMirror mirror, Property<Direction> facing)
+	{
+		return state.rotate(mirror.getRotation((Direction)state.get(facing)));
 	}
 }

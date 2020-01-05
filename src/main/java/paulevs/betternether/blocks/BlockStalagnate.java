@@ -16,6 +16,7 @@ public class BlockStalagnate extends BlockStalagnateStem
 		this.setClimmable(true);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, StalagnateShape.MIDDLE));
+		this.setDropItself(false);
 	}
 	
 	@Override

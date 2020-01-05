@@ -40,6 +40,7 @@ public class BlockEyeSeed extends BlockBaseNotFull implements Fertilizable
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	
+	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
 		return SHAPE;

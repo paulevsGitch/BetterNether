@@ -1,7 +1,0 @@
-{
-    "variants":
-	{
-        "half=bottom": { "model": "betternether:block/reeds_block" },
-        "half=top": { "model": "betternether:block/reeds_block" }
-    }
-}

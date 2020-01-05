@@ -18,7 +18,12 @@
                         }
                     ]
                 }
-            ]
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
         },
 		{
             "rolls": 1,
@@ -37,7 +42,12 @@
                         }
                     ]
                 }
-            ]
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
         }
     ]
 }
