@@ -32,7 +32,9 @@ public class BlocksHelper
 	{
 		Block b = state.getBlock();
 		return  b == Blocks.NETHERRACK ||
+				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
+				b == BlocksRegister.FARMLAND ||
 				b == BlocksRegister.BLOCK_NETHERRACK_MOSS;
 	}
 	

@@ -32,7 +32,6 @@ public class BlockNetherCactus extends BlockBaseNotFull
 		super(FabricBlockSettings.of(Material.CACTUS)
 				.materialColor(MaterialColor.ORANGE_TERRACOTTA)
 				.sounds(BlockSoundGroup.WOOL)
-				.breakInstantly()
 				.nonOpaque()
 				.ticksRandomly()
 				.build());

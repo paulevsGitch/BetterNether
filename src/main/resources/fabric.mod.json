@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "betternether",
   "version": "${version}",
 
   "name": "Better Nether",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "Me!"
+    "paulevs"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/wip-mods/2930448-better-nether",
+    "sources": "https://github.com/paulevsGitch/BetterNether/tree/mc_1.15.1"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/betternether/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -26,7 +26,7 @@
     ]
   },
   "mixins": [
-  	"modid.mixins.json"
+  	"betternether.mixins.json"
   ],
 
   "depends": {

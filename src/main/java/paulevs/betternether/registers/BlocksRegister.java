@@ -8,16 +8,23 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.blocks.BNButtom;
+import paulevs.betternether.blocks.BNDoor;
 import paulevs.betternether.blocks.BNFence;
 import paulevs.betternether.blocks.BNGate;
 import paulevs.betternether.blocks.BNPlate;
 import paulevs.betternether.blocks.BNSlab;
 import paulevs.betternether.blocks.BNStairs;
 import paulevs.betternether.blocks.BNTrapdoor;
+import paulevs.betternether.blocks.BlockAgave;
+import paulevs.betternether.blocks.BlockBarrelCactus;
+import paulevs.betternether.blocks.BlockBlackBush;
 import paulevs.betternether.blocks.BlockEyeSeed;
 import paulevs.betternether.blocks.BlockEyeVine;
 import paulevs.betternether.blocks.BlockEyeball;
 import paulevs.betternether.blocks.BlockEyeballSmall;
+import paulevs.betternether.blocks.BlockFarmland;
+import paulevs.betternether.blocks.BlockInkBush;
+import paulevs.betternether.blocks.BlockInkBushSeed;
 import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.blocks.BlockLucisSpore;
 import paulevs.betternether.blocks.BlockNetherCactus;
@@ -69,6 +76,14 @@ public class BlocksRegister
 	public static final Block BLOCK_LUCIS_SPORE = new BlockLucisSpore();
 	public static final Block BLOCK_NETHER_CACTUS = new BlockNetherCactus();
 	public static final Block BLOCK_WART_SEED = new BlockWartSeed();
+	public static final Block BLOCK_BARREL_CACTUS = new BlockBarrelCactus();
+	public static final Block BLOCK_AGAVE = new BlockAgave();
+	public static final Block BLOCK_BLACK_BUSH = new BlockBlackBush();
+	//public static final Block BLOCK_INK_BUSH = new BlockInkBush();
+	//public static final Block BLOCK_INK_BUSH_SEED = new BlockInkBushSeed();
+	
+	// -- NEW --
+	public static final Block FARMLAND = new BlockFarmland();
 	
 	public static void register()
 	{
@@ -105,6 +120,12 @@ public class BlocksRegister
 		registerBlock("lucis_spore", BLOCK_LUCIS_SPORE);
 		registerBlock("nether_cactus", BLOCK_NETHER_CACTUS);
 		registerBlock("wart_seed", BLOCK_WART_SEED);
+		registerBlock("barrel_cactus", BLOCK_BARREL_CACTUS);
+		registerBlock("agave", BLOCK_AGAVE);
+		registerBlock("black_bush", BLOCK_BLACK_BUSH);
+		
+		
+		registerBlock("farmland", FARMLAND);
 	}
 	
 	private static void registerBlock(String name, Block block)

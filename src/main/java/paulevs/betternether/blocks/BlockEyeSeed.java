@@ -19,12 +19,13 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureEye;
 
 public class BlockEyeSeed extends BlockBaseNotFull implements Fertilizable
 {
-	protected static final VoxelShape SHAPE = Block.createCuboidShape(4, 6, 4, 12, 16, 12);
-	protected static final StructureEye STRUCTURE = new StructureEye();
+	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 6, 4, 12, 16, 12);
+	private static final StructureEye STRUCTURE = new StructureEye();
 	
 	public BlockEyeSeed()
 	{
@@ -67,15 +68,13 @@ public class BlockEyeSeed extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		BlockPos blockPos = pos.up();
-		return world.getBlockState(blockPos).getBlock() == Blocks.NETHERRACK;
+		return BlocksHelper.isNetherrack(world.getBlockState(pos.up()));
 	}
 
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, IWorld world, BlockPos pos, BlockPos neighborPos)
 	{
-		BlockPos blockPos = pos.up();
-		if (world.getBlockState(blockPos).getBlock() != Blocks.NETHERRACK)
+		if (!canPlaceAt(state, world, pos))
 			return Blocks.AIR.getDefaultState();
 		else
 			return state;
@@ -89,10 +88,5 @@ public class BlockEyeSeed extends BlockBaseNotFull implements Fertilizable
 		{
 			grow(world, random, pos, state);
 		}
-	}
-	
-	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos)
-	{
-		return true;
 	}
 }
