@@ -1,8 +1,6 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
@@ -16,12 +14,8 @@ import net.minecraft.block.Fertilizable;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContext.Builder;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -40,7 +34,7 @@ import paulevs.betternether.structures.plants.StructureLucis;
 
 public class BlockLucisSpore extends BlockBaseNotFull implements Fertilizable
 {
-	protected static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
+	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
 					Direction.NORTH, Block.createCuboidShape(4, 4, 8, 12, 12, 16),
 					Direction.SOUTH, Block.createCuboidShape(4, 4, 0, 12, 12, 8),
 					Direction.WEST, Block.createCuboidShape(8, 4, 4, 16, 12, 12),
@@ -146,7 +140,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements Fertilizable
 			if (direction.getAxis().isHorizontal())
 			{
 				Direction direction2 = direction.getOpposite();
-				blockState = (BlockState)blockState.with(FACING, direction2);
+				blockState = blockState.with(FACING, direction2);
 				if (blockState.canPlaceAt(worldView, blockPos))
 				{
 					return blockState;

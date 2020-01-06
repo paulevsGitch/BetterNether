@@ -66,4 +66,12 @@ public class BlocksHelper
 	{
 		return state.rotate(mirror.getRotation((Direction)state.get(facing)));
 	}
+	
+	public static int getLengthDown(ServerWorld world, BlockPos pos, Block block)
+	{
+		int count = 1;
+		while (world.getBlockState(pos.down(count)).getBlock() == block)
+			count ++;
+		return count;
+	}
 }

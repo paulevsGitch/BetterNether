@@ -1,6 +1,6 @@
 {
     "variants": {
-        "shape=side":  { "model": "betternether:block/nether_cactus_middle" },
-        "shape=top":  { "model": "betternether:block/nether_cactus_top" }
+        "top=false":  { "model": "betternether:block/nether_cactus_middle" },
+        "top=true":  { "model": "betternether:block/nether_cactus_top" }
     }
 }

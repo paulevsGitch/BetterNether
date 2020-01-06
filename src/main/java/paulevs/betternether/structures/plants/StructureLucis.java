@@ -5,9 +5,9 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.registers.BlocksRegister;
@@ -16,7 +16,7 @@ import paulevs.betternether.structures.IStructure;
 public class StructureLucis extends Object implements IStructure
 {
 	@Override
-	public void generate(World world, BlockPos pos, Random random)
+	public void generate(ServerWorld world, BlockPos pos, Random random)
 	{
 		BlockState center = BlocksRegister.BLOCK_LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CENTER);
 		BlockState side = BlocksRegister.BLOCK_LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.SIDE);

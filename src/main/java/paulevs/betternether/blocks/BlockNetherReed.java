@@ -106,20 +106,12 @@ public class BlockNetherReed extends BlockBase
 		{
 			BlockPos up = pos.up();
 			boolean grow = world.getBlockState(up).getBlock() == Blocks.AIR;
-			grow = grow && (getLength(world, pos) < 3);
+			grow = grow && (BlocksHelper.getLengthDown(world, pos, this) < 3);
 			if (grow)
 			{
 				BlocksHelper.setWithoutUpdate(world, up, getDefaultState());
 				BlocksHelper.setWithoutUpdate(world, pos, getDefaultState().with(TOP, false));
 			}
 		}
-	}
-	
-	private int getLength(ServerWorld world, BlockPos pos)
-	{
-		int count = 1;
-		while (world.getBlockState(pos.down(count)).getBlock() == this)
-			count ++;
-		return count;
 	}
 }

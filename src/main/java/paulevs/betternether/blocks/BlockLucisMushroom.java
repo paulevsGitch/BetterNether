@@ -19,7 +19,7 @@ import net.minecraft.world.BlockView;
 
 public class BlockLucisMushroom extends BlockBaseNotFull
 {
-	protected static final VoxelShape V_SHAPE = Block.createCuboidShape(0, 0, 0, 16, 9, 16);
+	private static final VoxelShape V_SHAPE = Block.createCuboidShape(0, 0, 0, 16, 9, 16);
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	public static final EnumProperty<EnumShape> SHAPE = EnumProperty.of("shape", EnumShape.class);
 

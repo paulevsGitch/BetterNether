@@ -20,6 +20,7 @@ import paulevs.betternether.blocks.BlockEyeball;
 import paulevs.betternether.blocks.BlockEyeballSmall;
 import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.blocks.BlockLucisSpore;
+import paulevs.betternether.blocks.BlockNetherCactus;
 import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.blocks.BlockNetherrackMoss;
@@ -29,6 +30,7 @@ import paulevs.betternether.blocks.BlockStalagnateBark;
 import paulevs.betternether.blocks.BlockStalagnatePlanks;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStalagnateStem;
+import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 
@@ -65,6 +67,8 @@ public class BlocksRegister
 	public static final Block BLOCK_REEDS_DOOR = new BNDoor(BLOCK_REEDS_BLOCK);
 	public static final Block BLOCK_LUCIS_MUSHROOM = new BlockLucisMushroom();
 	public static final Block BLOCK_LUCIS_SPORE = new BlockLucisSpore();
+	public static final Block BLOCK_NETHER_CACTUS = new BlockNetherCactus();
+	public static final Block BLOCK_WART_SEED = new BlockWartSeed();
 	
 	public static void register()
 	{
@@ -99,6 +103,8 @@ public class BlocksRegister
 		registerBlock("reeds_door", BLOCK_REEDS_DOOR);
 		registerBlockNI("lucis_mushroom", BLOCK_LUCIS_MUSHROOM);
 		registerBlock("lucis_spore", BLOCK_LUCIS_SPORE);
+		registerBlock("nether_cactus", BLOCK_NETHER_CACTUS);
+		registerBlock("wart_seed", BLOCK_WART_SEED);
 	}
 	
 	private static void registerBlock(String name, Block block)

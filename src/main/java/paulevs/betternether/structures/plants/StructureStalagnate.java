@@ -3,6 +3,7 @@ package paulevs.betternether.structures.plants;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
@@ -17,7 +18,7 @@ public class StructureStalagnate implements IStructure
 	public static final int MIN_LENGTH = 3; // 5
 	
 	@Override
-	public void generate(World world, BlockPos pos, Random random)
+	public void generate(ServerWorld world, BlockPos pos, Random random)
 	{
 		int length = BlocksHelper.upRay(world, pos, MAX_LENGTH);
 		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.up(length + 1))))
