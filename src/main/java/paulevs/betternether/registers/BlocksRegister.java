@@ -32,6 +32,7 @@ import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.blocks.BlockNetherrackMoss;
 import paulevs.betternether.blocks.BlockReedsBlock;
+import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.BlockStalagnate;
 import paulevs.betternether.blocks.BlockStalagnateBark;
 import paulevs.betternether.blocks.BlockStalagnatePlanks;
@@ -79,8 +80,9 @@ public class BlocksRegister
 	public static final Block BLOCK_BARREL_CACTUS = new BlockBarrelCactus();
 	public static final Block BLOCK_AGAVE = new BlockAgave();
 	public static final Block BLOCK_BLACK_BUSH = new BlockBlackBush();
-	//public static final Block BLOCK_INK_BUSH = new BlockInkBush();
-	//public static final Block BLOCK_INK_BUSH_SEED = new BlockInkBushSeed();
+	public static final Block BLOCK_INK_BUSH = new BlockInkBush();
+	public static final Block BLOCK_INK_BUSH_SEED = new BlockInkBushSeed();
+	public static final Block BLOCK_SMOKER = new BlockSmoker();
 	
 	// -- NEW --
 	public static final Block FARMLAND = new BlockFarmland();
@@ -123,7 +125,9 @@ public class BlocksRegister
 		registerBlock("barrel_cactus", BLOCK_BARREL_CACTUS);
 		registerBlock("agave", BLOCK_AGAVE);
 		registerBlock("black_bush", BLOCK_BLACK_BUSH);
-		
+		registerBlockNI("ink_bush", BLOCK_INK_BUSH);
+		registerBlock("ink_bush_seed", BLOCK_INK_BUSH_SEED);
+		registerBlock("smoker", BLOCK_SMOKER);
 		
 		registerBlock("farmland", FARMLAND);
 	}

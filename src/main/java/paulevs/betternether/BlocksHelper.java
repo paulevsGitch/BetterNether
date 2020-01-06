@@ -11,6 +11,7 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registers.BlocksRegister;
 
 public class BlocksHelper
@@ -75,5 +76,10 @@ public class BlocksHelper
 		while (world.getBlockState(pos.down(count)).getBlock() == block)
 			count ++;
 		return count;
+	}
+	
+	public static boolean isFertile(BlockState state)
+	{
+		return state.getBlock() instanceof BlockFarmland;
 	}
 }

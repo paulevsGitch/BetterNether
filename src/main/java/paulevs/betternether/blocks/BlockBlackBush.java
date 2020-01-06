@@ -29,6 +29,8 @@ public class BlockBlackBush extends BlockBaseNotFull
 				.noCollision()
 				.breakInstantly()
 				.build());
+		this.setDropItself(false);
+		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	
 	@Override

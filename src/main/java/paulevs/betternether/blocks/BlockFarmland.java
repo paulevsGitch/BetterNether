@@ -11,7 +11,7 @@ public class BlockFarmland extends BlockBase
 	{
 		super(FabricBlockSettings.of(Material.WOOD)
 				.materialColor(MaterialColor.LIME_TERRACOTTA)
-				.sounds(BlockSoundGroup.WET_GRASS)
+				.sounds(BlockSoundGroup.WOOD)
 				.hardness(2F)
 				.resistance(0.5F)
 				.build());
