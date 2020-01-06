@@ -17,7 +17,10 @@ import paulevs.betternether.blocks.BNStairs;
 import paulevs.betternether.blocks.BNTrapdoor;
 import paulevs.betternether.blocks.BlockAgave;
 import paulevs.betternether.blocks.BlockBarrelCactus;
+import paulevs.betternether.blocks.BlockBlackApple;
+import paulevs.betternether.blocks.BlockBlackAppleSeed;
 import paulevs.betternether.blocks.BlockBlackBush;
+import paulevs.betternether.blocks.BlockEggPlant;
 import paulevs.betternether.blocks.BlockEyeSeed;
 import paulevs.betternether.blocks.BlockEyeVine;
 import paulevs.betternether.blocks.BlockEyeball;
@@ -83,6 +86,9 @@ public class BlocksRegister
 	public static final Block BLOCK_INK_BUSH = new BlockInkBush();
 	public static final Block BLOCK_INK_BUSH_SEED = new BlockInkBushSeed();
 	public static final Block BLOCK_SMOKER = new BlockSmoker();
+	public static final Block BLOCK_EGG_PLANT = new BlockEggPlant();
+	public static final Block BLOCK_BLACK_APPLE = new BlockBlackApple();
+	public static final Block BLOCK_BLACK_APPLE_SEED = new BlockBlackAppleSeed();
 	
 	// -- NEW --
 	public static final Block FARMLAND = new BlockFarmland();
@@ -128,6 +134,9 @@ public class BlocksRegister
 		registerBlockNI("ink_bush", BLOCK_INK_BUSH);
 		registerBlock("ink_bush_seed", BLOCK_INK_BUSH_SEED);
 		registerBlock("smoker", BLOCK_SMOKER);
+		registerBlock("egg_plant", BLOCK_EGG_PLANT);
+		registerBlockNI("black_apple", BLOCK_BLACK_APPLE);
+		registerBlock("black_apple_seed", BLOCK_BLACK_APPLE_SEED);
 		
 		registerBlock("farmland", FARMLAND);
 	}

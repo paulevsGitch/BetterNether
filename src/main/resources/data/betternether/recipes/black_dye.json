@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "betternether:ink_bush_seed"
   },
-  "result": "minecraft:ink_sac",
+  "result": "minecraft:black_dye",
   "experience": 0.0,
   "cookingtime": 200
 }

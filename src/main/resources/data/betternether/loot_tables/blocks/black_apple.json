@@ -7,22 +7,13 @@
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "betternether:ink_bush_seed",
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 2,
-                                "max": 4
-                            }
-                        }
-                    ]
+                    "name": "betternether:black_apple"
                 }
             ],
 			"conditions": [
 				{
 					"condition": "minecraft:block_state_property",
-					"block": "betternether:ink_bush",
+					"block": "betternether:black_apple",
 					"properties": {
 						"age": "3"
 					}
@@ -38,7 +29,7 @@
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "betternether:ink_bush_seed"
+                    "name": "betternether:black_apple_seed"
                 }
             ],
 			"conditions": [

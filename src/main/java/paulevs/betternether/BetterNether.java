@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.registers.ItemsRegister;
+import paulevs.betternether.tab.CreativeTab;
 
 public class BetterNether implements ModInitializer
 {
@@ -16,5 +17,6 @@ public class BetterNether implements ModInitializer
 		BlocksRegister.register();
 		ItemsRegister.register();
 		Config.save();
+		//CreativeTab.fixTab();
 	}
 }

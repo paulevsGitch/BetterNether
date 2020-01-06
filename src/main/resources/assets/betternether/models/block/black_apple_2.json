@@ -1,0 +1,44 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "betternether:block/black_apple_medium",
+		"texture": "betternether:block/black_apple_medium"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 7.5, 0, 6 ],
+			"to": [ 8.5, 5, 8 ],
+			"faces": {
+				"down": { "uv": [ 5.5, 14, 7.5, 16 ], "texture": "#texture", "cullface": "down" },
+				"up": { "uv": [ 5, 10, 7, 12 ], "texture": "#texture" },
+				"north": { "uv": [ 5, 10, 6, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 6, 10, 7, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 5, 10, 7, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 5, 10, 7, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 7.5, 6, 6 ],
+			"to": [ 8.5, 8, 7.5 ],
+			"faces": {
+				"up": { "uv": [ 6, 8, 7, 9.5 ], "texture": "#texture" },
+				"north": { "uv": [ 5, 8, 6, 10 ], "texture": "#texture" },
+				"south": { "uv": [ 6, 8, 7, 10 ], "texture": "#texture" },
+				"west": { "uv": [ 5, 8, 6.5, 10 ], "texture": "#texture" },
+				"east": { "uv": [ 5, 8, 6.5, 10 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "PlaneX12",
+			"from": [ 8, 4, 1 ],
+			"to": [ 8.001, 16, 10 ],
+			"faces": {
+				"west": { "uv": [ 0, 0, 9, 12 ], "texture": "#texture" },
+				"east": { "uv": [ 9, 0, 0, 12 ], "texture": "#texture" }
+			}
+		}
+	]
+}

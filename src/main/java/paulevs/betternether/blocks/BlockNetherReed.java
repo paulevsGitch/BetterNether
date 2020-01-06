@@ -102,15 +102,20 @@ public class BlockNetherReed extends BlockBase
 			world.breakBlock(pos, true);
 			return;
 		}
-		if (state.get(TOP).booleanValue() && random.nextInt(16) == 0)
+		if (state.get(TOP).booleanValue())
 		{
 			BlockPos up = pos.up();
 			boolean grow = world.getBlockState(up).getBlock() == Blocks.AIR;
-			grow = grow && (BlocksHelper.getLengthDown(world, pos, this) < 3);
 			if (grow)
 			{
-				BlocksHelper.setWithoutUpdate(world, up, getDefaultState());
-				BlocksHelper.setWithoutUpdate(world, pos, getDefaultState().with(TOP, false));
+				int length = BlocksHelper.getLengthDown(world, pos, this);
+				grow = (length < 3);
+				grow = grow && BlocksHelper.isFertile(world.getBlockState(pos.down(length))) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
+				if (grow)
+				{
+					BlocksHelper.setWithoutUpdate(world, up, getDefaultState());
+					BlocksHelper.setWithoutUpdate(world, pos, getDefaultState().with(TOP, false));
+				}
 			}
 		}
 	}
