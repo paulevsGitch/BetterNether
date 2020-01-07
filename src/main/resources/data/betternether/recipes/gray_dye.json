@@ -9,8 +9,7 @@
     }
   },
   "result": {
-    "item": "minecraft:dye",
-    "data": 7,
+    "item": "minecraft:gray_dye",
 	"count": 1
   }
 }

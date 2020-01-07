@@ -21,12 +21,16 @@ import paulevs.betternether.blocks.BlockBlackApple;
 import paulevs.betternether.blocks.BlockBlackAppleSeed;
 import paulevs.betternether.blocks.BlockBlackBush;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom;
+import paulevs.betternether.blocks.BlockCincinnasitPillar;
+import paulevs.betternether.blocks.BlockCincinnasite;
+import paulevs.betternether.blocks.BlockCincinnasiteOre;
 import paulevs.betternether.blocks.BlockEggPlant;
 import paulevs.betternether.blocks.BlockEyeSeed;
 import paulevs.betternether.blocks.BlockEyeVine;
 import paulevs.betternether.blocks.BlockEyeball;
 import paulevs.betternether.blocks.BlockEyeballSmall;
 import paulevs.betternether.blocks.BlockFarmland;
+import paulevs.betternether.blocks.BlockGrayMold;
 import paulevs.betternether.blocks.BlockInkBush;
 import paulevs.betternether.blocks.BlockInkBushSeed;
 import paulevs.betternether.blocks.BlockLucisMushroom;
@@ -37,7 +41,9 @@ import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockNetherMycelium;
 import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.blocks.BlockNetherrackMoss;
+import paulevs.betternether.blocks.BlockOrangeMushroom;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
+import paulevs.betternether.blocks.BlockRedMold;
 import paulevs.betternether.blocks.BlockReedsBlock;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.BlockStalagnate;
@@ -97,6 +103,27 @@ public class BlocksRegister
 	public static final Block BLOCK_NETHER_MYCELIUM = new BlockNetherMycelium();
 	public static final Block BLOCK_RED_LARGE_MUSHROOM = new BlockRedLargeMushroom();
 	public static final Block BLOCK_BROWN_LARGE_MUSHROOM = new BlockBrownLargeMushroom();
+	public static final Block BLOCK_ORANGE_MUSHROOM = new BlockOrangeMushroom();
+	public static final Block BLOCK_RED_MOLD = new BlockRedMold();
+	public static final Block BLOCK_GRAY_MOLD = new BlockGrayMold();
+	public static final Block BLOCK_CINCINNASITE_ORE = new BlockCincinnasiteOre();
+	public static final Block BLOCK_CINCINNASITE = new BlockCincinnasite();
+	public static final Block BLOCK_CINCINNASITE_FORGED = new BlockCincinnasite();
+	public static final Block BLOCK_CINCINNASITE_PILLAR = new BlockCincinnasitPillar();
+	public static final Block BLOCK_CINCINNASITE_BRICKS = new BlockCincinnasite();
+	public static final Block BLOCK_CINCINNASITE_BRICK_PLATE  = new BlockCincinnasite();
+	
+	/*public static final Block BLOCK_CINCINNASITE_STAIRS;
+	public static final Block BLOCK_CINCINNASITE_SLAB;
+	public static final Block BLOCK_CINCINNASITE_BUTTON;
+	public static final Block BLOCK_CINCINNASITE_PLATE;
+	public static final Block BLOCK_CINCINNASITE_LANTERN;
+	public static final Block BLOCK_CINCINNASITE_TILE_LARGE;
+	public static final Block BLOCK_CINCINNASITE_TILE_SMALL;
+	public static final Block BLOCK_CINCINNASITE_CARVED;
+	public static final Block BLOCK_NETHER_BRICK_TILE_LARGE;
+	public static final Block BLOCK_NETHER_BRICK_TILE_SMALL;
+	public static final Block BLOCK_CINCINNASITE_WALL;*/
 	
 	// -- NEW --
 	public static final Block FARMLAND = new BlockFarmland();
@@ -149,6 +176,15 @@ public class BlocksRegister
 		registerBlock("nether_mycelium", BLOCK_NETHER_MYCELIUM);
 		registerBlockNI("red_large_mushroom", BLOCK_RED_LARGE_MUSHROOM);
 		registerBlockNI("brown_large_mushroom", BLOCK_BROWN_LARGE_MUSHROOM);
+		registerBlock("orange_mushroom", BLOCK_ORANGE_MUSHROOM);
+		registerBlock("red_mold", BLOCK_RED_MOLD);
+		registerBlock("gray_mold", BLOCK_GRAY_MOLD);
+		registerBlock("cincinnasite_ore", BLOCK_CINCINNASITE_ORE);
+		registerBlock("cincinnasite_block", BLOCK_CINCINNASITE);
+		registerBlock("cincinnasite_forged", BLOCK_CINCINNASITE_FORGED);
+		registerBlock("cincinnasite_pillar", BLOCK_CINCINNASITE_PILLAR);
+		registerBlock("cincinnasite_bricks", BLOCK_CINCINNASITE_BRICKS);
+		registerBlock("cincinnasite_brick_plate", BLOCK_CINCINNASITE_BRICK_PLATE);
 		
 		registerBlock("farmland", FARMLAND);
 	}

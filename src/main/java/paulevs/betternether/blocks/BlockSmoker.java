@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
@@ -29,9 +28,7 @@ public class BlockSmoker extends BlockBaseNotFull
 	
 	public BlockSmoker()
 	{
-		super(FabricBlockSettings.copyOf(Materials.COMMON_WOOD)
-				.materialColor(MaterialColor.BROWN)
-				.build());
+		super(Materials.makeWood(MaterialColor.BROWN).build());
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.TOP));
 	}
 	

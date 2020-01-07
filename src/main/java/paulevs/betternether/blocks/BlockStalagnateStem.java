@@ -1,6 +1,5 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
@@ -17,10 +16,7 @@ public class BlockStalagnateStem extends BlockBaseNotFull
 
 	public BlockStalagnateStem()
 	{
-		super(FabricBlockSettings.copyOf(Materials.COMMON_WOOD)
-				.materialColor(MaterialColor.LIME_TERRACOTTA)
-				.nonOpaque()
-				.build());
+		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA).nonOpaque().build());
 	}
 	
 	@Override

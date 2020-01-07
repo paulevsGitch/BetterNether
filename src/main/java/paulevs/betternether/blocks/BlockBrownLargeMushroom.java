@@ -1,6 +1,5 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
@@ -22,10 +21,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull
 	
 	public BlockBrownLargeMushroom()
 	{
-		super(FabricBlockSettings.copyOf(Materials.COMMON_WOOD)
-				.materialColor(MaterialColor.BROWN)
-				.nonOpaque()
-				.build());
+		super(Materials.makeWood(MaterialColor.BROWN).nonOpaque().build());
 	}
 	
 	@Override
