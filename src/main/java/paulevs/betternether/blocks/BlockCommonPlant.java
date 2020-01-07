@@ -33,6 +33,7 @@ public class BlockCommonPlant extends BlockBaseNotFull implements Fertilizable
 				.nonOpaque()
 				.noCollision()
 				.breakInstantly()
+				.ticksRandomly()
 				.build());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
@@ -80,5 +81,13 @@ public class BlockCommonPlant extends BlockBaseNotFull implements Fertilizable
 	{
 		int age = state.get(AGE);
 		world.setBlockState(pos, state.with(AGE, age + 1));
+	}
+	
+	@Override
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
+	{
+		super.scheduledTick(state, world, pos, random);
+		if (canGrow(world, random, pos, state))
+			grow(world, random, pos, state);
 	}
 }

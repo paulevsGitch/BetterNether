@@ -20,6 +20,7 @@ import paulevs.betternether.blocks.BlockBarrelCactus;
 import paulevs.betternether.blocks.BlockBlackApple;
 import paulevs.betternether.blocks.BlockBlackAppleSeed;
 import paulevs.betternether.blocks.BlockBlackBush;
+import paulevs.betternether.blocks.BlockBrownLargeMushroom;
 import paulevs.betternether.blocks.BlockEggPlant;
 import paulevs.betternether.blocks.BlockEyeSeed;
 import paulevs.betternether.blocks.BlockEyeVine;
@@ -30,10 +31,13 @@ import paulevs.betternether.blocks.BlockInkBush;
 import paulevs.betternether.blocks.BlockInkBushSeed;
 import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.blocks.BlockLucisSpore;
+import paulevs.betternether.blocks.BlockMagmaFlower;
 import paulevs.betternether.blocks.BlockNetherCactus;
 import paulevs.betternether.blocks.BlockNetherGrass;
+import paulevs.betternether.blocks.BlockNetherMycelium;
 import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.blocks.BlockNetherrackMoss;
+import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.BlockReedsBlock;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.BlockStalagnate;
@@ -89,6 +93,10 @@ public class BlocksRegister
 	public static final Block BLOCK_EGG_PLANT = new BlockEggPlant();
 	public static final Block BLOCK_BLACK_APPLE = new BlockBlackApple();
 	public static final Block BLOCK_BLACK_APPLE_SEED = new BlockBlackAppleSeed();
+	public static final Block BLOCK_MAGMA_FLOWER = new BlockMagmaFlower();
+	public static final Block BLOCK_NETHER_MYCELIUM = new BlockNetherMycelium();
+	public static final Block BLOCK_RED_LARGE_MUSHROOM = new BlockRedLargeMushroom();
+	public static final Block BLOCK_BROWN_LARGE_MUSHROOM = new BlockBrownLargeMushroom();
 	
 	// -- NEW --
 	public static final Block FARMLAND = new BlockFarmland();
@@ -137,6 +145,10 @@ public class BlocksRegister
 		registerBlock("egg_plant", BLOCK_EGG_PLANT);
 		registerBlockNI("black_apple", BLOCK_BLACK_APPLE);
 		registerBlock("black_apple_seed", BLOCK_BLACK_APPLE_SEED);
+		registerBlock("magma_flower", BLOCK_MAGMA_FLOWER);
+		registerBlock("nether_mycelium", BLOCK_NETHER_MYCELIUM);
+		registerBlockNI("red_large_mushroom", BLOCK_RED_LARGE_MUSHROOM);
+		registerBlockNI("brown_large_mushroom", BLOCK_BROWN_LARGE_MUSHROOM);
 		
 		registerBlock("farmland", FARMLAND);
 	}

@@ -14,7 +14,7 @@ public class BNButtom extends WoodButtonBlock
 {
 	public BNButtom(Block block)
 	{
-		super(FabricBlockSettings.copy(block).build());
+		super(FabricBlockSettings.copy(block).nonOpaque().build());
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -25,8 +26,9 @@ public class BlockLucisMushroom extends BlockBaseNotFull
 
 	public BlockLucisMushroom()
 	{
-		super(FabricBlockSettings.of(Material.WOOD)
+		super(FabricBlockSettings.of(Material.ORGANIC)
 				.materialColor(MaterialColor.YELLOW)
+				.breakByTool(FabricToolTags.AXES)
 				.sounds(BlockSoundGroup.WOOD)
 				.hardness(1F)
 				.lightLevel(15)

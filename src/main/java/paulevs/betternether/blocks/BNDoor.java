@@ -15,7 +15,7 @@ public class BNDoor extends DoorBlock
 {
 	public BNDoor(Block block)
 	{
-		super(FabricBlockSettings.copy(block).build());
+		super(FabricBlockSettings.copy(block).nonOpaque().build());
 	}
 	
 	@Override

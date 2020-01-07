@@ -3,13 +3,12 @@ package paulevs.betternether.blocks;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.EntityContext;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockStalagnateStem extends BlockBaseNotFull
 {
@@ -18,11 +17,9 @@ public class BlockStalagnateStem extends BlockBaseNotFull
 
 	public BlockStalagnateStem()
 	{
-		super(FabricBlockSettings.of(Material.WOOD)
+		super(FabricBlockSettings.copyOf(Materials.COMMON_WOOD)
 				.materialColor(MaterialColor.LIME_TERRACOTTA)
-				.sounds(BlockSoundGroup.WOOD)
-				.hardness(2F)
-				.resistance(0.5F)
+				.nonOpaque()
 				.build());
 	}
 	

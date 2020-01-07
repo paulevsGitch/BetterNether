@@ -7,11 +7,9 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +18,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.blocks.shapes.TripleShape;
 
 public class BlockSmoker extends BlockBaseNotFull
@@ -30,11 +29,8 @@ public class BlockSmoker extends BlockBaseNotFull
 	
 	public BlockSmoker()
 	{
-		super(FabricBlockSettings.of(Material.WOOD)
+		super(FabricBlockSettings.copyOf(Materials.COMMON_WOOD)
 				.materialColor(MaterialColor.BROWN)
-				.sounds(BlockSoundGroup.WOOD)
-				.hardness(2F)
-				.resistance(0.5F)
 				.build());
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.TOP));
 	}

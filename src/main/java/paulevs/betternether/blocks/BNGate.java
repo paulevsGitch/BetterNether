@@ -14,7 +14,7 @@ public class BNGate extends FenceGateBlock
 {
 	public BNGate(Block block)
 	{
-		super(FabricBlockSettings.copy(block).build());
+		super(FabricBlockSettings.copy(block).nonOpaque().build());
 	}
 	
 	@Override

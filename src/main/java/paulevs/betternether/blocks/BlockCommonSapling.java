@@ -79,4 +79,12 @@ public class BlockCommonSapling extends BlockBaseNotFull implements Fertilizable
 	{
 		world.setBlockState(pos, plant.getDefaultState());
 	}
+	
+	@Override
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
+	{
+		super.scheduledTick(state, world, pos, random);
+		if (canGrow(world, random, pos, state))
+			grow(world, random, pos, state);
+	}
 }

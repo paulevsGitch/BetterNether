@@ -8,20 +8,16 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.registers.BlocksRegister;
 
 public class CreativeTab
 {
-	//public static final ItemGroup BN_TAB = FabricItemGroupBuilder.build(
-	//		new Identifier(BetterNether.MOD_ID, "items"),
-	//		() -> new ItemStack(BlocksRegister.BLOCK_NETHER_GRASS));
-	
 	public static final ItemGroup BN_TAB = FabricItemGroupBuilder.create(
 			new Identifier(BetterNether.MOD_ID, "items"))
-			.icon(() -> new ItemStack(Items.BOWL))
+			.icon(() -> new ItemStack(BlocksRegister.BLOCK_NETHER_GRASS))
 			.appendItems(stacks ->
 			{
 				Iterator<Item> iterator = Registry.ITEM.iterator();

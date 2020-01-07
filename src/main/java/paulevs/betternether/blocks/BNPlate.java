@@ -14,7 +14,7 @@ public class BNPlate extends PressurePlateBlock
 {
 	public BNPlate(ActivationRule type, Block block)
 	{
-		super(type, FabricBlockSettings.copy(block).build());
+		super(type, FabricBlockSettings.copy(block).nonOpaque().build());
 	}
 	
 	@Override

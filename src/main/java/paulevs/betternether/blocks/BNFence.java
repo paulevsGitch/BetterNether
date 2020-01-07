@@ -14,7 +14,7 @@ public class BNFence extends FenceBlock
 {
 	public BNFence(Block block)
 	{
-		super(FabricBlockSettings.copy(block).build());
+		super(FabricBlockSettings.copy(block).nonOpaque().build());
 	}
 	
 	@Override
