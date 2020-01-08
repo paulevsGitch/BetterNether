@@ -14,6 +14,7 @@ import paulevs.betternether.blocks.BNDoor;
 import paulevs.betternether.blocks.BNFence;
 import paulevs.betternether.blocks.BNGate;
 import paulevs.betternether.blocks.BNNetherBrick;
+import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNPlate;
 import paulevs.betternether.blocks.BNSlab;
 import paulevs.betternether.blocks.BNStairs;
@@ -24,6 +25,7 @@ import paulevs.betternether.blocks.BlockBarrelCactus;
 import paulevs.betternether.blocks.BlockBlackApple;
 import paulevs.betternether.blocks.BlockBlackAppleSeed;
 import paulevs.betternether.blocks.BlockBlackBush;
+import paulevs.betternether.blocks.BlockBoneMushroom;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom;
 import paulevs.betternether.blocks.BlockCincinnasitFireBowl;
 import paulevs.betternether.blocks.BlockCincinnasitPillar;
@@ -138,6 +140,28 @@ public class BlocksRegister
 	public static final Block BLOCK_NETHER_BRICK_WALL = new BNWall(Blocks.NETHER_BRICKS);
 	public static final Block BLOCK_NETHER_BRICK_TILE_SLAB = new BNSlab(BLOCK_NETHER_BRICK_TILE_SMALL);
 	public static final Block BLOCK_NETHER_BRICK_TILE_STAIRS = new BNStairs(BLOCK_NETHER_BRICK_TILE_SMALL);
+	public static final Block BLOCK_BONE_MUSHROOM = new BlockBoneMushroom();
+	public static final Block BLOCK_REEDS_LADDER = new BNLadder(BLOCK_REEDS_BLOCK);
+	public static final Block BLOCK_CINCINNASITE_BRICKS_PILLAR = new BNPillar(BLOCK_CINCINNASITE);
+	public static final Block BLOCK_BONE_TILE = new BNBoneBlock();
+	//public static Block BLOCK_CINCINNASITE_PEDESTAL;
+	//public static Block BLOCK_PIG_STATUE_RESPAWNER;
+	//public static Block BLOCK_CINCINNASITE_POT;
+	//public static Block BLOCK_POTTED_PLANT;
+	//public static Block BLOCK_CINCINNASITE_FRAME;
+	//public static Block BLOCK_QUARTZ_GLASS;
+	//public static Block BLOCK_QUARTZ_GLASS_FRAMED;
+	//public static Block BLOCK_QUARTZ_STAINED_GLASS;
+	//public static Block BLOCK_CINCINNASITE_BARS;
+	//public static Block BLOCK_QUARTZ_GLASS_PANE;
+	//public static Block BLOCK_QUARTZ_GLASS_FRAMED_PANE;
+	//public static Block BLOCK_CINCINNASITE_FORGE;
+	//public static Block BLOCK_NETHERRACK_FURNACE;
+	//public static Block BLOCK_BONE_REED_DOOR;
+	//public static Block BLOCK_BONE_CINCINNASITE_DOOR;
+	//public static Block BLOCK_QUARTZ_STAINED_GLASS_FRAMED;
+	//public static Block BLOCK_STALAGNATE_BOWL;
+	//public static Block BLOCK_CHEST_OF_DRAWERS;
 	
 	// -- NEW --
 	public static final Block FARMLAND = new BlockFarmland();
@@ -220,6 +244,10 @@ public class BlocksRegister
 		registerBlock("nether_brick_wall", BLOCK_NETHER_BRICK_WALL);
 		registerBlock("nether_brick_tile_slab", BLOCK_NETHER_BRICK_TILE_SLAB);
 		registerBlock("nether_brick_tile_stairs", BLOCK_NETHER_BRICK_TILE_STAIRS);
+		registerBlock("bone_mushroom", BLOCK_BONE_MUSHROOM);
+		registerBlock("reeds_ladder", BLOCK_REEDS_LADDER);
+		registerBlock("cincinnasite_bricks_pillar", BLOCK_CINCINNASITE_BRICKS_PILLAR);
+		registerBlock("bone_tile", BLOCK_BONE_TILE);
 		
 		registerBlock("farmland", FARMLAND);
 	}

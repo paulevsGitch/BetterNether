@@ -39,6 +39,13 @@ public class BlocksHelper
 				b == BlocksRegister.BLOCK_NETHERRACK_MOSS;
 	}
 	
+	public static boolean isBone(BlockState state)
+	{
+		Block b = state.getBlock();
+		return  b == Blocks.BONE_BLOCK ||
+				b == BlocksRegister.BLOCK_BONE;
+	}
+	
 	public static void setWithoutUpdate(ServerWorld world, BlockPos pos, BlockState state)
 	{
 		world.setBlockState(pos, state, 19);
