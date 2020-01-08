@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "###"
+	"###"
   ],
   "key": {
     "#": {
-      "item": "betternether:bone_block"
+      "item": "betternether:nether_brick_tile_small"
     }
   },
   "result": {
-    "item": "betternether:bone_slab",
+    "item": "betternether:nether_brick_tile_slab",
 	"count": 6
   }
 }

@@ -1,26 +1,31 @@
 package paulevs.betternether.registers;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.blocks.BNButtom;
+import paulevs.betternether.blocks.BNBoneBlock;
+import paulevs.betternether.blocks.BNButton;
 import paulevs.betternether.blocks.BNDoor;
 import paulevs.betternether.blocks.BNFence;
 import paulevs.betternether.blocks.BNGate;
+import paulevs.betternether.blocks.BNNetherBrick;
 import paulevs.betternether.blocks.BNPlate;
 import paulevs.betternether.blocks.BNSlab;
 import paulevs.betternether.blocks.BNStairs;
 import paulevs.betternether.blocks.BNTrapdoor;
+import paulevs.betternether.blocks.BNWall;
 import paulevs.betternether.blocks.BlockAgave;
 import paulevs.betternether.blocks.BlockBarrelCactus;
 import paulevs.betternether.blocks.BlockBlackApple;
 import paulevs.betternether.blocks.BlockBlackAppleSeed;
 import paulevs.betternether.blocks.BlockBlackBush;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom;
+import paulevs.betternether.blocks.BlockCincinnasitFireBowl;
 import paulevs.betternether.blocks.BlockCincinnasitPillar;
 import paulevs.betternether.blocks.BlockCincinnasite;
 import paulevs.betternether.blocks.BlockCincinnasiteOre;
@@ -73,7 +78,7 @@ public class BlocksRegister
 	public static final Block BLOCK_STALAGNATE_PLANKS_SLAB = new BNSlab(BLOCK_STALAGNATE_PLANKS);
 	public static final Block BLOCK_STALAGNATE_PLANKS_FENCE = new BNFence(BLOCK_STALAGNATE_PLANKS);
 	public static final Block BLOCK_STALAGNATE_PLANKS_GATE = new BNGate(BLOCK_STALAGNATE_PLANKS);
-	public static final Block BLOCK_STALAGNATE_PLANKS_BUTTON = new BNButtom(BLOCK_STALAGNATE_PLANKS);
+	public static final Block BLOCK_STALAGNATE_PLANKS_BUTTON = new BNButton(BLOCK_STALAGNATE_PLANKS);
 	public static final Block BLOCK_STALAGNATE_PLANKS_PLATE = new BNPlate(ActivationRule.EVERYTHING, BLOCK_STALAGNATE_PLANKS);
 	public static final Block BLOCK_STALAGNATE_PLANKS_TRAPDOOR = new BNTrapdoor(BLOCK_STALAGNATE_PLANKS);
 	public static final Block BLOCK_STALAGNATE_PLANKS_DOOR = new BNDoor(BLOCK_STALAGNATE_PLANKS);
@@ -82,7 +87,7 @@ public class BlocksRegister
 	public static final Block BLOCK_REEDS_SLAB = new BNSlab(BLOCK_REEDS_BLOCK);
 	public static final Block BLOCK_REEDS_FENCE = new BNFence(BLOCK_REEDS_BLOCK);
 	public static final Block BLOCK_REEDS_GATE = new BNGate(BLOCK_REEDS_BLOCK);
-	public static final Block BLOCK_REEDS_BUTTON = new BNButtom(BLOCK_REEDS_BLOCK);
+	public static final Block BLOCK_REEDS_BUTTON = new BNButton(BLOCK_REEDS_BLOCK);
 	public static final Block BLOCK_REEDS_PLATE = new BNPlate(ActivationRule.EVERYTHING, BLOCK_REEDS_BLOCK);
 	public static final Block BLOCK_REEDS_TRAPDOOR = new BNTrapdoor(BLOCK_REEDS_BLOCK);
 	public static final Block BLOCK_REEDS_DOOR = new BNDoor(BLOCK_REEDS_BLOCK);
@@ -111,19 +116,28 @@ public class BlocksRegister
 	public static final Block BLOCK_CINCINNASITE_FORGED = new BlockCincinnasite();
 	public static final Block BLOCK_CINCINNASITE_PILLAR = new BlockCincinnasitPillar();
 	public static final Block BLOCK_CINCINNASITE_BRICKS = new BlockCincinnasite();
-	public static final Block BLOCK_CINCINNASITE_BRICK_PLATE  = new BlockCincinnasite();
-	
-	/*public static final Block BLOCK_CINCINNASITE_STAIRS;
-	public static final Block BLOCK_CINCINNASITE_SLAB;
-	public static final Block BLOCK_CINCINNASITE_BUTTON;
-	public static final Block BLOCK_CINCINNASITE_PLATE;
-	public static final Block BLOCK_CINCINNASITE_LANTERN;
-	public static final Block BLOCK_CINCINNASITE_TILE_LARGE;
-	public static final Block BLOCK_CINCINNASITE_TILE_SMALL;
-	public static final Block BLOCK_CINCINNASITE_CARVED;
-	public static final Block BLOCK_NETHER_BRICK_TILE_LARGE;
-	public static final Block BLOCK_NETHER_BRICK_TILE_SMALL;
-	public static final Block BLOCK_CINCINNASITE_WALL;*/
+	public static final Block BLOCK_CINCINNASITE_BRICK_PLATE = new BlockCincinnasite();
+	public static final Block BLOCK_CINCINNASITE_STAIRS = new BNStairs(BLOCK_CINCINNASITE);
+	public static final Block BLOCK_CINCINNASITE_SLAB = new BNSlab(BLOCK_CINCINNASITE);
+	public static final Block BLOCK_CINCINNASITE_BUTTON = new BNButton(BLOCK_CINCINNASITE);
+	public static final Block BLOCK_CINCINNASITE_PLATE = new BNPlate(ActivationRule.MOBS, BLOCK_CINCINNASITE);
+	public static final Block BLOCK_CINCINNASITE_LANTERN = new BlockCincinnasiteLantern();
+	public static final Block BLOCK_CINCINNASITE_TILE_LARGE = new BlockCincinnasite();
+	public static final Block BLOCK_CINCINNASITE_TILE_SMALL = new BlockCincinnasite();
+	public static final Block BLOCK_CINCINNASITE_CARVED = new BlockCincinnasite();
+	public static final Block BLOCK_NETHER_BRICK_TILE_LARGE = new BNNetherBrick();
+	public static final Block BLOCK_NETHER_BRICK_TILE_SMALL = new BNNetherBrick();
+	public static final Block BLOCK_CINCINNASITE_WALL = new BNWall(BLOCK_CINCINNASITE);
+	public static final Block BLOCK_BONE = new BNBoneBlock();
+	public static final Block BLOCK_BONE_STAIRS = new BNStairs(BLOCK_BONE);
+	public static final Block BLOCK_BONE_SLAB = new BNSlab(BLOCK_BONE);
+	public static final Block BLOCK_BONE_BUTTON = new BNButton(BLOCK_BONE);
+	public static final Block BLOCK_BONE_PLATE = new BNPlate(ActivationRule.EVERYTHING, BLOCK_BONE);
+	public static final Block BLOCK_CINCINNASITE_FIRE_BOWL = new BlockCincinnasitFireBowl();
+	public static final Block BLOCK_BONE_WALL = new BNWall(BLOCK_BONE);
+	public static final Block BLOCK_NETHER_BRICK_WALL = new BNWall(Blocks.NETHER_BRICKS);
+	public static final Block BLOCK_NETHER_BRICK_TILE_SLAB = new BNSlab(BLOCK_NETHER_BRICK_TILE_SMALL);
+	public static final Block BLOCK_NETHER_BRICK_TILE_STAIRS = new BNStairs(BLOCK_NETHER_BRICK_TILE_SMALL);
 	
 	// -- NEW --
 	public static final Block FARMLAND = new BlockFarmland();
@@ -185,6 +199,27 @@ public class BlocksRegister
 		registerBlock("cincinnasite_pillar", BLOCK_CINCINNASITE_PILLAR);
 		registerBlock("cincinnasite_bricks", BLOCK_CINCINNASITE_BRICKS);
 		registerBlock("cincinnasite_brick_plate", BLOCK_CINCINNASITE_BRICK_PLATE);
+		registerBlock("cincinnasite_stairs", BLOCK_CINCINNASITE_STAIRS);
+		registerBlock("cincinnasite_slab", BLOCK_CINCINNASITE_SLAB);
+		registerBlock("cincinnasite_button", BLOCK_CINCINNASITE_BUTTON);
+		registerBlock("cincinnasite_plate", BLOCK_CINCINNASITE_PLATE);
+		registerBlock("cincinnasite_lantern", BLOCK_CINCINNASITE_LANTERN);
+		registerBlock("cincinnasite_tile_large", BLOCK_CINCINNASITE_TILE_LARGE);
+		registerBlock("cincinnasite_tile_small", BLOCK_CINCINNASITE_TILE_SMALL);
+		registerBlock("cincinnasite_carved", BLOCK_CINCINNASITE_CARVED);
+		registerBlock("nether_brick_tile_large", BLOCK_NETHER_BRICK_TILE_LARGE);
+		registerBlock("nether_brick_tile_small", BLOCK_NETHER_BRICK_TILE_SMALL);
+		registerBlock("cincinnasite_wall", BLOCK_CINCINNASITE_WALL);
+		registerBlock("bone_block", BLOCK_BONE);
+		registerBlock("bone_stairs", BLOCK_BONE_STAIRS);
+		registerBlock("bone_slab", BLOCK_BONE_SLAB);
+		registerBlock("bone_button", BLOCK_BONE_BUTTON);
+		registerBlock("bone_plate", BLOCK_BONE_PLATE);
+		registerBlock("cincinnasite_fire_bowl", BLOCK_CINCINNASITE_FIRE_BOWL);
+		registerBlock("bone_wall", BLOCK_BONE_WALL);
+		registerBlock("nether_brick_wall", BLOCK_NETHER_BRICK_WALL);
+		registerBlock("nether_brick_tile_slab", BLOCK_NETHER_BRICK_TILE_SLAB);
+		registerBlock("nether_brick_tile_stairs", BLOCK_NETHER_BRICK_TILE_STAIRS);
 		
 		registerBlock("farmland", FARMLAND);
 	}

@@ -10,9 +10,9 @@ import net.minecraft.block.WoodButtonBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 
-public class BNButtom extends WoodButtonBlock
+public class BNButton extends WoodButtonBlock
 {
-	public BNButtom(Block block)
+	public BNButton(Block block)
 	{
 		super(FabricBlockSettings.copy(block).nonOpaque().build());
 	}

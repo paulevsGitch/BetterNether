@@ -1,0 +1,8 @@
+{
+	"replace": "false",
+	"values": [
+		"betternether:cincinnasite_wall",
+		"betternether:bone_wall",
+		"betternether:nether_brick_wall"
+	]
+}
