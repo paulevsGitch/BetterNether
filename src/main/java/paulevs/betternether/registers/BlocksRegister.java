@@ -59,6 +59,7 @@ import paulevs.betternether.blocks.BlockStalagnatePlanks;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStalagnateStem;
 import paulevs.betternether.blocks.BlockWartSeed;
+import paulevs.betternether.blocks.PigStatueRespawner;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 
@@ -144,8 +145,8 @@ public class BlocksRegister
 	public static final Block BLOCK_REEDS_LADDER = new BNLadder(BLOCK_REEDS_BLOCK);
 	public static final Block BLOCK_CINCINNASITE_BRICKS_PILLAR = new BNPillar(BLOCK_CINCINNASITE);
 	public static final Block BLOCK_BONE_TILE = new BNBoneBlock();
-	//public static Block BLOCK_CINCINNASITE_PEDESTAL;
-	//public static Block BLOCK_PIG_STATUE_RESPAWNER;
+	public static final Block BLOCK_CINCINNASITE_PEDESTAL = new BlockCincinnasitePedestal();
+	public static final Block BLOCK_PIG_STATUE_RESPAWNER = new PigStatueRespawner();
 	//public static Block BLOCK_CINCINNASITE_POT;
 	//public static Block BLOCK_POTTED_PLANT;
 	//public static Block BLOCK_CINCINNASITE_FRAME;
@@ -248,6 +249,8 @@ public class BlocksRegister
 		registerBlock("reeds_ladder", BLOCK_REEDS_LADDER);
 		registerBlock("cincinnasite_bricks_pillar", BLOCK_CINCINNASITE_BRICKS_PILLAR);
 		registerBlock("bone_tile", BLOCK_BONE_TILE);
+		registerBlock("cincinnasite_pedestal", BLOCK_CINCINNASITE_PEDESTAL);
+		registerBlock("pig_statue_respawner", BLOCK_PIG_STATUE_RESPAWNER);
 		
 		registerBlock("farmland", FARMLAND);
 	}

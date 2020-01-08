@@ -6,8 +6,8 @@
 		"top": "betternether:block/cincinnasite_fire_bowl_top",
 		"side": "betternether:block/cincinnasite_fire_bowl_side",
 		"bottom": "betternether:block/cincinnasite_plate_up",
-		"fire_0": "block/fire_layer_0",
-		"fire_1": "block/fire_layer_1"
+		"fire_0": "block/fire_0",
+		"fire_1": "block/fire_1"
 	},
 	"elements": [ 	 
 		{
