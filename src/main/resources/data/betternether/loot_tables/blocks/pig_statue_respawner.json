@@ -1,0 +1,27 @@
+{
+    "type": "block",
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "betternether:pig_statue_respawner"
+                }
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "betternether:pig_statue_respawner",
+					"properties": {
+						"top": "false"
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+        }
+    ]
+}

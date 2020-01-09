@@ -5,7 +5,9 @@
   "mixins": [
     "ChunkPopulateMixin",
     "LadderMixin",
-	"MushroomMixin"
+	"MushroomMixin",
+	"PlayerMixin",
+	PlayerManagerMixin
   ],
   "client": [],
   "injectors": {
