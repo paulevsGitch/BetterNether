@@ -1,4 +1,4 @@
-package paulevs.betternether.tileentities;
+package paulevs.betternether.blockentities;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -44,7 +44,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import paulevs.betternether.registers.BlockEntitiesRegister;
 
-public class TileEntityFurnace extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider, Tickable
+public class BlockEntityForge extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider, Tickable
 {
 	private static final int[] TOP_SLOTS = new int[] { 0 };
 	private static final int[] BOTTOM_SLOTS = new int[] { 2, 1 };
@@ -57,10 +57,17 @@ public class TileEntityFurnace extends LockableContainerBlockEntity implements S
 	protected final PropertyDelegate propertyDelegate;
 	private final Map<Identifier, Integer> recipesUsed;
 	protected final RecipeType<SmeltingRecipe> recipeType = RecipeType.SMELTING;
-
-	public TileEntityFurnace()
+	private int speed;
+	
+	public BlockEntityForge()
 	{
-		super(BlockEntitiesRegister.NETHERRACK_FURNACE);
+		this(1);
+	}
+
+	public BlockEntityForge(int speed)
+	{
+		super(BlockEntitiesRegister.CINCINNASITE_FORGE);
+		this.speed = speed;
 		this.inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 		this.propertyDelegate = new PropertyDelegate()
 		{
@@ -69,13 +76,13 @@ public class TileEntityFurnace extends LockableContainerBlockEntity implements S
 				switch (key)
 				{
 				case 0:
-					return TileEntityFurnace.this.burnTime;
+					return BlockEntityForge.this.burnTime;
 				case 1:
-					return TileEntityFurnace.this.fuelTime;
+					return BlockEntityForge.this.fuelTime;
 				case 2:
-					return TileEntityFurnace.this.cookTime;
+					return BlockEntityForge.this.cookTime;
 				case 3:
-					return TileEntityFurnace.this.cookTimeTotal;
+					return BlockEntityForge.this.cookTimeTotal;
 				default:
 					return 0;
 				}
@@ -86,16 +93,16 @@ public class TileEntityFurnace extends LockableContainerBlockEntity implements S
 				switch (key)
 				{
 				case 0:
-					TileEntityFurnace.this.burnTime = value;
+					BlockEntityForge.this.burnTime = value;
 					break;
 				case 1:
-					TileEntityFurnace.this.fuelTime = value;
+					BlockEntityForge.this.fuelTime = value;
 					break;
 				case 2:
-					TileEntityFurnace.this.cookTime = value;
+					BlockEntityForge.this.cookTime = value;
 					break;
 				case 3:
-					TileEntityFurnace.this.cookTimeTotal = value;
+					BlockEntityForge.this.cookTimeTotal = value;
 				}
 
 			}
@@ -202,6 +209,7 @@ public class TileEntityFurnace extends LockableContainerBlockEntity implements S
 		this.inventory = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
 		Inventories.fromTag(tag, this.inventory);
 		this.burnTime = tag.getShort("BurnTime");
+		this.speed = tag.getShort("Speed");
 		this.cookTime = tag.getShort("CookTime");
 		this.cookTimeTotal = tag.getShort("CookTimeTotal");
 		this.fuelTime = this.getFuelTime((ItemStack) this.inventory.get(1));
@@ -220,6 +228,7 @@ public class TileEntityFurnace extends LockableContainerBlockEntity implements S
 	{
 		super.toTag(tag);
 		tag.putShort("BurnTime", (short) this.burnTime);
+		tag.putShort("Speed", (short) this.speed);
 		tag.putShort("CookTime", (short) this.cookTime);
 		tag.putShort("CookTimeTotal", (short) this.cookTimeTotal);
 		Inventories.toTag(tag, this.inventory);
@@ -280,7 +289,7 @@ public class TileEntityFurnace extends LockableContainerBlockEntity implements S
 
 				if (this.isBurning() && this.canAcceptRecipeOutput(recipe))
 				{
-					++ this.cookTime;
+					this.cookTime += speed;
 					if (this.cookTime >= this.cookTimeTotal)
 					{
 						this.cookTime = 0;
@@ -610,7 +619,7 @@ public class TileEntityFurnace extends LockableContainerBlockEntity implements S
 
 	protected Text getContainerName()
 	{
-		return new TranslatableText("container.furnace", new Object[0]);
+		return new TranslatableText("container.forge", new Object[0]);
 	}
 
 	protected Container createContainer(int i, PlayerInventory playerInventory)

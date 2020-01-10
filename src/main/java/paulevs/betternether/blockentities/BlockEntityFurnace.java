@@ -1,4 +1,4 @@
-package paulevs.betternether.tileentities;
+package paulevs.betternether.blockentities;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -44,7 +44,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import paulevs.betternether.registers.BlockEntitiesRegister;
 
-public class TileEntityForge extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider, Tickable
+public class BlockEntityFurnace extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider, Tickable
 {
 	private static final int[] TOP_SLOTS = new int[] { 0 };
 	private static final int[] BOTTOM_SLOTS = new int[] { 2, 1 };
@@ -57,17 +57,10 @@ public class TileEntityForge extends LockableContainerBlockEntity implements Sid
 	protected final PropertyDelegate propertyDelegate;
 	private final Map<Identifier, Integer> recipesUsed;
 	protected final RecipeType<SmeltingRecipe> recipeType = RecipeType.SMELTING;
-	private int speed;
-	
-	public TileEntityForge()
-	{
-		this(1);
-	}
 
-	public TileEntityForge(int speed)
+	public BlockEntityFurnace()
 	{
-		super(BlockEntitiesRegister.CINCINNASITE_FORGE);
-		this.speed = speed;
+		super(BlockEntitiesRegister.NETHERRACK_FURNACE);
 		this.inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 		this.propertyDelegate = new PropertyDelegate()
 		{
@@ -76,13 +69,13 @@ public class TileEntityForge extends LockableContainerBlockEntity implements Sid
 				switch (key)
 				{
 				case 0:
-					return TileEntityForge.this.burnTime;
+					return BlockEntityFurnace.this.burnTime;
 				case 1:
-					return TileEntityForge.this.fuelTime;
+					return BlockEntityFurnace.this.fuelTime;
 				case 2:
-					return TileEntityForge.this.cookTime;
+					return BlockEntityFurnace.this.cookTime;
 				case 3:
-					return TileEntityForge.this.cookTimeTotal;
+					return BlockEntityFurnace.this.cookTimeTotal;
 				default:
 					return 0;
 				}
@@ -93,16 +86,16 @@ public class TileEntityForge extends LockableContainerBlockEntity implements Sid
 				switch (key)
 				{
 				case 0:
-					TileEntityForge.this.burnTime = value;
+					BlockEntityFurnace.this.burnTime = value;
 					break;
 				case 1:
-					TileEntityForge.this.fuelTime = value;
+					BlockEntityFurnace.this.fuelTime = value;
 					break;
 				case 2:
-					TileEntityForge.this.cookTime = value;
+					BlockEntityFurnace.this.cookTime = value;
 					break;
 				case 3:
-					TileEntityForge.this.cookTimeTotal = value;
+					BlockEntityFurnace.this.cookTimeTotal = value;
 				}
 
 			}
@@ -209,7 +202,6 @@ public class TileEntityForge extends LockableContainerBlockEntity implements Sid
 		this.inventory = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
 		Inventories.fromTag(tag, this.inventory);
 		this.burnTime = tag.getShort("BurnTime");
-		this.speed = tag.getShort("Speed");
 		this.cookTime = tag.getShort("CookTime");
 		this.cookTimeTotal = tag.getShort("CookTimeTotal");
 		this.fuelTime = this.getFuelTime((ItemStack) this.inventory.get(1));
@@ -228,7 +220,6 @@ public class TileEntityForge extends LockableContainerBlockEntity implements Sid
 	{
 		super.toTag(tag);
 		tag.putShort("BurnTime", (short) this.burnTime);
-		tag.putShort("Speed", (short) this.speed);
 		tag.putShort("CookTime", (short) this.cookTime);
 		tag.putShort("CookTimeTotal", (short) this.cookTimeTotal);
 		Inventories.toTag(tag, this.inventory);
@@ -289,7 +280,7 @@ public class TileEntityForge extends LockableContainerBlockEntity implements Sid
 
 				if (this.isBurning() && this.canAcceptRecipeOutput(recipe))
 				{
-					this.cookTime += speed;
+					++ this.cookTime;
 					if (this.cookTime >= this.cookTimeTotal)
 					{
 						this.cookTime = 0;

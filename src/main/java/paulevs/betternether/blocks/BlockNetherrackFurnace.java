@@ -6,7 +6,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.AbstractFurnaceBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -24,24 +23,24 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import paulevs.betternether.tileentities.TileEntityFurnace;
+import paulevs.betternether.blockentities.BlockEntityFurnace;
 
-public class BNFurnace extends AbstractFurnaceBlock
+public class BlockNetherrackFurnace extends AbstractFurnaceBlock
 {
-	public BNFurnace()
+	public BlockNetherrackFurnace()
 	{
 		super(FabricBlockSettings.copy(Blocks.NETHER_BRICKS).build());
 	}
 	
 	public BlockEntity createBlockEntity(BlockView view)
 	{
-		return new TileEntityFurnace();
+		return new BlockEntityFurnace();
 	}
 
 	protected void openContainer(World world, BlockPos pos, PlayerEntity player)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof TileEntityFurnace)
+		if (blockEntity instanceof BlockEntityFurnace)
 		{
 			player.openContainer((NameableContainerProvider) blockEntity);
 			player.incrementStat(Stats.INTERACT_WITH_FURNACE);
@@ -77,9 +76,9 @@ public class BNFurnace extends AbstractFurnaceBlock
 		if (itemStack.hasCustomName())
 		{
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof TileEntityFurnace)
+			if (blockEntity instanceof BlockEntityFurnace)
 			{
-				((TileEntityFurnace) blockEntity).setCustomName(itemStack.getName());
+				((BlockEntityFurnace) blockEntity).setCustomName(itemStack.getName());
 			}
 		}
 
@@ -90,9 +89,9 @@ public class BNFurnace extends AbstractFurnaceBlock
 		if (state.getBlock() != newState.getBlock())
 		{
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof TileEntityFurnace)
+			if (blockEntity instanceof BlockEntityFurnace)
 			{
-				ItemScatterer.spawn(world, (BlockPos) pos, (Inventory) ((TileEntityFurnace) blockEntity));
+				ItemScatterer.spawn(world, (BlockPos) pos, (Inventory) ((BlockEntityFurnace) blockEntity));
 				world.updateHorizontalAdjacent(pos, this);
 			}
 

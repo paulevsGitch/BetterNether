@@ -22,8 +22,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import paulevs.betternether.blockentities.BlockEntityForge;
 import paulevs.betternether.registers.BlocksRegister;
-import paulevs.betternether.tileentities.TileEntityForge;
 
 public class CincinnasiteForge extends AbstractFurnaceBlock
 {
@@ -34,13 +34,13 @@ public class CincinnasiteForge extends AbstractFurnaceBlock
 
 	public BlockEntity createBlockEntity(BlockView view)
 	{
-		return new TileEntityForge(2);
+		return new BlockEntityForge(2);
 	}
 
 	protected void openContainer(World world, BlockPos pos, PlayerEntity player)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof TileEntityForge)
+		if (blockEntity instanceof BlockEntityForge)
 		{
 			player.openContainer((NameableContainerProvider) blockEntity);
 			player.incrementStat(Stats.INTERACT_WITH_FURNACE);
@@ -76,9 +76,9 @@ public class CincinnasiteForge extends AbstractFurnaceBlock
 		if (itemStack.hasCustomName())
 		{
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof TileEntityForge)
+			if (blockEntity instanceof BlockEntityForge)
 			{
-				((TileEntityForge) blockEntity).setCustomName(itemStack.getName());
+				((BlockEntityForge) blockEntity).setCustomName(itemStack.getName());
 			}
 		}
 
@@ -89,9 +89,9 @@ public class CincinnasiteForge extends AbstractFurnaceBlock
 		if (state.getBlock() != newState.getBlock())
 		{
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof TileEntityForge)
+			if (blockEntity instanceof BlockEntityForge)
 			{
-				ItemScatterer.spawn(world, (BlockPos) pos, (Inventory) ((TileEntityForge) blockEntity));
+				ItemScatterer.spawn(world, (BlockPos) pos, (Inventory) ((BlockEntityForge) blockEntity));
 				world.updateHorizontalAdjacent(pos, this);
 			}
 

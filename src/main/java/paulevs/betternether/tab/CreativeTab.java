@@ -1,21 +1,15 @@
 package paulevs.betternether.tab;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.registers.BlocksRegister;
 
 public class CreativeTab
 {
-	public static final ItemGroup BN_TAB = FabricItemGroupBuilder.create(
+	/*public static final ItemGroup BN_TAB = FabricItemGroupBuilder.create(
 			new Identifier(BetterNether.MOD_ID, "items"))
 			.icon(() -> new ItemStack(BlocksRegister.BLOCK_NETHER_GRASS))
 			.appendItems(stacks ->
@@ -36,5 +30,7 @@ public class CreativeTab
 					}
 				});
 			})
-			.build();
+			.build();*/
+	
+	public static final ItemGroup BN_TAB = FabricItemGroupBuilder.create(new Identifier(BetterNether.MOD_ID, "items")).icon(() -> new ItemStack(BlocksRegister.BLOCK_NETHER_GRASS)).build();
 }

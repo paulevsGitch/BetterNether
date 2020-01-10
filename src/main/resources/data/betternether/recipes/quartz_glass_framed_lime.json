@@ -1,1 +1,20 @@
-{  "type": "minecraft:crafting_shaped",  "pattern": [    "###",    "#D#",    "###"  ],  "key": {    "#": {      "item": "betternether:quartz_glass_framed",      "data": 32767    },  "D": {      "type": "forge:ore_dict",      "ore": "dyeLime"    }  },  "result": {    "item": "betternether:quartz_stained_glass_framed",    "data": 5,    "count": 8  }}
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"###",
+		"#D#",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "betternether:quartz_glass_framed"
+		},
+		"D": {
+			"item": "minecraft:lime_dye"
+		}
+	},
+	"result": {
+		"item": "betternether:quartz_glass_framed_lime",
+		"count": 8
+	}
+}

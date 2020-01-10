@@ -10,8 +10,9 @@ import net.minecraft.block.DoorBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
+import paulevs.betternether.client.IRenderTypeable;
 
-public class BNDoor extends DoorBlock
+public class BNDoor extends DoorBlock implements IRenderTypeable
 {
 	public BNDoor(Block block)
 	{
@@ -25,5 +26,11 @@ public class BNDoor extends DoorBlock
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		else
 			return Collections.emptyList();
+	}
+
+	@Override
+	public BNRenderLayer getRenderLayer()
+	{
+		return BNRenderLayer.CUTOUT;
 	}
 }

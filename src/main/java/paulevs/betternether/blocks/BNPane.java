@@ -9,8 +9,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.PaneBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
+import paulevs.betternether.client.IRenderTypeable;
 
-public class BNPane extends PaneBlock
+public class BNPane extends PaneBlock implements IRenderTypeable
 {
 	public BNPane(Block block)
 	{
@@ -21,5 +22,11 @@ public class BNPane extends PaneBlock
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
 	{
 		return Collections.singletonList(new ItemStack(this.asItem()));
+	}
+
+	@Override
+	public BNRenderLayer getRenderLayer()
+	{
+		return BNRenderLayer.TRANSLUCENT;
 	}
 }

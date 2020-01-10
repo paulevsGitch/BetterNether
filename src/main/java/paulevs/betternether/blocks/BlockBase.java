@@ -7,8 +7,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
+import paulevs.betternether.client.IRenderTypeable;
 
-public class BlockBase extends Block
+public class BlockBase extends Block implements IRenderTypeable
 {
 	private boolean isClimmable = false;
 	private boolean dropItself = true;
@@ -34,6 +35,7 @@ public class BlockBase extends Block
 		this.layer = layer;
 	}
 	
+	@Override
 	public BNRenderLayer getRenderLayer()
 	{
 		return layer;

@@ -41,8 +41,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
 	{
-		stateManager.add(FACING);
-		stateManager.add(SHAPE);
+		stateManager.add(FACING, SHAPE);
 	}
 	
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
