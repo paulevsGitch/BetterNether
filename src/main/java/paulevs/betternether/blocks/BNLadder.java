@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -22,8 +22,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.blocks.BNRenderLayer;
-import paulevs.betternether.blocks.BlockBaseNotFull;
 
 public class BNLadder extends BlockBaseNotFull
 {
@@ -34,7 +32,7 @@ public class BNLadder extends BlockBaseNotFull
 	protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 3.0D);
 	protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D);
 
-	protected BNLadder(Block block)
+	public BNLadder(Block block)
 	{
 		super(FabricBlockSettings.copy(block).nonOpaque().build());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);

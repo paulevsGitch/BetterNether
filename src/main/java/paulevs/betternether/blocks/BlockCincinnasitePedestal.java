@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import paulevs.betternether.blocks.BlockBaseNotFull;
+import paulevs.betternether.registers.BlocksRegister;
 
 public class BlockCincinnasitePedestal extends BlockBaseNotFull
 {

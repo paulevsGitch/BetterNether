@@ -1,12 +1,12 @@
 {
     "variants": {
-        "active=false,facing=north": { "model": "betternether:block/cincinnasite_forge" },
-        "active=false,facing=south": { "model": "betternether:block/cincinnasite_forge", "y": 180 },
-        "active=false,facing=west":  { "model": "betternether:block/cincinnasite_forge", "y": 270 },
-        "active=false,facing=east":  { "model": "betternether:block/cincinnasite_forge", "y": 90 },
-		"active=true,facing=north": { "model": "betternether:block/cincinnasite_forge_on" },
-        "active=true,facing=south": { "model": "betternether:block/cincinnasite_forge_on", "y": 180 },
-        "active=true,facing=west":  { "model": "betternether:block/cincinnasite_forge_on", "y": 270 },
-        "active=true,facing=east":  { "model": "betternether:block/cincinnasite_forge_on", "y": 90 }
+        "lit=false,facing=north": { "model": "betternether:block/cincinnasite_forge" },
+        "lit=false,facing=south": { "model": "betternether:block/cincinnasite_forge", "y": 180 },
+        "lit=false,facing=west":  { "model": "betternether:block/cincinnasite_forge", "y": 270 },
+        "lit=false,facing=east":  { "model": "betternether:block/cincinnasite_forge", "y": 90 },
+		"lit=true,facing=north": { "model": "betternether:block/cincinnasite_forge_on" },
+        "lit=true,facing=south": { "model": "betternether:block/cincinnasite_forge_on", "y": 180 },
+        "lit=true,facing=west":  { "model": "betternether:block/cincinnasite_forge_on", "y": 270 },
+        "lit=true,facing=east":  { "model": "betternether:block/cincinnasite_forge_on", "y": 90 }
     }
 }

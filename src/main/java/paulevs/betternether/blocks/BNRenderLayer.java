@@ -3,5 +3,6 @@ package paulevs.betternether.blocks;
 public enum BNRenderLayer
 {
 	SOLID,
-	CUTOUT;
+	CUTOUT,
+	TRANSLUCENT;
 }

@@ -1,5 +1,5 @@
 {
-    "parent": "block/pane_post",
+    "parent": "block/template_glass_pane_post",
     "textures": {
         "edge": "betternether:block/quartz_glass",
         "pane": "betternether:block/quartz_glass"
