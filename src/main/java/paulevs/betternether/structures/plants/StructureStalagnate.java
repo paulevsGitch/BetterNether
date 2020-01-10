@@ -3,8 +3,8 @@ package paulevs.betternether.structures.plants;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockStalagnate;
@@ -18,7 +18,7 @@ public class StructureStalagnate implements IStructure
 	public static final int MIN_LENGTH = 3; // 5
 	
 	@Override
-	public void generate(ServerWorld world, BlockPos pos, Random random)
+	public void generate(IWorld world, BlockPos pos, Random random)
 	{
 		int length = BlocksHelper.upRay(world, pos, MAX_LENGTH);
 		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.up(length + 1))))
@@ -27,10 +27,10 @@ public class StructureStalagnate implements IStructure
 			BlockState middle = BlocksRegister.BLOCK_STALAGNATE.getDefaultState();
 			BlockState top = BlocksRegister.BLOCK_STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
 			
-			world.setBlockState(pos, bottom);
-			world.setBlockState(pos.up(length), top);
+			BlocksHelper.setWithoutUpdate(world, pos, bottom);
+			BlocksHelper.setWithoutUpdate(world, pos.up(length), top);
 			for (int y = 1; y < length; y++)
-				world.setBlockState(pos.up(y), middle);
+				BlocksHelper.setWithoutUpdate(world, pos.up(y), middle);
 		}
 	}
 	
@@ -43,10 +43,10 @@ public class StructureStalagnate implements IStructure
 			BlockState middle = BlocksRegister.BLOCK_STALAGNATE.getDefaultState();
 			BlockState top = BlocksRegister.BLOCK_STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
 			
-			world.setBlockState(pos.down(length), bottom);
-			world.setBlockState(pos, top);
+			BlocksHelper.setWithoutUpdate(world, pos.down(length), bottom);
+			BlocksHelper.setWithoutUpdate(world, pos, top);
 			for (int y = 1; y < length; y++)
-				world.setBlockState(pos.down(y), middle);
+				BlocksHelper.setWithoutUpdate(world, pos.down(y), middle);
 		}
 	}
 }

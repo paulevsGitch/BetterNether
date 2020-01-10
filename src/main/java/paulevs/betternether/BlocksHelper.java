@@ -10,7 +10,7 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registers.BlocksRegister;
 
@@ -46,12 +46,12 @@ public class BlocksHelper
 				b == BlocksRegister.BLOCK_BONE;
 	}
 	
-	public static void setWithoutUpdate(ServerWorld world, BlockPos pos, BlockState state)
+	public static void setWithoutUpdate(IWorld world, BlockPos pos, BlockState state)
 	{
 		world.setBlockState(pos, state, 19);
 	}
 	
-	public static int upRay(World world, BlockPos pos, int maxDist)
+	public static int upRay(IWorld world, BlockPos pos, int maxDist)
 	{
 		int length = 0;
 		for (int j = 1; j < maxDist && (world.getBlockState(pos.up(j)).getBlock() == Blocks.AIR); j++)
@@ -59,7 +59,7 @@ public class BlocksHelper
 		return length;
 	}
 	
-	public static int downRay(World world, BlockPos pos, int maxDist)
+	public static int downRay(IWorld world, BlockPos pos, int maxDist)
 	{
 		int length = 0;
 		for (int j = 1; j < maxDist && (world.getBlockState(pos.down(j)).getBlock() == Blocks.AIR); j++)

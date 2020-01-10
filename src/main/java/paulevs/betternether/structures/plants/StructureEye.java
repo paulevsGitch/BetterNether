@@ -4,15 +4,16 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureEye implements IStructure
 {
 	@Override
-	public void generate(ServerWorld world, BlockPos pos, Random random)
+	public void generate(IWorld world, BlockPos pos, Random random)
 	{
 		int h = random.nextInt(19) + 5;
 		int h2 = pos.getY() - h;
@@ -42,9 +43,9 @@ public class StructureEye implements IStructure
 		BlockState eyeState = random.nextBoolean() ? BlocksRegister.BLOCK_EYEBALL.getDefaultState() : BlocksRegister.BLOCK_EYEBALL_SMALL.getDefaultState();
 		
 		for (int y = 0; y < h; y++)
-			world.setBlockState(pos.down(y), vineState);
+			BlocksHelper.setWithoutUpdate(world, pos.down(y), vineState);
 		
-		world.setBlockState(pos.down(h), eyeState);
+		BlocksHelper.setWithoutUpdate(world, pos.down(h), eyeState);
 	}
 
 }

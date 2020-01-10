@@ -4,9 +4,10 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.world.IWorld;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom.BrownMushroomShape;
 import paulevs.betternether.registers.BlocksRegister;
@@ -17,7 +18,7 @@ public class StructureMedBrownMushroom implements IStructure
 	Mutable npos = new Mutable();
 	
 	@Override
-	public void generate(ServerWorld world, BlockPos pos, Random random)
+	public void generate(IWorld world, BlockPos pos, Random random)
 	{
 		Block under;
 		if (world.getBlockState(pos.down()).getBlock() == BlocksRegister.BLOCK_NETHER_MYCELIUM)
@@ -45,7 +46,7 @@ public class StructureMedBrownMushroom implements IStructure
 		}
 	}
 	
-	public void grow(ServerWorld world, BlockPos pos, Random random)
+	public void grow(IWorld world, BlockPos pos, Random random)
 	{
 		int size = 2 + random.nextInt(3);
 		for (int y = 1; y <= size; y++)
@@ -66,46 +67,46 @@ public class StructureMedBrownMushroom implements IStructure
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.MIDDLE);
-			world.setBlockState(pos, BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.BOTTOM));
 			for (int y = 1; y < size; y++)
-				world.setBlockState(pos.up(y), middle);
+				BlocksHelper.setWithoutUpdate(world, pos.up(y), middle);
 			pos = pos.up(size);
-			world.setBlockState(pos, BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.TOP));
-			world.setBlockState(pos.north(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.north(), BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.SIDE_N));
-			world.setBlockState(pos.south(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.south(), BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.SIDE_S));
-			world.setBlockState(pos.east(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.east(), BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.SIDE_E));
-			world.setBlockState(pos.west(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.west(), BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.SIDE_W));
-			world.setBlockState(pos.north().east(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.north().east(), BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.CORNER_N));
-			world.setBlockState(pos.north().west(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.north().west(), BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.CORNER_W));
-			world.setBlockState(pos.south().east(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.south().east(), BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.CORNER_E));
-			world.setBlockState(pos.south().west(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.south().west(), BlocksRegister
 					.BLOCK_BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.CORNER_S));

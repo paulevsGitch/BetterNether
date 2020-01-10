@@ -5,46 +5,36 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
+import paulevs.betternether.world.BNWorldGenerator;
 
 @Mixin(ChunkGenerator.class)
-public abstract class ChunkPopulateMixin
+public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 {
-	private static final BlockState STONE = Blocks.STONE.getDefaultState();
-	private BlockPos.Mutable pos = new BlockPos.Mutable();
+	private static final ChunkRandom RANDOM = new ChunkRandom();
+
+	@Inject(method = "<init>*", at = @At("RETURN"))
+	private void onConstructed(IWorld world, BiomeSource biomeSource, C config, CallbackInfo ci)
+	{
+		if (world.getDimension().isNether())
+			BNWorldGenerator.init(world);
+	}
 	
 	@Inject(method = "generateFeatures", at = @At("HEAD"))
     private void customPopulate(ChunkRegion region, CallbackInfo info)
 	{
-		populate(region);
-    }
-	
-	private void populate(ChunkRegion region)
-	{
-		int chunkX = region.getCenterChunkX();
-		int chunkZ = region.getCenterChunkZ();
-		int sx = (chunkX << 4) | 8;
-		int sz = (chunkZ << 4) | 8;
-		for (int x = 0; x < 16; x++)
+		if (region.getDimension().isNether())
 		{
-			int wx = sx + x;
-			int y = (int) (Math.sin(wx * 0.2) * 10 + 100);
-			for (int z = 0; z < 16; z++)
-			{
-				int wz = sz + z;
-				for (int wy = y; wy < y + 4; wy++)
-					setBlockState(region, wx, wy, wz, STONE);
-			}
+			int chunkX = region.getCenterChunkX();
+			int chunkZ = region.getCenterChunkZ();
+			RANDOM.setSeed(chunkX, chunkZ);
+			BNWorldGenerator.smoothChunk(region, chunkX, chunkZ);
+			BNWorldGenerator.generate(region, chunkX, chunkZ, RANDOM);
 		}
-	}
-	
-	private void setBlockState(ChunkRegion region, int x, int y, int z, BlockState state)
-	{
-		pos.set(x, y, z);
-		region.setBlockState(pos, state, 19);
-	}
+    }
 }

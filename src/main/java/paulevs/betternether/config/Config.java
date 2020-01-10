@@ -101,4 +101,31 @@ public class Config
 			return def;
 		}
 	}
+	
+	public static float getFloat(String group, String name, float def)
+	{
+		JsonObject jGroup = config.getAsJsonObject(group);
+		if (jGroup != null)
+		{
+			JsonElement element = jGroup.get(name);
+			if (element != null)
+			{
+				return element.getAsFloat();
+			}
+			else
+			{
+				jGroup.addProperty(name, def);
+				rewrite = true;
+				return def;
+			}
+		}
+		else
+		{
+			JsonObject newGroup = new JsonObject();
+			newGroup.addProperty(name, def);
+			config.add(group, newGroup);
+			rewrite = true;
+			return def;
+		}
+	}
 }

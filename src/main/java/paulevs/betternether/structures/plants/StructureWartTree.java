@@ -8,10 +8,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.registers.BlocksRegister;
@@ -24,7 +24,7 @@ public class StructureWartTree implements IStructure
 	private Mutable blockPos = new Mutable();
 	
 	@Override
-	public void generate(ServerWorld world, BlockPos pos, Random random)
+	public void generate(IWorld world, BlockPos pos, Random random)
 	{
 		int height = 5 + random.nextInt(5);
 		
@@ -47,10 +47,10 @@ public class StructureWartTree implements IStructure
 						blockPos.set(px, py, pz);
 						if (isReplaceable(world.getBlockState(blockPos)))
 						{
-							world.setBlockState(blockPos, WART_BLOCK);
+							BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
 							if (random.nextInt(3) == 0)
 							{
-								world.setBlockState(blockPos, WART_BLOCK);
+								BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
 								Direction dir = HORIZONTAL[random.nextInt(HORIZONTAL.length)];
 								seedBlocks.add(new BlockPos(blockPos).offset(dir));
 							}
@@ -75,10 +75,10 @@ public class StructureWartTree implements IStructure
 							blockPos.set(px, py, pz);
 							if (world.isAir(blockPos))
 							{
-								world.setBlockState(blockPos, WART_BLOCK);
+								BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
 								if (random.nextInt(3) == 0)
 								{
-									world.setBlockState(blockPos, WART_BLOCK);
+									BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
 									Direction dir = HORIZONTAL[random.nextInt(HORIZONTAL.length)];
 									seedBlocks.add(new BlockPos(blockPos).offset(dir));
 								}
@@ -92,7 +92,7 @@ public class StructureWartTree implements IStructure
 		}
 	}
 
-	private void PlaceRandomSeed(ServerWorld world, BlockPos pos)
+	private void PlaceRandomSeed(IWorld world, BlockPos pos)
 	{
 		BlockState seed = BlocksRegister.BLOCK_WART_SEED.getDefaultState();
 		if (isReplaceable(world.getBlockState(pos)))
