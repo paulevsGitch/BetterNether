@@ -1,29 +1,19 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import paulevs.betternether.blocks.BlockBoneMushroom;
-import paulevs.betternether.registers.BlocksRegister;
-import paulevs.betternether.structures.StructureNBT;
-
 public class NetherBoneReef extends NetherGrasslands
 {
-	private static StructureNBT[] bones = new StructureNBT[]{
+	/*private static StructureNBT[] bones = new StructureNBT[]{
 		new StructureNBT("bone_01"),
 		new StructureNBT("bone_02"),
 		new StructureNBT("bone_03")
-	};
+	};*/
 	
 	public NetherBoneReef(String name)
 	{
 		super(name);
 	}
 	
-	@Override
+	/*@Override
 	public void genFloorObjects(World chunk, BlockPos pos, Random random)
 	{
 		Block ground = chunk.getBlockState(pos).getBlock();
@@ -47,9 +37,9 @@ public class NetherBoneReef extends NetherGrasslands
 							.getDefaultState()
 							.withProperty(BlockBoneMushroom.AGE, random.nextInt(3)));
 		}
-	}
+	}*/
 	
-	@Override
+	/*@Override
 	public void genWallObjects(World world, BlockPos origin, BlockPos pos, Random random)
 	{
 		if (random.nextFloat() <= plantDensity && BlocksRegister.BLOCK_BONE_MUSHROOM != Blocks.AIR && random.nextBoolean() &&
@@ -63,5 +53,5 @@ public class NetherBoneReef extends NetherGrasslands
 					.withProperty(BlockBoneMushroom.FACING, facing)
 					.withProperty(BlockBoneMushroom.AGE, random.nextInt(3)));
 		}
-	}
+	}*/
 }

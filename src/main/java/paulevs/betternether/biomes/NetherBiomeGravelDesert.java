@@ -6,7 +6,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.config.Config;
 import paulevs.betternether.structures.plants.StructureAgave;
 import paulevs.betternether.structures.plants.StructureBarrelCactus;
 import paulevs.betternether.structures.plants.StructureNetherCactus;
@@ -16,21 +15,9 @@ public class NetherBiomeGravelDesert extends NetherBiome
 	public NetherBiomeGravelDesert(String name)
 	{
 		super(name);
-		this.addStructure(
-				new StructureNetherCactus(),
-				StructureType.FLOOR,
-				Config.getFloat("generator_desert", "nether_cactus_density", 0.02F),
-				Config.getBoolean("generator_desert", "nether_cactus_limit", true));
-		this.addStructure(
-				new StructureAgave(),
-				StructureType.FLOOR,
-				Config.getFloat("generator_desert", "agave_density", 0.02F),
-				Config.getBoolean("generator_desert", "agave_limit", true));
-		this.addStructure(
-				new StructureBarrelCactus(),
-				StructureType.FLOOR,
-				Config.getFloat("generator_desert", "barrel_cactus_density", 0.02F),
-				Config.getBoolean("generator_desert", "barrel_cactus_limit", true));
+		addStructure("nether_cactus", new StructureNetherCactus(), StructureType.FLOOR, 0.02F, true);
+		addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);
+		addStructure("barrel_cactus", new StructureBarrelCactus(), StructureType.FLOOR, 0.02F, true);
 	}
 
 	@Override

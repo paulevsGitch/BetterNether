@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
+import paulevs.betternether.config.Config;
 import paulevs.betternether.noise.WorleyNoiseOctaved3D;
 import paulevs.betternether.structures.IStructure;
-import paulevs.betternether.world.BNWorldGenerator;
 
 public class NetherBiome
 {
@@ -19,19 +22,30 @@ public class NetherBiome
 	private ArrayList<StructureInfo> generatorsWall = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> generatorsCeil = new ArrayList<StructureInfo>();
 	
+	public Block testBlock = Blocks.AIR;
+	
 	protected String name;
 	protected NetherBiome edge;
 	protected int edgeSize;
 	protected List<NetherBiome> subbiomes;
-	protected int sl;
 	
 	public NetherBiome(String name)
 	{
 		this.name = name;
 		edge = this;
 		edgeSize = 0;
-		sl = 0;
+		//sl = 0;
 		subbiomes = new ArrayList<NetherBiome>();
+		subbiomes.add(this);
+		
+		Random random = new Random(name.hashCode());
+		for (int i = 0; i < 100 && !testBlock.isOpaque(testBlock.getDefaultState()); i++)
+		{
+			testBlock = Registry.BLOCK.get(random.nextInt(256));
+		}
+		if (!testBlock.isOpaque(testBlock.getDefaultState()))
+			testBlock = Blocks.STONE;
+		System.out.println(name + ": " + testBlock);
 	}
 	
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random) {}
@@ -95,21 +109,19 @@ public class NetherBiome
 	public void addSubBiome(NetherBiome biome)
 	{
 		subbiomes.add(biome);
-		sl = subbiomes.size() << 3;
 	}
 	
-	public NetherBiome getSubBiome(int x, int y, int z)
+	public NetherBiome getSubBiome(Random random)
 	{
-		if (sl > 0)
-		{
-			int id = BNWorldGenerator.getSubBiome(x, y, z, sl);
-			if (id < subbiomes.size())
-				return subbiomes.get(id);
-			else
-				return this;
-		}
-		else
-			return this;
+		return subbiomes.get(random.nextInt(subbiomes.size()));
+	}
+	
+	protected void addStructure(String name, IStructure structure, StructureType type, float density, boolean useNoise)
+	{
+		String group = "generator_" + getRegistryName();
+		float dens = Config.getFloat(group, name + "_density", density);
+		boolean limit = Config.getBoolean(group, name + "_limit", useNoise);
+		this.addStructure(structure, type, dens, limit);
 	}
 	
 	protected void addStructure(IStructure structure, StructureType type, float density, boolean useNoise)

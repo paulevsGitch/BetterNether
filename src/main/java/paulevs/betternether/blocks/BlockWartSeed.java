@@ -53,7 +53,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements Fertilizable
 				.nonOpaque()
 				.noCollision()
 				.build());
-		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.DOWN));
+		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.UP));
 	}
 	
 	@Override

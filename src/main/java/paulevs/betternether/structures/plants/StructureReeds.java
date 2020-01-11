@@ -17,7 +17,7 @@ public class StructureReeds implements IStructure
 		if (BlocksRegister.BLOCK_NETHER_REED.canPlaceAt(world.getBlockState(pos), world, pos))
 		{
 			BlockState med = BlocksRegister.BLOCK_NETHER_REED.getDefaultState().with(BlockNetherReed.TOP, false);
-			int h = random.nextInt(2);
+			int h = random.nextInt(3);
 			for (int i = 0; i < h; i++)
 				BlocksHelper.setWithoutUpdate(world, pos.up(i), med);
 			BlocksHelper.setWithoutUpdate(world, pos.up(h), BlocksRegister.BLOCK_NETHER_REED.getDefaultState());

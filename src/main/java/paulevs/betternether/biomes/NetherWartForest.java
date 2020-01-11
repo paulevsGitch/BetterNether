@@ -4,53 +4,43 @@ import java.util.Random;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
-import paulevs.betternether.world.BNWorldGenerator;
+import paulevs.betternether.structures.plants.StructureBlackBush;
+import paulevs.betternether.structures.plants.StructureNetherWart;
+import paulevs.betternether.structures.plants.StructureWartSeed;
+import paulevs.betternether.structures.plants.StructureWartTree;
 
 public class NetherWartForest extends NetherBiome
 {
 	public NetherWartForest(String name)
 	{
 		super(name);
-	}
-
-	@Override
-	public void genFloorObjects(World world, BlockPos pos, Random random)
-	{
-			if (random.nextFloat() <= plantDensity && world.getBlockState(pos).getBlock() == Blocks.SOUL_SAND)
-			{
-				if (BNWorldGenerator.hasWartTreeGen && random.nextInt(15) == 0)
-				{
-					BNWorldGenerator.wartTreeGen.generate(world, pos, random);
-				}
-				else if (BNWorldGenerator.hasWartsGen && random.nextInt(3) == 0 && world.getBlockState(pos).getBlock() == Blocks.SOUL_SAND && world.getBlockState(pos.up()).getBlock() == Blocks.AIR)
-					world.setBlockState(pos.up(), Blocks.NETHER_WART.getDefaultState().withProperty(BlockNetherWart.AGE, Integer.valueOf(random.nextInt(4))));
-		}
+		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.05F, false);
+		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.2F, false);
+		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, false);
+		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.05F, false);
 	}
 	
 	@Override
-	public void genSurfColumn(World world, BlockPos pos, Random random)
+	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
 	{
-		if (world.getBlockState(pos).getBlock() == Blocks.NETHERRACK)
+		switch(random.nextInt(3))
 		{
-			switch(random.nextInt(3))
-			{
-			case 0:
-			case 1:
-				world.setBlockState(pos, Blocks.SOUL_SAND.getDefaultState());
-				break;
-			case 2:
-				if (BlocksRegister.BLOCK_NETHERRACK_MOSS != Blocks.AIR)
-					world.setBlockState(pos, BlocksRegister.BLOCK_NETHERRACK_MOSS.getDefaultState());
-				break;
-			}
-			for (int i = 1; i < 1 + random.nextInt(3); i++)
-			{
-				BlockPos p2 = pos.down(i);
-				if (p2.getY() > -1 && random.nextInt(3) == 0 && world.getBlockState(p2).getBlock() == Blocks.NETHERRACK)
-					world.setBlockState(p2, Blocks.SOUL_SAND.getDefaultState());
-			}
+		case 0:
+		case 1:
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
+			break;
+		case 2:
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.BLOCK_NETHERRACK_MOSS.getDefaultState());
+			break;
+		}
+		for (int i = 1; i < random.nextInt(3); i++)
+		{
+			BlockPos down = pos.down(i);
+			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down)))
+				BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.getDefaultState());
 		}
 	}
 }

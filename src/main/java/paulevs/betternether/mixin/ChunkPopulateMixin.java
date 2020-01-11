@@ -35,6 +35,7 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 			RANDOM.setSeed(chunkX, chunkZ);
 			BNWorldGenerator.smoothChunk(region, chunkX, chunkZ);
 			BNWorldGenerator.generate(region, chunkX, chunkZ, RANDOM);
+			BNWorldGenerator.clearCache();
 		}
     }
 }

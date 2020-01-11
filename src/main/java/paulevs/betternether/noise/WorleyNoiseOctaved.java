@@ -26,9 +26,9 @@ public class WorleyNoiseOctaved
 
 	public double GetValue(double x, double y)
 	{
-		double result = noise.GetValue(x, y);
+		double result = noise.getValue(x, y);
 		for (int i = 0; i < octaves - 1; i++)
-			result = result * multipliers[i] + noise.GetValue(x * offsets[i], y * offsets[i]) * negativeMultipliers[i];
+			result = result * multipliers[i] + noise.getValue(x * offsets[i], y * offsets[i]) * negativeMultipliers[i];
 		return result;
 	}
 }

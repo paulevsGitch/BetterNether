@@ -11,7 +11,7 @@ public class WorleyNoise
 		randY = new PermutationTable((seed + 1337L));
 	}
 
-	public double GetValue(double x, double y)
+	public double getValue(double x, double y)
 	{
 		int px = (int) x;
 		int py = (int) y;
