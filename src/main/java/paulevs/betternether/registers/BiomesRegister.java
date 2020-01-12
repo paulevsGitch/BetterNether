@@ -11,6 +11,7 @@ import paulevs.betternether.biomes.NetherMushroomForest;
 import paulevs.betternether.biomes.NetherMushroomForestEdge;
 import paulevs.betternether.biomes.NetherPoorGrasslands;
 import paulevs.betternether.biomes.NetherSwampland;
+import paulevs.betternether.biomes.NetherSwamplandTerraces;
 import paulevs.betternether.biomes.NetherWartForest;
 import paulevs.betternether.biomes.NetherWartForestEdge;
 import paulevs.betternether.config.Config;
@@ -31,6 +32,7 @@ public class BiomesRegister
 	public static final NetherBiome BIOME_BONE_REEF = new NetherBoneReef("Bone Reef");
 	public static final NetherBiome BIOME_POOR_GRASSLANDS = new NetherPoorGrasslands("Poor Nether Grasslands");
 	public static final NetherBiome NETHER_SWAMPLAND = new NetherSwampland("Nether Swampland");
+	public static final NetherBiome NETHER_SWAMPLAND_TERRACES = new NetherSwamplandTerraces("Nether Swampland Terraces");
 	
 	public static void register()
 	{
@@ -45,6 +47,7 @@ public class BiomesRegister
 		registerSubBiome(BIOME_BONE_REEF, BIOME_GRASSLANDS, 0.3F);
 		registerSubBiome(BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);
 		registerBiome(NETHER_SWAMPLAND);
+		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
 	}
 	
 	protected static void registerBiome(NetherBiome biome)

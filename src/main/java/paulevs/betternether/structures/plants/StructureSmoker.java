@@ -40,10 +40,18 @@ public class StructureSmoker implements IStructure
 					if (world.isAir(npos) && canPlaceAt(world, npos))
 					{
 						int h = random.nextInt(5);
+						BlocksHelper.setWithoutUpdate(world, npos, bottom);
 						for (int n = 1; n < h; n++)
-							BlocksHelper.setWithoutUpdate(world, npos.up(n), middle);
-						if (h > 0)
-							BlocksHelper.setWithoutUpdate(world, npos, bottom);
+						{
+							BlockPos up = npos.up(n);
+							if (world.isAir(up.up()))
+								BlocksHelper.setWithoutUpdate(world, up, middle);
+							else
+							{
+								BlocksHelper.setWithoutUpdate(world, up, top);
+								return;
+							}
+						}	
 						BlocksHelper.setWithoutUpdate(world, npos.up(h), top);
 						break;
 					}

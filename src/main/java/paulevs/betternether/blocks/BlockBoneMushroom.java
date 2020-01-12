@@ -1,10 +1,6 @@
 package paulevs.betternether.blocks;
 
-import java.util.EnumMap;
 import java.util.Random;
-
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,7 +8,6 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.EntityContext;
@@ -22,6 +17,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
@@ -34,14 +30,14 @@ import paulevs.betternether.BlocksHelper;
 
 public class BlockBoneMushroom extends BlockBaseNotFull
 {
-	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
-			Direction.NORTH, Block.createCuboidShape(1, 1, 8, 15, 15, 16),
-			Direction.SOUTH, Block.createCuboidShape(1, 1, 0, 15, 15, 8),
-			Direction.WEST, Block.createCuboidShape(8, 1, 1, 16, 15, 15),
-			Direction.EAST, Block.createCuboidShape(0, 1, 1, 8, 15, 15)));
-	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+	private static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(1, 1, 8, 15, 15, 16);
+	private static final VoxelShape SHAPE_SOUTH = Block.createCuboidShape(1, 1, 0, 15, 15, 8);
+	private static final VoxelShape SHAPE_WEST = Block.createCuboidShape(8, 1, 1, 16, 15, 15);
+	private static final VoxelShape SHAPE_EAST = Block.createCuboidShape(0, 1, 1, 8, 15, 15);
+	private static final VoxelShape SHAPE_UP = Block.createCuboidShape(1, 0, 1, 15, 12, 15);
+	public static final DirectionProperty FACING = Properties.FACING;
 	public static final IntProperty AGE = IntProperty.of("age", 0, 2);
-	
+
 	public BlockBoneMushroom()
 	{
 		super(FabricBlockSettings.of(Material.PLANT)
@@ -56,35 +52,50 @@ public class BlockBoneMushroom extends BlockBaseNotFull
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(AGE, 0).with(FACING, Direction.NORTH));
 	}
-	
+
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
 	{
 		stateManager.add(FACING);
 		stateManager.add(AGE);
 	}
-	
+
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
-		return BOUNDING_SHAPES.get(state.get(FACING));
+		switch (state.get(FACING))
+		{
+		case NORTH:
+			return SHAPE_NORTH;
+		case SOUTH:
+			return SHAPE_SOUTH;
+		case EAST:
+			return SHAPE_EAST;
+		case WEST:
+			return SHAPE_WEST;
+		case UP:
+		default:
+			return SHAPE_UP;
+		}
 	}
-	
+
 	@Environment(EnvType.CLIENT)
 	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos)
 	{
 		return 1.0F;
 	}
-	
+
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
 		Direction direction = (Direction) state.get(FACING);
+		if (direction == Direction.DOWN)
+			return false;
 		BlockPos blockPos = pos.offset(direction.getOpposite());
 		BlockState blockState = world.getBlockState(blockPos);
 		return BlocksHelper.isBone(blockState);
 	}
-	
+
 	@Override
 	public BlockState rotate(BlockState state, BlockRotation rotation)
 	{
@@ -96,7 +107,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull
 	{
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
-	
+
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, IWorld world, BlockPos pos, BlockPos neighborPos)
 	{
@@ -105,7 +116,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull
 		else
 			return Blocks.AIR.getDefaultState();
 	}
-	
+
 	@Override
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
@@ -116,7 +127,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull
 			BlocksHelper.setWithoutUpdate(world, pos, state.with(AGE, age + 1));
 		}
 	}
-	
+
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext ctx)
 	{
@@ -127,7 +138,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull
 		for(int i = 0; i < directions.length; ++i) 
 		{
 			Direction direction = directions[i];
-			if (direction.getAxis().isHorizontal())
+			if (direction != Direction.UP)
 			{
 				Direction direction2 = direction.getOpposite();
 				blockState = blockState.with(FACING, direction2);

@@ -27,17 +27,19 @@ public class NetherSwampland extends NetherBiome
 	@Override
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
 	{
-		if (random.nextInt(4) > 0)
+		switch (random.nextInt(4))
 		{
+		case 0:
 			if (validWall(world, pos.down()) && validWall(world, pos.north()) && validWall(world, pos.south()) && validWall(world, pos.east()) && validWall(world, pos.west()))
 				BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState());
 			else
 				BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
-		}
-		else if (random.nextInt(3) > 0)
+			break;
+		case 1:
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
-		else if (random.nextBoolean())
+		case 2:
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.BLOCK_NETHERRACK_MOSS.getDefaultState());
+		}
 		for (int i = 1; i < random.nextInt(3); i++)
 		{
 			BlockPos down = pos.down(i);
@@ -48,7 +50,7 @@ public class NetherSwampland extends NetherBiome
 		}
 	}
 	
-	private boolean validWall(IWorld world, BlockPos pos)
+	protected boolean validWall(IWorld world, BlockPos pos)
 	{
 		BlockState state = world.getBlockState(pos);
 		return BlocksHelper.isLava(state) || BlocksHelper.isNetherGround(state);

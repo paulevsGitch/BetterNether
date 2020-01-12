@@ -7,18 +7,15 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
-import paulevs.betternether.biomes.NetherBiome.StructureType;
 import paulevs.betternether.config.Config;
-import paulevs.betternether.noise.WorleyNoiseOctaved3D;
+import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.structures.IStructure;
-import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureWartCap;
 
 public class NetherBiome
 {
-	private static final WorleyNoiseOctaved3D SCATTER = new WorleyNoiseOctaved3D(1337, 3);
+	private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
 	private static int structureID = 0;
 	
 	private ArrayList<StructureInfo> generatorsFloor = new ArrayList<StructureInfo>();
@@ -32,7 +29,7 @@ public class NetherBiome
 	protected int edgeSize;
 	protected List<Subbiome> subbiomes;
 	protected NetherBiome parrent;
-	protected float maxSubBiomeChance = 0;
+	protected float maxSubBiomeChance = 1;
 	
 	public NetherBiome(String name)
 	{
@@ -41,6 +38,7 @@ public class NetherBiome
 		edgeSize = 0;
 		subbiomes = new ArrayList<Subbiome>();
 		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.08F, true);
+		subbiomes.add(new Subbiome(this, 1));
 	}
 	
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random) {}
@@ -68,7 +66,7 @@ public class NetherBiome
 	
 	protected double getFeatureNoise(BlockPos pos, int id)
 	{
-		return SCATTER.GetValue(pos.getX() * 0.1, pos.getY() * 0.1 + id * 10, pos.getZ() * 0.1);
+		return SCATTER.eval(pos.getX() * 0.1, pos.getY() * 0.1 + id * 10, pos.getZ() * 0.1);
 	}
 	
 	public String getName()
@@ -105,16 +103,13 @@ public class NetherBiome
 	public void addSubBiome(NetherBiome biome, float chance)
 	{
 		int index = subbiomes.size() - 1;
-		if (index >= 0)
-			chance += subbiomes.get(index).chance;
-		maxSubBiomeChance = chance;
+		maxSubBiomeChance += subbiomes.get(index).chance;
 		biome.parrent = this;
+		subbiomes.add(new Subbiome(biome, maxSubBiomeChance));
 	}
 	
 	public NetherBiome getSubBiome(Random random)
 	{
-		if (subbiomes.size() == 0)
-			return this;
 		float chance = random.nextFloat() * maxSubBiomeChance;
 		for (Subbiome biome: subbiomes)
 			if (biome.canGenerate(chance))
@@ -195,7 +190,7 @@ public class NetherBiome
 		
 		boolean canGenerate(Random random, BlockPos pos)
 		{
-			return (!useNoise || getFeatureNoise(pos, id) < 0.25) && random.nextFloat() < density;
+			return (!useNoise || getFeatureNoise(pos, id) > 0.5) && random.nextFloat() < density;
 		}
 	}
 	

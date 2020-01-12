@@ -32,11 +32,8 @@ public class BiomeMap
 		this.sizeY = sizeY;
 		maxHeight = 128 / sizeY;
 		
-		depth = (int) Math.ceil(Math.log(Math.max(sizeXZ, sizeY)) / Math.log(2));
+		depth = (int) Math.ceil(Math.log(Math.max(sizeXZ, sizeY)) / Math.log(2)) - 1;
 		size = 1 << depth;
-		
-		System.out.println("Map depth " + depth);
-		System.out.println("Map size " + size);
 	}
 	
 	public void clearCache()

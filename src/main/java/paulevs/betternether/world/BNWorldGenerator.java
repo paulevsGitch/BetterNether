@@ -13,14 +13,16 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.structures.IStructureWorld;
+import paulevs.betternether.structures.StructureBuilding;
 
 public class BNWorldGenerator
 {
-	//public static IStructureWorld[] globalStructuresLand;
-	//public static IStructureWorld[] globalStructuresLava;
-	//public static IStructureWorld[] globalStructuresCave;
+	private static IStructureWorld[] globalStructuresLand;
+	private static IStructureWorld[] globalStructuresLava;
+	private static IStructureWorld[] globalStructuresCave;
 	
-	public static boolean hasCleaningPass;
+	private static boolean hasCleaningPass;
 
 	//private static float structueDensity = 1F / 64F;
 	private static float oreDensity;
@@ -28,7 +30,6 @@ public class BNWorldGenerator
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	
 	//private static CityStructureManager cityManager;
-	//private static BlockPos pos;
 	private static Mutable popPos = new Mutable();
 	
 	private static NetherBiome[][][] biomeArray = new NetherBiome[8][64][8];
@@ -36,6 +37,10 @@ public class BNWorldGenerator
 	private static int cacheTimer = 0;
 	private static int sizeXZ;
 	private static int sizeY;
+	
+	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(1024);
+	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(1024);
+	private static final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(1024);
 	
 	public static void loadConfig()
 	{
@@ -49,6 +54,28 @@ public class BNWorldGenerator
 	{
 		long seed = world.getSeed();
 		map = new BiomeMap(seed, sizeXZ, sizeY);
+		
+		globalStructuresLand = new IStructureWorld[] {
+				new StructureBuilding("altar_01", -1),
+				new StructureBuilding("altar_02", -4),
+				new StructureBuilding("altar_03", -3),
+				new StructureBuilding("altar_04", -3),
+				new StructureBuilding("altar_05", -2),
+				new StructureBuilding("altar_06", -2),
+				new StructureBuilding("portal_01", -4),
+				new StructureBuilding("portal_02", -3),
+				new StructureBuilding("garden_01", -3),
+				new StructureBuilding("garden_02", -2),
+				new StructureBuilding("pillar_01", -1),
+				new StructureBuilding("respawn_point_01", -3),
+				new StructureBuilding("respawn_point_02", -2)
+		};
+		
+		globalStructuresLava = new IStructureWorld[] {};
+		
+		globalStructuresCave = new IStructureWorld[] {
+				new StructureBuilding("room_01", -5),
+		};
 		
 		/*if (ConfigLoader.hasCities())
 		{
@@ -147,41 +174,42 @@ public class BNWorldGenerator
 		int sx = (cx << 4) | 8;
 		int sz = (cz << 4) | 8;
 
+		makeBiomeArray(sx, sz);
+		
 		//Structure Generator
-		/*if (coordinateRandom.nextFloat() < structueDensity)
+		if (random.nextFloat() < 0.1)
 		{
-			pos = new BlockPos(sx + coordinateRandom.nextInt(8), 32 + coordinateRandom.nextInt(120 - 32), sz + coordinateRandom.nextInt(8));
+			BlockPos pos = new BlockPos(sx + random.nextInt(8), 32 + random.nextInt(120 - 32), sz + random.nextInt(8));
 			while (world.getBlockState(pos).getBlock() != Blocks.AIR && pos.getY() > 32)
 			{
 				pos = pos.down();
 			}
-			pos = downRay(world, pos);
-			if (pos != null)
+			int h = BlocksHelper.downRay(world, pos, pos.getY() - 5);
+			pos = pos.down(h + 1);
+			boolean terrain = true;
+			for (int y = 1; y < 8; y++)
 			{
-				boolean terrain = true;
-				for (int y = 1; y < 8; y++)
+				if (!world.isAir(pos.up(y)))
 				{
-					if (world.getBlockState(pos.up(y)).getBlock() != Blocks.AIR)
-					{
-						terrain = false;
-						break;
-					}
-				}
-				if (terrain)
-				{
-					if (globalStructuresLava.length > 0 && world.getBlockState(pos).getMaterial() == Material.LAVA)
-						globalStructuresLava[coordinateRandom.nextInt(globalStructuresLava.length)].generateLava(world, pos.up(), coordinateRandom);
-					else if (globalStructuresLand.length > 0)
-						globalStructuresLand[coordinateRandom.nextInt(globalStructuresLand.length)].generateSurface(world, pos.up(), coordinateRandom);
-				}
-				else if (globalStructuresCave.length > 0)
-				{
-					globalStructuresCave[coordinateRandom.nextInt(globalStructuresCave.length)].generateSubterrain(world, pos, coordinateRandom);
+					terrain = false;
+					break;
 				}
 			}
-		}*/
-
-		makeBiomeArray(sx, sz);
+			if (terrain)
+			{
+				if (BlocksHelper.isLava(world.getBlockState(pos)))
+				{
+					if (globalStructuresLava.length > 0)
+						globalStructuresLava[random.nextInt(globalStructuresLava.length)].generateLava(world, pos.up(), random);
+				}
+				else if (globalStructuresLand.length > 0)
+					globalStructuresLand[random.nextInt(globalStructuresLand.length)].generateSurface(world, pos.up(), random);
+			}
+			else if (globalStructuresCave.length > 0)
+			{
+				globalStructuresCave[random.nextInt(globalStructuresCave.length)].generateSubterrain(world, pos, random);
+			}
+		}
 
 		// Total Populator
 		for (int x = 0; x < 16; x++)
@@ -205,14 +233,15 @@ public class BNWorldGenerator
 							// Ground Generation
 							if (world.isAir(popPos.up()))
 							{
-								//biome.genSurfColumn(world, popPos, random);
-								biome.genFloorObjects(world, popPos.up(), random);
+								//biome.genFloorObjects(world, popPos.up(), random);
+								LIST_FLOOR.add(new BlockPos(popPos.up()));
 							}
 
 							// Ceiling Generation
 							else if (world.isAir(popPos.down()))
 							{
-								biome.genCeilObjects(world, popPos.down(), random);
+								//biome.genCeilObjects(world, popPos.down(), random);
+								LIST_CEIL.add(new BlockPos(popPos.down()));
 							}
 
 							// Wall Generation
@@ -239,9 +268,8 @@ public class BNWorldGenerator
 
 									if (bDown && bUp)
 									{
-										biome.genWallObjects(world, objPos, random);
-										//if (y < 37 && world.getBlockState(popPos).getBlock() instanceof BlockNetherBrick && random.nextInt(512) == 0)
-										//	wartCapGen.generate(world, popPos, random);
+										//biome.genWallObjects(world, objPos, random);
+										LIST_WALL.add(new BlockPos(objPos));
 									}
 								}
 							}
@@ -252,6 +280,31 @@ public class BNWorldGenerator
 				}
 			}
 		}
+		
+		for (BlockPos pos: LIST_FLOOR)
+			if (world.isAir(pos))
+			{
+				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
+				biome.genFloorObjects(world, pos, random);
+			}
+		
+		for (BlockPos pos: LIST_WALL)
+			if (world.isAir(pos))
+			{
+				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
+				biome.genWallObjects(world, pos, random);
+			}
+		
+		for (BlockPos pos: LIST_CEIL)
+			if (world.isAir(pos))
+			{
+				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
+				biome.genCeilObjects(world, pos, random);
+			}
+		
+		LIST_FLOOR.clear();
+		LIST_WALL.clear();
+		LIST_CEIL.clear();
 	}
 	
 	public static void smoothChunk(IWorld world, int cx, int cz)
@@ -327,23 +380,6 @@ public class BNWorldGenerator
 			}
 		}
 	}
-	
-	/*private static BlockPos downRay(World world, BlockPos start)
-	{
-		int dist = 0;
-		Block b;
-		BlockPos p;
-		for (int j = start.getY(); j > 31; j--)
-		{
-			p = new BlockPos(start.getX(), j, start.getZ());
-			b = world.getBlockState(p).getBlock();
-			if (b != Blocks.AIR && (b instanceof BlockNetherrack || b instanceof BlockSoulSand || world.getBlockState(p).getMaterial() == Material.LAVA))
-			{
-				return new BlockPos(start.getX(), j, start.getZ());
-			}
-		}
-		return null;
-	}*/
 	
 	/*public static BlockPos getNearestCity(World world, int cx, int cz)
 	{

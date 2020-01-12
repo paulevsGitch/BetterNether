@@ -19,7 +19,20 @@ public class StructureReeds implements IStructure
 			BlockState med = BlocksRegister.BLOCK_NETHER_REED.getDefaultState().with(BlockNetherReed.TOP, false);
 			int h = random.nextInt(3);
 			for (int i = 0; i < h; i++)
-				BlocksHelper.setWithoutUpdate(world, pos.up(i), med);
+			{
+				BlockPos posN = pos.up(i);
+				BlockPos up = posN.up();
+				if (world.isAir(posN))
+				{
+					if (world.isAir(up))
+						BlocksHelper.setWithoutUpdate(world, posN, med);
+					else
+					{
+						BlocksHelper.setWithoutUpdate(world, posN, BlocksRegister.BLOCK_NETHER_REED.getDefaultState());
+						return;
+					}
+				}
+			}
 			BlocksHelper.setWithoutUpdate(world, pos.up(h), BlocksRegister.BLOCK_NETHER_REED.getDefaultState());
 		}
 	}
