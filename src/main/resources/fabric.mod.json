@@ -1,40 +1,44 @@
 {
-  "schemaVersion": 1,
-  "id": "betternether",
-  "version": "${version}",
+	"schemaVersion": 1,
+	"id": "betternether",
+	"version": "${version}",
 
-  "name": "Better Nether",
-  "description": "This is an example description! Tell everyone what your mod is about!",
-  "authors": [
-    "paulevs"
-  ],
-  "contact": {
-    "homepage": "https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/wip-mods/2930448-better-nether",
-    "sources": "https://github.com/paulevsGitch/BetterNether/tree/mc_1.15.1"
-  },
+	"name": "Better Nether",
+	"description": "Mod that improves Nether",
+	"authors": [
+		"paulevs"
+	],
+	"contributors": [
+		"paulevs (programming, art, ideas, ru/en translations)",
+		"edos_ (builder, design help)"
+	],
+	"contact": {
+		"homepage": "https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/wip-mods/2930448-better-nether",
+		"sources": "https://github.com/paulevsGitch/BetterNether/tree/mc_1.15.1"
+	},
 
-  "license": "CC0-1.0",
-  "icon": "assets/betternether/icon.png",
+	"license": "CC0-1.0",
+	"icon": "assets/betternether/icon.png",
 
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "paulevs.betternether.BetterNether"
-    ],
-    "client": [
-      "paulevs.betternether.client.BetterNetherClient"
-    ]
-  },
-  "mixins": [
-  	"betternether.mixins.json"
-  ],
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"paulevs.betternether.BetterNether"
+		],
+		"client": [
+			"paulevs.betternether.client.BetterNetherClient"
+		]
+	},
+	"mixins": [
+		"betternether.mixins.json"
+	],
 
-  "depends": {
-    "fabricloader": ">=0.7.2",
-    "fabric": "*",
-    "minecraft": "1.15.x"
-  },
-  "suggests": {
-    "flamingo": "*"
-  }
+	"depends": {
+		"fabricloader": ">=0.7.2",
+		"fabric": "*",
+		"minecraft": "1.15.x"
+	},
+	"suggests": {
+		"flamingo": "*"
+	}
 }

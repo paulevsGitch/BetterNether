@@ -9,9 +9,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
+import paulevs.betternether.biomes.NetherBiome.StructureType;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.noise.WorleyNoiseOctaved3D;
 import paulevs.betternether.structures.IStructure;
+import paulevs.betternether.structures.plants.StructureReeds;
+import paulevs.betternether.structures.plants.StructureWartCap;
 
 public class NetherBiome
 {
@@ -27,26 +30,17 @@ public class NetherBiome
 	protected String name;
 	protected NetherBiome edge;
 	protected int edgeSize;
-	protected List<NetherBiome> subbiomes;
+	protected List<Subbiome> subbiomes;
 	protected NetherBiome parrent;
+	protected float maxSubBiomeChance = 0;
 	
 	public NetherBiome(String name)
 	{
 		this.name = name;
 		edge = this;
 		edgeSize = 0;
-		//sl = 0;
-		subbiomes = new ArrayList<NetherBiome>();
-		subbiomes.add(this);
-		
-		Random random = new Random(name.hashCode());
-		for (int i = 0; i < 100 && !testBlock.isOpaque(testBlock.getDefaultState()); i++)
-		{
-			testBlock = Registry.BLOCK.get(random.nextInt(256));
-		}
-		if (!testBlock.isOpaque(testBlock.getDefaultState()))
-			testBlock = Blocks.STONE;
-		System.out.println(name + ": " + testBlock);
+		subbiomes = new ArrayList<Subbiome>();
+		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.08F, true);
 	}
 	
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random) {}
@@ -108,15 +102,24 @@ public class NetherBiome
 		edgeSize = size;
 	}
 	
-	public void addSubBiome(NetherBiome biome)
+	public void addSubBiome(NetherBiome biome, float chance)
 	{
-		subbiomes.add(biome);
+		int index = subbiomes.size() - 1;
+		if (index >= 0)
+			chance += subbiomes.get(index).chance;
+		maxSubBiomeChance = chance;
 		biome.parrent = this;
 	}
 	
 	public NetherBiome getSubBiome(Random random)
 	{
-		return subbiomes.get(random.nextInt(subbiomes.size()));
+		if (subbiomes.size() == 0)
+			return this;
+		float chance = random.nextFloat() * maxSubBiomeChance;
+		for (Subbiome biome: subbiomes)
+			if (biome.canGenerate(chance))
+				return biome.biome;
+		return this;
 	}
 	
 	public NetherBiome getParrentBiome()
@@ -149,7 +152,7 @@ public class NetherBiome
 		this.addStructure(structure, type, dens, limit);
 	}
 	
-	protected void addStructure(IStructure structure, StructureType type, float density, boolean useNoise)
+	private void addStructure(IStructure structure, StructureType type, float density, boolean useNoise)
 	{
 		switch(type)
 		{
@@ -193,6 +196,23 @@ public class NetherBiome
 		boolean canGenerate(Random random, BlockPos pos)
 		{
 			return (!useNoise || getFeatureNoise(pos, id) < 0.25) && random.nextFloat() < density;
+		}
+	}
+	
+	protected class Subbiome
+	{
+		NetherBiome biome;
+		float chance;
+		
+		Subbiome(NetherBiome biome, float chance)
+		{
+			this.biome = biome;
+			this.chance = chance;
+		}
+		
+		public boolean canGenerate(float chance)
+		{
+			return chance < this.chance;
 		}
 	}
 }

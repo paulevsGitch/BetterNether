@@ -40,7 +40,7 @@
 	"block.betternether.bone_reed_door": "Костяно-тростниковая дверь",
 	"block.betternether.bone_slab": "Костяная плита",
 	"block.betternether.bone_stairs": "Костяные ступени",
-	"block.betternether.bone_block.betternether": "Костяная плитка",
+	"block.betternether.bone_tile": "Костяная плитка",
 	"block.betternether.bone_wall": "Костяная стена",
 	
 	"block.betternether.chest_of_drawers": "Комод",
@@ -64,13 +64,15 @@
 	"block.betternether.cincinnasite_pot": "Цинцинназитовый горшок",
 	"block.betternether.cincinnasite_slab": "Цинцинназитовая плита",
 	"block.betternether.cincinnasite_stairs": "Цинцинназитовые ступени",
-	"block.betternether.cincinnasite_block.betternether.large": "Большая цинцинназитовая плитка",
-	"block.betternether.cincinnasite_block.betternether.small": "Маленькая цинцинназитовая плитка",
+	"block.betternether.cincinnasite_tile_large": "Большая цинцинназитовая плитка",
+	"block.betternether.cincinnasite_tile_small": "Маленькая цинцинназитовая плитка",
 	"block.betternether.cincinnasite_wall": "Цинцинназитовая стена",
 
 	"block.betternether.egg_plant": "Яйцевидное растение",
 
 	"block.betternether.eye_seed": "Глазное семечко",
+	
+	"block.betternether.farmland": "Грядка",
 
 	"block.betternether.gray_mold": "Серая плесень",
 
@@ -81,10 +83,10 @@
 
 	"block.betternether.magma_flower": "Семя магмового цветка",
 
-	"block.betternether.nether_brick_block.betternether.large": "Большая плитка из кирпича нижнего мира",
-	"block.betternether.nether_brick_block.betternether.slab": "Плита из маленькой плитки",
-	"block.betternether.nether_brick_block.betternether.small": "Маленькая плитка из кирпича нижнего мира",
-	"block.betternether.nether_brick_block.betternether.stairs": "Ступени из маленькой плитки",
+	"block.betternether.nether_brick_tile_large": "Большая плитка",
+	"block.betternether.nether_brick_tile_slab": "Плита из маленькой плитки",
+	"block.betternether.nether_brick_tile_small": "Маленькая плитка",
+	"block.betternether.nether_brick_tile_stairs": "Ступени из маленькой плитки",
 	"block.betternether.nether_brick_wall": "Стена из кирпича нижнего мира",
 	"block.betternether.nether_cactus": "Кактус нижнего мира",
 	"block.betternether.nether_grass": "Трава нижнего мира",
@@ -95,9 +97,9 @@
 
 	"block.betternether.orange_mushroom": "Оранжевый гриб",
 
-	"block.betternether.pig_statue_01": "Статуя возрождения",
+	"block.betternether.pig_statue_respawner": "Статуя возрождения",
 
-	"block.betternether.potted_plant_1": "Растение в горшке",
+	"block.betternether.potted_plant": "Растение в горшке",
 
 	"block.betternether.quartz_glass": "Кварцевое стекло",
 	"block.betternether.quartz_glass_framed": "Кварцевое стекло в рамке",

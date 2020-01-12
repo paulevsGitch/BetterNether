@@ -40,7 +40,7 @@
 	"block.betternether.bone_reed_door": "Bone-Reed Door",
 	"block.betternether.bone_slab": "Bone Slab",
 	"block.betternether.bone_stairs": "Bone Stairs",
-	"block.betternether.bone_block.betternether": "Bone Tile",
+	"block.betternether.bone_tile": "Bone Tile",
 	"block.betternether.bone_wall": "Bone Wall",
 	
 	"block.betternether.chest_of_drawers": "Chest of Drawers",
@@ -71,6 +71,8 @@
 	"block.betternether.egg_plant": "Egg Plant",
 
 	"block.betternether.eye_seed": "Eye Seed",
+	
+	"block.betternether.farmland": "Farmland",
 
 	"block.betternether.gray_mold": "Gray Mold",
 
@@ -95,9 +97,9 @@
 
 	"block.betternether.orange_mushroom": "Orange Mushroom",
 
-	"block.betternether.pig_statue_01": "Respawner Statue",
+	"block.betternether.pig_statue_respawner": "Respawner Statue",
 
-	"block.betternether.potted_plant_1": "Potted Plant",
+	"block.betternether.potted_plant": "Potted Plant",
 
 	"block.betternether.quartz_glass": "Quartz Glass",
 	"block.betternether.quartz_glass_framed": "Framed Quartz Glass",

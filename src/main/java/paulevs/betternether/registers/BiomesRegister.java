@@ -40,10 +40,10 @@ public class BiomesRegister
 		registerBiome(BIOME_WART_FOREST);
 		registerBiome(BIOME_GRASSLANDS);
 		registerBiome(BIOME_MUSHROOM_FOREST);
-		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 3); // 10
-		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 3); // 9
-		registerSubBiome(BIOME_BONE_REEF, BIOME_GRASSLANDS);
-		registerSubBiome(BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS);
+		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 10);
+		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 9);
+		registerSubBiome(BIOME_BONE_REEF, BIOME_GRASSLANDS, 0.3F);
+		registerSubBiome(BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);
 		registerBiome(NETHER_SWAMPLAND);
 	}
 	
@@ -64,11 +64,11 @@ public class BiomesRegister
 		}
 	}
 	
-	protected static void registerSubBiome(NetherBiome biome, NetherBiome mainBiome)
+	protected static void registerSubBiome(NetherBiome biome, NetherBiome mainBiome, float chance)
 	{
 		if (Config.getBoolean("biomes", biome.getRegistryName(), true))
 		{
-			mainBiome.addSubBiome(biome);
+			mainBiome.addSubBiome(biome, chance);
 		}
 	}
 	

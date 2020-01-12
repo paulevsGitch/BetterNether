@@ -10,19 +10,17 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 
 public class BiomeMap
 {
-	protected static final int DEPTH = 3;
-	protected static final int SIZE = 1 << DEPTH;
-	
 	private static final HashMap<ChunkPos, BiomeChunk> MAPS = new HashMap<ChunkPos, BiomeChunk>();
+	private static final ChunkRandom RANDOM = new ChunkRandom();
+	
 	private final int sizeXZ;
 	private final int sizeY;
 	protected final int maxHeight;
-	
-	private static final ChunkRandom RANDOM = new ChunkRandom();
-	
-	private OpenSimplexNoise noiseX;
-	private OpenSimplexNoise noiseY;
-	private OpenSimplexNoise noiseZ;
+	private final int depth;
+	private final int size;
+	private final OpenSimplexNoise noiseX;
+	private final OpenSimplexNoise noiseY;
+	private final OpenSimplexNoise noiseZ;
 	
 	public BiomeMap(long seed, int sizeXZ, int sizeY)
 	{
@@ -33,6 +31,12 @@ public class BiomeMap
 		this.sizeXZ = sizeXZ;
 		this.sizeY = sizeY;
 		maxHeight = 128 / sizeY;
+		
+		depth = (int) Math.ceil(Math.log(Math.max(sizeXZ, sizeY)) / Math.log(2));
+		size = 1 << depth;
+		
+		System.out.println("Map depth " + depth);
+		System.out.println("Map size " + size);
 	}
 	
 	public void clearCache()
@@ -43,14 +47,14 @@ public class BiomeMap
 	
 	public NetherBiome getBiome(int bx, int by, int bz)
 	{
-		int x = bx * SIZE / sizeXZ;
-		int y = by * SIZE / sizeY;
-		int z = bz * SIZE / sizeXZ;
+		int x = bx * size / sizeXZ;
+		int y = by * size / sizeY;
+		int z = bz * size / sizeXZ;
 		int nx = x;
 		int ny = y;
 		int nz = z;
 		
-		for (int i = 0; i < DEPTH; i++)
+		for (int i = 0; i < depth; i++)
 		{
 			nx = (int) Math.round(x + noiseX.eval(x, y, z) * 0.5 + 0.5) >> 1;
 			ny = (int) Math.round(y + noiseY.eval(x, y, z) * 0.5 + 0.5) >> 1;
