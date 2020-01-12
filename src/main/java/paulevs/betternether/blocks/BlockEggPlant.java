@@ -13,12 +13,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.GhastEntity;
+import net.minecraft.entity.mob.ZombiePigmanEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import paulevs.betternether.config.Config;
 
 public class BlockEggPlant extends BlockCommonPlant
 {
@@ -30,6 +32,8 @@ public class BlockEggPlant extends BlockCommonPlant
 	public BlockEggPlant()
 	{
 		super(MaterialColor.WHITE_TERRACOTTA);
+		enableModDamage = Config.getBoolean("egg_plant", "mob_damage", true);
+		enablePlayerDamage = Config.getBoolean("egg_plant", "player_damage", true);
 	}
 	
 	@Override
@@ -50,7 +54,7 @@ public class BlockEggPlant extends BlockCommonPlant
 	{
 		if (enableModDamage && entity instanceof LivingEntity && !((LivingEntity) entity).hasStatusEffect(StatusEffects.POISON))
 		{
-			if (entity instanceof GhastEntity)// || entity instanceof PigzombieEntity || entity instanceof FireflyEntity)
+			if (entity instanceof GhastEntity || entity instanceof ZombiePigmanEntity)// || entity instanceof FireflyEntity)
 				return;
 			((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 3));
 		}

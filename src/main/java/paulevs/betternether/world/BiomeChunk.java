@@ -8,29 +8,33 @@ import paulevs.betternether.registers.BiomesRegister;
 public class BiomeChunk
 {
 	protected static final int WIDTH = 16;
-	protected static final int HEIGHT = (128 * 3) >> BiomeMap.DEPTH;
 	private static final int SM_WIDTH = WIDTH >> 1;
-	private static final int SM_HEIGHT = HEIGHT >> 1;
 	private static final int MASK_A = SM_WIDTH - 1;
-	private static final int MASK_B = SM_HEIGHT - 1;
 	private static final int MASK_C = WIDTH - 1;
-	private static final int MASK_D = HEIGHT - 1;
-	private static final NetherBiome[][][] PRE_BIO = new NetherBiome[SM_HEIGHT][SM_WIDTH][SM_WIDTH];
 	
-	private NetherBiome[][][] biomes = new NetherBiome[HEIGHT][WIDTH][WIDTH];
+	private final int sm_height;
+	private final int maxY;
+	private final int maskB;
+	private final NetherBiome[][][] PreBio;
+	private final NetherBiome[][][] biomes;
 	
-	public BiomeChunk(Random random)
+	public BiomeChunk(BiomeMap map, Random random)
 	{
-		for (int y = 0; y < SM_HEIGHT; y++)
+		sm_height = clampOne(map.maxHeight >> 1);
+		maskB = sm_height - 1;
+		maxY = map.maxHeight - 1;
+		PreBio = new NetherBiome[sm_height][SM_WIDTH][SM_WIDTH];
+		biomes = new NetherBiome[map.maxHeight][WIDTH][WIDTH];
+		
+		for (int y = 0; y < sm_height; y++)
 			for (int x = 0; x < SM_WIDTH; x++)
 				for (int z = 0; z < SM_WIDTH; z++)
-					PRE_BIO[y][x][z] = BiomesRegister.getBiomeID(random.nextInt(BiomesRegister.getBiomeCount()));
+					PreBio[y][x][z] = BiomesRegister.getBiomeID(random.nextInt(BiomesRegister.getBiomeCount()));
 		
-		biomes = new NetherBiome[HEIGHT][WIDTH][WIDTH];
-		for (int y = 0; y < HEIGHT; y++)
+		for (int y = 0; y < map.maxHeight; y++)
 			for (int x = 0; x < WIDTH; x++)
 				for (int z = 0; z < WIDTH; z++)
-					biomes[y][x][z] = PRE_BIO[offsetY(y, random)][offsetXZ(y, random)][offsetXZ(y, random)].getSubBiome(random);
+					biomes[y][x][z] = PreBio[offsetY(y, random)][offsetXZ(x, random)][offsetXZ(z, random)].getSubBiome(random);
 	}
 
 	public NetherBiome getBiome(int x, int y, int z)
@@ -40,16 +44,21 @@ public class BiomeChunk
 	
 	private int offsetXZ(int x, Random random)
 	{
-		return ((x + random.nextInt(2)) >> 2) & MASK_A;
+		return ((x + random.nextInt(2)) >> 1) & MASK_A;
 	}
 	
 	private int offsetY(int y, Random random)
 	{
-		return ((y + random.nextInt(2)) >> 2) & MASK_B;
+		return ((y + random.nextInt(2)) >> 1) & maskB;
 	}
 	
 	private int clamp(int y)
 	{
-		return y < 0 ? 0 : y > MASK_D ? MASK_D : y;
+		return y < 0 ? 0 : y > maxY ? maxY : y;
+	}
+	
+	private int clampOne(int x)
+	{
+		return x < 1 ? 1 : x;
 	}
 }

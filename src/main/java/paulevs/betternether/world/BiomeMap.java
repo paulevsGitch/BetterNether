@@ -10,9 +10,13 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 
 public class BiomeMap
 {
-	protected static final int DEPTH = 6;
+	protected static final int DEPTH = 3;
+	protected static final int SIZE = 1 << DEPTH;
 	
 	private static final HashMap<ChunkPos, BiomeChunk> MAPS = new HashMap<ChunkPos, BiomeChunk>();
+	private final int sizeXZ;
+	private final int sizeY;
+	protected final int maxHeight;
 	
 	private static final ChunkRandom RANDOM = new ChunkRandom();
 	
@@ -20,12 +24,15 @@ public class BiomeMap
 	private OpenSimplexNoise noiseY;
 	private OpenSimplexNoise noiseZ;
 	
-	public BiomeMap(long seed)
+	public BiomeMap(long seed, int sizeXZ, int sizeY)
 	{
 		RANDOM.setSeed(seed);
 		noiseX = new OpenSimplexNoise(RANDOM.nextLong());
 		noiseY = new OpenSimplexNoise(RANDOM.nextLong());
 		noiseZ = new OpenSimplexNoise(RANDOM.nextLong());
+		this.sizeXZ = sizeXZ;
+		this.sizeY = sizeY;
+		maxHeight = 128 / sizeY;
 	}
 	
 	public void clearCache()
@@ -36,9 +43,9 @@ public class BiomeMap
 	
 	public NetherBiome getBiome(int bx, int by, int bz)
 	{
-		int x = bx;
-		int y = by;
-		int z = bz;
+		int x = bx * SIZE / sizeXZ;
+		int y = by * SIZE / sizeY;
+		int z = bz * SIZE / sizeXZ;
 		int nx = x;
 		int ny = y;
 		int nz = z;
@@ -61,7 +68,7 @@ public class BiomeMap
 		if (chunk == null)
 		{
 			RANDOM.setSeed(cpos.x, cpos.z);
-			chunk = new BiomeChunk(RANDOM);
+			chunk = new BiomeChunk(this, RANDOM);
 			MAPS.put(cpos, chunk);
 		}
 		

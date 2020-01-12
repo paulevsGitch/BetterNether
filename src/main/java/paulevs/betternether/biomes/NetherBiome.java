@@ -28,6 +28,7 @@ public class NetherBiome
 	protected NetherBiome edge;
 	protected int edgeSize;
 	protected List<NetherBiome> subbiomes;
+	protected NetherBiome parrent;
 	
 	public NetherBiome(String name)
 	{
@@ -94,6 +95,7 @@ public class NetherBiome
 	public void setEdge(NetherBiome edge)
 	{
 		this.edge = edge;
+		edge.parrent = this;
 	}
 
 	public int getEdgeSize()
@@ -109,11 +111,34 @@ public class NetherBiome
 	public void addSubBiome(NetherBiome biome)
 	{
 		subbiomes.add(biome);
+		biome.parrent = this;
 	}
 	
 	public NetherBiome getSubBiome(Random random)
 	{
 		return subbiomes.get(random.nextInt(subbiomes.size()));
+	}
+	
+	public NetherBiome getParrentBiome()
+	{
+		return this.parrent;
+	}
+	
+	public boolean hasEdge()
+	{
+		return edge != null;
+	}
+	
+	public boolean hasParrent()
+	{
+		return parrent != null;
+	}
+	
+	public boolean isSame(NetherBiome biome)
+	{
+		return biome == this ||
+				(biome.hasParrent() && biome.getParrentBiome() == this);// ||
+				//(this.hasParrent() && this.getParrentBiome() == biome);
 	}
 	
 	protected void addStructure(String name, IStructure structure, StructureType type, float density, boolean useNoise)

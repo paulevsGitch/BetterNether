@@ -10,6 +10,7 @@ import paulevs.betternether.biomes.NetherGrasslands;
 import paulevs.betternether.biomes.NetherMushroomForest;
 import paulevs.betternether.biomes.NetherMushroomForestEdge;
 import paulevs.betternether.biomes.NetherPoorGrasslands;
+import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.biomes.NetherWartForest;
 import paulevs.betternether.biomes.NetherWartForestEdge;
 import paulevs.betternether.config.Config;
@@ -29,6 +30,7 @@ public class BiomesRegister
 	public static final NetherBiome BIOME_WART_FOREST_EDGE = new NetherWartForestEdge("Nether Wart Forest Edge");
 	public static final NetherBiome BIOME_BONE_REEF = new NetherBoneReef("Bone Reef");
 	public static final NetherBiome BIOME_POOR_GRASSLANDS = new NetherPoorGrasslands("Poor Nether Grasslands");
+	public static final NetherBiome NETHER_SWAMPLAND = new NetherSwampland("Nether Swampland");
 	
 	public static void register()
 	{
@@ -38,10 +40,11 @@ public class BiomesRegister
 		registerBiome(BIOME_WART_FOREST);
 		registerBiome(BIOME_GRASSLANDS);
 		registerBiome(BIOME_MUSHROOM_FOREST);
-		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 10);
-		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 9);
+		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 3); // 10
+		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 3); // 9
 		registerSubBiome(BIOME_BONE_REEF, BIOME_GRASSLANDS);
 		registerSubBiome(BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS);
+		registerBiome(NETHER_SWAMPLAND);
 	}
 	
 	protected static void registerBiome(NetherBiome biome)

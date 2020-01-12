@@ -20,13 +20,10 @@ public class BNWorldGenerator
 	//public static IStructureWorld[] globalStructuresLava;
 	//public static IStructureWorld[] globalStructuresCave;
 	
-	public static boolean hasCleaningPass = Config.getBoolean("generator_world", "cleaning_pass", true);
+	public static boolean hasCleaningPass;
 
 	//private static float structueDensity = 1F / 64F;
-	private static float oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
-	
-	public static boolean enablePlayerDamage;
-	public static boolean enableMobDamage;
+	private static float oreDensity;
 	
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	
@@ -37,11 +34,21 @@ public class BNWorldGenerator
 	private static NetherBiome[][][] biomeArray = new NetherBiome[8][64][8];
 	private static BiomeMap map;
 	private static int cacheTimer = 0;
+	private static int sizeXZ;
+	private static int sizeY;
+	
+	public static void loadConfig()
+	{
+		hasCleaningPass = Config.getBoolean("generator_world", "cleaning_pass", true);
+		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
+		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 32);
+		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
+	}
 
 	public static void init(IWorld world)
 	{
 		long seed = world.getSeed();
-		map = new BiomeMap(seed);
+		map = new BiomeMap(seed, sizeXZ, sizeY);
 		
 		/*if (ConfigLoader.hasCities())
 		{
@@ -78,7 +85,7 @@ public class BNWorldGenerator
 				for (int z = 0; z < 8; z++)
 				{
 					wz = sz + (z << 1);
-					biomeArray[x][y][z] = map.getBiome(wx, wy, wz);
+					biomeArray[x][y][z] = getBiome(wx, wy, wz);//map.getBiome(wx, wy, wz);
 				}
 			}
 		}
@@ -87,11 +94,67 @@ public class BNWorldGenerator
 	
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random)
 	{
-		x = (x + random.nextInt(4) - 2) >> 1;
-		y = (y + random.nextInt(4) - 2) >> 1;
-		z = (z + random.nextInt(4) - 2) >> 1;
+		x = (x/* + random.nextInt(4) - 2*/) >> 1;
+		y = (y/* + random.nextInt(4) - 2*/) >> 1;
+		z = (z/* + random.nextInt(4) - 2*/) >> 1;
 		
 		return biomeArray[clamp(x, 7)][clamp(y, 63)][clamp(z, 7)];
+	}
+	
+	private static NetherBiome getBiome(int x, int y, int z)
+	{
+		NetherBiome biome = map.getBiome(x, y, z);
+		
+		if (biome.hasEdge() || (biome.hasParrent() && biome.getParrentBiome().hasEdge()))
+		{
+			NetherBiome search = biome;
+			if (biome.hasParrent())
+				search = biome.getParrentBiome();
+			int d = search.getEdgeSize();
+			
+			boolean edge = !search.isSame(map.getBiome(x + d, y, z));
+			edge = edge || !search.isSame(map.getBiome(x - d, y, z));
+			edge = edge || !search.isSame(map.getBiome(x, y + d, z));
+			edge = edge || !search.isSame(map.getBiome(x, y - d, z));
+			edge = edge || !search.isSame(map.getBiome(x, y, z + d));
+			edge = edge || !search.isSame(map.getBiome(x, y, z - d));
+			edge = edge || !search.isSame(map.getBiome(x - d, y - d, z - d));
+			edge = edge || !search.isSame(map.getBiome(x + d, y - d, z - d));
+			edge = edge || !search.isSame(map.getBiome(x - d, y - d, z + d));
+			edge = edge || !search.isSame(map.getBiome(x + d, y - d, z + d));
+			edge = edge || !search.isSame(map.getBiome(x - d, y + d, z - d));
+			edge = edge || !search.isSame(map.getBiome(x + d, y + d, z - d));
+			edge = edge || !search.isSame(map.getBiome(x - d, y + d, z + d));
+			edge = edge || !search.isSame(map.getBiome(x + d, y + d, z + d));
+			
+			/*boolean edge = false;
+			for (int i = -1; i < 2; i++)
+				for (int j = -1; j < 2; j++)
+					for (int k = -1; k < 2; k++)
+						if (i != 0 || j != 0 || k != 0)
+							edge = edge || !search.isSame(map.getBiome(x + d * i, y + d * j, z + d * k));*/
+			if (edge)
+			{
+				biome = search.getEdge();
+			}
+		}
+		
+		/*if (biome.hasEdge())
+		{
+			int d = biome.getEdgeSize();
+			boolean edge = !biome.isSame(map.getBiome(x + d, y, z));
+			edge = edge || !biome.isSame(map.getBiome(x - d, y, z));
+			edge = edge || !biome.isSame(map.getBiome(x, y + d, z));
+			edge = edge || !biome.isSame(map.getBiome(x, y - d, z));
+			edge = edge || !biome.isSame(map.getBiome(x, y, z + d));
+			edge = edge || !biome.isSame(map.getBiome(x, y, z - d));
+			if (edge)
+			{
+				biome = biome.getEdge();
+			}
+		}*/
+		
+		return biome;
 	}
 	
 	private static int clamp(int x, int max)
@@ -147,8 +210,7 @@ public class BNWorldGenerator
 			for (int z = 0; z < 16; z++)
 			{
 				int wz = sz + z;
-				//biome = map.getBiome(wx, 10, wz);
-				biome = getBiomeLocal(x, 10, z, random);
+				biome = getBiomeLocal(x, 10, z, random);//getBiome(wx, 10, wz);
 				popPos.set(wx, 128, wz);
 				BlocksHelper.setWithoutUpdate(world, popPos, biome.testBlock.getDefaultState());
 			}
