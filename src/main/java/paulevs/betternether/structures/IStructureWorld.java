@@ -29,7 +29,6 @@ public interface IStructureWorld
 		randomize(random);
 		if (getAirFraction(world, pos) > 0.8 && getAirFractionBottom(world, pos) < 0.3)
 		{
-			System.out.println(pos.getX() + " " + pos.getY() + " " + pos.getZ());
 			generate(world, pos);
 		}
 	}

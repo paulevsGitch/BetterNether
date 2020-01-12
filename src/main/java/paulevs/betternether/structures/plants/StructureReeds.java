@@ -14,7 +14,7 @@ public class StructureReeds implements IStructure
 {
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
-		if (BlocksRegister.BLOCK_NETHER_REED.canPlaceAt(world.getBlockState(pos), world, pos))
+		if (world.isAir(pos) && BlocksRegister.BLOCK_NETHER_REED.canPlaceAt(world.getBlockState(pos), world, pos))
 		{
 			BlockState med = BlocksRegister.BLOCK_NETHER_REED.getDefaultState().with(BlockNetherReed.TOP, false);
 			int h = random.nextInt(3);

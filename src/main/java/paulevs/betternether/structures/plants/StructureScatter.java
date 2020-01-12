@@ -41,7 +41,7 @@ public class StructureScatter implements IStructure
 	@Override
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
-		if (canPlaceAt(world, pos))
+		if (world.isAir(pos) && canPlaceAt(world, pos))
 		{
 			BlockState state = plantBlock.getDefaultState();
 			for (int i = 0; i < 16; i++)

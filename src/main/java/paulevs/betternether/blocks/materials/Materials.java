@@ -15,6 +15,7 @@ public class Materials
 		return FabricBlockSettings.of(Materials.COMMON_WOOD)
 				.sounds(BlockSoundGroup.WOOD)
 				.breakByTool(FabricToolTags.AXES)
+				.hardness(1)
 				.materialColor(color);
 	}
 }

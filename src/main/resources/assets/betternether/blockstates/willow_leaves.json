@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=north": { "model": "betternether:block/willow_leaves", "x": 270, "y": 180 },
+		"facing=south": { "model": "betternether:block/willow_leaves", "x": 270 },
+		"facing=east": { "model": "betternether:block/willow_leaves", "x": 270, "y": 270 },
+		"facing=west": { "model": "betternether:block/willow_leaves", "x": 270, "y": 90 },
+		"facing=up": { "model": "betternether:block/willow_leaves" },
+		"facing=down": { "model": "betternether:block/willow_leaves", "x": 180 }
+    }
+}

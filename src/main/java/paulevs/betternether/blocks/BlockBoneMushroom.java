@@ -56,8 +56,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
 	{
-		stateManager.add(FACING);
-		stateManager.add(AGE);
+		stateManager.add(FACING, AGE);
 	}
 
 	@Override

@@ -24,7 +24,6 @@ public class StructureBoneReef implements IStructure
 			StructureNBT bone = bones[random.nextInt(bones.length)];
 			bone.randomRM(random);
 			bone.generateCentered(world, pos.down(random.nextInt(4)));
-			System.out.println("B " + pos.getX() + " " + pos.getY() + " " + pos.getZ());
 		}
 	}
 }

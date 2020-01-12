@@ -1,0 +1,23 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "betternether:block/willow_bark",
+		"texture": "betternether:block/willow_bark",
+		"log": "betternether:block/willow_log_top_2"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 4, 0, 4 ],
+			"to": [ 12, 11, 12 ],
+			"faces": {
+				"down": { "uv": [ 4, 4, 12, 12 ], "texture": "#log", "cullface": "down" },
+				"up": { "uv": [ 4, 4, 12, 12 ], "texture": "#texture" },
+				"north": { "uv": [ 4, 5, 12, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 4, 5, 12, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 4, 5, 12, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 4, 5, 12, 16 ], "texture": "#texture" }
+			}
+		}
+	]
+}

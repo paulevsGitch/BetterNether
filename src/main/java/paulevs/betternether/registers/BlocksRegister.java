@@ -70,6 +70,12 @@ import paulevs.betternether.blocks.BlockStalagnatePlanks;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStalagnateStem;
 import paulevs.betternether.blocks.BlockWartSeed;
+import paulevs.betternether.blocks.BlockWillowBark;
+import paulevs.betternether.blocks.BlockWillowBranch;
+import paulevs.betternether.blocks.BlockWillowLog;
+import paulevs.betternether.blocks.BlockWillowLeaves;
+import paulevs.betternether.blocks.BlockWillowSapling;
+import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.CincinnasiteForge;
 import paulevs.betternether.blocks.PigStatueRespawner;
 import paulevs.betternether.config.Config;
@@ -205,9 +211,13 @@ public class BlocksRegister
 	public static final Block BLOCK_QUARTZ_GLASS_FRAMED_BLACK = new BNGlass(BLOCK_QUARTZ_GLASS_FRAMED);
 	public static final Block BLOCK_STALAGNATE_BOWL = new BlockStalagnateBowl();
 	public static final Block BLOCK_CHEST_OF_DRAWERS = new BlockChestOfDrawers();
-	
-	// -- NEW --
 	public static final Block FARMLAND = new BlockFarmland();
+	public static final Block WILLOW_BRANCH = new BlockWillowBranch();
+	public static final Block WILLOW_LEAVES = new BlockWillowLeaves();
+	public static final Block WILLOW_TRUNK = new BlockWillowTrunk();
+	public static final Block WILLOW_LOG = new BlockWillowLog();
+	public static final Block WILLOW_BARK = new BlockWillowBark();
+	public static final Block WILLOW_SAPLING = new BlockWillowSapling();
 	
 	public static void register()
 	{
@@ -339,8 +349,13 @@ public class BlocksRegister
 		registerBlock("quartz_glass_framed_black", BLOCK_QUARTZ_GLASS_FRAMED_BLACK);
 		registerBlockNI("stalagnate_bowl", BLOCK_STALAGNATE_BOWL);
 		registerBlock("chest_of_drawers", BLOCK_CHEST_OF_DRAWERS);
-		
 		registerBlock("farmland", FARMLAND);
+		registerBlockNI("willow_branch", WILLOW_BRANCH);
+		registerBlockNI("willow_leaves", WILLOW_LEAVES);
+		registerBlockNI("willow_trunk", WILLOW_TRUNK);
+		registerBlock("willow_log", WILLOW_LOG);
+		registerBlock("willow_bark", WILLOW_BARK);
+		registerBlock("willow_sapling", WILLOW_SAPLING);
 	}
 	
 	private static void registerBlock(String name, Block block)

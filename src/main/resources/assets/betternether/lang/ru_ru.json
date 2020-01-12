@@ -171,5 +171,12 @@
 
 	"commands.findnethercity.usage.console": "Не указаны координаты",
 	"commands.findnethercity.usage.coordinates": "Неверный формат координат",
-	"commands.findnethercity.usage": "Неверное число аргументов, допустимо /findNetherCity или /findNetherCity x y z"
+	"commands.findnethercity.usage": "Неверное число аргументов, допустимо /findNetherCity или /findNetherCity x y z",
+	
+	"block.betternether.willow_branch": "Ветки ивы",
+	"block.betternether.willow_leaves": "Листья ивы",
+	"block.betternether.willow_trunk": "Ствол ивы",
+	"block.betternether.willow_log": "Древесина ивы",
+	"block.betternether.willow_bark": "Ивовая кора",
+	"block.betternether.willow_sapling": "Саженец ивы"
 }

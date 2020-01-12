@@ -171,5 +171,12 @@
 
 	"commands.findnethercity.usage.console": "No coordinates in input",
 	"commands.findnethercity.usage.coordinates": "Wrong coordinates",
-	"commands.findnethercity.usage": "Wrong usage, must be /findNetherCity or /findNetherCity x y z"
+	"commands.findnethercity.usage": "Wrong usage, must be /findNetherCity or /findNetherCity x y z",
+	
+	"block.betternether.willow_branch": "Willow Branch",
+	"block.betternether.willow_leaves": "Willow Leaves",
+	"block.betternether.willow_trunk": "Willow Trunk",
+	"block.betternether.willow_log": "Willow Log",
+	"block.betternether.willow_bark": "Willow Bark",
+	"block.betternether.willow_sapling": "Willow Sapling"
 }

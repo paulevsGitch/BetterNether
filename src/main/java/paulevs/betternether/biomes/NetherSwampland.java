@@ -12,12 +12,14 @@ import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureNetherGrass;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSmoker;
+import paulevs.betternether.structures.plants.StructureWillow;
 
 public class NetherSwampland extends NetherBiome
 {
 	public NetherSwampland(String name)
 	{
 		super(name);
+		addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.1F, false);
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.8F, false);
 		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.1F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
