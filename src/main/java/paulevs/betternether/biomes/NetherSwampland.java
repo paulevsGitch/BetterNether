@@ -9,9 +9,11 @@ import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.plants.StructureBlackBush;
+import paulevs.betternether.structures.plants.StructureBlackVine;
 import paulevs.betternether.structures.plants.StructureNetherGrass;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSmoker;
+import paulevs.betternether.structures.plants.StructureSwampGrass;
 import paulevs.betternether.structures.plants.StructureWillow;
 
 public class NetherSwampland extends NetherBiome
@@ -23,7 +25,8 @@ public class NetherSwampland extends NetherBiome
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.8F, false);
 		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.1F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
-		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.4F, false);
+		addStructure("nether_grass", new StructureSwampGrass(), StructureType.FLOOR, 0.4F, false);
+		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.7F, false);
 	}
 	
 	@Override

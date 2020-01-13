@@ -178,5 +178,27 @@
 	"block.betternether.willow_trunk": "Willow Trunk",
 	"block.betternether.willow_log": "Willow Log",
 	"block.betternether.willow_bark": "Willow Bark",
-	"block.betternether.willow_sapling": "Willow Sapling"
+	"block.betternether.willow_sapling": "Willow Sapling",
+	
+	"block.betternether.swamp_grass": "Swamp Grass",
+	
+	"block.betternether.willow_planks": "Willow Planks",
+	"block.betternether.willow_stairs": "Willow Stairs",
+	"block.betternether.willow_slab": "Willow Slab",
+	"block.betternether.willow_fence": "Willow Fence",
+	"block.betternether.willow_gate": "Willow Gate",
+	"block.betternether.willow_button": "Willow Button",
+	"block.betternether.willow_plate": "Willow Pressure Plate",
+	"block.betternether.willow_trapdoor": "Willow Trapdoor",
+	"block.betternether.willow_door": "Willow Door",
+	
+	"block.betternether.wart_planks": "Wart Planks",
+	"block.betternether.wart_stairs": "Wart Stairs",
+	"block.betternether.wart_slab": "Wart Slab",
+	"block.betternether.wart_fence": "Wart Fence",
+	"block.betternether.wart_gate": "Wart Gate",
+	"block.betternether.wart_button": "Wart Button",
+	"block.betternether.wart_plate": "Wart Pressure Plate",
+	"block.betternether.wart_trapdoor": "Wart Trapdoor",
+	"block.betternether.wart_door": "Wart Door"
 }

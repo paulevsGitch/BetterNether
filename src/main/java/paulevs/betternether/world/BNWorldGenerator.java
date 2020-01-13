@@ -24,7 +24,7 @@ public class BNWorldGenerator
 	
 	private static boolean hasCleaningPass;
 
-	//private static float structueDensity = 1F / 64F;
+	private static float structueDensity;
 	private static float oreDensity;
 	
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
@@ -46,6 +46,7 @@ public class BNWorldGenerator
 	{
 		hasCleaningPass = Config.getBoolean("generator_world", "cleaning_pass", true);
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
+		structueDensity = Config.getFloat("generator_world", "structure_density", 1F / 64F);
 		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
 		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
 	}
@@ -177,7 +178,7 @@ public class BNWorldGenerator
 		makeBiomeArray(sx, sz);
 		
 		//Structure Generator
-		if (random.nextFloat() < 0.1)
+		if (random.nextFloat() < structueDensity)
 		{
 			BlockPos pos = new BlockPos(sx + random.nextInt(8), 32 + random.nextInt(120 - 32), sz + random.nextInt(8));
 			while (world.getBlockState(pos).getBlock() != Blocks.AIR && pos.getY() > 32)

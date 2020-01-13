@@ -143,7 +143,7 @@
 	"block.betternether.reeds_block": "Тростниковый блок",
 	"block.betternether.reeds_button": "Тростниковая кнопка",
 	"block.betternether.reeds_fence": "Тростниковый забор",
-	"block.betternether.reeds_gate": "Тростниковые ворота",
+	"block.betternether.reeds_gate": "Тростниковая калитка",
 	"block.betternether.reeds_ladder": "Тростниковая лестница",
 	"block.betternether.reeds_plate": "Тростниковая нажимная плита",
 	"block.betternether.reeds_slab": "Тростниковая плита",
@@ -160,7 +160,7 @@
 	"block.betternether.stalagnate_planks": "Сталагнатовые доски",
 	"block.betternether.stalagnate_planks_button": "Сталагнатовая кнопка",
 	"block.betternether.stalagnate_planks_fence": "Сталагнатовый забор",
-	"block.betternether.stalagnate_planks_gate": "Сталагнатовые ворота",
+	"block.betternether.stalagnate_planks_gate": "Сталагнатовая калитка",
 	"block.betternether.stalagnate_planks_plate": "Сталагнатовая нажимная плита",
 	"block.betternether.stalagnate_planks_slab": "Сталагнатовая плита",
 	"block.betternether.stalagnate_planks_stairs": "Сталагнатовые ступени",
@@ -178,5 +178,27 @@
 	"block.betternether.willow_trunk": "Ствол ивы",
 	"block.betternether.willow_log": "Древесина ивы",
 	"block.betternether.willow_bark": "Ивовая кора",
-	"block.betternether.willow_sapling": "Саженец ивы"
+	"block.betternether.willow_sapling": "Саженец ивы",
+	
+	"block.betternether.swamp_grass": "Болотная трава",
+	
+	"block.betternether.willow_planks": "Ивовые доски",
+	"block.betternether.willow_stairs": "Ивовые ступени",
+	"block.betternether.willow_slab": "Ивовая плита",
+	"block.betternether.willow_fence": "Ивовый забор",
+	"block.betternether.willow_gate": "Ивовая калитка",
+	"block.betternether.willow_button": "Ивовая кнопка",
+	"block.betternether.willow_plate": "Ивовая нажимная плита",
+	"block.betternether.willow_trapdoor": "Ивовый люк",
+	"block.betternether.willow_door": "Ивовая дверь",
+	
+	"block.betternether.wart_planks": "Доски из нароста",
+	"block.betternether.wart_stairs": "Ступени из нароста",
+	"block.betternether.wart_slab": "Полублок из нароста",
+	"block.betternether.wart_fence": "Забор из нароста",
+	"block.betternether.wart_gate": "Калитка из нароста",
+	"block.betternether.wart_button": "Кнопка из нароста",
+	"block.betternether.wart_plate": "Нажимная плита из нароста",
+	"block.betternether.wart_trapdoor": "Люк из нароста",
+	"block.betternether.wart_door": "Дверь из нароста"
 }

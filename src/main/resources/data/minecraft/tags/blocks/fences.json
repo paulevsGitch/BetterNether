@@ -2,6 +2,8 @@
 	"replace": "false",
 	"values": [
 		"betternether:stalagnate_planks_fence",
-		"betternether:reeds_fence"
+		"betternether:reeds_fence",
+		"betternether:willow_fence",
+		"betternether:wart_fence"
 	]
 }

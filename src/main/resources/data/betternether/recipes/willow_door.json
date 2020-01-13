@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:willow_planks"
+    }
+  },
+  "result": {
+    "item": "betternether:willow_door",
+	"count": 3
+  }
+}

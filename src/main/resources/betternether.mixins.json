@@ -7,7 +7,9 @@
     "LadderMixin",
 	"MushroomMixin",
 	"PlayerMixin",
-	PlayerManagerMixin
+	"PlayerManagerMixin",
+	"MapMixin",
+	"MapStateMixin"
   ],
   "client": [],
   "injectors": {

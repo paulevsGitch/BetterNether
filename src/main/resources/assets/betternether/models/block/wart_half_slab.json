@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab",
+    "textures": {
+        "bottom": "betternether:block/wart_planks",
+        "top": "betternether:block/wart_planks",
+        "side": "betternether:block/wart_planks"
+    }
+}

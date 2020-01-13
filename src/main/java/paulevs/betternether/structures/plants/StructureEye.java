@@ -47,5 +47,4 @@ public class StructureEye implements IStructure
 		
 		BlocksHelper.setWithoutUpdate(world, pos.down(h), eyeState);
 	}
-
 }

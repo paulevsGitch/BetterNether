@@ -56,7 +56,7 @@ public class BlocksHelper
 	public static int upRay(IWorld world, BlockPos pos, int maxDist)
 	{
 		int length = 0;
-		for (int j = 1; j < maxDist && (world.getBlockState(pos.up(j)).getBlock() == Blocks.AIR); j++)
+		for (int j = 1; j < maxDist && (world.isAir(pos.up(j))); j++)
 			length ++;
 		return length;
 	}
@@ -64,7 +64,7 @@ public class BlocksHelper
 	public static int downRay(IWorld world, BlockPos pos, int maxDist)
 	{
 		int length = 0;
-		for (int j = 1; j < maxDist && (world.getBlockState(pos.down(j)).getBlock() == Blocks.AIR); j++)
+		for (int j = 1; j < maxDist && (world.isAir(pos.down(j))); j++)
 			length ++;
 		return length;
 	}

@@ -1,10 +1,10 @@
 {
     "variants": {
-        "facing=north": { "model": "betternether:block/willow_leaves", "x": 270, "y": 180 },
-		"facing=south": { "model": "betternether:block/willow_leaves", "x": 270 },
-		"facing=east": { "model": "betternether:block/willow_leaves", "x": 270, "y": 270 },
-		"facing=west": { "model": "betternether:block/willow_leaves", "x": 270, "y": 90 },
-		"facing=up": { "model": "betternether:block/willow_leaves" },
-		"facing=down": { "model": "betternether:block/willow_leaves", "x": 180 }
+        "facing=north": { "model": "betternether:block/willow_leaves_side" },
+		"facing=south": { "model": "betternether:block/willow_leaves_side", "y": 180 },
+		"facing=east": { "model": "betternether:block/willow_leaves_side", "y": 90 },
+		"facing=west": { "model": "betternether:block/willow_leaves_side", "y": 270 },
+		"facing=up": { "model": "betternether:block/willow_leaves_top" },
+		"facing=down": { "model": "betternether:block/willow_leaves_bottom", "x": 180 }
     }
 }

@@ -1,6 +1,8 @@
 {
 	"replace": "false",
 	"values": [
-		"betternether:stalagnate_planks"
+		"betternether:stalagnate_planks",
+		"betternether:willow_planks",
+		"betternether:wart_planks"
 	]
 }

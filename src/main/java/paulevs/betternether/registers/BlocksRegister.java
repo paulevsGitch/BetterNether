@@ -23,6 +23,7 @@ import paulevs.betternether.blocks.BNSlab;
 import paulevs.betternether.blocks.BNStairs;
 import paulevs.betternether.blocks.BNTrapdoor;
 import paulevs.betternether.blocks.BNWall;
+import paulevs.betternether.blocks.BlockBlackVine;
 import paulevs.betternether.blocks.BlockAgave;
 import paulevs.betternether.blocks.BlockBarrelCactus;
 import paulevs.betternether.blocks.BlockBlackApple;
@@ -69,10 +70,12 @@ import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnatePlanks;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStalagnateStem;
+import paulevs.betternether.blocks.BlockWartPlanks;
 import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.blocks.BlockWillowBark;
 import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLog;
+import paulevs.betternether.blocks.BlockWillowPlanks;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
@@ -218,6 +221,26 @@ public class BlocksRegister
 	public static final Block WILLOW_LOG = new BlockWillowLog();
 	public static final Block WILLOW_BARK = new BlockWillowBark();
 	public static final Block WILLOW_SAPLING = new BlockWillowSapling();
+	public static final Block SWAMP_GRASS = new BlockNetherGrass();
+	public static final Block WILLOW_PLANKS = new BlockWillowPlanks();
+	public static final Block BLOCK_WILLOW_STAIRS = new BNStairs(WILLOW_PLANKS);
+	public static final Block BLOCK_WILLOW_SLAB = new BNSlab(WILLOW_PLANKS);
+	public static final Block BLOCK_WILLOW_FENCE = new BNFence(WILLOW_PLANKS);
+	public static final Block BLOCK_WILLOW_GATE = new BNGate(WILLOW_PLANKS);
+	public static final Block BLOCK_WILLOW_BUTTON = new BNButton(WILLOW_PLANKS);
+	public static final Block BLOCK_WILLOW_PLATE = new BNPlate(ActivationRule.EVERYTHING, WILLOW_PLANKS);
+	public static final Block BLOCK_WILLOW_TRAPDOOR = new BNTrapdoor(WILLOW_PLANKS);
+	public static final Block BLOCK_WILLOW_DOOR = new BNDoor(WILLOW_PLANKS);
+	public static final Block WART_PLANKS = new BlockWartPlanks();
+	public static final Block BLOCK_WART_STAIRS = new BNStairs(WART_PLANKS);
+	public static final Block BLOCK_WART_SLAB = new BNSlab(WART_PLANKS);
+	public static final Block BLOCK_WART_FENCE = new BNFence(WART_PLANKS);
+	public static final Block BLOCK_WART_GATE = new BNGate(WART_PLANKS);
+	public static final Block BLOCK_WART_BUTTON = new BNButton(WART_PLANKS);
+	public static final Block BLOCK_WART_PLATE = new BNPlate(ActivationRule.EVERYTHING, WART_PLANKS);
+	public static final Block BLOCK_WART_TRAPDOOR = new BNTrapdoor(WART_PLANKS);
+	public static final Block BLOCK_WART_DOOR = new BNDoor(WART_PLANKS);
+	public static final Block BLOCK_BLACK_VINE = new BlockBlackVine();
 	
 	public static void register()
 	{
@@ -356,6 +379,26 @@ public class BlocksRegister
 		registerBlock("willow_log", WILLOW_LOG);
 		registerBlock("willow_bark", WILLOW_BARK);
 		registerBlock("willow_sapling", WILLOW_SAPLING);
+		registerBlock("swamp_grass", SWAMP_GRASS);
+		registerBlock("willow_planks", WILLOW_PLANKS);
+		registerBlock("willow_stairs", BLOCK_WILLOW_STAIRS);
+		registerBlock("willow_slab", BLOCK_WILLOW_SLAB);
+		registerBlock("willow_fence", BLOCK_WILLOW_FENCE);
+		registerBlock("willow_gate", BLOCK_WILLOW_GATE);
+		registerBlock("willow_button", BLOCK_WILLOW_BUTTON);
+		registerBlock("willow_plate", BLOCK_WILLOW_PLATE);
+		registerBlock("willow_trapdoor", BLOCK_WILLOW_TRAPDOOR);
+		registerBlock("willow_door", BLOCK_WILLOW_DOOR);
+		registerBlock("wart_planks", WART_PLANKS);
+		registerBlock("wart_stairs", BLOCK_WART_STAIRS);
+		registerBlock("wart_slab", BLOCK_WART_SLAB);
+		registerBlock("wart_fence", BLOCK_WART_FENCE);
+		registerBlock("wart_gate", BLOCK_WART_GATE);
+		registerBlock("wart_button", BLOCK_WART_BUTTON);
+		registerBlock("wart_plate", BLOCK_WART_PLATE);
+		registerBlock("wart_trapdoor", BLOCK_WART_TRAPDOOR);
+		registerBlock("wart_door", BLOCK_WART_DOOR);
+		registerBlock("black_vine", BLOCK_BLACK_VINE);
 	}
 	
 	private static void registerBlock(String name, Block block)

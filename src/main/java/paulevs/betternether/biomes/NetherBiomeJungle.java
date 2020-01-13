@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.structures.plants.StructureBlackVine;
 import paulevs.betternether.structures.plants.StructureEggPlant;
 import paulevs.betternether.structures.plants.StructureEye;
 import paulevs.betternether.structures.plants.StructureLucis;
@@ -27,6 +28,7 @@ public class NetherBiomeJungle extends NetherBiome
 		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.1F, false);
 		addStructure("lucis", new StructureLucis(), StructureType.WALL, 0.05F, false);
 		addStructure("eye", new StructureEye(), StructureType.CEIL, 0.2F, true);
+		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.2F, true);
 	}
 
 	@Override
