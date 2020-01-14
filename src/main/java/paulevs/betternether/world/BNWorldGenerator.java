@@ -100,7 +100,7 @@ public class BNWorldGenerator
 	private static BlockPos pos;
 	private static MutableBlockPos popPos = new MutableBlockPos();
 	
-	private static NetherBiome[][][] biomeArray = new NetherBiome[8][64][8];
+	private static final NetherBiome[][][] BIO_ARRAY = new NetherBiome[8][64][8];
 
 	public static void init(World world)
 	{
@@ -135,13 +135,13 @@ public class BNWorldGenerator
 				wy = (y << 1);
 				for (int z = 0; z < 8; z++)
 				{
-					wz = sx | (z << 1);
+					wz = sz | (z << 1);
 					id = getBiome(wx, wy, wz);
-					biomeArray[x][y][z] = BiomeRegister.getBiomeID(id);
-					if (isEdge(id, wx, y, wz, biomeArray[x][y][z].getEdgeSize()))
-						biomeArray[x][y][z] = biomeArray[x][y][z].getEdge();
+					BIO_ARRAY[x][y][z] = BiomeRegister.getBiomeID(id);
+					if (isEdge(id, wx, wy, wz, BIO_ARRAY[x][y][z].getEdgeSize()))
+						BIO_ARRAY[x][y][z] = BIO_ARRAY[x][y][z].getEdge();
 					else
-						biomeArray[x][y][z] = biomeArray[x][y][z].getSubBiome(wx, y, wz);
+						BIO_ARRAY[x][y][z] = BIO_ARRAY[x][y][z].getSubBiome(wx, wy, wz);
 				}
 			}
 		}
@@ -158,7 +158,7 @@ public class BNWorldGenerator
 		z = (z + random.nextInt(2)) >> 1;
 		if (z > 7)
 			z = 7;
-		return biomeArray[x][y][z];
+		return BIO_ARRAY[x][y][z];
 	}
 
 	public static void generate(World world, int cx, int cz, Random random)
@@ -321,19 +321,19 @@ public class BNWorldGenerator
 							east = popPos.east();
 							west = popPos.west();
 							if (isAir(world, north) && isAir(world, south))
-								pos.add(popPos);
+								pos.add(new BlockPos(popPos));
 							else if (isAir(world, east) && isAir(world, west))
-								pos.add(popPos);
+								pos.add(new BlockPos(popPos));
 							else if (isAir(world, up) && isAir(world, down))
-								pos.add(popPos);
+								pos.add(new BlockPos(popPos));
 							else if (isAir(world, popPos.north().east().down()) && isAir(world, popPos.south().west().up()))
-								pos.add(popPos);
+								pos.add(new BlockPos(popPos));
 							else if (isAir(world, popPos.south().east().down()) && isAir(world, popPos.north().west().up()))
-								pos.add(popPos);
+								pos.add(new BlockPos(popPos));
 							else if (isAir(world, popPos.north().west().down()) && isAir(world, popPos.south().east().up()))
-								pos.add(popPos);
+								pos.add(new BlockPos(popPos));
 							else if (isAir(world, popPos.south().west().down()) && isAir(world, popPos.north().east().up()))
-								pos.add(popPos);
+								pos.add(new BlockPos(popPos));
 						}
 					}
 			}
