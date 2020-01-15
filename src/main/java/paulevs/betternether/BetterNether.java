@@ -5,6 +5,7 @@ import paulevs.betternether.config.Config;
 import paulevs.betternether.registers.BiomesRegister;
 import paulevs.betternether.registers.BlockEntitiesRegister;
 import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registers.EntityRegister;
 import paulevs.betternether.registers.ItemsRegister;
 import paulevs.betternether.world.BNWorldGenerator;
 
@@ -21,6 +22,7 @@ public class BetterNether implements ModInitializer
 		ItemsRegister.register();
 		BiomesRegister.register();
 		BNWorldGenerator.loadConfig();
+		EntityRegister.register();
 		Config.save();
 	}
 }

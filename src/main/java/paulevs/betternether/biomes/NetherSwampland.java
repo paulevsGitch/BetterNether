@@ -10,7 +10,6 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureBlackVine;
-import paulevs.betternether.structures.plants.StructureNetherGrass;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSmoker;
 import paulevs.betternether.structures.plants.StructureSwampGrass;

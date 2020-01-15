@@ -24,6 +24,15 @@ dependencies {
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
+	
+	// https://mvnrepository.com/artifact/javax.annotation/jsr305
+	compile group: 'javax.annotation', name: 'jsr305', version: '1.0'
+}
+
+repositories {
+    maven {
+        url "https://maven.onehippo.com/maven2/"
+    }
 }
 
 processResources {

@@ -17,12 +17,13 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
 public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable
@@ -57,6 +58,13 @@ public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable
 	{
 		return SHAPE;
 	}
+	
+	@Override
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
+	{
+		BlockState upState = world.getBlockState(pos.up());
+		return upState.getBlock() == this || upState.isSideSolidFullSquare(world, pos, Direction.DOWN);
+	}
 
 	@Environment(EnvType.CLIENT)
 	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos)
@@ -73,8 +81,7 @@ public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, IWorld world, BlockPos pos, BlockPos neighborPos)
 	{
-		BlockState upState = world.getBlockState(pos.up());
-		if (upState.getBlock() == this || upState.isSideSolidFullSquare(world, pos, Direction.DOWN))
+		if (canPlaceAt(state, world, pos))
 			return world.getBlockState(pos.down()).getBlock() == this ? state.with(BOTTOM, false) : state.with(BOTTOM, true);
 		else
 			return Blocks.AIR.getDefaultState();
