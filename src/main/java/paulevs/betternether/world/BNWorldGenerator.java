@@ -15,6 +15,7 @@ import paulevs.betternether.config.Config;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.IStructureWorld;
 import paulevs.betternether.structures.StructureBuilding;
+import paulevs.betternether.structures.StructureCaves;
 
 public class BNWorldGenerator
 {
@@ -41,6 +42,9 @@ public class BNWorldGenerator
 	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(1024);
 	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(1024);
 	private static final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(1024);
+	
+	//private static StructureRoad road;
+	private static StructureCaves caves;
 	
 	public static void loadConfig()
 	{
@@ -84,6 +88,9 @@ public class BNWorldGenerator
 			cityManager.load(world);
 			cityManager.setDistance(ConfigLoader.getCityDistance());
 		}*/
+		
+		//road = new StructureRoad(seed);
+		caves = new StructureCaves(seed);
 	}
 	
 	public static void clearCache()
@@ -211,6 +218,10 @@ public class BNWorldGenerator
 				globalStructuresCave[random.nextInt(globalStructuresCave.length)].generateSubterrain(world, pos, random);
 			}
 		}
+		
+		popPos.set(sx, 0, sz);
+		//road.generate(world, popPos, random);
+		caves.generate(world, popPos, random);
 
 		// Total Populator
 		for (int x = 0; x < 16; x++)
@@ -219,11 +230,14 @@ public class BNWorldGenerator
 			for (int z = 0; z < 16; z++)
 			{
 				int wz = sz + z;
+				
 				for (int y = 5; y < 126; y++)
 				{
 					popPos.set(wx, y, wz);
+					
 					if (BlocksHelper.isNetherGround(world.getBlockState(popPos)))
 					{
+						
 						biome = getBiomeLocal(x, y, z, random);
 						
 						if (world.isAir(popPos.up()))

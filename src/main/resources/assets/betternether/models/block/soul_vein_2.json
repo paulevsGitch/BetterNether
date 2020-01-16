@@ -1,0 +1,6 @@
+{
+	"parent": "betternether:block/soul_vein_1",
+	"textures": {
+        "texture": "betternether:block/soul_vein_2"
+    }
+}

@@ -46,6 +46,7 @@ import paulevs.betternether.blocks.BlockEyeVine;
 import paulevs.betternether.blocks.BlockEyeball;
 import paulevs.betternether.blocks.BlockEyeballSmall;
 import paulevs.betternether.blocks.BlockFarmland;
+import paulevs.betternether.blocks.BlockGoldenVine;
 import paulevs.betternether.blocks.BlockGrayMold;
 import paulevs.betternether.blocks.BlockInkBush;
 import paulevs.betternether.blocks.BlockInkBushSeed;
@@ -64,12 +65,14 @@ import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.BlockRedMold;
 import paulevs.betternether.blocks.BlockReedsBlock;
 import paulevs.betternether.blocks.BlockSmoker;
+import paulevs.betternether.blocks.BlockSoulVein;
 import paulevs.betternether.blocks.BlockStalagnate;
 import paulevs.betternether.blocks.BlockStalagnateBark;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnatePlanks;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStalagnateStem;
+import paulevs.betternether.blocks.BlockVeinedSand;
 import paulevs.betternether.blocks.BlockWartPlanks;
 import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.blocks.BlockWillowBark;
@@ -241,6 +244,10 @@ public class BlocksRegister
 	public static final Block BLOCK_WART_TRAPDOOR = new BNTrapdoor(WART_PLANKS);
 	public static final Block BLOCK_WART_DOOR = new BNDoor(WART_PLANKS);
 	public static final Block BLOCK_BLACK_VINE = new BlockBlackVine();
+	public static final Block BLOCK_VEINED_SAND = new BlockVeinedSand();
+	public static final Block BLOCK_SOUL_VEIN = new BlockSoulVein();
+	public static final Block BLOCK_BLOOMING_VINE = new BlockBlackVine();
+	public static final Block BLOCK_GOLDEN_VINE = new BlockGoldenVine();
 	
 	public static void register()
 	{
@@ -399,6 +406,10 @@ public class BlocksRegister
 		registerBlock("wart_trapdoor", BLOCK_WART_TRAPDOOR);
 		registerBlock("wart_door", BLOCK_WART_DOOR);
 		registerBlock("black_vine", BLOCK_BLACK_VINE);
+		registerBlockNI("veined_sand", BLOCK_VEINED_SAND);
+		registerBlock("soul_vein", BLOCK_SOUL_VEIN);
+		registerBlock("blooming_vine", BLOCK_BLOOMING_VINE);
+		registerBlock("golden_vine", BLOCK_GOLDEN_VINE);
 	}
 	
 	private static void registerBlock(String name, Block block)

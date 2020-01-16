@@ -38,7 +38,6 @@ public class BiomeMap
 	
 	public void clearCache()
 	{
-		System.out.println("Maps: " + MAPS.size());
 		MAPS.clear();
 	}
 	
@@ -53,9 +52,9 @@ public class BiomeMap
 		
 		for (int i = 0; i < depth; i++)
 		{
-			nx = (int) Math.round(x + noiseX.eval(x, y, z) * 0.5 + 0.5) >> 1;
-			ny = (int) Math.round(y + noiseY.eval(x, y, z) * 0.5 + 0.5) >> 1;
-			nz = (int) Math.round(z + noiseZ.eval(x, y, z) * 0.5 + 0.5) >> 1;
+			nx = (int) Math.round(x + noiseX.eval(y, z) * 0.5 + 0.5) >> 1;
+			ny = (int) Math.round(y + noiseY.eval(x, z) * 0.5 + 0.5) >> 1;
+			nz = (int) Math.round(z + noiseZ.eval(x, y) * 0.5 + 0.5) >> 1;
 			
 			x = nx;
 			y = ny;

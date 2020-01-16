@@ -200,5 +200,11 @@
 	"block.betternether.wart_button": "Wart Button",
 	"block.betternether.wart_plate": "Wart Pressure Plate",
 	"block.betternether.wart_trapdoor": "Wart Trapdoor",
-	"block.betternether.wart_door": "Wart Door"
+	"block.betternether.wart_door": "Wart Door",
+	
+	"block.betternether.black_vine": "Black Vine",
+	"block.betternether.veined_sand": "Veined Sand",
+	"block.betternether.soul_vein": "Soul Vein",
+	"block.betternether.blooming_vine": "Blooming vine",
+	"block.betternether.golden_vine": "Golden Vine"
 }

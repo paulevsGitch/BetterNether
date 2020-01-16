@@ -1,0 +1,23 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/soul_vein_1" },
+			{ "model": "betternether:block/soul_vein_2" },
+			{ "model": "betternether:block/soul_vein_3" },
+			{ "model": "betternether:block/soul_vein_4" },
+			{ "model": "betternether:block/soul_vein_1", "y": 90 },
+			{ "model": "betternether:block/soul_vein_2", "y": 90 },
+			{ "model": "betternether:block/soul_vein_3", "y": 90 },
+			{ "model": "betternether:block/soul_vein_4", "y": 90 },
+			{ "model": "betternether:block/soul_vein_1", "y": 180 },
+			{ "model": "betternether:block/soul_vein_2", "y": 180 },
+			{ "model": "betternether:block/soul_vein_3", "y": 180 },
+			{ "model": "betternether:block/soul_vein_4", "y": 180 },
+			{ "model": "betternether:block/soul_vein_1", "y": 270 },
+			{ "model": "betternether:block/soul_vein_2", "y": 270 },
+			{ "model": "betternether:block/soul_vein_3", "y": 270 },
+			{ "model": "betternether:block/soul_vein_4", "y": 270 }
+		]
+    }
+}

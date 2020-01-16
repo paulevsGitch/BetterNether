@@ -29,7 +29,7 @@ public class BiomeChunk
 		for (int y = 0; y < sm_height; y++)
 			for (int x = 0; x < SM_WIDTH; x++)
 				for (int z = 0; z < SM_WIDTH; z++)
-					PreBio[y][x][z] = BiomesRegister.getBiomeID(random.nextInt(BiomesRegister.getBiomeCount()));
+					PreBio[y][x][z] = BiomesRegister.getBiome(random);//BiomesRegister.getBiomeID(random.nextInt(BiomesRegister.getBiomeCount()));
 		
 		for (int y = 0; y < map.maxHeight; y++)
 			for (int x = 0; x < WIDTH; x++)

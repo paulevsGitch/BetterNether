@@ -200,5 +200,11 @@
 	"block.betternether.wart_button": "Кнопка из нароста",
 	"block.betternether.wart_plate": "Нажимная плита из нароста",
 	"block.betternether.wart_trapdoor": "Люк из нароста",
-	"block.betternether.wart_door": "Дверь из нароста"
+	"block.betternether.wart_door": "Дверь из нароста",
+	
+	"block.betternether.black_vine": "Чёрная лоза",
+	"block.betternether.veined_sand": "Жилистый песок",
+	"block.betternether.soul_vein": "Жила души",
+	"block.betternether.blooming_vine": "Цветущая лоза",
+	"block.betternether.golden_vine": "Золотая лоза"
 }

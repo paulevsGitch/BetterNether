@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.config.Config;
@@ -22,20 +20,17 @@ public class NetherBiome
 	private ArrayList<StructureInfo> generatorsWall = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> generatorsCeil = new ArrayList<StructureInfo>();
 	
-	public Block testBlock = Blocks.AIR;
-	
 	protected String name;
 	protected NetherBiome edge;
 	protected int edgeSize;
 	protected List<Subbiome> subbiomes;
 	protected NetherBiome parrent;
 	protected float maxSubBiomeChance = 1;
+	protected float genChance = 1;
 	
 	public NetherBiome(String name)
 	{
 		this.name = name;
-		edge = this;
-		edgeSize = 0;
 		subbiomes = new ArrayList<Subbiome>();
 		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.08F, true);
 		subbiomes.add(new Subbiome(this, 1));
@@ -102,8 +97,7 @@ public class NetherBiome
 	
 	public void addSubBiome(NetherBiome biome, float chance)
 	{
-		int index = subbiomes.size() - 1;
-		maxSubBiomeChance += subbiomes.get(index).chance;
+		maxSubBiomeChance += chance;
 		biome.parrent = this;
 		subbiomes.add(new Subbiome(biome, maxSubBiomeChance));
 	}
@@ -209,5 +203,15 @@ public class NetherBiome
 		{
 			return chance < this.chance;
 		}
+	}
+	
+	public boolean canGenerate(float chance)
+	{
+		return chance < this.genChance;
+	}
+	
+	public void setGenChance(float chance)
+	{
+		this.genChance = chance;
 	}
 }

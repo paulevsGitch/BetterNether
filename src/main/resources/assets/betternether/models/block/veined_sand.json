@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/veined_sand_side",
+        "down": "block/soul_sand",
+        "up": "betternether:block/veined_sand_top",
+        "north": "betternether:block/veined_sand_side",
+        "east": "betternether:block/veined_sand_side",
+        "south": "betternether:block/veined_sand_side",
+        "west": "betternether:block/veined_sand_side"
+    }
+}

@@ -1,6 +1,5 @@
 package paulevs.betternether.entity;
 
-import java.awt.Color;
 import java.util.EnumSet;
 import java.util.Random;
 
@@ -15,15 +14,13 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.FlyingEntity;
-import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 import paulevs.betternether.blocks.BlockCommonPlant;
 import paulevs.betternether.blocks.BlockNetherGrass;
 
@@ -194,7 +191,7 @@ public class EntityFirefly extends FlyingEntity// MobEntityWithAi
 			double z = this.firefly.getZ() + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
 			
 			BlockPos pos = this.firefly.getBlockPos();
-			if (this.firefly.world.isAir(pos.down()) && this.firefly.world.isAir(pos.down(1)) && this.firefly.world.isAir(pos.down(2)))
+			if (this.firefly.world.isAir(pos.down()) && this.firefly.world.isAir(pos.down(2)) && this.firefly.world.isAir(pos.down(3)))
 				y = pos.getY() - 3;
 			else
 				y = this.firefly.getY() + (double) ((random.nextFloat() * 2.0F - 1.0F) * 8.0F);

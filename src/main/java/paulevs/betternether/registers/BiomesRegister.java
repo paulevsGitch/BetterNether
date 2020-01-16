@@ -1,6 +1,7 @@
 package paulevs.betternether.registers;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Random;
 
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.biomes.NetherBiomeGravelDesert;
@@ -18,8 +19,7 @@ import paulevs.betternether.config.Config;
 
 public class BiomesRegister
 {
-	private static int biomeCount = 0;
-	public static final HashMap<Integer, NetherBiome> REGISTRY = new HashMap<Integer, NetherBiome>();
+	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	
 	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiome("Empty Nether");
 	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherBiomeGravelDesert("Gravel Desert");
@@ -34,6 +34,8 @@ public class BiomesRegister
 	public static final NetherBiome NETHER_SWAMPLAND = new NetherSwampland("Nether Swampland");
 	public static final NetherBiome NETHER_SWAMPLAND_TERRACES = new NetherSwamplandTerraces("Nether Swampland Terraces");
 	
+	private static int maxChance = 0;
+	
 	public static void register()
 	{
 		registerBiome(BIOME_EMPTY_NETHER);
@@ -42,8 +44,8 @@ public class BiomesRegister
 		registerBiome(BIOME_WART_FOREST);
 		registerBiome(BIOME_GRASSLANDS);
 		registerBiome(BIOME_MUSHROOM_FOREST);
-		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 10);
-		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 9);
+		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 2);
+		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 2);
 		registerSubBiome(BIOME_BONE_REEF, BIOME_GRASSLANDS, 0.3F);
 		registerSubBiome(BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);
 		registerBiome(NETHER_SWAMPLAND);
@@ -52,9 +54,13 @@ public class BiomesRegister
 	
 	protected static void registerBiome(NetherBiome biome)
 	{
-		if (Config.getBoolean("biomes", biome.getRegistryName(), true))
+		String regName = biome.getRegistryName();
+		if (Config.getBoolean("biomes", regName, true))
 		{
-			REGISTRY.put(biomeCount++, biome);
+			float chance = Config.getFloat("biomes", regName + "_chance", 1);
+			maxChance += chance;
+			biome.setGenChance(maxChance);
+			REGISTRY.add(biome);
 		}
 	}
 	
@@ -69,19 +75,20 @@ public class BiomesRegister
 	
 	protected static void registerSubBiome(NetherBiome biome, NetherBiome mainBiome, float chance)
 	{
-		if (Config.getBoolean("biomes", biome.getRegistryName(), true))
+		String regName = biome.getRegistryName();
+		if (Config.getBoolean("biomes", regName, true))
 		{
+			chance = Config.getFloat("biomes", regName + "_subchance", chance);
 			mainBiome.addSubBiome(biome, chance);
 		}
 	}
 	
-	public static NetherBiome getBiomeID(int id)
+	public static NetherBiome getBiome(Random random)
 	{
-		return REGISTRY.get(id);
-	}
-
-	public static int getBiomeCount()
-	{
-		return biomeCount;
+		float chance = random.nextFloat() * maxChance;
+		for (NetherBiome biome: REGISTRY)
+			if (biome.canGenerate(chance))
+				return biome;
+		return REGISTRY.get(0);
 	}
 }

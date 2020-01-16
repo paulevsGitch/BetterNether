@@ -17,8 +17,8 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
@@ -26,12 +26,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
-public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable
+public class BlockGoldenVine  extends BlockBaseNotFull implements Fertilizable
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 16, 14);
 	public static final BooleanProperty BOTTOM = BooleanProperty.of("bottom");
 
-	public BlockBlackVine()
+	public BlockGoldenVine()
 	{
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.RED)
@@ -39,6 +39,7 @@ public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable
 				.noCollision()
 				.breakInstantly()
 				.nonOpaque()
+				.lightLevel(15)
 				.build());
 		this.setClimmable(true);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);

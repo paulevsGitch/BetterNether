@@ -12,6 +12,7 @@ import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureBlackVine;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSmoker;
+import paulevs.betternether.structures.plants.StructureSoulVein;
 import paulevs.betternether.structures.plants.StructureSwampGrass;
 import paulevs.betternether.structures.plants.StructureWillow;
 
@@ -22,10 +23,11 @@ public class NetherSwampland extends NetherBiome
 		super(name);
 		addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.1F, false);
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.8F, false);
+		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, false);
 		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.1F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
 		addStructure("nether_grass", new StructureSwampGrass(), StructureType.FLOOR, 0.4F, false);
-		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.7F, false);
+		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, false);
 	}
 	
 	@Override
