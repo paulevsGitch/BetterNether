@@ -12,7 +12,7 @@ public class BNItemAxe extends AxeItem
 	
 	public BNItemAxe(ToolMaterial material, int durability, float speed)
 	{
-		super(material, 1, -2.8F, ItemsRegister.defaultSettings().maxDamageIfAbsent(durability));
+		super(material, 1, -2.8F, ItemsRegister.defaultSettings());//.maxDamageIfAbsent(durability));
 		this.speed = speed;
 	}
 	

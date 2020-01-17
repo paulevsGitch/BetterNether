@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D",
+	"D#"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_sword"
+    },
+	"D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "betternether:cincinnasite_sword_diamond"
+  }
+}

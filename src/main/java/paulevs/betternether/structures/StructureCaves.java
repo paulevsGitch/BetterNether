@@ -71,16 +71,17 @@ public class StructureCaves implements IStructure
 			for (int z = 0; z < 16; z++)
 			{
 				int wz = pos.getZ() + z;
-				for (int y = 0; y < 24; y++)
+				for (int y = 23; y >= 0; y--)
 				{
 					int wy = offset + y;
 					B_POS.set(wx, wy, wz);
-					if (MASK[x][y][z] && BlocksHelper.isNetherGround(world.getBlockState(B_POS)))
+					if (MASK[x][y][z] && BlocksHelper.isGroundOrModContent(world.getBlockState(B_POS)))
 					{
-						BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.AIR.getDefaultState());
+						if (world.getBlockState(B_POS.up()).getBlock() == Blocks.NETHER_WART_BLOCK)
+							BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.NETHER_WART_BLOCK.getDefaultState());
+						else
+							BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.AIR.getDefaultState());
 					}
-					//else if (!MASK[x][y][z] && MASK[x][y - 1][z])
-					//	BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.DIAMOND_BLOCK.getDefaultState());
 				}
 			}
 		}

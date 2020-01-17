@@ -218,10 +218,6 @@ public class BNWorldGenerator
 				globalStructuresCave[random.nextInt(globalStructuresCave.length)].generateSubterrain(world, pos, random);
 			}
 		}
-		
-		popPos.set(sx, 0, sz);
-		//road.generate(world, popPos, random);
-		caves.generate(world, popPos, random);
 
 		// Total Populator
 		for (int x = 0; x < 16; x++)
@@ -235,9 +231,8 @@ public class BNWorldGenerator
 				{
 					popPos.set(wx, y, wz);
 					
-					if (BlocksHelper.isNetherGround(world.getBlockState(popPos)))
+					if (BlocksHelper.isNetherGroundMagma(world.getBlockState(popPos)))
 					{
-						
 						biome = getBiomeLocal(x, y, z, random);
 						
 						if (world.isAir(popPos.up()))
@@ -324,10 +319,14 @@ public class BNWorldGenerator
 	
 	public static void smoothChunk(IWorld world, int cx, int cz)
 	{
+		int wx = (cx << 4) | 8;
+		int wz = (cz << 4) | 8;
+		
+		popPos.set(wx, 0, wz);
+		caves.generate(world, popPos, world.getRandom());
+		
 		if (hasCleaningPass)
 		{
-			int wx = (cx << 4) | 8;
-			int wz = (cz << 4) | 8;
 			List<BlockPos> pos = new ArrayList<BlockPos>();
 			BlockPos up;
 			BlockPos down;

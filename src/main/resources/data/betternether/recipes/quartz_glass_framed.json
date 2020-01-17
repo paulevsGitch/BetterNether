@@ -10,8 +10,7 @@
       "item": "betternether:cincinnasite_forged"
     },
 	"G": {
-      "item": "betternether:quartz_glass",
-	  "data": 32767
+      "item": "betternether:quartz_glass"
     }
   },
   "result": {

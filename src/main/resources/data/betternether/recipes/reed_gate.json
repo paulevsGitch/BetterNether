@@ -9,8 +9,7 @@
       "item": "betternether:reeds_block"
     },
 	"l": {
-      "item": "minecraft:stick",
-	  "data": 32767
+      "item": "minecraft:stick"
     }
   },
   "result": {

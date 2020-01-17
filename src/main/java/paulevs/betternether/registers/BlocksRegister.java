@@ -46,6 +46,7 @@ import paulevs.betternether.blocks.BlockEyeVine;
 import paulevs.betternether.blocks.BlockEyeball;
 import paulevs.betternether.blocks.BlockEyeballSmall;
 import paulevs.betternether.blocks.BlockFarmland;
+import paulevs.betternether.blocks.BlockGeyser;
 import paulevs.betternether.blocks.BlockGoldenVine;
 import paulevs.betternether.blocks.BlockGrayMold;
 import paulevs.betternether.blocks.BlockInkBush;
@@ -248,6 +249,7 @@ public class BlocksRegister
 	public static final Block BLOCK_SOUL_VEIN = new BlockSoulVein();
 	public static final Block BLOCK_BLOOMING_VINE = new BlockBlackVine();
 	public static final Block BLOCK_GOLDEN_VINE = new BlockGoldenVine();
+	public static final Block BLOCK_GEYSER = new BlockGeyser();
 	
 	public static void register()
 	{
@@ -410,6 +412,7 @@ public class BlocksRegister
 		registerBlock("soul_vein", BLOCK_SOUL_VEIN);
 		registerBlock("blooming_vine", BLOCK_BLOOMING_VINE);
 		registerBlock("golden_vine", BLOCK_GOLDEN_VINE);
+		registerBlock("geyser", BLOCK_GEYSER);
 	}
 	
 	private static void registerBlock(String name, Block block)

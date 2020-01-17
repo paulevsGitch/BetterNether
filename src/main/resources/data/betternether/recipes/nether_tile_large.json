@@ -6,8 +6,7 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:stone_slab",
-	  "data": 6
+      "item": "minecraft:nether_brick_slab"
     }
   },
   "result": {

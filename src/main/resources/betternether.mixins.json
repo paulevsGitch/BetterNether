@@ -9,7 +9,9 @@
 	"PlayerMixin",
 	"PlayerManagerMixin",
 	"MapMixin",
-	"MapStateMixin"
+	"MapStateMixin",
+	"PlayerArmorMixin",
+	"StandArmorMixin"
   ],
   "client": [],
   "injectors": {

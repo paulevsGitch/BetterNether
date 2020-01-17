@@ -10,8 +10,7 @@
       "item": "betternether:stalagnate_planks"
     },
 	"S": {
-      "item": "minecraft:stick",
-	  "data": 32767
+      "item": "minecraft:stick"
     }
   },
   "result": {

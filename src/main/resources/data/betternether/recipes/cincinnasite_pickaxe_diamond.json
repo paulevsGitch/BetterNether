@@ -5,12 +5,10 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:diamond",
-	  "data": 32767
+      "item": "minecraft:diamond"
     },
 	"P": {
-      "item": "betternether:cincinnasite_pickaxe",
-	  "data": 0
+      "item": "betternether:cincinnasite_pickaxe"
     }
   },
   "result": {

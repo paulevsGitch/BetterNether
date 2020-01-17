@@ -206,5 +206,16 @@
 	"block.betternether.veined_sand": "Veined Sand",
 	"block.betternether.soul_vein": "Soul Vein",
 	"block.betternether.blooming_vine": "Blooming vine",
-	"block.betternether.golden_vine": "Golden Vine"
+	"block.betternether.golden_vine": "Golden Vine",
+	"block.betternether.geyser": "Geyser",
+	
+	"item.betternether.cincinnasite_shovel": "Cincinnasite Shovel",
+	"item.betternether.cincinnasite_shovel_diamond": "Cincinnasite-Diamond Shovel",
+	
+	"item.betternether.cincinnasite_helmet": "Cincinnasite Helmet",
+	"item.betternether.cincinnasite_chestplate": "Cincinnasite Chestplate",
+	"item.betternether.cincinnasite_leggings": "Cincinnasite Leggings",
+	"item.betternether.cincinnasite_boots": "Cincinnasite Boots",
+	"item.betternether.cincinnasite_sword": "Cincinnasite Sword",
+	"item.betternether.cincinnasite_sword_diamond": "Cincinnasite-Diamond Sword"
 }

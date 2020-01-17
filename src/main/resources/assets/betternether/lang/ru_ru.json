@@ -206,5 +206,16 @@
 	"block.betternether.veined_sand": "Жилистый песок",
 	"block.betternether.soul_vein": "Жила души",
 	"block.betternether.blooming_vine": "Цветущая лоза",
-	"block.betternether.golden_vine": "Золотая лоза"
+	"block.betternether.golden_vine": "Золотая лоза",
+	"block.betternether.geyser": "Гейзер",
+	
+	"item.betternether.cincinnasite_shovel": "Цинцинназитовая лопата",
+	"item.betternether.cincinnasite_shovel_diamond": "Цинцинназитово-алмазная лопата",
+	
+	"item.betternether.cincinnasite_helmet": "Цинцинназитовый шлем",
+	"item.betternether.cincinnasite_chestplate": "Цинцинназитовый нагрудник",
+	"item.betternether.cincinnasite_leggings": "Цинцинназитовые поножи",
+	"item.betternether.cincinnasite_boots": "Цинцинназитовые ботинки",
+	"item.betternether.cincinnasite_sword": "Цинцинназитовый меч",
+	"item.betternether.cincinnasite_sword_diamond": "Цинцинназитово-алмазный меч"
 }

@@ -10,8 +10,7 @@
       "item": "betternether:cincinnasite_forged"
     },
 	"G": {
-      "item": "minecraft:glowstone",
-	  "data": 32767
+      "item": "minecraft:glowstone"
     }
   },
   "result": {

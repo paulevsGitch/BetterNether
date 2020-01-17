@@ -12,11 +12,13 @@ import paulevs.betternether.world.BNWorldGenerator;
 public class BetterNether implements ModInitializer
 {
 	public static final String MOD_ID = "betternether";
+	private static boolean thinArmor = true;
 
 	@Override
 	public void onInitialize()
 	{
 		Config.load();
+		initOptions();
 		BlocksRegister.register();
 		BlockEntitiesRegister.register();
 		ItemsRegister.register();
@@ -24,5 +26,15 @@ public class BetterNether implements ModInitializer
 		BNWorldGenerator.loadConfig();
 		EntityRegister.register();
 		Config.save();
+	}
+	
+	private void initOptions()
+	{
+		thinArmor = Config.getBoolean("improvement", "smaller_armor_offset", true);
+	}
+	
+	public static boolean hasThinArmor()
+	{
+		return thinArmor;
 	}
 }
