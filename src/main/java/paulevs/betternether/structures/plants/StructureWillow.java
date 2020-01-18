@@ -42,15 +42,17 @@ public class StructureWillow implements IStructure
 			BlocksHelper.setWithoutUpdate(world, pos.up(h2), BlocksRegister.WILLOW_TRUNK.getDefaultState().with(BlockWillowTrunk.SHAPE, TripleShape.TOP));
 		
 		for (int i = 0; i < 4; i++)
-			branch(world, pos.up(h2).offset(HOR[i]), 3 + random.nextInt(2), random, HOR[i], pos.up(h2));
+			branch(world, pos.up(h2).offset(HOR[i]), 3 + random.nextInt(2), random, HOR[i], pos.up(h2), 0);
 		
 		BlocksHelper.setWithoutUpdate(world, pos.up(h2 + 1), BlocksRegister.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.UP));
 		for (int i = 0; i < 4; i++)
 			BlocksHelper.setWithoutUpdate(world, pos.up(h2 + 1).offset(HOR[i]), BlocksRegister.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, HOR[i]));
 	}
 	
-	private void branch(IWorld world, BlockPos pos, int length, Random random, Direction direction, BlockPos center)
+	private void branch(IWorld world, BlockPos pos, int length, Random random, Direction direction, BlockPos center, int level)
 	{
+		if (level > 2)
+			return;
 		Mutable bpos = new Mutable(pos);
 		BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegister.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, direction));
 		vine(world, pos.down(), 1 + random.nextInt(1));
@@ -86,11 +88,11 @@ public class StructureWillow implements IStructure
 					Direction right = dir.rotateYClockwise();
 					BlockPos p2 = bpos.offset(right);
 					if (world.isAir(p2))
-						branch(world, p2, length, random, right, center);
+						branch(world, p2, length, random, right, center, level + 1);
 					right = right.getOpposite();
 					p2 = bpos.offset(right);
 					if (world.isAir(p2))
-						branch(world, p2, length, random, right, center);
+						branch(world, p2, length, random, right, center, level + 1);
 				}
 				
 				Direction dir2 = HOR[random.nextInt(4)];

@@ -1,10 +1,16 @@
 package paulevs.betternether.structures.big;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 
@@ -105,42 +111,56 @@ public abstract class StructureManager
 		return root;
 	}
 	
-	/*public void save(IWorld world)
+	public void save(IWorld world)
 	{
-		String path = world.getDimension().get.getSaveHandler().getWorldDirectory().getAbsolutePath() + "/data/bn_" + name + ".nbt";
-		try
+		if (world instanceof ServerWorld)
 		{
-			FileOutputStream fs = new FileOutputStream(new File(path));
-			CompressedStreamTools.writeCompressed(this.toNBT(), fs);
-			fs.close();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	public void load(IWorld world)
-	{
-		String path = world.getSaveHandler().getWorldDirectory().getAbsolutePath() + "/data/bn_" + name + ".nbt";
-		File file = new File(path);
-		if (file.exists())
-		{
+			ServerWorld sw = (ServerWorld) world;
+			String path = sw.getSaveHandler().getWorldDir().getAbsolutePath() + "/data/bn_" + name + ".nbt";
 			try
 			{
-				FileInputStream fs = new FileInputStream(file);
-				NBTTagCompound root = CompressedStreamTools.readCompressed(fs);
+				FileOutputStream fs = new FileOutputStream(new File(path));
+				NbtIo.writeCompressed(this.toNBT(), fs);
 				fs.close();
-				NBTTagList structureData = root.getTagList("structures", 10);
-				for (int i = 0; i < structureData.tagCount(); i++)
-					structures.add(new BigStructure(structureData.getCompoundTagAt(i)));
 			}
 			catch (IOException e)
 			{
 				e.printStackTrace();
 			}
 		}
-	}*/
+	}
+	
+	public void load(IWorld world)
+	{
+		if (world instanceof ServerWorld)
+		{
+			ServerWorld sw = (ServerWorld) world;
+			sw.dimension.saveWorldData();
+			String path = sw.getSaveHandler().getWorldDir().getAbsolutePath() + "/data/bn_" + name + ".nbt";
+			File file = new File(path);
+			if (file.exists())
+			{
+				try
+				{
+					FileInputStream fs = new FileInputStream(file);
+					CompoundTag root = NbtIo.readCompressed(fs);
+					fs.close();
+					ListTag structureData = root.getList("structures", 10);
+					for (int i = 0; i < structureData.size(); i++)
+						structures.add(loadStructure(structureData.getCompound(i)));
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	protected BigStructure loadStructure(CompoundTag tag)
+	{
+		return new BigStructure(tag);
+	}
 	
 	public void generate(IWorld world, int cx, int cz)
 	{

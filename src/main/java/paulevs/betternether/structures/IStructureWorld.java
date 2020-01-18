@@ -27,7 +27,7 @@ public interface IStructureWorld
 	default void generateSurface(IWorld world, BlockPos pos, Random random)
 	{
 		randomize(random);
-		if (getAirFraction(world, pos) > 0.8 && getAirFractionBottom(world, pos) < 0.3)
+		if (getAirFraction(world, pos) > 0.7 && getAirFractionBottom(world, pos) < 0.3)
 		{
 			generate(world, pos);
 		}

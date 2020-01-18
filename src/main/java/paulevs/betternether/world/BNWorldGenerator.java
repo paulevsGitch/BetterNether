@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
@@ -16,6 +17,7 @@ import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.IStructureWorld;
 import paulevs.betternether.structures.StructureBuilding;
 import paulevs.betternether.structures.StructureCaves;
+import paulevs.betternether.structures.city.CityStructureManager;
 
 public class BNWorldGenerator
 {
@@ -43,7 +45,6 @@ public class BNWorldGenerator
 	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(1024);
 	private static final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(1024);
 	
-	//private static StructureRoad road;
 	private static StructureCaves caves;
 	
 	public static void loadConfig()
@@ -82,14 +83,9 @@ public class BNWorldGenerator
 				new StructureBuilding("room_01", -5),
 		};
 		
-		/*if (ConfigLoader.hasCities())
-		{
-			cityManager = new CityStructureManager(seed);
-			cityManager.load(world);
-			cityManager.setDistance(ConfigLoader.getCityDistance());
-		}*/
+		//cityManager = new CityStructureManager(seed);
+		//cityManager.setDistance(32);
 		
-		//road = new StructureRoad(seed);
 		caves = new StructureCaves(seed);
 	}
 	
@@ -102,11 +98,17 @@ public class BNWorldGenerator
 		}
 	}
 	
-	/*public static void save(World world)
+	public static void save(ServerWorld world)
 	{
-		if (cityManager != null)
-			cityManager.save(world);
-	}*/
+		//if (cityManager != null)
+		//	cityManager.save(world);
+	}
+	
+	public static void load(ServerWorld world)
+	{
+		//if (cityManager != null)
+		//	cityManager.load(world);
+	}
 	
 	private static void makeBiomeArray(int sx, int sz)
 	{
@@ -374,6 +376,7 @@ public class BNWorldGenerator
 					BlocksHelper.setWithoutUpdate(world, up, AIR);
 			}
 		}
+		
 		//if (cityManager != null)
 		//	cityManager.generate(world, cx, cz);
 	}
