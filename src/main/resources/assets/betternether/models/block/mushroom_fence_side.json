@@ -1,6 +1,8 @@
 {
-    "parent": "block/fence_side",
+    "parent": "betternether:block/reeds_fence_side",
     "textures": {
-        "texture": "betternether:block/mushroom_planks"
+        "particle": "betternether:block/mushroom_fence_side",
+        "texture": "betternether:block/mushroom_fence_side",
+		"top": "betternether:block/mushroom_fence_top"
     }
 }

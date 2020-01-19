@@ -2,16 +2,16 @@
     "multipart": [
         {   "apply": { "model": "betternether:block/reeds_fence_post" }},
         {   "when": { "north": true },
-            "apply": { "model": "betternether:block/reeds_fence_side", "uvlock": true }
+            "apply": { "model": "betternether:block/reeds_fence_side" }
         },
         {   "when": { "east": true },
-            "apply": { "model": "betternether:block/reeds_fence_side", "y": 90, "uvlock": true }
+            "apply": { "model": "betternether:block/reeds_fence_side", "y": 90 }
         },
         {   "when": { "south": true },
-            "apply": { "model": "betternether:block/reeds_fence_side", "y": 180, "uvlock": true }
+            "apply": { "model": "betternether:block/reeds_fence_side", "y": 180 }
         },
         {   "when": { "west": true },
-            "apply": { "model": "betternether:block/reeds_fence_side", "y": 270, "uvlock": true }
+            "apply": { "model": "betternether:block/reeds_fence_side", "y": 270 }
         }
     ]
 }

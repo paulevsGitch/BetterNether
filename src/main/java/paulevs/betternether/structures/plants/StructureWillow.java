@@ -51,7 +51,7 @@ public class StructureWillow implements IStructure
 	
 	private void branch(IWorld world, BlockPos pos, int length, Random random, Direction direction, BlockPos center, int level)
 	{
-		if (level > 2)
+		if (level > 5)
 			return;
 		Mutable bpos = new Mutable(pos);
 		BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegister.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, direction));
