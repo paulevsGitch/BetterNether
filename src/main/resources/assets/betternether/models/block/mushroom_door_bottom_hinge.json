@@ -1,6 +1,5 @@
 {
 	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
-	"ambientocclusion": false,
 	"textures": {
 		"particle": "betternether:block/mushroom_door_bootom",
 		"texture": "betternether:block/mushroom_door_bootom",
@@ -46,6 +45,7 @@
 			"__comment": "Box1",
 			"from": [ 1, 2, 2 ],
 			"to": [ 2, 16, 14 ],
+			"shade": false,
 			"faces": {
 				"west": { "uv": [ 14, 0, 2, 14 ], "texture": "#texture" },
 				"east": { "uv": [ 2, 0, 14, 14 ], "texture": "#texture" }

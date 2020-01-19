@@ -3,12 +3,15 @@ package paulevs.betternether.blocks;
 import java.util.Collections;
 import java.util.List;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PaneBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.util.math.Direction;
 import paulevs.betternether.client.IRenderTypeable;
 
 public class BNPane extends PaneBlock implements IRenderTypeable
@@ -34,5 +37,24 @@ public class BNPane extends PaneBlock implements IRenderTypeable
 	public BNRenderLayer getRenderLayer()
 	{
 		return BNRenderLayer.TRANSLUCENT;
+	}
+
+	@Environment(EnvType.CLIENT)
+	public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing)
+	{
+		if (neighbor.getBlock() == this)
+		{
+			if (!facing.getAxis().isHorizontal())
+			{
+				return false;
+			}
+
+			if (state.get(FACING_PROPERTIES.get(facing)) && neighbor.get(FACING_PROPERTIES.get(facing.getOpposite())))
+			{
+				return true;
+			}
+		}
+
+		return super.isSideInvisible(state, neighbor, facing);
 	}
 }
