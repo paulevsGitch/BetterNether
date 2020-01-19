@@ -1,0 +1,10 @@
+{
+    "variants": {
+		"facing=north": { "model": "betternether:block/cincinnasite_lantern_wall", "y": 180 },
+		"facing=south": { "model": "betternether:block/cincinnasite_lantern_wall" },
+		"facing=east": { "model": "betternether:block/cincinnasite_lantern_wall", "y": 270 },
+		"facing=west": { "model": "betternether:block/cincinnasite_lantern_wall", "y": 90 },
+		"facing=up": { "model": "betternether:block/cincinnasite_lantern_floor" },
+		"facing=down": { "model": "betternether:block/cincinnasite_lantern_ceil" }
+    }
+}

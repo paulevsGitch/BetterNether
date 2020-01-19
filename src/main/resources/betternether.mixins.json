@@ -12,7 +12,8 @@
 	"MapStateMixin",
 	"PlayerArmorMixin",
 	"StandArmorMixin",
-	"WorldSaveMixin"
+	"WorldSaveMixin",
+	"LocateMixin"
   ],
   "client": [],
   "injectors": {

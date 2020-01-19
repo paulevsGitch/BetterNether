@@ -13,15 +13,21 @@ import paulevs.betternether.client.IRenderTypeable;
 
 public class BNPane extends PaneBlock implements IRenderTypeable
 {
-	public BNPane(Block block)
+	private boolean dropSelf;
+	
+	public BNPane(Block block, boolean dropSelf)
 	{
 		super(FabricBlockSettings.copy(block).strength(0.3F, 0.3F).nonOpaque().build());
+		this.dropSelf = dropSelf;
 	}
 	
 	@Override
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
 	{
-		return Collections.singletonList(new ItemStack(this.asItem()));
+		if (dropSelf)
+			return Collections.singletonList(new ItemStack(this.asItem()));
+		else
+			return super.getDroppedStacks(state, builder);
 	}
 
 	@Override

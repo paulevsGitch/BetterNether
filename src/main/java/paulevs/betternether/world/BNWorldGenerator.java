@@ -7,9 +7,17 @@ import java.util.Random;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.VillageFeatureConfig;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
@@ -17,7 +25,7 @@ import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.IStructureWorld;
 import paulevs.betternether.structures.StructureBuilding;
 import paulevs.betternether.structures.StructureCaves;
-import paulevs.betternether.structures.city.CityStructureManager;
+import paulevs.betternether.world.structures.CityFeature;
 
 public class BNWorldGenerator
 {
@@ -46,6 +54,12 @@ public class BNWorldGenerator
 	private static final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(1024);
 	
 	private static StructureCaves caves;
+
+	private static final Feature<VillageFeatureConfig> CITY = Registry.register(
+			Registry.FEATURE,
+			new Identifier(BetterNether.MOD_ID, "nether_city"),
+			new CityFeature(VillageFeatureConfig::deserialize)
+			);
 	
 	public static void loadConfig()
 	{
@@ -87,6 +101,12 @@ public class BNWorldGenerator
 		//cityManager.setDistance(32);
 		
 		caves = new StructureCaves(seed);
+		
+		Biomes.NETHER.addFeature(
+				GenerationStep.Feature.UNDERGROUND_STRUCTURES,
+				CITY.configure(new VillageFeatureConfig("village/plains/town_centers", 6)));
+		Feature.STRUCTURES.put("nether_city", (StructureFeature<?>) CITY);
+		//Feature.JIGSAW_STRUCTURES.add((StructureFeature<?>) CITY);
 	}
 	
 	public static void clearCache()

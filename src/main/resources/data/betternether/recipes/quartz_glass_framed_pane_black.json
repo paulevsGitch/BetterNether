@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"###",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "betternether:quartz_glass_framed_black"
+		}
+	},
+	"result": {
+		"item": "betternether:quartz_glass_framed_pane_black",
+		"count": 16
+	}
+}

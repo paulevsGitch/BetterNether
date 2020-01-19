@@ -4,10 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
 import paulevs.betternether.blocks.materials.Materials;
 
-public class BlockWartPlanks extends Block
+public class BNPlanks extends Block
 {
-	public BlockWartPlanks()
+	public BNPlanks(MaterialColor color)
 	{
-		super(Materials.makeWood(MaterialColor.RED).build());
+		super(Materials.makeWood(color).build());
 	}
 }

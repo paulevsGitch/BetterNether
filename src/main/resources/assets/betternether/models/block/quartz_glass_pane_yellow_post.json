@@ -1,0 +1,7 @@
+{
+	"parent": "block/template_glass_pane_post",
+	"textures": {
+		"edge": "betternether:block/quartz_stained_glass_yellow",
+		"pane": "betternether:block/quartz_stained_glass_yellow"
+	}
+}
