@@ -267,5 +267,13 @@
 	"block.betternether.quartz_glass_framed_pane_brown": "Коричневая кварцевая панель в рамке",
 	"block.betternether.quartz_glass_framed_pane_green": "Зелёная кварцевая панель в рамке",
 	"block.betternether.quartz_glass_framed_pane_red": "Красная кварцевая панель в рамке",
-	"block.betternether.quartz_glass_framed_pane_black": "Чёрная кварцевая панель в рамке"
+	"block.betternether.quartz_glass_framed_pane_black": "Чёрная кварцевая панель в рамке",
+	
+	"block.betternether.soul_lily": "Лилия души",
+	"block.betternether.soul_lily_sapling": "Саженец лилии души",
+	"block.betternether.soul_grass": "Трава души",
+	
+	"block.betternether.wart_log": "Бревно нароста",
+	"block.betternether.wart_bark": "Кора нароста",
+	"block.betternether.wart_roots": "Корни нароста"
 }

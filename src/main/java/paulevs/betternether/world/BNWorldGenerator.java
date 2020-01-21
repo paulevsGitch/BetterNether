@@ -14,7 +14,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.VillageFeatureConfig;
 import paulevs.betternether.BetterNether;
@@ -34,6 +33,8 @@ public class BNWorldGenerator
 	private static IStructureWorld[] globalStructuresCave;
 	
 	private static boolean hasCleaningPass;
+	private static boolean hasFixPass;
+	private static boolean hasFortressPass;
 
 	private static float structueDensity;
 	private static float oreDensity;
@@ -55,15 +56,27 @@ public class BNWorldGenerator
 	
 	private static StructureCaves caves;
 
-	private static final Feature<VillageFeatureConfig> CITY = Registry.register(
+	private static final StructureFeature<VillageFeatureConfig> CITY = Registry.register(
 			Registry.FEATURE,
 			new Identifier(BetterNether.MOD_ID, "nether_city"),
 			new CityFeature(VillageFeatureConfig::deserialize)
 			);
 	
+	static
+	{
+		Biomes.NETHER.addFeature(
+				GenerationStep.Feature.UNDERGROUND_STRUCTURES,
+				CITY.configure(new VillageFeatureConfig("nether_city/centers", 6)));
+		Biomes.NETHER.addStructureFeature(CITY.configure(new VillageFeatureConfig("nether_city/centers", 6)));
+		//Feature.STRUCTURES.put("nether_city", (StructureFeature<VillageFeatureConfig>) CITY);
+	}
+	
 	public static void loadConfig()
 	{
 		hasCleaningPass = Config.getBoolean("generator_world", "cleaning_pass", true);
+		hasFixPass = Config.getBoolean("generator_world", "fixing_pass", true);
+		hasFortressPass = Config.getBoolean("generator_world", "firtress_fix_pass", true);
+		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
 		structueDensity = Config.getFloat("generator_world", "structure_density", 1F / 64F);
 		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
@@ -102,10 +115,10 @@ public class BNWorldGenerator
 		
 		caves = new StructureCaves(seed);
 		
-		Biomes.NETHER.addFeature(
+		/*Biomes.NETHER.addFeature(
 				GenerationStep.Feature.UNDERGROUND_STRUCTURES,
-				CITY.configure(new VillageFeatureConfig("village/plains/town_centers", 6)));
-		Feature.STRUCTURES.put("nether_city", (StructureFeature<?>) CITY);
+				CITY.configure(new VillageFeatureConfig("nether_city/centers", 6)));
+		Feature.STRUCTURES.put("nether_city", (StructureFeature<VillageFeatureConfig>) CITY);*/
 		//Feature.JIGSAW_STRUCTURES.add((StructureFeature<?>) CITY);
 	}
 	
@@ -429,26 +442,24 @@ public class BNWorldGenerator
 	
 	public static void cleaningPass(IWorld world, int cx, int cz)
 	{
-		int wx = (cx << 4) | 8;
-		int wz = (cz << 4) | 8;
-		
-		for (int y = 16; y < 110; y++)
+		if (hasFixPass)
 		{
-			popPos.setY(y);
-			for (int x = 0; x < 16; x++)
-			{
-				popPos.setX(wx + x);
-				for (int z = 0; z < 16; z++)
-				{
-					popPos.setZ(wz + z);
-					if (!world.getBlockState(popPos).canPlaceAt(world, popPos))
-						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
-				}
-			}
+			int wx = (cx << 4) | 8;
+			int wz = (cz << 4) | 8;
+			
+			fixBlocks(world, wx, 30, wz, wx + 15, 110, wz + 15);
 		}
 	}
 	
-	public static void fortressPass(IWorld world, int x1, int y1, int z1, int x2, int y2, int z2)
+	public static void fortressPass(IWorld world, int x1, int z1, int x2, int z2, int y2)
+	{
+		if (hasFortressPass)
+		{
+			fixBlocks(world, x1, 30, z1, x2, y2, z2);
+		}
+	}
+	
+	private static void fixBlocks(IWorld world, int x1, int y1, int z1, int x2, int y2, int z2)
 	{
 		for (int y = y1; y <= y2; y++)
 		{
@@ -459,9 +470,20 @@ public class BNWorldGenerator
 				for (int z = z1; z <= z2; z++)
 				{
 					popPos.setZ(z);
-					if (!world.getBlockState(popPos).canPlaceAt(world, popPos))
+					
+					BlockState state = world.getBlockState(popPos);
+					
+					if (!state.canPlaceAt(world, popPos))
+					{
 						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
-					//BlocksHelper.setWithoutUpdate(world, popPos, Blocks.DIAMOND_BLOCK.getDefaultState());
+						continue;
+					}
+					
+					if (!state.isOpaque() && world.getBlockState(popPos.up()).getBlock() == Blocks.NETHER_BRICKS)
+					{
+						BlocksHelper.setWithoutUpdate(world, popPos, Blocks.NETHER_BRICKS.getDefaultState());
+						continue;
+					}
 				}
 			}
 		}

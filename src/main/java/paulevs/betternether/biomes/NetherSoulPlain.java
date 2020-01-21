@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureBlackBush;
+import paulevs.betternether.structures.plants.StructureSoulGrass;
 import paulevs.betternether.structures.plants.StructureSoulVein;
 
 public class NetherSoulPlain extends NetherBiome
@@ -19,6 +20,7 @@ public class NetherSoulPlain extends NetherBiome
 		super(name);
 		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, true);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
+		addStructure("soul_grass", new StructureSoulGrass(), StructureType.FLOOR, 0.3F, false);
 	}
 	
 	@Override

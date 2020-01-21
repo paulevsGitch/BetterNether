@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/wart_bark",
+        "down": "betternether:block/wart_log_top",
+        "up": "betternether:block/wart_log_top",
+        "north": "betternether:block/wart_bark",
+        "east": "betternether:block/wart_bark",
+        "south": "betternether:block/wart_bark",
+        "west": "betternether:block/wart_bark"
+    }
+}

@@ -2,14 +2,11 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.EntityContext;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -18,6 +15,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockNetherGrass extends BlockBase
 {
@@ -25,14 +23,7 @@ public class BlockNetherGrass extends BlockBase
 	
 	public BlockNetherGrass()
 	{
-		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.GRAY_TERRACOTTA)
-				.sounds(BlockSoundGroup.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
-				.ticksRandomly()
-				.build());
+		super(Materials.makeGrass(MaterialColor.GRAY_TERRACOTTA).ticksRandomly().build());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}

@@ -184,7 +184,7 @@ public class NetherBiome
 		
 		boolean canGenerate(Random random, BlockPos pos)
 		{
-			return (!useNoise || getFeatureNoise(pos, id) > 0.5) && random.nextFloat() < density;
+			return (!useNoise || getFeatureNoise(pos, id) > 0.3) && random.nextFloat() < density;
 		}
 	}
 	

@@ -57,8 +57,9 @@ public class BiomesRegister
 		registerBiome(NETHER_SWAMPLAND);
 		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
 		registerBiome(MAGMA_LAND);
-		registerBiome(SOUL_PLAIN, 0.5F);
-		registerSubBiome(SOUL_FOREST, SOUL_PLAIN, 1F);
+		//registerBiome(SOUL_PLAIN, 0.5F);
+		//registerSubBiome(SOUL_FOREST, SOUL_PLAIN, 1F);
+		registerSubBiome(SOUL_PLAIN, BIOME_WART_FOREST, 1F);
 	}
 	
 	public static void registerBiome(NetherBiome biome)

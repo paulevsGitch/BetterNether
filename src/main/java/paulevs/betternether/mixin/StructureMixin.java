@@ -38,7 +38,6 @@ public class StructureMixin//<C extends FeatureConfig>
 	@Inject(method = "generateStructure", at = @At(value = "RETURN"))
 	public void afterSetBB(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, CallbackInfo info)
 	{
-		
 		if ((Object) this instanceof NetherFortressFeature.Start)
 		{
 			if (boundingBox != BlockBox.empty())
@@ -51,11 +50,7 @@ public class StructureMixin//<C extends FeatureConfig>
 				x2 = Math.min(x2, boundingBox.maxX);
 				z1 = Math.max(z1, boundingBox.minZ);
 				z2 = Math.min(z2, boundingBox.maxZ);
-				/*for (int x = x1; x <= x2; x++)
-					for (int y = boundingBox.minY; y <= boundingBox.maxY; y++)
-						for (int z = z1; z <= z2; z++)
-							BlocksHelper.setWithoutUpdate(world, new BlockPos(x, y, z), Blocks.DIAMOND_BLOCK.getDefaultState());*/
-				BNWorldGenerator.fortressPass(world, x1, 24, z1, x2, boundingBox.maxY, z2);
+				BNWorldGenerator.fortressPass(world, x1, z1, x2, z2, boundingBox.maxY);
 			}
 		}
 	}

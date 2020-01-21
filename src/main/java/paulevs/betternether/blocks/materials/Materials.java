@@ -9,13 +9,23 @@ import net.minecraft.sound.BlockSoundGroup;
 public class Materials
 {
 	public static final Material COMMON_WOOD = new Material.Builder(MaterialColor.WOOD).build();
+	public static final Material COMMON_GRASS = new Material.Builder(MaterialColor.FOLIAGE).allowsMovement().notSolid().replaceable().build();
 	
 	public static FabricBlockSettings makeWood(MaterialColor color)
 	{
-		return FabricBlockSettings.of(Materials.COMMON_WOOD)
+		return FabricBlockSettings.of(COMMON_WOOD)
 				.sounds(BlockSoundGroup.WOOD)
 				.breakByTool(FabricToolTags.AXES)
 				.hardness(1)
 				.materialColor(color);
+	}
+	
+	public static FabricBlockSettings makeGrass(MaterialColor color)
+	{
+		return FabricBlockSettings.of(COMMON_GRASS)
+				.sounds(BlockSoundGroup.CROP)
+				.materialColor(color)
+				.noCollision()
+				.breakInstantly();
 	}
 }

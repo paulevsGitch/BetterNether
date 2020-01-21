@@ -31,6 +31,7 @@ public class StructureWartTree implements IStructure
 			if (world.isAir(pos.up(2).north()) && world.isAir(pos.up(2).south())  && world.isAir(pos.up(2).east())  && world.isAir(pos.up(2).west()))
 			{
 				int height = 5 + random.nextInt(5);
+				int h2 = height - 1;
 				int width = (height >>> 2) + 1;
 				int offset = width >>> 1;
 				List<BlockPos> seedBlocks = new ArrayList<BlockPos>();
@@ -46,10 +47,14 @@ public class StructureWartTree implements IStructure
 							blockPos.set(px, py, pz);
 							if (isReplaceable(world.getBlockState(blockPos)))
 							{
-								BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
-								if (random.nextInt(3) == 0)
-								{
+								if (y == 0 && !isReplaceable(world.getBlockState(blockPos.down())))
+									BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegister.WART_ROOTS.getDefaultState());
+								else if (y < h2)
+									BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegister.WART_LOG.getDefaultState());
+								else
 									BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
+								if (random.nextInt(8) == 0)
+								{
 									Direction dir = HORIZONTAL[random.nextInt(HORIZONTAL.length)];
 									seedBlocks.add(new BlockPos(blockPos).offset(dir));
 								}
@@ -70,7 +75,13 @@ public class StructureWartTree implements IStructure
 							blockPos.set(px, py, pz);
 							if (isReplaceable(world.getBlockState(blockPos)))
 							{
-								BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
+								if (isReplaceable(world.getBlockState(blockPos.down())))
+									BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegister.WART_LOG.getDefaultState());
+								else
+								{
+									BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegister.WART_ROOTS.getDefaultState());
+									break;
+								}
 							}
 						}
 					}
@@ -94,12 +105,8 @@ public class StructureWartTree implements IStructure
 								if (world.isAir(blockPos))
 								{
 									BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
-									if (random.nextInt(3) == 0)
-									{
-										BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
-										Direction dir = HORIZONTAL[random.nextInt(HORIZONTAL.length)];
-										seedBlocks.add(new BlockPos(blockPos).offset(dir));
-									}
+									for (int i = 0; i < 4; i++)
+										seedBlocks.add(new BlockPos(blockPos).offset(Direction.values()[random.nextInt(6)]));
 								}
 							}
 						}
@@ -116,16 +123,18 @@ public class StructureWartTree implements IStructure
 		BlockState seed = BlocksRegister.BLOCK_WART_SEED.getDefaultState();
 		if (isReplaceable(world.getBlockState(pos)))
 		{
-			if (world.getBlockState(pos.north()) == WART_BLOCK)
-				seed = seed.with(BlockWartSeed.FACING, Direction.SOUTH);
-			else if (world.getBlockState(pos.south()) == WART_BLOCK)
-				seed = seed.with(BlockWartSeed.FACING, Direction.NORTH);
-			else if (world.getBlockState(pos.east()) == WART_BLOCK)
-				seed = seed.with(BlockWartSeed.FACING, Direction.WEST);
-			else if (world.getBlockState(pos.west()) == WART_BLOCK)
-				seed = seed.with(BlockWartSeed.FACING, Direction.EAST);
-			else if (world.getBlockState(pos.up()) == WART_BLOCK)
+			if (isWart(world.getBlockState(pos.up())))
 				seed = seed.with(BlockWartSeed.FACING, Direction.DOWN);
+			else if (isWart(world.getBlockState(pos.down())))
+				seed = seed.with(BlockWartSeed.FACING, Direction.UP);
+			else if (isWart(world.getBlockState(pos.north())))
+				seed = seed.with(BlockWartSeed.FACING, Direction.SOUTH);
+			else if (isWart(world.getBlockState(pos.south())))
+				seed = seed.with(BlockWartSeed.FACING, Direction.NORTH);
+			else if (isWart(world.getBlockState(pos.east())))
+				seed = seed.with(BlockWartSeed.FACING, Direction.WEST);
+			else if (isWart(world.getBlockState(pos.west())))
+				seed = seed.with(BlockWartSeed.FACING, Direction.EAST);
 			BlocksHelper.setWithoutUpdate(world, pos, seed);
 		}
 	}
@@ -133,9 +142,16 @@ public class StructureWartTree implements IStructure
 	private boolean isReplaceable(BlockState state)
 	{
 		Block block = state.getBlock();
-		return block == Blocks.AIR ||
+		return state.getMaterial().isReplaceable() ||
+				block == Blocks.AIR ||
 				block == BlocksRegister.BLOCK_WART_SEED ||
 				block == BlocksRegister.BLOCK_BLACK_BUSH ||
+				block == BlocksRegister.BLOCK_SOUL_VEIN ||
 				block == Blocks.NETHER_WART;
+	}
+	
+	private boolean isWart(BlockState state)
+	{
+		return state == WART_BLOCK || state.getBlock() == BlocksRegister.WART_LOG;
 	}
 }

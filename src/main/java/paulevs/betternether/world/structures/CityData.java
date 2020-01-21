@@ -17,6 +17,6 @@ public class CityData
 	{
 		List<Pair<StructurePoolElement,Integer>> elements = new ArrayList<Pair<StructurePoolElement,Integer>>();
 		elements.add(new Pair<StructurePoolElement, Integer>(new SinglePoolElement("village/plains/town_centers/plains_meeting_point_2"), 50));
-		StructurePoolBasedGenerator.REGISTRY.add(new StructurePool(new Identifier("village/plains/town_centers"), new Identifier("empty"), elements, StructurePool.Projection.RIGID));
+		StructurePoolBasedGenerator.REGISTRY.add(new StructurePool(new Identifier("nether_city/centers"), new Identifier("empty"), elements, StructurePool.Projection.RIGID));
 	}
 }

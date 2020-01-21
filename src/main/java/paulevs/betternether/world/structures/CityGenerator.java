@@ -9,6 +9,7 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.structure.VillageGenerator;
+import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.structure.pool.StructurePoolElement;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockBox;
@@ -25,6 +26,7 @@ public class CityGenerator
 	public static void addPieces(ChunkGenerator<?> chunkGenerator, StructureManager structureManager, BlockPos pos, List<StructurePiece> pieces, ChunkRandom random, VillageFeatureConfig config)
 	{
 		CityData.initialize();
+		StructurePoolBasedGenerator.addPieces(config.startPool, config.size, CityGenerator.Piece::new, chunkGenerator, structureManager, pos, pieces, random);
 	}
 
 	public static class Piece extends PoolStructurePiece

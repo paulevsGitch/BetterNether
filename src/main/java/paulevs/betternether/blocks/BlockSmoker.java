@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.particle.ParticleTypes;
@@ -17,6 +18,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.blocks.shapes.TripleShape;
 
@@ -54,6 +57,10 @@ public class BlockSmoker extends BlockBaseNotFull
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, IWorld world, BlockPos pos, BlockPos neighborPos)
 	{
+		if (!canPlaceAt(state, world, pos))
+		{
+			return Blocks.AIR.getDefaultState();
+		}
 		Block side = world.getBlockState(pos.up()).getBlock();
 		if (side != this)
 			return state.with(SHAPE, TripleShape.TOP);
@@ -62,5 +69,12 @@ public class BlockSmoker extends BlockBaseNotFull
 			return state.with(SHAPE, TripleShape.MIDDLE);
 		else
 			return state.with(SHAPE, TripleShape.BOTTOM);
+	}
+	
+	@Override
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
+	{
+		BlockState down = world.getBlockState(pos.down());
+		return down.getBlock() == this || BlocksHelper.isNetherGround(down);
 	}
 }

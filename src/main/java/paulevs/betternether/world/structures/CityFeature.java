@@ -6,8 +6,8 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.structure.StructureManager;
+import net.minecraft.structure.StructureStart;
 import net.minecraft.structure.VillageGenerator;
-import net.minecraft.structure.VillageStructureStart;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -54,7 +54,7 @@ public class CityFeature extends StructureFeature<VillageFeatureConfig>
 	@Override
 	public net.minecraft.world.gen.feature.StructureFeature.StructureStartFactory getStructureStartFactory()
 	{
-		return CityFeature.Start::new;
+		return CityFeature.CityStart::new;
 	}
 
 	@Override
@@ -69,9 +69,9 @@ public class CityFeature extends StructureFeature<VillageFeatureConfig>
 		return 8;
 	}
 
-	public static class Start extends VillageStructureStart
+	public static class CityStart extends StructureStart
 	{
-		public Start(StructureFeature<?> structureFeature, int chunkX, int chunkZ, BlockBox blockBox, int i, long l)
+		public CityStart(StructureFeature<?> structureFeature, int chunkX, int chunkZ, BlockBox blockBox, int i, long l)
 		{
 			super(structureFeature, chunkX, chunkZ, blockBox, i, l);
 		}

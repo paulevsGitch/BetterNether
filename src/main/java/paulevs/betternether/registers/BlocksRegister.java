@@ -69,6 +69,7 @@ import paulevs.betternether.blocks.BlockRedMold;
 import paulevs.betternether.blocks.BlockReedsBlock;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.blocks.BlockSmoker;
+import paulevs.betternether.blocks.BlockSoulGrass;
 import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLilySapling;
 import paulevs.betternether.blocks.BlockSoulVein;
@@ -297,6 +298,10 @@ public class BlocksRegister
 	public static final Block BLOCK_QUARTZ_GLASS_FRAMED_PANE_BLACK = new BNPane(BLOCK_QUARTZ_GLASS_FRAMED, true);
 	public static final Block BLOCK_SOUL_LILY = new BlockSoulLily();
 	public static final Block BLOCK_SOUL_LILY_SAPLING = new BlockSoulLilySapling();
+	public static final Block SOUL_GRASS = new BlockSoulGrass();
+	public static final Block WART_LOG = new BNPillar(Blocks.NETHER_WART_BLOCK);
+	public static final Block WART_BARK = new BNPlanks(MaterialColor.RED);
+	public static final Block WART_ROOTS = new BlockWartRoots();
 	
 	public static void register()
 	{
@@ -505,6 +510,10 @@ public class BlocksRegister
 		registerBlock("quartz_glass_framed_pane_black", BLOCK_QUARTZ_GLASS_FRAMED_PANE_BLACK);
 		registerBlockNI("soul_lily", BLOCK_SOUL_LILY);
 		registerBlock("soul_lily_sapling", BLOCK_SOUL_LILY_SAPLING);
+		registerBlock("soul_grass", SOUL_GRASS);
+		registerBlock("wart_log", WART_LOG);
+		registerBlock("wart_bark", WART_BARK);
+		registerBlockNI("wart_roots", WART_ROOTS);
 	}
 	
 	private static void registerBlock(String name, Block block)

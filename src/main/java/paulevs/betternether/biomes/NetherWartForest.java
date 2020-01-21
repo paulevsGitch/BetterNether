@@ -9,6 +9,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureNetherWart;
+import paulevs.betternether.structures.plants.StructureSoulLily;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 import paulevs.betternether.structures.plants.StructureWartTree;
 
@@ -21,6 +22,7 @@ public class NetherWartForest extends NetherBiome
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.05F, false);
+		addStructure("soul_lily", new StructureSoulLily(), StructureType.FLOOR, 0.2F, true);
 	}
 	
 	@Override

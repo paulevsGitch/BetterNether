@@ -267,5 +267,13 @@
 	"block.betternether.quartz_glass_framed_pane_brown": "Brown Framed Quartz Pane",
 	"block.betternether.quartz_glass_framed_pane_green": "Green Framed Quartz Pane",
 	"block.betternether.quartz_glass_framed_pane_red": "Red Framed Quartz Pane",
-	"block.betternether.quartz_glass_framed_pane_black": "Black Framed Quartz Pane"
+	"block.betternether.quartz_glass_framed_pane_black": "Black Framed Quartz Pane",
+	
+	"block.betternether.soul_lily": "Soul Lily",
+	"block.betternether.soul_lily_sapling": "Soul Lily Sapling",
+	"block.betternether.soul_grass": "Soul Grass",
+	
+	"block.betternether.wart_log": "Wart Log",
+	"block.betternether.wart_bark": "Wart Bark",
+	"block.betternether.wart_roots": "Wart Roots"
 }

@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wart_log"
+    }
+  },
+  "result": {
+    "item": "betternether:wart_planks",
+	"count": 4
+  }
+}
