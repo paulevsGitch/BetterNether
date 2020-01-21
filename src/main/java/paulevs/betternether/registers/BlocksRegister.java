@@ -19,6 +19,7 @@ import paulevs.betternether.blocks.BNLadder;
 import paulevs.betternether.blocks.BNNetherBrick;
 import paulevs.betternether.blocks.BNPane;
 import paulevs.betternether.blocks.BNPillar;
+import paulevs.betternether.blocks.BNPlanks;
 import paulevs.betternether.blocks.BNPlate;
 import paulevs.betternether.blocks.BNSlab;
 import paulevs.betternether.blocks.BNStairs;
@@ -68,6 +69,8 @@ import paulevs.betternether.blocks.BlockRedMold;
 import paulevs.betternether.blocks.BlockReedsBlock;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.blocks.BlockSmoker;
+import paulevs.betternether.blocks.BlockSoulLily;
+import paulevs.betternether.blocks.BlockSoulLilySapling;
 import paulevs.betternether.blocks.BlockSoulVein;
 import paulevs.betternether.blocks.BlockStalagnate;
 import paulevs.betternether.blocks.BlockStalagnateBark;
@@ -75,7 +78,6 @@ import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStalagnateStem;
 import paulevs.betternether.blocks.BlockVeinedSand;
-import paulevs.betternether.blocks.BNPlanks;
 import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.blocks.BlockWillowBark;
 import paulevs.betternether.blocks.BlockWillowBranch;
@@ -293,6 +295,8 @@ public class BlocksRegister
 	public static final Block BLOCK_QUARTZ_GLASS_FRAMED_PANE_GREEN = new BNPane(BLOCK_QUARTZ_GLASS_FRAMED, true);
 	public static final Block BLOCK_QUARTZ_GLASS_FRAMED_PANE_RED = new BNPane(BLOCK_QUARTZ_GLASS_FRAMED, true);
 	public static final Block BLOCK_QUARTZ_GLASS_FRAMED_PANE_BLACK = new BNPane(BLOCK_QUARTZ_GLASS_FRAMED, true);
+	public static final Block BLOCK_SOUL_LILY = new BlockSoulLily();
+	public static final Block BLOCK_SOUL_LILY_SAPLING = new BlockSoulLilySapling();
 	
 	public static void register()
 	{
@@ -499,6 +503,8 @@ public class BlocksRegister
 		registerBlock("quartz_glass_framed_pane_green", BLOCK_QUARTZ_GLASS_FRAMED_PANE_GREEN);
 		registerBlock("quartz_glass_framed_pane_red", BLOCK_QUARTZ_GLASS_FRAMED_PANE_RED);
 		registerBlock("quartz_glass_framed_pane_black", BLOCK_QUARTZ_GLASS_FRAMED_PANE_BLACK);
+		registerBlockNI("soul_lily", BLOCK_SOUL_LILY);
+		registerBlock("soul_lily_sapling", BLOCK_SOUL_LILY_SAPLING);
 	}
 	
 	private static void registerBlock(String name, Block block)

@@ -13,7 +13,9 @@
 	"PlayerArmorMixin",
 	"StandArmorMixin",
 	"WorldSaveMixin",
-	"LocateMixin"
+	"LocateMixin",
+	"GrassGrowMixin",
+	"StructureMixin"
   ],
   "client": [],
   "injectors": {

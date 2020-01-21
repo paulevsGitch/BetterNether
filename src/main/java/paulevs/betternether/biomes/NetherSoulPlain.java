@@ -1,0 +1,35 @@
+package paulevs.betternether.biomes;
+
+import java.util.Random;
+
+import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.world.IWorld;
+import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.structures.plants.StructureBlackBush;
+import paulevs.betternether.structures.plants.StructureSoulVein;
+
+public class NetherSoulPlain extends NetherBiome
+{
+	private static final Mutable POS = new Mutable();
+	
+	public NetherSoulPlain(String name)
+	{
+		super(name);
+		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, true);
+		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
+	}
+	
+	@Override
+	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
+	{
+		POS.set(pos);
+		for (int i = 0; i < random.nextInt(3) + 1; i++)
+		{
+			POS.setY(pos.getY() - i);
+			if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
+				BlocksHelper.setWithoutUpdate(world, POS, Blocks.SOUL_SAND.getDefaultState());
+		}
+	}
+}

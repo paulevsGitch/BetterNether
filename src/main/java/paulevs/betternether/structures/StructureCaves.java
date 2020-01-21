@@ -75,7 +75,7 @@ public class StructureCaves implements IStructure
 				{
 					int wy = offset + y;
 					B_POS.set(wx, wy, wz);
-					if (MASK[x][y][z] && BlocksHelper.isGroundOrModContent(world.getBlockState(B_POS)))
+					if (MASK[x][y][z] && BlocksHelper.isNetherGroundMagma(world.getBlockState(B_POS)))
 					{
 						if (world.getBlockState(B_POS.up()).getBlock() == Blocks.NETHER_WART_BLOCK)
 							BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.NETHER_WART_BLOCK.getDefaultState());

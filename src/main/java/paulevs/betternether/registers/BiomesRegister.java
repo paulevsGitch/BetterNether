@@ -12,6 +12,8 @@ import paulevs.betternether.biomes.NetherMagmaLand;
 import paulevs.betternether.biomes.NetherMushroomForest;
 import paulevs.betternether.biomes.NetherMushroomForestEdge;
 import paulevs.betternether.biomes.NetherPoorGrasslands;
+import paulevs.betternether.biomes.NetherSoulForest;
+import paulevs.betternether.biomes.NetherSoulPlain;
 import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.biomes.NetherSwamplandTerraces;
 import paulevs.betternether.biomes.NetherWartForest;
@@ -35,6 +37,8 @@ public class BiomesRegister
 	public static final NetherBiome NETHER_SWAMPLAND = new NetherSwampland("Nether Swampland");
 	public static final NetherBiome NETHER_SWAMPLAND_TERRACES = new NetherSwamplandTerraces("Nether Swampland Terraces");
 	public static final NetherBiome MAGMA_LAND = new NetherMagmaLand("Magma Land");
+	public static final NetherBiome SOUL_PLAIN = new NetherSoulPlain("Soul Plain");
+	public static final NetherBiome SOUL_FOREST = new NetherSoulForest("Soul Forest");
 	
 	private static int maxChance = 0;
 	
@@ -53,9 +57,11 @@ public class BiomesRegister
 		registerBiome(NETHER_SWAMPLAND);
 		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
 		registerBiome(MAGMA_LAND);
+		registerBiome(SOUL_PLAIN, 0.5F);
+		registerSubBiome(SOUL_FOREST, SOUL_PLAIN, 1F);
 	}
 	
-	protected static void registerBiome(NetherBiome biome)
+	public static void registerBiome(NetherBiome biome)
 	{
 		String regName = biome.getRegistryName();
 		if (Config.getBoolean("biomes", regName, true))
@@ -67,7 +73,19 @@ public class BiomesRegister
 		}
 	}
 	
-	protected static void registerEdgeBiome(NetherBiome biome, NetherBiome mainBiome, int size)
+	public static void registerBiome(NetherBiome biome, float chance)
+	{
+		String regName = biome.getRegistryName();
+		if (Config.getBoolean("biomes", regName, true))
+		{
+			float ch = Config.getFloat("biomes", regName + "_chance", chance);
+			maxChance += ch;
+			biome.setGenChance(maxChance);
+			REGISTRY.add(biome);
+		}
+	}
+	
+	public static void registerEdgeBiome(NetherBiome biome, NetherBiome mainBiome, int size)
 	{
 		if (Config.getBoolean("biomes", biome.getRegistryName(), true))
 		{
@@ -76,7 +94,7 @@ public class BiomesRegister
 		}
 	}
 	
-	protected static void registerSubBiome(NetherBiome biome, NetherBiome mainBiome, float chance)
+	public static void registerSubBiome(NetherBiome biome, NetherBiome mainBiome, float chance)
 	{
 		String regName = biome.getRegistryName();
 		if (Config.getBoolean("biomes", regName, true))

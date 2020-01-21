@@ -17,10 +17,10 @@ public class NetherMushroomForestEdge extends NetherBiome
 	public NetherMushroomForestEdge(String name)
 	{
 		super(name);
-		addStructure("gray_mold", new StructureVanillaMushroom(), StructureType.FLOOR, 0.01F, false);
 		addStructure("orange_mushroom", new StructureOrangeMushroom(), StructureType.FLOOR, 0.05F, false);
-		addStructure("red_mold", new StructureRedMold(), StructureType.FLOOR, 0.1F, false);
-		addStructure("gray_mold", new StructureGrayMold(), StructureType.FLOOR, 0.1F, false);
+		addStructure("vanilla_mushrooms", new StructureVanillaMushroom(), StructureType.FLOOR, 0.1F, false);
+		addStructure("red_mold", new StructureRedMold(), StructureType.FLOOR, 0.3F, false);
+		addStructure("gray_mold", new StructureGrayMold(), StructureType.FLOOR, 0.3F, false);
 	}
 
 	@Override

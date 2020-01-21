@@ -158,7 +158,7 @@ public class BNWorldGenerator
 		return biomeArray[clamp(x, 7)][clamp(y, 63)][clamp(z, 7)];
 	}
 	
-	private static NetherBiome getBiome(int x, int y, int z)
+	public static NetherBiome getBiome(int x, int y, int z)
 	{
 		NetherBiome biome = map.getBiome(x, y, z);
 		
@@ -358,10 +358,13 @@ public class BNWorldGenerator
 			BlockPos west;
 			for (int y = 32; y < 110; y++)
 			{
+				popPos.setY(y);
 				for (int x = 0; x < 16; x++)
+				{
+					popPos.setX(x + wx);
 					for (int z = 0; z < 16; z++)
 					{
-						popPos.set(x + wx, y, z + wz);
+						popPos.setZ(z + wz);
 						if (canReplace(world, popPos))
 						{
 							up = popPos.up();
@@ -386,6 +389,7 @@ public class BNWorldGenerator
 								pos.add(new BlockPos(popPos));
 						}
 					}
+				}
 			}
 			for (BlockPos p : pos)
 			{
@@ -422,4 +426,44 @@ public class BNWorldGenerator
 	{
 		return cityManager.getNearestStructure(world, cx, cz);
 	}*/
+	
+	public static void cleaningPass(IWorld world, int cx, int cz)
+	{
+		int wx = (cx << 4) | 8;
+		int wz = (cz << 4) | 8;
+		
+		for (int y = 16; y < 110; y++)
+		{
+			popPos.setY(y);
+			for (int x = 0; x < 16; x++)
+			{
+				popPos.setX(wx + x);
+				for (int z = 0; z < 16; z++)
+				{
+					popPos.setZ(wz + z);
+					if (!world.getBlockState(popPos).canPlaceAt(world, popPos))
+						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
+				}
+			}
+		}
+	}
+	
+	public static void fortressPass(IWorld world, int x1, int y1, int z1, int x2, int y2, int z2)
+	{
+		for (int y = y1; y <= y2; y++)
+		{
+			popPos.setY(y);
+			for (int x = x1; x <= x2; x++)
+			{
+				popPos.setX(x);
+				for (int z = z1; z <= z2; z++)
+				{
+					popPos.setZ(z);
+					if (!world.getBlockState(popPos).canPlaceAt(world, popPos))
+						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
+					//BlocksHelper.setWithoutUpdate(world, popPos, Blocks.DIAMOND_BLOCK.getDefaultState());
+				}
+			}
+		}
+	}
 }
