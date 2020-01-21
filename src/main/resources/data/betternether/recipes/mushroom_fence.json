@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:mushroom_planks"
+    },
+	"S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "betternether:mushroom_fence",
+    "count": 3
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:mushroom_planks"
+    }
+  },
+  "result": {
+    "item": "betternether:mushroom_stairs",
+    "count": 4
+  }
+}
