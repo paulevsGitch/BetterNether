@@ -25,6 +25,7 @@ public class BetterNether implements ModInitializer
 		BiomesRegister.register();
 		BNWorldGenerator.loadConfig();
 		EntityRegister.register();
+		//ParticleRegister.register();
 		Config.save();
 	}
 	

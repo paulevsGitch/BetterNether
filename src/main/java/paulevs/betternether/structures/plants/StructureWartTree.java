@@ -147,6 +147,8 @@ public class StructureWartTree implements IStructure
 				block == BlocksRegister.BLOCK_WART_SEED ||
 				block == BlocksRegister.BLOCK_BLACK_BUSH ||
 				block == BlocksRegister.BLOCK_SOUL_VEIN ||
+				block == BlocksRegister.BLOCK_SOUL_LILY ||
+				block == BlocksRegister.BLOCK_SOUL_LILY_SAPLING ||
 				block == Blocks.NETHER_WART;
 	}
 	

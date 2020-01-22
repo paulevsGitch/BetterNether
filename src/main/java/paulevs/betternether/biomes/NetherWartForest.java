@@ -22,7 +22,10 @@ public class NetherWartForest extends NetherBiome
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.05F, false);
-		addStructure("soul_lily", new StructureSoulLily(), StructureType.FLOOR, 0.2F, true);
+		
+		addStructure("soul_lily_1", new StructureSoulLily(), StructureType.FLOOR, 0.2F, true);
+		addStructure("soul_lily_2", new StructureSoulLily(), StructureType.FLOOR, 0.1F, true);
+		addStructure("soul_lily_3", new StructureSoulLily(), StructureType.FLOOR, 0.05F, true);
 	}
 	
 	@Override

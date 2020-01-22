@@ -49,7 +49,7 @@ public class StructureBuilding extends StructureNBT implements IStructureWorld
 					if (world.isAir(posMut))
 						airCount ++;
 				}
-		return (float) airCount / (size.getX() * size.getY() * size.getZ());
+		return (float) airCount / (size.getX() * (size.getY() + offsetY) * size.getZ());
 	}
 	
 	@Override
@@ -72,6 +72,6 @@ public class StructureBuilding extends StructureNBT implements IStructureWorld
 					if (world.isAir(posMut))
 						airCount ++;
 				}
-		return (float) airCount / (size.getX() * size.getY() * size.getZ());
+		return (float) airCount / (size.getX() * (end.getY() - start.getY() + 1) * size.getZ());
 	}
 }

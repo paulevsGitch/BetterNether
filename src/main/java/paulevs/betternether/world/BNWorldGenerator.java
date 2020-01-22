@@ -484,6 +484,12 @@ public class BNWorldGenerator
 						BlocksHelper.setWithoutUpdate(world, popPos, Blocks.NETHER_BRICKS.getDefaultState());
 						continue;
 					}
+					
+					if (BlocksHelper.isLava(state) && world.isAir(popPos.up()) && world.isAir(popPos.down()))
+					{
+						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
+						continue;
+					}
 				}
 			}
 		}
