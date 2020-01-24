@@ -30,7 +30,7 @@ public class StructureWartCap implements IStructure
 	@Override
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
-		if (!isWall(world, pos))
+		if (!isWall(world, pos) || pos.getY() > 57 || pos.getY() < 34 || world.isAir(pos.down(3)))
 			return;
 		int radius = 3 + random.nextInt(3);
 		int r2 = radius * radius;

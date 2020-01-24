@@ -70,6 +70,7 @@ public class BiomesRegister
 			float chance = Config.getFloat("biomes", regName + "_chance", 1);
 			maxChance += chance;
 			biome.setGenChance(maxChance);
+			biome.loadStructures();
 			REGISTRY.add(biome);
 		}
 	}
@@ -82,6 +83,7 @@ public class BiomesRegister
 			float ch = Config.getFloat("biomes", regName + "_chance", chance);
 			maxChance += ch;
 			biome.setGenChance(maxChance);
+			biome.loadStructures();
 			REGISTRY.add(biome);
 		}
 	}
@@ -92,6 +94,7 @@ public class BiomesRegister
 		{
 			mainBiome.setEdge(biome);
 			mainBiome.setEdgeSize(size);
+			biome.loadStructures();
 		}
 	}
 	
@@ -102,6 +105,7 @@ public class BiomesRegister
 		{
 			chance = Config.getFloat("biomes", regName + "_subchance", chance);
 			mainBiome.addSubBiome(biome, chance);
+			biome.loadStructures();
 		}
 	}
 	

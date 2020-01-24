@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureGrayMold;
 import paulevs.betternether.structures.plants.StructureLucis;
 import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
@@ -14,6 +15,8 @@ import paulevs.betternether.structures.plants.StructureMedRedMushroom;
 import paulevs.betternether.structures.plants.StructureOrangeMushroom;
 import paulevs.betternether.structures.plants.StructureRedMold;
 import paulevs.betternether.structures.plants.StructureVanillaMushroom;
+import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
+import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
 public class NetherMushroomForest extends NetherBiome
 {
@@ -27,6 +30,8 @@ public class NetherMushroomForest extends NetherBiome
 		addStructure("red_mold", new StructureRedMold(), StructureType.FLOOR, 0.3F, false);
 		addStructure("gray_mold", new StructureGrayMold(), StructureType.FLOOR, 0.3F, false);
 		addStructure("lucis", new StructureLucis(), StructureType.WALL, 0.05F, false);
+		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
+		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
 	}
 
 	@Override

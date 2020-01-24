@@ -1,5 +1,6 @@
 package paulevs.betternether.biomes;
 
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.bones.StructureBoneReef;
 import paulevs.betternether.structures.plants.StructureNetherGrass;
 

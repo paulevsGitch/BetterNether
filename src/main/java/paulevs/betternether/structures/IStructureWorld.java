@@ -1,13 +1,8 @@
 package paulevs.betternether.structures;
 
-import java.util.Random;
-
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-
 public interface IStructureWorld
 {
-	void generate(IWorld world, BlockPos pos);
+	/*void generate(IWorld world, BlockPos pos);
 	
 	default float getAirFraction(IWorld world, BlockPos pos)
 	{
@@ -46,5 +41,5 @@ public interface IStructureWorld
 	{
 		randomize(random);
 		generate(world, pos);
-	}
+	}*/
 }

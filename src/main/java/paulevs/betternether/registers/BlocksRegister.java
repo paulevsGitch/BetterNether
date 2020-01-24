@@ -63,6 +63,7 @@ import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.blocks.BlockNetherrackFurnace;
 import paulevs.betternether.blocks.BlockNetherrackMoss;
 import paulevs.betternether.blocks.BlockOrangeMushroom;
+import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.BlockRedMold;
@@ -302,6 +303,12 @@ public class BlocksRegister
 	public static final Block WART_LOG = new BNPillar(Blocks.NETHER_WART_BLOCK);
 	public static final Block WART_BARK = new BNPlanks(MaterialColor.RED);
 	public static final Block WART_ROOTS = new BlockWartRoots();
+	public static final Block WALL_MOSS = new BlockPlantWall(MaterialColor.RED);
+	public static final Block WALL_MUSHROOM_BROWN = new BlockPlantWall(MaterialColor.BROWN);
+	public static final Block WALL_MUSHROOM_RED = new BlockPlantWall(MaterialColor.RED);
+	
+	//public static final Block ASH_VINE_STEM = new BlockAshVineStem();
+	//public static final Block ASH_VINE_LEAVES = new BlockAshVineLeaves();
 	
 	public static void register()
 	{
@@ -514,6 +521,9 @@ public class BlocksRegister
 		registerBlock("wart_log", WART_LOG);
 		registerBlock("wart_bark", WART_BARK);
 		registerBlockNI("wart_roots", WART_ROOTS);
+		registerBlock("wall_moss", WALL_MOSS);
+		registerBlock("wall_mushroom_brown", WALL_MUSHROOM_BROWN);
+		registerBlock("wall_mushroom_red", WALL_MUSHROOM_RED);
 	}
 	
 	private static void registerBlock(String name, Block block)

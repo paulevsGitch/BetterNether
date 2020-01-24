@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackVine;
 import paulevs.betternether.structures.plants.StructureEggPlant;
 import paulevs.betternether.structures.plants.StructureEye;
@@ -17,6 +18,9 @@ import paulevs.betternether.structures.plants.StructureMagmaFlower;
 import paulevs.betternether.structures.plants.StructureNetherGrass;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureStalagnate;
+import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
+import paulevs.betternether.structures.plants.StructureWallMoss;
+import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
 public class NetherBiomeJungle extends NetherBiome
 {
@@ -33,6 +37,9 @@ public class NetherBiomeJungle extends NetherBiome
 		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, true);
 		addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.4F, true);
 		addStructure("flowered_vine", new StructureFloweredVine(), StructureType.CEIL, 0.4F, true);
+		addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
+		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
+		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
 	}
 
 	@Override

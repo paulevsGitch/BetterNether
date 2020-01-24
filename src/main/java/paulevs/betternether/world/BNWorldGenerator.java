@@ -21,22 +21,15 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registers.BlocksRegister;
-import paulevs.betternether.structures.IStructureWorld;
-import paulevs.betternether.structures.StructureBuilding;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.world.structures.CityFeature;
 
 public class BNWorldGenerator
 {
-	private static IStructureWorld[] globalStructuresLand;
-	private static IStructureWorld[] globalStructuresLava;
-	private static IStructureWorld[] globalStructuresCave;
-	
 	private static boolean hasCleaningPass;
 	private static boolean hasFixPass;
 	private static boolean hasFortressPass;
 
-	private static float structueDensity;
 	private static float oreDensity;
 	
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
@@ -44,7 +37,7 @@ public class BNWorldGenerator
 	//private static CityStructureManager cityManager;
 	private static Mutable popPos = new Mutable();
 	
-	private static NetherBiome[][][] biomeArray = new NetherBiome[8][64][8];
+	private static final NetherBiome[][][] BIOMES = new NetherBiome[8][64][8];
 	private static BiomeMap map;
 	private static int cacheTimer = 0;
 	private static int sizeXZ;
@@ -53,6 +46,8 @@ public class BNWorldGenerator
 	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(1024);
 	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(1024);
 	private static final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(1024);
+	private static final List<BlockPos> LIST_UNDER = new ArrayList<BlockPos>(4096);
+	private static final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
 	
 	private static StructureCaves caves;
 
@@ -78,7 +73,6 @@ public class BNWorldGenerator
 		hasFortressPass = Config.getBoolean("generator_world", "firtress_fix_pass", true);
 		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
-		structueDensity = Config.getFloat("generator_world", "structure_density", 1F / 64F);
 		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
 		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
 	}
@@ -87,28 +81,6 @@ public class BNWorldGenerator
 	{
 		long seed = world.getSeed();
 		map = new BiomeMap(seed, sizeXZ, sizeY);
-		
-		globalStructuresLand = new IStructureWorld[] {
-				new StructureBuilding("altar_01", -1),
-				new StructureBuilding("altar_02", -4),
-				new StructureBuilding("altar_03", -3),
-				new StructureBuilding("altar_04", -3),
-				new StructureBuilding("altar_05", -2),
-				new StructureBuilding("altar_06", -2),
-				new StructureBuilding("portal_01", -4),
-				new StructureBuilding("portal_02", -3),
-				new StructureBuilding("garden_01", -3),
-				new StructureBuilding("garden_02", -2),
-				new StructureBuilding("pillar_01", -1),
-				new StructureBuilding("respawn_point_01", -3),
-				new StructureBuilding("respawn_point_02", -2)
-		};
-		
-		globalStructuresLava = new IStructureWorld[] {};
-		
-		globalStructuresCave = new IStructureWorld[] {
-				new StructureBuilding("room_01", -5),
-		};
 		
 		//cityManager = new CityStructureManager(seed);
 		//cityManager.setDistance(32);
@@ -155,7 +127,7 @@ public class BNWorldGenerator
 				for (int z = 0; z < 8; z++)
 				{
 					wz = sz + (z << 1);
-					biomeArray[x][y][z] = getBiome(wx, wy, wz);
+					BIOMES[x][y][z] = getBiome(wx, wy, wz);
 				}
 			}
 		}
@@ -168,7 +140,7 @@ public class BNWorldGenerator
 		y = (y + random.nextInt(4) - 2) >> 1;
 		z = (z + random.nextInt(4) - 2) >> 1;
 		
-		return biomeArray[clamp(x, 7)][clamp(y, 63)][clamp(z, 7)];
+		return BIOMES[clamp(x, 7)][clamp(y, 63)][clamp(z, 7)];
 	}
 	
 	public static NetherBiome getBiome(int x, int y, int z)
@@ -220,7 +192,7 @@ public class BNWorldGenerator
 		makeBiomeArray(sx, sz);
 		
 		//Structure Generator
-		if (random.nextFloat() < structueDensity)
+		/*if (random.nextFloat() < structueDensity)
 		{
 			BlockPos pos = new BlockPos(sx + random.nextInt(8), 32 + random.nextInt(120 - 32), sz + random.nextInt(8));
 			while (world.getBlockState(pos).getBlock() != Blocks.AIR && pos.getY() > 32)
@@ -252,7 +224,7 @@ public class BNWorldGenerator
 			{
 				globalStructuresCave[random.nextInt(globalStructuresCave.length)].generateSubterrain(world, pos, random);
 			}
-		}
+		}*/
 
 		// Total Populator
 		for (int x = 0; x < 16; x++)
@@ -265,12 +237,13 @@ public class BNWorldGenerator
 				for (int y = 5; y < 126; y++)
 				{
 					popPos.set(wx, y, wz);
-					
-					if (BlocksHelper.isNetherGroundMagma(world.getBlockState(popPos)))
+					BlockState state = world.getBlockState(popPos);
+					boolean lava = BlocksHelper.isLava(state);
+					if (lava || BlocksHelper.isNetherGroundMagma(state))
 					{
 						biome = getBiomeLocal(x, y, z, random);
 						
-						if (world.isAir(popPos.up()))
+						if (!lava && world.isAir(popPos.up()))
 							biome.genSurfColumn(world, popPos, random);
 
 						if (((x + y + z) & 1) == 0)
@@ -278,19 +251,20 @@ public class BNWorldGenerator
 							// Ground Generation
 							if (world.isAir(popPos.up()))
 							{
-								//biome.genFloorObjects(world, popPos.up(), random);
-								LIST_FLOOR.add(new BlockPos(popPos.up()));
+								if (lava)
+									LIST_LAVA.add(popPos.up());
+								else
+									LIST_FLOOR.add(new BlockPos(popPos.up()));
 							}
 
 							// Ceiling Generation
 							else if (world.isAir(popPos.down()))
 							{
-								//biome.genCeilObjects(world, popPos.down(), random);
 								LIST_CEIL.add(new BlockPos(popPos.down()));
 							}
 
 							// Wall Generation
-							else// if (((x + y + z) & 1) == 0)
+							else
 							{
 								boolean bNorth = world.isAir(popPos.north());
 								boolean bSouth = world.isAir(popPos.south());
@@ -317,12 +291,31 @@ public class BNWorldGenerator
 										LIST_WALL.add(new BlockPos(objPos));
 									}
 								}
+								else
+								{
+									LIST_UNDER.add(new BlockPos(popPos));
+								}
 							}
 						}
 						if (random.nextFloat() < oreDensity)
 							spawnOre(BlocksRegister.BLOCK_CINCINNASITE_ORE.getDefaultState(), world, popPos, random);
 					}
 				}
+			}
+		}
+		
+		for (BlockPos pos: LIST_UNDER)
+		{
+			biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
+			biome.genUnderObjects(world, pos, random);
+		}
+		
+		for (BlockPos pos: LIST_LAVA)
+		{
+			if (world.isAir(pos))
+			{
+				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
+				biome.genLavaObjects(world, pos, random);
 			}
 		}
 		
@@ -347,6 +340,8 @@ public class BNWorldGenerator
 				biome.genCeilObjects(world, pos, random);
 			}
 		
+		LIST_UNDER.clear();
+		LIST_LAVA.clear();
 		LIST_FLOOR.clear();
 		LIST_WALL.clear();
 		LIST_CEIL.clear();

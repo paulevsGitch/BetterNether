@@ -275,5 +275,9 @@
 	
 	"block.betternether.wart_log": "Wart Log",
 	"block.betternether.wart_bark": "Wart Bark",
-	"block.betternether.wart_roots": "Wart Roots"
+	"block.betternether.wart_roots": "Wart Roots",
+	
+	"block.betternether.wall_moss": "Wall Moss",
+	"block.betternether.wall_mushroom_brown": "Wall Brown Mushroom",
+	"block.betternether.wall_mushroom_red": "Wall Red Mushroom"
 }

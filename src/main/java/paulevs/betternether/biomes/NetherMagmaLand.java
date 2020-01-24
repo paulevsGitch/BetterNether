@@ -10,6 +10,7 @@ import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.structures.StructureGeyser;
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureGoldenVine;
 import paulevs.betternether.structures.plants.StructureMagmaFlower;
 

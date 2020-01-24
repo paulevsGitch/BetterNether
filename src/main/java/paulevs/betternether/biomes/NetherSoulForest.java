@@ -1,5 +1,6 @@
 package paulevs.betternether.biomes;
 
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureSoulLily;
 
 public class NetherSoulForest extends NetherSoulPlain

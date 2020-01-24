@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:red_mushroom"
+    }
+  },
+  "result": {
+    "item": "betternether:wall_mushroom_red"
+  }
+}

@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureAgave;
 import paulevs.betternether.structures.plants.StructureBarrelCactus;
 import paulevs.betternether.structures.plants.StructureNetherCactus;

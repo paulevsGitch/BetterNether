@@ -2,6 +2,7 @@ package paulevs.betternether.biomes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
@@ -9,6 +10,8 @@ import net.minecraft.world.IWorld;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.structures.IStructure;
+import paulevs.betternether.structures.StructureType;
+import paulevs.betternether.structures.StructureWorld;
 import paulevs.betternether.structures.plants.StructureWartCap;
 
 public class NetherBiome
@@ -19,6 +22,8 @@ public class NetherBiome
 	private ArrayList<StructureInfo> generatorsFloor = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> generatorsWall = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> generatorsCeil = new ArrayList<StructureInfo>();
+	private ArrayList<StructureInfo> generatorsLava = new ArrayList<StructureInfo>();
+	private ArrayList<StructureInfo> generatorsUnder = new ArrayList<StructureInfo>();
 	
 	protected String name;
 	protected NetherBiome edge;
@@ -28,12 +33,44 @@ public class NetherBiome
 	protected float maxSubBiomeChance = 1;
 	protected float genChance = 1;
 	
+	private static final String[] DEF_STRUCTURES = new String[] {
+			structureFormat("altar_01", -1, StructureType.FLOOR, 0.00001F),
+			structureFormat("altar_02", -4, StructureType.FLOOR, 0.00001F),
+			structureFormat("altar_03", -3, StructureType.FLOOR, 0.00001F),
+			structureFormat("altar_04", -3, StructureType.FLOOR, 0.00001F),
+			structureFormat("altar_05", -2, StructureType.FLOOR, 0.00001F),
+			structureFormat("altar_06", -2, StructureType.FLOOR, 0.00001F),
+			structureFormat("portal_01", -4, StructureType.FLOOR, 0.00001F),
+			structureFormat("portal_02", -3, StructureType.FLOOR, 0.00001F),
+			structureFormat("garden_01", -3, StructureType.FLOOR, 0.00001F),
+			structureFormat("garden_02", -2, StructureType.FLOOR, 0.00001F),
+			structureFormat("pillar_01", -1, StructureType.FLOOR, 0.00001F),
+			structureFormat("respawn_point_01", -3, StructureType.FLOOR, 0.00001F),
+			structureFormat("respawn_point_02", -2, StructureType.FLOOR, 0.00001F)
+	};
+	
+	private ArrayList<String> structures;
+	
 	public NetherBiome(String name)
 	{
 		this.name = name;
 		subbiomes = new ArrayList<Subbiome>();
-		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.08F, true);
+		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.8F, true);
 		subbiomes.add(new Subbiome(this, 1));
+		
+		structures = new ArrayList<String>(DEF_STRUCTURES.length);
+		for (String s: DEF_STRUCTURES)
+			structures.add(s);
+	}
+	
+	public void loadStructures()
+	{
+		String group = "generator_" + getRegistryName();
+		String[] structAll = Config.getStringArray(group, "structures", structures.toArray(new String[] {}));
+		for (String struct: structAll)
+		{
+			structureFromString(struct);
+		}
 	}
 	
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random) {}
@@ -59,7 +96,21 @@ public class NetherBiome
 				info.structure.generate(world, pos, random);
 	}
 	
-	protected double getFeatureNoise(BlockPos pos, int id)
+	public void genLavaObjects(IWorld world, BlockPos pos, Random random)
+	{
+		for (StructureInfo info: generatorsLava)
+			if (info.canGenerate(random, pos))
+				info.structure.generate(world, pos, random);
+	}
+	
+	public void genUnderObjects(IWorld world, BlockPos pos, Random random)
+	{
+		for (StructureInfo info: generatorsUnder)
+			if (info.canGenerate(random, pos))
+				info.structure.generate(world, pos, random);
+	}
+	
+	protected static double getFeatureNoise(BlockPos pos, int id)
 	{
 		return SCATTER.eval(pos.getX() * 0.1, pos.getY() * 0.1 + id * 10, pos.getZ() * 0.1);
 	}
@@ -157,14 +208,12 @@ public class NetherBiome
 		default:
 			break;
 		}
-		
 	}
 	
-	protected enum StructureType
+	protected void addWorldStructures(String... structures)
 	{
-		FLOOR,
-		WALL,
-		CEIL;
+		for (String s: structures)
+			this.structures.add(s);
 	}
 	
 	protected class StructureInfo
@@ -213,5 +262,70 @@ public class NetherBiome
 	public void setGenChance(float chance)
 	{
 		this.genChance = chance;
+	}
+	
+	protected static String structureFormat(String name, int offset, StructureType type, float chance)
+	{
+		return String.format(Locale.ROOT, "name: %s; offset: %d; type: %s; chance: %f", name, offset, type.getName(), chance);
+	}
+	
+	private void structureFromString(String structureString)
+	{
+		String[] args = structureString.split(";");
+		
+		String name = "";
+		int offset = 0;
+		StructureType type = StructureType.FLOOR;
+		float chance = 0;
+		
+		for (String a: args)
+		{
+			if (a.contains("name:"))
+			{
+				name = a.replace("name:", "").trim();
+			}
+			else if (a.contains("offset:"))
+			{
+				offset = Integer.parseInt(a.replace("offset:", "").trim());
+			}
+			else if (a.contains("type:"))
+			{
+				type = StructureType.fromString(a);
+			}
+			else if (a.contains("chance:"))
+			{
+				chance = Float.parseFloat(a.replace("chance:", "").trim());
+			}
+		}
+		
+		if (!name.isEmpty())
+		{
+			StructureWorld structure = new StructureWorld(name, offset, type);
+			if (structure.loaded())
+			{
+				StructureInfo info = new StructureInfo(structure, chance, false);
+				
+				switch(structure.getType())
+				{
+				case CEIL:
+					generatorsCeil.add(info);
+					break;
+				case FLOOR:
+					generatorsFloor.add(info);
+					break;
+				case WALL:
+					generatorsWall.add(info);
+					break;
+				case LAVA:
+					generatorsLava.add(info);
+					break;
+				case UNDER:
+					generatorsUnder.add(info);
+					break;
+				default:
+					break;
+				}
+			}
+		}
 	}
 }

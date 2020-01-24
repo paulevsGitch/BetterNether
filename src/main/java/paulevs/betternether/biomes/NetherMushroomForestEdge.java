@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureGrayMold;
 import paulevs.betternether.structures.plants.StructureOrangeMushroom;
 import paulevs.betternether.structures.plants.StructureRedMold;

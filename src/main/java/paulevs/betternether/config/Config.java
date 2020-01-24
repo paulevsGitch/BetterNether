@@ -9,6 +9,7 @@ import java.io.Reader;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -150,6 +151,76 @@ public class Config
 		{
 			JsonObject newGroup = new JsonObject();
 			newGroup.addProperty(name, def);
+			config.add(group, newGroup);
+			rewrite = true;
+			return def;
+		}
+	}
+	
+	public static String[] getStringArray(String group, String name, String[] def)
+	{
+		JsonObject jGroup = config.getAsJsonObject(group);
+		if (jGroup != null)
+		{
+			JsonElement element = jGroup.get(name);
+			if (element != null)
+			{
+				return toStringArray(element.getAsJsonArray());
+			}
+			else
+			{
+				jGroup.add(name, toJsonArray(def));
+				rewrite = true;
+				return def;
+			}
+		}
+		else
+		{
+			JsonObject newGroup = new JsonObject();
+			newGroup.add(name, toJsonArray(def));
+			config.add(group, newGroup);
+			rewrite = true;
+			return def;
+		}
+	}
+	
+	private static String[] toStringArray(JsonArray array)
+	{
+		String[] result = new String[array.size()];
+		for (int i = 0; i < array.size(); i++)
+			result[i] = array.get(i).getAsString();
+		return result;
+	}
+	
+	private static JsonArray toJsonArray(String[] array)
+	{
+		JsonArray result = new JsonArray();
+		for (String s: array)
+			result.add(s);
+		return result;
+	}
+	
+	public static JsonArray getJsonArray(String group, String name, JsonArray def)
+	{
+		JsonObject jGroup = config.getAsJsonObject(group);
+		if (jGroup != null)
+		{
+			JsonElement element = jGroup.get(name);
+			if (element != null)
+			{
+				return element.getAsJsonArray();
+			}
+			else
+			{
+				jGroup.add(name, def);
+				rewrite = true;
+				return def;
+			}
+		}
+		else
+		{
+			JsonObject newGroup = new JsonObject();
+			newGroup.add(name, def);
 			config.add(group, newGroup);
 			rewrite = true;
 			return def;

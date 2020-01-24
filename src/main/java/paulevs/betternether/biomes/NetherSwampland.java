@@ -8,12 +8,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureBlackVine;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSmoker;
 import paulevs.betternether.structures.plants.StructureSoulVein;
 import paulevs.betternether.structures.plants.StructureSwampGrass;
+import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
+import paulevs.betternether.structures.plants.StructureWallMoss;
+import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWillow;
 
 public class NetherSwampland extends NetherBiome
@@ -28,6 +32,9 @@ public class NetherSwampland extends NetherBiome
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
 		addStructure("nether_grass", new StructureSwampGrass(), StructureType.FLOOR, 0.4F, false);
 		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, false);
+		addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
+		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
+		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
 	}
 	
 	@Override

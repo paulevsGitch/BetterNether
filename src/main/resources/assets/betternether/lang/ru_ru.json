@@ -275,5 +275,9 @@
 	
 	"block.betternether.wart_log": "Бревно нароста",
 	"block.betternether.wart_bark": "Кора нароста",
-	"block.betternether.wart_roots": "Корни нароста"
+	"block.betternether.wart_roots": "Корни нароста",
+	
+	"block.betternether.wall_moss": "Настенный мох",
+	"block.betternether.wall_mushroom_brown": "Настенный коричневый гриб",
+	"block.betternether.wall_mushroom_red": "Настенный красный гриб"
 }
