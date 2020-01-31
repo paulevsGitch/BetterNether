@@ -6,7 +6,6 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
@@ -14,8 +13,12 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.VillageFeatureConfig;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
@@ -28,91 +31,64 @@ public class BNWorldGenerator
 {
 	private static boolean hasCleaningPass;
 	private static boolean hasFixPass;
-	private static boolean hasFortressPass;
+	//private static boolean hasFortressPass;
 
 	private static float oreDensity;
 	
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	
-	//private static CityStructureManager cityManager;
 	private static Mutable popPos = new Mutable();
 	
 	private static final NetherBiome[][][] BIOMES = new NetherBiome[8][64][8];
 	private static BiomeMap map;
-	private static int cacheTimer = 0;
 	private static int sizeXZ;
 	private static int sizeY;
 	
-	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(1024);
-	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(1024);
-	private static final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(1024);
-	private static final List<BlockPos> LIST_UNDER = new ArrayList<BlockPos>(4096);
+	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(4096);
+	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(4096);
+	private static final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(4096);
 	private static final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
 	
 	private static StructureCaves caves;
+	private static NetherBiome biome;
 
-	private static final StructureFeature<VillageFeatureConfig> CITY = Registry.register(
-			Registry.FEATURE,
+	public static final StructureFeature<DefaultFeatureConfig> CITY = Registry.register(
+			Registry.STRUCTURE_FEATURE,
 			new Identifier(BetterNether.MOD_ID, "nether_city"),
-			new CityFeature(VillageFeatureConfig::deserialize)
+			new CityFeature(DefaultFeatureConfig::deserialize)
 			);
 	
-	static
+	public static void onModInit()
 	{
-		Biomes.NETHER.addFeature(
-				GenerationStep.Feature.UNDERGROUND_STRUCTURES,
-				CITY.configure(new VillageFeatureConfig("nether_city/centers", 6)));
-		Biomes.NETHER.addStructureFeature(CITY.configure(new VillageFeatureConfig("nether_city/centers", 6)));
-		//Feature.STRUCTURES.put("nether_city", (StructureFeature<VillageFeatureConfig>) CITY);
-	}
-	
-	public static void loadConfig()
-	{
-		hasCleaningPass = Config.getBoolean("generator_world", "cleaning_pass", true);
-		hasFixPass = Config.getBoolean("generator_world", "fixing_pass", true);
-		hasFortressPass = Config.getBoolean("generator_world", "firtress_fix_pass", true);
+		hasCleaningPass = Config.getBoolean("generator_world", "terrain_cleaning_pass", true);
+		hasFixPass = Config.getBoolean("generator_world", "world_fixing_pass", true);
+		//hasFortressPass = Config.getBoolean("generator_world", "fortress_fix_pass", true);
 		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
 		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
 		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
+		
+		if (Config.getBoolean("generator_world", "generate_cities", true))
+		{
+			Biomes.NETHER.addStructureFeature(CITY.configure(FeatureConfig.DEFAULT));
+			Biomes.NETHER.addFeature(GenerationStep.Feature.RAW_GENERATION, CITY.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT)));
+			Feature.STRUCTURES.put("nether_city", CITY);
+		}
 	}
 
 	public static void init(IWorld world)
 	{
-		long seed = world.getSeed();
-		map = new BiomeMap(seed, sizeXZ, sizeY);
-		
-		//cityManager = new CityStructureManager(seed);
-		//cityManager.setDistance(32);
-		
-		caves = new StructureCaves(seed);
-		
-		/*Biomes.NETHER.addFeature(
-				GenerationStep.Feature.UNDERGROUND_STRUCTURES,
-				CITY.configure(new VillageFeatureConfig("nether_city/centers", 6)));
-		Feature.STRUCTURES.put("nether_city", (StructureFeature<VillageFeatureConfig>) CITY);*/
-		//Feature.JIGSAW_STRUCTURES.add((StructureFeature<?>) CITY);
+		if (map == null)
+		{
+			long seed = world.getSeed();
+			map = new BiomeMap(seed, sizeXZ, sizeY);
+			caves = new StructureCaves(seed);
+		}
 	}
 	
 	public static void clearCache()
 	{
-		if (cacheTimer > 512)
-		{
-			cacheTimer = 0;
-			map.clearCache();
-		}
-	}
-	
-	public static void save(ServerWorld world)
-	{
-		//if (cityManager != null)
-		//	cityManager.save(world);
-	}
-	
-	public static void load(ServerWorld world)
-	{
-		//if (cityManager != null)
-		//	cityManager.load(world);
+		map.clearCache();
 	}
 	
 	private static void makeBiomeArray(int sx, int sz)
@@ -131,7 +107,6 @@ public class BNWorldGenerator
 				}
 			}
 		}
-		cacheTimer ++;
 	}
 	
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random)
@@ -183,48 +158,17 @@ public class BNWorldGenerator
 		return x < 0 ? 0 : x > max ? max : x;
 	}
 
-	public static void generate(IWorld world, int cx, int cz, Random random)
+	public static void populate(IWorld world, int sx, int sz, Random random)
 	{
-		NetherBiome biome;
-		int sx = (cx << 4) | 8;
-		int sz = (cz << 4) | 8;
-
 		makeBiomeArray(sx, sz);
 		
-		//Structure Generator
-		/*if (random.nextFloat() < structueDensity)
-		{
-			BlockPos pos = new BlockPos(sx + random.nextInt(8), 32 + random.nextInt(120 - 32), sz + random.nextInt(8));
-			while (world.getBlockState(pos).getBlock() != Blocks.AIR && pos.getY() > 32)
-			{
-				pos = pos.down();
-			}
-			int h = BlocksHelper.downRay(world, pos, pos.getY() - 5);
-			pos = pos.down(h + 1);
-			boolean terrain = true;
-			for (int y = 1; y < 8; y++)
-			{
-				if (!world.isAir(pos.up(y)))
-				{
-					terrain = false;
-					break;
-				}
-			}
-			if (terrain)
-			{
-				if (BlocksHelper.isLava(world.getBlockState(pos)))
-				{
-					if (globalStructuresLava.length > 0)
-						globalStructuresLava[random.nextInt(globalStructuresLava.length)].generateLava(world, pos.up(), random);
-				}
-				else if (globalStructuresLand.length > 0)
-					globalStructuresLand[random.nextInt(globalStructuresLand.length)].generateSurface(world, pos.up(), random);
-			}
-			else if (globalStructuresCave.length > 0)
-			{
-				globalStructuresCave[random.nextInt(globalStructuresCave.length)].generateSubterrain(world, pos, random);
-			}
-		}*/
+		LIST_LAVA.clear();
+		LIST_FLOOR.clear();
+		LIST_WALL.clear();
+		LIST_CEIL.clear();
+		
+		int ex = sx + 16;
+		int ez = sz + 16;
 
 		// Total Populator
 		for (int x = 0; x < 16; x++)
@@ -236,6 +180,9 @@ public class BNWorldGenerator
 				
 				for (int y = 5; y < 126; y++)
 				{
+					if (caves.isInCave(x, y, z))
+						continue;
+					
 					popPos.set(wx, y, wz);
 					BlockState state = world.getBlockState(popPos);
 					boolean lava = BlocksHelper.isLava(state);
@@ -282,18 +229,16 @@ public class BNWorldGenerator
 									else
 										objPos = popPos.west();
 
-									boolean bDown = world.isAir(objPos.down());
-									boolean bUp = world.isAir(objPos.up());
-
-									if (bDown && bUp)
+									if ((popPos.getX() >= sx) && (popPos.getX() < ex) && (popPos.getZ() >= sz) && (popPos.getZ() < ez))
 									{
-										//biome.genWallObjects(world, objPos, random);
-										LIST_WALL.add(new BlockPos(objPos));
+										boolean bDown = world.isAir(objPos.down());
+										boolean bUp = world.isAir(objPos.up());
+	
+										if (bDown && bUp)
+										{
+											LIST_WALL.add(new BlockPos(objPos));
+										}
 									}
-								}
-								else
-								{
-									LIST_UNDER.add(new BlockPos(popPos));
 								}
 							}
 						}
@@ -302,12 +247,7 @@ public class BNWorldGenerator
 					}
 				}
 			}
-		}
-		
-		for (BlockPos pos: LIST_UNDER)
-		{
-			biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
-			biome.genUnderObjects(world, pos, random);
+			
 		}
 		
 		for (BlockPos pos: LIST_LAVA)
@@ -339,18 +279,12 @@ public class BNWorldGenerator
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
 				biome.genCeilObjects(world, pos, random);
 			}
-		
-		LIST_UNDER.clear();
-		LIST_LAVA.clear();
-		LIST_FLOOR.clear();
-		LIST_WALL.clear();
-		LIST_CEIL.clear();
 	}
 	
-	public static void smoothChunk(IWorld world, int cx, int cz)
+	public static void prePopulate(IWorld world, int cx, int cz)
 	{
-		int wx = (cx << 4) | 8;
-		int wz = (cz << 4) | 8;
+		int wx = (cx << 4);// | 8;
+		int wz = (cz << 4);// | 8;
 		
 		popPos.set(wx, 0, wz);
 		caves.generate(world, popPos, world.getRandom());
@@ -408,9 +342,6 @@ public class BNWorldGenerator
 					BlocksHelper.setWithoutUpdate(world, up, AIR);
 			}
 		}
-		
-		//if (cityManager != null)
-		//	cityManager.generate(world, cx, cz);
 	}
 	
 	private static boolean canReplace(IWorld world, BlockPos pos)
@@ -430,29 +361,21 @@ public class BNWorldGenerator
 		}
 	}
 	
-	/*public static BlockPos getNearestCity(World world, int cx, int cz)
-	{
-		return cityManager.getNearestStructure(world, cx, cz);
-	}*/
-	
-	public static void cleaningPass(IWorld world, int cx, int cz)
+	public static void cleaningPass(IWorld world, int sx, int sz)
 	{
 		if (hasFixPass)
 		{
-			int wx = (cx << 4) | 8;
-			int wz = (cz << 4) | 8;
-			
-			fixBlocks(world, wx, 30, wz, wx + 15, 110, wz + 15);
+			fixBlocks(world, sx, 30, sz, sx + 15, 110, sz + 15);
 		}
 	}
 	
-	public static void fortressPass(IWorld world, int x1, int z1, int x2, int z2, int y2)
+	/*public static void fortressPass(IWorld world, int x1, int z1, int x2, int z2, int y2)
 	{
 		if (hasFortressPass)
 		{
 			fixBlocks(world, x1, 30, z1, x2, y2, z2);
 		}
-	}
+	}*/
 	
 	private static void fixBlocks(IWorld world, int x1, int y1, int z1, int x2, int y2, int z2)
 	{

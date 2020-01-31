@@ -14,6 +14,7 @@ import paulevs.betternether.structures.IStructure;
 public class StructureWall implements IStructure
 {
 	private static final Direction[] DIRECTIONS = HorizontalFacingBlock.FACING.getValues().toArray(new Direction[] {});
+	private static final Direction[] SHUFFLED = new Direction[DIRECTIONS.length];
 	private final Block plantBlock;
 	
 	public StructureWall(Block plantBlock)
@@ -35,33 +36,30 @@ public class StructureWall implements IStructure
 	private BlockState getPlacementState(IWorld world, BlockPos pos, Random random)
 	{
 		BlockState blockState = plantBlock.getDefaultState();
-		Direction[] dirs = getShuffled(random);
-		for(int i = 0; i < dirs.length; i++) 
+		shuffle(random);
+		for(int i = 0; i < 4; i++) 
 		{
-			Direction direction = dirs[i];
-			if (direction.getAxis().isHorizontal())
+			Direction direction = SHUFFLED[i];
+			Direction direction2 = direction.getOpposite();
+			blockState = blockState.with(HorizontalFacingBlock.FACING, direction2);
+			if (blockState.canPlaceAt(world, pos))
 			{
-				Direction direction2 = direction.getOpposite();
-				blockState = blockState.with(HorizontalFacingBlock.FACING, direction2);
-				if (blockState.canPlaceAt(world, pos))
-				{
-					return blockState;
-				}
+				return blockState;
 			}
 		}
 		return null;
 	}
 	
-	private Direction[] getShuffled(Random random)
+	private void shuffle(Random random)
 	{
-		Direction[] dirs = DIRECTIONS.clone();
+		for (int i = 0; i < 4; i++)
+			SHUFFLED[i] = DIRECTIONS[i];
 		for (int i = 0; i < 4; i++)
 		{
 			int i2 = random.nextInt(4);
-			Direction d = dirs[i2];
-			dirs[i2] = dirs[i];
-			dirs[i] = d;
+			Direction d = SHUFFLED[i2];
+			SHUFFLED[i2] = SHUFFLED[i];
+			SHUFFLED[i] = d;
 		}
-		return dirs;
 	}
 }

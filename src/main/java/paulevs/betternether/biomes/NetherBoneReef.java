@@ -9,7 +9,7 @@ public class NetherBoneReef extends NetherBiome
 	public NetherBoneReef(String name)
 	{
 		super(name);
-		addStructure("bone_reef", new StructureBoneReef(), StructureType.FLOOR, 0.2F, false);
+		addStructure("bone_reef", new StructureBoneReef(), StructureType.FLOOR, 0.2F, true);
 		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.4F, false);
 	}
 }

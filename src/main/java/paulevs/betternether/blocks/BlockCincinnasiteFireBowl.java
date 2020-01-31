@@ -28,12 +28,12 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.registers.BlocksRegister;
 
-public class BlockCincinnasitFireBowl extends BlockBaseNotFull
+public class BlockCincinnasiteFireBowl extends BlockBaseNotFull
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 12, 16);
 	public static final BooleanProperty FIRE = BooleanProperty.of("fire");
 
-	public BlockCincinnasitFireBowl()
+	public BlockCincinnasiteFireBowl()
 	{
 		super(FabricBlockSettings.copy(BlocksRegister.BLOCK_CINCINNASITE).nonOpaque().build());
 		this.setDefaultState(getStateManager().getDefaultState().with(FIRE, false));
@@ -84,7 +84,7 @@ public class BlockCincinnasitFireBowl extends BlockBaseNotFull
 	@Override
 	public void onSteppedOn(World world, BlockPos pos, Entity entity)
 	{
-		if (!entity.isFireImmune() && entity instanceof LivingEntity)
+		if (!entity.isFireImmune() && entity instanceof LivingEntity && world.getBlockState(pos).get(FIRE))
 		{
 			entity.damage(DamageSource.HOT_FLOOR, 1.0F);
 		}

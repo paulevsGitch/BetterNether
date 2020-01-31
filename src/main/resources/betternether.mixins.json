@@ -12,10 +12,10 @@
 	"MapStateMixin",
 	"PlayerArmorMixin",
 	"StandArmorMixin",
-	"WorldSaveMixin",
 	"LocateMixin",
 	"GrassGrowMixin",
-	"StructureMixin"
+	"StructureMixin",
+	"BackgroundRenderMixin"
   ],
   "client": [],
   "injectors": {

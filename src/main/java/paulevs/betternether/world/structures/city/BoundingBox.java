@@ -1,4 +1,4 @@
-package paulevs.betternether.structures.city;
+package paulevs.betternether.world.structures.city;
 
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;

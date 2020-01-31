@@ -1,4 +1,4 @@
-package paulevs.betternether.structures.city;
+package paulevs.betternether.world.structures.city;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
+import paulevs.betternether.world.structures.piece.CityPiece;
 
 public class CityGenerator
 {
@@ -61,16 +62,16 @@ public class CityGenerator
 		buildings.add(building.getRotated(BlockRotation.COUNTERCLOCKWISE_90));
 	}
 	
-	private void placeCenterBuilding(BlockPos pos, StructureCityBuilding building, ArrayList<BuildingInfo> city)
+	private void placeCenterBuilding(BlockPos pos, StructureCityBuilding building, ArrayList<CityPiece> city, Random random)
 	{
 		BoundingBox bb = building.getBoungingBox().offset(pos);
 		bounds.add(bb);
-		city.add(new BuildingInfo(building, pos.add(0, building.getYOffset(), 0)));
+		city.add(new CityPiece(building, pos.add(0, building.getYOffset(), 0), random.nextInt()));
 		for (int i = 0; i < building.getEndsCount(); i++)
 			ends.add(pos.add(building.getOffsettedPos(i).add(0, building.getYOffset(), 0)));
 	}
 	
-	private void attachBuildings(Random random, ArrayList<BuildingInfo> city)
+	private void attachBuildings(Random random, ArrayList<CityPiece> city)
 	{
 		for (BlockPos pos : ends)
 		{
@@ -92,7 +93,7 @@ public class CityGenerator
 						for (int i = 0; i < building.getEndsCount(); i++)
 							if (i != index)
 								add.add(npos.add(building.getOffsettedPos(i)));
-						city.add(new BuildingInfo(building, npos));
+						city.add(new CityPiece(building, npos, random.nextInt()));
 						generate = false;
 					}
 				}
@@ -104,7 +105,7 @@ public class CityGenerator
 		add.clear();
 	}
 	
-	private void closeRoads(ArrayList<BuildingInfo> city)
+	private void closeRoads(ArrayList<CityPiece> city, Random random)
 	{
 		for (BlockPos pos : ends)
 		{
@@ -117,7 +118,7 @@ public class CityGenerator
 				{
 					BlockPos npos = new BlockPos(bb.x1, pos.getY() - offset.getY() + building.getYOffset(), bb.z1);
 					bounds.add(bb);
-					city.add(new BuildingInfo(building, npos));
+					city.add(new CityPiece(building, npos, random.nextInt()));
 					break;
 				}
 			}
@@ -128,13 +129,13 @@ public class CityGenerator
 		add.clear();
 	}
 	
-	public ArrayList<BuildingInfo> generate(BlockPos pos, Random random)
+	public ArrayList<CityPiece> generate(BlockPos pos, Random random)
 	{
-		ArrayList<BuildingInfo> city = new ArrayList<BuildingInfo>();
-		placeCenterBuilding(pos, centers.get(random.nextInt(centers.size())), city);
+		ArrayList<CityPiece> city = new ArrayList<CityPiece>();
+		placeCenterBuilding(pos, centers.get(random.nextInt(centers.size())), city, random);
 		for (int i = 0; i < 2 + random.nextInt(4); i++)
 			attachBuildings(random, city);
-		closeRoads(city);
+		closeRoads(city, random);
 		return city;
 	}
 	

@@ -38,7 +38,8 @@ public class BiomeMap
 	
 	public void clearCache()
 	{
-		MAPS.clear();
+		if (MAPS.size() > 16)
+			MAPS.clear();
 	}
 	
 	public NetherBiome getBiome(int bx, int by, int bz)

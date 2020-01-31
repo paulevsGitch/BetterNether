@@ -78,6 +78,7 @@ public class Config
 
 	public static boolean getBoolean(String group, String name, boolean def)
 	{
+		name += "[def: " + def + "]";
 		JsonObject jGroup = config.getAsJsonObject(group);
 		if (jGroup != null)
 		{
@@ -105,6 +106,7 @@ public class Config
 	
 	public static float getFloat(String group, String name, float def)
 	{
+		name += "[def: " + def + "]";
 		JsonObject jGroup = config.getAsJsonObject(group);
 		if (jGroup != null)
 		{
@@ -132,6 +134,7 @@ public class Config
 	
 	public static int getInt(String group, String name, int def)
 	{
+		name += "[def: " + def + "]";
 		JsonObject jGroup = config.getAsJsonObject(group);
 		if (jGroup != null)
 		{

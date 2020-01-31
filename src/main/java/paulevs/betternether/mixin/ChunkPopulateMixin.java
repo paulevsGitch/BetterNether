@@ -1,6 +1,8 @@
 package paulevs.betternether.mixin;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -19,22 +21,26 @@ import paulevs.betternether.world.BNWorldGenerator;
 public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 {
 	private static final ChunkRandom RANDOM = new ChunkRandom();
+	
+	@Shadow
+	@Final
+	protected IWorld world;
 
 	@Inject(method = "<init>*", at = @At("RETURN"))
 	private void onConstructed(IWorld world, BiomeSource biomeSource, C config, CallbackInfo ci)
 	{
-		if (world.getDimension().isNether())
-			BNWorldGenerator.init(world);
+		BNWorldGenerator.init(world);
 	}
 	
 	@Inject(method = "generateFeatures", at = @At("HEAD"))
     private void customPrePopulate(ChunkRegion region, CallbackInfo info)
 	{
-		if (!region.isClient() && region.getDimension().isNether())
+		int chunkX = region.getCenterChunkX();
+		int chunkZ = region.getCenterChunkZ();
+		if (!region.isClient() && isNetherBiome(region, chunkX, chunkZ))
 		{
-			int chunkX = region.getCenterChunkX();
-			int chunkZ = region.getCenterChunkZ();
-			BNWorldGenerator.smoothChunk(region, chunkX, chunkZ);
+			if (region.getDimension().isNether())
+				BNWorldGenerator.prePopulate(region, chunkX, chunkZ);
 		}
     }
 	
@@ -46,8 +52,10 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 		if (!region.isClient() && isNetherBiome(region, chunkX, chunkZ))
 		{
 			RANDOM.setSeed(chunkX, chunkZ);
-			BNWorldGenerator.generate(region, chunkX, chunkZ, RANDOM);
-			BNWorldGenerator.cleaningPass(region, chunkX, chunkZ);
+			int sx = chunkX << 4;
+			int sz = chunkZ << 4;
+			BNWorldGenerator.populate(region, sx, sz, RANDOM);
+			BNWorldGenerator.cleaningPass(region, sx, sz);
 			BNWorldGenerator.clearCache();
 		}
     }

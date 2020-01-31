@@ -17,6 +17,14 @@ import paulevs.betternether.registers.BlocksRegister;
 
 public class BlocksHelper
 {
+	public static final int FLAG_UPDATE_BLOCK = 1;
+	public static final int FLAG_SEND_CLIENT_CHANGES = 2;
+	public static final int FLAG_NO_RERENDER = 4;
+	public static final int FORSE_RERENDER = 8;
+	public static final int FLAG_IGNORE_OBSERVERS = 16;
+	
+	public static final int SET_SILENT = FLAG_UPDATE_BLOCK | FLAG_IGNORE_OBSERVERS | FLAG_SEND_CLIENT_CHANGES;
+	
 	public static boolean isLava(BlockState state)
 	{
 		return state.getMaterial() == Material.LAVA;
@@ -75,7 +83,7 @@ public class BlocksHelper
 	
 	public static void setWithoutUpdate(IWorld world, BlockPos pos, BlockState state)
 	{
-		world.setBlockState(pos, state, 19);
+		world.setBlockState(pos, state, SET_SILENT);
 	}
 	
 	public static int upRay(IWorld world, BlockPos pos, int maxDist)

@@ -12,6 +12,7 @@ import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
@@ -21,8 +22,8 @@ public class StructureNBT
 {
 	protected Identifier location;
 	protected Structure structure;
-	protected BlockMirror mirror;
-	protected BlockRotation rotation;
+	protected BlockMirror mirror = BlockMirror.NONE;
+	protected BlockRotation rotation = BlockRotation.NONE;
 
 	public StructureNBT(String structure)
 	{
@@ -67,7 +68,7 @@ public class StructureNBT
 			blockpos2.setX(blockpos2.getX());
 		if (this.mirror == BlockMirror.LEFT_RIGHT)
 			blockpos2.setZ(blockpos2.getZ());
-		StructurePlacementData data = new StructurePlacementData().setRotation(this.rotation);//.setMirrored(this.mirror).setRotation(this.rotation).setIgnoreEntities(true);
+		StructurePlacementData data = new StructurePlacementData().setRotation(this.rotation).setMirrored(this.mirror);//.setRotation(this.rotation).setIgnoreEntities(true);
 		structure.place(world, pos.add(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1), data);
 		return true;
 	}
@@ -79,7 +80,7 @@ public class StructureNBT
 
         try
         {
-        	InputStream inputstream = MinecraftServer.class.getResourceAsStream("/assets/" + ns + "/structures/" + nm + ".nbt");
+        	InputStream inputstream = MinecraftServer.class.getResourceAsStream("/data/" + ns + "/structures/" + nm + ".nbt");
             return readStructureFromStream(inputstream);
         }
         catch (IOException e)
@@ -115,6 +116,11 @@ public class StructureNBT
 	
 	public String getName()
 	{
-		return location.getNamespace();
+		return location.getPath();
+	}
+
+	public BlockBox getBoundingBox(BlockPos pos)
+	{
+		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirrored(mirror), pos);
 	}
 }

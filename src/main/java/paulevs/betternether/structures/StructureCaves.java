@@ -113,4 +113,13 @@ public class StructureCaves implements IStructure
 		h = h > 1 ? 1 : h < 0 ? 0 : h;
 		return mix(dist2, dist1, h) - blend * h * (1 - h);
 	}
+	
+	public boolean isInCave(int x, int y, int z)
+	{
+		int y2 = y - offset;
+		if (y2 >= 0 && y < 24)
+			return MASK[x][y2][z];
+		else
+			return false;
+	}
 }

@@ -36,5 +36,6 @@ public class EntityRegister
 			}
 			return render;
 		});
+		//Biomes.NETHER.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 4, 4));
 	}
 }

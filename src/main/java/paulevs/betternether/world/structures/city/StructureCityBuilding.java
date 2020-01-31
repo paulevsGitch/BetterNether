@@ -1,4 +1,4 @@
-package paulevs.betternether.structures.city;
+package paulevs.betternether.world.structures.city;
 
 import java.util.List;
 import java.util.Random;
@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureNBT;
 
@@ -23,7 +22,7 @@ public class StructureCityBuilding extends StructureNBT
 	protected static final BlockState AIR = Blocks.AIR.getDefaultState();
 	
 	private BoundingBox bb;
-	private BlockPos[] ends;
+	public BlockPos[] ends;
 	private Direction[] dirs;
 	private BlockPos rotationOffset;
 	private BlockRotation rotation;
@@ -93,7 +92,7 @@ public class StructureCityBuilding extends StructureNBT
 		return bb;
 	}
 	
-	public void place(World world, BlockPos pos)
+	public void place(IWorld world, BlockPos pos)
 	{
 		BlockPos p = pos.add(rotationOffset);
 		structure.place(world, p, new StructurePlacementData().setRotation(rotation));
@@ -138,7 +137,7 @@ public class StructureCityBuilding extends StructureNBT
 	{
 		BlockPos p = pos.add(rotationOffset);
 		structure.place(world, p, new StructurePlacementData().setRotation(rotation).setBoundingBox(boundingBox));
-		for (BlockPos rep : ends)
+		/*for (BlockPos rep : ends)
 		{
 			BlockPos repPos = rep.add(pos);
 			if (repPos.getX() >= boundingBox.minX && repPos.getX() <= boundingBox.maxX)
@@ -168,7 +167,7 @@ public class StructureCityBuilding extends StructureNBT
 							}
 						}
 					}
-			}
+			}*/
 	}
 
 	public BlockPos[] getEnds()
