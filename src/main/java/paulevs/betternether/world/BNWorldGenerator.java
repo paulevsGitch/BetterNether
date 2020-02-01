@@ -31,9 +31,9 @@ public class BNWorldGenerator
 {
 	private static boolean hasCleaningPass;
 	private static boolean hasFixPass;
-	//private static boolean hasFortressPass;
 
 	private static float oreDensity;
+	private static float structureDensity;
 	
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	
@@ -62,9 +62,9 @@ public class BNWorldGenerator
 	{
 		hasCleaningPass = Config.getBoolean("generator_world", "terrain_cleaning_pass", true);
 		hasFixPass = Config.getBoolean("generator_world", "world_fixing_pass", true);
-		//hasFortressPass = Config.getBoolean("generator_world", "fortress_fix_pass", true);
 		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
+		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 64F);
 		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
 		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
 		
@@ -161,6 +161,29 @@ public class BNWorldGenerator
 	public static void populate(IWorld world, int sx, int sz, Random random)
 	{
 		makeBiomeArray(sx, sz);
+		
+		//Structure Generator
+		if (random.nextFloat() < structureDensity)
+		{
+			popPos.set(sx + random.nextInt(16), 32 + random.nextInt(120 - 32), sz + random.nextInt(16));
+			while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
+			{
+				popPos.setY(popPos.getY() - 1);
+			}
+			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+			if (world.isAir(popPos))
+			{
+				BlockState down = world.getBlockState(popPos.down());
+				if (BlocksHelper.isLava(down))
+				{
+					biome.genLavaBuildings(world, popPos, random);
+				}
+				else if (BlocksHelper.isNetherGroundMagma(down))
+					biome.genFloorBuildings(world, popPos, random);
+			}
+			else
+				biome.genUnderBuildings(world, popPos, random);
+		}
 		
 		LIST_LAVA.clear();
 		LIST_FLOOR.clear();
@@ -283,8 +306,8 @@ public class BNWorldGenerator
 	
 	public static void prePopulate(IWorld world, int cx, int cz)
 	{
-		int wx = (cx << 4);// | 8;
-		int wz = (cz << 4);// | 8;
+		int wx = (cx << 4);
+		int wz = (cz << 4);
 		
 		popPos.set(wx, 0, wz);
 		caves.generate(world, popPos, world.getRandom());
@@ -368,14 +391,6 @@ public class BNWorldGenerator
 			fixBlocks(world, sx, 30, sz, sx + 15, 110, sz + 15);
 		}
 	}
-	
-	/*public static void fortressPass(IWorld world, int x1, int z1, int x2, int z2, int y2)
-	{
-		if (hasFortressPass)
-		{
-			fixBlocks(world, x1, 30, z1, x2, y2, z2);
-		}
-	}*/
 	
 	private static void fixBlocks(IWorld world, int x1, int y1, int z1, int x2, int y2, int z2)
 	{
