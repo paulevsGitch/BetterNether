@@ -23,10 +23,16 @@ public class CityGenerator
 	{
 		addBuildingToList("city_center_01", -10, centers);
 		addBuildingToList("city_center_02", -10, centers);
+		addBuildingToList("city_center_03", -10, centers);
 		
 		addBuildingToList("city_library_01", buildings);
+		addBuildingToList("city_library_02", buildings);
+		
 		addBuildingToList("city_tower_01", buildings);
 		addBuildingToList("city_tower_02", buildings);
+		addBuildingToList("city_tower_03", buildings);
+		addBuildingToList("city_tower_04", buildings);
+		
 		addBuildingToList("city_building_01", buildings);
 		addBuildingToList("city_building_02", buildings);
 		addBuildingToList("city_building_03", buildings);
@@ -36,9 +42,15 @@ public class CityGenerator
 		addBuildingToList("city_building_07", buildings);
 		addBuildingToList("city_building_08", buildings);
 		addBuildingToList("city_building_09", buildings);
-		addBuildingToList("city_building_10", buildings);
+		
 		addBuildingToList("city_enchanter_01", buildings);
-		addBuildingToList("city_hall", buildings);
+		addBuildingToList("city_enchanter_02", buildings);
+		
+		addBuildingToList("city_park_01", buildings);
+		addBuildingToList("city_park_02", buildings);
+		addBuildingToList("city_park_03", buildings);
+		
+		addBuildingToList("city_bridge_01", buildings);
 		
 		addBuildingToList("road_end_01", roadEnds);
 		addBuildingToList("road_end_02", -2, roadEnds);

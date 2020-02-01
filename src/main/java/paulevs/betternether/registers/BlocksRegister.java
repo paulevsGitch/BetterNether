@@ -88,7 +88,7 @@ import paulevs.betternether.blocks.BlockWillowLog;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.CincinnasiteForge;
-import paulevs.betternether.blocks.PigStatueRespawner;
+import paulevs.betternether.blocks.BlockStatueRespawner;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 
@@ -175,7 +175,7 @@ public class BlocksRegister
 	public static final Block BLOCK_CINCINNASITE_BRICKS_PILLAR = new BNPillar(BLOCK_CINCINNASITE);
 	public static final Block BLOCK_BONE_TILE = new BNBoneBlock();
 	public static final Block BLOCK_CINCINNASITE_PEDESTAL = new BlockCincinnasitePedestal();
-	public static final Block BLOCK_PIG_STATUE_RESPAWNER = new PigStatueRespawner();
+	public static final Block BLOCK_PIG_STATUE_RESPAWNER = new BlockStatueRespawner();
 	public static final Block BLOCK_CINCINNASITE_POT = new BlockCincinnasitePot();
 	public static final Block BLOCK_POTTED_PLANT = new BlockPottedPlant();
 	public static final Block BLOCK_CINCINNASITE_FRAME = new BlockCincinnasiteFrame();

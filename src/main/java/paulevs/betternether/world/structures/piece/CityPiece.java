@@ -54,32 +54,34 @@ public class CityPiece extends CustomPiece
 	{
 		if (!this.boundingBox.intersects(blockBox))
 			return true;
+		
+		BlockBox clamped = new BlockBox(boundingBox);
+		
+		clamped.minX = Math.max(clamped.minX, blockBox.minX);
+		clamped.maxX = Math.min(clamped.maxX, blockBox.maxX);
+		
+		clamped.minY = Math.max(clamped.minY, blockBox.minY);
+		clamped.maxY = Math.min(clamped.maxY, blockBox.maxY);
+		
+		clamped.minZ = Math.max(clamped.minZ, blockBox.minZ);
+		clamped.maxZ = Math.min(clamped.maxZ, blockBox.maxZ);
 
-		building.placeInChunk(world, pos, blockBox);
-
-		for (BlockPos rep : building.ends)
-		{
-			BlockPos repPos = rep.add(pos);
-			this.addBlock(world, AIR, repPos.getX(), repPos.getY(), repPos.getZ(), blockBox);
-		}
+		building.placeInChunk(world, pos, clamped);
 
 		BlockState state;
-		for (int x = 0; x < building.getBoungingBox().getMaxX(); x++)
-			for (int z = 0; z < building.getBoungingBox().getMaxZ(); z++)
+		for (int x = clamped.minX; x <= clamped.maxX; x++)
+			for (int z = clamped.minZ; z <= clamped.maxZ; z++)
 			{
-				POS.set(pos.getX() + x, pos.getY(), pos.getZ() + z);
-				if (blockBox.contains(POS))
+				POS.set(x, clamped.minY, z);
+				state = world.getBlockState(POS);
+				if (!state.isAir() && state.isFullCube(world, POS))
 				{
-					state = world.getBlockState(POS);
-					if (state.isFullCube(world, POS) && !world.getBlockState(POS.down()).isFullCube(world, POS.down()))
+					for (int y = clamped.minY - 1; y > 4; y--)
 					{
-						for (int y = 1; y < 64; y++)
-						{
-							POS.setY(POS.getY() - 1);
-							world.setBlockState(POS, state, 0);
-							if (BlocksHelper.isNetherGroundMagma(world.getBlockState(POS.down())) || POS.getY() < 5)
-								break;
-						}
+						POS.setY(y);
+						BlocksHelper.setWithoutUpdate(world, POS, state);
+						if (BlocksHelper.isNetherGroundMagma(world.getBlockState(POS.down())))
+							break;
 					}
 				}
 			}

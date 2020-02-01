@@ -19,6 +19,8 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -32,14 +34,14 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.IDimensionable;
 import paulevs.betternether.registers.BlocksRegister;
 
-public class PigStatueRespawner extends BlockBaseNotFull
+public class BlockStatueRespawner extends BlockBaseNotFull
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 16, 15);
 	private static final DustParticleEffect EFFECT = new DustParticleEffect(1, 0, 0, 1.0F);
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	public static final BooleanProperty TOP = BooleanProperty.of("top");
 	
-	public PigStatueRespawner()
+	public BlockStatueRespawner()
 	{
 		super(FabricBlockSettings.copy(BlocksRegister.BLOCK_CINCINNASITE)
 				.nonOpaque()
@@ -100,7 +102,10 @@ public class PigStatueRespawner extends BlockBaseNotFull
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.isAir(pos.up());
+		if (state.get(TOP))
+			return true;
+		BlockState up = world.getBlockState(pos.up());
+		return up.isAir() || (up.getBlock() == this && up.get(TOP));
 	}
 
 	@Override
@@ -121,5 +126,17 @@ public class PigStatueRespawner extends BlockBaseNotFull
 		{
 			return world.getBlockState(pos.up()).getBlock() == this ? state : Blocks.AIR.getDefaultState();
 		}
+	}
+	
+	@Override
+	public BlockState rotate(BlockState state, BlockRotation rotation)
+	{
+		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
+	}
+
+	@Override
+	public BlockState mirror(BlockState state, BlockMirror mirror)
+	{
+		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 }

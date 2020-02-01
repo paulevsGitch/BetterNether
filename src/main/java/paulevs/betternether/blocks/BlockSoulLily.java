@@ -10,6 +10,8 @@ import net.minecraft.entity.EntityContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -35,6 +37,13 @@ public class BlockSoulLily extends BlockBaseNotFull
 	private static final VoxelShape SHAPE_BIG_TOP_SIDE_W = Block.createCuboidShape(0, 4, 0, 8, 6, 16);
 	
 	private static final StructureSoulLily STRUCTURE = new StructureSoulLily();
+	
+	private static final SoulLilyShape[] ROT = new SoulLilyShape[] {
+			SoulLilyShape.BIG_TOP_SIDE_N,
+			SoulLilyShape.BIG_TOP_SIDE_E,
+			SoulLilyShape.BIG_TOP_SIDE_S,
+			SoulLilyShape.BIG_TOP_SIDE_W
+			};
 	
 	public BlockSoulLily()
 	{
@@ -129,5 +138,62 @@ public class BlockSoulLily extends BlockBaseNotFull
 	private boolean isAirSides(World world, BlockPos pos)
 	{
 		return world.isAir(pos.north()) && world.isAir(pos.south()) && world.isAir(pos.east()) && world.isAir(pos.west());
+	}
+	
+	@Override
+	public BlockState rotate(BlockState state, BlockRotation rotation)
+	{
+		SoulLilyShape shape = state.get(SHAPE);
+		int index = getRotationIndex(shape);
+		if (index < 0)
+			return state;
+		int offset = rotOffset(rotation);
+		return state.with(SHAPE, ROT[(index + offset) & 3]);
+	}
+
+	@Override
+	public BlockState mirror(BlockState state, BlockMirror mirror)
+	{
+		SoulLilyShape shape = state.get(SHAPE);
+		int index = getRotationIndex(shape);
+		if (index < 0)
+			return state;
+		if (mirror == BlockMirror.FRONT_BACK)
+		{
+			if (shape == SoulLilyShape.BIG_TOP_SIDE_E)
+				shape = SoulLilyShape.BIG_TOP_SIDE_W;
+			else if (shape == SoulLilyShape.BIG_TOP_SIDE_W)
+				shape = SoulLilyShape.BIG_TOP_SIDE_E;
+		}
+		else if (mirror == BlockMirror.LEFT_RIGHT)
+		{
+			if (shape == SoulLilyShape.BIG_TOP_SIDE_N)
+				shape = SoulLilyShape.BIG_TOP_SIDE_S;
+			else if (shape == SoulLilyShape.BIG_TOP_SIDE_S)
+				shape = SoulLilyShape.BIG_TOP_SIDE_N;
+		}
+		return state.with(SHAPE, shape);
+	}
+	
+	private int getRotationIndex(SoulLilyShape shape)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (shape == ROT[i])
+				return i;
+		}
+		return -1;
+	}
+	
+	private int rotOffset(BlockRotation rotation)
+	{
+		if (rotation == BlockRotation.NONE)
+			return 0;
+		else if (rotation == BlockRotation.CLOCKWISE_90)
+			return 1;
+		else if (rotation == BlockRotation.CLOCKWISE_180)
+			return 2;
+		else
+			return 3;
 	}
 }

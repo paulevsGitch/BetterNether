@@ -3,11 +3,18 @@ package paulevs.betternether.world.structures.city;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.collect.ImmutableList;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.Structure.StructureBlockInfo;
 import net.minecraft.structure.StructurePlacementData;
+import net.minecraft.structure.processor.RuleStructureProcessor;
+import net.minecraft.structure.processor.StructureProcessor;
+import net.minecraft.structure.processor.StructureProcessorRule;
+import net.minecraft.structure.rule.AlwaysTrueRuleTest;
+import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
@@ -20,12 +27,13 @@ import paulevs.betternether.structures.StructureNBT;
 public class StructureCityBuilding extends StructureNBT
 {
 	protected static final BlockState AIR = Blocks.AIR.getDefaultState();
+	protected static final StructureProcessor REPLACE = makeProcessorReplace();
+	protected static final StructureProcessor STATUE_FIX = makeProcessorFix();
 	
 	private BoundingBox bb;
 	public BlockPos[] ends;
 	private Direction[] dirs;
 	private BlockPos rotationOffset;
-	private BlockRotation rotation;
 	private int offsetY;
 	
 	public StructureCityBuilding(String structure)
@@ -136,38 +144,11 @@ public class StructureCityBuilding extends StructureNBT
 	public void placeInChunk(IWorld world, BlockPos pos, BlockBox boundingBox)
 	{
 		BlockPos p = pos.add(rotationOffset);
-		structure.place(world, p, new StructurePlacementData().setRotation(rotation).setBoundingBox(boundingBox));
-		/*for (BlockPos rep : ends)
-		{
-			BlockPos repPos = rep.add(pos);
-			if (repPos.getX() >= boundingBox.minX && repPos.getX() <= boundingBox.maxX)
-				if (repPos.getZ() >= boundingBox.minZ && repPos.getZ() <= boundingBox.maxZ)
-					BlocksHelper.setWithoutUpdate(world, repPos, AIR);
-		}
-		BlockState state;
-		int d;
-		for (int x = 0; x < bb.x2; x++)
-			for (int z = 0; z < bb.z2; z++)
-			{
-				p = pos.add(x, 0, z);
-				if (p.getX() >= boundingBox.minX && p.getX() <= boundingBox.maxX)
-					if (p.getZ() >= boundingBox.minZ && p.getZ() <= boundingBox.maxZ)
-					{
-						state = world.getBlockState(p);
-						if (state.isFullCube(world, p))
-						{
-							for (d = 1; d < pos.getY() - 5; d++)
-							{
-								if (BlocksHelper.isNetherGroundMagma(world.getBlockState(p.down(d))))
-									break;
-							}
-							for (int y = 1; y < d; y++)
-							{
-								BlocksHelper.setWithoutUpdate(world, p.down(y), state);
-							}
-						}
-					}
-			}*/
+		structure.place(world, p, new StructurePlacementData()
+				.setRotation(rotation)
+				.setMirrored(mirror)
+				.setBoundingBox(boundingBox)
+				.addProcessor(REPLACE));
 	}
 
 	public BlockPos[] getEnds()
@@ -255,5 +236,37 @@ public class StructureCityBuilding extends StructureNBT
 	public BlockRotation getRotation()
 	{
 		return rotation;
+	}
+
+	private static StructureProcessor makeProcessorReplace()
+	{
+		return new RuleStructureProcessor(
+				ImmutableList.of(
+						new StructureProcessorRule(
+								new BlockMatchRuleTest(Blocks.STRUCTURE_BLOCK),
+								AlwaysTrueRuleTest.INSTANCE,
+								Blocks.AIR.getDefaultState()
+						)
+				)
+		);
+	}
+	
+	private static StructureProcessor makeProcessorFix()
+	{
+		return new RuleStructureProcessor(
+				ImmutableList.of(
+						new StructureProcessorRule(
+								new BlockMatchRuleTest(Blocks.STRUCTURE_BLOCK),
+								AlwaysTrueRuleTest.INSTANCE,
+								Blocks.AIR.getDefaultState()
+						)
+				)
+		);
+	}
+	
+	@Override
+	public BlockBox getBoundingBox(BlockPos pos)
+	{
+		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirrored(mirror), pos.add(rotationOffset));
 	}
 }

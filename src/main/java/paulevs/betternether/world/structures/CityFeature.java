@@ -70,7 +70,7 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 	@Override
 	public int getRadius()
 	{
-		return 12;
+		return 16;
 	}
 
 	public static class CityStart extends StructureStart

@@ -93,9 +93,12 @@ public class BlockCincinnasiteFireBowl extends BlockBaseNotFull
 	@Environment(EnvType.CLIENT)
 	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
 	{
-		if (random.nextInt(24) == 0)
-			world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
-		if (random.nextInt(4) == 0)
-			world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX() + random.nextDouble(), pos.getY() + 0.75, pos.getX() + random.nextDouble(), 0.0D, 0.0D, 0.0D);
+		if (state.get(FIRE))
+		{
+			if (random.nextInt(24) == 0)
+				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+			if (random.nextInt(4) == 0)
+				world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX() + random.nextDouble(), pos.getY() + 0.75, pos.getX() + random.nextDouble(), 0.0D, 0.0D, 0.0D);
+		}
 	}
 }

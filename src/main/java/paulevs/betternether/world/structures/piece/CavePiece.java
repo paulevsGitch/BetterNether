@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.chunk.CavesChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
@@ -55,6 +56,11 @@ public class CavePiece extends CustomPiece
 	@Override
 	public boolean generate(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos)
 	{
+		BlockState bottom = LAVA;
+		if (!(chunkGenerator instanceof CavesChunkGenerator))
+		{
+			bottom = Blocks.NETHERRACK.getDefaultState();
+		}
 		for (int x = blockBox.minX; x <= blockBox.maxX; x++)
 		{
 			int px = x - center.getX();
@@ -68,13 +74,11 @@ public class CavePiece extends CustomPiece
 					{
 						POS.set(x, y, z);
 						if (y > 31)
-							//this.addBlock(world, AIR, x, y, z, blockBox);
-							//BlocksHelper.setWithoutUpdate(world, POS, AIR);
+						{
 							world.setBlockState(POS, AIR, 0);
+						}
 						else
-							//this.addBlock(world, LAVA, x, y, z, blockBox);
-							//BlocksHelper.setWithoutUpdate(world, POS, LAVA);
-							world.setBlockState(POS, LAVA, 0);
+							world.setBlockState(POS, bottom, 0);
 					}
 				}
 			}

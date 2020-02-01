@@ -15,7 +15,8 @@
 	"LocateMixin",
 	"GrassGrowMixin",
 	"StructureMixin",
-	"BackgroundRenderMixin"
+	"BackgroundRenderMixin",
+	"LightStorageMixin"
   ],
   "client": [],
   "injectors": {
