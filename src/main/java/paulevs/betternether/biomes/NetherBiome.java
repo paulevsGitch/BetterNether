@@ -46,6 +46,8 @@ public class NetherBiome
 			structureFormat("altar_04", -3, StructureType.FLOOR, 1),
 			structureFormat("altar_05", -2, StructureType.FLOOR, 1),
 			structureFormat("altar_06", -2, StructureType.FLOOR, 1),
+			structureFormat("altar_07", -2, StructureType.FLOOR, 1),
+			structureFormat("altar_08", -2, StructureType.FLOOR, 1),
 			structureFormat("portal_01", -4, StructureType.FLOOR, 1),
 			structureFormat("portal_02", -3, StructureType.FLOOR, 1),
 			structureFormat("garden_01", -3, StructureType.FLOOR, 1),
@@ -53,8 +55,13 @@ public class NetherBiome
 			structureFormat("pillar_01", -1, StructureType.FLOOR, 1),
 			structureFormat("pillar_02", -1, StructureType.FLOOR, 1),
 			structureFormat("pillar_03", -1, StructureType.FLOOR, 1),
+			structureFormat("pillar_04", -1, StructureType.FLOOR, 1),
+			structureFormat("pillar_05", -1, StructureType.FLOOR, 1),
+			structureFormat("pillar_06", -1, StructureType.FLOOR, 1),
 			structureFormat("respawn_point_01", -3, StructureType.FLOOR, 1),
 			structureFormat("respawn_point_02", -2, StructureType.FLOOR, 1),
+			structureFormat("respawn_point_03", -3, StructureType.FLOOR, 1),
+			structureFormat("respawn_point_04", -2, StructureType.FLOOR, 1),
 			structureFormat("spawn_altar_ladder", -2, StructureType.FLOOR, 1)
 	};
 	

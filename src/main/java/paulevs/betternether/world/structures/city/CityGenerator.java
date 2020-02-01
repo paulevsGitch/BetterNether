@@ -42,6 +42,8 @@ public class CityGenerator
 		addBuildingToList("city_building_07", buildings);
 		addBuildingToList("city_building_08", buildings);
 		addBuildingToList("city_building_09", buildings);
+		addBuildingToList("city_building_10", buildings);
+		addBuildingToList("city_building_11", buildings);
 		
 		addBuildingToList("city_enchanter_01", buildings);
 		addBuildingToList("city_enchanter_02", buildings);

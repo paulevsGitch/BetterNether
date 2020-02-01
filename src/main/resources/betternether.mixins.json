@@ -16,7 +16,8 @@
 	"GrassGrowMixin",
 	"StructureMixin",
 	"BackgroundRenderMixin",
-	"LightStorageMixin"
+	"LightStorageMixin",
+	"NetherWartMixin"
   ],
   "client": [],
   "injectors": {
