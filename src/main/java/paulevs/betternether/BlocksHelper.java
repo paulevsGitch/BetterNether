@@ -35,8 +35,8 @@ public class BlocksHelper
 		Block b = state.getBlock();
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
-				b == BlocksRegister.BLOCK_CINCINNASITE_ORE ||
-				b == BlocksRegister.BLOCK_NETHERRACK_MOSS;
+				b == BlocksRegister.CINCINNASITE_ORE ||
+				b == BlocksRegister.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isNetherGround(BlockState state)
@@ -46,8 +46,8 @@ public class BlocksHelper
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
 				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.BLOCK_CINCINNASITE_ORE ||
-				b == BlocksRegister.BLOCK_NETHERRACK_MOSS;
+				b == BlocksRegister.CINCINNASITE_ORE ||
+				b == BlocksRegister.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isNetherGroundMagma(BlockState state)
@@ -58,15 +58,15 @@ public class BlocksHelper
 				b == Blocks.SOUL_SAND ||
 				b == Blocks.MAGMA_BLOCK ||
 				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.BLOCK_CINCINNASITE_ORE ||
-				b == BlocksRegister.BLOCK_NETHERRACK_MOSS;
+				b == BlocksRegister.CINCINNASITE_ORE ||
+				b == BlocksRegister.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isBone(BlockState state)
 	{
 		Block b = state.getBlock();
 		return  b == Blocks.BONE_BLOCK ||
-				b == BlocksRegister.BLOCK_BONE;
+				b == BlocksRegister.BONE;
 	}
 	
 	public static boolean isGroundOrModContent(BlockState state)
@@ -76,8 +76,8 @@ public class BlocksHelper
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
 				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.BLOCK_CINCINNASITE_ORE ||
-				b == BlocksRegister.BLOCK_NETHERRACK_MOSS ||
+				b == BlocksRegister.CINCINNASITE_ORE ||
+				b == BlocksRegister.NETHERRACK_MOSS ||
 				Registry.BLOCK.getId(b).getNamespace().equals(BetterNether.MOD_ID);
 	}
 	

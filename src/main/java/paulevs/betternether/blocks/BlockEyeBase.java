@@ -28,7 +28,7 @@ public class BlockEyeBase extends BlockBase
 	{
 		BlockPos blockPos = pos.up();
 		Block up = world.getBlockState(blockPos).getBlock();
-		if (up != BlocksRegister.BLOCK_EYE_VINE && up != Blocks.NETHERRACK)
+		if (up != BlocksRegister.EYE_VINE && up != Blocks.NETHERRACK)
 			return Blocks.AIR.getDefaultState();
 		else
 			return state;

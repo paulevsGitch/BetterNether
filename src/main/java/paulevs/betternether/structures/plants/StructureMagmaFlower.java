@@ -7,6 +7,6 @@ public class StructureMagmaFlower extends StructureScatter
 {
 	public StructureMagmaFlower()
 	{
-		super(BlocksRegister.BLOCK_MAGMA_FLOWER, BlockCommonPlant.AGE, 4);
+		super(BlocksRegister.MAGMA_FLOWER, BlockCommonPlant.AGE, 4);
 	}
 }

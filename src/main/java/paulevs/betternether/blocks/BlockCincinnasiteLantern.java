@@ -7,7 +7,7 @@ public class BlockCincinnasiteLantern extends BlockBase
 {
 	public BlockCincinnasiteLantern()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.BLOCK_CINCINNASITE)
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE)
 				.lightLevel(15)
 				.build());
 	}

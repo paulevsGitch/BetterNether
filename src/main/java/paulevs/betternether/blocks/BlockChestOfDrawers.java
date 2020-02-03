@@ -44,7 +44,7 @@ public class BlockChestOfDrawers extends BlockWithEntity
 
 	public BlockChestOfDrawers()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.BLOCK_CINCINNASITE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).nonOpaque().build());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(OPEN, false));
 	}
 

@@ -28,7 +28,7 @@ public class GrassGrowMixin
 	{
 		World world = context.getWorld();
 		BlockPos blockPos = context.getBlockPos();
-		if (!world.isClient)// && world.getDimension().isNether())
+		if (!world.isClient)
 		{
 			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos)))
 			{
@@ -70,6 +70,6 @@ public class GrassGrowMixin
 		if (biome instanceof NetherSwampland)
 			return BlocksRegister.SWAMP_GRASS.getDefaultState();
 		else
-			return BlocksRegister.BLOCK_NETHER_GRASS.getDefaultState();
+			return BlocksRegister.NETHER_GRASS.getDefaultState();
 	}
 }

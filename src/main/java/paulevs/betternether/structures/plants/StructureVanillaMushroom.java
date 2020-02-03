@@ -17,7 +17,7 @@ public class StructureVanillaMushroom implements IStructure
 	
 	private boolean canPlaceAt(IWorld world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.BLOCK_NETHER_MYCELIUM;
+		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.NETHER_MYCELIUM;
 	}
 	
 	@Override

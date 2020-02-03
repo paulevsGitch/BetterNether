@@ -36,7 +36,7 @@ public abstract class MushroomMixin
 	@Inject(method = "grow", at = @At(value = "HEAD"), cancellable = true)
 	private void growStructure(ServerWorld world, Random random, BlockPos pos, BlockState state, CallbackInfo info)
 	{
-		if (world.getBlockState(pos.down()).getBlock() == BlocksRegister.BLOCK_NETHER_MYCELIUM)
+		if (world.getBlockState(pos.down()).getBlock() == BlocksRegister.NETHER_MYCELIUM)
 		{
 			if (state.getBlock() == Blocks.RED_MUSHROOM)
 			{

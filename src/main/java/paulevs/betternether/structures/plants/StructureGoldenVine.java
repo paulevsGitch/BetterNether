@@ -6,6 +6,6 @@ public class StructureGoldenVine extends StructureVine
 {
 	public StructureGoldenVine()
 	{
-		super(BlocksRegister.BLOCK_GOLDEN_VINE);
+		super(BlocksRegister.GOLDEN_VINE);
 	}
 }

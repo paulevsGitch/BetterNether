@@ -6,6 +6,6 @@ public class StructureBlackVine extends StructureVine
 {
 	public StructureBlackVine()
 	{
-		super(BlocksRegister.BLOCK_BLACK_VINE);
+		super(BlocksRegister.BLACK_VINE);
 	}
 }

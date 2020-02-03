@@ -50,7 +50,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
 		Block block = world.getBlockState(pos.down()).getBlock();
-		return block == Blocks.SOUL_SAND || block == BlocksRegister.BLOCK_VEINED_SAND;
+		return block == Blocks.SOUL_SAND || block == BlocksRegister.VEINED_SAND;
 	}
 	
 	@Override
@@ -83,6 +83,6 @@ public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable
 	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack)
 	{
 		if (world.getBlockState(pos.down()).getBlock() == Blocks.SOUL_SAND)
-			world.setBlockState(pos.down(), BlocksRegister.BLOCK_VEINED_SAND.getDefaultState());
+			world.setBlockState(pos.down(), BlocksRegister.VEINED_SAND.getDefaultState());
 	}
 }

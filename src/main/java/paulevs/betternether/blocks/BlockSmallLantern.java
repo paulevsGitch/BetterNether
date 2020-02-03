@@ -33,7 +33,7 @@ public class BlockSmallLantern extends BlockBaseNotFull
 	
 	public BlockSmallLantern()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.BLOCK_CINCINNASITE_LANTERN).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_LANTERN).nonOpaque().build());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.DOWN));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

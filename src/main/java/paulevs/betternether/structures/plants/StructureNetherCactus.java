@@ -26,8 +26,8 @@ public class StructureNetherCactus implements IStructure
 	{
 		if (canPlaceAt(world, pos))
 		{
-			BlockState top = BlocksRegister.BLOCK_NETHER_CACTUS.getDefaultState();
-			BlockState bottom = BlocksRegister.BLOCK_NETHER_CACTUS.getDefaultState().with(BlockNetherCactus.TOP, false);
+			BlockState top = BlocksRegister.NETHER_CACTUS.getDefaultState();
+			BlockState bottom = BlocksRegister.NETHER_CACTUS.getDefaultState().with(BlockNetherCactus.TOP, false);
 			for (int i = 0; i < 16; i++)
 			{
 				int x = pos.getX() + (int) (random.nextGaussian() * 4);

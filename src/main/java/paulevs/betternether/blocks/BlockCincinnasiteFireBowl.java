@@ -35,7 +35,7 @@ public class BlockCincinnasiteFireBowl extends BlockBaseNotFull
 
 	public BlockCincinnasiteFireBowl()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.BLOCK_CINCINNASITE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).nonOpaque().build());
 		this.setDefaultState(getStateManager().getDefaultState().with(FIRE, false));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

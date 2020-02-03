@@ -16,7 +16,7 @@ public class StructureSoulVein implements IStructure
 	
 	private boolean canPlaceAt(IWorld world, BlockPos pos)
 	{
-		return BlocksRegister.BLOCK_SOUL_VEIN.canPlaceAt(BlocksRegister.BLOCK_SOUL_VEIN.getDefaultState(), world, pos);
+		return BlocksRegister.SOUL_VEIN.canPlaceAt(BlocksRegister.SOUL_VEIN.getDefaultState(), world, pos);
 	}
 	
 	@Override
@@ -24,8 +24,8 @@ public class StructureSoulVein implements IStructure
 	{
 		if (world.isAir(pos) && canPlaceAt(world, pos))
 		{
-			BlockState state = BlocksRegister.BLOCK_SOUL_VEIN.getDefaultState();
-			BlockState sand = BlocksRegister.BLOCK_VEINED_SAND.getDefaultState();
+			BlockState state = BlocksRegister.SOUL_VEIN.getDefaultState();
+			BlockState sand = BlocksRegister.VEINED_SAND.getDefaultState();
 			int x1 = pos.getX() - 1;
 			int x2 = pos.getX() + 1;
 			int z1 = pos.getZ() - 1;

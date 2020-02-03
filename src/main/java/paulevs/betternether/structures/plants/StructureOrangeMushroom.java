@@ -7,6 +7,6 @@ public class StructureOrangeMushroom extends StructureScatter
 {
 	public StructureOrangeMushroom()
 	{
-		super(BlocksRegister.BLOCK_ORANGE_MUSHROOM, BlockCommonPlant.AGE, 4);
+		super(BlocksRegister.ORANGE_MUSHROOM, BlockCommonPlant.AGE, 4);
 	}
 }

@@ -43,7 +43,7 @@ public class NetherMushroomForest extends NetherBiome
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
 			break;
 		default:
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.BLOCK_NETHER_MYCELIUM.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHER_MYCELIUM.getDefaultState());
 			break;
 		}
 		for (int i = 1; i < 1 + random.nextInt(3); i++)

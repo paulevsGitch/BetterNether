@@ -61,7 +61,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.BLOCK_CINCINNASITE_POT;
+		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.CINCINNASITE_POT;
 	}
 
 	@Override
@@ -85,27 +85,27 @@ public class BlockPottedPlant extends BlockBaseNotFull
 		for (PottedPlantShape shape: PottedPlantShape.values())
 		{
 			if (shape.getItem().equals(item))
-				return BlocksRegister.BLOCK_POTTED_PLANT.getDefaultState().with(PLANT, shape);
+				return BlocksRegister.POTTED_PLANT.getDefaultState().with(PLANT, shape);
 		}
 		return null;
 	}
 	
 	public static enum PottedPlantShape implements StringIdentifiable
 	{
-		AGAVE(BlocksRegister.BLOCK_AGAVE),
-		BARREL_CACTUS(BlocksRegister.BLOCK_BARREL_CACTUS),
-		BLACK_APPLE(BlocksRegister.BLOCK_BLACK_APPLE_SEED),
-		BLACK_BUSH(BlocksRegister.BLOCK_BLACK_BUSH),
-		EGG_PLANT(BlocksRegister.BLOCK_EGG_PLANT),
-		INK_BUSH(BlocksRegister.BLOCK_INK_BUSH_SEED),
-		REEDS(BlocksRegister.BLOCK_NETHER_REED),
-		NETHER_CACTUS(BlocksRegister.BLOCK_NETHER_CACTUS),
-		NETHER_GRASS(BlocksRegister.BLOCK_NETHER_GRASS),
-		ORANGE_MUSHROOM(BlocksRegister.BLOCK_ORANGE_MUSHROOM),
-		RED_MOLD(BlocksRegister.BLOCK_RED_MOLD),
-		GRAY_MOLD(BlocksRegister.BLOCK_GRAY_MOLD),
-		MAGMA_FLOWER(BlocksRegister.BLOCK_MAGMA_FLOWER),
-		NETHER_WART(BlocksRegister.BLOCK_WART_SEED);
+		AGAVE(BlocksRegister.AGAVE),
+		BARREL_CACTUS(BlocksRegister.BARREL_CACTUS),
+		BLACK_APPLE(BlocksRegister.BLACK_APPLE_SEED),
+		BLACK_BUSH(BlocksRegister.BLACK_BUSH),
+		EGG_PLANT(BlocksRegister.EGG_PLANT),
+		INK_BUSH(BlocksRegister.INK_BUSH_SEED),
+		REEDS(BlocksRegister.NETHER_REED),
+		NETHER_CACTUS(BlocksRegister.NETHER_CACTUS),
+		NETHER_GRASS(BlocksRegister.NETHER_GRASS),
+		ORANGE_MUSHROOM(BlocksRegister.ORANGE_MUSHROOM),
+		RED_MOLD(BlocksRegister.RED_MOLD),
+		GRAY_MOLD(BlocksRegister.GRAY_MOLD),
+		MAGMA_FLOWER(BlocksRegister.MAGMA_FLOWER),
+		NETHER_WART(BlocksRegister.WART_SEED);
 		
 		private final Block block;
 

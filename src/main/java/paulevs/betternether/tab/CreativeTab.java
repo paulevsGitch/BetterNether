@@ -11,7 +11,7 @@ public class CreativeTab
 {
 	/*public static final ItemGroup BN_TAB = FabricItemGroupBuilder.create(
 			new Identifier(BetterNether.MOD_ID, "items"))
-			.icon(() -> new ItemStack(BlocksRegister.BLOCK_NETHER_GRASS))
+			.icon(() -> new ItemStack(BlocksRegister.NETHER_GRASS))
 			.appendItems(stacks ->
 			{
 				Iterator<Item> iterator = Registry.ITEM.iterator();
@@ -32,5 +32,5 @@ public class CreativeTab
 			})
 			.build();*/
 	
-	public static final ItemGroup BN_TAB = FabricItemGroupBuilder.create(new Identifier(BetterNether.MOD_ID, "items")).icon(() -> new ItemStack(BlocksRegister.BLOCK_NETHER_GRASS)).build();
+	public static final ItemGroup BN_TAB = FabricItemGroupBuilder.create(new Identifier(BetterNether.MOD_ID, "items")).icon(() -> new ItemStack(BlocksRegister.NETHER_GRASS)).build();
 }

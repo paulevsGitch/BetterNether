@@ -7,6 +7,6 @@ public class BlockBlackAppleSeed extends BlockCommonSapling
 {
 	public BlockBlackAppleSeed()
 	{
-		super(BlocksRegister.BLOCK_BLACK_APPLE, MaterialColor.ORANGE);
+		super(BlocksRegister.BLACK_APPLE, MaterialColor.ORANGE);
 	}
 }

@@ -29,8 +29,8 @@
 	"block.betternether.black_apple_seed": "Black Apple Seed",
 	"block.betternether.black_bush": "Black Bush",
 
-	"block.betternether.block_eyeball": "Eyeball Block",
-	"block.betternether.block_eyeball_small": "Small Eyeball Block",
+	"block.betternether.eyeball": "Eyeball Block",
+	"block.betternether.eyeball_small": "Small Eyeball Block",
 
 	"block.betternether.bone_block": "Bone Block",
 	"block.betternether.bone_button": "Bone Button",
@@ -279,5 +279,24 @@
 	
 	"block.betternether.wall_moss": "Wall Moss",
 	"block.betternether.wall_mushroom_brown": "Wall Brown Mushroom",
-	"block.betternether.wall_mushroom_red": "Wall Red Mushroom"
+	"block.betternether.wall_mushroom_red": "Wall Red Mushroom",
+	
+	"block.betternether.roof_tile_reeds": "Reeds Roof Tile",
+	"block.betternether.roof_tile_reeds_stairs": "Reeds Roof Tile Stairs",
+	"block.betternether.roof_tile_reeds_slab": "Reeds Roof Tile Slab",
+	"block.betternether.roof_tile_stalagnate": "Stalagnate Roof Tile",
+	"block.betternether.roof_tile_stalagnate_stairs": "Stalagnate Roof Tile Stairs",
+	"block.betternether.roof_tile_stalagnate_slab": "Stalagnate Roof Tile Slab",
+	"block.betternether.roof_tile_nether_bricks": "Nether Bricks Roof Tile",
+	"block.betternether.roof_tile_nether_bricks_stairs": "Nether Bricks Roof Tile Stairs",
+	"block.betternether.roof_tile_nether_bricks_slab": "Nether Bricks Roof Tile Slab",
+	"block.betternether.roof_tile_cincinnasite": "Cincinnasite Roof Tile",
+	"block.betternether.roof_tile_cincinnasite_stairs": "Cincinnasite Roof Tile Stairs",
+	"block.betternether.roof_tile_cincinnasite_slab": "Cincinnasite Roof Tile Slab",
+	"block.betternether.roof_tile_willow": "Willow Roof Tile",
+	"block.betternether.roof_tile_willow_stairs": "Willow Roof Tile Stairs",
+	"block.betternether.roof_tile_willow_slab": "Willow Roof Tile Slab",
+	"block.betternether.roof_tile_wart": "Wart Roof Tile",
+	"block.betternether.roof_tile_wart_stairs": "Wart Roof Tile Stairs",
+	"block.betternether.roof_tile_wart_slab": "Wart Roof Tile Slab"
 }

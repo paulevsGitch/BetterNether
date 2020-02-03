@@ -37,11 +37,11 @@ public class ItemBowlFood extends Item
 	{
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos().offset(context.getSide());
-		if (world.isAir(pos) && BlocksRegister.BLOCK_STALAGNATE_BOWL.canPlaceAt(world.getBlockState(pos), world, pos))
+		if (world.isAir(pos) && BlocksRegister.STALAGNATE_BOWL.canPlaceAt(world.getBlockState(pos), world, pos))
 		{
 			if (!world.isClient())
 			{
-				BlockState state = BlocksRegister.BLOCK_STALAGNATE_BOWL.getDefaultState().with(BlockStalagnateBowl.FOOD, bowlFood);
+				BlockState state = BlocksRegister.STALAGNATE_BOWL.getDefaultState().with(BlockStalagnateBowl.FOOD, bowlFood);
 				BlocksHelper.setWithoutUpdate((ServerWorld) world, pos, state);
 			}
 			if (!context.getPlayer().isCreative())

@@ -6,6 +6,6 @@ public class StructureBlackBush extends StructureScatter
 {
 	public StructureBlackBush()
 	{
-		super(BlocksRegister.BLOCK_BLACK_BUSH);
+		super(BlocksRegister.BLACK_BUSH);
 	}
 }

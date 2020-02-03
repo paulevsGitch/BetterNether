@@ -7,6 +7,6 @@ public class StructureEggPlant extends StructureScatter
 {
 	public StructureEggPlant()
 	{
-		super(BlocksRegister.BLOCK_EGG_PLANT, BlockCommonPlant.AGE, 4);
+		super(BlocksRegister.EGG_PLANT, BlockCommonPlant.AGE, 4);
 	}
 }

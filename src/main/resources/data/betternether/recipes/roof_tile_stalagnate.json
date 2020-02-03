@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+	"###",
+	" # "
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:stalagnate_planks"
+    }
+  },
+  "result": {
+    "item": "betternether:roof_tile_stalagnate",
+	"count": 6
+  }
+}

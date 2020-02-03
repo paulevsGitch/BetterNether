@@ -51,7 +51,7 @@ public class NetherSwampland extends NetherBiome
 		case 1:
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
 		case 2:
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.BLOCK_NETHERRACK_MOSS.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHERRACK_MOSS.getDefaultState());
 		}
 		for (int i = 1; i < random.nextInt(3); i++)
 		{

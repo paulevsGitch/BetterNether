@@ -6,6 +6,6 @@ public class StructureBarrelCactus extends StructureScatter
 {
 	public StructureBarrelCactus()
 	{
-		super(BlocksRegister.BLOCK_BARREL_CACTUS);
+		super(BlocksRegister.BARREL_CACTUS);
 	}
 }

@@ -23,9 +23,9 @@ public class StructureStalagnate implements IStructure
 		int length = BlocksHelper.upRay(world, pos, MAX_LENGTH);
 		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.up(length + 1))))
 		{
-			BlockState bottom = BlocksRegister.BLOCK_STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
-			BlockState middle = BlocksRegister.BLOCK_STALAGNATE.getDefaultState();
-			BlockState top = BlocksRegister.BLOCK_STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
+			BlockState bottom = BlocksRegister.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
+			BlockState middle = BlocksRegister.STALAGNATE.getDefaultState();
+			BlockState top = BlocksRegister.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
 			
 			BlocksHelper.setWithoutUpdate(world, pos, bottom);
 			BlocksHelper.setWithoutUpdate(world, pos.up(length), top);
@@ -39,9 +39,9 @@ public class StructureStalagnate implements IStructure
 		int length = BlocksHelper.downRay(world, pos, MAX_LENGTH);
 		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.down(length + 1))))
 		{
-			BlockState bottom = BlocksRegister.BLOCK_STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
-			BlockState middle = BlocksRegister.BLOCK_STALAGNATE.getDefaultState();
-			BlockState top = BlocksRegister.BLOCK_STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
+			BlockState bottom = BlocksRegister.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
+			BlockState middle = BlocksRegister.STALAGNATE.getDefaultState();
+			BlockState top = BlocksRegister.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
 			
 			BlocksHelper.setWithoutUpdate(world, pos.down(length), bottom);
 			BlocksHelper.setWithoutUpdate(world, pos, top);

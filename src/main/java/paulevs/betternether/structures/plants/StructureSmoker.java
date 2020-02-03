@@ -26,9 +26,9 @@ public class StructureSmoker implements IStructure
 	{
 		if (canPlaceAt(world, pos))
 		{
-			BlockState top = BlocksRegister.BLOCK_SMOKER.getDefaultState();
-			BlockState middle = BlocksRegister.BLOCK_SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.MIDDLE);
-			BlockState bottom = BlocksRegister.BLOCK_SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.BOTTOM);
+			BlockState top = BlocksRegister.SMOKER.getDefaultState();
+			BlockState middle = BlocksRegister.SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.MIDDLE);
+			BlockState bottom = BlocksRegister.SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.BOTTOM);
 			for (int i = 0; i < 8; i++)
 			{
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);

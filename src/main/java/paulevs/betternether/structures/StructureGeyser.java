@@ -13,6 +13,6 @@ public class StructureGeyser implements IStructure
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
 		if (BlocksHelper.isNetherrack(world.getBlockState(pos.down())))
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.BLOCK_GEYSER.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.GEYSER.getDefaultState());
 	}
 }

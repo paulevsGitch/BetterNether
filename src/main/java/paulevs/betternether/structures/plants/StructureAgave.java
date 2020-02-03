@@ -6,6 +6,6 @@ public class StructureAgave extends StructureScatter
 {
 	public StructureAgave()
 	{
-		super(BlocksRegister.BLOCK_AGAVE);
+		super(BlocksRegister.AGAVE);
 	}
 }

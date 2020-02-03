@@ -6,6 +6,6 @@ public class StructureGrayMold extends StructureScatter
 {
 	public StructureGrayMold()
 	{
-		super(BlocksRegister.BLOCK_GRAY_MOLD);
+		super(BlocksRegister.GRAY_MOLD);
 	}
 }

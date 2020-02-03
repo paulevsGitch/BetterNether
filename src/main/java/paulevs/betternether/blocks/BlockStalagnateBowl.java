@@ -28,7 +28,7 @@ public class BlockStalagnateBowl extends BlockBaseNotFull
 	
 	public BlockStalagnateBowl()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.BLOCK_STALAGNATE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegister.STALAGNATE).nonOpaque().build());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(FOOD, FoodShape.NONE));
 	}

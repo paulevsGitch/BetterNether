@@ -29,8 +29,8 @@
 	"block.betternether.black_apple_seed": "Семя чёрного яблока",
 	"block.betternether.black_bush": "Чёрный куст",
 
-	"block.betternether.block_eyeball": "Блок глаза",
-	"block.betternether.block_eyeball_small": "Маленький блок глаза",
+	"block.betternether.eyeball": "Блок глаза",
+	"block.betternether.eyeball_small": "Маленький блок глаза",
 
 	"block.betternether.bone_block": "Костный блок",
 	"block.betternether.bone_button": "Костяная кнопка",
@@ -194,7 +194,7 @@
 	
 	"block.betternether.wart_planks": "Доски из нароста",
 	"block.betternether.wart_stairs": "Ступени из нароста",
-	"block.betternether.wart_slab": "Полублок из нароста",
+	"block.betternether.wart_slab": "Плита из нароста",
 	"block.betternether.wart_fence": "Забор из нароста",
 	"block.betternether.wart_gate": "Калитка из нароста",
 	"block.betternether.wart_button": "Кнопка из нароста",
@@ -279,5 +279,24 @@
 	
 	"block.betternether.wall_moss": "Настенный мох",
 	"block.betternether.wall_mushroom_brown": "Настенный коричневый гриб",
-	"block.betternether.wall_mushroom_red": "Настенный красный гриб"
+	"block.betternether.wall_mushroom_red": "Настенный красный гриб",
+	
+	"block.betternether.roof_tile_reeds": "Тростниковая черепица",
+	"block.betternether.roof_tile_reeds_stairs": "Ступени из тростниковой черепицы",
+	"block.betternether.roof_tile_reeds_slab": "Плита из тростниковой черепица",
+	"block.betternether.roof_tile_stalagnate": "Сталагнатовая черепица",
+	"block.betternether.roof_tile_stalagnate_stairs": "Ступени из сталагнатовой черепицы",
+	"block.betternether.roof_tile_stalagnate_slab": "Плита из сталагнатовой черепица",
+	"block.betternether.roof_tile_nether_bricks": "Кирпичная черепица",
+	"block.betternether.roof_tile_nether_bricks_stairs": "Ступени из кирпичной черепицы",
+	"block.betternether.roof_tile_nether_bricks_slab": "Плита из кирпичной черепица",
+	"block.betternether.roof_tile_cincinnasite": "Цинцинназитовая черепица",
+	"block.betternether.roof_tile_cincinnasite_stairs": "Ступени из цинцинназитовой черепицы",
+	"block.betternether.roof_tile_cincinnasite_slab": "Плита из цинцинназитовой черепица",
+	"block.betternether.roof_tile_willow": "Ивовая черепица",
+	"block.betternether.roof_tile_willow_stairs": "Ступени из ивовой черепицы",
+	"block.betternether.roof_tile_willow_slab": "Плита из ивовой черепица",
+	"block.betternether.roof_tile_wart": "Наростовая черепица",
+	"block.betternether.roof_tile_wart_stairs": "Ступени из наростовой черепицы",
+	"block.betternether.roof_tile_wart_slab": "Плита из наростовой черепица"
 }

@@ -21,9 +21,9 @@ public class StructureLucis extends Object implements IStructure
 	{
 		if (canGenerate(world, pos))
 		{
-			BlockState center = BlocksRegister.BLOCK_LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CENTER);
-			BlockState side = BlocksRegister.BLOCK_LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.SIDE);
-			BlockState corner = BlocksRegister.BLOCK_LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CORNER);
+			BlockState center = BlocksRegister.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CENTER);
+			BlockState side = BlocksRegister.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.SIDE);
+			BlockState corner = BlocksRegister.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CORNER);
 
 			if (random.nextInt(3) == 0)
 			{
@@ -75,7 +75,7 @@ public class StructureLucis extends Object implements IStructure
 	private boolean canReplace(BlockState state)
 	{
 		Block b = state.getBlock();
-		return b == Blocks.AIR || b == BlocksRegister.BLOCK_LUCIS_SPORE;
+		return b == Blocks.AIR || b == BlocksRegister.LUCIS_SPORE;
 	}
 
 	private boolean canGenerate(IWorld world, BlockPos pos)

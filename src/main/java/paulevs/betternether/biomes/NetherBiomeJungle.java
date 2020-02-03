@@ -11,7 +11,7 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackVine;
 import paulevs.betternether.structures.plants.StructureEggPlant;
 import paulevs.betternether.structures.plants.StructureEye;
-import paulevs.betternether.structures.plants.StructureFloweredVine;
+import paulevs.betternether.structures.plants.StructureBloomingVine;
 import paulevs.betternether.structures.plants.StructureGoldenVine;
 import paulevs.betternether.structures.plants.StructureLucis;
 import paulevs.betternether.structures.plants.StructureMagmaFlower;
@@ -36,7 +36,7 @@ public class NetherBiomeJungle extends NetherBiome
 		addStructure("eye", new StructureEye(), StructureType.CEIL, 0.4F, true);
 		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, true);
 		addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.4F, true);
-		addStructure("flowered_vine", new StructureFloweredVine(), StructureType.CEIL, 0.4F, true);
+		addStructure("flowered_vine", new StructureBloomingVine(), StructureType.CEIL, 0.4F, true);
 		addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
@@ -53,7 +53,7 @@ public class NetherBiomeJungle extends NetherBiome
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
 			break;
 		case 1:
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.BLOCK_NETHERRACK_MOSS.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHERRACK_MOSS.getDefaultState());
 			break;
 		}
 		for (int i = 1; i < random.nextInt(3); i++)

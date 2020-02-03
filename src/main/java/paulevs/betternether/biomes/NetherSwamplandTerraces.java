@@ -23,7 +23,7 @@ public class NetherSwamplandTerraces extends NetherSwampland
 		else if (random.nextInt(3) > 0)
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
 		else if (random.nextBoolean())
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.BLOCK_NETHERRACK_MOSS.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHERRACK_MOSS.getDefaultState());
 		for (int i = 1; i < random.nextInt(3); i++)
 		{
 			BlockPos down = pos.down(i);

@@ -35,7 +35,7 @@ public class NetherMushroomForestEdge extends NetherBiome
 		case 1:
 			break;
 		default:
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.BLOCK_NETHER_MYCELIUM.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHER_MYCELIUM.getDefaultState());
 			break;
 		}
 		for (int i = 1; i < random.nextInt(3); i++)

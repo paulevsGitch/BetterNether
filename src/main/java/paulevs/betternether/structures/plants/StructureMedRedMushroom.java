@@ -21,7 +21,7 @@ public class StructureMedRedMushroom implements IStructure
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
 		Block under;
-		if (world.getBlockState(pos.down()).getBlock() == BlocksRegister.BLOCK_NETHER_MYCELIUM)
+		if (world.getBlockState(pos.down()).getBlock() == BlocksRegister.NETHER_MYCELIUM)
 		{
 			for (int i = 0; i < 10; i++)
 			{
@@ -34,7 +34,7 @@ public class StructureMedRedMushroom implements IStructure
 					if (npos.getY() > 31)
 					{
 						under = world.getBlockState(npos.down()).getBlock();
-						if (under == BlocksRegister.BLOCK_NETHER_MYCELIUM)
+						if (under == BlocksRegister.NETHER_MYCELIUM)
 						{
 							grow(world, npos, random);
 						}
@@ -57,10 +57,10 @@ public class StructureMedRedMushroom implements IStructure
 				size = y - 1;
 				break;
 			}
-		BlockState middle = BlocksRegister.BLOCK_RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.MIDDLE);
+		BlockState middle = BlocksRegister.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.MIDDLE);
 		for (int y = 1; y < size; y++)
 			BlocksHelper.setWithoutUpdate(world, pos.up(y), middle);
-		BlocksHelper.setWithoutUpdate(world, pos.up(size), BlocksRegister.BLOCK_RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.TOP));
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.BLOCK_RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.BOTTOM));
+		BlocksHelper.setWithoutUpdate(world, pos.up(size), BlocksRegister.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.TOP));
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.BOTTOM));
 	}
 }

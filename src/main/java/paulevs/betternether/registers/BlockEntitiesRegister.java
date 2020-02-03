@@ -11,9 +11,9 @@ import paulevs.betternether.blockentities.BlockEntityFurnace;
 
 public class BlockEntitiesRegister
 {
-	public static final BlockEntityType<?> CINCINNASITE_FORGE = BlockEntityType.Builder.create(BlockEntityForge::new, BlocksRegister.BLOCK_CINCINNASITE_FORGE).build(null);
-	public static final BlockEntityType<?> NETHERRACK_FURNACE = BlockEntityType.Builder.create(BlockEntityFurnace::new, BlocksRegister.BLOCK_NETHERRACK_FURNACE).build(null);
-	public static final BlockEntityType<?> CHEST_OF_DRAWERS = BlockEntityType.Builder.create(BlockEntityChestOfDrawers::new, BlocksRegister.BLOCK_CHEST_OF_DRAWERS).build(null);
+	public static final BlockEntityType<?> CINCINNASITE_FORGE = BlockEntityType.Builder.create(BlockEntityForge::new, BlocksRegister.CINCINNASITE_FORGE).build(null);
+	public static final BlockEntityType<?> NETHERRACK_FURNACE = BlockEntityType.Builder.create(BlockEntityFurnace::new, BlocksRegister.NETHERRACK_FURNACE).build(null);
+	public static final BlockEntityType<?> CHEST_OF_DRAWERS = BlockEntityType.Builder.create(BlockEntityChestOfDrawers::new, BlocksRegister.CHEST_OF_DRAWERS).build(null);
 	
 	public static void register()
 	{

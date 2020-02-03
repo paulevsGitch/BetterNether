@@ -7,6 +7,6 @@ public class StructureBlackApple extends StructureScatter
 {
 	public StructureBlackApple()
 	{
-		super(BlocksRegister.BLOCK_BLACK_APPLE, BlockCommonPlant.AGE, 4);
+		super(BlocksRegister.BLACK_APPLE, BlockCommonPlant.AGE, 4);
 	}
 }

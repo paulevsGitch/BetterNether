@@ -51,7 +51,7 @@ public class BlockMold extends BlockBaseNotFull
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.BLOCK_NETHER_MYCELIUM;
+		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.NETHER_MYCELIUM;
 	}
 	
 	@Override

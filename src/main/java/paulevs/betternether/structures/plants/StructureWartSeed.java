@@ -6,6 +6,6 @@ public class StructureWartSeed extends StructureScatter
 {
 	public StructureWartSeed()
 	{
-		super(BlocksRegister.BLOCK_WART_SEED);
+		super(BlocksRegister.WART_SEED);
 	}
 }

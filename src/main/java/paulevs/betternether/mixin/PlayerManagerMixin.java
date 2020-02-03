@@ -54,7 +54,7 @@ public abstract class PlayerManagerMixin
 	{
 		for (Direction dir: HorizontalFacingBlock.FACING.getValues())
 		{
-			if (world.getBlockState(pos.offset(dir)).getBlock() == BlocksRegister.BLOCK_PIG_STATUE_RESPAWNER)
+			if (world.getBlockState(pos.offset(dir)).getBlock() == BlocksRegister.PIG_STATUE_RESPAWNER)
 				return true;
 		}
 		return false;

@@ -29,7 +29,7 @@ public class CincinnasiteForge extends AbstractFurnaceBlock
 {
 	public CincinnasiteForge()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.BLOCK_CINCINNASITE).build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).build());
 	}
 
 	public BlockEntity createBlockEntity(BlockView view)

@@ -26,7 +26,7 @@ public class BlockCincinnasitePot extends BlockBaseNotFull
 	
 	public BlockCincinnasitePot()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.BLOCK_CINCINNASITE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).nonOpaque().build());
 	}
 
 	public boolean hasSidedTransparency(BlockState state)
@@ -37,7 +37,7 @@ public class BlockCincinnasitePot extends BlockBaseNotFull
 	/*@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
-		return view.getBlockState(pos.up()).getBlock() == BlocksRegister.BLOCK_POTTED_PLANT ? SHAPE_PLANTED : SHAPE;
+		return view.getBlockState(pos.up()).getBlock() == BlocksRegister.POTTED_PLANT ? SHAPE_PLANTED : SHAPE;
 	}
 	
 	@Override

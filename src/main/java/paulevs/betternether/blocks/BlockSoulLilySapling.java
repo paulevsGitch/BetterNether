@@ -12,7 +12,7 @@ public class BlockSoulLilySapling extends BlockCommonSapling
 {
 	public BlockSoulLilySapling()
 	{
-		super(BlocksRegister.BLOCK_SOUL_LILY, MaterialColor.ORANGE);
+		super(BlocksRegister.SOUL_LILY, MaterialColor.ORANGE);
 	}
 	
 	@Override

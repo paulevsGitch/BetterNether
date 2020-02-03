@@ -6,6 +6,6 @@ public class StructureNetherGrass extends StructureScatter
 {
 	public StructureNetherGrass()
 	{
-		super(BlocksRegister.BLOCK_NETHER_GRASS);
+		super(BlocksRegister.NETHER_GRASS);
 	}
 }

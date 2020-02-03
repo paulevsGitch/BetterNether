@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stone_slab",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:roof_tile_nether_bricks"
+    }
+  },
+  "result": {
+    "item": "betternether:roof_tile_nether_bricks_slab",
+    "count": 6
+  }
+}

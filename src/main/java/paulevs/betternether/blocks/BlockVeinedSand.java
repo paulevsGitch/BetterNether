@@ -26,7 +26,7 @@ public class BlockVeinedSand extends BlockBase
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, IWorld world, BlockPos pos, BlockPos neighborPos)
 	{
-		if (world.getBlockState(pos.up()).getBlock() == BlocksRegister.BLOCK_SOUL_VEIN)
+		if (world.getBlockState(pos.up()).getBlock() == BlocksRegister.SOUL_VEIN)
 			return state;
 		else
 			return Blocks.SOUL_SAND.getDefaultState();

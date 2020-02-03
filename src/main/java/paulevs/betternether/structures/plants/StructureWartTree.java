@@ -120,7 +120,7 @@ public class StructureWartTree implements IStructure
 
 	private void PlaceRandomSeed(IWorld world, BlockPos pos)
 	{
-		BlockState seed = BlocksRegister.BLOCK_WART_SEED.getDefaultState();
+		BlockState seed = BlocksRegister.WART_SEED.getDefaultState();
 		if (isReplaceable(world.getBlockState(pos)))
 		{
 			if (isWart(world.getBlockState(pos.up())))
@@ -144,11 +144,11 @@ public class StructureWartTree implements IStructure
 		Block block = state.getBlock();
 		return state.getMaterial().isReplaceable() ||
 				block == Blocks.AIR ||
-				block == BlocksRegister.BLOCK_WART_SEED ||
-				block == BlocksRegister.BLOCK_BLACK_BUSH ||
-				block == BlocksRegister.BLOCK_SOUL_VEIN ||
-				block == BlocksRegister.BLOCK_SOUL_LILY ||
-				block == BlocksRegister.BLOCK_SOUL_LILY_SAPLING ||
+				block == BlocksRegister.WART_SEED ||
+				block == BlocksRegister.BLACK_BUSH ||
+				block == BlocksRegister.SOUL_VEIN ||
+				block == BlocksRegister.SOUL_LILY ||
+				block == BlocksRegister.SOUL_LILY_SAPLING ||
 				block == Blocks.NETHER_WART;
 	}
 	

@@ -7,6 +7,6 @@ public class BlockInkBushSeed extends BlockCommonSapling
 {
 	public BlockInkBushSeed()
 	{
-		super(BlocksRegister.BLOCK_INK_BUSH, MaterialColor.RED);
+		super(BlocksRegister.INK_BUSH, MaterialColor.RED);
 	}
 }

@@ -6,6 +6,6 @@ public class StructureRedMold extends StructureScatter
 {
 	public StructureRedMold()
 	{
-		super(BlocksRegister.BLOCK_RED_MOLD);
+		super(BlocksRegister.RED_MOLD);
 	}
 }
