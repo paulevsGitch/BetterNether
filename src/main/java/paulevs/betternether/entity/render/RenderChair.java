@@ -4,7 +4,6 @@ import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.util.Identifier;
-import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.model.ModelEmpty;
 

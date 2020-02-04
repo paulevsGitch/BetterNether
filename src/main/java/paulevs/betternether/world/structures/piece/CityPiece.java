@@ -6,12 +6,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.structure.StructureManager;
+import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.city.StructureCityBuilding;
@@ -27,7 +29,7 @@ public class CityPiece extends CustomPiece
 	{
 		super(StructureTypes.NETHER_CITY, id);
 		this.building = building;
-		this.pos = pos;
+		this.pos = new BlockPos(pos);
 		this.boundingBox = building.getBoundingBox(pos);
 	}
 
@@ -35,7 +37,8 @@ public class CityPiece extends CustomPiece
 	{
 		super(StructureTypes.NETHER_CITY, tag);
 		this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"));
-		this.building.setRotation(BlockRotation.values()[tag.getInt("rotation")]);
+		this.building = this.building.getRotated(BlockRotation.values()[tag.getInt("rotation")]);
+		this.building.setMirror(BlockMirror.values()[tag.getInt("mirror")]);
 		this.pos = NbtHelper.toBlockPos(tag.getCompound("pos"));
 		this.boundingBox = building.getBoundingBox(pos);
 	}
@@ -45,6 +48,7 @@ public class CityPiece extends CustomPiece
 	{
 		tag.putString("building", building.getName());
 		tag.putInt("rotation", building.getRotation().ordinal());
+		tag.putInt("mirror", building.getMirror().ordinal());
 		tag.putInt("offset", building.getYOffset());
 		tag.put("pos", NbtHelper.fromBlockPos(pos));
 	}
@@ -67,6 +71,8 @@ public class CityPiece extends CustomPiece
 		clamped.maxZ = Math.min(clamped.maxZ, blockBox.maxZ);
 
 		building.placeInChunk(world, pos, clamped);
+		
+		Chunk chunk = world.getChunk(chunkPos.x, chunkPos.z);
 
 		BlockState state;
 		for (int x = clamped.minX; x <= clamped.maxX; x++)
@@ -83,6 +89,13 @@ public class CityPiece extends CustomPiece
 						if (BlocksHelper.isNetherGroundMagma(world.getBlockState(POS.down())))
 							break;
 					}
+				}
+				
+				//POS.set(x - clamped.minX, clamped.minY - clamped.minZ, z);
+				for (int y = clamped.minY; y <= clamped.maxY; y++)
+				{
+					POS.setY(y);
+					chunk.markBlockForPostProcessing(POS);
 				}
 			}
 

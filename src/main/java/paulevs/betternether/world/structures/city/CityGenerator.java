@@ -54,6 +54,8 @@ public class CityGenerator
 		
 		addBuildingToList("city_bridge_01", buildings);
 		
+		addBuildingToList("ramp_01", buildings);
+		
 		addBuildingToList("road_end_01", roadEnds);
 		addBuildingToList("road_end_02", -2, roadEnds);
 		

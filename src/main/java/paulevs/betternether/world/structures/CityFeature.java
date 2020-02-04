@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockBox;
@@ -15,6 +16,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.world.structures.city.CityGenerator;
@@ -82,7 +84,21 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 
 		public void initialize(ChunkGenerator<?> chunkGenerator, StructureManager structureManager, int x, int z, Biome biome)
 		{
-			BlockPos center = new BlockPos(x << 4, 40, z << 4);
+			int px = (x << 4) | 8;
+			int pz = (z << 4) | 8;
+			int y = 40;
+			if (chunkGenerator instanceof FlatChunkGenerator)
+			{
+				BlockState[] layers = ((FlatChunkGenerator) chunkGenerator).getConfig().getLayerBlocks();
+				for (int i = 255; i >= 0; i--)
+					if (layers[i] != null && !layers[i].isAir())
+					{
+						y = i + 10;
+						break;
+					}
+			}
+			
+			BlockPos center = new BlockPos(px, y, pz);
 			System.out.println("New generator for " + center);
 			
 			List<CityPiece> buildings = GENERATOR.generate(center, this.random);
@@ -90,14 +106,15 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 			for (CityPiece p: buildings)
 				cityBox.encompass(p.getBoundingBox());
 			
-			int radius = (int) (Math.max(cityBox.maxX - cityBox.minX, cityBox.maxZ - cityBox.minZ) * 1.2F * 0.5F);
+			int radius = (int) (Math.max(cityBox.maxX - cityBox.minX, cityBox.maxZ - cityBox.minZ) * 1.5F * 0.5F);
 			if (cityBox.maxY > radius * 0.5F + center.getY())
 			{
-				radius = (int) (cityBox.maxY * 1.2F * 0.5F);
+				radius = (int) (cityBox.maxY * 1.5F * 0.5F);
 			}
 			System.out.println("Radius: " + radius + " " + Math.ceil(radius / 16));
 			
-			this.children.add(new CavePiece(center, radius, random));
+			if (!(chunkGenerator instanceof FlatChunkGenerator))
+				this.children.add(new CavePiece(center, radius, random));
 			this.children.addAll(buildings);
 			this.setBoundingBoxFromChildren();
 			this.boundingBox.minX -= 12;

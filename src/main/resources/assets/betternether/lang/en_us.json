@@ -298,5 +298,15 @@
 	"block.betternether.roof_tile_willow_slab": "Willow Roof Tile Slab",
 	"block.betternether.roof_tile_wart": "Wart Roof Tile",
 	"block.betternether.roof_tile_wart_stairs": "Wart Roof Tile Stairs",
-	"block.betternether.roof_tile_wart_slab": "Wart Roof Tile Slab"
+	"block.betternether.roof_tile_wart_slab": "Wart Roof Tile Slab",
+	
+	"block.betternether.taburet_reeds": "Reeds Taburet",
+	"block.betternether.taburet_stalagnate": "Stalagnate Taburet",
+	"block.betternether.taburet_willow": "Willow Taburet",
+	"block.betternether.taburet_wart": "Wart Taburet",
+	"block.betternether.taburet_cincinnasite": "Cincinnasite Taburet",
+	
+	"block.betternether.stalagnate_ladder": "Stalagnate Ladder",
+	"block.betternether.willow_ladder": "Willow Ladder",
+	"block.betternether.wart_ladder": "Wart Ladder"
 }

@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.blocks.BNBarStool;
 import paulevs.betternether.blocks.BNBoneBlock;
 import paulevs.betternether.blocks.BNButton;
 import paulevs.betternether.blocks.BNDoor;
@@ -17,6 +18,7 @@ import paulevs.betternether.blocks.BNGate;
 import paulevs.betternether.blocks.BNGlass;
 import paulevs.betternether.blocks.BNLadder;
 import paulevs.betternether.blocks.BNNetherBrick;
+import paulevs.betternether.blocks.BNNormalChair;
 import paulevs.betternether.blocks.BNPane;
 import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNPlanks;
@@ -325,12 +327,24 @@ public class BlocksRegister
 	public static final Block ROOF_TILE_WART = new BNPlanks(MaterialColor.RED_TERRACOTTA);
 	public static final Block ROOF_TILE_WART_STAIRS = new BNStairs(ROOF_TILE_WART);
 	public static final Block ROOF_TILE_WART_SLAB = new BNSlab(ROOF_TILE_WART);
-	
 	public static final Block TABURET_REEDS = new BNTaburet(REEDS_BLOCK);
 	public static final Block TABURET_STALAGNATE = new BNTaburet(STALAGNATE_PLANKS);
 	public static final Block TABURET_WILLOW = new BNTaburet(WILLOW_PLANKS);
 	public static final Block TABURET_WART = new BNTaburet(WART_PLANKS);
 	public static final Block TABURET_CINCINNASITE = new BNTaburet(CINCINNASITE_FORGED);
+	public static final Block STALAGNATE_LADDER = new BNLadder(STALAGNATE_PLANKS);
+	public static final Block WILLOW_LADDER = new BNLadder(WILLOW_PLANKS);
+	public static final Block WART_LADDER = new BNLadder(WART_PLANKS);
+	public static final Block CHAIR_REEDS = new BNNormalChair(REEDS_BLOCK);
+	public static final Block CHAIR_STALAGNATE = new BNNormalChair(STALAGNATE_PLANKS);
+	public static final Block CHAIR_WILLOW = new BNNormalChair(WILLOW_PLANKS);
+	public static final Block CHAIR_WART = new BNNormalChair(WART_PLANKS);
+	public static final Block CHAIR_CINCINNASITE = new BNNormalChair(CINCINNASITE_FORGED);
+	public static final Block BAR_STOOL_REEDS = new BNBarStool(REEDS_BLOCK);
+	public static final Block BAR_STOOL_STALAGNATE = new BNBarStool(STALAGNATE_PLANKS);
+	public static final Block BAR_STOOL_WILLOW = new BNBarStool(WILLOW_PLANKS);
+	public static final Block BAR_STOOL_WART = new BNBarStool(WART_PLANKS);
+	public static final Block BAR_STOOL_CINCINNASITE = new BNBarStool(CINCINNASITE_FORGED);
 	
 	public static void register()
 	{
@@ -564,12 +578,26 @@ public class BlocksRegister
 		registerBlock("roof_tile_wart", ROOF_TILE_WART);
 		registerBlock("roof_tile_wart_stairs", ROOF_TILE_WART_STAIRS);
 		registerBlock("roof_tile_wart_slab", ROOF_TILE_WART_SLAB);
-		
 		registerBlock("taburet_reeds", TABURET_REEDS);
 		registerBlock("taburet_stalagnate", TABURET_STALAGNATE);
 		registerBlock("taburet_willow", TABURET_WILLOW);
 		registerBlock("taburet_wart", TABURET_WART);
 		registerBlock("taburet_cincinnasite", TABURET_CINCINNASITE);
+		registerBlock("stalagnate_ladder", STALAGNATE_LADDER);
+		registerBlock("willow_ladder", WILLOW_LADDER);
+		registerBlock("wart_ladder", WART_LADDER);
+		
+		/*registerBlock("chair_reeds", CHAIR_REEDS);
+		registerBlock("chair_stalagnate", CHAIR_STALAGNATE);
+		registerBlock("chair_willow", CHAIR_WILLOW);
+		registerBlock("chair_wart", CHAIR_WART);
+		registerBlock("chair_cincinnasite", CHAIR_CINCINNASITE);
+		
+		registerBlock("bar_stool_reeds", BAR_STOOL_REEDS);
+		registerBlock("bar_stool_stalagnate", BAR_STOOL_STALAGNATE);
+		registerBlock("bar_stool_willow", BAR_STOOL_WILLOW);
+		registerBlock("bar_stool_wart", BAR_STOOL_WART);
+		registerBlock("bar_stool_cincinnasite", BAR_STOOL_CINCINNASITE);*/
 	}
 	
 	private static void registerBlock(String name, Block block)

@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=east":  { "model": "betternether:block/chair_willow" },
+		"facing=west":  { "model": "betternether:block/chair_willow", "y": 180 },
+		"facing=south": { "model": "betternether:block/chair_willow", "y": 90 },
+		"facing=north": { "model": "betternether:block/chair_willow", "y": 270 }
+	}
+}

@@ -28,7 +28,6 @@ public class StructureCityBuilding extends StructureNBT
 {
 	protected static final BlockState AIR = Blocks.AIR.getDefaultState();
 	protected static final StructureProcessor REPLACE = makeProcessorReplace();
-	protected static final StructureProcessor STATUE_FIX = makeProcessorFix();
 	
 	private BoundingBox bb;
 	public BlockPos[] ends;
@@ -251,22 +250,17 @@ public class StructureCityBuilding extends StructureNBT
 		);
 	}
 	
-	private static StructureProcessor makeProcessorFix()
-	{
-		return new RuleStructureProcessor(
-				ImmutableList.of(
-						new StructureProcessorRule(
-								new BlockMatchRuleTest(Blocks.STRUCTURE_BLOCK),
-								AlwaysTrueRuleTest.INSTANCE,
-								Blocks.AIR.getDefaultState()
-						)
-				)
-		);
-	}
-	
 	@Override
 	public BlockBox getBoundingBox(BlockPos pos)
 	{
 		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirrored(mirror), pos.add(rotationOffset));
+	}
+	
+	@Override
+	public StructureCityBuilding setRotation(BlockRotation rotation)
+	{
+		this.rotation = rotation;
+		rotationOffset = structure.getSize().rotate(rotation);
+		return this;
 	}
 }

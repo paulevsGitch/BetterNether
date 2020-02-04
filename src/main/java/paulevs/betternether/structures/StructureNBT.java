@@ -43,6 +43,11 @@ public class StructureNBT
 		return this;
 	}
 	
+	public BlockMirror getMirror()
+	{
+		return mirror;
+	}
+	
 	public StructureNBT setMirror(BlockMirror mirror)
 	{
 		this.mirror = mirror;

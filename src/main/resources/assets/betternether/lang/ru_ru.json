@@ -298,5 +298,15 @@
 	"block.betternether.roof_tile_willow_slab": "Плита из ивовой черепица",
 	"block.betternether.roof_tile_wart": "Наростовая черепица",
 	"block.betternether.roof_tile_wart_stairs": "Ступени из наростовой черепицы",
-	"block.betternether.roof_tile_wart_slab": "Плита из наростовой черепица"
+	"block.betternether.roof_tile_wart_slab": "Плита из наростовой черепица",
+	
+	"block.betternether.taburet_reeds": "Тростниковый табурет",
+	"block.betternether.taburet_stalagnate": "Сталагнатовый табурет",
+	"block.betternether.taburet_willow": "Ивовый табурет",
+	"block.betternether.taburet_wart": "Наростовый табурет",
+	"block.betternether.taburet_cincinnasite": "Цинцинназитовый табурет",
+	
+	"block.betternether.stalagnate_ladder": "Сталагнатовая лестница",
+	"block.betternether.willow_ladder": "Ивовая лестница",
+	"block.betternether.wart_ladder": "Наростовая лестница"
 }
