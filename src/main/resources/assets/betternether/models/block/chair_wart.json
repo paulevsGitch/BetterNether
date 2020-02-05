@@ -1,6 +1,6 @@
 {
     "parent": "betternether:block/bn_chair",
     "textures": {
-        "texture": "betternether:block/chair_wart"
+        "texture": "betternether:block/wart_planks"
     }
 }

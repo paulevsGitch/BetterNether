@@ -17,7 +17,7 @@
 		"sources": "https://github.com/paulevsGitch/BetterNether/tree/mc_1.15.1"
 	},
 
-	"license": "CC0-1.0",
+	"license": "GPLv3",
 	"icon": "assets/betternether/icon.png",
 
 	"environment": "*",

@@ -52,7 +52,6 @@ public class CityGenerator
 		
 		addBuildingToList("city_enchanter_01", buildings);
 		addBuildingToList("city_enchanter_02", buildings);
-		addBuildingToList("city_enchanter_03", buildings);
 		
 		addBuildingToList("city_park_01", buildings);
 		addBuildingToList("city_park_02", buildings);
@@ -157,7 +156,13 @@ public class CityGenerator
 	{
 		ArrayList<CityPiece> city = new ArrayList<CityPiece>();
 		placeCenterBuilding(pos, centers.get(random.nextInt(centers.size())), city, random);
-		for (int i = 0; i < 2 + random.nextInt(4); i++)
+		
+		float rnd = random.nextFloat();
+		rnd *= rnd;
+		rnd *= rnd;
+		int iterations = (int) Math.round(2 + rnd * 3);
+		
+		for (int i = 0; i < iterations; i++)
 			attachBuildings(random, city);
 		closeRoads(city, random);
 		return city;

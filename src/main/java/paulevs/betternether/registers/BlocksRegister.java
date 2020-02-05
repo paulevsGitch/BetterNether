@@ -587,13 +587,13 @@ public class BlocksRegister
 		registerBlock("willow_ladder", WILLOW_LADDER);
 		registerBlock("wart_ladder", WART_LADDER);
 		
-		/*registerBlock("chair_reeds", CHAIR_REEDS);
+		registerBlock("chair_reeds", CHAIR_REEDS);
 		registerBlock("chair_stalagnate", CHAIR_STALAGNATE);
 		registerBlock("chair_willow", CHAIR_WILLOW);
 		registerBlock("chair_wart", CHAIR_WART);
 		registerBlock("chair_cincinnasite", CHAIR_CINCINNASITE);
 		
-		registerBlock("bar_stool_reeds", BAR_STOOL_REEDS);
+		/*registerBlock("bar_stool_reeds", BAR_STOOL_REEDS);
 		registerBlock("bar_stool_stalagnate", BAR_STOOL_STALAGNATE);
 		registerBlock("bar_stool_willow", BAR_STOOL_WILLOW);
 		registerBlock("bar_stool_wart", BAR_STOOL_WART);

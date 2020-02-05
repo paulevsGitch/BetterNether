@@ -12,11 +12,14 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.registers.EntityRegister;
 
@@ -85,5 +88,17 @@ public class BNChair extends BlockBaseNotFull
 			player.setHeadYaw(yaw);
 			return ActionResult.SUCCESS;
 		}
+	}
+	
+	@Override
+	public BlockState rotate(BlockState state, BlockRotation rotation)
+	{
+		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
+	}
+
+	@Override
+	public BlockState mirror(BlockState state, BlockMirror mirror)
+	{
+		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 }
