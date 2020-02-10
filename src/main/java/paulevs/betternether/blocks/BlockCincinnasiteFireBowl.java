@@ -14,6 +14,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -66,8 +67,8 @@ public class BlockCincinnasiteFireBowl extends BlockBaseNotFull
 			if (player.getMainHandStack().getItem() == Items.FLINT_AND_STEEL && !state.get(FIRE))
 			{
 				world.setBlockState(pos, state.with(FIRE, true));
-				if (!player.isCreative())
-					player.getMainHandStack().decrement(1);
+				if (!player.isCreative() && !world.isClient)
+					player.getMainHandStack().damage(1, world.random, (ServerPlayerEntity) player);
 				world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, world.random.nextFloat() * 0.4F + 0.8F);
 				return ActionResult.SUCCESS;
 			}
