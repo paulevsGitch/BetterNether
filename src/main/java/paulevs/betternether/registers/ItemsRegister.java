@@ -1,7 +1,5 @@
 package paulevs.betternether.registers;
 
-import java.awt.Color;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
@@ -23,6 +21,8 @@ import paulevs.betternether.tab.CreativeTab;
 
 public class ItemsRegister
 {
+	private static final int ALPHA = 255 << 24;
+	
 	public static final Item BLACK_APPLE = new ItemBlackApple();
 	public static final Item CINCINNASITE = new Item(defaultSettings());
 	public static final Item CINCINNASITE_PICKAXE = new BNItemPickaxe(BNItemMaterials.CINCINNASITE_TOOLS, 512, 1F);
@@ -41,7 +41,7 @@ public class ItemsRegister
 	public static final Item CINCINNASITE_BOOTS = new BNArmor(BNItemMaterials.CINCINNASITE_ARMOR, EquipmentSlot.FEET);
 	public static final Item CINCINNASITE_SWORD = new BNSword(BNItemMaterials.CINCINNASITE_TOOLS, 512, 4, -2.4F);
 	public static final Item CINCINNASITE_SWORD_DIAMOND = new BNSword(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 5, -2.4F);
-	public static final Item SPAWN_EGG_FIREFLY = makeEgg(EntityRegister.FIREFLY, new Color(255, 223, 168), new Color(233, 182, 95));
+	public static final Item SPAWN_EGG_FIREFLY = makeEgg(EntityRegister.FIREFLY, color(255, 223, 168), color(233, 182, 95));
 	public static final Item CINCINNASITE_INGOT = new Item(defaultSettings());
 
 	public static void register()
@@ -78,8 +78,13 @@ public class ItemsRegister
 		return new Item.Settings().group(CreativeTab.BN_TAB);
 	}
 	
-	private static SpawnEggItem makeEgg(EntityType<?> type, Color background, Color dots)
+	private static SpawnEggItem makeEgg(EntityType<?> type, int background, int dots)
 	{
-		return new SpawnEggItem(type, background.getRGB(), dots.getRGB(), defaultSettings());
+		return new SpawnEggItem(type, background, dots, defaultSettings());
+	}
+	
+	private static int color(int r, int g, int b)
+	{
+		return ALPHA | (r << 16) | (g << 8) | b;
 	}
 }
