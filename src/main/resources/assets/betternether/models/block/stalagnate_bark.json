@@ -1,12 +1,6 @@
 {
-    "parent": "block/cube",
+    "parent": "block/cube_all",
     "textures": {
-        "particle": "betternether:block/stalagnate_bark_side",
-        "down": "betternether:block/stalagnate_bark_top",
-        "up": "betternether:block/stalagnate_bark_top",
-        "north": "betternether:block/stalagnate_bark_side",
-        "east": "betternether:block/stalagnate_bark_side",
-        "south": "betternether:block/stalagnate_bark_side",
-        "west": "betternether:block/stalagnate_bark_side"
+        "all": "betternether:block/stalagnate_bark_side"
     }
 }

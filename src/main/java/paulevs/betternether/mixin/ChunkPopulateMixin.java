@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.NetherBiome;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -58,19 +59,26 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 			BNWorldGenerator.cleaningPass(region, sx, sz);
 			BNWorldGenerator.clearCache();
 		}
-    }
-	
+	}
+
 	private boolean isNetherBiome(IWorld world, int cx, int cz)
 	{
 		BlockPos start = new BlockPos(cx << 4, 0, cx << 4);
-		return  world.getBiome(start) instanceof NetherBiome ||
-				world.getBiome(start.add(0, 0, 7)) instanceof NetherBiome ||
-				world.getBiome(start.add(0, 0, 15)) instanceof NetherBiome ||
-				world.getBiome(start.add(7, 0, 0)) instanceof NetherBiome ||
-				world.getBiome(start.add(7, 0, 7)) instanceof NetherBiome ||
-				world.getBiome(start.add(7, 0, 15)) instanceof NetherBiome ||
-				world.getBiome(start.add(15, 0, 0)) instanceof NetherBiome ||
-				world.getBiome(start.add(15, 0, 7)) instanceof NetherBiome ||
-				world.getBiome(start.add(15, 0, 15)) instanceof NetherBiome;
+		return  isNetherBiome(world.getBiome(start)) ||
+				isNetherBiome(world.getBiome(start.add(0, 0, 7))) ||
+				isNetherBiome(world.getBiome(start.add(0, 0, 15))) ||
+				isNetherBiome(world.getBiome(start.add(7, 0, 0))) ||
+				isNetherBiome(world.getBiome(start.add(7, 0, 7))) ||
+				isNetherBiome(world.getBiome(start.add(7, 0, 15))) ||
+				isNetherBiome(world.getBiome(start.add(15, 0, 0))) ||
+				isNetherBiome(world.getBiome(start.add(15, 0, 7))) ||
+				isNetherBiome(world.getBiome(start.add(15, 0, 15)));
+	}
+
+	private boolean isNetherBiome(Biome biome)
+	{
+		return  biome == Biomes.NETHER_WASTES ||
+				biome == Biomes.CRIMSON_FOREST ||
+				biome == Biomes.WARPED_FOREST;
 	}
 }

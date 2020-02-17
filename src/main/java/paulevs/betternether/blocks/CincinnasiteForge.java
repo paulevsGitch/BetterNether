@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.container.NameableContainerProvider;
+import net.minecraft.container.NameableContainerFactory;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -42,7 +42,7 @@ public class CincinnasiteForge extends AbstractFurnaceBlock
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (blockEntity instanceof BlockEntityForge)
 		{
-			player.openContainer((NameableContainerProvider) blockEntity);
+			player.openContainer((NameableContainerFactory) blockEntity);
 			player.incrementStat(Stats.INTERACT_WITH_FURNACE);
 		}
 	}

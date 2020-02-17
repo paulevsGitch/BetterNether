@@ -6,9 +6,11 @@ import java.util.List;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MaterialColor;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BNPillar extends PillarBlock
 {
@@ -20,6 +22,11 @@ public class BNPillar extends PillarBlock
 	public BNPillar(Block block)
 	{
 		super(FabricBlockSettings.copy(block).build());
+	}
+	
+	public BNPillar(MaterialColor color)
+	{
+		super(Materials.makeWood(color).build());
 	}
 	
 	@Override

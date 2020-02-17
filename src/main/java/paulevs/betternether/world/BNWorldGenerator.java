@@ -70,8 +70,8 @@ public class BNWorldGenerator
 		
 		if (Config.getBoolean("generator_world", "generate_cities", true))
 		{
-			Biomes.NETHER.addStructureFeature(CITY.configure(FeatureConfig.DEFAULT));
-			Biomes.NETHER.addFeature(GenerationStep.Feature.RAW_GENERATION, CITY.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT)));
+			Biomes.NETHER_WASTES.addStructureFeature(CITY.configure(FeatureConfig.DEFAULT));
+			Biomes.NETHER_WASTES.addFeature(GenerationStep.Feature.RAW_GENERATION, CITY.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT)));
 			Feature.STRUCTURES.put("nether_city", CITY);
 		}
 	}

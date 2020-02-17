@@ -12,7 +12,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.container.NameableContainerProvider;
+import net.minecraft.container.NameableContainerFactory;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -94,7 +94,7 @@ public class BlockChestOfDrawers extends BlockWithEntity
 		}
 		else
 		{
-			NameableContainerProvider nameableContainerProvider = this.createContainerProvider(state, world, pos);
+			NameableContainerFactory nameableContainerProvider = this.createContainerFactory(state, world, pos);
 			if (nameableContainerProvider != null)
 			{
 				player.openContainer(nameableContainerProvider);

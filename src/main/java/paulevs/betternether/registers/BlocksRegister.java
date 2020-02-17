@@ -17,6 +17,7 @@ import paulevs.betternether.blocks.BNFence;
 import paulevs.betternether.blocks.BNGate;
 import paulevs.betternether.blocks.BNGlass;
 import paulevs.betternether.blocks.BNLadder;
+import paulevs.betternether.blocks.BNLogStripable;
 import paulevs.betternether.blocks.BNNetherBrick;
 import paulevs.betternether.blocks.BNNormalChair;
 import paulevs.betternether.blocks.BNPane;
@@ -78,17 +79,14 @@ import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLilySapling;
 import paulevs.betternether.blocks.BlockSoulVein;
 import paulevs.betternether.blocks.BlockStalagnate;
-import paulevs.betternether.blocks.BlockStalagnateBark;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStalagnateStem;
 import paulevs.betternether.blocks.BlockStatueRespawner;
 import paulevs.betternether.blocks.BlockVeinedSand;
 import paulevs.betternether.blocks.BlockWartSeed;
-import paulevs.betternether.blocks.BlockWillowBark;
 import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
-import paulevs.betternether.blocks.BlockWillowLog;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.CincinnasiteForge;
@@ -107,7 +105,10 @@ public class BlocksRegister
 	public static final Block STALAGNATE_STEM = new BlockStalagnateStem();
 	public static final Block STALAGNATE = new BlockStalagnate();
 	public static final Block STALAGNATE_SEED = new BlockStalagnateSeed();
-	public static final Block STALAGNATE_BARK = new BlockStalagnateBark();
+	public static final Block STRIPED_LOG_STALAGNATE = new BNPillar(MaterialColor.LIME_TERRACOTTA);
+	public static final Block STRIPED_BARK_STALAGNATE = new BNPillar(MaterialColor.LIME_TERRACOTTA);
+	public static final Block STALAGNATE_LOG = new BNLogStripable(MaterialColor.LIME_TERRACOTTA, STRIPED_LOG_STALAGNATE);
+	public static final Block STALAGNATE_BARK = new BNLogStripable(MaterialColor.LIME_TERRACOTTA, STRIPED_BARK_STALAGNATE);
 	public static final Block STALAGNATE_PLANKS = new BNPlanks(MaterialColor.LIME_TERRACOTTA);
 	public static final Block STALAGNATE_PLANKS_STAIRS = new BNStairs(STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_PLANKS_SLAB = new BNSlab(STALAGNATE_PLANKS);
@@ -229,8 +230,10 @@ public class BlocksRegister
 	public static final Block WILLOW_BRANCH = new BlockWillowBranch();
 	public static final Block WILLOW_LEAVES = new BlockWillowLeaves();
 	public static final Block WILLOW_TRUNK = new BlockWillowTrunk();
-	public static final Block WILLOW_LOG = new BlockWillowLog();
-	public static final Block WILLOW_BARK = new BlockWillowBark();
+	public static final Block STRIPED_LOG_WILLOW = new BNPillar(MaterialColor.PINK);
+	public static final Block STRIPED_BARK_WILLOW = new BNPillar(MaterialColor.PINK);
+	public static final Block WILLOW_LOG = new BNLogStripable(MaterialColor.RED_TERRACOTTA, STRIPED_LOG_WILLOW);
+	public static final Block WILLOW_BARK = new BNLogStripable(MaterialColor.RED_TERRACOTTA, STRIPED_BARK_WILLOW);
 	public static final Block WILLOW_SAPLING = new BlockWillowSapling();
 	public static final Block SWAMP_GRASS = new BlockNetherGrass();
 	public static final Block WILLOW_PLANKS = new BNPlanks(MaterialColor.RED_TERRACOTTA);
@@ -303,8 +306,10 @@ public class BlocksRegister
 	public static final Block SOUL_LILY = new BlockSoulLily();
 	public static final Block SOUL_LILY_SAPLING = new BlockSoulLilySapling();
 	public static final Block SOUL_GRASS = new BlockSoulGrass();
-	public static final Block WART_LOG = new BNPillar(Blocks.NETHER_WART_BLOCK);
-	public static final Block WART_BARK = new BNPlanks(MaterialColor.RED);
+	public static final Block STRIPED_LOG_WART = new BNPillar(MaterialColor.RED);
+	public static final Block STRIPED_BARK_WART = new BNPillar(MaterialColor.RED);
+	public static final Block WART_LOG = new BNLogStripable(Blocks.NETHER_WART_BLOCK, STRIPED_LOG_WART);
+	public static final Block WART_BARK = new BNLogStripable(Blocks.NETHER_WART_BLOCK, STRIPED_BARK_WART);
 	public static final Block WART_ROOTS = new BlockWartRoots();
 	public static final Block WALL_MOSS = new BlockPlantWall(MaterialColor.RED);
 	public static final Block WALL_MUSHROOM_BROWN = new BlockPlantWall(MaterialColor.BROWN);
@@ -358,6 +363,7 @@ public class BlocksRegister
 		registerBlock("stalagnate_stem", STALAGNATE_STEM);
 		registerBlockNI("stalagnate", STALAGNATE);
 		registerBlock("stalagnate_seed", STALAGNATE_SEED);
+		registerBlock("stalagnate_log", STALAGNATE_LOG);
 		registerBlock("stalagnate_bark", STALAGNATE_BARK);
 		registerBlock("stalagnate_planks", STALAGNATE_PLANKS);
 		registerBlock("stalagnate_planks_stairs", STALAGNATE_PLANKS_STAIRS);
@@ -598,6 +604,14 @@ public class BlocksRegister
 		registerBlock("bar_stool_willow", BAR_STOOL_WILLOW);
 		registerBlock("bar_stool_wart", BAR_STOOL_WART);
 		registerBlock("bar_stool_cincinnasite", BAR_STOOL_CINCINNASITE);*/
+		
+		registerBlock("striped_log_stalagnate", STRIPED_LOG_STALAGNATE);
+		registerBlock("striped_log_willow", STRIPED_LOG_WILLOW);
+		registerBlock("striped_log_wart", STRIPED_LOG_WART);
+		
+		registerBlock("striped_bark_stalagnate", STRIPED_BARK_STALAGNATE);
+		registerBlock("striped_bark_willow", STRIPED_BARK_WILLOW);
+		registerBlock("striped_bark_wart", STRIPED_BARK_WART);
 	}
 	
 	private static void registerBlock(String name, Block block)

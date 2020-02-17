@@ -69,4 +69,10 @@ public class BNArmorMaterial implements ArmorMaterial
 	{
 		return toughness;
 	}
+
+	@Override
+	public float method_24355()
+	{
+		return 0;
+	}
 }

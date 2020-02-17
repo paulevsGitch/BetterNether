@@ -79,7 +79,7 @@ public class BNChair extends BlockBaseNotFull
 			entity.setNoGravity(true);
 			entity.setSilent(true);
 			entity.setInvisible(true);
-			entity.setPosition(px, py, pz);
+			entity.setPos(px, py, pz);
 			entity.setYaw(yaw);
 			player.startRiding(entity);
 			entity.getPassengerList().add(player);

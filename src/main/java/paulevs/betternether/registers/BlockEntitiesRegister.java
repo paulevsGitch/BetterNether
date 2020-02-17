@@ -24,6 +24,6 @@ public class BlockEntitiesRegister
 	
 	public static void RegisterBlockEntity(String name, BlockEntityType<? extends BlockEntity> type)
 	{
-		Registry.register(Registry.BLOCK_ENTITY, new Identifier(BetterNether.MOD_ID, name), type);
+		Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), type);
 	}
 }

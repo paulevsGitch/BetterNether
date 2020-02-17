@@ -90,7 +90,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 			}
 		}
 
-		o = this.getCustomAngle(mobEntity, g);
+		o = 0;//this.getCustomAngle(mobEntity, g);
 		this.setupTransforms(mobEntity, matrixStack, o, h, g);
 		matrixStack.scale(-1.0F, -1.0F, 1.0F);
 		this.scale(mobEntity, matrixStack, g);

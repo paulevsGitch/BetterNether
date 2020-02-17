@@ -10,7 +10,6 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registers.BlocksRegister;
@@ -45,6 +44,9 @@ public class BlocksHelper
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
+				b == Blocks.SOUL_SOIL ||
+				b == Blocks.CRIMSON_NYLIUM ||
+				b == Blocks.WARPED_NYLIUM ||
 				b == BlocksRegister.FARMLAND ||
 				b == BlocksRegister.CINCINNASITE_ORE ||
 				b == BlocksRegister.NETHERRACK_MOSS;
@@ -56,6 +58,9 @@ public class BlocksHelper
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
+				b == Blocks.SOUL_SOIL ||
+				b == Blocks.CRIMSON_NYLIUM ||
+				b == Blocks.WARPED_NYLIUM ||
 				b == Blocks.MAGMA_BLOCK ||
 				b == BlocksRegister.FARMLAND ||
 				b == BlocksRegister.CINCINNASITE_ORE ||
@@ -67,18 +72,6 @@ public class BlocksHelper
 		Block b = state.getBlock();
 		return  b == Blocks.BONE_BLOCK ||
 				b == BlocksRegister.BONE;
-	}
-	
-	public static boolean isGroundOrModContent(BlockState state)
-	{
-		Block b = state.getBlock();
-		return  b == Blocks.NETHERRACK ||
-				b == Blocks.NETHER_QUARTZ_ORE ||
-				b == Blocks.SOUL_SAND ||
-				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS ||
-				Registry.BLOCK.getId(b).getNamespace().equals(BetterNether.MOD_ID);
 	}
 	
 	public static void setWithoutUpdate(IWorld world, BlockPos pos, BlockState state)
