@@ -155,7 +155,7 @@
 
 	"block.betternether.stalagnate": "Stalagnate",
 	"block.betternether.stalagnate_stem": "Stalagnate",
-	"block.betternether.stalagnate_bark": "Stalagnate Bark",
+	"block.betternether.stalagnate_bark": "Stalagnate Wood",
 	"block.betternether.stalagnate_bowl_placed": "Stalagnate Bowl",
 	"block.betternether.stalagnate_planks": "Stalagnate Planks",
 	"block.betternether.stalagnate_planks_button": "Stalagnate Button",
@@ -177,7 +177,7 @@
 	"block.betternether.willow_leaves": "Willow Leaves",
 	"block.betternether.willow_trunk": "Willow Trunk",
 	"block.betternether.willow_log": "Willow Log",
-	"block.betternether.willow_bark": "Willow Bark",
+	"block.betternether.willow_bark": "Willow Wood",
 	"block.betternether.willow_sapling": "Willow Sapling",
 	
 	"block.betternether.swamp_grass": "Swamp Grass",
@@ -274,7 +274,7 @@
 	"block.betternether.soul_grass": "Soul Grass",
 	
 	"block.betternether.wart_log": "Wart Log",
-	"block.betternether.wart_bark": "Wart Bark",
+	"block.betternether.wart_bark": "Wart Wood",
 	"block.betternether.wart_roots": "Wart Roots",
 	
 	"block.betternether.wall_moss": "Wall Moss",
@@ -308,5 +308,19 @@
 	
 	"block.betternether.stalagnate_ladder": "Stalagnate Ladder",
 	"block.betternether.willow_ladder": "Willow Ladder",
-	"block.betternether.wart_ladder": "Wart Ladder"
+	"block.betternether.wart_ladder": "Wart Ladder",
+	
+	"block.betternether.chair_reeds": "Reeds Chair",
+	"block.betternether.chair_stalagnate": "Stalagnate Chair",
+	"block.betternether.chair_willow": "Willow Chair",
+	"block.betternether.chair_wart": "Wart Chair",
+	"block.betternether.chair_cincinnasite": "Cincinnasite Chair",
+	
+	"block.betternether.striped_log_stalagnate": "Striped Stalagnate Log",
+	"block.betternether.striped_log_willow": "Striped Willow Log",
+	"block.betternether.striped_log_wart": "Striped Wart Log",
+	
+	"block.betternether.striped_bark_stalagnate": "Striped Stalagnate Wood",
+	"block.betternether.striped_bark_willow": "Striped Willow Wood",
+	"block.betternether.striped_bark_wart": "Striped Wart Wood"
 }

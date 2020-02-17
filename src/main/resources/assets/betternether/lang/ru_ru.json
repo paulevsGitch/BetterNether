@@ -155,7 +155,7 @@
 
 	"block.betternether.stalagnate": "Сталагнат",
 	"block.betternether.stalagnate_stem": "Сталагнат",
-	"block.betternether.stalagnate_bark": "Кора сталагната",
+	"block.betternether.stalagnate_bark": "Древесина сталагната",
 	"block.betternether.stalagnate_bowl_placed": "Сталагнатовая миска",
 	"block.betternether.stalagnate_planks": "Сталагнатовые доски",
 	"block.betternether.stalagnate_planks_button": "Сталагнатовая кнопка",
@@ -177,7 +177,7 @@
 	"block.betternether.willow_leaves": "Листья ивы",
 	"block.betternether.willow_trunk": "Ствол ивы",
 	"block.betternether.willow_log": "Древесина ивы",
-	"block.betternether.willow_bark": "Ивовая кора",
+	"block.betternether.willow_bark": "Ивовая Древесина",
 	"block.betternether.willow_sapling": "Саженец ивы",
 	
 	"block.betternether.swamp_grass": "Болотная трава",
@@ -274,7 +274,7 @@
 	"block.betternether.soul_grass": "Трава души",
 	
 	"block.betternether.wart_log": "Бревно нароста",
-	"block.betternether.wart_bark": "Кора нароста",
+	"block.betternether.wart_bark": "Древесина нароста",
 	"block.betternether.wart_roots": "Корни нароста",
 	
 	"block.betternether.wall_moss": "Настенный мох",
@@ -308,5 +308,19 @@
 	
 	"block.betternether.stalagnate_ladder": "Сталагнатовая лестница",
 	"block.betternether.willow_ladder": "Ивовая лестница",
-	"block.betternether.wart_ladder": "Наростовая лестница"
+	"block.betternether.wart_ladder": "Наростовая лестница",
+	
+	"block.betternether.chair_reeds": "Тростниковый стул",
+	"block.betternether.chair_stalagnate": "Сталагнатовый стул",
+	"block.betternether.chair_willow": "Ивовый стул",
+	"block.betternether.chair_wart": "Наростовый стул",
+	"block.betternether.chair_cincinnasite": "Цинцинназитовый стул",
+	
+	"block.betternether.striped_log_stalagnate": "Обтёсанное бревно сталагната",
+	"block.betternether.striped_log_willow": "Обтёсанное бревно ивы",
+	"block.betternether.striped_log_wart": "Обтёсанное бревно нароста",
+	
+	"block.betternether.striped_bark_stalagnate": "Обтёсанная древесина сталагната",
+	"block.betternether.striped_bark_willow": "Обтёсанная древесина ивы",
+	"block.betternether.striped_bark_wart": "Обтёсанная древесина нароста"
 }
