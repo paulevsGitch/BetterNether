@@ -3,9 +3,12 @@ package paulevs.betternether.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
 public class BlockCactusBase extends BlockBaseNotFull
@@ -29,5 +32,11 @@ public class BlockCactusBase extends BlockBaseNotFull
 			return state;
 		else
 			return Blocks.AIR.getDefaultState();
+	}
+
+	@Override
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
+	{
+		entity.damage(DamageSource.CACTUS, 1.0F);
 	}
 }

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/striped_log_willow_side",
+        "down": "betternether:block/striped_log_willow_top",
+        "up": "betternether:block/striped_log_willow_top",
+        "north": "betternether:block/striped_log_willow_side",
+        "east": "betternether:block/striped_log_willow_side",
+        "south": "betternether:block/striped_log_willow_side",
+        "west": "betternether:block/striped_log_willow_side"
+    }
+}
