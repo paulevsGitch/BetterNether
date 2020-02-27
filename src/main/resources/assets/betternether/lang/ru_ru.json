@@ -322,5 +322,8 @@
 	
 	"block.betternether.striped_bark_stalagnate": "Обтёсанная древесина сталагната",
 	"block.betternether.striped_bark_willow": "Обтёсанная древесина ивы",
-	"block.betternether.striped_bark_wart": "Обтёсанная древесина нароста"
+	"block.betternether.striped_bark_wart": "Обтёсанная древесина нароста",
+	
+	"block.betternether.giant_mold": "Гигантская плесень",
+	"block.betternether.giant_mold_sapling": "Саженец гигантской плесени"
 }

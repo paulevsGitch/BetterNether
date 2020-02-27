@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -77,8 +77,6 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 
 	private boolean isNetherBiome(Biome biome)
 	{
-		return  biome == Biomes.NETHER_WASTES ||
-				biome == Biomes.CRIMSON_FOREST ||
-				biome == Biomes.WARPED_FOREST;
+		return biome.getCategory() == Category.NETHER;
 	}
 }

@@ -1,0 +1,69 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "betternether:block/giant_mold_stem_side",
+		"texture": "betternether:block/giant_mold_stem_side",
+		"cut": "betternether:block/mushroom_stem_top",
+		"texture1": "betternether:block/giant_mold_small"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 7, 0, 7 ],
+			"to": [ 9, 4, 9 ],
+			"faces": {
+				"down": { "uv": [ 7, 7, 9, 9 ], "texture": "#cut", "cullface": "down" },
+				"up": { "uv": [ 7, 7, 9, 9 ], "texture": "#cut", "cullface": "up" },
+				"north": { "uv": [ 7, 12, 9, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 7, 12, 9, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 7, 12, 9, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 7, 12, 9, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Box2",
+			"from": [ 5, 4, 5 ],
+			"to": [ 11, 10, 11 ],
+			"faces": {
+				"down": { "uv": [ 5, 5, 11, 11 ], "texture": "#texture1" },
+				"up": { "uv": [ 5, 5, 11, 11 ], "texture": "#texture1" },
+				"north": { "uv": [ 5, 5, 11, 11 ], "texture": "#texture1" },
+				"south": { "uv": [ 5, 5, 11, 11 ], "texture": "#texture1" },
+				"west": { "uv": [ 5, 5, 11, 11 ], "texture": "#texture1" },
+				"east": { "uv": [ 5, 5, 11, 11 ], "texture": "#texture1" }
+			}
+		},
+		{
+			"__comment": "PlaneX4",
+			"from": [ 13.5, -1, 2.5 ],
+			"to": [ 13.501, 15, 18.5 ],
+			"rotation": { "origin": [ 13.5, -1, 2.5 ], "axis": "y", "angle": -45 },
+			"shade": false,
+			"faces": {
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture1" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture1" }
+			}
+		},
+		{
+			"__comment": "PlaneX4",
+			"from": [ 3, -1, 3 ],
+			"to": [ 3.001, 15, 19 ],
+			"rotation": { "origin": [ 3, -1, 3 ], "axis": "y", "angle": 45 },
+			"shade": false,
+			"faces": {
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture1" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture1" }
+			}
+		},
+		{
+			"__comment": "PlaneY6",
+			"from": [ 0, 7, 0 ],
+			"to": [ 16, 7.001, 16 ],
+			"shade": false,
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture1" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture1" }
+			}
+		}
+	]
+}

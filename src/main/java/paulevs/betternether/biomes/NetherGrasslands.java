@@ -27,14 +27,14 @@ public class NetherGrasslands extends NetherBiome
 	{
 		super(name);
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
-		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.05F, false);
-		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, false);
-		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.05F, false);
-		addStructure("ink_bush", new StructureInkBush(), StructureType.FLOOR, 0.05F, false);
-		addStructure("black_apple", new StructureBlackApple(), StructureType.FLOOR, 0.01F, false);
-		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
-		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.02F, false);
-		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.4F, false);
+		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.05F, true);
+		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, true);
+		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.05F, true);
+		addStructure("ink_bush", new StructureInkBush(), StructureType.FLOOR, 0.05F, true);
+		addStructure("black_apple", new StructureBlackApple(), StructureType.FLOOR, 0.01F, true);
+		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, true);
+		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.02F, true);
+		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.4F, true);
 		addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);

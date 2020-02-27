@@ -1,0 +1,16 @@
+{
+	"variants": {
+        "shape=top":  { "model": "betternether:block/giant_mold_top" },
+		"shape=middle":  [
+			{ "model": "betternether:block/giant_mold_stem" },
+			{ "model": "betternether:block/giant_mold_stem" },
+			{ "model": "betternether:block/giant_mold_stem" },
+			{ "model": "betternether:block/giant_mold_stem" },
+			{ "model": "betternether:block/giant_mold_stem_2" },
+			{ "model": "betternether:block/giant_mold_stem_2", "y": 90 },
+			{ "model": "betternether:block/giant_mold_stem_2", "y": 180 },
+			{ "model": "betternether:block/giant_mold_stem_2", "y": 270 }
+		],
+        "shape=bottom":  { "model": "betternether:block/giant_mold_bottom" }
+    }
+}

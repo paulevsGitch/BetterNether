@@ -11,7 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
@@ -70,8 +71,12 @@ public class BNWorldGenerator
 		
 		if (Config.getBoolean("generator_world", "generate_cities", true))
 		{
-			Biomes.NETHER_WASTES.addStructureFeature(CITY.configure(FeatureConfig.DEFAULT));
-			Biomes.NETHER_WASTES.addFeature(GenerationStep.Feature.RAW_GENERATION, CITY.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT)));
+			for (Biome b: Registry.BIOME)
+				if (b.getCategory() == Category.NETHER)
+				{
+					b.addStructureFeature(CITY.configure(FeatureConfig.DEFAULT));
+					b.addFeature(GenerationStep.Feature.RAW_GENERATION, CITY.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT)));
+				}
 			Feature.STRUCTURES.put("nether_city", CITY);
 		}
 	}

@@ -38,6 +38,7 @@ public class NetherBiome
 	protected NetherBiome parrent;
 	protected float maxSubBiomeChance = 1;
 	protected float genChance = 1;
+	protected float noiseDensity = 0.3F;
 	
 	private static final String[] DEF_STRUCTURES = new String[] {
 			structureFormat("altar_01", -2, StructureType.FLOOR, 1),
@@ -79,7 +80,17 @@ public class NetherBiome
 			structures.add(s);
 	}
 	
-	public void loadStructures()
+	public void setNoiseDensity(float density)
+	{
+		this.noiseDensity = 1 - density * 2;
+	}
+	
+	public float getNoiseDensity()
+	{
+		return (1F - this.noiseDensity) / 2F;
+	}
+	
+	public void build()
 	{
 		String group = "generator_" + getRegistryName();
 		String[] structAll = Config.getStringArray(group, "structures", structures.toArray(new String[] {}));
@@ -87,6 +98,7 @@ public class NetherBiome
 		{
 			structureFromString(struct);
 		}
+		setNoiseDensity(Config.getFloat(group, "noise_density", getNoiseDensity()));
 	}
 	
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random) {}
@@ -249,7 +261,7 @@ public class NetherBiome
 		
 		boolean canGenerate(Random random, BlockPos pos)
 		{
-			return (!useNoise || getFeatureNoise(pos, id) > 0.3) && random.nextFloat() < density;
+			return (!useNoise || getFeatureNoise(pos, id) > noiseDensity) && random.nextFloat() < density;
 		}
 	}
 	

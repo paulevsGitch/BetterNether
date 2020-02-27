@@ -13,7 +13,7 @@ import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureMedRedMushroom implements IStructure
+public class StructureGiantMold implements IStructure
 {
 	Mutable npos = new Mutable();
 	
@@ -28,7 +28,7 @@ public class StructureMedRedMushroom implements IStructure
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
 				int y = pos.getY() + random.nextInt(6);
-				for (int j = 0; j < 12; j++)
+				for (int j = 0; j < 16; j++)
 				{
 					npos.set(x, y - j, z);
 					under = world.getBlockState(npos.down()).getBlock();
@@ -43,7 +43,7 @@ public class StructureMedRedMushroom implements IStructure
 
 	public void grow(IWorld world, BlockPos pos, Random random)
 	{
-		int size = 1 + random.nextInt(4);
+		int size = 2 + random.nextInt(6);
 		for (int y = 1; y <= size; y++)
 			if (!world.isAir(pos.up(y)))
 			{
@@ -52,10 +52,10 @@ public class StructureMedRedMushroom implements IStructure
 				size = y - 1;
 				break;
 			}
-		BlockState middle = BlocksRegister.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.MIDDLE);
+		BlockState middle = BlocksRegister.GIANT_MOLD.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.MIDDLE);
 		for (int y = 1; y < size; y++)
 			BlocksHelper.setWithoutUpdate(world, pos.up(y), middle);
-		BlocksHelper.setWithoutUpdate(world, pos.up(size), BlocksRegister.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.TOP));
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.BOTTOM));
+		BlocksHelper.setWithoutUpdate(world, pos.up(size), BlocksRegister.GIANT_MOLD.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.TOP));
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.GIANT_MOLD.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.BOTTOM));
 	}
 }

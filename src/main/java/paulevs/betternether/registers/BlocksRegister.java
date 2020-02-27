@@ -53,6 +53,8 @@ import paulevs.betternether.blocks.BlockEyeball;
 import paulevs.betternether.blocks.BlockEyeballSmall;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.blocks.BlockGeyser;
+import paulevs.betternether.blocks.BlockGiantMold;
+import paulevs.betternether.blocks.BlockGiantMoldSapling;
 import paulevs.betternether.blocks.BlockGoldenVine;
 import paulevs.betternether.blocks.BlockGrayMold;
 import paulevs.betternether.blocks.BlockInkBush;
@@ -350,6 +352,8 @@ public class BlocksRegister
 	public static final Block BAR_STOOL_WILLOW = new BNBarStool(WILLOW_PLANKS);
 	public static final Block BAR_STOOL_WART = new BNBarStool(WART_PLANKS);
 	public static final Block BAR_STOOL_CINCINNASITE = new BNBarStool(CINCINNASITE_FORGED);
+	public static final Block GIANT_MOLD = new BlockGiantMold();
+	public static final Block GIANT_MOLD_SAPLING = new BlockGiantMoldSapling();
 	
 	public static void register()
 	{
@@ -612,6 +616,9 @@ public class BlocksRegister
 		registerBlock("striped_bark_stalagnate", STRIPED_BARK_STALAGNATE);
 		registerBlock("striped_bark_willow", STRIPED_BARK_WILLOW);
 		registerBlock("striped_bark_wart", STRIPED_BARK_WART);
+		
+		registerBlockNI("giant_mold", GIANT_MOLD);
+		registerBlock("giant_mold_sapling", GIANT_MOLD_SAPLING);
 	}
 	
 	private static void registerBlock(String name, Block block)
