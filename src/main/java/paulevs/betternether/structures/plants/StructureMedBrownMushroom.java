@@ -28,19 +28,14 @@ public class StructureMedBrownMushroom implements IStructure
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
 				int y = pos.getY() + random.nextInt(6);
-				for (int j = 0; j < 6; j++)
+				for (int j = 0; j < 12; j++)
 				{
 					npos.set(x, y - j, z);
-					if (npos.getY() > 31)
+					under = world.getBlockState(npos.down()).getBlock();
+					if (under == BlocksRegister.NETHER_MYCELIUM)
 					{
-						under = world.getBlockState(npos.down()).getBlock();
-						if (under == BlocksRegister.NETHER_MYCELIUM)
-						{
-							grow(world, npos, random);
-						}
+						grow(world, npos, random);
 					}
-					else
-						break;
 				}
 			}
 		}

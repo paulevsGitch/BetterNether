@@ -322,5 +322,8 @@
 	
 	"block.betternether.striped_bark_stalagnate": "Striped Stalagnate Wood",
 	"block.betternether.striped_bark_willow": "Striped Willow Wood",
-	"block.betternether.striped_bark_wart": "Striped Wart Wood"
+	"block.betternether.striped_bark_wart": "Striped Wart Wood",
+	
+	"block.betternether.giant_mold": "Giant Mold",
+	"block.betternether.giant_mold_sapling": "Giant Mold Sapling"
 }

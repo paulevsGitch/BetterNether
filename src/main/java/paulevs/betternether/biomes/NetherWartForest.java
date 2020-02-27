@@ -19,7 +19,7 @@ public class NetherWartForest extends NetherBiome
 	public NetherWartForest(String name)
 	{
 		super(name);
-		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.05F, false);
+		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.1F, false);
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.05F, false);
