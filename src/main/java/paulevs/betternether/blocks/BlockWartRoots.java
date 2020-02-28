@@ -1,8 +1,7 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Blocks;
-import paulevs.betternether.blocks.BlockBase;
 
 public class BlockWartRoots extends BlockBase
 {

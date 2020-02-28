@@ -45,7 +45,7 @@ public class GrassGrowMixin
 	{
 		int y1 = pos.getY() + 3;
 		int y2 = pos.getY() - 3;
-		BlockState grass = getGrassState(pos);
+		BlockState grass = getGrassState(world, pos);
 		for (int i = 0; i < 64; i++)
 		{
 			int x = (int) (pos.getX() + world.random.nextGaussian() * 2);
@@ -64,9 +64,9 @@ public class GrassGrowMixin
 		}
 	}
 	
-	private BlockState getGrassState(BlockPos pos)
+	private BlockState getGrassState(World world, BlockPos pos)
 	{
-		NetherBiome biome = BNWorldGenerator.getBiome(pos.getX(), pos.getY(), pos.getZ());
+		NetherBiome biome = BNWorldGenerator.getBiome(world, pos.getX(), pos.getY(), pos.getZ());
 		if (biome instanceof NetherSwampland)
 			return BlocksRegister.SWAMP_GRASS.getDefaultState();
 		else

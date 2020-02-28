@@ -22,8 +22,10 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.IBiomeArray;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
+import paulevs.betternether.registers.BiomesRegister;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.world.structures.CityFeature;
@@ -32,6 +34,7 @@ public class BNWorldGenerator
 {
 	private static boolean hasCleaningPass;
 	private static boolean hasFixPass;
+	private static boolean useCustomBiomes;
 
 	private static float oreDensity;
 	private static float structureDensity;
@@ -63,6 +66,7 @@ public class BNWorldGenerator
 	{
 		hasCleaningPass = Config.getBoolean("generator_world", "terrain_cleaning_pass", true);
 		hasFixPass = Config.getBoolean("generator_world", "world_fixing_pass", true);
+		useCustomBiomes = Config.getBoolean("generator_world", "use_custom_biome_system", true);
 		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
 		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 64F);
@@ -96,7 +100,7 @@ public class BNWorldGenerator
 		map.clearCache();
 	}
 	
-	private static void makeBiomeArray(int sx, int sz)
+	private static void makeBiomeArray(IWorld world, int sx, int sz)
 	{
 		int wx, wy, wz;
 		for (int x = 0; x < 8; x++)
@@ -108,7 +112,7 @@ public class BNWorldGenerator
 				for (int z = 0; z < 8; z++)
 				{
 					wz = sz + (z << 1);
-					BIOMES[x][y][z] = getBiome(wx, wy, wz);
+					BIOMES[x][y][z] = getBiome(world, wx, wy, wz);
 				}
 			}
 		}
@@ -123,49 +127,83 @@ public class BNWorldGenerator
 		return BIOMES[clamp(x, 7)][clamp(y, 63)][clamp(z, 7)];
 	}
 	
-	public static NetherBiome getBiome(int x, int y, int z)
+	public static NetherBiome getBiome(IWorld world, int x, int y, int z)
 	{
-		NetherBiome biome = map.getBiome(x, y, z);
-		
-		if (biome.hasEdge() || (biome.hasParrent() && biome.getParrentBiome().hasEdge()))
+		if (useCustomBiomes)
 		{
-			NetherBiome search = biome;
-			if (biome.hasParrent())
-				search = biome.getParrentBiome();
-			int d = search.getEdgeSize();
+			NetherBiome biome = map.getBiome(x, y, z);
 			
-			boolean edge = !search.isSame(map.getBiome(x + d, y, z));
-			edge = edge || !search.isSame(map.getBiome(x - d, y, z));
-			edge = edge || !search.isSame(map.getBiome(x, y + d, z));
-			edge = edge || !search.isSame(map.getBiome(x, y - d, z));
-			edge = edge || !search.isSame(map.getBiome(x, y, z + d));
-			edge = edge || !search.isSame(map.getBiome(x, y, z - d));
-			edge = edge || !search.isSame(map.getBiome(x - d, y - d, z - d));
-			edge = edge || !search.isSame(map.getBiome(x + d, y - d, z - d));
-			edge = edge || !search.isSame(map.getBiome(x - d, y - d, z + d));
-			edge = edge || !search.isSame(map.getBiome(x + d, y - d, z + d));
-			edge = edge || !search.isSame(map.getBiome(x - d, y + d, z - d));
-			edge = edge || !search.isSame(map.getBiome(x + d, y + d, z - d));
-			edge = edge || !search.isSame(map.getBiome(x - d, y + d, z + d));
-			edge = edge || !search.isSame(map.getBiome(x + d, y + d, z + d));
-			
-			if (edge)
+			if (biome.hasEdge() || (biome.hasParrent() && biome.getParrentBiome().hasEdge()))
 			{
-				biome = search.getEdge();
+				NetherBiome search = biome;
+				if (biome.hasParrent())
+					search = biome.getParrentBiome();
+				int d = search.getEdgeSize();
+				
+				boolean edge = !search.isSame(map.getBiome(x + d, y, z));
+				edge = edge || !search.isSame(map.getBiome(x - d, y, z));
+				edge = edge || !search.isSame(map.getBiome(x, y + d, z));
+				edge = edge || !search.isSame(map.getBiome(x, y - d, z));
+				edge = edge || !search.isSame(map.getBiome(x, y, z + d));
+				edge = edge || !search.isSame(map.getBiome(x, y, z - d));
+				edge = edge || !search.isSame(map.getBiome(x - d, y - d, z - d));
+				edge = edge || !search.isSame(map.getBiome(x + d, y - d, z - d));
+				edge = edge || !search.isSame(map.getBiome(x - d, y - d, z + d));
+				edge = edge || !search.isSame(map.getBiome(x + d, y - d, z + d));
+				edge = edge || !search.isSame(map.getBiome(x - d, y + d, z - d));
+				edge = edge || !search.isSame(map.getBiome(x + d, y + d, z - d));
+				edge = edge || !search.isSame(map.getBiome(x - d, y + d, z + d));
+				edge = edge || !search.isSame(map.getBiome(x + d, y + d, z + d));
+				
+				if (edge)
+				{
+					biome = search.getEdge();
+				}
 			}
+			
+			return biome;
 		}
 		
-		return biome;
+		popPos.set(x, y, z);
+		Biome biome = world.getBiome(popPos);
+		if (biome instanceof NetherBiome)
+			return (NetherBiome) biome;
+		else
+			return null;
 	}
 	
 	private static int clamp(int x, int max)
 	{
 		return x < 0 ? 0 : x > max ? max : x;
 	}
+	
+	public static void generateBiomes(IWorld world, int sx, int sz, Random random)
+	{
+		makeBiomeArray(world, sx, sz);
+		if (useCustomBiomes)
+		{
+			IBiomeArray array = (IBiomeArray) world.getChunk(sx >> 4, sz >> 4).getBiomeArray();
+			for (int x = 0; x < 16; x++)
+			{
+				for (int z = 0; z < 16; z++)
+				{
+					for (int y = 0; y < 128; y++)
+					{
+						biome = getBiomeLocal(x, 0, z, random);
+						
+						if (biome == null)
+							continue;
+
+						array.setBiome(x, y, z, biome);
+					}
+				}
+			}
+		}
+	}
 
 	public static void populate(IWorld world, int sx, int sz, Random random)
 	{
-		makeBiomeArray(sx, sz);
+		makeBiomeArray(world, sx, sz);
 		
 		//Structure Generator
 		if (random.nextFloat() < structureDensity)
@@ -176,6 +214,8 @@ public class BNWorldGenerator
 				popPos.setY(popPos.getY() - 1);
 			}
 			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+			if (biome == null)
+				biome = BiomesRegister.BIOME_EMPTY_NETHER;
 			if (world.isAir(popPos))
 			{
 				BlockState down = world.getBlockState(popPos.down());
@@ -197,6 +237,8 @@ public class BNWorldGenerator
 		
 		int ex = sx + 16;
 		int ez = sz + 16;
+		
+		//IBiomeArray array = (IBiomeArray) world.getChunk(sx >> 4, sz >> 4).getBiomeArray();
 
 		// Total Populator
 		for (int x = 0; x < 16; x++)
@@ -205,19 +247,25 @@ public class BNWorldGenerator
 			for (int z = 0; z < 16; z++)
 			{
 				int wz = sz + z;
-				
 				for (int y = 5; y < 126; y++)
 				{
 					if (caves.isInCave(x, y, z))
 						continue;
+					
+					biome = getBiomeLocal(x, 0, z, random);
+					if (biome == null)
+						continue;
+					
+					/*if (useCustomBiomes)
+					{
+						array.setBiome(x, y, z, biome);
+					}*/
 					
 					popPos.set(wx, y, wz);
 					BlockState state = world.getBlockState(popPos);
 					boolean lava = BlocksHelper.isLava(state);
 					if (lava || BlocksHelper.isNetherGroundMagma(state))
 					{
-						biome = getBiomeLocal(x, y, z, random);
-						
 						if (!lava && world.isAir(popPos.up()))
 							biome.genSurfColumn(world, popPos, random);
 
@@ -283,7 +331,8 @@ public class BNWorldGenerator
 			if (world.isAir(pos))
 			{
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
-				biome.genLavaObjects(world, pos, random);
+				if (biome != null)
+					biome.genLavaObjects(world, pos, random);
 			}
 		}
 		
@@ -291,21 +340,24 @@ public class BNWorldGenerator
 			if (world.isAir(pos))
 			{
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
-				biome.genFloorObjects(world, pos, random);
+				if (biome != null)
+					biome.genFloorObjects(world, pos, random);
 			}
 		
 		for (BlockPos pos: LIST_WALL)
 			if (world.isAir(pos))
 			{
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
-				biome.genWallObjects(world, pos, random);
+				if (biome != null)
+					biome.genWallObjects(world, pos, random);
 			}
 		
 		for (BlockPos pos: LIST_CEIL)
 			if (world.isAir(pos))
 			{
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
-				biome.genCeilObjects(world, pos, random);
+				if (biome != null)
+					biome.genCeilObjects(world, pos, random);
 			}
 	}
 	

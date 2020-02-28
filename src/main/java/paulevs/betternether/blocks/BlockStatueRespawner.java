@@ -83,7 +83,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 						pos.getX() + world.random.nextFloat(),
 						pos.getY() + y + world.random.nextFloat() * 0.2,
 						pos.getZ() + world.random.nextFloat(), 0, 0, 0);
-			player.addChatMessage(new TranslatableText("message.spawn_set", new Object[0]), true);
+			player.addMessage(new TranslatableText("message.spawn_set", new Object[0]), true);
 			player.setPlayerSpawn(pos.offset(state.get(FACING)), true, false);
 			if (!world.isClient)
 			{
@@ -95,7 +95,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 			return ActionResult.SUCCESS;
 		}
 		else
-			player.addChatMessage(new TranslatableText("message.spawn_help", new Object[0]), true);
+			player.addMessage(new TranslatableText("message.spawn_help", new Object[0]), true);
 		return ActionResult.FAIL;
 	}
 	

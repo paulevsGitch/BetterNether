@@ -4,7 +4,6 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ChunkPopulateMixin",
-    "LadderMixin",
 	"MushroomMixin",
 	"PlayerMixin",
 	"PlayerManagerMixin",
@@ -17,7 +16,8 @@
 	"StructureMixin",
 	"BackgroundRenderMixin",
 	"LightStorageMixin",
-	"NetherWartMixin"
+	"NetherWartMixin",
+	"BiomeArrayMixin"
   ],
   "client": [],
   "injectors": {

@@ -36,7 +36,7 @@ public class BNLadder extends BlockBaseNotFull
 	{
 		super(FabricBlockSettings.copy(block).nonOpaque().build());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
-		this.setClimmable(true);
+		//this.setClimmable(true);
 	}
 	
 	@Override

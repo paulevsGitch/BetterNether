@@ -41,7 +41,7 @@ public class BlockGoldenVine  extends BlockBaseNotFull implements Fertilizable
 				.nonOpaque()
 				.lightLevel(15)
 				.build());
-		this.setClimmable(true);
+		//this.setClimmable(true);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(BOTTOM, true));

@@ -13,7 +13,7 @@ public class BlockStalagnate extends BlockStalagnateStem
 	public BlockStalagnate()
 	{
 		super();
-		this.setClimmable(true);
+		//this.setClimmable(true);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.MIDDLE));
 		this.setDropItself(false);

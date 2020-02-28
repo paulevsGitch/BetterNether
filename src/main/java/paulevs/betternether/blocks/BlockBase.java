@@ -11,7 +11,7 @@ import paulevs.betternether.client.IRenderTypeable;
 
 public class BlockBase extends Block implements IRenderTypeable
 {
-	private boolean isClimmable = false;
+	//private boolean isClimmable = false;
 	private boolean dropItself = true;
 	private BNRenderLayer layer = BNRenderLayer.SOLID;
 	
@@ -20,7 +20,7 @@ public class BlockBase extends Block implements IRenderTypeable
 		super(settings);
 	}
 	
-	public void setClimmable(boolean climmable)
+	/*public void setClimmable(boolean climmable)
 	{
 		this.isClimmable = climmable;
 	}
@@ -28,7 +28,7 @@ public class BlockBase extends Block implements IRenderTypeable
 	public boolean isClimmable()
 	{
 		return isClimmable;
-	}
+	}*/
 	
 	public void setRenderLayer(BNRenderLayer layer)
 	{

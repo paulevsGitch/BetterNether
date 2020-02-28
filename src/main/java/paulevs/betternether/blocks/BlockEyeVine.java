@@ -30,7 +30,7 @@ public class BlockEyeVine extends BlockBaseNotFull
 				.breakInstantly()
 				.nonOpaque()
 				.build());
-		this.setClimmable(true);
+		//this.setClimmable(true);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		setDropItself(false);
 	}

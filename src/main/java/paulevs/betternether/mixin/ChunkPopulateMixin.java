@@ -42,6 +42,13 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 		{
 			if (region.getDimension().isNether())
 				BNWorldGenerator.prePopulate(region, chunkX, chunkZ);
+			RANDOM.setSeed(chunkX, chunkZ);
+			int sx = chunkX << 4;
+			int sz = chunkZ << 4;
+			//BNWorldGenerator.populate(region, sx, sz, RANDOM);
+			//BNWorldGenerator.cleaningPass(region, sx, sz);
+			//BNWorldGenerator.clearCache();
+			BNWorldGenerator.generateBiomes(region, sx, sz, RANDOM);
 		}
     }
 	
@@ -52,7 +59,7 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 		int chunkZ = region.getCenterChunkZ();
 		if (!region.isClient() && isNetherBiome(region, chunkX, chunkZ))
 		{
-			RANDOM.setSeed(chunkX, chunkZ);
+			//RANDOM.setSeed(chunkX, chunkZ);
 			int sx = chunkX << 4;
 			int sz = chunkZ << 4;
 			BNWorldGenerator.populate(region, sx, sz, RANDOM);

@@ -5,8 +5,28 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import com.google.common.collect.ImmutableList;
+
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityCategory;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.ProbabilityConfig;
+import net.minecraft.world.gen.carver.Carver;
+import net.minecraft.world.gen.decorator.ChanceRangeDecoratorConfig;
+import net.minecraft.world.gen.decorator.CountDecoratorConfig;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.structures.IStructure;
@@ -14,8 +34,9 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.StructureWorld;
 import paulevs.betternether.structures.plants.StructureWartCap;
 
-public class NetherBiome
+public class NetherBiome extends Biome
 {
+	//private static int preID;
 	private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
 	private static int structureID = 0;
 	
@@ -67,9 +88,68 @@ public class NetherBiome
 	};
 	
 	private ArrayList<String> structures;
+	//private int internalID;
+	
+	/*static
+	{
+		Iterator<Biome> iterator = Registry.BIOME.iterator();
+		preID = 0;
+		while (iterator.hasNext())
+		{
+			Biome biome = iterator.next();
+			if (biome.getCategory() == Category.NETHER)
+				preID = Math.max(preID, biome.hashCode());
+		}
+		preID ++;
+	}*/
+	
+	private NetherBiome(String name, Random random)
+	{
+		super((new Biome.Settings())
+				.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)
+				.precipitation(Biome.Precipitation.NONE)
+				.category(Biome.Category.NETHER)
+				.depth(0.1F)
+				.scale(0.2F)
+				.temperature(2.0F)
+				.downfall(0.0F)
+				.effects((new BiomeEffects.Builder())
+						.waterColor(4159204)
+						.waterFogColor(329011)
+						.fogColor((255 << 24) | name.hashCode())
+						.build())
+				.parent((String)null)
+				.noises(ImmutableList.of(new Biome.MixedNoisePoint(
+						random.nextFloat() * 2 - 1,
+						random.nextFloat() * 2 - 1,
+						random.nextFloat() * 2 - 1,
+						random.nextFloat(), 1.0F))));
+	}
 	
 	public NetherBiome(String name)
 	{
+		this(name, new Random(name.hashCode()));
+		this.addStructureFeature(Feature.NETHER_BRIDGE.configure(FeatureConfig.DEFAULT));
+		this.addCarver(GenerationStep.Carver.AIR, configureCarver(Carver.NETHER_CAVE, new ProbabilityConfig(0.2F)));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.LAVA_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_VERY_BIASED_RANGE.configure(new RangeDecoratorConfig(20, 8, 16, 256))));
+		DefaultBiomeFeatures.addDefaultMushrooms(this);
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.NETHER_BRIDGE.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT)));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.NETHER_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(8, 4, 8, 128))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.NETHER_FIRE_CONFIG).createDecoratedFeature(Decorator.FIRE.configure(new CountDecoratorConfig(10))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.SOUL_FIRE_CONFIG).createDecoratedFeature(Decorator.FIRE.configure(new CountDecoratorConfig(10))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.GLOWSTONE_BLOB.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.LIGHT_GEM_CHANCE.configure(new CountDecoratorConfig(10))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.GLOWSTONE_BLOB.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(10, 0, 0, 128))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.BROWN_MUSHROOM_CONFIG).createDecoratedFeature(Decorator.CHANCE_RANGE.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.RED_MUSHROOM_CONFIG).createDecoratedFeature(Decorator.CHANCE_RANGE.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NETHERRACK, Blocks.MAGMA_BLOCK.getDefaultState(), 33)).createDecoratedFeature(Decorator.MAGMA.configure(new CountDecoratorConfig(4))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.ENCLOSED_NETHER_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(16, 10, 20, 128))));
+		DefaultBiomeFeatures.addNetherOres(this);
+		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.GHAST, 50, 4, 4));
+		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ZOMBIFIED_PIGLIN, 100, 4, 4));
+		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.MAGMA_CUBE, 2, 4, 4));
+		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
+		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
+		
 		this.name = name;
 		subbiomes = new ArrayList<Subbiome>();
 		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.8F, true);
@@ -78,6 +158,8 @@ public class NetherBiome
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
 		for (String s: DEF_STRUCTURES)
 			structures.add(s);
+		
+		//internalID = preID++;
 	}
 	
 	public void setNoiseDensity(float density)
@@ -143,10 +225,10 @@ public class NetherBiome
 		return SCATTER.eval(pos.getX() * 0.1, pos.getY() * 0.1 + id * 10, pos.getZ() * 0.1);
 	}
 	
-	public String getName()
+	/*public String getName()
 	{
 		return name;
-	}
+	}*/
 	
 	public String getRegistryName()
 	{
