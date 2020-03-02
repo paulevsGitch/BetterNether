@@ -1,11 +1,6 @@
 package paulevs.betternether;
 
-import java.util.Iterator;
-
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registers.BiomesRegister;
 import paulevs.betternether.registers.BlockEntitiesRegister;
@@ -35,33 +30,12 @@ public class BetterNether implements ModInitializer
 		BNWorldGenerator.onModInit();
 		EntityRegister.register();
 		Config.save();
-		
-		Iterator<Biome> iterator = Registry.BIOME.iterator();
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		
-		while (iterator.hasNext())
-		{
-			Biome biome = iterator.next();
-			if (biome.getCategory() == Category.NETHER)
-				System.out.println(biome.getName() + " " + biome.hashCode() + " " + (biome.equals(BiomesRegister.BIOME_GRASSLANDS)));
-		}
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
 	}
 	
 	private void initOptions()
 	{
 		thinArmor = Config.getBoolean("improvement", "smaller_armor_offset", true);
-		float density = Config.getFloat("improvement", "fog_density", 1F);
+		float density = Config.getFloat("improvement", "fog_density[vanilla: 1.0]", 0.5F);
 		makeStart(density);
 		makeEnd(density);
 	}

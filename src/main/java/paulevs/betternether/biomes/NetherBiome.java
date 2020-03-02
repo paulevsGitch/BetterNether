@@ -183,6 +183,11 @@ public class NetherBiome extends Biome
 		setNoiseDensity(Config.getFloat(group, "noise_density", getNoiseDensity()));
 	}
 	
+	public void loadStructures()
+	{
+		
+	}
+	
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random) {}
 	
 	public void genFloorObjects(IWorld world, BlockPos pos, Random random)
@@ -486,5 +491,10 @@ public class NetherBiome extends Biome
 	{
 		int size = info.size();
 		return size > 0 ? info.get(size - 1).density : 0;
+	}
+	
+	public Biome getBiome()
+	{
+		return this;
 	}
 }

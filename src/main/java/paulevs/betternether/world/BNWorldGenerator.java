@@ -9,10 +9,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
@@ -105,13 +107,13 @@ public class BNWorldGenerator
 		int wx, wy, wz;
 		for (int x = 0; x < 8; x++)
 		{
-			wx = sx + (x << 1);
+			wx = sx | (x << 1);
 			for (int y = 0; y < 64; y++)
 			{
 				wy = (y << 1);
 				for (int z = 0; z < 8; z++)
 				{
-					wz = sz + (z << 1);
+					wz = sz | (z << 1);
 					BIOMES[x][y][z] = getBiome(world, wx, wy, wz);
 				}
 			}
@@ -169,7 +171,7 @@ public class BNWorldGenerator
 		if (biome instanceof NetherBiome)
 			return (NetherBiome) biome;
 		else
-			return null;
+			return BiomesRegister.BIOME_EMPTY_NETHER;
 	}
 	
 	private static int clamp(int x, int max)
@@ -183,22 +185,57 @@ public class BNWorldGenerator
 		if (useCustomBiomes)
 		{
 			IBiomeArray array = (IBiomeArray) world.getChunk(sx >> 4, sz >> 4).getBiomeArray();
-			for (int x = 0; x < 16; x++)
+			/*for (int x = 0; x < 16; x++)
 			{
 				for (int z = 0; z < 16; z++)
 				{
 					for (int y = 0; y < 128; y++)
 					{
-						biome = getBiomeLocal(x, 0, z, random);
+						biome = getBiomeLocal(x, y, z, random);
 						
 						if (biome == null)
 							continue;
 
-						array.setBiome(x, y, z, biome);
+						array.setBiome(x, y, z, biome.getBiome());
 					}
 				}
-			}
+			}*/
+			for (int x = 0; x < 4; x++)
+				for (int y = 0; y < 32; y++)
+					for (int z = 0; z < 4; z++)
+					{
+						biome = BIOMES[x << 1][y << 1][z << 1];
+						array.setBiome(x, y, z, biome.getBiome());
+					}
 		}
+	}
+	
+	public static boolean generateCustomBiomes(IWorld world, Chunk chunk)
+	{
+		if (useCustomBiomes)
+		{
+			ChunkPos chunkPos = chunk.getPos();
+			makeBiomeArray(world, chunkPos.getStartX(), chunkPos.getStartZ());
+			IBiomeArray array = (IBiomeArray) chunk.getBiomeArray();
+			for (int x = 0; x < 4; x++)
+				for (int y = 0; y < 32; y++)
+					for (int z = 0; z < 4; z++)
+					{
+						biome = BIOMES[x << 1][y << 1][z << 1];
+						array.setBiome(x, y, z, biome.getBiome());
+					}
+		}
+		else
+		{
+			for (int x = 0; x < 8; x++)
+				for (int y = 0; y < 64; y++)
+					for (int z = 0; z < 8; z++)
+					{
+						Biome b = chunk.getBiomeArray().getBiomeForNoiseGen(x >> 1, y >> 1, z >> 1);
+						BIOMES[x][y][z] = BiomesRegister.getFromBiome(b);
+					}
+		}
+		return useCustomBiomes;
 	}
 
 	public static void populate(IWorld world, int sx, int sz, Random random)
@@ -214,8 +251,6 @@ public class BNWorldGenerator
 				popPos.setY(popPos.getY() - 1);
 			}
 			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
-			if (biome == null)
-				biome = BiomesRegister.BIOME_EMPTY_NETHER;
 			if (world.isAir(popPos))
 			{
 				BlockState down = world.getBlockState(popPos.down());
@@ -237,8 +272,6 @@ public class BNWorldGenerator
 		
 		int ex = sx + 16;
 		int ez = sz + 16;
-		
-		//IBiomeArray array = (IBiomeArray) world.getChunk(sx >> 4, sz >> 4).getBiomeArray();
 
 		// Total Populator
 		for (int x = 0; x < 16; x++)
@@ -247,19 +280,12 @@ public class BNWorldGenerator
 			for (int z = 0; z < 16; z++)
 			{
 				int wz = sz + z;
-				for (int y = 5; y < 126; y++)
+				for (int y = 1; y < 126; y++)
 				{
 					if (caves.isInCave(x, y, z))
 						continue;
 					
-					biome = getBiomeLocal(x, 0, z, random);
-					if (biome == null)
-						continue;
-					
-					/*if (useCustomBiomes)
-					{
-						array.setBiome(x, y, z, biome);
-					}*/
+					biome = getBiomeLocal(x, y, z, random);
 					
 					popPos.set(wx, y, wz);
 					BlockState state = world.getBlockState(popPos);
@@ -361,12 +387,9 @@ public class BNWorldGenerator
 			}
 	}
 	
-	public static void prePopulate(IWorld world, int cx, int cz)
+	public static void prePopulate(IWorld world, int sx, int sz)
 	{
-		int wx = (cx << 4);
-		int wz = (cz << 4);
-		
-		popPos.set(wx, 0, wz);
+		popPos.set(sx, 0, sz);
 		caves.generate(world, popPos, world.getRandom());
 		
 		if (hasCleaningPass)
@@ -383,10 +406,10 @@ public class BNWorldGenerator
 				popPos.setY(y);
 				for (int x = 0; x < 16; x++)
 				{
-					popPos.setX(x + wx);
+					popPos.setX(x | sx);
 					for (int z = 0; z < 16; z++)
 					{
-						popPos.setZ(z + wz);
+						popPos.setZ(z | sz);
 						if (canReplace(world, popPos))
 						{
 							up = popPos.up();

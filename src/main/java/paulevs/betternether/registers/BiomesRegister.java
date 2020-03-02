@@ -1,15 +1,21 @@
 package paulevs.betternether.registers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.biome.Biomes;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.biomes.NetherBiomeGravelDesert;
 import paulevs.betternether.biomes.NetherBiomeJungle;
+import paulevs.betternether.biomes.NetherBiomeWrapper;
 import paulevs.betternether.biomes.NetherBoneReef;
 import paulevs.betternether.biomes.NetherGrasslands;
 import paulevs.betternether.biomes.NetherMagmaLand;
@@ -26,8 +32,9 @@ import paulevs.betternether.config.Config;
 public class BiomesRegister
 {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
+	private static final HashMap<Biome, NetherBiome> LINKS = new HashMap<Biome, NetherBiome>();
 	
-	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiome("Empty Nether");
+	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper("nether_wastes", Biomes.NETHER_WASTES);
 	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherBiomeGravelDesert("Gravel Desert");
 	public static final NetherBiome BIOME_NETHER_JUNGLE = new NetherBiomeJungle("Nether Jungle");
 	public static final NetherBiome BIOME_WART_FOREST = new NetherWartForest("Wart Forest");
@@ -46,6 +53,7 @@ public class BiomesRegister
 	
 	public static void register()
 	{
+		registerNotModBiomes();
 		registerBiome(BIOME_GRAVEL_DESERT);
 		registerBiome(BIOME_NETHER_JUNGLE);
 		registerBiome(BIOME_WART_FOREST);
@@ -59,6 +67,36 @@ public class BiomesRegister
 		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
 		registerBiome(MAGMA_LAND);
 		registerSubBiome(SOUL_PLAIN, BIOME_WART_FOREST, 1F);
+	}
+	
+	private static void registerNotModBiomes()
+	{
+		float chance = Config.getFloat("biomes", "nether_wastes_chance", 1);
+		maxChance += chance;
+		BIOME_EMPTY_NETHER.setGenChance(maxChance);
+		BIOME_EMPTY_NETHER.build();
+		REGISTRY.add(BIOME_EMPTY_NETHER);
+		LINKS.put(Biomes.NETHER_WASTES, BIOME_EMPTY_NETHER);
+		
+		Iterator<Biome> iterator = Registry.BIOME.iterator();
+		while (iterator.hasNext())
+		{
+			Biome biome = iterator.next();
+			if (biome.getCategory() == Category.NETHER && biome != Biomes.NETHER_WASTES)
+			{
+				String name = Registry.BIOME.getId(biome).getPath();
+				if (Config.getBoolean("biomes", name, true))
+				{
+					NetherBiomeWrapper wrapper = new NetherBiomeWrapper(name, biome);
+					chance = Config.getFloat("biomes", name + "_chance", 1);
+					maxChance += chance;
+					wrapper.setGenChance(maxChance);
+					wrapper.build();
+					REGISTRY.add(wrapper);
+					LINKS.put(biome, wrapper);
+				}
+			}
+		}
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -123,5 +161,11 @@ public class BiomesRegister
 			if (biome.canGenerate(chance))
 				return biome;
 		return REGISTRY.get(0);
+	}
+	
+	public static NetherBiome getFromBiome(Biome biome)
+	{
+		NetherBiome b = LINKS.get(biome);
+		return b == null ? BIOME_EMPTY_NETHER : b;
 	}
 }
