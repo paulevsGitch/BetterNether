@@ -84,6 +84,7 @@ import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStalagnateStem;
 import paulevs.betternether.blocks.BlockStatueRespawner;
 import paulevs.betternether.blocks.BlockVeinedSand;
+import paulevs.betternether.blocks.BlockWartRoots;
 import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
@@ -603,11 +604,11 @@ public class BlocksRegister
 		registerBlock("chair_wart", CHAIR_WART);
 		registerBlock("chair_cincinnasite", CHAIR_CINCINNASITE);
 		
-		/*registerBlock("bar_stool_reeds", BAR_STOOL_REEDS);
+		registerBlock("bar_stool_reeds", BAR_STOOL_REEDS);
 		registerBlock("bar_stool_stalagnate", BAR_STOOL_STALAGNATE);
 		registerBlock("bar_stool_willow", BAR_STOOL_WILLOW);
 		registerBlock("bar_stool_wart", BAR_STOOL_WART);
-		registerBlock("bar_stool_cincinnasite", BAR_STOOL_CINCINNASITE);*/
+		registerBlock("bar_stool_cincinnasite", BAR_STOOL_CINCINNASITE);
 		
 		registerBlock("striped_log_stalagnate", STRIPED_LOG_STALAGNATE);
 		registerBlock("striped_log_willow", STRIPED_LOG_WILLOW);

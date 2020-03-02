@@ -1,50 +1,61 @@
 package paulevs.betternether.entity;
 
 import java.util.EnumSet;
-import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.control.MoveControl;
+import net.minecraft.entity.Flutterer;
+import net.minecraft.entity.ai.TargetFinder;
+import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.entity.ai.control.LookControl;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.pathing.BirdNavigation;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
+import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.FlyingEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.tag.ItemTags;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import paulevs.betternether.blocks.BlockCommonPlant;
-import paulevs.betternether.blocks.BlockNetherGrass;
+import net.minecraft.world.WorldView;
+import paulevs.betternether.registers.EntityRegister;
 
-public class EntityFirefly extends FlyingEntity// MobEntityWithAi
+public class EntityFirefly extends AnimalEntity implements Flutterer
 {
 	private static final TrackedData<Float> COLOR_RED = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
 	private static final TrackedData<Float> COLOR_GREEN = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
 	private static final TrackedData<Float> COLOR_BLUE = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
 	
-	private BlockPos flower;
+	//private BlockPos flower;
 
 	public EntityFirefly(EntityType<? extends EntityFirefly> type, World world)
 	{
 		super(type, world);
-		this.moveControl = new FireflyMoveControl(this);
+		this.moveControl = new FlightMoveControl(this, 20, true);
+		this.lookControl = new FreflyLookControl(this);
 		this.setPathfindingPenalty(PathNodeType.LAVA, -1.0F);
 		this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
+		this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, 0.0F);
+		this.experiencePoints = 1;
 	}
-
-	/*@Override
-	public float getPathfindingFavor(BlockPos pos, WorldView worldView)
-	{
-		return worldView.getBlockState(pos).isAir() ? 10.0F : 0.0F;
-	}*/
 
 	@Override
 	protected void initDataTracker()
@@ -53,7 +64,6 @@ public class EntityFirefly extends FlyingEntity// MobEntityWithAi
 		this.dataTracker.startTracking(COLOR_RED, random.nextFloat() * 0.5F + 0.5F);
 		this.dataTracker.startTracking(COLOR_GREEN, random.nextFloat() * 0.5F + 0.5F);
 		this.dataTracker.startTracking(COLOR_BLUE, random.nextFloat() * 0.5F + 0.5F);
-		this.setNoGravity(true);
 	}
 
 	@Override
@@ -62,16 +72,98 @@ public class EntityFirefly extends FlyingEntity// MobEntityWithAi
 		super.initAttributes();
 		this.getAttributes().register(EntityAttributes.FLYING_SPEED);
 		this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(1.0);
-		this.getAttributeInstance(EntityAttributes.FLYING_SPEED).setBaseValue(0.001);
-		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.001);
+		this.getAttributeInstance(EntityAttributes.FLYING_SPEED).setBaseValue(1F);
+		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.5F);
+		this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
+	}
+
+	@Override
+	protected EntityNavigation createNavigation(World world)
+	{
+		BirdNavigation birdNavigation = new BirdNavigation(this, world)
+		{
+			public boolean isValidPosition(BlockPos pos)
+			{
+				return !this.world.getBlockState(pos.down()).isAir();
+			}
+
+			public void tick()
+			{
+				super.tick();
+			}
+		};
+		birdNavigation.setCanPathThroughDoors(false);
+		birdNavigation.setCanSwim(false);
+		birdNavigation.setCanEnterOpenDoors(true);
+		return birdNavigation;
 	}
 
 	@Override
 	protected void initGoals()
 	{
-		this.goalSelector.add(1, new FlyRandomlyGoal(this));
-		this.goalSelector.add(2, new FindFlowerGoal(this));
+		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
+		this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.fromTag(ItemTags.FLOWERS), false));
+		this.goalSelector.add(5, new FollowParentGoal(this, 1.25D));
+		this.goalSelector.add(8, new WanderAroundGoal());
+		this.goalSelector.add(9, new SwimGoal(this));
 	}
+
+	@Override
+	public float getPathfindingFavor(BlockPos pos, WorldView worldView)
+	{
+		return worldView.getBlockState(pos).isAir() ? 10.0F : 0.0F;
+	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack stack)
+	{
+		return stack.getItem() == Items.GLOWSTONE_DUST;
+	}
+
+	@Override
+	protected boolean hasWings()
+	{
+		return true;
+	}
+
+	@Override
+	public EntityGroup getGroup()
+	{
+		return EntityGroup.ARTHROPOD;
+	}
+	
+	@Override
+	protected void swimUpward(Tag<Fluid> fluid)
+	{
+		this.setVelocity(this.getVelocity().add(0.0D, 0.01D, 0.0D));
+	}
+
+	@Override
+	public float getBrightnessAtEyes()
+	{
+		return 1.0F;
+	}
+
+	@Override
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier)
+	{
+		return false;
+	}
+	
+	@Override
+	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
+
+	@Override
+	public boolean canClimb()
+	{
+		return false;
+	}
+	
+	@Override
+    public boolean hasNoGravity()
+	{
+        return true;
+    }
 
 	public float getRed()
 	{
@@ -118,205 +210,71 @@ public class EntityFirefly extends FlyingEntity// MobEntityWithAi
 			this.dataTracker.set(COLOR_BLUE, tag.getFloat("ColorBlue"));
 		}
 	}
-	
-	protected BlockPos findFlower(BlockPos pos, int radius)
+
+	@Override
+	public PassiveEntity createChild(PassiveEntity mate)
 	{
-		int x1 = pos.getX() - radius;
-		int x2 = pos.getX() + radius;
-		int y1 = pos.getY() - radius;
-		int y2 = pos.getY() + radius;
-		int z1 = pos.getZ() - radius;
-		int z2 = pos.getZ() + radius;
-		Mutable bPos = new Mutable();
-		for (int y = y2; y >= y1; y--)
-			for (int x = x1; x <= x2; x++)
-				for (int z = z1; z <= z2; z++)
-				{
-					bPos.set(x, y, z);
-					if (isFlower(bPos))
-						return bPos;
-				}
-		return null;
+		return EntityRegister.FIREFLY.create(world);
 	}
 
-	private boolean isFlower(BlockPos pos)
+	class FreflyLookControl extends LookControl
 	{
-		Block block = world.getBlockState(pos).getBlock();
-		return block instanceof BlockNetherGrass || block instanceof BlockCommonPlant;
-	}
-
-	public boolean isWithinDistance(BlockPos pos, int distance)
-	{
-		return pos.isWithinDistance(getBlockPos(), distance);
-	}
-
-	static class FlyRandomlyGoal extends Goal
-	{
-		private final EntityFirefly firefly;
-
-		public FlyRandomlyGoal(EntityFirefly ghast)
+		FreflyLookControl(MobEntity entity)
 		{
-			this.firefly = ghast;
+			super(entity);
+		}
+
+		protected boolean shouldStayHorizontal()
+		{
+			return true;
+		}
+	}
+
+	class WanderAroundGoal extends Goal
+	{
+		WanderAroundGoal()
+		{
 			this.setControls(EnumSet.of(Goal.Control.MOVE));
 		}
 
 		public boolean canStart()
 		{
-			MoveControl moveControl = this.firefly.getMoveControl();
-
-			if (!moveControl.isMoving())
-			{
-				return true;
-			}
-			else
-			{
-				double d = moveControl.getTargetX() - this.firefly.getX();
-				double e = moveControl.getTargetY() - this.firefly.getY();
-				double f = moveControl.getTargetZ() - this.firefly.getZ();
-				double g = d * d + e * e + f * f;
-				return g < 1.0D || g > 3600.0D;
-			}
+			return EntityFirefly.this.navigation.isIdle() && EntityFirefly.this.random.nextInt(10) == 0;
 		}
 
 		public boolean shouldContinue()
 		{
-			return false;
+			return !EntityFirefly.this.navigation.isIdle();
 		}
 
 		public void start()
 		{
-			Random random = this.firefly.getRandom();
-			double x = this.firefly.getX() + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			double y;
-			double z = this.firefly.getZ() + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			
-			BlockPos pos = this.firefly.getBlockPos();
-			if (this.firefly.world.isAir(pos.down()) && this.firefly.world.isAir(pos.down(2)) && this.firefly.world.isAir(pos.down(3)))
-				y = pos.getY() - 3;
+			Vec3d vec3d = this.getRandomLocation();
+			System.out.println(vec3d);
+			if (vec3d != null)
+			{
+				System.out.println("Fly: " + EntityFirefly.this.canFly());
+				System.out.println("No Gravity: " + EntityFirefly.this.hasNoGravity());
+				
+				System.out.println("Move!");
+				System.out.println("From " + EntityFirefly.this.getBlockPos() + " to " + vec3d);
+				EntityFirefly.this.navigation.setRangeMultiplier(0.5F);
+				Path path = EntityFirefly.this.navigation.findPathTo((BlockPos)(new BlockPos(vec3d)), 20);
+				System.out.println("Path is null: " + (path == null));
+				EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
+				//EntityFirefly.this.setVelocity(vec3d.subtract(EntityFirefly.this.getPos()).normalize().multiply(0.5F));
+			}
 			else
-				y = this.firefly.getY() + (double) ((random.nextFloat() * 2.0F - 1.0F) * 8.0F);
-			
-			this.firefly.getMoveControl().moveTo(x, y, z, 0.001);
-		}
-	}
-	
-	static class FindFlowerGoal extends Goal
-	{
-		private final EntityFirefly firefly;
-		
-		public FindFlowerGoal(EntityFirefly firefly)
-		{
-			this.firefly = firefly;
-		}
-		
-		@Override
-		public boolean canStart()
-		{
-			return true;
-		}
-		
-		public void tick()
-		{
-			if (this.firefly.flower != null)
-			{
-				double x = this.firefly.flower.getX() + 0.5;
-				double y = this.firefly.flower.getY() + 0.5;
-				double z = this.firefly.flower.getZ() + 0.5;
-				
-				if (this.firefly.getPos().squaredDistanceTo(x, y, z) < 2)
-				{
-					this.firefly.flower = null;
-					return;
-				}
-				
-				this.firefly.getMoveControl().moveTo(x, y, z, 0.001);
-			}
-			else if (this.firefly.random.nextInt(16) == 0)
-			{
-				this.firefly.findFlower();
-			}
-		}
-	}
-
-	static class FireflyMoveControl extends MoveControl
-	{
-		private final EntityFirefly firefly;
-		private int field_7276;
-
-		public FireflyMoveControl(EntityFirefly firefly)
-		{
-			super(firefly);
-			this.firefly = firefly;
-			firefly.setNoGravity(true);
+				System.out.println("Vec is null!");
+			System.out.println("Idle: " + EntityFirefly.this.navigation.isIdle());
+			super.start();
 		}
 
-		public void tick()
+		private Vec3d getRandomLocation()
 		{
-			if (this.state == MoveControl.State.MOVE_TO)
-			{
-				if (this.field_7276-- <= 0)
-				{
-					this.field_7276 += this.firefly.getRandom().nextInt(3) + 1;
-					Vec3d vec3d = new Vec3d(this.targetX - this.firefly.getX(), this.targetY - this.firefly.getY(),
-							this.targetZ - this.firefly.getZ());
-					double d = vec3d.length();
-					vec3d = vec3d.normalize();
-					if (this.method_7051(vec3d, MathHelper.ceil(d)))
-					{
-						this.firefly.setVelocity(this.firefly.getVelocity().add(vec3d.multiply(0.1D)));
-					}
-					else
-					{
-						this.state = MoveControl.State.WAIT;
-					}
-				}
-			}
+			Vec3d vec3d3 = EntityFirefly.this.getRotationVec(0.0F);
+			Vec3d vec3d4 = TargetFinder.findAirTarget(EntityFirefly.this, 8, 7, vec3d3, 1.5707964F, 2, 1);
+			return vec3d4 != null ? vec3d4 : TargetFinder.findGroundTarget(EntityFirefly.this, 8, 4, -2, vec3d3, 1.5707963705062866D);
 		}
-
-		private boolean method_7051(Vec3d vec3d, int i)
-		{
-			Box box = this.firefly.getBoundingBox();
-
-			for (int j = 1; j < i; ++j)
-			{
-				box = box.offset(vec3d);
-				if (!this.firefly.world.doesNotCollide(this.firefly, box))
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
-	}
-	
-	private void findFlower()
-	{
-		int x1 = (int) (this.getX() - 5);
-		int x2 = (int) (this.getX() + 5);
-		int y1 = (int) (this.getY() - 5);
-		int y2 = (int) (this.getY() + 5);
-		int z1 = (int) (this.getZ() - 5);
-		int z2 = (int) (this.getZ() + 5);
-		
-		Mutable bPos = new Mutable();
-		
-		for (int y = y2; y >= y1; y--)
-			for (int x = x1; x <= x2; x++)
-				for (int z = z1; z <= z2; z++)
-				{
-					bPos.set(x, y, z);
-					if (isFlower(world.getBlockState(bPos)))
-					{
-						flower = bPos;
-						return;
-					}
-				}
-	}
-	
-	private boolean isFlower(BlockState state)
-	{
-		Block block = state.getBlock();
-		return block instanceof BlockNetherGrass || block instanceof BlockCommonPlant;
 	}
 }

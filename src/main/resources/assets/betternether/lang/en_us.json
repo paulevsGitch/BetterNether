@@ -325,5 +325,11 @@
 	"block.betternether.striped_bark_wart": "Striped Wart Wood",
 	
 	"block.betternether.giant_mold": "Giant Mold",
-	"block.betternether.giant_mold_sapling": "Giant Mold Sapling"
+	"block.betternether.giant_mold_sapling": "Giant Mold Sapling",
+	
+	"block.betternether.bar_stool_reeds": "Reed Bar Stool",
+	"block.betternether.bar_stool_stalagnate": "Stalagnate Bar Stool",
+	"block.betternether.bar_stool_willow": "Willow Bar Stool",
+	"block.betternether.bar_stool_wart": "Wart Bar Stool",
+	"block.betternether.bar_stool_cincinnasite": "Cincinnasite Bar Stool"
 }

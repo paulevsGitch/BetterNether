@@ -65,7 +65,7 @@ public class BNWorldGenerator
 		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
 		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 64F);
-		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
+		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 256);
 		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
 		
 		if (Config.getBoolean("generator_world", "generate_cities", true))
