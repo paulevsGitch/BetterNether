@@ -1,6 +1,7 @@
 package paulevs.betternether.entity;
 
 import java.util.EnumSet;
+import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityGroup;
@@ -33,6 +34,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
@@ -244,37 +246,56 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 
 		public boolean shouldContinue()
 		{
-			return !EntityFirefly.this.navigation.isIdle();
+			return EntityFirefly.this.navigation.method_23966();
 		}
 
 		public void start()
 		{
-			Vec3d vec3d = this.getRandomLocation();
-			System.out.println(vec3d);
-			if (vec3d != null)
+			BlockPos pos = this.getRandomLocation();
+			if (pos != null)
 			{
-				System.out.println("Fly: " + EntityFirefly.this.canFly());
-				System.out.println("No Gravity: " + EntityFirefly.this.hasNoGravity());
-				
-				System.out.println("Move!");
-				System.out.println("From " + EntityFirefly.this.getBlockPos() + " to " + vec3d);
-				EntityFirefly.this.navigation.setRangeMultiplier(0.5F);
-				Path path = EntityFirefly.this.navigation.findPathTo((BlockPos)(new BlockPos(vec3d)), 20);
-				System.out.println("Path is null: " + (path == null));
+				Path path = EntityFirefly.this.navigation.findPathTo((BlockPos)(new BlockPos(pos)), 1);
 				EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
-				//EntityFirefly.this.setVelocity(vec3d.subtract(EntityFirefly.this.getPos()).normalize().multiply(0.5F));
 			}
-			else
-				System.out.println("Vec is null!");
-			System.out.println("Idle: " + EntityFirefly.this.navigation.isIdle());
 			super.start();
 		}
 
-		private Vec3d getRandomLocation()
+		private BlockPos getRandomLocation()
 		{
-			Vec3d vec3d3 = EntityFirefly.this.getRotationVec(0.0F);
-			Vec3d vec3d4 = TargetFinder.findAirTarget(EntityFirefly.this, 8, 7, vec3d3, 1.5707964F, 2, 1);
-			return vec3d4 != null ? vec3d4 : TargetFinder.findGroundTarget(EntityFirefly.this, 8, 4, -2, vec3d3, 1.5707963705062866D);
+			World w = EntityFirefly.this.world;
+			Mutable bpos = new Mutable();
+			bpos.set(EntityFirefly.this);
+			
+			if (w.isAir(bpos.down(2)) && w.isAir(bpos.down()))
+			{
+				int y = bpos.getY();
+				while(w.isAir(bpos.down(2)) && y > 0)
+					bpos.setY(y--);
+				return bpos;
+			}
+			
+			Random random = EntityFirefly.this.random;
+			bpos.setX(bpos.getX() + randomRange(10));
+			bpos.setY(bpos.getY() + randomRange(2));
+			bpos.setZ(bpos.getZ() + randomRange(10));
+			
+			return bpos;
+			
+			/*Vec3d angle = EntityFirefly.this.getRotationVec(0.0F);
+			Vec3d airTarget = TargetFinder.findAirTarget(EntityFirefly.this, 8, 7, angle, 1.5707964F, 2, 1);
+			
+			if (airTarget == null)
+				return null;
+			
+			bpos.set(airTarget.getX(), airTarget.getY(), airTarget.getZ());
+			
+			return bpos;*/
+		}
+		
+		private int randomRange(int side)
+		{
+			Random random = EntityFirefly.this.random;
+			return random.nextInt(side + 1) - (side >> 1);
 		}
 	}
 }

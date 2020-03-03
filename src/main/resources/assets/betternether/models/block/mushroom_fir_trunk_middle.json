@@ -1,0 +1,24 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "betternether:block/mushroom_fir_bark",
+		"texture": "betternether:block/mushroom_fir_bark",
+		"cuts": "betternether:block/mushroom_fir_cuts"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 5, 0, 5 ],
+			"to": [ 11, 16, 11 ],
+			"faces": {
+				"down": { "uv": [ 8, 0, 14, 6 ], "texture": "#cuts" },
+				"up": { "uv": [ 8, 0, 14, 6 ], "texture": "#cuts" },
+				"north": { "uv": [ 5, 0, 11, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 5, 0, 11, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 5, 0, 11, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 5, 0, 11, 16 ], "texture": "#texture" }
+			}
+		}
+	]
+}

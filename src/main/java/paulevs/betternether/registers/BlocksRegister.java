@@ -60,6 +60,8 @@ import paulevs.betternether.blocks.BlockInkBushSeed;
 import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.blocks.BlockLucisSpore;
 import paulevs.betternether.blocks.BlockMagmaFlower;
+import paulevs.betternether.blocks.BlockMushroomFir;
+import paulevs.betternether.blocks.BlockMushroomFirSapling;
 import paulevs.betternether.blocks.BlockNetherCactus;
 import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockNetherMycelium;
@@ -355,6 +357,8 @@ public class BlocksRegister
 	public static final Block BAR_STOOL_CINCINNASITE = new BNBarStool(CINCINNASITE_FORGED);
 	public static final Block GIANT_MOLD = new BlockGiantMold();
 	public static final Block GIANT_MOLD_SAPLING = new BlockGiantMoldSapling();
+	public static final Block MUSHROOM_FIR = new BlockMushroomFir();
+	public static final Block MUSHROOM_FIR_SAPLING = new BlockMushroomFirSapling();
 	
 	public static void register()
 	{
@@ -620,6 +624,9 @@ public class BlocksRegister
 		
 		registerBlockNI("giant_mold", GIANT_MOLD);
 		registerBlock("giant_mold_sapling", GIANT_MOLD_SAPLING);
+		
+		registerBlockNI("mushroom_fir", MUSHROOM_FIR);
+		registerBlock("mushroom_fir_sapling", MUSHROOM_FIR_SAPLING);
 	}
 	
 	private static void registerBlock(String name, Block block)
