@@ -1,8 +1,11 @@
 package paulevs.betternether.entity;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
@@ -31,22 +34,51 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.registers.EntityRegister;
 
 public class EntityFirefly extends AnimalEntity implements Flutterer
 {
+	private static final Vec3i[] SERCH;
+	
 	private static final TrackedData<Float> COLOR_RED = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
 	private static final TrackedData<Float> COLOR_GREEN = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
 	private static final TrackedData<Float> COLOR_BLUE = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
 	
-	//private BlockPos flower;
+	private boolean mustSit = false;
+	
+	static
+	{
+		ArrayList<Vec3i> points = new ArrayList<Vec3i>();
+		int radius = 6;
+		int r2 = radius * radius;
+		for (int x = -radius; x <= radius; x++)
+			for (int y = -radius; y <= radius; y++)
+				for (int z = -radius; z <= radius; z++)
+					if (x * x + y * y + z * z <= r2)
+						points.add(new Vec3i(x, y, z));
+		points.sort(new Comparator<Vec3i>()
+		{
+			@Override
+			public int compare(Vec3i v1, Vec3i v2)
+			{
+				int d1 = v1.getX() * v1.getX() + v1.getY() * v1.getY() + v1.getZ() * v1.getZ();
+				int d2 = v2.getX() * v2.getX() + v2.getY() * v2.getY() + v2.getZ() * v2.getZ();
+				return d1 - d2;
+			}
+		});
+		SERCH = points.toArray(new Vec3i[] {});
+	}
 
 	public EntityFirefly(EntityType<? extends EntityFirefly> type, World world)
 	{
@@ -74,8 +106,8 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		super.initAttributes();
 		this.getAttributes().register(EntityAttributes.FLYING_SPEED);
 		this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(1.0);
-		this.getAttributeInstance(EntityAttributes.FLYING_SPEED).setBaseValue(1F);
-		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.5F);
+		this.getAttributeInstance(EntityAttributes.FLYING_SPEED).setBaseValue(0.6F);
+		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
 		this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
 	}
 
@@ -106,6 +138,8 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
 		this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.fromTag(ItemTags.FLOWERS), false));
 		this.goalSelector.add(5, new FollowParentGoal(this, 1.25D));
+		this.goalSelector.add(6, new SittingGoal());
+		this.goalSelector.add(7, new MoveToFlowersGoal());
 		this.goalSelector.add(8, new WanderAroundGoal());
 		this.goalSelector.add(9, new SwimGoal(this));
 	}
@@ -166,6 +200,12 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	{
         return true;
     }
+	
+	@Override
+	public int getLookYawSpeed()
+	{
+		return 1;
+	}
 
 	public float getRed()
 	{
@@ -252,11 +292,8 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		public void start()
 		{
 			BlockPos pos = this.getRandomLocation();
-			if (pos != null)
-			{
-				Path path = EntityFirefly.this.navigation.findPathTo((BlockPos)(new BlockPos(pos)), 1);
-				EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
-			}
+			Path path = EntityFirefly.this.navigation.findPathTo((BlockPos)(new BlockPos(pos)), 1);
+			EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
 			super.start();
 		}
 
@@ -274,28 +311,136 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 				return bpos;
 			}
 			
-			Random random = EntityFirefly.this.random;
-			bpos.setX(bpos.getX() + randomRange(10));
-			bpos.setY(bpos.getY() + randomRange(2));
-			bpos.setZ(bpos.getZ() + randomRange(10));
-			
-			return bpos;
-			
-			/*Vec3d angle = EntityFirefly.this.getRotationVec(0.0F);
+			Vec3d angle = EntityFirefly.this.getRotationVec(0.0F);
 			Vec3d airTarget = TargetFinder.findAirTarget(EntityFirefly.this, 8, 7, angle, 1.5707964F, 2, 1);
 			
 			if (airTarget == null)
-				return null;
+			{
+				bpos.setX(bpos.getX() + randomRange(8));
+				bpos.setZ(bpos.getZ() + randomRange(8));
+				bpos.setY(bpos.getY() + randomRange(2));
+				return bpos;
+			}
 			
 			bpos.set(airTarget.getX(), airTarget.getY(), airTarget.getZ());
 			
-			return bpos;*/
+			return bpos;
 		}
 		
 		private int randomRange(int side)
 		{
 			Random random = EntityFirefly.this.random;
 			return random.nextInt(side + 1) - (side >> 1);
+		}
+	}
+	
+	class MoveToFlowersGoal extends Goal
+	{
+		MoveToFlowersGoal()
+		{
+			this.setControls(EnumSet.of(Goal.Control.MOVE));
+		}
+
+		@Override
+		public boolean canStart()
+		{
+			if (EntityFirefly.this.navigation.isIdle() && EntityFirefly.this.random.nextInt(20) == 0)
+			{
+				BlockState state = EntityFirefly.this.world.getBlockState(EntityFirefly.this.getBlockPos().down());
+				return !state.isAir() && !state.getMaterial().isLiquid();
+			}
+			return false;
+		}
+
+		@Override
+		public boolean shouldContinue()
+		{
+			return EntityFirefly.this.navigation.method_23966();
+		}
+
+		@Override
+		public void start()
+		{
+			BlockPos pos = this.getFlowerLocation();
+			if (pos != null)
+			{
+				System.out.println("Go to flower at " + pos);
+				Path path = EntityFirefly.this.navigation.findPathTo((BlockPos)(new BlockPos(pos)), 1);
+				EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
+			}
+			super.start();
+		}
+		
+		@Override
+		public void stop()
+		{
+			if (isFlower(EntityFirefly.this.getBlockState()))
+				EntityFirefly.this.mustSit = true;
+		}
+
+		private BlockPos getFlowerLocation()
+		{
+			World w = EntityFirefly.this.world;
+			Mutable bpos = new Mutable();
+			bpos.set(EntityFirefly.this);
+
+			for (Vec3i offset: SERCH)
+			{
+				bpos.set(
+						EntityFirefly.this.getX() + offset.getX(),
+						EntityFirefly.this.getY() + offset.getY(),
+						EntityFirefly.this.getZ() + offset.getZ()
+						);
+				if (isFlower(w.getBlockState(bpos.add(bpos))))
+					return bpos;
+			}
+			
+			return null;
+		}
+		
+		private boolean isFlower(BlockState state)
+		{
+			Block b = state.getBlock();
+			if (!Registry.BLOCK.getId(b).getNamespace().equals(BetterNether.MOD_ID))
+				return false;
+			return !b.getMaterial(state).isSolid() && !b.getMaterial(state).blocksMovement() && b.getSoundGroup(state).equals(BlockSoundGroup.CROP);
+		}
+	}
+	
+	class SittingGoal extends Goal
+	{
+		int timer;
+		int ammount;
+		
+		SittingGoal() {}
+
+		@Override
+		public boolean canStart()
+		{
+			return EntityFirefly.this.mustSit && EntityFirefly.this.navigation.isIdle();
+		}
+
+		@Override
+		public boolean shouldContinue()
+		{
+			return timer < ammount;
+		}
+
+		@Override
+		public void start()
+		{
+			System.out.println("Sitting!");
+			timer = 0;
+			ammount = EntityFirefly.this.random.nextInt(21) + 20;
+			EntityFirefly.this.mustSit = false;
+			EntityFirefly.this.setVelocity(0, -0.1, 0);
+			super.start();
+		}
+
+		@Override
+		public void tick()
+		{
+			timer ++;
 		}
 	}
 }
