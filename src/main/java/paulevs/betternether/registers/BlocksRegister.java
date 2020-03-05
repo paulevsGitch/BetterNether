@@ -53,6 +53,8 @@ import paulevs.betternether.blocks.BlockEyeball;
 import paulevs.betternether.blocks.BlockEyeballSmall;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.blocks.BlockGeyser;
+import paulevs.betternether.blocks.BlockGiantMold;
+import paulevs.betternether.blocks.BlockGiantMoldSapling;
 import paulevs.betternether.blocks.BlockGoldenVine;
 import paulevs.betternether.blocks.BlockGrayMold;
 import paulevs.betternether.blocks.BlockInkBush;
@@ -93,8 +95,6 @@ import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.CincinnasiteForge;
-import paulevs.betternether.blocks.BlockGiantMold;
-import paulevs.betternether.blocks.BlockGiantMoldSapling;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 

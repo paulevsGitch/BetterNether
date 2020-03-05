@@ -9,8 +9,9 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.structures.StructureGeyser;
 import paulevs.betternether.structures.StructureType;
+import paulevs.betternether.structures.decorations.StructureCrystal;
+import paulevs.betternether.structures.decorations.StructureGeyser;
 import paulevs.betternether.structures.plants.StructureGoldenVine;
 import paulevs.betternether.structures.plants.StructureMagmaFlower;
 
@@ -23,6 +24,7 @@ public class NetherMagmaLand extends NetherBiome
 	{
 		super(name);
 		addStructure("geyser", new StructureGeyser(), StructureType.FLOOR, 0.1F, false);
+		addStructure("obsidian_crystals", new StructureCrystal(), StructureType.FLOOR, 0.04F, true);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.4F, false);
 		addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.2F, true);
 	}

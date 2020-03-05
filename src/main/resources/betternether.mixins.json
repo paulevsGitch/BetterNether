@@ -17,7 +17,8 @@
 	"StructureMixin",
 	"BackgroundRenderMixin",
 	"LightStorageMixin",
-	"NetherWartMixin"
+	"NetherWartMixin",
+	"BiomeMixin"
   ],
   "client": [],
   "injectors": {

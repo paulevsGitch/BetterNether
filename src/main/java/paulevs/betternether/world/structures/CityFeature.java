@@ -99,7 +99,6 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 			}
 			
 			BlockPos center = new BlockPos(px, y, pz);
-			System.out.println("New generator for " + center);
 			
 			List<CityPiece> buildings = GENERATOR.generate(center, this.random);
 			BlockBox cityBox = BlockBox.empty();
@@ -111,7 +110,6 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 			{
 				radius = (int) (cityBox.maxY * 1.5F * 0.5F);
 			}
-			System.out.println("Radius: " + radius + " " + Math.ceil(radius / 16));
 			
 			if (!(chunkGenerator instanceof FlatChunkGenerator))
 				this.children.add(new CavePiece(center, radius, random));

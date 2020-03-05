@@ -3,10 +3,13 @@ package paulevs.betternether.entity;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
@@ -17,7 +20,6 @@ import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.Path;
@@ -33,22 +35,19 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.BetterNether;
+import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.registers.EntityRegister;
 
 public class EntityFirefly extends AnimalEntity implements Flutterer
 {
+	private static final HashSet<Block> FLOWERS;
 	private static final Vec3i[] SERCH;
 	
 	private static final TrackedData<Float> COLOR_RED = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
@@ -78,6 +77,19 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 			}
 		});
 		SERCH = points.toArray(new Vec3i[] {});
+		
+		FLOWERS = new HashSet<Block>();
+		FLOWERS.add(BlocksRegister.NETHER_GRASS);
+		FLOWERS.add(BlocksRegister.SOUL_GRASS);
+		FLOWERS.add(BlocksRegister.SWAMP_GRASS);
+		FLOWERS.add(BlocksRegister.BLACK_APPLE);
+		FLOWERS.add(BlocksRegister.MAGMA_FLOWER);
+		FLOWERS.add(BlocksRegister.SOUL_VEIN);
+		FLOWERS.add(BlocksRegister.NETHER_REED);
+		FLOWERS.add(BlocksRegister.INK_BUSH);
+		FLOWERS.add(BlocksRegister.INK_BUSH_SEED);
+		FLOWERS.add(BlocksRegister.POTTED_PLANT);
+		FLOWERS.add(Blocks.NETHER_WART);
 	}
 
 	public EntityFirefly(EntityType<? extends EntityFirefly> type, World world)
@@ -118,7 +130,16 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		{
 			public boolean isValidPosition(BlockPos pos)
 			{
-				return !this.world.getBlockState(pos.down()).isAir();
+				BlockState state = this.world.getBlockState(pos.down());
+				boolean valid = !state.isAir() && state.getMaterial() != Material.LAVA;
+				if (valid)
+				{
+					state = this.world.getBlockState(pos);
+					valid = state.isAir() || !state.getMaterial().blocksMovement();
+					valid = valid && state.getBlock() != BlocksRegister.EGG_PLANT;
+					valid = valid && !state.getBlock().getMaterial(state).blocksMovement();
+				}
+				return valid;
 			}
 
 			public void tick()
@@ -135,13 +156,13 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	@Override
 	protected void initGoals()
 	{
+		this.goalSelector.add(1, new SwimGoal(this));
 		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
-		this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.fromTag(ItemTags.FLOWERS), false));
-		this.goalSelector.add(5, new FollowParentGoal(this, 1.25D));
-		this.goalSelector.add(6, new SittingGoal());
-		this.goalSelector.add(7, new MoveToFlowersGoal());
-		this.goalSelector.add(8, new WanderAroundGoal());
-		this.goalSelector.add(9, new SwimGoal(this));
+		this.goalSelector.add(3, new FollowParentGoal(this, 1.0D));
+		this.goalSelector.add(4, new SittingGoal());
+		this.goalSelector.add(5, new MoveToFlowersGoal());
+		this.goalSelector.add(6, new WanderAroundGoal());
+		this.goalSelector.add(7, new MoveRandomGoal());
 	}
 
 	@Override
@@ -200,12 +221,6 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	{
         return true;
     }
-	
-	@Override
-	public int getLookYawSpeed()
-	{
-		return 1;
-	}
 
 	public float getRed()
 	{
@@ -292,8 +307,14 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		public void start()
 		{
 			BlockPos pos = this.getRandomLocation();
-			Path path = EntityFirefly.this.navigation.findPathTo((BlockPos)(new BlockPos(pos)), 1);
-			EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
+			//if (pos != null)
+			//{
+				Path path = EntityFirefly.this.navigation.findPathTo(pos, 1);
+				if (path != null)
+					EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
+				else
+					EntityFirefly.this.setVelocity(0, -0.2, 0);
+			//}
 			super.start();
 		}
 
@@ -305,7 +326,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 			
 			if (w.isAir(bpos.down(2)) && w.isAir(bpos.down()))
 			{
-				int y = bpos.getY();
+				int y = bpos.getY() - 1;
 				while(w.isAir(bpos.down(2)) && y > 0)
 					bpos.setY(y--);
 				return bpos;
@@ -313,7 +334,12 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 			
 			Vec3d angle = EntityFirefly.this.getRotationVec(0.0F);
 			Vec3d airTarget = TargetFinder.findAirTarget(EntityFirefly.this, 8, 7, angle, 1.5707964F, 2, 1);
-			
+
+			if (airTarget == null)
+			{
+				airTarget = TargetFinder.findAirTarget(EntityFirefly.this, 16, 10, angle, 1.5707964F, 3, 1);
+			}
+
 			if (airTarget == null)
 			{
 				bpos.setX(bpos.getX() + randomRange(8));
@@ -332,6 +358,13 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 			Random random = EntityFirefly.this.random;
 			return random.nextInt(side + 1) - (side >> 1);
 		}
+		
+		@Override
+		public void tick()
+		{
+			checkMovement();
+			super.tick();
+		}
 	}
 	
 	class MoveToFlowersGoal extends Goal
@@ -344,12 +377,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		@Override
 		public boolean canStart()
 		{
-			if (EntityFirefly.this.navigation.isIdle() && EntityFirefly.this.random.nextInt(20) == 0)
-			{
-				BlockState state = EntityFirefly.this.world.getBlockState(EntityFirefly.this.getBlockPos().down());
-				return !state.isAir() && !state.getMaterial().isLiquid();
-			}
-			return false;
+			return EntityFirefly.this.navigation.isIdle() && EntityFirefly.this.random.nextInt(30) == 0;
 		}
 
 		@Override
@@ -364,7 +392,6 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 			BlockPos pos = this.getFlowerLocation();
 			if (pos != null)
 			{
-				System.out.println("Go to flower at " + pos);
 				Path path = EntityFirefly.this.navigation.findPathTo((BlockPos)(new BlockPos(pos)), 1);
 				EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
 			}
@@ -376,13 +403,13 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		{
 			if (isFlower(EntityFirefly.this.getBlockState()))
 				EntityFirefly.this.mustSit = true;
+			super.stop();
 		}
 
 		private BlockPos getFlowerLocation()
 		{
 			World w = EntityFirefly.this.world;
 			Mutable bpos = new Mutable();
-			bpos.set(EntityFirefly.this);
 
 			for (Vec3i offset: SERCH)
 			{
@@ -391,7 +418,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 						EntityFirefly.this.getY() + offset.getY(),
 						EntityFirefly.this.getZ() + offset.getZ()
 						);
-				if (isFlower(w.getBlockState(bpos.add(bpos))))
+				if (isFlower(w.getBlockState(bpos)))
 					return bpos;
 			}
 			
@@ -401,9 +428,26 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		private boolean isFlower(BlockState state)
 		{
 			Block b = state.getBlock();
-			if (!Registry.BLOCK.getId(b).getNamespace().equals(BetterNether.MOD_ID))
-				return false;
-			return !b.getMaterial(state).isSolid() && !b.getMaterial(state).blocksMovement() && b.getSoundGroup(state).equals(BlockSoundGroup.CROP);
+			return FLOWERS.contains(b);
+		}
+		
+		@Override
+		public void tick()
+		{
+			checkMovement();
+			super.tick();
+		}
+	}
+	
+	private void checkMovement()
+	{
+		Vec3d vel = EntityFirefly.this.getVelocity();
+		if (Math.abs(vel.x) > 0.1 || Math.abs(vel.z) > 0.1)
+		{
+			double d = Math.abs(EntityFirefly.this.prevX - EntityFirefly.this.getX());
+			d += Math.abs(EntityFirefly.this.prevZ - EntityFirefly.this.getZ());
+			if (d < 0.1)
+				EntityFirefly.this.navigation.stop();
 		}
 	}
 	
@@ -417,7 +461,12 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		@Override
 		public boolean canStart()
 		{
-			return EntityFirefly.this.mustSit && EntityFirefly.this.navigation.isIdle();
+			if (EntityFirefly.this.mustSit && EntityFirefly.this.navigation.isIdle())
+			{
+				BlockState state = EntityFirefly.this.world.getBlockState(EntityFirefly.this.getBlockPos().down());
+				return !state.isAir() && !state.getMaterial().isLiquid();
+			}
+			return false;
 		}
 
 		@Override
@@ -429,11 +478,60 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		@Override
 		public void start()
 		{
-			System.out.println("Sitting!");
 			timer = 0;
 			ammount = EntityFirefly.this.random.nextInt(21) + 20;
 			EntityFirefly.this.mustSit = false;
 			EntityFirefly.this.setVelocity(0, -0.1, 0);
+			super.start();
+		}
+		
+		@Override
+		public void stop()
+		{
+			EntityFirefly.this.setVelocity(0, 0.1, 0);
+			super.stop();
+		}
+
+		@Override
+		public void tick()
+		{
+			timer ++;
+			super.tick();
+		}
+	}
+	
+	class MoveRandomGoal extends Goal
+	{
+		int timer;
+		int ammount;
+		
+		MoveRandomGoal() {}
+
+		@Override
+		public boolean canStart()
+		{
+			return EntityFirefly.this.navigation.isIdle() && EntityFirefly.this.random.nextInt(20) == 0;
+		}
+
+		@Override
+		public boolean shouldContinue()
+		{
+			return timer < ammount;
+		}
+
+		@Override
+		public void start()
+		{
+			timer = 0;
+			ammount = EntityFirefly.this.random.nextInt(30) + 10;
+			Vec3d velocity = new Vec3d(
+					EntityFirefly.this.random.nextDouble(),
+					EntityFirefly.this.random.nextDouble(),
+					EntityFirefly.this.random.nextDouble()
+					);
+			if (velocity.lengthSquared() == 0)
+				velocity = new Vec3d(1, 0, 0);
+			EntityFirefly.this.setVelocity(velocity.normalize().multiply(EntityFirefly.this.flyingSpeed));
 			super.start();
 		}
 
@@ -441,6 +539,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		public void tick()
 		{
 			timer ++;
+			super.tick();
 		}
 	}
 }
