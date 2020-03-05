@@ -30,6 +30,7 @@ public class BlockOrangeMushroom extends BlockCommonPlant
 				.nonOpaque()
 				.hardness(0.5F)
 				.ticksRandomly()
+				.noCollision()
 				.build());
 	}
 

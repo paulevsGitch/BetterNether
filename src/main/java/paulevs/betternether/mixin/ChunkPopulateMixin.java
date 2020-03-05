@@ -46,7 +46,8 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 	@Inject(method = "populateBiomes", at = @At("RETURN"))
 	public void customBiomes(Chunk chunk, CallbackInfo info)
 	{
-		BNWorldGenerator.generateCustomBiomes(world, chunk);
+		if (isNetherBiome(chunk))
+			BNWorldGenerator.generateCustomBiomes(world, chunk);
 	}
 
 	@Inject(method = "generateFeatures", at = @At("HEAD"), cancellable = true)
@@ -111,6 +112,15 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 				isNetherBiome(world.getBiome(POS.add(15, 0, 0))) ||
 				isNetherBiome(world.getBiome(POS.add(15, 0, 7))) ||
 				isNetherBiome(world.getBiome(POS.add(15, 0, 15)));
+	}
+	
+	private boolean isNetherBiome(Chunk chunk)
+	{
+		for (int x = 0; x < 4; x++)
+			for (int z = 0; z < 4; z++)
+				if (isNetherBiome(chunk.getBiomeArray().getBiomeForNoiseGen(x, 0, z)))
+					return  true;
+		return false;
 	}
 	
 	private void getBiomeSet(IWorld world, int sx, int sz)
