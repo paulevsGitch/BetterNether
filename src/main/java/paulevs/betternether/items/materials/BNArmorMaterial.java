@@ -8,7 +8,7 @@ import net.minecraft.sound.SoundEvent;
 
 public class BNArmorMaterial implements ArmorMaterial
 {
-	private static final int[] DURABILITY = {13, 15, 16, 11};
+	private static final int[] DURABILITY = new int[] {3, 6, 8, 3};
 	private final String name;
 	private final int multiplier;
 	private final int enchantLevel;

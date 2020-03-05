@@ -12,7 +12,7 @@ public class BNItemShovel extends ShovelItem
 	
 	public BNItemShovel(ToolMaterial material, int durability, float speed)
 	{
-		super(material, 1, -2.8F, ItemsRegister.defaultSettings());//.maxDamageIfAbsent(durability));
+		super(material, 1, -2.8F, ItemsRegister.defaultSettings().fireproof());
 		this.speed = speed;
 	}
 	

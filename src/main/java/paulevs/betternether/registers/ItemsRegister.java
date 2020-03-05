@@ -37,8 +37,8 @@ public class ItemsRegister
 	public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem("stalagnate_bowl_mushroom", new ItemBowlFood(6, FoodShape.MUSHROOM));
 	public static final Item STALAGNATE_BOWL_APPLE = registerItem("stalagnate_bowl_apple", new ItemBowlFood(7, FoodShape.APPLE));
 	
-	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
-	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()));
+	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings().fireproof()));
+	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings().fireproof()));
 	
 	public static final Item CINCINNASITE_PICKAXE = registerItem("cincinnasite_pickaxe", new BNItemPickaxe(BNItemMaterials.CINCINNASITE_TOOLS, 512, 1F));
 	public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerItem("cincinnasite_pickaxe_diamond", new BNItemPickaxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
