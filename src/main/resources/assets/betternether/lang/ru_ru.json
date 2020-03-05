@@ -331,5 +331,26 @@
 	"block.betternether.bar_stool_stalagnate": "Сталагнатовый барный стул",
 	"block.betternether.bar_stool_willow": "Ивовый барный стул",
 	"block.betternether.bar_stool_wart": "Наростовый барный стул",
-	"block.betternether.bar_stool_cincinnasite": "Цинцинназитовый барный стул"
+	"block.betternether.bar_stool_cincinnasite": "Цинцинназитовый барный стул",
+	
+	"block.betternether.mushroom_fir": "Грибная ель",
+	"block.betternether.mushroom_fir_sapling": "Саженец грибной ели",
+	"block.betternether.mushroom_fir_stem": "Ствол грибной ели",
+	"block.betternether.mushroom_fir_log": "Бревно грибной ели",
+	"block.betternether.mushroom_fir_wood": "Древесина грибной ели",
+	"block.betternether.striped_log_mushroom_fir": "Обтёсанное бревно грибной ели",
+	"block.betternether.striped_wood_mushroom_fir": "Обтёсанная древесина грибной ели",
+	"block.betternether.mushroom_fir_planks": "Доски из грибной ели",
+	"block.betternether.mushroom_fir_stairs": "Ступени из грибной ели",
+	"block.betternether.mushroom_fir_slab": "Плита из грибной ели",
+	"block.betternether.mushroom_fir_fence": "Забор из грибной ели",
+	"block.betternether.mushroom_fir_gate": "Калитка из грибной ели",
+	"block.betternether.mushroom_fir_button": "Кнопка из грибной ели",
+	"block.betternether.mushroom_fir_plate": "Нажимная плита из грибной ели",
+	"block.betternether.mushroom_fir_trapdoor": "Люк из грибной ели",
+	"block.betternether.mushroom_fir_door": "Дверь из грибной ели",
+	
+	"block.betternether.chair_mushroom_fir": "Стул из грибной ели",
+	"block.betternether.taburet_mushroom_fir": "Табурет из грибной ели",
+	"block.betternether.bar_stool_mushroom_fir": "Барный стул из грибной ели"
 }

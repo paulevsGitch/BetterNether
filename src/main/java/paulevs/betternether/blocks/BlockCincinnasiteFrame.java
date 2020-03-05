@@ -13,7 +13,7 @@ public class BlockCincinnasiteFrame extends BlockBaseNotFull
 {
 	public BlockCincinnasiteFrame()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).nonOpaque().build());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	

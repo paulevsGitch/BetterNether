@@ -17,7 +17,7 @@ public class BlockCincinnasitPillar extends BlockBase
 	
 	public BlockCincinnasitPillar()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).build());
 	}
 	
 	@Override

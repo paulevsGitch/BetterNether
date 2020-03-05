@@ -331,5 +331,26 @@
 	"block.betternether.bar_stool_stalagnate": "Stalagnate Bar Stool",
 	"block.betternether.bar_stool_willow": "Willow Bar Stool",
 	"block.betternether.bar_stool_wart": "Wart Bar Stool",
-	"block.betternether.bar_stool_cincinnasite": "Cincinnasite Bar Stool"
+	"block.betternether.bar_stool_cincinnasite": "Cincinnasite Bar Stool",
+	
+	"block.betternether.mushroom_fir": "Mushroom Fir",
+	"block.betternether.mushroom_fir_sapling": "Mushroom Fir Sapling",
+	"block.betternether.mushroom_fir_stem": "Mushroom Fir Stem",
+	"block.betternether.mushroom_fir_log": "Mushroom Fir Log",
+	"block.betternether.mushroom_fir_wood": "Mushroom Fir Wood",
+	"block.betternether.striped_log_mushroom_fir": "Striped Mushroom Fir Log",
+	"block.betternether.striped_wood_mushroom_fir": "Striped Mushroom Fir Wood",
+	"block.betternether.mushroom_fir_planks": "Mushroom Fir Planks",
+	"block.betternether.mushroom_fir_stairs": "Mushroom Fir Stairs",
+	"block.betternether.mushroom_fir_slab": "Mushroom Fir Slab",
+	"block.betternether.mushroom_fir_fence": "Mushroom Fir Fence",
+	"block.betternether.mushroom_fir_gate": "Mushroom Fir Gate",
+	"block.betternether.mushroom_fir_button": "Mushroom Fir Button",
+	"block.betternether.mushroom_fir_plate": "Mushroom Fir Plate",
+	"block.betternether.mushroom_fir_trapdoor": "Mushroom Fir Trapdoor",
+	"block.betternether.mushroom_fir_door": "Mushroom Fir Door",
+	
+	"block.betternether.chair_mushroom_fir": "Mushroom Fir Chair",
+	"block.betternether.taburet_mushroom_fir": "Mushroom Fir Stool",
+	"block.betternether.bar_stool_mushroom_fir": "Mushroom Fir Bar Stool"
 }

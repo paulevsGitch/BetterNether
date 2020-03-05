@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "betternether:block/mushroom_fir_wood" },
+        "axis=z": { "model": "betternether:block/mushroom_fir_wood", "x": 90 },
+        "axis=x": { "model": "betternether:block/mushroom_fir_wood", "x": 90, "y": 90 }
+    }
+}

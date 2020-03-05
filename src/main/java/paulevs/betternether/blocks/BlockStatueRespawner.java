@@ -43,7 +43,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 	
 	public BlockStatueRespawner()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE)
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK)
 				.nonOpaque()
 				.lightLevel(15)
 				.build());

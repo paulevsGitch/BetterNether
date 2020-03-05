@@ -24,13 +24,13 @@ public class NetherMushroomForest extends NetherBiome
 	public NetherMushroomForest(String name)
 	{
 		super(name);
-		this.setNoiseDensity(0.75F);
-		addStructure("large_red_mushroom", new StructureMedRedMushroom(), StructureType.FLOOR, 0.15F, true);
-		addStructure("large_brown_mushroom", new StructureMedBrownMushroom(), StructureType.FLOOR, 0.15F, true);
-		addStructure("giant_mold", new StructureGiantMold(), StructureType.FLOOR, 0.15F, true);
+		this.setNoiseDensity(0.5F);
+		addStructure("large_red_mushroom", new StructureMedRedMushroom(), StructureType.FLOOR, 0.12F, true);
+		addStructure("large_brown_mushroom", new StructureMedBrownMushroom(), StructureType.FLOOR, 0.12F, true);
+		addStructure("giant_mold", new StructureGiantMold(), StructureType.FLOOR, 0.12F, true);
 		addStructure("mushroom_fir", new StructureMushroomFir(), StructureType.FLOOR, 0.2F, true);
 		addStructure("vanilla_mushrooms", new StructureVanillaMushroom(), StructureType.FLOOR, 0.1F, false);
-		addStructure("orange_mushroom", new StructureOrangeMushroom(), StructureType.FLOOR, 0.2F, true);
+		addStructure("orange_mushroom", new StructureOrangeMushroom(), StructureType.FLOOR, 0.05F, true);
 		addStructure("red_mold", new StructureRedMold(), StructureType.FLOOR, 0.5F, true);
 		addStructure("gray_mold", new StructureGrayMold(), StructureType.FLOOR, 0.5F, true);
 		addStructure("lucis", new StructureLucis(), StructureType.WALL, 0.05F, false);
