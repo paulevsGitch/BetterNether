@@ -145,7 +145,7 @@ public class StructureCityBuilding extends StructureNBT
 		BlockPos p = pos.add(rotationOffset);
 		structure.place(world, p, new StructurePlacementData()
 				.setRotation(rotation)
-				.setMirrored(mirror)
+				.setMirror(mirror)
 				.setBoundingBox(boundingBox)
 				.addProcessor(REPLACE));
 	}
@@ -253,7 +253,7 @@ public class StructureCityBuilding extends StructureNBT
 	@Override
 	public BlockBox getBoundingBox(BlockPos pos)
 	{
-		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirrored(mirror), pos.add(rotationOffset));
+		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirror(mirror), pos.add(rotationOffset));
 	}
 	
 	@Override

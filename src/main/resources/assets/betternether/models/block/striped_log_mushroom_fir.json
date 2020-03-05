@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/striped_log_mushroom_fir_side",
+        "down": "betternether:block/striped_log_mushroom_fir_top",
+        "up": "betternether:block/striped_log_mushroom_fir_top",
+        "north": "betternether:block/striped_log_mushroom_fir_side",
+        "east": "betternether:block/striped_log_mushroom_fir_side",
+        "south": "betternether:block/striped_log_mushroom_fir_side",
+        "west": "betternether:block/striped_log_mushroom_fir_side"
+    }
+}

@@ -7,6 +7,7 @@ import paulevs.betternether.registers.BlockEntitiesRegister;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.registers.EntityRegister;
 import paulevs.betternether.registers.ItemsRegister;
+import paulevs.betternether.tab.CreativeTab;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.structures.piece.StructureTypes;
 

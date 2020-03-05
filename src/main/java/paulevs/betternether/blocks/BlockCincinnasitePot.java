@@ -26,7 +26,7 @@ public class BlockCincinnasitePot extends BlockBaseNotFull
 	
 	public BlockCincinnasitePot()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).nonOpaque().build());
 	}
 
 	public boolean hasSidedTransparency(BlockState state)

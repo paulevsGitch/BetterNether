@@ -53,7 +53,7 @@ public class StructureWillow implements IStructure
 	{
 		if (level > 5)
 			return;
-		Mutable bpos = new Mutable(pos);
+		Mutable bpos = new Mutable().set(pos);
 		BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegister.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, direction));
 		vine(world, pos.down(), 1 + random.nextInt(1));
 		Direction preDir = direction;

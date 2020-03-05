@@ -45,7 +45,7 @@ public class BackgroundRenderMixin
 					{
 						ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entity;
 						o -= clientPlayerEntity.method_3140() * clientPlayerEntity.method_3140() * 0.03F;
-						Biome biome = clientPlayerEntity.world.getBiome(new BlockPos(clientPlayerEntity));
+						Biome biome = clientPlayerEntity.world.getBiome(new BlockPos(clientPlayerEntity.getSenseCenterPos()));
 						if (biome == Biomes.SWAMP || biome == Biomes.SWAMP_HILLS)
 						{
 							o += 0.005F;

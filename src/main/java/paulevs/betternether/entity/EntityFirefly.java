@@ -322,7 +322,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		{
 			World w = EntityFirefly.this.world;
 			Mutable bpos = new Mutable();
-			bpos.set(EntityFirefly.this);
+			bpos.set(EntityFirefly.this.getX(), EntityFirefly.this.getY(), EntityFirefly.this.getZ());
 			
 			if (w.isAir(bpos.down(2)) && w.isAir(bpos.down()))
 			{
@@ -463,7 +463,8 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		{
 			if (EntityFirefly.this.mustSit && EntityFirefly.this.navigation.isIdle())
 			{
-				BlockState state = EntityFirefly.this.world.getBlockState(EntityFirefly.this.getBlockPos().down());
+				BlockPos pos = new BlockPos(EntityFirefly.this.getX(), EntityFirefly.this.getY(), EntityFirefly.this.getZ());
+				BlockState state = EntityFirefly.this.world.getBlockState(pos.down());
 				return !state.isAir() && !state.getMaterial().isLiquid();
 			}
 			return false;

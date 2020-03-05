@@ -89,7 +89,7 @@ public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient)
 	{
-		Mutable blockPos = new Mutable(pos);
+		Mutable blockPos = new Mutable().set(pos);
 		for (int y = pos.getY() - 1; y > 1; y--)
 		{
 			blockPos.setY(y);
@@ -108,7 +108,7 @@ public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
 	{
-		Mutable blockPos = new Mutable(pos);
+		Mutable blockPos = new Mutable().set(pos);
 		for (int y = pos.getY(); y > 1; y--)
 		{
 			blockPos.setY(y);

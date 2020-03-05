@@ -68,12 +68,12 @@ public class StructureNBT
 			return false;
 		}
 		
-		Mutable blockpos2 = new Mutable(structure.getSize().rotate(rotation));//.rotate(mirror.getRotation(direction));
+		Mutable blockpos2 = new Mutable().set(structure.getSize().rotate(rotation));
 		if (this.mirror == BlockMirror.FRONT_BACK)
 			blockpos2.setX(blockpos2.getX());
 		if (this.mirror == BlockMirror.LEFT_RIGHT)
 			blockpos2.setZ(blockpos2.getZ());
-		StructurePlacementData data = new StructurePlacementData().setRotation(this.rotation).setMirrored(this.mirror);//.setRotation(this.rotation).setIgnoreEntities(true);
+		StructurePlacementData data = new StructurePlacementData().setRotation(this.rotation).setMirror(this.mirror);
 		structure.place(world, pos.add(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1), data);
 		return true;
 	}
@@ -126,6 +126,6 @@ public class StructureNBT
 
 	public BlockBox getBoundingBox(BlockPos pos)
 	{
-		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirrored(mirror), pos);
+		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirror(mirror), pos);
 	}
 }

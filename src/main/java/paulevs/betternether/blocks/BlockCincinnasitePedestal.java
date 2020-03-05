@@ -15,7 +15,7 @@ public class BlockCincinnasitePedestal extends BlockBaseNotFull
 	
 	public BlockCincinnasitePedestal()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).nonOpaque().build());
 	}
 
 	@Override

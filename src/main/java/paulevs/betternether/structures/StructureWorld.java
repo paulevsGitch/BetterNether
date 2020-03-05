@@ -43,7 +43,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 	{
 		int airCount = 0;
 		
-		Mutable size = new Mutable(structure.getSize().rotate(rotation));
+		Mutable size = new Mutable().set(structure.getSize().rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 		
@@ -68,7 +68,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 	{
 		int airCount = 0;
 		
-		Mutable size = new Mutable(structure.getSize().rotate(rotation));
+		Mutable size = new Mutable().set(structure.getSize().rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 		
@@ -93,7 +93,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 	{
 		int airCount = 0;
 		
-		Mutable size = new Mutable(structure.getSize().rotate(rotation));
+		Mutable size = new Mutable().set(structure.getSize().rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 		

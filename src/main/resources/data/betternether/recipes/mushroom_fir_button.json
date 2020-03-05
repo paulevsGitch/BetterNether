@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_button",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:mushroom_fir_planks"
+    }
+  },
+  "result": {
+    "item": "betternether:mushroom_fir_button"
+  }
+}
