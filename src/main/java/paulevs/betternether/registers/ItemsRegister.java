@@ -11,6 +11,7 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.MathHelper;
 import paulevs.betternether.blocks.shapes.FoodShape;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.items.BNArmor;
@@ -27,8 +28,6 @@ public class ItemsRegister
 {
 	public static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
 	public static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
-	
-	private static final int ALPHA = 255 << 24;
 	
 	public static final Item BLACK_APPLE = registerItem("black_apple", new ItemBlackApple());
 	
@@ -54,7 +53,7 @@ public class ItemsRegister
 	public static final Item CINCINNASITE_SWORD = registerItem("cincinnasite_sword", new BNSword(BNItemMaterials.CINCINNASITE_TOOLS, 512, 4, -2.4F));
 	public static final Item CINCINNASITE_SWORD_DIAMOND = registerItem("cincinnasite_sword_diamond", new BNSword(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 5, -2.4F));
 	
-	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg(EntityRegister.FIREFLY, color(255, 223, 168), color(233, 182, 95)));
+	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg(EntityRegister.FIREFLY, MathHelper.color(255, 223, 168), MathHelper.color(233, 182, 95)));
 
 	public static void register() {}
 
@@ -79,10 +78,5 @@ public class ItemsRegister
 	private static SpawnEggItem makeEgg(EntityType<?> type, int background, int dots)
 	{
 		return new SpawnEggItem(type, background, dots, defaultSettings());
-	}
-	
-	private static int color(int r, int g, int b)
-	{
-		return ALPHA | (r << 16) | (g << 8) | b;
 	}
 }

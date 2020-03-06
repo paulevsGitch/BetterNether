@@ -8,7 +8,7 @@ public class NetherBiomeWrapper extends NetherBiome
 	
 	public NetherBiomeWrapper(String name, Biome biome)
 	{
-		super(name);
+		super(new BiomeDefenition(name));
 		this.biome = biome;
 	}
 	

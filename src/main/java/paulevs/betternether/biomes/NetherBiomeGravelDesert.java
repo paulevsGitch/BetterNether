@@ -3,6 +3,7 @@ package paulevs.betternether.biomes;
 import java.util.Random;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
@@ -15,7 +16,9 @@ public class NetherBiomeGravelDesert extends NetherBiome
 {
 	public NetherBiomeGravelDesert(String name)
 	{
-		super(name);
+		super(new BiomeDefenition(name)
+				.setColor(184, 95, 60)
+				.setLoop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP));
 		addStructure("nether_cactus", new StructureNetherCactus(), StructureType.FLOOR, 0.02F, true);
 		addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);
 		addStructure("barrel_cactus", new StructureBarrelCactus(), StructureType.FLOOR, 0.02F, true);

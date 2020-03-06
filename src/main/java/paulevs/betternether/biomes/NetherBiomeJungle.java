@@ -3,6 +3,7 @@ package paulevs.betternether.biomes;
 import java.util.Random;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
@@ -26,7 +27,11 @@ public class NetherBiomeJungle extends NetherBiome
 {
 	public NetherBiomeJungle(String name)
 	{
-		super(name);
+		super(new BiomeDefenition(name)
+				.setColor(50, 181, 126)
+				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, false);

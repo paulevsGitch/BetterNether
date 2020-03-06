@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
@@ -22,7 +23,11 @@ public class NetherMagmaLand extends NetherBiome
 	
 	public NetherMagmaLand(String name)
 	{
-		super(name);
+		super(new BiomeDefenition(name)
+				.setColor(248, 158, 68)
+				.setLoop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
+				.setAdditions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
+				.setMood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD));
 		addStructure("geyser", new StructureGeyser(), StructureType.FLOOR, 0.1F, false);
 		addStructure("obsidian_crystals", new StructureCrystal(), StructureType.FLOOR, 0.04F, true);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.4F, false);

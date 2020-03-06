@@ -2,10 +2,12 @@ package paulevs.betternether.biomes;
 
 import java.util.Random;
 
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registers.SoundsRegister;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureGiantMold;
 import paulevs.betternether.structures.plants.StructureGrayMold;
@@ -23,7 +25,10 @@ public class NetherMushroomForest extends NetherBiome
 {
 	public NetherMushroomForest(String name)
 	{
-		super(name);
+		super(new BiomeDefenition(name)
+				.setColor(159, 99, 126)
+				.setLoop(SoundsRegister.AMBIENT_MUSHROOM_FOREST)
+				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS));
 		this.setNoiseDensity(0.5F);
 		addStructure("large_red_mushroom", new StructureMedRedMushroom(), StructureType.FLOOR, 0.12F, true);
 		addStructure("large_brown_mushroom", new StructureMedBrownMushroom(), StructureType.FLOOR, 0.12F, true);

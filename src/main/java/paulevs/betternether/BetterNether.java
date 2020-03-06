@@ -7,7 +7,7 @@ import paulevs.betternether.registers.BlockEntitiesRegister;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.registers.EntityRegister;
 import paulevs.betternether.registers.ItemsRegister;
-import paulevs.betternether.tab.CreativeTab;
+import paulevs.betternether.registers.SoundsRegister;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.structures.piece.StructureTypes;
 
@@ -23,6 +23,7 @@ public class BetterNether implements ModInitializer
 	{
 		Config.load();
 		initOptions();
+		SoundsRegister.register();
 		StructureTypes.init();
 		BlocksRegister.register();
 		BlockEntitiesRegister.register();
@@ -36,7 +37,7 @@ public class BetterNether implements ModInitializer
 	private void initOptions()
 	{
 		thinArmor = Config.getBoolean("improvement", "smaller_armor_offset", true);
-		float density = Config.getFloat("improvement", "fog_density[vanilla: 1.0]", 0.5F);
+		float density = Config.getFloat("improvement", "fog_density[vanilla: 1.0]", 0.75F);
 		makeStart(density);
 		makeEnd(density);
 	}

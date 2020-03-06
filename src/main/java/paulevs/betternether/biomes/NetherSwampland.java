@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
@@ -24,7 +25,11 @@ public class NetherSwampland extends NetherBiome
 {
 	public NetherSwampland(String name)
 	{
-		super(name);
+		super(new BiomeDefenition(name)
+				.setColor(126, 32, 57)
+				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
 		addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.1F, false);
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.8F, false);
 		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, false);

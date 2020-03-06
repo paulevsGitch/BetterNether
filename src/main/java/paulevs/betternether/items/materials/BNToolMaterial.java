@@ -10,14 +10,16 @@ public class BNToolMaterial implements ToolMaterial
 	private final float speed;
 	private final int level;
 	private final int enchantibility;
+	private final float damage;
 	private final ItemConvertible reapair;
 	
-	public BNToolMaterial(int durability, float speed, int level, int enchantibility, ItemConvertible reapair)
+	public BNToolMaterial(int durability, float speed, int level, int enchantibility, float damage, ItemConvertible reapair)
 	{
 		this.durability = durability;
 		this.speed = speed;
 		this.level = level;
 		this.enchantibility = enchantibility;
+		this.damage = damage;
 		this.reapair = reapair;
 	}
 
@@ -36,7 +38,7 @@ public class BNToolMaterial implements ToolMaterial
 	@Override
 	public float getAttackDamage()
 	{
-		return 5;
+		return damage;
 	}
 
 	@Override

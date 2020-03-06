@@ -5,15 +5,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-import com.google.common.collect.ImmutableList;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.ProbabilityConfig;
@@ -26,7 +23,6 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.structures.IStructure;
@@ -36,7 +32,6 @@ import paulevs.betternether.structures.plants.StructureWartCap;
 
 public class NetherBiome extends Biome
 {
-	//private static int preID;
 	private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
 	private static int structureID = 0;
 	
@@ -88,47 +83,11 @@ public class NetherBiome extends Biome
 	};
 	
 	private ArrayList<String> structures;
-	//private int internalID;
 	
-	/*static
+	public NetherBiome(BiomeDefenition defenition)
 	{
-		Iterator<Biome> iterator = Registry.BIOME.iterator();
-		preID = 0;
-		while (iterator.hasNext())
-		{
-			Biome biome = iterator.next();
-			if (biome.getCategory() == Category.NETHER)
-				preID = Math.max(preID, biome.hashCode());
-		}
-		preID ++;
-	}*/
-	
-	private NetherBiome(String name, Random random)
-	{
-		super((new Biome.Settings())
-				.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)
-				.precipitation(Biome.Precipitation.NONE)
-				.category(Biome.Category.NETHER)
-				.depth(0.1F)
-				.scale(0.2F)
-				.temperature(2.0F)
-				.downfall(0.0F)
-				.effects((new BiomeEffects.Builder())
-						.waterColor(4159204)
-						.waterFogColor(329011)
-						.fogColor((255 << 24) | name.hashCode())
-						.build())
-				.parent((String)null)
-				.noises(ImmutableList.of(new Biome.MixedNoisePoint(
-						random.nextFloat() * 2 - 1,
-						random.nextFloat() * 2 - 1,
-						random.nextFloat() * 2 - 1,
-						random.nextFloat(), 1.0F))));
-	}
-	
-	public NetherBiome(String name)
-	{
-		this(name, new Random(name.hashCode()));
+		super(defenition.buildBiomeSettings());
+		
 		this.addStructureFeature(Feature.NETHER_BRIDGE.configure(FeatureConfig.DEFAULT));
 		this.addCarver(GenerationStep.Carver.AIR, configureCarver(Carver.NETHER_CAVE, new ProbabilityConfig(0.2F)));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.LAVA_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_VERY_BIASED_RANGE.configure(new RangeDecoratorConfig(20, 8, 16, 256))));
@@ -150,7 +109,7 @@ public class NetherBiome extends Biome
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
 		
-		this.name = name;
+		this.name = defenition.getName();
 		subbiomes = new ArrayList<Subbiome>();
 		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.8F, true);
 		subbiomes.add(new Subbiome(this, 1));
@@ -158,8 +117,6 @@ public class NetherBiome extends Biome
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
 		for (String s: DEF_STRUCTURES)
 			structures.add(s);
-		
-		//internalID = preID++;
 	}
 	
 	public void setNoiseDensity(float density)

@@ -3,6 +3,7 @@ package paulevs.betternether.biomes;
 import java.util.Random;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
@@ -16,7 +17,11 @@ public class NetherWartForestEdge extends NetherBiome
 {
 	public NetherWartForestEdge(String name)
 	{
-		super(name);
+		super(new BiomeDefenition(name)
+				.setColor(191, 28, 28)
+				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.01F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.01F, false);

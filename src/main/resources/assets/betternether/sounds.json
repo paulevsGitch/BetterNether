@@ -1,11 +1,20 @@
 {
-  "mob.firefly.fly": {
-    "category": "neutral",
-    "sounds": [
-      {
-        "name": "betternether:mob/firefly/fly",
-        "stream": false
-      }
-    ]
-  }
+	"mob.firefly.fly": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/firefly/fly",
+				"stream": false
+			}
+		]
+	},
+		"betternether.ambient.mushroom_forest": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name": "betternether:ambient/mushroom_forest",
+				"stream": false
+			}
+		]
+	}
 }

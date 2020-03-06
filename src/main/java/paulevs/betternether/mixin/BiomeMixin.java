@@ -20,5 +20,4 @@ public class BiomeMixin implements IBiome
 	{
 		addSpawn(type.getCategory(), new SpawnEntry(type, weight, minGroupSize, maxGroupSize));
 	}
-
 }
