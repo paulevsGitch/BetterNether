@@ -17,7 +17,7 @@ public class NetherBiomeGravelDesert extends NetherBiome
 	public NetherBiomeGravelDesert(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(184, 95, 60)
+				.setColor(170, 48, 0)
 				.setLoop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP));
 		addStructure("nether_cactus", new StructureNetherCactus(), StructureType.FLOOR, 0.02F, true);
 		addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);

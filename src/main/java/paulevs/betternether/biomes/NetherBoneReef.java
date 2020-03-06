@@ -10,7 +10,7 @@ public class NetherBoneReef extends NetherBiome
 	public NetherBoneReef(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(228, 65, 53)
+				.setColor(154, 144, 49)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
