@@ -352,5 +352,25 @@
 	
 	"block.betternether.chair_mushroom_fir": "Стул из грибной ели",
 	"block.betternether.taburet_mushroom_fir": "Табурет из грибной ели",
-	"block.betternether.bar_stool_mushroom_fir": "Барный стул из грибной ели"
+	"block.betternether.bar_stool_mushroom_fir": "Барный стул из грибной ели",
+	
+	"block.betternether.obsidian_bricks": "Обсидиановые кирпичи",
+	"block.betternether.obsidian_bricks_stairs": "Ступени из обсидиановых кирпичей",
+	"block.betternether.obsidian_bricks_slab": "Плита из обсидиановых кирпичей",
+	"block.betternether.obsidian_tile": "Обсидиановая плитка",
+	"block.betternether.obsidian_tile_small": "Маленькая обсидиановая плитка",
+	"block.betternether.obsidian_tile_stairs": "Ступени из обсидиановой плитки",
+	"block.betternether.obsidian_tile_slab": "Плита из обсидиановой плитки",
+	"block.betternether.obsidian_glass": "Обсидиановое стекло",
+	"block.betternether.obsidian_glass_pane": "Панель из обсидианового стекла",
+	"block.betternether.blue_obsidian": "Синий обсидиан",
+	"block.betternether.blue_obsidian_bricks": "Синие обсидиановые кирпичи",
+	"block.betternether.blue_obsidian_bricks_stairs": "Ступени из синих обсидиановых кирпичей",
+	"block.betternether.blue_obsidian_bricks_slab": "Плита из синих обсидиановых кирпичей",
+	"block.betternether.blue_obsidian_tile": "Синяя обсидиановая плитка",
+	"block.betternether.blue_obsidian_tile_small": "Маленькая синяя обсидиановая плитка",
+	"block.betternether.blue_obsidian_tile_stairs": "Ступени из синей обсидиановой плитки",
+	"block.betternether.blue_obsidian_tile_slab": "Плита из синей обсидиановой плитки",
+	"block.betternether.blue_obsidian_glass": "Синее обсидиановое стекло",
+	"block.betternether.blue_obsidian_glass_pane": "Панель из синего обсидианового стекла"
 }

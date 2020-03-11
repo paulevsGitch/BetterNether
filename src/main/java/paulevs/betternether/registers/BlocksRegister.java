@@ -20,6 +20,7 @@ import paulevs.betternether.blocks.BNLadder;
 import paulevs.betternether.blocks.BNLogStripable;
 import paulevs.betternether.blocks.BNNetherBrick;
 import paulevs.betternether.blocks.BNNormalChair;
+import paulevs.betternether.blocks.BNObsidian;
 import paulevs.betternether.blocks.BNPane;
 import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNPlanks;
@@ -95,6 +96,7 @@ import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.CincinnasiteForge;
+import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 
@@ -255,6 +257,27 @@ public class BlocksRegister
 	public static final Block QUARTZ_GLASS_FRAMED_PANE_GREEN = registerBlock("quartz_glass_framed_pane_green", new BNPane(QUARTZ_GLASS_FRAMED, true));
 	public static final Block QUARTZ_GLASS_FRAMED_PANE_RED = registerBlock("quartz_glass_framed_pane_red", new BNPane(QUARTZ_GLASS_FRAMED, true));
 	public static final Block QUARTZ_GLASS_FRAMED_PANE_BLACK = registerBlock("quartz_glass_framed_pane_black", new BNPane(QUARTZ_GLASS_FRAMED, true));
+	
+	// Obsidian //
+	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian());
+	public static final Block OBSIDIAN_BRICKS_STAIRS = registerBlock("obsidian_bricks_stairs", new BNStairs(OBSIDIAN_BRICKS));
+	public static final Block OBSIDIAN_BRICKS_SLAB = registerBlock("obsidian_bricks_slab", new BNSlab(OBSIDIAN_BRICKS));
+	public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile", new BNObsidian());
+	public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian());
+	public static final Block OBSIDIAN_TILE_STAIRS = registerBlock("obsidian_tile_stairs", new BNStairs(OBSIDIAN_TILE_SMALL));
+	public static final Block OBSIDIAN_TILE_SLAB = registerBlock("obsidian_tile_slab", new BNSlab(OBSIDIAN_TILE_SMALL));
+	public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass());
+	public static final Block OBSIDIAN_GLASS_PANE = registerBlock("obsidian_glass_pane", new BNPane(OBSIDIAN_GLASS, true));
+	public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian());
+	public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks", new BNObsidian());
+	public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerBlock("blue_obsidian_bricks_stairs", new BNStairs(BLUE_OBSIDIAN_BRICKS));
+	public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerBlock("blue_obsidian_bricks_slab", new BNSlab(BLUE_OBSIDIAN_BRICKS));
+	public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile", new BNObsidian());
+	public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian());
+	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerBlock("blue_obsidian_tile_stairs", new BNStairs(BLUE_OBSIDIAN_TILE_SMALL));
+	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerBlock("blue_obsidian_tile_slab", new BNSlab(BLUE_OBSIDIAN_TILE_SMALL));
+	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass());
+	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
 	
 	// Willow //
 	public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());

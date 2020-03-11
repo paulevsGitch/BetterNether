@@ -352,5 +352,25 @@
 	
 	"block.betternether.chair_mushroom_fir": "Mushroom Fir Chair",
 	"block.betternether.taburet_mushroom_fir": "Mushroom Fir Stool",
-	"block.betternether.bar_stool_mushroom_fir": "Mushroom Fir Bar Stool"
+	"block.betternether.bar_stool_mushroom_fir": "Mushroom Fir Bar Stool",
+	
+	"block.betternether.obsidian_bricks": "Obsidian Bricks",
+	"block.betternether.obsidian_bricks_stairs": "Obsidian Bricks Stairs",
+	"block.betternether.obsidian_bricks_slab": "Obsidian Bricks Slab",
+	"block.betternether.obsidian_tile": "Obsidian Tile",
+	"block.betternether.obsidian_tile_small": "Obsidian Small Tile",
+	"block.betternether.obsidian_tile_stairs": "Obsidian Tile Stairs",
+	"block.betternether.obsidian_tile_slab": "Obsidian Tile Slab",
+	"block.betternether.obsidian_glass": "Obsidian Glass",
+	"block.betternether.obsidian_glass_pane": "Obsidian Glass Pane",
+	"block.betternether.blue_obsidian": "Blue Obsidian",
+	"block.betternether.blue_obsidian_bricks": "Blue Obsidian Bricks",
+	"block.betternether.blue_obsidian_bricks_stairs": "Blue Obsidian Bricks Stairs",
+	"block.betternether.blue_obsidian_bricks_slab": "Blue Obsidian Bricks Slab",
+	"block.betternether.blue_obsidian_tile": "Blue Obsidian Tile",
+	"block.betternether.blue_obsidian_tile_small": "Blue Obsidian Small Tile",
+	"block.betternether.blue_obsidian_tile_stairs": "Blue Obsidian Tile Stairs",
+	"block.betternether.blue_obsidian_tile_slab": "Blue Obsidian Tile Slab",
+	"block.betternether.blue_obsidian_glass": "Blue Obsidian Glass",
+	"block.betternether.blue_obsidian_glass_pane": "Blue Obsidian Glass Pane"
 }
