@@ -1,0 +1,16 @@
+{
+	"type": "crafting_shaped",
+	"pattern": [
+		"##",
+		"##"
+	],
+	"key": {
+		"#": {
+			"item": "betternether:blue_obsidian_tile"
+		}
+	},
+	"result": {
+		"item": "betternether:blue_obsidian_bricks",
+		"count": 4
+	}
+}

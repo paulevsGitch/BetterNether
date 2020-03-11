@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient": {
+		"item": "betternether:blue_obsidian"
+	},
+	"result": "betternether:blue_obsidian_glass",
+	"experience": 0.0,
+	"cookingtime": 200
+}

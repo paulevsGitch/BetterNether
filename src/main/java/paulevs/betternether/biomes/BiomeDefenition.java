@@ -9,6 +9,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.MixedNoisePoint;
 import net.minecraft.world.biome.Biome.Settings;
 import net.minecraft.world.biome.BiomeEffects.Builder;
+import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import paulevs.betternether.MathHelper;
 
@@ -22,6 +23,7 @@ public class BiomeDefenition
 	private SoundEvent mood;
 	private SoundEvent additions;
 	private MixedNoisePoint noise;
+	private BiomeParticleConfig particleConfig;
 	
 	public BiomeDefenition(String name)
 	{
@@ -92,6 +94,8 @@ public class BiomeDefenition
 			effects.method_24943(mood);
 		if (additions != null)
 			effects.method_24943(additions);
+		if (particleConfig != null)
+			effects.particleConfig(particleConfig);
 		
 		return new Settings()
 				.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)
@@ -109,5 +113,11 @@ public class BiomeDefenition
 	public String getName()
 	{
 		return name;
+	}
+	
+	public BiomeDefenition setParticleConfig(BiomeParticleConfig config)
+	{
+		this.particleConfig = config;
+		return this;
 	}
 }
