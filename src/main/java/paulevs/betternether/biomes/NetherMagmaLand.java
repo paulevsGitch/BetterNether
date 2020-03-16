@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureCrystal;
 import paulevs.betternether.structures.decorations.StructureGeyser;
@@ -17,8 +16,8 @@ import paulevs.betternether.structures.plants.StructureMagmaFlower;
 
 public class NetherMagmaLand extends NetherBiome
 {
-	private static final OpenSimplexNoise SURFACE = new OpenSimplexNoise(2315);
 	private static final Mutable POS = new Mutable();
+	private static final boolean[] MASK;
 	
 	public NetherMagmaLand(String name)
 	{
@@ -32,34 +31,60 @@ public class NetherMagmaLand extends NetherBiome
 	@Override
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
 	{
-		double noise = rigidNoise(pos);
-		if (noise < 0.15)
+		if (isMask(pos.getX(), pos.getZ()))
 		{
 			POS.set(pos);
-			for (int y = 0; y < random.nextInt(3) + 1; y++)
-				if (random.nextInt(4) == 0)
+			boolean magma = true;
+			if (random.nextInt(4) == 0)
+			{
+				if (validWall(world, POS.down()) && validWall(world, POS.north()) && validWall(world, POS.south()) && validWall(world, POS.east()) && validWall(world, POS.west()))
 				{
-					POS.setY(POS.getY() - y);
-					if (validWall(world, POS.down()) && validWall(world, POS.north()) && validWall(world, POS.south()) && validWall(world, POS.east()) && validWall(world, POS.west()))
-						BlocksHelper.setWithoutUpdate(world, POS, Blocks.LAVA.getDefaultState());
-					else
+					BlocksHelper.setWithoutUpdate(world, POS, Blocks.LAVA.getDefaultState());
+					magma = false;
+				}
+			}
+			if (magma)
+				for (int y = 0; y < random.nextInt(3) + 1; y++)
+				{
+					POS.setY(pos.getY() - y);
+					if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
 						BlocksHelper.setWithoutUpdate(world, POS, Blocks.MAGMA_BLOCK.getDefaultState());
 				}
-				else
-					BlocksHelper.setWithoutUpdate(world, POS, Blocks.MAGMA_BLOCK.getDefaultState());
 		}
-		else if (random.nextBoolean() && random.nextDouble() > noise * 2)
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
-	}
-	
-	private double rigidNoise(BlockPos pos)
-	{
-		return Math.abs(SURFACE.eval(pos.getX() * 0.1, pos.getY() * 0.1, pos.getZ() * 0.1));
 	}
 	
 	protected boolean validWall(IWorld world, BlockPos pos)
 	{
 		BlockState state = world.getBlockState(pos);
 		return BlocksHelper.isLava(state) || BlocksHelper.isNetherGroundMagma(state);
+	}
+	
+	protected boolean isMask(int x, int z)
+	{
+		x &= 15;
+		z &= 15;
+		return MASK[(x << 4) | z];
+	}
+	
+	static
+	{
+		MASK = new boolean[] {
+				false,  true, false, false, false, false, false,  true, false, false, false, false,  true,  true, false, false,
+				false, false, false, false, false, false, false,  true, false, false, false, false,  true,  true, false, false,
+				 true,  true,  true, false, false, false,  true,  true, false, false, false,  true, false, false,  true,  true,
+				 true, false, false,  true,  true,  true,  true, false,  true,  true,  true,  true, false, false, false,  true,
+				 true, false, false,  true,  true,  true, false, false, false, false, false,  true, false, false, false, false,
+				 true, false, false, false,  true, false, false, false, false, false, false, false,  true, false, false, false,
+				false, false, false, false,  true, false, false, false, false, false, false, false,  true,  true,  true,  true,
+				 true, false, false, false,  true,  true,  true,  true, false, false, false,  true,  true, false,  true,  true,
+				 true,  true,  true,  true,  true, false, false,  true,  true, false,  true,  true, false, false, false,  true,
+				false, false,  true, false, false, false, false, false,  true,  true,  true, false, false, false, false,  true,
+				false, false,  true, false, false, false, false, false, false,  true, false, false, false, false,  true, false,
+				false, false,  true,  true, false, false, false, false, false,  true, false, false, false, false,  true, false,
+				 true, false, false, false,  true, false, false, false, false,  true, false, false, false, false,  true, false,
+				 true,  true, false, false,  true, false, false, false,  true,  true,  true,  true,  true,  true, false,  true,
+				false,  true,  true,  true,  true,  true,  true,  true, false, false, false, false,  true, false, false, false,
+				false,  true,  true, false, false, false,  true, false, false, false, false, false,  true,  true, false, false
+		};
 	}
 }

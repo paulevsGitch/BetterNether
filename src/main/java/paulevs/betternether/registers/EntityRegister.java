@@ -20,7 +20,7 @@ public class EntityRegister
 	
 	public static void register()
 	{
-		registerEntity("firefly", FIREFLY, 50, 2, 6, Biomes.NETHER);
+		registerEntity("firefly", FIREFLY, 10, 2, 6, Biomes.NETHER);
 		registerEntity("chair", CHAIR);
 	}
 	
