@@ -12,8 +12,6 @@ import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.GhastEntity;
-import net.minecraft.entity.mob.ZombiePigmanEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +19,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.config.Config;
+import paulevs.betternether.registers.EntityRegister;
 
 public class BlockEggPlant extends BlockCommonPlant
 {
@@ -46,7 +45,12 @@ public class BlockEggPlant extends BlockCommonPlant
 	@Environment(EnvType.CLIENT)
 	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
 	{
-		world.addParticle(ParticleTypes.ENTITY_EFFECT, pos.getX() + random.nextDouble(), pos.getY() + 0.4, pos.getZ() + random.nextDouble(), 0.46, 0.28, 0.55);
+		world.addParticle(
+				ParticleTypes.ENTITY_EFFECT,
+				pos.getX() + random.nextDouble(),
+				pos.getY() + 0.4,
+				pos.getZ() + random.nextDouble(),
+				0.46, 0.28, 0.55);
 	}
 	
 	@Override
@@ -54,9 +58,8 @@ public class BlockEggPlant extends BlockCommonPlant
 	{
 		if (enableModDamage && entity instanceof LivingEntity && !((LivingEntity) entity).hasStatusEffect(StatusEffects.POISON))
 		{
-			if (entity instanceof GhastEntity || entity instanceof ZombiePigmanEntity)// || entity instanceof FireflyEntity)
-				return;
-			((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 3));
+			if (EntityRegister.isNetherEntity(entity))
+				((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 3));
 		}
 		else if (enablePlayerDamage && entity instanceof PlayerEntity && !((PlayerEntity) entity).hasStatusEffect(StatusEffects.POISON))
 			((PlayerEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 3));

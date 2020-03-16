@@ -9,16 +9,12 @@ import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.container.NameableContainerFactory;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
@@ -37,12 +33,13 @@ public class BlockNetherrackFurnace extends AbstractFurnaceBlock
 		return new BlockEntityFurnace();
 	}
 
-	protected void openContainer(World world, BlockPos pos, PlayerEntity player)
+	@Override
+	protected void openScreen(World world, BlockPos pos, PlayerEntity player)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (blockEntity instanceof BlockEntityFurnace)
 		{
-			player.openContainer((NameableContainerFactory) blockEntity);
+			player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
 			player.incrementStat(Stats.INTERACT_WITH_FURNACE);
 		}
 	}
@@ -68,34 +65,6 @@ public class BlockNetherrackFurnace extends AbstractFurnaceBlock
 			double k = axis == Direction.Axis.Z ? (double) direction.getOffsetZ() * 0.52D : h;
 			world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
 			world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
-		}
-	}
-
-	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack)
-	{
-		if (itemStack.hasCustomName())
-		{
-			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof BlockEntityFurnace)
-			{
-				((BlockEntityFurnace) blockEntity).setCustomName(itemStack.getName());
-			}
-		}
-
-	}
-
-	public void onBlockRemoved(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved)
-	{
-		if (state.getBlock() != newState.getBlock())
-		{
-			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof BlockEntityFurnace)
-			{
-				ItemScatterer.spawn(world, (BlockPos) pos, (Inventory) ((BlockEntityFurnace) blockEntity));
-				world.updateHorizontalAdjacent(pos, this);
-			}
-
-			super.onBlockRemoved(state, world, pos, newState, moved);
 		}
 	}
 }

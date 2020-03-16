@@ -68,7 +68,7 @@ public class BiomeMap
 		BiomeChunk chunk = MAPS.get(cpos);
 		if (chunk == null)
 		{
-			RANDOM.setSeed(cpos.x, cpos.z);
+			RANDOM.setTerrainSeed(cpos.x, cpos.z);
 			chunk = new BiomeChunk(this, RANDOM);
 			MAPS.put(cpos, chunk);
 		}

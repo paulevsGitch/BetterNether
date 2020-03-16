@@ -57,14 +57,14 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 		int chunkZ = region.getCenterChunkZ();
 		if (!region.isClient() && isNetherBiome(region, chunkX, chunkZ))
 		{
-			RANDOM.setSeed(chunkX, chunkZ);
+			RANDOM.setTerrainSeed(chunkX, chunkZ);
 			int sx = chunkX << 4;
 			int sz = chunkZ << 4;
 			BNWorldGenerator.prePopulate(region, sx, sz);
 			
 			getBiomeSet(region, sx, sz);
 			GenerationStep.Feature[] steps = GenerationStep.Feature.values();
-			long featureSeed = RANDOM.setSeed(region.getSeed(), chunkX, chunkZ);
+			long featureSeed = RANDOM.setPopulationSeed(region.getSeed(), chunkX, chunkZ);
 			@SuppressWarnings("unchecked")
 			ChunkGenerator<C> generator = (ChunkGenerator<C>) (Object) this;
 			for (Biome biome: BIOMES)

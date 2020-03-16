@@ -71,6 +71,7 @@ import paulevs.betternether.blocks.BlockNetherMycelium;
 import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.blocks.BlockNetherrackFurnace;
 import paulevs.betternether.blocks.BlockNetherrackMoss;
+import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.blocks.BlockOrangeMushroom;
 import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockPottedPlant;
@@ -96,7 +97,6 @@ import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.CincinnasiteForge;
-import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 

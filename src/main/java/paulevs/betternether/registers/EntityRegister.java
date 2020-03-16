@@ -2,8 +2,10 @@ package paulevs.betternether.registers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -18,6 +20,7 @@ import paulevs.betternether.entity.EntityFirefly;
 
 public class EntityRegister
 {
+	private static final List<EntityType<?>> NETHER_ENTITIES = new ArrayList<EntityType<?>>();
 	private static final Biome[] NETHER_BIOMES;
 	
 	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityFirefly::new).size(EntityDimensions.fixed(0.5F, 0.5F)).setImmuneToFire().build();
@@ -25,7 +28,7 @@ public class EntityRegister
 	
 	public static void register()
 	{
-		registerEntity("firefly", FIREFLY, 50, 2, 6, NETHER_BIOMES);
+		registerEntity("firefly", FIREFLY, 10, 2, 6, NETHER_BIOMES);
 		registerEntity("chair", CHAIR);
 	}
 	
@@ -44,6 +47,7 @@ public class EntityRegister
 				IBiome biome = (IBiome) b;
 				biome.addEntitySpawn(entity, weight, minGroupSize, maxGroupSize);
 			}
+			NETHER_ENTITIES.add(entity);
 		}
 	}
 	
@@ -60,5 +64,13 @@ public class EntityRegister
 			}
 		}
 		NETHER_BIOMES = biomes.toArray(new Biome[] {});
+		
+		NETHER_ENTITIES.add(EntityType.GHAST);
+		NETHER_ENTITIES.add(EntityType.ZOMBIFIED_PIGLIN);
+	}
+	
+	public static boolean isNetherEntity(Entity entity)
+	{
+		return NETHER_ENTITIES.contains(entity.getType());
 	}
 }

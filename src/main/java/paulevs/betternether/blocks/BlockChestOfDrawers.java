@@ -12,12 +12,12 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.container.NameableContainerFactory;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -94,10 +94,10 @@ public class BlockChestOfDrawers extends BlockWithEntity
 		}
 		else
 		{
-			NameableContainerFactory nameableContainerProvider = this.createContainerFactory(state, world, pos);
-			if (nameableContainerProvider != null)
+			NamedScreenHandlerFactory screenFactory = this.createScreenHandlerFactory(state, world, pos);
+			if (screenFactory != null)
 			{
-				player.openContainer(nameableContainerProvider);
+				player.openHandledScreen(screenFactory);
 			}
 			return ActionResult.SUCCESS;
 		}

@@ -17,8 +17,8 @@ public class BNItemAxe extends AxeItem
 	}
 	
 	@Override
-	public float getMiningSpeed(ItemStack stack, BlockState state)
+	public float getMiningSpeedMultiplier(ItemStack stack, BlockState state)
 	{
-		return super.getMiningSpeed(stack, state) * speed;
+		return super.getMiningSpeedMultiplier(stack, state) * speed;
 	}
 }

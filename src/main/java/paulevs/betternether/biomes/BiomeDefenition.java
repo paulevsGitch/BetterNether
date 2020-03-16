@@ -89,11 +89,11 @@ public class BiomeDefenition
 				.waterFogColor(329011)
 				.fogColor(color);
 		if (loop != null)
-			effects.method_24942(loop);
+			effects.loopSound(loop);
 		if (mood != null)
-			effects.method_24943(mood);
+			effects.moodSound(mood);
 		if (additions != null)
-			effects.method_24943(additions);
+			effects.additionsSound(additions);
 		if (particleConfig != null)
 			effects.particleConfig(particleConfig);
 		

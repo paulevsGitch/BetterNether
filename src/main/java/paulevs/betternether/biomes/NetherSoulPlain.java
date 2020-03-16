@@ -3,10 +3,12 @@ package paulevs.betternether.biomes;
 import java.util.Random;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
@@ -23,7 +25,13 @@ public class NetherSoulPlain extends NetherBiome
 				.setColor(196, 113, 239)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
+				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				.setParticleConfig(new BiomeParticleConfig(
+						ParticleTypes.PORTAL,
+						0.02F,
+						(random) -> { return 0.0; },
+						(random) -> { return -1.0; },
+						(random) -> { return 0.0; })));
 		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, true);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
 		addStructure("soul_grass", new StructureSoulGrass(), StructureType.FLOOR, 0.3F, false);

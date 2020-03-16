@@ -3,9 +3,11 @@ package paulevs.betternether.biomes;
 import java.util.Random;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureAgave;
@@ -18,7 +20,13 @@ public class NetherBiomeGravelDesert extends NetherBiome
 	{
 		super(new BiomeDefenition(name)
 				.setColor(170, 48, 0)
-				.setLoop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP));
+				.setLoop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
+				.setParticleConfig(new BiomeParticleConfig(
+						ParticleTypes.ASH,
+						0.02F,
+						(random) -> { return 0.2; },
+						(random) -> { return -0.1; },
+						(random) -> { return 0.0; })));
 		addStructure("nether_cactus", new StructureNetherCactus(), StructureType.FLOOR, 0.02F, true);
 		addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);
 		addStructure("barrel_cactus", new StructureBarrelCactus(), StructureType.FLOOR, 0.02F, true);

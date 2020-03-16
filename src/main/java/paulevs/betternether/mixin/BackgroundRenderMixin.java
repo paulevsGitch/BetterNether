@@ -44,7 +44,7 @@ public class BackgroundRenderMixin
 					if (entity instanceof ClientPlayerEntity)
 					{
 						ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entity;
-						o -= clientPlayerEntity.method_3140() * clientPlayerEntity.method_3140() * 0.03F;
+						o -= clientPlayerEntity.getUnderwaterVisibility() * clientPlayerEntity.getUnderwaterVisibility() * 0.03F;
 						Biome biome = clientPlayerEntity.world.getBiome(new BlockPos(clientPlayerEntity.getSenseCenterPos()));
 						if (biome == Biomes.SWAMP || biome == Biomes.SWAMP_HILLS)
 						{

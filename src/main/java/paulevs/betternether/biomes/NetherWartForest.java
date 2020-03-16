@@ -3,9 +3,11 @@ package paulevs.betternether.biomes;
 import java.util.Random;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.StructureType;
@@ -23,7 +25,13 @@ public class NetherWartForest extends NetherBiome
 				.setColor(151, 6, 6)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
+				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				.setParticleConfig(new BiomeParticleConfig(
+						ParticleTypes.CRIMSON_SPORE,
+						0.05F,
+						(random) -> { return 0.0; },
+						(random) -> { return -1.0; },
+						(random) -> { return 0.0; })));
 		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.1F, false);
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, false);

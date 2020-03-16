@@ -10,9 +10,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.mojang.authlib.GameProfile;
 
-import net.minecraft.container.ContainerListener;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.screen.ScreenHandlerListener;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
@@ -21,7 +21,7 @@ import net.minecraft.world.dimension.DimensionType;
 import paulevs.betternether.IDimensionable;
 
 @Mixin(ServerPlayerEntity.class)
-public abstract class PlayerMixin extends PlayerEntity implements ContainerListener, IDimensionable
+public abstract class PlayerMixin extends PlayerEntity implements ScreenHandlerListener, IDimensionable
 {
 	private static final HashMap<UUID, DimensionType> SPAWN_DIM = new HashMap<UUID, DimensionType>();
 	private static final HashMap<UUID, Boolean> USED_STATUE = new HashMap<UUID, Boolean>();

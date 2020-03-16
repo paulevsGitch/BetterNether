@@ -13,9 +13,6 @@ import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
-import net.minecraft.container.Container;
-import net.minecraft.container.FurnaceContainer;
-import net.minecraft.container.PropertyDelegate;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -33,6 +30,9 @@ import net.minecraft.recipe.RecipeInputProvider;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.RecipeUnlocker;
 import net.minecraft.recipe.SmeltingRecipe;
+import net.minecraft.screen.FurnaceScreenHandler;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.text.Text;
@@ -622,8 +622,8 @@ public class BlockEntityForge extends LockableContainerBlockEntity implements Si
 		return new TranslatableText("container.forge", new Object[0]);
 	}
 
-	protected Container createContainer(int i, PlayerInventory playerInventory)
+	protected ScreenHandler createContainer(int i, PlayerInventory playerInventory)
 	{
-		return new FurnaceContainer(i, playerInventory, this, this.propertyDelegate);
+		return new FurnaceScreenHandler(i, playerInventory, this, this.propertyDelegate);
 	}
 }

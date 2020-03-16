@@ -3,13 +3,13 @@ package paulevs.betternether.blockentities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
-import net.minecraft.container.Container;
-import net.minecraft.container.GenericContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.screen.GenericContainerScreenHandler;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -54,9 +54,9 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 	}
 
 	@Override
-	protected Container createContainer(int i, PlayerInventory playerInventory)
+	protected ScreenHandler createContainer(int i, PlayerInventory playerInventory)
 	{
-		return GenericContainer.createGeneric9x3(i, playerInventory, this);
+		return GenericContainerScreenHandler.createGeneric9x3(i, playerInventory, this);
 	}
 
 	public void fromTag(CompoundTag tag)

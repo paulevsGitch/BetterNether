@@ -32,6 +32,7 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 		super(configFactory);
 	}
 
+	@Override
 	protected ChunkPos getStart(ChunkGenerator<?> chunkGenerator, Random random, int chunkX, int chunkZ, int scaleX, int scaleZ)
 	{
 		int m = 64;//chunkGenerator.getConfig().getVillageDistance();
@@ -42,13 +43,33 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 		int r = p < 0 ? p - m + 1 : p;
 		int s = q / m;
 		int t = r / m;
-		((ChunkRandom)random).setStructureSeed(chunkGenerator.getSeed(), s, t, 897527);
+		((ChunkRandom)random).setRegionSeed(chunkGenerator.getSeed(), s, t, 897527);
 		s *= m;
 		t *= m;
 		s += random.nextInt(m - n);
 		t += random.nextInt(m - n);
 		return new ChunkPos(s, t);
 	}
+
+	/*private boolean getNearestFortress(ChunkGenerator<?> chunkGenerator, Random random, int chunkX, int chunkZ)
+	{
+		int i = chunkX >> 4;
+		int j = chunkZ >> 4;
+		random.setSeed((long)(i ^ j << 4) ^ chunkGenerator.getSeed());
+		random.nextInt();
+		if (random.nextInt(3) != 0)
+		{
+			return false;
+		}
+		else if (chunkX != (i << 4) + 4 + random.nextInt(8))
+		{
+			return false;
+		}
+		else
+		{
+			return chunkZ != (j << 4) + 4 + random.nextInt(8);
+		}
+	}*/
 
 	@Override
 	public boolean shouldStartAt(BiomeAccess biomeAccess, ChunkGenerator<?> chunkGenerator, Random random, int chunkZ, int i, Biome biome)

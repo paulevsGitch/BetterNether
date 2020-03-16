@@ -59,7 +59,7 @@ public class StructureCityBuilding extends StructureNBT
 	{
 		BlockPos size = structure.getSize();
 		bb = new BoundingBox(size);
-		List<StructureBlockInfo> map = structure.method_15165(BlockPos.ORIGIN, new StructurePlacementData(), Blocks.STRUCTURE_BLOCK, false);
+		List<StructureBlockInfo> map = structure.getInfosForBlock(BlockPos.ORIGIN, new StructurePlacementData(), Blocks.STRUCTURE_BLOCK, false);
 		ends = new BlockPos[map.size()];
 		dirs = new Direction[map.size()];
 		int i = 0;
