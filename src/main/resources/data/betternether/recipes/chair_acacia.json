@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S ",
+	"##",
+    "SS"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:acacia_slab"
+    },
+	"S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "betternether:chair_acacia"
+  }
+}

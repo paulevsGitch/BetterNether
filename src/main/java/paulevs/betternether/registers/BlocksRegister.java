@@ -71,7 +71,6 @@ import paulevs.betternether.blocks.BlockNetherMycelium;
 import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.blocks.BlockNetherrackFurnace;
 import paulevs.betternether.blocks.BlockNetherrackMoss;
-import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.blocks.BlockOrangeMushroom;
 import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockPottedPlant;
@@ -97,6 +96,7 @@ import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.CincinnasiteForge;
+import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 
@@ -422,6 +422,13 @@ public class BlocksRegister
 	public static final Block NETHERRACK_FURNACE = registerBlock("netherrack_furnace", new BlockNetherrackFurnace());
 	
 	// Taburets //
+	public static final Block TABURET_OAK = registerBlock("taburet_oak", new BNTaburet(Blocks.OAK_PLANKS));
+	public static final Block TABURET_SPRUCE = registerBlock("taburet_spruce", new BNTaburet(Blocks.SPRUCE_PLANKS));
+	public static final Block TABURET_BIRCH = registerBlock("taburet_birch", new BNTaburet(Blocks.BIRCH_PLANKS));
+	public static final Block TABURET_JUNGLE = registerBlock("taburet_jungle", new BNTaburet(Blocks.JUNGLE_PLANKS));
+	public static final Block TABURET_ACACIA = registerBlock("taburet_acacia", new BNTaburet(Blocks.ACACIA_PLANKS));
+	public static final Block TABURET_DARK_OAK = registerBlock("taburet_dark_oak", new BNTaburet(Blocks.DARK_OAK_PLANKS));
+	
 	public static final Block TABURET_REEDS = registerBlock("taburet_reeds", new BNTaburet(REEDS_BLOCK));
 	public static final Block TABURET_STALAGNATE = registerBlock("taburet_stalagnate", new BNTaburet(STALAGNATE_PLANKS));
 	public static final Block TABURET_WILLOW = registerBlock("taburet_willow", new BNTaburet(WILLOW_PLANKS));
@@ -430,6 +437,13 @@ public class BlocksRegister
 	public static final Block TABURET_MUSHROOM_FIR = registerBlock("taburet_mushroom_fir", new BNTaburet(MUSHROOM_FIR_PLANKS));
 	
 	// Chairs
+	public static final Block CHAIR_OAK = registerBlock("chair_oak", new BNNormalChair(Blocks.OAK_PLANKS));
+	public static final Block CHAIR_SPRUCE = registerBlock("chair_spruce", new BNNormalChair(Blocks.SPRUCE_PLANKS));
+	public static final Block CHAIR_BIRCH = registerBlock("chair_birch", new BNNormalChair(Blocks.BIRCH_PLANKS));
+	public static final Block CHAIR_JUNGLE = registerBlock("chair_jungle", new BNNormalChair(Blocks.JUNGLE_PLANKS));
+	public static final Block CHAIR_ACACIA = registerBlock("chair_acacia", new BNNormalChair(Blocks.ACACIA_PLANKS));
+	public static final Block CHAIR_DARK_OAK = registerBlock("chair_dark_oak", new BNNormalChair(Blocks.DARK_OAK_PLANKS));
+	
 	public static final Block CHAIR_REEDS = registerBlock("chair_reeds", new BNNormalChair(REEDS_BLOCK));
 	public static final Block CHAIR_STALAGNATE = registerBlock("chair_stalagnate", new BNNormalChair(STALAGNATE_PLANKS));
 	public static final Block CHAIR_WILLOW = registerBlock("chair_willow", new BNNormalChair(WILLOW_PLANKS));
@@ -438,6 +452,13 @@ public class BlocksRegister
 	public static final Block CHAIR_MUSHROOM_FIR = registerBlock("chair_mushroom_fir", new BNNormalChair(MUSHROOM_FIR_PLANKS));
 	
 	// Stools //
+	public static final Block BAR_STOOL_OAK = registerBlock("bar_stool_oak", new BNBarStool(Blocks.OAK_PLANKS));
+	public static final Block BAR_STOOL_SPRUCE = registerBlock("bar_stool_spruce", new BNBarStool(Blocks.SPRUCE_PLANKS));
+	public static final Block BAR_STOOL_BIRCH = registerBlock("bar_stool_birch", new BNBarStool(Blocks.BIRCH_PLANKS));
+	public static final Block BAR_STOOL_JUNGLE = registerBlock("bar_stool_jungle", new BNBarStool(Blocks.JUNGLE_PLANKS));
+	public static final Block BAR_STOOL_ACACIA = registerBlock("bar_stool_acacia", new BNBarStool(Blocks.ACACIA_PLANKS));
+	public static final Block BAR_STOOL_DARK_OAK = registerBlock("bar_stool_dark_oak", new BNBarStool(Blocks.DARK_OAK_PLANKS));
+	
 	public static final Block BAR_STOOL_REEDS = registerBlock("bar_stool_reeds", new BNBarStool(REEDS_BLOCK));
 	public static final Block BAR_STOOL_STALAGNATE = registerBlock("bar_stool_stalagnate", new BNBarStool(STALAGNATE_PLANKS));
 	public static final Block BAR_STOOL_WILLOW = registerBlock("bar_stool_willow", new BNBarStool(WILLOW_PLANKS));

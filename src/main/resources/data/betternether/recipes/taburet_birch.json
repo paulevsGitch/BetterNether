@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "SS"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:birch_slab"
+    },
+	"S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "betternether:taburet_birch"
+  }
+}
