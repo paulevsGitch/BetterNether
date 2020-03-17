@@ -372,5 +372,27 @@
 	"block.betternether.blue_obsidian_tile_stairs": "Ступени из синей обсидиановой плитки",
 	"block.betternether.blue_obsidian_tile_slab": "Плита из синей обсидиановой плитки",
 	"block.betternether.blue_obsidian_glass": "Синее обсидиановое стекло",
-	"block.betternether.blue_obsidian_glass_pane": "Панель из синего обсидианового стекла"
+	"block.betternether.blue_obsidian_glass_pane": "Панель из синего обсидианового стекла",
+	
+	"block.betternether.taburet_oak": "Дубовый табурет",
+	"block.betternether.chair_oak": "Дубовый стул",
+	"block.betternether.bar_stool_oak": "Дубовый барный стул",
+	"block.betternether.taburet_spruce": "Еловый табурет",
+	"block.betternether.chair_spruce": "Еловый стул",
+	"block.betternether.bar_stool_spruce": "Еловый барный стул",
+	"block.betternether.taburet_birch": "Берёзовый табурет",
+	"block.betternether.chair_birch": "Берёзовый стул",
+	"block.betternether.bar_stool_birch": "Берёзовый барный стул",
+	"block.betternether.taburet_jungle": "Джунглевый табурет",
+	"block.betternether.chair_jungle": "Джунглевый стул",
+	"block.betternether.bar_stool_jungle": "Джунглевый барный стул",
+	"block.betternether.taburet_acacia": "Акациевый табурет",
+	"block.betternether.chair_acacia": "Акациевый стул",
+	"block.betternether.bar_stool_acacia": "Акациевый барный стул",
+	"block.betternether.taburet_dark_oak": "Табурет из тёмного дуба",
+	"block.betternether.chair_dark_oak": "Стул из тёмного дуба",
+	"block.betternether.bar_stool_dark_oak": "Барный стул из тёмного дуба",
+	
+	"item.betternether.cincinnasite_hammer": "Цинцинназитовый молот",
+	"item.betternether.cincinnasite_hammer_diamond": "Цинцинназитово-алмазный молот"
 }
