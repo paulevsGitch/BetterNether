@@ -45,13 +45,16 @@ public class NetherWartForest extends NetherBiome
 	@Override
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
 	{
-		switch(random.nextInt(3))
+		switch(random.nextInt(4))
 		{
 		case 0:
 		case 1:
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
 			break;
 		case 2:
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
+			break;
+		case 3:
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHERRACK_MOSS.getDefaultState());
 			break;
 		}

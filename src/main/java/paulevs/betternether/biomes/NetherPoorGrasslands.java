@@ -45,7 +45,7 @@ public class NetherPoorGrasslands extends NetherBiome
 		switch(random.nextInt(3))
 		{
 		case 0:
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
 			break;
 		case 1:
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHERRACK_MOSS.getDefaultState());

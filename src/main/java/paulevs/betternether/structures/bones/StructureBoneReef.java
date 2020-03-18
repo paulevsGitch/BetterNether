@@ -10,7 +10,7 @@ import paulevs.betternether.structures.StructureNBT;
 
 public class StructureBoneReef implements IStructure
 {
-	private static StructureNBT[] bones = new StructureNBT[] {
+	private static final StructureNBT[] BONES = new StructureNBT[] {
 			new StructureNBT("bone_01"),
 			new StructureNBT("bone_02"),
 			new StructureNBT("bone_03")
@@ -21,7 +21,7 @@ public class StructureBoneReef implements IStructure
 	{
 		if (BlocksHelper.isNetherGround(world.getBlockState(pos.down())) && world.isAir(pos.up(2)) && world.isAir(pos.up(4)))
 		{
-			StructureNBT bone = bones[random.nextInt(bones.length)];
+			StructureNBT bone = BONES[random.nextInt(BONES.length)];
 			bone.randomRM(random);
 			bone.generateCentered(world, pos.down(random.nextInt(4)));
 		}

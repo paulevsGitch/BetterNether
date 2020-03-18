@@ -21,7 +21,7 @@ public class NetherSwamplandTerraces extends NetherSwampland
 		if (validWall(world, pos.down()) && validWall(world, pos.north()) && validWall(world, pos.south()) && validWall(world, pos.east()) && validWall(world, pos.west()))
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState());
 		else if (random.nextInt(3) > 0)
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
 		else if (random.nextBoolean())
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHERRACK_MOSS.getDefaultState());
 		for (int i = 1; i < random.nextInt(3); i++)

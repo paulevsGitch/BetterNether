@@ -15,6 +15,7 @@ public class BetterNether implements ModInitializer
 {
 	public static final String MOD_ID = "betternether";
 	private static boolean thinArmor = true;
+	private static boolean lavafallParticles = true;
 	private static float fogStart = 0.05F;
 	private static float fogEnd = 0.5F;
 
@@ -37,6 +38,7 @@ public class BetterNether implements ModInitializer
 	private void initOptions()
 	{
 		thinArmor = Config.getBoolean("improvement", "smaller_armor_offset", true);
+		lavafallParticles = Config.getBoolean("improvement", "lavafall_particles", true);
 		float density = Config.getFloat("improvement", "fog_density[vanilla: 1.0]", 0.75F);
 		makeStart(density);
 		makeEnd(density);
@@ -45,6 +47,11 @@ public class BetterNether implements ModInitializer
 	public static boolean hasThinArmor()
 	{
 		return thinArmor;
+	}
+	
+	public static boolean hasLavafallParticles()
+	{
+		return lavafallParticles;
 	}
 	
 	private void makeStart(float density)

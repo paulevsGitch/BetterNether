@@ -38,6 +38,13 @@ public class BlocksHelper
 				b == BlocksRegister.NETHERRACK_MOSS;
 	}
 	
+	public static boolean isSoulSand(BlockState state)
+	{
+		Block b = state.getBlock();
+		return  b == Blocks.SOUL_SAND ||
+				b == Blocks.SOUL_SOIL;
+	}
+	
 	public static boolean isNetherGround(BlockState state)
 	{
 		Block b = state.getBlock();

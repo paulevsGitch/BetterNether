@@ -18,7 +18,8 @@
 	"LightStorageMixin",
 	"NetherWartMixin",
 	"BiomeArrayMixin",
-	"BiomeMixin"
+	"BiomeMixin",
+	"LavaFluidMixin"
   ],
   "client": [],
   "injectors": {

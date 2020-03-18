@@ -12,6 +12,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biomes;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.biomes.CrimsonGlowingWoods;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.biomes.NetherBiomeGravelDesert;
 import paulevs.betternether.biomes.NetherBiomeJungle;
@@ -48,6 +49,7 @@ public class BiomesRegister
 	public static final NetherBiome NETHER_SWAMPLAND_TERRACES = new NetherSwamplandTerraces("Nether Swampland Terraces");
 	public static final NetherBiome MAGMA_LAND = new NetherMagmaLand("Magma Land");
 	public static final NetherBiome SOUL_PLAIN = new NetherSoulPlain("Soul Plain");
+	public static final NetherBiome CRIMSON_GLOWING_WOODS = new CrimsonGlowingWoods("Crimson Glowing Woods");
 	
 	private static int maxChance = 0;
 	
@@ -67,6 +69,7 @@ public class BiomesRegister
 		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
 		registerBiome(MAGMA_LAND);
 		registerSubBiome(SOUL_PLAIN, BIOME_WART_FOREST, 1F);
+		registerBiome(CRIMSON_GLOWING_WOODS);
 	}
 	
 	private static void registerNotModBiomes()

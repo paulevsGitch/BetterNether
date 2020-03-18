@@ -70,9 +70,9 @@ public class StructureNBT
 		
 		Mutable blockpos2 = new Mutable().set(structure.getSize().rotate(rotation));
 		if (this.mirror == BlockMirror.FRONT_BACK)
-			blockpos2.setX(blockpos2.getX());
+			blockpos2.setX(-blockpos2.getX());
 		if (this.mirror == BlockMirror.LEFT_RIGHT)
-			blockpos2.setZ(blockpos2.getZ());
+			blockpos2.setZ(-blockpos2.getZ());
 		StructurePlacementData data = new StructurePlacementData().setRotation(this.rotation).setMirror(this.mirror);
 		structure.place(world, pos.add(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1), data);
 		return true;
