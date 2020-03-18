@@ -95,6 +95,7 @@ import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
+import paulevs.betternether.blocks.BNBrewingStand;
 import paulevs.betternether.blocks.CincinnasiteForge;
 import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.config.Config;
@@ -102,12 +103,6 @@ import paulevs.betternether.tab.CreativeTab;
 
 public class BlocksRegister
 {
-	// Eyes //
-	public static final Block EYEBALL = registerBlock("eyeball", new BlockEyeball());
-	public static final Block EYEBALL_SMALL = registerBlock("eyeball_small", new BlockEyeballSmall());
-	public static final Block EYE_VINE = registerBlockNI("eye_vine", new BlockEyeVine());
-	public static final Block EYE_SEED = registerBlock("eye_seed", new BlockEyeSeed());
-	
 	// Stalagnate //
 	public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
 	public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStalagnateStem());
@@ -363,6 +358,12 @@ public class BlocksRegister
 	public static final Block MUSHROOM_FIR_TRAPDOOR = registerBlock("mushroom_fir_trapdoor",  new BNTrapdoor(MUSHROOM_FIR_PLANKS));
 	public static final Block MUSHROOM_FIR_DOOR = registerBlock("mushroom_fir_door",  new BNDoor(MUSHROOM_FIR_PLANKS));
 	
+	// Eyes //
+	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
+	public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
+	public static final Block EYE_VINE = registerBlockNI("eye_vine", new BlockEyeVine());
+	public static final Block EYE_SEED = registerBlock("eye_seed", new BlockEyeSeed());
+	
 	// Grass //
 	public static final Block NETHER_GRASS = registerBlock("nether_grass", new BlockNetherGrass());
 	public static final Block SWAMP_GRASS = registerBlock("swamp_grass", new BlockNetherGrass());
@@ -390,6 +391,18 @@ public class BlocksRegister
 	public static final Block AGAVE = registerBlock("agave", new BlockAgave());
 	public static final Block BARREL_CACTUS = registerBlock("barrel_cactus", new BlockBarrelCactus());
 	public static final Block NETHER_CACTUS = registerBlock("nether_cactus", new BlockNetherCactus());
+	
+	// Wall plants
+	public static final Block WALL_MOSS = registerBlock("wall_moss", new BlockPlantWall(MaterialColor.RED));
+	public static final Block WALL_MUSHROOM_BROWN = registerBlock("wall_mushroom_brown", new BlockPlantWall(MaterialColor.BROWN));
+	public static final Block WALL_MUSHROOM_RED = registerBlock("wall_mushroom_red", new BlockPlantWall(MaterialColor.RED));
+	
+	// Decorations //
+	public static final Block PIG_STATUE_RESPAWNER = registerBlock("pig_statue_respawner", new BlockStatueRespawner());
+	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
+	public static final Block CINCINNASITE_POT = registerBlock("cincinnasite_pot", new BlockCincinnasitePot());
+	public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
+	public static final Block GEYSER = registerBlock("geyser", new BlockGeyser());
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockNetherrackMoss());
@@ -420,6 +433,7 @@ public class BlocksRegister
 	// Craft Stations //
 	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new CincinnasiteForge());
 	public static final Block NETHERRACK_FURNACE = registerBlock("netherrack_furnace", new BlockNetherrackFurnace());
+	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
 	
 	// Taburets //
 	public static final Block TABURET_OAK = registerBlock("taburet_oak", new BNTaburet(Blocks.OAK_PLANKS));
@@ -472,18 +486,6 @@ public class BlocksRegister
 	public static final Block WILLOW_LADDER = registerBlock("willow_ladder", new BNLadder(WILLOW_PLANKS));
 	public static final Block WART_LADDER = registerBlock("wart_ladder", new BNLadder(WART_PLANKS));
 	public static final Block MUSHROOM_FIR_LADDER = registerBlock("mushroom_fir_ladder", new BNLadder(MUSHROOM_FIR_PLANKS));
-	
-	// Wall plants
-	public static final Block WALL_MOSS = registerBlock("wall_moss", new BlockPlantWall(MaterialColor.RED));
-	public static final Block WALL_MUSHROOM_BROWN = registerBlock("wall_mushroom_brown", new BlockPlantWall(MaterialColor.BROWN));
-	public static final Block WALL_MUSHROOM_RED = registerBlock("wall_mushroom_red", new BlockPlantWall(MaterialColor.RED));
-	
-	// Decorations //
-	public static final Block PIG_STATUE_RESPAWNER = registerBlock("pig_statue_respawner", new BlockStatueRespawner());
-	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
-	public static final Block CINCINNASITE_POT = registerBlock("cincinnasite_pot", new BlockCincinnasitePot());
-	public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
-	public static final Block GEYSER = registerBlock("geyser", new BlockGeyser());
 	
 	public static void register() {}
 	

@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.biomes.NetherSoulPlain;
 import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.world.BNWorldGenerator;
@@ -31,6 +32,14 @@ public class GrassGrowMixin
 		if (!world.isClient)
 		{
 			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos)))
+			{
+				growGrass(world, blockPos);
+				world.playLevelEvent(2005, blockPos, 0);
+				if (!context.getPlayer().isCreative())
+					context.getStack().decrement(1);
+				info.setReturnValue(ActionResult.SUCCESS);
+			}
+			else if (BlocksHelper.isSoulSand(world.getBlockState(blockPos)))
 			{
 				growGrass(world, blockPos);
 				world.playLevelEvent(2005, blockPos, 0);
@@ -69,6 +78,8 @@ public class GrassGrowMixin
 		NetherBiome biome = BNWorldGenerator.getBiome(pos.getX(), pos.getY(), pos.getZ());
 		if (biome instanceof NetherSwampland)
 			return BlocksRegister.SWAMP_GRASS.getDefaultState();
+		else if (biome instanceof NetherSoulPlain)
+			return BlocksRegister.SOUL_GRASS.getDefaultState();
 		else
 			return BlocksRegister.NETHER_GRASS.getDefaultState();
 	}

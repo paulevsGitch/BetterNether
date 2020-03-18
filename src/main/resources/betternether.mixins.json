@@ -18,7 +18,9 @@
 	"BackgroundRenderMixin",
 	"LightStorageMixin",
 	"NetherWartMixin",
-	"BiomeMixin"
+	"BiomeMixin",
+	"LavaFluidMixin",
+	"BrewingRecipeRegistryMixin"
   ],
   "client": [],
   "injectors": {
