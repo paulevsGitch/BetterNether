@@ -2,7 +2,9 @@ package paulevs.betternether.blockentities;
 
 import java.util.Arrays;
 import java.util.Iterator;
+
 import javax.annotation.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.container.BrewingStandContainer;

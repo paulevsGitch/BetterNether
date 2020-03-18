@@ -7,8 +7,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.recipe.BrewingRecipeRegistry;
 import paulevs.betternether.registers.BrewingRegister;
 import paulevs.betternether.registers.BrewingRegister.PotionRecipe;
