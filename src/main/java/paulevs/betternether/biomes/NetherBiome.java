@@ -187,10 +187,10 @@ public class NetherBiome extends Biome
 		return SCATTER.eval(pos.getX() * 0.1, pos.getY() * 0.1 + id * 10, pos.getZ() * 0.1);
 	}
 	
-	/*public String getName()
+	public String getBiomeName()
 	{
 		return name;
-	}*/
+	}
 	
 	public String getRegistryName()
 	{

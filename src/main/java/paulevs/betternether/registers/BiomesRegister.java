@@ -28,6 +28,7 @@ import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.biomes.NetherSwamplandTerraces;
 import paulevs.betternether.biomes.NetherWartForest;
 import paulevs.betternether.biomes.NetherWartForestEdge;
+import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.config.Config;
 
 public class BiomesRegister
@@ -36,6 +37,9 @@ public class BiomesRegister
 	private static final HashMap<Biome, NetherBiome> LINKS = new HashMap<Biome, NetherBiome>();
 	
 	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper("nether_wastes", Biomes.NETHER_WASTES);
+	public static final NetherBiome BIOME_CRIMSON_FOREST = new NetherBiomeWrapper("crimson_forest", Biomes.CRIMSON_FOREST);
+	public static final NetherBiome BIOME_WARPED_FOREST = new NetherBiomeWrapper("warped_forest", Biomes.WARPED_FOREST);
+	
 	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherBiomeGravelDesert("Gravel Desert");
 	public static final NetherBiome BIOME_NETHER_JUNGLE = new NetherBiomeJungle("Nether Jungle");
 	public static final NetherBiome BIOME_WART_FOREST = new NetherWartForest("Wart Forest");
@@ -50,6 +54,7 @@ public class BiomesRegister
 	public static final NetherBiome MAGMA_LAND = new NetherMagmaLand("Magma Land");
 	public static final NetherBiome SOUL_PLAIN = new NetherSoulPlain("Soul Plain");
 	public static final NetherBiome CRIMSON_GLOWING_WOODS = new CrimsonGlowingWoods("Crimson Glowing Woods");
+	public static final NetherBiome OLD_WARPED_WOODS = new OldWarpedWoods("Old Warped Woods");
 	
 	private static int maxChance = 0;
 	
@@ -69,29 +74,27 @@ public class BiomesRegister
 		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
 		registerBiome(MAGMA_LAND);
 		registerSubBiome(SOUL_PLAIN, BIOME_WART_FOREST, 1F);
-		registerBiome(CRIMSON_GLOWING_WOODS);
+		registerSubBiome(CRIMSON_GLOWING_WOODS, BIOME_CRIMSON_FOREST, 1F);
+		registerSubBiome(OLD_WARPED_WOODS, BIOME_WARPED_FOREST, 1F);
 	}
 	
 	private static void registerNotModBiomes()
 	{
-		float chance = Config.getFloat("biomes", "nether_wastes_chance", 1);
-		maxChance += chance;
-		BIOME_EMPTY_NETHER.setGenChance(maxChance);
-		BIOME_EMPTY_NETHER.build();
-		REGISTRY.add(BIOME_EMPTY_NETHER);
-		LINKS.put(Biomes.NETHER_WASTES, BIOME_EMPTY_NETHER);
+		registerDefaultWrapped(BIOME_EMPTY_NETHER);
+		registerDefaultWrapped(BIOME_CRIMSON_FOREST);
+		registerDefaultWrapped(BIOME_WARPED_FOREST);
 		
 		Iterator<Biome> iterator = Registry.BIOME.iterator();
 		while (iterator.hasNext())
 		{
 			Biome biome = iterator.next();
-			if (biome.getCategory() == Category.NETHER && biome != Biomes.NETHER_WASTES)
+			if (biome.getCategory() == Category.NETHER && notWrapped(biome))
 			{
 				String name = Registry.BIOME.getId(biome).getPath();
 				if (Config.getBoolean("biomes", name, true))
 				{
 					NetherBiomeWrapper wrapper = new NetherBiomeWrapper(name, biome);
-					chance = Config.getFloat("biomes", name + "_chance", 1);
+					float chance = Config.getFloat("biomes", name + "_chance", 1);
 					maxChance += chance;
 					wrapper.setGenChance(maxChance);
 					wrapper.build();
@@ -100,6 +103,23 @@ public class BiomesRegister
 				}
 			}
 		}
+	}
+	
+	private static void registerDefaultWrapped(NetherBiome biome)
+	{
+		float chance = Config.getFloat("biomes", biome.getRegistryName() + "_chance", 1);
+		maxChance += chance;
+		biome.setGenChance(maxChance);
+		biome.build();
+		REGISTRY.add(biome);
+		LINKS.put(biome.getBiome(), biome);
+	}
+	
+	private static boolean notWrapped(Biome biome)
+	{
+		return  biome != Biomes.NETHER_WASTES &&
+				biome != Biomes.CRIMSON_FOREST &&
+				biome != Biomes.WARPED_FOREST;
 	}
 	
 	@SuppressWarnings("deprecation")
