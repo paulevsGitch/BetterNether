@@ -23,7 +23,7 @@ public class ItemBlackApple extends Item
 	@Override
 	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user)
 	{
-		user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 40, 3));
+		user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 1));
 		return super.finishUsing(stack, world, user);
 	}
 }

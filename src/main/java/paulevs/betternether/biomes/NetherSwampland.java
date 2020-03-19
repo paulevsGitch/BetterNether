@@ -31,7 +31,7 @@ public class NetherSwampland extends NetherBiome
 		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.1F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
 		addStructure("nether_grass", new StructureSwampGrass(), StructureType.FLOOR, 0.4F, false);
-		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, false);
+		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, true);
 		addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
