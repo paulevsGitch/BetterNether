@@ -1,6 +1,7 @@
 package paulevs.betternether.blocks;
 
 import java.util.Random;
+import java.util.function.ToIntFunction;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -36,21 +37,22 @@ public class BlockCincinnasiteFireBowl extends BlockBaseNotFull
 
 	public BlockCincinnasiteFireBowl()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).nonOpaque().build().lightLevel(getLuminance()));
 		this.setDefaultState(getStateManager().getDefaultState().with(FIRE, false));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
+	}
+	
+	protected static ToIntFunction<BlockState> getLuminance()
+	{
+		return (state) -> {
+			return state.get(FIRE) ? 15 : 0;
+		};
 	}
 
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
 	{
 		stateManager.add(FIRE);
-	}
-
-	@Override
-	public int getLuminance(BlockState state)
-	{
-		return state.get(FIRE) ? 15 : 0;
 	}
 
 	@Override

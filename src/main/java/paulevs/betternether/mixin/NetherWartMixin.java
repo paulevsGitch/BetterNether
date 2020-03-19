@@ -38,7 +38,7 @@ public abstract class NetherWartMixin extends PlantBlock
 			info.setReturnValue(true);
     }
 
-	@Inject(method = "scheduledTick", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "randomTick", at = @At(value = "HEAD"), cancellable = true)
 	private void tick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo info)
 	{
 		super.scheduledTick(state, world, pos, random);

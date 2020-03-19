@@ -36,14 +36,14 @@ public class BlockBarrelCactus extends BlockCactusBase implements Fertilizable
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
-		Vec3d vec3d = state.getOffsetPos(view, pos);
+		Vec3d vec3d = state.method_26226(view, pos);
 		return SELECTION.offset(vec3d.x, vec3d.y, vec3d.z);
 	}
 	
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
-		Vec3d vec3d = state.getOffsetPos(view, pos);
+		Vec3d vec3d = state.method_26226(view, pos);
 		return COLLISION.offset(vec3d.x, vec3d.y, vec3d.z);
 	}
 	

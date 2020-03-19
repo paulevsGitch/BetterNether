@@ -43,4 +43,9 @@ public class BlockBase extends Block implements IRenderTypeable
 	{
 		this.dropItself = drop;
 	}
+	
+	/*public int getLuminance(BlockState state)
+	{
+		return 0;
+	}*/
 }

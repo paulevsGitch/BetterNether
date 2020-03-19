@@ -48,7 +48,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
 		Block block = state.get(PLANT).getBlock();
-		Vec3d vec3d = block.getDefaultState().getOffsetPos(view, pos);
+		Vec3d vec3d = block.getDefaultState().method_26226(view, pos);
 		return block.getOutlineShape(block.getDefaultState(), view, pos, ePos).offset(-vec3d.x, -0.5 - vec3d.y, -vec3d.z);
 	}
 	

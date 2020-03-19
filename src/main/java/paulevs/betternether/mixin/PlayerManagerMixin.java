@@ -1,24 +1,13 @@
 package paulevs.betternether.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.server.PlayerManager;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.dimension.DimensionType;
-import paulevs.betternether.IDimensionable;
-import paulevs.betternether.registers.BlocksRegister;
 
 @Mixin(PlayerManager.class)
 public abstract class PlayerManagerMixin
 {
-	@Inject(method = "respawnPlayer", at = @At("RETURN"))
+	/*@Inject(method = "respawnPlayer", at = @At("RETURN"))
 	private void dimRespawn(ServerPlayerEntity player, DimensionType dimension, boolean alive, CallbackInfoReturnable<ServerPlayerEntity> info)
 	{
 		if (player.isSpawnForced())
@@ -58,5 +47,5 @@ public abstract class PlayerManagerMixin
 				return true;
 		}
 		return false;
-	}
+	}*/
 }

@@ -37,7 +37,7 @@ public class BlockAgave extends BlockCactusBase implements Fertilizable
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
-		Vec3d vec3d = state.getOffsetPos(view, pos);
+		Vec3d vec3d = state.method_26226(view, pos);
 		return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
 	}
 	

@@ -13,7 +13,6 @@ import net.minecraft.entity.EntityContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -35,8 +34,7 @@ public class BlockEyeballSmall extends BlockEyeBase
 
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
-		Vec3d vec3d = state.getOffsetPos(view, pos);
-		return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
+		return SHAPE;
 	}
 	
 	@Environment(EnvType.CLIENT)

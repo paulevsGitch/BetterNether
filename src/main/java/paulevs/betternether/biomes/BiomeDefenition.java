@@ -4,6 +4,8 @@ import java.util.Random;
 
 import com.google.common.collect.ImmutableList;
 
+import net.minecraft.class_4967;
+import net.minecraft.class_4968;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.MixedNoisePoint;
@@ -20,8 +22,8 @@ public class BiomeDefenition
 	private String name;
 	private int color;
 	private SoundEvent loop;
-	private SoundEvent mood;
-	private SoundEvent additions;
+	private class_4968 mood;
+	private class_4967 additions;
 	private MixedNoisePoint noise;
 	private BiomeParticleConfig particleConfig;
 	
@@ -67,7 +69,7 @@ public class BiomeDefenition
 	 */
 	public BiomeDefenition setMood(SoundEvent mood)
 	{
-		this.mood = mood;
+		this.mood = new class_4968(mood, 6000, 8, 2.0D);
 		return this;
 	}
 	
@@ -78,7 +80,7 @@ public class BiomeDefenition
 	 */
 	public BiomeDefenition setAdditions(SoundEvent additions)
 	{
-		this.additions = additions;
+		this.additions = new class_4967(additions, 0.01);
 		return this;
 	}
 	

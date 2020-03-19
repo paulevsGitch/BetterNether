@@ -10,14 +10,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -31,7 +28,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.IDimensionable;
 import paulevs.betternether.registers.BlocksRegister;
 
 public class BlockStatueRespawner extends BlockBaseNotFull
@@ -73,7 +69,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
 	{
-		if (player.getMainHandStack().getItem() == Items.GLOWSTONE_DUST)
+		/*if (player.getMainHandStack().getItem() == Items.GLOWSTONE_DUST)
 		{
 			float y = state.get(TOP) ? 0.4F : 1.4F;
 			if (!player.isCreative())
@@ -95,7 +91,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 			return ActionResult.SUCCESS;
 		}
 		else
-			player.addMessage(new TranslatableText("message.spawn_help", new Object[0]), true);
+			player.addMessage(new TranslatableText("message.spawn_help", new Object[0]), true);*/
 		return ActionResult.FAIL;
 	}
 	

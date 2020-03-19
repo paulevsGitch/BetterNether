@@ -137,7 +137,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 					state = this.world.getBlockState(pos);
 					valid = state.isAir() || !state.getMaterial().blocksMovement();
 					valid = valid && state.getBlock() != BlocksRegister.EGG_PLANT;
-					valid = valid && !state.getBlock().getMaterial(state).blocksMovement();
+					valid = valid && !state.getMaterial().blocksMovement();
 				}
 				return valid;
 			}
@@ -301,7 +301,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 
 		public boolean shouldContinue()
 		{
-			return EntityFirefly.this.navigation.method_23966();
+			return EntityFirefly.this.navigation.isFollowingPath();
 		}
 
 		public void start()
@@ -383,7 +383,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		@Override
 		public boolean shouldContinue()
 		{
-			return EntityFirefly.this.navigation.method_23966();
+			return EntityFirefly.this.navigation.isFollowingPath();
 		}
 
 		@Override

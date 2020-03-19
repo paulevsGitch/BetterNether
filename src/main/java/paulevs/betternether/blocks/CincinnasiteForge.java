@@ -1,6 +1,7 @@
 package paulevs.betternether.blocks;
 
 import java.util.Random;
+import java.util.function.ToIntFunction;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,6 +15,7 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
@@ -25,7 +27,14 @@ public class CincinnasiteForge extends AbstractFurnaceBlock
 {
 	public CincinnasiteForge()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).build());
+		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).build().lightLevel(getLuminance()));
+	}
+
+	private static ToIntFunction<BlockState> getLuminance()
+	{
+		return (blockState) -> {
+			return (Boolean)blockState.get(Properties.LIT) ? 13 : 0;
+		};
 	}
 
 	public BlockEntity createBlockEntity(BlockView view)

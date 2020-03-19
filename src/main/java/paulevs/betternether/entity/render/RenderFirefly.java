@@ -1,11 +1,15 @@
 package paulevs.betternether.entity.render;
 
+import java.util.Iterator;
+
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.util.math.Matrix3f;
 import net.minecraft.client.util.math.Matrix4f;
@@ -37,13 +41,27 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		return TEXTURE;
 	}
 
+	@Override
 	public void render(EntityFirefly mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
 	{
-		
 		float red = mobEntity.getRed();
 		float green = mobEntity.getGreen();
 		float blue = mobEntity.getBlue();
-		
+
+		matrixStack.push();
+		matrixStack.translate(0, 0.125, 0);
+		matrixStack.multiply(this.dispatcher.getRotation());
+		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
+		MatrixStack.Entry entry = matrixStack.peek();
+		Matrix4f matrix4f = entry.getModel();
+		Matrix3f matrix3f = entry.getNormal();
+		VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
+		addVertex(matrix4f, matrix3f, vertexConsumer, -1, -1, 0F, 0.5F, red, green, blue);
+		addVertex(matrix4f, matrix3f, vertexConsumer, 1, -1, 1F, 0.5F, red, green, blue);
+		addVertex(matrix4f, matrix3f, vertexConsumer, 1, 1, 1F, 1F, red, green, blue);
+		addVertex(matrix4f, matrix3f, vertexConsumer, -1, 1, 0F, 1F, red, green, blue);
+		matrixStack.pop();
+
 		matrixStack.push();
 		this.model.handSwingProgress = this.getHandSwingProgress(mobEntity, g);
 		this.model.riding = mobEntity.hasVehicle();
@@ -58,7 +76,6 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 			h = MathHelper.lerpAngleDegrees(g, mobEntity2.prevBodyYaw, mobEntity2.bodyYaw);
 			k = j - h;
 			o = MathHelper.wrapDegrees(k);
-
 			if (o < -85.0F)
 			{
 				o = -85.0F;
@@ -86,11 +103,12 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 			if (direction != null)
 			{
 				p = mobEntity.getEyeHeight(EntityPose.STANDING) - 0.1F;
-				matrixStack.translate((double)((float)(-direction.getOffsetX()) * p), 0.0D, (double)((float)(-direction.getOffsetZ()) * p));
+				matrixStack.translate((double) ((float) (-direction.getOffsetX()) * p), 0.0D,
+						(double) ((float) (-direction.getOffsetZ()) * p));
 			}
 		}
 
-		o = 0;//this.getCustomAngle(mobEntity, g);
+		o = this.getAnimationProgress(mobEntity, g);
 		this.setupTransforms(mobEntity, matrixStack, o, h, g);
 		matrixStack.scale(-1.0F, -1.0F, 1.0F);
 		this.scale(mobEntity, matrixStack, g);
@@ -101,7 +119,6 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		{
 			p = MathHelper.lerp(g, mobEntity.lastLimbDistance, mobEntity.limbDistance);
 			q = mobEntity.limbAngle - mobEntity.limbDistance * (1.0F - g);
-
 			if (mobEntity.isBaby())
 			{
 				q *= 3.0F;
@@ -115,27 +132,26 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 
 		this.model.animateModel(mobEntity, q, p, g);
 		this.model.setAngles(mobEntity, q, p, o, k, m);
+		boolean bl = this.isFullyVisible(mobEntity);
+		boolean bl2 = !bl && !mobEntity.isInvisibleTo(MinecraftClient.getInstance().player);
+		RenderLayer renderLayer = this.getRenderLayer(mobEntity, bl, bl2);
+		if (renderLayer != null)
+		{
+			int r = getOverlay(mobEntity, this.getWhiteOverlayProgress(mobEntity, g));
+			this.model.render(matrixStack, vertexConsumer, i, r, 1.0F, 1.0F, 1.0F, bl2 ? 0.15F : 1.0F);
+		}
 
-		VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
-		this.model.render(matrixStack, vertexConsumer, LIT, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0F);
+		if (!mobEntity.isSpectator())
+		{
+			Iterator<?> var21 = this.features.iterator();
+			while (var21.hasNext())
+			{
+				@SuppressWarnings("unchecked")
+				FeatureRenderer<EntityFirefly, AnimalModel<EntityFirefly>> featureRenderer = (FeatureRenderer<EntityFirefly, AnimalModel<EntityFirefly>>) var21.next();
+				featureRenderer.render(matrixStack, vertexConsumerProvider, i, mobEntity, q, p, g, o, k, m);
+			}
+		}
 
-		matrixStack.pop();
-		
-		matrixStack.push();
-		
-		matrixStack.translate(0, 0.125, 0);
-        matrixStack.multiply(this.renderManager.getRotation());
-        matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
-		
-		MatrixStack.Entry entry = matrixStack.peek();
-		Matrix4f matrix4f = entry.getModel();
-		Matrix3f matrix3f = entry.getNormal();
-		
-		addVertex(matrix4f, matrix3f, vertexConsumer, -1, -1, 0F, 0.5F, red, green, blue);
-		addVertex(matrix4f, matrix3f, vertexConsumer, 1, -1, 1F, 0.5F, red, green, blue);
-		addVertex(matrix4f, matrix3f, vertexConsumer, 1, 1, 1F, 1F, red, green, blue);
-		addVertex(matrix4f, matrix3f, vertexConsumer, -1, 1, 0F, 1F, red, green, blue);
-		
 		matrixStack.pop();
 
 		if (this.hasLabel(mobEntity))

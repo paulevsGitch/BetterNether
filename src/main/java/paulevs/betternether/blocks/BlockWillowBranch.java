@@ -1,5 +1,7 @@
 package paulevs.betternether.blocks;
 
+import java.util.function.ToIntFunction;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -24,10 +26,17 @@ public class BlockWillowBranch extends BlockBaseNotFull
 	
 	public BlockWillowBranch()
 	{
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().noCollision().build());
+		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().noCollision().build().lightLevel(getLuminance()));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, WillowBranchShape.MIDDLE));
+	}
+	
+	protected static ToIntFunction<BlockState> getLuminance()
+	{
+		return (state) -> {
+			return state.get(SHAPE) == WillowBranchShape.END ? 15 : 0;
+		};
 	}
 	
 	@Environment(EnvType.CLIENT)
@@ -46,12 +55,6 @@ public class BlockWillowBranch extends BlockBaseNotFull
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
 		return V_SHAPE;
-	}
-	
-	@Override
-	public int getLuminance(BlockState state)
-	{
-		return state.get(SHAPE) == WillowBranchShape.END ? 15 : 0;
 	}
 	
 	@Override
