@@ -25,7 +25,7 @@ public class StructureBigWarpedTree implements IStructure
 	@Override
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
-		if (isGround(world.getBlockState(pos.down())) && noTreesNear(world, pos))
+		if (isGround(world.getBlockState(pos.down())) && isGround(world.getBlockState(pos.down(2))) && isGround(world.getBlockState(pos.down(3))) && noTreesNear(world, pos))
 		{
 			StructureWorld tree = TREES[random.nextInt(TREES.length)];
 			tree.generate(world, pos, random);

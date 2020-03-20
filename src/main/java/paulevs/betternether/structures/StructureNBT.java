@@ -68,11 +68,12 @@ public class StructureNBT
 			return false;
 		}
 		
-		Mutable blockpos2 = new Mutable().set(structure.getSize().rotate(rotation));
+		Mutable blockpos2 = new Mutable().set(structure.getSize());
 		if (this.mirror == BlockMirror.FRONT_BACK)
 			blockpos2.setX(-blockpos2.getX());
 		if (this.mirror == BlockMirror.LEFT_RIGHT)
 			blockpos2.setZ(-blockpos2.getZ());
+		blockpos2.set(blockpos2.rotate(rotation));
 		StructurePlacementData data = new StructurePlacementData().setRotation(this.rotation).setMirror(this.mirror);
 		structure.place(world, pos.add(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1), data);
 		return true;

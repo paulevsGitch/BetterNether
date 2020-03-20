@@ -24,12 +24,13 @@ public class StructureCrimsonGlowingTree implements IStructure
 	@Override
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
-		if (isGround(world.getBlockState(pos.down())) && noTreesNear(world, pos))
+		if (isGround(world.getBlockState(pos.down())) && isGround(world.getBlockState(pos.down(2))) && isGround(world.getBlockState(pos.down(3))) && noTreesNear(world, pos))
 		{
 			StructureWorld tree = TREES[random.nextInt(TREES.length)];
 			tree.generate(world, pos, random);
 		}
 	}
+
 	
 	private boolean isGround(BlockState state)
 	{
@@ -38,10 +39,10 @@ public class StructureCrimsonGlowingTree implements IStructure
 	
 	private boolean noTreesNear(IWorld world, BlockPos pos)
 	{
-		int x1 = pos.getX() - 5;
-		int z1 = pos.getZ() - 5;
-		int x2 = pos.getX() + 5;
-		int z2 = pos.getZ() + 5;
+		int x1 = pos.getX() - 7;
+		int z1 = pos.getZ() - 7;
+		int x2 = pos.getX() + 7;
+		int z2 = pos.getZ() + 7;
 		POS.setY(pos.getY());
 		for (int x = x1; x <= x2; x++)
 		{
@@ -49,7 +50,7 @@ public class StructureCrimsonGlowingTree implements IStructure
 			for (int z = z1; z <= z2; z++)
 			{
 				POS.setZ(z);
-				if (isInside(x - pos.getX(), z - pos.getZ(), 8) && isTree(world.getBlockState(POS)))
+				if (isInside(x - pos.getX(), z - pos.getZ(), 11) && isTree(world.getBlockState(POS)))
 					return false;
 			}
 		}

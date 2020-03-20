@@ -44,7 +44,8 @@ public class StructureTwistedVines implements IStructure
 								break;
 							}
 							BlocksHelper.setWithoutUpdate(world, npos, Blocks.TWISTING_VINES_PLANT.getDefaultState());
-						}	
+						}
+						BlocksHelper.setWithoutUpdate(world, npos, Blocks.TWISTING_VINES.getDefaultState());
 						break;
 					}
 				}
