@@ -2,7 +2,7 @@
 	"container.forge": "Forge",
 	"container.chest_of_drawers": "Chest of Drawers",
 
-	"entity.firefly": "Firefly",
+	"entity.betternether.firefly": "Firefly",
 
 	"item.betternether.black_apple": "Black Apple",
 
@@ -394,5 +394,7 @@
 	"block.betternether.bar_stool_dark_oak": "Dark Oak Bar Stool",
 	
 	"item.betternether.cincinnasite_hammer": "Cincinnasite Hammer",
-	"item.betternether.cincinnasite_hammer_diamond": "Cincinnasite-Diamond Hammer"
+	"item.betternether.cincinnasite_hammer_diamond": "Cincinnasite-Diamond Hammer",
+	
+	"block.betternether.nether_brewing_stand": "Nether Brewing Stand"
 }

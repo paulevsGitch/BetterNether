@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+	" S ",
+	"###"
+  ],
+  "key": {
+    "I": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+	"S": {
+      "item": "minecraft:blaze_rod"
+    },
+	"#": {
+      "item": "minecraft:nether_bricks"
+    }
+  },
+  "result": {
+    "item": "betternether:nether_brewing_stand"
+  }
+}
