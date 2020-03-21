@@ -1,4 +1,4 @@
-package paulevs.betternether.mixin;
+package paulevs.betternether.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

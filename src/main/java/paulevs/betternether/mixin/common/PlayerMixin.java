@@ -1,4 +1,4 @@
-package paulevs.betternether.mixin;
+package paulevs.betternether.mixin.common;
 
 import java.util.HashMap;
 import java.util.UUID;

@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "package": "paulevs.betternether.mixin.common",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ChunkPopulateMixin",
+    "LadderMixin",
+	"MushroomMixin",
+	"PlayerMixin",
+	"PlayerManagerMixin",
+	"MapMixin",
+	"MapStateMixin",
+	"LocateMixin",
+	"GrassGrowMixin",
+	"StructureMixin",
+	"LightStorageMixin",
+	"NetherWartMixin",
+	"BiomeMixin",
+	"BrewingRecipeRegistryMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

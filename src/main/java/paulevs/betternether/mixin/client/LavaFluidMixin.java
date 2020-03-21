@@ -1,4 +1,4 @@
-package paulevs.betternether.mixin;
+package paulevs.betternether.mixin.client;
 
 import java.util.Random;
 
@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.LavaFluid;
 import net.minecraft.particle.ParticleEffect;
@@ -15,9 +17,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import paulevs.betternether.BetterNether;
 
+@Environment(EnvType.CLIENT)
 @Mixin(LavaFluid.class)
 public class LavaFluidMixin
 {
+	@Environment(EnvType.CLIENT)
 	@Inject(method = "randomDisplayTick", at = @At(value = "HEAD"))
 	private void displayTick(World world, BlockPos blockPos, FluidState fluidState, Random random, CallbackInfo info)
 	{
