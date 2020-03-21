@@ -1,26 +1,21 @@
 {
   "required": true,
-  "package": "paulevs.betternether.mixin",
+  "package": "paulevs.betternether.mixin.common",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ChunkPopulateMixin",
+	"ChunkPopulateMixin",
 	"MushroomMixin",
 	"MapMixin",
 	"MapStateMixin",
-	"PlayerArmorMixin",
-	"StandArmorMixin",
 	"LocateMixin",
 	"GrassGrowMixin",
 	"StructureMixin",
-	"BackgroundRenderMixin",
 	"LightStorageMixin",
 	"NetherWartMixin",
 	"BiomeArrayMixin",
 	"BiomeMixin",
-	"LavaFluidMixin",
 	"PlayerEntityMixin"
   ],
-  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

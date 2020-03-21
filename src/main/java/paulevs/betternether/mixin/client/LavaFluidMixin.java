@@ -1,4 +1,4 @@
-package paulevs.betternether.mixin;
+package paulevs.betternether.mixin.client;
 
 import java.util.Random;
 

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "paulevs.betternether.mixin.client",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+	"BackgroundRenderMixin",
+	"LavaFluidMixin",
+	"StandArmorMixin",
+	"PlayerArmorMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,4 +1,4 @@
-package paulevs.betternether.mixin;
+package paulevs.betternether.mixin.common;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

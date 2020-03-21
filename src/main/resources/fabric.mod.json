@@ -30,7 +30,8 @@
 		]
 	},
 	"mixins": [
-		"betternether.mixins.json"
+		"betternether.mixins.common.json",
+		"betternether.mixins.client.json"
 	],
 
 	"depends": {
