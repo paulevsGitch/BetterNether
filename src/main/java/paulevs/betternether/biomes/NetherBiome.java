@@ -63,7 +63,7 @@ public class NetherBiome
 			structureFormat("respawn_point_02", -2, StructureType.FLOOR, 1),
 			structureFormat("respawn_point_03", -3, StructureType.FLOOR, 1),
 			structureFormat("respawn_point_04", -2, StructureType.FLOOR, 1),
-			structureFormat("spawn_altar_ladder", -2, StructureType.FLOOR, 1)
+			structureFormat("spawn_altar_ladder", -5, StructureType.FLOOR, 1)
 	};
 	
 	private ArrayList<String> structures;

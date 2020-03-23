@@ -6,7 +6,8 @@
 	"BackgroundRenderMixin",
 	"LavaFluidMixin",
 	"StandArmorMixin",
-	"PlayerArmorMixin"
+	"PlayerArmorMixin",
+	"PresetsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

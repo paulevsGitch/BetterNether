@@ -12,9 +12,9 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 		super(type, world);
 	}
 
-	public void tick()
+	/*public void tick()
 	{
 		if (this.random.nextInt(32) == 0)
 			this.setVelocity(this.random.nextDouble(), this.random.nextDouble(), this.random.nextDouble());
-	}
+	}*/
 }

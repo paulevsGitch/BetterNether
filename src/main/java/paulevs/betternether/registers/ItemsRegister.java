@@ -59,6 +59,7 @@ public class ItemsRegister
 	public static final Item CINCINNASITE_SWORD_DIAMOND = registerItem("cincinnasite_sword_diamond", new BNSword(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 5, -2.4F));
 	
 	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg(EntityRegister.FIREFLY, color(255, 223, 168), color(233, 182, 95)));
+	public static final Item SPAWN_EGG_JELLYFISH = registerItem("spawn_egg_hydrogen_jellyfish", makeEgg(EntityRegister.HYDROGEN_JELLYFISH, color(60, 60, 60), color(200, 200, 200)));
 
 	public static void register() {}
 	

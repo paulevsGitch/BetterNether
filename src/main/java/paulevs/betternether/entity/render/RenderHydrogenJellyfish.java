@@ -10,16 +10,22 @@ import paulevs.betternether.entity.model.ModelEntityHydrogenJellyfish;
 
 public class RenderHydrogenJellyfish extends MobEntityRenderer<EntityHydrogenJellyfish, AnimalModel<EntityHydrogenJellyfish>>
 {
-	private static final Identifier TEXTURE = new Identifier("textures/block/stone.png");//new Identifier(BetterNether.MOD_ID, "textures/entity/firefly.png");
+	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/jellyfish.png");
 	
 	public RenderHydrogenJellyfish(EntityRenderDispatcher renderManager)
 	{
-		super(renderManager, new ModelEntityHydrogenJellyfish(), 0);
+		super(renderManager, new ModelEntityHydrogenJellyfish(), 1);
 	}
 
 	@Override
 	public Identifier getTexture(EntityHydrogenJellyfish entity)
 	{
 		return TEXTURE;
+	}
+	
+	@Override
+	protected int getBlockLight(EntityHydrogenJellyfish entity, float tickDelta)
+	{
+		return 15;
 	}
 }
