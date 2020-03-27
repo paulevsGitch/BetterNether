@@ -3,7 +3,7 @@ package paulevs.betternether.blocks;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -35,19 +35,19 @@ public class BlockCincinnasitePot extends BlockBaseNotFull
 	}
 
 	/*@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
 		return view.getBlockState(pos.up()).getBlock() == BlocksRegister.POTTED_PLANT ? SHAPE_PLANTED : SHAPE;
 	}
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
 		return SHAPE;
 	}*/
 	
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
 		return SHAPE;
 	}

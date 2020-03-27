@@ -8,8 +8,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -49,7 +49,7 @@ public class BlockNetherCactus extends BlockBaseNotFull
     }
 	
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
 		return state.get(TOP).booleanValue() ? TOP_SHAPE : SIDE_SHAPE;
 	}

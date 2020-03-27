@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -47,13 +47,13 @@ public class BNNormalChair extends BNChair
 	}
 	
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
 		return state.get(TOP) ? SHAPE_TOP : SHAPE_BOTTOM;
 	}
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
 		return state.get(TOP) ? VoxelShapes.empty() : COLLIDER;
 	}

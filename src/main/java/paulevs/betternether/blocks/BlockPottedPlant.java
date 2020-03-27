@@ -8,7 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
@@ -45,10 +45,10 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	}
 	
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
 		Block block = state.get(PLANT).getBlock();
-		Vec3d vec3d = block.getDefaultState().method_26226(view, pos);
+		Vec3d vec3d = block.getDefaultState().getModelOffset(view, pos);
 		return block.getOutlineShape(block.getDefaultState(), view, pos, ePos).offset(-vec3d.x, -0.5 - vec3d.y, -vec3d.z);
 	}
 	

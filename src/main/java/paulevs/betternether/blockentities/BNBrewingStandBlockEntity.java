@@ -242,9 +242,9 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		this.world.playLevelEvent(1035, blockPos, 0);
 	}
 
-	public void fromTag(CompoundTag tag)
+	public void fromTag(BlockState blockState, CompoundTag tag)
 	{
-		super.fromTag(tag);
+		super.fromTag(blockState, tag);
 		this.inventory = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
 		Inventories.fromTag(tag, this.inventory);
 		this.brewTime = tag.getShort("BrewTime");

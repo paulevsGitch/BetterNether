@@ -203,9 +203,9 @@ public class BlockEntityForge extends LockableContainerBlockEntity implements Si
 		return this.burnTime > 0;
 	}
 
-	public void fromTag(CompoundTag tag)
+	public void fromTag(BlockState blockState, CompoundTag tag)
 	{
-		super.fromTag(tag);
+		super.fromTag(blockState, tag);
 		this.inventory = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
 		Inventories.fromTag(tag, this.inventory);
 		this.burnTime = tag.getShort("BurnTime");

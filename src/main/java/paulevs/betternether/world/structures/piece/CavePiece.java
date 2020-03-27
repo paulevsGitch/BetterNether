@@ -54,7 +54,7 @@ public class CavePiece extends CustomPiece
 	}
 
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos)
+	public boolean generate(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
 	{
 		BlockState bottom = LAVA;
 		if (!(chunkGenerator instanceof CavesChunkGenerator))

@@ -9,7 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
@@ -43,7 +43,7 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Fertiliza
 	}
 	
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
 		return SHAPE;
 	}

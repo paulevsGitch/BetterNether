@@ -32,6 +32,17 @@ public class StructureNetherCactus implements IStructure
 			{
 				int x = pos.getX() + (int) (random.nextGaussian() * 4);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 4);
+				if (((x + z + pos.getY()) & 1) == 0)
+				{
+					if (random.nextBoolean())
+					{
+						x += random.nextBoolean() ? 1 : -1;
+					}
+					else
+					{
+						z += random.nextBoolean() ? 1 : -1;
+					}
+				}
 				int y = pos.getY() + random.nextInt(8);
 				for (int j = 0; j < 8; j++)
 				{

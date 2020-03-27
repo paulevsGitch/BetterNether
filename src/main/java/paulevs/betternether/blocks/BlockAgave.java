@@ -8,7 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -35,9 +35,9 @@ public class BlockAgave extends BlockCactusBase implements Fertilizable
 	}
 	
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
-		Vec3d vec3d = state.method_26226(view, pos);
+		Vec3d vec3d = state.getModelOffset(view, pos);
 		return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
 	}
 	

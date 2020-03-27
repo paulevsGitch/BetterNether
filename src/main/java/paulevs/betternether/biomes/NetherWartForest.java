@@ -11,6 +11,7 @@ import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registers.BlocksRegister;
 import paulevs.betternether.structures.StructureType;
+import paulevs.betternether.structures.decorations.StructureWartDeadwood;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureNetherWart;
 import paulevs.betternether.structures.plants.StructureSoulLily;
@@ -32,14 +33,13 @@ public class NetherWartForest extends NetherBiome
 						(random) -> { return 0.0; },
 						(random) -> { return -1.0; },
 						(random) -> { return 0.0; })));
+		this.setNoiseDensity(0.45F);
+		addStructure("wart_deadwood", new StructureWartDeadwood(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.1F, false);
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.05F, false);
-		
-		addStructure("soul_lily_1", new StructureSoulLily(), StructureType.FLOOR, 0.2F, true);
-		addStructure("soul_lily_2", new StructureSoulLily(), StructureType.FLOOR, 0.1F, true);
-		addStructure("soul_lily_3", new StructureSoulLily(), StructureType.FLOOR, 0.05F, true);
+		addStructure("soul_lily", new StructureSoulLily(), StructureType.FLOOR, 0.2F, true);
 	}
 	
 	@Override

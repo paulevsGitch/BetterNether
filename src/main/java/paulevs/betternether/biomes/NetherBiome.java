@@ -79,7 +79,7 @@ public class NetherBiome extends Biome
 			structureFormat("respawn_point_02", -2, StructureType.FLOOR, 1),
 			structureFormat("respawn_point_03", -3, StructureType.FLOOR, 1),
 			structureFormat("respawn_point_04", -2, StructureType.FLOOR, 1),
-			structureFormat("spawn_altar_ladder", -2, StructureType.FLOOR, 1)
+			structureFormat("spawn_altar_ladder", -5, StructureType.FLOOR, 1)
 	};
 	
 	private ArrayList<String> structures;
@@ -108,6 +108,7 @@ public class NetherBiome extends Biome
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.MAGMA_CUBE, 2, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
+		this.addSpawn(EntityCategory.CREATURE, new Biome.SpawnEntry(EntityType.STRIDER, 60, 2, 4));
 		
 		this.name = defenition.getName();
 		subbiomes = new ArrayList<Subbiome>();

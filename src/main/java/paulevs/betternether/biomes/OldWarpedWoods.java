@@ -34,8 +34,8 @@ public class OldWarpedWoods extends NetherBiome
 		addStructure("big_warped_tree", new StructureBigWarpedTree(), StructureType.FLOOR, 0.1F, false);
 		addStructure("warped_fungus", new StructureWarpedFungus(), StructureType.FLOOR, 0.05F, true);
 		addStructure("warped_roots", new StructureWarpedRoots(), StructureType.FLOOR, 0.2F, true);
-		addStructure("twisted_vine", new StructureTwistedVines(), StructureType.FLOOR, 0.4F, true);
-		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.3F, false);
+		addStructure("twisted_vine", new StructureTwistedVines(), StructureType.FLOOR, 0.1F, true);
+		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.3F, true);
 	}
 	
 	@Override

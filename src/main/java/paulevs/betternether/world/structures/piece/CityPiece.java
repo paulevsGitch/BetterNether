@@ -54,7 +54,7 @@ public class CityPiece extends CustomPiece
 	}
 
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos)
+	public boolean generate(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
 	{
 		if (!this.boundingBox.intersects(blockBox))
 			return true;

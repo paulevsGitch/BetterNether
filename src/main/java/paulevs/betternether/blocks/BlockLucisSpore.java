@@ -14,7 +14,7 @@ import net.minecraft.block.Fertilizable;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -63,7 +63,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements Fertilizable
 	}
 	
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
 		return BOUNDING_SHAPES.get(state.get(FACING));
 	}

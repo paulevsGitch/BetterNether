@@ -59,9 +59,9 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 		return GenericContainerScreenHandler.createGeneric9x3(i, playerInventory, this);
 	}
 
-	public void fromTag(CompoundTag tag)
+	public void fromTag(BlockState blockState, CompoundTag tag)
 	{
-		super.fromTag(tag);
+		super.fromTag(blockState, tag);
 		this.inventory = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
 		if (!this.deserializeLootTable(tag))
 		{
