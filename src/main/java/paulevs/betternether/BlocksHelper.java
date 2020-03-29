@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.blocks.BlockFarmland;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlocksHelper
 {
@@ -34,8 +34,8 @@ public class BlocksHelper
 		Block b = state.getBlock();
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS;
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isSoulSand(BlockState state)
@@ -54,9 +54,9 @@ public class BlocksHelper
 				b == Blocks.SOUL_SOIL ||
 				b == Blocks.CRIMSON_NYLIUM ||
 				b == Blocks.WARPED_NYLIUM ||
-				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS;
+				b == BlocksRegistry.FARMLAND ||
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isNetherGroundMagma(BlockState state)
@@ -69,16 +69,16 @@ public class BlocksHelper
 				b == Blocks.CRIMSON_NYLIUM ||
 				b == Blocks.WARPED_NYLIUM ||
 				b == Blocks.MAGMA_BLOCK ||
-				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS;
+				b == BlocksRegistry.FARMLAND ||
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isBone(BlockState state)
 	{
 		Block b = state.getBlock();
 		return  b == Blocks.BONE_BLOCK ||
-				b == BlocksRegister.BONE;
+				b == BlocksRegistry.BONE;
 	}
 	
 	public static void setWithoutUpdate(IWorld world, BlockPos pos, BlockState state)

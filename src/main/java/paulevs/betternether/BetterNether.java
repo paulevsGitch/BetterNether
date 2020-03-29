@@ -2,12 +2,12 @@ package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
 import paulevs.betternether.config.Config;
-import paulevs.betternether.registers.BiomesRegister;
-import paulevs.betternether.registers.BlockEntitiesRegister;
-import paulevs.betternether.registers.BlocksRegister;
-import paulevs.betternether.registers.EntityRegister;
-import paulevs.betternether.registers.ItemsRegister;
-import paulevs.betternether.registers.SoundsRegister;
+import paulevs.betternether.registry.BiomesRegistry;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
+import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.structures.piece.StructureTypes;
 
@@ -24,14 +24,14 @@ public class BetterNether implements ModInitializer
 	{
 		Config.load();
 		initOptions();
-		SoundsRegister.register();
+		SoundsRegistry.register();
 		StructureTypes.init();
-		BlocksRegister.register();
-		BlockEntitiesRegister.register();
-		ItemsRegister.register();
-		BiomesRegister.register();
+		BlocksRegistry.register();
+		BlockEntitiesRegistry.register();
+		ItemsRegistry.register();
+		BiomesRegistry.register();
 		BNWorldGenerator.onModInit();
-		EntityRegister.register();
+		EntityRegistry.register();
 		Config.save();
 	}
 	

@@ -1,11 +1,11 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class StructureRedMold extends StructureScatter
 {
 	public StructureRedMold()
 	{
-		super(BlocksRegister.RED_MOLD);
+		super(BlocksRegistry.RED_MOLD);
 	}
 }

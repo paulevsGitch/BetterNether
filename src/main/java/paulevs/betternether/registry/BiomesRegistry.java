@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.registry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ import paulevs.betternether.biomes.OldFungiwoods;
 import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.config.Config;
 
-public class BiomesRegister
+public class BiomesRegistry
 {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	private static final HashMap<Biome, NetherBiome> LINKS = new HashMap<Biome, NetherBiome>();

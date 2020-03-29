@@ -19,7 +19,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.blocks.shapes.FoodShape;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockStalagnateBowl extends BlockBaseNotFull
 {
@@ -28,7 +28,7 @@ public class BlockStalagnateBowl extends BlockBaseNotFull
 	
 	public BlockStalagnateBowl()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.STALAGNATE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.STALAGNATE).nonOpaque().build());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(FOOD, FoodShape.NONE));
 	}

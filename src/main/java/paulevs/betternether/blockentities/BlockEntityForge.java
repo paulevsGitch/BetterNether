@@ -42,7 +42,7 @@ import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import paulevs.betternether.registers.BlockEntitiesRegister;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BlockEntityForge extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider, Tickable
 {
@@ -66,7 +66,7 @@ public class BlockEntityForge extends LockableContainerBlockEntity implements Si
 
 	public BlockEntityForge(int speed)
 	{
-		super(BlockEntitiesRegister.CINCINNASITE_FORGE);
+		super(BlockEntitiesRegistry.CINCINNASITE_FORGE);
 		this.speed = speed;
 		this.inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 		this.propertyDelegate = new PropertyDelegate()

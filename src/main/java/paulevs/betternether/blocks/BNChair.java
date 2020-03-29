@@ -21,7 +21,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.entity.EntityChair;
-import paulevs.betternether.registers.EntityRegister;
+import paulevs.betternether.registry.EntityRegistry;
 
 public class BNChair extends BlockBaseNotFull
 {
@@ -75,7 +75,7 @@ public class BNChair extends BlockBaseNotFull
 			
 			float yaw = state.get(FACING).getOpposite().asRotation();
 			
-			EntityChair entity = new EntityChair(EntityRegister.CHAIR, world);
+			EntityChair entity = new EntityChair(EntityRegistry.CHAIR, world);
 			entity.setNoGravity(true);
 			entity.setSilent(true);
 			entity.setInvisible(true);

@@ -1,11 +1,11 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.registry;
 
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
 
-public class SoundsRegister
+public class SoundsRegistry
 {
 	public static final SoundEvent AMBIENT_MUSHROOM_FOREST = register("betternether.ambient.mushroom_forest");
 	

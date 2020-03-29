@@ -16,7 +16,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.blocks.BlockNetherMycelium;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
 import paulevs.betternether.structures.plants.StructureMedRedMushroom;
 
@@ -36,7 +36,7 @@ public abstract class MushroomMixin
 	@Inject(method = "grow", at = @At(value = "HEAD"), cancellable = true)
 	private void growStructure(ServerWorld world, Random random, BlockPos pos, BlockState state, CallbackInfo info)
 	{
-		if (world.getBlockState(pos.down()).getBlock() == BlocksRegister.NETHER_MYCELIUM)
+		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM)
 		{
 			if (state.getBlock() == Blocks.RED_MUSHROOM)
 			{

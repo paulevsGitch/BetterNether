@@ -8,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
-import paulevs.betternether.registers.SoundsRegister;
+import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureGiantMold;
 import paulevs.betternether.structures.plants.StructureGrayMold;
@@ -29,7 +29,7 @@ public class NetherMushroomForest extends NetherBiome
 	{
 		super(new BiomeDefenition(name)
 				.setColor(166, 38, 95)
-				.setLoop(SoundsRegister.AMBIENT_MUSHROOM_FOREST)
+				.setLoop(SoundsRegistry.AMBIENT_MUSHROOM_FOREST)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setParticleConfig(new BiomeParticleConfig(
 						ParticleTypes.MYCELIUM,
@@ -54,6 +54,6 @@ public class NetherMushroomForest extends NetherBiome
 	@Override
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHER_MYCELIUM.getDefaultState());
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.getDefaultState());
 	}
 }

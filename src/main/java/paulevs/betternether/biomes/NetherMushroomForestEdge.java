@@ -7,7 +7,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureGrayMold;
 import paulevs.betternether.structures.plants.StructureOrangeMushroom;
@@ -39,7 +39,7 @@ public class NetherMushroomForestEdge extends NetherBiome
 		case 1:
 			break;
 		default:
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHER_MYCELIUM.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.getDefaultState());
 			break;
 		}
 		for (int i = 1; i < random.nextInt(3); i++)

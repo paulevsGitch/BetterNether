@@ -6,7 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class NetherSwamplandTerraces extends NetherSwampland
 {
@@ -23,7 +23,7 @@ public class NetherSwamplandTerraces extends NetherSwampland
 		else if (random.nextInt(3) > 0)
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
 		else if (random.nextBoolean())
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHERRACK_MOSS.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
 		for (int i = 1; i < random.nextInt(3); i++)
 		{
 			BlockPos down = pos.down(i);

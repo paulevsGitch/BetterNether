@@ -18,7 +18,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockSmallLantern extends BlockBaseNotFull
 {
@@ -33,7 +33,7 @@ public class BlockSmallLantern extends BlockBaseNotFull
 	
 	public BlockSmallLantern()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_LANTERN).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_LANTERN).nonOpaque().build());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.DOWN));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

@@ -10,7 +10,7 @@ import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom.BrownMushroomShape;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureMedBrownMushroom implements IStructure
@@ -21,7 +21,7 @@ public class StructureMedBrownMushroom implements IStructure
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
 		Block under;
-		if (world.getBlockState(pos.down()).getBlock() == BlocksRegister.NETHER_MYCELIUM)
+		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM)
 		{
 			for (int i = 0; i < 10; i++)
 			{
@@ -43,7 +43,7 @@ public class StructureMedBrownMushroom implements IStructure
 				{
 					POS.set(x, y - j, z);
 					under = world.getBlockState(POS.down()).getBlock();
-					if (under == BlocksRegister.NETHER_MYCELIUM)
+					if (under == BlocksRegistry.NETHER_MYCELIUM)
 					{
 						grow(world, POS, random);
 					}
@@ -69,50 +69,50 @@ public class StructureMedBrownMushroom implements IStructure
 				hasAir = hasAir && world.isAir(pos.up(size).add(x, 0, z));
 		if (hasAir)
 		{
-			BlockState middle = BlocksRegister
+			BlockState middle = BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.MIDDLE);
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.BOTTOM));
 			for (int y = 1; y < size; y++)
 				BlocksHelper.setWithoutUpdate(world, pos.up(y), middle);
 			pos = pos.up(size);
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.TOP));
-			BlocksHelper.setWithoutUpdate(world, pos.north(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.north(), BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.SIDE_N));
-			BlocksHelper.setWithoutUpdate(world, pos.south(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.south(), BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.SIDE_S));
-			BlocksHelper.setWithoutUpdate(world, pos.east(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.east(), BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.SIDE_E));
-			BlocksHelper.setWithoutUpdate(world, pos.west(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.west(), BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.SIDE_W));
-			BlocksHelper.setWithoutUpdate(world, pos.north().east(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.north().east(), BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.CORNER_N));
-			BlocksHelper.setWithoutUpdate(world, pos.north().west(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.north().west(), BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.CORNER_W));
-			BlocksHelper.setWithoutUpdate(world, pos.south().east(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.south().east(), BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.CORNER_E));
-			BlocksHelper.setWithoutUpdate(world, pos.south().west(), BlocksRegister
+			BlocksHelper.setWithoutUpdate(world, pos.south().west(), BlocksRegistry
 					.BROWN_LARGE_MUSHROOM
 					.getDefaultState()
 					.with(BlockBrownLargeMushroom.SHAPE, BrownMushroomShape.CORNER_S));

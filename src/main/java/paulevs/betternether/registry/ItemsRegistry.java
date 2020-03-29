@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.registry;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ import paulevs.betternether.items.ItemBowlFood;
 import paulevs.betternether.items.materials.BNItemMaterials;
 import paulevs.betternether.tab.CreativeTab;
 
-public class ItemsRegister
+public class ItemsRegistry
 {
 	public static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
 	public static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
@@ -58,7 +58,7 @@ public class ItemsRegister
 	public static final Item CINCINNASITE_SWORD = registerItem("cincinnasite_sword", new BNSword(BNItemMaterials.CINCINNASITE_TOOLS, 512, 4, -2.4F));
 	public static final Item CINCINNASITE_SWORD_DIAMOND = registerItem("cincinnasite_sword_diamond", new BNSword(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 5, -2.4F));
 	
-	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg(EntityRegister.FIREFLY, color(255, 223, 168), color(233, 182, 95)));
+	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg(EntityRegistry.FIREFLY, color(255, 223, 168), color(233, 182, 95)));
 
 	public static void register() {}
 	

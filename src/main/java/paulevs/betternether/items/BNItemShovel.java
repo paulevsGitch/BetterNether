@@ -4,7 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ToolMaterial;
-import paulevs.betternether.registers.ItemsRegister;
+import paulevs.betternether.registry.ItemsRegistry;
 
 public class BNItemShovel extends ShovelItem
 {
@@ -12,7 +12,7 @@ public class BNItemShovel extends ShovelItem
 	
 	public BNItemShovel(ToolMaterial material, int durability, float speed)
 	{
-		super(material, 1, -2.8F, ItemsRegister.defaultSettings().fireproof());
+		super(material, 1, -2.8F, ItemsRegistry.defaultSettings().fireproof());
 		this.speed = speed;
 	}
 	

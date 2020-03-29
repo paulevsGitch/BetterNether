@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.registry;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,12 +9,12 @@ import paulevs.betternether.entity.render.RenderChair;
 import paulevs.betternether.entity.render.RenderFirefly;
 
 @Environment(EnvType.CLIENT)
-public class EntityRenderRegister
+public class EntityRenderRegistry
 {
 	public static void register()
 	{
-		registerRender(EntityRegister.FIREFLY, RenderFirefly.class);
-		registerRender(EntityRegister.CHAIR, RenderChair.class);
+		registerRender(EntityRegistry.FIREFLY, RenderFirefly.class);
+		registerRender(EntityRegistry.CHAIR, RenderChair.class);
 	}
 
 	private static void registerRender(EntityType<?> entity, Class<? extends MobEntityRenderer<?, ?>> renderer)

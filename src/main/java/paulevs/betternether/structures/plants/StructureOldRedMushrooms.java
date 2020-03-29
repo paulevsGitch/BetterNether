@@ -3,7 +3,7 @@ package paulevs.betternether.structures.plants;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureObjScatter;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.StructureWorld;
@@ -27,7 +27,7 @@ public class StructureOldRedMushrooms extends StructureObjScatter
 	
 	protected boolean isGround(BlockState state)
 	{
-		return state.getBlock() == BlocksRegister.NETHER_MYCELIUM || BlocksHelper.isNetherGround(state);
+		return state.getBlock() == BlocksRegistry.NETHER_MYCELIUM || BlocksHelper.isNetherGround(state);
 	}
 	
 	protected boolean isStructure(BlockState state)

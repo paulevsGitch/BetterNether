@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureSoulVein implements IStructure
@@ -16,7 +16,7 @@ public class StructureSoulVein implements IStructure
 	
 	private boolean canPlaceAt(IWorld world, BlockPos pos)
 	{
-		return BlocksRegister.SOUL_VEIN.canPlaceAt(BlocksRegister.SOUL_VEIN.getDefaultState(), world, pos);
+		return BlocksRegistry.SOUL_VEIN.canPlaceAt(BlocksRegistry.SOUL_VEIN.getDefaultState(), world, pos);
 	}
 	
 	@Override
@@ -24,8 +24,8 @@ public class StructureSoulVein implements IStructure
 	{
 		if (world.isAir(pos) && canPlaceAt(world, pos))
 		{
-			BlockState state = BlocksRegister.SOUL_VEIN.getDefaultState();
-			BlockState sand = BlocksRegister.VEINED_SAND.getDefaultState();
+			BlockState state = BlocksRegistry.SOUL_VEIN.getDefaultState();
+			BlockState sand = BlocksRegistry.VEINED_SAND.getDefaultState();
 			int x1 = pos.getX() - 1;
 			int x2 = pos.getX() + 1;
 			int z1 = pos.getZ() - 1;

@@ -7,13 +7,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasiteFrame extends BlockBaseNotFull
 {
 	public BlockCincinnasiteFrame()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().build());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	

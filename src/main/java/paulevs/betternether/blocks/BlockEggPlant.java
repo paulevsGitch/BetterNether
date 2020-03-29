@@ -19,7 +19,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.config.Config;
-import paulevs.betternether.registers.EntityRegister;
+import paulevs.betternether.registry.EntityRegistry;
 
 public class BlockEggPlant extends BlockCommonPlant
 {
@@ -58,7 +58,7 @@ public class BlockEggPlant extends BlockCommonPlant
 	{
 		if (enableModDamage && entity instanceof LivingEntity && !((LivingEntity) entity).hasStatusEffect(StatusEffects.POISON))
 		{
-			if (EntityRegister.isNetherEntity(entity))
+			if (EntityRegistry.isNetherEntity(entity))
 				((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 3));
 		}
 		else if (enablePlayerDamage && entity instanceof PlayerEntity && !((PlayerEntity) entity).hasStatusEffect(StatusEffects.POISON))

@@ -1,11 +1,11 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class StructureBloomingVine extends StructureVine
 {
 	public StructureBloomingVine()
 	{
-		super(BlocksRegister.BLOOMING_VINE);
+		super(BlocksRegistry.BLOOMING_VINE);
 	}
 }

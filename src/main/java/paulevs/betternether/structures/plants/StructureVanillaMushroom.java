@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureVanillaMushroom implements IStructure
@@ -17,7 +17,7 @@ public class StructureVanillaMushroom implements IStructure
 	
 	private boolean canPlaceAt(IWorld world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.NETHER_MYCELIUM;
+		return world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM;
 	}
 	
 	@Override

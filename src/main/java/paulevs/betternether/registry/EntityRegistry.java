@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.registry;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,7 +18,7 @@ import paulevs.betternether.IBiome;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.EntityFirefly;
 
-public class EntityRegister
+public class EntityRegistry
 {
 	private static final List<EntityType<?>> NETHER_ENTITIES = new ArrayList<EntityType<?>>();
 	private static final Biome[] NETHER_BIOMES;

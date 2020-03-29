@@ -16,7 +16,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
 import paulevs.betternether.structures.plants.StructureMedRedMushroom;
 
@@ -34,7 +34,7 @@ public abstract class NetherWartMixin extends PlantBlock
 	@Inject(method = "canPlantOnTop", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void canStay(BlockState floor, BlockView view, BlockPos pos, CallbackInfoReturnable<Boolean> info)
 	{
-		if (floor.getBlock() == BlocksRegister.FARMLAND)
+		if (floor.getBlock() == BlocksRegistry.FARMLAND)
 			info.setReturnValue(true);
     }
 

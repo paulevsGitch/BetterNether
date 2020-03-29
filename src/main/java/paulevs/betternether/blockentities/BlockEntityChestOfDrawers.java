@@ -1,5 +1,8 @@
 package paulevs.betternether.blockentities;
 
+import java.util.List;
+
+import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -11,12 +14,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockChestOfDrawers;
-import paulevs.betternether.registers.BlockEntitiesRegister;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 {
@@ -25,7 +33,7 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 	
 	public BlockEntityChestOfDrawers()
 	{
-		super(BlockEntitiesRegister.CHEST_OF_DRAWERS);
+		super(BlockEntitiesRegistry.CHEST_OF_DRAWERS);
 		this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
 	}
 
@@ -87,6 +95,10 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 			{
 				this.watchers = 0;
 			}
+			if (this.watchers == 0)
+			{
+				this.playSound(this.getCachedState(), SoundEvents.BLOCK_BARREL_OPEN);
+			}
 
 			++this.watchers;
 			this.onInvOpenOrClose();
@@ -118,6 +130,21 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 				BlocksHelper.setWithoutUpdate((ServerWorld) world, pos, state.with(BlockChestOfDrawers.OPEN, false));
 			}
 		}
+	}
+	
+	private void playSound(BlockState blockState, SoundEvent soundEvent)
+	{
+	      Vec3i vec3i = ((Direction)blockState.get(BarrelBlock.FACING)).getVector();
+	      double d = (double)this.pos.getX() + 0.5D + (double)vec3i.getX() / 2.0D;
+	      double e = (double)this.pos.getY() + 0.5D + (double)vec3i.getY() / 2.0D;
+	      double f = (double)this.pos.getZ() + 0.5D + (double)vec3i.getZ() / 2.0D;
+	      this.world.playSound((PlayerEntity)null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+	   }
 
+	public void addItemsToList(List<ItemStack> items)
+	{
+		for (ItemStack item: inventory)
+			if (item != null)
+				items.add(item);
 	}
 }

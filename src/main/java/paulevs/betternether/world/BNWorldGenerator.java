@@ -27,8 +27,8 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.IBiomeArray;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
-import paulevs.betternether.registers.BiomesRegister;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BiomesRegistry;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.world.structures.CityFeature;
 
@@ -171,7 +171,7 @@ public class BNWorldGenerator
 		if (biome instanceof NetherBiome)
 			return (NetherBiome) biome;
 		else
-			return BiomesRegister.BIOME_EMPTY_NETHER;
+			return BiomesRegistry.BIOME_EMPTY_NETHER;
 	}
 	
 	private static int clamp(int x, int max)
@@ -232,7 +232,7 @@ public class BNWorldGenerator
 					for (int z = 0; z < 8; z++)
 					{
 						Biome b = chunk.getBiomeArray().getBiomeForNoiseGen(x >> 1, y >> 1, z >> 1);
-						BIOMES[x][y][z] = BiomesRegister.getFromBiome(b);
+						BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
 					}
 		}
 		return useCustomBiomes;
@@ -345,7 +345,7 @@ public class BNWorldGenerator
 							}
 						}
 						if (random.nextFloat() < oreDensity)
-							spawnOre(BlocksRegister.CINCINNASITE_ORE.getDefaultState(), world, popPos, random);
+							spawnOre(BlocksRegistry.CINCINNASITE_ORE.getDefaultState(), world, popPos, random);
 					}
 				}
 			}

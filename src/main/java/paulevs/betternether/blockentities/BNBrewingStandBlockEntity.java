@@ -27,7 +27,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import paulevs.betternether.blocks.BNBrewingStand;
-import paulevs.betternether.registers.BlockEntitiesRegister;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity implements SidedInventory, Tickable
 {
@@ -43,7 +43,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 	public BNBrewingStandBlockEntity()
 	{
-		super(BlockEntitiesRegister.NETHER_BREWING_STAND);
+		super(BlockEntitiesRegistry.NETHER_BREWING_STAND);
 		this.inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
 		this.propertyDelegate = new PropertyDelegate()
 		{

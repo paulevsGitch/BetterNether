@@ -11,16 +11,16 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureCrystal implements IStructure
 {
 	private static final Block[] PALETTES = new Block[] {
-			BlocksRegister.OBSIDIAN_GLASS,
+			BlocksRegistry.OBSIDIAN_GLASS,
 			Blocks.OBSIDIAN,
-			BlocksRegister.BLUE_OBSIDIAN_GLASS,
-			BlocksRegister.BLUE_OBSIDIAN
+			BlocksRegistry.BLUE_OBSIDIAN_GLASS,
+			BlocksRegistry.BLUE_OBSIDIAN
 	};
 	private static final double SQRT05 = Math.sqrt(0.5);
 	private static final Mutable POS = new Mutable();

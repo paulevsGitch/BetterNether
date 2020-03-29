@@ -42,8 +42,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.registers.BlocksRegister;
-import paulevs.betternether.registers.EntityRegister;
+import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.EntityRegistry;
 
 public class EntityFirefly extends AnimalEntity implements Flutterer
 {
@@ -79,16 +79,16 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		SERCH = points.toArray(new Vec3i[] {});
 		
 		FLOWERS = new HashSet<Block>();
-		FLOWERS.add(BlocksRegister.NETHER_GRASS);
-		FLOWERS.add(BlocksRegister.SOUL_GRASS);
-		FLOWERS.add(BlocksRegister.SWAMP_GRASS);
-		FLOWERS.add(BlocksRegister.BLACK_APPLE);
-		FLOWERS.add(BlocksRegister.MAGMA_FLOWER);
-		FLOWERS.add(BlocksRegister.SOUL_VEIN);
-		FLOWERS.add(BlocksRegister.NETHER_REED);
-		FLOWERS.add(BlocksRegister.INK_BUSH);
-		FLOWERS.add(BlocksRegister.INK_BUSH_SEED);
-		FLOWERS.add(BlocksRegister.POTTED_PLANT);
+		FLOWERS.add(BlocksRegistry.NETHER_GRASS);
+		FLOWERS.add(BlocksRegistry.SOUL_GRASS);
+		FLOWERS.add(BlocksRegistry.SWAMP_GRASS);
+		FLOWERS.add(BlocksRegistry.BLACK_APPLE);
+		FLOWERS.add(BlocksRegistry.MAGMA_FLOWER);
+		FLOWERS.add(BlocksRegistry.SOUL_VEIN);
+		FLOWERS.add(BlocksRegistry.NETHER_REED);
+		FLOWERS.add(BlocksRegistry.INK_BUSH);
+		FLOWERS.add(BlocksRegistry.INK_BUSH_SEED);
+		FLOWERS.add(BlocksRegistry.POTTED_PLANT);
 		FLOWERS.add(Blocks.NETHER_WART);
 	}
 
@@ -136,7 +136,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 				{
 					state = this.world.getBlockState(pos);
 					valid = state.isAir() || !state.getMaterial().blocksMovement();
-					valid = valid && state.getBlock() != BlocksRegister.EGG_PLANT;
+					valid = valid && state.getBlock() != BlocksRegistry.EGG_PLANT;
 					valid = valid && !state.getMaterial().blocksMovement();
 				}
 				return valid;
@@ -271,7 +271,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	@Override
 	public PassiveEntity createChild(PassiveEntity mate)
 	{
-		return EntityRegister.FIREFLY.create(world);
+		return EntityRegistry.FIREFLY.create(world);
 	}
 
 	class FreflyLookControl extends LookControl

@@ -11,7 +11,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLucisMushroom;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureLucis extends Object implements IStructure
@@ -21,9 +21,9 @@ public class StructureLucis extends Object implements IStructure
 	{
 		if (canGenerate(world, pos))
 		{
-			BlockState center = BlocksRegister.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CENTER);
-			BlockState side = BlocksRegister.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.SIDE);
-			BlockState corner = BlocksRegister.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CORNER);
+			BlockState center = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CENTER);
+			BlockState side = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.SIDE);
+			BlockState corner = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CORNER);
 
 			if (random.nextInt(3) == 0)
 			{
@@ -75,7 +75,7 @@ public class StructureLucis extends Object implements IStructure
 	private boolean canReplace(BlockState state)
 	{
 		Block b = state.getBlock();
-		return b == Blocks.AIR || b == BlocksRegister.LUCIS_SPORE;
+		return b == Blocks.AIR || b == BlocksRegistry.LUCIS_SPORE;
 	}
 
 	private boolean canGenerate(IWorld world, BlockPos pos)

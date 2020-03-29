@@ -7,7 +7,7 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasitePedestal extends BlockBaseNotFull
 {
@@ -15,7 +15,7 @@ public class BlockCincinnasitePedestal extends BlockBaseNotFull
 	
 	public BlockCincinnasitePedestal()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().build());
 	}
 
 	@Override
