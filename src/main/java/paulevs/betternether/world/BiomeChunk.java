@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.registers.BiomesRegister;
+import paulevs.betternether.registry.BiomesRegistry;
 
 public class BiomeChunk
 {
@@ -13,7 +13,7 @@ public class BiomeChunk
 	private static final int MASK_A = SM_WIDTH - 1;
 	private static final int MASK_C = WIDTH - 1;
 	private static final ArrayList<NetherBiome> SURROUNDING = new ArrayList<NetherBiome>(6);
-	private static final ArrayList<NetherBiome> BIOME_NO_REPEATS = new ArrayList<NetherBiome>(BiomesRegister.getBiomeCount());
+	private static final ArrayList<NetherBiome> BIOME_NO_REPEATS = new ArrayList<NetherBiome>(BiomesRegistry.getBiomeCount());
 	
 	private final int sm_height;
 	private final int maxY;
@@ -32,7 +32,7 @@ public class BiomeChunk
 		for (int y = 0; y < sm_height; y++)
 			for (int x = 0; x < SM_WIDTH; x++)
 				for (int z = 0; z < SM_WIDTH; z++)
-					PreBio[y][x][z] = BiomesRegister.getBiome(random);
+					PreBio[y][x][z] = BiomesRegistry.getBiome(random);
 		
 		for (int y = 0; y < sm_height; y++)
 			for (int x = 0; x < SM_WIDTH; x++)
@@ -90,7 +90,7 @@ public class BiomeChunk
 	
 	private NetherBiome getNonRepeat(Random random, NetherBiome center)
 	{
-		BIOME_NO_REPEATS.addAll(BiomesRegister.getBiomesList());
+		BIOME_NO_REPEATS.addAll(BiomesRegistry.getBiomesList());
 		BIOME_NO_REPEATS.removeAll(SURROUNDING);
 		NetherBiome result = center;
 		if (!BIOME_NO_REPEATS.isEmpty())

@@ -1,12 +1,12 @@
 package paulevs.betternether.structures.plants;
 
 import paulevs.betternether.blocks.BlockCommonPlant;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class StructureInkBush extends StructureScatter
 {
 	public StructureInkBush()
 	{
-		super(BlocksRegister.INK_BUSH, BlockCommonPlant.AGE, 4);
+		super(BlocksRegistry.INK_BUSH, BlockCommonPlant.AGE, 4);
 	}
 }

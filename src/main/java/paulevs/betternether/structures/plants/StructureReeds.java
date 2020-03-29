@@ -7,16 +7,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherReed;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureReeds implements IStructure
 {
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
-		if (world.isAir(pos) && BlocksRegister.NETHER_REED.canPlaceAt(world.getBlockState(pos), world, pos))
+		if (world.isAir(pos) && BlocksRegistry.NETHER_REED.canPlaceAt(world.getBlockState(pos), world, pos))
 		{
-			BlockState med = BlocksRegister.NETHER_REED.getDefaultState().with(BlockNetherReed.TOP, false);
+			BlockState med = BlocksRegistry.NETHER_REED.getDefaultState().with(BlockNetherReed.TOP, false);
 			int h = random.nextInt(3);
 			for (int i = 0; i < h; i++)
 			{
@@ -28,12 +28,12 @@ public class StructureReeds implements IStructure
 						BlocksHelper.setWithoutUpdate(world, posN, med);
 					else
 					{
-						BlocksHelper.setWithoutUpdate(world, posN, BlocksRegister.NETHER_REED.getDefaultState());
+						BlocksHelper.setWithoutUpdate(world, posN, BlocksRegistry.NETHER_REED.getDefaultState());
 						return;
 					}
 				}
 			}
-			BlocksHelper.setWithoutUpdate(world, pos.up(h), BlocksRegister.NETHER_REED.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos.up(h), BlocksRegistry.NETHER_REED.getDefaultState());
 		}
 	}
 }

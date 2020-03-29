@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.registry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +9,13 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.Potions;
 
-public class BrewingRegister
+public class BrewingRegistry
 {
 	private static final List<PotionRecipe> RECIPES = new ArrayList<PotionRecipe>();
 	
 	public static void register()
 	{
-		registerBrewingRecipe(BlocksRegister.BARREL_CACTUS.asItem(), Items.GLASS_BOTTLE, Potions.WATER);
+		registerBrewingRecipe(BlocksRegistry.BARREL_CACTUS.asItem(), Items.GLASS_BOTTLE, Potions.WATER);
 	}
 	
 	public static void registerBrewingRecipe(Item source, Item potion, Potion result)

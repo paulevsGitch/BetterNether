@@ -1,5 +1,7 @@
 package paulevs.betternether.blockentities;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -16,7 +18,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.DefaultedList;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockChestOfDrawers;
-import paulevs.betternether.registers.BlockEntitiesRegister;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 {
@@ -25,7 +27,7 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 	
 	public BlockEntityChestOfDrawers()
 	{
-		super(BlockEntitiesRegister.CHEST_OF_DRAWERS);
+		super(BlockEntitiesRegistry.CHEST_OF_DRAWERS);
 		this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
 	}
 
@@ -119,5 +121,12 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 			}
 		}
 
+	}
+	
+	public void addItemsToList(List<ItemStack> items)
+	{
+		for (ItemStack item: inventory)
+			if (item != null)
+				items.add(item);
 	}
 }

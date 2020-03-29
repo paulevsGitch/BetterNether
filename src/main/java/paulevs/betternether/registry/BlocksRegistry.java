@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.registry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -43,6 +43,7 @@ import paulevs.betternether.blocks.BlockChestOfDrawers;
 import paulevs.betternether.blocks.BlockCincinnasitPillar;
 import paulevs.betternether.blocks.BlockCincinnasite;
 import paulevs.betternether.blocks.BlockCincinnasiteFireBowl;
+import paulevs.betternether.blocks.BlockCincinnasiteForge;
 import paulevs.betternether.blocks.BlockCincinnasiteFrame;
 import paulevs.betternether.blocks.BlockCincinnasiteLantern;
 import paulevs.betternether.blocks.BlockCincinnasiteOre;
@@ -97,11 +98,10 @@ import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
-import paulevs.betternether.blocks.CincinnasiteForge;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 
-public class BlocksRegister
+public class BlocksRegistry
 {
 	// Stalagnate //
 	public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
@@ -431,8 +431,8 @@ public class BlocksRegister
 	public static final Block ROOF_TILE_WART_SLAB = registerBlock("roof_tile_wart_slab", new BNSlab(ROOF_TILE_WART));
 	
 	// Craft Stations //
-	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new CincinnasiteForge());
 	public static final Block NETHERRACK_FURNACE = registerBlock("netherrack_furnace", new BlockNetherrackFurnace());
+	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new BlockCincinnasiteForge());
 	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
 	
 	// Taburets //
@@ -494,7 +494,7 @@ public class BlocksRegister
 		if (Config.getBoolean("blocks", name, true))
 		{
 			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
-			ItemsRegister.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
+			ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
 		}
 		return block;
 	}

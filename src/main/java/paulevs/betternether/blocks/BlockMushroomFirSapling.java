@@ -20,7 +20,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.plants.StructureMushroomFir;
 
 public class BlockMushroomFirSapling extends BlockBaseNotFull implements Fertilizable
@@ -51,7 +51,7 @@ public class BlockMushroomFirSapling extends BlockBaseNotFull implements Fertili
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.NETHER_MYCELIUM;
+		return world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM;
 	}
 	
 	@Override

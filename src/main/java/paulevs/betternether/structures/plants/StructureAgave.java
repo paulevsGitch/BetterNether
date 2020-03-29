@@ -1,11 +1,11 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class StructureAgave extends StructureScatter
 {
 	public StructureAgave()
 	{
-		super(BlocksRegister.AGAVE);
+		super(BlocksRegistry.AGAVE);
 	}
 }

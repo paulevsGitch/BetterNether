@@ -10,7 +10,7 @@ import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLily.SoulLilyShape;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureSoulLily implements IStructure
@@ -66,48 +66,48 @@ public class StructureSoulLily implements IStructure
 	
 	public void growSmall(IWorld world, BlockPos pos)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.SOUL_LILY.getDefaultState());
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SOUL_LILY.getDefaultState());
 	}
 	
 	public void growMedium(IWorld world, BlockPos pos)
 	{
 		BlocksHelper.setWithoutUpdate(world, pos,
-				BlocksRegister.SOUL_LILY
+				BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_BOTTOM));
 		BlocksHelper.setWithoutUpdate(world, pos.up(),
-				BlocksRegister.SOUL_LILY
+				BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_TOP));
 	}
 	
 	public void growBig(IWorld world, BlockPos pos)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.SOUL_LILY
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_BOTTOM));
 		BlocksHelper.setWithoutUpdate(world, pos.up(),
-				BlocksRegister.SOUL_LILY
+				BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_MIDDLE));
 		BlockPos up = pos.up(2);
 		BlocksHelper.setWithoutUpdate(world, up,
-				BlocksRegister.SOUL_LILY
+				BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_CENTER));
-		BlocksHelper.setWithoutUpdate(world, up.north(), BlocksRegister.SOUL_LILY
+		BlocksHelper.setWithoutUpdate(world, up.north(), BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_S));
 		BlocksHelper.setWithoutUpdate(world, up.south(),
-				BlocksRegister.SOUL_LILY
+				BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_N));
 		BlocksHelper.setWithoutUpdate(world, up.east(),
-				BlocksRegister.SOUL_LILY
+				BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_W));
 		BlocksHelper.setWithoutUpdate(world, up.west(),
-				BlocksRegister.SOUL_LILY
+				BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_E));
 	}

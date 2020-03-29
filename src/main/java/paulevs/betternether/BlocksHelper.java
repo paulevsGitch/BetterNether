@@ -18,7 +18,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.blocks.BlockFarmland;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlocksHelper
 {
@@ -54,8 +54,8 @@ public class BlocksHelper
 		Block b = state.getBlock();
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS;
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isSoulSand(BlockState state)
@@ -70,9 +70,9 @@ public class BlocksHelper
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
-				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS;
+				b == BlocksRegistry.FARMLAND ||
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isNetherGroundMagma(BlockState state)
@@ -82,16 +82,16 @@ public class BlocksHelper
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
 				b == Blocks.MAGMA_BLOCK ||
-				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS;
+				b == BlocksRegistry.FARMLAND ||
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isBone(BlockState state)
 	{
 		Block b = state.getBlock();
 		return  b == Blocks.BONE_BLOCK ||
-				b == BlocksRegister.BONE;
+				b == BlocksRegistry.BONE;
 	}
 	
 	public static boolean isGroundOrModContent(BlockState state)
@@ -100,9 +100,9 @@ public class BlocksHelper
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
-				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS ||
+				b == BlocksRegistry.FARMLAND ||
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS ||
 				Registry.BLOCK.getId(b).getNamespace().equals(BetterNether.MOD_ID);
 	}
 	

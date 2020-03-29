@@ -16,7 +16,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.biomes.NetherSoulPlain;
 import paulevs.betternether.biomes.NetherSwampland;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 
 @Mixin(BoneMealItem.class)
@@ -77,10 +77,10 @@ public class GrassGrowMixin
 	{
 		NetherBiome biome = BNWorldGenerator.getBiome(pos.getX(), pos.getY(), pos.getZ());
 		if (biome instanceof NetherSwampland)
-			return BlocksRegister.SWAMP_GRASS.getDefaultState();
+			return BlocksRegistry.SWAMP_GRASS.getDefaultState();
 		else if (biome instanceof NetherSoulPlain)
-			return BlocksRegister.SOUL_GRASS.getDefaultState();
+			return BlocksRegistry.SOUL_GRASS.getDefaultState();
 		else
-			return BlocksRegister.NETHER_GRASS.getDefaultState();
+			return BlocksRegistry.NETHER_GRASS.getDefaultState();
 	}
 }

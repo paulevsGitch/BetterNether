@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.registry;
 
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -10,12 +10,12 @@ import paulevs.betternether.blockentities.BlockEntityChestOfDrawers;
 import paulevs.betternether.blockentities.BlockEntityForge;
 import paulevs.betternether.blockentities.BlockEntityFurnace;
 
-public class BlockEntitiesRegister
+public class BlockEntitiesRegistry
 {
-	public static final BlockEntityType<?> CINCINNASITE_FORGE = BlockEntityType.Builder.create(BlockEntityForge::new, BlocksRegister.CINCINNASITE_FORGE).build(null);
-	public static final BlockEntityType<?> NETHERRACK_FURNACE = BlockEntityType.Builder.create(BlockEntityFurnace::new, BlocksRegister.NETHERRACK_FURNACE).build(null);
-	public static final BlockEntityType<?> CHEST_OF_DRAWERS = BlockEntityType.Builder.create(BlockEntityChestOfDrawers::new, BlocksRegister.CHEST_OF_DRAWERS).build(null);
-	public static final BlockEntityType<?> NETHER_BREWING_STAND = BlockEntityType.Builder.create(BNBrewingStandBlockEntity::new, BlocksRegister.NETHER_BREWING_STAND).build(null);
+	public static final BlockEntityType<?> CINCINNASITE_FORGE = BlockEntityType.Builder.create(BlockEntityForge::new, BlocksRegistry.CINCINNASITE_FORGE).build(null);
+	public static final BlockEntityType<?> NETHERRACK_FURNACE = BlockEntityType.Builder.create(BlockEntityFurnace::new, BlocksRegistry.NETHERRACK_FURNACE).build(null);
+	public static final BlockEntityType<?> CHEST_OF_DRAWERS = BlockEntityType.Builder.create(BlockEntityChestOfDrawers::new, BlocksRegistry.CHEST_OF_DRAWERS).build(null);
+	public static final BlockEntityType<?> NETHER_BREWING_STAND = BlockEntityType.Builder.create(BNBrewingStandBlockEntity::new, BlocksRegistry.NETHER_BREWING_STAND).build(null);
 	
 	public static void register()
 	{

@@ -1,4 +1,4 @@
-package paulevs.betternether.registers;
+package paulevs.betternether.registry;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,7 +20,7 @@ import paulevs.betternether.biomes.NetherWartForest;
 import paulevs.betternether.biomes.NetherWartForestEdge;
 import paulevs.betternether.config.Config;
 
-public class BiomesRegister
+public class BiomesRegistry
 {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	

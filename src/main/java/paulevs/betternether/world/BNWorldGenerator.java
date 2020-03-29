@@ -23,7 +23,7 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.world.structures.CityFeature;
 
@@ -266,7 +266,7 @@ public class BNWorldGenerator
 							}
 						}
 						if (random.nextFloat() < oreDensity)
-							spawnOre(BlocksRegister.CINCINNASITE_ORE.getDefaultState(), world, popPos, random);
+							spawnOre(BlocksRegistry.CINCINNASITE_ORE.getDefaultState(), world, popPos, random);
 					}
 				}
 			}

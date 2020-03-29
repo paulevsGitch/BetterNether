@@ -23,7 +23,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockPottedPlant extends BlockBaseNotFull
 {
@@ -61,7 +61,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.CINCINNASITE_POT;
+		return world.getBlockState(pos.down()).getBlock() == BlocksRegistry.CINCINNASITE_POT;
 	}
 
 	@Override
@@ -85,27 +85,27 @@ public class BlockPottedPlant extends BlockBaseNotFull
 		for (PottedPlantShape shape: PottedPlantShape.values())
 		{
 			if (shape.getItem().equals(item))
-				return BlocksRegister.POTTED_PLANT.getDefaultState().with(PLANT, shape);
+				return BlocksRegistry.POTTED_PLANT.getDefaultState().with(PLANT, shape);
 		}
 		return null;
 	}
 	
 	public static enum PottedPlantShape implements StringIdentifiable
 	{
-		AGAVE(BlocksRegister.AGAVE),
-		BARREL_CACTUS(BlocksRegister.BARREL_CACTUS),
-		BLACK_APPLE(BlocksRegister.BLACK_APPLE_SEED),
-		BLACK_BUSH(BlocksRegister.BLACK_BUSH),
-		EGG_PLANT(BlocksRegister.EGG_PLANT),
-		INK_BUSH(BlocksRegister.INK_BUSH_SEED),
-		REEDS(BlocksRegister.NETHER_REED),
-		NETHER_CACTUS(BlocksRegister.NETHER_CACTUS),
-		NETHER_GRASS(BlocksRegister.NETHER_GRASS),
-		ORANGE_MUSHROOM(BlocksRegister.ORANGE_MUSHROOM),
-		RED_MOLD(BlocksRegister.RED_MOLD),
-		GRAY_MOLD(BlocksRegister.GRAY_MOLD),
-		MAGMA_FLOWER(BlocksRegister.MAGMA_FLOWER),
-		NETHER_WART(BlocksRegister.WART_SEED);
+		AGAVE(BlocksRegistry.AGAVE),
+		BARREL_CACTUS(BlocksRegistry.BARREL_CACTUS),
+		BLACK_APPLE(BlocksRegistry.BLACK_APPLE_SEED),
+		BLACK_BUSH(BlocksRegistry.BLACK_BUSH),
+		EGG_PLANT(BlocksRegistry.EGG_PLANT),
+		INK_BUSH(BlocksRegistry.INK_BUSH_SEED),
+		REEDS(BlocksRegistry.NETHER_REED),
+		NETHER_CACTUS(BlocksRegistry.NETHER_CACTUS),
+		NETHER_GRASS(BlocksRegistry.NETHER_GRASS),
+		ORANGE_MUSHROOM(BlocksRegistry.ORANGE_MUSHROOM),
+		RED_MOLD(BlocksRegistry.RED_MOLD),
+		GRAY_MOLD(BlocksRegistry.GRAY_MOLD),
+		MAGMA_FLOWER(BlocksRegistry.MAGMA_FLOWER),
+		NETHER_WART(BlocksRegistry.WART_SEED);
 		
 		private final Block block;
 

@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureGrayMold;
 import paulevs.betternether.structures.plants.StructureOrangeMushroom;
@@ -26,6 +26,6 @@ public class NetherMushroomForestEdge extends NetherBiome
 	@Override
 	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.NETHER_MYCELIUM.getDefaultState());
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.getDefaultState());
 	}
 }

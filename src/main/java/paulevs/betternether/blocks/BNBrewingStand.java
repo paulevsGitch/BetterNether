@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 import net.fabricmc.api.EnvType;
@@ -20,7 +18,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
@@ -60,12 +57,6 @@ public class BNBrewingStand extends BlockWithEntity implements IRenderTypeable
 				.with(BOTTLE_PROPERTIES[0], false)
 				.with(BOTTLE_PROPERTIES[1], false)
 				.with(BOTTLE_PROPERTIES[2], false));
-	}
-
-	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
-		return Collections.singletonList(new ItemStack(this.asItem()));
 	}
 
 	@Override

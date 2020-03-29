@@ -14,7 +14,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockWartSeed;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureWartTree implements IStructure
@@ -49,9 +49,9 @@ public class StructureWartTree implements IStructure
 								if (isReplaceable(world.getBlockState(blockPos)))
 								{
 									if (y == 0 && !isReplaceable(world.getBlockState(blockPos.down())))
-										BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegister.WART_ROOTS.getDefaultState());
+										BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegistry.WART_ROOTS.getDefaultState());
 									else if (y < h2)
-										BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegister.WART_LOG.getDefaultState());
+										BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegistry.WART_LOG.getDefaultState());
 									else
 										BlocksHelper.setWithoutUpdate(world, blockPos, WART_BLOCK);
 									if (random.nextInt(8) == 0)
@@ -77,10 +77,10 @@ public class StructureWartTree implements IStructure
 								if (isReplaceable(world.getBlockState(blockPos)))
 								{
 									if (isReplaceable(world.getBlockState(blockPos.down())))
-										BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegister.WART_LOG.getDefaultState());
+										BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegistry.WART_LOG.getDefaultState());
 									else
 									{
-										BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegister.WART_ROOTS.getDefaultState());
+										BlocksHelper.setWithoutUpdate(world, blockPos, BlocksRegistry.WART_ROOTS.getDefaultState());
 										break;
 									}
 								}
@@ -121,7 +121,7 @@ public class StructureWartTree implements IStructure
 
 	private void PlaceRandomSeed(IWorld world, BlockPos pos)
 	{
-		BlockState seed = BlocksRegister.WART_SEED.getDefaultState();
+		BlockState seed = BlocksRegistry.WART_SEED.getDefaultState();
 		if (isReplaceable(world.getBlockState(pos)))
 		{
 			if (isWart(world.getBlockState(pos.up())))
@@ -145,16 +145,16 @@ public class StructureWartTree implements IStructure
 		Block block = state.getBlock();
 		return state.getMaterial().isReplaceable() ||
 				block == Blocks.AIR ||
-				block == BlocksRegister.WART_SEED ||
-				block == BlocksRegister.BLACK_BUSH ||
-				block == BlocksRegister.SOUL_VEIN ||
-				block == BlocksRegister.SOUL_LILY ||
-				block == BlocksRegister.SOUL_LILY_SAPLING ||
+				block == BlocksRegistry.WART_SEED ||
+				block == BlocksRegistry.BLACK_BUSH ||
+				block == BlocksRegistry.SOUL_VEIN ||
+				block == BlocksRegistry.SOUL_LILY ||
+				block == BlocksRegistry.SOUL_LILY_SAPLING ||
 				block == Blocks.NETHER_WART;
 	}
 
 	private boolean isWart(BlockState state)
 	{
-		return state == WART_BLOCK || state.getBlock() == BlocksRegister.WART_LOG;
+		return state == WART_BLOCK || state.getBlock() == BlocksRegistry.WART_LOG;
 	}
 }

@@ -8,7 +8,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
-import paulevs.betternether.registers.ItemsRegister;
+import paulevs.betternether.registry.ItemsRegistry;
 
 public class VanillaHammersIntegration
 {
@@ -21,7 +21,7 @@ public class VanillaHammersIntegration
 			return Items.AIR;
 		try
 		{
-			return (Item) hammerConstructor.newInstance(material, attackDamage, attackSpeed, ItemsRegister.defaultSettings());
+			return (Item) hammerConstructor.newInstance(material, attackDamage, attackSpeed, ItemsRegistry.defaultSettings());
 		}
 		catch (Exception e)
 		{

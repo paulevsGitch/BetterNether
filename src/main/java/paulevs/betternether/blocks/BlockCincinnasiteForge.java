@@ -23,13 +23,13 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.blockentities.BlockEntityForge;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
-public class CincinnasiteForge extends AbstractFurnaceBlock
+public class BlockCincinnasiteForge extends AbstractFurnaceBlock
 {
-	public CincinnasiteForge()
+	public BlockCincinnasiteForge()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).build());
 	}
 
 	public BlockEntity createBlockEntity(BlockView view)

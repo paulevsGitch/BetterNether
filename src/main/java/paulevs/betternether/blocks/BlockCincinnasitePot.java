@@ -17,7 +17,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasitePot extends BlockBaseNotFull
 {
@@ -26,7 +26,7 @@ public class BlockCincinnasitePot extends BlockBaseNotFull
 	
 	public BlockCincinnasitePot()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().build());
 	}
 
 	public boolean hasSidedTransparency(BlockState state)

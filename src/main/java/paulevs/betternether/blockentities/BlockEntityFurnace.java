@@ -42,7 +42,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import paulevs.betternether.registers.BlockEntitiesRegister;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BlockEntityFurnace extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider, Tickable
 {
@@ -60,7 +60,7 @@ public class BlockEntityFurnace extends LockableContainerBlockEntity implements 
 
 	public BlockEntityFurnace()
 	{
-		super(BlockEntitiesRegister.NETHERRACK_FURNACE);
+		super(BlockEntitiesRegistry.NETHERRACK_FURNACE);
 		this.inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 		this.propertyDelegate = new PropertyDelegate()
 		{

@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.dimension.DimensionType;
 import paulevs.betternether.IDimensionable;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 @Mixin(PlayerManager.class)
 public abstract class PlayerManagerMixin
@@ -54,7 +54,7 @@ public abstract class PlayerManagerMixin
 	{
 		for (Direction dir: HorizontalFacingBlock.FACING.getValues())
 		{
-			if (world.getBlockState(pos.offset(dir)).getBlock() == BlocksRegister.PIG_STATUE_RESPAWNER)
+			if (world.getBlockState(pos.offset(dir)).getBlock() == BlocksRegistry.PIG_STATUE_RESPAWNER)
 				return true;
 		}
 		return false;

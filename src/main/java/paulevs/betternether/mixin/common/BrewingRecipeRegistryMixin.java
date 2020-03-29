@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.BrewingRecipeRegistry;
-import paulevs.betternether.registers.BrewingRegister;
-import paulevs.betternether.registers.BrewingRegister.PotionRecipe;
+import paulevs.betternether.registry.BrewingRegistry;
+import paulevs.betternether.registry.BrewingRegistry.PotionRecipe;
 
 @Mixin(BrewingRecipeRegistry.class)
 public class BrewingRecipeRegistryMixin
@@ -17,7 +17,7 @@ public class BrewingRecipeRegistryMixin
 	@Inject(method = "isPotionRecipeIngredient", at = @At("RETURN"), cancellable = true)
 	private static void isIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> info)
 	{
-		if (BrewingRegister.isIngredient(stack))
+		if (BrewingRegistry.isIngredient(stack))
 		{
 			info.setReturnValue(true);
 			info.cancel();
@@ -27,7 +27,7 @@ public class BrewingRecipeRegistryMixin
 	@Inject(method = "hasRecipe", at = @At("HEAD"), cancellable = true)
 	private static void checkRecipe(ItemStack input, ItemStack ingredient, CallbackInfoReturnable<Boolean> info)
 	{
-		if (BrewingRegister.getRecipe(ingredient, input) != null)
+		if (BrewingRegistry.getRecipe(ingredient, input) != null)
 		{
 			info.setReturnValue(true);
 			info.cancel();
@@ -43,7 +43,7 @@ public class BrewingRecipeRegistryMixin
 	@Inject(method = "craft", at = @At("HEAD"), cancellable = true)
 	private static void tryCraft(ItemStack input, ItemStack ingredient, CallbackInfoReturnable<ItemStack> info)
 	{
-		PotionRecipe recipe = BrewingRegister.getRecipe(ingredient, input);
+		PotionRecipe recipe = BrewingRegistry.getRecipe(ingredient, input);
 		System.out.println("Craft? " + input + " " + ingredient);
 		if (recipe != null)
 		{

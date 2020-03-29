@@ -9,7 +9,7 @@ import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasitPillar extends BlockBase
 {
@@ -17,7 +17,7 @@ public class BlockCincinnasitPillar extends BlockBase
 	
 	public BlockCincinnasitPillar()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE_BLOCK).build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).build());
 	}
 	
 	@Override
