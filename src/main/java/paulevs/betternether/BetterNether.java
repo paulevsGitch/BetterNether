@@ -8,6 +8,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.structures.piece.StructureTypes;
 
@@ -24,6 +25,7 @@ public class BetterNether implements ModInitializer
 	{
 		Config.load();
 		initOptions();
+		SoundsRegistry.register();
 		StructureTypes.init();
 		BlocksRegistry.register();
 		BlockEntitiesRegistry.register();
