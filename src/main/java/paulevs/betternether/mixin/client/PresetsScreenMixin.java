@@ -10,6 +10,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.PresetsScreen;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -24,7 +25,7 @@ public class PresetsScreenMixin
 	
 	static
 	{
-		addPreset("createWorld.customize.preset.betternether.flat_nether",
+		addPreset(I18n.translate("betternether.flat_nether"),
 				Blocks.NETHERRACK,
 				Biomes.NETHER,
 				Arrays.asList("decoration", "nether_city"),

@@ -18,6 +18,7 @@ import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.biomes.NetherSwamplandTerraces;
 import paulevs.betternether.biomes.NetherWartForest;
 import paulevs.betternether.biomes.NetherWartForestEdge;
+import paulevs.betternether.biomes.OldFungiwoods;
 import paulevs.betternether.config.Config;
 
 public class BiomesRegistry
@@ -39,6 +40,7 @@ public class BiomesRegistry
 	public static final NetherBiome MAGMA_LAND = new NetherMagmaLand("Magma Land");
 	public static final NetherBiome SOUL_PLAIN = new NetherSoulPlain("Soul Plain");
 	public static final NetherBiome SOUL_FOREST = new NetherSoulForest("Soul Forest");
+	public static final NetherBiome OLD_FUNGIWOODS = new OldFungiwoods("Old Fungiwoods");
 	
 	private static int maxChance = 0;
 	
@@ -57,9 +59,8 @@ public class BiomesRegistry
 		registerBiome(NETHER_SWAMPLAND);
 		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
 		registerBiome(MAGMA_LAND);
-		//registerBiome(SOUL_PLAIN, 0.5F);
-		//registerSubBiome(SOUL_FOREST, SOUL_PLAIN, 1F);
 		registerSubBiome(SOUL_PLAIN, BIOME_WART_FOREST, 1F);
+		registerSubBiome(OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
 	}
 	
 	public static void registerBiome(NetherBiome biome)

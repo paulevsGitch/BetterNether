@@ -15,7 +15,7 @@ import paulevs.betternether.structures.IStructure;
 
 public class StructureMedRedMushroom implements IStructure
 {
-	Mutable npos = new Mutable();
+	private static final Mutable POS = new Mutable();
 	
 	@Override
 	public void generate(IWorld world, BlockPos pos, Random random)
@@ -27,14 +27,25 @@ public class StructureMedRedMushroom implements IStructure
 			{
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
+				if (((x + z) & 1) == 0)
+				{
+					if (random.nextBoolean())
+					{
+						x += random.nextBoolean() ? 1 : -1;
+					}
+					else
+					{
+						z += random.nextBoolean() ? 1 : -1;
+					}
+				}
 				int y = pos.getY() + random.nextInt(6);
 				for (int j = 0; j < 12; j++)
 				{
-					npos.set(x, y - j, z);
-					under = world.getBlockState(npos.down()).getBlock();
+					POS.set(x, y - j, z);
+					under = world.getBlockState(POS.down()).getBlock();
 					if (under == BlocksRegistry.NETHER_MYCELIUM)
 					{
-						grow(world, npos, random);
+						grow(world, POS, random);
 					}
 				}
 			}

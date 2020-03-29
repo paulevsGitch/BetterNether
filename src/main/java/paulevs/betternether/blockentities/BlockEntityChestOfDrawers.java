@@ -13,9 +13,14 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.DefaultedList;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockChestOfDrawers;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
@@ -89,6 +94,10 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 			{
 				this.watchers = 0;
 			}
+			if (this.watchers == 0)
+			{
+				this.playSound(this.getCachedState(), SoundEvents.BLOCK_BARREL_OPEN);
+			}
 
 			++this.watchers;
 			this.onInvOpenOrClose();
@@ -121,6 +130,15 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 			}
 		}
 
+	}
+	
+	private void playSound(BlockState blockState, SoundEvent soundEvent)
+	{
+		Vec3i vec3i = ((Direction) blockState.get(BlockChestOfDrawers.FACING)).getVector();
+		double d = (double)this.pos.getX() + 0.5D + (double)vec3i.getX() / 2.0D;
+		double e = (double)this.pos.getY() + 0.5D + (double)vec3i.getY() / 2.0D;
+		double f = (double)this.pos.getZ() + 0.5D + (double)vec3i.getZ() / 2.0D;
+		this.world.playSound((PlayerEntity)null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
 	}
 	
 	public void addItemsToList(List<ItemStack> items)

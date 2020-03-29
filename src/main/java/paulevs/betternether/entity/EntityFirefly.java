@@ -109,9 +109,6 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	protected void initDataTracker()
 	{
 		super.initDataTracker();
-		//this.dataTracker.startTracking(COLOR_RED, random.nextFloat() * 0.5F + 0.5F);
-		//this.dataTracker.startTracking(COLOR_GREEN, random.nextFloat() * 0.5F + 0.5F);
-		//this.dataTracker.startTracking(COLOR_BLUE, random.nextFloat() * 0.5F + 0.5F);
 		makeColor(random.nextFloat(), random.nextFloat() * 0.75F, 1);
 	}
 
@@ -604,5 +601,11 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		this.dataTracker.startTracking(COLOR_RED, red / 255F);
 		this.dataTracker.startTracking(COLOR_GREEN, green / 255F);
 		this.dataTracker.startTracking(COLOR_BLUE, blue / 255F);
+	}
+
+	@Override
+	public int getLimitPerChunk()
+	{
+		return 5;
 	}
 }

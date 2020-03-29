@@ -16,15 +16,16 @@ import paulevs.betternether.entity.EntityHydrogenJellyfish;
 
 public class EntityRegistry
 {
-	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityFirefly::new).size(EntityDimensions.fixed(0.5F, 0.5F)).setImmuneToFire().build();
 	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(EntityCategory.MISC, EntityChair::new).size(EntityDimensions.fixed(0.0F, 0.0F)).setImmuneToFire().build();
+	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityFirefly::new).size(EntityDimensions.fixed(0.5F, 0.5F)).setImmuneToFire().build();
 	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityHydrogenJellyfish::new).size(EntityDimensions.changing(2F, 5F)).setImmuneToFire().build();
 	
 	public static void register()
 	{
-		registerEntity("firefly", FIREFLY, 10, 2, 6, Biomes.NETHER);
 		registerEntity("chair", CHAIR);
-		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, 20, 1, 4, Biomes.NETHER);
+		
+		registerEntity("firefly", FIREFLY, 5, 2, 6, Biomes.NETHER);
+		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, 100, 1, 4, Biomes.NETHER);
 	}
 	
 	public static void registerEntity(String name, EntityType<?> entity)
