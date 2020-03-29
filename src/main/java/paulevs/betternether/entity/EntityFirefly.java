@@ -35,6 +35,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
@@ -44,6 +45,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.SoundsRegistry;
 
 public class EntityFirefly extends AnimalEntity implements Flutterer
 {
@@ -107,9 +109,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	protected void initDataTracker()
 	{
 		super.initDataTracker();
-		this.dataTracker.startTracking(COLOR_RED, random.nextFloat() * 0.5F + 0.5F);
-		this.dataTracker.startTracking(COLOR_GREEN, random.nextFloat() * 0.5F + 0.5F);
-		this.dataTracker.startTracking(COLOR_BLUE, random.nextFloat() * 0.5F + 0.5F);
+		makeColor(random.nextFloat(), random.nextFloat() * 0.75F, 1);
 	}
 
 	@Override
@@ -542,5 +542,65 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 			timer ++;
 			super.tick();
 		}
+	}
+	
+	@Override
+	public SoundEvent getAmbientSound()
+	{
+		return SoundsRegistry.MOB_FIREFLY_FLY;
+	}
+
+	@Override
+	protected float getSoundVolume()
+	{
+		return 0.3F + random.nextFloat() * 0.3F;
+	}
+
+	private void makeColor(float hue, float saturation, float brightness)
+	{
+		float red = 0;
+		float green = 0;
+		float blue = 0;
+		float f3 = (hue - (float) Math.floor(hue)) * 6F;
+		float f4 = f3 - (float) Math.floor(f3);
+		float f5 = brightness * (1.0F - saturation);
+		float f6 = brightness * (1.0F - saturation * f4);
+		float f7 = brightness * (1.0F - saturation * (1.0F - f4));
+		switch ((int) f3)
+		{
+		case 0 :
+			red = (byte) (brightness * 255F + 0.5F);
+			green = (byte) (f7 * 255F + 0.5F);
+			blue = (byte) (f5 * 255F + 0.5F);
+			break;
+		case 1 :
+			red = (byte) (f6 * 255F + 0.5F);
+			green = (byte) (brightness * 255F + 0.5F);
+			blue = (byte) (f5 * 255F + 0.5F);
+			break;
+		case 2 :
+			red = (byte) (f5 * 255F + 0.5F);
+			green = (byte) (brightness * 255F + 0.5F);
+			blue = (byte) (f7 * 255F + 0.5F);
+			break;
+		case 3 :
+			red = (byte) (f5 * 255F + 0.5F);
+			green = (byte) (f6 * 255F + 0.5F);
+			blue = (byte) (brightness * 255F + 0.5F);
+			break;
+		case 4 :
+			red = (byte) (f7 * 255F + 0.5F);
+			green = (byte) (f5 * 255F + 0.5F);
+			blue = (byte) (brightness * 255F + 0.5F);
+			break;
+		case 5 :
+			red = (byte) (brightness * 255F + 0.5F);
+			green = (byte) (f5 * 255F + 0.5F);
+			blue = (byte) (f6 * 255F + 0.5F);
+			break;
+		}
+		this.dataTracker.startTracking(COLOR_RED, red / 255F);
+		this.dataTracker.startTracking(COLOR_GREEN, green / 255F);
+		this.dataTracker.startTracking(COLOR_BLUE, blue / 255F);
 	}
 }
