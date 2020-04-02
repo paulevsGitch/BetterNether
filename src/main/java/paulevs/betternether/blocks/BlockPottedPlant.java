@@ -27,7 +27,6 @@ import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockPottedPlant extends BlockBaseNotFull
 {
-	//private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 8, 14);
 	public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.of("plant", PottedPlantShape.class);
 	
 	public BlockPottedPlant()
@@ -43,7 +42,13 @@ public class BlockPottedPlant extends BlockBaseNotFull
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(PLANT, PottedPlantShape.AGAVE));
 	}
-	
+
+	@Override
+	public int getLuminance(BlockState state)
+	{
+		return state.get(PLANT) == PottedPlantShape.WILLOW ? 12 : 0;
+	}
+
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
@@ -61,7 +66,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegistry.CINCINNASITE_POT;
+		return world.getBlockState(pos.down()).getBlock() instanceof BlockBNPot;
 	}
 
 	@Override
@@ -105,7 +110,10 @@ public class BlockPottedPlant extends BlockBaseNotFull
 		RED_MOLD(BlocksRegistry.RED_MOLD),
 		GRAY_MOLD(BlocksRegistry.GRAY_MOLD),
 		MAGMA_FLOWER(BlocksRegistry.MAGMA_FLOWER),
-		NETHER_WART(BlocksRegistry.WART_SEED);
+		NETHER_WART(BlocksRegistry.WART_SEED),
+		WILLOW(BlocksRegistry.WILLOW_SAPLING),
+		SMOKER(BlocksRegistry.SMOKER),
+		WART(Blocks.NETHER_WART);
 		
 		private final Block block;
 

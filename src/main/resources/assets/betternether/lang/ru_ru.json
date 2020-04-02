@@ -399,5 +399,7 @@
 	
 	"block.betternether.nether_brewing_stand": "Зельеварка нижнего мира",
 	
-	"betternether.flat_nether": "Плоский нижний мир"
+	"betternether.flat_nether": "Плоский нижний мир",
+	
+	"item.betternether.spawn_egg_hydrogen_jellyfish": "Яйцо призыва водородной медузы"
 }

@@ -19,12 +19,12 @@ import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockCincinnasitePot extends BlockBaseNotFull
+public class BlockBNPot extends BlockBaseNotFull
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 8, 13);
 	//private static final VoxelShape SHAPE_PLANTED = Block.createCuboidShape(3, 0, 3, 13, 16, 13);
 	
-	public BlockCincinnasitePot()
+	public BlockBNPot()
 	{
 		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().build());
 	}
