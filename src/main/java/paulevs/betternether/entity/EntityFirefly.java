@@ -24,7 +24,6 @@ import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -112,7 +111,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		makeColor(random.nextFloat(), random.nextFloat() * 0.75F, 1);
 	}
 
-	@Override
+	/*@Override
 	protected void initAttributes()
 	{
 		super.initAttributes();
@@ -121,7 +120,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		this.getAttributeInstance(EntityAttributes.FLYING_SPEED).setBaseValue(0.6F);
 		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
 		this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
-	}
+	}*/
 
 	@Override
 	protected EntityNavigation createNavigation(World world)
@@ -602,5 +601,11 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		this.dataTracker.startTracking(COLOR_RED, red / 255F);
 		this.dataTracker.startTracking(COLOR_GREEN, green / 255F);
 		this.dataTracker.startTracking(COLOR_BLUE, blue / 255F);
+	}
+	
+	@Override
+	public int getLimitPerChunk()
+	{
+		return 5;
 	}
 }

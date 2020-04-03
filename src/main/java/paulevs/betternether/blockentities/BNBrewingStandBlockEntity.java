@@ -6,6 +6,7 @@ import java.util.Iterator;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BrewingStandBlock;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -26,14 +27,13 @@ import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import paulevs.betternether.blocks.BNBrewingStand;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity implements SidedInventory, Tickable
 {
-	private static final int[] TOP_SLOTS = new int[] { 3 };
-	private static final int[] BOTTOM_SLOTS = new int[] { 0, 1, 2, 3 };
-	private static final int[] SIDE_SLOTS = new int[] { 0, 1, 2, 4 };
+	private static final int[] TOP_SLOTS = new int[] {3};
+	private static final int[] BOTTOM_SLOTS = new int[] {0, 1, 2, 3};
+	private static final int[] SIDE_SLOTS = new int[] {0, 1, 2, 4};
 	private DefaultedList<ItemStack> inventory;
 	private int brewTime;
 	private boolean[] slotsEmptyLastTick;
@@ -47,9 +47,9 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		this.inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
 		this.propertyDelegate = new PropertyDelegate()
 		{
-			public int get(int key)
+			public int get(int index)
 			{
-				switch (key)
+				switch (index)
 				{
 				case 0:
 					return BNBrewingStandBlockEntity.this.brewTime;
@@ -60,9 +60,9 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 				}
 			}
 
-			public void set(int key, int value)
+			public void set(int index, int value)
 			{
-				switch (key)
+				switch (index)
 				{
 				case 0:
 					BNBrewingStandBlockEntity.this.brewTime = value;
@@ -85,12 +85,12 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		return new TranslatableText("container.brewing", new Object[0]);
 	}
 
-	public int getInvSize()
+	public int size()
 	{
 		return this.inventory.size();
 	}
 
-	public boolean isInvEmpty()
+	public boolean isEmpty()
 	{
 		Iterator<ItemStack> var1 = this.inventory.iterator();
 
@@ -102,7 +102,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 				return true;
 			}
 
-			itemStack = var1.next();
+			itemStack = (ItemStack) var1.next();
 		}
 		while (itemStack.isEmpty());
 
@@ -111,7 +111,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 	public void tick()
 	{
-		ItemStack itemStack = this.inventory.get(4);
+		ItemStack itemStack = (ItemStack) this.inventory.get(4);
 		if (this.fuel <= 0 && itemStack.getItem() == Items.BLAZE_POWDER)
 		{
 			this.fuel = 20;
@@ -121,7 +121,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 		boolean bl = this.canCraft();
 		boolean bl2 = this.brewTime > 0;
-		ItemStack itemStack2 = this.inventory.get(3);
+		ItemStack itemStack2 = (ItemStack) this.inventory.get(3);
 		if (bl2)
 		{
 			--this.brewTime;
@@ -157,14 +157,14 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 			{
 				this.slotsEmptyLastTick = bls;
 				BlockState blockState = this.world.getBlockState(this.getPos());
-				if (!(blockState.getBlock() instanceof BNBrewingStand))
+				if (!(blockState.getBlock() instanceof BrewingStandBlock))
 				{
 					return;
 				}
 
-				for (int i = 0; i < BNBrewingStand.BOTTLE_PROPERTIES.length; ++i)
+				for (int i = 0; i < BrewingStandBlock.BOTTLE_PROPERTIES.length; ++i)
 				{
-					blockState = (BlockState) blockState.with(BNBrewingStand.BOTTLE_PROPERTIES[i], bls[i]);
+					blockState = (BlockState) blockState.with(BrewingStandBlock.BOTTLE_PROPERTIES[i], bls[i]);
 				}
 
 				this.world.setBlockState(this.pos, blockState, 2);
@@ -179,7 +179,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 		for (int i = 0; i < 3; ++i)
 		{
-			if (!this.inventory.get(i).isEmpty())
+			if (!((ItemStack) this.inventory.get(i)).isEmpty())
 			{
 				bls[i] = true;
 			}
@@ -190,7 +190,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 	private boolean canCraft()
 	{
-		ItemStack itemStack = this.inventory.get(3);
+		ItemStack itemStack = (ItemStack) this.inventory.get(3);
 		if (itemStack.isEmpty())
 		{
 			return false;
@@ -203,7 +203,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		{
 			for (int i = 0; i < 3; ++i)
 			{
-				ItemStack itemStack2 = this.inventory.get(i);
+				ItemStack itemStack2 = (ItemStack) this.inventory.get(i);
 				if (!itemStack2.isEmpty() && BrewingRecipeRegistry.hasRecipe(itemStack2, itemStack))
 				{
 					return true;
@@ -216,11 +216,11 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 	private void craft()
 	{
-		ItemStack itemStack = this.inventory.get(3);
+		ItemStack itemStack = (ItemStack) this.inventory.get(3);
 
 		for (int i = 0; i < 3; ++i)
 		{
-			this.inventory.set(i, BrewingRecipeRegistry.craft(itemStack, this.inventory.get(i)));
+			this.inventory.set(i, BrewingRecipeRegistry.craft(itemStack, (ItemStack) this.inventory.get(i)));
 		}
 
 		itemStack.decrement(1);
@@ -234,7 +234,8 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 			}
 			else if (!this.world.isClient)
 			{
-				ItemScatterer.spawn(this.world, (double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), itemStack2);
+				ItemScatterer.spawn(this.world, (double) blockPos.getX(), (double) blockPos.getY(),
+						(double) blockPos.getZ(), itemStack2);
 			}
 		}
 
@@ -242,10 +243,10 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		this.world.playLevelEvent(1035, blockPos, 0);
 	}
 
-	public void fromTag(BlockState blockState, CompoundTag tag)
+	public void fromTag(BlockState state, CompoundTag tag)
 	{
-		super.fromTag(blockState, tag);
-		this.inventory = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
+		super.fromTag(state, tag);
+		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
 		Inventories.fromTag(tag, this.inventory);
 		this.brewTime = tag.getShort("BrewTime");
 		this.fuel = tag.getByte("Fuel");
@@ -260,22 +261,22 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		return tag;
 	}
 
-	public ItemStack getInvStack(int slot)
+	public ItemStack getStack(int slot)
 	{
-		return slot >= 0 && slot < this.inventory.size() ? this.inventory.get(slot) : ItemStack.EMPTY;
+		return slot >= 0 && slot < this.inventory.size() ? (ItemStack) this.inventory.get(slot) : ItemStack.EMPTY;
 	}
 
-	public ItemStack takeInvStack(int slot, int amount)
+	public ItemStack removeStack(int slot, int amount)
 	{
 		return Inventories.splitStack(this.inventory, slot, amount);
 	}
 
-	public ItemStack removeInvStack(int slot)
+	public ItemStack removeStack(int slot)
 	{
 		return Inventories.removeStack(this.inventory, slot);
 	}
 
-	public void setInvStack(int slot, ItemStack stack)
+	public void setStack(int slot, ItemStack stack)
 	{
 		if (slot >= 0 && slot < this.inventory.size())
 		{
@@ -284,7 +285,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 	}
 
-	public boolean canPlayerUseInv(PlayerEntity player)
+	public boolean canPlayerUse(PlayerEntity player)
 	{
 		if (this.world.getBlockEntity(this.pos) != this)
 		{
@@ -297,7 +298,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		}
 	}
 
-	public boolean isValidInvStack(int slot, ItemStack stack)
+	public boolean isValid(int slot, ItemStack stack)
 	{
 		if (slot == 3)
 		{
@@ -313,12 +314,12 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 			else
 			{
 				return (item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION
-						|| item == Items.GLASS_BOTTLE) && this.getInvStack(slot).isEmpty();
+						|| item == Items.GLASS_BOTTLE) && this.getStack(slot).isEmpty();
 			}
 		}
 	}
 
-	public int[] getInvAvailableSlots(Direction side)
+	public int[] getAvailableSlots(Direction side)
 	{
 		if (side == Direction.UP)
 		{
@@ -330,12 +331,12 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		}
 	}
 
-	public boolean canInsertInvStack(int slot, ItemStack stack, @Nullable Direction dir)
+	public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir)
 	{
-		return this.isValidInvStack(slot, stack);
+		return this.isValid(slot, stack);
 	}
 
-	public boolean canExtractInvStack(int slot, ItemStack stack, Direction dir)
+	public boolean canExtract(int slot, ItemStack stack, Direction dir)
 	{
 		if (slot == 3)
 		{

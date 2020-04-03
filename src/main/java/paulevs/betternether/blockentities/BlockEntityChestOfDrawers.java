@@ -2,7 +2,6 @@ package paulevs.betternether.blockentities;
 
 import java.util.List;
 
-import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -38,7 +37,7 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 	}
 
 	@Override
-	public int getInvSize()
+	public int size()
 	{
 		return 27;
 	}
@@ -70,7 +69,7 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 	public void fromTag(BlockState blockState, CompoundTag tag)
 	{
 		super.fromTag(blockState, tag);
-		this.inventory = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
+		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
 		if (!this.deserializeLootTable(tag))
 		{
 			Inventories.fromTag(tag, this.inventory);
@@ -106,7 +105,7 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 	}
 
 	@Override
-	public void onInvClose(PlayerEntity player)
+	public void onClose(PlayerEntity player)
 	{
 		if (!player.isSpectator())
 		{
@@ -131,15 +130,15 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 			}
 		}
 	}
-	
+
 	private void playSound(BlockState blockState, SoundEvent soundEvent)
 	{
-	      Vec3i vec3i = ((Direction)blockState.get(BarrelBlock.FACING)).getVector();
-	      double d = (double)this.pos.getX() + 0.5D + (double)vec3i.getX() / 2.0D;
-	      double e = (double)this.pos.getY() + 0.5D + (double)vec3i.getY() / 2.0D;
-	      double f = (double)this.pos.getZ() + 0.5D + (double)vec3i.getZ() / 2.0D;
-	      this.world.playSound((PlayerEntity)null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
-	   }
+		Vec3i vec3i = ((Direction) blockState.get(BlockChestOfDrawers.FACING)).getVector();
+		double d = (double)this.pos.getX() + 0.5D + (double)vec3i.getX() / 2.0D;
+		double e = (double)this.pos.getY() + 0.5D + (double)vec3i.getY() / 2.0D;
+		double f = (double)this.pos.getZ() + 0.5D + (double)vec3i.getZ() / 2.0D;
+		this.world.playSound((PlayerEntity)null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+	}
 
 	public void addItemsToList(List<ItemStack> items)
 	{

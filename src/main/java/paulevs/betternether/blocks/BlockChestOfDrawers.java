@@ -21,7 +21,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -98,10 +97,10 @@ public class BlockChestOfDrawers extends BlockWithEntity
 		}
 		else
 		{
-			NamedScreenHandlerFactory screenFactory = this.createScreenHandlerFactory(state, world, pos);
-			if (screenFactory != null)
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if (blockEntity instanceof BlockEntityChestOfDrawers)
 			{
-				player.openHandledScreen(screenFactory);
+				player.openHandledScreen((BlockEntityChestOfDrawers) blockEntity);
 			}
 			return ActionResult.SUCCESS;
 		}

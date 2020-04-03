@@ -2,6 +2,7 @@ package paulevs.betternether.world.structures.piece;
 
 import java.util.Random;
 
+import net.minecraft.class_5138;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundTag;
@@ -54,7 +55,7 @@ public class CavePiece extends CustomPiece
 	}
 
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
+	public boolean generate(IWorld world, class_5138 arg, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
 	{
 		BlockState bottom = LAVA;
 		if (!(chunkGenerator instanceof CavesChunkGenerator))

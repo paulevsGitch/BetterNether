@@ -39,7 +39,7 @@ public class BlockCincinnasiteForge extends AbstractFurnaceBlock
 
 	public BlockEntity createBlockEntity(BlockView view)
 	{
-		return new BlockEntityForge(2);
+		return new BlockEntityForge();
 	}
 
 	@Override

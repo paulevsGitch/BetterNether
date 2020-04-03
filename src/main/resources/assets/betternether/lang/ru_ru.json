@@ -3,6 +3,7 @@
 	"container.chest_of_drawers": "Комод",
 
 	"entity.betternether.firefly": "Светлячёк",
+	"entity.betternether.hydrogen_jellyfish": "Водородная медуза",
 
 	"item.betternether.black_apple": "Чёрное яблоко",
 
@@ -410,5 +411,9 @@
 	"item.betternether.cincinnasite_hammer": "Цинцинназитовый молот",
 	"item.betternether.cincinnasite_hammer_diamond": "Цинцинназитово-алмазный молот",
 	
-	"block.betternether.nether_brewing_stand": "Зельеварка нижнего мира"
+	"block.betternether.nether_brewing_stand": "Зельеварка нижнего мира",
+	
+	"betternether.flat_nether": "Плоский нижний мир",
+	
+	"item.betternether.spawn_egg_hydrogen_jellyfish": "Яйцо призыва водородной медузы"
 }

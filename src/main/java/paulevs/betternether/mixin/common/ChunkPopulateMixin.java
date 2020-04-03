@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.minecraft.class_5138;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.math.BlockPos;
@@ -51,7 +52,7 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 	}
 
 	@Inject(method = "generateFeatures", at = @At("HEAD"), cancellable = true)
-    private void customPopulate(ChunkRegion region, CallbackInfo info)
+    private void customPopulate(ChunkRegion region, class_5138 arg, CallbackInfo info)
 	{
 		int chunkX = region.getCenterChunkX();
 		int chunkZ = region.getCenterChunkZ();
@@ -75,7 +76,7 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 
 					try
 					{
-						biome.generateFeatureStep(feature, generator, region, featureSeed, RANDOM, new BlockPos(sx, 0, sz));
+						biome.generateFeatureStep(feature, arg, generator, region, featureSeed, RANDOM, new BlockPos(sx, 0, sz));
 					}
 					catch (Exception e)
 					{

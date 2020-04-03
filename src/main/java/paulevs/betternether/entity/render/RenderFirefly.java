@@ -11,8 +11,6 @@ import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.model.AnimalModel;
-import net.minecraft.client.util.math.Matrix3f;
-import net.minecraft.client.util.math.Matrix4f;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.EntityPose;
@@ -20,6 +18,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Matrix3f;
+import net.minecraft.util.math.Matrix4f;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.model.ModelEntityFirefly;
@@ -132,12 +132,14 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 
 		this.model.animateModel(mobEntity, q, p, g);
 		this.model.setAngles(mobEntity, q, p, o, k, m);
-		boolean bl = this.isFullyVisible(mobEntity);
+		boolean bl = this.isVisible(mobEntity);
 		boolean bl2 = !bl && !mobEntity.isInvisibleTo(MinecraftClient.getInstance().player);
-		RenderLayer renderLayer = this.getRenderLayer(mobEntity, bl, bl2);
+		MinecraftClient minecraftClient = MinecraftClient.getInstance();
+		boolean bl3 = minecraftClient.method_27022(mobEntity);
+		RenderLayer renderLayer = this.getRenderLayer(mobEntity, bl, bl2, bl3);
 		if (renderLayer != null)
 		{
-			int r = getOverlay(mobEntity, this.getWhiteOverlayProgress(mobEntity, g));
+			int r = getOverlay(mobEntity, 0);
 			this.model.render(matrixStack, vertexConsumer, i, r, 1.0F, 1.0F, 1.0F, bl2 ? 0.15F : 1.0F);
 		}
 

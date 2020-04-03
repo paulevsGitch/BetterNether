@@ -22,7 +22,6 @@ import paulevs.betternether.registry.BlocksRegistry;
 public class BlockCincinnasitePot extends BlockBaseNotFull
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 8, 13);
-	//private static final VoxelShape SHAPE_PLANTED = Block.createCuboidShape(3, 0, 3, 13, 16, 13);
 	
 	public BlockCincinnasitePot()
 	{
@@ -33,18 +32,6 @@ public class BlockCincinnasitePot extends BlockBaseNotFull
 	{
 		return true;
 	}
-
-	/*@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
-		return view.getBlockState(pos.up()).getBlock() == BlocksRegister.POTTED_PLANT ? SHAPE_PLANTED : SHAPE;
-	}
-	
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
-		return SHAPE;
-	}*/
 	
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
