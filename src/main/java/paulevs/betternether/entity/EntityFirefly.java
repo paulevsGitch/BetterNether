@@ -24,6 +24,8 @@ import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.attribute.Attributes;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -121,6 +123,17 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
 		this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
 	}*/
+	
+	public static DefaultAttributeContainer getAttributeContainer()
+	{
+		return MobEntity
+				.createMobAttributes()
+				.add(Attributes.GENERIC_MAX_HEALTH, 1.0)
+				.add(Attributes.GENERIC_FLYING_SPEED, 0.6)
+				.add(Attributes.GENERIC_MOVEMENT_SPEED, 0.25)
+				.add(Attributes.GENERIC_FOLLOW_RANGE, 48.0)
+				.build();
+	}
 
 	@Override
 	protected EntityNavigation createNavigation(World world)

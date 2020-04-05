@@ -14,7 +14,8 @@
 	"NetherWartMixin",
 	"BiomeArrayMixin",
 	"BiomeMixin",
-	"PlayerEntityMixin"
+	"PlayerEntityMixin",
+	"DefaultAttributeRegistryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

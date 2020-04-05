@@ -2,7 +2,6 @@ package paulevs.betternether.world.structures.piece;
 
 import java.util.Random;
 
-import net.minecraft.class_5138;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtHelper;
@@ -15,6 +14,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.city.StructureCityBuilding;
@@ -55,7 +55,7 @@ public class CityPiece extends CustomPiece
 	}
 
 	@Override
-	public boolean generate(IWorld world, class_5138 arg, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
+	public boolean generate(IWorld world, StructureAccessor arg, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
 	{
 		if (!this.boundingBox.intersects(blockBox))
 			return true;

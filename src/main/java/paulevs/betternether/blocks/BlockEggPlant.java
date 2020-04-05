@@ -58,7 +58,7 @@ public class BlockEggPlant extends BlockCommonPlant
 	{
 		if (enableModDamage && entity instanceof LivingEntity && !((LivingEntity) entity).hasStatusEffect(StatusEffects.POISON))
 		{
-			if (EntityRegistry.isNetherEntity(entity))
+			if (!EntityRegistry.isNetherEntity(entity))
 				((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 3));
 		}
 		else if (enablePlayerDamage && entity instanceof PlayerEntity && !((PlayerEntity) entity).hasStatusEffect(StatusEffects.POISON))

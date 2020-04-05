@@ -1,14 +1,19 @@
 package paulevs.betternether.registry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -20,6 +25,7 @@ import paulevs.betternether.entity.EntityFirefly;
 
 public class EntityRegistry
 {
+	public static final Map<EntityType<? extends LivingEntity>, DefaultAttributeContainer> ATTRUBUTES = new HashMap<EntityType<? extends LivingEntity>, DefaultAttributeContainer>();
 	private static final List<EntityType<?>> NETHER_ENTITIES = new ArrayList<EntityType<?>>();
 	private static final Biome[] NETHER_BIOMES;
 	
@@ -29,17 +35,18 @@ public class EntityRegistry
 	{
 		registerEntity("chair", CHAIR);
 		
-		registerEntity("firefly", FIREFLY, 5, 2, 6, NETHER_BIOMES);
+		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 5, 2, 6, NETHER_BIOMES);
 	}
 	
-	public static void registerEntity(String name, EntityType<?> entity)
+	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity)
 	{
-		registerEntity(name, entity, 0, 0, 0);
+		registerEntity(name, entity, MobEntity.createMobAttributes().build(), 0, 0, 0);
 	}
 	
-	public static void registerEntity(String name, EntityType<?> entity, int weight, int minGroupSize, int maxGroupSize, Biome... spawnBiomes)
+	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity, DefaultAttributeContainer container, int weight, int minGroupSize, int maxGroupSize, Biome... spawnBiomes)
 	{
 		Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
+		ATTRUBUTES.put(entity, container);
 		if (spawnBiomes != null)
 		{
 			for (Biome b: spawnBiomes)
