@@ -32,6 +32,7 @@ import paulevs.betternether.blocks.BNTaburet;
 import paulevs.betternether.blocks.BNTrapdoor;
 import paulevs.betternether.blocks.BNWall;
 import paulevs.betternether.blocks.BlockAgave;
+import paulevs.betternether.blocks.BlockBNPot;
 import paulevs.betternether.blocks.BlockBarrelCactus;
 import paulevs.betternether.blocks.BlockBlackApple;
 import paulevs.betternether.blocks.BlockBlackAppleSeed;
@@ -48,7 +49,6 @@ import paulevs.betternether.blocks.BlockCincinnasiteFrame;
 import paulevs.betternether.blocks.BlockCincinnasiteLantern;
 import paulevs.betternether.blocks.BlockCincinnasiteOre;
 import paulevs.betternether.blocks.BlockCincinnasitePedestal;
-import paulevs.betternether.blocks.BlockCincinnasitePot;
 import paulevs.betternether.blocks.BlockEggPlant;
 import paulevs.betternether.blocks.BlockEyeSeed;
 import paulevs.betternether.blocks.BlockEyeVine;
@@ -400,7 +400,8 @@ public class BlocksRegistry
 	// Decorations //
 	public static final Block PIG_STATUE_RESPAWNER = registerBlock("pig_statue_respawner", new BlockStatueRespawner());
 	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
-	public static final Block CINCINNASITE_POT = registerBlock("cincinnasite_pot", new BlockCincinnasitePot());
+	public static final Block CINCINNASITE_POT = registerBlock("cincinnasite_pot", new BlockBNPot(CINCINNASITE_BLOCK));
+	public static final Block BRICK_POT = registerBlock("brick_pot", new BlockBNPot(Blocks.NETHER_BRICKS));
 	public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
 	public static final Block GEYSER = registerBlock("geyser", new BlockGeyser());
 	

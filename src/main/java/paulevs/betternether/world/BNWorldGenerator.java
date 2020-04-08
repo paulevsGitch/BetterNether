@@ -30,6 +30,7 @@ import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.structures.CityFeature;
 
 public class BNWorldGenerator
@@ -71,7 +72,7 @@ public class BNWorldGenerator
 		useCustomBiomes = Config.getBoolean("generator_world", "use_custom_biome_system", true);
 		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
-		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 64F);
+		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 32F);
 		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
 		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
 		
@@ -246,20 +247,52 @@ public class BNWorldGenerator
 		if (random.nextFloat() < structureDensity)
 		{
 			popPos.set(sx + random.nextInt(16), 32 + random.nextInt(120 - 32), sz + random.nextInt(16));
-			while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
-			{
-				popPos.setY(popPos.getY() - 1);
-			}
+			StructureType type = StructureType.FLOOR;
+			boolean isAir =  world.getBlockState(popPos).isAir();
+			boolean airUp = world.getBlockState(popPos.up()).isAir() && world.getBlockState(popPos.up(3)).isAir();
+			boolean airDown = world.getBlockState(popPos.down()).isAir() && world.getBlockState(popPos.down(3)).isAir();
 			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+			if (!isAir && !airUp && !airDown)
+				type = StructureType.UNDER;
+			else
+			{
+				if (!biome.hasCeilStructures() || random.nextBoolean()) // Floor
+				{
+					while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
+					{
+						popPos.setY(popPos.getY() - 1);
+					}
+				}
+				else // Ceil
+				{
+					while (!BlocksHelper.isNetherGroundMagma(world.getBlockState(popPos.up())) && popPos.getY() < 127)
+					{
+						popPos.setY(popPos.getY() + 1);
+					}
+					type = StructureType.CEIL;
+				}
+			}
+			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
 			if (world.isAir(popPos))
 			{
-				BlockState down = world.getBlockState(popPos.down());
-				if (BlocksHelper.isLava(down))
+				if (type == StructureType.FLOOR)
 				{
-					biome.genLavaBuildings(world, popPos, random);
+					BlockState down = world.getBlockState(popPos.down());
+					if (BlocksHelper.isLava(down))
+					{
+						biome.genLavaBuildings(world, popPos, random);
+					}
+					else if (BlocksHelper.isNetherGroundMagma(down))
+						biome.genFloorBuildings(world, popPos, random);
 				}
-				else if (BlocksHelper.isNetherGroundMagma(down))
-					biome.genFloorBuildings(world, popPos, random);
+				else if (type == StructureType.CEIL)
+				{
+					BlockState up = world.getBlockState(popPos.up());
+					if (BlocksHelper.isNetherGroundMagma(up))
+					{
+						biome.genCeilBuildings(world, popPos, random);
+					}
+				}
 			}
 			else
 				biome.genUnderBuildings(world, popPos, random);
@@ -449,7 +482,8 @@ public class BNWorldGenerator
 	
 	private static boolean canReplace(IWorld world, BlockPos pos)
 	{
-		return BlocksHelper.isNetherGround(world.getBlockState(pos));
+		BlockState state = world.getBlockState(pos);
+		return BlocksHelper.isNetherGround(state);
 	}
 	
 	private static void spawnOre(BlockState state, IWorld world, BlockPos pos, Random random)
@@ -501,6 +535,13 @@ public class BNWorldGenerator
 					if (BlocksHelper.isLava(state) && world.isAir(popPos.up()) && world.isAir(popPos.down()))
 					{
 						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
+						continue;
+					}
+					
+					if (state.getBlock() == Blocks.NETHER_WART_BLOCK || state.getBlock() == Blocks.WARPED_WART_BLOCK)
+					{
+						if (world.isAir(popPos.down()) && world.isAir(popPos.up()) && world.isAir(popPos.north()) && world.isAir(popPos.south()) && world.isAir(popPos.east()) && world.isAir(popPos.west()))
+							BlocksHelper.setWithoutUpdate(world, popPos, AIR);
 						continue;
 					}
 				}

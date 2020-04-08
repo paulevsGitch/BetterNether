@@ -22,6 +22,7 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.IBiome;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.EntityFirefly;
+import paulevs.betternether.entity.EntityHydrogenJellyfish;
 
 public class EntityRegistry
 {
@@ -31,11 +32,14 @@ public class EntityRegistry
 	
 	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(EntityCategory.MISC, EntityChair::new).size(EntityDimensions.fixed(0.0F, 0.0F)).setImmuneToFire().build();
 	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityFirefly::new).size(EntityDimensions.fixed(0.5F, 0.5F)).setImmuneToFire().build();
+	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityHydrogenJellyfish::new).size(EntityDimensions.changing(2F, 5F)).setImmuneToFire().build();
+	
 	public static void register()
 	{
 		registerEntity("chair", CHAIR);
 		
 		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 5, 2, 6, NETHER_BIOMES);
+		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 100, 1, 4, NETHER_BIOMES);
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity)

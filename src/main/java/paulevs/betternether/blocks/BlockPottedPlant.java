@@ -1,6 +1,8 @@
 package paulevs.betternether.blocks;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.function.ToIntFunction;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -27,7 +29,6 @@ import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockPottedPlant extends BlockBaseNotFull
 {
-	//private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 8, 14);
 	public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.of("plant", PottedPlantShape.class);
 	
 	public BlockPottedPlant()
@@ -38,10 +39,17 @@ public class BlockPottedPlant extends BlockBaseNotFull
 				.nonOpaque()
 				.noCollision()
 				.breakInstantly()
-				.build());
+				.build().lightLevel(getLuminance()));
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(PLANT, PottedPlantShape.AGAVE));
+	}
+	
+	private static ToIntFunction<BlockState> getLuminance()
+	{
+		return (blockState) -> {
+			return blockState.get(PLANT) == PottedPlantShape.WILLOW ? 12 : 0;
+		};
 	}
 	
 	@Override
@@ -77,7 +85,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
 	{
 		Block block = state.get(PLANT).getBlock();
-		return block.getDroppedStacks(block.getDefaultState(), builder);
+		return Collections.singletonList(new ItemStack(block.asItem()));
 	}
 
 	public static BlockState getPlant(Item item)
@@ -105,7 +113,10 @@ public class BlockPottedPlant extends BlockBaseNotFull
 		RED_MOLD(BlocksRegistry.RED_MOLD),
 		GRAY_MOLD(BlocksRegistry.GRAY_MOLD),
 		MAGMA_FLOWER(BlocksRegistry.MAGMA_FLOWER),
-		NETHER_WART(BlocksRegistry.WART_SEED);
+		NETHER_WART(BlocksRegistry.WART_SEED),
+		WILLOW(BlocksRegistry.WILLOW_SAPLING),
+		SMOKER(BlocksRegistry.SMOKER),
+		WART(Blocks.NETHER_WART);
 		
 		private final Block block;
 

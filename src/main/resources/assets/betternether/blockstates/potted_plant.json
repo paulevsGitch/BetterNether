@@ -46,6 +46,19 @@
 			{ "model": "betternether:block/potted_magma_flower", "y": 180 },
 			{ "model": "betternether:block/potted_magma_flower", "y": 270 }
 		],
-		"plant=nether_wart": { "model": "betternether:block/potted_wart" }
+		"plant=nether_wart": { "model": "betternether:block/potted_wart" },
+		"plant=willow": [
+			{ "model": "betternether:block/potted_willow" },
+			{ "model": "betternether:block/potted_willow", "y": 90 },
+			{ "model": "betternether:block/potted_willow", "y": 180 },
+			{ "model": "betternether:block/potted_willow", "y": 270 }
+		],
+		"plant=smoker": [
+			{ "model": "betternether:block/potted_smoker" },
+			{ "model": "betternether:block/potted_smoker", "y": 90 },
+			{ "model": "betternether:block/potted_smoker", "y": 180 },
+			{ "model": "betternether:block/potted_smoker", "y": 270 }
+		],
+		"plant=wart": { "model": "betternether:block/potted_mc_wart" }
     }
 }

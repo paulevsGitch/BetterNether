@@ -50,6 +50,7 @@ public class BlocksHelper
 		Block b = state.getBlock();
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
+				b == Blocks.NETHER_GOLD_ORE ||
 				b == Blocks.SOUL_SAND ||
 				b == Blocks.SOUL_SOIL ||
 				b == Blocks.CRIMSON_NYLIUM ||
@@ -62,16 +63,7 @@ public class BlocksHelper
 	public static boolean isNetherGroundMagma(BlockState state)
 	{
 		Block b = state.getBlock();
-		return  b == Blocks.NETHERRACK ||
-				b == Blocks.NETHER_QUARTZ_ORE ||
-				b == Blocks.SOUL_SAND ||
-				b == Blocks.SOUL_SOIL ||
-				b == Blocks.CRIMSON_NYLIUM ||
-				b == Blocks.WARPED_NYLIUM ||
-				b == Blocks.MAGMA_BLOCK ||
-				b == BlocksRegistry.FARMLAND ||
-				b == BlocksRegistry.CINCINNASITE_ORE ||
-				b == BlocksRegistry.NETHERRACK_MOSS;
+		return  isNetherGround(state) || b == Blocks.MAGMA_BLOCK;
 	}
 	
 	public static boolean isBone(BlockState state)

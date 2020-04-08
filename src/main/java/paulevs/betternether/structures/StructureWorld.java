@@ -36,7 +36,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 		else if (type == StructureType.UNDER)
 			return getAirFraction(world, pos) < 0.2;
 		else if (type == StructureType.CEIL)
-			return getAirFractionBottom(world, pos) > 0.7 && getAirFractionFoundation(world, pos) < 0.3;
+			return getAirFractionBottom(world, pos) > 0.7 && getAirFraction(world, pos) < 0.6;
 		else
 			return false;
 	}
@@ -53,9 +53,9 @@ public class StructureWorld extends StructureNBT implements IStructure
 		BlockPos end = pos.add(size.getX() >> 1, size.getY() + offsetY, size.getZ() >> 1);
 		int count = 0;
 		
-		for (int x = start.getX(); x < end.getX(); x++)
-			for (int y = start.getY(); y < end.getY(); y++)
-				for (int z = start.getZ(); z < end.getZ(); z++)
+		for (int x = start.getX(); x <= end.getX(); x++)
+			for (int y = start.getY(); y <= end.getY(); y++)
+				for (int z = start.getZ(); z <= end.getZ(); z++)
 				{
 					POS.set(x, y, z);
 					if (world.isAir(POS))
@@ -78,9 +78,9 @@ public class StructureWorld extends StructureNBT implements IStructure
 		BlockPos end = pos.add(size.getX() >> 1, 0, size.getZ() >> 1);
 		int count = 0;
 		
-		for (int x = start.getX(); x < end.getX(); x++)
-			for (int y = start.getY(); y < end.getY(); y++)
-				for (int z = start.getZ(); z < end.getZ(); z++)
+		for (int x = start.getX(); x <= end.getX(); x++)
+			for (int y = start.getY(); y <= end.getY(); y++)
+				for (int z = start.getZ(); z <= end.getZ(); z++)
 				{
 					POS.set(x, y, z);
 					if (world.isAir(POS))
@@ -105,9 +105,9 @@ public class StructureWorld extends StructureNBT implements IStructure
 		BlockPos end = pos.add(size.getX() >> 1, y2, size.getZ() >> 1);
 		int count = 0;
 		
-		for (int x = start.getX(); x < end.getX(); x++)
-			for (int y = start.getY(); y < end.getY(); y++)
-				for (int z = start.getZ(); z < end.getZ(); z++)
+		for (int x = start.getX(); x <= end.getX(); x++)
+			for (int y = start.getY(); y <= end.getY(); y++)
+				for (int z = start.getZ(); z <= end.getZ(); z++)
 				{
 					POS.set(x, y, z);
 					if (world.isAir(POS))
