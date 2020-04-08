@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityType;
 import paulevs.betternether.entity.render.RenderChair;
 import paulevs.betternether.entity.render.RenderFirefly;
 import paulevs.betternether.entity.render.RenderHydrogenJellyfish;
-import paulevs.betternether.entity.render.RenderNaga;
 
 @Environment(EnvType.CLIENT)
 public class EntityRenderRegistry
@@ -18,7 +17,8 @@ public class EntityRenderRegistry
 		registerRender(EntityRegistry.FIREFLY, RenderFirefly.class);
 		registerRender(EntityRegistry.CHAIR, RenderChair.class);
 		registerRender(EntityRegistry.HYDROGEN_JELLYFISH, RenderHydrogenJellyfish.class);
-		registerRender(EntityRegistry.NAGA, RenderNaga.class);
+		//registerRender(EntityRegistry.NAGA, RenderNaga.class);
+		//registerRender2(EntityRegistry.NAGA_PROJECTILE, RenderNagaProjectile.class);
 	}
 
 	private static void registerRender(EntityType<?> entity, Class<? extends MobEntityRenderer<?, ?>> renderer)
@@ -36,4 +36,20 @@ public class EntityRenderRegistry
 			return render;
 		});
 	}
+	
+	/*private static void registerRender2(EntityType<?> entity, Class<? extends EntityRenderer<?>> renderer)
+	{
+		EntityRendererRegistry.INSTANCE.register(entity, (entityRenderDispatcher, context) -> {
+			EntityRenderer<?> render = null;
+			try
+			{
+				render = renderer.getConstructor(entityRenderDispatcher.getClass()).newInstance(entityRenderDispatcher);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			return render;
+		});
+	}*/
 }

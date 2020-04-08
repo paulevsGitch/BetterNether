@@ -1,5 +1,6 @@
 package paulevs.betternether.blocks;
 
+import java.util.Collections;
 import java.util.List;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
@@ -82,7 +83,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
 	{
 		Block block = state.get(PLANT).getBlock();
-		return block.getDroppedStacks(block.getDefaultState(), builder);
+		return Collections.singletonList(new ItemStack(block.asItem()));
 	}
 
 	public static BlockState getPlant(Item item)

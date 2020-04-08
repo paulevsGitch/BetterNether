@@ -1,5 +1,7 @@
 package paulevs.betternether.blocks;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import net.fabricmc.api.EnvType;
@@ -10,6 +12,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShearsItem;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
@@ -98,5 +104,14 @@ public class BlockMold extends BlockBaseNotFull
 				}
 			}
 		}
+	}
+	
+	@Override
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
+	{
+		if (builder.get(LootContextParameters.TOOL).getItem() instanceof ShearsItem)
+			return Collections.singletonList(new ItemStack(this.asItem()));
+		else
+			return super.getDroppedStacks(state, builder);
 	}
 }

@@ -15,6 +15,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.tag.Tag;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
@@ -150,8 +151,18 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 			double vx = Math.cos(rads) * this.flyingSpeed;
 			double vz = Math.sin(rads) * this.flyingSpeed;
 			
+			BlockPos bp = getBlockPos();
+			double vy = random.nextDouble() * this.flyingSpeed * 0.75;
+			if (world.getBlockState(bp).isAir() &&
+				world.getBlockState(bp.down(2)).isAir() &&
+				world.getBlockState(bp.down(3)).isAir() &&
+				world.getBlockState(bp.down(4)).isAir())
+			{
+				vy = -vy;
+			}
+			
 			preVelocity = newVelocity;
-			newVelocity = new Vec3d(vx, 0, vz);
+			newVelocity = new Vec3d(vx, vy, vz);
 			timer = 0;
 			timeOut = random.nextInt(300) + 120;
 		}

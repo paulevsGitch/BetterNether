@@ -60,7 +60,7 @@ public class ItemsRegistry
 	
 	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg(EntityRegistry.FIREFLY, color(255, 223, 168), color(233, 182, 95)));
 	public static final Item SPAWN_EGG_JELLYFISH = registerItem("spawn_egg_hydrogen_jellyfish", makeEgg(EntityRegistry.HYDROGEN_JELLYFISH, color(253, 164, 24), color(88, 21, 4)));
-	public static final Item SPAWN_NAGA = registerItem("spawn_egg_naga", makeEgg(EntityRegistry.NAGA, color(200, 200, 200), color(60, 60, 60)));
+	//public static final Item SPAWN_NAGA = registerItem("spawn_egg_naga", makeEgg(EntityRegistry.NAGA, color(200, 200, 200), color(60, 60, 60)));
 
 	public static void register() {}
 	

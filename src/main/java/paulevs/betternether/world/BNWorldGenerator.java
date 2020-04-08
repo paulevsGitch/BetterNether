@@ -25,6 +25,7 @@ import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.structures.CityFeature;
 
 public class BNWorldGenerator
@@ -166,20 +167,52 @@ public class BNWorldGenerator
 		if (random.nextFloat() < structureDensity)
 		{
 			popPos.set(sx + random.nextInt(16), 32 + random.nextInt(120 - 32), sz + random.nextInt(16));
-			while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
-			{
-				popPos.setY(popPos.getY() - 1);
-			}
+			StructureType type = StructureType.FLOOR;
+			boolean isAir =  world.getBlockState(popPos).isAir();
+			boolean airUp = world.getBlockState(popPos.up()).isAir() && world.getBlockState(popPos.up(3)).isAir();
+			boolean airDown = world.getBlockState(popPos.down()).isAir() && world.getBlockState(popPos.down(3)).isAir();
 			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+			if (!isAir && !airUp && !airDown)
+				type = StructureType.UNDER;
+			else
+			{
+				if (!biome.hasCeilStructures() || random.nextBoolean()) // Floor
+				{
+					while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
+					{
+						popPos.setY(popPos.getY() - 1);
+					}
+				}
+				else // Ceil
+				{
+					while (!BlocksHelper.isNetherGroundMagma(world.getBlockState(popPos.up())) && popPos.getY() < 127)
+					{
+						popPos.setY(popPos.getY() + 1);
+					}
+					type = StructureType.CEIL;
+				}
+			}
+			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
 			if (world.isAir(popPos))
 			{
-				BlockState down = world.getBlockState(popPos.down());
-				if (BlocksHelper.isLava(down))
+				if (type == StructureType.FLOOR)
 				{
-					biome.genLavaBuildings(world, popPos, random);
+					BlockState down = world.getBlockState(popPos.down());
+					if (BlocksHelper.isLava(down))
+					{
+						biome.genLavaBuildings(world, popPos, random);
+					}
+					else if (BlocksHelper.isNetherGroundMagma(down))
+						biome.genFloorBuildings(world, popPos, random);
 				}
-				else if (BlocksHelper.isNetherGroundMagma(down))
-					biome.genFloorBuildings(world, popPos, random);
+				else if (type == StructureType.CEIL)
+				{
+					BlockState up = world.getBlockState(popPos.up());
+					if (BlocksHelper.isNetherGroundMagma(up))
+					{
+						biome.genCeilBuildings(world, popPos, random);
+					}
+				}
 			}
 			else
 				biome.genUnderBuildings(world, popPos, random);

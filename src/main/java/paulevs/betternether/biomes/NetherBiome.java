@@ -63,7 +63,8 @@ public class NetherBiome
 			structureFormat("respawn_point_02", -2, StructureType.FLOOR, 1),
 			structureFormat("respawn_point_03", -3, StructureType.FLOOR, 1),
 			structureFormat("respawn_point_04", -2, StructureType.FLOOR, 1),
-			structureFormat("spawn_altar_ladder", -5, StructureType.FLOOR, 1)
+			structureFormat("spawn_altar_ladder", -5, StructureType.FLOOR, 1),
+			structureFormat("ghast_hive", -20, StructureType.CEIL, 1F)
 	};
 	
 	private ArrayList<String> structures;
@@ -392,7 +393,6 @@ public class NetherBiome
 				default:
 					break;
 				}
-				
 				chance += getLastChance(infoList);
 				StructureInfo info = new StructureInfo(structure, chance, false);
 				infoList.add(info);
@@ -404,5 +404,10 @@ public class NetherBiome
 	{
 		int size = info.size();
 		return size > 0 ? info.get(size - 1).density : 0;
+	}
+	
+	public boolean hasCeilStructures()
+	{
+		return !buildGeneratorsCeil.isEmpty();
 	}
 }

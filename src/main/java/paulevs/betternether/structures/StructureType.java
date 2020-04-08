@@ -10,15 +10,15 @@ public enum StructureType
 
 	public static StructureType fromString(String a)
 	{
-		if (a.equals("floor"))
+		if (a.contains("floor"))
 			return FLOOR;
-		else if (a.equals("wall"))
+		else if (a.contains("wall"))
 			return WALL;
-		else if (a.equals("ceil"))
+		else if (a.contains("ceil"))
 			return CEIL;
-		else if (a.equals("lava"))
+		else if (a.contains("lava"))
 			return LAVA;
-		else if (a.equals("under"))
+		else if (a.contains("under"))
 			return UNDER;
 		return FLOOR;
 	}
