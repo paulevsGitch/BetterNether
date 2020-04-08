@@ -65,7 +65,7 @@ public class BNWorldGenerator
 		hasFixPass = Config.getBoolean("generator_world", "world_fixing_pass", true);
 		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
-		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 64F);
+		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 32F);
 		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 256);
 		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
 		
