@@ -415,5 +415,6 @@
 	
 	"betternether.flat_nether": "Плоский нижний мир",
 	
-	"item.betternether.spawn_egg_hydrogen_jellyfish": "Яйцо призыва водородной медузы"
+	"item.betternether.spawn_egg_hydrogen_jellyfish": "Яйцо призыва водородной медузы",
+	"block.betternether.brick_pot": "Кирпичный горшок"
 }
