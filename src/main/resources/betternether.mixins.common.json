@@ -15,7 +15,8 @@
 	"BiomeArrayMixin",
 	"BiomeMixin",
 	"PlayerEntityMixin",
-	"DefaultAttributeRegistryMixin"
+	"DefaultAttributeRegistryMixin",
+	"BasaltColumnsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

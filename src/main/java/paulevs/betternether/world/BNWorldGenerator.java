@@ -14,8 +14,8 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.Decorator;
@@ -28,6 +28,7 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.IBiomeArray;
 import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.biomes.NetherBiomeWrapper;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -137,7 +138,7 @@ public class BNWorldGenerator
 	{
 		if (useCustomBiomes)
 		{
-			NetherBiome biome = map.getBiome(x, y, z);
+			NetherBiome biome = map.getBiome(x, y > 30 ? y : 30, z);
 			
 			if (biome.hasEdge() || (biome.hasParrent() && biome.getParrentBiome().hasEdge()))
 			{
@@ -403,9 +404,14 @@ public class BNWorldGenerator
 				{
 					Biome b = chunk.getBiomeArray().getBiomeForNoiseGen(x, y, z);
 					BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
-					if (!(b instanceof NetherBiome))
-						MC_BIOMES.add(b);
 				}
+		
+		for (int y = 2; y < 30; y++)
+		{
+			Biome b = BIOMES[2][y][2].getBiome();
+			if (b instanceof NetherBiomeWrapper || !(b instanceof NetherBiome))
+				MC_BIOMES.add(b);
+		}
 	}
 
 	public static void prePopulate(IWorld world, int sx, int sz, Random random)
