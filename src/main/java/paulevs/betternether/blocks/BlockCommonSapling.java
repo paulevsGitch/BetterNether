@@ -71,6 +71,11 @@ public class BlockCommonSapling extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
 	{
+		return BlocksHelper.isFertile(world.getBlockState(pos.down())) ? (random.nextBoolean()) : (random.nextInt(4) == 0);
+	}
+	
+	protected boolean canGrowTerrain(World world, Random random, BlockPos pos, BlockState state)
+	{
 		return BlocksHelper.isFertile(world.getBlockState(pos.down())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
 	}
 
@@ -84,7 +89,7 @@ public class BlockCommonSapling extends BlockBaseNotFull implements Fertilizable
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
 		super.scheduledTick(state, world, pos, random);
-		if (canGrow(world, random, pos, state))
+		if (canGrowTerrain(world, random, pos, state))
 			grow(world, random, pos, state);
 	}
 }

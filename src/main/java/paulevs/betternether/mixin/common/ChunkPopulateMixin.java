@@ -1,7 +1,5 @@
 package paulevs.betternether.mixin.common;
 
-import java.util.HashSet;
-
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,7 +29,6 @@ import paulevs.betternether.world.BNWorldGenerator;
 public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 {
 	private static final ChunkRandom RANDOM = new ChunkRandom();
-	private static final HashSet<Biome> BIOMES = new HashSet<Biome>();
 	private static final Mutable POS = new Mutable();
 	
 	@Shadow
@@ -61,14 +58,13 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 			RANDOM.setTerrainSeed(chunkX, chunkZ);
 			int sx = chunkX << 4;
 			int sz = chunkZ << 4;
-			BNWorldGenerator.prePopulate(region, sx, sz);
+			BNWorldGenerator.prePopulate(region, sx, sz, RANDOM);
 			
-			getBiomeSet(region, sx, sz);
 			GenerationStep.Feature[] steps = GenerationStep.Feature.values();
 			long featureSeed = RANDOM.setPopulationSeed(region.getSeed(), chunkX, chunkZ);
 			@SuppressWarnings("unchecked")
 			ChunkGenerator<C> generator = (ChunkGenerator<C>) (Object) this;
-			for (Biome biome: BIOMES)
+			for (Biome biome: BNWorldGenerator.getPopulateBiomes())
 			{
 				for (int step = 0; step < steps.length; step ++)
 				{
@@ -122,24 +118,6 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 				if (isNetherBiome(chunk.getBiomeArray().getBiomeForNoiseGen(x, 0, z)))
 					return  true;
 		return false;
-	}
-	
-	private void getBiomeSet(IWorld world, int sx, int sz)
-	{
-		BIOMES.clear();
-		for (int x = 0; x < 16; x += 4)
-		{
-			POS.setX(sx | x);
-			for (int z = 0; z < 16; z += 4)
-			{
-				POS.setZ(sz | z);
-				for (int y = 0; y < 128; y += 4)
-				{
-					POS.setY(y);
-					BIOMES.add(world.getBiome(POS));
-				}
-			}
-		}
 	}
 
 	private boolean isNetherBiome(Biome biome)

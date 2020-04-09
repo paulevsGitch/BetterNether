@@ -1,3 +1,6 @@
 {
-    "parent": "betternether:block/geyser"
+	"parent": "item/generated",
+    "textures": {
+        "layer0": "betternether:item/geyser"
+    }
 }

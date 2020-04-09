@@ -37,6 +37,7 @@ public class NetherMushroomForestEdge extends NetherBiome
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
 			break;
 		case 1:
+			super.genSurfColumn(world, pos, random);
 			break;
 		default:
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.getDefaultState());

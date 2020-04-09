@@ -56,6 +56,9 @@ public class NetherGrasslands extends NetherBiome
 		case 1:
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
 			break;
+		default:
+			super.genSurfColumn(world, pos, random);
+			break;
 		}
 		for (int i = 1; i < random.nextInt(3); i++)
 		{

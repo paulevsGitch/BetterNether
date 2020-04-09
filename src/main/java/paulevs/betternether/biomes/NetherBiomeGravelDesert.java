@@ -38,7 +38,7 @@ public class NetherBiomeGravelDesert extends NetherBiome
 		for (int i = 0; i < 1 + random.nextInt(3); i++)
 		{
 			BlockPos p2 = pos.down(i);
-			if (BlocksHelper.isNetherrack(world.getBlockState(p2)))
+			if (BlocksHelper.isNetherGround(world.getBlockState(p2)))
 				if (world.isAir(p2.down()))
 				{
 					BlocksHelper.setWithoutUpdate(world, p2, Blocks.NETHERRACK.getDefaultState());

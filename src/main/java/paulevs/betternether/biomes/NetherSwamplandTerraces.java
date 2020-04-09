@@ -24,6 +24,8 @@ public class NetherSwamplandTerraces extends NetherSwampland
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
 		else if (random.nextBoolean())
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
+		else
+			super.genSurfColumn(world, pos, random);
 		for (int i = 1; i < random.nextInt(3); i++)
 		{
 			BlockPos down = pos.down(i);

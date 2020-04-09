@@ -30,9 +30,9 @@ public class BiomeMap
 		noiseZ = new OpenSimplexNoise(RANDOM.nextLong());
 		this.sizeXZ = sizeXZ;
 		this.sizeY = sizeY;
-		maxHeight = 128 / sizeY;
+		maxHeight = (int) Math.ceil(128F / sizeY);
 		
-		depth = (int) Math.ceil(Math.log(Math.max(sizeXZ, sizeY)) / Math.log(2)) - 1;
+		depth = (int) Math.ceil(Math.log(Math.max(sizeXZ, sizeY)) / Math.log(2)) - 2;
 		size = 1 << depth;
 	}
 	

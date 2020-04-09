@@ -23,6 +23,7 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.structures.IStructure;
@@ -142,12 +143,10 @@ public class NetherBiome extends Biome
 		setNoiseDensity(Config.getFloat(group, "noise_density", getNoiseDensity()));
 	}
 	
-	public void loadStructures()
+	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
 	{
-		
+		BlocksHelper.setWithoutUpdate(world, pos, this.getBiome().getSurfaceBuilder().config.getTopMaterial());
 	}
-	
-	public void genSurfColumn(IWorld world, BlockPos pos, Random random) {}
 	
 	public void genFloorObjects(IWorld world, BlockPos pos, Random random)
 	{

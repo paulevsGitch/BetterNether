@@ -56,6 +56,8 @@ public class NetherMagmaLand extends NetherBiome
 						BlocksHelper.setWithoutUpdate(world, POS, Blocks.MAGMA_BLOCK.getDefaultState());
 				}
 		}
+		else
+			super.genSurfColumn(world, pos, random);
 	}
 	
 	protected boolean validWall(IWorld world, BlockPos pos)

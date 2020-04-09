@@ -48,6 +48,8 @@ public class NetherWartForest extends NetherBiome
 		switch(random.nextInt(4))
 		{
 		case 0:
+			super.genSurfColumn(world, pos, random);
+			break;
 		case 1:
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
 			break;

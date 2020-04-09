@@ -55,8 +55,13 @@ public class NetherSwampland extends NetherBiome
 			break;
 		case 1:
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
+			break;
 		case 2:
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
+			break;
+		default:
+			super.genSurfColumn(world, pos, random);
+			break;
 		}
 		for (int i = 1; i < random.nextInt(3); i++)
 		{
