@@ -140,6 +140,7 @@ public class BiomesRegistry
 			biome.build();
 			REGISTRY.add(biome);
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, regName), biome);
+			LINKS.put(biome.getBiome(), biome);
 			NetherBiomes.addNetherBiome(biome);
 		}
 	}
@@ -156,6 +157,7 @@ public class BiomesRegistry
 			biome.build();
 			REGISTRY.add(biome);
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, regName), biome);
+			LINKS.put(biome.getBiome(), biome);
 			NetherBiomes.addNetherBiome(biome);
 		}
 	}
@@ -180,6 +182,7 @@ public class BiomesRegistry
 			mainBiome.addSubBiome(biome, chance);
 			biome.build();
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, biome.getRegistryName()), biome);
+			LINKS.put(biome.getBiome(), biome);
 		}
 	}
 	

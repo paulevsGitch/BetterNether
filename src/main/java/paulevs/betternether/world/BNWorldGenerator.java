@@ -46,7 +46,7 @@ public class BNWorldGenerator
 	
 	private static Mutable popPos = new Mutable();
 	
-	private static final NetherBiome[][][] BIOMES = new NetherBiome[8][64][8];
+	private static final NetherBiome[][][] BIOMES = new NetherBiome[4][32][4];
 	private static BiomeMap map;
 	private static int sizeXZ;
 	private static int sizeY;
@@ -74,7 +74,7 @@ public class BNWorldGenerator
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
 		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 32F);
 		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
-		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
+		sizeY = Config.getInt("generator_world", "biome_size_y", 64);
 		
 		if (Config.getBoolean("generator_world", "generate_cities", true))
 		{
@@ -106,15 +106,15 @@ public class BNWorldGenerator
 	private static void makeBiomeArray(IWorld world, int sx, int sz)
 	{
 		int wx, wy, wz;
-		for (int x = 0; x < 8; x++)
+		for (int x = 0; x < 4; x++)
 		{
-			wx = sx | (x << 1);
-			for (int y = 0; y < 64; y++)
+			wx = sx | (x << 2);
+			for (int y = 0; y < 32; y++)
 			{
-				wy = (y << 1);
-				for (int z = 0; z < 8; z++)
+				wy = (y << 2);
+				for (int z = 0; z < 4; z++)
 				{
-					wz = sz | (z << 1);
+					wz = sz | (z << 2);
 					BIOMES[x][y][z] = getBiome(world, wx, wy, wz);
 				}
 			}
@@ -123,11 +123,10 @@ public class BNWorldGenerator
 	
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random)
 	{
-		x = (x + random.nextInt(4) - 2) >> 1;
-		y = (y + random.nextInt(4) - 2) >> 1;
-		z = (z + random.nextInt(4) - 2) >> 1;
-		
-		return BIOMES[clamp(x, 7)][clamp(y, 63)][clamp(z, 7)];
+		int px = (x + random.nextInt(5) - 2) >> 2;
+		int py = (y + random.nextInt(5) - 2) >> 2;
+		int pz = (z + random.nextInt(5) - 2) >> 2;
+		return BIOMES[clamp(px, 3)][clamp(py, 31)][clamp(pz, 3)];
 	}
 	
 	public static NetherBiome getBiome(IWorld world, int x, int y, int z)
@@ -180,37 +179,6 @@ public class BNWorldGenerator
 		return x < 0 ? 0 : x > max ? max : x;
 	}
 	
-	public static void generateBiomes(IWorld world, int sx, int sz, Random random)
-	{
-		makeBiomeArray(world, sx, sz);
-		if (useCustomBiomes)
-		{
-			IBiomeArray array = (IBiomeArray) world.getChunk(sx >> 4, sz >> 4).getBiomeArray();
-			/*for (int x = 0; x < 16; x++)
-			{
-				for (int z = 0; z < 16; z++)
-				{
-					for (int y = 0; y < 128; y++)
-					{
-						biome = getBiomeLocal(x, y, z, random);
-						
-						if (biome == null)
-							continue;
-
-						array.setBiome(x, y, z, biome.getBiome());
-					}
-				}
-			}*/
-			for (int x = 0; x < 4; x++)
-				for (int y = 0; y < 32; y++)
-					for (int z = 0; z < 4; z++)
-					{
-						biome = BIOMES[x << 1][y << 1][z << 1];
-						array.setBiome(x, y, z, biome.getBiome());
-					}
-		}
-	}
-	
 	public static boolean generateCustomBiomes(IWorld world, Chunk chunk)
 	{
 		if (useCustomBiomes)
@@ -222,17 +190,17 @@ public class BNWorldGenerator
 				for (int y = 0; y < 32; y++)
 					for (int z = 0; z < 4; z++)
 					{
-						biome = BIOMES[x << 1][y << 1][z << 1];
+						biome = BIOMES[x][y][z];
 						array.setBiome(x, y, z, biome.getBiome());
 					}
 		}
 		else
 		{
-			for (int x = 0; x < 8; x++)
-				for (int y = 0; y < 64; y++)
-					for (int z = 0; z < 8; z++)
+			for (int x = 0; x < 4; x++)
+				for (int y = 0; y < 32; y++)
+					for (int z = 0; z < 4; z++)
 					{
-						Biome b = chunk.getBiomeArray().getBiomeForNoiseGen(x >> 1, y >> 1, z >> 1);
+						Biome b = chunk.getBiomeArray().getBiomeForNoiseGen(x, y, z);
 						BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
 					}
 		}
@@ -241,7 +209,7 @@ public class BNWorldGenerator
 
 	public static void populate(IWorld world, int sx, int sz, Random random)
 	{
-		makeBiomeArray(world, sx, sz);
+		makeLocalBiomes(world.getChunk(sx >> 4, sz >> 4));
 		
 		//Structure Generator
 		if (random.nextFloat() < structureDensity)
@@ -420,6 +388,17 @@ public class BNWorldGenerator
 			}
 	}
 	
+	private static void makeLocalBiomes(Chunk chunk)
+	{
+		for (int x = 0; x < 4; x++)
+			for (int y = 0; y < 32; y++)
+				for (int z = 0; z < 4; z++)
+				{
+					Biome b = chunk.getBiomeArray().getBiomeForNoiseGen(x, y, z);
+					BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
+				}
+	}
+
 	public static void prePopulate(IWorld world, int sx, int sz)
 	{
 		popPos.set(sx, 0, sz);

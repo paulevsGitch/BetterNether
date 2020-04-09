@@ -32,10 +32,10 @@ public class BiomeDefenition
 		this.name = name;
 		random.setSeed(name.hashCode());
 		noise = new Biome.MixedNoisePoint(
-				random.nextFloat() * 2 - 1,
-				random.nextFloat() * 2 - 1,
-				random.nextFloat() * 2 - 1,
-				random.nextFloat(), 1.0F);
+				random.nextFloat(),
+				random.nextFloat(),
+				random.nextFloat(),
+				random.nextFloat() * 2 - 1, 1.0F);
 	}
 	
 	/**
