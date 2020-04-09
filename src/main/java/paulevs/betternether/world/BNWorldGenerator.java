@@ -66,8 +66,8 @@ public class BNWorldGenerator
 		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
 		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 32F);
-		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 256);
-		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
+		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
+		sizeY = Config.getInt("generator_world", "biome_size_y", 40);
 		
 		if (Config.getBoolean("generator_world", "generate_cities", true))
 		{
@@ -127,7 +127,7 @@ public class BNWorldGenerator
 			NetherBiome search = biome;
 			if (biome.hasParrent())
 				search = biome.getParrentBiome();
-			int d = search.getEdgeSize();
+			int d = (int) Math.ceil(search.getEdgeSize() / 4F) * 4;
 			
 			boolean edge = !search.isSame(map.getBiome(x + d, y, z));
 			edge = edge || !search.isSame(map.getBiome(x - d, y, z));

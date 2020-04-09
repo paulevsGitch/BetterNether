@@ -401,5 +401,6 @@
 	
 	"betternether.createWorld.customize.preset.betternether.flat_nether": "Flat Nether",
 	
-	"item.betternether.spawn_egg_hydrogen_jellyfish": "Hydrogen Jellyfish Spawn Egg"
+	"item.betternether.spawn_egg_hydrogen_jellyfish": "Hydrogen Jellyfish Spawn Egg",
+	"block.betternether.brick_pot": "Brick Pot"
 }
