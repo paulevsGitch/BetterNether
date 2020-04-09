@@ -17,9 +17,12 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 public class BlockGeyser extends BlockBaseNotFull
 {
@@ -92,5 +95,20 @@ public class BlockGeyser extends BlockBaseNotFull
 		}
 
 		super.onSteppedOn(world, pos, entity);
+	}
+	
+	@Override
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
+	{
+		return world.getBlockState(pos.down()).isSideSolidFullSquare(world, pos.down(), Direction.UP);
+	}
+	
+	@Override
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, IWorld world, BlockPos pos, BlockPos neighborPos)
+	{
+		if (!canPlaceAt(state, world, pos))
+			return Blocks.AIR.getDefaultState();
+		else
+			return state;
 	}
 }

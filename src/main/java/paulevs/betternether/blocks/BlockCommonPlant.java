@@ -78,6 +78,15 @@ public class BlockCommonPlant extends BlockBaseNotFull implements Fertilizable
 	{
 		int age = state.get(AGE);
 		if (age < 3)
+			return BlocksHelper.isFertile(world.getBlockState(pos.down())) ? (random.nextBoolean()) : (random.nextInt(4) == 0);
+		else
+			return false;
+	}
+	
+	protected boolean canGrowTerrain(World world, Random random, BlockPos pos, BlockState state)
+	{
+		int age = state.get(AGE);
+		if (age < 3)
 			return BlocksHelper.isFertile(world.getBlockState(pos.down())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
 		else
 			return false;
@@ -94,7 +103,7 @@ public class BlockCommonPlant extends BlockBaseNotFull implements Fertilizable
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
 		super.scheduledTick(state, world, pos, random);
-		if (canGrow(world, random, pos, state))
+		if (canGrowTerrain(world, random, pos, state))
 			grow(world, random, pos, state);
 	}
 }

@@ -40,7 +40,7 @@ public class BNWorldGenerator
 	
 	private static Mutable popPos = new Mutable();
 	
-	private static final NetherBiome[][][] BIOMES = new NetherBiome[8][64][8];
+	private static final NetherBiome[][][] BIOMES = new NetherBiome[4][32][4];
 	private static BiomeMap map;
 	private static int sizeXZ;
 	private static int sizeY;
@@ -95,15 +95,15 @@ public class BNWorldGenerator
 	private static void makeBiomeArray(int sx, int sz)
 	{
 		int wx, wy, wz;
-		for (int x = 0; x < 8; x++)
+		for (int x = 0; x < 4; x++)
 		{
-			wx = sx + (x << 1);
-			for (int y = 0; y < 64; y++)
+			wx = sx + (x << 2);
+			for (int y = 0; y < 32; y++)
 			{
-				wy = (y << 1);
-				for (int z = 0; z < 8; z++)
+				wy = (y << 2);
+				for (int z = 0; z < 4; z++)
 				{
-					wz = sz + (z << 1);
+					wz = sz + (z << 2);
 					BIOMES[x][y][z] = getBiome(wx, wy, wz);
 				}
 			}
@@ -112,11 +112,10 @@ public class BNWorldGenerator
 	
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random)
 	{
-		x = (x + random.nextInt(4) - 2) >> 1;
-		y = (y + random.nextInt(4) - 2) >> 1;
-		z = (z + random.nextInt(4) - 2) >> 1;
-		
-		return BIOMES[clamp(x, 7)][clamp(y, 63)][clamp(z, 7)];
+		int px = (x + random.nextInt(5) - 2) >> 2;
+		int py = (y + random.nextInt(5) - 2) >> 2;
+		int pz = (z + random.nextInt(5) - 2) >> 2;
+		return BIOMES[clamp(px, 3)][clamp(py, 31)][clamp(pz, 3)];
 	}
 	
 	public static NetherBiome getBiome(int x, int y, int z)
