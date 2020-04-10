@@ -4,7 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
-import paulevs.betternether.registers.ItemsRegister;
+import paulevs.betternether.registry.ItemsRegistry;
 
 public class BNItemAxe extends AxeItem
 {
@@ -12,7 +12,7 @@ public class BNItemAxe extends AxeItem
 	
 	public BNItemAxe(ToolMaterial material, int durability, float speed)
 	{
-		super(material, 1, -2.8F, ItemsRegister.defaultSettings());//.maxDamageIfAbsent(durability));
+		super(material, 1, -2.8F, ItemsRegistry.defaultSettings());//.maxDamageIfAbsent(durability));
 		this.speed = speed;
 	}
 	

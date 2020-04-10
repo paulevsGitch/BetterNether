@@ -44,10 +44,22 @@ public class StructureScatter implements IStructure
 		if (world.isAir(pos) && canPlaceAt(world, pos))
 		{
 			BlockState state = plantBlock.getDefaultState();
-			for (int i = 0; i < 16; i++)
+			int rndState = random.nextInt(2);
+			for (int i = 0; i < 20; i++)
 			{
 				int x = pos.getX() + (int) (random.nextGaussian() * 4);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 4);
+				if (((x + z + rndState) & 1) == 0)
+				{
+					if (random.nextBoolean())
+					{
+						x += random.nextBoolean() ? 1 : -1;
+					}
+					else
+					{
+						z += random.nextBoolean() ? 1 : -1;
+					}
+				}
 				int y = pos.getY() + random.nextInt(8);
 				for (int j = 0; j < 8; j++)
 				{

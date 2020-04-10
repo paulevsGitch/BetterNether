@@ -1,12 +1,12 @@
 package paulevs.betternether.structures.plants;
 
 import paulevs.betternether.blocks.BlockCommonPlant;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class StructureOrangeMushroom extends StructureScatter
 {
 	public StructureOrangeMushroom()
 	{
-		super(BlocksRegister.ORANGE_MUSHROOM, BlockCommonPlant.AGE, 4);
+		super(BlocksRegistry.ORANGE_MUSHROOM, BlockCommonPlant.AGE, 4);
 	}
 }

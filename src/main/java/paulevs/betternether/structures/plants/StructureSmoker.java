@@ -9,7 +9,7 @@ import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.shapes.TripleShape;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureSmoker implements IStructure
@@ -26,9 +26,9 @@ public class StructureSmoker implements IStructure
 	{
 		if (canPlaceAt(world, pos))
 		{
-			BlockState top = BlocksRegister.SMOKER.getDefaultState();
-			BlockState middle = BlocksRegister.SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.MIDDLE);
-			BlockState bottom = BlocksRegister.SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.BOTTOM);
+			BlockState top = BlocksRegistry.SMOKER.getDefaultState();
+			BlockState middle = BlocksRegistry.SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.MIDDLE);
+			BlockState bottom = BlocksRegistry.SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.BOTTOM);
 			for (int i = 0; i < 8; i++)
 			{
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);

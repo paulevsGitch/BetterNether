@@ -1,5 +1,6 @@
 package paulevs.betternether.blocks;
 
+import java.util.Collections;
 import java.util.List;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
@@ -23,11 +24,10 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockPottedPlant extends BlockBaseNotFull
 {
-	//private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 8, 14);
 	public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.of("plant", PottedPlantShape.class);
 	
 	public BlockPottedPlant()
@@ -43,7 +43,13 @@ public class BlockPottedPlant extends BlockBaseNotFull
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(PLANT, PottedPlantShape.AGAVE));
 	}
-	
+
+	@Override
+	public int getLuminance(BlockState state)
+	{
+		return state.get(PLANT) == PottedPlantShape.WILLOW ? 12 : 0;
+	}
+
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
@@ -61,7 +67,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegister.CINCINNASITE_POT;
+		return world.getBlockState(pos.down()).getBlock() instanceof BlockBNPot;
 	}
 
 	@Override
@@ -77,7 +83,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
 	{
 		Block block = state.get(PLANT).getBlock();
-		return block.getDroppedStacks(block.getDefaultState(), builder);
+		return Collections.singletonList(new ItemStack(block.asItem()));
 	}
 
 	public static BlockState getPlant(Item item)
@@ -85,27 +91,30 @@ public class BlockPottedPlant extends BlockBaseNotFull
 		for (PottedPlantShape shape: PottedPlantShape.values())
 		{
 			if (shape.getItem().equals(item))
-				return BlocksRegister.POTTED_PLANT.getDefaultState().with(PLANT, shape);
+				return BlocksRegistry.POTTED_PLANT.getDefaultState().with(PLANT, shape);
 		}
 		return null;
 	}
 	
 	public static enum PottedPlantShape implements StringIdentifiable
 	{
-		AGAVE(BlocksRegister.AGAVE),
-		BARREL_CACTUS(BlocksRegister.BARREL_CACTUS),
-		BLACK_APPLE(BlocksRegister.BLACK_APPLE_SEED),
-		BLACK_BUSH(BlocksRegister.BLACK_BUSH),
-		EGG_PLANT(BlocksRegister.EGG_PLANT),
-		INK_BUSH(BlocksRegister.INK_BUSH_SEED),
-		REEDS(BlocksRegister.NETHER_REED),
-		NETHER_CACTUS(BlocksRegister.NETHER_CACTUS),
-		NETHER_GRASS(BlocksRegister.NETHER_GRASS),
-		ORANGE_MUSHROOM(BlocksRegister.ORANGE_MUSHROOM),
-		RED_MOLD(BlocksRegister.RED_MOLD),
-		GRAY_MOLD(BlocksRegister.GRAY_MOLD),
-		MAGMA_FLOWER(BlocksRegister.MAGMA_FLOWER),
-		NETHER_WART(BlocksRegister.WART_SEED);
+		AGAVE(BlocksRegistry.AGAVE),
+		BARREL_CACTUS(BlocksRegistry.BARREL_CACTUS),
+		BLACK_APPLE(BlocksRegistry.BLACK_APPLE_SEED),
+		BLACK_BUSH(BlocksRegistry.BLACK_BUSH),
+		EGG_PLANT(BlocksRegistry.EGG_PLANT),
+		INK_BUSH(BlocksRegistry.INK_BUSH_SEED),
+		REEDS(BlocksRegistry.NETHER_REED),
+		NETHER_CACTUS(BlocksRegistry.NETHER_CACTUS),
+		NETHER_GRASS(BlocksRegistry.NETHER_GRASS),
+		ORANGE_MUSHROOM(BlocksRegistry.ORANGE_MUSHROOM),
+		RED_MOLD(BlocksRegistry.RED_MOLD),
+		GRAY_MOLD(BlocksRegistry.GRAY_MOLD),
+		MAGMA_FLOWER(BlocksRegistry.MAGMA_FLOWER),
+		NETHER_WART(BlocksRegistry.WART_SEED),
+		WILLOW(BlocksRegistry.WILLOW_SAPLING),
+		SMOKER(BlocksRegistry.SMOKER),
+		WART(Blocks.NETHER_WART);
 		
 		private final Block block;
 

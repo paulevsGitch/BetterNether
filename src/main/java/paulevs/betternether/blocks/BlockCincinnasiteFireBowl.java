@@ -27,7 +27,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasiteFireBowl extends BlockBaseNotFull
 {
@@ -36,7 +36,7 @@ public class BlockCincinnasiteFireBowl extends BlockBaseNotFull
 
 	public BlockCincinnasiteFireBowl()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().build());
 		this.setDefaultState(getStateManager().getDefaultState().with(FIRE, false));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

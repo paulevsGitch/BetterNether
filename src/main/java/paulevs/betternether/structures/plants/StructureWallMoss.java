@@ -1,11 +1,11 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class StructureWallMoss extends StructureWall
 {
 	public StructureWallMoss()
 	{
-		super(BlocksRegister.WALL_MOSS);
+		super(BlocksRegistry.WALL_MOSS);
 	}
 }

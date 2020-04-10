@@ -1,5 +1,7 @@
 package paulevs.betternether.blocks;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
@@ -12,6 +14,9 @@ import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShearsItem;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +26,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable
 {
@@ -50,7 +55,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
 		Block block = world.getBlockState(pos.down()).getBlock();
-		return block == Blocks.SOUL_SAND || block == BlocksRegister.VEINED_SAND;
+		return block == Blocks.SOUL_SAND || block == BlocksRegistry.VEINED_SAND;
 	}
 	
 	@Override
@@ -83,6 +88,15 @@ public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable
 	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack)
 	{
 		if (world.getBlockState(pos.down()).getBlock() == Blocks.SOUL_SAND)
-			world.setBlockState(pos.down(), BlocksRegister.VEINED_SAND.getDefaultState());
+			world.setBlockState(pos.down(), BlocksRegistry.VEINED_SAND.getDefaultState());
+	}
+	
+	@Override
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
+	{
+		if (builder.get(LootContextParameters.TOOL).getItem() instanceof ShearsItem)
+			return Collections.singletonList(new ItemStack(this.asItem()));
+		else
+			return super.getDroppedStacks(state, builder);
 	}
 }

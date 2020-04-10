@@ -1,5 +1,9 @@
 package paulevs.betternether;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,10 +14,11 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.blocks.BlockFarmland;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlocksHelper
 {
@@ -25,6 +30,20 @@ public class BlocksHelper
 	
 	public static final int SET_SILENT = FLAG_UPDATE_BLOCK | FLAG_IGNORE_OBSERVERS | FLAG_SEND_CLIENT_CHANGES;
 	
+	private static final Vec3i[] OFFSETS = new Vec3i[] {
+			new Vec3i(-1, -1, -1), new Vec3i(-1, -1, 0), new Vec3i(-1, -1, 1),
+			new Vec3i(-1, 0, -1), new Vec3i(-1, 0, 0), new Vec3i(-1, 0, 1),
+			new Vec3i(-1, 1, -1), new Vec3i(-1, 1, 0), new Vec3i(-1, 1, 1),
+			
+			new Vec3i(0, -1, -1), new Vec3i(0, -1, 0), new Vec3i(0, -1, 1),
+			new Vec3i(0, 0, -1), new Vec3i(0, 0, 0), new Vec3i(0, 0, 1),
+			new Vec3i(0, 1, -1), new Vec3i(0, 1, 0), new Vec3i(0, 1, 1),
+			
+			new Vec3i(1, -1, -1), new Vec3i(1, -1, 0), new Vec3i(1, -1, 1),
+			new Vec3i(1, 0, -1), new Vec3i(1, 0, 0), new Vec3i(1, 0, 1),
+			new Vec3i(1, 1, -1), new Vec3i(1, 1, 0), new Vec3i(1, 1, 1)
+	};
+	
 	public static boolean isLava(BlockState state)
 	{
 		return state.getMaterial() == Material.LAVA;
@@ -35,8 +54,14 @@ public class BlocksHelper
 		Block b = state.getBlock();
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS;
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS;
+	}
+	
+	public static boolean isSoulSand(BlockState state)
+	{
+		Block b = state.getBlock();
+		return  b == Blocks.SOUL_SAND;
 	}
 	
 	public static boolean isNetherGround(BlockState state)
@@ -45,9 +70,9 @@ public class BlocksHelper
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
-				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS;
+				b == BlocksRegistry.FARMLAND ||
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isNetherGroundMagma(BlockState state)
@@ -57,16 +82,16 @@ public class BlocksHelper
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
 				b == Blocks.MAGMA_BLOCK ||
-				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS;
+				b == BlocksRegistry.FARMLAND ||
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS;
 	}
 	
 	public static boolean isBone(BlockState state)
 	{
 		Block b = state.getBlock();
 		return  b == Blocks.BONE_BLOCK ||
-				b == BlocksRegister.BONE;
+				b == BlocksRegistry.BONE;
 	}
 	
 	public static boolean isGroundOrModContent(BlockState state)
@@ -75,9 +100,9 @@ public class BlocksHelper
 		return  b == Blocks.NETHERRACK ||
 				b == Blocks.NETHER_QUARTZ_ORE ||
 				b == Blocks.SOUL_SAND ||
-				b == BlocksRegister.FARMLAND ||
-				b == BlocksRegister.CINCINNASITE_ORE ||
-				b == BlocksRegister.NETHERRACK_MOSS ||
+				b == BlocksRegistry.FARMLAND ||
+				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHERRACK_MOSS ||
 				Registry.BLOCK.getId(b).getNamespace().equals(BetterNether.MOD_ID);
 	}
 	
@@ -123,5 +148,41 @@ public class BlocksHelper
 	public static boolean isFertile(BlockState state)
 	{
 		return state.getBlock() instanceof BlockFarmland;
+	}
+	
+	public static void cover(IWorld world, BlockPos center, Block ground, BlockState cover, int radius, Random random)
+	{
+		HashSet<BlockPos> points = new HashSet<BlockPos>();
+		HashSet<BlockPos> points2 = new HashSet<BlockPos>();
+		if (world.getBlockState(center).getBlock() == ground)
+		{
+			points.add(center);
+			points2.add(center);
+			for (int i = 0; i < radius; i++)
+			{
+				Iterator<BlockPos> iterator = points.iterator();
+				while (iterator.hasNext())
+				{
+					BlockPos pos = iterator.next();
+					for (Vec3i offset: OFFSETS)
+					{
+						if (random.nextBoolean())
+						{
+							BlockPos pos2 = pos.add(offset);
+							if (random.nextBoolean() && world.getBlockState(pos2).getBlock() == ground && !points.contains(pos2))
+								points2.add(pos2);
+						}
+					}
+				}
+				points.addAll(points2);
+				points2.clear();
+			}
+			Iterator<BlockPos> iterator = points.iterator();
+			while (iterator.hasNext())
+			{
+				BlockPos pos = iterator.next();
+				BlocksHelper.setWithoutUpdate(world, pos, cover);
+			}
+		}
 	}
 }

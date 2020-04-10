@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "betternether:block/obsidian_bricks_half_slab" },
+        "type=top": { "model": "betternether:block/obsidian_bricks_half_slab", "x": 180, "uvlock": true },
+        "type=double": { "model": "betternether:block/obsidian_bricks" }
+    }
+}

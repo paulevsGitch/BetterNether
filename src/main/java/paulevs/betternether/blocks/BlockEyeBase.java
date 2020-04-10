@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockEyeBase extends BlockBase
 {
@@ -28,7 +28,7 @@ public class BlockEyeBase extends BlockBase
 	{
 		BlockPos blockPos = pos.up();
 		Block up = world.getBlockState(blockPos).getBlock();
-		if (up != BlocksRegister.EYE_VINE && up != Blocks.NETHERRACK)
+		if (up != BlocksRegistry.EYE_VINE && up != Blocks.NETHERRACK)
 			return Blocks.AIR.getDefaultState();
 		else
 			return state;

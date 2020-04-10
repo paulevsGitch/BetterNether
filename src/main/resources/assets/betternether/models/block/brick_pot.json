@@ -1,0 +1,9 @@
+{
+	"parent": "betternether:block/cincinnasite_pot",
+	"textures": {
+		"particle": "betternether:block/brick_pot_side",
+		"side": "betternether:block/brick_pot_side",
+		"top": "betternether:block/brick_pot_top",
+		"bottom": "betternether:block/nether_brick_tile_large"
+	}
+}

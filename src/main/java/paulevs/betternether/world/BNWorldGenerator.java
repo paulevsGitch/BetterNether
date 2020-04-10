@@ -23,8 +23,9 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
+import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.structures.CityFeature;
 
 public class BNWorldGenerator
@@ -39,7 +40,7 @@ public class BNWorldGenerator
 	
 	private static Mutable popPos = new Mutable();
 	
-	private static final NetherBiome[][][] BIOMES = new NetherBiome[8][64][8];
+	private static final NetherBiome[][][] BIOMES = new NetherBiome[4][32][4];
 	private static BiomeMap map;
 	private static int sizeXZ;
 	private static int sizeY;
@@ -64,9 +65,9 @@ public class BNWorldGenerator
 		hasFixPass = Config.getBoolean("generator_world", "world_fixing_pass", true);
 		
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
-		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 64F);
-		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
-		sizeY = Config.getInt("generator_world", "biome_size_y", 32);
+		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 32F);
+		sizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
+		sizeY = Config.getInt("generator_world", "biome_size_y", 40);
 		
 		if (Config.getBoolean("generator_world", "generate_cities", true))
 		{
@@ -94,15 +95,15 @@ public class BNWorldGenerator
 	private static void makeBiomeArray(int sx, int sz)
 	{
 		int wx, wy, wz;
-		for (int x = 0; x < 8; x++)
+		for (int x = 0; x < 4; x++)
 		{
-			wx = sx + (x << 1);
-			for (int y = 0; y < 64; y++)
+			wx = sx + (x << 2);
+			for (int y = 0; y < 32; y++)
 			{
-				wy = (y << 1);
-				for (int z = 0; z < 8; z++)
+				wy = (y << 2);
+				for (int z = 0; z < 4; z++)
 				{
-					wz = sz + (z << 1);
+					wz = sz + (z << 2);
 					BIOMES[x][y][z] = getBiome(wx, wy, wz);
 				}
 			}
@@ -111,11 +112,10 @@ public class BNWorldGenerator
 	
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random)
 	{
-		x = (x + random.nextInt(4) - 2) >> 1;
-		y = (y + random.nextInt(4) - 2) >> 1;
-		z = (z + random.nextInt(4) - 2) >> 1;
-		
-		return BIOMES[clamp(x, 7)][clamp(y, 63)][clamp(z, 7)];
+		int px = (x + random.nextInt(5) - 2) >> 2;
+		int py = (y + random.nextInt(5) - 2) >> 2;
+		int pz = (z + random.nextInt(5) - 2) >> 2;
+		return BIOMES[clamp(px, 3)][clamp(py, 31)][clamp(pz, 3)];
 	}
 	
 	public static NetherBiome getBiome(int x, int y, int z)
@@ -127,7 +127,7 @@ public class BNWorldGenerator
 			NetherBiome search = biome;
 			if (biome.hasParrent())
 				search = biome.getParrentBiome();
-			int d = search.getEdgeSize();
+			int d = (int) Math.ceil(search.getEdgeSize() / 4F) * 4;
 			
 			boolean edge = !search.isSame(map.getBiome(x + d, y, z));
 			edge = edge || !search.isSame(map.getBiome(x - d, y, z));
@@ -166,20 +166,52 @@ public class BNWorldGenerator
 		if (random.nextFloat() < structureDensity)
 		{
 			popPos.set(sx + random.nextInt(16), 32 + random.nextInt(120 - 32), sz + random.nextInt(16));
-			while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
-			{
-				popPos.setY(popPos.getY() - 1);
-			}
+			StructureType type = StructureType.FLOOR;
+			boolean isAir =  world.getBlockState(popPos).isAir();
+			boolean airUp = world.getBlockState(popPos.up()).isAir() && world.getBlockState(popPos.up(3)).isAir();
+			boolean airDown = world.getBlockState(popPos.down()).isAir() && world.getBlockState(popPos.down(3)).isAir();
 			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+			if (!isAir && !airUp && !airDown)
+				type = StructureType.UNDER;
+			else
+			{
+				if (!biome.hasCeilStructures() || random.nextBoolean()) // Floor
+				{
+					while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
+					{
+						popPos.setY(popPos.getY() - 1);
+					}
+				}
+				else // Ceil
+				{
+					while (!BlocksHelper.isNetherGroundMagma(world.getBlockState(popPos.up())) && popPos.getY() < 127)
+					{
+						popPos.setY(popPos.getY() + 1);
+					}
+					type = StructureType.CEIL;
+				}
+			}
+			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
 			if (world.isAir(popPos))
 			{
-				BlockState down = world.getBlockState(popPos.down());
-				if (BlocksHelper.isLava(down))
+				if (type == StructureType.FLOOR)
 				{
-					biome.genLavaBuildings(world, popPos, random);
+					BlockState down = world.getBlockState(popPos.down());
+					if (BlocksHelper.isLava(down))
+					{
+						biome.genLavaBuildings(world, popPos, random);
+					}
+					else if (BlocksHelper.isNetherGroundMagma(down))
+						biome.genFloorBuildings(world, popPos, random);
 				}
-				else if (BlocksHelper.isNetherGroundMagma(down))
-					biome.genFloorBuildings(world, popPos, random);
+				else if (type == StructureType.CEIL)
+				{
+					BlockState up = world.getBlockState(popPos.up());
+					if (BlocksHelper.isNetherGroundMagma(up))
+					{
+						biome.genCeilBuildings(world, popPos, random);
+					}
+				}
 			}
 			else
 				biome.genUnderBuildings(world, popPos, random);
@@ -266,7 +298,7 @@ public class BNWorldGenerator
 							}
 						}
 						if (random.nextFloat() < oreDensity)
-							spawnOre(BlocksRegister.CINCINNASITE_ORE.getDefaultState(), world, popPos, random);
+							spawnOre(BlocksRegistry.CINCINNASITE_ORE.getDefaultState(), world, popPos, random);
 					}
 				}
 			}

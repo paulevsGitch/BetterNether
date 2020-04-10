@@ -9,11 +9,11 @@ import net.minecraft.world.BlockView;
 
 public class BNBarStool extends BNChair
 {
-	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 16, 14);
+	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
 	
 	public BNBarStool(Block block)
 	{
-		super(block, 16);
+		super(block, 15);
 	}
 	
 	@Override

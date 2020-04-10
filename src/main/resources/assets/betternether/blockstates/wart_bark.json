@@ -1,5 +1,7 @@
 {
     "variants": {
-        "": { "model": "betternether:block/wart_bark" }
+        "axis=y": { "model": "betternether:block/wart_bark" },
+        "axis=z": { "model": "betternether:block/wart_bark", "x": 90 },
+        "axis=x": { "model": "betternether:block/wart_bark", "x": 90, "y": 90 }
     }
 }

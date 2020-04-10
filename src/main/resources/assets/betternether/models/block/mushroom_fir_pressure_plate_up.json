@@ -1,0 +1,6 @@
+{
+    "parent": "block/pressure_plate_up",
+    "textures": {
+        "texture": "betternether:block/mushroom_fir_planks"
+    }
+}

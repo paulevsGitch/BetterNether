@@ -1,28 +1,18 @@
 package paulevs.betternether.entity.model;
 
-import com.google.common.collect.ImmutableList;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
 
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.entity.model.AnimalModel;
-import paulevs.betternether.entity.EntityChair;
-
-public class ModelEmpty extends AnimalModel<EntityChair>
+public class ModelEmpty<T extends Entity> extends EntityModel<T>
 {
 	@Override
-	protected Iterable<ModelPart> getHeadParts()
-	{
-		return ImmutableList.of();
-	}
-
-	@Override
-	protected Iterable<ModelPart> getBodyParts()
-	{
-		return ImmutableList.of();
-	}
-
-	@Override
-	public void setAngles(EntityChair entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch)
+	public void setAngles(T entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch)
 	{
 		
 	}
+
+	@Override
+	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {}
 }

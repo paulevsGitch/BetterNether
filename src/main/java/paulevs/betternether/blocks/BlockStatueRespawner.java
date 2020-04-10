@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.IDimensionable;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockStatueRespawner extends BlockBaseNotFull
 {
@@ -43,7 +43,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 	
 	public BlockStatueRespawner()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE)
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK)
 				.nonOpaque()
 				.lightLevel(15)
 				.build());

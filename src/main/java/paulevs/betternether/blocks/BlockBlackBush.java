@@ -35,7 +35,6 @@ public class BlockBlackBush extends BlockBaseNotFull implements Fertilizable
 				.noCollision()
 				.breakInstantly()
 				.build());
-		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	

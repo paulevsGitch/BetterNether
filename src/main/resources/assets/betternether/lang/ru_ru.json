@@ -2,7 +2,8 @@
 	"container.forge": "Печь",
 	"container.chest_of_drawers": "Комод",
 
-	"entity.firefly": "Светлячёк",
+	"entity.betternether.firefly": "Светлячёк",
+	"entity.betternether.hydrogen_jellyfish": "Водородная медуза",
 
 	"item.betternether.black_apple": "Чёрное яблоко",
 
@@ -322,5 +323,84 @@
 	
 	"block.betternether.striped_bark_stalagnate": "Обтёсанная древесина сталагната",
 	"block.betternether.striped_bark_willow": "Обтёсанная древесина ивы",
-	"block.betternether.striped_bark_wart": "Обтёсанная древесина нароста"
+	"block.betternether.striped_bark_wart": "Обтёсанная древесина нароста",
+	
+	"block.betternether.giant_mold": "Гигантская плесень",
+	"block.betternether.giant_mold_sapling": "Саженец гигантской плесени",
+	
+	"block.betternether.bar_stool_reeds": "Тростниковый барный стул",
+	"block.betternether.bar_stool_stalagnate": "Сталагнатовый барный стул",
+	"block.betternether.bar_stool_willow": "Ивовый барный стул",
+	"block.betternether.bar_stool_wart": "Наростовый барный стул",
+	"block.betternether.bar_stool_cincinnasite": "Цинцинназитовый барный стул",
+	
+	"block.betternether.mushroom_fir": "Грибная ель",
+	"block.betternether.mushroom_fir_sapling": "Саженец грибной ели",
+	"block.betternether.mushroom_fir_stem": "Ствол грибной ели",
+	"block.betternether.mushroom_fir_log": "Бревно грибной ели",
+	"block.betternether.mushroom_fir_wood": "Древесина грибной ели",
+	"block.betternether.striped_log_mushroom_fir": "Обтёсанное бревно грибной ели",
+	"block.betternether.striped_wood_mushroom_fir": "Обтёсанная древесина грибной ели",
+	"block.betternether.mushroom_fir_planks": "Доски из грибной ели",
+	"block.betternether.mushroom_fir_stairs": "Ступени из грибной ели",
+	"block.betternether.mushroom_fir_slab": "Плита из грибной ели",
+	"block.betternether.mushroom_fir_fence": "Забор из грибной ели",
+	"block.betternether.mushroom_fir_gate": "Калитка из грибной ели",
+	"block.betternether.mushroom_fir_button": "Кнопка из грибной ели",
+	"block.betternether.mushroom_fir_plate": "Нажимная плита из грибной ели",
+	"block.betternether.mushroom_fir_trapdoor": "Люк из грибной ели",
+	"block.betternether.mushroom_fir_door": "Дверь из грибной ели",
+	
+	"block.betternether.chair_mushroom_fir": "Стул из грибной ели",
+	"block.betternether.taburet_mushroom_fir": "Табурет из грибной ели",
+	"block.betternether.bar_stool_mushroom_fir": "Барный стул из грибной ели",
+	
+	"block.betternether.obsidian_bricks": "Обсидиановые кирпичи",
+	"block.betternether.obsidian_bricks_stairs": "Ступени из обсидиановых кирпичей",
+	"block.betternether.obsidian_bricks_slab": "Плита из обсидиановых кирпичей",
+	"block.betternether.obsidian_tile": "Обсидиановая плитка",
+	"block.betternether.obsidian_tile_small": "Маленькая обсидиановая плитка",
+	"block.betternether.obsidian_tile_stairs": "Ступени из обсидиановой плитки",
+	"block.betternether.obsidian_tile_slab": "Плита из обсидиановой плитки",
+	"block.betternether.obsidian_glass": "Обсидиановое стекло",
+	"block.betternether.obsidian_glass_pane": "Панель из обсидианового стекла",
+	"block.betternether.blue_obsidian": "Синий обсидиан",
+	"block.betternether.blue_obsidian_bricks": "Синие обсидиановые кирпичи",
+	"block.betternether.blue_obsidian_bricks_stairs": "Ступени из синих обсидиановых кирпичей",
+	"block.betternether.blue_obsidian_bricks_slab": "Плита из синих обсидиановых кирпичей",
+	"block.betternether.blue_obsidian_tile": "Синяя обсидиановая плитка",
+	"block.betternether.blue_obsidian_tile_small": "Маленькая синяя обсидиановая плитка",
+	"block.betternether.blue_obsidian_tile_stairs": "Ступени из синей обсидиановой плитки",
+	"block.betternether.blue_obsidian_tile_slab": "Плита из синей обсидиановой плитки",
+	"block.betternether.blue_obsidian_glass": "Синее обсидиановое стекло",
+	"block.betternether.blue_obsidian_glass_pane": "Панель из синего обсидианового стекла",
+	
+	"block.betternether.taburet_oak": "Дубовый табурет",
+	"block.betternether.chair_oak": "Дубовый стул",
+	"block.betternether.bar_stool_oak": "Дубовый барный стул",
+	"block.betternether.taburet_spruce": "Еловый табурет",
+	"block.betternether.chair_spruce": "Еловый стул",
+	"block.betternether.bar_stool_spruce": "Еловый барный стул",
+	"block.betternether.taburet_birch": "Берёзовый табурет",
+	"block.betternether.chair_birch": "Берёзовый стул",
+	"block.betternether.bar_stool_birch": "Берёзовый барный стул",
+	"block.betternether.taburet_jungle": "Джунглевый табурет",
+	"block.betternether.chair_jungle": "Джунглевый стул",
+	"block.betternether.bar_stool_jungle": "Джунглевый барный стул",
+	"block.betternether.taburet_acacia": "Акациевый табурет",
+	"block.betternether.chair_acacia": "Акациевый стул",
+	"block.betternether.bar_stool_acacia": "Акациевый барный стул",
+	"block.betternether.taburet_dark_oak": "Табурет из тёмного дуба",
+	"block.betternether.chair_dark_oak": "Стул из тёмного дуба",
+	"block.betternether.bar_stool_dark_oak": "Барный стул из тёмного дуба",
+	
+	"item.betternether.cincinnasite_hammer": "Цинцинназитовый молот",
+	"item.betternether.cincinnasite_hammer_diamond": "Цинцинназитово-алмазный молот",
+	
+	"block.betternether.nether_brewing_stand": "Зельеварка нижнего мира",
+	
+	"betternether.flat_nether": "Плоский нижний мир",
+	
+	"item.betternether.spawn_egg_hydrogen_jellyfish": "Яйцо призыва водородной медузы",
+	"block.betternether.brick_pot": "Кирпичный горшок"
 }

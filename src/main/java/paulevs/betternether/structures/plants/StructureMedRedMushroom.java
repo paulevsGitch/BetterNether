@@ -10,37 +10,43 @@ import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.shapes.TripleShape;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureMedRedMushroom implements IStructure
 {
-	Mutable npos = new Mutable();
+	private static final Mutable POS = new Mutable();
 	
 	@Override
 	public void generate(IWorld world, BlockPos pos, Random random)
 	{
 		Block under;
-		if (world.getBlockState(pos.down()).getBlock() == BlocksRegister.NETHER_MYCELIUM)
+		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM)
 		{
 			for (int i = 0; i < 10; i++)
 			{
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
-				int y = pos.getY() + random.nextInt(6);
-				for (int j = 0; j < 6; j++)
+				if (((x + z) & 1) == 0)
 				{
-					npos.set(x, y - j, z);
-					if (npos.getY() > 31)
+					if (random.nextBoolean())
 					{
-						under = world.getBlockState(npos.down()).getBlock();
-						if (under == BlocksRegister.NETHER_MYCELIUM)
-						{
-							grow(world, npos, random);
-						}
+						x += random.nextBoolean() ? 1 : -1;
 					}
 					else
-						break;
+					{
+						z += random.nextBoolean() ? 1 : -1;
+					}
+				}
+				int y = pos.getY() + random.nextInt(6);
+				for (int j = 0; j < 12; j++)
+				{
+					POS.set(x, y - j, z);
+					under = world.getBlockState(POS.down()).getBlock();
+					if (under == BlocksRegistry.NETHER_MYCELIUM)
+					{
+						grow(world, POS, random);
+					}
 				}
 			}
 		}
@@ -57,10 +63,10 @@ public class StructureMedRedMushroom implements IStructure
 				size = y - 1;
 				break;
 			}
-		BlockState middle = BlocksRegister.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.MIDDLE);
+		BlockState middle = BlocksRegistry.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.MIDDLE);
 		for (int y = 1; y < size; y++)
 			BlocksHelper.setWithoutUpdate(world, pos.up(y), middle);
-		BlocksHelper.setWithoutUpdate(world, pos.up(size), BlocksRegister.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.TOP));
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegister.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.BOTTOM));
+		BlocksHelper.setWithoutUpdate(world, pos.up(size), BlocksRegistry.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.TOP));
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.BOTTOM));
 	}
 }

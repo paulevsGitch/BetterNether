@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherCactus;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureNetherCactus implements IStructure
@@ -26,12 +26,23 @@ public class StructureNetherCactus implements IStructure
 	{
 		if (canPlaceAt(world, pos))
 		{
-			BlockState top = BlocksRegister.NETHER_CACTUS.getDefaultState();
-			BlockState bottom = BlocksRegister.NETHER_CACTUS.getDefaultState().with(BlockNetherCactus.TOP, false);
+			BlockState top = BlocksRegistry.NETHER_CACTUS.getDefaultState();
+			BlockState bottom = BlocksRegistry.NETHER_CACTUS.getDefaultState().with(BlockNetherCactus.TOP, false);
 			for (int i = 0; i < 16; i++)
 			{
 				int x = pos.getX() + (int) (random.nextGaussian() * 4);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 4);
+				if (((x + z + pos.getY()) & 1) == 0)
+				{
+					if (random.nextBoolean())
+					{
+						x += random.nextBoolean() ? 1 : -1;
+					}
+					else
+					{
+						z += random.nextBoolean() ? 1 : -1;
+					}
+				}
 				int y = pos.getY() + random.nextInt(8);
 				for (int j = 0; j < 8; j++)
 				{

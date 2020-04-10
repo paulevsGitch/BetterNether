@@ -1,6 +1,8 @@
 package paulevs.betternether.blocks;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -18,6 +20,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -30,7 +34,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.blockentities.BlockEntityChestOfDrawers;
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockChestOfDrawers extends BlockWithEntity
 {
@@ -44,7 +48,7 @@ public class BlockChestOfDrawers extends BlockWithEntity
 
 	public BlockChestOfDrawers()
 	{
-		super(FabricBlockSettings.copy(BlocksRegister.CINCINNASITE).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().build());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(OPEN, false));
 	}
 
@@ -107,5 +111,15 @@ public class BlockChestOfDrawers extends BlockWithEntity
 	public BlockState getPlacementState(ItemPlacementContext ctx)
 	{
 		return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+	}
+	
+	@Override
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
+	{
+		List<ItemStack> drop = new ArrayList<ItemStack>();
+		BlockEntityChestOfDrawers entity = (BlockEntityChestOfDrawers) builder.get(LootContextParameters.BLOCK_ENTITY);
+		drop.add(new ItemStack(this.asItem()));
+		entity.addItemsToList(drop);
+		return drop;
 	}
 }

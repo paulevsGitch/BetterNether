@@ -1,11 +1,11 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class StructureWartSeed extends StructureScatter
 {
 	public StructureWartSeed()
 	{
-		super(BlocksRegister.WART_SEED);
+		super(BlocksRegistry.WART_SEED);
 	}
 }

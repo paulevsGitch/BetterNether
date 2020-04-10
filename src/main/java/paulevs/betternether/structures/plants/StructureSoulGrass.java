@@ -1,11 +1,11 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registers.BlocksRegister;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class StructureSoulGrass extends StructureScatter
 {
 	public StructureSoulGrass()
 	{
-		super(BlocksRegister.SOUL_GRASS);
+		super(BlocksRegistry.SOUL_GRASS);
 	}
 }
