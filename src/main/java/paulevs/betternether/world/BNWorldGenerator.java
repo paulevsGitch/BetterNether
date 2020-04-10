@@ -120,7 +120,7 @@ public class BNWorldGenerator
 	
 	public static NetherBiome getBiome(int x, int y, int z)
 	{
-		NetherBiome biome = map.getBiome(x, y, z);
+		NetherBiome biome = map.getBiome(x, y > 30 ? y : 30, z);
 		
 		if (biome.hasEdge() || (biome.hasParrent() && biome.getParrentBiome().hasEdge()))
 		{

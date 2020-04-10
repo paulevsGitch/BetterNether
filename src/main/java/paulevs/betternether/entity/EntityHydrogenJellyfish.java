@@ -171,7 +171,7 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 			if (this.yaw != nextYaw)
 			{
 				float delta = timer / 120F;
-				this.yaw = MathHelper.lerpAngleDegrees(delta, prewYaw, nextYaw);
+				this.yaw = lerpAngleDegrees(delta, prewYaw, nextYaw);
 				this.setVelocity(
 						MathHelper.lerp(delta, preVelocity.x, newVelocity.x),
 						MathHelper.lerp(delta, preVelocity.y, newVelocity.y),
@@ -183,6 +183,11 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 		{
 			this.setVelocity(newVelocity);
 		}
+	}
+
+	public static float lerpAngleDegrees(float delta, float first, float second)
+	{
+		return first + delta * MathHelper.wrapDegrees(second - first);
 	}
 	
 	@Override
