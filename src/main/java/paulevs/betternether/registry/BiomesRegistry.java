@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
+import net.fabricmc.fabric.impl.biome.InternalBiomeData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -128,7 +128,6 @@ public class BiomesRegistry
 				biome != Biomes.WARPED_FOREST;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void registerBiome(NetherBiome biome)
 	{
 		String regName = biome.getRegistryName();
@@ -141,11 +140,10 @@ public class BiomesRegistry
 			REGISTRY.add(biome);
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, regName), biome);
 			LINKS.put(biome.getBiome(), biome);
-			NetherBiomes.addNetherBiome(biome);
+			InternalBiomeData.addNetherBiome(biome);
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void registerBiome(NetherBiome biome, float chance)
 	{
 		String regName = biome.getRegistryName();
@@ -158,7 +156,7 @@ public class BiomesRegistry
 			REGISTRY.add(biome);
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, regName), biome);
 			LINKS.put(biome.getBiome(), biome);
-			NetherBiomes.addNetherBiome(biome);
+			InternalBiomeData.addNetherBiome(biome);
 		}
 	}
 	
@@ -183,6 +181,7 @@ public class BiomesRegistry
 			biome.build();
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, biome.getRegistryName()), biome);
 			LINKS.put(biome.getBiome(), biome);
+			InternalBiomeData.addNetherBiome(biome);
 		}
 	}
 	
@@ -199,5 +198,10 @@ public class BiomesRegistry
 	{
 		NetherBiome b = LINKS.get(biome);
 		return b == null ? BIOME_EMPTY_NETHER : b;
+	}
+	
+	public static ArrayList<NetherBiome> getRegisteredBiomes()
+	{
+		return REGISTRY;
 	}
 }

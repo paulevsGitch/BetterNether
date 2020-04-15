@@ -16,7 +16,7 @@
 	"BiomeMixin",
 	"PlayerEntityMixin",
 	"DefaultAttributeRegistryMixin",
-	"BasaltColumnsMixin"
+	"DeltaFeatureMixin"
   ],
   "injectors": {
     "defaultRequire": 1

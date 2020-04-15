@@ -1,7 +1,6 @@
 package paulevs.betternether.world.structures;
 
 import java.util.List;
-import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
@@ -11,11 +10,10 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.source.BiomeAccess;
-import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -32,50 +30,19 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 		super(configFactory);
 	}
 
-	@Override
-	protected ChunkPos getStart(ChunkGenerator<?> chunkGenerator, Random random, int chunkX, int chunkZ, int scaleX, int scaleZ)
+	protected int getSpacing(DimensionType dimensionType, ChunkGeneratorConfig chunkGeneratorConfig)
 	{
-		int m = 64;//chunkGenerator.getConfig().getVillageDistance();
-		int n = 32;//chunkGenerator.getConfig().getVillageSeparation();
-		int o = chunkX + m * scaleX;
-		int p = chunkZ + m * scaleZ;
-		int q = o < 0 ? o - m + 1 : o;
-		int r = p < 0 ? p - m + 1 : p;
-		int s = q / m;
-		int t = r / m;
-		((ChunkRandom)random).setRegionSeed(chunkGenerator.getSeed(), s, t, 897527);
-		s *= m;
-		t *= m;
-		s += random.nextInt(m - n);
-		t += random.nextInt(m - n);
-		return new ChunkPos(s, t);
+		return 64;
 	}
 
-	/*private boolean getNearestFortress(ChunkGenerator<?> chunkGenerator, Random random, int chunkX, int chunkZ)
+	protected int getSeparation(DimensionType dimensionType, ChunkGeneratorConfig chunkGeneratorConfig)
 	{
-		int i = chunkX >> 4;
-		int j = chunkZ >> 4;
-		random.setSeed((long)(i ^ j << 4) ^ chunkGenerator.getSeed());
-		random.nextInt();
-		if (random.nextInt(3) != 0)
-		{
-			return false;
-		}
-		else if (chunkX != (i << 4) + 4 + random.nextInt(8))
-		{
-			return false;
-		}
-		else
-		{
-			return chunkZ != (j << 4) + 4 + random.nextInt(8);
-		}
-	}*/
+		return 32;
+	}
 
-	@Override
-	public boolean shouldStartAt(BiomeAccess biomeAccess, ChunkGenerator<?> chunkGenerator, Random random, int chunkZ, int i, Biome biome)
+	protected int getSeedModifier(ChunkGeneratorConfig chunkGeneratorConfig)
 	{
-		ChunkPos chunkPos = this.getStart(chunkGenerator, random, chunkZ, i, 0, 0);
-		return chunkZ == chunkPos.x && i == chunkPos.z && chunkGenerator.hasStructure(biome, this);
+		return 897527;
 	}
 
 	@Override

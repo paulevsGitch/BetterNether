@@ -110,19 +110,8 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	protected void initDataTracker()
 	{
 		super.initDataTracker();
-		makeColor(random.nextFloat(), random.nextFloat() * 0.75F, 1);
+		makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.5F, 1);
 	}
-
-	/*@Override
-	protected void initAttributes()
-	{
-		super.initAttributes();
-		this.getAttributes().register(EntityAttributes.FLYING_SPEED);
-		this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(1.0);
-		this.getAttributeInstance(EntityAttributes.FLYING_SPEED).setBaseValue(0.6F);
-		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
-		this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
-	}*/
 	
 	public static DefaultAttributeContainer getAttributeContainer()
 	{
