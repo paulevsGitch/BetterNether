@@ -9,12 +9,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockEyeVine extends BlockBaseNotFull
 {
@@ -30,7 +32,6 @@ public class BlockEyeVine extends BlockBaseNotFull
 				.breakInstantly()
 				.nonOpaque()
 				.build());
-		//this.setClimmable(true);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		setDropItself(false);
 	}
@@ -64,5 +65,12 @@ public class BlockEyeVine extends BlockBaseNotFull
 			return Blocks.AIR.getDefaultState();
 		else
 			return state;
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
+	{
+		return new ItemStack(BlocksRegistry.EYE_SEED);
 	}
 }
