@@ -34,8 +34,8 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 
 	protected ChunkPos getStart(ChunkGenerator<?> chunkGenerator, Random random, int chunkX, int chunkZ, int scaleX, int scaleZ)
 	{
-		int m = 64;//chunkGenerator.getConfig().getVillageDistance();
-		int n = 32;//chunkGenerator.getConfig().getVillageSeparation();
+		int m = 64;
+		int n = 32;
 		int o = chunkX + m * scaleX;
 		int p = chunkZ + m * scaleZ;
 		int q = o < 0 ? o - m + 1 : o;
@@ -105,16 +105,27 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 			for (CityPiece p: buildings)
 				cityBox.encompass(p.getBoundingBox());
 			
-			int radius = (int) (Math.max(cityBox.maxX - cityBox.minX, cityBox.maxZ - cityBox.minZ) * 1.5F * 0.5F);
-			if (cityBox.maxY > radius * 0.5F + center.getY())
+			int d1 = Math.max((center.getX() - cityBox.minX), (cityBox.maxX - center.getX()));
+			int d2 = Math.max((center.getZ() - cityBox.minZ), (cityBox.maxZ - center.getZ()));
+			int radius = Math.max(d1, d2);
+			if (radius / 2 + center.getY() < cityBox.maxY)
 			{
-				radius = (int) (cityBox.maxY * 1.5F * 0.5F);
+				radius = (cityBox.maxY - center.getY()) / 2;
 			}
 			
 			if (!(chunkGenerator instanceof FlatChunkGenerator))
-				this.children.add(new CavePiece(center, radius, random));
-			this.children.addAll(buildings);
-			this.setBoundingBoxFromChildren();
+			{
+				CavePiece cave = new CavePiece(center, radius, random);
+				this.children.add(cave);
+				this.children.addAll(buildings);
+				this.boundingBox = cave.getBoundingBox();
+			}
+			else
+			{
+				this.children.addAll(buildings);
+				this.setBoundingBoxFromChildren();
+			}
+			
 			this.boundingBox.minX -= 12;
 			this.boundingBox.maxX += 12;
 			this.boundingBox.minZ -= 12;

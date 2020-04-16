@@ -1,9 +1,13 @@
 package paulevs.betternether.blocks;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.EntityContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +15,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.blocks.shapes.TripleShape;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockRedLargeMushroom extends BlockBaseNotFull
 {
@@ -35,5 +40,12 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)
 	{
 		return state.get(SHAPE) == TripleShape.TOP ? TOP_SHAPE : MIDDLE_SHAPE;
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
+	{
+		return state.get(SHAPE) == TripleShape.TOP ? new ItemStack(Items.RED_MUSHROOM) : new ItemStack(BlocksRegistry.MUSHROOM_STEM);
 	}
 }
