@@ -1,9 +1,13 @@
 package paulevs.betternether.blocks;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.BlockMirror;
@@ -12,7 +16,9 @@ import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import paulevs.betternether.blocks.BlockBrownLargeMushroom.BrownMushroomShape;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockBrownLargeMushroom extends BlockBaseNotFull
 {
@@ -39,6 +45,14 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull
 	{
 		super(Materials.makeWood(MaterialColor.BROWN).nonOpaque().build());
 		this.setDropItself(false);
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
+	{
+		BrownMushroomShape shape = state.get(SHAPE);
+		return shape == BrownMushroomShape.BOTTOM || shape == BrownMushroomShape.MIDDLE ? new ItemStack(BlocksRegistry.MUSHROOM_STEM) : new ItemStack(Items.BROWN_MUSHROOM);
 	}
 	
 	@Override

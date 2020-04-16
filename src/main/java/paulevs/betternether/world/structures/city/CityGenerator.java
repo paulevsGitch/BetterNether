@@ -110,14 +110,25 @@ public class CityGenerator
 					BoundingBox bb = building.getBoungingBox().offset(pos).offsetNegative(offset);
 					if (noCollisions(bb))
 					{
+						boolean validHeight = true;
 						BlockPos npos = new BlockPos(bb.x1, pos.getY() - offset.getY() + building.getYOffset(), bb.z1);
-						bounds.add(bb);
-						rem.add(pos);
 						for (int i = 0; i < building.getEndsCount(); i++)
 							if (i != index)
-								add.add(npos.add(building.getOffsettedPos(i)));
-						city.add(new CityPiece(building, npos, random.nextInt()));
-						generate = false;
+								if (npos.getY() + building.getOffsettedPos(i).getY() < 32)
+								{
+									validHeight = false;
+									break;
+								}
+						if (validHeight)
+						{
+							bounds.add(bb);
+							rem.add(pos);
+							for (int i = 0; i < building.getEndsCount(); i++)
+								if (i != index)
+									add.add(npos.add(building.getOffsettedPos(i)));
+							city.add(new CityPiece(building, npos, random.nextInt()));
+							generate = false;
+						}
 					}
 				}
 			}
@@ -160,7 +171,7 @@ public class CityGenerator
 		float rnd = random.nextFloat();
 		rnd *= rnd;
 		rnd *= rnd;
-		int iterations = (int) Math.round(2 + rnd * 3);
+		int iterations = (int) Math.round(2 + rnd * 2);
 		
 		for (int i = 0; i < iterations; i++)
 			attachBuildings(random, city);

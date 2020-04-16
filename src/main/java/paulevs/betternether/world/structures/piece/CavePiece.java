@@ -65,13 +65,16 @@ public class CavePiece extends CustomPiece
 		for (int x = blockBox.minX; x <= blockBox.maxX; x++)
 		{
 			int px = x - center.getX();
+			px *= px;
 			for (int z = blockBox.minZ; z <= blockBox.maxZ; z++)
 			{
 				int pz = z - center.getZ();
+				pz *= pz;
 				for (int y = minY; y <= maxY; y++)
 				{
 					int py = (y - center.getY()) << 1;
-					if (px * px + py * py + pz * pz <= radSqr + NOISE.eval(x * 0.1, y * 0.1, z * 0.1) * 800)
+					py *= py;
+					if (px + py + pz <= radSqr + NOISE.eval(x * 0.1, y * 0.1, z * 0.1) * 800)
 					{
 						POS.set(x, y, z);
 						if (y > 31)
