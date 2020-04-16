@@ -9,7 +9,6 @@
 	"MapStateMixin",
 	"LocateMixin",
 	"GrassGrowMixin",
-	"StructureMixin",
 	"LightStorageMixin",
 	"NetherWartMixin",
 	"BiomeArrayMixin",
