@@ -109,7 +109,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	protected void initDataTracker()
 	{
 		super.initDataTracker();
-		makeColor(random.nextFloat(), random.nextFloat() * 0.75F, 1);
+		makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.5F, 1);
 	}
 
 	@Override

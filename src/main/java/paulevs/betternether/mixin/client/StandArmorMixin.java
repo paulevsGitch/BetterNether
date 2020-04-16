@@ -33,7 +33,6 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStandEnt
 	{
 		if (BetterNether.hasThinArmor())
 		{
-			this.features.clear();
 			Iterator<FeatureRenderer<ArmorStandEntity, ArmorStandArmorEntityModel>> iterator = this.features.iterator();
 			while (iterator.hasNext())
 			{
