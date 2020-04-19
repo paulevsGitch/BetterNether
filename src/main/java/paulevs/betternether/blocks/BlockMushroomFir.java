@@ -1,9 +1,12 @@
 package paulevs.betternether.blocks;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.StringIdentifiable;
@@ -11,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockMushroomFir extends BlockBaseNotFull
 {
@@ -89,5 +93,13 @@ public class BlockMushroomFir extends BlockBaseNotFull
 		{
 			return this.toString().toLowerCase();
 		}
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
+	{
+		MushroomFirShape shape = state.get(SHAPE);
+		return shape == MushroomFirShape.BOTTOM || shape == MushroomFirShape.MIDDLE ? new ItemStack(BlocksRegistry.MUSHROOM_FIR_STEM) : new ItemStack(BlocksRegistry.MUSHROOM_FIR_SAPLING);
 	}
 }

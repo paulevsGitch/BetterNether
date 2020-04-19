@@ -34,4 +34,10 @@ public class BlockEntityForge extends AbstractFurnaceBlockEntity
 	{
 		return super.getFuelTime(fuel) / 2;
 	}
+	
+	@Override
+	protected int getCookTime()
+	{
+		return super.getCookTime() / 2;
+	}
 }
