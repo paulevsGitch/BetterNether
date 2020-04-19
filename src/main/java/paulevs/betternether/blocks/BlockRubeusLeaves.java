@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
@@ -17,7 +18,7 @@ public class BlockRubeusLeaves extends LeavesBlock implements IRenderTypeable
 {
 	public BlockRubeusLeaves()
 	{
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().build());
+		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).sounds(BlockSoundGroup.GRASS).nonOpaque().build());
 	}
 	
 	@Override

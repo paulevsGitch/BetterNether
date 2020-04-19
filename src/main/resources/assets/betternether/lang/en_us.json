@@ -420,5 +420,12 @@
 	"betternether.flat_nether": "Flat Nether",
 	
 	"item.betternether.spawn_egg_hydrogen_jellyfish": "Hydrogen Jellyfish Spawn Egg",
-	"block.betternether.brick_pot": "Brick Pot"
+	"block.betternether.brick_pot": "Brick Pot",
+	
+	"block.betternether.striped_log_rubeus": "Striped Rubeus Log",
+	"block.betternether.striped_bark_rubeus": "Striped Rubeus Bark",
+	"block.betternether.rubeus_log": "Rubeus Log",
+	"block.betternether.rubeus_bark": "Rubeus Bark",
+	"block.betternether.rubeus_leaves": "Rubeus Leaves",
+	"block.betternether.rubeus_planks": "Rubeus Planks"
 }

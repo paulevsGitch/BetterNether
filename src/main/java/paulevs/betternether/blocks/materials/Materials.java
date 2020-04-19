@@ -23,9 +23,10 @@ public class Materials
 	public static FabricBlockSettings makeGrass(MaterialColor color)
 	{
 		return FabricBlockSettings.of(COMMON_GRASS)
-				.sounds(BlockSoundGroup.CROP)
+				.sounds(BlockSoundGroup.GRASS)
 				.materialColor(color)
 				.noCollision()
+				.nonOpaque()
 				.breakInstantly();
 	}
 }
