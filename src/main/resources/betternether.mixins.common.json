@@ -11,11 +11,13 @@
 	"GrassGrowMixin",
 	"LightStorageMixin",
 	"NetherWartMixin",
-	"BiomeArrayMixin",
 	"BiomeMixin",
 	"PlayerEntityMixin",
 	"DefaultAttributeRegistryMixin",
-	"DeltaFeatureMixin"
+	"DeltaFeatureMixin",
+	"TheNetherDimensionMixin",
+	"DimensionTypeMixin",
+	"LevelGeneratorOptionsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

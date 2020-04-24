@@ -2,7 +2,6 @@ package paulevs.betternether.world;
 
 import java.util.HashMap;
 
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.gen.ChunkRandom;
 import paulevs.betternether.biomes.NetherBiome;
@@ -21,8 +20,9 @@ public class BiomeMap
 	private final OpenSimplexNoise noiseX;
 	private final OpenSimplexNoise noiseY;
 	private final OpenSimplexNoise noiseZ;
+	private final boolean volumetric;
 	
-	public BiomeMap(long seed, int sizeXZ, int sizeY)
+	public BiomeMap(long seed, int sizeXZ, int sizeY, boolean volumetric)
 	{
 		RANDOM.setSeed(seed);
 		noiseX = new OpenSimplexNoise(RANDOM.nextLong());
@@ -30,7 +30,8 @@ public class BiomeMap
 		noiseZ = new OpenSimplexNoise(RANDOM.nextLong());
 		this.sizeXZ = sizeXZ;
 		this.sizeY = sizeY;
-		maxHeight = (int) Math.ceil(128F / sizeY);
+		this.volumetric = volumetric;
+		maxHeight = volumetric ? (int) Math.ceil(128F / sizeY) : 1;
 		
 		depth = (int) Math.ceil(Math.log(Math.max(sizeXZ, sizeY)) / Math.log(2)) - 2;
 		size = 1 << depth;
@@ -42,23 +43,31 @@ public class BiomeMap
 			MAPS.clear();
 	}
 	
-	public NetherBiome getBiome(int bx, int by, int bz)
+	private NetherBiome getRawBiome(int bx, int by, int bz)
 	{
-		int x = bx * size / sizeXZ;
-		int y = by * size / sizeY;
-		int z = bz * size / sizeXZ;
-		int nx = x;
-		int ny = y;
-		int nz = z;
+		double x = bx * size / sizeXZ;
+		double y = volumetric ? by * size / sizeY : 0;
+		double z = bz * size / sizeXZ;
+		double nx = x;
+		double ny = y;
+		double nz = z;
 		
 		for (int i = 0; i < depth; i++)
 		{
-			nx = (int) Math.round(x + noiseX.eval(y, z) * 0.5 + 0.5) >> 1;
-			ny = (int) Math.round(y + noiseY.eval(x, z) * 0.5 + 0.5) >> 1;
-			nz = (int) Math.round(z + noiseZ.eval(x, y) * 0.5 + 0.5) >> 1;
+			if (volumetric)
+			{
+				nx = (x + noiseX.eval(y + i, z + i)) / 2;
+				nz = (z + noiseZ.eval(x + i, y + i)) / 2;
+				ny = (y + noiseY.eval(x + i, z + i)) / 2;
+				y = ny;
+			}
+			else
+			{
+				nx = (x + noiseX.eval(x + i, z + i)) / 2;
+				nz = (z + noiseZ.eval(z + i, x + i)) / 2;
+			}
 			
 			x = nx;
-			y = ny;
 			z = nz;
 		}
 		
@@ -73,11 +82,48 @@ public class BiomeMap
 			MAPS.put(cpos, chunk);
 		}
 		
-		return chunk.getBiome(x, y, z);
+		return chunk.getBiome((int) x, (int) y, (int) z);
 	}
-
-	public NetherBiome getBiome(BlockPos pos)
+	
+	public NetherBiome getBiome(int x, int y, int z)
 	{
-		return getBiome(pos.getX(), pos.getY(), pos.getZ());
+		NetherBiome biome = getRawBiome(x, y > 30 ? y : 30, z);
+		
+		if (biome.hasEdge() || (biome.hasParrent() && biome.getParrentBiome().hasEdge()))
+		{
+			NetherBiome search = biome;
+			if (biome.hasParrent())
+				search = biome.getParrentBiome();
+			int d = (int) Math.ceil(search.getEdgeSize() / 4F) << 2;
+			
+			boolean edge = !search.isSame(getRawBiome(x + d, y, z));
+			edge = edge || !search.isSame(getRawBiome(x - d, y, z));
+			edge = edge || !search.isSame(getRawBiome(x, y, z + d));
+			edge = edge || !search.isSame(getRawBiome(x, y, z - d));
+			edge = edge || !search.isSame(getRawBiome(x - 1, y, z - 1));
+			edge = edge || !search.isSame(getRawBiome(x - 1, y, z + 1));
+			edge = edge || !search.isSame(getRawBiome(x + 1, y, z - 1));
+			edge = edge || !search.isSame(getRawBiome(x + 1, y, z + 1));
+			if (!edge && volumetric)
+			{
+				edge = edge || !search.isSame(getRawBiome(x, y + d, z));
+				edge = edge || !search.isSame(getRawBiome(x, y - d, z));
+				edge = edge || !search.isSame(getRawBiome(x - d, y - d, z - d));
+				edge = edge || !search.isSame(getRawBiome(x + d, y - d, z - d));
+				edge = edge || !search.isSame(getRawBiome(x - d, y - d, z + d));
+				edge = edge || !search.isSame(getRawBiome(x + d, y - d, z + d));
+				edge = edge || !search.isSame(getRawBiome(x - d, y + d, z - d));
+				edge = edge || !search.isSame(getRawBiome(x + d, y + d, z - d));
+				edge = edge || !search.isSame(getRawBiome(x - d, y + d, z + d));
+				edge = edge || !search.isSame(getRawBiome(x + d, y + d, z + d));
+			}
+			
+			if (edge)
+			{
+				biome = search.getEdge();
+			}
+		}
+		
+		return biome;
 	}
 }

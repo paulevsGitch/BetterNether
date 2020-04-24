@@ -17,7 +17,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.source.BiomeSource;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
@@ -39,13 +38,6 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 	private void onConstructed(IWorld world, BiomeSource biomeSource, C config, CallbackInfo ci)
 	{
 		BNWorldGenerator.init(world);
-	}
-
-	@Inject(method = "populateBiomes", at = @At("RETURN"))
-	public void customBiomes(Chunk chunk, CallbackInfo info)
-	{
-		if (isNetherBiome(chunk))
-			BNWorldGenerator.generateCustomBiomes(world, chunk);
 	}
 
 	@Inject(method = "generateFeatures", at = @At("HEAD"), cancellable = true)
@@ -91,7 +83,6 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 			
 			BNWorldGenerator.populate(region, sx, sz, RANDOM);
 			BNWorldGenerator.cleaningPass(region, sx, sz);
-			BNWorldGenerator.clearCache();
 
 			info.cancel();
 		}
@@ -109,15 +100,6 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 				isNetherBiome(world.getBiome(POS.add(15, 0, 0))) ||
 				isNetherBiome(world.getBiome(POS.add(15, 0, 7))) ||
 				isNetherBiome(world.getBiome(POS.add(15, 0, 15)));
-	}
-	
-	private boolean isNetherBiome(Chunk chunk)
-	{
-		for (int x = 0; x < 4; x++)
-			for (int z = 0; z < 4; z++)
-				if (isNetherBiome(chunk.getBiomeArray().getBiomeForNoiseGen(x, 0, z)))
-					return  true;
-		return false;
 	}
 
 	private boolean isNetherBiome(Biome biome)

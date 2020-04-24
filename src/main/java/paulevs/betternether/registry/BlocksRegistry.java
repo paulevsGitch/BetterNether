@@ -81,6 +81,7 @@ import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.BlockRedMold;
 import paulevs.betternether.blocks.BlockReedsBlock;
 import paulevs.betternether.blocks.BlockRubeusLeaves;
+import paulevs.betternether.blocks.BlockRubeusSapling;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.BlockSoulGrass;
@@ -311,6 +312,7 @@ public class BlocksRegistry
 	public static final Block WART_DOOR = registerBlock("wart_door", new BNDoor(WART_PLANKS));
 	
 	// Rubeus
+	public static final Block RUBEUS_SAPLING = registerBlock("rubeus_sapling",  new BlockRubeusSapling());
 	public static final Block STRIPED_LOG_RUBEUS = registerBlock("striped_log_rubeus", new BNPillar(MaterialColor.MAGENTA));
 	public static final Block STRIPED_BARK_RUBEUS = registerBlock("striped_bark_rubeus", new BNPillar(MaterialColor.MAGENTA));
 	public static final Block RUBEUS_LOG = registerBlock("rubeus_log", new BNLogStripable(MaterialColor.MAGENTA, STRIPED_LOG_WART));

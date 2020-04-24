@@ -1,6 +1,7 @@
 package paulevs.betternether.mixin.common;
 
 import org.spongepowered.asm.mixin.Mixin;
+
 import net.minecraft.world.gen.feature.DeltaFeature;
 
 @Mixin(DeltaFeature.class)

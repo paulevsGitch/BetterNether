@@ -2,25 +2,67 @@ package paulevs.betternether.blocks;
 
 import java.util.Random;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.MaterialColor;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.client.IRenderTypeable;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockRubeusLeaves extends LeavesBlock implements IRenderTypeable
+public class BlockRubeusLeaves extends BlockBase
 {
+	private static final int MAX_DIST = 10;
+	public static final IntProperty DISTANCE_CUSTOM = IntProperty.of("dist_custom", 1, MAX_DIST);
+	 public static final BooleanProperty PERSISTENT = Properties.PERSISTENT;
+	
 	public BlockRubeusLeaves()
 	{
 		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).sounds(BlockSoundGroup.GRASS).nonOpaque().build());
+		this.setDefaultState(this.stateManager.getDefaultState().with(DISTANCE_CUSTOM, 1).with(PERSISTENT, false));
+		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	
+	@Override
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
+	{
+		builder.add(PERSISTENT, DISTANCE_CUSTOM);
+	}
+
+	@Override
+	public BlockState getPlacementState(ItemPlacementContext ctx)
+	{
+		return updateDistanceFromLogs((BlockState)this.getDefaultState().with(PERSISTENT, true), ctx.getWorld(), ctx.getBlockPos());
+	}
+
+	@Override
+	public boolean hasRandomTicks(BlockState state)
+	{
+		return state.get(DISTANCE_CUSTOM) == MAX_DIST && !(Boolean)state.get(PERSISTENT);
+	}
+
+	@Override
+	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
+	{
+		if (!state.get(PERSISTENT) && state.get(DISTANCE_CUSTOM) == MAX_DIST)
+		{
+			dropStacks(state, world, pos);
+			world.removeBlock(pos, false);
+		}
+	}
+
 	@Override
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
@@ -30,8 +72,8 @@ public class BlockRubeusLeaves extends LeavesBlock implements IRenderTypeable
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, IWorld world, BlockPos pos, BlockPos posFrom)
 	{
-		int i = getDistanceFromLog(newState) + 1;
-		if (i != 1 || (Integer) state.get(DISTANCE) != i)
+		int dist = getDistanceFromLog(newState) + 1;
+		if (dist != 1 || state.get(DISTANCE_CUSTOM) != dist)
 		{
 			world.getBlockTickScheduler().schedule(pos, this, 1);
 		}
@@ -41,23 +83,23 @@ public class BlockRubeusLeaves extends LeavesBlock implements IRenderTypeable
 
 	private static BlockState updateDistanceFromLogs(BlockState state, IWorld world, BlockPos pos)
 	{
-		int i = 7;
+		int dist = MAX_DIST;
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		Direction[] var5 = Direction.values();
-		int var6 = var5.length;
+		Direction[] dirs = Direction.values();
+		int count = dirs.length;
 
-		for (int var7 = 0; var7 < var6; ++var7)
+		for (int n = 0; n < count; ++n)
 		{
-			Direction direction = var5[var7];
-			mutable.set(pos, direction);
-			i = Math.min(i, getDistanceFromLog(world.getBlockState(mutable)) + 1);
-			if (i == 1)
+			Direction dir = dirs[n];
+			mutable.set(pos, dir);
+			dist = Math.min(dist, getDistanceFromLog(world.getBlockState(mutable)) + 1);
+			if (dist == 1)
 			{
 				break;
 			}
 		}
 
-		return (BlockState) state.with(DISTANCE, i);
+		return (BlockState) state.with(DISTANCE_CUSTOM, dist);
 	}
 
 	private static int getDistanceFromLog(BlockState state)
@@ -68,13 +110,27 @@ public class BlockRubeusLeaves extends LeavesBlock implements IRenderTypeable
 		}
 		else
 		{
-			return state.getBlock() instanceof LeavesBlock ? (Integer) state.get(DISTANCE) : 7;
+			return state.getBlock() instanceof BlockRubeusLeaves ? state.get(DISTANCE_CUSTOM) : MAX_DIST;
 		}
 	}
 
-	@Override
-	public BNRenderLayer getRenderLayer()
+	@Environment(EnvType.CLIENT)
+	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
 	{
-		return BNRenderLayer.CUTOUT;
+		if (world.hasRain(pos.up()))
+		{
+			if (random.nextInt(15) == 1)
+			{
+				BlockPos blockPos = pos.down();
+				BlockState blockState = world.getBlockState(blockPos);
+				if (!blockState.isOpaque() || !blockState.isSideSolidFullSquare(world, blockPos, Direction.UP))
+				{
+					double d = (double)((float)pos.getX() + random.nextFloat());
+					double e = (double)pos.getY() - 0.05D;
+					double f = (double)((float)pos.getZ() + random.nextFloat());
+					world.addParticle(ParticleTypes.DRIPPING_WATER, d, e, f, 0.0D, 0.0D, 0.0D);
+				}
+			}
+		}
 	}
 }

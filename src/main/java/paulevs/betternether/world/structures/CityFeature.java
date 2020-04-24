@@ -70,7 +70,7 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 			super(structureFeature, chunkX, chunkZ, blockBox, i, l);
 		}
 
-		public void initialize(ChunkGenerator<?> chunkGenerator, StructureManager structureManager, int x, int z, Biome biome)
+		public void init(ChunkGenerator<?> chunkGenerator, StructureManager structureManager, int x, int z, Biome biome)
 		{
 			int px = (x << 4) | 8;
 			int pz = (z << 4) | 8;

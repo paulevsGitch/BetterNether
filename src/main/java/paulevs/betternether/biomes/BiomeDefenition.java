@@ -13,7 +13,7 @@ import net.minecraft.world.biome.Biome.Settings;
 import net.minecraft.world.biome.BiomeEffects.Builder;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import paulevs.betternether.MathHelper;
+import paulevs.betternether.MHelper;
 
 public class BiomeDefenition
 {
@@ -47,7 +47,7 @@ public class BiomeDefenition
 	 */
 	public BiomeDefenition setColor(int r, int g, int b)
 	{
-		this.color = MathHelper.color(r, g, b);
+		this.color = MHelper.color(r, g, b);
 		return this;
 	}
 	
@@ -80,7 +80,7 @@ public class BiomeDefenition
 	 */
 	public BiomeDefenition setAdditions(SoundEvent additions)
 	{
-		this.additions = new BiomeAdditionsSound(additions, 0.01);
+		this.additions = new BiomeAdditionsSound(additions, 0.0111);
 		return this;
 	}
 	

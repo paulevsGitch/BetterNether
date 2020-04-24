@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-import net.fabricmc.fabric.impl.biome.InternalBiomeData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -118,7 +117,6 @@ public class BiomesRegistry
 		biome.setGenChance(maxChance);
 		biome.build();
 		REGISTRY.add(biome);
-		LINKS.put(biome.getBiome(), biome);
 	}
 	
 	private static boolean notWrapped(Biome biome)
@@ -139,8 +137,6 @@ public class BiomesRegistry
 			biome.build();
 			REGISTRY.add(biome);
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, regName), biome);
-			LINKS.put(biome.getBiome(), biome);
-			InternalBiomeData.addNetherBiome(biome);
 		}
 	}
 	
@@ -155,8 +151,6 @@ public class BiomesRegistry
 			biome.build();
 			REGISTRY.add(biome);
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, regName), biome);
-			LINKS.put(biome.getBiome(), biome);
-			InternalBiomeData.addNetherBiome(biome);
 		}
 	}
 	
@@ -180,8 +174,6 @@ public class BiomesRegistry
 			mainBiome.addSubBiome(biome, chance);
 			biome.build();
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, biome.getRegistryName()), biome);
-			LINKS.put(biome.getBiome(), biome);
-			InternalBiomeData.addNetherBiome(biome);
 		}
 	}
 	
@@ -196,8 +188,15 @@ public class BiomesRegistry
 	
 	public static NetherBiome getFromBiome(Biome biome)
 	{
-		NetherBiome b = LINKS.get(biome);
-		return b == null ? BIOME_EMPTY_NETHER : b;
+		if (biome instanceof NetherBiome)
+		{
+			return (NetherBiome) biome;
+		}
+		else
+		{
+			NetherBiome b = LINKS.get(biome);
+			return b == null ? BIOME_EMPTY_NETHER : b;
+		}
 	}
 	
 	public static ArrayList<NetherBiome> getRegisteredBiomes()

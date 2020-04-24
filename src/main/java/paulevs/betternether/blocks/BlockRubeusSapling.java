@@ -20,14 +20,14 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.structures.plants.StructureWillow;
+import paulevs.betternether.structures.plants.StructureRubeus;
 
-public class BlockWillowSapling extends BlockBaseNotFull implements Fertilizable
+public class BlockRubeusSapling extends BlockBaseNotFull implements Fertilizable
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 14, 12);
-	private static final StructureWillow STRUCTURE = new StructureWillow();
+	private static final StructureRubeus STRUCTURE = new StructureRubeus();
 	
-	public BlockWillowSapling()
+	public BlockRubeusSapling()
 	{
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.RED)
@@ -77,7 +77,7 @@ public class BlockWillowSapling extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
 	{
-		STRUCTURE.generate(world, pos, random);
+		STRUCTURE.grow(world, pos, random);
 	}
 	
 	@Override

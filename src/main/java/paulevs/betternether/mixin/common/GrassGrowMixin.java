@@ -12,11 +12,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.registry.BlocksRegistry;
-import paulevs.betternether.world.BNWorldGenerator;
 
 @Mixin(BoneMealItem.class)
 public class GrassGrowMixin
@@ -66,7 +65,7 @@ public class GrassGrowMixin
 	
 	private BlockState getGrassState(World world, BlockPos pos)
 	{
-		NetherBiome biome = BNWorldGenerator.getBiome(world, pos.getX(), pos.getY(), pos.getZ());
+		Biome biome = world.getBiome(pos);//BNWorldGenerator.getBiome(world, pos.getX(), pos.getY(), pos.getZ());
 		if (biome instanceof NetherSwampland)
 			return BlocksRegistry.SWAMP_GRASS.getDefaultState();
 		else

@@ -18,6 +18,7 @@ import paulevs.betternether.structures.plants.StructureLucis;
 import paulevs.betternether.structures.plants.StructureMagmaFlower;
 import paulevs.betternether.structures.plants.StructureNetherGrass;
 import paulevs.betternether.structures.plants.StructureReeds;
+import paulevs.betternether.structures.plants.StructureRubeus;
 import paulevs.betternether.structures.plants.StructureStalagnate;
 import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallMoss;
@@ -34,6 +35,7 @@ public class NetherBiomeJungle extends NetherBiome
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);
+		addStructure("rubeus_tree", new StructureRubeus(), StructureType.FLOOR, 0.1F, false);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, false);
 		addStructure("egg_plant", new StructureEggPlant(), StructureType.FLOOR, 0.05F, false);
 		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.1F, false);
