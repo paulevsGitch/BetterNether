@@ -1,6 +1,7 @@
 package paulevs.betternether.structures.plants;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -10,14 +11,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.blocks.RubeusLog;
+import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureFuncScatter;
 
 public class StructureRubeus extends StructureFuncScatter
 {
-	private static final float[] CURVE_X = new float[] {9F, 5F, 1.5F, 0.5F, 3F, 7F};
-	private static final float[] CURVE_Y = new float[] {20F, 17F, 12F, 4F, 1F, -2F};
+	private static final float[] CURVE_X = new float[] {9F, 7F, 1.5F, 0.5F, 3F, 7F};
+	private static final float[] CURVE_Y = new float[] {20F, 17F, 12F, 4F, 0F, -2F};
+	private static final int MIDDLE_Y = 10;
 	private static final Set<BlockPos> POINTS = new HashSet<BlockPos>();
+	private static final Set<BlockPos> MIDDLE = new HashSet<BlockPos>();
+	private static final Set<BlockPos> TOP = new HashSet<BlockPos>();
 	
 	public StructureRubeus()
 	{
@@ -34,36 +40,109 @@ public class StructureRubeus extends StructureFuncScatter
 		int count = MHelper.randRange(minCount, maxCount, random);
 		for (int n = 0; n < count; n++)
 		{
-			float branchSize = MHelper.randRange(0.5F, 1F, random) * scale;
+			float branchSize = MHelper.randRange(0.5F, 0.8F, random) * scale;
 			float angle = n * MHelper.PI2 / count;
 			float radius = CURVE_X[0] * branchSize;
 			int x1 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F, 2F, random) * branchSize);
 			int y1 = Math.round(pos.getY() + CURVE_Y[0] * branchSize + MHelper.randRange(-2F, 2F, random) * branchSize);
 			int z1 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F, 2F, random) * branchSize);
-			crown(world, x1, y1 + 1, z1, 5 * branchSize, random, BlocksRegistry.RUBEUS_LEAVES.getDefaultState());
+			float crownR = 5 * branchSize;
+			if (crownR < 1.5F)
+				crownR = 1.5F;
+			crown(world, x1, y1 + 1, z1, crownR, random, BlocksRegistry.RUBEUS_LEAVES.getDefaultState());
 			
-			for (int i = 1; i < CURVE_X.length; i++)
+			int middle = Math.round(pos.getY() + (MIDDLE_Y + MHelper.randRange(-2, 2, random)) * branchSize);
+			boolean generate = true;
+			for (int i = 1; i < CURVE_X.length && generate; i++)
 			{
 				radius = CURVE_X[i] * branchSize;
 				int x2 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F, 2F, random) * branchSize);
 				int y2 = Math.round(pos.getY() + CURVE_Y[i] * branchSize + (CURVE_Y[i] > 0 ? MHelper.randRange(-2F, 2F, random) * branchSize : 0));
 				int z2 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F, 2F, random) * branchSize);
-				line(world, x1, y1, z1, x2, y2, z2);
+				
+				if (CURVE_Y[i] <= 0)
+				{
+					if (!isGround(world.getBlockState(POS.set(x2, y2, z2))))
+					{
+						boolean noGround = true;
+						for (int d = 1; d < 3; d++)
+						{
+							if (isGround(world.getBlockState(POS.set(x2, y2 - d, z2))))
+							{
+								y2 -= d;
+								noGround = false;
+								break;
+							}
+						}
+						if (noGround)
+						{
+							x2 = pos.getX();
+							y2 = pos.getY();
+							generate = false;
+						}
+					}
+				}
+				
+				line(world, x1, y1, z1, x2, y2, z2, middle);
 				x1 = x2;
 				y1 = y2;
 				z1 = z2;
 			}
 		}
 		
+		BlockState state;
+		Iterator<BlockPos> iterator = TOP.iterator();
+		while (iterator.hasNext())
+		{
+			BlockPos bpos = iterator.next();
+			if (bpos != null)
+			{
+				if (POINTS.contains(bpos.up()) && !TOP.contains(bpos.up()))
+					iterator.remove();
+			}
+		}
+		
+		iterator = MIDDLE.iterator();
+		while (iterator.hasNext())
+		{
+			BlockPos bpos = iterator.next();
+			if (bpos != null)
+			{
+				BlockPos up = bpos.up();
+				if (MIDDLE.contains(up) || (!TOP.contains(up) && POINTS.contains(up)))
+					iterator.remove();
+			}
+			else
+				iterator.remove();
+		}
+				
 		for (BlockPos bpos: POINTS)
 		{
 			if (POINTS.contains(bpos.up()) && POINTS.contains(bpos.down()))
-				setCondition(world, bpos, pos.getY(), BlocksRegistry.RUBEUS_LOG.getDefaultState());
+			{
+				state = BlocksRegistry.RUBEUS_LOG.getDefaultState();
+				if (MIDDLE.contains(bpos))
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.MIDDLE));
+				else if (TOP.contains(bpos))
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.TOP));
+				else
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.BOTTOM));
+			}
 			else
-				setCondition(world, bpos, pos.getY(), BlocksRegistry.RUBEUS_BARK.getDefaultState());
+			{
+				state = BlocksRegistry.RUBEUS_BARK.getDefaultState();
+				if (MIDDLE.contains(bpos))
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.MIDDLE));
+				else if (TOP.contains(bpos))
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.TOP));
+				else
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.BOTTOM));
+			}
 		}
 		
 		POINTS.clear();
+		MIDDLE.clear();
+		TOP.clear();
 	}
 	
 	@Override
@@ -86,7 +165,7 @@ public class StructureRubeus extends StructureFuncScatter
 		return BlocksHelper.isNetherGround(state);
 	}
 	
-	private void line(IWorld world, int x1, int y1, int z1, int x2, int y2, int z2)
+	private void line(IWorld world, int x1, int y1, int z1, int x2, int y2, int z2, int middleY)
 	{
 		int dx = x2 - x1;
 		int dy = y2 - y1;
@@ -98,26 +177,34 @@ public class StructureRubeus extends StructureFuncScatter
 		float px = x1;
 		float py = y1;
 		float pz = z1;
-		POINTS.add(POS.set(x1, y1, z1).toImmutable());
-		POINTS.add(POS.set(x2, y2, z2).toImmutable());
-		//int y = POS.getY();
+		
+		BlockPos pos = POS.set(x1, y1, z1).toImmutable();
+		POINTS.add(pos);
+		if (pos.getY() == middleY)
+			MIDDLE.add(pos);
+		else if (pos.getY() > middleY)
+			TOP.add(pos);
+		
+		pos = POS.set(x2, y2, z2).toImmutable();
+		POINTS.add(pos);
+		if (pos.getY() == middleY)
+			MIDDLE.add(pos);
+		else if (pos.getY() > middleY)
+			TOP.add(pos);
+		
 		for (int i = 0; i < mx; i++)
 		{
 			px += fdx;
 			py += fdy;
 			pz += fdz;
+			
 			POS.set(Math.round(px), Math.round(py), Math.round(pz));
-			POINTS.add(POS.toImmutable());
-			/*if (y > POS.getY())
-			{
-				y = POS.getY();
-				POINTS.add(POS.down());
-			}
-			else if (y < POS.getY())
-			{
-				y = POS.getY();
-				POINTS.add(POS.up());
-			}*/
+			pos = POS.toImmutable();
+			POINTS.add(pos);
+			if (POS.getY() == middleY)
+				MIDDLE.add(pos);
+			else if (POS.getY() > middleY)
+				TOP.add(pos);
 		}
 	}
 	

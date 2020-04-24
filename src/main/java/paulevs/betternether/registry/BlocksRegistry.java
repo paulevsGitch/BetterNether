@@ -100,6 +100,7 @@ import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
+import paulevs.betternether.blocks.RubeusLog;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 
@@ -313,10 +314,11 @@ public class BlocksRegistry
 	
 	// Rubeus
 	public static final Block RUBEUS_SAPLING = registerBlock("rubeus_sapling",  new BlockRubeusSapling());
+	public static final Block RUBEUS_CONE = registerBlock("rubeus_cone",  new BlockRubeusCone());
 	public static final Block STRIPED_LOG_RUBEUS = registerBlock("striped_log_rubeus", new BNPillar(MaterialColor.MAGENTA));
 	public static final Block STRIPED_BARK_RUBEUS = registerBlock("striped_bark_rubeus", new BNPillar(MaterialColor.MAGENTA));
-	public static final Block RUBEUS_LOG = registerBlock("rubeus_log", new BNLogStripable(MaterialColor.MAGENTA, STRIPED_LOG_WART));
-	public static final Block RUBEUS_BARK = registerBlock("rubeus_bark", new BNLogStripable(MaterialColor.MAGENTA, STRIPED_BARK_WART));
+	public static final Block RUBEUS_LOG = registerBlock("rubeus_log", new RubeusLog(STRIPED_LOG_WART));
+	public static final Block RUBEUS_BARK = registerBlock("rubeus_bark", new RubeusLog(STRIPED_BARK_WART));
 	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves());
 	public static final Block RUBEUS_PLANKS = registerBlock("rubeus_planks", new BNPlanks(MaterialColor.MAGENTA));
 	
