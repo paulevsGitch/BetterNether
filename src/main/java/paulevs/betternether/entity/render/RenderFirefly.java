@@ -158,7 +158,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 
 		if (this.hasLabel(mobEntity))
 		{
-			this.renderLabelIfPresent(mobEntity, mobEntity.getDisplayName().asFormattedString(), matrixStack, vertexConsumerProvider, i);
+			this.renderLabelIfPresent(mobEntity, mobEntity.getDisplayName(), matrixStack, vertexConsumerProvider, i);
 		}
 	}
 

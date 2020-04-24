@@ -16,6 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -23,6 +24,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
+import paulevs.betternether.registry.SoundsRegistry;
 
 public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 {
@@ -213,5 +215,11 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 						getZ() + random.nextGaussian() * scale,
 						0, 0, 0);
 		}
+	}
+	
+	@Override
+	public SoundEvent getAmbientSound()
+	{
+		return SoundsRegistry.MOB_JELLYFISH;
 	}
 }

@@ -16,5 +16,14 @@
 				"stream": false
 			}
 		]
+	},
+	"betternether.mob.jellyfish": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/jellyfish",
+				"stream": false
+			}
+		]
 	}
 }

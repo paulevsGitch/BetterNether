@@ -1,7 +1,7 @@
 package paulevs.betternether.blocks.materials;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tools.FabricToolTags;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.sound.BlockSoundGroup;
