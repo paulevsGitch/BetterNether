@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
@@ -14,6 +15,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.biomes.NetherSoulPlain;
 import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.registry.BlocksRegistry;
 
@@ -22,20 +24,30 @@ public class GrassGrowMixin
 {
 	private static final Mutable POS = new Mutable();
 	
-	@Inject(method = "useOnBlock", at = @At("HEAD"))
+	@Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
 	private void onUse(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info)
 	{
 		World world = context.getWorld();
 		BlockPos blockPos = context.getBlockPos();
 		if (!world.isClient)
 		{
-			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos)))
+			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos)) && !hasNyliumNear(world, blockPos))
 			{
 				growGrass(world, blockPos);
 				world.playLevelEvent(2005, blockPos, 0);
 				if (!context.getPlayer().isCreative())
 					context.getStack().decrement(1);
 				info.setReturnValue(ActionResult.SUCCESS);
+				info.cancel();
+			}
+			else if (BlocksHelper.isSoulSand(world.getBlockState(blockPos)))
+			{
+				growGrass(world, blockPos);
+				world.playLevelEvent(2005, blockPos, 0);
+				if (!context.getPlayer().isCreative())
+					context.getStack().decrement(1);
+				info.setReturnValue(ActionResult.SUCCESS);
+				info.cancel();
 			}
 		}
 	}
@@ -65,10 +77,25 @@ public class GrassGrowMixin
 	
 	private BlockState getGrassState(World world, BlockPos pos)
 	{
-		Biome biome = world.getBiome(pos);//BNWorldGenerator.getBiome(world, pos.getX(), pos.getY(), pos.getZ());
+		Biome biome = world.getBiome(pos);
 		if (biome instanceof NetherSwampland)
 			return BlocksRegistry.SWAMP_GRASS.getDefaultState();
+		else if (biome instanceof NetherSoulPlain)
+			return BlocksRegistry.SOUL_GRASS.getDefaultState();
 		else
 			return BlocksRegistry.NETHER_GRASS.getDefaultState();
+	}
+	
+	private boolean hasNyliumNear(World world, BlockPos pos)
+	{
+		return  isNylium(world.getBlockState(pos.north())) ||
+				isNylium(world.getBlockState(pos.south())) ||
+				isNylium(world.getBlockState(pos.east())) ||
+				isNylium(world.getBlockState(pos.west()));
+	}
+	
+	private boolean isNylium(BlockState state)
+	{
+		return state.getBlock() == Blocks.CRIMSON_NYLIUM || state.getBlock() == Blocks.WARPED_NYLIUM;
 	}
 }

@@ -222,4 +222,10 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 	{
 		return SoundsRegistry.MOB_JELLYFISH;
 	}
+
+	@Override
+	protected float getSoundVolume()
+	{
+		return 0.5F;
+	}
 }
