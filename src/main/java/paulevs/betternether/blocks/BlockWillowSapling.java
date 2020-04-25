@@ -36,6 +36,7 @@ public class BlockWillowSapling extends BlockBaseNotFull implements Fertilizable
 				.dropsNothing()
 				.breakInstantly()
 				.noCollision()
+				.ticksRandomly()
 				.build());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

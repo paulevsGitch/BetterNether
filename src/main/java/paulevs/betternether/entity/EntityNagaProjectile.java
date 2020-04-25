@@ -1,30 +1,40 @@
 package paulevs.betternether.entity;
 
-import net.minecraft.client.network.packet.EntitySpawnS2CPacket;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Packet;
+import net.minecraft.entity.ProjectileUtil;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.FlyingEntity;
+import net.minecraft.entity.projectile.Projectile;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.RayTraceContext;
 import net.minecraft.world.World;
 
-public class EntityNagaProjectile extends Entity
+public class EntityNagaProjectile extends FlyingEntity implements Projectile
 {
+	private static final int MAX_LIFE_TIME = 60; // 3 seconds * 20 ticks
 	private LivingEntity owner;
-
+	private int lifeTime = 0;
+	
 	public EntityNagaProjectile(EntityType<? extends EntityNagaProjectile> type, World world)
 	{
 		super(type, world);
+		calculateDimensions();
 	}
 
-	public void setParams(LivingEntity owner, LivingEntity target)
+	public void setParams(LivingEntity owner, Entity target)
 	{
 		this.owner = owner;
-		this.setPositionAndAngles(owner.getX(), owner.getEyeY(), owner.getZ(), owner.yaw, owner.pitch);
+		this.setPos(getX(), getEyeY() - this.getHeight(), getZ());
 		this.updatePosition();
-		Vec3d dir = target.getPos().add(0, target.getHeightOffset() * 0.5, 0).subtract(getPos()).normalize();
+		Vec3d dir = target.getPos().add(0, target.getHeight() * 0.25, 0).subtract(getPos()).normalize().multiply(2);
 		this.setVelocity(dir);
 		this.prevX = getX() - dir.x;
 		this.prevY = getY() - dir.y;
@@ -37,37 +47,106 @@ public class EntityNagaProjectile extends Entity
 		return true;
 	}
 
-	@Override
-	protected void initDataTracker() {}
-
-	@Override
-	protected void readCustomDataFromTag(CompoundTag tag) {}
-
-	@Override
-	protected void writeCustomDataToTag(CompoundTag tag) {}
-
-	@Override
-	public Packet<?> createSpawnPacket()
+	@Environment(EnvType.CLIENT)
+	public boolean shouldRender(double distance)
 	{
-		int i = this.owner == null ? 0 : this.owner.getEntityId();
-		return new EntitySpawnS2CPacket(this.getEntityId(), this.getUuid(), this.getX(), this.getY(), this.getZ(), this.pitch, this.yaw, this.getType(), i, this.getVelocity());
+		return distance < 128;
 	}
 
 	@Override
 	public void tick()
 	{
 		super.tick();
-		//prevX = getX();
-		//prevX = getY();
-		//prevZ = getZ();
-		//setPosition(getX() + getVelocity().x, getY() + getVelocity().y, getZ() + getVelocity().z);
-		//for (int i = 0; i < 10; i++)
-		//	world.addParticle(ParticleTypes.SMOKE, getX(), getY(), getZ(), 0, 0, 0);
-		if (getX() == prevX && getY() == prevY && getZ() == prevZ)
+		world.addParticle(ParticleTypes.LARGE_SMOKE,
+				getX() + random.nextGaussian() * 0.2,
+				getY() + random.nextGaussian() * 0.2,
+				getZ() + random.nextGaussian() * 0.2,
+				0, 0, 0);
+		world.addParticle(ParticleTypes.SMOKE,
+				getX() + random.nextGaussian() * 0.2,
+				getY() + random.nextGaussian() * 0.2,
+				getZ() + random.nextGaussian() * 0.2,
+				0, 0, 0);
+		
+		HitResult hitResult = ProjectileUtil.getCollision(this, true, false, this.owner, RayTraceContext.ShapeType.COLLIDER);
+        if (hitResult.getType() != HitResult.Type.MISS)
+        {
+           this.onCollision(hitResult);
+        }
+        
+        lifeTime ++;
+        if (lifeTime > MAX_LIFE_TIME)
+        	effectKill();
+        
+        if (isSame(this.prevX, this.getX()) && isSame(this.prevY, this.getY()) && isSame(this.prevZ, this.getZ()))
+        	effectKill();
+	}
+	
+	private boolean isSame(double a, double b)
+	{
+		return Math.abs(a - b) < 0.1;
+	}
+
+	@Override
+	public void setVelocity(double x, double y, double z, float speed, float divergence)
+	{
+		this.setVelocity(x, y, z);
+	}
+	
+	protected void onCollision(HitResult hitResult)
+	{
+		HitResult.Type type = hitResult.getType();
+		if (type == HitResult.Type.BLOCK)
 		{
-			world.addParticle(ParticleTypes.EXPLOSION, getX(), getY(), getZ(), 0, 0, 0);
-			this.kill();
+			for (int i = 0; i < 10; i++)
+			{
+				world.addParticle(ParticleTypes.LARGE_SMOKE,
+						getX() + random.nextGaussian() * 0.5,
+						getY() + random.nextGaussian() * 0.5,
+						getZ() + random.nextGaussian() * 0.5,
+						random.nextGaussian() * 0.2,
+						random.nextGaussian() * 0.2,
+						random.nextGaussian() * 0.2);
+			}
+			effectKill();
 		}
-		//System.out.println(this.isAlive());
+		else if (type == HitResult.Type.ENTITY)
+		{
+			Entity entity = ((EntityHitResult) hitResult).getEntity();
+			if (entity instanceof LivingEntity && !(entity instanceof EntityNaga) && !(entity instanceof EntityNagaProjectile))
+			{
+				LivingEntity living = (LivingEntity) entity;
+				if (!(living.hasStatusEffect(StatusEffects.WITHER)))
+				{
+					living.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 40));
+				}
+				effectKill();
+			}
+		}
+	}
+
+	private void effectKill()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			world.addParticle(ParticleTypes.ENTITY_EFFECT,
+					getX() + random.nextGaussian() * 0.5,
+					getY() + random.nextGaussian() * 0.5,
+					getZ() + random.nextGaussian() * 0.5,
+					0.1, 0.1, 0.1);
+		}
+		this.kill();
+	}
+
+	@Override
+	public boolean canHaveStatusEffect(StatusEffectInstance effect)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isSilent()
+	{
+		return true;
 	}
 }

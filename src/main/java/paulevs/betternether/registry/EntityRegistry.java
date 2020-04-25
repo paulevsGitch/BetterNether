@@ -13,24 +13,26 @@ import paulevs.betternether.IBiome;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
+import paulevs.betternether.entity.EntityNaga;
+import paulevs.betternether.entity.EntityNagaProjectile;
 
 public class EntityRegistry
 {
 	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(EntityCategory.MISC, EntityChair::new).size(EntityDimensions.fixed(0.0F, 0.0F)).setImmuneToFire().disableSummon().build();
-	//public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(EntityCategory.MISC, (EntityType<EntityNagaProjectile> type, World world) -> {return new EntityNagaProjectile(type, world);}).size(EntityDimensions.fixed(1F, 1F)).build();
+	public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(EntityCategory.MISC, EntityNagaProjectile::new).size(EntityDimensions.fixed(1F, 1F)).disableSummon().build();
 	
 	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityFirefly::new).size(EntityDimensions.fixed(0.5F, 0.5F)).setImmuneToFire().build();
 	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityHydrogenJellyfish::new).size(EntityDimensions.changing(2F, 5F)).setImmuneToFire().build();
-	//public static final EntityType<EntityNaga> NAGA = FabricEntityTypeBuilder.create(EntityCategory.MONSTER, EntityNaga::new).size(EntityDimensions.fixed(0.625F, 2.75F)).setImmuneToFire().build();
+	public static final EntityType<EntityNaga> NAGA = FabricEntityTypeBuilder.create(EntityCategory.MONSTER, EntityNaga::new).size(EntityDimensions.fixed(0.625F, 2.75F)).setImmuneToFire().build();
 	
 	public static void register()
 	{
 		registerEntity("chair", CHAIR);
-		//registerEntity("naga_projectile", NAGA_PROJECTILE);
+		registerEntity("naga_projectile", NAGA_PROJECTILE);
 		
 		registerEntity("firefly", FIREFLY, 5, 2, 6, Biomes.NETHER);
 		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, 100, 1, 4, Biomes.NETHER);
-		//registerEntity("naga", NAGA, 100, 1, 4);
+		registerEntity("naga", NAGA, 100, 1, 4);
 	}
 	
 	public static void registerEntity(String name, EntityType<?> entity)
