@@ -25,5 +25,27 @@
 				"stream": false
 			}
 		]
+	},
+	"betternether.mob.naga_idle": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/naga/naga_1",
+				"stream": false
+			},
+			{
+				"name": "betternether:mob/naga/naga_2",
+				"stream": false
+			}
+		]
+	},
+	"betternether.mob.naga_attack": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/naga/naga_attack",
+				"stream": false
+			}
+		]
 	}
 }

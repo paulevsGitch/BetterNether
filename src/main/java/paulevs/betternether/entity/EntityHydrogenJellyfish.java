@@ -118,7 +118,7 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 	@Override
 	public void onPlayerCollision(PlayerEntity player)
 	{
-		player.damage(DamageSource.CACTUS, 3);
+		player.damage(DamageSource.GENERIC, 3);
 	}
 
 	@Override
@@ -226,6 +226,6 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 	@Override
 	protected float getSoundVolume()
 	{
-		return 0.5F;
+		return 0.25F;
 	}
 }

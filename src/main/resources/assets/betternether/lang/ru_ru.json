@@ -4,6 +4,9 @@
 
 	"entity.betternether.firefly": "Светлячёк",
 	"entity.betternether.hydrogen_jellyfish": "Водородная медуза",
+	"entity.betternether.naga_projectile": "Снаряд наги",
+	"entity.betternether.naga": "Нага",
+	"item.betternether.spawn_egg_naga": "Яйцо призыва наги",
 
 	"item.betternether.black_apple": "Чёрное яблоко",
 
