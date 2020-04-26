@@ -16,8 +16,8 @@ public class NetherBiomeSource extends BiomeSource
 	public NetherBiomeSource(NetherBiomeSourceConfig config)
 	{
 		super(buildBiomes());
-		int sizeXZ = Config.getInt("generator_world", "biome_size_xz", 128);
-		int sizeY = Config.getInt("generator_world", "biome_size_y", 32);
+		int sizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
+		int sizeY = Config.getInt("generator_world", "biome_size_y", 40);
 		map = new BiomeMap(config.getSeed(), sizeXZ, sizeY, config.isVolumetric());
 	}
 

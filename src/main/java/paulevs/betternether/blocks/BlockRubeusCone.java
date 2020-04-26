@@ -1,4 +1,4 @@
-package paulevs.betternether.registry;
+package paulevs.betternether.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -11,7 +11,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.blocks.BlockBaseNotFull;
 import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockRubeusCone extends BlockBaseNotFull

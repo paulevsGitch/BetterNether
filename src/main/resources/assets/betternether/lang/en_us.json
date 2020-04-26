@@ -427,8 +427,21 @@
 	
 	"block.betternether.striped_log_rubeus": "Striped Rubeus Log",
 	"block.betternether.striped_bark_rubeus": "Striped Rubeus Bark",
+	"block.betternether.rubeus_cone": "Rubeus Cone",
 	"block.betternether.rubeus_log": "Rubeus Log",
 	"block.betternether.rubeus_bark": "Rubeus Bark",
 	"block.betternether.rubeus_leaves": "Rubeus Leaves",
-	"block.betternether.rubeus_planks": "Rubeus Planks"
+	"block.betternether.rubeus_planks": "Rubeus Planks",
+	"block.betternether.rubeus_stairs": "Rubeus Stairs",
+	"block.betternether.rubeus_slab": "Rubeus Slab",
+	"block.betternether.rubeus_fence": "Rubeus Fence",
+	"block.betternether.rubeus_gate": "Rubeus Gate",
+	"block.betternether.rubeus_button": "Rubeus Button",
+	"block.betternether.rubeus_plate": "Rubeus Pressure Plate",
+	"block.betternether.rubeus_trapdoor": "Rubeus Trapdoor",
+	"block.betternether.rubeus_door": "Rubeus Door",
+	"block.betternether.taburet_rubeus": "Rubeus Stool",
+	"block.betternether.chair_rubeus": "Rubeus Chair",
+	"block.betternether.bar_stool_rubeus": "Rubeus Bar Stool",
+	"block.betternether.rubeus_ladder": "Rubeus Ladder"
 }

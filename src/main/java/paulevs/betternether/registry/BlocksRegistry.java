@@ -80,6 +80,7 @@ import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.BlockRedMold;
 import paulevs.betternether.blocks.BlockReedsBlock;
+import paulevs.betternether.blocks.BlockRubeusCone;
 import paulevs.betternether.blocks.BlockRubeusLeaves;
 import paulevs.betternether.blocks.BlockRubeusSapling;
 import paulevs.betternether.blocks.BlockSmallLantern;

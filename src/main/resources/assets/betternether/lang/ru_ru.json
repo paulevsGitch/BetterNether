@@ -430,5 +430,17 @@
 	"block.betternether.rubeus_log": "Бревно рубейса",
 	"block.betternether.rubeus_bark": "Древесина рубейса",
 	"block.betternether.rubeus_leaves": "Листья рубейса",
-	"block.betternether.rubeus_planks": "Рубейсовые доски "
+	"block.betternether.rubeus_planks": "Рубейсовые доски",
+	"block.betternether.rubeus_stairs": "Рубейсовые ступени",
+	"block.betternether.rubeus_slab": "Рубейсовая плита",
+	"block.betternether.rubeus_fence": "Рубейсовый забор",
+	"block.betternether.rubeus_gate": "Рубейсовая калитка",
+	"block.betternether.rubeus_button": "Рубейсовая кнопка",
+	"block.betternether.rubeus_plate": "Рубейсовая нажимная плита",
+	"block.betternether.rubeus_trapdoor": "Рубейсовый люк",
+	"block.betternether.rubeus_door": "Рубейсовая дверь",
+	"block.betternether.taburet_rubeus": "Рубейсовый табурет",
+	"block.betternether.chair_rubeus": "Рубейсовый стул",
+	"block.betternether.bar_stool_rubeus": "Рубейсовый барный стул",
+	"block.betternether.rubeus_ladder": "Рубейсовая лестница"
 }
