@@ -25,7 +25,7 @@ public class EntityNagaProjectile extends FlyingEntity
 	public EntityNagaProjectile(EntityType<? extends EntityNagaProjectile> type, World world)
 	{
 		super(type, world);
-		calculateDimensions();
+		this.experiencePoints = 0;
 	}
 
 	public void setParams(LivingEntity owner, Entity target)

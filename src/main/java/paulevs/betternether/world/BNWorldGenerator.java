@@ -294,16 +294,18 @@ public class BNWorldGenerator
 					popPos.setZ(sz + (z << 1) + 2);
 					Biome b = world.getBiome(popPos);
 					BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
+					if (b instanceof NetherBiomeWrapper || !(b instanceof NetherBiome))
+						MC_BIOMES.add(b);
 				}
 			}
 		}
 		
-		for (int y = 4; y < 60; y += 2)
+		/*for (int y = 4; y < 60; y += 2)
 		{
 			Biome b = BIOMES[4][y][4].getBiome();
 			if (b instanceof NetherBiomeWrapper || !(b instanceof NetherBiome))
 				MC_BIOMES.add(b);
-		}
+		}*/
 	}
 
 	public static void prePopulate(IWorld world, int sx, int sz, Random random)

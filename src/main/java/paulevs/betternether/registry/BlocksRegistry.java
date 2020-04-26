@@ -327,8 +327,8 @@ public class BlocksRegistry
 	public static final Block RUBEUS_GATE = registerBlock("rubeus_gate", new BNGate(WART_PLANKS));
 	public static final Block RUBEUS_BUTTON = registerBlock("rubeus_button", new BNButton(WART_PLANKS));
 	public static final Block RUBEUS_PLATE = registerBlock("rubeus_plate", new BNPlate(ActivationRule.EVERYTHING, WART_PLANKS));
-	//public static final Block RUBEUS_TRAPDOOR = registerBlock("rubeus_trapdoor", new BNTrapdoor(WART_PLANKS));
-	//public static final Block RUBEUS_DOOR = registerBlock("rubeus_door", new BNDoor(WART_PLANKS));
+	public static final Block RUBEUS_TRAPDOOR = registerBlock("rubeus_trapdoor", new BNTrapdoor(WART_PLANKS));
+	public static final Block RUBEUS_DOOR = registerBlock("rubeus_door", new BNDoor(WART_PLANKS));
 	
 	// Mushroom //
 	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStalagnateStem());

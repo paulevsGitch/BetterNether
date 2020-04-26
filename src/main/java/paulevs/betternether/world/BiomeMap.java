@@ -52,23 +52,28 @@ public class BiomeMap
 		double ny = y;
 		double nz = z;
 		
+		double px = bx * 0.2;
+		double py = by * 0.2;
+		double pz = bz * 0.2;
+		
 		for (int i = 0; i < depth; i++)
 		{
+			nx = (x + noiseX.eval(px, pz)) / 2F;
+			nz = (z + noiseZ.eval(px, pz)) / 2F;
+			
 			if (volumetric)
 			{
-				nx = (x + noiseX.eval(y + i, z + i)) / 2;
-				nz = (z + noiseZ.eval(x + i, y + i)) / 2;
-				ny = (y + noiseY.eval(x + i, z + i)) / 2;
+				nz = (z + noiseY.eval(px, pz)) / 2F;
+				
 				y = ny;
-			}
-			else
-			{
-				nx = (x + noiseX.eval(x + i, z + i)) / 2;
-				nz = (z + noiseZ.eval(z + i, x + i)) / 2;
+				py = py / 2 + i;
 			}
 			
 			x = nx;
 			z = nz;
+			
+			px = px / 2 + i;
+			pz = pz / 2 + i;
 		}
 		
 		ChunkPos cpos = new ChunkPos(
@@ -104,7 +109,7 @@ public class BiomeMap
 			edge = edge || !search.isSame(getRawBiome(x - 1, y, z + 1));
 			edge = edge || !search.isSame(getRawBiome(x + 1, y, z - 1));
 			edge = edge || !search.isSame(getRawBiome(x + 1, y, z + 1));
-			if (!edge && volumetric)
+			/*if (!edge && volumetric)
 			{
 				edge = edge || !search.isSame(getRawBiome(x, y + d, z));
 				edge = edge || !search.isSame(getRawBiome(x, y - d, z));
@@ -116,7 +121,7 @@ public class BiomeMap
 				edge = edge || !search.isSame(getRawBiome(x + d, y + d, z - d));
 				edge = edge || !search.isSame(getRawBiome(x - d, y + d, z + d));
 				edge = edge || !search.isSame(getRawBiome(x + d, y + d, z + d));
-			}
+			}*/
 			
 			if (edge)
 			{

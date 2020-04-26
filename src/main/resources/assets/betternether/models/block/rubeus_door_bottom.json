@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom",
+    "textures": {
+        "bottom": "betternether:block/rubeus_door_bottom",
+        "top": "betternether:block/rubeus_door_bottom"
+    }
+}

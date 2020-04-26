@@ -117,6 +117,7 @@ public class BiomesRegistry
 		biome.setGenChance(maxChance);
 		biome.build();
 		REGISTRY.add(biome);
+		LINKS.put(biome.getBiome(), biome);
 	}
 	
 	private static boolean notWrapped(Biome biome)

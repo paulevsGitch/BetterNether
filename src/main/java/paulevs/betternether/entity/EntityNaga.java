@@ -30,6 +30,7 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 	public EntityNaga(EntityType<? extends EntityNaga> type, World world)
 	{
 		super(type, world);
+		this.experiencePoints = 10;
 	}
 
 	@Override
@@ -92,5 +93,11 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 	public boolean shouldRender(double distance)
 	{
 		return distance < 256;
+	}
+
+	@Override
+	public int getBodyYawSpeed()
+	{
+		return 1;
 	}
 }

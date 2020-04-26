@@ -11,6 +11,7 @@ public class ModelNaga extends AnimalModel<EntityNaga>
 	public ModelPart head;
 	public ModelPart body;
 	public ModelPart[] tail;
+	public ModelPart[] spikes;
 	private float pitch;
 	private double animation;
 	private long preTime;
@@ -31,19 +32,22 @@ public class ModelNaga extends AnimalModel<EntityNaga>
 		body.addCuboid(-5.0F, 3.0F, -6.0F, 10.0F, 16.0F, 6.0F);
 		body.setPivot(0.0F, -10F, 0.0F);
 		
-		ModelPart panel = new ModelPart(this, 33, 25);
-		panel.addCuboid(0, 0, 0, 10, 18.0F, 0);
-		panel.setPivot(0.0F, 0.0F, 0.0F);
-		panel.yaw = (float) Math.toRadians(-40);
-		body.addChild(panel);
+		spikes = new ModelPart[8];
 		
-		panel = new ModelPart(this, 33, 25);
-		panel.addCuboid(0, 0, 0, 10, 18.0F, 0);
-		panel.setPivot(0.0F, 0, 0.0F);
-		panel.yaw = (float) Math.toRadians(-140);
-		body.addChild(panel);
+		spikes[0] = new ModelPart(this, 33, 25);
+		spikes[0].addCuboid(0, 0, 0, 10, 18.0F, 0);
+		spikes[0].setPivot(0.0F, 0.0F, 0.0F);
+		spikes[0].yaw = (float) Math.toRadians(-40);
+		body.addChild(spikes[0]);
+		
+		spikes[1] = new ModelPart(this, 33, 25);
+		spikes[1].addCuboid(0, 0, 0, 10, 18.0F, 0);
+		spikes[1].setPivot(0.0F, 0, 0.0F);
+		spikes[1].yaw = (float) Math.toRadians(-140);
+		body.addChild(spikes[1]);
 		
 		tail = new ModelPart[4];
+		
 		int last = tail.length - 1;
 		for (int i = 0; i < tail.length; i++)
 		{
@@ -62,17 +66,19 @@ public class ModelNaga extends AnimalModel<EntityNaga>
 			{
 				int px = 32 + (12 - height * 3);
 				
-				/*ModelPart */panel = new ModelPart(this, px, 22);
-				panel.addCuboid(0, 0, 0, height * 3, 20.0F, 0);
-				panel.setPivot(0.0F, 0, 0.0F);
-				panel.yaw = (float) Math.toRadians(-60);
-				tail[i].addChild(panel);
+				int index = (i << 1) + 2;
+				spikes[index] = new ModelPart(this, px, 22);
+				spikes[index].addCuboid(0, 0, 0, height * 3, 20.0F, 0);
+				spikes[index].setPivot(0.0F, 0, 0.0F);
+				spikes[index].yaw = (float) Math.toRadians(-60);
+				tail[i].addChild(spikes[index]);
 				
-				panel = new ModelPart(this, px, 22);
-				panel.addCuboid(0, 0, 0, height * 3, 20.0F, 0);
-				panel.setPivot(0.0F, 0, 0.0F);
-				panel.yaw = (float) Math.toRadians(-120);
-				tail[i].addChild(panel);
+				index ++;
+				spikes[index] = new ModelPart(this, px, 22);
+				spikes[index].addCuboid(0, 0, 0, height * 3, 20.0F, 0);
+				spikes[index].setPivot(0.0F, 0, 0.0F);
+				spikes[index].yaw = (float) Math.toRadians(-120);
+				tail[i].addChild(spikes[index]);
 			}
 			
 			if (i == 0)
@@ -135,18 +141,25 @@ public class ModelNaga extends AnimalModel<EntityNaga>
 		}
 		
 		long time = System.currentTimeMillis();
-		double speed = (entity.isOnGround() && (entity.getVelocity().x != 0 || entity.getVelocity().z != 0) && !entity.hasVehicle()) ? 4 : 0.5;
-		maxAngle = this.lerpAngle(maxAngle, speed > 1 ? 0.1F : 0.3F, 0.02F);
+		double speed = (entity.isOnGround() && (entity.getVelocity().x != 0 || entity.getVelocity().z != 0) && !entity.hasVehicle()) ? 6 : 0.5;
+		maxAngle = this.lerpAngle(maxAngle, speed > 1 ? 0.1F : 0.5F, 0.03F);
 		animation += (time - preTime) * speed / 1000.0;
-		float angle = (float) Math.sin(animation) * maxAngle;
+		float angle = (float) Math.sin(animation) * maxAngle * 0.3F;
 		float start_angle = angle;
 		tail[0].yaw = angle;
 		for (int i = 1; i < tail.length; i++)
 		{
-			angle = (float) Math.sin(i * 1.2 + animation) * maxAngle;
+			angle = (float) Math.atan(Math.sin(i * 1.7 + animation)) * maxAngle;
 			tail[i].roll = angle - start_angle;
 			start_angle += angle;
 		}
+		
+		for (int i = 0; i < spikes.length; i++)
+		{
+			float yaw = ((i & 1) == 0) ? (float) Math.toRadians(-50 + Math.sin(animation * 0.4 + i / 2) * 10) : (float) Math.toRadians(-110 - Math.sin(animation * 0.4 + i / 2) * 10);
+			spikes[i].yaw = yaw;
+		}
+		
 		preTime = time;
 	}
 

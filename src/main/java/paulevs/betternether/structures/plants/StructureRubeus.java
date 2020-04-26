@@ -49,7 +49,7 @@ public class StructureRubeus extends StructureFuncScatter
 			float crownR = 5 * branchSize;
 			if (crownR < 1.5F)
 				crownR = 1.5F;
-			crown(world, x1, y1 + 1, z1, crownR, random, BlocksRegistry.RUBEUS_LEAVES.getDefaultState());
+			crown(world, x1, y1 + 1, z1, crownR, random);
 			
 			int middle = Math.round(pos.getY() + (MIDDLE_Y + MHelper.randRange(-2, 2, random)) * branchSize);
 			boolean generate = true;
@@ -208,8 +208,10 @@ public class StructureRubeus extends StructureFuncScatter
 		}
 	}
 	
-	private void crown(IWorld world, int x, int y, int z, float radius, Random random, BlockState leaves)
+	private void crown(IWorld world, int x, int y, int z, float radius, Random random)
 	{
+		BlockState leaves = BlocksRegistry.RUBEUS_LEAVES.getDefaultState();
+		BlockState cone = BlocksRegistry.RUBEUS_CONE.getDefaultState();
 		float halfR = radius * 0.5F;
 		float r2 = radius * radius;
 		int start = (int) Math.floor(- radius);
@@ -230,6 +232,8 @@ public class StructureRubeus extends StructureFuncScatter
 					{
 						POS.setZ(z + cz);
 						setIfAirLeaves(world, POS, leaves);
+						if (((POS.getX() + POS.getZ()) & 1) == 0 && random.nextInt(6) == 0)
+							setIfAir(world, POS.down(), cone);
 					}
 				}
 			}
@@ -247,7 +251,7 @@ public class StructureRubeus extends StructureFuncScatter
 	private void setIfAir(IWorld world, BlockPos pos, BlockState state)
 	{
 		BlockState bState = world.getBlockState(pos);
-		if (world.isAir(pos) || bState.getBlock() == BlocksRegistry.RUBEUS_LEAVES || bState.getMaterial().isReplaceable())
+		if (world.isAir(pos) || bState.getMaterial().isReplaceable() || bState.getBlock() == BlocksRegistry.RUBEUS_LEAVES || bState.getBlock() == BlocksRegistry.RUBEUS_CONE)
 			BlocksHelper.setWithoutUpdate(world, pos, state);
 	}
 	
