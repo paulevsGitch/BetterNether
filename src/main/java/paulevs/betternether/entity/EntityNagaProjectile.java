@@ -10,6 +10,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.projectile.Projectile;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -26,7 +27,7 @@ public class EntityNagaProjectile extends FlyingEntity implements Projectile
 	public EntityNagaProjectile(EntityType<? extends EntityNagaProjectile> type, World world)
 	{
 		super(type, world);
-		calculateDimensions();
+		this.experiencePoints = 0;
 	}
 
 	public void setParams(LivingEntity owner, Entity target)
@@ -113,7 +114,7 @@ public class EntityNagaProjectile extends FlyingEntity implements Projectile
 		else if (type == HitResult.Type.ENTITY)
 		{
 			Entity entity = ((EntityHitResult) hitResult).getEntity();
-			if (entity instanceof LivingEntity && !(entity instanceof EntityNaga) && !(entity instanceof EntityNagaProjectile))
+			if (entity != this && entity instanceof LivingEntity && !(entity instanceof EntityNaga))
 			{
 				LivingEntity living = (LivingEntity) entity;
 				if (!(living.hasStatusEffect(StatusEffects.WITHER)))
@@ -148,5 +149,22 @@ public class EntityNagaProjectile extends FlyingEntity implements Projectile
 	public boolean isSilent()
 	{
 		return true;
+	}
+	
+	@Override
+	public void writeCustomDataToTag(CompoundTag tag)
+	{
+		super.writeCustomDataToTag(tag);
+		tag.putInt("life", lifeTime);
+	}
+
+	@Override
+	public void readCustomDataFromTag(CompoundTag tag)
+	{
+		super.readCustomDataFromTag(tag);
+		if (tag.contains("life"))
+		{
+			lifeTime = tag.getInt("life");
+		}
 	}
 }

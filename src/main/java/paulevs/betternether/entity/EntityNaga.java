@@ -25,6 +25,7 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob
 	public EntityNaga(EntityType<? extends EntityNaga> type, World world)
 	{
 		super(type, world);
+		this.experiencePoints = 10;
 	}
 
 	@Override

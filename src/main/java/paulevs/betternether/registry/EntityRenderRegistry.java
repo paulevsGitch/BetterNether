@@ -22,7 +22,6 @@ public class EntityRenderRegistry
 		registerRenderMob(EntityRegistry.HYDROGEN_JELLYFISH, RenderHydrogenJellyfish.class);
 		registerRenderMob(EntityRegistry.NAGA, RenderNaga.class);
 		registerRenderAny(EntityRegistry.NAGA_PROJECTILE, RenderNagaProjectile.class);
-		//EntityRendererRegistry.INSTANCE.register(EntityRegistry.NAGA_PROJECTILE, (dispatcher, context) -> new RenderNagaProjectile(dispatcher));
 	}
 
 	private static void registerRenderMob(EntityType<?> entity, Class<? extends MobEntityRenderer<?, ?>> renderer)

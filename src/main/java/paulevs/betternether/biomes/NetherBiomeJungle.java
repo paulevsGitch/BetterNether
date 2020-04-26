@@ -30,7 +30,7 @@ public class NetherBiomeJungle extends NetherBiome
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, false);
-		addStructure("egg_plant", new StructureEggPlant(), StructureType.FLOOR, 0.05F, false);
+		addStructure("egg_plant", new StructureEggPlant(), StructureType.FLOOR, 0.05F, true);
 		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.1F, false);
 		addStructure("lucis", new StructureLucis(), StructureType.WALL, 0.05F, false);
 		addStructure("eye", new StructureEye(), StructureType.CEIL, 0.4F, true);

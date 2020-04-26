@@ -32,7 +32,7 @@ public class EntityRegistry
 		
 		registerEntity("firefly", FIREFLY, 5, 2, 6, Biomes.NETHER);
 		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, 100, 1, 4, Biomes.NETHER);
-		registerEntity("naga", NAGA, 100, 1, 4);
+		registerEntity("naga", NAGA, 10, 2, 4);
 	}
 	
 	public static void registerEntity(String name, EntityType<?> entity)
