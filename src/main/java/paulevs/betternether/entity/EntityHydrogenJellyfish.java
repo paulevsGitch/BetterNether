@@ -226,6 +226,6 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 	@Override
 	protected float getSoundVolume()
 	{
-		return 0.25F;
+		return 0.1F;
 	}
 }

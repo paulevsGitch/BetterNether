@@ -17,7 +17,8 @@
 	"DeltaFeatureMixin",
 	"TheNetherDimensionMixin",
 	"DimensionTypeMixin",
-	"LevelGeneratorOptionsMixin"
+	"LevelGeneratorOptionsMixin",
+	"SpawnRestrictionMixin"
   ],
   "injectors": {
     "defaultRequire": 1

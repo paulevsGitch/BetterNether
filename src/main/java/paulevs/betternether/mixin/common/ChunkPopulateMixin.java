@@ -56,12 +56,11 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 			long featureSeed = RANDOM.setPopulationSeed(region.getSeed(), chunkX, chunkZ);
 			@SuppressWarnings("unchecked")
 			ChunkGenerator<C> generator = (ChunkGenerator<C>) (Object) this;
-			for (Biome biome: BNWorldGenerator.getPopulateBiomes())
+			for (int step = 0; step < steps.length; step ++)
 			{
-				for (int step = 0; step < steps.length; step ++)
+				GenerationStep.Feature feature = steps[step];
+				for (Biome biome: BNWorldGenerator.getPopulateBiomes())
 				{
-					GenerationStep.Feature feature = steps[step];
-
 					try
 					{
 						biome.generateFeatureStep(feature, accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, 0, sz));

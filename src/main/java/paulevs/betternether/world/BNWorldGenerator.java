@@ -17,6 +17,7 @@ import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
@@ -24,7 +25,6 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.biomes.NetherBiomeWrapper;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -71,11 +71,13 @@ public class BNWorldGenerator
 		
 		if (Config.getBoolean("generator_world", "generate_cities", true))
 		{
+			ConfiguredFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> sFeature = CITY.configure(FeatureConfig.DEFAULT);
+			ConfiguredFeature<?, ?> feature = CITY.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT));
 			for (Biome b: Registry.BIOME)
 				if (b.getCategory() == Category.NETHER)
 				{
-					b.addStructureFeature(CITY.configure(FeatureConfig.DEFAULT));
-					b.addFeature(GenerationStep.Feature.RAW_GENERATION, CITY.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT)));
+					b.addStructureFeature(sFeature);
+					b.addFeature(GenerationStep.Feature.RAW_GENERATION, feature);
 				}
 			Feature.STRUCTURES.put("nether_city", CITY);
 		}
@@ -294,8 +296,8 @@ public class BNWorldGenerator
 					popPos.setZ(sz + (z << 1) + 2);
 					Biome b = world.getBiome(popPos);
 					BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
-					if (b instanceof NetherBiomeWrapper || !(b instanceof NetherBiome))
-						MC_BIOMES.add(b);
+					//if (b instanceof NetherBiomeWrapper || !(b instanceof NetherBiome))
+					MC_BIOMES.add(b);
 				}
 			}
 		}

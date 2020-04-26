@@ -1,10 +1,13 @@
 package paulevs.betternether.entity;
 
+import java.util.Random;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -20,6 +23,9 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.EntityRegistry;
@@ -92,12 +98,17 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 	@Environment(EnvType.CLIENT)
 	public boolean shouldRender(double distance)
 	{
-		return distance < 256;
+		return true;//distance < 256;
 	}
 
 	@Override
 	public int getBodyYawSpeed()
 	{
 		return 1;
+	}
+	
+	public static boolean canSpawn(EntityType<EntityNaga> type, IWorld world, SpawnType spawnType, BlockPos pos, Random random)
+	{
+		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}
 }
