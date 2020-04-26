@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockMushroomFir;
+import paulevs.betternether.blocks.BlockNetherMycelium;
 import paulevs.betternether.blocks.BlockMushroomFir.MushroomFirShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
@@ -131,6 +132,13 @@ Mutable npos = new Mutable();
 				BlocksHelper.setWithoutUpdate(world, npos, BlocksRegistry.MUSHROOM_FIR
 						.getDefaultState()
 						.with(BlockMushroomFir.SHAPE, MushroomFirShape.END));
+			
+			BlocksHelper.cover(world,
+					pos.down(),
+					BlocksRegistry.NETHER_MYCELIUM,
+					BlocksRegistry.NETHER_MYCELIUM.getDefaultState().with(BlockNetherMycelium.IS_BLUE, true),
+					5,
+					random);
 		}
 	}
 }

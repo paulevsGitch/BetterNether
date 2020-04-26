@@ -1,5 +1,9 @@
 package paulevs.betternether;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,6 +14,7 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -23,6 +28,20 @@ public class BlocksHelper
 	public static final int FLAG_IGNORE_OBSERVERS = 16;
 	
 	public static final int SET_SILENT = FLAG_UPDATE_BLOCK | FLAG_IGNORE_OBSERVERS | FLAG_SEND_CLIENT_CHANGES;
+	
+	private static final Vec3i[] OFFSETS = new Vec3i[] {
+			new Vec3i(-1, -1, -1), new Vec3i(-1, -1, 0), new Vec3i(-1, -1, 1),
+			new Vec3i(-1, 0, -1), new Vec3i(-1, 0, 0), new Vec3i(-1, 0, 1),
+			new Vec3i(-1, 1, -1), new Vec3i(-1, 1, 0), new Vec3i(-1, 1, 1),
+			
+			new Vec3i(0, -1, -1), new Vec3i(0, -1, 0), new Vec3i(0, -1, 1),
+			new Vec3i(0, 0, -1), new Vec3i(0, 0, 0), new Vec3i(0, 0, 1),
+			new Vec3i(0, 1, -1), new Vec3i(0, 1, 0), new Vec3i(0, 1, 1),
+			
+			new Vec3i(1, -1, -1), new Vec3i(1, -1, 0), new Vec3i(1, -1, 1),
+			new Vec3i(1, 0, -1), new Vec3i(1, 0, 0), new Vec3i(1, 0, 1),
+			new Vec3i(1, 1, -1), new Vec3i(1, 1, 0), new Vec3i(1, 1, 1)
+	};
 	
 	public static boolean isLava(BlockState state)
 	{
@@ -115,5 +134,41 @@ public class BlocksHelper
 	public static boolean isFertile(BlockState state)
 	{
 		return state.getBlock() instanceof BlockFarmland;
+	}
+	
+	public static void cover(IWorld world, BlockPos center, Block ground, BlockState cover, int radius, Random random)
+	{
+		HashSet<BlockPos> points = new HashSet<BlockPos>();
+		HashSet<BlockPos> points2 = new HashSet<BlockPos>();
+		if (world.getBlockState(center).getBlock() == ground)
+		{
+			points.add(center);
+			points2.add(center);
+			for (int i = 0; i < radius; i++)
+			{
+				Iterator<BlockPos> iterator = points.iterator();
+				while (iterator.hasNext())
+				{
+					BlockPos pos = iterator.next();
+					for (Vec3i offset: OFFSETS)
+					{
+						if (random.nextBoolean())
+						{
+							BlockPos pos2 = pos.add(offset);
+							if (random.nextBoolean() && world.getBlockState(pos2).getBlock() == ground && !points.contains(pos2))
+								points2.add(pos2);
+						}
+					}
+				}
+				points.addAll(points2);
+				points2.clear();
+			}
+			Iterator<BlockPos> iterator = points.iterator();
+			while (iterator.hasNext())
+			{
+				BlockPos pos = iterator.next();
+				BlocksHelper.setWithoutUpdate(world, pos, cover);
+			}
+		}
 	}
 }
