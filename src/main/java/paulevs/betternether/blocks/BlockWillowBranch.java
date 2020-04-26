@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.EntityContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.StringIdentifiable;
@@ -16,6 +17,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockWillowBranch extends BlockBaseNotFull
 {
@@ -73,5 +75,12 @@ public class BlockWillowBranch extends BlockBaseNotFull
 		{
 			return this.toString().toLowerCase();
 		}
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
+	{
+		return new ItemStack(BlocksRegistry.WILLOW_LOG);
 	}
 }
