@@ -80,6 +80,9 @@ import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.BlockRedMold;
 import paulevs.betternether.blocks.BlockReedsBlock;
+import paulevs.betternether.blocks.BlockRubeusCone;
+import paulevs.betternether.blocks.BlockRubeusLeaves;
+import paulevs.betternether.blocks.BlockRubeusSapling;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.BlockSoulGrass;
@@ -98,6 +101,7 @@ import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
+import paulevs.betternether.blocks.BlockRubeusLog;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 
@@ -308,6 +312,24 @@ public class BlocksRegistry
 	public static final Block WART_PLATE = registerBlock("wart_plate", new BNPlate(ActivationRule.EVERYTHING, WART_PLANKS));
 	public static final Block WART_TRAPDOOR = registerBlock("wart_trapdoor", new BNTrapdoor(WART_PLANKS));
 	public static final Block WART_DOOR = registerBlock("wart_door", new BNDoor(WART_PLANKS));
+	
+	// Rubeus
+	public static final Block RUBEUS_SAPLING = registerBlock("rubeus_sapling",  new BlockRubeusSapling());
+	public static final Block RUBEUS_CONE = registerBlock("rubeus_cone",  new BlockRubeusCone());
+	public static final Block STRIPED_LOG_RUBEUS = registerBlock("striped_log_rubeus", new BNPillar(MaterialColor.MAGENTA));
+	public static final Block STRIPED_BARK_RUBEUS = registerBlock("striped_bark_rubeus", new BNPillar(MaterialColor.MAGENTA));
+	public static final Block RUBEUS_LOG = registerBlock("rubeus_log", new BlockRubeusLog(STRIPED_LOG_WART));
+	public static final Block RUBEUS_BARK = registerBlock("rubeus_bark", new BlockRubeusLog(STRIPED_BARK_WART));
+	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves());
+	public static final Block RUBEUS_PLANKS = registerBlock("rubeus_planks", new BNPlanks(MaterialColor.MAGENTA));
+	public static final Block RUBEUS_STAIRS = registerBlock("rubeus_stairs", new BNStairs(WART_PLANKS));
+	public static final Block RUBEUS_SLAB = registerBlock("rubeus_slab", new BNSlab(WART_PLANKS));
+	public static final Block RUBEUS_FENCE = registerBlock("rubeus_fence", new BNFence(WART_PLANKS));
+	public static final Block RUBEUS_GATE = registerBlock("rubeus_gate", new BNGate(WART_PLANKS));
+	public static final Block RUBEUS_BUTTON = registerBlock("rubeus_button", new BNButton(WART_PLANKS));
+	public static final Block RUBEUS_PLATE = registerBlock("rubeus_plate", new BNPlate(ActivationRule.EVERYTHING, WART_PLANKS));
+	public static final Block RUBEUS_TRAPDOOR = registerBlock("rubeus_trapdoor", new BNTrapdoor(WART_PLANKS));
+	public static final Block RUBEUS_DOOR = registerBlock("rubeus_door", new BNDoor(WART_PLANKS));
 	
 	// Mushroom //
 	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStalagnateStem());
