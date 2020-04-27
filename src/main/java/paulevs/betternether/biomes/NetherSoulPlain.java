@@ -45,7 +45,7 @@ public class NetherSoulPlain extends NetherBiome
 		{
 			POS.setY(pos.getY() - i);
 			if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
-				BlocksHelper.setWithoutUpdate(world, POS, Blocks.SOUL_SAND.getDefaultState());
+				BlocksHelper.setWithoutUpdate(world, POS, Blocks.SOUL_SOIL.getDefaultState());
 		}
 	}
 }
