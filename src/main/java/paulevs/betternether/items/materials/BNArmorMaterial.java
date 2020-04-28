@@ -15,9 +15,9 @@ public class BNArmorMaterial implements ArmorMaterial
 	private final SoundEvent sound;
 	private final ItemConvertible repair;
 	private final float toughness;
-	private final int protection;
+	private final int[] protection;
 	
-	public BNArmorMaterial(String name, int durabilityMultiplier, int enchantLevel, SoundEvent equipSound, ItemConvertible repairItem, float toughness, int protection)
+	public BNArmorMaterial(String name, int durabilityMultiplier, int enchantLevel, SoundEvent equipSound, ItemConvertible repairItem, float toughness, int[] protection)
 	{
 		this.name = name;
 		this.multiplier = durabilityMultiplier;
@@ -37,7 +37,7 @@ public class BNArmorMaterial implements ArmorMaterial
 	@Override
 	public int getProtectionAmount(EquipmentSlot slot)
 	{
-		return protection;
+		return protection[slot.getEntitySlotId()];
 	}
 
 	@Override
