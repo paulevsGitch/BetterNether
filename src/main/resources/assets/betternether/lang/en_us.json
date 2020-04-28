@@ -159,6 +159,7 @@
 
 	"block.betternether.stalagnate": "Stalagnate",
 	"block.betternether.stalagnate_stem": "Stalagnate",
+	"block.betternether.stalagnate_log": "Stalagnate Log",
 	"block.betternether.stalagnate_bark": "Stalagnate Wood",
 	"block.betternether.stalagnate_bowl_placed": "Stalagnate Bowl",
 	"block.betternether.stalagnate_planks": "Stalagnate Planks",
@@ -426,5 +427,7 @@
 	"block.betternether.taburet_rubeus": "Rubeus Stool",
 	"block.betternether.chair_rubeus": "Rubeus Chair",
 	"block.betternether.bar_stool_rubeus": "Rubeus Bar Stool",
-	"block.betternether.rubeus_ladder": "Rubeus Ladder"
+	"block.betternether.rubeus_ladder": "Rubeus Ladder",
+	
+	"item.betternether.cincinnasite_shears": "Cincinnasite Shears"
 }

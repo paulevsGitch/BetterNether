@@ -1,0 +1,7 @@
+{
+	"replace": "false",
+	"values": [
+		"minecraft:shears",
+		"betternether:cincinnasite_shears"
+	]
+}

@@ -2,9 +2,11 @@ package paulevs.betternether.blocks.materials;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tools.FabricToolTags;
+import net.minecraft.block.Block.Settings;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.sound.BlockSoundGroup;
+import paulevs.betternether.BetterNether;
 
 public class Materials
 {
@@ -27,5 +29,16 @@ public class Materials
 				.materialColor(color)
 				.noCollision()
 				.breakInstantly();
+	}
+	
+	public static Settings makeLeaves(MaterialColor color)
+	{
+		return FabricBlockSettings.of(COMMON_WOOD, color)
+				.breakByHand(true)
+				.breakByTool(BetterNether.SHEARS)
+				.sounds(BlockSoundGroup.GRASS)
+				.nonOpaque()
+				.strength(0.2F, 0F)
+				.build();
 	}
 }

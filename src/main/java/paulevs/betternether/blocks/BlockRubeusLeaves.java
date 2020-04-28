@@ -10,7 +10,6 @@ import net.minecraft.block.MaterialColor;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
@@ -30,7 +29,7 @@ public class BlockRubeusLeaves extends BlockBase
 	
 	public BlockRubeusLeaves()
 	{
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).sounds(BlockSoundGroup.GRASS).nonOpaque().build());
+		super(Materials.makeLeaves(MaterialColor.LIGHT_BLUE));
 		this.setDefaultState(this.stateManager.getDefaultState().with(DISTANCE_CUSTOM, 1).with(PERSISTENT, false));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);

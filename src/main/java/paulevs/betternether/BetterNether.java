@@ -1,6 +1,10 @@
 package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.tag.TagRegistry;
+import net.minecraft.item.Item;
+import net.minecraft.tag.Tag;
+import net.minecraft.util.Identifier;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
@@ -14,6 +18,7 @@ import paulevs.betternether.world.structures.piece.StructureTypes;
 
 public class BetterNether implements ModInitializer
 {
+	public static final Tag<Item> SHEARS = TagRegistry.item(new Identifier("fabric", "shears"));
 	public static final String MOD_ID = "betternether";
 	private static boolean thinArmor = true;
 	private static boolean lavafallParticles = true;
