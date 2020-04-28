@@ -33,6 +33,7 @@ public class BlockRubeusLeaves extends BlockBase
 		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).sounds(BlockSoundGroup.GRASS).nonOpaque().build());
 		this.setDefaultState(this.stateManager.getDefaultState().with(DISTANCE_CUSTOM, 1).with(PERSISTENT, false));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
+		this.setDropItself(false);
 	}
 	
 	@Override
