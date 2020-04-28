@@ -159,6 +159,7 @@
 
 	"block.betternether.stalagnate": "Сталагнат",
 	"block.betternether.stalagnate_stem": "Сталагнат",
+	"block.betternether.stalagnate_log": "Бревно сталагната",
 	"block.betternether.stalagnate_bark": "Древесина сталагната",
 	"block.betternether.stalagnate_bowl_placed": "Сталагнатовая миска",
 	"block.betternether.stalagnate_planks": "Сталагнатовые доски",
@@ -445,5 +446,7 @@
 	"block.betternether.taburet_rubeus": "Рубейсовый табурет",
 	"block.betternether.chair_rubeus": "Рубейсовый стул",
 	"block.betternether.bar_stool_rubeus": "Рубейсовый барный стул",
-	"block.betternether.rubeus_ladder": "Рубейсовая лестница"
+	"block.betternether.rubeus_ladder": "Рубейсовая лестница",
+	
+	"item.betternether.cincinnasite_shears": "Цинцинназитовые ножницы"
 }

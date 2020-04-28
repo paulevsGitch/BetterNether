@@ -35,7 +35,7 @@
                   ]
                 }
               ],
-              "name": "betternether:rubeus_leaves"
+              "name": "minecraft:acacia_leaves"
             },
             {
               "type": "minecraft:item",
@@ -54,7 +54,7 @@
                   ]
                 }
               ],
-              "name": "betternether:rubeus_sapling"
+              "name": "minecraft:acacia_sapling"
             }
           ]
         }
@@ -103,7 +103,7 @@
               {
                 "condition": "minecraft:match_tool",
                 "predicate": {
-                  "item": "minecraft:shears"
+                  "tag": "fabric:shears"
                 }
               },
               {
