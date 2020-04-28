@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureSoulGrass;
@@ -17,6 +18,7 @@ import paulevs.betternether.structures.plants.StructureSoulVein;
 
 public class NetherSoulPlain extends NetherBiome
 {
+	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);
 	private static final Mutable POS = new Mutable();
 	
 	public NetherSoulPlain(String name)
@@ -45,7 +47,10 @@ public class NetherSoulPlain extends NetherBiome
 		{
 			POS.setY(pos.getY() - i);
 			if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
-				BlocksHelper.setWithoutUpdate(world, POS, Blocks.SOUL_SOIL.getDefaultState());
+				if (TERRAIN.eval(pos.getX() * 0.1, pos.getY() * 0.1, pos.getZ() * 0.1) > 0)
+					BlocksHelper.setWithoutUpdate(world, POS, Blocks.SOUL_SOIL.getDefaultState());
+				else
+					BlocksHelper.setWithoutUpdate(world, POS, Blocks.SOUL_SAND.getDefaultState());
 		}
 	}
 }
