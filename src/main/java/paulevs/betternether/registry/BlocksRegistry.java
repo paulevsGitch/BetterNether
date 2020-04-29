@@ -472,6 +472,7 @@ public class BlocksRegistry
 	public static final Block TABURET_WART = registerBlock("taburet_wart", new BNTaburet(WART_PLANKS));
 	public static final Block TABURET_CINCINNASITE = registerBlock("taburet_cincinnasite", new BNTaburet(CINCINNASITE_FORGED));
 	public static final Block TABURET_MUSHROOM_FIR = registerBlock("taburet_mushroom_fir", new BNTaburet(MUSHROOM_FIR_PLANKS));
+	public static final Block TABURET_RUBEUS = registerBlock("taburet_rubeus", new BNTaburet(RUBEUS_PLANKS));
 	
 	// Chairs
 	public static final Block CHAIR_OAK = registerBlock("chair_oak", new BNNormalChair(Blocks.OAK_PLANKS));
@@ -487,6 +488,7 @@ public class BlocksRegistry
 	public static final Block CHAIR_WART = registerBlock("chair_wart", new BNNormalChair(WART_PLANKS));
 	public static final Block CHAIR_CINCINNASITE = registerBlock("chair_cincinnasite", new BNNormalChair(CINCINNASITE_FORGED));
 	public static final Block CHAIR_MUSHROOM_FIR = registerBlock("chair_mushroom_fir", new BNNormalChair(MUSHROOM_FIR_PLANKS));
+	public static final Block CHAIR_RUBEUS = registerBlock("chair_rubeus", new BNNormalChair(RUBEUS_PLANKS));
 	
 	// Stools //
 	public static final Block BAR_STOOL_OAK = registerBlock("bar_stool_oak", new BNBarStool(Blocks.OAK_PLANKS));
@@ -502,6 +504,7 @@ public class BlocksRegistry
 	public static final Block BAR_STOOL_WART = registerBlock("bar_stool_wart", new BNBarStool(WART_PLANKS));
 	public static final Block BAR_STOOL_CINCINNASITE = registerBlock("bar_stool_cincinnasite", new BNBarStool(CINCINNASITE_FORGED));
 	public static final Block BAR_STOOL_MUSHROOM_FIR = registerBlock("bar_stool_mushroom_fir", new BNBarStool(MUSHROOM_FIR_PLANKS));
+	public static final Block BAR_STOOL_RUBEUS = registerBlock("bar_stool_rubeus", new BNBarStool(RUBEUS_PLANKS));
 	
 	// Ladders //
 	public static final Block REEDS_LADDER = registerBlock("reeds_ladder", new BNLadder(REEDS_BLOCK));
@@ -509,6 +512,7 @@ public class BlocksRegistry
 	public static final Block WILLOW_LADDER = registerBlock("willow_ladder", new BNLadder(WILLOW_PLANKS));
 	public static final Block WART_LADDER = registerBlock("wart_ladder", new BNLadder(WART_PLANKS));
 	public static final Block MUSHROOM_FIR_LADDER = registerBlock("mushroom_fir_ladder", new BNLadder(MUSHROOM_FIR_PLANKS));
+	public static final Block RUBEUS_LADDER = registerBlock("rubeus_ladder", new BNLadder(RUBEUS_PLANKS));
 	
 	public static void register() {}
 	

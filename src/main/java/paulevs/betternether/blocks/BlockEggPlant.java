@@ -1,5 +1,7 @@
 package paulevs.betternether.blocks;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import net.fabricmc.api.EnvType;
@@ -15,6 +17,10 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.ZombiePigmanEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShearsItem;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -60,5 +66,14 @@ public class BlockEggPlant extends BlockCommonPlant
 		}
 		else if (enablePlayerDamage && entity instanceof PlayerEntity && !((PlayerEntity) entity).hasStatusEffect(StatusEffects.POISON))
 			((PlayerEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 3));
+	}
+	
+	@Override
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
+	{
+		if (builder.get(LootContextParameters.TOOL).getItem() instanceof ShearsItem)
+			return Collections.singletonList(new ItemStack(this.asItem()));
+		else
+			return super.getDroppedStacks(state, builder);
 	}
 }
