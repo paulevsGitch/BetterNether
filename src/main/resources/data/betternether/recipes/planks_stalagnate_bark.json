@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:stalagnate_bark"
+    }
+  },
+  "result": {
+    "item": "betternether:stalagnate_planks"
+  }
+}
