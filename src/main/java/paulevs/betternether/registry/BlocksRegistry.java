@@ -43,6 +43,7 @@ import paulevs.betternether.blocks.BlockBrownLargeMushroom;
 import paulevs.betternether.blocks.BlockChestOfDrawers;
 import paulevs.betternether.blocks.BlockCincinnasitPillar;
 import paulevs.betternether.blocks.BlockCincinnasite;
+import paulevs.betternether.blocks.BlockCincinnasiteAnvil;
 import paulevs.betternether.blocks.BlockCincinnasiteFireBowl;
 import paulevs.betternether.blocks.BlockCincinnasiteForge;
 import paulevs.betternether.blocks.BlockCincinnasiteFrame;
@@ -82,6 +83,7 @@ import paulevs.betternether.blocks.BlockRedMold;
 import paulevs.betternether.blocks.BlockReedsBlock;
 import paulevs.betternether.blocks.BlockRubeusCone;
 import paulevs.betternether.blocks.BlockRubeusLeaves;
+import paulevs.betternether.blocks.BlockRubeusLog;
 import paulevs.betternether.blocks.BlockRubeusSapling;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.blocks.BlockSmoker;
@@ -101,7 +103,6 @@ import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
-import paulevs.betternether.blocks.BlockRubeusLog;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.tab.CreativeTab;
 
@@ -457,6 +458,7 @@ public class BlocksRegistry
 	public static final Block NETHERRACK_FURNACE = registerBlock("netherrack_furnace", new BlockNetherrackFurnace());
 	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new BlockCincinnasiteForge());
 	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
+	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil());
 	
 	// Taburets //
 	public static final Block TABURET_OAK = registerBlock("taburet_oak", new BNTaburet(Blocks.OAK_PLANKS));

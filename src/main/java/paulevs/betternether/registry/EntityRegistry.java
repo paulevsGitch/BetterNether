@@ -31,7 +31,7 @@ public class EntityRegistry
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
 		
 		registerEntity("firefly", FIREFLY, 5, 2, 6, Biomes.NETHER);
-		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, 100, 1, 4, Biomes.NETHER);
+		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, 20, 1, 4, Biomes.NETHER);
 		registerEntity("naga", NAGA, 10, 2, 4);
 	}
 	
