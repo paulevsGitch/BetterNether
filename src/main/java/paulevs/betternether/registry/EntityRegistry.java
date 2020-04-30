@@ -36,7 +36,7 @@ public class EntityRegistry
 	public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(EntityCategory.MISC, EntityNagaProjectile::new).size(EntityDimensions.fixed(1F, 1F)).disableSummon().trackable(60, 3).build();
 	
 	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityFirefly::new).size(EntityDimensions.fixed(0.5F, 0.5F)).setImmuneToFire().trackable(70, 3).build();
-	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityHydrogenJellyfish::new).size(EntityDimensions.changing(2F, 5F)).setImmuneToFire().trackable(150, 10).build();
+	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityHydrogenJellyfish::new).size(EntityDimensions.changing(2F, 5F)).setImmuneToFire().trackable(150, 1).build();
 	public static final EntityType<EntityNaga> NAGA = FabricEntityTypeBuilder.create(EntityCategory.MONSTER, EntityNaga::new).size(EntityDimensions.fixed(0.625F, 2.75F)).setImmuneToFire().trackable(100, 3).build();
 	
 	public static void register()
