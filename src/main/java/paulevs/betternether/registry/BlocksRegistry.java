@@ -43,6 +43,7 @@ import paulevs.betternether.blocks.BlockBrownLargeMushroom;
 import paulevs.betternether.blocks.BlockChestOfDrawers;
 import paulevs.betternether.blocks.BlockCincinnasitPillar;
 import paulevs.betternether.blocks.BlockCincinnasite;
+import paulevs.betternether.blocks.BlockCincinnasiteAnvil;
 import paulevs.betternether.blocks.BlockCincinnasiteFireBowl;
 import paulevs.betternether.blocks.BlockCincinnasiteForge;
 import paulevs.betternether.blocks.BlockCincinnasiteFrame;
@@ -457,6 +458,7 @@ public class BlocksRegistry
 	public static final Block NETHERRACK_FURNACE = registerBlock("netherrack_furnace", new BlockNetherrackFurnace());
 	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new BlockCincinnasiteForge());
 	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
+	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil());
 	
 	// Taburets //
 	public static final Block TABURET_OAK = registerBlock("taburet_oak", new BNTaburet(Blocks.OAK_PLANKS));
