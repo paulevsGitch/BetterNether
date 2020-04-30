@@ -2,8 +2,6 @@ package paulevs.betternether.entity;
 
 import java.util.Random;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -93,12 +91,6 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 	protected boolean isDisallowedInPeaceful()
 	{
 		return true;
-	}
-	
-	@Environment(EnvType.CLIENT)
-	public boolean shouldRender(double distance)
-	{
-		return true;//distance < 256;
 	}
 
 	@Override

@@ -27,7 +27,7 @@ import paulevs.betternether.entity.model.ModelEntityFirefly;
 public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<EntityFirefly>>
 {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/firefly.png");
-	private static final RenderLayer LAYER = RenderLayer.getEntityNoOutline(TEXTURE); // getEntityNoOutline getBeaconBeam
+	private static final RenderLayer LAYER = RenderLayer.getEntityTranslucent(TEXTURE); // getEntityNoOutline getBeaconBeam getEntityShadow
 	private static final int LIT = 15728880;
 
 	public RenderFirefly(EntityRenderDispatcher renderManager)
