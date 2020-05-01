@@ -313,7 +313,6 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 	{
 		if (slot == 3)
 		{
-			System.out.println(BrewingRegistry.isValidIngridient(stack));
 			return BrewingRecipeRegistry.isValidIngredient(stack);
 		}
 		else
