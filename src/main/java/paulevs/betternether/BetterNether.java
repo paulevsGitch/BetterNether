@@ -5,6 +5,7 @@ import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.BrewingRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
@@ -32,6 +33,7 @@ public class BetterNether implements ModInitializer
 		BiomesRegistry.register();
 		BNWorldGenerator.onModInit();
 		EntityRegistry.register();
+		BrewingRegistry.register();
 		Config.save();
 	}
 	

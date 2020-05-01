@@ -18,7 +18,8 @@
 	"TheNetherDimensionMixin",
 	"DimensionTypeMixin",
 	"LevelGeneratorOptionsMixin",
-	"SpawnRestrictionMixin"
+	"SpawnRestrictionMixin",
+	"BrewingRecipeRegistryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

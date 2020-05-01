@@ -28,6 +28,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
+import paulevs.betternether.registry.BrewingRegistry;
 
 public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity implements SidedInventory, Tickable
 {
@@ -190,12 +191,12 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 	private boolean canCraft()
 	{
-		ItemStack itemStack = (ItemStack) this.inventory.get(3);
-		if (itemStack.isEmpty())
+		ItemStack source = this.inventory.get(3);
+		if (source.isEmpty())
 		{
 			return false;
 		}
-		else if (!BrewingRecipeRegistry.isValidIngredient(itemStack))
+		else if (!BrewingRecipeRegistry.isValidIngredient(source))
 		{
 			return false;
 		}
@@ -203,10 +204,13 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		{
 			for (int i = 0; i < 3; ++i)
 			{
-				ItemStack itemStack2 = (ItemStack) this.inventory.get(i);
-				if (!itemStack2.isEmpty() && BrewingRecipeRegistry.hasRecipe(itemStack2, itemStack))
+				ItemStack bottle = this.inventory.get(i);
+				if (!bottle.isEmpty())
 				{
-					return true;
+					if (BrewingRecipeRegistry.hasRecipe(bottle, source))
+						return true;
+					else if (BrewingRegistry.getResult(source, bottle) != null)
+						return true;
 				}
 			}
 
@@ -216,21 +220,29 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 	private void craft()
 	{
-		ItemStack itemStack = (ItemStack) this.inventory.get(3);
+		ItemStack source = (ItemStack) this.inventory.get(3);
 
 		for (int i = 0; i < 3; ++i)
 		{
-			this.inventory.set(i, BrewingRecipeRegistry.craft(itemStack, (ItemStack) this.inventory.get(i)));
+			ItemStack bottle = this.inventory.get(i);
+			if (!bottle.isEmpty())
+			{
+				ItemStack result = BrewingRegistry.getResult(source, bottle);
+				if (result != null)
+					this.inventory.set(i, result.copy());
+				else
+					this.inventory.set(i, BrewingRecipeRegistry.craft(source, this.inventory.get(i)));
+			}
 		}
 
-		itemStack.decrement(1);
+		source.decrement(1);
 		BlockPos blockPos = this.getPos();
-		if (itemStack.getItem().hasRecipeRemainder())
+		if (source.getItem().hasRecipeRemainder())
 		{
-			ItemStack itemStack2 = new ItemStack(itemStack.getItem().getRecipeRemainder());
-			if (itemStack.isEmpty())
+			ItemStack itemStack2 = new ItemStack(source.getItem().getRecipeRemainder());
+			if (source.isEmpty())
 			{
-				itemStack = itemStack2;
+				source = itemStack2;
 			}
 			else if (!this.world.isClient)
 			{
@@ -239,7 +251,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 			}
 		}
 
-		this.inventory.set(3, itemStack);
+		this.inventory.set(3, source);
 		this.world.playLevelEvent(1035, blockPos, 0);
 	}
 
