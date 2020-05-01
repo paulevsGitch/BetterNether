@@ -3,75 +3,72 @@ package paulevs.betternether.registry;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 
 public class BrewingRegistry
 {
-	private static final List<PotionRecipe> RECIPES = new ArrayList<PotionRecipe>();
+	private static final List<BrewingRecipe> RECIPES = new ArrayList<BrewingRecipe>();
 	
 	public static void register()
 	{
-		registerBrewingRecipe(BlocksRegistry.BARREL_CACTUS.asItem(), Items.GLASS_BOTTLE, Potions.WATER);
+		register(new ItemStack(BlocksRegistry.BARREL_CACTUS), new ItemStack(Items.GLASS_BOTTLE), makePotion(Potions.WATER));
 	}
 	
-	public static void registerBrewingRecipe(Item source, Item potion, Potion result)
+	private static void register(ItemStack source, ItemStack bottle, ItemStack result)
 	{
-		RECIPES.add(new PotionRecipe(source, potion, result));
+		RECIPES.add(new BrewingRecipe(source, bottle, result));
 	}
 	
-	public static class PotionRecipe
+	private static ItemStack makePotion(Potion potion)
 	{
-		private final Item source;
-		private final Item potion;
-		private final Potion result;
+		return PotionUtil.setPotion(new ItemStack(Items.POTION), potion);
+	}
+	
+	public static class BrewingRecipe
+	{
+		private final ItemStack source;
+		private final ItemStack bottle;
+		private final ItemStack result;
 		
-		public PotionRecipe(Item source, Item potion, Potion result)
+		public BrewingRecipe(ItemStack source, ItemStack bottle, ItemStack result)
 		{
 			this.source = source;
-			this.potion = potion;
+			this.bottle = bottle;
 			this.result = result;
 		}
-
-		public boolean canBeUsed(ItemStack stack)
+		
+		public boolean isValid(ItemStack source, ItemStack bottle)
 		{
-			return stack.getItem() == source;
+			return ItemStack.areEqualIgnoreDamage(this.source, source) && ItemStack.areEqualIgnoreDamage(this.bottle, bottle);
 		}
 		
-		public boolean comparePotion(ItemStack stack)
+		public boolean isValid(ItemStack source)
 		{
-			return stack.getItem() == potion;
+			return ItemStack.areEqualIgnoreDamage(this.source, source);
 		}
-
-		public Potion getResult()
+		
+		public ItemStack getResult()
 		{
 			return result;
 		}
 	}
 	
-	public static boolean isIngredient(ItemStack stack)
+	public static ItemStack getResult(ItemStack source, ItemStack bottle)
 	{
-		for (PotionRecipe p: RECIPES)
-			if (p.canBeUsed(stack))
-				return true;
-		return false;
-	}
-	
-	public static PotionRecipe getRecipe(ItemStack source, ItemStack result)
-	{
-		for (PotionRecipe p: RECIPES)
-			if (p.canBeUsed(source) && p.comparePotion(result))
-				return p;
+		for (BrewingRecipe recipe: RECIPES)
+			if (recipe.isValid(source, bottle))
+				return recipe.getResult();
 		return null;
 	}
 	
-	public static boolean isPotion(ItemStack stack)
+	public static boolean isValidIngridient(ItemStack source)
 	{
-		for (PotionRecipe p: RECIPES)
-			if (p.comparePotion(stack))
+		for (BrewingRecipe recipe: RECIPES)
+			if (recipe.isValid(source))
 				return true;
 		return false;
 	}
