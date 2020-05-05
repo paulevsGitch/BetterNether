@@ -1,5 +1,6 @@
 package paulevs.betternether;
 
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.item.Item;
@@ -16,7 +17,7 @@ import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.structures.piece.StructureTypes;
 
-public class BetterNether implements ModInitializer
+public class BetterNether implements ModInitializer, ClientModInitializer
 {
 	public static final Tag<Item> SHEARS = TagRegistry.item(new Identifier("fabric", "shears"));
 	public static final String MOD_ID = "betternether";
@@ -40,6 +41,12 @@ public class BetterNether implements ModInitializer
 		EntityRegistry.register();
 		BrewingRegistry.register();
 		Config.save();
+	}
+	
+	@Override
+	public void onInitializeClient()
+	{
+		
 	}
 	
 	private void initOptions()

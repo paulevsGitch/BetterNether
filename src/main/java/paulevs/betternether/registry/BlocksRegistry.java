@@ -26,6 +26,7 @@ import paulevs.betternether.blocks.BNPane;
 import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNPlanks;
 import paulevs.betternether.blocks.BNPlate;
+import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.blocks.BNSlab;
 import paulevs.betternether.blocks.BNStairs;
 import paulevs.betternether.blocks.BNTaburet;
@@ -91,6 +92,7 @@ import paulevs.betternether.blocks.BlockSoulGrass;
 import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLilySapling;
 import paulevs.betternether.blocks.BlockSoulVein;
+import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.blocks.BlockStalagnate;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
@@ -126,6 +128,7 @@ public class BlocksRegistry
 	public static final Block STALAGNATE_PLANKS_TRAPDOOR = registerBlock("stalagnate_planks_trapdoor", new BNTrapdoor(STALAGNATE_PLANKS));
 	public static final Block STALAGNATE_PLANKS_DOOR = registerBlock("stalagnate_planks_door", new BNDoor(STALAGNATE_PLANKS));
 	public static final Block STALAGNATE_BOWL = registerBlockNI("stalagnate_bowl", new BlockStalagnateBowl());
+	public static final Block STALAGNATE_SIGN = registerBlock("stalagnate_sign", new BNSign(STALAGNATE_PLANKS));
 	
 	// Reed //
 	public static final Block NETHER_REED = registerBlock("nether_reed", new BlockNetherReed());
@@ -427,6 +430,8 @@ public class BlocksRegistry
 	public static final Block BRICK_POT = registerBlock("brick_pot", new BlockBNPot(Blocks.NETHER_BRICKS));
 	public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
 	public static final Block GEYSER = registerBlock("geyser", new BlockGeyser());
+	public static final Block NETHERRACK_STALACTITE = registerBlock("netherrack_stalactite", new BlockStalactite(Blocks.NETHERRACK));
+	public static final Block GLOWSTONE_STALACTITE = registerBlock("glowstone_stalactite", new BlockStalactite(Blocks.GLOWSTONE));
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockNetherrackMoss());

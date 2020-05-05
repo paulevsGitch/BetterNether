@@ -7,6 +7,6 @@ public class BlockWillowLog extends BNPillar
 {
 	public BlockWillowLog()
 	{
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().build());
+		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque());
 	}
 }

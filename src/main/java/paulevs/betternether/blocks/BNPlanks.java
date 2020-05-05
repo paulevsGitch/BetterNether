@@ -7,6 +7,6 @@ public class BNPlanks extends BlockBase
 {
 	public BNPlanks(MaterialColor color)
 	{
-		super(Materials.makeWood(color).build());
+		super(Materials.makeWood(color));
 	}
 }

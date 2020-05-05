@@ -2,8 +2,8 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tools.FabricToolTags;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -14,11 +14,10 @@ public class BNGlass extends BlockBaseNotFull
 {
 	public BNGlass(Block block)
 	{
-		super(FabricBlockSettings.copy(block)
+		super(FabricBlockSettings.copyOf(block)
 				.resistance(0.3F)
 				.nonOpaque()
-				.breakByTool(FabricToolTags.PICKAXES)
-				.build());
+				.breakByTool(FabricToolTags.PICKAXES));
 		this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
 	}
 

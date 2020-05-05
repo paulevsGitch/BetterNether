@@ -3,7 +3,7 @@ package paulevs.betternether.blocks;
 import java.util.List;
 import java.util.function.Predicate;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -30,7 +30,7 @@ public class BNChair extends BlockBaseNotFull
 	
 	public BNChair(Block block, int height)
 	{
-		super(FabricBlockSettings.copy(block).nonOpaque().build());
+		super(FabricBlockSettings.copy(block).nonOpaque());
 		this.height = (float) (height - 3F) / 16F;
 	}
 	
@@ -79,7 +79,7 @@ public class BNChair extends BlockBaseNotFull
 			entity.setNoGravity(true);
 			entity.setSilent(true);
 			entity.setInvisible(true);
-			entity.setPosition(px, py, pz);
+			entity.updatePosition(px, py, pz);
 			entity.setYaw(yaw);
 			player.startRiding(entity);
 			entity.getPassengerList().add(player);

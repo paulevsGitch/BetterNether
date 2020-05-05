@@ -63,6 +63,8 @@ public class ItemsRegistry
 	public static final Item SPAWN_EGG_JELLYFISH = registerItem("spawn_egg_hydrogen_jellyfish", makeEgg(EntityRegistry.HYDROGEN_JELLYFISH, MHelper.color(253, 164, 24), MHelper.color(88, 21, 4)));
 	public static final Item SPAWN_NAGA = registerItem("spawn_egg_naga", makeEgg(EntityRegistry.NAGA, MHelper.color(12, 12, 12), MHelper.color(210, 90, 26)));
 
+	//public static final Item STALAGNATE_SIGN = registerItem("stalagnate_sign", new SignItem(defaultSettings(), BlocksRegistry.STALAGNATE_SIGN, BlocksRegistry.STALAGNATE_SIGN_WALL));
+	
 	public static void register() {}
 	
 	public static Item registerItem(String name, Item item)

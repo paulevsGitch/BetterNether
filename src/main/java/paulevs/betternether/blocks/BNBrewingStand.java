@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlacementEnvironment;
 import net.minecraft.block.BlockRenderType;
@@ -48,11 +48,10 @@ public class BNBrewingStand extends BlockWithEntity implements IRenderTypeable
 
 	public BNBrewingStand()
 	{
-		super(FabricBlockSettings.copy(Blocks.NETHER_BRICKS)
+		super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS)
 				.strength(0.5F, 0.5F)
 				.lightLevel(1)
-				.nonOpaque()
-				.build());
+				.nonOpaque());
 		this.setDefaultState(getStateManager().getDefaultState()
 				.with(BOTTLE_PROPERTIES[0], false)
 				.with(BOTTLE_PROPERTIES[1], false)

@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
@@ -29,8 +29,7 @@ public class BlockEyeballSmall extends BlockEyeBase
 				.sounds(BlockSoundGroup.SLIME)
 				.hardness(0.5F)
 				.resistance(0.5F)
-				.nonOpaque()
-				.build());
+				.nonOpaque());
 	}
 
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos)

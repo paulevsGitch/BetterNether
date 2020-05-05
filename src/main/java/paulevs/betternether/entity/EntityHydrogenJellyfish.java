@@ -127,7 +127,7 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 		double y = this.getY();
 		double z = this.getZ();
 		super.calculateDimensions();
-		this.setPosition(x, y, z);
+		this.updatePosition(x, y, z);
 	}
 
 	@Override

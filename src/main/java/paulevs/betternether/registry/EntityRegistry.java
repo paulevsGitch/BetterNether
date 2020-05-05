@@ -1,6 +1,6 @@
 package paulevs.betternether.registry;
 
-import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -18,12 +18,12 @@ import paulevs.betternether.entity.EntityNagaProjectile;
 
 public class EntityRegistry
 {
-	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(EntityCategory.MISC, EntityChair::new).size(EntityDimensions.fixed(0.0F, 0.0F)).setImmuneToFire().disableSummon().build();
-	public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(EntityCategory.MISC, EntityNagaProjectile::new).size(EntityDimensions.fixed(1F, 1F)).disableSummon().build();
+	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(EntityCategory.MISC, EntityChair::new).dimensions(EntityDimensions.fixed(0.0F, 0.0F)).fireImmune().disableSummon().trackable(10, 1).build();
+	public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(EntityCategory.MISC, EntityNagaProjectile::new).dimensions(EntityDimensions.fixed(1F, 1F)).disableSummon().trackable(60, 1).build();
 	
-	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityFirefly::new).size(EntityDimensions.fixed(0.5F, 0.5F)).setImmuneToFire().build();
-	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityHydrogenJellyfish::new).size(EntityDimensions.changing(2F, 5F)).setImmuneToFire().build();
-	public static final EntityType<EntityNaga> NAGA = FabricEntityTypeBuilder.create(EntityCategory.MONSTER, EntityNaga::new).size(EntityDimensions.fixed(0.625F, 2.75F)).setImmuneToFire().build();
+	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityFirefly::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).fireImmune().trackable(70, 3).build();
+	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, EntityHydrogenJellyfish::new).dimensions(EntityDimensions.changing(2F, 5F)).fireImmune().trackable(150, 1).build();
+	public static final EntityType<EntityNaga> NAGA = FabricEntityTypeBuilder.create(EntityCategory.MONSTER, EntityNaga::new).dimensions(EntityDimensions.fixed(0.625F, 2.75F)).fireImmune().trackable(100, 3).build();
 	
 	public static void register()
 	{

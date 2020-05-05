@@ -16,7 +16,7 @@ public class BlockStalagnateStem extends BlockBaseNotFull
 
 	public BlockStalagnateStem()
 	{
-		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA).nonOpaque().build());
+		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA).nonOpaque());
 	}
 	
 	@Override

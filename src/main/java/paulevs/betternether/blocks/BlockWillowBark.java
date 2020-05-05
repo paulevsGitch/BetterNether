@@ -7,6 +7,6 @@ public class BlockWillowBark extends BlockBase
 {
 	public BlockWillowBark()
 	{
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().build());
+		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque());
 	}
 }

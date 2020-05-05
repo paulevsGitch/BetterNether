@@ -2,7 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -14,8 +14,7 @@ public class BlockObsidianGlass extends BlockBaseNotFull
 	public BlockObsidianGlass()
 	{
 		super(FabricBlockSettings.copy(Blocks.OBSIDIAN)
-				.nonOpaque()
-				.build());
+				.nonOpaque());
 		this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
 	}
 

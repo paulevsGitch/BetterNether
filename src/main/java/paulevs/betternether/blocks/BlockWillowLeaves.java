@@ -26,7 +26,7 @@ public class BlockWillowLeaves extends BlockBaseNotFull
 	
 	public BlockWillowLeaves()
 	{
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().build());
+		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque());
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.UP));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);

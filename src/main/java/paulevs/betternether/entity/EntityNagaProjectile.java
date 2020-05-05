@@ -33,8 +33,7 @@ public class EntityNagaProjectile extends FlyingEntity implements Projectile
 	public void setParams(LivingEntity owner, Entity target)
 	{
 		this.owner = owner;
-		this.setPos(getX(), getEyeY() - this.getHeight(), getZ());
-		this.updatePosition();
+		this.updatePosition(getX(), getEyeY() - this.getHeight(), getZ());
 		Vec3d dir = target.getPos().add(0, target.getHeight() * 0.25, 0).subtract(getPos()).normalize().multiply(2);
 		this.setVelocity(dir);
 		this.prevX = getX() - dir.x;

@@ -19,7 +19,7 @@ public class BlockRubeusCone extends BlockBaseNotFull
 	
 	public BlockRubeusCone()
 	{
-		super(Materials.makeWood(MaterialColor.CYAN).nonOpaque().lightLevel(13).build());
+		super(Materials.makeWood(MaterialColor.CYAN).nonOpaque().lightLevel(13));
 	}
 	
 	@Override

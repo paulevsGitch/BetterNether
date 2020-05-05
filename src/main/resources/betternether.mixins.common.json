@@ -16,7 +16,8 @@
 	"LightStorageMixin",
 	"NetherWartMixin",
 	"BiomeMixin",
-	"BrewingRecipeRegistryMixin"
+	"BrewingRecipeRegistryMixin",
+	"SignTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

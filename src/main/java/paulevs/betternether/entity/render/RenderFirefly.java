@@ -39,7 +39,6 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 
 	public void render(EntityFirefly mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
 	{
-		
 		float red = mobEntity.getRed();
 		float green = mobEntity.getGreen();
 		float blue = mobEntity.getBlue();
@@ -90,7 +89,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 			}
 		}
 
-		o = this.getCustomAngle(mobEntity, g);
+		o = this.getAnimationProgress(mobEntity, g);
 		this.setupTransforms(mobEntity, matrixStack, o, h, g);
 		matrixStack.scale(-1.0F, -1.0F, 1.0F);
 		this.scale(mobEntity, matrixStack, g);

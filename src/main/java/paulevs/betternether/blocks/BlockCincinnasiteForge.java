@@ -4,11 +4,11 @@ import java.util.Random;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.container.NameableContainerProvider;
+import net.minecraft.container.NameableContainerFactory;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -29,7 +29,7 @@ public class BlockCincinnasiteForge extends AbstractFurnaceBlock
 {
 	public BlockCincinnasiteForge()
 	{
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK));
 	}
 
 	public BlockEntity createBlockEntity(BlockView view)
@@ -42,7 +42,7 @@ public class BlockCincinnasiteForge extends AbstractFurnaceBlock
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (blockEntity instanceof BlockEntityForge)
 		{
-			player.openContainer((NameableContainerProvider) blockEntity);
+			player.openContainer((NameableContainerFactory) blockEntity);
 			player.incrementStat(Stats.INTERACT_WITH_FURNACE);
 		}
 	}

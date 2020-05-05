@@ -2,7 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -13,7 +13,7 @@ public class BlockCincinnasiteFrame extends BlockBaseNotFull
 {
 	public BlockCincinnasiteFrame()
 	{
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	

@@ -1,7 +1,7 @@
 package paulevs.betternether.blocks.materials;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tools.FabricToolTags;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block.Settings;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
@@ -38,7 +38,6 @@ public class Materials
 				.breakByTool(BetterNether.SHEARS)
 				.sounds(BlockSoundGroup.GRASS)
 				.nonOpaque()
-				.strength(0.2F, 0F)
-				.build();
+				.strength(0.2F, 0F);
 	}
 }
