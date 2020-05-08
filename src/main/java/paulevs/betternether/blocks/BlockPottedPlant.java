@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -39,7 +39,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 				.nonOpaque()
 				.noCollision()
 				.breakInstantly()
-				.build().lightLevel(getLuminance()));
+				.lightLevel(getLuminance()));
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(PLANT, PottedPlantShape.AGAVE));

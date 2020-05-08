@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -99,7 +99,7 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 		return 1;
 	}
 	
-	public static boolean canSpawn(EntityType<EntityNaga> type, IWorld world, SpawnType spawnType, BlockPos pos, Random random)
+	public static boolean canSpawn(EntityType<? extends EntityNaga> type, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random)
 	{
 		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}

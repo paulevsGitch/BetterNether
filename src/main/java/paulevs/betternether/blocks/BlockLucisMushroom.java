@@ -1,6 +1,6 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -32,8 +32,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull
 				.sounds(BlockSoundGroup.WOOD)
 				.hardness(1F)
 				.lightLevel(15)
-				.nonOpaque()
-				.build());
+				.nonOpaque());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(SHAPE, EnumShape.CORNER));
 		setDropItself(false);
 	}

@@ -28,7 +28,7 @@ public class BNLogStripable extends BNPillar
 	
 	public BNLogStripable(MaterialColor color, Block result)
 	{
-		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA).build());
+		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA));
 		this.result = result;
 	}
 

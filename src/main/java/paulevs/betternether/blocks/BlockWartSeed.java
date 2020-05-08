@@ -5,7 +5,7 @@ import java.util.Random;
 
 import com.google.common.collect.Maps;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -19,6 +19,8 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -26,6 +28,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureWartTree;
 
 public class BlockWartSeed extends BlockBaseNotFull implements Fertilizable
@@ -51,8 +54,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements Fertilizable
 				.sounds(BlockSoundGroup.WOOD)
 				.hardness(1F)
 				.nonOpaque()
-				.noCollision()
-				.build());
+				.noCollision());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.UP));
 	}
 	
@@ -113,5 +115,17 @@ public class BlockWartSeed extends BlockBaseNotFull implements Fertilizable
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
 	{
 		STRUCTURE.grow(world, pos, random);
+	}
+	
+	@Override
+	public BlockState rotate(BlockState state, BlockRotation rotation)
+	{
+		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
+	}
+
+	@Override
+	public BlockState mirror(BlockState state, BlockMirror mirror)
+	{
+		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 }

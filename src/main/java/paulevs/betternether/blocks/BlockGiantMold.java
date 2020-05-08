@@ -27,7 +27,7 @@ public class BlockGiantMold extends BlockBaseNotFull
 	
 	public BlockGiantMold()
 	{
-		super(Materials.makeWood(MaterialColor.GRAY).nonOpaque().build());
+		super(Materials.makeWood(MaterialColor.GRAY).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

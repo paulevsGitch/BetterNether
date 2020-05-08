@@ -20,7 +20,7 @@ public class BlockWillowTrunk extends BlockBaseNotFull
 	
 	public BlockWillowTrunk()
 	{
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().build());
+		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque());
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.TOP));
 	}

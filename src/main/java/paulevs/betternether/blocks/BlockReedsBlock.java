@@ -7,6 +7,6 @@ public class BlockReedsBlock extends BNPillar
 {
 	public BlockReedsBlock()
 	{
-		super(Materials.makeWood(MaterialColor.CYAN).build());
+		super(Materials.makeWood(MaterialColor.CYAN));
 	}
 }

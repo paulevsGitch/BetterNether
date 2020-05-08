@@ -2,7 +2,7 @@ package paulevs.betternether.blocks;
 
 import java.util.Random;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
@@ -33,8 +33,7 @@ public class BlockBlackBush extends BlockBaseNotFull implements Fertilizable
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.noCollision()
-				.breakInstantly()
-				.build());
+				.breakInstantly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	

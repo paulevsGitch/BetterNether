@@ -34,7 +34,7 @@ public class GrassGrowMixin
 			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos)) && !hasNyliumNear(world, blockPos))
 			{
 				growGrass(world, blockPos);
-				world.playLevelEvent(2005, blockPos, 0);
+				world.syncWorldEvent(2005, blockPos, 0);
 				if (!context.getPlayer().isCreative())
 					context.getStack().decrement(1);
 				info.setReturnValue(ActionResult.SUCCESS);
@@ -43,7 +43,7 @@ public class GrassGrowMixin
 			else if (BlocksHelper.isSoulSand(world.getBlockState(blockPos)))
 			{
 				growGrass(world, blockPos);
-				world.playLevelEvent(2005, blockPos, 0);
+				world.syncWorldEvent(2005, blockPos, 0);
 				if (!context.getPlayer().isCreative())
 					context.getStack().decrement(1);
 				info.setReturnValue(ActionResult.SUCCESS);

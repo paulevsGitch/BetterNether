@@ -16,6 +16,7 @@ import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix3f;
@@ -42,11 +43,11 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 	}
 
 	@Override
-	public void render(EntityFirefly mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
+	public void render(EntityFirefly entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
 	{
-		float red = mobEntity.getRed();
-		float green = mobEntity.getGreen();
-		float blue = mobEntity.getBlue();
+		float red = entity.getRed();
+		float green = entity.getGreen();
+		float blue = entity.getBlue();
 
 		matrixStack.push();
 		matrixStack.translate(0, 0.125, 0);
@@ -63,16 +64,16 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		matrixStack.pop();
 
 		matrixStack.push();
-		this.model.handSwingProgress = this.getHandSwingProgress(mobEntity, g);
-		this.model.riding = mobEntity.hasVehicle();
-		this.model.child = mobEntity.isBaby();
-		float h = MathHelper.lerpAngleDegrees(g, mobEntity.prevBodyYaw, mobEntity.bodyYaw);
-		float j = MathHelper.lerpAngleDegrees(g, mobEntity.prevHeadYaw, mobEntity.headYaw);
+		this.model.handSwingProgress = this.getHandSwingProgress(entity, g);
+		this.model.riding = entity.hasVehicle();
+		this.model.child = entity.isBaby();
+		float h = MathHelper.lerpAngleDegrees(g, entity.prevBodyYaw, entity.bodyYaw);
+		float j = MathHelper.lerpAngleDegrees(g, entity.prevHeadYaw, entity.headYaw);
 		float k = j - h;
 		float o;
-		if (mobEntity.hasVehicle() && mobEntity.getVehicle() instanceof LivingEntity)
+		if (entity.hasVehicle() && entity.getVehicle() instanceof LivingEntity)
 		{
-			LivingEntity mobEntity2 = (LivingEntity) mobEntity.getVehicle();
+			LivingEntity mobEntity2 = (LivingEntity) entity.getVehicle();
 			h = MathHelper.lerpAngleDegrees(g, mobEntity2.prevBodyYaw, mobEntity2.bodyYaw);
 			k = j - h;
 			o = MathHelper.wrapDegrees(k);
@@ -95,31 +96,31 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 			k = j - h;
 		}
 
-		float m = MathHelper.lerp(g, mobEntity.prevPitch, mobEntity.pitch);
+		float m = MathHelper.lerp(g, entity.prevPitch, entity.pitch);
 		float p;
-		if (mobEntity.getPose() == EntityPose.SLEEPING)
+		if (entity.getPose() == EntityPose.SLEEPING)
 		{
-			Direction direction = mobEntity.getSleepingDirection();
+			Direction direction = entity.getSleepingDirection();
 			if (direction != null)
 			{
-				p = mobEntity.getEyeHeight(EntityPose.STANDING) - 0.1F;
+				p = entity.getEyeHeight(EntityPose.STANDING) - 0.1F;
 				matrixStack.translate((double) ((float) (-direction.getOffsetX()) * p), 0.0D,
 						(double) ((float) (-direction.getOffsetZ()) * p));
 			}
 		}
 
-		o = this.getAnimationProgress(mobEntity, g);
-		this.setupTransforms(mobEntity, matrixStack, o, h, g);
+		o = this.getAnimationProgress(entity, g);
+		this.setupTransforms(entity, matrixStack, o, h, g);
 		matrixStack.scale(-1.0F, -1.0F, 1.0F);
-		this.scale(mobEntity, matrixStack, g);
+		this.scale(entity, matrixStack, g);
 		matrixStack.translate(0.0D, -1.5010000467300415D, 0.0D);
 		p = 0.0F;
 		float q = 0.0F;
-		if (!mobEntity.hasVehicle() && mobEntity.isAlive())
+		if (!entity.hasVehicle() && entity.isAlive())
 		{
-			p = MathHelper.lerp(g, mobEntity.lastLimbDistance, mobEntity.limbDistance);
-			q = mobEntity.limbAngle - mobEntity.limbDistance * (1.0F - g);
-			if (mobEntity.isBaby())
+			p = MathHelper.lerp(g, entity.lastLimbDistance, entity.limbDistance);
+			q = entity.limbAngle - entity.limbDistance * (1.0F - g);
+			if (entity.isBaby())
 			{
 				q *= 3.0F;
 			}
@@ -130,35 +131,35 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 			}
 		}
 
-		this.model.animateModel(mobEntity, q, p, g);
-		this.model.setAngles(mobEntity, q, p, o, k, m);
-		boolean bl = this.isVisible(mobEntity);
-		boolean bl2 = !bl && !mobEntity.isInvisibleTo(MinecraftClient.getInstance().player);
-		MinecraftClient minecraftClient = MinecraftClient.getInstance();
-		boolean bl3 = minecraftClient.method_27022(mobEntity);
-		RenderLayer renderLayer = this.getRenderLayer(mobEntity, bl, bl2, bl3);
-		if (renderLayer != null)
+		this.model.animateModel(entity, q, p, g);
+		this.model.setAngles(entity, q, p, o, k, m);
+		boolean visible = this.isVisible(entity);
+		boolean ghost = !visible && !entity.isInvisibleTo(MinecraftClient.getInstance().player);
+		MinecraftClient client = MinecraftClient.getInstance();
+		boolean bl3 = client.method_27022(entity);
+		RenderLayer layer = this.getRenderLayer(entity, visible, ghost, bl3);
+		if (layer != null)
 		{
-			int r = getOverlay(mobEntity, 0);
-			this.model.render(matrixStack, vertexConsumer, i, r, 1.0F, 1.0F, 1.0F, bl2 ? 0.15F : 1.0F);
+			int r = getOverlay(entity, 0);
+			this.model.render(matrixStack, vertexConsumer, i, r, red, green, blue, ghost ? 0.15F : 1.0F);
 		}
 
-		if (!mobEntity.isSpectator())
+		if (!entity.isSpectator())
 		{
 			Iterator<?> var21 = this.features.iterator();
 			while (var21.hasNext())
 			{
 				@SuppressWarnings("unchecked")
-				FeatureRenderer<EntityFirefly, AnimalModel<EntityFirefly>> featureRenderer = (FeatureRenderer<EntityFirefly, AnimalModel<EntityFirefly>>) var21.next();
-				featureRenderer.render(matrixStack, vertexConsumerProvider, i, mobEntity, q, p, g, o, k, m);
+				FeatureRenderer<EntityFirefly, AnimalModel<EntityFirefly>> feature = (FeatureRenderer<EntityFirefly, AnimalModel<EntityFirefly>>) var21.next();
+				feature.render(matrixStack, vertexConsumerProvider, i, entity, q, p, g, o, k, m);
 			}
 		}
 
 		matrixStack.pop();
 
-		if (this.hasLabel(mobEntity))
+		if (this.hasLabel(entity))
 		{
-			this.renderLabelIfPresent(mobEntity, mobEntity.getDisplayName(), matrixStack, vertexConsumerProvider, i);
+			this.renderLabelIfPresent(entity, entity.getDisplayName(), matrixStack, vertexConsumerProvider, i);
 		}
 	}
 
@@ -168,7 +169,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 	}
 
 	@Override
-	protected int getBlockLight(EntityFirefly entity, float tickDelta)
+	protected int getBlockLight(EntityFirefly entity, BlockPos blockPos)
 	{
 		return 15;
 	}

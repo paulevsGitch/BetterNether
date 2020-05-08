@@ -1,6 +1,6 @@
 package paulevs.betternether.blocks.materials;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.Material;
@@ -38,7 +38,6 @@ public class Materials
 				.breakByTool(FabricToolTags.SHEARS)
 				.sounds(BlockSoundGroup.GRASS)
 				.nonOpaque()
-				.build()
 				.strength(0.2F)
 				.allowsSpawning((state, world, pos, type) -> { return false; })
 				.suffocates((state, worls, pos) -> { return false; })

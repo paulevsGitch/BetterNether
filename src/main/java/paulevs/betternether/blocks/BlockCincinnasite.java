@@ -1,6 +1,6 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.sound.BlockSoundGroup;
@@ -13,7 +13,6 @@ public class BlockCincinnasite extends BlockBase
 				.materialColor(MaterialColor.YELLOW)
 				.hardness(3F)
 				.resistance(10F)
-				.sounds(BlockSoundGroup.METAL)
-				.build());
+				.sounds(BlockSoundGroup.METAL));
 	}
 }

@@ -38,7 +38,7 @@ public class BlockPlantWall extends BlockBaseNotFull
 	
 	public BlockPlantWall(MaterialColor color)
 	{
-		super(Materials.makeGrass(color).build());
+		super(Materials.makeGrass(color));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	

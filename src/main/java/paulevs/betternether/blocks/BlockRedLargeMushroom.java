@@ -28,7 +28,7 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull
 	
 	public BlockRedLargeMushroom()
 	{
-		super(Materials.makeWood(MaterialColor.RED).nonOpaque().build());
+		super(Materials.makeWood(MaterialColor.RED).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

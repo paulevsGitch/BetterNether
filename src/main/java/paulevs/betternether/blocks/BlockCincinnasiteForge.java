@@ -5,7 +5,7 @@ import java.util.function.ToIntFunction;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -27,7 +27,7 @@ public class BlockCincinnasiteForge extends AbstractFurnaceBlock
 {
 	public BlockCincinnasiteForge()
 	{
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).build().lightLevel(getLuminance()));
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).lightLevel(getLuminance()));
 	}
 
 	private static ToIntFunction<BlockState> getLuminance()

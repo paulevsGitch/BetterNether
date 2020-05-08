@@ -5,7 +5,7 @@ import java.util.function.ToIntFunction;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -37,7 +37,7 @@ public class BlockCincinnasiteFireBowl extends BlockBaseNotFull
 
 	public BlockCincinnasiteFireBowl()
 	{
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().build().lightLevel(getLuminance()));
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().lightLevel(getLuminance()));
 		this.setDefaultState(getStateManager().getDefaultState().with(FIRE, false));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

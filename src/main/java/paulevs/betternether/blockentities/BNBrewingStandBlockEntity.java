@@ -252,7 +252,7 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		}
 
 		this.inventory.set(3, source);
-		this.world.playLevelEvent(1035, blockPos, 0);
+		this.world.syncWorldEvent(1035, blockPos, 0);
 	}
 
 	public void fromTag(BlockState state, CompoundTag tag)

@@ -1,6 +1,6 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -24,7 +24,7 @@ public class BlockBNPot extends BlockBaseNotFull
 	
 	public BlockBNPot(Block material)
 	{
-		super(FabricBlockSettings.copy(material).nonOpaque().build());
+		super(FabricBlockSettings.copy(material).nonOpaque());
 	}
 
 	public boolean hasSidedTransparency(BlockState state)

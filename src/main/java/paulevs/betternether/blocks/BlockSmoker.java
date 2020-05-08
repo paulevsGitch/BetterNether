@@ -31,7 +31,7 @@ public class BlockSmoker extends BlockBaseNotFull
 	
 	public BlockSmoker()
 	{
-		super(Materials.makeWood(MaterialColor.BROWN).build());
+		super(Materials.makeWood(MaterialColor.BROWN));
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.TOP));
 	}
 	

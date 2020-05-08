@@ -7,6 +7,6 @@ public class BlockStalagnateBark extends BNPillar
 {
 	public BlockStalagnateBark()
 	{
-		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA).build());
+		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA));
 	}
 }

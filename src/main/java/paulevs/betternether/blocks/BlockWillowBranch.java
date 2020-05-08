@@ -28,7 +28,7 @@ public class BlockWillowBranch extends BlockBaseNotFull
 	
 	public BlockWillowBranch()
 	{
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().noCollision().build().lightLevel(getLuminance()));
+		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().noCollision().lightLevel(getLuminance()));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, WillowBranchShape.MIDDLE));

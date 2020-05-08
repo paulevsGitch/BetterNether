@@ -5,6 +5,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
 import paulevs.betternether.entity.model.ModelEntityHydrogenJellyfish;
@@ -25,7 +26,7 @@ public class RenderHydrogenJellyfish extends MobEntityRenderer<EntityHydrogenJel
 	}
 
 	@Override
-	protected int getBlockLight(EntityHydrogenJellyfish entity, float tickDelta)
+	protected int getBlockLight(EntityHydrogenJellyfish entity, BlockPos tickDelta)
 	{
 		return 15;
 	}

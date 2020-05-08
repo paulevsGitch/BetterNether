@@ -6,11 +6,11 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.util.math.Matrix3f;
-import net.minecraft.util.math.Matrix4f;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Matrix3f;
+import net.minecraft.util.math.Matrix4f;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityNagaProjectile;
 

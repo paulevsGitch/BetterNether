@@ -1,6 +1,6 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -15,7 +15,7 @@ public class BlockCincinnasitePedestal extends BlockBaseNotFull
 	
 	public BlockCincinnasitePedestal()
 	{
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque());
 	}
 
 	@Override

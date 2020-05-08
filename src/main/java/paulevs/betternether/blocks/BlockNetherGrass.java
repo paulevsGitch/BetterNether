@@ -30,7 +30,7 @@ public class BlockNetherGrass extends BlockBase
 	
 	public BlockNetherGrass()
 	{
-		super(Materials.makeGrass(MaterialColor.GRAY_TERRACOTTA).ticksRandomly().build());
+		super(Materials.makeGrass(MaterialColor.GRAY_TERRACOTTA).ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}

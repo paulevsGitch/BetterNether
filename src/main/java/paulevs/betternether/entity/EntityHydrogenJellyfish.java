@@ -10,8 +10,9 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import paulevs.betternether.registry.SoundsRegistry;
 
-public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
+public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer
 {
 	private static final TrackedData<Float> SCALE = DataTracker.registerData(EntityHydrogenJellyfish.class, TrackedDataHandlerRegistry.FLOAT);
 	
@@ -227,5 +228,11 @@ public class EntityHydrogenJellyfish extends FlyingEntity implements Flutterer
 	protected float getSoundVolume()
 	{
 		return 0.1F;
+	}
+
+	@Override
+	public PassiveEntity createChild(PassiveEntity mate)
+	{
+		return null;
 	}
 }

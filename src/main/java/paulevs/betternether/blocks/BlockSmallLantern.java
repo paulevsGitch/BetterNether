@@ -1,6 +1,6 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -33,7 +33,7 @@ public class BlockSmallLantern extends BlockBaseNotFull
 	
 	public BlockSmallLantern()
 	{
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_LANTERN).nonOpaque().build());
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_LANTERN).nonOpaque());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.DOWN));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

@@ -51,49 +51,13 @@ import paulevs.betternether.registry.SoundsRegistry;
 public class EntityFirefly extends AnimalEntity implements Flutterer
 {
 	private static final HashSet<Block> FLOWERS;
-	private static final Vec3i[] SERCH;
+	private static final Vec3i[] SEARCH;
 	
 	private static final TrackedData<Float> COLOR_RED = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
 	private static final TrackedData<Float> COLOR_GREEN = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
 	private static final TrackedData<Float> COLOR_BLUE = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
 	
 	private boolean mustSit = false;
-	
-	static
-	{
-		ArrayList<Vec3i> points = new ArrayList<Vec3i>();
-		int radius = 6;
-		int r2 = radius * radius;
-		for (int x = -radius; x <= radius; x++)
-			for (int y = -radius; y <= radius; y++)
-				for (int z = -radius; z <= radius; z++)
-					if (x * x + y * y + z * z <= r2)
-						points.add(new Vec3i(x, y, z));
-		points.sort(new Comparator<Vec3i>()
-		{
-			@Override
-			public int compare(Vec3i v1, Vec3i v2)
-			{
-				int d1 = v1.getX() * v1.getX() + v1.getY() * v1.getY() + v1.getZ() * v1.getZ();
-				int d2 = v2.getX() * v2.getX() + v2.getY() * v2.getY() + v2.getZ() * v2.getZ();
-				return d1 - d2;
-			}
-		});
-		SERCH = points.toArray(new Vec3i[] {});
-		
-		FLOWERS = new HashSet<Block>();
-		FLOWERS.add(BlocksRegistry.NETHER_GRASS);
-		FLOWERS.add(BlocksRegistry.SOUL_GRASS);
-		FLOWERS.add(BlocksRegistry.SWAMP_GRASS);
-		FLOWERS.add(BlocksRegistry.BLACK_APPLE);
-		FLOWERS.add(BlocksRegistry.MAGMA_FLOWER);
-		FLOWERS.add(BlocksRegistry.SOUL_VEIN);
-		FLOWERS.add(BlocksRegistry.NETHER_REED);
-		FLOWERS.add(BlocksRegistry.INK_BUSH);
-		FLOWERS.add(BlocksRegistry.INK_BUSH_SEED);
-		FLOWERS.add(BlocksRegistry.POTTED_PLANT);
-		FLOWERS.add(Blocks.NETHER_WART);
-	}
 
 	public EntityFirefly(EntityType<? extends EntityFirefly> type, World world)
 	{
@@ -110,7 +74,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	protected void initDataTracker()
 	{
 		super.initDataTracker();
-		makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.5F, 1);
+		makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.25F, 1);
 	}
 	
 	public static DefaultAttributeContainer getAttributeContainer()
@@ -412,7 +376,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 			World w = EntityFirefly.this.world;
 			Mutable bpos = new Mutable();
 
-			for (Vec3i offset: SERCH)
+			for (Vec3i offset: SEARCH)
 			{
 				bpos.set(
 						EntityFirefly.this.getX() + offset.getX(),
@@ -609,5 +573,41 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	public int getLimitPerChunk()
 	{
 		return 5;
+	}
+	
+	static
+	{
+		ArrayList<Vec3i> points = new ArrayList<Vec3i>();
+		int radius = 6;
+		int r2 = radius * radius;
+		for (int x = -radius; x <= radius; x++)
+			for (int y = -radius; y <= radius; y++)
+				for (int z = -radius; z <= radius; z++)
+					if (x * x + y * y + z * z <= r2)
+						points.add(new Vec3i(x, y, z));
+		points.sort(new Comparator<Vec3i>()
+		{
+			@Override
+			public int compare(Vec3i v1, Vec3i v2)
+			{
+				int d1 = v1.getX() * v1.getX() + v1.getY() * v1.getY() + v1.getZ() * v1.getZ();
+				int d2 = v2.getX() * v2.getX() + v2.getY() * v2.getY() + v2.getZ() * v2.getZ();
+				return d1 - d2;
+			}
+		});
+		SEARCH = points.toArray(new Vec3i[] {});
+		
+		FLOWERS = new HashSet<Block>();
+		FLOWERS.add(BlocksRegistry.NETHER_GRASS);
+		FLOWERS.add(BlocksRegistry.SOUL_GRASS);
+		FLOWERS.add(BlocksRegistry.SWAMP_GRASS);
+		FLOWERS.add(BlocksRegistry.BLACK_APPLE);
+		FLOWERS.add(BlocksRegistry.MAGMA_FLOWER);
+		FLOWERS.add(BlocksRegistry.SOUL_VEIN);
+		FLOWERS.add(BlocksRegistry.NETHER_REED);
+		FLOWERS.add(BlocksRegistry.INK_BUSH);
+		FLOWERS.add(BlocksRegistry.INK_BUSH_SEED);
+		FLOWERS.add(BlocksRegistry.POTTED_PLANT);
+		FLOWERS.add(Blocks.NETHER_WART);
 	}
 }

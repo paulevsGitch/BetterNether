@@ -37,7 +37,7 @@ public abstract class PlayerEntityMixin
 		pos = pos.offset(state.get(BlockStatueRespawner.FACING));
 		
 		if (world.getBlockState(pos).getCollisionShape(world, pos).isEmpty())
-			return Optional.of(Vec3d.method_24955(pos));
+			return Optional.of(Vec3d.of(pos));
 		else
 			return Optional.empty();
 	}

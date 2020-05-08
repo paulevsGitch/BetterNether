@@ -32,7 +32,7 @@ public class BlockMushroomFir extends BlockBaseNotFull
 	
 	public BlockMushroomFir()
 	{
-		super(Materials.makeWood(MaterialColor.CYAN).nonOpaque().build());
+		super(Materials.makeWood(MaterialColor.CYAN).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
