@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -11,17 +8,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.entity.EntityChair;
-import paulevs.betternether.registry.EntityRegistry;
 
 public class BNChair extends BlockBaseNotFull
 {
@@ -50,8 +45,14 @@ public class BNChair extends BlockBaseNotFull
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
 	{
 		if (world.isClient)
+			player.sendMessage(new TranslatableText("Sorry, furniture is not working on 20w19a\n")
+					.append("(it will teleport you under bedrock)\n")
+					.append("I will fix it later"), false);
+		return ActionResult.FAIL;
+		
+		/*if (world.isClient)
 		{
-			return ActionResult.SUCCESS;
+			return ActionResult.FAIL;
 		}
 		else
 		{
@@ -81,13 +82,14 @@ public class BNChair extends BlockBaseNotFull
 			entity.setInvisible(true);
 			entity.setPos(px, py, pz);
 			entity.setYaw(yaw);
-			player.startRiding(entity);
-			entity.getPassengerList().add(player);
-			world.spawnEntity(entity);
-			player.setYaw(yaw);
-			player.setHeadYaw(yaw);
+			if (world.spawnEntity(entity))
+			{
+				//player.startRiding(entity, true);
+				//player.setYaw(yaw);
+				//player.setHeadYaw(yaw);
+			}
 			return ActionResult.SUCCESS;
-		}
+		}*/
 	}
 	
 	@Override
