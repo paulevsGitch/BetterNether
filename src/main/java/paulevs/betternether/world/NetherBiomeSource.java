@@ -20,6 +20,12 @@ public class NetherBiomeSource extends BiomeSource
 		int sizeY = Config.getInt("generator_world", "biome_size_y", 40);
 		map = new BiomeMap(config.getSeed(), sizeXZ, sizeY, config.isVolumetric());
 	}
+	
+	private NetherBiomeSource(Set<Biome> biomes, BiomeMap map)
+	{
+		super(biomes);
+		this.map = map;
+	}
 
 	@Override
 	public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ)
@@ -38,5 +44,11 @@ public class NetherBiomeSource extends BiomeSource
 			biomes.add(nb.getBiome());
 		}
 		return biomes;
+	}
+
+	@Override
+	public NetherBiomeSource create(long seed)
+	{
+		return new NetherBiomeSource(this.biomes, this.map);
 	}
 }

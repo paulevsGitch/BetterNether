@@ -26,7 +26,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull
 
 	public BlockLucisMushroom()
 	{
-		super(FabricBlockSettings.of(Material.ORGANIC)
+		super(FabricBlockSettings.of(Material.SOLID_ORGANIC)
 				.materialColor(MaterialColor.YELLOW)
 				.breakByTool(FabricToolTags.AXES)
 				.sounds(BlockSoundGroup.WOOD)

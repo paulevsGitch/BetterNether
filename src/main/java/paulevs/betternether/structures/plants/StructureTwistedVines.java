@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.IStructure;
 
@@ -14,14 +14,14 @@ public class StructureTwistedVines implements IStructure
 {
 	private Mutable npos = new Mutable();
 	
-	private boolean canPlaceAt(IWorld world, BlockPos pos)
+	private boolean canPlaceAt(WorldAccess world, BlockPos pos)
 	{
 		Block block = world.getBlockState(pos.down()).getBlock();
 		return block == Blocks.WARPED_NYLIUM || block == Blocks.TWISTING_VINES;
 	}
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (canPlaceAt(world, pos))
 		{

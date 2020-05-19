@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
@@ -14,13 +14,13 @@ public class StructureSoulVein implements IStructure
 {
 	private Mutable npos = new Mutable();
 	
-	private boolean canPlaceAt(IWorld world, BlockPos pos)
+	private boolean canPlaceAt(WorldAccess world, BlockPos pos)
 	{
 		return BlocksRegistry.SOUL_VEIN.canPlaceAt(BlocksRegistry.SOUL_VEIN.getDefaultState(), world, pos);
 	}
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (world.isAir(pos) && canPlaceAt(world, pos))
 		{

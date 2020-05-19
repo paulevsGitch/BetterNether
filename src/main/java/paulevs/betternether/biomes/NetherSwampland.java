@@ -6,7 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
@@ -43,7 +43,7 @@ public class NetherSwampland extends NetherBiome
 	}
 	
 	@Override
-	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
 		switch (random.nextInt(4))
 		{
@@ -73,7 +73,7 @@ public class NetherSwampland extends NetherBiome
 		}
 	}
 	
-	protected boolean validWall(IWorld world, BlockPos pos)
+	protected boolean validWall(WorldAccess world, BlockPos pos)
 	{
 		BlockState state = world.getBlockState(pos);
 		return BlocksHelper.isLava(state) || BlocksHelper.isNetherGround(state);

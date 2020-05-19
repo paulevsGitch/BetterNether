@@ -61,9 +61,9 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity
 	}
 
 	@Override
-	protected ScreenHandler createContainer(int i, PlayerInventory playerInventory)
+	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory)
 	{
-		return GenericContainerScreenHandler.createGeneric9x3(i, playerInventory, this);
+		return GenericContainerScreenHandler.createGeneric9x3(syncId, playerInventory, this);
 	}
 
 	public void fromTag(BlockState blockState, CompoundTag tag)

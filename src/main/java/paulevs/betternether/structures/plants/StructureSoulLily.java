@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLily.SoulLilyShape;
@@ -18,7 +18,7 @@ public class StructureSoulLily implements IStructure
 	Mutable npos = new Mutable();
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		Block under;
 		if (world.getBlockState(pos.down()).getBlock() == Blocks.SOUL_SAND)
@@ -46,7 +46,7 @@ public class StructureSoulLily implements IStructure
 		}
 	}
 	
-	private void growTree(IWorld world, BlockPos pos, Random random)
+	private void growTree(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (world.getBlockState(pos.down()).getBlock() == Blocks.SOUL_SAND)
 		{
@@ -64,12 +64,12 @@ public class StructureSoulLily implements IStructure
 		}
 	}
 	
-	public void growSmall(IWorld world, BlockPos pos)
+	public void growSmall(WorldAccess world, BlockPos pos)
 	{
 		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SOUL_LILY.getDefaultState());
 	}
 	
-	public void growMedium(IWorld world, BlockPos pos)
+	public void growMedium(WorldAccess world, BlockPos pos)
 	{
 		BlocksHelper.setWithoutUpdate(world, pos,
 				BlocksRegistry.SOUL_LILY
@@ -81,7 +81,7 @@ public class StructureSoulLily implements IStructure
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_TOP));
 	}
 	
-	public void growBig(IWorld world, BlockPos pos)
+	public void growBig(WorldAccess world, BlockPos pos)
 	{
 		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SOUL_LILY
 				.getDefaultState()
@@ -112,7 +112,7 @@ public class StructureSoulLily implements IStructure
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_E));
 	}
 	
-	private boolean isAirSides(IWorld world, BlockPos pos)
+	private boolean isAirSides(WorldAccess world, BlockPos pos)
 	{
 		return world.isAir(pos.north()) && world.isAir(pos.south()) && world.isAir(pos.east()) && world.isAir(pos.west());
 	}

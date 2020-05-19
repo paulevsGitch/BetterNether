@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 
@@ -16,7 +16,7 @@ public class NetherSwamplandTerraces extends NetherSwampland
 	}
 	
 	@Override
-	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (validWall(world, pos.down()) && validWall(world, pos.north()) && validWall(world, pos.south()) && validWall(world, pos.east()) && validWall(world, pos.west()))
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState());

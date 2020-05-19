@@ -9,7 +9,7 @@ import net.minecraft.block.MushroomBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.IStructure;
 
@@ -30,7 +30,7 @@ public class StructureWartCap implements IStructure
 	private static final Mutable POS = new Mutable();
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (!isWall(world, pos) || pos.getY() > 57 || pos.getY() < 34 || world.isAir(pos.down(3)))
 			return;
@@ -97,7 +97,7 @@ public class StructureWartCap implements IStructure
 		}
 	}
 	
-	private boolean isWall(IWorld world, BlockPos pos)
+	private boolean isWall(WorldAccess world, BlockPos pos)
 	{
 		for (Direction dir: HorizontalFacingBlock.FACING.getValues())
 			if (world.getBlockState(pos.offset(dir)).getBlock() == Blocks.NETHER_BRICKS)

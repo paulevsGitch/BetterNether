@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.shapes.TripleShape;
@@ -18,7 +18,7 @@ public class StructureGiantMold implements IStructure
 	Mutable npos = new Mutable();
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		Block under;
 		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM)
@@ -41,7 +41,7 @@ public class StructureGiantMold implements IStructure
 		}
 	}
 
-	public void grow(IWorld world, BlockPos pos, Random random)
+	public void grow(WorldAccess world, BlockPos pos, Random random)
 	{
 		int size = 2 + random.nextInt(6);
 		for (int y = 1; y <= size; y++)

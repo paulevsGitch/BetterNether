@@ -15,7 +15,8 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registry.BlocksRegistry;
 
@@ -92,12 +93,12 @@ public class BlocksHelper
 				b == BlocksRegistry.BONE;
 	}
 	
-	public static void setWithoutUpdate(IWorld world, BlockPos pos, BlockState state)
+	public static void setWithoutUpdate(WorldAccess world, BlockPos pos, BlockState state)
 	{
 		world.setBlockState(pos, state, SET_SILENT);
 	}
 	
-	public static int upRay(IWorld world, BlockPos pos, int maxDist)
+	public static int upRay(WorldAccess world, BlockPos pos, int maxDist)
 	{
 		int length = 0;
 		for (int j = 1; j < maxDist && (world.isAir(pos.up(j))); j++)
@@ -105,7 +106,7 @@ public class BlocksHelper
 		return length;
 	}
 	
-	public static int downRay(IWorld world, BlockPos pos, int maxDist)
+	public static int downRay(WorldAccess world, BlockPos pos, int maxDist)
 	{
 		int length = 0;
 		for (int j = 1; j < maxDist && (world.isAir(pos.down(j))); j++)
@@ -136,7 +137,7 @@ public class BlocksHelper
 		return state.getBlock() instanceof BlockFarmland;
 	}
 	
-	public static void cover(IWorld world, BlockPos center, Block ground, BlockState cover, int radius, Random random)
+	public static void cover(WorldAccess world, BlockPos center, Block ground, BlockState cover, int radius, Random random)
 	{
 		HashSet<BlockPos> points = new HashSet<BlockPos>();
 		HashSet<BlockPos> points2 = new HashSet<BlockPos>();

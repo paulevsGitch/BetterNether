@@ -6,7 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureType;
@@ -33,7 +33,7 @@ public class NetherBiomeGravelDesert extends NetherBiome
 	}
 
 	@Override
-	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
 		for (int i = 0; i < 1 + random.nextInt(3); i++)
 		{

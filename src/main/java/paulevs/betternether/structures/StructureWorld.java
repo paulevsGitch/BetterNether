@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 
 public class StructureWorld extends StructureNBT implements IStructure
 {
@@ -20,7 +20,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 	}
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		randomRM(random);
 		if (canGenerate(world, pos))
@@ -29,7 +29,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 		}
 	}
 
-	private boolean canGenerate(IWorld world, BlockPos pos)
+	private boolean canGenerate(WorldAccess world, BlockPos pos)
 	{
 		if (type == StructureType.FLOOR)
 			return getAirFraction(world, pos) > 0.7 && getAirFractionFoundation(world, pos) < 0.3;
@@ -41,7 +41,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 			return false;
 	}
 
-	private float getAirFraction(IWorld world, BlockPos pos)
+	private float getAirFraction(WorldAccess world, BlockPos pos)
 	{
 		int airCount = 0;
 		
@@ -66,7 +66,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 		return (float) airCount / count;
 	}
 	
-	private float getAirFractionFoundation(IWorld world, BlockPos pos)
+	private float getAirFractionFoundation(WorldAccess world, BlockPos pos)
 	{
 		int airCount = 0;
 		
@@ -91,7 +91,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 		return (float) airCount / count;
 	}
 	
-	private float getAirFractionBottom(IWorld world, BlockPos pos)
+	private float getAirFractionBottom(WorldAccess world, BlockPos pos)
 	{
 		int airCount = 0;
 		

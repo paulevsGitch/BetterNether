@@ -7,7 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.IStructure;
 
@@ -23,7 +23,7 @@ public class StructureWall implements IStructure
 	}
 
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (world.isAir(pos))
 		{
@@ -33,7 +33,7 @@ public class StructureWall implements IStructure
 		}
 	}
 	
-	private BlockState getPlacementState(IWorld world, BlockPos pos, Random random)
+	private BlockState getPlacementState(WorldAccess world, BlockPos pos, Random random)
 	{
 		BlockState blockState = plantBlock.getDefaultState();
 		shuffle(random);

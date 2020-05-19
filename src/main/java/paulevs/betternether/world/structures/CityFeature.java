@@ -10,11 +10,13 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.FlatChunkGenerator;
+import net.minecraft.world.gen.chunk.FlatChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.world.structures.city.CityGenerator;
@@ -70,20 +72,21 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 			super(structureFeature, chunkX, chunkZ, blockBox, i, l);
 		}
 
-		public void init(ChunkGenerator<?> chunkGenerator, StructureManager structureManager, int x, int z, Biome biome)
+		public void init(ChunkGenerator chunkGenerator, StructureManager structureManager, int x, int z, Biome biome)
 		{
 			int px = (x << 4) | 8;
 			int pz = (z << 4) | 8;
 			int y = 40;
 			if (chunkGenerator instanceof FlatChunkGenerator)
 			{
-				BlockState[] layers = ((FlatChunkGenerator) chunkGenerator).getConfig().getLayerBlocks();
+				/*BlockState[] layers = ((FlatChunkGeneratorConfig) ((FlatChunkGenerator) chunkGenerator).getConfig()).getLayerBlocks();
 				for (int i = 255; i >= 0; i--)
 					if (layers[i] != null && !layers[i].isAir())
 					{
 						y = i + 10;
 						break;
-					}
+					}*/
+				y = chunkGenerator.getHeight(px, pz, Type.WORLD_SURFACE);
 			}
 			
 			BlockPos center = new BlockPos(px, y, pz);

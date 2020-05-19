@@ -20,7 +20,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureNBT;
 
@@ -99,7 +99,7 @@ public class StructureCityBuilding extends StructureNBT
 		return bb;
 	}
 	
-	public void place(IWorld world, BlockPos pos)
+	public void place(WorldAccess world, BlockPos pos)
 	{
 		BlockPos p = pos.add(rotationOffset);
 		structure.place(world, p, new StructurePlacementData().setRotation(rotation));
@@ -140,7 +140,7 @@ public class StructureCityBuilding extends StructureNBT
 		}
 	}
 	
-	public void placeInChunk(IWorld world, BlockPos pos, BlockBox boundingBox)
+	public void placeInChunk(WorldAccess world, BlockPos pos, BlockBox boundingBox)
 	{
 		BlockPos p = pos.add(rotationOffset);
 		structure.place(world, p, new StructurePlacementData()

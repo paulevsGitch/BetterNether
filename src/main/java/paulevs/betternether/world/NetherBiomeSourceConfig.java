@@ -1,6 +1,6 @@
 package paulevs.betternether.world;
 
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.source.BiomeSourceConfig;
 import net.minecraft.world.level.LevelGeneratorType;
@@ -10,7 +10,7 @@ public class NetherBiomeSourceConfig implements BiomeSourceConfig
 	final LevelGeneratorType type;
 	final long seed;
 	
-	public NetherBiomeSourceConfig(IWorld world, LevelGeneratorType type)
+	public NetherBiomeSourceConfig(WorldAccess world, LevelGeneratorType type)
 	{
 		this.type = type;
 		this.seed = world.getSeed();

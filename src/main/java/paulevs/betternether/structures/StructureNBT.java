@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BetterNether;
 
 public class StructureNBT
@@ -60,7 +60,7 @@ public class StructureNBT
 		mirror = BlockMirror.values()[random.nextInt(3)];
 	}
 	
-	public boolean generateCentered(IWorld world, BlockPos pos)
+	public boolean generateCentered(WorldAccess world, BlockPos pos)
 	{
 		if(structure == null)
 		{

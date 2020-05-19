@@ -23,7 +23,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.World;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.EntityRegistry;
@@ -99,7 +99,7 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 		return 1;
 	}
 	
-	public static boolean canSpawn(EntityType<? extends EntityNaga> type, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random)
+	public static boolean canSpawn(EntityType<? extends EntityNaga> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
 	{
 		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}

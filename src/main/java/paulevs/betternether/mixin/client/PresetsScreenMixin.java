@@ -29,7 +29,7 @@ public class PresetsScreenMixin
 		addPreset(new TranslatableText("betternether.flat_nether"),
 				Blocks.NETHERRACK,
 				Biomes.NETHER_WASTES,
-				Arrays.asList("decoration", "nether_city"),
+				Arrays.asList("nether_city"),
 				new FlatChunkGeneratorLayer(63, Blocks.NETHERRACK),
 				new FlatChunkGeneratorLayer(1, Blocks.BEDROCK));
 	}

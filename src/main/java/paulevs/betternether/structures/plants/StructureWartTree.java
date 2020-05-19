@@ -10,7 +10,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -27,7 +27,7 @@ public class StructureWartTree extends StructureFuncScatter
 	}
 
 	@Override
-	public void grow(IWorld world, BlockPos pos, Random random)
+	public void grow(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (world.isAir(pos.up(1)) && world.isAir(pos.up(2)))
 		{
@@ -122,7 +122,7 @@ public class StructureWartTree extends StructureFuncScatter
 		}
 	}
 
-	private void PlaceRandomSeed(IWorld world, BlockPos pos)
+	private void PlaceRandomSeed(WorldAccess world, BlockPos pos)
 	{
 		BlockState seed = BlocksRegistry.WART_SEED.getDefaultState();
 		if (isReplaceable(world.getBlockState(pos)))

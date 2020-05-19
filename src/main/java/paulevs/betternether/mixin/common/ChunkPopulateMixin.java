@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.source.BiomeSource;
@@ -29,16 +29,12 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 {
 	private static final ChunkRandom RANDOM = new ChunkRandom();
 	private static final Mutable POS = new Mutable();
-	
-	@Shadow
-	@Final
-	protected IWorld world;
 
-	@Inject(method = "<init>*", at = @At("RETURN"))
-	private void onConstructed(IWorld world, BiomeSource biomeSource, C config, CallbackInfo ci)
+	/*@Inject(method = "<init>*", at = @At("RETURN"))
+	private void onConstructed(WorldAccess world, BiomeSource biomeSource, C config, CallbackInfo ci)
 	{
 		BNWorldGenerator.init(world);
-	}
+	}*/
 
 	@Inject(method = "generateFeatures", at = @At("HEAD"), cancellable = true)
     private void customPopulate(ChunkRegion region, StructureAccessor accessor, CallbackInfo info)
@@ -54,8 +50,7 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 			
 			GenerationStep.Feature[] steps = GenerationStep.Feature.values();
 			long featureSeed = RANDOM.setPopulationSeed(region.getSeed(), chunkX, chunkZ);
-			@SuppressWarnings("unchecked")
-			ChunkGenerator<C> generator = (ChunkGenerator<C>) (Object) this;
+			ChunkGenerator generator = (ChunkGenerator) (Object) this;
 			for (int step = 0; step < steps.length; step ++)
 			{
 				GenerationStep.Feature feature = steps[step];
@@ -87,7 +82,7 @@ public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
 		}
 	}
 
-	private boolean isNetherBiome(IWorld world, int cx, int cz)
+	private boolean isNetherBiome(ChunkRegion world, int cx, int cz)
 	{
 		POS.set(cx << 4, 0, cx << 4);
 		return  isNetherBiome(world.getBiome(POS)) ||

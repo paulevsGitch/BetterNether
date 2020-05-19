@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
@@ -28,7 +28,7 @@ public class NetherMushroomForestEdge extends NetherBiome
 	}
 
 	@Override
-	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (random.nextInt(4) > 0)
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.getDefaultState());

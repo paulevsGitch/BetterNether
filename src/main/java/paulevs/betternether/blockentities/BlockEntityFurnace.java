@@ -21,8 +21,9 @@ public class BlockEntityFurnace extends AbstractFurnaceBlockEntity
 		return new TranslatableText("container.furnace", new Object[0]);
 	}
 
-	protected ScreenHandler createContainer(int i, PlayerInventory playerInventory)
+	@Override
+	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory)
 	{
-		return new FurnaceScreenHandler(i, playerInventory, this, this.propertyDelegate);
+		return new FurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
 	}
 }

@@ -6,7 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherCactus;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -16,13 +16,13 @@ public class StructureNetherCactus implements IStructure
 {
 	private Mutable npos = new Mutable();
 	
-	private boolean canPlaceAt(IWorld world, BlockPos pos)
+	private boolean canPlaceAt(WorldAccess world, BlockPos pos)
 	{
 		return world.getBlockState(pos.down()).getBlock() == Blocks.GRAVEL;
 	}
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (canPlaceAt(world, pos))
 		{

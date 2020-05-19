@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 
 public abstract class StructureObjScatter implements IStructure
 {
@@ -23,7 +23,7 @@ public abstract class StructureObjScatter implements IStructure
 	}
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (isGround(world.getBlockState(pos.down())) && isGround(world.getBlockState(pos.down(2))) && noObjNear(world, pos))
 		{
@@ -36,7 +36,7 @@ public abstract class StructureObjScatter implements IStructure
 	
 	protected abstract boolean isGround(BlockState state);
 	
-	private boolean noObjNear(IWorld world, BlockPos pos)
+	private boolean noObjNear(WorldAccess world, BlockPos pos)
 	{
 		int x1 = pos.getX() - distance;
 		int z1 = pos.getZ() - distance;

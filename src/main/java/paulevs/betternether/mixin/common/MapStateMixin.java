@@ -11,8 +11,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.item.map.MapIcon;
 import net.minecraft.item.map.MapState;
 import net.minecraft.text.Text;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.PersistentState;
+import net.minecraft.world.dimension.TheNetherDimension;
 
 @Mixin(MapState.class)
 public abstract class MapStateMixin extends PersistentState
@@ -35,9 +36,9 @@ public abstract class MapStateMixin extends PersistentState
 	}
 
 	@Inject(method = "addIcon", at = @At(value = "HEAD"), cancellable = true)
-	private void updatePlayer(MapIcon.Type type, IWorld world, String key, double x, double z, double rotation, Text text, CallbackInfo info)
+	private void updatePlayer(MapIcon.Type type, WorldAccess world, String key, double x, double z, double rotation, Text text, CallbackInfo info)
 	{
-		if (world != null && world.getDimension().isNether())
+		if (world != null && world.getDimension() instanceof TheNetherDimension)
 		{
 			Map<String, MapIcon> icons = ((MapState) (Object) this).icons;
 			

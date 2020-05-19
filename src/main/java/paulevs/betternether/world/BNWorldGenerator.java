@@ -7,11 +7,13 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStep;
@@ -83,13 +85,12 @@ public class BNWorldGenerator
 		}
 	}
 
-	public static void init(IWorld world)
+	public static void init(long seed)
 	{
-		if (caves == null)
-		{
-			long seed = world.getSeed();
+		//if (caves == null)
+		//{
 			caves = new StructureCaves(seed);
-		}
+		//}
 	}
 	
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random)
@@ -105,7 +106,7 @@ public class BNWorldGenerator
 		return x < 0 ? 0 : x > max ? max : x;
 	}
 
-	public static void populate(IWorld world, int sx, int sz, Random random)
+	public static void populate(ChunkRegion world, int sx, int sz, Random random)
 	{
 		//Structure Generator
 		if (random.nextFloat() < structureDensity)
@@ -282,7 +283,7 @@ public class BNWorldGenerator
 			}
 	}
 	
-	private static void makeLocalBiomes(IWorld world, int sx, int sz)
+	private static void makeLocalBiomes(ChunkRegion world, int sx, int sz)
 	{
 		MC_BIOMES.clear();
 		for (int x = 0; x < 8; x++)
@@ -310,7 +311,7 @@ public class BNWorldGenerator
 		}*/
 	}
 
-	public static void prePopulate(IWorld world, int sx, int sz, Random random)
+	public static void prePopulate(ChunkRegion world, int sx, int sz, Random random)
 	{
 		makeLocalBiomes(world, sx, sz);
 		
@@ -372,13 +373,13 @@ public class BNWorldGenerator
 		}
 	}
 	
-	private static boolean canReplace(IWorld world, BlockPos pos)
+	private static boolean canReplace(WorldAccess world, BlockPos pos)
 	{
 		BlockState state = world.getBlockState(pos);
 		return BlocksHelper.isNetherGround(state) || state.getBlock() == Blocks.GRAVEL;
 	}
 	
-	private static void spawnOre(BlockState state, IWorld world, BlockPos pos, Random random)
+	private static void spawnOre(BlockState state, WorldAccess world, BlockPos pos, Random random)
 	{
 		for (int i = 0; i < 6 + random.nextInt(11); i++)
 		{
@@ -390,7 +391,7 @@ public class BNWorldGenerator
 		}
 	}
 	
-	public static void cleaningPass(IWorld world, int sx, int sz)
+	public static void cleaningPass(WorldAccess world, int sx, int sz)
 	{
 		if (hasFixPass)
 		{
@@ -398,7 +399,7 @@ public class BNWorldGenerator
 		}
 	}
 	
-	private static void fixBlocks(IWorld world, int x1, int y1, int z1, int x2, int y2, int z2)
+	private static void fixBlocks(WorldAccess world, int x1, int y1, int z1, int x2, int y2, int z2)
 	{
 		for (int y = y1; y <= y2; y++)
 		{

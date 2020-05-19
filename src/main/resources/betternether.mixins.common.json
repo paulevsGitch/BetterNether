@@ -15,11 +15,10 @@
 	"PlayerEntityMixin",
 	"DefaultAttributeRegistryMixin",
 	"DeltaFeatureMixin",
-	"TheNetherDimensionMixin",
 	"DimensionTypeMixin",
-	"LevelGeneratorOptionsMixin",
 	"SpawnRestrictionMixin",
-	"BrewingRecipeRegistryMixin"
+	"BrewingRecipeRegistryMixin",
+	"ServerWorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1

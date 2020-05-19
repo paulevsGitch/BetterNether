@@ -6,7 +6,7 @@ import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowBranch.WillowBranchShape;
@@ -21,7 +21,7 @@ public class StructureWillow implements IStructure
 	private static final Direction[] HOR = HorizontalFacingBlock.FACING.getValues().toArray(new Direction[] {});
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (!BlocksHelper.isNetherGround(world.getBlockState(pos.down())))
 			return;
@@ -49,7 +49,7 @@ public class StructureWillow implements IStructure
 			BlocksHelper.setWithoutUpdate(world, pos.up(h2 + 1).offset(HOR[i]), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, HOR[i]));
 	}
 	
-	private void branch(IWorld world, BlockPos pos, int length, Random random, Direction direction, BlockPos center, int level)
+	private void branch(WorldAccess world, BlockPos pos, int length, Random random, Direction direction, BlockPos center, int level)
 	{
 		if (level > 5)
 			return;
@@ -111,7 +111,7 @@ public class StructureWillow implements IStructure
 		}
 	}
 	
-	private void vine(IWorld world, BlockPos pos, int length)
+	private void vine(WorldAccess world, BlockPos pos, int length)
 	{
 		if (!world.isAir(pos))
 			return;

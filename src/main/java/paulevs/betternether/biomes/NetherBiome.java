@@ -9,7 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
@@ -143,40 +143,40 @@ public class NetherBiome extends Biome
 		setNoiseDensity(Config.getFloat(group, "noise_density", getNoiseDensity()));
 	}
 	
-	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
 		BlocksHelper.setWithoutUpdate(world, pos, this.getBiome().getSurfaceBuilder().config.getTopMaterial());
 	}
 	
-	public void genFloorObjects(IWorld world, BlockPos pos, Random random)
+	public void genFloorObjects(WorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsFloor)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 	
-	public void genWallObjects(IWorld world, BlockPos pos, Random random)
+	public void genWallObjects(WorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsWall)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 	
-	public void genCeilObjects(IWorld world, BlockPos pos, Random random)
+	public void genCeilObjects(WorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsCeil)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 	
-	public void genLavaObjects(IWorld world, BlockPos pos, Random random)
+	public void genLavaObjects(WorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsLava)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 	
-	/*public void genUnderObjects(IWorld world, BlockPos pos, Random random)
+	/*public void genUnderObjects(WorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsUnder)
 			if (info.canGenerate(random, pos))
@@ -342,32 +342,32 @@ public class NetherBiome extends Biome
 		return String.format(Locale.ROOT, "name: %s; offset: %d; type: %s; chance: %f", name, offset, type.getName(), chance);
 	}
 
-	public void genFloorBuildings(IWorld world, BlockPos pos, Random random)
+	public void genFloorBuildings(WorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, buildGeneratorsFloor);
 	}
 
-	/*public void genWallBuildings(IWorld world, BlockPos pos, Random random)
+	/*public void genWallBuildings(WorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, worldGeneratorsWall);
 	}*/
 	
-	public void genCeilBuildings(IWorld world, BlockPos pos, Random random)
+	public void genCeilBuildings(WorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, buildGeneratorsCeil);
 	}
 	
-	public void genLavaBuildings(IWorld world, BlockPos pos, Random random)
+	public void genLavaBuildings(WorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, buildGeneratorsLava);
 	}
 	
-	public void genUnderBuildings(IWorld world, BlockPos pos, Random random)
+	public void genUnderBuildings(WorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, buildGeneratorsUnder);
 	}
 	
-	private void chancedStructure(IWorld world, BlockPos pos, Random random, List<StructureInfo> infoList)
+	private void chancedStructure(WorldAccess world, BlockPos pos, Random random, List<StructureInfo> infoList)
 	{
 		float chance = getLastChance(infoList);
 		if (chance > 0)

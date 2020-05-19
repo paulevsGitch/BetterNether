@@ -24,9 +24,9 @@ public class BlockEntityForge extends AbstractFurnaceBlockEntity
 	}
 
 	@Override
-	protected ScreenHandler createContainer(int i, PlayerInventory playerInventory)
+	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory)
 	{
-		return new FurnaceScreenHandler(i, playerInventory, this, this.propertyDelegate);
+		return new FurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
 	}
 
 	@Override

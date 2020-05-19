@@ -1,24 +1,9 @@
 package paulevs.betternether.mixin.common;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import com.mojang.datafixers.Dynamic;
-
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.gen.chunk.ChunkGeneratorType;
-import net.minecraft.world.gen.chunk.FlatChunkGeneratorConfig;
-import net.minecraft.world.level.LevelGeneratorOptions;
-import net.minecraft.world.level.LevelGeneratorType;
-import paulevs.betternether.world.NetherBiomeSource;
-import paulevs.betternether.world.NetherBiomeSourceConfig;
-
-@Mixin(LevelGeneratorOptions.class)
+//@Mixin(LevelGeneratorOptions.class)
 public class LevelGeneratorOptionsMixin
 {
-	@Inject(method = "createFlat", at = @At(value = "HEAD"), cancellable = true)
+	/*@Inject(method = "createFlat", at = @At(value = "HEAD"), cancellable = true)
 	private static void flat(LevelGeneratorType generatorType, Dynamic<?> dynamic, CallbackInfoReturnable<LevelGeneratorOptions> info)
 	{
 		FlatChunkGeneratorConfig flatChunkGeneratorConfig = FlatChunkGeneratorConfig.fromDynamic(dynamic);
@@ -31,5 +16,5 @@ public class LevelGeneratorOptionsMixin
 			info.setReturnValue(options);
 			info.cancel();
 		}
-	}
+	}*/
 }

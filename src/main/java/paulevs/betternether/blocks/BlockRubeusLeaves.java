@@ -16,7 +16,7 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.World;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -70,7 +70,7 @@ public class BlockRubeusLeaves extends BlockBase
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, IWorld world, BlockPos pos, BlockPos posFrom)
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom)
 	{
 		int dist = getDistanceFromLog(newState) + 1;
 		if (dist != 1 || state.get(DISTANCE_CUSTOM) != dist)
@@ -81,7 +81,7 @@ public class BlockRubeusLeaves extends BlockBase
 		return state;
 	}
 
-	private static BlockState updateDistanceFromLogs(BlockState state, IWorld world, BlockPos pos)
+	private static BlockState updateDistanceFromLogs(BlockState state, WorldAccess world, BlockPos pos)
 	{
 		int dist = MAX_DIST;
 		BlockPos.Mutable mutable = new BlockPos.Mutable();

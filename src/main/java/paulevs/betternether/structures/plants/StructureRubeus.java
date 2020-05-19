@@ -8,7 +8,7 @@ import java.util.Set;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.RubeusLog;
@@ -31,7 +31,7 @@ public class StructureRubeus extends StructureFuncScatter
 	}
 	
 	@Override
-	public void grow(IWorld world, BlockPos pos, Random random)
+	public void grow(WorldAccess world, BlockPos pos, Random random)
 	{
 		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 0);
 		float scale = MHelper.randRange(0.5F, 1F, random);
@@ -146,7 +146,7 @@ public class StructureRubeus extends StructureFuncScatter
 	}
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
 		if (length >= StructureStalagnate.MAX_LENGTH)
@@ -165,7 +165,7 @@ public class StructureRubeus extends StructureFuncScatter
 		return BlocksHelper.isNetherGround(state);
 	}
 	
-	private void line(IWorld world, int x1, int y1, int z1, int x2, int y2, int z2, int middleY)
+	private void line(WorldAccess world, int x1, int y1, int z1, int x2, int y2, int z2, int middleY)
 	{
 		int dx = x2 - x1;
 		int dy = y2 - y1;
@@ -208,7 +208,7 @@ public class StructureRubeus extends StructureFuncScatter
 		}
 	}
 	
-	private void crown(IWorld world, int x, int y, int z, float radius, Random random)
+	private void crown(WorldAccess world, int x, int y, int z, float radius, Random random)
 	{
 		BlockState leaves = BlocksRegistry.RUBEUS_LEAVES.getDefaultState();
 		BlockState cone = BlocksRegistry.RUBEUS_CONE.getDefaultState();
@@ -240,7 +240,7 @@ public class StructureRubeus extends StructureFuncScatter
 		}
 	}
 	
-	private void setCondition(IWorld world, BlockPos pos, int y, BlockState state)
+	private void setCondition(WorldAccess world, BlockPos pos, int y, BlockState state)
 	{
 		if (pos.getY() > y)
 			setIfAir(world, pos, state);
@@ -248,21 +248,21 @@ public class StructureRubeus extends StructureFuncScatter
 			setIfGroundOrAir(world, pos, state);
 	}
 	
-	private void setIfAir(IWorld world, BlockPos pos, BlockState state)
+	private void setIfAir(WorldAccess world, BlockPos pos, BlockState state)
 	{
 		BlockState bState = world.getBlockState(pos);
 		if (world.isAir(pos) || bState.getMaterial().isReplaceable() || bState.getBlock() == BlocksRegistry.RUBEUS_LEAVES || bState.getBlock() == BlocksRegistry.RUBEUS_CONE)
 			BlocksHelper.setWithoutUpdate(world, pos, state);
 	}
 	
-	private void setIfGroundOrAir(IWorld world, BlockPos pos, BlockState state)
+	private void setIfGroundOrAir(WorldAccess world, BlockPos pos, BlockState state)
 	{
 		BlockState bState = world.getBlockState(pos);
 		if (bState.isAir() || bState.getBlock() == BlocksRegistry.RUBEUS_LEAVES || bState.getMaterial().isReplaceable() || BlocksHelper.isNetherGround(bState))
 			BlocksHelper.setWithoutUpdate(world, pos, state);
 	}
 	
-	private void setIfAirLeaves(IWorld world, BlockPos pos, BlockState state)
+	private void setIfAirLeaves(WorldAccess world, BlockPos pos, BlockState state)
 	{
 		BlockState bState = world.getBlockState(pos);
 		if (world.isAir(pos) || bState.getMaterial().isReplaceable())

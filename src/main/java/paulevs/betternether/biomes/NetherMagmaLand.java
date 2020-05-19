@@ -7,7 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureCrystal;
@@ -34,7 +34,7 @@ public class NetherMagmaLand extends NetherBiome
 	}
 	
 	@Override
-	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (isMask(pos.getX(), pos.getZ()))
 		{
@@ -60,7 +60,7 @@ public class NetherMagmaLand extends NetherBiome
 			super.genSurfColumn(world, pos, random);
 	}
 	
-	protected boolean validWall(IWorld world, BlockPos pos)
+	protected boolean validWall(WorldAccess world, BlockPos pos)
 	{
 		BlockState state = world.getBlockState(pos);
 		return BlocksHelper.isLava(state) || BlocksHelper.isNetherGroundMagma(state);

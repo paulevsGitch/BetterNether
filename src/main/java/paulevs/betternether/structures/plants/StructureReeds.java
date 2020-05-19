@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -12,7 +12,7 @@ import paulevs.betternether.structures.IStructure;
 
 public class StructureReeds implements IStructure
 {
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (world.isAir(pos) && BlocksRegistry.NETHER_REED.canPlaceAt(world.getBlockState(pos), world, pos))
 		{

@@ -3,7 +3,7 @@ package paulevs.betternether.biomes;
 import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 
 public class NetherBiomeWrapper extends NetherBiome
@@ -23,7 +23,7 @@ public class NetherBiomeWrapper extends NetherBiome
 	}
 	
 	@Override
-	public void genSurfColumn(IWorld world, BlockPos pos, Random random)
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
 		//SurfaceConfig config = biome.getSurfaceConfig();
 		//BlocksHelper.setWithoutUpdate(world, pos, config.getTopMaterial());

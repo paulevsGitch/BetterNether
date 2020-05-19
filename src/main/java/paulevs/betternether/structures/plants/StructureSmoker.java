@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.shapes.TripleShape;
@@ -16,13 +16,13 @@ public class StructureSmoker implements IStructure
 {
 	private Mutable npos = new Mutable();
 	
-	private boolean canPlaceAt(IWorld world, BlockPos pos)
+	private boolean canPlaceAt(WorldAccess world, BlockPos pos)
 	{
 		return BlocksHelper.isNetherGround(world.getBlockState(pos.down()));
 	}
 	
 	@Override
-	public void generate(IWorld world, BlockPos pos, Random random)
+	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (canPlaceAt(world, pos))
 		{
