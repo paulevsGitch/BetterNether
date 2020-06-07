@@ -1,9 +1,7 @@
 package paulevs.betternether.world;
 
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.source.BiomeSourceConfig;
-import net.minecraft.world.level.LevelGeneratorType;
+import net.minecraft.world.WorldAccess;
 
 public class NetherBiomeSourceConfig implements BiomeSourceConfig
 {

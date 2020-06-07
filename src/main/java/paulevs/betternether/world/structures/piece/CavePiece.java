@@ -12,9 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.CavesChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
@@ -59,7 +57,7 @@ public class CavePiece extends CustomPiece
 	public boolean generate(ServerWorldAccess world, StructureAccessor arg, ChunkGenerator chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
 	{
 		BlockState bottom = LAVA;
-		if (!(chunkGenerator instanceof CavesChunkGenerator))
+		if (!(world.getDimension().isNether()))
 		{
 			bottom = Blocks.NETHERRACK.getDefaultState();
 		}

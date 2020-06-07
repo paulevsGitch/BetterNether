@@ -16,12 +16,7 @@ public class NetherBoneReef extends NetherBiome
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setParticleConfig(new BiomeParticleConfig(
-						ParticleTypes.ASH,
-						0.1F,
-						(random) -> { return 0.0; },
-						(random) -> { return -0.1; },
-						(random) -> { return 0.0; })));
+				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.ASH, 0.1F)));
 		addStructure("bone_reef", new StructureBoneReef(), StructureType.FLOOR, 0.2F, true);
 		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.4F, false);
 	}

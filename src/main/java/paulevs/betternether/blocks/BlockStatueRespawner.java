@@ -28,8 +28,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -85,7 +85,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 			player.sendMessage(new TranslatableText("message.spawn_set", new Object[0]), true);
 			if (!world.isClient)
 			{
-				((ServerPlayerEntity) player).setSpawnPoint(world.getDimension().getType(), pos, true, false);
+				((ServerPlayerEntity) player).setSpawnPoint(world.getRegistryKey(), pos, true, false);
 			}
 			player.playSound(SoundEvents.ITEM_TOTEM_USE, 0.7F, 1.0F);
 			return ActionResult.SUCCESS;

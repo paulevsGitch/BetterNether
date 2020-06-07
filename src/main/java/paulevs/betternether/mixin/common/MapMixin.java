@@ -24,7 +24,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
-import net.minecraft.world.dimension.TheNetherDimension;
 
 @Mixin(FilledMapItem.class)
 public abstract class MapMixin extends NetworkSyncedItem
@@ -43,7 +42,7 @@ public abstract class MapMixin extends NetworkSyncedItem
 	@Inject(method = "updateColors", at = @At(value = "HEAD"), cancellable = true)
 	private void customColors(World world, Entity entity, MapState state, CallbackInfo info)
 	{
-		if (world.getDimension() instanceof TheNetherDimension && world.getDimension().getType() == state.dimension && entity instanceof PlayerEntity)
+		if (world.getDimension().hasCeiling() && world.getRegistryKey() == state.dimension && entity instanceof PlayerEntity)
 		{
 			int i = 1 << state.scale;
 			int j = state.xCenter;

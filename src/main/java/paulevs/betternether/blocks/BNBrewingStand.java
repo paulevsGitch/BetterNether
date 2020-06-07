@@ -1,78 +1,39 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.BrewingStandBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.stat.Stats;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.blockentities.BNBrewingStandBlockEntity;
 import paulevs.betternether.client.IRenderTypeable;
 
-public class BNBrewingStand extends BlockWithEntity implements IRenderTypeable
+public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
 {
-	public static final BooleanProperty[] BOTTLE_PROPERTIES = new BooleanProperty[] {
-			Properties.HAS_BOTTLE_0,
-			Properties.HAS_BOTTLE_1,
-			Properties.HAS_BOTTLE_2
-	};
-	protected static final VoxelShape SHAPE = VoxelShapes.union(
-			Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D),
-			Block.createCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 14.0D, 9.0D));
-
 	public BNBrewingStand()
 	{
 		super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS)
 				.strength(0.5F, 0.5F)
 				.lightLevel(1)
 				.nonOpaque());
-		this.setDefaultState(getStateManager().getDefaultState()
-				.with(BOTTLE_PROPERTIES[0], false)
-				.with(BOTTLE_PROPERTIES[1], false)
-				.with(BOTTLE_PROPERTIES[2], false));
-	}
-
-	@Override
-	public BlockRenderType getRenderType(BlockState state)
-	{
-		return BlockRenderType.MODEL;
 	}
 
 	@Override
 	public BlockEntity createBlockEntity(BlockView view)
 	{
 		return new BNBrewingStandBlockEntity();
-	}
-
-	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
-		return SHAPE;
 	}
 
 	@Override
@@ -106,50 +67,21 @@ public class BNBrewingStand extends BlockWithEntity implements IRenderTypeable
 				((BNBrewingStandBlockEntity) blockEntity).setCustomName(itemStack.getName());
 			}
 		}
-
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
+	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean notify)
 	{
-		double d = (double)pos.getX() + 0.4D + (double)random.nextFloat() * 0.2D;
-		double e = (double)pos.getY() + 0.7D + (double)random.nextFloat() * 0.3D;
-		double f = (double)pos.getZ() + 0.4D + (double)random.nextFloat() * 0.2D;
-		world.addParticle(ParticleTypes.SMOKE, d, e, f, 0.0D, 0.0D, 0.0D);
-	}
-
-	@Override
-	public void onBlockRemoved(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved)
-	{
-		if (state.getBlock() != newState.getBlock())
+		if (!state.isOf(newState.getBlock()))
 		{
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if (blockEntity instanceof BNBrewingStandBlockEntity)
 			{
-				ItemScatterer.spawn(world, (BlockPos) pos, (Inventory) blockEntity);
+				ItemScatterer.spawn(world, (BlockPos)pos, (Inventory)((BNBrewingStandBlockEntity) blockEntity));
 			}
 
-			super.onBlockRemoved(state, world, pos, newState, moved);
+			super.onStateReplaced(state, world, pos, newState, notify);
 		}
-	}
-
-	@Override
-	public boolean hasComparatorOutput(BlockState state)
-	{
-		return true;
-	}
-
-	@Override
-	public int getComparatorOutput(BlockState state, World world, BlockPos pos)
-	{
-		return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
-	}
-
-	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
-	{
-		builder.add(BOTTLE_PROPERTIES[0], BOTTLE_PROPERTIES[1], BOTTLE_PROPERTIES[2]);
 	}
 
 	@Override

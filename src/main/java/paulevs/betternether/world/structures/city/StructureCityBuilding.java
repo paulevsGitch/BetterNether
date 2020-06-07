@@ -102,7 +102,7 @@ public class StructureCityBuilding extends StructureNBT
 	public void place(WorldAccess world, BlockPos pos)
 	{
 		BlockPos p = pos.add(rotationOffset);
-		structure.place(world, p, new StructurePlacementData().setRotation(rotation));
+		structure.place(world, p, new StructurePlacementData().setRotation(rotation), world.getRandom());
 		for (BlockPos rep : ends)
 		{
 			BlocksHelper.setWithoutUpdate(world, rep.add(pos), AIR);
@@ -147,7 +147,8 @@ public class StructureCityBuilding extends StructureNBT
 				.setRotation(rotation)
 				.setMirror(mirror)
 				.setBoundingBox(boundingBox)
-				.addProcessor(REPLACE));
+				.addProcessor(REPLACE),
+				world.getRandom());
 	}
 
 	public BlockPos[] getEnds()

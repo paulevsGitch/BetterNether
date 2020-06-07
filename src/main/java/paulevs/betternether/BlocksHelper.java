@@ -15,7 +15,6 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registry.BlocksRegistry;

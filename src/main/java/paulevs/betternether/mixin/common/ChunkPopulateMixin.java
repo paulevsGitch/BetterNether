@@ -1,8 +1,6 @@
 package paulevs.betternether.mixin.common;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -13,28 +11,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import paulevs.betternether.world.BNWorldGenerator;
 
 @Mixin(ChunkGenerator.class)
-public abstract class ChunkPopulateMixin<C extends ChunkGeneratorConfig>
+public abstract class ChunkPopulateMixin
 {
 	private static final ChunkRandom RANDOM = new ChunkRandom();
 	private static final Mutable POS = new Mutable();
-
-	/*@Inject(method = "<init>*", at = @At("RETURN"))
-	private void onConstructed(WorldAccess world, BiomeSource biomeSource, C config, CallbackInfo ci)
-	{
-		BNWorldGenerator.init(world);
-	}*/
 
 	@Inject(method = "generateFeatures", at = @At("HEAD"), cancellable = true)
     private void customPopulate(ChunkRegion region, StructureAccessor accessor, CallbackInfo info)

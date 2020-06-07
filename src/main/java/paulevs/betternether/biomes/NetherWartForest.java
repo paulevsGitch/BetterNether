@@ -27,12 +27,7 @@ public class NetherWartForest extends NetherBiome
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setParticleConfig(new BiomeParticleConfig(
-						ParticleTypes.CRIMSON_SPORE,
-						0.05F,
-						(random) -> { return 0.0; },
-						(random) -> { return -1.0; },
-						(random) -> { return 0.0; })));
+				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.CRIMSON_SPORE, 0.05F)));
 		this.setNoiseDensity(0.45F);
 		addStructure("wart_deadwood", new StructureWartDeadwood(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.1F, false);

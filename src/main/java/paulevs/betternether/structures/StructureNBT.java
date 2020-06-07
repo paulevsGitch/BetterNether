@@ -75,7 +75,7 @@ public class StructureNBT
 			blockpos2.setZ(-blockpos2.getZ());
 		blockpos2.set(blockpos2.rotate(rotation));
 		StructurePlacementData data = new StructurePlacementData().setRotation(this.rotation).setMirror(this.mirror);
-		structure.place(world, pos.add(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1), data);
+		structure.place(world, pos.add(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1), data, world.getRandom());
 		return true;
 	}
 	

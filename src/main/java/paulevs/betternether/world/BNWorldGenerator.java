@@ -7,24 +7,11 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
-import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
@@ -32,7 +19,6 @@ import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.world.structures.CityFeature;
 
 public class BNWorldGenerator
 {
@@ -57,11 +43,11 @@ public class BNWorldGenerator
 	private static StructureCaves caves;
 	private static NetherBiome biome;
 
-	public static final StructureFeature<DefaultFeatureConfig> CITY = Registry.register(
+	/*public static final StructureFeature<DefaultFeatureConfig> CITY = Registry.register(
 			Registry.STRUCTURE_FEATURE,
 			new Identifier(BetterNether.MOD_ID, "nether_city"),
 			new CityFeature(DefaultFeatureConfig::deserialize)
-			);
+			);*/
 	
 	public static void onModInit()
 	{
@@ -71,7 +57,7 @@ public class BNWorldGenerator
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
 		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 32F);
 		
-		if (Config.getBoolean("generator_world", "generate_cities", true))
+		/*if (Config.getBoolean("generator_world", "generate_cities", true))
 		{
 			ConfiguredFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> sFeature = CITY.configure(FeatureConfig.DEFAULT);
 			ConfiguredFeature<?, ?> feature = CITY.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT));
@@ -82,7 +68,7 @@ public class BNWorldGenerator
 					b.addFeature(GenerationStep.Feature.RAW_GENERATION, feature);
 				}
 			Feature.STRUCTURES.put("nether_city", CITY);
-		}
+		}*/
 	}
 
 	public static void init(long seed)

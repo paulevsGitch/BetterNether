@@ -25,12 +25,7 @@ public class OldWarpedWoods extends NetherBiome
 				.setLoop(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_WARPED_FOREST_MOOD)
-				.setParticleConfig(new BiomeParticleConfig(
-						ParticleTypes.WARPED_SPORE,
-						0.025F,
-						(random) -> { return random.nextGaussian() * 0.000001; },
-						(random) -> { return random.nextGaussian() * 0.000001; },
-						(random) -> { return random.nextGaussian() * 0.000001; })));
+				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.WARPED_SPORE, 0.025F)));
 		addStructure("big_warped_tree", new StructureBigWarpedTree(), StructureType.FLOOR, 0.1F, false);
 		addStructure("warped_fungus", new StructureWarpedFungus(), StructureType.FLOOR, 0.05F, true);
 		addStructure("warped_roots", new StructureWarpedRoots(), StructureType.FLOOR, 0.2F, true);
