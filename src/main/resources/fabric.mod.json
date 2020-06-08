@@ -13,8 +13,8 @@
 		"edos_ (builder, design help)"
 	],
 	"contact": {
-		"homepage": "https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/wip-mods/2930448-better-nether",
-		"sources": "https://github.com/paulevsGitch/BetterNether/tree/mc_1.15.1"
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/betternether",
+		"sources": "https://github.com/paulevsGitch/BetterNether/tree/snapshots"
 	},
 
 	"license": "GPLv3",
@@ -35,7 +35,7 @@
 	],
 
 	"depends": {
-		"fabricloader": ">=0.8.3",
+		"fabricloader": ">=0.8.4",
 		"fabric": "*",
 		"minecraft": "1.16.x"
 	},
