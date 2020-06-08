@@ -1,41 +1,44 @@
 package paulevs.betternether.world;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Optional;
 
-import com.mojang.serialization.Codec;
+import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.MixedNoisePoint;
 import net.minecraft.world.biome.source.BiomeSource;
-import paulevs.betternether.biomes.NetherBiome;
+import net.minecraft.world.biome.source.MultiNoiseBiomeSource;
 import paulevs.betternether.config.Config;
-import paulevs.betternether.registry.BiomesRegistry;
 
-public class NetherBiomeSource extends BiomeSource
+public class NetherBiomeSource extends MultiNoiseBiomeSource
 {
 	private BiomeMap map;
 	
-	public NetherBiomeSource(NetherBiomeSourceConfig config)
+	public NetherBiomeSource(long seed, boolean volumetric)
 	{
-		super(buildBiomes());
+		//super(buildBiomes());
+		super(seed, Collections.emptyList(), null);
 		int sizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
 		int sizeY = Config.getInt("generator_world", "biome_size_y", 40);
-		map = new BiomeMap(config.getSeed(), sizeXZ, sizeY, config.isVolumetric());
+		this.map = new BiomeMap(seed, sizeXZ, sizeY, volumetric);
 	}
 	
-	private NetherBiomeSource(List<Biome> biomes, BiomeMap map)
+	private NetherBiomeSource(long seed, ImmutableList<Pair<MixedNoisePoint, Biome>> biomes, Optional<class_5305> optional, BiomeMap map)
 	{
-		super(biomes);
+		//super(biomes);
+		super(seed, biomes, optional);
 		this.map = map;
 	}
-	
-	/*public NetherBiomeSource(long seed)
+
+	public NetherBiomeSource(long seed, ImmutableList<Pair<MixedNoisePoint, Biome>> biomes, Optional<class_5305> optional, boolean volumetric)
 	{
-		super(buildBiomes());
+		super(seed, biomes, optional);
 		int sizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
 		int sizeY = Config.getInt("generator_world", "biome_size_y", 40);
-		map = new BiomeMap(config.getSeed(), sizeXZ, sizeY, config.isVolumetric());
-	}*/
+		this.map = new BiomeMap(seed, sizeXZ, sizeY, volumetric);
+	}
 
 	@Override
 	public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ)
@@ -46,7 +49,7 @@ public class NetherBiomeSource extends BiomeSource
 		return biome;
 	}
 	
-	private static List<Biome> buildBiomes()
+	/*private static List<Biome> buildBiomes()
 	{
 		List<Biome> biomes = new ArrayList<Biome>();
 		for (NetherBiome nb: BiomesRegistry.getRegisteredBiomes())
@@ -54,24 +57,19 @@ public class NetherBiomeSource extends BiomeSource
 			biomes.add(nb.getBiome());
 		}
 		return biomes;
-	}
-	
-	public NetherBiomeSource create(long seed)
-	{
-		return new NetherBiomeSource(this.biomes, this.map);
-	}
+	}*/
 
-	@Override
+	/*@Override
 	protected Codec<? extends BiomeSource> method_28442()
 	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+		return MultiNoiseBiomeSource.CODEC;
+	}*/
 
 	@Override
 	public BiomeSource withSeed(long seed)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ImmutableList<Pair<MixedNoisePoint, Biome>> biomes = this.biomes.stream().flatMap((biome) -> biome.streamNoises().map((point) -> Pair.of(point, biome))).collect(ImmutableList.toImmutableList());
+		Optional<class_5305> optional = Optional.of(MultiNoiseBiomeSource.class_5305.field_24723);
+		return new NetherBiomeSource(seed, biomes, optional, this.map);
 	}
 }

@@ -18,7 +18,8 @@
 	"DimensionTypeMixin",
 	"SpawnRestrictionMixin",
 	"BrewingRecipeRegistryMixin",
-	"ServerWorldMixin"
+	"ServerWorldMixin",
+	"MultiNoiseBiomeSourceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

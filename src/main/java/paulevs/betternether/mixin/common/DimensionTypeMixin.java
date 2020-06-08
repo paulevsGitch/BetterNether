@@ -9,34 +9,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.world.biome.source.BiomeAccessType;
 import net.minecraft.world.dimension.DimensionType;
-import paulevs.betternether.world.NetherBiomeAccessType;
 
 @Mixin(DimensionType.class)
 public class DimensionTypeMixin
 {
-	@Shadow
-	@Final
-	private static DimensionType OVERWORLD;
+	//@Shadow
+	//@Final
+	//private static DimensionType OVERWORLD;
 
 	@Shadow
 	@Final
 	private static DimensionType THE_NETHER;
 
-	private static final BiomeAccessType TYPE = NetherBiomeAccessType.INSTANCE;
-
 	@Inject(method = "getBiomeAccessType", at = @At("HEAD"), cancellable = true)
 	private void biomeAccessType(CallbackInfoReturnable<BiomeAccessType> info)
 	{
-		DimensionType self = (DimensionType) (Object) this;
+		/*DimensionType self = (DimensionType) (Object) this;
 		if (self == THE_NETHER)
 		{
-			info.setReturnValue(TYPE);
+			info.setReturnValue(NetherBiomeAccessType.INSTANCE);
 			info.cancel();
-		}
-		else if (self == OVERWORLD)
+		}*/
+		/*else if (self == OVERWORLD)
 		{
 			info.setReturnValue(TYPE);
 			info.cancel();
-		}
+		}*/
 	}
 }

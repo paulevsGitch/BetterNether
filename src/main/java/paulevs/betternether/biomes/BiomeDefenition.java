@@ -4,9 +4,11 @@ import java.util.Random;
 
 import com.google.common.collect.ImmutableList;
 
+import net.minecraft.client.sound.MusicType;
 import net.minecraft.sound.BiomeAdditionsSound;
 import net.minecraft.sound.BiomeMoodSound;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.MixedNoisePoint;
 import net.minecraft.world.biome.Biome.Settings;
@@ -98,6 +100,7 @@ public class BiomeDefenition
 			effects.additionsSound(additions);
 		if (particleConfig != null)
 			effects.particleConfig(particleConfig);
+		effects.music(MusicType.method_27283(SoundEvents.MUSIC_NETHER_WARPED_FOREST));
 		
 		return new Settings()
 				.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)
