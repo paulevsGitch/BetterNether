@@ -46,7 +46,7 @@ public class BNWorldGenerator
 	/*public static final StructureFeature<DefaultFeatureConfig> CITY = Registry.register(
 			Registry.STRUCTURE_FEATURE,
 			new Identifier(BetterNether.MOD_ID, "nether_city"),
-			new CityFeature(DefaultFeatureConfig::deserialize)
+			new CityFeature(DefaultFeatureConfig.CODEC)
 			);*/
 	
 	public static void onModInit()
@@ -59,15 +59,15 @@ public class BNWorldGenerator
 		
 		/*if (Config.getBoolean("generator_world", "generate_cities", true))
 		{
-			ConfiguredFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> sFeature = CITY.configure(FeatureConfig.DEFAULT);
-			ConfiguredFeature<?, ?> feature = CITY.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT));
+			ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> sFeature = CITY.configure(FeatureConfig.DEFAULT);
+			//ConfiguredFeature<?, ?> feature = CITY.configure(new StructurePoolFeatureConfig(new Identifier("village/plains/town_centers"), 6));
 			for (Biome b: Registry.BIOME)
 				if (b.getCategory() == Category.NETHER)
 				{
 					b.addStructureFeature(sFeature);
-					b.addFeature(GenerationStep.Feature.RAW_GENERATION, feature);
+					//b.addFeature(GenerationStep.Feature.RAW_GENERATION, feature);
 				}
-			Feature.STRUCTURES.put("nether_city", CITY);
+			//Feature.STRUCTURES.put("nether_city", CITY);
 		}*/
 	}
 

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "betternether:cincinnasite_block"
+  },
+  "result": "betternether:cincinnasite_forged",
+  "experience": 0.0,
+  "cookingtime": 100
+}

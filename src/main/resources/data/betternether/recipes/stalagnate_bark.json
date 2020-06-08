@@ -6,10 +6,11 @@
   ],
   "key": {
     "#": {
-      "item": "betternether:stalagnate_stem"
+      "item": "betternether:stalagnate_log"
     }
   },
   "result": {
-    "item": "betternether:stalagnate_bark"
+    "item": "betternether:stalagnate_bark",
+	"count": 3
   }
 }

@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "crafting_shaped",
   "pattern": [
     "#"
   ],
   "key": {
     "#": {
-      "item": "betternether:stalagnate_bark"
+      "item": "betternether:striped_stalagnate_log"
     }
   },
   "result": {
