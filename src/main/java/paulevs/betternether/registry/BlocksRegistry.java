@@ -319,8 +319,8 @@ public class BlocksRegistry
 	public static final Block RUBEUS_CONE = registerBlock("rubeus_cone",  new BlockRubeusCone());
 	public static final Block STRIPED_LOG_RUBEUS = registerBlock("striped_log_rubeus", new BNPillar(MaterialColor.MAGENTA));
 	public static final Block STRIPED_BARK_RUBEUS = registerBlock("striped_bark_rubeus", new BNPillar(MaterialColor.MAGENTA));
-	public static final Block RUBEUS_LOG = registerBlock("rubeus_log", new RubeusLog(STRIPED_LOG_WART));
-	public static final Block RUBEUS_BARK = registerBlock("rubeus_bark", new RubeusLog(STRIPED_BARK_WART));
+	public static final Block RUBEUS_LOG = registerBlock("rubeus_log", new RubeusLog(STRIPED_LOG_RUBEUS));
+	public static final Block RUBEUS_BARK = registerBlock("rubeus_bark", new RubeusLog(STRIPED_BARK_RUBEUS));
 	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves());
 	public static final Block RUBEUS_PLANKS = registerBlock("rubeus_planks", new BNPlanks(MaterialColor.MAGENTA));
 	public static final Block RUBEUS_STAIRS = registerBlock("rubeus_stairs", new BNStairs(WART_PLANKS));
