@@ -30,7 +30,6 @@ public class EntityRegistry
 {
 	public static final Map<EntityType<? extends LivingEntity>, DefaultAttributeContainer> ATTRUBUTES = new HashMap<EntityType<? extends LivingEntity>, DefaultAttributeContainer>();
 	private static final List<EntityType<?>> NETHER_ENTITIES = new ArrayList<EntityType<?>>();
-	private static final Biome[] NETHER_BIOMES;
 	
 	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, EntityChair::new).dimensions(EntityDimensions.fixed(0.0F, 0.0F)).fireImmune().trackable(10, 1).build();
 	public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityNagaProjectile::new).dimensions(EntityDimensions.fixed(1F, 1F)).disableSummon().trackable(60, 1).build();
@@ -41,12 +40,21 @@ public class EntityRegistry
 	
 	public static void register()
 	{
+		NETHER_ENTITIES.add(EntityType.GHAST);
+		NETHER_ENTITIES.add(EntityType.ZOMBIFIED_PIGLIN);
+		NETHER_ENTITIES.add(EntityType.PIGLIN);
+		NETHER_ENTITIES.add(EntityType.HOGLIN);
+		NETHER_ENTITIES.add(EntityType.BLAZE);
+		NETHER_ENTITIES.add(EntityType.STRIDER);
+		
+		Biome[] NETHER_BIOMES = getBiomes();
+		
 		registerEntity("chair", CHAIR);
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
 		
-		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 5, 2, 6, NETHER_BIOMES);
-		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 20, 1, 4, NETHER_BIOMES);
-		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 10, 2, 4, NETHER_BIOMES);
+		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 20, 2, 6, NETHER_BIOMES);
+		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 40, 1, 4, NETHER_BIOMES);
+		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 20, 2, 4, NETHER_BIOMES);
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity)
@@ -69,9 +77,9 @@ public class EntityRegistry
 		}
 	}
 	
-	static
+	private static Biome[] getBiomes()
 	{
-		ArrayList<Biome> biomes = new ArrayList<Biome>();
+		ArrayList<Biome> biomes = new ArrayList<Biome>(32);
 		Iterator<Biome> iterator = Registry.BIOME.iterator();
 		while (iterator.hasNext())
 		{
@@ -81,10 +89,8 @@ public class EntityRegistry
 				biomes.add(biome);	
 			}
 		}
-		NETHER_BIOMES = biomes.toArray(new Biome[] {});
-		
-		NETHER_ENTITIES.add(EntityType.GHAST);
-		NETHER_ENTITIES.add(EntityType.ZOMBIFIED_PIGLIN);
+		biomes.addAll(BiomesRegistry.getRegisteredBiomes());
+		return biomes.toArray(new Biome[] {});
 	}
 	
 	public static boolean isNetherEntity(Entity entity)

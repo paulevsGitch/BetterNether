@@ -81,12 +81,11 @@ public class BNChair extends BlockBaseNotFull
 			
 			float yaw = state.get(FACING).getOpposite().asRotation();
 			
-			EntityChair entity = new EntityChair(EntityRegistry.CHAIR, world);
+			EntityChair entity = EntityRegistry.CHAIR.create(world);
+			entity.refreshPositionAndAngles(px, py, pz, yaw, 0);
 			entity.setNoGravity(true);
 			entity.setSilent(true);
 			entity.setInvisible(true);
-			entity.setPos(px, py, pz);
-			entity.setYaw(yaw);
 			if (world.spawnEntity(entity))
 			{
 				player.startRiding(entity, true);
