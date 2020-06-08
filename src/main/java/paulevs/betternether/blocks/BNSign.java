@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.container.NameableContainerFactory;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,13 +17,18 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.SignEditorOpenS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SignType;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
@@ -144,13 +150,31 @@ public class BNSign extends AbstractSignBlock
 	{
 		if (!world.isClient() && placer != null && placer instanceof PlayerEntity)
 		{
-			//ServerPlayerEntity player = (ServerPlayerEntity) placer;
-			//player.openEditSignScreen((NetherSignBlockEntity) world.getBlockEntity(pos));
+			ServerPlayerEntity player = (ServerPlayerEntity) placer;
+			//((NetherSignBlockEntity) world.getBlockEntity(pos)).setEditor(player);
+			//player.networkHandler.sendPacket(new SignEditorOpenS2CPacket(pos));
+			//player.
+			//player.openEditSignScreen(new SignBlockEntity());
+			//player.openEditBookScreen(new ItemStack(Items.WRITABLE_BOOK), player.getActiveHand());
+			
 			/*SignBlockEntity sign = (SignBlockEntity) world.getBlockEntity(pos);
 			sign.setEditable(true);
 			sign.setEditor(player);
 			player.networkHandler.sendPacket(new SignEditorOpenS2CPacket(pos));*/
+			player.openContainer((NameableContainerFactory) world.getBlockEntity(pos));
 		}
+	}
+	
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
+	{
+		if (!world.isClient())
+		{
+			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+			((NetherSignBlockEntity) world.getBlockEntity(pos)).setEditor(serverPlayer);
+			serverPlayer.networkHandler.sendPacket(new SignEditorOpenS2CPacket(pos));
+		}
+		return ActionResult.FAIL;
 	}
 
 	@Override

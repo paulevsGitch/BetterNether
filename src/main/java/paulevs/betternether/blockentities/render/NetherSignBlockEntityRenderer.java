@@ -27,11 +27,11 @@ import net.minecraft.util.SignType;
 import paulevs.betternether.blockentities.NetherSignBlockEntity;
 import paulevs.betternether.blocks.BNSign;
 
-public class BNSignBlockEntityRenderer extends BlockEntityRenderer<NetherSignBlockEntity>
+public class NetherSignBlockEntityRenderer extends BlockEntityRenderer<NetherSignBlockEntity>
 {
 	private final SignBlockEntityRenderer.SignModel model = new SignBlockEntityRenderer.SignModel();
 
-	public BNSignBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher)
+	public NetherSignBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher)
 	{
 		super(dispatcher);
 	}
@@ -41,7 +41,7 @@ public class BNSignBlockEntityRenderer extends BlockEntityRenderer<NetherSignBlo
 	{
 		BlockState blockState = signBlockEntity.getCachedState();
 		matrixStack.push();
-		float h = -((float) ((Integer) blockState.get(BNSign.ROTATION) * 360) / 16.0F);
+		float h = -(blockState.get(BNSign.ROTATION) * 360F / 16.0F);
 		
 		matrixStack.translate(0.5D, 0.5D, 0.5D);
 		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(h));
@@ -59,9 +59,7 @@ public class BNSignBlockEntityRenderer extends BlockEntityRenderer<NetherSignBlo
 		matrixStack.push();
 		matrixStack.scale(0.6666667F, -0.6666667F, -0.6666667F);
 		SpriteIdentifier spriteIdentifier = getModelTexture(blockState.getBlock());
-		SignBlockEntityRenderer.SignModel var10002 = this.model;
-		var10002.getClass();
-		VertexConsumer vertexConsumer = spriteIdentifier.getVertexConsumer(vertexConsumerProvider, var10002::getLayer);
+		VertexConsumer vertexConsumer = spriteIdentifier.getVertexConsumer(vertexConsumerProvider, model::getLayer);
 		this.model.field.render(matrixStack, vertexConsumer, i, j);
 		this.model.foot.render(matrixStack, vertexConsumer, i, j);
 		matrixStack.pop();

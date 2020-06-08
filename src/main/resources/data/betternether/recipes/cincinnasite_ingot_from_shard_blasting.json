@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "betternether:cincinnasite"
+  },
+  "result": "betternether:cincinnasite_ingot",
+  "experience": 0.0,
+  "cookingtime": 100
+}

@@ -9,8 +9,11 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.container.Container;
+import net.minecraft.container.NameableContainerFactory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.command.CommandOutput;
@@ -22,12 +25,13 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
-public class NetherSignBlockEntity extends BlockEntity
+public class NetherSignBlockEntity extends BlockEntity// implements NameableContainerFactory
 {
 	public final Text[] text = new Text[] {
 			new LiteralText(""),
@@ -210,4 +214,16 @@ public class NetherSignBlockEntity extends BlockEntity
 			return false;
 		}
 	}
+
+	/*@Override
+	public Container createMenu(int syncId, PlayerInventory inv, PlayerEntity player)
+	{
+		return new SignContainer(syncId);
+	}*/
+
+	/*@Override
+	public Text getDisplayName()
+	{
+		return new TranslatableText("sign", new Object[0]);
+	}*/
 }
