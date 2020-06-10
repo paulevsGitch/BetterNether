@@ -7,7 +7,6 @@
 	"MushroomMixin",
 	"MapMixin",
 	"MapStateMixin",
-	"LocateMixin",
 	"GrassGrowMixin",
 	"LightStorageMixin",
 	"NetherWartMixin",

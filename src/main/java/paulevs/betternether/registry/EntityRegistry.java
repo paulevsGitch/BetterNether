@@ -2,9 +2,9 @@ package paulevs.betternether.registry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
@@ -12,12 +12,14 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.IBiome;
 import paulevs.betternether.entity.EntityChair;
@@ -79,22 +81,16 @@ public class EntityRegistry
 	
 	private static Biome[] getBiomes()
 	{
-		ArrayList<Biome> biomes = new ArrayList<Biome>(32);
-		Iterator<Biome> iterator = Registry.BIOME.iterator();
-		while (iterator.hasNext())
-		{
-			Biome biome = iterator.next();
-			if (biome.getCategory() == Category.NETHER)
-			{
-				biomes.add(biome);	
-			}
-		}
-		biomes.addAll(BiomesRegistry.getRegisteredBiomes());
-		return biomes.toArray(new Biome[] {});
+		return BiomesRegistry.getRegisteredBiomes().toArray(new Biome[] {});
 	}
 	
 	public static boolean isNetherEntity(Entity entity)
 	{
 		return NETHER_ENTITIES.contains(entity.getType());
+	}
+	
+	public static boolean alwaysSpawn(EntityType<?> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
+	{
+		return true;
 	}
 }

@@ -62,8 +62,8 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 	@Override
 	public void attack(LivingEntity target, float f)
 	{
-		EntityNagaProjectile projectile = new EntityNagaProjectile(EntityRegistry.NAGA_PROJECTILE, world);
-		projectile.setPos(getX(), getEyeY(), getZ());
+		EntityNagaProjectile projectile = EntityRegistry.NAGA_PROJECTILE.create(world);
+		projectile.updatePositionAndAngles(getX(), getEyeY(), getZ(), 0, 0);
 		projectile.setParams(this, target);
 		world.spawnEntity(projectile);
 		this.playSound(SoundsRegistry.MOB_NAGA_ATTACK, MHelper.randRange(3F, 5F, random), MHelper.randRange(0.75F, 1.25F, random));

@@ -20,33 +20,36 @@ public class Config
 	private static JsonObject config;
 	private static boolean rewrite = false;
 
-	public static void load()
+	private static void load()
 	{
-		File file = getFile();
-		if (file.exists())
+		if (config == null)
 		{
-			Gson gson = new Gson();
-			try
+			File file = getFile();
+			if (file.exists())
 			{
-				Reader reader = new FileReader(file);
-				config = gson.fromJson(reader, JsonObject.class);
-				if (config == null)
+				Gson gson = new Gson();
+				try
 				{
+					Reader reader = new FileReader(file);
+					config = gson.fromJson(reader, JsonObject.class);
+					if (config == null)
+					{
+						config = new JsonObject();
+						rewrite = true;
+					}
+				}
+				catch (FileNotFoundException e)
+				{
+					e.printStackTrace();
 					config = new JsonObject();
 					rewrite = true;
 				}
 			}
-			catch (FileNotFoundException e)
+			else
 			{
-				e.printStackTrace();
 				config = new JsonObject();
 				rewrite = true;
 			}
-		}
-		else
-		{
-			config = new JsonObject();
-			rewrite = true;
 		}
 	}
 
@@ -78,6 +81,7 @@ public class Config
 
 	public static boolean getBoolean(String group, String name, boolean def)
 	{
+		load();
 		name += "[def: " + def + "]";
 		JsonObject jGroup = config.getAsJsonObject(group);
 		if (jGroup != null)
@@ -106,6 +110,7 @@ public class Config
 	
 	public static float getFloat(String group, String name, float def)
 	{
+		load();
 		name += "[def: " + def + "]";
 		JsonObject jGroup = config.getAsJsonObject(group);
 		if (jGroup != null)
@@ -134,6 +139,7 @@ public class Config
 	
 	public static int getInt(String group, String name, int def)
 	{
+		load();
 		name += "[def: " + def + "]";
 		JsonObject jGroup = config.getAsJsonObject(group);
 		if (jGroup != null)
@@ -162,6 +168,7 @@ public class Config
 	
 	public static String[] getStringArray(String group, String name, String[] def)
 	{
+		load();
 		JsonObject jGroup = config.getAsJsonObject(group);
 		if (jGroup != null)
 		{
@@ -189,6 +196,7 @@ public class Config
 	
 	private static String[] toStringArray(JsonArray array)
 	{
+		load();
 		String[] result = new String[array.size()];
 		for (int i = 0; i < array.size(); i++)
 			result[i] = array.get(i).getAsString();
@@ -197,6 +205,7 @@ public class Config
 	
 	private static JsonArray toJsonArray(String[] array)
 	{
+		load();
 		JsonArray result = new JsonArray();
 		for (String s: array)
 			result.add(s);
@@ -205,6 +214,7 @@ public class Config
 	
 	public static JsonArray getJsonArray(String group, String name, JsonArray def)
 	{
+		load();
 		JsonObject jGroup = config.getAsJsonObject(group);
 		if (jGroup != null)
 		{

@@ -8,44 +8,49 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
+import paulevs.betternether.config.Config;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.piece.CavePiece;
 import paulevs.betternether.world.structures.piece.CityPiece;
 
 public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 {
+	private static final ChunkRandom RANDOM = new ChunkRandom();
+	private final int distance;
+	private final int separation;
+	
 	public CityFeature(Codec<DefaultFeatureConfig> codec)
 	{
 		super(codec);
+		distance = Config.getInt("generator_world", "city_distance", 64);
+		separation = distance >> 1;
 	}
 
 	private static final CityGenerator GENERATOR = new CityGenerator();
 	
-	/*public CityFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configFactory)
+	@Override
+	protected boolean shouldStartAt(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long seed, ChunkRandom chunkRandom, int i, int j, Biome biome, ChunkPos chunkPos, DefaultFeatureConfig defaultFeatureConfig)
 	{
-		super(configFactory);
+		int q = chunkPos.x < 0 ? chunkPos.x - separation + 1 : chunkPos.x;
+		int r = chunkPos.z < 0 ? chunkPos.z - separation + 1 : chunkPos.z;
+		int s = q / distance;
+		int t = r / distance;
+		RANDOM.setRegionSeed(seed, s, t, 897527);
+		s *= distance;
+		t *= distance;
+		s += RANDOM.nextInt(separation);
+		t += RANDOM.nextInt(separation);
+		return s == chunkPos.x && t == chunkPos.z;
 	}
-
-	protected int getSpacing(DimensionType dimensionType, ChunkGeneratorConfig chunkGeneratorConfig)
-	{
-		return 64;
-	}
-
-	protected int getSeparation(DimensionType dimensionType, ChunkGeneratorConfig chunkGeneratorConfig)
-	{
-		return 32;
-	}
-
-	protected int getSeedModifier(ChunkGeneratorConfig chunkGeneratorConfig)
-	{
-		return 897527;
-	}*/
 
 	@Override
 	public StructureStartFactory<DefaultFeatureConfig> getStructureStartFactory()
@@ -56,14 +61,8 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 	@Override
 	public String getName()
 	{
-		return "Nether City";
+		return "nether_city";
 	}
-
-	/*@Override
-	public int getRadius()
-	{
-		return 16;
-	}*/
 
 	public static class CityStart extends StructureStart<DefaultFeatureConfig>
 	{

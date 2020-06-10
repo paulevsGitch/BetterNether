@@ -23,7 +23,6 @@ public class BetterNether implements ModInitializer
 	@Override
 	public void onInitialize()
 	{
-		Config.load();
 		initOptions();
 		SoundsRegistry.register();
 		StructureTypes.init();

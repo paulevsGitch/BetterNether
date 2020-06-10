@@ -1,17 +1,28 @@
 package paulevs.betternether.world;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.GenerationStep.Feature;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Config;
@@ -19,6 +30,7 @@ import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructureType;
+import paulevs.betternether.world.structures.CityFeature;
 
 public class BNWorldGenerator
 {
@@ -43,12 +55,13 @@ public class BNWorldGenerator
 	private static StructureCaves caves;
 	private static NetherBiome biome;
 
-	/*public static final StructureFeature<DefaultFeatureConfig> CITY = Registry.register(
+	public static final StructureFeature<DefaultFeatureConfig> CITY = Registry.register(
 			Registry.STRUCTURE_FEATURE,
 			new Identifier(BetterNether.MOD_ID, "nether_city"),
 			new CityFeature(DefaultFeatureConfig.CODEC)
-			);*/
+			);
 	
+	@SuppressWarnings("unchecked")
 	public static void onModInit()
 	{
 		hasCleaningPass = Config.getBoolean("generator_world", "terrain_cleaning_pass", true);
@@ -57,18 +70,39 @@ public class BNWorldGenerator
 		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
 		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 32F);
 		
-		/*if (Config.getBoolean("generator_world", "generate_cities", true))
+		if (Config.getBoolean("generator_world", "generate_cities", true))
 		{
-			ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> sFeature = CITY.configure(FeatureConfig.DEFAULT);
-			//ConfiguredFeature<?, ?> feature = CITY.configure(new StructurePoolFeatureConfig(new Identifier("village/plains/town_centers"), 6));
-			for (Biome b: Registry.BIOME)
-				if (b.getCategory() == Category.NETHER)
+			StructureFeature.STRUCTURES.put("nether_city", CITY);
+			
+			Map<StructureFeature<?>, GenerationStep.Feature> genStep = null;
+			for (Field f: StructureFeature.class.getDeclaredFields())
+			{
+				if (f.getType().equals(Map.class))
 				{
-					b.addStructureFeature(sFeature);
-					//b.addFeature(GenerationStep.Feature.RAW_GENERATION, feature);
+					f.setAccessible(true);
+					try
+					{
+						genStep = (Map<StructureFeature<?>, Feature>) f.get(StructureFeature.class);
+					}
+					catch (IllegalArgumentException | IllegalAccessException e)
+					{
+						e.printStackTrace();
+					}
+					break;
 				}
-			//Feature.STRUCTURES.put("nether_city", CITY);
-		}*/
+			}
+			if (genStep != null)
+				genStep.put(CITY, GenerationStep.Feature.RAW_GENERATION);
+			else
+				System.out.println("Cities faild adding to generation");
+			
+			ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> sFeature = CITY.configure(FeatureConfig.DEFAULT);
+			
+			for (Biome b: BiomesRegistry.getRegisteredBiomes())
+			{
+				b.addStructureFeature(sFeature);
+			}
+		}
 	}
 
 	public static void init(long seed)
