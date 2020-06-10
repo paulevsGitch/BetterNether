@@ -12,7 +12,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.ArmorStandEntityRenderer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.feature.ArmorBipedFeatureRenderer;
+import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.model.ArmorStandArmorEntityModel;
 import net.minecraft.entity.decoration.ArmorStandEntity;
@@ -37,13 +37,13 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStandEnt
 			while (iterator.hasNext())
 			{
 				FeatureRenderer<ArmorStandEntity, ArmorStandArmorEntityModel> feature = iterator.next();
-				if (feature instanceof ArmorBipedFeatureRenderer)
+				if (feature instanceof ArmorFeatureRenderer)
 				{
 					this.features.remove(feature);
 					break;
 				}
 			}
-			this.features.add(0, new ArmorBipedFeatureRenderer(this, new ArmorStandArmorEntityModel(0.25F), new ArmorStandArmorEntityModel(0.5F)));
+			this.features.add(0, new ArmorFeatureRenderer(this, new ArmorStandArmorEntityModel(0.25F), new ArmorStandArmorEntityModel(0.5F)));
 		}
 	}
 }

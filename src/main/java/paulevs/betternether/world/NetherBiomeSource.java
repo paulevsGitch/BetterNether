@@ -18,21 +18,19 @@ public class NetherBiomeSource extends MultiNoiseBiomeSource
 	
 	public NetherBiomeSource(long seed, boolean volumetric)
 	{
-		//super(buildBiomes());
 		super(seed, Collections.emptyList(), null);
 		int sizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
 		int sizeY = Config.getInt("generator_world", "biome_size_y", 40);
 		this.map = new BiomeMap(seed, sizeXZ, sizeY, volumetric);
 	}
 	
-	private NetherBiomeSource(long seed, ImmutableList<Pair<MixedNoisePoint, Biome>> biomes, Optional<class_5305> optional, BiomeMap map)
+	private NetherBiomeSource(long seed, ImmutableList<Pair<MixedNoisePoint, Biome>> biomes, Optional<Preset> optional, BiomeMap map)
 	{
-		//super(biomes);
 		super(seed, biomes, optional);
 		this.map = map;
 	}
 
-	public NetherBiomeSource(long seed, ImmutableList<Pair<MixedNoisePoint, Biome>> biomes, Optional<class_5305> optional, boolean volumetric)
+	public NetherBiomeSource(long seed, ImmutableList<Pair<MixedNoisePoint, Biome>> biomes, Optional<Preset> optional, boolean volumetric)
 	{
 		super(seed, biomes, optional);
 		int sizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
@@ -48,28 +46,12 @@ public class NetherBiomeSource extends MultiNoiseBiomeSource
 			map.clearCache();
 		return biome;
 	}
-	
-	/*private static List<Biome> buildBiomes()
-	{
-		List<Biome> biomes = new ArrayList<Biome>();
-		for (NetherBiome nb: BiomesRegistry.getRegisteredBiomes())
-		{
-			biomes.add(nb.getBiome());
-		}
-		return biomes;
-	}*/
-
-	/*@Override
-	protected Codec<? extends BiomeSource> method_28442()
-	{
-		return MultiNoiseBiomeSource.CODEC;
-	}*/
 
 	@Override
 	public BiomeSource withSeed(long seed)
 	{
 		ImmutableList<Pair<MixedNoisePoint, Biome>> biomes = this.biomes.stream().flatMap((biome) -> biome.streamNoises().map((point) -> Pair.of(point, biome))).collect(ImmutableList.toImmutableList());
-		Optional<class_5305> optional = Optional.of(MultiNoiseBiomeSource.class_5305.field_24723);
+		Optional<Preset> optional = Optional.of(Preset.NETHER);
 		return new NetherBiomeSource(seed, biomes, optional, this.map);
 	}
 }

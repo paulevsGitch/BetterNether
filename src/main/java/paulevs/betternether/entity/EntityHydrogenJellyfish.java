@@ -204,7 +204,7 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer
 	public void onDeath(DamageSource source)
 	{
 		super.onDeath(source);
-		Explosion.DestructionType destructionType = this.world.getGameRules().getBoolean(GameRules.MOB_GRIEFING) ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE;
+		Explosion.DestructionType destructionType = this.world.getGameRules().getBoolean(GameRules.field_19388) ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE;
 		this.world.createExplosion(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
 		if (world.isClient)
 		{

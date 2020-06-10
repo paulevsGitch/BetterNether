@@ -15,7 +15,7 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.MixedNoisePoint;
 import net.minecraft.world.biome.source.MultiNoiseBiomeSource;
-import net.minecraft.world.biome.source.MultiNoiseBiomeSource.class_5305;
+import net.minecraft.world.biome.source.MultiNoiseBiomeSource.Preset;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.world.NetherBiomeSource;
@@ -33,7 +33,7 @@ public class MultiNoiseBiomeSourceMixin
 		}
 			
 		ImmutableList<Pair<MixedNoisePoint, Biome>> biomes = newList.stream().flatMap((biome) -> biome.streamNoises().map((point) -> Pair.of(point, biome))).collect(ImmutableList.toImmutableList());
-		Optional<class_5305> optional = Optional.of(MultiNoiseBiomeSource.class_5305.field_24723);
+		Optional<Preset> optional = Optional.of(Preset.NETHER);
 		info.setReturnValue(new NetherBiomeSource(seed, biomes, optional, true));
 		info.cancel();
 	}

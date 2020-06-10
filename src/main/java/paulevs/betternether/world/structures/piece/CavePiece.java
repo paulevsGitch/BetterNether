@@ -57,7 +57,7 @@ public class CavePiece extends CustomPiece
 	public boolean generate(ServerWorldAccess world, StructureAccessor arg, ChunkGenerator chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
 	{
 		BlockState bottom = LAVA;
-		if (!(world.getDimension().isNether()))
+		if (!(world.getDimension().hasCeiling()))
 		{
 			bottom = Blocks.NETHERRACK.getDefaultState();
 		}
