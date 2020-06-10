@@ -10,7 +10,6 @@
 	"GrassGrowMixin",
 	"LightStorageMixin",
 	"NetherWartMixin",
-	"BiomeMixin",
 	"PlayerEntityMixin",
 	"DefaultAttributeRegistryMixin",
 	"DeltaFeatureMixin",
@@ -18,7 +17,9 @@
 	"SpawnRestrictionMixin",
 	"BrewingRecipeRegistryMixin",
 	"ServerWorldMixin",
-	"MultiNoiseBiomeSourceMixin"
+	"MultiNoiseBiomeSourceMixin",
+	"SpawnHelperMixin",
+	"BiomeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

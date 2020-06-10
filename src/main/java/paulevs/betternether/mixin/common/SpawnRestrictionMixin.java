@@ -19,7 +19,7 @@ public class SpawnRestrictionMixin
 	static
 	{
 		register(EntityRegistry.NAGA, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityNaga::canSpawn);
-		register(EntityRegistry.FIREFLY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityRegistry::alwaysSpawn);
-		register(EntityRegistry.HYDROGEN_JELLYFISH, SpawnRestriction.Location.IN_LAVA, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityRegistry::alwaysSpawn);
+		register(EntityRegistry.FIREFLY, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING, EntityRegistry::alwaysSpawn);
+		register(EntityRegistry.HYDROGEN_JELLYFISH, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityRegistry::alwaysSpawn);
 	}
 }

@@ -117,6 +117,8 @@ public class NetherBiome extends Biome
 		this.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
 		this.addSpawn(SpawnGroup.CREATURE, new Biome.SpawnEntry(EntityType.STRIDER, 60, 2, 4));
 		
+		this.addSpawnDensity(EntityType.GHAST, 1.0D, 0.04D);
+		
 		this.name = defenition.getName();
 		subbiomes = new ArrayList<Subbiome>();
 		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.8F, true);
@@ -464,5 +466,11 @@ public class NetherBiome extends Biome
 	public boolean hasCeilStructures()
 	{
 		return !buildGeneratorsCeil.isEmpty();
+	}
+	
+	public void addEntitySpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize)
+	{
+		this.addSpawn(type.getSpawnGroup(), new SpawnEntry(type, weight, minGroupSize, maxGroupSize));
+		this.addSpawnDensity(type, 1.0D, 0.5D);
 	}
 }

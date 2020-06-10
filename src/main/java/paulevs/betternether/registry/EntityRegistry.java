@@ -1,6 +1,7 @@
 package paulevs.betternether.registry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +20,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.Biome;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.IBiome;
+import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
@@ -49,13 +49,14 @@ public class EntityRegistry
 		NETHER_ENTITIES.add(EntityType.BLAZE);
 		NETHER_ENTITIES.add(EntityType.STRIDER);
 		
-		Biome[] NETHER_BIOMES = getBiomes();
+		NetherBiome[] NETHER_BIOMES = getBiomes();
+		System.out.println(Arrays.toString(NETHER_BIOMES));
 		
 		registerEntity("chair", CHAIR);
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
 		
-		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 20, 2, 6, NETHER_BIOMES);
-		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 40, 1, 4, NETHER_BIOMES);
+		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 60, 2, 6, NETHER_BIOMES);
+		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 100, 1, 4, NETHER_BIOMES);
 		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 20, 2, 4, NETHER_BIOMES);
 	}
 	
@@ -64,24 +65,23 @@ public class EntityRegistry
 		registerEntity(name, entity, MobEntity.createMobAttributes().build(), 0, 0, 0);
 	}
 	
-	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity, DefaultAttributeContainer container, int weight, int minGroupSize, int maxGroupSize, Biome... spawnBiomes)
+	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity, DefaultAttributeContainer container, int weight, int minGroupSize, int maxGroupSize, NetherBiome... spawnBiomes)
 	{
 		Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
 		ATTRUBUTES.put(entity, container);
 		if (spawnBiomes != null)
 		{
-			for (Biome b: spawnBiomes)
+			for (NetherBiome biome: spawnBiomes)
 			{
-				IBiome biome = (IBiome) b;
 				biome.addEntitySpawn(entity, weight, minGroupSize, maxGroupSize);
 			}
 			NETHER_ENTITIES.add(entity);
 		}
 	}
 	
-	private static Biome[] getBiomes()
+	private static NetherBiome[] getBiomes()
 	{
-		return BiomesRegistry.getRegisteredBiomes().toArray(new Biome[] {});
+		return BiomesRegistry.getRegisteredBiomes().toArray(new NetherBiome[] {});
 	}
 	
 	public static boolean isNetherEntity(Entity entity)

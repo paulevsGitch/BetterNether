@@ -1,5 +1,9 @@
 package paulevs.betternether.mixin.common;
 
+import java.util.List;
+import java.util.Map;
+
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -13,7 +17,11 @@ import paulevs.betternether.IBiome;
 public class BiomeMixin implements IBiome
 {
 	@Shadow
-	protected void addSpawn(SpawnGroup type, Biome.SpawnEntry spawnEntry) {}
+	@Final
+	private Map<SpawnGroup, List<Biome.SpawnEntry>> spawns;
+	
+	@Shadow
+	protected void addSpawn(SpawnGroup type, SpawnEntry spawnEntry) {}
 	
 	@Override
 	public void addEntitySpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize)
