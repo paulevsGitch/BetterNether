@@ -3,31 +3,26 @@ package paulevs.betternether.world.structures.city;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.collect.ImmutableList;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.Structure.StructureBlockInfo;
 import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.processor.RuleStructureProcessor;
 import net.minecraft.structure.processor.StructureProcessor;
-import net.minecraft.structure.processor.StructureProcessorRule;
-import net.minecraft.structure.rule.AlwaysTrueRuleTest;
-import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
-import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureNBT;
+import paulevs.betternether.world.structures.city.palette.Palettes;
 
 public class StructureCityBuilding extends StructureNBT
 {
 	protected static final BlockState AIR = Blocks.AIR.getDefaultState();
-	protected static final StructureProcessor REPLACE = makeProcessorReplace();
+	//protected static final StructureProcessor REPLACE = makeProcessorReplace();
+	protected static final StructureProcessor REPLACE = new BuildingStructureProcessor(Palettes.RED_PALETTE);
 	
 	private BoundingBox bb;
 	public BlockPos[] ends;
@@ -97,36 +92,6 @@ public class StructureCityBuilding extends StructureNBT
 	public BoundingBox getBoungingBox()
 	{
 		return bb;
-	}
-	
-	public void place(WorldAccess world, BlockPos pos)
-	{
-		BlockPos p = pos.add(rotationOffset);
-		structure.place(world, p, new StructurePlacementData().setRotation(rotation), world.getRandom());
-		for (BlockPos rep : ends)
-		{
-			BlocksHelper.setWithoutUpdate(world, rep.add(pos), AIR);
-		}
-		BlockState state;
-		int d;
-		for (int x = 0; x < bb.x2; x++)
-			for (int z = 0; z < bb.z2; z++)
-			{
-				p = pos.add(x, 0, z);
-				state = world.getBlockState(p);
-				if (state.isFullCube(world, p))
-				{
-					for (d = 1; d < pos.getY() - 5; d++)
-					{
-						if (BlocksHelper.isNetherGroundMagma(world.getBlockState(p.down(d))))
-							break;
-					}
-					for (int y = 1; y < d; y++)
-					{
-						BlocksHelper.setWithoutUpdate(world, p.down(y), state);
-					}
-				}
-			}
 	}
 	
 	protected BlockRotation mirrorRotation(BlockRotation r)
@@ -238,7 +203,7 @@ public class StructureCityBuilding extends StructureNBT
 		return rotation;
 	}
 
-	private static StructureProcessor makeProcessorReplace()
+	/*private static StructureProcessor makeProcessorReplace()
 	{
 		return new RuleStructureProcessor(
 				ImmutableList.of(
@@ -249,7 +214,7 @@ public class StructureCityBuilding extends StructureNBT
 						)
 				)
 		);
-	}
+	}*/
 	
 	@Override
 	public BlockBox getBoundingBox(BlockPos pos)
