@@ -7,7 +7,8 @@
 	"LavaFluidMixin",
 	"StandArmorMixin",
 	"PlayerArmorMixin",
-	"PresetsScreenMixin"
+	"PresetsScreenMixin",
+	"ModelLoaderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

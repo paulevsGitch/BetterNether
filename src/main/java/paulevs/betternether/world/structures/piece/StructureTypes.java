@@ -9,11 +9,9 @@ public class StructureTypes
 {
 	public static final StructurePieceType NETHER_CITY = register(CityPiece::new, "bncity");
 	public static final StructurePieceType CAVE = register(CavePiece::new, "bncave");
+	public static final StructurePieceType DESTRUCTION = register(DestructionPiece::new, "bndestr");
 	
-	public static void init()
-	{
-		
-	}
+	public static void init() {}
 	
 	protected static StructurePieceType register(StructurePieceType pieceType, String id)
 	{

@@ -1,7 +1,6 @@
 package paulevs.betternether.registry;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +49,6 @@ public class EntityRegistry
 		NETHER_ENTITIES.add(EntityType.STRIDER);
 		
 		NetherBiome[] NETHER_BIOMES = getBiomes();
-		System.out.println(Arrays.toString(NETHER_BIOMES));
 		
 		registerEntity("chair", CHAIR);
 		registerEntity("naga_projectile", NAGA_PROJECTILE);

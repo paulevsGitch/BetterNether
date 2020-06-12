@@ -16,13 +16,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.structures.StructureNBT;
-import paulevs.betternether.world.structures.city.palette.Palettes;
 
 public class StructureCityBuilding extends StructureNBT
 {
 	protected static final BlockState AIR = Blocks.AIR.getDefaultState();
-	//protected static final StructureProcessor REPLACE = makeProcessorReplace();
-	protected static final StructureProcessor REPLACE = new BuildingStructureProcessor(Palettes.RED_PALETTE);
 	
 	private BoundingBox bb;
 	public BlockPos[] ends;
@@ -105,14 +102,14 @@ public class StructureCityBuilding extends StructureNBT
 		}
 	}
 	
-	public void placeInChunk(WorldAccess world, BlockPos pos, BlockBox boundingBox)
+	public void placeInChunk(WorldAccess world, BlockPos pos, BlockBox boundingBox, StructureProcessor paletteProcessor)
 	{
 		BlockPos p = pos.add(rotationOffset);
 		structure.place(world, p, new StructurePlacementData()
 				.setRotation(rotation)
 				.setMirror(mirror)
 				.setBoundingBox(boundingBox)
-				.addProcessor(REPLACE),
+				.addProcessor(paletteProcessor),
 				world.getRandom());
 	}
 

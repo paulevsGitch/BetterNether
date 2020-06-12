@@ -19,6 +19,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.world.structures.city.CityGenerator;
+import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
 import paulevs.betternether.world.structures.piece.CityPiece;
 
@@ -84,7 +85,8 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 			
 			BlockPos center = new BlockPos(px, y, pz);
 			
-			List<CityPiece> buildings = GENERATOR.generate(center, this.random);
+			//CityPalette palette = Palettes.getRandom(random);
+			List<CityPiece> buildings = GENERATOR.generate(center, this.random, Palettes.EMPTY);
 			BlockBox cityBox = BlockBox.empty();
 			for (CityPiece p: buildings)
 				cityBox.encompass(p.getBoundingBox());
@@ -109,6 +111,18 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 				this.children.addAll(buildings);
 				this.setBoundingBoxFromChildren();
 			}
+			
+			/*for (CityPiece p: buildings)
+			{
+				int count = p.getBoundingBox().getBlockCountX() * p.getBoundingBox().getBlockCountY() * p.getBoundingBox().getBlockCountZ();
+				if (count > 0)
+				{
+					count = random.nextInt(count / 512);
+					for (int i = 0; i < count; i++)
+						this.children.add(new DestructionPiece(p.getBoundingBox(), random));
+				}
+			}*/
+						
 			this.boundingBox.minX -= 12;
 			this.boundingBox.maxX += 12;
 			this.boundingBox.minZ -= 12;

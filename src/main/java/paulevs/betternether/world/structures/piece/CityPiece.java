@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.structure.StructureManager;
+import net.minecraft.structure.processor.StructureProcessor;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockBox;
@@ -17,21 +18,28 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.world.structures.city.BuildingStructureProcessor;
 import paulevs.betternether.world.structures.city.StructureCityBuilding;
+import paulevs.betternether.world.structures.city.palette.CityPalette;
+import paulevs.betternether.world.structures.city.palette.Palettes;
 
 public class CityPiece extends CustomPiece
 {
 	private static final Mutable POS = new Mutable();
 
+	private StructureProcessor paletteProcessor;
 	private StructureCityBuilding building;
+	private CityPalette palette;
 	private BlockPos pos;
 
-	public CityPiece(StructureCityBuilding building, BlockPos pos, int id)
+	public CityPiece(StructureCityBuilding building, BlockPos pos, int id, CityPalette palette)
 	{
 		super(StructureTypes.NETHER_CITY, id);
 		this.building = building;
 		this.pos = new BlockPos(pos);
 		this.boundingBox = building.getBoundingBox(pos);
+		this.palette = palette;
+		this.paletteProcessor = new BuildingStructureProcessor(palette);
 	}
 
 	protected CityPiece(StructureManager manager, CompoundTag tag)
@@ -42,6 +50,8 @@ public class CityPiece extends CustomPiece
 		this.building.setMirror(BlockMirror.values()[tag.getInt("mirror")]);
 		this.pos = NbtHelper.toBlockPos(tag.getCompound("pos"));
 		this.boundingBox = building.getBoundingBox(pos);
+		this.palette = Palettes.getPalette(tag.getString("palette"));
+		this.paletteProcessor = new BuildingStructureProcessor(palette);
 	}
 
 	@Override
@@ -52,6 +62,7 @@ public class CityPiece extends CustomPiece
 		tag.putInt("mirror", building.getMirror().ordinal());
 		tag.putInt("offset", building.getYOffset());
 		tag.put("pos", NbtHelper.fromBlockPos(pos));
+		tag.putString("palette", palette.getName());
 	}
 
 	@Override
@@ -71,7 +82,7 @@ public class CityPiece extends CustomPiece
 		clamped.minZ = Math.max(clamped.minZ, blockBox.minZ);
 		clamped.maxZ = Math.min(clamped.maxZ, blockBox.maxZ);
 
-		building.placeInChunk(world, pos, clamped);
+		building.placeInChunk(world, pos, clamped, paletteProcessor);
 		
 		Chunk chunk = world.getChunk(chunkPos.x, chunkPos.z);
 

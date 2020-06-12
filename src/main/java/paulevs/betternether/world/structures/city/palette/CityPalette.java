@@ -6,40 +6,76 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.LanternBlock;
+import net.minecraft.block.PaneBlock;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
+import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WallBlock;
+import net.minecraft.block.WallTorchBlock;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import paulevs.betternether.blocks.BlockPottedPlant;
+import paulevs.betternether.blocks.BlockPottedPlant.PottedPlantShape;
+import paulevs.betternether.blocks.BlockSmallLantern;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class CityPalette
 {
 	private static final Random RANDOM = new Random();
+	private final String name;
 	
-	List<Block> foundationBlocks = new ArrayList<Block>();
-	List<Block> foundationSlabs = new ArrayList<Block>();
-	List<Block> foundationStairs = new ArrayList<Block>();
-	List<Block> foundationWalls = new ArrayList<Block>();
+	private final List<Block> foundationBlocks = new ArrayList<Block>();
+	private final List<Block> foundationSlabs = new ArrayList<Block>();
+	private final List<Block> foundationStairs = new ArrayList<Block>();
+	private final List<Block> foundationWalls = new ArrayList<Block>();
 	
-	List<Block> roofBlocks = new ArrayList<Block>();
-	List<Block> roofSlabs = new ArrayList<Block>();
-	List<Block> roofStairs = new ArrayList<Block>();
+	private final List<Block> roofBlocks = new ArrayList<Block>();
+	private final List<Block> roofSlabs = new ArrayList<Block>();
+	private final List<Block> roofStairs = new ArrayList<Block>();
 	
-	List<Block> planksBlocks = new ArrayList<Block>();
-	List<Block> planksSlabs = new ArrayList<Block>();
-	List<Block> planksStairs = new ArrayList<Block>();
+	private final List<Block> planksBlocks = new ArrayList<Block>();
+	private final List<Block> planksSlabs = new ArrayList<Block>();
+	private final List<Block> planksStairs = new ArrayList<Block>();
 	
-	List<Block> fences = new ArrayList<Block>();
-	List<Block> walls = new ArrayList<Block>();
-	List<Block> gates = new ArrayList<Block>();
+	private final List<Block> fences = new ArrayList<Block>();
+	private final List<Block> walls = new ArrayList<Block>();
+	private final List<Block> gates = new ArrayList<Block>();
 	
-	List<Block> logs = new ArrayList<Block>();
-	List<Block> bark = new ArrayList<Block>();
-	List<Block> stoneBlocks = new ArrayList<Block>();
-	List<Block> stoneSlabs = new ArrayList<Block>();
-	List<Block> stoneStairs = new ArrayList<Block>();
+	private final List<Block> logs = new ArrayList<Block>();
+	private final List<Block> bark = new ArrayList<Block>();
+	private final List<Block> stoneBlocks = new ArrayList<Block>();
+	private final List<Block> stoneSlabs = new ArrayList<Block>();
+	private final List<Block> stoneStairs = new ArrayList<Block>();
+	
+	private final List<Block> glowingBlocks = new ArrayList<Block>();
+	private final List<Block> wallLights = new ArrayList<Block>();
+	private final List<Block> ceilingLights = new ArrayList<Block>();
+	private final List<Block> floorLights = new ArrayList<Block>();
+	
+	private final List<Block> doors = new ArrayList<Block>();
+	private final List<Block> trapdoors = new ArrayList<Block>();
+	private final List<Block> platesStone = new ArrayList<Block>();
+	private final List<Block> platesWood = new ArrayList<Block>();
+	
+	private final List<Block> glassBlocks = new ArrayList<Block>();
+	private final List<Block> glassPanes = new ArrayList<Block>();
+	
+	private final List<Block> pots = new ArrayList<Block>();
+	
+	public CityPalette(String name)
+	{
+		this.name = name;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
 	
 	private CityPalette putBlocks(Block[] blocks, List<Block> list)
 	{
@@ -138,8 +174,68 @@ public class CityPalette
 		return putBlocks(blocks, stoneStairs);
 	}
 	
+	public CityPalette addGlowingBlocks(Block... blocks)
+	{
+		return putBlocks(blocks, glowingBlocks);
+	}
+	
+	public CityPalette addWallLights(Block... blocks)
+	{
+		return putBlocks(blocks, wallLights);
+	}
+	
+	public CityPalette addCeilingLights(Block... blocks)
+	{
+		return putBlocks(blocks, ceilingLights);
+	}
+	
+	public CityPalette addFloorLights(Block... blocks)
+	{
+		return putBlocks(blocks, floorLights);
+	}
+	
+	public CityPalette addDoors(Block... blocks)
+	{
+		return putBlocks(blocks, doors);
+	}
+	
+	public CityPalette addTrapdoors(Block... blocks)
+	{
+		return putBlocks(blocks, trapdoors);
+	}
+	
+	public CityPalette addStonePlates(Block... blocks)
+	{
+		return putBlocks(blocks, platesStone);
+	}
+	
+	public CityPalette addWoodPlates(Block... blocks)
+	{
+		return putBlocks(blocks, platesWood);
+	}
+	
+	public CityPalette addGlassBlocks(Block... blocks)
+	{
+		return putBlocks(blocks, glassBlocks);
+	}
+	
+	public CityPalette addGlassPanes(Block... blocks)
+	{
+		return putBlocks(blocks, glassPanes);
+	}
+	
+	public CityPalette addPotsPanes(Block... blocks)
+	{
+		return putBlocks(blocks, pots);
+	}
+	
 	private Block getRandomBlock(BlockState state, List<Block> list)
 	{
+		if (list.isEmpty())
+			return state.getBlock();
+		else if (list.size() == 1)
+			return list.get(0);
+		
 		String seed = Registry.BLOCK.getId(state.getBlock()).getPath();
 		RANDOM.setSeed(seed.hashCode());
 		return list.get(RANDOM.nextInt(list.size()));
@@ -239,6 +335,68 @@ public class CityPalette
 		return state;
 	}
 	
+	private BlockState copyLanternWall(BlockState source, Block block)
+	{
+		if (source.getBlock() instanceof BlockSmallLantern && !(block instanceof BlockSmallLantern))
+		{
+			Direction facing = source.get(BlockSmallLantern.FACING);
+			BlockState state = block.getDefaultState();
+			if (block instanceof WallTorchBlock)
+			{
+				return state.with(WallTorchBlock.FACING, facing);
+			}
+			return state;
+		}
+		return source;
+	}
+	
+	private BlockState copyLanternCeiling(BlockState source, Block block)
+	{
+		if (source.getBlock() instanceof BlockSmallLantern && !(block instanceof BlockSmallLantern))
+		{
+			BlockState state = block.getDefaultState();
+			if (block instanceof LanternBlock)
+			{
+				return state.with(LanternBlock.HANGING, true);
+			}
+			return state;
+		}
+		return source;
+	}
+	
+	private BlockState copyDoor(BlockState source, Block block)
+	{
+		BlockState state = block.getDefaultState()
+		.with(DoorBlock.FACING, source.get(DoorBlock.FACING))
+		.with(DoorBlock.HALF, source.get(DoorBlock.HALF))
+		.with(DoorBlock.HINGE, source.get(DoorBlock.HINGE))
+		.with(DoorBlock.OPEN, source.get(DoorBlock.OPEN))
+		.with(DoorBlock.POWERED, source.get(DoorBlock.POWERED));
+		return state;
+	}
+	
+	private BlockState copyTrapdoor(BlockState source, Block block)
+	{
+		BlockState state = block.getDefaultState()
+		.with(TrapdoorBlock.FACING, source.get(TrapdoorBlock.FACING))
+		.with(TrapdoorBlock.HALF, source.get(TrapdoorBlock.HALF))
+		.with(TrapdoorBlock.OPEN, source.get(TrapdoorBlock.OPEN))
+		.with(TrapdoorBlock.POWERED, source.get(TrapdoorBlock.POWERED))
+		.with(TrapdoorBlock.WATERLOGGED, source.get(TrapdoorBlock.WATERLOGGED));
+		return state;
+	}
+	
+	private BlockState copyPane(BlockState source, Block block)
+	{
+		BlockState state = block.getDefaultState()
+		.with(PaneBlock.EAST, source.get(PaneBlock.EAST))
+		.with(PaneBlock.NORTH, source.get(PaneBlock.NORTH))
+		.with(PaneBlock.SOUTH, source.get(PaneBlock.SOUTH))
+		.with(PaneBlock.WEST, source.get(PaneBlock.WEST))
+		.with(PaneBlock.WATERLOGGED, source.get(PaneBlock.WATERLOGGED));
+		return state;
+	}
+	
 	// Foundation
 	
 	public BlockState getFoundationBlock(BlockState input)
@@ -261,7 +419,7 @@ public class CityPalette
 		if (foundationWalls.isEmpty())
 			return input;
 		else if (foundationWalls.size() == 1)
-			return foundationWalls.get(0).getDefaultState();
+			return copyWall(input, foundationWalls.get(0));
 		else
 		{
 			return copyWall(input, getRandomBlock(input, foundationWalls));
@@ -309,7 +467,7 @@ public class CityPalette
 		if (fences.isEmpty())
 			return input;
 		else if (fences.size() == 1)
-			return fences.get(0).getDefaultState();
+			return copyFence(input, fences.get(0));
 		else
 		{
 			return copyFence(input, getRandomBlock(input, fences));
@@ -323,7 +481,7 @@ public class CityPalette
 		if (walls.isEmpty())
 			return input;
 		else if (walls.size() == 1)
-			return walls.get(0).getDefaultState();
+			return copyWall(input, walls.get(0));
 		else
 		{
 			return copyWall(input, getRandomBlock(input, walls));
@@ -337,7 +495,7 @@ public class CityPalette
 		if (gates.isEmpty())
 			return input;
 		else if (gates.size() == 1)
-			return gates.get(0).getDefaultState();
+			return copyGate(input, gates.get(0));
 		else
 		{
 			return copyGate(input, getRandomBlock(input, gates));
@@ -351,7 +509,7 @@ public class CityPalette
 		if (logs.isEmpty())
 			return input;
 		else if (logs.size() == 1)
-			return logs.get(0).getDefaultState();
+			return copyPillar(input, logs.get(0));
 		else
 		{
 			return copyPillar(input, getRandomBlock(input, logs));
@@ -363,7 +521,7 @@ public class CityPalette
 		if (bark.isEmpty())
 			return input;
 		else if (bark.size() == 1)
-			return bark.get(0).getDefaultState();
+			return copyPillar(input, bark.get(0));
 		else
 		{
 			return copyPillar(input, getRandomBlock(input, bark));
@@ -385,5 +543,84 @@ public class CityPalette
 	public BlockState getStoneStair(BlockState input)
 	{
 		return getStairState(input, stoneStairs);
+	}
+	
+	// Lights
+	
+	public BlockState getGlowingBlock(BlockState input)
+	{
+		return getFullState(input, glowingBlocks);
+	}
+	
+	public BlockState getWallLight(BlockState input)
+	{
+		if (wallLights.isEmpty())
+			return input;
+		else if (wallLights.size() == 1)
+			return copyLanternWall(input, bark.get(0));
+		else
+		{
+			return copyLanternWall(input, getRandomBlock(input, wallLights));
+		}
+	}
+	
+	public BlockState getCeilingLight(BlockState input)
+	{
+		return copyLanternCeiling(input, getRandomBlock(input, ceilingLights));
+	}
+	
+	public BlockState getFloorLight(BlockState input)
+	{
+		return getFullState(input, ceilingLights);
+	}
+	
+	// Doors
+	
+	public BlockState getDoor(BlockState input)
+	{
+		return copyDoor(input, getRandomBlock(input, doors));
+	}
+	
+	public BlockState getTrapdoor(BlockState input)
+	{
+		return copyTrapdoor(input, getRandomBlock(input, trapdoors));
+	}
+	
+	// Plates
+	
+	public BlockState getWoodenPlate(BlockState input)
+	{
+		return getFullState(input, platesWood);
+	}
+	
+	public BlockState getStonePlate(BlockState input)
+	{
+		return getFullState(input, platesStone);
+	}
+	
+	// Glass
+	
+	public BlockState getGlassBlock(BlockState input)
+	{
+		return getFullState(input, glassBlocks);
+	}
+	
+	public BlockState getGlassPane(BlockState input)
+	{
+		return copyPane(input, getRandomBlock(input, glassPanes));
+	}
+	
+	// Pots
+	
+	public BlockState getPot(BlockState input)
+	{
+		return getFullState(input, pots);
+	}
+	
+	public BlockState getPlant(BlockState input)
+	{
+		String seed = Registry.BLOCK.getId(input.getBlock()).getPath();
+		RANDOM.setSeed(seed.hashCode());
+		return BlocksRegistry.POTTED_PLANT.getDefaultState().with(BlockPottedPlant.PLANT, PottedPlantShape.values()[RANDOM.nextInt(PottedPlantShape.values().length)]);
 	}
 }

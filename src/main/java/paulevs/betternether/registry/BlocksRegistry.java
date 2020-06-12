@@ -516,9 +516,11 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_LADDER = registerBlock("mushroom_fir_ladder", new BNLadder(MUSHROOM_FIR_PLANKS));
 	public static final Block RUBEUS_LADDER = registerBlock("rubeus_ladder", new BNLadder(RUBEUS_PLANKS));
 	
+	//public static final WoodenMaterial TEST_MATERIAL = new WoodenMaterial("test_material", MaterialColor.BLACK);
+	
 	public static void register() {}
 	
-	private static Block registerBlock(String name, Block block)
+	public static Block registerBlock(String name, Block block)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
@@ -528,7 +530,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerBlockNI(String name, Block block)
+	public static Block registerBlockNI(String name, Block block)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{

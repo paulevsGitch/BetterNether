@@ -4,21 +4,30 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.PaneBlock;
 import net.minecraft.block.PillarBlock;
+import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.StructureBlock;
+import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WallBlock;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.structure.Structure.StructureBlockInfo;
 import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.structure.processor.StructureProcessor;
 import net.minecraft.structure.processor.StructureProcessorType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.blocks.BNPlanks;
+import paulevs.betternether.blocks.BlockBNPot;
+import paulevs.betternether.blocks.BlockPottedPlant;
+import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.world.structures.city.palette.CityPalette;
 
 public class BuildingStructureProcessor extends StructureProcessor
@@ -86,21 +95,19 @@ public class BuildingStructureProcessor extends StructureProcessor
 			}
 			return setState(palette.getPlanksBlock(state), structureBlockInfo2);
 		}
+		else if (name.contains("glass") || name.contains("frame"))
+		{
+			if (block instanceof PaneBlock)
+				return setState(palette.getGlassPane(state), structureBlockInfo2);
+			return setState(palette.getGlassBlock(state), structureBlockInfo2);
+		}
 		else if (block instanceof PillarBlock)
 		{
 			if (name.contains("log"))
 			{
 				return setState(palette.getLog(state), structureBlockInfo2);
 			}
-			//else if (name.contains("bark") || name.contains("wood"))
-			//{
-				return setState(palette.getBark(state), structureBlockInfo2);
-			/*}
-			else if (name.contains("bone"))
-			{
-				return setState(palette.getStoneBlock(state), structureBlockInfo2);
-			}
-			return structureBlockInfo2;*/
+			return setState(palette.getBark(state), structureBlockInfo2);
 		}
 		else if (block instanceof StairsBlock)
 		{
@@ -122,13 +129,46 @@ public class BuildingStructureProcessor extends StructureProcessor
 		{
 			return setState(palette.getGate(state), structureBlockInfo2);
 		}
+		else if (block instanceof DoorBlock)
+		{
+			return setState(palette.getDoor(state), structureBlockInfo2);
+		}
+		else if (block instanceof TrapdoorBlock)
+		{
+			return setState(palette.getTrapdoor(state), structureBlockInfo2);
+		}
+		else if (block instanceof PressurePlateBlock)
+		{
+			if (block.getSoundGroup(state) == BlockSoundGroup.WOOD)
+				return setState(palette.getWoodenPlate(state), structureBlockInfo2);
+			else
+				return setState(palette.getStonePlate(state), structureBlockInfo2);
+		}
+		else if (block instanceof BlockSmallLantern)
+		{
+			if (state.get(BlockSmallLantern.FACING) == Direction.UP)
+				return setState(palette.getCeilingLight(state), structureBlockInfo2);
+			else if (state.get(BlockSmallLantern.FACING) != Direction.DOWN)
+				return setState(palette.getWallLight(state), structureBlockInfo2);
+			else
+				return setState(palette.getFloorLight(state), structureBlockInfo2);
+		}
+		else if (block instanceof BlockBNPot)
+		{
+			return setState(palette.getPot(state), structureBlockInfo2);
+		}
+		else if (block instanceof BlockPottedPlant)
+		{
+			return setState(palette.getPlant(state), structureBlockInfo2);
+		}
 		else if (block instanceof StructureBlock)
 		{
 			return setState(Blocks.AIR.getDefaultState(), structureBlockInfo2);
 		}
-		else if (!name.contains("nether") && !name.contains("mycelium") && state.isFullCube(worldView, structureBlockInfo.pos) &&
-					state.isOpaque() && !(state.getBlock() instanceof BlockWithEntity) && state.getLuminance() == 0)
+		else if (!name.contains("nether") && !name.contains("mycelium") && state.isFullCube(worldView, structureBlockInfo.pos) && state.isOpaque() && !(state.getBlock() instanceof BlockWithEntity))
 		{
+			if (state.getLuminance() > 0)
+				return setState(palette.getGlowingBlock(state), structureBlockInfo2);
 			return setState(palette.getStoneBlock(state), structureBlockInfo2);
 		}
 		
