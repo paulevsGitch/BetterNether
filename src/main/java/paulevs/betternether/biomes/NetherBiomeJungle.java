@@ -41,9 +41,9 @@ public class NetherBiomeJungle extends NetherBiome
 		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.1F, false);
 		addStructure("lucis", new StructureLucis(), StructureType.WALL, 0.05F, false);
 		addStructure("eye", new StructureEye(), StructureType.CEIL, 0.4F, true);
-		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, true);
-		addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.4F, true);
-		addStructure("flowered_vine", new StructureBloomingVine(), StructureType.CEIL, 0.4F, true);
+		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.2F, true);
+		addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.2F, true);
+		addStructure("flowered_vine", new StructureBloomingVine(), StructureType.CEIL, 0.2F, true);
 		addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
