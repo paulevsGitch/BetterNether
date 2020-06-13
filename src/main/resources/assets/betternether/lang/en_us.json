@@ -449,5 +449,13 @@
 	"block.betternether.rubeus_ladder": "Rubeus Ladder",
 	
 	"item.betternether.cincinnasite_shears": "Cincinnasite Shears",
-	"block.betternether.cincinnasite_anvil": "Cincinnasite Anvil"
+	"block.betternether.cincinnasite_anvil": "Cincinnasite Anvil",
+	
+	"block.betternether.jungle_grass": "Jungle Grass",
+	"block.betternether.jungle_plant": "Jungle Plant",
+	
+	"block.betternether.netherrack_stalactite": "Netherrack Stalactite",
+	"block.betternether.glowstone_stalactite": "Glowstone Stalactite",
+	"block.betternether.blackstone_stalactite": "Blackstone Stalactite",
+	"block.betternether.basalt_stalactite": "Basalt Stalactite"
 }

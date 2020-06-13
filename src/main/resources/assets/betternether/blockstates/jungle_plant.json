@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/jungle_plant_1_a" },
+			{ "model": "betternether:block/jungle_plant_1_b" }
+		]
+    }
+}

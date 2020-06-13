@@ -90,6 +90,7 @@ import paulevs.betternether.blocks.BlockSoulGrass;
 import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLilySapling;
 import paulevs.betternether.blocks.BlockSoulVein;
+import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.blocks.BlockStalagnate;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
@@ -391,6 +392,7 @@ public class BlocksRegistry
 	public static final Block NETHER_GRASS = registerBlock("nether_grass", new BlockNetherGrass());
 	public static final Block SWAMP_GRASS = registerBlock("swamp_grass", new BlockNetherGrass());
 	public static final Block SOUL_GRASS = registerBlock("soul_grass", new BlockSoulGrass());
+	public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", new BlockNetherGrass());
 	
 	// Vines //
 	public static final Block BLACK_VINE = registerBlock("black_vine", new BlockBlackVine());
@@ -427,10 +429,15 @@ public class BlocksRegistry
 	public static final Block BRICK_POT = registerBlock("brick_pot", new BlockBNPot(Blocks.NETHER_BRICKS));
 	public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
 	public static final Block GEYSER = registerBlock("geyser", new BlockGeyser());
+	public static final Block NETHERRACK_STALACTITE = registerBlock("netherrack_stalactite", new BlockStalactite(Blocks.NETHERRACK));
+	public static final Block GLOWSTONE_STALACTITE = registerBlock("glowstone_stalactite", new BlockStalactite(Blocks.GLOWSTONE));
+	public static final Block BLACKSTONE_STALACTITE = registerBlock("blackstone_stalactite", new BlockStalactite(Blocks.BLACKSTONE));
+	public static final Block BASALT_STALACTITE = registerBlock("basalt_stalactite", new BlockStalactite(Blocks.BASALT));
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockNetherrackMoss());
 	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium());
+	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockNetherrackMoss());
 	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand());
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
 	

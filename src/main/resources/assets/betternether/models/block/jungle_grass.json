@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/jungle_grass_side",
+        "down": "block/netherrack",
+        "up": "betternether:block/jungle_grass_top",
+        "north": "betternether:block/jungle_grass_side",
+        "east": "betternether:block/jungle_grass_side",
+        "south": "betternether:block/jungle_grass_side",
+        "west": "betternether:block/jungle_grass_side"
+    }
+}

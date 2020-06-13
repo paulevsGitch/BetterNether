@@ -260,7 +260,7 @@
 	"block.betternether.quartz_glass_framed_pane_white": "Белая кварцевая панель в рамке",
 	"block.betternether.quartz_glass_framed_pane_orange": "Оранжевая кварцевая панель в рамке",
 	"block.betternether.quartz_glass_framed_pane_magenta": "Фиолетовая кварцевая панель в рамке",
-	"block.betternether.quartz_glass_framed_pane_light_blue": "Голубая Blue кварцевая панель в рамке",
+	"block.betternether.quartz_glass_framed_pane_light_blue": "Голубая кварцевая панель в рамке",
 	"block.betternether.quartz_glass_framed_pane_yellow": "Жёлтая кварцевая панель в рамке",
 	"block.betternether.quartz_glass_framed_pane_lime": "Лаймовая кварцевая панель в рамке",
 	"block.betternether.quartz_glass_framed_pane_pink": "Розовая кварцевая панель в рамке",
@@ -449,5 +449,13 @@
 	"block.betternether.rubeus_ladder": "Рубейсовая лестница",
 	
 	"item.betternether.cincinnasite_shears": "Цинцинназитовые ножницы",
-	"block.betternether.cincinnasite_anvil": "Цинцинназитовая наковальня"
+	"block.betternether.cincinnasite_anvil": "Цинцинназитовая наковальня",
+	
+	"block.betternether.jungle_grass": "Трава джунглей",
+	"block.betternether.jungle_plant": "Растение джунглей",
+	
+	"block.betternether.netherrack_stalactite": "Незеритовый сталактит",
+	"block.betternether.glowstone_stalactite": "Светокаменный сталактит",
+	"block.betternether.blackstone_stalactite": "Чернокаменный сталактит",
+	"block.betternether.basalt_stalactite": "Базальтовый сталактит"
 }

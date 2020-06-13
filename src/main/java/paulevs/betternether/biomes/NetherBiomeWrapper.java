@@ -5,8 +5,10 @@ import java.util.Random;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.biome.BasaltDeltasBiome;
 import net.minecraft.world.biome.Biome;
 import paulevs.betternether.IBiome;
+import paulevs.betternether.structures.StructureType;
 
 public class NetherBiomeWrapper extends NetherBiome
 {
@@ -16,6 +18,15 @@ public class NetherBiomeWrapper extends NetherBiome
 	{
 		super(new BiomeDefenition(name));
 		this.biome = biome;
+		
+		if (biome instanceof BasaltDeltasBiome)
+		{
+			addStructure("blackstone_stalactite", STALACTITE_BLACKSTONE, StructureType.FLOOR, 0.2F, true);
+			addStructure("stalactite_stalactite", STALACTITE_BASALT, StructureType.FLOOR, 0.2F, true);
+			
+			addStructure("blackstone_stalagmite", STALAGMITE_BLACKSTONE, StructureType.CEIL, 0.1F, true);
+			addStructure("basalt_stalagmite", STALAGMITE_BASALT, StructureType.CEIL, 0.1F, true);
+		}
 	}
 	
 	@Override

@@ -1,0 +1,7 @@
+{
+	"parent": "betternether:block/stalactite_0",
+	"textures": {
+		"particle": "block/basalt_side",
+		"texture": "block/basalt_side"
+	}
+}

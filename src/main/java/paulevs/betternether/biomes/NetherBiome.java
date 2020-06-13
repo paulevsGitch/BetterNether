@@ -25,9 +25,12 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.noise.OpenSimplexNoise;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.StructureWorld;
+import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
+import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureWartCap;
 
 public class NetherBiome extends Biome
@@ -85,6 +88,16 @@ public class NetherBiome extends Biome
 	
 	private ArrayList<String> structures;
 	
+	protected static final StructureStalactiteFloor STALACTITE_NETHERRACK = new StructureStalactiteFloor(BlocksRegistry.NETHERRACK_STALACTITE, null);
+	protected static final StructureStalactiteFloor STALACTITE_GLOWSTONE = new StructureStalactiteFloor(BlocksRegistry.GLOWSTONE_STALACTITE, Blocks.GLOWSTONE);
+	protected static final StructureStalactiteFloor STALACTITE_BLACKSTONE = new StructureStalactiteFloor(BlocksRegistry.BLACKSTONE_STALACTITE, Blocks.BLACKSTONE, Blocks.BLACKSTONE, Blocks.NETHERRACK);
+	protected static final StructureStalactiteFloor STALACTITE_BASALT = new StructureStalactiteFloor(BlocksRegistry.BASALT_STALACTITE, Blocks.BASALT, Blocks.BASALT, Blocks.NETHERRACK);
+	
+	protected static final StructureStalactiteCeil STALAGMITE_NETHERRACK = new StructureStalactiteCeil(BlocksRegistry.NETHERRACK_STALACTITE, null);
+	protected static final StructureStalactiteCeil STALAGMITE_GLOWSTONE = new StructureStalactiteCeil(BlocksRegistry.GLOWSTONE_STALACTITE, Blocks.GLOWSTONE);
+	protected static final StructureStalactiteCeil STALAGMITE_BLACKSTONE = new StructureStalactiteCeil(BlocksRegistry.BLACKSTONE_STALACTITE, Blocks.BLACKSTONE, Blocks.BLACKSTONE, Blocks.NETHERRACK);
+	protected static final StructureStalactiteCeil STALAGMITE_BASALT = new StructureStalactiteCeil(BlocksRegistry.BASALT_STALACTITE, Blocks.BASALT, Blocks.BASALT, Blocks.NETHERRACK);
+	
 	public NetherBiome(BiomeDefenition defenition)
 	{
 		super(defenition.buildBiomeSettings());
@@ -127,6 +140,12 @@ public class NetherBiome extends Biome
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
 		for (String s: DEF_STRUCTURES)
 			structures.add(s);
+		
+		addStructure("netherrack_stalactite", STALACTITE_NETHERRACK, StructureType.FLOOR, 0.05F, true);
+		addStructure("glowstone_stalactite", STALACTITE_GLOWSTONE, StructureType.FLOOR, 0.01F, true);
+		
+		addStructure("netherrack_stalagmite", STALAGMITE_NETHERRACK, StructureType.CEIL, 0.01F, true);
+		addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
 	}
 	
 	public void setNoiseDensity(float density)

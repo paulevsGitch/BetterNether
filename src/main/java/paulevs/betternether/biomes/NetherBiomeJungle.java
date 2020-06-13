@@ -2,7 +2,6 @@ package paulevs.betternether.biomes;
 
 import java.util.Random;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
@@ -14,11 +13,12 @@ import paulevs.betternether.structures.plants.StructureBloomingVine;
 import paulevs.betternether.structures.plants.StructureEggPlant;
 import paulevs.betternether.structures.plants.StructureEye;
 import paulevs.betternether.structures.plants.StructureGoldenVine;
+import paulevs.betternether.structures.plants.StructureJunglePlant;
 import paulevs.betternether.structures.plants.StructureLucis;
 import paulevs.betternether.structures.plants.StructureMagmaFlower;
-import paulevs.betternether.structures.plants.StructureNetherGrass;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureRubeus;
+import paulevs.betternether.structures.plants.StructureRubeusBush;
 import paulevs.betternether.structures.plants.StructureStalagnate;
 import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallMoss;
@@ -36,10 +36,11 @@ public class NetherBiomeJungle extends NetherBiome
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);
 		addStructure("rubeus_tree", new StructureRubeus(), StructureType.FLOOR, 0.1F, false);
+		addStructure("bush_rubeus", new StructureRubeusBush(), StructureType.FLOOR, 0.1F, false);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, false);
 		addStructure("egg_plant", new StructureEggPlant(), StructureType.FLOOR, 0.05F, true);
-		addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.1F, false);
-		addStructure("lucis", new StructureLucis(), StructureType.WALL, 0.05F, false);
+		addStructure("jungle_plant", new StructureJunglePlant(), StructureType.FLOOR, 0.1F, false);
+		addStructure("lucis", new StructureLucis(), StructureType.WALL, 0.1F, false);
 		addStructure("eye", new StructureEye(), StructureType.CEIL, 0.4F, true);
 		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.2F, true);
 		addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.2F, true);
@@ -54,25 +55,6 @@ public class NetherBiomeJungle extends NetherBiome
 	@Override
 	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
-		switch (random.nextInt(3))
-		{
-		case 0:
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
-			break;
-		case 1:
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
-			break;
-		default:
-			super.genSurfColumn(world, pos, random);
-			break;
-		}
-		for (int i = 1; i < random.nextInt(3); i++)
-		{
-			BlockPos down = pos.down(i);
-			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down)))
-			{
-				BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.getDefaultState());
-			}
-		}
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JUNGLE_GRASS.getDefaultState());
 	}
 }
