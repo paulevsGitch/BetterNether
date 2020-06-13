@@ -1,36 +1,5 @@
 package paulevs.betternether;
 
-import java.util.List;
-
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SignBlock;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.BufferRenderer;
-import net.minecraft.client.render.DiffuseLighting;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.VertexFormats;
-import net.minecraft.client.resource.language.I18n;
-import net.minecraft.client.util.SelectionManager;
-import net.minecraft.client.util.SpriteIdentifier;
-import net.minecraft.client.util.Texts;
-import net.minecraft.client.util.math.Matrix4f;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.network.packet.c2s.play.UpdateSignC2SPacket;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import paulevs.betternether.blockentities.NetherSignBlockEntity;
-import paulevs.betternether.blockentities.render.NetherSignBlockEntityRenderer;
-
 public class NetherSignEditScreen //extends Screen
 {
 	/*private final NetherSignBlockEntityRenderer.SignModel model = new NetherSignBlockEntityRenderer.SignModel();

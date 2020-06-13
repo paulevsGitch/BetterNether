@@ -9,7 +9,6 @@ import paulevs.betternether.blockentities.BNBrewingStandBlockEntity;
 import paulevs.betternether.blockentities.BlockEntityChestOfDrawers;
 import paulevs.betternether.blockentities.BlockEntityForge;
 import paulevs.betternether.blockentities.BlockEntityFurnace;
-import paulevs.betternether.blockentities.NetherSignBlockEntity;
 
 public class BlockEntitiesRegistry
 {
@@ -17,7 +16,7 @@ public class BlockEntitiesRegistry
 	public static final BlockEntityType<? extends BlockEntity> NETHERRACK_FURNACE = BlockEntityType.Builder.create(BlockEntityFurnace::new, BlocksRegistry.NETHERRACK_FURNACE).build(null);
 	public static final BlockEntityType<? extends BlockEntity> CHEST_OF_DRAWERS = BlockEntityType.Builder.create(BlockEntityChestOfDrawers::new, BlocksRegistry.CHEST_OF_DRAWERS).build(null);
 	public static final BlockEntityType<? extends BlockEntity> NETHER_BREWING_STAND = BlockEntityType.Builder.create(BNBrewingStandBlockEntity::new, BlocksRegistry.NETHER_BREWING_STAND).build(null);
-	public static final BlockEntityType<NetherSignBlockEntity> NETHER_SIGN = BlockEntityType.Builder.create(NetherSignBlockEntity::new, BlocksRegistry.STALAGNATE_SIGN).build(null);
+	//public static final BlockEntityType<NetherSignBlockEntity> NETHER_SIGN = BlockEntityType.Builder.create(NetherSignBlockEntity::new, BlocksRegistry.STALAGNATE_SIGN).build(null);
 	
 	public static void register()
 	{
@@ -25,7 +24,7 @@ public class BlockEntitiesRegistry
 		RegisterBlockEntity("furnace", NETHERRACK_FURNACE);
 		RegisterBlockEntity("chest_of_drawers", CHEST_OF_DRAWERS);
 		RegisterBlockEntity("nether_brewing_stand", NETHER_BREWING_STAND);
-		RegisterBlockEntity("nether_sign", NETHER_SIGN);
+		//RegisterBlockEntity("nether_sign", NETHER_SIGN);
 	}
 	
 	public static void RegisterBlockEntity(String name, BlockEntityType<? extends BlockEntity> type)

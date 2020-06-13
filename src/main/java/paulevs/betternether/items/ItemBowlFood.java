@@ -1,8 +1,11 @@
 package paulevs.betternether.items;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -14,6 +17,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.shapes.FoodShape;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.ItemsRegistry;
 import paulevs.betternether.tab.CreativeTab;
 
 public class ItemBowlFood extends Item
@@ -32,7 +36,7 @@ public class ItemBowlFood extends Item
 		food.setItem(this);
 		this.bowlFood = food;
 	}
-
+	
 	public ActionResult useOnBlock(ItemUsageContext context)
 	{
 		World world = context.getWorld();
@@ -60,5 +64,22 @@ public class ItemBowlFood extends Item
 			return ActionResult.CONSUME;
 		}
 		return ActionResult.PASS;
+	}
+	
+	@Override
+	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user)
+	{
+		if (stack.getCount() == 1)
+			return new ItemStack(ItemsRegistry.STALAGNATE_BOWL, stack.getCount());
+		else
+		{
+			if (user instanceof PlayerEntity)
+			{
+				PlayerEntity player = (PlayerEntity) user;
+				if (!player.isCreative())
+					player.giveItemStack(new ItemStack(ItemsRegistry.STALAGNATE_BOWL));
+			}
+			return super.finishUsing(stack, world, user);
+		}
 	}
 }
