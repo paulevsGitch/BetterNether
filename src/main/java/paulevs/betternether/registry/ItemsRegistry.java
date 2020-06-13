@@ -2,15 +2,22 @@ package paulevs.betternether.registry;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
@@ -87,7 +94,20 @@ public class ItemsRegistry
 	
 	private static SpawnEggItem makeEgg(EntityType<?> type, int background, int dots)
 	{
-		return new SpawnEggItem(type, background, dots, defaultSettings());
+		SpawnEggItem item = new SpawnEggItem(type, background, dots, defaultSettings());
+		ItemDispenserBehavior behavior = new ItemDispenserBehavior()
+		{
+			public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack)
+			{
+				Direction direction = (Direction)pointer.getBlockState().get(DispenserBlock.FACING);
+				EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getTag());
+				entityType.spawnFromItemStack(pointer.getWorld(), stack, (PlayerEntity)null, pointer.getBlockPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
+				stack.decrement(1);
+				return stack;
+			}
+		};
+		DispenserBlock.registerBehavior(item, behavior);
+		return item;
 	}
 	
 	private static int color(int r, int g, int b)
