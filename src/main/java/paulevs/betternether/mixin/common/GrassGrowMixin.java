@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.biomes.NetherBiomeJungle;
 import paulevs.betternether.biomes.NetherSoulPlain;
 import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -66,7 +67,7 @@ public class GrassGrowMixin
 			for (int y = y1; y >= y2; y--)
 			{
 				POS.setY(y);
-				if (world.isAir(POS) && BlocksHelper.isNetherGround(world.getBlockState(POS.down())))
+				if (world.isAir(POS) && world.getBlockState(POS.down()).getBlock() != BlocksRegistry.NETHER_MYCELIUM && BlocksHelper.isNetherGround(world.getBlockState(POS.down())))
 				{
 					BlocksHelper.setWithoutUpdate(world, POS, grass);
 					break;
@@ -82,6 +83,8 @@ public class GrassGrowMixin
 			return BlocksRegistry.SWAMP_GRASS.getDefaultState();
 		else if (biome instanceof NetherSoulPlain)
 			return BlocksRegistry.SOUL_GRASS.getDefaultState();
+		else if (biome instanceof NetherBiomeJungle)
+			return BlocksRegistry.JUNGLE_PLANT.getDefaultState();
 		else
 			return BlocksRegistry.NETHER_GRASS.getDefaultState();
 	}
