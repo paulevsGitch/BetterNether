@@ -2,15 +2,22 @@ package paulevs.betternether.registry;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Settings;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
@@ -62,8 +69,6 @@ public class ItemsRegistry
 	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg(EntityRegistry.FIREFLY, MHelper.color(255, 223, 168), MHelper.color(233, 182, 95)));
 	public static final Item SPAWN_EGG_JELLYFISH = registerItem("spawn_egg_hydrogen_jellyfish", makeEgg(EntityRegistry.HYDROGEN_JELLYFISH, MHelper.color(253, 164, 24), MHelper.color(88, 21, 4)));
 	public static final Item SPAWN_NAGA = registerItem("spawn_egg_naga", makeEgg(EntityRegistry.NAGA, MHelper.color(12, 12, 12), MHelper.color(210, 90, 26)));
-
-	//public static final Item STALAGNATE_SIGN = registerItem("stalagnate_sign", new SignItem(defaultSettings(), BlocksRegistry.STALAGNATE_SIGN, BlocksRegistry.STALAGNATE_SIGN_WALL));
 	
 	public static void register() {}
 	
@@ -84,9 +89,22 @@ public class ItemsRegistry
 	{
 		return new Item.Settings().group(CreativeTab.BN_TAB);
 	}
-	
+
 	private static SpawnEggItem makeEgg(EntityType<?> type, int background, int dots)
 	{
-		return new SpawnEggItem(type, background, dots, defaultSettings());
+		SpawnEggItem item = new SpawnEggItem(type, background, dots, defaultSettings());
+		ItemDispenserBehavior behavior = new ItemDispenserBehavior()
+		{
+			public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack)
+			{
+				Direction direction = (Direction)pointer.getBlockState().get(DispenserBlock.FACING);
+				EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getTag());
+				entityType.spawnFromItemStack(pointer.getWorld(), stack, (PlayerEntity)null, pointer.getBlockPos().offset(direction), SpawnType.DISPENSER, direction != Direction.UP, false);
+				stack.decrement(1);
+				return stack;
+			}
+		};
+		DispenserBlock.registerBehavior(item, behavior);
+		return item;
 	}
 }
