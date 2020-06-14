@@ -18,7 +18,7 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 
 	public ModelEntityFlyingPig()
 	{
-		this.textureWidth = 68;
+		this.textureWidth = 128;
 		this.textureHeight = 64;
 		
 		this.head = new ModelPart(this, 0, 0);
@@ -86,7 +86,7 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 			this.head.pitch = headPitch * 0.017453292F;
 			this.head.yaw = 3.1415927F - headYaw * 0.017453292F;
 			this.head.roll = 3.1415927F;
-			this.head.setPivot(0.0F, 1.0F, 0.0F);
+			
 			this.body.pitch = 3.1415927F;
 			this.rightWing.pitch = 0;
 			this.rightWing.yaw = -1.2566371F;
@@ -94,19 +94,25 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 			this.leftWing.pitch = this.rightWing.pitch;
 			this.leftWing.yaw = -this.rightWing.yaw;
 			this.leftWingTip.yaw = -this.rightWingTip.yaw;
+			
+			this.head.setPivot(0.0F, 23, 0.0F);
+			this.body.setPivot(0.0F, 22, 0.0F);
 		}
 		else
 		{
 			this.head.pitch = headPitch * 0.017453292F;
 			this.head.yaw = headYaw * 0.017453292F;
 			this.head.roll = 0.0F;
-			this.head.setPivot(0.0F, 0.0F, 0.0F);
+			
 			this.body.pitch = 0.7853982F + MathHelper.cos(animationProgress * 0.1F) * 0.15F;
 			this.body.yaw = 0.0F;
 			this.rightWing.yaw = MathHelper.cos(animationProgress * 0.4F) * 3.1415927F * 0.25F;
 			this.leftWing.yaw = -this.rightWing.yaw;
 			this.rightWingTip.yaw = this.rightWing.yaw * 0.75F;
 			this.leftWingTip.yaw = -this.rightWing.yaw * 0.75F;
+			
+			this.head.setPivot(0.0F, 8.0F, 0.0F);
+			this.body.setPivot(0.0F, 8.0F, 0.0F);
 		}
 	}
 }

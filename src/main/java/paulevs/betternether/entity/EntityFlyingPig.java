@@ -1,26 +1,70 @@
 package paulevs.betternether.entity;
 
+import java.util.EnumSet;
+import java.util.Random;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Flutterer;
+import net.minecraft.entity.ai.TargetFinder;
+import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.pathing.BirdNavigation;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
+import net.minecraft.entity.ai.pathing.Path;
+import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.registry.BlocksRegistry;
 
-public class EntityFlyingPig extends HostileEntity
+public class EntityFlyingPig extends HostileEntity implements Flutterer
 {
 	private static final TrackedData<Byte> FLAGS;
 	private static final int BIT_ROOSTING = 0;
+	private Goal preGoal;
 
 	public EntityFlyingPig(EntityType<? extends EntityFlyingPig> type, World world)
 	{
 		super(type, world);
+		this.moveControl = new FlightMoveControl(this, 20, true);
+		this.setPathfindingPenalty(PathNodeType.LAVA, -1.0F);
+		this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
+		this.experiencePoints = 2;
 	}
 
+	@Override
+	protected void initGoals()
+	{
+		this.targetSelector.add(1, new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
+		this.goalSelector.add(2, new SittingGoal());
+		this.goalSelector.add(3, new RoostingGoal());
+		this.goalSelector.add(4, new WanderAroundGoal());
+		this.goalSelector.add(5, new LookAroundGoal(this));
+		this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+	}
+	
 	public static DefaultAttributeContainer getAttributeContainer()
 	{
 		return MobEntity
@@ -32,6 +76,36 @@ public class EntityFlyingPig extends HostileEntity
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
 				.add(EntityAttributes.GENERIC_ARMOR, 1.0)
 				.build();
+	}
+	
+	@Override
+	protected EntityNavigation createNavigation(World world)
+	{
+		BirdNavigation birdNavigation = new BirdNavigation(this, world)
+		{
+			public boolean isValidPosition(BlockPos pos)
+			{
+				BlockState state = this.world.getBlockState(pos.down());
+				boolean valid = !state.isAir() && state.getMaterial() != Material.LAVA;
+				if (valid)
+				{
+					state = this.world.getBlockState(pos);
+					valid = state.isAir() || !state.getMaterial().blocksMovement();
+					valid = valid && state.getBlock() != BlocksRegistry.EGG_PLANT;
+					valid = valid && !state.getMaterial().blocksMovement();
+				}
+				return valid;
+			}
+
+			public void tick()
+			{
+				super.tick();
+			}
+		};
+		birdNavigation.setCanPathThroughDoors(false);
+		birdNavigation.setCanSwim(false);
+		birdNavigation.setCanEnterOpenDoors(true);
+		return birdNavigation;
 	}
 
 	@Override
@@ -56,17 +130,244 @@ public class EntityFlyingPig extends HostileEntity
 	@Override
 	protected float getSoundVolume()
 	{
-		return 0.3F;
+		return MHelper.randRange(0.85F, 1.15F, random);
 	}
 
 	@Override
 	protected float getSoundPitch()
 	{
-		return 0.2F;
+		return MHelper.randRange(0.3F, 0.4F, random);
 	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource source)
+	{
+		return SoundEvents.ENTITY_PIG_HURT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound()
+	{
+		return SoundEvents.ENTITY_PIG_DEATH;
+	}
+	
+	@Override
+	public SoundEvent getAmbientSound()
+	{
+		return SoundEvents.ENTITY_PIG_AMBIENT;
+	}
+
+	@Override
+	public boolean isPushable()
+	{
+		return false;
+	}
+
+	@Override
+	protected void pushAway(Entity entity) {}
+
+	@Override
+	protected void tickCramming() {}
+	
+	@Override
+	protected boolean hasWings()
+	{
+		return true;
+	}
+	
+	@Override
+	public boolean canClimb()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier)
+	{
+		return false;
+	}
+	
+	@Override
+	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
 
 	static
 	{
 		FLAGS = DataTracker.registerData(EntityFlyingPig.class, TrackedDataHandlerRegistry.BYTE);
+	}
+	
+	class WanderAroundGoal extends Goal
+	{
+		WanderAroundGoal()
+		{
+			this.setControls(EnumSet.of(Goal.Control.MOVE));
+		}
+
+		public boolean canStart()
+		{
+			return EntityFlyingPig.this.navigation.isIdle() && !EntityFlyingPig.this.isRoosting();
+		}
+
+		public boolean shouldContinue()
+		{
+			return EntityFlyingPig.this.navigation.isFollowingPath() && EntityFlyingPig.this.random.nextInt(32) > 0;
+		}
+
+		public void start()
+		{
+			BlockPos pos = this.getRandomLocation();
+			Path path = EntityFlyingPig.this.navigation.findPathTo(pos, 1);
+			if (path != null)
+				EntityFlyingPig.this.navigation.startMovingAlong(path, 1.0D);
+			else
+				EntityFlyingPig.this.setVelocity(0, -0.2, 0);
+			EntityFlyingPig.this.setRoosting(false);
+			super.start();
+		}
+
+		private BlockPos getRandomLocation()
+		{
+			Mutable bpos = new Mutable();
+			bpos.set(EntityFlyingPig.this.getX(), EntityFlyingPig.this.getY(), EntityFlyingPig.this.getZ());
+			
+			Vec3d angle = EntityFlyingPig.this.getRotationVec(0.0F);
+			Vec3d airTarget = TargetFinder.findAirTarget(EntityFlyingPig.this, 8, 7, angle, 1.5707964F, 2, 1);
+
+			if (airTarget == null)
+			{
+				airTarget = TargetFinder.findAirTarget(EntityFlyingPig.this, 32, 10, angle, 1.5707964F, 3, 1);
+			}
+
+			if (airTarget == null)
+			{
+				bpos.setX(bpos.getX() + randomRange(32));
+				bpos.setZ(bpos.getZ() + randomRange(32));
+				bpos.setY(bpos.getY() + randomRange(32));
+				return bpos;
+			}
+			
+			bpos.set(airTarget.getX(), airTarget.getY(), airTarget.getZ());
+			BlockPos down = bpos.down();
+			if (EntityFlyingPig.this.world.getBlockState(down).isFullCube(EntityFlyingPig.this.world, down))
+				bpos.offset(Direction.UP);
+			
+			return bpos;
+		}
+		
+		private int randomRange(int side)
+		{
+			Random random = EntityFlyingPig.this.random;
+			return random.nextInt(side + 1) - (side >> 1);
+		}
+		
+		@Override
+		public void stop()
+		{
+			EntityFlyingPig.this.preGoal = this;
+			super.stop();
+		}
+	}
+	
+	class RoostingGoal extends Goal
+	{
+		BlockPos roosting;
+		
+		@Override
+		public boolean canStart()
+		{
+			return !(EntityFlyingPig.this.preGoal instanceof SittingGoal) &&
+					EntityFlyingPig.this.navigation.isIdle() &&
+					!EntityFlyingPig.this.isRoosting() &&
+					EntityFlyingPig.this.random.nextInt(4) == 0;
+		}
+		
+		@Override
+		public boolean shouldContinue()
+		{
+			return EntityFlyingPig.this.navigation.isFollowingPath();
+		}
+		
+		@Override
+		public void start()
+		{
+			BlockPos pos = this.getRoostingLocation();
+			if (pos != null)
+			{
+				Path path = EntityFlyingPig.this.navigation.findPathTo(pos, 1);
+				if (path != null)
+				{
+					EntityFlyingPig.this.navigation.startMovingAlong(path, 1.0D);
+					this.roosting = pos;
+				}
+			}
+			super.start();
+		}
+
+		@Override
+		public void stop()
+		{
+			if (this.roosting != null)
+			{
+				EntityFlyingPig.this.setPos(roosting.getX() + 0.5, roosting.getY() - 0.25, roosting.getZ() + 0.5);
+				EntityFlyingPig.this.setRoosting(true);
+				EntityFlyingPig.this.preGoal = this;
+			}
+			super.stop();
+		}
+		
+		private BlockPos getRoostingLocation()
+		{
+			BlockPos start = EntityFlyingPig.this.getBlockPos();
+			World world = EntityFlyingPig.this.world;
+			int up = BlocksHelper.upRay(world, start, 16);
+			start = start.offset(Direction.UP, up);
+			if (world.getBlockState(start.up()).getBlock() == Blocks.NETHER_WART_BLOCK)
+				return start;
+			else
+				return null;
+		}
+	}
+	
+	class SittingGoal extends Goal
+	{
+		int timer;
+		int ammount;
+
+		@Override
+		public boolean canStart()
+		{
+			return EntityFlyingPig.this.isRoosting();
+		}
+
+		@Override
+		public boolean shouldContinue()
+		{
+			return timer < ammount;
+		}
+
+		@Override
+		public void start()
+		{
+			timer = 0;
+			ammount = MHelper.randRange(80, 160, EntityFlyingPig.this.random);
+			EntityFlyingPig.this.setVelocity(0, 0, 0);
+			EntityFlyingPig.this.setYaw(EntityFlyingPig.this.random.nextFloat() * MHelper.PI2);
+			super.start();
+		}
+		
+		@Override
+		public void stop()
+		{
+			EntityFlyingPig.this.setRoosting(false);
+			EntityFlyingPig.this.setVelocity(0, -0.1F, 0);
+			EntityFlyingPig.this.preGoal = this;
+			super.stop();
+		}
+
+		@Override
+		public void tick()
+		{
+			timer ++;
+			super.tick();
+		}
 	}
 }
