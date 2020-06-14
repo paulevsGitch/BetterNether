@@ -23,6 +23,7 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.EntityFirefly;
+import paulevs.betternether.entity.EntityFlyingPig;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
 import paulevs.betternether.entity.EntityNaga;
 import paulevs.betternether.entity.EntityNagaProjectile;
@@ -38,6 +39,7 @@ public class EntityRegistry
 	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EntityFirefly::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).fireImmune().trackable(70, 3).build();
 	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EntityHydrogenJellyfish::new).dimensions(EntityDimensions.changing(2F, 5F)).fireImmune().trackable(150, 1).build();
 	public static final EntityType<EntityNaga> NAGA = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityNaga::new).dimensions(EntityDimensions.fixed(0.625F, 2.75F)).fireImmune().trackable(100, 3).build();
+	public static final EntityType<EntityFlyingPig> FLYING_PIG = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFlyingPig::new).dimensions(EntityDimensions.fixed(1.0F, 1.0F)).fireImmune().trackable(70, 3).build();
 	
 	public static void register()
 	{
@@ -56,6 +58,7 @@ public class EntityRegistry
 		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 60, 2, 6, NETHER_BIOMES);
 		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 100, 1, 4, NETHER_BIOMES);
 		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 20, 2, 4, NETHER_BIOMES);
+		registerEntity("flying_pig", FLYING_PIG, EntityFlyingPig.getAttributeContainer(), 20, 2, 4, BiomesRegistry.BIOME_CRIMSON_FOREST, BiomesRegistry.CRIMSON_GLOWING_WOODS, BiomesRegistry.CRIMSON_PINEWOOD);
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity)

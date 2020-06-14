@@ -21,4 +21,26 @@ public class MHelper
 	{
 		return min + random.nextFloat() * (max - min);
 	}
+	
+	public static byte setBit(byte source, int pos, boolean value)
+	{
+		return value ? setBitTrue(source, pos) : setBitFalse(source, pos);
+	}
+	
+	public static byte setBitTrue(byte source, int pos)
+	{
+		source |= 1 << pos;
+		return source;
+	}
+	
+	public static byte setBitFalse(byte source, int pos)
+	{
+		source &= ~(1 << pos);
+		return source;
+	}
+	
+	public static boolean getBit(byte source, int pos)
+	{
+		return ((source >> pos) & 1) == 1;
+	}
 }

@@ -8,6 +8,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.entity.EntityType;
 import paulevs.betternether.entity.render.RenderChair;
 import paulevs.betternether.entity.render.RenderFirefly;
+import paulevs.betternether.entity.render.RenderFlyingPig;
 import paulevs.betternether.entity.render.RenderHydrogenJellyfish;
 import paulevs.betternether.entity.render.RenderNaga;
 import paulevs.betternether.entity.render.RenderNagaProjectile;
@@ -22,6 +23,7 @@ public class EntityRenderRegistry
 		registerRenderMob(EntityRegistry.HYDROGEN_JELLYFISH, RenderHydrogenJellyfish.class);
 		registerRenderMob(EntityRegistry.NAGA, RenderNaga.class);
 		registerRenderAny(EntityRegistry.NAGA_PROJECTILE, RenderNagaProjectile.class);
+		registerRenderMob(EntityRegistry.FLYING_PIG, RenderFlyingPig.class);
 	}
 
 	private static void registerRenderMob(EntityType<?> entity, Class<? extends MobEntityRenderer<?, ?>> renderer)
