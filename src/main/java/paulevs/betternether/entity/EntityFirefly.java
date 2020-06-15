@@ -13,6 +13,7 @@ import net.minecraft.block.Material;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.TargetFinder;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
@@ -43,7 +44,9 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
@@ -609,5 +612,10 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 		FLOWERS.add(BlocksRegistry.INK_BUSH_SEED);
 		FLOWERS.add(BlocksRegistry.POTTED_PLANT);
 		FLOWERS.add(Blocks.NETHER_WART);
+	}
+	
+	public static boolean canSpawn(EntityType<? extends EntityFirefly> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
+	{
+		return BlocksHelper.downRay(world, pos, 10) < 8;
 	}
 }

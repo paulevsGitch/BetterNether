@@ -50,14 +50,18 @@ public class EntityRegistry
 		NETHER_ENTITIES.add(EntityType.BLAZE);
 		NETHER_ENTITIES.add(EntityType.STRIDER);
 		
-		NetherBiome[] NETHER_BIOMES = getBiomes();
+		NetherBiome[] netherBiomes = getBiomes();
+		List<NetherBiome> fireflyBiomes = new ArrayList<NetherBiome>(BiomesRegistry.getRegisteredBiomes());
+		fireflyBiomes.remove(BiomesRegistry.BIOME_GRAVEL_DESERT);
+		fireflyBiomes.remove(BiomesRegistry.BIOME_EMPTY_NETHER);
+		fireflyBiomes.remove(BiomesRegistry.BIOME_BASALT_DELTAS);
 		
 		registerEntity("chair", CHAIR);
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
 		
-		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 10, 2, 6, NETHER_BIOMES);
-		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 20, 2, 5, NETHER_BIOMES);
-		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 20, 2, 4, NETHER_BIOMES);
+		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 10, 2, 6, fireflyBiomes.toArray(new NetherBiome[] {}));
+		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 20, 2, 5, netherBiomes);
+		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 20, 2, 4, netherBiomes);
 		registerEntity("flying_pig", FLYING_PIG, EntityFlyingPig.getAttributeContainer(), 20, 2, 4, BiomesRegistry.BIOME_CRIMSON_FOREST, BiomesRegistry.CRIMSON_GLOWING_WOODS, BiomesRegistry.CRIMSON_PINEWOOD);
 	}
 	

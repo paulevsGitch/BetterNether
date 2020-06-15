@@ -40,6 +40,7 @@ public class BiomesRegistry
 	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper("nether_wastes", Biomes.NETHER_WASTES);
 	public static final NetherBiome BIOME_CRIMSON_FOREST = new NetherBiomeWrapper("crimson_forest", Biomes.CRIMSON_FOREST);
 	public static final NetherBiome BIOME_WARPED_FOREST = new NetherBiomeWrapper("warped_forest", Biomes.WARPED_FOREST);
+	public static final NetherBiome BIOME_BASALT_DELTAS = new NetherBiomeWrapper("basalt_deltas", Biomes.BASALT_DELTAS);
 	
 	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherBiomeGravelDesert("Gravel Desert");
 	public static final NetherBiome BIOME_NETHER_JUNGLE = new NetherBiomeJungle("Nether Jungle");
@@ -88,6 +89,7 @@ public class BiomesRegistry
 		registerDefaultWrapped(BIOME_EMPTY_NETHER);
 		registerDefaultWrapped(BIOME_CRIMSON_FOREST);
 		registerDefaultWrapped(BIOME_WARPED_FOREST);
+		registerDefaultWrapped(BIOME_BASALT_DELTAS);
 		
 		Iterator<Biome> iterator = Registry.BIOME.iterator();
 		while (iterator.hasNext())
