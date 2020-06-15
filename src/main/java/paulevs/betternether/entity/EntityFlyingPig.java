@@ -1,6 +1,7 @@
 package paulevs.betternether.entity;
 
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -31,8 +32,10 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -415,17 +418,24 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 			if (target.isAlive() && target.distanceTo(EntityFlyingPig.this) < 1.3)
 			{
 				ItemStack stack = ((ItemEntity) target).getStack();
-				for (int i = 0; i < 16; i++)
+				
+				ItemStackParticleEffect effect = new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(stack.getItem()));
+
+				Iterator<?> var14 = world.getPlayers().iterator();
+
+				while(var14.hasNext())
 				{
-					EntityFlyingPig.this.world.addParticle(
-							new ItemStackParticleEffect(ParticleTypes.ITEM, stack),
-							target.getX(),
-							target.getY(),
-							target.getZ(),
-							EntityFlyingPig.this.random.nextGaussian() * 0.1F,
-							EntityFlyingPig.this.random.nextGaussian() * 0.1F,
-							EntityFlyingPig.this.random.nextGaussian() * 0.1F);
+					ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)var14.next();
+					if (serverPlayerEntity.squaredDistanceTo(target.getX(), target.getY(), target.getZ()) < 4096.0D)
+					{
+						serverPlayerEntity.networkHandler.sendPacket(new ParticleS2CPacket(effect, false,
+								target.getX(),
+								target.getY() + 0.2,
+								target.getZ(),
+								0.2F, 0.2F, 0.2F, 0, 16));
+					}
 				}
+				
 				EntityFlyingPig.this.eatFood(world, stack);
 				target.kill();
 				EntityFlyingPig.this.heal(stack.getCount());
