@@ -22,7 +22,7 @@ public class CrimsonGlowingWoods extends NetherBiome
 	public CrimsonGlowingWoods(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(51, 3, 3)
+				.setFogColor(51, 3, 3)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)

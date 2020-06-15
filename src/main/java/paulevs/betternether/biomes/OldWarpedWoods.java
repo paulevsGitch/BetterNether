@@ -21,7 +21,7 @@ public class OldWarpedWoods extends NetherBiome
 	public OldWarpedWoods(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(26, 5, 26)
+				.setFogColor(26, 5, 26)
 				.setLoop(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_WARPED_FOREST_MOOD)

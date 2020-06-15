@@ -27,7 +27,7 @@ public class NetherGrasslands extends NetherBiome
 	public NetherGrasslands(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(113, 73, 133)
+				.setFogColor(113, 73, 133)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));

@@ -18,7 +18,7 @@ public class NetherWartForestEdge extends NetherBiome
 	public NetherWartForestEdge(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(191, 28, 28)
+				.setFogColor(191, 28, 28)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));

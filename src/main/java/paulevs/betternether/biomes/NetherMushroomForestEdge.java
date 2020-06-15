@@ -18,7 +18,7 @@ public class NetherMushroomForestEdge extends NetherBiome
 	public NetherMushroomForestEdge(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(200, 121, 157)
+				.setFogColor(200, 121, 157)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS));
 		addStructure("orange_mushroom", new StructureOrangeMushroom(), StructureType.FLOOR, 0.05F, true);

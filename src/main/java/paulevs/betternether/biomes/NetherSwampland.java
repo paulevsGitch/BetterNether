@@ -26,7 +26,7 @@ public class NetherSwampland extends NetherBiome
 	public NetherSwampland(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(137, 19, 78)
+				.setFogColor(137, 19, 78)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));

@@ -13,6 +13,7 @@ import net.minecraft.world.biome.Biomes;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.CrimsonGlowingWoods;
 import paulevs.betternether.biomes.CrimsonPinewood;
+import paulevs.betternether.biomes.FloodedDeltas;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.biomes.NetherBiomeGravelDesert;
 import paulevs.betternether.biomes.NetherBiomeJungle;
@@ -59,6 +60,7 @@ public class BiomesRegistry
 	public static final NetherBiome OLD_WARPED_WOODS = new OldWarpedWoods("Old Warped Woods");
 	public static final NetherBiome CRIMSON_PINEWOOD = new CrimsonPinewood("Crimson Pinewood");
 	public static final NetherBiome OLD_FUNGIWOODS = new OldFungiwoods("Old Fungiwoods");
+	public static final NetherBiome FLOODED_DELTAS = new FloodedDeltas("Flooded Deltas");
 	
 	private static int maxChance = 0;
 	
@@ -82,6 +84,7 @@ public class BiomesRegistry
 		registerSubBiome(OLD_WARPED_WOODS, BIOME_WARPED_FOREST, 1F);
 		registerSubBiome(CRIMSON_PINEWOOD, BIOME_CRIMSON_FOREST, 0.3F);
 		registerSubBiome(OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
+		registerSubBiome(FLOODED_DELTAS, BIOME_BASALT_DELTAS, 1F);
 	}
 	
 	private static void registerNotModBiomes()

@@ -7,6 +7,8 @@
 	"entity.betternether.naga_projectile": "Naga Projectile",
 	"entity.betternether.naga": "Naga",
 	"item.betternether.spawn_egg_naga": "Naga Spawn Egg",
+	"entity.betternether.flying_pig": "Flying Pig",
+	"item.betternether.spawn_egg_flying_pig": "Flying Pig Spawn Egg",
 
 	"item.betternether.black_apple": "Black Apple",
 
@@ -356,6 +358,7 @@
 	"biome.betternether.crimson_pinewood": "Crimson Pinewood",
 	"biome.betternether.old_fungiwoods": "Old Fungiwoods",
 	"biome.betternether.poor_nether_grasslands": "Poor Nether Grasslands",
+	"biome.betternether.flooded_deltas": "Flooded Deltas",
 	
 	"block.betternether.mushroom_fir": "Mushroom Fir",
 	"block.betternether.mushroom_fir_sapling": "Mushroom Fir Sapling",

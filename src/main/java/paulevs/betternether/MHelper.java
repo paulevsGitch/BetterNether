@@ -43,4 +43,14 @@ public class MHelper
 	{
 		return ((source >> pos) & 1) == 1;
 	}
+	
+	public static int floor(float x)
+	{
+		return x < 0 ? (int) (x - 1) : (int) x;
+	}
+	
+	public static float wrap(float x, float side)
+	{
+		return x - floor(x / side) * side;
+	}
 }

@@ -7,6 +7,8 @@
 	"entity.betternether.naga_projectile": "Снаряд наги",
 	"entity.betternether.naga": "Нага",
 	"item.betternether.spawn_egg_naga": "Яйцо призыва наги",
+	"entity.betternether.flying_pig": "Летающая свинья",
+	"item.betternether.spawn_egg_flying_pig": "Яйцо призыва летающей свиньи",
 
 	"item.betternether.black_apple": "Чёрное яблоко",
 
@@ -356,6 +358,7 @@
 	"biome.betternether.crimson_pinewood": "Багровый бор",
 	"biome.betternether.old_fungiwoods": "Старый грибной лес",
 	"biome.betternether.poor_nether_grasslands": "Обеднённые адские луга",
+	"biome.betternether.flooded_deltas": "Затопленные дельты",
 	
 	"block.betternether.mushroom_fir": "Грибная ель",
 	"block.betternether.mushroom_fir_sapling": "Саженец грибной ели",

@@ -28,7 +28,7 @@ public class NetherMushroomForest extends NetherBiome
 	public NetherMushroomForest(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(166, 38, 95)
+				.setFogColor(166, 38, 95)
 				.setLoop(SoundsRegistry.AMBIENT_MUSHROOM_FOREST)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.MYCELIUM, 0.1F)));

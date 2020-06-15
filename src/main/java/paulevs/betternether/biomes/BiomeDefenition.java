@@ -22,12 +22,13 @@ public class BiomeDefenition
 	private static final Random random = new Random();
 	
 	private String name;
-	private int color;
+	private int fogColor;
 	private SoundEvent loop;
 	private BiomeMoodSound mood;
 	private BiomeAdditionsSound additions;
 	private MixedNoisePoint noise;
 	private BiomeParticleConfig particleConfig;
+	private SoundEvent music;
 	
 	public BiomeDefenition(String name)
 	{
@@ -41,15 +42,15 @@ public class BiomeDefenition
 	}
 	
 	/**
-	 * Sets biome sky color
+	 * Sets biome fog color
 	 * @param r - Red [0 - 255]
 	 * @param g - Green [0 - 255]
 	 * @param b - Blue [0 - 255]
 	 * @return this BiomeDefenition
 	 */
-	public BiomeDefenition setColor(int r, int g, int b)
+	public BiomeDefenition setFogColor(int r, int g, int b)
 	{
-		this.color = MHelper.color(r, g, b);
+		this.fogColor = MHelper.color(r, g, b);
 		return this;
 	}
 	
@@ -86,12 +87,18 @@ public class BiomeDefenition
 		return this;
 	}
 	
+	public BiomeDefenition setMusic(SoundEvent music)
+	{
+		this.music = music;
+		return this;
+	}
+	
 	public Settings buildBiomeSettings()
 	{
 		Builder effects = new Builder()
 				.waterColor(4159204)
 				.waterFogColor(329011)
-				.fogColor(color);
+				.fogColor(fogColor);
 		if (loop != null)
 			effects.loopSound(loop);
 		if (mood != null)
@@ -100,7 +107,7 @@ public class BiomeDefenition
 			effects.additionsSound(additions);
 		if (particleConfig != null)
 			effects.particleConfig(particleConfig);
-		effects.music(MusicType.method_27283(SoundEvents.MUSIC_NETHER_WARPED_FOREST));
+		effects.music(MusicType.method_27283(music != null ? music : SoundEvents.MUSIC_NETHER_WARPED_FOREST));
 		
 		return new Settings()
 				.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)

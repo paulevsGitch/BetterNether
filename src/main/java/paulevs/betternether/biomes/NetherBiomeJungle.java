@@ -29,7 +29,7 @@ public class NetherBiomeJungle extends NetherBiome
 	public NetherBiomeJungle(String name)
 	{
 		super(new BiomeDefenition(name)
-				.setColor(62, 169, 61)
+				.setFogColor(62, 169, 61)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
