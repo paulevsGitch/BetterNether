@@ -1,6 +1,7 @@
 package paulevs.betternether.entity;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
@@ -9,6 +10,7 @@ import net.minecraft.block.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.ai.TargetFinder;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
@@ -28,10 +30,14 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ItemStackParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -52,17 +58,19 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 		this.setPathfindingPenalty(PathNodeType.LAVA, -1.0F);
 		this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
 		this.experiencePoints = 2;
+		this.flyingSpeed = 0.3F;
 	}
 
 	@Override
 	protected void initGoals()
 	{
 		this.targetSelector.add(1, new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
-		this.goalSelector.add(2, new SittingGoal());
-		this.goalSelector.add(3, new RoostingGoal());
-		this.goalSelector.add(4, new WanderAroundGoal());
-		this.goalSelector.add(5, new LookAroundGoal(this));
-		this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+		this.goalSelector.add(2, new FindFoodGoal());
+		this.goalSelector.add(3, new SittingGoal());
+		this.goalSelector.add(4, new RoostingGoal());
+		this.goalSelector.add(5, new WanderAroundGoal());
+		this.goalSelector.add(6, new LookAroundGoal(this));
+		this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
 	}
 	
 	public static DefaultAttributeContainer getAttributeContainer()
@@ -71,8 +79,8 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 				.createMobAttributes()
 				.add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
 				.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.0)
-				.add(EntityAttributes.GENERIC_FLYING_SPEED, 1.0)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
+				.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.3)
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
 				.add(EntityAttributes.GENERIC_ARMOR, 1.0)
 				.build();
@@ -217,7 +225,7 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 			BlockPos pos = this.getRandomLocation();
 			Path path = EntityFlyingPig.this.navigation.findPathTo(pos, 1);
 			if (path != null)
-				EntityFlyingPig.this.navigation.startMovingAlong(path, 1.0D);
+				EntityFlyingPig.this.navigation.startMovingAlong(path, EntityFlyingPig.this.flyingSpeed);
 			else
 				EntityFlyingPig.this.setVelocity(0, -0.2, 0);
 			EntityFlyingPig.this.setRoosting(false);
@@ -295,7 +303,7 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 				Path path = EntityFlyingPig.this.navigation.findPathTo(pos, 1);
 				if (path != null)
 				{
-					EntityFlyingPig.this.navigation.startMovingAlong(path, 1.0D);
+					EntityFlyingPig.this.navigation.startMovingAlong(path, EntityFlyingPig.this.flyingSpeed);
 					this.roosting = pos;
 				}
 			}
@@ -316,12 +324,12 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 		
 		private BlockPos getRoostingLocation()
 		{
-			BlockPos start = EntityFlyingPig.this.getBlockPos();
+			BlockPos pos = EntityFlyingPig.this.getBlockPos();
 			World world = EntityFlyingPig.this.world;
-			int up = BlocksHelper.upRay(world, start, 16);
-			start = start.offset(Direction.UP, up);
-			if (world.getBlockState(start.up()).getBlock() == Blocks.NETHER_WART_BLOCK)
-				return start;
+			int up = BlocksHelper.upRay(world, pos, 16);
+			pos = pos.offset(Direction.UP, up);
+			if (world.getBlockState(pos.up()).getBlock() == Blocks.NETHER_WART_BLOCK)
+				return pos;
 			else
 				return null;
 		}
@@ -368,6 +376,78 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 		{
 			timer ++;
 			super.tick();
+		}
+	}
+	
+	class FindFoodGoal extends Goal
+	{
+		private List<ItemEntity> foods;
+		private ItemEntity target;
+		
+		@Override
+		public boolean canStart()
+		{
+			return hasNearFood();
+		}
+		
+		@Override
+		public void start()
+		{
+			BlockPos pos = getFood();
+			Path path = EntityFlyingPig.this.navigation.findPathTo(pos, 1);
+			if (path != null)
+			{
+				EntityFlyingPig.this.navigation.startMovingAlong(path, EntityFlyingPig.this.flyingSpeed);
+				EntityFlyingPig.this.setRoosting(false);
+			}
+			super.start();
+		}
+		
+		@Override
+		public boolean shouldContinue()
+		{
+			return target.isAlive() && EntityFlyingPig.this.navigation.isFollowingPath();
+		}
+		
+		@Override
+		public void stop()
+		{
+			if (target.isAlive() && target.distanceTo(EntityFlyingPig.this) < 1.3)
+			{
+				ItemStack stack = ((ItemEntity) target).getStack();
+				for (int i = 0; i < 16; i++)
+				{
+					EntityFlyingPig.this.world.addParticle(
+							new ItemStackParticleEffect(ParticleTypes.ITEM, stack),
+							target.getX(),
+							target.getY(),
+							target.getZ(),
+							EntityFlyingPig.this.random.nextGaussian() * 0.1F,
+							EntityFlyingPig.this.random.nextGaussian() * 0.1F,
+							EntityFlyingPig.this.random.nextGaussian() * 0.1F);
+				}
+				EntityFlyingPig.this.eatFood(world, stack);
+				target.kill();
+				EntityFlyingPig.this.heal(stack.getCount());
+				EntityFlyingPig.this.setVelocity(0, 0.2F, 0);
+			}
+			EntityFlyingPig.this.preGoal = this;
+			super.stop();
+		}
+		
+		private BlockPos getFood()
+		{
+			target = foods.get(EntityFlyingPig.this.random.nextInt(foods.size()));
+			return target.getBlockPos();
+		}
+		
+		private boolean hasNearFood()
+		{
+			Box box = new Box(EntityFlyingPig.this.getBlockPos()).expand(16);
+			foods = EntityFlyingPig.this.world.getEntities(ItemEntity.class, box, (entity) -> {
+				return ((ItemEntity) entity).getStack().isFood();
+			});
+			return !foods.isEmpty();
 		}
 	}
 }
