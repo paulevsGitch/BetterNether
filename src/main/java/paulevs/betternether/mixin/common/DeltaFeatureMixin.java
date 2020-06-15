@@ -1,27 +1,26 @@
 package paulevs.betternether.mixin.common;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.DeltaFeature;
+import net.minecraft.world.gen.feature.DeltaFeatureConfig;
+import paulevs.betternether.BlocksHelper;
 
 @Mixin(DeltaFeature.class)
 public class DeltaFeatureMixin
 {
-	/*@Inject(method = "method_27096", at = @At("HEAD"), cancellable = true)
-	private void canGenerate(WorldAccess iWorld, int i, BlockPos blockPos, int j, int k, CallbackInfoReturnable<Boolean> info)
+	@Inject(method = "method_27103", at = @At("HEAD"), cancellable = true)
+	private static void checkBlock(WorldAccess worldAccess, BlockPos blockPos, DeltaFeatureConfig deltaFeatureConfig, CallbackInfoReturnable<Boolean> info)
 	{
-		if (blockPos.getY() > 42)
-		{
-			info.setReturnValue(false);
-			info.cancel();
-		}
-	}*/
-	
-	/*@Inject(method = "method_27103", at = @At("HEAD"), cancellable = true)
-	private static void checkBlock(WorldAccess iWorld, BlockPos blockPos, DeltaFeatureConfig deltaFeatureConfig, CallbackInfoReturnable<Boolean> info)
-	{
-		//System.out.println(iWorld.getBlockState(blockPos));
-		//if (!isValidBlock(iWorld.getBlockState(blockPos)))
+		BlockState blockState = worldAccess.getBlockState(blockPos);
+		if (!isValidBlock(blockState))
 		{
 			info.setReturnValue(false);
 			info.cancel();
@@ -30,6 +29,6 @@ public class DeltaFeatureMixin
 	
 	private static boolean isValidBlock(BlockState state)
 	{
-		return BlocksHelper.isNetherGround(state) || state.getBlock() == Blocks.BASALT;
-	}*/
+		return BlocksHelper.isNetherrack(state) || state.getBlock() == Blocks.BASALT || state.getBlock() == Blocks.BLACKSTONE;
+	}
 }

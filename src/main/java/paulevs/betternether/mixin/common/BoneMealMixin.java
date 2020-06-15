@@ -21,7 +21,7 @@ import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.registry.BlocksRegistry;
 
 @Mixin(BoneMealItem.class)
-public class GrassGrowMixin
+public class BoneMealMixin
 {
 	private static final Mutable POS = new Mutable();
 	
@@ -34,10 +34,19 @@ public class GrassGrowMixin
 		{
 			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos)) && !hasNyliumNear(world, blockPos))
 			{
-				growGrass(world, blockPos);
-				world.syncWorldEvent(2005, blockPos, 0);
+				boolean ground = false;
+				if (world.getBlockState(blockPos).getBlock() == Blocks.NETHERRACK)
+				{
+					ground = setGround(world, blockPos, world.getBlockState(blockPos.north())) ||
+							setGround(world, blockPos, world.getBlockState(blockPos.south())) ||
+							setGround(world, blockPos, world.getBlockState(blockPos.east())) ||
+							setGround(world, blockPos, world.getBlockState(blockPos.west()));
+				}
+				if (!ground)
+					growGrass(world, blockPos);
 				if (!context.getPlayer().isCreative())
 					context.getStack().decrement(1);
+				world.syncWorldEvent(2005, blockPos, 0);
 				info.setReturnValue(ActionResult.SUCCESS);
 				info.cancel();
 			}
@@ -100,5 +109,20 @@ public class GrassGrowMixin
 	private boolean isNylium(BlockState state)
 	{
 		return state.getBlock() == Blocks.CRIMSON_NYLIUM || state.getBlock() == Blocks.WARPED_NYLIUM;
+	}
+	
+	private boolean setGround(World world, BlockPos pos, BlockState state)
+	{
+		if (state.getBlock() == BlocksRegistry.NETHER_MYCELIUM)
+		{
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.getDefaultState());
+			return true;
+		}
+		else if (state.getBlock() == BlocksRegistry.JUNGLE_GRASS)
+		{
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JUNGLE_GRASS.getDefaultState());
+			return true;
+		}
+		return false;
 	}
 }

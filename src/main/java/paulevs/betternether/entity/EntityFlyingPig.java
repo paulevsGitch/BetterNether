@@ -7,7 +7,6 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
@@ -46,7 +45,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.registry.BlocksRegistry;
 
 public class EntityFlyingPig extends HostileEntity implements Flutterer
 {
@@ -96,7 +94,7 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 		{
 			public boolean isValidPosition(BlockPos pos)
 			{
-				BlockState state = this.world.getBlockState(pos.down());
+				/*BlockState state = this.world.getBlockState(pos.down());
 				boolean valid = !state.isAir() && state.getMaterial() != Material.LAVA;
 				if (valid)
 				{
@@ -105,7 +103,8 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 					valid = valid && state.getBlock() != BlocksRegistry.EGG_PLANT;
 					valid = valid && !state.getMaterial().blocksMovement();
 				}
-				return valid;
+				return valid;*/
+				return this.world.isAir(pos);
 			}
 
 			public void tick()

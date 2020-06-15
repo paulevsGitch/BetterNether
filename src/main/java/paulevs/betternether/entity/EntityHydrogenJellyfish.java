@@ -1,9 +1,13 @@
 package paulevs.betternether.entity;
 
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -20,10 +24,12 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.explosion.Explosion;
 import paulevs.betternether.registry.SoundsRegistry;
 
@@ -234,5 +240,13 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer
 	public PassiveEntity createChild(PassiveEntity mate)
 	{
 		return null;
+	}
+	
+	public static boolean canSpawn(EntityType<? extends EntityHydrogenJellyfish> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
+	{
+		Box box = new Box(pos);
+		box.expand(32, 256, 32);
+		List<EntityHydrogenJellyfish> list = world.getEntities(EntityHydrogenJellyfish.class, box, (entity) -> { return true; });
+		return list.size() < 4;
 	}
 }

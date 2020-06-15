@@ -36,8 +36,8 @@ public class EntityRegistry
 	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, EntityChair::new).dimensions(EntityDimensions.fixed(0.0F, 0.0F)).fireImmune().trackable(10, 1).build();
 	public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityNagaProjectile::new).dimensions(EntityDimensions.fixed(1F, 1F)).disableSummon().trackable(60, 1).build();
 	
-	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EntityFirefly::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).fireImmune().trackable(70, 3).build();
-	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EntityHydrogenJellyfish::new).dimensions(EntityDimensions.changing(2F, 5F)).fireImmune().trackable(150, 1).build();
+	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFirefly::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).fireImmune().trackable(70, 3).build();
+	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityHydrogenJellyfish::new).dimensions(EntityDimensions.changing(2F, 5F)).fireImmune().trackable(150, 1).build();
 	public static final EntityType<EntityNaga> NAGA = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityNaga::new).dimensions(EntityDimensions.fixed(0.625F, 2.75F)).fireImmune().trackable(100, 3).build();
 	public static final EntityType<EntityFlyingPig> FLYING_PIG = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFlyingPig::new).dimensions(EntityDimensions.fixed(1.0F, 1.25F)).fireImmune().trackable(70, 3).build();
 	
@@ -55,8 +55,8 @@ public class EntityRegistry
 		registerEntity("chair", CHAIR);
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
 		
-		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 60, 2, 6, NETHER_BIOMES);
-		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 100, 1, 4, NETHER_BIOMES);
+		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 10, 2, 6, NETHER_BIOMES);
+		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 20, 2, 5, NETHER_BIOMES);
 		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 20, 2, 4, NETHER_BIOMES);
 		registerEntity("flying_pig", FLYING_PIG, EntityFlyingPig.getAttributeContainer(), 20, 2, 4, BiomesRegistry.BIOME_CRIMSON_FOREST, BiomesRegistry.CRIMSON_GLOWING_WOODS, BiomesRegistry.CRIMSON_PINEWOOD);
 	}
