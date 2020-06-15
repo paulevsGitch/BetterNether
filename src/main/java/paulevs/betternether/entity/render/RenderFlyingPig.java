@@ -11,6 +11,7 @@ import paulevs.betternether.entity.model.ModelEntityFlyingPig;
 public class RenderFlyingPig extends MobEntityRenderer<EntityFlyingPig, AnimalModel<EntityFlyingPig>>
 {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/flying_pig.png");
+	private static final Identifier TEXTURE_WARTED = new Identifier(BetterNether.MOD_ID, "textures/entity/flying_pig_warted.png");
 
 	public RenderFlyingPig(EntityRenderDispatcher renderManager)
 	{
@@ -20,6 +21,6 @@ public class RenderFlyingPig extends MobEntityRenderer<EntityFlyingPig, AnimalMo
 	@Override
 	public Identifier getTexture(EntityFlyingPig entity)
 	{
-		return TEXTURE;
+		return entity.isWarted() ? TEXTURE_WARTED : TEXTURE;
 	}
 }

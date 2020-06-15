@@ -31,6 +31,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -42,6 +43,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
@@ -50,6 +52,7 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 {
 	private static final TrackedData<Byte> FLAGS;
 	private static final int BIT_ROOSTING = 0;
+	private static final int BIT_WARTED = 1;
 	private Goal preGoal;
 
 	public EntityFlyingPig(EntityType<? extends EntityFlyingPig> type, World world)
@@ -94,16 +97,6 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 		{
 			public boolean isValidPosition(BlockPos pos)
 			{
-				/*BlockState state = this.world.getBlockState(pos.down());
-				boolean valid = !state.isAir() && state.getMaterial() != Material.LAVA;
-				if (valid)
-				{
-					state = this.world.getBlockState(pos);
-					valid = state.isAir() || !state.getMaterial().blocksMovement();
-					valid = valid && state.getBlock() != BlocksRegistry.EGG_PLANT;
-					valid = valid && !state.getMaterial().blocksMovement();
-				}
-				return valid;*/
 				return this.world.isAir(pos);
 			}
 
@@ -122,13 +115,19 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 	protected void initDataTracker()
 	{
 		super.initDataTracker();
-		this.dataTracker.startTracking(FLAGS, (byte) 0);
+		this.dataTracker.startTracking(FLAGS, MHelper.setBit((byte) 0, BIT_WARTED, random.nextInt(4) == 0));
 	}
 
 	public boolean isRoosting()
 	{
 		byte b = this.dataTracker.get(FLAGS);
 		return MHelper.getBit(b, BIT_ROOSTING);
+	}
+	
+	public boolean isWarted()
+	{
+		byte b = this.dataTracker.get(FLAGS);
+		return MHelper.getBit(b, BIT_WARTED);
 	}
 
 	public void setRoosting(boolean roosting)
@@ -199,6 +198,17 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 	
 	@Override
 	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
+	
+	@Override
+	protected void updatePostDeath()
+	{
+		if (!world.isClient && this.isWarted() && world.getServer().getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+		{
+			this.dropStack(new ItemStack(Items.NETHER_WART, MHelper.randRange(1, 3, random)));
+		}
+		super.updatePostDeath();
+		
+	}
 
 	static
 	{
