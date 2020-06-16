@@ -111,9 +111,9 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 	}
 
 	@Override
-	public void setAngles(EntityHydrogenJellyfish entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch)
+	public void setAngles(EntityHydrogenJellyfish entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
 	{
-		double time = System.currentTimeMillis() * 0.0003;
+		double time = animationProgress * 0.03;
 		
 		body.setPivot(0, (float) Math.sin(time) * 8 - 42, 0);
 		
