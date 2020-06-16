@@ -15,7 +15,7 @@ public class RenderFlyingPig extends MobEntityRenderer<EntityFlyingPig, AnimalMo
 
 	public RenderFlyingPig(EntityRenderDispatcher renderManager)
 	{
-		super(renderManager, new ModelEntityFlyingPig(), 1);
+		super(renderManager, new ModelEntityFlyingPig(), 0.6F);
 	}
 
 	@Override

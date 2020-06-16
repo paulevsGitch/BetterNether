@@ -43,7 +43,7 @@ public class BlockStalactite extends BlockBaseNotFull
 	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack)
 	{
-		if (world.getBlockState(pos.down()).getBlock() == this)
+		if (world.getBlockState(pos.down()).getBlock() instanceof BlockStalactite)
 		{
 			POS.setX(pos.getX());
 			POS.setZ(pos.getZ());

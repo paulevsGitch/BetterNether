@@ -32,6 +32,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -116,6 +117,25 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 	{
 		super.initDataTracker();
 		this.dataTracker.startTracking(FLAGS, MHelper.setBit((byte) 0, BIT_WARTED, random.nextInt(4) == 0));
+	}
+	
+	@Override
+	public void writeCustomDataToTag(CompoundTag tag)
+	{
+		super.writeCustomDataToTag(tag);
+		
+		tag.putByte("byteData", this.dataTracker.get(FLAGS));
+	}
+	
+	@Override
+	public void readCustomDataFromTag(CompoundTag tag)
+	{
+		super.readCustomDataFromTag(tag);
+		
+		if (tag.contains("byteData"))
+		{
+			this.dataTracker.set(FLAGS, tag.getByte("byteData"));
+		}
 	}
 
 	public boolean isRoosting()

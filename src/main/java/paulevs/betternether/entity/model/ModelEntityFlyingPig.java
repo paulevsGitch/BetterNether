@@ -15,6 +15,9 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 	private final ModelPart leftWing;
 	private final ModelPart rightWingTip;
 	private final ModelPart leftWingTip;
+	private final ModelPart tail;
+	private final ModelPart legA;
+	private final ModelPart legB;
 
 	public ModelEntityFlyingPig()
 	{
@@ -64,6 +67,21 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 		this.leftWingTip.setPivot(-16.0F, 0.0F, 0.0F);
 		this.leftWingTip.addCuboid(-16.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
 		this.leftWing.addChild(this.leftWingTip);
+		
+		tail = new ModelPart(this, 0, 40);
+		tail.setPivot(0, 17, 0);
+		tail.addCuboid(-4.0F, 0.0F, 0.0F, 8.0F, 8.0F, 0.0F);
+		this.body.addChild(tail);
+		
+		this.legA = new ModelPart(this, 0, 48);
+		legA.setPivot(1.5F, 15, -4);
+		legA.addCuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F);
+		this.body.addChild(legA);
+		
+		this.legB = new ModelPart(this, 0, 48);
+		legB.setPivot(-4.5F, 15, -4);
+		legB.addCuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F);
+		this.body.addChild(legB);
 	}
 	   
 	@Override
@@ -110,6 +128,10 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 			this.leftWing.yaw = -this.rightWing.yaw;
 			this.rightWingTip.yaw = this.rightWing.yaw * 0.75F;
 			this.leftWingTip.yaw = -this.rightWing.yaw * 0.75F;
+			this.tail.pitch = MathHelper.cos(animationProgress * 0.3F) * 0.25F;
+			
+			this.legA.pitch = -this.body.pitch + MathHelper.sin(animationProgress * 0.05F) * 0.1F;
+			this.legB.pitch = -this.body.pitch + MathHelper.cos(animationProgress * 0.05F) * 0.1F;
 			
 			this.head.setPivot(0.0F, 8.0F, 0.0F);
 			this.body.setPivot(0.0F, 8.0F, 0.0F);
