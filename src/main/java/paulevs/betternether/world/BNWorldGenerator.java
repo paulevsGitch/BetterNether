@@ -11,6 +11,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ChunkRegion;
@@ -25,6 +26,7 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -209,7 +211,7 @@ public class BNWorldGenerator
 					boolean lava = BlocksHelper.isLava(state);
 					if (lava || BlocksHelper.isNetherGroundMagma(state) || state.getBlock() == Blocks.GRAVEL)
 					{
-						if (!lava && world.isAir(popPos.up()))
+						if (!lava && ((state = world.getBlockState(popPos.up())).isAir() || !state.getMaterial().blocksLight() || !state.getMaterial().blocksMovement()))// world.isAir(popPos.up()))
 							biome.genSurfColumn(world, popPos, random);
 
 						if (((x + y + z) & 1) == 0)
@@ -455,6 +457,17 @@ public class BNWorldGenerator
 					{
 						if (world.isAir(popPos.down()) && world.isAir(popPos.up()) && world.isAir(popPos.north()) && world.isAir(popPos.south()) && world.isAir(popPos.east()) && world.isAir(popPos.west()))
 							BlocksHelper.setWithoutUpdate(world, popPos, AIR);
+						continue;
+					}
+					
+					if (state.getBlock() instanceof BlockStalactite && !(state = world.getBlockState(popPos.down())).isFullCube(world, popPos.down()) && !(state.getBlock() instanceof BlockStalactite))
+					{
+						Mutable sp = new Mutable().set(popPos);
+						while (world.getBlockState(sp).getBlock() instanceof BlockStalactite)
+						{
+							BlocksHelper.setWithoutUpdate(world, sp, AIR);
+							sp.offset(Direction.UP);
+						}
 						continue;
 					}
 				}

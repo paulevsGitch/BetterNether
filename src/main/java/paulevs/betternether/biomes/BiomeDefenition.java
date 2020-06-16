@@ -110,7 +110,8 @@ public class BiomeDefenition
 		effects.music(MusicType.method_27283(music != null ? music : SoundEvents.MUSIC_NETHER_WARPED_FOREST));
 		
 		return new Settings()
-				.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)
+				//.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.NOPE, SurfaceBuilder.NETHER_CONFIG)
 				.precipitation(Biome.Precipitation.NONE)
 				.category(Biome.Category.NETHER)
 				.depth(0.1F)
