@@ -14,6 +14,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -25,6 +26,7 @@ import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.EntityFlyingPig;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
+import paulevs.betternether.entity.EntityJungleSkeleton;
 import paulevs.betternether.entity.EntityNaga;
 import paulevs.betternether.entity.EntityNagaProjectile;
 
@@ -39,7 +41,9 @@ public class EntityRegistry
 	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFirefly::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).fireImmune().trackable(70, 3).build();
 	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityHydrogenJellyfish::new).dimensions(EntityDimensions.changing(2F, 5F)).fireImmune().trackable(150, 1).build();
 	public static final EntityType<EntityNaga> NAGA = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityNaga::new).dimensions(EntityDimensions.fixed(0.625F, 2.75F)).fireImmune().trackable(100, 3).build();
-	public static final EntityType<EntityFlyingPig> FLYING_PIG = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFlyingPig::new).dimensions(EntityDimensions.fixed(1.0F, 1.25F)).fireImmune().trackable(70, 3).build();
+	public static final EntityType<EntityFlyingPig> FLYING_PIG = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFlyingPig::new).dimensions(EntityDimensions.fixed(1.0F, 1.25F)).fireImmune().trackable(70, 5).build();
+	public static final EntityType<EntityJungleSkeleton> JUNGLE_SKELETON = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityJungleSkeleton::new).dimensions(EntityDimensions.fixed(0.6F, 1.99F)).fireImmune().trackable(100, 3).build();
+	//public static final EntityType<EntityFlyingPig> SKULL = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFlyingPig::new).dimensions(EntityDimensions.fixed(1.0F, 1.25F)).fireImmune().trackable(70, 3).build();
 	
 	public static void register()
 	{
@@ -63,6 +67,9 @@ public class EntityRegistry
 		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 20, 2, 5, netherBiomes);
 		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 20, 2, 4, netherBiomes);
 		registerEntity("flying_pig", FLYING_PIG, EntityFlyingPig.getAttributeContainer(), 20, 2, 4, BiomesRegistry.BIOME_CRIMSON_FOREST, BiomesRegistry.CRIMSON_GLOWING_WOODS, BiomesRegistry.CRIMSON_PINEWOOD);
+		registerEntity("jungle_skeleton", JUNGLE_SKELETON, AbstractSkeletonEntity.createAbstractSkeletonAttributes().build(), 1000, 2, 4, BiomesRegistry.BIOME_NETHER_JUNGLE);
+		//BiomesRegistry.BIOME_NETHER_JUNGLE.setSpawnDensity(JUNGLE_SKELETON, 1, 1);
+		//registerEntity("skull", SKULL, EntityNaga.getAttributeContainer(), 20, 2, 4, netherBiomes);
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity)

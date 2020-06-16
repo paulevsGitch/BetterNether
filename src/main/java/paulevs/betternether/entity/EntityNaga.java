@@ -115,6 +115,6 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 	
 	public static boolean canSpawn(EntityType<? extends EntityNaga> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
 	{
-		return world.getDifficulty() != Difficulty.PEACEFUL;
+		return world.getDifficulty() != Difficulty.PEACEFUL && world.getLightLevel(pos) < 8;
 	}
 }

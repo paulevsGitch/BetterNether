@@ -24,6 +24,7 @@ public class Materials
 	public static FabricBlockSettings makeGrass(MaterialColor color)
 	{
 		return FabricBlockSettings.of(COMMON_GRASS)
+				.allowsSpawning((state, world, pos, type) -> { return true; })
 				.sounds(BlockSoundGroup.GRASS)
 				.materialColor(color)
 				.noCollision()

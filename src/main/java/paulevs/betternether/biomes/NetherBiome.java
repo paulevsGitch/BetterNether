@@ -492,4 +492,9 @@ public class NetherBiome extends Biome
 		this.addSpawn(type.getSpawnGroup(), new SpawnEntry(type, weight, minGroupSize, maxGroupSize));
 		this.addSpawnDensity(type, 1.0D, 0.5D);
 	}
+	
+	public void setSpawnDensity(EntityType<?> type, double maxMass, double mass)
+	{
+		this.addSpawnDensity(type, maxMass, mass);
+	}
 }
