@@ -113,8 +113,15 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 			this.leftWing.yaw = -this.rightWing.yaw;
 			this.leftWingTip.yaw = -this.rightWingTip.yaw;
 			
-			this.head.setPivot(0.0F, 23, 0.0F);
-			this.body.setPivot(0.0F, 22, 0.0F);
+			this.head.setPivot(0.0F, 25, 0.0F);
+			this.body.setPivot(0.0F, 24, 0.0F);
+			
+			this.legA.pitch = 0;
+			this.legB.pitch = 0;
+			this.tail.pitch = 0.1F;
+			
+			legA.setPivot(1.5F, 15, -3);
+			legB.setPivot(-4.5F, 15, -3);
 		}
 		else
 		{
@@ -135,6 +142,9 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 			
 			this.head.setPivot(0.0F, 8.0F, 0.0F);
 			this.body.setPivot(0.0F, 8.0F, 0.0F);
+			
+			legA.setPivot(1.5F, 15, -4);
+			legB.setPivot(-4.5F, 15, -4);
 		}
 	}
 }

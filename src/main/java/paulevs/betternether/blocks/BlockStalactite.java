@@ -50,12 +50,13 @@ public class BlockStalactite extends BlockBaseNotFull
 			for (int i = 1; i < 8; i++)
 			{
 				POS.setY(pos.getY() - i);
-				if (world.getBlockState(POS).getBlock() == this)
+				if (world.getBlockState(POS).getBlock() instanceof BlockStalactite)
 				{
-					int size = world.getBlockState(POS).get(SIZE);
+					BlockState state2 = world.getBlockState(POS);
+					int size = state2.get(SIZE);
 					if (size < i)
 					{
-						world.setBlockState(POS, getDefaultState().with(SIZE, i));
+						world.setBlockState(POS, state2.with(SIZE, i));
 					}
 					else
 						break;
@@ -64,19 +65,20 @@ public class BlockStalactite extends BlockBaseNotFull
 					break;
 			}
 		}
-		if (world.getBlockState(pos.up()).getBlock() == this)
+		if (world.getBlockState(pos.up()).getBlock() instanceof BlockStalactite)
 		{
 			POS.setX(pos.getX());
 			POS.setZ(pos.getZ());
 			for (int i = 1; i < 8; i++)
 			{
 				POS.setY(pos.getY() + i);
-				if (world.getBlockState(POS).getBlock() == this)
+				if (world.getBlockState(POS).getBlock() instanceof BlockStalactite)
 				{
-					int size = world.getBlockState(POS).get(SIZE);
+					BlockState state2 = world.getBlockState(POS);
+					int size = state2.get(SIZE);
 					if (size < i)
 					{
-						world.setBlockState(POS, getDefaultState().with(SIZE, i));
+						world.setBlockState(POS, state2.with(SIZE, i));
 					}
 					else
 						break;
