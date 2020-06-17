@@ -2,6 +2,7 @@ package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
 import paulevs.betternether.config.Config;
+import paulevs.betternether.recipes.HammersRecipes;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -34,6 +35,8 @@ public class BetterNether implements ModInitializer
 		EntityRegistry.register();
 		BrewingRegistry.register();
 		Config.save();
+		
+		HammersRecipes.register();
 	}
 	
 	private void initOptions()

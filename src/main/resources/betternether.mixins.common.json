@@ -17,7 +17,8 @@
 	"BrewingRecipeRegistryMixin",
 	"ServerWorldMixin",
 	"MultiNoiseBiomeSourceMixin",
-	"BiomeMixin"
+	"BiomeMixin",
+	"RecipeManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
