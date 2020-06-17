@@ -80,9 +80,9 @@ public class BNRecipeManager
 		}
 	}
 	
-	public static void addCraftingRecipe(String group, String[] shape, Map<String, ItemStack> materials, ItemStack result)
+	public static void addCraftingRecipe(String name, String[] shape, Map<String, ItemStack> materials, ItemStack result)
 	{
-		addCraftingRecipe("", group, shape, materials, result);
+		addCraftingRecipe(name, "", shape, materials, result);
 	}
 	
 	public static void addCraftingRecipe(String name, String group, String[] shape, Map<String, ItemStack> materials, ItemStack result)
