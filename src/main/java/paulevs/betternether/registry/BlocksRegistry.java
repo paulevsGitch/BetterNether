@@ -126,8 +126,8 @@ public class BlocksRegistry
 	public static final Block STALAGNATE_SLAB = registerSlab("stalagnate_planks_slab", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_FENCE = registerBlock("stalagnate_planks_fence", new BNFence(STALAGNATE_PLANKS));
 	public static final Block STALAGNATE_GATE = registerBlock("stalagnate_planks_gate", new BNGate(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_BUTTON = registerBlock("stalagnate_planks_button", new BNButton(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_PLATE = registerBlock("stalagnate_planks_plate", new BNPlate(ActivationRule.EVERYTHING, STALAGNATE_PLANKS));
+	public static final Block STALAGNATE_BUTTON = registerButton("stalagnate_planks_button", STALAGNATE_PLANKS);
+	public static final Block STALAGNATE_PLATE = registerPlate("stalagnate_planks_plate", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_TRAPDOOR = registerBlock("stalagnate_planks_trapdoor", new BNTrapdoor(STALAGNATE_PLANKS));
 	public static final Block STALAGNATE_DOOR = registerBlock("stalagnate_planks_door", new BNDoor(STALAGNATE_PLANKS));
 	public static final Block STALAGNATE_BOWL = registerBlockNI("stalagnate_bowl", new BlockStalagnateBowl());
@@ -139,8 +139,8 @@ public class BlocksRegistry
 	public static final Block REEDS_SLAB = registerSlab("reeds_slab", REEDS_BLOCK);
 	public static final Block REEDS_FENCE = registerBlock("reeds_fence", new BNFence(REEDS_BLOCK));
 	public static final Block REEDS_GATE = registerBlock("reeds_gate", new BNGate(REEDS_BLOCK));
-	public static final Block REEDS_BUTTON = registerBlock("reeds_button", new BNButton(REEDS_BLOCK));
-	public static final Block REEDS_PLATE = registerBlock("reeds_plate", new BNPlate(ActivationRule.EVERYTHING, REEDS_BLOCK));
+	public static final Block REEDS_BUTTON = registerButton("reeds_button", REEDS_BLOCK);
+	public static final Block REEDS_PLATE = registerPlate("reeds_plate", REEDS_BLOCK);
 	public static final Block REEDS_TRAPDOOR = registerBlock("reeds_trapdoor", new BNTrapdoor(REEDS_BLOCK));
 	public static final Block REEDS_DOOR = registerBlock("reeds_door", new BNDoor(REEDS_BLOCK));
 	
@@ -153,8 +153,8 @@ public class BlocksRegistry
 	public static final Block CINCINNASITE_BRICK_PLATE = registerBlock("cincinnasite_brick_plate", new BlockCincinnasite());
 	public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED);
 	public static final Block CINCINNASITE_SLAB = registerSlab("cincinnasite_slab", CINCINNASITE_FORGED);
-	public static final Block CINCINNASITE_BUTTON = registerBlock("cincinnasite_button", new BNButton(CINCINNASITE_FORGED));
-	public static final Block CINCINNASITE_PLATE = registerBlock("cincinnasite_plate", new BNPlate(ActivationRule.MOBS, CINCINNASITE_FORGED));
+	public static final Block CINCINNASITE_BUTTON = registerButton("cincinnasite_button", CINCINNASITE_FORGED);
+	public static final Block CINCINNASITE_PLATE = registerPlate("cincinnasite_plate", CINCINNASITE_FORGED, ActivationRule.MOBS);
 	public static final Block CINCINNASITE_LANTERN = registerBlock("cincinnasite_lantern", new BlockCincinnasiteLantern());
 	public static final Block CINCINNASITE_TILE_LARGE = registerBlock("cincinnasite_tile_large", new BlockCincinnasite());
 	public static final Block CINCINNASITE_TILE_SMALL = registerBlock("cincinnasite_tile_small", new BlockCincinnasite());
@@ -184,8 +184,8 @@ public class BlocksRegistry
 	public static final Block BONE_BLOCK = registerBlock("bone_block", new BNBoneBlock());
 	public static final Block BONE_STAIRS = registerStairs("bone_stairs", BONE_BLOCK);
 	public static final Block BONE_SLAB = registerSlab("bone_slab", BONE_BLOCK);
-	public static final Block BONE_BUTTON = registerBlock("bone_button", new BNButton(BONE_BLOCK));
-	public static final Block BONE_PLATE = registerBlock("bone_plate", new BNPlate(ActivationRule.EVERYTHING, BONE_BLOCK));
+	public static final Block BONE_BUTTON = registerButton("bone_button", BONE_BLOCK);
+	public static final Block BONE_PLATE = registerPlate("bone_plate", BONE_BLOCK);
 	public static final Block BONE_WALL = registerBlock("bone_wall", new BNWall(BONE_BLOCK));
 	public static final Block BONE_TILE = registerBlock("bone_tile", new BNBoneBlock());
 	public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BNDoor(BONE_BLOCK));
@@ -304,8 +304,8 @@ public class BlocksRegistry
 	public static final Block WILLOW_SLAB = registerSlab("willow_slab", WILLOW_PLANKS);
 	public static final Block WILLOW_FENCE = registerBlock("willow_fence", new BNFence(WILLOW_PLANKS));
 	public static final Block WILLOW_GATE = registerBlock("willow_gate", new BNGate(WILLOW_PLANKS));
-	public static final Block WILLOW_BUTTON = registerBlock("willow_button", new BNButton(WILLOW_PLANKS));
-	public static final Block WILLOW_PLATE = registerBlock("willow_plate", new BNPlate(ActivationRule.EVERYTHING, WILLOW_PLANKS));
+	public static final Block WILLOW_BUTTON = registerButton("willow_button", WILLOW_PLANKS);
+	public static final Block WILLOW_PLATE = registerPlate("willow_plate", WILLOW_PLANKS);
 	public static final Block WILLOW_TRAPDOOR = registerBlock("willow_trapdoor", new BNTrapdoor(WILLOW_PLANKS));
 	public static final Block WILLOW_DOOR = registerBlock("willow_door", new BNDoor(WILLOW_PLANKS));
 	
@@ -320,8 +320,8 @@ public class BlocksRegistry
 	public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
 	public static final Block WART_FENCE = registerBlock("wart_fence", new BNFence(WART_PLANKS));
 	public static final Block WART_GATE = registerBlock("wart_gate", new BNGate(WART_PLANKS));
-	public static final Block WART_BUTTON = registerBlock("wart_button", new BNButton(WART_PLANKS));
-	public static final Block WART_PLATE = registerBlock("wart_plate", new BNPlate(ActivationRule.EVERYTHING, WART_PLANKS));
+	public static final Block WART_BUTTON = registerButton("wart_button", WART_PLANKS);
+	public static final Block WART_PLATE = registerPlate("wart_plate", WART_PLANKS);
 	public static final Block WART_TRAPDOOR = registerBlock("wart_trapdoor", new BNTrapdoor(WART_PLANKS));
 	public static final Block WART_DOOR = registerBlock("wart_door", new BNDoor(WART_PLANKS));
 	
@@ -338,8 +338,8 @@ public class BlocksRegistry
 	public static final Block RUBEUS_SLAB = registerSlab("rubeus_slab", RUBEUS_PLANKS);
 	public static final Block RUBEUS_FENCE = registerBlock("rubeus_fence", new BNFence(RUBEUS_PLANKS));
 	public static final Block RUBEUS_GATE = registerBlock("rubeus_gate", new BNGate(RUBEUS_PLANKS));
-	public static final Block RUBEUS_BUTTON = registerBlock("rubeus_button", new BNButton(RUBEUS_PLANKS));
-	public static final Block RUBEUS_PLATE = registerBlock("rubeus_plate", new BNPlate(ActivationRule.EVERYTHING, RUBEUS_PLANKS));
+	public static final Block RUBEUS_BUTTON = registerButton("rubeus_button", RUBEUS_PLANKS);
+	public static final Block RUBEUS_PLATE = registerPlate("rubeus_plate", RUBEUS_PLANKS);
 	public static final Block RUBEUS_TRAPDOOR = registerBlock("rubeus_trapdoor", new BNTrapdoor(RUBEUS_PLANKS));
 	public static final Block RUBEUS_DOOR = registerBlock("rubeus_door", new BNDoor(RUBEUS_PLANKS));
 	
@@ -350,8 +350,8 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_SLAB = registerSlab("mushroom_slab", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_FENCE = registerBlock("mushroom_fence", new BNFence(MUSHROOM_PLANKS));
 	public static final Block MUSHROOM_GATE = registerBlock("mushroom_gate", new BNGate(MUSHROOM_PLANKS));
-	public static final Block MUSHROOM_BUTTON = registerBlock("mushroom_button", new BNButton(MUSHROOM_PLANKS));
-	public static final Block MUSHROOM_PLATE = registerBlock("mushroom_plate", new BNPlate(ActivationRule.EVERYTHING, MUSHROOM_PLANKS));
+	public static final Block MUSHROOM_BUTTON = registerButton("mushroom_button", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_PLATE = registerPlate("mushroom_plate", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_TRAPDOOR = registerBlock("mushroom_trapdoor", new BNTrapdoor(MUSHROOM_STAIRS));
 	public static final Block MUSHROOM_DOOR = registerBlock("mushroom_door", new BNDoor(MUSHROOM_STAIRS));
 	
@@ -387,8 +387,8 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab",  MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_FENCE = registerBlock("mushroom_fir_fence",  new BNFence(MUSHROOM_FIR_PLANKS));
 	public static final Block MUSHROOM_FIR_GATE = registerBlock("mushroom_fir_gate",  new BNGate(MUSHROOM_FIR_PLANKS));
-	public static final Block MUSHROOM_FIR_BUTTON = registerBlock("mushroom_fir_button",  new BNButton(MUSHROOM_FIR_PLANKS));
-	public static final Block MUSHROOM_FIR_PLATE = registerBlock("mushroom_fir_plate",  new BNPlate(ActivationRule.EVERYTHING, MUSHROOM_FIR_PLANKS));
+	public static final Block MUSHROOM_FIR_BUTTON = registerButton("mushroom_fir_button", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_PLATE = registerPlate("mushroom_fir_plate",  MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_TRAPDOOR = registerBlock("mushroom_fir_trapdoor",  new BNTrapdoor(MUSHROOM_FIR_PLANKS));
 	public static final Block MUSHROOM_FIR_DOOR = registerBlock("mushroom_fir_door",  new BNDoor(MUSHROOM_FIR_PLANKS));
 	
@@ -556,7 +556,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	public static Block registerStairs(String name, Block source)
+	private static Block registerStairs(String name, Block source)
 	{
 		Block stairs = new BNStairs(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -568,7 +568,7 @@ public class BlocksRegistry
 		return stairs;
 	}
 	
-	public static Block registerSlab(String name, Block source)
+	private static Block registerSlab(String name, Block source)
 	{
 		Block slab = new BNSlab(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -580,7 +580,7 @@ public class BlocksRegistry
 		return slab;
 	}
 	
-	public static Block registerRoof(String name, Block source)
+	private static Block registerRoof(String name, Block source)
 	{
 		Block roof = new BlockBase(FabricBlockSettings.copyOf(source));
 		if (Config.getBoolean("blocks", name, true))
@@ -590,5 +590,41 @@ public class BlocksRegistry
 			RecipesHelper.makeRoofRecipe(source, roof);
 		}
 		return roof;
+	}
+	
+	private static Block registerButton(String name, Block source)
+	{
+		Block button = new BNButton(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), button);
+			ItemsRegistry.registerItem(name, new BlockItem(button, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makeButtonRecipe(source, button);
+		}
+		return button;
+	}
+	
+	private static Block registerPlate(String name, Block source)
+	{
+		Block plate = new BNPlate(ActivationRule.EVERYTHING, source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), plate);
+			ItemsRegistry.registerItem(name, new BlockItem(plate, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makePlateRecipe(source, plate);
+		}
+		return plate;
+	}
+	
+	private static Block registerPlate(String name, Block source, ActivationRule rule)
+	{
+		Block plate = new BNPlate(rule, source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), plate);
+			ItemsRegistry.registerItem(name, new BlockItem(plate, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makePlateRecipe(source, plate);
+		}
+		return plate;
 	}
 }

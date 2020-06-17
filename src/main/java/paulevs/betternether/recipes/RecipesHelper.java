@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.registry.Registry;
 
 public class RecipesHelper
@@ -12,59 +12,51 @@ public class RecipesHelper
 	private static final String[] SHAPE_ROOF = new String[] {"# #", "###", " # "};
 	private static final String[] SHAPE_STAIR = new String[] {"#  ", "## ", "###"};
 	private static final String[] SHAPE_SLAB = new String[] {"###"};
-	private static Identifier id;
+	private static final String[] SHAPE_BUTTON = new String[] {"#"};
+	private static final String[] SHAPE_PLATE = new String[] {"##"};
+	
+	private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count)
+	{
+		if (Registry.BLOCK.getId(source) != null)
+		{
+			String name = Registry.BLOCK.getId(result).getPath();
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
+			BNRecipeManager.addCraftingRecipe(name, group, shape, materials, new ItemStack(result, count));
+		}
+	}
 	
 	public static void makeRoofRecipe(Block source, Block roof)
 	{
-		if ((id = Registry.BLOCK.getId(source)) != null)
-		{
-			String name = Registry.BLOCK.getId(roof).getPath();
-			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
-			BNRecipeManager.addCraftingRecipe(name, SHAPE_ROOF, materials, new ItemStack(roof, 6));
-		}
+		makeSingleRecipe("roof_tile", source, roof, SHAPE_ROOF, 6);
 	}
 	
 	public static void makeStairsRecipe(Block source, Block stairs)
 	{
-		if ((id = Registry.BLOCK.getId(source)) != null)
-		{
-			String name = Registry.BLOCK.getId(stairs).getPath();
-			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
-			BNRecipeManager.addCraftingRecipe(name, SHAPE_STAIR, materials, new ItemStack(stairs, 4));
-		}
+		String group = Registry.BLOCK.getId(stairs).getPath().contains("roof_tile") ?
+				"roof_tile_stairs" :
+					stairs.getSoundGroup(stairs.getDefaultState()) == BlockSoundGroup.WOOD ?
+							"nether_wooden_stairs" : "nether_rock_stairs";
+		makeSingleRecipe(group, source, stairs, SHAPE_STAIR, 4);
 	}
 	
 	public static void makeSlabRecipe(Block source, Block slab)
 	{
-		if ((id = Registry.BLOCK.getId(source)) != null)
-		{
-			String name = Registry.BLOCK.getId(slab).getPath();
-			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
-			BNRecipeManager.addCraftingRecipe(name, SHAPE_SLAB, materials, new ItemStack(slab, 6));
-		}
+		String group = Registry.BLOCK.getId(slab).getPath().contains("roof_tile") ?
+				"roof_tile_slab" :
+					slab.getSoundGroup(slab.getDefaultState()) == BlockSoundGroup.WOOD ?
+							"nether_wooden_slab" : "nether_rock_slab";
+		makeSingleRecipe(group, source, slab, SHAPE_SLAB, 6);
 	}
 	
-	public static void slabAndStairs(Block source, Block stairs, Block slab)
+	public static void makeButtonRecipe(Block source, Block button)
 	{
-		if ((id = Registry.BLOCK.getId(source)) != null)
-		{
-			String startName = id.getPath();
-			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
-			if (Registry.BLOCK.getId(stairs) != null)
-				BNRecipeManager.addCraftingRecipe(startName + "_stair", SHAPE_STAIR, materials, new ItemStack(stairs, 4));
-			if (Registry.BLOCK.getId(slab) != null)
-				BNRecipeManager.addCraftingRecipe(startName + "_slab", SHAPE_SLAB, materials, new ItemStack(slab, 6));
-		}
+		String group = button.getSoundGroup(button.getDefaultState()) == BlockSoundGroup.WOOD ? "nether_wooden_button" : "nether_rock_button";
+		makeSingleRecipe(group, source, button, SHAPE_BUTTON, 1);
 	}
 	
-	public static void roof(Block source, Block tile, Block stairs, Block slab)
+	public static void makePlateRecipe(Block source, Block plate)
 	{
-		if ((id = Registry.BLOCK.getId(source)) != null && Registry.BLOCK.getId(tile) != null)
-		{
-			String startName = id.getPath();
-			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
-			BNRecipeManager.addCraftingRecipe(startName, SHAPE_ROOF, materials, new ItemStack(tile, 6));
-			slabAndStairs(tile, stairs, slab);
-		}
+		String group = plate.getSoundGroup(plate.getDefaultState()) == BlockSoundGroup.WOOD ? "nether_wooden_plate" : "nether_rock_plate";
+		makeSingleRecipe(group, source, plate, SHAPE_PLATE, 1);
 	}
 }

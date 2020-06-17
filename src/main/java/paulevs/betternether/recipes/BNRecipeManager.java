@@ -80,7 +80,12 @@ public class BNRecipeManager
 		}
 	}
 	
-	public static void addCraftingRecipe(String name, String[] shape, Map<String, ItemStack> materials, ItemStack result)
+	public static void addCraftingRecipe(String group, String[] shape, Map<String, ItemStack> materials, ItemStack result)
+	{
+		addCraftingRecipe("", group, shape, materials, result);
+	}
+	
+	public static void addCraftingRecipe(String name, String group, String[] shape, Map<String, ItemStack> materials, ItemStack result)
 	{
 		int width = shape[0].length();
 		int height = shape.length;
@@ -92,7 +97,7 @@ public class BNRecipeManager
 		});
 		
 		DefaultedList<Ingredient> list = BNRecipeManager.getIngredients(shape, mapIng, width, height);
-		ShapedRecipe recipe = new ShapedRecipe(new Identifier(BetterNether.MOD_ID, name), "", width, height, list, result);
+		ShapedRecipe recipe = new ShapedRecipe(new Identifier(BetterNether.MOD_ID, name), group, width, height, list, result);
 		BNRecipeManager.addRecipe(RecipeType.CRAFTING, recipe);
 	}
 }
