@@ -87,7 +87,7 @@ public class BlocksHelper
 	{
 		Block b = state.getBlock();
 		return  b == Blocks.BONE_BLOCK ||
-				b == BlocksRegistry.BONE;
+				b == BlocksRegistry.BONE_BLOCK;
 	}
 	
 	public static void setWithoutUpdate(WorldAccess world, BlockPos pos, BlockState state)

@@ -37,6 +37,7 @@ public class BetterNether implements ModInitializer
 		Config.save();
 		
 		HammersRecipes.register();
+		//BlocksRecipes.register();
 	}
 	
 	private void initOptions()

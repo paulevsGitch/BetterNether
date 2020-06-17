@@ -11,13 +11,11 @@ import com.google.gson.JsonSyntaxException;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.IRecipeManager;
 
 public class BNRecipeManager
 {
@@ -34,11 +32,8 @@ public class BNRecipeManager
 		list.put(recipe.getId(), recipe);
 	}
 	
-	public static void inject(RecipeManager recipeManager)
+	public static Map<RecipeType<?>, Map<Identifier, Recipe<?>>> getMap(Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes)
 	{
-		IRecipeManager manager = (IRecipeManager) recipeManager;
-		
-		Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes = manager.getMap();
 		Map<RecipeType<?>, Map<Identifier, Recipe<?>>> result = Maps.newHashMap();
 		
 		for (RecipeType<?> type: RECIPES.keySet())
@@ -56,7 +51,7 @@ public class BNRecipeManager
 			result.put(type, newList);
 		}
 		
-		manager.setMap(result);
+		return result;
 	}
 	
 	public static DefaultedList<Ingredient> getIngredients(String[] pattern, Map<String, Ingredient> key, int width, int height)
@@ -91,6 +86,7 @@ public class BNRecipeManager
 		int height = shape.length;
 		
 		Map<String, Ingredient> mapIng = new HashMap<String, Ingredient>();
+		mapIng.put(" ", Ingredient.EMPTY);
 		materials.forEach((id, material) -> {
 			mapIng.put(id, Ingredient.ofStacks(material));
 		});

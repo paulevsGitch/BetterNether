@@ -18,7 +18,6 @@ import net.minecraft.world.gen.Spawner;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.level.storage.LevelStorage;
-import paulevs.betternether.recipes.BNRecipeManager;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.NetherBiomeAccessType;
 
@@ -30,7 +29,5 @@ public class ServerWorldMixin
 	{
 		BNWorldGenerator.init(seed);
 		NetherBiomeAccessType.reInitMap(seed);
-		
-		BNRecipeManager.inject(server.getRecipeManager());
 	}
 }

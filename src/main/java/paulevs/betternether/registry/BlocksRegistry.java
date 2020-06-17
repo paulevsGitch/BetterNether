@@ -1,5 +1,6 @@
 package paulevs.betternether.registry;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
@@ -34,6 +35,7 @@ import paulevs.betternether.blocks.BNWall;
 import paulevs.betternether.blocks.BlockAgave;
 import paulevs.betternether.blocks.BlockBNPot;
 import paulevs.betternether.blocks.BlockBarrelCactus;
+import paulevs.betternether.blocks.BlockBase;
 import paulevs.betternether.blocks.BlockBlackApple;
 import paulevs.betternether.blocks.BlockBlackAppleSeed;
 import paulevs.betternether.blocks.BlockBlackBush;
@@ -106,6 +108,7 @@ import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.RubeusLog;
 import paulevs.betternether.config.Config;
+import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.tab.CreativeTab;
 
 public class BlocksRegistry
@@ -119,21 +122,21 @@ public class BlocksRegistry
 	public static final Block STALAGNATE_LOG = registerBlock("stalagnate_log", new BNLogStripable(MaterialColor.LIME_TERRACOTTA, STRIPED_LOG_STALAGNATE));
 	public static final Block STALAGNATE_BARK = registerBlock("stalagnate_bark", new BNLogStripable(MaterialColor.LIME_TERRACOTTA, STRIPED_BARK_STALAGNATE));
 	public static final Block STALAGNATE_PLANKS = registerBlock("stalagnate_planks", new BNPlanks(MaterialColor.LIME_TERRACOTTA));
-	public static final Block STALAGNATE_PLANKS_STAIRS = registerBlock("stalagnate_planks_stairs", new BNStairs(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_PLANKS_SLAB = registerBlock("stalagnate_planks_slab", new BNSlab(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_PLANKS_FENCE = registerBlock("stalagnate_planks_fence", new BNFence(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_PLANKS_GATE = registerBlock("stalagnate_planks_gate", new BNGate(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_PLANKS_BUTTON = registerBlock("stalagnate_planks_button", new BNButton(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_PLANKS_PLATE = registerBlock("stalagnate_planks_plate", new BNPlate(ActivationRule.EVERYTHING, STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_PLANKS_TRAPDOOR = registerBlock("stalagnate_planks_trapdoor", new BNTrapdoor(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_PLANKS_DOOR = registerBlock("stalagnate_planks_door", new BNDoor(STALAGNATE_PLANKS));
+	public static final Block STALAGNATE_STAIRS = registerStairs("stalagnate_planks_stairs", STALAGNATE_PLANKS);
+	public static final Block STALAGNATE_SLAB = registerSlab("stalagnate_planks_slab", STALAGNATE_PLANKS);
+	public static final Block STALAGNATE_FENCE = registerBlock("stalagnate_planks_fence", new BNFence(STALAGNATE_PLANKS));
+	public static final Block STALAGNATE_GATE = registerBlock("stalagnate_planks_gate", new BNGate(STALAGNATE_PLANKS));
+	public static final Block STALAGNATE_BUTTON = registerBlock("stalagnate_planks_button", new BNButton(STALAGNATE_PLANKS));
+	public static final Block STALAGNATE_PLATE = registerBlock("stalagnate_planks_plate", new BNPlate(ActivationRule.EVERYTHING, STALAGNATE_PLANKS));
+	public static final Block STALAGNATE_TRAPDOOR = registerBlock("stalagnate_planks_trapdoor", new BNTrapdoor(STALAGNATE_PLANKS));
+	public static final Block STALAGNATE_DOOR = registerBlock("stalagnate_planks_door", new BNDoor(STALAGNATE_PLANKS));
 	public static final Block STALAGNATE_BOWL = registerBlockNI("stalagnate_bowl", new BlockStalagnateBowl());
 	
 	// Reed //
 	public static final Block NETHER_REED = registerBlock("nether_reed", new BlockNetherReed());
 	public static final Block REEDS_BLOCK = registerBlock("reeds_block", new BlockReedsBlock());
-	public static final Block REEDS_STAIRS = registerBlock("reeds_stairs", new BNStairs(REEDS_BLOCK));
-	public static final Block REEDS_SLAB = registerBlock("reeds_slab", new BNSlab(REEDS_BLOCK));
+	public static final Block REEDS_STAIRS = registerStairs("reeds_stairs", REEDS_BLOCK);
+	public static final Block REEDS_SLAB = registerSlab("reeds_slab", REEDS_BLOCK);
 	public static final Block REEDS_FENCE = registerBlock("reeds_fence", new BNFence(REEDS_BLOCK));
 	public static final Block REEDS_GATE = registerBlock("reeds_gate", new BNGate(REEDS_BLOCK));
 	public static final Block REEDS_BUTTON = registerBlock("reeds_button", new BNButton(REEDS_BLOCK));
@@ -148,18 +151,18 @@ public class BlocksRegistry
 	public static final Block CINCINNASITE_PILLAR = registerBlock("cincinnasite_pillar", new BlockCincinnasitPillar());
 	public static final Block CINCINNASITE_BRICKS = registerBlock("cincinnasite_bricks", new BlockCincinnasite());
 	public static final Block CINCINNASITE_BRICK_PLATE = registerBlock("cincinnasite_brick_plate", new BlockCincinnasite());
-	public static final Block CINCINNASITE_STAIRS = registerBlock("cincinnasite_stairs", new BNStairs(CINCINNASITE_BLOCK));
-	public static final Block CINCINNASITE_SLAB = registerBlock("cincinnasite_slab", new BNSlab(CINCINNASITE_BLOCK));
-	public static final Block CINCINNASITE_BUTTON = registerBlock("cincinnasite_button", new BNButton(CINCINNASITE_BLOCK));
-	public static final Block CINCINNASITE_PLATE = registerBlock("cincinnasite_plate", new BNPlate(ActivationRule.MOBS, CINCINNASITE_BLOCK));
+	public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED);
+	public static final Block CINCINNASITE_SLAB = registerSlab("cincinnasite_slab", CINCINNASITE_FORGED);
+	public static final Block CINCINNASITE_BUTTON = registerBlock("cincinnasite_button", new BNButton(CINCINNASITE_FORGED));
+	public static final Block CINCINNASITE_PLATE = registerBlock("cincinnasite_plate", new BNPlate(ActivationRule.MOBS, CINCINNASITE_FORGED));
 	public static final Block CINCINNASITE_LANTERN = registerBlock("cincinnasite_lantern", new BlockCincinnasiteLantern());
 	public static final Block CINCINNASITE_TILE_LARGE = registerBlock("cincinnasite_tile_large", new BlockCincinnasite());
 	public static final Block CINCINNASITE_TILE_SMALL = registerBlock("cincinnasite_tile_small", new BlockCincinnasite());
 	public static final Block CINCINNASITE_CARVED = registerBlock("cincinnasite_carved", new BlockCincinnasite());
-	public static final Block CINCINNASITE_WALL = registerBlock("cincinnasite_wall", new BNWall(CINCINNASITE_BLOCK));
+	public static final Block CINCINNASITE_WALL = registerBlock("cincinnasite_wall", new BNWall(CINCINNASITE_FORGED));
 	public static final Block CINCINNASITE_FIRE_BOWL = registerBlock("cincinnasite_fire_bowl", new BlockCincinnasiteFireBowl());
-	public static final Block CINCINNASITE_BRICKS_PILLAR = registerBlock("cincinnasite_bricks_pillar", new BNPillar(CINCINNASITE_BLOCK));
-	public static final Block CINCINNASITE_BARS = registerBlock("cincinnasite_bars", new BNPane(CINCINNASITE_BLOCK, true));
+	public static final Block CINCINNASITE_BRICKS_PILLAR = registerBlock("cincinnasite_bricks_pillar", new BNPillar(CINCINNASITE_FORGED));
+	public static final Block CINCINNASITE_BARS = registerBlock("cincinnasite_bars", new BNPane(CINCINNASITE_FORGED, true));
 	public static final Block CINCINNASITE_PEDESTAL = registerBlock("cincinnasite_pedestal", new BlockCincinnasitePedestal());
 	public static final Block CINCINNASITE_FRAME = registerBlock("cincinnasite_frame", new BlockCincinnasiteFrame());
 	public static final Block CINCINNASITE_LANTERN_SMALL = registerBlock("cincinnasite_lantern_small", new BlockSmallLantern());
@@ -167,26 +170,26 @@ public class BlocksRegistry
 	// Ruby //
 	public static final Block NETHER_RUBY_ORE = registerBlock("nether_ruby_ore", new BlockOre());
 	public static final Block NETHER_RUBY_BLOCK = registerBlock("nether_ruby_block", new BlockNetherRuby());
-	public static final Block NETHER_RUBY_STAIRS = registerBlock("nether_ruby_stairs", new BNStairs(NETHER_RUBY_BLOCK));
-	public static final Block NETHER_RUBY_SLAB = registerBlock("nether_ruby_slab", new BNSlab(NETHER_RUBY_BLOCK));
+	public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK);
+	public static final Block NETHER_RUBY_SLAB = registerSlab("nether_ruby_slab", NETHER_RUBY_BLOCK);
 	
 	// Bricks //
 	public static final Block NETHER_BRICK_TILE_LARGE = registerBlock("nether_brick_tile_large", new BNNetherBrick());
 	public static final Block NETHER_BRICK_TILE_SMALL = registerBlock("nether_brick_tile_small", new BNNetherBrick());
 	public static final Block NETHER_BRICK_WALL = registerBlock("nether_brick_wall", new BNWall(Blocks.NETHER_BRICKS));
-	public static final Block NETHER_BRICK_TILE_SLAB = registerBlock("nether_brick_tile_slab", new BNSlab(NETHER_BRICK_TILE_SMALL));
-	public static final Block NETHER_BRICK_TILE_STAIRS = registerBlock("nether_brick_tile_stairs", new BNStairs(NETHER_BRICK_TILE_SMALL));
+	public static final Block NETHER_BRICK_TILE_SLAB = registerSlab("nether_brick_tile_slab", NETHER_BRICK_TILE_SMALL);
+	public static final Block NETHER_BRICK_TILE_STAIRS = registerStairs("nether_brick_tile_stairs", NETHER_BRICK_TILE_SMALL);
 	
 	// Bone //
-	public static final Block BONE = registerBlock("bone_block", new BNBoneBlock());
-	public static final Block BONE_STAIRS = registerBlock("bone_stairs", new BNStairs(BONE));
-	public static final Block BONE_SLAB = registerBlock("bone_slab", new BNSlab(BONE));
-	public static final Block BONE_BUTTON = registerBlock("bone_button", new BNButton(BONE));
-	public static final Block BONE_PLATE = registerBlock("bone_plate", new BNPlate(ActivationRule.EVERYTHING, BONE));
-	public static final Block BONE_WALL = registerBlock("bone_wall", new BNWall(BONE));
+	public static final Block BONE_BLOCK = registerBlock("bone_block", new BNBoneBlock());
+	public static final Block BONE_STAIRS = registerStairs("bone_stairs", BONE_BLOCK);
+	public static final Block BONE_SLAB = registerSlab("bone_slab", BONE_BLOCK);
+	public static final Block BONE_BUTTON = registerBlock("bone_button", new BNButton(BONE_BLOCK));
+	public static final Block BONE_PLATE = registerBlock("bone_plate", new BNPlate(ActivationRule.EVERYTHING, BONE_BLOCK));
+	public static final Block BONE_WALL = registerBlock("bone_wall", new BNWall(BONE_BLOCK));
 	public static final Block BONE_TILE = registerBlock("bone_tile", new BNBoneBlock());
-	public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BNDoor(BONE));
-	public static final Block BONE_CINCINNASITE_DOOR = registerBlock("bone_cincinnasite_door", new BNDoor(BONE));
+	public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BNDoor(BONE_BLOCK));
+	public static final Block BONE_CINCINNASITE_DOOR = registerBlock("bone_cincinnasite_door", new BNDoor(BONE_BLOCK));
 	
 	// Quartz Glass //
 	public static final Block QUARTZ_GLASS = registerBlock("quartz_glass", new BNGlass(Blocks.GLASS));
@@ -268,22 +271,22 @@ public class BlocksRegistry
 	
 	// Obsidian //
 	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian());
-	public static final Block OBSIDIAN_BRICKS_STAIRS = registerBlock("obsidian_bricks_stairs", new BNStairs(OBSIDIAN_BRICKS));
-	public static final Block OBSIDIAN_BRICKS_SLAB = registerBlock("obsidian_bricks_slab", new BNSlab(OBSIDIAN_BRICKS));
+	public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs", OBSIDIAN_BRICKS);
+	public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab("obsidian_bricks_slab", OBSIDIAN_BRICKS);
 	public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile", new BNObsidian());
 	public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian());
-	public static final Block OBSIDIAN_TILE_STAIRS = registerBlock("obsidian_tile_stairs", new BNStairs(OBSIDIAN_TILE_SMALL));
-	public static final Block OBSIDIAN_TILE_SLAB = registerBlock("obsidian_tile_slab", new BNSlab(OBSIDIAN_TILE_SMALL));
+	public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs", OBSIDIAN_TILE_SMALL);
+	public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab", OBSIDIAN_TILE_SMALL);
 	public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass());
 	public static final Block OBSIDIAN_GLASS_PANE = registerBlock("obsidian_glass_pane", new BNPane(OBSIDIAN_GLASS, true));
 	public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian());
 	public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks", new BNObsidian());
-	public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerBlock("blue_obsidian_bricks_stairs", new BNStairs(BLUE_OBSIDIAN_BRICKS));
-	public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerBlock("blue_obsidian_bricks_slab", new BNSlab(BLUE_OBSIDIAN_BRICKS));
+	public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs("blue_obsidian_bricks_stairs", BLUE_OBSIDIAN_BRICKS);
+	public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab("blue_obsidian_bricks_slab", BLUE_OBSIDIAN_BRICKS);
 	public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile", new BNObsidian());
 	public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian());
-	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerBlock("blue_obsidian_tile_stairs", new BNStairs(BLUE_OBSIDIAN_TILE_SMALL));
-	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerBlock("blue_obsidian_tile_slab", new BNSlab(BLUE_OBSIDIAN_TILE_SMALL));
+	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs("blue_obsidian_tile_stairs", BLUE_OBSIDIAN_TILE_SMALL);
+	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL);
 	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass());
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
 	
@@ -297,8 +300,8 @@ public class BlocksRegistry
 	public static final Block WILLOW_BARK = registerBlock("willow_bark", new BNLogStripable(MaterialColor.RED_TERRACOTTA, STRIPED_BARK_WILLOW));
 	public static final Block WILLOW_SAPLING = registerBlock("willow_sapling", new BlockWillowSapling());
 	public static final Block WILLOW_PLANKS = registerBlock("willow_planks", new BNPlanks(MaterialColor.RED_TERRACOTTA));
-	public static final Block WILLOW_STAIRS = registerBlock("willow_stairs", new BNStairs(WILLOW_PLANKS));
-	public static final Block WILLOW_SLAB = registerBlock("willow_slab", new BNSlab(WILLOW_PLANKS));
+	public static final Block WILLOW_STAIRS = registerStairs("willow_stairs", WILLOW_PLANKS);
+	public static final Block WILLOW_SLAB = registerSlab("willow_slab", WILLOW_PLANKS);
 	public static final Block WILLOW_FENCE = registerBlock("willow_fence", new BNFence(WILLOW_PLANKS));
 	public static final Block WILLOW_GATE = registerBlock("willow_gate", new BNGate(WILLOW_PLANKS));
 	public static final Block WILLOW_BUTTON = registerBlock("willow_button", new BNButton(WILLOW_PLANKS));
@@ -313,8 +316,8 @@ public class BlocksRegistry
 	public static final Block WART_BARK = registerBlock("wart_bark", new BNLogStripable(Blocks.NETHER_WART_BLOCK, STRIPED_BARK_WART));
 	public static final Block WART_ROOTS = registerBlockNI("wart_roots", new BlockWartRoots());
 	public static final Block WART_PLANKS = registerBlock("wart_planks", new BNPlanks(MaterialColor.RED));
-	public static final Block WART_STAIRS = registerBlock("wart_stairs", new BNStairs(WART_PLANKS));
-	public static final Block WART_SLAB = registerBlock("wart_slab", new BNSlab(WART_PLANKS));
+	public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);
+	public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
 	public static final Block WART_FENCE = registerBlock("wart_fence", new BNFence(WART_PLANKS));
 	public static final Block WART_GATE = registerBlock("wart_gate", new BNGate(WART_PLANKS));
 	public static final Block WART_BUTTON = registerBlock("wart_button", new BNButton(WART_PLANKS));
@@ -331,20 +334,20 @@ public class BlocksRegistry
 	public static final Block RUBEUS_BARK = registerBlock("rubeus_bark", new RubeusLog(STRIPED_BARK_RUBEUS));
 	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves());
 	public static final Block RUBEUS_PLANKS = registerBlock("rubeus_planks", new BNPlanks(MaterialColor.MAGENTA));
-	public static final Block RUBEUS_STAIRS = registerBlock("rubeus_stairs", new BNStairs(WART_PLANKS));
-	public static final Block RUBEUS_SLAB = registerBlock("rubeus_slab", new BNSlab(WART_PLANKS));
-	public static final Block RUBEUS_FENCE = registerBlock("rubeus_fence", new BNFence(WART_PLANKS));
-	public static final Block RUBEUS_GATE = registerBlock("rubeus_gate", new BNGate(WART_PLANKS));
-	public static final Block RUBEUS_BUTTON = registerBlock("rubeus_button", new BNButton(WART_PLANKS));
-	public static final Block RUBEUS_PLATE = registerBlock("rubeus_plate", new BNPlate(ActivationRule.EVERYTHING, WART_PLANKS));
-	public static final Block RUBEUS_TRAPDOOR = registerBlock("rubeus_trapdoor", new BNTrapdoor(WART_PLANKS));
-	public static final Block RUBEUS_DOOR = registerBlock("rubeus_door", new BNDoor(WART_PLANKS));
+	public static final Block RUBEUS_STAIRS = registerStairs("rubeus_stairs", RUBEUS_PLANKS);
+	public static final Block RUBEUS_SLAB = registerSlab("rubeus_slab", RUBEUS_PLANKS);
+	public static final Block RUBEUS_FENCE = registerBlock("rubeus_fence", new BNFence(RUBEUS_PLANKS));
+	public static final Block RUBEUS_GATE = registerBlock("rubeus_gate", new BNGate(RUBEUS_PLANKS));
+	public static final Block RUBEUS_BUTTON = registerBlock("rubeus_button", new BNButton(RUBEUS_PLANKS));
+	public static final Block RUBEUS_PLATE = registerBlock("rubeus_plate", new BNPlate(ActivationRule.EVERYTHING, RUBEUS_PLANKS));
+	public static final Block RUBEUS_TRAPDOOR = registerBlock("rubeus_trapdoor", new BNTrapdoor(RUBEUS_PLANKS));
+	public static final Block RUBEUS_DOOR = registerBlock("rubeus_door", new BNDoor(RUBEUS_PLANKS));
 	
 	// Mushroom //
 	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStalagnateStem());
 	public static final Block MUSHROOM_PLANKS = registerBlock("mushroom_planks", new BNPlanks(MaterialColor.LIGHT_GRAY));
-	public static final Block MUSHROOM_STAIRS = registerBlock("mushroom_stairs", new BNStairs(MUSHROOM_PLANKS));
-	public static final Block MUSHROOM_SLAB = registerBlock("mushroom_slab", new BNSlab(MUSHROOM_PLANKS));
+	public static final Block MUSHROOM_STAIRS = registerStairs("mushroom_stairs", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_SLAB = registerSlab("mushroom_slab", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_FENCE = registerBlock("mushroom_fence", new BNFence(MUSHROOM_PLANKS));
 	public static final Block MUSHROOM_GATE = registerBlock("mushroom_gate", new BNGate(MUSHROOM_PLANKS));
 	public static final Block MUSHROOM_BUTTON = registerBlock("mushroom_button", new BNButton(MUSHROOM_PLANKS));
@@ -380,8 +383,8 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_LOG = registerBlock("mushroom_fir_log",  new BNLogStripable(MaterialColor.BLUE, STRIPED_LOG_MUSHROOM_FIR));
 	public static final Block MUSHROOM_FIR_WOOD = registerBlock("mushroom_fir_wood",  new BNLogStripable(MaterialColor.BLUE, STRIPED_WOOD_MUSHROOM_FIR));
 	public static final Block MUSHROOM_FIR_PLANKS = registerBlock("mushroom_fir_planks",  new BNPlanks(MaterialColor.LIGHT_GRAY));
-	public static final Block MUSHROOM_FIR_STAIRS = registerBlock("mushroom_fir_stairs",  new BNStairs(MUSHROOM_FIR_PLANKS));
-	public static final Block MUSHROOM_FIR_SLAB = registerBlock("mushroom_fir_slab",  new BNSlab(MUSHROOM_FIR_PLANKS));
+	public static final Block MUSHROOM_FIR_STAIRS = registerStairs("mushroom_fir_stairs", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab",  MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_FENCE = registerBlock("mushroom_fir_fence",  new BNFence(MUSHROOM_FIR_PLANKS));
 	public static final Block MUSHROOM_FIR_GATE = registerBlock("mushroom_fir_gate",  new BNGate(MUSHROOM_FIR_PLANKS));
 	public static final Block MUSHROOM_FIR_BUTTON = registerBlock("mushroom_fir_button",  new BNButton(MUSHROOM_FIR_PLANKS));
@@ -449,24 +452,24 @@ public class BlocksRegistry
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
 	
 	// Roofs //
-	public static final Block ROOF_TILE_REEDS = registerBlock("roof_tile_reeds", new BNPlanks(MaterialColor.BLUE));
-	public static final Block ROOF_TILE_REEDS_STAIRS = registerBlock("roof_tile_reeds_stairs", new BNStairs(ROOF_TILE_REEDS));
-	public static final Block ROOF_TILE_REEDS_SLAB = registerBlock("roof_tile_reeds_slab", new BNSlab(ROOF_TILE_REEDS));
-	public static final Block ROOF_TILE_STALAGNATE = registerBlock("roof_tile_stalagnate", new BNPlanks(MaterialColor.LIME));
-	public static final Block ROOF_TILE_STALAGNATE_STAIRS = registerBlock("roof_tile_stalagnate_stairs", new BNStairs(ROOF_TILE_STALAGNATE));
-	public static final Block ROOF_TILE_STALAGNATE_SLAB = registerBlock("roof_tile_stalagnate_slab", new BNSlab(ROOF_TILE_STALAGNATE));
-	public static final Block ROOF_TILE_NETHER_BRICKS = registerBlock("roof_tile_nether_bricks", new BNNetherBrick());
-	public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerBlock("roof_tile_nether_bricks_stairs", new BNStairs(ROOF_TILE_NETHER_BRICKS));
-	public static final Block ROOF_TILE_NETHER_BRICKS_SLAB = registerBlock("roof_tile_nether_bricks_slab", new BNSlab(ROOF_TILE_NETHER_BRICKS));
-	public static final Block ROOF_TILE_CINCINNASITE = registerBlock("roof_tile_cincinnasite", new BlockCincinnasite());
-	public static final Block ROOF_TILE_CINCINNASITE_STAIRS = registerBlock("roof_tile_cincinnasite_stairs", new BNStairs(ROOF_TILE_NETHER_BRICKS));
-	public static final Block ROOF_TILE_CINCINNASITE_SLAB = registerBlock("roof_tile_cincinnasite_slab", new BNSlab(ROOF_TILE_NETHER_BRICKS));
-	public static final Block ROOF_TILE_WILLOW = registerBlock("roof_tile_willow", new BNPlanks(MaterialColor.RED_TERRACOTTA));
-	public static final Block ROOF_TILE_WILLOW_STAIRS = registerBlock("roof_tile_willow_stairs", new BNStairs(ROOF_TILE_WILLOW));
-	public static final Block ROOF_TILE_WILLOW_SLAB = registerBlock("roof_tile_willow_slab", new BNSlab(ROOF_TILE_WILLOW));
-	public static final Block ROOF_TILE_WART = registerBlock("roof_tile_wart", new BNPlanks(MaterialColor.RED_TERRACOTTA));
-	public static final Block ROOF_TILE_WART_STAIRS = registerBlock("roof_tile_wart_stairs", new BNStairs(ROOF_TILE_WART));
-	public static final Block ROOF_TILE_WART_SLAB = registerBlock("roof_tile_wart_slab", new BNSlab(ROOF_TILE_WART));
+	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);
+	public static final Block ROOF_TILE_REEDS_STAIRS = registerStairs("roof_tile_reeds_stairs", ROOF_TILE_REEDS);
+	public static final Block ROOF_TILE_REEDS_SLAB = registerSlab("roof_tile_reeds_slab", ROOF_TILE_REEDS);
+	public static final Block ROOF_TILE_STALAGNATE = registerRoof("roof_tile_stalagnate", STALAGNATE_PLANKS);
+	public static final Block ROOF_TILE_STALAGNATE_STAIRS = registerStairs("roof_tile_stalagnate_stairs", ROOF_TILE_STALAGNATE);
+	public static final Block ROOF_TILE_STALAGNATE_SLAB = registerSlab("roof_tile_stalagnate_slab", ROOF_TILE_STALAGNATE);
+	public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS);
+	public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerStairs("roof_tile_nether_bricks_stairs", ROOF_TILE_NETHER_BRICKS);
+	public static final Block ROOF_TILE_NETHER_BRICKS_SLAB = registerSlab("roof_tile_nether_bricks_slab", ROOF_TILE_NETHER_BRICKS);
+	public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED);
+	public static final Block ROOF_TILE_CINCINNASITE_STAIRS = registerStairs("roof_tile_cincinnasite_stairs", ROOF_TILE_CINCINNASITE);
+	public static final Block ROOF_TILE_CINCINNASITE_SLAB = registerSlab("roof_tile_cincinnasite_slab", ROOF_TILE_CINCINNASITE);
+	public static final Block ROOF_TILE_WILLOW = registerRoof("roof_tile_willow", WILLOW_PLANKS);
+	public static final Block ROOF_TILE_WILLOW_STAIRS = registerStairs("roof_tile_willow_stairs", ROOF_TILE_WILLOW);
+	public static final Block ROOF_TILE_WILLOW_SLAB = registerSlab("roof_tile_willow_slab", ROOF_TILE_WILLOW);
+	public static final Block ROOF_TILE_WART = registerRoof("roof_tile_wart", WART_PLANKS);
+	public static final Block ROOF_TILE_WART_STAIRS = registerStairs("roof_tile_wart_stairs", ROOF_TILE_WART);
+	public static final Block ROOF_TILE_WART_SLAB = registerSlab("roof_tile_wart_slab", ROOF_TILE_WART);
 	
 	// Craft Stations //
 	public static final Block NETHERRACK_FURNACE = registerBlock("netherrack_furnace", new BlockNetherrackFurnace());
@@ -551,5 +554,41 @@ public class BlocksRegistry
 			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
 		}
 		return block;
+	}
+	
+	public static Block registerStairs(String name, Block source)
+	{
+		Block stairs = new BNStairs(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), stairs);
+			ItemsRegistry.registerItem(name, new BlockItem(stairs, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makeStairsRecipe(source, stairs);
+		}
+		return stairs;
+	}
+	
+	public static Block registerSlab(String name, Block source)
+	{
+		Block slab = new BNSlab(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), slab);
+			ItemsRegistry.registerItem(name, new BlockItem(slab, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makeSlabRecipe(source, slab);
+		}
+		return slab;
+	}
+	
+	public static Block registerRoof(String name, Block source)
+	{
+		Block roof = new BlockBase(FabricBlockSettings.copyOf(source));
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), roof);
+			ItemsRegistry.registerItem(name, new BlockItem(roof, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makeRoofRecipe(source, roof);
+		}
+		return roof;
 	}
 }

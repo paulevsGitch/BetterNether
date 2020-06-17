@@ -1,6 +1,7 @@
 package paulevs.betternether;
 
 import java.lang.reflect.Constructor;
+
 import org.apache.logging.log4j.LogManager;
 
 import net.fabricmc.loader.api.FabricLoader;
