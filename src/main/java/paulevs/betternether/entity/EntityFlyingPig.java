@@ -229,6 +229,12 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 		super.updatePostDeath();
 		
 	}
+	
+	@Override
+	public int getLimitPerChunk()
+	{
+		return 5;
+	}
 
 	static
 	{
