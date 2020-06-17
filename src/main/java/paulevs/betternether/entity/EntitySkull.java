@@ -131,7 +131,7 @@ public class EntitySkull extends HostileEntity implements Flutterer
 						.multiply(EntitySkull.this.flyingSpeed);
 				setVelocity(velocity);
 				this.lookAtEntity(target, 360, 360);
-				this.playSound(SoundsRegistry.MOB_SKULL_FLIGHT, MHelper.randRange(0.3F, 0.5F, random), MHelper.randRange(0.75F, 1.25F, random));
+				this.playSound(SoundsRegistry.MOB_SKULL_FLIGHT, MHelper.randRange(0.3F, 0.5F, random), MHelper.randRange(0.9F, 1.5F, random));
 			}
 			else if (dirTickTick < 0)
 			{
