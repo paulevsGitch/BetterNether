@@ -68,11 +68,22 @@ public class ItemsRegistry
 	public static final Item CINCINNASITE_SWORD = registerItem("cincinnasite_sword", new BNSword(BNItemMaterials.CINCINNASITE_TOOLS, 512, 4, -2.4F));
 	public static final Item CINCINNASITE_SWORD_DIAMOND = registerItem("cincinnasite_sword_diamond", new BNSword(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 5, -2.4F));
 	
+	public static final Item NETHER_RUBY = registerItem("nether_ruby", new Item(defaultSettings()));
+	public static final Item NETHER_RUBY_PICKAXE = registerItem("nether_ruby_pickaxe", new BNItemPickaxe(BNItemMaterials.NETHER_RUBY_TOOLS, 512, 1F));
+	public static final Item NETHER_RUBY_AXE = registerItem("nether_ruby_axe", new BNItemAxe(BNItemMaterials.NETHER_RUBY_TOOLS, 512, 1F));
+	public static final Item NETHER_RUBY_SHOVEL = registerItem("nether_ruby_shovel", new BNItemShovel(BNItemMaterials.NETHER_RUBY_TOOLS, 512, 1F));
+	public static final Item NETHER_RUBY_SWORD = registerItem("nether_ruby_sword", new BNSword(BNItemMaterials.NETHER_RUBY_TOOLS, 512, 4, -2.4F));
+	public static final Item NETHER_RUBY_HELMET = registerItem("nether_ruby_helmet", new BNArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.HEAD));
+	public static final Item NETHER_RUBY_CHESTPLATE = registerItem("nether_ruby_chestplate", new BNArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.CHEST));
+	public static final Item NETHER_RUBY_LEGGINGS = registerItem("nether_ruby_leggings", new BNArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.LEGS));
+	public static final Item NETHER_RUBY_BOOTS = registerItem("nether_ruby_boots", new BNArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.FEET));
+	
 	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg(EntityRegistry.FIREFLY, color(255, 223, 168), color(233, 182, 95)));
 	public static final Item SPAWN_EGG_JELLYFISH = registerItem("spawn_egg_hydrogen_jellyfish", makeEgg(EntityRegistry.HYDROGEN_JELLYFISH, color(253, 164, 24), color(88, 21, 4)));
 	public static final Item SPAWN_NAGA = registerItem("spawn_egg_naga", makeEgg(EntityRegistry.NAGA, MHelper.color(12, 12, 12), MHelper.color(210, 90, 26)));
 	public static final Item SPAWN_FLYING_PIG = registerItem("spawn_egg_flying_pig", makeEgg(EntityRegistry.FLYING_PIG, MHelper.color(241, 140, 93), MHelper.color(176, 58, 47)));
 	public static final Item SPAWN_JUNGLE_SKELETON = registerItem("spawn_egg_jungle_skeleton", makeEgg(EntityRegistry.JUNGLE_SKELETON, MHelper.color(134, 162, 149), MHelper.color(6, 111, 79)));
+	public static final Item SPAWN_SKULL = registerItem("spawn_egg_skull", makeEgg(EntityRegistry.SKULL, MHelper.color(24, 19, 19), MHelper.color(255, 28, 18)));
 	
 	public static void register() {}
 	

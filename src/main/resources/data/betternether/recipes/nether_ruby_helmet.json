@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+	"# #"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:nether_ruby"
+    }
+  },
+  "result": {
+    "item": "betternether:nether_ruby_helmet"
+  }
+}

@@ -462,5 +462,20 @@
 	"block.betternether.netherrack_stalactite": "Незеритовый сталактит",
 	"block.betternether.glowstone_stalactite": "Светокаменный сталактит",
 	"block.betternether.blackstone_stalactite": "Чернокаменный сталактит",
-	"block.betternether.basalt_stalactite": "Базальтовый сталактит"
+	"block.betternether.basalt_stalactite": "Базальтовый сталактит",
+	
+	"block.betternether.nether_ruby_ore": "Руда рубина нижнего мира",
+	"block.betternether.nether_ruby_block": "Блок рубина нижнего мира",
+	"block.betternether.nether_ruby_stairs": "Ступени из рубина нижнего мира",
+	"block.betternether.nether_ruby_slab": "Плита из рубина нижнего мира",
+	
+	"item.betternether.nether_ruby": "Рубин нижнего мира",
+	"item.betternether.nether_ruby_pickaxe": "Рубиновая кирка",
+	"item.betternether.nether_ruby_axe": "Рубиновый топор",
+	"item.betternether.nether_ruby_shovel": "Рубиновая лопата",
+	"item.betternether.nether_ruby_sword": "Рубиновый меч",
+	"item.betternether.nether_ruby_helmet": "Рубиновый шлем",
+	"item.betternether.nether_ruby_chestplate": "Рубиновый нагрудник",
+	"item.betternether.nether_ruby_leggings": "Рубиновые поножи",
+	"item.betternether.nether_ruby_boots": "Рубиновые ботинки"
 }

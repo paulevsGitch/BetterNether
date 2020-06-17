@@ -11,6 +11,8 @@
 	"item.betternether.spawn_egg_flying_pig": "Flying Pig Spawn Egg",
 	"entity.betternether.jungle_skeleton": "Jungle Skeleton",
 	"item.betternether.spawn_egg_jungle_skeleton": "Jungle Skeleton Spawn Egg",
+	"entity.betternether.skull": "Skull",
+	"item.betternether.spawn_egg_skull": "Skull Spawn Egg",
 
 	"item.betternether.black_apple": "Black Apple",
 
@@ -462,5 +464,20 @@
 	"block.betternether.netherrack_stalactite": "Netherrack Stalactite",
 	"block.betternether.glowstone_stalactite": "Glowstone Stalactite",
 	"block.betternether.blackstone_stalactite": "Blackstone Stalactite",
-	"block.betternether.basalt_stalactite": "Basalt Stalactite"
+	"block.betternether.basalt_stalactite": "Basalt Stalactite",
+	
+	"block.betternether.nether_ruby_ore": "Nether Ruby Ore",
+	"block.betternether.nether_ruby_block": "Nether Ruby Block",
+	"block.betternether.nether_ruby_stairs": "Nether Ruby Stairs",
+	"block.betternether.nether_ruby_slab": "Nether Ruby Slab",
+	
+	"item.betternether.nether_ruby": "Nether Ruby",
+	"item.betternether.nether_ruby_pickaxe": "Nether Ruby Pickaxe",
+	"item.betternether.nether_ruby_axe": "Nether Ruby Axe",
+	"item.betternether.nether_ruby_shovel": "Nether Ruby Shovel",
+	"item.betternether.nether_ruby_sword": "Nether Ruby Sword",
+	"item.betternether.nether_ruby_helmet": "Nether Ruby Helmet",
+	"item.betternether.nether_ruby_chestplate": "Nether Ruby Chestplate",
+	"item.betternether.nether_ruby_leggings": "Nether Ruby Leggings",
+	"item.betternether.nether_ruby_boots": "Nether Ruby Boots"
 }

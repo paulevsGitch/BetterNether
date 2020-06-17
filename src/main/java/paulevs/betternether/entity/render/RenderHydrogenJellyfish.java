@@ -26,7 +26,7 @@ public class RenderHydrogenJellyfish extends MobEntityRenderer<EntityHydrogenJel
 	}
 
 	@Override
-	protected int getBlockLight(EntityHydrogenJellyfish entity, BlockPos tickDelta)
+	protected int getBlockLight(EntityHydrogenJellyfish entity, BlockPos pos)
 	{
 		return 15;
 	}

@@ -618,4 +618,10 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	{
 		return BlocksHelper.downRay(world, pos, 10) < 8;
 	}
+	
+	@Override
+	public boolean isPushable()
+	{
+		return false;
+	}
 }

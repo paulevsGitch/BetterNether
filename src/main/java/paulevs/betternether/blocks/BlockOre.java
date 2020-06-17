@@ -5,13 +5,14 @@ import net.minecraft.block.Material;
 import net.minecraft.block.OreBlock;
 import net.minecraft.sound.BlockSoundGroup;
 
-public class BlockCincinnasiteOre extends OreBlock
+public class BlockOre extends OreBlock
 {
-	public BlockCincinnasiteOre()
+	public BlockOre()
 	{
 		super(FabricBlockSettings.of(Material.STONE)
+				.requiresTool()
 				.hardness(3F)
 				.resistance(5F)
-				.sounds(BlockSoundGroup.STONE));
+				.sounds(BlockSoundGroup.NETHERRACK));
 	}
 }

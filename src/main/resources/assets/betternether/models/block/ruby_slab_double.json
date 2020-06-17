@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/nether_ruby_slab_side",
+        "down": "betternether:block/nether_ruby_block",
+        "up": "betternether:block/nether_ruby_block",
+        "north": "betternether:block/nether_ruby_slab_side",
+        "east": "betternether:block/nether_ruby_slab_side",
+        "south": "betternether:block/nether_ruby_slab_side",
+        "west": "betternether:block/nether_ruby_slab_side"
+    }
+}

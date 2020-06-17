@@ -47,5 +47,14 @@
 				"stream": false
 			}
 		]
+	},
+	"betternether.mob.skull_flight": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/skull_flight",
+				"stream": false
+			}
+		]
 	}
 }

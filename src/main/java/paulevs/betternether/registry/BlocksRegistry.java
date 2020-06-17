@@ -48,7 +48,6 @@ import paulevs.betternether.blocks.BlockCincinnasiteFireBowl;
 import paulevs.betternether.blocks.BlockCincinnasiteForge;
 import paulevs.betternether.blocks.BlockCincinnasiteFrame;
 import paulevs.betternether.blocks.BlockCincinnasiteLantern;
-import paulevs.betternether.blocks.BlockCincinnasiteOre;
 import paulevs.betternether.blocks.BlockCincinnasitePedestal;
 import paulevs.betternether.blocks.BlockEggPlant;
 import paulevs.betternether.blocks.BlockEyeSeed;
@@ -72,10 +71,12 @@ import paulevs.betternether.blocks.BlockNetherCactus;
 import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockNetherMycelium;
 import paulevs.betternether.blocks.BlockNetherReed;
+import paulevs.betternether.blocks.BlockNetherRuby;
 import paulevs.betternether.blocks.BlockNetherrackFurnace;
 import paulevs.betternether.blocks.BlockNetherrackMoss;
 import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.blocks.BlockOrangeMushroom;
+import paulevs.betternether.blocks.BlockOre;
 import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
@@ -141,7 +142,7 @@ public class BlocksRegistry
 	public static final Block REEDS_DOOR = registerBlock("reeds_door", new BNDoor(REEDS_BLOCK));
 	
 	// Cincinnasite //
-	public static final Block CINCINNASITE_ORE = registerBlock("cincinnasite_ore", new BlockCincinnasiteOre());
+	public static final Block CINCINNASITE_ORE = registerBlock("cincinnasite_ore", new BlockOre());
 	public static final Block CINCINNASITE_BLOCK = registerBlock("cincinnasite_block", new BlockCincinnasite());
 	public static final Block CINCINNASITE_FORGED = registerBlock("cincinnasite_forged", new BlockCincinnasite());
 	public static final Block CINCINNASITE_PILLAR = registerBlock("cincinnasite_pillar", new BlockCincinnasitPillar());
@@ -162,6 +163,12 @@ public class BlocksRegistry
 	public static final Block CINCINNASITE_PEDESTAL = registerBlock("cincinnasite_pedestal", new BlockCincinnasitePedestal());
 	public static final Block CINCINNASITE_FRAME = registerBlock("cincinnasite_frame", new BlockCincinnasiteFrame());
 	public static final Block CINCINNASITE_LANTERN_SMALL = registerBlock("cincinnasite_lantern_small", new BlockSmallLantern());
+	
+	// Ruby //
+	public static final Block NETHER_RUBY_ORE = registerBlock("nether_ruby_ore", new BlockOre());
+	public static final Block NETHER_RUBY_BLOCK = registerBlock("nether_ruby_block", new BlockNetherRuby());
+	public static final Block NETHER_RUBY_STAIRS = registerBlock("nether_ruby_stairs", new BNStairs(NETHER_RUBY_BLOCK));
+	public static final Block NETHER_RUBY_SLAB = registerBlock("nether_ruby_slab", new BNSlab(NETHER_RUBY_BLOCK));
 	
 	// Bricks //
 	public static final Block NETHER_BRICK_TILE_LARGE = registerBlock("nether_brick_tile_large", new BNNetherBrick());

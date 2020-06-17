@@ -13,6 +13,7 @@ import paulevs.betternether.entity.render.RenderHydrogenJellyfish;
 import paulevs.betternether.entity.render.RenderJungleSkeleton;
 import paulevs.betternether.entity.render.RenderNaga;
 import paulevs.betternether.entity.render.RenderNagaProjectile;
+import paulevs.betternether.entity.render.RenderSkull;
 
 @Environment(EnvType.CLIENT)
 public class EntityRenderRegistry
@@ -26,6 +27,7 @@ public class EntityRenderRegistry
 		registerRenderAny(EntityRegistry.NAGA_PROJECTILE, RenderNagaProjectile.class);
 		registerRenderMob(EntityRegistry.FLYING_PIG, RenderFlyingPig.class);
 		registerRenderMob(EntityRegistry.JUNGLE_SKELETON, RenderJungleSkeleton.class);
+		registerRenderMob(EntityRegistry.SKULL, RenderSkull.class);
 	}
 
 	private static void registerRenderMob(EntityType<?> entity, Class<? extends MobEntityRenderer<?, ?>> renderer)

@@ -29,6 +29,7 @@ import paulevs.betternether.entity.EntityHydrogenJellyfish;
 import paulevs.betternether.entity.EntityJungleSkeleton;
 import paulevs.betternether.entity.EntityNaga;
 import paulevs.betternether.entity.EntityNagaProjectile;
+import paulevs.betternether.entity.EntitySkull;
 
 public class EntityRegistry
 {
@@ -43,7 +44,7 @@ public class EntityRegistry
 	public static final EntityType<EntityNaga> NAGA = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityNaga::new).dimensions(EntityDimensions.fixed(0.625F, 2.75F)).fireImmune().trackable(100, 3).build();
 	public static final EntityType<EntityFlyingPig> FLYING_PIG = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFlyingPig::new).dimensions(EntityDimensions.fixed(1.0F, 1.25F)).fireImmune().trackable(50, 3).build();
 	public static final EntityType<EntityJungleSkeleton> JUNGLE_SKELETON = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityJungleSkeleton::new).dimensions(EntityDimensions.fixed(0.6F, 1.99F)).fireImmune().trackable(100, 3).build();
-	//public static final EntityType<EntityFlyingPig> SKULL = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFlyingPig::new).dimensions(EntityDimensions.fixed(1.0F, 1.25F)).fireImmune().trackable(70, 3).build();
+	public static final EntityType<EntitySkull> SKULL = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntitySkull::new).dimensions(EntityDimensions.fixed(0.625F, 0.625F)).fireImmune().trackable(50, 3).build();
 	
 	public static void register()
 	{
@@ -68,8 +69,7 @@ public class EntityRegistry
 		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 20, 2, 4, netherBiomes);
 		registerEntity("flying_pig", FLYING_PIG, EntityFlyingPig.getAttributeContainer(), 20, 2, 4, BiomesRegistry.BIOME_CRIMSON_FOREST, BiomesRegistry.CRIMSON_GLOWING_WOODS, BiomesRegistry.CRIMSON_PINEWOOD);
 		registerEntity("jungle_skeleton", JUNGLE_SKELETON, AbstractSkeletonEntity.createAbstractSkeletonAttributes().build(), 1000, 2, 4, BiomesRegistry.BIOME_NETHER_JUNGLE);
-		//BiomesRegistry.BIOME_NETHER_JUNGLE.setSpawnDensity(JUNGLE_SKELETON, 1, 1);
-		//registerEntity("skull", SKULL, EntityNaga.getAttributeContainer(), 20, 2, 4, netherBiomes);
+		registerEntity("skull", SKULL, EntitySkull.getAttributeContainer(), 2, 2, 4, netherBiomes);
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity)
