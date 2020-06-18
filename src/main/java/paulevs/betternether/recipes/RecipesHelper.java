@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.registry.Registry;
 
@@ -15,6 +16,7 @@ public class RecipesHelper
 	private static final String[] SHAPE_BUTTON = new String[] {"#"};
 	private static final String[] SHAPE_PLATE = new String[] {"##"};
 	private static final String[] SHAPE_X2 = new String[] {"##", "##"};
+	private static final String[] SHAPE_3X2 = new String[] {"#I#", "#I#"};
 	
 	private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count)
 	{
@@ -69,5 +71,25 @@ public class RecipesHelper
 	public static void makeSimpleRecipe2(Block source, Block result, int count, String group)
 	{
 		makeSingleRecipe(group, source, result, SHAPE_X2, count);
+	}
+	
+	public static void makeFenceRecipe(Block source, Block fence)
+	{
+		if (Registry.BLOCK.getId(source) != null)
+		{
+			String name = Registry.BLOCK.getId(fence).getPath();
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source), "I", new ItemStack(Items.STICK));
+			BNRecipeManager.addCraftingRecipe(name, "nether_fence", SHAPE_3X2, materials, new ItemStack(fence, 3));
+		}
+	}
+	
+	public static void makeGateRecipe(Block source, Block gate)
+	{
+		if (Registry.BLOCK.getId(source) != null)
+		{
+			String name = Registry.BLOCK.getId(gate).getPath();
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("I", new ItemStack(source), "#", new ItemStack(Items.STICK));
+			BNRecipeManager.addCraftingRecipe(name, "nether_fence", SHAPE_3X2, materials, new ItemStack(gate));
+		}
 	}
 }

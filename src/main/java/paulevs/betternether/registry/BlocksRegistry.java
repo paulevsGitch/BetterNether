@@ -124,8 +124,8 @@ public class BlocksRegistry
 	public static final Block STALAGNATE_PLANKS = registerPlanks("stalagnate_planks", new BNPlanks(MaterialColor.LIME_TERRACOTTA), 1, STALAGNATE_STEM, STALAGNATE_LOG, STALAGNATE_BARK, STRIPED_LOG_STALAGNATE, STRIPED_BARK_STALAGNATE);
 	public static final Block STALAGNATE_STAIRS = registerStairs("stalagnate_planks_stairs", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_SLAB = registerSlab("stalagnate_planks_slab", STALAGNATE_PLANKS);
-	public static final Block STALAGNATE_FENCE = registerBlock("stalagnate_planks_fence", new BNFence(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_GATE = registerBlock("stalagnate_planks_gate", new BNGate(STALAGNATE_PLANKS));
+	public static final Block STALAGNATE_FENCE = registerFence("stalagnate_planks_fence", STALAGNATE_PLANKS);
+	public static final Block STALAGNATE_GATE = registerGate("stalagnate_planks_gate", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_BUTTON = registerButton("stalagnate_planks_button", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_PLATE = registerPlate("stalagnate_planks_plate", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_TRAPDOOR = registerBlock("stalagnate_planks_trapdoor", new BNTrapdoor(STALAGNATE_PLANKS));
@@ -137,8 +137,8 @@ public class BlocksRegistry
 	public static final Block REEDS_BLOCK = registerBlock("reeds_block", new BlockReedsBlock());
 	public static final Block REEDS_STAIRS = registerStairs("reeds_stairs", REEDS_BLOCK);
 	public static final Block REEDS_SLAB = registerSlab("reeds_slab", REEDS_BLOCK);
-	public static final Block REEDS_FENCE = registerBlock("reeds_fence", new BNFence(REEDS_BLOCK));
-	public static final Block REEDS_GATE = registerBlock("reeds_gate", new BNGate(REEDS_BLOCK));
+	public static final Block REEDS_FENCE = registerFence("reeds_fence", REEDS_BLOCK);
+	public static final Block REEDS_GATE = registerGate("reeds_gate", REEDS_BLOCK);
 	public static final Block REEDS_BUTTON = registerButton("reeds_button", REEDS_BLOCK);
 	public static final Block REEDS_PLATE = registerPlate("reeds_plate", REEDS_BLOCK);
 	public static final Block REEDS_TRAPDOOR = registerBlock("reeds_trapdoor", new BNTrapdoor(REEDS_BLOCK));
@@ -302,8 +302,8 @@ public class BlocksRegistry
 	public static final Block WILLOW_PLANKS = registerPlanks("willow_planks", new BNPlanks(MaterialColor.RED_TERRACOTTA), WILLOW_LOG, WILLOW_BARK, STRIPED_LOG_WILLOW, STRIPED_BARK_WILLOW);
 	public static final Block WILLOW_STAIRS = registerStairs("willow_stairs", WILLOW_PLANKS);
 	public static final Block WILLOW_SLAB = registerSlab("willow_slab", WILLOW_PLANKS);
-	public static final Block WILLOW_FENCE = registerBlock("willow_fence", new BNFence(WILLOW_PLANKS));
-	public static final Block WILLOW_GATE = registerBlock("willow_gate", new BNGate(WILLOW_PLANKS));
+	public static final Block WILLOW_FENCE = registerFence("willow_fence", WILLOW_PLANKS);
+	public static final Block WILLOW_GATE = registerGate("willow_gate", WILLOW_PLANKS);
 	public static final Block WILLOW_BUTTON = registerButton("willow_button", WILLOW_PLANKS);
 	public static final Block WILLOW_PLATE = registerPlate("willow_plate", WILLOW_PLANKS);
 	public static final Block WILLOW_TRAPDOOR = registerBlock("willow_trapdoor", new BNTrapdoor(WILLOW_PLANKS));
@@ -318,8 +318,8 @@ public class BlocksRegistry
 	public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MaterialColor.RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
 	public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);
 	public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
-	public static final Block WART_FENCE = registerBlock("wart_fence", new BNFence(WART_PLANKS));
-	public static final Block WART_GATE = registerBlock("wart_gate", new BNGate(WART_PLANKS));
+	public static final Block WART_FENCE = registerFence("wart_fence", WART_PLANKS);
+	public static final Block WART_GATE = registerGate("wart_gate", WART_PLANKS);
 	public static final Block WART_BUTTON = registerButton("wart_button", WART_PLANKS);
 	public static final Block WART_PLATE = registerPlate("wart_plate", WART_PLANKS);
 	public static final Block WART_TRAPDOOR = registerBlock("wart_trapdoor", new BNTrapdoor(WART_PLANKS));
@@ -336,8 +336,8 @@ public class BlocksRegistry
 	public static final Block RUBEUS_PLANKS = registerPlanks("rubeus_planks", new BNPlanks(MaterialColor.MAGENTA), RUBEUS_LOG, RUBEUS_BARK, STRIPED_LOG_RUBEUS, STRIPED_BARK_RUBEUS);
 	public static final Block RUBEUS_STAIRS = registerStairs("rubeus_stairs", RUBEUS_PLANKS);
 	public static final Block RUBEUS_SLAB = registerSlab("rubeus_slab", RUBEUS_PLANKS);
-	public static final Block RUBEUS_FENCE = registerBlock("rubeus_fence", new BNFence(RUBEUS_PLANKS));
-	public static final Block RUBEUS_GATE = registerBlock("rubeus_gate", new BNGate(RUBEUS_PLANKS));
+	public static final Block RUBEUS_FENCE = registerFence("rubeus_fence", RUBEUS_PLANKS);
+	public static final Block RUBEUS_GATE = registerGate("rubeus_gate", RUBEUS_PLANKS);
 	public static final Block RUBEUS_BUTTON = registerButton("rubeus_button", RUBEUS_PLANKS);
 	public static final Block RUBEUS_PLATE = registerPlate("rubeus_plate", RUBEUS_PLANKS);
 	public static final Block RUBEUS_TRAPDOOR = registerBlock("rubeus_trapdoor", new BNTrapdoor(RUBEUS_PLANKS));
@@ -348,8 +348,8 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_PLANKS = registerPlanks("mushroom_planks", new BNPlanks(MaterialColor.LIGHT_GRAY), 2, MUSHROOM_STEM);
 	public static final Block MUSHROOM_STAIRS = registerStairs("mushroom_stairs", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_SLAB = registerSlab("mushroom_slab", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_FENCE = registerBlock("mushroom_fence", new BNFence(MUSHROOM_PLANKS));
-	public static final Block MUSHROOM_GATE = registerBlock("mushroom_gate", new BNGate(MUSHROOM_PLANKS));
+	public static final Block MUSHROOM_FENCE = registerFence("mushroom_fence", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_GATE = registerGate("mushroom_gate", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_BUTTON = registerButton("mushroom_button", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_PLATE = registerPlate("mushroom_plate", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_TRAPDOOR = registerBlock("mushroom_trapdoor", new BNTrapdoor(MUSHROOM_STAIRS));
@@ -385,8 +385,8 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_PLANKS = registerPlanks("mushroom_fir_planks", new BNPlanks(MaterialColor.LIGHT_GRAY), 1, MUSHROOM_FIR_STEM, MUSHROOM_FIR_LOG, MUSHROOM_FIR_WOOD, STRIPED_LOG_MUSHROOM_FIR, STRIPED_WOOD_MUSHROOM_FIR);
 	public static final Block MUSHROOM_FIR_STAIRS = registerStairs("mushroom_fir_stairs", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab",  MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_FENCE = registerBlock("mushroom_fir_fence",  new BNFence(MUSHROOM_FIR_PLANKS));
-	public static final Block MUSHROOM_FIR_GATE = registerBlock("mushroom_fir_gate",  new BNGate(MUSHROOM_FIR_PLANKS));
+	public static final Block MUSHROOM_FIR_FENCE = registerFence("mushroom_fir_fence", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_GATE = registerGate("mushroom_fir_gate", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_BUTTON = registerButton("mushroom_fir_button", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_PLATE = registerPlate("mushroom_fir_plate",  MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_TRAPDOOR = registerBlock("mushroom_fir_trapdoor",  new BNTrapdoor(MUSHROOM_FIR_PLANKS));
@@ -673,5 +673,29 @@ public class BlocksRegistry
 			RecipesHelper.makeSimpleRecipe2(log, bark, 3, "nether_bark");
 		}
 		return bark;
+	}
+	
+	private static Block registerFence(String name, Block source)
+	{
+		Block fence = new BNFence(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), fence);
+			ItemsRegistry.registerItem(name, new BlockItem(fence, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makeFenceRecipe(source, fence);
+		}
+		return fence;
+	}
+	
+	private static Block registerGate(String name, Block source)
+	{
+		Block gate = new BNGate(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), gate);
+			ItemsRegistry.registerItem(name, new BlockItem(gate, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makeGateRecipe(source, gate);
+		}
+		return gate;
 	}
 }
