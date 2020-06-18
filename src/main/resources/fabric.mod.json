@@ -39,7 +39,8 @@
 		"fabric": "*",
 		"minecraft": "1.16.x"
 	},
-	"suggests": {
-		"flamingo": "*"
+	
+	"custom": {
+		"extrapieces:piecepack": "extrapieces.betternether.json"
 	}
 }
