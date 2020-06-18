@@ -8,11 +8,29 @@
 			}
 		]
 	},
-		"betternether.ambient.mushroom_forest": {
+	"betternether.ambient.mushroom_forest": {
 		"category": "ambient",
 		"sounds": [
 			{
 				"name": "betternether:ambient/mushroom_forest",
+				"stream": false
+			}
+		]
+	},
+	"betternether.ambient.gravel_desert": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name": "betternether:ambient/gravel_desert",
+				"stream": false
+			}
+		]
+	},
+	"betternether.ambient.nether_jungle": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name": "betternether:ambient/nether_jungle",
 				"stream": false
 			}
 		]

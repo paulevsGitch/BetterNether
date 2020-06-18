@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureAgave;
 import paulevs.betternether.structures.plants.StructureBarrelCactus;
@@ -20,7 +21,10 @@ public class NetherBiomeGravelDesert extends NetherBiome
 	{
 		super(new BiomeDefenition(name)
 				.setFogColor(170, 48, 0)
-				.setLoop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
+				.setLoop(SoundsRegistry.AMBIENT_GRAVEL_DESERT)
+				.setMood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
+				.setAdditions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
+				.setMusic(SoundEvents.MUSIC_NETHER_NETHER_WASTES)
 				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.ASH, 0.02F)));
 		addStructure("nether_cactus", new StructureNetherCactus(), StructureType.FLOOR, 0.02F, true);
 		addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);

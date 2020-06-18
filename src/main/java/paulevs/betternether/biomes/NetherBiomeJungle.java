@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackVine;
 import paulevs.betternether.structures.plants.StructureBloomingVine;
@@ -30,7 +31,7 @@ public class NetherBiomeJungle extends NetherBiome
 	{
 		super(new BiomeDefenition(name)
 				.setFogColor(62, 169, 61)
-				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				.setLoop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
