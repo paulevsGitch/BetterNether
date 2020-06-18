@@ -211,7 +211,7 @@ public class BNWorldGenerator
 					boolean lava = BlocksHelper.isLava(state);
 					if (lava || BlocksHelper.isNetherGroundMagma(state) || state.getBlock() == Blocks.GRAVEL)
 					{
-						if (!lava && ((state = world.getBlockState(popPos.up())).isAir() || !state.getMaterial().blocksLight() || !state.getMaterial().blocksMovement()))// world.isAir(popPos.up()))
+						if (!lava && ((state = world.getBlockState(popPos.up())).isAir() || !state.getMaterial().blocksLight() || !state.getMaterial().blocksMovement()) && state.getFluidState().isEmpty())// world.isAir(popPos.up()))
 							biome.genSurfColumn(world, popPos, random);
 
 						if (((x + y + z) & 1) == 0)
