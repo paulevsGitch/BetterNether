@@ -128,8 +128,8 @@ public class BlocksRegistry
 	public static final Block STALAGNATE_GATE = registerGate("stalagnate_planks_gate", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_BUTTON = registerButton("stalagnate_planks_button", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_PLATE = registerPlate("stalagnate_planks_plate", STALAGNATE_PLANKS);
-	public static final Block STALAGNATE_TRAPDOOR = registerBlock("stalagnate_planks_trapdoor", new BNTrapdoor(STALAGNATE_PLANKS));
-	public static final Block STALAGNATE_DOOR = registerBlock("stalagnate_planks_door", new BNDoor(STALAGNATE_PLANKS));
+	public static final Block STALAGNATE_TRAPDOOR = registerTrapdoor("stalagnate_planks_trapdoor", STALAGNATE_PLANKS);
+	public static final Block STALAGNATE_DOOR = registerDoor("stalagnate_planks_door", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_BOWL = registerBlockNI("stalagnate_bowl", new BlockStalagnateBowl());
 	
 	// Reed //
@@ -141,8 +141,8 @@ public class BlocksRegistry
 	public static final Block REEDS_GATE = registerGate("reeds_gate", REEDS_BLOCK);
 	public static final Block REEDS_BUTTON = registerButton("reeds_button", REEDS_BLOCK);
 	public static final Block REEDS_PLATE = registerPlate("reeds_plate", REEDS_BLOCK);
-	public static final Block REEDS_TRAPDOOR = registerBlock("reeds_trapdoor", new BNTrapdoor(REEDS_BLOCK));
-	public static final Block REEDS_DOOR = registerBlock("reeds_door", new BNDoor(REEDS_BLOCK));
+	public static final Block REEDS_TRAPDOOR = registerTrapdoor("reeds_trapdoor", REEDS_BLOCK);
+	public static final Block REEDS_DOOR = registerDoor("reeds_door", REEDS_BLOCK);
 	
 	// Cincinnasite //
 	public static final Block CINCINNASITE_ORE = registerBlock("cincinnasite_ore", new BlockOre());
@@ -306,8 +306,8 @@ public class BlocksRegistry
 	public static final Block WILLOW_GATE = registerGate("willow_gate", WILLOW_PLANKS);
 	public static final Block WILLOW_BUTTON = registerButton("willow_button", WILLOW_PLANKS);
 	public static final Block WILLOW_PLATE = registerPlate("willow_plate", WILLOW_PLANKS);
-	public static final Block WILLOW_TRAPDOOR = registerBlock("willow_trapdoor", new BNTrapdoor(WILLOW_PLANKS));
-	public static final Block WILLOW_DOOR = registerBlock("willow_door", new BNDoor(WILLOW_PLANKS));
+	public static final Block WILLOW_TRAPDOOR = registerTrapdoor("willow_trapdoor", WILLOW_PLANKS);
+	public static final Block WILLOW_DOOR = registerDoor("willow_door", WILLOW_PLANKS);
 	
 	// Wart //
 	public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.RED));
@@ -322,8 +322,8 @@ public class BlocksRegistry
 	public static final Block WART_GATE = registerGate("wart_gate", WART_PLANKS);
 	public static final Block WART_BUTTON = registerButton("wart_button", WART_PLANKS);
 	public static final Block WART_PLATE = registerPlate("wart_plate", WART_PLANKS);
-	public static final Block WART_TRAPDOOR = registerBlock("wart_trapdoor", new BNTrapdoor(WART_PLANKS));
-	public static final Block WART_DOOR = registerBlock("wart_door", new BNDoor(WART_PLANKS));
+	public static final Block WART_TRAPDOOR = registerTrapdoor("wart_trapdoor", WART_PLANKS);
+	public static final Block WART_DOOR = registerDoor("wart_door", WART_PLANKS);
 	
 	// Rubeus
 	public static final Block RUBEUS_SAPLING = registerBlock("rubeus_sapling",  new BlockRubeusSapling());
@@ -340,8 +340,8 @@ public class BlocksRegistry
 	public static final Block RUBEUS_GATE = registerGate("rubeus_gate", RUBEUS_PLANKS);
 	public static final Block RUBEUS_BUTTON = registerButton("rubeus_button", RUBEUS_PLANKS);
 	public static final Block RUBEUS_PLATE = registerPlate("rubeus_plate", RUBEUS_PLANKS);
-	public static final Block RUBEUS_TRAPDOOR = registerBlock("rubeus_trapdoor", new BNTrapdoor(RUBEUS_PLANKS));
-	public static final Block RUBEUS_DOOR = registerBlock("rubeus_door", new BNDoor(RUBEUS_PLANKS));
+	public static final Block RUBEUS_TRAPDOOR = registerTrapdoor("rubeus_trapdoor", RUBEUS_PLANKS);
+	public static final Block RUBEUS_DOOR = registerDoor("rubeus_door", RUBEUS_PLANKS);
 	
 	// Mushroom //
 	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStalagnateStem());
@@ -352,8 +352,8 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_GATE = registerGate("mushroom_gate", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_BUTTON = registerButton("mushroom_button", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_PLATE = registerPlate("mushroom_plate", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_TRAPDOOR = registerBlock("mushroom_trapdoor", new BNTrapdoor(MUSHROOM_STAIRS));
-	public static final Block MUSHROOM_DOOR = registerBlock("mushroom_door", new BNDoor(MUSHROOM_STAIRS));
+	public static final Block MUSHROOM_TRAPDOOR = registerTrapdoor("mushroom_trapdoor", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_DOOR = registerDoor("mushroom_door", MUSHROOM_PLANKS);
 	
 	// Soul lily //
 	public static final Block SOUL_LILY = registerBlockNI("soul_lily", new BlockSoulLily());
@@ -389,8 +389,8 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_GATE = registerGate("mushroom_fir_gate", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_BUTTON = registerButton("mushroom_fir_button", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_PLATE = registerPlate("mushroom_fir_plate",  MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_TRAPDOOR = registerBlock("mushroom_fir_trapdoor",  new BNTrapdoor(MUSHROOM_FIR_PLANKS));
-	public static final Block MUSHROOM_FIR_DOOR = registerBlock("mushroom_fir_door",  new BNDoor(MUSHROOM_FIR_PLANKS));
+	public static final Block MUSHROOM_FIR_TRAPDOOR = registerTrapdoor("mushroom_fir_trapdoor", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_DOOR = registerDoor("mushroom_fir_door", MUSHROOM_FIR_PLANKS);
 	
 	// Eyes //
 	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
@@ -556,13 +556,18 @@ public class BlocksRegistry
 		return block;
 	}
 	
+	private static void registerBlockDirectly(String name, Block block)
+	{
+		Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
+		ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
+	}
+	
 	private static Block registerStairs(String name, Block source)
 	{
 		Block stairs = new BNStairs(source);
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), stairs);
-			ItemsRegistry.registerItem(name, new BlockItem(stairs, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, stairs);
 			RecipesHelper.makeStairsRecipe(source, stairs);
 		}
 		return stairs;
@@ -573,8 +578,7 @@ public class BlocksRegistry
 		Block slab = new BNSlab(source);
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), slab);
-			ItemsRegistry.registerItem(name, new BlockItem(slab, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, slab);
 			RecipesHelper.makeSlabRecipe(source, slab);
 		}
 		return slab;
@@ -585,8 +589,7 @@ public class BlocksRegistry
 		Block roof = new BlockBase(FabricBlockSettings.copyOf(source));
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), roof);
-			ItemsRegistry.registerItem(name, new BlockItem(roof, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, roof);
 			RecipesHelper.makeRoofRecipe(source, roof);
 		}
 		return roof;
@@ -597,8 +600,7 @@ public class BlocksRegistry
 		Block button = new BNButton(source);
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), button);
-			ItemsRegistry.registerItem(name, new BlockItem(button, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, button);
 			RecipesHelper.makeButtonRecipe(source, button);
 		}
 		return button;
@@ -609,8 +611,7 @@ public class BlocksRegistry
 		Block plate = new BNPlate(ActivationRule.EVERYTHING, source);
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), plate);
-			ItemsRegistry.registerItem(name, new BlockItem(plate, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
 		return plate;
@@ -621,8 +622,7 @@ public class BlocksRegistry
 		Block plate = new BNPlate(rule, source);
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), plate);
-			ItemsRegistry.registerItem(name, new BlockItem(plate, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
 		return plate;
@@ -632,8 +632,7 @@ public class BlocksRegistry
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), planks);
-			ItemsRegistry.registerItem(name, new BlockItem(planks, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, planks);
 			for (Block log: logs)
 				RecipesHelper.makeSimpleRecipe(log, planks, 4, "nether_planks");
 		}
@@ -644,8 +643,7 @@ public class BlocksRegistry
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), planks);
-			ItemsRegistry.registerItem(name, new BlockItem(planks, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, planks);
 			RecipesHelper.makeSimpleRecipe(stem, planks, output, "nether_planks");
 			for (Block log: logs)
 				RecipesHelper.makeSimpleRecipe(log, planks, 4, "nether_planks");
@@ -657,8 +655,7 @@ public class BlocksRegistry
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), log);
-			ItemsRegistry.registerItem(name, new BlockItem(log, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, log);
 			RecipesHelper.makeSimpleRecipe2(stem, log, 1, "nether_stem_log");
 		}
 		return log;
@@ -668,8 +665,7 @@ public class BlocksRegistry
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), bark);
-			ItemsRegistry.registerItem(name, new BlockItem(bark, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, bark);
 			RecipesHelper.makeSimpleRecipe2(log, bark, 3, "nether_bark");
 		}
 		return bark;
@@ -680,8 +676,7 @@ public class BlocksRegistry
 		Block fence = new BNFence(source);
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), fence);
-			ItemsRegistry.registerItem(name, new BlockItem(fence, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, fence);
 			RecipesHelper.makeFenceRecipe(source, fence);
 		}
 		return fence;
@@ -692,10 +687,31 @@ public class BlocksRegistry
 		Block gate = new BNGate(source);
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), gate);
-			ItemsRegistry.registerItem(name, new BlockItem(gate, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, gate);
 			RecipesHelper.makeGateRecipe(source, gate);
 		}
 		return gate;
+	}
+	
+	private static Block registerDoor(String name, Block source)
+	{
+		Block door = new BNDoor(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, door);
+			RecipesHelper.makeDoorRecipe(source, door);
+		}
+		return door;
+	}
+	
+	private static Block registerTrapdoor(String name, Block source)
+	{
+		Block trapdoor = new BNTrapdoor(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, trapdoor);
+			RecipesHelper.makeTrapdoorRecipe(source, trapdoor);
+		}
+		return trapdoor;
 	}
 }

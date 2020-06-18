@@ -16,7 +16,9 @@ public class RecipesHelper
 	private static final String[] SHAPE_BUTTON = new String[] {"#"};
 	private static final String[] SHAPE_PLATE = new String[] {"##"};
 	private static final String[] SHAPE_X2 = new String[] {"##", "##"};
-	private static final String[] SHAPE_3X2 = new String[] {"#I#", "#I#"};
+	private static final String[] SHAPE_FG = new String[] {"#I#", "#I#"};
+	private static final String[] SHAPE_2X3 = new String[] {"##", "##", "##"};
+	private static final String[] SHAPE_3X2 = new String[] {"###", "###"};
 	
 	private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count)
 	{
@@ -79,7 +81,7 @@ public class RecipesHelper
 		{
 			String name = Registry.BLOCK.getId(fence).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source), "I", new ItemStack(Items.STICK));
-			BNRecipeManager.addCraftingRecipe(name, "nether_fence", SHAPE_3X2, materials, new ItemStack(fence, 3));
+			BNRecipeManager.addCraftingRecipe(name, "nether_fence", SHAPE_FG, materials, new ItemStack(fence, 3));
 		}
 	}
 	
@@ -89,7 +91,17 @@ public class RecipesHelper
 		{
 			String name = Registry.BLOCK.getId(gate).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("I", new ItemStack(source), "#", new ItemStack(Items.STICK));
-			BNRecipeManager.addCraftingRecipe(name, "nether_fence", SHAPE_3X2, materials, new ItemStack(gate));
+			BNRecipeManager.addCraftingRecipe(name, "nether_gate", SHAPE_FG, materials, new ItemStack(gate));
 		}
+	}
+	
+	public static void makeDoorRecipe(Block source, Block result)
+	{
+		makeSingleRecipe("nether_door", source, result, SHAPE_2X3, 3);
+	}
+	
+	public static void makeTrapdoorRecipe(Block source, Block result)
+	{
+		makeSingleRecipe("nether_trapdoor", source, result, SHAPE_3X2, 2);
 	}
 }

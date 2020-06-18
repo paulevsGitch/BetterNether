@@ -47,6 +47,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
@@ -521,7 +522,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	@Override
 	protected float getSoundVolume()
 	{
-		return 0.3F + random.nextFloat() * 0.3F;
+		return MHelper.randRange(0.1F, 0.3F, random);
 	}
 
 	private void makeColor(float hue, float saturation, float brightness)
