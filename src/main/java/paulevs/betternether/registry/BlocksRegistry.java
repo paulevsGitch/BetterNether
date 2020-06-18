@@ -119,9 +119,9 @@ public class BlocksRegistry
 	public static final Block STALAGNATE_SEED = registerBlock("stalagnate_seed", new BlockStalagnateSeed());
 	public static final Block STRIPED_LOG_STALAGNATE = registerBlock("striped_log_stalagnate", new BNPillar(MaterialColor.LIME_TERRACOTTA));
 	public static final Block STRIPED_BARK_STALAGNATE = registerBlock("striped_bark_stalagnate", new BNPillar(MaterialColor.LIME_TERRACOTTA));
-	public static final Block STALAGNATE_LOG = registerBlock("stalagnate_log", new BNLogStripable(MaterialColor.LIME_TERRACOTTA, STRIPED_LOG_STALAGNATE));
-	public static final Block STALAGNATE_BARK = registerBlock("stalagnate_bark", new BNLogStripable(MaterialColor.LIME_TERRACOTTA, STRIPED_BARK_STALAGNATE));
-	public static final Block STALAGNATE_PLANKS = registerBlock("stalagnate_planks", new BNPlanks(MaterialColor.LIME_TERRACOTTA));
+	public static final Block STALAGNATE_LOG = registerLog("stalagnate_log", new BNLogStripable(MaterialColor.LIME_TERRACOTTA, STRIPED_LOG_STALAGNATE), STALAGNATE_STEM);
+	public static final Block STALAGNATE_BARK = registerBark("stalagnate_bark", new BNLogStripable(MaterialColor.LIME_TERRACOTTA, STRIPED_BARK_STALAGNATE), STALAGNATE_LOG);
+	public static final Block STALAGNATE_PLANKS = registerPlanks("stalagnate_planks", new BNPlanks(MaterialColor.LIME_TERRACOTTA), 1, STALAGNATE_STEM, STALAGNATE_LOG, STALAGNATE_BARK, STRIPED_LOG_STALAGNATE, STRIPED_BARK_STALAGNATE);
 	public static final Block STALAGNATE_STAIRS = registerStairs("stalagnate_planks_stairs", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_SLAB = registerSlab("stalagnate_planks_slab", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_FENCE = registerBlock("stalagnate_planks_fence", new BNFence(STALAGNATE_PLANKS));
@@ -297,9 +297,9 @@ public class BlocksRegistry
 	public static final Block STRIPED_LOG_WILLOW = registerBlock("striped_log_willow", new BNPillar(MaterialColor.PINK));
 	public static final Block STRIPED_BARK_WILLOW = registerBlock("striped_bark_willow", new BNPillar(MaterialColor.PINK));
 	public static final Block WILLOW_LOG = registerBlock("willow_log", new BNLogStripable(MaterialColor.RED_TERRACOTTA, STRIPED_LOG_WILLOW));
-	public static final Block WILLOW_BARK = registerBlock("willow_bark", new BNLogStripable(MaterialColor.RED_TERRACOTTA, STRIPED_BARK_WILLOW));
+	public static final Block WILLOW_BARK = registerBark("willow_bark", new BNLogStripable(MaterialColor.RED_TERRACOTTA, STRIPED_BARK_WILLOW), WILLOW_LOG);
 	public static final Block WILLOW_SAPLING = registerBlock("willow_sapling", new BlockWillowSapling());
-	public static final Block WILLOW_PLANKS = registerBlock("willow_planks", new BNPlanks(MaterialColor.RED_TERRACOTTA));
+	public static final Block WILLOW_PLANKS = registerPlanks("willow_planks", new BNPlanks(MaterialColor.RED_TERRACOTTA), WILLOW_LOG, WILLOW_BARK, STRIPED_LOG_WILLOW, STRIPED_BARK_WILLOW);
 	public static final Block WILLOW_STAIRS = registerStairs("willow_stairs", WILLOW_PLANKS);
 	public static final Block WILLOW_SLAB = registerSlab("willow_slab", WILLOW_PLANKS);
 	public static final Block WILLOW_FENCE = registerBlock("willow_fence", new BNFence(WILLOW_PLANKS));
@@ -313,9 +313,9 @@ public class BlocksRegistry
 	public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.RED));
 	public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MaterialColor.RED));
 	public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(Blocks.NETHER_WART_BLOCK, STRIPED_LOG_WART));
-	public static final Block WART_BARK = registerBlock("wart_bark", new BNLogStripable(Blocks.NETHER_WART_BLOCK, STRIPED_BARK_WART));
+	public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(Blocks.NETHER_WART_BLOCK, STRIPED_BARK_WART), WART_LOG);
 	public static final Block WART_ROOTS = registerBlockNI("wart_roots", new BlockWartRoots());
-	public static final Block WART_PLANKS = registerBlock("wart_planks", new BNPlanks(MaterialColor.RED));
+	public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MaterialColor.RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
 	public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);
 	public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
 	public static final Block WART_FENCE = registerBlock("wart_fence", new BNFence(WART_PLANKS));
@@ -331,9 +331,9 @@ public class BlocksRegistry
 	public static final Block STRIPED_LOG_RUBEUS = registerBlock("striped_log_rubeus", new BNPillar(MaterialColor.MAGENTA));
 	public static final Block STRIPED_BARK_RUBEUS = registerBlock("striped_bark_rubeus", new BNPillar(MaterialColor.MAGENTA));
 	public static final Block RUBEUS_LOG = registerBlock("rubeus_log", new RubeusLog(STRIPED_LOG_RUBEUS));
-	public static final Block RUBEUS_BARK = registerBlock("rubeus_bark", new RubeusLog(STRIPED_BARK_RUBEUS));
+	public static final Block RUBEUS_BARK = registerBark("rubeus_bark", new RubeusLog(STRIPED_BARK_RUBEUS), RUBEUS_LOG);
 	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves());
-	public static final Block RUBEUS_PLANKS = registerBlock("rubeus_planks", new BNPlanks(MaterialColor.MAGENTA));
+	public static final Block RUBEUS_PLANKS = registerPlanks("rubeus_planks", new BNPlanks(MaterialColor.MAGENTA), RUBEUS_LOG, RUBEUS_BARK, STRIPED_LOG_RUBEUS, STRIPED_BARK_RUBEUS);
 	public static final Block RUBEUS_STAIRS = registerStairs("rubeus_stairs", RUBEUS_PLANKS);
 	public static final Block RUBEUS_SLAB = registerSlab("rubeus_slab", RUBEUS_PLANKS);
 	public static final Block RUBEUS_FENCE = registerBlock("rubeus_fence", new BNFence(RUBEUS_PLANKS));
@@ -345,7 +345,7 @@ public class BlocksRegistry
 	
 	// Mushroom //
 	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStalagnateStem());
-	public static final Block MUSHROOM_PLANKS = registerBlock("mushroom_planks", new BNPlanks(MaterialColor.LIGHT_GRAY));
+	public static final Block MUSHROOM_PLANKS = registerPlanks("mushroom_planks", new BNPlanks(MaterialColor.LIGHT_GRAY), 2, MUSHROOM_STEM);
 	public static final Block MUSHROOM_STAIRS = registerStairs("mushroom_stairs", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_SLAB = registerSlab("mushroom_slab", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_FENCE = registerBlock("mushroom_fence", new BNFence(MUSHROOM_PLANKS));
@@ -380,9 +380,9 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem",  new BlockStalagnateStem());
 	public static final Block STRIPED_LOG_MUSHROOM_FIR = registerBlock("striped_log_mushroom_fir",  new BNPillar(MaterialColor.BLUE));
 	public static final Block STRIPED_WOOD_MUSHROOM_FIR = registerBlock("striped_wood_mushroom_fir",  new BNPillar(MaterialColor.BLUE));
-	public static final Block MUSHROOM_FIR_LOG = registerBlock("mushroom_fir_log",  new BNLogStripable(MaterialColor.BLUE, STRIPED_LOG_MUSHROOM_FIR));
-	public static final Block MUSHROOM_FIR_WOOD = registerBlock("mushroom_fir_wood",  new BNLogStripable(MaterialColor.BLUE, STRIPED_WOOD_MUSHROOM_FIR));
-	public static final Block MUSHROOM_FIR_PLANKS = registerBlock("mushroom_fir_planks",  new BNPlanks(MaterialColor.LIGHT_GRAY));
+	public static final Block MUSHROOM_FIR_LOG = registerLog("mushroom_fir_log",  new BNLogStripable(MaterialColor.BLUE, STRIPED_LOG_MUSHROOM_FIR), MUSHROOM_FIR_STEM);
+	public static final Block MUSHROOM_FIR_WOOD = registerBark("mushroom_fir_wood",  new BNLogStripable(MaterialColor.BLUE, STRIPED_WOOD_MUSHROOM_FIR), MUSHROOM_FIR_LOG);
+	public static final Block MUSHROOM_FIR_PLANKS = registerPlanks("mushroom_fir_planks", new BNPlanks(MaterialColor.LIGHT_GRAY), 1, MUSHROOM_FIR_STEM, MUSHROOM_FIR_LOG, MUSHROOM_FIR_WOOD, STRIPED_LOG_MUSHROOM_FIR, STRIPED_WOOD_MUSHROOM_FIR);
 	public static final Block MUSHROOM_FIR_STAIRS = registerStairs("mushroom_fir_stairs", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab",  MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_FENCE = registerBlock("mushroom_fir_fence",  new BNFence(MUSHROOM_FIR_PLANKS));
@@ -626,5 +626,52 @@ public class BlocksRegistry
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
 		return plate;
+	}
+	
+	private static Block registerPlanks(String name, Block planks, Block... logs)
+	{
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), planks);
+			ItemsRegistry.registerItem(name, new BlockItem(planks, new Item.Settings().group(CreativeTab.BN_TAB)));
+			for (Block log: logs)
+				RecipesHelper.makeSimpleRecipe(log, planks, 4, "nether_planks");
+		}
+		return planks;
+	}
+	
+	private static Block registerPlanks(String name, Block planks, int output, Block stem, Block... logs)
+	{
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), planks);
+			ItemsRegistry.registerItem(name, new BlockItem(planks, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makeSimpleRecipe(stem, planks, output, "nether_planks");
+			for (Block log: logs)
+				RecipesHelper.makeSimpleRecipe(log, planks, 4, "nether_planks");
+		}
+		return planks;
+	}
+	
+	private static Block registerLog(String name, Block log, Block stem)
+	{
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), log);
+			ItemsRegistry.registerItem(name, new BlockItem(log, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makeSimpleRecipe2(stem, log, 1, "nether_stem_log");
+		}
+		return log;
+	}
+	
+	private static Block registerBark(String name, Block bark, Block log)
+	{
+		if (Config.getBoolean("blocks", name, true))
+		{
+			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), bark);
+			ItemsRegistry.registerItem(name, new BlockItem(bark, new Item.Settings().group(CreativeTab.BN_TAB)));
+			RecipesHelper.makeSimpleRecipe2(log, bark, 3, "nether_bark");
+		}
+		return bark;
 	}
 }

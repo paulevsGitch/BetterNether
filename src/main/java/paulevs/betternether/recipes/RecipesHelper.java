@@ -14,12 +14,13 @@ public class RecipesHelper
 	private static final String[] SHAPE_SLAB = new String[] {"###"};
 	private static final String[] SHAPE_BUTTON = new String[] {"#"};
 	private static final String[] SHAPE_PLATE = new String[] {"##"};
+	private static final String[] SHAPE_X2 = new String[] {"##", "##"};
 	
 	private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count)
 	{
 		if (Registry.BLOCK.getId(source) != null)
 		{
-			String name = Registry.BLOCK.getId(result).getPath();
+			String name = Registry.BLOCK.getId(source).getPath() + "_" + Registry.BLOCK.getId(result).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
 			BNRecipeManager.addCraftingRecipe(name, group, shape, materials, new ItemStack(result, count));
 		}
@@ -58,5 +59,15 @@ public class RecipesHelper
 	{
 		String group = plate.getSoundGroup(plate.getDefaultState()) == BlockSoundGroup.WOOD ? "nether_wooden_plate" : "nether_rock_plate";
 		makeSingleRecipe(group, source, plate, SHAPE_PLATE, 1);
+	}
+	
+	public static void makeSimpleRecipe(Block source, Block result, int count, String group)
+	{
+		makeSingleRecipe(group, source, result, SHAPE_BUTTON, count);
+	}
+	
+	public static void makeSimpleRecipe2(Block source, Block result, int count, String group)
+	{
+		makeSingleRecipe(group, source, result, SHAPE_X2, count);
 	}
 }

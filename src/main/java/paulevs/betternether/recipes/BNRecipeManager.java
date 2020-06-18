@@ -36,19 +36,24 @@ public class BNRecipeManager
 	{
 		Map<RecipeType<?>, Map<Identifier, Recipe<?>>> result = Maps.newHashMap();
 		
+		for (RecipeType<?> type: recipes.keySet())
+		{
+			Map<Identifier, Recipe<?>> typeList = Maps.newHashMap();
+			typeList.putAll(recipes.get(type));
+			result.put(type, typeList);
+		}
+		
 		for (RecipeType<?> type: RECIPES.keySet())
 		{
-			Map<Identifier, Recipe<?>> newList = Maps.newHashMap();
 			Map<Identifier, Recipe<?>> list = RECIPES.get(type);
-			
-			Map<Identifier, Recipe<?>> originalList = recipes.get(type);
-			if (originalList.isEmpty())
-				newList.putAll(originalList);
-			
 			if (list != null)
-				newList.putAll(list);
-			
-			result.put(type, newList);
+			{
+				Map<Identifier, Recipe<?>> typeList = result.get(type);
+				list.forEach((id, recipe) -> {
+					if (!typeList.containsKey(id))
+						typeList.put(id, recipe);
+				});
+			}
 		}
 		
 		return result;
