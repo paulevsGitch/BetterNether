@@ -25,6 +25,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.MHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.config.Config;
@@ -39,7 +40,8 @@ public class BNWorldGenerator
 	private static boolean hasCleaningPass;
 	private static boolean hasFixPass;
 
-	private static float oreDensity;
+	private static float cincinnasiteDensity;
+	private static float rubyDensity;
 	private static float structureDensity;
 	
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
@@ -69,7 +71,8 @@ public class BNWorldGenerator
 		hasCleaningPass = Config.getBoolean("generator_world", "terrain_cleaning_pass", true);
 		hasFixPass = Config.getBoolean("generator_world", "world_fixing_pass", true);
 		
-		oreDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
+		cincinnasiteDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
+		rubyDensity = Config.getFloat("generator_world", "ruby_ore_density", 1F / 4000F);
 		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 32F);
 		
 		if (Config.getBoolean("generator_world", "generate_cities", true))
@@ -263,8 +266,10 @@ public class BNWorldGenerator
 								}
 							}
 						}
-						if (random.nextFloat() < oreDensity)
-							spawnOre(BlocksRegistry.CINCINNASITE_ORE.getDefaultState(), world, popPos, random);
+						if (random.nextFloat() < cincinnasiteDensity)
+							spawnOre(BlocksRegistry.CINCINNASITE_ORE.getDefaultState(), world, popPos, random, 6, 16);
+						if (random.nextFloat() < rubyDensity)
+							spawnOre(BlocksRegistry.NETHER_RUBY_ORE.getDefaultState(), world, popPos, random, 1, 5);
 					}
 				}
 			}
@@ -401,9 +406,10 @@ public class BNWorldGenerator
 		return BlocksHelper.isNetherGround(state) || state.getBlock() == Blocks.GRAVEL;
 	}
 	
-	private static void spawnOre(BlockState state, WorldAccess world, BlockPos pos, Random random)
+	private static void spawnOre(BlockState state, WorldAccess world, BlockPos pos, Random random, int minSize, int maxSize)
 	{
-		for (int i = 0; i < 6 + random.nextInt(11); i++)
+		int size = MHelper.randRange(minSize, maxSize, random);
+		for (int i = 0; i < size; i++)
 		{
 			BlockPos local = pos.add(random.nextInt(3), random.nextInt(3), random.nextInt(3));
 			if (BlocksHelper.isNetherrack(world.getBlockState(local)))
