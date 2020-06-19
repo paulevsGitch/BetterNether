@@ -210,8 +210,6 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer
 	public void onDeath(DamageSource source)
 	{
 		super.onDeath(source);
-		Explosion.DestructionType destructionType = this.world.getGameRules().getBoolean(GameRules.field_19388) ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE;
-		this.world.createExplosion(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
 		if (world.isClient)
 		{
 			float scale = getScale() * 3;
@@ -221,6 +219,11 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer
 						getEyeY() + random.nextGaussian() * scale,
 						getZ() + random.nextGaussian() * scale,
 						0, 0, 0);
+		}
+		else
+		{
+			Explosion.DestructionType destructionType = this.world.getGameRules().getBoolean(GameRules.field_19388) ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE;
+			this.world.createExplosion(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
 		}
 	}
 	

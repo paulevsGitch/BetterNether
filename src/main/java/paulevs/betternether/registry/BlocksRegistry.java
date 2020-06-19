@@ -292,9 +292,9 @@ public class BlocksRegistry
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
 	
 	// Soul Sandstone //
-	public static final Block SOUL_SANDSTONE = registerBlock("soul_sandstone", new BlockSoulSandstone());
-	public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2("soul_sandstone_cut", new BlockSoulSandstone(), SOUL_SANDSTONE, "soul_sandstone");
-	public static final Block SOUL_SANDSTONE_SMOOTH = registerMakeable2X2("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), SOUL_SANDSTONE_CUT, "soul_sandstone");
+	public static final Block SOUL_SANDSTONE = registerMakeable2X2("soul_sandstone", new BlockSoulSandstone(), "soul_sandstone", Blocks.SOUL_SAND, Blocks.SOUL_SOIL);
+	public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2("soul_sandstone_cut", new BlockSoulSandstone(), "soul_sandstone", SOUL_SANDSTONE);
+	public static final Block SOUL_SANDSTONE_SMOOTH = registerMakeable2X2("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_CUT);
 	
 	public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs("soul_sandstone_cut_stairs", SOUL_SANDSTONE_CUT);
@@ -729,12 +729,13 @@ public class BlocksRegistry
 		return trapdoor;
 	}
 	
-	private static Block registerMakeable2X2(String name, Block result, Block source, String group)
+	private static Block registerMakeable2X2(String name, Block result, String group, Block... sources)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
 			registerBlockDirectly(name, result);
-			RecipesHelper.makeSimpleRecipe2(source, result, 4, group);
+			for (Block source: sources)
+				RecipesHelper.makeSimpleRecipe2(source, result, 4, group);
 		}
 		return result;
 	}
