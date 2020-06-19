@@ -51,6 +51,12 @@ public class NetherBiomeJungle extends NetherBiome
 		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
 		
 		addWorldStructures(structureFormat("ruined_temple", -4, StructureType.FLOOR, 10F));
+		addWorldStructures(structureFormat("jungle_temple_altar", -2, StructureType.FLOOR, 10F));
+		addWorldStructures(structureFormat("jungle_temple_2", -2, StructureType.FLOOR, 10F));
+		
+		addWorldStructures(structureFormat("jungle_bones_1", 0, StructureType.FLOOR, 20F));
+		addWorldStructures(structureFormat("jungle_bones_2", 0, StructureType.FLOOR, 20F));
+		addWorldStructures(structureFormat("jungle_bones_3", 0, StructureType.FLOOR, 20F));
 	}
 
 	@Override
