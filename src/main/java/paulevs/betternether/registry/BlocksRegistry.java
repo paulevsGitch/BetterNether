@@ -92,6 +92,7 @@ import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.BlockSoulGrass;
 import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLilySapling;
+import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.blocks.BlockSoulVein;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.blocks.BlockStalagnate;
@@ -289,6 +290,19 @@ public class BlocksRegistry
 	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL);
 	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass());
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
+	
+	// Soul Sandstone //
+	public static final Block SOUL_SANDSTONE = registerBlock("soul_sandstone", new BlockSoulSandstone());
+	public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2("soul_sandstone_cut", new BlockSoulSandstone(), SOUL_SANDSTONE, "soul_sandstone");
+	public static final Block SOUL_SANDSTONE_SMOOTH = registerMakeable2X2("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), SOUL_SANDSTONE_CUT, "soul_sandstone");
+	
+	public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs", SOUL_SANDSTONE);
+	public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs("soul_sandstone_cut_stairs", SOUL_SANDSTONE_CUT);
+	public static final Block SOUL_SANDSTONE_SMOOTH_STAIRS = registerStairs("soul_sandstone_smooth_stairs", SOUL_SANDSTONE_SMOOTH);
+	
+	public static final Block SOUL_SANDSTONE_SLAB = registerSlab("soul_sandstone_slab", SOUL_SANDSTONE);
+	public static final Block SOUL_SANDSTONE_CUT_SLAB = registerSlab("soul_sandstone_cut_slab", SOUL_SANDSTONE_CUT);
+	public static final Block SOUL_SANDSTONE_SMOOTH_SLAB = registerSlab("soul_sandstone_smooth_slab", SOUL_SANDSTONE_SMOOTH);
 	
 	// Willow //
 	public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());
@@ -713,5 +727,15 @@ public class BlocksRegistry
 			RecipesHelper.makeTrapdoorRecipe(source, trapdoor);
 		}
 		return trapdoor;
+	}
+	
+	private static Block registerMakeable2X2(String name, Block result, Block source, String group)
+	{
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, result);
+			RecipesHelper.makeSimpleRecipe2(source, result, 4, group);
+		}
+		return result;
 	}
 }

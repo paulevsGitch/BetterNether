@@ -479,5 +479,17 @@
 	"item.betternether.nether_ruby_helmet": "Nether Ruby Helmet",
 	"item.betternether.nether_ruby_chestplate": "Nether Ruby Chestplate",
 	"item.betternether.nether_ruby_leggings": "Nether Ruby Leggings",
-	"item.betternether.nether_ruby_boots": "Nether Ruby Boots"
+	"item.betternether.nether_ruby_boots": "Nether Ruby Boots",
+	
+	"block.betternether.soul_sandstone": "Soul Sandstone",
+	"block.betternether.soul_sandstone_cut": "Cutted Soul Sandstone",
+	"block.betternether.soul_sandstone_smooth": "Smooth Soul Sandstone",
+	
+	"block.betternether.soul_sandstone_stairs": "Soul Sandstone Stairs",
+	"block.betternether.soul_sandstone_cut_stairs": "Cutted Soul Sandstone Stairs",
+	"block.betternether.soul_sandstone_smooth_stairs": "Smooth Soul Sandstone Stairs",
+	
+	"block.betternether.soul_sandstone_slab": "Soul Sandstone Slab",
+	"block.betternether.soul_sandstone_cut_slab": "Cutted Soul Sandstone Slab",
+	"block.betternether.soul_sandstone_smooth_slab": "Smooth Soul Sandstone Slab"
 }

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/soul_sandstone_cut",
+        "down": "betternether:block/soul_sandstone_top",
+        "up": "betternether:block/soul_sandstone_top",
+        "north": "betternether:block/soul_sandstone_cut",
+        "east": "betternether:block/soul_sandstone_cut",
+        "south": "betternether:block/soul_sandstone_cut",
+        "west": "betternether:block/soul_sandstone_cut"
+    }
+}

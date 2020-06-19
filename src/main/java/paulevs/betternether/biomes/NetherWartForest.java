@@ -6,9 +6,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.MHelper;
+import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureWartDeadwood;
@@ -20,6 +23,8 @@ import paulevs.betternether.structures.plants.StructureWartTree;
 
 public class NetherWartForest extends NetherBiome
 {
+	private static final Mutable POS = new Mutable();
+	
 	public NetherWartForest(String name)
 	{
 		super(new BiomeDefenition(name)
@@ -55,11 +60,41 @@ public class NetherWartForest extends NetherBiome
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
 			break;
 		}
-		for (int i = 1; i < random.nextInt(3); i++)
+		
+		int d1 = MHelper.randRange(2, 4, random);
+		POS.setX(pos.getX());
+		POS.setZ(pos.getZ());
+		
+		for (int i = 1; i < d1; i++)
 		{
-			BlockPos down = pos.down(i);
-			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down)))
-				BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.getDefaultState());
+			POS.setY(pos.getY() - i);
+			if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
+			{
+				switch(random.nextInt(3))
+				{
+				case 0:
+					BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.getDefaultState());
+					break;
+				case 1:
+					BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
+					break;
+				case 2:
+					BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHERRACK.getDefaultState());
+					break;
+				}
+			}
+			else
+				return;
+		}
+		
+		int d2 = MHelper.randRange(5, 7, random);
+		for (int i = d1; i < d2; i++)
+		{
+			POS.setY(pos.getY() - i);
+			if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
+				BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.SOUL_SANDSTONE.getDefaultState().with(BlockSoulSandstone.UP, i == d1));
+			else
+				return;
 		}
 	}
 }

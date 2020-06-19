@@ -10,7 +10,10 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.MHelper;
+import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.noise.OpenSimplexNoise;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureSoulGrass;
@@ -38,7 +41,9 @@ public class NetherSoulPlain extends NetherBiome
 	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
 		POS.set(pos);
-		for (int i = 0; i < random.nextInt(3) + 1; i++)
+		int d1 = MHelper.randRange(2, 4, random);
+		
+		for (int i = 0; i < d1; i++)
 		{
 			POS.setY(pos.getY() - i);
 			if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
@@ -46,6 +51,18 @@ public class NetherSoulPlain extends NetherBiome
 					BlocksHelper.setWithoutUpdate(world, POS, Blocks.SOUL_SOIL.getDefaultState());
 				else
 					BlocksHelper.setWithoutUpdate(world, POS, Blocks.SOUL_SAND.getDefaultState());
+			else
+				return;
+		}
+		
+		int d2 = MHelper.randRange(5, 7, random);
+		for (int i = d1; i < d2; i++)
+		{
+			POS.setY(pos.getY() - i);
+			if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
+				BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.SOUL_SANDSTONE.getDefaultState().with(BlockSoulSandstone.UP, i == d1));
+			else
+				return;
 		}
 	}
 }

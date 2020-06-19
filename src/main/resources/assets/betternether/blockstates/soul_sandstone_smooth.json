@@ -1,0 +1,11 @@
+{
+	"variants":
+	{
+        "": [
+			{ "model": "betternether:block/soul_sandstone_smooth" },
+			{ "model": "betternether:block/soul_sandstone_smooth", "y": 90 },
+			{ "model": "betternether:block/soul_sandstone_smooth", "y": 180 },
+			{ "model": "betternether:block/soul_sandstone_smooth", "y": 270 }
+		]
+    }
+}
