@@ -230,6 +230,7 @@ public class BlocksRegistry
 	public static final Block SOUL_SANDSTONE = registerMakeable2X2("soul_sandstone", new BlockSoulSandstone(), "soul_sandstone", Blocks.SOUL_SAND, Blocks.SOUL_SOIL);
 	public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2("soul_sandstone_cut", new BlockSoulSandstone(), "soul_sandstone", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_SMOOTH = registerMakeable2X2("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_CUT);
+	public static final Block SOUL_SANDSTONE_CHISELED = registerMakeable2X2("soul_sandstone_chiseled", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_SMOOTH);
 	
 	public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs("soul_sandstone_cut_stairs", SOUL_SANDSTONE_CUT);
