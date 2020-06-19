@@ -491,5 +491,7 @@
 	
 	"block.betternether.soul_sandstone_slab": "Soul Sandstone Slab",
 	"block.betternether.soul_sandstone_cut_slab": "Cutted Soul Sandstone Slab",
-	"block.betternether.soul_sandstone_smooth_slab": "Smooth Soul Sandstone Slab"
+	"block.betternether.soul_sandstone_smooth_slab": "Smooth Soul Sandstone Slab",
+	
+	"block.betternether.soul_sandstone_wall": "Soul Sandstone Wall"
 }

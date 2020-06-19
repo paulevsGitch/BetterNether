@@ -35,8 +35,8 @@ public class Palettes
 			.addFloorLights(Blocks.TORCH, BlocksRegistry.CINCINNASITE_LANTERN_SMALL)
 			.addDoors(BlocksRegistry.WART_DOOR)
 			.addTrapdoors(BlocksRegistry.WART_TRAPDOOR)
-			.addGlassBlocks(BlocksRegistry.QUARTZ_GLASS_FRAMED_RED, BlocksRegistry.QUARTZ_RED_GLASS, BlocksRegistry.CINCINNASITE_FRAME)
-			.addGlassPanes(BlocksRegistry.QUARTZ_GLASS_FRAMED_PANE_RED, BlocksRegistry.QUARTZ_GLASS_PANE_RED, BlocksRegistry.CINCINNASITE_BARS)
+			.addGlassBlocks(BlocksRegistry.QUARTZ_GLASS_FRAMED_COLORED.red, BlocksRegistry.QUARTZ_GLASS_COLORED.red, BlocksRegistry.CINCINNASITE_FRAME)
+			.addGlassPanes(BlocksRegistry.QUARTZ_GLASS_FRAMED_PANE_COLORED.red, BlocksRegistry.QUARTZ_GLASS_PANE_COLORED.red, BlocksRegistry.CINCINNASITE_BARS)
 			.addWoodPlates(BlocksRegistry.WART_PLATE)
 			.addPotsPanes(BlocksRegistry.BRICK_POT));
 	

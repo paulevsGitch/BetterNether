@@ -108,6 +108,7 @@ import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowSapling;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.RubeusLog;
+import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.tab.CreativeTab;
@@ -160,7 +161,7 @@ public class BlocksRegistry
 	public static final Block CINCINNASITE_TILE_LARGE = registerBlock("cincinnasite_tile_large", new BlockCincinnasite());
 	public static final Block CINCINNASITE_TILE_SMALL = registerBlock("cincinnasite_tile_small", new BlockCincinnasite());
 	public static final Block CINCINNASITE_CARVED = registerBlock("cincinnasite_carved", new BlockCincinnasite());
-	public static final Block CINCINNASITE_WALL = registerBlock("cincinnasite_wall", new BNWall(CINCINNASITE_FORGED));
+	public static final Block CINCINNASITE_WALL = registerWall("cincinnasite_wall", CINCINNASITE_FORGED);
 	public static final Block CINCINNASITE_FIRE_BOWL = registerBlock("cincinnasite_fire_bowl", new BlockCincinnasiteFireBowl());
 	public static final Block CINCINNASITE_BRICKS_PILLAR = registerBlock("cincinnasite_bricks_pillar", new BNPillar(CINCINNASITE_FORGED));
 	public static final Block CINCINNASITE_BARS = registerBlock("cincinnasite_bars", new BNPane(CINCINNASITE_FORGED, true));
@@ -177,7 +178,7 @@ public class BlocksRegistry
 	// Bricks //
 	public static final Block NETHER_BRICK_TILE_LARGE = registerBlock("nether_brick_tile_large", new BNNetherBrick());
 	public static final Block NETHER_BRICK_TILE_SMALL = registerBlock("nether_brick_tile_small", new BNNetherBrick());
-	public static final Block NETHER_BRICK_WALL = registerBlock("nether_brick_wall", new BNWall(Blocks.NETHER_BRICKS));
+	public static final Block NETHER_BRICK_WALL = registerWall("nether_brick_wall", NETHER_BRICK_TILE_LARGE);
 	public static final Block NETHER_BRICK_TILE_SLAB = registerSlab("nether_brick_tile_slab", NETHER_BRICK_TILE_SMALL);
 	public static final Block NETHER_BRICK_TILE_STAIRS = registerStairs("nether_brick_tile_stairs", NETHER_BRICK_TILE_SMALL);
 	
@@ -187,7 +188,7 @@ public class BlocksRegistry
 	public static final Block BONE_SLAB = registerSlab("bone_slab", BONE_BLOCK);
 	public static final Block BONE_BUTTON = registerButton("bone_button", BONE_BLOCK);
 	public static final Block BONE_PLATE = registerPlate("bone_plate", BONE_BLOCK);
-	public static final Block BONE_WALL = registerBlock("bone_wall", new BNWall(BONE_BLOCK));
+	public static final Block BONE_WALL = registerWall("bone_wall", BONE_BLOCK);
 	public static final Block BONE_TILE = registerBlock("bone_tile", new BNBoneBlock());
 	public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BNDoor(BONE_BLOCK));
 	public static final Block BONE_CINCINNASITE_DOOR = registerBlock("bone_cincinnasite_door", new BNDoor(BONE_BLOCK));
@@ -199,76 +200,10 @@ public class BlocksRegistry
 	public static final Block QUARTZ_GLASS_FRAMED_PANE = registerBlock("quartz_glass_framed_pane", new BNPane(CINCINNASITE_BLOCK, true));
 	
 	// Quartz Glass Colored //
-	public static final Block QUARTZ_WHITE_GLASS = registerBlock("quartz_glass_white", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_ORANGE_GLASS = registerBlock("quartz_glass_orange", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_MAGENTA_GLASS = registerBlock("quartz_glass_magenta", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_LIGHT_BLUE_GLASS = registerBlock("quartz_glass_light_blue", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_YELLOW_GLASS = registerBlock("quartz_glass_yellow", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_LIME_GLASS = registerBlock("quartz_glass_lime", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_PINK_GLASS = registerBlock("quartz_glass_pink", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_GRAY_GLASS = registerBlock("quartz_glass_gray", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_LIGHT_GRAY_GLASS = registerBlock("quartz_glass_light_gray", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_CYAN_GLASS = registerBlock("quartz_glass_cyan", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_PURPLE_GLASS = registerBlock("quartz_glass_purple", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_BLUE_GLASS = registerBlock("quartz_glass_blue", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_BROWN_GLASS = registerBlock("quartz_glass_brown", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_GREEN_GLASS = registerBlock("quartz_glass_green", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_RED_GLASS = registerBlock("quartz_glass_red", new BNGlass(QUARTZ_GLASS));
-	public static final Block QUARTZ_BLACK_GLASS = registerBlock("quartz_glass_black", new BNGlass(QUARTZ_GLASS));
-	
-	// Quartz Glass Colored Framed //
-	public static final Block QUARTZ_GLASS_FRAMED_WHITE = registerBlock("quartz_glass_framed_white", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_ORANGE = registerBlock("quartz_glass_framed_orange", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_MAGENTA = registerBlock("quartz_glass_framed_magenta", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_LIGHT_BLUE = registerBlock("quartz_glass_framed_light_blue", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_YELLOW = registerBlock("quartz_glass_framed_yellow", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_LIME = registerBlock("quartz_glass_framed_lime", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_PINK = registerBlock("quartz_glass_framed_pink", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_GRAY = registerBlock("quartz_glass_framed_gray", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_LIGHT_GRAY = registerBlock("quartz_glass_framed_light_gray", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_CYAN = registerBlock("quartz_glass_framed_cyan", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_PURPLE = registerBlock("quartz_glass_framed_purple", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_BLUE = registerBlock("quartz_glass_framed_blue", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_BROWN = registerBlock("quartz_glass_framed_brown", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_GREEN = registerBlock("quartz_glass_framed_green", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_RED = registerBlock("quartz_glass_framed_red", new BNGlass(QUARTZ_GLASS_FRAMED));
-	public static final Block QUARTZ_GLASS_FRAMED_BLACK = registerBlock("quartz_glass_framed_black", new BNGlass(QUARTZ_GLASS_FRAMED));
-	
-	// Quartz Glass Colored Panes //
-	public static final Block QUARTZ_GLASS_PANE_WHITE = registerBlock("quartz_glass_pane_white", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_ORANGE = registerBlock("quartz_glass_pane_orange", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_MAGENTA = registerBlock("quartz_glass_pane_magenta", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_LIGHT_BLUE = registerBlock("quartz_glass_pane_light_blue", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_YELLOW = registerBlock("quartz_glass_pane_yellow", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_LIME = registerBlock("quartz_glass_pane_lime", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_PINK = registerBlock("quartz_glass_pane_pink", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_GRAY = registerBlock("quartz_glass_pane_gray", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_LIGHT_GRAY = registerBlock("quartz_glass_pane_light_gray", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_CYAN = registerBlock("quartz_glass_pane_cyan", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_PURPLE = registerBlock("quartz_glass_pane_purple", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_BLUE = registerBlock("quartz_glass_pane_blue", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_BROWN = registerBlock("quartz_glass_pane_brown", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_GREEN = registerBlock("quartz_glass_pane_green", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_RED = registerBlock("quartz_glass_pane_red", new BNPane(QUARTZ_GLASS, false));
-	public static final Block QUARTZ_GLASS_PANE_BLACK = registerBlock("quartz_glass_pane_black", new BNPane(QUARTZ_GLASS, false));
-	
-	// Quartz Glass Colored Panes Framed //
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_WHITE = registerBlock("quartz_glass_framed_pane_white", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_ORANGE = registerBlock("quartz_glass_framed_pane_orange", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_MAGENTA = registerBlock("quartz_glass_framed_pane_magenta", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_LIGHT_BLUE = registerBlock("quartz_glass_framed_pane_light_blue", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_YELLOW = registerBlock("quartz_glass_framed_pane_yellow", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_LIME = registerBlock("quartz_glass_framed_pane_lime", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_PINK = registerBlock("quartz_glass_framed_pane_pink", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_GRAY = registerBlock("quartz_glass_framed_pane_gray", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_LIGHT_GRAY = registerBlock("quartz_glass_framed_pane_light_gray", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_CYAN = registerBlock("quartz_glass_framed_pane_cyan", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_PURPLE = registerBlock("quartz_glass_framed_pane_purple", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_BLUE = registerBlock("quartz_glass_framed_pane_blue", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_BROWN = registerBlock("quartz_glass_framed_pane_brown", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_GREEN = registerBlock("quartz_glass_framed_pane_green", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_RED = registerBlock("quartz_glass_framed_pane_red", new BNPane(QUARTZ_GLASS_FRAMED, true));
-	public static final Block QUARTZ_GLASS_FRAMED_PANE_BLACK = registerBlock("quartz_glass_framed_pane_black", new BNPane(QUARTZ_GLASS_FRAMED, true));
+	public static final ColoredGlassMaterial QUARTZ_GLASS_COLORED = new ColoredGlassMaterial("quartz_glass", QUARTZ_GLASS);
+	public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_COLORED = new ColoredGlassMaterial("quartz_glass_framed", QUARTZ_GLASS_FRAMED);
+	public static final ColoredGlassMaterial QUARTZ_GLASS_PANE_COLORED = new ColoredGlassMaterial("quartz_glass_pane", QUARTZ_GLASS_PANE, false);
+	public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_PANE_COLORED = new ColoredGlassMaterial("quartz_glass_framed_pane", QUARTZ_GLASS_FRAMED_PANE, true);
 	
 	// Obsidian //
 	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian());
@@ -303,6 +238,8 @@ public class BlocksRegistry
 	public static final Block SOUL_SANDSTONE_SLAB = registerSlab("soul_sandstone_slab", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_CUT_SLAB = registerSlab("soul_sandstone_cut_slab", SOUL_SANDSTONE_CUT);
 	public static final Block SOUL_SANDSTONE_SMOOTH_SLAB = registerSlab("soul_sandstone_smooth_slab", SOUL_SANDSTONE_SMOOTH);
+	
+	public static final Block SOUL_SANDSTONE_WALL = registerWall("soul_sandstone_wall", SOUL_SANDSTONE_CUT);
 	
 	// Willow //
 	public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());
@@ -738,5 +675,16 @@ public class BlocksRegistry
 				RecipesHelper.makeSimpleRecipe2(source, result, 4, group);
 		}
 		return result;
+	}
+	
+	private static Block registerWall(String name, Block source)
+	{
+		Block wall = new BNWall(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, wall);
+			RecipesHelper.makeWallRecipe(source, wall);
+		}
+		return wall;
 	}
 }

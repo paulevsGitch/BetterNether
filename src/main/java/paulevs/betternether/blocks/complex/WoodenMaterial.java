@@ -1,8 +1,19 @@
-package paulevs.betternether.blocks;
+package paulevs.betternether.blocks.complex;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
+import paulevs.betternether.blocks.BNButton;
+import paulevs.betternether.blocks.BNDoor;
+import paulevs.betternether.blocks.BNFence;
+import paulevs.betternether.blocks.BNGate;
+import paulevs.betternether.blocks.BNLogStripable;
+import paulevs.betternether.blocks.BNPillar;
+import paulevs.betternether.blocks.BNPlanks;
+import paulevs.betternether.blocks.BNPlate;
+import paulevs.betternether.blocks.BNSlab;
+import paulevs.betternether.blocks.BNStairs;
+import paulevs.betternether.blocks.BNTrapdoor;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class WoodenMaterial

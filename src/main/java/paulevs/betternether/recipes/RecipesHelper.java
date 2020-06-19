@@ -3,6 +3,7 @@ package paulevs.betternether.recipes;
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.BlockSoundGroup;
@@ -19,6 +20,7 @@ public class RecipesHelper
 	private static final String[] SHAPE_FG = new String[] {"#I#", "#I#"};
 	private static final String[] SHAPE_2X3 = new String[] {"##", "##", "##"};
 	private static final String[] SHAPE_3X2 = new String[] {"###", "###"};
+	private static final String[] SHAPE_COLORING = new String[] {"###", "#I#", "###"};
 	
 	private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count)
 	{
@@ -103,5 +105,25 @@ public class RecipesHelper
 	public static void makeTrapdoorRecipe(Block source, Block result)
 	{
 		makeSingleRecipe("nether_trapdoor", source, result, SHAPE_3X2, 2);
+	}
+	
+	public static void makeWallRecipe(Block source, Block wall)
+	{
+		if (Registry.BLOCK.getId(source) != null)
+		{
+			String name = Registry.BLOCK.getId(wall).getPath();
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
+			BNRecipeManager.addCraftingRecipe(name, "nether_wall", SHAPE_3X2, materials, new ItemStack(wall, 6));
+		}
+	}
+	
+	public static void makeColoringRecipe(Block source, Block result, Item dye, String group)
+	{
+		if (Registry.BLOCK.getId(source) != null)
+		{
+			String name = Registry.BLOCK.getId(result).getPath();
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source), "I", new ItemStack(dye));
+			BNRecipeManager.addCraftingRecipe(name, group, SHAPE_COLORING, materials, new ItemStack(result, 8));
+		}
 	}
 }
