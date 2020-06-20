@@ -244,7 +244,7 @@ public class BlocksRegistry
 	
 	// Willow //
 	public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());
-	public static final Block WILLOW_LEAVES = registerBlockNI("willow_leaves", new BlockWillowLeaves());
+	public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BlockWillowLeaves());
 	public static final Block WILLOW_TRUNK = registerBlockNI("willow_trunk", new BlockWillowTrunk());
 	public static final Block STRIPED_LOG_WILLOW = registerBlock("striped_log_willow", new BNPillar(MaterialColor.PINK));
 	public static final Block STRIPED_BARK_WILLOW = registerBlock("striped_bark_willow", new BNPillar(MaterialColor.PINK));

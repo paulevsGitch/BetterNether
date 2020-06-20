@@ -6,8 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
@@ -23,19 +25,26 @@ import paulevs.betternether.registry.BlocksRegistry;
 public class BlockWillowLeaves extends BlockBaseNotFull
 {
 	public static final DirectionProperty FACING = Properties.FACING;
+	public static final BooleanProperty NATURAL = BooleanProperty.of("natural");
 	
 	public BlockWillowLeaves()
 	{
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque());
+		super(Materials.makeLeaves(MaterialColor.RED_TERRACOTTA));
 		this.setDropItself(false);
-		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.UP));
+		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.UP).with(NATURAL, true));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 	
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
 	{
-		stateManager.add(FACING);
+		stateManager.add(FACING, NATURAL);
+	}
+	
+	@Override
+	public BlockState getPlacementState(ItemPlacementContext ctx)
+	{
+		return this.getDefaultState().with(NATURAL, false);
 	}
 	
 	@Override
@@ -53,7 +62,7 @@ public class BlockWillowLeaves extends BlockBaseNotFull
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
 	{
-		if (world.isAir(pos.offset(state.get(FACING).getOpposite())))
+		if (state.get(NATURAL) && world.isAir(pos.offset(state.get(FACING).getOpposite())))
 			return Blocks.AIR.getDefaultState();
 		else
 			return state;
