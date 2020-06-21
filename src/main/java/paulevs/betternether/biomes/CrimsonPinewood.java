@@ -9,6 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.MHelper;
+import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureCrimsonFungus;
 import paulevs.betternether.structures.plants.StructureCrimsonPinewood;
@@ -21,6 +23,8 @@ import paulevs.betternether.structures.plants.StructureWartSeed;
 
 public class CrimsonPinewood extends NetherBiome
 {
+	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
+	
 	public CrimsonPinewood(String name)
 	{
 		super(new BiomeDefenition(name)
@@ -30,8 +34,8 @@ public class CrimsonPinewood extends NetherBiome
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.CRIMSON_SPORE, 0.025F)));
 		addStructure("crimson_pinewood", new StructureCrimsonPinewood(), StructureType.FLOOR, 0.2F, false);
-		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.8F, false);
-		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, false);
+		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.1F, false);
+		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, true);
 		addStructure("crimson_fungus", new StructureCrimsonFungus(), StructureType.FLOOR, 0.05F, true);
 		addStructure("crimson_roots", new StructureCrimsonRoots(), StructureType.FLOOR, 0.2F, true);
 		addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.3F, true);
@@ -42,6 +46,9 @@ public class CrimsonPinewood extends NetherBiome
 	@Override
 	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.getDefaultState());
+		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.getDefaultState());
+		else
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.getDefaultState());
 	}
 }

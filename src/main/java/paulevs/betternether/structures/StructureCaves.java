@@ -77,10 +77,10 @@ public class StructureCaves implements IStructure
 					B_POS.set(wx, wy, wz);
 					if (MASK[x][y][z] && BlocksHelper.isNetherGroundMagma(world.getBlockState(B_POS)))
 					{
-						if (world.getBlockState(B_POS.up()).getBlock() == Blocks.NETHER_WART_BLOCK)
+						/*if (world.getBlockState(B_POS.up()).getBlock() == Blocks.NETHER_WART_BLOCK)
 							BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.NETHER_WART_BLOCK.getDefaultState());
-						else
-							BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.AIR.getDefaultState());
+						else*/
+						BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.AIR.getDefaultState());
 					}
 				}
 			}

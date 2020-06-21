@@ -13,8 +13,8 @@ public class ModelNaga extends AnimalModel<EntityNaga>
 	public ModelPart[] tail;
 	public ModelPart[] spikes;
 	private float pitch;
-	private double animation;
-	private long preTime;
+	//private double animation;
+	//private long preTime;
 	private float maxAngle = 0.1F;
 
 	public ModelNaga()
@@ -115,7 +115,7 @@ public class ModelNaga extends AnimalModel<EntityNaga>
 	}
 
 	@Override
-	public void setAngles(EntityNaga entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch)
+	public void setAngles(EntityNaga entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
 	{
 		boolean rollTooBig = entity.getRoll() > 4;
 		boolean isSwimming = entity.isInSwimmingPose();
@@ -140,10 +140,11 @@ public class ModelNaga extends AnimalModel<EntityNaga>
 			this.head.pitch = headPitch * 0.017453292F;
 		}
 		
-		long time = System.currentTimeMillis();
+		//long time = System.currentTimeMillis();
 		double speed = (entity.isOnGround() && (entity.getVelocity().x != 0 || entity.getVelocity().z != 0) && !entity.hasVehicle()) ? 6 : 0.5;
 		maxAngle = this.lerpAngle(maxAngle, speed > 1 ? 0.1F : 0.5F, 0.03F);
-		animation += (time - preTime) * speed / 1000.0;
+		//animation += (time - preTime) * speed / 1000.0;
+		double animation = animationProgress * speed / 40;
 		float angle = (float) Math.sin(animation) * maxAngle * 0.3F;
 		float start_angle = angle;
 		tail[0].yaw = angle;
@@ -160,7 +161,7 @@ public class ModelNaga extends AnimalModel<EntityNaga>
 			spikes[i].yaw = yaw;
 		}
 		
-		preTime = time;
+		//preTime = time;
 	}
 
 	protected float lerpAngle(float from, float to, float position)

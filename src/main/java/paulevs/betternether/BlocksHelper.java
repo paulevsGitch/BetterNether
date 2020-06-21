@@ -57,6 +57,7 @@ public class BlocksHelper
 				b == Blocks.CRIMSON_NYLIUM ||
 				b == Blocks.WARPED_NYLIUM ||
 				b == BlocksRegistry.CINCINNASITE_ORE ||
+				b == BlocksRegistry.NETHER_RUBY_ORE ||
 				b == BlocksRegistry.NETHERRACK_MOSS ||
 				b == BlocksRegistry.NETHER_MYCELIUM ||
 				b == BlocksRegistry.JUNGLE_GRASS;

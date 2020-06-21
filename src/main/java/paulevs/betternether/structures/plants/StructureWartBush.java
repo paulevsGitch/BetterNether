@@ -18,11 +18,14 @@ public class StructureWartBush implements IStructure
 	@Override
 	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
-		//if (world.isAir(pos))
+		if (world.isAir(pos))
 		{
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.getDefaultState());
 			for (Direction dir: DIRS)
 				setSeed(world, pos, dir);
+			
+			//BlocksHelper.setWithoutUpdate(world, pos, Blocks.DIAMOND_BLOCK.getDefaultState());
+			//System.out.println(pos);
 		}
 	}
 	
@@ -30,6 +33,6 @@ public class StructureWartBush implements IStructure
 	{
 		BlockPos p = pos.offset(dir);
 		if (world.isAir(p))
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.WART_SEED.getDefaultState().with(BlockWartSeed.FACING, dir.getOpposite()));
+			BlocksHelper.setWithoutUpdate(world, p, BlocksRegistry.WART_SEED.getDefaultState().with(BlockWartSeed.FACING, dir));
 	}
 }
