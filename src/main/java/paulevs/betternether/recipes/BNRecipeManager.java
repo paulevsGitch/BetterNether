@@ -1,5 +1,6 @@
 package paulevs.betternether.recipes;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -98,11 +99,16 @@ public class BNRecipeManager
 		Map<String, Ingredient> mapIng = new HashMap<String, Ingredient>();
 		mapIng.put(" ", Ingredient.EMPTY);
 		materials.forEach((id, material) -> {
-			mapIng.put(id, Ingredient.ofStacks(material));
+			mapIng.put(id, fromStacks(material));
 		});
 		
 		DefaultedList<Ingredient> list = BNRecipeManager.getIngredients(shape, mapIng, width, height);
 		ShapedRecipe recipe = new ShapedRecipe(new Identifier(BetterNether.MOD_ID, name), group, width, height, list, result);
 		BNRecipeManager.addRecipe(RecipeType.CRAFTING, recipe);
+	}
+	
+	private static Ingredient fromStacks(ItemStack... stacks)
+	{
+		return Ingredient.method_26964(Arrays.stream(stacks));
 	}
 }
