@@ -13,6 +13,7 @@ import net.minecraft.entity.Flutterer;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.ai.TargetFinder;
 import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -27,8 +28,9 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -48,8 +50,9 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.registry.EntityRegistry;
 
-public class EntityFlyingPig extends HostileEntity implements Flutterer
+public class EntityFlyingPig extends AnimalEntity implements Flutterer
 {
 	private static final TrackedData<Byte> FLAGS;
 	private static final int BIT_ROOSTING = 0;
@@ -71,11 +74,12 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 	{
 		this.targetSelector.add(1, new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
 		this.goalSelector.add(2, new FindFoodGoal());
-		this.goalSelector.add(3, new SittingGoal());
-		this.goalSelector.add(4, new RoostingGoal());
-		this.goalSelector.add(5, new WanderAroundGoal());
-		this.goalSelector.add(6, new LookAroundGoal(this));
-		this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+		this.goalSelector.add(3, new AnimalMateGoal(this, 1.0D));
+		this.goalSelector.add(4, new SittingGoal());
+		this.goalSelector.add(5, new RoostingGoal());
+		this.goalSelector.add(6, new WanderAroundGoal());
+		this.goalSelector.add(7, new LookAroundGoal(this));
+		this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
 	}
 	
 	public static DefaultAttributeContainer getAttributeContainer()
@@ -143,17 +147,23 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 		byte b = this.dataTracker.get(FLAGS);
 		return MHelper.getBit(b, BIT_ROOSTING);
 	}
+
+	public void setRoosting(boolean roosting)
+	{
+		byte b = this.dataTracker.get(FLAGS);
+		this.dataTracker.set(FLAGS, MHelper.setBit(b, BIT_ROOSTING, roosting));
+	}
 	
 	public boolean isWarted()
 	{
 		byte b = this.dataTracker.get(FLAGS);
 		return MHelper.getBit(b, BIT_WARTED);
 	}
-
-	public void setRoosting(boolean roosting)
+	
+	public void setWarted(boolean warted)
 	{
 		byte b = this.dataTracker.get(FLAGS);
-		this.dataTracker.set(FLAGS, MHelper.setBit(b, BIT_ROOSTING, roosting));
+		this.dataTracker.set(FLAGS, MHelper.setBit(b, BIT_WARTED, warted));
 	}
 
 	@Override
@@ -494,5 +504,19 @@ public class EntityFlyingPig extends HostileEntity implements Flutterer
 			});
 			return !foods.isEmpty();
 		}
+	}
+
+	@Override
+	public PassiveEntity createChild(PassiveEntity mate)
+	{
+		EntityFlyingPig pig = EntityRegistry.FLYING_PIG.create(this.world);
+		pig.setWarted(pig.isWarted());
+		return pig;
+	}
+
+	@Override
+	public boolean isBreedingItem(ItemStack stack)
+	{
+		return stack.getItem() == Items.NETHER_WART;
 	}
 }

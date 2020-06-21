@@ -3,6 +3,7 @@ package paulevs.betternether.entity;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -11,6 +12,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.EntityDamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -243,6 +245,25 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer
 	public PassiveEntity createChild(PassiveEntity mate)
 	{
 		return null;
+	}
+	
+	@Override
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier)
+	{
+		return false;
+	}
+	
+	@Override
+	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
+	
+	@Override
+	public boolean damage(DamageSource source, float amount)
+	{
+		if (source == DamageSource.WITHER || source instanceof EntityDamageSource)
+		{
+			return super.damage(source, amount);
+		}
+		return false;
 	}
 	
 	public static boolean canSpawn(EntityType<? extends EntityHydrogenJellyfish> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
