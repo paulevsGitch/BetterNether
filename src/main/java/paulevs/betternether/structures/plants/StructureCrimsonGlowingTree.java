@@ -28,8 +28,6 @@ public class StructureCrimsonGlowingTree extends StructureObjScatter
 	
 	protected boolean isStructure(BlockState state)
 	{
-		return  state.getBlock() == Blocks.CRIMSON_STEM ||
-				state.getBlock() == Blocks.NETHER_WART_BLOCK ||
-				state.getBlock() == Blocks.SHROOMLIGHT;
+		return  state.getBlock() == Blocks.CRIMSON_STEM;
 	}
 }

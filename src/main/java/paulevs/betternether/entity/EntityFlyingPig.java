@@ -63,8 +63,8 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer
 	{
 		super(type, world);
 		this.moveControl = new FlightMoveControl(this, 20, true);
-		this.setPathfindingPenalty(PathNodeType.LAVA, -1.0F);
-		this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
+		this.setPathfindingPenalty(PathNodeType.LAVA, 0.0F);
+		this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
 		this.experiencePoints = 2;
 		this.flyingSpeed = 0.3F;
 	}
@@ -104,14 +104,9 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer
 			{
 				return this.world.isAir(pos);
 			}
-
-			public void tick()
-			{
-				super.tick();
-			}
 		};
 		birdNavigation.setCanPathThroughDoors(false);
-		birdNavigation.setCanSwim(false);
+		birdNavigation.setCanSwim(true);
 		birdNavigation.setCanEnterOpenDoors(true);
 		return birdNavigation;
 	}
@@ -270,13 +265,18 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer
 
 		public void start()
 		{
-			BlockPos pos = this.getRandomLocation();
-			Path path = EntityFlyingPig.this.navigation.findPathTo(pos, 1);
-			if (path != null)
-				EntityFlyingPig.this.navigation.startMovingAlong(path, EntityFlyingPig.this.flyingSpeed);
+			if (EntityFlyingPig.this.world.getFluidState(EntityFlyingPig.this.getBlockPos()).isEmpty())
+			{
+				BlockPos pos = this.getRandomLocation();
+				Path path = EntityFlyingPig.this.navigation.findPathTo(pos, 1);
+				if (path != null)
+					EntityFlyingPig.this.navigation.startMovingAlong(path, EntityFlyingPig.this.flyingSpeed);
+				else
+					EntityFlyingPig.this.setVelocity(0, -0.2, 0);
+				EntityFlyingPig.this.setRoosting(false);
+			}
 			else
-				EntityFlyingPig.this.setVelocity(0, -0.2, 0);
-			EntityFlyingPig.this.setRoosting(false);
+				EntityFlyingPig.this.setVelocity(0, 1, 0);
 			super.start();
 		}
 
@@ -304,7 +304,10 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer
 			bpos.set(airTarget.getX(), airTarget.getY(), airTarget.getZ());
 			BlockPos down = bpos.down();
 			if (EntityFlyingPig.this.world.getBlockState(down).isFullCube(EntityFlyingPig.this.world, down))
-				bpos.offset(Direction.UP);
+				bpos.move(Direction.UP);
+			
+			while (!EntityFlyingPig.this.world.getFluidState(bpos).isEmpty())
+				bpos.move(Direction.UP);
 			
 			return bpos;
 		}

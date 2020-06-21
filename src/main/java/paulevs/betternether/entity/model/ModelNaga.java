@@ -144,7 +144,7 @@ public class ModelNaga extends AnimalModel<EntityNaga>
 		double speed = (entity.isOnGround() && (entity.getVelocity().x != 0 || entity.getVelocity().z != 0) && !entity.hasVehicle()) ? 6 : 0.5;
 		maxAngle = this.lerpAngle(maxAngle, speed > 1 ? 0.1F : 0.5F, 0.03F);
 		//animation += (time - preTime) * speed / 1000.0;
-		double animation = animationProgress * speed / 40;
+		double animation = animationProgress * speed / 20;
 		float angle = (float) Math.sin(animation) * maxAngle * 0.3F;
 		float start_angle = angle;
 		tail[0].yaw = angle;
