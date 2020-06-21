@@ -32,6 +32,7 @@ import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
+import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.structures.CityFeature;
 
@@ -56,7 +57,11 @@ public class BNWorldGenerator
 	private static final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
 	private static final HashSet<Biome> MC_BIOMES = new HashSet<Biome>();
 	
+	private static boolean hasCaves;
+	private static boolean hasPaths;
+	
 	private static StructureCaves caves;
+	private static StructurePath paths;
 	private static NetherBiome biome;
 
 	public static final StructureFeature<DefaultFeatureConfig> CITY = Registry.register(
@@ -70,6 +75,9 @@ public class BNWorldGenerator
 	{
 		hasCleaningPass = Config.getBoolean("generator_world", "terrain_cleaning_pass", true);
 		hasFixPass = Config.getBoolean("generator_world", "world_fixing_pass", true);
+		
+		hasCaves = Config.getBoolean("generator_world", "generate_caves", true);
+		hasPaths = Config.getBoolean("generator_world", "generate_paths", true);
 		
 		cincinnasiteDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
 		rubyDensity = Config.getFloat("generator_world", "ruby_ore_density", 1F / 4000F);
@@ -115,6 +123,7 @@ public class BNWorldGenerator
 		//if (caves == null)
 		//{
 			caves = new StructureCaves(seed);
+			paths = new StructurePath(seed + 1);
 		//}
 	}
 	
@@ -324,26 +333,21 @@ public class BNWorldGenerator
 					popPos.setZ(sz + (z << 1) + 2);
 					Biome b = world.getBiome(popPos);
 					BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
-					//if (b instanceof NetherBiomeWrapper || !(b instanceof NetherBiome))
 					MC_BIOMES.add(b);
 				}
 			}
 		}
-		
-		/*for (int y = 4; y < 60; y += 2)
-		{
-			Biome b = BIOMES[4][y][4].getBiome();
-			if (b instanceof NetherBiomeWrapper || !(b instanceof NetherBiome))
-				MC_BIOMES.add(b);
-		}*/
 	}
 
 	public static void prePopulate(ChunkRegion world, int sx, int sz, Random random)
 	{
 		makeLocalBiomes(world, sx, sz);
 		
-		popPos.set(sx, 0, sz);
-		caves.generate(world, popPos, random);
+		if (hasCaves)
+		{
+			popPos.set(sx, 0, sz);
+			caves.generate(world, popPos, random);
+		}
 		
 		if (hasCleaningPass)
 		{
@@ -397,6 +401,12 @@ public class BNWorldGenerator
 				if (!state.getBlock().canPlaceAt(state, world, up))
 					BlocksHelper.setWithoutUpdate(world, up, AIR);
 			}
+		}
+		
+		if (hasPaths)
+		{
+			popPos.set(sx, 0, sz);
+			paths.generate(world, popPos, random);
 		}
 	}
 	
