@@ -2,6 +2,8 @@ package paulevs.betternether.entity.render;
 
 import java.util.Iterator;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -45,6 +47,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 	@Override
 	public void render(EntityFirefly entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
 	{
+		GL11.glEnable(GL11.GL_BLEND);
 		float red = entity.getRed();
 		float green = entity.getGreen();
 		float blue = entity.getBlue();
@@ -62,6 +65,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		addVertex(matrix4f, matrix3f, vertexConsumer, 1, 1, 1F, 1F, red, green, blue);
 		addVertex(matrix4f, matrix3f, vertexConsumer, -1, 1, 0F, 1F, red, green, blue);
 		matrixStack.pop();
+		GL11.glDisable(GL11.GL_BLEND);
 
 		matrixStack.push();
 		this.model.handSwingProgress = this.getHandSwingProgress(entity, g);

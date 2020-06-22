@@ -242,6 +242,12 @@ public class BlocksRegistry
 	
 	public static final Block SOUL_SANDSTONE_WALL = registerWall("soul_sandstone_wall", SOUL_SANDSTONE_CUT);
 	
+	// Basalt Bricks //
+	public static final Block BASALT_BRICKS = registerMakeable2X2("basalt_bricks", new BlockBase(FabricBlockSettings.copyOf(Blocks.BASALT)), "basalt_bricks", Blocks.POLISHED_BASALT);
+	public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS);
+	public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS);
+	public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
+	
 	// Willow //
 	public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());
 	public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BlockWillowLeaves());

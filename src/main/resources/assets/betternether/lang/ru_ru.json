@@ -492,5 +492,10 @@
 	"block.betternether.soul_sandstone_cut_slab": "Плита из обработанного песчаника душ",
 	"block.betternether.soul_sandstone_smooth_slab": "Плита из гладкого песчаника душ",
 	
-	"block.betternether.soul_sandstone_wall": "Стена из песчаника душ"
+	"block.betternether.soul_sandstone_wall": "Стена из песчаника душ",
+	
+	"block.betternether.basalt_bricks": "Базальтовые кирпичи",
+	"block.betternether.basalt_bricks_stairs": "Ступени из базальтовых кирпичей",
+	"block.betternether.basalt_bricks_slab": "Плита из базальтовых кирпичей",
+	"block.betternether.basalt_bricks_wall": "Стена из базальтовых кирпичей"
 }
