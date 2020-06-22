@@ -283,7 +283,7 @@ public class NetherBiome extends Biome
 	
 	protected void addStructure(String name, IStructure structure, StructureType type, float density, boolean useNoise)
 	{
-		String group = "generator.biome." + getRegistryName() + ".procedural." + type + "." + name;
+		String group = "generator.biome." + getRegistryName() + ".procedural." + type.getName() + "." + name;
 		float dens = Config.getFloat(group, "density", density);
 		boolean limit = Config.getBoolean(group, "limit", useNoise);
 		this.addStructure(structure, type, dens, limit);
