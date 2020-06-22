@@ -160,8 +160,8 @@ public class NetherBiome extends Biome
 	
 	public void build()
 	{
-		String group = "generator_" + getRegistryName();
-		String[] structAll = Config.getStringArray(group, "structures", structures.toArray(new String[] {}));
+		String group = "generator.biome." + getRegistryName();
+		String[] structAll = Config.getStringArray(group, "schematics", structures.toArray(new String[] {}));
 		for (String struct: structAll)
 		{
 			structureFromString(struct);
@@ -278,16 +278,14 @@ public class NetherBiome extends Biome
 	
 	public boolean isSame(NetherBiome biome)
 	{
-		return biome == this ||
-				(biome.hasParrent() && biome.getParrentBiome() == this);// ||
-				//(this.hasParrent() && this.getParrentBiome() == biome);
+		return biome == this || (biome.hasParrent() && biome.getParrentBiome() == this);
 	}
 	
 	protected void addStructure(String name, IStructure structure, StructureType type, float density, boolean useNoise)
 	{
-		String group = "generator_" + getRegistryName();
-		float dens = Config.getFloat(group, name + "_density", density);
-		boolean limit = Config.getBoolean(group, name + "_limit", useNoise);
+		String group = "generator.biome." + getRegistryName() + ".procedural." + type + "." + name;
+		float dens = Config.getFloat(group, "density", density);
+		boolean limit = Config.getBoolean(group, "limit", useNoise);
 		this.addStructure(structure, type, dens, limit);
 	}
 	

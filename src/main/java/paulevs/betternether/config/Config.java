@@ -6,13 +6,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import paulevs.betternether.BetterNether;
 
 public class Config
@@ -79,116 +77,80 @@ public class Config
 		return new File(String.format("./config/%s.json", BetterNether.MOD_ID));
 	}
 
-	public static boolean getBoolean(String group, String name, boolean def)
+	public static boolean getBoolean(String groups, String name, boolean def)
 	{
 		load();
 		name += "[def: " + def + "]";
-		JsonObject jGroup = config.getAsJsonObject(group);
-		if (jGroup != null)
+		
+		JsonObject group = getGroup(groups);
+		JsonElement element = group.get(name);
+		
+		if (element != null)
 		{
-			JsonElement element = jGroup.get(name);
-			if (element != null)
-			{
-				return element.getAsBoolean();
-			}
-			else
-			{
-				jGroup.addProperty(name, def);
-				rewrite = true;
-				return def;
-			}
+			return element.getAsBoolean();
 		}
 		else
 		{
-			JsonObject newGroup = new JsonObject();
-			newGroup.addProperty(name, def);
-			config.add(group, newGroup);
+			group.addProperty(name, def);
 			rewrite = true;
 			return def;
 		}
 	}
 	
-	public static float getFloat(String group, String name, float def)
+	public static float getFloat(String groups, String name, float def)
 	{
 		load();
 		name += "[def: " + def + "]";
-		JsonObject jGroup = config.getAsJsonObject(group);
-		if (jGroup != null)
+		
+		JsonObject group = getGroup(groups);
+		JsonElement element = group.get(name);
+		
+		if (element != null)
 		{
-			JsonElement element = jGroup.get(name);
-			if (element != null)
-			{
-				return element.getAsFloat();
-			}
-			else
-			{
-				jGroup.addProperty(name, def);
-				rewrite = true;
-				return def;
-			}
+			return element.getAsFloat();
 		}
 		else
 		{
-			JsonObject newGroup = new JsonObject();
-			newGroup.addProperty(name, def);
-			config.add(group, newGroup);
+			group.addProperty(name, def);
 			rewrite = true;
 			return def;
 		}
 	}
 	
-	public static int getInt(String group, String name, int def)
+	public static int getInt(String groups, String name, int def)
 	{
 		load();
 		name += "[def: " + def + "]";
-		JsonObject jGroup = config.getAsJsonObject(group);
-		if (jGroup != null)
+		
+		JsonObject group = getGroup(groups);
+		JsonElement element = group.get(name);
+		
+		if (element != null)
 		{
-			JsonElement element = jGroup.get(name);
-			if (element != null)
-			{
-				return element.getAsInt();
-			}
-			else
-			{
-				jGroup.addProperty(name, def);
-				rewrite = true;
-				return def;
-			}
+			return element.getAsInt();
 		}
 		else
 		{
-			JsonObject newGroup = new JsonObject();
-			newGroup.addProperty(name, def);
-			config.add(group, newGroup);
+			group.addProperty(name, def);
 			rewrite = true;
 			return def;
 		}
 	}
 	
-	public static String[] getStringArray(String group, String name, String[] def)
+	public static String[] getStringArray(String groups, String name, String[] def)
 	{
 		load();
-		JsonObject jGroup = config.getAsJsonObject(group);
-		if (jGroup != null)
+		
+		JsonObject group = getGroup(groups);
+		JsonElement element = group.get(name);
+		
+		if (element != null)
 		{
-			JsonElement element = jGroup.get(name);
-			if (element != null)
-			{
-				return toStringArray(element.getAsJsonArray());
-			}
-			else
-			{
-				jGroup.add(name, toJsonArray(def));
-				rewrite = true;
-				return def;
-			}
+			return toStringArray(element.getAsJsonArray());
 		}
 		else
 		{
-			JsonObject newGroup = new JsonObject();
-			newGroup.add(name, toJsonArray(def));
-			config.add(group, newGroup);
+			group.add(name, toJsonArray(def));
 			rewrite = true;
 			return def;
 		}
@@ -212,31 +174,20 @@ public class Config
 		return result;
 	}
 	
-	public static JsonArray getJsonArray(String group, String name, JsonArray def)
+	private static JsonObject getGroup(String groups)
 	{
-		load();
-		JsonObject jGroup = config.getAsJsonObject(group);
-		if (jGroup != null)
+		JsonObject obj = config;
+		String[] groupsArr = groups.split("\\.");
+		for (String group: groupsArr)
 		{
-			JsonElement element = jGroup.get(name);
-			if (element != null)
+			JsonObject jGroup = obj.getAsJsonObject(group);
+			if (jGroup == null)
 			{
-				return element.getAsJsonArray();
+				jGroup = new JsonObject();
+				obj.add(group, jGroup);
 			}
-			else
-			{
-				jGroup.add(name, def);
-				rewrite = true;
-				return def;
-			}
+			obj = jGroup;
 		}
-		else
-		{
-			JsonObject newGroup = new JsonObject();
-			newGroup.add(name, def);
-			config.add(group, newGroup);
-			rewrite = true;
-			return def;
-		}
+		return obj;
 	}
 }

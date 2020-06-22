@@ -32,7 +32,7 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 	public CityFeature(Codec<DefaultFeatureConfig> codec)
 	{
 		super(codec);
-		distance = Config.getInt("generator_world", "city_distance", 64);
+		distance = Config.getInt("generator.world.cities", "distance", 64);
 		separation = distance >> 1;
 	}
 

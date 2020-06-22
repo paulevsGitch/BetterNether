@@ -98,13 +98,15 @@ public class BiomesRegistry
 		while (iterator.hasNext())
 		{
 			Biome biome = iterator.next();
-			if (biome.getCategory() == Category.NETHER && notWrapped(biome))
+			if (biome.getCategory() == Category.NETHER && !LINKS.containsKey(biome))
 			{
-				String name = Registry.BIOME.getId(biome).getPath();
-				if (Config.getBoolean("biomes", name, true))
+				Identifier id = Registry.BIOME.getId(biome);
+				String name = id.getPath();
+				String group = id.getNamespace();
+				float chance = Config.getFloat("biomes." + group, name + "_chance", 1);
+				if (chance > 0)
 				{
 					NetherBiomeWrapper wrapper = new NetherBiomeWrapper(name, biome);
-					float chance = Config.getFloat("biomes", name + "_chance", 1);
 					maxChance += chance;
 					wrapper.setGenChance(maxChance);
 					wrapper.build();
@@ -117,42 +119,24 @@ public class BiomesRegistry
 	
 	private static void registerDefaultWrapped(NetherBiome biome)
 	{
-		float chance = Config.getFloat("biomes", biome.getRegistryName() + "_chance", 1);
-		maxChance += chance;
-		biome.setGenChance(maxChance);
-		biome.build();
-		REGISTRY.add(biome);
-		LINKS.put(biome.getBiome(), biome);
-	}
-	
-	private static boolean notWrapped(Biome biome)
-	{
-		return  biome != Biomes.NETHER_WASTES &&
-				biome != Biomes.CRIMSON_FOREST &&
-				biome != Biomes.WARPED_FOREST;
+		float chance = Config.getFloat("biomes.minecraft", biome.getRegistryName() + "_chance", 1);
+		if (chance > 0)
+		{
+			maxChance += chance;
+			biome.setGenChance(maxChance);
+			biome.build();
+			REGISTRY.add(biome);
+			LINKS.put(biome.getBiome(), biome);
+		}
 	}
 	
 	public static void registerBiome(NetherBiome biome)
 	{
 		String regName = biome.getRegistryName();
-		if (Config.getBoolean("biomes", regName, true))
+		float chance = Config.getFloat("biomes.main", regName + "_chance", 1);
+		if (chance > 0)
 		{
-			float chance = Config.getFloat("biomes", regName + "_chance", 1);
 			maxChance += chance;
-			biome.setGenChance(maxChance);
-			biome.build();
-			REGISTRY.add(biome);
-			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, regName), biome);
-		}
-	}
-	
-	public static void registerBiome(NetherBiome biome, float chance)
-	{
-		String regName = biome.getRegistryName();
-		if (Config.getBoolean("biomes", regName, true))
-		{
-			float ch = Config.getFloat("biomes", regName + "_chance", chance);
-			maxChance += ch;
 			biome.setGenChance(maxChance);
 			biome.build();
 			REGISTRY.add(biome);
@@ -162,21 +146,23 @@ public class BiomesRegistry
 	
 	public static void registerEdgeBiome(NetherBiome biome, NetherBiome mainBiome, int size)
 	{
-		if (Config.getBoolean("biomes", biome.getRegistryName(), true))
+		String regName = biome.getRegistryName();
+		int sizeConf = Config.getInt("biomes.edge", regName + "_size", size);
+		if (sizeConf > 0)
 		{
 			mainBiome.setEdge(biome);
-			mainBiome.setEdgeSize(size);
+			mainBiome.setEdgeSize(sizeConf);
 			biome.build();
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, biome.getRegistryName()), biome);
 		}
 	}
-	
+
 	public static void registerSubBiome(NetherBiome biome, NetherBiome mainBiome, float chance)
 	{
 		String regName = biome.getRegistryName();
-		if (Config.getBoolean("biomes", regName, true))
+		chance = Config.getFloat("biomes.variation", regName + "_chance", chance);
+		if (chance > 0)
 		{
-			chance = Config.getFloat("biomes", regName + "_subchance", chance);
 			mainBiome.addSubBiome(biome, chance);
 			biome.build();
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, biome.getRegistryName()), biome);

@@ -73,17 +73,17 @@ public class BNWorldGenerator
 	@SuppressWarnings("unchecked")
 	public static void onModInit()
 	{
-		hasCleaningPass = Config.getBoolean("generator_world", "terrain_cleaning_pass", true);
-		hasFixPass = Config.getBoolean("generator_world", "world_fixing_pass", true);
+		hasCleaningPass = Config.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
+		hasFixPass = Config.getBoolean("generator.world.terrain", "world_fixing_pass", true);
 		
-		hasCaves = Config.getBoolean("generator_world", "generate_caves", true);
-		hasPaths = Config.getBoolean("generator_world", "generate_paths", true);
+		hasCaves = Config.getBoolean("generator.world.environment", "generate_caves", true);
+		hasPaths = Config.getBoolean("generator.world.environment", "generate_paths", true);
 		
-		cincinnasiteDensity = Config.getFloat("generator_world", "cincinnasite_ore_density", 1F / 1024F);
-		rubyDensity = Config.getFloat("generator_world", "ruby_ore_density", 1F / 4000F);
-		structureDensity = Config.getFloat("generator_world", "structures_density", 1F / 32F);
+		cincinnasiteDensity = Config.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 1024F);
+		rubyDensity = Config.getFloat("generator.world.ores", "ruby_ore_density", 1F / 4000F);
+		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 32F);
 		
-		if (Config.getBoolean("generator_world", "generate_cities", true))
+		if (Config.getBoolean("generator.world.cities", "generate", true))
 		{
 			StructureFeature.STRUCTURES.put("nether_city", CITY);
 			
