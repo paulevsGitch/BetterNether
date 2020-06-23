@@ -122,7 +122,7 @@ public abstract class MapMixin extends NetworkSyncedItem
 									ac = 0;
 								}
 
-								MaterialColor materialColor = (MaterialColor) Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.AIR);
+								MaterialColor materialColor = (MaterialColor) Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.CLEAR);
 								
 								if (materialColor == MaterialColor.WATER)
 								{
