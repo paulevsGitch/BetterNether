@@ -58,6 +58,7 @@ public class NetherBiome extends Biome
 	protected float maxSubBiomeChance = 1;
 	protected float genChance = 1;
 	protected float noiseDensity = 0.3F;
+	protected float plantDensity = 1;
 	
 	private static final String[] DEF_STRUCTURES = new String[] {
 			structureFormat("altar_01", -2, StructureType.FLOOR, 1),
@@ -146,6 +147,16 @@ public class NetherBiome extends Biome
 		
 		addStructure("netherrack_stalagmite", STALAGMITE_NETHERRACK, StructureType.CEIL, 0.01F, true);
 		addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
+	}
+	
+	public void setPlantDensity(float density)
+	{
+		this.plantDensity = density;
+	}
+	
+	public float getPlantDensity()
+	{
+		return plantDensity;
 	}
 	
 	public void setNoiseDensity(float density)

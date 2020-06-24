@@ -124,6 +124,7 @@ public class BiomesRegistry
 		{
 			maxChance += chance;
 			biome.setGenChance(maxChance);
+			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			biome.build();
 			REGISTRY.add(biome);
 			LINKS.put(biome.getBiome(), biome);
@@ -137,6 +138,7 @@ public class BiomesRegistry
 		if (chance > 0)
 		{
 			maxChance += chance;
+			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			biome.setGenChance(maxChance);
 			biome.build();
 			REGISTRY.add(biome);
@@ -150,6 +152,7 @@ public class BiomesRegistry
 		int sizeConf = Config.getInt("biomes.edge", regName + "_size", size);
 		if (sizeConf > 0)
 		{
+			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			mainBiome.setEdge(biome);
 			mainBiome.setEdgeSize(sizeConf);
 			biome.build();
@@ -163,6 +166,7 @@ public class BiomesRegistry
 		chance = Config.getFloat("biomes.variation", regName + "_chance", chance);
 		if (chance > 0)
 		{
+			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			mainBiome.addSubBiome(biome, chance);
 			biome.build();
 			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, biome.getRegistryName()), biome);

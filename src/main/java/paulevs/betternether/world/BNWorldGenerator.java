@@ -44,6 +44,7 @@ public class BNWorldGenerator
 	private static float cincinnasiteDensity;
 	private static float rubyDensity;
 	private static float structureDensity;
+	private static float globalDensity;
 	
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
 	
@@ -81,7 +82,8 @@ public class BNWorldGenerator
 		
 		cincinnasiteDensity = Config.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 1024F);
 		rubyDensity = Config.getFloat("generator.world.ores", "ruby_ore_density", 1F / 4000F);
-		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 32F);
+		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 32F) * 1.0001F;
+		globalDensity = Config.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
 		
 		if (Config.getBoolean("generator.world.cities", "generate", true))
 		{
@@ -226,7 +228,7 @@ public class BNWorldGenerator
 						if (!lava && ((state = world.getBlockState(popPos.up())).isAir() || !state.getMaterial().blocksLight() || !state.getMaterial().blocksMovement()) && state.getFluidState().isEmpty())// world.isAir(popPos.up()))
 							biome.genSurfColumn(world, popPos, random);
 
-						if (((x + y + z) & 1) == 0)
+						if (((x + y + z) & 1) == 0 && random.nextFloat() < globalDensity)
 						{
 							// Ground Generation
 							if (world.isAir(popPos.up()))
