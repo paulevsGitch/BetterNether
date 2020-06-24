@@ -101,9 +101,9 @@ public class BlockEggPlant extends BlockCommonPlant
 							px + random.nextGaussian() * 0.2,
 							py + random.nextGaussian() * 0.2,
 							pz + random.nextGaussian() * 0.2,
-							random.nextGaussian() * 0.6,
-							random.nextGaussian() * 0.6,
-							random.nextGaussian() * 0.6);
+							random.nextGaussian(),
+							random.nextGaussian(),
+							random.nextGaussian());
 			}
 			
 			world.setBlockState(pos, state.with(DESTRUCTED, true));

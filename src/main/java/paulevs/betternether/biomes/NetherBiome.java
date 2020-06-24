@@ -58,7 +58,7 @@ public class NetherBiome extends Biome
 	protected float maxSubBiomeChance = 1;
 	protected float genChance = 1;
 	protected float noiseDensity = 0.3F;
-	protected float plantDensity = 1;
+	protected float plantDensity = 1.0001F;
 	
 	private static final String[] DEF_STRUCTURES = new String[] {
 			structureFormat("altar_01", -2, StructureType.FLOOR, 1),
@@ -151,7 +151,7 @@ public class NetherBiome extends Biome
 	
 	public void setPlantDensity(float density)
 	{
-		this.plantDensity = density;
+		this.plantDensity = density * 1.0001F;
 	}
 	
 	public float getPlantDensity()
