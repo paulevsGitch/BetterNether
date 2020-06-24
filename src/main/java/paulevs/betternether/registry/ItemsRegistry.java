@@ -26,6 +26,7 @@ import paulevs.betternether.blocks.shapes.FoodShape;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.items.BNArmor;
 import paulevs.betternether.items.BNItemAxe;
+import paulevs.betternether.items.BNItemHoe;
 import paulevs.betternether.items.BNItemPickaxe;
 import paulevs.betternether.items.BNItemShovel;
 import paulevs.betternether.items.BNSword;
@@ -57,6 +58,8 @@ public class ItemsRegistry
 	public static final Item CINCINNASITE_AXE_DIAMOND = registerItem("cincinnasite_axe_diamond", new BNItemAxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
 	public static final Item CINCINNASITE_SHOVEL = registerItem("cincinnasite_shovel", new BNItemShovel(BNItemMaterials.CINCINNASITE_TOOLS, 512, 1F));
 	public static final Item CINCINNASITE_SHOVEL_DIAMOND = registerItem("cincinnasite_shovel_diamond", new BNItemShovel(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
+	public static final Item CINCINNASITE_HOE = registerItem("cincinnasite_hoe", new BNItemHoe(BNItemMaterials.CINCINNASITE_TOOLS, 512, 1F));
+	public static final Item CINCINNASITE_HOE_DIAMOND = registerItem("cincinnasite_hoe_diamond", new BNItemHoe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
 	public static final Item CINCINNASITE_HAMMER = registerItem("cincinnasite_hammer", VanillaHammersIntegration.makeHammer(BNItemMaterials.CINCINNASITE_TOOLS, 4, -2.0F));
 	public static final Item CINCINNASITE_HAMMER_DIAMOND = registerItem("cincinnasite_hammer_diamond", VanillaHammersIntegration.makeHammer(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 5, -2.0F));
 	public static final Item CINCINNASITE_SHEARS = registerItem("cincinnasite_shears", new ShearsItem(defaultSettings().maxDamage(380)));
@@ -72,6 +75,7 @@ public class ItemsRegistry
 	public static final Item NETHER_RUBY_PICKAXE = registerItem("nether_ruby_pickaxe", new BNItemPickaxe(BNItemMaterials.NETHER_RUBY_TOOLS, 512, 1F));
 	public static final Item NETHER_RUBY_AXE = registerItem("nether_ruby_axe", new BNItemAxe(BNItemMaterials.NETHER_RUBY_TOOLS, 512, 1F));
 	public static final Item NETHER_RUBY_SHOVEL = registerItem("nether_ruby_shovel", new BNItemShovel(BNItemMaterials.NETHER_RUBY_TOOLS, 512, 1F));
+	public static final Item NETHER_RUBY_HOE = registerItem("nether_ruby_hoe", new BNItemHoe(BNItemMaterials.NETHER_RUBY_TOOLS, 512, 1F));
 	public static final Item NETHER_RUBY_SWORD = registerItem("nether_ruby_sword", new BNSword(BNItemMaterials.NETHER_RUBY_TOOLS, 512, 4, -2.4F));
 	public static final Item NETHER_RUBY_HELMET = registerItem("nether_ruby_helmet", new BNArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.HEAD));
 	public static final Item NETHER_RUBY_CHESTPLATE = registerItem("nether_ruby_chestplate", new BNArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.CHEST));

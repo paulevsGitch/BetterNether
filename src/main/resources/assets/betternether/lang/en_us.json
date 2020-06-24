@@ -499,5 +499,9 @@
 	"block.betternether.basalt_bricks": "Basalt Bricks",
 	"block.betternether.basalt_bricks_stairs": "Basalt Bricks Stairs",
 	"block.betternether.basalt_bricks_slab": "Basalt Bricks Slab",
-	"block.betternether.basalt_bricks_wall": "Basalt Bricks Wall"
+	"block.betternether.basalt_bricks_wall": "Basalt Bricks Wall",
+	
+	"item.betternether.cincinnasite_hoe": "Cincinnasite Hoe",
+	"item.betternether.cincinnasite_hoe_diamond": "Cincinnasite-Diamond Hoe",
+	"item.betternether.nether_ruby_hoe": "Nether Ruby Hoe"
 }

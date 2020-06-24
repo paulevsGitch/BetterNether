@@ -497,5 +497,9 @@
 	"block.betternether.basalt_bricks": "Базальтовые кирпичи",
 	"block.betternether.basalt_bricks_stairs": "Ступени из базальтовых кирпичей",
 	"block.betternether.basalt_bricks_slab": "Плита из базальтовых кирпичей",
-	"block.betternether.basalt_bricks_wall": "Стена из базальтовых кирпичей"
+	"block.betternether.basalt_bricks_wall": "Стена из базальтовых кирпичей",
+	
+	"item.betternether.cincinnasite_hoe": "Цинцинназитовая мотыга",
+	"item.betternether.cincinnasite_hoe_diamond": "Цинцинназитово-алмазная мотыга",
+	"item.betternether.nether_ruby_hoe": "Мотыга из рубина нижнего мира"
 }
