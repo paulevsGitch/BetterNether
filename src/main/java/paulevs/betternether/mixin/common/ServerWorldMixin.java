@@ -18,6 +18,7 @@ import net.minecraft.world.gen.Spawner;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.level.storage.LevelStorage;
+import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.NetherBiomeAccessType;
 
@@ -27,6 +28,7 @@ public class ServerWorldMixin
 	@Inject(method = "<init>*", at = @At("RETURN"))
 	private void onInit(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> registryKey, RegistryKey<DimensionType> registryKey2, DimensionType dimensionType, WorldGenerationProgressListener generationProgressListener, ChunkGenerator chunkGenerator, boolean bl, long seed, List<Spawner> list, boolean bl2, CallbackInfo info)
 	{
+		BiomesRegistry.registerAllOtherBiomes();
 		BNWorldGenerator.init(seed);
 		NetherBiomeAccessType.reInitMap(seed);
 	}

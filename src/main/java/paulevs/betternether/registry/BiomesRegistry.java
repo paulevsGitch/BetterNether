@@ -63,6 +63,7 @@ public class BiomesRegistry
 	public static final NetherBiome FLOODED_DELTAS = new FloodedDeltas("Flooded Deltas");
 	
 	private static int maxChance = 0;
+	private static boolean registered = false;
 	
 	public static void register()
 	{
@@ -85,6 +86,15 @@ public class BiomesRegistry
 		registerSubBiome(CRIMSON_PINEWOOD, BIOME_CRIMSON_FOREST, 0.3F);
 		registerSubBiome(OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
 		registerSubBiome(FLOODED_DELTAS, BIOME_BASALT_DELTAS, 1F);
+	}
+	
+	public static void registerAllOtherBiomes()
+	{
+		if (!registered)
+		{
+			registerNotModBiomes();
+			registered = true;
+		}
 	}
 	
 	private static void registerNotModBiomes()
