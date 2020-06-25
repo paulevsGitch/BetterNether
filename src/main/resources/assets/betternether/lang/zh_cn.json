@@ -3,16 +3,16 @@
 	"container.chest_of_drawers": "抽屉柜",
 
 	"entity.betternether.firefly": "流荧",
-	"entity.betternether.hydrogen_jellyfish": "氢蜇",
+	"entity.betternether.hydrogen_jellyfish": "氢气水母",
 	"entity.betternether.naga_projectile": "娜迦弹丸",
 	"entity.betternether.naga": "娜迦",
 	"item.betternether.spawn_egg_naga": "娜迦刷怪蛋",
-	"entity.betternether.flying_pig": "飞猪",
-	"item.betternether.spawn_egg_flying_pig": "飞猪刷怪蛋",
+	"entity.betternether.flying_pig": "蝙猪",
+	"item.betternether.spawn_egg_flying_pig": "蝙猪刷怪蛋",
 	"entity.betternether.jungle_skeleton": "丛林骷髅",
 	"item.betternether.spawn_egg_jungle_skeleton": "丛林骷髅刷怪蛋",
-	"entity.betternether.skull": "头骨",
-	"item.betternether.spawn_egg_skull": "头骨刷怪蛋",
+	"entity.betternether.skull": "髑",
+	"item.betternether.spawn_egg_skull": "髑刷怪蛋",
 
 	"item.betternether.black_apple": "黑苹果",
 
@@ -23,7 +23,7 @@
 	"item.betternether.cincinnasite_pickaxe_diamond": "钻石云金斧镐",
 
 	"item.betternether.stalagnate_bowl": "石结碗",
-	"item.betternether.stalagnate_bowl_apple": "黑苹果",
+	"item.betternether.stalagnate_bowl_apple": "黑苹果煲",
 	"item.betternether.stalagnate_bowl_mushroom": "蘑菇煲",
 	"item.betternether.stalagnate_bowl_wart": "下界疣汤",
 
@@ -218,7 +218,7 @@
 	"block.betternether.soul_vein": "灵魂叶脉",
 	"block.betternether.blooming_vine": "盛花藤蔓",
 	"block.betternether.golden_vine": "金藤",
-	"block.betternether.geyser": "间歇泉",
+	"block.betternether.geyser": "下界间歇泉",
 	
 	"item.betternether.cincinnasite_shovel": "云金锹",
 	"item.betternether.cincinnasite_shovel_diamond": "钻石云金锹",
@@ -431,7 +431,7 @@
 	
 	"betternether.flat_nether": "平坦下界",
 	
-	"item.betternether.spawn_egg_hydrogen_jellyfish": "氢蜇刷怪蛋",
+	"item.betternether.spawn_egg_hydrogen_jellyfish": "氢气水母刷怪蛋",
 	"block.betternether.brick_pot": "下界砖花盆",
 	
 	"block.betternether.striped_log_rubeus": "去皮铬瘤原木",
@@ -458,8 +458,8 @@
 	"item.betternether.cincinnasite_shears": "云金剪刀",
 	"block.betternether.cincinnasite_anvil": "云金砧",
 	
-	"block.betternether.jungle_grass": "丛林草",
-	"block.betternether.jungle_plant": "丛林草",
+	"block.betternether.jungle_grass": "下界丛林草方块",
+	"block.betternether.jungle_plant": "下界丛林草",
 	
 	"block.betternether.netherrack_stalactite": "下界岩钟乳",
 	"block.betternether.glowstone_stalactite": "萤石钟乳",
