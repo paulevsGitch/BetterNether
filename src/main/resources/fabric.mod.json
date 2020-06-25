@@ -27,6 +27,9 @@
 		],
 		"client": [
 			"paulevs.betternether.client.BetterNetherClient"
+		],
+		"modmenu": [
+			"paulevs.betternether.config.ModMenuEntry"
 		]
 	},
 	"mixins": [

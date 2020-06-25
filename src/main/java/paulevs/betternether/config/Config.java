@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -99,6 +103,16 @@ public class Config
 		}
 	}
 	
+	public static void setBoolean(String groups, String name, int def, int value)
+	{
+		name += "[def: " + def + "]";
+		
+		JsonObject group = getGroup(groups);
+		group.addProperty(name, value);
+		
+		rewrite = true;
+	}
+	
 	public static float getFloat(String groups, String name, float def)
 	{
 		load();
@@ -119,6 +133,16 @@ public class Config
 		}
 	}
 	
+	public static void setFloat(String groups, String name, float def, float value)
+	{
+		name += "[def: " + def + "]";
+		
+		JsonObject group = getGroup(groups);
+		group.addProperty(name, value);
+		
+		rewrite = true;
+	}
+	
 	public static int getInt(String groups, String name, int def)
 	{
 		load();
@@ -137,6 +161,16 @@ public class Config
 			rewrite = true;
 			return def;
 		}
+	}
+	
+	public static void setInt(String groups, String name, int def, int value)
+	{
+		name += "[def: " + def + "]";
+		
+		JsonObject group = getGroup(groups);
+		group.addProperty(name, value);
+		
+		rewrite = true;
 	}
 	
 	public static String[] getStringArray(String groups, String name, String[] def)
@@ -176,7 +210,7 @@ public class Config
 		return result;
 	}
 	
-	private static JsonObject getGroup(String groups)
+	public static JsonObject getGroup(String groups)
 	{
 		JsonObject obj = config;
 		String[] groupsArr = groups.split("\\.");
@@ -191,5 +225,25 @@ public class Config
 			obj = jGroup;
 		}
 		return obj;
+	}
+
+	public static List<String> getBaseGroups()
+	{
+		List<String> groups = new ArrayList<String>();
+		Iterator<Entry<String, JsonElement>> iterator = config.entrySet().iterator();
+		iterator.forEachRemaining((element) -> { groups.add(element.getKey()); });
+		return groups;
+	}
+	
+	public static List<Entry<String, JsonElement>> getGroupMembers(JsonObject group)
+	{
+		List<Entry<String, JsonElement>> result = new ArrayList<Entry<String, JsonElement>>();
+		result.addAll(group.entrySet());
+		return result;
+	}
+
+	public static void markToSave()
+	{
+		rewrite = true;
 	}
 }
