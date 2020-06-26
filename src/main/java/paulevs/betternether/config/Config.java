@@ -103,7 +103,7 @@ public class Config
 		}
 	}
 	
-	public static void setBoolean(String groups, String name, int def, int value)
+	public static void setBoolean(String groups, String name, boolean def, boolean value)
 	{
 		name += "[def: " + def + "]";
 		

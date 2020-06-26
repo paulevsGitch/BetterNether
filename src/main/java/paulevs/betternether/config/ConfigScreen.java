@@ -9,6 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.TranslatableText;
 import paulevs.betternether.config.screen.BlocksScreen;
 import paulevs.betternether.config.screen.ImprovementsScreen;
+import paulevs.betternether.config.screen.ItemsScreen;
 
 public class ConfigScreen extends Screen
 {
@@ -57,16 +58,16 @@ public class ConfigScreen extends Screen
 			}
 		));
 		
-		/*this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.items"),
+		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.items"),
 			new PressAction()
 			{
 				@Override
 				public void onPress(ButtonWidget button)
 				{
-					ConfigScreen.this.client.openScreen(new ImprovementsScreen(ConfigScreen.this));
+					ConfigScreen.this.client.openScreen(new ItemsScreen(ConfigScreen.this));
 				}
 			}
-		));*/
+		));
 	}
 	
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)

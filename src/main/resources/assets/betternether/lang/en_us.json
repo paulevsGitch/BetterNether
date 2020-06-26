@@ -22,6 +22,7 @@
 	"item.betternether.cincinnasite_pickaxe": "Cincinnasite Pickaxe",
 	"item.betternether.cincinnasite_pickaxe_diamond": "Cincinnasite-Diamond Pickaxe",
 
+	"block.betternether.stalagnate_bowl": "Stalagnate Bowl",
 	"item.betternether.stalagnate_bowl": "Stalagnate Bowl",
 	"item.betternether.stalagnate_bowl_apple": "Black Apple",
 	"item.betternether.stalagnate_bowl_mushroom": "Mushroom Stew",
@@ -38,6 +39,10 @@
 
 	"block.betternether.black_apple_seed": "Black Apple Seed",
 	"block.betternether.black_bush": "Black Bush",
+	
+	"block.betternether.red_large_mushroom": "Red Large Mushroom",
+	"block.betternether.brown_large_mushroom": "Brown Large Mushroom",
+	"block.betternether.lucis_mushroom": "Lucis Mushroom",
 
 	"block.betternether.eyeball": "Eyeball Block",
 	"block.betternether.eyeball_small": "Small Eyeball Block",
@@ -164,7 +169,7 @@
 	"block.betternether.smoker": "Smoker",
 
 	"block.betternether.stalagnate": "Stalagnate",
-	"block.betternether.stalagnate_stem": "Stalagnate",
+	"block.betternether.stalagnate_stem": "Stalagnate Stem",
 	"block.betternether.stalagnate_log": "Stalagnate Log",
 	"block.betternether.stalagnate_bark": "Stalagnate Wood",
 	"block.betternether.stalagnate_bowl_placed": "Stalagnate Bowl",
@@ -179,6 +184,9 @@
 	"block.betternether.stalagnate_planks_trapdoor": "Stalagnate Trapdoor",
 	"block.betternether.stalagnate_seed": "Stalagnate Seed",
 	"block.betternether.wart_seed": "Wart Seed",
+	
+	"block.betternether.eye_vine": "Eye Vine",
+	"block.betternether.black_apple": "Black Apple Bush",
 
 	"commands.findnethercity.usage.console": "No coordinates in input",
 	"commands.findnethercity.usage.coordinates": "Wrong coordinates",
@@ -380,6 +388,7 @@
 	"block.betternether.mushroom_fir_plate": "Mushroom Fir Plate",
 	"block.betternether.mushroom_fir_trapdoor": "Mushroom Fir Trapdoor",
 	"block.betternether.mushroom_fir_door": "Mushroom Fir Door",
+	"block.betternether.mushroom_fir_ladder": "Mushroom Fir Ladder",
 	
 	"block.betternether.chair_mushroom_fir": "Mushroom Fir Chair",
 	"block.betternether.taburet_mushroom_fir": "Mushroom Fir Stool",
@@ -512,5 +521,6 @@
 	"config.betternether.items": "Registered Items",
 	
 	"config.betternether.reset": "Reset",
-	"config.betternether.fog": "Fog Distance"
+	"config.betternether.fog": "Fog Distance",
+	"config.betternether.armour": "§b§l*§rThin Armor"
 }

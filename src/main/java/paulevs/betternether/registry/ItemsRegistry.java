@@ -1,6 +1,7 @@
 package paulevs.betternether.registry;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -37,6 +38,7 @@ import paulevs.betternether.tab.CreativeTab;
 
 public class ItemsRegistry
 {
+	private static final List<String> ITEMS = new ArrayList<String>();
 	public static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
 	public static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
 	
@@ -93,7 +95,7 @@ public class ItemsRegistry
 	
 	public static Item registerItem(String name, Item item)
 	{
-		if (Config.getBoolean("items", name, true) && item != Items.AIR)
+		if ((item instanceof BlockItem || Config.getBoolean("items", name, true)) && item != Items.AIR)
 		{
 			Registry.register(Registry.ITEM, new Identifier(BetterNether.MOD_ID, name), item);
 			if (item instanceof BlockItem)
@@ -101,6 +103,8 @@ public class ItemsRegistry
 			else
 				MOD_ITEMS.add(item);
 		}
+		if (!(item instanceof BlockItem))
+			ITEMS.add(name);
 		return item;
 	}
 
@@ -130,5 +134,10 @@ public class ItemsRegistry
 	private static int color(int r, int g, int b)
 	{
 		return ALPHA | (r << 16) | (g << 8) | b;
+	}
+	
+	public static List<String> getPossibleItems()
+	{
+		return ITEMS;
 	}
 }

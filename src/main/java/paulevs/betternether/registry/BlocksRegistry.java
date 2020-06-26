@@ -1,5 +1,8 @@
 package paulevs.betternether.registry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -115,6 +118,8 @@ import paulevs.betternether.tab.CreativeTab;
 
 public class BlocksRegistry
 {
+	private static final List<String> BLOCKS = new ArrayList<String>();
+	
 	// Stalagnate //
 	public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
 	public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStalagnateStem());
@@ -502,6 +507,7 @@ public class BlocksRegistry
 			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
 			ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
 		}
+		BLOCKS.add(name);
 		return block;
 	}
 	
@@ -511,6 +517,7 @@ public class BlocksRegistry
 		{
 			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
 		}
+		BLOCKS.add(name);
 		return block;
 	}
 	
@@ -528,6 +535,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, stairs);
 			RecipesHelper.makeStairsRecipe(source, stairs);
 		}
+		BLOCKS.add(name);
 		return stairs;
 	}
 	
@@ -539,6 +547,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, slab);
 			RecipesHelper.makeSlabRecipe(source, slab);
 		}
+		BLOCKS.add(name);
 		return slab;
 	}
 	
@@ -550,6 +559,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, roof);
 			RecipesHelper.makeRoofRecipe(source, roof);
 		}
+		BLOCKS.add(name);
 		return roof;
 	}
 	
@@ -561,6 +571,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, button);
 			RecipesHelper.makeButtonRecipe(source, button);
 		}
+		BLOCKS.add(name);
 		return button;
 	}
 	
@@ -572,6 +583,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
+		BLOCKS.add(name);
 		return plate;
 	}
 	
@@ -583,6 +595,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
+		BLOCKS.add(name);
 		return plate;
 	}
 	
@@ -594,6 +607,7 @@ public class BlocksRegistry
 			for (Block log: logs)
 				RecipesHelper.makeSimpleRecipe(log, planks, 4, "nether_planks");
 		}
+		BLOCKS.add(name);
 		return planks;
 	}
 	
@@ -606,6 +620,7 @@ public class BlocksRegistry
 			for (Block log: logs)
 				RecipesHelper.makeSimpleRecipe(log, planks, 4, "nether_planks");
 		}
+		BLOCKS.add(name);
 		return planks;
 	}
 	
@@ -616,6 +631,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, log);
 			RecipesHelper.makeSimpleRecipe2(stem, log, 1, "nether_stem_log");
 		}
+		BLOCKS.add(name);
 		return log;
 	}
 	
@@ -626,6 +642,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, bark);
 			RecipesHelper.makeSimpleRecipe2(log, bark, 3, "nether_bark");
 		}
+		BLOCKS.add(name);
 		return bark;
 	}
 	
@@ -637,6 +654,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, fence);
 			RecipesHelper.makeFenceRecipe(source, fence);
 		}
+		BLOCKS.add(name);
 		return fence;
 	}
 	
@@ -648,6 +666,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, gate);
 			RecipesHelper.makeGateRecipe(source, gate);
 		}
+		BLOCKS.add(name);
 		return gate;
 	}
 	
@@ -659,6 +678,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, door);
 			RecipesHelper.makeDoorRecipe(source, door);
 		}
+		BLOCKS.add(name);
 		return door;
 	}
 	
@@ -670,6 +690,7 @@ public class BlocksRegistry
 			registerBlockDirectly(name, trapdoor);
 			RecipesHelper.makeTrapdoorRecipe(source, trapdoor);
 		}
+		BLOCKS.add(name);
 		return trapdoor;
 	}
 	
@@ -681,6 +702,7 @@ public class BlocksRegistry
 			for (Block source: sources)
 				RecipesHelper.makeSimpleRecipe2(source, result, 4, group);
 		}
+		BLOCKS.add(name);
 		return result;
 	}
 	
@@ -692,6 +714,12 @@ public class BlocksRegistry
 			registerBlockDirectly(name, wall);
 			RecipesHelper.makeWallRecipe(source, wall);
 		}
+		BLOCKS.add(name);
 		return wall;
+	}
+	
+	public static List<String> getPossibleBlocks()
+	{
+		return BLOCKS;
 	}
 }

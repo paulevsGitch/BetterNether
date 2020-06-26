@@ -52,6 +52,11 @@ public class BetterNether implements ModInitializer
 		return thinArmor;
 	}
 	
+	public static void setThinArmor(boolean value)
+	{
+		thinArmor = value;
+	}
+	
 	public static boolean hasLavafallParticles()
 	{
 		return lavafallParticles;

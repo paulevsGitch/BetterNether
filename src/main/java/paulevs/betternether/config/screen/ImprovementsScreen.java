@@ -7,6 +7,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget.PressAction;
 import net.minecraft.client.options.DoubleOption;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Config;
@@ -14,6 +15,7 @@ import paulevs.betternether.config.Config;
 public class ImprovementsScreen extends Screen
 {
 	private Screen parrent;
+	private Text header;
 	
 	public ImprovementsScreen(Screen parrent)
 	{
@@ -35,17 +37,20 @@ public class ImprovementsScreen extends Screen
 				}
 			}
 		));
+		
+		header = new TranslatableText("\u00A7b\u00A7l* ").append(new TranslatableText("config.betternether.mod_reload").getString());
 
 		// Fog //
-		final String varName = "fog_density[vanilla: 1.0]";
+		final String varFog = "fog_density[vanilla: 1.0]";
 		final float fogDefault = 0.75F;
-		AbstractButtonWidget fogButton = new DoubleOption("bn_fog_density", 0.0, 1.0, 0.05F,
+		
+		AbstractButtonWidget fogButton = new DoubleOption("fog", 0.0, 1.0, 0.05F,
 			(gameOptions) -> {
-				return (double) Config.getFloat("improvement", varName, fogDefault);
+				return (double) Config.getFloat("improvement", varFog, fogDefault);
 			},
 			(gameOptions, value) -> {
 				float val = value.floatValue();
-				Config.setFloat("improvement", varName, fogDefault, val);
+				Config.setFloat("improvement", varFog, fogDefault, val);
 				BetterNether.changeFogDensity(val);
 			},
 			(gameOptions, doubleOption) -> {
@@ -53,7 +58,7 @@ public class ImprovementsScreen extends Screen
 				String color = Math.abs(val - fogDefault) < 0.001 ? "" : "\u00A7b";
 				return new TranslatableText("config.betternether.fog").append(String.format(": %s%.2f", color, val));
 			}
-		).createButton(this.client.options, this.width / 2 - 120 + 20, 27, 150);
+		).createButton(this.client.options, this.width / 2 - 100, 27, 150);
 		this.addButton(fogButton);
 
 		this.addButton(new ButtonWidget(this.width / 2 + 40 + 20, 27, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction()
@@ -61,14 +66,42 @@ public class ImprovementsScreen extends Screen
 			@Override
 			public void onPress(ButtonWidget button)
 			{
-				Config.setFloat("improvement", varName, fogDefault, fogDefault);
+				Config.setFloat("improvement", varFog, fogDefault, fogDefault);
 				BetterNether.changeFogDensity(fogDefault);
-				fogButton.onRelease(0, 0);
+				fogButton.onClick(fogButton.getWidth() * fogDefault + fogButton.x, fogButton.y);
 			}
 		}));
 		
-		for (AbstractButtonWidget button: this.buttons)
-			this.children.add(button);
+		// Thin Armor
+		final String varArmour = "smaller_armor_offset";
+		boolean hasArmour = Config.getBoolean("improvement", varArmour, true);
+		
+		AbstractButtonWidget armorButton = new ButtonWidget(this.width / 2 - 100, 27 * 2, 150, 20, new TranslatableText("config.betternether.armour"), new PressAction()
+		{
+			@Override
+			public void onPress(ButtonWidget button)
+			{
+				boolean value = !Config.getBoolean("improvement", varArmour, true);
+				Config.setBoolean("improvement", varArmour, true, value);
+				String color = value ? ": \u00A7a" : ": \u00A7c";
+				button.setMessage(new TranslatableText("config.betternether.armour")
+						.append(color + ScreenTexts.getToggleText(value).getString()));
+			}
+		});
+		String color = hasArmour ? ": \u00A7a" : ": \u00A7c";
+		armorButton.setMessage(new TranslatableText("config.betternether.armour").append(color + ScreenTexts.getToggleText(hasArmour).getString()));
+		this.addButton(armorButton);
+		
+		this.addButton(new ButtonWidget(this.width / 2 + 40 + 20, 27 * 2, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction()
+		{
+			@Override
+			public void onPress(ButtonWidget button)
+			{
+				Config.setBoolean("improvement", varArmour, true, true);
+				BetterNether.setThinArmor(true);
+				armorButton.setMessage(new TranslatableText("config.betternether.armour").append(": \u00A7a" + ScreenTexts.getToggleText(true).getString()));
+			}
+		}));
 	}
 	
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
@@ -78,5 +111,6 @@ public class ImprovementsScreen extends Screen
 		{
 			button.render(matrices, mouseX, mouseY, delta);
 		}
+		this.drawCenteredText(matrices, this.textRenderer, header, this.width / 2, 14, 16777215);
 	}
 }

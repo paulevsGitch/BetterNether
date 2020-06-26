@@ -20,6 +20,7 @@
 	"item.betternether.cincinnasite_pickaxe": "Цинцинназитовая кирка",
 	"item.betternether.cincinnasite_pickaxe_diamond": "Цинцинназитово-алмазная кирка",
 
+	"block.betternether.stalagnate_bowl": "Сталагнатовая миска",
 	"item.betternether.stalagnate_bowl": "Сталагнатовая миска",
 	"item.betternether.stalagnate_bowl_apple": "Чёрное яблоко",
 	"item.betternether.stalagnate_bowl_mushroom": "Грибной суп",
@@ -36,6 +37,10 @@
 
 	"block.betternether.black_apple_seed": "Семя чёрного яблока",
 	"block.betternether.black_bush": "Чёрный куст",
+	
+	"block.betternether.red_large_mushroom": "Большой красный гриб",
+	"block.betternether.brown_large_mushroom": "Большой коричневый гриб",
+	"block.betternether.lucis_mushroom": "Гриб Люцис",
 
 	"block.betternether.eyeball": "Блок глаза",
 	"block.betternether.eyeball_small": "Маленький блок глаза",
@@ -162,7 +167,7 @@
 	"block.betternether.smoker": "Курильщик",
 
 	"block.betternether.stalagnate": "Сталагнат",
-	"block.betternether.stalagnate_stem": "Сталагнат",
+	"block.betternether.stalagnate_stem": "Стебель сталагната",
 	"block.betternether.stalagnate_log": "Бревно сталагната",
 	"block.betternether.stalagnate_bark": "Древесина сталагната",
 	"block.betternether.stalagnate_bowl_placed": "Сталагнатовая миска",
@@ -177,6 +182,9 @@
 	"block.betternether.stalagnate_planks_trapdoor": "Сталагнатовый люк",
 	"block.betternether.stalagnate_seed": "Семя сталагната",
 	"block.betternether.wart_seed": "Семя нароста",
+	
+	"block.betternether.eye_vine": "Глазнвя лоза",
+	"block.betternether.black_apple": "Куст чёрного яблока",
 
 	"commands.findnethercity.usage.console": "Не указаны координаты",
 	"commands.findnethercity.usage.coordinates": "Неверный формат координат",
@@ -378,6 +386,7 @@
 	"block.betternether.mushroom_fir_plate": "Нажимная плита из грибной ели",
 	"block.betternether.mushroom_fir_trapdoor": "Люк из грибной ели",
 	"block.betternether.mushroom_fir_door": "Дверь из грибной ели",
+	"block.betternether.mushroom_fir_ladder": "Лестница из грибной ели",
 	
 	"block.betternether.chair_mushroom_fir": "Стул из грибной ели",
 	"block.betternether.taburet_mushroom_fir": "Табурет из грибной ели",
