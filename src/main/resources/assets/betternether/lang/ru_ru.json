@@ -510,5 +510,16 @@
 	
 	"item.betternether.cincinnasite_hoe": "Цинцинназитовая мотыга",
 	"item.betternether.cincinnasite_hoe_diamond": "Цинцинназитово-алмазная мотыга",
-	"item.betternether.nether_ruby_hoe": "Мотыга из рубина нижнего мира"
+	"item.betternether.nether_ruby_hoe": "Мотыга из рубина нижнего мира",
+	
+	"config.betternether.config": "Настройки BetterNether",
+	"config.betternether.mod_reload": "§b§lВам необходимо перезапустить Minecraft, чтобы изменения вступили в силу!",
+	"config.betternether.rendering": "Настройки графики",
+	"config.betternether.blocks": "Регистрация блоков",
+	"config.betternether.items": "Регистрация предметов",
+	
+	"config.betternether.reset": "Сбросить",
+	"config.betternether.fog": "Расстояние до тумана",
+	"config.betternether.lavafalls": "§b*§rЧастицы лавопадов",
+	"config.betternether.armour": "§b*§rТонкая броня"
 }

@@ -522,5 +522,6 @@
 	
 	"config.betternether.reset": "Reset",
 	"config.betternether.fog": "Fog Distance",
-	"config.betternether.armour": "§b§l*§rThin Armor"
+	"config.betternether.lavafalls": "§b*§rLavafall Particles",
+	"config.betternether.armour": "§b*§rThin Armor"
 }

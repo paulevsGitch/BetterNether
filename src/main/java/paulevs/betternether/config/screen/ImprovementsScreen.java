@@ -38,7 +38,7 @@ public class ImprovementsScreen extends Screen
 			}
 		));
 		
-		header = new TranslatableText("\u00A7b\u00A7l* ").append(new TranslatableText("config.betternether.mod_reload").getString());
+		header = new TranslatableText("\u00A7b* ").append(new TranslatableText("config.betternether.mod_reload").getString());
 
 		// Fog //
 		final String varFog = "fog_density[vanilla: 1.0]";
@@ -72,7 +72,7 @@ public class ImprovementsScreen extends Screen
 			}
 		}));
 		
-		// Thin Armor
+		// Thin Armor //
 		final String varArmour = "smaller_armor_offset";
 		boolean hasArmour = Config.getBoolean("improvement", varArmour, true);
 		
@@ -100,6 +100,37 @@ public class ImprovementsScreen extends Screen
 				Config.setBoolean("improvement", varArmour, true, true);
 				BetterNether.setThinArmor(true);
 				armorButton.setMessage(new TranslatableText("config.betternether.armour").append(": \u00A7a" + ScreenTexts.getToggleText(true).getString()));
+			}
+		}));
+		
+		// Lavafalls //
+		final String varLava = "lavafall_particles";
+		boolean hasLava = Config.getBoolean("improvement", varLava, true);
+		
+		AbstractButtonWidget lavaButton = new ButtonWidget(this.width / 2 - 100, 27 * 3, 150, 20, new TranslatableText("config.betternether.armour"), new PressAction()
+		{
+			@Override
+			public void onPress(ButtonWidget button)
+			{
+				boolean value = !Config.getBoolean("improvement", varLava, true);
+				Config.setBoolean("improvement", varLava, true, value);
+				String color = value ? ": \u00A7a" : ": \u00A7c";
+				button.setMessage(new TranslatableText("config.betternether.lavafalls")
+						.append(color + ScreenTexts.getToggleText(value).getString()));
+			}
+		});
+		color = hasLava ? ": \u00A7a" : ": \u00A7c";
+		lavaButton.setMessage(new TranslatableText("config.betternether.lavafalls").append(color + ScreenTexts.getToggleText(hasLava).getString()));
+		this.addButton(lavaButton);
+		
+		this.addButton(new ButtonWidget(this.width / 2 + 40 + 20, 27 * 3, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction()
+		{
+			@Override
+			public void onPress(ButtonWidget button)
+			{
+				Config.setBoolean("improvement", varLava, true, true);
+				BetterNether.setThinArmor(true);
+				lavaButton.setMessage(new TranslatableText("config.betternether.lavafalls").append(": \u00A7a" + ScreenTexts.getToggleText(true).getString()));
 			}
 		}));
 	}
