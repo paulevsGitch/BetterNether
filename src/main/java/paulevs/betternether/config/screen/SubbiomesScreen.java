@@ -56,7 +56,7 @@ public class SubbiomesScreen extends Screen
 			if (biome.hasParentBiome() && biome.getParentBiome().getEdge() != biome)
 			{
 				final int size = BiomesRegistry.getDefaultEdgeSize(biome);
-				final String path = "biomes." + biome.getNamespace() + ".edge";
+				final String path = "biomes." + biome.getNamespace() + ".variation";
 				final String name = biome.getRegistryName() + "_chance";
 				
 				this.list.addSingleOptionEntry(new DoubleOption(biome.getRegistryName(), 0, 32, 1F, (gameOptions) -> {
@@ -65,8 +65,8 @@ public class SubbiomesScreen extends Screen
 					int val = Math.round(value.floatValue());
 					Config.setInt(path, name, size, val);
 				}, (gameOptions, doubleOption) -> {
-					int val = (int) Math.round(doubleOption.get(gameOptions));
-					return new TranslatableText("[" + biome.getNamespace() + "] ").append(new TranslatableText(key).getString() + String.format(": %d", val));
+					double val = doubleOption.get(gameOptions);
+					return new TranslatableText("[" + biome.getNamespace() + "] ").append(new TranslatableText(key).getString() + String.format(": %.2f", val));
 				}));
 			}
 		});

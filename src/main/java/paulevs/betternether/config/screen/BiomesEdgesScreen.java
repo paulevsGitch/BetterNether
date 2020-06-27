@@ -57,7 +57,7 @@ public class BiomesEdgesScreen extends Screen
 			{
 				final int size = BiomesRegistry.getDefaultEdgeSize(biome);
 				final String path = "biomes." + biome.getNamespace() + ".edge";
-				final String name = biome.getRegistryName() + "_chance";
+				final String name = biome.getRegistryName() + "_size";
 				
 				this.list.addSingleOptionEntry(new DoubleOption(biome.getRegistryName(), 0, 32, 1F, (gameOptions) -> {
 					return (double) Config.getInt(path, name, size);
