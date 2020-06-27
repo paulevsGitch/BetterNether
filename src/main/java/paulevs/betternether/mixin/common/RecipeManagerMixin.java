@@ -7,9 +7,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
@@ -28,5 +31,15 @@ public class RecipeManagerMixin
 	private void setRecipes(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo info)
 	{
 		recipes = BNRecipeManager.getMap(recipes);
+	}
+
+	@Inject(method = "deserialize", at = @At(value = "HEAD"), cancellable = true)
+	private static void checkMissing(Identifier id, JsonObject json, CallbackInfoReturnable<Recipe<?>> info)
+	{
+		if (id.getNamespace().equals("techreborn") && !FabricLoader.getInstance().isModLoaded("techreborn"))
+		{
+			info.setReturnValue(BNRecipeManager.makeEmtyRecipe(id));
+			info.cancel();
+		}
 	}
 }
