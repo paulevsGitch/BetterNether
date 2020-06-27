@@ -33,7 +33,7 @@ public class ConfigScreen extends Screen
 		));
 		
 		int i = 0;
-		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.rendering"),
+		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 20, 200, 20, new TranslatableText("config.betternether.rendering"),
 			new PressAction()
 			{
 				@Override
@@ -95,6 +95,17 @@ public class ConfigScreen extends Screen
 				public void onPress(ButtonWidget button)
 				{
 					ConfigScreen.this.client.openScreen(new BiomesEdgesScreen(ConfigScreen.this));
+				}
+			}
+		));
+		
+		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.generator"),
+			new PressAction()
+			{
+				@Override
+				public void onPress(ButtonWidget button)
+				{
+					ConfigScreen.this.client.openScreen(new GeneratorScreen(ConfigScreen.this));
 				}
 			}
 		));

@@ -522,6 +522,10 @@
 	"config.betternether.biomes": "Biomes Options",
 	"config.betternether.subbiomes": "Sub-biomes Options",
 	"config.betternether.biomes_edges": "Biomes Edges Options",
+	"config.betternether.generator": "Generator Options",
+	"config.betternether.global_structures_density": "Global Foliage & Structures Density",
+	"config.betternether.structures_density": "Structures Density",
+	"config.betternether.cities_dist": "Distance Between Cities [in chunks]",
 	
 	"config.betternether.reset": "Reset",
 	"config.betternether.fog": "Fog Distance",
