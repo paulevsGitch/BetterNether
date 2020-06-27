@@ -28,7 +28,10 @@ public class Config
 	{
 		if (config == null)
 		{
-			File file = getFile();
+			File file = getFolder();
+			if (!file.exists())
+				file.mkdirs();
+			file = getFile();
 			if (file.exists())
 			{
 				Gson gson = new Gson();
@@ -61,7 +64,10 @@ public class Config
 	{
 		if (rewrite)
 		{
-			File file = getFile();
+			File file = getFolder();
+			if (!file.exists())
+				file.mkdirs();
+			file = getFile();
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			try
 			{
@@ -81,6 +87,11 @@ public class Config
 	private static File getFile()
 	{
 		return new File(String.format("./config/%s.json", BetterNether.MOD_ID));
+	}
+	
+	private static File getFolder()
+	{
+		return new File("./config/");
 	}
 
 	public static boolean getBoolean(String groups, String name, boolean def)

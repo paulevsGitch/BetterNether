@@ -44,6 +44,7 @@
 	},
 	
 	"custom": {
-		"extrapieces:piecepack": "extrapieces.betternether.json"
+		"extrapieces:piecepack": "extrapieces.betternether.json",
+		"modmenu:clientsideOnly": true
 	}
 }
