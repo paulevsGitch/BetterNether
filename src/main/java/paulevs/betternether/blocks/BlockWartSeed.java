@@ -27,6 +27,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureWartTree;
@@ -127,5 +128,14 @@ public class BlockWartSeed extends BlockBaseNotFull implements Fertilizable
 	public BlockState mirror(BlockState state, BlockMirror mirror)
 	{
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
+	}
+	
+	@Override
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
+	{
+		if (!canPlaceAt(state, world, pos))
+			return Blocks.AIR.getDefaultState();
+		else
+			return state;
 	}
 }

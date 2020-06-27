@@ -69,7 +69,7 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegistry.CINCINNASITE_POT;
+		return world.getBlockState(pos.down()).getBlock() instanceof BlockBNPot;
 	}
 
 	@Override
