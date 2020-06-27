@@ -1,4 +1,4 @@
-package paulevs.betternether.config;
+package paulevs.betternether.config.screen;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
@@ -7,9 +7,6 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget.PressAction;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.TranslatableText;
-import paulevs.betternether.config.screen.BlocksScreen;
-import paulevs.betternether.config.screen.ImprovementsScreen;
-import paulevs.betternether.config.screen.ItemsScreen;
 
 public class ConfigScreen extends Screen
 {
@@ -65,6 +62,39 @@ public class ConfigScreen extends Screen
 				public void onPress(ButtonWidget button)
 				{
 					ConfigScreen.this.client.openScreen(new ItemsScreen(ConfigScreen.this));
+				}
+			}
+		));
+		
+		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.biomes"),
+			new PressAction()
+			{
+				@Override
+				public void onPress(ButtonWidget button)
+				{
+					ConfigScreen.this.client.openScreen(new BiomesScreen(ConfigScreen.this));
+				}
+			}
+		));
+		
+		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.subbiomes"),
+			new PressAction()
+			{
+				@Override
+				public void onPress(ButtonWidget button)
+				{
+					ConfigScreen.this.client.openScreen(new SubbiomesScreen(ConfigScreen.this));
+				}
+			}
+		));
+		
+		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.biomes_edges"),
+			new PressAction()
+			{
+				@Override
+				public void onPress(ButtonWidget button)
+				{
+					ConfigScreen.this.client.openScreen(new BiomesEdgesScreen(ConfigScreen.this));
 				}
 			}
 		));

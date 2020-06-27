@@ -5,6 +5,7 @@ import java.util.function.Function;
 import io.github.prospector.modmenu.api.ModMenuApi;
 import net.minecraft.client.gui.screen.Screen;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.config.screen.ConfigScreen;
 
 public class ModMenuEntry implements ModMenuApi
 {

@@ -22,6 +22,7 @@ public class BiomeDefenition
 	private static final Random random = new Random();
 	
 	private String name;
+	private String group;
 	private int fogColor;
 	private SoundEvent loop;
 	private BiomeMoodSound mood;
@@ -32,7 +33,13 @@ public class BiomeDefenition
 	
 	public BiomeDefenition(String name)
 	{
-		this.name = name;
+		this(name, "betternether");
+	}
+	
+	public BiomeDefenition(String name, String group)
+	{
+		this.name = name.toLowerCase().replace(' ', '_');
+		this.group = group;
 		random.setSeed(name.hashCode());
 		noise = new Biome.MixedNoisePoint(
 				random.nextFloat(),
@@ -110,7 +117,6 @@ public class BiomeDefenition
 		effects.music(MusicType.method_27283(music != null ? music : SoundEvents.MUSIC_NETHER_WARPED_FOREST));
 		
 		return new Settings()
-				//.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)
 				.configureSurfaceBuilder(SurfaceBuilder.NOPE, SurfaceBuilder.NETHER_CONFIG)
 				.precipitation(Biome.Precipitation.NONE)
 				.category(Biome.Category.NETHER)
@@ -126,6 +132,11 @@ public class BiomeDefenition
 	public String getName()
 	{
 		return name;
+	}
+	
+	public String getGroup()
+	{
+		return group;
 	}
 	
 	public BiomeDefenition setParticleConfig(BiomeParticleConfig config)

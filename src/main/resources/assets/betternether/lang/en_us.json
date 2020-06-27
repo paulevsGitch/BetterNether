@@ -519,6 +519,9 @@
 	"config.betternether.rendering": "Render Options",
 	"config.betternether.blocks": "Registered Blocks",
 	"config.betternether.items": "Registered Items",
+	"config.betternether.biomes": "Biomes Options",
+	"config.betternether.subbiomes": "Sub-biomes Options",
+	"config.betternether.biomes_edges": "Biomes Edges Options",
 	
 	"config.betternether.reset": "Reset",
 	"config.betternether.fog": "Fog Distance",

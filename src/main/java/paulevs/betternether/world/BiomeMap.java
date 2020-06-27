@@ -94,11 +94,11 @@ public class BiomeMap
 	{
 		NetherBiome biome = getRawBiome(x, y > 30 ? y : 30, z);
 		
-		if (biome.hasEdge() || (biome.hasParrent() && biome.getParrentBiome().hasEdge()))
+		if (biome.hasEdge() || (biome.hasParentBiome() && biome.getParentBiome().hasEdge()))
 		{
 			NetherBiome search = biome;
-			if (biome.hasParrent())
-				search = biome.getParrentBiome();
+			if (biome.hasParentBiome())
+				search = biome.getParentBiome();
 			int d = (int) Math.ceil(search.getEdgeSize() / 4F) << 2;
 			
 			boolean edge = !search.isSame(getRawBiome(x + d, y, z));

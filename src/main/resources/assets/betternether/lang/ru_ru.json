@@ -517,6 +517,9 @@
 	"config.betternether.rendering": "Настройки графики",
 	"config.betternether.blocks": "Регистрация блоков",
 	"config.betternether.items": "Регистрация предметов",
+	"config.betternether.biomes": "Настройки биомов",
+	"config.betternether.subbiomes": "Настройки подбиомов",
+	"config.betternether.biomes_edges": "Настройки пограничных биомов",
 	
 	"config.betternether.reset": "Сбросить",
 	"config.betternether.fog": "Расстояние до тумана",

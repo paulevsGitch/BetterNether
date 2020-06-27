@@ -75,30 +75,30 @@ public class BlocksScreen extends Screen
 		this.children.add(list);
 		
 		this.addButton(new ButtonWidget(this.width / 2 - 156, this.height - 27, 154, 20, new TranslatableText("config.betternether.reset"),
-				new PressAction()
+			new PressAction()
+			{
+				@Override
+				public void onPress(ButtonWidget button)
 				{
-					@Override
-					public void onPress(ButtonWidget button)
-					{
-						blocks.forEach((blockName) -> {
-							String name = blockName + "[def: true]";
-							group.addProperty(name, true);
+					blocks.forEach((blockName) -> {
+						String name = blockName + "[def: true]";
+						group.addProperty(name, true);
+					});
+					list.children().forEach((entry) -> {
+						entry.children().forEach((element -> {
+							if (element instanceof AbstractButtonWidget)
+							{
+								AbstractButtonWidget ab = (AbstractButtonWidget) element;
+								String message = ab.getMessage().getString();
+								message = message.substring(0, message.lastIndexOf(':'));
+								ab.setMessage(new TranslatableText("").append(message).append(": \u00A7a" + ScreenTexts.getToggleText(true).getString()));
+							}
+							}));
 						});
-						list.children().forEach((entry) -> {
-							entry.children().forEach((element -> {
-								if (element instanceof AbstractButtonWidget)
-								{
-									AbstractButtonWidget ab = (AbstractButtonWidget) element;
-									String message = ab.getMessage().getString();
-									message = message.substring(0, message.lastIndexOf(':'));
-									ab.setMessage(new TranslatableText("").append(message).append(": \u00A7a" + ScreenTexts.getToggleText(true).getString()));
-								}
-								}));
-							});
-						Config.save();
-					}
+					Config.save();
 				}
-			));
+			}
+		));
 	}
 	
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
