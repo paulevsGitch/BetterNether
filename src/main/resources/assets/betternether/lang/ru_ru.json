@@ -520,6 +520,10 @@
 	"config.betternether.biomes": "Настройки биомов",
 	"config.betternether.subbiomes": "Настройки подбиомов",
 	"config.betternether.biomes_edges": "Настройки пограничных биомов",
+	"config.betternether.generator": "Настройки генерации",
+	"config.betternether.global_structures_density": "Глобальная плотность растений и структур",
+	"config.betternether.structures_density": "Плотность структур",
+	"config.betternether.cities_dist": "Расстояние между городами [в чанках]",
 	
 	"config.betternether.reset": "Сбросить",
 	"config.betternether.fog": "Расстояние до тумана",
