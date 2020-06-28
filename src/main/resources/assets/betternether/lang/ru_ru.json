@@ -537,5 +537,7 @@
 	"block.betternether.crafting_table_wart": "Верстак из нароста",
 	"block.betternether.crafting_table_rubeus": "Рубейсовый верстак",
 	"block.betternether.crafting_table_mushroom": "Грибной верстак",
-	"block.betternether.crafting_table_mushroom_fir": "Верстак из грибной ели"
+	"block.betternether.crafting_table_mushroom_fir": "Верстак из грибной ели",
+	
+	"block.betternether.chest_stalagnate": "Сталагнатовый сундук"
 }

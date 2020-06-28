@@ -539,5 +539,7 @@
 	"block.betternether.crafting_table_wart": "Wart Crafting Table",
 	"block.betternether.crafting_table_rubeus": "Rubeus Crafting Table",
 	"block.betternether.crafting_table_mushroom": "Mushroom Crafting Table",
-	"block.betternether.crafting_table_mushroom_fir": "Mushroom Fir Crafting Table"
+	"block.betternether.crafting_table_mushroom_fir": "Mushroom Fir Crafting Table",
+	
+	"block.betternether.chest_stalagnate": "Stalagnate Chest"
 }
