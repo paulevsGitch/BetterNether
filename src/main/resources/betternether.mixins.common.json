@@ -18,7 +18,8 @@
 	"ServerWorldMixin",
 	"MultiNoiseBiomeSourceMixin",
 	"BiomeMixin",
-	"RecipeManagerMixin"
+	"RecipeManagerMixin",
+	"CraftingScreenHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

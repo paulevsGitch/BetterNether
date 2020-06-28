@@ -15,6 +15,7 @@ import net.minecraft.world.biome.Biome.Settings;
 import net.minecraft.world.biome.BiomeEffects.Builder;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 
 public class BiomeDefenition
@@ -33,7 +34,7 @@ public class BiomeDefenition
 	
 	public BiomeDefenition(String name)
 	{
-		this(name, "betternether");
+		this(name, BetterNether.MOD_ID);
 	}
 	
 	public BiomeDefenition(String name, String group)

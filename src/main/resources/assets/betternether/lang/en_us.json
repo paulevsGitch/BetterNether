@@ -530,5 +530,13 @@
 	"config.betternether.reset": "Reset",
 	"config.betternether.fog": "Fog Distance",
 	"config.betternether.lavafalls": "§b*§rLavafall Particles",
-	"config.betternether.armour": "§b*§rThin Armor"
+	"config.betternether.armour": "§b*§rThin Armor",
+	
+	"block.betternether.crafting_table_stalagnate": "Stalagnate Crafting Table",
+	"block.betternether.crafting_table_reed": "Reeds Crafting Table",
+	"block.betternether.crafting_table_willow": "Willow Crafting Table",
+	"block.betternether.crafting_table_wart": "Wart Crafting Table",
+	"block.betternether.crafting_table_rubeus": "Rubeus Crafting Table",
+	"block.betternether.crafting_table_mushroom": "Mushroom Crafting Table",
+	"block.betternether.crafting_table_mushroom_fir": "Mushroom Fir Crafting Table"
 }

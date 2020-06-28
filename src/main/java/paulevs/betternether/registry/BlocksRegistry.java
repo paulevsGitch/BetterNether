@@ -13,104 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.blocks.BNBarStool;
-import paulevs.betternether.blocks.BNBoneBlock;
-import paulevs.betternether.blocks.BNBrewingStand;
-import paulevs.betternether.blocks.BNButton;
-import paulevs.betternether.blocks.BNDoor;
-import paulevs.betternether.blocks.BNFence;
-import paulevs.betternether.blocks.BNGate;
-import paulevs.betternether.blocks.BNGlass;
-import paulevs.betternether.blocks.BNLadder;
-import paulevs.betternether.blocks.BNLogStripable;
-import paulevs.betternether.blocks.BNNetherBrick;
-import paulevs.betternether.blocks.BNNormalChair;
-import paulevs.betternether.blocks.BNObsidian;
-import paulevs.betternether.blocks.BNPane;
-import paulevs.betternether.blocks.BNPillar;
-import paulevs.betternether.blocks.BNPlanks;
-import paulevs.betternether.blocks.BNPlate;
-import paulevs.betternether.blocks.BNSlab;
-import paulevs.betternether.blocks.BNStairs;
-import paulevs.betternether.blocks.BNTaburet;
-import paulevs.betternether.blocks.BNTrapdoor;
-import paulevs.betternether.blocks.BNWall;
-import paulevs.betternether.blocks.BlockAgave;
-import paulevs.betternether.blocks.BlockBNPot;
-import paulevs.betternether.blocks.BlockBarrelCactus;
-import paulevs.betternether.blocks.BlockBase;
-import paulevs.betternether.blocks.BlockBlackApple;
-import paulevs.betternether.blocks.BlockBlackAppleSeed;
-import paulevs.betternether.blocks.BlockBlackBush;
-import paulevs.betternether.blocks.BlockBlackVine;
-import paulevs.betternether.blocks.BlockBoneMushroom;
-import paulevs.betternether.blocks.BlockBrownLargeMushroom;
-import paulevs.betternether.blocks.BlockChestOfDrawers;
-import paulevs.betternether.blocks.BlockCincinnasitPillar;
-import paulevs.betternether.blocks.BlockCincinnasite;
-import paulevs.betternether.blocks.BlockCincinnasiteAnvil;
-import paulevs.betternether.blocks.BlockCincinnasiteFireBowl;
-import paulevs.betternether.blocks.BlockCincinnasiteForge;
-import paulevs.betternether.blocks.BlockCincinnasiteFrame;
-import paulevs.betternether.blocks.BlockCincinnasiteLantern;
-import paulevs.betternether.blocks.BlockCincinnasitePedestal;
-import paulevs.betternether.blocks.BlockEggPlant;
-import paulevs.betternether.blocks.BlockEyeSeed;
-import paulevs.betternether.blocks.BlockEyeVine;
-import paulevs.betternether.blocks.BlockEyeball;
-import paulevs.betternether.blocks.BlockEyeballSmall;
-import paulevs.betternether.blocks.BlockFarmland;
-import paulevs.betternether.blocks.BlockGeyser;
-import paulevs.betternether.blocks.BlockGiantMold;
-import paulevs.betternether.blocks.BlockGiantMoldSapling;
-import paulevs.betternether.blocks.BlockGoldenVine;
-import paulevs.betternether.blocks.BlockGrayMold;
-import paulevs.betternether.blocks.BlockInkBush;
-import paulevs.betternether.blocks.BlockInkBushSeed;
-import paulevs.betternether.blocks.BlockLucisMushroom;
-import paulevs.betternether.blocks.BlockLucisSpore;
-import paulevs.betternether.blocks.BlockMagmaFlower;
-import paulevs.betternether.blocks.BlockMushroomFir;
-import paulevs.betternether.blocks.BlockMushroomFirSapling;
-import paulevs.betternether.blocks.BlockNetherCactus;
-import paulevs.betternether.blocks.BlockNetherGrass;
-import paulevs.betternether.blocks.BlockNetherMycelium;
-import paulevs.betternether.blocks.BlockNetherReed;
-import paulevs.betternether.blocks.BlockNetherRuby;
-import paulevs.betternether.blocks.BlockNetherrackFurnace;
-import paulevs.betternether.blocks.BlockNetherrackMoss;
-import paulevs.betternether.blocks.BlockObsidianGlass;
-import paulevs.betternether.blocks.BlockOrangeMushroom;
-import paulevs.betternether.blocks.BlockOre;
-import paulevs.betternether.blocks.BlockPlantWall;
-import paulevs.betternether.blocks.BlockPottedPlant;
-import paulevs.betternether.blocks.BlockRedLargeMushroom;
-import paulevs.betternether.blocks.BlockRedMold;
-import paulevs.betternether.blocks.BlockReedsBlock;
-import paulevs.betternether.blocks.BlockRubeusCone;
-import paulevs.betternether.blocks.BlockRubeusLeaves;
-import paulevs.betternether.blocks.BlockRubeusSapling;
-import paulevs.betternether.blocks.BlockSmallLantern;
-import paulevs.betternether.blocks.BlockSmoker;
-import paulevs.betternether.blocks.BlockSoulGrass;
-import paulevs.betternether.blocks.BlockSoulLily;
-import paulevs.betternether.blocks.BlockSoulLilySapling;
-import paulevs.betternether.blocks.BlockSoulSandstone;
-import paulevs.betternether.blocks.BlockSoulVein;
-import paulevs.betternether.blocks.BlockStalactite;
-import paulevs.betternether.blocks.BlockStalagnate;
-import paulevs.betternether.blocks.BlockStalagnateBowl;
-import paulevs.betternether.blocks.BlockStalagnateSeed;
-import paulevs.betternether.blocks.BlockStalagnateStem;
-import paulevs.betternether.blocks.BlockStatueRespawner;
-import paulevs.betternether.blocks.BlockVeinedSand;
-import paulevs.betternether.blocks.BlockWartRoots;
-import paulevs.betternether.blocks.BlockWartSeed;
-import paulevs.betternether.blocks.BlockWillowBranch;
-import paulevs.betternether.blocks.BlockWillowLeaves;
-import paulevs.betternether.blocks.BlockWillowSapling;
-import paulevs.betternether.blocks.BlockWillowTrunk;
-import paulevs.betternether.blocks.RubeusLog;
+import paulevs.betternether.blocks.*;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.recipes.RecipesHelper;
@@ -440,6 +343,14 @@ public class BlocksRegistry
 	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
 	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil());
 	
+	public static final Block CRAFTING_TABLE_STALAGNATE = registerCraftingTable("crafting_table_stalagnate", STALAGNATE_PLANKS);
+	public static final Block CRAFTING_TABLE_REED = registerCraftingTable("crafting_table_reed", REEDS_BLOCK);
+	public static final Block CRAFTING_TABLE_WILLOW = registerCraftingTable("crafting_table_willow", WILLOW_PLANKS);
+	public static final Block CRAFTING_TABLE_WART = registerCraftingTable("crafting_table_wart", WART_PLANKS);
+	public static final Block CRAFTING_TABLE_RUBEUS = registerCraftingTable("crafting_table_rubeus", RUBEUS_PLANKS);
+	public static final Block CRAFTING_TABLE_MUSHROOM = registerCraftingTable("crafting_table_mushroom", MUSHROOM_PLANKS);
+	public static final Block CRAFTING_TABLE_MUSHROOM_FIR = registerCraftingTable("crafting_table_mushroom_fir", MUSHROOM_FIR_PLANKS);
+	
 	// Taburets //
 	public static final Block TABURET_OAK = registerBlock("taburet_oak", new BNTaburet(Blocks.OAK_PLANKS));
 	public static final Block TABURET_SPRUCE = registerBlock("taburet_spruce", new BNTaburet(Blocks.SPRUCE_PLANKS));
@@ -716,6 +627,19 @@ public class BlocksRegistry
 		}
 		BLOCKS.add(name);
 		return wall;
+	}
+	
+	private static Block registerCraftingTable(String name, Block source)
+	{
+		Block block = new BNCraftingTable(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeWallRecipe(source, block);
+			RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
+		}
+		BLOCKS.add(name);
+		return block;
 	}
 	
 	public static List<String> getPossibleBlocks()

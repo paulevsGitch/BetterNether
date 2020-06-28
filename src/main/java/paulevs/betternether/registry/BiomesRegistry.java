@@ -113,7 +113,7 @@ public class BiomesRegistry
 					Identifier id = Registry.BIOME.getId(biome);
 					String name = id.getPath();
 					String group = id.getNamespace();
-					if (!group.equals("betternether"))
+					if (!group.equals(BetterNether.MOD_ID))
 					{
 						float chance = Config.getFloat("biomes." + group, name + "_chance", 1);
 						if (chance > 0)
