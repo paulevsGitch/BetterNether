@@ -15,6 +15,8 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
@@ -78,10 +80,9 @@ public class BlockWillowLeaves extends BlockBaseNotFull
 		return true;
 	}
 	
-	/*@Override
-	@Environment(EnvType.CLIENT)
-	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
+	@Override
+	public VoxelShape getSidesShape(BlockState state, BlockView world, BlockPos pos)
 	{
-		return new ItemStack(BlocksRegistry.WILLOW_SAPLING);
-	}*/
+		return VoxelShapes.empty();
+	}
 }

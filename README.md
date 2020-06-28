@@ -1,5 +1,5 @@
 # BetterNether
-BetterNether Mod for Fabric, MC 1.16
+BetterNether Mod for Fabric, MC 1.16.1
 
 Building:
 * Clone repo

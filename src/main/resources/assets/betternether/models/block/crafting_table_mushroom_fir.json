@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "betternether:block/crafting_table_mushroom_fir_front",
+    "north": "betternether:block/crafting_table_mushroom_fir_front",
+    "south": "betternether:block/crafting_table_mushroom_fir_side",
+    "east": "betternether:block/crafting_table_mushroom_fir_side",
+    "west": "betternether:block/crafting_table_mushroom_fir_front",
+    "up": "betternether:block/crafting_table_mushroom_fir_top",
+    "down": "betternether:block/crafting_table_mushroom_fir_bottom"
+  }
+}

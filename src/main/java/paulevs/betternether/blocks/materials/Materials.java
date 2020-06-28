@@ -11,6 +11,7 @@ public class Materials
 {
 	public static final Material COMMON_WOOD = new Material.Builder(MaterialColor.WOOD).build();
 	public static final Material COMMON_GRASS = new Material.Builder(MaterialColor.FOLIAGE).allowsMovement().notSolid().replaceable().build();
+	public static final Material COMMON_LEAVES = new Material.Builder(MaterialColor.FOLIAGE).notSolid().build();
 	
 	public static FabricBlockSettings makeWood(MaterialColor color)
 	{
@@ -34,7 +35,7 @@ public class Materials
 	
 	public static Settings makeLeaves(MaterialColor color)
 	{
-		return FabricBlockSettings.of(COMMON_WOOD, color)
+		return FabricBlockSettings.of(COMMON_LEAVES, color)
 				.breakByHand(true)
 				.breakByTool(FabricToolTags.SHEARS)
 				.sounds(BlockSoundGroup.GRASS)

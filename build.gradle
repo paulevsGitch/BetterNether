@@ -27,6 +27,7 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/javax.annotation/jsr305
 	compile group: 'javax.annotation', name: 'jsr305', version: '1.0'
+	modCompile "io.github.prospector:modmenu:${project.modmenu_version}"
 }
 
 repositories {
