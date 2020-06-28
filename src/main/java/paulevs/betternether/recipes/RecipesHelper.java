@@ -24,7 +24,7 @@ public class RecipesHelper
 	
 	private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count)
 	{
-		if (Registry.BLOCK.getId(source) != null)
+		if (Registry.BLOCK.getId(source) != Registry.BLOCK.getDefaultId())
 		{
 			String name = Registry.BLOCK.getId(source).getPath() + "_" + Registry.BLOCK.getId(result).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
@@ -79,7 +79,7 @@ public class RecipesHelper
 	
 	public static void makeFenceRecipe(Block source, Block fence)
 	{
-		if (Registry.BLOCK.getId(source) != null)
+		if (Registry.BLOCK.getId(source) != Registry.BLOCK.getDefaultId())
 		{
 			String name = Registry.BLOCK.getId(fence).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source), "I", new ItemStack(Items.STICK));
@@ -89,7 +89,7 @@ public class RecipesHelper
 	
 	public static void makeGateRecipe(Block source, Block gate)
 	{
-		if (Registry.BLOCK.getId(source) != null)
+		if (Registry.BLOCK.getId(source) != Registry.BLOCK.getDefaultId())
 		{
 			String name = Registry.BLOCK.getId(gate).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("I", new ItemStack(source), "#", new ItemStack(Items.STICK));
@@ -109,7 +109,7 @@ public class RecipesHelper
 	
 	public static void makeWallRecipe(Block source, Block wall)
 	{
-		if (Registry.BLOCK.getId(source) != null)
+		if (Registry.BLOCK.getId(source) != Registry.BLOCK.getDefaultId())
 		{
 			String name = Registry.BLOCK.getId(wall).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
@@ -119,7 +119,7 @@ public class RecipesHelper
 	
 	public static void makeColoringRecipe(Block source, Block result, Item dye, String group)
 	{
-		if (Registry.BLOCK.getId(source) != null)
+		if (Registry.BLOCK.getId(source) != Registry.BLOCK.getDefaultId())
 		{
 			String name = Registry.BLOCK.getId(result).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source), "I", new ItemStack(dye));
