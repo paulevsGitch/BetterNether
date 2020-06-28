@@ -45,6 +45,9 @@
 	
 	"custom": {
 		"extrapieces:piecepack": "extrapieces.betternether.json",
-		"modmenu:clientsideOnly": true
+		"modupdater": {
+			"strategy": "curseforge",
+			"projectID": 311377
+        }
 	}
 }
