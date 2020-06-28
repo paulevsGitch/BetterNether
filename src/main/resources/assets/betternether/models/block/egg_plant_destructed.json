@@ -1,0 +1,18 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "betternether:block/egg_plant_vine",
+		"vine": "betternether:block/egg_plant_vine"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "PlaneY5",
+			"from": [ 0, 1, 0 ],
+			"to": [ 16, 1.001, 16 ],
+			"faces": {
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#vine" }
+			}
+		}
+	]
+}

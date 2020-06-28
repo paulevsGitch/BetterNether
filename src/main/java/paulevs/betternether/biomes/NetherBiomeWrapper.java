@@ -14,9 +14,9 @@ public class NetherBiomeWrapper extends NetherBiome
 {
 	final Biome biome;
 	
-	public NetherBiomeWrapper(String name, Biome biome)
+	public NetherBiomeWrapper(String name, String group, Biome biome)
 	{
-		super(new BiomeDefenition(name));
+		super(new BiomeDefenition(name, group));
 		this.biome = biome;
 		
 		if (biome instanceof BasaltDeltasBiome)
