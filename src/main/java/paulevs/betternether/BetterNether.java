@@ -37,6 +37,7 @@ public class BetterNether implements ModInitializer
 		Config.save();
 		
 		IntegrationRecipes.register();
+		NetherTags.register();
 	}
 	
 	private void initOptions()

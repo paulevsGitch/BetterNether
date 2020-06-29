@@ -46,8 +46,6 @@ public class BlockEntitiesRegistry
 			if (block instanceof BNChest)
 				result.add(block);
 		});
-		for (Block b: result)
-			System.out.println(b);
 		return result.toArray(new Block[] {});
 	}
 }

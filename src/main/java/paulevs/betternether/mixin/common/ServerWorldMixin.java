@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.WorldGenerationProgressListener;
 import net.minecraft.server.world.ServerWorld;
@@ -18,6 +19,7 @@ import net.minecraft.world.gen.Spawner;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.level.storage.LevelStorage;
+import paulevs.betternether.NetherTags;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.NetherBiomeAccessType;
@@ -31,5 +33,10 @@ public class ServerWorldMixin
 		BiomesRegistry.registerAllOtherBiomes();
 		BNWorldGenerator.init(seed);
 		NetherBiomeAccessType.reInitMap(seed);
+		
+		System.out.println("Soul Soil: " + Blocks.SOUL_SOIL.isIn(NetherTags.SOUL_GROUND));
+		System.out.println("Soul Sand: " + Blocks.SOUL_SAND.isIn(NetherTags.SOUL_GROUND));
+		System.out.println("Stone: " + Blocks.STONE.isIn(NetherTags.SOUL_GROUND));
+		System.out.println("Netherrack: " + Blocks.NETHERRACK.isIn(NetherTags.SOUL_GROUND));
 	}
 }
