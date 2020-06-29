@@ -28,6 +28,7 @@ public class BlocksHelper
 	public static final int FLAG_IGNORE_OBSERVERS = 16;
 	
 	public static final int SET_SILENT = FLAG_UPDATE_BLOCK | FLAG_IGNORE_OBSERVERS | FLAG_SEND_CLIENT_CHANGES;
+	public static final Direction[] HORIZONTAL = new Direction[] {Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 	
 	private static final Vec3i[] OFFSETS = new Vec3i[] {
 			new Vec3i(-1, -1, -1), new Vec3i(-1, -1, 0), new Vec3i(-1, -1, 1),
@@ -72,6 +73,11 @@ public class BlocksHelper
 	{
 		Block b = state.getBlock();
 		return b == Blocks.BONE_BLOCK || b == BlocksRegistry.BONE_BLOCK;
+	}
+	
+	public static boolean isNetherMycelium(BlockState state)
+	{
+		return state.isIn(NetherTags.MYCELIUM);
 	}
 	
 	public static void setWithoutUpdate(WorldAccess world, BlockPos pos, BlockState state)

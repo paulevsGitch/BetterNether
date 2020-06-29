@@ -76,7 +76,7 @@ public class BlockRubeusSapling extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
 	{
-		STRUCTURE.grow(world, pos, random);
+		STRUCTURE.grow(world, pos, random, false);
 	}
 	
 	@Override

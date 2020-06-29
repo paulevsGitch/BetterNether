@@ -20,7 +20,6 @@ import paulevs.betternether.registry.BlocksRegistry;
 
 public class StructurePath implements IStructure
 {
-	private static final Direction[] HORIZONTAL = new Direction[] {Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 	private static final Mutable B_POS = new Mutable();
 	private OpenSimplexNoise heightNoise;
 	private OpenSimplexNoise rigidNoise;
@@ -98,7 +97,7 @@ public class StructurePath implements IStructure
 		Direction dir = Direction.NORTH;
 		double d = 1000;
 		double v = getRigid(pos.getX(), pos.getZ());
-		for (Direction face: HORIZONTAL)
+		for (Direction face: BlocksHelper.HORIZONTAL)
 		{
 			BlockPos p = pos.offset(face);
 			double v2 = getRigid(p.getX(), p.getZ());
@@ -140,7 +139,7 @@ public class StructurePath implements IStructure
 	private boolean needsSlab(WorldAccess world, BlockPos pos)
 	{
 		BlockState state;
-		for (Direction dir: HORIZONTAL)
+		for (Direction dir: BlocksHelper.HORIZONTAL)
 		{
 			if ((BlocksHelper.isNetherGround(state = world.getBlockState(pos.offset(dir))) ||
 				 state.getBlock() == Blocks.BASALT || state.getBlock() == BlocksRegistry.SOUL_SANDSTONE) &&

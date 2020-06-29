@@ -539,5 +539,13 @@
 	"block.betternether.crafting_table_mushroom": "Грибной верстак",
 	"block.betternether.crafting_table_mushroom_fir": "Верстак из грибной ели",
 	
-	"block.betternether.chest_stalagnate": "Сталагнатовый сундук"
+	"block.betternether.chest_stalagnate": "Сталагнатовый сундук",
+	"block.betternether.chest_reed": "Тростниковый сундук",
+	"block.betternether.chest_willow": "Ивовый сундук",
+	"block.betternether.chest_wart": "Сундук из нароста",
+	"block.betternether.chest_rubeus": "Рубейсовый сундук",
+	"block.betternether.chest_mushroom": "Грибной сундук",
+	"block.betternether.chest_mushroom_fir": "Сундук из грибной ели",
+	
+	"block.betternether.jungle_moss": "Мох джунглей"
 }
