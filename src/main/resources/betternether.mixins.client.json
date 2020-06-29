@@ -9,7 +9,8 @@
 	"PlayerArmorMixin",
 	"PresetsScreenMixin",
 	"ModelLoaderMixin",
-	"MinecraftClientMixin"
+	"MinecraftClientMixin",
+	"RenderPhaseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

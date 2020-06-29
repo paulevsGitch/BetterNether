@@ -14,7 +14,8 @@
 	],
 	"contact": {
 		"homepage": "https://www.curseforge.com/minecraft/mc-mods/betternether",
-		"sources": "https://github.com/paulevsGitch/BetterNether/tree/snapshots"
+		"sources": "https://github.com/paulevsGitch/BetterNether/tree/snapshots",
+		"issues": "https://github.com/paulevsGitch/BetterNether/issues"
 	},
 
 	"license": "GPLv3",
@@ -45,6 +46,9 @@
 	
 	"custom": {
 		"extrapieces:piecepack": "extrapieces.betternether.json",
-		"modmenu:clientsideOnly": true
+		"modupdater": {
+			"strategy": "curseforge",
+			"projectID": 311377
+        }
 	}
 }

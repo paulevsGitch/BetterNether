@@ -1,0 +1,6 @@
+{
+	"parent": "betternether:block/chest_item",
+    "textures": {
+        "texture": "betternether:entity/chest/chest_wart"
+    }
+}

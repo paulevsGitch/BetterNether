@@ -513,6 +513,7 @@
 	"item.betternether.cincinnasite_hoe": "Cincinnasite Hoe",
 	"item.betternether.cincinnasite_hoe_diamond": "Cincinnasite-Diamond Hoe",
 	"item.betternether.nether_ruby_hoe": "Nether Ruby Hoe",
+	"item.betternether.nether_ruby_hammer": "Nether Ruby Hammer",
 	
 	"config.betternether.config": "Better Nether Config",
 	"config.betternether.mod_reload": "§b§lYou need to restart Minecraft to apply this changes!",
@@ -538,5 +539,15 @@
 	"block.betternether.crafting_table_wart": "Wart Crafting Table",
 	"block.betternether.crafting_table_rubeus": "Rubeus Crafting Table",
 	"block.betternether.crafting_table_mushroom": "Mushroom Crafting Table",
-	"block.betternether.crafting_table_mushroom_fir": "Mushroom Fir Crafting Table"
+	"block.betternether.crafting_table_mushroom_fir": "Mushroom Fir Crafting Table",
+	
+	"block.betternether.chest_stalagnate": "Stalagnate Chest",
+	"block.betternether.chest_reed": "Reeds Chest",
+	"block.betternether.chest_willow": "Willow Chest",
+	"block.betternether.chest_wart": "Wart Chest",
+	"block.betternether.chest_rubeus": "Rubeus Chest",
+	"block.betternether.chest_mushroom": "Mushroom Chest",
+	"block.betternether.chest_mushroom_fir": "Mushroom Fir Chest",
+	
+	"block.betternether.jungle_moss": "Jungle Moss"
 }

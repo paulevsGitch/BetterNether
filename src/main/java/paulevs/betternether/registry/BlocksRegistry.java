@@ -297,10 +297,10 @@ public class BlocksRegistry
 	public static final Block WALL_MOSS = registerBlock("wall_moss", new BlockPlantWall(MaterialColor.RED));
 	public static final Block WALL_MUSHROOM_BROWN = registerBlock("wall_mushroom_brown", new BlockPlantWall(MaterialColor.BROWN));
 	public static final Block WALL_MUSHROOM_RED = registerBlock("wall_mushroom_red", new BlockPlantWall(MaterialColor.RED));
+	public static final Block JUNGLE_MOSS = registerBlock("jungle_moss", new BlockPlantWall(MaterialColor.LIME));
 	
 	// Decorations //
 	public static final Block PIG_STATUE_RESPAWNER = registerBlock("pig_statue_respawner", new BlockStatueRespawner());
-	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
 	public static final Block CINCINNASITE_POT = registerBlock("cincinnasite_pot", new BlockBNPot(CINCINNASITE_BLOCK));
 	public static final Block BRICK_POT = registerBlock("brick_pot", new BlockBNPot(Blocks.NETHER_BRICKS));
 	public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
@@ -350,6 +350,16 @@ public class BlocksRegistry
 	public static final Block CRAFTING_TABLE_RUBEUS = registerCraftingTable("crafting_table_rubeus", RUBEUS_PLANKS);
 	public static final Block CRAFTING_TABLE_MUSHROOM = registerCraftingTable("crafting_table_mushroom", MUSHROOM_PLANKS);
 	public static final Block CRAFTING_TABLE_MUSHROOM_FIR = registerCraftingTable("crafting_table_mushroom_fir", MUSHROOM_FIR_PLANKS);
+	
+	// Storage
+	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
+	public static final Block CHEST_STALAGNATE = registerChest("chest_stalagnate", STALAGNATE_PLANKS);
+	public static final Block CHEST_REED = registerChest("chest_reed", REEDS_BLOCK);
+	public static final Block CHEST_WILLOW = registerChest("chest_willow", WILLOW_PLANKS);
+	public static final Block CHEST_WART = registerChest("chest_wart", WART_PLANKS);
+	public static final Block CHEST_RUBEUS = registerChest("chest_rubeus", RUBEUS_PLANKS);
+	public static final Block CHEST_MUSHROOM = registerChest("chest_mushroom", MUSHROOM_PLANKS);
+	public static final Block CHEST_MUSHROOM_FIR = registerChest("chest_mushroom_fir", MUSHROOM_FIR_PLANKS);
 	
 	// Taburets //
 	public static final Block TABURET_OAK = registerBlock("taburet_oak", new BNTaburet(Blocks.OAK_PLANKS));
@@ -637,6 +647,18 @@ public class BlocksRegistry
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeWallRecipe(source, block);
 			RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerChest(String name, Block source)
+	{
+		Block block = new BNChest(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeRoundRecipe(source, block, "nether_chest");
 		}
 		BLOCKS.add(name);
 		return block;

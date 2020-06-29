@@ -8,9 +8,11 @@ import java.util.Set;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.RubeusLog;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -32,6 +34,11 @@ public class StructureRubeus extends StructureFuncScatter
 	
 	@Override
 	public void grow(WorldAccess world, BlockPos pos, Random random)
+	{
+		grow(world, pos, random, true);
+	}
+	
+	public void grow(WorldAccess world, BlockPos pos, Random random, boolean natural)
 	{
 		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 0);
 		float scale = MHelper.randRange(0.5F, 1F, random);
@@ -122,21 +129,21 @@ public class StructureRubeus extends StructureFuncScatter
 			{
 				state = BlocksRegistry.RUBEUS_LOG.getDefaultState();
 				if (MIDDLE.contains(bpos))
-					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.MIDDLE));
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.MIDDLE), false, random);
 				else if (TOP.contains(bpos))
-					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.TOP));
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.TOP), false, random);
 				else
-					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.BOTTOM));
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.BOTTOM), natural, random);
 			}
 			else
 			{
 				state = BlocksRegistry.RUBEUS_BARK.getDefaultState();
 				if (MIDDLE.contains(bpos))
-					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.MIDDLE));
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.MIDDLE), false, random);
 				else if (TOP.contains(bpos))
-					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.TOP));
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.TOP), false, random);
 				else
-					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.BOTTOM));
+					setCondition(world, bpos, pos.getY(), state.with(RubeusLog.SHAPE, TripleShape.BOTTOM), natural, random);
 			}
 		}
 		
@@ -240,12 +247,20 @@ public class StructureRubeus extends StructureFuncScatter
 		}
 	}
 	
-	private void setCondition(WorldAccess world, BlockPos pos, int y, BlockState state)
+	private void setCondition(WorldAccess world, BlockPos pos, int y, BlockState state, boolean moss, Random random)
 	{
 		if (pos.getY() > y)
 			setIfAir(world, pos, state);
 		else
 			setIfGroundOrAir(world, pos, state);
+		if (moss && Math.abs(pos.getY() - y) < 4)
+		{
+			for (Direction dir: BlocksHelper.HORIZONTAL)
+			{
+				if (random.nextInt(3) > 0)
+					setIfAir(world, pos.offset(dir), BlocksRegistry.JUNGLE_MOSS.getDefaultState().with(BlockPlantWall.FACING, dir));
+			}
+		}
 	}
 	
 	private void setIfAir(WorldAccess world, BlockPos pos, BlockState state)

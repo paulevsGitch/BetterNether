@@ -57,7 +57,7 @@ public class BlockNetherGrass extends BlockBase
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return BlocksHelper.isNetherGround(world.getBlockState(pos.down()));
+		return BlocksHelper.isNetherrack(world.getBlockState(pos.down())) || BlocksHelper.isNylium(world.getBlockState(pos.down()));
 	}
 	
 	@Override

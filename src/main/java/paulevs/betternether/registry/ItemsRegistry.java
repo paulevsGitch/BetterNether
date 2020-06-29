@@ -62,8 +62,6 @@ public class ItemsRegistry
 	public static final Item CINCINNASITE_SHOVEL_DIAMOND = registerItem("cincinnasite_shovel_diamond", new BNItemShovel(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
 	public static final Item CINCINNASITE_HOE = registerItem("cincinnasite_hoe", new BNItemHoe(BNItemMaterials.CINCINNASITE_TOOLS, 512, 1F));
 	public static final Item CINCINNASITE_HOE_DIAMOND = registerItem("cincinnasite_hoe_diamond", new BNItemHoe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
-	public static final Item CINCINNASITE_HAMMER = registerItem("cincinnasite_hammer", VanillaHammersIntegration.makeHammer(BNItemMaterials.CINCINNASITE_TOOLS, 4, -2.0F));
-	public static final Item CINCINNASITE_HAMMER_DIAMOND = registerItem("cincinnasite_hammer_diamond", VanillaHammersIntegration.makeHammer(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 5, -2.0F));
 	public static final Item CINCINNASITE_SHEARS = registerItem("cincinnasite_shears", new ShearsItem(defaultSettings().maxDamage(380)));
 	
 	public static final Item CINCINNASITE_HELMET = registerItem("cincinnasite_helmet", new BNArmor(BNItemMaterials.CINCINNASITE_ARMOR, EquipmentSlot.HEAD));
@@ -83,6 +81,10 @@ public class ItemsRegistry
 	public static final Item NETHER_RUBY_CHESTPLATE = registerItem("nether_ruby_chestplate", new BNArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.CHEST));
 	public static final Item NETHER_RUBY_LEGGINGS = registerItem("nether_ruby_leggings", new BNArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.LEGS));
 	public static final Item NETHER_RUBY_BOOTS = registerItem("nether_ruby_boots", new BNArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.FEET));
+	
+	public static final Item CINCINNASITE_HAMMER = registerItem("cincinnasite_hammer", VanillaHammersIntegration.makeHammer(BNItemMaterials.CINCINNASITE_TOOLS, 4, -2.0F));
+	public static final Item CINCINNASITE_HAMMER_DIAMOND = registerItem("cincinnasite_hammer_diamond", VanillaHammersIntegration.makeHammer(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 5, -2.0F));
+	public static final Item NETHER_RUBY_HAMMER = registerItem("nether_ruby_hammer", VanillaHammersIntegration.makeHammer(BNItemMaterials.NETHER_RUBY_TOOLS, 5, -2.0F));
 	
 	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg(EntityRegistry.FIREFLY, color(255, 223, 168), color(233, 182, 95)));
 	public static final Item SPAWN_EGG_JELLYFISH = registerItem("spawn_egg_hydrogen_jellyfish", makeEgg(EntityRegistry.HYDROGEN_JELLYFISH, color(253, 164, 24), color(88, 21, 4)));

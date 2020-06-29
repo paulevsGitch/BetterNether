@@ -11,7 +11,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.BlocksHelper;
 
 public class BlockOrangeMushroom extends BlockCommonPlant
 {
@@ -36,7 +36,7 @@ public class BlockOrangeMushroom extends BlockCommonPlant
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM;
+		return BlocksHelper.isNetherMycelium(world.getBlockState(pos.down()));
 	}
 	
 	@Override
