@@ -1,0 +1,36 @@
+{
+    "variants": {
+        "facing=north":  [
+			{ "model": "betternether:block/jungle_moss_1", "y": 180 },
+			{ "model": "betternether:block/jungle_moss_2", "y": 180 },
+			{ "model": "betternether:block/jungle_moss_3", "y": 180 },
+			{ "model": "betternether:block/jungle_moss_4", "y": 180 },
+			{ "model": "betternether:block/jungle_moss_5", "y": 180 },
+			{ "model": "betternether:block/jungle_moss_6", "y": 180 }
+		],
+        "facing=south":  [
+			{ "model": "betternether:block/jungle_moss_1" },
+			{ "model": "betternether:block/jungle_moss_2" },
+			{ "model": "betternether:block/jungle_moss_3" },
+			{ "model": "betternether:block/jungle_moss_4" },
+			{ "model": "betternether:block/jungle_moss_5" },
+			{ "model": "betternether:block/jungle_moss_6" }
+		],
+        "facing=east":  [
+			{ "model": "betternether:block/jungle_moss_1", "y": 270 },
+			{ "model": "betternether:block/jungle_moss_2", "y": 270 },
+			{ "model": "betternether:block/jungle_moss_3", "y": 270 },
+			{ "model": "betternether:block/jungle_moss_4", "y": 270 },
+			{ "model": "betternether:block/jungle_moss_5", "y": 270 },
+			{ "model": "betternether:block/jungle_moss_6", "y": 270 }
+		],
+        "facing=west":  [
+			{ "model": "betternether:block/jungle_moss_1", "y": 90 },
+			{ "model": "betternether:block/jungle_moss_2", "y": 90 },
+			{ "model": "betternether:block/jungle_moss_3", "y": 90 },
+			{ "model": "betternether:block/jungle_moss_4", "y": 90 },
+			{ "model": "betternether:block/jungle_moss_5", "y": 90 },
+			{ "model": "betternether:block/jungle_moss_6", "y": 90 }
+		]
+    }
+}

@@ -2,7 +2,7 @@ package paulevs.betternether.entity.render;
 
 import java.util.Iterator;
 
-import org.lwjgl.opengl.GL11;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
@@ -30,7 +30,7 @@ import paulevs.betternether.entity.model.ModelEntityFirefly;
 public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<EntityFirefly>>
 {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/firefly.png");
-	private static final RenderLayer LAYER = RenderLayer.getEntityTranslucent(TEXTURE); // getEntityNoOutline getBeaconBeam getEntityShadow
+	private static final RenderLayer LAYER = RenderLayers.getFirefly(TEXTURE); // getEntityTranslucent getEntityNoOutline getBeaconBeam getEntityShadow
 	private static final int LIT = 15728880;
 
 	public RenderFirefly(EntityRenderDispatcher renderManager)
@@ -47,7 +47,9 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 	@Override
 	public void render(EntityFirefly entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
 	{
-		GL11.glEnable(GL11.GL_BLEND);
+		RenderSystem.enableDepthTest();
+		RenderSystem.enableBlend();
+		
 		float red = entity.getRed();
 		float green = entity.getGreen();
 		float blue = entity.getBlue();
@@ -65,7 +67,6 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		addVertex(matrix4f, matrix3f, vertexConsumer, 1, 1, 1F, 1F, red, green, blue);
 		addVertex(matrix4f, matrix3f, vertexConsumer, -1, 1, 0F, 1F, red, green, blue);
 		matrixStack.pop();
-		GL11.glDisable(GL11.GL_BLEND);
 
 		matrixStack.push();
 		this.model.handSwingProgress = this.getHandSwingProgress(entity, g);
@@ -146,6 +147,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		{
 			int r = getOverlay(entity, 0);
 			this.model.render(matrixStack, vertexConsumer, i, r, red, green, blue, ghost ? 0.15F : 1.0F);
+			
 		}
 
 		if (!entity.isSpectator())

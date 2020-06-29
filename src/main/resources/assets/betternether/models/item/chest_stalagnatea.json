@@ -1,0 +1,6 @@
+{
+    "parent": "betternether:item/chest_item",
+    "textures": {
+        "texture": "betternether:block/chest/chest_stalagnate"
+    }
+}

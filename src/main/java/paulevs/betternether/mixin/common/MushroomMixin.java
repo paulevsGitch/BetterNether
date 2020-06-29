@@ -15,8 +15,7 @@ import net.minecraft.block.MushroomPlantBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.blocks.BlockNetherMycelium;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
 import paulevs.betternether.structures.plants.StructureMedRedMushroom;
 
@@ -29,14 +28,14 @@ public abstract class MushroomMixin
 	@Inject(method = "canPlaceAt", at = @At(value = "RETURN", ordinal = 1), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void canStay(BlockState state, WorldView world, BlockPos pos, CallbackInfoReturnable<Boolean> info)
 	{
-		if (world.getBlockState(pos.down()).getBlock() instanceof BlockNetherMycelium)
+		if (BlocksHelper.isNetherMycelium(world.getBlockState(pos.down())))
 			info.setReturnValue(true);
     }
 	
 	@Inject(method = "grow", at = @At(value = "HEAD"), cancellable = true)
 	private void growStructure(ServerWorld world, Random random, BlockPos pos, BlockState state, CallbackInfo info)
 	{
-		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM)
+		if (BlocksHelper.isNetherMycelium(world.getBlockState(pos.down())))
 		{
 			if (state.getBlock() == Blocks.RED_MUSHROOM)
 			{
