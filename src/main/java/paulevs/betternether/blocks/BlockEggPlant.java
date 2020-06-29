@@ -91,9 +91,9 @@ public class BlockEggPlant extends BlockCommonPlant
 			double px = pos.getX() + 0.5;
 			double py = pos.getY() + 0.125;
 			double pz = pos.getZ() + 0.5;
-			world.playSound(px, py, pz, BlockSoundGroup.WART_BLOCK.getBreakSound(), SoundCategory.BLOCKS, 1, 1, false);
 			if (world.isClient)
 			{
+				world.playSound(px, py, pz, BlockSoundGroup.WART_BLOCK.getBreakSound(), SoundCategory.BLOCKS, 1, 1, false);
 				BlockStateParticleEffect effect = new BlockStateParticleEffect(ParticleTypes.BLOCK, state);
 				Random random = world.random;
 				for (int i = 0; i < 24; i++)
