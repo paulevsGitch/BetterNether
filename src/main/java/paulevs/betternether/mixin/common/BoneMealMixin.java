@@ -13,10 +13,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.biomes.NetherBiomeJungle;
-import paulevs.betternether.biomes.NetherSoulPlain;
 import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.registry.BlocksRegistry;
 
@@ -32,41 +29,46 @@ public class BoneMealMixin
 		BlockPos blockPos = context.getBlockPos();
 		if (!world.isClient)
 		{
-			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos)) && !hasNyliumNear(world, blockPos))
+			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos)))
 			{
-				boolean ground = false;
-				if (world.getBlockState(blockPos).getBlock() == Blocks.NETHERRACK)
+				BlockState nylium = getNylium(world, blockPos);
+				boolean consume = true;
+				if (nylium != null && world.getBlockState(blockPos).getBlock() == Blocks.NETHERRACK)
 				{
-					ground = setGround(world, blockPos, world.getBlockState(blockPos.north())) ||
-							setGround(world, blockPos, world.getBlockState(blockPos.south())) ||
-							setGround(world, blockPos, world.getBlockState(blockPos.east())) ||
-							setGround(world, blockPos, world.getBlockState(blockPos.west()));
+					BlocksHelper.setWithoutUpdate(world, blockPos, nylium);
 				}
-				if (!ground)
-					growGrass(world, blockPos);
-				if (!context.getPlayer().isCreative())
-					context.getStack().decrement(1);
-				world.syncWorldEvent(2005, blockPos, 0);
-				info.setReturnValue(ActionResult.SUCCESS);
-				info.cancel();
+				else
+				{
+					consume = growGrass(world, blockPos);
+				}
+				if (consume)
+				{
+					if (!context.getPlayer().isCreative())
+						context.getStack().decrement(1);
+					world.syncWorldEvent(2005, blockPos, 0);
+					info.setReturnValue(ActionResult.SUCCESS);
+					info.cancel();
+				}
 			}
 			else if (BlocksHelper.isSoulSand(world.getBlockState(blockPos)))
 			{
-				growGrass(world, blockPos);
-				world.syncWorldEvent(2005, blockPos, 0);
-				if (!context.getPlayer().isCreative())
-					context.getStack().decrement(1);
-				info.setReturnValue(ActionResult.SUCCESS);
-				info.cancel();
+				if (growGrass(world, blockPos))
+				{
+					world.syncWorldEvent(2005, blockPos, 0);
+					if (!context.getPlayer().isCreative())
+						context.getStack().decrement(1);
+					info.setReturnValue(ActionResult.SUCCESS);
+					info.cancel();
+				}
 			}
 		}
 	}
 	
-	private void growGrass(World world, BlockPos pos)
+	private boolean growGrass(World world, BlockPos pos)
 	{
 		int y1 = pos.getY() + 3;
 		int y2 = pos.getY() - 3;
-		BlockState grass = getGrassState(world, pos);
+		boolean result = false;
 		for (int i = 0; i < 64; i++)
 		{
 			int x = (int) (pos.getX() + world.random.nextGaussian() * 2);
@@ -76,53 +78,56 @@ public class BoneMealMixin
 			for (int y = y1; y >= y2; y--)
 			{
 				POS.setY(y);
-				if (world.isAir(POS) && world.getBlockState(POS.down()).getBlock() != BlocksRegistry.NETHER_MYCELIUM && BlocksHelper.isNetherGround(world.getBlockState(POS.down())))
+				BlockPos down = POS.down();
+				if (world.isAir(POS) && !world.isAir(down))
 				{
-					BlocksHelper.setWithoutUpdate(world, POS, grass);
+					BlockState grass = getGrassState(world, down);
+					if (grass != null)
+					{
+						BlocksHelper.setWithoutUpdate(world, POS, grass);
+						if (world.random.nextInt(3) == 0 && world.getBlockState(down).getBlock() == Blocks.NETHERRACK)
+							BlocksHelper.setWithoutUpdate(world, down, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
+						result = true;
+					}
 					break;
 				}
 			}
 		}
+		return result;
 	}
 	
 	private BlockState getGrassState(World world, BlockPos pos)
 	{
-		Biome biome = world.getBiome(pos);
-		if (biome instanceof NetherSwampland)
-			return BlocksRegistry.SWAMP_GRASS.getDefaultState();
-		else if (biome instanceof NetherSoulPlain)
-			return BlocksRegistry.SOUL_GRASS.getDefaultState();
-		else if (biome instanceof NetherBiomeJungle)
+		BlockState state = world.getBlockState(pos);
+		if (state.getBlock() == BlocksRegistry.JUNGLE_GRASS)
 			return BlocksRegistry.JUNGLE_PLANT.getDefaultState();
-		else
-			return BlocksRegistry.NETHER_GRASS.getDefaultState();
+		else if (BlocksHelper.isSoulSand(state))
+			return BlocksRegistry.SOUL_GRASS.getDefaultState();
+		else if (BlocksHelper.isNetherrack(state) && !BlocksHelper.isNylium(state))
+			return world.getBiome(pos) instanceof NetherSwampland ?
+					BlocksRegistry.SWAMP_GRASS.getDefaultState() :
+						BlocksRegistry.NETHER_GRASS.getDefaultState();
+		return null;
 	}
 	
-	private boolean hasNyliumNear(World world, BlockPos pos)
+	private BlockState getNylium(World world, BlockPos pos)
 	{
-		return  isNylium(world.getBlockState(pos.north())) ||
-				isNylium(world.getBlockState(pos.south())) ||
-				isNylium(world.getBlockState(pos.east())) ||
-				isNylium(world.getBlockState(pos.west()));
-	}
-	
-	private boolean isNylium(BlockState state)
-	{
-		return state.getBlock() == Blocks.CRIMSON_NYLIUM || state.getBlock() == Blocks.WARPED_NYLIUM;
-	}
-	
-	private boolean setGround(World world, BlockPos pos, BlockState state)
-	{
-		if (state.getBlock() == BlocksRegistry.NETHER_MYCELIUM)
-		{
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.getDefaultState());
-			return true;
-		}
-		else if (state.getBlock() == BlocksRegistry.JUNGLE_GRASS)
-		{
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JUNGLE_GRASS.getDefaultState());
-			return true;
-		}
-		return false;
+		BlockState state = world.getBlockState(pos.north());
+		if (BlocksHelper.isNylium(state))
+			return state;
+		
+		state = world.getBlockState(pos.south());
+		if (BlocksHelper.isNylium(state))
+			return state;
+		
+		state = world.getBlockState(pos.east());
+		if (BlocksHelper.isNylium(state))
+			return state;
+		
+		state = world.getBlockState(pos.west());
+		if (BlocksHelper.isNylium(state))
+			return state;
+		
+		return null;
 	}
 }
