@@ -115,22 +115,29 @@ public class ItemsRegistry
 		return new Item.Settings().group(CreativeTab.BN_TAB);
 	}
 	
-	private static SpawnEggItem makeEgg(EntityType<?> type, int background, int dots)
+	private static Item makeEgg(EntityType<?> type, int background, int dots)
 	{
-		SpawnEggItem item = new SpawnEggItem(type, background, dots, defaultSettings());
-		ItemDispenserBehavior behavior = new ItemDispenserBehavior()
+		if (Registry.ENTITY_TYPE.getKey(type).isPresent())
 		{
-			public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack)
+			SpawnEggItem item = new SpawnEggItem(type, background, dots, defaultSettings());
+			ItemDispenserBehavior behavior = new ItemDispenserBehavior()
 			{
-				Direction direction = (Direction)pointer.getBlockState().get(DispenserBlock.FACING);
-				EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getTag());
-				entityType.spawnFromItemStack(pointer.getWorld(), stack, (PlayerEntity)null, pointer.getBlockPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
-				stack.decrement(1);
-				return stack;
-			}
-		};
-		DispenserBlock.registerBehavior(item, behavior);
-		return item;
+				public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack)
+				{
+					Direction direction = (Direction)pointer.getBlockState().get(DispenserBlock.FACING);
+					EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getTag());
+					entityType.spawnFromItemStack(pointer.getWorld(), stack, (PlayerEntity)null, pointer.getBlockPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
+					stack.decrement(1);
+					return stack;
+				}
+			};
+			DispenserBlock.registerBehavior(item, behavior);
+			return item;
+		}
+		else
+		{
+			return Items.AIR;
+		}
 	}
 	
 	private static int color(int r, int g, int b)

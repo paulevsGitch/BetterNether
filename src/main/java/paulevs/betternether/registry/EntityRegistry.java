@@ -22,6 +22,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.config.Config;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.EntityFlyingPig;
@@ -74,20 +75,24 @@ public class EntityRegistry
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity)
 	{
-		registerEntity(name, entity, MobEntity.createMobAttributes().build(), 0, 0, 0);
+		Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
+		ATTRUBUTES.put(entity, MobEntity.createMobAttributes().build());
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity, DefaultAttributeContainer container, int weight, int minGroupSize, int maxGroupSize, NetherBiome... spawnBiomes)
 	{
-		Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
-		ATTRUBUTES.put(entity, container);
-		if (spawnBiomes != null)
+		if (Config.getBoolean("mobs", name, true))
 		{
-			for (NetherBiome biome: spawnBiomes)
+			Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
+			ATTRUBUTES.put(entity, container);
+			if (spawnBiomes != null)
 			{
-				biome.addEntitySpawn(entity, weight, minGroupSize, maxGroupSize);
+				for (NetherBiome biome: spawnBiomes)
+				{
+					biome.addEntitySpawn(entity, weight, minGroupSize, maxGroupSize);
+				}
+				NETHER_ENTITIES.add(entity);
 			}
-			NETHER_ENTITIES.add(entity);
 		}
 	}
 	

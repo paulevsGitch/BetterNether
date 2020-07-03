@@ -25,7 +25,6 @@ public class BNChestBlockEntity extends ChestBlockEntity
 		{
 			material = world == null ? "normal" : Registry.BLOCK.getId(world.getBlockState(pos).getBlock()).getPath();
 			update = false;
-			System.out.println(material);
 		}
 		return material;
 	}

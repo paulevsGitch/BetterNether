@@ -417,6 +417,9 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_LADDER = registerBlock("mushroom_fir_ladder", new BNLadder(MUSHROOM_FIR_PLANKS));
 	public static final Block RUBEUS_LADDER = registerBlock("rubeus_ladder", new BNLadder(RUBEUS_PLANKS));
 	
+	// Signs
+	//public static final Block SIGN_STALAGNATE = registerSign("sign_stalagnate", STALAGNATE_PLANKS);
+	
 	//public static final WoodenMaterial TEST_MATERIAL = new WoodenMaterial("test_material", MaterialColor.BLACK);
 	
 	public static void register() {}
@@ -659,6 +662,18 @@ public class BlocksRegistry
 		{
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeRoundRecipe(source, block, "nether_chest");
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerSign(String name, Block source)
+	{
+		Block block = new BNSign(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeSignRecipe(source, block, "nether_sign");
 		}
 		BLOCKS.add(name);
 		return block;
