@@ -56,7 +56,7 @@ public class BlocksHelper
 	
 	public static boolean isSoulSand(BlockState state)
 	{
-		return state.isIn(NetherTags.SOUL_GROUND);
+		return state.isIn(NetherTags.SOUL_GROUND_BLOCK);
 	}
 	
 	public static boolean isNetherGround(BlockState state)
