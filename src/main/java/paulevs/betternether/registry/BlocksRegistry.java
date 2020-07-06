@@ -648,7 +648,6 @@ public class BlocksRegistry
 		if (Config.getBoolean("blocks", name, true))
 		{
 			registerBlockDirectly(name, block);
-			RecipesHelper.makeWallRecipe(source, block);
 			RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
 		}
 		BLOCKS.add(name);
