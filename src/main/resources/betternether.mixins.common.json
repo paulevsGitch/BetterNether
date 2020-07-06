@@ -19,7 +19,8 @@
 	"MultiNoiseBiomeSourceMixin",
 	"BiomeMixin",
 	"RecipeManagerMixin",
-	"CraftingScreenHandlerMixin"
+	"CraftingScreenHandlerMixin",
+	"PickaxeItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

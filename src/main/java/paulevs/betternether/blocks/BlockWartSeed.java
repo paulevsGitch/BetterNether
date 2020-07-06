@@ -52,7 +52,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements Fertilizable
 	{
 		super(FabricBlockSettings.of(Material.WOOD)
 				.materialColor(MaterialColor.RED_TERRACOTTA)
-				.sounds(BlockSoundGroup.WOOD)
+				.sounds(BlockSoundGroup.WART_BLOCK)
 				.hardness(1F)
 				.nonOpaque()
 				.noCollision());
