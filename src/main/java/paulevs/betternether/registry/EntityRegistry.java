@@ -1,10 +1,12 @@
 package paulevs.betternether.registry;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
@@ -22,6 +24,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.config.Config;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.EntityFlyingPig;
@@ -33,8 +36,8 @@ import paulevs.betternether.entity.EntitySkull;
 
 public class EntityRegistry
 {
-	public static final Map<EntityType<? extends LivingEntity>, DefaultAttributeContainer> ATTRUBUTES = new HashMap<EntityType<? extends LivingEntity>, DefaultAttributeContainer>();
-	private static final List<EntityType<?>> NETHER_ENTITIES = new ArrayList<EntityType<?>>();
+	public static final Map<EntityType<? extends LivingEntity>, DefaultAttributeContainer> ATTRUBUTES = Maps.newHashMap();
+	private static final List<EntityType<?>> NETHER_ENTITIES = Lists.newArrayList();
 	
 	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, EntityChair::new).dimensions(EntityDimensions.fixed(0.0F, 0.0F)).fireImmune().trackable(10, 1).build();
 	public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityNagaProjectile::new).dimensions(EntityDimensions.fixed(1F, 1F)).disableSummon().trackable(60, 1).build();
@@ -74,20 +77,24 @@ public class EntityRegistry
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity)
 	{
-		registerEntity(name, entity, MobEntity.createMobAttributes().build(), 0, 0, 0);
+		Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
+		ATTRUBUTES.put(entity, MobEntity.createMobAttributes().build());
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity, DefaultAttributeContainer container, int weight, int minGroupSize, int maxGroupSize, NetherBiome... spawnBiomes)
 	{
-		Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
-		ATTRUBUTES.put(entity, container);
-		if (spawnBiomes != null)
+		if (Config.getBoolean("mobs", name, true))
 		{
-			for (NetherBiome biome: spawnBiomes)
+			Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
+			ATTRUBUTES.put(entity, container);
+			if (spawnBiomes != null)
 			{
-				biome.addEntitySpawn(entity, weight, minGroupSize, maxGroupSize);
+				for (NetherBiome biome: spawnBiomes)
+				{
+					biome.addEntitySpawn(entity, weight, minGroupSize, maxGroupSize);
+				}
+				NETHER_ENTITIES.add(entity);
 			}
-			NETHER_ENTITIES.add(entity);
 		}
 	}
 	

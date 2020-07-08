@@ -135,7 +135,7 @@ public class BlocksRegistry
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
 	
 	// Soul Sandstone //
-	public static final Block SOUL_SANDSTONE = registerMakeable2X2("soul_sandstone", new BlockSoulSandstone(), "soul_sandstone", Blocks.SOUL_SAND, Blocks.SOUL_SOIL);
+	public static final Block SOUL_SANDSTONE = registerBlock("soul_sandstone", new BlockSoulSandstone());
 	public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2("soul_sandstone_cut", new BlockSoulSandstone(), "soul_sandstone", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_SMOOTH = registerMakeable2X2("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_CUT);
 	public static final Block SOUL_SANDSTONE_CHISELED = registerMakeable2X2("soul_sandstone_chiseled", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_SMOOTH);
@@ -417,6 +417,9 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_LADDER = registerBlock("mushroom_fir_ladder", new BNLadder(MUSHROOM_FIR_PLANKS));
 	public static final Block RUBEUS_LADDER = registerBlock("rubeus_ladder", new BNLadder(RUBEUS_PLANKS));
 	
+	// Signs
+	//public static final Block SIGN_STALAGNATE = registerSign("sign_stalagnate", STALAGNATE_PLANKS);
+	
 	//public static final WoodenMaterial TEST_MATERIAL = new WoodenMaterial("test_material", MaterialColor.BLACK);
 	
 	public static void register() {}
@@ -645,7 +648,6 @@ public class BlocksRegistry
 		if (Config.getBoolean("blocks", name, true))
 		{
 			registerBlockDirectly(name, block);
-			RecipesHelper.makeWallRecipe(source, block);
 			RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
 		}
 		BLOCKS.add(name);
@@ -659,6 +661,18 @@ public class BlocksRegistry
 		{
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeRoundRecipe(source, block, "nether_chest");
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerSign(String name, Block source)
+	{
+		Block block = new BNSign(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeSignRecipe(source, block, "nether_sign");
 		}
 		BLOCKS.add(name);
 		return block;

@@ -22,6 +22,7 @@ public class RecipesHelper
 	private static final String[] SHAPE_3X2 = new String[] {"###", "###"};
 	private static final String[] SHAPE_COLORING = new String[] {"###", "#I#", "###"};
 	private static final String[] SHAPE_ROUND = new String[] {"###", "# #", "###"};
+	private static final String[] SHAPE_SIGN = new String[] {"###", "###", " I "};
 	
 	private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count)
 	{
@@ -135,6 +136,16 @@ public class RecipesHelper
 			String name = Registry.BLOCK.getId(result).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source));
 			BNRecipeManager.addCraftingRecipe(name, group, SHAPE_ROUND, materials, new ItemStack(result));
+		}
+	}
+	
+	public static void makeSignRecipe(Block source, Block result, String group)
+	{
+		if (Registry.BLOCK.getId(source) != Registry.BLOCK.getDefaultId())
+		{
+			String name = Registry.BLOCK.getId(result).getPath();
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source), "I", new ItemStack(Items.STICK));
+			BNRecipeManager.addCraftingRecipe(name, group, SHAPE_SIGN, materials, new ItemStack(result, 3));
 		}
 	}
 }
