@@ -13,6 +13,7 @@ public class BlockOre extends OreBlock
 				.requiresTool()
 				.hardness(3F)
 				.resistance(5F)
+				.requiresTool()
 				.sounds(BlockSoundGroup.NETHERRACK));
 	}
 }

@@ -54,7 +54,7 @@ public class StructurePath implements IStructure
 					B_POS.setY(height);
 					height -= BlocksHelper.downRay(world, B_POS, height);
 					B_POS.setY(height);
-					if (world.isAir(B_POS) && BlocksHelper.isNetherGround(world.getBlockState(B_POS.move(Direction.DOWN))) && isHeightValid(world, B_POS.up()))
+					if (world.isAir(B_POS) && world.getBlockState(B_POS.move(Direction.DOWN)).isFullCube(world, B_POS) && isHeightValid(world, B_POS.up()))
 					{
 						Biome biome = world.getBiome(B_POS);
 						BlocksHelper.setWithoutUpdate(world, B_POS, getRoadMaterial(world, B_POS, biome));
