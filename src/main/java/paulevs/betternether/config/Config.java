@@ -17,6 +17,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
 import paulevs.betternether.BetterNether;
 
 public class Config
@@ -43,6 +45,23 @@ public class Config
 					{
 						config = new JsonObject();
 						rewrite = true;
+					}
+					else
+					{
+						boolean rewrite = getBooleanLoad("config", "reset_on_version_update", true);
+						String version = getStringLoad("config", "mod_version");
+						if (rewrite || version.equals("${version}"))
+						{
+							ModContainer mod = FabricLoader.getInstance().getModContainer(BetterNether.MOD_ID).get();
+							String versionActual = mod.getMetadata().getVersion().getFriendlyString();
+							if (!version.equals(versionActual))
+							{
+								config = new JsonObject();
+								rewrite = true;
+								setStringLoad("config", "mod_version", versionActual);
+								setBoolean("config", "rewrite_on_version_update", true, true);
+							}
+						}
 					}
 				}
 				catch (FileNotFoundException e)
@@ -114,6 +133,40 @@ public class Config
 		}
 	}
 	
+	private static boolean getBooleanLoad(String groups, String name, boolean def)
+	{
+		name += "[def: " + def + "]";
+		
+		JsonObject group = getGroup(groups);
+		JsonElement element = group.get(name);
+		
+		if (element != null)
+		{
+			return element.getAsBoolean();
+		}
+		else
+		{
+			group.addProperty(name, def);
+			rewrite = true;
+			return def;
+		}
+	}
+	
+	private static String getStringLoad(String groups, String name)
+	{
+		JsonObject group = getGroup(groups);
+		JsonElement element = group.get(name);
+		
+		if (element != null)
+		{
+			return element.getAsString();
+		}
+		else
+		{
+			return "";
+		}
+	}
+	
 	public static void setBoolean(String groups, String name, boolean def, boolean value)
 	{
 		name += "[def: " + def + "]";
@@ -182,6 +235,12 @@ public class Config
 		group.addProperty(name, value);
 		
 		rewrite = true;
+	}
+	
+	public static void setStringLoad(String groups, String name, String value)
+	{
+		JsonObject group = getGroup(groups);
+		group.addProperty(name, value);
 	}
 	
 	public static String[] getStringArray(String groups, String name, String[] def)

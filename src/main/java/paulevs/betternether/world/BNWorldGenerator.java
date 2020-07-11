@@ -147,7 +147,7 @@ public class BNWorldGenerator
 		//Structure Generator
 		if (random.nextFloat() < structureDensity)
 		{
-			popPos.set(sx + random.nextInt(16), 32 + random.nextInt(120 - 32), sz + random.nextInt(16));
+			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, 100, random), sz + random.nextInt(16));
 			StructureType type = StructureType.FLOOR;
 			boolean isAir =  world.getBlockState(popPos).isAir();
 			boolean airUp = world.getBlockState(popPos.up()).isAir() && world.getBlockState(popPos.up(3)).isAir();
