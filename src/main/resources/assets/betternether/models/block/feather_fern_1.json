@@ -1,0 +1,8 @@
+{
+	"parent": "betternether:block/feather_fern",
+	"textures": {
+		"particle": "betternether:block/feather_fern_leaf_1",
+		"texture": "betternether:block/feather_fern_leaf_1",
+		"texture1": "betternether:block/feather_fern_center_1"
+	}
+}

@@ -287,6 +287,7 @@ public class BlocksRegistry
 	public static final Block BLACK_APPLE = registerBlockNI("black_apple", new BlockBlackApple());
 	public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", new BlockBlackAppleSeed());
 	public static final Block MAGMA_FLOWER = registerBlock("magma_flower", new BlockMagmaFlower());
+	public static final Block FEATHER_FERN = registerBlock("feather_fern", new BlockFeatherFern());
 	
 	// Cactuses //
 	public static final Block AGAVE = registerBlock("agave", new BlockAgave());
