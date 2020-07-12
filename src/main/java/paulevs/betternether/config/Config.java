@@ -49,12 +49,12 @@ public class Config
 					else
 					{
 						boolean rewrite = getBooleanLoad("config", "reset_on_version_update", true);
-						String version = getStringLoad("config", "mod_version");
-						if (rewrite || version.equals("${version}"))
+						if (rewrite)
 						{
 							ModContainer mod = FabricLoader.getInstance().getModContainer(BetterNether.MOD_ID).get();
 							String versionActual = mod.getMetadata().getVersion().getFriendlyString();
-							if (!version.equals(versionActual))
+							String version = getStringLoad("config", "mod_version");
+							if (!version.equals(versionActual) || version.equals("${version}"))
 							{
 								config = new JsonObject();
 								rewrite = true;

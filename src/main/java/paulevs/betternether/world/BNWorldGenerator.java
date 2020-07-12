@@ -148,7 +148,7 @@ public class BNWorldGenerator
 		if (random.nextFloat() < structureDensity)
 		{
 			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, 100, random), sz + random.nextInt(16));
-			StructureType type = StructureType.FLOOR;
+			StructureType type = popPos.getY() < 38 ? StructureType.LAVA : StructureType.FLOOR;
 			boolean isAir =  world.getBlockState(popPos).isAir();
 			boolean airUp = world.getBlockState(popPos.up()).isAir() && world.getBlockState(popPos.up(3)).isAir();
 			boolean airDown = world.getBlockState(popPos.down()).isAir() && world.getBlockState(popPos.down(3)).isAir();
@@ -157,7 +157,7 @@ public class BNWorldGenerator
 				type = StructureType.UNDER;
 			else
 			{
-				if (!biome.hasCeilStructures() || random.nextBoolean()) // Floor
+				if (type == StructureType.LAVA || !biome.hasCeilStructures() || random.nextBoolean()) // Floor
 				{
 					while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
 					{
@@ -176,7 +176,7 @@ public class BNWorldGenerator
 			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
 			if (world.isAir(popPos))
 			{
-				if (type == StructureType.FLOOR)
+				if (type == StructureType.FLOOR || type == StructureType.LAVA)
 				{
 					BlockState down = world.getBlockState(popPos.down());
 					if (BlocksHelper.isLava(down))

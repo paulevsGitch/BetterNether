@@ -70,13 +70,26 @@ public class BlockWillowBranch extends BlockBaseNotFull
 	
 	public enum WillowBranchShape implements StringIdentifiable
 	{
-		END,
-		MIDDLE;
+		END("end"),
+		MIDDLE("middle");
+		
+		final String name;
+		
+		WillowBranchShape(String name)
+		{
+			this.name = name;
+		}
 
 		@Override
 		public String asString()
 		{
-			return this.toString().toLowerCase();
+			return name;
+		}
+		
+		@Override
+		public String toString()
+		{
+			return name;
 		}
 	}
 	

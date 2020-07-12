@@ -75,23 +75,36 @@ public class BlockMushroomFir extends BlockBaseNotFull
 	
 	public enum MushroomFirShape implements StringIdentifiable
 	{
-		BOTTOM,
-		MIDDLE,
-		TOP,
-		SIDE_BIG_N,
-		SIDE_BIG_S,
-		SIDE_BIG_E,
-		SIDE_BIG_W,
-		SIDE_SMALL_N,
-		SIDE_SMALL_S,
-		SIDE_SMALL_E,
-		SIDE_SMALL_W,
-		END;
+		BOTTOM("bottom"),
+		MIDDLE("middle"),
+		TOP("top"),
+		SIDE_BIG_N("side_big_n"),
+		SIDE_BIG_S("side_big_s"),
+		SIDE_BIG_E("side_big_e"),
+		SIDE_BIG_W("side_big_w"),
+		SIDE_SMALL_N("side_small_n"),
+		SIDE_SMALL_S("side_small_s"),
+		SIDE_SMALL_E("side_small_e"),
+		SIDE_SMALL_W("side_small_w"),
+		END("end");
 		
+		final String name;
+
+		MushroomFirShape(String name)
+		{
+			this.name = name;
+		}
+
 		@Override
 		public String asString()
 		{
-			return this.toString().toLowerCase();
+			return name;
+		}
+
+		@Override
+		public String toString()
+		{
+			return name;
 		}
 	}
 	
