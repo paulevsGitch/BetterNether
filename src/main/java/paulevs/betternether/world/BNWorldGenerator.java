@@ -44,6 +44,7 @@ public class BNWorldGenerator
 	private static float cincinnasiteDensity;
 	private static float rubyDensity;
 	private static float structureDensity;
+	private static float lavaStructureDensity;
 	private static float globalDensity;
 	
 	private static final BlockState AIR = Blocks.AIR.getDefaultState();
@@ -83,6 +84,7 @@ public class BNWorldGenerator
 		cincinnasiteDensity = Config.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 1024F);
 		rubyDensity = Config.getFloat("generator.world.ores", "ruby_ore_density", 1F / 4000F);
 		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 32F) * 1.0001F;
+		lavaStructureDensity = Config.getFloat("generator.world", "lava_structures_density", 1F / 128F) * 1.0001F;
 		globalDensity = Config.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
 		
 		if (Config.getBoolean("generator.world.cities", "generate", true))
@@ -148,7 +150,7 @@ public class BNWorldGenerator
 		if (random.nextFloat() < structureDensity)
 		{
 			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, 100, random), sz + random.nextInt(16));
-			StructureType type = popPos.getY() < 38 ? StructureType.LAVA : StructureType.FLOOR;
+			StructureType type = StructureType.FLOOR;
 			boolean isAir =  world.getBlockState(popPos).isAir();
 			boolean airUp = world.getBlockState(popPos.up()).isAir() && world.getBlockState(popPos.up(3)).isAir();
 			boolean airDown = world.getBlockState(popPos.down()).isAir() && world.getBlockState(popPos.down(3)).isAir();
@@ -157,7 +159,7 @@ public class BNWorldGenerator
 				type = StructureType.UNDER;
 			else
 			{
-				if (type == StructureType.LAVA || !biome.hasCeilStructures() || random.nextBoolean()) // Floor
+				if (!biome.hasCeilStructures() || random.nextBoolean()) // Floor
 				{
 					while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
 					{
@@ -176,14 +178,10 @@ public class BNWorldGenerator
 			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
 			if (world.isAir(popPos))
 			{
-				if (type == StructureType.FLOOR || type == StructureType.LAVA)
+				if (type == StructureType.FLOOR)
 				{
 					BlockState down = world.getBlockState(popPos.down());
-					if (BlocksHelper.isLava(down))
-					{
-						biome.genLavaBuildings(world, popPos, random);
-					}
-					else if (BlocksHelper.isNetherGroundMagma(down))
+					if (BlocksHelper.isNetherGroundMagma(down))
 						biome.genFloorBuildings(world, popPos, random);
 				}
 				else if (type == StructureType.CEIL)
@@ -197,6 +195,16 @@ public class BNWorldGenerator
 			}
 			else
 				biome.genUnderBuildings(world, popPos, random);
+		}
+		
+		if (random.nextFloat() < lavaStructureDensity)
+		{
+			popPos.set(sx + random.nextInt(16), 32, sz + random.nextInt(16));
+			if (world.isAir(popPos) && BlocksHelper.isLava(world.getBlockState(popPos.down())))
+			{
+				biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+				biome.genLavaBuildings(world, popPos, random);
+			}
 		}
 		
 		LIST_LAVA.clear();
