@@ -1,6 +1,7 @@
 package paulevs.betternether.registry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -66,6 +67,8 @@ public class EntityRegistry
 		
 		registerEntity("chair", CHAIR);
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
+		
+		System.out.println(Arrays.toString(netherBiomes));
 		
 		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 10, 2, 6, fireflyBiomes.toArray(new NetherBiome[] {}));
 		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 20, 2, 5, netherBiomes);
