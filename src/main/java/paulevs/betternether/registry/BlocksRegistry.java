@@ -429,8 +429,7 @@ public class BlocksRegistry
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
-			ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, block);
 		}
 		BLOCKS.add(name);
 		return block;

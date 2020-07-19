@@ -48,7 +48,7 @@ public class Config
 					}
 					else
 					{
-						boolean rewrite = getBooleanLoad("config", "reset_on_version_update", true);
+						boolean rewrite = getBooleanLoad("config", "rewrite_on_version_update", true);
 						if (rewrite)
 						{
 							ModContainer mod = FabricLoader.getInstance().getModContainer(BetterNether.MOD_ID).get();
@@ -59,7 +59,6 @@ public class Config
 								config = new JsonObject();
 								rewrite = true;
 								setStringLoad("config", "mod_version", versionActual);
-								setBoolean("config", "rewrite_on_version_update", true, true);
 							}
 						}
 					}

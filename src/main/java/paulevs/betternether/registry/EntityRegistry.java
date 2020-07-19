@@ -67,8 +67,8 @@ public class EntityRegistry
 		registerEntity("chair", CHAIR);
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
 		
-		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 10, 2, 6, fireflyBiomes.toArray(new NetherBiome[] {}));
-		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 20, 2, 5, netherBiomes);
+		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer(), 20, 2, 6, fireflyBiomes.toArray(new NetherBiome[] {}));
+		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer(), 10, 2, 5, netherBiomes);
 		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer(), 20, 2, 4, netherBiomes);
 		registerEntity("flying_pig", FLYING_PIG, EntityFlyingPig.getAttributeContainer(), 20, 2, 4, BiomesRegistry.BIOME_CRIMSON_FOREST, BiomesRegistry.CRIMSON_GLOWING_WOODS, BiomesRegistry.CRIMSON_PINEWOOD);
 		registerEntity("jungle_skeleton", JUNGLE_SKELETON, AbstractSkeletonEntity.createAbstractSkeletonAttributes().build(), 1000, 2, 4, BiomesRegistry.BIOME_NETHER_JUNGLE);
@@ -89,9 +89,10 @@ public class EntityRegistry
 			ATTRUBUTES.put(entity, container);
 			if (spawnBiomes != null)
 			{
+				int spawnWeight = Config.getInt("mobs", name + "_" + "spawn_chance", weight);
 				for (NetherBiome biome: spawnBiomes)
 				{
-					biome.addEntitySpawn(entity, weight, minGroupSize, maxGroupSize);
+					biome.addEntitySpawn(entity, spawnWeight, minGroupSize, maxGroupSize);
 				}
 				NETHER_ENTITIES.add(entity);
 			}
