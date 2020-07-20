@@ -419,7 +419,13 @@ public class BlocksRegistry
 	public static final Block RUBEUS_LADDER = registerBlock("rubeus_ladder", new BNLadder(RUBEUS_PLANKS));
 	
 	// Signs
-	//public static final Block SIGN_STALAGNATE = registerSign("sign_stalagnate", STALAGNATE_PLANKS);
+	public static final Block SIGN_STALAGNATE = registerSign("sign_stalagnate", STALAGNATE_PLANKS);
+	public static final Block SIGN_REED = registerSign("sign_reed", REEDS_BLOCK);
+	public static final Block SIGN_WILLOW = registerSign("sign_willow", WILLOW_PLANKS);
+	public static final Block SIGN_WART = registerSign("sign_wart", WART_PLANKS);
+	public static final Block SIGN_RUBEUS = registerSign("sign_rubeus", RUBEUS_PLANKS);
+	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
+	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
 	
 	//public static final WoodenMaterial TEST_MATERIAL = new WoodenMaterial("test_material", MaterialColor.BLACK);
 	

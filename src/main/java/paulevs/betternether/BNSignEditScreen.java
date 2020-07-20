@@ -8,7 +8,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SignBlock;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -21,10 +20,8 @@ import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.VertexFormats;
-import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer.SignModel;
 import net.minecraft.client.util.SelectionManager;
-import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.UpdateSignC2SPacket;
 import net.minecraft.text.LiteralText;
@@ -32,6 +29,8 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Matrix4f;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
+import paulevs.betternether.blockentities.render.BNSignBlockEntityRenderer;
+import paulevs.betternether.blocks.BNSign;
 
 @Environment(EnvType.CLIENT)
 public class BNSignEditScreen extends Screen
@@ -140,7 +139,8 @@ public class BNSignEditScreen extends Screen
 		matrices.scale(93.75F, -93.75F, 93.75F);
 		matrices.translate(0.0D, -1.3125D, 0.0D);
 		BlockState blockState = this.sign.getCachedState();
-		boolean bl = blockState.getBlock() instanceof SignBlock;
+		boolean bl = blockState.get(BNSign.FLOOR);
+		
 		if (!bl)
 		{
 			matrices.translate(0.0D, -0.3125D, 0.0D);
@@ -151,11 +151,9 @@ public class BNSignEditScreen extends Screen
 		matrices.push();
 		matrices.scale(0.6666667F, -0.6666667F, -0.6666667F);
 		VertexConsumerProvider.Immediate immediate = this.client.getBufferBuilders().getEntityVertexConsumers();
-		SpriteIdentifier spriteIdentifier = SignBlockEntityRenderer.getModelTexture(blockState.getBlock());
-		SignBlockEntityRenderer.SignModel var10002 = this.model;
-		var10002.getClass();
-		VertexConsumer vertexConsumer = spriteIdentifier.getVertexConsumer(immediate, var10002::getLayer);
+		VertexConsumer vertexConsumer = BNSignBlockEntityRenderer.getConsumer(immediate, blockState.getBlock());
 		this.model.field.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV);
+		
 		if (bl)
 		{
 			this.model.foot.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV);

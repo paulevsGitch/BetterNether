@@ -1,12 +1,16 @@
 package paulevs.betternether.blockentities.render;
 
+import java.util.HashMap;
 import java.util.List;
+
+import com.google.common.collect.Maps;
 
 import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SignBlock;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -20,11 +24,17 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.text.StringRenderable;
 import net.minecraft.text.Style;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.SignType;
+import net.minecraft.util.registry.Registry;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
+import paulevs.betternether.blocks.BNSign;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEntity>
 {
+	private static final HashMap<Integer, RenderLayer> LAYERS = Maps.newHashMap();
 	private final SignModel model = new SignBlockEntityRenderer.SignModel();
 
 	public BNSignBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher)
@@ -39,25 +49,33 @@ public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEn
 
 		matrixStack.translate(0.5D, 0.5D, 0.5D);
 		float angle = -((float) ((Integer) state.get(SignBlock.ROTATION) * 360) / 16.0F);
-		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(angle));
-		this.model.foot.visible = true;
+		
+		BlockState blockState = signBlockEntity.getCachedState();
+		if (blockState.get(BNSign.FLOOR))
+		{
+			matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(angle));
+			this.model.foot.visible = true;
+		}
+		else
+		{
+			matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(angle + 180));
+			matrixStack.translate(0.0D, -0.3125D, -0.4375D);
+			this.model.foot.visible = false;
+		}
 
 		matrixStack.push();
 		matrixStack.scale(0.6666667F, -0.6666667F, -0.6666667F);
-		SpriteIdentifier spriteIdentifier = getModelTexture(state.getBlock());
-		SignBlockEntityRenderer.SignModel var10002 = this.model;
-		var10002.getClass();
-		VertexConsumer vertexConsumer = spriteIdentifier.getVertexConsumer(provider, var10002::getLayer);
-		this.model.field.render(matrixStack, vertexConsumer, light, overlay);
-		this.model.foot.render(matrixStack, vertexConsumer, light, overlay);
+		VertexConsumer vertexConsumer = getConsumer(provider, state.getBlock());
+		model.field.render(matrixStack, vertexConsumer, light, overlay);
+		model.foot.render(matrixStack, vertexConsumer, light, overlay);
 		matrixStack.pop();
-		TextRenderer textRenderer = this.dispatcher.getTextRenderer();
+		TextRenderer textRenderer = dispatcher.getTextRenderer();
 		matrixStack.translate(0.0D, 0.3333333432674408D, 0.046666666865348816D);
 		matrixStack.scale(0.010416667F, -0.010416667F, 0.010416667F);
 		int m = signBlockEntity.getTextColor().getSignColor();
-		int n = (int) ((double) NativeImage.getRed(m) * 0.4D);
-		int o = (int) ((double) NativeImage.getGreen(m) * 0.4D);
-		int p = (int) ((double) NativeImage.getBlue(m) * 0.4D);
+		int n = (int) (NativeImage.getRed(m) * 0.4D);
+		int o = (int) (NativeImage.getGreen(m) * 0.4D);
+		int p = (int) (NativeImage.getBlue(m) * 0.4D);
 		int q = NativeImage.getAbgrColor(0, p, o, n);
 
 		for (int s = 0; s < 4; ++s)
@@ -68,8 +86,8 @@ public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEn
 			});
 			if (stringRenderable != null)
 			{
-				float t = (float) (-textRenderer.getWidth(stringRenderable) / 2);
-				textRenderer.draw((StringRenderable) stringRenderable, t, (float) (s * 10 - 20), q, false, matrixStack.peek().getModel(), provider, false, 0, light);
+				float t = -textRenderer.getWidth(stringRenderable) / 2;
+				textRenderer.draw(stringRenderable, t, s * 10 - 20, q, false, matrixStack.peek().getModel(), provider, false, 0, light);
 			}
 		}
 
@@ -89,5 +107,21 @@ public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEn
 		}
 
 		return TexturedRenderLayers.getSignTextureId(signType2);
+	}
+	
+	static
+	{
+		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
+			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));
+			if (block instanceof BNSign)
+			{
+				LAYERS.put(Block.getRawIdFromState(block.getDefaultState()), RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/signs/" + name + ".png")));
+			}
+		});
+	}
+	
+	public static VertexConsumer getConsumer(VertexConsumerProvider provider, Block block)
+	{
+		return provider.getBuffer(LAYERS.get(Block.getRawIdFromState(block.getDefaultState())));
 	}
 }

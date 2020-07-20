@@ -20,7 +20,8 @@
 	"BiomeMixin",
 	"RecipeManagerMixin",
 	"CraftingScreenHandlerMixin",
-	"PickaxeItemMixin"
+	"PickaxeItemMixin",
+	"ServerPlayNetworkHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

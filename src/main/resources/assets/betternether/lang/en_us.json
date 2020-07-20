@@ -551,5 +551,13 @@
 	
 	"block.betternether.jungle_moss": "Jungle Moss",
 	
-	"block.betternether.feather_fern": "Feather Fern"
+	"block.betternether.feather_fern": "Feather Fern",
+	
+	"block.betternether.sign_stalagnate": "Stalagnate Sign",
+	"block.betternether.sign_reed": "Reeds Sign",
+	"block.betternether.sign_willow": "Willow Sign",
+	"block.betternether.sign_wart": "Wart Sign",
+	"block.betternether.sign_rubeus": "Rubeus Sign",
+	"block.betternether.sign_mushroom": "Mushroom Sign",
+	"block.betternether.sign_mushroom_fir": "Mushroom Fir Sign"
 }
