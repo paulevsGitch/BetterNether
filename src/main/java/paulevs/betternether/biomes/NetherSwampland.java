@@ -12,6 +12,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureBlackVine;
+import paulevs.betternether.structures.plants.StructureFeatherFern;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSmoker;
 import paulevs.betternether.structures.plants.StructureSoulVein;
@@ -31,6 +32,7 @@ public class NetherSwampland extends NetherBiome
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
 		addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.1F, false);
+		addStructure("feather_fern", new StructureFeatherFern(), StructureType.FLOOR, 0.05F, true);
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.8F, false);
 		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, false);
 		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.1F, false);

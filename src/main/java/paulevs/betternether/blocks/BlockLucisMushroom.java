@@ -50,14 +50,27 @@ public class BlockLucisMushroom extends BlockBaseNotFull
 
 	public enum EnumShape implements StringIdentifiable
 	{
-		CORNER,
-		SIDE,
-		CENTER;
+		CORNER("corner"),
+		SIDE("side"),
+		CENTER("center");
 
+		final String name;
+		
+		EnumShape(String name)
+		{
+			this.name = name;
+		}
+		
 		@Override
 		public String asString()
 		{
-			return this.toString().toLowerCase();
+			return name;
+		}
+
+		@Override
+		public String toString()
+		{
+			return name;
 		}
 	}
 }

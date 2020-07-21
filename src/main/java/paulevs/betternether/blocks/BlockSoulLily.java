@@ -89,21 +89,34 @@ public class BlockSoulLily extends BlockBaseNotFull
 	
 	public enum SoulLilyShape implements StringIdentifiable
 	{
-		SMALL,
-		MEDIUM_BOTTOM,
-		MEDIUM_TOP,
-		BIG_BOTTOM,
-		BIG_MIDDLE,
-		BIG_TOP_CENTER,
-		BIG_TOP_SIDE_N,
-		BIG_TOP_SIDE_S,
-		BIG_TOP_SIDE_E,
-		BIG_TOP_SIDE_W;
+		SMALL("small"),
+		MEDIUM_BOTTOM("medium_bottom"),
+		MEDIUM_TOP("medium_top"),
+		BIG_BOTTOM("big_bottom"),
+		BIG_MIDDLE("big_middle"),
+		BIG_TOP_CENTER("big_top_center"),
+		BIG_TOP_SIDE_N("big_top_side_n"),
+		BIG_TOP_SIDE_S("big_top_side_s"),
+		BIG_TOP_SIDE_E("big_top_side_e"),
+		BIG_TOP_SIDE_W("big_top_side_w");
+		
+		final String name;
+
+		SoulLilyShape(String name)
+		{
+			this.name = name;
+		}
 		
 		@Override
 		public String asString()
 		{
-			return this.toString().toLowerCase();
+			return name;
+		}
+
+		@Override
+		public String toString()
+		{
+			return name;
 		}
 	}
 	

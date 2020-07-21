@@ -77,22 +77,35 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull
 	
 	public static enum BrownMushroomShape implements StringIdentifiable
 	{
-		TOP,
-		SIDE_N,
-		SIDE_S,
-		SIDE_E,
-		SIDE_W,
-		CORNER_N,
-		CORNER_S,
-		CORNER_E,
-		CORNER_W,
-		MIDDLE,
-		BOTTOM;
+		TOP("top"),
+		SIDE_N("side_n"),
+		SIDE_S("side_s"),
+		SIDE_E("side_e"),
+		SIDE_W("side_w"),
+		CORNER_N("corner_n"),
+		CORNER_S("corner_s"),
+		CORNER_E("corner_e"),
+		CORNER_W("corner_w"),
+		MIDDLE("middle"),
+		BOTTOM("bottom");
+		
+		final String name;
+		
+		BrownMushroomShape(String name)
+		{
+			this.name = name;
+		}
 		
 		@Override
 		public String asString()
 		{
-			return this.toString().toLowerCase();
+			return name;
+		}
+
+		@Override
+		public String toString()
+		{
+			return name;
 		}
 	}
 	

@@ -43,15 +43,28 @@ public class BlockCincinnasitPillar extends BlockBase
 	
 	public static enum CincinnasitPillarShape implements StringIdentifiable
 	{
-		SMALL,
-		TOP,
-		MIDDLE,
-		BOTTOM;
+		SMALL("small"),
+		TOP("top"),
+		MIDDLE("middle"),
+		BOTTOM("bottom");
+		
+		final String name;
+		
+		CincinnasitPillarShape(String name)
+		{
+			this.name = name;
+		}
 		
 		@Override
 		public String asString()
 		{
-			return this.toString().toLowerCase();
+			return name;
+		}
+		
+		@Override
+		public String toString()
+		{
+			return name;
 		}
 	}
 }

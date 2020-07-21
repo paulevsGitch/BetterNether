@@ -29,9 +29,9 @@ public class BetterNether implements ModInitializer
 		StructureTypes.init();
 		BlocksRegistry.register();
 		BlockEntitiesRegistry.register();
-		EntityRegistry.register();
 		ItemsRegistry.register();
 		BiomesRegistry.register();
+		EntityRegistry.register();
 		BNWorldGenerator.onModInit();
 		BrewingRegistry.register();
 		Config.save();

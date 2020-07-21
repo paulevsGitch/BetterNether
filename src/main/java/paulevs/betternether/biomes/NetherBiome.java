@@ -85,7 +85,12 @@ public class NetherBiome extends Biome
 			structureFormat("respawn_point_03", -3, StructureType.FLOOR, 1),
 			structureFormat("respawn_point_04", -2, StructureType.FLOOR, 1),
 			structureFormat("spawn_altar_ladder", -5, StructureType.FLOOR, 1),
-			structureFormat("ghast_hive", -20, StructureType.CEIL, 1F)
+			
+			structureFormat("ghast_hive", -20, StructureType.CEIL, 1F),
+			
+			structureFormat("lava/pyramid_1", -1, StructureType.LAVA, 1F),
+			structureFormat("lava/pyramid_2", -1, StructureType.LAVA, 1F),
+			structureFormat("lava/pyramid_3", -1, StructureType.LAVA, 1F)
 	};
 	
 	private ArrayList<String> structures;

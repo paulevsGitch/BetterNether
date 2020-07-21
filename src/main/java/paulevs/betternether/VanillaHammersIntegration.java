@@ -38,7 +38,7 @@ public class VanillaHammersIntegration
 			if (hasHammers)
 			{
 				LogManager.getLogger().info("Enabled Vanilla Hammers Integration");
-				Class<?> hammerItemClass = Class.forName("com.github.draylar.vh.api.HammerItem");
+				Class<?> hammerItemClass = Class.forName("draylar.magna.item.HammerItem");
 				if (hammerItemClass != null)
 					for (Constructor<?> c: hammerItemClass.getConstructors())
 						if (c.getParameterCount() == 4)

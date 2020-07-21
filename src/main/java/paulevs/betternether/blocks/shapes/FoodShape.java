@@ -5,12 +5,18 @@ import net.minecraft.util.StringIdentifiable;
 
 public enum FoodShape implements StringIdentifiable
 {
-	NONE,
-	WART,
-	MUSHROOM,
-	APPLE;
+	NONE("none"),
+	WART("wart"),
+	MUSHROOM("mushroom"),
+	APPLE("apple");
 	
+	private final String name;
 	private Item item;
+	
+	FoodShape(String name)
+	{
+		this.name = name;
+	}
 	
 	public void setItem(Item item)
 	{
@@ -20,7 +26,13 @@ public enum FoodShape implements StringIdentifiable
 	@Override
 	public String asString()
 	{
-		return this.toString().toLowerCase();
+		return name;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return name;
 	}
 	
 	public Item getItem()

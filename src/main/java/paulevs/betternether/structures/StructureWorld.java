@@ -33,6 +33,8 @@ public class StructureWorld extends StructureNBT implements IStructure
 	{
 		if (type == StructureType.FLOOR)
 			return getAirFraction(world, pos) > 0.7 && getAirFractionFoundation(world, pos) < 0.3;
+		else if (type == StructureType.LAVA)
+			return getAirFraction(world, pos) > 0.8;
 		else if (type == StructureType.UNDER)
 			return getAirFraction(world, pos) < 0.2;
 		else if (type == StructureType.CEIL)
@@ -74,7 +76,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 		
-		BlockPos start = pos.add(-size.getX() >> 1, -2, -size.getZ() >> 1);
+		BlockPos start = pos.add(-size.getX() >> 1, -1, -size.getZ() >> 1);
 		BlockPos end = pos.add(size.getX() >> 1, 0, size.getZ() >> 1);
 		int count = 0;
 		

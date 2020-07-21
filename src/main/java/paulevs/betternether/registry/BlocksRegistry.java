@@ -287,6 +287,7 @@ public class BlocksRegistry
 	public static final Block BLACK_APPLE = registerBlockNI("black_apple", new BlockBlackApple());
 	public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", new BlockBlackAppleSeed());
 	public static final Block MAGMA_FLOWER = registerBlock("magma_flower", new BlockMagmaFlower());
+	public static final Block FEATHER_FERN = registerBlock("feather_fern", new BlockFeatherFern());
 	
 	// Cactuses //
 	public static final Block AGAVE = registerBlock("agave", new BlockAgave());
@@ -353,6 +354,7 @@ public class BlocksRegistry
 	
 	// Storage
 	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
+	
 	public static final Block CHEST_STALAGNATE = registerChest("chest_stalagnate", STALAGNATE_PLANKS);
 	public static final Block CHEST_REED = registerChest("chest_reed", REEDS_BLOCK);
 	public static final Block CHEST_WILLOW = registerChest("chest_willow", WILLOW_PLANKS);
@@ -360,6 +362,14 @@ public class BlocksRegistry
 	public static final Block CHEST_RUBEUS = registerChest("chest_rubeus", RUBEUS_PLANKS);
 	public static final Block CHEST_MUSHROOM = registerChest("chest_mushroom", MUSHROOM_PLANKS);
 	public static final Block CHEST_MUSHROOM_FIR = registerChest("chest_mushroom_fir", MUSHROOM_FIR_PLANKS);
+	
+	public static final Block BARREL_STALAGNATE = registerBarrel("barrel_stalagnate", STALAGNATE_PLANKS, STALAGNATE_SLAB);
+	public static final Block BARREL_REED = registerBarrel("barrel_reed", REEDS_BLOCK, REEDS_SLAB);
+	public static final Block BARREL_WILLOW = registerBarrel("barrel_willow", WILLOW_PLANKS, WILLOW_SLAB);
+	public static final Block BARREL_WART = registerBarrel("barrel_wart", WART_PLANKS, WART_SLAB);
+	public static final Block BARREL_RUBEUS = registerBarrel("barrel_rubeus", RUBEUS_PLANKS, RUBEUS_SLAB);
+	public static final Block BARREL_MUSHROOM = registerBarrel("barrel_mushroom", MUSHROOM_PLANKS, MUSHROOM_SLAB);
+	public static final Block BARREL_MUSHROOM_FIR = registerBarrel("barrel_mushroom_fir", MUSHROOM_FIR_PLANKS, MUSHROOM_FIR_SLAB);
 	
 	// Taburets //
 	public static final Block TABURET_OAK = registerBlock("taburet_oak", new BNTaburet(Blocks.OAK_PLANKS));
@@ -418,7 +428,13 @@ public class BlocksRegistry
 	public static final Block RUBEUS_LADDER = registerBlock("rubeus_ladder", new BNLadder(RUBEUS_PLANKS));
 	
 	// Signs
-	//public static final Block SIGN_STALAGNATE = registerSign("sign_stalagnate", STALAGNATE_PLANKS);
+	public static final Block SIGN_STALAGNATE = registerSign("sign_stalagnate", STALAGNATE_PLANKS);
+	public static final Block SIGN_REED = registerSign("sign_reed", REEDS_BLOCK);
+	public static final Block SIGN_WILLOW = registerSign("sign_willow", WILLOW_PLANKS);
+	public static final Block SIGN_WART = registerSign("sign_wart", WART_PLANKS);
+	public static final Block SIGN_RUBEUS = registerSign("sign_rubeus", RUBEUS_PLANKS);
+	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
+	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
 	
 	//public static final WoodenMaterial TEST_MATERIAL = new WoodenMaterial("test_material", MaterialColor.BLACK);
 	
@@ -428,8 +444,7 @@ public class BlocksRegistry
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
-			ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
+			registerBlockDirectly(name, block);
 		}
 		BLOCKS.add(name);
 		return block;
@@ -672,7 +687,19 @@ public class BlocksRegistry
 		if (Config.getBoolean("blocks", name, true))
 		{
 			registerBlockDirectly(name, block);
-			RecipesHelper.makeSignRecipe(source, block, "nether_sign");
+			RecipesHelper.makeSignRecipe(source, block);
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerBarrel(String name, Block source, Block slab)
+	{
+		Block block = new BNBarrel(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeBarrelRecipe(source, slab, block);
 		}
 		BLOCKS.add(name);
 		return block;

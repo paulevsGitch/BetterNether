@@ -547,5 +547,23 @@
 	"block.betternether.chest_mushroom": "Грибной сундук",
 	"block.betternether.chest_mushroom_fir": "Сундук из грибной ели",
 	
-	"block.betternether.jungle_moss": "Мох джунглей"
+	"block.betternether.jungle_moss": "Мох джунглей",
+	
+	"block.betternether.feather_fern": "Перистый папоротник",
+	
+	"block.betternether.sign_stalagnate": "Сталагнатовая табличка",
+	"block.betternether.sign_reed": "Тростниковая табличка",
+	"block.betternether.sign_willow": "Ивовая табличка",
+	"block.betternether.sign_wart": "Табличка из нароста",
+	"block.betternether.sign_rubeus": "Рубейсовая табличка",
+	"block.betternether.sign_mushroom": "Грибная табличка",
+	"block.betternether.sign_mushroom_fir": "Табличка из грибной ели",
+	
+	"block.betternether.barrel_stalagnate": "Сталагнатовая бочка",
+	"block.betternether.barrel_reed": "Тростниковая бочка",
+	"block.betternether.barrel_willow": "Ивовая бочка",
+	"block.betternether.barrel_wart": "Бочка из нароста",
+	"block.betternether.barrel_rubeus": "Рубейсовая бочка",
+	"block.betternether.barrel_mushroom": "Грибная бочка",
+	"block.betternether.barrel_mushroom_fir": "бочка из грибной ели"
 }

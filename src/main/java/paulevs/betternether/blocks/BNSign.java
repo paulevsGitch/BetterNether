@@ -8,10 +8,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.DyeItem;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.SignEditorOpenS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -24,10 +26,13 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SignType;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import paulevs.betternether.BNSignEditScreen;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
 
 public class BNSign extends AbstractSignBlock
@@ -44,7 +49,7 @@ public class BNSign extends AbstractSignBlock
 	
 	public BNSign(Block source)
 	{
-		super(FabricBlockSettings.copyOf(source), SignType.OAK);
+		super(FabricBlockSettings.copyOf(source).noCollision().nonOpaque(), SignType.OAK);
 		this.setDefaultState(this.stateManager.getDefaultState().with(ROTATION, 0).with(FLOOR, true).with(WATERLOGGED, false));
 	}
 	
@@ -89,7 +94,6 @@ public class BNSign extends AbstractSignBlock
 						itemStack.decrement(1);
 					}
 				}
-
 				return signBlockEntity.onActivate(player) ? ActionResult.SUCCESS : ActionResult.PASS;
 			}
 			else
@@ -105,15 +109,60 @@ public class BNSign extends AbstractSignBlock
 		if (!world.isClient && placer != null && placer instanceof PlayerEntity)
 		{
 			BNSignBlockEntity sign = (BNSignBlockEntity) world.getBlockEntity(pos);
-			if (world.isClient)
+			sign.setEditable(true);
+			sign.setEditor((PlayerEntity) placer);
+			((ServerPlayerEntity) placer).networkHandler.sendPacket(new SignEditorOpenS2CPacket(pos));
+		}
+	}
+	
+	@Override
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
+	{
+		if ((Boolean) state.get(WATERLOGGED))
+		{
+			world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+		}
+	
+		return super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos);
+	}
+	
+	@Override
+	public BlockState getPlacementState(ItemPlacementContext ctx)
+	{
+		if (ctx.getSide() == Direction.UP)
+		{
+			FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
+			return this.getDefaultState()
+					.with(FLOOR, true)
+					.with(ROTATION, MathHelper.floor((180.0 + ctx.getPlayerYaw() * 16.0 / 360.0) + 0.5 - 12) & 15)
+					.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+		}
+		else if (ctx.getSide() != Direction.DOWN)
+		{
+			BlockState blockState = this.getDefaultState();
+			FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
+			WorldView worldView = ctx.getWorld();
+			BlockPos blockPos = ctx.getBlockPos();
+			Direction[] directions = ctx.getPlacementDirections();
+			Direction[] var7 = directions;
+			int var8 = directions.length;
+
+			for (int var9 = 0; var9 < var8; ++var9)
 			{
-				MinecraftClient.getInstance().openScreen(new BNSignEditScreen(sign));
-			}
-			else
-			{
-				sign.setEditor((PlayerEntity) placer);
-				((ServerPlayerEntity) placer).networkHandler.sendPacket(new SignEditorOpenS2CPacket(pos));
+				Direction direction = var7[var9];
+				if (direction.getAxis().isHorizontal())
+				{
+					Direction direction2 = direction.getOpposite();
+					int rot = MathHelper.floor((180.0 + direction2.asRotation() * 16.0 / 360.0) + 0.5 + 4) & 15;
+					blockState = blockState.with(ROTATION, rot);
+					if (blockState.canPlaceAt(worldView, blockPos))
+					{
+						return blockState.with(FLOOR, false).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+					}
+				}
 			}
 		}
+		
+		return null;
 	}
 }

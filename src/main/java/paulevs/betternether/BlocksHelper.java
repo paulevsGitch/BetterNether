@@ -7,7 +7,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
+import net.minecraft.fluid.LavaFluid;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.BlockMirror;
@@ -46,7 +46,7 @@ public class BlocksHelper
 	
 	public static boolean isLava(BlockState state)
 	{
-		return state.getMaterial() == Material.LAVA;
+		return state.getFluidState().getFluid() instanceof LavaFluid;
 	}
 	
 	public static boolean isNetherrack(BlockState state)

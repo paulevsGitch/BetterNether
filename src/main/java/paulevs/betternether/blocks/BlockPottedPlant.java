@@ -100,35 +100,43 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	
 	public static enum PottedPlantShape implements StringIdentifiable
 	{
-		AGAVE(BlocksRegistry.AGAVE),
-		BARREL_CACTUS(BlocksRegistry.BARREL_CACTUS),
-		BLACK_APPLE(BlocksRegistry.BLACK_APPLE_SEED),
-		BLACK_BUSH(BlocksRegistry.BLACK_BUSH),
-		EGG_PLANT(BlocksRegistry.EGG_PLANT),
-		INK_BUSH(BlocksRegistry.INK_BUSH_SEED),
-		REEDS(BlocksRegistry.NETHER_REED),
-		NETHER_CACTUS(BlocksRegistry.NETHER_CACTUS),
-		NETHER_GRASS(BlocksRegistry.NETHER_GRASS),
-		ORANGE_MUSHROOM(BlocksRegistry.ORANGE_MUSHROOM),
-		RED_MOLD(BlocksRegistry.RED_MOLD),
-		GRAY_MOLD(BlocksRegistry.GRAY_MOLD),
-		MAGMA_FLOWER(BlocksRegistry.MAGMA_FLOWER),
-		NETHER_WART(BlocksRegistry.WART_SEED),
-		WILLOW(BlocksRegistry.WILLOW_SAPLING),
-		SMOKER(BlocksRegistry.SMOKER),
-		WART(Blocks.NETHER_WART);
+		AGAVE("agave", BlocksRegistry.AGAVE),
+		BARREL_CACTUS("barrel_cactus", BlocksRegistry.BARREL_CACTUS),
+		BLACK_APPLE("black_apple", BlocksRegistry.BLACK_APPLE_SEED),
+		BLACK_BUSH("black_bush", BlocksRegistry.BLACK_BUSH),
+		EGG_PLANT("egg_plant", BlocksRegistry.EGG_PLANT),
+		INK_BUSH("ink_bush", BlocksRegistry.INK_BUSH_SEED),
+		REEDS("reeds", BlocksRegistry.NETHER_REED),
+		NETHER_CACTUS("nether_cactus", BlocksRegistry.NETHER_CACTUS),
+		NETHER_GRASS("nether_grass", BlocksRegistry.NETHER_GRASS),
+		ORANGE_MUSHROOM("orange_mushroom", BlocksRegistry.ORANGE_MUSHROOM),
+		RED_MOLD("red_mold", BlocksRegistry.RED_MOLD),
+		GRAY_MOLD("gray_mold", BlocksRegistry.GRAY_MOLD),
+		MAGMA_FLOWER("magma_flower", BlocksRegistry.MAGMA_FLOWER),
+		NETHER_WART("nether_wart", BlocksRegistry.WART_SEED),
+		WILLOW("willow", BlocksRegistry.WILLOW_SAPLING),
+		SMOKER("smoker", BlocksRegistry.SMOKER),
+		WART("wart", Blocks.NETHER_WART);
 		
 		private final Block block;
+		private final String name;
 
-		private PottedPlantShape(Block block)
+		private PottedPlantShape(String name, Block block)
 		{
+			this.name = name;
 			this.block = block;
 		}
 		
 		@Override
 		public String asString()
 		{
-			return this.toString().toLowerCase();
+			return name;
+		}
+		
+		@Override
+		public String toString()
+		{
+			return name;
 		}
 		
 		public Item getItem()

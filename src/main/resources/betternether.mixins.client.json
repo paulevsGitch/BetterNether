@@ -10,7 +10,8 @@
 	"PresetsScreenMixin",
 	"ModelLoaderMixin",
 	"MinecraftClientMixin",
-	"RenderPhaseMixin"
+	"RenderPhaseMixin",
+	"ClientPlayNetworkHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
