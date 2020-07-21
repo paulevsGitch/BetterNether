@@ -16,7 +16,7 @@ public class BNChest extends ChestBlock
 {
 	public BNChest(Block source)
 	{
-		super(FabricBlockSettings.copyOf(source), () -> {
+		super(FabricBlockSettings.copyOf(source).nonOpaque(), () -> {
 	         return BlockEntitiesRegistry.CHEST;
 	      });
 	}

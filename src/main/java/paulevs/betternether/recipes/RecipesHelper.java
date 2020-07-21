@@ -23,6 +23,7 @@ public class RecipesHelper
 	private static final String[] SHAPE_COLORING = new String[] {"###", "#I#", "###"};
 	private static final String[] SHAPE_ROUND = new String[] {"###", "# #", "###"};
 	private static final String[] SHAPE_SIGN = new String[] {"###", "###", " I "};
+	private static final String[] SHAPE_BARREL = new String[] {"#S#", "# #", "#S#"};
 	
 	private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count)
 	{
@@ -139,13 +140,23 @@ public class RecipesHelper
 		}
 	}
 	
-	public static void makeSignRecipe(Block source, Block result, String group)
+	public static void makeSignRecipe(Block source, Block result)
 	{
 		if (Registry.BLOCK.getId(source) != Registry.BLOCK.getDefaultId())
 		{
 			String name = Registry.BLOCK.getId(result).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source), "I", new ItemStack(Items.STICK));
-			BNRecipeManager.addCraftingRecipe(name, group, SHAPE_SIGN, materials, new ItemStack(result, 3));
+			BNRecipeManager.addCraftingRecipe(name, "nether_sign", SHAPE_SIGN, materials, new ItemStack(result, 3));
+		}
+	}
+	
+	public static void makeBarrelRecipe(Block source, Block slab, Block result)
+	{
+		if (Registry.BLOCK.getId(source) != Registry.BLOCK.getDefaultId())
+		{
+			String name = Registry.BLOCK.getId(result).getPath();
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source), "S", new ItemStack(slab));
+			BNRecipeManager.addCraftingRecipe(name, "nether_barrel", SHAPE_BARREL, materials, new ItemStack(result));
 		}
 	}
 }

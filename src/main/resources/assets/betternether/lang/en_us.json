@@ -559,5 +559,13 @@
 	"block.betternether.sign_wart": "Wart Sign",
 	"block.betternether.sign_rubeus": "Rubeus Sign",
 	"block.betternether.sign_mushroom": "Mushroom Sign",
-	"block.betternether.sign_mushroom_fir": "Mushroom Fir Sign"
+	"block.betternether.sign_mushroom_fir": "Mushroom Fir Sign",
+	
+	"block.betternether.barrel_stalagnate": "Stalagnate Barrel",
+	"block.betternether.barrel_reed": "Reeds Barrel",
+	"block.betternether.barrel_willow": "Willow Barrel",
+	"block.betternether.barrel_wart": "Wart Barrel",
+	"block.betternether.barrel_rubeus": "Rubeus Barrel",
+	"block.betternether.barrel_mushroom": "Mushroom Barrel",
+	"block.betternether.barrel_mushroom_fir": "Mushroom Fir Barrel"
 }
