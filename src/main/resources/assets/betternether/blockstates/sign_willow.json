@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "betternether:block/sign_willow" }
+    "": { "model": "betternether:block/empty_willow" }
   }
 }

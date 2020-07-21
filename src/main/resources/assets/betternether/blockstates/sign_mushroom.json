@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "betternether:block/sign_mushroom" }
+    "": { "model": "betternether:block/empty_mushroom" }
   }
 }

@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "betternether:block/sign_wart" }
+    "": { "model": "betternether:block/empty_wart" }
   }
 }
