@@ -360,6 +360,9 @@ public class BlocksRegistry
 	// Storage
 	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
 	
+	public static final Block CHEST_CRIMSON = registerChest("chest_crimson", Blocks.CRIMSON_PLANKS);
+	public static final Block CHEST_WARPED = registerChest("chest_warped", Blocks.WARPED_PLANKS);
+	
 	public static final Block CHEST_STALAGNATE = registerChest("chest_stalagnate", STALAGNATE_PLANKS);
 	public static final Block CHEST_REED = registerChest("chest_reed", REEDS_BLOCK);
 	public static final Block CHEST_WILLOW = registerChest("chest_willow", WILLOW_PLANKS);

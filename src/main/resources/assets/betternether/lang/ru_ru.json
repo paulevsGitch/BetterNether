@@ -28,7 +28,7 @@
 
 	"itemGroup.betternether.items": "Улучшенный Нижний Мир",
 
-	"message.spawn_help": "§c§lВы должны держать светокаменную пыль для установления точки возрождения",
+	"message.spawn_help": "§c§lВы должны держать§r %s §c§lдля установления точки возрождения",
 	"message.spawn_set": "§2§lВаша точка возрождения установлена здесь",
 
 	"block.betternether.agave": "Агава",
@@ -552,6 +552,9 @@
 	"block.betternether.chest_mushroom": "Грибной сундук",
 	"block.betternether.chest_mushroom_fir": "Сундук из грибной ели",
 	
+	"block.betternether.chest_crimson": "Багровый сундук",
+	"block.betternether.chest_warped": "Искажённый сундук",
+	
 	"block.betternether.jungle_moss": "Мох джунглей",
 	
 	"block.betternether.feather_fern": "Перистый папоротник",
@@ -573,7 +576,7 @@
 	"block.betternether.barrel_mushroom_fir": "бочка из грибной ели",
 	
 	"block.betternether.crimson_ladder": "Багровая лестница",
-	"block.betternether.warped_ladder": "Искажённая лестница"
+	"block.betternether.warped_ladder": "Искажённая лестница",
 	"block.betternether.mushroom_ladder": "Грибная лестница",
 	
 	"block.betternether.taburet_crimson": "Багровый табурет",
