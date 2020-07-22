@@ -371,6 +371,9 @@ public class BlocksRegistry
 	public static final Block CHEST_MUSHROOM = registerChest("chest_mushroom", MUSHROOM_PLANKS);
 	public static final Block CHEST_MUSHROOM_FIR = registerChest("chest_mushroom_fir", MUSHROOM_FIR_PLANKS);
 	
+	public static final Block BARREL_CRIMSON = registerBarrel("barrel_crimson", Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_SLAB);
+	public static final Block BARREL_WARPED = registerBarrel("barrel_warped", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB);
+	
 	public static final Block BARREL_STALAGNATE = registerBarrel("barrel_stalagnate", STALAGNATE_PLANKS, STALAGNATE_SLAB);
 	public static final Block BARREL_REED = registerBarrel("barrel_reed", REEDS_BLOCK, REEDS_SLAB);
 	public static final Block BARREL_WILLOW = registerBarrel("barrel_willow", WILLOW_PLANKS, WILLOW_SLAB);
