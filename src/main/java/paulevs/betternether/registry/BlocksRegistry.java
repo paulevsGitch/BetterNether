@@ -339,9 +339,9 @@ public class BlocksRegistry
 	public static final Block ROOF_TILE_WART_SLAB = registerSlab("roof_tile_wart_slab", ROOF_TILE_WART);
 	
 	// Craft Stations //
-	public static final Block BLACKSTONE_FURNACE = registerBlock("blackstone_furnace", new BlockNetherFurnace());
-	public static final Block BASALT_FURNACE = registerBlock("basalt_furnace", new BlockNetherFurnace());
-	public static final Block NETHERRACK_FURNACE = registerBlock("netherrack_furnace", new BlockNetherFurnace());
+	public static final Block BLACKSTONE_FURNACE = registerFurnace("blackstone_furnace", Blocks.BLACKSTONE);
+	public static final Block BASALT_FURNACE = registerFurnace("basalt_furnace", Blocks.BASALT);
+	public static final Block NETHERRACK_FURNACE = registerFurnace("netherrack_furnace", Blocks.NETHERRACK);
 	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new BlockCincinnasiteForge());
 	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
 	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil());
@@ -772,6 +772,18 @@ public class BlocksRegistry
 		{
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeBarStoolRecipe(source, block);
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerFurnace(String name, Block source)
+	{
+		Block block = new BlockNetherFurnace(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeRoundRecipe(source, block, "nether_furnace");
 		}
 		BLOCKS.add(name);
 		return block;
