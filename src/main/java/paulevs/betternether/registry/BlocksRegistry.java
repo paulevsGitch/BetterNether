@@ -178,8 +178,8 @@ public class BlocksRegistry
 	// Wart //
 	public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.RED));
 	public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MaterialColor.RED));
-	public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(Blocks.NETHER_WART_BLOCK, STRIPED_LOG_WART));
-	public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(Blocks.NETHER_WART_BLOCK, STRIPED_BARK_WART), WART_LOG);
+	public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(MaterialColor.RED, STRIPED_LOG_WART));
+	public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(MaterialColor.RED, STRIPED_BARK_WART), WART_LOG);
 	public static final Block WART_ROOTS = registerBlockNI("wart_roots", new BlockWartRoots());
 	public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MaterialColor.RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
 	public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);

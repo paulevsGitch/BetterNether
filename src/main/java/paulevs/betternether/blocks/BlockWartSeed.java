@@ -103,13 +103,13 @@ public class BlockWartSeed extends BlockBaseNotFull implements Fertilizable
 	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient)
 	{
 		Direction direction = (Direction) state.get(FACING);
-		return direction == Direction.UP && world.getBlockState(pos.down()).getBlock() == Blocks.SOUL_SAND;
+		return direction == Direction.UP && BlocksHelper.isSoulSand(world.getBlockState(pos.down()));
 	}
 
 	@Override
 	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
 	{
-		return random.nextInt(16) == 0;
+		return random.nextInt(8) == 0;
 	}
 
 	@Override

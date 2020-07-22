@@ -48,9 +48,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 	
 	public BlockStatueRespawner()
 	{
-		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK)
-				.nonOpaque()
-				.lightLevel(15));
+		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().lightLevel(15));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(TOP, false));
 		this.setDropItself(false);
