@@ -1,5 +1,6 @@
 package paulevs.betternether.entity;
 
+import java.util.List;
 import java.util.Random;
 
 import net.fabricmc.api.EnvType;
@@ -23,6 +24,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
@@ -250,6 +252,12 @@ public class EntitySkull extends HostileEntity implements Flutterer
 	
 	public static boolean canSpawn(EntityType<? extends EntitySkull> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
 	{
-		return world.getDifficulty() != Difficulty.PEACEFUL && world.getLightLevel(pos) < 8;
+		if (world.getDifficulty() == Difficulty.PEACEFUL || world.getLightLevel(pos) > 7)
+			return false;
+		
+		Box box = new Box(pos);
+		box.expand(256, 256, 256);
+		List<EntitySkull> list = world.getEntities(EntitySkull.class, box, (entity) -> { return true; });
+		return list.size() < 4;
 	}
 }

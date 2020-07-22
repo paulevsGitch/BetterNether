@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "betternether:block/basalt_furnace_top",
+        "front": "betternether:block/basalt_furnace_front_on",
+        "side": "betternether:block/basalt_furnace_side"
+    }
+}

@@ -339,10 +339,15 @@ public class BlocksRegistry
 	public static final Block ROOF_TILE_WART_SLAB = registerSlab("roof_tile_wart_slab", ROOF_TILE_WART);
 	
 	// Craft Stations //
-	public static final Block NETHERRACK_FURNACE = registerBlock("netherrack_furnace", new BlockNetherrackFurnace());
+	public static final Block BLACKSTONE_FURNACE = registerBlock("blackstone_furnace", new BlockNetherFurnace());
+	public static final Block BASALT_FURNACE = registerBlock("basalt_furnace", new BlockNetherFurnace());
+	public static final Block NETHERRACK_FURNACE = registerBlock("netherrack_furnace", new BlockNetherFurnace());
 	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new BlockCincinnasiteForge());
 	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
 	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil());
+	
+	public static final Block CRAFTING_TABLE_CRIMSON = registerCraftingTable("crafting_table_crimson", Blocks.CRIMSON_PLANKS);
+	public static final Block CRAFTING_TABLE_WARPED = registerCraftingTable("crafting_table_warped", Blocks.WARPED_PLANKS);
 	
 	public static final Block CRAFTING_TABLE_STALAGNATE = registerCraftingTable("crafting_table_stalagnate", STALAGNATE_PLANKS);
 	public static final Block CRAFTING_TABLE_REED = registerCraftingTable("crafting_table_reed", REEDS_BLOCK);
@@ -372,60 +377,73 @@ public class BlocksRegistry
 	public static final Block BARREL_MUSHROOM_FIR = registerBarrel("barrel_mushroom_fir", MUSHROOM_FIR_PLANKS, MUSHROOM_FIR_SLAB);
 	
 	// Taburets //
-	public static final Block TABURET_OAK = registerBlock("taburet_oak", new BNTaburet(Blocks.OAK_PLANKS));
-	public static final Block TABURET_SPRUCE = registerBlock("taburet_spruce", new BNTaburet(Blocks.SPRUCE_PLANKS));
-	public static final Block TABURET_BIRCH = registerBlock("taburet_birch", new BNTaburet(Blocks.BIRCH_PLANKS));
-	public static final Block TABURET_JUNGLE = registerBlock("taburet_jungle", new BNTaburet(Blocks.JUNGLE_PLANKS));
-	public static final Block TABURET_ACACIA = registerBlock("taburet_acacia", new BNTaburet(Blocks.ACACIA_PLANKS));
-	public static final Block TABURET_DARK_OAK = registerBlock("taburet_dark_oak", new BNTaburet(Blocks.DARK_OAK_PLANKS));
+	public static final Block TABURET_OAK = registerTaburet("taburet_oak", Blocks.OAK_SLAB);
+	public static final Block TABURET_SPRUCE = registerTaburet("taburet_spruce", Blocks.SPRUCE_SLAB);
+	public static final Block TABURET_BIRCH = registerTaburet("taburet_birch", Blocks.BIRCH_SLAB);
+	public static final Block TABURET_JUNGLE = registerTaburet("taburet_jungle", Blocks.JUNGLE_SLAB);
+	public static final Block TABURET_ACACIA = registerTaburet("taburet_acacia", Blocks.ACACIA_SLAB);
+	public static final Block TABURET_DARK_OAK = registerTaburet("taburet_dark_oak", Blocks.DARK_OAK_SLAB);
+	public static final Block TABURET_CRIMSON = registerTaburet("taburet_crimson", Blocks.CRIMSON_SLAB);
+	public static final Block TABURET_WARPED = registerTaburet("taburet_warped", Blocks.WARPED_SLAB);
 	
-	public static final Block TABURET_REEDS = registerBlock("taburet_reeds", new BNTaburet(REEDS_BLOCK));
-	public static final Block TABURET_STALAGNATE = registerBlock("taburet_stalagnate", new BNTaburet(STALAGNATE_PLANKS));
-	public static final Block TABURET_WILLOW = registerBlock("taburet_willow", new BNTaburet(WILLOW_PLANKS));
-	public static final Block TABURET_WART = registerBlock("taburet_wart", new BNTaburet(WART_PLANKS));
-	public static final Block TABURET_CINCINNASITE = registerBlock("taburet_cincinnasite", new BNTaburet(CINCINNASITE_FORGED));
-	public static final Block TABURET_MUSHROOM_FIR = registerBlock("taburet_mushroom_fir", new BNTaburet(MUSHROOM_FIR_PLANKS));
-	public static final Block TABURET_RUBEUS = registerBlock("taburet_rubeus", new BNTaburet(RUBEUS_PLANKS));
+	public static final Block TABURET_REEDS = registerTaburet("taburet_reeds", REEDS_SLAB);
+	public static final Block TABURET_STALAGNATE = registerTaburet("taburet_stalagnate", STALAGNATE_SLAB);
+	public static final Block TABURET_WILLOW = registerTaburet("taburet_willow", WILLOW_SLAB);
+	public static final Block TABURET_WART = registerTaburet("taburet_wart", WART_SLAB);
+	public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
+	public static final Block TABURET_MUSHROOM = registerTaburet("taburet_mushroom", MUSHROOM_SLAB);
+	public static final Block TABURET_MUSHROOM_FIR = registerTaburet("taburet_mushroom_fir", MUSHROOM_FIR_SLAB);
+	public static final Block TABURET_RUBEUS = registerTaburet("taburet_rubeus", RUBEUS_SLAB);
 	
 	// Chairs
-	public static final Block CHAIR_OAK = registerBlock("chair_oak", new BNNormalChair(Blocks.OAK_PLANKS));
-	public static final Block CHAIR_SPRUCE = registerBlock("chair_spruce", new BNNormalChair(Blocks.SPRUCE_PLANKS));
-	public static final Block CHAIR_BIRCH = registerBlock("chair_birch", new BNNormalChair(Blocks.BIRCH_PLANKS));
-	public static final Block CHAIR_JUNGLE = registerBlock("chair_jungle", new BNNormalChair(Blocks.JUNGLE_PLANKS));
-	public static final Block CHAIR_ACACIA = registerBlock("chair_acacia", new BNNormalChair(Blocks.ACACIA_PLANKS));
-	public static final Block CHAIR_DARK_OAK = registerBlock("chair_dark_oak", new BNNormalChair(Blocks.DARK_OAK_PLANKS));
+	public static final Block CHAIR_OAK = registerChair("chair_oak", Blocks.OAK_SLAB);
+	public static final Block CHAIR_SPRUCE = registerChair("chair_spruce", Blocks.SPRUCE_SLAB);
+	public static final Block CHAIR_BIRCH = registerChair("chair_birch", Blocks.BIRCH_SLAB);
+	public static final Block CHAIR_JUNGLE = registerChair("chair_jungle", Blocks.JUNGLE_SLAB);
+	public static final Block CHAIR_ACACIA = registerChair("chair_acacia", Blocks.ACACIA_SLAB);
+	public static final Block CHAIR_DARK_OAK = registerChair("chair_dark_oak", Blocks.DARK_OAK_SLAB);
+	public static final Block CHAIR_CRIMSON = registerChair("chair_crimson", Blocks.CRIMSON_SLAB);
+	public static final Block CHAIR_WARPED = registerChair("chair_warped", Blocks.WARPED_SLAB);
 	
-	public static final Block CHAIR_REEDS = registerBlock("chair_reeds", new BNNormalChair(REEDS_BLOCK));
-	public static final Block CHAIR_STALAGNATE = registerBlock("chair_stalagnate", new BNNormalChair(STALAGNATE_PLANKS));
-	public static final Block CHAIR_WILLOW = registerBlock("chair_willow", new BNNormalChair(WILLOW_PLANKS));
-	public static final Block CHAIR_WART = registerBlock("chair_wart", new BNNormalChair(WART_PLANKS));
-	public static final Block CHAIR_CINCINNASITE = registerBlock("chair_cincinnasite", new BNNormalChair(CINCINNASITE_FORGED));
-	public static final Block CHAIR_MUSHROOM_FIR = registerBlock("chair_mushroom_fir", new BNNormalChair(MUSHROOM_FIR_PLANKS));
-	public static final Block CHAIR_RUBEUS = registerBlock("chair_rubeus", new BNNormalChair(RUBEUS_PLANKS));
+	public static final Block CHAIR_REEDS = registerChair("chair_reeds", REEDS_SLAB);
+	public static final Block CHAIR_STALAGNATE = registerChair("chair_stalagnate", STALAGNATE_SLAB);
+	public static final Block CHAIR_WILLOW = registerChair("chair_willow", WILLOW_SLAB);
+	public static final Block CHAIR_WART = registerChair("chair_wart", WART_SLAB);
+	public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
+	public static final Block CHAIR_MUSHROOM = registerChair("chair_mushroom", MUSHROOM_SLAB);
+	public static final Block CHAIR_MUSHROOM_FIR = registerChair("chair_mushroom_fir", MUSHROOM_FIR_SLAB);
+	public static final Block CHAIR_RUBEUS = registerChair("chair_rubeus", RUBEUS_SLAB);
 	
 	// Stools //
-	public static final Block BAR_STOOL_OAK = registerBlock("bar_stool_oak", new BNBarStool(Blocks.OAK_PLANKS));
-	public static final Block BAR_STOOL_SPRUCE = registerBlock("bar_stool_spruce", new BNBarStool(Blocks.SPRUCE_PLANKS));
-	public static final Block BAR_STOOL_BIRCH = registerBlock("bar_stool_birch", new BNBarStool(Blocks.BIRCH_PLANKS));
-	public static final Block BAR_STOOL_JUNGLE = registerBlock("bar_stool_jungle", new BNBarStool(Blocks.JUNGLE_PLANKS));
-	public static final Block BAR_STOOL_ACACIA = registerBlock("bar_stool_acacia", new BNBarStool(Blocks.ACACIA_PLANKS));
-	public static final Block BAR_STOOL_DARK_OAK = registerBlock("bar_stool_dark_oak", new BNBarStool(Blocks.DARK_OAK_PLANKS));
+	public static final Block BAR_STOOL_OAK = registerBarStool("bar_stool_oak", Blocks.OAK_SLAB);
+	public static final Block BAR_STOOL_SPRUCE = registerBarStool("bar_stool_spruce", Blocks.SPRUCE_SLAB);
+	public static final Block BAR_STOOL_BIRCH = registerBarStool("bar_stool_birch", Blocks.BIRCH_SLAB);
+	public static final Block BAR_STOOL_JUNGLE = registerBarStool("bar_stool_jungle", Blocks.JUNGLE_SLAB);
+	public static final Block BAR_STOOL_ACACIA = registerBarStool("bar_stool_acacia", Blocks.ACACIA_SLAB);
+	public static final Block BAR_STOOL_DARK_OAK = registerBarStool("bar_stool_dark_oak", Blocks.DARK_OAK_SLAB);
+	public static final Block BAR_STOOL_CRIMSON = registerBarStool("bar_stool_crimson", Blocks.CRIMSON_SLAB);
+	public static final Block BAR_STOOL_WARPED = registerBarStool("bar_stool_warped", Blocks.WARPED_SLAB);
 	
-	public static final Block BAR_STOOL_REEDS = registerBlock("bar_stool_reeds", new BNBarStool(REEDS_BLOCK));
-	public static final Block BAR_STOOL_STALAGNATE = registerBlock("bar_stool_stalagnate", new BNBarStool(STALAGNATE_PLANKS));
-	public static final Block BAR_STOOL_WILLOW = registerBlock("bar_stool_willow", new BNBarStool(WILLOW_PLANKS));
-	public static final Block BAR_STOOL_WART = registerBlock("bar_stool_wart", new BNBarStool(WART_PLANKS));
-	public static final Block BAR_STOOL_CINCINNASITE = registerBlock("bar_stool_cincinnasite", new BNBarStool(CINCINNASITE_FORGED));
-	public static final Block BAR_STOOL_MUSHROOM_FIR = registerBlock("bar_stool_mushroom_fir", new BNBarStool(MUSHROOM_FIR_PLANKS));
-	public static final Block BAR_STOOL_RUBEUS = registerBlock("bar_stool_rubeus", new BNBarStool(RUBEUS_PLANKS));
+	public static final Block BAR_STOOL_REEDS = registerBarStool("bar_stool_reeds", REEDS_SLAB);
+	public static final Block BAR_STOOL_STALAGNATE = registerBarStool("bar_stool_stalagnate", STALAGNATE_SLAB);
+	public static final Block BAR_STOOL_WILLOW = registerBarStool("bar_stool_willow", WILLOW_SLAB);
+	public static final Block BAR_STOOL_WART = registerBarStool("bar_stool_wart", WART_SLAB);
+	public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
+	public static final Block BAR_STOOL_MUSHROOM = registerBarStool("bar_stool_mushroom", MUSHROOM_SLAB);
+	public static final Block BAR_STOOL_MUSHROOM_FIR = registerBarStool("bar_stool_mushroom_fir", MUSHROOM_FIR_SLAB);
+	public static final Block BAR_STOOL_RUBEUS = registerBarStool("bar_stool_rubeus", RUBEUS_SLAB);
 	
 	// Ladders //
-	public static final Block REEDS_LADDER = registerBlock("reeds_ladder", new BNLadder(REEDS_BLOCK));
-	public static final Block STALAGNATE_LADDER = registerBlock("stalagnate_ladder", new BNLadder(STALAGNATE_PLANKS));
-	public static final Block WILLOW_LADDER = registerBlock("willow_ladder", new BNLadder(WILLOW_PLANKS));
-	public static final Block WART_LADDER = registerBlock("wart_ladder", new BNLadder(WART_PLANKS));
-	public static final Block MUSHROOM_FIR_LADDER = registerBlock("mushroom_fir_ladder", new BNLadder(MUSHROOM_FIR_PLANKS));
-	public static final Block RUBEUS_LADDER = registerBlock("rubeus_ladder", new BNLadder(RUBEUS_PLANKS));
+	public static final Block CRIMSON_LADDER = registerLadder("crimson_ladder", Blocks.CRIMSON_PLANKS);
+	public static final Block WARPED_LADDER = registerLadder("warped_ladder", Blocks.WARPED_PLANKS);
+	
+	public static final Block REEDS_LADDER = registerLadder("reeds_ladder", REEDS_BLOCK);
+	public static final Block STALAGNATE_LADDER = registerLadder("stalagnate_ladder", STALAGNATE_PLANKS);
+	public static final Block WILLOW_LADDER = registerLadder("willow_ladder", WILLOW_PLANKS);
+	public static final Block WART_LADDER = registerLadder("wart_ladder", WART_PLANKS);
+	public static final Block MUSHROOM_LADDER = registerLadder("mushroom_ladder", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_FIR_LADDER = registerLadder("mushroom_fir_ladder", MUSHROOM_FIR_PLANKS);
+	public static final Block RUBEUS_LADDER = registerLadder("rubeus_ladder", RUBEUS_PLANKS);
 	
 	// Signs
 	public static final Block SIGN_STALAGNATE = registerSign("sign_stalagnate", STALAGNATE_PLANKS);
@@ -700,6 +718,54 @@ public class BlocksRegistry
 		{
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeBarrelRecipe(source, slab, block);
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerLadder(String name, Block source)
+	{
+		Block block = new BNLadder(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeLadderRecipe(source, block);
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerTaburet(String name, Block source)
+	{
+		Block block = new BNTaburet(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeTaburetRecipe(source, block);
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerChair(String name, Block source)
+	{
+		Block block = new BNNormalChair(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeChairRecipe(source, block);
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerBarStool(String name, Block source)
+	{
+		Block block = new BNBarStool(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeBarStoolRecipe(source, block);
 		}
 		BLOCKS.add(name);
 		return block;

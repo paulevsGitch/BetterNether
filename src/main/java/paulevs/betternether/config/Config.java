@@ -226,6 +226,26 @@ public class Config
 		}
 	}
 	
+	public static String getString(String groups, String name, String def)
+	{
+		load();
+		name += "[def: " + def + "]";
+		
+		JsonObject group = getGroup(groups);
+		JsonElement element = group.get(name);
+		
+		if (element != null)
+		{
+			return element.getAsString();
+		}
+		else
+		{
+			group.addProperty(name, def);
+			rewrite = true;
+			return def;
+		}
+	}
+	
 	public static void setInt(String groups, String name, int def, int value)
 	{
 		name += "[def: " + def + "]";

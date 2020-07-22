@@ -1,5 +1,6 @@
 package paulevs.betternether.blocks;
 
+import java.util.List;
 import java.util.Random;
 import java.util.function.ToIntFunction;
 
@@ -8,8 +9,11 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
@@ -20,33 +24,32 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import paulevs.betternether.blockentities.BlockEntityForge;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.blockentities.BlockEntityFurnace;
 
-public class BlockCincinnasiteForge extends AbstractFurnaceBlock
+public class BlockNetherFurnace extends AbstractFurnaceBlock
 {
-	public BlockCincinnasiteForge()
+	public BlockNetherFurnace()
 	{
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).requiresTool().lightLevel(getLuminance()));
+		super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS).requiresTool().lightLevel(getLuminance()));
 	}
-
+	
 	private static ToIntFunction<BlockState> getLuminance()
 	{
 		return (blockState) -> {
 			return (Boolean)blockState.get(Properties.LIT) ? 13 : 0;
 		};
 	}
-
+	
 	public BlockEntity createBlockEntity(BlockView view)
 	{
-		return new BlockEntityForge();
+		return new BlockEntityFurnace();
 	}
 
 	@Override
 	protected void openScreen(World world, BlockPos pos, PlayerEntity player)
 	{
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof BlockEntityForge)
+		if (blockEntity instanceof BlockEntityFurnace)
 		{
 			player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
 			player.incrementStat(Stats.INTERACT_WITH_FURNACE);
@@ -75,5 +78,13 @@ public class BlockCincinnasiteForge extends AbstractFurnaceBlock
 			world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
 			world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0D, 0.0D, 0.0D);
 		}
+	}
+	
+	@Override
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
+	{
+		List<ItemStack> drop = super.getDroppedStacks(state, builder);
+		drop.add(new ItemStack(this.asItem()));
+		return drop;
 	}
 }

@@ -13,6 +13,7 @@ public class BlockCincinnasite extends BlockBase
 				.materialColor(MaterialColor.YELLOW)
 				.hardness(3F)
 				.resistance(10F)
+				.requiresTool()
 				.sounds(BlockSoundGroup.METAL));
 	}
 }
