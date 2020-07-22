@@ -10,8 +10,8 @@
 			{ "model": "betternether:block/basalt_bricks_slab_2", "x": 180, "uvlock": true }
 		],
         "type=double": [
-			{ "model": "betternether:block/basalt_bricks_slab_1" },
-			{ "model": "betternether:block/basalt_bricks_slab_2" }
+			{ "model": "betternether:block/basalt_bricks_1" },
+			{ "model": "betternether:block/basalt_bricks_2" }
 		]
     }
 }
