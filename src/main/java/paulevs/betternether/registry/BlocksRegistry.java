@@ -274,6 +274,8 @@ public class BlocksRegistry
 	public static final Block BLACK_VINE = registerBlock("black_vine", new BlockBlackVine());
 	public static final Block BLOOMING_VINE = registerBlock("blooming_vine", new BlockBlackVine());
 	public static final Block GOLDEN_VINE = registerBlock("golden_vine", new BlockGoldenVine());
+	public static final Block LUMABUS_SEED = registerBlock("lumabus_seed", new BlockLumabusSeed());
+	public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine());
 	
 	// Small Plants
 	public static final Block SOUL_VEIN = registerBlock("soul_vein", new BlockSoulVein());

@@ -19,15 +19,14 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.structures.plants.StructureEye;
+import paulevs.betternether.structures.plants.StructureLumabus;
 
-public class BlockEyeSeed extends BlockBaseNotFull implements Fertilizable
+public class BlockLumabusSeed extends BlockBaseNotFull implements Fertilizable
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 6, 4, 12, 16, 12);
-	private static final StructureEye STRUCTURE = new StructureEye();
+	private static final StructureLumabus STRUCTURE = new StructureLumabus();
 	
-	public BlockEyeSeed()
+	public BlockLumabusSeed()
 	{
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.RED)
@@ -62,11 +61,12 @@ public class BlockEyeSeed extends BlockBaseNotFull implements Fertilizable
 	{
 		STRUCTURE.generate(world, pos, random);
 	}
-
+	
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return BlocksHelper.isNetherrack(world.getBlockState(pos.up()));
+		BlockState upState = world.getBlockState(pos.up());
+		return upState.isSideSolidFullSquare(world, pos, Direction.DOWN);
 	}
 
 	@Override

@@ -1,0 +1,28 @@
+{
+	"textures": {
+		"particle": "betternether:block/lumabus_vine",
+		"texture": "betternether:block/lumabus_vine"
+	},
+	"elements": [ 	 
+		{
+			"from": [ 2.5, 0, 2.5 ],
+			"to": [ 2.501, 16, 18.5 ],
+			"rotation": { "origin": [ 2.5, 0, 2.5 ], "axis": "y", "angle": 45 },
+			"shade": false,
+			"faces": {
+				"west": { "uv": [ 16, 0, 0, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 16, 0, 0, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"from": [ 13.5, 0, 2.5 ],
+			"to": [ 13.501, 16, 18.5 ],
+			"rotation": { "origin": [ 13.5, 0, 2.5 ], "axis": "y", "angle": -45 },
+			"shade": false,
+			"faces": {
+				"west": { "uv": [ 16, 0, 0, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 16, 0, 0, 16 ], "texture": "#texture" }
+			}
+		}
+	]
+}
