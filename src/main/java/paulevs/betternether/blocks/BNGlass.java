@@ -17,7 +17,9 @@ public class BNGlass extends BlockBaseNotFull
 		super(FabricBlockSettings.copyOf(block)
 				.resistance(0.3F)
 				.nonOpaque()
-				.breakByTool(FabricToolTags.PICKAXES));
+				.breakByTool(FabricToolTags.PICKAXES)
+				.suffocates((arg1, arg2, arg3) -> {return false;})
+				.blockVision((arg1, arg2, arg3) -> {return false;}));
 		this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
 	}
 
