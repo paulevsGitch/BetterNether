@@ -592,5 +592,13 @@
 	
 	"block.betternether.bar_stool_crimson": "Багровый барный стул",
 	"block.betternether.bar_stool_warped": "Искажённый барный стул",
-	"block.betternether.bar_stool_mushroom": "Грибной барный стул"
+	"block.betternether.bar_stool_mushroom": "Грибной барный стул",
+	
+	"block.betternether.mushroom_grass": "Грибная трава",
+	"block.betternether.bone_grass": "Костяная трава",
+	"block.betternether.lumabus_seed": "Семя люмабуса",
+	"block.betternether.lumabus_vine": "Лоза люмабуса",
+	"item.betternether.glowstone_pile": "Щепотка глоустоуна",
+	"block.betternether.jellyfish_mushroom": "Медузовый гриб",
+	"block.betternether.jellyfish_mushroom_sapling": "Саженец медузового гриба"
 }

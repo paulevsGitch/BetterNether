@@ -594,5 +594,13 @@
 	
 	"block.betternether.bar_stool_crimson": "Crimson Bar Stool",
 	"block.betternether.bar_stool_warped": "Warped Bar Stool",
-	"block.betternether.bar_stool_mushroom": "Mushroom Bar Stool"
+	"block.betternether.bar_stool_mushroom": "Mushroom Bar Stool",
+	
+	"block.betternether.mushroom_grass": "Mushroom Grass",
+	"block.betternether.bone_grass": "Bone Grass",
+	"block.betternether.lumabus_seed": "Lumabus Seed",
+	"block.betternether.lumabus_vine": "Lumabus Vine",
+	"item.betternether.glowstone_pile": "Glowstone Pile",
+	"block.betternether.jellyfish_mushroom": "Jellyfish Mushroom",
+	"block.betternether.jellyfish_mushroom_sapling": "Jellyfish Mushroom Sapling"
 }

@@ -3,6 +3,7 @@ package paulevs.betternether;
 import net.fabricmc.api.ModInitializer;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.recipes.IntegrationRecipes;
+import paulevs.betternether.recipes.ItemRecipes;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -38,6 +39,7 @@ public class BetterNether implements ModInitializer
 		
 		IntegrationRecipes.register();
 		NetherTags.register();
+		ItemRecipes.register();
 	}
 	
 	private void initOptions()

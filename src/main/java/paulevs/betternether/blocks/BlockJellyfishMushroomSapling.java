@@ -20,17 +20,18 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.structures.plants.StructureWillow;
+import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 
-public class BlockWillowSapling extends BlockBaseNotFull implements Fertilizable
+public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements Fertilizable
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 14, 12);
-	private static final StructureWillow STRUCTURE = new StructureWillow();
+	private static final StructureJellyfishMushroom STRUCTURE = new StructureJellyfishMushroom();
 	
-	public BlockWillowSapling()
+	public BlockJellyfishMushroomSapling()
 	{
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.RED)
+				.materialColor(MaterialColor.CYAN)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.breakInstantly()
@@ -48,7 +49,7 @@ public class BlockWillowSapling extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return BlocksHelper.isNetherGround(world.getBlockState(pos.down()));
+		return world.getBlockState(pos.down()).getBlock() == BlocksRegistry.MUSHROOM_GRASS;
 	}
 	
 	@Override

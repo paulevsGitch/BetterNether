@@ -23,9 +23,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.VanillaHammersIntegration;
 import paulevs.betternether.blocks.shapes.FoodShape;
 import paulevs.betternether.config.Config;
+import paulevs.betternether.integrations.VanillaExcavatorsIntegration;
+import paulevs.betternether.integrations.VanillaHammersIntegration;
 import paulevs.betternether.items.BNArmor;
 import paulevs.betternether.items.BNItemAxe;
 import paulevs.betternether.items.BNItemHoe;
@@ -87,12 +88,18 @@ public class ItemsRegistry
 	public static final Item CINCINNASITE_HAMMER_DIAMOND = registerItem("cincinnasite_hammer_diamond", VanillaHammersIntegration.makeHammer(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 5, -2.0F));
 	public static final Item NETHER_RUBY_HAMMER = registerItem("nether_ruby_hammer", VanillaHammersIntegration.makeHammer(BNItemMaterials.NETHER_RUBY_TOOLS, 5, -2.0F));
 	
+	public static final Item CINCINNASITE_EXCAVATOR = registerItem("cincinnasite_excavator", VanillaExcavatorsIntegration.makeExcavator(BNItemMaterials.CINCINNASITE_TOOLS, 4, -2.0F));
+	public static final Item CINCINNASITE_EXCAVATOR_DIAMOND = registerItem("cincinnasite_excavator_diamond", VanillaExcavatorsIntegration.makeExcavator(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 5, -2.0F));
+	public static final Item NETHER_RUBY_EXCAVATOR = registerItem("nether_ruby_excavator", VanillaExcavatorsIntegration.makeExcavator(BNItemMaterials.NETHER_RUBY_TOOLS, 5, -2.0F));
+	
 	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg("firefly", EntityRegistry.FIREFLY, color(255, 223, 168), color(233, 182, 95)));
 	public static final Item SPAWN_EGG_JELLYFISH = registerItem("spawn_egg_hydrogen_jellyfish", makeEgg("hydrogen_jellyfish", EntityRegistry.HYDROGEN_JELLYFISH, color(253, 164, 24), color(88, 21, 4)));
 	public static final Item SPAWN_NAGA = registerItem("spawn_egg_naga", makeEgg("naga", EntityRegistry.NAGA, MHelper.color(12, 12, 12), MHelper.color(210, 90, 26)));
 	public static final Item SPAWN_FLYING_PIG = registerItem("spawn_egg_flying_pig", makeEgg("flying_pig", EntityRegistry.FLYING_PIG, MHelper.color(241, 140, 93), MHelper.color(176, 58, 47)));
 	public static final Item SPAWN_JUNGLE_SKELETON = registerItem("spawn_egg_jungle_skeleton", makeEgg("jungle_skeleton", EntityRegistry.JUNGLE_SKELETON, MHelper.color(134, 162, 149), MHelper.color(6, 111, 79)));
 	public static final Item SPAWN_SKULL = registerItem("spawn_egg_skull", makeEgg("skull", EntityRegistry.SKULL, MHelper.color(24, 19, 19), MHelper.color(255, 28, 18)));
+	
+	public static final Item GLOWSTONE_PILE = registerItem("glowstone_pile", new Item(defaultSettings()));
 	
 	public static void register() {}
 	

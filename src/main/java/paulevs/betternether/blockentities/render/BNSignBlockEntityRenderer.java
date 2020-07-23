@@ -35,6 +35,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEntity>
 {
 	private static final HashMap<Integer, RenderLayer> LAYERS = Maps.newHashMap();
+	private static RenderLayer defaultLayer;
 	private final SignModel model = new SignBlockEntityRenderer.SignModel();
 
 	public BNSignBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher)
@@ -115,13 +116,18 @@ public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEn
 			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));
 			if (block instanceof BNSign)
 			{
-				LAYERS.put(Block.getRawIdFromState(block.getDefaultState()), RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/signs/" + name + ".png")));
+				RenderLayer layer = RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/signs/" + name + ".png"));
+				LAYERS.put(Block.getRawIdFromState(block.getDefaultState()), layer);
+				if (defaultLayer == null)
+				{
+					defaultLayer = layer;
+				}
 			}
 		});
 	}
 	
 	public static VertexConsumer getConsumer(VertexConsumerProvider provider, Block block)
 	{
-		return provider.getBuffer(LAYERS.get(Block.getRawIdFromState(block.getDefaultState())));
+		return provider.getBuffer(LAYERS.getOrDefault(Block.getRawIdFromState(block.getDefaultState()), defaultLayer));
 	}
 }

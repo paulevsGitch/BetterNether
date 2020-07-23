@@ -1,0 +1,7 @@
+{
+	"parent": "betternether:block/potted_reeds",
+	"textures": {
+		"particle": "betternether:block/jungle_plant_1",
+		"texture": "betternether:block/jungle_plant_1"
+	}
+}

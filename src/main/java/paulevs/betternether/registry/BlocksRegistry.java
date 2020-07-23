@@ -241,6 +241,7 @@ public class BlocksRegistry
 	public static final Block GIANT_MOLD_SAPLING = registerBlock("giant_mold_sapling", new BlockGiantMoldSapling());
 	
 	public static final Block JELLYFISH_MUSHROOM = registerBlockNI("jellyfish_mushroom", new BlockJellyfishMushroom());
+	public static final Block JELLYFISH_MUSHROOM_SAPLING = registerBlock("jellyfish_mushroom_sapling", new BlockJellyfishMushroomSapling());
 	
 	// Mushroom Fir //
 	public static final Block MUSHROOM_FIR = registerBlockNI("mushroom_fir",  new BlockMushroomFir());

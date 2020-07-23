@@ -49,7 +49,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull
 				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
-		this.setDefaultState(getStateManager().getDefaultState().with(AGE, 0).with(FACING, Direction.NORTH));
+		this.setDefaultState(getStateManager().getDefaultState().with(AGE, 0).with(FACING, Direction.UP));
 	}
 
 	@Override

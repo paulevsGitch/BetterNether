@@ -106,12 +106,16 @@ public class BNSign extends AbstractSignBlock
 	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack)
 	{
-		if (!world.isClient && placer != null && placer instanceof PlayerEntity)
+		if (placer != null && placer instanceof PlayerEntity)
 		{
 			BNSignBlockEntity sign = (BNSignBlockEntity) world.getBlockEntity(pos);
-			sign.setEditable(true);
-			sign.setEditor((PlayerEntity) placer);
-			((ServerPlayerEntity) placer).networkHandler.sendPacket(new SignEditorOpenS2CPacket(pos));
+			if (!world.isClient)
+			{
+				sign.setEditor((PlayerEntity) placer);
+				((ServerPlayerEntity) placer).networkHandler.sendPacket(new SignEditorOpenS2CPacket(pos));
+			}
+			else
+				sign.setEditable(true);
 		}
 	}
 	

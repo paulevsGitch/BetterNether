@@ -1,4 +1,4 @@
-package paulevs.betternether;
+package paulevs.betternether.integrations;
 
 import java.lang.reflect.Constructor;
 
