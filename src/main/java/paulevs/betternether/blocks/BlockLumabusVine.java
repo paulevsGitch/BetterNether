@@ -105,4 +105,11 @@ public class BlockLumabusVine extends BlockBaseNotFull
 		}
 		return Lists.newArrayList();
 	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
+	{
+		return new ItemStack(BlocksRegistry.LUMABUS_SEED);
+	}
 }

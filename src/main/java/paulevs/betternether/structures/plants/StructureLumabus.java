@@ -18,11 +18,10 @@ public class StructureLumabus implements IStructure
 	{
 		int h = random.nextInt(19) + 5;
 		int h2 = BlocksHelper.downRay(world, pos, h);
+		h2 -= 2;
 		
-		if (h2 < 5)
+		if (h2 < 3)
 			return;
-		
-		h2 -= 1;
 		
 		BlockState vineState = BlocksRegistry.LUMABUS_VINE.getDefaultState().with(BlockLumabusVine.SHAPE, TripleShape.MIDDLE);
 		

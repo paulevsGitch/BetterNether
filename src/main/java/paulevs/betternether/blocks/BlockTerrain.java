@@ -3,9 +3,9 @@ package paulevs.betternether.blocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Blocks;
 
-public class BlockNetherrackMoss extends BlockBase
+public class BlockTerrain extends BlockBase
 {
-	public BlockNetherrackMoss()
+	public BlockTerrain()
 	{
 		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK));
 	}

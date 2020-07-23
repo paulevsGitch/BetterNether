@@ -240,6 +240,8 @@ public class BlocksRegistry
 	public static final Block GIANT_MOLD = registerBlockNI("giant_mold", new BlockGiantMold());
 	public static final Block GIANT_MOLD_SAPLING = registerBlock("giant_mold_sapling", new BlockGiantMoldSapling());
 	
+	public static final Block JELLYFISH_MUSHROOM = registerBlockNI("jellyfish_mushroom", new BlockJellyfishMushroom());
+	
 	// Mushroom Fir //
 	public static final Block MUSHROOM_FIR = registerBlockNI("mushroom_fir",  new BlockMushroomFir());
 	public static final Block MUSHROOM_FIR_SAPLING = registerBlock("mushroom_fir_sapling",  new BlockMushroomFirSapling());
@@ -269,6 +271,7 @@ public class BlocksRegistry
 	public static final Block SWAMP_GRASS = registerBlock("swamp_grass", new BlockNetherGrass());
 	public static final Block SOUL_GRASS = registerBlock("soul_grass", new BlockSoulGrass());
 	public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", new BlockNetherGrass());
+	public static final Block BONE_GRASS = registerBlock("bone_grass", new BlockNetherGrass());
 	
 	// Vines //
 	public static final Block BLACK_VINE = registerBlock("black_vine", new BlockBlackVine());
@@ -314,9 +317,10 @@ public class BlocksRegistry
 	public static final Block BASALT_STALACTITE = registerBlock("basalt_stalactite", new BlockStalactite(Blocks.BASALT));
 	
 	// Terrain //
-	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockNetherrackMoss());
+	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
 	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium());
-	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockNetherrackMoss());
+	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockTerrain());
+	public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass", new BlockTerrain());
 	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand());
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
 	

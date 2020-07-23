@@ -449,6 +449,9 @@ public class BNWorldGenerator
 	
 	private static void fixBlocks(WorldAccess world, int x1, int y1, int z1, int x2, int y2, int z2)
 	{
+		//List<BlockPos> lavafalls = Lists.newArrayList();
+		//List<BlockPos> update = Lists.newArrayList();
+		
 		for (int y = y1; y <= y2; y++)
 		{
 			popPos.setY(y);
@@ -460,6 +463,40 @@ public class BNWorldGenerator
 					popPos.setZ(z);
 					
 					BlockState state = world.getBlockState(popPos);
+					
+					/*if (y > 32 && BlocksHelper.isLava(state) && !BlocksHelper.isLava(world.getBlockState(popPos.down())))
+					{
+						
+						if (world.isAir(popPos.down()))
+						{
+							Mutable p = new Mutable().set(popPos.down());
+							while(likeAir(world, p))
+							{
+								lavafalls.add(p.toImmutable());
+								p.move(Direction.DOWN);
+							}
+							update.add(p.up());
+						}
+						else
+						{
+							for(Direction dir: BlocksHelper.HORIZONTAL)
+							{
+								BlockPos start = popPos.offset(dir);
+								if (likeAir(world, start))
+								{
+									Mutable p = new Mutable().set(start);
+									while(likeAir(world, p))
+									{
+										lavafalls.add(p.toImmutable());
+										p.move(Direction.DOWN);
+									}
+									update.add(p.up());
+								}
+							}
+						}
+						
+						continue;
+					}*/
 					
 					if (!state.canPlaceAt(world, popPos))
 					{
@@ -499,10 +536,81 @@ public class BNWorldGenerator
 				}
 			}
 		}
+		
+		/*for (BlockPos pos: lavafalls)
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState().with(FluidBlock.LEVEL, 8));
+		
+		for (BlockPos pos: update)
+			world.getChunk(pos).markBlockForPostProcessing(popPos.set(pos.getX() & 15, pos.getY(), pos.getZ() & 15));*/
 	}
 	
 	public static HashSet<Biome> getPopulateBiomes()
 	{
 		return MC_BIOMES;
 	}
+	
+	/*private static List<BlockPos> blockStream(WorldAccess world, BlockPos pos)
+	{
+		List<BlockPos> path = new ArrayList<BlockPos>();
+		
+		Mutable mutable = new Mutable().set(pos);
+		Mutable center = new Mutable();
+		path.add(mutable.toImmutable());
+		
+		int d = 0;
+		
+		for (int i = 0; i < 256; i++)
+		{
+			if (d >= 3 || Math.abs(pos.getX() - mutable.getX()) > 8 || Math.abs(pos.getZ() - mutable.getZ()) > 8)
+			{
+				for (int x = -3; x <= 3; x++)
+				{
+					int x2 = x * x;
+					for (int z = -3; z <= 3; z++)
+					{
+						int z2 = z * z;
+						for (int y = -3; y <= 0; y++)
+						{
+							int y2 = y * y;
+							if (x2 + z2 + y2 < 9)
+							{
+								path.add(center.add(x, y, z));
+							}
+						}
+					}
+				}
+				break;
+			}
+			
+			if (mutable.getY() < 33)
+				break;
+			
+			if (likeAir(world, mutable.down()))
+			{
+				mutable.move(Direction.DOWN);
+				path.add(mutable.toImmutable());
+				center.set(mutable);
+				d = 0;
+				continue;
+			}
+			for(Direction dir: BlocksHelper.HORIZONTAL)
+			{
+				if (likeAir(world, mutable.offset(dir)))
+				{
+					mutable.offset(dir);
+					path.add(mutable.toImmutable());
+					d ++;
+					break;
+				}
+			}
+		}
+		
+		return path;
+	}
+	
+	private static boolean likeAir(WorldAccess world, BlockPos pos)
+	{
+		BlockState state = world.getBlockState(pos);
+		return state.isAir() || !state.isFullCube(world, pos);
+	}*/
 }
