@@ -10,6 +10,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.FoodComponents;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.item.ItemStack;
@@ -46,10 +47,10 @@ public class ItemsRegistry
 	
 	public static final Item BLACK_APPLE = registerItem("black_apple", new ItemBlackApple());
 	
-	public static final Item STALAGNATE_BOWL = registerItem("stalagnate_bowl", new ItemBowlFood(0, FoodShape.NONE));
-	public static final Item STALAGNATE_BOWL_WART = registerItem("stalagnate_bowl_wart", new ItemBowlFood(4, FoodShape.WART));
-	public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem("stalagnate_bowl_mushroom", new ItemBowlFood(6, FoodShape.MUSHROOM));
-	public static final Item STALAGNATE_BOWL_APPLE = registerItem("stalagnate_bowl_apple", new ItemBowlFood(7, FoodShape.APPLE));
+	public static final Item STALAGNATE_BOWL = registerItem("stalagnate_bowl", new ItemBowlFood(null, FoodShape.NONE));
+	public static final Item STALAGNATE_BOWL_WART = registerItem("stalagnate_bowl_wart", new ItemBowlFood(FoodComponents.COOKED_CHICKEN, FoodShape.WART));
+	public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem("stalagnate_bowl_mushroom", new ItemBowlFood(FoodComponents.MUSHROOM_STEW, FoodShape.MUSHROOM));
+	public static final Item STALAGNATE_BOWL_APPLE = registerItem("stalagnate_bowl_apple", new ItemBowlFood(FoodComponents.APPLE, FoodShape.APPLE));
 	
 	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
 	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()));
