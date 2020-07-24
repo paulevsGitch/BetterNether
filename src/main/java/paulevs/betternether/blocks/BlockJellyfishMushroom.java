@@ -1,5 +1,10 @@
 package paulevs.betternether.blocks;
 
+import java.util.List;
+import java.util.Random;
+
+import com.google.common.collect.Lists;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -10,6 +15,8 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -20,19 +27,22 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.ItemsRegistry;
 
 public class BlockJellyfishMushroom extends BlockBaseNotFull
 {
 	private static final VoxelShape TOP_SHAPE = Block.createCuboidShape(1, 0, 1, 15, 16, 15);
 	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 15.99, 11);
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
+	private static final Random RANDOM = new Random();
 	
 	public BlockJellyfishMushroom()
 	{
-		super(Materials.makeWood(MaterialColor.CYAN).sounds(BlockSoundGroup.FUNGUS).nonOpaque().lightLevel(13));
+		super(Materials.makeWood(MaterialColor.CYAN).hardness(0.1F).sounds(BlockSoundGroup.FUNGUS).nonOpaque().lightLevel(13));
 		this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
 	}
 	
@@ -73,8 +83,9 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull
 		switch (state.get(SHAPE))
 		{
 		case BOTTOM:
-		case MIDDLE:
 			return world.getBlockState(pos.down()).isSideSolidFullSquare(world, pos.down(), Direction.UP) ? state : Blocks.AIR.getDefaultState();
+		case MIDDLE:
+			return world.getBlockState(pos.up()).getBlock() == this && world.getBlockState(pos.down()).isSideSolidFullSquare(world, pos.down(), Direction.UP) ? state : Blocks.AIR.getDefaultState();
 		case TOP:
 		default:
 			return world.getBlockState(pos.down()).getBlock() == this ? state : Blocks.AIR.getDefaultState();
@@ -127,5 +138,20 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull
 			entity.setVelocity(entity.getVelocity().multiply(e, 1.0D, e));
 		}
 		super.onSteppedOn(world, pos, entity);
+	}
+	
+	@Override
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
+	{
+		if (state.get(SHAPE) == TripleShape.TOP)
+		{
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, RANDOM)),
+									  new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(0, 2, RANDOM)),
+									  new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, RANDOM)));
+		}
+		else if (state.get(SHAPE) == TripleShape.TOP)
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING));
+		else
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM));
 	}
 }

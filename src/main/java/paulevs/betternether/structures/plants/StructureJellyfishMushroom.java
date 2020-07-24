@@ -35,7 +35,7 @@ public class StructureJellyfishMushroom implements IStructure
 						under = world.getBlockState(npos.down()).getBlock();
 						if (under == BlocksRegistry.MUSHROOM_GRASS && world.isAir(npos))
 						{
-							growTree(world, npos, random);
+							grow(world, npos, random);
 						}
 					}
 					else
@@ -45,7 +45,7 @@ public class StructureJellyfishMushroom implements IStructure
 		}
 	}
 
-	private void growTree(WorldAccess world, BlockPos pos, Random random)
+	public void grow(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (random.nextBoolean() && world.isAir(pos.up()))
 			growMedium(world, pos);

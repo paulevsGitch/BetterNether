@@ -122,7 +122,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements Fertilizable
 		Direction direction = (Direction) state.get(FACING);
 		BlockPos blockPos = pos.offset(direction.getOpposite());
 		BlockState blockState = world.getBlockState(blockPos);
-		return BlocksHelper.isNetherrack(blockState);
+		return BlocksHelper.isNetherrack(blockState) || BlocksHelper.isNylium(blockState);
 	}
 
 	@Override

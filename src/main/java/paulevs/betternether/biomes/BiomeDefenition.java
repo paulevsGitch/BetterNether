@@ -9,6 +9,7 @@ import net.minecraft.sound.BiomeAdditionsSound;
 import net.minecraft.sound.BiomeMoodSound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.MixedNoisePoint;
 import net.minecraft.world.biome.Biome.Settings;
@@ -17,6 +18,7 @@ import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.config.Config;
 
 public class BiomeDefenition
 {
@@ -58,6 +60,10 @@ public class BiomeDefenition
 	 */
 	public BiomeDefenition setFogColor(int r, int g, int b)
 	{
+		String path = "generator.biome.betternether." + name + ".fog_color";
+		r = MathHelper.clamp(Config.getInt(path, "red", r), 0, 255);
+		g = MathHelper.clamp(Config.getInt(path, "green", g), 0, 255);
+		b = MathHelper.clamp(Config.getInt(path, "blue", b), 0, 255);
 		this.fogColor = MHelper.color(r, g, b);
 		return this;
 	}

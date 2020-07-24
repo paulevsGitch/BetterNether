@@ -16,7 +16,6 @@ import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -30,6 +29,7 @@ import net.minecraft.world.WorldView;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.ItemsRegistry;
 
 public class BlockLumabusVine extends BlockBaseNotFull
 {
@@ -93,7 +93,7 @@ public class BlockLumabusVine extends BlockBaseNotFull
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
 	{
-		return canPlaceAt(state, world, pos) ? state : Blocks.AIR.getDefaultState();
+		return canPlaceAt(state, world, pos) && (world.getBlockState(pos.down()).getBlock() == this || state.get(SHAPE) == TripleShape.BOTTOM) ? state : Blocks.AIR.getDefaultState();
 	}
 	
 	@Override
@@ -101,7 +101,7 @@ public class BlockLumabusVine extends BlockBaseNotFull
 	{
 		if (state.get(SHAPE) == TripleShape.BOTTOM)
 		{
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.LUMABUS_SEED, MHelper.randRange(1, 3, RANDOM)), new ItemStack(Items.GLOWSTONE_DUST));
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.LUMABUS_SEED, MHelper.randRange(1, 3, RANDOM)), new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(1, 3, RANDOM)));
 		}
 		return Lists.newArrayList();
 	}

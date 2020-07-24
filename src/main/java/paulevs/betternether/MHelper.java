@@ -6,6 +6,7 @@ public class MHelper
 {
 	public static final float PI2 = (float) (Math.PI * 2);
 	private static final int ALPHA = 255 << 24;
+	public static final Random RANDOM = new Random();
 	
 	public static int color(int r, int g, int b)
 	{
