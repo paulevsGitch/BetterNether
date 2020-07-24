@@ -316,6 +316,7 @@ public class BlocksRegistry
 	public static final Block GLOWSTONE_STALACTITE = registerBlock("glowstone_stalactite", new BlockStalactite(Blocks.GLOWSTONE));
 	public static final Block BLACKSTONE_STALACTITE = registerBlock("blackstone_stalactite", new BlockStalactite(Blocks.BLACKSTONE));
 	public static final Block BASALT_STALACTITE = registerBlock("basalt_stalactite", new BlockStalactite(Blocks.BASALT));
+	public static final Block BONE_STALACTITE = registerBlock("bone_stalactite", new BlockStalactite(Blocks.BONE_BLOCK));
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
