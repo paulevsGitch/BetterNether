@@ -107,6 +107,11 @@ public class NetherBiome extends Biome
 	
 	public NetherBiome(BiomeDefenition defenition)
 	{
+		this(defenition, true);
+	}
+	
+	public NetherBiome(BiomeDefenition defenition, boolean hasStalactites)
+	{
 		super(defenition.buildBiomeSettings());
 
 		this.addStructureFeature(DefaultBiomeFeatures.NETHER_RUINED_PORTAL);
@@ -150,11 +155,14 @@ public class NetherBiome extends Biome
 		for (String s: DEF_STRUCTURES)
 			structures.add(s);
 		
-		addStructure("netherrack_stalactite", STALACTITE_NETHERRACK, StructureType.FLOOR, 0.05F, true);
-		addStructure("glowstone_stalactite", STALACTITE_GLOWSTONE, StructureType.FLOOR, 0.01F, true);
-		
-		addStructure("netherrack_stalagmite", STALAGMITE_NETHERRACK, StructureType.CEIL, 0.01F, true);
-		addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
+		if (hasStalactites)
+		{
+			addStructure("netherrack_stalactite", STALACTITE_NETHERRACK, StructureType.FLOOR, 0.05F, true);
+			addStructure("glowstone_stalactite", STALACTITE_GLOWSTONE, StructureType.FLOOR, 0.01F, true);
+			
+			addStructure("netherrack_stalagmite", STALAGMITE_NETHERRACK, StructureType.CEIL, 0.01F, true);
+			addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
+		}
 	}
 	
 	public void setPlantDensity(float density)

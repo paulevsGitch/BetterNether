@@ -25,7 +25,7 @@ import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 
 public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements Fertilizable
 {
-	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 14, 12);
+	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 6, 12);
 	private static final StructureJellyfishMushroom STRUCTURE = new StructureJellyfishMushroom();
 	
 	public BlockJellyfishMushroomSapling()

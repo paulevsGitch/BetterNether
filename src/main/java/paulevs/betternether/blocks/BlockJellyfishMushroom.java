@@ -36,7 +36,7 @@ import paulevs.betternether.registry.ItemsRegistry;
 public class BlockJellyfishMushroom extends BlockBaseNotFull
 {
 	private static final VoxelShape TOP_SHAPE = Block.createCuboidShape(1, 0, 1, 15, 16, 15);
-	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 15.99, 11);
+	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 16, 11);
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
 	private static final Random RANDOM = new Random();
 	

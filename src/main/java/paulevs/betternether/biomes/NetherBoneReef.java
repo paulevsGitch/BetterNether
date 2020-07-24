@@ -23,12 +23,11 @@ public class NetherBoneReef extends NetherBiome
 	public NetherBoneReef(String name)
 	{
 		super(new BiomeDefenition(name)
-				//.setFogColor(77, 186, 52)
 				.setFogColor(47, 221, 202)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.WARPED_SPORE, 0.01F)));
+				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.WARPED_SPORE, 0.01F)), false);
 		
 		addStructure("bone_stalactite", new StructureStalactiteFloor(BlocksRegistry.BONE_STALACTITE, BlocksRegistry.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 		

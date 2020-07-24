@@ -617,7 +617,13 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	
 	public static boolean canSpawn(EntityType<? extends EntityFirefly> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
 	{
-		return BlocksHelper.downRay(world, pos, 10) < 8;
+		int h = BlocksHelper.downRay(world, pos, 10);
+		if (h > 8)
+			return false;
+		for (int i = 1; i <= h; i++)
+			if (BlocksHelper.isLava(world.getBlockState(pos.down(i))))
+				return false;
+		return true;
 	}
 	
 	@Override
