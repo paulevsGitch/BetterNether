@@ -604,5 +604,8 @@
 	"block.betternether.bone_stalactite": "Костяной сталактит",
 	"block.betternether.cincinnasite_chain": "Цинцинназитовая цепь",
 	"block.betternether.nether_lapis_ore": "Лазуритовая руда нижнего мира",
-	"item.betternether.lapis_pile": "Щепотка лазурита"
+	"item.betternether.lapis_pile": "Щепотка лазурита",
+	"item.betternether.cincinnasite_excavator": "Цинцинназитовый экскаватор",
+	"item.betternether.cincinnasite_excavator_diamond": "Цинцинназитово-алмазный экскаватор",
+	"item.betternether.nether_ruby_excavator": "Рубиновый экскаватор"
 }

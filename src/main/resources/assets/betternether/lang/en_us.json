@@ -606,5 +606,8 @@
 	"block.betternether.bone_stalactite": "Bone Stalactite",
 	"block.betternether.cincinnasite_chain": "Cincinnasite Chain",
 	"block.betternether.nether_lapis_ore": "Nether Lapis Ore",
-	"item.betternether.lapis_pile": "Lapis Pile"
+	"item.betternether.lapis_pile": "Lapis Pile",
+	"item.betternether.cincinnasite_excavator": "Cincinnasite Excavator",
+	"item.betternether.cincinnasite_excavator_diamond": "Cincinnasite-Diamond Excavator",
+	"item.betternether.nether_ruby_excavator": "Ruby Excavator"
 }
