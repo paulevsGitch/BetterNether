@@ -76,6 +76,7 @@ public class BlocksRegistry
 	public static final Block CINCINNASITE_PEDESTAL = registerBlock("cincinnasite_pedestal", new BlockCincinnasitePedestal());
 	public static final Block CINCINNASITE_FRAME = registerBlock("cincinnasite_frame", new BlockCincinnasiteFrame());
 	public static final Block CINCINNASITE_LANTERN_SMALL = registerBlock("cincinnasite_lantern_small", new BlockSmallLantern());
+	public static final Block CINCINNASITE_CHAIN = registerBlock("cincinnasite_chain", new BNChain());
 	
 	// Ruby //
 	public static final Block NETHER_RUBY_ORE = registerBlock("nether_ruby_ore", new BlockOre());
@@ -316,7 +317,7 @@ public class BlocksRegistry
 	public static final Block GLOWSTONE_STALACTITE = registerBlock("glowstone_stalactite", new BlockStalactite(Blocks.GLOWSTONE));
 	public static final Block BLACKSTONE_STALACTITE = registerBlock("blackstone_stalactite", new BlockStalactite(Blocks.BLACKSTONE));
 	public static final Block BASALT_STALACTITE = registerBlock("basalt_stalactite", new BlockStalactite(Blocks.BASALT));
-	public static final Block BONE_STALACTITE = registerBlock("bone_stalactite", new BlockStalactite(Blocks.BONE_BLOCK));
+	public static final Block BONE_STALACTITE = registerBlock("bone_stalactite", new BlockStalactite(BONE_BLOCK));
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());

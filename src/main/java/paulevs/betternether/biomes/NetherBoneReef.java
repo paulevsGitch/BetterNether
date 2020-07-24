@@ -11,6 +11,8 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.bones.StructureBoneReef;
+import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
+import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureBoneGrass;
 import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.structures.plants.StructureLumabus;
@@ -28,10 +30,14 @@ public class NetherBoneReef extends NetherBiome
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.WARPED_SPORE, 0.01F)));
 		
+		addStructure("bone_stalactite", new StructureStalactiteFloor(BlocksRegistry.BONE_STALACTITE, BlocksRegistry.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
+		
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("bone_reef", new StructureBoneReef(), StructureType.FLOOR, 0.2F, true);
 		addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructureType.FLOOR, 0.02F, true);
 		addStructure("bone_grass", new StructureBoneGrass(), StructureType.FLOOR, 0.1F, false);
+		
+		addStructure("bone_stalagmite", new StructureStalactiteCeil(BlocksRegistry.BONE_STALACTITE, BlocksRegistry.BONE_BLOCK), StructureType.CEIL, 0.05F, true);
 		
 		addStructure("lumabus_vine", new StructureLumabus(), StructureType.CEIL, 0.3F, true);
 	}
