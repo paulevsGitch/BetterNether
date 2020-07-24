@@ -604,5 +604,7 @@
 	"block.betternether.jellyfish_mushroom": "Jellyfish Mushroom",
 	"block.betternether.jellyfish_mushroom_sapling": "Jellyfish Mushroom Sapling",
 	"block.betternether.bone_stalactite": "Bone Stalactite",
-	"block.betternether.cincinnasite_chain": "Cincinnasite Chain"
+	"block.betternether.cincinnasite_chain": "Cincinnasite Chain",
+	"block.betternether.nether_lapis_ore": "Nether Lapis Ore",
+	"item.betternether.lapis_pile": "Lapis Pile"
 }

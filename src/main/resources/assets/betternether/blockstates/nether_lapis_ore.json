@@ -1,0 +1,23 @@
+{
+    "variants":
+	{
+        "": [
+        	{ "model": "betternether:block/nether_lapis_ore" },
+        	{ "model": "betternether:block/nether_lapis_ore", "y": 90 },
+        	{ "model": "betternether:block/nether_lapis_ore", "y": 180 },
+        	{ "model": "betternether:block/nether_lapis_ore", "y": 270 },
+			{ "model": "betternether:block/nether_lapis_ore", "x": 90 },
+        	{ "model": "betternether:block/nether_lapis_ore", "x": 90, "y": 90 },
+        	{ "model": "betternether:block/nether_lapis_ore", "x": 90, "y": 180 },
+        	{ "model": "betternether:block/nether_lapis_ore", "x": 90, "y": 270 },
+			{ "model": "betternether:block/nether_lapis_ore", "x": 180 },
+        	{ "model": "betternether:block/nether_lapis_ore", "x": 180, "y": 90 },
+        	{ "model": "betternether:block/nether_lapis_ore", "x": 180, "y": 180 },
+        	{ "model": "betternether:block/nether_lapis_ore", "x": 180, "y": 270 },
+			{ "model": "betternether:block/nether_lapis_ore", "x": 270 },
+        	{ "model": "betternether:block/nether_lapis_ore", "x": 270, "y": 90 },
+        	{ "model": "betternether:block/nether_lapis_ore", "x": 270, "y": 180 },
+        	{ "model": "betternether:block/nether_lapis_ore", "x": 270, "y": 270 }
+        ]
+    }
+}

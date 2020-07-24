@@ -43,6 +43,7 @@ public class BNWorldGenerator
 
 	private static float cincinnasiteDensity;
 	private static float rubyDensity;
+	private static float lapisDensity;
 	private static float structureDensity;
 	private static float lavaStructureDensity;
 	private static float globalDensity;
@@ -83,6 +84,7 @@ public class BNWorldGenerator
 		
 		cincinnasiteDensity = Config.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 1024F);
 		rubyDensity = Config.getFloat("generator.world.ores", "ruby_ore_density", 1F / 4000F);
+		lapisDensity = Config.getFloat("generator.world.ores", "lapis_ore_density", 1F / 4000F);
 		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 32F) * 1.0001F;
 		lavaStructureDensity = Config.getFloat("generator.world", "lava_structures_density", 1F / 128F) * 1.0001F;
 		globalDensity = Config.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
@@ -286,9 +288,11 @@ public class BNWorldGenerator
 							}
 						}
 						if (random.nextFloat() < cincinnasiteDensity)
-							spawnOre(BlocksRegistry.CINCINNASITE_ORE.getDefaultState(), world, popPos, random, 6, 16);
+							spawnOre(BlocksRegistry.CINCINNASITE_ORE.getDefaultState(), world, popPos, random, 6, 14);
 						if (random.nextFloat() < rubyDensity)
 							spawnOre(BlocksRegistry.NETHER_RUBY_ORE.getDefaultState(), world, popPos, random, 1, 5);
+						if (random.nextFloat() < lapisDensity)
+							spawnOre(BlocksRegistry.NETHER_LAPIS_ORE.getDefaultState(), world, popPos, random, 1, 6);
 					}
 				}
 			}

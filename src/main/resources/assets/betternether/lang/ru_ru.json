@@ -602,5 +602,7 @@
 	"block.betternether.jellyfish_mushroom": "Медузовый гриб",
 	"block.betternether.jellyfish_mushroom_sapling": "Саженец медузового гриба",
 	"block.betternether.bone_stalactite": "Костяной сталактит",
-	"block.betternether.cincinnasite_chain": "Цинцинназитовая цепь"
+	"block.betternether.cincinnasite_chain": "Цинцинназитовая цепь",
+	"block.betternether.nether_lapis_ore": "Лазуритовая руда нижнего мира",
+	"item.betternether.lapis_pile": "Щепотка лазурита"
 }

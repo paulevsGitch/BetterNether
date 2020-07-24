@@ -100,6 +100,7 @@ public class ItemsRegistry
 	public static final Item SPAWN_SKULL = registerItem("spawn_egg_skull", makeEgg("skull", EntityRegistry.SKULL, MHelper.color(24, 19, 19), MHelper.color(255, 28, 18)));
 	
 	public static final Item GLOWSTONE_PILE = registerItem("glowstone_pile", new Item(defaultSettings()));
+	public static final Item LAPIS_PILE = registerItem("lapis_pile", new Item(defaultSettings()));
 	
 	public static void register() {}
 	
