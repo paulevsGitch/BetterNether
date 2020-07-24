@@ -103,6 +103,8 @@ public class BoneMealMixin
 			return BlocksRegistry.JUNGLE_PLANT.getDefaultState();
 		else if (BlocksHelper.isSoulSand(state))
 			return BlocksRegistry.SOUL_GRASS.getDefaultState();
+		else if (state.getBlock() == BlocksRegistry.MUSHROOM_GRASS)
+			return BlocksRegistry.BONE_GRASS.getDefaultState();
 		else if (BlocksHelper.isNetherrack(state) && !BlocksHelper.isNylium(state))
 			return world.getBiome(pos) instanceof NetherSwampland ?
 					BlocksRegistry.SWAMP_GRASS.getDefaultState() :

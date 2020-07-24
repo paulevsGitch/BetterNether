@@ -1,0 +1,11 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/mushroom_grass" },
+			{ "model": "betternether:block/mushroom_grass", "y": 90 },
+			{ "model": "betternether:block/mushroom_grass", "y": 180 },
+			{ "model": "betternether:block/mushroom_grass", "y": 270 }
+		]
+    }
+}

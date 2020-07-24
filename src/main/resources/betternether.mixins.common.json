@@ -21,7 +21,8 @@
 	"RecipeManagerMixin",
 	"CraftingScreenHandlerMixin",
 	"PickaxeItemMixin",
-	"ServerPlayNetworkHandlerMixin"
+	"ServerPlayNetworkHandlerMixin",
+	"SheepEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#N#",
+	" # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:nether_brick"
+    },
+	"N": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "result": {
+    "item": "betternether:brick_pot"
+  }
+}

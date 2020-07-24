@@ -1,1 +1,1 @@
-{  "type": "minecraft:crafting_shaped",  "pattern": [    "WWW",    " # "  ],  "key": {    "#": {      "item": "betternether:stalagnate_bowl"    },	"W": {      "item": "minecraft:nether_wart"    }  },  "result": {    "item": "betternether:stalagnate_bowl_wart"  }}
+{  "type": "minecraft:crafting_shapeless",  "ingredients": [    { "item": "betternether:stalagnate_bowl" },	{ "item": "minecraft:nether_wart" },	{ "item": "minecraft:nether_wart" },	{ "item": "minecraft:nether_wart" }  ],  "result": {    "item": "betternether:stalagnate_bowl_wart"  }}

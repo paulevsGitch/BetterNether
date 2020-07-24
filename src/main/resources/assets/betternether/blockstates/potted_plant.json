@@ -59,6 +59,13 @@
 			{ "model": "betternether:block/potted_smoker", "y": 180 },
 			{ "model": "betternether:block/potted_smoker", "y": 270 }
 		],
-		"plant=wart": { "model": "betternether:block/potted_mc_wart" }
+		"plant=wart": { "model": "betternether:block/potted_mc_wart" },
+		
+		"plant=jungle_plant": { "model": "betternether:block/potted_jungle_plant" },
+		"plant=jellyfish_mushroom": { "model": "betternether:block/potted_jellyfish_mushroom" },
+		"plant=swamp_grass": { "model": "betternether:block/potted_swamp_grass" },
+		"plant=soul_grass": { "model": "betternether:block/potted_soul_grass" },
+		"plant=bone_grass": { "model": "betternether:block/potted_bone_grass" },
+		"plant=bone_mushroom": { "model": "betternether:block/potted_bone_mushroom" }
     }
 }

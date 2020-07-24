@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "top": "betternether:block/barrel_willow_top",
+    "top": "betternether:block/barrel_willow_top_open",
     "bottom": "betternether:block/barrel_willow_bottom",
     "side": "betternether:block/barrel_willow_side"
   }

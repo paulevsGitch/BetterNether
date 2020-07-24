@@ -30,7 +30,7 @@
 
 	"itemGroup.betternether.items": "Better Nether",
 
-	"message.spawn_help": "§c§lYou must hold Glowstone Dust to set your spawn point here",
+	"message.spawn_help": "§c§lYou must hold§r %s §c§lto set your spawn point here",
 	"message.spawn_set": "§2§lYour spawn point was set here",
 
 	"block.betternether.agave": "Agave",
@@ -108,6 +108,8 @@
 	"block.betternether.nether_mycelium": "Nether Mycelium",
 	"block.betternether.nether_reed": "Nether Reed",
 	"block.betternether.netherrack_furnace": "Netherrack Furnace",
+	"block.betternether.blackstone_furnace": "Blackstone Furnace",
+	"block.betternether.basalt_furnace": "Basalt Furnace",
 	"block.betternether.netherrack_moss": "Nether Moss",
 
 	"block.betternether.orange_mushroom": "Orange Mushroom",
@@ -533,6 +535,9 @@
 	"config.betternether.lavafalls": "§b*§rLavafall Particles",
 	"config.betternether.armour": "§b*§rThin Armor",
 	
+	"block.betternether.crafting_table_crimson": "Crimson Crafting Table",
+	"block.betternether.crafting_table_warped": "Warped Crafting Table",
+	
 	"block.betternether.crafting_table_stalagnate": "Stalagnate Crafting Table",
 	"block.betternether.crafting_table_reed": "Reeds Crafting Table",
 	"block.betternether.crafting_table_willow": "Willow Crafting Table",
@@ -548,6 +553,9 @@
 	"block.betternether.chest_rubeus": "Rubeus Chest",
 	"block.betternether.chest_mushroom": "Mushroom Chest",
 	"block.betternether.chest_mushroom_fir": "Mushroom Fir Chest",
+	
+	"block.betternether.chest_crimson": "Crimson Chest",
+	"block.betternether.chest_warped": "Warped Chest",
 	
 	"block.betternether.jungle_moss": "Jungle Moss",
 	
@@ -567,5 +575,39 @@
 	"block.betternether.barrel_wart": "Wart Barrel",
 	"block.betternether.barrel_rubeus": "Rubeus Barrel",
 	"block.betternether.barrel_mushroom": "Mushroom Barrel",
-	"block.betternether.barrel_mushroom_fir": "Mushroom Fir Barrel"
+	"block.betternether.barrel_mushroom_fir": "Mushroom Fir Barrel",
+	
+	"block.betternether.barrel_crimson": "Crimson Barrel",
+	"block.betternether.barrel_warped": "Warped Barrel",
+	
+	"block.betternether.crimson_ladder": "Crimson Ladder",
+	"block.betternether.warped_ladder": "Warped Ladder",
+	"block.betternether.mushroom_ladder": "Mushroom Ladder",
+	
+	"block.betternether.taburet_crimson": "Crimson Taburet",
+	"block.betternether.taburet_warped": "Warped Taburet",
+	"block.betternether.taburet_mushroom": "Mushroom Taburet",
+	
+	"block.betternether.chair_crimson": "Crimson Chair",
+	"block.betternether.chair_warped": "Warped Chair",
+	"block.betternether.chair_mushroom": "Mushroom Chair",
+	
+	"block.betternether.bar_stool_crimson": "Crimson Bar Stool",
+	"block.betternether.bar_stool_warped": "Warped Bar Stool",
+	"block.betternether.bar_stool_mushroom": "Mushroom Bar Stool",
+	
+	"block.betternether.mushroom_grass": "Mushroom Grass",
+	"block.betternether.bone_grass": "Bone Grass",
+	"block.betternether.lumabus_seed": "Lumabus Seed",
+	"block.betternether.lumabus_vine": "Lumabus Vine",
+	"item.betternether.glowstone_pile": "Glowstone Pile",
+	"block.betternether.jellyfish_mushroom": "Jellyfish Mushroom",
+	"block.betternether.jellyfish_mushroom_sapling": "Jellyfish Mushroom Sapling",
+	"block.betternether.bone_stalactite": "Bone Stalactite",
+	"block.betternether.cincinnasite_chain": "Cincinnasite Chain",
+	"block.betternether.nether_lapis_ore": "Nether Lapis Ore",
+	"item.betternether.lapis_pile": "Lapis Pile",
+	"item.betternether.cincinnasite_excavator": "Cincinnasite Excavator",
+	"item.betternether.cincinnasite_excavator_diamond": "Cincinnasite-Diamond Excavator",
+	"item.betternether.nether_ruby_excavator": "Ruby Excavator"
 }

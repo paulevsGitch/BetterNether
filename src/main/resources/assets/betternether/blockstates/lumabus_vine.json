@@ -1,0 +1,15 @@
+{
+	"variants": {
+        "shape=top":  { "model": "betternether:block/lumabus_roots" },
+		"shape=middle":  [
+			{ "model": "betternether:block/lumabus_vine" },
+			{ "model": "betternether:block/lumabus_vine_mirrored" }
+		],
+        "shape=bottom":  [
+			{ "model": "betternether:block/lumabus_bulb_1" },
+			{ "model": "betternether:block/lumabus_bulb_2" },
+			{ "model": "betternether:block/lumabus_bulb_3" },
+			{ "model": "betternether:block/lumabus_bulb_4" }
+		]
+    }
+}

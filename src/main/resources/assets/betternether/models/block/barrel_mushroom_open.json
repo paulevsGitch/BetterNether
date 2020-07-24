@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "top": "betternether:block/barrel_mushroom_top",
+    "top": "betternether:block/barrel_mushroom_top_open",
     "bottom": "betternether:block/barrel_mushroom_bottom",
     "side": "betternether:block/barrel_mushroom_side"
   }

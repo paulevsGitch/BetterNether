@@ -24,15 +24,9 @@ public class ItemBowlFood extends Item
 {
 	private FoodShape bowlFood;
 	
-	public ItemBowlFood(int hunger, FoodShape food)
+	public ItemBowlFood(FoodComponent component, FoodShape food)
 	{
-		super(new Item.Settings()
-				.group(CreativeTab.BN_TAB)
-				.food(hunger > 0 ? new FoodComponent
-						.Builder()
-						.hunger(hunger)
-						.saturationModifier(0.5F)
-						.build() : null));
+		super(new Item.Settings().group(CreativeTab.BN_TAB).food(component).maxCount(16));
 		food.setItem(this);
 		this.bowlFood = food;
 	}
@@ -41,7 +35,7 @@ public class ItemBowlFood extends Item
 	{
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos().offset(context.getSide());
-		if (world.isAir(pos) && BlocksRegistry.STALAGNATE_BOWL.canPlaceAt(world.getBlockState(pos), world, pos))
+		if (context.getPlayer().isSneaking() && world.isAir(pos) && BlocksRegistry.STALAGNATE_BOWL.canPlaceAt(world.getBlockState(pos), world, pos))
 		{
 			if (!world.isClient())
 			{
@@ -63,14 +57,17 @@ public class ItemBowlFood extends Item
 					true);
 			return ActionResult.CONSUME;
 		}
-		return ActionResult.PASS;
+		return super.useOnBlock(context);
 	}
 	
 	@Override
 	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user)
 	{
 		if (stack.getCount() == 1)
+		{
+			super.finishUsing(stack, world, user);
 			return new ItemStack(ItemsRegistry.STALAGNATE_BOWL, stack.getCount());
+		}
 		else
 		{
 			if (user instanceof PlayerEntity)

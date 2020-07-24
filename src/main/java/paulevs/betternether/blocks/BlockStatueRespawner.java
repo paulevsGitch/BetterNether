@@ -8,6 +8,7 @@ import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -23,15 +24,18 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockStatueRespawner extends BlockBaseNotFull
@@ -40,15 +44,21 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 	private static final DustParticleEffect EFFECT = new DustParticleEffect(1, 0, 0, 1.0F);
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	public static final BooleanProperty TOP = BooleanProperty.of("top");
+	private final ItemStack requiredItem;
 	
 	public BlockStatueRespawner()
 	{
-		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK)
-				.nonOpaque()
-				.lightLevel(15));
+		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().lightLevel(15));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(TOP, false));
 		this.setDropItself(false);
+		
+		String itemName = Config.getString("respawn_statue", "respawn_item", Registry.ITEM.getId(Items.GLOWSTONE).toString());
+		Item item = Registry.ITEM.get(new Identifier(itemName));
+		if (item == Items.AIR)
+			item = Items.GLOWSTONE;
+		int count = Config.getInt("respawn_statue", "item_count", 4);
+		requiredItem = new ItemStack(item, count);
 	}
 	
 	@Override
@@ -72,11 +82,14 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
 	{
-		if (player.getMainHandStack().getItem() == Items.GLOWSTONE_DUST)
+		ItemStack stack = player.getMainHandStack();
+		if (stack.getItem() == requiredItem.getItem() && stack.getCount() >= requiredItem.getCount())
 		{
 			float y = state.get(TOP) ? 0.4F : 1.4F;
 			if (!player.isCreative())
-				player.getMainHandStack().decrement(1);
+			{
+				player.getMainHandStack().decrement(requiredItem.getCount());
+			}
 			for (int i = 0; i < 50; i++)
 				world.addParticle(EFFECT,
 						pos.getX() + world.random.nextFloat(),
@@ -91,8 +104,10 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 			return ActionResult.SUCCESS;
 		}
 		else
-			player.sendMessage(new TranslatableText("message.spawn_help", new Object[0]), true);
-		return ActionResult.FAIL;
+		{
+			player.sendMessage(new TranslatableText("message.spawn_help", requiredItem), true);
+		}
+		return ActionResult.SUCCESS;
 	}
 	
 	@Override

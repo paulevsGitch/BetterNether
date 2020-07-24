@@ -33,7 +33,6 @@ public class BlockWillowSapling extends BlockBaseNotFull implements Fertilizable
 				.materialColor(MaterialColor.RED)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
-				.dropsNothing()
 				.breakInstantly()
 				.noCollision()
 				.ticksRandomly());

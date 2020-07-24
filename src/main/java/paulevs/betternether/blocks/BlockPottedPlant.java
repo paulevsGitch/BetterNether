@@ -48,7 +48,12 @@ public class BlockPottedPlant extends BlockBaseNotFull
 	private static ToIntFunction<BlockState> getLuminance()
 	{
 		return (blockState) -> {
-			return blockState.get(PLANT) == PottedPlantShape.WILLOW ? 12 : 0;
+			if (blockState.get(PLANT) == PottedPlantShape.WILLOW)
+				return 12;
+			else if (blockState.get(PLANT) == PottedPlantShape.JELLYFISH_MUSHROOM)
+				return 13;
+			else
+				return 0;
 		};
 	}
 	
@@ -116,7 +121,13 @@ public class BlockPottedPlant extends BlockBaseNotFull
 		NETHER_WART("nether_wart", BlocksRegistry.WART_SEED),
 		WILLOW("willow", BlocksRegistry.WILLOW_SAPLING),
 		SMOKER("smoker", BlocksRegistry.SMOKER),
-		WART("wart", Blocks.NETHER_WART);
+		WART("wart", Blocks.NETHER_WART),
+		JUNGLE_PLANT("jungle_plant", BlocksRegistry.JUNGLE_PLANT),
+		JELLYFISH_MUSHROOM("jellyfish_mushroom", BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING),
+		SWAMP_GRASS("swamp_grass", BlocksRegistry.SWAMP_GRASS),
+		SOUL_GRASS("soul_grass", BlocksRegistry.SOUL_GRASS),
+		BONE_GRASS("bone_grass", BlocksRegistry.BONE_GRASS),
+		BONE_MUSHROOM("bone_mushroom", BlocksRegistry.BONE_MUSHROOM);
 		
 		private final Block block;
 		private final String name;

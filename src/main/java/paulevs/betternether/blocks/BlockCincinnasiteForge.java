@@ -27,7 +27,7 @@ public class BlockCincinnasiteForge extends AbstractFurnaceBlock
 {
 	public BlockCincinnasiteForge()
 	{
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).lightLevel(getLuminance()));
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).requiresTool().lightLevel(getLuminance()));
 	}
 
 	private static ToIntFunction<BlockState> getLuminance()

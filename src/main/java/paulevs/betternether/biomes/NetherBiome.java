@@ -107,11 +107,16 @@ public class NetherBiome extends Biome
 	
 	public NetherBiome(BiomeDefenition defenition)
 	{
+		this(defenition, true);
+	}
+	
+	public NetherBiome(BiomeDefenition defenition, boolean hasStalactites)
+	{
 		super(defenition.buildBiomeSettings());
 
 		this.addStructureFeature(DefaultBiomeFeatures.NETHER_RUINED_PORTAL);
 		this.addStructureFeature(DefaultBiomeFeatures.FORTRESS);
-	      this.addStructureFeature(DefaultBiomeFeatures.BASTION_REMNANT);
+	    this.addStructureFeature(DefaultBiomeFeatures.BASTION_REMNANT);
 
 		this.addCarver(GenerationStep.Carver.AIR, configureCarver(Carver.NETHER_CAVE, new ProbabilityConfig(0.2F)));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.LAVA_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_VERY_BIASED_RANGE.configure(new RangeDecoratorConfig(20, 8, 16, 256))));
@@ -150,11 +155,14 @@ public class NetherBiome extends Biome
 		for (String s: DEF_STRUCTURES)
 			structures.add(s);
 		
-		addStructure("netherrack_stalactite", STALACTITE_NETHERRACK, StructureType.FLOOR, 0.05F, true);
-		addStructure("glowstone_stalactite", STALACTITE_GLOWSTONE, StructureType.FLOOR, 0.01F, true);
-		
-		addStructure("netherrack_stalagmite", STALAGMITE_NETHERRACK, StructureType.CEIL, 0.01F, true);
-		addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
+		if (hasStalactites)
+		{
+			addStructure("netherrack_stalactite", STALACTITE_NETHERRACK, StructureType.FLOOR, 0.05F, true);
+			addStructure("glowstone_stalactite", STALACTITE_GLOWSTONE, StructureType.FLOOR, 0.01F, true);
+			
+			addStructure("netherrack_stalagmite", STALAGMITE_NETHERRACK, StructureType.CEIL, 0.01F, true);
+			addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
+		}
 	}
 	
 	public void setPlantDensity(float density)

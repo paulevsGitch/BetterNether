@@ -1,0 +1,7 @@
+{
+	"parent": "betternether:block/lumabus_vine",
+	"textures": {
+		"particle": "betternether:block/lumabus_sapling",
+		"texture": "betternether:block/lumabus_sapling"
+	}
+}
