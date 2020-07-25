@@ -18,7 +18,7 @@ public class ItemRecipes
 		{
 			String[] shape = new String[] {"###", "###", "###"};
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(ItemsRegistry.GLOWSTONE_PILE));
-			BNRecipeManager.addCraftingRecipe("glowstone_pile_to_dust", "", shape, materials, new ItemStack(Items.GLOWSTONE_DUST));
+			BNRecipeManager.addCraftingRecipe("bn_glowstone_dust", "", shape, materials, new ItemStack(Items.GLOWSTONE_DUST));
 		}
 		
 		if (itemExists(ItemsRegistry.CINCINNASITE_INGOT) && blockExists(BlocksRegistry.CINCINNASITE_CHAIN))
@@ -33,6 +33,18 @@ public class ItemRecipes
 			String[] shape = new String[] {"###", "###", "###"};
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(ItemsRegistry.LAPIS_PILE));
 			BNRecipeManager.addCraftingRecipe("glowstone_pile_to_dust", "", shape, materials, new ItemStack(Items.LAPIS_LAZULI));
+		}
+		
+		if (blockExists(BlocksRegistry.BLOOMING_VINE))
+		{
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(BlocksRegistry.BLOOMING_VINE));
+			BNRecipeManager.addCraftingRecipe("bn_yellow_dye", "", new String[] {"#"}, materials, new ItemStack(Items.YELLOW_DYE, 2));
+		}
+		
+		if (blockExists(BlocksRegistry.GOLDEN_VINE) && itemExists(ItemsRegistry.GLOWSTONE_PILE))
+		{
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(BlocksRegistry.GOLDEN_VINE));
+			BNRecipeManager.addCraftingRecipe("bn_golden_vine", "", new String[] {"#"}, materials, new ItemStack(ItemsRegistry.GLOWSTONE_PILE, 2));
 		}
 	}
 	

@@ -13,7 +13,10 @@ public class BlockObsidianGlass extends BlockBaseNotFull
 {
 	public BlockObsidianGlass()
 	{
-		super(FabricBlockSettings.copyOf(Blocks.OBSIDIAN).nonOpaque());
+		super(FabricBlockSettings.copyOf(Blocks.OBSIDIAN)
+				.nonOpaque()
+				.suffocates((arg1, arg2, arg3) -> {return false;})
+				.blockVision((arg1, arg2, arg3) -> {return false;}));
 		this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
 	}
 
