@@ -17,7 +17,7 @@ public class DefaultAttributeRegistryMixin
 	@Inject(method = "get", at = @At("HEAD"), cancellable = true)
 	private static void getAttribute(EntityType<? extends LivingEntity> type, CallbackInfoReturnable<DefaultAttributeContainer> info)
 	{
-		DefaultAttributeContainer container = EntityRegistry.ATTRUBUTES.get(type);
+		DefaultAttributeContainer container = EntityRegistry.ATTRIBUTES.get(type);
 		if (container != null)
 		{
 			info.setReturnValue(container);
@@ -28,7 +28,7 @@ public class DefaultAttributeRegistryMixin
 	@Inject(method = "hasDefinitionFor", at = @At("HEAD"), cancellable = true)
 	private static void hasDefinition(EntityType<?> type, CallbackInfoReturnable<Boolean> info)
 	{
-		if (EntityRegistry.ATTRUBUTES.containsKey(type))
+		if (EntityRegistry.ATTRIBUTES.containsKey(type))
 		{
 			info.setReturnValue(true);
 			info.cancel();
