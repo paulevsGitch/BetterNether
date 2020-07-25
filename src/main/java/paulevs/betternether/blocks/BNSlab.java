@@ -15,7 +15,7 @@ public class BNSlab extends SlabBlock
 {
 	public BNSlab(Block block)
 	{
-		super(FabricBlockSettings.copy(block).nonOpaque());
+		super(FabricBlockSettings.copyOf(block).nonOpaque());
 	}
 	
 	@Override
