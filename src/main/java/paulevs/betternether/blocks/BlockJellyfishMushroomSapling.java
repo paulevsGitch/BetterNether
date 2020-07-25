@@ -12,6 +12,7 @@ import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -20,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 
 public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements Fertilizable
@@ -50,7 +50,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements F
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
-		return world.getBlockState(pos.down()).getBlock() == BlocksRegistry.MUSHROOM_GRASS;
+		return world.getBlockState(pos.down()).getBlock().isIn(BlockTags.NYLIUM);
 	}
 	
 	@Override

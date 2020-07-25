@@ -3,6 +3,7 @@ package paulevs.betternether.structures.plants;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.WorldAccess;
@@ -20,7 +21,7 @@ public class StructureJellyfishMushroom implements IStructure
 	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		Block under;
-		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.MUSHROOM_GRASS)
+		if (world.getBlockState(pos.down()).getBlock().isIn(BlockTags.NYLIUM))
 		{
 			for (int i = 0; i < 10; i++)
 			{
@@ -33,7 +34,7 @@ public class StructureJellyfishMushroom implements IStructure
 					if (npos.getY() > 31)
 					{
 						under = world.getBlockState(npos.down()).getBlock();
-						if (under == BlocksRegistry.MUSHROOM_GRASS && world.isAir(npos))
+						if (under.isIn(BlockTags.NYLIUM) && world.isAir(npos))
 						{
 							grow(world, npos, random);
 						}

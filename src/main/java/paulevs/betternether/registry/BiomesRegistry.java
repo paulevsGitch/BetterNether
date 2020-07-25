@@ -27,6 +27,7 @@ import paulevs.betternether.biomes.NetherMushroomForest;
 import paulevs.betternether.biomes.NetherMushroomForestEdge;
 import paulevs.betternether.biomes.NetherPoorGrasslands;
 import paulevs.betternether.biomes.NetherSoulPlain;
+import paulevs.betternether.biomes.NetherSulfuricBoneReef;
 import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.biomes.NetherSwamplandTerraces;
 import paulevs.betternether.biomes.NetherWartForest;
@@ -58,6 +59,7 @@ public class BiomesRegistry
 	public static final NetherBiome BIOME_MUSHROOM_FOREST_EDGE = new NetherMushroomForestEdge("Nether Mushroom Forest Edge");
 	public static final NetherBiome BIOME_WART_FOREST_EDGE = new NetherWartForestEdge("Wart Forest Edge");
 	public static final NetherBiome BIOME_BONE_REEF = new NetherBoneReef("Bone Reef");
+	public static final NetherBiome BIOME_SULFURIC_BONE_REEF = new NetherSulfuricBoneReef("Sulfuric Bone Reef");
 	public static final NetherBiome BIOME_POOR_GRASSLANDS = new NetherPoorGrasslands("Poor Nether Grasslands");
 	public static final NetherBiome NETHER_SWAMPLAND = new NetherSwampland("Nether Swampland");
 	public static final NetherBiome NETHER_SWAMPLAND_TERRACES = new NetherSwamplandTerraces("Nether Swampland Terraces");
@@ -82,6 +84,7 @@ public class BiomesRegistry
 		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 2);
 		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 2);
 		registerBiome(BIOME_BONE_REEF);
+		registerSubBiome(BIOME_SULFURIC_BONE_REEF, BIOME_BONE_REEF, 0.3F);
 		registerSubBiome(BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);
 		registerBiome(NETHER_SWAMPLAND);
 		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);

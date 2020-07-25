@@ -609,5 +609,10 @@
 	"item.betternether.lapis_pile": "Lapis Pile",
 	"item.betternether.cincinnasite_excavator": "Cincinnasite Excavator",
 	"item.betternether.cincinnasite_excavator_diamond": "Cincinnasite-Diamond Excavator",
-	"item.betternether.nether_ruby_excavator": "Ruby Excavator"
+	"item.betternether.nether_ruby_excavator": "Ruby Excavator",
+	
+	"block.betternether.sepia_mushroom_grass": "Sepian Mushroom Grass",
+	"block.betternether.sepia_bone_grass": "Sepian Bone Grass",
+	"block.betternether.golden_lumabus_seed": "Golden Lumabus Seed",
+	"block.betternether.golden_lumabus_vine": "Golden Lumabus Vine"
 }

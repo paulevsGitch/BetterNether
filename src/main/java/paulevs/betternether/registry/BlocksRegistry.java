@@ -277,13 +277,16 @@ public class BlocksRegistry
 	public static final Block SOUL_GRASS = registerBlock("soul_grass", new BlockSoulGrass());
 	public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", new BlockNetherGrass());
 	public static final Block BONE_GRASS = registerBlock("bone_grass", new BlockNetherGrass());
+	public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", new BlockNetherGrass());
 	
 	// Vines //
 	public static final Block BLACK_VINE = registerBlock("black_vine", new BlockBlackVine());
 	public static final Block BLOOMING_VINE = registerBlock("blooming_vine", new BlockBlackVine());
 	public static final Block GOLDEN_VINE = registerBlock("golden_vine", new BlockGoldenVine());
 	public static final Block LUMABUS_SEED = registerBlock("lumabus_seed", new BlockLumabusSeed());
-	public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine());
+	public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine(LUMABUS_SEED));
+	public static final Block GOLDEN_LUMABUS_SEED = registerBlock("golden_lumabus_seed", new BlockLumabusSeed());
+	public static final Block GOLDEN_LUMABUS_VINE = registerBlockNI("golden_lumabus_vine", new BlockLumabusVine(GOLDEN_LUMABUS_SEED));
 	
 	// Small Plants
 	public static final Block SOUL_VEIN = registerBlock("soul_vein", new BlockSoulVein());
@@ -327,6 +330,7 @@ public class BlocksRegistry
 	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium());
 	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockTerrain());
 	public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass", new BlockTerrain());
+	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain());
 	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand());
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
 	

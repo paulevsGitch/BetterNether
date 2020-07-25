@@ -607,5 +607,10 @@
 	"item.betternether.lapis_pile": "Щепотка лазурита",
 	"item.betternether.cincinnasite_excavator": "Цинцинназитовый экскаватор",
 	"item.betternether.cincinnasite_excavator_diamond": "Цинцинназитово-алмазный экскаватор",
-	"item.betternether.nether_ruby_excavator": "Рубиновый экскаватор"
+	"item.betternether.nether_ruby_excavator": "Рубиновый экскаватор",
+	
+	"block.betternether.sepia_mushroom_grass": "Сепиевая грибная трава",
+	"block.betternether.sepia_bone_grass": "Сепиевая грибная трава",
+	"block.betternether.golden_lumabus_seed": "Золотое семя люмабуса",
+	"block.betternether.golden_lumabus_vine": "Золотая лоза люмабуса"
 }

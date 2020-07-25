@@ -28,7 +28,6 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.shapes.TripleShape;
-import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
 
 public class BlockLumabusVine extends BlockBaseNotFull
@@ -37,8 +36,9 @@ public class BlockLumabusVine extends BlockBaseNotFull
 	private static final VoxelShape BOTTOM_SHAPE = Block.createCuboidShape(2, 4, 2, 14, 16, 14);
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
 	private static final Random RANDOM = new Random();
+	private final Block seed;
 
-	public BlockLumabusVine()
+	public BlockLumabusVine(Block seed)
 	{
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.CYAN)
@@ -47,6 +47,7 @@ public class BlockLumabusVine extends BlockBaseNotFull
 				.breakInstantly()
 				.nonOpaque()
 				.lightLevel(getLuminance()));
+		this.seed = seed;
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.TOP));
@@ -101,7 +102,7 @@ public class BlockLumabusVine extends BlockBaseNotFull
 	{
 		if (state.get(SHAPE) == TripleShape.BOTTOM)
 		{
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.LUMABUS_SEED, MHelper.randRange(1, 3, RANDOM)), new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(1, 3, RANDOM)));
+			return Lists.newArrayList(new ItemStack(seed, MHelper.randRange(1, 3, RANDOM)), new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(1, 3, RANDOM)));
 		}
 		return Lists.newArrayList();
 	}
@@ -110,6 +111,6 @@ public class BlockLumabusVine extends BlockBaseNotFull
 	@Environment(EnvType.CLIENT)
 	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
 	{
-		return new ItemStack(BlocksRegistry.LUMABUS_SEED);
+		return new ItemStack(seed);
 	}
 }
