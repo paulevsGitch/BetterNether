@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -43,7 +44,8 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull
 	public BlockJellyfishMushroom()
 	{
 		super(Materials.makeWood(MaterialColor.CYAN).hardness(0.1F).sounds(BlockSoundGroup.FUNGUS).nonOpaque().lightLevel(13));
-		this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
+		boolean sodium = FabricLoader.getInstance().isModLoaded("sodium"); // Fix incorrect sodium render
+		this.setRenderLayer(sodium ? BNRenderLayer.CUTOUT : BNRenderLayer.TRANSLUCENT);
 	}
 	
 	@Override
