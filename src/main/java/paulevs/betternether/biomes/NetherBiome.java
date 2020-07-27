@@ -90,7 +90,8 @@ public class NetherBiome extends Biome
 			
 			structureFormat("lava/pyramid_1", -1, StructureType.LAVA, 1F),
 			structureFormat("lava/pyramid_2", -1, StructureType.LAVA, 1F),
-			structureFormat("lava/pyramid_3", -1, StructureType.LAVA, 1F)
+			structureFormat("lava/pyramid_3", -1, StructureType.LAVA, 1F),
+			structureFormat("lava/pyramid_4", -1, StructureType.LAVA, 1F)
 	};
 	
 	private ArrayList<String> structures;
