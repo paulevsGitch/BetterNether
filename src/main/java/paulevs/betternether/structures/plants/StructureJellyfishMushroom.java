@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockJellyfishMushroom;
+import paulevs.betternether.blocks.BlockJellyfishMushroom.JellyShape;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
@@ -56,12 +57,16 @@ public class StructureJellyfishMushroom implements IStructure
 	
 	public void growSmall(WorldAccess world, BlockPos pos)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.BOTTOM));
+		Block down = world.getBlockState(pos.down()).getBlock();
+		JellyShape visual = down == BlocksRegistry.MUSHROOM_GRASS ? JellyShape.NORMAL : down == BlocksRegistry.SEPIA_MUSHROOM_GRASS ? JellyShape.SEPIA : JellyShape.POOR;
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.BOTTOM).with(BlockJellyfishMushroom.VISUAL, visual));
 	}
 	
 	public void growMedium(WorldAccess world, BlockPos pos)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.MIDDLE));
-		BlocksHelper.setWithoutUpdate(world, pos.up(), BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.TOP));
+		Block down = world.getBlockState(pos.down()).getBlock();
+		JellyShape visual = down == BlocksRegistry.MUSHROOM_GRASS ? JellyShape.NORMAL : down == BlocksRegistry.SEPIA_MUSHROOM_GRASS ? JellyShape.SEPIA : JellyShape.POOR;
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.MIDDLE).with(BlockJellyfishMushroom.VISUAL, visual));
+		BlocksHelper.setWithoutUpdate(world, pos.up(), BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.TOP).with(BlockJellyfishMushroom.VISUAL, visual));
 	}
 }
