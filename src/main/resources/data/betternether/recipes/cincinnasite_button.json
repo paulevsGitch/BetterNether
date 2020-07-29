@@ -5,11 +5,10 @@
   ],
   "key": {
     "#": {
-      "item": "betternether:cincinnasite_forged"
+      "item": "betternether:cincinnasite_ingot"
     }
   },
   "result": {
-    "item": "betternether:cincinnasite_ingot",
-	"count": 4
+    "item": "betternether:cincinnasite_button"
   }
 }
