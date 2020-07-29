@@ -19,6 +19,7 @@ import net.minecraft.recipe.ShapelessRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.config.Config;
 
 public class BNRecipeManager
 {
@@ -26,13 +27,16 @@ public class BNRecipeManager
 	
 	public static void addRecipe(RecipeType<?> type, Recipe<?> recipe)
 	{
-		Map<Identifier, Recipe<?>> list = RECIPES.get(type);
-		if (list == null)
+		if (Config.getBoolean("recipes", recipe.getId().getPath(), true))
 		{
-			list = Maps.newHashMap();
-			RECIPES.put(type, list);
+			Map<Identifier, Recipe<?>> list = RECIPES.get(type);
+			if (list == null)
+			{
+				list = Maps.newHashMap();
+				RECIPES.put(type, list);
+			}
+			list.put(recipe.getId(), recipe);
 		}
-		list.put(recipe.getId(), recipe);
 	}
 	
 	public static Map<RecipeType<?>, Map<Identifier, Recipe<?>>> getMap(Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes)
