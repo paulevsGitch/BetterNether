@@ -1,7 +1,6 @@
 package paulevs.betternether.blocks;
 
 import java.util.List;
-import java.util.Random;
 
 import com.google.common.collect.Lists;
 
@@ -41,7 +40,6 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull
 	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 16, 11);
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
 	public static final EnumProperty<JellyShape> VISUAL = EnumProperty.of("visual", JellyShape.class);
-	private static final Random RANDOM = new Random();
 	
 	public BlockJellyfishMushroom()
 	{
@@ -149,12 +147,12 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull
 	{
 		if (state.get(SHAPE) == TripleShape.TOP)
 		{
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, RANDOM)),
-									  new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(0, 2, RANDOM)),
-									  new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, RANDOM)));
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)),
+									  new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM)),
+									  new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, MHelper.RANDOM)));
 		}
-		else if (state.get(SHAPE) == TripleShape.TOP)
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING));
+		else if (state.get(SHAPE) == TripleShape.BOTTOM)
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)));
 		else
 			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM));
 	}

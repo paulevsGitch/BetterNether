@@ -2,11 +2,14 @@ package paulevs.betternether.blocks;
 
 import java.util.Random;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -19,6 +22,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.plants.StructureSoulLily;
 
 public class BlockSoulLily extends BlockBaseNotFull
@@ -208,5 +212,12 @@ public class BlockSoulLily extends BlockBaseNotFull
 			return 2;
 		else
 			return 3;
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
+	{
+		return new ItemStack(BlocksRegistry.SOUL_LILY_SAPLING);
 	}
 }
