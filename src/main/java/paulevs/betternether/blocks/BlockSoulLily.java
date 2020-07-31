@@ -1,6 +1,9 @@
 package paulevs.betternether.blocks;
 
+import java.util.List;
 import java.util.Random;
+
+import com.google.common.collect.Lists;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,6 +13,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -17,10 +21,14 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.plants.StructureSoulLily;
@@ -54,7 +62,6 @@ public class BlockSoulLily extends BlockBaseNotFull
 		super(Materials.makeWood(MaterialColor.ORANGE).nonOpaque().ticksRandomly());
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, SoulLilyShape.SMALL));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
-		this.setDropItself(false);
 	}
 	
 	@Override
@@ -219,5 +226,51 @@ public class BlockSoulLily extends BlockBaseNotFull
 	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
 	{
 		return new ItemStack(BlocksRegistry.SOUL_LILY_SAPLING);
+	}
+	
+	@Override
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
+	{
+		SoulLilyShape shape = state.get(SHAPE);
+		if (shape == SoulLilyShape.BIG_TOP_SIDE_N)
+			return world.getBlockState(pos.north()).getBlock() == this;
+		if (shape == SoulLilyShape.BIG_TOP_SIDE_S)
+			return world.getBlockState(pos.south()).getBlock() == this;
+		if (shape == SoulLilyShape.BIG_TOP_SIDE_E)
+			return world.getBlockState(pos.east()).getBlock() == this;
+		if (shape == SoulLilyShape.BIG_TOP_SIDE_W)
+			return world.getBlockState(pos.west()).getBlock() == this;
+		BlockState down = world.getBlockState(pos.down());
+		return down.getBlock() == this || BlocksHelper.isSoulSand(down);
+	}
+	
+	@Override
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
+	{
+		return canPlaceAt(state, world, pos) ? state : Blocks.AIR.getDefaultState();
+	}
+	
+	@Override
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
+	{
+		switch (state.get(SHAPE))
+		{
+		case BIG_BOTTOM:
+		case BIG_MIDDLE:
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM));
+		case BIG_TOP_CENTER:
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM), new ItemStack(BlocksRegistry.SOUL_LILY_SAPLING));
+		case MEDIUM_BOTTOM:
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM));
+		case BIG_TOP_SIDE_N:
+		case BIG_TOP_SIDE_S:
+		case BIG_TOP_SIDE_E:
+		case BIG_TOP_SIDE_W:
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM), new ItemStack(BlocksRegistry.SOUL_LILY_SAPLING, MHelper.randRange(0, 1, MHelper.RANDOM)));
+		case SMALL:
+		case MEDIUM_TOP:
+		default:
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM), new ItemStack(BlocksRegistry.SOUL_LILY_SAPLING));
+		}
 	}
 }
