@@ -16,7 +16,7 @@ import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureBoneGrass;
 import paulevs.betternether.structures.plants.StructureFeatherFern;
 import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
-import paulevs.betternether.structures.plants.StructureLumabus;
+import paulevs.betternether.structures.plants.StructureLumabusVine;
 import paulevs.betternether.structures.plants.StructureReeds;
 
 public class NetherBoneReef extends NetherBiome
@@ -40,7 +40,7 @@ public class NetherBoneReef extends NetherBiome
 		
 		addStructure("bone_stalagmite", new StructureStalactiteCeil(BlocksRegistry.BONE_STALACTITE, BlocksRegistry.BONE_BLOCK), StructureType.CEIL, 0.05F, true);
 		
-		addStructure("lumabus_vine", new StructureLumabus(), StructureType.CEIL, 0.3F, true);
+		addStructure("lumabus_vine", new StructureLumabusVine(), StructureType.CEIL, 0.3F, true);
 	}
 	
 	@Override

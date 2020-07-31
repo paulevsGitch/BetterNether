@@ -11,7 +11,7 @@ import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureLumabus implements IStructure
+public class StructureLumabusVine implements IStructure
 {
 	@Override
 	public void generate(WorldAccess world, BlockPos pos, Random random)
