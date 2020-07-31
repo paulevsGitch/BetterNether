@@ -1,6 +1,6 @@
 {
 	"variants": {
-        "shape=top":  { "model": "betternether:block/lumabus_roots" },
+        "shape=top":  { "model": "betternether:block/golden_lumabus_roots" },
 		"shape=middle":  [
 			{ "model": "betternether:block/golden_lumabus_vine" },
 			{ "model": "betternether:block/golden_lumabus_vine_mirrored" }

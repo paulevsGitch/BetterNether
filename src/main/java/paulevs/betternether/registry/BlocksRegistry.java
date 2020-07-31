@@ -321,11 +321,11 @@ public class BlocksRegistry
 	public static final Block BRICK_POT = registerBlock("brick_pot", new BlockBNPot(Blocks.NETHER_BRICKS));
 	public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
 	public static final Block GEYSER = registerBlock("geyser", new BlockGeyser());
-	public static final Block NETHERRACK_STALACTITE = registerBlock("netherrack_stalactite", new BlockStalactite(Blocks.NETHERRACK));
-	public static final Block GLOWSTONE_STALACTITE = registerBlock("glowstone_stalactite", new BlockStalactite(Blocks.GLOWSTONE));
-	public static final Block BLACKSTONE_STALACTITE = registerBlock("blackstone_stalactite", new BlockStalactite(Blocks.BLACKSTONE));
-	public static final Block BASALT_STALACTITE = registerBlock("basalt_stalactite", new BlockStalactite(Blocks.BASALT));
-	public static final Block BONE_STALACTITE = registerBlock("bone_stalactite", new BlockStalactite(BONE_BLOCK));
+	public static final Block NETHERRACK_STALACTITE = registerStalactite("netherrack_stalactite", Blocks.NETHERRACK);
+	public static final Block GLOWSTONE_STALACTITE = registerStalactite("glowstone_stalactite", Blocks.GLOWSTONE);
+	public static final Block BLACKSTONE_STALACTITE = registerStalactite("blackstone_stalactite", Blocks.BLACKSTONE);
+	public static final Block BASALT_STALACTITE = registerStalactite("basalt_stalactite", Blocks.BASALT);
+	public static final Block BONE_STALACTITE = registerStalactite("bone_stalactite", BONE_BLOCK);
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
@@ -802,6 +802,18 @@ public class BlocksRegistry
 		{
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeRoundRecipe(source, block, "nether_furnace");
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerStalactite(String name, Block source)
+	{
+		Block block = new BlockStalactite(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite");
 		}
 		BLOCKS.add(name);
 		return block;
