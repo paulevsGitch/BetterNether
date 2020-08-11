@@ -361,6 +361,7 @@
 	"biome.betternether.nether_mushroom_forest": "Nether Mushroom Forest",
 	"biome.betternether.nether_mushroom_forest_edge": "Nether Mushroom Forest Edge",
 	"biome.betternether.wart_forest_edge": "Wart Forest Edge",
+	"biome.betternether.sulfuric_bone_reef": "Sulfuric Bone Reef",
 	"biome.betternether.bone_reef": "Bone Reef",
 	"biome.betternether.poor_grasslands": "Poor Grasslands",
 	"biome.betternether.nether_swampland": "Nether Swampland",
@@ -609,5 +610,10 @@
 	"item.betternether.lapis_pile": "Lapis Pile",
 	"item.betternether.cincinnasite_excavator": "Cincinnasite Excavator",
 	"item.betternether.cincinnasite_excavator_diamond": "Cincinnasite-Diamond Excavator",
-	"item.betternether.nether_ruby_excavator": "Ruby Excavator"
+	"item.betternether.nether_ruby_excavator": "Ruby Excavator",
+	
+	"block.betternether.sepia_mushroom_grass": "Sepian Mushroom Grass",
+	"block.betternether.sepia_bone_grass": "Sepian Bone Grass",
+	"block.betternether.golden_lumabus_seed": "Golden Lumabus Seed",
+	"block.betternether.golden_lumabus_vine": "Golden Lumabus Vine"
 }

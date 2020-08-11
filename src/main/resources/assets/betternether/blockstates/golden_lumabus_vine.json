@@ -1,0 +1,15 @@
+{
+	"variants": {
+        "shape=top":  { "model": "betternether:block/golden_lumabus_roots" },
+		"shape=middle":  [
+			{ "model": "betternether:block/golden_lumabus_vine" },
+			{ "model": "betternether:block/golden_lumabus_vine_mirrored" }
+		],
+        "shape=bottom":  [
+			{ "model": "betternether:block/golden_lumabus_bulb_1" },
+			{ "model": "betternether:block/golden_lumabus_bulb_2" },
+			{ "model": "betternether:block/golden_lumabus_bulb_3" },
+			{ "model": "betternether:block/golden_lumabus_bulb_4" }
+		]
+    }
+}

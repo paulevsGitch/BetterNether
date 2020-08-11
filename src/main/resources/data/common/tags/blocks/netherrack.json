@@ -9,10 +9,13 @@
 		
 		"betternether:cincinnasite_ore",
 		"betternether:nether_ruby_ore",
+		"betternether:nether_lapis_ore",
 		"betternether:netherrack_moss",
 		"betternether:nether_mycelium",
 		"betternether:netherrack_moss",
 		"betternether:jungle_grass",
+		"betternether:mushroom_grass",
+		"betternether:sepia_mushroom_grass",
 		"betternether:farmland"
 	]
 }

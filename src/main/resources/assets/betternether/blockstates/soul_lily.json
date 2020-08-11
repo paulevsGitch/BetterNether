@@ -3,7 +3,7 @@
 	{
         "shape=small": { "model": "betternether:block/soul_lily_small" },
         "shape=medium_bottom": { "model": "betternether:block/soul_lily_medium" },
-        "shape=medium_top": { "model": "block/air" },
+        "shape=medium_top": { "model": "betternether:block/soul_lily_medium_top" },
         "shape=big_bottom": { "model": "betternether:block/soul_lily_big_bottom" },
         "shape=big_middle": [
 			{ "model": "betternether:block/soul_lily_big_middle" },

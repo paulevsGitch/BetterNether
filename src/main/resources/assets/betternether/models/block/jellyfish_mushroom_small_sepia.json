@@ -1,0 +1,9 @@
+{
+	"parent": "betternether:block/jellyfish_mushroom_small",
+	"textures": {
+		"particle": "betternether:block/jellyfish_mushroom_top_sepia",
+		"texture": "betternether:block/jellyfish_mushroom_top_sepia",
+		"side": "betternether:block/jellyfish_mushroom_side_sepia",
+		"bottom": "betternether:block/jellyfish_mushroom_bottom_sepia"
+	}
+}

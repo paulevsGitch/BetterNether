@@ -1,0 +1,11 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/sepia_mushroom_grass" },
+			{ "model": "betternether:block/sepia_mushroom_grass", "y": 90 },
+			{ "model": "betternether:block/sepia_mushroom_grass", "y": 180 },
+			{ "model": "betternether:block/sepia_mushroom_grass", "y": 270 }
+		]
+    }
+}

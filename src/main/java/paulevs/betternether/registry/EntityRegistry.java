@@ -36,10 +36,10 @@ import paulevs.betternether.entity.EntitySkull;
 
 public class EntityRegistry
 {
-	public static final Map<EntityType<? extends LivingEntity>, DefaultAttributeContainer> ATTRUBUTES = Maps.newHashMap();
+	public static final Map<EntityType<? extends LivingEntity>, DefaultAttributeContainer> ATTRIBUTES = Maps.newHashMap();
 	private static final List<EntityType<?>> NETHER_ENTITIES = Lists.newArrayList();
 	
-	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, EntityChair::new).dimensions(EntityDimensions.fixed(0.0F, 0.0F)).fireImmune().trackable(10, 1).build();
+	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, EntityChair::new).dimensions(EntityDimensions.fixed(0.0F, 0.0F)).fireImmune().disableSummon().trackable(10, 1).build();
 	public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityNagaProjectile::new).dimensions(EntityDimensions.fixed(1F, 1F)).disableSummon().trackable(60, 1).build();
 	
 	public static final EntityType<EntityFirefly> FIREFLY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EntityFirefly::new).dimensions(EntityDimensions.fixed(0.5F, 0.5F)).fireImmune().trackable(70, 3).build();
@@ -78,7 +78,7 @@ public class EntityRegistry
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity)
 	{
 		Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
-		ATTRUBUTES.put(entity, MobEntity.createMobAttributes().build());
+		ATTRIBUTES.put(entity, MobEntity.createMobAttributes().build());
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity, DefaultAttributeContainer container, int weight, int minGroupSize, int maxGroupSize, NetherBiome... spawnBiomes)
@@ -86,7 +86,7 @@ public class EntityRegistry
 		if (Config.getBoolean("mobs", name, true))
 		{
 			Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
-			ATTRUBUTES.put(entity, container);
+			ATTRIBUTES.put(entity, container);
 			if (spawnBiomes != null)
 			{
 				int spawnWeight = Config.getInt("mobs", name + "_" + "spawn_chance", weight);

@@ -19,14 +19,14 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.structures.plants.StructureLumabus;
+import paulevs.betternether.structures.IStructure;
 
 public class BlockLumabusSeed extends BlockBaseNotFull implements Fertilizable
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 6, 4, 12, 16, 12);
-	private static final StructureLumabus STRUCTURE = new StructureLumabus();
+	private final IStructure STRUCTURE;
 	
-	public BlockLumabusSeed()
+	public BlockLumabusSeed(IStructure structure)
 	{
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.RED)
@@ -36,6 +36,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements Fertilizable
 				.noCollision()
 				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
+		this.STRUCTURE = structure;
 	}
 	
 	@Override

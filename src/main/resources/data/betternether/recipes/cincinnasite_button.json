@@ -1,15 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "##",
-    "##"
+    "#"
   ],
   "key": {
     "#": {
-      "item": "betternether:netherrack_stalactite"
+      "item": "betternether:cincinnasite_ingot"
     }
   },
   "result": {
-    "item": "minecraft:netherrack"
+    "item": "betternether:cincinnasite_button"
   }
 }

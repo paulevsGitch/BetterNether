@@ -3,11 +3,13 @@ package paulevs.betternether.structures.plants;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockJellyfishMushroom;
+import paulevs.betternether.blocks.BlockJellyfishMushroom.JellyShape;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
@@ -20,7 +22,7 @@ public class StructureJellyfishMushroom implements IStructure
 	public void generate(WorldAccess world, BlockPos pos, Random random)
 	{
 		Block under;
-		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.MUSHROOM_GRASS)
+		if (world.getBlockState(pos.down()).getBlock().isIn(BlockTags.NYLIUM))
 		{
 			for (int i = 0; i < 10; i++)
 			{
@@ -33,7 +35,7 @@ public class StructureJellyfishMushroom implements IStructure
 					if (npos.getY() > 31)
 					{
 						under = world.getBlockState(npos.down()).getBlock();
-						if (under == BlocksRegistry.MUSHROOM_GRASS && world.isAir(npos))
+						if (under.isIn(BlockTags.NYLIUM) && world.isAir(npos))
 						{
 							grow(world, npos, random);
 						}
@@ -55,12 +57,16 @@ public class StructureJellyfishMushroom implements IStructure
 	
 	public void growSmall(WorldAccess world, BlockPos pos)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.BOTTOM));
+		Block down = world.getBlockState(pos.down()).getBlock();
+		JellyShape visual = down == BlocksRegistry.MUSHROOM_GRASS ? JellyShape.NORMAL : down == BlocksRegistry.SEPIA_MUSHROOM_GRASS ? JellyShape.SEPIA : JellyShape.POOR;
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.BOTTOM).with(BlockJellyfishMushroom.VISUAL, visual));
 	}
 	
 	public void growMedium(WorldAccess world, BlockPos pos)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.MIDDLE));
-		BlocksHelper.setWithoutUpdate(world, pos.up(), BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.TOP));
+		Block down = world.getBlockState(pos.down()).getBlock();
+		JellyShape visual = down == BlocksRegistry.MUSHROOM_GRASS ? JellyShape.NORMAL : down == BlocksRegistry.SEPIA_MUSHROOM_GRASS ? JellyShape.SEPIA : JellyShape.POOR;
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.MIDDLE).with(BlockJellyfishMushroom.VISUAL, visual));
+		BlocksHelper.setWithoutUpdate(world, pos.up(), BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.TOP).with(BlockJellyfishMushroom.VISUAL, visual));
 	}
 }

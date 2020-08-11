@@ -1,12 +1,12 @@
 package paulevs.betternether.blocks;
 
 import java.util.List;
-import java.util.Random;
 
 import com.google.common.collect.Lists;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,6 +20,7 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
+import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -38,18 +39,19 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull
 	private static final VoxelShape TOP_SHAPE = Block.createCuboidShape(1, 0, 1, 15, 16, 15);
 	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 16, 11);
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
-	private static final Random RANDOM = new Random();
+	public static final EnumProperty<JellyShape> VISUAL = EnumProperty.of("visual", JellyShape.class);
 	
 	public BlockJellyfishMushroom()
 	{
 		super(Materials.makeWood(MaterialColor.CYAN).hardness(0.1F).sounds(BlockSoundGroup.FUNGUS).nonOpaque().lightLevel(13));
-		this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
+		boolean sodium = FabricLoader.getInstance().isModLoaded("sodium"); // Fix incorrect sodium render
+		this.setRenderLayer(sodium ? BNRenderLayer.CUTOUT : BNRenderLayer.TRANSLUCENT);
 	}
 	
 	@Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
 	{
-        stateManager.add(SHAPE);
+        stateManager.add(SHAPE, VISUAL);
     }
 	
 	@Override
@@ -145,13 +147,39 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull
 	{
 		if (state.get(SHAPE) == TripleShape.TOP)
 		{
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, RANDOM)),
-									  new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(0, 2, RANDOM)),
-									  new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, RANDOM)));
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)),
+									  new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM)),
+									  new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, MHelper.RANDOM)));
 		}
-		else if (state.get(SHAPE) == TripleShape.TOP)
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING));
+		else if (state.get(SHAPE) == TripleShape.BOTTOM)
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)));
 		else
 			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM));
+	}
+	
+	public static enum JellyShape implements StringIdentifiable
+	{
+		NORMAL("normal"),
+		SEPIA("sepia"),
+		POOR("poor");
+		
+		final String name;
+		
+		JellyShape(String name)
+		{
+			this.name = name;
+		}
+		
+		@Override
+		public String asString()
+		{
+			return name;
+		}
+		
+		@Override
+		public String toString()
+		{
+			return name;
+		}
 	}
 }

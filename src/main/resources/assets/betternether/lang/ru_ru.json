@@ -359,7 +359,8 @@
 	"biome.betternether.nether_mushroom_forest": "Адский грибной лес",
 	"biome.betternether.nether_mushroom_forest_edge": "Окраина адского грибного леса",
 	"biome.betternether.wart_forest_edge": "Ораина наростового леса",
-	"biome.betternether.bone_reef": "Костяные рифы",
+	"biome.betternether.bone_reef": "Костяной риф",
+	"biome.betternether.sulfuric_bone_reef": "Серный костяной риф",
 	"biome.betternether.poor_grasslands": "Обеднённые луга",
 	"biome.betternether.nether_swampland": "Адское болото",
 	"biome.betternether.nether_swampland_terraces": "Террасированное адское болото",
@@ -607,5 +608,10 @@
 	"item.betternether.lapis_pile": "Щепотка лазурита",
 	"item.betternether.cincinnasite_excavator": "Цинцинназитовый экскаватор",
 	"item.betternether.cincinnasite_excavator_diamond": "Цинцинназитово-алмазный экскаватор",
-	"item.betternether.nether_ruby_excavator": "Рубиновый экскаватор"
+	"item.betternether.nether_ruby_excavator": "Рубиновый экскаватор",
+	
+	"block.betternether.sepia_mushroom_grass": "Сепиевая грибная трава",
+	"block.betternether.sepia_bone_grass": "Сепиевая грибная трава",
+	"block.betternether.golden_lumabus_seed": "Золотое семя люмабуса",
+	"block.betternether.golden_lumabus_vine": "Золотая лоза люмабуса"
 }

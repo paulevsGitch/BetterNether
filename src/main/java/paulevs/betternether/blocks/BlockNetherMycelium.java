@@ -21,7 +21,7 @@ public static final BooleanProperty IS_BLUE = BooleanProperty.of("blue");
 	
 	public BlockNetherMycelium()
 	{
-		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).materialColor(MaterialColor.GRAY));
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).materialColor(MaterialColor.GRAY).requiresTool());
 		this.setDefaultState(getStateManager().getDefaultState().with(IS_BLUE, false));
 	}
 	

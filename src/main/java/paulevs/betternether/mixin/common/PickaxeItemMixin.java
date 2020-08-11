@@ -12,6 +12,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
+import paulevs.betternether.blocks.BNObsidian;
+import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.registry.BlocksRegistry;
 
 @Mixin(PickaxeItem.class)
@@ -36,7 +38,7 @@ public abstract class PickaxeItemMixin extends MiningToolItem
 			info.setReturnValue(level >= 2);
 			info.cancel();
 		}
-		else if (state.getBlock() == BlocksRegistry.BLUE_OBSIDIAN)
+		else if (state.getBlock() instanceof BNObsidian || state.getBlock() instanceof BlockObsidianGlass)
 		{
 			info.setReturnValue(level >= 3);
 			info.cancel();

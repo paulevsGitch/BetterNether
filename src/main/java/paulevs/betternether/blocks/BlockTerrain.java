@@ -7,6 +7,6 @@ public class BlockTerrain extends BlockBase
 {
 	public BlockTerrain()
 	{
-		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK));
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).requiresTool());
 	}
 }
