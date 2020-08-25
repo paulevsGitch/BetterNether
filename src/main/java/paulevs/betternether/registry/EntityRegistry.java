@@ -90,10 +90,10 @@ public class EntityRegistry
 			if (spawnBiomes != null)
 			{
 				int spawnWeight = Config.getInt("mobs", name + "_" + "spawn_chance", weight);
-				for (NetherBiome biome: spawnBiomes)
+				/*for (NetherBiome biome: spawnBiomes)
 				{
 					biome.addEntitySpawn(entity, spawnWeight, minGroupSize, maxGroupSize);
-				}
+				}*/
 				NETHER_ENTITIES.add(entity);
 			}
 		}

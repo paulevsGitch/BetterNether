@@ -22,8 +22,7 @@ import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
-import net.minecraft.text.StringRenderable;
-import net.minecraft.text.Style;
+import net.minecraft.text.OrderedText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.SignType;
 import net.minecraft.util.registry.Registry;
@@ -81,14 +80,14 @@ public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEn
 
 		for (int s = 0; s < 4; ++s)
 		{
-			StringRenderable stringRenderable = signBlockEntity.getTextBeingEditedOnRow(s, (stringRenderablex) -> {
-				List<StringRenderable> list = textRenderer.getTextHandler().wrapLines((StringRenderable) stringRenderablex, 90, Style.EMPTY);
-				return list.isEmpty() ? StringRenderable.EMPTY : (StringRenderable) list.get(0);
+			OrderedText orderedText = signBlockEntity.getTextBeingEditedOnRow(s, (text) -> {
+				List<OrderedText> list = textRenderer.wrapLines(text, 90);
+				return list.isEmpty() ? OrderedText.EMPTY : (OrderedText) list.get(0);
 			});
-			if (stringRenderable != null)
+			if (orderedText != null)
 			{
-				float t = -textRenderer.getWidth(stringRenderable) / 2;
-				textRenderer.draw(stringRenderable, t, s * 10 - 20, q, false, matrixStack.peek().getModel(), provider, false, 0, light);
+				float t = (float) (-textRenderer.getWidth(orderedText) / 2);
+				textRenderer.draw((OrderedText) orderedText, t, (float) (s * 10 - 20), q, false, matrixStack.peek().getModel(), provider, false, 0, light);
 			}
 		}
 

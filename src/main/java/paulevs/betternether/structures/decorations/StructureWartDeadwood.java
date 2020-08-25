@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureType;
@@ -20,7 +20,7 @@ public class StructureWartDeadwood implements IStructure
 		};
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		if (isGround(world.getBlockState(pos.down())) && isGround(world.getBlockState(pos.down(2))))
 		{

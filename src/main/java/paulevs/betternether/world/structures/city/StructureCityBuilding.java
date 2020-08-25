@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.structures.StructureNBT;
 
 public class StructureCityBuilding extends StructureNBT
@@ -102,7 +102,7 @@ public class StructureCityBuilding extends StructureNBT
 		}
 	}
 	
-	public void placeInChunk(WorldAccess world, BlockPos pos, BlockBox boundingBox, StructureProcessor paletteProcessor)
+	public void placeInChunk(ServerWorldAccess world, BlockPos pos, BlockBox boundingBox, StructureProcessor paletteProcessor)
 	{
 		BlockPos p = pos.add(rotationOffset);
 		structure.place(world, p, new StructurePlacementData()

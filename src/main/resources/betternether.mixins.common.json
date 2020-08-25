@@ -17,7 +17,6 @@
 	"BrewingRecipeRegistryMixin",
 	"ServerWorldMixin",
 	"MultiNoiseBiomeSourceMixin",
-	"BiomeMixin",
 	"RecipeManagerMixin",
 	"CraftingScreenHandlerMixin",
 	"PickaxeItemMixin",

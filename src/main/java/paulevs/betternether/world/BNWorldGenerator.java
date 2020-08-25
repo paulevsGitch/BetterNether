@@ -117,10 +117,10 @@ public class BNWorldGenerator
 			
 			ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> sFeature = CITY.configure(FeatureConfig.DEFAULT);
 			
-			for (Biome b: BiomesRegistry.getRegisteredBiomes())
+			/*for (NetherBiome b: BiomesRegistry.getRegisteredBiomes())
 			{
-				b.addStructureFeature(sFeature);
-			}
+				b.getBiome().addStructureFeature(sFeature);
+			}*/
 		}
 	}
 

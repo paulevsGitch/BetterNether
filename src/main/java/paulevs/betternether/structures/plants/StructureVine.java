@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockBlackVine;
 import paulevs.betternether.structures.IStructure;
@@ -23,7 +23,7 @@ public class StructureVine implements IStructure
 	}
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		int h = BlocksHelper.downRay(world, pos, 25);
 		if (h < 2)

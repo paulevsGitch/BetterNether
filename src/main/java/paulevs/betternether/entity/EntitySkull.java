@@ -292,7 +292,7 @@ public class EntitySkull extends HostileEntity implements Flutterer
 		
 		Box box = new Box(pos);
 		box.expand(256, 256, 256);
-		List<EntitySkull> list = world.getEntities(EntitySkull.class, box, (entity) -> { return true; });
+		List<EntitySkull> list = world.getEntitiesByClass(EntitySkull.class, box, (entity) -> { return true; });
 		return list.size() < 4;
 	}
 }

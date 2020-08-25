@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -16,7 +16,7 @@ public class StructureWartBush implements IStructure
 	private static final Direction[] DIRS = new Direction[] {Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		if (world.isAir(pos))
 		{
@@ -29,7 +29,7 @@ public class StructureWartBush implements IStructure
 		}
 	}
 	
-	private void setSeed(WorldAccess world, BlockPos pos, Direction dir)
+	private void setSeed(ServerWorldAccess world, BlockPos pos, Direction dir)
 	{
 		BlockPos p = pos.offset(dir);
 		if (world.isAir(p))

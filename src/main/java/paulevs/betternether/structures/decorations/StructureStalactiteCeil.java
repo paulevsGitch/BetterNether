@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockStalactite;
@@ -32,7 +32,7 @@ public class StructureStalactiteCeil implements IStructure
 		this.ground = ground;
 	}
 	
-	private boolean canPlaceAt(WorldAccess world, BlockPos pos)
+	private boolean canPlaceAt(ServerWorldAccess world, BlockPos pos)
 	{
 		return world.isAir(pos) && (ground == null ? BlocksHelper.isNetherrack(world.getBlockState(pos.up())) : groundContains(world.getBlockState(pos.up()).getBlock()));
 	}
@@ -46,7 +46,7 @@ public class StructureStalactiteCeil implements IStructure
 	}
 
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		if (canPlaceAt(world, pos))
 		{

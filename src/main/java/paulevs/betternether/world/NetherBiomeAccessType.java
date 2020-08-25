@@ -25,7 +25,7 @@ public enum NetherBiomeAccessType implements BiomeAccessType
 		int nx = (int) (NOISE_X.eval(pz, py) * 6 + x);
 		int ny = (int) (NOISE_Y.eval(px, pz) * 6 + y);
 		int nz = (int) (NOISE_Z.eval(py, px) * 6 + z);
-		return map.getBiome(nx, ny, nz);//storage.getBiomeForNoiseGen(nx >> 2, ny >> 2, nz >> 2);
+		return map.getBiome(nx, ny, nz).getBiome();//storage.getBiomeForNoiseGen(nx >> 2, ny >> 2, nz >> 2);
 		//return storage.getBiomeForNoiseGen(x >> 2, y >> 2, z >> 2);
 	}
 	

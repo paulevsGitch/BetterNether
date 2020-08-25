@@ -8,7 +8,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -17,7 +17,7 @@ import paulevs.betternether.structures.IStructure;
 public class StructureLucis extends Object implements IStructure
 {
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		if (canGenerate(world, pos))
 		{
@@ -78,7 +78,7 @@ public class StructureLucis extends Object implements IStructure
 		return b == Blocks.AIR || b == BlocksRegistry.LUCIS_SPORE;
 	}
 
-	private boolean canGenerate(WorldAccess world, BlockPos pos)
+	private boolean canGenerate(ServerWorldAccess world, BlockPos pos)
 	{
 		for (Direction dir: HorizontalFacingBlock.FACING.getValues())
 			if (BlocksHelper.isNetherrack(world.getBlockState(pos.offset(dir))))

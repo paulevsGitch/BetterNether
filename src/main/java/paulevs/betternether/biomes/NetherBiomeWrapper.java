@@ -2,12 +2,10 @@ package paulevs.betternether.biomes;
 
 import java.util.Random;
 
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.BasaltDeltasBiome;
 import net.minecraft.world.biome.Biome;
-import paulevs.betternether.IBiome;
+import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
 import paulevs.betternether.structures.StructureType;
 
 public class NetherBiomeWrapper extends NetherBiome
@@ -19,7 +17,7 @@ public class NetherBiomeWrapper extends NetherBiome
 		super(new BiomeDefenition(name, group));
 		this.biome = biome;
 		
-		if (biome instanceof BasaltDeltasBiome)
+		if (biome.getGenerationSettings().getSurfaceBuilder() == ConfiguredSurfaceBuilders.BASALT_DELTAS)
 		{
 			addStructure("blackstone_stalactite", STALACTITE_BLACKSTONE, StructureType.FLOOR, 0.2F, true);
 			addStructure("stalactite_stalactite", STALACTITE_BASALT, StructureType.FLOOR, 0.2F, true);
@@ -30,21 +28,11 @@ public class NetherBiomeWrapper extends NetherBiome
 	}
 	
 	@Override
-	public Biome getBiome()
-	{
-		return biome;
-	}
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {}
 	
-	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
-		//SurfaceConfig config = biome.getSurfaceConfig();
-		//BlocksHelper.setWithoutUpdate(world, pos, config.getTopMaterial());
-	}
-	
-	@Override
+	/*@Override
 	public void addEntitySpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize)
 	{
 		((IBiome) biome).addEntitySpawn(type, weight, minGroupSize, maxGroupSize);
-	}
+	}*/
 }

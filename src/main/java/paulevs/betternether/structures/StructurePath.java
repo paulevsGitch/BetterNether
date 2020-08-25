@@ -8,13 +8,11 @@ import net.minecraft.block.LanternBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.biomes.NetherWartForest;
-import paulevs.betternether.biomes.NetherWartForestEdge;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
 
@@ -36,7 +34,7 @@ public class StructurePath implements IStructure
 	}
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		for (int x = 0; x < 16; x++)
 		{
@@ -118,25 +116,25 @@ public class StructurePath implements IStructure
 		BlocksHelper.setWithoutUpdate(world, p.down(), Blocks.LANTERN.getDefaultState().with(LanternBlock.HANGING, true));
 	}
 	
-	private BlockState getRoadMaterial(WorldAccess world, BlockPos pos, Biome biome)
+	private BlockState getRoadMaterial(ServerWorldAccess world, BlockPos pos, Biome biome)
 	{
-		if (biome == Biomes.SOUL_SAND_VALLEY || biome instanceof NetherWartForest || biome instanceof NetherWartForestEdge)
+		/*if (biome == Biomes.SOUL_SAND_VALLEY || biome instanceof NetherWartForest || biome instanceof NetherWartForestEdge)
 		{
 			return BlocksRegistry.SOUL_SANDSTONE.getDefaultState();
-		}
+		}*/
 		return Blocks.BASALT.getDefaultState();
 	}
 	
-	private BlockState getSlabMaterial(WorldAccess world, BlockPos pos, Biome biome)
+	private BlockState getSlabMaterial(ServerWorldAccess world, BlockPos pos, Biome biome)
 	{
-		if (biome == Biomes.SOUL_SAND_VALLEY || biome instanceof NetherWartForest || biome instanceof NetherWartForestEdge)
+		/*if (biome == BuiltInBiomes.SOUL_SAND_VALLEY || biome instanceof NetherWartForest || biome instanceof NetherWartForestEdge)
 		{
 			return BlocksRegistry.SOUL_SANDSTONE_SLAB.getDefaultState();
-		}
+		}*/
 		return Blocks.COBBLESTONE_SLAB.getDefaultState();
 	}
 	
-	private boolean needsSlab(WorldAccess world, BlockPos pos)
+	private boolean needsSlab(ServerWorldAccess world, BlockPos pos)
 	{
 		BlockState state;
 		for (Direction dir: BlocksHelper.HORIZONTAL)

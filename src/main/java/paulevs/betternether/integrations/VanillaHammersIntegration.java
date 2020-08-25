@@ -37,7 +37,7 @@ public class VanillaHammersIntegration
 		{
 			if (hasHammers)
 			{
-				LogManager.getLogger().info("Enabled Vanilla Hammers Integration");
+				LogManager.getLogger().info("[BetterNether] Enabled Vanilla Hammers Integration");
 				Class<?> hammerItemClass = Class.forName("draylar.magna.item.HammerItem");
 				if (hammerItemClass != null)
 					for (Constructor<?> c: hammerItemClass.getConstructors())

@@ -6,23 +6,10 @@ import java.util.Locale;
 import java.util.Random;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.ProbabilityConfig;
-import net.minecraft.world.gen.carver.Carver;
-import net.minecraft.world.gen.decorator.ChanceRangeDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -33,7 +20,7 @@ import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureWartCap;
 
-public class NetherBiome extends Biome
+public class NetherBiome
 {
 	private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
 	private static int structureID = 0;
@@ -50,6 +37,7 @@ public class NetherBiome extends Biome
 	private ArrayList<StructureInfo> buildGeneratorsLava = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> buildGeneratorsUnder = new ArrayList<StructureInfo>();
 	
+	protected final Biome biome;
 	protected final String name;
 	protected final String namespace;
 	protected NetherBiome edge;
@@ -113,37 +101,7 @@ public class NetherBiome extends Biome
 	
 	public NetherBiome(BiomeDefenition defenition, boolean hasStalactites)
 	{
-		super(defenition.buildBiomeSettings());
-
-		this.addStructureFeature(DefaultBiomeFeatures.NETHER_RUINED_PORTAL);
-		this.addStructureFeature(DefaultBiomeFeatures.FORTRESS);
-	    this.addStructureFeature(DefaultBiomeFeatures.BASTION_REMNANT);
-
-		this.addCarver(GenerationStep.Carver.AIR, configureCarver(Carver.NETHER_CAVE, new ProbabilityConfig(0.2F)));
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.LAVA_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_VERY_BIASED_RANGE.configure(new RangeDecoratorConfig(20, 8, 16, 256))));
-		
-		DefaultBiomeFeatures.addDefaultMushrooms(this);
-		
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.NETHER_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(8, 4, 8, 128))));
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.NETHER_FIRE_CONFIG).createDecoratedFeature(Decorator.FIRE.configure(new CountDecoratorConfig(10))));
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.SOUL_FIRE_CONFIG).createDecoratedFeature(Decorator.FIRE.configure(new CountDecoratorConfig(10))));
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.GLOWSTONE_BLOB.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.LIGHT_GEM_CHANCE.configure(new CountDecoratorConfig(10))));
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.GLOWSTONE_BLOB.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(10, 0, 0, 128))));
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.BROWN_MUSHROOM_CONFIG).createDecoratedFeature(Decorator.CHANCE_RANGE.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.RED_MUSHROOM_CONFIG).createDecoratedFeature(Decorator.CHANCE_RANGE.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NETHERRACK, Blocks.MAGMA_BLOCK.getDefaultState(), 33)).createDecoratedFeature(Decorator.MAGMA.configure(new CountDecoratorConfig(4))));
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.ENCLOSED_NETHER_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(16, 10, 20, 128))));
-		
-		DefaultBiomeFeatures.addNetherMineables(this);
-		
-		this.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.GHAST, 50, 4, 4));
-		this.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.ZOMBIFIED_PIGLIN, 100, 4, 4));
-		this.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.MAGMA_CUBE, 2, 4, 4));
-		this.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
-		this.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
-		this.addSpawn(SpawnGroup.CREATURE, new Biome.SpawnEntry(EntityType.STRIDER, 60, 2, 4));
-		
-		this.addSpawnDensity(EntityType.GHAST, 1.0D, 0.04D);
+		biome = defenition.build();
 		
 		this.name = defenition.getName();
 		this.namespace = defenition.getGroup();
@@ -204,38 +162,38 @@ public class NetherBiome extends Biome
 	
 	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
-		BlocksHelper.setWithoutUpdate(world, pos, this.getBiome().getSurfaceBuilder().config.getTopMaterial());
+		//BlocksHelper.setWithoutUpdate(world, pos, this.getBiome().getSurfaceBuilder().config.getTopMaterial());
 	}
 	
-	public void genFloorObjects(WorldAccess world, BlockPos pos, Random random)
+	public void genFloorObjects(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsFloor)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 	
-	public void genWallObjects(WorldAccess world, BlockPos pos, Random random)
+	public void genWallObjects(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsWall)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 	
-	public void genCeilObjects(WorldAccess world, BlockPos pos, Random random)
+	public void genCeilObjects(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsCeil)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 	
-	public void genLavaObjects(WorldAccess world, BlockPos pos, Random random)
+	public void genLavaObjects(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsLava)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 	
-	/*public void genUnderObjects(WorldAccess world, BlockPos pos, Random random)
+	/*public void genUnderObjects(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		for (StructureInfo info: generatorsUnder)
 			if (info.canGenerate(random, pos))
@@ -394,32 +352,32 @@ public class NetherBiome extends Biome
 		return String.format(Locale.ROOT, "name: %s; offset: %d; type: %s; chance: %f", name, offset, type.getName(), chance);
 	}
 
-	public void genFloorBuildings(WorldAccess world, BlockPos pos, Random random)
+	public void genFloorBuildings(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, buildGeneratorsFloor);
 	}
 
-	/*public void genWallBuildings(WorldAccess world, BlockPos pos, Random random)
+	/*public void genWallBuildings(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, worldGeneratorsWall);
 	}*/
 	
-	public void genCeilBuildings(WorldAccess world, BlockPos pos, Random random)
+	public void genCeilBuildings(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, buildGeneratorsCeil);
 	}
 	
-	public void genLavaBuildings(WorldAccess world, BlockPos pos, Random random)
+	public void genLavaBuildings(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, buildGeneratorsLava);
 	}
 	
-	public void genUnderBuildings(WorldAccess world, BlockPos pos, Random random)
+	public void genUnderBuildings(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		chancedStructure(world, pos, random, buildGeneratorsUnder);
 	}
 	
-	private void chancedStructure(WorldAccess world, BlockPos pos, Random random, List<StructureInfo> infoList)
+	private void chancedStructure(ServerWorldAccess world, BlockPos pos, Random random, List<StructureInfo> infoList)
 	{
 		float chance = getLastChance(infoList);
 		if (chance > 0)
@@ -505,7 +463,7 @@ public class NetherBiome extends Biome
 	
 	public Biome getBiome()
 	{
-		return this;
+		return biome;
 	}
 
 	public boolean hasCeilStructures()
@@ -513,7 +471,7 @@ public class NetherBiome extends Biome
 		return !buildGeneratorsCeil.isEmpty();
 	}
 	
-	public void addEntitySpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize)
+	/*public void addEntitySpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize)
 	{
 		this.addSpawn(type.getSpawnGroup(), new SpawnEntry(type, weight, minGroupSize, maxGroupSize));
 		this.addSpawnDensity(type, 1.0D, 0.5D);
@@ -522,7 +480,7 @@ public class NetherBiome extends Biome
 	public void setSpawnDensity(EntityType<?> type, double maxMass, double mass)
 	{
 		this.addSpawnDensity(type, maxMass, mass);
-	}
+	}*/
 
 	public String getNamespace()
 	{

@@ -2,9 +2,9 @@ package paulevs.betternether.biomes;
 
 import java.util.Random;
 
-import com.google.common.collect.ImmutableList;
-
 import net.minecraft.client.sound.MusicType;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.BiomeAdditionsSound;
 import net.minecraft.sound.BiomeMoodSound;
 import net.minecraft.sound.SoundEvent;
@@ -12,10 +12,16 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.MixedNoisePoint;
-import net.minecraft.world.biome.Biome.Settings;
 import net.minecraft.world.biome.BiomeEffects.Builder;
 import net.minecraft.world.biome.BiomeParticleConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.biome.GenerationSettings;
+import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.carver.ConfiguredCarvers;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
+import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.config.Config;
@@ -107,7 +113,7 @@ public class BiomeDefenition
 		return this;
 	}
 	
-	public Settings buildBiomeSettings()
+	/*public Settings buildBiomeSettings()
 	{
 		Builder effects = new Builder()
 				.waterColor(4159204)
@@ -134,6 +140,58 @@ public class BiomeDefenition
 				.effects(effects.build())
 				.parent((String) null)
 				.noises(ImmutableList.of(noise));
+	}*/
+	
+	public Biome build()
+	{
+		SpawnSettings spawnSettings = (new SpawnSettings.Builder())
+				.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GHAST, 50, 4, 4))
+				.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIFIED_PIGLIN, 100, 4, 4))
+				.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.MAGMA_CUBE, 2, 4, 4))
+				.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4))
+				.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.PIGLIN, 15, 4, 4))
+				.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.STRIDER, 60, 1, 2)).build();
+		GenerationSettings.Builder builder = (new GenerationSettings.Builder())
+				.surfaceBuilder(ConfiguredSurfaceBuilders.NETHER)
+				.structureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER)
+				.structureFeature(ConfiguredStructureFeatures.FORTRESS)
+				.structureFeature(ConfiguredStructureFeatures.BASTION_REMNANT)
+				.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE)
+				.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SPRING_LAVA);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		builder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_OPEN)
+				.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_FIRE)
+				.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_SOUL_FIRE)
+				.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE_EXTRA)
+				.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE)
+				.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.BROWN_MUSHROOM_NETHER)
+				.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.RED_MUSHROOM_NETHER)
+				.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.ORE_MAGMA)
+				.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_CLOSED);
+		DefaultBiomeFeatures.addNetherMineables(builder);
+		
+		Builder effects = new Builder()
+				.skyColor(fogColor)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.fogColor(fogColor);
+		if (loop != null)
+			effects.loopSound(loop);
+		if (mood != null)
+			effects.moodSound(mood);
+		if (additions != null)
+			effects.additionsSound(additions);
+		if (particleConfig != null)
+			effects.particleConfig(particleConfig);
+		effects.music(MusicType.createIngameMusic(music != null ? music : SoundEvents.MUSIC_NETHER_WARPED_FOREST));
+		
+		return new Biome.Builder()
+				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.NETHER).depth(0.1F)
+				.scale(0.2F).temperature(2.0F).downfall(0.0F)
+				.effects(effects.build())
+				.spawnSettings(spawnSettings)
+				.generationSettings(builder.build())
+				.build();
 	}
 	
 	public String getName()

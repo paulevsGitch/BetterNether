@@ -8,6 +8,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -52,7 +53,7 @@ public class BNSignEditScreen extends Screen
 
 	protected void init()
 	{
-		this.client.keyboard.enableRepeatEvents(true);
+		this.client.keyboard.setRepeatEvents(true);
 		this.addButton(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 120, 200, 20, ScreenTexts.DONE,
 				(buttonWidget) -> {
 					this.finishEditing();
@@ -70,7 +71,7 @@ public class BNSignEditScreen extends Screen
 
 	public void removed()
 	{
-		this.client.keyboard.enableRepeatEvents(false);
+		this.client.keyboard.setRepeatEvents(false);
 		ClientPlayNetworkHandler clientPlayNetworkHandler = this.client.getNetworkHandler();
 		if (clientPlayNetworkHandler != null)
 		{
@@ -132,7 +133,7 @@ public class BNSignEditScreen extends Screen
 	{
 		DiffuseLighting.disableGuiDepthLighting();
 		this.renderBackground(matrices);
-		this.drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 40, 16777215);
+		DrawableHelper.drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 40, 16777215);
 		matrices.push();
 		matrices.translate((double) (this.width / 2), 0.0D, 50.0D);
 		

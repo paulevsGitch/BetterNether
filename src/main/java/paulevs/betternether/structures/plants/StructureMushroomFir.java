@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockMushroomFir;
 import paulevs.betternether.blocks.BlockMushroomFir.MushroomFirShape;
@@ -17,7 +17,7 @@ public class StructureMushroomFir implements IStructure
 Mutable npos = new Mutable();
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM)
 		{

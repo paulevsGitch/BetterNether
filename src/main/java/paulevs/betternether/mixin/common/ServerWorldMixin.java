@@ -26,7 +26,7 @@ import paulevs.betternether.world.NetherBiomeAccessType;
 public class ServerWorldMixin
 {
 	@Inject(method = "<init>*", at = @At("RETURN"))
-	private void onInit(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> registryKey, RegistryKey<DimensionType> registryKey2, DimensionType dimensionType, WorldGenerationProgressListener generationProgressListener, ChunkGenerator chunkGenerator, boolean bl, long seed, List<Spawner> list, boolean bl2, CallbackInfo info)
+	private void onInit(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType, WorldGenerationProgressListener worldGenerationProgressListener, ChunkGenerator chunkGenerator, boolean bl, long seed, List<Spawner> list, boolean bl2, CallbackInfo info)
 	{
 		BiomesRegistry.registerAllOtherBiomes();
 		BNWorldGenerator.init(seed);

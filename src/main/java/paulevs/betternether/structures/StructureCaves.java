@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
@@ -29,7 +29,7 @@ public class StructureCaves implements IStructure
 	}
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		boolean isVoid = true;
 		offset = (int) (getHeight(pos.getX() + 8, pos.getZ() + 8) - 12);

@@ -37,7 +37,7 @@ public class VanillaExcavatorsIntegration
 		{
 			if (hasExcavators)
 			{
-				LogManager.getLogger().info("Enabled Vanilla Hammers Integration");
+				LogManager.getLogger().info("[BetterNether] Enabled Vanilla Excavators Integration");
 				Class<?> itemClass = Class.forName("draylar.magna.item.ExcavatorItem");
 				if (itemClass != null)
 					for (Constructor<?> c: itemClass.getConstructors())

@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom.BrownMushroomShape;
@@ -18,7 +18,7 @@ public class StructureMedBrownMushroom implements IStructure
 	private static final Mutable POS = new Mutable();
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		Block under;
 		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM)
@@ -52,7 +52,7 @@ public class StructureMedBrownMushroom implements IStructure
 		}
 	}
 	
-	public void grow(WorldAccess world, BlockPos pos, Random random)
+	public void grow(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		int size = 2 + random.nextInt(3);
 		for (int y = 1; y <= size; y++)

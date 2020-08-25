@@ -1,20 +1,8 @@
 package paulevs.betternether.world;
 
-import java.util.Collections;
-import java.util.Optional;
-
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
-
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.MixedNoisePoint;
-import net.minecraft.world.biome.source.BiomeSource;
-import net.minecraft.world.biome.source.MultiNoiseBiomeSource;
-import paulevs.betternether.config.Config;
-
-public class NetherBiomeSource extends MultiNoiseBiomeSource
+public class NetherBiomeSource// extends BiomeSource
 {
-	private BiomeMap map;
+	/*private BiomeMap map;
 	
 	public NetherBiomeSource(long seed, boolean volumetric)
 	{
@@ -53,5 +41,5 @@ public class NetherBiomeSource extends MultiNoiseBiomeSource
 		ImmutableList<Pair<MixedNoisePoint, Biome>> biomes = this.biomes.stream().flatMap((biome) -> biome.streamNoises().map((point) -> Pair.of(point, biome))).collect(ImmutableList.toImmutableList());
 		Optional<Preset> optional = Optional.of(Preset.NETHER);
 		return new NetherBiomeSource(seed, biomes, optional, this.map);
-	}
+	}*/
 }

@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLumabusVine;
 import paulevs.betternether.blocks.shapes.TripleShape;
@@ -14,7 +14,7 @@ import paulevs.betternether.structures.IStructure;
 public class StructureLumabusVine implements IStructure
 {
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		int h = random.nextInt(19) + 5;
 		int h2 = BlocksHelper.downRay(world, pos, h);

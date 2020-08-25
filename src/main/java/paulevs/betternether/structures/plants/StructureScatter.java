@@ -7,7 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.IStructure;
 
@@ -33,13 +33,13 @@ public class StructureScatter implements IStructure
 		this.maxAge = 0;
 	}
 	
-	private boolean canPlaceAt(WorldAccess world, BlockPos pos)
+	private boolean canPlaceAt(ServerWorldAccess world, BlockPos pos)
 	{
 		return plantBlock.canPlaceAt(plantBlock.getDefaultState(), world, pos);
 	}
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		if (world.isAir(pos) && canPlaceAt(world, pos))
 		{

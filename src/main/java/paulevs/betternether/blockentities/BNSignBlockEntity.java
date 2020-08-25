@@ -1,6 +1,6 @@
 package paulevs.betternether.blockentities;
 
-import java.util.function.UnaryOperator;
+import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
@@ -20,7 +20,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.LiteralText;
-import net.minecraft.text.StringRenderable;
+import net.minecraft.text.OrderedText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
@@ -34,7 +34,7 @@ public class BNSignBlockEntity extends BlockEntity
 	private final Text[] text;
 	private boolean editable;
 	private PlayerEntity editor;
-	private final StringRenderable[] textBeingEdited;
+	private final OrderedText[] textBeingEdited;
 	private DyeColor textColor;
 
 	public BNSignBlockEntity()
@@ -42,7 +42,7 @@ public class BNSignBlockEntity extends BlockEntity
 		super(BlockEntitiesRegistry.SIGN);
 		this.text = new Text[] { LiteralText.EMPTY, LiteralText.EMPTY, LiteralText.EMPTY, LiteralText.EMPTY };
 		this.editable = true;
-		this.textBeingEdited = new StringRenderable[4];
+		this.textBeingEdited = new OrderedText[4];
 		this.textColor = DyeColor.BLACK;
 	}
 
@@ -99,11 +99,11 @@ public class BNSignBlockEntity extends BlockEntity
 
 	@Nullable
 	@Environment(EnvType.CLIENT)
-	public StringRenderable getTextBeingEditedOnRow(int row, UnaryOperator<StringRenderable> unaryOperator)
+	public OrderedText getTextBeingEditedOnRow(int row, Function<Text, OrderedText> function)
 	{
 		if (this.textBeingEdited[row] == null && this.text[row] != null)
 		{
-			this.textBeingEdited[row] = (StringRenderable) unaryOperator.apply(this.text[row]);
+			this.textBeingEdited[row] = (OrderedText) function.apply(this.text[row]);
 		}
 
 		return this.textBeingEdited[row];

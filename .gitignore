@@ -26,3 +26,4 @@ run/
 /target/
 
 *.launch
+logs/

@@ -9,7 +9,6 @@ import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -47,18 +46,17 @@ public abstract class ChunkPopulateMixin
 				{
 					try
 					{
-						biome.generateFeatureStep(feature, accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, 0, sz));
+						biome.generateFeatureStep(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, 0, sz));
 					}
 					catch (Exception e)
 					{
 						CrashReport crashReport = CrashReport.create(e, "Biome decoration");
 						crashReport
-							.addElement("Generation")
-							.add("CenterX", chunkX)
-							.add("CenterZ", chunkZ)
-							.add("Step", feature)
-							.add("Seed", featureSeed)
-							.add("Biome", Registry.BIOME.getId(biome));
+						.addElement("Generation")
+						.add("CenterX", region.getCenterChunkX())
+						.add("CenterZ", region.getCenterChunkZ())
+						.add("Seed", featureSeed)
+						.add("Biome", biome);
 						throw new CrashException(crashReport);
 					}
 				}

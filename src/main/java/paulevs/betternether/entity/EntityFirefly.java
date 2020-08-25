@@ -37,6 +37,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
@@ -238,7 +239,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer
 	}
 
 	@Override
-	public PassiveEntity createChild(PassiveEntity mate)
+	public PassiveEntity createChild(ServerWorld world, PassiveEntity mate)
 	{
 		return EntityRegistry.FIREFLY.create(world);
 	}
