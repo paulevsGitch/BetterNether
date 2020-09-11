@@ -15,7 +15,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BuiltInBiomes;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.chunk.FlatChunkGeneratorLayer;
 import net.minecraft.world.gen.feature.StructureFeature;
 
@@ -30,9 +30,8 @@ public class PresetsScreenMixin
 	{
 		addPreset(new TranslatableText("betternether.flat_nether"),
 				Blocks.NETHERRACK,
-				BuiltInBiomes.NETHER_WASTES,
+				BiomeKeys.NETHER_WASTES,
 				Collections.emptyList(),
-				//Arrays.asList("nether_city"),
 				false, false, false,
 				new FlatChunkGeneratorLayer(63, Blocks.NETHERRACK),
 				new FlatChunkGeneratorLayer(1, Blocks.BEDROCK));

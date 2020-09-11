@@ -109,19 +109,6 @@ public class BiomeMap
 			edge = edge || !search.isSame(getRawBiome(x - 1, y, z + 1));
 			edge = edge || !search.isSame(getRawBiome(x + 1, y, z - 1));
 			edge = edge || !search.isSame(getRawBiome(x + 1, y, z + 1));
-			/*if (!edge && volumetric)
-			{
-				edge = edge || !search.isSame(getRawBiome(x, y + d, z));
-				edge = edge || !search.isSame(getRawBiome(x, y - d, z));
-				edge = edge || !search.isSame(getRawBiome(x - d, y - d, z - d));
-				edge = edge || !search.isSame(getRawBiome(x + d, y - d, z - d));
-				edge = edge || !search.isSame(getRawBiome(x - d, y - d, z + d));
-				edge = edge || !search.isSame(getRawBiome(x + d, y - d, z + d));
-				edge = edge || !search.isSame(getRawBiome(x - d, y + d, z - d));
-				edge = edge || !search.isSame(getRawBiome(x + d, y + d, z - d));
-				edge = edge || !search.isSame(getRawBiome(x - d, y + d, z + d));
-				edge = edge || !search.isSame(getRawBiome(x + d, y + d, z + d));
-			}*/
 			
 			if (edge)
 			{

@@ -16,12 +16,12 @@
 	"SpawnRestrictionMixin",
 	"BrewingRecipeRegistryMixin",
 	"ServerWorldMixin",
-	"MultiNoiseBiomeSourceMixin",
 	"RecipeManagerMixin",
 	"CraftingScreenHandlerMixin",
 	"PickaxeItemMixin",
 	"ServerPlayNetworkHandlerMixin",
-	"SheepEntityMixin"
+	"SheepEntityMixin",
+	"DimensionTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -20,7 +20,6 @@ import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.level.storage.LevelStorage;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
-import paulevs.betternether.world.NetherBiomeAccessType;
 
 @Mixin(ServerWorld.class)
 public class ServerWorldMixin
@@ -30,6 +29,5 @@ public class ServerWorldMixin
 	{
 		BiomesRegistry.registerAllOtherBiomes();
 		BNWorldGenerator.init(seed);
-		NetherBiomeAccessType.reInitMap(seed);
 	}
 }

@@ -66,12 +66,16 @@ public class BNWorldGenerator
 	private static StructureCaves caves;
 	private static StructurePath paths;
 	private static NetherBiome biome;
+	
+	protected static int biomeSizeXZ;
+	protected static int biomeSizeY;
+	protected static boolean volumetric;
 
 	public static final StructureFeature<DefaultFeatureConfig> CITY = Registry.register(
-			Registry.STRUCTURE_FEATURE,
-			new Identifier(BetterNether.MOD_ID, "nether_city"),
-			new CityFeature(DefaultFeatureConfig.CODEC)
-			);
+		Registry.STRUCTURE_FEATURE,
+		new Identifier(BetterNether.MOD_ID, "nether_city"),
+		new CityFeature(DefaultFeatureConfig.CODEC)
+	);
 	
 	@SuppressWarnings("unchecked")
 	public static void onModInit()
@@ -88,6 +92,10 @@ public class BNWorldGenerator
 		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 32F) * 1.0001F;
 		lavaStructureDensity = Config.getFloat("generator.world", "lava_structures_density", 1F / 128F) * 1.0001F;
 		globalDensity = Config.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
+		
+		biomeSizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
+		biomeSizeY = Config.getInt("generator_world", "biome_size_y", 40);
+		volumetric = Config.getBoolean("generator_world", "volumetric_biomes", true);
 		
 		if (Config.getBoolean("generator.world.cities", "generate", true))
 		{
@@ -178,6 +186,7 @@ public class BNWorldGenerator
 				}
 			}
 			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+			System.out.println(biome);
 			if (world.isAir(popPos))
 			{
 				if (type == StructureType.FLOOR)

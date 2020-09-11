@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
@@ -485,5 +486,16 @@ public class NetherBiome
 	public String getNamespace()
 	{
 		return namespace;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return namespace + ":" + name;
+	}
+
+	public Identifier getID()
+	{
+		return new Identifier(namespace, name);
 	}
 }
