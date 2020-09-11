@@ -2,23 +2,17 @@ package paulevs.betternether.world.structures;
 
 import java.util.List;
 
-import com.mojang.serialization.Codec;
-
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.source.BiomeSource;
-import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-import paulevs.betternether.config.Config;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
@@ -26,20 +20,20 @@ import paulevs.betternether.world.structures.piece.CityPiece;
 
 public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 {
-	private static final ChunkRandom RANDOM = new ChunkRandom();
-	private final int distance;
-	private final int separation;
+	//private static final ChunkRandom RANDOM = new ChunkRandom();
+	//private final int distance;
+	//private final int separation;
 	
-	public CityFeature(Codec<DefaultFeatureConfig> codec)
+	public CityFeature()
 	{
-		super(codec);
-		distance = Config.getInt("generator.world.cities", "distance", 64);
-		separation = distance >> 1;
+		super(DefaultFeatureConfig.CODEC);
+		//distance = Config.getInt("generator.world.cities", "distance", 64);
+		//separation = distance >> 1;
 	}
 
 	private static final CityGenerator GENERATOR = new CityGenerator();
 	
-	@Override
+	/*@Override
 	protected boolean shouldStartAt(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long seed, ChunkRandom chunkRandom, int i, int j, Biome biome, ChunkPos chunkPos, DefaultFeatureConfig defaultFeatureConfig)
 	{
 		int q = chunkPos.x < 0 ? chunkPos.x - separation + 1 : chunkPos.x;
@@ -52,18 +46,12 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 		s += RANDOM.nextInt(separation);
 		t += RANDOM.nextInt(separation);
 		return s == chunkPos.x && t == chunkPos.z;
-	}
+	}*/
 
 	@Override
 	public StructureStartFactory<DefaultFeatureConfig> getStructureStartFactory()
 	{
 		return CityFeature.CityStart::new;
-	}
-
-	@Override
-	public String getName()
-	{
-		return "nether_city";
 	}
 
 	public static class CityStart extends StructureStart<DefaultFeatureConfig>
@@ -85,6 +73,7 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 			}
 			
 			BlockPos center = new BlockPos(px, y, pz);
+			System.out.println("City " + center);
 			
 			//CityPalette palette = Palettes.getRandom(random);
 			List<CityPiece> buildings = GENERATOR.generate(center, this.random, Palettes.EMPTY);

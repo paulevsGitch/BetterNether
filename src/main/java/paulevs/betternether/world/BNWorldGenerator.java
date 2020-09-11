@@ -5,14 +5,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStep.Feature;
+import net.minecraft.world.gen.chunk.StructureConfig;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.biomes.NetherBiome;
@@ -23,6 +32,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
+import paulevs.betternether.world.structures.CityFeature;
 
 public class BNWorldGenerator
 {
@@ -59,17 +69,29 @@ public class BNWorldGenerator
 	protected static int biomeSizeY;
 	protected static boolean volumetric;
 
-	/*public static final StructureFeature<DefaultFeatureConfig> CITY = Registry.register(
+	public static final StructureFeature<DefaultFeatureConfig> CITY = new CityFeature();/*Registry.register(
 		Registry.STRUCTURE_FEATURE,
 		new Identifier(BetterNether.MOD_ID, "nether_city"),
-		new CityFeature(DefaultFeatureConfig.CODEC)
+		new CityFeature()
 	);*/
+	public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CITY_CONFIGURED = CITY.configure(FeatureConfig.DEFAULT);
 	
 	//CITY = Registry.register(Registry.0,0);
+	
+	public static StructureFeature<DefaultFeatureConfig> city;
 	
 	//@SuppressWarnings("unchecked")
 	public static void onModInit()
 	{
+		int distance = Config.getInt("generator.world.cities", "distance", 64);
+		int separation = distance >> 1;
+		
+		city = FabricStructureBuilder.create(new Identifier(BetterNether.MOD_ID, "nether_city"), CITY)
+		.step(Feature.RAW_GENERATION)
+		.defaultConfig(new StructureConfig(distance, separation, 1234))
+		.superflatFeature(CITY.configure(FeatureConfig.DEFAULT))
+		.register();
+		
 		hasCleaningPass = Config.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
 		hasFixPass = Config.getBoolean("generator.world.terrain", "world_fixing_pass", true);
 		
