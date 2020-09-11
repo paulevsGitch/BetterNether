@@ -33,7 +33,6 @@ import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.config.Config;
-import paulevs.betternether.registry.EntityRegistry;
 
 public class BiomeDefinition
 {
@@ -136,9 +135,9 @@ public class BiomeDefinition
 	 */
 	public BiomeDefinition addMobSpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize)
 	{
-		if (EntityRegistry.isRegistered(type))
+		Identifier eID = Registry.ENTITY_TYPE.getId(type);
+		if (eID != Registry.ENTITY_TYPE.getDefaultId())
 		{
-			Identifier eID = Registry.ENTITY_TYPE.getId(type);
 			String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".mobs." + eID.getNamespace();
 			SpawnInfo info = new SpawnInfo();
 			info.type = type;

@@ -91,9 +91,4 @@ public class EntityRegistry
 	{
 		return true;
 	}
-	
-	public static boolean isRegistered(EntityType<?> entity)
-	{
-		return Registry.ENTITY_TYPE.getId(entity) != Registry.ENTITY_TYPE.getDefaultId();
-	}
 }

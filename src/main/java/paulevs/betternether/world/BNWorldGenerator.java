@@ -169,7 +169,6 @@ public class BNWorldGenerator
 				}
 			}
 			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
-			System.out.println(biome);
 			if (world.isAir(popPos))
 			{
 				if (type == StructureType.FLOOR)
