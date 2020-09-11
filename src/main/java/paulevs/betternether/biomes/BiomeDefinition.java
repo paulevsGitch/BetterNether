@@ -33,6 +33,7 @@ import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.config.Config;
+import paulevs.betternether.registry.EntityRegistry;
 
 public class BiomeDefinition
 {
@@ -135,14 +136,17 @@ public class BiomeDefinition
 	 */
 	public BiomeDefinition addMobSpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize)
 	{
-		Identifier eID = Registry.ENTITY_TYPE.getId(type);
-		String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".mobs." + eID.getNamespace();
-		SpawnInfo info = new SpawnInfo();
-		info.type = type;
-		info.weight = Config.getInt(path, "weight", weight);
-		info.minGroupSize = Config.getInt(path, "min_group_size", minGroupSize);
-		info.maxGroupSize = Config.getInt(path, "max_group_size", maxGroupSize);
-		mobs.add(info);
+		if (EntityRegistry.isRegistered(type))
+		{
+			Identifier eID = Registry.ENTITY_TYPE.getId(type);
+			String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".mobs." + eID.getNamespace();
+			SpawnInfo info = new SpawnInfo();
+			info.type = type;
+			info.weight = Config.getInt(path, "weight", weight);
+			info.minGroupSize = Config.getInt(path, "min_group_size", minGroupSize);
+			info.maxGroupSize = Config.getInt(path, "max_group_size", maxGroupSize);
+			mobs.add(info);
+		}
 		return this;
 	}
 	
@@ -153,6 +157,7 @@ public class BiomeDefinition
 	 */
 	public BiomeDefinition addStructureFeature(ConfiguredStructureFeature<?, ?> feature)
 	{
+		System.out.println("Structure " + feature);
 		structures.add(feature);
 		return this;
 	}

@@ -37,6 +37,7 @@ public class NetherJungle extends NetherBiome
 				.setLoop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				.setDefaultMobs(false)
 				.addMobSpawn(EntityRegistry.JUNGLE_SKELETON, 1000, 2, 4));
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);

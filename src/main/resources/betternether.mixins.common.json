@@ -21,7 +21,8 @@
 	"PickaxeItemMixin",
 	"ServerPlayNetworkHandlerMixin",
 	"SheepEntityMixin",
-	"DimensionTypeMixin"
+	"DimensionTypeMixin",
+	"DefaultBiomeFeaturesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

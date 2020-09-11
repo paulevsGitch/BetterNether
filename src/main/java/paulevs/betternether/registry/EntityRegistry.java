@@ -92,8 +92,8 @@ public class EntityRegistry
 		return true;
 	}
 	
-	public boolean isRegistered(EntityType<?> entity)
+	public static boolean isRegistered(EntityType<?> entity)
 	{
-		return ATTRIBUTES.containsKey(entity);
+		return Registry.ENTITY_TYPE.getId(entity) != Registry.ENTITY_TYPE.getDefaultId();
 	}
 }
