@@ -15,11 +15,11 @@ import paulevs.betternether.structures.plants.StructureAgave;
 import paulevs.betternether.structures.plants.StructureBarrelCactus;
 import paulevs.betternether.structures.plants.StructureNetherCactus;
 
-public class NetherBiomeGravelDesert extends NetherBiome
+public class NetherGravelDesert extends NetherBiome
 {
-	public NetherBiomeGravelDesert(String name)
+	public NetherGravelDesert(String name)
 	{
-		super(new BiomeDefenition(name)
+		super(new BiomeDefinition(name)
 				.setFogColor(170, 48, 0)
 				.setLoop(SoundsRegistry.AMBIENT_GRAVEL_DESERT)
 				.setMood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)

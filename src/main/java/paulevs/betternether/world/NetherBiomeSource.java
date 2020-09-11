@@ -4,10 +4,13 @@ import java.util.Collections;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeSource;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.BiomesRegistry;
 
@@ -56,5 +59,10 @@ public class NetherBiomeSource extends BiomeSource
 	protected Codec<? extends BiomeSource> getCodec()
 	{
 		return CODEC;
+	}
+	
+	public static void register()
+	{
+		Registry.register(Registry.BIOME_SOURCE, new Identifier(BetterNether.MOD_ID, "nether_biome_source"), CODEC);
 	}
 }

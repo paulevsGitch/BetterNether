@@ -2,7 +2,9 @@ package paulevs.betternether.biomes;
 
 import java.util.Random;
 
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
@@ -12,10 +14,10 @@ public class NetherBiomeWrapper extends NetherBiome
 {
 	final Biome biome;
 	
-	public NetherBiomeWrapper(String name, String group, Biome biome)
+	public NetherBiomeWrapper(Identifier id)
 	{
-		super(new BiomeDefenition(name, group));
-		this.biome = biome;
+		super(new BiomeDefinition(id));
+		this.biome = BuiltinRegistries.BIOME.get(id);
 		
 		if (biome.getGenerationSettings().getSurfaceBuilder() == ConfiguredSurfaceBuilders.BASALT_DELTAS)
 		{
@@ -29,10 +31,4 @@ public class NetherBiomeWrapper extends NetherBiome
 	
 	@Override
 	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {}
-	
-	/*@Override
-	public void addEntitySpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize)
-	{
-		((IBiome) biome).addEntitySpawn(type, weight, minGroupSize, maxGroupSize);
-	}*/
 }

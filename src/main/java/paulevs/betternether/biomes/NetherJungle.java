@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackVine;
@@ -27,15 +28,16 @@ import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
-public class NetherBiomeJungle extends NetherBiome
+public class NetherJungle extends NetherBiome
 {
-	public NetherBiomeJungle(String name)
+	public NetherJungle(String name)
 	{
-		super(new BiomeDefenition(name)
+		super(new BiomeDefinition(name)
 				.setFogColor(62, 169, 61)
 				.setLoop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
+				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				.addMobSpawn(EntityRegistry.JUNGLE_SKELETON, 1000, 2, 4));
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);
 		addStructure("rubeus_tree", new StructureRubeus(), StructureType.FLOOR, 0.1F, false);

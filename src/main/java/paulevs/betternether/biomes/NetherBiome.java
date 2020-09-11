@@ -14,6 +14,7 @@ import net.minecraft.world.biome.Biome;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.StructureWorld;
@@ -39,8 +40,7 @@ public class NetherBiome
 	private ArrayList<StructureInfo> buildGeneratorsUnder = new ArrayList<StructureInfo>();
 	
 	protected final Biome biome;
-	protected final String name;
-	protected final String namespace;
+	protected final Identifier mcID;
 	protected NetherBiome edge;
 	protected int edgeSize;
 	protected List<Subbiome> subbiomes;
@@ -95,17 +95,15 @@ public class NetherBiome
 	protected static final StructureStalactiteCeil STALAGMITE_BLACKSTONE = new StructureStalactiteCeil(BlocksRegistry.BLACKSTONE_STALACTITE, Blocks.BLACKSTONE, Blocks.BLACKSTONE, Blocks.NETHERRACK);
 	protected static final StructureStalactiteCeil STALAGMITE_BASALT = new StructureStalactiteCeil(BlocksRegistry.BASALT_STALACTITE, Blocks.BASALT, Blocks.BASALT, Blocks.NETHERRACK);
 	
-	public NetherBiome(BiomeDefenition defenition)
+	public NetherBiome(BiomeDefinition definition)
 	{
-		this(defenition, true);
-	}
-	
-	public NetherBiome(BiomeDefenition defenition, boolean hasStalactites)
-	{
-		biome = defenition.build();
+		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 2, 6);
+		definition.addMobSpawn(EntityRegistry.SKULL, 2, 2, 4);
+		definition.addMobSpawn(EntityRegistry.NAGA, 20, 2, 4);
+		definition.addMobSpawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
 		
-		this.name = defenition.getName();
-		this.namespace = defenition.getGroup();
+		biome = definition.build();
+		mcID = definition.getID();
 		
 		subbiomes = new ArrayList<Subbiome>();
 		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.8F, true);
@@ -115,7 +113,7 @@ public class NetherBiome
 		for (String s: DEF_STRUCTURES)
 			structures.add(s);
 		
-		if (hasStalactites)
+		if (definition.hasStalactites())
 		{
 			addStructure("netherrack_stalactite", STALACTITE_NETHERRACK, StructureType.FLOOR, 0.05F, true);
 			addStructure("glowstone_stalactite", STALACTITE_GLOWSTONE, StructureType.FLOOR, 0.01F, true);
@@ -147,7 +145,7 @@ public class NetherBiome
 	
 	private String getGroup()
 	{
-		return "generator.biome." + namespace + "." + getRegistryName();
+		return "generator.biome." + mcID.getNamespace() + "." + getRegistryName();
 	}
 	
 	public void build()
@@ -208,7 +206,7 @@ public class NetherBiome
 	
 	public String getRegistryName()
 	{
-		return name;
+		return mcID.getPath();
 	}
 
 	public NetherBiome getEdge()
@@ -471,31 +469,20 @@ public class NetherBiome
 	{
 		return !buildGeneratorsCeil.isEmpty();
 	}
-	
-	/*public void addEntitySpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize)
-	{
-		this.addSpawn(type.getSpawnGroup(), new SpawnEntry(type, weight, minGroupSize, maxGroupSize));
-		this.addSpawnDensity(type, 1.0D, 0.5D);
-	}
-	
-	public void setSpawnDensity(EntityType<?> type, double maxMass, double mass)
-	{
-		this.addSpawnDensity(type, maxMass, mass);
-	}*/
 
 	public String getNamespace()
 	{
-		return namespace;
+		return mcID.getNamespace();
 	}
 	
 	@Override
 	public String toString()
 	{
-		return namespace + ":" + name;
+		return mcID.toString();
 	}
 
 	public Identifier getID()
 	{
-		return new Identifier(namespace, name);
+		return mcID;
 	}
 }

@@ -22,7 +22,7 @@ public class NetherMagmaLand extends NetherBiome
 	
 	public NetherMagmaLand(String name)
 	{
-		super(new BiomeDefenition(name)
+		super(new BiomeDefinition(name)
 				.setFogColor(248, 158, 68)
 				.setLoop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)

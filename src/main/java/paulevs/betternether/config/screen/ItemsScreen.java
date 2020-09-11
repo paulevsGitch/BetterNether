@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
@@ -107,6 +108,6 @@ public class ItemsScreen extends Screen
 		list.render(matrices, mouseX, mouseY, delta);
 		for (AbstractButtonWidget button: this.buttons)
 			button.render(matrices, mouseX, mouseY, delta);
-		this.drawCenteredText(matrices, this.textRenderer, header, this.width / 2, 14, 16777215);
+		DrawableHelper.drawCenteredText(matrices, this.textRenderer, header, this.width / 2, 14, 16777215);
 	}
 }

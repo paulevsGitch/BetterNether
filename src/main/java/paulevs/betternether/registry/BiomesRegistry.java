@@ -3,11 +3,9 @@ package paulevs.betternether.registry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import net.minecraft.util.Identifier;
@@ -21,11 +19,11 @@ import paulevs.betternether.biomes.CrimsonGlowingWoods;
 import paulevs.betternether.biomes.CrimsonPinewood;
 import paulevs.betternether.biomes.FloodedDeltas;
 import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.biomes.NetherBiomeGravelDesert;
-import paulevs.betternether.biomes.NetherBiomeJungle;
 import paulevs.betternether.biomes.NetherBiomeWrapper;
 import paulevs.betternether.biomes.NetherBoneReef;
 import paulevs.betternether.biomes.NetherGrasslands;
+import paulevs.betternether.biomes.NetherGravelDesert;
+import paulevs.betternether.biomes.NetherJungle;
 import paulevs.betternether.biomes.NetherMagmaLand;
 import paulevs.betternether.biomes.NetherMushroomForest;
 import paulevs.betternether.biomes.NetherMushroomForestEdge;
@@ -44,7 +42,6 @@ public class BiomesRegistry
 {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
-	private static final HashMap<RegistryKey<Biome>, NetherBiome> LINKS = Maps.newHashMap();
 	private static final HashMap<NetherBiome, RegistryKey<Biome>> KEYS = Maps.newHashMap();
 	public static final HashMap<Biome, NetherBiome> MUTABLE = Maps.newHashMap();
 	
@@ -52,13 +49,13 @@ public class BiomesRegistry
 	private static final HashMap<NetherBiome, Float> DEF_CHANCES_SUB = Maps.newHashMap();
 	private static final HashMap<NetherBiome, Integer> DEF_SIZE_EDGE = Maps.newHashMap();
 	
-	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper("nether_wastes", "minecraft", BuiltinRegistries.BIOME.get(new Identifier("nether_wastes")));
-	public static final NetherBiome BIOME_CRIMSON_FOREST = new NetherBiomeWrapper("crimson_forest", "minecraft", BuiltinRegistries.BIOME.get(new Identifier("crimson_forest")));
-	public static final NetherBiome BIOME_WARPED_FOREST = new NetherBiomeWrapper("warped_forest", "minecraft", BuiltinRegistries.BIOME.get(new Identifier("warped_forest")));
-	public static final NetherBiome BIOME_BASALT_DELTAS = new NetherBiomeWrapper("basalt_deltas", "minecraft", BuiltinRegistries.BIOME.get(new Identifier("basalt_deltas")));
+	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper(new Identifier("nether_wastes"));
+	public static final NetherBiome BIOME_CRIMSON_FOREST = new NetherBiomeWrapper(new Identifier("crimson_forest"));
+	public static final NetherBiome BIOME_WARPED_FOREST = new NetherBiomeWrapper(new Identifier("warped_forest"));
+	public static final NetherBiome BIOME_BASALT_DELTAS = new NetherBiomeWrapper(new Identifier("basalt_deltas"));
 	
-	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherBiomeGravelDesert("Gravel Desert");
-	public static final NetherBiome BIOME_NETHER_JUNGLE = new NetherBiomeJungle("Nether Jungle");
+	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherGravelDesert("Gravel Desert");
+	public static final NetherBiome BIOME_NETHER_JUNGLE = new NetherJungle("Nether Jungle");
 	public static final NetherBiome BIOME_WART_FOREST = new NetherWartForest("Wart Forest");
 	public static final NetherBiome BIOME_GRASSLANDS = new NetherGrasslands("Nether Grasslands");
 	public static final NetherBiome BIOME_MUSHROOM_FOREST = new NetherMushroomForest("Nether Mushroom Forest");
@@ -127,7 +124,7 @@ public class BiomesRegistry
 						float chance = Config.getFloat("biomes." + group, name + "_chance", 1);
 						if (chance > 0)
 						{
-							NetherBiomeWrapper wrapper = new NetherBiomeWrapper(name, group, biome);
+							NetherBiomeWrapper wrapper = new NetherBiomeWrapper(id);
 							maxChance += chance;
 							wrapper.setGenChance(maxChance);
 							wrapper.build();
@@ -156,7 +153,7 @@ public class BiomesRegistry
 				Identifier id = BuiltinRegistries.BIOME.getId(biome);
 				if (id.getNamespace().equals("minecraft"))
 				{
-					NetherBiomeWrapper wrapper = new NetherBiomeWrapper(id.getPath(), "minecraft", biome);
+					NetherBiomeWrapper wrapper = new NetherBiomeWrapper(id);
 					registerDefaultWrapped(wrapper);
 				}
 			}
@@ -245,44 +242,21 @@ public class BiomesRegistry
 	private static boolean hasLink(Biome biome)
 	{
 		Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
-		return optional.isPresent() && LINKS.containsKey(optional.get());
+		if (!optional.isPresent()) return false;
+		Identifier id = optional.get().getValue();
+		for (RegistryKey<Biome> key: KEYS.values()) if (id.equals(key.getValue())) return true;
+		return false;
 	}
 	
 	private static void makeLink(NetherBiome netherBiome)
 	{
 		Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(netherBiome.getBiome());
 		RegistryKey<Biome> key = optional.isPresent() ? optional.get() : RegistryKey.of(Registry.BIOME_KEY, netherBiome.getID());
-		System.out.println(netherBiome + " " + key);
-		LINKS.put(key, netherBiome);
 		KEYS.put(netherBiome, key);
 	}
 	
 	public static NetherBiome getFromBiome(Biome biome)
 	{
-		/*System.out.println(KEYS2.get(biome));
-		Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
-		if (!optional.isPresent())
-		{
-			RegistryKey<Biome> key = KEYS2.get(biome);
-			return key == null ? BIOME_EMPTY_NETHER : LINKS.getOrDefault(key, BIOME_EMPTY_NETHER);
-		}
-		return LINKS.getOrDefault(optional.get(), BIOME_EMPTY_NETHER);*/
-		
-		/*int code = biome.hashCode();
-		System.out.println("SRC Hash " + code);
-		
-		for (NetherBiome netherBiome: ALL_BIOMES)
-		{
-			if (netherBiome.getBiome().hashCode() == code)
-			{
-				System.out.println("Equal! " + netherBiome);
-				return netherBiome;
-			}
-			else
-				System.out.println("NE " + netherBiome + " " + netherBiome.getBiome().hashCode());
-		}
-		return BIOME_EMPTY_NETHER;*/
-		
 		return MUTABLE.getOrDefault(biome, BIOME_EMPTY_NETHER);
 	}
 	

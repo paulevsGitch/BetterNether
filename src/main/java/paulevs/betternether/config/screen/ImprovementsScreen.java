@@ -1,5 +1,6 @@
 package paulevs.betternether.config.screen;
 
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
@@ -142,6 +143,6 @@ public class ImprovementsScreen extends Screen
 		{
 			button.render(matrices, mouseX, mouseY, delta);
 		}
-		this.drawCenteredText(matrices, this.textRenderer, header, this.width / 2, 14, 16777215);
+		DrawableHelper.drawCenteredText(matrices, this.textRenderer, header, this.width / 2, 14, 16777215);
 	}
 }
