@@ -103,20 +103,6 @@ public class BNWorldGenerator
 		
 		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
 	}
-	
-	/*public static void addCities()
-	{
-		for (Biome biome: BuiltinRegistries.BIOME)
-		{
-			if (biome.getCategory() == Category.NETHER)
-			{
-				GenerationSettingsMixin settings = ((GenerationSettingsMixin) biome.getGenerationSettings());
-				List<Supplier<ConfiguredStructureFeature<?, ?>>> features = settings.getStructureFeatures();
-				settings.setStructureFeatures(new ArrayList<>(features));
-				biome.getGenerationSettings().getStructureFeatures().add(() -> { return cityConfigured; });
-			}
-		}
-	}*/
 
 	public static void init(long seed)
 	{
