@@ -1,9 +1,9 @@
 package paulevs.betternether.world.structures.piece;
 
-import java.util.Locale;
-
 import net.minecraft.structure.StructurePieceType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import paulevs.betternether.BetterNether;
 
 public class StructureTypes
 {
@@ -15,6 +15,6 @@ public class StructureTypes
 	
 	protected static StructurePieceType register(StructurePieceType pieceType, String id)
 	{
-		return (StructurePieceType)Registry.register(Registry.STRUCTURE_PIECE, (String)id.toLowerCase(Locale.ROOT), pieceType);
+		return Registry.register(Registry.STRUCTURE_PIECE, new Identifier(BetterNether.MOD_ID, id), pieceType);
 	}
 }

@@ -338,7 +338,7 @@ public class NetherBiome
 	
 	public boolean canGenerate(float chance)
 	{
-		return chance < this.genChance;
+		return chance <= this.genChance;
 	}
 	
 	public void setGenChance(float chance)

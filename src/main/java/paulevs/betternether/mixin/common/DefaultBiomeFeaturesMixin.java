@@ -8,17 +8,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import paulevs.betternether.config.Config;
+import paulevs.betternether.world.BNWorldGenerator;
 
 @Mixin(DefaultBiomeFeatures.class)
 public class DefaultBiomeFeaturesMixin
 {
-	@Inject(method = "addNetherMineables", at = @At("RETURN"))
+	@Inject(method = "addNetherMineables", at = @At("TAIL"))
 	private static void addNetherMineables(GenerationSettings.Builder builder, CallbackInfo info)
 	{
 		if (Config.getBoolean("generator.world.cities", "generate", true))
 		{
-			//builder.structureFeature(BNWorldGenerator.CITY.configure(FeatureConfig.DEFAULT));
-			//builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, BNWorldGenerator.CITY.configure(FeatureConfig.DEFAULT));
+			builder.structureFeature(BNWorldGenerator.CITY_CONFIGURED);
 		}
 	}
 }

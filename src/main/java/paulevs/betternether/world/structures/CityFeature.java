@@ -8,13 +8,14 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.Heightmap.Type;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.FlatChunkGenerator;
+import net.minecraft.world.gen.chunk.StructureConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-import paulevs.betternether.config.Config;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
@@ -22,46 +23,16 @@ import paulevs.betternether.world.structures.piece.CityPiece;
 
 public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 {
-	private static final ChunkRandom RANDOM = new ChunkRandom();
-	private final int distance;
-	private final int separation;
+	private static CityGenerator generator;
 	
 	public CityFeature()
 	{
 		super(DefaultFeatureConfig.CODEC);
-		distance = Config.getInt("generator.world.cities", "distance", 64);
-		separation = distance >> 1;
 	}
 
-	private static final CityGenerator GENERATOR = new CityGenerator();
-	
-	/*@Override
-	protected boolean shouldStartAt(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long seed, ChunkRandom chunkRandom, int i, int j, Biome biome, ChunkPos chunkPos, DefaultFeatureConfig defaultFeatureConfig)
+	public static void initGenerator()
 	{
-		int q = chunkPos.x < 0 ? chunkPos.x - separation + 1 : chunkPos.x;
-		int r = chunkPos.z < 0 ? chunkPos.z - separation + 1 : chunkPos.z;
-		int s = q / distance;
-		int t = r / distance;
-		RANDOM.setRegionSeed(seed, s, t, 897527);
-		s *= distance;
-		t *= distance;
-		s += RANDOM.nextInt(separation);
-		t += RANDOM.nextInt(separation);
-		return s == chunkPos.x && t == chunkPos.z;
-	}*/
-	
-	public boolean canStartAt(long seed, int cx, int cz)
-	{
-		int q = cx < 0 ? cx - separation + 1 : cx;
-		int r = cz < 0 ? cz - separation + 1 : cz;
-		int s = q / distance;
-		int t = r / distance;
-		RANDOM.setRegionSeed(seed, s, t, 897527);
-		s *= distance;
-		t *= distance;
-		s += RANDOM.nextInt(separation);
-		t += RANDOM.nextInt(separation);
-		return s == cx && t == cz;
+		generator = new CityGenerator();
 	}
 
 	@Override
@@ -69,6 +40,12 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 	{
 		return CityFeature.CityStart::new;
 	}
+	
+	@Override
+    public BlockPos locateStructure(WorldView worldView, StructureAccessor structureAccessor, BlockPos blockPos, int radius, boolean skipExistingChunks, long seed, StructureConfig structureConfig)
+	{
+        return new BlockPos((blockPos.getX() >> 8) << 8, 40, (blockPos.getZ() >> 8) << 8);
+    }
 
 	public static class CityStart extends StructureStart<DefaultFeatureConfig>
 	{
@@ -89,10 +66,9 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 			}
 			
 			BlockPos center = new BlockPos(px, y, pz);
-			System.out.println("City " + center);
 			
 			//CityPalette palette = Palettes.getRandom(random);
-			List<CityPiece> buildings = GENERATOR.generate(center, this.random, Palettes.EMPTY);
+			List<CityPiece> buildings = generator.generate(center, this.random, Palettes.EMPTY);
 			BlockBox cityBox = BlockBox.empty();
 			for (CityPiece p: buildings)
 				cityBox.encompass(p.getBoundingBox());

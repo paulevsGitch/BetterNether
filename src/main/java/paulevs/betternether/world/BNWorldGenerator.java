@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
@@ -19,7 +20,6 @@ import net.minecraft.world.gen.GenerationStep.Feature;
 import net.minecraft.world.gen.chunk.StructureConfig;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
@@ -70,20 +70,8 @@ public class BNWorldGenerator
 	protected static boolean volumetric;
 	
 	public static final CityFeature CITY = new CityFeature();
-	public static ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> city_conf;
-
-	/*Registry.register(
-		Registry.STRUCTURE_FEATURE,
-		new Identifier(BetterNether.MOD_ID, "nether_city"),
-		new CityFeature()
-	);*/
-	//public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CITY_CONFIGURED = CITY.configure(FeatureConfig.DEFAULT);
+	public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CITY_CONFIGURED = CITY.configure(DefaultFeatureConfig.DEFAULT);
 	
-	//CITY = Registry.register(Registry.0,0);
-	
-	//public static StructureFeature<DefaultFeatureConfig> city;
-	
-	//@SuppressWarnings("unchecked")
 	public static void onModInit()
 	{
 		hasCleaningPass = Config.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
@@ -107,62 +95,33 @@ public class BNWorldGenerator
 		int distance = Config.getInt("generator.world.cities", "distance", 64);
 		int separation = distance >> 1;
 		
-		city_conf = CITY.configure(FeatureConfig.DEFAULT);
 		FabricStructureBuilder.create(new Identifier(BetterNether.MOD_ID, "nether_city"), CITY)
 		.step(Feature.RAW_GENERATION)
 		.defaultConfig(new StructureConfig(distance, separation, 1234))
-		.superflatFeature(city_conf)
+		.superflatFeature(CITY_CONFIGURED)
 		.register();
 		
-		/*if (Config.getBoolean("generator.world.cities", "generate", true))
-		{
-			StructureFeature.STRUCTURES.put("nether_city", CITY);
-			
-			Map<StructureFeature<?>, GenerationStep.Feature> genStep = null;
-			for (Field f: StructureFeature.class.getDeclaredFields())
-			{
-				if (f.getType().equals(Map.class))
-				{
-					f.setAccessible(true);
-					try
-					{
-						genStep = (Map<StructureFeature<?>, Feature>) f.get(StructureFeature.class);
-					}
-					catch (IllegalArgumentException | IllegalAccessException e)
-					{
-						e.printStackTrace();
-					}
-					break;
-				}
-			}
-			if (genStep != null)
-				genStep.put(CITY, GenerationStep.Feature.RAW_GENERATION);
-			else
-				System.out.println("Cities faild adding to generation");
-		}*/
+		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
 	}
 	
-	public static void addCities()
+	/*public static void addCities()
 	{
-		/*for (Biome biome: BuiltinRegistries.BIOME)
+		for (Biome biome: BuiltinRegistries.BIOME)
 		{
 			if (biome.getCategory() == Category.NETHER)
 			{
 				GenerationSettingsMixin settings = ((GenerationSettingsMixin) biome.getGenerationSettings());
 				List<Supplier<ConfiguredStructureFeature<?, ?>>> features = settings.getStructureFeatures();
 				settings.setStructureFeatures(new ArrayList<>(features));
-				biome.getGenerationSettings().getStructureFeatures().add(() -> { return city_conf; });
+				biome.getGenerationSettings().getStructureFeatures().add(() -> { return cityConfigured; });
 			}
-		}*/
-	}
+		}
+	}*/
 
 	public static void init(long seed)
 	{
-		//if (caves == null)
-		//{
-			caves = new StructureCaves(seed);
-			paths = new StructurePath(seed + 1);
-		//}
+		caves = new StructureCaves(seed);
+		paths = new StructurePath(seed + 1);
 	}
 	
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random)

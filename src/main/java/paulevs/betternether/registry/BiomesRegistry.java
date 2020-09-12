@@ -163,7 +163,7 @@ public class BiomesRegistry
 	private static void registerDefaultWrapped(NetherBiome biome)
 	{
 		float chance = Config.getFloat("biomes.minecraft.main", biome.getRegistryName() + "_chance", 1);
-		if (chance > 0)
+		if (chance > 0.0F)
 		{
 			maxChance += chance;
 			biome.setGenChance(maxChance);
@@ -186,7 +186,7 @@ public class BiomesRegistry
 	{
 		String regName = biome.getRegistryName();
 		float chance = Config.getFloat("biomes.betternether.main", regName + "_chance", 1);
-		if (chance > 0)
+		if (chance > 0.0F)
 		{
 			maxChance += chance;
 			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
@@ -203,7 +203,7 @@ public class BiomesRegistry
 	{
 		String regName = biome.getRegistryName();
 		int sizeConf = Config.getInt("biomes.betternether.edge", regName + "_size", size);
-		if (sizeConf > 0)
+		if (sizeConf > 0.0F)
 		{
 			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			mainBiome.setEdge(biome);
@@ -219,7 +219,7 @@ public class BiomesRegistry
 	{
 		String regName = biome.getRegistryName();
 		chance = Config.getFloat("biomes.betternether.variation", regName + "_chance", chance);
-		if (chance > 0)
+		if (chance > 0.0F)
 		{
 			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			mainBiome.addSubBiome(biome, chance);

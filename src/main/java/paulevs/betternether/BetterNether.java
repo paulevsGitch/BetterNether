@@ -28,11 +28,11 @@ public class BetterNether implements ModInitializer
 	{
 		initOptions();
 		SoundsRegistry.register();
-		StructureTypes.init();
 		BlocksRegistry.register();
 		BlockEntitiesRegistry.register();
 		ItemsRegistry.register();
 		EntityRegistry.register();
+		StructureTypes.init();
 		BNWorldGenerator.onModInit();
 		BiomesRegistry.register();
 		BrewingRegistry.register();
