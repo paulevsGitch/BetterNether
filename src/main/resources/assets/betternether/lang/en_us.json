@@ -67,7 +67,6 @@
 	"block.betternether.cincinnasite_bricks_pillar": "Cincinnasite Brick Pillar",
 	"block.betternether.cincinnasite_button": "Cincinnasite Button",
 	"block.betternether.cincinnasite_carved": "Cincinnasite Carved",
-	"block.betternether.cincinnasite_fire_bowl": "Cincinnasite Fire Bowl",
 	"block.betternether.cincinnasite_forge": "Cincinnasite Forge",
 	"block.betternether.cincinnasite_forged": "Forged Cincinnasite Block",
 	"block.betternether.cincinnasite_frame": "Cincinnasite Frame",
@@ -615,5 +614,12 @@
 	"block.betternether.sepia_mushroom_grass": "Sepian Mushroom Grass",
 	"block.betternether.sepia_bone_grass": "Sepian Bone Grass",
 	"block.betternether.golden_lumabus_seed": "Golden Lumabus Seed",
-	"block.betternether.golden_lumabus_vine": "Golden Lumabus Vine"
+	"block.betternether.golden_lumabus_vine": "Golden Lumabus Vine",
+	
+	"block.betternether.cincinnasite_fire_bowl": "Cincinnasite Fire Bowl",
+	"block.betternether.bricks_fire_bowl": "Bricks Fire Bowl",
+	"block.betternether.netherite_fire_bowl": "Netherite Fire Bowl",
+	"block.betternether.cincinnasite_fire_bowl_soul": "Soul Cincinnasite Fire Bowl",
+	"block.betternether.bricks_fire_bowl_soul": "Soul Bricks Fire Bowl",
+	"block.betternether.netherite_fire_bowl_soul": "Soul Netherite Fire Bowl"
 }

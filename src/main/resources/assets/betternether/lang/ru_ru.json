@@ -65,7 +65,6 @@
 	"block.betternether.cincinnasite_bricks_pillar": "Колонна из цинцинназитового кирпича",
 	"block.betternether.cincinnasite_button": "Цинцинназитовая кнопка",
 	"block.betternether.cincinnasite_carved": "Резной цинцинназит",
-	"block.betternether.cincinnasite_fire_bowl": "Цинцинназитовая огненная чаша",
 	"block.betternether.cincinnasite_forge": "Цинцинназитовая печь",
 	"block.betternether.cincinnasite_forged": "Сплавленный цинцинназитовый блок",
 	"block.betternether.cincinnasite_frame": "Цинцинназитовая рамка",
@@ -613,5 +612,12 @@
 	"block.betternether.sepia_mushroom_grass": "Сепиевая грибная трава",
 	"block.betternether.sepia_bone_grass": "Сепиевая грибная трава",
 	"block.betternether.golden_lumabus_seed": "Золотое семя люмабуса",
-	"block.betternether.golden_lumabus_vine": "Золотая лоза люмабуса"
+	"block.betternether.golden_lumabus_vine": "Золотая лоза люмабуса",
+	
+	"block.betternether.cincinnasite_fire_bowl": "Цинцинназитовая огненная чаша",
+	"block.betternether.bricks_fire_bowl": "Кирпичная огненная чаша",
+	"block.betternether.netherite_fire_bowl": "Незеритовая огненная чаша",
+	"block.betternether.cincinnasite_fire_bowl_soul": "Цинцинназитовая огненная чаша души",
+	"block.betternether.bricks_fire_bowl_soul": "Кирпичная огненная чаша души",
+	"block.betternether.netherite_fire_bowl_soul": "Незеритовая огненная чаша души"
 }

@@ -10,6 +10,7 @@ import net.minecraft.block.MaterialColor;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
@@ -72,7 +73,6 @@ public class BlocksRegistry
 	public static final Block CINCINNASITE_TILE_SMALL = registerBlock("cincinnasite_tile_small", new BlockCincinnasite());
 	public static final Block CINCINNASITE_CARVED = registerBlock("cincinnasite_carved", new BlockCincinnasite());
 	public static final Block CINCINNASITE_WALL = registerWall("cincinnasite_wall", CINCINNASITE_FORGED);
-	public static final Block CINCINNASITE_FIRE_BOWL = registerBlock("cincinnasite_fire_bowl", new BlockCincinnasiteFireBowl());
 	public static final Block CINCINNASITE_BRICKS_PILLAR = registerBlock("cincinnasite_bricks_pillar", new BNPillar(CINCINNASITE_FORGED));
 	public static final Block CINCINNASITE_BARS = registerBlock("cincinnasite_bars", new BNPane(CINCINNASITE_FORGED, true));
 	public static final Block CINCINNASITE_PEDESTAL = registerBlock("cincinnasite_pedestal", new BlockCincinnasitePedestal());
@@ -326,6 +326,15 @@ public class BlocksRegistry
 	public static final Block BLACKSTONE_STALACTITE = registerStalactite("blackstone_stalactite", Blocks.BLACKSTONE);
 	public static final Block BASALT_STALACTITE = registerStalactite("basalt_stalactite", Blocks.BASALT);
 	public static final Block BONE_STALACTITE = registerStalactite("bone_stalactite", BONE_BLOCK);
+	
+	// Fire Bowls
+	public static final Block CINCINNASITE_FIRE_BOWL = registerFireBowl("cincinnasite_fire_bowl", CINCINNASITE_FORGED, Blocks.NETHERRACK, ItemsRegistry.CINCINNASITE_INGOT);
+	public static final Block BRICKS_FIRE_BOWL = registerFireBowl("bricks_fire_bowl", NETHER_BRICK_TILE_LARGE, Blocks.NETHERRACK, Items.NETHER_BRICK);
+	public static final Block NETHERITE_FIRE_BOWL = registerFireBowl("netherite_fire_bowl", Blocks.NETHERITE_BLOCK, Blocks.NETHERRACK, Items.NETHERITE_INGOT);
+	
+	public static final Block CINCINNASITE_FIRE_BOWL_SOUL = registerFireBowl("cincinnasite_fire_bowl_soul", CINCINNASITE_FORGED, Blocks.SOUL_SAND, ItemsRegistry.CINCINNASITE_INGOT);
+	public static final Block BRICKS_FIRE_BOWL_SOUL = registerFireBowl("bricks_fire_bowl_soul", NETHER_BRICK_TILE_LARGE, Blocks.SOUL_SAND, Items.NETHER_BRICK);
+	public static final Block NETHERITE_FIRE_BOWL_SOUL = registerFireBowl("netherite_fire_bowl_soul", Blocks.NETHERITE_BLOCK, Blocks.SOUL_SAND, Items.NETHERITE_INGOT);
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
@@ -814,6 +823,18 @@ public class BlocksRegistry
 		{
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite");
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerFireBowl(String name, Block source, Block inside, Item leg)
+	{
+		Block block = new BlockFireBowl(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
 		}
 		BLOCKS.add(name);
 		return block;

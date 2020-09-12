@@ -28,16 +28,15 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockCincinnasiteFireBowl extends BlockBaseNotFull
+public class BlockFireBowl extends BlockBaseNotFull
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 12, 16);
 	public static final BooleanProperty FIRE = BooleanProperty.of("fire");
 
-	public BlockCincinnasiteFireBowl()
+	public BlockFireBowl(Block source)
 	{
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().lightLevel(getLuminance()));
+		super(FabricBlockSettings.copy(source).nonOpaque().lightLevel(getLuminance()));
 		this.setDefaultState(getStateManager().getDefaultState().with(FIRE, false));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
