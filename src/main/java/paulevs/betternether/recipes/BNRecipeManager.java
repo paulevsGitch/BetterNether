@@ -115,7 +115,7 @@ public class BNRecipeManager
 	
 	private static Ingredient fromStacks(ItemStack... stacks)
 	{
-		return Ingredient.method_26964(Arrays.stream(stacks));
+		return Ingredient.ofStacks(Arrays.stream(stacks));
 	}
 	
 	public static ShapelessRecipe makeEmtyRecipe(Identifier id)

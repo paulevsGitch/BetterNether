@@ -9,10 +9,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
+import paulevs.betternether.config.Config;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
@@ -20,15 +22,15 @@ import paulevs.betternether.world.structures.piece.CityPiece;
 
 public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 {
-	//private static final ChunkRandom RANDOM = new ChunkRandom();
-	//private final int distance;
-	//private final int separation;
+	private static final ChunkRandom RANDOM = new ChunkRandom();
+	private final int distance;
+	private final int separation;
 	
 	public CityFeature()
 	{
 		super(DefaultFeatureConfig.CODEC);
-		//distance = Config.getInt("generator.world.cities", "distance", 64);
-		//separation = distance >> 1;
+		distance = Config.getInt("generator.world.cities", "distance", 64);
+		separation = distance >> 1;
 	}
 
 	private static final CityGenerator GENERATOR = new CityGenerator();
@@ -47,6 +49,20 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 		t += RANDOM.nextInt(separation);
 		return s == chunkPos.x && t == chunkPos.z;
 	}*/
+	
+	public boolean canStartAt(long seed, int cx, int cz)
+	{
+		int q = cx < 0 ? cx - separation + 1 : cx;
+		int r = cz < 0 ? cz - separation + 1 : cz;
+		int s = q / distance;
+		int t = r / distance;
+		RANDOM.setRegionSeed(seed, s, t, 897527);
+		s *= distance;
+		t *= distance;
+		s += RANDOM.nextInt(separation);
+		t += RANDOM.nextInt(separation);
+		return s == cx && t == cz;
+	}
 
 	@Override
 	public StructureStartFactory<DefaultFeatureConfig> getStructureStartFactory()

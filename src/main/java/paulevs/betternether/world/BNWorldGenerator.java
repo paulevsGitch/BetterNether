@@ -68,30 +68,24 @@ public class BNWorldGenerator
 	protected static int biomeSizeXZ;
 	protected static int biomeSizeY;
 	protected static boolean volumetric;
+	
+	public static final CityFeature CITY = new CityFeature();
+	public static ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> city_conf;
 
-	public static final StructureFeature<DefaultFeatureConfig> CITY = new CityFeature();/*Registry.register(
+	/*Registry.register(
 		Registry.STRUCTURE_FEATURE,
 		new Identifier(BetterNether.MOD_ID, "nether_city"),
 		new CityFeature()
 	);*/
-	public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CITY_CONFIGURED = CITY.configure(FeatureConfig.DEFAULT);
+	//public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CITY_CONFIGURED = CITY.configure(FeatureConfig.DEFAULT);
 	
 	//CITY = Registry.register(Registry.0,0);
 	
-	public static StructureFeature<DefaultFeatureConfig> city;
+	//public static StructureFeature<DefaultFeatureConfig> city;
 	
 	//@SuppressWarnings("unchecked")
 	public static void onModInit()
 	{
-		int distance = Config.getInt("generator.world.cities", "distance", 64);
-		int separation = distance >> 1;
-		
-		city = FabricStructureBuilder.create(new Identifier(BetterNether.MOD_ID, "nether_city"), CITY)
-		.step(Feature.RAW_GENERATION)
-		.defaultConfig(new StructureConfig(distance, separation, 1234))
-		.superflatFeature(CITY.configure(FeatureConfig.DEFAULT))
-		.register();
-		
 		hasCleaningPass = Config.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
 		hasFixPass = Config.getBoolean("generator.world.terrain", "world_fixing_pass", true);
 		
@@ -108,6 +102,17 @@ public class BNWorldGenerator
 		biomeSizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
 		biomeSizeY = Config.getInt("generator_world", "biome_size_y", 40);
 		volumetric = Config.getBoolean("generator_world", "volumetric_biomes", true);
+		
+		
+		int distance = Config.getInt("generator.world.cities", "distance", 64);
+		int separation = distance >> 1;
+		
+		city_conf = CITY.configure(FeatureConfig.DEFAULT);
+		FabricStructureBuilder.create(new Identifier(BetterNether.MOD_ID, "nether_city"), CITY)
+		.step(Feature.RAW_GENERATION)
+		.defaultConfig(new StructureConfig(distance, separation, 1234))
+		.superflatFeature(city_conf)
+		.register();
 		
 		/*if (Config.getBoolean("generator.world.cities", "generate", true))
 		{
@@ -134,6 +139,20 @@ public class BNWorldGenerator
 				genStep.put(CITY, GenerationStep.Feature.RAW_GENERATION);
 			else
 				System.out.println("Cities faild adding to generation");
+		}*/
+	}
+	
+	public static void addCities()
+	{
+		/*for (Biome biome: BuiltinRegistries.BIOME)
+		{
+			if (biome.getCategory() == Category.NETHER)
+			{
+				GenerationSettingsMixin settings = ((GenerationSettingsMixin) biome.getGenerationSettings());
+				List<Supplier<ConfiguredStructureFeature<?, ?>>> features = settings.getStructureFeatures();
+				settings.setStructureFeatures(new ArrayList<>(features));
+				biome.getGenerationSettings().getStructureFeatures().add(() -> { return city_conf; });
+			}
 		}*/
 	}
 

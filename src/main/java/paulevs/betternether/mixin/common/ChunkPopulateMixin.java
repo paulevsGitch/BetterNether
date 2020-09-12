@@ -35,6 +35,10 @@ public abstract class ChunkPopulateMixin
 			int sz = chunkZ << 4;
 			BNWorldGenerator.prePopulate(region, sx, sz, RANDOM);
 			
+			//if (BNWorldGenerator.CITY.canStartAt(region.getSeed(), chunkX, chunkZ))
+			//	region.getChunk(sx, sz).setStructureStart(BNWorldGenerator.CITY, new CityFeature.CityStart(BNWorldGenerator.CITY, sx, sz, new BlockBox(), 0, region.getSeed()));
+			//BNWorldGenerator.city_conf.tryPlaceStart(null, region, region, null, region.getSeed(), new ChunkPos(chunkX, chunkZ), null, 0, null);
+			
 			long featureSeed = RANDOM.setPopulationSeed(region.getSeed(), chunkX, chunkZ);
 			ChunkGenerator generator = (ChunkGenerator) (Object) this;
 			for (Biome biome: BNWorldGenerator.getPopulateBiomes())

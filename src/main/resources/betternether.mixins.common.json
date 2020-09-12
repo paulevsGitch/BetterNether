@@ -22,7 +22,8 @@
 	"ServerPlayNetworkHandlerMixin",
 	"SheepEntityMixin",
 	"DimensionTypeMixin",
-	"DefaultBiomeFeaturesMixin"
+	"DefaultBiomeFeaturesMixin",
+	"GenerationSettingsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

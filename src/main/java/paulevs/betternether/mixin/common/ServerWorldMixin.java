@@ -29,5 +29,6 @@ public class ServerWorldMixin
 	{
 		BiomesRegistry.registerAllOtherBiomes();
 		BNWorldGenerator.init(seed);
+		BNWorldGenerator.addCities();
 	}
 }
