@@ -138,7 +138,7 @@ public class BiomeDefinition
 		Identifier eID = Registry.ENTITY_TYPE.getId(type);
 		if (eID != Registry.ENTITY_TYPE.getDefaultId())
 		{
-			String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".mobs." + eID.getNamespace();
+			String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".mobs." + eID.getNamespace() + "." + eID.getPath();
 			SpawnInfo info = new SpawnInfo();
 			info.type = type;
 			info.weight = Config.getInt(path, "weight", weight);
