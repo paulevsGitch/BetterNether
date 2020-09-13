@@ -11,6 +11,7 @@ import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureBlackVine;
@@ -34,9 +35,10 @@ public class NetherSwampland extends NetherBiome
 	{
 		super(new BiomeDefinition(name)
 				.setFogColor(137, 19, 78)
-				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				.setLoop(SoundsRegistry.AMBIENT_SWAMPLAND)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				.setMusic(SoundEvents.MUSIC_NETHER_CRIMSON_FOREST)
 				.setDefaultMobs(false)
 				.addMobSpawn(EntityType.STRIDER, 40, 2, 4)
 				.addMobSpawn(EntityType.MAGMA_CUBE, 40, 2, 4));

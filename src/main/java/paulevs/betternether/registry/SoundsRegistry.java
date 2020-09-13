@@ -10,6 +10,7 @@ public class SoundsRegistry
 	public static final SoundEvent AMBIENT_MUSHROOM_FOREST = register("betternether.ambient.mushroom_forest");
 	public static final SoundEvent AMBIENT_GRAVEL_DESERT = register("betternether.ambient.gravel_desert");
 	public static final SoundEvent AMBIENT_NETHER_JUNGLE = register("betternether.ambient.nether_jungle");
+	public static final SoundEvent AMBIENT_SWAMPLAND = register("betternether.ambient.swampland");
 	
 	public static final SoundEvent MOB_FIREFLY_FLY = register("betternether.mob.firefly.fly");
 	public static final SoundEvent MOB_JELLYFISH = register("betternether.mob.jellyfish");

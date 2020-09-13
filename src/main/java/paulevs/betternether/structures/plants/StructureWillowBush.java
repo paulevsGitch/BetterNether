@@ -11,6 +11,7 @@ import net.minecraft.util.math.Direction.AxisDirection;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
@@ -27,7 +28,7 @@ public class StructureWillowBush implements IStructure
 		if (!world.isAir(pos) || !world.isAir(pos.up())|| !world.isAir(pos.up(15)))
 			return;
 		
-		float r = random.nextFloat() * 2 + 1;
+		float r = random.nextFloat() * 2F + 0.5F;
 		int count = (int) r;
 		
 		for (int i = 0; i < count; i++)
@@ -82,7 +83,7 @@ public class StructureWillowBush implements IStructure
 	
 	private void setIfAir(WorldAccess world, BlockPos pos, BlockState state)
 	{
-		if (world.isAir(pos))
+		if (world.isAir(pos) || world.getBlockState(pos).getBlock() instanceof BlockNetherGrass)
 			BlocksHelper.setWithoutUpdate(world, pos, state);
 	}
 }
