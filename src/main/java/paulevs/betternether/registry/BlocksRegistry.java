@@ -161,6 +161,7 @@ public class BlocksRegistry
 	public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS);
 	public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS);
 	public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
+	public static final Block BASALT_SLAB = registerSlab("basalt_slab", Blocks.BASALT);
 	
 	// Willow //
 	public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());

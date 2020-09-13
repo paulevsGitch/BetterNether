@@ -15,6 +15,7 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureBlackVine;
 import paulevs.betternether.structures.plants.StructureFeatherFern;
+import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSmoker;
 import paulevs.betternether.structures.plants.StructureSoulVein;
@@ -45,6 +46,7 @@ public class NetherSwampland extends NetherBiome
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.8F, false);
 		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, false);
 		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.05F, false);
+		addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructureType.FLOOR, 0.03F, true);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.01F, false);
 		addStructure("swamp_grass", new StructureSwampGrass(), StructureType.FLOOR, 0.4F, false);
 		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, true);

@@ -131,7 +131,7 @@ public class StructurePath implements IStructure
 		{
 			return BlocksRegistry.SOUL_SANDSTONE_SLAB.getDefaultState();
 		}*/
-		return Blocks.COBBLESTONE_SLAB.getDefaultState();
+		return BlocksRegistry.BASALT_SLAB.getDefaultState();
 	}
 	
 	private boolean needsSlab(ServerWorldAccess world, BlockPos pos)

@@ -16,6 +16,7 @@ import paulevs.betternether.structures.plants.StructureEggPlant;
 import paulevs.betternether.structures.plants.StructureEye;
 import paulevs.betternether.structures.plants.StructureFeatherFern;
 import paulevs.betternether.structures.plants.StructureGoldenVine;
+import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.structures.plants.StructureJungleMoss;
 import paulevs.betternether.structures.plants.StructureJunglePlant;
 import paulevs.betternether.structures.plants.StructureLucis;
@@ -45,6 +46,7 @@ public class NetherJungle extends NetherBiome
 		addStructure("bush_rubeus", new StructureRubeusBush(), StructureType.FLOOR, 0.1F, false);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, false);
 		addStructure("egg_plant", new StructureEggPlant(), StructureType.FLOOR, 0.05F, true);
+		addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructureType.FLOOR, 0.03F, true);
 		addStructure("feather_fern", new StructureFeatherFern(), StructureType.FLOOR, 0.05F, true);
 		addStructure("jungle_plant", new StructureJunglePlant(), StructureType.FLOOR, 0.1F, false);
 		addStructure("lucis", new StructureLucis(), StructureType.WALL, 0.1F, false);
