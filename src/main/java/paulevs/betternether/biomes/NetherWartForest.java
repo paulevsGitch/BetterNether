@@ -33,6 +33,7 @@ public class NetherWartForest extends NetherBiome
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				.setMusic(SoundEvents.MUSIC_NETHER_CRIMSON_FOREST)
 				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.CRIMSON_SPORE, 0.05F))
 				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
 		this.setNoiseDensity(0.45F);

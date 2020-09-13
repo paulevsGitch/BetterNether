@@ -23,6 +23,7 @@ public class NetherWartForestEdge extends NetherBiome
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				.setMusic(SoundEvents.MUSIC_NETHER_CRIMSON_FOREST)
 				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.01F, false);

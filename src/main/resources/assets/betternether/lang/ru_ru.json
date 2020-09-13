@@ -622,5 +622,27 @@
 	"block.betternether.netherite_fire_bowl_soul": "Незеритовая огненная чаша души",
 	
 	"block.betternether.swampland_grass": "Болотный дёрн",
-	"block.betternether.basalt_slab": "Базальтовая плита"
+	"block.betternether.basalt_slab": "Базальтовая плита",
+	
+	"block.betternether.anchor_tree_bark": "Кора якорного дерева",
+	"block.betternether.anchor_tree_button": "Кнопка из якорного дерева",
+	"block.betternether.anchor_tree_door": "Дверь из якорного дерева",
+	"block.betternether.anchor_tree_fence": "Забор из якорного дерева",
+	"block.betternether.anchor_tree_gate": "Калитка из якорного дерева",
+	"block.betternether.anchor_tree_ladder": "Лестница из якорного дерева",
+	"block.betternether.anchor_tree_log": "Бревно якорного дерева",
+	"block.betternether.anchor_tree_planks": "Доски якорного дерева",
+	"block.betternether.anchor_tree_plate": "Нажимная плита из якорного дерева",
+	"block.betternether.anchor_tree_slab": "Плита из якорного дерева",
+	"block.betternether.anchor_tree_stairs": "Ступени из якорного дерева",
+	"block.betternether.anchor_tree_trapdoor": "Люк из якорного дерева",
+	"block.betternether.barrel_anchor_tree": "Бочка из якорного дерева",
+	"block.betternether.bar_stool_anchor_tree": "Барный стул из якорного дерева",
+	"block.betternether.chair_anchor_tree": "Стул из якорного дерева",
+	"block.betternether.chest_anchor_tree": "Сундук из якорного дерева",
+	"block.betternether.crafting_table_anchor_tree": "Верстак из якорного дерева",
+	"block.betternether.sign_anchor_tree": "Табличка из якорного дерева",
+	"block.betternether.striped_bark_anchor_tree": "Обтёсанная кора якорного дерева",
+	"block.betternether.striped_log_anchor_tree": "Обтёсанное бревно якорного дерева",
+	"block.betternether.taburet_anchor_tree": "Табурет из якорного дерева"
 }

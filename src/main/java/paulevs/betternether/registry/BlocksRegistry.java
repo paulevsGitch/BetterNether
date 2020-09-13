@@ -16,6 +16,7 @@ import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.blocks.*;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
+import paulevs.betternether.blocks.complex.WoodenMaterial;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
@@ -489,7 +490,7 @@ public class BlocksRegistry
 	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
 	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
 	
-	//public static final WoodenMaterial TEST_MATERIAL = new WoodenMaterial("test_material", MaterialColor.BLACK);
+	public static final WoodenMaterial ANCHOR_TREE = new WoodenMaterial("anchor_tree", MaterialColor.BLUE);
 	
 	public static void register() {}
 	
@@ -519,7 +520,7 @@ public class BlocksRegistry
 		ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
 	}
 	
-	private static Block registerStairs(String name, Block source)
+	public static Block registerStairs(String name, Block source)
 	{
 		Block stairs = new BNStairs(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -531,7 +532,7 @@ public class BlocksRegistry
 		return stairs;
 	}
 	
-	private static Block registerSlab(String name, Block source)
+	public static Block registerSlab(String name, Block source)
 	{
 		Block slab = new BNSlab(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -555,7 +556,7 @@ public class BlocksRegistry
 		return roof;
 	}
 	
-	private static Block registerButton(String name, Block source)
+	public static Block registerButton(String name, Block source)
 	{
 		Block button = new BNButton(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -567,7 +568,7 @@ public class BlocksRegistry
 		return button;
 	}
 	
-	private static Block registerPlate(String name, Block source)
+	public static Block registerPlate(String name, Block source)
 	{
 		Block plate = new BNPlate(ActivationRule.EVERYTHING, source);
 		if (Config.getBoolean("blocks", name, true))
@@ -591,7 +592,7 @@ public class BlocksRegistry
 		return plate;
 	}
 	
-	private static Block registerPlanks(String name, Block planks, Block... logs)
+	public static Block registerPlanks(String name, Block planks, Block... logs)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
@@ -616,7 +617,7 @@ public class BlocksRegistry
 		return planks;
 	}
 	
-	private static Block registerLog(String name, Block log, Block stem)
+	public static Block registerLog(String name, Block log, Block stem)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
@@ -627,7 +628,7 @@ public class BlocksRegistry
 		return log;
 	}
 	
-	private static Block registerBark(String name, Block bark, Block log)
+	public static Block registerBark(String name, Block bark, Block log)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
@@ -638,7 +639,7 @@ public class BlocksRegistry
 		return bark;
 	}
 	
-	private static Block registerFence(String name, Block source)
+	public static Block registerFence(String name, Block source)
 	{
 		Block fence = new BNFence(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -650,7 +651,7 @@ public class BlocksRegistry
 		return fence;
 	}
 	
-	private static Block registerGate(String name, Block source)
+	public static Block registerGate(String name, Block source)
 	{
 		Block gate = new BNGate(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -662,7 +663,7 @@ public class BlocksRegistry
 		return gate;
 	}
 	
-	private static Block registerDoor(String name, Block source)
+	public static Block registerDoor(String name, Block source)
 	{
 		Block door = new BNDoor(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -674,7 +675,7 @@ public class BlocksRegistry
 		return door;
 	}
 	
-	private static Block registerTrapdoor(String name, Block source)
+	public static Block registerTrapdoor(String name, Block source)
 	{
 		Block trapdoor = new BNTrapdoor(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -686,7 +687,7 @@ public class BlocksRegistry
 		return trapdoor;
 	}
 	
-	private static Block registerMakeable2X2(String name, Block result, String group, Block... sources)
+	public static Block registerMakeable2X2(String name, Block result, String group, Block... sources)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
@@ -698,7 +699,7 @@ public class BlocksRegistry
 		return result;
 	}
 	
-	private static Block registerWall(String name, Block source)
+	public static Block registerWall(String name, Block source)
 	{
 		Block wall = new BNWall(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -710,7 +711,7 @@ public class BlocksRegistry
 		return wall;
 	}
 	
-	private static Block registerCraftingTable(String name, Block source)
+	public static Block registerCraftingTable(String name, Block source)
 	{
 		Block block = new BNCraftingTable(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -722,7 +723,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerChest(String name, Block source)
+	public static Block registerChest(String name, Block source)
 	{
 		Block block = new BNChest(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -734,7 +735,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerSign(String name, Block source)
+	public static Block registerSign(String name, Block source)
 	{
 		Block block = new BNSign(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -746,7 +747,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerBarrel(String name, Block source, Block slab)
+	public static Block registerBarrel(String name, Block source, Block slab)
 	{
 		Block block = new BNBarrel(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -758,7 +759,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerLadder(String name, Block source)
+	public static Block registerLadder(String name, Block source)
 	{
 		Block block = new BNLadder(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -770,7 +771,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerTaburet(String name, Block source)
+	public static Block registerTaburet(String name, Block source)
 	{
 		Block block = new BNTaburet(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -782,7 +783,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerChair(String name, Block source)
+	public static Block registerChair(String name, Block source)
 	{
 		Block block = new BNNormalChair(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -794,7 +795,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerBarStool(String name, Block source)
+	public static Block registerBarStool(String name, Block source)
 	{
 		Block block = new BNBarStool(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -806,7 +807,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerFurnace(String name, Block source)
+	public static Block registerFurnace(String name, Block source)
 	{
 		Block block = new BlockNetherFurnace(source);
 		if (Config.getBoolean("blocks", name, true))

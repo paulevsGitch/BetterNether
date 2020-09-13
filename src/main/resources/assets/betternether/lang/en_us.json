@@ -624,5 +624,27 @@
 	"block.betternether.netherite_fire_bowl_soul": "Soul Netherite Fire Bowl",
 	
 	"block.betternether.swampland_grass": "Swampland Grass",
-	"block.betternether.basalt_slab": "Basalt Slab"
+	"block.betternether.basalt_slab": "Basalt Slab",
+	
+	"block.betternether.anchor_tree_bark": "Anchor Tree Bark",
+	"block.betternether.anchor_tree_button": "Anchor Tree Button",
+	"block.betternether.anchor_tree_door": "Anchor Tree Door",
+	"block.betternether.anchor_tree_fence": "Anchor Tree Fence",
+	"block.betternether.anchor_tree_gate": "Anchor Tree Gate",
+	"block.betternether.anchor_tree_ladder": "Anchor Tree Ladder",
+	"block.betternether.anchor_tree_log": "Anchor Tree Log",
+	"block.betternether.anchor_tree_planks": "Anchor Tree Planks",
+	"block.betternether.anchor_tree_plate": "Anchor Tree Pressure Plate",
+	"block.betternether.anchor_tree_slab": "Anchor Tree Slab",
+	"block.betternether.anchor_tree_stairs": "Anchor Tree Stairs",
+	"block.betternether.anchor_tree_trapdoor": "Anchor Tree Trapdoor",
+	"block.betternether.barrel_anchor_tree": "Anchor Tree Barrel",
+	"block.betternether.bar_stool_anchor_tree": "Anchor Tree Bar Stool",
+	"block.betternether.chair_anchor_tree": "Anchor Tree Chair",
+	"block.betternether.chest_anchor_tree": "Anchor Tree Chest",
+	"block.betternether.crafting_table_anchor_tree": "Anchor Tree Crafting Table",
+	"block.betternether.sign_anchor_tree": "Anchor Tree Sign",
+	"block.betternether.striped_bark_anchor_tree": "Anchor Tree Striped Bark",
+	"block.betternether.striped_log_anchor_tree": "Anchor Tree Striped Log",
+	"block.betternether.taburet_anchor_tree": "Anchor Tree Taburet"
 }

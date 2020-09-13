@@ -36,6 +36,7 @@ import paulevs.betternether.biomes.NetherWartForest;
 import paulevs.betternether.biomes.NetherWartForestEdge;
 import paulevs.betternether.biomes.OldFungiwoods;
 import paulevs.betternether.biomes.OldWarpedWoods;
+import paulevs.betternether.biomes.UpsideDownForest;
 import paulevs.betternether.config.Config;
 
 public class BiomesRegistry
@@ -73,6 +74,7 @@ public class BiomesRegistry
 	public static final NetherBiome CRIMSON_PINEWOOD = new CrimsonPinewood("Crimson Pinewood");
 	public static final NetherBiome OLD_FUNGIWOODS = new OldFungiwoods("Old Fungiwoods");
 	public static final NetherBiome FLOODED_DELTAS = new FloodedDeltas("Flooded Deltas");
+	public static final NetherBiome UPSIDE_DOWN_FOREST = new UpsideDownForest("Upside Down Forest");
 	
 	private static int maxChance = 0;
 	private static boolean registered = false;
@@ -98,6 +100,7 @@ public class BiomesRegistry
 		registerSubBiome(CRIMSON_PINEWOOD, BIOME_CRIMSON_FOREST, 0.3F);
 		registerSubBiome(OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
 		registerSubBiome(FLOODED_DELTAS, BIOME_BASALT_DELTAS, 1F);
+		registerBiome(UPSIDE_DOWN_FOREST);
 		
 		registerDefaultWrapped(BIOME_EMPTY_NETHER);
 		registerDefaultWrapped(BIOME_CRIMSON_FOREST);
