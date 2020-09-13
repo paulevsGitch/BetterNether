@@ -1,6 +1,6 @@
 {
-    "parent": "block/crop",
+    "parent": "betternether:block/crop_block",
     "textures": {
-        "crop": "betternether:block/swamp_grass_3"
+        "texture": "betternether:block/swamp_grass_3"
     }
 }
