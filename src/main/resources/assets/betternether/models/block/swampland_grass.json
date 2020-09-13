@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/swampland_grass_side",
+        "down": "block/netherrack",
+        "up": "betternether:block/swampland_grass",
+        "north": "betternether:block/swampland_grass_side",
+        "east": "betternether:block/swampland_grass_side",
+        "south": "betternether:block/swampland_grass_side",
+        "west": "betternether:block/swampland_grass_side"
+    }
+}

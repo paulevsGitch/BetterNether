@@ -344,6 +344,7 @@ public class BlocksRegistry
 	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain());
 	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand());
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
+	public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass", new BlockTerrain());
 	
 	// Roofs //
 	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);

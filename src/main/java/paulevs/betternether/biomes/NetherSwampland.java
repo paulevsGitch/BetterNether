@@ -4,10 +4,12 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
@@ -21,23 +23,30 @@ import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWillow;
+import paulevs.betternether.structures.plants.StructureWillowBush;
 
 public class NetherSwampland extends NetherBiome
 {
+	protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);
+	
 	public NetherSwampland(String name)
 	{
 		super(new BiomeDefinition(name)
 				.setFogColor(137, 19, 78)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
-		addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.1F, false);
+				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				.setDefaultMobs(false)
+				.addMobSpawn(EntityType.STRIDER, 40, 2, 4)
+				.addMobSpawn(EntityType.MAGMA_CUBE, 40, 2, 4));
+		addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.05F, false);
+		addStructure("willow_bush", new StructureWillowBush(), StructureType.FLOOR, 0.2F, true);
 		addStructure("feather_fern", new StructureFeatherFern(), StructureType.FLOOR, 0.05F, true);
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.8F, false);
 		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, false);
-		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.1F, false);
-		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
-		addStructure("nether_grass", new StructureSwampGrass(), StructureType.FLOOR, 0.4F, false);
+		addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.05F, false);
+		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.01F, false);
+		addStructure("swamp_grass", new StructureSwampGrass(), StructureType.FLOOR, 0.4F, false);
 		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, true);
 		addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
@@ -47,32 +56,25 @@ public class NetherSwampland extends NetherBiome
 	@Override
 	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
-		switch (random.nextInt(4))
+		double value = TERRAIN.eval(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2);
+		if (value > 0.3 && validWalls(world, pos))
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState());
+		else if (value > -0.3)
+			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SWAMPLAND_GRASS.getDefaultState());
+		else
 		{
-		case 0:
-			if (validWall(world, pos.down()) && validWall(world, pos.north()) && validWall(world, pos.south()) && validWall(world, pos.east()) && validWall(world, pos.west()))
-				BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState());
-			else
-				BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
-			break;
-		case 1:
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
-			break;
-		case 2:
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
-			break;
-		default:
-			super.genSurfColumn(world, pos, random);
-			break;
+			value = TERRAIN.eval(pos.getX() * 0.5, pos.getZ() * 0.5);
+			BlocksHelper.setWithoutUpdate(world, pos, value > 0 ? Blocks.SOUL_SAND.getDefaultState() : Blocks.SOUL_SOIL.getDefaultState());
 		}
-		for (int i = 1; i < random.nextInt(3); i++)
-		{
-			BlockPos down = pos.down(i);
-			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down)))
-			{
-				BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.getDefaultState());
-			}
-		}
+	}
+	
+	protected boolean validWalls(WorldAccess world, BlockPos pos)
+	{
+		return validWall(world, pos.down())
+				&& validWall(world, pos.north())
+				&& validWall(world, pos.south())
+				&& validWall(world, pos.east())
+				&& validWall(world, pos.west());
 	}
 	
 	protected boolean validWall(WorldAccess world, BlockPos pos)

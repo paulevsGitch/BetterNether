@@ -19,19 +19,18 @@ public class NetherSwamplandTerraces extends NetherSwampland
 	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{
 		if (validWall(world, pos.down()) && validWall(world, pos.north()) && validWall(world, pos.south()) && validWall(world, pos.east()) && validWall(world, pos.west()))
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState());
-		else if (random.nextInt(3) > 0)
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
-		else if (random.nextBoolean())
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
-		else
-			super.genSurfColumn(world, pos, random);
-		for (int i = 1; i < random.nextInt(3); i++)
 		{
-			BlockPos down = pos.down(i);
-			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down)))
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState());
+		}
+		else
+		{
+			double value = TERRAIN.eval(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2);
+			if (value > -0.3)
+				BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SWAMPLAND_GRASS.getDefaultState());
+			else
 			{
-				BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.getDefaultState());
+				value = TERRAIN.eval(pos.getX() * 0.5, pos.getZ() * 0.5);
+				BlocksHelper.setWithoutUpdate(world, pos, value > 0 ? Blocks.SOUL_SAND.getDefaultState() : Blocks.SOUL_SOIL.getDefaultState());
 			}
 		}
 	}
