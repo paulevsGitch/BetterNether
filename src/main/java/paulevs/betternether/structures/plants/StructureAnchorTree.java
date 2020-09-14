@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Set;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MushroomBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ServerWorldAccess;
@@ -53,6 +54,7 @@ public class StructureAnchorTree implements IStructure
 		buildBigCircle(trunkBottom, -15, count, 2, random.nextDouble() * Math.PI * 2, 3.5, random);
 		
 		BlockState state;
+		int offset = random.nextInt(4);
 		for (BlockPos bpos: BLOCKS)
 		{
 			if (bpos.getY() < 1 || bpos.getY() > 126) continue;
@@ -61,6 +63,18 @@ public class StructureAnchorTree implements IStructure
 				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.log.getDefaultState());
 			else
 				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.getDefaultState());
+			
+			if (bpos.getY() > 45 && bpos.getY() < 90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0)
+			{
+				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
+					makeMushroom(world, bpos.north(), random.nextDouble() * 3 + 1.5);
+				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.south()))
+					makeMushroom(world, bpos.south(), random.nextDouble() * 3 + 1.5);
+				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.east()))
+					makeMushroom(world, bpos.east(), random.nextDouble() * 3 + 1.5);
+				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.west()))
+					makeMushroom(world, bpos.west(), random.nextDouble() * 3 + 1.5);
+			}
 		}
 	}
 	
@@ -172,5 +186,50 @@ public class StructureAnchorTree implements IStructure
 			startAngle += angle;
 		}
 		return result;
+	}
+	
+	public static void makeMushroom(ServerWorldAccess world, BlockPos pos, double radius)
+	{
+		if (!world.getBlockState(pos).getMaterial().isReplaceable()) return;
+		
+		int x1 = MHelper.floor(pos.getX() - radius);
+		int z1 = MHelper.floor(pos.getZ() - radius);
+		int x2 = MHelper.floor(pos.getX() + radius + 1);
+		int z2 = MHelper.floor(pos.getZ() + radius + 1);
+		radius *= radius;
+		
+		List<BlockPos> placed = new ArrayList<BlockPos>((int) (radius * 4));
+		for (int x = x1; x <= x2; x++)
+		{
+			int px2 = x - pos.getX();
+			px2 *= px2;
+			for (int z = z1; z <= z2; z++)
+			{
+				int pz2 = z - pos.getZ();
+				pz2 *= pz2;
+				if (px2 + pz2 <= radius)
+				{
+					BlockPos p = new BlockPos(x, pos.getY(), z);
+					if (world.getBlockState(p).getMaterial().isReplaceable())
+					{
+						placed.add(p);
+					}
+				}
+			}
+		}
+		
+		for (BlockPos p: placed)
+		{
+			boolean north = world.getBlockState(p.north()).getBlock() != BlocksRegistry.GIANT_LUCIS;
+			boolean south = world.getBlockState(p.south()).getBlock() != BlocksRegistry.GIANT_LUCIS;
+			boolean east = world.getBlockState(p.east()).getBlock() != BlocksRegistry.GIANT_LUCIS;
+			boolean west = world.getBlockState(p.west()).getBlock() != BlocksRegistry.GIANT_LUCIS;
+			BlockState state = BlocksRegistry.GIANT_LUCIS.getDefaultState();
+			BlocksHelper.setWithoutUpdate(world, p, state
+					.with(MushroomBlock.NORTH, north)
+					.with(MushroomBlock.SOUTH, south)
+					.with(MushroomBlock.EAST, east)
+					.with(MushroomBlock.WEST, west));
+		}
 	}
 }

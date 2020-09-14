@@ -243,6 +243,7 @@ public class BlocksRegistry
 	// Lucis //
 	public static final Block LUCIS_MUSHROOM = registerBlockNI("lucis_mushroom", new BlockLucisMushroom());
 	public static final Block LUCIS_SPORE = registerBlock("lucis_spore", new BlockLucisSpore());
+	public static final Block GIANT_LUCIS = registerBlock("giant_lucis", new BlockGiantLucis());
 	
 	// Giant Mold //
 	public static final Block GIANT_MOLD = registerBlockNI("giant_mold", new BlockGiantMold());
