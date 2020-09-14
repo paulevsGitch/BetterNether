@@ -68,4 +68,9 @@ public class WoodenMaterial
 		chest = BlocksRegistry.registerChest("chest_" + name, planks);
 		barrel = BlocksRegistry.registerBarrel("barrel_" + name, planks, planks_slab);
 	}
+	
+	public boolean isTreeLog(Block block)
+	{
+		return block == log || block == bark;
+	}
 }

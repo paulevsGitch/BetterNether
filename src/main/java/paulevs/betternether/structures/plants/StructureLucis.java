@@ -2,9 +2,7 @@ package paulevs.betternether.structures.plants;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -74,14 +72,14 @@ public class StructureLucis extends Object implements IStructure
 
 	private boolean canReplace(BlockState state)
 	{
-		Block b = state.getBlock();
-		return b == Blocks.AIR || b == BlocksRegistry.LUCIS_SPORE;
+		return state.getBlock() == BlocksRegistry.LUCIS_SPORE || state.getMaterial().isReplaceable();
 	}
 
 	private boolean canGenerate(ServerWorldAccess world, BlockPos pos)
 	{
+		BlockState state;
 		for (Direction dir: HorizontalFacingBlock.FACING.getValues())
-			if (BlocksHelper.isNetherrack(world.getBlockState(pos.offset(dir))))
+			if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.offset(dir))) || BlocksRegistry.ANCHOR_TREE.isTreeLog(state.getBlock()))
 				return true;
 		return false;
 	}

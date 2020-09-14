@@ -6,13 +6,18 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.blocks.BlockAnchorTreeVine;
+import paulevs.betternether.blocks.BlockPlantWall;
+import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
@@ -20,6 +25,8 @@ public class StructureAnchorTreeRoot implements IStructure
 {
 	private static final Set<BlockPos> BLOCKS = new HashSet<BlockPos>(2048);
 	private static final Mutable POS = new Mutable();
+	private Block[] wallPlants;
+	private static final StructureLucis LUCIS = new StructureLucis();
 	
 	@Override
 	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
@@ -45,15 +52,85 @@ public class StructureAnchorTreeRoot implements IStructure
 		buildLine(blocks, 1.3 + random.nextDouble());
 		
 		BlockState state;
+		if (wallPlants == null)
+		{
+			wallPlants = new Block[] {BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.WALL_MUSHROOM_BROWN, BlocksRegistry.WALL_MUSHROOM_RED};
+		}
+		BlockState vine = BlocksRegistry.ANCHOR_TREE_VINE.getDefaultState();
 		for (BlockPos bpos: BLOCKS)
 		{
 			if (bpos.getY() < 1 || bpos.getY() > 126) continue;
-			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
-			if (BLOCKS.contains(bpos.up()) && BLOCKS.contains(bpos.down()))
+			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !canReplace(state)) continue;
+			boolean blockUp = true;
+			boolean blockDown = true;
+			if ((blockUp = BLOCKS.contains(bpos.up())) && (blockDown = BLOCKS.contains(bpos.down())))
 				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.log.getDefaultState());
 			else
 				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.getDefaultState());
+			
+			if (!blockUp)
+			{
+				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.MOSS_COVER.getDefaultState());
+			}
+			
+			if ((bpos.getY() & 3) == 0 && StructureAnchorTree.NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0)
+			{
+				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
+					if (random.nextBoolean())
+						StructureAnchorTree.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5);
+					else
+						LUCIS.generate(world, bpos, random);
+				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.south()))
+					if (random.nextBoolean())
+						StructureAnchorTree.makeMushroom(world, bpos.south(), random.nextDouble() + 1.5);
+					else
+						LUCIS.generate(world, bpos, random);
+				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.east()))
+					if (random.nextBoolean())
+						StructureAnchorTree.makeMushroom(world, bpos.east(), random.nextDouble() + 1.5);
+					else
+						LUCIS.generate(world, bpos, random);
+				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.west()))
+					if (random.nextBoolean())
+						StructureAnchorTree.makeMushroom(world, bpos.west(), random.nextDouble() + 1.5);
+					else
+						LUCIS.generate(world, bpos, random);
+			}
+			
+			state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
+				BlocksHelper.setWithoutUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
+				BlocksHelper.setWithoutUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
+				BlocksHelper.setWithoutUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
+				BlocksHelper.setWithoutUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
+			
+			if (!blockDown && random.nextInt(16) == 0)
+			{
+				bpos = bpos.down();
+				int length = BlocksHelper.downRay(world, bpos, 17);
+				if (length > 4)
+				{
+					length = MHelper.randRange(3, length, random);
+					for (int i = 1; i < length - 2; i++)
+					{
+						BlocksHelper.setWithoutUpdate(world, POS.down(i), vine);
+					}
+					BlocksHelper.setWithoutUpdate(world, POS.down(length - 2), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
+					BlocksHelper.setWithoutUpdate(world, POS.down(length - 1), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
+				}
+			}
 		}
+	}
+	
+	private boolean canReplace(BlockState state)
+	{
+		return state.getMaterial().isReplaceable()
+				|| state.getBlock() == BlocksRegistry.GIANT_LUCIS
+				|| state.getBlock() == BlocksRegistry.LUCIS_MUSHROOM
+				|| state.getBlock() instanceof BlockPlantWall;
 	}
 	
 	private void buildLine(List<BlockPos> blocks, double radius)

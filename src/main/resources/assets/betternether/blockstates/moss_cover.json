@@ -1,0 +1,23 @@
+{
+	"variants":
+	{
+        "":  [
+			{ "model": "betternether:block/moss_cover" },
+			{ "model": "betternether:block/moss_cover", "y": 90 },
+			{ "model": "betternether:block/moss_cover", "y": 180 },
+			{ "model": "betternether:block/moss_cover", "y": 270 },
+			{ "model": "betternether:block/moss_cover_2" },
+			{ "model": "betternether:block/moss_cover_2", "y": 90 },
+			{ "model": "betternether:block/moss_cover_2", "y": 180 },
+			{ "model": "betternether:block/moss_cover_2", "y": 270 },
+			{ "model": "betternether:block/moss_cover_3" },
+			{ "model": "betternether:block/moss_cover_3", "y": 90 },
+			{ "model": "betternether:block/moss_cover_3", "y": 180 },
+			{ "model": "betternether:block/moss_cover_3", "y": 270 },
+			{ "model": "betternether:block/moss_cover_4" },
+			{ "model": "betternether:block/moss_cover_4", "y": 90 },
+			{ "model": "betternether:block/moss_cover_4", "y": 180 },
+			{ "model": "betternether:block/moss_cover_4", "y": 270 }
+		]
+    }
+}

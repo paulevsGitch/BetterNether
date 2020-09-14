@@ -55,6 +55,7 @@ public class BiomeDefinition
 	private boolean defaultFeatures = true;
 	private boolean defaultStructureFeatures = true;
 	private boolean stalactites = true;
+	private boolean bnStructures = true;
 	
 	private final Identifier id;
 	
@@ -71,6 +72,12 @@ public class BiomeDefinition
 	public BiomeDefinition setStalactites(boolean value)
 	{
 		stalactites = value;
+		return this;
+	}
+	
+	public BiomeDefinition setBNStructures(boolean value)
+	{
+		bnStructures = value;
 		return this;
 	}
 	
@@ -355,5 +362,10 @@ public class BiomeDefinition
 	public boolean hasStalactites()
 	{
 		return stalactites;
+	}
+	
+	public boolean hasBNStructures()
+	{
+		return bnStructures;
 	}
 }

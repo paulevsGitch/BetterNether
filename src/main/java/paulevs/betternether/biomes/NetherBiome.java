@@ -110,8 +110,11 @@ public class NetherBiome
 		subbiomes.add(new Subbiome(this, 1));
 		
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
-		for (String s: DEF_STRUCTURES)
-			structures.add(s);
+		if (definition.hasBNStructures())
+		{
+			for (String s: DEF_STRUCTURES)
+				structures.add(s);
+		}
 		
 		if (definition.hasStalactites())
 		{

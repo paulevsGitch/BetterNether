@@ -6,21 +6,25 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MushroomBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureAnchorTree implements IStructure
 {
-	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(2145);
+	protected static final OpenSimplexNoise NOISE = new OpenSimplexNoise(2145);
 	private static final Set<BlockPos> BLOCKS = new HashSet<BlockPos>(2048);
+	private Block[] wallPlants;
 	
 	@Override
 	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
@@ -46,6 +50,11 @@ public class StructureAnchorTree implements IStructure
 		
 		BLOCKS.clear();
 		
+		if (wallPlants == null)
+		{
+			wallPlants = new Block[] {BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.WALL_MUSHROOM_BROWN, BlocksRegistry.WALL_MUSHROOM_RED};
+		}
+		
 		buildLine(blocks, 4);
 		
 		count = (up.getY() - down.getY()) / 10 - 1;
@@ -59,7 +68,8 @@ public class StructureAnchorTree implements IStructure
 		{
 			if (bpos.getY() < 1 || bpos.getY() > 126) continue;
 			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
-			if (BLOCKS.contains(bpos.up()) && BLOCKS.contains(bpos.down()))
+			boolean blockUp = true;
+			if ((blockUp = BLOCKS.contains(bpos.up())) && BLOCKS.contains(bpos.down()))
 				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.log.getDefaultState());
 			else
 				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.getDefaultState());
@@ -74,6 +84,27 @@ public class StructureAnchorTree implements IStructure
 					makeMushroom(world, bpos.east(), random.nextDouble() * 3 + 1.5);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.west()))
 					makeMushroom(world, bpos.west(), random.nextDouble() * 3 + 1.5);
+			}
+			
+			if (bpos.getY() > 64)
+			{
+				if (!blockUp)
+				{
+					BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.MOSS_COVER.getDefaultState());
+				}
+				
+				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0)
+				{
+					state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
+						BlocksHelper.setWithoutUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
+						BlocksHelper.setWithoutUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
+						BlocksHelper.setWithoutUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
+						BlocksHelper.setWithoutUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
+				}
 			}
 		}
 	}
@@ -188,7 +219,7 @@ public class StructureAnchorTree implements IStructure
 		return result;
 	}
 	
-	public static void makeMushroom(ServerWorldAccess world, BlockPos pos, double radius)
+	protected static void makeMushroom(ServerWorldAccess world, BlockPos pos, double radius)
 	{
 		if (!world.getBlockState(pos).getMaterial().isReplaceable()) return;
 		
