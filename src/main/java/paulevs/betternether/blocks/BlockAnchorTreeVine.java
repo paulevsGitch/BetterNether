@@ -93,6 +93,6 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull
 	@Environment(EnvType.CLIENT)
 	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
 	{
-		return new ItemStack(BlocksRegistry.EYE_SEED);
+		return new ItemStack(BlocksRegistry.ANCHOR_TREE_LEAVES);
 	}
 }

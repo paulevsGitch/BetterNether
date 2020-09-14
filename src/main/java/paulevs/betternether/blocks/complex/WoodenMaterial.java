@@ -38,15 +38,15 @@ public class WoodenMaterial
 	public final Block chest;
 	public final Block barrel;
 	
-	public WoodenMaterial(String name, MaterialColor color)
+	public WoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor)
 	{
-		log_striped = BlocksRegistry.registerBlock("striped_log_" + name, new BNPillar(color));
-		bark_striped = BlocksRegistry.registerBlock("striped_bark_" + name, new BNPillar(color));
+		log_striped = BlocksRegistry.registerBlock("striped_log_" + name, new BNPillar(woodColor));
+		bark_striped = BlocksRegistry.registerBlock("striped_bark_" + name, new BNPillar(woodColor));
 		
-		log = BlocksRegistry.registerBlock(name + "_log", new BNLogStripable(color, log_striped));
-		bark = BlocksRegistry.registerBark(name + "_bark", new BNLogStripable(color, bark_striped), log);
+		log = BlocksRegistry.registerBlock(name + "_log", new BNLogStripable(woodColor, log_striped));
+		bark = BlocksRegistry.registerBark(name + "_bark", new BNLogStripable(woodColor, bark_striped), log);
 		
-		planks = BlocksRegistry.registerPlanks(name + "_planks", new BNPlanks(color), log_striped, bark_striped, log, bark);
+		planks = BlocksRegistry.registerPlanks(name + "_planks", new BNPlanks(planksColor), log_striped, bark_striped, log, bark);
 		planks_stairs = BlocksRegistry.registerStairs(name + "_stairs", planks);
 		planks_slab = BlocksRegistry.registerSlab(name + "_slab", planks);
 		

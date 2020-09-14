@@ -644,5 +644,9 @@
 	"block.betternether.sign_anchor_tree": "Табличка из якорного дерева",
 	"block.betternether.striped_bark_anchor_tree": "Обтёсанная кора якорного дерева",
 	"block.betternether.striped_log_anchor_tree": "Обтёсанное бревно якорного дерева",
-	"block.betternether.taburet_anchor_tree": "Табурет из якорного дерева"
+	"block.betternether.taburet_anchor_tree": "Табурет из якорного дерева",
+	
+	"block.betternether.anchor_tree_vine": "Лозая якорного дерева",
+	"block.betternether.anchor_tree_leaves": "Листва якорного дерева",
+	"block.betternether.anchor_tree_sapling": "Саженец якорного дерева"
 }

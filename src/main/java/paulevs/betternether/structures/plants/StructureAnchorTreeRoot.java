@@ -32,6 +32,7 @@ public class StructureAnchorTreeRoot implements IStructure
 		double size = MHelper.randRange(10, 25, random) * 0.5;
 		int count = MHelper.floor(size / 1.5);
 		if (count < 3) count = 3;
+		if ((count & 1) == 0) count++;
 		POS.set(pos.getX() - dx * size, pos.getY() + 10, pos.getZ() - dz * size);
 		BlockPos start = POS.up(BlocksHelper.upRay(world, POS, 64));
 		if (start.getY() < pos.getY()) start = POS.set(start).add(0, 10, 0).toImmutable();
@@ -41,7 +42,7 @@ public class StructureAnchorTreeRoot implements IStructure
 		List<BlockPos> blocks = lineParable(start, end, count, random, 0.8);
 		
 		BLOCKS.clear();
-		buildLine(blocks, 1.5);
+		buildLine(blocks, 1.3 + random.nextDouble());
 		
 		BlockState state;
 		for (BlockPos bpos: BLOCKS)
@@ -93,7 +94,7 @@ public class StructureAnchorTreeRoot implements IStructure
 		int max = count - 1;
 		int middle = count / 2;
 		result.add(start);
-		double size = Math.sqrt(start.getSquaredDistance(end)) * 0.5;
+		double size = Math.sqrt(start.getSquaredDistance(end)) * 0.8;
 		for (int i = 1; i < max; i++)
 		{
 			double offset = (i - middle) / middle;

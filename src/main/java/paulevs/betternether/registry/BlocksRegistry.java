@@ -269,6 +269,12 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_TRAPDOOR = registerTrapdoor("mushroom_fir_trapdoor", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_DOOR = registerDoor("mushroom_fir_door", MUSHROOM_FIR_PLANKS);
 	
+	// Anchor Tree
+	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
+	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
+	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
+	public static final WoodenMaterial ANCHOR_TREE = new WoodenMaterial("anchor_tree", MaterialColor.BLUE, MaterialColor.GREEN);
+	
 	// Eyes //
 	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
 	public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
@@ -489,10 +495,6 @@ public class BlocksRegistry
 	public static final Block SIGN_RUBEUS = registerSign("sign_rubeus", RUBEUS_PLANKS);
 	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
 	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
-	
-	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
-	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
-	public static final WoodenMaterial ANCHOR_TREE = new WoodenMaterial("anchor_tree", MaterialColor.BLUE);
 	
 	public static void register() {}
 	
