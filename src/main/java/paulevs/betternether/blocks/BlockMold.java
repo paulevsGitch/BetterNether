@@ -6,11 +6,9 @@ import java.util.Random;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
@@ -24,12 +22,13 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockMold extends BlockBaseNotFull
 {
 	public BlockMold(MaterialColor color)
 	{
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(Materials.makeGrass(color)
 				.materialColor(color)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()

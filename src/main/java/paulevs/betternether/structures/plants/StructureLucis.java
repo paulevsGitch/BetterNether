@@ -9,6 +9,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLucisMushroom;
+import paulevs.betternether.blocks.BlockLucisSpore;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
@@ -47,7 +48,7 @@ public class StructureLucis extends Object implements IStructure
 			}
 			else
 			{
-				boolean offset = false;
+				/*boolean offset = false;
 				if (BlocksHelper.isNetherrack(world.getBlockState(pos.north())))
 				{
 					pos = pos.north();
@@ -65,7 +66,30 @@ public class StructureLucis extends Object implements IStructure
 				if (canReplace(world.getBlockState(pos.south())))
 					BlocksHelper.setWithoutUpdate(world, pos.south(), corner.with(BlockLucisMushroom.FACING, Direction.WEST));
 				if (canReplace(world.getBlockState(pos.south().west())))
-					BlocksHelper.setWithoutUpdate(world, pos.south().west(), corner.with(BlockLucisMushroom.FACING, Direction.NORTH));
+					BlocksHelper.setWithoutUpdate(world, pos.south().west(), corner.with(BlockLucisMushroom.FACING, Direction.NORTH));*/
+				
+				BlockState state = world.getBlockState(pos);
+				if (state.getBlock() == BlocksRegistry.LUCIS_SPORE)
+				{
+					if (state.get(BlockLucisSpore.FACING) == Direction.SOUTH) pos = pos.north();
+					else if (state.get(BlockLucisSpore.FACING) == Direction.WEST) pos = pos.east();
+				}
+				else
+				{
+					if (!world.getBlockState(pos.north()).isAir())
+					{
+						pos = pos.north();
+					}
+					else if (!world.getBlockState(pos.east()).isAir())
+					{
+						pos = pos.east();
+					}
+				}
+				
+				if (canReplace(world.getBlockState(pos))) BlocksHelper.setWithoutUpdate(world, pos, corner.with(BlockLucisMushroom.FACING, Direction.SOUTH));
+				if (canReplace(world.getBlockState(pos.west()))) BlocksHelper.setWithoutUpdate(world, pos.west(), corner.with(BlockLucisMushroom.FACING, Direction.EAST));
+				if (canReplace(world.getBlockState(pos.south()))) BlocksHelper.setWithoutUpdate(world, pos.south(), corner.with(BlockLucisMushroom.FACING, Direction.WEST));
+				if (canReplace(world.getBlockState(pos.south().west()))) BlocksHelper.setWithoutUpdate(world, pos.south().west(), corner.with(BlockLucisMushroom.FACING, Direction.NORTH));
 			}
 		}
 	}
