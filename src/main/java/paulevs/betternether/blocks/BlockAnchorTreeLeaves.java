@@ -2,6 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.util.math.BlockPos;
@@ -17,6 +18,11 @@ public class BlockAnchorTreeLeaves extends BlockBaseNotFull
 		super(Materials.makeLeaves(MaterialColor.GREEN));
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
+	}
+	
+	public AbstractBlock.OffsetType getOffsetType()
+	{
+		return AbstractBlock.OffsetType.XZ;
 	}
 	
 	@Environment(EnvType.CLIENT)

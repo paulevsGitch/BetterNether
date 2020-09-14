@@ -5,6 +5,7 @@ import java.util.function.ToIntFunction;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,6 +18,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
@@ -47,6 +49,11 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull
 		return (state) -> { return state.get(SHAPE) == TripleShape.BOTTOM ? 15 : 0; };
 	}
 	
+	public AbstractBlock.OffsetType getOffsetType()
+	{
+		return AbstractBlock.OffsetType.XZ;
+	}
+	
 	@Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
 	{
@@ -56,7 +63,8 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
-		return SHAPE_SELECTION;
+		Vec3d vec3d = state.getModelOffset(view, pos);
+		return SHAPE_SELECTION.offset(vec3d.x, vec3d.y, vec3d.z);
 	}
 
 	@Environment(EnvType.CLIENT)
