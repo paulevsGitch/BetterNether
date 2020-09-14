@@ -650,5 +650,8 @@
 	
 	"block.betternether.anchor_tree_vine": "Anchor Tree Vine",
 	"block.betternether.anchor_tree_leaves": "Anchor Tree Leaves",
-	"block.betternether.anchor_tree_sapling": "Anchor Tree Sapling"
+	"block.betternether.anchor_tree_sapling": "Anchor Tree Sapling",
+	
+	"block.betternether.giant_lucis": "Giant Lucis",
+	"block.betternether.moss_cover": "Moss Cover"
 }

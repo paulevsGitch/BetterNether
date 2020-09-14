@@ -648,5 +648,8 @@
 	
 	"block.betternether.anchor_tree_vine": "Лозая якорного дерева",
 	"block.betternether.anchor_tree_leaves": "Листва якорного дерева",
-	"block.betternether.anchor_tree_sapling": "Саженец якорного дерева"
+	"block.betternether.anchor_tree_sapling": "Саженец якорного дерева",
+	
+	"block.betternether.giant_lucis": "Гигантский Люцис",
+	"block.betternether.moss_cover": "Мховое покрытие"
 }
