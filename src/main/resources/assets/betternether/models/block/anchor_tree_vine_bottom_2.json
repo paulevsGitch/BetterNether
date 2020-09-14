@@ -1,0 +1,6 @@
+{
+    "parent": "betternether:block/cross_inverted",
+    "textures": {
+        "cross": "betternether:block/anchor_tree_vine_end_2"
+    }
+}
