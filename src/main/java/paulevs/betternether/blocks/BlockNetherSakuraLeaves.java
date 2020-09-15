@@ -85,10 +85,10 @@ public class BlockNetherSakuraLeaves extends BlockBaseNotFull
 			}
 		}
 	}
-	
+
 	@Environment(EnvType.CLIENT)
-	   public int getColor(BlockState state, BlockView world, BlockPos pos)
+	public int getColor(BlockState state, BlockView world, BlockPos pos)
 	{
-	      return COLOR;
-	   }
+		return COLOR;
+	}
 }

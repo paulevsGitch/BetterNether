@@ -20,12 +20,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.structures.plants.StructureAnchorTreeBranch;
+import paulevs.betternether.structures.plants.StructureNetherSakura;
 
 public class BlockNetherSakuraSapling extends BlockBaseNotFull implements Fertilizable
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 2, 4, 12, 16, 12);
-	private static final StructureAnchorTreeBranch STRUCTURE = new StructureAnchorTreeBranch();
+	private static final StructureNetherSakura STRUCTURE = new StructureNetherSakura();
 	
 	public BlockNetherSakuraSapling()
 	{
