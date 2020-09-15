@@ -651,5 +651,30 @@
 	"block.betternether.anchor_tree_sapling": "Саженец якорного дерева",
 	
 	"block.betternether.giant_lucis": "Гигантский Люцис",
-	"block.betternether.moss_cover": "Мховое покрытие"
+	"block.betternether.moss_cover": "Мховое покрытие",
+	
+	"block.betternether.nether_sakura_bark": "Кора сакуры нижнего мира",
+	"block.betternether.nether_sakura_button": "Кнопка из сакуры",
+	"block.betternether.nether_sakura_door": "Дверь из сакуры",
+	"block.betternether.nether_sakura_fence": "Забор из сакуры",
+	"block.betternether.nether_sakura_gate": "Калитка из сакуры",
+	"block.betternether.nether_sakura_ladder": "Лестница из сакуры",
+	"block.betternether.nether_sakura_log": "Бревно из сакуры",
+	"block.betternether.nether_sakura_planks": "Доски сакуры нижнего мира",
+	"block.betternether.nether_sakura_plate": "Нажимная плита из сакуры",
+	"block.betternether.nether_sakura_slab": "Плита из сакуры",
+	"block.betternether.nether_sakura_stairs": "Ступени из сакуры",
+	"block.betternether.nether_sakura_trapdoor": "Люк из сакуры",
+	"block.betternether.barrel_nether_sakura": "Бочка из сакуры",
+	"block.betternether.bar_stool_nether_sakura": "Барный стул из сакуры",
+	"block.betternether.chair_nether_sakura": "Стул из сакуры",
+	"block.betternether.chest_nether_sakura": "Сундук из сакуры",
+	"block.betternether.crafting_table_nether_sakura": "Верстак из сакуры",
+	"block.betternether.sign_nether_sakura": "Табличка из сакуры",
+	"block.betternether.striped_bark_nether_sakura": "Обтёсанная кора сакуры",
+	"block.betternether.striped_log_nether_sakura": "Обтёсанное бревно сакуры",
+	"block.betternether.taburet_nether_sakura": "Табурет из сакуры",
+	
+	"block.betternether.nether_sakura_leaves": "Листья сакуры нижнего мира",
+	"block.betternether.nether_sakura_sapling": "Саженец сакуры нижнего мира"
 }

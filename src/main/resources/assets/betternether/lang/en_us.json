@@ -675,5 +675,8 @@
 	"block.betternether.sign_nether_sakura": "Nether Sakura Sign",
 	"block.betternether.striped_bark_nether_sakura": "Nether Sakura Striped Bark",
 	"block.betternether.striped_log_nether_sakura": "Nether Sakura Striped Log",
-	"block.betternether.taburet_nether_sakura": "Nether Sakura Taburet"
+	"block.betternether.taburet_nether_sakura": "Nether Sakura Taburet",
+	
+	"block.betternether.nether_sakura_leaves": "Nether Sakura Leaves",
+	"block.betternether.nether_sakura_sapling": "Nether Sakura Sapling"
 }
