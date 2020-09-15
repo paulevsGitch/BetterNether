@@ -1,0 +1,6 @@
+{
+    "parent": "block/button",
+    "textures": {
+        "texture": "betternether:block/nether_sakura_planks"
+    }
+}

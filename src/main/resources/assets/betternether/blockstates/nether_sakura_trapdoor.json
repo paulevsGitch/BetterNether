@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "facing=north,half=bottom,open=false": { "model": "betternether:block/nether_sakura_trapdoor" },
+        "facing=south,half=bottom,open=false": { "model": "betternether:block/nether_sakura_trapdoor", "y": 180 },
+        "facing=east,half=bottom,open=false": { "model": "betternether:block/nether_sakura_trapdoor", "y": 90 },
+        "facing=west,half=bottom,open=false": { "model": "betternether:block/nether_sakura_trapdoor", "y": 270 },
+        "facing=north,half=top,open=false": { "model": "betternether:block/nether_sakura_trapdoor", "x": 180 },
+        "facing=south,half=top,open=false": { "model": "betternether:block/nether_sakura_trapdoor", "x": 180, "y": 180 },
+        "facing=east,half=top,open=false": { "model": "betternether:block/nether_sakura_trapdoor", "x": 180, "y": 90 },
+        "facing=west,half=top,open=false": { "model": "betternether:block/nether_sakura_trapdoor", "x": 180, "y": 270 },
+        "facing=north,half=bottom,open=true": { "model": "betternether:block/nether_sakura_trapdoor", "x": 90 },
+        "facing=south,half=bottom,open=true": { "model": "betternether:block/nether_sakura_trapdoor", "x": 90, "y": 180 },
+        "facing=east,half=bottom,open=true": { "model": "betternether:block/nether_sakura_trapdoor", "x": 90, "y": 90 },
+        "facing=west,half=bottom,open=true": { "model": "betternether:block/nether_sakura_trapdoor", "x": 90, "y": 270 },
+        "facing=north,half=top,open=true": { "model": "betternether:block/nether_sakura_trapdoor", "x": 270, "y": 180 },
+        "facing=south,half=top,open=true": { "model": "betternether:block/nether_sakura_trapdoor", "x": 270, "y": 0 },
+        "facing=east,half=top,open=true": { "model": "betternether:block/nether_sakura_trapdoor", "x": 270, "y": 270 },
+        "facing=west,half=top,open=true": { "model": "betternether:block/nether_sakura_trapdoor", "x": 270, "y": 90 }
+    }
+}

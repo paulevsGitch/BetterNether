@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_top",
+    "textures": {
+        "bottom": "betternether:block/nether_sakura_door_top",
+        "top": "betternether:block/nether_sakura_door_top"
+    }
+}

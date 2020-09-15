@@ -1,0 +1,11 @@
+{
+	"variants":
+	{
+        "":  [
+			{ "model": "betternether:block/nether_sakura_leaves" },
+			{ "model": "betternether:block/nether_sakura_leaves", "y": 90 },
+			{ "model": "betternether:block/nether_sakura_leaves", "y": 180 },
+			{ "model": "betternether:block/nether_sakura_leaves", "y": 270 }
+		]
+    }
+}

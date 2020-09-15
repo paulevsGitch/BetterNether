@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "betternether:block/nether_sakura_planks",
+        "top": "betternether:block/nether_sakura_planks",
+        "side": "betternether:block/nether_sakura_planks"
+    }
+}

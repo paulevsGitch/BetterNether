@@ -107,7 +107,7 @@ public class StructureAnchorTreeRoot implements IStructure
 			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
 				BlocksHelper.setWithoutUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
 			
-			if (!blockDown && random.nextInt(16) == 0)
+			if (blockUp && !blockDown && random.nextInt(16) == 0)
 			{
 				bpos = bpos.down();
 				int length = BlocksHelper.downRay(world, bpos, 17);

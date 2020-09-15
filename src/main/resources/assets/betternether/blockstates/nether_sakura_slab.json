@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "betternether:block/nether_sakura_half_slab" },
+        "type=top": { "model": "betternether:block/nether_sakura_half_slab", "x": 180, "uvlock": true },
+        "type=double": { "model": "betternether:block/nether_sakura_planks" }
+    }
+}

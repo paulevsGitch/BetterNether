@@ -18,11 +18,14 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
@@ -86,5 +89,17 @@ public class BlockLucisMushroom extends BlockBaseNotFull
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
 	{
 		return Lists.newArrayList(new ItemStack(BlocksRegistry.LUCIS_SPORE), new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(2, 4, MHelper.RANDOM)));
+	}
+	
+	@Override
+	public BlockState rotate(BlockState state, BlockRotation rotation)
+	{
+		return BlocksHelper.rotateHorizontal(state.with(FACING, state.get(FACING).getOpposite()), rotation, FACING);
+	}
+
+	@Override
+	public BlockState mirror(BlockState state, BlockMirror mirror)
+	{
+		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 }

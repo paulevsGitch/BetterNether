@@ -43,21 +43,22 @@
         "up": "true"
       },
       "apply": [
-		{"model": "betternether:block/giant_lucis_top", "x": 270},
-		{"model": "betternether:block/giant_lucis_top", "x": 270, "y": 90},
-		{"model": "betternether:block/giant_lucis_top", "x": 270, "y": 180},
-		{"model": "betternether:block/giant_lucis_top", "x": 270, "y": 270}
+		{ "model": "betternether:block/giant_lucis_top", "x": 270 },
+		{ "model": "betternether:block/giant_lucis_top", "x": 270, "y": 90 },
+		{ "model": "betternether:block/giant_lucis_top", "x": 270, "y": 180 },
+		{ "model": "betternether:block/giant_lucis_top", "x": 270, "y": 270 }
 	  ]
     },
     {
       "when": {
         "down": "true"
       },
-      "apply": {
-        "model": "betternether:block/giant_lucis_bottom",
-        "x": 90,
-        "uvlock": true
-      }
+      "apply": [
+		{ "model": "betternether:block/giant_lucis_bottom", "x": 90 },
+		{ "model": "betternether:block/giant_lucis_bottom", "x": 90, "y": 90 },
+		{ "model": "betternether:block/giant_lucis_bottom", "x": 90, "y": 180 },
+		{ "model": "betternether:block/giant_lucis_bottom", "x": 90, "y": 270 }
+	  ]
     },
     {
       "when": {

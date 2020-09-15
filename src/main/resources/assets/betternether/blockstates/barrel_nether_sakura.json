@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,open=false": {
+      "x": 180,
+      "model": "betternether:block/barrel_nether_sakura"
+    },
+    "facing=down,open=true": {
+      "x": 180,
+      "model": "betternether:block/barrel_nether_sakura_open"
+    },
+    "facing=east,open=false": {
+      "x": 90,
+      "y": 90,
+      "model": "betternether:block/barrel_nether_sakura"
+    },
+    "facing=east,open=true": {
+      "x": 90,
+      "y": 90,
+      "model": "betternether:block/barrel_nether_sakura_open"
+    },
+    "facing=north,open=false": {
+      "x": 90,
+      "model": "betternether:block/barrel_nether_sakura"
+    },
+    "facing=north,open=true": {
+      "x": 90,
+      "model": "betternether:block/barrel_nether_sakura_open"
+    },
+    "facing=south,open=false": {
+      "x": 90,
+      "y": 180,
+      "model": "betternether:block/barrel_nether_sakura"
+    },
+    "facing=south,open=true": {
+      "x": 90,
+      "y": 180,
+      "model": "betternether:block/barrel_nether_sakura_open"
+    },
+    "facing=up,open=false": {
+      "model": "betternether:block/barrel_nether_sakura"
+    },
+    "facing=up,open=true": {
+      "model": "betternether:block/barrel_nether_sakura_open"
+    },
+    "facing=west,open=false": {
+      "x": 90,
+      "y": 270,
+      "model": "betternether:block/barrel_nether_sakura"
+    },
+    "facing=west,open=true": {
+      "x": 90,
+      "y": 270,
+      "model": "betternether:block/barrel_nether_sakura_open"
+    }
+  }
+}

@@ -271,10 +271,15 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_DOOR = registerDoor("mushroom_fir_door", MUSHROOM_FIR_PLANKS);
 	
 	// Anchor Tree
+	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
 	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
 	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
-	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
 	public static final WoodenMaterial ANCHOR_TREE = new WoodenMaterial("anchor_tree", MaterialColor.BLUE, MaterialColor.GREEN);
+	
+	// Nether Sakura
+	public static final Block NETHER_SAKURA_SAPLING = registerBlock("nether_sakura_sapling", new BlockNetherSakuraSapling());
+	public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves", new BlockNetherSakuraLeaves());
+	public static final WoodenMaterial NETHER_SAKURA = new WoodenMaterial("nether_sakura", MaterialColor.PINK, MaterialColor.BROWN);
 	
 	// Eyes //
 	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());

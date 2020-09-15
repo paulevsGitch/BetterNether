@@ -8,10 +8,4 @@ public class StructureMossCover extends StructureScatter
 	{
 		super(BlocksRegistry.MOSS_COVER);
 	}
-	
-	/*@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
-	{
-		if (pos.getY() > 61) super.generate(world, pos, random);
-	}*/
 }

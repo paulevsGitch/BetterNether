@@ -653,5 +653,27 @@
 	"block.betternether.anchor_tree_sapling": "Anchor Tree Sapling",
 	
 	"block.betternether.giant_lucis": "Giant Lucis",
-	"block.betternether.moss_cover": "Moss Cover"
+	"block.betternether.moss_cover": "Moss Cover",
+	
+	"block.betternether.nether_sakura_bark": "Nether Sakura Bark",
+	"block.betternether.nether_sakura_button": "Nether Sakura Button",
+	"block.betternether.nether_sakura_door": "Nether Sakura Door",
+	"block.betternether.nether_sakura_fence": "Nether Sakura Fence",
+	"block.betternether.nether_sakura_gate": "Nether Sakura Gate",
+	"block.betternether.nether_sakura_ladder": "Nether Sakura Ladder",
+	"block.betternether.nether_sakura_log": "Nether Sakura Log",
+	"block.betternether.nether_sakura_planks": "Nether Sakura Planks",
+	"block.betternether.nether_sakura_plate": "Nether Sakura Plate",
+	"block.betternether.nether_sakura_slab": "Nether Sakura Slab",
+	"block.betternether.nether_sakura_stairs": "Nether Sakura Stairs",
+	"block.betternether.nether_sakura_trapdoor": "Nether Sakura Trapdoor",
+	"block.betternether.barrel_nether_sakura": "Nether Sakura Barrel",
+	"block.betternether.bar_stool_nether_sakura": "Nether Sakura Bar Stool",
+	"block.betternether.chair_nether_sakura": "Nether Sakura Chair",
+	"block.betternether.chest_nether_sakura": "Nether Sakura Chest",
+	"block.betternether.crafting_table_nether_sakura": "Nether Sakura Crafting Table",
+	"block.betternether.sign_nether_sakura": "Nether Sakura Sign",
+	"block.betternether.striped_bark_nether_sakura": "Nether Sakura Striped Bark",
+	"block.betternether.striped_log_nether_sakura": "Nether Sakura Striped Log",
+	"block.betternether.taburet_nether_sakura": "Nether Sakura Taburet"
 }

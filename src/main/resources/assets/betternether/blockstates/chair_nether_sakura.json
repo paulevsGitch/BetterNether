@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"facing=east,top=false":  { "model": "betternether:block/chair_nether_sakura", "y": 90 },
+		"facing=west,top=false":  { "model": "betternether:block/chair_nether_sakura", "y": 270 },
+		"facing=south,top=false": { "model": "betternether:block/chair_nether_sakura", "y": 180 },
+		"facing=north,top=false": { "model": "betternether:block/chair_nether_sakura" },
+		"top=true": { "model": "betternether:block/chair_nether_sakura_top" }
+	}
+}
