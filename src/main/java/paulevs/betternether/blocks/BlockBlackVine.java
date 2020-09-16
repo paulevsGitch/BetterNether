@@ -16,6 +16,8 @@ import net.minecraft.block.Fertilizable;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
@@ -128,7 +130,7 @@ public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
 	{
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS))
+		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0)
 		{
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		}

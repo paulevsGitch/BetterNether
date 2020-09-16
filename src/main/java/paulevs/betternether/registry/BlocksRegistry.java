@@ -318,6 +318,7 @@ public class BlocksRegistry
 	public static final Block MAGMA_FLOWER = registerBlock("magma_flower", new BlockMagmaFlower());
 	public static final Block FEATHER_FERN = registerBlock("feather_fern", new BlockFeatherFern());
 	public static final Block MOSS_COVER = registerBlock("moss_cover", new BlockMossCover());
+	public static final Block NEON_EQUISETUM = registerBlock("neon_equisetum", new BlockNeonEquisetum());
 	
 	// Cactuses //
 	public static final Block AGAVE = registerBlock("agave", new BlockAgave());
@@ -360,6 +361,7 @@ public class BlocksRegistry
 	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand());
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
 	public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass", new BlockTerrain());
+	public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
 	
 	// Roofs //
 	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);

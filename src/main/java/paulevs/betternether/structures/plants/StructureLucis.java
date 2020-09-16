@@ -13,7 +13,7 @@ import paulevs.betternether.blocks.BlockLucisSpore;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureLucis extends Object implements IStructure
+public class StructureLucis implements IStructure
 {
 	@Override
 	public void generate(ServerWorldAccess world, BlockPos pos, Random random)

@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "shape=bottom": { "model": "betternether:block/neon_equisetum_bottom" },
+        "shape=middle": { "model": "betternether:block/neon_equisetum_middle" },
+        "shape=top": { "model": "betternether:block/neon_equisetum_top" }
+    }
+}
