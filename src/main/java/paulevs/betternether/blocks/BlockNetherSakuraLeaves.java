@@ -2,7 +2,6 @@ package paulevs.betternether.blocks;
 
 import java.util.List;
 import java.util.Random;
-
 import com.google.common.collect.Lists;
 
 import net.fabricmc.api.EnvType;
@@ -33,7 +32,7 @@ public class BlockNetherSakuraLeaves extends BlockBaseNotFull
 	
 	public BlockNetherSakuraLeaves()
 	{
-		super(Materials.makeLeaves(MaterialColor.PINK).lightLevel((state) -> { return 15; }));
+		super(Materials.makeLeaves(MaterialColor.PINK).lightLevel((state) -> { return 13; }));
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
@@ -73,7 +72,7 @@ public class BlockNetherSakuraLeaves extends BlockBaseNotFull
 	@Environment(EnvType.CLIENT)
 	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
 	{
-		if (random.nextInt(16) == 0)
+		if (random.nextInt(10) == 0)
 		{
 			BlockPos blockPos = pos.down();
 			if (world.isAir(blockPos))

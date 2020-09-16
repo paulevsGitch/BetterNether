@@ -5,7 +5,7 @@
 		"particle": "betternether:block/nether_sakura_leaves_2",
 		"texture": "betternether:block/nether_sakura_leaves_2",
 		"sides": "betternether:block/nether_sakura_leaves_side",
-		"flowers": "betternether:block/nether_sakura_flowers_1"
+		"flowers": "betternether:block/nether_sakura_flowers_3"
 	},
 	"elements": [ 	 
 		{
@@ -19,6 +19,20 @@
 				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
 				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
 				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"shade": false,
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" }
 			}
 		},
 		{

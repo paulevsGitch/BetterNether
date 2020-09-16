@@ -22,6 +22,20 @@
 			}
 		},
 		{
+			"__comment": "Box1",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"shade": false,
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#flowers" }
+			}
+		},
+		{
 			"__comment": "PlaneX2",
 			"from": [ -4.5, 0, -4 ],
 			"to": [ -4.499, 16, 12 ],
