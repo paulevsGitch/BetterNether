@@ -20,7 +20,7 @@ public class StructureNeonEquisetum implements IStructure
 	@Override
 	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
-		if (!BlocksHelper.isNetherrack(world.getBlockState(pos.up()))) return;
+		if (pos.getY() < 90 || !BlocksHelper.isNetherrack(world.getBlockState(pos.up()))) return;
 		
 		int h = BlocksHelper.downRay(world, pos, 10);
 		if (h < 3)
