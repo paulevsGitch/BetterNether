@@ -29,12 +29,18 @@ public class BlockMold extends BlockBaseNotFull
 	public BlockMold(MaterialColor color)
 	{
 		super(Materials.makeGrass(color)
-				.materialColor(color)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.noCollision()
 				.breakInstantly()
 				.ticksRandomly());
+		this.setRenderLayer(BNRenderLayer.CUTOUT);
+		this.setDropItself(false);
+	}
+	
+	public BlockMold(Settings settings)
+	{
+		super(settings);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}

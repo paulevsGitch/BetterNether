@@ -14,6 +14,7 @@ import paulevs.betternether.structures.plants.StructureAnchorTree;
 import paulevs.betternether.structures.plants.StructureAnchorTreeBranch;
 import paulevs.betternether.structures.plants.StructureAnchorTreeRoot;
 import paulevs.betternether.structures.plants.StructureCeilingMushrooms;
+import paulevs.betternether.structures.plants.StructureHookMushroom;
 import paulevs.betternether.structures.plants.StructureJungleMoss;
 import paulevs.betternether.structures.plants.StructureMossCover;
 import paulevs.betternether.structures.plants.StructureNeonEquisetum;
@@ -45,6 +46,7 @@ public class UpsideDownForest extends NetherBiome
 		addStructure("forest_litter", new StructureForestLitter(), StructureType.FLOOR, 0.1F, false);
 		addStructure("ceiling_mushrooms", new StructureCeilingMushrooms(), StructureType.CEIL, 1F, false);
 		addStructure("neon_equisetum", new StructureNeonEquisetum(), StructureType.CEIL, 0.1F, true);
+		addStructure("hook_mushroom", new StructureHookMushroom(), StructureType.CEIL, 0.03F, true);
 	}
 	
 	@Override
