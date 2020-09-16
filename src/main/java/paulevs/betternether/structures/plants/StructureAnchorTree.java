@@ -88,9 +88,9 @@ public class StructureAnchorTree implements IStructure
 			
 			if (bpos.getY() > 64)
 			{
-				if (!blockUp)
+				if (!blockUp && world.getBlockState(bpos.up()).getMaterial().isReplaceable())
 				{
-					BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.MOSS_COVER.getDefaultState());
+					BlocksHelper.setWithoutUpdate(world, bpos.up(), BlocksRegistry.MOSS_COVER.getDefaultState());
 				}
 				
 				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0)

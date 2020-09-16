@@ -68,9 +68,9 @@ public class StructureAnchorTreeRoot implements IStructure
 			else
 				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.getDefaultState());
 			
-			if (!blockUp)
+			if (!blockUp && world.getBlockState(bpos.up()).getMaterial().isReplaceable())
 			{
-				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.MOSS_COVER.getDefaultState());
+				BlocksHelper.setWithoutUpdate(world, bpos.up(), BlocksRegistry.MOSS_COVER.getDefaultState());
 			}
 			
 			if ((bpos.getY() & 3) == 0 && StructureAnchorTree.NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0)
