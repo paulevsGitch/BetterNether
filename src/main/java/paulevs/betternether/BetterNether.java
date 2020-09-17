@@ -12,6 +12,7 @@ import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
+import paulevs.betternether.world.NetherBiomeSource;
 import paulevs.betternether.world.structures.piece.StructureTypes;
 
 public class BetterNether implements ModInitializer
@@ -27,19 +28,20 @@ public class BetterNether implements ModInitializer
 	{
 		initOptions();
 		SoundsRegistry.register();
-		StructureTypes.init();
 		BlocksRegistry.register();
 		BlockEntitiesRegistry.register();
 		ItemsRegistry.register();
-		BiomesRegistry.register();
 		EntityRegistry.register();
+		StructureTypes.init();
 		BNWorldGenerator.onModInit();
+		BiomesRegistry.register();
 		BrewingRegistry.register();
 		Config.save();
 		
 		IntegrationRecipes.register();
 		NetherTags.register();
 		ItemRecipes.register();
+		NetherBiomeSource.register();
 	}
 	
 	private void initOptions()

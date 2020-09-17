@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureNetherWart;
@@ -17,11 +18,13 @@ public class NetherWartForestEdge extends NetherBiome
 {
 	public NetherWartForestEdge(String name)
 	{
-		super(new BiomeDefenition(name)
+		super(new BiomeDefinition(name)
 				.setFogColor(191, 28, 28)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
+				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				.setMusic(SoundEvents.MUSIC_NETHER_CRIMSON_FOREST)
+				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.01F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.01F, false);

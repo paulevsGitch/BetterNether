@@ -3,6 +3,7 @@ package paulevs.betternether.biomes;
 import java.util.Random;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -20,12 +21,15 @@ public class OldWarpedWoods extends NetherBiome
 {
 	public OldWarpedWoods(String name)
 	{
-		super(new BiomeDefenition(name)
+		super(new BiomeDefinition(name)
 				.setFogColor(26, 5, 26)
 				.setLoop(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_WARPED_FOREST_MOOD)
-				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.WARPED_SPORE, 0.025F)));
+				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.WARPED_SPORE, 0.025F))
+				.setDefaultMobs(false)
+				.addMobSpawn(EntityType.ENDERMAN, 1, 4, 4)
+				.addMobSpawn(EntityType.STRIDER, 60, 1, 2));
 		addStructure("big_warped_tree", new StructureBigWarpedTree(), StructureType.FLOOR, 0.1F, false);
 		addStructure("warped_fungus", new StructureWarpedFungus(), StructureType.FLOOR, 0.05F, true);
 		addStructure("warped_roots", new StructureWarpedRoots(), StructureType.FLOOR, 0.2F, true);

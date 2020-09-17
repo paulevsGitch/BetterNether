@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.biomes.NetherSwampland;
 import paulevs.betternether.registry.BlocksRegistry;
 
 @Mixin(BoneMealItem.class)
@@ -105,10 +104,10 @@ public class BoneMealMixin
 			return BlocksRegistry.SOUL_GRASS.getDefaultState();
 		else if (state.getBlock() == BlocksRegistry.MUSHROOM_GRASS)
 			return BlocksRegistry.BONE_GRASS.getDefaultState();
+		else if (state.getBlock() == BlocksRegistry.SWAMPLAND_GRASS)
+			return BlocksRegistry.SWAMP_GRASS.getDefaultState();
 		else if (BlocksHelper.isNetherrack(state) && !BlocksHelper.isNylium(state))
-			return world.getBiome(pos) instanceof NetherSwampland ?
-					BlocksRegistry.SWAMP_GRASS.getDefaultState() :
-						BlocksRegistry.NETHER_GRASS.getDefaultState();
+			return BlocksRegistry.NETHER_GRASS.getDefaultState();
 		return null;
 	}
 	

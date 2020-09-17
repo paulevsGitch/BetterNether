@@ -3,25 +3,27 @@ package paulevs.betternether.registry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Random;
 
 import com.google.common.collect.Maps;
 
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biomes;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.CrimsonGlowingWoods;
 import paulevs.betternether.biomes.CrimsonPinewood;
 import paulevs.betternether.biomes.FloodedDeltas;
 import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.biomes.NetherBiomeGravelDesert;
-import paulevs.betternether.biomes.NetherBiomeJungle;
 import paulevs.betternether.biomes.NetherBiomeWrapper;
 import paulevs.betternether.biomes.NetherBoneReef;
 import paulevs.betternether.biomes.NetherGrasslands;
+import paulevs.betternether.biomes.NetherGravelDesert;
+import paulevs.betternether.biomes.NetherJungle;
 import paulevs.betternether.biomes.NetherMagmaLand;
 import paulevs.betternether.biomes.NetherMushroomForest;
 import paulevs.betternether.biomes.NetherMushroomForestEdge;
@@ -33,26 +35,29 @@ import paulevs.betternether.biomes.NetherSwamplandTerraces;
 import paulevs.betternether.biomes.NetherWartForest;
 import paulevs.betternether.biomes.NetherWartForestEdge;
 import paulevs.betternether.biomes.OldFungiwoods;
+import paulevs.betternether.biomes.OldSwampland;
 import paulevs.betternether.biomes.OldWarpedWoods;
+import paulevs.betternether.biomes.UpsideDownForest;
 import paulevs.betternether.config.Config;
 
 public class BiomesRegistry
 {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
-	private static final HashMap<Biome, NetherBiome> LINKS = Maps.newHashMap();
+	private static final HashMap<NetherBiome, RegistryKey<Biome>> KEYS = Maps.newHashMap();
+	public static final HashMap<Biome, NetherBiome> MUTABLE = Maps.newHashMap();
 	
 	private static final HashMap<NetherBiome, Float> DEF_CHANCES_MAIN = Maps.newHashMap();
 	private static final HashMap<NetherBiome, Float> DEF_CHANCES_SUB = Maps.newHashMap();
 	private static final HashMap<NetherBiome, Integer> DEF_SIZE_EDGE = Maps.newHashMap();
 	
-	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper("nether_wastes", "minecraft", Biomes.NETHER_WASTES);
-	public static final NetherBiome BIOME_CRIMSON_FOREST = new NetherBiomeWrapper("crimson_forest", "minecraft", Biomes.CRIMSON_FOREST);
-	public static final NetherBiome BIOME_WARPED_FOREST = new NetherBiomeWrapper("warped_forest", "minecraft", Biomes.WARPED_FOREST);
-	public static final NetherBiome BIOME_BASALT_DELTAS = new NetherBiomeWrapper("basalt_deltas", "minecraft", Biomes.BASALT_DELTAS);
+	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper(new Identifier("nether_wastes"));
+	public static final NetherBiome BIOME_CRIMSON_FOREST = new NetherBiomeWrapper(new Identifier("crimson_forest"));
+	public static final NetherBiome BIOME_WARPED_FOREST = new NetherBiomeWrapper(new Identifier("warped_forest"));
+	public static final NetherBiome BIOME_BASALT_DELTAS = new NetherBiomeWrapper(new Identifier("basalt_deltas"));
 	
-	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherBiomeGravelDesert("Gravel Desert");
-	public static final NetherBiome BIOME_NETHER_JUNGLE = new NetherBiomeJungle("Nether Jungle");
+	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherGravelDesert("Gravel Desert");
+	public static final NetherBiome BIOME_NETHER_JUNGLE = new NetherJungle("Nether Jungle");
 	public static final NetherBiome BIOME_WART_FOREST = new NetherWartForest("Wart Forest");
 	public static final NetherBiome BIOME_GRASSLANDS = new NetherGrasslands("Nether Grasslands");
 	public static final NetherBiome BIOME_MUSHROOM_FOREST = new NetherMushroomForest("Nether Mushroom Forest");
@@ -70,6 +75,8 @@ public class BiomesRegistry
 	public static final NetherBiome CRIMSON_PINEWOOD = new CrimsonPinewood("Crimson Pinewood");
 	public static final NetherBiome OLD_FUNGIWOODS = new OldFungiwoods("Old Fungiwoods");
 	public static final NetherBiome FLOODED_DELTAS = new FloodedDeltas("Flooded Deltas");
+	public static final NetherBiome UPSIDE_DOWN_FOREST = new UpsideDownForest("Upside Down Forest");
+	public static final NetherBiome OLD_SWAMPLAND = new OldSwampland("Old Swampland");
 	
 	private static int maxChance = 0;
 	private static boolean registered = false;
@@ -95,6 +102,8 @@ public class BiomesRegistry
 		registerSubBiome(CRIMSON_PINEWOOD, BIOME_CRIMSON_FOREST, 0.3F);
 		registerSubBiome(OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
 		registerSubBiome(FLOODED_DELTAS, BIOME_BASALT_DELTAS, 1F);
+		registerBiome(UPSIDE_DOWN_FOREST);
+		registerSubBiome(OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
 		
 		registerDefaultWrapped(BIOME_EMPTY_NETHER);
 		registerDefaultWrapped(BIOME_CRIMSON_FOREST);
@@ -107,13 +116,13 @@ public class BiomesRegistry
 	{
 		if (!registered)
 		{
-			Iterator<Biome> iterator = Registry.BIOME.iterator();
+			Iterator<Biome> iterator = BuiltinRegistries.BIOME.iterator();
 			while (iterator.hasNext())
 			{
 				Biome biome = iterator.next();
-				if (biome.getCategory() == Category.NETHER && !LINKS.containsKey(biome))
+				if (biome.getCategory() == Category.NETHER && !hasLink(biome))
 				{
-					Identifier id = Registry.BIOME.getId(biome);
+					Identifier id = BuiltinRegistries.BIOME.getId(biome);
 					String name = id.getPath();
 					String group = id.getNamespace();
 					if (!group.equals(BetterNether.MOD_ID))
@@ -121,12 +130,12 @@ public class BiomesRegistry
 						float chance = Config.getFloat("biomes." + group, name + "_chance", 1);
 						if (chance > 0)
 						{
-							NetherBiomeWrapper wrapper = new NetherBiomeWrapper(name, group, biome);
+							NetherBiomeWrapper wrapper = new NetherBiomeWrapper(id);
 							maxChance += chance;
 							wrapper.setGenChance(maxChance);
 							wrapper.build();
 							REGISTRY.add(wrapper);
-							LINKS.put(biome, wrapper);
+							makeLink(wrapper);
 							DEF_CHANCES_MAIN.put(wrapper, chance);
 						}
 					}
@@ -141,16 +150,16 @@ public class BiomesRegistry
 	
 	private static void registerMinecraftBiomes()
 	{
-		Iterator<Biome> iterator = Registry.BIOME.iterator();
+		Iterator<Biome> iterator = BuiltinRegistries.BIOME.iterator();
 		while (iterator.hasNext())
 		{
 			Biome biome = iterator.next();
-			if (biome.getCategory() == Category.NETHER && !LINKS.containsKey(biome))
+			if (biome.getCategory() == Category.NETHER && !hasLink(biome))
 			{
-				Identifier id = Registry.BIOME.getId(biome);
+				Identifier id = BuiltinRegistries.BIOME.getId(biome);
 				if (id.getNamespace().equals("minecraft"))
 				{
-					NetherBiomeWrapper wrapper = new NetherBiomeWrapper(id.getPath(), "minecraft", biome);
+					NetherBiomeWrapper wrapper = new NetherBiomeWrapper(id);
 					registerDefaultWrapped(wrapper);
 				}
 			}
@@ -160,24 +169,30 @@ public class BiomesRegistry
 	private static void registerDefaultWrapped(NetherBiome biome)
 	{
 		float chance = Config.getFloat("biomes.minecraft.main", biome.getRegistryName() + "_chance", 1);
-		if (chance > 0)
+		if (chance > 0.0F)
 		{
 			maxChance += chance;
 			biome.setGenChance(maxChance);
 			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			biome.build();
 			REGISTRY.add(biome);
-			LINKS.put(biome.getBiome(), biome);
+			makeLink(biome);
 			ALL_BIOMES.add(biome);
 			DEF_CHANCES_MAIN.put(biome, 1F);
 		}
+	}
+	
+	private static void registerBiomeDirect(String regName, NetherBiome biome)
+	{
+		Registry.register(BuiltinRegistries.BIOME, biome.getID(), biome.getBiome());
+		makeLink(biome);
 	}
 	
 	public static void registerBiome(NetherBiome biome)
 	{
 		String regName = biome.getRegistryName();
 		float chance = Config.getFloat("biomes.betternether.main", regName + "_chance", 1);
-		if (chance > 0)
+		if (chance > 0.0F)
 		{
 			maxChance += chance;
 			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
@@ -186,7 +201,7 @@ public class BiomesRegistry
 			REGISTRY.add(biome);
 			ALL_BIOMES.add(biome);
 			DEF_CHANCES_MAIN.put(biome, chance);
-			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, regName), biome);
+			registerBiomeDirect(regName, biome);
 		}
 	}
 	
@@ -194,7 +209,7 @@ public class BiomesRegistry
 	{
 		String regName = biome.getRegistryName();
 		int sizeConf = Config.getInt("biomes.betternether.edge", regName + "_size", size);
-		if (sizeConf > 0)
+		if (sizeConf > 0.0F)
 		{
 			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			mainBiome.setEdge(biome);
@@ -202,7 +217,7 @@ public class BiomesRegistry
 			biome.build();
 			DEF_SIZE_EDGE.put(biome, sizeConf);
 			ALL_BIOMES.add(biome);
-			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, biome.getRegistryName()), biome);
+			registerBiomeDirect(regName, biome);
 		}
 	}
 
@@ -210,14 +225,14 @@ public class BiomesRegistry
 	{
 		String regName = biome.getRegistryName();
 		chance = Config.getFloat("biomes.betternether.variation", regName + "_chance", chance);
-		if (chance > 0)
+		if (chance > 0.0F)
 		{
 			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			mainBiome.addSubBiome(biome, chance);
 			biome.build();
 			DEF_CHANCES_SUB.put(biome, chance);
 			ALL_BIOMES.add(biome);
-			Registry.register(Registry.BIOME, new Identifier(BetterNether.MOD_ID, biome.getRegistryName()), biome);
+			registerBiomeDirect(regName, biome);
 		}
 	}
 	
@@ -230,17 +245,25 @@ public class BiomesRegistry
 		return REGISTRY.get(0);
 	}
 	
+	private static boolean hasLink(Biome biome)
+	{
+		Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
+		if (!optional.isPresent()) return false;
+		Identifier id = optional.get().getValue();
+		for (RegistryKey<Biome> key: KEYS.values()) if (id.equals(key.getValue())) return true;
+		return false;
+	}
+	
+	private static void makeLink(NetherBiome netherBiome)
+	{
+		Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(netherBiome.getBiome());
+		RegistryKey<Biome> key = optional.isPresent() ? optional.get() : RegistryKey.of(Registry.BIOME_KEY, netherBiome.getID());
+		KEYS.put(netherBiome, key);
+	}
+	
 	public static NetherBiome getFromBiome(Biome biome)
 	{
-		if (biome instanceof NetherBiome)
-		{
-			return (NetherBiome) biome;
-		}
-		else
-		{
-			NetherBiome b = LINKS.get(biome);
-			return b == null ? BIOME_EMPTY_NETHER : b;
-		}
+		return MUTABLE.getOrDefault(biome, BIOME_EMPTY_NETHER);
 	}
 	
 	public static ArrayList<NetherBiome> getRegisteredBiomes()
@@ -266,7 +289,7 @@ public class BiomesRegistry
 			REGISTRY.add(biome);
 			ALL_BIOMES.add(biome);
 			DEF_CHANCES_MAIN.put(biome, chance);
-			Registry.register(Registry.BIOME, new Identifier(biome.getNamespace(), regName), biome);
+			registerBiomeDirect(regName, biome);
 		}
 	}
 	
@@ -288,7 +311,7 @@ public class BiomesRegistry
 			biome.build();
 			DEF_SIZE_EDGE.put(biome, sizeConf);
 			ALL_BIOMES.add(biome);
-			Registry.register(Registry.BIOME, new Identifier(biome.getNamespace(), regName), biome);
+			registerBiomeDirect(regName, biome);
 		}
 	}
 
@@ -309,7 +332,7 @@ public class BiomesRegistry
 			biome.build();
 			DEF_CHANCES_SUB.put(biome, chance);
 			ALL_BIOMES.add(biome);
-			Registry.register(Registry.BIOME, new Identifier(biome.getNamespace(), regName), biome);
+			registerBiomeDirect(regName, biome);
 		}
 	}
 	
@@ -334,5 +357,10 @@ public class BiomesRegistry
 	public static ArrayList<NetherBiome> getAllBiomes()
 	{
 		return ALL_BIOMES;
+	}
+
+	public static RegistryKey<Biome> getBiomeKey(NetherBiome biome)
+	{
+		return KEYS.get(biome);
 	}
 }

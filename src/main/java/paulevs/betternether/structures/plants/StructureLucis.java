@@ -2,22 +2,21 @@ package paulevs.betternether.structures.plants;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLucisMushroom;
+import paulevs.betternether.blocks.BlockLucisSpore;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureLucis extends Object implements IStructure
+public class StructureLucis implements IStructure
 {
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		if (canGenerate(world, pos))
 		{
@@ -49,7 +48,7 @@ public class StructureLucis extends Object implements IStructure
 			}
 			else
 			{
-				boolean offset = false;
+				/*boolean offset = false;
 				if (BlocksHelper.isNetherrack(world.getBlockState(pos.north())))
 				{
 					pos = pos.north();
@@ -67,21 +66,44 @@ public class StructureLucis extends Object implements IStructure
 				if (canReplace(world.getBlockState(pos.south())))
 					BlocksHelper.setWithoutUpdate(world, pos.south(), corner.with(BlockLucisMushroom.FACING, Direction.WEST));
 				if (canReplace(world.getBlockState(pos.south().west())))
-					BlocksHelper.setWithoutUpdate(world, pos.south().west(), corner.with(BlockLucisMushroom.FACING, Direction.NORTH));
+					BlocksHelper.setWithoutUpdate(world, pos.south().west(), corner.with(BlockLucisMushroom.FACING, Direction.NORTH));*/
+				
+				BlockState state = world.getBlockState(pos);
+				if (state.getBlock() == BlocksRegistry.LUCIS_SPORE)
+				{
+					if (state.get(BlockLucisSpore.FACING) == Direction.SOUTH) pos = pos.north();
+					else if (state.get(BlockLucisSpore.FACING) == Direction.WEST) pos = pos.east();
+				}
+				else
+				{
+					if (!world.getBlockState(pos.north()).isAir())
+					{
+						pos = pos.north();
+					}
+					else if (!world.getBlockState(pos.east()).isAir())
+					{
+						pos = pos.east();
+					}
+				}
+				
+				if (canReplace(world.getBlockState(pos))) BlocksHelper.setWithoutUpdate(world, pos, corner.with(BlockLucisMushroom.FACING, Direction.SOUTH));
+				if (canReplace(world.getBlockState(pos.west()))) BlocksHelper.setWithoutUpdate(world, pos.west(), corner.with(BlockLucisMushroom.FACING, Direction.EAST));
+				if (canReplace(world.getBlockState(pos.south()))) BlocksHelper.setWithoutUpdate(world, pos.south(), corner.with(BlockLucisMushroom.FACING, Direction.WEST));
+				if (canReplace(world.getBlockState(pos.south().west()))) BlocksHelper.setWithoutUpdate(world, pos.south().west(), corner.with(BlockLucisMushroom.FACING, Direction.NORTH));
 			}
 		}
 	}
 
 	private boolean canReplace(BlockState state)
 	{
-		Block b = state.getBlock();
-		return b == Blocks.AIR || b == BlocksRegistry.LUCIS_SPORE;
+		return state.getBlock() == BlocksRegistry.LUCIS_SPORE || state.getMaterial().isReplaceable();
 	}
 
-	private boolean canGenerate(WorldAccess world, BlockPos pos)
+	private boolean canGenerate(ServerWorldAccess world, BlockPos pos)
 	{
+		BlockState state;
 		for (Direction dir: HorizontalFacingBlock.FACING.getValues())
-			if (BlocksHelper.isNetherrack(world.getBlockState(pos.offset(dir))))
+			if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.offset(dir))) || BlocksRegistry.ANCHOR_TREE.isTreeLog(state.getBlock()))
 				return true;
 		return false;
 	}

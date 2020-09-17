@@ -9,12 +9,10 @@ import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.ChunkRandom;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import paulevs.betternether.world.BNWorldGenerator;
@@ -37,30 +35,28 @@ public abstract class ChunkPopulateMixin
 			int sz = chunkZ << 4;
 			BNWorldGenerator.prePopulate(region, sx, sz, RANDOM);
 			
-			GenerationStep.Feature[] steps = GenerationStep.Feature.values();
+			//if (BNWorldGenerator.CITY.canStartAt(region.getSeed(), chunkX, chunkZ))
+			//	region.getChunk(sx, sz).setStructureStart(BNWorldGenerator.CITY, new CityFeature.CityStart(BNWorldGenerator.CITY, sx, sz, new BlockBox(), 0, region.getSeed()));
+			//BNWorldGenerator.city_conf.tryPlaceStart(null, region, region, null, region.getSeed(), new ChunkPos(chunkX, chunkZ), null, 0, null);
+			
 			long featureSeed = RANDOM.setPopulationSeed(region.getSeed(), chunkX, chunkZ);
 			ChunkGenerator generator = (ChunkGenerator) (Object) this;
-			for (int step = 0; step < steps.length; step ++)
+			for (Biome biome: BNWorldGenerator.getPopulateBiomes())
 			{
-				GenerationStep.Feature feature = steps[step];
-				for (Biome biome: BNWorldGenerator.getPopulateBiomes())
+				try
 				{
-					try
-					{
-						biome.generateFeatureStep(feature, accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, 0, sz));
-					}
-					catch (Exception e)
-					{
-						CrashReport crashReport = CrashReport.create(e, "Biome decoration");
-						crashReport
-							.addElement("Generation")
-							.add("CenterX", chunkX)
-							.add("CenterZ", chunkZ)
-							.add("Step", feature)
-							.add("Seed", featureSeed)
-							.add("Biome", Registry.BIOME.getId(biome));
-						throw new CrashException(crashReport);
-					}
+					biome.generateFeatureStep(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, 0, sz));
+				}
+				catch (Exception e)
+				{
+					CrashReport crashReport = CrashReport.create(e, "Biome decoration");
+					crashReport
+					.addElement("Generation")
+					.add("CenterX", region.getCenterChunkX())
+					.add("CenterZ", region.getCenterChunkZ())
+					.add("Seed", featureSeed)
+					.add("Biome", biome);
+					throw new CrashException(crashReport);
 				}
 			}
 			

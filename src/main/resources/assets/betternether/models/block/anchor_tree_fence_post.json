@@ -1,0 +1,6 @@
+{
+    "parent": "block/fence_post",
+    "textures": {
+        "texture": "betternether:block/anchor_tree_planks"
+    }
+}

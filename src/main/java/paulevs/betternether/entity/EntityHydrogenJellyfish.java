@@ -23,6 +23,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
@@ -242,7 +243,7 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer
 	}
 
 	@Override
-	public PassiveEntity createChild(PassiveEntity mate)
+	public PassiveEntity createChild(ServerWorld world, PassiveEntity mate)
 	{
 		return null;
 	}
@@ -268,9 +269,8 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer
 	
 	public static boolean canSpawn(EntityType<? extends EntityHydrogenJellyfish> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
 	{
-		Box box = new Box(pos);
-		box.expand(64, 256, 64);
-		List<EntityHydrogenJellyfish> list = world.getEntities(EntityHydrogenJellyfish.class, box, (entity) -> { return true; });
+		Box box = new Box(pos).expand(64, 256, 64);
+		List<EntityHydrogenJellyfish> list = world.getEntitiesByClass(EntityHydrogenJellyfish.class, box, (entity) -> { return true; });
 		return list.size() < 4;
 	}
 }

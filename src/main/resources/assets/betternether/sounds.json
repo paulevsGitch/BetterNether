@@ -35,6 +35,15 @@
 			}
 		]
 	},
+	"betternether.ambient.swampland": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name": "betternether:ambient/swampland",
+				"stream": false
+			}
+		]
+	},
 	"betternether.mob.jellyfish": {
 		"category": "neutral",
 		"sounds": [

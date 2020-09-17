@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
@@ -33,12 +34,12 @@ public class StructureRubeus extends StructureFuncScatter
 	}
 	
 	@Override
-	public void grow(WorldAccess world, BlockPos pos, Random random)
+	public void grow(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		grow(world, pos, random, true);
 	}
 	
-	public void grow(WorldAccess world, BlockPos pos, Random random, boolean natural)
+	public void grow(ServerWorldAccess world, BlockPos pos, Random random, boolean natural)
 	{
 		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 0);
 		float scale = MHelper.randRange(0.5F, 1F, random);
@@ -153,7 +154,7 @@ public class StructureRubeus extends StructureFuncScatter
 	}
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
 		if (length >= StructureStalagnate.MAX_LENGTH)

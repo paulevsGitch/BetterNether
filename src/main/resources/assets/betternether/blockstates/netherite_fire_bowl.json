@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "fire=false": { "model": "betternether:block/netherite_fire_bowl_off" },
+        "fire=true": { "model": "betternether:block/netherite_fire_bowl_on" }
+    }
+}

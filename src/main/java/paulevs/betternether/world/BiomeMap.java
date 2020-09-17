@@ -3,6 +3,7 @@ package paulevs.betternether.world;
 import java.util.HashMap;
 
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.gen.ChunkRandom;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.noise.OpenSimplexNoise;
@@ -87,7 +88,7 @@ public class BiomeMap
 			MAPS.put(cpos, chunk);
 		}
 		
-		return chunk.getBiome((int) x, (int) y, (int) z);
+		return chunk.getBiome((int) x, MathHelper.clamp((int) y, 0, maxHeight - 1), (int) z);
 	}
 	
 	public NetherBiome getBiome(int x, int y, int z)
@@ -109,19 +110,6 @@ public class BiomeMap
 			edge = edge || !search.isSame(getRawBiome(x - 1, y, z + 1));
 			edge = edge || !search.isSame(getRawBiome(x + 1, y, z - 1));
 			edge = edge || !search.isSame(getRawBiome(x + 1, y, z + 1));
-			/*if (!edge && volumetric)
-			{
-				edge = edge || !search.isSame(getRawBiome(x, y + d, z));
-				edge = edge || !search.isSame(getRawBiome(x, y - d, z));
-				edge = edge || !search.isSame(getRawBiome(x - d, y - d, z - d));
-				edge = edge || !search.isSame(getRawBiome(x + d, y - d, z - d));
-				edge = edge || !search.isSame(getRawBiome(x - d, y - d, z + d));
-				edge = edge || !search.isSame(getRawBiome(x + d, y - d, z + d));
-				edge = edge || !search.isSame(getRawBiome(x - d, y + d, z - d));
-				edge = edge || !search.isSame(getRawBiome(x + d, y + d, z - d));
-				edge = edge || !search.isSame(getRawBiome(x - d, y + d, z + d));
-				edge = edge || !search.isSame(getRawBiome(x + d, y + d, z + d));
-			}*/
 			
 			if (edge)
 			{

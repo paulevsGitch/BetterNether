@@ -13,6 +13,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureWartDeadwood;
 import paulevs.betternether.structures.plants.StructureBlackBush;
@@ -27,12 +28,14 @@ public class NetherWartForest extends NetherBiome
 	
 	public NetherWartForest(String name)
 	{
-		super(new BiomeDefenition(name)
+		super(new BiomeDefinition(name)
 				.setFogColor(151, 6, 6)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.CRIMSON_SPORE, 0.05F)));
+				.setMusic(SoundEvents.MUSIC_NETHER_CRIMSON_FOREST)
+				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.CRIMSON_SPORE, 0.05F))
+				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
 		this.setNoiseDensity(0.45F);
 		addStructure("wart_deadwood", new StructureWartDeadwood(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.1F, false);

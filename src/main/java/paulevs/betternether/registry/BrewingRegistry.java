@@ -16,6 +16,7 @@ public class BrewingRegistry
 	public static void register()
 	{
 		register(new ItemStack(BlocksRegistry.BARREL_CACTUS), new ItemStack(Items.GLASS_BOTTLE), makePotion(Potions.WATER));
+		register(new ItemStack(BlocksRegistry.HOOK_MUSHROOM), makePotion(Potions.AWKWARD), makePotion(Potions.HEALING));
 	}
 	
 	private static void register(ItemStack source, ItemStack bottle, ItemStack result)

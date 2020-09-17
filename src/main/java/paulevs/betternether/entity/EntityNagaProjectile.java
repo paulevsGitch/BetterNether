@@ -14,7 +14,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RayTraceContext;
 import net.minecraft.world.World;
 
 public class EntityNagaProjectile extends FlyingEntity
@@ -65,7 +64,7 @@ public class EntityNagaProjectile extends FlyingEntity
 				getZ() + random.nextGaussian() * 0.2,
 				0, 0, 0);
 		
-		HitResult hitResult = ProjectileUtil.getCollision(this, (entity) -> { return  entity.isAlive() && entity instanceof LivingEntity; }, RayTraceContext.ShapeType.COLLIDER);
+		HitResult hitResult = ProjectileUtil.getCollision(this, (entity) -> { return  entity.isAlive() && entity instanceof LivingEntity; });
         if (hitResult.getType() != HitResult.Type.MISS)
         {
            this.onCollision(hitResult);

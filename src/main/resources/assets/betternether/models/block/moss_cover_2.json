@@ -1,0 +1,67 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "betternether:block/moss_top",
+		"texture": "betternether:block/moss_side",
+		"top": "betternether:block/moss_top",
+		"part": "betternether:block/moss_parts"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ -0.01, -9, -0.01 ],
+			"to": [ 16.01, 1, 16.01 ],
+			"faces": {
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#top" },
+				"north": { "uv": [ 0, 0, 16, 10 ], "texture": "#texture", "cullface": "north" },
+				"south": { "uv": [ 0, 0, 16, 10 ], "texture": "#texture", "cullface": "south" },
+				"west": { "uv": [ 0, 0, 16, 10 ], "texture": "#texture", "cullface": "west" },
+				"east": { "uv": [ 0, 0, 16, 10 ], "texture": "#texture", "cullface": "east" }
+			}
+		},
+		{
+			"__comment": "PlaneX2",
+			"from": [ 0, 0, 4 ],
+			"to": [ 0.001, 16, 20 ],
+			"rotation": { "origin": [ 0, 0, 4 ], "axis": "y", "angle": 45 },
+			"shade": false,
+			"faces": {
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#part" },
+				"east": { "uv": [ 16, 0, 0, 16 ], "texture": "#part" }
+			}
+		},
+		{
+			"__comment": "PlaneX2",
+			"from": [ 5.5, 1, 0 ],
+			"to": [ 5.501, 17, 16 ],
+			"rotation": { "origin": [ 5.5, 1, 0 ], "axis": "y", "angle": 45 },
+			"shade": false,
+			"faces": {
+				"west": { "uv": [ 16, 0, 0, 16 ], "texture": "#part" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#part" }
+			}
+		},
+		{
+			"__comment": "PlaneX2",
+			"from": [ 11, 0, 0 ],
+			"to": [ 11.001, 16, 16 ],
+			"rotation": { "origin": [ 11, 0, 0 ], "axis": "y", "angle": -45 },
+			"shade": false,
+			"faces": {
+				"west": { "uv": [ 16, 0, 0, 16 ], "texture": "#part" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#part" }
+			}
+		},
+		{
+			"__comment": "PlaneX2",
+			"from": [ 16, 1, 4.5 ],
+			"to": [ 16.001, 17, 20.5 ],
+			"rotation": { "origin": [ 16, 1, 4.5 ], "axis": "y", "angle": -45 },
+			"shade": false,
+			"faces": {
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#part" },
+				"east": { "uv": [ 16, 0, 0, 16 ], "texture": "#part" }
+			}
+		}
+	]
+}

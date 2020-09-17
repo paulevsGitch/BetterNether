@@ -141,8 +141,8 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		boolean visible = this.isVisible(entity);
 		boolean ghost = !visible && !entity.isInvisibleTo(MinecraftClient.getInstance().player);
 		MinecraftClient client = MinecraftClient.getInstance();
-		boolean bl3 = client.method_27022(entity);
-		RenderLayer layer = this.getRenderLayer(entity, visible, ghost, bl3);
+		boolean outline = client.hasOutline(entity);
+		RenderLayer layer = this.getRenderLayer(entity, visible, ghost, outline);
 		if (layer != null)
 		{
 			int r = getOverlay(entity, 0);

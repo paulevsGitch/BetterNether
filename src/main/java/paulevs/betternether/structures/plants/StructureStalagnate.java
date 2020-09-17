@@ -4,8 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockStalagnate;
 import paulevs.betternether.blocks.shapes.TripleShape;
@@ -18,7 +17,7 @@ public class StructureStalagnate implements IStructure
 	public static final int MIN_LENGTH = 3; // 5
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		int length = BlocksHelper.upRay(world, pos, MAX_LENGTH);
 		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.up(length + 1))))
@@ -34,7 +33,7 @@ public class StructureStalagnate implements IStructure
 		}
 	}
 	
-	public void generateDown(World world, BlockPos pos, Random random)
+	public void generateDown(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		int length = BlocksHelper.downRay(world, pos, MAX_LENGTH);
 		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.down(length + 1))))

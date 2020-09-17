@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/striped_log_anchor_tree_side_2",
+        "down": "betternether:block/striped_log_anchor_tree_top",
+        "up": "betternether:block/striped_log_anchor_tree_top",
+        "north": "betternether:block/striped_log_anchor_tree_side_2",
+        "east": "betternether:block/striped_log_anchor_tree_side_2",
+        "south": "betternether:block/striped_log_anchor_tree_side_2",
+        "west": "betternether:block/striped_log_anchor_tree_side_2"
+    }
+}

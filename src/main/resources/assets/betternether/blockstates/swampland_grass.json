@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [
+			{ "model": "betternether:block/swampland_grass" },
+			{ "model": "betternether:block/swampland_grass", "y": 90 },
+			{ "model": "betternether:block/swampland_grass", "y": 180 },
+			{ "model": "betternether:block/swampland_grass", "y": 270 }
+		]
+    }
+}

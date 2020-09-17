@@ -26,7 +26,7 @@ public class NetherSoulPlain extends NetherBiome
 	
 	public NetherSoulPlain(String name)
 	{
-		super(new BiomeDefenition(name)
+		super(new BiomeDefinition(name)
 				.setFogColor(196, 113, 239)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)

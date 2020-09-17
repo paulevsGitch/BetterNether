@@ -1,0 +1,22 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "betternether:block/moss_top",
+		"texture": "betternether:block/moss_side",
+		"top": "betternether:block/moss_top"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ -0.01, -9, -0.01 ],
+			"to": [ 16.01, 1, 16.01 ],
+			"faces": {
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#top" },
+				"north": { "uv": [ 16, 0, 0, 10 ], "texture": "#texture", "cullface": "north" },
+				"south": { "uv": [ 16, 0, 0, 10 ], "texture": "#texture", "cullface": "south" },
+				"west": { "uv": [ 16, 0, 0, 10 ], "texture": "#texture", "cullface": "west" },
+				"east": { "uv": [ 16, 0, 0, 10 ], "texture": "#texture", "cullface": "east" }
+			}
+		}
+	]
+}

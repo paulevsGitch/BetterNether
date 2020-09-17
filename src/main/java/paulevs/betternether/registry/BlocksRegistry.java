@@ -10,11 +10,13 @@ import net.minecraft.block.MaterialColor;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.blocks.*;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
+import paulevs.betternether.blocks.complex.WoodenMaterial;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
@@ -72,7 +74,6 @@ public class BlocksRegistry
 	public static final Block CINCINNASITE_TILE_SMALL = registerBlock("cincinnasite_tile_small", new BlockCincinnasite());
 	public static final Block CINCINNASITE_CARVED = registerBlock("cincinnasite_carved", new BlockCincinnasite());
 	public static final Block CINCINNASITE_WALL = registerWall("cincinnasite_wall", CINCINNASITE_FORGED);
-	public static final Block CINCINNASITE_FIRE_BOWL = registerBlock("cincinnasite_fire_bowl", new BlockCincinnasiteFireBowl());
 	public static final Block CINCINNASITE_BRICKS_PILLAR = registerBlock("cincinnasite_bricks_pillar", new BNPillar(CINCINNASITE_FORGED));
 	public static final Block CINCINNASITE_BARS = registerBlock("cincinnasite_bars", new BNPane(CINCINNASITE_FORGED, true));
 	public static final Block CINCINNASITE_PEDESTAL = registerBlock("cincinnasite_pedestal", new BlockCincinnasitePedestal());
@@ -161,6 +162,7 @@ public class BlocksRegistry
 	public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS);
 	public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS);
 	public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
+	public static final Block BASALT_SLAB = registerSlab("basalt_slab", Blocks.BASALT);
 	
 	// Willow //
 	public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());
@@ -241,6 +243,7 @@ public class BlocksRegistry
 	// Lucis //
 	public static final Block LUCIS_MUSHROOM = registerBlockNI("lucis_mushroom", new BlockLucisMushroom());
 	public static final Block LUCIS_SPORE = registerBlock("lucis_spore", new BlockLucisSpore());
+	public static final Block GIANT_LUCIS = registerBlock("giant_lucis", new BlockGiantLucis());
 	
 	// Giant Mold //
 	public static final Block GIANT_MOLD = registerBlockNI("giant_mold", new BlockGiantMold());
@@ -266,6 +269,17 @@ public class BlocksRegistry
 	public static final Block MUSHROOM_FIR_PLATE = registerPlate("mushroom_fir_plate",  MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_TRAPDOOR = registerTrapdoor("mushroom_fir_trapdoor", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_DOOR = registerDoor("mushroom_fir_door", MUSHROOM_FIR_PLANKS);
+	
+	// Anchor Tree
+	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
+	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
+	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
+	public static final WoodenMaterial ANCHOR_TREE = new WoodenMaterial("anchor_tree", MaterialColor.BLUE, MaterialColor.GREEN);
+	
+	// Nether Sakura
+	public static final Block NETHER_SAKURA_SAPLING = registerBlock("nether_sakura_sapling", new BlockNetherSakuraSapling());
+	public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves", new BlockNetherSakuraLeaves());
+	public static final WoodenMaterial NETHER_SAKURA = new WoodenMaterial("nether_sakura", MaterialColor.PINK, MaterialColor.BROWN);
 	
 	// Eyes //
 	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
@@ -303,6 +317,9 @@ public class BlocksRegistry
 	public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", new BlockBlackAppleSeed());
 	public static final Block MAGMA_FLOWER = registerBlock("magma_flower", new BlockMagmaFlower());
 	public static final Block FEATHER_FERN = registerBlock("feather_fern", new BlockFeatherFern());
+	public static final Block MOSS_COVER = registerBlock("moss_cover", new BlockMossCover());
+	public static final Block NEON_EQUISETUM = registerBlock("neon_equisetum", new BlockNeonEquisetum());
+	public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", new BlockHookMushroom());
 	
 	// Cactuses //
 	public static final Block AGAVE = registerBlock("agave", new BlockAgave());
@@ -327,6 +344,15 @@ public class BlocksRegistry
 	public static final Block BASALT_STALACTITE = registerStalactite("basalt_stalactite", Blocks.BASALT);
 	public static final Block BONE_STALACTITE = registerStalactite("bone_stalactite", BONE_BLOCK);
 	
+	// Fire Bowls
+	public static final Block CINCINNASITE_FIRE_BOWL = registerFireBowl("cincinnasite_fire_bowl", CINCINNASITE_FORGED, Blocks.NETHERRACK, ItemsRegistry.CINCINNASITE_INGOT);
+	public static final Block BRICKS_FIRE_BOWL = registerFireBowl("bricks_fire_bowl", NETHER_BRICK_TILE_LARGE, Blocks.NETHERRACK, Items.NETHER_BRICK);
+	public static final Block NETHERITE_FIRE_BOWL = registerFireBowl("netherite_fire_bowl", Blocks.NETHERITE_BLOCK, Blocks.NETHERRACK, Items.NETHERITE_INGOT);
+	
+	public static final Block CINCINNASITE_FIRE_BOWL_SOUL = registerFireBowl("cincinnasite_fire_bowl_soul", CINCINNASITE_FORGED, Blocks.SOUL_SAND, ItemsRegistry.CINCINNASITE_INGOT);
+	public static final Block BRICKS_FIRE_BOWL_SOUL = registerFireBowl("bricks_fire_bowl_soul", NETHER_BRICK_TILE_LARGE, Blocks.SOUL_SAND, Items.NETHER_BRICK);
+	public static final Block NETHERITE_FIRE_BOWL_SOUL = registerFireBowl("netherite_fire_bowl_soul", Blocks.NETHERITE_BLOCK, Blocks.SOUL_SAND, Items.NETHERITE_INGOT);
+	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
 	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium());
@@ -335,6 +361,8 @@ public class BlocksRegistry
 	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain());
 	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand());
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
+	public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass", new BlockTerrain());
+	public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
 	
 	// Roofs //
 	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);
@@ -478,8 +506,6 @@ public class BlocksRegistry
 	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
 	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
 	
-	//public static final WoodenMaterial TEST_MATERIAL = new WoodenMaterial("test_material", MaterialColor.BLACK);
-	
 	public static void register() {}
 	
 	public static Block registerBlock(String name, Block block)
@@ -508,7 +534,7 @@ public class BlocksRegistry
 		ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
 	}
 	
-	private static Block registerStairs(String name, Block source)
+	public static Block registerStairs(String name, Block source)
 	{
 		Block stairs = new BNStairs(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -520,7 +546,7 @@ public class BlocksRegistry
 		return stairs;
 	}
 	
-	private static Block registerSlab(String name, Block source)
+	public static Block registerSlab(String name, Block source)
 	{
 		Block slab = new BNSlab(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -544,7 +570,7 @@ public class BlocksRegistry
 		return roof;
 	}
 	
-	private static Block registerButton(String name, Block source)
+	public static Block registerButton(String name, Block source)
 	{
 		Block button = new BNButton(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -556,7 +582,7 @@ public class BlocksRegistry
 		return button;
 	}
 	
-	private static Block registerPlate(String name, Block source)
+	public static Block registerPlate(String name, Block source)
 	{
 		Block plate = new BNPlate(ActivationRule.EVERYTHING, source);
 		if (Config.getBoolean("blocks", name, true))
@@ -580,7 +606,7 @@ public class BlocksRegistry
 		return plate;
 	}
 	
-	private static Block registerPlanks(String name, Block planks, Block... logs)
+	public static Block registerPlanks(String name, Block planks, Block... logs)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
@@ -605,7 +631,7 @@ public class BlocksRegistry
 		return planks;
 	}
 	
-	private static Block registerLog(String name, Block log, Block stem)
+	public static Block registerLog(String name, Block log, Block stem)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
@@ -616,7 +642,7 @@ public class BlocksRegistry
 		return log;
 	}
 	
-	private static Block registerBark(String name, Block bark, Block log)
+	public static Block registerBark(String name, Block bark, Block log)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
@@ -627,7 +653,7 @@ public class BlocksRegistry
 		return bark;
 	}
 	
-	private static Block registerFence(String name, Block source)
+	public static Block registerFence(String name, Block source)
 	{
 		Block fence = new BNFence(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -639,7 +665,7 @@ public class BlocksRegistry
 		return fence;
 	}
 	
-	private static Block registerGate(String name, Block source)
+	public static Block registerGate(String name, Block source)
 	{
 		Block gate = new BNGate(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -651,7 +677,7 @@ public class BlocksRegistry
 		return gate;
 	}
 	
-	private static Block registerDoor(String name, Block source)
+	public static Block registerDoor(String name, Block source)
 	{
 		Block door = new BNDoor(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -663,7 +689,7 @@ public class BlocksRegistry
 		return door;
 	}
 	
-	private static Block registerTrapdoor(String name, Block source)
+	public static Block registerTrapdoor(String name, Block source)
 	{
 		Block trapdoor = new BNTrapdoor(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -675,7 +701,7 @@ public class BlocksRegistry
 		return trapdoor;
 	}
 	
-	private static Block registerMakeable2X2(String name, Block result, String group, Block... sources)
+	public static Block registerMakeable2X2(String name, Block result, String group, Block... sources)
 	{
 		if (Config.getBoolean("blocks", name, true))
 		{
@@ -687,7 +713,7 @@ public class BlocksRegistry
 		return result;
 	}
 	
-	private static Block registerWall(String name, Block source)
+	public static Block registerWall(String name, Block source)
 	{
 		Block wall = new BNWall(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -699,7 +725,7 @@ public class BlocksRegistry
 		return wall;
 	}
 	
-	private static Block registerCraftingTable(String name, Block source)
+	public static Block registerCraftingTable(String name, Block source)
 	{
 		Block block = new BNCraftingTable(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -711,7 +737,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerChest(String name, Block source)
+	public static Block registerChest(String name, Block source)
 	{
 		Block block = new BNChest(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -723,7 +749,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerSign(String name, Block source)
+	public static Block registerSign(String name, Block source)
 	{
 		Block block = new BNSign(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -735,7 +761,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerBarrel(String name, Block source, Block slab)
+	public static Block registerBarrel(String name, Block source, Block slab)
 	{
 		Block block = new BNBarrel(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -747,7 +773,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerLadder(String name, Block source)
+	public static Block registerLadder(String name, Block source)
 	{
 		Block block = new BNLadder(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -759,7 +785,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerTaburet(String name, Block source)
+	public static Block registerTaburet(String name, Block source)
 	{
 		Block block = new BNTaburet(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -771,7 +797,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerChair(String name, Block source)
+	public static Block registerChair(String name, Block source)
 	{
 		Block block = new BNNormalChair(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -783,7 +809,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerBarStool(String name, Block source)
+	public static Block registerBarStool(String name, Block source)
 	{
 		Block block = new BNBarStool(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -795,7 +821,7 @@ public class BlocksRegistry
 		return block;
 	}
 	
-	private static Block registerFurnace(String name, Block source)
+	public static Block registerFurnace(String name, Block source)
 	{
 		Block block = new BlockNetherFurnace(source);
 		if (Config.getBoolean("blocks", name, true))
@@ -814,6 +840,18 @@ public class BlocksRegistry
 		{
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite");
+		}
+		BLOCKS.add(name);
+		return block;
+	}
+	
+	private static Block registerFireBowl(String name, Block source, Block inside, Item leg)
+	{
+		Block block = new BlockFireBowl(source);
+		if (Config.getBoolean("blocks", name, true))
+		{
+			registerBlockDirectly(name, block);
+			RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
 		}
 		BLOCKS.add(name);
 		return block;

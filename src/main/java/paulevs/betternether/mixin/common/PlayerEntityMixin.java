@@ -19,7 +19,7 @@ import paulevs.betternether.blocks.BlockStatueRespawner;
 public abstract class PlayerEntityMixin
 {
 	@Inject(method = "findRespawnPosition", at = @At(value = "HEAD"), cancellable = true)
-	private static void statueRespawn(ServerWorld world, BlockPos pos, boolean bl, boolean bl2, CallbackInfoReturnable<Optional<Vec3d>> info)
+	private static void statueRespawn(ServerWorld world, BlockPos pos, float f, boolean bl, boolean bl2, CallbackInfoReturnable<Optional<Vec3d>> info)
 	{
 		BlockState blockState = world.getBlockState(pos);
 		Block block = blockState.getBlock();

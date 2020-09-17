@@ -1,0 +1,6 @@
+{
+	"parent": "block/template_single_face",
+	"textures": {
+		"texture": "betternether:block/giant_lucis_top"
+	}
+}

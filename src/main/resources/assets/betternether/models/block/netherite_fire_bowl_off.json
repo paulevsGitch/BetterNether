@@ -1,0 +1,9 @@
+{
+	"parent": "betternether:block/cincinnasite_fire_bowl_off",
+	"textures": {
+		"particle": "block/netherite_block",
+		"top": "betternether:block/netherite_fire_bowl_top",
+		"side": "betternether:block/netherite_fire_bowl_side",
+		"bottom": "block/netherite_block"
+	}
+}

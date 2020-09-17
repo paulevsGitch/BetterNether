@@ -23,7 +23,7 @@ public class NetherPoorGrasslands extends NetherBiome
 {
 	public NetherPoorGrasslands(String name)
 	{
-		super(new BiomeDefenition(name)
+		super(new BiomeDefinition(name)
 				.setFogColor(113, 73, 133)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)

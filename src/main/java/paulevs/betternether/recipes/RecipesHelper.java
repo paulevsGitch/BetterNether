@@ -28,6 +28,7 @@ public class RecipesHelper
 	private static final String[] SHAPE_TABURET = new String[] {"##", "II"};
 	private static final String[] SHAPE_CHAIR = new String[] {"I ", "##", "II"};
 	private static final String[] SHAPE_BAR_STOOL = new String[] {"##", "II", "II"};
+	private static final String[] SHAPE_FIRE_BOWL = new String[] {"#I#", " # ", "L L"};
 	
 	private static void makeSingleRecipe(String group, Block source, Block result, String[] shape, int count)
 	{
@@ -201,6 +202,16 @@ public class RecipesHelper
 			String name = Registry.BLOCK.getId(result).getPath();
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(source), "I", new ItemStack(Items.STICK));
 			BNRecipeManager.addCraftingRecipe(name, "nether_ladder", SHAPE_BAR_STOOL, materials, new ItemStack(result));
+		}
+	}
+	
+	public static void makeFireBowlRecipe(Block material, Block inside, Item leg, Block result)
+	{
+		if (Registry.BLOCK.getId(material) != Registry.BLOCK.getDefaultId() && Registry.BLOCK.getId(inside) != Registry.BLOCK.getDefaultId() && Registry.ITEM.getId(leg) != Registry.ITEM.getDefaultId())
+		{
+			String name = Registry.BLOCK.getId(result).getPath();
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(material), "I", new ItemStack(inside), "L", new ItemStack(leg));
+			BNRecipeManager.addCraftingRecipe(name, "fire_bowl", SHAPE_FIRE_BOWL, materials, new ItemStack(result));
 		}
 	}
 }

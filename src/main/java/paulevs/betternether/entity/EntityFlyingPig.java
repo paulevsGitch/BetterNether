@@ -39,6 +39,7 @@ import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -502,7 +503,7 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer
 		private boolean hasNearFood()
 		{
 			Box box = new Box(EntityFlyingPig.this.getBlockPos()).expand(16);
-			foods = EntityFlyingPig.this.world.getEntities(ItemEntity.class, box, (entity) -> {
+			foods = EntityFlyingPig.this.world.getEntitiesByClass(ItemEntity.class, box, (entity) -> {
 				return ((ItemEntity) entity).getStack().isFood();
 			});
 			return !foods.isEmpty();
@@ -510,7 +511,7 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer
 	}
 
 	@Override
-	public PassiveEntity createChild(PassiveEntity mate)
+	public PassiveEntity createChild(ServerWorld world, PassiveEntity mate)
 	{
 		EntityFlyingPig pig = EntityRegistry.FLYING_PIG.create(this.world);
 		pig.setWarted(pig.isWarted());

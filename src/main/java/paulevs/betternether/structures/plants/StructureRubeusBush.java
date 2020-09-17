@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.RubeusLog;
@@ -22,7 +23,7 @@ public class StructureRubeusBush implements IStructure
 	}
 
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		if (!world.isAir(pos) || !world.isAir(pos.up())|| !world.isAir(pos.up(15)))
 			return;

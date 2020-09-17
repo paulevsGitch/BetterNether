@@ -1,0 +1,122 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_side"
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_side",
+        "y": 90,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_side",
+        "y": 180,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_side",
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": [
+		{ "model": "betternether:block/giant_lucis_top", "x": 270 },
+		{ "model": "betternether:block/giant_lucis_top", "x": 270, "y": 90 },
+		{ "model": "betternether:block/giant_lucis_top", "x": 270, "y": 180 },
+		{ "model": "betternether:block/giant_lucis_top", "x": 270, "y": 270 }
+	  ]
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": [
+		{ "model": "betternether:block/giant_lucis_bottom", "x": 90 },
+		{ "model": "betternether:block/giant_lucis_bottom", "x": 90, "y": 90 },
+		{ "model": "betternether:block/giant_lucis_bottom", "x": 90, "y": 180 },
+		{ "model": "betternether:block/giant_lucis_bottom", "x": 90, "y": 270 }
+	  ]
+    },
+    {
+      "when": {
+        "north": "false"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_bottom"
+      }
+    },
+    {
+      "when": {
+        "east": "false"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_bottom",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "south": "false"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_bottom",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "west": "false"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_bottom",
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "up": "false"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_bottom",
+        "x": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "down": "false"
+      },
+      "apply": {
+        "model": "betternether:block/giant_lucis_bottom",
+        "x": 90,
+        "uvlock": false
+      }
+    }
+  ]
+}

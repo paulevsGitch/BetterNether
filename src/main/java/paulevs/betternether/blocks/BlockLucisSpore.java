@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.plants.StructureLucis;
 
 public class BlockLucisSpore extends BlockBaseNotFull implements Fertilizable
@@ -122,7 +123,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements Fertilizable
 		Direction direction = (Direction) state.get(FACING);
 		BlockPos blockPos = pos.offset(direction.getOpposite());
 		BlockState blockState = world.getBlockState(blockPos);
-		return BlocksHelper.isNetherrack(blockState) || BlocksHelper.isNylium(blockState);
+		return BlocksHelper.isNetherrack(blockState) || BlocksRegistry.ANCHOR_TREE.isTreeLog(blockState.getBlock());
 	}
 
 	@Override

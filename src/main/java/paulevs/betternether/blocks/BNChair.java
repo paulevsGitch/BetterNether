@@ -68,7 +68,7 @@ public class BNChair extends BlockBaseNotFull
 			double py = pos.getY() + height;
 			double pz = pos.getZ() + 0.5;
 			
-			List<EntityChair> active = world.getEntities(EntityChair.class, new Box(pos), new Predicate<EntityChair>()
+			List<EntityChair> active = world.getEntitiesByClass(EntityChair.class, new Box(pos), new Predicate<EntityChair>()
 			{
 				@Override
 				public boolean test(EntityChair entity)

@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockJellyfishMushroom;
 import paulevs.betternether.blocks.BlockJellyfishMushroom.JellyShape;
@@ -19,7 +19,7 @@ public class StructureJellyfishMushroom implements IStructure
 	Mutable npos = new Mutable();
 	
 	@Override
-	public void generate(WorldAccess world, BlockPos pos, Random random)
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		Block under;
 		if (world.getBlockState(pos.down()).getBlock().isIn(BlockTags.NYLIUM))
@@ -47,7 +47,7 @@ public class StructureJellyfishMushroom implements IStructure
 		}
 	}
 
-	public void grow(WorldAccess world, BlockPos pos, Random random)
+	public void grow(ServerWorldAccess world, BlockPos pos, Random random)
 	{
 		if (random.nextBoolean() && world.isAir(pos.up()))
 			growMedium(world, pos);
@@ -55,14 +55,14 @@ public class StructureJellyfishMushroom implements IStructure
 			growSmall(world, pos);
 	}
 	
-	public void growSmall(WorldAccess world, BlockPos pos)
+	public void growSmall(ServerWorldAccess world, BlockPos pos)
 	{
 		Block down = world.getBlockState(pos.down()).getBlock();
 		JellyShape visual = down == BlocksRegistry.MUSHROOM_GRASS ? JellyShape.NORMAL : down == BlocksRegistry.SEPIA_MUSHROOM_GRASS ? JellyShape.SEPIA : JellyShape.POOR;
 		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JELLYFISH_MUSHROOM.getDefaultState().with(BlockJellyfishMushroom.SHAPE, TripleShape.BOTTOM).with(BlockJellyfishMushroom.VISUAL, visual));
 	}
 	
-	public void growMedium(WorldAccess world, BlockPos pos)
+	public void growMedium(ServerWorldAccess world, BlockPos pos)
 	{
 		Block down = world.getBlockState(pos.down()).getBlock();
 		JellyShape visual = down == BlocksRegistry.MUSHROOM_GRASS ? JellyShape.NORMAL : down == BlocksRegistry.SEPIA_MUSHROOM_GRASS ? JellyShape.SEPIA : JellyShape.POOR;

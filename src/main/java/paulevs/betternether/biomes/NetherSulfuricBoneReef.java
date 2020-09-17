@@ -22,12 +22,13 @@ public class NetherSulfuricBoneReef extends NetherBiome
 {
 	public NetherSulfuricBoneReef(String name)
 	{
-		super(new BiomeDefenition(name)
+		super(new BiomeDefinition(name)
 				.setFogColor(154, 144, 49)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.ASH, 0.01F)), false);
+				.setStalactites(false)
+				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.ASH, 0.01F)));
 		
 		addStructure("bone_stalactite", new StructureStalactiteFloor(BlocksRegistry.BONE_STALACTITE, BlocksRegistry.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 		

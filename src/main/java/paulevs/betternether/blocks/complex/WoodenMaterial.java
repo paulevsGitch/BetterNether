@@ -2,18 +2,9 @@ package paulevs.betternether.blocks.complex;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
-import net.minecraft.block.PressurePlateBlock.ActivationRule;
-import paulevs.betternether.blocks.BNButton;
-import paulevs.betternether.blocks.BNDoor;
-import paulevs.betternether.blocks.BNFence;
-import paulevs.betternether.blocks.BNGate;
 import paulevs.betternether.blocks.BNLogStripable;
 import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNPlanks;
-import paulevs.betternether.blocks.BNPlate;
-import paulevs.betternether.blocks.BNSlab;
-import paulevs.betternether.blocks.BNStairs;
-import paulevs.betternether.blocks.BNTrapdoor;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class WoodenMaterial
@@ -36,22 +27,50 @@ public class WoodenMaterial
 	public final Block trapdoor;
 	public final Block door;
 	
-	public WoodenMaterial(String name, MaterialColor color)
+	public final Block taburet;
+	public final Block chair;
+	public final Block bar_stool;
+	
+	public final Block crafting_table;
+	public final Block ladder;
+	public final Block sign;
+	
+	public final Block chest;
+	public final Block barrel;
+	
+	public WoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor)
 	{
-		log_striped = BlocksRegistry.registerBlock(name + "_log_striped", new BNPillar(MaterialColor.LIME_TERRACOTTA));
-		bark_striped = BlocksRegistry.registerBlock(name + "_bark_striped", new BNPillar(MaterialColor.LIME_TERRACOTTA));
+		log_striped = BlocksRegistry.registerBlock("striped_log_" + name, new BNPillar(woodColor));
+		bark_striped = BlocksRegistry.registerBlock("striped_bark_" + name, new BNPillar(woodColor));
 		
-		log = BlocksRegistry.registerBlock(name + "_log", new BNLogStripable(MaterialColor.LIME_TERRACOTTA, log_striped));
-		bark = BlocksRegistry.registerBlock(name + "_bark", new BNLogStripable(MaterialColor.LIME_TERRACOTTA, bark_striped));
+		log = BlocksRegistry.registerBlock(name + "_log", new BNLogStripable(woodColor, log_striped));
+		bark = BlocksRegistry.registerBark(name + "_bark", new BNLogStripable(woodColor, bark_striped), log);
 		
-		planks = BlocksRegistry.registerBlock(name + "_planks", new BNPlanks(MaterialColor.LIME_TERRACOTTA));
-		planks_stairs = BlocksRegistry.registerBlock(name + "_stairs", new BNStairs(planks));
-		planks_slab = BlocksRegistry.registerBlock(name + "_slab", new BNSlab(planks));
-		fence = BlocksRegistry.registerBlock(name + "_fence", new BNFence(planks));
-		gate = BlocksRegistry.registerBlock(name + "_gate", new BNGate(planks));
-		button = BlocksRegistry.registerBlock(name + "_button", new BNButton(planks));
-		pressure_plate = BlocksRegistry.registerBlock(name + "_plate", new BNPlate(ActivationRule.EVERYTHING, planks));
-		trapdoor = BlocksRegistry.registerBlock(name + "_trapdoor", new BNTrapdoor(planks));
-		door = BlocksRegistry.registerBlock(name + "_door", new BNDoor(planks));
+		planks = BlocksRegistry.registerPlanks(name + "_planks", new BNPlanks(planksColor), log_striped, bark_striped, log, bark);
+		planks_stairs = BlocksRegistry.registerStairs(name + "_stairs", planks);
+		planks_slab = BlocksRegistry.registerSlab(name + "_slab", planks);
+		
+		fence = BlocksRegistry.registerFence(name + "_fence", planks);
+		gate = BlocksRegistry.registerGate(name + "_gate", planks);
+		button = BlocksRegistry.registerButton(name + "_button", planks);
+		pressure_plate = BlocksRegistry.registerPlate(name + "_plate", planks);
+		trapdoor = BlocksRegistry.registerTrapdoor(name + "_trapdoor", planks);
+		door = BlocksRegistry.registerDoor(name + "_door", planks);
+		
+		taburet = BlocksRegistry.registerTaburet("taburet_" + name, planks_slab);
+		chair = BlocksRegistry.registerChair("chair_" + name, planks_slab);
+		bar_stool = BlocksRegistry.registerBarStool("bar_stool_" + name, planks_slab);
+		
+		crafting_table = BlocksRegistry.registerCraftingTable("crafting_table_" + name, planks);
+		ladder = BlocksRegistry.registerLadder(name + "_ladder", planks);
+		sign = BlocksRegistry.registerSign("sign_" + name, planks);
+		
+		chest = BlocksRegistry.registerChest("chest_" + name, planks);
+		barrel = BlocksRegistry.registerBarrel("barrel_" + name, planks, planks_slab);
+	}
+	
+	public boolean isTreeLog(Block block)
+	{
+		return block == log || block == bark;
 	}
 }

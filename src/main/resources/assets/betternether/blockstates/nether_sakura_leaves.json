@@ -1,0 +1,35 @@
+{
+	"variants":
+	{
+		"":  [
+			{ "model": "betternether:block/nether_sakura_leaves" },
+			{ "model": "betternether:block/nether_sakura_leaves", "y": 90 },
+			{ "model": "betternether:block/nether_sakura_leaves", "y": 180 },
+			{ "model": "betternether:block/nether_sakura_leaves", "y": 270 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_1" },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_1", "y": 90 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_1", "y": 180 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_1", "y": 270 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_2" },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_2", "y": 90 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_2", "y": 180 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_2", "y": 270 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_3" },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_3", "y": 90 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_3", "y": 180 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_3", "y": 270 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_4" },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_4", "y": 90 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_4", "y": 180 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_4", "y": 270 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_5" },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_5", "y": 90 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_5", "y": 180 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_5", "y": 270 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_6" },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_6", "y": 90 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_6", "y": 180 },
+			{ "model": "betternether:block/nether_sakura_leaves_flowers_6", "y": 270 }
+		]
+    }
+}

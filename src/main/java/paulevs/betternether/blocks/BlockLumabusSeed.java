@@ -24,7 +24,7 @@ import paulevs.betternether.structures.IStructure;
 public class BlockLumabusSeed extends BlockBaseNotFull implements Fertilizable
 {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 6, 4, 12, 16, 12);
-	private final IStructure STRUCTURE;
+	private final IStructure structure;
 	
 	public BlockLumabusSeed(IStructure structure)
 	{
@@ -36,7 +36,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements Fertilizable
 				.noCollision()
 				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
-		this.STRUCTURE = structure;
+		this.structure = structure;
 	}
 	
 	@Override
@@ -60,7 +60,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
 	{
-		STRUCTURE.generate(world, pos, random);
+		structure.generate(world, pos, random);
 	}
 	
 	@Override

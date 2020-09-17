@@ -54,4 +54,9 @@ public class MHelper
 	{
 		return x - floor(x / side) * side;
 	}
+
+	public static int floor(double x)
+	{
+		return x < 0 ? (int) (x - 1) : (int) x;
+	}
 }

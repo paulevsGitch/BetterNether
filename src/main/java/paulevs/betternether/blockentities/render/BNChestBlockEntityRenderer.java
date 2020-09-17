@@ -36,7 +36,8 @@ import paulevs.betternether.registry.BlocksRegistry;
 
 public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlockEntity>
 {
-	private static final HashMap<String, RenderLayer[]> LAYERS = Maps.newHashMap();
+	private static final HashMap<Integer, RenderLayer[]> LAYERS = Maps.newHashMap();
+	private static RenderLayer[] defaultLayer;
 	
 	private static final int ID_NORMAL = 0;
 	private static final int ID_LEFT = 1;
@@ -119,9 +120,7 @@ public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlock
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			int blockLight = ((Int2IntFunction) propertySource.apply(new LightmapCoordinatesRetriever())).applyAsInt(light);
 			
-			RenderLayer[] layers = LAYERS.get(entity.getMaterial());
-			RenderLayer layer = getChestTexture(chestType, layers);
-			VertexConsumer vertexConsumer = vertexConsumers.getBuffer(layer);
+			VertexConsumer vertexConsumer = getConsumer(vertexConsumers, block, chestType);
 			
 			if (isDouble)
 			{
@@ -166,23 +165,29 @@ public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlock
 		}
 	}
 	
+	public static VertexConsumer getConsumer(VertexConsumerProvider provider, Block block, ChestType chestType)
+	{
+		RenderLayer[] layers = LAYERS.getOrDefault(Block.getRawIdFromState(block.getDefaultState()), defaultLayer);
+		return provider.getBuffer(getChestTexture(chestType, layers));
+	}
+	
 	static
 	{
+		defaultLayer = new RenderLayer[] {
+			RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal.png")),
+			RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal_left.png")),
+			RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal_right.png"))
+		};
 		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));
 			if (block instanceof BNChest)
 			{
-				LAYERS.put(name, new RenderLayer[] {
+				LAYERS.put(Block.getRawIdFromState(block.getDefaultState()), new RenderLayer[] {
 					RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + ".png")),
 					RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + "_left.png")),
 					RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + "_right.png"))
 				});
 			}
-		});
-		LAYERS.put("normal", new RenderLayer[] {
-			RenderLayer.getEntitySolid(new Identifier("entity/chest/normal.png")),
-			RenderLayer.getEntitySolid(new Identifier("entity/chest/normal_left.png")),
-			RenderLayer.getEntitySolid(new Identifier("entity/chest/normal_right.png"))
 		});
 	}
 }
