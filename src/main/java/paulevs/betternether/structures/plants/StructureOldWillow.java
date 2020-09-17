@@ -175,7 +175,8 @@ public class StructureOldWillow extends StructureFuncScatter
 			pz += fdz;
 			
 			POS.set(Math.round(px), Math.round(py), Math.round(pz));
-			sphere(POS, MathHelper.clamp(2.3 - Math.abs(POS.getY() - startY) * 0.1, 0.5, 2.3));
+			double delta = POS.getY() - startY;
+			sphere(POS, MathHelper.clamp(2.3 - Math.abs(delta) * (delta > 0 ? 0.1 : 0.3), 0.5, 2.3));
 		}
 	}
 	
@@ -209,7 +210,7 @@ public class StructureOldWillow extends StructureFuncScatter
 	
 	private void crown(WorldAccess world, BlockPos pos, float radius, Random random)
 	{
-		BlockState leaves = BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.NATURAL, true);
+		BlockState leaves = BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.NATURAL, false);
 		BlockState vine = BlocksRegistry.WILLOW_BRANCH.getDefaultState();
 		float halfR = radius * 0.5F;
 		float r2 = radius * radius;
@@ -232,18 +233,25 @@ public class StructureOldWillow extends StructureFuncScatter
 						POS.setZ(pos.getZ() + cz);
 						if (world.getBlockState(POS).getMaterial().isReplaceable())
 						{
-							int length = BlocksHelper.downRay(world, POS, 9);
-							if (length < 3)
+							if (random.nextBoolean())
 							{
-								BlocksHelper.setWithoutUpdate(world, POS, leaves);
-								continue;
-							};
-							length = MHelper.randRange(3, length, random);
-							for (int i = 1; i < length - 1; i++)
-							{
-								BlocksHelper.setWithoutUpdate(world, POS.down(i), vine);
+								int length = BlocksHelper.downRay(world, POS, 12);
+								if (length < 3)
+								{
+									BlocksHelper.setWithoutUpdate(world, POS, leaves);
+									continue;
+								};
+								length = MHelper.randRange(3, length, random);
+								for (int i = 1; i < length - 1; i++)
+								{
+									BlocksHelper.setWithoutUpdate(world, POS.down(i), vine);
+								}
+								BlocksHelper.setWithoutUpdate(world, POS.down(length - 1), vine.with(BlockWillowBranch.SHAPE, WillowBranchShape.END));
 							}
-							BlocksHelper.setWithoutUpdate(world, POS.down(length - 1), vine.with(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+							else if (random.nextBoolean() && world.getBlockState(POS.down()).getMaterial().isReplaceable())
+							{
+								BlocksHelper.setWithoutUpdate(world, POS.down(), leaves);
+							}
 							BlocksHelper.setWithoutUpdate(world, POS, leaves);
 						}
 					}
