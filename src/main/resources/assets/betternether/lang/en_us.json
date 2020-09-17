@@ -678,5 +678,10 @@
 	"block.betternether.taburet_nether_sakura": "Nether Sakura Taburet",
 	
 	"block.betternether.nether_sakura_leaves": "Nether Sakura Leaves",
-	"block.betternether.nether_sakura_sapling": "Nether Sakura Sapling"
+	"block.betternether.nether_sakura_sapling": "Nether Sakura Sapling",
+	
+	"block.betternether.ceiling_mushrooms": "Ceiling Mushrooms",
+	"block.betternether.neon_equisetum": "Neon Equisetum",
+	"block.betternether.hook_mushroom": "Hook Mushroom",
+	"item.betternether.hook_mushroom_cooked": "Cooked Hook Mushroom"
 }

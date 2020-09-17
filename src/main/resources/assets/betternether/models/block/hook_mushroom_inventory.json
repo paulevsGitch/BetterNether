@@ -1,5 +1,6 @@
 {
 	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
 	"textures": {
 		"particle": "betternether:block/hook_mushroom",
 		"texture": "betternether:block/hook_mushroom"
