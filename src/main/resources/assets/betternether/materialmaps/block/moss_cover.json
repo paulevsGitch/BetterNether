@@ -1,0 +1,10 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/moss_parts",
+				"material": "betternether:glow_50_half"
+			}
+		]
+	}
+}

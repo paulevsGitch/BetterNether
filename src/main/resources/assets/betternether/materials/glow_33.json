@@ -1,0 +1,8 @@
+{
+	"layers": [
+		{
+			"vertexSource": "canvas:shaders/material/default.vert",
+			"fragmentSource": "betternether:shaders/material/glow_33.frag"
+		}
+	]
+}

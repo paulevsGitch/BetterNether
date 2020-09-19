@@ -1,0 +1,10 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/swamp_grass_2",
+				"material": "betternether:glow_50"
+			}
+		]
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/reeds_block_top",
+				"material": "betternether:glow_33"
+			}
+		]
+	}
+}

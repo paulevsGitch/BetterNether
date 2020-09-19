@@ -1,0 +1,30 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/jellyfish_mushroom_side",
+				"material": "betternether:glow_transparent"
+			},
+			{
+				"sprite": "betternether:block/jellyfish_mushroom_side_poor",
+				"material": "betternether:glow_transparent"
+			},
+			{
+				"sprite": "betternether:block/jellyfish_mushroom_side_sepia",
+				"material": "betternether:glow_transparent"
+			},
+			{
+				"sprite": "betternether:block/jellyfish_mushroom_top",
+				"material": "betternether:glow_transparent"
+			},
+			{
+				"sprite": "betternether:block/jellyfish_mushroom_top_poor",
+				"material": "betternether:glow_transparent"
+			},
+			{
+				"sprite": "betternether:block/jellyfish_mushroom_top_sepia",
+				"material": "betternether:glow_transparent"
+			}
+		]
+	}
+}

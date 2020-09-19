@@ -1,0 +1,10 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/willow_bark_end",
+				"material": "betternether:glow_inc"
+			}
+		]
+	}
+}

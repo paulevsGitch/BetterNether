@@ -1,0 +1,10 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/anchor_tree_vine_end_2",
+				"material": "betternether:glow_50_half"
+			}
+		]
+	}
+}
