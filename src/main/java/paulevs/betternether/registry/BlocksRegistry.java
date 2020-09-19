@@ -29,7 +29,7 @@ public class BlocksRegistry
 	
 	// Stalagnate //
 	public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
-	public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStalagnateStem());
+	public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStem(MaterialColor.LIME_TERRACOTTA));
 	public static final Block STALAGNATE_SEED = registerBlock("stalagnate_seed", new BlockStalagnateSeed());
 	public static final Block STRIPED_LOG_STALAGNATE = registerBlock("striped_log_stalagnate", new BNPillar(MaterialColor.LIME_TERRACOTTA));
 	public static final Block STRIPED_BARK_STALAGNATE = registerBlock("striped_bark_stalagnate", new BNPillar(MaterialColor.LIME_TERRACOTTA));
@@ -218,7 +218,7 @@ public class BlocksRegistry
 	public static final Block RUBEUS_DOOR = registerDoor("rubeus_door", RUBEUS_PLANKS);
 	
 	// Mushroom //
-	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStalagnateStem());
+	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStem(MaterialColor.WHITE_TERRACOTTA));
 	public static final Block MUSHROOM_PLANKS = registerPlanks("mushroom_planks", new BNPlanks(MaterialColor.LIGHT_GRAY), 2, MUSHROOM_STEM);
 	public static final Block MUSHROOM_STAIRS = registerStairs("mushroom_stairs", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_SLAB = registerSlab("mushroom_slab", MUSHROOM_PLANKS);
@@ -255,7 +255,7 @@ public class BlocksRegistry
 	// Mushroom Fir //
 	public static final Block MUSHROOM_FIR = registerBlockNI("mushroom_fir",  new BlockMushroomFir());
 	public static final Block MUSHROOM_FIR_SAPLING = registerBlock("mushroom_fir_sapling",  new BlockMushroomFirSapling());
-	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem",  new BlockStalagnateStem());
+	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem",  new BlockStem(MaterialColor.BLACK_TERRACOTTA));
 	public static final Block STRIPED_LOG_MUSHROOM_FIR = registerBlock("striped_log_mushroom_fir",  new BNPillar(MaterialColor.BLUE));
 	public static final Block STRIPED_WOOD_MUSHROOM_FIR = registerBlock("striped_wood_mushroom_fir",  new BNPillar(MaterialColor.BLUE));
 	public static final Block MUSHROOM_FIR_LOG = registerLog("mushroom_fir_log",  new BNLogStripable(MaterialColor.BLUE, STRIPED_LOG_MUSHROOM_FIR), MUSHROOM_FIR_STEM);

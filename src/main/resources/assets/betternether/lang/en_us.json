@@ -684,5 +684,9 @@
 	"block.betternether.ceiling_mushrooms": "Ceiling Mushrooms",
 	"block.betternether.neon_equisetum": "Neon Equisetum",
 	"block.betternether.hook_mushroom": "Hook Mushroom",
-	"item.betternether.hook_mushroom_cooked": "Cooked Hook Mushroom"
+	"item.betternether.hook_mushroom_cooked": "Cooked Hook Mushroom",
+	
+	"item.betternether.whispering_gourd_vine": "Whispering Gourd Seeds",
+	"item.betternether.whispering_gourd": "Whispering Gourd",
+	"item.betternether.whispering_gourd_lantern": "Whispering Gourd Lantern"
 }

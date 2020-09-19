@@ -683,5 +683,9 @@
 	"block.betternether.ceiling_mushrooms": "Потолочные грибы",
 	"block.betternether.neon_equisetum": "Неоновый хвощ",
 	"block.betternether.hook_mushroom": "Цепляющийся гриб",
-	"item.betternether.hook_mushroom_cooked": "Приготовленный цепляющийся гриб"
+	"item.betternether.hook_mushroom_cooked": "Приготовленный цепляющийся гриб",
+	
+	"item.betternether.whispering_gourd_vine": "Семена шепчущей тыква",
+	"item.betternether.whispering_gourd": "Шепчущая тыква",
+	"item.betternether.whispering_gourd_lantern": "Фонарь из шепчущей тыквы"
 }
