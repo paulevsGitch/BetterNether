@@ -46,6 +46,24 @@ public class ItemRecipes
 			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(BlocksRegistry.GOLDEN_VINE));
 			BNRecipeManager.addCraftingRecipe("bn_golden_vine", "", new String[] {"#"}, materials, new ItemStack(ItemsRegistry.GLOWSTONE_PILE, 2));
 		}
+		
+		if (blockExists(BlocksRegistry.WALL_MUSHROOM_BROWN))
+		{
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(BlocksRegistry.WALL_MUSHROOM_BROWN));
+			BNRecipeManager.addCraftingRecipe("wall_mushroom_brown_1", "wall_mushroom", new String[] {"#"}, materials, new ItemStack(Items.BROWN_MUSHROOM));
+			
+			materials = ImmutableMap.of("#", new ItemStack(Items.BROWN_MUSHROOM));
+			BNRecipeManager.addCraftingRecipe("wall_mushroom_brown_2", "wall_mushroom", new String[] {"#"}, materials, new ItemStack(BlocksRegistry.WALL_MUSHROOM_BROWN));
+		}
+		
+		if (blockExists(BlocksRegistry.WALL_MUSHROOM_RED))
+		{
+			ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#", new ItemStack(BlocksRegistry.WALL_MUSHROOM_RED));
+			BNRecipeManager.addCraftingRecipe("wall_mushroom_red_1", "wall_mushroom", new String[] {"#"}, materials, new ItemStack(Items.RED_MUSHROOM));
+			
+			materials = ImmutableMap.of("#", new ItemStack(Items.RED_MUSHROOM));
+			BNRecipeManager.addCraftingRecipe("wall_mushroom_red_2", "wall_mushroom", new String[] {"#"}, materials, new ItemStack(BlocksRegistry.WALL_MUSHROOM_RED));
+		}
 	}
 	
 	private static boolean itemExists(Item item)
