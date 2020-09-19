@@ -320,6 +320,9 @@ public class BlocksRegistry
 	public static final Block MOSS_COVER = registerBlock("moss_cover", new BlockMossCover());
 	public static final Block NEON_EQUISETUM = registerBlock("neon_equisetum", new BlockNeonEquisetum());
 	public static final Block HOOK_MUSHROOM = registerBlock("hook_mushroom", new BlockHookMushroom());
+	public static final Block WHISPERING_GOURD_VINE = registerBlock("whispering_gourd_vine", new BlockWhisperingGourdVine());
+	public static final Block WHISPERING_GOURD = registerBlock("whispering_gourd", new BlockWhisperingGourd());
+	public static final Block WHISPERING_GOURD_LANTERN = registerBlock("whispering_gourd_lantern", new BlockWhisperingGourdLantern());
 	
 	// Cactuses //
 	public static final Block AGAVE = registerBlock("agave", new BlockAgave());
