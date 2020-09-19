@@ -1,7 +1,7 @@
 {
 	"layers": [
 		{
-			"vertexSource": "canvas:shaders/material/default.vert",
+			"vertexSource": "betternether:shaders/material/wave.vert",
 			"fragmentSource": "betternether:shaders/material/glow_inc.frag",
 			"disableAo": true,
 			"disableDiffuse": true

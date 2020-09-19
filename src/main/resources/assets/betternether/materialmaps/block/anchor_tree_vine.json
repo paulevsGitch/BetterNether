@@ -3,7 +3,19 @@
 		"spriteMap": [
 			{
 				"sprite": "betternether:block/anchor_tree_vine_end_2",
-				"material": "betternether:glow_50_half"
+				"material": "betternether:large_wave_glow_50_half"
+			},
+			{
+				"sprite": "betternether:block/anchor_tree_vine_end_1",
+				"material": "betternether:waving_large"
+			},
+			{
+				"sprite": "betternether:block/anchor_tree_vine",
+				"material": "betternether:waving_large"
+			},
+			{
+				"sprite": "betternether:block/anchor_tree_leaves_2",
+				"material": "betternether:waving_large"
 			}
 		]
 	}

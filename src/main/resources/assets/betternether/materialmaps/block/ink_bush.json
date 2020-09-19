@@ -1,0 +1,10 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/ink_bush_leaves",
+				"material": "betternether:waving"
+			}
+		]
+	}
+}
