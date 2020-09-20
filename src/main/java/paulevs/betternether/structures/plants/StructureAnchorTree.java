@@ -8,6 +8,7 @@ import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.MushroomBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -40,6 +41,13 @@ public class StructureAnchorTree implements IStructure
 	private void grow(ServerWorldAccess world, BlockPos up, BlockPos down, Random random)
 	{
 		if (up.getY() - down.getY() < 30) return;
+		int pd = BlocksHelper.downRay(world, down, 128) + 1;
+		for (int i = 0; i < 5; i++)
+		{
+			Block block = world.getBlockState(down.down(pd + i)).getBlock();
+			if (block == Blocks.NETHER_BRICKS || block == BlocksRegistry.NETHER_BRICK_TILE_LARGE || block == BlocksRegistry.NETHER_BRICK_TILE_SMALL)
+				return;
+		}
 		
 		BlockPos trunkTop = lerp(down, up, 0.6);
 		BlockPos trunkBottom = lerp(down, up, 0.3);

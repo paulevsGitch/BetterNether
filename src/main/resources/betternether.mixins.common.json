@@ -23,7 +23,9 @@
 	"SheepEntityMixin",
 	"DimensionTypeMixin",
 	"DefaultBiomeFeaturesMixin",
-	"GenerationSettingsMixin"
+	"GenerationSettingsMixin",
+	"BastionRemnantFeatureMixin",
+	"NetherFortressFeatureMixin"
   ],
   "injectors": {
     "defaultRequire": 1
