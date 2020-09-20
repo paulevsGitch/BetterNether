@@ -8,12 +8,10 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.blocks.RubeusLog;
-import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureRubeusBush implements IStructure
+public class StructureNetherSakuraBush implements IStructure
 {
 	private static final Mutable POS = new Mutable();
 
@@ -23,7 +21,7 @@ public class StructureRubeusBush implements IStructure
 		if (!world.isAir(pos) || !world.isAir(pos.up())|| !world.isAir(pos.up(15)))
 			return;
 		
-		float r = random.nextFloat() * 3 + 1;
+		float r = random.nextFloat() * 1.5F + 0.5F;
 		int count = (int) r;
 		
 		for (int i = 0; i < count; i++)
@@ -51,23 +49,23 @@ public class StructureRubeusBush implements IStructure
 					POS.setZ(z);
 					if (sqx + sqz < r2 + random.nextFloat() * r)
 					{
-						setIfAir(world, POS, BlocksRegistry.RUBEUS_LEAVES.getDefaultState());
+						setIfAir(world, POS, BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
 					}
 				}
 			}
 		}
 		
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.RUBEUS_BARK.getDefaultState().with(RubeusLog.SHAPE, TripleShape.MIDDLE));
-		setIfAir(world, pos.up(), BlocksRegistry.RUBEUS_LEAVES.getDefaultState());
-		setIfAir(world, pos.north(), BlocksRegistry.RUBEUS_LEAVES.getDefaultState());
-		setIfAir(world, pos.south(), BlocksRegistry.RUBEUS_LEAVES.getDefaultState());
-		setIfAir(world, pos.east(), BlocksRegistry.RUBEUS_LEAVES.getDefaultState());
-		setIfAir(world, pos.west(), BlocksRegistry.RUBEUS_LEAVES.getDefaultState());
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_SAKURA.bark.getDefaultState());
+		setIfAir(world, pos.up(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
+		setIfAir(world, pos.north(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
+		setIfAir(world, pos.south(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
+		setIfAir(world, pos.east(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
+		setIfAir(world, pos.west(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
 	}
 	
 	private void setIfAir(WorldAccess world, BlockPos pos, BlockState state)
 	{
-		if (world.isAir(pos))
+		if (world.getBlockState(pos).getMaterial().isReplaceable())
 			BlocksHelper.setWithoutUpdate(world, pos, state);
 	}
 }
