@@ -688,9 +688,9 @@
 	"block.betternether.hook_mushroom": "Цепляющийся гриб",
 	"item.betternether.hook_mushroom_cooked": "Приготовленный цепляющийся гриб",
 	
-	"item.betternether.whispering_gourd_vine": "Семена шепчущей тыква",
-	"item.betternether.whispering_gourd": "Шепчущая тыква",
-	"item.betternether.whispering_gourd_lantern": "Фонарь из шепчущей тыквы",
+	"block.betternether.whispering_gourd_vine": "Семена шепчущей тыква",
+	"block.betternether.whispering_gourd": "Шепчущая тыква",
+	"block.betternether.whispering_gourd_lantern": "Фонарь из шепчущей тыквы",
 	
 	"block.betternether.willow_torch": "Ивовый факел"
 }
