@@ -1,0 +1,1 @@
+{  "type": "minecraft:crafting_shapeless",  "ingredients": [	{ "item": "betternether:stalagnate_bowl" },	{ "item": "betternether:agave_leaf" },	{ "item": "betternether:black_apple" },	{ "item": "betternether:hook_mushroom_cooked" },	{ "item": "minecraft:nether_wart" }  ],  "result": {    "item": "betternether:herbal_medicine"  }}

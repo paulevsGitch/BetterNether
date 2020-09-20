@@ -33,7 +33,10 @@
 	"message.spawn_help": "§c§lYou must hold§r %s §c§lto set your spawn point here",
 	"message.spawn_set": "§2§lYour spawn point was set here",
 
-	"block.betternether.agave": "Agave",
+	"block.betternether.agave": "Agave Seed",
+	"item.betternether.agave_leaf": "Agave Leaf",
+	"item.betternether.agave_medicine": "Agave Medicine",
+	"item.betternether.herbal_medicine": "Herbal Medicine",
 
 	"block.betternether.barrel_cactus": "Barrel Cactus",
 

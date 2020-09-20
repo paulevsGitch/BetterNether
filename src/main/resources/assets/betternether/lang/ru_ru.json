@@ -31,7 +31,10 @@
 	"message.spawn_help": "§c§lВы должны держать§r %s §c§lдля установления точки возрождения",
 	"message.spawn_set": "§2§lВаша точка возрождения установлена здесь",
 
-	"block.betternether.agave": "Агава",
+	"block.betternether.agave": "Семя агавы",
+	"item.betternether.agave_leaf": "Лист Агавы",
+	"item.betternether.agave_medicine": "Лекарство из агавы",
+	"item.betternether.herbal_medicine": "Лекарство из трав",
 
 	"block.betternether.barrel_cactus": "Бочковидный кактус",
 
