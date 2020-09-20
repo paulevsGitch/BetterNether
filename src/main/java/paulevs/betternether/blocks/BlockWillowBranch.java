@@ -1,6 +1,9 @@
 package paulevs.betternether.blocks;
 
+import java.util.List;
 import java.util.function.ToIntFunction;
+
+import com.google.common.collect.Lists;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,6 +13,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.StringIdentifiable;
@@ -97,6 +101,19 @@ public class BlockWillowBranch extends BlockBaseNotFull
 	@Environment(EnvType.CLIENT)
 	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
 	{
-		return new ItemStack(BlocksRegistry.WILLOW_LOG);
+		return new ItemStack(state.get(SHAPE) == WillowBranchShape.END ? BlocksRegistry.WILLOW_TORCH : BlocksRegistry.WILLOW_LEAVES);
+	}
+	
+	@Override
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
+	{
+		if (state.get(SHAPE) == WillowBranchShape.END)
+		{
+			return Lists.newArrayList(new ItemStack(BlocksRegistry.WILLOW_TORCH));
+		}
+		else
+		{
+			return Lists.newArrayList();
+		}
 	}
 }

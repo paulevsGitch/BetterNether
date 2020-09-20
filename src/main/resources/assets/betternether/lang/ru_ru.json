@@ -690,5 +690,7 @@
 	
 	"item.betternether.whispering_gourd_vine": "Семена шепчущей тыква",
 	"item.betternether.whispering_gourd": "Шепчущая тыква",
-	"item.betternether.whispering_gourd_lantern": "Фонарь из шепчущей тыквы"
+	"item.betternether.whispering_gourd_lantern": "Фонарь из шепчущей тыквы",
+	
+	"block.betternether.willow_torch": "Ивовый факел"
 }

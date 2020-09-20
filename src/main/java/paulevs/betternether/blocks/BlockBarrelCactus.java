@@ -30,6 +30,7 @@ import paulevs.betternether.MHelper;
 
 public class BlockBarrelCactus extends BlockCommonPlant implements Fertilizable
 {
+	private static final VoxelShape EMPTY = Block.createCuboidShape(0, 0, 0, 0, 0, 0);
 	private static final VoxelShape[] SHAPES = new VoxelShape[] {
 			Block.createCuboidShape(5, 0, 5, 11, 5, 11),
 			Block.createCuboidShape(3, 0, 3, 13, 9, 13),
@@ -80,6 +81,7 @@ public class BlockBarrelCactus extends BlockCommonPlant implements Fertilizable
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
 	{
+		if (state.get(BlockCommonPlant.AGE) < 2) return EMPTY;
 		Vec3d vec3d = state.getModelOffset(view, pos);
 		return SHAPES[state.get(BlockCommonPlant.AGE)].offset(vec3d.x, vec3d.y, vec3d.z);
 	}

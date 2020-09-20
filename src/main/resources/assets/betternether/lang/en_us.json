@@ -691,5 +691,7 @@
 	
 	"item.betternether.whispering_gourd_vine": "Whispering Gourd Seeds",
 	"item.betternether.whispering_gourd": "Whispering Gourd",
-	"item.betternether.whispering_gourd_lantern": "Whispering Gourd Lantern"
+	"item.betternether.whispering_gourd_lantern": "Whispering Gourd Lantern",
+	
+	"block.betternether.willow_torch": "Willow Torch"
 }

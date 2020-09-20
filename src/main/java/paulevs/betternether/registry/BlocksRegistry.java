@@ -346,6 +346,7 @@ public class BlocksRegistry
 	public static final Block BLACKSTONE_STALACTITE = registerStalactite("blackstone_stalactite", Blocks.BLACKSTONE);
 	public static final Block BASALT_STALACTITE = registerStalactite("basalt_stalactite", Blocks.BASALT);
 	public static final Block BONE_STALACTITE = registerStalactite("bone_stalactite", BONE_BLOCK);
+	public static final Block WILLOW_TORCH = registerBlock("willow_torch", new BlockWillowTorch());
 	
 	// Fire Bowls
 	public static final Block CINCINNASITE_FIRE_BOWL = registerFireBowl("cincinnasite_fire_bowl", CINCINNASITE_FORGED, Blocks.NETHERRACK, ItemsRegistry.CINCINNASITE_INGOT);

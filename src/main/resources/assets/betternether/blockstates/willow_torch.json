@@ -1,0 +1,10 @@
+{
+    "variants": {
+		"facing=north": { "model": "betternether:block/willow_torch_wall", "y": 180 },
+		"facing=south": { "model": "betternether:block/willow_torch_wall" },
+		"facing=east": { "model": "betternether:block/willow_torch_wall", "y": 270 },
+		"facing=west": { "model": "betternether:block/willow_torch_wall", "y": 90 },
+		"facing=up": { "model": "betternether:block/willow_torch" },
+		"facing=down": { "model": "betternether:block/willow_torch", "x": 180 }
+    }
+}
