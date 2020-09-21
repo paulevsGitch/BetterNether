@@ -31,6 +31,12 @@ public class NetherBiomeWrapper extends NetherBiome
 		}
 	}
 	
+	public NetherBiomeWrapper(Identifier id, Biome biome)
+	{
+		super(new BiomeDefinition(id));
+		this.biome = biome;
+	}
+	
 	@Override
 	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
 	{

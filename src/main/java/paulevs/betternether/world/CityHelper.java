@@ -16,7 +16,7 @@ public class CityHelper
 	public static boolean stopStructGen(int chunkX, int chunkZ, ChunkGenerator chunkGenerator, long worldSeed, ChunkRandom chunkRandom)
 	{
 		StructureConfig config = chunkGenerator.getStructuresConfig().getForType(BNWorldGenerator.CITY);
-		collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
+		if (config != null) collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
 		return stopGeneration(chunkX, chunkZ);
 	}
 	

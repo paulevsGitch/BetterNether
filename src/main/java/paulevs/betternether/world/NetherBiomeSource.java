@@ -1,7 +1,6 @@
 package paulevs.betternether.world;
 
 import java.util.Collections;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
@@ -33,9 +32,7 @@ public class NetherBiomeSource extends BiomeSource
 		this.seed = seed;
 		this.map = new BiomeMap(seed, BNWorldGenerator.biomeSizeXZ, BNWorldGenerator.biomeSizeY, BNWorldGenerator.volumetric);
 		this.biomeRegistry = biomeRegistry;
-		
-		for (NetherBiome netherBiome: BiomesRegistry.getAllBiomes())
-			BiomesRegistry.MUTABLE.put(biomeRegistry.getOrThrow(BiomesRegistry.getBiomeKey(netherBiome)), netherBiome);
+		BiomesRegistry.mutateRegistry(biomeRegistry);
 	}
 
 	@Override
