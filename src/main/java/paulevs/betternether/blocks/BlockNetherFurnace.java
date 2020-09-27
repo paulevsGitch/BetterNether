@@ -68,7 +68,6 @@ public class BlockNetherFurnace extends AbstractFurnaceBlock
 			{
 				world.playSound(d, e, f, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 			}
-
 			Direction direction = (Direction) state.get(FACING);
 			Direction.Axis axis = direction.getAxis();
 			double h = random.nextDouble() * 0.6D - 0.3D;

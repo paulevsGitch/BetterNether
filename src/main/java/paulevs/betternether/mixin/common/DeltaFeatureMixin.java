@@ -6,12 +6,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.DeltaFeature;
 import net.minecraft.world.gen.feature.DeltaFeatureConfig;
-import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.BlockRubeusLeaves;
+import paulevs.betternether.blocks.BlockWillowLeaves;
 
 @Mixin(DeltaFeature.class)
 public class DeltaFeatureMixin
@@ -29,6 +29,6 @@ public class DeltaFeatureMixin
 	
 	private static boolean isValidBlock(BlockState state)
 	{
-		return BlocksHelper.isNetherrack(state) || state.getBlock() == Blocks.BASALT || state.getBlock() == Blocks.BLACKSTONE;
+		return !(state.getBlock() instanceof BlockRubeusLeaves) && !(state.getBlock() instanceof BlockWillowLeaves) && !state.getMaterial().isReplaceable();
 	}
 }

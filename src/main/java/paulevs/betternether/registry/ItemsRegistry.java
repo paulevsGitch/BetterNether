@@ -7,7 +7,10 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.FoodComponent;
@@ -22,6 +25,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.shapes.FoodShape;
@@ -104,6 +108,10 @@ public class ItemsRegistry
 	public static final Item GLOWSTONE_PILE = registerItem("glowstone_pile", new Item(defaultSettings()));
 	public static final Item LAPIS_PILE = registerItem("lapis_pile", new Item(defaultSettings()));
 	
+	public static final Item AGAVE_LEAF = registerItem("agave_leaf", new Item(defaultSettings()));
+	public static final Item AGAVE_MEDICINE = registerMedicine("agave_medicine", 40, 2, true);
+	public static final Item HERBAL_MEDICINE = registerMedicine("herbal_medicine", 10, 5, true);
+	
 	public static void register() {}
 	
 	public static Item registerItem(String name, Item item)
@@ -124,6 +132,36 @@ public class ItemsRegistry
 	public static Item registerFood(String name, int hunger, float saturationMultiplier)
 	{
 		return registerItem(name, new Item(defaultSettings().food(new FoodComponent.Builder().hunger(hunger).saturationModifier(saturationMultiplier).build())));
+	}
+	
+	public static Item registerMedicine(String name, int ticks, int power, boolean bowl)
+	{
+		if (bowl)
+		{
+			Item item = new Item(defaultSettings().food(new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, ticks, power), 1).build())) {
+				@Override
+				public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user)
+				{
+					if (stack.getCount() == 1)
+					{
+						super.finishUsing(stack, world, user);
+						return new ItemStack(ItemsRegistry.STALAGNATE_BOWL, stack.getCount());
+					}
+					else
+					{
+						if (user instanceof PlayerEntity)
+						{
+							PlayerEntity player = (PlayerEntity) user;
+							if (!player.isCreative())
+								player.giveItemStack(new ItemStack(ItemsRegistry.STALAGNATE_BOWL));
+						}
+						return super.finishUsing(stack, world, user);
+					}
+				}
+			};
+			return registerItem(name, item);
+		}
+		return registerItem(name, new Item(defaultSettings().food(new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, ticks, power), 1).build())));
 	}
 
 	public static Settings defaultSettings()

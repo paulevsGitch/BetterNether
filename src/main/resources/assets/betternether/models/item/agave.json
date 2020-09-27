@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
     "textures": {
-        "layer0": "betternether:block/agave_leaf_02"
+        "layer0": "betternether:item/agave_seed"
     }
 }

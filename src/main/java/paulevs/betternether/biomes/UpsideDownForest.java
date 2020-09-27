@@ -19,8 +19,10 @@ import paulevs.betternether.structures.plants.StructureJungleMoss;
 import paulevs.betternether.structures.plants.StructureMossCover;
 import paulevs.betternether.structures.plants.StructureNeonEquisetum;
 import paulevs.betternether.structures.plants.StructureNetherSakura;
+import paulevs.betternether.structures.plants.StructureNetherSakuraBush;
 import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
+import paulevs.betternether.structures.plants.StructureWhisperingGourd;
 
 public class UpsideDownForest extends NetherBiome
 {
@@ -38,7 +40,8 @@ public class UpsideDownForest extends NetherBiome
 		addStructure("anchor_tree", new StructureAnchorTree(), StructureType.CEIL, 0.2F, false);
 		addStructure("anchor_tree_root", new StructureAnchorTreeRoot(), StructureType.CEIL, 0.03F, false);
 		addStructure("anchor_tree_branch", new StructureAnchorTreeBranch(), StructureType.CEIL, 0.02F, true);
-		addStructure("anchor_nether_sakura", new StructureNetherSakura(), StructureType.CEIL, 0.01F, true);
+		addStructure("nether_sakura", new StructureNetherSakura(), StructureType.CEIL, 0.01F, true);
+		addStructure("nether_sakura_bush", new StructureNetherSakuraBush(), StructureType.FLOOR, 0.01F, true);
 		addStructure("moss_cover", new StructureMossCover(), StructureType.FLOOR, 0.6F, false);
 		addStructure("jungle_moss", new StructureJungleMoss(), StructureType.WALL, 0.4F, true);
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.4F, true);
@@ -47,6 +50,7 @@ public class UpsideDownForest extends NetherBiome
 		addStructure("ceiling_mushrooms", new StructureCeilingMushrooms(), StructureType.CEIL, 1F, false);
 		addStructure("neon_equisetum", new StructureNeonEquisetum(), StructureType.CEIL, 0.1F, true);
 		addStructure("hook_mushroom", new StructureHookMushroom(), StructureType.CEIL, 0.03F, true);
+		addStructure("whispering_gourd", new StructureWhisperingGourd(), StructureType.CEIL, 0.02F, true);
 	}
 	
 	@Override

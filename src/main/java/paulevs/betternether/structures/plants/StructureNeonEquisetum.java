@@ -40,6 +40,6 @@ public class StructureNeonEquisetum implements IStructure
 		blockPos.setY(blockPos.getY() - 1);
 		BlocksHelper.setWithoutUpdate(world, blockPos, middle);
 		blockPos.setY(blockPos.getY() - 1);
-		BlocksHelper.setWithoutUpdate(world, blockPos.down(), bottom);
+		BlocksHelper.setWithoutUpdate(world, blockPos, bottom);
 	}
 }

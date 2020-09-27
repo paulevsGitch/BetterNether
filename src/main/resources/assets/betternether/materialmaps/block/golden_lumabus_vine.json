@@ -1,0 +1,30 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/golden_lumabus_bulb_1",
+				"material": "betternether:wave_glow_inc"
+			},
+			{
+				"sprite": "betternether:block/golden_lumabus_bulb_2",
+				"material": "betternether:wave_glow_inc"
+			},
+			{
+				"sprite": "betternether:block/golden_lumabus_bulb_3",
+				"material": "betternether:wave_glow_inc"
+			},
+			{
+				"sprite": "betternether:block/golden_lumabus_bulb_4",
+				"material": "betternether:wave_glow_inc"
+			},
+			{
+				"sprite": "betternether:block/golden_lumabus_vine",
+				"material": "betternether:waving"
+			},
+			{
+				"sprite": "betternether:block/golden_lumabus_leaves",
+				"material": "betternether:waving"
+			}
+		]
+	}
+}

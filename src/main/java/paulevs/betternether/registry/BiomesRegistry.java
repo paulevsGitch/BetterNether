@@ -45,7 +45,8 @@ public class BiomesRegistry
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
 	private static final HashMap<NetherBiome, RegistryKey<Biome>> KEYS = Maps.newHashMap();
-	public static final HashMap<Biome, NetherBiome> MUTABLE = Maps.newHashMap();
+	private static final HashMap<Biome, NetherBiome> MUTABLE = Maps.newHashMap();
+	private static final ArrayList<NetherBiome> GENERATOR = new ArrayList<NetherBiome>();
 	
 	private static final HashMap<NetherBiome, Float> DEF_CHANCES_MAIN = Maps.newHashMap();
 	private static final HashMap<NetherBiome, Float> DEF_CHANCES_SUB = Maps.newHashMap();
@@ -78,6 +79,7 @@ public class BiomesRegistry
 	public static final NetherBiome UPSIDE_DOWN_FOREST = new UpsideDownForest("Upside Down Forest");
 	public static final NetherBiome OLD_SWAMPLAND = new OldSwampland("Old Swampland");
 	
+	private static int maxDefChance = 0;
 	private static int maxChance = 0;
 	private static boolean registered = false;
 	
@@ -205,6 +207,44 @@ public class BiomesRegistry
 		}
 	}
 	
+	public static void mutateRegistry(Registry<Biome> biomeRegistry)
+	{
+		GENERATOR.clear();
+		GENERATOR.addAll(REGISTRY);
+		
+		MUTABLE.clear();
+		for (NetherBiome netherBiome: BiomesRegistry.getAllBiomes())
+		{
+			MUTABLE.put(biomeRegistry.getOrThrow(getBiomeKey(netherBiome)), netherBiome);
+		}
+		
+		if (maxDefChance == 0) maxDefChance = maxChance;
+		maxChance = maxDefChance;
+		
+		Iterator<Biome> iterator = biomeRegistry.iterator();
+		while (iterator.hasNext())
+		{
+			Biome biome = iterator.next();
+			if (biome.getCategory() == Category.NETHER && !BiomesRegistry.MUTABLE.containsKey(biome))
+			{
+				NetherBiome netherBiome = new NetherBiomeWrapper(biomeRegistry.getId(biome), biome);
+				MUTABLE.put(biome, netherBiome);
+				
+				float chance = Config.getFloat("biomes.minecraft.main", netherBiome.getRegistryName() + "_chance", 1);
+				if (chance > 0.0F)
+				{
+					maxChance += chance;
+					netherBiome.setGenChance(maxChance);
+					netherBiome.setPlantDensity(Config.getFloat("generator.biome." + netherBiome.getRegistryName(), "plants_and_structures_density", 1));
+					netherBiome.build();
+					GENERATOR.add(netherBiome);
+					KEYS.put(netherBiome, biomeRegistry.getKey(biome).get());
+					DEF_CHANCES_MAIN.put(netherBiome, 1F);
+				}
+			}
+		}
+	}
+	
 	public static void registerEdgeBiome(NetherBiome biome, NetherBiome mainBiome, int size)
 	{
 		String regName = biome.getRegistryName();
@@ -239,10 +279,10 @@ public class BiomesRegistry
 	public static NetherBiome getBiome(Random random)
 	{
 		float chance = random.nextFloat() * maxChance;
-		for (NetherBiome biome: REGISTRY)
+		for (NetherBiome biome: GENERATOR)
 			if (biome.canGenerate(chance))
 				return biome;
-		return REGISTRY.get(0);
+		return BIOME_EMPTY_NETHER;
 	}
 	
 	private static boolean hasLink(Biome biome)

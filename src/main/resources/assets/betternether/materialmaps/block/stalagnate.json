@@ -1,0 +1,14 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/stalagnate_trunk_leaves",
+				"material": "betternether:waving_small"
+			},
+			{
+				"sprite": "betternether:block/stalagnate_trunk_leaves_2",
+				"material": "betternether:waving_small"
+			}
+		]
+	}
+}

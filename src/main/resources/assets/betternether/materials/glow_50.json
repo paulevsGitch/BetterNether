@@ -1,0 +1,10 @@
+{
+	"layers": [
+		{
+			"vertexSource": "canvas:shaders/material/default.vert",
+			"fragmentSource": "betternether:shaders/material/glow_50.frag",
+			"disableAo": true,
+			"disableDiffuse": true
+		}
+	]
+}

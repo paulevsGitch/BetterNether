@@ -2,6 +2,7 @@ package paulevs.betternether.blocks;
 
 import java.util.List;
 import java.util.Random;
+
 import com.google.common.collect.Lists;
 
 import net.fabricmc.api.EnvType;

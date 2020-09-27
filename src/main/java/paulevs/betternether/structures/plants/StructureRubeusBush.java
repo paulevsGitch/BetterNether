@@ -16,11 +16,6 @@ import paulevs.betternether.structures.IStructure;
 public class StructureRubeusBush implements IStructure
 {
 	private static final Mutable POS = new Mutable();
-	
-	public StructureRubeusBush()
-	{
-		
-	}
 
 	@Override
 	public void generate(ServerWorldAccess world, BlockPos pos, Random random)

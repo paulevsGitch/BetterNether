@@ -31,7 +31,10 @@
 	"message.spawn_help": "§c§lВы должны держать§r %s §c§lдля установления точки возрождения",
 	"message.spawn_set": "§2§lВаша точка возрождения установлена здесь",
 
-	"block.betternether.agave": "Агава",
+	"block.betternether.agave": "Семя агавы",
+	"item.betternether.agave_leaf": "Лист Агавы",
+	"item.betternether.agave_medicine": "Лекарство из агавы",
+	"item.betternether.herbal_medicine": "Лекарство из трав",
 
 	"block.betternether.barrel_cactus": "Бочковидный кактус",
 
@@ -683,5 +686,11 @@
 	"block.betternether.ceiling_mushrooms": "Потолочные грибы",
 	"block.betternether.neon_equisetum": "Неоновый хвощ",
 	"block.betternether.hook_mushroom": "Цепляющийся гриб",
-	"item.betternether.hook_mushroom_cooked": "Приготовленный цепляющийся гриб"
+	"item.betternether.hook_mushroom_cooked": "Приготовленный цепляющийся гриб",
+	
+	"block.betternether.whispering_gourd_vine": "Семена шепчущей тыква",
+	"block.betternether.whispering_gourd": "Шепчущая тыква",
+	"block.betternether.whispering_gourd_lantern": "Фонарь из шепчущей тыквы",
+	
+	"block.betternether.willow_torch": "Ивовый факел"
 }

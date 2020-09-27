@@ -114,12 +114,12 @@ public class StructureAnchorTreeRoot implements IStructure
 				if (length > 4)
 				{
 					length = MHelper.randRange(3, length, random);
-					for (int i = 1; i < length - 2; i++)
+					for (int i = 0; i < length - 2; i++)
 					{
-						BlocksHelper.setWithoutUpdate(world, POS.down(i), vine);
+						BlocksHelper.setWithoutUpdate(world, bpos.down(i), vine);
 					}
-					BlocksHelper.setWithoutUpdate(world, POS.down(length - 2), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
-					BlocksHelper.setWithoutUpdate(world, POS.down(length - 1), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
+					BlocksHelper.setWithoutUpdate(world, bpos.down(length - 2), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
+					BlocksHelper.setWithoutUpdate(world, bpos.down(length - 1), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
 				}
 			}
 		}

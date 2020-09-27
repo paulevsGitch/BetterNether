@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
@@ -94,12 +96,35 @@ public class BlockLucisMushroom extends BlockBaseNotFull
 	@Override
 	public BlockState rotate(BlockState state, BlockRotation rotation)
 	{
-		return BlocksHelper.rotateHorizontal(state.with(FACING, state.get(FACING).getOpposite()), rotation, FACING);
+		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, BlockMirror mirror)
 	{
-		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
+		if (mirror == BlockMirror.FRONT_BACK)
+		{
+			if (state.get(SHAPE) == EnumShape.SIDE) state = state.with(FACING, state.get(FACING).rotateYCounterclockwise());
+			if (state.get(FACING) == Direction.NORTH) return state.with(FACING, Direction.WEST);
+			if (state.get(FACING) == Direction.WEST) return state.with(FACING, Direction.NORTH);
+			if (state.get(FACING) == Direction.SOUTH) return state.with(FACING, Direction.EAST);
+			if (state.get(FACING) == Direction.EAST) return state.with(FACING, Direction.SOUTH);
+		}
+		else if (mirror == BlockMirror.LEFT_RIGHT)
+		{
+			if (state.get(SHAPE) == EnumShape.SIDE) state = state.with(FACING, state.get(FACING).rotateYCounterclockwise());
+			if (state.get(FACING) == Direction.NORTH) return state.with(FACING, Direction.EAST);
+			if (state.get(FACING) == Direction.EAST) return state.with(FACING, Direction.NORTH);
+			if (state.get(FACING) == Direction.SOUTH) return state.with(FACING, Direction.WEST);
+			if (state.get(FACING) == Direction.WEST) return state.with(FACING, Direction.SOUTH);
+		}
+		return state;
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
+	{
+		return new ItemStack(BlocksRegistry.LUCIS_SPORE);
 	}
 }

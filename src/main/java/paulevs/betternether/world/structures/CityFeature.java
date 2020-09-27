@@ -8,12 +8,9 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.Heightmap.Type;
-import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.FlatChunkGenerator;
-import net.minecraft.world.gen.chunk.StructureConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.world.structures.city.CityGenerator;
@@ -24,6 +21,7 @@ import paulevs.betternether.world.structures.piece.CityPiece;
 public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 {
 	private static CityGenerator generator;
+	public static final int RADIUS = 8 * 8;
 	
 	public CityFeature()
 	{
@@ -40,12 +38,6 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig>
 	{
 		return CityFeature.CityStart::new;
 	}
-	
-	@Override
-    public BlockPos locateStructure(WorldView worldView, StructureAccessor structureAccessor, BlockPos blockPos, int radius, boolean skipExistingChunks, long seed, StructureConfig structureConfig)
-	{
-        return new BlockPos((blockPos.getX() >> 8) << 8, 40, (blockPos.getZ() >> 8) << 8);
-    }
 
 	public static class CityStart extends StructureStart<DefaultFeatureConfig>
 	{

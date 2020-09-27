@@ -1,0 +1,26 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/nether_sakura_flowers_1",
+				"material": "betternether:wave_glow_all"
+			},
+			{
+				"sprite": "betternether:block/nether_sakura_flowers_2",
+				"material": "betternether:wave_glow_all"
+			},
+			{
+				"sprite": "betternether:block/nether_sakura_flowers_3",
+				"material": "betternether:wave_glow_all"
+			},
+			{
+				"sprite": "betternether:block/nether_sakura_leaves_2",
+				"material": "betternether:waving"
+			},
+			{
+				"sprite": "betternether:block/nether_sakura_leaves_side",
+				"material": "betternether:waving"
+			}
+		]
+	}
+}
