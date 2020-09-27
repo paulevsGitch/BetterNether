@@ -83,7 +83,7 @@ public class BNWorldGenerator
 		cincinnasiteDensity = Config.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 1024F);
 		rubyDensity = Config.getFloat("generator.world.ores", "ruby_ore_density", 1F / 4000F);
 		lapisDensity = Config.getFloat("generator.world.ores", "lapis_ore_density", 1F / 4000F);
-		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 32F) * 1.0001F;
+		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
 		lavaStructureDensity = Config.getFloat("generator.world", "lava_structures_density", 1F / 128F) * 1.0001F;
 		globalDensity = Config.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
 		
@@ -130,23 +130,37 @@ public class BNWorldGenerator
 		{
 			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, 100, random), sz + random.nextInt(16));
 			StructureType type = StructureType.FLOOR;
-			boolean isAir =  world.getBlockState(popPos).isAir();
-			boolean airUp = world.getBlockState(popPos.up()).isAir() && world.getBlockState(popPos.up(3)).isAir();
-			boolean airDown = world.getBlockState(popPos.down()).isAir() && world.getBlockState(popPos.down(3)).isAir();
+			boolean isAir =  world.getBlockState(popPos).getMaterial().isReplaceable();
+			boolean airUp = world.getBlockState(popPos.up()).getMaterial().isReplaceable() && world.getBlockState(popPos.up(3)).getMaterial().isReplaceable();
+			boolean airDown = world.getBlockState(popPos.down()).getMaterial().isReplaceable() && world.getBlockState(popPos.down(3)).getMaterial().isReplaceable();
 			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
-			if (!isAir && !airUp && !airDown)
+			if (!isAir && !airUp && !airDown && random.nextInt(8) == 0)
 				type = StructureType.UNDER;
 			else
 			{
 				if (!biome.hasCeilStructures() || random.nextBoolean()) // Floor
 				{
-					while (world.getBlockState(popPos.down()).isAir() && popPos.getY() > 1)
+					if (!isAir)
+					{
+						while (!world.getBlockState(popPos).getMaterial().isReplaceable() && popPos.getY() > 1)
+						{
+							popPos.setY(popPos.getY() - 1);
+						}
+					}
+					while (world.getBlockState(popPos.down()).getMaterial().isReplaceable() && popPos.getY() > 1)
 					{
 						popPos.setY(popPos.getY() - 1);
 					}
 				}
 				else // Ceil
 				{
+					if (!isAir)
+					{
+						while (!world.getBlockState(popPos).getMaterial().isReplaceable() && popPos.getY() > 1)
+						{
+							popPos.setY(popPos.getY() + 1);
+						}
+					}
 					while (!BlocksHelper.isNetherGroundMagma(world.getBlockState(popPos.up())) && popPos.getY() < 127)
 					{
 						popPos.setY(popPos.getY() + 1);
@@ -155,7 +169,7 @@ public class BNWorldGenerator
 				}
 			}
 			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
-			if (world.isAir(popPos))
+			if (world.getBlockState(popPos).getMaterial().isReplaceable())
 			{
 				if (type == StructureType.FLOOR)
 				{
