@@ -84,7 +84,7 @@ public class BNWorldGenerator
 		rubyDensity = Config.getFloat("generator.world.ores", "ruby_ore_density", 1F / 4000F);
 		lapisDensity = Config.getFloat("generator.world.ores", "lapis_ore_density", 1F / 4000F);
 		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
-		lavaStructureDensity = Config.getFloat("generator.world", "lava_structures_density", 1F / 128F) * 1.0001F;
+		lavaStructureDensity = Config.getFloat("generator.world", "lava_structures_density", 1F / 200F) * 1.0001F;
 		globalDensity = Config.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
 		
 		biomeSizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
