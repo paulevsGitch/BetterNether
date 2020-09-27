@@ -2,7 +2,6 @@ package paulevs.betternether.structures;
 
 import java.util.Random;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
@@ -41,7 +40,7 @@ public class StructureWorld extends StructureNBT implements IStructure
 		else if (type == StructureType.UNDER)
 			return getAirFraction(world, pos) < 0.2;
 		else if (type == StructureType.CEIL)
-			return getAirFractionBottom(world, pos) > 0.7 && getAirFraction(world, pos) < 0.6;
+			return getAirFractionBottom(world, pos) > 0.8 && getAirFraction(world, pos) < 0.6;
 		else
 			return false;
 	}

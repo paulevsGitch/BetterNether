@@ -1,6 +1,7 @@
 package paulevs.betternether.world;
 
 import java.util.Collections;
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
