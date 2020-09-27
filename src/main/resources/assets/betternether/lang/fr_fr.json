@@ -40,25 +40,25 @@
 	"block.betternether.black_apple_seed": "Graines de pomme noire",
 	"block.betternether.black_bush": "Buisson noir",
 	
-	"block.betternether.red_large_mushroom": "Red Large Mushroom",
-	"block.betternether.brown_large_mushroom": "Brown Large Mushroom",
-	"block.betternether.lucis_mushroom": "Lucis Mushroom",
+	"block.betternether.red_large_mushroom": "Large champignon rouge",
+	"block.betternether.brown_large_mushroom": "Large champignon brun",
+	"block.betternether.lucis_mushroom": "Champignon Lucis",
 
-	"block.betternether.eyeball": "Eyeball Block",
-	"block.betternether.eyeball_small": "Small Eyeball Block",
+	"block.betternether.eyeball": "Bloc oculaire",
+	"block.betternether.eyeball_small": "Petit bloc oculaire",
 
-	"block.betternether.bone_block": "Bone Block",
-	"block.betternether.bone_button": "Bone Button",
-	"block.betternether.bone_cincinnasite_door": "Bone-Cincinnasite Door",
-	"block.betternether.bone_mushroom": "Bone Mushroom Spores",
-	"block.betternether.bone_plate": "Bone Pressure Plate",
-	"block.betternether.bone_reed_door": "Bone-Reed Door",
-	"block.betternether.bone_slab": "Bone Slab",
-	"block.betternether.bone_stairs": "Bone Stairs",
-	"block.betternether.bone_tile": "Bone Tile",
-	"block.betternether.bone_wall": "Bone Wall",
+	"block.betternether.bone_block": "Bloc d'os",
+	"block.betternether.bone_button": "Bouton ossseux",
+	"block.betternether.bone_cincinnasite_door": "Porte en Cincinnasite osseuse",
+	"block.betternether.bone_mushroom": "Spores de champignons osseux",
+	"block.betternether.bone_plate": "Plaque de pression osseuse",
+	"block.betternether.bone_reed_door": "Porte en roseau osseux",
+	"block.betternether.bone_slab": "Dalle osseuse",
+	"block.betternether.bone_stairs": "Escaliers osseux",
+	"block.betternether.bone_tile": "Tuile osseuse",
+	"block.betternether.bone_wall": "Muret osseux",
 	
-	"block.betternether.chest_of_drawers": "Chest of Drawers",
+	"block.betternether.chest_of_drawers": "Commode",
 
 	"block.betternether.cincinnasite_bars": "Cincinnasite Bars",
 	"block.betternether.cincinnasite_block": "Cincinnasite Block",
@@ -82,20 +82,20 @@
 	"block.betternether.cincinnasite_tile_small": "Small Cincinnasite Tile",
 	"block.betternether.cincinnasite_wall": "Cincinnasite Wall",
 
-	"block.betternether.egg_plant": "Egg Plant",
+	"block.betternether.egg_plant": "Aubergine",
 
-	"block.betternether.eye_seed": "Eye Seed",
+	"block.betternether.eye_seed": "Graine d'oeil",
 	
-	"block.betternether.farmland": "Farmland",
+	"block.betternether.farmland": "Terre labourée",
 
-	"block.betternether.gray_mold": "Gray Mold",
+	"block.betternether.gray_mold": "Moisissure grise",
 
-	"block.betternether.ink_bush": "Ink Bush",
-	"block.betternether.ink_bush_seed": "Ink Bush Seed",
+	"block.betternether.ink_bush": "Buisson d'encre",
+	"block.betternether.ink_bush_seed": "Graines de buisson d'encre",
 
-	"block.betternether.lucis_spore": "Lucis Spore",
+	"block.betternether.lucis_spore": "Spore Lucis",
 
-	"block.betternether.magma_flower": "Magma flower seed",
+	"block.betternether.magma_flower": "Graine de fleur de magma",
 
 	"block.betternether.nether_brick_tile_large": "Large Nether Brick Tile",
 	"block.betternether.nether_brick_tile_slab": "Small Nether Brick Tile Slab",
@@ -109,13 +109,13 @@
 	"block.betternether.netherrack_furnace": "Netherrack Furnace",
 	"block.betternether.blackstone_furnace": "Blackstone Furnace",
 	"block.betternether.basalt_furnace": "Basalt Furnace",
-	"block.betternether.netherrack_moss": "Nether Moss",
+	"block.betternether.netherrack_moss": "Mousse du Nether",
 
-	"block.betternether.orange_mushroom": "Orange Mushroom",
+	"block.betternether.orange_mushroom": "Champignon orange",
 
-	"block.betternether.pig_statue_respawner": "Respawner Statue",
+	"block.betternether.pig_statue_respawner": "Statue de réapparition",
 
-	"block.betternether.potted_plant": "Potted Plant",
+	"block.betternether.potted_plant": "Plante en pot",
 
 	"block.betternether.quartz_glass": "Quartz Glass",
 	"block.betternether.quartz_glass_framed": "Framed Quartz Glass",
@@ -154,7 +154,7 @@
 	"block.betternether.quartz_glass_framed_white": "Framed Quartz Glass White",
 	"block.betternether.quartz_glass_framed_yellow": "Framed Quartz Glass Yellow",
 
-	"block.betternether.red_mold": "Red Mold",
+	"block.betternether.red_mold": "Moisissure rouge",
 
 	"block.betternether.reeds_block": "Reeds Block",
 	"block.betternether.reeds_button": "Reeds Button",
@@ -167,7 +167,7 @@
 	"block.betternether.reeds_door": "Reeds Door",
 	"block.betternether.reeds_trapdoor": "Reeds Trapdoor",
 
-	"block.betternether.smoker": "Smoker",
+	"block.betternether.smoker": "Fumoir",
 
 	"block.betternether.stalagnate": "Stalagnate",
 	"block.betternether.stalagnate_stem": "Stalagnate Stem",
@@ -186,8 +186,8 @@
 	"block.betternether.stalagnate_seed": "Stalagnate Seed",
 	"block.betternether.wart_seed": "Wart Seed",
 	
-	"block.betternether.eye_vine": "Eye Vine",
-	"block.betternether.black_apple": "Black Apple Bush",
+	"block.betternether.eye_vine": "Vigne oculaire",
+	"block.betternether.black_apple": "Buisson de pomme noire",
 
 	"commands.findnethercity.usage.console": "No coordinates in input",
 	"commands.findnethercity.usage.coordinates": "Wrong coordinates",
