@@ -112,7 +112,7 @@ public class BNNormalChair extends BNChair
 	{
 		if (player.isCreative() && state.get(TOP) && world.getBlockState(pos.down()).getBlock() == this) 
 		{
-					world.setBlockState(pos.down(), Blocks.AIR.getDefaultState());
+			world.setBlockState(pos.down(), Blocks.AIR.getDefaultState());
 		}
 		super.onBreak(world, pos, state, player);
 	}
