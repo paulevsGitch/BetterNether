@@ -1,0 +1,23 @@
+{
+	"replace": "false",
+	"values": [
+		"minecraft:netherrack",
+		"minecraft:nether_quartz_ore",
+		"minecraft:nether_gold_ore",
+		"minecraft:crimson_nylium",
+		"minecraft:warped_nylium",
+		
+		"betternether:cincinnasite_ore",
+		"betternether:nether_ruby_ore",
+		"betternether:nether_lapis_ore",
+		"betternether:netherrack_moss",
+		"betternether:nether_mycelium",
+		"betternether:netherrack_moss",
+		"betternether:jungle_grass",
+		"betternether:mushroom_grass",
+		"betternether:sepia_mushroom_grass",
+		"betternether:farmland",
+		"betternether:swampland_grass",
+		"betternether:ceiling_mushrooms"
+	]
+}

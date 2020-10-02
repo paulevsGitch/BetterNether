@@ -19,14 +19,14 @@ public class NetherTags
 	
 	private static Tag<Block> getOrCreateTagBlock(String name)
 	{
-		Identifier id = new Identifier("common", name);
+		Identifier id = new Identifier("c", name);
 		Tag<Block> tag = BlockTags.getTagGroup().getTag(id);
 		return tag != null ? tag : TagRegistry.block(id);
 	}
 	
 	private static Tag<Item> getOrCreateTagItem(String name)
 	{
-		Identifier id = new Identifier("common", name);
+		Identifier id = new Identifier("c", name);
 		Tag<Item> tag = ItemTags.getTagGroup().getTag(id);
 		return tag != null ? tag : TagRegistry.item(id);
 	}
