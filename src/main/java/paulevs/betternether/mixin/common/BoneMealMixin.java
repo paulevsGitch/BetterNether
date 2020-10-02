@@ -1,5 +1,7 @@
 package paulevs.betternether.mixin.common;
 
+import java.util.Random;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -12,6 +14,7 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -19,6 +22,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 @Mixin(BoneMealItem.class)
 public class BoneMealMixin
 {
+	private static final Direction[] DIR = new Direction[] {Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 	private static final Mutable POS = new Mutable();
 	
 	@Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
@@ -110,25 +114,27 @@ public class BoneMealMixin
 			return BlocksRegistry.NETHER_GRASS.getDefaultState();
 		return null;
 	}
+
+	private void shuffle(Random random)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			int j = random.nextInt(4);
+			Direction d = DIR[i];
+			DIR[i] = DIR[j];
+			DIR[j] = d;
+		}
+	}
 	
 	private BlockState getNylium(World world, BlockPos pos)
 	{
-		BlockState state = world.getBlockState(pos.north());
-		if (BlocksHelper.isNylium(state))
-			return state;
-		
-		state = world.getBlockState(pos.south());
-		if (BlocksHelper.isNylium(state))
-			return state;
-		
-		state = world.getBlockState(pos.east());
-		if (BlocksHelper.isNylium(state))
-			return state;
-		
-		state = world.getBlockState(pos.west());
-		if (BlocksHelper.isNylium(state))
-			return state;
-		
+		shuffle(world.random);
+		for (Direction dir: DIR)
+		{
+			BlockState state = world.getBlockState(pos.offset(dir));
+			if (BlocksHelper.isNylium(state))
+				return state;
+		}
 		return null;
 	}
 }
