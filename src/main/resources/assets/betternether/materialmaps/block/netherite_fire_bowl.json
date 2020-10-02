@@ -1,0 +1,14 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "block/fire_0",
+				"material": "betternether:glow_all"
+			},
+			{
+				"sprite": "block/fire_1",
+				"material": "betternether:glow_all"
+			}
+		]
+	}
+}
