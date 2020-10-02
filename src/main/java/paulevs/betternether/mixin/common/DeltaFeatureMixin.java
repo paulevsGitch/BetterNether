@@ -29,6 +29,6 @@ public class DeltaFeatureMixin
 	
 	private static boolean isValidBlock(BlockState state)
 	{
-		return !(state.getBlock() instanceof BlockRubeusLeaves) && !(state.getBlock() instanceof BlockWillowLeaves) && !state.getMaterial().isReplaceable();
+		return !(state.getBlock() instanceof BlockRubeusLeaves) && !(state.getBlock() instanceof BlockWillowLeaves) && !(state.getFluidState().isEmpty() && state.getMaterial().isReplaceable());
 	}
 }

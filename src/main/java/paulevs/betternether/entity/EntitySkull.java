@@ -290,6 +290,8 @@ public class EntitySkull extends HostileEntity implements Flutterer
 		if (world.getDifficulty() == Difficulty.PEACEFUL || world.getLightLevel(pos) > 7)
 			return false;
 		
+		if (pos.getY() >= world.getDimension().getLogicalHeight()) return false;
+		
 		Box box = new Box(pos).expand(256, 256, 256);
 		List<EntitySkull> list = world.getEntitiesByClass(EntitySkull.class, box, (entity) -> { return true; });
 		return list.size() < 4;

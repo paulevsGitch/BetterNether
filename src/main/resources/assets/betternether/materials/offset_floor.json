@@ -1,0 +1,10 @@
+{
+	"layers": [
+		{
+			"vertexSource": "betternether:shaders/material/offset_floor.vert",
+			"fragmentSource": "canvas:shaders/material/default.frag",
+			"disableAo": true,
+			"disableDiffuse": true
+		}
+	]
+}
