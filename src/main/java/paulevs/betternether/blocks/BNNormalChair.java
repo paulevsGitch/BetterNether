@@ -106,4 +106,14 @@ public class BNNormalChair extends BNChair
 		}
 		return super.onUse(state, world, pos, player, hand, hit);
 	}
+	
+	@Override
+	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player)
+	{
+		if (player.isCreative() && state.get(TOP) && world.getBlockState(pos.down()).getBlock() == this) 
+		{
+					world.setBlockState(pos.down(), Blocks.AIR.getDefaultState());
+		}
+		super.onBreak(world, pos, state, player);
+	}
 }

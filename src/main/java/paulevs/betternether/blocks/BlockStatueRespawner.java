@@ -150,4 +150,14 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 	{
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
+	
+	@Override
+	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player)
+	{
+		if (player.isCreative() && state.get(TOP) && world.getBlockState(pos.down()).getBlock() == this) 
+		{
+				world.setBlockState(pos.down(), Blocks.AIR.getDefaultState());
+		}
+		super.onBreak(world, pos, state, player);
+	}
 }
