@@ -25,7 +25,8 @@
 	"DefaultBiomeFeaturesMixin",
 	"GenerationSettingsMixin",
 	"BastionRemnantFeatureMixin",
-	"NetherFortressFeatureMixin"
+	"NetherFortressFeatureMixin",
+	"LocateCommandMixin"
   ],
   "injectors": {
     "defaultRequire": 1
