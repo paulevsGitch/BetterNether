@@ -25,6 +25,8 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -32,6 +34,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blockentities.BlockEntityChestOfDrawers;
 import paulevs.betternether.registry.BlocksRegistry;
 
@@ -120,5 +123,17 @@ public class BlockChestOfDrawers extends BlockWithEntity
 		drop.add(new ItemStack(this.asItem()));
 		entity.addItemsToList(drop);
 		return drop;
+	}
+	
+	@Override
+	public BlockState rotate(BlockState state, BlockRotation rotation)
+	{
+		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
+	}
+
+	@Override
+	public BlockState mirror(BlockState state, BlockMirror mirror)
+	{
+		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 }
