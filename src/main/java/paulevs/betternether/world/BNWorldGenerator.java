@@ -138,7 +138,7 @@ public class BNWorldGenerator
 				type = StructureType.UNDER;
 			else
 			{
-				if (!biome.hasCeilStructures() || random.nextBoolean()) // Floor
+				if (popPos.getY() < 45 || !biome.hasCeilStructures() || random.nextBoolean()) // Floor
 				{
 					if (!isAir)
 					{
