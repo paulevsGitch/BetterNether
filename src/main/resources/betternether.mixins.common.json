@@ -26,7 +26,9 @@
 	"GenerationSettingsMixin",
 	"BastionRemnantFeatureMixin",
 	"NetherFortressFeatureMixin",
-	"LocateCommandMixin"
+	"LocateCommandMixin",
+	"MinecraftServerMixin",
+	"RecipeManagerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
