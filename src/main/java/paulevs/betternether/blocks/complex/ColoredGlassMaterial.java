@@ -15,8 +15,7 @@ import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.registry.ItemsRegistry;
 import paulevs.betternether.tab.CreativeTab;
 
-public class ColoredGlassMaterial
-{
+public class ColoredGlassMaterial {
 	public final Block white;
 	public final Block orange;
 	public final Block magenta;
@@ -33,14 +32,16 @@ public class ColoredGlassMaterial
 	public final Block green;
 	public final Block red;
 	public final Block black;
-	
+
 	/**
 	 * Full Block Constructor
-	 * @param name - base name of block (prefix) and it's group
-	 * @param base - block base for material properties and crafting
+	 * 
+	 * @param name
+	 *            - base name of block (prefix) and it's group
+	 * @param base
+	 *            - block base for material properties and crafting
 	 */
-	public <T extends Block> ColoredGlassMaterial(String name, Block base)
-	{
+	public <T extends Block> ColoredGlassMaterial(String name, Block base) {
 		white = makeInstance(name, base, Items.WHITE_DYE, true, false);
 		orange = makeInstance(name, base, Items.ORANGE_DYE, true, false);
 		magenta = makeInstance(name, base, Items.MAGENTA_DYE, true, false);
@@ -58,15 +59,19 @@ public class ColoredGlassMaterial
 		red = makeInstance(name, base, Items.RED_DYE, true, false);
 		black = makeInstance(name, base, Items.BLACK_DYE, true, false);
 	}
-	
+
 	/**
 	 * Pane Block Constructor
-	 * @param name - base name of block (prefix) and it's group
-	 * @param base - block base for material properties and crafting
-	 * @param paneDropItself - will pane drop itself on break or not (will require silk touch)
+	 * 
+	 * @param name
+	 *            - base name of block (prefix) and it's group
+	 * @param base
+	 *            - block base for material properties and crafting
+	 * @param paneDropItself
+	 *            - will pane drop itself on break or not (will require silk
+	 *            touch)
 	 */
-	public <T extends Block> ColoredGlassMaterial(String name, Block base, boolean paneDropItself)
-	{
+	public <T extends Block> ColoredGlassMaterial(String name, Block base, boolean paneDropItself) {
 		white = makeInstance(name, base, Items.WHITE_DYE, false, paneDropItself);
 		orange = makeInstance(name, base, Items.ORANGE_DYE, false, paneDropItself);
 		magenta = makeInstance(name, base, Items.MAGENTA_DYE, false, paneDropItself);
@@ -84,13 +89,11 @@ public class ColoredGlassMaterial
 		red = makeInstance(name, base, Items.RED_DYE, false, paneDropItself);
 		black = makeInstance(name, base, Items.BLACK_DYE, false, paneDropItself);
 	}
-	
-	private Block makeInstance(String group, Block base, Item dye, boolean isFullBlock, boolean paneDropItself)
-	{
+
+	private Block makeInstance(String group, Block base, Item dye, boolean isFullBlock, boolean paneDropItself) {
 		Block block = isFullBlock ? new BNGlass(base) : new BNPane(base, paneDropItself);
 		String name = group + "_" + ((DyeItem) dye).getColor().asString();
-		if (Config.getBoolean("blocks", name, true))
-		{
+		if (Config.getBoolean("blocks", name, true)) {
 			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
 			ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
 			RecipesHelper.makeColoringRecipe(base, block, dye, group);

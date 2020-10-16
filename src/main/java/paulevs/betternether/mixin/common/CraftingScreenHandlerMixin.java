@@ -13,16 +13,16 @@ import net.minecraft.screen.CraftingScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 
 @Mixin(CraftingScreenHandler.class)
-public abstract class CraftingScreenHandlerMixin
-{
+public abstract class CraftingScreenHandlerMixin {
 	@Shadow
 	@Final
 	private ScreenHandlerContext context;
-	
+
 	@Inject(method = "canUse", at = @At("HEAD"), cancellable = true)
-	private void canUse(PlayerEntity player, CallbackInfoReturnable<Boolean> info)
-	{
-		info.setReturnValue(context.run((world, pos) -> { return world.getBlockState(pos).getBlock() instanceof CraftingTableBlock; }, true));
+	private void canUse(PlayerEntity player, CallbackInfoReturnable<Boolean> info) {
+		info.setReturnValue(context.run((world, pos) -> {
+			return world.getBlockState(pos).getBlock() instanceof CraftingTableBlock;
+		}, true));
 		info.cancel();
 	}
 }

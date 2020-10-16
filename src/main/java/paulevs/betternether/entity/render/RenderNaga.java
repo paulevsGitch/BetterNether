@@ -8,18 +8,15 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityNaga;
 import paulevs.betternether.entity.model.ModelNaga;
 
-public class RenderNaga extends MobEntityRenderer<EntityNaga, AnimalModel<EntityNaga>>
-{
+public class RenderNaga extends MobEntityRenderer<EntityNaga, AnimalModel<EntityNaga>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/naga.png");
-	
-	public RenderNaga(EntityRenderDispatcher renderManager)
-	{
+
+	public RenderNaga(EntityRenderDispatcher renderManager) {
 		super(renderManager, new ModelNaga(), 0.7F);
 	}
 
 	@Override
-	public Identifier getTexture(EntityNaga entity)
-	{
+	public Identifier getTexture(EntityNaga entity) {
 		return TEXTURE;
 	}
 }

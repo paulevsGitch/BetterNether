@@ -7,13 +7,12 @@ import java.util.Random;
 import net.minecraft.block.Blocks;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class Palettes
-{
+public class Palettes {
 	private static final HashMap<String, CityPalette> REGISTRY = new HashMap<String, CityPalette>();
 	private static final ArrayList<CityPalette> PALETTES = new ArrayList<CityPalette>();
-	
+
 	public static final CityPalette EMPTY = register(new CityPalette("empty"));
-	
+
 	public static final CityPalette RED = register(new CityPalette("red")
 			.addRoofBlocks(BlocksRegistry.ROOF_TILE_WART)
 			.addRoofSlabs(BlocksRegistry.ROOF_TILE_WART_SLAB)
@@ -39,22 +38,19 @@ public class Palettes
 			.addGlassPanes(BlocksRegistry.QUARTZ_GLASS_FRAMED_PANE_COLORED.red, BlocksRegistry.QUARTZ_GLASS_PANE_COLORED.red, BlocksRegistry.CINCINNASITE_BARS)
 			.addWoodPlates(BlocksRegistry.WART_PLATE)
 			.addPotsPanes(BlocksRegistry.BRICK_POT));
-	
-	private static CityPalette register(CityPalette palette)
-	{
+
+	private static CityPalette register(CityPalette palette) {
 		REGISTRY.put(palette.getName(), palette);
 		PALETTES.add(palette);
 		return palette;
 	}
-	
-	public static CityPalette getPalette(String name)
-	{
+
+	public static CityPalette getPalette(String name) {
 		CityPalette palette = REGISTRY.get(name);
 		return palette == null ? EMPTY : palette;
 	}
-	
-	public static CityPalette getRandom(Random random)
-	{
+
+	public static CityPalette getRandom(Random random) {
 		return random.nextBoolean() ? EMPTY : PALETTES.get(random.nextInt(PALETTES.size()));
 	}
 }

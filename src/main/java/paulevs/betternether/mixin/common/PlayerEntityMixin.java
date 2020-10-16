@@ -16,22 +16,18 @@ import net.minecraft.util.math.Vec3d;
 import paulevs.betternether.blocks.BlockStatueRespawner;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin
-{
+public abstract class PlayerEntityMixin {
 	@Inject(method = "findRespawnPosition", at = @At(value = "HEAD"), cancellable = true)
-	private static void statueRespawn(ServerWorld world, BlockPos pos, float f, boolean bl, boolean bl2, CallbackInfoReturnable<Optional<Vec3d>> info)
-	{
+	private static void statueRespawn(ServerWorld world, BlockPos pos, float f, boolean bl, boolean bl2, CallbackInfoReturnable<Optional<Vec3d>> info) {
 		BlockState blockState = world.getBlockState(pos);
 		Block block = blockState.getBlock();
-		if (block instanceof BlockStatueRespawner)
-		{
+		if (block instanceof BlockStatueRespawner) {
 			info.setReturnValue(findRespawnPosition(world, pos, blockState));
 			info.cancel();
 		}
 	}
 
-	private static Optional<Vec3d> findRespawnPosition(ServerWorld world, BlockPos pos, BlockState state)
-	{
+	private static Optional<Vec3d> findRespawnPosition(ServerWorld world, BlockPos pos, BlockState state) {
 		if (state.get(BlockStatueRespawner.TOP))
 			pos = pos.down();
 		pos = pos.offset(state.get(BlockStatueRespawner.FACING));

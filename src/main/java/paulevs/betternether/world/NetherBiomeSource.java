@@ -14,8 +14,7 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.BiomesRegistry;
 
-public class NetherBiomeSource extends BiomeSource
-{
+public class NetherBiomeSource extends BiomeSource {
 	public static final Codec<NetherBiomeSource> CODEC = RecordCodecBuilder.create((instance) -> {
 		return instance.group(RegistryLookupCodec.of(Registry.BIOME_KEY).forGetter((theEndBiomeSource) -> {
 			return theEndBiomeSource.biomeRegistry;
@@ -27,8 +26,7 @@ public class NetherBiomeSource extends BiomeSource
 	private final long seed;
 	private final Registry<Biome> biomeRegistry;
 
-	public NetherBiomeSource(Registry<Biome> biomeRegistry, long seed)
-	{
+	public NetherBiomeSource(Registry<Biome> biomeRegistry, long seed) {
 		super(Collections.emptyList());
 		this.seed = seed;
 		this.map = new BiomeMap(seed, BNWorldGenerator.biomeSizeXZ, BNWorldGenerator.biomeSizeY, BNWorldGenerator.volumetric);
@@ -37,30 +35,25 @@ public class NetherBiomeSource extends BiomeSource
 	}
 
 	@Override
-	public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ)
-	{
+	public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ) {
 		NetherBiome netherBiome = map.getBiome(biomeX << 2, biomeY << 2, biomeZ << 2);
-		if (biomeX == 0 && biomeZ == 0)
-		{
+		if (biomeX == 0 && biomeZ == 0) {
 			map.clearCache();
 		}
 		return biomeRegistry.getOrThrow(BiomesRegistry.getBiomeKey(netherBiome));
 	}
 
 	@Override
-	public BiomeSource withSeed(long seed)
-	{
+	public BiomeSource withSeed(long seed) {
 		return new NetherBiomeSource(biomeRegistry, seed);
 	}
 
 	@Override
-	protected Codec<? extends BiomeSource> getCodec()
-	{
+	protected Codec<? extends BiomeSource> getCodec() {
 		return CODEC;
 	}
-	
-	public static void register()
-	{
+
+	public static void register() {
 		Registry.register(Registry.BIOME_SOURCE, new Identifier(BetterNether.MOD_ID, "nether_biome_source"), CODEC);
 	}
 }

@@ -21,25 +21,19 @@ import paulevs.betternether.BetterNether;
 
 @Environment(EnvType.CLIENT)
 @Mixin(PlayerEntityRenderer.class)
-public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>
-{
-	public PlayerArmorMixin(EntityRenderDispatcher entityRenderDispatcher, PlayerEntityModel<AbstractClientPlayerEntity> entityModel, float f)
-	{
+public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
+	public PlayerArmorMixin(EntityRenderDispatcher entityRenderDispatcher, PlayerEntityModel<AbstractClientPlayerEntity> entityModel, float f) {
 		super(entityRenderDispatcher, entityModel, f);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Inject(method = "<init>*", at = @At(value = "RETURN"))
-	private void onInit(EntityRenderDispatcher entityRenderDispatcher, boolean bl, CallbackInfo info)
-	{
-		if (BetterNether.hasThinArmor())
-		{
+	private void onInit(EntityRenderDispatcher entityRenderDispatcher, boolean bl, CallbackInfo info) {
+		if (BetterNether.hasThinArmor()) {
 			Iterator<FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>> iterator = this.features.iterator();
-			while (iterator.hasNext())
-			{
+			while (iterator.hasNext()) {
 				FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> feature = iterator.next();
-				if (feature instanceof ArmorFeatureRenderer)
-				{
+				if (feature instanceof ArmorFeatureRenderer) {
 					this.features.remove(feature);
 					break;
 				}

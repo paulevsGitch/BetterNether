@@ -23,46 +23,37 @@ import net.minecraft.world.World;
 import paulevs.betternether.blockentities.BlockEntityForge;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockCincinnasiteForge extends AbstractFurnaceBlock
-{
-	public BlockCincinnasiteForge()
-	{
+public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
+	public BlockCincinnasiteForge() {
 		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).requiresTool().lightLevel(getLuminance()));
 	}
 
-	private static ToIntFunction<BlockState> getLuminance()
-	{
+	private static ToIntFunction<BlockState> getLuminance() {
 		return (blockState) -> {
-			return (Boolean)blockState.get(Properties.LIT) ? 13 : 0;
+			return (Boolean) blockState.get(Properties.LIT) ? 13 : 0;
 		};
 	}
 
-	public BlockEntity createBlockEntity(BlockView view)
-	{
+	public BlockEntity createBlockEntity(BlockView view) {
 		return new BlockEntityForge();
 	}
 
 	@Override
-	protected void openScreen(World world, BlockPos pos, PlayerEntity player)
-	{
+	protected void openScreen(World world, BlockPos pos, PlayerEntity player) {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof BlockEntityForge)
-		{
+		if (blockEntity instanceof BlockEntityForge) {
 			player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
 			player.incrementStat(Stats.INTERACT_WITH_FURNACE);
 		}
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
-	{
-		if ((Boolean) state.get(LIT))
-		{
+	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+		if ((Boolean) state.get(LIT)) {
 			double d = (double) pos.getX() + 0.5D;
 			double e = (double) pos.getY();
 			double f = (double) pos.getZ() + 0.5D;
-			if (random.nextDouble() < 0.1D)
-			{
+			if (random.nextDouble() < 0.1D) {
 				world.playSound(d, e, f, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 			}
 

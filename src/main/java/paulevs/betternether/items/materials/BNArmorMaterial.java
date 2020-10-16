@@ -6,9 +6,8 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 
-public class BNArmorMaterial implements ArmorMaterial
-{
-	private static final int[] DURABILITY = new int[] {3, 6, 8, 3};
+public class BNArmorMaterial implements ArmorMaterial {
+	private static final int[] DURABILITY = new int[] { 3, 6, 8, 3 };
 	private final String name;
 	private final int multiplier;
 	private final int enchantLevel;
@@ -16,9 +15,8 @@ public class BNArmorMaterial implements ArmorMaterial
 	private final ItemConvertible repair;
 	private final float toughness;
 	private final int[] protection;
-	
-	public BNArmorMaterial(String name, int durabilityMultiplier, int enchantLevel, SoundEvent equipSound, ItemConvertible repairItem, float toughness, int[] protection)
-	{
+
+	public BNArmorMaterial(String name, int durabilityMultiplier, int enchantLevel, SoundEvent equipSound, ItemConvertible repairItem, float toughness, int[] protection) {
 		this.name = name;
 		this.multiplier = durabilityMultiplier;
 		this.enchantLevel = enchantLevel;
@@ -27,52 +25,44 @@ public class BNArmorMaterial implements ArmorMaterial
 		this.toughness = toughness;
 		this.protection = protection;
 	}
-	
+
 	@Override
-	public int getDurability(EquipmentSlot slot)
-	{
+	public int getDurability(EquipmentSlot slot) {
 		return DURABILITY[slot.getEntitySlotId()] * multiplier;
 	}
 
 	@Override
-	public int getProtectionAmount(EquipmentSlot slot)
-	{
+	public int getProtectionAmount(EquipmentSlot slot) {
 		return protection[slot.getEntitySlotId()];
 	}
 
 	@Override
-	public int getEnchantability()
-	{
+	public int getEnchantability() {
 		return enchantLevel;
 	}
 
 	@Override
-	public SoundEvent getEquipSound()
-	{
+	public SoundEvent getEquipSound() {
 		return sound;
 	}
 
 	@Override
-	public Ingredient getRepairIngredient()
-	{
+	public Ingredient getRepairIngredient() {
 		return Ingredient.ofItems(repair);
 	}
 
 	@Override
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
 	@Override
-	public float getToughness()
-	{
+	public float getToughness() {
 		return toughness;
 	}
 
 	@Override
-	public float getKnockbackResistance()
-	{
+	public float getKnockbackResistance() {
 		return 0;
 	}
 }

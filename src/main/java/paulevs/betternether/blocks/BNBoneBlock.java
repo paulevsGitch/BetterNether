@@ -9,16 +9,13 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 
-public class BNBoneBlock extends BlockBase
-{
-	public BNBoneBlock()
-	{
+public class BNBoneBlock extends BlockBase {
+	public BNBoneBlock() {
 		super(FabricBlockSettings.copyOf(Blocks.BONE_BLOCK));
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this.asItem()));
 	}
 }

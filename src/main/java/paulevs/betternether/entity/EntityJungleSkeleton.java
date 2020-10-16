@@ -22,24 +22,20 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class EntityJungleSkeleton extends SkeletonEntity
-{
-	public EntityJungleSkeleton(EntityType<? extends SkeletonEntity> entityType, World world)
-	{
+public class EntityJungleSkeleton extends SkeletonEntity {
+	public EntityJungleSkeleton(EntityType<? extends SkeletonEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
 	@Override
-	public void tickMovement()
-	{
+	public void tickMovement() {
 		this.tickHandSwing();
 		this.updateDespawnCounter();
 		super.tickMovement();
 	}
-	
+
 	@Override
-	public EntityData initialize(ServerWorldAccess serverWorldAccess, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag)
-	{
+	public EntityData initialize(ServerWorldAccess serverWorldAccess, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
 		entityData = super.initialize(serverWorldAccess, difficulty, spawnReason, entityData, entityTag);
 		super.initEquipment(difficulty);
 
@@ -49,8 +45,7 @@ public class EntityJungleSkeleton extends SkeletonEntity
 		this.updateEnchantments(difficulty);
 		this.updateAttackType();
 		this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * difficulty.getClampedLocalDifficulty());
-		if (this.getEquippedStack(EquipmentSlot.HEAD).isEmpty())
-		{
+		if (this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
 			LocalDate localDate = LocalDate.now();
 			int i = localDate.get(ChronoField.DAY_OF_MONTH);
 			int j = localDate.get(ChronoField.MONTH_OF_YEAR);
@@ -62,31 +57,25 @@ public class EntityJungleSkeleton extends SkeletonEntity
 
 		return entityData;
 	}
-	
-	private ItemStack getHandItem()
-	{
+
+	private ItemStack getHandItem() {
 		int n = this.random.nextInt(3);
-		switch(n)
-		{
-		case 0:
-		default:
-			return new ItemStack(this.random.nextBoolean() ? Items.WOODEN_SWORD : Items.STONE_SWORD);
-		case 1:
-			return new ItemStack(Items.BOW);
-		case 2:
-			return new ItemStack(Items.AIR);
+		switch (n) {
+			case 0:
+			default:
+				return new ItemStack(this.random.nextBoolean() ? Items.WOODEN_SWORD : Items.STONE_SWORD);
+			case 1:
+				return new ItemStack(Items.BOW);
+			case 2:
+				return new ItemStack(Items.AIR);
 		}
 	}
-	
-	private ItemStack getOffhandItem()
-	{
+
+	private ItemStack getOffhandItem() {
 		return this.random.nextInt(8) == 0 ? new ItemStack(Items.SHIELD) : new ItemStack(Items.AIR);
 	}
-	
-	public static boolean canSpawn(EntityType<? extends EntityJungleSkeleton> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
-	{
-		//System.out.println(world.getBlockState(pos.down()).getBlock());
-		return world.getDifficulty() != Difficulty.PEACEFUL;// &&
-		//		world.getBlockState(pos.down()).getBlock() == BlocksRegistry.JUNGLE_GRASS;
+
+	public static boolean canSpawn(EntityType<? extends EntityJungleSkeleton> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}
 }

@@ -31,33 +31,28 @@ import paulevs.betternether.blockentities.BNSignBlockEntity;
 import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEntity>
-{
+public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEntity> {
 	private static final HashMap<Integer, RenderLayer> LAYERS = Maps.newHashMap();
 	private static RenderLayer defaultLayer;
 	private final SignModel model = new SignBlockEntityRenderer.SignModel();
 
-	public BNSignBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher)
-	{
+	public BNSignBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
 		super(dispatcher);
 	}
 
-	public void render(BNSignBlockEntity signBlockEntity, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider provider, int light, int overlay)
-	{
+	public void render(BNSignBlockEntity signBlockEntity, float tickDelta, MatrixStack matrixStack, VertexConsumerProvider provider, int light, int overlay) {
 		BlockState state = signBlockEntity.getCachedState();
 		matrixStack.push();
 
 		matrixStack.translate(0.5D, 0.5D, 0.5D);
 		float angle = -((float) ((Integer) state.get(SignBlock.ROTATION) * 360) / 16.0F);
-		
+
 		BlockState blockState = signBlockEntity.getCachedState();
-		if (blockState.get(BNSign.FLOOR))
-		{
+		if (blockState.get(BNSign.FLOOR)) {
 			matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(angle));
 			this.model.foot.visible = true;
 		}
-		else
-		{
+		else {
 			matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(angle + 180));
 			matrixStack.translate(0.0D, -0.3125D, -0.4375D);
 			this.model.foot.visible = false;
@@ -78,14 +73,12 @@ public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEn
 		int p = (int) (NativeImage.getBlue(m) * 0.4D);
 		int q = NativeImage.getAbgrColor(0, p, o, n);
 
-		for (int s = 0; s < 4; ++s)
-		{
+		for (int s = 0; s < 4; ++s) {
 			OrderedText orderedText = signBlockEntity.getTextBeingEditedOnRow(s, (text) -> {
 				List<OrderedText> list = textRenderer.wrapLines(text, 90);
 				return list.isEmpty() ? OrderedText.EMPTY : (OrderedText) list.get(0);
 			});
-			if (orderedText != null)
-			{
+			if (orderedText != null) {
 				float t = (float) (-textRenderer.getWidth(orderedText) / 2);
 				textRenderer.draw((OrderedText) orderedText, t, (float) (s * 10 - 20), q, false, matrixStack.peek().getModel(), provider, false, 0, light);
 			}
@@ -94,39 +87,32 @@ public class BNSignBlockEntityRenderer extends BlockEntityRenderer<BNSignBlockEn
 		matrixStack.pop();
 	}
 
-	public static SpriteIdentifier getModelTexture(Block block)
-	{
+	public static SpriteIdentifier getModelTexture(Block block) {
 		SignType signType2;
-		if (block instanceof AbstractSignBlock)
-		{
+		if (block instanceof AbstractSignBlock) {
 			signType2 = ((AbstractSignBlock) block).getSignType();
 		}
-		else
-		{
+		else {
 			signType2 = SignType.OAK;
 		}
 
 		return TexturedRenderLayers.getSignTextureId(signType2);
 	}
-	
-	static
-	{
+
+	static {
 		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));
-			if (block instanceof BNSign)
-			{
+			if (block instanceof BNSign) {
 				RenderLayer layer = RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/signs/" + name + ".png"));
 				LAYERS.put(Block.getRawIdFromState(block.getDefaultState()), layer);
-				if (defaultLayer == null)
-				{
+				if (defaultLayer == null) {
 					defaultLayer = layer;
 				}
 			}
 		});
 	}
-	
-	public static VertexConsumer getConsumer(VertexConsumerProvider provider, Block block)
-	{
+
+	public static VertexConsumer getConsumer(VertexConsumerProvider provider, Block block) {
 		return provider.getBuffer(LAYERS.getOrDefault(Block.getRawIdFromState(block.getDefaultState()), defaultLayer));
 	}
 }

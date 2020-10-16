@@ -17,12 +17,10 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class BlockEyeballSmall extends BlockEyeBase
-{
+public class BlockEyeballSmall extends BlockEyeBase {
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(4, 8, 4, 12, 16, 12);
 
-	public BlockEyeballSmall()
-	{
+	public BlockEyeballSmall() {
 		super(FabricBlockSettings.of(Material.WOOD)
 				.materialColor(MaterialColor.BROWN)
 				.sounds(BlockSoundGroup.SLIME)
@@ -31,16 +29,13 @@ public class BlockEyeballSmall extends BlockEyeBase
 				.nonOpaque());
 	}
 
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
-	
+
 	@Environment(EnvType.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
-	{
-		if (random.nextInt(5) == 0)
-		{
+	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+		if (random.nextInt(5) == 0) {
 			double x = pos.getX() + random.nextDouble() * 0.5 + 0.25;
 			double y = pos.getY() + random.nextDouble() * 0.1 + 0.5;
 			double z = pos.getZ() + random.nextDouble() * 0.5 + 0.25;
@@ -48,13 +43,11 @@ public class BlockEyeballSmall extends BlockEyeBase
 		}
 	}
 
-	public boolean canSuffocate(BlockState state, BlockView view, BlockPos pos)
-	{
+	public boolean canSuffocate(BlockState state, BlockView view, BlockPos pos) {
 		return false;
 	}
 
-	public boolean isSimpleFullBlock(BlockState state, BlockView view, BlockPos pos)
-	{
+	public boolean isSimpleFullBlock(BlockState state, BlockView view, BlockPos pos) {
 		return false;
 	}
 }

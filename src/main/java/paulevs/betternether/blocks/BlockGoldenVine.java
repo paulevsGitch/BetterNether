@@ -35,13 +35,11 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
-public class BlockGoldenVine  extends BlockBaseNotFull implements Fertilizable
-{
+public class BlockGoldenVine extends BlockBaseNotFull implements Fertilizable {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 16, 14);
 	public static final BooleanProperty BOTTOM = BooleanProperty.of("bottom");
 
-	public BlockGoldenVine()
-	{
+	public BlockGoldenVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.RED)
 				.sounds(BlockSoundGroup.CROP)
@@ -53,41 +51,35 @@ public class BlockGoldenVine  extends BlockBaseNotFull implements Fertilizable
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(BOTTOM, true));
 	}
-	
-	@Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
-        stateManager.add(BOTTOM);
-    }
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+		stateManager.add(BOTTOM);
+	}
+
+	@Override
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		BlockState upState = world.getBlockState(pos.up());
 		return upState.getBlock() == this || upState.isSideSolidFullSquare(world, pos, Direction.DOWN);
 	}
 
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos)
-	{
+	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
 		return 1.0F;
 	}
 
 	@Override
-	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos)
-	{
+	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos) {
 		return true;
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (canPlaceAt(state, world, pos))
 			return world.getBlockState(pos.down()).getBlock() == this ? state.with(BOTTOM, false) : state.with(BOTTOM, true);
 		else
@@ -95,11 +87,9 @@ public class BlockGoldenVine  extends BlockBaseNotFull implements Fertilizable
 	}
 
 	@Override
-	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient)
-	{
+	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
 		Mutable blockPos = new Mutable().set(pos);
-		for (int y = pos.getY() - 1; y > 1; y--)
-		{
+		for (int y = pos.getY() - 1; y > 1; y--) {
 			blockPos.setY(y);
 			if (world.getBlockState(blockPos).getBlock() != this)
 				return world.getBlockState(blockPos).getBlock() == Blocks.AIR;
@@ -108,17 +98,14 @@ public class BlockGoldenVine  extends BlockBaseNotFull implements Fertilizable
 	}
 
 	@Override
-	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
-	{
+	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
-	{
+	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		Mutable blockPos = new Mutable().set(pos);
-		for (int y = pos.getY(); y > 1; y--)
-		{
+		for (int y = pos.getY(); y > 1; y--) {
 			blockPos.setY(y);
 			if (world.getBlockState(blockPos).getBlock() != this)
 				break;
@@ -126,17 +113,14 @@ public class BlockGoldenVine  extends BlockBaseNotFull implements Fertilizable
 		BlocksHelper.setWithoutUpdate(world, blockPos.up(), getDefaultState().with(BOTTOM, false));
 		BlocksHelper.setWithoutUpdate(world, blockPos, getDefaultState().with(BOTTOM, true));
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0)
-		{
+		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0) {
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		}
-		else
-		{
+		else {
 			return Lists.newArrayList();
 		}
 	}

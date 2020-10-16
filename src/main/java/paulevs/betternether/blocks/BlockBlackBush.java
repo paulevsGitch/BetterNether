@@ -22,12 +22,10 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
-public class BlockBlackBush extends BlockBaseNotFull implements Fertilizable
-{
+public class BlockBlackBush extends BlockBaseNotFull implements Fertilizable {
 	private static final VoxelShape SHAPE = VoxelShapes.cuboid(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
-	
-	public BlockBlackBush()
-	{
+
+	public BlockBlackBush() {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.BLACK)
 				.sounds(BlockSoundGroup.CROP)
@@ -36,22 +34,19 @@ public class BlockBlackBush extends BlockBaseNotFull implements Fertilizable
 				.breakInstantly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
-	
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		return BlocksHelper.isNetherGround(world.getBlockState(pos.down()));
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (!canPlaceAt(state, world, pos))
 			return Blocks.AIR.getDefaultState();
 		else
@@ -59,20 +54,17 @@ public class BlockBlackBush extends BlockBaseNotFull implements Fertilizable
 	}
 
 	@Override
-	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient)
-	{
+	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
-	{
+	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
-	{
+	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		dropStack(world, pos, new ItemStack(this.asItem()));
 	}
 }

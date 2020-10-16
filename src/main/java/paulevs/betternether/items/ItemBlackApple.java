@@ -10,21 +10,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import paulevs.betternether.tab.CreativeTab;
 
-public class ItemBlackApple extends Item
-{
+public class ItemBlackApple extends Item {
 	public static final FoodComponent BLACK_APPLE = new FoodComponent.Builder().hunger(6).saturationModifier(0.5F).build();
-	
-	public ItemBlackApple()
-	{
+
+	public ItemBlackApple() {
 		super(new Item.Settings()
 				.group(CreativeTab.BN_TAB)
 				.food(BLACK_APPLE)
 				.food(FoodComponents.APPLE));
 	}
-	
+
 	@Override
-	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user)
-	{
+	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
 		user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 1));
 		return super.finishUsing(stack, world, user);
 	}

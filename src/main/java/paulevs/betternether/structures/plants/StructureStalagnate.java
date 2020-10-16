@@ -11,37 +11,32 @@ import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureStalagnate implements IStructure
-{
+public class StructureStalagnate implements IStructure {
 	public static final int MAX_LENGTH = 25; // 27
 	public static final int MIN_LENGTH = 3; // 5
-	
+
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
-	{
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
 		int length = BlocksHelper.upRay(world, pos, MAX_LENGTH);
-		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.up(length + 1))))
-		{
+		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.up(length + 1)))) {
 			BlockState bottom = BlocksRegistry.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
 			BlockState middle = BlocksRegistry.STALAGNATE.getDefaultState();
 			BlockState top = BlocksRegistry.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
-			
+
 			BlocksHelper.setWithoutUpdate(world, pos, bottom);
 			BlocksHelper.setWithoutUpdate(world, pos.up(length), top);
 			for (int y = 1; y < length; y++)
 				BlocksHelper.setWithoutUpdate(world, pos.up(y), middle);
 		}
 	}
-	
-	public void generateDown(ServerWorldAccess world, BlockPos pos, Random random)
-	{
+
+	public void generateDown(ServerWorldAccess world, BlockPos pos, Random random) {
 		int length = BlocksHelper.downRay(world, pos, MAX_LENGTH);
-		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.down(length + 1))))
-		{
+		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.down(length + 1)))) {
 			BlockState bottom = BlocksRegistry.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
 			BlockState middle = BlocksRegistry.STALAGNATE.getDefaultState();
 			BlockState top = BlocksRegistry.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
-			
+
 			BlocksHelper.setWithoutUpdate(world, pos.down(length), bottom);
 			BlocksHelper.setWithoutUpdate(world, pos, top);
 			for (int y = 1; y < length; y++)

@@ -17,10 +17,8 @@ import paulevs.betternether.structures.plants.StructureTwistedVines;
 import paulevs.betternether.structures.plants.StructureWarpedFungus;
 import paulevs.betternether.structures.plants.StructureWarpedRoots;
 
-public class OldWarpedWoods extends NetherBiome
-{
-	public OldWarpedWoods(String name)
-	{
+public class OldWarpedWoods extends NetherBiome {
+	public OldWarpedWoods(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(26, 5, 26)
 				.setLoop(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
@@ -36,10 +34,9 @@ public class OldWarpedWoods extends NetherBiome
 		addStructure("twisted_vine", new StructureTwistedVines(), StructureType.FLOOR, 0.1F, true);
 		addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.3F, true);
 	}
-	
+
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
 		BlocksHelper.setWithoutUpdate(world, pos, Blocks.WARPED_NYLIUM.getDefaultState());
 	}
 }

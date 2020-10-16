@@ -23,10 +23,8 @@ import paulevs.betternether.structures.plants.StructureVanillaMushroom;
 import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
-public class NetherMushroomForest extends NetherBiome
-{
-	public NetherMushroomForest(String name)
-	{
+public class NetherMushroomForest extends NetherBiome {
+	public NetherMushroomForest(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(166, 38, 95)
 				.setLoop(SoundsRegistry.AMBIENT_MUSHROOM_FOREST)
@@ -49,8 +47,7 @@ public class NetherMushroomForest extends NetherBiome
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
 		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.getDefaultState());
 	}
 }

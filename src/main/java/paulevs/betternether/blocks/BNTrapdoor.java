@@ -11,22 +11,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import paulevs.betternether.client.IRenderTypeable;
 
-public class BNTrapdoor extends TrapdoorBlock implements IRenderTypeable
-{
-	public BNTrapdoor(Block block)
-	{
+public class BNTrapdoor extends TrapdoorBlock implements IRenderTypeable {
+	public BNTrapdoor(Block block) {
 		super(FabricBlockSettings.copyOf(block).nonOpaque());
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this.asItem()));
 	}
 
 	@Override
-	public BNRenderLayer getRenderLayer()
-	{
+	public BNRenderLayer getRenderLayer() {
 		return BNRenderLayer.CUTOUT;
 	}
 }

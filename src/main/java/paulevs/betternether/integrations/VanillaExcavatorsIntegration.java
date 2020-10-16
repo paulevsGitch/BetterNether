@@ -10,53 +10,43 @@ import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import paulevs.betternether.registry.ItemsRegistry;
 
-public class VanillaExcavatorsIntegration
-{
+public class VanillaExcavatorsIntegration {
 	private static boolean hasExcavators;
 	private static Constructor<?> excavatorConstructor;
-	
-	public static Item makeExcavator(ToolMaterial material, int attackDamage, float attackSpeed)
-	{
+
+	public static Item makeExcavator(ToolMaterial material, int attackDamage, float attackSpeed) {
 		if (!hasExcavators)
 			return Items.AIR;
-		try
-		{
+		try {
 			return (Item) excavatorConstructor.newInstance(material, attackDamage, attackSpeed, ItemsRegistry.defaultSettings());
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			e.printStackTrace();
 			return Items.AIR;
 		}
 	}
-	
-	static
-	{
+
+	static {
 		hasExcavators = FabricLoader.getInstance().isModLoaded("vanillaexcavators");
-		try
-		{
-			if (hasExcavators)
-			{
+		try {
+			if (hasExcavators) {
 				LogManager.getLogger().info("[BetterNether] Enabled Vanilla Excavators Integration");
 				Class<?> itemClass = Class.forName("draylar.magna.item.ExcavatorItem");
 				if (itemClass != null)
-					for (Constructor<?> c: itemClass.getConstructors())
-						if (c.getParameterCount() == 4)
-						{
-							excavatorConstructor = c;
-							break;
-						}
+					for (Constructor<?> c : itemClass.getConstructors())
+					if (c.getParameterCount() == 4) {
+					excavatorConstructor = c;
+					break;
+					}
 				hasExcavators = (excavatorConstructor != null);
 			}
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static boolean hasExcavators()
-	{
+
+	public static boolean hasExcavators() {
 		return hasExcavators;
 	}
 }

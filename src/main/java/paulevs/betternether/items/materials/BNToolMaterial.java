@@ -4,17 +4,15 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
-public class BNToolMaterial implements ToolMaterial
-{
+public class BNToolMaterial implements ToolMaterial {
 	private final int durability;
 	private final float speed;
 	private final int level;
 	private final int enchantibility;
 	private final float damage;
 	private final ItemConvertible reapair;
-	
-	public BNToolMaterial(int durability, float speed, int level, int enchantibility, float damage, ItemConvertible reapair)
-	{
+
+	public BNToolMaterial(int durability, float speed, int level, int enchantibility, float damage, ItemConvertible reapair) {
 		this.durability = durability;
 		this.speed = speed;
 		this.level = level;
@@ -24,38 +22,32 @@ public class BNToolMaterial implements ToolMaterial
 	}
 
 	@Override
-	public int getDurability()
-	{
+	public int getDurability() {
 		return durability;
 	}
 
 	@Override
-	public float getMiningSpeedMultiplier()
-	{
+	public float getMiningSpeedMultiplier() {
 		return speed;
 	}
 
 	@Override
-	public float getAttackDamage()
-	{
+	public float getAttackDamage() {
 		return damage;
 	}
 
 	@Override
-	public int getMiningLevel()
-	{
+	public int getMiningLevel() {
 		return level;
 	}
 
 	@Override
-	public int getEnchantability()
-	{
+	public int getEnchantability() {
 		return enchantibility;
 	}
 
 	@Override
-	public Ingredient getRepairIngredient()
-	{
+	public Ingredient getRepairIngredient() {
 		return Ingredient.ofItems(reapair);
 	}
 }

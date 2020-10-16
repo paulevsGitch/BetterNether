@@ -27,12 +27,10 @@ import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWillow;
 import paulevs.betternether.structures.plants.StructureWillowBush;
 
-public class NetherSwampland extends NetherBiome
-{
+public class NetherSwampland extends NetherBiome {
 	protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);
-	
-	public NetherSwampland(String name)
-	{
+
+	public NetherSwampland(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(137, 19, 78)
 				.setLoop(SoundsRegistry.AMBIENT_SWAMPLAND)
@@ -56,33 +54,29 @@ public class NetherSwampland extends NetherBiome
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
 	}
-	
+
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
 		double value = TERRAIN.eval(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2);
 		if (value > 0.3 && validWalls(world, pos))
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState());
 		else if (value > -0.3)
 			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SWAMPLAND_GRASS.getDefaultState());
-		else
-		{
+		else {
 			value = TERRAIN.eval(pos.getX() * 0.5, pos.getZ() * 0.5);
 			BlocksHelper.setWithoutUpdate(world, pos, value > 0 ? Blocks.SOUL_SAND.getDefaultState() : Blocks.SOUL_SOIL.getDefaultState());
 		}
 	}
-	
-	protected boolean validWalls(WorldAccess world, BlockPos pos)
-	{
+
+	protected boolean validWalls(WorldAccess world, BlockPos pos) {
 		return validWall(world, pos.down())
 				&& validWall(world, pos.north())
 				&& validWall(world, pos.south())
 				&& validWall(world, pos.east())
 				&& validWall(world, pos.west());
 	}
-	
-	protected boolean validWall(WorldAccess world, BlockPos pos)
-	{
+
+	protected boolean validWall(WorldAccess world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 		return BlocksHelper.isLava(state) || BlocksHelper.isNetherGround(state);
 	}

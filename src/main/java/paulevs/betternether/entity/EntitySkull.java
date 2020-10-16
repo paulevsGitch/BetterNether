@@ -36,17 +36,15 @@ import net.minecraft.world.WorldAccess;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.SoundsRegistry;
 
-public class EntitySkull extends HostileEntity implements Flutterer
-{
+public class EntitySkull extends HostileEntity implements Flutterer {
 	private static double particleX;
 	private static double particleY;
 	private static double particleZ;
 	private int attackTick;
 	private int dirTickTick;
 	private int collideTick;
-	
-	public EntitySkull(EntityType<? extends EntitySkull> type, World world)
-	{
+
+	public EntitySkull(EntityType<? extends EntitySkull> type, World world) {
 		super(type, world);
 		this.moveControl = new FlightMoveControl(this, 20, true);
 		this.lookControl = new SkullLookControl(this);
@@ -56,9 +54,8 @@ public class EntitySkull extends HostileEntity implements Flutterer
 		this.experiencePoints = 1;
 		this.flyingSpeed = 0.5F;
 	}
-	
-	public static DefaultAttributeContainer getAttributeContainer()
-	{
+
+	public static DefaultAttributeContainer getAttributeContainer() {
 		return MobEntity
 				.createMobAttributes()
 				.add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
@@ -68,41 +65,32 @@ public class EntitySkull extends HostileEntity implements Flutterer
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
 				.build();
 	}
-	
-	class SkullLookControl extends LookControl
-	{
-		SkullLookControl(MobEntity entity)
-		{
+
+	class SkullLookControl extends LookControl {
+		SkullLookControl(MobEntity entity) {
 			super(entity);
 		}
 
-		protected boolean shouldStayHorizontal()
-		{
+		protected boolean shouldStayHorizontal() {
 			return false;
 		}
 	}
-	
+
 	@Override
-	public void onPlayerCollision(PlayerEntity player)
-	{
-		collideTick ++;
-		if (collideTick > 3)
-		{
+	public void onPlayerCollision(PlayerEntity player) {
+		collideTick++;
+		if (collideTick > 3) {
 			collideTick = 0;
-			
+
 			boolean shield = player.getActiveItem().getItem() instanceof ShieldItem && player.isUsingItem();
-			if (shield)
-			{
+			if (shield) {
 				player.playSound(SoundEvents.ITEM_SHIELD_BLOCK, MHelper.randRange(0.8F, 1.2F, random), MHelper.randRange(0.8F, 1.2F, random));
 				this.setVelocity(new Vec3d(0, 0, 0).subtract(getVelocity()));
 			}
-			if (player instanceof ServerPlayerEntity)
-			{
-				if (shield)
-				{
+			if (player instanceof ServerPlayerEntity) {
+				if (shield) {
 					player.getActiveItem().damage(1, random, (ServerPlayerEntity) player);
-					if (player.getActiveItem().getDamage() > player.getActiveItem().getMaxDamage())
-					{
+					if (player.getActiveItem().getDamage() > player.getActiveItem().getMaxDamage()) {
 						player.sendToolBreakStatus(player.getActiveHand());
 						if (player.getActiveHand().equals(Hand.MAIN_HAND))
 							player.inventory.main.clear();
@@ -118,32 +106,26 @@ public class EntitySkull extends HostileEntity implements Flutterer
 			}
 		}
 	}
-	
+
 	@Override
-	public void tick()
-	{
+	public void tick() {
 		super.tick();
-		if (random.nextInt(3) == 0)
-		{
+		if (random.nextInt(3) == 0) {
 			updateParticlePos();
 			this.world.addParticle(ParticleTypes.SMOKE, particleX, particleY, particleZ, 0, 0, 0);
 		}
-		if (random.nextInt(3) == 0)
-		{
+		if (random.nextInt(3) == 0) {
 			updateParticlePos();
 			this.world.addParticle(ParticleTypes.DRIPPING_LAVA, particleX, particleY, particleZ, 0, 0, 0);
 		}
-		if (random.nextInt(3) == 0)
-		{
+		if (random.nextInt(3) == 0) {
 			updateParticlePos();
 			this.world.addParticle(ParticleTypes.FLAME, particleX, particleY, particleZ, 0, 0, 0);
 		}
-		
-		if (attackTick > 40 && this.isAlive())
-		{
+
+		if (attackTick > 40 && this.isAlive()) {
 			PlayerEntity target = EntitySkull.this.world.getClosestPlayer(getX(), getY(), getZ(), 20, true);
-			if (target != null && this.canSee(target))
-			{
+			if (target != null && this.canSee(target)) {
 				attackTick = 0;
 				Vec3d velocity = target
 						.getPos()
@@ -155,44 +137,37 @@ public class EntitySkull extends HostileEntity implements Flutterer
 				this.lookAtEntity(target, 360, 360);
 				this.playSound(SoundsRegistry.MOB_SKULL_FLIGHT, MHelper.randRange(0.15F, 0.3F, random), MHelper.randRange(0.9F, 1.5F, random));
 			}
-			else if (dirTickTick < 0)
-			{
+			else if (dirTickTick < 0) {
 				dirTickTick = MHelper.randRange(20, 60, random);
 				moveRandomDir();
 			}
 		}
-		else
-		{
-			if (dirTickTick < 0)
-			{
+		else {
+			if (dirTickTick < 0) {
 				dirTickTick = MHelper.randRange(20, 60, random);
 				moveRandomDir();
 			}
 		}
-		attackTick ++;
-		dirTickTick --;
+		attackTick++;
+		dirTickTick--;
 	}
 
 	@Override
-	protected SoundEvent getAmbientSound()
-	{
+	protected SoundEvent getAmbientSound() {
 		return SoundEvents.ENTITY_SKELETON_AMBIENT;
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source)
-	{
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.ENTITY_SKELETON_HURT;
 	}
 
 	@Override
-	protected SoundEvent getDeathSound()
-	{
+	protected SoundEvent getDeathSound() {
 		return SoundEvents.ENTITY_SKELETON_DEATH;
 	}
 
-	private void moveRandomDir()
-	{
+	private void moveRandomDir() {
 		double dx = random.nextDouble() - 0.5;
 		double dy = random.nextDouble() - 0.5;
 		double dz = random.nextDouble() - 0.5;
@@ -210,8 +185,7 @@ public class EntitySkull extends HostileEntity implements Flutterer
 		this.playSound(SoundsRegistry.MOB_SKULL_FLIGHT, MHelper.randRange(0.15F, 0.3F, random), MHelper.randRange(0.75F, 1.25F, random));
 	}
 
-	private void lookAt(Vec3d target)
-	{
+	private void lookAt(Vec3d target) {
 		double d = target.getX() - this.getX();
 		double e = target.getZ() - this.getZ();
 		double g = target.getY() - this.getY();
@@ -223,9 +197,8 @@ public class EntitySkull extends HostileEntity implements Flutterer
 		this.pitch = j;
 		this.yaw = i;
 	}
-	
-	private void updateParticlePos()
-	{
+
+	private void updateParticlePos() {
 		particleX = random.nextDouble() - 0.5;
 		particleY = random.nextDouble() - 0.5;
 		particleZ = random.nextDouble() - 0.5;
@@ -238,62 +211,56 @@ public class EntitySkull extends HostileEntity implements Flutterer
 		particleY = particleY * 0.5 / l + getY();
 		particleZ = particleZ * 0.5 / l + getZ();
 	}
-	
+
 	@Override
 	@Environment(EnvType.CLIENT)
-	public float getEyeHeight(EntityPose pose)
-	{
+	public float getEyeHeight(EntityPose pose) {
 		return this.getDimensions(pose).height * 0.5F;
 	}
-	
+
 	@Override
-	protected boolean hasWings()
-	{
+	protected boolean hasWings() {
 		return true;
 	}
 
 	@Override
-	public EntityGroup getGroup()
-	{
+	public EntityGroup getGroup() {
 		return EntityGroup.UNDEAD;
 	}
-	
+
 	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier)
-	{
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier) {
 		return false;
 	}
-	
+
 	@Override
 	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
 
 	@Override
-	public boolean canClimb()
-	{
+	public boolean canClimb() {
 		return false;
 	}
-	
+
 	@Override
-    public boolean hasNoGravity()
-	{
-        return true;
-    }
-	
+	public boolean hasNoGravity() {
+		return true;
+	}
+
 	@Override
-	public boolean isPushable()
-	{
+	public boolean isPushable() {
 		return false;
 	}
-	
-	public static boolean canSpawn(EntityType<? extends EntitySkull> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
-	{
+
+	public static boolean canSpawn(EntityType<? extends EntitySkull> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
 		if (world.getDifficulty() == Difficulty.PEACEFUL || world.getLightLevel(pos) > 7)
 			return false;
-		
+
 		if (pos.getY() >= world.getDimension().getLogicalHeight()) return false;
-		
+
 		Box box = new Box(pos).expand(256, 256, 256);
-		List<EntitySkull> list = world.getEntitiesByClass(EntitySkull.class, box, (entity) -> { return true; });
+		List<EntitySkull> list = world.getEntitiesByClass(EntitySkull.class, box, (entity) -> {
+			return true;
+		});
 		return list.size() < 4;
 	}
 }

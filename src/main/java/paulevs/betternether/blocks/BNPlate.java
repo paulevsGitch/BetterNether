@@ -10,16 +10,13 @@ import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 
-public class BNPlate extends PressurePlateBlock
-{
-	public BNPlate(ActivationRule type, Block block)
-	{
+public class BNPlate extends PressurePlateBlock {
+	public BNPlate(ActivationRule type, Block block) {
 		super(type, FabricBlockSettings.copyOf(block).nonOpaque());
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this.asItem()));
 	}
 }

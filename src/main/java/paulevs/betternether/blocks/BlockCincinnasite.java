@@ -5,10 +5,8 @@ import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.sound.BlockSoundGroup;
 
-public class BlockCincinnasite extends BlockBase
-{
-	public BlockCincinnasite()
-	{
+public class BlockCincinnasite extends BlockBase {
+	public BlockCincinnasite() {
 		super(FabricBlockSettings.of(Material.METAL)
 				.materialColor(MaterialColor.YELLOW)
 				.hardness(3F)

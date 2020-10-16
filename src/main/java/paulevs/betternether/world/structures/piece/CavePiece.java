@@ -16,29 +16,26 @@ import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
-public class CavePiece extends CustomPiece
-{
+public class CavePiece extends CustomPiece {
 	private static final BlockState LAVA = Blocks.LAVA.getDefaultState();
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(927649);
 	private static final Mutable POS = new Mutable();
-	
+
 	private BlockPos center;
 	private int radius;
 	private int radSqr;
 	private int minY;
 	private int maxY;
-	
-	public CavePiece(BlockPos center, int radius, Random random)
-	{
+
+	public CavePiece(BlockPos center, int radius, Random random) {
 		super(StructureTypes.CAVE, random.nextInt());
-		this.center = center;
+		this.center = center.toImmutable();
 		this.radius = radius;
 		this.radSqr = radius * radius;
 		makeBoundingBox();
 	}
-	
-	protected CavePiece(StructureManager manager, CompoundTag tag)
-	{
+
+	protected CavePiece(StructureManager manager, CompoundTag tag) {
 		super(StructureTypes.CAVE, tag);
 		this.center = NbtHelper.toBlockPos(tag.getCompound("center"));
 		this.radius = tag.getInt("radius");
@@ -47,37 +44,29 @@ public class CavePiece extends CustomPiece
 	}
 
 	@Override
-	protected void toNbt(CompoundTag tag)
-	{
+	protected void toNbt(CompoundTag tag) {
 		tag.put("center", NbtHelper.fromBlockPos(center));
 		tag.putInt("radius", radius);
 	}
 
 	@Override
-	public boolean generate(StructureWorldAccess world, StructureAccessor arg, ChunkGenerator chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
-	{
+	public boolean generate(StructureWorldAccess world, StructureAccessor arg, ChunkGenerator chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
 		BlockState bottom = LAVA;
-		if (!(world.getDimension().hasCeiling()))
-		{
+		if (!(world.getDimension().hasCeiling())) {
 			bottom = Blocks.NETHERRACK.getDefaultState();
 		}
-		for (int x = blockBox.minX; x <= blockBox.maxX; x++)
-		{
+		for (int x = blockBox.minX; x <= blockBox.maxX; x++) {
 			int px = x - center.getX();
 			px *= px;
-			for (int z = blockBox.minZ; z <= blockBox.maxZ; z++)
-			{
+			for (int z = blockBox.minZ; z <= blockBox.maxZ; z++) {
 				int pz = z - center.getZ();
 				pz *= pz;
-				for (int y = minY; y <= maxY; y++)
-				{
+				for (int y = minY; y <= maxY; y++) {
 					int py = (y - center.getY()) << 1;
 					py *= py;
-					if (px + py + pz <= radSqr + NOISE.eval(x * 0.1, y * 0.1, z * 0.1) * 800)
-					{
+					if (px + py + pz <= radSqr + NOISE.eval(x * 0.1, y * 0.1, z * 0.1) * 800) {
 						POS.set(x, y, z);
-						if (y > 31)
-						{
+						if (y > 31) {
 							world.setBlockState(POS, AIR, 0);
 						}
 						else
@@ -88,9 +77,8 @@ public class CavePiece extends CustomPiece
 		}
 		return true;
 	}
-	
-	private void makeBoundingBox()
-	{
+
+	private void makeBoundingBox() {
 		int x1 = center.getX() - radius;
 		int x2 = center.getX() + radius;
 		minY = Math.max(22, center.getY() - radius);

@@ -7,8 +7,7 @@ import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.util.math.MathHelper;
 import paulevs.betternether.entity.EntityFlyingPig;
 
-public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
-{
+public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig> {
 	private final ModelPart head;
 	private final ModelPart body;
 	private final ModelPart rightWing;
@@ -19,92 +18,87 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 	private final ModelPart legA;
 	private final ModelPart legB;
 
-	public ModelEntityFlyingPig()
-	{
+	public ModelEntityFlyingPig() {
 		this.textureWidth = 128;
 		this.textureHeight = 64;
-		
+
 		this.head = new ModelPart(this, 0, 0);
 		this.head.addCuboid(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F);
-		
+
 		ModelPart modelEar = new ModelPart(this, 32, 4);
 		modelEar.setPivot(-7.0F, -7.0F, -2.0F);
 		modelEar.addCuboid(0.0F, 0.0F, 0.0F, 5.0F, 5.0F, 1.0F);
 		this.head.addChild(modelEar);
-		
+
 		modelEar = new ModelPart(this, 32, 4);
 		modelEar.setPivot(2.0F, -7.0F, -2.0F);
 		modelEar.mirror = true;
 		modelEar.addCuboid(0.0F, 0.0F, 0.0F, 5.0F, 5.0F, 1.0F);
 		this.head.addChild(modelEar);
-		
+
 		ModelPart piglet = new ModelPart(this, 32, 0);
 		piglet.setPivot(-2.0F, -1.0F, -5.0F);
 		piglet.addCuboid(0.0F, 0.0F, 0.0F, 4.0F, 3.0F, 1.0F);
 		this.head.addChild(piglet);
-		
+
 		this.body = new ModelPart(this, 0, 16);
 		this.body.addCuboid(-5.0F, 3.0F, -4.0F, 10.0F, 14.0F, 8.0F);
-		
+
 		this.rightWing = new ModelPart(this, 36, 10);
 		this.rightWing.setPivot(5, 2.5F, 0);
 		this.rightWing.addCuboid(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
 		this.body.addChild(this.rightWing);
-		
+
 		this.rightWingTip = new ModelPart(this, 36, 26);
 		this.rightWingTip.setPivot(16.0F, 0.0F, 0.0F);
 		this.rightWingTip.addCuboid(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
 		this.rightWing.addChild(this.rightWingTip);
-		
+
 		this.leftWing = new ModelPart(this, 36, 10);
 		this.leftWing.mirror = true;
 		this.leftWing.setPivot(-5, 2.5F, 0);
 		this.leftWing.addCuboid(-16.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
 		this.body.addChild(this.leftWing);
-		
+
 		this.leftWingTip = new ModelPart(this, 36, 26);
 		this.leftWingTip.mirror = true;
 		this.leftWingTip.setPivot(-16.0F, 0.0F, 0.0F);
 		this.leftWingTip.addCuboid(-16.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
 		this.leftWing.addChild(this.leftWingTip);
-		
+
 		tail = new ModelPart(this, 0, 40);
 		tail.setPivot(0, 17, 0);
 		tail.addCuboid(-4.0F, 0.0F, 0.0F, 8.0F, 8.0F, 0.0F);
 		this.body.addChild(tail);
-		
+
 		this.legA = new ModelPart(this, 0, 48);
 		legA.setPivot(1.5F, 15, -4);
 		legA.addCuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F);
 		this.body.addChild(legA);
-		
+
 		this.legB = new ModelPart(this, 0, 48);
 		legB.setPivot(-4.5F, 15, -4);
 		legB.addCuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F);
 		this.body.addChild(legB);
 	}
-	   
+
 	@Override
-	protected Iterable<ModelPart> getHeadParts()
-	{
+	protected Iterable<ModelPart> getHeadParts() {
 		return ImmutableList.of(head);
 	}
 
 	@Override
-	protected Iterable<ModelPart> getBodyParts()
-	{
+	protected Iterable<ModelPart> getBodyParts() {
 		return ImmutableList.of(body);
 	}
 
 	@Override
-	public void setAngles(EntityFlyingPig entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
-	{
-		if (entity.isRoosting())
-		{
+	public void setAngles(EntityFlyingPig entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+		if (entity.isRoosting()) {
 			this.head.pitch = headPitch * 0.017453292F;
 			this.head.yaw = 3.1415927F - headYaw * 0.017453292F;
 			this.head.roll = 3.1415927F;
-			
+
 			this.body.pitch = 3.1415927F;
 			this.rightWing.pitch = 0;
 			this.rightWing.yaw = -1.2566371F;
@@ -112,23 +106,22 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 			this.leftWing.pitch = this.rightWing.pitch;
 			this.leftWing.yaw = -this.rightWing.yaw;
 			this.leftWingTip.yaw = -this.rightWingTip.yaw;
-			
+
 			this.head.setPivot(0.0F, 25, 0.0F);
 			this.body.setPivot(0.0F, 24, 0.0F);
-			
+
 			this.legA.pitch = 0;
 			this.legB.pitch = 0;
 			this.tail.pitch = 0.1F;
-			
+
 			legA.setPivot(1.5F, 15, -3);
 			legB.setPivot(-4.5F, 15, -3);
 		}
-		else
-		{
+		else {
 			this.head.pitch = headPitch * 0.017453292F;
 			this.head.yaw = headYaw * 0.017453292F;
 			this.head.roll = 0.0F;
-			
+
 			this.body.pitch = 0.7853982F + MathHelper.cos(animationProgress * 0.1F) * 0.15F;
 			this.body.yaw = 0.0F;
 			this.rightWing.yaw = MathHelper.cos(animationProgress * 0.4F) * 3.1415927F * 0.25F;
@@ -136,13 +129,13 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig>
 			this.rightWingTip.yaw = this.rightWing.yaw * 0.75F;
 			this.leftWingTip.yaw = -this.rightWing.yaw * 0.75F;
 			this.tail.pitch = MathHelper.cos(animationProgress * 0.3F) * 0.25F;
-			
+
 			this.legA.pitch = -this.body.pitch + MathHelper.sin(animationProgress * 0.05F) * 0.1F;
 			this.legB.pitch = -this.body.pitch + MathHelper.cos(animationProgress * 0.05F) * 0.1F;
-			
+
 			this.head.setPivot(0.0F, 8.0F, 0.0F);
 			this.body.setPivot(0.0F, 8.0F, 0.0F);
-			
+
 			legA.setPivot(1.5F, 15, -4);
 			legB.setPivot(-4.5F, 15, -4);
 		}

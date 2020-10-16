@@ -18,12 +18,10 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockEyeVine extends BlockBaseNotFull
-{
+public class BlockEyeVine extends BlockBaseNotFull {
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
 
-	public BlockEyeVine()
-	{
+	public BlockEyeVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.RED)
 				.sounds(BlockSoundGroup.CROP)
@@ -36,26 +34,22 @@ public class BlockEyeVine extends BlockBaseNotFull
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
 
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos)
-	{
+	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
 		return 1.0F;
 	}
 
 	@Override
-	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos)
-	{
+	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos) {
 		return true;
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		Block up = world.getBlockState(pos.up()).getBlock();
 		Block down = world.getBlockState(pos.down()).getBlock();
 		if (up != this && up != Blocks.NETHERRACK)
@@ -65,11 +59,10 @@ public class BlockEyeVine extends BlockBaseNotFull
 		else
 			return state;
 	}
-	
+
 	@Override
 	@Environment(EnvType.CLIENT)
-	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
-	{
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
 		return new ItemStack(BlocksRegistry.EYE_SEED);
 	}
 }

@@ -9,18 +9,15 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockCincinnasitePedestal extends BlockBaseNotFull
-{
+public class BlockCincinnasitePedestal extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 16, 14);
-	
-	public BlockCincinnasitePedestal()
-	{
+
+	public BlockCincinnasitePedestal() {
 		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque());
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
 }

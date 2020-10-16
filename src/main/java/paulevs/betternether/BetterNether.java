@@ -15,8 +15,7 @@ import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.NetherBiomeSource;
 import paulevs.betternether.world.structures.piece.StructureTypes;
 
-public class BetterNether implements ModInitializer
-{
+public class BetterNether implements ModInitializer {
 	public static final String MOD_ID = "betternether";
 	private static boolean thinArmor = true;
 	private static boolean lavafallParticles = true;
@@ -24,8 +23,7 @@ public class BetterNether implements ModInitializer
 	private static float fogEnd = 0.5F;
 
 	@Override
-	public void onInitialize()
-	{
+	public void onInitialize() {
 		initOptions();
 		SoundsRegistry.register();
 		BlocksRegistry.register();
@@ -37,49 +35,42 @@ public class BetterNether implements ModInitializer
 		BiomesRegistry.register();
 		BrewingRegistry.register();
 		Config.save();
-		
+
 		IntegrationRecipes.register();
 		NetherTags.register();
 		ItemRecipes.register();
 		NetherBiomeSource.register();
 	}
-	
-	private void initOptions()
-	{
+
+	private void initOptions() {
 		thinArmor = Config.getBoolean("improvement", "smaller_armor_offset", true);
 		lavafallParticles = Config.getBoolean("improvement", "lavafall_particles", true);
 		float density = Config.getFloat("improvement", "fog_density[vanilla: 1.0]", 0.75F);
 		changeFogDensity(density);
 	}
-	
-	public static boolean hasThinArmor()
-	{
+
+	public static boolean hasThinArmor() {
 		return thinArmor;
 	}
-	
-	public static void setThinArmor(boolean value)
-	{
+
+	public static void setThinArmor(boolean value) {
 		thinArmor = value;
 	}
-	
-	public static boolean hasLavafallParticles()
-	{
+
+	public static boolean hasLavafallParticles() {
 		return lavafallParticles;
 	}
-	
-	public static void changeFogDensity(float density)
-	{
+
+	public static void changeFogDensity(float density) {
 		fogStart = -0.45F * density + 0.5F;
 		fogEnd = -0.5F * density + 1;
 	}
-	
-	public static float getFogStart()
-	{
+
+	public static float getFogStart() {
 		return fogStart;
 	}
-	
-	public static float getFogEnd()
-	{
+
+	public static float getFogEnd() {
 		return fogEnd;
 	}
 }

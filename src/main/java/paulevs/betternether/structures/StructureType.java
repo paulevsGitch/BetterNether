@@ -1,15 +1,9 @@
 package paulevs.betternether.structures;
 
-public enum StructureType
-{
-	FLOOR,
-	WALL,
-	CEIL,
-	LAVA,
-	UNDER;
+public enum StructureType {
+	FLOOR, WALL, CEIL, LAVA, UNDER;
 
-	public static StructureType fromString(String a)
-	{
+	public static StructureType fromString(String a) {
 		if (a.contains("floor"))
 			return FLOOR;
 		else if (a.contains("wall"))
@@ -22,9 +16,8 @@ public enum StructureType
 			return UNDER;
 		return FLOOR;
 	}
-	
-	public String getName()
-	{
+
+	public String getName() {
 		return this.toString().toLowerCase();
 	}
 }

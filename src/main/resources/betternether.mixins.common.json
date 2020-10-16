@@ -25,7 +25,11 @@
 	"DefaultBiomeFeaturesMixin",
 	"GenerationSettingsMixin",
 	"BastionRemnantFeatureMixin",
-	"NetherFortressFeatureMixin"
+	"NetherFortressFeatureMixin",
+	"LocateCommandMixin",
+	"MinecraftServerMixin",
+	"RecipeManagerAccessor",
+	"ChunkSerializerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

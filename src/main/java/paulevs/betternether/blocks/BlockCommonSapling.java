@@ -21,13 +21,11 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
-public class BlockCommonSapling extends BlockBaseNotFull implements Fertilizable
-{
+public class BlockCommonSapling extends BlockBaseNotFull implements Fertilizable {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 14, 12);
 	private Block plant;
-	
-	public BlockCommonSapling(Block plant, MaterialColor color)
-	{
+
+	public BlockCommonSapling(Block plant, MaterialColor color) {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(color)
 				.sounds(BlockSoundGroup.CROP)
@@ -39,22 +37,19 @@ public class BlockCommonSapling extends BlockBaseNotFull implements Fertilizable
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.plant = plant;
 	}
-	
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		return BlocksHelper.isNetherGround(world.getBlockState(pos.down()));
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (!canPlaceAt(state, world, pos))
 			return Blocks.AIR.getDefaultState();
 		else
@@ -62,31 +57,26 @@ public class BlockCommonSapling extends BlockBaseNotFull implements Fertilizable
 	}
 
 	@Override
-	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient)
-	{
+	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
-	{
+	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
 		return BlocksHelper.isFertile(world.getBlockState(pos.down())) ? (random.nextBoolean()) : (random.nextInt(4) == 0);
 	}
-	
-	protected boolean canGrowTerrain(World world, Random random, BlockPos pos, BlockState state)
-	{
+
+	protected boolean canGrowTerrain(World world, Random random, BlockPos pos, BlockState state) {
 		return BlocksHelper.isFertile(world.getBlockState(pos.down())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
 	}
 
 	@Override
-	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
-	{
+	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		world.setBlockState(pos, plant.getDefaultState());
 	}
-	
+
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
-	{
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 		super.scheduledTick(state, world, pos, random);
 		if (canGrowTerrain(world, random, pos, state))
 			grow(world, random, pos, state);

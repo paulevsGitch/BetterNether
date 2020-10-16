@@ -38,21 +38,19 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockStatueRespawner extends BlockBaseNotFull
-{
+public class BlockStatueRespawner extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 16, 15);
 	private static final DustParticleEffect EFFECT = new DustParticleEffect(1, 0, 0, 1.0F);
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	public static final BooleanProperty TOP = BooleanProperty.of("top");
 	private final ItemStack requiredItem;
-	
-	public BlockStatueRespawner()
-	{
+
+	public BlockStatueRespawner() {
 		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().lightLevel(15));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(TOP, false));
 		this.setDropItself(false);
-		
+
 		String itemName = Config.getString("respawn_statue", "respawn_item", Registry.ITEM.getId(Items.GLOWSTONE).toString());
 		Item item = Registry.ITEM.get(new Identifier(itemName));
 		if (item == Items.AIR)
@@ -60,34 +58,28 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 		int count = Config.getInt("respawn_statue", "item_count", 4);
 		requiredItem = new ItemStack(item, count);
 	}
-	
+
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING, TOP);
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx)
-	{
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
 	}
-	
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
-	
+
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
-	{
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack stack = player.getMainHandStack();
-		if (stack.getItem() == requiredItem.getItem() && stack.getCount() >= requiredItem.getCount())
-		{
+		if (stack.getItem() == requiredItem.getItem() && stack.getCount() >= requiredItem.getCount()) {
 			float y = state.get(TOP) ? 0.4F : 1.4F;
-			if (!player.isCreative())
-			{
+			if (!player.isCreative()) {
 				player.getMainHandStack().decrement(requiredItem.getCount());
 			}
 			for (int i = 0; i < 50; i++)
@@ -96,23 +88,20 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 						pos.getY() + y + world.random.nextFloat() * 0.2,
 						pos.getZ() + world.random.nextFloat(), 0, 0, 0);
 			player.sendMessage(new TranslatableText("message.spawn_set", new Object[0]), true);
-			if (!world.isClient)
-			{
+			if (!world.isClient) {
 				((ServerPlayerEntity) player).setSpawnPoint(world.getRegistryKey(), pos, player.getHeadYaw(), true, false);
 			}
 			player.playSound(SoundEvents.ITEM_TOTEM_USE, 0.7F, 1.0F);
 			return ActionResult.SUCCESS;
 		}
-		else
-		{
+		else {
 			player.sendMessage(new TranslatableText("message.spawn_help", requiredItem), true);
 		}
 		return ActionResult.SUCCESS;
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		if (state.get(TOP))
 			return true;
 		BlockState up = world.getBlockState(pos.up());
@@ -120,43 +109,35 @@ public class BlockStatueRespawner extends BlockBaseNotFull
 	}
 
 	@Override
-	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack)
-	{
+	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
 		if (!world.isClient())
 			BlocksHelper.setWithoutUpdate((ServerWorld) world, pos.up(), state.with(TOP, true));
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
-		if (state.get(TOP))
-		{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+		if (state.get(TOP)) {
 			return world.getBlockState(pos.down()).getBlock() == this ? state : Blocks.AIR.getDefaultState();
 		}
-		else
-		{
+		else {
 			return world.getBlockState(pos.up()).getBlock() == this ? state : Blocks.AIR.getDefaultState();
 		}
 	}
-	
+
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation)
-	{
+	public BlockState rotate(BlockState state, BlockRotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror)
-	{
+	public BlockState mirror(BlockState state, BlockMirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
-	
+
 	@Override
-	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player)
-	{
-		if (player.isCreative() && state.get(TOP) && world.getBlockState(pos.down()).getBlock() == this) 
-		{
-				world.setBlockState(pos.down(), Blocks.AIR.getDefaultState());
+	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+		if (player.isCreative() && state.get(TOP) && world.getBlockState(pos.down()).getBlock() == this) {
+			world.setBlockState(pos.down(), Blocks.AIR.getDefaultState());
 		}
 		super.onBreak(world, pos, state, player);
 	}

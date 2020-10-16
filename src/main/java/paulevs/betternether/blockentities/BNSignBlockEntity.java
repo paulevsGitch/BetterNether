@@ -29,16 +29,14 @@ import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
-public class BNSignBlockEntity extends BlockEntity
-{
+public class BNSignBlockEntity extends BlockEntity {
 	private final Text[] text;
 	private boolean editable;
 	private PlayerEntity editor;
 	private final OrderedText[] textBeingEdited;
 	private DyeColor textColor;
 
-	public BNSignBlockEntity()
-	{
+	public BNSignBlockEntity() {
 		super(BlockEntitiesRegistry.SIGN);
 		this.text = new Text[] { LiteralText.EMPTY, LiteralText.EMPTY, LiteralText.EMPTY, LiteralText.EMPTY };
 		this.editable = true;
@@ -46,12 +44,10 @@ public class BNSignBlockEntity extends BlockEntity
 		this.textColor = DyeColor.BLACK;
 	}
 
-	public CompoundTag toTag(CompoundTag tag)
-	{
+	public CompoundTag toTag(CompoundTag tag) {
 		super.toTag(tag);
 
-		for (int i = 0; i < 4; ++i)
-		{
+		for (int i = 0; i < 4; ++i) {
 			String string = Text.Serializer.toJson(this.text[i]);
 			tag.putString("Text" + (i + 1), string);
 		}
@@ -60,29 +56,23 @@ public class BNSignBlockEntity extends BlockEntity
 		return tag;
 	}
 
-	public void fromTag(BlockState state, CompoundTag tag)
-	{
+	public void fromTag(BlockState state, CompoundTag tag) {
 		this.editable = false;
 		super.fromTag(state, tag);
 		this.textColor = DyeColor.byName(tag.getString("Color"), DyeColor.BLACK);
 
-		for (int i = 0; i < 4; ++i)
-		{
+		for (int i = 0; i < 4; ++i) {
 			String string = tag.getString("Text" + (i + 1));
 			Text text = Text.Serializer.fromJson(string.isEmpty() ? "\"\"" : string);
-			if (this.world instanceof ServerWorld)
-			{
-				try
-				{
+			if (this.world instanceof ServerWorld) {
+				try {
 					this.text[i] = Texts.parse(this.getCommandSource((ServerPlayerEntity) null), text, (Entity) null, 0);
 				}
-				catch (CommandSyntaxException var7)
-				{
+				catch (CommandSyntaxException var7) {
 					this.text[i] = text;
 				}
 			}
-			else
-			{
+			else {
 				this.text[i] = text;
 			}
 
@@ -91,18 +81,15 @@ public class BNSignBlockEntity extends BlockEntity
 
 	}
 
-	public void setTextOnRow(int row, Text text)
-	{
+	public void setTextOnRow(int row, Text text) {
 		this.text[row] = text;
 		this.textBeingEdited[row] = null;
 	}
 
 	@Nullable
 	@Environment(EnvType.CLIENT)
-	public OrderedText getTextBeingEditedOnRow(int row, Function<Text, OrderedText> function)
-	{
-		if (this.textBeingEdited[row] == null && this.text[row] != null)
-		{
+	public OrderedText getTextBeingEditedOnRow(int row, Function<Text, OrderedText> function) {
+		if (this.textBeingEdited[row] == null && this.text[row] != null) {
 			this.textBeingEdited[row] = (OrderedText) function.apply(this.text[row]);
 		}
 
@@ -110,61 +97,49 @@ public class BNSignBlockEntity extends BlockEntity
 	}
 
 	@Nullable
-	public BlockEntityUpdateS2CPacket toUpdatePacket()
-	{
+	public BlockEntityUpdateS2CPacket toUpdatePacket() {
 		return new BlockEntityUpdateS2CPacket(this.pos, 9, this.toInitialChunkDataTag());
 	}
 
-	public CompoundTag toInitialChunkDataTag()
-	{
+	public CompoundTag toInitialChunkDataTag() {
 		return this.toTag(new CompoundTag());
 	}
 
-	public boolean copyItemDataRequiresOperator()
-	{
+	public boolean copyItemDataRequiresOperator() {
 		return true;
 	}
 
-	public boolean isEditable()
-	{
+	public boolean isEditable() {
 		return this.editable;
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void setEditable(boolean bl)
-	{
+	public void setEditable(boolean bl) {
 		this.editable = bl;
-		if (!bl)
-		{
+		if (!bl) {
 			this.editor = null;
 		}
 
 	}
 
-	public void setEditor(PlayerEntity player)
-	{
+	public void setEditor(PlayerEntity player) {
 		this.editor = player;
 	}
 
-	public PlayerEntity getEditor()
-	{
+	public PlayerEntity getEditor() {
 		return this.editor;
 	}
 
-	public boolean onActivate(PlayerEntity player)
-	{
+	public boolean onActivate(PlayerEntity player) {
 		Text[] var2 = this.text;
 		int var3 = var2.length;
 
-		for (int var4 = 0; var4 < var3; ++var4)
-		{
+		for (int var4 = 0; var4 < var3; ++var4) {
 			Text text = var2[var4];
 			Style style = text == null ? null : text.getStyle();
-			if (style != null && style.getClickEvent() != null)
-			{
+			if (style != null && style.getClickEvent() != null) {
 				ClickEvent clickEvent = style.getClickEvent();
-				if (clickEvent.getAction() == ClickEvent.Action.RUN_COMMAND)
-				{
+				if (clickEvent.getAction() == ClickEvent.Action.RUN_COMMAND) {
 					player.getServer().getCommandManager().execute(this.getCommandSource((ServerPlayerEntity) player), clickEvent.getValue());
 				}
 			}
@@ -173,29 +148,24 @@ public class BNSignBlockEntity extends BlockEntity
 		return true;
 	}
 
-	public ServerCommandSource getCommandSource(@Nullable ServerPlayerEntity player)
-	{
+	public ServerCommandSource getCommandSource(@Nullable ServerPlayerEntity player) {
 		String string = player == null ? "Sign" : player.getName().getString();
 		Text text = player == null ? new LiteralText("Sign") : player.getDisplayName();
 		return new ServerCommandSource(CommandOutput.DUMMY, Vec3d.ofCenter(this.pos), Vec2f.ZERO, (ServerWorld) this.world, 2, string, (Text) text, this.world.getServer(), player);
 	}
 
-	public DyeColor getTextColor()
-	{
+	public DyeColor getTextColor() {
 		return this.textColor;
 	}
 
-	public boolean setTextColor(DyeColor value)
-	{
-		if (value != this.getTextColor())
-		{
+	public boolean setTextColor(DyeColor value) {
+		if (value != this.getTextColor()) {
 			this.textColor = value;
 			this.markDirty();
 			this.world.updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), 3);
 			return true;
 		}
-		else
-		{
+		else {
 			return false;
 		}
 	}

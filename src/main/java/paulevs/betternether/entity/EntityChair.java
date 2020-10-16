@@ -6,30 +6,25 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import paulevs.betternether.blocks.BNChair;
 
-public class EntityChair extends MobEntity
-{
-	public EntityChair(EntityType<? extends EntityChair> type, World world)
-	{
+public class EntityChair extends MobEntity {
+	public EntityChair(EntityType<? extends EntityChair> type, World world) {
 		super(type, world);
 	}
-	
+
 	@Override
-	public void tick()
-	{
+	public void tick() {
 		if (!this.hasPassengers())
 			this.remove();
 		else if (this.getBlockState().getBlock() instanceof BNChair)
 			super.tick();
-		else
-		{
+		else {
 			this.removeAllPassengers();
 			this.remove();
 		}
 	}
 
 	@Override
-	public void tickMovement()
-	{
+	public void tickMovement() {
 		super.tickMovement();
 		this.setVelocity(Vec3d.ZERO);
 	}

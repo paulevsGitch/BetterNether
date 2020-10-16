@@ -11,54 +11,45 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureStalactiteFloor implements IStructure
-{
+public class StructureStalactiteFloor implements IStructure {
 	private static final Mutable POS = new Mutable();
 	private final Block block;
 	private final Block under;
 	private final Block[] ground;
-	
-	public StructureStalactiteFloor(Block block, Block under)
-	{
+
+	public StructureStalactiteFloor(Block block, Block under) {
 		this.block = block;
 		ground = null;
 		this.under = under;
 	}
-	
-	public StructureStalactiteFloor(Block block, Block under, Block... ground)
-	{
+
+	public StructureStalactiteFloor(Block block, Block under, Block... ground) {
 		this.block = block;
 		this.under = under;
 		this.ground = ground;
 	}
-	
-	private boolean canPlaceAt(ServerWorldAccess world, BlockPos pos)
-	{
+
+	private boolean canPlaceAt(ServerWorldAccess world, BlockPos pos) {
 		return world.isAir(pos) && (ground == null ? BlocksHelper.isNetherGround(world.getBlockState(pos.down())) : groundContains(world.getBlockState(pos.down()).getBlock()));
 	}
-	
-	private boolean groundContains(Block block)
-	{
-		for (Block b: ground)
+
+	private boolean groundContains(Block block) {
+		for (Block b : ground)
 			if (b == block)
 				return true;
 		return false;
 	}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
-	{
-		if (canPlaceAt(world, pos))
-		{
-			for (int i = 0; i < 16; i++)
-			{
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+		if (canPlaceAt(world, pos)) {
+			for (int i = 0; i < 16; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2F);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2F);
 				POS.set(x, pos.getY(), z);
 				int y = pos.getY() - BlocksHelper.downRay(world, POS, 8);
-				
-				if (canPlaceAt(world, POS))
-				{
+
+				if (canPlaceAt(world, POS)) {
 					int dx = x - pos.getX();
 					int dz = z - pos.getZ();
 					float dist = 4 - (float) Math.sqrt(dx * dx + dz * dz);
@@ -73,19 +64,16 @@ public class StructureStalactiteFloor implements IStructure
 					if (h2 <= h)
 						h = h2;
 					int offset = stalagnate ? (h < 8 ? MHelper.randRange(0, 8 - h, random) : 0) : 0;
-					
-					if (under != null && h > 2)
-					{
+
+					if (under != null && h > 2) {
 						POS.setY(y - 1);
 						BlocksHelper.setWithoutUpdate(world, POS, under.getDefaultState());
-						if (stalagnate)
-						{
+						if (stalagnate) {
 							POS.setY(y + h);
 							BlocksHelper.setWithoutUpdate(world, POS, under.getDefaultState());
 						}
 					}
-					for (int n = 0; n < h; n++)
-					{
+					for (int n = 0; n < h; n++) {
 						POS.setY(y + n);
 						if (!world.isAir(POS))
 							break;

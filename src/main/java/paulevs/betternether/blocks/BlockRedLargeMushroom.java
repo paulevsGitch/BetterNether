@@ -20,49 +20,42 @@ import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockRedLargeMushroom extends BlockBaseNotFull
-{
+public class BlockRedLargeMushroom extends BlockBaseNotFull {
 	private static final VoxelShape TOP_SHAPE = Block.createCuboidShape(0, 0.1, 0, 16, 16, 16);
 	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 16, 11);
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
-	
-	public BlockRedLargeMushroom()
-	{
+
+	public BlockRedLargeMushroom() {
 		super(Materials.makeWood(MaterialColor.RED).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
-	
+
 	@Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
-        stateManager.add(SHAPE);
-    }
-	
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+		stateManager.add(SHAPE);
+	}
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return state.get(SHAPE) == TripleShape.TOP ? TOP_SHAPE : MIDDLE_SHAPE;
 	}
-	
+
 	@Override
 	@Environment(EnvType.CLIENT)
-	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
-	{
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
 		return state.get(SHAPE) == TripleShape.TOP ? new ItemStack(Items.RED_MUSHROOM) : new ItemStack(BlocksRegistry.MUSHROOM_STEM);
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
-		switch (state.get(SHAPE))
-		{
-		case BOTTOM:
-			return state;
-		case MIDDLE:
-		case TOP:
-		default:
-			return world.getBlockState(pos.down()).getBlock() == this ? state : Blocks.AIR.getDefaultState();
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+		switch (state.get(SHAPE)) {
+			case BOTTOM:
+				return state;
+			case MIDDLE:
+			case TOP:
+			default:
+				return world.getBlockState(pos.down()).getBlock() == this ? state : Blocks.AIR.getDefaultState();
 		}
 	}
 }

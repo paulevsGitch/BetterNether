@@ -10,16 +10,13 @@ import net.minecraft.block.WallBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 
-public class BNWall extends WallBlock
-{
-	public BNWall(Block block)
-	{
+public class BNWall extends WallBlock {
+	public BNWall(Block block) {
 		super(FabricBlockSettings.copyOf(block).nonOpaque());
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this.asItem()));
 	}
 }

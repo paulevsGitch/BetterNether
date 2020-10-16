@@ -21,8 +21,7 @@ import paulevs.betternether.blocks.BNChest;
 import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.blocks.BlockNetherFurnace;
 
-public class BlockEntitiesRegistry
-{
+public class BlockEntitiesRegistry {
 	public static final BlockEntityType<?> CINCINNASITE_FORGE = BlockEntityType.Builder.create(BlockEntityForge::new, BlocksRegistry.CINCINNASITE_FORGE).build(null);
 	public static final BlockEntityType<?> NETHERRACK_FURNACE = BlockEntityType.Builder.create(BlockEntityFurnace::new, getFurnaces()).build(null);
 	public static final BlockEntityType<?> CHEST_OF_DRAWERS = BlockEntityType.Builder.create(BlockEntityChestOfDrawers::new, BlocksRegistry.CHEST_OF_DRAWERS).build(null);
@@ -30,9 +29,8 @@ public class BlockEntitiesRegistry
 	public static final BlockEntityType<BNChestBlockEntity> CHEST = BlockEntityType.Builder.create(BNChestBlockEntity::new, getChests()).build(null);
 	public static final BlockEntityType<BNBarrelBlockEntity> BARREL = BlockEntityType.Builder.create(BNBarrelBlockEntity::new, getBarrels()).build(null);
 	public static final BlockEntityType<BNSignBlockEntity> SIGN = BlockEntityType.Builder.create(BNSignBlockEntity::new, getSigns()).build(null);
-	
-	public static void register()
-	{
+
+	public static void register() {
 		RegisterBlockEntity("forge", CINCINNASITE_FORGE);
 		RegisterBlockEntity("furnace", NETHERRACK_FURNACE);
 		RegisterBlockEntity("chest_of_drawers", CHEST_OF_DRAWERS);
@@ -41,14 +39,12 @@ public class BlockEntitiesRegistry
 		RegisterBlockEntity("barrel", BARREL);
 		RegisterBlockEntity("sign", SIGN);
 	}
-	
-	public static void RegisterBlockEntity(String name, BlockEntityType<? extends BlockEntity> type)
-	{
+
+	public static void RegisterBlockEntity(String name, BlockEntityType<? extends BlockEntity> type) {
 		Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), type);
 	}
-	
-	private static Block[] getChests()
-	{
+
+	private static Block[] getChests() {
 		List<Block> result = new ArrayList<Block>();
 		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));
@@ -57,9 +53,8 @@ public class BlockEntitiesRegistry
 		});
 		return result.toArray(new Block[] {});
 	}
-	
-	private static Block[] getBarrels()
-	{
+
+	private static Block[] getBarrels() {
 		List<Block> result = new ArrayList<Block>();
 		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));
@@ -68,9 +63,8 @@ public class BlockEntitiesRegistry
 		});
 		return result.toArray(new Block[] {});
 	}
-	
-	private static Block[] getSigns()
-	{
+
+	private static Block[] getSigns() {
 		List<Block> result = new ArrayList<Block>();
 		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));
@@ -79,9 +73,8 @@ public class BlockEntitiesRegistry
 		});
 		return result.toArray(new Block[] {});
 	}
-	
-	private static Block[] getFurnaces()
-	{
+
+	private static Block[] getFurnaces() {
 		List<Block> result = new ArrayList<Block>();
 		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));

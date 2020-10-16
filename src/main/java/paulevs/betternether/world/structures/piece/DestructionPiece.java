@@ -16,18 +16,16 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 
-public class DestructionPiece extends CustomPiece
-{
+public class DestructionPiece extends CustomPiece {
 	private static final Mutable POS = new Mutable();
-	
+
 	private BlockPos center;
 	private int radius;
 	private int radSqr;
 	private int minY;
 	private int maxY;
-	
-	public DestructionPiece(BlockBox bounds, Random random)
-	{
+
+	public DestructionPiece(BlockBox bounds, Random random) {
 		super(StructureTypes.DESTRUCTION, random.nextInt());
 		radius = random.nextInt(5) + 1;
 		radSqr = radius * radius;
@@ -37,9 +35,8 @@ public class DestructionPiece extends CustomPiece
 				MHelper.randRange(bounds.minZ, bounds.maxZ, random));
 		makeBoundingBox();
 	}
-	
-	protected DestructionPiece(StructureManager manager, CompoundTag tag)
-	{
+
+	protected DestructionPiece(StructureManager manager, CompoundTag tag) {
 		super(StructureTypes.DESTRUCTION, tag);
 		this.center = NbtHelper.toBlockPos(tag.getCompound("center"));
 		this.radius = tag.getInt("radius");
@@ -48,39 +45,30 @@ public class DestructionPiece extends CustomPiece
 	}
 
 	@Override
-	protected void toNbt(CompoundTag tag)
-	{
+	protected void toNbt(CompoundTag tag) {
 		tag.put("center", NbtHelper.fromBlockPos(center));
 		tag.putInt("radius", radius);
 	}
 
 	@Override
-	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos)
-	{
-		for (int x = blockBox.minX; x <= blockBox.maxX; x++)
-		{
+	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
+		for (int x = blockBox.minX; x <= blockBox.maxX; x++) {
 			int px = x - center.getX();
 			px *= px;
-			for (int z = blockBox.minZ; z <= blockBox.maxZ; z++)
-			{
+			for (int z = blockBox.minZ; z <= blockBox.maxZ; z++) {
 				int pz = z - center.getZ();
 				pz *= pz;
-				for (int y = minY; y <= maxY; y++)
-				{
+				for (int y = minY; y <= maxY; y++) {
 					int py = (y - center.getY()) << 1;
 					py *= py;
-					if (px + py + pz <= radSqr + random.nextInt(radius))
-					{
+					if (px + py + pz <= radSqr + random.nextInt(radius)) {
 						POS.set(x, y, z);
-						if (!world.isAir(POS))
-						{
+						if (!world.isAir(POS)) {
 							if (random.nextBoolean())
 								BlocksHelper.setWithoutUpdate(world, POS, AIR);
-							else
-							{
+							else {
 								int dist = BlocksHelper.downRay(world, POS, maxY - 5);
-								if (dist > 0)
-								{
+								if (dist > 0) {
 									BlockState state = world.getBlockState(POS);
 									BlocksHelper.setWithoutUpdate(world, POS, AIR);
 									POS.setY(POS.getY() - dist);
@@ -94,9 +82,8 @@ public class DestructionPiece extends CustomPiece
 		}
 		return true;
 	}
-	
-	private void makeBoundingBox()
-	{
+
+	private void makeBoundingBox() {
 		int x1 = center.getX() - radius;
 		int x2 = center.getX() + radius;
 		minY = Math.max(22, center.getY() - radius);

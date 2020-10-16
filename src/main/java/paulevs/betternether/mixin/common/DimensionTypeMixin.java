@@ -14,11 +14,9 @@ import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
 import paulevs.betternether.world.NetherBiomeSource;
 
 @Mixin(DimensionType.class)
-public class DimensionTypeMixin
-{
+public class DimensionTypeMixin {
 	@Inject(method = "createNetherGenerator", at = @At("HEAD"), cancellable = true)
-	private static void replaceGenerator(Registry<Biome> biomeRegistry, Registry<ChunkGeneratorSettings> chunkGeneratorSettingsRegistry, long seed, CallbackInfoReturnable<ChunkGenerator> info)
-	{
+	private static void replaceGenerator(Registry<Biome> biomeRegistry, Registry<ChunkGeneratorSettings> chunkGeneratorSettingsRegistry, long seed, CallbackInfoReturnable<ChunkGenerator> info) {
 		info.setReturnValue(new NoiseChunkGenerator(new NetherBiomeSource(biomeRegistry, seed), seed, () -> {
 			return (ChunkGeneratorSettings) chunkGeneratorSettingsRegistry.getOrThrow(ChunkGeneratorSettings.NETHER);
 		}));

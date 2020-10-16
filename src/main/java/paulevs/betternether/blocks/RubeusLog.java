@@ -8,19 +8,16 @@ import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.Direction;
 import paulevs.betternether.blocks.shapes.TripleShape;
 
-public class RubeusLog extends BNLogStripable
-{
+public class RubeusLog extends BNLogStripable {
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
-	
-	public RubeusLog(Block striped)
-	{
+
+	public RubeusLog(Block striped) {
 		super(MaterialColor.MAGENTA, striped);
 		this.setDefaultState(this.getDefaultState().with(AXIS, Direction.Axis.Y).with(SHAPE, TripleShape.BOTTOM));
 	}
-	
+
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
 		super.appendProperties(stateManager);
 		stateManager.add(SHAPE);
 	}

@@ -23,8 +23,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
-public class BNLadder extends BlockBaseNotFull
-{
+public class BNLadder extends BlockBaseNotFull {
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 3.0D, 16.0D, 16.0D);
@@ -32,59 +31,49 @@ public class BNLadder extends BlockBaseNotFull
 	protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 3.0D);
 	protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D);
 
-	public BNLadder(Block block)
-	{
+	public BNLadder(Block block) {
 		super(FabricBlockSettings.copyOf(block).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
-	
+
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING);
 		stateManager.add(WATERLOGGED);
 	}
 
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
-		switch (state.get(FACING))
-		{
-		case NORTH:
-			return NORTH_SHAPE;
-		case SOUTH:
-			return SOUTH_SHAPE;
-		case WEST:
-			return WEST_SHAPE;
-		case EAST:
-		default:
-			return EAST_SHAPE;
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
+		switch (state.get(FACING)) {
+			case NORTH:
+				return NORTH_SHAPE;
+			case SOUTH:
+				return SOUTH_SHAPE;
+			case WEST:
+				return WEST_SHAPE;
+			case EAST:
+			default:
+				return EAST_SHAPE;
 		}
 	}
 
-	private boolean canPlaceOn(BlockView world, BlockPos pos, Direction side)
-	{
+	private boolean canPlaceOn(BlockView world, BlockPos pos, Direction side) {
 		BlockState blockState = world.getBlockState(pos);
 		return !blockState.emitsRedstonePower() && blockState.isSideSolidFullSquare(world, pos, side);
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		Direction direction = (Direction) state.get(FACING);
 		return this.canPlaceOn(world, pos.offset(direction.getOpposite()), direction);
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
-		if (facing.getOpposite() == state.get(FACING) && !state.canPlaceAt(world, pos))
-		{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+		if (facing.getOpposite() == state.get(FACING) && !state.canPlaceAt(world, pos)) {
 			return Blocks.AIR.getDefaultState();
 		}
-		else
-		{
-			if ((Boolean) state.get(WATERLOGGED))
-			{
+		else {
+			if ((Boolean) state.get(WATERLOGGED)) {
 				world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 			}
 
@@ -93,14 +82,11 @@ public class BNLadder extends BlockBaseNotFull
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx)
-	{
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		BlockState blockState2;
-		if (!ctx.canReplaceExisting())
-		{
+		if (!ctx.canReplaceExisting()) {
 			blockState2 = ctx.getWorld().getBlockState(ctx.getBlockPos().offset(ctx.getSide().getOpposite()));
-			if (blockState2.getBlock() == this && blockState2.get(FACING) == ctx.getSide())
-			{
+			if (blockState2.getBlock() == this && blockState2.get(FACING) == ctx.getSide()) {
 				return null;
 			}
 		}
@@ -112,14 +98,11 @@ public class BNLadder extends BlockBaseNotFull
 		Direction[] var6 = ctx.getPlacementDirections();
 		int var7 = var6.length;
 
-		for (int var8 = 0; var8 < var7; ++var8)
-		{
+		for (int var8 = 0; var8 < var7; ++var8) {
 			Direction direction = var6[var8];
-			if (direction.getAxis().isHorizontal())
-			{
+			if (direction.getAxis().isHorizontal()) {
 				blockState2 = (BlockState) blockState2.with(FACING, direction.getOpposite());
-				if (blockState2.canPlaceAt(worldView, blockPos))
-				{
+				if (blockState2.canPlaceAt(worldView, blockPos)) {
 					return (BlockState) blockState2.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
 				}
 			}
@@ -127,22 +110,19 @@ public class BNLadder extends BlockBaseNotFull
 
 		return null;
 	}
-	
+
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation)
-	{
+	public BlockState rotate(BlockState state, BlockRotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror)
-	{
+	public BlockState mirror(BlockState state, BlockMirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 
 	@Override
-	public FluidState getFluidState(BlockState state)
-	{
+	public FluidState getFluidState(BlockState state) {
 		return (Boolean) state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
 	}
 }

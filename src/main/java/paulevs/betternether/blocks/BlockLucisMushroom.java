@@ -32,14 +32,12 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
 
-public class BlockLucisMushroom extends BlockBaseNotFull
-{
+public class BlockLucisMushroom extends BlockBaseNotFull {
 	private static final VoxelShape V_SHAPE = Block.createCuboidShape(0, 0, 0, 16, 9, 16);
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	public static final EnumProperty<EnumShape> SHAPE = EnumProperty.of("shape", EnumShape.class);
 
-	public BlockLucisMushroom()
-	{
+	public BlockLucisMushroom() {
 		super(FabricBlockSettings.of(Material.SOLID_ORGANIC)
 				.materialColor(MaterialColor.YELLOW)
 				.breakByTool(FabricToolTags.AXES)
@@ -51,67 +49,54 @@ public class BlockLucisMushroom extends BlockBaseNotFull
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING, SHAPE);
 	}
-	
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return V_SHAPE;
 	}
 
-	public enum EnumShape implements StringIdentifiable
-	{
-		CORNER("corner"),
-		SIDE("side"),
-		CENTER("center");
+	public enum EnumShape implements StringIdentifiable {
+		CORNER("corner"), SIDE("side"), CENTER("center");
 
 		final String name;
-		
-		EnumShape(String name)
-		{
+
+		EnumShape(String name) {
 			this.name = name;
 		}
-		
+
 		@Override
-		public String asString()
-		{
+		public String asString() {
 			return name;
 		}
 
 		@Override
-		public String toString()
-		{
+		public String toString() {
 			return name;
 		}
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Lists.newArrayList(new ItemStack(BlocksRegistry.LUCIS_SPORE), new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(2, 4, MHelper.RANDOM)));
 	}
-	
+
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation)
-	{
+	public BlockState rotate(BlockState state, BlockRotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror)
-	{
-		if (mirror == BlockMirror.FRONT_BACK)
-		{
+	public BlockState mirror(BlockState state, BlockMirror mirror) {
+		if (mirror == BlockMirror.FRONT_BACK) {
 			if (state.get(SHAPE) == EnumShape.SIDE) state = state.with(FACING, state.get(FACING).rotateYCounterclockwise());
 			if (state.get(FACING) == Direction.NORTH) return state.with(FACING, Direction.WEST);
 			if (state.get(FACING) == Direction.WEST) return state.with(FACING, Direction.NORTH);
 			if (state.get(FACING) == Direction.SOUTH) return state.with(FACING, Direction.EAST);
 			if (state.get(FACING) == Direction.EAST) return state.with(FACING, Direction.SOUTH);
 		}
-		else if (mirror == BlockMirror.LEFT_RIGHT)
-		{
+		else if (mirror == BlockMirror.LEFT_RIGHT) {
 			if (state.get(SHAPE) == EnumShape.SIDE) state = state.with(FACING, state.get(FACING).rotateYCounterclockwise());
 			if (state.get(FACING) == Direction.NORTH) return state.with(FACING, Direction.EAST);
 			if (state.get(FACING) == Direction.EAST) return state.with(FACING, Direction.NORTH);
@@ -120,11 +105,10 @@ public class BlockLucisMushroom extends BlockBaseNotFull
 		}
 		return state;
 	}
-	
+
 	@Override
 	@Environment(EnvType.CLIENT)
-	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
-	{
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
 		return new ItemStack(BlocksRegistry.LUCIS_SPORE);
 	}
 }

@@ -21,44 +21,38 @@ import net.minecraft.util.math.BlockPos;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
 
 @Mixin(ServerPlayNetworkHandler.class)
-public class ServerPlayNetworkHandlerMixin
-{
+public class ServerPlayNetworkHandlerMixin {
 	@Shadow
 	private static final Logger LOGGER = LogManager.getLogger();
-	
+
 	@Shadow
 	public ServerPlayerEntity player;
 
 	@Inject(method = "onSignUpdate", at = @At(value = "HEAD"), cancellable = true)
-	private void signUpdate(UpdateSignC2SPacket packet, CallbackInfo info)
-	{
+	private void signUpdate(UpdateSignC2SPacket packet, CallbackInfo info) {
 		NetworkThreadUtils.forceMainThread(packet, (ServerPlayNetworkHandler) (Object) this, (ServerWorld) this.player.getServerWorld());
 		this.player.updateLastActionTime();
 		ServerWorld serverWorld = this.player.getServerWorld();
 		BlockPos blockPos = packet.getPos();
-		if (serverWorld.isChunkLoaded(blockPos))
-		{
+		if (serverWorld.isChunkLoaded(blockPos)) {
 			BlockState blockState = serverWorld.getBlockState(blockPos);
 			BlockEntity blockEntity = serverWorld.getBlockEntity(blockPos);
-			if (blockEntity instanceof BNSignBlockEntity)
-			{
+			if (blockEntity instanceof BNSignBlockEntity) {
 				BNSignBlockEntity signBlockEntity = (BNSignBlockEntity) blockEntity;
-				if (!signBlockEntity.isEditable() || signBlockEntity.getEditor() != this.player)
-				{
+				if (!signBlockEntity.isEditable() || signBlockEntity.getEditor() != this.player) {
 					LOGGER.warn("Player {} just tried to change non-editable sign", this.player.getName().getString());
 					return;
 				}
 
 				String[] strings = packet.getText();
 
-				for (int i = 0; i < strings.length; ++i)
-				{
+				for (int i = 0; i < strings.length; ++i) {
 					signBlockEntity.setTextOnRow(i, new LiteralText(Formatting.strip(strings[i])));
 				}
 
 				signBlockEntity.markDirty();
 				serverWorld.updateListeners(blockPos, blockState, blockState, 3);
-				
+
 				info.cancel();
 			}
 		}

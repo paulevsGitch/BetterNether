@@ -7,18 +7,15 @@ import net.minecraft.util.Identifier;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.model.ModelEmpty;
 
-public class RenderChair extends MobEntityRenderer<EntityChair, AnimalModel<EntityChair>>
-{
+public class RenderChair extends MobEntityRenderer<EntityChair, AnimalModel<EntityChair>> {
 	private static final Identifier TEXTURE = new Identifier("minecraft:textures/block/stone.png");
-	
-	public RenderChair(EntityRenderDispatcher renderManager)
-	{
+
+	public RenderChair(EntityRenderDispatcher renderManager) {
 		super(renderManager, new ModelEmpty(), 0);
 	}
 
 	@Override
-	public Identifier getTexture(EntityChair entity)
-	{
+	public Identifier getTexture(EntityChair entity) {
 		return TEXTURE;
 	}
 }

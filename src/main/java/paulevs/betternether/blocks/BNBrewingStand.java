@@ -20,10 +20,8 @@ import net.minecraft.world.World;
 import paulevs.betternether.blockentities.BNBrewingStandBlockEntity;
 import paulevs.betternether.client.IRenderTypeable;
 
-public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
-{
-	public BNBrewingStand()
-	{
+public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable {
+	public BNBrewingStand() {
 		super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS)
 				.strength(0.5F, 0.5F)
 				.lightLevel(1)
@@ -31,23 +29,18 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView view)
-	{
+	public BlockEntity createBlockEntity(BlockView view) {
 		return new BNBrewingStandBlockEntity();
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
-	{
-		if (world.isClient)
-		{
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (world.isClient) {
 			return ActionResult.SUCCESS;
 		}
-		else
-		{
+		else {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof BNBrewingStandBlockEntity)
-			{
+			if (blockEntity instanceof BNBrewingStandBlockEntity) {
 				player.openHandledScreen((BNBrewingStandBlockEntity) blockEntity);
 				player.incrementStat(Stats.INTERACT_WITH_BREWINGSTAND);
 			}
@@ -57,27 +50,21 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
 	}
 
 	@Override
-	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack)
-	{
-		if (itemStack.hasCustomName())
-		{
+	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+		if (itemStack.hasCustomName()) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof BNBrewingStandBlockEntity)
-			{
+			if (blockEntity instanceof BNBrewingStandBlockEntity) {
 				((BNBrewingStandBlockEntity) blockEntity).setCustomName(itemStack.getName());
 			}
 		}
 	}
 
 	@Override
-	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean notify)
-	{
-		if (!state.isOf(newState.getBlock()))
-		{
+	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean notify) {
+		if (!state.isOf(newState.getBlock())) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof BNBrewingStandBlockEntity)
-			{
-				ItemScatterer.spawn(world, (BlockPos)pos, (Inventory)((BNBrewingStandBlockEntity) blockEntity));
+			if (blockEntity instanceof BNBrewingStandBlockEntity) {
+				ItemScatterer.spawn(world, (BlockPos) pos, (Inventory) ((BNBrewingStandBlockEntity) blockEntity));
 			}
 
 			super.onStateReplaced(state, world, pos, newState, notify);
@@ -85,8 +72,7 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
 	}
 
 	@Override
-	public BNRenderLayer getRenderLayer()
-	{
+	public BNRenderLayer getRenderLayer() {
 		return BNRenderLayer.CUTOUT;
 	}
 }

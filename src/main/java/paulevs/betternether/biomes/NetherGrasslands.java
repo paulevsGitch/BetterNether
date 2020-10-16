@@ -22,10 +22,8 @@ import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 
-public class NetherGrasslands extends NetherBiome 
-{
-	public NetherGrasslands(String name)
-	{
+public class NetherGrasslands extends NetherBiome {
+	public NetherGrasslands(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(113, 73, 133)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
@@ -46,25 +44,21 @@ public class NetherGrasslands extends NetherBiome
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
-		switch(random.nextInt(3))
-		{
-		case 0:
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
-			break;
-		case 1:
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
-			break;
-		default:
-			super.genSurfColumn(world, pos, random);
-			break;
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
+		switch (random.nextInt(3)) {
+			case 0:
+				BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
+				break;
+			case 1:
+				BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
+				break;
+			default:
+				super.genSurfColumn(world, pos, random);
+				break;
 		}
-		for (int i = 1; i < random.nextInt(3); i++)
-		{
+		for (int i = 1; i < random.nextInt(3); i++) {
 			BlockPos down = pos.down(i);
-			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down)))
-			{
+			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down))) {
 				BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.getDefaultState());
 			}
 		}

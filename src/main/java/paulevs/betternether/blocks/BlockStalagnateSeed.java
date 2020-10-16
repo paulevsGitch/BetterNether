@@ -25,15 +25,13 @@ import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureStalagnate;
 
-public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizable
-{
+public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizable {
 	protected static final VoxelShape SHAPE_TOP = Block.createCuboidShape(4, 6, 4, 12, 16, 12);
 	protected static final VoxelShape SHAPE_BOTTOM = Block.createCuboidShape(4, 0, 4, 12, 12, 12);
 	private static final StructureStalagnate STRUCTURE = new StructureStalagnate();
 	public static final BooleanProperty TOP = BooleanProperty.of("top");
-	
-	public BlockStalagnateSeed()
-	{
+
+	public BlockStalagnateSeed() {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.CYAN)
 				.sounds(BlockSoundGroup.CROP)
@@ -44,16 +42,14 @@ public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizabl
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(TOP, true));
 	}
-	
-	@Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
-        stateManager.add(TOP);
-    }
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+		stateManager.add(TOP);
+	}
+
+	@Override
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		BlockState blockState = this.getDefaultState();
 		if (ctx.getSide() == Direction.DOWN)
 			return blockState;
@@ -62,23 +58,19 @@ public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizabl
 		else
 			return null;
 	}
-	
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return state.get(TOP).booleanValue() ? SHAPE_TOP : SHAPE_BOTTOM;
 	}
 
 	@Override
-	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient)
-	{
+	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
-	{
-		if (random.nextInt(16) == 0)
-		{
+	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+		if (random.nextInt(16) == 0) {
 			if (state.get(TOP).booleanValue())
 				return BlocksHelper.downRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
 			else
@@ -88,45 +80,38 @@ public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizabl
 	}
 
 	@Override
-	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
-	{
+	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		if (state.get(TOP).booleanValue())
 			STRUCTURE.generateDown(world, pos, random);
 		else
 			STRUCTURE.generate(world, pos, random);
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		return BlocksHelper.isNetherrack(world.getBlockState(pos.up())) || BlocksHelper.isNetherrack(world.getBlockState(pos.down()));
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
-		if (state.get(TOP).booleanValue())
-		{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+		if (state.get(TOP).booleanValue()) {
 			if (BlocksHelper.isNetherrack(world.getBlockState(pos.up())))
 				return state;
 			else
 				return Blocks.AIR.getDefaultState();
 		}
-		else
-		{
+		else {
 			if (BlocksHelper.isNetherrack(world.getBlockState(pos.down())))
 				return state;
 			else
 				return Blocks.AIR.getDefaultState();
 		}
 	}
-	
+
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
-	{
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 		super.scheduledTick(state, world, pos, random);
-		if (canGrow(world, random, pos, state))
-		{
+		if (canGrow(world, random, pos, state)) {
 			grow(world, random, pos, state);
 		}
 	}

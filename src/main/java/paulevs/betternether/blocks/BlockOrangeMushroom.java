@@ -13,8 +13,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
-public class BlockOrangeMushroom extends BlockCommonPlant
-{
+public class BlockOrangeMushroom extends BlockCommonPlant {
 	private static final VoxelShape[] SHAPES = new VoxelShape[] {
 			VoxelShapes.cuboid(0.25, 0.0, 0.25, 0.75, 0.375, 0.75),
 			VoxelShapes.cuboid(0.125, 0.0, 0.125, 0.875, 0.625, 0.875),
@@ -22,8 +21,7 @@ public class BlockOrangeMushroom extends BlockCommonPlant
 			VoxelShapes.cuboid(0.0, 0.0, 0.0, 1.0, 1.0, 1.0)
 	};
 
-	public BlockOrangeMushroom()
-	{
+	public BlockOrangeMushroom() {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.ORANGE)
 				.sounds(BlockSoundGroup.CROP)
@@ -34,14 +32,12 @@ public class BlockOrangeMushroom extends BlockCommonPlant
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		return BlocksHelper.isNetherMycelium(world.getBlockState(pos.down()));
 	}
-	
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPES[state.get(AGE)];
 	}
 }

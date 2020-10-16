@@ -21,12 +21,10 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
-public class BlockNetherReed extends BlockBase
-{
+public class BlockNetherReed extends BlockBase {
 	public static final BooleanProperty TOP = BooleanProperty.of("top");
-	
-	public BlockNetherReed()
-	{
+
+	public BlockNetherReed() {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.CYAN)
 				.sounds(BlockSoundGroup.CROP)
@@ -37,33 +35,28 @@ public class BlockNetherReed extends BlockBase
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(TOP, true));
 	}
-	
+
 	@Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
-        stateManager.add(TOP);
-    }
-	
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+		stateManager.add(TOP);
+	}
+
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos)
-	{
+	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
 		return 1.0F;
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		Block up = world.getBlockState(pos.up()).getBlock();
 		BlockState down = world.getBlockState(pos.down());
-		if (BlocksHelper.isNetherGround(down))
-		{
+		if (BlocksHelper.isNetherGround(down)) {
 			BlockPos posDown = pos.down();
 			boolean lava = BlocksHelper.isLava(world.getBlockState(posDown.north()));
 			lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.south()));
 			lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.east()));
 			lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.west()));
-			if (lava)
-			{
+			if (lava) {
 				return up == this ? this.getDefaultState().with(TOP, false) : this.getDefaultState();
 			}
 			return Blocks.AIR.getDefaultState();
@@ -75,14 +68,12 @@ public class BlockNetherReed extends BlockBase
 		else
 			return this.getDefaultState().with(TOP, false);
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		BlockPos posDown = pos.down();
 		BlockState down = world.getBlockState(posDown);
-		if (BlocksHelper.isNetherGround(down))
-		{
+		if (BlocksHelper.isNetherGround(down)) {
 			boolean lava = BlocksHelper.isLava(world.getBlockState(posDown.north()));
 			lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.south()));
 			lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.east()));
@@ -94,26 +85,21 @@ public class BlockNetherReed extends BlockBase
 	}
 
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
-	{
-		if (!canPlaceAt(state, world, pos))
-		{
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		if (!canPlaceAt(state, world, pos)) {
 			world.breakBlock(pos, true);
 			return;
 		}
-		if (state.get(TOP).booleanValue())
-		{
+		if (state.get(TOP).booleanValue()) {
 			BlockPos up = pos.up();
 			boolean grow = world.isAir(up);
-			if (grow)
-			{
+			if (grow) {
 				int length = BlocksHelper.getLengthDown(world, pos, this);
 				boolean isFertile = BlocksHelper.isFertile(world.getBlockState(pos.down(length)));
 				if (isFertile)
 					length -= 2;
 				grow = (length < 3) && (isFertile ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0));
-				if (grow)
-				{
+				if (grow) {
 					BlocksHelper.setWithoutUpdate(world, up, getDefaultState());
 					BlocksHelper.setWithoutUpdate(world, pos, getDefaultState().with(TOP, false));
 				}
