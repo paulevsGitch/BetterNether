@@ -6,6 +6,7 @@ import java.util.Set;
 
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -14,6 +15,7 @@ import paulevs.betternether.world.structures.CityFeature;
 
 public class CityHelper {
 	private static final Set<ChunkPos> POSITIONS = new HashSet<ChunkPos>(16);
+	private static final Mutable POS = new Mutable();
 
 	public static boolean stopStructGen(int chunkX, int chunkZ, ChunkGenerator chunkGenerator, long worldSeed, ChunkRandom chunkRandom) {
 		StructureConfig config = chunkGenerator.getStructuresConfig().getForType(BNWorldGenerator.CITY);
@@ -32,6 +34,26 @@ public class CityHelper {
 			for (int z = z1; z <= z2; z += 8) {
 				ChunkPos chunk = BNWorldGenerator.CITY.getStartChunk(config, worldSeed, chunkRandom, x, z);
 				POSITIONS.add(chunk);
+			}
+		}
+	}
+	
+	private static void collectNearby(ServerWorld world, int chunkX, int chunkZ, StructureConfig config, long worldSeed, ChunkRandom chunkRandom) {
+		int x1 = chunkX - 16;
+		int x2 = chunkX + 16;
+		int z1 = chunkZ - 16;
+		int z2 = chunkZ + 16;
+
+		POSITIONS.clear();
+		POS.setY(64);
+		for (int x = x1; x <= x2; x += 8) {
+			POS.setX(x << 4);
+			for (int z = z1; z <= z2; z += 8) {
+				POS.setZ(z << 4);
+				if (world.getBiome(POS).getGenerationSettings().hasStructureFeature(BNWorldGenerator.CITY)) {
+					ChunkPos chunk = BNWorldGenerator.CITY.getStartChunk(config, worldSeed, chunkRandom, x, z);
+					POSITIONS.add(chunk);
+				}
 			}
 		}
 	}
@@ -58,7 +80,7 @@ public class CityHelper {
 		if (config == null || config.getSpacing() < 1)
 			return null;
 
-		collectNearby(cx, cz, config, world.getSeed(), new ChunkRandom());
+		collectNearby(world, cx, cz, config, world.getSeed(), new ChunkRandom());
 		Iterator<ChunkPos> iterator = POSITIONS.iterator();
 		if (iterator.hasNext()) {
 			ChunkPos nearest = POSITIONS.iterator().next();
