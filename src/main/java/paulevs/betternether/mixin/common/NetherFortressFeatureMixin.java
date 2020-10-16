@@ -15,13 +15,11 @@ import net.minecraft.world.gen.feature.NetherFortressFeature;
 import paulevs.betternether.world.CityHelper;
 
 @Mixin(NetherFortressFeature.class)
-public class NetherFortressFeatureMixin
-{
+public class NetherFortressFeatureMixin {
 	@Inject(method = "shouldStartAt", at = @At("HEAD"), cancellable = true)
-	private void checkCity(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long worldSeed, ChunkRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, DefaultFeatureConfig defaultFeatureConfig, CallbackInfoReturnable<Boolean> info)
-	{
-		if (CityHelper.stopStructGen(chunkX, chunkZ, chunkGenerator, worldSeed, chunkRandom))
-		{
+	private void checkCity(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long worldSeed, ChunkRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, DefaultFeatureConfig defaultFeatureConfig,
+			CallbackInfoReturnable<Boolean> info) {
+		if (CityHelper.stopStructGen(chunkX, chunkZ, chunkGenerator, worldSeed, chunkRandom)) {
 			info.setReturnValue(false);
 			info.cancel();
 		}

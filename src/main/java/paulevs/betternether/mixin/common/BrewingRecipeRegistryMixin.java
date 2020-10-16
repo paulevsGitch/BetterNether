@@ -10,13 +10,10 @@ import net.minecraft.recipe.BrewingRecipeRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
 
 @Mixin(BrewingRecipeRegistry.class)
-public class BrewingRecipeRegistryMixin
-{
+public class BrewingRecipeRegistryMixin {
 	@Inject(method = "isValidIngredient", at = @At("HEAD"), cancellable = true)
-	private static void isIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> info)
-	{
-		if (BrewingRegistry.isValidIngridient(stack))
-		{
+	private static void isIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
+		if (BrewingRegistry.isValidIngridient(stack)) {
 			info.setReturnValue(true);
 			info.cancel();
 		}

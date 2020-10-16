@@ -19,34 +19,30 @@ import paulevs.betternether.BNSignEditScreen;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
 
 @Mixin(ClientPlayNetworkHandler.class)
-public class ClientPlayNetworkHandlerMixin
-{
+public class ClientPlayNetworkHandlerMixin {
 	@Shadow
 	private MinecraftClient client;
-	
+
 	@Shadow
 	private ClientWorld world;
-	
+
 	@Inject(method = "onSignEditorOpen", at = @At(value = "HEAD"), cancellable = true)
 	public void openSignEditor(SignEditorOpenS2CPacket packet, CallbackInfo info) {
 		NetworkThreadUtils.forceMainThread(packet, (ClientPlayNetworkHandler) (Object) this, (ThreadExecutor<?>) client);
 		BlockEntity blockEntity = this.world.getBlockEntity(packet.getPos());
-		if (blockEntity instanceof BNSignBlockEntity)
-		{
+		if (blockEntity instanceof BNSignBlockEntity) {
 			BNSignBlockEntity sign = (BNSignBlockEntity) blockEntity;
 			client.openScreen(new BNSignEditScreen(sign));
 			info.cancel();
 		}
 	}
-	
+
 	@Inject(method = "onBlockEntityUpdate", at = @At(value = "HEAD"), cancellable = true)
-	public void onEntityUpdate(BlockEntityUpdateS2CPacket packet, CallbackInfo info)
-	{
+	public void onEntityUpdate(BlockEntityUpdateS2CPacket packet, CallbackInfo info) {
 		NetworkThreadUtils.forceMainThread(packet, (ClientPlayNetworkHandler) (Object) this, (ThreadExecutor<?>) client);
 		BlockPos blockPos = packet.getPos();
 		BlockEntity blockEntity = this.client.world.getBlockEntity(blockPos);
-		if (blockEntity instanceof BNSignBlockEntity)
-		{
+		if (blockEntity instanceof BNSignBlockEntity) {
 			blockEntity.fromTag(this.client.world.getBlockState(blockPos), packet.getCompoundTag());
 			info.cancel();
 		}

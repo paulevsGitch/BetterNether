@@ -16,42 +16,36 @@ import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockStalagnate extends BlockBaseNotFull
-{
+public class BlockStalagnate extends BlockBaseNotFull {
 	private static final VoxelShape SELECT_SHAPE = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
 	private static final VoxelShape COLLISION_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 16, 11);
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
-	
-	public BlockStalagnate()
-	{
+
+	public BlockStalagnate() {
 		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.MIDDLE));
 		this.setDropItself(false);
 	}
-	
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SELECT_SHAPE;
 	}
-	
+
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return COLLISION_SHAPE;
 	}
-	
+
 	@Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
-        stateManager.add(SHAPE);
-    }
-	
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+		stateManager.add(SHAPE);
+	}
+
 	@Override
 	@Environment(EnvType.CLIENT)
-	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
-	{
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
 		return new ItemStack(BlocksRegistry.STALAGNATE_STEM);
 	}
 }

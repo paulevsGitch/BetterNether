@@ -18,27 +18,23 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 @Mixin(SheepEntity.class)
-public abstract class SheepEntityMixin extends AnimalEntity implements Shearable
-{
-	protected SheepEntityMixin(EntityType<? extends AnimalEntity> entityType, World world)
-	{
+public abstract class SheepEntityMixin extends AnimalEntity implements Shearable {
+	protected SheepEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
 	@Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
-	private void shear(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> info)
-	{
+	private void shear(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> info) {
 		ItemStack itemStack = player.getStackInHand(hand);
-		if (itemStack.getItem().isIn(FabricToolTags.SHEARS))
-		{
-			if (!this.world.isClient && this.isShearable())
-			{
+		if (itemStack.getItem().isIn(FabricToolTags.SHEARS)) {
+			if (!this.world.isClient && this.isShearable()) {
 				this.sheared(SoundCategory.PLAYERS);
-				itemStack.damage(1, player, ((playerEntity) -> { playerEntity.sendToolBreakStatus(hand); }));
+				itemStack.damage(1, player, ((playerEntity) -> {
+					playerEntity.sendToolBreakStatus(hand);
+				}));
 				info.setReturnValue(ActionResult.SUCCESS);
 			}
-			else
-			{
+			else {
 				info.setReturnValue(ActionResult.CONSUME);
 			}
 			info.cancel();

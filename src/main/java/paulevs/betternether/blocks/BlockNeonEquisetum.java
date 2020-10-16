@@ -41,13 +41,11 @@ import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.shapes.TripleShape;
 
-public class BlockNeonEquisetum extends BlockBaseNotFull implements Fertilizable
-{
+public class BlockNeonEquisetum extends BlockBaseNotFull implements Fertilizable {
 	protected static final VoxelShape SHAPE_SELECTION = Block.createCuboidShape(2, 0, 2, 14, 16, 14);
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
-	
-	public BlockNeonEquisetum()
-	{
+
+	public BlockNeonEquisetum() {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.GREEN)
 				.sounds(BlockSoundGroup.CROP)
@@ -60,88 +58,73 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Fertilizable
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.BOTTOM));
 		setDropItself(false);
 	}
-	
-	public AbstractBlock.OffsetType getOffsetType()
-	{
+
+	public AbstractBlock.OffsetType getOffsetType() {
 		return AbstractBlock.OffsetType.XZ;
 	}
-	
-	@Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
-        stateManager.add(SHAPE);
-    }
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+		stateManager.add(SHAPE);
+	}
+
+	@Override
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		Vec3d vec3d = state.getModelOffset(view, pos);
 		return SHAPE_SELECTION.offset(vec3d.x, vec3d.y, vec3d.z);
 	}
 
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos)
-	{
+	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
 		return 1.0F;
 	}
 
 	@Override
-	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos)
-	{
+	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos) {
 		return true;
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		BlockState up = world.getBlockState(pos.up());
 		return up.getBlock() == this || BlocksHelper.isNetherrack(up);
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (!canPlaceAt(state, world, pos))
 			return Blocks.AIR.getDefaultState();
 		else
 			return state;
 	}
-	
+
 	@Override
-	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack)
-	{
+	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
 		BlockPos upPos = pos.up();
-		if (world.getBlockState(upPos).getBlock() == this)
-		{
+		if (world.getBlockState(upPos).getBlock() == this) {
 			world.setBlockState(upPos, getDefaultState().with(SHAPE, TripleShape.MIDDLE));
 			upPos = upPos.up();
-			if (world.getBlockState(upPos).getBlock() == this)
-			{
+			if (world.getBlockState(upPos).getBlock() == this) {
 				world.setBlockState(upPos, getDefaultState().with(SHAPE, TripleShape.TOP));
 			}
 		}
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0)
-		{
+		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0) {
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		}
-		else
-		{
+		else {
 			return Lists.newArrayList();
 		}
 	}
-	
+
 	@Override
-	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient)
-	{
+	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
 		Mutable blockPos = new Mutable().set(pos);
-		for (int y = pos.getY() - 1; y > 1; y--)
-		{
+		for (int y = pos.getY() - 1; y > 1; y--) {
 			blockPos.setY(y);
 			if (world.getBlockState(blockPos).getBlock() != this)
 				return world.getBlockState(blockPos).getBlock() == Blocks.AIR;
@@ -150,17 +133,14 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Fertilizable
 	}
 
 	@Override
-	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
-	{
+	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
-	{
+	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		Mutable blockPos = new Mutable().set(pos);
-		for (int y = pos.getY(); y > 1; y--)
-		{
+		for (int y = pos.getY(); y > 1; y--) {
 			blockPos.setY(y);
 			if (world.getBlockState(blockPos).getBlock() != this)
 				break;

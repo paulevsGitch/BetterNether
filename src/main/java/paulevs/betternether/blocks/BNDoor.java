@@ -13,16 +13,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import paulevs.betternether.client.IRenderTypeable;
 
-public class BNDoor extends DoorBlock implements IRenderTypeable
-{
-	public BNDoor(Block block)
-	{
+public class BNDoor extends DoorBlock implements IRenderTypeable {
+	public BNDoor(Block block) {
 		super(FabricBlockSettings.of(Material.NETHER_WOOD).sounds(block.getSoundGroup(block.getDefaultState())).nonOpaque());
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		if (state.get(HALF) == DoubleBlockHalf.LOWER)
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		else
@@ -30,8 +27,7 @@ public class BNDoor extends DoorBlock implements IRenderTypeable
 	}
 
 	@Override
-	public BNRenderLayer getRenderLayer()
-	{
+	public BNRenderLayer getRenderLayer() {
 		return BNRenderLayer.CUTOUT;
 	}
 }

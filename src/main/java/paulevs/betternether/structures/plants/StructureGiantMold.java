@@ -13,27 +13,21 @@ import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureGiantMold implements IStructure
-{
+public class StructureGiantMold implements IStructure {
 	Mutable npos = new Mutable();
-	
+
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
-	{
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
 		Block under;
-		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM)
-		{
-			for (int i = 0; i < 10; i++)
-			{
+		if (world.getBlockState(pos.down()).getBlock() == BlocksRegistry.NETHER_MYCELIUM) {
+			for (int i = 0; i < 10; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
 				int y = pos.getY() + random.nextInt(6);
-				for (int j = 0; j < 16; j++)
-				{
+				for (int j = 0; j < 16; j++) {
 					npos.set(x, y - j, z);
 					under = world.getBlockState(npos.down()).getBlock();
-					if (under == BlocksRegistry.NETHER_MYCELIUM)
-					{
+					if (under == BlocksRegistry.NETHER_MYCELIUM) {
 						grow(world, npos, random);
 					}
 				}
@@ -41,12 +35,10 @@ public class StructureGiantMold implements IStructure
 		}
 	}
 
-	public void grow(ServerWorldAccess world, BlockPos pos, Random random)
-	{
+	public void grow(ServerWorldAccess world, BlockPos pos, Random random) {
 		int size = 2 + random.nextInt(6);
 		for (int y = 1; y <= size; y++)
-			if (!world.isAir(pos.up(y)))
-			{
+			if (!world.isAir(pos.up(y))) {
 				if (y == 1)
 					return;
 				size = y - 1;

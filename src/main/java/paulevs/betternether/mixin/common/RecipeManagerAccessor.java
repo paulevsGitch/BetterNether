@@ -11,11 +11,10 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 
 @Mixin(RecipeManager.class)
-public interface RecipeManagerAccessor
-{
+public interface RecipeManagerAccessor {
 	@Accessor("recipes")
 	Map<RecipeType<?>, Map<Identifier, Recipe<?>>> getRecipes();
-	
+
 	@Accessor("recipes")
 	void setRecipes(Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes);
 }

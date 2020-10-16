@@ -12,35 +12,29 @@ import net.minecraft.util.BlockRotation;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 
-public class BlockWhisperingGourdLantern extends Block
-{
+public class BlockWhisperingGourdLantern extends Block {
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-	
-	public BlockWhisperingGourdLantern()
-	{
+
+	public BlockWhisperingGourdLantern() {
 		super(Materials.makeWood(MaterialColor.BLUE).lightLevel(15));
 	}
-	
-	protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
-	{
+
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
-	
+
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation)
-	{
+	public BlockState rotate(BlockState state, BlockRotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror)
-	{
+	public BlockState mirror(BlockState state, BlockMirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
-	
+
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx)
-	{
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
 	}
 }

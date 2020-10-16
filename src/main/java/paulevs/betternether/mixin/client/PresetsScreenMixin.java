@@ -21,13 +21,11 @@ import net.minecraft.world.gen.feature.StructureFeature;
 
 @Environment(EnvType.CLIENT)
 @Mixin(PresetsScreen.class)
-public class PresetsScreenMixin
-{
+public class PresetsScreenMixin {
 	@Shadow
 	private static void addPreset(Text text, ItemConvertible icon, RegistryKey<Biome> registryKey, List<StructureFeature<?>> structures, boolean bl, boolean bl2, boolean bl3, FlatChunkGeneratorLayer... flatChunkGeneratorLayers) {}
-	
-	static
-	{
+
+	static {
 		addPreset(new TranslatableText("betternether.flat_nether"),
 				Blocks.NETHERRACK,
 				BiomeKeys.NETHER_WASTES,

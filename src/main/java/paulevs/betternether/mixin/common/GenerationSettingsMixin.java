@@ -10,8 +10,7 @@ import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 
 @Mixin(GenerationSettings.class)
-public interface GenerationSettingsMixin
-{
+public interface GenerationSettingsMixin {
 	@Accessor("structureFeatures")
 	List<Supplier<ConfiguredStructureFeature<?, ?>>> getStructureFeatures();
 

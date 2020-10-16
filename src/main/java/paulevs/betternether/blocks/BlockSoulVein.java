@@ -28,12 +28,10 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable
-{
+public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 1, 16);
-	
-	public BlockSoulVein()
-	{
+
+	public BlockSoulVein() {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(MaterialColor.PURPLE)
 				.sounds(BlockSoundGroup.CROP)
@@ -43,23 +41,20 @@ public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable
 				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
-	
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		Block block = world.getBlockState(pos.down()).getBlock();
 		return block == Blocks.SOUL_SAND || block == BlocksRegistry.VEINED_SAND;
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (canPlaceAt(state, world, pos))
 			return state;
 		else
@@ -67,32 +62,27 @@ public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable
 	}
 
 	@Override
-	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient)
-	{
+	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
-	{
+	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
-	{
+	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		dropStack(world, pos, new ItemStack(this.asItem()));
 	}
 
-	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack)
-	{
+	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
 		if (world.getBlockState(pos.down()).getBlock() == Blocks.SOUL_SAND)
 			world.setBlockState(pos.down(), BlocksRegistry.VEINED_SAND.getDefaultState());
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		if (builder.get(LootContextParameters.TOOL).getItem() instanceof ShearsItem)
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		else

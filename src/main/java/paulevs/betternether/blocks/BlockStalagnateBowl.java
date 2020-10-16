@@ -21,46 +21,39 @@ import net.minecraft.world.WorldView;
 import paulevs.betternether.blocks.shapes.FoodShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockStalagnateBowl extends BlockBaseNotFull
-{
+public class BlockStalagnateBowl extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(5, 0, 5, 11, 3, 11);
 	public static final EnumProperty<FoodShape> FOOD = EnumProperty.of("food", FoodShape.class);
-	
-	public BlockStalagnateBowl()
-	{
+
+	public BlockStalagnateBowl() {
 		super(FabricBlockSettings.copyOf(BlocksRegistry.STALAGNATE).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(FOOD, FoodShape.NONE));
 	}
-	
+
 	@Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
-        stateManager.add(FOOD);
-    }
-	
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+		stateManager.add(FOOD);
+	}
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(state.get(FOOD).getItem()));
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		BlockPos down = pos.down();
 		return world.getBlockState(down).isSideSolidFullSquare(world, down, Direction.UP);
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (!canPlaceAt(state, world, pos))
 			return Blocks.AIR.getDefaultState();
 		else

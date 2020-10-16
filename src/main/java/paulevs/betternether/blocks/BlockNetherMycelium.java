@@ -22,26 +22,22 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockNetherMycelium extends BlockBase
-{
-public static final BooleanProperty IS_BLUE = BooleanProperty.of("blue");
-	
-	public BlockNetherMycelium()
-	{
+public class BlockNetherMycelium extends BlockBase {
+	public static final BooleanProperty IS_BLUE = BooleanProperty.of("blue");
+
+	public BlockNetherMycelium() {
 		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).materialColor(MaterialColor.GRAY).requiresTool());
 		this.setDefaultState(getStateManager().getDefaultState().with(IS_BLUE, false));
 		this.setDropItself(false);
 	}
-	
+
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
 		stateManager.add(IS_BLUE);
 	}
-	
+
 	@Environment(EnvType.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
-	{
+	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
 		super.randomDisplayTick(state, world, pos, random);
 		world.addParticle(ParticleTypes.MYCELIUM,
 				pos.getX() + random.nextDouble(),
@@ -49,18 +45,17 @@ public static final BooleanProperty IS_BLUE = BooleanProperty.of("blue");
 				pos.getZ() + random.nextDouble(),
 				0.0D, 0.0D, 0.0D);
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool.isEffectiveOn(state))
-		{
+		if (tool.isEffectiveOn(state)) {
 			if (EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0)
 				return Collections.singletonList(new ItemStack(this.asItem()));
-			else 
+			else
 				return Collections.singletonList(new ItemStack(Blocks.NETHERRACK));
 		}
-		else return super.getDroppedStacks(state, builder);
+		else
+			return super.getDroppedStacks(state, builder);
 	}
 }

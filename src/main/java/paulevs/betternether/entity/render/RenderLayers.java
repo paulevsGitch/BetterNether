@@ -7,17 +7,15 @@ import net.minecraft.client.render.RenderPhase.Target;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.util.Identifier;
 
-public class RenderLayers
-{
+public class RenderLayers {
 	public static RenderPhase.Transparency translucentTransparency;
 	public static RenderPhase.WriteMaskState colorMask;
 	public static RenderPhase.Fog fog;
 	public static RenderPhase.DepthTest lEqualDepthTest;
 	public static Layering polygonZLayering;
 	public static Target translucentTarget;
-	
-	public static RenderLayer getFirefly(Identifier texture)
-	{
+
+	public static RenderLayer getFirefly(Identifier texture) {
 		RenderLayer.MultiPhaseParameters multiPhaseParameters = RenderLayer.MultiPhaseParameters.builder()
 				.texture(new RenderPhase.Texture(texture, false, false))
 				.transparency(translucentTransparency)

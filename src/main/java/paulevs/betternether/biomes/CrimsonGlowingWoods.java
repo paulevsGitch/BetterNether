@@ -22,12 +22,10 @@ import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWartBush;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 
-public class CrimsonGlowingWoods extends NetherBiome
-{
+public class CrimsonGlowingWoods extends NetherBiome {
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
-	
-	public CrimsonGlowingWoods(String name)
-	{
+
+	public CrimsonGlowingWoods(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(51, 3, 3)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
@@ -44,10 +42,9 @@ public class CrimsonGlowingWoods extends NetherBiome
 		addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.4F, true);
 	}
-	
+
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
 		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.getDefaultState());
 		else

@@ -34,15 +34,14 @@ import paulevs.betternether.blockentities.BNChestBlockEntity;
 import paulevs.betternether.blocks.BNChest;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlockEntity>
-{
+public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlockEntity> {
 	private static final HashMap<Integer, RenderLayer[]> LAYERS = Maps.newHashMap();
 	private static RenderLayer[] defaultLayer;
-	
+
 	private static final int ID_NORMAL = 0;
 	private static final int ID_LEFT = 1;
 	private static final int ID_RIGHT = 2;
-	
+
 	private final ModelPart partA;
 	private final ModelPart partC;
 	private final ModelPart partB;
@@ -53,8 +52,7 @@ public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlock
 	private final ModelPart partLeftC;
 	private final ModelPart partLeftB;
 
-	public BNChestBlockEntityRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher)
-	{
+	public BNChestBlockEntityRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher) {
 		super(blockEntityRenderDispatcher);
 
 		this.partC = new ModelPart(64, 64, 0, 19);
@@ -85,32 +83,28 @@ public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlock
 		this.partLeftB.addCuboid(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
 		this.partLeftB.pivotY = 8.0F;
 	}
-	
-	public void render(BNChestBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay)
-	{
+
+	public void render(BNChestBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		World world = entity.getWorld();
 		boolean worldExists = world != null;
 		BlockState blockState = worldExists ? entity.getCachedState() : (BlockState) Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
 		ChestType chestType = blockState.contains(ChestBlock.CHEST_TYPE) ? (ChestType) blockState.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
 		Block block = blockState.getBlock();
-		if (block instanceof AbstractChestBlock)
-		{
+		if (block instanceof AbstractChestBlock) {
 			AbstractChestBlock<?> abstractChestBlock = (AbstractChestBlock<?>) block;
 			boolean isDouble = chestType != ChestType.SINGLE;
 			float f = ((Direction) blockState.get(ChestBlock.FACING)).asRotation();
 			PropertySource<? extends ChestBlockEntity> propertySource;
-			
+
 			matrices.push();
 			matrices.translate(0.5D, 0.5D, 0.5D);
 			matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-f));
 			matrices.translate(-0.5D, -0.5D, -0.5D);
-			
-			if (worldExists)
-			{
+
+			if (worldExists) {
 				propertySource = abstractChestBlock.getBlockEntitySource(blockState, world, entity.getPos(), true);
 			}
-			else
-			{
+			else {
 				propertySource = DoubleBlockProperties.PropertyRetriever::getFallback;
 			}
 
@@ -119,73 +113,63 @@ public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlock
 			pitch = 1.0F - pitch * pitch * pitch;
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			int blockLight = ((Int2IntFunction) propertySource.apply(new LightmapCoordinatesRetriever())).applyAsInt(light);
-			
+
 			VertexConsumer vertexConsumer = getConsumer(vertexConsumers, block, chestType);
-			
-			if (isDouble)
-			{
-				if (chestType == ChestType.LEFT)
-				{
+
+			if (isDouble) {
+				if (chestType == ChestType.LEFT) {
 					renderParts(matrices, vertexConsumer, this.partLeftA, this.partLeftB, this.partLeftC, pitch, blockLight, overlay);
 				}
-				else
-				{
+				else {
 					renderParts(matrices, vertexConsumer, this.partRightA, this.partRightB, this.partRightC, pitch, blockLight, overlay);
 				}
 			}
-			else
-			{
+			else {
 				renderParts(matrices, vertexConsumer, this.partA, this.partB, this.partC, pitch, blockLight, overlay);
 			}
 
 			matrices.pop();
 		}
 	}
-	
-	private void renderParts(MatrixStack matrices, VertexConsumer vertices, ModelPart modelPart, ModelPart modelPart2, ModelPart modelPart3, float pitch, int light, int overlay)
-	{
+
+	private void renderParts(MatrixStack matrices, VertexConsumer vertices, ModelPart modelPart, ModelPart modelPart2, ModelPart modelPart3, float pitch, int light, int overlay) {
 		modelPart.pitch = -(pitch * 1.5707964F);
 		modelPart2.pitch = modelPart.pitch;
 		modelPart.render(matrices, vertices, light, overlay);
 		modelPart2.render(matrices, vertices, light, overlay);
 		modelPart3.render(matrices, vertices, light, overlay);
 	}
-	
-	private static RenderLayer getChestTexture(ChestType type, RenderLayer[] layers)
-	{
-		switch(type)
-		{
-		case LEFT:
-			return layers[ID_LEFT];
-		case RIGHT:
-			return layers[ID_RIGHT];
-		case SINGLE:
-		default:
-			return layers[ID_NORMAL];
+
+	private static RenderLayer getChestTexture(ChestType type, RenderLayer[] layers) {
+		switch (type) {
+			case LEFT:
+				return layers[ID_LEFT];
+			case RIGHT:
+				return layers[ID_RIGHT];
+			case SINGLE:
+			default:
+				return layers[ID_NORMAL];
 		}
 	}
-	
-	public static VertexConsumer getConsumer(VertexConsumerProvider provider, Block block, ChestType chestType)
-	{
+
+	public static VertexConsumer getConsumer(VertexConsumerProvider provider, Block block, ChestType chestType) {
 		RenderLayer[] layers = LAYERS.getOrDefault(Block.getRawIdFromState(block.getDefaultState()), defaultLayer);
 		return provider.getBuffer(getChestTexture(chestType, layers));
 	}
-	
-	static
-	{
+
+	static {
 		defaultLayer = new RenderLayer[] {
-			RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal.png")),
-			RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal_left.png")),
-			RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal_right.png"))
+				RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal.png")),
+				RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal_left.png")),
+				RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal_right.png"))
 		};
 		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));
-			if (block instanceof BNChest)
-			{
+			if (block instanceof BNChest) {
 				LAYERS.put(Block.getRawIdFromState(block.getDefaultState()), new RenderLayer[] {
-					RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + ".png")),
-					RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + "_left.png")),
-					RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + "_right.png"))
+						RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + ".png")),
+						RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + "_left.png")),
+						RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + "_right.png"))
 				});
 			}
 		});

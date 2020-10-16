@@ -9,21 +9,17 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
-public class BlockEntityFurnace extends AbstractFurnaceBlockEntity
-{
-	public BlockEntityFurnace()
-	{
+public class BlockEntityFurnace extends AbstractFurnaceBlockEntity {
+	public BlockEntityFurnace() {
 		super(BlockEntitiesRegistry.NETHERRACK_FURNACE, RecipeType.SMELTING);
 	}
 
-	protected Text getContainerName()
-	{
+	protected Text getContainerName() {
 		return new TranslatableText("container.furnace", new Object[0]);
 	}
 
 	@Override
-	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory)
-	{
+	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
 		return new FurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
 	}
 }

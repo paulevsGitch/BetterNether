@@ -29,10 +29,8 @@ import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
-public class NetherJungle extends NetherBiome
-{
-	public NetherJungle(String name)
-	{
+public class NetherJungle extends NetherBiome {
+	public NetherJungle(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(62, 169, 61)
 				.setLoop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
@@ -58,21 +56,20 @@ public class NetherJungle extends NetherBiome
 		addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.2F, true);
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
-		
+
 		addWorldStructures(structureFormat("ruined_temple", -4, StructureType.FLOOR, 10F));
 		addWorldStructures(structureFormat("jungle_temple_altar", -2, StructureType.FLOOR, 10F));
 		addWorldStructures(structureFormat("jungle_temple_2", -2, StructureType.FLOOR, 10F));
-		
+
 		addWorldStructures(structureFormat("jungle_bones_1", 0, StructureType.FLOOR, 20F));
 		addWorldStructures(structureFormat("jungle_bones_2", 0, StructureType.FLOOR, 20F));
 		addWorldStructures(structureFormat("jungle_bones_3", 0, StructureType.FLOOR, 20F));
-		
+
 		this.setNoiseDensity(0.5F);
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
 		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JUNGLE_GRASS.getDefaultState());
 	}
 }

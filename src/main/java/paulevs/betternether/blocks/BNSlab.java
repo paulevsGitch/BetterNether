@@ -11,16 +11,13 @@ import net.minecraft.block.enums.SlabType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 
-public class BNSlab extends SlabBlock
-{
-	public BNSlab(Block block)
-	{
+public class BNSlab extends SlabBlock {
+	public BNSlab(Block block) {
 		super(FabricBlockSettings.copyOf(block).nonOpaque());
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this.asItem(), state.get(TYPE) == SlabType.DOUBLE ? 2 : 1));
 	}
 }

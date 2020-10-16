@@ -23,11 +23,10 @@ import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.structures.CityFeature;
 
 @Mixin(ServerWorld.class)
-public class ServerWorldMixin
-{
+public class ServerWorldMixin {
 	@Inject(method = "<init>*", at = @At("RETURN"))
-	private void onInit(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType, WorldGenerationProgressListener worldGenerationProgressListener, ChunkGenerator chunkGenerator, boolean bl, long seed, List<Spawner> list, boolean bl2, CallbackInfo info)
-	{
+	private void onInit(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType,
+			WorldGenerationProgressListener worldGenerationProgressListener, ChunkGenerator chunkGenerator, boolean bl, long seed, List<Spawner> list, boolean bl2, CallbackInfo info) {
 		BiomesRegistry.registerAllOtherBiomes();
 		BNWorldGenerator.init(seed);
 		CityFeature.initGenerator();

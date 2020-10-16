@@ -8,23 +8,19 @@ import paulevs.betternether.blocks.BNRenderLayer;
 import paulevs.betternether.registry.BlockEntityRenderRegistry;
 import paulevs.betternether.registry.EntityRenderRegistry;
 
-public class BetterNetherClient implements ClientModInitializer
-{
+public class BetterNetherClient implements ClientModInitializer {
 	@Override
-	public void onInitializeClient()
-	{
+	public void onInitializeClient() {
 		registerRenderLayers();
 		EntityRenderRegistry.register();
 		BlockEntityRenderRegistry.register();
 	}
-	
-	private void registerRenderLayers()
-	{
+
+	private void registerRenderLayers() {
 		RenderLayer cutout = RenderLayer.getCutout();
 		RenderLayer translucent = RenderLayer.getTranslucent();
 		Registry.BLOCK.forEach(block -> {
-			if (block instanceof IRenderTypeable)
-			{
+			if (block instanceof IRenderTypeable) {
 				BNRenderLayer layer = ((IRenderTypeable) block).getRenderLayer();
 				if (layer == BNRenderLayer.CUTOUT)
 					BlockRenderLayerMap.INSTANCE.putBlock(block, cutout);

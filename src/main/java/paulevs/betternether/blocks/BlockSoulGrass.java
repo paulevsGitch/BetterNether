@@ -11,19 +11,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
-public class BlockSoulGrass extends BlockNetherGrass
-{
+public class BlockSoulGrass extends BlockNetherGrass {
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		return BlocksHelper.isSoulSand(world.getBlockState(pos.down()));
 	}
-	
+
 	@Environment(EnvType.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
-	{
-		if (random.nextInt(4) == 0)
-		{
+	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+		if (random.nextInt(4) == 0) {
 			world.addParticle(
 					ParticleTypes.PORTAL,
 					pos.getX() + random.nextDouble(),

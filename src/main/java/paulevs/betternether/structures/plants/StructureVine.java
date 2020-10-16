@@ -11,36 +11,31 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockBlackVine;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureVine implements IStructure
-{
+public class StructureVine implements IStructure {
 	private Mutable blockPos = new Mutable();
-	
+
 	private final Block block;
-	
-	public StructureVine(Block block)
-	{
+
+	public StructureVine(Block block) {
 		this.block = block;
 	}
-	
+
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
-	{
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
 		int h = BlocksHelper.downRay(world, pos, 25);
 		if (h < 2)
 			return;
 		h = random.nextInt(h) + 1;
-		
+
 		BlockState bottom = block.getDefaultState().with(BlockBlackVine.BOTTOM, true);
 		BlockState middle = block.getDefaultState().with(BlockBlackVine.BOTTOM, false);
-		
+
 		blockPos.set(pos);
-		for (int y = 0; y < h; y++)
-		{
+		for (int y = 0; y < h; y++) {
 			blockPos.setY(pos.getY() - y);
 			if (world.isAir(blockPos.down()))
 				BlocksHelper.setWithoutUpdate(world, blockPos, middle);
-			else
-			{
+			else {
 				BlocksHelper.setWithoutUpdate(world, blockPos, bottom);
 				return;
 			}

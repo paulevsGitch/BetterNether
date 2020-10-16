@@ -28,12 +28,10 @@ import net.minecraft.world.WorldView;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.ItemsRegistry;
 
-public class BlockAgave extends BlockCommonPlant
-{
+public class BlockAgave extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 14, 14);
-	
-	public BlockAgave()
-	{
+
+	public BlockAgave() {
 		super(FabricBlockSettings.of(Material.CACTUS)
 				.materialColor(MaterialColor.ORANGE_TERRACOTTA)
 				.sounds(BlockSoundGroup.WOOL)
@@ -44,30 +42,26 @@ public class BlockAgave extends BlockCommonPlant
 				.breakByTool(FabricToolTags.SHEARS));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
-	
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		Vec3d vec3d = state.getModelOffset(view, pos);
 		return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
 	}
-	
+
 	@Override
-	public Block.OffsetType getOffsetType()
-	{
+	public Block.OffsetType getOffsetType() {
 		return Block.OffsetType.XZ;
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		Block down = world.getBlockState(pos.down()).getBlock();
 		return down == Blocks.GRAVEL;
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (canPlaceAt(state, world, pos))
 			return state;
 		else
@@ -75,16 +69,13 @@ public class BlockAgave extends BlockCommonPlant
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
-	{
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
 		if (state.get(BlockCommonPlant.AGE) > 1) entity.damage(DamageSource.CACTUS, 1.0F);
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
-		if (state.get(BlockCommonPlant.AGE) == 3)
-		{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+		if (state.get(BlockCommonPlant.AGE) == 3) {
 			return Lists.newArrayList(new ItemStack(this, MHelper.randRange(1, 2, MHelper.RANDOM)), new ItemStack(ItemsRegistry.AGAVE_LEAF, MHelper.randRange(2, 5, MHelper.RANDOM)));
 		}
 		return Lists.newArrayList(new ItemStack(this));

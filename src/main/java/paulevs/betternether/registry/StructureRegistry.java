@@ -61,29 +61,24 @@ import paulevs.betternether.structures.plants.StructureWartSeed;
 import paulevs.betternether.structures.plants.StructureWartTree;
 import paulevs.betternether.structures.plants.StructureWillow;
 
-public class StructureRegistry
-{
+public class StructureRegistry {
 	private static final Map<StructureType, Map<String, IStructure>> REGISTRY;
-	
-	public static void register(String name, IStructure structure, StructureType type)
-	{
+
+	public static void register(String name, IStructure structure, StructureType type) {
 		REGISTRY.get(type).put(name, structure);
 	}
-	
-	public static IStructure getStructure(String name, StructureType type)
-	{
+
+	public static IStructure getStructure(String name, StructureType type) {
 		return REGISTRY.get(type).get(name);
 	}
-	
-	static
-	{
+
+	static {
 		REGISTRY = Maps.newHashMap();
-		for (StructureType type: StructureType.values())
-		{
+		for (StructureType type : StructureType.values()) {
 			Map<String, IStructure> list = Maps.newHashMap();
 			REGISTRY.put(type, list);
 		}
-		
+
 		register("agave", new StructureAgave(), StructureType.FLOOR);
 		register("barrel_cactus", new StructureBarrelCactus(), StructureType.FLOOR);
 		register("big_warped_tree", new StructureBigWarpedTree(), StructureType.FLOOR);
@@ -130,12 +125,12 @@ public class StructureRegistry
 		register("wart_seed", new StructureWartSeed(), StructureType.FLOOR);
 		register("wart_tree", new StructureWartTree(), StructureType.FLOOR);
 		register("willow", new StructureWillow(), StructureType.FLOOR);
-		
+
 		register("black_vine", new StructureBlackVine(), StructureType.CEIL);
 		register("eye", new StructureEye(), StructureType.CEIL);
 		register("flowered_vine", new StructureBloomingVine(), StructureType.CEIL);
 		register("golden_vine", new StructureGoldenVine(), StructureType.CEIL);
-		
+
 		register("lucis", new StructureLucis(), StructureType.WALL);
 		register("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL);
 		register("wall_moss", new StructureWallMoss(), StructureType.WALL);

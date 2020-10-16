@@ -20,10 +20,8 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
 
-public class BlockGiantLucis extends MushroomBlock
-{
-	public BlockGiantLucis()
-	{
+public class BlockGiantLucis extends MushroomBlock {
+	public BlockGiantLucis() {
 		super(FabricBlockSettings.of(Material.SOLID_ORGANIC)
 				.materialColor(MaterialColor.YELLOW)
 				.breakByTool(FabricToolTags.AXES)
@@ -32,10 +30,9 @@ public class BlockGiantLucis extends MushroomBlock
 				.lightLevel(15)
 				.nonOpaque());
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
 		if (EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0) return Lists.newArrayList(new ItemStack(this.asItem()));
 		return Lists.newArrayList(new ItemStack(BlocksRegistry.LUCIS_SPORE, MHelper.randRange(0, 1, MHelper.RANDOM)),

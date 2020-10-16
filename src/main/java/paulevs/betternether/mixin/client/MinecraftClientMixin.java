@@ -9,11 +9,9 @@ import net.minecraft.client.MinecraftClient;
 import paulevs.betternether.registry.BiomesRegistry;
 
 @Mixin(MinecraftClient.class)
-public class MinecraftClientMixin
-{
+public class MinecraftClientMixin {
 	@Inject(method = "<init>*", at = @At("RETURN"))
-	private void onInit(CallbackInfo info)
-	{
+	private void onInit(CallbackInfo info) {
 		BiomesRegistry.registerAllOtherBiomes();
 	}
 }

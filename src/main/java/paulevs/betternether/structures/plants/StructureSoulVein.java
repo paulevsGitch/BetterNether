@@ -11,20 +11,16 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureSoulVein implements IStructure
-{
+public class StructureSoulVein implements IStructure {
 	private Mutable npos = new Mutable();
-	
-	private boolean canPlaceAt(WorldAccess world, BlockPos pos)
-	{
+
+	private boolean canPlaceAt(WorldAccess world, BlockPos pos) {
 		return BlocksRegistry.SOUL_VEIN.canPlaceAt(BlocksRegistry.SOUL_VEIN.getDefaultState(), world, pos);
 	}
-	
+
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random)
-	{
-		if (world.isAir(pos) && canPlaceAt(world, pos))
-		{
+	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+		if (world.isAir(pos) && canPlaceAt(world, pos)) {
 			BlockState state = BlocksRegistry.SOUL_VEIN.getDefaultState();
 			BlockState sand = BlocksRegistry.VEINED_SAND.getDefaultState();
 			int x1 = pos.getX() - 1;
@@ -32,14 +28,11 @@ public class StructureSoulVein implements IStructure
 			int z1 = pos.getZ() - 1;
 			int z2 = pos.getZ() + 1;
 			for (int x = x1; x <= x2; x++)
-				for (int z = z1; z <= z2; z++)
-				{
+				for (int z = z1; z <= z2; z++) {
 					int y = pos.getY() + 2;
-					for (int j = 0; j < 4; j++)
-					{
+					for (int j = 0; j < 4; j++) {
 						npos.set(x, y - j, z);
-						if (world.isAir(npos) && canPlaceAt(world, npos))
-						{
+						if (world.isAir(npos) && canPlaceAt(world, npos)) {
 							BlocksHelper.setWithoutUpdate(world, npos, state);
 							BlocksHelper.setWithoutUpdate(world, npos.down(), sand);
 						}

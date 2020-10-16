@@ -27,39 +27,31 @@ import net.minecraft.world.World;
 import paulevs.betternether.blockentities.BNBarrelBlockEntity;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
-public class BNBarrel extends BarrelBlock
-{
-	public BNBarrel(Block source)
-	{
+public class BNBarrel extends BarrelBlock {
+	public BNBarrel(Block source) {
 		super(FabricBlockSettings.copyOf(source).nonOpaque());
 	}
-	
+
 	@Override
-	public BlockEntity createBlockEntity(BlockView world)
-	{
+	public BlockEntity createBlockEntity(BlockView world) {
 		return BlockEntitiesRegistry.BARREL.instantiate();
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		List<ItemStack> drop = super.getDroppedStacks(state, builder);
 		drop.add(new ItemStack(this.asItem()));
 		return drop;
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
-	{
-		if (world.isClient)
-		{
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (world.isClient) {
 			return ActionResult.SUCCESS;
 		}
-		else
-		{
+		else {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof BNBarrelBlockEntity)
-			{
+			if (blockEntity instanceof BNBarrelBlockEntity) {
 				player.openHandledScreen((BNBarrelBlockEntity) blockEntity);
 				player.incrementStat(Stats.OPEN_BARREL);
 				PiglinBrain.onGuardedBlockInteracted(player, true);
@@ -70,29 +62,23 @@ public class BNBarrel extends BarrelBlock
 	}
 
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
-	{
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof BNBarrelBlockEntity)
-		{
+		if (blockEntity instanceof BNBarrelBlockEntity) {
 			((BNBarrelBlockEntity) blockEntity).tick();
 		}
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state)
-	{
+	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
-	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack)
-	{
-		if (itemStack.hasCustomName())
-		{
+	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+		if (itemStack.hasCustomName()) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof BNBarrelBlockEntity)
-			{
+			if (blockEntity instanceof BNBarrelBlockEntity) {
 				((BNBarrelBlockEntity) blockEntity).setCustomName(itemStack.getName());
 			}
 		}

@@ -8,34 +8,32 @@ import net.minecraft.client.render.RenderPhase;
 import paulevs.betternether.entity.render.RenderLayers;
 
 @Mixin(RenderPhase.class)
-public class RenderPhaseMixin
-{
+public class RenderPhaseMixin {
 	@Shadow
 	@Final
 	protected static RenderPhase.Transparency TRANSLUCENT_TRANSPARENCY;
-	
+
 	@Shadow
 	@Final
 	protected static RenderPhase.WriteMaskState COLOR_MASK;
-	
+
 	@Shadow
 	@Final
 	protected static RenderPhase.Fog FOG;
-	
+
 	@Shadow
 	@Final
 	protected static RenderPhase.DepthTest LEQUAL_DEPTH_TEST;
-	
+
 	@Shadow
 	@Final
 	protected static RenderPhase.Layering POLYGON_OFFSET_LAYERING;
-	
+
 	@Shadow
 	@Final
 	protected static RenderPhase.Target CLOUDS_TARGET;
-	
-	static
-	{
+
+	static {
 		RenderLayers.translucentTransparency = TRANSLUCENT_TRANSPARENCY;
 		RenderLayers.colorMask = COLOR_MASK;
 		RenderLayers.fog = FOG;

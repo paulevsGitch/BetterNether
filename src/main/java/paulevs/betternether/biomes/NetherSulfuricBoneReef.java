@@ -18,10 +18,8 @@ import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSepiaBoneGrass;
 
-public class NetherSulfuricBoneReef extends NetherBiome
-{
-	public NetherSulfuricBoneReef(String name)
-	{
+public class NetherSulfuricBoneReef extends NetherBiome {
+	public NetherSulfuricBoneReef(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(154, 144, 49)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
@@ -29,22 +27,21 @@ public class NetherSulfuricBoneReef extends NetherBiome
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setStalactites(false)
 				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.ASH, 0.01F)));
-		
+
 		addStructure("bone_stalactite", new StructureStalactiteFloor(BlocksRegistry.BONE_STALACTITE, BlocksRegistry.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
-		
+
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("bone_reef", new StructureBoneReef(), StructureType.FLOOR, 0.2F, true);
 		addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructureType.FLOOR, 0.02F, true);
 		addStructure("sulfuric_bone_grass", new StructureSepiaBoneGrass(), StructureType.FLOOR, 0.1F, false);
-		
+
 		addStructure("bone_stalagmite", new StructureStalactiteCeil(BlocksRegistry.BONE_STALACTITE, BlocksRegistry.BONE_BLOCK), StructureType.CEIL, 0.05F, true);
-		
+
 		addStructure("golden_lumabus_vine", new StructureGoldenLumabusVine(), StructureType.CEIL, 0.3F, true);
 	}
-	
+
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
 		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SEPIA_MUSHROOM_GRASS.getDefaultState());
 	}
 }

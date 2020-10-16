@@ -13,40 +13,33 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntitySkull;
 import paulevs.betternether.entity.model.ModelSkull;
 
-public class RenderSkull extends MobEntityRenderer<EntitySkull, AnimalModel<EntitySkull>>
-{
+public class RenderSkull extends MobEntityRenderer<EntitySkull, AnimalModel<EntitySkull>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/skull.png");
-	
-	public RenderSkull(EntityRenderDispatcher renderManager)
-	{
+
+	public RenderSkull(EntityRenderDispatcher renderManager) {
 		super(renderManager, new ModelSkull(), 0.7F);
 		this.addFeature(new GlowFeatureRenderer(this));
 	}
-	
+
 	@Override
-	public Identifier getTexture(EntitySkull entity)
-	{
+	public Identifier getTexture(EntitySkull entity) {
 		return TEXTURE;
 	}
-	
-	static class GlowFeatureRenderer extends EyesFeatureRenderer<EntitySkull, AnimalModel<EntitySkull>>
-	{
+
+	static class GlowFeatureRenderer extends EyesFeatureRenderer<EntitySkull, AnimalModel<EntitySkull>> {
 		private static final RenderLayer SKIN = RenderLayer.getEntityTranslucent(new Identifier(BetterNether.MOD_ID, "textures/entity/skull_glow.png"));
 
-		public GlowFeatureRenderer(FeatureRendererContext<EntitySkull, AnimalModel<EntitySkull>> featureRendererContext)
-		{
+		public GlowFeatureRenderer(FeatureRendererContext<EntitySkull, AnimalModel<EntitySkull>> featureRendererContext) {
 			super(featureRendererContext);
 		}
 
-		public RenderLayer getEyesTexture()
-		{
+		public RenderLayer getEyesTexture() {
 			return SKIN;
 		}
 	}
-	
+
 	@Override
-	protected int getBlockLight(EntitySkull entity, BlockPos pos)
-	{
+	protected int getBlockLight(EntitySkull entity, BlockPos pos) {
 		return MathHelper.clamp(super.getBlockLight(entity, pos), 7, 15);
 	}
 }

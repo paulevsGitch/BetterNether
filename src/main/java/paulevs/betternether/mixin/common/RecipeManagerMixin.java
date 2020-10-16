@@ -30,33 +30,30 @@ import net.minecraft.world.World;
 import paulevs.betternether.recipes.BNRecipeManager;
 
 @Mixin(RecipeManager.class)
-public class RecipeManagerMixin
-{
+public class RecipeManagerMixin {
 	@Shadow
 	private Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes;
-	
+
 	@Inject(method = "apply", at = @At(value = "RETURN"))
-	private void setRecipes(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo info)
-	{
+	private void setRecipes(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo info) {
 		recipes = BNRecipeManager.getMap(recipes);
 	}
 
 	@Inject(method = "deserialize", at = @At(value = "HEAD"), cancellable = true)
-	private static void checkMissing(Identifier id, JsonObject json, CallbackInfoReturnable<Recipe<?>> info)
-	{
-		if (id.getNamespace().equals("techreborn") && !FabricLoader.getInstance().isModLoaded("techreborn"))
-		{
+	private static void checkMissing(Identifier id, JsonObject json, CallbackInfoReturnable<Recipe<?>> info) {
+		if (id.getNamespace().equals("techreborn") && !FabricLoader.getInstance().isModLoaded("techreborn")) {
 			info.setReturnValue(BNRecipeManager.makeEmtyRecipe(id));
 			info.cancel();
 		}
 	}
-	
+
 	@Shadow
-	private <C extends Inventory, T extends Recipe<C>> Map<Identifier, Recipe<C>> getAllOfType(RecipeType<T> type) { return null; }
-	
+	private <C extends Inventory, T extends Recipe<C>> Map<Identifier, Recipe<C>> getAllOfType(RecipeType<T> type) {
+		return null;
+	}
+
 	@Overwrite
-	public <C extends Inventory, T extends Recipe<C>> Optional<T> getFirstMatch(RecipeType<T> type, C inventory, World world)
-	{
+	public <C extends Inventory, T extends Recipe<C>> Optional<T> getFirstMatch(RecipeType<T> type, C inventory, World world) {
 		Collection<Recipe<C>> values = getAllOfType(type).values();
 		List<Recipe<C>> list = new ArrayList<Recipe<C>>(values);
 		list.sort((v1, v2) -> {
@@ -64,9 +61,9 @@ public class RecipeManagerMixin
 			boolean b2 = v2.getId().getNamespace().equals("minecraft");
 			return b1 ^ b2 ? (b1 ? 1 : -1) : 0;
 		});
-		
+
 		return list.stream().flatMap((recipe) -> {
-	         return Util.stream(type.get(recipe, world, inventory));
-	      }).findFirst();
-	   }
+			return Util.stream(type.get(recipe, world, inventory));
+		}).findFirst();
+	}
 }

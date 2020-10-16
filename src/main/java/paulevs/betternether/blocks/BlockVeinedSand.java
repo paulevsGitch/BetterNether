@@ -15,30 +15,26 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockVeinedSand extends BlockBase
-{
-	public BlockVeinedSand()
-	{
+public class BlockVeinedSand extends BlockBase {
+	public BlockVeinedSand() {
 		super(FabricBlockSettings.of(Material.AGGREGATE)
 				.materialColor(MaterialColor.BROWN)
 				.sounds(BlockSoundGroup.SAND)
 				.strength(0.5F, 0.5F));
 		this.setDropItself(false);
 	}
-	
+
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (world.getBlockState(pos.up()).getBlock() == BlocksRegistry.SOUL_VEIN)
 			return state;
 		else
 			return Blocks.SOUL_SAND.getDefaultState();
 	}
-	
+
 	@Override
 	@Environment(EnvType.CLIENT)
-	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
-	{
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
 		return new ItemStack(Blocks.SOUL_SAND);
 	}
 }

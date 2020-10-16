@@ -15,10 +15,8 @@ import paulevs.betternether.structures.plants.StructureAgave;
 import paulevs.betternether.structures.plants.StructureBarrelCactus;
 import paulevs.betternether.structures.plants.StructureNetherCactus;
 
-public class NetherGravelDesert extends NetherBiome
-{
-	public NetherGravelDesert(String name)
-	{
+public class NetherGravelDesert extends NetherBiome {
+	public NetherGravelDesert(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(170, 48, 0)
 				.setLoop(SoundsRegistry.AMBIENT_GRAVEL_DESERT)
@@ -32,19 +30,16 @@ public class NetherGravelDesert extends NetherBiome
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
-		for (int i = 0; i < 1 + random.nextInt(3); i++)
-		{
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
+		for (int i = 0; i < 1 + random.nextInt(3); i++) {
 			BlockPos p2 = pos.down(i);
 			if (BlocksHelper.isNetherGround(world.getBlockState(p2)))
-				if (world.isAir(p2.down()))
-				{
-					BlocksHelper.setWithoutUpdate(world, p2, Blocks.NETHERRACK.getDefaultState());
-					return;
+				if (world.isAir(p2.down())) {
+				BlocksHelper.setWithoutUpdate(world, p2, Blocks.NETHERRACK.getDefaultState());
+				return;
 				}
 				else
-					BlocksHelper.setWithoutUpdate(world, p2, Blocks.GRAVEL.getDefaultState());
+				BlocksHelper.setWithoutUpdate(world, p2, Blocks.GRAVEL.getDefaultState());
 		}
 	}
 }

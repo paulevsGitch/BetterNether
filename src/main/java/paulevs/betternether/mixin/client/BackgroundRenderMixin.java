@@ -18,22 +18,17 @@ import net.minecraft.fluid.Fluids;
 import paulevs.betternether.BetterNether;
 
 @Mixin(BackgroundRenderer.class)
-public class BackgroundRenderMixin
-{
+public class BackgroundRenderMixin {
 	@Inject(method = "applyFog", at = @At(value = "HEAD"), cancellable = true)
-	private static void applyThickFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo info)
-	{
+	private static void applyThickFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo info) {
 		FluidState fluidState = camera.getSubmergedFluidState();
 		Entity entity = camera.getFocusedEntity();
-		if (thickFog)
-		{
-			if (fluidState.getFluid() == Fluids.EMPTY)
-			{
-				if (!(entity instanceof LivingEntity && ((LivingEntity) entity).hasStatusEffect(StatusEffects.BLINDNESS)))
-				{
+		if (thickFog) {
+			if (fluidState.getFluid() == Fluids.EMPTY) {
+				if (!(entity instanceof LivingEntity && ((LivingEntity) entity).hasStatusEffect(StatusEffects.BLINDNESS))) {
 					float start = viewDistance * BetterNether.getFogStart();
 					float end = viewDistance * BetterNether.getFogEnd();
-					
+
 					RenderSystem.fogStart(start);
 					RenderSystem.fogEnd(end);
 					RenderSystem.fogMode(GlStateManager.FogMode.LINEAR);

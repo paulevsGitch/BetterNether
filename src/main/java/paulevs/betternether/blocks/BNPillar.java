@@ -12,26 +12,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import paulevs.betternether.blocks.materials.Materials;
 
-public class BNPillar extends PillarBlock
-{
-	public BNPillar(Settings settings)
-	{
+public class BNPillar extends PillarBlock {
+	public BNPillar(Settings settings) {
 		super(settings);
 	}
-	
-	public BNPillar(Block block)
-	{
+
+	public BNPillar(Block block) {
 		super(FabricBlockSettings.copyOf(block));
 	}
-	
-	public BNPillar(MaterialColor color)
-	{
+
+	public BNPillar(MaterialColor color) {
 		super(Materials.makeWood(color));
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this));
 	}
 }

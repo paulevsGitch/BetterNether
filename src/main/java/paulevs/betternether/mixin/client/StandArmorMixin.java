@@ -20,25 +20,19 @@ import paulevs.betternether.BetterNether;
 
 @Environment(EnvType.CLIENT)
 @Mixin(ArmorStandEntityRenderer.class)
-public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStandEntity, ArmorStandArmorEntityModel>
-{
-	public StandArmorMixin(EntityRenderDispatcher entityRenderDispatcher, ArmorStandArmorEntityModel entityModel, float f)
-	{
+public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStandEntity, ArmorStandArmorEntityModel> {
+	public StandArmorMixin(EntityRenderDispatcher entityRenderDispatcher, ArmorStandArmorEntityModel entityModel, float f) {
 		super(entityRenderDispatcher, entityModel, f);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Inject(method = "<init>*", at = @At(value = "RETURN"))
-	private void onInit(EntityRenderDispatcher entityRenderDispatcher, CallbackInfo info)
-	{
-		if (BetterNether.hasThinArmor())
-		{
+	private void onInit(EntityRenderDispatcher entityRenderDispatcher, CallbackInfo info) {
+		if (BetterNether.hasThinArmor()) {
 			Iterator<FeatureRenderer<ArmorStandEntity, ArmorStandArmorEntityModel>> iterator = this.features.iterator();
-			while (iterator.hasNext())
-			{
+			while (iterator.hasNext()) {
 				FeatureRenderer<ArmorStandEntity, ArmorStandArmorEntityModel> feature = iterator.next();
-				if (feature instanceof ArmorFeatureRenderer)
-				{
+				if (feature instanceof ArmorFeatureRenderer) {
 					this.features.remove(feature);
 					break;
 				}

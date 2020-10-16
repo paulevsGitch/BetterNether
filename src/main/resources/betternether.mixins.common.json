@@ -28,7 +28,8 @@
 	"NetherFortressFeatureMixin",
 	"LocateCommandMixin",
 	"MinecraftServerMixin",
-	"RecipeManagerAccessor"
+	"RecipeManagerAccessor",
+	"ChunkSerializerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

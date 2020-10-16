@@ -14,19 +14,16 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.util.math.Direction;
 import paulevs.betternether.client.IRenderTypeable;
 
-public class BNPane extends PaneBlock implements IRenderTypeable
-{
+public class BNPane extends PaneBlock implements IRenderTypeable {
 	private boolean dropSelf;
-	
-	public BNPane(Block block, boolean dropSelf)
-	{
+
+	public BNPane(Block block, boolean dropSelf) {
 		super(FabricBlockSettings.copyOf(block).strength(0.3F, 0.3F).nonOpaque());
 		this.dropSelf = dropSelf;
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		if (dropSelf)
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		else
@@ -34,23 +31,18 @@ public class BNPane extends PaneBlock implements IRenderTypeable
 	}
 
 	@Override
-	public BNRenderLayer getRenderLayer()
-	{
+	public BNRenderLayer getRenderLayer() {
 		return BNRenderLayer.TRANSLUCENT;
 	}
 
 	@Environment(EnvType.CLIENT)
-	public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing)
-	{
-		if (neighbor.getBlock() == this)
-		{
-			if (!facing.getAxis().isHorizontal())
-			{
+	public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing) {
+		if (neighbor.getBlock() == this) {
+			if (!facing.getAxis().isHorizontal()) {
 				return false;
 			}
 
-			if (state.get(FACING_PROPERTIES.get(facing)) && neighbor.get(FACING_PROPERTIES.get(facing.getOpposite())))
-			{
+			if (state.get(FACING_PROPERTIES.get(facing)) && neighbor.get(FACING_PROPERTIES.get(facing.getOpposite()))) {
 				return true;
 			}
 		}

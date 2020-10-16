@@ -18,14 +18,12 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.MathHelper;
 import paulevs.betternether.MHelper;
 
-public class BlockOre extends OreBlock
-{
+public class BlockOre extends OreBlock {
 	private final Item dropItem;
 	private final int minCount;
 	private final int maxCount;
-	
-	public BlockOre(Item drop, int minCount, int maxCount)
-	{
+
+	public BlockOre(Item drop, int minCount, int maxCount) {
 		super(FabricBlockSettings.of(Material.STONE)
 				.requiresTool()
 				.hardness(3F)
@@ -36,13 +34,11 @@ public class BlockOre extends OreBlock
 		this.minCount = minCount;
 		this.maxCount = maxCount;
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool.isEffectiveOn(state))
-		{
+		if (tool.isEffectiveOn(state)) {
 			int fortune = EnchantmentHelper.getLevel(Enchantments.FORTUNE, tool);
 			int min = MathHelper.clamp(minCount + fortune, 0, maxCount);
 			if (min == maxCount)

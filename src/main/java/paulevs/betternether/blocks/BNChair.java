@@ -23,71 +23,62 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.registry.EntityRegistry;
 
-public class BNChair extends BlockBaseNotFull
-{
+public class BNChair extends BlockBaseNotFull {
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	private float height;
-	
-	public BNChair(Block block, int height)
-	{
+
+	public BNChair(Block block, int height) {
 		super(FabricBlockSettings.copyOf(block).nonOpaque());
 		this.height = (float) (height - 3F) / 16F;
 	}
-	
+
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING);
 	}
-	
+
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx)
-	{
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
 	}
-	
+
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
-	{
-		/*if (world.isClient)
-			player.sendMessage(new TranslatableText("Sorry, furniture is not working on 20w19a\n")
-					.append("(it will teleport you under bedrock)\n")
-					.append("I will fix it later"), false);
-		return ActionResult.FAIL;*/
-		
-		if (world.isClient)
-		{
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		/*
+		 * if (world.isClient) player.sendMessage(new TranslatableText(
+		 * "Sorry, furniture is not working on 20w19a\n") .append(
+		 * "(it will teleport you under bedrock)\n") .append(
+		 * "I will fix it later"), false); return ActionResult.FAIL;
+		 */
+
+		if (world.isClient) {
 			return ActionResult.FAIL;
 		}
-		else
-		{
+		else {
 			if (player.hasVehicle() || player.isSpectator())
 				return ActionResult.FAIL;
-			
+
 			double px = pos.getX() + 0.5;
 			double py = pos.getY() + height;
 			double pz = pos.getZ() + 0.5;
-			
-			List<EntityChair> active = world.getEntitiesByClass(EntityChair.class, new Box(pos), new Predicate<EntityChair>()
-			{
+
+			List<EntityChair> active = world.getEntitiesByClass(EntityChair.class, new Box(pos), new Predicate<EntityChair>() {
 				@Override
-				public boolean test(EntityChair entity)
-				{
+				public boolean test(EntityChair entity) {
 					return entity.hasPlayerRider();
 				}
 			});
 			if (!active.isEmpty())
 				return ActionResult.FAIL;
-			
+
 			float yaw = state.get(FACING).getOpposite().asRotation();
-			
+
 			EntityChair entity = EntityRegistry.CHAIR.create(world);
 			entity.refreshPositionAndAngles(px, py, pz, yaw, 0);
 			entity.setNoGravity(true);
 			entity.setSilent(true);
 			entity.setInvisible(true);
-			if (world.spawnEntity(entity))
-			{
+			if (world.spawnEntity(entity)) {
 				player.startRiding(entity, true);
 				player.setYaw(yaw);
 				player.setHeadYaw(yaw);
@@ -96,16 +87,14 @@ public class BNChair extends BlockBaseNotFull
 			return ActionResult.FAIL;
 		}
 	}
-	
+
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation)
-	{
+	public BlockState rotate(BlockState state, BlockRotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror)
-	{
+	public BlockState mirror(BlockState state, BlockMirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 }

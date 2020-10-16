@@ -31,26 +31,22 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 
-public class EntityNaga extends HostileEntity implements RangedAttackMob, Monster
-{
-	public EntityNaga(EntityType<? extends EntityNaga> type, World world)
-	{
+public class EntityNaga extends HostileEntity implements RangedAttackMob, Monster {
+	public EntityNaga(EntityType<? extends EntityNaga> type, World world) {
 		super(type, world);
 		this.experiencePoints = 10;
 	}
 
 	@Override
-	protected void initGoals()
-	{
+	protected void initGoals() {
 		this.targetSelector.add(1, new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
 		this.goalSelector.add(2, new ProjectileAttackGoal(this, 1.0D, 40, 20.0F));
 		this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0D));
 		this.goalSelector.add(5, new LookAroundGoal(this));
 	}
-	
-	public static DefaultAttributeContainer getAttributeContainer()
-	{
+
+	public static DefaultAttributeContainer getAttributeContainer() {
 		return MobEntity
 				.createMobAttributes()
 				.add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
@@ -62,8 +58,7 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 	}
 
 	@Override
-	public void attack(LivingEntity target, float f)
-	{
+	public void attack(LivingEntity target, float f) {
 		EntityNagaProjectile projectile = EntityRegistry.NAGA_PROJECTILE.create(world);
 		projectile.updatePositionAndAngles(getX(), getEyeY(), getZ(), 0, 0);
 		projectile.setParams(this, target);
@@ -72,49 +67,41 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 	}
 
 	@Override
-	public EntityGroup getGroup()
-	{
+	public EntityGroup getGroup() {
 		return EntityGroup.UNDEAD;
 	}
-	
+
 	@Override
-	public boolean canHaveStatusEffect(StatusEffectInstance effect)
-	{
+	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
 		return effect.getEffectType() == StatusEffects.WITHER ? false : super.canHaveStatusEffect(effect);
 	}
-	
+
 	@Override
-	public SoundEvent getAmbientSound()
-	{
+	public SoundEvent getAmbientSound() {
 		return SoundsRegistry.MOB_NAGA_IDLE;
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source)
-	{
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.ENTITY_SKELETON_HURT;
 	}
 
 	@Override
-	protected SoundEvent getDeathSound()
-	{
+	protected SoundEvent getDeathSound() {
 		return SoundEvents.ENTITY_SKELETON_DEATH;
 	}
 
 	@Override
-	protected boolean isDisallowedInPeaceful()
-	{
+	protected boolean isDisallowedInPeaceful() {
 		return true;
 	}
 
 	@Override
-	public int getBodyYawSpeed()
-	{
+	public int getBodyYawSpeed() {
 		return 1;
 	}
-	
-	public static boolean canSpawn(EntityType<? extends EntityNaga> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random)
-	{
+
+	public static boolean canSpawn(EntityType<? extends EntityNaga> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
 		return world.getDifficulty() != Difficulty.PEACEFUL && world.getLightLevel(pos) < 8;
 	}
 }

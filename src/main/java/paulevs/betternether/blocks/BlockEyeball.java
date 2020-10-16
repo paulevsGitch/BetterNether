@@ -17,10 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 
-public class BlockEyeball extends BlockEyeBase
-{
-	public BlockEyeball()
-	{
+public class BlockEyeball extends BlockEyeBase {
+	public BlockEyeball() {
 		super(FabricBlockSettings.of(Material.WOOD)
 				.materialColor(MaterialColor.BROWN)
 				.sounds(BlockSoundGroup.SLIME)
@@ -30,30 +28,24 @@ public class BlockEyeball extends BlockEyeBase
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
-	{
-		if (random.nextInt(5) == 0)
-		{
+	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+		if (random.nextInt(5) == 0) {
 			double x = pos.getX() + random.nextDouble();
 			double y = pos.getY() + random.nextDouble() * 0.3;
 			double z = pos.getZ() + random.nextDouble();
 			world.addParticle(ParticleTypes.DRIPPING_WATER, x, y, z, 0, 0, 0);
 		}
 	}
-	
+
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
-	{
-		if (random.nextInt(64) == 0)
-		{
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		if (random.nextInt(64) == 0) {
 			int y = BlocksHelper.downRay(world, pos, 64) + 1;
 			BlockPos down = pos.down(y);
 			BlockState cauldron = world.getBlockState(down);
-			if (cauldron.getBlock() == Blocks.CAULDRON)
-			{
+			if (cauldron.getBlock() == Blocks.CAULDRON) {
 				int level = cauldron.get(CauldronBlock.LEVEL);
-				if (level < 3)
-				{
+				if (level < 3) {
 					world.setBlockState(down, cauldron.with(CauldronBlock.LEVEL, level + 1));
 				}
 			}

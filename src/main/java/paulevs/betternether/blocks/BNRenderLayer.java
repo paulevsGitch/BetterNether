@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-public enum BNRenderLayer
-{
-	SOLID,
-	CUTOUT,
-	TRANSLUCENT;
+public enum BNRenderLayer {
+	SOLID, CUTOUT, TRANSLUCENT;
 }

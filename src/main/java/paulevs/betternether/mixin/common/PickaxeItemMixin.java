@@ -17,29 +17,23 @@ import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.registry.BlocksRegistry;
 
 @Mixin(PickaxeItem.class)
-public abstract class PickaxeItemMixin extends MiningToolItem
-{
-	protected PickaxeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Set<Block> effectiveBlocks, Settings settings)
-	{
+public abstract class PickaxeItemMixin extends MiningToolItem {
+	protected PickaxeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Set<Block> effectiveBlocks, Settings settings) {
 		super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
 	}
 
 	@Inject(method = "isEffectiveOn", at = @At(value = "HEAD"), cancellable = true)
-	private void effectiveOn(BlockState state, CallbackInfoReturnable<Boolean> info)
-	{
+	private void effectiveOn(BlockState state, CallbackInfoReturnable<Boolean> info) {
 		int level = this.getMaterial().getMiningLevel();
-		if (state.getBlock() == BlocksRegistry.CINCINNASITE_ORE)
-		{
+		if (state.getBlock() == BlocksRegistry.CINCINNASITE_ORE) {
 			info.setReturnValue(level >= 1);
 			info.cancel();
 		}
-		else if (state.getBlock() == BlocksRegistry.NETHER_RUBY_ORE)
-		{
+		else if (state.getBlock() == BlocksRegistry.NETHER_RUBY_ORE) {
 			info.setReturnValue(level >= 2);
 			info.cancel();
 		}
-		else if (state.getBlock() instanceof BNObsidian || state.getBlock() instanceof BlockObsidianGlass)
-		{
+		else if (state.getBlock() instanceof BNObsidian || state.getBlock() instanceof BlockObsidianGlass) {
 			info.setReturnValue(level >= 3);
 			info.cancel();
 		}

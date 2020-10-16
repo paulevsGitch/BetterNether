@@ -16,21 +16,15 @@ import net.minecraft.world.World;
 import paulevs.betternether.BetterNether;
 
 @Mixin(LavaFluid.class)
-public class LavaFluidMixin
-{
+public class LavaFluidMixin {
 	@Inject(method = "randomDisplayTick", at = @At(value = "HEAD"))
-	private void displayTick(World world, BlockPos blockPos, FluidState fluidState, Random random, CallbackInfo info)
-	{
-		if (BetterNether.hasLavafallParticles() && !fluidState.isStill())
-		{
+	private void displayTick(World world, BlockPos blockPos, FluidState fluidState, Random random, CallbackInfo info) {
+		if (BetterNether.hasLavafallParticles() && !fluidState.isStill()) {
 			FluidState state = world.getFluidState(blockPos.down());
-			if (state.isEmpty() || state.isStill())
-			{
+			if (state.isEmpty() || state.isStill()) {
 				state = world.getFluidState(blockPos.up(3));
-				if (!state.isEmpty() && !state.isStill())
-				{
-					for (int i = 0; i < 10; i++)
-					{
+				if (!state.isEmpty() && !state.isStill()) {
+					for (int i = 0; i < 10; i++) {
 						spawnParticle(ParticleTypes.LARGE_SMOKE, world, random, blockPos);
 						spawnParticle(ParticleTypes.SMOKE, world, random, blockPos);
 						spawnParticle(ParticleTypes.LAVA, world, random, blockPos);
@@ -39,9 +33,8 @@ public class LavaFluidMixin
 			}
 		}
 	}
-	
-	private void spawnParticle(ParticleEffect effect, World world, Random random, BlockPos pos)
-	{
+
+	private void spawnParticle(ParticleEffect effect, World world, Random random, BlockPos pos) {
 		double angle = random.nextDouble() * Math.PI * 2;
 		world.addParticle(ParticleTypes.LARGE_SMOKE,
 				pos.getX() + random.nextDouble(),

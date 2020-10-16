@@ -20,32 +20,25 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 
 @Mixin(BoneMealItem.class)
-public class BoneMealMixin
-{
-	private static final Direction[] DIR = new Direction[] {Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
+public class BoneMealMixin {
+	private static final Direction[] DIR = new Direction[] { Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST };
 	private static final Mutable POS = new Mutable();
-	
+
 	@Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
-	private void onUse(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info)
-	{
+	private void onUse(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
 		World world = context.getWorld();
 		BlockPos blockPos = context.getBlockPos();
-		if (!world.isClient)
-		{
-			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos)))
-			{
+		if (!world.isClient) {
+			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos))) {
 				BlockState nylium = getNylium(world, blockPos);
 				boolean consume = true;
-				if (nylium != null && world.getBlockState(blockPos).getBlock() == Blocks.NETHERRACK)
-				{
+				if (nylium != null && world.getBlockState(blockPos).getBlock() == Blocks.NETHERRACK) {
 					BlocksHelper.setWithoutUpdate(world, blockPos, nylium);
 				}
-				else
-				{
+				else {
 					consume = growGrass(world, blockPos);
 				}
-				if (consume)
-				{
+				if (consume) {
 					if (!context.getPlayer().isCreative())
 						context.getStack().decrement(1);
 					world.syncWorldEvent(2005, blockPos, 0);
@@ -53,10 +46,8 @@ public class BoneMealMixin
 					info.cancel();
 				}
 			}
-			else if (BlocksHelper.isSoulSand(world.getBlockState(blockPos)))
-			{
-				if (growGrass(world, blockPos))
-				{
+			else if (BlocksHelper.isSoulSand(world.getBlockState(blockPos))) {
+				if (growGrass(world, blockPos)) {
 					world.syncWorldEvent(2005, blockPos, 0);
 					if (!context.getPlayer().isCreative())
 						context.getStack().decrement(1);
@@ -66,27 +57,22 @@ public class BoneMealMixin
 			}
 		}
 	}
-	
-	private boolean growGrass(World world, BlockPos pos)
-	{
+
+	private boolean growGrass(World world, BlockPos pos) {
 		int y1 = pos.getY() + 3;
 		int y2 = pos.getY() - 3;
 		boolean result = false;
-		for (int i = 0; i < 64; i++)
-		{
+		for (int i = 0; i < 64; i++) {
 			int x = (int) (pos.getX() + world.random.nextGaussian() * 2);
 			int z = (int) (pos.getZ() + world.random.nextGaussian() * 2);
 			POS.setX(x);
 			POS.setZ(z);
-			for (int y = y1; y >= y2; y--)
-			{
+			for (int y = y1; y >= y2; y--) {
 				POS.setY(y);
 				BlockPos down = POS.down();
-				if (world.isAir(POS) && !world.isAir(down))
-				{
+				if (world.isAir(POS) && !world.isAir(down)) {
 					BlockState grass = getGrassState(world, down);
-					if (grass != null)
-					{
+					if (grass != null) {
 						BlocksHelper.setWithoutUpdate(world, POS, grass);
 						if (world.random.nextInt(3) == 0 && world.getBlockState(down).getBlock() == Blocks.NETHERRACK)
 							BlocksHelper.setWithoutUpdate(world, down, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
@@ -98,9 +84,8 @@ public class BoneMealMixin
 		}
 		return result;
 	}
-	
-	private BlockState getGrassState(World world, BlockPos pos)
-	{
+
+	private BlockState getGrassState(World world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 		if (state.getBlock() == BlocksRegistry.JUNGLE_GRASS)
 			return BlocksRegistry.JUNGLE_PLANT.getDefaultState();
@@ -115,22 +100,18 @@ public class BoneMealMixin
 		return null;
 	}
 
-	private void shuffle(Random random)
-	{
-		for (int i = 0; i < 4; i++)
-		{
+	private void shuffle(Random random) {
+		for (int i = 0; i < 4; i++) {
 			int j = random.nextInt(4);
 			Direction d = DIR[i];
 			DIR[i] = DIR[j];
 			DIR[j] = d;
 		}
 	}
-	
-	private BlockState getNylium(World world, BlockPos pos)
-	{
+
+	private BlockState getNylium(World world, BlockPos pos) {
 		shuffle(world.random);
-		for (Direction dir: DIR)
-		{
+		for (Direction dir : DIR) {
 			BlockState state = world.getBlockState(pos.offset(dir));
 			if (BlocksHelper.isNylium(state))
 				return state;

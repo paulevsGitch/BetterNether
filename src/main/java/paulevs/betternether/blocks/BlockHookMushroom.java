@@ -8,10 +8,8 @@ import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 
-public class BlockHookMushroom extends BlockMold
-{
-	public BlockHookMushroom()
-	{
+public class BlockHookMushroom extends BlockMold {
+	public BlockHookMushroom() {
 		super(Materials.makeGrass(MaterialColor.PINK)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
@@ -20,10 +18,9 @@ public class BlockHookMushroom extends BlockMold
 				.ticksRandomly()
 				.lightLevel(13));
 	}
-	
+
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		return BlocksHelper.isNetherrack(world.getBlockState(pos.up()));
 	}
 }

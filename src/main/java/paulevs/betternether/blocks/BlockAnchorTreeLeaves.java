@@ -23,50 +23,41 @@ import net.minecraft.world.BlockView;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockAnchorTreeLeaves extends BlockBaseNotFull
-{
+public class BlockAnchorTreeLeaves extends BlockBaseNotFull {
 	private Random random = new Random();
-	
-	public BlockAnchorTreeLeaves()
-	{
+
+	public BlockAnchorTreeLeaves() {
 		super(Materials.makeLeaves(MaterialColor.GREEN));
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
-	
-	public AbstractBlock.OffsetType getOffsetType()
-	{
+
+	public AbstractBlock.OffsetType getOffsetType() {
 		return AbstractBlock.OffsetType.XZ;
 	}
-	
+
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos)
-	{
+	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
 		return 1.0F;
 	}
 
 	@Override
-	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos)
-	{
+	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos) {
 		return true;
 	}
-	
+
 	@Override
-	public VoxelShape getSidesShape(BlockState state, BlockView world, BlockPos pos)
-	{
+	public VoxelShape getSidesShape(BlockState state, BlockView world, BlockPos pos) {
 		return VoxelShapes.empty();
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0)
-		{
+		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0) {
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		}
-		else
-		{
+		else {
 			return random.nextInt(5) == 0 ? Lists.newArrayList(new ItemStack(BlocksRegistry.ANCHOR_TREE_SAPLING)) : super.getDroppedStacks(state, builder);
 		}
 	}

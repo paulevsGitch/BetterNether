@@ -17,38 +17,33 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.structures.StructureNBT;
 
-public class StructureCityBuilding extends StructureNBT
-{
+public class StructureCityBuilding extends StructureNBT {
 	protected static final BlockState AIR = Blocks.AIR.getDefaultState();
-	
+
 	private BoundingBox bb;
 	public BlockPos[] ends;
 	private Direction[] dirs;
 	private BlockPos rotationOffset;
 	private int offsetY;
-	
-	public StructureCityBuilding(String structure)
-	{
+
+	public StructureCityBuilding(String structure) {
 		super(structure);
 		this.offsetY = 0;
 		init();
 	}
-	
-	public StructureCityBuilding(String structure, int offsetY)
-	{
+
+	public StructureCityBuilding(String structure, int offsetY) {
 		super(structure);
 		this.offsetY = offsetY;
 		init();
 	}
-	
-	protected StructureCityBuilding(Identifier location, Structure structure)
-	{
+
+	protected StructureCityBuilding(Identifier location, Structure structure) {
 		super(location, structure);
 		init();
 	}
-	
-	private void init()
-	{
+
+	private void init() {
 		BlockPos size = structure.getSize();
 		bb = new BoundingBox(size);
 		List<StructureBlockInfo> map = structure.getInfosForBlock(BlockPos.ORIGIN, new StructurePlacementData(), Blocks.STRUCTURE_BLOCK, false);
@@ -56,29 +51,25 @@ public class StructureCityBuilding extends StructureNBT
 		dirs = new Direction[map.size()];
 		int i = 0;
 		BlockPos center = new BlockPos(size.getX() >> 1, size.getY(), size.getZ() >> 1);
-		for(StructureBlockInfo info : map)
-		{
+		for (StructureBlockInfo info : map) {
 			ends[i] = info.pos;
 			dirs[i++] = getDir(info.pos.add(-center.getX(), 0, -center.getZ()));
 		}
 		rotationOffset = new BlockPos(0, 0, 0);
 		rotation = BlockRotation.NONE;
 	}
-	
-	private Direction getDir(BlockPos pos)
-	{
+
+	private Direction getDir(BlockPos pos) {
 		int ax = Math.abs(pos.getX());
 		int az = Math.abs(pos.getZ());
 		int mx = Math.max(ax, az);
-		if (mx == ax)
-		{
+		if (mx == ax) {
 			if (pos.getX() > 0)
 				return Direction.EAST;
 			else
 				return Direction.WEST;
 		}
-		else
-		{
+		else {
 			if (pos.getZ() > 0)
 				return Direction.SOUTH;
 			else
@@ -86,24 +77,20 @@ public class StructureCityBuilding extends StructureNBT
 		}
 	}
 
-	public BoundingBox getBoungingBox()
-	{
+	public BoundingBox getBoungingBox() {
 		return bb;
 	}
-	
-	protected BlockRotation mirrorRotation(BlockRotation r)
-	{
-		switch (r)
-		{
-		case CLOCKWISE_90:
-			return BlockRotation.COUNTERCLOCKWISE_90;
-		default:
-			return r;
+
+	protected BlockRotation mirrorRotation(BlockRotation r) {
+		switch (r) {
+			case CLOCKWISE_90:
+				return BlockRotation.COUNTERCLOCKWISE_90;
+			default:
+				return r;
 		}
 	}
-	
-	public void placeInChunk(ServerWorldAccess world, BlockPos pos, BlockBox boundingBox, StructureProcessor paletteProcessor)
-	{
+
+	public void placeInChunk(ServerWorldAccess world, BlockPos pos, BlockBox boundingBox, StructureProcessor paletteProcessor) {
 		BlockPos p = pos.add(rotationOffset);
 		structure.place(world, p, new StructurePlacementData()
 				.setRotation(rotation)
@@ -113,28 +100,23 @@ public class StructureCityBuilding extends StructureNBT
 				world.getRandom());
 	}
 
-	public BlockPos[] getEnds()
-	{
+	public BlockPos[] getEnds() {
 		return ends;
 	}
-	
-	public int getEndsCount()
-	{
+
+	public int getEndsCount() {
 		return ends.length;
 	}
-	
-	public BlockPos getOffsettedPos(int index)
-	{
+
+	public BlockPos getOffsettedPos(int index) {
 		return ends[index].offset(dirs[index]);
 	}
 
-	public BlockPos getPos(int index)
-	{
+	public BlockPos getPos(int index) {
 		return ends[index];
 	}
-	
-	public StructureCityBuilding getRotated(BlockRotation rotation)
-	{
+
+	public StructureCityBuilding getRotated(BlockRotation rotation) {
 		StructureCityBuilding building = this.clone();
 		building.rotation = rotation;
 		building.rotationOffset = building.structure.getSize().rotate(rotation);
@@ -149,8 +131,7 @@ public class StructureCityBuilding extends StructureNBT
 		else
 			z = 0;
 		building.rotationOffset = new BlockPos(x, 0, z);
-		for (int i = 0; i < building.dirs.length; i++)
-		{
+		for (int i = 0; i < building.dirs.length; i++) {
 			building.dirs[i] = rotated(building.dirs[i], rotation);
 			building.ends[i] = building.ends[i].rotate(rotation).add(building.rotationOffset);
 		}
@@ -158,70 +139,56 @@ public class StructureCityBuilding extends StructureNBT
 		building.offsetY = this.offsetY;
 		return building;
 	}
-	
-	public StructureCityBuilding getRandomRotated(Random random)
-	{
+
+	public StructureCityBuilding getRandomRotated(Random random) {
 		return getRotated(BlockRotation.values()[random.nextInt(4)]);
 	}
-	
-	public StructureCityBuilding clone()
-	{
+
+	public StructureCityBuilding clone() {
 		return new StructureCityBuilding(location, structure);
 	}
-	
-	private Direction rotated(Direction dir, BlockRotation rotation)
-	{
+
+	private Direction rotated(Direction dir, BlockRotation rotation) {
 		Direction f;
-		switch (rotation)
-		{
-		case CLOCKWISE_90:
-			f = dir.rotateYClockwise();
-			break;
-		case CLOCKWISE_180:
-			f = dir.getOpposite();
-			break;
-		case COUNTERCLOCKWISE_90:
-			f = dir.rotateYCounterclockwise();
-			break;
-		default:
-			f = dir;
-			break;
+		switch (rotation) {
+			case CLOCKWISE_90:
+				f = dir.rotateYClockwise();
+				break;
+			case CLOCKWISE_180:
+				f = dir.getOpposite();
+				break;
+			case COUNTERCLOCKWISE_90:
+				f = dir.rotateYCounterclockwise();
+				break;
+			default:
+				f = dir;
+				break;
 		}
 		return f;
 	}
-	
-	public int getYOffset()
-	{
+
+	public int getYOffset() {
 		return offsetY;
 	}
 
-	public BlockRotation getRotation()
-	{
+	public BlockRotation getRotation() {
 		return rotation;
 	}
 
-	/*private static StructureProcessor makeProcessorReplace()
-	{
-		return new RuleStructureProcessor(
-				ImmutableList.of(
-						new StructureProcessorRule(
-								new BlockMatchRuleTest(Blocks.STRUCTURE_BLOCK),
-								AlwaysTrueRuleTest.INSTANCE,
-								Blocks.AIR.getDefaultState()
-						)
-				)
-		);
-	}*/
-	
+	/*
+	 * private static StructureProcessor makeProcessorReplace() { return new
+	 * RuleStructureProcessor( ImmutableList.of( new StructureProcessorRule( new
+	 * BlockMatchRuleTest(Blocks.STRUCTURE_BLOCK), AlwaysTrueRuleTest.INSTANCE,
+	 * Blocks.AIR.getDefaultState() ) ) ); }
+	 */
+
 	@Override
-	public BlockBox getBoundingBox(BlockPos pos)
-	{
+	public BlockBox getBoundingBox(BlockPos pos) {
 		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirror(mirror), pos.add(rotationOffset));
 	}
-	
+
 	@Override
-	public StructureCityBuilding setRotation(BlockRotation rotation)
-	{
+	public StructureCityBuilding setRotation(BlockRotation rotation) {
 		this.rotation = rotation;
 		rotationOffset = structure.getSize().rotate(rotation);
 		return this;

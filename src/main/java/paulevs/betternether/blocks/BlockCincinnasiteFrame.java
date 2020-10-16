@@ -9,29 +9,24 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockCincinnasiteFrame extends BlockBaseNotFull
-{
-	public BlockCincinnasiteFrame()
-	{
+public class BlockCincinnasiteFrame extends BlockBaseNotFull {
+	public BlockCincinnasiteFrame() {
 		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
-	
+
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos)
-	{
+	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
 		return 1.0F;
 	}
 
 	@Override
-	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos)
-	{
+	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos) {
 		return true;
 	}
-	
+
 	@Environment(EnvType.CLIENT)
-	public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing)
-	{
+	public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing) {
 		return neighbor.getBlock() == this ? true : super.isSideInvisible(state, neighbor, facing);
 	}
 }

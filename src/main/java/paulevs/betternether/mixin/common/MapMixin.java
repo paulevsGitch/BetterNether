@@ -26,24 +26,19 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
 
 @Mixin(FilledMapItem.class)
-public abstract class MapMixin extends NetworkSyncedItem
-{
-	public MapMixin(Settings settings)
-	{
+public abstract class MapMixin extends NetworkSyncedItem {
+	public MapMixin(Settings settings) {
 		super(settings);
 	}
 
 	@Shadow
-	private BlockState getFluidStateIfVisible(World world, BlockState state, BlockPos pos)
-	{
+	private BlockState getFluidStateIfVisible(World world, BlockState state, BlockPos pos) {
 		return state;
 	}
 
 	@Inject(method = "updateColors", at = @At(value = "HEAD"), cancellable = true)
-	private void customColors(World world, Entity entity, MapState state, CallbackInfo info)
-	{
-		if (world.getDimension().hasCeiling() && world.getRegistryKey() == state.dimension && entity instanceof PlayerEntity)
-		{
+	private void customColors(World world, Entity entity, MapState state, CallbackInfo info) {
+		if (world.getDimension().hasCeiling() && world.getRegistryKey() == state.dimension && entity instanceof PlayerEntity) {
 			int i = 1 << state.scale;
 			int j = state.xCenter;
 			int k = state.zCenter;
@@ -58,17 +53,13 @@ public abstract class MapMixin extends NetworkSyncedItem
 			BlockState blockState = Blocks.BEDROCK.getDefaultState();
 			Blocks.BEDROCK.getDefaultState();
 
-			for (int o = l - n + 1; o < l + n; ++o)
-			{
-				if ((o & 15) == (playerUpdateTracker.field_131 & 15) || bl)
-				{
+			for (int o = l - n + 1; o < l + n; ++o) {
+				if ((o & 15) == (playerUpdateTracker.field_131 & 15) || bl) {
 					bl = false;
 					double d = 0.0D;
 
-					for (int p = m - n - 1; p < m + n; ++p)
-					{
-						if (o >= 0 && p >= -1 && o < 128 && p < 128)
-						{
+					for (int p = m - n - 1; p < m + n; ++p) {
+						if (o >= 0 && p >= -1 && o < 128 && p < 128) {
 							int q = o - l;
 							int r = p - m;
 							boolean bl2 = q * q + r * r > (n - 2) * (n - 2);
@@ -76,8 +67,7 @@ public abstract class MapMixin extends NetworkSyncedItem
 							int t = (k / i + p - 64) * i;
 							Multiset<MaterialColor> multiset = LinkedHashMultiset.create();
 							WorldChunk worldChunk = world.getWorldChunk(new BlockPos(s, 0, t));
-							if (!worldChunk.isEmpty())
-							{
+							if (!worldChunk.isEmpty()) {
 								ChunkPos chunkPos = worldChunk.getPos();
 
 								int u = chunkPos.getStartX() + (s & 15);
@@ -88,18 +78,14 @@ public abstract class MapMixin extends NetworkSyncedItem
 								BlockPos.Mutable mutable = new BlockPos.Mutable();
 								new BlockPos.Mutable();
 
-								for (int x = 0; x < i; ++x)
-								{
-									for (int z = 0; z < i; ++z)
-									{
+								for (int x = 0; x < i; ++x) {
+									for (int z = 0; z < i; ++z) {
 										mutable.set(x + u, 127, z + v);
 
 										blockState = Blocks.NETHERRACK.getDefaultState();
-										for (int y = 126; y > 0; y--)
-										{
+										for (int y = 126; y > 0; y--) {
 											mutable.setY(y);
-											if (!world.isAir(mutable) && world.isAir(mutable.up()))
-											{
+											if (!world.isAir(mutable) && world.isAir(mutable.up())) {
 												blockState = world.getBlockState(mutable);
 												break;
 											}
@@ -112,40 +98,33 @@ public abstract class MapMixin extends NetworkSyncedItem
 								w /= i * i;
 								double f = (e - d) * 4.0D / (double) (i + 4) + ((double) (o + p & 1) - 0.5D) * 0.4D;
 								int ac = 1;
-								if (f > 0.6D)
-								{
+								if (f > 0.6D) {
 									ac = 2;
 								}
 
-								if (f < -0.6D)
-								{
+								if (f < -0.6D) {
 									ac = 0;
 								}
 
 								MaterialColor materialColor = (MaterialColor) Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.CLEAR);
-								
-								if (materialColor == MaterialColor.WATER)
-								{
+
+								if (materialColor == MaterialColor.WATER) {
 									f = (double) w * 0.1D + (double) (o + p & 1) * 0.2D;
 									ac = 1;
-									if (f < 0.5D)
-									{
+									if (f < 0.5D) {
 										ac = 2;
 									}
 
-									if (f > 0.9D)
-									{
+									if (f > 0.9D) {
 										ac = 0;
 									}
 								}
 
 								d = e;
-								if (p >= 0 && q * q + r * r < n * n && (!bl2 || (o + p & 1) != 0))
-								{
+								if (p >= 0 && q * q + r * r < n * n && (!bl2 || (o + p & 1) != 0)) {
 									byte b = state.colors[o + p * 128];
 									byte c = (byte) (materialColor.id * 4 + ac);
-									if (b != c)
-									{
+									if (b != c) {
 										state.colors[o + p * 128] = c;
 										state.markDirty(o, p);
 										bl = true;
@@ -156,7 +135,7 @@ public abstract class MapMixin extends NetworkSyncedItem
 					}
 				}
 			}
-			
+
 			info.cancel();
 		}
 	}

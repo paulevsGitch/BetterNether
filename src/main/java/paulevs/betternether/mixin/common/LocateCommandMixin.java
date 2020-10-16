@@ -18,31 +18,25 @@ import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.CityHelper;
 
 @Mixin(LocateCommand.class)
-public class LocateCommandMixin
-{
+public class LocateCommandMixin {
 	@Shadow
 	@Final
 	private static SimpleCommandExceptionType FAILED_EXCEPTION;
-	
+
 	@Shadow
-	public static int sendCoordinates(ServerCommandSource source, String structure, BlockPos sourcePos, BlockPos structurePos, String successMessage)
-	{
+	public static int sendCoordinates(ServerCommandSource source, String structure, BlockPos sourcePos, BlockPos structurePos, String successMessage) {
 		return 0;
 	}
 
 	@Inject(method = "execute", at = @At("HEAD"), cancellable = true)
-	private static void execute(ServerCommandSource source, StructureFeature<?> structureFeature, CallbackInfoReturnable<Integer> info) throws CommandSyntaxException
-	{
-		if (structureFeature == BNWorldGenerator.CITY)
-		{
+	private static void execute(ServerCommandSource source, StructureFeature<?> structureFeature, CallbackInfoReturnable<Integer> info) throws CommandSyntaxException {
+		if (structureFeature == BNWorldGenerator.CITY) {
 			BlockPos blockPos = new BlockPos(source.getPosition());
 			BlockPos blockPos2 = CityHelper.getNearestCity(blockPos, source.getWorld());
-			if (blockPos2 == null)
-			{
+			if (blockPos2 == null) {
 				throw FAILED_EXCEPTION.create();
 			}
-			else
-			{
+			else {
 				info.setReturnValue(sendCoordinates(source, structureFeature.getName(), blockPos, blockPos2, "commands.locate.success"));
 				info.cancel();
 			}

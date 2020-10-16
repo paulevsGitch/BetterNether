@@ -38,8 +38,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blockentities.BlockEntityChestOfDrawers;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BlockChestOfDrawers extends BlockWithEntity
-{
+public class BlockChestOfDrawers extends BlockWithEntity {
 	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
 			Direction.NORTH, Block.createCuboidShape(0, 0, 8, 16, 16, 16),
 			Direction.SOUTH, Block.createCuboidShape(0, 0, 0, 16, 16, 8),
@@ -48,92 +47,76 @@ public class BlockChestOfDrawers extends BlockWithEntity
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	public static final BooleanProperty OPEN = BooleanProperty.of("open");
 
-	public BlockChestOfDrawers()
-	{
+	public BlockChestOfDrawers() {
 		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(OPEN, false));
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager)
-	{
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING, OPEN);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return BOUNDING_SHAPES.get(state.get(FACING));
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView view)
-	{
+	public BlockEntity createBlockEntity(BlockView view) {
 		return new BlockEntityChestOfDrawers();
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state)
-	{
+	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
-	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack)
-	{
-		if (itemStack.hasCustomName())
-		{
+	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+		if (itemStack.hasCustomName()) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof BlockEntityChestOfDrawers)
-			{
+			if (blockEntity instanceof BlockEntityChestOfDrawers) {
 				((BlockEntityChestOfDrawers) blockEntity).setCustomName(itemStack.getName());
 			}
 		}
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
-	{
-		if (world.isClient)
-		{
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (world.isClient) {
 			return ActionResult.SUCCESS;
 		}
-		else
-		{
+		else {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof BlockEntityChestOfDrawers)
-			{
+			if (blockEntity instanceof BlockEntityChestOfDrawers) {
 				player.openHandledScreen((BlockEntityChestOfDrawers) blockEntity);
 			}
 			return ActionResult.SUCCESS;
 		}
 	}
-	
+
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx)
-	{
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		List<ItemStack> drop = new ArrayList<ItemStack>();
 		BlockEntityChestOfDrawers entity = (BlockEntityChestOfDrawers) builder.get(LootContextParameters.BLOCK_ENTITY);
 		drop.add(new ItemStack(this.asItem()));
 		entity.addItemsToList(drop);
 		return drop;
 	}
-	
+
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation)
-	{
+	public BlockState rotate(BlockState state, BlockRotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror)
-	{
+	public BlockState mirror(BlockState state, BlockMirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 }

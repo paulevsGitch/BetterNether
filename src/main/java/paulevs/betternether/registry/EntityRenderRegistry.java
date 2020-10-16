@@ -16,10 +16,8 @@ import paulevs.betternether.entity.render.RenderNagaProjectile;
 import paulevs.betternether.entity.render.RenderSkull;
 
 @Environment(EnvType.CLIENT)
-public class EntityRenderRegistry
-{
-	public static void register()
-	{
+public class EntityRenderRegistry {
+	public static void register() {
 		registerRenderMob(EntityRegistry.FIREFLY, RenderFirefly.class);
 		registerRenderMob(EntityRegistry.CHAIR, RenderChair.class);
 		registerRenderMob(EntityRegistry.HYDROGEN_JELLYFISH, RenderHydrogenJellyfish.class);
@@ -30,32 +28,26 @@ public class EntityRenderRegistry
 		registerRenderMob(EntityRegistry.SKULL, RenderSkull.class);
 	}
 
-	private static void registerRenderMob(EntityType<?> entity, Class<? extends MobEntityRenderer<?, ?>> renderer)
-	{
+	private static void registerRenderMob(EntityType<?> entity, Class<? extends MobEntityRenderer<?, ?>> renderer) {
 		EntityRendererRegistry.INSTANCE.register(entity, (entityRenderDispatcher, context) -> {
 			MobEntityRenderer<?, ?> render = null;
-			try
-			{
+			try {
 				render = renderer.getConstructor(entityRenderDispatcher.getClass()).newInstance(entityRenderDispatcher);
 			}
-			catch (Exception e)
-			{
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 			return render;
 		});
 	}
-	
-	private static void registerRenderAny(EntityType<?> entity, Class<? extends EntityRenderer<?>> renderer)
-	{
+
+	private static void registerRenderAny(EntityType<?> entity, Class<? extends EntityRenderer<?>> renderer) {
 		EntityRendererRegistry.INSTANCE.register(entity, (entityRenderDispatcher, context) -> {
 			EntityRenderer<?> render = null;
-			try
-			{
+			try {
 				render = renderer.getConstructor(entityRenderDispatcher.getClass()).newInstance(entityRenderDispatcher);
 			}
-			catch (Exception e)
-			{
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 			return render;

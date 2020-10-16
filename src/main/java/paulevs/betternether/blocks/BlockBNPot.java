@@ -18,35 +18,28 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 
-public class BlockBNPot extends BlockBaseNotFull
-{
+public class BlockBNPot extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 8, 13);
-	
-	public BlockBNPot(Block material)
-	{
+
+	public BlockBNPot(Block material) {
 		super(FabricBlockSettings.copy(material).nonOpaque());
 	}
 
-	public boolean hasSidedTransparency(BlockState state)
-	{
+	public boolean hasSidedTransparency(BlockState state) {
 		return true;
 	}
-	
+
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos)
-	{
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return SHAPE;
 	}
-	
+
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
-	{
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		BlockPos plantPos = pos.up();
-		if (hit.getSide() == Direction.UP && world.isAir(plantPos))
-		{
+		if (hit.getSide() == Direction.UP && world.isAir(plantPos)) {
 			BlockState plant = BlockPottedPlant.getPlant(player.getMainHandStack().getItem());
-			if (plant != null)
-			{
+			if (plant != null) {
 				if (!world.isClient())
 					BlocksHelper.setWithoutUpdate((ServerWorld) world, plantPos, plant);
 				world.playSound(

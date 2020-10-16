@@ -10,16 +10,13 @@ import net.minecraft.block.StairsBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 
-public class BNStairs extends StairsBlock
-{
-	public BNStairs(Block block)
-	{
+public class BNStairs extends StairsBlock {
+	public BNStairs(Block block) {
 		super(block.getDefaultState(), FabricBlockSettings.copyOf(block));
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this.asItem()));
 	}
 }

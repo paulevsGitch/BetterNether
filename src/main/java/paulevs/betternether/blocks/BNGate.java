@@ -10,16 +10,13 @@ import net.minecraft.block.FenceGateBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 
-public class BNGate extends FenceGateBlock
-{
-	public BNGate(Block block)
-	{
+public class BNGate extends FenceGateBlock {
+	public BNGate(Block block) {
 		super(FabricBlockSettings.copyOf(block).nonOpaque());
 	}
-	
+
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder)
-	{
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this.asItem()));
 	}
 }

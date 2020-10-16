@@ -24,10 +24,8 @@ import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWhisperingGourd;
 
-public class UpsideDownForest extends NetherBiome
-{
-	public UpsideDownForest(String name)
-	{
+public class UpsideDownForest extends NetherBiome {
+	public UpsideDownForest(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(111, 188, 111)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
@@ -52,10 +50,9 @@ public class UpsideDownForest extends NetherBiome
 		addStructure("hook_mushroom", new StructureHookMushroom(), StructureType.CEIL, 0.03F, true);
 		addStructure("whispering_gourd", new StructureWhisperingGourd(), StructureType.CEIL, 0.02F, true);
 	}
-	
+
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random)
-	{
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
 		BlocksHelper.setWithoutUpdate(world, pos, random.nextInt(3) == 0 ? BlocksRegistry.NETHERRACK_MOSS.getDefaultState() : Blocks.NETHERRACK.getDefaultState());
 	}
 }
