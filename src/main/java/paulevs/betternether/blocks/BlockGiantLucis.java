@@ -27,7 +27,7 @@ public class BlockGiantLucis extends MushroomBlock {
 				.breakByTool(FabricToolTags.AXES)
 				.sounds(BlockSoundGroup.WOOD)
 				.hardness(1F)
-				.lightLevel(15)
+				.luminance(15)
 				.nonOpaque());
 	}
 

@@ -31,7 +31,7 @@ public class BlockNetherSakuraLeaves extends BlockBaseNotFull {
 	private static final int COLOR = MHelper.color(251, 113, 143);
 
 	public BlockNetherSakuraLeaves() {
-		super(Materials.makeLeaves(MaterialColor.PINK).lightLevel((state) -> {
+		super(Materials.makeLeaves(MaterialColor.PINK).luminance((state) -> {
 			return 13;
 		}));
 		this.setDropItself(false);

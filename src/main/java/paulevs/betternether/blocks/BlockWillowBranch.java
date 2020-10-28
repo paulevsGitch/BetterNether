@@ -30,7 +30,7 @@ public class BlockWillowBranch extends BlockBaseNotFull {
 	public static final EnumProperty<WillowBranchShape> SHAPE = EnumProperty.of("shape", WillowBranchShape.class);
 
 	public BlockWillowBranch() {
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().noCollision().lightLevel(getLuminance()));
+		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().noCollision().luminance(getLuminance()));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, WillowBranchShape.MIDDLE));

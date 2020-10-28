@@ -28,7 +28,7 @@ import paulevs.betternether.blockentities.BlockEntityFurnace;
 
 public class BlockNetherFurnace extends AbstractFurnaceBlock {
 	public BlockNetherFurnace(Block source) {
-		super(FabricBlockSettings.copyOf(source).requiresTool().lightLevel(getLuminance()));
+		super(FabricBlockSettings.copyOf(source).requiresTool().luminance(getLuminance()));
 	}
 
 	private static ToIntFunction<BlockState> getLuminance() {

@@ -46,7 +46,7 @@ public class BlockGoldenVine extends BlockBaseNotFull implements Fertilizable {
 				.noCollision()
 				.breakInstantly()
 				.nonOpaque()
-				.lightLevel(15));
+				.luminance(15));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(BOTTOM, true));

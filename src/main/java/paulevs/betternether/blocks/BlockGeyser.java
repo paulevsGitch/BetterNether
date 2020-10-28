@@ -28,7 +28,7 @@ public class BlockGeyser extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 4, 15);
 
 	public BlockGeyser() {
-		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).nonOpaque().lightLevel(10));
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).nonOpaque().luminance(10));
 	}
 
 	@Override

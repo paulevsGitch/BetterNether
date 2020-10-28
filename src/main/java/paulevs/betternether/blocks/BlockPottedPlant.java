@@ -37,7 +37,7 @@ public class BlockPottedPlant extends BlockBaseNotFull {
 				.nonOpaque()
 				.noCollision()
 				.breakInstantly()
-				.lightLevel(getLuminance()));
+				.luminance(getLuminance()));
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(PLANT, PottedPlantShape.AGAVE));

@@ -16,7 +16,7 @@ public class BlockWhisperingGourdLantern extends Block {
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
 	public BlockWhisperingGourdLantern() {
-		super(Materials.makeWood(MaterialColor.BLUE).lightLevel(15));
+		super(Materials.makeWood(MaterialColor.BLUE).luminance(15));
 	}
 
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {

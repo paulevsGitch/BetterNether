@@ -31,7 +31,7 @@ public class BlockWillowTorch extends BlockBaseNotFull {
 	public static final DirectionProperty FACING = Properties.FACING;
 
 	public BlockWillowTorch() {
-		super(Materials.makeWood(MaterialColor.LIGHT_BLUE).lightLevel(15).noCollision().nonOpaque());
+		super(Materials.makeWood(MaterialColor.LIGHT_BLUE).luminance(15).noCollision().nonOpaque());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.DOWN));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

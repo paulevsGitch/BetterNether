@@ -35,7 +35,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements F
 				.breakInstantly()
 				.noCollision()
 				.ticksRandomly()
-				.lightLevel(9));
+				.luminance(9));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

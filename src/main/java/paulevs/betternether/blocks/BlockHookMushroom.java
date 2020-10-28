@@ -16,7 +16,7 @@ public class BlockHookMushroom extends BlockMold {
 				.noCollision()
 				.breakInstantly()
 				.ticksRandomly()
-				.lightLevel(13));
+				.luminance(13));
 	}
 
 	@Override
