@@ -8,7 +8,6 @@ import java.util.Random;
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.structure.BastionRemnantGenerator;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
@@ -17,14 +16,11 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.GenerationStep.Feature;
 import net.minecraft.world.gen.chunk.StructureConfig;
-import net.minecraft.world.gen.feature.BastionRemnantFeature;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
@@ -74,10 +70,6 @@ public class BNWorldGenerator {
 
 	public static final CityFeature CITY = new CityFeature();
 	public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CITY_CONFIGURED = CITY.configure(DefaultFeatureConfig.DEFAULT);
-	public static final BastionRemnantFeature BASTION_REMNANT = new BastionRemnantFeature(StructurePoolFeatureConfig.CODEC);
-	public static final ConfiguredStructureFeature<StructurePoolFeatureConfig, ? extends StructureFeature<StructurePoolFeatureConfig>> DENSE_BASTION = BASTION_REMNANT.configure(new StructurePoolFeatureConfig(() -> {
-		return BastionRemnantGenerator.field_25941;
-	}, 6));
 	
 	public static void onModInit() {
 		hasCleaningPass = Config.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
@@ -107,14 +99,6 @@ public class BNWorldGenerator {
 				.register();
 
 		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
-		
-		FabricStructureBuilder.create(new Identifier(BetterNether.MOD_ID, "dense_bastion"), BASTION_REMNANT)
-				.step(Feature.SURFACE_STRUCTURES)
-				.defaultConfig(new StructureConfig(5, 3, 1234))
-				.superflatFeature(DENSE_BASTION)
-				.register();
-
-		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier(BetterNether.MOD_ID, "dense_bastion"), DENSE_BASTION);
 	}
 
 	public static void init(long seed) {
