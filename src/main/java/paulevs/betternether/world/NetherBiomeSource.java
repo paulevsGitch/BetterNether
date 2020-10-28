@@ -1,6 +1,7 @@
 package paulevs.betternether.world;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
@@ -12,8 +13,10 @@ import net.minecraft.util.registry.RegistryLookupCodec;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.mixin.common.GenerationSettingsAccessor;
 import paulevs.betternether.registry.BiomesRegistry;
 
 public class NetherBiomeSource extends BiomeSource {
@@ -34,6 +37,16 @@ public class NetherBiomeSource extends BiomeSource {
 		this.map = new BiomeMap(seed, BNWorldGenerator.biomeSizeXZ, BNWorldGenerator.biomeSizeY, BNWorldGenerator.volumetric);
 		this.biomeRegistry = biomeRegistry;
 		BiomesRegistry.mutateRegistry(biomeRegistry);
+		boolean incendium = isIncendiumInstalled();
+		this.biomes.forEach((biome) -> {
+			GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
+			List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureFeatures());
+			structures.add(() -> { return BNWorldGenerator.CITY_CONFIGURED; });
+			if (incendium) {
+				structures.add(() -> { return BNWorldGenerator.DENSE_BASTION; });
+			}
+			accessor.setStructureFeatures(structures);
+		});
 	}
 	
 	private static List<Biome> getBiomes(Registry<Biome> biomeRegistry) {
@@ -44,6 +57,17 @@ public class NetherBiomeSource extends BiomeSource {
 			}
 		});
 		return result;
+	}
+	
+	private boolean isIncendiumInstalled() {
+		boolean incendium = false;
+		for (Biome biome: biomes) {
+			if (biomeRegistry.getId(biome).getNamespace().equals("starmute")) {
+				incendium = true;
+				break;
+			}
+		}
+		return incendium;
 	}
 
 	@Override
