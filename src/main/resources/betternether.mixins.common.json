@@ -26,7 +26,6 @@
 	"GenerationSettingsMixin",
 	"BastionRemnantFeatureMixin",
 	"NetherFortressFeatureMixin",
-	"LocateCommandMixin",
 	"MinecraftServerMixin",
 	"RecipeManagerAccessor",
 	"ChunkSerializerMixin"
