@@ -24,7 +24,7 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
 	public BNBrewingStand() {
 		super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS)
 				.strength(0.5F, 0.5F)
-				.lightLevel(1)
+				.luminance(1)
 				.nonOpaque());
 	}
 

@@ -37,7 +37,7 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull {
 				.dropsNothing()
 				.breakInstantly()
 				.nonOpaque()
-				.lightLevel(getLuminance()));
+				.luminance(getLuminance()));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		setDropItself(false);
 	}

@@ -2,6 +2,7 @@ package paulevs.betternether.structures;
 
 import java.util.Random;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
@@ -28,6 +29,11 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	}
 
 	private boolean canGenerate(WorldAccess world, BlockPos pos) {
+		for (int i = 0; i < this.structure.getSize().getY(); i += 2) {
+			if (world.getBlockState(pos.up(i)).isOf(Blocks.BEDROCK)) {
+				return false;
+			}
+		}
 		if (type == StructureType.FLOOR)
 			return getAirFraction(world, pos) > 0.6 && getAirFractionFoundation(world, pos) < 0.5;
 		else if (type == StructureType.LAVA)

@@ -17,7 +17,7 @@ public class BlockRubeusCone extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(3, 3, 3, 13, 16, 13);
 
 	public BlockRubeusCone() {
-		super(Materials.makeWood(MaterialColor.CYAN).nonOpaque().lightLevel(15));
+		super(Materials.makeWood(MaterialColor.CYAN).nonOpaque().luminance(15));
 	}
 
 	@Override

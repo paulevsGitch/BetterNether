@@ -44,7 +44,7 @@ public class BlockLumabusVine extends BlockBaseNotFull {
 				.noCollision()
 				.breakInstantly()
 				.nonOpaque()
-				.lightLevel(getLuminance()));
+				.luminance(getLuminance()));
 		this.seed = seed;
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);

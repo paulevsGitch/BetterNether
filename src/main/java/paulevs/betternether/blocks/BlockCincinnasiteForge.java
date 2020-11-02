@@ -25,7 +25,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
 	public BlockCincinnasiteForge() {
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).requiresTool().lightLevel(getLuminance()));
+		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).requiresTool().luminance(getLuminance()));
 	}
 
 	private static ToIntFunction<BlockState> getLuminance() {

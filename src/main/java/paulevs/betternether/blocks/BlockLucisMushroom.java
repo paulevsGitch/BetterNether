@@ -43,7 +43,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 				.breakByTool(FabricToolTags.AXES)
 				.sounds(BlockSoundGroup.WOOD)
 				.hardness(1F)
-				.lightLevel(15)
+				.luminance(15)
 				.nonOpaque());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(SHAPE, EnumShape.CORNER));
 	}

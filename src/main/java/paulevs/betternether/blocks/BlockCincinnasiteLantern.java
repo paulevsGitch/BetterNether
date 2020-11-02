@@ -5,6 +5,6 @@ import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasiteLantern extends BlockBase {
 	public BlockCincinnasiteLantern() {
-		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK).lightLevel(15));
+		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK).luminance(15));
 	}
 }

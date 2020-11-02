@@ -35,7 +35,7 @@ public class BlockAnchorTreeSapling extends BlockBaseNotFull implements Fertiliz
 				.breakInstantly()
 				.noCollision()
 				.ticksRandomly()
-				.lightLevel(10));
+				.luminance(10));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

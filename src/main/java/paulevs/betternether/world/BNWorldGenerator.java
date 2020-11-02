@@ -70,7 +70,7 @@ public class BNWorldGenerator {
 
 	public static final CityFeature CITY = new CityFeature();
 	public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CITY_CONFIGURED = CITY.configure(DefaultFeatureConfig.DEFAULT);
-
+	
 	public static void onModInit() {
 		hasCleaningPass = Config.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
 		hasFixPass = Config.getBoolean("generator.world.terrain", "world_fixing_pass", true);

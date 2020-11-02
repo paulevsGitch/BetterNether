@@ -53,7 +53,7 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Fertilizable
 				.dropsNothing()
 				.breakInstantly()
 				.nonOpaque()
-				.lightLevel(15));
+				.luminance(15));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.BOTTOM));
 		setDropItself(false);

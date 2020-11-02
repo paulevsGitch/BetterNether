@@ -35,7 +35,7 @@ import paulevs.betternether.blocks.BNChest;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlockEntity> {
-	private static final HashMap<Integer, RenderLayer[]> LAYERS = Maps.newHashMap();
+	private static final HashMap<Block, RenderLayer[]> LAYERS = Maps.newHashMap();
 	private static RenderLayer[] defaultLayer;
 
 	private static final int ID_NORMAL = 0;
@@ -153,20 +153,20 @@ public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlock
 	}
 
 	public static VertexConsumer getConsumer(VertexConsumerProvider provider, Block block, ChestType chestType) {
-		RenderLayer[] layers = LAYERS.getOrDefault(Block.getRawIdFromState(block.getDefaultState()), defaultLayer);
+		RenderLayer[] layers = LAYERS.getOrDefault(block, defaultLayer);
 		return provider.getBuffer(getChestTexture(chestType, layers));
 	}
 
 	static {
 		defaultLayer = new RenderLayer[] {
-				RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal.png")),
-				RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal_left.png")),
-				RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "entity/chest/normal_right.png"))
+				RenderLayer.getEntitySolid(new Identifier("entity/chest/normal.png")),
+				RenderLayer.getEntitySolid(new Identifier("entity/chest/normal_left.png")),
+				RenderLayer.getEntitySolid(new Identifier("entity/chest/normal_right.png"))
 		};
 		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new Identifier(BetterNether.MOD_ID, name));
 			if (block instanceof BNChest) {
-				LAYERS.put(Block.getRawIdFromState(block.getDefaultState()), new RenderLayer[] {
+				LAYERS.put(block, new RenderLayer[] {
 						RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + ".png")),
 						RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + "_left.png")),
 						RenderLayer.getEntitySolid(new Identifier(BetterNether.MOD_ID, "textures/entity/chest/" + name + "_right.png"))

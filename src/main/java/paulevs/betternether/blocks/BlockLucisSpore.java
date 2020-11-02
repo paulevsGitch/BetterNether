@@ -50,7 +50,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements Fertilizable {
 				.nonOpaque()
 				.noCollision()
 				.ticksRandomly()
-				.lightLevel(7));
+				.luminance(7));
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH));
 	}
 

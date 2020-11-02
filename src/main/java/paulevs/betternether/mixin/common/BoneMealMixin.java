@@ -30,13 +30,13 @@ public class BoneMealMixin {
 		BlockPos blockPos = context.getBlockPos();
 		if (!world.isClient) {
 			if (BlocksHelper.isNetherrack(world.getBlockState(blockPos))) {
-				BlockState nylium = getNylium(world, blockPos);
+				BlockState nylium = bnGetNylium(world, blockPos);
 				boolean consume = true;
 				if (nylium != null && world.getBlockState(blockPos).getBlock() == Blocks.NETHERRACK) {
 					BlocksHelper.setWithoutUpdate(world, blockPos, nylium);
 				}
 				else {
-					consume = growGrass(world, blockPos);
+					consume = bnGrowGrass(world, blockPos);
 				}
 				if (consume) {
 					if (!context.getPlayer().isCreative())
@@ -47,7 +47,7 @@ public class BoneMealMixin {
 				}
 			}
 			else if (BlocksHelper.isSoulSand(world.getBlockState(blockPos))) {
-				if (growGrass(world, blockPos)) {
+				if (bnGrowGrass(world, blockPos)) {
 					world.syncWorldEvent(2005, blockPos, 0);
 					if (!context.getPlayer().isCreative())
 						context.getStack().decrement(1);
@@ -58,7 +58,7 @@ public class BoneMealMixin {
 		}
 	}
 
-	private boolean growGrass(World world, BlockPos pos) {
+	private boolean bnGrowGrass(World world, BlockPos pos) {
 		int y1 = pos.getY() + 3;
 		int y2 = pos.getY() - 3;
 		boolean result = false;
@@ -71,7 +71,7 @@ public class BoneMealMixin {
 				POS.setY(y);
 				BlockPos down = POS.down();
 				if (world.isAir(POS) && !world.isAir(down)) {
-					BlockState grass = getGrassState(world, down);
+					BlockState grass = bnGetGrassState(world, down);
 					if (grass != null) {
 						BlocksHelper.setWithoutUpdate(world, POS, grass);
 						if (world.random.nextInt(3) == 0 && world.getBlockState(down).getBlock() == Blocks.NETHERRACK)
@@ -85,7 +85,7 @@ public class BoneMealMixin {
 		return result;
 	}
 
-	private BlockState getGrassState(World world, BlockPos pos) {
+	private BlockState bnGetGrassState(World world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 		if (state.getBlock() == BlocksRegistry.JUNGLE_GRASS)
 			return BlocksRegistry.JUNGLE_PLANT.getDefaultState();
@@ -100,7 +100,7 @@ public class BoneMealMixin {
 		return null;
 	}
 
-	private void shuffle(Random random) {
+	private void bnShuffle(Random random) {
 		for (int i = 0; i < 4; i++) {
 			int j = random.nextInt(4);
 			Direction d = DIR[i];
@@ -109,8 +109,8 @@ public class BoneMealMixin {
 		}
 	}
 
-	private BlockState getNylium(World world, BlockPos pos) {
-		shuffle(world.random);
+	private BlockState bnGetNylium(World world, BlockPos pos) {
+		bnShuffle(world.random);
 		for (Direction dir : DIR) {
 			BlockState state = world.getBlockState(pos.offset(dir));
 			if (BlocksHelper.isNylium(state))

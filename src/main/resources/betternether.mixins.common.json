@@ -22,11 +22,9 @@
 	"ServerPlayNetworkHandlerMixin",
 	"SheepEntityMixin",
 	"DimensionTypeMixin",
-	"DefaultBiomeFeaturesMixin",
-	"GenerationSettingsMixin",
+	"GenerationSettingsAccessor",
 	"BastionRemnantFeatureMixin",
 	"NetherFortressFeatureMixin",
-	"LocateCommandMixin",
 	"MinecraftServerMixin",
 	"RecipeManagerAccessor",
 	"ChunkSerializerMixin"
