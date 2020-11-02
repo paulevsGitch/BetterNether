@@ -28,7 +28,7 @@
 	"item.betternether.stalagnate_bowl_mushroom": "蘑菇煲",
 	"item.betternether.stalagnate_bowl_wart": "下界疣煲",
 
-	"itemGroup.betternether.items": "更好的下届",
+	"itemGroup.betternether.items": "更好的下界",
 
 	"message.spawn_help": "§c§l你必须拿着§r %s §c§l才能在此设置出生点",
 	"message.spawn_set": "§2§l你的出生点已设置",
@@ -600,7 +600,7 @@
 	"block.betternether.bar_stool_warped": "诡异木高脚凳",
 	"block.betternether.bar_stool_mushroom": "蘑菇高脚凳",
 	
-	"block.betternether.mushroom_grass": "蘑菇草",
+	"block.betternether.mushroom_grass": "蘑菇草方块",
 	"block.betternether.bone_grass": "骨草",
 	"block.betternether.lumabus_seed": "鲁玛巴斯幼苗",
 	"block.betternether.lumabus_vine": "鲁玛巴斯藤",
@@ -615,17 +615,17 @@
 	"item.betternether.cincinnasite_excavator_diamond": "镶钻辛辛那金铲",
 	"item.betternether.nether_ruby_excavator": "红宝石铲",
 	
-	"block.betternether.sepia_mushroom_grass": "墨菇草",
+	"block.betternether.sepia_mushroom_grass": "墨菇草方块",
 	"block.betternether.sepia_bone_grass": "墨骨草",
 	"block.betternether.golden_lumabus_seed": "金鲁玛巴斯幼苗",
 	"block.betternether.golden_lumabus_vine": "金鲁玛巴斯藤",
 	
 	"block.betternether.cincinnasite_fire_bowl": "辛辛那金火盆",
 	"block.betternether.bricks_fire_bowl": "下界砖火盆",
-	"block.betternether.netherite_fire_bowl": "下届合金火盆",
+	"block.betternether.netherite_fire_bowl": "下界合金火盆",
 	"block.betternether.cincinnasite_fire_bowl_soul": "辛辛那金灵魂沙火盆",
 	"block.betternether.bricks_fire_bowl_soul": "下界砖灵魂沙火盆",
-	"block.betternether.netherite_fire_bowl_soul": "下届合金灵魂沙火盆",
+	"block.betternether.netherite_fire_bowl_soul": "下界合金灵魂沙火盆",
 	
 	"block.betternether.swampland_grass": "沼泽草",
 	"block.betternether.basalt_slab": "玄武岩台阶",
