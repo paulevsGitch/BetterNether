@@ -5,6 +5,7 @@
   "client": [
 	"ClientPlayNetworkHandlerMixin",
 	"BackgroundRenderMixin",
+	"MinecraftClientMixin",
 	"PresetsScreenMixin",
 	"PlayerArmorMixin",
 	"RenderPhaseMixin",
