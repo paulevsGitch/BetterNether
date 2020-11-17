@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -42,6 +44,7 @@ public class BiomesRegistry {
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
 	private static final HashMap<Biome, NetherBiome> MUTABLE = Maps.newHashMap();
 	private static final ArrayList<NetherBiome> GENERATOR = new ArrayList<NetherBiome>();
+	private static final Set<Integer> OCCUPIED_IDS = Sets.newHashSet();
 
 	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper(new Identifier("nether_wastes"));
 	public static final NetherBiome BIOME_CRIMSON_FOREST = new NetherBiomeWrapper(new Identifier("crimson_forest"));
@@ -72,6 +75,7 @@ public class BiomesRegistry {
 
 	private static int maxDefChance = 0;
 	private static int maxChance = 0;
+	private static int biomeID = 7000;
 
 	public static void register() {
 		registerNetherBiome(BIOME_GRAVEL_DESERT);
@@ -140,7 +144,16 @@ public class BiomesRegistry {
 
 	private static void register(NetherBiome biome) {
 		if (!BuiltinRegistries.BIOME.containsId(biome.getID())) {
-			Registry.register(BuiltinRegistries.BIOME, biome.getID(), biome.getBiome());
+			if (OCCUPIED_IDS.isEmpty()) {
+				BuiltinRegistries.BIOME.forEach((bio) -> {
+					OCCUPIED_IDS.add(BuiltinRegistries.BIOME.getRawId(bio));
+				});
+			}
+			biomeID ++;
+			while (OCCUPIED_IDS.contains(biomeID)) {
+				biomeID ++;
+			}
+			Registry.register(BuiltinRegistries.BIOME, biomeID, biome.getID().toString(), biome.getBiome());
 		}
 	}
 

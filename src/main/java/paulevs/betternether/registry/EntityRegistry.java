@@ -54,7 +54,7 @@ public class EntityRegistry {
 		NETHER_ENTITIES.add(EntityType.BLAZE);
 		NETHER_ENTITIES.add(EntityType.STRIDER);
 
-		registerEntity("chair", CHAIR);
+		registerEntity("chair", CHAIR, EntityChair.getAttributeContainer());
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
 
 		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer());
