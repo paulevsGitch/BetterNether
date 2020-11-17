@@ -92,6 +92,7 @@ public class BNWorldGenerator {
 		int distance = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
 		int separation = distance >> 1;
 
+		Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true);
 		FabricStructureBuilder.create(new Identifier(BetterNether.MOD_ID, "nether_city"), CITY)
 				.step(Feature.RAW_GENERATION)
 				.defaultConfig(new StructureConfig(distance, separation, 1234))
