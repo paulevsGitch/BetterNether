@@ -1,5 +1,8 @@
 package paulevs.betternether.blocks;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -15,6 +18,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.network.packet.s2c.play.SignEditorOpenS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.StateManager;
@@ -144,5 +148,10 @@ public class BNSign extends AbstractSignBlock {
 		}
 
 		return null;
+	}
+	
+	@Override
+	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+		return Collections.singletonList(new ItemStack(this));
 	}
 }
