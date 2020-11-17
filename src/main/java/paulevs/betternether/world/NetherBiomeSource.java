@@ -16,6 +16,7 @@ import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.mixin.common.GenerationSettingsAccessor;
 import paulevs.betternether.registry.BiomesRegistry;
 
@@ -37,12 +38,14 @@ public class NetherBiomeSource extends BiomeSource {
 		this.map = new BiomeMap(seed, BNWorldGenerator.biomeSizeXZ, BNWorldGenerator.biomeSizeY, BNWorldGenerator.volumetric);
 		this.biomeRegistry = biomeRegistry;
 		BiomesRegistry.mutateRegistry(biomeRegistry);
-		this.biomes.forEach((biome) -> {
-			GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
-			List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureFeatures());
-			structures.add(() -> { return BNWorldGenerator.CITY_CONFIGURED; });
-			accessor.setStructureFeatures(structures);
-		});
+		if (Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)) {
+			this.biomes.forEach((biome) -> {
+				GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
+				List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureFeatures());
+				structures.add(() -> { return BNWorldGenerator.CITY_CONFIGURED; });
+				accessor.setStructureFeatures(structures);
+			});
+		}
 	}
 	
 	private static List<Biome> getBiomes(Registry<Biome> biomeRegistry) {
