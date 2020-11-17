@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
@@ -531,11 +532,18 @@ public class BlocksRegistry {
 		Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
 		ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
 	}
+	
+	private static void addFuel(Block source, Block result) {
+		if (source.getDefaultState().getMaterial().isBurnable()) {
+			FuelRegistry.INSTANCE.add(result, 40);
+		}
+	}
 
 	public static Block registerStairs(String name, Block source) {
 		Block stairs = new BNStairs(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, stairs);
+			addFuel(source, stairs);
 			RecipesHelper.makeStairsRecipe(source, stairs);
 		}
 		BLOCKS.add(name);
@@ -546,6 +554,7 @@ public class BlocksRegistry {
 		Block slab = new BNSlab(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, slab);
+			addFuel(source, slab);
 			RecipesHelper.makeSlabRecipe(source, slab);
 		}
 		BLOCKS.add(name);
@@ -556,6 +565,7 @@ public class BlocksRegistry {
 		Block roof = new BlockBase(FabricBlockSettings.copyOf(source));
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, roof);
+			addFuel(source, roof);
 			RecipesHelper.makeRoofRecipe(source, roof);
 		}
 		BLOCKS.add(name);
@@ -566,6 +576,7 @@ public class BlocksRegistry {
 		Block button = new BNButton(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, button);
+			addFuel(source, button);
 			RecipesHelper.makeButtonRecipe(source, button);
 		}
 		BLOCKS.add(name);
@@ -576,6 +587,7 @@ public class BlocksRegistry {
 		Block plate = new BNPlate(ActivationRule.EVERYTHING, source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, plate);
+			addFuel(source, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
 		BLOCKS.add(name);
@@ -586,6 +598,7 @@ public class BlocksRegistry {
 		Block plate = new BNPlate(rule, source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, plate);
+			addFuel(source, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
 		BLOCKS.add(name);
@@ -635,6 +648,7 @@ public class BlocksRegistry {
 		Block fence = new BNFence(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, fence);
+			addFuel(source, fence);
 			RecipesHelper.makeFenceRecipe(source, fence);
 		}
 		BLOCKS.add(name);
@@ -645,6 +659,7 @@ public class BlocksRegistry {
 		Block gate = new BNGate(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, gate);
+			addFuel(source, gate);
 			RecipesHelper.makeGateRecipe(source, gate);
 		}
 		BLOCKS.add(name);
@@ -655,6 +670,7 @@ public class BlocksRegistry {
 		Block door = new BNDoor(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, door);
+			addFuel(source, door);
 			RecipesHelper.makeDoorRecipe(source, door);
 		}
 		BLOCKS.add(name);
@@ -665,6 +681,7 @@ public class BlocksRegistry {
 		Block trapdoor = new BNTrapdoor(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, trapdoor);
+			addFuel(source, trapdoor);
 			RecipesHelper.makeTrapdoorRecipe(source, trapdoor);
 		}
 		BLOCKS.add(name);
@@ -705,6 +722,7 @@ public class BlocksRegistry {
 		Block block = new BNChest(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
+			addFuel(source, block);
 			RecipesHelper.makeRoundRecipe(source, block, "nether_chest");
 		}
 		BLOCKS.add(name);
@@ -715,6 +733,7 @@ public class BlocksRegistry {
 		Block block = new BNSign(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
+			addFuel(source, block);
 			RecipesHelper.makeSignRecipe(source, block);
 		}
 		BLOCKS.add(name);
@@ -725,6 +744,7 @@ public class BlocksRegistry {
 		Block block = new BNBarrel(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
+			addFuel(source, block);
 			RecipesHelper.makeBarrelRecipe(source, slab, block);
 		}
 		BLOCKS.add(name);
@@ -735,6 +755,7 @@ public class BlocksRegistry {
 		Block block = new BNLadder(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
+			addFuel(source, block);
 			RecipesHelper.makeLadderRecipe(source, block);
 		}
 		BLOCKS.add(name);
@@ -745,6 +766,7 @@ public class BlocksRegistry {
 		Block block = new BNTaburet(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
+			addFuel(source, block);
 			RecipesHelper.makeTaburetRecipe(source, block);
 		}
 		BLOCKS.add(name);
@@ -755,6 +777,7 @@ public class BlocksRegistry {
 		Block block = new BNNormalChair(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
+			addFuel(source, block);
 			RecipesHelper.makeChairRecipe(source, block);
 		}
 		BLOCKS.add(name);
@@ -765,6 +788,7 @@ public class BlocksRegistry {
 		Block block = new BNBarStool(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
+			addFuel(source, block);
 			RecipesHelper.makeBarStoolRecipe(source, block);
 		}
 		BLOCKS.add(name);
