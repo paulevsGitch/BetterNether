@@ -113,7 +113,7 @@ public class StructureAnchorTreeBranch implements IStructure {
 				state = BlocksRegistry.ANCHOR_TREE.log.getDefaultState();
 			else
 				state = BlocksRegistry.ANCHOR_TREE.bark.getDefaultState();
-			BlocksHelper.setWithoutUpdate(world, bpos, state);
+			BlocksHelper.setWithUpdate(world, bpos, state);
 		}
 
 		POINTS.clear();
@@ -183,17 +183,17 @@ public class StructureAnchorTreeBranch implements IStructure {
 						if (world.getBlockState(POS).getMaterial().isReplaceable()) {
 							int length = BlocksHelper.downRay(world, POS, 17);
 							if (length < 5) {
-								BlocksHelper.setWithoutUpdate(world, POS, leaves);
+								BlocksHelper.setWithUpdate(world, POS, leaves);
 								continue;
 							} ;
 							if (length > 15) length = MHelper.randRange(12, 15, random);
 							else if (length > 12) length = MHelper.randRange(12, length, random);
 							for (int i = 1; i < length - 2; i++) {
-								BlocksHelper.setWithoutUpdate(world, POS.down(i), vine);
+								BlocksHelper.setWithUpdate(world, POS.down(i), vine);
 							}
-							BlocksHelper.setWithoutUpdate(world, POS.down(length - 2), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
-							BlocksHelper.setWithoutUpdate(world, POS.down(length - 1), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
-							BlocksHelper.setWithoutUpdate(world, POS, leaves);
+							BlocksHelper.setWithUpdate(world, POS.down(length - 2), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
+							BlocksHelper.setWithUpdate(world, POS.down(length - 1), vine.with(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
+							BlocksHelper.setWithUpdate(world, POS, leaves);
 						}
 					}
 				}

@@ -44,11 +44,11 @@ public class StructureWartTree extends StructureFuncScatter {
 				POS.set(px, py, pz);
 				if (isReplaceable(world.getBlockState(POS))) {
 				if (y == 0 && !isReplaceable(world.getBlockState(POS.down())))
-					BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.WART_ROOTS.getDefaultState());
+					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_ROOTS.getDefaultState());
 				else if (y < h2)
-					BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.WART_LOG.getDefaultState());
+					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_LOG.getDefaultState());
 				else
-				BlocksHelper.setWithoutUpdate(world, POS, WART_BLOCK);
+				BlocksHelper.setWithUpdate(world, POS, WART_BLOCK);
 				if (random.nextInt(8) == 0) {
 				Direction dir = HORIZONTAL[random.nextInt(HORIZONTAL.length)];
 				seedBlocks.add(new BlockPos(POS).offset(dir));
@@ -67,9 +67,9 @@ public class StructureWartTree extends StructureFuncScatter {
 				POS.set(px, py, pz);
 				if (isReplaceable(world.getBlockState(POS))) {
 				if (isReplaceable(world.getBlockState(POS.down())))
-					BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.WART_LOG.getDefaultState());
+					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_LOG.getDefaultState());
 				else {
-				BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.WART_ROOTS.getDefaultState());
+				BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_ROOTS.getDefaultState());
 				break;
 				}
 				}
@@ -89,7 +89,7 @@ public class StructureWartTree extends StructureFuncScatter {
 				int py = y + height;
 				POS.set(px, py, pz);
 				if (world.isAir(POS)) {
-				BlocksHelper.setWithoutUpdate(world, POS, WART_BLOCK);
+				BlocksHelper.setWithUpdate(world, POS, WART_BLOCK);
 				for (int i = 0; i < 4; i++)
 				seedBlocks.add(new BlockPos(POS).offset(Direction.values()[random.nextInt(6)]));
 				}
@@ -118,7 +118,7 @@ public class StructureWartTree extends StructureFuncScatter {
 				seed = seed.with(BlockWartSeed.FACING, Direction.WEST);
 			else if (isWart(world.getBlockState(pos.west())))
 				seed = seed.with(BlockWartSeed.FACING, Direction.EAST);
-			BlocksHelper.setWithoutUpdate(world, pos, seed);
+			BlocksHelper.setWithUpdate(world, pos, seed);
 		}
 	}
 

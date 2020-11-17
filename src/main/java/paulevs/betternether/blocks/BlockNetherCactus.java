@@ -79,8 +79,8 @@ public class BlockNetherCactus extends BlockBaseNotFull {
 			boolean grow = world.getBlockState(up).getBlock() == Blocks.AIR;
 			grow = grow && (BlocksHelper.getLengthDown(world, pos, this) < 3);
 			if (grow) {
-				BlocksHelper.setWithoutUpdate(world, up, getDefaultState());
-				BlocksHelper.setWithoutUpdate(world, pos, getDefaultState().with(TOP, false));
+				BlocksHelper.setWithUpdate(world, up, getDefaultState());
+				BlocksHelper.setWithUpdate(world, pos, getDefaultState().with(TOP, false));
 			}
 		}
 	}

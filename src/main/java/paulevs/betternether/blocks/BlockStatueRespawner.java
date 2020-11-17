@@ -35,7 +35,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockStatueRespawner extends BlockBaseNotFull {
@@ -51,11 +51,11 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(TOP, false));
 		this.setDropItself(false);
 
-		String itemName = Config.getString("respawn_statue", "respawn_item", Registry.ITEM.getId(Items.GLOWSTONE).toString());
+		String itemName = Configs.MAIN.getString("respawn_statue", "respawn_item", Registry.ITEM.getId(Items.GLOWSTONE).toString());
 		Item item = Registry.ITEM.get(new Identifier(itemName));
 		if (item == Items.AIR)
 			item = Items.GLOWSTONE;
-		int count = Config.getInt("respawn_statue", "item_count", 4);
+		int count = Configs.MAIN.getInt("respawn_statue", "item_count", 4);
 		requiredItem = new ItemStack(item, count);
 	}
 
@@ -111,7 +111,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
 	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
 		if (!world.isClient())
-			BlocksHelper.setWithoutUpdate((ServerWorld) world, pos.up(), state.with(TOP, true));
+			BlocksHelper.setWithUpdate((ServerWorld) world, pos.up(), state.with(TOP, true));
 	}
 
 	@Override

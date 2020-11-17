@@ -24,8 +24,8 @@ public class StructureEye implements IStructure {
 		BlockState eyeState = random.nextBoolean() ? BlocksRegistry.EYEBALL.getDefaultState() : BlocksRegistry.EYEBALL_SMALL.getDefaultState();
 
 		for (int y = 0; y < h2; y++)
-			BlocksHelper.setWithoutUpdate(world, pos.down(y), vineState);
+			BlocksHelper.setWithUpdate(world, pos.down(y), vineState);
 
-		BlocksHelper.setWithoutUpdate(world, pos.down(h2), eyeState);
+		BlocksHelper.setWithUpdate(world, pos.down(h2), eyeState);
 	}
 }

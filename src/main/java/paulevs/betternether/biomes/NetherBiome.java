@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
-import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
@@ -30,12 +30,8 @@ public class NetherBiome {
 	private ArrayList<StructureInfo> generatorsWall = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> generatorsCeil = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> generatorsLava = new ArrayList<StructureInfo>();
-	// private ArrayList<StructureInfo> generatorsUnder = new
-	// ArrayList<StructureInfo>();
 
 	private ArrayList<StructureInfo> buildGeneratorsFloor = new ArrayList<StructureInfo>();
-	// private ArrayList<StructureInfo> buildGeneratorsWall = new
-	// ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> buildGeneratorsCeil = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> buildGeneratorsLava = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> buildGeneratorsUnder = new ArrayList<StructureInfo>();
@@ -43,7 +39,7 @@ public class NetherBiome {
 	protected final Biome biome;
 	protected final Identifier mcID;
 	protected NetherBiome edge;
-	protected int edgeSize;
+	protected float edgeSize;
 	protected List<Subbiome> subbiomes;
 	protected NetherBiome biomeParent;
 	protected float maxSubBiomeChance = 1;
@@ -85,6 +81,7 @@ public class NetherBiome {
 	};
 
 	private ArrayList<String> structures;
+	private Biome actualBiome;
 
 	protected static final StructureStalactiteFloor STALACTITE_NETHERRACK = new StructureStalactiteFloor(BlocksRegistry.NETHERRACK_STALACTITE, null);
 	protected static final StructureStalactiteFloor STALACTITE_GLOWSTONE = new StructureStalactiteFloor(BlocksRegistry.GLOWSTONE_STALACTITE, Blocks.GLOWSTONE);
@@ -146,11 +143,11 @@ public class NetherBiome {
 
 	public void build() {
 		String group = getGroup();
-		String[] structAll = Config.getStringArray(group, "schematics", structures.toArray(new String[] {}));
+		String[] structAll = Configs.BIOMES.getStringArray(group, "schematics", structures.toArray(new String[] {}));
 		for (String struct : structAll) {
 			structureFromString(struct);
 		}
-		setNoiseDensity(Config.getFloat(group, "noise_density", getNoiseDensity()));
+		setNoiseDensity(Configs.BIOMES.getFloat(group, "noise_density", getNoiseDensity()));
 	}
 
 	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
@@ -206,11 +203,11 @@ public class NetherBiome {
 		edge.biomeParent = this;
 	}
 
-	public int getEdgeSize() {
+	public float getEdgeSize() {
 		return edgeSize;
 	}
 
-	public void setEdgeSize(int size) {
+	public void setEdgeSize(float size) {
 		edgeSize = size;
 	}
 
@@ -246,8 +243,8 @@ public class NetherBiome {
 
 	protected void addStructure(String name, IStructure structure, StructureType type, float density, boolean useNoise) {
 		String group = getGroup() + ".procedural." + type.getName() + "." + name;
-		float dens = Config.getFloat(group, "density", density);
-		boolean limit = Config.getBoolean(group, "limit", useNoise);
+		float dens = Configs.BIOMES.getFloat(group, "density", density);
+		boolean limit = Configs.BIOMES.getBoolean(group, "limit", useNoise);
 		this.addStructure(structure, type, dens, limit);
 	}
 
@@ -428,5 +425,13 @@ public class NetherBiome {
 
 	public Identifier getID() {
 		return mcID;
+	}
+
+	public Biome getActualBiome() {
+		return actualBiome;
+	}
+
+	public void setActualBiome(Biome actualBiome) {
+		this.actualBiome = actualBiome;
 	}
 }

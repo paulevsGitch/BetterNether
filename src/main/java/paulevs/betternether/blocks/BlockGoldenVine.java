@@ -110,8 +110,8 @@ public class BlockGoldenVine extends BlockBaseNotFull implements Fertilizable {
 			if (world.getBlockState(blockPos).getBlock() != this)
 				break;
 		}
-		BlocksHelper.setWithoutUpdate(world, blockPos.up(), getDefaultState().with(BOTTOM, false));
-		BlocksHelper.setWithoutUpdate(world, blockPos, getDefaultState().with(BOTTOM, true));
+		BlocksHelper.setWithUpdate(world, blockPos.up(), getDefaultState().with(BOTTOM, false));
+		BlocksHelper.setWithUpdate(world, blockPos, getDefaultState().with(BOTTOM, true));
 	}
 
 	@Override

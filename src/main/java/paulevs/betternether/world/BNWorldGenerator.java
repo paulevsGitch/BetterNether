@@ -26,7 +26,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.blocks.BlockStalactite;
-import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureCaves;
@@ -72,24 +72,24 @@ public class BNWorldGenerator {
 	public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CITY_CONFIGURED = CITY.configure(DefaultFeatureConfig.DEFAULT);
 	
 	public static void onModInit() {
-		hasCleaningPass = Config.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
-		hasFixPass = Config.getBoolean("generator.world.terrain", "world_fixing_pass", true);
+		hasCleaningPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
+		hasFixPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "world_fixing_pass", true);
 
-		hasCaves = Config.getBoolean("generator.world.environment", "generate_caves", true);
-		hasPaths = Config.getBoolean("generator.world.environment", "generate_paths", true);
+		hasCaves = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_caves", true);
+		hasPaths = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_paths", true);
 
-		cincinnasiteDensity = Config.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 1024F);
-		rubyDensity = Config.getFloat("generator.world.ores", "ruby_ore_density", 1F / 4000F);
-		lapisDensity = Config.getFloat("generator.world.ores", "lapis_ore_density", 1F / 4000F);
-		structureDensity = Config.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
-		lavaStructureDensity = Config.getFloat("generator.world", "lava_structures_density", 1F / 200F) * 1.0001F;
-		globalDensity = Config.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
+		cincinnasiteDensity = Configs.GENERATOR.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 1024F);
+		rubyDensity = Configs.GENERATOR.getFloat("generator.world.ores", "ruby_ore_density", 1F / 4000F);
+		lapisDensity = Configs.GENERATOR.getFloat("generator.world.ores", "lapis_ore_density", 1F / 4000F);
+		structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
+		lavaStructureDensity = Configs.GENERATOR.getFloat("generator.world", "lava_structures_density", 1F / 200F) * 1.0001F;
+		globalDensity = Configs.GENERATOR.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
 
-		biomeSizeXZ = Config.getInt("generator_world", "biome_size_xz", 200);
-		biomeSizeY = Config.getInt("generator_world", "biome_size_y", 40);
-		volumetric = Config.getBoolean("generator_world", "volumetric_biomes", true);
+		biomeSizeXZ = Configs.GENERATOR.getInt("generator_world", "biome_size_xz", 200);
+		biomeSizeY = Configs.GENERATOR.getInt("generator_world", "biome_size_y", 40);
+		volumetric = Configs.GENERATOR.getBoolean("generator_world", "volumetric_biomes", true);
 
-		int distance = Config.getInt("generator.world.cities", "distance", 64);
+		int distance = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
 		int separation = distance >> 1;
 
 		FabricStructureBuilder.create(new Identifier(BetterNether.MOD_ID, "nether_city"), CITY)

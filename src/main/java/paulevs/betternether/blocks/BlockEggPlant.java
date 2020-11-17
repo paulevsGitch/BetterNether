@@ -30,7 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.registry.EntityRegistry;
 
 public class BlockEggPlant extends BlockCommonPlant {
@@ -42,8 +42,8 @@ public class BlockEggPlant extends BlockCommonPlant {
 
 	public BlockEggPlant() {
 		super(MaterialColor.WHITE_TERRACOTTA);
-		enableModDamage = Config.getBoolean("egg_plant", "mob_damage", true);
-		enablePlayerDamage = Config.getBoolean("egg_plant", "player_damage", true);
+		enableModDamage = Configs.MAIN.getBoolean("egg_plant", "mob_damage", true);
+		enablePlayerDamage = Configs.MAIN.getBoolean("egg_plant", "player_damage", true);
 		this.setDefaultState(getStateManager().getDefaultState().with(DESTRUCTED, false));
 	}
 

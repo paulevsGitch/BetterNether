@@ -39,8 +39,12 @@ public class BlockOre extends OreBlock {
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
 		if (tool.isEffectiveOn(state)) {
-			int fortune = EnchantmentHelper.getLevel(Enchantments.FORTUNE, tool);
-			int min = MathHelper.clamp(minCount + fortune, 0, maxCount);
+			int enchant = EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool);
+			if (enchant > 0) {
+				return Lists.newArrayList(new ItemStack(this));
+			}
+			enchant = EnchantmentHelper.getLevel(Enchantments.FORTUNE, tool);
+			int min = MathHelper.clamp(minCount + enchant, 0, maxCount);
 			if (min == maxCount)
 				return Lists.newArrayList(new ItemStack(dropItem, maxCount));
 			int count = MHelper.randRange(min, maxCount, MHelper.RANDOM);

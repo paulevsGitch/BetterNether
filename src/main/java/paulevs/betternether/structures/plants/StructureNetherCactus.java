@@ -42,8 +42,8 @@ public class StructureNetherCactus implements IStructure {
 					if (world.isAir(npos) && canPlaceAt(world, npos)) {
 						int h = random.nextInt(3);
 						for (int n = 0; n < h; n++)
-							BlocksHelper.setWithoutUpdate(world, npos.up(n), bottom);
-						BlocksHelper.setWithoutUpdate(world, npos.up(h), top);
+							BlocksHelper.setWithUpdate(world, npos.up(n), bottom);
+						BlocksHelper.setWithUpdate(world, npos.up(h), top);
 						break;
 					}
 				}

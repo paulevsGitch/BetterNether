@@ -23,11 +23,11 @@ public class StructureLumabusVine implements IStructure {
 
 		BlockState vineState = BlocksRegistry.LUMABUS_VINE.getDefaultState().with(BlockLumabusVine.SHAPE, TripleShape.MIDDLE);
 
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.LUMABUS_VINE.getDefaultState());
+		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.LUMABUS_VINE.getDefaultState());
 
 		for (int y = 1; y < h2; y++)
-			BlocksHelper.setWithoutUpdate(world, pos.down(y), vineState);
+			BlocksHelper.setWithUpdate(world, pos.down(y), vineState);
 
-		BlocksHelper.setWithoutUpdate(world, pos.down(h2), BlocksRegistry.LUMABUS_VINE.getDefaultState().with(BlockLumabusVine.SHAPE, TripleShape.BOTTOM));
+		BlocksHelper.setWithUpdate(world, pos.down(h2), BlocksRegistry.LUMABUS_VINE.getDefaultState().with(BlockLumabusVine.SHAPE, TripleShape.BOTTOM));
 	}
 }

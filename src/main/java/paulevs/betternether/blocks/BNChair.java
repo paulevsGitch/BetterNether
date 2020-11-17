@@ -44,13 +44,6 @@ public class BNChair extends BlockBaseNotFull {
 
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		/*
-		 * if (world.isClient) player.sendMessage(new TranslatableText(
-		 * "Sorry, furniture is not working on 20w19a\n") .append(
-		 * "(it will teleport you under bedrock)\n") .append(
-		 * "I will fix it later"), false); return ActionResult.FAIL;
-		 */
-
 		if (world.isClient) {
 			return ActionResult.FAIL;
 		}
@@ -72,12 +65,13 @@ public class BNChair extends BlockBaseNotFull {
 				return ActionResult.FAIL;
 
 			float yaw = state.get(FACING).getOpposite().asRotation();
-
 			EntityChair entity = EntityRegistry.CHAIR.create(world);
 			entity.refreshPositionAndAngles(px, py, pz, yaw, 0);
 			entity.setNoGravity(true);
 			entity.setSilent(true);
 			entity.setInvisible(true);
+			entity.setHeadYaw(yaw);
+			entity.setYaw(yaw);
 			if (world.spawnEntity(entity)) {
 				player.startRiding(entity, true);
 				player.setYaw(yaw);

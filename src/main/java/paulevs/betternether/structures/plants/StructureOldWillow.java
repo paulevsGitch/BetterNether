@@ -93,20 +93,20 @@ public class StructureOldWillow extends StructureFuncScatter {
 		for (BlockPos bpos : BLOCKS) {
 			if (BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) || state.getMaterial().isReplaceable()) {
 				if (!BLOCKS.contains(bpos.up()) || !BLOCKS.contains(bpos.down()))
-					BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.WILLOW_BARK.getDefaultState());
+					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_BARK.getDefaultState());
 				else
-					BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.WILLOW_LOG.getDefaultState());
+					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LOG.getDefaultState());
 
 				if (random.nextInt(8) == 0) {
 					state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
-						BlocksHelper.setWithoutUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
+						BlocksHelper.setWithUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
-						BlocksHelper.setWithoutUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
+						BlocksHelper.setWithUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
-						BlocksHelper.setWithoutUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
+						BlocksHelper.setWithUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
-						BlocksHelper.setWithoutUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
+						BlocksHelper.setWithUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
 				}
 			}
 		}
@@ -206,19 +206,19 @@ public class StructureOldWillow extends StructureFuncScatter {
 							if (random.nextBoolean()) {
 								int length = BlocksHelper.downRay(world, POS, 12);
 								if (length < 3) {
-									BlocksHelper.setWithoutUpdate(world, POS, leaves);
+									BlocksHelper.setWithUpdate(world, POS, leaves);
 									continue;
 								} ;
 								length = MHelper.randRange(3, length, random);
 								for (int i = 1; i < length - 1; i++) {
-									BlocksHelper.setWithoutUpdate(world, POS.down(i), vine);
+									BlocksHelper.setWithUpdate(world, POS.down(i), vine);
 								}
-								BlocksHelper.setWithoutUpdate(world, POS.down(length - 1), vine.with(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+								BlocksHelper.setWithUpdate(world, POS.down(length - 1), vine.with(BlockWillowBranch.SHAPE, WillowBranchShape.END));
 							}
 							else if (random.nextBoolean() && world.getBlockState(POS.down()).getMaterial().isReplaceable()) {
-								BlocksHelper.setWithoutUpdate(world, POS.down(), leaves);
+								BlocksHelper.setWithUpdate(world, POS.down(), leaves);
 							}
-							BlocksHelper.setWithoutUpdate(world, POS, leaves);
+							BlocksHelper.setWithUpdate(world, POS, leaves);
 						}
 					}
 				}

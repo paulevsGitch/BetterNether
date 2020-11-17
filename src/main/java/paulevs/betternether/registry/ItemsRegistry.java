@@ -29,7 +29,7 @@ import net.minecraft.world.World;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.shapes.FoodShape;
-import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.integrations.VanillaExcavatorsIntegration;
 import paulevs.betternether.integrations.VanillaHammersIntegration;
 import paulevs.betternether.items.BNArmor;
@@ -114,7 +114,7 @@ public class ItemsRegistry {
 	public static void register() {}
 
 	public static Item registerItem(String name, Item item) {
-		if ((item instanceof BlockItem || Config.getBoolean("items", name, true)) && item != Items.AIR) {
+		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
 			Registry.register(Registry.ITEM, new Identifier(BetterNether.MOD_ID, name), item);
 			if (item instanceof BlockItem)
 				MOD_BLOCKS.add(item);
@@ -159,7 +159,7 @@ public class ItemsRegistry {
 	}
 
 	private static Item makeEgg(String name, EntityType<?> type, int background, int dots) {
-		if (Config.getBoolean("mobs", name, true)) {
+		if (Configs.MOBS.getBoolean("mobs", name, true)) {
 			SpawnEggItem item = new SpawnEggItem(type, background, dots, defaultSettings());
 			ItemDispenserBehavior behavior = new ItemDispenserBehavior() {
 				public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
