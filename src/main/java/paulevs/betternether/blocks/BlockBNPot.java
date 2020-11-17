@@ -41,7 +41,7 @@ public class BlockBNPot extends BlockBaseNotFull {
 			BlockState plant = BlockPottedPlant.getPlant(player.getMainHandStack().getItem());
 			if (plant != null) {
 				if (!world.isClient())
-					BlocksHelper.setWithoutUpdate((ServerWorld) world, plantPos, plant);
+					BlocksHelper.setWithUpdate((ServerWorld) world, plantPos, plant);
 				world.playSound(
 						pos.getX() + 0.5,
 						pos.getY() + 1.5,

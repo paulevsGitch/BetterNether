@@ -3,7 +3,6 @@ package paulevs.betternether.registry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Optional;
 import java.util.Random;
 
 import com.google.common.collect.Maps;
@@ -11,10 +10,8 @@ import com.google.common.collect.Maps;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.CrimsonGlowingWoods;
 import paulevs.betternether.biomes.CrimsonPinewood;
 import paulevs.betternether.biomes.FloodedDeltas;
@@ -43,7 +40,6 @@ import paulevs.betternether.config.Config;
 public class BiomesRegistry {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
-	private static final HashMap<NetherBiome, RegistryKey<Biome>> KEYS = Maps.newHashMap();
 	private static final HashMap<Biome, NetherBiome> MUTABLE = Maps.newHashMap();
 	private static final ArrayList<NetherBiome> GENERATOR = new ArrayList<NetherBiome>();
 
@@ -80,7 +76,6 @@ public class BiomesRegistry {
 
 	private static int maxDefChance = 0;
 	private static int maxChance = 0;
-	private static boolean registered = false;
 
 	public static void register() {
 		registerBiome(BIOME_GRAVEL_DESERT);
@@ -109,51 +104,6 @@ public class BiomesRegistry {
 		registerDefaultWrapped(BIOME_CRIMSON_FOREST);
 		registerDefaultWrapped(BIOME_WARPED_FOREST);
 		registerDefaultWrapped(BIOME_BASALT_DELTAS);
-		registerMinecraftBiomes();
-	}
-
-	public static void registerAllOtherBiomes() {
-		if (!registered) {
-			Iterator<Biome> iterator = BuiltinRegistries.BIOME.iterator();
-			while (iterator.hasNext()) {
-				Biome biome = iterator.next();
-				if (biome.getCategory() == Category.NETHER && !hasLink(biome)) {
-					Identifier id = BuiltinRegistries.BIOME.getId(biome);
-					String name = id.getPath();
-					String group = id.getNamespace();
-					if (!group.equals(BetterNether.MOD_ID)) {
-						float chance = Config.getFloat("biomes." + group, name + "_chance", 1);
-						if (chance > 0) {
-							NetherBiomeWrapper wrapper = new NetherBiomeWrapper(id);
-							maxChance += chance;
-							wrapper.setGenChance(maxChance);
-							wrapper.build();
-							REGISTRY.add(wrapper);
-							makeLink(wrapper);
-							DEF_CHANCES_MAIN.put(wrapper, chance);
-						}
-					}
-				}
-			}
-
-			registered = true;
-			Config.markToSave();
-			Config.save();
-		}
-	}
-
-	private static void registerMinecraftBiomes() {
-		Iterator<Biome> iterator = BuiltinRegistries.BIOME.iterator();
-		while (iterator.hasNext()) {
-			Biome biome = iterator.next();
-			if (biome.getCategory() == Category.NETHER && !hasLink(biome)) {
-				Identifier id = BuiltinRegistries.BIOME.getId(biome);
-				if (id.getNamespace().equals("minecraft")) {
-					NetherBiomeWrapper wrapper = new NetherBiomeWrapper(id);
-					registerDefaultWrapped(wrapper);
-				}
-			}
-		}
 	}
 
 	private static void registerDefaultWrapped(NetherBiome biome) {
@@ -164,7 +114,6 @@ public class BiomesRegistry {
 			biome.setPlantDensity(Config.getFloat("generator.biome." + biome.getRegistryName(), "plants_and_structures_density", 1));
 			biome.build();
 			REGISTRY.add(biome);
-			makeLink(biome);
 			ALL_BIOMES.add(biome);
 			DEF_CHANCES_MAIN.put(biome, 1F);
 		}
@@ -172,7 +121,6 @@ public class BiomesRegistry {
 
 	private static void registerBiomeDirect(String regName, NetherBiome biome) {
 		Registry.register(BuiltinRegistries.BIOME, biome.getID(), biome.getBiome());
-		makeLink(biome);
 	}
 
 	public static void registerBiome(NetherBiome biome) {
@@ -196,7 +144,9 @@ public class BiomesRegistry {
 
 		MUTABLE.clear();
 		for (NetherBiome netherBiome : BiomesRegistry.getAllBiomes()) {
-			MUTABLE.put(biomeRegistry.getOrThrow(getBiomeKey(netherBiome)), netherBiome);
+			Biome biome = biomeRegistry.get(netherBiome.getID());
+			netherBiome.setActualBiome(biome);
+			MUTABLE.put(biome, netherBiome);
 		}
 
 		if (maxDefChance == 0) maxDefChance = maxChance;
@@ -206,17 +156,18 @@ public class BiomesRegistry {
 		while (iterator.hasNext()) {
 			Biome biome = iterator.next();
 			if (biome.getCategory() == Category.NETHER && !BiomesRegistry.MUTABLE.containsKey(biome)) {
+				Identifier id = biomeRegistry.getId(biome);
 				NetherBiome netherBiome = new NetherBiomeWrapper(biomeRegistry.getId(biome), biome);
+				netherBiome.setActualBiome(biome);
 				MUTABLE.put(biome, netherBiome);
 
-				float chance = Config.getFloat("biomes.minecraft.main", netherBiome.getRegistryName() + "_chance", 1);
+				float chance = Config.getFloat("biomes." + id.getNamespace() + ".main", id.getPath() + "_chance", 1);
 				if (chance > 0.0F) {
 					maxChance += chance;
 					netherBiome.setGenChance(maxChance);
 					netherBiome.setPlantDensity(Config.getFloat("generator.biome." + netherBiome.getRegistryName(), "plants_and_structures_density", 1));
 					netherBiome.build();
 					GENERATOR.add(netherBiome);
-					KEYS.put(netherBiome, biomeRegistry.getKey(biome).get());
 					DEF_CHANCES_MAIN.put(netherBiome, 1F);
 				}
 			}
@@ -256,21 +207,6 @@ public class BiomesRegistry {
 			if (biome.canGenerate(chance))
 				return biome;
 		return BIOME_EMPTY_NETHER;
-	}
-
-	private static boolean hasLink(Biome biome) {
-		Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
-		if (!optional.isPresent()) return false;
-		Identifier id = optional.get().getValue();
-		for (RegistryKey<Biome> key : KEYS.values())
-			if (id.equals(key.getValue())) return true;
-		return false;
-	}
-
-	private static void makeLink(NetherBiome netherBiome) {
-		Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(netherBiome.getBiome());
-		RegistryKey<Biome> key = optional.isPresent() ? optional.get() : RegistryKey.of(Registry.BIOME_KEY, netherBiome.getID());
-		KEYS.put(netherBiome, key);
 	}
 
 	public static NetherBiome getFromBiome(Biome biome) {
@@ -375,9 +311,5 @@ public class BiomesRegistry {
 
 	public static ArrayList<NetherBiome> getAllBiomes() {
 		return ALL_BIOMES;
-	}
-
-	public static RegistryKey<Biome> getBiomeKey(NetherBiome biome) {
-		return KEYS.get(biome);
 	}
 }

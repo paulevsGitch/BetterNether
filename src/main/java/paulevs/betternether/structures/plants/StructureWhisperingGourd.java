@@ -32,8 +32,8 @@ public class StructureWhisperingGourd implements IStructure {
 		blockPos.set(pos);
 		for (int y = 0; y < h - 1; y++) {
 			blockPos.setY(pos.getY() - y);
-			BlocksHelper.setWithoutUpdate(world, blockPos, random.nextBoolean() ? top : middle);
+			BlocksHelper.setWithUpdate(world, blockPos, random.nextBoolean() ? top : middle);
 		}
-		BlocksHelper.setWithoutUpdate(world, blockPos.down(), bottom);
+		BlocksHelper.setWithUpdate(world, blockPos.down(), bottom);
 	}
 }

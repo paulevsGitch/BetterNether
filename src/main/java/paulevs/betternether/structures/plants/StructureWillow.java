@@ -32,26 +32,26 @@ public class StructureWillow implements IStructure {
 
 		h2 = Math.min(h2, mh);
 
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.WILLOW_TRUNK.getDefaultState().with(BlockWillowTrunk.SHAPE, TripleShape.BOTTOM));
+		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.WILLOW_TRUNK.getDefaultState().with(BlockWillowTrunk.SHAPE, TripleShape.BOTTOM));
 		for (int h = 1; h < h2; h++)
 			if (world.isAir(pos.up(h)))
-				BlocksHelper.setWithoutUpdate(world, pos.up(h), BlocksRegistry.WILLOW_TRUNK.getDefaultState().with(BlockWillowTrunk.SHAPE, TripleShape.MIDDLE));
+				BlocksHelper.setWithUpdate(world, pos.up(h), BlocksRegistry.WILLOW_TRUNK.getDefaultState().with(BlockWillowTrunk.SHAPE, TripleShape.MIDDLE));
 		if (world.isAir(pos.up(h2)))
-			BlocksHelper.setWithoutUpdate(world, pos.up(h2), BlocksRegistry.WILLOW_TRUNK.getDefaultState().with(BlockWillowTrunk.SHAPE, TripleShape.TOP));
+			BlocksHelper.setWithUpdate(world, pos.up(h2), BlocksRegistry.WILLOW_TRUNK.getDefaultState().with(BlockWillowTrunk.SHAPE, TripleShape.TOP));
 
 		for (int i = 0; i < 4; i++)
 			branch(world, pos.up(h2).offset(HOR[i]), 3 + random.nextInt(2), random, HOR[i], pos.up(h2), 0);
 
-		BlocksHelper.setWithoutUpdate(world, pos.up(h2 + 1), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.UP));
+		BlocksHelper.setWithUpdate(world, pos.up(h2 + 1), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.UP));
 		for (int i = 0; i < 4; i++)
-			BlocksHelper.setWithoutUpdate(world, pos.up(h2 + 1).offset(HOR[i]), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, HOR[i]));
+			BlocksHelper.setWithUpdate(world, pos.up(h2 + 1).offset(HOR[i]), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, HOR[i]));
 	}
 
 	private void branch(ServerWorldAccess world, BlockPos pos, int length, Random random, Direction direction, BlockPos center, int level) {
 		if (level > 5)
 			return;
 		Mutable bpos = new Mutable().set(pos);
-		BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, direction));
+		BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, direction));
 		vine(world, pos.down(), 1 + random.nextInt(1));
 		Direction preDir = direction;
 		int l2 = length * length;
@@ -62,15 +62,15 @@ public class StructureWillow implements IStructure {
 				bpos.set(p);
 				if (bpos.getManhattanDistance(center) > length)
 					break;
-				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, dir));
+				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, dir));
 
 				if (random.nextBoolean()) {
-					BlocksHelper.setWithoutUpdate(world, bpos.up(), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.UP));
+					BlocksHelper.setWithUpdate(world, bpos.up(), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.UP));
 				}
 
 				if (random.nextInt(3) == 0) {
 					bpos.setY(bpos.getY() - 1);
-					BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.DOWN));
+					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.DOWN));
 				}
 
 				if (random.nextBoolean())
@@ -90,7 +90,7 @@ public class StructureWillow implements IStructure {
 				Direction dir2 = HOR[random.nextInt(4)];
 				BlockPos p2 = bpos.offset(dir2);
 				if (world.isAir(p2))
-					BlocksHelper.setWithoutUpdate(world, p2, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, dir2));
+					BlocksHelper.setWithUpdate(world, p2, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, dir2));
 
 				preDir = dir;
 			}
@@ -98,7 +98,7 @@ public class StructureWillow implements IStructure {
 
 		if (random.nextBoolean()) {
 			if (world.isAir(bpos))
-				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, preDir));
+				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, preDir));
 		}
 	}
 
@@ -109,12 +109,12 @@ public class StructureWillow implements IStructure {
 		for (int i = 0; i < length; i++) {
 			BlockPos p = pos.down(i);
 			if (world.isAir(p.down()))
-				BlocksHelper.setWithoutUpdate(world, p, BlocksRegistry.WILLOW_BRANCH.getDefaultState().with(BlockWillowBranch.SHAPE, WillowBranchShape.MIDDLE));
+				BlocksHelper.setWithUpdate(world, p, BlocksRegistry.WILLOW_BRANCH.getDefaultState().with(BlockWillowBranch.SHAPE, WillowBranchShape.MIDDLE));
 			else {
-				BlocksHelper.setWithoutUpdate(world, p, BlocksRegistry.WILLOW_BRANCH.getDefaultState().with(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+				BlocksHelper.setWithUpdate(world, p, BlocksRegistry.WILLOW_BRANCH.getDefaultState().with(BlockWillowBranch.SHAPE, WillowBranchShape.END));
 				return;
 			}
 		}
-		BlocksHelper.setWithoutUpdate(world, pos.down(length), BlocksRegistry.WILLOW_BRANCH.getDefaultState().with(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+		BlocksHelper.setWithUpdate(world, pos.down(length), BlocksRegistry.WILLOW_BRANCH.getDefaultState().with(BlockWillowBranch.SHAPE, WillowBranchShape.END));
 	}
 }

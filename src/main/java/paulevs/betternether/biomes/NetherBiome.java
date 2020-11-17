@@ -30,12 +30,8 @@ public class NetherBiome {
 	private ArrayList<StructureInfo> generatorsWall = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> generatorsCeil = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> generatorsLava = new ArrayList<StructureInfo>();
-	// private ArrayList<StructureInfo> generatorsUnder = new
-	// ArrayList<StructureInfo>();
 
 	private ArrayList<StructureInfo> buildGeneratorsFloor = new ArrayList<StructureInfo>();
-	// private ArrayList<StructureInfo> buildGeneratorsWall = new
-	// ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> buildGeneratorsCeil = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> buildGeneratorsLava = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> buildGeneratorsUnder = new ArrayList<StructureInfo>();
@@ -85,6 +81,7 @@ public class NetherBiome {
 	};
 
 	private ArrayList<String> structures;
+	private Biome actualBiome;
 
 	protected static final StructureStalactiteFloor STALACTITE_NETHERRACK = new StructureStalactiteFloor(BlocksRegistry.NETHERRACK_STALACTITE, null);
 	protected static final StructureStalactiteFloor STALACTITE_GLOWSTONE = new StructureStalactiteFloor(BlocksRegistry.GLOWSTONE_STALACTITE, Blocks.GLOWSTONE);
@@ -428,5 +425,13 @@ public class NetherBiome {
 
 	public Identifier getID() {
 		return mcID;
+	}
+
+	public Biome getActualBiome() {
+		return actualBiome;
+	}
+
+	public void setActualBiome(Biome actualBiome) {
+		this.actualBiome = actualBiome;
 	}
 }

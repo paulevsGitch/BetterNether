@@ -47,9 +47,9 @@ public class StructureNetherSakura implements IStructure {
 						int start = MHelper.randRange(-2, 0, random);
 						for (int y = start; y < length; y++) {
 							POS.setY(pos.getY() - y);
-							if (canReplace(world.getBlockState(POS))) BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.log.getDefaultState());
+							if (canReplace(world.getBlockState(POS))) BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.log.getDefaultState());
 						}
-						if (BlocksRegistry.NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.bark.getDefaultState());
+						if (BlocksRegistry.NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.bark.getDefaultState());
 					}
 
 					if (d < 2) {
@@ -74,7 +74,7 @@ public class StructureNetherSakura implements IStructure {
 					int cz2 = cz * cz;
 					if (cx2 + cy2 + cz2 < r2) {
 						POS2.setZ(pos.getZ() + cz);
-						if (world.getBlockState(POS2).getMaterial().isReplaceable()) BlocksHelper.setWithoutUpdate(world, POS2, leaves);
+						if (world.getBlockState(POS2).getMaterial().isReplaceable()) BlocksHelper.setWithUpdate(world, POS2, leaves);
 					}
 				}
 			}
@@ -94,7 +94,7 @@ public class StructureNetherSakura implements IStructure {
 					int cz2 = cz * cz;
 					if (cx2 + cz2 < r2) {
 						POS2.setZ(pos.getZ() + cz);
-						if (world.getBlockState(POS2).getMaterial().isReplaceable()) BlocksHelper.setWithoutUpdate(world, POS2, leaves);
+						if (world.getBlockState(POS2).getMaterial().isReplaceable()) BlocksHelper.setWithUpdate(world, POS2, leaves);
 					}
 				}
 			}

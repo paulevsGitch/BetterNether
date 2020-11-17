@@ -55,45 +55,45 @@ public class StructureSoulLily implements IStructure {
 	}
 
 	public void growSmall(WorldAccess world, BlockPos pos) {
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SOUL_LILY.getDefaultState());
+		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.SOUL_LILY.getDefaultState());
 	}
 
 	public void growMedium(WorldAccess world, BlockPos pos) {
-		BlocksHelper.setWithoutUpdate(world, pos,
+		BlocksHelper.setWithUpdate(world, pos,
 				BlocksRegistry.SOUL_LILY
 						.getDefaultState()
 						.with(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_BOTTOM));
-		BlocksHelper.setWithoutUpdate(world, pos.up(),
+		BlocksHelper.setWithUpdate(world, pos.up(),
 				BlocksRegistry.SOUL_LILY
 						.getDefaultState()
 						.with(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_TOP));
 	}
 
 	public void growBig(WorldAccess world, BlockPos pos) {
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SOUL_LILY
+		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_BOTTOM));
-		BlocksHelper.setWithoutUpdate(world, pos.up(),
+		BlocksHelper.setWithUpdate(world, pos.up(),
 				BlocksRegistry.SOUL_LILY
 						.getDefaultState()
 						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_MIDDLE));
 		BlockPos up = pos.up(2);
-		BlocksHelper.setWithoutUpdate(world, up,
+		BlocksHelper.setWithUpdate(world, up,
 				BlocksRegistry.SOUL_LILY
 						.getDefaultState()
 						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_CENTER));
-		BlocksHelper.setWithoutUpdate(world, up.north(), BlocksRegistry.SOUL_LILY
+		BlocksHelper.setWithUpdate(world, up.north(), BlocksRegistry.SOUL_LILY
 				.getDefaultState()
 				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_S));
-		BlocksHelper.setWithoutUpdate(world, up.south(),
+		BlocksHelper.setWithUpdate(world, up.south(),
 				BlocksRegistry.SOUL_LILY
 						.getDefaultState()
 						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_N));
-		BlocksHelper.setWithoutUpdate(world, up.east(),
+		BlocksHelper.setWithUpdate(world, up.east(),
 				BlocksRegistry.SOUL_LILY
 						.getDefaultState()
 						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_W));
-		BlocksHelper.setWithoutUpdate(world, up.west(),
+		BlocksHelper.setWithUpdate(world, up.west(),
 				BlocksRegistry.SOUL_LILY
 						.getDefaultState()
 						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_E));

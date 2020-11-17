@@ -109,8 +109,8 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Fertil
 
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-		BlocksHelper.setWithoutUpdate(world, pos, state.with(SHAPE, TripleShape.TOP));
-		BlocksHelper.setWithoutUpdate(world, pos.down(), getDefaultState());
+		BlocksHelper.setWithUpdate(world, pos, state.with(SHAPE, TripleShape.TOP));
+		BlocksHelper.setWithUpdate(world, pos.down(), getDefaultState());
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Fertil
 			grow(world, random, pos, state);
 		}
 		if (state.get(SHAPE) != TripleShape.MIDDLE && state.get(SHAPE) != TripleShape.BOTTOM && random.nextInt(16) == 0) {
-			BlocksHelper.setWithoutUpdate(world, pos, state.with(SHAPE, TripleShape.MIDDLE));
+			BlocksHelper.setWithUpdate(world, pos, state.with(SHAPE, TripleShape.MIDDLE));
 		}
 	}
 
@@ -139,7 +139,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Fertil
 		ItemStack tool = player.getStackInHand(hand);
 		if (tool.getItem().isIn(FabricToolTags.SHEARS) && state.get(SHAPE) == TripleShape.MIDDLE) {
 			if (!world.isClient) {
-				BlocksHelper.setWithoutUpdate(world, pos, state.with(SHAPE, TripleShape.BOTTOM));
+				BlocksHelper.setWithUpdate(world, pos, state.with(SHAPE, TripleShape.BOTTOM));
 				world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(BlocksRegistry.WHISPERING_GOURD)));
 				if (world.random.nextBoolean()) {
 					world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(BlocksRegistry.WHISPERING_GOURD)));

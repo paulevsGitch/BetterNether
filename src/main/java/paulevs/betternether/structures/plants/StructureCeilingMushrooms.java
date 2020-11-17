@@ -13,11 +13,11 @@ public class StructureCeilingMushrooms implements IStructure {
 	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
 		if (pos.getY() < 90) return;
 		pos = pos.up();
-		if (canPlace(world, pos)) BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
-		if (canPlace(world, pos.north())) BlocksHelper.setWithoutUpdate(world, pos.north(), BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
-		if (canPlace(world, pos.south())) BlocksHelper.setWithoutUpdate(world, pos.south(), BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
-		if (canPlace(world, pos.east())) BlocksHelper.setWithoutUpdate(world, pos.east(), BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
-		if (canPlace(world, pos.west())) BlocksHelper.setWithoutUpdate(world, pos.west(), BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
+		if (canPlace(world, pos)) BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
+		if (canPlace(world, pos.north())) BlocksHelper.setWithUpdate(world, pos.north(), BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
+		if (canPlace(world, pos.south())) BlocksHelper.setWithUpdate(world, pos.south(), BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
+		if (canPlace(world, pos.east())) BlocksHelper.setWithUpdate(world, pos.east(), BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
+		if (canPlace(world, pos.west())) BlocksHelper.setWithUpdate(world, pos.west(), BlocksRegistry.CEILING_MUSHROOMS.getDefaultState());
 	}
 
 	private boolean canPlace(ServerWorldAccess world, BlockPos pos) {

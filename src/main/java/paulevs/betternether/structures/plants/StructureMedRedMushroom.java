@@ -54,8 +54,8 @@ public class StructureMedRedMushroom implements IStructure {
 			}
 		BlockState middle = BlocksRegistry.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.MIDDLE);
 		for (int y = 1; y < size; y++)
-			BlocksHelper.setWithoutUpdate(world, pos.up(y), middle);
-		BlocksHelper.setWithoutUpdate(world, pos.up(size), BlocksRegistry.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.TOP));
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.BOTTOM));
+			BlocksHelper.setWithUpdate(world, pos.up(y), middle);
+		BlocksHelper.setWithUpdate(world, pos.up(size), BlocksRegistry.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.TOP));
+		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.RED_LARGE_MUSHROOM.getDefaultState().with(BlockRedLargeMushroom.SHAPE, TripleShape.BOTTOM));
 	}
 }

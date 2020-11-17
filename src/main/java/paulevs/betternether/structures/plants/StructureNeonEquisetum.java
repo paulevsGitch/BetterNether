@@ -32,11 +32,11 @@ public class StructureNeonEquisetum implements IStructure {
 		blockPos.set(pos);
 		for (int y = 0; y < h - 2; y++) {
 			blockPos.setY(pos.getY() - y);
-			BlocksHelper.setWithoutUpdate(world, blockPos, top);
+			BlocksHelper.setWithUpdate(world, blockPos, top);
 		}
 		blockPos.setY(blockPos.getY() - 1);
-		BlocksHelper.setWithoutUpdate(world, blockPos, middle);
+		BlocksHelper.setWithUpdate(world, blockPos, middle);
 		blockPos.setY(blockPos.getY() - 1);
-		BlocksHelper.setWithoutUpdate(world, blockPos, bottom);
+		BlocksHelper.setWithUpdate(world, blockPos, bottom);
 	}
 }
