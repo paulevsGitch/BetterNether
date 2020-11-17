@@ -17,7 +17,7 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.blocks.*;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.blocks.complex.WoodenMaterial;
-import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.structures.plants.StructureLumabusVine;
@@ -512,7 +512,7 @@ public class BlocksRegistry {
 	public static void register() {}
 
 	public static Block registerBlock(String name, Block block) {
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 		}
 		BLOCKS.add(name);
@@ -520,7 +520,7 @@ public class BlocksRegistry {
 	}
 
 	public static Block registerBlockNI(String name, Block block) {
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
 		}
 		BLOCKS.add(name);
@@ -534,7 +534,7 @@ public class BlocksRegistry {
 
 	public static Block registerStairs(String name, Block source) {
 		Block stairs = new BNStairs(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, stairs);
 			RecipesHelper.makeStairsRecipe(source, stairs);
 		}
@@ -544,7 +544,7 @@ public class BlocksRegistry {
 
 	public static Block registerSlab(String name, Block source) {
 		Block slab = new BNSlab(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, slab);
 			RecipesHelper.makeSlabRecipe(source, slab);
 		}
@@ -554,7 +554,7 @@ public class BlocksRegistry {
 
 	private static Block registerRoof(String name, Block source) {
 		Block roof = new BlockBase(FabricBlockSettings.copyOf(source));
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, roof);
 			RecipesHelper.makeRoofRecipe(source, roof);
 		}
@@ -564,7 +564,7 @@ public class BlocksRegistry {
 
 	public static Block registerButton(String name, Block source) {
 		Block button = new BNButton(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, button);
 			RecipesHelper.makeButtonRecipe(source, button);
 		}
@@ -574,7 +574,7 @@ public class BlocksRegistry {
 
 	public static Block registerPlate(String name, Block source) {
 		Block plate = new BNPlate(ActivationRule.EVERYTHING, source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
@@ -584,7 +584,7 @@ public class BlocksRegistry {
 
 	private static Block registerPlate(String name, Block source, ActivationRule rule) {
 		Block plate = new BNPlate(rule, source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
@@ -593,7 +593,7 @@ public class BlocksRegistry {
 	}
 
 	public static Block registerPlanks(String name, Block planks, Block... logs) {
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, planks);
 			for (Block log : logs)
 				RecipesHelper.makeSimpleRecipe(log, planks, 4, "nether_planks");
@@ -603,7 +603,7 @@ public class BlocksRegistry {
 	}
 
 	private static Block registerPlanks(String name, Block planks, int output, Block stem, Block... logs) {
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, planks);
 			RecipesHelper.makeSimpleRecipe(stem, planks, output, "nether_planks");
 			for (Block log : logs)
@@ -614,7 +614,7 @@ public class BlocksRegistry {
 	}
 
 	public static Block registerLog(String name, Block log, Block stem) {
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, log);
 			RecipesHelper.makeSimpleRecipe2(stem, log, 1, "nether_stem_log");
 		}
@@ -623,7 +623,7 @@ public class BlocksRegistry {
 	}
 
 	public static Block registerBark(String name, Block bark, Block log) {
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, bark);
 			RecipesHelper.makeSimpleRecipe2(log, bark, 3, "nether_bark");
 		}
@@ -633,7 +633,7 @@ public class BlocksRegistry {
 
 	public static Block registerFence(String name, Block source) {
 		Block fence = new BNFence(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, fence);
 			RecipesHelper.makeFenceRecipe(source, fence);
 		}
@@ -643,7 +643,7 @@ public class BlocksRegistry {
 
 	public static Block registerGate(String name, Block source) {
 		Block gate = new BNGate(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, gate);
 			RecipesHelper.makeGateRecipe(source, gate);
 		}
@@ -653,7 +653,7 @@ public class BlocksRegistry {
 
 	public static Block registerDoor(String name, Block source) {
 		Block door = new BNDoor(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, door);
 			RecipesHelper.makeDoorRecipe(source, door);
 		}
@@ -663,7 +663,7 @@ public class BlocksRegistry {
 
 	public static Block registerTrapdoor(String name, Block source) {
 		Block trapdoor = new BNTrapdoor(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, trapdoor);
 			RecipesHelper.makeTrapdoorRecipe(source, trapdoor);
 		}
@@ -672,7 +672,7 @@ public class BlocksRegistry {
 	}
 
 	public static Block registerMakeable2X2(String name, Block result, String group, Block... sources) {
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, result);
 			for (Block source : sources)
 				RecipesHelper.makeSimpleRecipe2(source, result, 4, group);
@@ -683,7 +683,7 @@ public class BlocksRegistry {
 
 	public static Block registerWall(String name, Block source) {
 		Block wall = new BNWall(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, wall);
 			RecipesHelper.makeWallRecipe(source, wall);
 		}
@@ -693,7 +693,7 @@ public class BlocksRegistry {
 
 	public static Block registerCraftingTable(String name, Block source) {
 		Block block = new BNCraftingTable(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
 		}
@@ -703,7 +703,7 @@ public class BlocksRegistry {
 
 	public static Block registerChest(String name, Block source) {
 		Block block = new BNChest(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeRoundRecipe(source, block, "nether_chest");
 		}
@@ -713,7 +713,7 @@ public class BlocksRegistry {
 
 	public static Block registerSign(String name, Block source) {
 		Block block = new BNSign(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeSignRecipe(source, block);
 		}
@@ -723,7 +723,7 @@ public class BlocksRegistry {
 
 	public static Block registerBarrel(String name, Block source, Block slab) {
 		Block block = new BNBarrel(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeBarrelRecipe(source, slab, block);
 		}
@@ -733,7 +733,7 @@ public class BlocksRegistry {
 
 	public static Block registerLadder(String name, Block source) {
 		Block block = new BNLadder(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeLadderRecipe(source, block);
 		}
@@ -743,7 +743,7 @@ public class BlocksRegistry {
 
 	public static Block registerTaburet(String name, Block source) {
 		Block block = new BNTaburet(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeTaburetRecipe(source, block);
 		}
@@ -753,7 +753,7 @@ public class BlocksRegistry {
 
 	public static Block registerChair(String name, Block source) {
 		Block block = new BNNormalChair(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeChairRecipe(source, block);
 		}
@@ -763,7 +763,7 @@ public class BlocksRegistry {
 
 	public static Block registerBarStool(String name, Block source) {
 		Block block = new BNBarStool(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeBarStoolRecipe(source, block);
 		}
@@ -773,7 +773,7 @@ public class BlocksRegistry {
 
 	public static Block registerFurnace(String name, Block source) {
 		Block block = new BlockNetherFurnace(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeRoundRecipe(source, block, "nether_furnace");
 		}
@@ -783,7 +783,7 @@ public class BlocksRegistry {
 
 	private static Block registerStalactite(String name, Block source) {
 		Block block = new BlockStalactite(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite");
 		}
@@ -793,7 +793,7 @@ public class BlocksRegistry {
 
 	private static Block registerFireBowl(String name, Block source, Block inside, Item leg) {
 		Block block = new BlockFireBowl(source);
-		if (Config.getBoolean("blocks", name, true)) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
 		}

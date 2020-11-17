@@ -34,54 +34,6 @@ public class ConfigScreen extends Screen {
 						ConfigScreen.this.client.openScreen(new ImprovementsScreen(ConfigScreen.this));
 					}
 				}));
-
-		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.blocks"),
-				new PressAction() {
-					@Override
-					public void onPress(ButtonWidget button) {
-						ConfigScreen.this.client.openScreen(new BlocksScreen(ConfigScreen.this));
-					}
-				}));
-
-		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.items"),
-				new PressAction() {
-					@Override
-					public void onPress(ButtonWidget button) {
-						ConfigScreen.this.client.openScreen(new ItemsScreen(ConfigScreen.this));
-					}
-				}));
-
-		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.biomes"),
-				new PressAction() {
-					@Override
-					public void onPress(ButtonWidget button) {
-						ConfigScreen.this.client.openScreen(new BiomesScreen(ConfigScreen.this));
-					}
-				}));
-
-		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.subbiomes"),
-				new PressAction() {
-					@Override
-					public void onPress(ButtonWidget button) {
-						ConfigScreen.this.client.openScreen(new SubbiomesScreen(ConfigScreen.this));
-					}
-				}));
-
-		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.biomes_edges"),
-				new PressAction() {
-					@Override
-					public void onPress(ButtonWidget button) {
-						ConfigScreen.this.client.openScreen(new BiomesEdgesScreen(ConfigScreen.this));
-					}
-				}));
-
-		this.addButton(new ButtonWidget(this.width / 2 - 100, i += 27, 200, 20, new TranslatableText("config.betternether.generator"),
-				new PressAction() {
-					@Override
-					public void onPress(ButtonWidget button) {
-						ConfigScreen.this.client.openScreen(new GeneratorScreen(ConfigScreen.this));
-					}
-				}));
 	}
 
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {

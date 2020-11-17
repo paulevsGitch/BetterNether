@@ -12,6 +12,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 
 public class ImprovementsScreen extends Screen {
 	private Screen parrent;
@@ -41,11 +42,11 @@ public class ImprovementsScreen extends Screen {
 
 		AbstractButtonWidget fogButton = new DoubleOption("fog", 0.0, 1.0, 0.05F,
 				(gameOptions) -> {
-					return (double) Config.getFloat("improvement", varFog, fogDefault);
+					return (double) Configs.MAIN.getFloat("improvement", varFog, fogDefault);
 				},
 				(gameOptions, value) -> {
 					float val = value.floatValue();
-					Config.setFloat("improvement", varFog, fogDefault, val);
+					Configs.MAIN.setFloat("improvement", varFog, fogDefault, val);
 					BetterNether.changeFogDensity(val);
 				},
 				(gameOptions, doubleOption) -> {
@@ -58,7 +59,7 @@ public class ImprovementsScreen extends Screen {
 		this.addButton(new ButtonWidget(this.width / 2 + 40 + 20, 27, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
-				Config.setFloat("improvement", varFog, fogDefault, fogDefault);
+				Configs.MAIN.setFloat("improvement", varFog, fogDefault, fogDefault);
 				BetterNether.changeFogDensity(fogDefault);
 				fogButton.onClick(fogButton.getWidth() * fogDefault + fogButton.x, fogButton.y);
 			}
@@ -66,13 +67,13 @@ public class ImprovementsScreen extends Screen {
 
 		// Thin Armor //
 		final String varArmour = "smaller_armor_offset";
-		boolean hasArmour = Config.getBoolean("improvement", varArmour, true);
+		boolean hasArmour = Configs.MAIN.getBoolean("improvement", varArmour, true);
 
 		AbstractButtonWidget armorButton = new ButtonWidget(this.width / 2 - 100, 27 * 2, 150, 20, new TranslatableText("config.betternether.armour"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
-				boolean value = !Config.getBoolean("improvement", varArmour, true);
-				Config.setBoolean("improvement", varArmour, true, value);
+				boolean value = !Configs.MAIN.getBoolean("improvement", varArmour, true);
+				Configs.MAIN.setBoolean("improvement", varArmour, true, value);
 				String color = value ? ": \u00A7a" : ": \u00A7c";
 				button.setMessage(new TranslatableText("config.betternether.armour")
 						.append(color + ScreenTexts.getToggleText(value).getString()));
@@ -85,7 +86,7 @@ public class ImprovementsScreen extends Screen {
 		this.addButton(new ButtonWidget(this.width / 2 + 40 + 20, 27 * 2, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
-				Config.setBoolean("improvement", varArmour, true, true);
+				Configs.MAIN.setBoolean("improvement", varArmour, true, true);
 				BetterNether.setThinArmor(true);
 				armorButton.setMessage(new TranslatableText("config.betternether.armour").append(": \u00A7a" + ScreenTexts.getToggleText(true).getString()));
 			}
@@ -93,13 +94,13 @@ public class ImprovementsScreen extends Screen {
 
 		// Lavafalls //
 		final String varLava = "lavafall_particles";
-		boolean hasLava = Config.getBoolean("improvement", varLava, true);
+		boolean hasLava = Configs.MAIN.getBoolean("improvement", varLava, true);
 
 		AbstractButtonWidget lavaButton = new ButtonWidget(this.width / 2 - 100, 27 * 3, 150, 20, new TranslatableText("config.betternether.armour"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
-				boolean value = !Config.getBoolean("improvement", varLava, true);
-				Config.setBoolean("improvement", varLava, true, value);
+				boolean value = !Configs.MAIN.getBoolean("improvement", varLava, true);
+				Configs.MAIN.setBoolean("improvement", varLava, true, value);
 				String color = value ? ": \u00A7a" : ": \u00A7c";
 				button.setMessage(new TranslatableText("config.betternether.lavafalls")
 						.append(color + ScreenTexts.getToggleText(value).getString()));
@@ -112,7 +113,7 @@ public class ImprovementsScreen extends Screen {
 		this.addButton(new ButtonWidget(this.width / 2 + 40 + 20, 27 * 3, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
-				Config.setBoolean("improvement", varLava, true, true);
+				Configs.MAIN.setBoolean("improvement", varLava, true, true);
 				BetterNether.setThinArmor(true);
 				lavaButton.setMessage(new TranslatableText("config.betternether.lavafalls").append(": \u00A7a" + ScreenTexts.getToggleText(true).getString()));
 			}
