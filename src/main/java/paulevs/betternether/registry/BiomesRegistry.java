@@ -143,7 +143,7 @@ public class BiomesRegistry {
 	}
 
 	private static void register(NetherBiome biome) {
-		if (!BuiltinRegistries.BIOME.containsId(biome.getID())) {
+		if (BuiltinRegistries.BIOME.get(biome.getID()) == null) {
 			if (OCCUPIED_IDS.isEmpty()) {
 				BuiltinRegistries.BIOME.forEach((bio) -> {
 					OCCUPIED_IDS.add(BuiltinRegistries.BIOME.getRawId(bio));
