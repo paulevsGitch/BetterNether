@@ -9,6 +9,7 @@ import java.util.Set;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -37,6 +38,7 @@ import paulevs.betternether.biomes.OldFungiwoods;
 import paulevs.betternether.biomes.OldSwampland;
 import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.biomes.UpsideDownForest;
+import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
 
 public class BiomesRegistry {
@@ -78,6 +80,13 @@ public class BiomesRegistry {
 	private static int biomeID = 7000;
 
 	public static void register() {
+		BuiltinRegistries.BIOME.forEach((biome) -> {
+			if (biome.getCategory() == Category.NETHER) {
+				Identifier id = BuiltinRegistries.BIOME.getId(biome);
+				Configs.GENERATOR.getFloat("biomes." + id.getNamespace() + ".main", id.getPath() + "_chance", 1);
+			}
+		});
+		
 		registerNetherBiome(BIOME_GRAVEL_DESERT);
 		registerNetherBiome(BIOME_NETHER_JUNGLE);
 		registerNetherBiome(BIOME_WART_FOREST);
@@ -104,6 +113,13 @@ public class BiomesRegistry {
 		registerNetherBiome(BIOME_CRIMSON_FOREST);
 		registerNetherBiome(BIOME_WARPED_FOREST);
 		registerNetherBiome(BIOME_BASALT_DELTAS);
+		
+		RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register((i, id, biome) -> {
+			if (biome.getCategory() == Category.NETHER) {
+				Identifier bioID = BuiltinRegistries.BIOME.getId(biome);
+				Configs.GENERATOR.getFloat("biomes." + bioID.getNamespace() + ".main", bioID.getPath() + "_chance", 1);
+			}
+		});
 	}
 	
 	public static void mutateRegistry(Registry<Biome> biomeRegistry) {
@@ -140,6 +156,8 @@ public class BiomesRegistry {
 				}
 			}
 		}
+		
+		Config.save();
 	}
 
 	private static void register(NetherBiome biome) {

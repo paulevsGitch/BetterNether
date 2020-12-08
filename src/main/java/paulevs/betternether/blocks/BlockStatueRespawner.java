@@ -89,7 +89,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
 						pos.getZ() + world.random.nextFloat(), 0, 0, 0);
 			player.sendMessage(new TranslatableText("message.spawn_set", new Object[0]), true);
 			if (!world.isClient) {
-				((ServerPlayerEntity) player).setSpawnPoint(world.getRegistryKey(), pos, player.getHeadYaw(), true, false);
+				((ServerPlayerEntity) player).setSpawnPoint(world.getRegistryKey(), pos, player.getHeadYaw(), false, true);
 			}
 			player.playSound(SoundEvents.ITEM_TOTEM_USE, 0.7F, 1.0F);
 			return ActionResult.SUCCESS;

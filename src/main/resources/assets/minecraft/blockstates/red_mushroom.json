@@ -11,6 +11,7 @@
 			{ "model": "block/mushroom_red_03", "y": 90 },
 			{ "model": "block/mushroom_red_00", "y": 180 },
 			{ "model": "block/mushroom_red_01", "y": 180 },
+			{ "model": "block/mushroom_red_04", "y": 180 },
 			{ "model": "block/mushroom_red_02", "y": 180 },
 			{ "model": "block/mushroom_red_03", "y": 180 },
 			{ "model": "block/mushroom_red_00", "y": 270 },

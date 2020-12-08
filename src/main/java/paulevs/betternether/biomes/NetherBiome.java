@@ -36,16 +36,18 @@ public class NetherBiome {
 	private ArrayList<StructureInfo> buildGeneratorsLava = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> buildGeneratorsUnder = new ArrayList<StructureInfo>();
 
-	protected final Biome biome;
 	protected final Identifier mcID;
-	protected NetherBiome edge;
+	protected final Biome biome;
+	
+	protected float maxSubBiomeChance = 1;
+	protected float plantDensity = 1.0001F;
+	protected float noiseDensity = 0.3F;
+	protected float genChance = 1;
 	protected float edgeSize;
+	
 	protected List<Subbiome> subbiomes;
 	protected NetherBiome biomeParent;
-	protected float maxSubBiomeChance = 1;
-	protected float genChance = 1;
-	protected float noiseDensity = 0.3F;
-	protected float plantDensity = 1.0001F;
+	protected NetherBiome edge;
 
 	private static final String[] DEF_STRUCTURES = new String[] {
 			structureFormat("altar_01", -2, StructureType.FLOOR, 1),
@@ -150,10 +152,7 @@ public class NetherBiome {
 		setNoiseDensity(Configs.BIOMES.getFloat(group, "noise_density", getNoiseDensity()));
 	}
 
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
-		// BlocksHelper.setWithoutUpdate(world, pos,
-		// this.getBiome().getSurfaceBuilder().config.getTopMaterial());
-	}
+	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {}
 
 	public void genFloorObjects(ServerWorldAccess world, BlockPos pos, Random random) {
 		for (StructureInfo info : generatorsFloor)
@@ -178,13 +177,6 @@ public class NetherBiome {
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
-
-	/*
-	 * public void genUnderObjects(ServerWorldAccess world, BlockPos pos, Random
-	 * random) { for (StructureInfo info: generatorsUnder) if
-	 * (info.canGenerate(random, pos)) info.structure.generate(world, pos,
-	 * random); }
-	 */
 
 	protected static double getFeatureNoise(BlockPos pos, int id) {
 		return SCATTER.eval(pos.getX() * 0.1, pos.getY() * 0.1 + id * 10, pos.getZ() * 0.1);
@@ -316,13 +308,7 @@ public class NetherBiome {
 	public void genFloorBuildings(ServerWorldAccess world, BlockPos pos, Random random) {
 		chancedStructure(world, pos, random, buildGeneratorsFloor);
 	}
-
-	/*
-	 * public void genWallBuildings(ServerWorldAccess world, BlockPos pos,
-	 * Random random) { chancedStructure(world, pos, random,
-	 * worldGeneratorsWall); }
-	 */
-
+	
 	public void genCeilBuildings(ServerWorldAccess world, BlockPos pos, Random random) {
 		chancedStructure(world, pos, random, buildGeneratorsCeil);
 	}
@@ -381,9 +367,6 @@ public class NetherBiome {
 					case FLOOR:
 						infoList = buildGeneratorsFloor;
 						break;
-					// case WALL:
-					// infoList = buildGeneratorsWall;
-					// break;
 					case LAVA:
 						infoList = buildGeneratorsLava;
 						break;
