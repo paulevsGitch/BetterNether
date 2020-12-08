@@ -16,8 +16,8 @@
 			{ "model": "block/mushroom_brown_00", "y": 270 },
 			{ "model": "block/mushroom_brown_01", "y": 270 },
 			{ "model": "block/mushroom_brown_02", "y": 270 },
-			{ "model": "block/mushroom_brown_03", "y": 270 }
-			{ "model": "block/mushroom_brown_04", "y": 180 },
+			{ "model": "block/mushroom_brown_03", "y": 270 },
+			{ "model": "block/mushroom_brown_04", "y": 180 }
 		]
     }
 }
