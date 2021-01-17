@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:nether_sakura_planks_from_nether_sakura_bark"
+    ]
+  },
+  "criteria": {
+    "nether_sakura_bark": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:nether_sakura_bark"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:nether_sakura_planks_from_nether_sakura_bark"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "nether_sakura_bark",
+      "has_the_recipe"
+    ]
+  ]
+}

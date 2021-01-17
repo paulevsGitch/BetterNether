@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:obsidian_bricks_slab_from_obsidian_bricks"
+    ]
+  },
+  "criteria": {
+    "obsidian_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:obsidian_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:obsidian_bricks_slab_from_obsidian_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "obsidian_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:wart_planks_from_striped_log_wart"
+    ]
+  },
+  "criteria": {
+    "striped_log_wart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:striped_log_wart"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:wart_planks_from_striped_log_wart"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "striped_log_wart",
+      "has_the_recipe"
+    ]
+  ]
+}

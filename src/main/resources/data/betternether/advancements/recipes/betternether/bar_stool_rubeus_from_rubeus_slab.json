@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:bar_stool_rubeus_from_rubeus_slab"
+    ]
+  },
+  "criteria": {
+    "rubeus_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:rubeus_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:bar_stool_rubeus_from_rubeus_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "rubeus_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

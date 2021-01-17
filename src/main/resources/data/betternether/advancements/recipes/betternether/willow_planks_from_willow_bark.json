@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:willow_planks_from_willow_bark"
+    ]
+  },
+  "criteria": {
+    "willow_bark": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:willow_bark"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:willow_planks_from_willow_bark"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "willow_bark",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:roof_tile_wart_stairs_from_roof_tile_wart"
+    ]
+  },
+  "criteria": {
+    "roof_tile_wart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:roof_tile_wart"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:roof_tile_wart_stairs_from_roof_tile_wart"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "roof_tile_wart",
+      "has_the_recipe"
+    ]
+  ]
+}

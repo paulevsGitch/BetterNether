@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:nether_brick_tile_stairs_from_nether_brick_tile_small"
+    ]
+  },
+  "criteria": {
+    "nether_brick_tile_small": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:nether_brick_tile_small"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:nether_brick_tile_stairs_from_nether_brick_tile_small"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "nether_brick_tile_small",
+      "has_the_recipe"
+    ]
+  ]
+}

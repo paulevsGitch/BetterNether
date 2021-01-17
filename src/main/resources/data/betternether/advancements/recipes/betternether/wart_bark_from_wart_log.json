@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:wart_bark_from_wart_log"
+    ]
+  },
+  "criteria": {
+    "wart_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:wart_log"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:wart_bark_from_wart_log"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wart_log",
+      "has_the_recipe"
+    ]
+  ]
+}

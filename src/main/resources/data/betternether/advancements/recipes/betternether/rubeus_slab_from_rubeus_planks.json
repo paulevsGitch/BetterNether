@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:rubeus_slab_from_rubeus_planks"
+    ]
+  },
+  "criteria": {
+    "rubeus_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:rubeus_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:rubeus_slab_from_rubeus_planks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "rubeus_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

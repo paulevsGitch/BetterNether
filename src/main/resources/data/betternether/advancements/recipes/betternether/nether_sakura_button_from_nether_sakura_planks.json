@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:nether_sakura_button_from_nether_sakura_planks"
+    ]
+  },
+  "criteria": {
+    "nether_sakura_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:nether_sakura_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:nether_sakura_button_from_nether_sakura_planks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "nether_sakura_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

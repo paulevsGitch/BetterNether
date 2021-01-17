@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:bar_stool_mushroom_fir_from_mushroom_fir_slab"
+    ]
+  },
+  "criteria": {
+    "mushroom_fir_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:mushroom_fir_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:bar_stool_mushroom_fir_from_mushroom_fir_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mushroom_fir_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

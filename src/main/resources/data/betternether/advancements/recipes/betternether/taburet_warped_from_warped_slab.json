@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:taburet_warped_from_warped_slab"
+    ]
+  },
+  "criteria": {
+    "warped_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:warped_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:taburet_warped_from_warped_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "warped_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

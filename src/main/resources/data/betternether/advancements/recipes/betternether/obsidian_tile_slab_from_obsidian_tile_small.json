@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:obsidian_tile_slab_from_obsidian_tile_small"
+    ]
+  },
+  "criteria": {
+    "obsidian_tile_small": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:obsidian_tile_small"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:obsidian_tile_slab_from_obsidian_tile_small"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "obsidian_tile_small",
+      "has_the_recipe"
+    ]
+  ]
+}

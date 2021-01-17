@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:sign_wart_from_wart_planks"
+    ]
+  },
+  "criteria": {
+    "wart_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:wart_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:sign_wart_from_wart_planks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wart_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

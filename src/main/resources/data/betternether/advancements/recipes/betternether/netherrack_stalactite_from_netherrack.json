@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:netherrack_stalactite_from_netherrack"
+    ]
+  },
+  "criteria": {
+    "netherrack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:netherrack"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:netherrack_stalactite_from_netherrack"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "netherrack",
+      "has_the_recipe"
+    ]
+  ]
+}

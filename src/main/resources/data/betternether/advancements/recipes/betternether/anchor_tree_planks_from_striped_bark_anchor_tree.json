@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:anchor_tree_planks_from_striped_bark_anchor_tree"
+    ]
+  },
+  "criteria": {
+    "striped_bark_anchor_tree": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:striped_bark_anchor_tree"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:anchor_tree_planks_from_striped_bark_anchor_tree"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "striped_bark_anchor_tree",
+      "has_the_recipe"
+    ]
+  ]
+}

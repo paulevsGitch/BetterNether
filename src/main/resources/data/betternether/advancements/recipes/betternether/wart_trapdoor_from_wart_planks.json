@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:wart_trapdoor_from_wart_planks"
+    ]
+  },
+  "criteria": {
+    "wart_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:wart_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:wart_trapdoor_from_wart_planks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wart_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

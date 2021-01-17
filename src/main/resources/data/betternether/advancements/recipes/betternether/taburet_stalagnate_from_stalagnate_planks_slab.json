@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:taburet_stalagnate_from_stalagnate_planks_slab"
+    ]
+  },
+  "criteria": {
+    "stalagnate_planks_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:stalagnate_planks_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:taburet_stalagnate_from_stalagnate_planks_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stalagnate_planks_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:soul_sandstone_wall_from_soul_sandstone_cut"
+    ]
+  },
+  "criteria": {
+    "soul_sandstone_cut": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:soul_sandstone_cut"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:soul_sandstone_wall_from_soul_sandstone_cut"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "soul_sandstone_cut",
+      "has_the_recipe"
+    ]
+  ]
+}

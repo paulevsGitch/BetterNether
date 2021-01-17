@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:stalagnate_planks_from_striped_bark_stalagnate"
+    ]
+  },
+  "criteria": {
+    "striped_bark_stalagnate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:striped_bark_stalagnate"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:stalagnate_planks_from_striped_bark_stalagnate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "striped_bark_stalagnate",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:taburet_wart_from_wart_slab"
+    ]
+  },
+  "criteria": {
+    "wart_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:wart_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:taburet_wart_from_wart_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wart_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

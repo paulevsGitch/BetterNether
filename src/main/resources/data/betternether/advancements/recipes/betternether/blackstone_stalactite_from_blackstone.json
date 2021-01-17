@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:blackstone_stalactite_from_blackstone"
+    ]
+  },
+  "criteria": {
+    "blackstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:blackstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:blackstone_stalactite_from_blackstone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "blackstone",
+      "has_the_recipe"
+    ]
+  ]
+}

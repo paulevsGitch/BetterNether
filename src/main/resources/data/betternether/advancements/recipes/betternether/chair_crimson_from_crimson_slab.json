@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:chair_crimson_from_crimson_slab"
+    ]
+  },
+  "criteria": {
+    "crimson_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:crimson_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:chair_crimson_from_crimson_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crimson_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

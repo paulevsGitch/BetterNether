@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:mushroom_fir_planks_from_mushroom_fir_log"
+    ]
+  },
+  "criteria": {
+    "mushroom_fir_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:mushroom_fir_log"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:mushroom_fir_planks_from_mushroom_fir_log"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mushroom_fir_log",
+      "has_the_recipe"
+    ]
+  ]
+}

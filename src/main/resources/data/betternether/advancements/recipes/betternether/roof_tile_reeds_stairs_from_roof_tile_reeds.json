@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:roof_tile_reeds_stairs_from_roof_tile_reeds"
+    ]
+  },
+  "criteria": {
+    "roof_tile_reeds": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:roof_tile_reeds"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:roof_tile_reeds_stairs_from_roof_tile_reeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "roof_tile_reeds",
+      "has_the_recipe"
+    ]
+  ]
+}

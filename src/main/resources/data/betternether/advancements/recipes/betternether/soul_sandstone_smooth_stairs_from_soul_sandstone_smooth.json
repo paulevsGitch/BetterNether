@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:soul_sandstone_smooth_stairs_from_soul_sandstone_smooth"
+    ]
+  },
+  "criteria": {
+    "soul_sandstone_smooth": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:soul_sandstone_smooth"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:soul_sandstone_smooth_stairs_from_soul_sandstone_smooth"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "soul_sandstone_smooth",
+      "has_the_recipe"
+    ]
+  ]
+}

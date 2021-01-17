@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:anchor_tree_fence_from_anchor_tree_planks"
+    ]
+  },
+  "criteria": {
+    "anchor_tree_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:anchor_tree_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:anchor_tree_fence_from_anchor_tree_planks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "anchor_tree_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

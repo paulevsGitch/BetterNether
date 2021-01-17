@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:roof_tile_nether_bricks_from_nether_bricks"
+    ]
+  },
+  "criteria": {
+    "nether_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:nether_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:roof_tile_nether_bricks_from_nether_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "nether_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

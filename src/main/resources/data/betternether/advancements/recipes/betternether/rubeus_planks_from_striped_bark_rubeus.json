@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:rubeus_planks_from_striped_bark_rubeus"
+    ]
+  },
+  "criteria": {
+    "striped_bark_rubeus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:striped_bark_rubeus"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:rubeus_planks_from_striped_bark_rubeus"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "striped_bark_rubeus",
+      "has_the_recipe"
+    ]
+  ]
+}

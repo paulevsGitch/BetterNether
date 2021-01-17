@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:chest_willow_from_willow_planks"
+    ]
+  },
+  "criteria": {
+    "willow_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:willow_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:chest_willow_from_willow_planks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "willow_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:bar_stool_dark_oak_from_dark_oak_slab"
+    ]
+  },
+  "criteria": {
+    "dark_oak_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:dark_oak_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:bar_stool_dark_oak_from_dark_oak_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "dark_oak_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

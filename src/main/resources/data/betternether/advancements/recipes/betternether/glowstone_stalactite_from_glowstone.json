@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:glowstone_stalactite_from_glowstone"
+    ]
+  },
+  "criteria": {
+    "glowstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:glowstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:glowstone_stalactite_from_glowstone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "glowstone",
+      "has_the_recipe"
+    ]
+  ]
+}

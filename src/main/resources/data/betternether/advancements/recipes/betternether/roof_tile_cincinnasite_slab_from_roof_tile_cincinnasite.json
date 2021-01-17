@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:roof_tile_cincinnasite_slab_from_roof_tile_cincinnasite"
+    ]
+  },
+  "criteria": {
+    "roof_tile_cincinnasite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:roof_tile_cincinnasite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:roof_tile_cincinnasite_slab_from_roof_tile_cincinnasite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "roof_tile_cincinnasite",
+      "has_the_recipe"
+    ]
+  ]
+}

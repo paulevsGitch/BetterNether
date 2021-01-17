@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:blue_obsidian_bricks_stairs_from_blue_obsidian_bricks"
+    ]
+  },
+  "criteria": {
+    "blue_obsidian_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:blue_obsidian_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:blue_obsidian_bricks_stairs_from_blue_obsidian_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "blue_obsidian_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

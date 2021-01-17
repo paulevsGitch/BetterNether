@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:basalt_bricks_wall_from_basalt_bricks"
+    ]
+  },
+  "criteria": {
+    "basalt_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:basalt_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:basalt_bricks_wall_from_basalt_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "basalt_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

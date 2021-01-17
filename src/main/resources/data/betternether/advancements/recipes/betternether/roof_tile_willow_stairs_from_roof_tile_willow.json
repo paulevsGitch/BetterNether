@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:roof_tile_willow_stairs_from_roof_tile_willow"
+    ]
+  },
+  "criteria": {
+    "roof_tile_willow": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betternether:roof_tile_willow"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:roof_tile_willow_stairs_from_roof_tile_willow"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "roof_tile_willow",
+      "has_the_recipe"
+    ]
+  ]
+}
