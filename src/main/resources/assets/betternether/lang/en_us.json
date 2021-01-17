@@ -28,7 +28,7 @@
 	"item.betternether.stalagnate_bowl_mushroom": "Mushroom Stew",
 	"item.betternether.stalagnate_bowl_wart": "Wart Soup",
 
-	"itemGroup.betternether.items": "Better Nether",
+	"itemGroup.betternether": "Better Nether",
 
 	"message.spawn_help": "§c§lYou must hold§r %s §c§lto set your spawn point here",
 	"message.spawn_set": "§2§lYour spawn point was set here",
