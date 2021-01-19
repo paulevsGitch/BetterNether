@@ -15,7 +15,7 @@ import paulevs.betternether.client.IRenderTypeable;
 
 public class BNDoor extends DoorBlock implements IRenderTypeable {
 	public BNDoor(Block block) {
-		super(FabricBlockSettings.of(Material.NETHER_WOOD).sounds(block.getSoundGroup(block.getDefaultState())).nonOpaque());
+		super(FabricBlockSettings.of(Material.NETHER_WOOD).sounds(block.getSoundGroup(block.getDefaultState())).nonOpaque().strength(3.0F));
 	}
 
 	@Override

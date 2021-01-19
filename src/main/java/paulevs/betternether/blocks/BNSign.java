@@ -54,7 +54,7 @@ public class BNSign extends AbstractSignBlock {
 	};
 
 	public BNSign(Block source) {
-		super(FabricBlockSettings.copyOf(source).noCollision().nonOpaque(), SignType.OAK);
+		super(FabricBlockSettings.copyOf(source).noCollision().nonOpaque().strength(1.0F), SignType.OAK);
 		this.setDefaultState(this.stateManager.getDefaultState().with(ROTATION, 0).with(FLOOR, true).with(WATERLOGGED, false));
 	}
 
