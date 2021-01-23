@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
@@ -48,9 +49,12 @@ public class BNSign extends AbstractSignBlock {
 			Block.createCuboidShape(0.0D, 4.5D, 0.0D, 16.0D, 12.5D, 2.0D),
 			Block.createCuboidShape(14.0D, 4.5D, 0.0D, 16.0D, 12.5D, 16.0D)
 	};
+	private static final Direction[] ROT = new Direction[] {
+		Direction.SOUTH, Direction.WEST, Direction.NORTH, Direction.EAST
+	};
 
 	public BNSign(Block source) {
-		super(FabricBlockSettings.copyOf(source).noCollision().nonOpaque(), SignType.OAK);
+		super(FabricBlockSettings.copyOf(source).noCollision().nonOpaque().strength(1.0F), SignType.OAK);
 		this.setDefaultState(this.stateManager.getDefaultState().with(ROTATION, 0).with(FLOOR, true).with(WATERLOGGED, false));
 	}
 
@@ -112,7 +116,9 @@ public class BNSign extends AbstractSignBlock {
 		if ((Boolean) state.get(WATERLOGGED)) {
 			world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 		}
-
+		if (!canPlaceAt(state, world, pos)) {
+			return state.get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
+		}
 		return super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos);
 	}
 
@@ -153,5 +159,16 @@ public class BNSign extends AbstractSignBlock {
 	@Override
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this));
+	}
+
+	@Override
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+		if (!state.get(FLOOR)) {
+			int index = (state.get(ROTATION) >> 2) & 3;
+			return world.getBlockState(pos.offset(ROT[index])).getMaterial().isSolid();
+		}
+		else {
+			return world.getBlockState(pos.down()).getMaterial().isSolid();
+		}
 	}
 }

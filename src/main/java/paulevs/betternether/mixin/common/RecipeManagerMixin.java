@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,12 +34,12 @@ public class RecipeManagerMixin {
 	private Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes;
 
 	@Inject(method = "apply", at = @At(value = "RETURN"))
-	private void setRecipes(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo info) {
+	private void be_setRecipes(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo info) {
 		recipes = BNRecipeManager.getMap(recipes);
 	}
 
 	@Inject(method = "deserialize", at = @At(value = "HEAD"), cancellable = true)
-	private static void checkMissing(Identifier id, JsonObject json, CallbackInfoReturnable<Recipe<?>> info) {
+	private static void be_checkMissing(Identifier id, JsonObject json, CallbackInfoReturnable<Recipe<?>> info) {
 		if (id.getNamespace().equals("techreborn") && !FabricLoader.getInstance().isModLoaded("techreborn")) {
 			info.setReturnValue(BNRecipeManager.makeEmtyRecipe(id));
 			info.cancel();
@@ -51,9 +50,9 @@ public class RecipeManagerMixin {
 	private <C extends Inventory, T extends Recipe<C>> Map<Identifier, Recipe<C>> getAllOfType(RecipeType<T> type) {
 		return null;
 	}
-
-	@Overwrite
-	public <C extends Inventory, T extends Recipe<C>> Optional<T> getFirstMatch(RecipeType<T> type, C inventory, World world) {
+	
+	@Inject(method = "getFirstMatch", at = @At(value = "HEAD"), cancellable = true)
+	private <C extends Inventory, T extends Recipe<C>> void be_getFirstMatch(RecipeType<T> type, C inventory, World world, CallbackInfoReturnable<Optional<T>> info) {
 		Collection<Recipe<C>> values = getAllOfType(type).values();
 		List<Recipe<C>> list = new ArrayList<Recipe<C>>(values);
 		list.sort((v1, v2) -> {
@@ -61,9 +60,10 @@ public class RecipeManagerMixin {
 			boolean b2 = v2.getId().getNamespace().equals("minecraft");
 			return b1 ^ b2 ? (b1 ? 1 : -1) : 0;
 		});
-
-		return list.stream().flatMap((recipe) -> {
+		
+		info.setReturnValue(list.stream().flatMap((recipe) -> {
 			return Util.stream(type.get(recipe, world, inventory));
-		}).findFirst();
+		}).findFirst());
+		info.cancel();
 	}
 }

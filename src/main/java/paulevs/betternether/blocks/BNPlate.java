@@ -12,7 +12,7 @@ import net.minecraft.loot.context.LootContext;
 
 public class BNPlate extends PressurePlateBlock {
 	public BNPlate(ActivationRule type, Block block) {
-		super(type, FabricBlockSettings.copyOf(block).nonOpaque());
+		super(type, FabricBlockSettings.copyOf(block).nonOpaque().noCollision());
 	}
 
 	@Override

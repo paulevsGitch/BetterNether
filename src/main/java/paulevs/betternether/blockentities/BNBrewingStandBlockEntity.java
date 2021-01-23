@@ -22,11 +22,13 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
 
@@ -268,11 +270,14 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		else {
 			Item item = stack.getItem();
 			if (slot == 4) {
-				return item == Items.BLAZE_POWDER;
+				if (item == Items.BLAZE_POWDER) {
+					return true;
+				}
+				Identifier id = Registry.ITEM.getId(item);
+				return id.getNamespace().equals("biomemakeover") && id.getPath().equals("soul_embers");
 			}
 			else {
-				return (item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION
-						|| item == Items.GLASS_BOTTLE) && this.getStack(slot).isEmpty();
+				return (item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION || item == Items.GLASS_BOTTLE) && this.getStack(slot).isEmpty();
 			}
 		}
 	}

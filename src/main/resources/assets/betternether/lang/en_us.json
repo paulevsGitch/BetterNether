@@ -69,7 +69,7 @@
 	"block.betternether.cincinnasite_bricks": "Cincinnasite Bricks",
 	"block.betternether.cincinnasite_bricks_pillar": "Cincinnasite Brick Pillar",
 	"block.betternether.cincinnasite_button": "Cincinnasite Button",
-	"block.betternether.cincinnasite_carved": "Cincinnasite Carved",
+	"block.betternether.cincinnasite_carved": "Carved Cincinnasite",
 	"block.betternether.cincinnasite_forge": "Cincinnasite Forge",
 	"block.betternether.cincinnasite_forged": "Forged Cincinnasite Block",
 	"block.betternether.cincinnasite_frame": "Cincinnasite Frame",
@@ -377,6 +377,7 @@
 	"biome.betternether.poor_nether_grasslands": "Poor Nether Grasslands",
 	"biome.betternether.upside_down_forest": "Upside Down Forest",
 	"biome.betternether.old_swampland": "Old Swampland",
+	"biome.betternether.flooded_deltas": "Flooded Deltas",
 	
 	"block.betternether.mushroom_fir": "Mushroom Fir",
 	"block.betternether.mushroom_fir_sapling": "Mushroom Fir Sapling",
