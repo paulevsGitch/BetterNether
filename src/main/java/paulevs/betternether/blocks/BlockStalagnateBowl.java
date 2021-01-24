@@ -18,12 +18,12 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.blocks.shapes.FoodShape;
+import paulevs.betternether.blocks.BlockProperties.FoodShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockStalagnateBowl extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(5, 0, 5, 11, 3, 11);
-	public static final EnumProperty<FoodShape> FOOD = EnumProperty.of("food", FoodShape.class);
+	public static final EnumProperty<FoodShape> FOOD = BlockProperties.FOOD;
 
 	public BlockStalagnateBowl() {
 		super(FabricBlockSettings.copyOf(BlocksRegistry.STALAGNATE).nonOpaque());

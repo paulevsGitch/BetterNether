@@ -16,18 +16,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
+import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockWillowBranch extends BlockBaseNotFull {
 	private static final VoxelShape V_SHAPE = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
-	public static final EnumProperty<WillowBranchShape> SHAPE = EnumProperty.of("shape", WillowBranchShape.class);
+	public static final EnumProperty<WillowBranchShape> SHAPE = BlockProperties.WILLOW_SHAPE;
 
 	public BlockWillowBranch() {
 		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().noCollision().luminance(getLuminance()));
@@ -63,26 +63,6 @@ public class BlockWillowBranch extends BlockBaseNotFull {
 			return Blocks.AIR.getDefaultState();
 		else
 			return state;
-	}
-
-	public enum WillowBranchShape implements StringIdentifiable {
-		END("end"), MIDDLE("middle");
-
-		final String name;
-
-		WillowBranchShape(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String asString() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
 	}
 
 	@Override

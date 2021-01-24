@@ -16,14 +16,14 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
+import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockRedLargeMushroom extends BlockBaseNotFull {
 	private static final VoxelShape TOP_SHAPE = Block.createCuboidShape(0, 0.1, 0, 16, 16, 16);
 	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 16, 11);
-	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
+	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockRedLargeMushroom() {
 		super(Materials.makeWood(MaterialColor.RED).nonOpaque());

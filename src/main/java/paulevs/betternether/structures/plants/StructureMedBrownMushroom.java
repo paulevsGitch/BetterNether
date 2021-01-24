@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom;
-import paulevs.betternether.blocks.BlockBrownLargeMushroom.BrownMushroomShape;
+import paulevs.betternether.blocks.BlockProperties.BrownMushroomShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 

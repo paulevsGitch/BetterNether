@@ -10,6 +10,7 @@ import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.blocks.BlockLucisSpore;
+import paulevs.betternether.blocks.BlockProperties;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
@@ -17,9 +18,9 @@ public class StructureLucis implements IStructure {
 	@Override
 	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
 		if (canGenerate(world, pos)) {
-			BlockState center = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CENTER);
-			BlockState side = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.SIDE);
-			BlockState corner = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockLucisMushroom.EnumShape.CORNER);
+			BlockState center = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockProperties.EnumLucisShape.CENTER);
+			BlockState side = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockProperties.EnumLucisShape.SIDE);
+			BlockState corner = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, BlockProperties.EnumLucisShape.CORNER);
 
 			if (random.nextInt(3) == 0) {
 				if (canReplace(world.getBlockState(pos)))

@@ -39,11 +39,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.blocks.shapes.TripleShape;
+import paulevs.betternether.blocks.BlockProperties.TripleShape;
 
 public class BlockNeonEquisetum extends BlockBaseNotFull implements Fertilizable {
 	protected static final VoxelShape SHAPE_SELECTION = Block.createCuboidShape(2, 0, 2, 14, 16, 14);
-	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
+	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockNeonEquisetum() {
 		super(FabricBlockSettings.of(Material.PLANT)

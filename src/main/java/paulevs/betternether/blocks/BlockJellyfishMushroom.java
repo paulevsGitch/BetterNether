@@ -20,7 +20,6 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -29,23 +28,21 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.blocks.BlockProperties.JellyShape;
+import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
 
 public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	private static final VoxelShape TOP_SHAPE = Block.createCuboidShape(1, 0, 1, 15, 16, 15);
 	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 16, 11);
-	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
-	public static final EnumProperty<JellyShape> VISUAL = EnumProperty.of("visual", JellyShape.class);
+	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
+	public static final EnumProperty<JellyShape> VISUAL = BlockProperties.JELLY_MUSHROOM_VISUAL;
 
 	public BlockJellyfishMushroom() {
 		super(Materials.makeWood(MaterialColor.CYAN).hardness(0.1F).sounds(BlockSoundGroup.FUNGUS).nonOpaque().luminance(13));
-		boolean sodium = FabricLoader.getInstance().isModLoaded("sodium"); // Fix
-																			// incorrect
-																			// sodium
-																			// render
+		boolean sodium = FabricLoader.getInstance().isModLoaded("sodium");
 		this.setRenderLayer(sodium ? BNRenderLayer.CUTOUT : BNRenderLayer.TRANSLUCENT);
 	}
 
@@ -140,25 +137,5 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)));
 		else
 			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM));
-	}
-
-	public static enum JellyShape implements StringIdentifiable {
-		NORMAL("normal"), SEPIA("sepia"), POOR("poor");
-
-		final String name;
-
-		JellyShape(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String asString() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
 	}
 }

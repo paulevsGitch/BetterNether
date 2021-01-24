@@ -17,7 +17,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockAnchorTreeVine;
 import paulevs.betternether.blocks.BlockPlantWall;
-import paulevs.betternether.blocks.shapes.TripleShape;
+import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 

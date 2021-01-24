@@ -28,7 +28,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.blocks.shapes.FoodShape;
+import paulevs.betternether.blocks.BlockProperties.FoodShape;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.integrations.VanillaExcavatorsIntegration;
 import paulevs.betternether.integrations.VanillaHammersIntegration;

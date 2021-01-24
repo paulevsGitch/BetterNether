@@ -22,7 +22,7 @@ import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 
 public class BlockCommonPlant extends BlockBaseNotFull implements Fertilizable {
-	public static final IntProperty AGE = IntProperty.of("age", 0, 3);
+	public static final IntProperty AGE = BlockProperties.AGE_FOUR;
 
 	public BlockCommonPlant(MaterialColor color) {
 		super(FabricBlockSettings.of(Material.PLANT)

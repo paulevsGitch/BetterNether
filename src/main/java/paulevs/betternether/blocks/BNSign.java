@@ -42,7 +42,7 @@ import paulevs.betternether.blockentities.BNSignBlockEntity;
 
 public class BNSign extends AbstractSignBlock {
 	public static final IntProperty ROTATION = Properties.ROTATION;
-	public static final BooleanProperty FLOOR = BooleanProperty.of("floor");
+	public static final BooleanProperty FLOOR = BlockProperties.FLOOR;
 	private static final VoxelShape[] WALL_SHAPES = new VoxelShape[] {
 			Block.createCuboidShape(0.0D, 4.5D, 14.0D, 16.0D, 12.5D, 16.0D),
 			Block.createCuboidShape(0.0D, 4.5D, 0.0D, 2.0D, 12.5D, 16.0D),

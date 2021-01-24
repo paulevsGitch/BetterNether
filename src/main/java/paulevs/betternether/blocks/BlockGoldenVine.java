@@ -37,7 +37,7 @@ import paulevs.betternether.BlocksHelper;
 
 public class BlockGoldenVine extends BlockBaseNotFull implements Fertilizable {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 16, 14);
-	public static final BooleanProperty BOTTOM = BooleanProperty.of("bottom");
+	public static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
 
 	public BlockGoldenVine() {
 		super(FabricBlockSettings.of(Material.PLANT)

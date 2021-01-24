@@ -45,7 +45,7 @@ public class BlockChestOfDrawers extends BlockWithEntity {
 			Direction.WEST, Block.createCuboidShape(8, 0, 0, 16, 16, 16),
 			Direction.EAST, Block.createCuboidShape(0, 0, 0, 8, 16, 16)));
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-	public static final BooleanProperty OPEN = BooleanProperty.of("open");
+	public static final BooleanProperty OPEN = BlockProperties.OPEN;
 
 	public BlockChestOfDrawers() {
 		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque());
