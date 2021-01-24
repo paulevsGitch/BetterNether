@@ -1,5 +1,7 @@
 package paulevs.betternether.blocks;
 
+import java.util.function.Supplier;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
@@ -173,34 +175,34 @@ public class BlockProperties {
 	}
 	
 	public static enum PottedPlantShape implements StringIdentifiable {
-		AGAVE("agave", BlocksRegistry.AGAVE),
-		BARREL_CACTUS("barrel_cactus", BlocksRegistry.BARREL_CACTUS),
-		BLACK_APPLE("black_apple", BlocksRegistry.BLACK_APPLE_SEED),
-		BLACK_BUSH("black_bush", BlocksRegistry.BLACK_BUSH),
-		EGG_PLANT("egg_plant", BlocksRegistry.EGG_PLANT),
-		INK_BUSH("ink_bush", BlocksRegistry.INK_BUSH_SEED),
-		REEDS("reeds", BlocksRegistry.NETHER_REED),
-		NETHER_CACTUS("nether_cactus", BlocksRegistry.NETHER_CACTUS),
-		NETHER_GRASS("nether_grass", BlocksRegistry.NETHER_GRASS),
-		ORANGE_MUSHROOM("orange_mushroom", BlocksRegistry.ORANGE_MUSHROOM),
-		RED_MOLD("red_mold", BlocksRegistry.RED_MOLD),
-		GRAY_MOLD("gray_mold", BlocksRegistry.GRAY_MOLD),
-		MAGMA_FLOWER("magma_flower", BlocksRegistry.MAGMA_FLOWER),
-		NETHER_WART("nether_wart", BlocksRegistry.WART_SEED),
-		WILLOW("willow", BlocksRegistry.WILLOW_SAPLING),
-		SMOKER("smoker", BlocksRegistry.SMOKER),
-		WART("wart", Blocks.NETHER_WART),
-		JUNGLE_PLANT("jungle_plant", BlocksRegistry.JUNGLE_PLANT),
-		JELLYFISH_MUSHROOM("jellyfish_mushroom", BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING),
-		SWAMP_GRASS("swamp_grass", BlocksRegistry.SWAMP_GRASS),
-		SOUL_GRASS("soul_grass", BlocksRegistry.SOUL_GRASS),
-		BONE_GRASS("bone_grass", BlocksRegistry.BONE_GRASS),
-		BONE_MUSHROOM("bone_mushroom", BlocksRegistry.BONE_MUSHROOM);
+		AGAVE("agave", () -> BlocksRegistry.AGAVE),
+		BARREL_CACTUS("barrel_cactus", () -> BlocksRegistry.BARREL_CACTUS),
+		BLACK_APPLE("black_apple", () -> BlocksRegistry.BLACK_APPLE_SEED),
+		BLACK_BUSH("black_bush", () -> BlocksRegistry.BLACK_BUSH),
+		EGG_PLANT("egg_plant", () -> BlocksRegistry.EGG_PLANT),
+		INK_BUSH("ink_bush", () -> BlocksRegistry.INK_BUSH_SEED),
+		REEDS("reeds", () -> BlocksRegistry.NETHER_REED),
+		NETHER_CACTUS("nether_cactus", () -> BlocksRegistry.NETHER_CACTUS),
+		NETHER_GRASS("nether_grass", () -> BlocksRegistry.NETHER_GRASS),
+		ORANGE_MUSHROOM("orange_mushroom", () -> BlocksRegistry.ORANGE_MUSHROOM),
+		RED_MOLD("red_mold", () -> BlocksRegistry.RED_MOLD),
+		GRAY_MOLD("gray_mold", () -> BlocksRegistry.GRAY_MOLD),
+		MAGMA_FLOWER("magma_flower", () -> BlocksRegistry.MAGMA_FLOWER),
+		NETHER_WART("nether_wart", () -> BlocksRegistry.WART_SEED),
+		WILLOW("willow", () -> BlocksRegistry.WILLOW_SAPLING),
+		SMOKER("smoker", () -> BlocksRegistry.SMOKER),
+		WART("wart", () -> Blocks.NETHER_WART),
+		JUNGLE_PLANT("jungle_plant", () -> BlocksRegistry.JUNGLE_PLANT),
+		JELLYFISH_MUSHROOM("jellyfish_mushroom", () -> BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING),
+		SWAMP_GRASS("swamp_grass", () -> BlocksRegistry.SWAMP_GRASS),
+		SOUL_GRASS("soul_grass", () -> BlocksRegistry.SOUL_GRASS),
+		BONE_GRASS("bone_grass", () -> BlocksRegistry.BONE_GRASS),
+		BONE_MUSHROOM("bone_mushroom", () -> BlocksRegistry.BONE_MUSHROOM);
 
-		private final Block block;
+		private final Supplier<Block> block;
 		private final String name;
 
-		private PottedPlantShape(String name, Block block) {
+		private PottedPlantShape(String name, Supplier<Block> block) {
 			this.name = name;
 			this.block = block;
 		}
@@ -216,11 +218,11 @@ public class BlockProperties {
 		}
 
 		public Item getItem() {
-			return block.asItem();
+			return block.get().asItem();
 		}
 
 		public Block getBlock() {
-			return block;
+			return block.get();
 		}
 	}
 	
