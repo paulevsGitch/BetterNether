@@ -132,7 +132,7 @@ public class BNSign extends AbstractSignBlock {
 					.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
 		}
 		else if (ctx.getSide() != Direction.DOWN) {
-			BlockState blockState = this.getDefaultState();
+			BlockState blockState = this.getDefaultState().with(FLOOR, false);
 			FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
 			WorldView worldView = ctx.getWorld();
 			BlockPos blockPos = ctx.getBlockPos();
@@ -147,7 +147,7 @@ public class BNSign extends AbstractSignBlock {
 					int rot = MathHelper.floor((180.0 + direction2.asRotation() * 16.0 / 360.0) + 0.5 + 4) & 15;
 					blockState = blockState.with(ROTATION, rot);
 					if (blockState.canPlaceAt(worldView, blockPos)) {
-						return blockState.with(FLOOR, false).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+						return blockState.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
 					}
 				}
 			}
