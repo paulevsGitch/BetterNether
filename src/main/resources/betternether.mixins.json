@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.paulevs.betternether.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "betternether.refmap.json",
+  "mixins": [
+
+  ],
+  "client": [
+
+    "ClientPlayNetHandlerMixin"
+  ],
+  "minVersion": "0.8"
+}

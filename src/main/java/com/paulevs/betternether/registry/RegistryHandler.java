@@ -2,12 +2,15 @@ package com.paulevs.betternether.registry;
 
 import com.paulevs.betternether.BetterNether;
 import com.paulevs.betternether.blocks.*;
+import com.paulevs.betternether.blocks.shapes.FoodShape;
 import com.paulevs.betternether.config.Configs;
+import com.paulevs.betternether.items.ItemBowlFood;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -51,8 +54,20 @@ public class RegistryHandler {
     public static final Block STALAGNATE_TRAPDOOR = registerTrapdoor("stalagnate_planks_trapdoor", STALAGNATE_PLANKS);
     public static final Block STALAGNATE_DOOR = registerDoor("stalagnate_planks_door", STALAGNATE_PLANKS);
     public static final Block STALAGNATE_BOWL = registerBlockNI("stalagnate_bowl", new BlockStalagnateBowl());
-
-
+    public static final Block CHAIR_STALAGNATE = registerChair("chair_stalagnate", STALAGNATE_SLAB);
+    public static final Block CRAFTING_TABLE_STALAGNATE = registerCraftingTable("crafting_table_stalagnate", STALAGNATE_PLANKS);
+    public static final Block CHEST_STALAGNATE = registerChest("chest_stalagnate", STALAGNATE_PLANKS);
+    public static final Block ROOF_TILE_STALAGNATE = registerRoof("roof_tile_stalagnate", STALAGNATE_PLANKS);
+    public static final Block ROOF_TILE_STALAGNATE_STAIRS = registerStairs("roof_tile_stalagnate_stairs", ROOF_TILE_STALAGNATE);
+    public static final Block ROOF_TILE_STALAGNATE_SLAB = registerSlab("roof_tile_stalagnate_slab", ROOF_TILE_STALAGNATE);
+    public static final Block BARREL_STALAGNATE = registerBarrel("barrel_stalagnate", STALAGNATE_PLANKS, STALAGNATE_SLAB);
+    public static final Block BAR_STOOL_STALAGNATE = registerBarStool("bar_stool_stalagnate", STALAGNATE_SLAB);
+    public static final Block STALAGNATE_LADDER = registerLadder("stalagnate_ladder", STALAGNATE_PLANKS);
+    public static final Block SIGN_STALAGNATE = registerSign("sign_stalagnate", STALAGNATE_PLANKS);
+    public static final Item STALAGNATE_BOWL_WART = registerItem("stalagnate_bowl_wart", new ItemBowlFood(Foods.COOKED_CHICKEN, FoodShape.WART));
+    public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem("stalagnate_bowl_mushroom", new ItemBowlFood(Foods.MUSHROOM_STEW, FoodShape.MUSHROOM));
+    public static final Item STALAGNATE_BOWL_APPLE = registerItem("stalagnate_bowl_apple", new ItemBowlFood(Foods.APPLE, FoodShape.APPLE));
+    public static final Block TABURET_STALAGNATE = registerTaburet("taburet_stalagnate", STALAGNATE_SLAB);
 
     public static void registerAllBlocks(RegistryEvent.Register<Block> e) {
         IForgeRegistry<Block> r = e.getRegistry();
@@ -112,6 +127,77 @@ public class RegistryHandler {
         for (Pair<String, Item> item : MODITEMS) {
             r.register(item.getRight().setRegistryName(new ResourceLocation(BetterNether.MOD_ID, item.getLeft())));
         }
+    }
+
+    public static Block registerCraftingTable(String name, Block source) {
+        Block block = new BNCraftingTable(source);
+        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+            registerBlockDirectly(name, block);
+        }
+        return block;
+    }
+
+    public static Block registerChest(String name, Block source) {
+      Block block = new BNChest(source);
+        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+            registerBlockDirectly(name, block);
+           addFuel(source, block);
+        }
+        return block;
+   }
+
+   public static Block registerSign(String name, Block source) {
+        Block block = new BNSign(source);
+       if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+            registerBlockDirectly(name, block);
+           addFuel(source, block);
+        }
+        return block;
+    }
+
+    public static Block registerBarrel(String name, Block source, Block slab) {
+        Block block = new BNBarrel(source);
+        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+            registerBlockDirectly(name, block);
+            addFuel(source, block);
+        }
+        return block;
+    }
+
+    public static Block registerLadder(String name, Block source) {
+        Block block = new BNLadder(source);
+        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+            registerBlockDirectly(name, block);
+            addFuel(source, block);
+        }
+        return block;
+    }
+
+    public static Block registerTaburet(String name, Block source) {
+        Block block = new BNTaburet(source);
+        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+            registerBlockDirectly(name, block);
+            addFuel(source, block);
+        }
+        return block;
+    }
+
+    public static Block registerChair(String name, Block source) {
+        Block block = new BNNormalChair(source);
+        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+            registerBlockDirectly(name, block);
+            addFuel(source, block);
+        }
+        return block;
+    }
+
+    public static Block registerBarStool(String name, Block source) {
+        Block block = new BNBarStool(source);
+        if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+            registerBlockDirectly(name, block);
+            addFuel(source, block);
+        }
+        return block;
     }
     public static Block registerStairs(String name, Block source) {
         Block stairs = new BNStairs(source);

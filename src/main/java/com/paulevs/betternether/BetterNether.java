@@ -4,12 +4,16 @@ package com.paulevs.betternether;
 import com.paulevs.betternether.blocks.BNRenderLayer;
 import com.paulevs.betternether.client.IRenderTypeable;
 import com.paulevs.betternether.registry.RegistryHandler;
+import com.paulevs.betternether.registry.TileEntitiesRegistry;
+import com.paulevs.betternether.registry.TileEntityRenderRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,6 +38,9 @@ public class BetterNether
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         modEventBus.addGenericListener(Block.class, RegistryHandler::registerAllBlocks);
         modEventBus.addGenericListener(Item.class, RegistryHandler::registerAllItems);
+        modEventBus.addGenericListener(TileEntityType.class, TileEntitiesRegistry::registerAll);
+
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         modEventBus.addListener(this::clientSetup);
 
@@ -45,6 +52,7 @@ public class BetterNether
 
     private void clientSetup(FMLClientSetupEvent e) {
         registerRenderLayers();
+        TileEntityRenderRegistry.register();
 
     }
 
