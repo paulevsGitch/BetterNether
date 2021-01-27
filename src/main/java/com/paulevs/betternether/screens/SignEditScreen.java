@@ -103,8 +103,7 @@ public class SignEditScreen extends Screen {
             this.selectionManager.moveCursorToEnd();
             return true;
         } else if (keyCode != 264 && keyCode != 257 && keyCode != 335) {
-            return this.selectionManager.specialKeyPressed(keyCode) ? true
-                    : super.keyPressed(keyCode, scanCode, modifiers);
+            return this.selectionManager.specialKeyPressed(keyCode) || super.keyPressed(keyCode, scanCode, modifiers);
         } else {
             this.currentRow = this.currentRow + 1 & 3;
             this.selectionManager.moveCursorToEnd();

@@ -1,14 +1,21 @@
 package com.paulevs.betternether.registry;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.paulevs.betternether.BetterNether;
 import com.paulevs.betternether.blocks.*;
 import com.paulevs.betternether.blocks.shapes.FoodShape;
 import com.paulevs.betternether.config.Configs;
+import com.paulevs.betternether.entity.EntityChair;
 import com.paulevs.betternether.items.ItemBowlFood;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
@@ -16,6 +23,9 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -29,9 +39,11 @@ public class RegistryHandler {
     private static final List<String> ITEMS = new ArrayList<String>();
     private static final List<Pair<String, Item>> MODITEMS = new ArrayList<>();
     private static Map<IItemProvider, Integer> FUELS = new HashMap<>();
+    public static final Map<EntityType<? extends LivingEntity>, AttributeModifierMap> ATTRIBUTES = Maps.newHashMap();
 
     public static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
     public static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
+    private static final List<EntityType<?>> NETHER_ENTITIES = Lists.newArrayList();
 
     // Grass //
     public static final Block NETHER_GRASS = registerBlock("nether_grass", new BlockNetherGrass());
@@ -68,6 +80,16 @@ public class RegistryHandler {
     public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem("stalagnate_bowl_mushroom", new ItemBowlFood(Foods.MUSHROOM_STEW, FoodShape.MUSHROOM));
     public static final Item STALAGNATE_BOWL_APPLE = registerItem("stalagnate_bowl_apple", new ItemBowlFood(Foods.APPLE, FoodShape.APPLE));
     public static final Block TABURET_STALAGNATE = registerTaburet("taburet_stalagnate", STALAGNATE_SLAB);
+    public static final EntityType<EntityChair> CHAIR =
+            EntityType.Builder
+                    .<EntityChair>create(EntityChair::new, EntityClassification.MISC)
+                    .size(0, 0)
+                    .setUpdateInterval(3)
+                    .setTrackingRange(5)
+                    .disableSummoning()
+                    .immuneToFire()
+                    .setShouldReceiveVelocityUpdates(true)
+                    .build("");
 
     public static void registerAllBlocks(RegistryEvent.Register<Block> e) {
         IForgeRegistry<Block> r = e.getRegistry();

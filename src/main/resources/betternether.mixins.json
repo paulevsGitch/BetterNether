@@ -4,6 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "betternether.refmap.json",
   "mixins": [
+    "ServerPlayNetHandlerMixin"
+
 
   ],
   "client": [

@@ -3,6 +3,9 @@ package com.paulevs.betternether;
 
 import com.paulevs.betternether.blocks.BNRenderLayer;
 import com.paulevs.betternether.client.IRenderTypeable;
+import com.paulevs.betternether.entity.EntityChair;
+import com.paulevs.betternether.entity.render.RenderChair;
+import com.paulevs.betternether.registry.EntityRenderRegistry;
 import com.paulevs.betternether.registry.RegistryHandler;
 import com.paulevs.betternether.registry.TileEntitiesRegistry;
 import com.paulevs.betternether.registry.TileEntityRenderRegistry;
@@ -10,6 +13,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -17,6 +22,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -26,10 +32,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static com.paulevs.betternether.registry.RegistryHandler.CHAIR;
+
 @Mod("betternether")
 public class BetterNether
 {
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger() ;
     public static final String MOD_ID = "betternether";
 
     public BetterNether() {
@@ -53,11 +61,13 @@ public class BetterNether
     private void clientSetup(FMLClientSetupEvent e) {
         registerRenderLayers();
         TileEntityRenderRegistry.register();
+        EntityRenderRegistry.register();
 
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
+        GlobalEntityTypeAttributes.put(CHAIR, EntityChair.getAttributeContainer());
 
     }
 
@@ -78,6 +88,9 @@ public class BetterNether
             }
         });
     }
+
+
+
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {

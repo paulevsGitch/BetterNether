@@ -1,6 +1,7 @@
 {
 	"container.forge": "Forge",
 	"container.chest_of_drawers": "Chest of Drawers",
+	"container.crafting_table": "Crafting Table",
 
 	"entity.betternether.firefly": "Firefly",
 	"entity.betternether.hydrogen_jellyfish": "Hydrogen Jellyfish",
@@ -693,5 +694,7 @@
 	"block.betternether.whispering_gourd": "Whispering Gourd",
 	"block.betternether.whispering_gourd_lantern": "Whispering Gourd Lantern",
 	
-	"block.betternether.willow_torch": "Willow Torch"
+	"block.betternether.willow_torch": "Willow Torch",
+
+	"sign.edit": "Edit Sign"
 }
