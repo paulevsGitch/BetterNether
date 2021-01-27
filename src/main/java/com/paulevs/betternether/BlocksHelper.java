@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 
+import com.paulevs.betternether.blocks.BlockFarmland;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -110,9 +111,9 @@ public class BlocksHelper {
 		return count;
 	}
 
-	//public static boolean isFertile(BlockState state) {
-	//	return state.getBlock() instanceof BlockFarmland;
-//	}
+	public static boolean isFertile(BlockState state) {
+		return state.getBlock() instanceof BlockFarmland;
+	}
 
 	public static void cover(IWorld world, BlockPos center, Block ground, BlockState cover, int radius, Random random) {
 		HashSet<BlockPos> points = new HashSet<BlockPos>();
