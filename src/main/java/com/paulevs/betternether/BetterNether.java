@@ -47,6 +47,7 @@ public class BetterNether
         modEventBus.addGenericListener(Block.class, RegistryHandler::registerAllBlocks);
         modEventBus.addGenericListener(Item.class, RegistryHandler::registerAllItems);
         modEventBus.addGenericListener(TileEntityType.class, TileEntitiesRegistry::registerAll);
+        modEventBus.addGenericListener(EntityType.class, RegistryHandler::registerAll);
 
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);

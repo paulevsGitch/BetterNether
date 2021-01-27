@@ -39,11 +39,9 @@ public class RegistryHandler {
     private static final List<String> ITEMS = new ArrayList<String>();
     private static final List<Pair<String, Item>> MODITEMS = new ArrayList<>();
     private static Map<IItemProvider, Integer> FUELS = new HashMap<>();
-    public static final Map<EntityType<? extends LivingEntity>, AttributeModifierMap> ATTRIBUTES = Maps.newHashMap();
 
     public static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
     public static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
-    private static final List<EntityType<?>> NETHER_ENTITIES = Lists.newArrayList();
 
     // Grass //
     public static final Block NETHER_GRASS = registerBlock("nether_grass", new BlockNetherGrass());
@@ -90,6 +88,7 @@ public class RegistryHandler {
                     .immuneToFire()
                     .setShouldReceiveVelocityUpdates(true)
                     .build("");
+    public static final Item STALAGNATE_BOWL_ITEM = registerItem("stalagnate_bowl", new ItemBowlFood(null, FoodShape.NONE));
 
     public static void registerAllBlocks(RegistryEvent.Register<Block> e) {
         IForgeRegistry<Block> r = e.getRegistry();
@@ -128,6 +127,12 @@ public class RegistryHandler {
             ITEMS.add(name);
         return item;
     }
+
+    public static void registerAll(RegistryEvent.Register<EntityType<?>> evt) {
+        IForgeRegistry<EntityType<?>> r = evt.getRegistry();
+        r.register(CHAIR.setRegistryName(new ResourceLocation(BetterNether.MOD_ID, "chair")));
+    }
+
     private static Block registerBlockDirectly(String name, Block block) {
         block.setRegistryName(new ResourceLocation(BetterNether.MOD_ID, name));
         BLOCKS.add(block);
