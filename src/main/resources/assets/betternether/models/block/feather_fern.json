@@ -1,4 +1,5 @@
 {
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
 	"parent": "block/block",
 	"textures": {
 		"base": "betternether:block/feather_fern_base",
