@@ -4,7 +4,7 @@
 		"base": "betternether:block/feather_fern_base",
 		"particle": "betternether:block/feather_fern_leaf",
 		"leaf": "betternether:block/feather_fern_leaf",
-		"center": "betternether:block/feather_fern_center_1"
+		"center": "betternether:block/feather_fern_center"
 	},
 	"elements": [
 		{
