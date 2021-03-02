@@ -75,7 +75,7 @@
 		},
 		{
 			"name": "Base",
-			"from": [-8, 0.5, -8],
+			"from": [-7.5, 0.5, -7.5],
 			"to": [24, 0.5, 24],
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
