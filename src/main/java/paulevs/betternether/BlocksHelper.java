@@ -27,6 +27,7 @@ public class BlocksHelper {
 	public static final int FLAG_IGNORE_OBSERVERS = 16;
 
 	public static final int SET_SILENT = FLAG_UPDATE_BLOCK | FLAG_IGNORE_OBSERVERS | FLAG_SEND_CLIENT_CHANGES;
+	public static final int SET_UPDATE = FLAG_UPDATE_BLOCK | FLAG_SEND_CLIENT_CHANGES;
 	public static final Direction[] HORIZONTAL = new Direction[] { Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST };
 
 	private static final Vec3i[] OFFSETS = new Vec3i[] {
@@ -73,6 +74,10 @@ public class BlocksHelper {
 		return state.isIn(NetherTags.MYCELIUM);
 	}
 
+	public static void setWithUpdate(WorldAccess world, BlockPos pos, BlockState state) {
+		world.setBlockState(pos, state, SET_UPDATE);
+	}
+	
 	public static void setWithoutUpdate(WorldAccess world, BlockPos pos, BlockState state) {
 		world.setBlockState(pos, state, SET_SILENT);
 	}

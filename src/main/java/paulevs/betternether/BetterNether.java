@@ -2,6 +2,7 @@ package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
 import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.recipes.IntegrationRecipes;
 import paulevs.betternether.recipes.ItemRecipes;
 import paulevs.betternether.registry.BiomesRegistry;
@@ -43,9 +44,9 @@ public class BetterNether implements ModInitializer {
 	}
 
 	private void initOptions() {
-		thinArmor = Config.getBoolean("improvement", "smaller_armor_offset", true);
-		lavafallParticles = Config.getBoolean("improvement", "lavafall_particles", true);
-		float density = Config.getFloat("improvement", "fog_density[vanilla: 1.0]", 0.75F);
+		thinArmor = Configs.MAIN.getBoolean("improvement", "smaller_armor_offset", true);
+		lavafallParticles = Configs.MAIN.getBoolean("improvement", "lavafall_particles", true);
+		float density = Configs.MAIN.getFloat("improvement", "fog_density[vanilla: 1.0]", 0.75F);
 		changeFogDensity(density);
 	}
 

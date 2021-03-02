@@ -13,7 +13,7 @@ import net.minecraft.loot.context.LootContext;
 
 public class BNSlab extends SlabBlock {
 	public BNSlab(Block block) {
-		super(FabricBlockSettings.copyOf(block).nonOpaque());
+		super(FabricBlockSettings.copyOf(block));
 	}
 
 	@Override

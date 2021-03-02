@@ -1,5 +1,5 @@
 # BetterNether
-BetterNether Mod for Fabric, MC 1.16.3
+BetterNether Mod for Fabric, MC 1.16.4
 
 Building:
 * Clone repo
@@ -8,4 +8,4 @@ Building:
 * Import project to IDE
 
 Mappings:
-* https://modmuss50.me/fabric.html?&version=1.16.3
+* https://modmuss50.me/fabric.html?&version=1.16.4

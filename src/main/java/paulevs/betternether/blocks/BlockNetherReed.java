@@ -100,8 +100,8 @@ public class BlockNetherReed extends BlockBase {
 					length -= 2;
 				grow = (length < 3) && (isFertile ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0));
 				if (grow) {
-					BlocksHelper.setWithoutUpdate(world, up, getDefaultState());
-					BlocksHelper.setWithoutUpdate(world, pos, getDefaultState().with(TOP, false));
+					BlocksHelper.setWithUpdate(world, up, getDefaultState());
+					BlocksHelper.setWithUpdate(world, pos, getDefaultState().with(TOP, false));
 				}
 			}
 		}

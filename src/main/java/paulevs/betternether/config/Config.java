@@ -11,21 +11,27 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
 import paulevs.betternether.BetterNether;
 
-public class Config {
-	private static JsonObject config;
-	private static boolean rewrite = false;
+public final class Config {
+	private static final List<Config> ALL = Lists.newArrayList();
+	private JsonObject config;
+	private boolean rewrite = false;
+	private final String name;
+	
+	public Config(String name) {
+		this.name = name;
+		ALL.add(this);
+	}
 
-	private static void load() {
+	private void load() {
 		if (config == null) {
 			File file = getFolder();
 			if (!file.exists())
@@ -41,17 +47,7 @@ public class Config {
 						rewrite = true;
 					}
 					else {
-						boolean rewrite = getBooleanLoad("config", "rewrite_on_version_update", true);
-						if (rewrite) {
-							ModContainer mod = FabricLoader.getInstance().getModContainer(BetterNether.MOD_ID).get();
-							String versionActual = mod.getMetadata().getVersion().getFriendlyString();
-							String version = getStringLoad("config", "mod_version");
-							if (!version.equals(versionActual) || version.equals("${version}")) {
-								config = new JsonObject();
-								rewrite = true;
-								setStringLoad("config", "mod_version", versionActual);
-							}
-						}
+						rewrite = false;
 					}
 				}
 				catch (FileNotFoundException e) {
@@ -68,34 +64,37 @@ public class Config {
 	}
 
 	public static void save() {
-		if (rewrite) {
-			File file = getFolder();
-			if (!file.exists())
-				file.mkdirs();
-			file = getFile();
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			try {
-				FileWriter writer = new FileWriter(file);
-				String gstring = gson.toJson(config);
-				writer.write(gstring);
-				writer.flush();
-				writer.close();
+		ALL.forEach((config) -> {
+			if (config.rewrite) {
+				File file = config.getFolder();
+				if (!file.exists())
+					file.mkdirs();
+				file = config.getFile();
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				try {
+					FileWriter writer = new FileWriter(file);
+					String gstring = gson.toJson(config.config);
+					writer.write(gstring);
+					writer.flush();
+					writer.close();
+					config.rewrite = false;
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		});
 	}
 
-	private static File getFile() {
-		return new File(String.format("./config/%s.json", BetterNether.MOD_ID));
+	private File getFile() {
+		return new File(String.format("./config/%s/%s.json", BetterNether.MOD_ID, name));
 	}
 
-	private static File getFolder() {
-		return new File("./config/");
+	private File getFolder() {
+		return new File("./config/" + BetterNether.MOD_ID + "/");
 	}
 
-	public static boolean getBoolean(String groups, String name, boolean def) {
+	public boolean getBoolean(String groups, String name, boolean def) {
 		load();
 		name += "[def: " + def + "]";
 
@@ -112,35 +111,7 @@ public class Config {
 		}
 	}
 
-	private static boolean getBooleanLoad(String groups, String name, boolean def) {
-		name += "[def: " + def + "]";
-
-		JsonObject group = getGroup(groups);
-		JsonElement element = group.get(name);
-
-		if (element != null) {
-			return element.getAsBoolean();
-		}
-		else {
-			group.addProperty(name, def);
-			rewrite = true;
-			return def;
-		}
-	}
-
-	private static String getStringLoad(String groups, String name) {
-		JsonObject group = getGroup(groups);
-		JsonElement element = group.get(name);
-
-		if (element != null) {
-			return element.getAsString();
-		}
-		else {
-			return "";
-		}
-	}
-
-	public static void setBoolean(String groups, String name, boolean def, boolean value) {
+	public void setBoolean(String groups, String name, boolean def, boolean value) {
 		name += "[def: " + def + "]";
 
 		JsonObject group = getGroup(groups);
@@ -149,7 +120,7 @@ public class Config {
 		rewrite = true;
 	}
 
-	public static float getFloat(String groups, String name, float def) {
+	public float getFloat(String groups, String name, float def) {
 		load();
 		name += "[def: " + def + "]";
 
@@ -166,7 +137,7 @@ public class Config {
 		}
 	}
 
-	public static void setFloat(String groups, String name, float def, float value) {
+	public void setFloat(String groups, String name, float def, float value) {
 		name += "[def: " + def + "]";
 
 		JsonObject group = getGroup(groups);
@@ -175,7 +146,7 @@ public class Config {
 		rewrite = true;
 	}
 
-	public static int getInt(String groups, String name, int def) {
+	public int getInt(String groups, String name, int def) {
 		load();
 		name += "[def: " + def + "]";
 
@@ -192,7 +163,7 @@ public class Config {
 		}
 	}
 
-	public static String getString(String groups, String name, String def) {
+	public String getString(String groups, String name, String def) {
 		load();
 		name += "[def: " + def + "]";
 
@@ -209,7 +180,7 @@ public class Config {
 		}
 	}
 
-	public static void setInt(String groups, String name, int def, int value) {
+	public void setInt(String groups, String name, int def, int value) {
 		name += "[def: " + def + "]";
 
 		JsonObject group = getGroup(groups);
@@ -218,12 +189,12 @@ public class Config {
 		rewrite = true;
 	}
 
-	public static void setStringLoad(String groups, String name, String value) {
+	public void setStringLoad(String groups, String name, String value) {
 		JsonObject group = getGroup(groups);
 		group.addProperty(name, value);
 	}
 
-	public static String[] getStringArray(String groups, String name, String[] def) {
+	public String[] getStringArray(String groups, String name, String[] def) {
 		load();
 
 		JsonObject group = getGroup(groups);
@@ -239,7 +210,7 @@ public class Config {
 		}
 	}
 
-	private static String[] toStringArray(JsonArray array) {
+	private String[] toStringArray(JsonArray array) {
 		load();
 		String[] result = new String[array.size()];
 		for (int i = 0; i < array.size(); i++)
@@ -247,7 +218,7 @@ public class Config {
 		return result;
 	}
 
-	private static JsonArray toJsonArray(String[] array) {
+	private JsonArray toJsonArray(String[] array) {
 		load();
 		JsonArray result = new JsonArray();
 		for (String s : array)
@@ -255,7 +226,7 @@ public class Config {
 		return result;
 	}
 
-	public static JsonObject getGroup(String groups) {
+	public JsonObject getGroup(String groups) {
 		JsonObject obj = config;
 		String[] groupsArr = groups.split("\\.");
 		for (String group : groupsArr) {
@@ -269,7 +240,7 @@ public class Config {
 		return obj;
 	}
 
-	public static List<String> getBaseGroups() {
+	public List<String> getBaseGroups() {
 		List<String> groups = new ArrayList<String>();
 		Iterator<Entry<String, JsonElement>> iterator = config.entrySet().iterator();
 		iterator.forEachRemaining((element) -> {
@@ -278,13 +249,13 @@ public class Config {
 		return groups;
 	}
 
-	public static List<Entry<String, JsonElement>> getGroupMembers(JsonObject group) {
+	public List<Entry<String, JsonElement>> getGroupMembers(JsonObject group) {
 		List<Entry<String, JsonElement>> result = new ArrayList<Entry<String, JsonElement>>();
 		result.addAll(group.entrySet());
 		return result;
 	}
 
-	public static void markToSave() {
+	public void markToSave() {
 		rewrite = true;
 	}
 }

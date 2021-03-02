@@ -20,14 +20,14 @@ public class StructureReeds implements IStructure {
 				BlockPos up = posN.up();
 				if (world.isAir(posN)) {
 					if (world.isAir(up))
-						BlocksHelper.setWithoutUpdate(world, posN, med);
+						BlocksHelper.setWithUpdate(world, posN, med);
 					else {
-						BlocksHelper.setWithoutUpdate(world, posN, BlocksRegistry.NETHER_REED.getDefaultState());
+						BlocksHelper.setWithUpdate(world, posN, BlocksRegistry.NETHER_REED.getDefaultState());
 						return;
 					}
 				}
 			}
-			BlocksHelper.setWithoutUpdate(world, pos.up(h), BlocksRegistry.NETHER_REED.getDefaultState());
+			BlocksHelper.setWithUpdate(world, pos.up(h), BlocksRegistry.NETHER_REED.getDefaultState());
 		}
 	}
 }

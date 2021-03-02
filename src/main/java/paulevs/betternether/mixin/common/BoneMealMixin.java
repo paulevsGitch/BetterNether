@@ -33,7 +33,7 @@ public class BoneMealMixin {
 				BlockState nylium = bnGetNylium(world, blockPos);
 				boolean consume = true;
 				if (nylium != null && world.getBlockState(blockPos).getBlock() == Blocks.NETHERRACK) {
-					BlocksHelper.setWithoutUpdate(world, blockPos, nylium);
+					BlocksHelper.setWithUpdate(world, blockPos, nylium);
 				}
 				else {
 					consume = bnGrowGrass(world, blockPos);
@@ -73,9 +73,9 @@ public class BoneMealMixin {
 				if (world.isAir(POS) && !world.isAir(down)) {
 					BlockState grass = bnGetGrassState(world, down);
 					if (grass != null) {
-						BlocksHelper.setWithoutUpdate(world, POS, grass);
+						BlocksHelper.setWithUpdate(world, POS, grass);
 						if (world.random.nextInt(3) == 0 && world.getBlockState(down).getBlock() == Blocks.NETHERRACK)
-							BlocksHelper.setWithoutUpdate(world, down, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
+							BlocksHelper.setWithUpdate(world, down, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
 						result = true;
 					}
 					break;

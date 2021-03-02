@@ -15,6 +15,8 @@
 		"betternether:crimson_ladder",
 		"betternether:warped_ladder",
 		"betternether:mushroom_ladder",
-		"betternether:anchor_tree_vine"
+		"betternether:anchor_tree_vine",
+		"betternether:anchor_tree_ladder",
+		"betternether:nether_sakura_ladder"
 	]
 }

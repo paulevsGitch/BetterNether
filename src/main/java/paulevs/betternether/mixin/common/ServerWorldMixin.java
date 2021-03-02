@@ -18,7 +18,6 @@ import net.minecraft.world.gen.Spawner;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.level.storage.LevelStorage;
-import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.structures.CityFeature;
 
@@ -26,8 +25,7 @@ import paulevs.betternether.world.structures.CityFeature;
 public class ServerWorldMixin {
 	@Inject(method = "<init>*", at = @At("RETURN"))
 	private void onInit(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType,
-			WorldGenerationProgressListener worldGenerationProgressListener, ChunkGenerator chunkGenerator, boolean bl, long seed, List<Spawner> list, boolean bl2, CallbackInfo info) {
-		BiomesRegistry.registerAllOtherBiomes();
+		WorldGenerationProgressListener worldGenerationProgressListener, ChunkGenerator chunkGenerator, boolean bl, long seed, List<Spawner> list, boolean bl2, CallbackInfo info) {
 		BNWorldGenerator.init(seed);
 		CityFeature.initGenerator();
 	}

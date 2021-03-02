@@ -23,10 +23,10 @@ public class StructureStalagnate implements IStructure {
 			BlockState middle = BlocksRegistry.STALAGNATE.getDefaultState();
 			BlockState top = BlocksRegistry.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
 
-			BlocksHelper.setWithoutUpdate(world, pos, bottom);
-			BlocksHelper.setWithoutUpdate(world, pos.up(length), top);
+			BlocksHelper.setWithUpdate(world, pos, bottom);
+			BlocksHelper.setWithUpdate(world, pos.up(length), top);
 			for (int y = 1; y < length; y++)
-				BlocksHelper.setWithoutUpdate(world, pos.up(y), middle);
+				BlocksHelper.setWithUpdate(world, pos.up(y), middle);
 		}
 	}
 
@@ -37,10 +37,10 @@ public class StructureStalagnate implements IStructure {
 			BlockState middle = BlocksRegistry.STALAGNATE.getDefaultState();
 			BlockState top = BlocksRegistry.STALAGNATE.getDefaultState().with(BlockStalagnate.SHAPE, TripleShape.TOP);
 
-			BlocksHelper.setWithoutUpdate(world, pos.down(length), bottom);
-			BlocksHelper.setWithoutUpdate(world, pos, top);
+			BlocksHelper.setWithUpdate(world, pos.down(length), bottom);
+			BlocksHelper.setWithUpdate(world, pos, top);
 			for (int y = 1; y < length; y++)
-				BlocksHelper.setWithoutUpdate(world, pos.down(y), middle);
+				BlocksHelper.setWithUpdate(world, pos.down(y), middle);
 		}
 	}
 }

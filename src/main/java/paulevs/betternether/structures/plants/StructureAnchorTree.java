@@ -71,9 +71,9 @@ public class StructureAnchorTree implements IStructure {
 			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
 			boolean blockUp = true;
 			if ((blockUp = BLOCKS.contains(bpos.up())) && BLOCKS.contains(bpos.down()))
-				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.log.getDefaultState());
+				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.log.getDefaultState());
 			else
-				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.getDefaultState());
+				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.getDefaultState());
 
 			if (bpos.getY() > 45 && bpos.getY() < 90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
@@ -88,19 +88,19 @@ public class StructureAnchorTree implements IStructure {
 
 			if (bpos.getY() > 64) {
 				if (!blockUp && world.getBlockState(bpos.up()).getMaterial().isReplaceable()) {
-					BlocksHelper.setWithoutUpdate(world, bpos.up(), BlocksRegistry.MOSS_COVER.getDefaultState());
+					BlocksHelper.setWithUpdate(world, bpos.up(), BlocksRegistry.MOSS_COVER.getDefaultState());
 				}
 
 				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
 					state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
-						BlocksHelper.setWithoutUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
+						BlocksHelper.setWithUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
-						BlocksHelper.setWithoutUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
+						BlocksHelper.setWithUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
-						BlocksHelper.setWithoutUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
+						BlocksHelper.setWithUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
-						BlocksHelper.setWithoutUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
+						BlocksHelper.setWithUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
 				}
 			}
 		}
@@ -233,7 +233,7 @@ public class StructureAnchorTree implements IStructure {
 			boolean east = world.getBlockState(p.east()).getBlock() != BlocksRegistry.GIANT_LUCIS;
 			boolean west = world.getBlockState(p.west()).getBlock() != BlocksRegistry.GIANT_LUCIS;
 			BlockState state = BlocksRegistry.GIANT_LUCIS.getDefaultState();
-			BlocksHelper.setWithoutUpdate(world, p, state
+			BlocksHelper.setWithUpdate(world, p, state
 					.with(MushroomBlock.NORTH, north)
 					.with(MushroomBlock.SOUTH, south)
 					.with(MushroomBlock.EAST, east)

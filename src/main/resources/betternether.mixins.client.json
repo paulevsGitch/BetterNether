@@ -3,14 +3,14 @@
   "package": "paulevs.betternether.mixin.client",
   "compatibilityLevel": "JAVA_8",
   "client": [
+	"ClientPlayNetworkHandlerMixin",
 	"BackgroundRenderMixin",
-	"LavaFluidMixin",
-	"StandArmorMixin",
-	"PlayerArmorMixin",
-	"PresetsScreenMixin",
 	"MinecraftClientMixin",
+	"PresetsScreenMixin",
+	"PlayerArmorMixin",
 	"RenderPhaseMixin",
-	"ClientPlayNetworkHandlerMixin"
+	"StandArmorMixin",
+	"LavaFluidMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -16,6 +16,7 @@ import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.mixin.common.GenerationSettingsAccessor;
 import paulevs.betternether.registry.BiomesRegistry;
 
@@ -37,17 +38,14 @@ public class NetherBiomeSource extends BiomeSource {
 		this.map = new BiomeMap(seed, BNWorldGenerator.biomeSizeXZ, BNWorldGenerator.biomeSizeY, BNWorldGenerator.volumetric);
 		this.biomeRegistry = biomeRegistry;
 		BiomesRegistry.mutateRegistry(biomeRegistry);
-		//boolean incendium = isIncendiumInstalled();
-		this.biomes.forEach((biome) -> {
-			GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
-			List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureFeatures());
-			structures.add(() -> { return BNWorldGenerator.CITY_CONFIGURED; });
-			/*if (incendium && !biomeRegistry.getId(biome).getNamespace().equals(BetterNether.MOD_ID)) {
-				structures.add(() -> { return ConfiguredStructureFeatures.BASTION_REMNANT; });
-				structures.add(() -> { return ConfiguredStructureFeatures.BASTION_REMNANT; });
-			}*/
-			accessor.setStructureFeatures(structures);
-		});
+		if (Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)) {
+			this.biomes.forEach((biome) -> {
+				GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
+				List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureFeatures());
+				structures.add(() -> { return BNWorldGenerator.CITY_CONFIGURED; });
+				accessor.setStructureFeatures(structures);
+			});
+		}
 	}
 	
 	private static List<Biome> getBiomes(Registry<Biome> biomeRegistry) {
@@ -59,17 +57,6 @@ public class NetherBiomeSource extends BiomeSource {
 		});
 		return result;
 	}
-	
-	/*private boolean isIncendiumInstalled() {
-		boolean incendium = false;
-		for (Biome biome: biomes) {
-			if (biomeRegistry.getId(biome).getNamespace().equals("starmute")) {
-				incendium = true;
-				break;
-			}
-		}
-		return incendium;
-	}*/
 
 	@Override
 	public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ) {
@@ -77,7 +64,7 @@ public class NetherBiomeSource extends BiomeSource {
 		if (biomeX == 0 && biomeZ == 0) {
 			map.clearCache();
 		}
-		return biomeRegistry.getOrThrow(BiomesRegistry.getBiomeKey(netherBiome));
+		return netherBiome.getActualBiome();
 	}
 
 	@Override

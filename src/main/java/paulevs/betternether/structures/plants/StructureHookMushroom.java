@@ -12,6 +12,6 @@ public class StructureHookMushroom implements IStructure {
 	@Override
 	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
 		if (pos.getY() < 90 || !BlocksHelper.isNetherrack(world.getBlockState(pos.up()))) return;
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.HOOK_MUSHROOM.getDefaultState());
+		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.HOOK_MUSHROOM.getDefaultState());
 	}
 }

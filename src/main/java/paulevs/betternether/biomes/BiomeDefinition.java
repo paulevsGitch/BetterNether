@@ -32,7 +32,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 
 public class BiomeDefinition {
 	private final List<ConfiguredStructureFeature<?, ?>> structures = Lists.newArrayList();
@@ -152,9 +152,9 @@ public class BiomeDefinition {
 			String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".mobs." + eID.getNamespace() + "." + eID.getPath();
 			SpawnInfo info = new SpawnInfo();
 			info.type = type;
-			info.weight = Config.getInt(path, "weight", weight);
-			info.minGroupSize = Config.getInt(path, "min_group_size", minGroupSize);
-			info.maxGroupSize = Config.getInt(path, "max_group_size", maxGroupSize);
+			info.weight = Configs.BIOMES.getInt(path, "weight", weight);
+			info.minGroupSize = Configs.BIOMES.getInt(path, "min_group_size", minGroupSize);
+			info.maxGroupSize = Configs.BIOMES.getInt(path, "max_group_size", maxGroupSize);
 			mobs.add(info);
 		}
 		return this;
@@ -194,9 +194,9 @@ public class BiomeDefinition {
 	 */
 	public BiomeDefinition setFogColor(int r, int g, int b) {
 		String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".fog_color";
-		r = MathHelper.clamp(Config.getInt(path, "red", r), 0, 255);
-		g = MathHelper.clamp(Config.getInt(path, "green", g), 0, 255);
-		b = MathHelper.clamp(Config.getInt(path, "blue", b), 0, 255);
+		r = MathHelper.clamp(Configs.BIOMES.getInt(path, "red", r), 0, 255);
+		g = MathHelper.clamp(Configs.BIOMES.getInt(path, "green", g), 0, 255);
+		b = MathHelper.clamp(Configs.BIOMES.getInt(path, "blue", b), 0, 255);
 		this.fogColor = MHelper.color(r, g, b);
 		return this;
 	}
@@ -214,9 +214,9 @@ public class BiomeDefinition {
 	 */
 	public BiomeDefinition setWaterColor(int r, int g, int b) {
 		String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".water_color";
-		r = MathHelper.clamp(Config.getInt(path, "red", r), 0, 255);
-		g = MathHelper.clamp(Config.getInt(path, "green", g), 0, 255);
-		b = MathHelper.clamp(Config.getInt(path, "blue", b), 0, 255);
+		r = MathHelper.clamp(Configs.BIOMES.getInt(path, "red", r), 0, 255);
+		g = MathHelper.clamp(Configs.BIOMES.getInt(path, "green", g), 0, 255);
+		b = MathHelper.clamp(Configs.BIOMES.getInt(path, "blue", b), 0, 255);
 		this.waterColor = MHelper.color(r, g, b);
 		return this;
 	}
@@ -234,9 +234,9 @@ public class BiomeDefinition {
 	 */
 	public BiomeDefinition setWaterFogColor(int r, int g, int b) {
 		String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".water_fog_color";
-		r = MathHelper.clamp(Config.getInt(path, "red", r), 0, 255);
-		g = MathHelper.clamp(Config.getInt(path, "green", g), 0, 255);
-		b = MathHelper.clamp(Config.getInt(path, "blue", b), 0, 255);
+		r = MathHelper.clamp(Configs.BIOMES.getInt(path, "red", r), 0, 255);
+		g = MathHelper.clamp(Configs.BIOMES.getInt(path, "green", g), 0, 255);
+		b = MathHelper.clamp(Configs.BIOMES.getInt(path, "blue", b), 0, 255);
 		this.waterFogColor = MHelper.color(r, g, b);
 		return this;
 	}

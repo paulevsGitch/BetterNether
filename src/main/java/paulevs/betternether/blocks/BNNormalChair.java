@@ -64,7 +64,7 @@ public class BNNormalChair extends BNChair {
 	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
 		if (!world.isClient())
-			BlocksHelper.setWithoutUpdate((ServerWorld) world, pos.up(), state.with(TOP, true));
+			BlocksHelper.setWithUpdate((ServerWorld) world, pos.up(), state.with(TOP, true));
 	}
 
 	@Override

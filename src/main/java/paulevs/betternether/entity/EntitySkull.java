@@ -79,7 +79,7 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 	@Override
 	public void onPlayerCollision(PlayerEntity player) {
 		collideTick++;
-		if (collideTick > 3) {
+		if (collideTick > 25) {
 			collideTick = 0;
 
 			boolean shield = player.getActiveItem().getItem() instanceof ShieldItem && player.isUsingItem();

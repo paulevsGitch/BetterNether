@@ -22,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.config.Config;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.EntityFlyingPig;
@@ -54,7 +54,7 @@ public class EntityRegistry {
 		NETHER_ENTITIES.add(EntityType.BLAZE);
 		NETHER_ENTITIES.add(EntityType.STRIDER);
 
-		registerEntity("chair", CHAIR);
+		registerEntity("chair", CHAIR, EntityChair.getAttributeContainer());
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
 
 		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer());
@@ -71,7 +71,7 @@ public class EntityRegistry {
 	}
 
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity, DefaultAttributeContainer container) {
-		if (Config.getBoolean("mobs", name, true)) {
+		if (Configs.MOBS.getBoolean("mobs", name, true)) {
 			Registry.register(Registry.ENTITY_TYPE, new Identifier(BetterNether.MOD_ID, name), entity);
 			ATTRIBUTES.put(entity, container);
 		}
