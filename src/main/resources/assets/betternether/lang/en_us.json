@@ -228,7 +228,7 @@
 	"block.betternether.black_vine": "Black Vine",
 	"block.betternether.veined_sand": "Veined Sand",
 	"block.betternether.soul_vein": "Soul Vein",
-	"block.betternether.blooming_vine": "Blooming vine",
+	"block.betternether.blooming_vine": "Blooming Vine",
 	"block.betternether.golden_vine": "Golden Vine",
 	"block.betternether.geyser": "Geyser",
 	
@@ -589,9 +589,9 @@
 	"block.betternether.warped_ladder": "Warped Ladder",
 	"block.betternether.mushroom_ladder": "Mushroom Ladder",
 	
-	"block.betternether.taburet_crimson": "Crimson Taburet",
-	"block.betternether.taburet_warped": "Warped Taburet",
-	"block.betternether.taburet_mushroom": "Mushroom Taburet",
+	"block.betternether.taburet_crimson": "Crimson Stool",
+	"block.betternether.taburet_warped": "Warped Stool",
+	"block.betternether.taburet_mushroom": "Mushroom Stool",
 	
 	"block.betternether.chair_crimson": "Crimson Chair",
 	"block.betternether.chair_warped": "Warped Chair",
@@ -680,7 +680,7 @@
 	"block.betternether.sign_nether_sakura": "Nether Sakura Sign",
 	"block.betternether.striped_bark_nether_sakura": "Stripped Nether Sakura Bark",
 	"block.betternether.striped_log_nether_sakura": "Stripped Nether Sakura Log",
-	"block.betternether.taburet_nether_sakura": "Nether Sakura Taburet",
+	"block.betternether.taburet_nether_sakura": "Nether Sakura Stool",
 	
 	"block.betternether.nether_sakura_leaves": "Nether Sakura Leaves",
 	"block.betternether.nether_sakura_sapling": "Nether Sakura Sapling",
