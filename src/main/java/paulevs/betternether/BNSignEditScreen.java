@@ -100,7 +100,7 @@ public class BNSignEditScreen extends Screen {
 	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
 		if (keyCode == 265) {
 			this.currentRow = this.currentRow - 1 & 3;
-			this.selectionManager.moveCaretToEnd();
+			this.selectionManager.putCursorAtEnd();
 			return true;
 		}
 		else if (keyCode != 264 && keyCode != 257 && keyCode != 335) {
@@ -109,7 +109,7 @@ public class BNSignEditScreen extends Screen {
 		}
 		else {
 			this.currentRow = this.currentRow + 1 & 3;
-			this.selectionManager.moveCaretToEnd();
+			this.selectionManager.putCursorAtEnd();
 			return true;
 		}
 	}
@@ -139,7 +139,7 @@ public class BNSignEditScreen extends Screen {
 		this.model.field.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV);
 
 		if (bl) {
-			this.model.foot.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV);
+			this.model.stick.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV);
 		}
 
 		matrices.pop();

@@ -1,0 +1,6 @@
+{
+    "variants":
+	{
+        "": { "model": "betternether:block/nether_sakura_sapling" }
+    }
+}

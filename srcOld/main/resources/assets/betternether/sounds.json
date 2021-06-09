@@ -1,0 +1,87 @@
+{
+	"betternether.mob.firefly.fly": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/firefly/fly",
+				"stream": false
+			}
+		]
+	},
+	"betternether.ambient.mushroom_forest": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name": "betternether:ambient/mushroom_forest",
+				"stream": false
+			}
+		]
+	},
+	"betternether.ambient.gravel_desert": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name": "betternether:ambient/gravel_desert",
+				"stream": false
+			}
+		]
+	},
+	"betternether.ambient.nether_jungle": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name": "betternether:ambient/nether_jungle",
+				"stream": false
+			}
+		]
+	},
+	"betternether.ambient.swampland": {
+		"category": "ambient",
+		"sounds": [
+			{
+				"name": "betternether:ambient/swampland",
+				"stream": false
+			}
+		]
+	},
+	"betternether.mob.jellyfish": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/jellyfish",
+				"stream": false
+			}
+		]
+	},
+	"betternether.mob.naga_idle": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/naga/naga_1",
+				"stream": false
+			},
+			{
+				"name": "betternether:mob/naga/naga_2",
+				"stream": false
+			}
+		]
+	},
+	"betternether.mob.naga_attack": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/naga/naga_attack",
+				"stream": false
+			}
+		]
+	},
+	"betternether.mob.skull_flight": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "betternether:mob/skull_flight",
+				"stream": false
+			}
+		]
+	}
+}

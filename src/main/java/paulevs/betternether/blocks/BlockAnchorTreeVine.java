@@ -9,8 +9,8 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
@@ -31,7 +31,7 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull {
 
 	public BlockAnchorTreeVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.GREEN)
+				.materialColor(MapColor.GREEN)
 				.sounds(BlockSoundGroup.CROP)
 				.noCollision()
 				.dropsNothing()

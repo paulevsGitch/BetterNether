@@ -1,0 +1,6 @@
+{
+    "parent": "betternether:block/bn_chair",
+    "textures": {
+        "texture": "betternether:block/willow_planks"
+    }
+}

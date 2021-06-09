@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [
+			{ "model": "betternether:block/ceiling_mushrooms" },
+			{ "model": "betternether:block/ceiling_mushrooms", "y": 90 },
+			{ "model": "betternether:block/ceiling_mushrooms", "y": 180 },
+			{ "model": "betternether:block/ceiling_mushrooms", "y": 270 }
+		]
+    }
+}

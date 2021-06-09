@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "lit=false,facing=north": { "model": "betternether:block/netherrack_furnace" },
+        "lit=false,facing=south": { "model": "betternether:block/netherrack_furnace", "y": 180 },
+        "lit=false,facing=west":  { "model": "betternether:block/netherrack_furnace", "y": 270 },
+        "lit=false,facing=east":  { "model": "betternether:block/netherrack_furnace", "y": 90 },
+		"lit=true,facing=north": { "model": "betternether:block/netherrack_furnace_on" },
+        "lit=true,facing=south": { "model": "betternether:block/netherrack_furnace_on", "y": 180 },
+        "lit=true,facing=west":  { "model": "betternether:block/netherrack_furnace_on", "y": 270 },
+        "lit=true,facing=east":  { "model": "betternether:block/netherrack_furnace_on", "y": 90 }
+    }
+}

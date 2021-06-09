@@ -2,7 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -14,7 +14,7 @@ public class BlockMossCover extends BlockMold {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 4, 16);
 
 	public BlockMossCover() {
-		super(MaterialColor.GREEN);
+		super(MapColor.GREEN);
 	}
 
 	@Override

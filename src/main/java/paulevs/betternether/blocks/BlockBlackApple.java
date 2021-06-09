@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +16,7 @@ public class BlockBlackApple extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
 
 	public BlockBlackApple() {
-		super(MaterialColor.ORANGE_TERRACOTTA);
+		super(MapColor.TERRACOTTA_ORANGE);
 	}
 
 	@Override

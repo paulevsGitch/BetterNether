@@ -34,7 +34,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -51,6 +51,10 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.entity.EntityFlyingPig.FindFoodGoal;
+import paulevs.betternether.entity.EntityFlyingPig.RoostingGoal;
+import paulevs.betternether.entity.EntityFlyingPig.SittingGoal;
+import paulevs.betternether.entity.EntityFlyingPig.WanderAroundGoal;
 import paulevs.betternether.registry.EntityRegistry;
 
 public class EntityFlyingPig extends AnimalEntity implements Flutterer {
@@ -112,15 +116,15 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag tag) {
-		super.writeCustomDataToTag(tag);
+	public void writeCustomDataToNbt(NbtCompound tag) {
+		super.writeCustomDataToNbt(tag);
 
 		tag.putByte("byteData", this.dataTracker.get(FLAGS));
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag tag) {
-		super.readCustomDataFromTag(tag);
+	public void readCustomDataFromNbt(NbtCompound tag) {
+		super.readCustomDataFromNbt(tag);
 
 		if (tag.contains("byteData")) {
 			this.dataTracker.set(FLAGS, tag.getByte("byteData"));
@@ -358,7 +362,7 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 			timer = 0;
 			ammount = MHelper.randRange(80, 160, EntityFlyingPig.this.random);
 			EntityFlyingPig.this.setVelocity(0, 0, 0);
-			EntityFlyingPig.this.setYaw(EntityFlyingPig.this.random.nextFloat() * MHelper.PI2);
+			EntityFlyingPig.this.setBodyYaw(EntityFlyingPig.this.random.nextFloat() * MHelper.PI2);
 			super.start();
 		}
 

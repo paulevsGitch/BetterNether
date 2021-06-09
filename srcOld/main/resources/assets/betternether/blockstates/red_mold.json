@@ -1,0 +1,19 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/red_mold_01" },
+			{ "model": "betternether:block/red_mold_01", "y": 90 },
+			{ "model": "betternether:block/red_mold_01", "y": 180 },
+			{ "model": "betternether:block/red_mold_01", "y": 270 },
+			{ "model": "betternether:block/red_mold_02" },
+			{ "model": "betternether:block/red_mold_02", "y": 90 },
+			{ "model": "betternether:block/red_mold_02", "y": 180 },
+			{ "model": "betternether:block/red_mold_02", "y": 270 },
+			{ "model": "betternether:block/red_mold_03" },
+			{ "model": "betternether:block/red_mold_03", "y": 90 },
+			{ "model": "betternether:block/red_mold_03", "y": 180 },
+			{ "model": "betternether:block/red_mold_03", "y": 270 }
+		]
+    }
+}

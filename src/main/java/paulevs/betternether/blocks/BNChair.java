@@ -71,10 +71,10 @@ public class BNChair extends BlockBaseNotFull {
 			entity.setSilent(true);
 			entity.setInvisible(true);
 			entity.setHeadYaw(yaw);
-			entity.setYaw(yaw);
+			entity.setBodyYaw(yaw);
 			if (world.spawnEntity(entity)) {
 				player.startRiding(entity, true);
-				player.setYaw(yaw);
+				player.setBodyYaw(yaw);
 				player.setHeadYaw(yaw);
 				return ActionResult.SUCCESS;
 			}

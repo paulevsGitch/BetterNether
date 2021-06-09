@@ -1,0 +1,54 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "#texture",
+		"texture": "block/stone"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Element",
+			"from": [ 8, -8, 0 ],
+			"to": [ 24, -7.999, 16 ],
+			"rotation": { "origin": [ 8, -8, 0 ], "axis": "z", "angle": 22.5 },
+			"shade": false,
+			"faces": {
+				"down": { "uv": [ 0, 16, 16, 0 ], "texture": "#texture", "rotation": 270 },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture", "rotation": 90 }
+			}
+		},
+		{
+			"__comment": "Element",
+			"from": [ -8, -8, 0 ],
+			"to": [ 8, -7.999, 16 ],
+			"rotation": { "origin": [ 8, -8, 0 ], "axis": "z", "angle": -22.5 },
+			"shade": false,
+			"faces": {
+				"down": { "uv": [ 0, 16, 16, 0 ], "texture": "#texture", "rotation": 90 },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture", "rotation": 270 }
+			}
+		},
+		{
+			"__comment": "Element",
+			"from": [ 0, -8, 8 ],
+			"to": [ 16, -7.999, 24 ],
+			"rotation": { "origin": [ 0, -8, 8 ], "axis": "x", "angle": -22.5 },
+			"shade": false,
+			"faces": {
+				"down": { "uv": [ 16, 0, 0, 16 ], "texture": "#texture" },
+				"up": { "uv": [ 16, 16, 0, 0 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Element",
+			"from": [ 0, -8, -8 ],
+			"to": [ 16, -7.999, 8 ],
+			"rotation": { "origin": [ 0, -8, 8 ], "axis": "x", "angle": 22.5 },
+			"shade": false,
+			"faces": {
+				"down": { "uv": [ 0, 16, 16, 0 ], "texture": "#texture" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" }
+			}
+		}
+	]
+}

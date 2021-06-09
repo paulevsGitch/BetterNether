@@ -1,0 +1,14 @@
+{
+	"replace": "false",
+	"values": [
+		"betternether:stalagnate_planks_trapdoor",
+		"betternether:reeds_trapdoor",
+		"betternether:willow_trapdoor",
+		"betternether:wart_trapdoor",
+		"betternether:rubeus_trapdoor",
+		"betternether:mushroom_trapdoor",
+		"betternether:mushroom_fir_trapdoor",
+		"betternether:anchor_tree_trapdoor",
+		"betternether:nether_sakura_trapdoor"
+	]
+}

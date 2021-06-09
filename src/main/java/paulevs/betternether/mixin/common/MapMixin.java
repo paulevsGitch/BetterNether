@@ -13,7 +13,7 @@ import com.google.common.collect.Multisets;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FilledMapItem;
@@ -40,8 +40,8 @@ public abstract class MapMixin extends NetworkSyncedItem {
 	private void customColors(World world, Entity entity, MapState state, CallbackInfo info) {
 		if (world.getDimension().hasCeiling() && world.getRegistryKey() == state.dimension && entity instanceof PlayerEntity) {
 			int i = 1 << state.scale;
-			int j = state.xCenter;
-			int k = state.zCenter;
+			int j = state.centerX;
+			int k = state.centerZ;
 			int l = MathHelper.floor(entity.getX() - (double) j) / i + 64;
 			int m = MathHelper.floor(entity.getZ() - (double) k) / i + 64;
 			int n = 128 / i;
@@ -65,7 +65,7 @@ public abstract class MapMixin extends NetworkSyncedItem {
 							boolean bl2 = q * q + r * r > (n - 2) * (n - 2);
 							int s = (j / i + o - 64) * i;
 							int t = (k / i + p - 64) * i;
-							Multiset<MaterialColor> multiset = LinkedHashMultiset.create();
+							Multiset<MapColor> multiset = LinkedHashMultiset.create();
 							WorldChunk worldChunk = world.getWorldChunk(new BlockPos(s, 0, t));
 							if (!worldChunk.isEmpty()) {
 								ChunkPos chunkPos = worldChunk.getPos();
@@ -91,7 +91,7 @@ public abstract class MapMixin extends NetworkSyncedItem {
 											}
 										}
 
-										multiset.add(blockState.getTopMaterialColor(world, mutable));
+										multiset.add(blockState.getMapColor(world, mutable));
 									}
 								}
 
@@ -106,9 +106,9 @@ public abstract class MapMixin extends NetworkSyncedItem {
 									ac = 0;
 								}
 
-								MaterialColor materialColor = (MaterialColor) Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.CLEAR);
+								MapColor materialColor = (MapColor) Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MapColor.CLEAR);
 
-								if (materialColor == MaterialColor.WATER) {
+								if (materialColor == MapColor.WATER_BLUE) {
 									f = (double) w * 0.1D + (double) (o + p & 1) * 0.2D;
 									ac = 1;
 									if (f < 0.5D) {

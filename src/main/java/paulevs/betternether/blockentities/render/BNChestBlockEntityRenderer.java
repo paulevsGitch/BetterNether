@@ -24,9 +24,9 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.LightmapCoordinatesRetriever;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import paulevs.betternether.BetterNether;
@@ -34,7 +34,7 @@ import paulevs.betternether.blockentities.BNChestBlockEntity;
 import paulevs.betternether.blocks.BNChest;
 import paulevs.betternether.registry.BlocksRegistry;
 
-public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlockEntity> {
+public class BNChestBlockEntityRenderer implements BlockEntityRenderer<BNChestBlockEntity> {
 	private static final HashMap<Block, RenderLayer[]> LAYERS = Maps.newHashMap();
 	private static RenderLayer[] defaultLayer;
 
@@ -98,7 +98,7 @@ public class BNChestBlockEntityRenderer extends BlockEntityRenderer<BNChestBlock
 
 			matrices.push();
 			matrices.translate(0.5D, 0.5D, 0.5D);
-			matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-f));
+			matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-f));
 			matrices.translate(-0.5D, -0.5D, -0.5D);
 
 			if (worldExists) {

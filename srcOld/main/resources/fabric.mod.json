@@ -1,0 +1,54 @@
+{
+	"schemaVersion": 1,
+	"id": "betternether",
+	"version": "${version}",
+
+	"name": "Better Nether",
+	"description": "Mod that improves Nether",
+	"authors": [
+		"paulevs"
+	],
+	"contributors": [
+		"paulevs (programming, art, ideas, ru/en translations)",
+		"edos_ (builder, design help)"
+	],
+	"contact": {
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/betternether",
+		"sources": "https://github.com/paulevsGitch/BetterNether/tree/snapshots",
+		"issues": "https://github.com/paulevsGitch/BetterNether/issues"
+	},
+
+	"license": "GPLv3",
+	"icon": "assets/betternether/icon.png",
+
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"paulevs.betternether.BetterNether"
+		],
+		"client": [
+			"paulevs.betternether.client.BetterNetherClient"
+		],
+		"modmenu": [
+			"paulevs.betternether.config.ModMenuEntry"
+		]
+	},
+	"mixins": [
+		"betternether.mixins.common.json",
+		"betternether.mixins.client.json"
+	],
+
+	"depends": {
+		"fabricloader": ">=0.11.1",
+		"fabric": "*",
+		"minecraft": ">1.16.4"
+	},
+	
+	"custom": {
+		"extrapieces:piecepack": "extrapieces.betternether.json",
+		"modupdater": {
+			"strategy": "curseforge",
+			"projectID": 311377
+        }
+	}
+}

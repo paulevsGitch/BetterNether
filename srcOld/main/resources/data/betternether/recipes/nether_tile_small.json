@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+	"##"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:nether_brick_tile_large"
+    }
+  },
+  "result": {
+    "item": "betternether:nether_brick_tile_small",
+	"count": 4
+  }
+}

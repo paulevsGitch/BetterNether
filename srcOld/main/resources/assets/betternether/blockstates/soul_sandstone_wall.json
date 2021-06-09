@@ -1,0 +1,31 @@
+{
+    "multipart": [
+        {   "when": { "up": "true" },
+            "apply": { "model": "betternether:block/soul_sandstone_post" }
+        },
+        {   "when": { "north": "low" },
+            "apply": { "model": "betternether:block/soul_sandstone_wall_side", "uvlock": true }
+        },
+        {   "when": { "east": "low" },
+            "apply": { "model": "betternether:block/soul_sandstone_wall_side", "y": 90, "uvlock": true }
+        },
+        {   "when": { "south": "low" },
+            "apply": { "model": "betternether:block/soul_sandstone_wall_side", "y": 180, "uvlock": true }
+        },
+        {   "when": { "west": "low" },
+            "apply": { "model": "betternether:block/soul_sandstone_wall_side", "y": 270, "uvlock": true }
+        },
+        {   "when": { "north": "tall" },
+            "apply": { "model": "betternether:block/soul_sandstone_wall_side", "uvlock": true }
+        },
+        {   "when": { "east": "tall" },
+            "apply": { "model": "betternether:block/soul_sandstone_wall_side", "y": 90, "uvlock": true }
+        },
+        {   "when": { "south": "tall" },
+            "apply": { "model": "betternether:block/soul_sandstone_wall_side", "y": 180, "uvlock": true }
+        },
+        {   "when": { "west": "tall" },
+            "apply": { "model": "betternether:block/soul_sandstone_wall_side", "y": 270, "uvlock": true }
+        }
+    ]
+}

@@ -7,8 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -24,9 +24,9 @@ import paulevs.betternether.BlocksHelper;
 public class BlockCommonPlant extends BlockBaseNotFull implements Fertilizable {
 	public static final IntProperty AGE = IntProperty.of("age", 0, 3);
 
-	public BlockCommonPlant(MaterialColor color) {
+	public BlockCommonPlant(MapColor color) {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.BLACK)
+				.materialColor(MapColor.BLACK)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.noCollision()

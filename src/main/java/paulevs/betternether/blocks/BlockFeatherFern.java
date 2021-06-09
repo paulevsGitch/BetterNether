@@ -2,7 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -13,7 +13,7 @@ public class BlockFeatherFern extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 14, 14);
 
 	public BlockFeatherFern() {
-		super(MaterialColor.LIGHT_BLUE);
+		super(MapColor.LIGHT_BLUE);
 	}
 
 	@Override

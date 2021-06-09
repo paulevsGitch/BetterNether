@@ -7,8 +7,8 @@ import com.google.common.collect.Lists;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.MushroomBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -23,7 +23,7 @@ import paulevs.betternether.registry.ItemsRegistry;
 public class BlockGiantLucis extends MushroomBlock {
 	public BlockGiantLucis() {
 		super(FabricBlockSettings.of(Material.SOLID_ORGANIC)
-				.materialColor(MaterialColor.YELLOW)
+				.materialColor(MapColor.YELLOW)
 				.breakByTool(FabricToolTags.AXES)
 				.sounds(BlockSoundGroup.WOOD)
 				.hardness(1F)

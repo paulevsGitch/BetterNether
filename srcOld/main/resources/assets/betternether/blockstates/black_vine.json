@@ -1,0 +1,13 @@
+{
+    "variants":
+	{
+        "bottom=false": [
+			{ "model": "betternether:block/black_vine_1" },
+			{ "model": "betternether:block/black_vine_2" }
+		],
+        "bottom=true": [
+			{ "model": "betternether:block/black_vine_bottom_1" },
+			{ "model": "betternether:block/black_vine_bottom_2" }
+		]
+    }
+}

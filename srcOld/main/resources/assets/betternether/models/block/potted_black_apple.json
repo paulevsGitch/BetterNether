@@ -1,0 +1,69 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "betternether:block/black_apple",
+		"texture": "betternether:block/black_apple"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 7, -8, 6 ],
+			"to": [ 9, -2, 8 ],
+			"faces": {
+				"down": { "uv": [ 5.5, 14, 7.5, 16 ], "texture": "#texture", "cullface": "down" },
+				"up": { "uv": [ 5, 10, 7, 12 ], "texture": "#texture" },
+				"north": { "uv": [ 5, 10, 7, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 5, 10, 7, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 5, 10, 7, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 5, 10, 7, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 7.5, -2, 6 ],
+			"to": [ 8.5, 0, 7.5 ],
+			"faces": {
+				"up": { "uv": [ 6, 8, 7, 9.5 ], "texture": "#texture" },
+				"north": { "uv": [ 5, 8, 6, 10 ], "texture": "#texture" },
+				"south": { "uv": [ 6, 8, 7, 10 ], "texture": "#texture" },
+				"west": { "uv": [ 5, 8, 6.5, 10 ], "texture": "#texture" },
+				"east": { "uv": [ 5, 8, 6.5, 10 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Box9",
+			"from": [ 6, -1, 8.5 ],
+			"to": [ 10, 3, 12.5 ],
+			"faces": {
+				"down": { "uv": [ 10, 6, 14, 10 ], "texture": "#texture", "rotation": 90 },
+				"up": { "uv": [ 10, 6, 14, 10 ], "texture": "#texture" },
+				"north": { "uv": [ 14, 6, 10, 10 ], "texture": "#texture" },
+				"south": { "uv": [ 10, 6, 14, 10 ], "texture": "#texture", "rotation": 180 },
+				"west": { "uv": [ 10, 6, 14, 10 ], "texture": "#texture" },
+				"east": { "uv": [ 10, 6, 14, 10 ], "texture": "#texture", "rotation": 270 }
+			}
+		},
+		{
+			"__comment": "Box10",
+			"from": [ 7, -2, 9.5 ],
+			"to": [ 9, -1, 11.5 ],
+			"faces": {
+				"down": { "uv": [ 11, 13, 13, 15 ], "texture": "#texture" },
+				"north": { "uv": [ 11, 11, 13, 12 ], "texture": "#texture" },
+				"south": { "uv": [ 11, 11, 13, 12 ], "texture": "#texture" },
+				"west": { "uv": [ 11, 11, 13, 12 ], "texture": "#texture" },
+				"east": { "uv": [ 11, 11, 13, 12 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "PlaneX12",
+			"from": [ 8, -4, 1 ],
+			"to": [ 8.001, 8, 11 ],
+			"faces": {
+				"west": { "uv": [ 0, 0, 10, 12 ], "texture": "#texture" },
+				"east": { "uv": [ 10, 0, 0, 12 ], "texture": "#texture" }
+			}
+		}
+	]
+}

@@ -1,0 +1,21 @@
+{
+    "parent": "block/block",
+	"textures":
+	{
+        "particle": "block/nether_wart_block",
+        "texture": "block/nether_wart_block"
+    },
+    "elements": [
+        {   "from": [ 5, 0, 5 ],
+            "to": [ 11, 6, 11 ],
+            "faces": {
+                "down":  { "texture": "#texture" },
+                "up":    { "texture": "#texture" },
+                "north": { "texture": "#texture" },
+                "south": { "texture": "#texture" },
+                "west":  { "texture": "#texture" },
+                "east":  { "texture": "#texture" }
+            }
+        }
+    ]
+}

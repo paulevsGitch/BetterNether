@@ -34,6 +34,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.entity.EntitySkull.SkullLookControl;
 import paulevs.betternether.registry.SoundsRegistry;
 
 public class EntitySkull extends HostileEntity implements Flutterer {
@@ -255,7 +256,7 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 		if (world.getDifficulty() == Difficulty.PEACEFUL || world.getLightLevel(pos) > 7)
 			return false;
 
-		if (pos.getY() >= world.getDimension().getLogicalHeight()) return false;
+		if (pos.getY() >= world.getDimension().getMinimumY()) return false;
 
 		Box box = new Box(pos).expand(256, 256, 256);
 		List<EntitySkull> list = world.getEntitiesByClass(EntitySkull.class, box, (entity) -> {

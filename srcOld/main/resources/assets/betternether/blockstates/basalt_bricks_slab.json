@@ -1,0 +1,17 @@
+{
+    "variants":
+	{
+        "type=bottom": [
+			{ "model": "betternether:block/basalt_bricks_slab_1" },
+			{ "model": "betternether:block/basalt_bricks_slab_2" }
+		],
+        "type=top": [
+			{ "model": "betternether:block/basalt_bricks_slab_1", "x": 180, "uvlock": true },
+			{ "model": "betternether:block/basalt_bricks_slab_2", "x": 180, "uvlock": true }
+		],
+        "type=double": [
+			{ "model": "betternether:block/basalt_bricks_1" },
+			{ "model": "betternether:block/basalt_bricks_2" }
+		]
+    }
+}

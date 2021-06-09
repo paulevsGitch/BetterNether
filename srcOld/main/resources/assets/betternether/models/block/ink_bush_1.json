@@ -1,0 +1,62 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "betternether:block/ink_bush_bark",
+		"bark": "betternether:block/ink_bush_bark",
+		"leaves": "betternether:block/ink_bush_leaves"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 4, 5, 4 ],
+			"to": [ 12, 13, 12 ],
+			"faces": {
+				"down": { "uv": [ 4, 4, 12, 12 ], "texture": "#leaves" },
+				"up": { "uv": [ 4, 4, 12, 12 ], "texture": "#leaves" },
+				"north": { "uv": [ 4, 3, 12, 11 ], "texture": "#leaves" },
+				"south": { "uv": [ 4, 3, 12, 11 ], "texture": "#leaves" },
+				"west": { "uv": [ 4, 3, 12, 11 ], "texture": "#leaves" },
+				"east": { "uv": [ 4, 3, 12, 11 ], "texture": "#leaves" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 7, 0, 7 ],
+			"to": [ 9, 8, 9 ],
+			"faces": {
+				"down": { "uv": [ 7, 7, 9, 9 ], "texture": "#bark" },
+				"up": { "uv": [ 7, 7, 9, 9 ], "texture": "#bark" },
+				"north": { "uv": [ 7, 8, 9, 16 ], "texture": "#bark" },
+				"south": { "uv": [ 7, 8, 9, 16 ], "texture": "#bark" },
+				"west": { "uv": [ 7, 8, 9, 16 ], "texture": "#bark" },
+				"east": { "uv": [ 7, 8, 9, 16 ], "texture": "#bark" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 8, 0, 9 ],
+			"to": [ 9, 2, 10 ],
+			"faces": {
+				"down": { "uv": [ 8, 6, 9, 7 ], "texture": "#bark" },
+				"up": { "uv": [ 8, 14, 9, 15 ], "texture": "#bark" },
+				"north": { "uv": [ 7, 14, 8, 16 ], "texture": "#bark" },
+				"south": { "uv": [ 8, 14, 9, 16 ], "texture": "#bark" },
+				"west": { "uv": [ 9, 14, 10, 16 ], "texture": "#bark" },
+				"east": { "uv": [ 6, 14, 7, 16 ], "texture": "#bark" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 9, 0, 6 ],
+			"to": [ 10, 1, 7 ],
+			"faces": {
+				"down": { "uv": [ 9, 9, 10, 10 ], "texture": "#bark" },
+				"up": { "uv": [ 9, 6, 10, 7 ], "texture": "#bark" },
+				"north": { "uv": [ 6, 15, 7, 16 ], "texture": "#bark" },
+				"south": { "uv": [ 9, 15, 10, 16 ], "texture": "#bark" },
+				"west": { "uv": [ 6, 15, 7, 16 ], "texture": "#bark" },
+				"east": { "uv": [ 9, 15, 10, 16 ], "texture": "#bark" }
+			}
+		}
+	]
+}

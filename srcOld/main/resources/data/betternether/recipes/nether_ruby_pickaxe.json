@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+	" S ",
+	" S "
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:nether_ruby"
+    },
+	"S": {
+      "item": "betternether:nether_reed"
+    }
+  },
+  "result": {
+    "item": "betternether:nether_ruby_pickaxe"
+  }
+}

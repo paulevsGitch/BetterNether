@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "axis=y": [
+			{ "model": "betternether:block/willow_bark" },
+			{ "model": "betternether:block/willow_bark_2" }
+		],
+        "axis=z": [
+			{ "model": "betternether:block/willow_bark", "x": 90 },
+			{ "model": "betternether:block/willow_bark_2", "x": 90 }
+		],
+        "axis=x": [
+			{ "model": "betternether:block/willow_bark", "x": 90, "y": 90 },
+			{ "model": "betternether:block/willow_bark_2", "x": 90, "y": 90 }
+		]
+    }
+}

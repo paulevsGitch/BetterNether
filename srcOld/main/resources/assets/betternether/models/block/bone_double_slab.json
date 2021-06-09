@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/bone_slab_side",
+        "down": "betternether:block/bone_slab_top",
+        "up": "betternether:block/bone_slab_top",
+        "north": "betternether:block/bone_slab_side",
+        "east": "betternether:block/bone_slab_side",
+        "south": "betternether:block/bone_slab_side",
+        "west": "betternether:block/bone_slab_side"
+    }
+}

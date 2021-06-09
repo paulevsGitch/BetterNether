@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -27,7 +27,7 @@ public class BlockWillowLeaves extends BlockBaseNotFull {
 	public static final BooleanProperty NATURAL = BooleanProperty.of("natural");
 
 	public BlockWillowLeaves() {
-		super(Materials.makeLeaves(MaterialColor.RED_TERRACOTTA));
+		super(Materials.makeLeaves(MapColor.TERRACOTTA_RED));
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.UP).with(NATURAL, true));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);

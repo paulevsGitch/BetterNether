@@ -1,0 +1,14 @@
+{
+    "variants":
+	{
+        "shape=bottom": { "model": "betternether:block/willow_trunk_bottom" },
+        "shape=middle": [
+			{ "model": "betternether:block/willow_trunk_middle" },
+			{ "model": "betternether:block/willow_trunk_middle_2" }
+		],
+        "shape=top": [
+			{ "model": "betternether:block/willow_trunk_top" },
+			{ "model": "betternether:block/willow_trunk_top_2" }
+		]
+    }
+}

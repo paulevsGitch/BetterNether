@@ -13,8 +13,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -41,7 +41,7 @@ public class BlockGoldenVine extends BlockBaseNotFull implements Fertilizable {
 
 	public BlockGoldenVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.RED)
+				.materialColor(MapColor.RED)
 				.sounds(BlockSoundGroup.CROP)
 				.noCollision()
 				.breakInstantly()

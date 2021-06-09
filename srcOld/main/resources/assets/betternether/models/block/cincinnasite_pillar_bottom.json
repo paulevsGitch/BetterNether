@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/cincinnasite_forged",
+        "down": "betternether:block/cincinnasite_plate_up",
+        "up": "betternether:block/cincinnasite_plate_up",
+        "north": "betternether:block/cincinnasite_pillar_bottom",
+        "east": "betternether:block/cincinnasite_pillar_bottom",
+        "south": "betternether:block/cincinnasite_pillar_bottom",
+        "west": "betternether:block/cincinnasite_pillar_bottom"
+    }
+}

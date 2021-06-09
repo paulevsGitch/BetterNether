@@ -1,0 +1,17 @@
+{
+    "variants":
+	{
+        "blue=false": [
+			{ "model": "betternether:block/nether_mycelium" },
+			{ "model": "betternether:block/nether_mycelium", "y": 90 },
+			{ "model": "betternether:block/nether_mycelium", "y": 180 },
+			{ "model": "betternether:block/nether_mycelium", "y": 270 }
+		],
+		"blue=true": [
+			{ "model": "betternether:block/nether_mycelium_blue" },
+			{ "model": "betternether:block/nether_mycelium_blue", "y": 90 },
+			{ "model": "betternether:block/nether_mycelium_blue", "y": 180 },
+			{ "model": "betternether:block/nether_mycelium_blue", "y": 270 }
+		]
+    }
+}

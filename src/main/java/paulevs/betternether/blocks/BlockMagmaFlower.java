@@ -3,7 +3,7 @@ package paulevs.betternether.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -14,7 +14,7 @@ public class BlockMagmaFlower extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 12, 15);
 
 	public BlockMagmaFlower() {
-		super(MaterialColor.ORANGE_TERRACOTTA);
+		super(MapColor.TERRACOTTA_ORANGE);
 	}
 
 	@Override

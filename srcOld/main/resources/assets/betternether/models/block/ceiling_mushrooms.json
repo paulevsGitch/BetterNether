@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/ceiling_mushrooms_side",
+        "down": "betternether:block/ceiling_mushrooms_bottom",
+        "up": "block/netherrack",
+        "north": "betternether:block/ceiling_mushrooms_side",
+        "east": "betternether:block/ceiling_mushrooms_side",
+        "south": "betternether:block/ceiling_mushrooms_side",
+        "west": "betternether:block/ceiling_mushrooms_side"
+    }
+}

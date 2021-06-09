@@ -1,0 +1,29 @@
+{
+    "variants":
+	{
+        "age=0": [
+			{ "model": "betternether:block/barrel_cactus_4" },
+			{ "model": "betternether:block/barrel_cactus_4", "y": 90 },
+			{ "model": "betternether:block/barrel_cactus_4", "y": 180 },
+			{ "model": "betternether:block/barrel_cactus_4", "y": 270 }
+		],
+		"age=1": [
+			{ "model": "betternether:block/barrel_cactus_3" },
+			{ "model": "betternether:block/barrel_cactus_3", "y": 90 },
+			{ "model": "betternether:block/barrel_cactus_3", "y": 180 },
+			{ "model": "betternether:block/barrel_cactus_3", "y": 270 }
+		],
+		"age=2": [
+			{ "model": "betternether:block/barrel_cactus_2" },
+			{ "model": "betternether:block/barrel_cactus_2", "y": 90 },
+			{ "model": "betternether:block/barrel_cactus_2", "y": 180 },
+			{ "model": "betternether:block/barrel_cactus_2", "y": 270 }
+		],
+		"age=3": [
+			{ "model": "betternether:block/barrel_cactus" },
+			{ "model": "betternether:block/barrel_cactus", "y": 90 },
+			{ "model": "betternether:block/barrel_cactus", "y": 180 },
+			{ "model": "betternether:block/barrel_cactus", "y": 270 }
+		]
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "betternether:block/crop_block",
+    "textures": {
+        "texture": "betternether:block/flowered_vine_bottom_1"
+    }
+}

@@ -1,0 +1,16 @@
+{
+	"replace": "false",
+	"values": [
+		"betternether:stalagnate_planks_door",
+		"betternether:reeds_door",
+		"betternether:bone_reed_door",
+		"betternether:bone_cincinnasite_door",
+		"betternether:willow_door",
+		"betternether:wart_door",
+		"betternether:rubeus_door",
+		"betternether:mushroom_door",
+		"betternether:mushroom_fir_door",
+		"betternether:anchor_tree_door",
+		"betternether:nether_sakura_door"
+	]
+}

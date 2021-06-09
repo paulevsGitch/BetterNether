@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=east":  { "model": "betternether:block/taburet_willow" },
+		"facing=west":  { "model": "betternether:block/taburet_willow", "y": 180 },
+		"facing=south": { "model": "betternether:block/taburet_willow", "y": 90 },
+		"facing=north": { "model": "betternether:block/taburet_willow", "y": 270 }
+	}
+}

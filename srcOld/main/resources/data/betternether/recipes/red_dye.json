@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:red_mold"
+    }
+  },
+  "result": {
+    "item": "minecraft:red_dye",
+	"count": 2
+  }
+}

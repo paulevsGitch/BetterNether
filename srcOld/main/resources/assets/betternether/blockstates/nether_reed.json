@@ -1,0 +1,7 @@
+{
+	"variants":
+	{
+        "top=true":  { "model": "betternether:block/nether_reed_top" },
+        "top=false":  { "model": "betternether:block/nether_reed" }
+    }
+}

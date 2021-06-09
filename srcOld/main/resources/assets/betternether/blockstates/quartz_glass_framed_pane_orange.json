@@ -1,0 +1,59 @@
+{
+    "multipart": [
+        {   "when": { "north": false, "east": false, "south": false, "west": false },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+        {   "when": { "north": true, "east": false, "south": false, "west": false },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+        {   "when": { "north": false, "east": true, "south": false, "west": false },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+        {   "when": { "north": false, "east": false, "south": true, "west": false },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+        {   "when": { "north": false, "east": false, "south": false, "west": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+		{   "when": { "north": false, "east": true, "south": true, "west": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+		{   "when": { "north": true, "east": false, "south": true, "west": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+		{   "when": { "north": true, "east": true, "south": false, "west": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+		{   "when": { "north": true, "east": true, "south": true, "west": false },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+		{   "when": { "north": true, "east": true, "south": true, "west": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+		{   "when": { "north": true, "east": true, "south": false, "west": false },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+		{   "when": { "north": false, "east": true, "south": true, "west": false },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+		{   "when": { "north": false, "east": false, "south": true, "west": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+		{   "when": { "north": true, "east": false, "south": false, "west": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_post" }
+        },
+        {   "when": { "north": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_side" }
+        },
+        {   "when": { "east": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_side", "y": 90, "uvlock": true }
+        },
+        {   "when": { "south": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_side_alt" }
+        },
+        {   "when": { "west": true },
+            "apply": { "model": "betternether:block/quartz_glass_framed_pane_orange_side_alt", "y": 90, "uvlock": true }
+        }
+    ]
+}
+

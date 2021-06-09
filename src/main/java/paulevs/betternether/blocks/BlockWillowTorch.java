@@ -3,7 +3,7 @@ package paulevs.betternether.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
@@ -31,7 +31,7 @@ public class BlockWillowTorch extends BlockBaseNotFull {
 	public static final DirectionProperty FACING = Properties.FACING;
 
 	public BlockWillowTorch() {
-		super(Materials.makeWood(MaterialColor.LIGHT_BLUE).luminance(15).noCollision().nonOpaque());
+		super(Materials.makeWood(MapColor.LIGHT_BLUE).luminance(15).noCollision().nonOpaque());
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.DOWN));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

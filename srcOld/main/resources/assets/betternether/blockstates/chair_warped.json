@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"facing=east,top=false":  { "model": "betternether:block/chair_warped", "y": 90 },
+		"facing=west,top=false":  { "model": "betternether:block/chair_warped", "y": 270 },
+		"facing=south,top=false": { "model": "betternether:block/chair_warped", "y": 180 },
+		"facing=north,top=false": { "model": "betternether:block/chair_warped" },
+		"top=true": { "model": "betternether:block/empty_warped" }
+	}
+}

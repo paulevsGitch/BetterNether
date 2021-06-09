@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "betternether:block/striped_bark_rubeus" },
+        "axis=z": { "model": "betternether:block/striped_bark_rubeus", "x": 90 },
+        "axis=x": { "model": "betternether:block/striped_bark_rubeus", "x": 90, "y": 90 }
+    }
+}

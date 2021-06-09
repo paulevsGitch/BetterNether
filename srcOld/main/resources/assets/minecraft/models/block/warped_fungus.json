@@ -1,0 +1,60 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "blocks/warped_fungus",
+		"texture": "blocks/warped_fungus",
+		"bottom": "blocks/warped_fungus_bottom"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 7, 0, 7 ],
+			"to": [ 9, 5, 9 ],
+			"faces": {
+				"down": { "uv": [ 0, 11, 2, 13 ], "texture": "#texture", "cullface": "down" },
+				"north": { "uv": [ 0, 11, 2, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 0, 11, 2, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 0, 11, 2, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 0, 11, 2, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 4, 5, 3 ],
+			"to": [ 12, 8, 13 ],
+			"faces": {
+				"down": { "uv": [ 4, 3, 12, 13 ], "texture": "#bottom" },
+				"up": { "uv": [ 4, 1, 12, 11 ], "texture": "#texture" },
+				"north": { "uv": [ 4, 13, 12, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 4, 13, 12, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 3, 13, 13, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 3, 13, 13, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 3, 5, 4 ],
+			"to": [ 13, 8, 12 ],
+			"faces": {
+				"down": { "uv": [ 3, 4, 13, 12 ], "texture": "#bottom" },
+				"up": { "uv": [ 3, 2, 13, 10 ], "texture": "#texture" },
+				"north": { "uv": [ 3, 13, 13, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 3, 13, 13, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 4, 13, 12, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 4, 13, 12, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Box1",
+			"from": [ 4, 8, 4 ],
+			"to": [ 12, 9, 12 ],
+			"faces": {
+				"up": { "uv": [ 4, 2, 12, 10 ], "texture": "#texture" },
+				"north": { "uv": [ 4, 12, 12, 13 ], "texture": "#texture" },
+				"south": { "uv": [ 4, 12, 12, 13 ], "texture": "#texture" },
+				"west": { "uv": [ 4, 12, 12, 13 ], "texture": "#texture" },
+				"east": { "uv": [ 4, 12, 12, 13 ], "texture": "#texture" }
+			}
+		}
+	]
+}

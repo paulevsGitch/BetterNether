@@ -1,0 +1,32 @@
+{
+    "variants": {
+        "age=0":
+		[
+			{ "model": "betternether:block/magma_flower_04" },
+			{ "model": "betternether:block/magma_flower_04", "y": 90 },
+			{ "model": "betternether:block/magma_flower_04", "y": 180 },
+			{ "model": "betternether:block/magma_flower_04", "y": 270 }
+		],
+        "age=1": 
+		[
+			{ "model": "betternether:block/magma_flower_03" },
+			{ "model": "betternether:block/magma_flower_03", "y": 90 },
+			{ "model": "betternether:block/magma_flower_03", "y": 180 },
+			{ "model": "betternether:block/magma_flower_03", "y": 270 }
+		],
+        "age=2": 
+		[
+			{ "model": "betternether:block/magma_flower_02" },
+			{ "model": "betternether:block/magma_flower_02", "y": 90 },
+			{ "model": "betternether:block/magma_flower_02", "y": 180 },
+			{ "model": "betternether:block/magma_flower_02", "y": 270 }
+		],
+		"age=3": 
+		[
+			{ "model": "betternether:block/magma_flower_01" },
+			{ "model": "betternether:block/magma_flower_01", "y": 90 },
+			{ "model": "betternether:block/magma_flower_01", "y": 180 },
+			{ "model": "betternether:block/magma_flower_01", "y": 270 }
+		]
+    }
+}

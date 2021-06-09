@@ -1,0 +1,13 @@
+{
+	"variants": {
+        "shape=top,visual=normal":  { "model": "betternether:block/jellyfish_mushroom_top" },
+        "shape=top,visual=sepia":  { "model": "betternether:block/jellyfish_mushroom_top_sepia" },
+        "shape=top,visual=poor":  { "model": "betternether:block/jellyfish_mushroom_top_poor" },
+		"shape=middle,visual=normal":  { "model": "betternether:block/jellyfish_mushroom_bottom" },
+		"shape=middle,visual=sepia":  { "model": "betternether:block/jellyfish_mushroom_bottom_sepia" },
+		"shape=middle,visual=poor":  { "model": "betternether:block/jellyfish_mushroom_bottom_poor" },
+        "shape=bottom,visual=normal":  { "model": "betternether:block/jellyfish_mushroom_small" },
+        "shape=bottom,visual=sepia":  { "model": "betternether:block/jellyfish_mushroom_small_sepia" },
+        "shape=bottom,visual=poor":  { "model": "betternether:block/jellyfish_mushroom_small_poor" }
+    }
+}

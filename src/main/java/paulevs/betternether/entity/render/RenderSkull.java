@@ -12,6 +12,7 @@ import net.minecraft.util.math.MathHelper;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntitySkull;
 import paulevs.betternether.entity.model.ModelSkull;
+import paulevs.betternether.entity.render.RenderSkull.GlowFeatureRenderer;
 
 public class RenderSkull extends MobEntityRenderer<EntitySkull, AnimalModel<EntitySkull>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/skull.png");

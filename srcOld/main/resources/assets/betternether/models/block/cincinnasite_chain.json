@@ -1,0 +1,7 @@
+{
+	"parent": "block/chain",
+	"textures": {
+		"particle": "betternether:block/cincinnasite_chain",
+		"all": "betternether:block/cincinnasite_chain"
+	}
+}

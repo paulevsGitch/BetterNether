@@ -2,7 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.Direction;
@@ -12,7 +12,7 @@ public class RubeusLog extends BNLogStripable {
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
 
 	public RubeusLog(Block striped) {
-		super(MaterialColor.MAGENTA, striped);
+		super(MapColor.MAGENTA, striped);
 		this.setDefaultState(this.getDefaultState().with(AXIS, Direction.Axis.Y).with(SHAPE, TripleShape.BOTTOM));
 	}
 

@@ -9,7 +9,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.loot.context.LootContext;
@@ -25,7 +25,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockMold extends BlockBaseNotFull {
-	public BlockMold(MaterialColor color) {
+	public BlockMold(MapColor color) {
 		super(Materials.makeGrass(color)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()

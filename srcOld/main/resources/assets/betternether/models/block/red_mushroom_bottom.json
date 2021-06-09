@@ -1,0 +1,43 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "betternether:block/red_mushroom_stem",
+		"texture": "betternether:block/red_mushroom_stem",
+		"mycelium": "betternether:block/red_mushroom_mycelium"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 6, 7, 6 ],
+			"to": [ 10, 16, 10 ],
+			"faces": {
+				"up": { "uv": [ 7, 11, 11, 15 ], "texture": "#texture", "cullface": "up" },
+				"north": { "uv": [ 1, 0, 5, 9 ], "texture": "#texture" },
+				"south": { "uv": [ 1, 0, 5, 9 ], "texture": "#texture" },
+				"west": { "uv": [ 1, 0, 5, 9 ], "texture": "#texture" },
+				"east": { "uv": [ 1, 0, 5, 9 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Box2",
+			"from": [ 5, 0, 5 ],
+			"to": [ 11, 7, 11 ],
+			"faces": {
+				"up": { "uv": [ 6, 10, 12, 16 ], "texture": "#texture" },
+				"north": { "uv": [ 0, 9, 6, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 0, 9, 6, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 0, 9, 6, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 0, 9, 6, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "PlaneY3",
+			"from": [ 0, 0.5, 0 ],
+			"to": [ 16, 0.501, 16 ],
+			"faces": {
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#mycelium" }
+			}
+		}
+	]
+}

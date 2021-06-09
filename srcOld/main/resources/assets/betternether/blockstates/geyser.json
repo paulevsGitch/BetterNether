@@ -1,0 +1,11 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/geyser" },
+			{ "model": "betternether:block/geyser", "y": 90 },
+			{ "model": "betternether:block/geyser", "y": 180 },
+			{ "model": "betternether:block/geyser", "y": 270 }
+		]
+    }
+}

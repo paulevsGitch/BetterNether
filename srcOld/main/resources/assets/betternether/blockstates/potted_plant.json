@@ -1,0 +1,71 @@
+{
+    "variants": {
+        "plant=agave": { "model": "betternether:block/potted_agave" },
+		"plant=barrel_cactus": { "model": "betternether:block/potted_cactus_barrel" },
+		"plant=black_apple": [
+			{ "model": "betternether:block/potted_black_apple" },
+			{ "model": "betternether:block/potted_black_apple", "y": 90 },
+			{ "model": "betternether:block/potted_black_apple", "y": 180 },
+			{ "model": "betternether:block/potted_black_apple", "y": 270 }
+		],
+		"plant=black_bush": { "model": "betternether:block/potted_black_bush" },
+		"plant=egg_plant": { "model": "betternether:block/potted_egg_plant" },
+		"plant=ink_bush": [
+			{ "model": "betternether:block/potted_ink_bush" },
+			{ "model": "betternether:block/potted_ink_bush", "y": 90 },
+			{ "model": "betternether:block/potted_ink_bush", "y": 180 },
+			{ "model": "betternether:block/potted_ink_bush", "y": 270 }
+		],
+		"plant=reeds": { "model": "betternether:block/potted_reeds" },
+		"plant=nether_cactus": { "model": "betternether:block/potted_nether_cactus" },
+		"plant=nether_grass": [
+			{ "model": "betternether:block/potted_nether_grass_1" },
+			{ "model": "betternether:block/potted_nether_grass_2" },
+			{ "model": "betternether:block/potted_nether_grass_3" }
+		],
+		"plant=orange_mushroom": [
+			{ "model": "betternether:block/potted_orange_mushroom_01" },
+			{ "model": "betternether:block/potted_orange_mushroom_02" },
+			{ "model": "betternether:block/potted_orange_mushroom_03" }
+		],
+		"plant=red_mold": [
+			{ "model": "betternether:block/potted_red_mold" },
+			{ "model": "betternether:block/potted_red_mold", "y": 90 },
+			{ "model": "betternether:block/potted_red_mold", "y": 180 },
+			{ "model": "betternether:block/potted_red_mold", "y": 270 }
+		],
+		"plant=gray_mold": [
+			{ "model": "betternether:block/potted_gray_mold" },
+			{ "model": "betternether:block/potted_gray_mold", "y": 90 },
+			{ "model": "betternether:block/potted_gray_mold", "y": 180 },
+			{ "model": "betternether:block/potted_gray_mold", "y": 270 }
+		],
+		"plant=magma_flower": [
+			{ "model": "betternether:block/potted_magma_flower" },
+			{ "model": "betternether:block/potted_magma_flower", "y": 90 },
+			{ "model": "betternether:block/potted_magma_flower", "y": 180 },
+			{ "model": "betternether:block/potted_magma_flower", "y": 270 }
+		],
+		"plant=nether_wart": { "model": "betternether:block/potted_wart" },
+		"plant=willow": [
+			{ "model": "betternether:block/potted_willow" },
+			{ "model": "betternether:block/potted_willow", "y": 90 },
+			{ "model": "betternether:block/potted_willow", "y": 180 },
+			{ "model": "betternether:block/potted_willow", "y": 270 }
+		],
+		"plant=smoker": [
+			{ "model": "betternether:block/potted_smoker" },
+			{ "model": "betternether:block/potted_smoker", "y": 90 },
+			{ "model": "betternether:block/potted_smoker", "y": 180 },
+			{ "model": "betternether:block/potted_smoker", "y": 270 }
+		],
+		"plant=wart": { "model": "betternether:block/potted_mc_wart" },
+		
+		"plant=jungle_plant": { "model": "betternether:block/potted_jungle_plant" },
+		"plant=jellyfish_mushroom": { "model": "betternether:block/potted_jellyfish_mushroom" },
+		"plant=swamp_grass": { "model": "betternether:block/potted_swamp_grass" },
+		"plant=soul_grass": { "model": "betternether:block/potted_soul_grass" },
+		"plant=bone_grass": { "model": "betternether:block/potted_bone_grass" },
+		"plant=bone_mushroom": { "model": "betternether:block/potted_bone_mushroom" }
+    }
+}

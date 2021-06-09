@@ -36,7 +36,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.Tag;
@@ -49,6 +49,11 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.entity.EntityFirefly.FreflyLookControl;
+import paulevs.betternether.entity.EntityFirefly.MoveRandomGoal;
+import paulevs.betternether.entity.EntityFirefly.MoveToFlowersGoal;
+import paulevs.betternether.entity.EntityFirefly.SittingGoal;
+import paulevs.betternether.entity.EntityFirefly.WanderAroundGoal;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
@@ -186,8 +191,8 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag tag) {
-		super.writeCustomDataToTag(tag);
+	public void writeCustomDataToNbt(NbtCompound tag) {
+		super.writeCustomDataToNbt(tag);
 
 		tag.putFloat("ColorRed", getRed());
 		tag.putFloat("ColorGreen", getGreen());
@@ -195,8 +200,8 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag tag) {
-		super.readCustomDataFromTag(tag);
+	public void readCustomDataFromNbt(NbtCompound tag) {
+		super.readCustomDataFromNbt(tag);
 
 		if (tag.contains("ColorRed")) {
 			this.dataTracker.set(COLOR_RED, tag.getFloat("ColorRed"));
@@ -540,7 +545,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	}
 
 	public static boolean canSpawn(EntityType<? extends EntityFirefly> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if (pos.getY() >= world.getDimension().getLogicalHeight()) return false;
+		if (pos.getY() >= world.getDimension().getMinimumY()) return false;
 		int h = BlocksHelper.downRay(world, pos, 10);
 		if (h > 8)
 			return false;

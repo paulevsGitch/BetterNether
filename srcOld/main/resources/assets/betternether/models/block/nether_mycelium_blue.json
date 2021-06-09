@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/nether_mycelium_side_blue",
+        "down": "block/netherrack",
+        "up": "betternether:block/nether_mycelium_top_blue",
+        "north": "betternether:block/nether_mycelium_side_blue",
+        "east": "betternether:block/nether_mycelium_side_blue",
+        "south": "betternether:block/nether_mycelium_side_blue",
+        "west": "betternether:block/nether_mycelium_side_blue"
+    }
+}

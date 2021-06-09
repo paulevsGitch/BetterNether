@@ -12,7 +12,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.command.CommandOutput;
 import net.minecraft.server.command.ServerCommandSource;
@@ -44,8 +44,8 @@ public class BNSignBlockEntity extends BlockEntity {
 		this.textColor = DyeColor.BLACK;
 	}
 
-	public CompoundTag toTag(CompoundTag tag) {
-		super.toTag(tag);
+	public NbtCompound writeNbt(NbtCompound tag) {
+		super.writeNbt(tag);
 
 		for (int i = 0; i < 4; ++i) {
 			String string = Text.Serializer.toJson(this.text[i]);
@@ -56,9 +56,9 @@ public class BNSignBlockEntity extends BlockEntity {
 		return tag;
 	}
 
-	public void fromTag(BlockState state, CompoundTag tag) {
+	public void readNbt(BlockState state, NbtCompound tag) {
 		this.editable = false;
-		super.fromTag(state, tag);
+		super.readNbt(state, tag);
 		this.textColor = DyeColor.byName(tag.getString("Color"), DyeColor.BLACK);
 
 		for (int i = 0; i < 4; ++i) {
@@ -98,11 +98,11 @@ public class BNSignBlockEntity extends BlockEntity {
 
 	@Nullable
 	public BlockEntityUpdateS2CPacket toUpdatePacket() {
-		return new BlockEntityUpdateS2CPacket(this.pos, 9, this.toInitialChunkDataTag());
+		return new BlockEntityUpdateS2CPacket(this.pos, 9, this.toInitialChunkDataNbt());
 	}
 
-	public CompoundTag toInitialChunkDataTag() {
-		return this.toTag(new CompoundTag());
+	public NbtCompound toInitialChunkDataNbt() {
+		return this.writeNbt(new NbtCompound());
 	}
 
 	public boolean copyItemDataRequiresOperator() {

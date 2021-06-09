@@ -1,0 +1,11 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/black_bush_01" },
+			{ "model": "betternether:block/black_bush_02" },
+			{ "model": "betternether:block/black_bush_03" },
+			{ "model": "betternether:block/black_bush_04" }
+		]
+    }
+}

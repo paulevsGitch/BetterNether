@@ -9,8 +9,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -33,7 +33,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable {
 
 	public BlockSoulVein() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.PURPLE)
+				.materialColor(MapColor.PURPLE)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.noCollision()

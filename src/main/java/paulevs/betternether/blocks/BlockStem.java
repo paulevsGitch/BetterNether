@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
@@ -24,7 +24,7 @@ public class BlockStem extends BlockBaseNotFull {
 	public static final EnumProperty<Axis> AXIS = Properties.AXIS;
 	private static final EnumMap<Axis, VoxelShape> OUTLINES = Maps.newEnumMap(Axis.class);
 
-	public BlockStem(MaterialColor color) {
+	public BlockStem(MapColor color) {
 		super(Materials.makeWood(color).nonOpaque());
 		this.setDefaultState(this.getDefaultState().with(AXIS, Axis.Y));
 	}

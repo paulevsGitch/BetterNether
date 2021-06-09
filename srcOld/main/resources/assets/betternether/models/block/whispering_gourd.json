@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/whispering_gourd_side",
+        "down": "betternether:block/whispering_gourd_bottom",
+        "up": "betternether:block/whispering_gourd_top",
+        "north": "betternether:block/whispering_gourd_side",
+        "east": "betternether:block/whispering_gourd_side",
+        "south": "betternether:block/whispering_gourd_side",
+        "west": "betternether:block/whispering_gourd_side"
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=north,top=false": { "model": "betternether:block/pig_statue_respawner", "y": 90 },
+        "facing=south,top=false": { "model": "betternether:block/pig_statue_respawner", "y": 270 },
+        "facing=west,top=false":  { "model": "betternether:block/pig_statue_respawner" },
+        "facing=east,top=false":  { "model": "betternether:block/pig_statue_respawner", "y": 180 },
+        "top=true":  { "model": "betternether:block/pig_statue_respawner_top" }
+    }
+}

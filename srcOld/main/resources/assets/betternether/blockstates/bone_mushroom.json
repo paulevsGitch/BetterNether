@@ -1,0 +1,35 @@
+{
+    "variants": {
+        "age=2,facing=up": [
+			{ "model": "betternether:block/bone_mushroom_floor" },
+			{ "model": "betternether:block/bone_mushroom_floor", "y": 90 },
+			{ "model": "betternether:block/bone_mushroom_floor", "y": 180 },
+			{ "model": "betternether:block/bone_mushroom_floor", "y": 270 }
+		],
+        "age=2,facing=east": { "model": "betternether:block/bone_mushroom_wall", "y": 270 },
+        "age=2,facing=south": { "model": "betternether:block/bone_mushroom_wall" },
+        "age=2,facing=west": { "model": "betternether:block/bone_mushroom_wall", "y": 90 },
+        "age=2,facing=north": { "model": "betternether:block/bone_mushroom_wall", "y": 180 },
+		"age=1,facing=up": [
+			{ "model": "betternether:block/bone_mushroom_floor_pre" },
+			{ "model": "betternether:block/bone_mushroom_floor_pre", "y": 90 },
+			{ "model": "betternether:block/bone_mushroom_floor_pre", "y": 180 },
+			{ "model": "betternether:block/bone_mushroom_floor_pre", "y": 270 }
+		],
+        "age=1,facing=east": { "model": "betternether:block/bone_mushroom_wall_pre", "y": 270 },
+        "age=1,facing=south": { "model": "betternether:block/bone_mushroom_wall_pre" },
+        "age=1,facing=west": { "model": "betternether:block/bone_mushroom_wall_pre", "y": 90 },
+        "age=1,facing=north": { "model": "betternether:block/bone_mushroom_wall_pre", "y": 180 },
+		"age=0,facing=up": [
+			{ "model": "betternether:block/bone_mushroom_floor_young" },
+			{ "model": "betternether:block/bone_mushroom_floor_young", "y": 90 },
+			{ "model": "betternether:block/bone_mushroom_floor_young", "y": 180 },
+			{ "model": "betternether:block/bone_mushroom_floor_young", "y": 270 }
+		],
+        "age=0,facing=east": { "model": "betternether:block/bone_mushroom_wall_young", "y": 270 },
+        "age=0,facing=south": { "model": "betternether:block/bone_mushroom_wall_young" },
+        "age=0,facing=west": { "model": "betternether:block/bone_mushroom_wall_young", "y": 90 },
+        "age=0,facing=north": { "model": "betternether:block/bone_mushroom_wall_young", "y": 180 },
+		"facing=down": { "model": "betternether:block/bone_mushroom_floor" }
+    }
+}

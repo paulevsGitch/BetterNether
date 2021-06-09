@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "AB",
+	"BB",
+	"BA"
+  ],
+  "key": {
+    "A": {
+		"item": "betternether:cincinnasite_forged"
+    },
+	"B": {
+      "item": "betternether:bone_block"
+    }
+  },
+  "result": {
+    "item": "betternether:bone_cincinnasite_door",
+	"count": 3
+  }
+}

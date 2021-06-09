@@ -1,0 +1,20 @@
+{
+    "variants":
+	{
+        "shape=small": { "model": "betternether:block/soul_lily_small" },
+        "shape=medium_bottom": { "model": "betternether:block/soul_lily_medium" },
+        "shape=medium_top": { "model": "betternether:block/soul_lily_medium_top" },
+        "shape=big_bottom": { "model": "betternether:block/soul_lily_big_bottom" },
+        "shape=big_middle": [
+			{ "model": "betternether:block/soul_lily_big_middle" },
+			{ "model": "betternether:block/soul_lily_big_middle", "y": 90 },
+			{ "model": "betternether:block/soul_lily_big_middle", "y": 180 },
+			{ "model": "betternether:block/soul_lily_big_middle", "y": 270 }
+		],
+		"shape=big_top_center": { "model": "betternether:block/soul_lily_big_top_center" },
+		"shape=big_top_side_n": { "model": "betternether:block/soul_lily_top_side" },
+		"shape=big_top_side_s": { "model": "betternether:block/soul_lily_top_side", "y": 180 },
+		"shape=big_top_side_e": { "model": "betternether:block/soul_lily_top_side", "y": 90 },
+		"shape=big_top_side_w": { "model": "betternether:block/soul_lily_top_side", "y": 270 }
+    }
+}

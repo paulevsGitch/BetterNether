@@ -1,0 +1,11 @@
+{
+	"variants":
+	{
+        "": [
+			{ "model": "betternether:block/soul_sandstone_chiseled" },
+			{ "model": "betternether:block/soul_sandstone_chiseled", "y": 90 },
+			{ "model": "betternether:block/soul_sandstone_chiseled", "y": 180 },
+			{ "model": "betternether:block/soul_sandstone_chiseled", "y": 270 }
+		]
+    }
+}

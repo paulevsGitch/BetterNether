@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "top=true": { "model": "betternether:block/stalagnate_seed", "x": 180 },
+        "top=false": { "model": "betternether:block/stalagnate_seed" }
+    }
+}

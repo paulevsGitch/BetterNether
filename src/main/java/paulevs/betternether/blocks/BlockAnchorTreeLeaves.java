@@ -10,7 +10,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
@@ -27,7 +27,7 @@ public class BlockAnchorTreeLeaves extends BlockBaseNotFull {
 	private Random random = new Random();
 
 	public BlockAnchorTreeLeaves() {
-		super(Materials.makeLeaves(MaterialColor.GREEN));
+		super(Materials.makeLeaves(MapColor.GREEN));
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

@@ -1,0 +1,29 @@
+{
+    "variants":
+	{
+        "age=0": [
+			{ "model": "betternether:block/agave_3" },
+			{ "model": "betternether:block/agave_3", "y": 90 },
+			{ "model": "betternether:block/agave_3", "y": 180 },
+			{ "model": "betternether:block/agave_3", "y": 270 }
+		],
+		"age=1": [
+			{ "model": "betternether:block/agave_2" },
+			{ "model": "betternether:block/agave_2", "y": 90 },
+			{ "model": "betternether:block/agave_2", "y": 180 },
+			{ "model": "betternether:block/agave_2", "y": 270 }
+		],
+		"age=2": [
+			{ "model": "betternether:block/agave_1" },
+			{ "model": "betternether:block/agave_1", "y": 90 },
+			{ "model": "betternether:block/agave_1", "y": 180 },
+			{ "model": "betternether:block/agave_1", "y": 270 }
+		],
+		"age=3": [
+			{ "model": "betternether:block/agave" },
+			{ "model": "betternether:block/agave", "y": 90 },
+			{ "model": "betternether:block/agave", "y": 180 },
+			{ "model": "betternether:block/agave", "y": 270 }
+		]
+    }
+}

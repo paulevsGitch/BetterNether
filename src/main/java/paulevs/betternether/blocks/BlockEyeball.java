@@ -5,11 +5,11 @@ import java.util.Random;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CauldronBlock;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -20,7 +20,7 @@ import paulevs.betternether.BlocksHelper;
 public class BlockEyeball extends BlockEyeBase {
 	public BlockEyeball() {
 		super(FabricBlockSettings.of(Material.WOOD)
-				.materialColor(MaterialColor.BROWN)
+				.materialColor(MapColor.BROWN)
 				.sounds(BlockSoundGroup.SLIME)
 				.hardness(0.5F)
 				.resistance(0.5F)
@@ -44,9 +44,9 @@ public class BlockEyeball extends BlockEyeBase {
 			BlockPos down = pos.down(y);
 			BlockState cauldron = world.getBlockState(down);
 			if (cauldron.getBlock() == Blocks.CAULDRON) {
-				int level = cauldron.get(CauldronBlock.LEVEL);
+				int level = cauldron.get(AbstractCauldronBlock.LEVEL);
 				if (level < 3) {
-					world.setBlockState(down, cauldron.with(CauldronBlock.LEVEL, level + 1));
+					world.setBlockState(down, cauldron.with(AbstractCauldronBlock.LEVEL, level + 1));
 				}
 			}
 		}

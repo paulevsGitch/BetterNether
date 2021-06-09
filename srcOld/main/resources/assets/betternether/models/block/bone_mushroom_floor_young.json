@@ -1,0 +1,22 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "betternether:block/bone_mushroom_up_pre",
+		"texture": "betternether:block/bone_mushroom_up_pre",
+		"wall": "betternether:block/bone_mycelium"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "PlaneY24",
+			"from": [ 0, 0.5, 0 ],
+			"to": [ 16, 0.501, 16 ],
+			"shade": false,
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#wall" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#wall" }
+			}
+		}
+	]
+}

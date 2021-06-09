@@ -2,8 +2,8 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +23,7 @@ public class BlockOrangeMushroom extends BlockCommonPlant {
 
 	public BlockOrangeMushroom() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.ORANGE)
+				.materialColor(MapColor.ORANGE)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.hardness(0.5F)

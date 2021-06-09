@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/sepia_mushroom_grass_side",
+        "down": "block/netherrack",
+        "up": "betternether:block/sepia_mushroom_grass_top",
+        "north": "betternether:block/sepia_mushroom_grass_side",
+        "east": "betternether:block/sepia_mushroom_grass_side",
+        "south": "betternether:block/sepia_mushroom_grass_side",
+        "west": "betternether:block/sepia_mushroom_grass_side"
+    }
+}

@@ -2,7 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
@@ -24,8 +24,8 @@ public class BNLogStripable extends BNPillar {
 		this.result = result;
 	}
 
-	public BNLogStripable(MaterialColor color, Block result) {
-		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA));
+	public BNLogStripable(MapColor color, Block result) {
+		super(Materials.makeWood(MapColor.TERRACOTTA_LIME));
 		this.result = result;
 	}
 

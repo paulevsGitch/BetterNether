@@ -1,0 +1,16 @@
+{
+    "variants": {
+		"axis=y": [
+			{ "model": "betternether:block/stalagnate_stem_1" },
+			{ "model": "betternether:block/stalagnate_stem_3" }
+		],
+        "axis=z": [
+			{ "model": "betternether:block/stalagnate_stem_1", "x": 90 },
+			{ "model": "betternether:block/stalagnate_stem_3", "x": 90 }
+		],
+        "axis=x": [
+			{ "model": "betternether:block/stalagnate_stem_1", "x": 90, "y": 90 },
+			{ "model": "betternether:block/stalagnate_stem_3", "x": 90, "y": 90 }
+		]
+	}
+}

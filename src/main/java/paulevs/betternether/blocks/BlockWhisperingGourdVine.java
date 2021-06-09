@@ -13,8 +13,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -46,7 +46,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Fertil
 
 	public BlockWhisperingGourdVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.RED)
+				.materialColor(MapColor.RED)
 				.sounds(BlockSoundGroup.CROP)
 				.noCollision()
 				.breakInstantly()

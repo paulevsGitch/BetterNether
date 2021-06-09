@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "betternether:block/cincinnasite_chain",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "betternether:block/cincinnasite_chain"
+    },
+    "axis=z": {
+      "model": "betternether:block/cincinnasite_chain",
+      "x": 90
+    }
+  }
+}

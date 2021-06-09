@@ -10,7 +10,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
@@ -57,7 +57,7 @@ public class BlockSoulLily extends BlockBaseNotFull {
 	};
 
 	public BlockSoulLily() {
-		super(Materials.makeWood(MaterialColor.ORANGE).nonOpaque().ticksRandomly());
+		super(Materials.makeWood(MapColor.ORANGE).nonOpaque().ticksRandomly());
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, SoulLilyShape.SMALL));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

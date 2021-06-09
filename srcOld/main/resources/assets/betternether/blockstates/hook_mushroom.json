@@ -1,0 +1,19 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/hook_mushroom_1" },
+			{ "model": "betternether:block/hook_mushroom_1", "y": 90 },
+			{ "model": "betternether:block/hook_mushroom_1", "y": 180 },
+			{ "model": "betternether:block/hook_mushroom_1", "y": 270 },
+			{ "model": "betternether:block/hook_mushroom_2" },
+			{ "model": "betternether:block/hook_mushroom_2", "y": 90 },
+			{ "model": "betternether:block/hook_mushroom_2", "y": 180 },
+			{ "model": "betternether:block/hook_mushroom_2", "y": 270 },
+			{ "model": "betternether:block/hook_mushroom_3" },
+			{ "model": "betternether:block/hook_mushroom_3", "y": 90 },
+			{ "model": "betternether:block/hook_mushroom_3", "y": 180 },
+			{ "model": "betternether:block/hook_mushroom_3", "y": 270 }
+		]
+    }
+}

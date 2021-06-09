@@ -1,0 +1,23 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "block/netherrack",
+		"texture": "block/netherrack"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 6, 0, 6 ],
+			"to": [ 10, 16, 10 ],
+			"faces": {
+				"down": { "uv": [ 6, 6, 10, 10 ], "texture": "#texture", "cullface": "down" },
+				"up": { "uv": [ 6, 6, 10, 10 ], "texture": "#texture", "cullface": "up" },
+				"north": { "uv": [ 6, 0, 10, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 6, 0, 10, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 6, 0, 10, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 6, 0, 10, 16 ], "texture": "#texture" }
+			}
+		}
+	]
+}

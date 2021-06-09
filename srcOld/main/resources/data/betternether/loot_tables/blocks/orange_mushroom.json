@@ -1,0 +1,113 @@
+{
+    "type": "block",
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "minecraft:orange_dye",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ]
+                }
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "betternether:orange_mushroom",
+					"properties": {
+						"age": "3"
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+        },
+		{
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "minecraft:purple_dye",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ]
+                }
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "betternether:orange_mushroom",
+					"properties": {
+						"age": "3"
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+        },
+		{
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "betternether:orange_mushroom",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 2
+                            }
+                        }
+                    ]
+                }
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "betternether:orange_mushroom",
+					"properties": {
+						"age": "3"
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+        },
+		{
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "betternether:orange_mushroom"
+                }
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+        }
+    ]
+}

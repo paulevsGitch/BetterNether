@@ -16,6 +16,7 @@ public class RenderLayers {
 	public static Target translucentTarget;
 
 	public static RenderLayer getFirefly(Identifier texture) {
+
 		RenderLayer.MultiPhaseParameters multiPhaseParameters = RenderLayer.MultiPhaseParameters.builder()
 				.texture(new RenderPhase.Texture(texture, false, false))
 				.transparency(translucentTransparency)

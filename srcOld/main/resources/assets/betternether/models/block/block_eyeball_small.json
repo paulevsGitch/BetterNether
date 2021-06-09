@@ -1,0 +1,22 @@
+{
+    "parent": "block/block",
+	"textures": {
+        "particle": "betternether:block/eye_side",
+        "down": "betternether:block/eye_small_bottom",
+        "up": "betternether:block/eye_top",
+        "side": "betternether:block/eye_side"
+    },
+    "elements": [
+        {   "from": [ 4, 8, 4 ],
+            "to": [ 12, 16, 12 ],
+            "faces": {
+                "down":  { "texture": "#down" },
+                "up":    { "texture": "#up", "cullface": "up" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#side" },
+                "east":  { "texture": "#side" }
+            }
+        }
+    ]
+}

@@ -3,10 +3,10 @@ package paulevs.betternether.config.screen;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
-import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget.PressAction;
-import net.minecraft.client.options.DoubleOption;
+import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.option.DoubleOption;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -40,7 +40,7 @@ public class ConfigScreen extends Screen {
 		final String varFog = "fog_density[vanilla: 1.0]";
 		final float fogDefault = 0.75F;
 
-		AbstractButtonWidget fogButton = new DoubleOption("fog", 0.0, 1.0, 0.05F,
+		ClickableWidget fogButton = new DoubleOption("fog", 0.0, 1.0, 0.05F,
 				(gameOptions) -> {
 					return (double) Configs.MAIN.getFloat("improvement", varFog, fogDefault);
 				},
@@ -69,7 +69,7 @@ public class ConfigScreen extends Screen {
 		final String varArmour = "smaller_armor_offset";
 		boolean hasArmour = Configs.MAIN.getBoolean("improvement", varArmour, true);
 
-		AbstractButtonWidget armorButton = new ButtonWidget(this.width / 2 - 100, 27 * 2, 150, 20, new TranslatableText("config.betternether.armour"), new PressAction() {
+		ClickableWidget armorButton = new ButtonWidget(this.width / 2 - 100, 27 * 2, 150, 20, new TranslatableText("config.betternether.armour"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
 				boolean value = !Configs.MAIN.getBoolean("improvement", varArmour, true);
@@ -96,7 +96,7 @@ public class ConfigScreen extends Screen {
 		final String varLava = "lavafall_particles";
 		boolean hasLava = Configs.MAIN.getBoolean("improvement", varLava, true);
 
-		AbstractButtonWidget lavaButton = new ButtonWidget(this.width / 2 - 100, 27 * 3, 150, 20, new TranslatableText("config.betternether.armour"), new PressAction() {
+		ClickableWidget lavaButton = new ButtonWidget(this.width / 2 - 100, 27 * 3, 150, 20, new TranslatableText("config.betternether.armour"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
 				boolean value = !Configs.MAIN.getBoolean("improvement", varLava, true);
@@ -122,7 +122,7 @@ public class ConfigScreen extends Screen {
 
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		this.renderBackground(matrices);
-		for (AbstractButtonWidget button : this.buttons) {
+		for (ClickableWidget button : this.buttons) {
 			button.render(matrices, mouseX, mouseY, delta);
 		}
 		DrawableHelper.drawCenteredText(matrices, this.textRenderer, header, this.width / 2, 14, 16777215);

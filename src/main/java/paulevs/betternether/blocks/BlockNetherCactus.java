@@ -6,8 +6,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
@@ -31,7 +31,7 @@ public class BlockNetherCactus extends BlockBaseNotFull {
 
 	public BlockNetherCactus() {
 		super(FabricBlockSettings.of(Material.CACTUS)
-				.materialColor(MaterialColor.ORANGE_TERRACOTTA)
+				.materialColor(MapColor.TERRACOTTA_ORANGE)
 				.sounds(BlockSoundGroup.WOOL)
 				.nonOpaque()
 				.ticksRandomly());

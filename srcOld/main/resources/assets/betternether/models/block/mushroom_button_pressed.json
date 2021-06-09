@@ -1,0 +1,22 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "#texture",
+		"texture": "betternether:block/mushroom_button"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Element",
+			"from": [ 5, 0, 6 ],
+			"to": [ 11, 1, 10 ],
+			"faces": {
+				"down": { "uv": [ 5, 6, 11, 10 ], "texture": "#texture", "cullface": "down" },
+				"up": { "uv": [ 5, 10, 11, 6 ], "texture": "#texture" },
+				"north": { "uv": [ 5, 10, 11, 11 ], "texture": "#texture" },
+				"south": { "uv": [ 5, 10, 11, 11 ], "texture": "#texture" },
+				"west": { "uv": [ 6, 10, 10, 11 ], "texture": "#texture" },
+				"east": { "uv": [ 6, 10, 10, 11 ], "texture": "#texture" }
+			}
+		}
+	]
+}

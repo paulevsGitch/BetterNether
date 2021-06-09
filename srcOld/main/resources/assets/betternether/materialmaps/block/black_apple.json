@@ -1,0 +1,18 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/black_apple_medium",
+				"material": "betternether:waving_floor"
+			},
+			{
+				"sprite": "betternether:block/black_apple_seed",
+				"material": "betternether:waving_floor"
+			},
+			{
+				"sprite": "betternether:block/black_apple_young",
+				"material": "betternether:waving_floor"
+			}
+		]
+	}
+}

@@ -3,8 +3,7 @@ package paulevs.betternether.structures;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
-
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.structure.Structure;
@@ -86,10 +85,10 @@ public class StructureNBT {
 	}
 
 	private Structure readStructureFromStream(InputStream stream) throws IOException {
-		CompoundTag nbttagcompound = NbtIo.readCompressed(stream);
+		NbtCompound nbttagcompound = NbtIo.readCompressed(stream);
 
 		Structure template = new Structure();
-		template.fromTag(nbttagcompound);
+		template.readNbt(nbttagcompound);
 
 		return template;
 	}

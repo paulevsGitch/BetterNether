@@ -10,7 +10,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -41,7 +41,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	public static final EnumProperty<JellyShape> VISUAL = EnumProperty.of("visual", JellyShape.class);
 
 	public BlockJellyfishMushroom() {
-		super(Materials.makeWood(MaterialColor.CYAN).hardness(0.1F).sounds(BlockSoundGroup.FUNGUS).nonOpaque().luminance(13));
+		super(Materials.makeWood(MapColor.CYAN).hardness(0.1F).sounds(BlockSoundGroup.FUNGUS).nonOpaque().luminance(13));
 		boolean sodium = FabricLoader.getInstance().isModLoaded("sodium"); // Fix
 																			// incorrect
 																			// sodium

@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "betternether:block/nether_sakura_sapling"
+    }
+}

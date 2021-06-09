@@ -5,8 +5,8 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +18,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 public class BlockVeinedSand extends BlockBase {
 	public BlockVeinedSand() {
 		super(FabricBlockSettings.of(Material.AGGREGATE)
-				.materialColor(MaterialColor.BROWN)
+				.materialColor(MapColor.BROWN)
 				.sounds(BlockSoundGroup.SAND)
 				.strength(0.5F, 0.5F));
 		this.setDropItself(false);

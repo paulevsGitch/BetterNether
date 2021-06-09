@@ -1,0 +1,52 @@
+{
+	"parent": "block/block",
+	"textures":
+	{
+        "particle": "#side"
+    },
+    "elements": [
+        {   "from": [ 5, 0, 5 ],
+            "to": [ 11, 16, 11 ],
+            "faces": {
+                "down":  { "texture": "#top" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#side" },
+                "east":  { "texture": "#side" }
+            }
+        },
+		{   "from": [ 4, -1, 0 ],
+            "to": [ 4, 15, 16 ],
+            "shade": false,
+            "faces": {
+                "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#leaves" },
+                "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#leaves" }
+            }
+        },
+        {   "from": [ 12, -1, 0 ],
+            "to": [ 12, 15, 16 ],
+            "shade": false,
+            "faces": {
+                "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#leaves" },
+                "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#leaves" }
+            }
+        },
+        {   "from": [ 0, -1, 4 ],
+            "to": [ 16, 15, 4 ],
+            "shade": false,
+            "faces": {
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#leaves" },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#leaves" }
+            }
+        },
+        {   "from": [ 0, -1, 12 ],
+            "to": [ 16, 15, 12 ],
+            "shade": false,
+            "faces": {
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#leaves" },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#leaves" }
+            }
+        }
+    ]
+}

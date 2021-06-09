@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=east":  { "model": "betternether:block/taburet_rubeus" },
+		"facing=west":  { "model": "betternether:block/taburet_rubeus", "y": 180 },
+		"facing=south": { "model": "betternether:block/taburet_rubeus", "y": 90 },
+		"facing=north": { "model": "betternether:block/taburet_rubeus", "y": 270 }
+	}
+}

@@ -1,0 +1,17 @@
+{
+    "variants":
+	{
+        "bottom=false": [
+			{ "model": "betternether:block/flowered_vine_1" },
+			{ "model": "betternether:block/flowered_vine_2" },
+			{ "model": "betternether:block/flowered_vine_3" },
+			{ "model": "betternether:block/flowered_vine_4" },
+			{ "model": "betternether:block/flowered_vine_5" },
+			{ "model": "betternether:block/flowered_vine_6" }
+		],
+        "bottom=true": [
+			{ "model": "betternether:block/flowered_vine_bottom_1" },
+			{ "model": "betternether:block/flowered_vine_bottom_2" }
+		]
+    }
+}

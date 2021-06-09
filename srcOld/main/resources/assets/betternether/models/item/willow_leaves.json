@@ -1,0 +1,22 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle": "betternether:block/willow_leaves_full",
+		"texture": "betternether:block/willow_leaves_full",
+		"top": "betternether:block/willow_leaves_top"
+	},
+	"elements": [ 	 
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#top" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#top" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" }
+			}
+		}
+	]
+}

@@ -1,0 +1,82 @@
+{
+    "type": "block",
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "minecraft:bone_meal",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ]
+                }
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "betternether:bone_mushroom",
+					"properties": {
+						"age": "2"
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+        },
+		{
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "betternether:bone_mushroom",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 2
+                            }
+                        }
+                    ]
+                }
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "betternether:bone_mushroom",
+					"properties": {
+						"age": "2"
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+        },
+		{
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "betternether:bone_mushroom"
+                }
+            ],
+			"conditions": [
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+        }
+    ]
+}

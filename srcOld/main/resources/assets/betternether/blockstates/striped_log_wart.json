@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "betternether:block/striped_log_wart" },
+        "axis=z": { "model": "betternether:block/striped_log_wart", "x": 90 },
+        "axis=x": { "model": "betternether:block/striped_log_wart", "x": 90, "y": 90 }
+    }
+}

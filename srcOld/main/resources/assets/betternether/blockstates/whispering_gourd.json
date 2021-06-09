@@ -1,0 +1,11 @@
+{
+    "variants":
+	{
+        "": [
+			{ "model": "betternether:block/whispering_gourd" },
+			{ "model": "betternether:block/whispering_gourd", "y": 90 },
+			{ "model": "betternether:block/whispering_gourd", "y": 180 },
+			{ "model": "betternether:block/whispering_gourd", "y": 270 }
+		]
+    }
+}

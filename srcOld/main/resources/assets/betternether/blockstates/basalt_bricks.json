@@ -1,0 +1,9 @@
+{
+	"variants":
+	{
+        "": [
+			{ "model": "betternether:block/basalt_bricks_1" },
+			{ "model": "betternether:block/basalt_bricks_2" }
+		]
+    }
+}

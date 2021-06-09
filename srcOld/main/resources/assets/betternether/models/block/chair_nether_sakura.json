@@ -1,0 +1,6 @@
+{
+    "parent": "betternether:block/bn_chair",
+    "textures": {
+        "texture": "betternether:block/nether_sakura_planks"
+    }
+}

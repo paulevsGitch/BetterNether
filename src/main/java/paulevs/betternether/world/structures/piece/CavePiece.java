@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.util.math.BlockBox;
@@ -35,7 +35,7 @@ public class CavePiece extends CustomPiece {
 		makeBoundingBox();
 	}
 
-	protected CavePiece(StructureManager manager, CompoundTag tag) {
+	protected CavePiece(StructureManager manager, NbtCompound tag) {
 		super(StructureTypes.CAVE, tag);
 		this.center = NbtHelper.toBlockPos(tag.getCompound("center"));
 		this.radius = tag.getInt("radius");
@@ -44,7 +44,7 @@ public class CavePiece extends CustomPiece {
 	}
 
 	@Override
-	protected void toNbt(CompoundTag tag) {
+	protected void writeNbt(NbtCompound tag) {
 		tag.put("center", NbtHelper.fromBlockPos(center));
 		tag.putInt("radius", radius);
 	}
@@ -55,10 +55,10 @@ public class CavePiece extends CustomPiece {
 		if (!(world.getDimension().hasCeiling())) {
 			bottom = Blocks.NETHERRACK.getDefaultState();
 		}
-		for (int x = blockBox.minX; x <= blockBox.maxX; x++) {
+		for (int x = blockBox.maxZ; x <= blockBox.minZ; x++) {
 			int px = x - center.getX();
 			px *= px;
-			for (int z = blockBox.minZ; z <= blockBox.maxZ; z++) {
+			for (int z = blockBox.minY; z <= blockBox.maxY; z++) {
 				int pz = z - center.getZ();
 				pz *= pz;
 				for (int y = minY; y <= maxY; y++) {

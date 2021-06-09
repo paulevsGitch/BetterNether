@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:soul_ground"
+    }
+  },
+  "result": {
+    "item": "betternether:soul_sandstone",
+	"count": 4
+  }
+}

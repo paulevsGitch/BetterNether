@@ -1,0 +1,28 @@
+{
+    "variants": {
+        "food=none": [
+			{ "model": "betternether:block/stalagnate_bowl_empty" },
+			{ "model": "betternether:block/stalagnate_bowl_empty", "y": 90 },
+			{ "model": "betternether:block/stalagnate_bowl_empty", "y": 180 },
+			{ "model": "betternether:block/stalagnate_bowl_empty", "y": 270 }
+		],
+        "food=wart": [
+			{ "model": "betternether:block/stalagnate_bowl_wart" },
+			{ "model": "betternether:block/stalagnate_bowl_wart", "y": 90 },
+			{ "model": "betternether:block/stalagnate_bowl_wart", "y": 180 },
+			{ "model": "betternether:block/stalagnate_bowl_wart", "y": 270 }
+		],
+        "food=mushroom": [
+			{ "model": "betternether:block/stalagnate_bowl_mushroom" },
+			{ "model": "betternether:block/stalagnate_bowl_mushroom", "y": 90 },
+			{ "model": "betternether:block/stalagnate_bowl_mushroom", "y": 180 },
+			{ "model": "betternether:block/stalagnate_bowl_mushroom", "y": 270 }
+		],
+        "food=apple": [
+			{ "model": "betternether:block/stalagnate_bowl_apple" },
+			{ "model": "betternether:block/stalagnate_bowl_apple", "y": 90 },
+			{ "model": "betternether:block/stalagnate_bowl_apple", "y": 180 },
+			{ "model": "betternether:block/stalagnate_bowl_apple", "y": 270 }
+		]
+    }
+}

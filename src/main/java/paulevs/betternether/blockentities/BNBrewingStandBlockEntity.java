@@ -15,7 +15,7 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.screen.BrewingStandScreenHandler;
 import net.minecraft.screen.PropertyDelegate;
@@ -218,18 +218,18 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		this.world.syncWorldEvent(1035, blockPos, 0);
 	}
 
-	public void fromTag(BlockState state, CompoundTag tag) {
-		super.fromTag(state, tag);
+	public void readNbt(BlockState state, NbtCompound tag) {
+		super.readNbt(state, tag);
 		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-		Inventories.fromTag(tag, this.inventory);
+		Inventories.readNbt(tag, this.inventory);
 		this.brewTime = tag.getShort("BrewTime");
 		this.fuel = tag.getByte("Fuel");
 	}
 
-	public CompoundTag toTag(CompoundTag tag) {
-		super.toTag(tag);
+	public NbtCompound writeNbt(NbtCompound tag) {
+		super.writeNbt(tag);
 		tag.putShort("BrewTime", (short) this.brewTime);
-		Inventories.toTag(tag, this.inventory);
+		Inventories.writeNbt(tag, this.inventory);
 		tag.putByte("Fuel", (byte) this.fuel);
 		return tag;
 	}

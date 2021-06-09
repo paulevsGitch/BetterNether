@@ -38,7 +38,7 @@ public class BlockOre extends OreBlock {
 	@Override
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool.isEffectiveOn(state)) {
+		if (tool.isSuitableFor(state)) {
 			int enchant = EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool);
 			if (enchant > 0) {
 				return Lists.newArrayList(new ItemStack(this));

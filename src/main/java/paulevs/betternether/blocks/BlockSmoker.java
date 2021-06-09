@@ -7,7 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
@@ -29,7 +29,7 @@ public class BlockSmoker extends BlockBaseNotFull {
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
 
 	public BlockSmoker() {
-		super(Materials.makeWood(MaterialColor.BROWN));
+		super(Materials.makeWood(MapColor.BROWN));
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.TOP));
 	}
 

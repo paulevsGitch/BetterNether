@@ -8,8 +8,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -32,7 +32,7 @@ public class BlockPottedPlant extends BlockBaseNotFull {
 
 	public BlockPottedPlant() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.BLACK)
+				.materialColor(MapColor.BLACK)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.noCollision()

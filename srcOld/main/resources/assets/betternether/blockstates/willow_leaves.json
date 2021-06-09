@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "facing=north,natural=true": { "model": "betternether:block/willow_leaves_side" },
+		"facing=south,natural=true": { "model": "betternether:block/willow_leaves_side", "y": 180 },
+		"facing=east,natural=true": { "model": "betternether:block/willow_leaves_side", "y": 90 },
+		"facing=west,natural=true": { "model": "betternether:block/willow_leaves_side", "y": 270 },
+		"facing=up,natural=true": { "model": "betternether:block/willow_leaves_top" },
+		"facing=down,natural=true": { "model": "betternether:block/willow_leaves_bottom", "x": 180 },
+		"natural=false": { "model": "betternether:block/willow_leaves" }
+    }
+}

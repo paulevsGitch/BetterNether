@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "shape=bottom,axis=y": { "model": "betternether:block/rubeus_bark" },
+        "shape=bottom,axis=z": { "model": "betternether:block/rubeus_bark", "x": 90 },
+        "shape=bottom,axis=x": { "model": "betternether:block/rubeus_bark", "x": 90, "y": 90 },
+		"shape=middle,axis=y": { "model": "betternether:block/rubeus_bark_blend" },
+        "shape=middle,axis=z": { "model": "betternether:block/rubeus_bark_blend", "x": 90 },
+        "shape=middle,axis=x": { "model": "betternether:block/rubeus_bark_blend", "x": 90, "y": 90 },
+		"shape=top,axis=y": { "model": "betternether:block/rubeus_bark_top" },
+        "shape=top,axis=z": { "model": "betternether:block/rubeus_bark_top", "x": 90 },
+        "shape=top,axis=x": { "model": "betternether:block/rubeus_bark_top", "x": 90, "y": 90 }
+    }
+}

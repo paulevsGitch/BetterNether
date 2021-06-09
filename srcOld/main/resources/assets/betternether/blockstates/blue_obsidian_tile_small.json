@@ -1,0 +1,6 @@
+{
+	"variants":
+	{
+        "":  { "model": "betternether:block/blue_obsidian_tile_small" }
+    }
+}

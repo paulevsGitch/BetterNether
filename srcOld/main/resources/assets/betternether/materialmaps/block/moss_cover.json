@@ -1,0 +1,14 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/moss_parts",
+				"material": "betternether:wave_glow_50_half"
+			},
+			{
+				"sprite": "betternether:block/moss_side",
+				"material": "betternether:offset_floor"
+			}
+		]
+	}
+}

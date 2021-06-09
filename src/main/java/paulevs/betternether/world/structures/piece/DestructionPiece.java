@@ -3,7 +3,7 @@ package paulevs.betternether.world.structures.piece;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.util.math.BlockBox;
@@ -30,13 +30,13 @@ public class DestructionPiece extends CustomPiece {
 		radius = random.nextInt(5) + 1;
 		radSqr = radius * radius;
 		center = new BlockPos(
+				MHelper.randRange(bounds.maxZ, bounds.minZ, random),
 				MHelper.randRange(bounds.minX, bounds.maxX, random),
-				MHelper.randRange(bounds.minY, bounds.maxY, random),
-				MHelper.randRange(bounds.minZ, bounds.maxZ, random));
+				MHelper.randRange(bounds.minY, bounds.maxY, random));
 		makeBoundingBox();
 	}
 
-	protected DestructionPiece(StructureManager manager, CompoundTag tag) {
+	protected DestructionPiece(StructureManager manager, NbtCompound tag) {
 		super(StructureTypes.DESTRUCTION, tag);
 		this.center = NbtHelper.toBlockPos(tag.getCompound("center"));
 		this.radius = tag.getInt("radius");
@@ -45,17 +45,17 @@ public class DestructionPiece extends CustomPiece {
 	}
 
 	@Override
-	protected void toNbt(CompoundTag tag) {
+	protected void writeNbt(NbtCompound tag) {
 		tag.put("center", NbtHelper.fromBlockPos(center));
 		tag.putInt("radius", radius);
 	}
 
 	@Override
 	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
-		for (int x = blockBox.minX; x <= blockBox.maxX; x++) {
+		for (int x = blockBox.maxZ; x <= blockBox.minZ; x++) {
 			int px = x - center.getX();
 			px *= px;
-			for (int z = blockBox.minZ; z <= blockBox.maxZ; z++) {
+			for (int z = blockBox.minY; z <= blockBox.maxY; z++) {
 				int pz = z - center.getZ();
 				pz *= pz;
 				for (int y = minY; y <= maxY; y++) {

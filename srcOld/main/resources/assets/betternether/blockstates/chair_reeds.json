@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"facing=east,top=false":  { "model": "betternether:block/chair_reeds", "y": 90 },
+		"facing=west,top=false":  { "model": "betternether:block/chair_reeds", "y": 270 },
+		"facing=south,top=false": { "model": "betternether:block/chair_reeds", "y": 180 },
+		"facing=north,top=false": { "model": "betternether:block/chair_reeds" },
+		"top=true": { "model": "betternether:block/chair_reeds_top" }
+	}
+}

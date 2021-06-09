@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    " # ",
+    "BBB"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_forged"
+    },
+	"B": {
+      "item": "minecraft:nether_bricks"
+    }
+  },
+  "result": {
+    "item": "betternether:cincinnasite_anvil"
+  }
+}

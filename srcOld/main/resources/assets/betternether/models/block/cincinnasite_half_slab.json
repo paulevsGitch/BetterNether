@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab",
+    "textures": {
+        "bottom": "betternether:block/cincinnasite_plate_up",
+        "top": "betternether:block/cincinnasite_plate_up",
+        "side": "betternether:block/cincinnasite_slab"
+    }
+}

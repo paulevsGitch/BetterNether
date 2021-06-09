@@ -1,0 +1,10 @@
+{
+	"layers": [
+		{
+			"vertexSource": "betternether:shaders/material/wave_large.vert",
+			"fragmentSource": "canvas:shaders/material/default.frag",
+			"disableAo": true,
+			"disableDiffuse": true
+		}
+	]
+}

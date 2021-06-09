@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "betternether:block/mushroom_fir_sapling"
+    }
+}

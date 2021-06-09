@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,open=false": {
+      "x": 180,
+      "model": "betternether:block/barrel_stalagnate"
+    },
+    "facing=down,open=true": {
+      "x": 180,
+      "model": "betternether:block/barrel_stalagnate_open"
+    },
+    "facing=east,open=false": {
+      "x": 90,
+      "y": 90,
+      "model": "betternether:block/barrel_stalagnate"
+    },
+    "facing=east,open=true": {
+      "x": 90,
+      "y": 90,
+      "model": "betternether:block/barrel_stalagnate_open"
+    },
+    "facing=north,open=false": {
+      "x": 90,
+      "model": "betternether:block/barrel_stalagnate"
+    },
+    "facing=north,open=true": {
+      "x": 90,
+      "model": "betternether:block/barrel_stalagnate_open"
+    },
+    "facing=south,open=false": {
+      "x": 90,
+      "y": 180,
+      "model": "betternether:block/barrel_stalagnate"
+    },
+    "facing=south,open=true": {
+      "x": 90,
+      "y": 180,
+      "model": "betternether:block/barrel_stalagnate_open"
+    },
+    "facing=up,open=false": {
+      "model": "betternether:block/barrel_stalagnate"
+    },
+    "facing=up,open=true": {
+      "model": "betternether:block/barrel_stalagnate_open"
+    },
+    "facing=west,open=false": {
+      "x": 90,
+      "y": 270,
+      "model": "betternether:block/barrel_stalagnate"
+    },
+    "facing=west,open=true": {
+      "x": 90,
+      "y": 270,
+      "model": "betternether:block/barrel_stalagnate_open"
+    }
+  }
+}

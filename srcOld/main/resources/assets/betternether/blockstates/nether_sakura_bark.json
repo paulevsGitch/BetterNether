@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "betternether:block/nether_sakura_bark" },
+        "axis=z": { "model": "betternether:block/nether_sakura_bark", "x": 90 },
+        "axis=x": { "model": "betternether:block/nether_sakura_bark", "x": 90, "y": 90 }
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#N#",
+	" # "
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+	"N": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "result": {
+    "item": "betternether:cincinnasite_pot"
+  }
+}

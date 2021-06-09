@@ -1,0 +1,18 @@
+{
+    "variants":
+	{
+        "shape=bottom": [
+			{ "model": "betternether:block/whispering_gourd_vine_end" },
+			{ "model": "betternether:block/whispering_gourd_vine_end", "y": 90 },
+			{ "model": "betternether:block/whispering_gourd_vine_end", "y": 180 },
+			{ "model": "betternether:block/whispering_gourd_vine_end", "y": 270 }
+		],
+        "shape=middle": [
+			{ "model": "betternether:block/whispering_gourd_vine_fruits" },
+			{ "model": "betternether:block/whispering_gourd_vine_fruits", "y": 90 },
+			{ "model": "betternether:block/whispering_gourd_vine_fruits", "y": 180 },
+			{ "model": "betternether:block/whispering_gourd_vine_fruits", "y": 270 }
+		],
+        "shape=top": { "model": "betternether:block/whispering_gourd_vine" }
+    }
+}

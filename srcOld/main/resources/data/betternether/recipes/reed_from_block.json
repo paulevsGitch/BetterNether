@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:reeds_block"
+    }
+  },
+  "result": {
+    "item": "betternether:nether_reed",
+	"count": 36
+  }
+}

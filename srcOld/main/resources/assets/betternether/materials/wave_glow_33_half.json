@@ -1,0 +1,10 @@
+{
+	"layers": [
+		{
+			"vertexSource": "betternether:shaders/material/wave.vert",
+			"fragmentSource": "betternether:shaders/material/glow_33_half.frag",
+			"disableAo": true,
+			"disableDiffuse": true
+		}
+	]
+}

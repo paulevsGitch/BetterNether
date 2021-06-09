@@ -1,0 +1,7 @@
+{
+    "variants": {
+		"axis=y": { "model": "betternether:block/mushroom_fir_trunk_middle" },
+        "axis=z": { "model": "betternether:block/mushroom_fir_trunk_middle", "x": 90 },
+        "axis=x": { "model": "betternether:block/mushroom_fir_trunk_middle", "x": 90, "y": 90 }
+	}
+}

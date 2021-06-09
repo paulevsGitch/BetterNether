@@ -1,0 +1,25 @@
+{
+    "variants":
+	{
+		"destructed=false": [
+			{ "model": "betternether:block/egg_plant_01" },
+			{ "model": "betternether:block/egg_plant_01", "y": 90 },
+			{ "model": "betternether:block/egg_plant_01", "y": 180 },
+			{ "model": "betternether:block/egg_plant_01", "y": 270 },
+			{ "model": "betternether:block/egg_plant_02" },
+			{ "model": "betternether:block/egg_plant_02", "y": 90 },
+			{ "model": "betternether:block/egg_plant_02", "y": 180 },
+			{ "model": "betternether:block/egg_plant_02", "y": 270 },
+			{ "model": "betternether:block/egg_plant_03" },
+			{ "model": "betternether:block/egg_plant_03", "y": 90 },
+			{ "model": "betternether:block/egg_plant_03", "y": 180 },
+			{ "model": "betternether:block/egg_plant_03", "y": 270 }
+		],
+		"destructed=true": [
+			{ "model": "betternether:block/egg_plant_destructed" },
+			{ "model": "betternether:block/egg_plant_destructed", "y": 90 },
+			{ "model": "betternether:block/egg_plant_destructed", "y": 180 },
+			{ "model": "betternether:block/egg_plant_destructed", "y": 270 }
+		]
+    }
+}

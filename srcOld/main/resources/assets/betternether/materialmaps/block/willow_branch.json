@@ -1,0 +1,22 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/willow_bark_end",
+				"material": "betternether:large_wave_glow_inc"
+			},
+			{
+				"sprite": "betternether:block/willow_leaves",
+				"material": "betternether:waving_large"
+			},
+			{
+				"sprite": "betternether:block/willow_leaves_end",
+				"material": "betternether:waving_large"
+			},
+			{
+				"sprite": "betternether:block/willow_bark",
+				"material": "betternether:waving_large"
+			}
+		]
+	}
+}

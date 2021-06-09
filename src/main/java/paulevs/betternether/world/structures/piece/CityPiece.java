@@ -3,7 +3,7 @@ package paulevs.betternether.world.structures.piece;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.processor.StructureProcessor;
@@ -40,7 +40,7 @@ public class CityPiece extends CustomPiece {
 		this.paletteProcessor = new BuildingStructureProcessor(palette);
 	}
 
-	protected CityPiece(StructureManager manager, CompoundTag tag) {
+	protected CityPiece(StructureManager manager, NbtCompound tag) {
 		super(StructureTypes.NETHER_CITY, tag);
 		this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"));
 		this.building = this.building.getRotated(BlockRotation.values()[tag.getInt("rotation")]);
@@ -52,7 +52,7 @@ public class CityPiece extends CustomPiece {
 	}
 
 	@Override
-	protected void toNbt(CompoundTag tag) {
+	protected void writeNbt(NbtCompound tag) {
 		tag.putString("building", building.getName());
 		tag.putInt("rotation", building.getRotation().ordinal());
 		tag.putInt("mirror", building.getMirror().ordinal());
@@ -68,26 +68,26 @@ public class CityPiece extends CustomPiece {
 
 		BlockBox clamped = new BlockBox(boundingBox);
 
+		clamped.maxZ = Math.max(clamped.maxZ, blockBox.maxZ);
+		clamped.minZ = Math.min(clamped.minZ, blockBox.minZ);
+
 		clamped.minX = Math.max(clamped.minX, blockBox.minX);
 		clamped.maxX = Math.min(clamped.maxX, blockBox.maxX);
 
 		clamped.minY = Math.max(clamped.minY, blockBox.minY);
 		clamped.maxY = Math.min(clamped.maxY, blockBox.maxY);
 
-		clamped.minZ = Math.max(clamped.minZ, blockBox.minZ);
-		clamped.maxZ = Math.min(clamped.maxZ, blockBox.maxZ);
-
 		building.placeInChunk(world, pos, clamped, paletteProcessor);
 
 		Chunk chunk = world.getChunk(chunkPos.x, chunkPos.z);
 
 		BlockState state;
-		for (int x = clamped.minX; x <= clamped.maxX; x++)
-			for (int z = clamped.minZ; z <= clamped.maxZ; z++) {
-				POS.set(x, clamped.minY, z);
+		for (int x = clamped.maxZ; x <= clamped.minZ; x++)
+			for (int z = clamped.minY; z <= clamped.maxY; z++) {
+				POS.set(x, clamped.minX, z);
 				state = world.getBlockState(POS);
 				if (!state.isAir() && state.isFullCube(world, POS)) {
-					for (int y = clamped.minY - 1; y > 4; y--) {
+					for (int y = clamped.minX - 1; y > 4; y--) {
 						POS.setY(y);
 						BlocksHelper.setWithoutUpdate(world, POS, state);
 						if (BlocksHelper.isNetherGroundMagma(world.getBlockState(POS.down())))
@@ -96,7 +96,7 @@ public class CityPiece extends CustomPiece {
 				}
 
 				// POS.set(x - clamped.minX, clamped.minY - clamped.minZ, z);
-				for (int y = clamped.minY; y <= clamped.maxY; y++) {
+				for (int y = clamped.minX; y <= clamped.maxX; y++) {
 					POS.setY(y);
 					chunk.markBlockForPostProcessing(POS);
 				}

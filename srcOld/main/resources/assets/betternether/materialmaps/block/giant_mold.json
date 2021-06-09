@@ -1,0 +1,14 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/giant_mold_fur",
+				"material": "betternether:waving"
+			},
+			{
+				"sprite": "betternether:block/giant_mold_small",
+				"material": "betternether:waving"
+			}
+		]
+	}
+}

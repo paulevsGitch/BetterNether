@@ -1,0 +1,17 @@
+{
+	"variants":
+	{
+        "up=true": [
+			{ "model": "betternether:block/soul_sandstone" },
+			{ "model": "betternether:block/soul_sandstone", "y": 90 },
+			{ "model": "betternether:block/soul_sandstone", "y": 180 },
+			{ "model": "betternether:block/soul_sandstone", "y": 270 }
+		],
+		"up=false": [
+			{ "model": "betternether:block/soul_sandstone_bottom" },
+			{ "model": "betternether:block/soul_sandstone_bottom", "y": 90 },
+			{ "model": "betternether:block/soul_sandstone_bottom", "y": 180 },
+			{ "model": "betternether:block/soul_sandstone_bottom", "y": 270 }
+		]
+    }
+}

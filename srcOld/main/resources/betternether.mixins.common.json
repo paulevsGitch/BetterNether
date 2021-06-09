@@ -1,0 +1,35 @@
+{
+  "required": true,
+  "package": "paulevs.betternether.mixin.common",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+	"DefaultAttributeRegistryMixin",
+	"ServerPlayNetworkHandlerMixin",
+	"GenerationSettingsAccessor",
+	"BastionRemnantFeatureMixin",
+	"NetherFortressFeatureMixin",
+	"BrewingRecipeRegistryMixin",
+	"CraftingScreenHandlerMixin",
+	"SpawnRestrictionMixin",
+	"RecipeManagerAccessor",
+	"MinecraftServerMixin",
+	"ChunkSerializerMixin",
+	"ChunkPopulateMixin",
+	"RecipeManagerMixin",
+	"DimensionTypeMixin",
+	"LightStorageMixin",
+	"DeltaFeatureMixin",
+	"PlayerEntityMixin",
+	"ServerWorldMixin",
+	"PickaxeItemMixin",
+	"SheepEntityMixin",
+	"NetherWartMixin",
+	"MushroomMixin",
+	"MapStateMixin",
+	"BoneMealMixin",
+	"MapMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

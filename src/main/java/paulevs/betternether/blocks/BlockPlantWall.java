@@ -11,7 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
@@ -35,7 +35,7 @@ public class BlockPlantWall extends BlockBaseNotFull {
 			Direction.EAST, Block.createCuboidShape(0, 2, 2, 6, 14, 14)));
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
-	public BlockPlantWall(MaterialColor color) {
+	public BlockPlantWall(MapColor color) {
 		super(Materials.makeGrass(color));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

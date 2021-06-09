@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "betternether:block/striped_log_nether_sakura_side",
+        "down": "betternether:block/striped_log_nether_sakura_top",
+        "up": "betternether:block/striped_log_nether_sakura_top",
+        "north": "betternether:block/striped_log_nether_sakura_side",
+        "east": "betternether:block/striped_log_nether_sakura_side",
+        "south": "betternether:block/striped_log_nether_sakura_side",
+        "west": "betternether:block/striped_log_nether_sakura_side"
+    }
+}

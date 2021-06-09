@@ -1,0 +1,10 @@
+{
+	"replace": "false",
+	"values": [
+		"betternether:nether_mycelium",
+		"betternether:jungle_grass",
+		"betternether:mushroom_grass",
+		"betternether:sepia_mushroom_grass",
+		"betternether:swampland_grass"
+	]
+}

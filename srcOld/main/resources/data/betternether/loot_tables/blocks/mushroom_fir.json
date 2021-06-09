@@ -1,0 +1,76 @@
+{
+    "type": "block",
+    "pools": [
+        {
+            "rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:alternatives",
+					"children": [
+						{
+							"type": "minecraft:item",
+							"name": "betternether:mushroom_fir_stem",
+							"conditions": [
+								{
+									"condition": "minecraft:block_state_property",
+									"block": "betternether:mushroom_fir",
+									"properties": {
+										"shape": "bottom"
+									}
+								},
+								{
+									"condition": "minecraft:survives_explosion"
+								}
+							]
+						},
+						{
+							"type": "minecraft:item",
+							"name": "betternether:mushroom_fir_stem",
+							"conditions": [
+								{
+									"condition": "minecraft:block_state_property",
+									"block": "betternether:mushroom_fir",
+									"properties": {
+										"shape": "middle"
+									}
+								},
+								{
+									"condition": "minecraft:survives_explosion"
+								}
+							]
+						},
+						{
+							"type": "minecraft:item",
+							"name": "betternether:mushroom_fir_stem",
+							"conditions": [
+								{
+									"condition": "minecraft:block_state_property",
+									"block": "betternether:mushroom_fir",
+									"properties": {
+										"shape": "top"
+									}
+								},
+								{
+									"condition": "minecraft:survives_explosion"
+								}
+							]
+						},
+						{
+							"type": "minecraft:item",
+							"name": "betternether:mushroom_fir_sapling",
+							"functions": [
+								{
+									"function": "set_count",
+									"count": {
+										"min": 0,
+										"max": 2
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+    ]
+}

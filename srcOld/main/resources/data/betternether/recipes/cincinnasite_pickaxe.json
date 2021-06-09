@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+	" S ",
+	" S "
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+	"S": {
+      "item": "betternether:nether_reed"
+    }
+  },
+  "result": {
+    "item": "betternether:cincinnasite_pickaxe"
+  }
+}

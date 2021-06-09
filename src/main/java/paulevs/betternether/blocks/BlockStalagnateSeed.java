@@ -7,8 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
@@ -33,7 +33,7 @@ public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizabl
 
 	public BlockStalagnateSeed() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.CYAN)
+				.materialColor(MapColor.CYAN)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.breakInstantly()

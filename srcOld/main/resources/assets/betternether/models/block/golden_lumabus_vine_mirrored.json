@@ -1,0 +1,7 @@
+{
+	"parent": "betternether:block/lumabus_vine_mirrored",
+	"textures": {
+		"particle": "betternether:block/golden_lumabus_vine",
+		"texture": "betternether:block/golden_lumabus_vine"
+	}
+}

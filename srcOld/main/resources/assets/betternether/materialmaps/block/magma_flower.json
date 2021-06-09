@@ -1,0 +1,14 @@
+{
+	"defaultMap": {
+		"spriteMap": [
+			{
+				"sprite": "betternether:block/magma_flower_side",
+				"material": "betternether:glow_33"
+			},
+			{
+				"sprite": "betternether:block/magma_flower_top",
+				"material": "betternether:glow_33"
+			}
+		]
+	}
+}

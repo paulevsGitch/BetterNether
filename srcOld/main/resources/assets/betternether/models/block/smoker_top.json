@@ -1,0 +1,23 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "betternether:block/smoker_top",
+		"texture": "betternether:block/smoker_top"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 4, 0, 4 ],
+			"to": [ 12, 8, 12 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 8, 16 ], "texture": "#texture" },
+				"up": { "uv": [ 8, 0, 16, 8 ], "texture": "#texture" },
+				"north": { "uv": [ 0, 0, 8, 8 ], "texture": "#texture" },
+				"south": { "uv": [ 0, 0, 8, 8 ], "texture": "#texture" },
+				"west": { "uv": [ 0, 0, 8, 8 ], "texture": "#texture" },
+				"east": { "uv": [ 0, 0, 8, 8 ], "texture": "#texture" }
+			}
+		}
+	]
+}

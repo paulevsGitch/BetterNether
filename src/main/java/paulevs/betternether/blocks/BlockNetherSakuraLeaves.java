@@ -9,7 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
@@ -31,7 +31,7 @@ public class BlockNetherSakuraLeaves extends BlockBaseNotFull {
 	private static final int COLOR = MHelper.color(251, 113, 143);
 
 	public BlockNetherSakuraLeaves() {
-		super(Materials.makeLeaves(MaterialColor.PINK).luminance((state) -> {
+		super(Materials.makeLeaves(MapColor.PINK).luminance((state) -> {
 			return 13;
 		}));
 		this.setDropItself(false);
