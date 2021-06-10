@@ -1,6 +1,0 @@
-{
-    "parent": "block/button",
-    "textures": {
-        "texture": "betternether:block/cincinnasite_button"
-    }
-}

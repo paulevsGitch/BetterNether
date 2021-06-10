@@ -1,8 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "betternether:block/anchor_tree_planks",
-        "top": "betternether:block/anchor_tree_planks",
-        "side": "betternether:block/anchor_tree_planks"
-    }
-}

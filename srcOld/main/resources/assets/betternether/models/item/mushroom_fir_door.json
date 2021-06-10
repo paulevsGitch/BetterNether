@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-    "textures": {
-        "layer0": "betternether:item/mushroom_fir_door"
-    }
-}

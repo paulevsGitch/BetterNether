@@ -1,6 +1,0 @@
-{
-	"parent": "betternether:block/netherite_fire_bowl_off",
-	"textures": {
-		"top": "betternether:block/netherite_fire_bowl_top_soul"
-	}
-}

@@ -1,9 +1,0 @@
-{
-    "variants":
-	{
-        "":
-		[
-			{ "model": "betternether:block/wart_planks" }
-		]
-    }
-}

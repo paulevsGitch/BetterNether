@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "powered=false": { "model": "betternether:block/reeds_pressure_plate_up" },
-        "powered=true": { "model": "betternether:block/reeds_pressure_plate_down" }
-    }
-}

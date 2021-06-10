@@ -1,9 +1,0 @@
-{
-	"variants": {
-		"facing=east,top=false":  { "model": "betternether:block/chair_cincinnasite", "y": 90 },
-		"facing=west,top=false":  { "model": "betternether:block/chair_cincinnasite", "y": 270 },
-		"facing=south,top=false": { "model": "betternether:block/chair_cincinnasite", "y": 180 },
-		"facing=north,top=false": { "model": "betternether:block/chair_cincinnasite" },
-		"top=true": { "model": "betternether:block/chair_cincinnasite_top" }
-	}
-}

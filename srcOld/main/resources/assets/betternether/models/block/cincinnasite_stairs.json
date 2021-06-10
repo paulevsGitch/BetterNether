@@ -1,8 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "betternether:block/cincinnasite_forged",
-        "top": "betternether:block/cincinnasite_forged",
-        "side": "betternether:block/cincinnasite_forged"
-    }
-}

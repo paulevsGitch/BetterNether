@@ -1,9 +1,0 @@
-{
-	"variants":
-	{
-        "":  [
-			{ "model": "betternether:block/wart_roots" },
-			{ "model": "betternether:block/wart_roots", "y": 180 }
-		]
-    }
-}

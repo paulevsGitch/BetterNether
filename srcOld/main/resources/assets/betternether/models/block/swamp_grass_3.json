@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "betternether:block/swamp_grass_2"
-    }
-}

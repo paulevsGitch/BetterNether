@@ -1,9 +1,0 @@
-{
-    "variants":
-	{
-        "":
-		[
-			{ "model": "betternether:block/stalagnate_planks" }
-		]
-    }
-}

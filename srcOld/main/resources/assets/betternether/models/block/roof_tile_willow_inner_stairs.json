@@ -1,8 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "betternether:block/roof_tile_willow",
-        "top": "betternether:block/roof_tile_willow",
-        "side": "betternether:block/roof_tile_willow"
-    }
-}

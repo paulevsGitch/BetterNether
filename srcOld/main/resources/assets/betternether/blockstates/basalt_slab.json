@@ -1,8 +1,0 @@
-{
-    "variants":
-	{
-        "type=bottom": { "model": "betternether:block/basalt_slab" },
-        "type=top": { "model": "betternether:block/basalt_slab", "x": 180, "uvlock": true },
-        "type=double": { "model": "block/basalt" }
-    }
-}

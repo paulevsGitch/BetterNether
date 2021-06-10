@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "powered=false": { "model": "betternether:block/cincinnasite_pressure_plate_up" },
-        "powered=true": { "model": "betternether:block/cincinnasite_pressure_plate_down" }
-    }
-}

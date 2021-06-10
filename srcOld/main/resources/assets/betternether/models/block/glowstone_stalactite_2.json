@@ -1,7 +1,0 @@
-{
-	"parent": "betternether:block/stalactite_2",
-	"textures": {
-		"particle": "block/glowstone",
-		"texture": "block/glowstone"
-	}
-}

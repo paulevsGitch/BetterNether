@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "betternether:block/sepia_bone_grass_1"
-    }
-}

@@ -1,8 +1,0 @@
-{
-	"parent": "betternether:block/lumabus_bulb_1",
-	"textures": {
-		"particle": "betternether:block/golden_lumabus_bulb_2",
-		"texture": "betternether:block/golden_lumabus_bulb_2",
-		"leaves": "betternether:block/golden_lumabus_leaves"
-	}
-}

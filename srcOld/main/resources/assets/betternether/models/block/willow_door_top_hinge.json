@@ -1,7 +1,0 @@
-{
-    "parent": "block/door_top_rh",
-    "textures": {
-        "bottom": "betternether:block/willow_door_top",
-        "top": "betternether:block/willow_door_top"
-    }
-}

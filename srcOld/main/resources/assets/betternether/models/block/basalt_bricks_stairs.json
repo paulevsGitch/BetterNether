@@ -1,8 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "betternether:block/basalt_bricks_2",
-        "top": "betternether:block/basalt_bricks_2",
-        "side": "betternether:block/basalt_bricks_2"
-    }
-}

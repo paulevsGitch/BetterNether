@@ -1,8 +1,0 @@
-{
-	"variants":
-	{
-        "":  [
-			{ "model": "betternether:block/cincinnasite_pot" }
-		]
-    }
-}

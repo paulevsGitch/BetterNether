@@ -1,8 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "betternether:block/mushroom_planks",
-        "top": "betternether:block/mushroom_planks",
-        "side": "betternether:block/mushroom_planks"
-    }
-}

@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "betternether:block/crimson_ladder" },
-        "facing=east":  { "model": "betternether:block/crimson_ladder", "y": 90 },
-        "facing=south": { "model": "betternether:block/crimson_ladder", "y": 180 },
-        "facing=west":  { "model": "betternether:block/crimson_ladder", "y": 270 }
-    }
-}

@@ -1,8 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "betternether:block/obsidian_bricks",
-        "top": "betternether:block/obsidian_bricks",
-        "side": "betternether:block/obsidian_bricks"
-    }
-}

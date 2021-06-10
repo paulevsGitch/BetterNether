@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "powered=false": { "model": "betternether:block/anchor_tree_pressure_plate_up" },
-        "powered=true": { "model": "betternether:block/anchor_tree_pressure_plate_down" }
-    }
-}

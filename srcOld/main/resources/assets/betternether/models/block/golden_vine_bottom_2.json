@@ -1,6 +1,0 @@
-{
-    "parent": "betternether:block/cross_inverted",
-    "textures": {
-        "cross": "betternether:block/golden_vine_bottom"
-    }
-}

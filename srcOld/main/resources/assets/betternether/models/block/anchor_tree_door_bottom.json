@@ -1,7 +1,0 @@
-{
-    "parent": "betternether:block/stalagnate_planks_door_bottom",
-    "textures": {
-        "texture": "betternether:block/anchor_tree_door_bottom",
-        "particle": "betternether:block/anchor_tree_door_bottom"
-    }
-}

@@ -1,7 +1,0 @@
-{
-    "parent": "betternether:block/reeds_ladder",
-    "textures": {
-        "particle": "betternether:block/wart_ladder",
-		"texture": "betternether:block/wart_ladder"
-    }
-}

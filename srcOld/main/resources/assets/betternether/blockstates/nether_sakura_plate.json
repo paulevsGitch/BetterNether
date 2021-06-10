@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "powered=false": { "model": "betternether:block/nether_sakura_pressure_plate_up" },
-        "powered=true": { "model": "betternether:block/nether_sakura_pressure_plate_down" }
-    }
-}

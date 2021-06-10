@@ -1,8 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "betternether:block/soul_sandstone_top",
-        "top": "betternether:block/soul_sandstone_top",
-        "side": "betternether:block/soul_sandstone_top"
-    }
-}
