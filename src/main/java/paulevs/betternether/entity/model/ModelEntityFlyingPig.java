@@ -138,7 +138,7 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig> {
 		this.legA = this.body.getChild(EntityModelPartNames.RIGHT_LEG);
 
 		this.leftWing = this.body.getChild(EntityModelPartNames.LEFT_WING);
-		this.leftWingTip = this.rightWing.getChild(EntityModelPartNames.LEFT_WING_TIP);
+		this.leftWingTip = this.leftWing.getChild(EntityModelPartNames.LEFT_WING_TIP);
 		this.legB = this.body.getChild(EntityModelPartNames.LEFT_LEG);
 	}
 

@@ -13,7 +13,6 @@
 	"StandArmorMixin",
 	"LavaFluidMixin",
     "EntityModelLayersMixin",
-    "EntityModelsMixin",
     "TexturedModelDataMixin"
   ],
   "injectors": {

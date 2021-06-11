@@ -1,6 +1,9 @@
 package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.Bootstrap;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.entity.model.EntityModelLoader;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.recipes.IntegrationRecipes;
@@ -25,6 +28,8 @@ public class BetterNether implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		System.out.println("######## BetterNether 1.17 ########");
+		//MinecraftClient.getInstance().getEntityModelLoader().reload(MinecraftClient.getInstance().getResourceManager());
 		initOptions();
 		SoundsRegistry.register();
 		BlocksRegistry.register();
