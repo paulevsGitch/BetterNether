@@ -11,6 +11,8 @@ import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
@@ -22,9 +24,11 @@ import net.minecraft.stat.Stats;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.blockentities.BlockEntityFurnace;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
+
+import javax.annotation.Nullable;
 
 public class BlockNetherFurnace extends AbstractFurnaceBlock {
 	public BlockNetherFurnace(Block source) {
@@ -39,6 +43,11 @@ public class BlockNetherFurnace extends AbstractFurnaceBlock {
 
 	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
 		return new BlockEntityFurnace(pos, state);
+	}
+
+	@Nullable
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+		return checkType(world, type, BlockEntitiesRegistry.NETHERRACK_FURNACE);
 	}
 
 	@Override
