@@ -33,8 +33,8 @@ public class BNBarrel extends BarrelBlock {
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView world) {
-		return BlockEntitiesRegistry.BARREL.instantiate();
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return BlockEntitiesRegistry.BARREL.instantiate(pos, state);
 	}
 
 	@Override

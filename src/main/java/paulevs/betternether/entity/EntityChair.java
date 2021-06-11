@@ -1,5 +1,6 @@
 package paulevs.betternether.entity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -16,12 +17,12 @@ public class EntityChair extends MobEntity {
 	@Override
 	public void tick() {
 		if (!this.hasPassengers())
-			this.remove();
-		else if (this.getBlockState().getBlock() instanceof BNChair)
+			this.discard();
+		else if (this.world.getBlockState(this.getBlockPos()).getBlock() instanceof BNChair)
 			super.tick();
 		else {
 			this.removeAllPassengers();
-			this.remove();
+			this.discard();
 		}
 	}
 
@@ -33,7 +34,7 @@ public class EntityChair extends MobEntity {
 	
 	@Override
 	public boolean isAlive() {
-		return !this.removed;
+		return !this.isRemoved();
 	}
 	
 	public static DefaultAttributeContainer getAttributeContainer() {

@@ -16,13 +16,16 @@ import net.minecraft.block.DoubleBlockProperties.PropertySource;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.client.block.ChestAnimationProgress;
-import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.block.entity.LightmapCoordinatesRetriever;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
@@ -42,94 +45,108 @@ public class BNChestBlockEntityRenderer implements BlockEntityRenderer<BNChestBl
 	private static final int ID_LEFT = 1;
 	private static final int ID_RIGHT = 2;
 
-	private final ModelPart partA;
-	private final ModelPart partC;
-	private final ModelPart partB;
-	private final ModelPart partRightA;
-	private final ModelPart partRightC;
-	private final ModelPart partRightB;
-	private final ModelPart partLeftA;
-	private final ModelPart partLeftC;
-	private final ModelPart partLeftB;
+	private static final String BASE = "bottom";
+	private static final String LID = "lid";
+	private static final String LATCH = "lock";
+	private final ModelPart singleChestLid;
+	private final ModelPart singleChestBase;
+	private final ModelPart singleChestLatch;
+	private final ModelPart doubleChestRightLid;
+	private final ModelPart doubleChestRightBase;
+	private final ModelPart doubleChestRightLatch;
+	private final ModelPart doubleChestLeftLid;
+	private final ModelPart doubleChestLeftBase;
+	private final ModelPart doubleChestLeftLatch;
 
-	public BNChestBlockEntityRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher) {
-		super(blockEntityRenderDispatcher);
+	public BNChestBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+		ModelPart modelPart = ctx.getLayerModelPart(EntityModelLayers.CHEST);
+		this.singleChestBase = modelPart.getChild(BASE);
+		this.singleChestLid = modelPart.getChild(LID);
+		this.singleChestLatch = modelPart.getChild(LATCH);
+		ModelPart modelPart2 = ctx.getLayerModelPart(EntityModelLayers.DOUBLE_CHEST_LEFT);
+		this.doubleChestRightBase = modelPart2.getChild(BASE);
+		this.doubleChestRightLid = modelPart2.getChild(LID);
+		this.doubleChestRightLatch = modelPart2.getChild(LATCH);
+		ModelPart modelPart3 = ctx.getLayerModelPart(EntityModelLayers.DOUBLE_CHEST_RIGHT);
+		this.doubleChestLeftBase = modelPart3.getChild(BASE);
+		this.doubleChestLeftLid = modelPart3.getChild(LID);
+		this.doubleChestLeftLatch = modelPart3.getChild(LATCH);
+	}
 
-		this.partC = new ModelPart(64, 64, 0, 19);
-		this.partC.addCuboid(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F, 0.0F);
-		this.partA = new ModelPart(64, 64, 0, 0);
-		this.partA.addCuboid(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F, 0.0F);
-		this.partA.pivotY = 9.0F;
-		this.partA.pivotZ = 1.0F;
-		this.partB = new ModelPart(64, 64, 0, 0);
-		this.partB.addCuboid(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
-		this.partB.pivotY = 8.0F;
-		this.partRightC = new ModelPart(64, 64, 0, 19);
-		this.partRightC.addCuboid(1.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
-		this.partRightA = new ModelPart(64, 64, 0, 0);
-		this.partRightA.addCuboid(1.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
-		this.partRightA.pivotY = 9.0F;
-		this.partRightA.pivotZ = 1.0F;
-		this.partRightB = new ModelPart(64, 64, 0, 0);
-		this.partRightB.addCuboid(15.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
-		this.partRightB.pivotY = 8.0F;
-		this.partLeftC = new ModelPart(64, 64, 0, 19);
-		this.partLeftC.addCuboid(0.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
-		this.partLeftA = new ModelPart(64, 64, 0, 0);
-		this.partLeftA.addCuboid(0.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
-		this.partLeftA.pivotY = 9.0F;
-		this.partLeftA.pivotZ = 1.0F;
-		this.partLeftB = new ModelPart(64, 64, 0, 0);
-		this.partLeftB.addCuboid(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
-		this.partLeftB.pivotY = 8.0F;
+	public static TexturedModelData getSingleTexturedModelData() {
+		ModelData modelData = new ModelData();
+		ModelPartData modelPartData = modelData.getRoot();
+		modelPartData.addChild(BASE, ModelPartBuilder.create().uv(0, 19).cuboid(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F), ModelTransform.NONE);
+		modelPartData.addChild(LID, ModelPartBuilder.create().uv(0, 0).cuboid(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F), ModelTransform.pivot(0.0F, 9.0F, 1.0F));
+		modelPartData.addChild(LATCH, ModelPartBuilder.create().uv(0, 0).cuboid(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F), ModelTransform.pivot(0.0F, 8.0F, 0.0F));
+		return TexturedModelData.of(modelData, 64, 64);
+	}
+
+	public static TexturedModelData getRightDoubleTexturedModelData() {
+		ModelData modelData = new ModelData();
+		ModelPartData modelPartData = modelData.getRoot();
+		modelPartData.addChild(BASE, ModelPartBuilder.create().uv(0, 19).cuboid(1.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F), ModelTransform.NONE);
+		modelPartData.addChild(LID, ModelPartBuilder.create().uv(0, 0).cuboid(1.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F), ModelTransform.pivot(0.0F, 9.0F, 1.0F));
+		modelPartData.addChild(LATCH, ModelPartBuilder.create().uv(0, 0).cuboid(15.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F), ModelTransform.pivot(0.0F, 8.0F, 0.0F));
+		return TexturedModelData.of(modelData, 64, 64);
+	}
+
+	public static TexturedModelData getLeftDoubleTexturedModelData() {
+		ModelData modelData = new ModelData();
+		ModelPartData modelPartData = modelData.getRoot();
+		modelPartData.addChild(BASE, ModelPartBuilder.create().uv(0, 19).cuboid(0.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F), ModelTransform.NONE);
+		modelPartData.addChild(LID, ModelPartBuilder.create().uv(0, 0).cuboid(0.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F), ModelTransform.pivot(0.0F, 9.0F, 1.0F));
+		modelPartData.addChild(LATCH, ModelPartBuilder.create().uv(0, 0).cuboid(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F), ModelTransform.pivot(0.0F, 8.0F, 0.0F));
+		return TexturedModelData.of(modelData, 64, 64);
 	}
 
 	public void render(BNChestBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		World world = entity.getWorld();
-		boolean worldExists = world != null;
-		BlockState blockState = worldExists ? entity.getCachedState() : (BlockState) Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
-		ChestType chestType = blockState.contains(ChestBlock.CHEST_TYPE) ? (ChestType) blockState.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
+		boolean bl = world != null;
+		BlockState blockState = bl ? entity.getCachedState() : (BlockState)Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
+		ChestType chestType = blockState.contains(ChestBlock.CHEST_TYPE) ? (ChestType)blockState.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
 		Block block = blockState.getBlock();
 		if (block instanceof AbstractChestBlock) {
-			AbstractChestBlock<?> abstractChestBlock = (AbstractChestBlock<?>) block;
-			boolean isDouble = chestType != ChestType.SINGLE;
-			float f = ((Direction) blockState.get(ChestBlock.FACING)).asRotation();
-			PropertySource<? extends ChestBlockEntity> propertySource;
-
+			AbstractChestBlock<?> abstractChestBlock = (AbstractChestBlock)block;
+			boolean bl2 = chestType != ChestType.SINGLE;
 			matrices.push();
+			float f = ((Direction)blockState.get(ChestBlock.FACING)).asRotation();
 			matrices.translate(0.5D, 0.5D, 0.5D);
 			matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-f));
 			matrices.translate(-0.5D, -0.5D, -0.5D);
-
-			if (worldExists) {
-				propertySource = abstractChestBlock.getBlockEntitySource(blockState, world, entity.getPos(), true);
+			DoubleBlockProperties.PropertySource propertySource2;
+			if (bl) {
+				propertySource2 = abstractChestBlock.getBlockEntitySource(blockState, world, entity.getPos(), true);
+			} else {
+				propertySource2 = DoubleBlockProperties.PropertyRetriever::getFallback;
 			}
-			else {
-				propertySource = DoubleBlockProperties.PropertyRetriever::getFallback;
-			}
 
-			float pitch = ((Float2FloatFunction) propertySource.apply(ChestBlock.getAnimationProgressRetriever((ChestAnimationProgress) entity))).get(tickDelta);
-			pitch = 1.0F - pitch;
-			pitch = 1.0F - pitch * pitch * pitch;
-			@SuppressWarnings({ "unchecked", "rawtypes" })
-			int blockLight = ((Int2IntFunction) propertySource.apply(new LightmapCoordinatesRetriever())).applyAsInt(light);
+			float g = ((Float2FloatFunction)propertySource2.apply(ChestBlock.getAnimationProgressRetriever((ChestAnimationProgress)entity))).get(tickDelta);
+			g = 1.0F - g;
+			g = 1.0F - g * g * g;
+			int i = ((Int2IntFunction)propertySource2.apply(new LightmapCoordinatesRetriever())).applyAsInt(light);
 
 			VertexConsumer vertexConsumer = getConsumer(vertexConsumers, block, chestType);
-
-			if (isDouble) {
+			if (bl2) {
 				if (chestType == ChestType.LEFT) {
-					renderParts(matrices, vertexConsumer, this.partLeftA, this.partLeftB, this.partLeftC, pitch, blockLight, overlay);
+					this.render(matrices, vertexConsumer, this.doubleChestRightLid, this.doubleChestRightLatch, this.doubleChestRightBase, g, i, overlay);
+				} else {
+					this.render(matrices, vertexConsumer, this.doubleChestLeftLid, this.doubleChestLeftLatch, this.doubleChestLeftBase, g, i, overlay);
 				}
-				else {
-					renderParts(matrices, vertexConsumer, this.partRightA, this.partRightB, this.partRightC, pitch, blockLight, overlay);
-				}
-			}
-			else {
-				renderParts(matrices, vertexConsumer, this.partA, this.partB, this.partC, pitch, blockLight, overlay);
+			} else {
+				this.render(matrices, vertexConsumer, this.singleChestLid, this.singleChestLatch, this.singleChestBase, g, i, overlay);
 			}
 
 			matrices.pop();
 		}
+	}
+
+	private void render(MatrixStack matrices, VertexConsumer vertices, ModelPart lid, ModelPart latch, ModelPart base, float openFactor, int light, int overlay) {
+		lid.pitch = -(openFactor * 1.5707964F);
+		latch.pitch = lid.pitch;
+		lid.render(matrices, vertices, light, overlay);
+		latch.render(matrices, vertices, light, overlay);
+		base.render(matrices, vertices, light, overlay);
 	}
 
 	private void renderParts(MatrixStack matrices, VertexConsumer vertices, ModelPart modelPart, ModelPart modelPart2, ModelPart modelPart3, float pitch, int light, int overlay) {

@@ -22,10 +22,10 @@ import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.blocks.BlockNetherFurnace;
 
 public class BlockEntitiesRegistry {
-	public static final BlockEntityType<?> CINCINNASITE_FORGE = BlockEntityType.Builder.create(BlockEntityForge::new, BlocksRegistry.CINCINNASITE_FORGE).build(null);
-	public static final BlockEntityType<?> NETHERRACK_FURNACE = BlockEntityType.Builder.create(BlockEntityFurnace::new, getFurnaces()).build(null);
-	public static final BlockEntityType<?> CHEST_OF_DRAWERS = BlockEntityType.Builder.create(BlockEntityChestOfDrawers::new, BlocksRegistry.CHEST_OF_DRAWERS).build(null);
-	public static final BlockEntityType<?> NETHER_BREWING_STAND = BlockEntityType.Builder.create(BNBrewingStandBlockEntity::new, BlocksRegistry.NETHER_BREWING_STAND).build(null);
+	public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = BlockEntityType.Builder.create(BlockEntityForge::new, BlocksRegistry.CINCINNASITE_FORGE).build(null);
+	public static final BlockEntityType<BlockEntityFurnace> NETHERRACK_FURNACE = BlockEntityType.Builder.create(BlockEntityFurnace::new, getFurnaces()).build(null);
+	public static final BlockEntityType<BlockEntityChestOfDrawers> CHEST_OF_DRAWERS = BlockEntityType.Builder.create(BlockEntityChestOfDrawers::new, BlocksRegistry.CHEST_OF_DRAWERS).build(null);
+	public static final BlockEntityType<BNBrewingStandBlockEntity> NETHER_BREWING_STAND = BlockEntityType.Builder.create(BNBrewingStandBlockEntity::new, BlocksRegistry.NETHER_BREWING_STAND).build(null);
 	public static final BlockEntityType<BNChestBlockEntity> CHEST = BlockEntityType.Builder.create(BNChestBlockEntity::new, getChests()).build(null);
 	public static final BlockEntityType<BNBarrelBlockEntity> BARREL = BlockEntityType.Builder.create(BNBarrelBlockEntity::new, getBarrels()).build(null);
 	public static final BlockEntityType<BNSignBlockEntity> SIGN = BlockEntityType.Builder.create(BNSignBlockEntity::new, getSigns()).build(null);

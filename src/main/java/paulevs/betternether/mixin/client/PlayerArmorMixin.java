@@ -2,6 +2,9 @@ package paulevs.betternether.mixin.client;
 
 import java.util.Iterator;
 
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.model.ArmorStandArmorEntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,13 +25,13 @@ import paulevs.betternether.BetterNether;
 @Environment(EnvType.CLIENT)
 @Mixin(PlayerEntityRenderer.class)
 public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
-	public PlayerArmorMixin(EntityRenderDispatcher entityRenderDispatcher, PlayerEntityModel<AbstractClientPlayerEntity> entityModel, float f) {
-		super(entityRenderDispatcher, entityModel, f);
+	public PlayerArmorMixin(EntityRendererFactory.Context context, PlayerEntityModel<AbstractClientPlayerEntity> entityModel, float f) {
+		super(context, entityModel, f);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Inject(method = "<init>*", at = @At(value = "RETURN"))
-	private void onInit(EntityRenderDispatcher entityRenderDispatcher, boolean bl, CallbackInfo info) {
+	private void onInit(EntityRendererFactory.Context context, boolean bl, CallbackInfo info) {
 		if (BetterNether.hasThinArmor()) {
 			Iterator<FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>> iterator = this.features.iterator();
 			while (iterator.hasNext()) {
@@ -38,7 +41,14 @@ public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClie
 					break;
 				}
 			}
-			this.features.add(0, new ArmorFeatureRenderer(this, new BipedEntityModel(0.25F), new BipedEntityModel(0.5F)));
+			this.features.add(
+					0,
+					new ArmorFeatureRenderer(
+							this,
+							new ArmorStandArmorEntityModel(context.getPart(EntityModelLayers.PLAYER_SLIM_INNER_ARMOR)),
+							new ArmorStandArmorEntityModel(context.getPart(EntityModelLayers.PLAYER_SLIM_OUTER_ARMOR))
+					)
+			);
 		}
 	}
 }

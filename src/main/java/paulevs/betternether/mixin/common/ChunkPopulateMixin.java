@@ -24,8 +24,8 @@ public abstract class ChunkPopulateMixin {
 
 	@Inject(method = "generateFeatures", at = @At("HEAD"), cancellable = true)
 	private void customPopulate(ChunkRegion region, StructureAccessor accessor, CallbackInfo info) {
-		int chunkX = region.getCenterChunkX();
-		int chunkZ = region.getCenterChunkZ();
+		int chunkX = region.getCenterPos().x;
+		int chunkZ = region.getCenterPos().z;
 		if (!region.isClient() && isNetherBiome(region, chunkX, chunkZ)) {
 			RANDOM.setTerrainSeed(chunkX, chunkZ);
 			int sx = chunkX << 4;
@@ -42,8 +42,8 @@ public abstract class ChunkPopulateMixin {
 					CrashReport crashReport = CrashReport.create(e, "Biome decoration");
 					crashReport
 							.addElement("Generation")
-							.add("CenterX", region.getCenterChunkX())
-							.add("CenterZ", region.getCenterChunkZ())
+							.add("CenterX", region.getCenterPos().x)
+							.add("CenterZ", region.getCenterPos().z)
 							.add("Seed", featureSeed)
 							.add("Biome", biome);
 					throw new CrashException(crashReport);

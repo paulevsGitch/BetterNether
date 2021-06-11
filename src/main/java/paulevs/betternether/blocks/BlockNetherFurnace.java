@@ -37,8 +37,8 @@ public class BlockNetherFurnace extends AbstractFurnaceBlock {
 		};
 	}
 
-	public BlockEntity createBlockEntity(BlockView view) {
-		return new BlockEntityFurnace();
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return new BlockEntityFurnace(pos, state);
 	}
 
 	@Override

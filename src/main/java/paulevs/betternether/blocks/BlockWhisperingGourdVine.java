@@ -116,7 +116,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Fertil
 	@Override
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS))
+		if (tool != null && FabricToolTags.SHEARS.contains(tool.getItem()))
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		else if (state.get(SHAPE) == TripleShape.BOTTOM || MHelper.RANDOM.nextBoolean())
 			return Lists.newArrayList(new ItemStack(this.asItem()));
@@ -137,7 +137,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Fertil
 
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack tool = player.getStackInHand(hand);
-		if (tool.getItem().isIn(FabricToolTags.SHEARS) && state.get(SHAPE) == TripleShape.MIDDLE) {
+		if (FabricToolTags.SHEARS.contains(tool.getItem()) && state.get(SHAPE) == TripleShape.MIDDLE) {
 			if (!world.isClient) {
 				BlocksHelper.setWithUpdate(world, pos, state.with(SHAPE, TripleShape.BOTTOM));
 				world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(BlocksRegistry.WHISPERING_GOURD)));

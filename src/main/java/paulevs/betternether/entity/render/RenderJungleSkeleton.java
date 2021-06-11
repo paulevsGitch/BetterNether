@@ -1,11 +1,13 @@
 package paulevs.betternether.entity.render;
 
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import net.minecraft.client.render.entity.feature.ElytraFeatureRenderer;
 import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SkeletonEntityModel;
 import net.minecraft.util.Identifier;
 import paulevs.betternether.BetterNether;
@@ -15,13 +17,17 @@ import paulevs.betternether.entity.model.ModelJungleSkeleton;
 public class RenderJungleSkeleton extends MobEntityRenderer<EntityJungleSkeleton, SkeletonEntityModel<EntityJungleSkeleton>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/jungle_skeleton.png");
 
-	public RenderJungleSkeleton(EntityRenderDispatcher renderManager) {
-		super(renderManager, new ModelJungleSkeleton(), 0.4F);
-		this.addFeature(new ArmorFeatureRenderer<EntityJungleSkeleton, SkeletonEntityModel<EntityJungleSkeleton>, SkeletonEntityModel<EntityJungleSkeleton>>(this, new SkeletonEntityModel<EntityJungleSkeleton>(0.5F, true),
-				new SkeletonEntityModel<EntityJungleSkeleton>(1.0F, true)));
+	public RenderJungleSkeleton(EntityRendererFactory.Context ctx, EntityModelLayer layer, EntityModelLayer legArmorLayer, EntityModelLayer bodyArmorLayer) {
+		super(ctx, new ModelJungleSkeleton(ctx.getPart(layer)), 0.4F);
+		final SkeletonEntityModel<EntityJungleSkeleton> afm_sem_body = new SkeletonEntityModel<EntityJungleSkeleton>(ctx.getPart(bodyArmorLayer));
+		final SkeletonEntityModel<EntityJungleSkeleton> afm_sem_legins = new SkeletonEntityModel<EntityJungleSkeleton>(ctx.getPart(legArmorLayer));
+		final ArmorFeatureRenderer<EntityJungleSkeleton, SkeletonEntityModel<EntityJungleSkeleton>, SkeletonEntityModel<EntityJungleSkeleton>> afm;
+		afm = new ArmorFeatureRenderer<>(this, afm_sem_legins, afm_sem_body);
+		this.addFeature(afm);
+
 		this.addFeature(new HeldItemFeatureRenderer<EntityJungleSkeleton, SkeletonEntityModel<EntityJungleSkeleton>>(this));
-		this.addFeature(new ElytraFeatureRenderer<EntityJungleSkeleton, SkeletonEntityModel<EntityJungleSkeleton>>(this));
-		this.addFeature(new HeadFeatureRenderer<EntityJungleSkeleton, SkeletonEntityModel<EntityJungleSkeleton>>(this));
+		this.addFeature(new ElytraFeatureRenderer<EntityJungleSkeleton, SkeletonEntityModel<EntityJungleSkeleton>>(this, ctx.getModelLoader()));
+		this.addFeature(new HeadFeatureRenderer<EntityJungleSkeleton, SkeletonEntityModel<EntityJungleSkeleton>>(this, ctx.getModelLoader()));
 	}
 
 	@Override

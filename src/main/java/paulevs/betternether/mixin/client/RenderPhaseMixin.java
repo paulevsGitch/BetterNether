@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import net.minecraft.client.render.RenderPhase;
 import paulevs.betternether.entity.render.RenderLayers;
 
+import java.lang.reflect.Field;
+
 @Mixin(RenderPhase.class)
 public class RenderPhaseMixin {
 	@Shadow
@@ -17,9 +19,9 @@ public class RenderPhaseMixin {
 	@Final
 	protected static RenderPhase.WriteMaskState COLOR_MASK;
 
-	@Shadow
+	/*@Shadow
 	@Final
-	protected static RenderPhase.Fog FOG;
+	protected static RenderPhase.Fog FOG;*/
 
 	@Shadow
 	@Final
@@ -34,11 +36,11 @@ public class RenderPhaseMixin {
 	protected static RenderPhase.Target CLOUDS_TARGET;
 
 	static {
-		RenderLayers.translucentTransparency = TRANSLUCENT_TRANSPARENCY;
-		RenderLayers.colorMask = COLOR_MASK;
-		RenderLayers.fog = FOG;
-		RenderLayers.lEqualDepthTest = LEQUAL_DEPTH_TEST;
-		RenderLayers.polygonZLayering = POLYGON_OFFSET_LAYERING;
-		RenderLayers.translucentTarget = CLOUDS_TARGET;
+	RenderLayers.translucentTransparency = TRANSLUCENT_TRANSPARENCY;
+	RenderLayers.colorMask = COLOR_MASK;
+	//RenderLayers.fog = FOG;
+	RenderLayers.lEqualDepthTest = LEQUAL_DEPTH_TEST;
+	RenderLayers.polygonZLayering = POLYGON_OFFSET_LAYERING;
+	RenderLayers.translucentTarget = CLOUDS_TARGET;
 	}
 }

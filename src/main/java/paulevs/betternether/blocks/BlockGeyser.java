@@ -79,13 +79,13 @@ public class BlockGeyser extends BlockBaseNotFull {
 	}
 
 	@Override
-	public void onSteppedOn(World world, BlockPos pos, Entity entity) {
+	public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
 		if (!entity.isFireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
 			entity.damage(DamageSource.IN_FIRE, 3F);
 			entity.setOnFireFor(1);
 		}
 
-		super.onSteppedOn(world, pos, entity);
+		super.onSteppedOn(world, pos, state, entity);
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.ai.TargetFinder;
+import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
@@ -157,7 +157,7 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	protected float getSoundPitch() {
+	public float getSoundPitch() {
 		return MHelper.randRange(0.3F, 0.4F, random);
 	}
 
@@ -193,12 +193,7 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public boolean canClimb() {
-		return false;
-	}
-
-	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier) {
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
 		return false;
 	}
 
@@ -221,6 +216,11 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 
 	static {
 		FLAGS = DataTracker.registerData(EntityFlyingPig.class, TrackedDataHandlerRegistry.BYTE);
+	}
+
+	@Override
+	public boolean isInAir() {
+		return !this.onGround;
 	}
 
 	class WanderAroundGoal extends Goal {
@@ -256,10 +256,10 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 			bpos.set(EntityFlyingPig.this.getX(), EntityFlyingPig.this.getY(), EntityFlyingPig.this.getZ());
 
 			Vec3d angle = EntityFlyingPig.this.getRotationVec(0.0F);
-			Vec3d airTarget = TargetFinder.findAirTarget(EntityFlyingPig.this, 8, 7, angle, 1.5707964F, 2, 1);
+			Vec3d airTarget = AboveGroundTargeting.find(EntityFlyingPig.this, 8, 7, angle.x, angle.z, 1.5707964F, 2, 1);
 
 			if (airTarget == null) {
-				airTarget = TargetFinder.findAirTarget(EntityFlyingPig.this, 32, 10, angle, 1.5707964F, 3, 1);
+				airTarget = AboveGroundTargeting.find(EntityFlyingPig.this, 32, 10, angle.x, angle.z, 1.5707964F, 3, 1);
 			}
 
 			if (airTarget == null) {

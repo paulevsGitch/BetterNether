@@ -1,6 +1,7 @@
 package paulevs.betternether.config.screen;
 
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -25,7 +26,7 @@ public class ConfigScreen extends Screen {
 
 	@Override
 	protected void init() {
-		this.addButton(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE,
+		this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE,
 				new PressAction() {
 					@Override
 					public void onPress(ButtonWidget button) {
@@ -54,9 +55,9 @@ public class ConfigScreen extends Screen {
 					String color = Math.abs(val - fogDefault) < 0.001 ? "" : "\u00A7b";
 					return new TranslatableText("config.betternether.fog").append(String.format(": %s%.2f", color, val));
 				}).createButton(this.client.options, this.width / 2 - 100, 27, 150);
-		this.addButton(fogButton);
+		this.addDrawableChild(fogButton);
 
-		this.addButton(new ButtonWidget(this.width / 2 + 40 + 20, 27, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction() {
+		this.addDrawableChild(new ButtonWidget(this.width / 2 + 40 + 20, 27, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
 				Configs.MAIN.setFloat("improvement", varFog, fogDefault, fogDefault);
@@ -76,19 +77,19 @@ public class ConfigScreen extends Screen {
 				Configs.MAIN.setBoolean("improvement", varArmour, true, value);
 				String color = value ? ": \u00A7a" : ": \u00A7c";
 				button.setMessage(new TranslatableText("config.betternether.armour")
-						.append(color + ScreenTexts.getToggleText(value).getString()));
+						.append(color + ScreenTexts.onOrOff(value).getString()));
 			}
 		});
 		String color = hasArmour ? ": \u00A7a" : ": \u00A7c";
-		armorButton.setMessage(new TranslatableText("config.betternether.armour").append(color + ScreenTexts.getToggleText(hasArmour).getString()));
-		this.addButton(armorButton);
+		armorButton.setMessage(new TranslatableText("config.betternether.armour").append(color + ScreenTexts.onOrOff(hasArmour).getString()));
+		this.addDrawableChild(armorButton);
 
-		this.addButton(new ButtonWidget(this.width / 2 + 40 + 20, 27 * 2, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction() {
+		this.addDrawableChild(new ButtonWidget(this.width / 2 + 40 + 20, 27 * 2, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
 				Configs.MAIN.setBoolean("improvement", varArmour, true, true);
 				BetterNether.setThinArmor(true);
-				armorButton.setMessage(new TranslatableText("config.betternether.armour").append(": \u00A7a" + ScreenTexts.getToggleText(true).getString()));
+				armorButton.setMessage(new TranslatableText("config.betternether.armour").append(": \u00A7a" + ScreenTexts.onOrOff(true).getString()));
 			}
 		}));
 
@@ -103,28 +104,27 @@ public class ConfigScreen extends Screen {
 				Configs.MAIN.setBoolean("improvement", varLava, true, value);
 				String color = value ? ": \u00A7a" : ": \u00A7c";
 				button.setMessage(new TranslatableText("config.betternether.lavafalls")
-						.append(color + ScreenTexts.getToggleText(value).getString()));
+						.append(color + ScreenTexts.onOrOff(value).getString()));
 			}
 		});
 		color = hasLava ? ": \u00A7a" : ": \u00A7c";
-		lavaButton.setMessage(new TranslatableText("config.betternether.lavafalls").append(color + ScreenTexts.getToggleText(hasLava).getString()));
-		this.addButton(lavaButton);
+		lavaButton.setMessage(new TranslatableText("config.betternether.lavafalls").append(color + ScreenTexts.onOrOff(hasLava).getString()));
+		this.addDrawableChild(lavaButton);
 
-		this.addButton(new ButtonWidget(this.width / 2 + 40 + 20, 27 * 3, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction() {
+		this.addDrawableChild(new ButtonWidget(this.width / 2 + 40 + 20, 27 * 3, 40, 20, new TranslatableText("config.betternether.reset"), new PressAction() {
 			@Override
 			public void onPress(ButtonWidget button) {
 				Configs.MAIN.setBoolean("improvement", varLava, true, true);
 				BetterNether.setThinArmor(true);
-				lavaButton.setMessage(new TranslatableText("config.betternether.lavafalls").append(": \u00A7a" + ScreenTexts.getToggleText(true).getString()));
+				lavaButton.setMessage(new TranslatableText("config.betternether.lavafalls").append(": \u00A7a" + ScreenTexts.onOrOff(true).getString()));
 			}
 		}));
 	}
 
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		this.renderBackground(matrices);
-		for (ClickableWidget button : this.buttons) {
-			button.render(matrices, mouseX, mouseY, delta);
-		}
+		super.render(matrices, mouseX, mouseY, delta);
+
 		DrawableHelper.drawCenteredText(matrices, this.textRenderer, header, this.width / 2, 14, 16777215);
 	}
 }

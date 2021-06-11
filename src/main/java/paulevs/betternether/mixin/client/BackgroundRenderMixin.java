@@ -1,5 +1,6 @@
 package paulevs.betternether.mixin.client;
 
+import net.minecraft.client.render.CameraSubmersionType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,18 +22,19 @@ import paulevs.betternether.BetterNether;
 public class BackgroundRenderMixin {
 	@Inject(method = "applyFog", at = @At(value = "HEAD"), cancellable = true)
 	private static void applyThickFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo info) {
-		FluidState fluidState = camera.getSubmersionType();
+
+		CameraSubmersionType cameraSubmersionType = camera.getSubmersionType();
 		Entity entity = camera.getFocusedEntity();
 		if (thickFog) {
-			if (fluidState.getFluid() == Fluids.EMPTY) {
+			if (cameraSubmersionType == CameraSubmersionType.NONE) {
 				if (!(entity instanceof LivingEntity && ((LivingEntity) entity).hasStatusEffect(StatusEffects.BLINDNESS))) {
 					float start = viewDistance * BetterNether.getFogStart();
 					float end = viewDistance * BetterNether.getFogEnd();
 
-					RenderSystem.fogStart(start);
-					RenderSystem.fogEnd(end);
-					RenderSystem.fogMode(GlStateManager.FogMode.LINEAR);
-					RenderSystem.setupNvFogDistance();
+					RenderSystem.setShaderFogStart(start);
+					RenderSystem.setShaderFogEnd(end);
+					//RenderSystem.setShaderF(GlStateManager.FogMode.LINEAR);
+					//RenderSystem.setupNvFogDistance();
 					info.cancel();
 				}
 			}

@@ -2,12 +2,122 @@ package paulevs.betternether.entity.model;
 
 import com.google.common.collect.ImmutableList;
 
-import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.AnimalModel;
+import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.util.math.MathHelper;
 import paulevs.betternether.entity.EntityFlyingPig;
 
 public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig> {
+	public static TexturedModelData getTexturedModelData() {
+		ModelData modelData = new ModelData();
+		ModelPartData modelPartData = modelData.getRoot();
+
+		ModelPartData modelPartData_HEAD = modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create()
+				.uv(0, 0)
+				.cuboid(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.NONE);
+		/*this.head = new ModelPart(this, 0, 0);
+		this.head.addCuboid(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F);*/
+
+		modelPartData_HEAD.addChild(EntityModelPartNames.LEFT_EAR, ModelPartBuilder.create()
+				.uv(32, 4)
+				.cuboid(0.0F, 0.0F, 0.0F, 5.0F, 5.0F, 1.0F), ModelTransform.pivot(-7.0F, -7.0F, -2.0F));
+		/*ModelPart modelEar = new ModelPart(this, 32, 4);
+		modelEar.setPivot(-7.0F, -7.0F, -2.0F);
+		modelEar.addCuboid(0.0F, 0.0F, 0.0F, 5.0F, 5.0F, 1.0F);
+		this.head.addChild(modelEar);*/
+
+		modelPartData_HEAD.addChild(EntityModelPartNames.RIGHT_EAR, ModelPartBuilder.create()
+				.uv(32, 4)
+				.mirrored(true)
+				.cuboid(0.0F, 0.0F, 0.0F, 5.0F, 5.0F, 1.0F), ModelTransform.pivot(2.0F, -7.0F, -2.0F));
+		/*modelEar = new ModelPart(this, 32, 4);
+		modelEar.setPivot(2.0F, -7.0F, -2.0F);
+		modelEar.mirror = true;
+		modelEar.addCuboid(0.0F, 0.0F, 0.0F, 5.0F, 5.0F, 1.0F);
+		this.head.addChild(modelEar);*/
+
+		modelPartData_HEAD.addChild(EntityModelPartNames.NOSE, ModelPartBuilder.create()
+				.uv(32, 0)
+				.cuboid(0.0F, 0.0F, 0.0F, 4.0F, 3.0F, 1.0F), ModelTransform.pivot(-2.0F, -1.0F, -5.0F));
+		/*ModelPart piglet = new ModelPart(this, 32, 0);
+		piglet.setPivot(-2.0F, -1.0F, -5.0F);
+		piglet.addCuboid(0.0F, 0.0F, 0.0F, 4.0F, 3.0F, 1.0F);
+		this.head.addChild(piglet);*/
+
+		ModelPartData modelPartData_BODY = modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create()
+				.uv(0, 16)
+				.cuboid(-5.0F, 3.0F, -4.0F, 10.0F, 14.0F, 8.0F), ModelTransform.NONE);
+		/*this.body = new ModelPart(this, 0, 16);
+		this.body.addCuboid(-5.0F, 3.0F, -4.0F, 10.0F, 14.0F, 8.0F);*/
+
+		ModelPartData modelPartData_RW = modelPartData_BODY.addChild(EntityModelPartNames.RIGHT_WING, ModelPartBuilder.create()
+				.uv(36, 10)
+				.cuboid(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F), ModelTransform.pivot(5, 2.5F, 0));
+		/*this.rightWing = new ModelPart(this, 36, 10);
+		this.rightWing.setPivot(5, 2.5F, 0);
+		this.rightWing.addCuboid(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
+		this.body.addChild(this.rightWing);*/
+
+		modelPartData_RW.addChild(EntityModelPartNames.RIGHT_WING_TIP, ModelPartBuilder.create()
+				.uv(36, 26)
+				.cuboid(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F), ModelTransform.pivot(16.0F, 0.0F, 0.0F));
+		/*this.rightWingTip = new ModelPart(this, 36, 26);
+		this.rightWingTip.setPivot(16.0F, 0.0F, 0.0F);
+		this.rightWingTip.addCuboid(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
+		this.rightWing.addChild(this.rightWingTip);*/
+
+		ModelPartData modelPartData_LW = modelPartData_BODY.addChild(EntityModelPartNames.LEFT_WING, ModelPartBuilder.create()
+				.uv(36, 10)
+				.mirrored(true)
+				.cuboid(-16.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F), ModelTransform.pivot(-5, 2.5F, 0));
+		/*this.leftWing = new ModelPart(this, 36, 10);
+		this.leftWing.mirror = true;
+		this.leftWing.setPivot(-5, 2.5F, 0);
+		this.leftWing.addCuboid(-16.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
+		this.body.addChild(this.leftWing);*/
+
+		modelPartData_LW.addChild(EntityModelPartNames.LEFT_WING_TIP, ModelPartBuilder.create()
+				.uv(36, 26)
+				.mirrored(true)
+				.cuboid(-16.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F), ModelTransform.pivot(-16.0F, 0.0F, 0.0F));
+		/*this.leftWingTip = new ModelPart(this, 36, 26);
+		this.leftWingTip.mirror = true;
+		this.leftWingTip.setPivot(-16.0F, 0.0F, 0.0F);
+		this.leftWingTip.addCuboid(-16.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
+		this.leftWing.addChild(this.leftWingTip);*/
+
+		modelPartData_BODY.addChild(EntityModelPartNames.TAIL, ModelPartBuilder.create()
+				.uv(0, 40)
+				.cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 8.0F, 0.0F), ModelTransform.pivot(0, 17, 0));
+		/*tail = new ModelPart(this, 0, 40);
+		tail.setPivot(0, 17, 0);
+		tail.addCuboid(-4.0F, 0.0F, 0.0F, 8.0F, 8.0F, 0.0F);
+		this.body.addChild(tail);*/
+
+		modelPartData_BODY.addChild(EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create()
+				.uv(0, 48)
+				.cuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F), ModelTransform.pivot(1.5F, 15, -4));
+		/*this.legA = new ModelPart(this, 0, 48);
+		legA.setPivot(1.5F, 15, -4);
+		legA.addCuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F);
+		this.body.addChild(legA);*/
+
+		modelPartData_BODY.addChild(EntityModelPartNames.LEFT_LEG, ModelPartBuilder.create()
+				.uv(0, 48)
+				.cuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F), ModelTransform.pivot(-4.5F, 15, -4));
+		/*this.legB = new ModelPart(this, 0, 48);
+		legB.setPivot(-4.5F, 15, -4);
+		legB.addCuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F);
+		this.body.addChild(legB);
+
+		/*
+		this.textureWidth = 128;
+		this.textureHeight = 64;
+		 */
+		return TexturedModelData.of(modelData, 128, 64);
+	}
+
 	private final ModelPart head;
 	private final ModelPart body;
 	private final ModelPart rightWing;
@@ -18,68 +128,18 @@ public class ModelEntityFlyingPig extends AnimalModel<EntityFlyingPig> {
 	private final ModelPart legA;
 	private final ModelPart legB;
 
-	public ModelEntityFlyingPig() {
-		this.textureWidth = 128;
-		this.textureHeight = 64;
+	public ModelEntityFlyingPig(ModelPart root) {
+		this.head = root.getChild(EntityModelPartNames.HEAD);
+		this.body = root.getChild(EntityModelPartNames.BODY);
+		this.tail = this.body.getChild(EntityModelPartNames.TAIL);
 
-		this.head = new ModelPart(this, 0, 0);
-		this.head.addCuboid(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F);
+		this.rightWing = this.body.getChild(EntityModelPartNames.RIGHT_WING);
+		this.rightWingTip = this.rightWing.getChild(EntityModelPartNames.RIGHT_WING_TIP);
+		this.legA = this.body.getChild(EntityModelPartNames.RIGHT_LEG);
 
-		ModelPart modelEar = new ModelPart(this, 32, 4);
-		modelEar.setPivot(-7.0F, -7.0F, -2.0F);
-		modelEar.addCuboid(0.0F, 0.0F, 0.0F, 5.0F, 5.0F, 1.0F);
-		this.head.addChild(modelEar);
-
-		modelEar = new ModelPart(this, 32, 4);
-		modelEar.setPivot(2.0F, -7.0F, -2.0F);
-		modelEar.mirror = true;
-		modelEar.addCuboid(0.0F, 0.0F, 0.0F, 5.0F, 5.0F, 1.0F);
-		this.head.addChild(modelEar);
-
-		ModelPart piglet = new ModelPart(this, 32, 0);
-		piglet.setPivot(-2.0F, -1.0F, -5.0F);
-		piglet.addCuboid(0.0F, 0.0F, 0.0F, 4.0F, 3.0F, 1.0F);
-		this.head.addChild(piglet);
-
-		this.body = new ModelPart(this, 0, 16);
-		this.body.addCuboid(-5.0F, 3.0F, -4.0F, 10.0F, 14.0F, 8.0F);
-
-		this.rightWing = new ModelPart(this, 36, 10);
-		this.rightWing.setPivot(5, 2.5F, 0);
-		this.rightWing.addCuboid(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
-		this.body.addChild(this.rightWing);
-
-		this.rightWingTip = new ModelPart(this, 36, 26);
-		this.rightWingTip.setPivot(16.0F, 0.0F, 0.0F);
-		this.rightWingTip.addCuboid(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
-		this.rightWing.addChild(this.rightWingTip);
-
-		this.leftWing = new ModelPart(this, 36, 10);
-		this.leftWing.mirror = true;
-		this.leftWing.setPivot(-5, 2.5F, 0);
-		this.leftWing.addCuboid(-16.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
-		this.body.addChild(this.leftWing);
-
-		this.leftWingTip = new ModelPart(this, 36, 26);
-		this.leftWingTip.mirror = true;
-		this.leftWingTip.setPivot(-16.0F, 0.0F, 0.0F);
-		this.leftWingTip.addCuboid(-16.0F, 0.0F, 0.0F, 16.0F, 16.0F, 0.0F);
-		this.leftWing.addChild(this.leftWingTip);
-
-		tail = new ModelPart(this, 0, 40);
-		tail.setPivot(0, 17, 0);
-		tail.addCuboid(-4.0F, 0.0F, 0.0F, 8.0F, 8.0F, 0.0F);
-		this.body.addChild(tail);
-
-		this.legA = new ModelPart(this, 0, 48);
-		legA.setPivot(1.5F, 15, -4);
-		legA.addCuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F);
-		this.body.addChild(legA);
-
-		this.legB = new ModelPart(this, 0, 48);
-		legB.setPivot(-4.5F, 15, -4);
-		legB.addCuboid(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F);
-		this.body.addChild(legB);
+		this.leftWing = this.body.getChild(EntityModelPartNames.LEFT_WING);
+		this.leftWingTip = this.rightWing.getChild(EntityModelPartNames.LEFT_WING_TIP);
+		this.legB = this.body.getChild(EntityModelPartNames.LEFT_LEG);
 	}
 
 	@Override

@@ -2,21 +2,33 @@ package paulevs.betternether.entity.model;
 
 import com.google.common.collect.ImmutableList;
 
-import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.AnimalModel;
+import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import paulevs.betternether.entity.EntitySkull;
 
 public class ModelSkull extends AnimalModel<EntitySkull> {
 	private final ModelPart head;
 	private float pitch;
 
-	public ModelSkull() {
-		textureHeight = 16;
-		textureWidth = 32;
+	public static TexturedModelData getTexturedModelData() {
+		ModelData modelData = new ModelData();
+		ModelPartData modelPartData = modelData.getRoot();
 
-		head = new ModelPart(this, 0, 0);
+		modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create()
+				.uv(0, 0)
+				.cuboid(-4, -4, -4, 8, 8, 8), ModelTransform.pivot(0, 20, 0));
+		/*head = ModelPart new (this, 0, 0);
 		head.setPivot(0, 20, 0);
-		head.addCuboid(-4, -4, -4, 8, 8, 8);
+		head.addCuboid(-4, -4, -4, 8, 8, 8);*/
+
+		/* textureHeight = 16;
+		textureWidth = 32; */
+		return TexturedModelData.of(modelData, 16, 32);
+	}
+
+	public ModelSkull(ModelPart root) {
+		this.head = root.getChild(EntityModelPartNames.HEAD);
 	}
 
 	@Override

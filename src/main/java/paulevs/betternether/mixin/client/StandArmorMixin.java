@@ -2,6 +2,9 @@ package paulevs.betternether.mixin.client;
 
 import java.util.Iterator;
 
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,13 +24,13 @@ import paulevs.betternether.BetterNether;
 @Environment(EnvType.CLIENT)
 @Mixin(ArmorStandEntityRenderer.class)
 public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStandEntity, ArmorStandArmorEntityModel> {
-	public StandArmorMixin(EntityRenderDispatcher entityRenderDispatcher, ArmorStandArmorEntityModel entityModel, float f) {
-		super(entityRenderDispatcher, entityModel, f);
+	public StandArmorMixin(EntityRendererFactory.Context context, ArmorStandArmorEntityModel entityModel, float f) {
+		super(context, entityModel, f);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Inject(method = "<init>*", at = @At(value = "RETURN"))
-	private void onInit(EntityRenderDispatcher entityRenderDispatcher, CallbackInfo info) {
+	private void onInit(EntityRendererFactory.Context ctx, CallbackInfo info) {
 		if (BetterNether.hasThinArmor()) {
 			Iterator<FeatureRenderer<ArmorStandEntity, ArmorStandArmorEntityModel>> iterator = this.features.iterator();
 			while (iterator.hasNext()) {
@@ -37,7 +40,14 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStandEnt
 					break;
 				}
 			}
-			this.features.add(0, new ArmorFeatureRenderer(this, new ArmorStandArmorEntityModel(0.25F), new ArmorStandArmorEntityModel(0.5F)));
+			this.features.add(
+					0,
+					new ArmorFeatureRenderer(
+							this,
+							new ArmorStandArmorEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM_INNER_ARMOR)),
+							new ArmorStandArmorEntityModel(ctx.getPart(EntityModelLayers.PLAYER_SLIM_OUTER_ARMOR))
+					)
+			);
 		}
 	}
 }

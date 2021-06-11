@@ -49,7 +49,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	private float getAirFraction(WorldAccess world, BlockPos pos) {
 		int airCount = 0;
 
-		Mutable size = new Mutable().set(structure.getSize().rotate(rotation));
+		Mutable size = new Mutable().set(new BlockPos(structure.getSize()).rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 
@@ -76,7 +76,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	private float getLavaFractionFoundation(WorldAccess world, BlockPos pos) {
 		int lavaCount = 0;
 
-		Mutable size = new Mutable().set(structure.getSize().rotate(rotation));
+		Mutable size = new Mutable().set(new BlockPos(structure.getSize()).rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 
@@ -101,7 +101,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	private float getAirFractionFoundation(WorldAccess world, BlockPos pos) {
 		int airCount = 0;
 
-		Mutable size = new Mutable().set(structure.getSize().rotate(rotation));
+		Mutable size = new Mutable().set(new BlockPos(structure.getSize()).rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 
@@ -128,7 +128,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	private float getAirFractionBottom(WorldAccess world, BlockPos pos) {
 		int airCount = 0;
 
-		Mutable size = new Mutable().set(structure.getSize().rotate(rotation));
+		Mutable size = new Mutable().set(new BlockPos(structure.getSize()).rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 

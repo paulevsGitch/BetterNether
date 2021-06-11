@@ -28,14 +28,18 @@ dependencies {
 	// You may need to force-disable transitiveness on them.
 	
 	// https://mvnrepository.com/artifact/javax.annotation/jsr305
-	implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-	modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
+	compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+	modCompileOnly "com.github.TerraformersMC:ModMenu:${modmenu_version}"
 }
 
 repositories {
+    mavenCentral()
+    //mavenLocal()
     maven {
-        url "https://maven.onehippo.com/maven2/"
+        name = 'JitPack'
+        url = 'https://jitpack.io'
     }
+    maven { url "https://maven.shedaniel.me/" }
 }
 
 processResources {

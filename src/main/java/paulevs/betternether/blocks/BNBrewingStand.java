@@ -5,6 +5,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.BrewingStandBlock;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -17,8 +20,10 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import paulevs.betternether.blockentities.BNBrewingStandBlockEntity;
 import paulevs.betternether.client.IRenderTypeable;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable {
 	public BNBrewingStand() {
@@ -27,10 +32,14 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
 				.luminance(1)
 				.nonOpaque());
 	}
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+		return world.isClient ? null : checkType(type, BlockEntitiesRegistry.NETHER_BREWING_STAND, BNBrewingStandBlockEntity::tick);
+	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView view) {
-		return new BNBrewingStandBlockEntity();
+	public BlockEntity createBlockEntity(BlockPos blockPos, BlockState blockState) {
+		return new BNBrewingStandBlockEntity(blockPos, blockState);
 	}
 
 	@Override

@@ -29,10 +29,10 @@ public class EntityRenderRegistry {
 	}
 
 	private static void registerRenderMob(EntityType<?> entity, Class<? extends MobEntityRenderer<?, ?>> renderer) {
-		EntityRendererRegistry.INSTANCE.register(entity, (entityRenderDispatcher, context) -> {
-			MobEntityRenderer<?, ?> render = null;
+		EntityRendererRegistry.INSTANCE.register(entity, (context) -> {
+			MobEntityRenderer render = null;
 			try {
-				render = renderer.getConstructor(entityRenderDispatcher.getClass()).newInstance(entityRenderDispatcher);
+				render = renderer.getConstructor(context.getClass()).newInstance(context);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -42,10 +42,10 @@ public class EntityRenderRegistry {
 	}
 
 	private static void registerRenderAny(EntityType<?> entity, Class<? extends EntityRenderer<?>> renderer) {
-		EntityRendererRegistry.INSTANCE.register(entity, (entityRenderDispatcher, context) -> {
-			EntityRenderer<?> render = null;
+		EntityRendererRegistry.INSTANCE.register(entity, (context) -> {
+			EntityRenderer render = null;
 			try {
-				render = renderer.getConstructor(entityRenderDispatcher.getClass()).newInstance(entityRenderDispatcher);
+				render = renderer.getConstructor(context.getClass()).newInstance(context);
 			}
 			catch (Exception e) {
 				e.printStackTrace();

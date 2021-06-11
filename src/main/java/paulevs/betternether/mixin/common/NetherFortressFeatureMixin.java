@@ -1,5 +1,6 @@
 package paulevs.betternether.mixin.common;
 
+import net.minecraft.world.HeightLimitView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,9 +18,9 @@ import paulevs.betternether.world.CityHelper;
 @Mixin(NetherFortressFeature.class)
 public class NetherFortressFeatureMixin {
 	@Inject(method = "shouldStartAt", at = @At("HEAD"), cancellable = true)
-	private void checkCity(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long worldSeed, ChunkRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, DefaultFeatureConfig defaultFeatureConfig,
-			CallbackInfoReturnable<Boolean> info) {
-		if (CityHelper.stopStructGen(chunkX, chunkZ, chunkGenerator, worldSeed, chunkRandom)) {
+	private void checkCity(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long worldSeed, ChunkRandom chunkRandom, ChunkPos chunkPos, Biome biome, ChunkPos chunkPos2, DefaultFeatureConfig defaultFeatureConfig,
+						   HeightLimitView heightLimitView, CallbackInfoReturnable<Boolean> info) {
+		if (CityHelper.stopStructGen(chunkPos.x, chunkPos.z, chunkGenerator, worldSeed, chunkRandom)) {
 			info.setReturnValue(false);
 			info.cancel();
 		}

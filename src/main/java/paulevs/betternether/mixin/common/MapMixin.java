@@ -125,8 +125,9 @@ public abstract class MapMixin extends NetworkSyncedItem {
 									byte b = state.colors[o + p * 128];
 									byte c = (byte) (materialColor.id * 4 + ac);
 									if (b != c) {
-										state.colors[o + p * 128] = c;
-										state.markDirty(o, p);
+										state.setColor(o, p, c);
+										/*state.colors[o + p * 128] = c;
+										state.markDirty(o, p);*/
 										bl = true;
 									}
 								}

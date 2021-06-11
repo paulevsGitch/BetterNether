@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "paulevs.betternether.mixin.client",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "client": [
 	"ClientPlayNetworkHandlerMixin",
 	"BackgroundRenderMixin",
@@ -9,8 +9,12 @@
 	"PresetsScreenMixin",
 	"PlayerArmorMixin",
 	"RenderPhaseMixin",
+    "RenderLayerMixin",
 	"StandArmorMixin",
-	"LavaFluidMixin"
+	"LavaFluidMixin",
+    "EntityModelLayersMixin",
+    "EntityModelsMixin",
+    "TexturedModelDataMixin"
   ],
   "injectors": {
     "defaultRequire": 1

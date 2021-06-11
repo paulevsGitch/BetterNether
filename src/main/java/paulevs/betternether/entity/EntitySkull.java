@@ -67,6 +67,11 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 				.build();
 	}
 
+	@Override
+	public boolean isInAir() {
+		return !this.onGround;
+	}
+
 	class SkullLookControl extends LookControl {
 		SkullLookControl(MobEntity entity) {
 			super(entity);
@@ -94,9 +99,9 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 					if (player.getActiveItem().getDamage() > player.getActiveItem().getMaxDamage()) {
 						player.sendToolBreakStatus(player.getActiveHand());
 						if (player.getActiveHand().equals(Hand.MAIN_HAND))
-							player.inventory.main.clear();
+							player.getInventory().main.clear();
 						else if (player.getActiveHand().equals(Hand.OFF_HAND))
-							player.inventory.offHand.clear();
+							player.getInventory().offHand.clear();
 						player.clearActiveItem();
 					}
 					return;
@@ -191,12 +196,12 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 		double e = target.getZ() - this.getZ();
 		double g = target.getY() - this.getY();
 
-		double h = MathHelper.sqrt(d * d + e * e);
+		double h = Math.sqrt(d * d + e * e);
 		float i = (float) (MathHelper.atan2(e, d) * 57.2957763671875D) - 90.0F;
 		float j = (float) (-(MathHelper.atan2(g, h) * 57.2957763671875D));
 
-		this.pitch = j;
-		this.yaw = i;
+		this.setPitch(j);
+		this.setYaw(i);
 	}
 
 	private void updateParticlePos() {
@@ -230,17 +235,12 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 	}
 
 	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier) {
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {
 		return false;
 	}
 
 	@Override
 	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
-
-	@Override
-	public boolean canClimb() {
-		return false;
-	}
 
 	@Override
 	public boolean hasNoGravity() {

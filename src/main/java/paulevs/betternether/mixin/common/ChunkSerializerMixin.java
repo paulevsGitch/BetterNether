@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -18,14 +19,14 @@ import net.minecraft.world.gen.feature.StructureFeature;
 @Mixin(ChunkSerializer.class)
 public class ChunkSerializerMixin {
 	@Overwrite
-	private static NbtCompound writeStructures(ChunkPos pos, Map<StructureFeature<?>, StructureStart<?>> structureStarts, Map<StructureFeature<?>, LongSet> structureReferences) {
+	private static NbtCompound writeStructures(ServerWorld serverWorld, ChunkPos pos, Map<StructureFeature<?>, StructureStart<?>> structureStarts, Map<StructureFeature<?>, LongSet> structureReferences) {
 		NbtCompound tagResult = new NbtCompound();
 		NbtCompound tagStarts = new NbtCompound();
 		Iterator<Entry<StructureFeature<?>, StructureStart<?>>> startsIterator = structureStarts.entrySet().iterator();
 
 		while (startsIterator.hasNext()) {
 			Entry<StructureFeature<?>, StructureStart<?>> start = startsIterator.next();
-			tagStarts.put((start.getKey()).getName(), (start.getValue()).toNbt(pos.x, pos.z));
+			tagStarts.put((start.getKey()).getName(), (start.getValue()).toNbt(serverWorld, pos));
 		}
 
 		tagResult.put("Starts", tagStarts);

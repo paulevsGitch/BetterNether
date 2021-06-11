@@ -46,7 +46,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements F
 
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return world.getBlockState(pos.down()).getBlock().isIn(BlockTags.NYLIUM);
+		return BlockTags.NYLIUM.contains(world.getBlockState(pos.down()).getBlock());
 	}
 
 	@Override
