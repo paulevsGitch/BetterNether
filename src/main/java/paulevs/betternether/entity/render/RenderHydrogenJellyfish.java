@@ -1,6 +1,5 @@
 package paulevs.betternether.entity.render;
 
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.AnimalModel;
@@ -10,13 +9,13 @@ import net.minecraft.util.math.BlockPos;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
 import paulevs.betternether.entity.model.ModelEntityHydrogenJellyfish;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.EntityRenderRegistry;
 
 public class RenderHydrogenJellyfish extends MobEntityRenderer<EntityHydrogenJellyfish, AnimalModel<EntityHydrogenJellyfish>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/jellyfish.png");
 
 	public RenderHydrogenJellyfish(EntityRendererFactory.Context ctx) {
-		super(ctx, new ModelEntityHydrogenJellyfish(ctx.getPart(EntityRegistry.HYDROGEN_JELLYFISH_LAYER)), 1);
+		super(ctx, new ModelEntityHydrogenJellyfish(ctx.getPart(EntityRenderRegistry.HYDROGEN_JELLYFISH_LAYER)), 1);
 	}
 
 	@Override

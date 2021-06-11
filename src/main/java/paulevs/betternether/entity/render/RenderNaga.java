@@ -8,13 +8,13 @@ import net.minecraft.util.Identifier;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityNaga;
 import paulevs.betternether.entity.model.ModelNaga;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.EntityRenderRegistry;
 
 public class RenderNaga extends MobEntityRenderer<EntityNaga, AnimalModel<EntityNaga>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/naga.png");
 
 	public RenderNaga(EntityRendererFactory.Context ctx) {
-		super(ctx, new ModelNaga(ctx.getPart(EntityRegistry.NAGA_LAYER)), 0.7F);
+		super(ctx, new ModelNaga(ctx.getPart(EntityRenderRegistry.NAGA_LAYER)), 0.7F);
 	}
 
 	@Override

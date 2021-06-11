@@ -9,7 +9,6 @@ import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
@@ -27,7 +26,7 @@ import net.minecraft.util.math.Vec3f;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.model.ModelEntityFirefly;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.EntityRenderRegistry;
 
 public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<EntityFirefly>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/firefly.png");
@@ -38,7 +37,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 	private static final int LIT = 15728880;
 
 	public RenderFirefly(EntityRendererFactory.Context ctx) {
-		super(ctx, new ModelEntityFirefly(ctx.getPart(EntityRegistry.FIREFLY_LAYER)), 0);
+		super(ctx, new ModelEntityFirefly(ctx.getPart(EntityRenderRegistry.FIREFLY_LAYER)), 0);
 	}
 
 	@Override

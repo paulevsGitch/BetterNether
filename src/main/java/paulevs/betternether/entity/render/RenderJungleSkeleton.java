@@ -1,6 +1,5 @@
 package paulevs.betternether.entity.render;
 
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
@@ -14,13 +13,13 @@ import net.minecraft.util.Identifier;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityJungleSkeleton;
 import paulevs.betternether.entity.model.ModelJungleSkeleton;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.EntityRenderRegistry;
 
 public class RenderJungleSkeleton extends MobEntityRenderer<EntityJungleSkeleton, SkeletonEntityModel<EntityJungleSkeleton>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/jungle_skeleton.png");
 
 	public RenderJungleSkeleton(EntityRendererFactory.Context ctx){
-		this(ctx, EntityRegistry.JUNGLE_SKELETON_LAYER, EntityModelLayers.SKELETON_INNER_ARMOR, EntityModelLayers.SKELETON_OUTER_ARMOR);
+		this(ctx, EntityRenderRegistry.JUNGLE_SKELETON_LAYER, EntityModelLayers.SKELETON_INNER_ARMOR, EntityModelLayers.SKELETON_OUTER_ARMOR);
 	}
 	public RenderJungleSkeleton(EntityRendererFactory.Context ctx, EntityModelLayer layer, EntityModelLayer legArmorLayer, EntityModelLayer bodyArmorLayer) {
 		super(ctx, new ModelJungleSkeleton(ctx.getPart(layer)), 0.4F);
