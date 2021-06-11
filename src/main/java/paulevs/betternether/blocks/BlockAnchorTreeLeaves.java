@@ -9,6 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -16,6 +17,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -26,11 +28,23 @@ import paulevs.betternether.registry.BlocksRegistry;
 public class BlockAnchorTreeLeaves extends BlockBaseNotFull {
 	private Random random = new Random();
 
+
 	public BlockAnchorTreeLeaves() {
-		super(Materials.makeLeaves(MapColor.GREEN));
+		super(Materials
+            .makeLeaves(MapColor.GREEN)
+            .dynamicBounds()
+        );
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
+
 	}
+
+	@Override
+	public boolean hasRandomTicks(BlockState state) {
+		return false;
+	}
+
+
 
 	public AbstractBlock.OffsetType getOffsetType() {
 		return AbstractBlock.OffsetType.XZ;

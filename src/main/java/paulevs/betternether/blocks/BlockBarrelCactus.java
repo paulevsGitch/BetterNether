@@ -44,7 +44,9 @@ public class BlockBarrelCactus extends BlockCommonPlant implements Fertilizable 
 				.nonOpaque()
 				.hardness(0.4F)
 				.ticksRandomly()
-				.breakByTool(FabricToolTags.SHEARS));
+				.breakByTool(FabricToolTags.SHEARS)
+				.dynamicBounds()
+        );
 	}
 
 	@Override
