@@ -96,7 +96,8 @@ public class BNSignBlockEntityRenderer implements BlockEntityRenderer<BNSignBloc
 		OrderedText[] orderedTexts = signBlockEntity.updateSign(MinecraftClient.getInstance().shouldFilterText(),
 				(text) -> {
 					List<OrderedText> list = this.textRenderer.wrapLines(text, 90);
-					return list.isEmpty() ? OrderedText.EMPTY : (OrderedText) list.get(0);
+					OrderedText o = list.isEmpty() ? OrderedText.EMPTY : (OrderedText) list.get(0);
+					return o==null?OrderedText.EMPTY:o;
 				});
 		int textColor;
 		boolean sldRender;
@@ -113,6 +114,9 @@ public class BNSignBlockEntityRenderer implements BlockEntityRenderer<BNSignBloc
 
 		for (int y = 0; y < 4; ++y) {
 			OrderedText orderedText = orderedTexts[y];
+			if (orderedText==null) {
+				orderedText = OrderedText.EMPTY;
+			}
 			float x = (float) (-this.textRenderer.getWidth(orderedText) / 2);
 			if (sldRender) {
 				this.textRenderer.method_37296(orderedText, x, (float) (y * 10 - 20), textColor, color,

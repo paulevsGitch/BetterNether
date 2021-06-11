@@ -49,7 +49,7 @@ public class BNSignEditScreen extends Screen {
 		this.signType = BNSignBlockEntityRenderer.getSignType(blockState.getBlock());
 		this.model = BNSignBlockEntityRenderer.createSignModel(this.client.getEntityModelLoader(), this.signType);
 		this.client.keyboard.setRepeatEvents(true);
-		this.addDrawable(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 120, 200, 20, ScreenTexts.DONE,
+		this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 120, 200, 20, ScreenTexts.DONE,
 				(buttonWidget) -> {
 					this.finishEditing();
 				}));
