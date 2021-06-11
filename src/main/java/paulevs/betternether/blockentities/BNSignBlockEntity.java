@@ -170,7 +170,7 @@ public class BNSignBlockEntity extends BlockEntity {
 		return this.editable;
 	}
 
-	public boolean isGlowingText() { return this.isGlowingText();}
+	public boolean isGlowingText() { return this.glowingText;}
 
 	@Environment(EnvType.CLIENT)
 	public void setEditable(boolean bl) {
