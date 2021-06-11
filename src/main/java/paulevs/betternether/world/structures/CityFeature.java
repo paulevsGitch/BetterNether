@@ -14,7 +14,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
@@ -44,15 +43,15 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig> {
 		}
 
 		@Override
-		public void init(DynamicRegistryManager dynamicRegistryManager, ChunkGenerator chunkGenerator, StructureManager structureManager, ChunkPos chunkPos, Biome biome, DefaultFeatureConfig featureConfig, HeightLimitView heightLimitView) {
-			int px = (chunkPos.x << 4) | 8;
-			int pz = (chunkPos.z << 4) | 8;
+		public void init(DynamicRegistryManager dynamicRegistryManager, ChunkGenerator chunkGenerator, StructureManager structureManager, ChunkPos cpos, Biome biome, DefaultFeatureConfig featureConfig, HeightLimitView heightLimitView) {
+			int px = cpos.getOffsetX(8);
+			int pz = cpos.getOffsetZ(8);
 			int y = 40;
 			if (chunkGenerator instanceof FlatChunkGenerator) {
 				y = chunkGenerator.getHeight(px, pz, Type.WORLD_SURFACE, heightLimitView);
 			}
-
 			BlockPos center = new BlockPos(px, y, pz);
+
 
 			// CityPalette palette = Palettes.getRandom(random);
 			List<CityPiece> buildings = generator.generate(center, this.random, Palettes.EMPTY);
@@ -79,6 +78,7 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig> {
 			}
 
 			this.setBoundingBoxFromChildren();
+
 			/*this.boundingBox.maxZ -= 12;
 			this.boundingBox.minZ += 12;
 			this.boundingBox.minY -= 12;
