@@ -33,6 +33,7 @@
 			"paulevs.betternether.config.ModMenuEntry"
 		]
 	},
+    "accessWidener" : "betternether.accesswidener",
 	"mixins": [
 		"betternether.mixins.common.json",
 		"betternether.mixins.client.json"
