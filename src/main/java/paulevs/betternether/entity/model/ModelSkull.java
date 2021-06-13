@@ -24,7 +24,7 @@ public class ModelSkull extends AnimalModel<EntitySkull> {
 
 		/* textureHeight = 16;
 		textureWidth = 32; */
-		return TexturedModelData.of(modelData, 16, 32);
+		return TexturedModelData.of(modelData, 32, 16);
 	}
 
 	public ModelSkull(ModelPart root) {

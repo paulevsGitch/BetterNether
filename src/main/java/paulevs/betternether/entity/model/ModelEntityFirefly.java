@@ -10,8 +10,9 @@ import paulevs.betternether.entity.EntityFirefly;
 public class ModelEntityFirefly extends AnimalModel<EntityFirefly> {
 	private final ModelPart body;
 	// private final ModelPart legs;
-	// private final ModelPart glow;
+	private final ModelPart glow;
 	private final static String GLOW ="glow";
+	private final static String GLOW_PLANE ="glow_plane";
 
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
@@ -33,10 +34,15 @@ public class ModelEntityFirefly extends AnimalModel<EntityFirefly> {
 
 		body.addChild(legs);*/
 
-		modelPartData_BODY.addChild(GLOW, ModelPartBuilder.create()
+		/*modelPartData_BODY.addChild(GLOW, ModelPartBuilder.create()
 				.uv(0, 10)
-				.cuboid(0F, 0F, 0F, 6F, 6F, 6F), ModelTransform.pivot(-0.5F, -0.5F, -0.5F));
+				.cuboid(0F, 0F, 0F, 6F, 6F, 6F), ModelTransform.pivot(-0.5F, -0.5F, -0.5F));*/
 
+		modelPartData.addChild(GLOW_PLANE, ModelPartBuilder.create()
+				.uv(0, 32), ModelTransform.pivot(-2.5F, 18F, -2.5F))
+				.addChild(GLOW, ModelPartBuilder.create()
+					.uv(0, 10)
+					.cuboid(0F, 0F, 0F, 6F, 6F, 6F), ModelTransform.pivot(-0.5F, -0.5F, -0.5F));;
 		/*glow = new ModelPart(this, 0, 10);
 		glow.addCuboid(0F, 0F, 0F, 6F, 6F, 6F);
 		glow.setPivot(-0.5F, -0.5F, -0.5F);
@@ -45,13 +51,13 @@ public class ModelEntityFirefly extends AnimalModel<EntityFirefly> {
 
 		/*textureHeight = 64;
 		textureWidth = 32;*/
-		return TexturedModelData.of(modelData, 64, 32);
+		return TexturedModelData.of(modelData, 32, 64);
 	}
 
 	public ModelEntityFirefly(ModelPart root) {
 		this.body = root.getChild(EntityModelPartNames.BODY);
 		// this.legs = this.body.getChild(EntityModelPartNames.TAIL);
-		// this.glow = this.body.getChild(GLOW);
+		this.glow = root.getChild(GLOW_PLANE);
 	}
 
 	@Override
@@ -67,5 +73,9 @@ public class ModelEntityFirefly extends AnimalModel<EntityFirefly> {
 	@Override
 	public void setAngles(EntityFirefly entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
 
+	}
+
+	public ModelPart getGlowPart(){
+		return this.glow;
 	}
 }
