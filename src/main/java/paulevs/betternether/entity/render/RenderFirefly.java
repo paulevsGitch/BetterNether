@@ -2,6 +2,7 @@ package paulevs.betternether.entity.render;
 
 import java.util.Iterator;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.MinecraftClient;
@@ -23,18 +24,17 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix3f;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3f;
+import org.jetbrains.annotations.Nullable;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityFirefly;
+import paulevs.betternether.entity.model.ModelEmpty;
 import paulevs.betternether.entity.model.ModelEntityFirefly;
 import paulevs.betternether.registry.EntityRenderRegistry;
 
 public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<EntityFirefly>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/firefly.png");
-	private static final RenderLayer LAYER = RenderLayers.getFirefly(TEXTURE); // getEntityTranslucent
-																				// getEntityNoOutline
-																				// getBeaconBeam
-																				// getEntityShadow
 	private static final int LIT = 15728880;
+	private static final ModelEmpty emptyModel = new ModelEmpty();
 
 	public RenderFirefly(EntityRendererFactory.Context ctx) {
 		super(ctx, new ModelEntityFirefly(ctx.getPart(EntityRenderRegistry.FIREFLY_LAYER)), 0);
@@ -45,10 +45,9 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		return TEXTURE;
 	}
 
-	@Override
-	public void render(EntityFirefly entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-		RenderSystem.enableDepthTest();
-		RenderSystem.enableBlend();
+	protected void renderGlow(EntityFirefly entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light){
+		RenderLayer renderLayer = this.getRenderLayerTranslucent(entity, true, true, false);
+		VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(renderLayer);
 
 		float red = entity.getRed();
 		float green = entity.getGreen();
@@ -61,103 +60,60 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		MatrixStack.Entry entry = matrixStack.peek();
 		Matrix4f matrix4f = entry.getModel();
 		Matrix3f matrix3f = entry.getNormal();
-		VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
+
 		addVertex(matrix4f, matrix3f, vertexConsumer, -1, -1, 0F, 0.5F, red, green, blue);
 		addVertex(matrix4f, matrix3f, vertexConsumer, 1, -1, 1F, 0.5F, red, green, blue);
 		addVertex(matrix4f, matrix3f, vertexConsumer, 1, 1, 1F, 1F, red, green, blue);
 		addVertex(matrix4f, matrix3f, vertexConsumer, -1, 1, 0F, 1F, red, green, blue);
+
+		if (renderLayer != null) {
+			ModelEntityFirefly mdl = (ModelEntityFirefly)this.model;
+
+			RenderSystem.enableBlend();
+			RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
+
+			RenderSystem.setShaderColor(red, green, blue, 0.1F);
+			this.emptyModel.render(matrixStack, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue,  0.1f);
+		}
 		matrixStack.pop();
+	}
+	@Override
+	public void render(EntityFirefly entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+		super.render(entity, f, g, matrixStack, vertexConsumerProvider, i);
+		renderGlow(entity, f, g, matrixStack, vertexConsumerProvider, i);
+	}
 
-		matrixStack.push();
-		this.model.handSwingProgress = this.getHandSwingProgress(entity, g);
-		this.model.riding = entity.hasVehicle();
-		this.model.child = entity.isBaby();
-		float h = MathHelper.lerpAngleDegrees(g, entity.prevBodyYaw, entity.bodyYaw);
-		float j = MathHelper.lerpAngleDegrees(g, entity.prevHeadYaw, entity.headYaw);
-		float k = j - h;
-		float o;
-		if (entity.hasVehicle() && entity.getVehicle() instanceof LivingEntity) {
-			LivingEntity mobEntity2 = (LivingEntity) entity.getVehicle();
-			h = MathHelper.lerpAngleDegrees(g, mobEntity2.prevBodyYaw, mobEntity2.bodyYaw);
-			k = j - h;
-			o = MathHelper.wrapDegrees(k);
-			if (o < -85.0F) {
-				o = -85.0F;
-			}
+	/**
+	 * Gets the render layer appropriate for rendering the passed entity. Returns
+	 * null if the entity should not be rendered.
+	 */
+	@Nullable
+	@Override
+	protected RenderLayer getRenderLayer(EntityFirefly entity, boolean showBody, boolean translucent, boolean showOutline) {
+		//Identifier identifier = this.getTexture(entity);
+		//return RenderPhaseAccessor.getFirefly(identifier);
+		//return RenderLayer.getEntityAlpha(identifier);
+		return super.getRenderLayer(entity, showBody, translucent, showOutline);
+	}
 
-			if (o >= 85.0F) {
-				o = 85.0F;
-			}
-
-			h = j - o;
-			if (o * o > 2500.0F) {
-				h += o * 0.2F;
-			}
-
-			k = j - h;
-		}
-
-		float m = MathHelper.lerp(g, entity.prevPitch, entity.getPitch());
-		float p;
-		if (entity.getPose() == EntityPose.SLEEPING) {
-			Direction direction = entity.getSleepingDirection();
-			if (direction != null) {
-				p = entity.getEyeHeight(EntityPose.STANDING) - 0.1F;
-				matrixStack.translate((double) ((float) (-direction.getOffsetX()) * p), 0.0D,
-						(double) ((float) (-direction.getOffsetZ()) * p));
-			}
-		}
-
-		o = this.getAnimationProgress(entity, g);
-		this.setupTransforms(entity, matrixStack, o, h, g);
-		matrixStack.scale(-1.0F, -1.0F, 1.0F);
-		this.scale(entity, matrixStack, g);
-		matrixStack.translate(0.0D, -1.5010000467300415D, 0.0D);
-		p = 0.0F;
-		float q = 0.0F;
-		if (!entity.hasVehicle() && entity.isAlive()) {
-			p = MathHelper.lerp(g, entity.lastLimbDistance, entity.limbDistance);
-			q = entity.limbAngle - entity.limbDistance * (1.0F - g);
-			if (entity.isBaby()) {
-				q *= 3.0F;
-			}
-
-			if (p > 1.0F) {
-				p = 1.0F;
-			}
-		}
-
-		this.model.animateModel(entity, q, p, g);
-		this.model.setAngles(entity, q, p, o, k, m);
-		boolean visible = this.isVisible(entity);
-		boolean ghost = !visible && !entity.isInvisibleTo(MinecraftClient.getInstance().player);
-		MinecraftClient client = MinecraftClient.getInstance();
-		boolean outline = client.hasOutline(entity);
-		RenderLayer layer = this.getRenderLayer(entity, visible, ghost, outline);
-		if (layer != null) {
-			int r = getOverlay(entity, 0);
-			this.model.render(matrixStack, vertexConsumer, i, r, red, green, blue, ghost ? 0.15F : 1.0F);
-
-		}
-
-		if (!entity.isSpectator()) {
-			Iterator<?> var21 = this.features.iterator();
-			while (var21.hasNext()) {
-				@SuppressWarnings("unchecked")
-				FeatureRenderer<EntityFirefly, AnimalModel<EntityFirefly>> feature = (FeatureRenderer<EntityFirefly, AnimalModel<EntityFirefly>>) var21.next();
-				feature.render(matrixStack, vertexConsumerProvider, i, entity, q, p, g, o, k, m);
-			}
-		}
-
-		matrixStack.pop();
-
-		if (this.hasLabel(entity)) {
-			this.renderLabelIfPresent(entity, entity.getDisplayName(), matrixStack, vertexConsumerProvider, i);
-		}
+	// getEntityTranslucent
+	// getEntityNoOutline
+	// getBeaconBeam
+	// getEntityShadow
+	@Nullable
+	protected RenderLayer getRenderLayerTranslucent(EntityFirefly entity, boolean showBody, boolean translucent, boolean showOutline) {
+		Identifier identifier = this.getTexture(entity);
+		return RenderPhaseAccessor.getFirefly(identifier);
 	}
 
 	public void addVertex(Matrix4f matrix4f, Matrix3f matrix3f, VertexConsumer vertexConsumer, float posX, float posY, float u, float v, float red, float green, float blue) {
-		vertexConsumer.vertex(matrix4f, posX, posY, 0).color(red, green, blue, 1F).texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(LIT).normal(matrix3f, 0, 1, 0).next();
+		vertexConsumer
+				.vertex(matrix4f, posX, posY, 0)
+				.color(red, green, blue, 0.0F)
+				.texture(u, v)
+				.overlay(OverlayTexture.DEFAULT_UV)
+				.light(LIT)
+				.normal(matrix3f, 0, 1, 0).next();
 	}
 
 	@Override
