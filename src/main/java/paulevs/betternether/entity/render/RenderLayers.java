@@ -15,8 +15,7 @@ abstract class RenderPhaseAccessor extends RenderPhase{
 		super(name, beginAction, endAction);
 	}
 
-	private static final java.util.function.Function<Identifier, RenderLayer> FIREFLY_RENDER_LAYER = Util.memoize((texture) -> {
-
+	private static final RenderLayer getFireflySetup(Identifier texture){
 		RenderLayer.MultiPhaseParameters multiPhaseParameters = RenderLayer.MultiPhaseParameters.builder()
 				.shader(RenderPhase.EYES_SHADER)
 				.texture(new RenderPhase.Texture(texture, false, false))
@@ -27,9 +26,20 @@ abstract class RenderPhaseAccessor extends RenderPhase{
 				.lightmap(ENABLE_LIGHTMAP)
 				.build(false);
 		return RenderLayerMixin.callOf("firefly", VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, false, true, multiPhaseParameters);
-	});
+	}
+
+	private static final java.util.function.Function<Identifier, RenderLayer> FIREFLY_RENDER_LAYER = Util.memoize(RenderPhaseAccessor::getFireflySetup);
+
+	private static int debugCachingID = 0;
+	private static RenderLayer reloadableDebugLayer = null;
 	public static RenderLayer getFirefly(Identifier texture) {
-		return FIREFLY_RENDER_LAYER.apply(texture);
+		int targetCacheID = 2;
+		if (debugCachingID<targetCacheID || reloadableDebugLayer == null){
+			System.out.println("Reloading RenderLayer: " + targetCacheID);
+			debugCachingID = targetCacheID;
+			reloadableDebugLayer = getFireflySetup(texture);
+		}
+		return reloadableDebugLayer; //FIREFLY_RENDER_LAYER.apply(texture);
 	}
 }
 
