@@ -5,7 +5,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 import net.minecraft.client.render.RenderPhase;
-import paulevs.betternether.entity.render.RenderLayers;
 
 import java.lang.reflect.Field;
 
@@ -36,11 +35,6 @@ public class RenderPhaseMixin {
 	protected static RenderPhase.Target CLOUDS_TARGET;
 
 	static {
-	RenderLayers.translucentTransparency = TRANSLUCENT_TRANSPARENCY;
-	RenderLayers.colorMask = COLOR_MASK;
-	//RenderLayers.fog = FOG;
-	RenderLayers.lEqualDepthTest = LEQUAL_DEPTH_TEST;
-	RenderLayers.polygonZLayering = POLYGON_OFFSET_LAYERING;
-	RenderLayers.translucentTarget = CLOUDS_TARGET;
+
 	}
 }

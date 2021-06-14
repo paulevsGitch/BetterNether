@@ -6,6 +6,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -13,10 +14,18 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
+import net.minecraft.client.render.entity.feature.FeatureRendererContext;
+import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.render.entity.model.AnimalModel;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.ModelWithArms;
+import net.minecraft.client.render.entity.model.SkeletonEntityModel;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -31,6 +40,30 @@ import paulevs.betternether.entity.model.ModelEmpty;
 import paulevs.betternether.entity.model.ModelEntityFirefly;
 import paulevs.betternether.registry.EntityRenderRegistry;
 
+class FireflyGlowFeatureRenderer extends FeatureRenderer<EntityFirefly, AnimalModel<EntityFirefly>> {
+	public FireflyGlowFeatureRenderer(FeatureRendererContext<EntityFirefly, AnimalModel<EntityFirefly>> featureRendererContext) {
+		super(featureRendererContext);
+	}
+
+	@Override
+	public void render(MatrixStack matrices, VertexConsumerProvider vertices, int light, EntityFirefly livingEntity, float f, float g, float h, float j, float k, float l) {
+		EntityModel<EntityFirefly> model = this.getContextModel();
+		Identifier identifier = this.getTexture(livingEntity);
+		RenderLayer renderLayer =  RenderPhaseAccessor.getFirefly(identifier);
+		VertexConsumer vertexConsumer = vertices.getBuffer(renderLayer);
+
+		if (model instanceof ModelEntityFirefly){
+			float red = livingEntity.getRed();
+			float green = livingEntity.getGreen();
+			float blue = livingEntity.getBlue();
+
+			((ModelEntityFirefly)model).getGlowPart().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue,  2f);
+			//((ModelEntityFirefly)model).getGlowPart().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue,  1f);
+		}
+	}
+
+}
+
 public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<EntityFirefly>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/firefly.png");
 	private static final int LIT = 15728880;
@@ -38,11 +71,22 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 
 	public RenderFirefly(EntityRendererFactory.Context ctx) {
 		super(ctx, new ModelEntityFirefly(ctx.getPart(EntityRenderRegistry.FIREFLY_LAYER)), 0);
+
+		this.addFeature(new FireflyGlowFeatureRenderer( this));
 	}
 
 	@Override
 	public Identifier getTexture(EntityFirefly entity) {
 		return TEXTURE;
+	}
+
+	void renderGlowModel(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha){
+		EntityModel<EntityFirefly> model = this.getModel();
+		if (model instanceof ModelEntityFirefly){
+			((ModelEntityFirefly)model).getGlowPart().render(matrices, vertices, light, overlay, red, green, blue, alpha);
+		} else {
+			emptyModel.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+		}
 	}
 
 	protected void renderGlow(EntityFirefly entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light){
@@ -67,20 +111,19 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 		addVertex(matrix4f, matrix3f, vertexConsumer, -1, 1, 0F, 1F, red, green, blue);
 
 		if (renderLayer != null) {
-			ModelEntityFirefly mdl = (ModelEntityFirefly)this.model;
-
-			RenderSystem.enableBlend();
-			RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
-
-			RenderSystem.setShaderColor(red, green, blue, 0.1F);
-			this.emptyModel.render(matrixStack, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue,  0.1f);
+			emptyModel.render(matrixStack, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue,  1f);
 		}
 		matrixStack.pop();
 	}
+
+	boolean renderOverlay = false;
 	@Override
 	public void render(EntityFirefly entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-		super.render(entity, f, g, matrixStack, vertexConsumerProvider, i);
 		renderGlow(entity, f, g, matrixStack, vertexConsumerProvider, i);
+		renderOverlay = false;
+		super.render(entity, f, g, matrixStack, vertexConsumerProvider, i);
+		renderOverlay = true;
+		//super.render(entity, f, g, matrixStack, vertexConsumerProvider, i);
 	}
 
 	/**
@@ -90,16 +133,10 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 	@Nullable
 	@Override
 	protected RenderLayer getRenderLayer(EntityFirefly entity, boolean showBody, boolean translucent, boolean showOutline) {
-		//Identifier identifier = this.getTexture(entity);
-		//return RenderPhaseAccessor.getFirefly(identifier);
-		//return RenderLayer.getEntityAlpha(identifier);
+		if (renderOverlay) return this.getRenderLayerTranslucent(entity,  showBody,  translucent,  showOutline);
 		return super.getRenderLayer(entity, showBody, translucent, showOutline);
 	}
 
-	// getEntityTranslucent
-	// getEntityNoOutline
-	// getBeaconBeam
-	// getEntityShadow
 	@Nullable
 	protected RenderLayer getRenderLayerTranslucent(EntityFirefly entity, boolean showBody, boolean translucent, boolean showOutline) {
 		Identifier identifier = this.getTexture(entity);
@@ -109,7 +146,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 	public void addVertex(Matrix4f matrix4f, Matrix3f matrix3f, VertexConsumer vertexConsumer, float posX, float posY, float u, float v, float red, float green, float blue) {
 		vertexConsumer
 				.vertex(matrix4f, posX, posY, 0)
-				.color(red, green, blue, 0.0F)
+				.color(red, green, blue, 1F)
 				.texture(u, v)
 				.overlay(OverlayTexture.DEFAULT_UV)
 				.light(LIT)

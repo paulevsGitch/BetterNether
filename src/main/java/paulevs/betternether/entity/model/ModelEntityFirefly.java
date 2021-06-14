@@ -39,10 +39,10 @@ public class ModelEntityFirefly extends AnimalModel<EntityFirefly> {
 				.cuboid(0F, 0F, 0F, 6F, 6F, 6F), ModelTransform.pivot(-0.5F, -0.5F, -0.5F));*/
 
 		modelPartData.addChild(GLOW_PLANE, ModelPartBuilder.create()
-				.uv(0, 32), ModelTransform.pivot(-2.5F, 18F, -2.5F))
+				.uv(0, 32), ModelTransform.NONE)
 				.addChild(GLOW, ModelPartBuilder.create()
 					.uv(0, 10)
-					.cuboid(0F, 0F, 0F, 6F, 6F, 6F), ModelTransform.pivot(-0.5F, -0.5F, -0.5F));;
+					.cuboid(0F, 0F, 0F, 5F, 5F, 5F, Dilation.NONE, 6.0f/5.0f, 6.0f/5.0f), ModelTransform.pivot(-2.5F, 18F, -2.5F));;
 		/*glow = new ModelPart(this, 0, 10);
 		glow.addCuboid(0F, 0F, 0F, 6F, 6F, 6F);
 		glow.setPivot(-0.5F, -0.5F, -0.5F);
@@ -73,6 +73,10 @@ public class ModelEntityFirefly extends AnimalModel<EntityFirefly> {
 	@Override
 	public void setAngles(EntityFirefly entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
 
+	}
+
+	public void syncTransform(){
+		this.glow.setTransform(this.body.getTransform());
 	}
 
 	public ModelPart getGlowPart(){

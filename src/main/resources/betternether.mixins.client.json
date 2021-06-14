@@ -8,7 +8,6 @@
 	"MinecraftClientMixin",
 	"PresetsScreenMixin",
 	"PlayerArmorMixin",
-	"RenderPhaseMixin",
     "RenderLayerMixin",
 	"StandArmorMixin",
 	"LavaFluidMixin",
