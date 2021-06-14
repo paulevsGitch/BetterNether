@@ -19,6 +19,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -41,7 +43,7 @@ abstract class ShaderDebugHelper extends RenderPhase {
             ResourceFactory factory = MinecraftClient.getInstance().getResourceManager();
             try {
                 myDebugShader = new DebugShader(factory);
-                MY_DEBUG_SHADER = new RenderPhase.Shader(RenderPhaseAccessor::getRenderTypeMyShader);
+                MY_DEBUG_SHADER = new RenderPhase.Shader(ShaderDebugHelper::getRenderTypeMyShader);
             } catch (IOException e) {
                 e.printStackTrace();
                 MY_DEBUG_SHADER = RenderPhase.EYES_SHADER;
@@ -98,7 +100,8 @@ class DebugShader extends net.minecraft.client.render.Shader {
         System.out.println("Loading " + name + type.getFileExtension());
 
 
-        final String shaderFile = "/Users/frank/Desktop/mc1.17/assets/minecraft/shaders/core/" + name + type.getFileExtension();
+        String workingDirAbs = Paths.get("").toAbsolutePath().toString();
+        final String shaderFile = workingDirAbs + "/" + name + type.getFileExtension();
         String dummyName = "shaders/core/" + name + type.getFileExtension();
         final String basePath = FileNameUtil.getPosixFullPath(dummyName);
 

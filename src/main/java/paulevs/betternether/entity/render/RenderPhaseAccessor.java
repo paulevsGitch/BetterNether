@@ -10,7 +10,7 @@ import paulevs.betternether.mixin.client.RenderLayerMixin;
 
 
 
-public abstract class RenderPhaseAccessor extends ShaderDebugHelper{
+public abstract class RenderPhaseAccessor extends RenderPhase { //extends ShaderDebugHelper{
 	public RenderPhaseAccessor(String name, Runnable beginAction, Runnable endAction) {
 		super(name, beginAction, endAction);
 	}
@@ -24,11 +24,11 @@ public abstract class RenderPhaseAccessor extends ShaderDebugHelper{
 	});
 
 	private static final RenderLayer getFireflySetup(Identifier texture){
-		initDebugShader();
+		//initDebugShader();
 
 		RenderLayer.MultiPhaseParameters multiPhaseParameters = RenderLayer.MultiPhaseParameters.builder()
-				.shader(MY_DEBUG_SHADER)
-				//.shader(EYES_SHADER)
+				//.shader(MY_DEBUG_SHADER)
+				.shader(EYES_SHADER)
 				.texture(new RenderPhase.Texture(texture, false, false))
 				.writeMaskState(COLOR_MASK)
 				.cull(DISABLE_CULLING)
@@ -41,8 +41,8 @@ public abstract class RenderPhaseAccessor extends ShaderDebugHelper{
 
 	private static final java.util.function.Function<Identifier, RenderLayer> FIREFLY_RENDER_LAYER = Util.memoize(RenderPhaseAccessor::getFireflySetup);
 
-
 	public static RenderLayer getFirefly(Identifier texture) {
-		return getDebugLayer(texture, RenderPhaseAccessor::getFireflySetup); //FIREFLY_RENDER_LAYER.apply(texture);
+		//return getDebugLayer(texture, RenderPhaseAccessor::getFireflySetup);
+		return FIREFLY_RENDER_LAYER.apply(texture);
 	}
 }
