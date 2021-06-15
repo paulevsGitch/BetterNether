@@ -18,7 +18,7 @@ public class RenderSkull extends MobEntityRenderer<EntitySkull, AnimalModel<Enti
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/skull.png");
 
 	public RenderSkull(EntityRendererFactory.Context ctx) {
-		super(ctx, new ModelSkull(ctx.getPart(EntityRenderRegistry.SKULL_LAYER)), 0.7F);
+		super(ctx, new ModelSkull(ctx.getPart(EntityRenderRegistry.SKULL_MODEL)), 0.7F);
 		this.addFeature(new GlowFeatureRenderer(this));
 	}
 
