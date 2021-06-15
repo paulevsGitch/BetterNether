@@ -32,7 +32,7 @@ public class EntityRenderRegistry {
 
 
 	public static EntityModelLayer registerMain(String id){
-		System.out.println("Register Entity: " + id);
+		//System.out.println("Register Entity: " + id);
 		return new EntityModelLayer(new Identifier(BetterNether.MOD_ID, id), "main");
 		//return EntityModelLayersMixin.callRegisterMain(key);
 	}
