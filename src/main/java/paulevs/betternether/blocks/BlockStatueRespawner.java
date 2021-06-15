@@ -28,6 +28,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -40,7 +41,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockStatueRespawner extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 16, 15);
-	private static final DustParticleEffect EFFECT = new DustParticleEffect(1, 0, 0, 1.0F);
+	private static final DustParticleEffect EFFECT = new DustParticleEffect(Vec3f.POSITIVE_X,  1.0F);
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	public static final BooleanProperty TOP = BooleanProperty.of("top");
 	private final ItemStack requiredItem;

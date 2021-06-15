@@ -38,7 +38,7 @@ public class BuildingStructureProcessor extends StructureProcessor {
 	}
 
 	private StructureBlockInfo setState(BlockState state, StructureBlockInfo info) {
-		return new StructureBlockInfo(info.pos, state, info.tag);
+		return new StructureBlockInfo(info.pos, state, info.nbt);
 	}
 
 	@Override

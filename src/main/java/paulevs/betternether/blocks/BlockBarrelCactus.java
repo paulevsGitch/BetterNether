@@ -10,8 +10,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
@@ -39,12 +39,14 @@ public class BlockBarrelCactus extends BlockCommonPlant implements Fertilizable 
 
 	public BlockBarrelCactus() {
 		super(FabricBlockSettings.of(Material.CACTUS)
-				.materialColor(MaterialColor.BLUE_TERRACOTTA)
+				.materialColor(MapColor.TERRACOTTA_BLUE)
 				.sounds(BlockSoundGroup.WOOL)
 				.nonOpaque()
 				.hardness(0.4F)
 				.ticksRandomly()
-				.breakByTool(FabricToolTags.SHEARS));
+				.breakByTool(FabricToolTags.SHEARS)
+				.dynamicBounds()
+        );
 	}
 
 	@Override

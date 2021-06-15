@@ -16,8 +16,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -47,7 +47,7 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Fertilizable
 
 	public BlockNeonEquisetum() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.GREEN)
+				.materialColor(MapColor.GREEN)
 				.sounds(BlockSoundGroup.CROP)
 				.noCollision()
 				.dropsNothing()
@@ -113,7 +113,7 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Fertilizable
 	@Override
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0) {
+		if (tool != null && FabricToolTags.SHEARS.contains(tool.getItem()) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0) {
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		}
 		else {

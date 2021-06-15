@@ -9,8 +9,8 @@ import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
@@ -33,7 +33,7 @@ public class BlockAgave extends BlockCommonPlant {
 
 	public BlockAgave() {
 		super(FabricBlockSettings.of(Material.CACTUS)
-				.materialColor(MaterialColor.ORANGE_TERRACOTTA)
+				.materialColor(MapColor.TERRACOTTA_ORANGE)
 				.sounds(BlockSoundGroup.WOOL)
 				.nonOpaque()
 				.noCollision()

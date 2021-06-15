@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
@@ -22,7 +22,7 @@ public class BlockStalagnate extends BlockBaseNotFull {
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
 
 	public BlockStalagnate() {
-		super(Materials.makeWood(MaterialColor.LIME_TERRACOTTA).nonOpaque());
+		super(Materials.makeWood(MapColor.TERRACOTTA_LIME).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.MIDDLE));
 		this.setDropItself(false);

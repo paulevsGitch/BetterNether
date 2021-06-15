@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.ai.TargetFinder;
+import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
@@ -34,7 +34,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -51,6 +51,10 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.entity.EntityFlyingPig.FindFoodGoal;
+import paulevs.betternether.entity.EntityFlyingPig.RoostingGoal;
+import paulevs.betternether.entity.EntityFlyingPig.SittingGoal;
+import paulevs.betternether.entity.EntityFlyingPig.WanderAroundGoal;
 import paulevs.betternether.registry.EntityRegistry;
 
 public class EntityFlyingPig extends AnimalEntity implements Flutterer {
@@ -112,15 +116,15 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag tag) {
-		super.writeCustomDataToTag(tag);
+	public void writeCustomDataToNbt(NbtCompound tag) {
+		super.writeCustomDataToNbt(tag);
 
 		tag.putByte("byteData", this.dataTracker.get(FLAGS));
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag tag) {
-		super.readCustomDataFromTag(tag);
+	public void readCustomDataFromNbt(NbtCompound tag) {
+		super.readCustomDataFromNbt(tag);
 
 		if (tag.contains("byteData")) {
 			this.dataTracker.set(FLAGS, tag.getByte("byteData"));
@@ -153,7 +157,7 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	protected float getSoundPitch() {
+	public float getSoundPitch() {
 		return MHelper.randRange(0.3F, 0.4F, random);
 	}
 
@@ -189,12 +193,7 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public boolean canClimb() {
-		return false;
-	}
-
-	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier) {
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
 		return false;
 	}
 
@@ -217,6 +216,11 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 
 	static {
 		FLAGS = DataTracker.registerData(EntityFlyingPig.class, TrackedDataHandlerRegistry.BYTE);
+	}
+
+	@Override
+	public boolean isInAir() {
+		return !this.onGround;
 	}
 
 	class WanderAroundGoal extends Goal {
@@ -252,10 +256,10 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 			bpos.set(EntityFlyingPig.this.getX(), EntityFlyingPig.this.getY(), EntityFlyingPig.this.getZ());
 
 			Vec3d angle = EntityFlyingPig.this.getRotationVec(0.0F);
-			Vec3d airTarget = TargetFinder.findAirTarget(EntityFlyingPig.this, 8, 7, angle, 1.5707964F, 2, 1);
+			Vec3d airTarget = AboveGroundTargeting.find(EntityFlyingPig.this, 8, 7, angle.x, angle.z, 1.5707964F, 2, 1);
 
 			if (airTarget == null) {
-				airTarget = TargetFinder.findAirTarget(EntityFlyingPig.this, 32, 10, angle, 1.5707964F, 3, 1);
+				airTarget = AboveGroundTargeting.find(EntityFlyingPig.this, 32, 10, angle.x, angle.z, 1.5707964F, 3, 1);
 			}
 
 			if (airTarget == null) {
@@ -358,7 +362,7 @@ public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 			timer = 0;
 			ammount = MHelper.randRange(80, 160, EntityFlyingPig.this.random);
 			EntityFlyingPig.this.setVelocity(0, 0, 0);
-			EntityFlyingPig.this.setYaw(EntityFlyingPig.this.random.nextFloat() * MHelper.PI2);
+			EntityFlyingPig.this.setBodyYaw(EntityFlyingPig.this.random.nextFloat() * MHelper.PI2);
 			super.start();
 		}
 

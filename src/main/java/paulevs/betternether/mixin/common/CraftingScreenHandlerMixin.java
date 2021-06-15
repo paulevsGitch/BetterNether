@@ -20,7 +20,7 @@ public abstract class CraftingScreenHandlerMixin {
 
 	@Inject(method = "canUse", at = @At("HEAD"), cancellable = true)
 	private void canUse(PlayerEntity player, CallbackInfoReturnable<Boolean> info) {
-		if (context.run((world, pos) -> {
+		if (context.get((world, pos) -> {
 			return world.getBlockState(pos).getBlock() instanceof CraftingTableBlock;
 		}, true)) {
 			info.setReturnValue(true);

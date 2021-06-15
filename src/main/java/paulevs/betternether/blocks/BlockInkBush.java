@@ -3,7 +3,7 @@ package paulevs.betternether.blocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
@@ -11,7 +11,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockInkBush extends BlockCommonPlant {
 	public BlockInkBush() {
-		super(MaterialColor.BLACK);
+		super(MapColor.BLACK);
 	}
 
 	@Override

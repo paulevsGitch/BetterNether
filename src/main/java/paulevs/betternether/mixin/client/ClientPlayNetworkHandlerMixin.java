@@ -32,7 +32,7 @@ public class ClientPlayNetworkHandlerMixin {
 		BlockEntity blockEntity = this.world.getBlockEntity(packet.getPos());
 		if (blockEntity instanceof BNSignBlockEntity) {
 			BNSignBlockEntity sign = (BNSignBlockEntity) blockEntity;
-			client.openScreen(new BNSignEditScreen(sign));
+			client.openScreen(new BNSignEditScreen(sign, this.client.shouldFilterText()));
 			info.cancel();
 		}
 	}
@@ -43,7 +43,7 @@ public class ClientPlayNetworkHandlerMixin {
 		BlockPos blockPos = packet.getPos();
 		BlockEntity blockEntity = this.client.world.getBlockEntity(blockPos);
 		if (blockEntity instanceof BNSignBlockEntity) {
-			blockEntity.fromTag(this.client.world.getBlockState(blockPos), packet.getCompoundTag());
+			blockEntity.readNbt(packet.getNbt());
 			info.cancel();
 		}
 	}

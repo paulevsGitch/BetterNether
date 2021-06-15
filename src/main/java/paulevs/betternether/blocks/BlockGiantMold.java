@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
@@ -25,7 +25,7 @@ public class BlockGiantMold extends BlockBaseNotFull {
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
 
 	public BlockGiantMold() {
-		super(Materials.makeWood(MaterialColor.GRAY).nonOpaque());
+		super(Materials.makeWood(MapColor.GRAY).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

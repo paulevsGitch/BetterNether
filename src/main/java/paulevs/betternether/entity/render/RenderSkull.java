@@ -1,7 +1,7 @@
 package paulevs.betternether.entity.render;
 
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.EyesFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
@@ -12,12 +12,13 @@ import net.minecraft.util.math.MathHelper;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntitySkull;
 import paulevs.betternether.entity.model.ModelSkull;
+import paulevs.betternether.registry.EntityRenderRegistry;
 
 public class RenderSkull extends MobEntityRenderer<EntitySkull, AnimalModel<EntitySkull>> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/skull.png");
 
-	public RenderSkull(EntityRenderDispatcher renderManager) {
-		super(renderManager, new ModelSkull(), 0.7F);
+	public RenderSkull(EntityRendererFactory.Context ctx) {
+		super(ctx, new ModelSkull(ctx.getPart(EntityRenderRegistry.JUNGLE_SKELETON_LAYER)), 0.7F);
 		this.addFeature(new GlowFeatureRenderer(this));
 	}
 

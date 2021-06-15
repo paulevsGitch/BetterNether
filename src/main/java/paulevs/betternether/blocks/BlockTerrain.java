@@ -30,7 +30,7 @@ public class BlockTerrain extends BlockBase {
 	@Override
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool.isEffectiveOn(state)) {
+		if (tool.isSuitableFor(state)) {
 			if (EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0)
 				return Collections.singletonList(new ItemStack(this.asItem()));
 			else

@@ -10,10 +10,11 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.context.LootContext;
@@ -41,7 +42,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	public static final EnumProperty<JellyShape> VISUAL = EnumProperty.of("visual", JellyShape.class);
 
 	public BlockJellyfishMushroom() {
-		super(Materials.makeWood(MaterialColor.CYAN).hardness(0.1F).sounds(BlockSoundGroup.FUNGUS).nonOpaque().luminance(13));
+		super(Materials.makeWood(MapColor.CYAN).hardness(0.1F).sounds(BlockSoundGroup.FUNGUS).nonOpaque().luminance(13));
 		boolean sodium = FabricLoader.getInstance().isModLoaded("sodium"); // Fix
 																			// incorrect
 																			// sodium
@@ -89,13 +90,13 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	}
 
 	@Override
-	public void onLandedUpon(World world, BlockPos pos, Entity entity, float distance) {
+	public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
 		if (world.getBlockState(pos).get(SHAPE) != TripleShape.TOP)
 			return;
 		if (entity.bypassesLandingEffects())
-			super.onLandedUpon(world, pos, entity, distance);
+			super.onLandedUpon(world, state, pos, entity, fallDistance);
 		else
-			entity.handleFallDamage(distance, 0.0F);
+			entity.handleFallDamage(fallDistance, 0.0F, DamageSource.FALL);
 	}
 
 	@Override
@@ -115,9 +116,9 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	}
 
 	@Override
-	public void onSteppedOn(World world, BlockPos pos, Entity entity) {
+	public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
 		if (world.getBlockState(pos).get(SHAPE) != TripleShape.TOP) {
-			super.onSteppedOn(world, pos, entity);
+			super.onSteppedOn(world, pos, state, entity);
 			return;
 		}
 
@@ -126,7 +127,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 			double e = 0.4D + d * 0.2D;
 			entity.setVelocity(entity.getVelocity().multiply(e, 1.0D, e));
 		}
-		super.onSteppedOn(world, pos, entity);
+		super.onSteppedOn(world, pos, state, entity);
 	}
 
 	@Override

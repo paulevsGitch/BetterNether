@@ -1,7 +1,7 @@
 package paulevs.betternether.blocks.complex;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import paulevs.betternether.blocks.BNLogStripable;
 import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNPlanks;
@@ -37,7 +37,7 @@ public class WoodenMaterial {
 	public final Block chest;
 	public final Block barrel;
 
-	public WoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
+	public WoodenMaterial(String name, MapColor woodColor, MapColor planksColor) {
 		log_striped = BlocksRegistry.registerBlock("striped_log_" + name, new BNPillar(woodColor));
 		bark_striped = BlocksRegistry.registerBlock("striped_bark_" + name, new BNPillar(woodColor));
 

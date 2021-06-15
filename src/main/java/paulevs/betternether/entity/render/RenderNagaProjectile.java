@@ -6,11 +6,12 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix3f;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3f;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityNagaProjectile;
 
@@ -18,8 +19,8 @@ public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile> {
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/naga_projectile.png");
 	private static final RenderLayer LAYER = RenderLayer.getEntityCutoutNoCull(TEXTURE);
 
-	public RenderNagaProjectile(EntityRenderDispatcher renderManager) {
-		super(renderManager);
+	public RenderNagaProjectile(EntityRendererFactory.Context context) {
+		super(context);
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile> {
 		matrixStack.push();
 		matrixStack.scale(2.0F, 2.0F, 2.0F);
 		matrixStack.multiply(this.dispatcher.getRotation());
-		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
+		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
 		MatrixStack.Entry entry = matrixStack.peek();
 		Matrix4f matrix4f = entry.getModel();
 		Matrix3f matrix3f = entry.getNormal();

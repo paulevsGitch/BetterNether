@@ -1,7 +1,7 @@
 package paulevs.betternether.blocks;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
@@ -10,7 +10,7 @@ import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockHookMushroom extends BlockMold {
 	public BlockHookMushroom() {
-		super(Materials.makeGrass(MaterialColor.PINK)
+		super(Materials.makeGrass(MapColor.PINK)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.noCollision()

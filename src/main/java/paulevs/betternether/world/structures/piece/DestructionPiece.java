@@ -3,8 +3,9 @@ package paulevs.betternether.world.structures.piece;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
@@ -26,17 +27,17 @@ public class DestructionPiece extends CustomPiece {
 	private int maxY;
 
 	public DestructionPiece(BlockBox bounds, Random random) {
-		super(StructureTypes.DESTRUCTION, random.nextInt());
+		super(StructureTypes.DESTRUCTION, random.nextInt(), bounds);
 		radius = random.nextInt(5) + 1;
 		radSqr = radius * radius;
 		center = new BlockPos(
-				MHelper.randRange(bounds.minX, bounds.maxX, random),
-				MHelper.randRange(bounds.minY, bounds.maxY, random),
-				MHelper.randRange(bounds.minZ, bounds.maxZ, random));
+				MHelper.randRange(bounds.getMaxZ(), bounds.getMinZ(), random),
+				MHelper.randRange(bounds.getMinX(), bounds.getMaxX(), random),
+				MHelper.randRange(bounds.getMinY(), bounds.getMaxY(), random));
 		makeBoundingBox();
 	}
 
-	protected DestructionPiece(StructureManager manager, CompoundTag tag) {
+	protected DestructionPiece(ServerWorld serverWorld, NbtCompound tag) {
 		super(StructureTypes.DESTRUCTION, tag);
 		this.center = NbtHelper.toBlockPos(tag.getCompound("center"));
 		this.radius = tag.getInt("radius");
@@ -45,17 +46,17 @@ public class DestructionPiece extends CustomPiece {
 	}
 
 	@Override
-	protected void toNbt(CompoundTag tag) {
+	protected void writeNbt(ServerWorld serverWorld, NbtCompound tag) {
 		tag.put("center", NbtHelper.fromBlockPos(center));
 		tag.putInt("radius", radius);
 	}
 
 	@Override
 	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
-		for (int x = blockBox.minX; x <= blockBox.maxX; x++) {
+		for (int x = blockBox.getMaxZ(); x <= blockBox.getMinZ(); x++) {
 			int px = x - center.getX();
 			px *= px;
-			for (int z = blockBox.minZ; z <= blockBox.maxZ; z++) {
+			for (int z = blockBox.getMinY(); z <= blockBox.getMaxY(); z++) {
 				int pz = z - center.getZ();
 				pz *= pz;
 				for (int y = minY; y <= maxY; y++) {

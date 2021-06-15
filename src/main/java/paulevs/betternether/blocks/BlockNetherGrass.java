@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
@@ -28,7 +28,7 @@ public class BlockNetherGrass extends BlockBase {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 12, 14);
 
 	public BlockNetherGrass() {
-		super(Materials.makeGrass(MaterialColor.GRAY_TERRACOTTA).ticksRandomly());
+		super(Materials.makeGrass(MapColor.TERRACOTTA_GRAY).ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}

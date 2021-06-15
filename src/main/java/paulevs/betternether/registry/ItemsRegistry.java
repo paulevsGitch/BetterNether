@@ -11,6 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.FoodComponent;
@@ -158,7 +159,7 @@ public class ItemsRegistry {
 		return new Item.Settings().group(CreativeTab.BN_TAB);
 	}
 
-	private static Item makeEgg(String name, EntityType<?> type, int background, int dots) {
+	private static Item makeEgg(String name, EntityType<? extends MobEntity> type, int background, int dots) {
 		if (Configs.MOBS.getBoolean("mobs", name, true)) {
 			SpawnEggItem item = new SpawnEggItem(type, background, dots, defaultSettings());
 			ItemDispenserBehavior behavior = new ItemDispenserBehavior() {

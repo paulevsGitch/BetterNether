@@ -10,7 +10,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
@@ -30,7 +30,7 @@ public class BlockWillowBranch extends BlockBaseNotFull {
 	public static final EnumProperty<WillowBranchShape> SHAPE = EnumProperty.of("shape", WillowBranchShape.class);
 
 	public BlockWillowBranch() {
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque().noCollision().luminance(getLuminance()));
+		super(Materials.makeWood(MapColor.TERRACOTTA_RED).nonOpaque().noCollision().luminance(getLuminance()));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, WillowBranchShape.MIDDLE));

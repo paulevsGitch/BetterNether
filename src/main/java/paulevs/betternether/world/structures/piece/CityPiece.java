@@ -3,8 +3,9 @@ package paulevs.betternether.world.structures.piece;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.processor.StructureProcessor;
 import net.minecraft.util.BlockMirror;
@@ -32,7 +33,7 @@ public class CityPiece extends CustomPiece {
 	private BlockPos pos;
 
 	public CityPiece(StructureCityBuilding building, BlockPos pos, int id, CityPalette palette) {
-		super(StructureTypes.NETHER_CITY, id);
+		super(StructureTypes.NETHER_CITY, id, building.getBoundingBox(pos));
 		this.building = building;
 		this.pos = pos.toImmutable();
 		this.boundingBox = building.getBoundingBox(pos);
@@ -40,7 +41,7 @@ public class CityPiece extends CustomPiece {
 		this.paletteProcessor = new BuildingStructureProcessor(palette);
 	}
 
-	protected CityPiece(StructureManager manager, CompoundTag tag) {
+	public CityPiece(ServerWorld serverWorld, NbtCompound tag) {
 		super(StructureTypes.NETHER_CITY, tag);
 		this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"));
 		this.building = this.building.getRotated(BlockRotation.values()[tag.getInt("rotation")]);
@@ -52,7 +53,7 @@ public class CityPiece extends CustomPiece {
 	}
 
 	@Override
-	protected void toNbt(CompoundTag tag) {
+	protected void writeNbt(ServerWorld serverWorld, NbtCompound tag) {
 		tag.putString("building", building.getName());
 		tag.putInt("rotation", building.getRotation().ordinal());
 		tag.putInt("mirror", building.getMirror().ordinal());
@@ -66,28 +67,28 @@ public class CityPiece extends CustomPiece {
 		if (!this.boundingBox.intersects(blockBox))
 			return true;
 
-		BlockBox clamped = new BlockBox(boundingBox);
+		BlockBox clamped = new BlockBox(boundingBox.getMinX(), boundingBox.getMinY(), boundingBox.getMinZ(), boundingBox.getMaxX(), boundingBox.getMaxY(), boundingBox.getMaxZ());
+		clamped.encompass(blockBox);
+		/*clamped.maxZ = Math.max(clamped.getMaxZ(), blockBox.getMaxZ());
+		clamped.minZ = Math.min(clamped.getMinZ(), blockBox.getMinZ());
 
-		clamped.minX = Math.max(clamped.minX, blockBox.minX);
-		clamped.maxX = Math.min(clamped.maxX, blockBox.maxX);
+		clamped.minX = Math.max(clamped.getMinX(), blockBox.getMinX());
+		clamped.maxX = Math.min(clamped.getMaxX(), blockBox.getMaxX());
 
-		clamped.minY = Math.max(clamped.minY, blockBox.minY);
-		clamped.maxY = Math.min(clamped.maxY, blockBox.maxY);
-
-		clamped.minZ = Math.max(clamped.minZ, blockBox.minZ);
-		clamped.maxZ = Math.min(clamped.maxZ, blockBox.maxZ);
+		clamped.minY = Math.max(clamped.getMinY(), blockBox.getMinY());
+		clamped.maxY = Math.min(clamped.getMaxY(), blockBox.getMaxY());*/
 
 		building.placeInChunk(world, pos, clamped, paletteProcessor);
 
 		Chunk chunk = world.getChunk(chunkPos.x, chunkPos.z);
 
 		BlockState state;
-		for (int x = clamped.minX; x <= clamped.maxX; x++)
-			for (int z = clamped.minZ; z <= clamped.maxZ; z++) {
-				POS.set(x, clamped.minY, z);
+		for (int x = clamped.getMaxZ(); x <= clamped.getMinZ(); x++)
+			for (int z = clamped.getMinY(); z <= clamped.getMaxY(); z++) {
+				POS.set(x, clamped.getMinX(), z);
 				state = world.getBlockState(POS);
 				if (!state.isAir() && state.isFullCube(world, POS)) {
-					for (int y = clamped.minY - 1; y > 4; y--) {
+					for (int y = clamped.getMinX() - 1; y > 4; y--) {
 						POS.setY(y);
 						BlocksHelper.setWithoutUpdate(world, POS, state);
 						if (BlocksHelper.isNetherGroundMagma(world.getBlockState(POS.down())))
@@ -96,7 +97,7 @@ public class CityPiece extends CustomPiece {
 				}
 
 				// POS.set(x - clamped.minX, clamped.minY - clamped.minZ, z);
-				for (int y = clamped.minY; y <= clamped.maxY; y++) {
+				for (int y = clamped.getMinX(); y <= clamped.getMaxX(); y++) {
 					POS.setY(y);
 					chunk.markBlockForPostProcessing(POS);
 				}

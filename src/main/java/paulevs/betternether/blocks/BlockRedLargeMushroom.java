@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -26,7 +26,7 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull {
 	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
 
 	public BlockRedLargeMushroom() {
-		super(Materials.makeWood(MaterialColor.RED).nonOpaque());
+		super(Materials.makeWood(MapColor.RED).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

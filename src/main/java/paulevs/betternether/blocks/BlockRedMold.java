@@ -2,7 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -13,7 +13,7 @@ public class BlockRedMold extends BlockMold {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 12, 14);
 
 	public BlockRedMold() {
-		super(MaterialColor.RED_TERRACOTTA);
+		super(MapColor.TERRACOTTA_RED);
 	}
 
 	@Override

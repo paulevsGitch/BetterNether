@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "paulevs.betternether.mixin.common",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "mixins": [
 	"DefaultAttributeRegistryMixin",
 	"ServerPlayNetworkHandlerMixin",
@@ -21,13 +21,14 @@
 	"DeltaFeatureMixin",
 	"PlayerEntityMixin",
 	"ServerWorldMixin",
-	"PickaxeItemMixin",
+    "MiningToolItemMixin",
 	"SheepEntityMixin",
 	"NetherWartMixin",
 	"MushroomMixin",
 	"MapStateMixin",
 	"BoneMealMixin",
-	"MapMixin"
+	"MapMixin",
+    "AbstractFurnaceBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

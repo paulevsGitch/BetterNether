@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
@@ -34,7 +34,7 @@ public class BlockMushroomFir extends BlockBaseNotFull {
 	private static final VoxelShape END_SHAPE = Block.createCuboidShape(0.01, 0, 0.01, 15.99, 15.99, 15.99);
 
 	public BlockMushroomFir() {
-		super(Materials.makeWood(MaterialColor.CYAN).nonOpaque());
+		super(Materials.makeWood(MapColor.CYAN).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

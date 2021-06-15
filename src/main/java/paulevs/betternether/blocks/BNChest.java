@@ -9,6 +9,7 @@ import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
@@ -20,8 +21,8 @@ public class BNChest extends ChestBlock {
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView world) {
-		return BlockEntitiesRegistry.CHEST.instantiate();
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return BlockEntitiesRegistry.CHEST.instantiate(pos, state);
 	}
 
 	@Override

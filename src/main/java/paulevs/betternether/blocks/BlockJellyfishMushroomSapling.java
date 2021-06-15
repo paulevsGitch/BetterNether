@@ -7,8 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -29,7 +29,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements F
 
 	public BlockJellyfishMushroomSapling() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.CYAN)
+				.materialColor(MapColor.CYAN)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.breakInstantly()
@@ -46,7 +46,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements F
 
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return world.getBlockState(pos.down()).getBlock().isIn(BlockTags.NYLIUM);
+		return BlockTags.NYLIUM.contains(world.getBlockState(pos.down()).getBlock());
 	}
 
 	@Override

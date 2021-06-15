@@ -75,7 +75,7 @@ public class BlockFireBowl extends BlockBaseNotFull {
 	}
 
 	@Override
-	public void onSteppedOn(World world, BlockPos pos, Entity entity) {
+	public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
 		if (!entity.isFireImmune() && entity instanceof LivingEntity && world.getBlockState(pos).get(FIRE)) {
 			entity.damage(DamageSource.HOT_FLOOR, 1.0F);
 		}

@@ -14,7 +14,7 @@ import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.TargetFinder;
+import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
@@ -27,6 +27,7 @@ import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -36,7 +37,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.Tag;
@@ -49,6 +50,11 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.entity.EntityFirefly.FreflyLookControl;
+import paulevs.betternether.entity.EntityFirefly.MoveRandomGoal;
+import paulevs.betternether.entity.EntityFirefly.MoveToFlowersGoal;
+import paulevs.betternether.entity.EntityFirefly.SittingGoal;
+import paulevs.betternether.entity.EntityFirefly.WanderAroundGoal;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
@@ -156,17 +162,12 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier) {
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
 		return false;
 	}
 
 	@Override
 	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
-
-	@Override
-	public boolean canClimb() {
-		return false;
-	}
 
 	@Override
 	public boolean hasNoGravity() {
@@ -186,8 +187,8 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag tag) {
-		super.writeCustomDataToTag(tag);
+	public void writeCustomDataToNbt(NbtCompound tag) {
+		super.writeCustomDataToNbt(tag);
 
 		tag.putFloat("ColorRed", getRed());
 		tag.putFloat("ColorGreen", getGreen());
@@ -195,8 +196,8 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag tag) {
-		super.readCustomDataFromTag(tag);
+	public void readCustomDataFromNbt(NbtCompound tag) {
+		super.readCustomDataFromNbt(tag);
 
 		if (tag.contains("ColorRed")) {
 			this.dataTracker.set(COLOR_RED, tag.getFloat("ColorRed"));
@@ -214,6 +215,11 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	@Override
 	public PassiveEntity createChild(ServerWorld world, PassiveEntity mate) {
 		return EntityRegistry.FIREFLY.create(world);
+	}
+
+	@Override
+	public boolean isInAir() {
+		return !this.onGround;
 	}
 
 	class FreflyLookControl extends LookControl {
@@ -265,10 +271,10 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 			}
 
 			Vec3d angle = EntityFirefly.this.getRotationVec(0.0F);
-			Vec3d airTarget = TargetFinder.findAirTarget(EntityFirefly.this, 8, 7, angle, 1.5707964F, 2, 1);
+			Vec3d airTarget = AboveGroundTargeting.find(EntityFirefly.this, 8, 7, angle.x, angle.z, 1.5707964F, 2, 1);
 
 			if (airTarget == null) {
-				airTarget = TargetFinder.findAirTarget(EntityFirefly.this, 16, 10, angle, 1.5707964F, 3, 1);
+				airTarget = AboveGroundTargeting.find(EntityFirefly.this, 16, 10, angle.x, angle.z, 1.5707964F, 3, 1);
 			}
 
 			if (airTarget == null) {
@@ -322,7 +328,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 
 		@Override
 		public void stop() {
-			if (isFlower(EntityFirefly.this.getBlockState()))
+			if (isFlower(EntityFirefly.this.getBlockStateAtPos()))
 				EntityFirefly.this.mustSit = true;
 			super.stop();
 		}
@@ -540,7 +546,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	}
 
 	public static boolean canSpawn(EntityType<? extends EntityFirefly> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if (pos.getY() >= world.getDimension().getLogicalHeight()) return false;
+		if (pos.getY() >= world.getDimension().getMinimumY()) return false;
 		int h = BlocksHelper.downRay(world, pos, 10);
 		if (h > 8)
 			return false;

@@ -1,9 +1,16 @@
 package paulevs.betternether.mixin.common;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -17,29 +24,29 @@ import net.minecraft.world.WorldAccess;
 @Mixin(MapState.class)
 public abstract class MapStateMixin extends PersistentState {
 	@Shadow
-	public int xCenter;
-
-	@Shadow
-	public int zCenter;
-
-	@Shadow
 	public boolean unlimitedTracking;
 
 	@Shadow
 	public byte scale;
 
-	public MapStateMixin(String key) {
-		super(key);
+	public MapStateMixin(int i, int j, byte b, boolean bl, boolean bl2, boolean bl3, RegistryKey<World> registryKey) {
+		super();
 	}
+
+	@Shadow @Final public int centerX;
+	@Shadow @Final public int centerZ;
+	@Shadow @Final private Map<String, MapIcon> icons;
+
+	@Shadow @Final private List<MapState.PlayerUpdateTracker> updateTrackers;
 
 	@Inject(method = "addIcon", at = @At(value = "HEAD"), cancellable = true)
 	private void updatePlayer(MapIcon.Type type, WorldAccess world, String key, double x, double z, double rotation, Text text, CallbackInfo info) {
 		if (world != null && world.getDimension().hasCeiling()) {
-			Map<String, MapIcon> icons = ((MapState) (Object) this).icons;
+			Map<String, MapIcon> icons = this.icons;//((MapState) (Object) this).icons;
 
 			int i = 1 << this.scale;
-			float f = (float) (x - (double) this.xCenter) / (float) i;
-			float g = (float) (z - (double) this.zCenter) / (float) i;
+			float f = (float) (x - (double) this.centerX) / (float) i;
+			float g = (float) (z - (double) this.centerZ) / (float) i;
 			byte b = (byte) ((int) ((double) (f * 2.0F) + 0.5D));
 			byte c = (byte) ((int) ((double) (g * 2.0F) + 0.5D));
 			byte e;

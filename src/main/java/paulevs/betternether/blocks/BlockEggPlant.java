@@ -8,7 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -41,7 +41,7 @@ public class BlockEggPlant extends BlockCommonPlant {
 	private boolean enablePlayerDamage = true;
 
 	public BlockEggPlant() {
-		super(MaterialColor.WHITE_TERRACOTTA);
+		super(MapColor.TERRACOTTA_WHITE);
 		enableModDamage = Configs.MAIN.getBoolean("egg_plant", "mob_damage", true);
 		enablePlayerDamage = Configs.MAIN.getBoolean("egg_plant", "player_damage", true);
 		this.setDefaultState(getStateManager().getDefaultState().with(DESTRUCTED, false));

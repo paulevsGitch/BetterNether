@@ -20,7 +20,7 @@ public class BlockCincinnasiteAnvil extends AnvilBlock {
 	@Override
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool != null && tool.isEffectiveOn(state)) {
+		if (tool != null && tool.isSuitableFor(state)) {
 			return Lists.newArrayList(new ItemStack(this));
 		}
 		else {

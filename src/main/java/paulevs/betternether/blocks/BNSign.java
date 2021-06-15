@@ -39,6 +39,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
+import paulevs.betternether.mixin.common.PlayerEntityMixin;
 
 public class BNSign extends AbstractSignBlock {
 	public static final IntProperty ROTATION = Properties.ROTATION;
@@ -69,14 +70,14 @@ public class BNSign extends AbstractSignBlock {
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView world) {
-		return new BNSignBlockEntity();
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return new BNSignBlockEntity(pos, state);
 	}
 
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack itemStack = player.getStackInHand(hand);
-		boolean bl = itemStack.getItem() instanceof DyeItem && player.abilities.allowModifyWorld;
+		boolean bl = itemStack.getItem() instanceof DyeItem && player.getAbilities().allowModifyWorld;
 		if (world.isClient) {
 			return bl ? ActionResult.SUCCESS : ActionResult.CONSUME;
 		}

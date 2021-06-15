@@ -7,8 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -25,7 +25,7 @@ public class BlockCommonSapling extends BlockBaseNotFull implements Fertilizable
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 14, 12);
 	private Block plant;
 
-	public BlockCommonSapling(Block plant, MaterialColor color) {
+	public BlockCommonSapling(Block plant, MapColor color) {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.materialColor(color)
 				.sounds(BlockSoundGroup.CROP)

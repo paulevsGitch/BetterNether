@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.block.Block;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.structure.Structure;
@@ -15,6 +16,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BetterNether;
 
@@ -66,7 +68,15 @@ public class StructureNBT {
 			blockpos2.setZ(-blockpos2.getZ());
 		blockpos2.set(blockpos2.rotate(rotation));
 		StructurePlacementData data = new StructurePlacementData().setRotation(this.rotation).setMirror(this.mirror);
-		structure.place(world, pos.add(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1), data, world.getRandom());
+		BlockPos newPos = pos.add(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1);
+		structure.place(
+				world,
+				newPos,
+				newPos,
+				data,
+				world.getRandom(),
+				Block.NOTIFY_LISTENERS
+		);
 		return true;
 	}
 
@@ -86,19 +96,19 @@ public class StructureNBT {
 	}
 
 	private Structure readStructureFromStream(InputStream stream) throws IOException {
-		CompoundTag nbttagcompound = NbtIo.readCompressed(stream);
+		NbtCompound nbttagcompound = NbtIo.readCompressed(stream);
 
 		Structure template = new Structure();
-		template.fromTag(nbttagcompound);
+		template.readNbt(nbttagcompound);
 
 		return template;
 	}
 
 	public BlockPos getSize() {
 		if (rotation == BlockRotation.NONE || rotation == BlockRotation.CLOCKWISE_180)
-			return structure.getSize();
+			return new BlockPos(structure.getSize());
 		else {
-			BlockPos size = structure.getSize();
+			Vec3i size = structure.getSize();
 			int x = size.getX();
 			int z = size.getZ();
 			return new BlockPos(z, size.getY(), x);

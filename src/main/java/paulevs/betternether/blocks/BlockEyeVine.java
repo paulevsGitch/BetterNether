@@ -6,8 +6,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
@@ -23,7 +23,7 @@ public class BlockEyeVine extends BlockBaseNotFull {
 
 	public BlockEyeVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.RED)
+				.materialColor(MapColor.RED)
 				.sounds(BlockSoundGroup.CROP)
 				.noCollision()
 				.dropsNothing()

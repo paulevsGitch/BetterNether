@@ -4,11 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Flutterer;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -21,7 +17,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -77,25 +73,20 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public boolean canClimb() {
-		return false;
-	}
-
-	@Override
 	public boolean hasNoGravity() {
 		return true;
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag tag) {
-		super.writeCustomDataToTag(tag);
+	public void writeCustomDataToNbt(NbtCompound tag) {
+		super.writeCustomDataToNbt(tag);
 
 		tag.putFloat("Scale", getScale());
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag tag) {
-		super.readCustomDataFromTag(tag);
+	public void readCustomDataFromNbt(NbtCompound tag) {
+		super.readCustomDataFromNbt(tag);
 
 		if (tag.contains("Scale")) {
 			this.dataTracker.set(SCALE, tag.getFloat("Scale"));
@@ -137,7 +128,7 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 	protected void mobTick() {
 		timer++;
 		if (timer > timeOut) {
-			prewYaw = this.yaw;
+			prewYaw = this.getYaw();
 			nextYaw = random.nextFloat() * 360;
 
 			double rads = Math.toRadians(nextYaw + 90);
@@ -160,9 +151,9 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 			timeOut = random.nextInt(300) + 120;
 		}
 		if (timer <= 120) {
-			if (this.yaw != nextYaw) {
+			if (this.getYaw() != nextYaw) {
 				float delta = timer / 120F;
-				this.yaw = lerpAngleDegrees(delta, prewYaw, nextYaw);
+				this.setYaw(lerpAngleDegrees(delta, prewYaw, nextYaw));
 				this.setVelocity(
 						MathHelper.lerp(delta, preVelocity.x, newVelocity.x),
 						MathHelper.lerp(delta, preVelocity.y, newVelocity.y),
@@ -217,7 +208,7 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier) {
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
 		return false;
 	}
 
@@ -238,5 +229,10 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 			return true;
 		});
 		return list.size() < 4;
+	}
+
+	@Override
+	public boolean isInAir() {
+		return !this.onGround;
 	}
 }

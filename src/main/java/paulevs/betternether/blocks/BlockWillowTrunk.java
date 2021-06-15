@@ -2,7 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -18,7 +18,7 @@ public class BlockWillowTrunk extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE_TOP = Block.createCuboidShape(4, 0, 4, 12, 12, 12);
 
 	public BlockWillowTrunk() {
-		super(Materials.makeWood(MaterialColor.RED_TERRACOTTA).nonOpaque());
+		super(Materials.makeWood(MapColor.TERRACOTTA_RED).nonOpaque());
 		this.setDropItself(false);
 		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.TOP));
 	}

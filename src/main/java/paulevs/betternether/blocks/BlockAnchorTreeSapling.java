@@ -7,8 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -28,7 +28,7 @@ public class BlockAnchorTreeSapling extends BlockBaseNotFull implements Fertiliz
 
 	public BlockAnchorTreeSapling() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.LIME)
+				.materialColor(MapColor.LIME)
 				.sounds(BlockSoundGroup.CROP)
 				.nonOpaque()
 				.dropsNothing()

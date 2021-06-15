@@ -9,7 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
@@ -19,6 +19,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
 import paulevs.betternether.BlocksHelper;
@@ -29,8 +30,8 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity {
 	private DefaultedList<ItemStack> inventory;
 	private int watchers = 0;
 
-	public BlockEntityChestOfDrawers() {
-		super(BlockEntitiesRegistry.CHEST_OF_DRAWERS);
+	public BlockEntityChestOfDrawers(BlockPos pos, BlockState state) {
+		super(BlockEntitiesRegistry.CHEST_OF_DRAWERS, pos, state);
 		this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
 	}
 
@@ -59,18 +60,18 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity {
 		return GenericContainerScreenHandler.createGeneric9x3(syncId, playerInventory, this);
 	}
 
-	public void fromTag(BlockState blockState, CompoundTag tag) {
-		super.fromTag(blockState, tag);
+	public void readNbt(NbtCompound tag) {
+		super.readNbt(tag);
 		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
 		if (!this.deserializeLootTable(tag)) {
-			Inventories.fromTag(tag, this.inventory);
+			Inventories.readNbt(tag, this.inventory);
 		}
 	}
 
-	public CompoundTag toTag(CompoundTag tag) {
-		super.toTag(tag);
+	public NbtCompound writeNbt(NbtCompound tag) {
+		super.writeNbt(tag);
 		if (!this.serializeLootTable(tag)) {
-			Inventories.toTag(tag, this.inventory);
+			Inventories.writeNbt(tag, this.inventory);
 		}
 		return tag;
 	}

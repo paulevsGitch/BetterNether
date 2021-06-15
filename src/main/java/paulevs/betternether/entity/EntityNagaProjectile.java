@@ -9,7 +9,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -26,7 +26,7 @@ public class EntityNagaProjectile extends FlyingEntity {
 	}
 
 	public void setParams(LivingEntity owner, Entity target) {
-		this.updatePosition(getX(), getEyeY() - this.getHeight(), getZ());
+		this.setPosition(getX(), getEyeY() - this.getHeight(), getZ());
 		Vec3d dir = target.getPos().add(0, target.getHeight() * 0.25, 0).subtract(getPos()).normalize().multiply(2);
 		this.setVelocity(dir);
 		this.prevX = getX() - dir.x;
@@ -126,14 +126,14 @@ public class EntityNagaProjectile extends FlyingEntity {
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag tag) {
-		super.writeCustomDataToTag(tag);
+	public void writeCustomDataToNbt(NbtCompound tag) {
+		super.writeCustomDataToNbt(tag);
 		tag.putInt("life", lifeTime);
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag tag) {
-		super.readCustomDataFromTag(tag);
+	public void readCustomDataFromNbt(NbtCompound tag) {
+		super.readCustomDataFromNbt(tag);
 		if (tag.contains("life")) {
 			lifeTime = tag.getInt("life");
 		}

@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -43,7 +43,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull {
 	};
 
 	public BlockBrownLargeMushroom() {
-		super(Materials.makeWood(MaterialColor.BROWN).nonOpaque());
+		super(Materials.makeWood(MapColor.BROWN).nonOpaque());
 		this.setDropItself(false);
 	}
 

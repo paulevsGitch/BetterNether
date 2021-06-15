@@ -13,20 +13,14 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.BufferRenderer;
-import net.minecraft.client.render.DiffuseLighting;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.*;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer.SignModel;
 import net.minecraft.client.util.SelectionManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.UpdateSignC2SPacket;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.SignType;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Matrix4f;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
@@ -35,23 +29,27 @@ import paulevs.betternether.blocks.BNSign;
 
 @Environment(EnvType.CLIENT)
 public class BNSignEditScreen extends Screen {
-	private final SignModel model = new SignModel();
+	private SignModel model;
 	private final BNSignBlockEntity sign;
 	private int ticksSinceOpened;
 	private int currentRow;
+	private SignType signType;
 	private SelectionManager selectionManager;
 	private final String[] text = (String[]) Util.make(new String[4], (strings) -> {
 		Arrays.fill(strings, "");
 	});
 
-	public BNSignEditScreen(BNSignBlockEntity sign) {
+	public BNSignEditScreen(BNSignBlockEntity sign, boolean filtered) {
 		super(new TranslatableText("sign.edit"));
 		this.sign = sign;
 	}
 
 	protected void init() {
+		BlockState blockState = this.sign.getCachedState();
+		this.signType = BNSignBlockEntityRenderer.getSignType(blockState.getBlock());
+		this.model = BNSignBlockEntityRenderer.createSignModel(this.client.getEntityModelLoader(), this.signType);
 		this.client.keyboard.setRepeatEvents(true);
-		this.addButton(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 120, 200, 20, ScreenTexts.DONE,
+		this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 120, 200, 20, ScreenTexts.DONE,
 				(buttonWidget) -> {
 					this.finishEditing();
 				}));
@@ -78,7 +76,7 @@ public class BNSignEditScreen extends Screen {
 
 	public void tick() {
 		++this.ticksSinceOpened;
-		if (!this.sign.getType().supports(this.sign.getCachedState().getBlock())) {
+		if (!this.sign.getType().supports(this.sign.getCachedState())) {
 			this.finishEditing();
 		}
 	}
@@ -100,7 +98,7 @@ public class BNSignEditScreen extends Screen {
 	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
 		if (keyCode == 265) {
 			this.currentRow = this.currentRow - 1 & 3;
-			this.selectionManager.moveCaretToEnd();
+			this.selectionManager.putCursorAtEnd();
 			return true;
 		}
 		else if (keyCode != 264 && keyCode != 257 && keyCode != 335) {
@@ -109,7 +107,7 @@ public class BNSignEditScreen extends Screen {
 		}
 		else {
 			this.currentRow = this.currentRow + 1 & 3;
-			this.selectionManager.moveCaretToEnd();
+			this.selectionManager.putCursorAtEnd();
 			return true;
 		}
 	}
@@ -136,10 +134,10 @@ public class BNSignEditScreen extends Screen {
 		matrices.scale(0.6666667F, -0.6666667F, -0.6666667F);
 		VertexConsumerProvider.Immediate immediate = this.client.getBufferBuilders().getEntityVertexConsumers();
 		VertexConsumer vertexConsumer = BNSignBlockEntityRenderer.getConsumer(immediate, blockState.getBlock());
-		this.model.field.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV);
+		this.model.root.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV);
 
 		if (bl) {
-			this.model.foot.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV);
+			this.model.stick.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV);
 		}
 
 		matrices.pop();
@@ -207,7 +205,7 @@ public class BNSignEditScreen extends Screen {
 					RenderSystem.disableTexture();
 					RenderSystem.enableColorLogicOp();
 					RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
-					bufferBuilder.begin(7, VertexFormats.POSITION_COLOR);
+					bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
 					float var32 = (float) x;
 					this.client.textRenderer.getClass();
 					bufferBuilder.vertex(matrix4f, var32, (float) (l + 9), 0.0F).color(0, 0, 255, 255).next();

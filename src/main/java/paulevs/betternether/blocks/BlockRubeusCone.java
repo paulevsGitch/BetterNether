@@ -3,7 +3,7 @@ package paulevs.betternether.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -17,7 +17,7 @@ public class BlockRubeusCone extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(3, 3, 3, 13, 16, 13);
 
 	public BlockRubeusCone() {
-		super(Materials.makeWood(MaterialColor.CYAN).nonOpaque().luminance(15));
+		super(Materials.makeWood(MapColor.CYAN).nonOpaque().luminance(15));
 	}
 
 	@Override

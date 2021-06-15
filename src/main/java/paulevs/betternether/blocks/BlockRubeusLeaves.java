@@ -6,7 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -27,7 +27,7 @@ public class BlockRubeusLeaves extends BlockBase {
 	public static final BooleanProperty PERSISTENT = Properties.PERSISTENT;
 
 	public BlockRubeusLeaves() {
-		super(Materials.makeLeaves(MaterialColor.LIGHT_BLUE));
+		super(Materials.makeLeaves(MapColor.LIGHT_BLUE));
 		this.setDefaultState(this.stateManager.getDefaultState().with(DISTANCE_CUSTOM, 1).with(PERSISTENT, false));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);

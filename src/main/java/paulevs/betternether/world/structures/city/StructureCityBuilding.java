@@ -3,6 +3,7 @@ package paulevs.betternether.world.structures.city;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.Structure;
@@ -14,6 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.structures.StructureNBT;
 
@@ -44,8 +46,8 @@ public class StructureCityBuilding extends StructureNBT {
 	}
 
 	private void init() {
-		BlockPos size = structure.getSize();
-		bb = new BoundingBox(size);
+		Vec3i size = structure.getSize();
+		bb = new BoundingBox(0, 0, size.getX(), size.getZ());
 		List<StructureBlockInfo> map = structure.getInfosForBlock(BlockPos.ORIGIN, new StructurePlacementData(), Blocks.STRUCTURE_BLOCK, false);
 		ends = new BlockPos[map.size()];
 		dirs = new Direction[map.size()];
@@ -92,12 +94,12 @@ public class StructureCityBuilding extends StructureNBT {
 
 	public void placeInChunk(ServerWorldAccess world, BlockPos pos, BlockBox boundingBox, StructureProcessor paletteProcessor) {
 		BlockPos p = pos.add(rotationOffset);
-		structure.place(world, p, new StructurePlacementData()
+		structure.place(world, p, p, new StructurePlacementData()
 				.setRotation(rotation)
 				.setMirror(mirror)
 				.setBoundingBox(boundingBox)
 				.addProcessor(paletteProcessor),
-				world.getRandom());
+				world.getRandom(), Block.NOTIFY_LISTENERS);
 	}
 
 	public BlockPos[] getEnds() {
@@ -119,7 +121,7 @@ public class StructureCityBuilding extends StructureNBT {
 	public StructureCityBuilding getRotated(BlockRotation rotation) {
 		StructureCityBuilding building = this.clone();
 		building.rotation = rotation;
-		building.rotationOffset = building.structure.getSize().rotate(rotation);
+		building.rotationOffset = new BlockPos(building.structure.getSize()).rotate(rotation);
 		int x = building.rotationOffset.getX();
 		int z = building.rotationOffset.getZ();
 		if (x < 0)
@@ -190,7 +192,7 @@ public class StructureCityBuilding extends StructureNBT {
 	@Override
 	public StructureCityBuilding setRotation(BlockRotation rotation) {
 		this.rotation = rotation;
-		rotationOffset = structure.getSize().rotate(rotation);
+		rotationOffset = new BlockPos(structure.getSize()).rotate(rotation);
 		return this;
 	}
 }

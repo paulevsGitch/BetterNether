@@ -63,8 +63,8 @@ public class BlockChestOfDrawers extends BlockWithEntity {
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView view) {
-		return new BlockEntityChestOfDrawers();
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return new BlockEntityChestOfDrawers(pos, state);
 	}
 
 	@Override
