@@ -29,7 +29,7 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/javax.annotation/jsr305
 	compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-	modCompileOnly "com.github.TerraformersMC:ModMenu:${modmenu_version}"
+	modCompileOnly "com.terraformersmc:modmenu:${modmenu_version}"
 }
 
 repositories {
@@ -40,6 +40,7 @@ repositories {
         url = 'https://jitpack.io'
     }
     maven { url "https://maven.shedaniel.me/" }
+	maven { url "https://maven.terraformersmc.com/releases/"}
 }
 
 processResources {
