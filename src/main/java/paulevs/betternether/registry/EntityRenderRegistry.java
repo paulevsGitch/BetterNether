@@ -28,7 +28,7 @@ public class EntityRenderRegistry {
 	public static final EntityModelLayer JUNGLE_SKELETON_MODEL = registerMain("jungle_skeleton");
 	public static final EntityModelLayer FLYING_PIG_MODEL = registerMain("flying_pig");
 	public static final EntityModelLayer HYDROGEN_JELLYFISH_MODEL = registerMain("hydrogen_jelly");
-	public static final EntityModelLayer SKULL_MODEL = registerMain("naga");
+	public static final EntityModelLayer SKULL_MODEL = registerMain("skull");
 
 
 	public static EntityModelLayer registerMain(String id){
