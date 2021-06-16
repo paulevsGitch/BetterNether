@@ -136,8 +136,6 @@ public class BiomeDefinition {
 	 * 
 	 * @param type
 	 *            - {@link EntityType}
-	 * @param group
-	 *            - {@link SpawnGroup}
 	 * @param weight
 	 *            - cumulative spawning weight
 	 * @param minGroupSize
@@ -344,6 +342,8 @@ public class BiomeDefinition {
 		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.RED_MUSHROOM_NETHER);
 		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.ORE_MAGMA);
 		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_CLOSED);
+		DefaultBiomeFeatures.addDefaultMushrooms(generationSettings);
+		DefaultBiomeFeatures.addNetherMineables(generationSettings);
 	}
 
 	private void addDefaultMobs(SpawnSettings.Builder spawnSettings) {
