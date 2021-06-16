@@ -25,7 +25,7 @@ public abstract class ChunkPopulateMixin {
 	private void customPopulate(ChunkRegion region, StructureAccessor accessor, CallbackInfo info) {
 		int chunkX = region.getCenterPos().x;
 		int chunkZ = region.getCenterPos().z;
-		if (!region.isClient() && isNetherBiome(region, chunkX, chunkZ)) {
+		if (!region.isClient() && isNetherBiome(region, chunkX, chunkZ) && region.getChunk(chunkX, chunkZ) != null) {
 			RANDOM.setTerrainSeed(chunkX, chunkZ);
 			int sx = chunkX << 4;
 			int sz = chunkZ << 4;
