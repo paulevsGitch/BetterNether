@@ -19,7 +19,7 @@ public class RenderJungleSkeleton extends MobEntityRenderer<EntityJungleSkeleton
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/jungle_skeleton.png");
 
 	public RenderJungleSkeleton(EntityRendererFactory.Context ctx){
-		this(ctx, EntityRenderRegistry.JUNGLE_SKELETON_LAYER, EntityModelLayers.SKELETON_INNER_ARMOR, EntityModelLayers.SKELETON_OUTER_ARMOR);
+		this(ctx, EntityRenderRegistry.JUNGLE_SKELETON_MODEL, EntityModelLayers.SKELETON_INNER_ARMOR, EntityModelLayers.SKELETON_OUTER_ARMOR);
 	}
 	public RenderJungleSkeleton(EntityRendererFactory.Context ctx, EntityModelLayer layer, EntityModelLayer legArmorLayer, EntityModelLayer bodyArmorLayer) {
 		super(ctx, new ModelJungleSkeleton(ctx.getPart(layer)), 0.4F);

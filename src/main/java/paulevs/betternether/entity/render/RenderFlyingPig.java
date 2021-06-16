@@ -14,7 +14,7 @@ public class RenderFlyingPig extends MobEntityRenderer<EntityFlyingPig, AnimalMo
 	private static final Identifier TEXTURE_WARTED = new Identifier(BetterNether.MOD_ID, "textures/entity/flying_pig_warted.png");
 
 	public RenderFlyingPig(EntityRendererFactory.Context ctx) {
-		super(ctx, new ModelEntityFlyingPig(ctx.getPart(EntityRenderRegistry.FLYING_PIG_LAYER)), 0.6F);
+		super(ctx, new ModelEntityFlyingPig(ctx.getPart(EntityRenderRegistry.FLYING_PIG_MODEL)), 0.6F);
 	}
 
 	@Override

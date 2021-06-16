@@ -119,7 +119,7 @@ public class BNSignBlockEntityRenderer implements BlockEntityRenderer<BNSignBloc
 			}
 			float x = (float) (-this.textRenderer.getWidth(orderedText) / 2);
 			if (sldRender) {
-				this.textRenderer.method_37296(orderedText, x, (float) (y * 10 - 20), textColor, color,
+				this.textRenderer.drawWithOutline(orderedText, x, (float) (y * 10 - 20), textColor, color,
 						matrixStack.peek().getModel(), provider, lightLevel);
 			} else {
 				this.textRenderer.draw((OrderedText) orderedText, x, (float) (y * 10 - 20), textColor, false,

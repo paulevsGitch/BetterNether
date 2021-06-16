@@ -15,7 +15,7 @@ public class RenderHydrogenJellyfish extends MobEntityRenderer<EntityHydrogenJel
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/jellyfish.png");
 
 	public RenderHydrogenJellyfish(EntityRendererFactory.Context ctx) {
-		super(ctx, new ModelEntityHydrogenJellyfish(ctx.getPart(EntityRenderRegistry.HYDROGEN_JELLYFISH_LAYER)), 1);
+		super(ctx, new ModelEntityHydrogenJellyfish(ctx.getPart(EntityRenderRegistry.HYDROGEN_JELLYFISH_MODEL)), 1);
 	}
 
 	@Override

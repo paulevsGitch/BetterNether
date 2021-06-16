@@ -92,7 +92,7 @@ public class RenderFirefly extends MobEntityRenderer<EntityFirefly, AnimalModel<
 	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/firefly.png");
 
 	public RenderFirefly(EntityRendererFactory.Context ctx) {
-		super(ctx, new ModelEntityFirefly(ctx.getPart(EntityRenderRegistry.FIREFLY_LAYER)), 0);
+		super(ctx, new ModelEntityFirefly(ctx.getPart(EntityRenderRegistry.FIREFLY_MODEL)), 0);
 
 		this.addFeature(new FireflyGlowFeatureRenderer( this));
 	}
