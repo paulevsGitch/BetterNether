@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+	"T"
+  ],
+  "key": {
+    "#": {
+      "item": "betternether:whispering_gourd"
+    },
+	"T": {
+      "item": "minecraft:torch"
+    }
+  },
+  "result": {
+    "item": "betternether:whispering_gourd_lantern"
+  }
+}

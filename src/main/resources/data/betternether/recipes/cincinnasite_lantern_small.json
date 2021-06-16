@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I",
+	"L"
+  ],
+  "key": {
+    "I": {
+      "item": "betternether:cincinnasite_ingot"
+    },
+	"L": {
+      "item": "betternether:cincinnasite_lantern"
+    }
+  },
+  "result": {
+    "item": "betternether:cincinnasite_lantern_small",
+	"count": 4
+  }
+}
