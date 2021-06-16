@@ -4,7 +4,8 @@
 		"sounds": [
 			{
 				"name": "betternether:mob/firefly/fly",
-				"stream": false
+				"stream": false,
+				"attenuation_distance": 8
 			}
 		]
 	},
@@ -13,7 +14,7 @@
 		"sounds": [
 			{
 				"name": "betternether:ambient/mushroom_forest",
-				"stream": false
+				"stream": true
 			}
 		]
 	},
@@ -22,7 +23,7 @@
 		"sounds": [
 			{
 				"name": "betternether:ambient/gravel_desert",
-				"stream": false
+				"stream": true
 			}
 		]
 	},
@@ -31,7 +32,7 @@
 		"sounds": [
 			{
 				"name": "betternether:ambient/nether_jungle",
-				"stream": false
+				"stream": true
 			}
 		]
 	},
@@ -40,7 +41,7 @@
 		"sounds": [
 			{
 				"name": "betternether:ambient/swampland",
-				"stream": false
+				"stream": true
 			}
 		]
 	},
@@ -49,7 +50,8 @@
 		"sounds": [
 			{
 				"name": "betternether:mob/jellyfish",
-				"stream": false
+				"stream": false,
+				"attenuation_distance": 8
 			}
 		]
 	},
@@ -58,11 +60,13 @@
 		"sounds": [
 			{
 				"name": "betternether:mob/naga/naga_1",
-				"stream": false
+				"stream": false,
+				"attenuation_distance": 8
 			},
 			{
 				"name": "betternether:mob/naga/naga_2",
-				"stream": false
+				"stream": false,
+				"attenuation_distance": 8
 			}
 		]
 	},
@@ -71,7 +75,8 @@
 		"sounds": [
 			{
 				"name": "betternether:mob/naga/naga_attack",
-				"stream": false
+				"stream": false,
+				"attenuation_distance": 8
 			}
 		]
 	},
@@ -80,7 +85,8 @@
 		"sounds": [
 			{
 				"name": "betternether:mob/skull_flight",
-				"stream": false
+				"stream": false,
+				"attenuation_distance": 8
 			}
 		]
 	}
