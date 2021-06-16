@@ -55,6 +55,12 @@ public class ItemRecipes {
 			materials = ImmutableMap.of("#", new ItemStack(Items.RED_MUSHROOM));
 			BNRecipeManager.addCraftingRecipe("wall_mushroom_red_2", "wall_mushroom", new String[] { "#" }, materials, new ItemStack(BlocksRegistry.WALL_MUSHROOM_RED));
 		}
+
+		RecipesHelper.makeSimpleRecipe2(BlocksRegistry.MUSHROOM_FIR_LOG, BlocksRegistry.MUSHROOM_FIR_WOOD, 3, "nether_bark_striped");
+		RecipesHelper.makeSimpleRecipe2(BlocksRegistry.STRIPED_LOG_RUBEUS, BlocksRegistry.STRIPED_BARK_RUBEUS, 3, "nether_bark_striped");
+		RecipesHelper.makeSimpleRecipe2(BlocksRegistry.STRIPED_LOG_STALAGNATE, BlocksRegistry.STRIPED_BARK_STALAGNATE, 3, "nether_bark_striped");
+		RecipesHelper.makeSimpleRecipe2(BlocksRegistry.STRIPED_LOG_WART, BlocksRegistry.STRIPED_BARK_WART, 3, "nether_bark_striped");
+		RecipesHelper.makeSimpleRecipe2(BlocksRegistry.STRIPED_LOG_WILLOW, BlocksRegistry.STRIPED_BARK_WILLOW, 3, "nether_bark_striped");
 	}
 
 	private static boolean itemExists(Item item) {

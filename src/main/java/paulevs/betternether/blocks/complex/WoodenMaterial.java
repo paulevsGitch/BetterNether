@@ -5,6 +5,7 @@ import net.minecraft.block.MapColor;
 import paulevs.betternether.blocks.BNLogStripable;
 import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNPlanks;
+import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class WoodenMaterial {
@@ -65,6 +66,8 @@ public class WoodenMaterial {
 
 		chest = BlocksRegistry.registerChest("chest_" + name, planks);
 		barrel = BlocksRegistry.registerBarrel("barrel_" + name, planks, planks_slab);
+
+		RecipesHelper.makeSimpleRecipe2(log_striped, bark_striped, 3, "nether_bark_striped");
 	}
 
 	public boolean isTreeLog(Block block) {
