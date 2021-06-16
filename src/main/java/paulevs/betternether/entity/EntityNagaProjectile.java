@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.FlyingEntity;
@@ -96,8 +97,8 @@ public class EntityNagaProjectile extends FlyingEntity {
 			if (entity != this && entity instanceof LivingEntity && !(entity instanceof EntityNaga)) {
 				LivingEntity living = (LivingEntity) entity;
 				if (!(living.hasStatusEffect(StatusEffects.WITHER))) {
-					living.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 40));
-					// living.damage(DamageSource.GENERIC, 0.5F);
+					living.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 200, 1));
+					living.damage(DamageSource.GENERIC, 2.0F);
 				}
 				effectKill();
 			}
