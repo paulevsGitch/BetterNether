@@ -530,7 +530,11 @@ public class BlocksRegistry {
 
 	private static void registerBlockDirectly(String name, Block block) {
 		Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
-		ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
+		Item.Settings settings = new Item.Settings().group(CreativeTab.BN_TAB);
+		if (block instanceof BNSign) {
+			settings.maxCount(16);
+		}
+		ItemsRegistry.registerItem(name, new BlockItem(block, settings));
 	}
 	
 	private static void addFuel(Block source, Block result) {
