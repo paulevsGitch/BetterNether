@@ -14,94 +14,81 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
 
-		ModelPartData modelPartData_BODY =  modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create()
-				.uv(0, 0)
-				.cuboid(-14F, 0F, -14F, 28, 18, 28), ModelTransform.pivot(0F, -48, 0F));
-		/*body = new ModelPart(this, 0, 0);
-		body.addCuboid(-14F, 0F, -14F, 28, 18, 28);
-		body.setPivot(0F, -48, 0F);*/
+		ModelPartData bodyPart = modelPartData.addChild(
+			EntityModelPartNames.BODY,
+			ModelPartBuilder.create()
+			.uv(0, 0)
+			.cuboid(-14F, 0F, -14F, 28, 18, 28),
+			ModelTransform.pivot(0F, -48, 0F)
+		);
 
-		modelPartData.addChild(BODY_TOP, ModelPartBuilder.create()
-				.uv(0, 46)
-				.cuboid(-10F, 0F, -10F, 20, 6, 20), ModelTransform.pivot(0F, -6F, 0F));
-		/*body_top = new ModelPart(this, 0, 46);
-		body_top.addCuboid(-10F, 0F, -10F, 20, 6, 20);
-		body_top.setPivot(0F, -6F, 0F);
-		body.addChild(body_top);*/
+		bodyPart.addChild(
+			BODY_TOP,
+			ModelPartBuilder.create()
+			.uv(0, 46)
+			.cuboid(-10F, 0F, -10F, 20, 6, 20),
+			ModelTransform.pivot(0F, -6F, 0F)
+		);
 
-		/*legs_1 = new ModelPart[LEGS];
-		legs_2 = new ModelPart[LEGS];
-		legs_3 = new ModelPart[LEGS];
-		leg_details = new ModelPart[LEGS * 3];
-		wings = new ModelPart[LEGS];*/
 		for (int i = 0; i < LEGS; i++) {
 			int li = i * 3;
 			float angle = (float) (i * Math.PI * 2 / LEGS);
 			float x = (float) Math.sin(angle) * 10;
 			float z = (float) Math.cos(angle) * 10;
 
-			ModelPartData modelPartData_LEG_1 = modelPartData_BODY.addChild("leg_1_"+i, ModelPartBuilder.create()
-					.uv(60, 46)
-					.cuboid(-3F, 0F, -3F, 6, 14, 6), ModelTransform.of(x, 18, z, 0, angle, 0));
-			/*legs_1[i] = new ModelPart(this, 60, 46);
-			legs_1[i].addCuboid(-3F, 0F, -3F, 6, 14, 6);
-			legs_1[i].setPivot(x, 18, z);
-			legs_1[i].yaw = angle;
-			body.addChild(legs_1[i]);*/
+			ModelPartData modelPartData_LEG_1 = bodyPart.addChild(
+				"leg_1_"+i, ModelPartBuilder.create()
+				.uv(60, 46)
+				.cuboid(-3F, 0F, -3F, 6, 14, 6),
+				ModelTransform.of(x, 18, z, 0, angle, 0)
+			);
 
-			modelPartData_LEG_1.addChild("leg_det_"+li, ModelPartBuilder.create()
-					.uv(97, 46)
-					.cuboid(-8F, 0F, 0F, 16, 14, 0)
-					.uv(97, 30)
-					.cuboid(0F, 0F, -8F, 0, 14, 16), ModelTransform.of(0,0,0, 0, angle, 0));
-			/*leg_details[li] = new ModelPart(this, 97, 46);
-			leg_details[li].addCuboid(-8F, 0F, 0F, 16, 14, 0);
-			leg_details[li].setTextureOffset(97, 30);
-			leg_details[li].addCuboid(0F, 0F, -8F, 0, 14, 16);
-			leg_details[li].yaw = (float) Math.toRadians(45);
-			legs_1[i].addChild(leg_details[li]);*/
+			modelPartData_LEG_1.addChild("leg_det_"+li,
+				ModelPartBuilder.create()
+				.uv(97, 46)
+				.cuboid(-8F, 0F, 0F, 16, 14, 0)
+				.uv(97, 30)
+				.cuboid(0F, 0F, -8F, 0, 14, 16),
+				ModelTransform.of(0,0,0, 0, angle, 0)
+			);
 
-			ModelPartData modelPartData_LEG_2 =  modelPartData_LEG_1.addChild("leg_2_"+i, ModelPartBuilder.create()
-					.uv(0, 72)
-					.cuboid(-2F, -24F, -2F, 4, 28, 4), ModelTransform.pivot(0F, 14F, 0F));
-			/*legs_2[i] = new ModelPart(this, 0, 72);
-			legs_2[i].addCuboid(-2F, -24F, -2F, 4, 28, 4);
-			legs_2[i].setPivot(0F, 14F, 0F);
-			legs_1[i].addChild(legs_2[i]);*/
+			ModelPartData modelPartData_LEG_2 = modelPartData_LEG_1.addChild(
+				"leg_2_"+i,
+				ModelPartBuilder.create()
+				.uv(0, 72)
+				.cuboid(-2F, -24F, -2F, 4, 28, 4),
+				ModelTransform.pivot(0F, 14F, 0F)
+			);
 
 			li++;
-			modelPartData_LEG_2.addChild("leg_det_"+li, ModelPartBuilder.create()
-					.uv(98, 60)
-					.cuboid(-7F, -24F, 0F, 14, 28, 0)
-					.uv(98, 48)
-					.cuboid(0F, -24F, -7F, 0, 28, 14), ModelTransform.of(0,0,0, 0, (float)Math.toRadians(45), 0));
-			/*leg_details[li] = new ModelPart(this, 98, 60);
-			leg_details[li].addCuboid(-7F, -24F, 0F, 14, 28, 0);
-			leg_details[li].setTextureOffset(98, 48);
-			leg_details[li].addCuboid(0F, -24F, -7F, 0, 28, 14);
-			leg_details[li].yaw = (float) Math.toRadians(45);
-			legs_2[i].addChild(leg_details[li]);*/
+			modelPartData_LEG_2.addChild(
+				"leg_det_"+li,
+				ModelPartBuilder.create()
+				.uv(98, 60)
+				.cuboid(-7F, -24F, 0F, 14, 28, 0)
+				.uv(98, 48)
+				.cuboid(0F, -24F, -7F, 0, 28, 14),
+				ModelTransform.of(0,0,0, 0, (float)Math.toRadians(45), 0)
+			);
 
-			ModelPartData modelPartData_LEG_3 = modelPartData_LEG_2.addChild("leg_3_"+i, ModelPartBuilder.create()
-					.uv(16, 72)
-					.cuboid(-1F, -24F, -1F, 2, 28, 2), ModelTransform.pivot(0F, -28F, 0F));
-			/*legs_3[i] = new ModelPart(this, 16, 72);
-			legs_3[i].addCuboid(-1F, -24F, -1F, 2, 28, 2);
-			legs_3[i].setPivot(0F, -28F, 0F);
-			legs_2[i].addChild(legs_3[i]);*/
+			ModelPartData modelPartData_LEG_3 = modelPartData_LEG_2.addChild(
+				"leg_3_"+i,
+				ModelPartBuilder.create()
+				.uv(16, 72)
+				.cuboid(-1F, -24F, -1F, 2, 28, 2),
+				ModelTransform.pivot(0F, -28F, 0F)
+			);
 
 			li++;
-			modelPartData_LEG_3.addChild("leg_det_"+li, ModelPartBuilder.create()
-					.uv(99, 88)
-					.cuboid(-6F, -28F, 0F, 12, 32, 0)
-					.uv(99, 76)
-					.cuboid(0F, -28F, -6F, 0, 32, 12), ModelTransform.of(0,0,0, 0, (float)Math.toRadians(45), 0));
-			/*leg_details[li] = new ModelPart(this, 99, 88);
-			leg_details[li].addCuboid(-6F, -28F, 0F, 12, 32, 0);
-			leg_details[li].setTextureOffset(99, 76);
-			leg_details[li].addCuboid(0F, -28F, -6F, 0, 32, 12);
-			leg_details[li].yaw = (float) Math.toRadians(45);
-			legs_3[i].addChild(leg_details[li]);*/
+			modelPartData_LEG_3.addChild(
+				"leg_det_"+li,
+				ModelPartBuilder.create()
+				.uv(99, 88)
+				.cuboid(-6F, -28F, 0F, 12, 32, 0)
+				.uv(99, 76)
+				.cuboid(0F, -28F, -6F, 0, 32, 12),
+				ModelTransform.of(0,0,0, 0, (float)Math.toRadians(45), 0)
+			);
 
 			x = (float) Math.sin(angle);
 			z = (float) Math.cos(angle);
@@ -110,22 +97,17 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 			x *= 12;
 			z *= 12;
 
-			modelPartData_BODY.addChild("wing_"+i, ModelPartBuilder.create()
-					.uv(60, 4)
-					.cuboid(-12F, 0F, 0F, 24F, 0F, 24F), ModelTransform.of(x, 12 - (i & 1) * 6, z, 0, angle, 0));
-			/*wings[i] = new ModelPart(this, 60, 4);
-			wings[i].setPivot(x, 12 - (i & 1) * 6, z);
-			wings[i].addCuboid(-12F, 0F, 0F, 24F, 0F, 24F);
-			wings[i].yaw = angle;
-			body.addChild(wings[i]);*/
+			bodyPart.addChild(
+				"wing_"+i, ModelPartBuilder.create()
+				.uv(60, 4)
+				.cuboid(-12F, 0F, 0F, 24F, 0F, 24F),
+				ModelTransform.of(x, 12 - (i & 1) * 6, z, 0, angle, 0)
+			);
 		}
-
-		/* textureHeight = 128;
-		textureWidth = 128; */
 		return TexturedModelData.of(modelData, 128, 128);
 	}
 
-	private static double HALF_PI = Math.PI * 0.5;
+	private static final double HALF_PI = Math.PI * 0.5;
 	private static final int LEGS = 8;
 	private final ModelPart body;
 	//private final ModelPart body_top;
