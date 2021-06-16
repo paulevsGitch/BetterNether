@@ -1,20 +1,11 @@
 package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.Bootstrap;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.entity.model.EntityModelLoader;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.recipes.IntegrationRecipes;
 import paulevs.betternether.recipes.ItemRecipes;
-import paulevs.betternether.registry.BiomesRegistry;
-import paulevs.betternether.registry.BlockEntitiesRegistry;
-import paulevs.betternether.registry.BlocksRegistry;
-import paulevs.betternether.registry.BrewingRegistry;
-import paulevs.betternether.registry.EntityRegistry;
-import paulevs.betternether.registry.ItemsRegistry;
-import paulevs.betternether.registry.SoundsRegistry;
+import paulevs.betternether.registry.*;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.NetherBiomeSource;
 import paulevs.betternether.world.structures.piece.StructureTypes;

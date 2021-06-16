@@ -1,25 +1,20 @@
 package paulevs.betternether.recipes;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonSyntaxException;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.ShapedRecipe;
-import net.minecraft.recipe.ShapelessRecipe;
+import net.minecraft.recipe.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class BNRecipeManager {
 	private static final Map<RecipeType<?>, Map<Identifier, Recipe<?>>> RECIPES = Maps.newHashMap();

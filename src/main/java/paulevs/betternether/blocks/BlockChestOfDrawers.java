@@ -1,19 +1,9 @@
 package paulevs.betternether.blocks;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -37,6 +27,10 @@ import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blockentities.BlockEntityChestOfDrawers;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 
 public class BlockChestOfDrawers extends BlockWithEntity {
 	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(

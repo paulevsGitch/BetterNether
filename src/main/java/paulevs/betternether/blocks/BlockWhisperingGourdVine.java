@@ -1,21 +1,11 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -39,6 +29,9 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Fertilizable {
 	private static final VoxelShape SELECTION = Block.createCuboidShape(2, 0, 2, 14, 16, 14);

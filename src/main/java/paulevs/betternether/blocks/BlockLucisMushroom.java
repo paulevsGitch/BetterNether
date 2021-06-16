@@ -1,19 +1,11 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.sound.BlockSoundGroup;
@@ -31,6 +23,8 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
+
+import java.util.List;
 
 public class BlockLucisMushroom extends BlockBaseNotFull {
 	private static final VoxelShape V_SHAPE = Block.createCuboidShape(0, 0, 0, 16, 9, 16);

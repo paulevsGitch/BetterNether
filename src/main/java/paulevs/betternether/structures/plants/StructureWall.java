@@ -1,7 +1,5 @@
 package paulevs.betternether.structures.plants;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -10,6 +8,8 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.Random;
 
 public class StructureWall implements IStructure {
 	private static final Direction[] DIRECTIONS = HorizontalFacingBlock.FACING.getValues().toArray(new Direction[] {});

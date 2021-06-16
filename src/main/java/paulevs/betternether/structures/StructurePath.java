@@ -1,7 +1,5 @@
 package paulevs.betternether.structures;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LanternBlock;
@@ -15,6 +13,8 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.Random;
 
 public class StructurePath implements IStructure {
 	private static final Mutable B_POS = new Mutable();

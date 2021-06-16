@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -14,6 +12,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockGrayMold extends BlockMold {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 8, 12);

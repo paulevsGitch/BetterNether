@@ -1,7 +1,5 @@
 package paulevs.betternether.blockentities;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -25,6 +23,8 @@ import net.minecraft.util.math.Vec3i;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockChestOfDrawers;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
+
+import java.util.List;
 
 public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity {
 	private DefaultedList<ItemStack> inventory;

@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-import java.util.function.ToIntFunction;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -18,10 +15,12 @@ import net.minecraft.stat.Stats;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.blockentities.BlockEntityForge;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.Random;
+import java.util.function.ToIntFunction;
 
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
 	public BlockCincinnasiteForge() {

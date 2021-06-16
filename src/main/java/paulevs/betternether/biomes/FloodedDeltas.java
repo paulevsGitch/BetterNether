@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleTypes;
@@ -13,6 +11,8 @@ import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.structures.StructureType;
+
+import java.util.Random;
 
 public class FloodedDeltas extends NetherBiome {
 	private static final Mutable POS = new Mutable();

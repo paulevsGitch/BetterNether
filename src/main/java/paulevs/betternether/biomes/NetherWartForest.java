@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
@@ -16,11 +14,9 @@ import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureWartDeadwood;
-import paulevs.betternether.structures.plants.StructureBlackBush;
-import paulevs.betternether.structures.plants.StructureNetherWart;
-import paulevs.betternether.structures.plants.StructureSoulLily;
-import paulevs.betternether.structures.plants.StructureWartSeed;
-import paulevs.betternether.structures.plants.StructureWartTree;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Random;
 
 public class NetherWartForest extends NetherBiome {
 	private static final Mutable POS = new Mutable();

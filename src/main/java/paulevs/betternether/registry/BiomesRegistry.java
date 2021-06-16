@@ -1,45 +1,18 @@
 package paulevs.betternether.registry;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Set;
-
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import paulevs.betternether.biomes.CrimsonGlowingWoods;
-import paulevs.betternether.biomes.CrimsonPinewood;
-import paulevs.betternether.biomes.FloodedDeltas;
-import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.biomes.NetherBiomeWrapper;
-import paulevs.betternether.biomes.NetherBoneReef;
-import paulevs.betternether.biomes.NetherGrasslands;
-import paulevs.betternether.biomes.NetherGravelDesert;
-import paulevs.betternether.biomes.NetherJungle;
-import paulevs.betternether.biomes.NetherMagmaLand;
-import paulevs.betternether.biomes.NetherMushroomForest;
-import paulevs.betternether.biomes.NetherMushroomForestEdge;
-import paulevs.betternether.biomes.NetherPoorGrasslands;
-import paulevs.betternether.biomes.NetherSoulPlain;
-import paulevs.betternether.biomes.NetherSulfuricBoneReef;
-import paulevs.betternether.biomes.NetherSwampland;
-import paulevs.betternether.biomes.NetherSwamplandTerraces;
-import paulevs.betternether.biomes.NetherWartForest;
-import paulevs.betternether.biomes.NetherWartForestEdge;
-import paulevs.betternether.biomes.OldFungiwoods;
-import paulevs.betternether.biomes.OldSwampland;
-import paulevs.betternether.biomes.OldWarpedWoods;
-import paulevs.betternether.biomes.UpsideDownForest;
+import paulevs.betternether.biomes.*;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
+
+import java.util.*;
 
 public class BiomesRegistry {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();

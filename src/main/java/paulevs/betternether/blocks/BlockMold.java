@@ -1,9 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -23,6 +19,10 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class BlockMold extends BlockBaseNotFull {
 	public BlockMold(MapColor color) {

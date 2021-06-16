@@ -1,12 +1,12 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.Random;
 
 public class NetherSwamplandTerraces extends NetherSwampland {
 	public NetherSwamplandTerraces(String name) {

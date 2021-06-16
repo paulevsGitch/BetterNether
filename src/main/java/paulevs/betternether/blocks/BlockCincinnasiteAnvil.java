@@ -1,9 +1,6 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.BlockState;
@@ -11,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.List;
 
 public class BlockCincinnasiteAnvil extends AnvilBlock {
 	public BlockCincinnasiteAnvil() {

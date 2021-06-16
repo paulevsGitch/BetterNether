@@ -1,8 +1,5 @@
 package paulevs.betternether.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
@@ -23,6 +20,9 @@ import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.structures.plants.StructureLumabusVine;
 import paulevs.betternether.tab.CreativeTab;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlocksRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();

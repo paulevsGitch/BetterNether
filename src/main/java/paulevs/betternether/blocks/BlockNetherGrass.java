@@ -1,15 +1,8 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.loot.context.LootContext;
@@ -23,6 +16,9 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+
+import java.util.Collections;
+import java.util.List;
 
 public class BlockNetherGrass extends BlockBase {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 12, 14);

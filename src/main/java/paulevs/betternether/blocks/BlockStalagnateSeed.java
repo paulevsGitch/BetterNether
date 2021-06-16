@@ -1,15 +1,7 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -24,6 +16,8 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureStalagnate;
+
+import java.util.Random;
 
 public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizable {
 	protected static final VoxelShape SHAPE_TOP = Block.createCuboidShape(4, 6, 4, 12, 16, 12);

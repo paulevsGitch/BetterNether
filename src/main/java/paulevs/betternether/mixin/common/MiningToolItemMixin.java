@@ -1,16 +1,16 @@
 package paulevs.betternether.mixin.common;
 
-import java.util.Set;
-
-import net.minecraft.item.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.MiningToolItem;
+import net.minecraft.item.ToolItem;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.Vanishable;
+import net.minecraft.tag.Tag;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.tag.Tag;
 import paulevs.betternether.blocks.BNObsidian;
 import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.registry.BlocksRegistry;

@@ -1,13 +1,13 @@
 package paulevs.betternether.structures;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
+
+import java.util.Random;
 
 public class StructureWorld extends StructureNBT implements IStructure {
 	protected static final Mutable POS = new Mutable();

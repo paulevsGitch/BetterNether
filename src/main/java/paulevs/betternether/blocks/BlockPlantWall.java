@@ -1,18 +1,10 @@
 package paulevs.betternether.blocks;
 
-import java.util.EnumMap;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -26,6 +18,8 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+
+import java.util.EnumMap;
 
 public class BlockPlantWall extends BlockBaseNotFull {
 	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(

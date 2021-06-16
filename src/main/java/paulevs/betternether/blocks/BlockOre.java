@@ -1,9 +1,6 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
@@ -17,6 +14,8 @@ import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.MathHelper;
 import paulevs.betternether.MHelper;
+
+import java.util.List;
 
 public class BlockOre extends OreBlock {
 	private final Item dropItem;

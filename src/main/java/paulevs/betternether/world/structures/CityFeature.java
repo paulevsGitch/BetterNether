@@ -1,7 +1,5 @@
 package paulevs.betternether.world.structures;
 
-import java.util.List;
-
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockBox;
@@ -19,6 +17,8 @@ import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
 import paulevs.betternether.world.structures.piece.CityPiece;
+
+import java.util.List;
 
 public class CityFeature extends StructureFeature<DefaultFeatureConfig> {
 	private static CityGenerator generator;

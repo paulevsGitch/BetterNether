@@ -1,13 +1,13 @@
 package paulevs.betternether.world.structures.city;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import paulevs.betternether.world.structures.city.palette.CityPalette;
 import paulevs.betternether.world.structures.piece.CityPiece;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class CityGenerator {
 	private List<StructureCityBuilding> centers = new ArrayList<StructureCityBuilding>();

@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -11,15 +9,9 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.StructureGrayMold;
-import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
-import paulevs.betternether.structures.plants.StructureMedRedMushroom;
-import paulevs.betternether.structures.plants.StructureOldBrownMushrooms;
-import paulevs.betternether.structures.plants.StructureOldRedMushrooms;
-import paulevs.betternether.structures.plants.StructureRedMold;
-import paulevs.betternether.structures.plants.StructureVanillaMushroom;
-import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.structures.plants.StructureWallRedMushroom;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Random;
 
 public class OldFungiwoods extends NetherBiome {
 	public OldFungiwoods(String name) {

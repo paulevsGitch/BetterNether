@@ -1,7 +1,5 @@
 package paulevs.betternether.structures.decorations;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,6 +11,8 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.Random;
 
 public class StructureCrystal implements IStructure {
 	private static final Block[] PALETTES = new Block[] {

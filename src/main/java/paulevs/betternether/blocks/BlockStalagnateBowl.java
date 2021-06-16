@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -20,6 +17,9 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.blocks.shapes.FoodShape;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.Collections;
+import java.util.List;
 
 public class BlockStalagnateBowl extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(5, 0, 5, 11, 3, 11);

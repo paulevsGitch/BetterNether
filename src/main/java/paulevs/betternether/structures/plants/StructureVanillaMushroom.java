@@ -1,7 +1,5 @@
 package paulevs.betternether.structures.plants;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +9,8 @@ import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.Random;
 
 public class StructureVanillaMushroom implements IStructure {
 	private Mutable npos = new Mutable();

@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particle.ParticleTypes;
@@ -11,11 +9,9 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.BiomeParticleConfig;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.StructureBigWarpedTree;
-import paulevs.betternether.structures.plants.StructureBlackVine;
-import paulevs.betternether.structures.plants.StructureTwistedVines;
-import paulevs.betternether.structures.plants.StructureWarpedFungus;
-import paulevs.betternether.structures.plants.StructureWarpedRoots;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Random;
 
 public class OldWarpedWoods extends NetherBiome {
 	public OldWarpedWoods(String name) {

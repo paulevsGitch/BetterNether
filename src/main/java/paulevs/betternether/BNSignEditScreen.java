@@ -1,10 +1,7 @@
 package paulevs.betternether;
 
-import java.util.Arrays;
-
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -26,6 +23,8 @@ import net.minecraft.util.math.Matrix4f;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
 import paulevs.betternether.blockentities.render.BNSignBlockEntityRenderer;
 import paulevs.betternether.blocks.BNSign;
+
+import java.util.Arrays;
 
 @Environment(EnvType.CLIENT)
 public class BNSignEditScreen extends Screen {

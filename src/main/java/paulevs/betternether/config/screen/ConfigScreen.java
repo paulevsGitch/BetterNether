@@ -1,7 +1,6 @@
 package paulevs.betternether.config.screen;
 
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ButtonWidget;

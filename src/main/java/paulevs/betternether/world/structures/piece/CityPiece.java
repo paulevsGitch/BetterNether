@@ -1,12 +1,9 @@
 package paulevs.betternether.world.structures.piece;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.processor.StructureProcessor;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -23,6 +20,8 @@ import paulevs.betternether.world.structures.city.BuildingStructureProcessor;
 import paulevs.betternether.world.structures.city.StructureCityBuilding;
 import paulevs.betternether.world.structures.city.palette.CityPalette;
 import paulevs.betternether.world.structures.city.palette.Palettes;
+
+import java.util.Random;
 
 public class CityPiece extends CustomPiece {
 	private static final Mutable POS = new Mutable();

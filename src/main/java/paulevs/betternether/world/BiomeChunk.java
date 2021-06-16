@@ -1,9 +1,9 @@
 package paulevs.betternether.world;
 
-import java.util.Random;
-
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.BiomesRegistry;
+
+import java.util.Random;
 
 public class BiomeChunk {
 	protected static final int WIDTH = 16;

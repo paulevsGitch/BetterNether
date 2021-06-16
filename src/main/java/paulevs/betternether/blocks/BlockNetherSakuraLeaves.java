@@ -1,10 +1,6 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
@@ -25,6 +21,9 @@ import net.minecraft.world.World;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockNetherSakuraLeaves extends BlockBaseNotFull {
 	private static final Random RANDOM = new Random();

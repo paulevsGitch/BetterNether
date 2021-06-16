@@ -1,17 +1,11 @@
 package paulevs.betternether.entity;
 
-import java.util.Random;
-
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -30,6 +24,8 @@ import net.minecraft.world.WorldAccess;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
+
+import java.util.Random;
 
 public class EntityNaga extends HostileEntity implements RangedAttackMob, Monster {
 	public EntityNaga(EntityType<? extends EntityNaga> type, World world) {

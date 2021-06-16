@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
@@ -13,14 +11,9 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.StructureCrimsonFungus;
-import paulevs.betternether.structures.plants.StructureCrimsonGlowingTree;
-import paulevs.betternether.structures.plants.StructureCrimsonRoots;
-import paulevs.betternether.structures.plants.StructureGoldenVine;
-import paulevs.betternether.structures.plants.StructureWallMoss;
-import paulevs.betternether.structures.plants.StructureWallRedMushroom;
-import paulevs.betternether.structures.plants.StructureWartBush;
-import paulevs.betternether.structures.plants.StructureWartSeed;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Random;
 
 public class CrimsonGlowingWoods extends NetherBiome {
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);

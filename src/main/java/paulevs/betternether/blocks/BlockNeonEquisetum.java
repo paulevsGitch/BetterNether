@@ -1,24 +1,11 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -40,6 +27,10 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.shapes.TripleShape;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockNeonEquisetum extends BlockBaseNotFull implements Fertilizable {
 	protected static final VoxelShape SHAPE_SELECTION = Block.createCuboidShape(2, 0, 2, 14, 16, 14);

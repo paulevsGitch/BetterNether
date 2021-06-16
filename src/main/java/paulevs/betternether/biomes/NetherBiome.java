@@ -1,10 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +16,11 @@ import paulevs.betternether.structures.StructureWorld;
 import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureWartCap;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 public class NetherBiome {
 	private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);

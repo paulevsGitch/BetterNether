@@ -1,10 +1,5 @@
 package paulevs.betternether.world;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -33,6 +28,11 @@ import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.structures.CityFeature;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 
 public class BNWorldGenerator {
 	private static boolean hasCleaningPass;

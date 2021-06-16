@@ -1,7 +1,5 @@
 package paulevs.betternether.structures.plants;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +11,8 @@ import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLily.SoulLilyShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.Random;
 
 public class StructureSoulLily implements IStructure {
 	Mutable npos = new Mutable();

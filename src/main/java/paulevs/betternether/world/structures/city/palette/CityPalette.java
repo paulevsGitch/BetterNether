@@ -1,28 +1,16 @@
 package paulevs.betternether.world.structures.city.palette;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.LanternBlock;
-import net.minecraft.block.PaneBlock;
-import net.minecraft.block.PillarBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.TrapdoorBlock;
-import net.minecraft.block.WallBlock;
-import net.minecraft.block.WallTorchBlock;
+import net.minecraft.block.*;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockPottedPlant.PottedPlantShape;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class CityPalette {
 	private static final Random RANDOM = new Random();

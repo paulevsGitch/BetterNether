@@ -1,13 +1,7 @@
 package paulevs.betternether.blockentities.render;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,6 +22,7 @@ import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
 import net.minecraft.text.OrderedText;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
@@ -35,12 +30,16 @@ import net.minecraft.util.SignType;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
 import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 
 

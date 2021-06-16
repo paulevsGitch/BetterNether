@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,6 +23,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
+
+import java.util.Collections;
+import java.util.List;
 
 public class BNNormalChair extends BNChair {
 	private static final VoxelShape SHAPE_BOTTOM = Block.createCuboidShape(3, 0, 3, 13, 16, 13);

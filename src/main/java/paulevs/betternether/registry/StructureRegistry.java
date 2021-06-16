@@ -1,65 +1,15 @@
 package paulevs.betternether.registry;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.bones.StructureBoneReef;
 import paulevs.betternether.structures.decorations.StructureCrystal;
 import paulevs.betternether.structures.decorations.StructureGeyser;
 import paulevs.betternether.structures.decorations.StructureWartDeadwood;
-import paulevs.betternether.structures.plants.StructureAgave;
-import paulevs.betternether.structures.plants.StructureBarrelCactus;
-import paulevs.betternether.structures.plants.StructureBigWarpedTree;
-import paulevs.betternether.structures.plants.StructureBlackApple;
-import paulevs.betternether.structures.plants.StructureBlackBush;
-import paulevs.betternether.structures.plants.StructureBlackVine;
-import paulevs.betternether.structures.plants.StructureBloomingVine;
-import paulevs.betternether.structures.plants.StructureCrimsonFungus;
-import paulevs.betternether.structures.plants.StructureCrimsonGlowingTree;
-import paulevs.betternether.structures.plants.StructureCrimsonPinewood;
-import paulevs.betternether.structures.plants.StructureCrimsonRoots;
-import paulevs.betternether.structures.plants.StructureEggPlant;
-import paulevs.betternether.structures.plants.StructureEye;
-import paulevs.betternether.structures.plants.StructureGiantMold;
-import paulevs.betternether.structures.plants.StructureGoldenVine;
-import paulevs.betternether.structures.plants.StructureGrayMold;
-import paulevs.betternether.structures.plants.StructureInkBush;
-import paulevs.betternether.structures.plants.StructureJunglePlant;
-import paulevs.betternether.structures.plants.StructureLucis;
-import paulevs.betternether.structures.plants.StructureMagmaFlower;
-import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
-import paulevs.betternether.structures.plants.StructureMedRedMushroom;
-import paulevs.betternether.structures.plants.StructureMushroomFir;
-import paulevs.betternether.structures.plants.StructureNetherCactus;
-import paulevs.betternether.structures.plants.StructureNetherGrass;
-import paulevs.betternether.structures.plants.StructureNetherWart;
-import paulevs.betternether.structures.plants.StructureOldBrownMushrooms;
-import paulevs.betternether.structures.plants.StructureOldRedMushrooms;
-import paulevs.betternether.structures.plants.StructureOrangeMushroom;
-import paulevs.betternether.structures.plants.StructureRedMold;
-import paulevs.betternether.structures.plants.StructureReeds;
-import paulevs.betternether.structures.plants.StructureRubeus;
-import paulevs.betternether.structures.plants.StructureRubeusBush;
-import paulevs.betternether.structures.plants.StructureSmoker;
-import paulevs.betternether.structures.plants.StructureSoulGrass;
-import paulevs.betternether.structures.plants.StructureSoulLily;
-import paulevs.betternether.structures.plants.StructureSoulVein;
-import paulevs.betternether.structures.plants.StructureStalagnate;
-import paulevs.betternether.structures.plants.StructureSwampGrass;
-import paulevs.betternether.structures.plants.StructureTwistedVines;
-import paulevs.betternether.structures.plants.StructureVanillaMushroom;
-import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.structures.plants.StructureWallMoss;
-import paulevs.betternether.structures.plants.StructureWallRedMushroom;
-import paulevs.betternether.structures.plants.StructureWarpedFungus;
-import paulevs.betternether.structures.plants.StructureWarpedRoots;
-import paulevs.betternether.structures.plants.StructureWartBush;
-import paulevs.betternether.structures.plants.StructureWartSeed;
-import paulevs.betternether.structures.plants.StructureWartTree;
-import paulevs.betternether.structures.plants.StructureWillow;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Map;
 
 public class StructureRegistry {
 	private static final Map<StructureType, Map<String, IStructure>> REGISTRY;

@@ -1,17 +1,9 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.server.world.ServerWorld;
@@ -32,6 +24,9 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.plants.StructureSoulLily;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockSoulLily extends BlockBaseNotFull {
 	public static final EnumProperty<SoulLilyShape> SHAPE = EnumProperty.of("shape", SoulLilyShape.class);

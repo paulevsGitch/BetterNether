@@ -1,7 +1,5 @@
 package paulevs.betternether.structures.plants;
 
-import java.util.Random;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
@@ -11,6 +9,8 @@ import paulevs.betternether.blocks.BlockMushroomFir.MushroomFirShape;
 import paulevs.betternether.blocks.BlockNetherMycelium;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.Random;
 
 public class StructureMushroomFir implements IStructure {
 	Mutable npos = new Mutable();

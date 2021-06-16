@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -13,6 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.util.math.Direction;
 import paulevs.betternether.client.IRenderTypeable;
+
+import java.util.Collections;
+import java.util.List;
 
 public class BNPane extends PaneBlock implements IRenderTypeable {
 	private boolean dropSelf;

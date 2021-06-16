@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -13,11 +11,9 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.bones.StructureBoneReef;
 import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
-import paulevs.betternether.structures.plants.StructureBoneGrass;
-import paulevs.betternether.structures.plants.StructureFeatherFern;
-import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
-import paulevs.betternether.structures.plants.StructureLumabusVine;
-import paulevs.betternether.structures.plants.StructureReeds;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Random;
 
 public class NetherBoneReef extends NetherBiome {
 	public NetherBoneReef(String name) {

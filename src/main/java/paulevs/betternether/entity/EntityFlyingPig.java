@@ -1,10 +1,5 @@
 package paulevs.betternether.entity;
 
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -13,11 +8,7 @@ import net.minecraft.entity.Flutterer;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.goal.AnimalMateGoal;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.Path;
@@ -51,11 +42,12 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.entity.EntityFlyingPig.FindFoodGoal;
-import paulevs.betternether.entity.EntityFlyingPig.RoostingGoal;
-import paulevs.betternether.entity.EntityFlyingPig.SittingGoal;
-import paulevs.betternether.entity.EntityFlyingPig.WanderAroundGoal;
 import paulevs.betternether.registry.EntityRegistry;
+
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public class EntityFlyingPig extends AnimalEntity implements Flutterer {
 	private static final TrackedData<Byte> FLAGS;

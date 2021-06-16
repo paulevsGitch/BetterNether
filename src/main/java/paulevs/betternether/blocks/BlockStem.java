@@ -1,9 +1,6 @@
 package paulevs.betternether.blocks;
 
-import java.util.EnumMap;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
@@ -19,6 +16,8 @@ import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import paulevs.betternether.blocks.materials.Materials;
+
+import java.util.EnumMap;
 
 public class BlockStem extends BlockBaseNotFull {
 	public static final EnumProperty<Axis> AXIS = Properties.AXIS;

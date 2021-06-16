@@ -1,9 +1,5 @@
 package paulevs.betternether.world;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
@@ -12,6 +8,10 @@ import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.StructureConfig;
 import paulevs.betternether.world.structures.CityFeature;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class CityHelper {
 	private static final Set<ChunkPos> POSITIONS = new HashSet<ChunkPos>(16);

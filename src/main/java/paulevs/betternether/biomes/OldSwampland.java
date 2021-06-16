@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -13,20 +11,9 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.StructureBlackBush;
-import paulevs.betternether.structures.plants.StructureBlackVine;
-import paulevs.betternether.structures.plants.StructureFeatherFern;
-import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
-import paulevs.betternether.structures.plants.StructureOldWillow;
-import paulevs.betternether.structures.plants.StructureReeds;
-import paulevs.betternether.structures.plants.StructureSmoker;
-import paulevs.betternether.structures.plants.StructureSoulVein;
-import paulevs.betternether.structures.plants.StructureSwampGrass;
-import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.structures.plants.StructureWallMoss;
-import paulevs.betternether.structures.plants.StructureWallRedMushroom;
-import paulevs.betternether.structures.plants.StructureWillow;
-import paulevs.betternether.structures.plants.StructureWillowBush;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Random;
 
 public class OldSwampland extends NetherBiome {
 	protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);

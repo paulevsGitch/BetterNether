@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -10,19 +8,9 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureForestLitter;
-import paulevs.betternether.structures.plants.StructureAnchorTree;
-import paulevs.betternether.structures.plants.StructureAnchorTreeBranch;
-import paulevs.betternether.structures.plants.StructureAnchorTreeRoot;
-import paulevs.betternether.structures.plants.StructureCeilingMushrooms;
-import paulevs.betternether.structures.plants.StructureHookMushroom;
-import paulevs.betternether.structures.plants.StructureJungleMoss;
-import paulevs.betternether.structures.plants.StructureMossCover;
-import paulevs.betternether.structures.plants.StructureNeonEquisetum;
-import paulevs.betternether.structures.plants.StructureNetherSakura;
-import paulevs.betternether.structures.plants.StructureNetherSakuraBush;
-import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.structures.plants.StructureWallRedMushroom;
-import paulevs.betternether.structures.plants.StructureWhisperingGourd;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Random;
 
 public class UpsideDownForest extends NetherBiome {
 	public UpsideDownForest(String name) {

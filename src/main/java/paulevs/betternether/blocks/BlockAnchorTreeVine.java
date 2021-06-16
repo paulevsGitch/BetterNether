@@ -1,17 +1,9 @@
 package paulevs.betternether.blocks;
 
-import java.util.function.ToIntFunction;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -24,6 +16,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.function.ToIntFunction;
 
 public class BlockAnchorTreeVine extends BlockBaseNotFull {
 	protected static final VoxelShape SHAPE_SELECTION = Block.createCuboidShape(4, 0, 4, 12, 16, 12);

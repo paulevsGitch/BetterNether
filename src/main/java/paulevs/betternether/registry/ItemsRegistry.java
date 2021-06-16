@@ -1,8 +1,5 @@
 package paulevs.betternether.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
@@ -13,15 +10,8 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.FoodComponents;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.item.Item.Settings;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.ShearsItem;
-import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.Direction;
@@ -33,16 +23,12 @@ import paulevs.betternether.blocks.shapes.FoodShape;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.integrations.VanillaExcavatorsIntegration;
 import paulevs.betternether.integrations.VanillaHammersIntegration;
-import paulevs.betternether.items.BNArmor;
-import paulevs.betternether.items.BNItemAxe;
-import paulevs.betternether.items.BNItemHoe;
-import paulevs.betternether.items.BNItemPickaxe;
-import paulevs.betternether.items.BNItemShovel;
-import paulevs.betternether.items.BNSword;
-import paulevs.betternether.items.ItemBlackApple;
-import paulevs.betternether.items.ItemBowlFood;
+import paulevs.betternether.items.*;
 import paulevs.betternether.items.materials.BNItemMaterials;
 import paulevs.betternether.tab.CreativeTab;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemsRegistry {
 	private static final List<String> ITEMS = new ArrayList<String>();

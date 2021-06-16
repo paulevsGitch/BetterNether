@@ -1,19 +1,9 @@
 package paulevs.betternether.registry;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -23,14 +13,11 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.entity.EntityChair;
-import paulevs.betternether.entity.EntityFirefly;
-import paulevs.betternether.entity.EntityFlyingPig;
-import paulevs.betternether.entity.EntityHydrogenJellyfish;
-import paulevs.betternether.entity.EntityJungleSkeleton;
-import paulevs.betternether.entity.EntityNaga;
-import paulevs.betternether.entity.EntityNagaProjectile;
-import paulevs.betternether.entity.EntitySkull;
+import paulevs.betternether.entity.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class EntityRegistry {
 	public static final Map<EntityType<? extends LivingEntity>, DefaultAttributeContainer> ATTRIBUTES = Maps.newHashMap();

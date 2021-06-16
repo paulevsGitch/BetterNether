@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
@@ -14,6 +12,8 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureAgave;
 import paulevs.betternether.structures.plants.StructureBarrelCactus;
 import paulevs.betternether.structures.plants.StructureNetherCactus;
+
+import java.util.Random;
 
 public class NetherGravelDesert extends NetherBiome {
 	public NetherGravelDesert(String name) {

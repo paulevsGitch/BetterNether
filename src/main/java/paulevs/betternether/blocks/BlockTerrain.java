@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,6 +10,9 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvents;
+
+import java.util.Collections;
+import java.util.List;
 
 public class BlockTerrain extends BlockBase {
 	public static final BlockSoundGroup TERRAIN_SOUND = new BlockSoundGroup(1.0F, 1.0F,

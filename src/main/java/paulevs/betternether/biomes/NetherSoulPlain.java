@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
@@ -18,6 +16,8 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureSoulGrass;
 import paulevs.betternether.structures.plants.StructureSoulVein;
+
+import java.util.Random;
 
 public class NetherSoulPlain extends NetherBiome {
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);

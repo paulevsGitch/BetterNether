@@ -1,7 +1,5 @@
 package paulevs.betternether.structures.plants;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Property;
@@ -10,6 +8,8 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.Random;
 
 public class StructureScatter implements IStructure {
 	private Mutable npos = new Mutable();

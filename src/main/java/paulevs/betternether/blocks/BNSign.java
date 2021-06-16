@@ -1,16 +1,7 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.AbstractSignBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,7 +30,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
-import paulevs.betternether.mixin.common.PlayerEntityMixin;
+
+import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
 
 public class BNSign extends AbstractSignBlock {
 	public static final IntProperty ROTATION = Properties.ROTATION;

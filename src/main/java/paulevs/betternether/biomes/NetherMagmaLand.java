@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.sound.SoundEvents;
@@ -14,6 +12,8 @@ import paulevs.betternether.structures.decorations.StructureCrystal;
 import paulevs.betternether.structures.decorations.StructureGeyser;
 import paulevs.betternether.structures.plants.StructureGoldenVine;
 import paulevs.betternether.structures.plants.StructureMagmaFlower;
+
+import java.util.Random;
 
 public class NetherMagmaLand extends NetherBiome {
 	private static final Mutable POS = new Mutable();

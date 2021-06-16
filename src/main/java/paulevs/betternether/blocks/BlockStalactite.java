@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import javax.annotation.Nullable;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,6 +16,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+
+import javax.annotation.Nullable;
 
 public class BlockStalactite extends BlockBaseNotFull {
 	public static final IntProperty SIZE = IntProperty.of("size", 0, 7);

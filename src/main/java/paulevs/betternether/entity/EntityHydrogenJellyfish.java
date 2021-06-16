@@ -1,8 +1,5 @@
 package paulevs.betternether.entity;
 
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -31,6 +28,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.explosion.Explosion;
 import paulevs.betternether.registry.SoundsRegistry;
+
+import java.util.List;
+import java.util.Random;
 
 public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 	private static final TrackedData<Float> SCALE = DataTracker.registerData(EntityHydrogenJellyfish.class, TrackedDataHandlerRegistry.FLOAT);

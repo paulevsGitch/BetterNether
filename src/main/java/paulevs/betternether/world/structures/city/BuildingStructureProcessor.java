@@ -1,20 +1,6 @@
 package paulevs.betternether.world.structures.city;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.PaneBlock;
-import net.minecraft.block.PillarBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.StructureBlock;
-import net.minecraft.block.TrapdoorBlock;
-import net.minecraft.block.WallBlock;
+import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.structure.Structure.StructureBlockInfo;
 import net.minecraft.structure.StructurePlacementData;

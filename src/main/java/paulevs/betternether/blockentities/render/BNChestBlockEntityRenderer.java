@@ -1,31 +1,19 @@
 package paulevs.betternether.blockentities.render;
 
-import java.util.HashMap;
-
 import com.google.common.collect.Maps;
-
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
-import net.minecraft.block.AbstractChestBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.DoubleBlockProperties;
-import net.minecraft.block.DoubleBlockProperties.PropertySource;
-import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.block.entity.LightmapCoordinatesRetriever;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
@@ -36,6 +24,8 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.blockentities.BNChestBlockEntity;
 import paulevs.betternether.blocks.BNChest;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.HashMap;
 
 public class BNChestBlockEntityRenderer implements BlockEntityRenderer<BNChestBlockEntity> {
 	private static final HashMap<Block, RenderLayer[]> LAYERS = Maps.newHashMap();

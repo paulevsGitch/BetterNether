@@ -1,12 +1,12 @@
 package paulevs.betternether.world;
 
-import java.util.HashMap;
-
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.gen.ChunkRandom;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.noise.OpenSimplexNoise;
+
+import java.util.HashMap;
 
 public class BiomeMap {
 	private static final HashMap<ChunkPos, BiomeChunk> MAPS = new HashMap<ChunkPos, BiomeChunk>();

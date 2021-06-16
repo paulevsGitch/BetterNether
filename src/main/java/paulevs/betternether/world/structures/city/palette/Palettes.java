@@ -1,11 +1,11 @@
 package paulevs.betternether.world.structures.city.palette;
 
+import net.minecraft.block.Blocks;
+import paulevs.betternether.registry.BlocksRegistry;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-
-import net.minecraft.block.Blocks;
-import paulevs.betternether.registry.BlocksRegistry;
 
 public class Palettes {
 	private static final HashMap<String, CityPalette> REGISTRY = new HashMap<String, CityPalette>();

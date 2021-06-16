@@ -1,9 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -32,6 +28,10 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.registry.EntityRegistry;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class BlockEggPlant extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 8, 16);

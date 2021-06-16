@@ -1,11 +1,5 @@
 package paulevs.betternether.entity;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -16,11 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.*;
+
+import javax.annotation.Nullable;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.util.Random;
 
 public class EntityJungleSkeleton extends SkeletonEntity {
 	public EntityJungleSkeleton(EntityType<? extends SkeletonEntity> entityType, World world) {

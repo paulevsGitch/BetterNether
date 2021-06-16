@@ -1,14 +1,7 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -20,6 +13,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
+
+import java.util.Random;
 
 public class BlockCommonPlant extends BlockBaseNotFull implements Fertilizable {
 	public static final IntProperty AGE = IntProperty.of("age", 0, 3);

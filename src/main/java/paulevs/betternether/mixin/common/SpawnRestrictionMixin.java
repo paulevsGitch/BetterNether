@@ -1,12 +1,11 @@
 package paulevs.betternether.mixin.common;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.world.Heightmap;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
 import paulevs.betternether.entity.EntityJungleSkeleton;

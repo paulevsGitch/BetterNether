@@ -1,12 +1,12 @@
 package paulevs.betternether.structures;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
+
+import java.util.Random;
 
 public abstract class StructureObjScatter implements IStructure {
 	private static final Mutable POS = new Mutable();

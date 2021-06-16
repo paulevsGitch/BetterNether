@@ -2,7 +2,10 @@ package paulevs.betternether.entity.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderPhase;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import paulevs.betternether.mixin.client.RenderLayerMixin;

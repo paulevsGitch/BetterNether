@@ -1,20 +1,19 @@
 package paulevs.betternether.mixin.common;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import net.minecraft.server.world.ServerWorld;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtLongArray;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ChunkSerializer;
 import net.minecraft.world.gen.feature.StructureFeature;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @Mixin(ChunkSerializer.class)
 public class ChunkSerializerMixin {

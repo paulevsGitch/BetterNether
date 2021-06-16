@@ -1,16 +1,7 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.function.ToIntFunction;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
@@ -26,6 +17,10 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.function.ToIntFunction;
 
 public class BlockPottedPlant extends BlockBaseNotFull {
 	public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.of("plant", PottedPlantShape.class);

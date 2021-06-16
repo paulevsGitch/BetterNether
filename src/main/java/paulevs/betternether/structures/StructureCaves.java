@@ -1,13 +1,13 @@
 package paulevs.betternether.structures;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
+
+import java.util.Random;
 
 public class StructureCaves implements IStructure {
 	private static final boolean[][][] MASK = new boolean[16][24][16];

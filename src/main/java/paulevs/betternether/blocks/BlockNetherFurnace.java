@@ -1,9 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.ToIntFunction;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -29,6 +25,9 @@ import paulevs.betternether.blockentities.BlockEntityFurnace;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+import java.util.function.ToIntFunction;
 
 public class BlockNetherFurnace extends AbstractFurnaceBlock {
 	public BlockNetherFurnace(Block source) {

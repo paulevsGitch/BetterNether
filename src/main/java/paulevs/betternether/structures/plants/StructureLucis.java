@@ -1,7 +1,5 @@
 package paulevs.betternether.structures.plants;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +10,8 @@ import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.blocks.BlockLucisSpore;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.Random;
 
 public class StructureLucis implements IStructure {
 	@Override

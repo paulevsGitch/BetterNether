@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -9,18 +7,9 @@ import net.minecraft.world.WorldAccess;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.StructureBlackApple;
-import paulevs.betternether.structures.plants.StructureBlackBush;
-import paulevs.betternether.structures.plants.StructureInkBush;
-import paulevs.betternether.structures.plants.StructureMagmaFlower;
-import paulevs.betternether.structures.plants.StructureNetherGrass;
-import paulevs.betternether.structures.plants.StructureNetherWart;
-import paulevs.betternether.structures.plants.StructureReeds;
-import paulevs.betternether.structures.plants.StructureSmoker;
-import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.structures.plants.StructureWallMoss;
-import paulevs.betternether.structures.plants.StructureWallRedMushroom;
-import paulevs.betternether.structures.plants.StructureWartSeed;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Random;
 
 public class NetherGrasslands extends NetherBiome {
 	public NetherGrasslands(String name) {

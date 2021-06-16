@@ -1,25 +1,19 @@
 package paulevs.betternether.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.blockentities.BNBarrelBlockEntity;
-import paulevs.betternether.blockentities.BNBrewingStandBlockEntity;
-import paulevs.betternether.blockentities.BNChestBlockEntity;
-import paulevs.betternether.blockentities.BNSignBlockEntity;
-import paulevs.betternether.blockentities.BlockEntityChestOfDrawers;
-import paulevs.betternether.blockentities.BlockEntityForge;
-import paulevs.betternether.blockentities.BlockEntityFurnace;
+import paulevs.betternether.blockentities.*;
 import paulevs.betternether.blocks.BNBarrel;
 import paulevs.betternether.blocks.BNChest;
 import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.blocks.BlockNetherFurnace;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockEntitiesRegistry {
 	public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = BlockEntityType.Builder.create(BlockEntityForge::new, BlocksRegistry.CINCINNASITE_FORGE).build(null);

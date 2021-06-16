@@ -1,12 +1,8 @@
 package paulevs.betternether.world;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.RegistryLookupCodec;
 import net.minecraft.util.registry.Registry;
@@ -19,6 +15,9 @@ import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.mixin.common.GenerationSettingsAccessor;
 import paulevs.betternether.registry.BiomesRegistry;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class NetherBiomeSource extends BiomeSource {
 	public static final Codec<NetherBiomeSource> CODEC = RecordCodecBuilder.create((instance) -> {

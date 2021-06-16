@@ -1,15 +1,10 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,13 +12,15 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockAnchorTreeLeaves extends BlockBaseNotFull {
 	private Random random = new Random();

@@ -1,9 +1,5 @@
 package paulevs.betternether.structures;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
@@ -19,6 +15,10 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BetterNether;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Random;
 
 public class StructureNBT {
 	protected Identifier location;

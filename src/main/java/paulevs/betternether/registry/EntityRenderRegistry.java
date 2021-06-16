@@ -11,14 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.model.*;
-import paulevs.betternether.entity.render.RenderChair;
-import paulevs.betternether.entity.render.RenderFirefly;
-import paulevs.betternether.entity.render.RenderFlyingPig;
-import paulevs.betternether.entity.render.RenderHydrogenJellyfish;
-import paulevs.betternether.entity.render.RenderJungleSkeleton;
-import paulevs.betternether.entity.render.RenderNaga;
-import paulevs.betternether.entity.render.RenderNagaProjectile;
-import paulevs.betternether.entity.render.RenderSkull;
+import paulevs.betternether.entity.render.*;
 
 @Environment(EnvType.CLIENT)
 public class EntityRenderRegistry {

@@ -1,11 +1,5 @@
 package paulevs.betternether.entity;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -50,14 +44,11 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.entity.EntityFirefly.FreflyLookControl;
-import paulevs.betternether.entity.EntityFirefly.MoveRandomGoal;
-import paulevs.betternether.entity.EntityFirefly.MoveToFlowersGoal;
-import paulevs.betternether.entity.EntityFirefly.SittingGoal;
-import paulevs.betternether.entity.EntityFirefly.WanderAroundGoal;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
+
+import java.util.*;
 
 public class EntityFirefly extends AnimalEntity implements Flutterer {
 	private static final HashSet<Block> FLOWERS;

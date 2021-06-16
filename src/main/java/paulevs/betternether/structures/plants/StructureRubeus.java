@@ -1,10 +1,5 @@
 package paulevs.betternether.structures.plants;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Set;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -18,6 +13,11 @@ import paulevs.betternether.blocks.RubeusLog;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureFuncScatter;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.Set;
 
 public class StructureRubeus extends StructureFuncScatter {
 	private static final float[] CURVE_X = new float[] { 9F, 7F, 1.5F, 0.5F, 3F, 7F };

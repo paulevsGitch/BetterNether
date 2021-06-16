@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
@@ -12,6 +10,8 @@ import paulevs.betternether.structures.plants.StructureGrayMold;
 import paulevs.betternether.structures.plants.StructureOrangeMushroom;
 import paulevs.betternether.structures.plants.StructureRedMold;
 import paulevs.betternether.structures.plants.StructureVanillaMushroom;
+
+import java.util.Random;
 
 public class NetherMushroomForestEdge extends NetherBiome {
 	public NetherMushroomForestEdge(String name) {

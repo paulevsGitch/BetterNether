@@ -1,17 +1,7 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
@@ -27,6 +17,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class BlockSoulVein extends BlockBaseNotFull implements Fertilizable {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 1, 16);

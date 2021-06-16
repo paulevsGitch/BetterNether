@@ -1,9 +1,6 @@
 package paulevs.betternether.biomes;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.minecraft.client.sound.MusicType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -24,15 +21,13 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.GenerationStep.Feature;
 import net.minecraft.world.gen.carver.ConfiguredCarvers;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.config.Configs;
+
+import java.util.List;
 
 public class BiomeDefinition {
 	private final List<ConfiguredStructureFeature<?, ?>> structures = Lists.newArrayList();

@@ -1,9 +1,5 @@
 package paulevs.betternether;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -18,6 +14,10 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
 
 public class BlocksHelper {
 	public static final int FLAG_UPDATE_BLOCK = 1;

@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -10,6 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.BlocksHelper;
+
+import java.util.Random;
 
 public class BlockSoulGrass extends BlockNetherGrass {
 	@Override

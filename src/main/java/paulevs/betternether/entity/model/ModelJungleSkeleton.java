@@ -1,13 +1,13 @@
 package paulevs.betternether.entity.model;
 
-import java.util.Random;
-
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.render.entity.model.SkeletonEntityModel;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.entity.EntityJungleSkeleton;
 import paulevs.betternether.mixin.client.TexturedModelDataMixin;
+
+import java.util.Random;
 
 public class ModelJungleSkeleton extends SkeletonEntityModel<EntityJungleSkeleton> {
 	private static final float ANGLE45 = (float) Math.PI * 0.25F;

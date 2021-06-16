@@ -1,11 +1,5 @@
 package paulevs.betternether.structures.plants;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,6 +14,8 @@ import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.*;
 
 public class StructureAnchorTree implements IStructure {
 	protected static final OpenSimplexNoise NOISE = new OpenSimplexNoise(2145);

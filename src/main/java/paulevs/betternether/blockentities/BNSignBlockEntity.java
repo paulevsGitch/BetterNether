@@ -1,11 +1,6 @@
 package paulevs.betternether.blockentities;
 
-import java.util.function.Function;
-
-import javax.annotation.Nullable;
-
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -19,17 +14,15 @@ import net.minecraft.server.command.CommandOutput;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.Texts;
+import net.minecraft.text.*;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
+
+import javax.annotation.Nullable;
+import java.util.function.Function;
 
 public class BNSignBlockEntity extends BlockEntity {
 	private static final String[] TEXT_KEYS = new String[]{"Text1", "Text2", "Text3", "Text4"};

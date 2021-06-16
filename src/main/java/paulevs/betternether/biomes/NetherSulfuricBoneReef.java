@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -17,6 +15,8 @@ import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSepiaBoneGrass;
+
+import java.util.Random;
 
 public class NetherSulfuricBoneReef extends NetherBiome {
 	public NetherSulfuricBoneReef(String name) {

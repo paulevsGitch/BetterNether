@@ -1,14 +1,8 @@
 package paulevs.betternether.blockentities;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BrewingStandBlock;
-import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -34,6 +28,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity implements SidedInventory {
 	private static final int[] TOP_SLOTS = new int[] { 3 };

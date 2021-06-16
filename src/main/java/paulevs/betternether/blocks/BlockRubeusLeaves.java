@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -20,6 +18,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.BlocksRegistry;
+
+import java.util.Random;
 
 public class BlockRubeusLeaves extends BlockBase {
 	private static final int MAX_DIST = 10;

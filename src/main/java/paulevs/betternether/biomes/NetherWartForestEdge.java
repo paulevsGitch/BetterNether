@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +11,8 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureNetherWart;
 import paulevs.betternether.structures.plants.StructureWartSeed;
+
+import java.util.Random;
 
 public class NetherWartForestEdge extends NetherBiome {
 	public NetherWartForestEdge(String name) {

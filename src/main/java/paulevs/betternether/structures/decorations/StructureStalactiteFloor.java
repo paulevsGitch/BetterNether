@@ -1,7 +1,5 @@
 package paulevs.betternether.structures.decorations;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
@@ -10,6 +8,8 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.Random;
 
 public class StructureStalactiteFloor implements IStructure {
 	private static final Mutable POS = new Mutable();

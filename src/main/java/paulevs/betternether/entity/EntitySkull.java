@@ -1,16 +1,9 @@
 package paulevs.betternether.entity;
 
-import java.util.List;
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityGroup;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Flutterer;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -34,8 +27,10 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.entity.EntitySkull.SkullLookControl;
 import paulevs.betternether.registry.SoundsRegistry;
+
+import java.util.List;
+import java.util.Random;
 
 public class EntitySkull extends HostileEntity implements Flutterer {
 	private static double particleX;

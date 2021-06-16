@@ -1,7 +1,5 @@
 package paulevs.betternether.structures.plants;
 
-import java.util.Random;
-
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
@@ -15,6 +13,8 @@ import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
+
+import java.util.Random;
 
 public class StructureWillow implements IStructure {
 	private static final Direction[] HOR = HorizontalFacingBlock.FACING.getValues().toArray(new Direction[] {});

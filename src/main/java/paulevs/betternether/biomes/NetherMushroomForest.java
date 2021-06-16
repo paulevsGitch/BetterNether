@@ -1,7 +1,5 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -11,17 +9,9 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.StructureGiantMold;
-import paulevs.betternether.structures.plants.StructureGrayMold;
-import paulevs.betternether.structures.plants.StructureLucis;
-import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
-import paulevs.betternether.structures.plants.StructureMedRedMushroom;
-import paulevs.betternether.structures.plants.StructureMushroomFir;
-import paulevs.betternether.structures.plants.StructureOrangeMushroom;
-import paulevs.betternether.structures.plants.StructureRedMold;
-import paulevs.betternether.structures.plants.StructureVanillaMushroom;
-import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.structures.plants.StructureWallRedMushroom;
+import paulevs.betternether.structures.plants.*;
+
+import java.util.Random;
 
 public class NetherMushroomForest extends NetherBiome {
 	public NetherMushroomForest(String name) {

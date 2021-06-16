@@ -1,9 +1,6 @@
 package paulevs.betternether.recipes;
 
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,6 +11,8 @@ import paulevs.betternether.integrations.VanillaExcavatorsIntegration;
 import paulevs.betternether.integrations.VanillaHammersIntegration;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
+
+import java.util.Map;
 
 public class IntegrationRecipes {
 	public static void register() {

@@ -1,13 +1,13 @@
 package paulevs.betternether.biomes;
 
-import java.util.Random;
-
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 import paulevs.betternether.structures.StructureType;
+
+import java.util.Random;
 
 public class NetherBiomeWrapper extends NetherBiome {
 	final Biome biome;

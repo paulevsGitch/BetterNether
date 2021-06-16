@@ -1,14 +1,13 @@
 package paulevs.betternether.integrations;
 
-import java.lang.reflect.Constructor;
-
-import org.apache.logging.log4j.LogManager;
-
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
+import org.apache.logging.log4j.LogManager;
 import paulevs.betternether.registry.ItemsRegistry;
+
+import java.lang.reflect.Constructor;
 
 public class VanillaExcavatorsIntegration {
 	private static boolean hasExcavators;
