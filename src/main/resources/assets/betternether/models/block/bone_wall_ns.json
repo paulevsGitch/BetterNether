@@ -8,7 +8,7 @@
 	"elements": [ 	 
 		{
 			"__comment": "Box2",
-			"from": [ 5, 0, 0 ],
+			"from": [ 5, 0.01, 0 ],
 			"to": [ 11, 1, 8 ],
 			"faces": {
 				"down": { "uv": [ 5, 8, 11, 16 ], "texture": "#top", "cullface": "down" },
