@@ -224,11 +224,16 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 	}
 
 	public static boolean canSpawn(EntityType<? extends EntityHydrogenJellyfish> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		Box box = new Box(pos).expand(64, 256, 64);
-		List<EntityHydrogenJellyfish> list = world.getEntitiesByClass(EntityHydrogenJellyfish.class, box, (entity) -> {
+		try {
+			Box box = new Box(pos).expand(64, 256, 64);
+			List<EntityHydrogenJellyfish> list = world.getEntitiesByClass(EntityHydrogenJellyfish.class, box, (entity) -> {
+				return true;
+			});
+			return list.size() < 4;
+		}
+		catch (Exception e) {
 			return true;
-		});
-		return list.size() < 4;
+		}
 	}
 
 	@Override

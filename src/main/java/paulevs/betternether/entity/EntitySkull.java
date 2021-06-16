@@ -248,15 +248,20 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 	}
 
 	public static boolean canSpawn(EntityType<? extends EntitySkull> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if (world.getDifficulty() == Difficulty.PEACEFUL || world.getLightLevel(pos) > 7)
-			return false;
+		try {
+			if (world.getDifficulty() == Difficulty.PEACEFUL || world.getLightLevel(pos) > 7)
+				return false;
 
-		if (pos.getY() >= world.getDimension().getMinimumY()) return false;
+			if (pos.getY() >= world.getDimension().getMinimumY()) return false;
 
-		Box box = new Box(pos).expand(256, 256, 256);
-		List<EntitySkull> list = world.getEntitiesByClass(EntitySkull.class, box, (entity) -> {
+			Box box = new Box(pos).expand(256, 256, 256);
+			List<EntitySkull> list = world.getEntitiesByClass(EntitySkull.class, box, (entity) -> {
+				return true;
+			});
+			return list.size() < 4;
+		}
+		catch (Exception e) {
 			return true;
-		});
-		return list.size() < 4;
+		}
 	}
 }

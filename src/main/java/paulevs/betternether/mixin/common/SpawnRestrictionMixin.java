@@ -10,6 +10,7 @@ import paulevs.betternether.entity.EntityFirefly;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
 import paulevs.betternether.entity.EntityJungleSkeleton;
 import paulevs.betternether.entity.EntityNaga;
+import paulevs.betternether.entity.EntitySkull;
 import paulevs.betternether.registry.EntityRegistry;
 
 @Mixin(SpawnRestriction.class)
@@ -22,5 +23,6 @@ public class SpawnRestrictionMixin {
 		register(EntityRegistry.FIREFLY, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING, EntityFirefly::canSpawn);
 		register(EntityRegistry.HYDROGEN_JELLYFISH, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityHydrogenJellyfish::canSpawn);
 		register(EntityRegistry.JUNGLE_SKELETON, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityJungleSkeleton::canSpawn);
+		register(EntityRegistry.SKULL, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING, EntitySkull::canSpawn);
 	}
 }
