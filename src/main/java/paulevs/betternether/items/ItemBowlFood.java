@@ -58,7 +58,7 @@ public class ItemBowlFood extends Item {
 	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
 		if (stack.getCount() == 1) {
 			super.finishUsing(stack, world, user);
-			return new ItemStack(ItemsRegistry.STALAGNATE_BOWL, stack.getCount());
+			return new ItemStack(ItemsRegistry.STALAGNATE_BOWL, 1);
 		}
 		else {
 			if (user instanceof PlayerEntity) {

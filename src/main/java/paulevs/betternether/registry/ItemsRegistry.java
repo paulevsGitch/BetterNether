@@ -119,7 +119,7 @@ public class ItemsRegistry {
 
 	public static Item registerMedicine(String name, int ticks, int power, boolean bowl) {
 		if (bowl) {
-			Item item = new Item(defaultSettings().food(new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, ticks, power), 1).build())) {
+			Item item = new Item(defaultSettings().maxCount(16).food(new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, ticks, power), 1).build())) {
 				@Override
 				public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
 					if (stack.getCount() == 1) {
