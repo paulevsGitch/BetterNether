@@ -1,10 +1,10 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Blocks;
+import paulevs.betternether.BlocksHelper;
 
 public class BNNetherBrick extends BlockBase {
 	public BNNetherBrick() {
-		super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS));
+		super(BlocksHelper.copySettingsOf(Blocks.NETHER_BRICKS));
 	}
 }

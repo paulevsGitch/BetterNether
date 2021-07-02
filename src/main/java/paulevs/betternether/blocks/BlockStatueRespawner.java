@@ -1,6 +1,5 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,7 +38,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
 	private final ItemStack requiredItem;
 
 	public BlockStatueRespawner() {
-		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().luminance(15));
+		super(BlocksHelper.copySettingsOf(BlocksRegistry.CINCINNASITE_BLOCK).nonOpaque().luminance(15));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(TOP, false));
 		this.setDropItself(false);

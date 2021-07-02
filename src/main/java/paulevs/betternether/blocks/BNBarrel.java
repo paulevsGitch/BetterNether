@@ -1,6 +1,5 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -18,6 +17,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blockentities.BNBarrelBlockEntity;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class BNBarrel extends BarrelBlock {
 	public BNBarrel(Block source) {
-		super(FabricBlockSettings.copyOf(source).nonOpaque());
+		super(BlocksHelper.copySettingsOf(source).nonOpaque());
 	}
 
 	@Override

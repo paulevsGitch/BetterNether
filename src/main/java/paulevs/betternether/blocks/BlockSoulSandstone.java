@@ -1,6 +1,5 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,12 +9,13 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
+import paulevs.betternether.BlocksHelper;
 
 public class BlockSoulSandstone extends BlockBase {
 	public static final BooleanProperty UP = BooleanProperty.of("up");
 
 	public BlockSoulSandstone() {
-		super(FabricBlockSettings.copyOf(Blocks.SANDSTONE));
+		super(BlocksHelper.copySettingsOf(Blocks.SANDSTONE));
 	}
 
 	@Override
