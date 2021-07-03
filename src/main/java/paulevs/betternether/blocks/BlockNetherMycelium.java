@@ -27,7 +27,7 @@ public class BlockNetherMycelium extends BlockBase {
 	public static final BooleanProperty IS_BLUE = BooleanProperty.of("blue");
 
 	public BlockNetherMycelium() {
-		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).materialColor(MapColor.GRAY).requiresTool().breakByTool(FabricToolTags.SHOVELS));
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).materialColor(MapColor.GRAY).requiresTool().breakByTool(FabricToolTags.PICKAXES));
 		this.setDefaultState(getStateManager().getDefaultState().with(IS_BLUE, false));
 		this.setDropItself(false);
 	}

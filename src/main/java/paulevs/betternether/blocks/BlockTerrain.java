@@ -24,7 +24,7 @@ public class BlockTerrain extends BlockBase {
 			SoundEvents.BLOCK_NETHERRACK_FALL);
 
 	public BlockTerrain() {
-		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).sounds(TERRAIN_SOUND).requiresTool().breakByTool(FabricToolTags.SHOVELS));
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).sounds(TERRAIN_SOUND).requiresTool().breakByTool(FabricToolTags.PICKAXES));
 		this.setDropItself(false);
 	}
 
