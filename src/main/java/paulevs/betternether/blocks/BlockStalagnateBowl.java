@@ -1,6 +1,5 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,6 +14,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.shapes.FoodShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
@@ -26,7 +26,7 @@ public class BlockStalagnateBowl extends BlockBaseNotFull {
 	public static final EnumProperty<FoodShape> FOOD = EnumProperty.of("food", FoodShape.class);
 
 	public BlockStalagnateBowl() {
-		super(FabricBlockSettings.copyOf(BlocksRegistry.STALAGNATE).nonOpaque());
+		super(BlocksHelper.copySettingsOf(BlocksRegistry.STALAGNATE).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDefaultState(getStateManager().getDefaultState().with(FOOD, FoodShape.NONE));
 	}

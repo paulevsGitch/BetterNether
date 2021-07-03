@@ -3,6 +3,7 @@ package paulevs.betternether.blocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -31,7 +32,7 @@ import java.util.function.ToIntFunction;
 
 public class BlockNetherFurnace extends AbstractFurnaceBlock {
 	public BlockNetherFurnace(Block source) {
-		super(FabricBlockSettings.copyOf(source).requiresTool().luminance(getLuminance()));
+		super(FabricBlockSettings.copyOf(source).requiresTool().breakByTool(FabricToolTags.PICKAXES).luminance(getLuminance()));
 	}
 
 	private static ToIntFunction<BlockState> getLuminance() {

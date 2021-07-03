@@ -3,6 +3,7 @@ package paulevs.betternether.blocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,7 +27,7 @@ public class BlockNetherMycelium extends BlockBase {
 	public static final BooleanProperty IS_BLUE = BooleanProperty.of("blue");
 
 	public BlockNetherMycelium() {
-		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).materialColor(MapColor.GRAY).requiresTool());
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).materialColor(MapColor.GRAY).requiresTool().breakByTool(FabricToolTags.PICKAXES));
 		this.setDefaultState(getStateManager().getDefaultState().with(IS_BLUE, false));
 		this.setDropItself(false);
 	}

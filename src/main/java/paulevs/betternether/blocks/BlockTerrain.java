@@ -1,6 +1,7 @@
 package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -23,7 +24,7 @@ public class BlockTerrain extends BlockBase {
 			SoundEvents.BLOCK_NETHERRACK_FALL);
 
 	public BlockTerrain() {
-		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).sounds(TERRAIN_SOUND).requiresTool());
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).sounds(TERRAIN_SOUND).requiresTool().breakByTool(FabricToolTags.PICKAXES));
 		this.setDropItself(false);
 	}
 
