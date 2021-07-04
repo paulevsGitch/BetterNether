@@ -2,10 +2,6 @@ package paulevs.betternether.registry;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.fabricmc.fabric.impl.object.builder.BlockSettingsInternals;
-import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
-import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
@@ -26,15 +22,10 @@ import paulevs.betternether.structures.plants.StructureLumabusVine;
 import paulevs.betternether.tab.CreativeTab;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BlocksRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
-	static HashMap<String, Block> blockmap = new HashMap<>();
 
 	// Stalagnate //
 	public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
@@ -537,11 +528,8 @@ public class BlocksRegistry {
 		return block;
 	}
 
-
-
 	private static void registerBlockDirectly(String name, Block block) {
 		Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
-		blockmap.put(name, block);
 		Item.Settings settings = new Item.Settings().group(CreativeTab.BN_TAB);
 		if (block instanceof BNSign) {
 			settings.maxCount(16);
@@ -843,66 +831,5 @@ public class BlocksRegistry {
 
 	public static List<String> getPossibleBlocks() {
 		return BLOCKS;
-	}
-
-	static {
-		HashMap<String, HashSet<String>> map = new HashMap<>();
-		map.put("PICKAXES", new HashSet<>());
-		map.put("AXES", new HashSet<>());
-		map.put("HOES", new HashSet<>());
-		map.put("SHOVELS", new HashSet<>());
-		map.put("SHEARS", new HashSet<>());
-		map.put("SWORDS", new HashSet<>());
-		map.put("UNKNOWN", new HashSet<>());
-		map.put("MISSING", new HashSet<>());
-		map.put("NONE", new HashSet<>());
-
-		for (var entry : blockmap.entrySet()){
-			Block bl = entry.getValue();
-			String name = entry.getKey();
-
-			AbstractBlockSettingsAccessor blockSettings = (AbstractBlockSettingsAccessor) ((AbstractBlockAccessor)bl).getSettings();
-			BlockSettingsInternals blockInternals = (BlockSettingsInternals) blockSettings;
-			IExtraDataMixin extraData = (IExtraDataMixin) (Object)blockInternals.getExtraData();
-
-			String id = new Identifier(BetterNether.MOD_ID, name).toString();
-			if (extraData!=null) {
-				for (var mLevel : extraData.getTags()) {
-					var tag = mLevel.getTag();
-					if (tag == FabricToolTags.PICKAXES) {
-						map.get("PICKAXES").add(id);
-					} else if (tag == FabricToolTags.AXES) {
-						map.get("AXES").add(id);
-					} else if (tag == FabricToolTags.HOES) {
-						map.get("HOES").add(id);
-					} else if (tag == FabricToolTags.SHOVELS) {
-						map.get("SHOVELS").add(id);
-					} else if (tag == FabricToolTags.SHEARS) {
-						map.get("SHEARS").add(id);
-					} else if (tag == FabricToolTags.SWORDS) {
-						map.get("SWORDS").add(id);
-					} else if (blockSettings.isToolRequired()) {
-						map.get("MISSING").add(id);
-					} else {
-						map.get("UNKNOWN").add(id);
-					}
-				}
-			} else {
-				if (blockSettings.isToolRequired()) {
-					map.get("MISSING").add(id);
-				} else {
-					map.get("NONE").add(id);
-				}
-			}
-		}
-
-		String out = "";
-		for (var entry : map.entrySet()){
-			out += "\n" + entry.getKey() + ":\n";
-			for (var id : entry.getValue().stream().sorted().collect(Collectors.toList())){
-				out += "  \"" + id + "\",\n";
-			}
-		}
-		System.out.println(out);
 	}
 }

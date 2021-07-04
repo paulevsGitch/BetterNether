@@ -28,9 +28,7 @@
 	"MapStateMixin",
 	"BoneMealMixin",
 	"MapMixin",
-    "AbstractFurnaceBlockEntityMixin",
-	"ExtraDataMixin",
-	"MiningLevelMixin"
+    "AbstractFurnaceBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
