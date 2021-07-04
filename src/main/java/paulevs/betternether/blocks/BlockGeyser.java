@@ -2,6 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,7 +21,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.BlocksHelper;
 
 import java.util.Random;
 
@@ -28,7 +28,7 @@ public class BlockGeyser extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 4, 15);
 
 	public BlockGeyser() {
-		super(BlocksHelper.copySettingsOf(Blocks.NETHERRACK).nonOpaque().luminance(10));
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).nonOpaque().luminance(10));
 	}
 
 	@Override

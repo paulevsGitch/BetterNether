@@ -1,5 +1,6 @@
 package paulevs.betternether.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -27,7 +28,7 @@ public class BNLadder extends BlockBaseNotFull {
 	protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D);
 
 	public BNLadder(Block block) {
-		super(BlocksHelper.copySettingsOf(block).nonOpaque());
+		super(FabricBlockSettings.copyOf(block).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

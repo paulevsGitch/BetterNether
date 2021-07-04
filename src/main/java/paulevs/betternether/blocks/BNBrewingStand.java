@@ -1,5 +1,6 @@
 package paulevs.betternether.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.BrewingStandBlock;
@@ -17,14 +18,13 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blockentities.BNBrewingStandBlockEntity;
 import paulevs.betternether.client.IRenderTypeable;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable {
 	public BNBrewingStand() {
-		super(BlocksHelper.copySettingsOf(Blocks.NETHER_BRICKS)
+		super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS)
 				.strength(0.5F, 0.5F)
 				.luminance(1)
 				.nonOpaque());

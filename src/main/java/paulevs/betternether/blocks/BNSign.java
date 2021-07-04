@@ -1,10 +1,7 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.AbstractSignBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,7 +29,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
 
 import javax.annotation.Nullable;
@@ -53,7 +49,7 @@ public class BNSign extends AbstractSignBlock {
 	};
 
 	public BNSign(Block source) {
-		super(BlocksHelper.copySettingsOf(source).noCollision().nonOpaque().strength(1.0F), SignType.OAK);
+		super(FabricBlockSettings.copyOf(source).noCollision().nonOpaque().strength(1.0F), SignType.OAK);
 		this.setDefaultState(this.stateManager.getDefaultState().with(ROTATION, 0).with(FLOOR, true).with(WATERLOGGED, false));
 	}
 
