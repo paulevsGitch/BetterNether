@@ -1,18 +1,22 @@
 package paulevs.betternether;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.fabricmc.fabric.impl.object.builder.BlockSettingsInternals;
 import net.fabricmc.fabric.impl.object.builder.FabricBlockInternals;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.LavaFluid;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Property;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
@@ -21,10 +25,6 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registry.BlocksRegistry;
-
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
 
 public class BlocksHelper {
 	public static final int FLAG_UPDATE_BLOCK = 1;
@@ -155,7 +155,7 @@ public class BlocksHelper {
 		return state.isIn(NetherTags.NYLIUM);
 	}
 
-	public static FabricBlockSettings copySettingsOf(AbstractBlock block) {
+	public static FabricBlockSettings copySettingsOf(Block block) {
 		FabricBlockSettings fbs = FabricBlockSettings.copyOf(block);
 
 		AbstractBlockSettingsAccessor blockSettings = (AbstractBlockSettingsAccessor) ((AbstractBlockAccessor)block).getSettings();
@@ -169,6 +169,18 @@ public class BlocksHelper {
 			FabricBlockInternals.ExtraData extraData = blockInternals.getExtraData();
 			
 			if (blockSettings.isToolRequired() && extraData == null) {
+				try {
+					System.out.println("Adding PICKAX to copy of " + block);
+					System.out.println("    - Axe:" + (BlockTags.AXE_MINEABLE.contains(block)));
+					System.out.println("    - Hoe:" + (BlockTags.HOE_MINEABLE.contains(block)));
+					System.out.println("    - Shovel:" + (BlockTags.SHOVEL_MINEABLE.contains(block)));
+					System.out.println("    - PickAxe:" + (BlockTags.PICKAXE_MINEABLE.contains(block)));
+					System.out.println("    - Diamond:" + (BlockTags.NEEDS_DIAMOND_TOOL.contains(block)));
+					System.out.println("    - Iron:" + (BlockTags.NEEDS_IRON_TOOL.contains(block)));
+					System.out.println("    - Stone:" + (BlockTags.NEEDS_STONE_TOOL.contains(block)));
+				} catch (Exception e){
+					System.out.println("    !!! Error");
+				}
 				fbs.breakByTool(FabricToolTags.PICKAXES);
 			}
 		}
