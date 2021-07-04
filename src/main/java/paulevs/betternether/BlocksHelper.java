@@ -169,19 +169,7 @@ public class BlocksHelper {
 			FabricBlockInternals.ExtraData extraData = blockInternals.getExtraData();
 			
 			if (blockSettings.isToolRequired() && extraData == null) {
-				try {
-					System.out.println("Adding PICKAX to copy of " + block);
-					System.out.println("    - Axe:" + (BlockTags.AXE_MINEABLE.contains(block)));
-					System.out.println("    - Hoe:" + (BlockTags.HOE_MINEABLE.contains(block)));
-					System.out.println("    - Shovel:" + (BlockTags.SHOVEL_MINEABLE.contains(block)));
-					System.out.println("    - PickAxe:" + (BlockTags.PICKAXE_MINEABLE.contains(block)));
-					System.out.println("    - Diamond:" + (BlockTags.NEEDS_DIAMOND_TOOL.contains(block)));
-					System.out.println("    - Iron:" + (BlockTags.NEEDS_IRON_TOOL.contains(block)));
-					System.out.println("    - Stone:" + (BlockTags.NEEDS_STONE_TOOL.contains(block)));
-				} catch (Exception e){
-					System.out.println("    !!! Error");
-				}
-				fbs.breakByTool(FabricToolTags.PICKAXES);
+				//fbs.breakByTool(FabricToolTags.PICKAXES);
 			}
 		}
 		return fbs;
