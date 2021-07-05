@@ -13,7 +13,7 @@ public class Materials {
 	public static final Material COMMON_LEAVES = new Material.Builder(MapColor.DARK_GREEN).notSolid().build();
 
 	public static FabricBlockSettings makeWood(MapColor color) {
-		return FabricBlockSettings.of(COMMON_WOOD)
+		return FabricBlockSettings.of(Material.NETHER_WOOD)
 				.sounds(BlockSoundGroup.WOOD)
 				.breakByTool(FabricToolTags.AXES)
 				.hardness(1)
