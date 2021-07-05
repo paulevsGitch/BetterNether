@@ -1,5 +1,6 @@
 package paulevs.betternether.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -27,7 +28,7 @@ public class BNChair extends BlockBaseNotFull {
 	private float height;
 
 	public BNChair(Block block, int height) {
-		super(BlocksHelper.copySettingsOf(block).nonOpaque());
+		super(FabricBlockSettings.copyOf(block).nonOpaque());
 		this.height = (float) (height - 3F) / 16F;
 	}
 

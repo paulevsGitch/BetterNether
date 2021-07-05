@@ -2,13 +2,13 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PaneBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.util.math.Direction;
-import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.client.IRenderTypeable;
 
 import java.util.Collections;
@@ -18,7 +18,7 @@ public class BNPane extends PaneBlock implements IRenderTypeable {
 	private boolean dropSelf;
 
 	public BNPane(Block block, boolean dropSelf) {
-		super(BlocksHelper.copySettingsOf(block).strength(0.3F, 0.3F).nonOpaque());
+		super(FabricBlockSettings.copyOf(block).strength(0.3F, 0.3F).nonOpaque());
 		this.dropSelf = dropSelf;
 	}
 

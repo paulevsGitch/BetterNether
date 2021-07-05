@@ -1,10 +1,10 @@
 package paulevs.betternether.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Blocks;
-import paulevs.betternether.BlocksHelper;
 
 public class BNObsidian extends BlockBase {
 	public BNObsidian() {
-		super(BlocksHelper.copySettingsOf(Blocks.OBSIDIAN));
+		super(FabricBlockSettings.copyOf(Blocks.OBSIDIAN));
 	}
 }

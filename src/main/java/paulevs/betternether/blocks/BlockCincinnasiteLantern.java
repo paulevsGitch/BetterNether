@@ -1,10 +1,10 @@
 package paulevs.betternether.blocks;
 
-import paulevs.betternether.BlocksHelper;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasiteLantern extends BlockBase {
 	public BlockCincinnasiteLantern() {
-		super(BlocksHelper.copySettingsOf(BlocksRegistry.CINCINNASITE_BLOCK).luminance(15));
+		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK).luminance(15));
 	}
 }

@@ -1,18 +1,18 @@
 package paulevs.betternether.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
-import paulevs.betternether.BlocksHelper;
 
 import java.util.Collections;
 import java.util.List;
 
 public class BNStairs extends StairsBlock {
 	public BNStairs(Block block) {
-		super(block.getDefaultState(), BlocksHelper.copySettingsOf(block));
+		super(block.getDefaultState(), FabricBlockSettings.copyOf(block));
 	}
 
 	@Override
