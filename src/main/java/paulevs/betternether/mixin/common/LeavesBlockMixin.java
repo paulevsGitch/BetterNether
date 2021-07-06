@@ -20,7 +20,7 @@ public abstract class LeavesBlockMixin extends Block {
 	@Override
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool != null && tool.getItem().isIn(FabricToolTags.SHEARS)) {
+		if (tool != null && tool.isIn(FabricToolTags.SHEARS)) {
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		}
 		else {
