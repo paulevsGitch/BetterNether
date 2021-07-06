@@ -14,7 +14,6 @@ import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
@@ -30,23 +29,22 @@ import java.util.Random;
 
 public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 16, 14);
-	public static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
 
 	public BlockBlackVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MapColor.RED)
+				.mapColor(MapColor.RED)
 				.sounds(BlockSoundGroup.CROP)
 				.noCollision()
 				.breakInstantly()
 				.nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
-		this.setDefaultState(getStateManager().getDefaultState().with(BOTTOM, true));
+		this.setDefaultState(getStateManager().getDefaultState().with(BlockProperties.BOTTOM, true));
 	}
 
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
-		stateManager.add(BOTTOM);
+		stateManager.add(BlockProperties.BOTTOM);
 	}
 
 	@Override
@@ -73,7 +71,7 @@ public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable {
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (canPlaceAt(state, world, pos))
-			return world.getBlockState(pos.down()).getBlock() == this ? state.with(BOTTOM, false) : state.with(BOTTOM, true);
+			return world.getBlockState(pos.down()).getBlock() == this ? state.with(BlockProperties.BOTTOM, false) : state.with(BlockProperties.BOTTOM, true);
 		else
 			return Blocks.AIR.getDefaultState();
 	}
@@ -102,8 +100,8 @@ public class BlockBlackVine extends BlockBaseNotFull implements Fertilizable {
 			if (world.getBlockState(blockPos).getBlock() != this)
 				break;
 		}
-		BlocksHelper.setWithoutUpdate(world, blockPos.up(), getDefaultState().with(BOTTOM, false));
-		BlocksHelper.setWithoutUpdate(world, blockPos, getDefaultState().with(BOTTOM, true));
+		BlocksHelper.setWithoutUpdate(world, blockPos.up(), getDefaultState().with(BlockProperties.BOTTOM, false));
+		BlocksHelper.setWithoutUpdate(world, blockPos, getDefaultState().with(BlockProperties.BOTTOM, true));
 	}
 
 	@Override

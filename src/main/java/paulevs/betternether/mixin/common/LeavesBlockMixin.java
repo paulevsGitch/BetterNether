@@ -2,6 +2,9 @@ package paulevs.betternether.mixin.common;
 
 import java.util.Collections;
 import java.util.List;
+
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import org.spongepowered.asm.mixin.Mixin;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
