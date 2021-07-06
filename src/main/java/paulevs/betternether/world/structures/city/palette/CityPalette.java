@@ -4,7 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import paulevs.betternether.blocks.BlockPottedPlant;
-import paulevs.betternether.blocks.BlockPottedPlant.PottedPlantShape;
+import paulevs.betternether.blocks.BlockProperties.PottedPlantShape;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.registry.BlocksRegistry;
 
