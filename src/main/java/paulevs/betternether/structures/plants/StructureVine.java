@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.blocks.BlockBlackVine;
+import paulevs.betternether.blocks.BlockProperties;
 import paulevs.betternether.structures.IStructure;
 
 import java.util.Random;
@@ -27,8 +27,8 @@ public class StructureVine implements IStructure {
 			return;
 		h = random.nextInt(h) + 1;
 
-		BlockState bottom = block.getDefaultState().with(BlockBlackVine.BOTTOM, true);
-		BlockState middle = block.getDefaultState().with(BlockBlackVine.BOTTOM, false);
+		BlockState bottom = block.getDefaultState().with(BlockProperties.BOTTOM, true);
+		BlockState middle = block.getDefaultState().with(BlockProperties.BOTTOM, false);
 
 		blockPos.set(pos);
 		for (int y = 0; y < h; y++) {
