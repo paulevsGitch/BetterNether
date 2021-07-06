@@ -55,7 +55,7 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig> {
 
 			// CityPalette palette = Palettes.getRandom(random);
 			List<CityPiece> buildings = generator.generate(center, this.random, Palettes.EMPTY);
-			BlockBox cityBox = BlockBox.empty();
+			BlockBox cityBox = BlockBox.infinite();
 			for (CityPiece p : buildings)
 				cityBox.encompass(p.getBoundingBox());
 
