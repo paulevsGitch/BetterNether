@@ -152,7 +152,7 @@ public class ItemsRegistry {
 				public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
 					Direction direction = (Direction) pointer.getBlockState().get(DispenserBlock.FACING);
 					EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getTag());
-					entityType.spawnFromItemStack(pointer.getWorld(), stack, (PlayerEntity) null, pointer.getBlockPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
+					entityType.spawnFromItemStack(pointer.getWorld(), stack, (PlayerEntity) null, pointer.getPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
 					stack.decrement(1);
 					return stack;
 				}
