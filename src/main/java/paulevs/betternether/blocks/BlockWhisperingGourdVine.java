@@ -6,6 +6,8 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -109,7 +111,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Fertil
 	@Override
 	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool != null && FabricToolTags.SHEARS.contains(tool.getItem()))
+		if (tool != null && (FabricToolTags.SHEARS.contains(tool.getItem()) || EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0))
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		else if (state.get(SHAPE) == TripleShape.BOTTOM || MHelper.RANDOM.nextBoolean())
 			return Lists.newArrayList(new ItemStack(this.asItem()));
