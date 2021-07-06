@@ -14,13 +14,13 @@ import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
-import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.blocks.BlockProperties.EnumLucisShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
 
@@ -29,7 +29,7 @@ import java.util.List;
 public class BlockLucisMushroom extends BlockBaseNotFull {
 	private static final VoxelShape V_SHAPE = Block.createCuboidShape(0, 0, 0, 16, 9, 16);
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-	public static final EnumProperty<EnumShape> SHAPE = EnumProperty.of("shape", EnumShape.class);
+	public static final EnumProperty<EnumLucisShape> SHAPE = BlockProperties.LUCIS_SHAPE;
 
 	public BlockLucisMushroom() {
 		super(FabricBlockSettings.of(Material.SOLID_ORGANIC)
@@ -39,7 +39,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 				.hardness(1F)
 				.luminance(15)
 				.nonOpaque());
-		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(SHAPE, EnumShape.CORNER));
+		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(SHAPE, EnumLucisShape.CORNER));
 	}
 
 	@Override
@@ -49,26 +49,6 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
 		return V_SHAPE;
-	}
-
-	public enum EnumShape implements StringIdentifiable {
-		CORNER("corner"), SIDE("side"), CENTER("center");
-
-		final String name;
-
-		EnumShape(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String asString() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
 	}
 
 	@Override
@@ -84,14 +64,14 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 	@Override
 	public BlockState mirror(BlockState state, BlockMirror mirror) {
 		if (mirror == BlockMirror.FRONT_BACK) {
-			if (state.get(SHAPE) == EnumShape.SIDE) state = state.with(FACING, state.get(FACING).rotateYCounterclockwise());
+			if (state.get(SHAPE) == EnumLucisShape.SIDE) state = state.with(FACING, state.get(FACING).rotateYCounterclockwise());
 			if (state.get(FACING) == Direction.NORTH) return state.with(FACING, Direction.WEST);
 			if (state.get(FACING) == Direction.WEST) return state.with(FACING, Direction.NORTH);
 			if (state.get(FACING) == Direction.SOUTH) return state.with(FACING, Direction.EAST);
 			if (state.get(FACING) == Direction.EAST) return state.with(FACING, Direction.SOUTH);
 		}
 		else if (mirror == BlockMirror.LEFT_RIGHT) {
-			if (state.get(SHAPE) == EnumShape.SIDE) state = state.with(FACING, state.get(FACING).rotateYCounterclockwise());
+			if (state.get(SHAPE) == EnumLucisShape.SIDE) state = state.with(FACING, state.get(FACING).rotateYCounterclockwise());
 			if (state.get(FACING) == Direction.NORTH) return state.with(FACING, Direction.EAST);
 			if (state.get(FACING) == Direction.EAST) return state.with(FACING, Direction.NORTH);
 			if (state.get(FACING) == Direction.SOUTH) return state.with(FACING, Direction.WEST);

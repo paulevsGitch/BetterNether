@@ -5,14 +5,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
+import paulevs.betternether.blocks.BlockProperties.CincinnasitPillarShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasitPillar extends BlockBase {
-	public static final EnumProperty<CincinnasitPillarShape> SHAPE = EnumProperty.of("shape", CincinnasitPillarShape.class);
+	public static final EnumProperty<CincinnasitPillarShape> SHAPE = BlockProperties.PILLAR_SHAPE;
 
 	public BlockCincinnasitPillar() {
 		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK));
@@ -35,25 +35,5 @@ public class BlockCincinnasitPillar extends BlockBase {
 			return state.with(SHAPE, CincinnasitPillarShape.TOP);
 		else
 			return state.with(SHAPE, CincinnasitPillarShape.SMALL);
-	}
-
-	public static enum CincinnasitPillarShape implements StringIdentifiable {
-		SMALL("small"), TOP("top"), MIDDLE("middle"), BOTTOM("bottom");
-
-		final String name;
-
-		CincinnasitPillarShape(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String asString() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
 	}
 }

@@ -17,7 +17,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.blocks.shapes.TripleShape;
+import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.registry.ItemsRegistry;
 
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.function.ToIntFunction;
 public class BlockLumabusVine extends BlockBaseNotFull {
 	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
 	private static final VoxelShape BOTTOM_SHAPE = Block.createCuboidShape(2, 4, 2, 14, 16, 14);
-	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
+	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 	private static final Random RANDOM = new Random();
 	private final Block seed;
 

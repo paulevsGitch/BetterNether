@@ -8,7 +8,6 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -16,6 +15,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import paulevs.betternether.blocks.BlockProperties.PottedPlantShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
 import java.util.Collections;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.function.ToIntFunction;
 
 public class BlockPottedPlant extends BlockBaseNotFull {
-	public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.of("plant", PottedPlantShape.class);
+	public static final EnumProperty<PottedPlantShape> PLANT = BlockProperties.PLANT;
 
 	public BlockPottedPlant() {
 		super(FabricBlockSettings.of(Material.PLANT)
@@ -86,40 +86,5 @@ public class BlockPottedPlant extends BlockBaseNotFull {
 				return BlocksRegistry.POTTED_PLANT.getDefaultState().with(PLANT, shape);
 		}
 		return null;
-	}
-
-	public static enum PottedPlantShape implements StringIdentifiable {
-		AGAVE("agave", BlocksRegistry.AGAVE), BARREL_CACTUS("barrel_cactus", BlocksRegistry.BARREL_CACTUS), BLACK_APPLE("black_apple", BlocksRegistry.BLACK_APPLE_SEED), BLACK_BUSH("black_bush", BlocksRegistry.BLACK_BUSH), EGG_PLANT("egg_plant",
-				BlocksRegistry.EGG_PLANT), INK_BUSH("ink_bush", BlocksRegistry.INK_BUSH_SEED), REEDS("reeds", BlocksRegistry.NETHER_REED), NETHER_CACTUS("nether_cactus", BlocksRegistry.NETHER_CACTUS), NETHER_GRASS("nether_grass",
-						BlocksRegistry.NETHER_GRASS), ORANGE_MUSHROOM("orange_mushroom", BlocksRegistry.ORANGE_MUSHROOM), RED_MOLD("red_mold", BlocksRegistry.RED_MOLD), GRAY_MOLD("gray_mold", BlocksRegistry.GRAY_MOLD), MAGMA_FLOWER("magma_flower",
-								BlocksRegistry.MAGMA_FLOWER), NETHER_WART("nether_wart", BlocksRegistry.WART_SEED), WILLOW("willow", BlocksRegistry.WILLOW_SAPLING), SMOKER("smoker", BlocksRegistry.SMOKER), WART("wart",
-										Blocks.NETHER_WART), JUNGLE_PLANT("jungle_plant", BlocksRegistry.JUNGLE_PLANT), JELLYFISH_MUSHROOM("jellyfish_mushroom", BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING), SWAMP_GRASS("swamp_grass",
-												BlocksRegistry.SWAMP_GRASS), SOUL_GRASS("soul_grass", BlocksRegistry.SOUL_GRASS), BONE_GRASS("bone_grass", BlocksRegistry.BONE_GRASS), BONE_MUSHROOM("bone_mushroom", BlocksRegistry.BONE_MUSHROOM);
-
-		private final Block block;
-		private final String name;
-
-		private PottedPlantShape(String name, Block block) {
-			this.name = name;
-			this.block = block;
-		}
-
-		@Override
-		public String asString() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
-
-		public Item getItem() {
-			return block.asItem();
-		}
-
-		public Block getBlock() {
-			return block;
-		}
 	}
 }

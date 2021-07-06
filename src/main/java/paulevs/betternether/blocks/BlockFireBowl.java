@@ -31,7 +31,7 @@ import java.util.function.ToIntFunction;
 
 public class BlockFireBowl extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 12, 16);
-	public static final BooleanProperty FIRE = BooleanProperty.of("fire");
+	public static final BooleanProperty FIRE = BlockProperties.FIRE;
 
 	public BlockFireBowl(Block source) {
 		super(FabricBlockSettings.copy(source).nonOpaque().luminance(getLuminance()));

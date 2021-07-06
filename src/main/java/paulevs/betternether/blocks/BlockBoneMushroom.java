@@ -30,7 +30,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE_EAST = Block.createCuboidShape(0, 1, 1, 8, 15, 15);
 	private static final VoxelShape SHAPE_UP = Block.createCuboidShape(1, 0, 1, 15, 12, 15);
 	public static final DirectionProperty FACING = Properties.FACING;
-	public static final IntProperty AGE = IntProperty.of("age", 0, 2);
+	public static final IntProperty AGE = BlockProperties.AGE_THREE;
 
 	public BlockBoneMushroom() {
 		super(FabricBlockSettings.of(Material.PLANT)

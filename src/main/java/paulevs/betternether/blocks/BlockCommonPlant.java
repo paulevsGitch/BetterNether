@@ -17,7 +17,7 @@ import paulevs.betternether.BlocksHelper;
 import java.util.Random;
 
 public class BlockCommonPlant extends BlockBaseNotFull implements Fertilizable {
-	public static final IntProperty AGE = IntProperty.of("age", 0, 3);
+	public static final IntProperty AGE = BlockProperties.AGE_FOUR;
 
 	public BlockCommonPlant(MapColor color) {
 		super(FabricBlockSettings.of(Material.PLANT)

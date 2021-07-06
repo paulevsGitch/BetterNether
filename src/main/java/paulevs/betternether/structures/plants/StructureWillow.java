@@ -6,11 +6,11 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ServerWorldAccess;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.BlockProperties.TripleShape;
+import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
 import paulevs.betternether.blocks.BlockWillowBranch;
-import paulevs.betternether.blocks.BlockWillowBranch.WillowBranchShape;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowTrunk;
-import paulevs.betternether.blocks.shapes.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 

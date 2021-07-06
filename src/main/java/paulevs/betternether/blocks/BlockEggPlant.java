@@ -35,7 +35,7 @@ import java.util.Random;
 
 public class BlockEggPlant extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 8, 16);
-	public static final BooleanProperty DESTRUCTED = BooleanProperty.of("destructed");
+	public static final BooleanProperty DESTRUCTED = BlockProperties.DESTRUCTED;
 
 	private boolean enableModDamage = true;
 	private boolean enablePlayerDamage = true;

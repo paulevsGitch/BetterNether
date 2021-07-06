@@ -14,14 +14,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
-import paulevs.betternether.blocks.shapes.TripleShape;
+import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
 import java.util.function.ToIntFunction;
 
 public class BlockAnchorTreeVine extends BlockBaseNotFull {
 	protected static final VoxelShape SHAPE_SELECTION = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
-	public static final EnumProperty<TripleShape> SHAPE = EnumProperty.of("shape", TripleShape.class);
+	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockAnchorTreeVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
