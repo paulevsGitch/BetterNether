@@ -19,7 +19,7 @@ public class BetterNether implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		System.out.println("######## BetterNether 1.17 ########");
+		System.out.println("######## BetterNether for 1.17.1 ########");
 		//MinecraftClient.getInstance().getEntityModelLoader().reload(MinecraftClient.getInstance().getResourceManager());
 		initOptions();
 		SoundsRegistry.register();
