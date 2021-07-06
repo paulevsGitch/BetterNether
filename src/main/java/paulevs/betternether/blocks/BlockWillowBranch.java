@@ -16,13 +16,14 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
 
 public class BlockWillowBranch extends BlockBaseNotFull {
 	private static final VoxelShape V_SHAPE = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
-	public static final EnumProperty<WillowBranchShape> SHAPE = EnumProperty.of("shape", WillowBranchShape.class);
+	public static final EnumProperty<WillowBranchShape> SHAPE = BlockProperties.WILLOW_SHAPE;
 
 	public BlockWillowBranch() {
 		super(Materials.makeWood(MapColor.TERRACOTTA_RED).nonOpaque().noCollision().luminance(getLuminance()));
@@ -58,26 +59,6 @@ public class BlockWillowBranch extends BlockBaseNotFull {
 			return Blocks.AIR.getDefaultState();
 		else
 			return state;
-	}
-
-	public enum WillowBranchShape implements StringIdentifiable {
-		END("end"), MIDDLE("middle");
-
-		final String name;
-
-		WillowBranchShape(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String asString() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
 	}
 
 	@Override

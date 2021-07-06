@@ -16,13 +16,14 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.blocks.BlockProperties.BrownMushroomShape;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockBrownLargeMushroom extends BlockBaseNotFull {
 	private static final VoxelShape TOP_CENTER_SHAPE = Block.createCuboidShape(0, 0.1, 0, 16, 16, 16);
 	private static final VoxelShape TOP_EDGE_SHAPE = Block.createCuboidShape(0, 8, 0, 16, 16, 16);
 	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
-	public static final EnumProperty<BrownMushroomShape> SHAPE = EnumProperty.of("shape", BrownMushroomShape.class);
+	public static final EnumProperty<BrownMushroomShape> SHAPE = BlockProperties.BROWN_MUSHROOM_SHAPE;
 
 	private static final BrownMushroomShape[] ROT_SIDE = new BrownMushroomShape[] {
 			BrownMushroomShape.SIDE_N,
@@ -64,26 +65,6 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull {
 			return MIDDLE_SHAPE;
 		else
 			return TOP_EDGE_SHAPE;
-	}
-
-	public static enum BrownMushroomShape implements StringIdentifiable {
-		TOP("top"), SIDE_N("side_n"), SIDE_S("side_s"), SIDE_E("side_e"), SIDE_W("side_w"), CORNER_N("corner_n"), CORNER_S("corner_s"), CORNER_E("corner_e"), CORNER_W("corner_w"), MIDDLE("middle"), BOTTOM("bottom");
-
-		final String name;
-
-		BrownMushroomShape(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String asString() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
 	}
 
 	@Override
