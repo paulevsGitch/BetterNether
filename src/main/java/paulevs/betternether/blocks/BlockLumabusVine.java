@@ -39,11 +39,11 @@ public class BlockLumabusVine extends BlockBaseNotFull {
 
 	public BlockLumabusVine(Block seed) {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_CYAN)
-				.sound(SoundType.CROP)
-				.noCollission()
-				.instabreak()
-				.noOcclusion()
+				.mapColor(MaterialColor.COLOR_CYAN)
+				.sounds(SoundType.CROP)
+				.noCollision()
+				.breakInstantly()
+				.nonOpaque()
 				.lightLevel(getLuminance()));
 		this.seed = seed;
 		this.setRenderLayer(BNRenderLayer.CUTOUT);

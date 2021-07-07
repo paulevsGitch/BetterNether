@@ -18,8 +18,8 @@ import paulevs.betternether.registry.BlocksRegistry;
 public class BlockVeinedSand extends BlockBase {
 	public BlockVeinedSand() {
 		super(FabricBlockSettings.of(Material.SAND)
-				.materialColor(MaterialColor.COLOR_BROWN)
-				.sound(SoundType.SAND)
+				.mapColor(MaterialColor.COLOR_BROWN)
+				.sounds(SoundType.SAND)
 				.strength(0.5F, 0.5F));
 		this.setDropItself(false);
 	}

@@ -25,11 +25,11 @@ public class BlockOre extends OreBlock {
 
 	public BlockOre(Item drop, int minCount, int maxCount) {
 		super(FabricBlockSettings.of(Material.STONE)
-				.requiresCorrectToolForDrops()
-				.destroyTime(3F)
-				.explosionResistance(5F)
-				.requiresCorrectToolForDrops()
-				.sound(SoundType.NETHERRACK));
+				.requiresTool()
+				.hardness(3F)
+				.resistance(5F)
+				.requiresTool()
+				.sounds(SoundType.NETHERRACK));
 		this.dropItem = drop;
 		this.minCount = minCount;
 		this.maxCount = maxCount;

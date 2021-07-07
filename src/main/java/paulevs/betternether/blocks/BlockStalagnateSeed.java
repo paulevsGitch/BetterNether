@@ -33,12 +33,12 @@ public class BlockStalagnateSeed extends BlockBaseNotFull implements Bonemealabl
 
 	public BlockStalagnateSeed() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_CYAN)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.instabreak()
-				.noCollission()
-				.randomTicks());
+				.mapColor(MaterialColor.COLOR_CYAN)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.breakInstantly()
+				.noCollision()
+				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
 	}

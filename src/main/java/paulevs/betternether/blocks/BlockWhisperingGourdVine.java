@@ -48,14 +48,14 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 
 	public BlockWhisperingGourdVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_RED)
-				.sound(SoundType.CROP)
-				.noCollission()
-				.instabreak()
-				.noOcclusion()
-				.randomTicks()
+				.mapColor(MaterialColor.COLOR_RED)
 				.breakByTool(FabricToolTags.SHEARS)
-				.instabreak());
+				.sounds(SoundType.CROP)
+				.noCollision()
+				.breakInstantly()
+				.nonOpaque()
+				.ticksRandomly()
+				.breakInstantly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.BOTTOM));

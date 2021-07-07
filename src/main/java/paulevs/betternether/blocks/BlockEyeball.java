@@ -20,11 +20,11 @@ import paulevs.betternether.BlocksHelper;
 public class BlockEyeball extends BlockEyeBase {
 	public BlockEyeball() {
 		super(FabricBlockSettings.of(Material.WOOD)
-				.materialColor(MaterialColor.COLOR_BROWN)
-				.sound(SoundType.SLIME_BLOCK)
-				.destroyTime(0.5F)
-				.explosionResistance(0.5F)
-				.randomTicks());
+				.mapColor(MaterialColor.COLOR_BROWN)
+				.sounds(SoundType.SLIME_BLOCK)
+				.hardness(0.5F)
+				.resistance(0.5F)
+				.ticksRandomly());
 	}
 
 	@Environment(EnvType.CLIENT)

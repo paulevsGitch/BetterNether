@@ -27,11 +27,11 @@ public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBloc
 
 	public BlockBlackBush() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_BLACK)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noCollission()
-				.instabreak());
+				.mapColor(MaterialColor.COLOR_BLACK)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.noCollision()
+				.breakInstantly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

@@ -5,6 +5,6 @@ import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockWillowLog extends BNPillar {
 	public BlockWillowLog() {
-		super(Materials.makeWood(MaterialColor.TERRACOTTA_RED).noOcclusion());
+		super(Materials.makeWood(MaterialColor.TERRACOTTA_RED).nonOpaque());
 	}
 }

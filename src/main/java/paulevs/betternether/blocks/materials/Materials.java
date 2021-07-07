@@ -14,32 +14,32 @@ public class Materials {
 
 	public static FabricBlockSettings makeWood(MaterialColor color) {
 		return FabricBlockSettings.of(Material.NETHER_WOOD)
-				.sound(SoundType.WOOD)
 				.breakByTool(FabricToolTags.AXES)
-				.destroyTime(1)
-				.materialColor(color);
+				.mapColor(color)
+				.sounds(SoundType.WOOD)
+				.hardness(1);
 	}
 
 	public static FabricBlockSettings makeGrass(MaterialColor color) {
 		return FabricBlockSettings.of(COMMON_GRASS)
-				.isValidSpawn((state, world, pos, type) -> {
+				.allowsSpawning((state, world, pos, type) -> {
 					return true;
 				})
-				.sound(SoundType.GRASS)
-				.materialColor(color)
-				.noCollission()
-				.noOcclusion()
-				.instabreak();
+				.sounds(SoundType.GRASS)
+				.mapColor(color)
+				.noCollision()
+				.nonOpaque()
+				.breakInstantly();
 	}
 
 	public static Properties makeLeaves(MaterialColor color) {
 		return FabricBlockSettings.of(COMMON_LEAVES, color)
 				.breakByHand(true)
 				.breakByTool(FabricToolTags.SHEARS)
-				.sound(SoundType.GRASS)
-				.noOcclusion()
+				.sounds(SoundType.GRASS)
+				.nonOpaque()
 				.strength(0.2F)
-				.isValidSpawn((state, world, pos, type) -> {
+				.allowsSpawning((state, world, pos, type) -> {
 					return false;
 				})
 				.isSuffocating((state, worls, pos) -> {

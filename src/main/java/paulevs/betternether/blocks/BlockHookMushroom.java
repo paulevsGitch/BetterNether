@@ -11,12 +11,13 @@ import paulevs.betternether.blocks.materials.Materials;
 public class BlockHookMushroom extends BlockMold {
 	public BlockHookMushroom() {
 		super(Materials.makeGrass(MaterialColor.COLOR_PINK)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noCollission()
-				.instabreak()
-				.randomTicks()
-				.luminance(13));
+				.luminance(13)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.noCollision()
+				.breakInstantly()
+				.ticksRandomly()
+				);
 	}
 
 	@Override

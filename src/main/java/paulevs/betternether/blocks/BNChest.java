@@ -14,7 +14,7 @@ import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BNChest extends ChestBlock {
 	public BNChest(Block source) {
-		super(FabricBlockSettings.copyOf(source).noOcclusion(), () -> {
+		super(FabricBlockSettings.copyOf(source).nonOpaque(), () -> {
 			return BlockEntitiesRegistry.CHEST;
 		});
 	}

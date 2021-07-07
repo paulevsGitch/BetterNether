@@ -53,7 +53,7 @@ public class BNSign extends SignBlock {
 	};
 
 	public BNSign(Block source) {
-		super(FabricBlockSettings.copyOf(source).noCollission().noOcclusion().strength(1.0F), WoodType.OAK);
+		super(FabricBlockSettings.copyOf(source).noCollision().nonOpaque().strength(1.0F), WoodType.OAK);
 		this.registerDefaultState(this.stateDefinition.any().setValue(ROTATION, 0).setValue(FLOOR, true).setValue(WATERLOGGED, false));
 	}
 

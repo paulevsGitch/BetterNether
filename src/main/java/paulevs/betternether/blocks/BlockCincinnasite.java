@@ -8,10 +8,10 @@ import net.minecraft.world.level.material.MaterialColor;
 public class BlockCincinnasite extends BlockBase {
 	public BlockCincinnasite() {
 		super(FabricBlockSettings.of(Material.METAL)
-				.materialColor(MaterialColor.COLOR_YELLOW)
-				.destroyTime(3F)
-				.explosionResistance(10F)
-				.requiresCorrectToolForDrops()
-				.sound(SoundType.METAL));
+				.mapColor(MaterialColor.COLOR_YELLOW)
+				.hardness(3F)
+				.resistance(10F)
+				.requiresTool()
+				.sounds(SoundType.METAL));
 	}
 }

@@ -25,7 +25,7 @@ public class BlockGiantMold extends BlockBaseNotFull {
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockGiantMold() {
-		super(Materials.makeWood(MaterialColor.COLOR_GRAY).noOcclusion());
+		super(Materials.makeWood(MaterialColor.COLOR_GRAY).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

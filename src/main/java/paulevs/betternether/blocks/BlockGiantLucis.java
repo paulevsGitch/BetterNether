@@ -23,12 +23,12 @@ import paulevs.betternether.registry.ItemsRegistry;
 public class BlockGiantLucis extends HugeMushroomBlock {
 	public BlockGiantLucis() {
 		super(FabricBlockSettings.of(Material.GRASS)
-				.materialColor(MaterialColor.COLOR_YELLOW)
+				.mapColor(MaterialColor.COLOR_YELLOW)
 				.breakByTool(FabricToolTags.AXES)
-				.sound(SoundType.WOOD)
-				.destroyTime(1F)
 				.luminance(15)
-				.noOcclusion());
+				.sounds(SoundType.WOOD)
+				.hardness(1F)
+				.nonOpaque());
 	}
 
 	@Override

@@ -27,13 +27,13 @@ public class BlockCommonSapling extends BlockBaseNotFull implements Bonemealable
 
 	public BlockCommonSapling(Block plant, MaterialColor color) {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(color)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noDrops()
-				.instabreak()
-				.noCollission()
-				.randomTicks());
+				.mapColor(color)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.dropsNothing()
+				.breakInstantly()
+				.noCollision()
+				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.plant = plant;
 	}

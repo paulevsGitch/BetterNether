@@ -26,7 +26,7 @@ public class BlockStalagnateBowl extends BlockBaseNotFull {
 	public static final EnumProperty<FoodShape> FOOD = BlockProperties.FOOD;
 
 	public BlockStalagnateBowl() {
-		super(FabricBlockSettings.copyOf(BlocksRegistry.STALAGNATE).noOcclusion());
+		super(FabricBlockSettings.copyOf(BlocksRegistry.STALAGNATE).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(FOOD, FoodShape.NONE));
 	}

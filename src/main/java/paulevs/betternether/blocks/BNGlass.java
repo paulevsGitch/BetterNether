@@ -13,9 +13,9 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BNGlass extends BlockBaseNotFull {
 	public BNGlass(Block block) {
 		super(FabricBlockSettings.copyOf(block)
-				.explosionResistance(0.3F)
-				.noOcclusion()
 				.breakByTool(FabricToolTags.PICKAXES)
+				.resistance(0.3F)
+				.nonOpaque()
 				.isSuffocating((arg1, arg2, arg3) -> {
 					return false;
 				})

@@ -28,14 +28,15 @@ public class BlockAnchorTreeSapling extends BlockBaseNotFull implements Bonemeal
 
 	public BlockAnchorTreeSapling() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_LIGHT_GREEN)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noDrops()
-				.instabreak()
-				.noCollission()
-				.randomTicks()
-				.luminance(10));
+				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
+				.luminance(10)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.dropsNothing()
+				.breakInstantly()
+				.noCollision()
+				.ticksRandomly()
+				);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

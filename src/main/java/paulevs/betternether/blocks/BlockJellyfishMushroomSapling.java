@@ -29,13 +29,14 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
 
 	public BlockJellyfishMushroomSapling() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_CYAN)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.instabreak()
-				.noCollission()
-				.randomTicks()
-				.luminance(9));
+				.mapColor(MaterialColor.COLOR_CYAN)
+				.luminance(9)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.breakInstantly()
+				.noCollision()
+				.ticksRandomly()
+		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

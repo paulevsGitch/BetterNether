@@ -28,13 +28,13 @@ public class BlockRubeusSapling extends BlockBaseNotFull implements Bonemealable
 
 	public BlockRubeusSapling() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_RED)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noDrops()
-				.instabreak()
-				.noCollission()
-				.randomTicks());
+				.mapColor(MaterialColor.COLOR_RED)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.dropsNothing()
+				.breakInstantly()
+				.noCollision()
+				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

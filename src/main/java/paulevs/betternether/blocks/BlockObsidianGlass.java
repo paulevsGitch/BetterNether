@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BlockObsidianGlass extends BlockBaseNotFull {
 	public BlockObsidianGlass() {
 		super(FabricBlockSettings.copyOf(Blocks.OBSIDIAN)
-				.noOcclusion()
+				.nonOpaque()
 				.isSuffocating((arg1, arg2, arg3) -> {
 					return false;
 				})

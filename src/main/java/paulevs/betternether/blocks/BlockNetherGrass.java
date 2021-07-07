@@ -28,7 +28,7 @@ public class BlockNetherGrass extends BlockBase {
 	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
 
 	public BlockNetherGrass() {
-		super(Materials.makeGrass(MaterialColor.TERRACOTTA_GRAY).randomTicks());
+		super(Materials.makeGrass(MaterialColor.TERRACOTTA_GRAY).ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}

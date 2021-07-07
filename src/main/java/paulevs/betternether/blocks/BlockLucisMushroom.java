@@ -39,12 +39,12 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 
 	public BlockLucisMushroom() {
 		super(FabricBlockSettings.of(Material.GRASS)
-				.materialColor(MaterialColor.COLOR_YELLOW)
-				.breakByTool(FabricToolTags.AXES)
-				.sound(SoundType.WOOD)
-				.destroyTime(1F)
+				.mapColor(MaterialColor.COLOR_YELLOW)
 				.luminance(15)
-				.noOcclusion());
+				.breakByTool(FabricToolTags.AXES)
+				.sounds(SoundType.WOOD)
+				.hardness(1F)
+				.nonOpaque());
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(SHAPE, EnumLucisShape.CORNER));
 	}
 

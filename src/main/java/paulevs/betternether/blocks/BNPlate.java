@@ -12,7 +12,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 
 public class BNPlate extends PressurePlateBlock {
 	public BNPlate(Sensitivity type, Block block) {
-		super(type, FabricBlockSettings.copyOf(block).noOcclusion().noCollission());
+		super(type, FabricBlockSettings.copyOf(block).nonOpaque().noCollision());
 	}
 
 	@Override

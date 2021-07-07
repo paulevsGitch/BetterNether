@@ -48,11 +48,11 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
 
 	public BlockWartSeed() {
 		super(FabricBlockSettings.of(Material.WOOD)
-				.materialColor(MaterialColor.TERRACOTTA_RED)
-				.sound(SoundType.WART_BLOCK)
-				.destroyTime(1F)
-				.noOcclusion()
-				.noCollission());
+				.mapColor(MaterialColor.TERRACOTTA_RED)
+				.sounds(SoundType.WART_BLOCK)
+				.hardness(1F)
+				.nonOpaque()
+				.noCollision());
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.UP));
 	}
 

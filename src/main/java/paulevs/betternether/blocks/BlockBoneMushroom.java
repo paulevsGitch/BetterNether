@@ -39,12 +39,12 @@ public class BlockBoneMushroom extends BlockBaseNotFull {
 
 	public BlockBoneMushroom() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_LIGHT_GREEN)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noCollission()
-				.instabreak()
-				.randomTicks());
+				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.noCollision()
+				.breakInstantly()
+				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.registerDefaultState(getStateDefinition().any().setValue(AGE, 0).setValue(FACING, Direction.UP));

@@ -27,7 +27,7 @@ import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BNBarrel extends BarrelBlock {
 	public BNBarrel(Block source) {
-		super(FabricBlockSettings.copyOf(source).noOcclusion());
+		super(FabricBlockSettings.copyOf(source).nonOpaque());
 	}
 
 	@Override

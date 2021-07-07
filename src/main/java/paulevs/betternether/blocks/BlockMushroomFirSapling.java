@@ -29,13 +29,13 @@ public class BlockMushroomFirSapling extends BlockBaseNotFull implements Bonemea
 
 	public BlockMushroomFirSapling() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_LIGHT_GREEN)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noDrops()
-				.instabreak()
-				.noCollission()
-				.randomTicks());
+				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.dropsNothing()
+				.breakInstantly()
+				.noCollision()
+				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

@@ -28,7 +28,7 @@ public class BNChair extends BlockBaseNotFull {
 	private float height;
 
 	public BNChair(Block block, int height) {
-		super(FabricBlockSettings.copyOf(block).noOcclusion());
+		super(FabricBlockSettings.copyOf(block).nonOpaque());
 		this.height = (float) (height - 3F) / 16F;
 	}
 

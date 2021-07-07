@@ -12,7 +12,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 
 public class BNButton extends WoodButtonBlock {
 	public BNButton(Block block) {
-		super(FabricBlockSettings.copyOf(block).noOcclusion().noCollission().strength(0.5F));
+		super(FabricBlockSettings.copyOf(block).nonOpaque().noCollision().strength(0.5F));
 	}
 
 	@Override

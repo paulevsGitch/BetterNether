@@ -18,7 +18,7 @@ public class BlockWillowTrunk extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE_TOP = Block.box(4, 0, 4, 12, 12, 12);
 
 	public BlockWillowTrunk() {
-		super(Materials.makeWood(MaterialColor.TERRACOTTA_RED).noOcclusion());
+		super(Materials.makeWood(MaterialColor.TERRACOTTA_RED).nonOpaque());
 		this.setDropItself(false);
 		this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
 	}

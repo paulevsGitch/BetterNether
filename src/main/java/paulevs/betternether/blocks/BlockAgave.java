@@ -33,13 +33,14 @@ public class BlockAgave extends BlockCommonPlant {
 
 	public BlockAgave() {
 		super(FabricBlockSettings.of(Material.CACTUS)
-				.materialColor(MaterialColor.TERRACOTTA_ORANGE)
-				.sound(SoundType.WOOL)
-				.noOcclusion()
-				.noCollission()
-				.destroyTime(0.4F)
-				.randomTicks()
-				.breakByTool(FabricToolTags.SHEARS));
+				.mapColor(MaterialColor.TERRACOTTA_ORANGE)
+				.breakByTool(FabricToolTags.SHEARS)
+				.sounds(SoundType.WOOL)
+				.nonOpaque()
+				.noCollision()
+				.hardness(0.4F)
+				.ticksRandomly()
+		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

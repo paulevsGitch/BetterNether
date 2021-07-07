@@ -27,11 +27,11 @@ import paulevs.betternether.blocks.materials.Materials;
 public class BlockMold extends BlockBaseNotFull {
 	public BlockMold(MaterialColor color) {
 		super(Materials.makeGrass(color)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noCollission()
-				.instabreak()
-				.randomTicks());
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.noCollision()
+				.breakInstantly()
+				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}

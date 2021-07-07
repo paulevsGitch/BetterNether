@@ -27,7 +27,7 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
 		super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS)
 				.strength(0.5F, 0.5F)
 				.luminance(1)
-				.noOcclusion());
+				.nonOpaque());
 	}
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {

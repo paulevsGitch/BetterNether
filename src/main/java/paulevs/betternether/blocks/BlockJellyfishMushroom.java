@@ -42,7 +42,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	public static final EnumProperty<JellyShape> VISUAL = BlockProperties.JELLY_MUSHROOM_VISUAL;
 
 	public BlockJellyfishMushroom() {
-		super(Materials.makeWood(MaterialColor.COLOR_CYAN).destroyTime(0.1F).sound(SoundType.FUNGUS).noOcclusion().luminance(13));
+		super(Materials.makeWood(MaterialColor.COLOR_CYAN).luminance(13).hardness(0.1F).sounds(SoundType.FUNGUS).nonOpaque());
 		boolean sodium = FabricLoader.getInstance().isModLoaded("sodium");
 		this.setRenderLayer(sodium ? BNRenderLayer.CUTOUT : BNRenderLayer.TRANSLUCENT);
 	}

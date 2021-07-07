@@ -39,12 +39,13 @@ public class BlockBarrelCactus extends BlockCommonPlant implements BonemealableB
 
 	public BlockBarrelCactus() {
 		super(FabricBlockSettings.of(Material.CACTUS)
-				.materialColor(MaterialColor.TERRACOTTA_BLUE)
-				.sound(SoundType.WOOL)
-				.noOcclusion()
-				.destroyTime(0.4F)
-				.randomTicks()
+				.mapColor(MaterialColor.TERRACOTTA_BLUE)
 				.breakByTool(FabricToolTags.SHEARS)
+				.sounds(SoundType.WOOL)
+				.nonOpaque()
+				.hardness(0.4F)
+				.ticksRandomly()
+
 				.dynamicShape()
         );
 	}

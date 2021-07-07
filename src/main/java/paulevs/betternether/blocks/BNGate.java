@@ -12,7 +12,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 
 public class BNGate extends FenceGateBlock {
 	public BNGate(Block block) {
-		super(FabricBlockSettings.copyOf(block).noOcclusion());
+		super(FabricBlockSettings.copyOf(block).nonOpaque());
 	}
 
 	@Override

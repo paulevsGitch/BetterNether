@@ -44,13 +44,14 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
 
 	public BlockLucisSpore() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_LIGHT_GREEN)
-				.sound(SoundType.CROP)
-				.instabreak()
-				.noOcclusion()
-				.noCollission()
-				.randomTicks()
-				.luminance(7));
+				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
+				.luminance(7)
+				.sounds(SoundType.CROP)
+				.breakInstantly()
+				.nonOpaque()
+				.noCollision()
+				.ticksRandomly()
+		);
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
 	}
 

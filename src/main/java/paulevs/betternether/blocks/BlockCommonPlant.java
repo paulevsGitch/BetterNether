@@ -26,12 +26,12 @@ public class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBl
 
 	public BlockCommonPlant(MaterialColor color) {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_BLACK)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noCollission()
-				.instabreak()
-				.randomTicks());
+				.mapColor(MaterialColor.COLOR_BLACK)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.noCollision()
+				.breakInstantly()
+				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}

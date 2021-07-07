@@ -41,12 +41,13 @@ public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlo
 
 	public BlockGoldenVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_RED)
-				.sound(SoundType.CROP)
-				.noCollission()
-				.instabreak()
-				.noOcclusion()
-				.luminance(15));
+				.mapColor(MaterialColor.COLOR_RED)
+				.luminance(15)
+				.sounds(SoundType.CROP)
+				.noCollision()
+				.breakInstantly()
+				.nonOpaque()
+		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.registerDefaultState(getStateDefinition().any().setValue(BOTTOM, true));

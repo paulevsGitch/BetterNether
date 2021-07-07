@@ -34,7 +34,7 @@ public class BlockMushroomFir extends BlockBaseNotFull {
 	private static final VoxelShape END_SHAPE = Block.box(0.01, 0, 0.01, 15.99, 15.99, 15.99);
 
 	public BlockMushroomFir() {
-		super(Materials.makeWood(MaterialColor.COLOR_CYAN).noOcclusion());
+		super(Materials.makeWood(MaterialColor.COLOR_CYAN).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

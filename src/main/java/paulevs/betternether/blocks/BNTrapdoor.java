@@ -13,7 +13,7 @@ import paulevs.betternether.client.IRenderTypeable;
 
 public class BNTrapdoor extends TrapDoorBlock implements IRenderTypeable {
 	public BNTrapdoor(Block block) {
-		super(FabricBlockSettings.copyOf(block).noOcclusion().strength(3.0F));
+		super(FabricBlockSettings.copyOf(block).nonOpaque().strength(3.0F));
 	}
 
 	@Override

@@ -23,12 +23,12 @@ public class BlockOrangeMushroom extends BlockCommonPlant {
 
 	public BlockOrangeMushroom() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_ORANGE)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.destroyTime(0.5F)
-				.randomTicks()
-				.noCollission());
+				.mapColor(MaterialColor.COLOR_ORANGE)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.hardness(0.5F)
+				.ticksRandomly()
+				.noCollision());
 	}
 
 	@Override

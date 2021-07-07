@@ -22,11 +22,11 @@ public class BlockEyeballSmall extends BlockEyeBase {
 
 	public BlockEyeballSmall() {
 		super(FabricBlockSettings.of(Material.WOOD)
-				.materialColor(MaterialColor.COLOR_BROWN)
-				.sound(SoundType.SLIME_BLOCK)
-				.destroyTime(0.5F)
-				.explosionResistance(0.5F)
-				.noOcclusion());
+				.mapColor(MaterialColor.COLOR_BROWN)
+				.sounds(SoundType.SLIME_BLOCK)
+				.hardness(0.5F)
+				.resistance(0.5F)
+				.nonOpaque());
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {

@@ -31,10 +31,10 @@ public class BlockNetherCactus extends BlockBaseNotFull {
 
 	public BlockNetherCactus() {
 		super(FabricBlockSettings.of(Material.CACTUS)
-				.materialColor(MaterialColor.TERRACOTTA_ORANGE)
-				.sound(SoundType.WOOL)
-				.noOcclusion()
-				.randomTicks());
+				.mapColor(MaterialColor.TERRACOTTA_ORANGE)
+				.sounds(SoundType.WOOL)
+				.nonOpaque()
+				.ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
 	}

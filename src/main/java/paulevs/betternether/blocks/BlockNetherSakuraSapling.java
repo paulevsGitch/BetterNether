@@ -28,14 +28,15 @@ public class BlockNetherSakuraSapling extends BlockBaseNotFull implements Boneme
 
 	public BlockNetherSakuraSapling() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_PINK)
-				.sound(SoundType.CROP)
-				.noOcclusion()
-				.noDrops()
-				.instabreak()
-				.noCollission()
-				.randomTicks()
-				.luminance(10));
+				.mapColor(MaterialColor.COLOR_PINK)
+				.luminance(10)
+				.sounds(SoundType.CROP)
+				.nonOpaque()
+				.dropsNothing()
+				.breakInstantly()
+				.noCollision()
+				.ticksRandomly()
+		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

@@ -23,12 +23,12 @@ public class BlockEyeVine extends BlockBaseNotFull {
 
 	public BlockEyeVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_RED)
-				.sound(SoundType.CROP)
-				.noCollission()
-				.noDrops()
-				.instabreak()
-				.noOcclusion());
+				.mapColor(MaterialColor.COLOR_RED)
+				.sounds(SoundType.CROP)
+				.noCollision()
+				.dropsNothing()
+				.breakInstantly()
+				.nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		setDropItself(false);
 	}

@@ -23,7 +23,7 @@ public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile> {
 	}
 
 	@Override
-	public ResourceLocation getTexture(EntityNagaProjectile entity) {
+	public ResourceLocation getTextureLocation(EntityNagaProjectile entity) {
 		return TEXTURE;
 	}
 

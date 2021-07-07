@@ -31,12 +31,12 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull {
 
 	public BlockAnchorTreeVine() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MaterialColor.COLOR_GREEN)
-				.sound(SoundType.CROP)
-				.noCollission()
-				.noDrops()
-				.instabreak()
-				.noOcclusion()
+				.mapColor(MaterialColor.COLOR_GREEN)
+				.sounds(SoundType.CROP)
+				.noCollision()
+				.dropsNothing()
+				.breakInstantly()
+				.nonOpaque()
 				.lightLevel(getLuminance()));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		setDropItself(false);

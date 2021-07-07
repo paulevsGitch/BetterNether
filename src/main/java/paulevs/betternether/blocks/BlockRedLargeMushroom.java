@@ -26,7 +26,7 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull {
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockRedLargeMushroom() {
-		super(Materials.makeWood(MaterialColor.COLOR_RED).noOcclusion());
+		super(Materials.makeWood(MaterialColor.COLOR_RED).nonOpaque());
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

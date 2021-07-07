@@ -42,7 +42,7 @@ public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 		}
 
 		@Override
-		public void init(RegistryAccess dynamicRegistryManager, ChunkGenerator chunkGenerator, StructureManager structureManager, ChunkPos cpos, Biome biome, NoneFeatureConfiguration featureConfig, LevelHeightAccessor heightLimitView) {
+		public void generatePieces(RegistryAccess dynamicRegistryManager, ChunkGenerator chunkGenerator, StructureManager structureManager, ChunkPos cpos, Biome biome, NoneFeatureConfiguration featureConfig, LevelHeightAccessor heightLimitView) {
 			int px = cpos.getBlockX(8);
 			int pz = cpos.getBlockZ(8);
 			int y = 40;
