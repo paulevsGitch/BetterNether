@@ -823,7 +823,9 @@ public class BlocksRegistry {
 		Block block = new BlockFireBowl(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
-			RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
+			if (!name.startsWith("netherite")) {
+				RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
+			}
 		}
 		BLOCKS.add(name);
 		return block;

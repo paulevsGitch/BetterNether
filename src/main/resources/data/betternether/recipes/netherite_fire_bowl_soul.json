@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:smithing",
+	"base": {
+		"item": "betternether:cincinnasite_fire_bowl_soul"
+	},
+	"addition": {
+		"item": "minecraft:netherite_ingot"
+	},
+	"result": {
+		"item": "betternether:netherite_fire_bowl_soul"
+	}
+}
