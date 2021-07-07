@@ -148,7 +148,7 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
 	}
 
 	@Override
-	public void setAngles(EntityHydrogenJellyfish entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+	public void setupAnim(EntityHydrogenJellyfish entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		double time = animationProgress * 0.03;
 
 		body.setPos(0, (float) Math.sin(time) * 8 - 42, 0);

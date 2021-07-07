@@ -17,7 +17,7 @@ public class RenderNaga extends MobRenderer<EntityNaga, AgeableListModel<EntityN
 	}
 
 	@Override
-	public ResourceLocation getTexture(EntityNaga entity) {
+	public ResourceLocation getTextureLocation(EntityNaga entity) {
 		return TEXTURE;
 	}
 }

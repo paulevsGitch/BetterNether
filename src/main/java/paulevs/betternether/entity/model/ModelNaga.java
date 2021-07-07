@@ -162,13 +162,13 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
 	}
 
 	@Override
-	public void animateModel(EntityNaga livingEntity, float f, float g, float h) {
+	public void prepareMobModel(EntityNaga livingEntity, float f, float g, float h) {
 		this.pitch = livingEntity.getSwimAmount(h);
 		super.prepareMobModel(livingEntity, f, g, h);
 	}
 
 	@Override
-	public void setAngles(EntityNaga entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+	public void setupAnim(EntityNaga entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		boolean rollTooBig = entity.getFallFlyingTicks() > 4;
 		boolean isSwimming = entity.isVisuallySwimming();
 		this.head.yRot = headYaw * 0.017453292F;

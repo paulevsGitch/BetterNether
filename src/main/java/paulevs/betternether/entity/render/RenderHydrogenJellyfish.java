@@ -19,12 +19,12 @@ public class RenderHydrogenJellyfish extends MobRenderer<EntityHydrogenJellyfish
 	}
 
 	@Override
-	public ResourceLocation getTexture(EntityHydrogenJellyfish entity) {
+	public ResourceLocation getTextureLocation(EntityHydrogenJellyfish entity) {
 		return TEXTURE;
 	}
 
 	@Override
-	protected int getBlockLight(EntityHydrogenJellyfish entity, BlockPos pos) {
+	protected int getBlockLightLevel(EntityHydrogenJellyfish entity, BlockPos pos) {
 		return 15;
 	}
 

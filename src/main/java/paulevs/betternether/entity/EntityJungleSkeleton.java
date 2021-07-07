@@ -38,7 +38,7 @@ public class EntityJungleSkeleton extends Skeleton {
 		super.populateDefaultEquipmentSlots(difficulty);
 
 		this.setItemSlot(EquipmentSlot.MAINHAND, getHandItem());
-		this.setItemSlot(EquipmentSlot.OFFHAND, getOffhandItem());
+		this.setItemSlot(EquipmentSlot.OFFHAND, getRandomOffhandItem());
 
 		this.populateDefaultEquipmentEnchantments(difficulty);
 		this.reassessWeaponGoal();
@@ -69,7 +69,7 @@ public class EntityJungleSkeleton extends Skeleton {
 		}
 	}
 
-	private ItemStack getOffhandItem() {
+	private ItemStack getRandomOffhandItem() {
 		return this.random.nextInt(8) == 0 ? new ItemStack(Items.SHIELD) : new ItemStack(Items.AIR);
 	}
 

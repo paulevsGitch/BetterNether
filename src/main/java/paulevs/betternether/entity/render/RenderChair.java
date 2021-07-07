@@ -15,7 +15,7 @@ public class RenderChair extends MobRenderer<EntityChair, AgeableListModel<Entit
 	}
 
 	@Override
-	public ResourceLocation getTexture(EntityChair entity) {
+	public ResourceLocation getTextureLocation(EntityChair entity) {
 		return TEXTURE;
 	}
 }

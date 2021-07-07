@@ -35,7 +35,7 @@ public class RenderJungleSkeleton extends MobRenderer<EntityJungleSkeleton, Skel
 	}
 
 	@Override
-	public ResourceLocation getTexture(EntityJungleSkeleton entity) {
+	public ResourceLocation getTextureLocation(EntityJungleSkeleton entity) {
 		return TEXTURE;
 	}
 }

@@ -46,13 +46,13 @@ public class ModelSkull extends AgeableListModel<EntitySkull> {
 	}
 
 	@Override
-	public void animateModel(EntitySkull livingEntity, float f, float g, float h) {
+	public void prepareMobModel(EntitySkull livingEntity, float f, float g, float h) {
 		this.pitch = livingEntity.getSwimAmount(h);
 		super.prepareMobModel(livingEntity, f, g, h);
 	}
 
 	@Override
-	public void setAngles(EntitySkull entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+	public void setupAnim(EntitySkull entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		// head.pitch = (float) Math.toRadians(headPitch);
 
 		boolean rollTooBig = entity.getFallFlyingTicks() > 4;

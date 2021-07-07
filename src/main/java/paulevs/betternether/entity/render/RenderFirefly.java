@@ -102,12 +102,12 @@ public class RenderFirefly extends MobRenderer<EntityFirefly, AgeableListModel<E
 	}
 
 	@Override
-	public ResourceLocation getTexture(EntityFirefly entity) {
+	public ResourceLocation getTextureLocation(EntityFirefly entity) {
 		return TEXTURE;
 	}
 
 	@Override
-	protected int getBlockLight(EntityFirefly entity, BlockPos blockPos) {
+	protected int getBlockLightLevel(EntityFirefly entity, BlockPos blockPos) {
 		return 15;
 	}
 }

@@ -18,7 +18,7 @@ public class RenderFlyingPig extends MobRenderer<EntityFlyingPig, AgeableListMod
 	}
 
 	@Override
-	public ResourceLocation getTexture(EntityFlyingPig entity) {
+	public ResourceLocation getTextureLocation(EntityFlyingPig entity) {
 		return entity.isWarted() ? TEXTURE_WARTED : TEXTURE;
 	}
 }

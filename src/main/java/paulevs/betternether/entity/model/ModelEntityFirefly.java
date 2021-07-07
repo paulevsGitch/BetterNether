@@ -73,7 +73,7 @@ public class ModelEntityFirefly extends AgeableListModel<EntityFirefly> {
 	}
 
 	@Override
-	public void setAngles(EntityFirefly entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
+	public void setupAnim(EntityFirefly entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
 
 	}
 

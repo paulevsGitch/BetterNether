@@ -21,7 +21,7 @@ import paulevs.betternether.structures.StructureNBT;
 public class StructureCityBuilding extends StructureNBT {
 	protected static final BlockState AIR = Blocks.AIR.defaultBlockState();
 
-	private BoundingBox bb;
+	private paulevs.betternether.world.structures.city.BoundingBox bb;
 	public BlockPos[] ends;
 	private Direction[] dirs;
 	private BlockPos rotationOffset;
@@ -46,7 +46,7 @@ public class StructureCityBuilding extends StructureNBT {
 
 	private void init() {
 		Vec3i size = structure.getSize();
-		bb = new BoundingBox(0, 0, size.getX(), size.getZ());
+		bb = new paulevs.betternether.world.structures.city.BoundingBox(0, 0, size.getX(), size.getZ());
 		List<StructureBlockInfo> map = structure.filterBlocks(BlockPos.ZERO, new StructurePlaceSettings(), Blocks.STRUCTURE_BLOCK, false);
 		ends = new BlockPos[map.size()];
 		dirs = new Direction[map.size()];
@@ -78,7 +78,7 @@ public class StructureCityBuilding extends StructureNBT {
 		}
 	}
 
-	public BoundingBox getBoungingBox() {
+	public paulevs.betternether.world.structures.city.BoundingBox getBoungingBox() {
 		return bb;
 	}
 

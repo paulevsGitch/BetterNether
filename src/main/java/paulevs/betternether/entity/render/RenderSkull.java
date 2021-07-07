@@ -24,7 +24,7 @@ public class RenderSkull extends MobRenderer<EntitySkull, AgeableListModel<Entit
 	}
 
 	@Override
-	public ResourceLocation getTexture(EntitySkull entity) {
+	public ResourceLocation getTextureLocation(EntitySkull entity) {
 		return TEXTURE;
 	}
 
@@ -41,7 +41,7 @@ public class RenderSkull extends MobRenderer<EntitySkull, AgeableListModel<Entit
 	}
 
 	@Override
-	protected int getBlockLight(EntitySkull entity, BlockPos pos) {
+	protected int getBlockLightLevel(EntitySkull entity, BlockPos pos) {
 		return Mth.clamp(super.getBlockLightLevel(entity, pos), 7, 15);
 	}
 }

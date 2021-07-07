@@ -17,7 +17,7 @@ public class ModelEmpty extends AgeableListModel<EntityChair> {
 	}
 
 	@Override
-	public void setAngles(EntityChair entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
+	public void setupAnim(EntityChair entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
 
 	}
 }

@@ -157,7 +157,7 @@ public class ModelEntityFlyingPig extends AgeableListModel<EntityFlyingPig> {
 	}
 
 	@Override
-	public void setAngles(EntityFlyingPig entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+	public void setupAnim(EntityFlyingPig entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		if (entity.isRoosting()) {
 			this.head.xRot = headPitch * 0.017453292F;
 			this.head.yRot = 3.1415927F - headYaw * 0.017453292F;
