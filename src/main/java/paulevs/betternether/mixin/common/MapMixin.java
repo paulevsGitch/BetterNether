@@ -30,11 +30,11 @@ public abstract class MapMixin extends ComplexItem {
 	}
 
 	@Shadow
-	private BlockState getFluidStateIfVisible(Level world, BlockState state, BlockPos pos) {
+	private BlockState getCorrectStateForFluidBlock(Level world, BlockState state, BlockPos pos) {
 		return state;
 	}
 
-	@Inject(method = "updateColors", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "update", at = @At(value = "HEAD"), cancellable = true)
 	private void customColors(Level world, Entity entity, MapItemSavedData state, CallbackInfo info) {
 		if (world.dimensionType().hasCeiling() && world.dimension() == state.dimension && entity instanceof Player) {
 			int i = 1 << state.scale;

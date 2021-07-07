@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(LayerDefinition.class)
 public interface TexturedModelDataMixin {
-    @Accessor("data")
-    public MeshDefinition getData();
+    @Accessor("mesh")
+    public MeshDefinition getMesh();
 }

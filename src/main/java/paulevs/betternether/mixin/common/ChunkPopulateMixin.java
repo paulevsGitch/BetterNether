@@ -21,7 +21,7 @@ public abstract class ChunkPopulateMixin {
 	private static final WorldgenRandom RANDOM = new WorldgenRandom();
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
-	@Inject(method = "generateFeatures", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "applyBiomeDecoration", at = @At("HEAD"), cancellable = true)
 	private void customPopulate(WorldGenRegion region, StructureFeatureManager accessor, CallbackInfo info) {
 		int chunkX = region.getCenter().x;
 		int chunkZ = region.getCenter().z;

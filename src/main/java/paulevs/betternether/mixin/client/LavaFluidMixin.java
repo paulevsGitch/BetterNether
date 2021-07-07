@@ -15,7 +15,7 @@ import paulevs.betternether.BetterNether;
 
 @Mixin(LavaFluid.class)
 public class LavaFluidMixin {
-	@Inject(method = "randomDisplayTick", at = @At(value = "HEAD"))
+	@Inject(method = "animateTick", at = @At(value = "HEAD"))
 	private void displayTick(Level world, BlockPos blockPos, FluidState fluidState, Random random, CallbackInfo info) {
 		if (BetterNether.hasLavafallParticles() && !fluidState.isSource()) {
 			FluidState state = world.getFluidState(blockPos.below());

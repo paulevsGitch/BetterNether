@@ -10,8 +10,8 @@ import paulevs.betternether.registry.BrewingRegistry;
 
 @Mixin(PotionBrewing.class)
 public class BrewingRecipeRegistryMixin {
-	@Inject(method = "isValidIngredient", at = @At("HEAD"), cancellable = true)
-	private static void isIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
+	@Inject(method = "isIngredient", at = @At("HEAD"), cancellable = true)
+	private static void betternether$isIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> info) {
 		if (BrewingRegistry.isValidIngridient(stack)) {
 			info.setReturnValue(true);
 			info.cancel();

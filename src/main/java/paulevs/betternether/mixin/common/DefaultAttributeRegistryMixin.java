@@ -12,7 +12,7 @@ import paulevs.betternether.registry.EntityRegistry;
 
 @Mixin(DefaultAttributes.class)
 public class DefaultAttributeRegistryMixin {
-	@Inject(method = "get", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "getSupplier", at = @At("HEAD"), cancellable = true)
 	private static void getAttribute(EntityType<? extends LivingEntity> type, CallbackInfoReturnable<AttributeSupplier> info) {
 		AttributeSupplier container = EntityRegistry.ATTRIBUTES.get(type);
 		if (container != null) {
@@ -21,7 +21,7 @@ public class DefaultAttributeRegistryMixin {
 		}
 	}
 
-	@Inject(method = "hasDefinitionFor", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "hasSupplier", at = @At("HEAD"), cancellable = true)
 	private static void hasDefinition(EntityType<?> type, CallbackInfoReturnable<Boolean> info) {
 		if (EntityRegistry.ATTRIBUTES.containsKey(type)) {
 			info.setReturnValue(true);

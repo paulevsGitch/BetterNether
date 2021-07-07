@@ -22,10 +22,10 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(PresetFlatWorldScreen.class)
 public class PresetsScreenMixin {
 	@Shadow
-	private static void addPreset(Component text, ItemLike icon, ResourceKey<Biome> registryKey, List<StructureFeature<?>> structures, boolean bl, boolean bl2, boolean bl3, FlatLayerInfo... flatChunkGeneratorLayers) {}
+	private static void preset(Component text, ItemLike icon, ResourceKey<Biome> registryKey, List<StructureFeature<?>> structures, boolean bl, boolean bl2, boolean bl3, FlatLayerInfo... flatChunkGeneratorLayers) {}
 
 	static {
-		addPreset(new TranslatableComponent("betternether.flat_nether"),
+		preset(new TranslatableComponent("betternether.flat_nether"),
 				Blocks.NETHERRACK,
 				Biomes.NETHER_WASTES,
 				Collections.emptyList(),

@@ -27,7 +27,7 @@ public abstract class NetherWartMixin extends BushBlock {
 	StructureMedRedMushroom redStucture = new StructureMedRedMushroom();
 	StructureMedBrownMushroom brownStructure = new StructureMedBrownMushroom();
 
-	@Inject(method = "canPlantOnTop", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
+	@Inject(method = "mayPlaceOn", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
 	private void canStay(BlockState floor, BlockGetter view, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
 		if (floor.getBlock() == BlocksRegistry.FARMLAND)
 			info.setReturnValue(true);

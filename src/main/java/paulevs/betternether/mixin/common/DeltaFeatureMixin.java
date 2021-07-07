@@ -14,7 +14,7 @@ import paulevs.betternether.blocks.BlockWillowLeaves;
 
 @Mixin(DeltaFeature.class)
 public class DeltaFeatureMixin {
-	@Inject(method = "canPlace", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "isClear", at = @At("HEAD"), cancellable = true)
 	private static void checkBlock(LevelAccessor worldAccess, BlockPos blockPos, DeltaFeatureConfiguration deltaFeatureConfig, CallbackInfoReturnable<Boolean> info) {
 		BlockState blockState = worldAccess.getBlockState(blockPos);
 		if (!isValidBlock(blockState)) {

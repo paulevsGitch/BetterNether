@@ -14,8 +14,8 @@ import paulevs.betternether.blockentities.ChangebleCookTime;
 @Mixin(AbstractFurnaceBlockEntity.class)
 public abstract class AbstractFurnaceBlockEntityMixin {
 
-    @Inject(method = "getCookTime", at = @At("RETURN"), cancellable = true)
-    private static void betternether$getCookTime(Level world, RecipeType<? extends AbstractCookingRecipe> recipeType, Container inventory, CallbackInfoReturnable<Integer> cir) {
+    @Inject(method = "getTotalCookTime", at = @At("RETURN"), cancellable = true)
+    private static void betternether$getTotalCookTime(Level world, RecipeType<? extends AbstractCookingRecipe> recipeType, Container inventory, CallbackInfoReturnable<Integer> cir) {
         if (inventory instanceof ChangebleCookTime) {
             ChangebleCookTime cct = (ChangebleCookTime)inventory;
             int val = cir.getReturnValue();

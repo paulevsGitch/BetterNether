@@ -22,7 +22,7 @@ public class ModelJungleSkeleton extends SkeletonModel<EntityJungleSkeleton> {
 
 	public static LayerDefinition createBodyLayer() {
 		LayerDefinition texturedModelData = SkeletonModel.createBodyLayer();
-		MeshDefinition modelData = ((TexturedModelDataMixin)texturedModelData).getData();
+		MeshDefinition modelData = ((TexturedModelDataMixin)texturedModelData).getMesh();
 		PartDefinition modelPartData = modelData.getRoot();
 		PartDefinition modelPartData_HEAD = modelPartData.getChild(PartNames.HEAD);
 

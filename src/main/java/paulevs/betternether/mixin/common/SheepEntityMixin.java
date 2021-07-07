@@ -22,7 +22,7 @@ public abstract class SheepEntityMixin extends Animal implements Shearable {
 		super(entityType, world);
 	}
 
-	@Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "mobInteract", at = @At("HEAD"), cancellable = true)
 	private void shear(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> info) {
 		ItemStack itemStack = player.getItemInHand(hand);
 		if (FabricToolTags.SHEARS.contains(itemStack.getItem())) {

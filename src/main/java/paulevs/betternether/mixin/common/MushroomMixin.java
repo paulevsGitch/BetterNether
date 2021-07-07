@@ -22,13 +22,13 @@ public abstract class MushroomMixin {
 	StructureMedRedMushroom redStucture = new StructureMedRedMushroom();
 	StructureMedBrownMushroom brownStructure = new StructureMedBrownMushroom();
 
-	@Inject(method = "canPlaceAt", at = @At(value = "RETURN", ordinal = 1), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
+	@Inject(method = "canSurvive", at = @At(value = "RETURN", ordinal = 1), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
 	private void canStay(BlockState state, LevelReader world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
 		if (BlocksHelper.isNetherMycelium(world.getBlockState(pos.below())))
 			info.setReturnValue(true);
 	}
 
-	@Inject(method = "grow", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "performBonemeal", at = @At(value = "HEAD"), cancellable = true)
 	private void growStructure(ServerLevel world, Random random, BlockPos pos, BlockState state, CallbackInfo info) {
 		if (BlocksHelper.isNetherMycelium(world.getBlockState(pos.below()))) {
 			if (state.getBlock() == Blocks.RED_MUSHROOM) {

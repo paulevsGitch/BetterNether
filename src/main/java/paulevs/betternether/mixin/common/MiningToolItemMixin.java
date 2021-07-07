@@ -21,7 +21,7 @@ public abstract class MiningToolItemMixin extends TieredItem implements Vanishab
 		super(material, settings);
 	}
 
-	@Inject(method = "isSuitableFor", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "isCorrectToolForDrops", at = @At(value = "HEAD"), cancellable = true)
 	private void effectiveOn(BlockState state, CallbackInfoReturnable<Boolean> info) {
 		int level = this.getTier().getLevel();
 		if (state.getBlock() == BlocksRegistry.CINCINNASITE_ORE) {

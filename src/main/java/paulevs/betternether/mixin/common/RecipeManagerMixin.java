@@ -37,7 +37,7 @@ public class RecipeManagerMixin {
 		recipes = BNRecipeManager.getMap(recipes);
 	}
 
-	@Inject(method = "deserialize", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "fromJson", at = @At(value = "HEAD"), cancellable = true)
 	private static void be_checkMissing(ResourceLocation id, JsonObject json, CallbackInfoReturnable<Recipe<?>> info) {
 		if (id.getNamespace().equals("techreborn") && !FabricLoader.getInstance().isModLoaded("techreborn")) {
 			info.setReturnValue(BNRecipeManager.makeEmtyRecipe(id));
@@ -46,13 +46,13 @@ public class RecipeManagerMixin {
 	}
 
 	@Shadow
-	private <C extends Container, T extends Recipe<C>> Map<ResourceLocation, Recipe<C>> getAllOfType(RecipeType<T> type) {
+	private <C extends Container, T extends Recipe<C>> Map<ResourceLocation, Recipe<C>> byType(RecipeType<T> type) {
 		return null;
 	}
 	
-	@Inject(method = "getFirstMatch", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "getRecipeFor", at = @At(value = "HEAD"), cancellable = true)
 	private <C extends Container, T extends Recipe<C>> void be_getFirstMatch(RecipeType<T> type, C inventory, Level world, CallbackInfoReturnable<Optional<T>> info) {
-		Collection<Recipe<C>> values = getAllOfType(type).values();
+		Collection<Recipe<C>> values = byType(type).values();
 		List<Recipe<C>> list = new ArrayList<Recipe<C>>(values);
 		list.sort((v1, v2) -> {
 			boolean b1 = v1.getId().getNamespace().equals("minecraft");

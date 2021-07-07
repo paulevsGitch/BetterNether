@@ -22,7 +22,7 @@ public class BoneMealMixin {
 	private static final Direction[] DIR = new Direction[] { Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST };
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
-	@Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
 	private void onUse(UseOnContext context, CallbackInfoReturnable<InteractionResult> info) {
 		Level world = context.getLevel();
 		BlockPos blockPos = context.getClickedPos();

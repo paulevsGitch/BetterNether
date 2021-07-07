@@ -16,7 +16,7 @@ import paulevs.betternether.blocks.BlockStatueRespawner;
 @Mixin(Player.class)
 public abstract class PlayerEntityMixin {
 
-	@Inject(method = "findRespawnPosition", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "findRespawnPositionAndUseSpawnBlock", at = @At(value = "HEAD"), cancellable = true)
 	private static void statueRespawn(ServerLevel world, BlockPos pos, float f, boolean bl, boolean bl2, CallbackInfoReturnable<Optional<Vec3>> info) {
 		BlockState blockState = world.getBlockState(pos);
 		Block block = blockState.getBlock();

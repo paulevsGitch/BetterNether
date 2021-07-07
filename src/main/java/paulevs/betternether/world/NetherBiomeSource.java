@@ -40,9 +40,9 @@ public class NetherBiomeSource extends BiomeSource {
 		if (Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)) {
 			this.possibleBiomes.forEach((biome) -> {
 				GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
-				List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureFeatures());
+				List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureStarts());
 				structures.add(() -> { return BNWorldGenerator.CITY_CONFIGURED; });
-				accessor.setStructureFeatures(structures);
+				accessor.setStructureStarts(structures);
 			});
 		}
 	}

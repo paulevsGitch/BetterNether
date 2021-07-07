@@ -16,7 +16,7 @@ import paulevs.betternether.world.CityHelper;
 
 @Mixin(BastionFeature.class)
 public class BastionRemnantFeatureMixin {
-	@Inject(method = "shouldStartAt", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "isFeatureChunk", at = @At("HEAD"), cancellable = true)
 	private void checkCity(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long worldSeed, WorldgenRandom chunkRandom, ChunkPos pos, Biome biome, ChunkPos chunkPos, JigsawConfiguration structurePoolFeatureConfig,
 		 LevelHeightAccessor heightLimitView,CallbackInfoReturnable<Boolean> info) {
 		if (CityHelper.stopStructGen(pos.x, pos.z, chunkGenerator, worldSeed, chunkRandom)) {

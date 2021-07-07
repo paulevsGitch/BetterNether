@@ -27,7 +27,7 @@ public class ServerPlayNetworkHandlerMixin {
 	@Shadow
 	public ServerPlayer player;
 
-	@Inject(method = "onSignUpdate", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "handleSignUpdate", at = @At(value = "HEAD"), cancellable = true)
 	private void signUpdate(ServerboundSignUpdatePacket packet, CallbackInfo info) {
 		PacketUtils.ensureRunningOnSameThread(packet, (ServerGamePacketListenerImpl) (Object) this, (ServerLevel) this.player.getLevel());
 		this.player.resetLastActionTime();

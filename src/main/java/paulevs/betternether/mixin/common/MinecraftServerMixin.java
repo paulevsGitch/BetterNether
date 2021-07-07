@@ -17,21 +17,21 @@ import paulevs.betternether.recipes.BNRecipeManager;
 @Mixin(MinecraftServer.class)
 public class MinecraftServerMixin {
 	@Shadow
-	private ServerResources serverResourceManager;
+	private ServerResources resources;
 
 	@Inject(method = "reloadResources", at = @At(value = "RETURN"), cancellable = true)
 	private void onReload(Collection<String> collection, CallbackInfoReturnable<CompletableFuture<Void>> info) {
 		injectRecipes();
 	}
 
-	@Inject(method = "loadWorld", at = @At(value = "RETURN"), cancellable = true)
+	@Inject(method = "loadLevel", at = @At(value = "RETURN"), cancellable = true)
 	private void onLoadWorld(CallbackInfo info) {
 		injectRecipes();
 	}
 
 	private void injectRecipes() {
 		if (FabricLoader.getInstance().isModLoaded("kubejs")) {
-			RecipeManagerAccessor accessor = (RecipeManagerAccessor) serverResourceManager.getRecipeManager();
+			RecipeManagerAccessor accessor = (RecipeManagerAccessor) resources.getRecipeManager();
 			accessor.setRecipes(BNRecipeManager.getMap(accessor.getRecipes()));
 		}
 	}

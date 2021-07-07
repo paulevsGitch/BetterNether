@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 @Mixin(ChunkSerializer.class)
 public class ChunkSerializerMixin {
 	@Overwrite
-	private static CompoundTag writeStructures(ServerLevel serverWorld, ChunkPos pos, Map<StructureFeature<?>, StructureStart<?>> structureStarts, Map<StructureFeature<?>, LongSet> structureReferences) {
+	private static CompoundTag packStructureData(ServerLevel serverWorld, ChunkPos pos, Map<StructureFeature<?>, StructureStart<?>> structureStarts, Map<StructureFeature<?>, LongSet> structureReferences) {
 		CompoundTag tagResult = new CompoundTag();
 		CompoundTag tagStarts = new CompoundTag();
 		Iterator<Entry<StructureFeature<?>, StructureStart<?>>> startsIterator = structureStarts.entrySet().iterator();

@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(RenderType.class)
 public interface RenderLayerMixin {
-    @Invoker("of")
-    public static RenderType.CompositeRenderType callOf(String string, VertexFormat vertexFormat, VertexFormat.Mode drawMode, int i, boolean bl, boolean bl2, RenderType.CompositeState multiPhaseParameters) {
+    @Invoker("create")
+    public static RenderType.CompositeRenderType callCreate(String string, VertexFormat vertexFormat, VertexFormat.Mode drawMode, int i, boolean bl, boolean bl2, RenderType.CompositeState multiPhaseParameters) {
         throw new AssertionError();
     }
 }

@@ -15,11 +15,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class CraftingScreenHandlerMixin {
 	@Shadow
 	@Final
-	private ContainerLevelAccess context;
+	private ContainerLevelAccess access;
 
-	@Inject(method = "canUse", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "stillValid", at = @At("HEAD"), cancellable = true)
 	private void canUse(Player player, CallbackInfoReturnable<Boolean> info) {
-		if (context.evaluate((world, pos) -> {
+		if (access.evaluate((world, pos) -> {
 			return world.getBlockState(pos).getBlock() instanceof CraftingTableBlock;
 		}, true)) {
 			info.setReturnValue(true);

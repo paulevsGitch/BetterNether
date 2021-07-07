@@ -28,20 +28,20 @@ public abstract class MapStateMixin extends SavedData {
 		super();
 	}
 
-	@Shadow @Final public int centerX;
-	@Shadow @Final public int centerZ;
-	@Shadow @Final private Map<String, MapDecoration> icons;
+	@Shadow @Final public int x;
+	@Shadow @Final public int z;
+	@Shadow @Final private Map<String, MapDecoration> decorations;
 
-	@Shadow @Final private List<MapItemSavedData.HoldingPlayer> updateTrackers;
+	@Shadow @Final private List<MapItemSavedData.HoldingPlayer> carriedBy;
 
-	@Inject(method = "addIcon", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "addDecoration", at = @At(value = "HEAD"), cancellable = true)
 	private void updatePlayer(MapDecoration.Type type, LevelAccessor world, String key, double x, double z, double rotation, Component text, CallbackInfo info) {
 		if (world != null && world.dimensionType().hasCeiling()) {
-			Map<String, MapDecoration> icons = this.icons;//((MapState) (Object) this).icons;
+			Map<String, MapDecoration> icons = this.decorations;//((MapState) (Object) this).icons;
 
 			int i = 1 << this.scale;
-			float f = (float) (x - (double) this.centerX) / (float) i;
-			float g = (float) (z - (double) this.centerZ) / (float) i;
+			float f = (float) (x - (double) this.x) / (float) i;
+			float g = (float) (z - (double) this.z) / (float) i;
 			byte b = (byte) ((int) ((double) (f * 2.0F) + 0.5D));
 			byte c = (byte) ((int) ((double) (g * 2.0F) + 0.5D));
 			byte e;

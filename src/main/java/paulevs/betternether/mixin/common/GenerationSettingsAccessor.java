@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(BiomeGenerationSettings.class)
 public interface GenerationSettingsAccessor {
-	@Accessor("structureFeatures")
-	List<Supplier<ConfiguredStructureFeature<?, ?>>> getStructureFeatures();
+	@Accessor("structureStarts")
+	List<Supplier<ConfiguredStructureFeature<?, ?>>> getStructureStarts();
 
-	@Accessor("structureFeatures")
-	void setStructureFeatures(List<Supplier<ConfiguredStructureFeature<?, ?>>> structureFeatures);
+	@Accessor("structureStarts")
+	void setStructureStarts(List<Supplier<ConfiguredStructureFeature<?, ?>>> structureFeatures);
 }

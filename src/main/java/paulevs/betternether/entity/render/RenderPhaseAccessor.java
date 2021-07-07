@@ -39,7 +39,7 @@ public abstract class RenderPhaseAccessor extends RenderStateShard { //extends S
 				.setLightmapState(LIGHTMAP)
 				.setTransparencyState(ALPHA_ADD_TRANSPARENCY)
 				.createCompositeState(false);
-		return RenderLayerMixin.callOf("firefly", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, multiPhaseParameters);
+		return RenderLayerMixin.callCreate("firefly", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, multiPhaseParameters);
 	}
 
 	private static final java.util.function.Function<ResourceLocation, RenderType> FIREFLY_RENDER_LAYER = Util.memoize(RenderPhaseAccessor::getFireflySetup);
