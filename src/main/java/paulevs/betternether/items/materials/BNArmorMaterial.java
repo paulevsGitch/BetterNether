@@ -1,10 +1,10 @@
 package paulevs.betternether.items.materials;
 
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 
 public class BNArmorMaterial implements ArmorMaterial {
 	private static final int[] DURABILITY = new int[] { 3, 6, 8, 3 };
@@ -12,11 +12,11 @@ public class BNArmorMaterial implements ArmorMaterial {
 	private final int multiplier;
 	private final int enchantLevel;
 	private final SoundEvent sound;
-	private final ItemConvertible repair;
+	private final ItemLike repair;
 	private final float toughness;
 	private final int[] protection;
 
-	public BNArmorMaterial(String name, int durabilityMultiplier, int enchantLevel, SoundEvent equipSound, ItemConvertible repairItem, float toughness, int[] protection) {
+	public BNArmorMaterial(String name, int durabilityMultiplier, int enchantLevel, SoundEvent equipSound, ItemLike repairItem, float toughness, int[] protection) {
 		this.name = name;
 		this.multiplier = durabilityMultiplier;
 		this.enchantLevel = enchantLevel;
@@ -27,17 +27,17 @@ public class BNArmorMaterial implements ArmorMaterial {
 	}
 
 	@Override
-	public int getDurability(EquipmentSlot slot) {
-		return DURABILITY[slot.getEntitySlotId()] * multiplier;
+	public int getDurabilityForSlot(EquipmentSlot slot) {
+		return DURABILITY[slot.getIndex()] * multiplier;
 	}
 
 	@Override
-	public int getProtectionAmount(EquipmentSlot slot) {
-		return protection[slot.getEntitySlotId()];
+	public int getDefenseForSlot(EquipmentSlot slot) {
+		return protection[slot.getIndex()];
 	}
 
 	@Override
-	public int getEnchantability() {
+	public int getEnchantmentValue() {
 		return enchantLevel;
 	}
 
@@ -48,7 +48,7 @@ public class BNArmorMaterial implements ArmorMaterial {
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.ofItems(repair);
+		return Ingredient.of(repair);
 	}
 
 	@Override

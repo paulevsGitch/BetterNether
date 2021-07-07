@@ -1,13 +1,16 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockPlantWall;
@@ -16,10 +19,6 @@ import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureFuncScatter;
-
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 
 public class StructureOldWillow extends StructureFuncScatter {
 	private static final float[] CURVE_X = new float[] { 9F, 7F, 1.5F, 0.5F, 3F, 7F };
@@ -32,12 +31,12 @@ public class StructureOldWillow extends StructureFuncScatter {
 	}
 
 	@Override
-	public void grow(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
 		grow(world, pos, random, true);
 	}
 
-	public void grow(ServerWorldAccess world, BlockPos pos, Random random, boolean natural) {
-		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 0);
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
+		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		float scale = MHelper.randRange(0.7F, 1.3F, random);
 		int minCount = scale < 1 ? 3 : 4;
 		int maxCount = scale < 1 ? 5 : 7;
@@ -92,21 +91,21 @@ public class StructureOldWillow extends StructureFuncScatter {
 		BlockState state;
 		for (BlockPos bpos : BLOCKS) {
 			if (BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) || state.getMaterial().isReplaceable()) {
-				if (!BLOCKS.contains(bpos.up()) || !BLOCKS.contains(bpos.down()))
-					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_BARK.getDefaultState());
+				if (!BLOCKS.contains(bpos.above()) || !BLOCKS.contains(bpos.below()))
+					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_BARK.defaultBlockState());
 				else
-					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LOG.getDefaultState());
+					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LOG.defaultBlockState());
 
 				if (random.nextInt(8) == 0) {
-					state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
-						BlocksHelper.setWithUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
-						BlocksHelper.setWithUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
-						BlocksHelper.setWithUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
-						BlocksHelper.setWithUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
+					state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isEmptyBlock(bpos.north()))
+						BlocksHelper.setWithUpdate(world, bpos.north(), state.setValue(BlockPlantWall.FACING, Direction.NORTH));
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isEmptyBlock(bpos.south()))
+						BlocksHelper.setWithUpdate(world, bpos.south(), state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isEmptyBlock(bpos.east()))
+						BlocksHelper.setWithUpdate(world, bpos.east(), state.setValue(BlockPlantWall.FACING, Direction.EAST));
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isEmptyBlock(bpos.west()))
+						BlocksHelper.setWithUpdate(world, bpos.west(), state.setValue(BlockPlantWall.FACING, Direction.WEST));
 				}
 			}
 		}
@@ -115,7 +114,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 	}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
 		if (length >= StructureStalagnate.MAX_LENGTH)
 			super.generate(world, pos, random);
@@ -131,7 +130,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 		return BlocksHelper.isNetherGround(state);
 	}
 
-	private void line(WorldAccess world, int x1, int y1, int z1, int x2, int y2, int z2, int startY) {
+	private void line(LevelAccessor world, int x1, int y1, int z1, int x2, int y2, int z2, int startY) {
 		int dx = x2 - x1;
 		int dy = y2 - y1;
 		int dz = z2 - z1;
@@ -143,10 +142,10 @@ public class StructureOldWillow extends StructureFuncScatter {
 		float py = y1;
 		float pz = z1;
 
-		BlockPos pos = POS.set(x1, y1, z1).toImmutable();
+		BlockPos pos = POS.set(x1, y1, z1).immutable();
 		BLOCKS.add(pos);
 
-		pos = POS.set(x2, y2, z2).toImmutable();
+		pos = POS.set(x2, y2, z2).immutable();
 		BLOCKS.add(pos);
 
 		for (int i = 0; i < mx; i++) {
@@ -156,7 +155,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 
 			POS.set(Math.round(px), Math.round(py), Math.round(pz));
 			double delta = POS.getY() - startY;
-			sphere(POS, MathHelper.clamp(2.3 - Math.abs(delta) * (delta > 0 ? 0.1 : 0.3), 0.5, 2.3));
+			sphere(POS, Mth.clamp(2.3 - Math.abs(delta) * (delta > 0 ? 0.1 : 0.3), 0.5, 2.3));
 		}
 	}
 
@@ -184,9 +183,9 @@ public class StructureOldWillow extends StructureFuncScatter {
 		}
 	}
 
-	private void crown(WorldAccess world, BlockPos pos, float radius, Random random) {
-		BlockState leaves = BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.NATURAL, false);
-		BlockState vine = BlocksRegistry.WILLOW_BRANCH.getDefaultState();
+	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random) {
+		BlockState leaves = BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.NATURAL, false);
+		BlockState vine = BlocksRegistry.WILLOW_BRANCH.defaultBlockState();
 		float halfR = radius * 0.5F;
 		float r2 = radius * radius;
 		int start = (int) Math.floor(-radius);
@@ -211,12 +210,12 @@ public class StructureOldWillow extends StructureFuncScatter {
 								} ;
 								length = MHelper.randRange(3, length, random);
 								for (int i = 1; i < length - 1; i++) {
-									BlocksHelper.setWithUpdate(world, POS.down(i), vine);
+									BlocksHelper.setWithUpdate(world, POS.below(i), vine);
 								}
-								BlocksHelper.setWithUpdate(world, POS.down(length - 1), vine.with(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+								BlocksHelper.setWithUpdate(world, POS.below(length - 1), vine.setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
 							}
-							else if (random.nextBoolean() && world.getBlockState(POS.down()).getMaterial().isReplaceable()) {
-								BlocksHelper.setWithUpdate(world, POS.down(), leaves);
+							else if (random.nextBoolean() && world.getBlockState(POS.below()).getMaterial().isReplaceable()) {
+								BlocksHelper.setWithUpdate(world, POS.below(), leaves);
 							}
 							BlocksHelper.setWithUpdate(world, POS, leaves);
 						}

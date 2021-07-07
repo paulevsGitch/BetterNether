@@ -1,13 +1,18 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ServerWorldAccess;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockPlantWall;
@@ -15,31 +20,25 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 public class StructureAnchorTree implements IStructure {
 	protected static final OpenSimplexNoise NOISE = new OpenSimplexNoise(2145);
 	private static final Set<BlockPos> BLOCKS = new HashSet<BlockPos>(2048);
 	private Block[] wallPlants;
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (canGenerate(pos)) grow(world, pos, pos.down(BlocksHelper.downRay(world, pos, 255)), random);
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (canGenerate(pos)) grow(world, pos, pos.below(BlocksHelper.downRay(world, pos, 255)), random);
 	}
 
 	private boolean canGenerate(BlockPos pos) {
 		return (pos.getX() & 15) == 7 && (pos.getZ() & 15) == 7;
 	}
 
-	private void grow(ServerWorldAccess world, BlockPos up, BlockPos down, Random random) {
+	private void grow(ServerLevelAccessor world, BlockPos up, BlockPos down, Random random) {
 		if (up.getY() - down.getY() < 30) return;
 		int pd = BlocksHelper.downRay(world, down, 128) + 1;
 		for (int i = 0; i < 5; i++) {
-			Block block = world.getBlockState(down.down(pd + i)).getBlock();
+			Block block = world.getBlockState(down.below(pd + i)).getBlock();
 			if (block == Blocks.NETHER_BRICKS || block == BlocksRegistry.NETHER_BRICK_TILE_LARGE || block == BlocksRegistry.NETHER_BRICK_TILE_SMALL)
 				return;
 		}
@@ -70,10 +69,10 @@ public class StructureAnchorTree implements IStructure {
 			if (bpos.getY() < 1 || bpos.getY() > 126) continue;
 			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
 			boolean blockUp = true;
-			if ((blockUp = BLOCKS.contains(bpos.up())) && BLOCKS.contains(bpos.down()))
-				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.log.getDefaultState());
+			if ((blockUp = BLOCKS.contains(bpos.above())) && BLOCKS.contains(bpos.below()))
+				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.log.defaultBlockState());
 			else
-				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.getDefaultState());
+				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.defaultBlockState());
 
 			if (bpos.getY() > 45 && bpos.getY() < 90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
@@ -87,20 +86,20 @@ public class StructureAnchorTree implements IStructure {
 			}
 
 			if (bpos.getY() > 64) {
-				if (!blockUp && world.getBlockState(bpos.up()).getMaterial().isReplaceable()) {
-					BlocksHelper.setWithUpdate(world, bpos.up(), BlocksRegistry.MOSS_COVER.getDefaultState());
+				if (!blockUp && world.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
+					BlocksHelper.setWithUpdate(world, bpos.above(), BlocksRegistry.MOSS_COVER.defaultBlockState());
 				}
 
 				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
-					state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
-						BlocksHelper.setWithUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
-						BlocksHelper.setWithUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
-						BlocksHelper.setWithUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
-						BlocksHelper.setWithUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
+					state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isEmptyBlock(bpos.north()))
+						BlocksHelper.setWithUpdate(world, bpos.north(), state.setValue(BlockPlantWall.FACING, Direction.NORTH));
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isEmptyBlock(bpos.south()))
+						BlocksHelper.setWithUpdate(world, bpos.south(), state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isEmptyBlock(bpos.east()))
+						BlocksHelper.setWithUpdate(world, bpos.east(), state.setValue(BlockPlantWall.FACING, Direction.EAST));
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isEmptyBlock(bpos.west()))
+						BlocksHelper.setWithUpdate(world, bpos.west(), state.setValue(BlockPlantWall.FACING, Direction.WEST));
 				}
 			}
 		}
@@ -136,21 +135,21 @@ public class StructureAnchorTree implements IStructure {
 	}
 
 	private BlockPos lerp(BlockPos start, BlockPos end, double mix) {
-		double x = MathHelper.lerp(mix, start.getX(), end.getX());
-		double y = MathHelper.lerp(mix, start.getY(), end.getY());
-		double z = MathHelper.lerp(mix, start.getZ(), end.getZ());
+		double x = Mth.lerp(mix, start.getX(), end.getX());
+		double y = Mth.lerp(mix, start.getY(), end.getY());
+		double z = Mth.lerp(mix, start.getZ(), end.getZ());
 		return new BlockPos(x, y, z);
 	}
 
 	private BlockPos lerpCos(BlockPos start, BlockPos end, int y, double mix) {
 		double v = lcos(mix);
-		double x = MathHelper.lerp(v, start.getX(), end.getX());
-		double z = MathHelper.lerp(v, start.getZ(), end.getZ());
+		double x = Mth.lerp(v, start.getX(), end.getX());
+		double z = Mth.lerp(v, start.getZ(), end.getZ());
 		return new BlockPos(x, y, z);
 	}
 
 	private double lcos(double mix) {
-		return MathHelper.clamp(0.5 - Math.cos(mix * Math.PI) * 0.5, 0, 1);
+		return Mth.clamp(0.5 - Math.cos(mix * Math.PI) * 0.5, 0, 1);
 	}
 
 	private List<BlockPos> line(BlockPos start, BlockPos end, int count, Random random, double range) {
@@ -159,9 +158,9 @@ public class StructureAnchorTree implements IStructure {
 		result.add(start);
 		for (int i = 1; i < max; i++) {
 			double delta = (double) i / max;
-			double x = MathHelper.lerp(delta, start.getX(), end.getX()) + random.nextGaussian() * range;
-			double y = MathHelper.lerp(delta, start.getY(), end.getY());
-			double z = MathHelper.lerp(delta, start.getZ(), end.getZ()) + random.nextGaussian() * range;
+			double x = Mth.lerp(delta, start.getX(), end.getX()) + random.nextGaussian() * range;
+			double y = Mth.lerp(delta, start.getY(), end.getY());
+			double z = Mth.lerp(delta, start.getZ(), end.getZ()) + random.nextGaussian() * range;
 			result.add(new BlockPos(x, y, z));
 		}
 		result.add(end);
@@ -202,7 +201,7 @@ public class StructureAnchorTree implements IStructure {
 		return result;
 	}
 
-	protected static void makeMushroom(ServerWorldAccess world, BlockPos pos, double radius) {
+	protected static void makeMushroom(ServerLevelAccessor world, BlockPos pos, double radius) {
 		if (!world.getBlockState(pos).getMaterial().isReplaceable()) return;
 
 		int x1 = MHelper.floor(pos.getX() - radius);
@@ -232,12 +231,12 @@ public class StructureAnchorTree implements IStructure {
 			boolean south = world.getBlockState(p.south()).getBlock() != BlocksRegistry.GIANT_LUCIS;
 			boolean east = world.getBlockState(p.east()).getBlock() != BlocksRegistry.GIANT_LUCIS;
 			boolean west = world.getBlockState(p.west()).getBlock() != BlocksRegistry.GIANT_LUCIS;
-			BlockState state = BlocksRegistry.GIANT_LUCIS.getDefaultState();
+			BlockState state = BlocksRegistry.GIANT_LUCIS.defaultBlockState();
 			BlocksHelper.setWithUpdate(world, p, state
-					.with(MushroomBlock.NORTH, north)
-					.with(MushroomBlock.SOUTH, south)
-					.with(MushroomBlock.EAST, east)
-					.with(MushroomBlock.WEST, west));
+					.setValue(HugeMushroomBlock.NORTH, north)
+					.setValue(HugeMushroomBlock.SOUTH, south)
+					.setValue(HugeMushroomBlock.EAST, east)
+					.setValue(HugeMushroomBlock.WEST, west));
 		}
 	}
 }

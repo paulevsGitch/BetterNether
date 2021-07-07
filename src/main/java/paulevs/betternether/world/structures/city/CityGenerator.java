@@ -1,13 +1,12 @@
 package paulevs.betternether.world.structures.city;
 
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import paulevs.betternether.world.structures.city.palette.CityPalette;
-import paulevs.betternether.world.structures.piece.CityPiece;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Rotation;
+import paulevs.betternether.world.structures.city.palette.CityPalette;
+import paulevs.betternether.world.structures.piece.CityPiece;
 
 public class CityGenerator {
 	private List<StructureCityBuilding> centers = new ArrayList<StructureCityBuilding>();
@@ -77,17 +76,17 @@ public class CityGenerator {
 	private void addBuildingToList(String name, int offsetY, List<StructureCityBuilding> buildings) {
 		StructureCityBuilding building = new StructureCityBuilding("city/" + name, offsetY);
 		buildings.add(building);
-		buildings.add(building.getRotated(BlockRotation.CLOCKWISE_90));
-		buildings.add(building.getRotated(BlockRotation.CLOCKWISE_180));
-		buildings.add(building.getRotated(BlockRotation.COUNTERCLOCKWISE_90));
+		buildings.add(building.getRotated(Rotation.CLOCKWISE_90));
+		buildings.add(building.getRotated(Rotation.CLOCKWISE_180));
+		buildings.add(building.getRotated(Rotation.COUNTERCLOCKWISE_90));
 	}
 
 	private void placeCenterBuilding(BlockPos pos, StructureCityBuilding building, ArrayList<CityPiece> city, Random random, CityPalette palette) {
 		BoundingBox bb = building.getBoungingBox().offset(pos);
 		bounds.add(bb);
-		city.add(new CityPiece(building, pos.add(0, building.getYOffset(), 0), random.nextInt(), palette));
+		city.add(new CityPiece(building, pos.offset(0, building.getYOffset(), 0), random.nextInt(), palette));
 		for (int i = 0; i < building.getEndsCount(); i++)
-			ends.add(pos.add(building.getOffsettedPos(i).add(0, building.getYOffset(), 0)));
+			ends.add(pos.offset(building.getOffsettedPos(i).offset(0, building.getYOffset(), 0)));
 	}
 
 	private void attachBuildings(Random random, ArrayList<CityPiece> city, CityPalette palette) {
@@ -114,7 +113,7 @@ public class CityGenerator {
 							rem.add(pos);
 							for (int i = 0; i < building.getEndsCount(); i++)
 								if (i != index)
-									add.add(npos.add(building.getOffsettedPos(i)));
+									add.add(npos.offset(building.getOffsettedPos(i)));
 							city.add(new CityPiece(building, npos, random.nextInt(), palette));
 							generate = false;
 						}

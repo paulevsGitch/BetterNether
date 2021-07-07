@@ -1,71 +1,77 @@
 package paulevs.betternether.blocks;
 
+import java.util.Random;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureStalagnate;
 
-import java.util.Random;
-
-public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizable {
-	protected static final VoxelShape SHAPE_TOP = Block.createCuboidShape(4, 6, 4, 12, 16, 12);
-	protected static final VoxelShape SHAPE_BOTTOM = Block.createCuboidShape(4, 0, 4, 12, 12, 12);
+public class BlockStalagnateSeed extends BlockBaseNotFull implements BonemealableBlock {
+	protected static final VoxelShape SHAPE_TOP = Block.box(4, 6, 4, 12, 16, 12);
+	protected static final VoxelShape SHAPE_BOTTOM = Block.box(4, 0, 4, 12, 12, 12);
 	private static final StructureStalagnate STRUCTURE = new StructureStalagnate();
-	public static final BooleanProperty TOP = BooleanProperty.of("top");
+	public static final BooleanProperty TOP = BooleanProperty.create("top");
 
 	public BlockStalagnateSeed() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MapColor.CYAN)
-				.sounds(BlockSoundGroup.CROP)
-				.nonOpaque()
-				.breakInstantly()
-				.noCollision()
-				.ticksRandomly());
+				.materialColor(MaterialColor.COLOR_CYAN)
+				.sound(SoundType.CROP)
+				.noOcclusion()
+				.instabreak()
+				.noCollission()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
-		this.setDefaultState(getStateManager().getDefaultState().with(TOP, true));
+		this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(TOP);
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		BlockState blockState = this.getDefaultState();
-		if (ctx.getSide() == Direction.DOWN)
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		BlockState blockState = this.defaultBlockState();
+		if (ctx.getClickedFace() == Direction.DOWN)
 			return blockState;
-		else if (ctx.getSide() == Direction.UP)
-			return blockState.with(TOP, false);
+		else if (ctx.getClickedFace() == Direction.UP)
+			return blockState.setValue(TOP, false);
 		else
 			return null;
 	}
 
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return state.get(TOP).booleanValue() ? SHAPE_TOP : SHAPE_BOTTOM;
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return state.getValue(TOP).booleanValue() ? SHAPE_TOP : SHAPE_BOTTOM;
 	}
 
 	@Override
-	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
 		if (random.nextInt(16) == 0) {
-			if (state.get(TOP).booleanValue())
+			if (state.getValue(TOP).booleanValue())
 				return BlocksHelper.downRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
 			else
 				return BlocksHelper.upRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
@@ -74,39 +80,39 @@ public class BlockStalagnateSeed extends BlockBaseNotFull implements Fertilizabl
 	}
 
 	@Override
-	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-		if (state.get(TOP).booleanValue())
+	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+		if (state.getValue(TOP).booleanValue())
 			STRUCTURE.generateDown(world, pos, random);
 		else
 			STRUCTURE.generate(world, pos, random);
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return BlocksHelper.isNetherrack(world.getBlockState(pos.up())) || BlocksHelper.isNetherrack(world.getBlockState(pos.down()));
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return BlocksHelper.isNetherrack(world.getBlockState(pos.above())) || BlocksHelper.isNetherrack(world.getBlockState(pos.below()));
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (state.get(TOP).booleanValue()) {
-			if (BlocksHelper.isNetherrack(world.getBlockState(pos.up())))
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (state.getValue(TOP).booleanValue()) {
+			if (BlocksHelper.isNetherrack(world.getBlockState(pos.above())))
 				return state;
 			else
-				return Blocks.AIR.getDefaultState();
+				return Blocks.AIR.defaultBlockState();
 		}
 		else {
-			if (BlocksHelper.isNetherrack(world.getBlockState(pos.down())))
+			if (BlocksHelper.isNetherrack(world.getBlockState(pos.below())))
 				return state;
 			else
-				return Blocks.AIR.getDefaultState();
+				return Blocks.AIR.defaultBlockState();
 		}
 	}
 
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		super.scheduledTick(state, world, pos, random);
-		if (canGrow(world, random, pos, state)) {
-			grow(world, random, pos, state);
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+		super.tick(state, world, pos, random);
+		if (isBonemealSuccess(world, random, pos, state)) {
+			performBonemeal(world, random, pos, state);
 		}
 	}
 }

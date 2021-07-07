@@ -1,75 +1,78 @@
 package paulevs.betternether.entity;
 
-import net.minecraft.entity.EntityGroup;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.Monster;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 
-import java.util.Random;
-
-public class EntityNaga extends HostileEntity implements RangedAttackMob, Monster {
-	public EntityNaga(EntityType<? extends EntityNaga> type, World world) {
+public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
+	public EntityNaga(EntityType<? extends EntityNaga> type, Level world) {
 		super(type, world);
-		this.experiencePoints = 10;
+		this.xpReward = 10;
 	}
 
 	@Override
-	protected void initGoals() {
-		this.targetSelector.add(1, new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
-		this.goalSelector.add(2, new ProjectileAttackGoal(this, 1.0D, 40, 20.0F));
-		this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-		this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0D));
-		this.goalSelector.add(5, new LookAroundGoal(this));
+	protected void registerGoals() {
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true));
+		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 20.0F));
+		this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
+		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 	}
 
-	public static DefaultAttributeContainer getAttributeContainer() {
-		return MobEntity
+	public static AttributeSupplier getAttributeContainer() {
+		return Mob
 				.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
-				.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23)
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
-				.add(EntityAttributes.GENERIC_ARMOR, 2.0)
+				.add(Attributes.MAX_HEALTH, 10.0)
+				.add(Attributes.FOLLOW_RANGE, 35.0)
+				.add(Attributes.MOVEMENT_SPEED, 0.23)
+				.add(Attributes.ATTACK_DAMAGE, 3.0)
+				.add(Attributes.ARMOR, 2.0)
 				.build();
 	}
 
 	@Override
-	public void attack(LivingEntity target, float f) {
-		EntityNagaProjectile projectile = EntityRegistry.NAGA_PROJECTILE.create(world);
-		projectile.updatePositionAndAngles(getX(), getEyeY(), getZ(), 0, 0);
+	public void performRangedAttack(LivingEntity target, float f) {
+		EntityNagaProjectile projectile = EntityRegistry.NAGA_PROJECTILE.create(level);
+		projectile.absMoveTo(getX(), getEyeY(), getZ(), 0, 0);
 		projectile.setParams(this, target);
-		world.spawnEntity(projectile);
+		level.addFreshEntity(projectile);
 		this.playSound(SoundsRegistry.MOB_NAGA_ATTACK, MHelper.randRange(3F, 5F, random), MHelper.randRange(0.75F, 1.25F, random));
 	}
 
 	@Override
-	public EntityGroup getGroup() {
-		return EntityGroup.UNDEAD;
+	public MobType getMobType() {
+		return MobType.UNDEAD;
 	}
 
 	@Override
-	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-		return effect.getEffectType() == StatusEffects.WITHER ? false : super.canHaveStatusEffect(effect);
+	public boolean canBeAffected(MobEffectInstance effect) {
+		return effect.getEffect() == MobEffects.WITHER ? false : super.canBeAffected(effect);
 	}
 
 	@Override
@@ -79,25 +82,25 @@ public class EntityNaga extends HostileEntity implements RangedAttackMob, Monste
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return SoundEvents.ENTITY_SKELETON_HURT;
+		return SoundEvents.SKELETON_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_SKELETON_DEATH;
+		return SoundEvents.SKELETON_DEATH;
 	}
 
 	@Override
-	protected boolean isDisallowedInPeaceful() {
+	protected boolean shouldDespawnInPeaceful() {
 		return true;
 	}
 
 	@Override
-	public int getBodyYawSpeed() {
+	public int getMaxHeadYRot() {
 		return 1;
 	}
 
-	public static boolean canSpawn(EntityType<? extends EntityNaga> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		return world.getDifficulty() != Difficulty.PEACEFUL && world.getLightLevel(pos) < 8;
+	public static boolean canSpawn(EntityType<? extends EntityNaga> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
+		return world.getDifficulty() != Difficulty.PEACEFUL && world.getMaxLocalRawBrightness(pos) < 8;
 	}
 }

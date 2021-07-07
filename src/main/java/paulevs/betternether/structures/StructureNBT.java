@@ -1,86 +1,85 @@
 package paulevs.betternether.structures;
 
-import net.minecraft.block.Block;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtIo;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockBox;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.ServerWorldAccess;
-import paulevs.betternether.BetterNether;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import paulevs.betternether.BetterNether;
 
 public class StructureNBT {
-	protected Identifier location;
-	protected Structure structure;
-	protected BlockMirror mirror = BlockMirror.NONE;
-	protected BlockRotation rotation = BlockRotation.NONE;
+	protected ResourceLocation location;
+	protected StructureTemplate structure;
+	protected Mirror mirror = Mirror.NONE;
+	protected Rotation rotation = Rotation.NONE;
 
 	public StructureNBT(String structure) {
-		location = new Identifier(BetterNether.MOD_ID, structure);
+		location = new ResourceLocation(BetterNether.MOD_ID, structure);
 		this.structure = readStructureFromJar(location);
 	}
 
-	protected StructureNBT(Identifier location, Structure structure) {
+	protected StructureNBT(ResourceLocation location, StructureTemplate structure) {
 		this.location = location;
 		this.structure = structure;
 	}
 
-	public StructureNBT setRotation(BlockRotation rotation) {
+	public StructureNBT setRotation(Rotation rotation) {
 		this.rotation = rotation;
 		return this;
 	}
 
-	public BlockMirror getMirror() {
+	public Mirror getMirror() {
 		return mirror;
 	}
 
-	public StructureNBT setMirror(BlockMirror mirror) {
+	public StructureNBT setMirror(Mirror mirror) {
 		this.mirror = mirror;
 		return this;
 	}
 
 	public void randomRM(Random random) {
-		rotation = BlockRotation.values()[random.nextInt(4)];
-		mirror = BlockMirror.values()[random.nextInt(3)];
+		rotation = Rotation.values()[random.nextInt(4)];
+		mirror = Mirror.values()[random.nextInt(3)];
 	}
 
-	public boolean generateCentered(ServerWorldAccess world, BlockPos pos) {
+	public boolean generateCentered(ServerLevelAccessor world, BlockPos pos) {
 		if (structure == null) {
 			System.out.println("No structure: " + location.toString());
 			return false;
 		}
 
-		Mutable blockpos2 = new Mutable().set(structure.getSize());
-		if (this.mirror == BlockMirror.FRONT_BACK)
+		MutableBlockPos blockpos2 = new MutableBlockPos().set(structure.getSize());
+		if (this.mirror == Mirror.FRONT_BACK)
 			blockpos2.setX(-blockpos2.getX());
-		if (this.mirror == BlockMirror.LEFT_RIGHT)
+		if (this.mirror == Mirror.LEFT_RIGHT)
 			blockpos2.setZ(-blockpos2.getZ());
 		blockpos2.set(blockpos2.rotate(rotation));
-		StructurePlacementData data = new StructurePlacementData().setRotation(this.rotation).setMirror(this.mirror);
-		BlockPos newPos = pos.add(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1);
-		structure.place(
+		StructurePlaceSettings data = new StructurePlaceSettings().setRotation(this.rotation).setMirror(this.mirror);
+		BlockPos newPos = pos.offset(-blockpos2.getX() >> 1, 0, -blockpos2.getZ() >> 1);
+		structure.placeInWorld(
 				world,
 				newPos,
 				newPos,
 				data,
 				world.getRandom(),
-				Block.NOTIFY_LISTENERS
+				Block.UPDATE_CLIENTS
 		);
 		return true;
 	}
 
-	private Structure readStructureFromJar(Identifier resource) {
+	private StructureTemplate readStructureFromJar(ResourceLocation resource) {
 		String ns = resource.getNamespace();
 		String nm = resource.getPath();
 
@@ -95,17 +94,17 @@ public class StructureNBT {
 		return null;
 	}
 
-	private Structure readStructureFromStream(InputStream stream) throws IOException {
-		NbtCompound nbttagcompound = NbtIo.readCompressed(stream);
+	private StructureTemplate readStructureFromStream(InputStream stream) throws IOException {
+		CompoundTag nbttagcompound = NbtIo.readCompressed(stream);
 
-		Structure template = new Structure();
-		template.readNbt(nbttagcompound);
+		StructureTemplate template = new StructureTemplate();
+		template.load(nbttagcompound);
 
 		return template;
 	}
 
 	public BlockPos getSize() {
-		if (rotation == BlockRotation.NONE || rotation == BlockRotation.CLOCKWISE_180)
+		if (rotation == Rotation.NONE || rotation == Rotation.CLOCKWISE_180)
 			return new BlockPos(structure.getSize());
 		else {
 			Vec3i size = structure.getSize();
@@ -119,7 +118,7 @@ public class StructureNBT {
 		return location.getPath();
 	}
 
-	public BlockBox getBoundingBox(BlockPos pos) {
-		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirror(mirror), pos);
+	public BoundingBox getBoundingBox(BlockPos pos) {
+		return structure.getBoundingBox(new StructurePlaceSettings().setRotation(this.rotation).setMirror(mirror), pos);
 	}
 }

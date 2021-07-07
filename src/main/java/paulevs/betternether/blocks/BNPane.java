@@ -1,33 +1,33 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PaneBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.util.math.Direction;
-import paulevs.betternether.client.IRenderTypeable;
-
 import java.util.Collections;
 import java.util.List;
 
-public class BNPane extends PaneBlock implements IRenderTypeable {
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.IronBarsBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
+import paulevs.betternether.client.IRenderTypeable;
+
+public class BNPane extends IronBarsBlock implements IRenderTypeable {
 	private boolean dropSelf;
 
 	public BNPane(Block block, boolean dropSelf) {
-		super(FabricBlockSettings.copyOf(block).strength(0.3F, 0.3F).nonOpaque());
+		super(FabricBlockSettings.copyOf(block).strength(0.3F, 0.3F).noOcclusion());
 		this.dropSelf = dropSelf;
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		if (dropSelf)
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		else
-			return super.getDroppedStacks(state, builder);
+			return super.getDrops(state, builder);
 	}
 
 	@Override
@@ -36,17 +36,17 @@ public class BNPane extends PaneBlock implements IRenderTypeable {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing) {
+	public boolean skipRendering(BlockState state, BlockState neighbor, Direction facing) {
 		if (neighbor.getBlock() == this) {
 			if (!facing.getAxis().isHorizontal()) {
 				return false;
 			}
 
-			if (state.get(FACING_PROPERTIES.get(facing)) && neighbor.get(FACING_PROPERTIES.get(facing.getOpposite()))) {
+			if (state.getValue(PROPERTY_BY_DIRECTION.get(facing)) && neighbor.getValue(PROPERTY_BY_DIRECTION.get(facing.getOpposite()))) {
 				return true;
 			}
 		}
 
-		return super.isSideInvisible(state, neighbor, facing);
+		return super.skipRendering(state, neighbor, facing);
 	}
 }

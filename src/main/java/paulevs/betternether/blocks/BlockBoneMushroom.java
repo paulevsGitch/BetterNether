@@ -1,58 +1,63 @@
 package paulevs.betternether.blocks;
 
+import java.util.Random;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 
-import java.util.Random;
-
 public class BlockBoneMushroom extends BlockBaseNotFull {
-	private static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(1, 1, 8, 15, 15, 16);
-	private static final VoxelShape SHAPE_SOUTH = Block.createCuboidShape(1, 1, 0, 15, 15, 8);
-	private static final VoxelShape SHAPE_WEST = Block.createCuboidShape(8, 1, 1, 16, 15, 15);
-	private static final VoxelShape SHAPE_EAST = Block.createCuboidShape(0, 1, 1, 8, 15, 15);
-	private static final VoxelShape SHAPE_UP = Block.createCuboidShape(1, 0, 1, 15, 12, 15);
-	public static final DirectionProperty FACING = Properties.FACING;
-	public static final IntProperty AGE = BlockProperties.AGE_THREE;
+	private static final VoxelShape SHAPE_NORTH = Block.box(1, 1, 8, 15, 15, 16);
+	private static final VoxelShape SHAPE_SOUTH = Block.box(1, 1, 0, 15, 15, 8);
+	private static final VoxelShape SHAPE_WEST = Block.box(8, 1, 1, 16, 15, 15);
+	private static final VoxelShape SHAPE_EAST = Block.box(0, 1, 1, 8, 15, 15);
+	private static final VoxelShape SHAPE_UP = Block.box(1, 0, 1, 15, 12, 15);
+	public static final DirectionProperty FACING = BlockStateProperties.FACING;
+	public static final IntegerProperty AGE = BlockProperties.AGE_THREE;
 
 	public BlockBoneMushroom() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MapColor.LIME)
-				.sounds(BlockSoundGroup.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
-				.ticksRandomly());
+				.materialColor(MaterialColor.COLOR_LIGHT_GREEN)
+				.sound(SoundType.CROP)
+				.noOcclusion()
+				.noCollission()
+				.instabreak()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
-		this.setDefaultState(getStateManager().getDefaultState().with(AGE, 0).with(FACING, Direction.UP));
+		this.registerDefaultState(getStateDefinition().any().setValue(AGE, 0).setValue(FACING, Direction.UP));
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING, AGE);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		switch (state.get(FACING)) {
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		switch (state.getValue(FACING)) {
 			case NORTH:
 				return SHAPE_NORTH;
 			case SOUTH:
@@ -68,59 +73,59 @@ public class BlockBoneMushroom extends BlockBaseNotFull {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
+	public float getShadeBrightness(BlockState state, BlockGetter view, BlockPos pos) {
 		return 1.0F;
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		Direction direction = (Direction) state.get(FACING);
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		Direction direction = (Direction) state.getValue(FACING);
 		if (direction == Direction.DOWN)
 			return false;
-		BlockPos blockPos = pos.offset(direction.getOpposite());
+		BlockPos blockPos = pos.relative(direction.getOpposite());
 		BlockState blockState = world.getBlockState(blockPos);
 		return BlocksHelper.isBone(blockState);
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
+	public BlockState rotate(BlockState state, Rotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror) {
+	public BlockState mirror(BlockState state, Mirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (canPlaceAt(state, world, pos))
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (canSurvive(state, world, pos))
 			return state;
 		else
-			return Blocks.AIR.getDefaultState();
+			return Blocks.AIR.defaultBlockState();
 	}
 
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		super.scheduledTick(state, world, pos, random);
-		int age = state.get(AGE);
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+		super.tick(state, world, pos, random);
+		int age = state.getValue(AGE);
 		if (age < 2 && random.nextInt(32) == 0) {
-			BlocksHelper.setWithoutUpdate(world, pos, state.with(AGE, age + 1));
+			BlocksHelper.setWithoutUpdate(world, pos, state.setValue(AGE, age + 1));
 		}
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		BlockState blockState = this.getDefaultState();
-		WorldView worldView = ctx.getWorld();
-		BlockPos blockPos = ctx.getBlockPos();
-		Direction[] directions = ctx.getPlacementDirections();
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		BlockState blockState = this.defaultBlockState();
+		LevelReader worldView = ctx.getLevel();
+		BlockPos blockPos = ctx.getClickedPos();
+		Direction[] directions = ctx.getNearestLookingDirections();
 		for (int i = 0; i < directions.length; ++i) {
 			Direction direction = directions[i];
 			if (direction != Direction.UP) {
 				Direction direction2 = direction.getOpposite();
-				blockState = blockState.with(FACING, direction2);
-				if (blockState.canPlaceAt(worldView, blockPos)) {
+				blockState = blockState.setValue(FACING, direction2);
+				if (blockState.canSurvive(worldView, blockPos)) {
 					return blockState;
 				}
 			}

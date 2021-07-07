@@ -1,19 +1,18 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import paulevs.betternether.client.IRenderTypeable;
-
 import java.util.Collections;
 import java.util.List;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
+import paulevs.betternether.client.IRenderTypeable;
 
 public class BlockBase extends Block implements IRenderTypeable {
 	private boolean dropItself = true;
 	private BNRenderLayer layer = BNRenderLayer.SOLID;
 
-	public BlockBase(Settings settings) {
+	public BlockBase(Properties settings) {
 		super(settings);
 	}
 
@@ -27,11 +26,11 @@ public class BlockBase extends Block implements IRenderTypeable {
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		if (dropItself)
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		else
-			return super.getDroppedStacks(state, builder);
+			return super.getDrops(state, builder);
 	}
 
 	public void setDropItself(boolean drop) {

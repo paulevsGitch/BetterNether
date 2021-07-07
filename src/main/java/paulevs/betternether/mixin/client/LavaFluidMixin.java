@@ -1,28 +1,27 @@
 package paulevs.betternether.mixin.client;
 
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.LavaFluid;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.LavaFluid;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.betternether.BetterNether;
 
-import java.util.Random;
-
 @Mixin(LavaFluid.class)
 public class LavaFluidMixin {
 	@Inject(method = "randomDisplayTick", at = @At(value = "HEAD"))
-	private void displayTick(World world, BlockPos blockPos, FluidState fluidState, Random random, CallbackInfo info) {
-		if (BetterNether.hasLavafallParticles() && !fluidState.isStill()) {
-			FluidState state = world.getFluidState(blockPos.down());
-			if (state.isEmpty() || state.isStill()) {
-				state = world.getFluidState(blockPos.up(3));
-				if (!state.isEmpty() && !state.isStill()) {
+	private void displayTick(Level world, BlockPos blockPos, FluidState fluidState, Random random, CallbackInfo info) {
+		if (BetterNether.hasLavafallParticles() && !fluidState.isSource()) {
+			FluidState state = world.getFluidState(blockPos.below());
+			if (state.isEmpty() || state.isSource()) {
+				state = world.getFluidState(blockPos.above(3));
+				if (!state.isEmpty() && !state.isSource()) {
 					for (int i = 0; i < 10; i++) {
 						spawnParticle(ParticleTypes.LARGE_SMOKE, world, random, blockPos);
 						spawnParticle(ParticleTypes.SMOKE, world, random, blockPos);
@@ -33,7 +32,7 @@ public class LavaFluidMixin {
 		}
 	}
 
-	private void spawnParticle(ParticleEffect effect, World world, Random random, BlockPos pos) {
+	private void spawnParticle(ParticleOptions effect, Level world, Random random, BlockPos pos) {
 		double angle = random.nextDouble() * Math.PI * 2;
 		world.addParticle(ParticleTypes.LARGE_SMOKE,
 				pos.getX() + random.nextDouble(),

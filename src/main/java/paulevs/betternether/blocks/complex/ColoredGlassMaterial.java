@@ -1,12 +1,12 @@
 package paulevs.betternether.blocks.complex;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.blocks.BNGlass;
 import paulevs.betternether.blocks.BNPane;
@@ -92,10 +92,10 @@ public class ColoredGlassMaterial {
 
 	private Block makeInstance(String group, Block base, Item dye, boolean isFullBlock, boolean paneDropItself) {
 		Block block = isFullBlock ? new BNGlass(base) : new BNPane(base, paneDropItself);
-		String name = group + "_" + ((DyeItem) dye).getColor().asString();
+		String name = group + "_" + ((DyeItem) dye).getDyeColor().getSerializedName();
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
-			ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Settings().group(CreativeTab.BN_TAB)));
+			Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
+			ItemsRegistry.registerItem(name, new BlockItem(block, new Item.Properties().tab(CreativeTab.BN_TAB)));
 			RecipesHelper.makeColoringRecipe(base, block, dye, group);
 		}
 		return block;

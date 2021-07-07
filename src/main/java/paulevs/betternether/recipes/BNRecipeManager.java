@@ -1,27 +1,30 @@
 package paulevs.betternether.recipes;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.gson.JsonSyntaxException;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.*;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
-import paulevs.betternether.BetterNether;
-import paulevs.betternether.config.Configs;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.google.gson.JsonSyntaxException;
+import paulevs.betternether.BetterNether;
+import paulevs.betternether.config.Configs;
 
 public class BNRecipeManager {
-	private static final Map<RecipeType<?>, Map<Identifier, Recipe<?>>> RECIPES = Maps.newHashMap();
+	private static final Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> RECIPES = Maps.newHashMap();
 
 	public static void addRecipe(RecipeType<?> type, Recipe<?> recipe) {
 		if (Configs.RECIPES.getBoolean("recipes", recipe.getId().getPath(), true)) {
-			Map<Identifier, Recipe<?>> list = RECIPES.get(type);
+			Map<ResourceLocation, Recipe<?>> list = RECIPES.get(type);
 			if (list == null) {
 				list = Maps.newHashMap();
 				RECIPES.put(type, list);
@@ -30,19 +33,19 @@ public class BNRecipeManager {
 		}
 	}
 
-	public static Map<RecipeType<?>, Map<Identifier, Recipe<?>>> getMap(Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes) {
-		Map<RecipeType<?>, Map<Identifier, Recipe<?>>> result = Maps.newHashMap();
+	public static Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> getMap(Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipes) {
+		Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> result = Maps.newHashMap();
 
 		for (RecipeType<?> type : recipes.keySet()) {
-			Map<Identifier, Recipe<?>> typeList = Maps.newHashMap();
+			Map<ResourceLocation, Recipe<?>> typeList = Maps.newHashMap();
 			typeList.putAll(recipes.get(type));
 			result.put(type, typeList);
 		}
 
 		for (RecipeType<?> type : RECIPES.keySet()) {
-			Map<Identifier, Recipe<?>> list = RECIPES.get(type);
+			Map<ResourceLocation, Recipe<?>> list = RECIPES.get(type);
 			if (list != null) {
-				Map<Identifier, Recipe<?>> typeList = result.get(type);
+				Map<ResourceLocation, Recipe<?>> typeList = result.get(type);
 				list.forEach((id, recipe) -> {
 					if (!typeList.containsKey(id))
 						typeList.put(id, recipe);
@@ -53,8 +56,8 @@ public class BNRecipeManager {
 		return result;
 	}
 
-	public static DefaultedList<Ingredient> getIngredients(String[] pattern, Map<String, Ingredient> key, int width, int height) {
-		DefaultedList<Ingredient> defaultedList = DefaultedList.ofSize(width * height, Ingredient.EMPTY);
+	public static NonNullList<Ingredient> getIngredients(String[] pattern, Map<String, Ingredient> key, int width, int height) {
+		NonNullList<Ingredient> defaultedList = NonNullList.withSize(width * height, Ingredient.EMPTY);
 		Set<String> set = Sets.newHashSet(key.keySet());
 		set.remove(" ");
 
@@ -93,17 +96,17 @@ public class BNRecipeManager {
 			mapIng.put(id, fromStacks(material));
 		});
 
-		DefaultedList<Ingredient> list = BNRecipeManager.getIngredients(shape, mapIng, width, height);
-		ShapedRecipe recipe = new ShapedRecipe(new Identifier(BetterNether.MOD_ID, name), group, width, height, list, result);
+		NonNullList<Ingredient> list = BNRecipeManager.getIngredients(shape, mapIng, width, height);
+		ShapedRecipe recipe = new ShapedRecipe(new ResourceLocation(BetterNether.MOD_ID, name), group, width, height, list, result);
 		BNRecipeManager.addRecipe(RecipeType.CRAFTING, recipe);
 	}
 
 	private static Ingredient fromStacks(ItemStack... stacks) {
-		return Ingredient.ofStacks(Arrays.stream(stacks));
+		return Ingredient.of(Arrays.stream(stacks));
 	}
 
-	public static ShapelessRecipe makeEmtyRecipe(Identifier id) {
-		ShapelessRecipe recipe = new ShapelessRecipe(id, "empty", new ItemStack(Items.AIR), DefaultedList.of());
+	public static ShapelessRecipe makeEmtyRecipe(ResourceLocation id) {
+		ShapelessRecipe recipe = new ShapelessRecipe(id, "empty", new ItemStack(Items.AIR), NonNullList.create());
 		return recipe;
 	}
 }

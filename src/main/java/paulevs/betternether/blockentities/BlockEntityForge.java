@@ -1,15 +1,15 @@
 package paulevs.betternether.blockentities;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.screen.FurnaceScreenHandler;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.FurnaceMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
 public class BlockEntityForge extends AbstractFurnaceBlockEntity implements ChangebleCookTime {
@@ -18,18 +18,18 @@ public class BlockEntityForge extends AbstractFurnaceBlockEntity implements Chan
 	}
 
 	@Override
-	protected Text getContainerName() {
-		return new TranslatableText("container.forge", new Object[0]);
+	protected Component getDefaultName() {
+		return new TranslatableComponent("container.forge", new Object[0]);
 	}
 
 	@Override
-	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return new FurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
+		return new FurnaceMenu(syncId, playerInventory, this, this.dataAccess);
 	}
 
 	@Override
-	protected int getFuelTime(ItemStack fuel) {
-		return super.getFuelTime(fuel) / 2;
+	protected int getBurnDuration(ItemStack fuel) {
+		return super.getBurnDuration(fuel) / 2;
 	}
 
 	@Override

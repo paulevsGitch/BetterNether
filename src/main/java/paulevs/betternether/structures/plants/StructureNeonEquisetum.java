@@ -1,9 +1,10 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockNeonEquisetum;
@@ -11,23 +12,21 @@ import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureNeonEquisetum implements IStructure {
-	private Mutable blockPos = new Mutable();
+	private MutableBlockPos blockPos = new MutableBlockPos();
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (pos.getY() < 90 || !BlocksHelper.isNetherrack(world.getBlockState(pos.up()))) return;
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (pos.getY() < 90 || !BlocksHelper.isNetherrack(world.getBlockState(pos.above()))) return;
 
 		int h = BlocksHelper.downRay(world, pos, 10);
 		if (h < 3)
 			return;
 		h = MHelper.randRange(3, h, random);
 
-		BlockState bottom = BlocksRegistry.NEON_EQUISETUM.getDefaultState().with(BlockNeonEquisetum.SHAPE, TripleShape.BOTTOM);
-		BlockState middle = BlocksRegistry.NEON_EQUISETUM.getDefaultState().with(BlockNeonEquisetum.SHAPE, TripleShape.MIDDLE);
-		BlockState top = BlocksRegistry.NEON_EQUISETUM.getDefaultState().with(BlockNeonEquisetum.SHAPE, TripleShape.TOP);
+		BlockState bottom = BlocksRegistry.NEON_EQUISETUM.defaultBlockState().setValue(BlockNeonEquisetum.SHAPE, TripleShape.BOTTOM);
+		BlockState middle = BlocksRegistry.NEON_EQUISETUM.defaultBlockState().setValue(BlockNeonEquisetum.SHAPE, TripleShape.MIDDLE);
+		BlockState top = BlocksRegistry.NEON_EQUISETUM.defaultBlockState().setValue(BlockNeonEquisetum.SHAPE, TripleShape.TOP);
 
 		blockPos.set(pos);
 		for (int y = 0; y < h - 2; y++) {

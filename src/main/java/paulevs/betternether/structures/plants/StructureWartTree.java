@@ -1,35 +1,34 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureFuncScatter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class StructureWartTree extends StructureFuncScatter {
-	private static final BlockState WART_BLOCK = Blocks.NETHER_WART_BLOCK.getDefaultState();
-	private static final Direction[] HORIZONTAL = HorizontalFacingBlock.FACING.getValues().toArray(new Direction[] {});
+	private static final BlockState WART_BLOCK = Blocks.NETHER_WART_BLOCK.defaultBlockState();
+	private static final Direction[] HORIZONTAL = HorizontalDirectionalBlock.FACING.getPossibleValues().toArray(new Direction[] {});
 
 	public StructureWartTree() {
 		super(7);
 	}
 
 	@Override
-	public void grow(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (world.isAir(pos.up(1)) && world.isAir(pos.up(2))) {
-			if (world.isAir(pos.up(2).north()) && world.isAir(pos.up(2).south()) && world.isAir(pos.up(2).east()) && world.isAir(pos.up(2).west()))
-				if (world.isAir(pos.up(3).north(2)) && world.isAir(pos.up(3).south(2)) && world.isAir(pos.up(3).east(2)) && world.isAir(pos.up(3).west(2))) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (world.isEmptyBlock(pos.above(1)) && world.isEmptyBlock(pos.above(2))) {
+			if (world.isEmptyBlock(pos.above(2).north()) && world.isEmptyBlock(pos.above(2).south()) && world.isEmptyBlock(pos.above(2).east()) && world.isEmptyBlock(pos.above(2).west()))
+				if (world.isEmptyBlock(pos.above(3).north(2)) && world.isEmptyBlock(pos.above(3).south(2)) && world.isEmptyBlock(pos.above(3).east(2)) && world.isEmptyBlock(pos.above(3).west(2))) {
 				int height = 5 + random.nextInt(5);
 				int h2 = height - 1;
 				int width = (height >>> 2) + 1;
@@ -43,15 +42,15 @@ public class StructureWartTree extends StructureFuncScatter {
 				int py = y + pos.getY();
 				POS.set(px, py, pz);
 				if (isReplaceable(world.getBlockState(POS))) {
-				if (y == 0 && !isReplaceable(world.getBlockState(POS.down())))
-					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_ROOTS.getDefaultState());
+				if (y == 0 && !isReplaceable(world.getBlockState(POS.below())))
+					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_ROOTS.defaultBlockState());
 				else if (y < h2)
-					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_LOG.getDefaultState());
+					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_LOG.defaultBlockState());
 				else
 				BlocksHelper.setWithUpdate(world, POS, WART_BLOCK);
 				if (random.nextInt(8) == 0) {
 				Direction dir = HORIZONTAL[random.nextInt(HORIZONTAL.length)];
-				seedBlocks.add(new BlockPos(POS).offset(dir));
+				seedBlocks.add(new BlockPos(POS).relative(dir));
 				}
 				}
 				}
@@ -66,10 +65,10 @@ public class StructureWartTree extends StructureFuncScatter {
 				int py = pos.getY() - y;
 				POS.set(px, py, pz);
 				if (isReplaceable(world.getBlockState(POS))) {
-				if (isReplaceable(world.getBlockState(POS.down())))
-					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_LOG.getDefaultState());
+				if (isReplaceable(world.getBlockState(POS.below())))
+					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_LOG.defaultBlockState());
 				else {
-				BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_ROOTS.getDefaultState());
+				BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_ROOTS.defaultBlockState());
 				break;
 				}
 				}
@@ -88,10 +87,10 @@ public class StructureWartTree extends StructureFuncScatter {
 				for (int y = 0; y < width; y++) {
 				int py = y + height;
 				POS.set(px, py, pz);
-				if (world.isAir(POS)) {
+				if (world.isEmptyBlock(POS)) {
 				BlocksHelper.setWithUpdate(world, POS, WART_BLOCK);
 				for (int i = 0; i < 4; i++)
-				seedBlocks.add(new BlockPos(POS).offset(Direction.values()[random.nextInt(6)]));
+				seedBlocks.add(new BlockPos(POS).relative(Direction.values()[random.nextInt(6)]));
 				}
 				}
 				}
@@ -103,21 +102,21 @@ public class StructureWartTree extends StructureFuncScatter {
 		}
 	}
 
-	private void PlaceRandomSeed(WorldAccess world, BlockPos pos) {
-		BlockState seed = BlocksRegistry.WART_SEED.getDefaultState();
+	private void PlaceRandomSeed(LevelAccessor world, BlockPos pos) {
+		BlockState seed = BlocksRegistry.WART_SEED.defaultBlockState();
 		if (isReplaceable(world.getBlockState(pos))) {
-			if (isWart(world.getBlockState(pos.up())))
-				seed = seed.with(BlockWartSeed.FACING, Direction.DOWN);
-			else if (isWart(world.getBlockState(pos.down())))
-				seed = seed.with(BlockWartSeed.FACING, Direction.UP);
+			if (isWart(world.getBlockState(pos.above())))
+				seed = seed.setValue(BlockWartSeed.FACING, Direction.DOWN);
+			else if (isWart(world.getBlockState(pos.below())))
+				seed = seed.setValue(BlockWartSeed.FACING, Direction.UP);
 			else if (isWart(world.getBlockState(pos.north())))
-				seed = seed.with(BlockWartSeed.FACING, Direction.SOUTH);
+				seed = seed.setValue(BlockWartSeed.FACING, Direction.SOUTH);
 			else if (isWart(world.getBlockState(pos.south())))
-				seed = seed.with(BlockWartSeed.FACING, Direction.NORTH);
+				seed = seed.setValue(BlockWartSeed.FACING, Direction.NORTH);
 			else if (isWart(world.getBlockState(pos.east())))
-				seed = seed.with(BlockWartSeed.FACING, Direction.WEST);
+				seed = seed.setValue(BlockWartSeed.FACING, Direction.WEST);
 			else if (isWart(world.getBlockState(pos.west())))
-				seed = seed.with(BlockWartSeed.FACING, Direction.EAST);
+				seed = seed.setValue(BlockWartSeed.FACING, Direction.EAST);
 			BlocksHelper.setWithUpdate(world, pos, seed);
 		}
 	}

@@ -1,10 +1,10 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.MapColor;
+import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockWillowBark extends BlockBase {
 	public BlockWillowBark() {
-		super(Materials.makeWood(MapColor.TERRACOTTA_RED).nonOpaque());
+		super(Materials.makeWood(MaterialColor.TERRACOTTA_RED).noOcclusion());
 	}
 }

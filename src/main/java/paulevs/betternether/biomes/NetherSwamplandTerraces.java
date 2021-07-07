@@ -1,12 +1,11 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
-
-import java.util.Random;
 
 public class NetherSwamplandTerraces extends NetherSwampland {
 	public NetherSwamplandTerraces(String name) {
@@ -14,17 +13,17 @@ public class NetherSwamplandTerraces extends NetherSwampland {
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
-		if (validWall(world, pos.down()) && validWall(world, pos.north()) && validWall(world, pos.south()) && validWall(world, pos.east()) && validWall(world, pos.west())) {
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.getDefaultState());
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+		if (validWall(world, pos.below()) && validWall(world, pos.north()) && validWall(world, pos.south()) && validWall(world, pos.east()) && validWall(world, pos.west())) {
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.defaultBlockState());
 		}
 		else {
 			double value = TERRAIN.eval(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2);
 			if (value > -0.3)
-				BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SWAMPLAND_GRASS.getDefaultState());
+				BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SWAMPLAND_GRASS.defaultBlockState());
 			else {
 				value = TERRAIN.eval(pos.getX() * 0.5, pos.getZ() * 0.5);
-				BlocksHelper.setWithoutUpdate(world, pos, value > 0 ? Blocks.SOUL_SAND.getDefaultState() : Blocks.SOUL_SOIL.getDefaultState());
+				BlocksHelper.setWithoutUpdate(world, pos, value > 0 ? Blocks.SOUL_SAND.defaultBlockState() : Blocks.SOUL_SOIL.defaultBlockState());
 			}
 		}
 	}

@@ -1,8 +1,8 @@
 package paulevs.betternether.world.structures.piece;
 
-import net.minecraft.structure.StructurePieceType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import paulevs.betternether.BetterNether;
 
 public class StructureTypes {
@@ -14,6 +14,6 @@ public class StructureTypes {
 	public static void init() {}
 
 	protected static StructurePieceType register(StructurePieceType pieceType, String id) {
-		return Registry.register(Registry.STRUCTURE_PIECE, new Identifier(BetterNether.MOD_ID, id), pieceType);
+		return Registry.register(Registry.STRUCTURE_PIECE, new ResourceLocation(BetterNether.MOD_ID, id), pieceType);
 	}
 }

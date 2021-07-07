@@ -1,32 +1,37 @@
 package paulevs.betternether.entity.model;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.AnimalModel;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
+import net.minecraft.client.model.AgeableListModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
 
-public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJellyfish> {
+public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydrogenJellyfish> {
 	public final static String BODY_TOP = "body_top";
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData modelData = new ModelData();
-		ModelPartData modelPartData = modelData.getRoot();
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition modelData = new MeshDefinition();
+		PartDefinition modelPartData = modelData.getRoot();
 
-		ModelPartData bodyPart = modelPartData.addChild(
-			EntityModelPartNames.BODY,
-			ModelPartBuilder.create()
-			.uv(0, 0)
-			.cuboid(-14F, 0F, -14F, 28, 18, 28),
-			ModelTransform.pivot(0F, -48, 0F)
+		PartDefinition bodyPart = modelPartData.addOrReplaceChild(
+			PartNames.BODY,
+			CubeListBuilder.create()
+			.texOffs(0, 0)
+			.addBox(-14F, 0F, -14F, 28, 18, 28),
+			PartPose.offset(0F, -48, 0F)
 		);
 
-		bodyPart.addChild(
+		bodyPart.addOrReplaceChild(
 			BODY_TOP,
-			ModelPartBuilder.create()
-			.uv(0, 46)
-			.cuboid(-10F, 0F, -10F, 20, 6, 20),
-			ModelTransform.pivot(0F, -6F, 0F)
+			CubeListBuilder.create()
+			.texOffs(0, 46)
+			.addBox(-10F, 0F, -10F, 20, 6, 20),
+			PartPose.offset(0F, -6F, 0F)
 		);
 
 		for (int i = 0; i < LEGS; i++) {
@@ -35,58 +40,58 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 			float x = (float) Math.sin(angle) * 10;
 			float z = (float) Math.cos(angle) * 10;
 
-			ModelPartData modelPartData_LEG_1 = bodyPart.addChild(
-				"leg_1_"+i, ModelPartBuilder.create()
-				.uv(60, 46)
-				.cuboid(-3F, 0F, -3F, 6, 14, 6),
-				ModelTransform.of(x, 18, z, 0, angle, 0)
+			PartDefinition modelPartData_LEG_1 = bodyPart.addOrReplaceChild(
+				"leg_1_"+i, CubeListBuilder.create()
+				.texOffs(60, 46)
+				.addBox(-3F, 0F, -3F, 6, 14, 6),
+				PartPose.offsetAndRotation(x, 18, z, 0, angle, 0)
 			);
 
-			modelPartData_LEG_1.addChild("leg_det_"+li,
-				ModelPartBuilder.create()
-				.uv(97, 46)
-				.cuboid(-8F, 0F, 0F, 16, 14, 0)
-				.uv(97, 30)
-				.cuboid(0F, 0F, -8F, 0, 14, 16),
-				ModelTransform.of(0,0,0, 0, angle, 0)
+			modelPartData_LEG_1.addOrReplaceChild("leg_det_"+li,
+				CubeListBuilder.create()
+				.texOffs(97, 46)
+				.addBox(-8F, 0F, 0F, 16, 14, 0)
+				.texOffs(97, 30)
+				.addBox(0F, 0F, -8F, 0, 14, 16),
+				PartPose.offsetAndRotation(0,0,0, 0, angle, 0)
 			);
 
-			ModelPartData modelPartData_LEG_2 = modelPartData_LEG_1.addChild(
+			PartDefinition modelPartData_LEG_2 = modelPartData_LEG_1.addOrReplaceChild(
 				"leg_2_"+i,
-				ModelPartBuilder.create()
-				.uv(0, 72)
-				.cuboid(-2F, -24F, -2F, 4, 28, 4),
-				ModelTransform.pivot(0F, 14F, 0F)
+				CubeListBuilder.create()
+				.texOffs(0, 72)
+				.addBox(-2F, -24F, -2F, 4, 28, 4),
+				PartPose.offset(0F, 14F, 0F)
 			);
 
 			li++;
-			modelPartData_LEG_2.addChild(
+			modelPartData_LEG_2.addOrReplaceChild(
 				"leg_det_"+li,
-				ModelPartBuilder.create()
-				.uv(98, 60)
-				.cuboid(-7F, -24F, 0F, 14, 28, 0)
-				.uv(98, 48)
-				.cuboid(0F, -24F, -7F, 0, 28, 14),
-				ModelTransform.of(0,0,0, 0, (float)Math.toRadians(45), 0)
+				CubeListBuilder.create()
+				.texOffs(98, 60)
+				.addBox(-7F, -24F, 0F, 14, 28, 0)
+				.texOffs(98, 48)
+				.addBox(0F, -24F, -7F, 0, 28, 14),
+				PartPose.offsetAndRotation(0,0,0, 0, (float)Math.toRadians(45), 0)
 			);
 
-			ModelPartData modelPartData_LEG_3 = modelPartData_LEG_2.addChild(
+			PartDefinition modelPartData_LEG_3 = modelPartData_LEG_2.addOrReplaceChild(
 				"leg_3_"+i,
-				ModelPartBuilder.create()
-				.uv(16, 72)
-				.cuboid(-1F, -24F, -1F, 2, 28, 2),
-				ModelTransform.pivot(0F, -28F, 0F)
+				CubeListBuilder.create()
+				.texOffs(16, 72)
+				.addBox(-1F, -24F, -1F, 2, 28, 2),
+				PartPose.offset(0F, -28F, 0F)
 			);
 
 			li++;
-			modelPartData_LEG_3.addChild(
+			modelPartData_LEG_3.addOrReplaceChild(
 				"leg_det_"+li,
-				ModelPartBuilder.create()
-				.uv(99, 88)
-				.cuboid(-6F, -28F, 0F, 12, 32, 0)
-				.uv(99, 76)
-				.cuboid(0F, -28F, -6F, 0, 32, 12),
-				ModelTransform.of(0,0,0, 0, (float)Math.toRadians(45), 0)
+				CubeListBuilder.create()
+				.texOffs(99, 88)
+				.addBox(-6F, -28F, 0F, 12, 32, 0)
+				.texOffs(99, 76)
+				.addBox(0F, -28F, -6F, 0, 32, 12),
+				PartPose.offsetAndRotation(0,0,0, 0, (float)Math.toRadians(45), 0)
 			);
 
 			x = (float) Math.sin(angle);
@@ -96,14 +101,14 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 			x *= 12;
 			z *= 12;
 
-			bodyPart.addChild(
-				"wing_"+i, ModelPartBuilder.create()
-				.uv(60, 4)
-				.cuboid(-12F, 0F, 0F, 24F, 0F, 24F),
-				ModelTransform.of(x, 12 - (i & 1) * 6, z, 0, angle, 0)
+			bodyPart.addOrReplaceChild(
+				"wing_"+i, CubeListBuilder.create()
+				.texOffs(60, 4)
+				.addBox(-12F, 0F, 0F, 24F, 0F, 24F),
+				PartPose.offsetAndRotation(x, 12 - (i & 1) * 6, z, 0, angle, 0)
 			);
 		}
-		return TexturedModelData.of(modelData, 128, 128);
+		return LayerDefinition.create(modelData, 128, 128);
 	}
 
 	private static final double HALF_PI = Math.PI * 0.5;
@@ -117,7 +122,7 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 	//private final ModelPart[] leg_details;
 
 	public ModelEntityHydrogenJellyfish(ModelPart root) {
-		this.body = root.getChild(EntityModelPartNames.BODY);
+		this.body = root.getChild(PartNames.BODY);
 
 		legs_1 = new ModelPart[LEGS];
 		legs_2 = new ModelPart[LEGS];
@@ -133,12 +138,12 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 	}
 
 	@Override
-	protected Iterable<ModelPart> getHeadParts() {
+	protected Iterable<ModelPart> headParts() {
 		return ImmutableList.of();
 	}
 
 	@Override
-	protected Iterable<ModelPart> getBodyParts() {
+	protected Iterable<ModelPart> bodyParts() {
 		return ImmutableList.of(this.body);
 	}
 
@@ -146,7 +151,7 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 	public void setAngles(EntityHydrogenJellyfish entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		double time = animationProgress * 0.03;
 
-		body.setPivot(0, (float) Math.sin(time) * 8 - 42, 0);
+		body.setPos(0, (float) Math.sin(time) * 8 - 42, 0);
 
 		double sin1 = Math.sin(time);
 		double sin2 = Math.sin(time + HALF_PI);
@@ -154,9 +159,9 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 			double sinIn = (i & 1) == 0 ? sin1 : sin2;
 			double rot = 10 + ((i + 1) & 1) * 10;
 			sinIn *= 10;
-			legs_1[i].pitch = (float) Math.toRadians(rot + sinIn + 10);
-			legs_2[i].pitch = (float) Math.toRadians(180 - rot + sinIn + 5);
-			legs_3[i].pitch = (float) Math.toRadians(sinIn);
+			legs_1[i].xRot = (float) Math.toRadians(rot + sinIn + 10);
+			legs_2[i].xRot = (float) Math.toRadians(180 - rot + sinIn + 5);
+			legs_3[i].xRot = (float) Math.toRadians(sinIn);
 		}
 
 		time = System.currentTimeMillis() * 0.0006;
@@ -164,7 +169,7 @@ public class ModelEntityHydrogenJellyfish extends AnimalModel<EntityHydrogenJell
 		sin2 = Math.sin(time + Math.PI * 0.5);
 		for (int i = 0; i < LEGS; i++) {
 			double sinIn = (i & 1) == 0 ? sin1 : sin2;
-			wings[i].pitch = (float) Math.toRadians(sinIn * 20 - 20);
+			wings[i].xRot = (float) Math.toRadians(sinIn * 20 - 20);
 		}
 	}
 }

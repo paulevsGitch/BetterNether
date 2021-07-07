@@ -1,52 +1,55 @@
 package paulevs.betternether.entity;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.*;
-
-import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 import java.util.Random;
+import javax.annotation.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 
-public class EntityJungleSkeleton extends SkeletonEntity {
-	public EntityJungleSkeleton(EntityType<? extends SkeletonEntity> entityType, World world) {
+public class EntityJungleSkeleton extends Skeleton {
+	public EntityJungleSkeleton(EntityType<? extends Skeleton> entityType, Level world) {
 		super(entityType, world);
 	}
 
 	@Override
-	public void tickMovement() {
-		this.tickHandSwing();
-		this.updateDespawnCounter();
-		super.tickMovement();
+	public void aiStep() {
+		this.updateSwingTime();
+		this.updateNoActionTime();
+		super.aiStep();
 	}
 
 	@Override
-	public EntityData initialize(ServerWorldAccess serverWorldAccess, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
-		entityData = super.initialize(serverWorldAccess, difficulty, spawnReason, entityData, entityTag);
-		super.initEquipment(difficulty);
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverWorldAccess, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData entityData, @Nullable CompoundTag entityTag) {
+		entityData = super.finalizeSpawn(serverWorldAccess, difficulty, spawnReason, entityData, entityTag);
+		super.populateDefaultEquipmentSlots(difficulty);
 
-		this.equipStack(EquipmentSlot.MAINHAND, getHandItem());
-		this.equipStack(EquipmentSlot.OFFHAND, getOffhandItem());
+		this.setItemSlot(EquipmentSlot.MAINHAND, getHandItem());
+		this.setItemSlot(EquipmentSlot.OFFHAND, getOffhandItem());
 
-		this.updateEnchantments(difficulty);
-		this.updateAttackType();
-		this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * difficulty.getClampedLocalDifficulty());
-		if (this.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {
+		this.populateDefaultEquipmentEnchantments(difficulty);
+		this.reassessWeaponGoal();
+		this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * difficulty.getSpecialMultiplier());
+		if (this.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
 			LocalDate localDate = LocalDate.now();
 			int i = localDate.get(ChronoField.DAY_OF_MONTH);
 			int j = localDate.get(ChronoField.MONTH_OF_YEAR);
 			if (j == 10 && i == 31 && this.random.nextFloat() < 0.25F) {
-				this.equipStack(EquipmentSlot.HEAD, new ItemStack(this.random.nextFloat() < 0.1F ? Blocks.JACK_O_LANTERN : Blocks.CARVED_PUMPKIN));
-				this.armorDropChances[EquipmentSlot.HEAD.getEntitySlotId()] = 0.0F;
+				this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(this.random.nextFloat() < 0.1F ? Blocks.JACK_O_LANTERN : Blocks.CARVED_PUMPKIN));
+				this.armorDropChances[EquipmentSlot.HEAD.getIndex()] = 0.0F;
 			}
 		}
 
@@ -70,7 +73,7 @@ public class EntityJungleSkeleton extends SkeletonEntity {
 		return this.random.nextInt(8) == 0 ? new ItemStack(Items.SHIELD) : new ItemStack(Items.AIR);
 	}
 
-	public static boolean canSpawn(EntityType<? extends EntityJungleSkeleton> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+	public static boolean canSpawn(EntityType<? extends EntityJungleSkeleton> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
 		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}
 }

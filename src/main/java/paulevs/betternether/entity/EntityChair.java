@@ -1,34 +1,34 @@
 package paulevs.betternether.entity;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.blocks.BNChair;
 
-public class EntityChair extends MobEntity {
-	public EntityChair(EntityType<? extends EntityChair> type, World world) {
+public class EntityChair extends Mob {
+	public EntityChair(EntityType<? extends EntityChair> type, Level world) {
 		super(type, world);
 	}
 
 	@Override
 	public void tick() {
-		if (!this.hasPassengers())
+		if (!this.isVehicle())
 			this.discard();
-		else if (this.world.getBlockState(this.getBlockPos()).getBlock() instanceof BNChair)
+		else if (this.level.getBlockState(this.blockPosition()).getBlock() instanceof BNChair)
 			super.tick();
 		else {
-			this.removeAllPassengers();
+			this.ejectPassengers();
 			this.discard();
 		}
 	}
 
 	@Override
-	public void tickMovement() {
-		super.tickMovement();
-		this.setVelocity(Vec3d.ZERO);
+	public void aiStep() {
+		super.aiStep();
+		this.setDeltaMovement(Vec3.ZERO);
 	}
 	
 	@Override
@@ -36,8 +36,8 @@ public class EntityChair extends MobEntity {
 		return !this.isRemoved();
 	}
 	
-	public static DefaultAttributeContainer getAttributeContainer() {
-		return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 0).build();
+	public static AttributeSupplier getAttributeContainer() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 0).build();
 		
 	}
 }

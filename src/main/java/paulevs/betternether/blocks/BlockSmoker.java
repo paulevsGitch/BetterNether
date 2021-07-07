@@ -1,68 +1,72 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.block.*;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.blocks.BlockProperties.TripleShape;
-
 import java.util.Random;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.BlockProperties.TripleShape;
+import paulevs.betternether.blocks.materials.Materials;
+
 public class BlockSmoker extends BlockBaseNotFull {
-	private static final VoxelShape TOP_SHAPE = Block.createCuboidShape(4, 0, 4, 12, 8, 12);
-	private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
+	private static final VoxelShape TOP_SHAPE = Block.box(4, 0, 4, 12, 8, 12);
+	private static final VoxelShape MIDDLE_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockSmoker() {
-		super(Materials.makeWood(MapColor.BROWN));
-		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.TOP));
+		super(Materials.makeWood(MaterialColor.COLOR_BROWN));
+		this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(SHAPE);
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-		if (world.isAir(pos.up()))
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+		if (world.isEmptyBlock(pos.above()))
 			world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return state.get(SHAPE) == TripleShape.TOP ? TOP_SHAPE : MIDDLE_SHAPE;
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return state.getValue(SHAPE) == TripleShape.TOP ? TOP_SHAPE : MIDDLE_SHAPE;
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (!canPlaceAt(state, world, pos)) {
-			return Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (!canSurvive(state, world, pos)) {
+			return Blocks.AIR.defaultBlockState();
 		}
-		Block side = world.getBlockState(pos.up()).getBlock();
+		Block side = world.getBlockState(pos.above()).getBlock();
 		if (side != this)
-			return state.with(SHAPE, TripleShape.TOP);
-		side = world.getBlockState(pos.down()).getBlock();
+			return state.setValue(SHAPE, TripleShape.TOP);
+		side = world.getBlockState(pos.below()).getBlock();
 		if (side == this)
-			return state.with(SHAPE, TripleShape.MIDDLE);
+			return state.setValue(SHAPE, TripleShape.MIDDLE);
 		else
-			return state.with(SHAPE, TripleShape.BOTTOM);
+			return state.setValue(SHAPE, TripleShape.BOTTOM);
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		BlockState down = world.getBlockState(pos.down());
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		BlockState down = world.getBlockState(pos.below());
 		return down.getBlock() == this || BlocksHelper.isNetherGround(down);
 	}
 }

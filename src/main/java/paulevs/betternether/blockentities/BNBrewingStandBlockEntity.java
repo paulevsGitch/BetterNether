@@ -1,53 +1,52 @@
 package paulevs.betternether.blockentities;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BrewingStandBlock;
-import net.minecraft.block.entity.LockableContainerBlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.SidedInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.BrewingRecipeRegistry;
-import net.minecraft.screen.BrewingStandScreenHandler;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
+import java.util.Arrays;
+import java.util.Iterator;
+import javax.annotation.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.BrewingStandMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BrewingStandBlock;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Iterator;
-
-public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity implements SidedInventory {
+public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
 	private static final int[] TOP_SLOTS = new int[] { 3 };
 	private static final int[] BOTTOM_SLOTS = new int[] { 0, 1, 2, 3 };
 	private static final int[] SIDE_SLOTS = new int[] { 0, 1, 2, 4 };
-	private DefaultedList<ItemStack> inventory;
+	private NonNullList<ItemStack> inventory;
 	private int brewTime;
 	private boolean[] slotsEmptyLastTick;
 	private Item itemBrewing;
 	private int fuel;
-	protected final PropertyDelegate propertyDelegate;
+	protected final ContainerData propertyDelegate;
 
 	public BNBrewingStandBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(BlockEntitiesRegistry.NETHER_BREWING_STAND, blockPos, blockState);
-		this.inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
-		this.propertyDelegate = new PropertyDelegate() {
+		this.inventory = NonNullList.withSize(5, ItemStack.EMPTY);
+		this.propertyDelegate = new ContainerData() {
 			public int get(int index) {
 				switch (index) {
 					case 0:
@@ -70,17 +69,17 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 
 			}
 
-			public int size() {
+			public int getCount() {
 				return 2;
 			}
 		};
 	}
 
-	protected Text getContainerName() {
-		return new TranslatableText("container.brewing", new Object[0]);
+	protected Component getDefaultName() {
+		return new TranslatableComponent("container.brewing", new Object[0]);
 	}
 
-	public int size() {
+	public int getContainerSize() {
 		return this.inventory.size();
 	}
 
@@ -100,12 +99,12 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		return false;
 	}
 
-	public static void tick(World world, BlockPos pos, BlockState state, BNBrewingStandBlockEntity blockEntity) {
+	public static void tick(Level world, BlockPos pos, BlockState state, BNBrewingStandBlockEntity blockEntity) {
 		ItemStack itemStack = (ItemStack) blockEntity.inventory.get(4);
 		if (blockEntity.fuel <= 0 && itemStack.getItem() == Items.BLAZE_POWDER) {
 			blockEntity.fuel = 20;
-			itemStack.decrement(1);
-			blockEntity.markDirty(world, pos, state);
+			itemStack.shrink(1);
+			blockEntity.setChanged(world, pos, state);
 		}
 
 		boolean bl = blockEntity.canCraft();
@@ -116,25 +115,25 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 			boolean bl3 = blockEntity.brewTime == 0;
 			if (bl3 && bl) {
 				blockEntity.craft();
-				blockEntity.markDirty(world, pos, state);
+				blockEntity.setChanged(world, pos, state);
 			}
 			else if (!bl) {
 				blockEntity.brewTime = 0;
-				blockEntity.markDirty(world, pos, state);
+				blockEntity.setChanged(world, pos, state);
 			}
 			else if (blockEntity.itemBrewing != itemStack2.getItem()) {
 				blockEntity.brewTime = 0;
-				blockEntity.markDirty(world, pos, state);
+				blockEntity.setChanged(world, pos, state);
 			}
 		}
 		else if (bl && blockEntity.fuel > 0) {
 			--blockEntity.fuel;
 			blockEntity.brewTime = 400;
 			blockEntity.itemBrewing = itemStack2.getItem();
-			blockEntity.markDirty(world, pos, state);
+			blockEntity.setChanged(world, pos, state);
 		}
 
-		if (!blockEntity.world.isClient) {
+		if (!blockEntity.level.isClientSide) {
 			boolean[] bls = blockEntity.getSlotsEmpty();
 			if (!Arrays.equals(bls, blockEntity.slotsEmptyLastTick)) {
 				blockEntity.slotsEmptyLastTick = bls;
@@ -144,11 +143,11 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 					return;
 				}
 
-				for (int i = 0; i < BrewingStandBlock.BOTTLE_PROPERTIES.length; ++i) {
-					blockState = (BlockState) blockState.with(BrewingStandBlock.BOTTLE_PROPERTIES[i], bls[i]);
+				for (int i = 0; i < BrewingStandBlock.HAS_BOTTLE.length; ++i) {
+					blockState = (BlockState) blockState.setValue(BrewingStandBlock.HAS_BOTTLE[i], bls[i]);
 				}
 
-				blockEntity.world.setBlockState(pos, blockState, Block.NOTIFY_LISTENERS);
+				blockEntity.level.setBlock(pos, blockState, Block.UPDATE_CLIENTS);
 			}
 		}
 
@@ -171,14 +170,14 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		if (source.isEmpty()) {
 			return false;
 		}
-		else if (!BrewingRecipeRegistry.isValidIngredient(source)) {
+		else if (!PotionBrewing.isIngredient(source)) {
 			return false;
 		}
 		else {
 			for (int i = 0; i < 3; ++i) {
 				ItemStack bottle = this.inventory.get(i);
 				if (!bottle.isEmpty()) {
-					if (BrewingRecipeRegistry.hasRecipe(bottle, source))
+					if (PotionBrewing.hasMix(bottle, source))
 						return true;
 					else if (BrewingRegistry.getResult(source, bottle) != null)
 						return true;
@@ -190,10 +189,10 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 	}
 
 	private void craft(){
-		craft(this.world, this.pos, this.getCachedState());
+		craft(this.level, this.worldPosition, this.getBlockState());
 	}
 
-	private void craft(World world, BlockPos blockPos, BlockState state) {
+	private void craft(Level world, BlockPos blockPos, BlockState state) {
 		ItemStack source = (ItemStack) this.inventory.get(3);
 
 		for (int i = 0; i < 3; ++i) {
@@ -203,74 +202,74 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 				if (result != null)
 					this.inventory.set(i, result.copy());
 				else
-					this.inventory.set(i, BrewingRecipeRegistry.craft(source, this.inventory.get(i)));
+					this.inventory.set(i, PotionBrewing.mix(source, this.inventory.get(i)));
 			}
 		}
 
-		source.decrement(1);
-		if (source.getItem().hasRecipeRemainder()) {
-			ItemStack itemStack2 = new ItemStack(source.getItem().getRecipeRemainder());
+		source.shrink(1);
+		if (source.getItem().hasCraftingRemainingItem()) {
+			ItemStack itemStack2 = new ItemStack(source.getItem().getCraftingRemainingItem());
 			if (source.isEmpty()) {
 				source = itemStack2;
 			}
-			else if (!world.isClient) {
-				ItemScatterer.spawn(world, (double) blockPos.getX(), (double) blockPos.getY(),
+			else if (!world.isClientSide) {
+				Containers.dropItemStack(world, (double) blockPos.getX(), (double) blockPos.getY(),
 						(double) blockPos.getZ(), itemStack2);
 			}
 		}
 
 		this.inventory.set(3, source);
-		this.world.syncWorldEvent(WorldEvents.BREWING_STAND_BREWS, blockPos, 0);
+		this.level.levelEvent(LevelEvent.SOUND_BREWING_STAND_BREW, blockPos, 0);
 	}
 
-	public void readNbt(NbtCompound tag) {
-		super.readNbt(tag);
-		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-		Inventories.readNbt(tag, this.inventory);
+	public void load(CompoundTag tag) {
+		super.load(tag);
+		this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+		ContainerHelper.loadAllItems(tag, this.inventory);
 		this.brewTime = tag.getShort("BrewTime");
 		this.fuel = tag.getByte("Fuel");
 	}
 
-	public NbtCompound writeNbt(NbtCompound tag) {
-		super.writeNbt(tag);
+	public CompoundTag save(CompoundTag tag) {
+		super.save(tag);
 		tag.putShort("BrewTime", (short) this.brewTime);
-		Inventories.writeNbt(tag, this.inventory);
+		ContainerHelper.saveAllItems(tag, this.inventory);
 		tag.putByte("Fuel", (byte) this.fuel);
 		return tag;
 	}
 
-	public ItemStack getStack(int slot) {
+	public ItemStack getItem(int slot) {
 		return slot >= 0 && slot < this.inventory.size() ? (ItemStack) this.inventory.get(slot) : ItemStack.EMPTY;
 	}
 
-	public ItemStack removeStack(int slot, int amount) {
-		return Inventories.splitStack(this.inventory, slot, amount);
+	public ItemStack removeItem(int slot, int amount) {
+		return ContainerHelper.removeItem(this.inventory, slot, amount);
 	}
 
-	public ItemStack removeStack(int slot) {
-		return Inventories.removeStack(this.inventory, slot);
+	public ItemStack removeItemNoUpdate(int slot) {
+		return ContainerHelper.takeItem(this.inventory, slot);
 	}
 
-	public void setStack(int slot, ItemStack stack) {
+	public void setItem(int slot, ItemStack stack) {
 		if (slot >= 0 && slot < this.inventory.size()) {
 			this.inventory.set(slot, stack);
 		}
 
 	}
 
-	public boolean canPlayerUse(PlayerEntity player) {
-		if (this.world.getBlockEntity(this.pos) != this) {
+	public boolean stillValid(Player player) {
+		if (this.level.getBlockEntity(this.worldPosition) != this) {
 			return false;
 		}
 		else {
-			return player.squaredDistanceTo((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D,
-					(double) this.pos.getZ() + 0.5D) <= 64.0D;
+			return player.distanceToSqr((double) this.worldPosition.getX() + 0.5D, (double) this.worldPosition.getY() + 0.5D,
+					(double) this.worldPosition.getZ() + 0.5D) <= 64.0D;
 		}
 	}
 
-	public boolean isValid(int slot, ItemStack stack) {
+	public boolean canPlaceItem(int slot, ItemStack stack) {
 		if (slot == 3) {
-			return BrewingRecipeRegistry.isValidIngredient(stack);
+			return PotionBrewing.isIngredient(stack);
 		}
 		else {
 			Item item = stack.getItem();
@@ -278,16 +277,16 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 				if (item == Items.BLAZE_POWDER) {
 					return true;
 				}
-				Identifier id = Registry.ITEM.getId(item);
+				ResourceLocation id = Registry.ITEM.getKey(item);
 				return id.getNamespace().equals("biomemakeover") && id.getPath().equals("soul_embers");
 			}
 			else {
-				return (item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION || item == Items.GLASS_BOTTLE) && this.getStack(slot).isEmpty();
+				return (item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION || item == Items.GLASS_BOTTLE) && this.getItem(slot).isEmpty();
 			}
 		}
 	}
 
-	public int[] getAvailableSlots(Direction side) {
+	public int[] getSlotsForFace(Direction side) {
 		if (side == Direction.UP) {
 			return TOP_SLOTS;
 		}
@@ -296,11 +295,11 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		}
 	}
 
-	public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-		return this.isValid(slot, stack);
+	public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction dir) {
+		return this.canPlaceItem(slot, stack);
 	}
 
-	public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+	public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
 		if (slot == 3) {
 			return stack.getItem() == Items.GLASS_BOTTLE;
 		}
@@ -309,12 +308,12 @@ public class BNBrewingStandBlockEntity extends LockableContainerBlockEntity impl
 		}
 	}
 
-	public void clear() {
+	public void clearContent() {
 		this.inventory.clear();
 	}
 
 	@Override
-	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return new BrewingStandScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
+		return new BrewingStandMenu(syncId, playerInventory, this, this.propertyDelegate);
 	}
 }

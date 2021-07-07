@@ -1,25 +1,25 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockBaseNotFull extends BlockBase {
 
-	public BlockBaseNotFull(Settings settings) {
+	public BlockBaseNotFull(Properties settings) {
 		super(settings);
 	}
 
-	public boolean canSuffocate(BlockState state, BlockView view, BlockPos pos) {
+	public boolean canSuffocate(BlockState state, BlockGetter view, BlockPos pos) {
 		return false;
 	}
 
-	public boolean isSimpleFullBlock(BlockState state, BlockView view, BlockPos pos) {
+	public boolean isSimpleFullBlock(BlockState state, BlockGetter view, BlockPos pos) {
 		return false;
 	}
 
-	public boolean allowsSpawning(BlockState state, BlockView view, BlockPos pos, EntityType<?> type) {
+	public boolean allowsSpawning(BlockState state, BlockGetter view, BlockPos pos, EntityType<?> type) {
 		return false;
 	}
 }

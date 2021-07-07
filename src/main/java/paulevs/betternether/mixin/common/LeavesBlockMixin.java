@@ -3,31 +3,29 @@ package paulevs.betternether.mixin.common;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import org.spongepowered.asm.mixin.Mixin;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(LeavesBlock.class)
 public abstract class LeavesBlockMixin extends Block {
-	public LeavesBlockMixin(Settings settings) {
+	public LeavesBlockMixin(Properties settings) {
 		super(settings);
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
-		ItemStack tool = builder.get(LootContextParameters.TOOL);
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+		ItemStack tool = builder.getParameter(LootContextParams.TOOL);
 		if (tool != null && FabricToolTags.SHEARS.contains(tool.getItem())) {
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		}
 		else {
-			return super.getDroppedStacks(state, builder);
+			return super.getDrops(state, builder);
 		}
 	}
 }

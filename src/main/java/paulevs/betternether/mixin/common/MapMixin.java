@@ -4,55 +4,55 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FilledMapItem;
-import net.minecraft.item.NetworkSyncedItem;
-import net.minecraft.item.map.MapState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.WorldChunk;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ComplexItem;
+import net.minecraft.world.item.MapItem;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(FilledMapItem.class)
-public abstract class MapMixin extends NetworkSyncedItem {
-	public MapMixin(Settings settings) {
+@Mixin(MapItem.class)
+public abstract class MapMixin extends ComplexItem {
+	public MapMixin(Properties settings) {
 		super(settings);
 	}
 
 	@Shadow
-	private BlockState getFluidStateIfVisible(World world, BlockState state, BlockPos pos) {
+	private BlockState getFluidStateIfVisible(Level world, BlockState state, BlockPos pos) {
 		return state;
 	}
 
 	@Inject(method = "updateColors", at = @At(value = "HEAD"), cancellable = true)
-	private void customColors(World world, Entity entity, MapState state, CallbackInfo info) {
-		if (world.getDimension().hasCeiling() && world.getRegistryKey() == state.dimension && entity instanceof PlayerEntity) {
+	private void customColors(Level world, Entity entity, MapItemSavedData state, CallbackInfo info) {
+		if (world.dimensionType().hasCeiling() && world.dimension() == state.dimension && entity instanceof Player) {
 			int i = 1 << state.scale;
-			int j = state.centerX;
-			int k = state.centerZ;
-			int l = MathHelper.floor(entity.getX() - (double) j) / i + 64;
-			int m = MathHelper.floor(entity.getZ() - (double) k) / i + 64;
+			int j = state.x;
+			int k = state.z;
+			int l = Mth.floor(entity.getX() - (double) j) / i + 64;
+			int m = Mth.floor(entity.getZ() - (double) k) / i + 64;
 			int n = 128 / i;
 
-			MapState.PlayerUpdateTracker playerUpdateTracker = state.getPlayerSyncData((PlayerEntity) entity);
-			++playerUpdateTracker.field_131;
+			MapItemSavedData.HoldingPlayer playerUpdateTracker = state.getHoldingPlayer((Player) entity);
+			++playerUpdateTracker.step;
 			boolean bl = false;
 
-			BlockState blockState = Blocks.BEDROCK.getDefaultState();
-			Blocks.BEDROCK.getDefaultState();
+			BlockState blockState = Blocks.BEDROCK.defaultBlockState();
+			Blocks.BEDROCK.defaultBlockState();
 
 			for (int o = l - n + 1; o < l + n; ++o) {
-				if ((o & 15) == (playerUpdateTracker.field_131 & 15) || bl) {
+				if ((o & 15) == (playerUpdateTracker.step & 15) || bl) {
 					bl = false;
 					double d = 0.0D;
 
@@ -63,27 +63,27 @@ public abstract class MapMixin extends NetworkSyncedItem {
 							boolean bl2 = q * q + r * r > (n - 2) * (n - 2);
 							int s = (j / i + o - 64) * i;
 							int t = (k / i + p - 64) * i;
-							Multiset<MapColor> multiset = LinkedHashMultiset.create();
-							WorldChunk worldChunk = world.getWorldChunk(new BlockPos(s, 0, t));
+							Multiset<MaterialColor> multiset = LinkedHashMultiset.create();
+							LevelChunk worldChunk = world.getChunkAt(new BlockPos(s, 0, t));
 							if (!worldChunk.isEmpty()) {
 								ChunkPos chunkPos = worldChunk.getPos();
 
-								int u = chunkPos.getStartX() + (s & 15);
-								int v = chunkPos.getStartZ() + (t & 15);
+								int u = chunkPos.getMinBlockX() + (s & 15);
+								int v = chunkPos.getMinBlockZ() + (t & 15);
 
 								int w = 0;
 								double e = 0.0D;
-								BlockPos.Mutable mutable = new BlockPos.Mutable();
-								new BlockPos.Mutable();
+								BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+								new BlockPos.MutableBlockPos();
 
 								for (int x = 0; x < i; ++x) {
 									for (int z = 0; z < i; ++z) {
 										mutable.set(x + u, 127, z + v);
 
-										blockState = Blocks.NETHERRACK.getDefaultState();
+										blockState = Blocks.NETHERRACK.defaultBlockState();
 										for (int y = 126; y > 0; y--) {
 											mutable.setY(y);
-											if (!world.isAir(mutable) && world.isAir(mutable.up())) {
+											if (!world.isEmptyBlock(mutable) && world.isEmptyBlock(mutable.above())) {
 												blockState = world.getBlockState(mutable);
 												break;
 											}
@@ -104,9 +104,9 @@ public abstract class MapMixin extends NetworkSyncedItem {
 									ac = 0;
 								}
 
-								MapColor materialColor = (MapColor) Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MapColor.CLEAR);
+								MaterialColor materialColor = (MaterialColor) Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.NONE);
 
-								if (materialColor == MapColor.WATER_BLUE) {
+								if (materialColor == MaterialColor.WATER) {
 									f = (double) w * 0.1D + (double) (o + p & 1) * 0.2D;
 									ac = 1;
 									if (f < 0.5D) {

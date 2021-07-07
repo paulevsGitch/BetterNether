@@ -1,10 +1,9 @@
 package paulevs.betternether.structures;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ServerWorldAccess;
-
 import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ServerLevelAccessor;
 
 public interface IStructure {
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random);
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random);
 }

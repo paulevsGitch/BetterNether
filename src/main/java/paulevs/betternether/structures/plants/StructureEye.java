@@ -1,17 +1,16 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ServerWorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureEye implements IStructure {
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		int h = random.nextInt(19) + 5;
 		int h2 = BlocksHelper.downRay(world, pos, h);
 
@@ -20,12 +19,12 @@ public class StructureEye implements IStructure {
 
 		h2 -= 1;
 
-		BlockState vineState = BlocksRegistry.EYE_VINE.getDefaultState();
-		BlockState eyeState = random.nextBoolean() ? BlocksRegistry.EYEBALL.getDefaultState() : BlocksRegistry.EYEBALL_SMALL.getDefaultState();
+		BlockState vineState = BlocksRegistry.EYE_VINE.defaultBlockState();
+		BlockState eyeState = random.nextBoolean() ? BlocksRegistry.EYEBALL.defaultBlockState() : BlocksRegistry.EYEBALL_SMALL.defaultBlockState();
 
 		for (int y = 0; y < h2; y++)
-			BlocksHelper.setWithUpdate(world, pos.down(y), vineState);
+			BlocksHelper.setWithUpdate(world, pos.below(y), vineState);
 
-		BlocksHelper.setWithUpdate(world, pos.down(h2), eyeState);
+		BlocksHelper.setWithUpdate(world, pos.below(h2), eyeState);
 	}
 }

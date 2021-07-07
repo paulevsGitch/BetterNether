@@ -1,9 +1,9 @@
 package paulevs.betternether.mixin.common;
 
-import net.minecraft.world.chunk.light.LightStorage;
+import net.minecraft.world.level.lighting.LayerLightSectionStorage;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(LightStorage.class)
+@Mixin(LayerLightSectionStorage.class)
 public class LightStorageMixin {
 	/*
 	 * @Shadow protected ChunkNibbleArray getLightArray(long sectionPos, boolean

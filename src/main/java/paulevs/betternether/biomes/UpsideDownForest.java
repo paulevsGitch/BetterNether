@@ -1,16 +1,27 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureForestLitter;
-import paulevs.betternether.structures.plants.*;
-
-import java.util.Random;
+import paulevs.betternether.structures.plants.StructureAnchorTree;
+import paulevs.betternether.structures.plants.StructureAnchorTreeBranch;
+import paulevs.betternether.structures.plants.StructureAnchorTreeRoot;
+import paulevs.betternether.structures.plants.StructureCeilingMushrooms;
+import paulevs.betternether.structures.plants.StructureHookMushroom;
+import paulevs.betternether.structures.plants.StructureJungleMoss;
+import paulevs.betternether.structures.plants.StructureMossCover;
+import paulevs.betternether.structures.plants.StructureNeonEquisetum;
+import paulevs.betternether.structures.plants.StructureNetherSakura;
+import paulevs.betternether.structures.plants.StructureNetherSakuraBush;
+import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
+import paulevs.betternether.structures.plants.StructureWallRedMushroom;
+import paulevs.betternether.structures.plants.StructureWhisperingGourd;
 
 public class UpsideDownForest extends NetherBiome {
 	public UpsideDownForest(String name) {
@@ -19,7 +30,7 @@ public class UpsideDownForest extends NetherBiome {
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setMusic(SoundEvents.MUSIC_NETHER_CRIMSON_FOREST)
+				.setMusic(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				.setBNStructures(false)
 				.setStalactites(false));
 		this.setNoiseDensity(0.5F);
@@ -40,7 +51,7 @@ public class UpsideDownForest extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, random.nextInt(3) == 0 ? BlocksRegistry.NETHERRACK_MOSS.getDefaultState() : Blocks.NETHERRACK.getDefaultState());
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+		BlocksHelper.setWithoutUpdate(world, pos, random.nextInt(3) == 0 ? BlocksRegistry.NETHERRACK_MOSS.defaultBlockState() : Blocks.NETHERRACK.defaultBlockState());
 	}
 }

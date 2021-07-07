@@ -1,25 +1,25 @@
 package paulevs.betternether.entity.render;
 
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.model.AnimalModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.model.AgeableListModel;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntityHydrogenJellyfish;
 import paulevs.betternether.entity.model.ModelEntityHydrogenJellyfish;
 import paulevs.betternether.registry.EntityRenderRegistry;
 
-public class RenderHydrogenJellyfish extends MobEntityRenderer<EntityHydrogenJellyfish, AnimalModel<EntityHydrogenJellyfish>> {
-	private static final Identifier TEXTURE = new Identifier(BetterNether.MOD_ID, "textures/entity/jellyfish.png");
+public class RenderHydrogenJellyfish extends MobRenderer<EntityHydrogenJellyfish, AgeableListModel<EntityHydrogenJellyfish>> {
+	private static final ResourceLocation TEXTURE = new ResourceLocation(BetterNether.MOD_ID, "textures/entity/jellyfish.png");
 
-	public RenderHydrogenJellyfish(EntityRendererFactory.Context ctx) {
-		super(ctx, new ModelEntityHydrogenJellyfish(ctx.getPart(EntityRenderRegistry.HYDROGEN_JELLYFISH_MODEL)), 1);
+	public RenderHydrogenJellyfish(EntityRendererProvider.Context ctx) {
+		super(ctx, new ModelEntityHydrogenJellyfish(ctx.bakeLayer(EntityRenderRegistry.HYDROGEN_JELLYFISH_MODEL)), 1);
 	}
 
 	@Override
-	public Identifier getTexture(EntityHydrogenJellyfish entity) {
+	public ResourceLocation getTexture(EntityHydrogenJellyfish entity) {
 		return TEXTURE;
 	}
 
@@ -29,7 +29,7 @@ public class RenderHydrogenJellyfish extends MobEntityRenderer<EntityHydrogenJel
 	}
 
 	@Override
-	protected void scale(EntityHydrogenJellyfish entity, MatrixStack matrixStack, float f) {
+	protected void scale(EntityHydrogenJellyfish entity, PoseStack matrixStack, float f) {
 		float scale = entity.getScale();
 		matrixStack.scale(scale, scale, scale);
 	}

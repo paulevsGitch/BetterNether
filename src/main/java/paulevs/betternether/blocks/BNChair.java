@@ -1,94 +1,94 @@
 package paulevs.betternether.blocks;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.registry.EntityRegistry;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 public class BNChair extends BlockBaseNotFull {
-	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	private float height;
 
 	public BNChair(Block block, int height) {
-		super(FabricBlockSettings.copyOf(block).nonOpaque());
+		super(FabricBlockSettings.copyOf(block).noOcclusion());
 		this.height = (float) (height - 3F) / 16F;
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING);
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (world.isClient) {
-			return ActionResult.FAIL;
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (world.isClientSide) {
+			return InteractionResult.FAIL;
 		}
 		else {
-			if (player.hasVehicle() || player.isSpectator())
-				return ActionResult.FAIL;
+			if (player.isPassenger() || player.isSpectator())
+				return InteractionResult.FAIL;
 
 			double px = pos.getX() + 0.5;
 			double py = pos.getY() + height;
 			double pz = pos.getZ() + 0.5;
 
-			List<EntityChair> active = world.getEntitiesByClass(EntityChair.class, new Box(pos), new Predicate<EntityChair>() {
+			List<EntityChair> active = world.getEntitiesOfClass(EntityChair.class, new AABB(pos), new Predicate<EntityChair>() {
 				@Override
 				public boolean test(EntityChair entity) {
-					return entity.hasPlayerRider();
+					return entity.hasExactlyOnePlayerPassenger();
 				}
 			});
 			if (!active.isEmpty())
-				return ActionResult.FAIL;
+				return InteractionResult.FAIL;
 
-			float yaw = state.get(FACING).getOpposite().asRotation();
+			float yaw = state.getValue(FACING).getOpposite().toYRot();
 			EntityChair entity = EntityRegistry.CHAIR.create(world);
-			entity.refreshPositionAndAngles(px, py, pz, yaw, 0);
+			entity.moveTo(px, py, pz, yaw, 0);
 			entity.setNoGravity(true);
 			entity.setSilent(true);
 			entity.setInvisible(true);
-			entity.setHeadYaw(yaw);
-			entity.setBodyYaw(yaw);
-			if (world.spawnEntity(entity)) {
+			entity.setYHeadRot(yaw);
+			entity.setYBodyRot(yaw);
+			if (world.addFreshEntity(entity)) {
 				player.startRiding(entity, true);
-				player.setBodyYaw(yaw);
-				player.setHeadYaw(yaw);
-				return ActionResult.SUCCESS;
+				player.setYBodyRot(yaw);
+				player.setYHeadRot(yaw);
+				return InteractionResult.SUCCESS;
 			}
-			return ActionResult.FAIL;
+			return InteractionResult.FAIL;
 		}
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
+	public BlockState rotate(BlockState state, Rotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror) {
+	public BlockState mirror(BlockState state, Mirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 }

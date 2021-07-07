@@ -1,26 +1,26 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockHookMushroom extends BlockMold {
 	public BlockHookMushroom() {
-		super(Materials.makeGrass(MapColor.PINK)
-				.sounds(BlockSoundGroup.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
-				.ticksRandomly()
+		super(Materials.makeGrass(MaterialColor.COLOR_PINK)
+				.sound(SoundType.CROP)
+				.noOcclusion()
+				.noCollission()
+				.instabreak()
+				.randomTicks()
 				.luminance(13));
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return BlocksHelper.isNetherrack(world.getBlockState(pos.up()));
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return BlocksHelper.isNetherrack(world.getBlockState(pos.above()));
 	}
 }

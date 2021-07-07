@@ -2,77 +2,77 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockWillowLeaves extends BlockBaseNotFull {
-	public static final DirectionProperty FACING = Properties.FACING;
-	public static final BooleanProperty NATURAL = BooleanProperty.of("natural");
+	public static final DirectionProperty FACING = BlockStateProperties.FACING;
+	public static final BooleanProperty NATURAL = BooleanProperty.create("natural");
 
 	public BlockWillowLeaves() {
-		super(Materials.makeLeaves(MapColor.TERRACOTTA_RED));
+		super(Materials.makeLeaves(MaterialColor.TERRACOTTA_RED));
 		this.setDropItself(false);
-		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.UP).with(NATURAL, true));
+		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.UP).setValue(NATURAL, true));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING, NATURAL);
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		return this.getDefaultState().with(NATURAL, false);
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		return this.defaultBlockState().setValue(NATURAL, false);
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
+	public BlockState rotate(BlockState state, Rotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror) {
+	public BlockState mirror(BlockState state, Mirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (state.get(NATURAL) && world.isAir(pos.offset(state.get(FACING).getOpposite())))
-			return Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (state.getValue(NATURAL) && world.isEmptyBlock(pos.relative(state.getValue(FACING).getOpposite())))
+			return Blocks.AIR.defaultBlockState();
 		else
 			return state;
 	}
 
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
+	public float getShadeBrightness(BlockState state, BlockGetter view, BlockPos pos) {
 		return 1.0F;
 	}
 
 	@Override
-	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos) {
+	public boolean propagatesSkylightDown(BlockState state, BlockGetter view, BlockPos pos) {
 		return true;
 	}
 
 	@Override
-	public VoxelShape getSidesShape(BlockState state, BlockView world, BlockPos pos) {
-		return VoxelShapes.empty();
+	public VoxelShape getBlockSupportShape(BlockState state, BlockGetter world, BlockPos pos) {
+		return Shapes.empty();
 	}
 }

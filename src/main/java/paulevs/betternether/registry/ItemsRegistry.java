@@ -1,34 +1,47 @@
 package paulevs.betternether.registry;
 
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.item.Item.Settings;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import java.util.ArrayList;
+import java.util.List;
+import net.minecraft.core.BlockSource;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.food.Foods;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.FoodShape;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.integrations.VanillaExcavatorsIntegration;
 import paulevs.betternether.integrations.VanillaHammersIntegration;
-import paulevs.betternether.items.*;
+import paulevs.betternether.items.BNArmor;
+import paulevs.betternether.items.BNItemAxe;
+import paulevs.betternether.items.BNItemHoe;
+import paulevs.betternether.items.BNItemPickaxe;
+import paulevs.betternether.items.BNItemShovel;
+import paulevs.betternether.items.BNSword;
+import paulevs.betternether.items.ItemBlackApple;
+import paulevs.betternether.items.ItemBowlFood;
 import paulevs.betternether.items.materials.BNItemMaterials;
 import paulevs.betternether.tab.CreativeTab;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ItemsRegistry {
 	private static final List<String> ITEMS = new ArrayList<String>();
@@ -40,9 +53,9 @@ public class ItemsRegistry {
 	public static final Item BLACK_APPLE = registerItem("black_apple", new ItemBlackApple());
 
 	public static final Item STALAGNATE_BOWL = registerItem("stalagnate_bowl", new ItemBowlFood(null, FoodShape.NONE));
-	public static final Item STALAGNATE_BOWL_WART = registerItem("stalagnate_bowl_wart", new ItemBowlFood(FoodComponents.COOKED_CHICKEN, FoodShape.WART));
-	public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem("stalagnate_bowl_mushroom", new ItemBowlFood(FoodComponents.MUSHROOM_STEW, FoodShape.MUSHROOM));
-	public static final Item STALAGNATE_BOWL_APPLE = registerItem("stalagnate_bowl_apple", new ItemBowlFood(FoodComponents.APPLE, FoodShape.APPLE));
+	public static final Item STALAGNATE_BOWL_WART = registerItem("stalagnate_bowl_wart", new ItemBowlFood(Foods.COOKED_CHICKEN, FoodShape.WART));
+	public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem("stalagnate_bowl_mushroom", new ItemBowlFood(Foods.MUSHROOM_STEW, FoodShape.MUSHROOM));
+	public static final Item STALAGNATE_BOWL_APPLE = registerItem("stalagnate_bowl_apple", new ItemBowlFood(Foods.APPLE, FoodShape.APPLE));
 	public static final Item HOOK_MUSHROOM = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
 	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
@@ -56,7 +69,7 @@ public class ItemsRegistry {
 	public static final Item CINCINNASITE_SHOVEL_DIAMOND = registerItem("cincinnasite_shovel_diamond", new BNItemShovel(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
 	public static final Item CINCINNASITE_HOE = registerItem("cincinnasite_hoe", new BNItemHoe(BNItemMaterials.CINCINNASITE_TOOLS, 512, 1F));
 	public static final Item CINCINNASITE_HOE_DIAMOND = registerItem("cincinnasite_hoe_diamond", new BNItemHoe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
-	public static final Item CINCINNASITE_SHEARS = registerItem("cincinnasite_shears", new ShearsItem(defaultSettings().maxDamage(380)));
+	public static final Item CINCINNASITE_SHEARS = registerItem("cincinnasite_shears", new ShearsItem(defaultSettings().durability(380)));
 
 	public static final Item CINCINNASITE_HELMET = registerItem("cincinnasite_helmet", new BNArmor(BNItemMaterials.CINCINNASITE_ARMOR, EquipmentSlot.HEAD));
 	public static final Item CINCINNASITE_CHESTPLATE = registerItem("cincinnasite_chestplate", new BNArmor(BNItemMaterials.CINCINNASITE_ARMOR, EquipmentSlot.CHEST));
@@ -102,7 +115,7 @@ public class ItemsRegistry {
 
 	public static Item registerItem(String name, Item item) {
 		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
-			Registry.register(Registry.ITEM, new Identifier(BetterNether.MOD_ID, name), item);
+			Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
 			if (item instanceof BlockItem)
 				MOD_BLOCKS.add(item);
 			else
@@ -114,46 +127,46 @@ public class ItemsRegistry {
 	}
 
 	public static Item registerFood(String name, int hunger, float saturationMultiplier) {
-		return registerItem(name, new Item(defaultSettings().food(new FoodComponent.Builder().hunger(hunger).saturationModifier(saturationMultiplier).build())));
+		return registerItem(name, new Item(defaultSettings().food(new FoodProperties.Builder().nutrition(hunger).saturationMod(saturationMultiplier).build())));
 	}
 
 	public static Item registerMedicine(String name, int ticks, int power, boolean bowl) {
 		if (bowl) {
-			Item item = new Item(defaultSettings().maxCount(16).food(new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, ticks, power), 1).build())) {
+			Item item = new Item(defaultSettings().stacksTo(16).food(new FoodProperties.Builder().effect(new MobEffectInstance(MobEffects.REGENERATION, ticks, power), 1).build())) {
 				@Override
-				public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+				public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
 					if (stack.getCount() == 1) {
-						super.finishUsing(stack, world, user);
+						super.finishUsingItem(stack, world, user);
 						return new ItemStack(ItemsRegistry.STALAGNATE_BOWL, stack.getCount());
 					}
 					else {
-						if (user instanceof PlayerEntity) {
-							PlayerEntity player = (PlayerEntity) user;
+						if (user instanceof Player) {
+							Player player = (Player) user;
 							if (!player.isCreative())
-								player.giveItemStack(new ItemStack(ItemsRegistry.STALAGNATE_BOWL));
+								player.addItem(new ItemStack(ItemsRegistry.STALAGNATE_BOWL));
 						}
-						return super.finishUsing(stack, world, user);
+						return super.finishUsingItem(stack, world, user);
 					}
 				}
 			};
 			return registerItem(name, item);
 		}
-		return registerItem(name, new Item(defaultSettings().food(new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, ticks, power), 1).build())));
+		return registerItem(name, new Item(defaultSettings().food(new FoodProperties.Builder().effect(new MobEffectInstance(MobEffects.REGENERATION, ticks, power), 1).build())));
 	}
 
-	public static Settings defaultSettings() {
-		return new Item.Settings().group(CreativeTab.BN_TAB);
+	public static Properties defaultSettings() {
+		return new Item.Properties().tab(CreativeTab.BN_TAB);
 	}
 
-	private static Item makeEgg(String name, EntityType<? extends MobEntity> type, int background, int dots) {
+	private static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {
 		if (Configs.MOBS.getBoolean("mobs", name, true)) {
 			SpawnEggItem item = new SpawnEggItem(type, background, dots, defaultSettings());
-			ItemDispenserBehavior behavior = new ItemDispenserBehavior() {
-				public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-					Direction direction = (Direction) pointer.getBlockState().get(DispenserBlock.FACING);
-					EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getTag());
-					entityType.spawnFromItemStack(pointer.getWorld(), stack, (PlayerEntity) null, pointer.getPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
-					stack.decrement(1);
+			DefaultDispenseItemBehavior behavior = new DefaultDispenseItemBehavior() {
+				public ItemStack execute(BlockSource pointer, ItemStack stack) {
+					Direction direction = (Direction) pointer.getBlockState().getValue(DispenserBlock.FACING);
+					EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
+					entityType.spawn(pointer.getLevel(), stack, (Player) null, pointer.getPos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
+					stack.shrink(1);
 					return stack;
 				}
 			};

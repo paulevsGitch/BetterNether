@@ -1,12 +1,17 @@
 package paulevs.betternether.entity.model;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.AnimalModel;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
+import net.minecraft.client.model.AgeableListModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import paulevs.betternether.entity.EntityNaga;
 
-public class ModelNaga extends AnimalModel<EntityNaga> {
+public class ModelNaga extends AgeableListModel<EntityNaga> {
 	private static final int SPIKE_COUNT = 8;
 	private static final int TAIL_COUNT = 4;
 	public ModelPart head;
@@ -18,32 +23,32 @@ public class ModelNaga extends AnimalModel<EntityNaga> {
 	// private long preTime;
 	private float maxAngle = 0.1F;
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData modelData = new ModelData();
-		ModelPartData modelPartData = modelData.getRoot();
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition modelData = new MeshDefinition();
+		PartDefinition modelPartData = modelData.getRoot();
 
-		ModelPartData modelPartData_HEAD = modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create()
-				.uv(0, 0)
-				.cuboid(-5.0F, -10.0F, -5.0F - 2F, 10.0F, 10.0F, 10.0F), ModelTransform.pivot(0.0F, -9.0F, 0.0F));
+		PartDefinition modelPartData_HEAD = modelPartData.addOrReplaceChild(PartNames.HEAD, CubeListBuilder.create()
+				.texOffs(0, 0)
+				.addBox(-5.0F, -10.0F, -5.0F - 2F, 10.0F, 10.0F, 10.0F), PartPose.offset(0.0F, -9.0F, 0.0F));
 
 		/* head = new ModelPart(this, 0, 0);
 		head.addCuboid(-5.0F, -10.0F, -5.0F - 2F, 10.0F, 10.0F, 10.0F);
 		head.setPivot(0.0F, -9.0F, 0.0F);*/
 
-		ModelPartData modelPartData_BODY = modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create()
-				.uv(40, 0)
-				.cuboid(-2.0F, 0.0F, -1.0F, 4.0F, 20.0F, 2.0F)
-				.uv(0, 20)
-				.cuboid(-5.0F, 3.0F, -6.0F, 10.0F, 16.0F, 6.0F), ModelTransform.pivot(0.0F, -10F, 0.0F));
+		PartDefinition modelPartData_BODY = modelPartData.addOrReplaceChild(PartNames.BODY, CubeListBuilder.create()
+				.texOffs(40, 0)
+				.addBox(-2.0F, 0.0F, -1.0F, 4.0F, 20.0F, 2.0F)
+				.texOffs(0, 20)
+				.addBox(-5.0F, 3.0F, -6.0F, 10.0F, 16.0F, 6.0F), PartPose.offset(0.0F, -10F, 0.0F));
 		/*body = new ModelPart(this, 40, 0);
 		body.addCuboid(-2.0F, 0.0F, -1.0F, 4.0F, 20.0F, 2.0F);
 		body.setTextureOffset(0, 20);
 		body.addCuboid(-5.0F, 3.0F, -6.0F, 10.0F, 16.0F, 6.0F);
 		body.setPivot(0.0F, -10F, 0.0F*/
 
-		modelPartData_BODY.addChild("spike_0", ModelPartBuilder.create()
-				.uv(33, 25)
-				.cuboid(0, 0, 0, 10, 18.0F, 0), ModelTransform.of(0.0F, 0F, 0.0F,0, (float) Math.toRadians(-40), 0));
+		modelPartData_BODY.addOrReplaceChild("spike_0", CubeListBuilder.create()
+				.texOffs(33, 25)
+				.addBox(0, 0, 0, 10, 18.0F, 0), PartPose.offsetAndRotation(0.0F, 0F, 0.0F,0, (float) Math.toRadians(-40), 0));
 		//spikes = new ModelPart[8];
 
 		/*spikes[0] = new ModelPart(this, 33, 25);
@@ -52,9 +57,9 @@ public class ModelNaga extends AnimalModel<EntityNaga> {
 		spikes[0].yaw = (float) Math.toRadians(-40);
 		body.addChild(spikes[0]);*/
 
-		modelPartData_BODY.addChild("spike_1", ModelPartBuilder.create()
-				.uv(33, 25)
-				.cuboid(0, 0, 0, 10, 18.0F, 0), ModelTransform.of(0.0F, 0F, 0.0F,0, (float) Math.toRadians(-140), 0));
+		modelPartData_BODY.addOrReplaceChild("spike_1", CubeListBuilder.create()
+				.texOffs(33, 25)
+				.addBox(0, 0, 0, 10, 18.0F, 0), PartPose.offsetAndRotation(0.0F, 0F, 0.0F,0, (float) Math.toRadians(-140), 0));
 		/*spikes[1] = new ModelPart(this, 33, 25);
 		spikes[1].addCuboid(0, 0, 0, 10, 18.0F, 0);
 		spikes[1].setPivot(0.0F, 0, 0.0F);
@@ -65,7 +70,7 @@ public class ModelNaga extends AnimalModel<EntityNaga> {
 		float[] tailPitch = {(float)Math.toRadians(45.0f), (float)Math.toRadians(45.0f), 0, 0};
 		assert tailPitch.length == TAIL_COUNT;
 
-		ModelPartData tailParent = modelPartData_BODY;
+		PartDefinition tailParent = modelPartData_BODY;
 		for (int i = 0; i < TAIL_COUNT; i++) {
 			int height = (TAIL_COUNT - i) * 4 / TAIL_COUNT;
 			if (height < 2)
@@ -74,9 +79,9 @@ public class ModelNaga extends AnimalModel<EntityNaga> {
 			if (width < 1)
 				width = 1;
 
-			ModelPartData modelPartData_TAIL = tailParent.addChild("tail_"+i, ModelPartBuilder.create()
-					.uv(40, 0)
-					.cuboid(-height * 0.5F, 0.0F, -width * 0.5F, height, 20.0F, width), ModelTransform.of(0.0F, 19.0F, 0.0F, tailPitch[i], 0, 0));
+			PartDefinition modelPartData_TAIL = tailParent.addOrReplaceChild("tail_"+i, CubeListBuilder.create()
+					.texOffs(40, 0)
+					.addBox(-height * 0.5F, 0.0F, -width * 0.5F, height, 20.0F, width), PartPose.offsetAndRotation(0.0F, 19.0F, 0.0F, tailPitch[i], 0, 0));
 			tailParent = modelPartData_TAIL;
 
 			/*tail[i] = new ModelPart(this, 40, 0);
@@ -89,9 +94,9 @@ public class ModelNaga extends AnimalModel<EntityNaga> {
 				int index = (i << 1) + 2;
 
 
-				modelPartData_TAIL.addChild("spike_"+index, ModelPartBuilder.create()
-						.uv(px, 22)
-						.cuboid(0, 0, 0, height * 3, 20.0F, 0), ModelTransform.of(0.0F, 0F, 0.0F,0, (float) Math.toRadians(-60), 0));
+				modelPartData_TAIL.addOrReplaceChild("spike_"+index, CubeListBuilder.create()
+						.texOffs(px, 22)
+						.addBox(0, 0, 0, height * 3, 20.0F, 0), PartPose.offsetAndRotation(0.0F, 0F, 0.0F,0, (float) Math.toRadians(-60), 0));
 				/*spikes[index] = new ModelPart(this, px, 22);
 				spikes[index].addCuboid(0, 0, 0, height * 3, 20.0F, 0);
 				spikes[index].setPivot(0.0F, 0, 0.0F);
@@ -99,9 +104,9 @@ public class ModelNaga extends AnimalModel<EntityNaga> {
 				tail[i].addChild(spikes[index]);*/
 
 				index++;
-				modelPartData_TAIL.addChild("spike_"+index, ModelPartBuilder.create()
-						.uv(px, 22)
-						.cuboid(0, 0, 0, height * 3, 20.0F, 0), ModelTransform.of(0.0F, 0F, 0.0F,0, (float) Math.toRadians(-120), 0));
+				modelPartData_TAIL.addOrReplaceChild("spike_"+index, CubeListBuilder.create()
+						.texOffs(px, 22)
+						.addBox(0, 0, 0, height * 3, 20.0F, 0), PartPose.offsetAndRotation(0.0F, 0F, 0.0F,0, (float) Math.toRadians(-120), 0));
 				/*spikes[index] = new ModelPart(this, px, 22);
 				spikes[index].addCuboid(0, 0, 0, height * 3, 20.0F, 0);
 				spikes[index].setPivot(0.0F, 0, 0.0F);
@@ -121,12 +126,12 @@ public class ModelNaga extends AnimalModel<EntityNaga> {
 		tail[1].pitch = (float) Math.toRadians(45);*/
 		/*textureHeight = 64;
 		textureWidth = 64;*/
-		return TexturedModelData.of(modelData, 64, 64);
+		return LayerDefinition.create(modelData, 64, 64);
 	}
 
 	public ModelNaga(ModelPart root) {
-		this.body = root.getChild(EntityModelPartNames.BODY);
-		this.head = root.getChild(EntityModelPartNames.HEAD);
+		this.body = root.getChild(PartNames.BODY);
+		this.head = root.getChild(PartNames.HEAD);
 
 		this.tail = new ModelPart[TAIL_COUNT];
 		this.spikes = new ModelPart[SPIKE_COUNT];
@@ -147,58 +152,58 @@ public class ModelNaga extends AnimalModel<EntityNaga> {
 	}
 
 	@Override
-	protected Iterable<ModelPart> getHeadParts() {
+	protected Iterable<ModelPart> headParts() {
 		return ImmutableList.of(this.head);
 	}
 
 	@Override
-	protected Iterable<ModelPart> getBodyParts() {
+	protected Iterable<ModelPart> bodyParts() {
 		return ImmutableList.of(this.body);
 	}
 
 	@Override
 	public void animateModel(EntityNaga livingEntity, float f, float g, float h) {
-		this.pitch = livingEntity.getLeaningPitch(h);
-		super.animateModel(livingEntity, f, g, h);
+		this.pitch = livingEntity.getSwimAmount(h);
+		super.prepareMobModel(livingEntity, f, g, h);
 	}
 
 	@Override
 	public void setAngles(EntityNaga entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-		boolean rollTooBig = entity.getRoll() > 4;
-		boolean isSwimming = entity.isInSwimmingPose();
-		this.head.yaw = headYaw * 0.017453292F;
+		boolean rollTooBig = entity.getFallFlyingTicks() > 4;
+		boolean isSwimming = entity.isVisuallySwimming();
+		this.head.yRot = headYaw * 0.017453292F;
 		if (rollTooBig) {
-			this.head.pitch = -0.7853982F;
+			this.head.xRot = -0.7853982F;
 		}
 		else if (this.pitch > 0.0F) {
 			if (isSwimming) {
-				this.head.pitch = this.lerpAngle(this.head.pitch, -0.7853982F, this.pitch);
+				this.head.xRot = this.lerpAngle(this.head.xRot, -0.7853982F, this.pitch);
 			}
 			else {
-				this.head.pitch = this.lerpAngle(this.head.pitch, headPitch * 0.017453292F, this.pitch);
+				this.head.xRot = this.lerpAngle(this.head.xRot, headPitch * 0.017453292F, this.pitch);
 			}
 		}
 		else {
-			this.head.pitch = headPitch * 0.017453292F;
+			this.head.xRot = headPitch * 0.017453292F;
 		}
 
 		// long time = System.currentTimeMillis();
-		double speed = (entity.isOnGround() && (entity.getVelocity().x != 0 || entity.getVelocity().z != 0) && !entity.hasVehicle()) ? 6 : 0.5;
+		double speed = (entity.isOnGround() && (entity.getDeltaMovement().x != 0 || entity.getDeltaMovement().z != 0) && !entity.isPassenger()) ? 6 : 0.5;
 		maxAngle = this.lerpAngle(maxAngle, speed > 1 ? 0.1F : 0.5F, 0.03F);
 		// animation += (time - preTime) * speed / 1000.0;
 		double animation = animationProgress * speed / 20;
 		float angle = (float) Math.sin(animation) * maxAngle * 0.3F;
 		float start_angle = angle;
-		tail[0].yaw = angle;
+		tail[0].yRot = angle;
 		for (int i = 1; i < tail.length; i++) {
 			angle = (float) Math.atan(Math.sin(i * 1.7 + animation)) * maxAngle;
-			tail[i].roll = angle - start_angle;
+			tail[i].zRot = angle - start_angle;
 			start_angle += angle;
 		}
 
 		for (int i = 0; i < spikes.length; i++) {
 			float yaw = ((i & 1) == 0) ? (float) Math.toRadians(-50 + Math.sin(animation * 0.4 + i / 2) * 10) : (float) Math.toRadians(-110 - Math.sin(animation * 0.4 + i / 2) * 10);
-			spikes[i].yaw = yaw;
+			spikes[i].yRot = yaw;
 		}
 
 		// preTime = time;

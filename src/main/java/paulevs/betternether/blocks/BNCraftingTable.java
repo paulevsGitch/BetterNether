@@ -1,15 +1,15 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CraftingTableBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import paulevs.betternether.client.IRenderTypeable;
-
 import java.util.Collections;
 import java.util.List;
+
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CraftingTableBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
+import paulevs.betternether.client.IRenderTypeable;
 
 public class BNCraftingTable extends CraftingTableBlock implements IRenderTypeable {
 	public BNCraftingTable(Block block) {
@@ -17,7 +17,7 @@ public class BNCraftingTable extends CraftingTableBlock implements IRenderTypeab
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this.asItem()));
 	}
 

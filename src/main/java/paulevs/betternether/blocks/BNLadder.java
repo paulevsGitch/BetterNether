@@ -1,45 +1,49 @@
 package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 
 public class BNLadder extends BlockBaseNotFull {
-	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-	protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 3.0D, 16.0D, 16.0D);
-	protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(13.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-	protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 3.0D);
-	protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D);
+	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+	protected static final VoxelShape EAST_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 3.0D, 16.0D, 16.0D);
+	protected static final VoxelShape WEST_SHAPE = Block.box(13.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+	protected static final VoxelShape SOUTH_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 3.0D);
+	protected static final VoxelShape NORTH_SHAPE = Block.box(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D);
 
 	public BNLadder(Block block) {
-		super(FabricBlockSettings.copyOf(block).nonOpaque());
+		super(FabricBlockSettings.copyOf(block).noOcclusion());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING);
 		stateManager.add(WATERLOGGED);
 	}
 
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		switch (state.get(FACING)) {
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		switch (state.getValue(FACING)) {
 			case NORTH:
 				return NORTH_SHAPE;
 			case SOUTH:
@@ -52,54 +56,54 @@ public class BNLadder extends BlockBaseNotFull {
 		}
 	}
 
-	private boolean canPlaceOn(BlockView world, BlockPos pos, Direction side) {
+	private boolean canPlaceOn(BlockGetter world, BlockPos pos, Direction side) {
 		BlockState blockState = world.getBlockState(pos);
-		return !blockState.emitsRedstonePower() && blockState.isSideSolidFullSquare(world, pos, side);
+		return !blockState.isSignalSource() && blockState.isFaceSturdy(world, pos, side);
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		Direction direction = (Direction) state.get(FACING);
-		return this.canPlaceOn(world, pos.offset(direction.getOpposite()), direction);
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		Direction direction = (Direction) state.getValue(FACING);
+		return this.canPlaceOn(world, pos.relative(direction.getOpposite()), direction);
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (facing.getOpposite() == state.get(FACING) && !state.canPlaceAt(world, pos)) {
-			return Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (facing.getOpposite() == state.getValue(FACING) && !state.canSurvive(world, pos)) {
+			return Blocks.AIR.defaultBlockState();
 		}
 		else {
-			if ((Boolean) state.get(WATERLOGGED)) {
-				world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+			if ((Boolean) state.getValue(WATERLOGGED)) {
+				world.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
 			}
 
-			return super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos);
+			return super.updateShape(state, facing, neighborState, world, pos, neighborPos);
 		}
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
 		BlockState blockState2;
-		if (!ctx.canReplaceExisting()) {
-			blockState2 = ctx.getWorld().getBlockState(ctx.getBlockPos().offset(ctx.getSide().getOpposite()));
-			if (blockState2.getBlock() == this && blockState2.get(FACING) == ctx.getSide()) {
+		if (!ctx.replacingClickedOnBlock()) {
+			blockState2 = ctx.getLevel().getBlockState(ctx.getClickedPos().relative(ctx.getClickedFace().getOpposite()));
+			if (blockState2.getBlock() == this && blockState2.getValue(FACING) == ctx.getClickedFace()) {
 				return null;
 			}
 		}
 
-		blockState2 = this.getDefaultState();
-		WorldView worldView = ctx.getWorld();
-		BlockPos blockPos = ctx.getBlockPos();
-		FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-		Direction[] var6 = ctx.getPlacementDirections();
+		blockState2 = this.defaultBlockState();
+		LevelReader worldView = ctx.getLevel();
+		BlockPos blockPos = ctx.getClickedPos();
+		FluidState fluidState = ctx.getLevel().getFluidState(ctx.getClickedPos());
+		Direction[] var6 = ctx.getNearestLookingDirections();
 		int var7 = var6.length;
 
 		for (int var8 = 0; var8 < var7; ++var8) {
 			Direction direction = var6[var8];
 			if (direction.getAxis().isHorizontal()) {
-				blockState2 = (BlockState) blockState2.with(FACING, direction.getOpposite());
-				if (blockState2.canPlaceAt(worldView, blockPos)) {
-					return (BlockState) blockState2.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+				blockState2 = (BlockState) blockState2.setValue(FACING, direction.getOpposite());
+				if (blockState2.canSurvive(worldView, blockPos)) {
+					return (BlockState) blockState2.setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
 				}
 			}
 		}
@@ -108,17 +112,17 @@ public class BNLadder extends BlockBaseNotFull {
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
+	public BlockState rotate(BlockState state, Rotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror) {
+	public BlockState mirror(BlockState state, Mirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return (Boolean) state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+		return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 }

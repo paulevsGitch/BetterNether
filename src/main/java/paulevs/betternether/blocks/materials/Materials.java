@@ -2,50 +2,50 @@ package paulevs.betternether.blocks.materials;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.AbstractBlock.Settings;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
 public class Materials {
-	public static final Material COMMON_WOOD = new Material.Builder(MapColor.OAK_TAN).build();
-	public static final Material COMMON_GRASS = new Material.Builder(MapColor.DARK_GREEN).allowsMovement().notSolid().replaceable().build();
-	public static final Material COMMON_LEAVES = new Material.Builder(MapColor.DARK_GREEN).notSolid().build();
+	public static final Material COMMON_WOOD = new Material.Builder(MaterialColor.WOOD).build();
+	public static final Material COMMON_GRASS = new Material.Builder(MaterialColor.PLANT).noCollider().nonSolid().replaceable().build();
+	public static final Material COMMON_LEAVES = new Material.Builder(MaterialColor.PLANT).nonSolid().build();
 
-	public static FabricBlockSettings makeWood(MapColor color) {
+	public static FabricBlockSettings makeWood(MaterialColor color) {
 		return FabricBlockSettings.of(Material.NETHER_WOOD)
-				.sounds(BlockSoundGroup.WOOD)
+				.sound(SoundType.WOOD)
 				.breakByTool(FabricToolTags.AXES)
-				.hardness(1)
+				.destroyTime(1)
 				.materialColor(color);
 	}
 
-	public static FabricBlockSettings makeGrass(MapColor color) {
+	public static FabricBlockSettings makeGrass(MaterialColor color) {
 		return FabricBlockSettings.of(COMMON_GRASS)
-				.allowsSpawning((state, world, pos, type) -> {
+				.isValidSpawn((state, world, pos, type) -> {
 					return true;
 				})
-				.sounds(BlockSoundGroup.GRASS)
+				.sound(SoundType.GRASS)
 				.materialColor(color)
-				.noCollision()
-				.nonOpaque()
-				.breakInstantly();
+				.noCollission()
+				.noOcclusion()
+				.instabreak();
 	}
 
-	public static Settings makeLeaves(MapColor color) {
+	public static Properties makeLeaves(MaterialColor color) {
 		return FabricBlockSettings.of(COMMON_LEAVES, color)
 				.breakByHand(true)
 				.breakByTool(FabricToolTags.SHEARS)
-				.sounds(BlockSoundGroup.GRASS)
-				.nonOpaque()
+				.sound(SoundType.GRASS)
+				.noOcclusion()
 				.strength(0.2F)
-				.allowsSpawning((state, world, pos, type) -> {
+				.isValidSpawn((state, world, pos, type) -> {
 					return false;
 				})
-				.suffocates((state, worls, pos) -> {
+				.isSuffocating((state, worls, pos) -> {
 					return false;
 				})
-				.blockVision((state, worls, pos) -> {
+				.isViewBlocking((state, worls, pos) -> {
 					return false;
 				});
 	}

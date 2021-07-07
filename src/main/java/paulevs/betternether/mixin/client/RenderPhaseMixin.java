@@ -1,19 +1,19 @@
 package paulevs.betternether.mixin.client;
 
-import net.minecraft.client.render.RenderPhase;
+import net.minecraft.client.renderer.RenderStateShard;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(RenderPhase.class)
+@Mixin(RenderStateShard.class)
 public class RenderPhaseMixin {
 	@Shadow
 	@Final
-	protected static RenderPhase.Transparency TRANSLUCENT_TRANSPARENCY;
+	protected static RenderStateShard.TransparencyStateShard TRANSLUCENT_TRANSPARENCY;
 
 	@Shadow
 	@Final
-	protected static RenderPhase.WriteMaskState COLOR_MASK;
+	protected static RenderStateShard.WriteMaskStateShard COLOR_MASK;
 
 	/*@Shadow
 	@Final
@@ -21,15 +21,15 @@ public class RenderPhaseMixin {
 
 	@Shadow
 	@Final
-	protected static RenderPhase.DepthTest LEQUAL_DEPTH_TEST;
+	protected static RenderStateShard.DepthTestStateShard LEQUAL_DEPTH_TEST;
 
 	@Shadow
 	@Final
-	protected static RenderPhase.Layering POLYGON_OFFSET_LAYERING;
+	protected static RenderStateShard.LayeringStateShard POLYGON_OFFSET_LAYERING;
 
 	@Shadow
 	@Final
-	protected static RenderPhase.Target CLOUDS_TARGET;
+	protected static RenderStateShard.OutputStateShard CLOUDS_TARGET;
 
 	static {
 

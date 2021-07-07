@@ -1,16 +1,15 @@
 package paulevs.betternether.world;
 
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.gen.ChunkRandom;
+import java.util.HashMap;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
-import java.util.HashMap;
-
 public class BiomeMap {
 	private static final HashMap<ChunkPos, BiomeChunk> MAPS = new HashMap<ChunkPos, BiomeChunk>();
-	private static final ChunkRandom RANDOM = new ChunkRandom();
+	private static final WorldgenRandom RANDOM = new WorldgenRandom();
 
 	private final int sizeXZ;
 	private final int sizeY;
@@ -77,12 +76,12 @@ public class BiomeMap {
 				(int) Math.floor((double) z / BiomeChunk.WIDTH));
 		BiomeChunk chunk = MAPS.get(cpos);
 		if (chunk == null) {
-			RANDOM.setTerrainSeed(cpos.x, cpos.z);
+			RANDOM.setBaseChunkSeed(cpos.x, cpos.z);
 			chunk = new BiomeChunk(this, RANDOM);
 			MAPS.put(cpos, chunk);
 		}
 
-		return chunk.getBiome((int) x, MathHelper.clamp((int) y, 0, maxHeight - 1), (int) z);
+		return chunk.getBiome((int) x, Mth.clamp((int) y, 0, maxHeight - 1), (int) z);
 	}
 
 	public NetherBiome getBiome(int x, int y, int z) {

@@ -1,49 +1,48 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureSmoker implements IStructure {
-	private Mutable npos = new Mutable();
+	private MutableBlockPos npos = new MutableBlockPos();
 
-	private boolean canPlaceAt(ServerWorldAccess world, BlockPos pos) {
-		return BlocksHelper.isNetherGround(world.getBlockState(pos.down()));
+	private boolean canPlaceAt(ServerLevelAccessor world, BlockPos pos) {
+		return BlocksHelper.isNetherGround(world.getBlockState(pos.below()));
 	}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		if (canPlaceAt(world, pos)) {
-			BlockState top = BlocksRegistry.SMOKER.getDefaultState();
-			BlockState middle = BlocksRegistry.SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.MIDDLE);
-			BlockState bottom = BlocksRegistry.SMOKER.getDefaultState().with(BlockSmoker.SHAPE, TripleShape.BOTTOM);
+			BlockState top = BlocksRegistry.SMOKER.defaultBlockState();
+			BlockState middle = BlocksRegistry.SMOKER.defaultBlockState().setValue(BlockSmoker.SHAPE, TripleShape.MIDDLE);
+			BlockState bottom = BlocksRegistry.SMOKER.defaultBlockState().setValue(BlockSmoker.SHAPE, TripleShape.BOTTOM);
 			for (int i = 0; i < 8; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
 				int y = pos.getY() + random.nextInt(6);
 				for (int j = 0; j < 6; j++) {
 					npos.set(x, y - j, z);
-					if (world.isAir(npos) && canPlaceAt(world, npos)) {
+					if (world.isEmptyBlock(npos) && canPlaceAt(world, npos)) {
 						int h = random.nextInt(5);
 						BlocksHelper.setWithoutUpdate(world, npos, bottom);
 						for (int n = 1; n < h; n++) {
-							BlockPos up = npos.up(n);
-							if (world.isAir(up.up()))
+							BlockPos up = npos.above(n);
+							if (world.isEmptyBlock(up.above()))
 								BlocksHelper.setWithoutUpdate(world, up, middle);
 							else {
 								BlocksHelper.setWithoutUpdate(world, up, top);
 								return;
 							}
 						}
-						BlocksHelper.setWithoutUpdate(world, npos.up(h), top);
+						BlocksHelper.setWithoutUpdate(world, npos.above(h), top);
 						break;
 					}
 				}

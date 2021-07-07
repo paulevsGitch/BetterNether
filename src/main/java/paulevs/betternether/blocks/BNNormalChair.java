@@ -1,104 +1,103 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import paulevs.betternether.BlocksHelper;
-
 import java.util.Collections;
 import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import paulevs.betternether.BlocksHelper;
 
 public class BNNormalChair extends BNChair {
-	private static final VoxelShape SHAPE_BOTTOM = Block.createCuboidShape(3, 0, 3, 13, 16, 13);
-	private static final VoxelShape SHAPE_TOP = Block.createCuboidShape(3, 0, 3, 13, 6, 13);
-	private static final VoxelShape COLLIDER = Block.createCuboidShape(3, 0, 3, 13, 10, 13);
-	public static final BooleanProperty TOP = BooleanProperty.of("top");
+	private static final VoxelShape SHAPE_BOTTOM = Block.box(3, 0, 3, 13, 16, 13);
+	private static final VoxelShape SHAPE_TOP = Block.box(3, 0, 3, 13, 6, 13);
+	private static final VoxelShape COLLIDER = Block.box(3, 0, 3, 13, 10, 13);
+	public static final BooleanProperty TOP = BooleanProperty.create("top");
 
 	public BNNormalChair(Block block) {
 		super(block, 10);
-		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(TOP, false));
+		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false));
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING, TOP);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return state.get(TOP) ? SHAPE_TOP : SHAPE_BOTTOM;
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return state.getValue(TOP) ? SHAPE_TOP : SHAPE_BOTTOM;
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return state.get(TOP) ? VoxelShapes.empty() : COLLIDER;
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return state.getValue(TOP) ? Shapes.empty() : COLLIDER;
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		if (state.get(TOP))
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		if (state.getValue(TOP))
 			return true;
-		BlockState up = world.getBlockState(pos.up());
-		return up.isAir() || (up.getBlock() == this && up.get(TOP));
+		BlockState up = world.getBlockState(pos.above());
+		return up.isAir() || (up.getBlock() == this && up.getValue(TOP));
 	}
 
 	@Override
-	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-		if (!world.isClient())
-			BlocksHelper.setWithUpdate((ServerWorld) world, pos.up(), state.with(TOP, true));
+	public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+		if (!world.isClientSide())
+			BlocksHelper.setWithUpdate((ServerLevel) world, pos.above(), state.setValue(TOP, true));
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (state.get(TOP)) {
-			return world.getBlockState(pos.down()).getBlock() == this ? state : Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (state.getValue(TOP)) {
+			return world.getBlockState(pos.below()).getBlock() == this ? state : Blocks.AIR.defaultBlockState();
 		}
 		else {
-			return world.getBlockState(pos.up()).getBlock() == this ? state : Blocks.AIR.getDefaultState();
+			return world.getBlockState(pos.above()).getBlock() == this ? state : Blocks.AIR.defaultBlockState();
 		}
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
-		if (!state.get(TOP))
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+		if (!state.getValue(TOP))
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		else
 			return Collections.emptyList();
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (state.get(TOP)) {
-			pos = pos.down();
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (state.getValue(TOP)) {
+			pos = pos.below();
 			state = world.getBlockState(pos);
 		}
-		return super.onUse(state, world, pos, player, hand, hit);
+		return super.use(state, world, pos, player, hand, hit);
 	}
 
 	@Override
-	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (player.isCreative() && state.get(TOP) && world.getBlockState(pos.down()).getBlock() == this) {
-			world.setBlockState(pos.down(), Blocks.AIR.getDefaultState());
+	public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+		if (player.isCreative() && state.getValue(TOP) && world.getBlockState(pos.below()).getBlock() == this) {
+			world.setBlockAndUpdate(pos.below(), Blocks.AIR.defaultBlockState());
 		}
-		super.onBreak(world, pos, state, player);
+		super.playerWillDestroy(world, pos, state, player);
 	}
 }

@@ -2,8 +2,8 @@ package paulevs.betternether.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Registry;
 import paulevs.betternether.blocks.BNRenderLayer;
 import paulevs.betternether.registry.BlockEntityRenderRegistry;
 import paulevs.betternether.registry.EntityRenderRegistry;
@@ -17,8 +17,8 @@ public class BetterNetherClient implements ClientModInitializer {
 	}
 
 	private void registerRenderLayers() {
-		RenderLayer cutout = RenderLayer.getCutout();
-		RenderLayer translucent = RenderLayer.getTranslucent();
+		RenderType cutout = RenderType.cutout();
+		RenderType translucent = RenderType.translucent();
 		Registry.BLOCK.forEach(block -> {
 			if (block instanceof IRenderTypeable) {
 				BNRenderLayer layer = ((IRenderTypeable) block).getRenderLayer();

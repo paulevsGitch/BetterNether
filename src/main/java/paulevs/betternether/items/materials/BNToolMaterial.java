@@ -1,18 +1,18 @@
 package paulevs.betternether.items.materials;
 
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 
-public class BNToolMaterial implements ToolMaterial {
+public class BNToolMaterial implements Tier {
 	private final int durability;
 	private final float speed;
 	private final int level;
 	private final int enchantibility;
 	private final float damage;
-	private final ItemConvertible reapair;
+	private final ItemLike reapair;
 
-	public BNToolMaterial(int durability, float speed, int level, int enchantibility, float damage, ItemConvertible reapair) {
+	public BNToolMaterial(int durability, float speed, int level, int enchantibility, float damage, ItemLike reapair) {
 		this.durability = durability;
 		this.speed = speed;
 		this.level = level;
@@ -22,32 +22,32 @@ public class BNToolMaterial implements ToolMaterial {
 	}
 
 	@Override
-	public int getDurability() {
+	public int getUses() {
 		return durability;
 	}
 
 	@Override
-	public float getMiningSpeedMultiplier() {
+	public float getSpeed() {
 		return speed;
 	}
 
 	@Override
-	public float getAttackDamage() {
+	public float getAttackDamageBonus() {
 		return damage;
 	}
 
 	@Override
-	public int getMiningLevel() {
+	public int getLevel() {
 		return level;
 	}
 
 	@Override
-	public int getEnchantability() {
+	public int getEnchantmentValue() {
 		return enchantibility;
 	}
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.ofItems(reapair);
+		return Ingredient.of(reapair);
 	}
 }

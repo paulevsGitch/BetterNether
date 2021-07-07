@@ -1,29 +1,28 @@
 package paulevs.betternether.world;
 
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.gen.ChunkRandom;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.StructureConfig;
-import paulevs.betternether.world.structures.CityFeature;
-
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
+import paulevs.betternether.world.structures.CityFeature;
 
 public class CityHelper {
 	private static final Set<ChunkPos> POSITIONS = new HashSet<ChunkPos>(16);
-	private static final Mutable POS = new Mutable();
+	private static final MutableBlockPos POS = new MutableBlockPos();
 
-	public static boolean stopStructGen(int chunkX, int chunkZ, ChunkGenerator chunkGenerator, long worldSeed, ChunkRandom chunkRandom) {
-		StructureConfig config = chunkGenerator.getStructuresConfig().getForType(BNWorldGenerator.CITY);
-		if (config != null && config.getSpacing() > 0) collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
+	public static boolean stopStructGen(int chunkX, int chunkZ, ChunkGenerator chunkGenerator, long worldSeed, WorldgenRandom chunkRandom) {
+		StructureFeatureConfiguration config = chunkGenerator.getSettings().getConfig(BNWorldGenerator.CITY);
+		if (config != null && config.spacing() > 0) collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
 		return stopGeneration(chunkX, chunkZ);
 	}
 
-	private static void collectNearby(int chunkX, int chunkZ, StructureConfig config, long worldSeed, ChunkRandom chunkRandom) {
+	private static void collectNearby(int chunkX, int chunkZ, StructureFeatureConfiguration config, long worldSeed, WorldgenRandom chunkRandom) {
 		int x1 = chunkX - 16;
 		int x2 = chunkX + 16;
 		int z1 = chunkZ - 16;
@@ -32,13 +31,13 @@ public class CityHelper {
 		POSITIONS.clear();
 		for (int x = x1; x <= x2; x += 8) {
 			for (int z = z1; z <= z2; z += 8) {
-				ChunkPos chunk = BNWorldGenerator.CITY.getStartChunk(config, worldSeed, chunkRandom, x, z);
+				ChunkPos chunk = BNWorldGenerator.CITY.getPotentialFeatureChunk(config, worldSeed, chunkRandom, x, z);
 				POSITIONS.add(chunk);
 			}
 		}
 	}
 	
-	private static void collectNearby(ServerWorld world, int chunkX, int chunkZ, StructureConfig config, long worldSeed, ChunkRandom chunkRandom) {
+	private static void collectNearby(ServerLevel world, int chunkX, int chunkZ, StructureFeatureConfiguration config, long worldSeed, WorldgenRandom chunkRandom) {
 		int x1 = chunkX - 16;
 		int x2 = chunkX + 16;
 		int z1 = chunkZ - 16;
@@ -50,8 +49,8 @@ public class CityHelper {
 			POS.setX(x << 4);
 			for (int z = z1; z <= z2; z += 8) {
 				POS.setZ(z << 4);
-				if (world.getBiome(POS).getGenerationSettings().hasStructureFeature(BNWorldGenerator.CITY)) {
-					ChunkPos chunk = BNWorldGenerator.CITY.getStartChunk(config, worldSeed, chunkRandom, x, z);
+				if (world.getBiome(POS).getGenerationSettings().isValidStart(BNWorldGenerator.CITY)) {
+					ChunkPos chunk = BNWorldGenerator.CITY.getPotentialFeatureChunk(config, worldSeed, chunkRandom, x, z);
 					POSITIONS.add(chunk);
 				}
 			}
@@ -72,15 +71,15 @@ public class CityHelper {
 		return (long) x * (long) x;
 	}
 
-	public static BlockPos getNearestCity(BlockPos pos, ServerWorld world) {
+	public static BlockPos getNearestCity(BlockPos pos, ServerLevel world) {
 		int cx = pos.getX() >> 4;
 		int cz = pos.getZ() >> 4;
 
-		StructureConfig config = world.getChunkManager().getChunkGenerator().getStructuresConfig().getForType(BNWorldGenerator.CITY);
-		if (config == null || config.getSpacing() < 1)
+		StructureFeatureConfiguration config = world.getChunkSource().getGenerator().getSettings().getConfig(BNWorldGenerator.CITY);
+		if (config == null || config.spacing() < 1)
 			return null;
 
-		collectNearby(world, cx, cz, config, world.getSeed(), new ChunkRandom());
+		collectNearby(world, cx, cz, config, world.getSeed(), new WorldgenRandom());
 		Iterator<ChunkPos> iterator = POSITIONS.iterator();
 		if (iterator.hasNext()) {
 			ChunkPos nearest = POSITIONS.iterator().next();
@@ -93,7 +92,7 @@ public class CityHelper {
 					nearest = n;
 				}
 			}
-			return nearest.getStartPos();
+			return nearest.getWorldPosition();
 		}
 		return null;
 	}

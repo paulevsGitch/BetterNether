@@ -1,42 +1,45 @@
 package paulevs.betternether.biomes;
 
+import java.util.List;
+import net.minecraft.core.Registry;
+import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.data.worldgen.Carvers;
+import net.minecraft.data.worldgen.Features;
+import net.minecraft.data.worldgen.StructureFeatures;
+import net.minecraft.data.worldgen.SurfaceBuilders;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.Musics;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.AmbientAdditionsSettings;
+import net.minecraft.world.level.biome.AmbientMoodSettings;
+import net.minecraft.world.level.biome.AmbientParticleSettings;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import net.minecraft.world.level.biome.Biome.Precipitation;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects.Builder;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import com.google.common.collect.Lists;
-import net.minecraft.client.sound.MusicType;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.sound.BiomeAdditionsSound;
-import net.minecraft.sound.BiomeMoodSound;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.Precipitation;
-import net.minecraft.world.biome.BiomeEffects.Builder;
-import net.minecraft.world.biome.BiomeParticleConfig;
-import net.minecraft.world.biome.GenerationSettings;
-import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.GenerationStep.Feature;
-import net.minecraft.world.gen.carver.ConfiguredCarvers;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.config.Configs;
-
-import java.util.List;
 
 public class BiomeDefinition {
 	private final List<ConfiguredStructureFeature<?, ?>> structures = Lists.newArrayList();
 	private final List<FeatureInfo> features = Lists.newArrayList();
 	private final List<SpawnInfo> mobs = Lists.newArrayList();
 
-	private BiomeParticleConfig particleConfig;
-	private BiomeAdditionsSound additions;
-	private BiomeMoodSound mood;
+	private AmbientParticleSettings particleConfig;
+	private AmbientAdditionsSettings additions;
+	private AmbientMoodSettings mood;
 	private SoundEvent music;
 	private SoundEvent loop;
 
@@ -51,13 +54,13 @@ public class BiomeDefinition {
 	private boolean stalactites = true;
 	private boolean bnStructures = true;
 
-	private final Identifier id;
+	private final ResourceLocation id;
 
 	public BiomeDefinition(String name) {
-		this.id = new Identifier(BetterNether.MOD_ID, name.replace(' ', '_').toLowerCase());
+		this.id = new ResourceLocation(BetterNether.MOD_ID, name.replace(' ', '_').toLowerCase());
 	}
 
-	public BiomeDefinition(Identifier id) {
+	public BiomeDefinition(ResourceLocation id) {
 		this.id = id;
 	}
 
@@ -121,7 +124,7 @@ public class BiomeDefinition {
 		return this;
 	}
 
-	public BiomeDefinition setParticleConfig(BiomeParticleConfig config) {
+	public BiomeDefinition setParticleConfig(AmbientParticleSettings config) {
 		this.particleConfig = config;
 		return this;
 	}
@@ -140,8 +143,8 @@ public class BiomeDefinition {
 	 * @return this {@link BiomeDefinition}
 	 */
 	public BiomeDefinition addMobSpawn(EntityType<?> type, int weight, int minGroupSize, int maxGroupSize) {
-		Identifier eID = Registry.ENTITY_TYPE.getId(type);
-		if (eID != Registry.ENTITY_TYPE.getDefaultId()) {
+		ResourceLocation eID = Registry.ENTITY_TYPE.getKey(type);
+		if (eID != Registry.ENTITY_TYPE.getDefaultKey()) {
 			String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".mobs." + eID.getNamespace() + "." + eID.getPath();
 			SpawnInfo info = new SpawnInfo();
 			info.type = type;
@@ -166,7 +169,7 @@ public class BiomeDefinition {
 		return this;
 	}
 
-	public BiomeDefinition addFeature(Feature featureStep, ConfiguredFeature<?, ?> feature) {
+	public BiomeDefinition addFeature(Decoration featureStep, ConfiguredFeature<?, ?> feature) {
 		FeatureInfo info = new FeatureInfo();
 		info.featureStep = featureStep;
 		info.feature = feature;
@@ -187,9 +190,9 @@ public class BiomeDefinition {
 	 */
 	public BiomeDefinition setFogColor(int r, int g, int b) {
 		String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".fog_color";
-		r = MathHelper.clamp(Configs.BIOMES.getInt(path, "red", r), 0, 255);
-		g = MathHelper.clamp(Configs.BIOMES.getInt(path, "green", g), 0, 255);
-		b = MathHelper.clamp(Configs.BIOMES.getInt(path, "blue", b), 0, 255);
+		r = Mth.clamp(Configs.BIOMES.getInt(path, "red", r), 0, 255);
+		g = Mth.clamp(Configs.BIOMES.getInt(path, "green", g), 0, 255);
+		b = Mth.clamp(Configs.BIOMES.getInt(path, "blue", b), 0, 255);
 		this.fogColor = MHelper.color(r, g, b);
 		return this;
 	}
@@ -207,9 +210,9 @@ public class BiomeDefinition {
 	 */
 	public BiomeDefinition setWaterColor(int r, int g, int b) {
 		String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".water_color";
-		r = MathHelper.clamp(Configs.BIOMES.getInt(path, "red", r), 0, 255);
-		g = MathHelper.clamp(Configs.BIOMES.getInt(path, "green", g), 0, 255);
-		b = MathHelper.clamp(Configs.BIOMES.getInt(path, "blue", b), 0, 255);
+		r = Mth.clamp(Configs.BIOMES.getInt(path, "red", r), 0, 255);
+		g = Mth.clamp(Configs.BIOMES.getInt(path, "green", g), 0, 255);
+		b = Mth.clamp(Configs.BIOMES.getInt(path, "blue", b), 0, 255);
 		this.waterColor = MHelper.color(r, g, b);
 		return this;
 	}
@@ -227,9 +230,9 @@ public class BiomeDefinition {
 	 */
 	public BiomeDefinition setWaterFogColor(int r, int g, int b) {
 		String path = "generator.biome." + id.getNamespace() + "." + id.getPath() + ".water_fog_color";
-		r = MathHelper.clamp(Configs.BIOMES.getInt(path, "red", r), 0, 255);
-		g = MathHelper.clamp(Configs.BIOMES.getInt(path, "green", g), 0, 255);
-		b = MathHelper.clamp(Configs.BIOMES.getInt(path, "blue", b), 0, 255);
+		r = Mth.clamp(Configs.BIOMES.getInt(path, "red", r), 0, 255);
+		g = Mth.clamp(Configs.BIOMES.getInt(path, "green", g), 0, 255);
+		b = Mth.clamp(Configs.BIOMES.getInt(path, "blue", b), 0, 255);
 		this.waterFogColor = MHelper.color(r, g, b);
 		return this;
 	}
@@ -254,7 +257,7 @@ public class BiomeDefinition {
 	 * @return this {@link BiomeDefinition}
 	 */
 	public BiomeDefinition setMood(SoundEvent mood) {
-		this.mood = new BiomeMoodSound(mood, 6000, 8, 2.0D);
+		this.mood = new AmbientMoodSettings(mood, 6000, 8, 2.0D);
 		return this;
 	}
 
@@ -267,7 +270,7 @@ public class BiomeDefinition {
 	 * @return this BiomeDefenition
 	 */
 	public BiomeDefinition setAdditions(SoundEvent additions) {
-		this.additions = new BiomeAdditionsSound(additions, 0.0111);
+		this.additions = new AmbientAdditionsSettings(additions, 0.0111);
 		return this;
 	}
 
@@ -283,71 +286,71 @@ public class BiomeDefinition {
 	}
 
 	public Biome build() {
-		SpawnSettings.Builder spawnSettings = new SpawnSettings.Builder();
-		GenerationSettings.Builder generationSettings = new GenerationSettings.Builder();
+		MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
+		BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder();
 		Builder effects = new Builder();
 
 		if (defaultMobs) addDefaultMobs(spawnSettings);
 		mobs.forEach((spawn) -> {
-			spawnSettings.spawn(spawn.type.getSpawnGroup(), new SpawnSettings.SpawnEntry(spawn.type, spawn.weight, spawn.minGroupSize, spawn.maxGroupSize));
+			spawnSettings.addSpawn(spawn.type.getCategory(), new MobSpawnSettings.SpawnerData(spawn.type, spawn.weight, spawn.minGroupSize, spawn.maxGroupSize));
 		});
 
-		generationSettings.surfaceBuilder(ConfiguredSurfaceBuilders.NETHER);
-		structures.forEach((structure) -> generationSettings.structureFeature(structure));
-		features.forEach((info) -> generationSettings.feature(info.featureStep, info.feature));
-		if (defaultOres) DefaultBiomeFeatures.addNetherMineables(generationSettings);
+		generationSettings.surfaceBuilder(SurfaceBuilders.NETHER);
+		structures.forEach((structure) -> generationSettings.addStructureStart(structure));
+		features.forEach((info) -> generationSettings.addFeature(info.featureStep, info.feature));
+		if (defaultOres) BiomeDefaultFeatures.addNetherDefaultOres(generationSettings);
 		if (defaultStructureFeatures) addDefaultStructures(generationSettings);
 		if (defaultFeatures) addDefaultFeatures(generationSettings);
 
 		effects.skyColor(fogColor).waterColor(waterColor).waterFogColor(waterFogColor).fogColor(fogColor);
-		if (loop != null) effects.loopSound(loop);
-		if (mood != null) effects.moodSound(mood);
-		if (additions != null) effects.additionsSound(additions);
-		if (particleConfig != null) effects.particleConfig(particleConfig);
-		effects.music(MusicType.createIngameMusic(music != null ? music : SoundEvents.MUSIC_NETHER_NETHER_WASTES));
+		if (loop != null) effects.ambientLoopSound(loop);
+		if (mood != null) effects.ambientMoodSound(mood);
+		if (additions != null) effects.ambientAdditionsSound(additions);
+		if (particleConfig != null) effects.ambientParticle(particleConfig);
+		effects.backgroundMusic(Musics.createGameMusic(music != null ? music : SoundEvents.MUSIC_BIOME_NETHER_WASTES));
 
-		return new Biome.Builder()
+		return new Biome.BiomeBuilder()
 				.precipitation(Precipitation.NONE)
-				.category(Category.NETHER)
+				.biomeCategory(BiomeCategory.NETHER)
 				.depth(0.1F)
 				.scale(0.2F)
 				.temperature(2.0F)
 				.downfall(0.0F)
-				.effects(effects.build())
-				.spawnSettings(spawnSettings.build())
+				.specialEffects(effects.build())
+				.mobSpawnSettings(spawnSettings.build())
 				.generationSettings(generationSettings.build())
 				.build();
 	}
 
-	private void addDefaultStructures(GenerationSettings.Builder generationSettings) {
-		generationSettings.structureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER);
-		generationSettings.structureFeature(ConfiguredStructureFeatures.FORTRESS);
-		generationSettings.structureFeature(ConfiguredStructureFeatures.BASTION_REMNANT);
-		generationSettings.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE);
-		generationSettings.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SPRING_LAVA);
+	private void addDefaultStructures(BiomeGenerationSettings.Builder generationSettings) {
+		generationSettings.addStructureStart(StructureFeatures.RUINED_PORTAL_NETHER);
+		generationSettings.addStructureStart(StructureFeatures.NETHER_BRIDGE);
+		generationSettings.addStructureStart(StructureFeatures.BASTION_REMNANT);
+		generationSettings.addCarver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
+		generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.SPRING_LAVA);
 	}
 
-	private void addDefaultFeatures(GenerationSettings.Builder generationSettings) {
-		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_OPEN);
-		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_FIRE);
-		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_SOUL_FIRE);
-		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE_EXTRA);
-		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE);
-		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.BROWN_MUSHROOM_NETHER);
-		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.RED_MUSHROOM_NETHER);
-		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.ORE_MAGMA);
-		generationSettings.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_CLOSED);
-		DefaultBiomeFeatures.addDefaultMushrooms(generationSettings);
-		DefaultBiomeFeatures.addNetherMineables(generationSettings);
+	private void addDefaultFeatures(BiomeGenerationSettings.Builder generationSettings) {
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.SPRING_OPEN);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.PATCH_FIRE);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.PATCH_SOUL_FIRE);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.GLOWSTONE_EXTRA);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.GLOWSTONE);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.BROWN_MUSHROOM_NETHER);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.RED_MUSHROOM_NETHER);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.ORE_MAGMA);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.SPRING_CLOSED);
+		BiomeDefaultFeatures.addDefaultMushrooms(generationSettings);
+		BiomeDefaultFeatures.addNetherDefaultOres(generationSettings);
 	}
 
-	private void addDefaultMobs(SpawnSettings.Builder spawnSettings) {
-		spawnSettings.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GHAST, 50, 4, 4));
-		spawnSettings.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIFIED_PIGLIN, 100, 4, 4));
-		spawnSettings.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.MAGMA_CUBE, 2, 4, 4));
-		spawnSettings.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
-		spawnSettings.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
-		spawnSettings.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
+	private void addDefaultMobs(MobSpawnSettings.Builder spawnSettings) {
+		spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.GHAST, 50, 4, 4));
+		spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ZOMBIFIED_PIGLIN, 100, 4, 4));
+		spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.MAGMA_CUBE, 2, 4, 4));
+		spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 1, 4, 4));
+		spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.PIGLIN, 15, 4, 4));
+		spawnSettings.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.STRIDER, 60, 1, 2));
 	}
 
 	private static final class SpawnInfo {
@@ -358,11 +361,11 @@ public class BiomeDefinition {
 	}
 
 	private static final class FeatureInfo {
-		Feature featureStep;
+		Decoration featureStep;
 		ConfiguredFeature<?, ?> feature;
 	}
 
-	public Identifier getID() {
+	public ResourceLocation getID() {
 		return id;
 	}
 

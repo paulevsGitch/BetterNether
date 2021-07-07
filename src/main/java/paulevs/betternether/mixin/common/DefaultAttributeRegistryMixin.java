@@ -1,20 +1,20 @@
 package paulevs.betternether.mixin.common;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.DefaultAttributeRegistry;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.betternether.registry.EntityRegistry;
 
-@Mixin(DefaultAttributeRegistry.class)
+@Mixin(DefaultAttributes.class)
 public class DefaultAttributeRegistryMixin {
 	@Inject(method = "get", at = @At("HEAD"), cancellable = true)
-	private static void getAttribute(EntityType<? extends LivingEntity> type, CallbackInfoReturnable<DefaultAttributeContainer> info) {
-		DefaultAttributeContainer container = EntityRegistry.ATTRIBUTES.get(type);
+	private static void getAttribute(EntityType<? extends LivingEntity> type, CallbackInfoReturnable<AttributeSupplier> info) {
+		AttributeSupplier container = EntityRegistry.ATTRIBUTES.get(type);
 		if (container != null) {
 			info.setReturnValue(container);
 			info.cancel();

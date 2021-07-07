@@ -1,18 +1,141 @@
 package paulevs.betternether.registry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.PressurePlateBlock.ActivationRule;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.PressurePlateBlock.Sensitivity;
+import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.blocks.*;
+import paulevs.betternether.blocks.BNBarStool;
+import paulevs.betternether.blocks.BNBarrel;
+import paulevs.betternether.blocks.BNBoneBlock;
+import paulevs.betternether.blocks.BNBrewingStand;
+import paulevs.betternether.blocks.BNButton;
+import paulevs.betternether.blocks.BNChain;
+import paulevs.betternether.blocks.BNChest;
+import paulevs.betternether.blocks.BNCraftingTable;
+import paulevs.betternether.blocks.BNDoor;
+import paulevs.betternether.blocks.BNFence;
+import paulevs.betternether.blocks.BNGate;
+import paulevs.betternether.blocks.BNGlass;
+import paulevs.betternether.blocks.BNLadder;
+import paulevs.betternether.blocks.BNLogStripable;
+import paulevs.betternether.blocks.BNNetherBrick;
+import paulevs.betternether.blocks.BNNormalChair;
+import paulevs.betternether.blocks.BNObsidian;
+import paulevs.betternether.blocks.BNPane;
+import paulevs.betternether.blocks.BNPillar;
+import paulevs.betternether.blocks.BNPlanks;
+import paulevs.betternether.blocks.BNPlate;
+import paulevs.betternether.blocks.BNSign;
+import paulevs.betternether.blocks.BNSlab;
+import paulevs.betternether.blocks.BNStairs;
+import paulevs.betternether.blocks.BNTaburet;
+import paulevs.betternether.blocks.BNTrapdoor;
+import paulevs.betternether.blocks.BNWall;
+import paulevs.betternether.blocks.BlockAgave;
+import paulevs.betternether.blocks.BlockAnchorTreeLeaves;
+import paulevs.betternether.blocks.BlockAnchorTreeSapling;
+import paulevs.betternether.blocks.BlockAnchorTreeVine;
+import paulevs.betternether.blocks.BlockBNPot;
+import paulevs.betternether.blocks.BlockBarrelCactus;
+import paulevs.betternether.blocks.BlockBase;
+import paulevs.betternether.blocks.BlockBlackApple;
+import paulevs.betternether.blocks.BlockBlackAppleSeed;
+import paulevs.betternether.blocks.BlockBlackBush;
+import paulevs.betternether.blocks.BlockBlackVine;
+import paulevs.betternether.blocks.BlockBoneMushroom;
+import paulevs.betternether.blocks.BlockBrownLargeMushroom;
+import paulevs.betternether.blocks.BlockChestOfDrawers;
+import paulevs.betternether.blocks.BlockCincinnasitPillar;
+import paulevs.betternether.blocks.BlockCincinnasite;
+import paulevs.betternether.blocks.BlockCincinnasiteAnvil;
+import paulevs.betternether.blocks.BlockCincinnasiteForge;
+import paulevs.betternether.blocks.BlockCincinnasiteFrame;
+import paulevs.betternether.blocks.BlockCincinnasiteLantern;
+import paulevs.betternether.blocks.BlockCincinnasitePedestal;
+import paulevs.betternether.blocks.BlockEggPlant;
+import paulevs.betternether.blocks.BlockEyeSeed;
+import paulevs.betternether.blocks.BlockEyeVine;
+import paulevs.betternether.blocks.BlockEyeball;
+import paulevs.betternether.blocks.BlockEyeballSmall;
+import paulevs.betternether.blocks.BlockFarmland;
+import paulevs.betternether.blocks.BlockFeatherFern;
+import paulevs.betternether.blocks.BlockFireBowl;
+import paulevs.betternether.blocks.BlockGeyser;
+import paulevs.betternether.blocks.BlockGiantLucis;
+import paulevs.betternether.blocks.BlockGiantMold;
+import paulevs.betternether.blocks.BlockGiantMoldSapling;
+import paulevs.betternether.blocks.BlockGoldenVine;
+import paulevs.betternether.blocks.BlockGrayMold;
+import paulevs.betternether.blocks.BlockHookMushroom;
+import paulevs.betternether.blocks.BlockInkBush;
+import paulevs.betternether.blocks.BlockInkBushSeed;
+import paulevs.betternether.blocks.BlockJellyfishMushroom;
+import paulevs.betternether.blocks.BlockJellyfishMushroomSapling;
+import paulevs.betternether.blocks.BlockLucisMushroom;
+import paulevs.betternether.blocks.BlockLucisSpore;
+import paulevs.betternether.blocks.BlockLumabusSeed;
+import paulevs.betternether.blocks.BlockLumabusVine;
+import paulevs.betternether.blocks.BlockMagmaFlower;
+import paulevs.betternether.blocks.BlockMossCover;
+import paulevs.betternether.blocks.BlockMushroomFir;
+import paulevs.betternether.blocks.BlockMushroomFirSapling;
+import paulevs.betternether.blocks.BlockNeonEquisetum;
+import paulevs.betternether.blocks.BlockNetherCactus;
+import paulevs.betternether.blocks.BlockNetherFurnace;
+import paulevs.betternether.blocks.BlockNetherGrass;
+import paulevs.betternether.blocks.BlockNetherMycelium;
+import paulevs.betternether.blocks.BlockNetherReed;
+import paulevs.betternether.blocks.BlockNetherRuby;
+import paulevs.betternether.blocks.BlockNetherSakuraLeaves;
+import paulevs.betternether.blocks.BlockNetherSakuraSapling;
+import paulevs.betternether.blocks.BlockObsidianGlass;
+import paulevs.betternether.blocks.BlockOrangeMushroom;
+import paulevs.betternether.blocks.BlockOre;
+import paulevs.betternether.blocks.BlockPlantWall;
+import paulevs.betternether.blocks.BlockPottedPlant;
+import paulevs.betternether.blocks.BlockRedLargeMushroom;
+import paulevs.betternether.blocks.BlockRedMold;
+import paulevs.betternether.blocks.BlockReedsBlock;
+import paulevs.betternether.blocks.BlockRubeusCone;
+import paulevs.betternether.blocks.BlockRubeusLeaves;
+import paulevs.betternether.blocks.BlockRubeusSapling;
+import paulevs.betternether.blocks.BlockSmallLantern;
+import paulevs.betternether.blocks.BlockSmoker;
+import paulevs.betternether.blocks.BlockSoulGrass;
+import paulevs.betternether.blocks.BlockSoulLily;
+import paulevs.betternether.blocks.BlockSoulLilySapling;
+import paulevs.betternether.blocks.BlockSoulSandstone;
+import paulevs.betternether.blocks.BlockSoulVein;
+import paulevs.betternether.blocks.BlockStalactite;
+import paulevs.betternether.blocks.BlockStalagnate;
+import paulevs.betternether.blocks.BlockStalagnateBowl;
+import paulevs.betternether.blocks.BlockStalagnateSeed;
+import paulevs.betternether.blocks.BlockStatueRespawner;
+import paulevs.betternether.blocks.BlockStem;
+import paulevs.betternether.blocks.BlockTerrain;
+import paulevs.betternether.blocks.BlockVeinedSand;
+import paulevs.betternether.blocks.BlockWartRoots;
+import paulevs.betternether.blocks.BlockWartSeed;
+import paulevs.betternether.blocks.BlockWhisperingGourd;
+import paulevs.betternether.blocks.BlockWhisperingGourdLantern;
+import paulevs.betternether.blocks.BlockWhisperingGourdVine;
+import paulevs.betternether.blocks.BlockWillowBranch;
+import paulevs.betternether.blocks.BlockWillowLeaves;
+import paulevs.betternether.blocks.BlockWillowSapling;
+import paulevs.betternether.blocks.BlockWillowTorch;
+import paulevs.betternether.blocks.BlockWillowTrunk;
+import paulevs.betternether.blocks.RubeusLog;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.blocks.complex.WoodenMaterial;
 import paulevs.betternether.config.Configs;
@@ -21,21 +144,18 @@ import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.structures.plants.StructureLumabusVine;
 import paulevs.betternether.tab.CreativeTab;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BlocksRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
 
 	// Stalagnate //
 	public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
-	public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStem(MapColor.TERRACOTTA_LIME));
+	public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStem(MaterialColor.TERRACOTTA_LIGHT_GREEN));
 	public static final Block STALAGNATE_SEED = registerBlock("stalagnate_seed", new BlockStalagnateSeed());
-	public static final Block STRIPED_LOG_STALAGNATE = registerBlock("striped_log_stalagnate", new BNPillar(MapColor.TERRACOTTA_LIME));
-	public static final Block STRIPED_BARK_STALAGNATE = registerBlock("striped_bark_stalagnate", new BNPillar(MapColor.TERRACOTTA_LIME));
-	public static final Block STALAGNATE_LOG = registerLog("stalagnate_log", new BNLogStripable(MapColor.TERRACOTTA_LIME, STRIPED_LOG_STALAGNATE), STALAGNATE_STEM);
-	public static final Block STALAGNATE_BARK = registerBark("stalagnate_bark", new BNLogStripable(MapColor.TERRACOTTA_LIME, STRIPED_BARK_STALAGNATE), STALAGNATE_LOG);
-	public static final Block STALAGNATE_PLANKS = registerPlanks("stalagnate_planks", new BNPlanks(MapColor.TERRACOTTA_LIME), 1, STALAGNATE_STEM, STALAGNATE_LOG, STALAGNATE_BARK, STRIPED_LOG_STALAGNATE, STRIPED_BARK_STALAGNATE);
+	public static final Block STRIPED_LOG_STALAGNATE = registerBlock("striped_log_stalagnate", new BNPillar(MaterialColor.TERRACOTTA_LIGHT_GREEN));
+	public static final Block STRIPED_BARK_STALAGNATE = registerBlock("striped_bark_stalagnate", new BNPillar(MaterialColor.TERRACOTTA_LIGHT_GREEN));
+	public static final Block STALAGNATE_LOG = registerLog("stalagnate_log", new BNLogStripable(MaterialColor.TERRACOTTA_LIGHT_GREEN, STRIPED_LOG_STALAGNATE), STALAGNATE_STEM);
+	public static final Block STALAGNATE_BARK = registerBark("stalagnate_bark", new BNLogStripable(MaterialColor.TERRACOTTA_LIGHT_GREEN, STRIPED_BARK_STALAGNATE), STALAGNATE_LOG);
+	public static final Block STALAGNATE_PLANKS = registerPlanks("stalagnate_planks", new BNPlanks(MaterialColor.TERRACOTTA_LIGHT_GREEN), 1, STALAGNATE_STEM, STALAGNATE_LOG, STALAGNATE_BARK, STRIPED_LOG_STALAGNATE, STRIPED_BARK_STALAGNATE);
 	public static final Block STALAGNATE_STAIRS = registerStairs("stalagnate_planks_stairs", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_SLAB = registerSlab("stalagnate_planks_slab", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_FENCE = registerFence("stalagnate_planks_fence", STALAGNATE_PLANKS);
@@ -68,7 +188,7 @@ public class BlocksRegistry {
 	public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED);
 	public static final Block CINCINNASITE_SLAB = registerSlab("cincinnasite_slab", CINCINNASITE_FORGED);
 	public static final Block CINCINNASITE_BUTTON = registerBlock("cincinnasite_button", new BNButton(CINCINNASITE_FORGED));
-	public static final Block CINCINNASITE_PLATE = registerPlate("cincinnasite_plate", CINCINNASITE_FORGED, ActivationRule.MOBS);
+	public static final Block CINCINNASITE_PLATE = registerPlate("cincinnasite_plate", CINCINNASITE_FORGED, Sensitivity.MOBS);
 	public static final Block CINCINNASITE_LANTERN = registerBlock("cincinnasite_lantern", new BlockCincinnasiteLantern());
 	public static final Block CINCINNASITE_TILE_LARGE = registerBlock("cincinnasite_tile_large", new BlockCincinnasite());
 	public static final Block CINCINNASITE_TILE_SMALL = registerBlock("cincinnasite_tile_small", new BlockCincinnasite());
@@ -168,12 +288,12 @@ public class BlocksRegistry {
 	public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());
 	public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BlockWillowLeaves());
 	public static final Block WILLOW_TRUNK = registerBlockNI("willow_trunk", new BlockWillowTrunk());
-	public static final Block STRIPED_LOG_WILLOW = registerBlock("striped_log_willow", new BNPillar(MapColor.PINK));
-	public static final Block STRIPED_BARK_WILLOW = registerBlock("striped_bark_willow", new BNPillar(MapColor.PINK));
-	public static final Block WILLOW_LOG = registerBlock("willow_log", new BNLogStripable(MapColor.TERRACOTTA_RED, STRIPED_LOG_WILLOW));
-	public static final Block WILLOW_BARK = registerBark("willow_bark", new BNLogStripable(MapColor.TERRACOTTA_RED, STRIPED_BARK_WILLOW), WILLOW_LOG);
+	public static final Block STRIPED_LOG_WILLOW = registerBlock("striped_log_willow", new BNPillar(MaterialColor.COLOR_PINK));
+	public static final Block STRIPED_BARK_WILLOW = registerBlock("striped_bark_willow", new BNPillar(MaterialColor.COLOR_PINK));
+	public static final Block WILLOW_LOG = registerBlock("willow_log", new BNLogStripable(MaterialColor.TERRACOTTA_RED, STRIPED_LOG_WILLOW));
+	public static final Block WILLOW_BARK = registerBark("willow_bark", new BNLogStripable(MaterialColor.TERRACOTTA_RED, STRIPED_BARK_WILLOW), WILLOW_LOG);
 	public static final Block WILLOW_SAPLING = registerBlock("willow_sapling", new BlockWillowSapling());
-	public static final Block WILLOW_PLANKS = registerPlanks("willow_planks", new BNPlanks(MapColor.TERRACOTTA_RED), WILLOW_LOG, WILLOW_BARK, STRIPED_LOG_WILLOW, STRIPED_BARK_WILLOW);
+	public static final Block WILLOW_PLANKS = registerPlanks("willow_planks", new BNPlanks(MaterialColor.TERRACOTTA_RED), WILLOW_LOG, WILLOW_BARK, STRIPED_LOG_WILLOW, STRIPED_BARK_WILLOW);
 	public static final Block WILLOW_STAIRS = registerStairs("willow_stairs", WILLOW_PLANKS);
 	public static final Block WILLOW_SLAB = registerSlab("willow_slab", WILLOW_PLANKS);
 	public static final Block WILLOW_FENCE = registerFence("willow_fence", WILLOW_PLANKS);
@@ -184,12 +304,12 @@ public class BlocksRegistry {
 	public static final Block WILLOW_DOOR = registerDoor("willow_door", WILLOW_PLANKS);
 
 	// Wart //
-	public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MapColor.RED));
-	public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MapColor.RED));
-	public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(MapColor.RED, STRIPED_LOG_WART));
-	public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(MapColor.RED, STRIPED_BARK_WART), WART_LOG);
+	public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.COLOR_RED));
+	public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MaterialColor.COLOR_RED));
+	public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_LOG_WART));
+	public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_BARK_WART), WART_LOG);
 	public static final Block WART_ROOTS = registerBlockNI("wart_roots", new BlockWartRoots());
-	public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MapColor.RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
+	public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MaterialColor.COLOR_RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
 	public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);
 	public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
 	public static final Block WART_FENCE = registerFence("wart_fence", WART_PLANKS);
@@ -202,12 +322,12 @@ public class BlocksRegistry {
 	// Rubeus
 	public static final Block RUBEUS_SAPLING = registerBlock("rubeus_sapling", new BlockRubeusSapling());
 	public static final Block RUBEUS_CONE = registerBlock("rubeus_cone", new BlockRubeusCone());
-	public static final Block STRIPED_LOG_RUBEUS = registerBlock("striped_log_rubeus", new BNPillar(MapColor.MAGENTA));
-	public static final Block STRIPED_BARK_RUBEUS = registerBlock("striped_bark_rubeus", new BNPillar(MapColor.MAGENTA));
+	public static final Block STRIPED_LOG_RUBEUS = registerBlock("striped_log_rubeus", new BNPillar(MaterialColor.COLOR_MAGENTA));
+	public static final Block STRIPED_BARK_RUBEUS = registerBlock("striped_bark_rubeus", new BNPillar(MaterialColor.COLOR_MAGENTA));
 	public static final Block RUBEUS_LOG = registerBlock("rubeus_log", new RubeusLog(STRIPED_LOG_RUBEUS));
 	public static final Block RUBEUS_BARK = registerBark("rubeus_bark", new RubeusLog(STRIPED_BARK_RUBEUS), RUBEUS_LOG);
 	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves());
-	public static final Block RUBEUS_PLANKS = registerPlanks("rubeus_planks", new BNPlanks(MapColor.MAGENTA), RUBEUS_LOG, RUBEUS_BARK, STRIPED_LOG_RUBEUS, STRIPED_BARK_RUBEUS);
+	public static final Block RUBEUS_PLANKS = registerPlanks("rubeus_planks", new BNPlanks(MaterialColor.COLOR_MAGENTA), RUBEUS_LOG, RUBEUS_BARK, STRIPED_LOG_RUBEUS, STRIPED_BARK_RUBEUS);
 	public static final Block RUBEUS_STAIRS = registerStairs("rubeus_stairs", RUBEUS_PLANKS);
 	public static final Block RUBEUS_SLAB = registerSlab("rubeus_slab", RUBEUS_PLANKS);
 	public static final Block RUBEUS_FENCE = registerFence("rubeus_fence", RUBEUS_PLANKS);
@@ -218,8 +338,8 @@ public class BlocksRegistry {
 	public static final Block RUBEUS_DOOR = registerDoor("rubeus_door", RUBEUS_PLANKS);
 
 	// Mushroom //
-	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStem(MapColor.TERRACOTTA_WHITE));
-	public static final Block MUSHROOM_PLANKS = registerPlanks("mushroom_planks", new BNPlanks(MapColor.LIGHT_GRAY), 2, MUSHROOM_STEM);
+	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStem(MaterialColor.TERRACOTTA_WHITE));
+	public static final Block MUSHROOM_PLANKS = registerPlanks("mushroom_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 2, MUSHROOM_STEM);
 	public static final Block MUSHROOM_STAIRS = registerStairs("mushroom_stairs", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_SLAB = registerSlab("mushroom_slab", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_FENCE = registerFence("mushroom_fence", MUSHROOM_PLANKS);
@@ -255,12 +375,12 @@ public class BlocksRegistry {
 	// Mushroom Fir //
 	public static final Block MUSHROOM_FIR = registerBlockNI("mushroom_fir", new BlockMushroomFir());
 	public static final Block MUSHROOM_FIR_SAPLING = registerBlock("mushroom_fir_sapling", new BlockMushroomFirSapling());
-	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem", new BlockStem(MapColor.TERRACOTTA_BLACK));
-	public static final Block STRIPED_LOG_MUSHROOM_FIR = registerBlock("striped_log_mushroom_fir", new BNPillar(MapColor.BLUE));
-	public static final Block STRIPED_WOOD_MUSHROOM_FIR = registerBlock("striped_wood_mushroom_fir", new BNPillar(MapColor.BLUE));
-	public static final Block MUSHROOM_FIR_LOG = registerLog("mushroom_fir_log", new BNLogStripable(MapColor.BLUE, STRIPED_LOG_MUSHROOM_FIR), MUSHROOM_FIR_STEM);
-	public static final Block MUSHROOM_FIR_WOOD = registerBark("mushroom_fir_wood", new BNLogStripable(MapColor.BLUE, STRIPED_WOOD_MUSHROOM_FIR), MUSHROOM_FIR_LOG);
-	public static final Block MUSHROOM_FIR_PLANKS = registerPlanks("mushroom_fir_planks", new BNPlanks(MapColor.LIGHT_GRAY), 1, MUSHROOM_FIR_STEM, MUSHROOM_FIR_LOG, MUSHROOM_FIR_WOOD, STRIPED_LOG_MUSHROOM_FIR, STRIPED_WOOD_MUSHROOM_FIR);
+	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem", new BlockStem(MaterialColor.TERRACOTTA_BLACK));
+	public static final Block STRIPED_LOG_MUSHROOM_FIR = registerBlock("striped_log_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
+	public static final Block STRIPED_WOOD_MUSHROOM_FIR = registerBlock("striped_wood_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
+	public static final Block MUSHROOM_FIR_LOG = registerLog("mushroom_fir_log", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_LOG_MUSHROOM_FIR), MUSHROOM_FIR_STEM);
+	public static final Block MUSHROOM_FIR_WOOD = registerBark("mushroom_fir_wood", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_WOOD_MUSHROOM_FIR), MUSHROOM_FIR_LOG);
+	public static final Block MUSHROOM_FIR_PLANKS = registerPlanks("mushroom_fir_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 1, MUSHROOM_FIR_STEM, MUSHROOM_FIR_LOG, MUSHROOM_FIR_WOOD, STRIPED_LOG_MUSHROOM_FIR, STRIPED_WOOD_MUSHROOM_FIR);
 	public static final Block MUSHROOM_FIR_STAIRS = registerStairs("mushroom_fir_stairs", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab", MUSHROOM_FIR_PLANKS);
 	public static final Block MUSHROOM_FIR_FENCE = registerFence("mushroom_fir_fence", MUSHROOM_FIR_PLANKS);
@@ -274,12 +394,12 @@ public class BlocksRegistry {
 	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
 	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
 	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
-	public static final WoodenMaterial ANCHOR_TREE = new WoodenMaterial("anchor_tree", MapColor.BLUE, MapColor.GREEN);
+	public static final WoodenMaterial ANCHOR_TREE = new WoodenMaterial("anchor_tree", MaterialColor.COLOR_BLUE, MaterialColor.COLOR_GREEN);
 
 	// Nether Sakura
 	public static final Block NETHER_SAKURA_SAPLING = registerBlock("nether_sakura_sapling", new BlockNetherSakuraSapling());
 	public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves", new BlockNetherSakuraLeaves());
-	public static final WoodenMaterial NETHER_SAKURA = new WoodenMaterial("nether_sakura", MapColor.PINK, MapColor.BROWN);
+	public static final WoodenMaterial NETHER_SAKURA = new WoodenMaterial("nether_sakura", MaterialColor.COLOR_PINK, MaterialColor.COLOR_BROWN);
 
 	// Eyes //
 	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
@@ -330,10 +450,10 @@ public class BlocksRegistry {
 	public static final Block NETHER_CACTUS = registerBlock("nether_cactus", new BlockNetherCactus());
 
 	// Wall plants
-	public static final Block WALL_MOSS = registerBlock("wall_moss", new BlockPlantWall(MapColor.RED));
-	public static final Block WALL_MUSHROOM_BROWN = registerBlock("wall_mushroom_brown", new BlockPlantWall(MapColor.BROWN));
-	public static final Block WALL_MUSHROOM_RED = registerBlock("wall_mushroom_red", new BlockPlantWall(MapColor.RED));
-	public static final Block JUNGLE_MOSS = registerBlock("jungle_moss", new BlockPlantWall(MapColor.LIME));
+	public static final Block WALL_MOSS = registerBlock("wall_moss", new BlockPlantWall(MaterialColor.COLOR_RED));
+	public static final Block WALL_MUSHROOM_BROWN = registerBlock("wall_mushroom_brown", new BlockPlantWall(MaterialColor.COLOR_BROWN));
+	public static final Block WALL_MUSHROOM_RED = registerBlock("wall_mushroom_red", new BlockPlantWall(MaterialColor.COLOR_RED));
+	public static final Block JUNGLE_MOSS = registerBlock("jungle_moss", new BlockPlantWall(MaterialColor.COLOR_LIGHT_GREEN));
 
 	// Decorations //
 	public static final Block PIG_STATUE_RESPAWNER = registerBlock("pig_statue_respawner", new BlockStatueRespawner());
@@ -522,23 +642,23 @@ public class BlocksRegistry {
 
 	public static Block registerBlockNI(String name, Block block) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
+			Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
 		}
 		BLOCKS.add(name);
 		return block;
 	}
 
 	private static void registerBlockDirectly(String name, Block block) {
-		Registry.register(Registry.BLOCK, new Identifier(BetterNether.MOD_ID, name), block);
-		Item.Settings settings = new Item.Settings().group(CreativeTab.BN_TAB);
+		Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
+		Item.Properties settings = new Item.Properties().tab(CreativeTab.BN_TAB);
 		if (block instanceof BNSign) {
-			settings.maxCount(16);
+			settings.stacksTo(16);
 		}
 		ItemsRegistry.registerItem(name, new BlockItem(block, settings));
 	}
 	
 	private static void addFuel(Block source, Block result) {
-		if (source.getDefaultState().getMaterial().isBurnable()) {
+		if (source.defaultBlockState().getMaterial().isFlammable()) {
 			FuelRegistry.INSTANCE.add(result, 40);
 		}
 	}
@@ -588,7 +708,7 @@ public class BlocksRegistry {
 	}
 
 	public static Block registerPlate(String name, Block source) {
-		Block plate = new BNPlate(ActivationRule.EVERYTHING, source);
+		Block plate = new BNPlate(Sensitivity.EVERYTHING, source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, plate);
 			addFuel(source, plate);
@@ -598,7 +718,7 @@ public class BlocksRegistry {
 		return plate;
 	}
 
-	private static Block registerPlate(String name, Block source, ActivationRule rule) {
+	private static Block registerPlate(String name, Block source, Sensitivity rule) {
 		Block plate = new BNPlate(rule, source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, plate);

@@ -2,64 +2,64 @@ package paulevs.betternether.entity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.FlyingEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.FlyingMob;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
-public class EntityNagaProjectile extends FlyingEntity {
+public class EntityNagaProjectile extends FlyingMob {
 	private static final int MAX_LIFE_TIME = 60; // 3 seconds * 20 ticks
 	private int lifeTime = 0;
 
-	public EntityNagaProjectile(EntityType<? extends EntityNagaProjectile> type, World world) {
+	public EntityNagaProjectile(EntityType<? extends EntityNagaProjectile> type, Level world) {
 		super(type, world);
-		this.experiencePoints = 0;
+		this.xpReward = 0;
 	}
 
 	public void setParams(LivingEntity owner, Entity target) {
-		this.setPosition(getX(), getEyeY() - this.getHeight(), getZ());
-		Vec3d dir = target.getPos().add(0, target.getHeight() * 0.25, 0).subtract(getPos()).normalize().multiply(2);
-		this.setVelocity(dir);
-		this.prevX = getX() - dir.x;
-		this.prevY = getY() - dir.y;
-		this.prevZ = getZ() - dir.z;
+		this.setPos(getX(), getEyeY() - this.getBbHeight(), getZ());
+		Vec3 dir = target.position().add(0, target.getBbHeight() * 0.25, 0).subtract(position()).normalize().scale(2);
+		this.setDeltaMovement(dir);
+		this.xo = getX() - dir.x;
+		this.yo = getY() - dir.y;
+		this.zo = getZ() - dir.z;
 	}
 
 	@Override
-	public boolean hasNoGravity() {
+	public boolean isNoGravity() {
 		return true;
 	}
 
 	@Environment(EnvType.CLIENT)
-	public boolean shouldRender(double distance) {
+	public boolean shouldRenderAtSqrDistance(double distance) {
 		return distance < 128;
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
-		world.addParticle(ParticleTypes.LARGE_SMOKE,
+		level.addParticle(ParticleTypes.LARGE_SMOKE,
 				getX() + random.nextGaussian() * 0.2,
 				getY() + random.nextGaussian() * 0.2,
 				getZ() + random.nextGaussian() * 0.2,
 				0, 0, 0);
-		world.addParticle(ParticleTypes.SMOKE,
+		level.addParticle(ParticleTypes.SMOKE,
 				getX() + random.nextGaussian() * 0.2,
 				getY() + random.nextGaussian() * 0.2,
 				getZ() + random.nextGaussian() * 0.2,
 				0, 0, 0);
 
-		HitResult hitResult = ProjectileUtil.getCollision(this, (entity) -> {
+		HitResult hitResult = ProjectileUtil.getHitResult(this, (entity) -> {
 			return entity.isAlive() && entity instanceof LivingEntity;
 		});
 		if (hitResult.getType() != HitResult.Type.MISS) {
@@ -70,7 +70,7 @@ public class EntityNagaProjectile extends FlyingEntity {
 		if (lifeTime > MAX_LIFE_TIME)
 			effectKill();
 
-		if (isSame(this.prevX, this.getX()) && isSame(this.prevY, this.getY()) && isSame(this.prevZ, this.getZ()))
+		if (isSame(this.xo, this.getX()) && isSame(this.yo, this.getY()) && isSame(this.zo, this.getZ()))
 			effectKill();
 	}
 
@@ -82,7 +82,7 @@ public class EntityNagaProjectile extends FlyingEntity {
 		HitResult.Type type = hitResult.getType();
 		if (type == HitResult.Type.BLOCK) {
 			for (int i = 0; i < 10; i++) {
-				world.addParticle(ParticleTypes.LARGE_SMOKE,
+				level.addParticle(ParticleTypes.LARGE_SMOKE,
 						getX() + random.nextGaussian() * 0.5,
 						getY() + random.nextGaussian() * 0.5,
 						getZ() + random.nextGaussian() * 0.5,
@@ -96,9 +96,9 @@ public class EntityNagaProjectile extends FlyingEntity {
 			Entity entity = ((EntityHitResult) hitResult).getEntity();
 			if (entity != this && entity instanceof LivingEntity && !(entity instanceof EntityNaga)) {
 				LivingEntity living = (LivingEntity) entity;
-				if (!(living.hasStatusEffect(StatusEffects.WITHER))) {
-					living.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 200, 1));
-					living.damage(DamageSource.GENERIC, 2.0F);
+				if (!(living.hasEffect(MobEffects.WITHER))) {
+					living.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 1));
+					living.hurt(DamageSource.GENERIC, 2.0F);
 				}
 				effectKill();
 			}
@@ -107,7 +107,7 @@ public class EntityNagaProjectile extends FlyingEntity {
 
 	private void effectKill() {
 		for (int i = 0; i < 10; i++) {
-			world.addParticle(ParticleTypes.ENTITY_EFFECT,
+			level.addParticle(ParticleTypes.ENTITY_EFFECT,
 					getX() + random.nextGaussian() * 0.5,
 					getY() + random.nextGaussian() * 0.5,
 					getZ() + random.nextGaussian() * 0.5,
@@ -117,7 +117,7 @@ public class EntityNagaProjectile extends FlyingEntity {
 	}
 
 	@Override
-	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+	public boolean canBeAffected(MobEffectInstance effect) {
 		return false;
 	}
 
@@ -127,14 +127,14 @@ public class EntityNagaProjectile extends FlyingEntity {
 	}
 
 	@Override
-	public void writeCustomDataToNbt(NbtCompound tag) {
-		super.writeCustomDataToNbt(tag);
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
 		tag.putInt("life", lifeTime);
 	}
 
 	@Override
-	public void readCustomDataFromNbt(NbtCompound tag) {
-		super.readCustomDataFromNbt(tag);
+	public void readAdditionalSaveData(CompoundTag tag) {
+		super.readAdditionalSaveData(tag);
 		if (tag.contains("life")) {
 			lifeTime = tag.getInt("life");
 		}

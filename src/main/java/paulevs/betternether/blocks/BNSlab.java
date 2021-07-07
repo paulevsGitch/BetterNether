@@ -1,15 +1,15 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-
 import java.util.Collections;
 import java.util.List;
+
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.storage.loot.LootContext;
 
 public class BNSlab extends SlabBlock {
 	public BNSlab(Block block) {
@@ -17,7 +17,7 @@ public class BNSlab extends SlabBlock {
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
-		return Collections.singletonList(new ItemStack(this.asItem(), state.get(TYPE) == SlabType.DOUBLE ? 2 : 1));
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+		return Collections.singletonList(new ItemStack(this.asItem(), state.getValue(TYPE) == SlabType.DOUBLE ? 2 : 1));
 	}
 }

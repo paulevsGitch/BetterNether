@@ -1,35 +1,35 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import paulevs.betternether.blocks.materials.Materials;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockWillowTrunk extends BlockBaseNotFull {
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
-	private static final VoxelShape SHAPE_BOTTOM = Block.createCuboidShape(4, 0, 4, 12, 16, 12);
-	private static final VoxelShape SHAPE_TOP = Block.createCuboidShape(4, 0, 4, 12, 12, 12);
+	private static final VoxelShape SHAPE_BOTTOM = Block.box(4, 0, 4, 12, 16, 12);
+	private static final VoxelShape SHAPE_TOP = Block.box(4, 0, 4, 12, 12, 12);
 
 	public BlockWillowTrunk() {
-		super(Materials.makeWood(MapColor.TERRACOTTA_RED).nonOpaque());
+		super(Materials.makeWood(MaterialColor.TERRACOTTA_RED).noOcclusion());
 		this.setDropItself(false);
-		this.setDefaultState(getStateManager().getDefaultState().with(SHAPE, TripleShape.TOP));
+		this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(SHAPE);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return state.get(SHAPE) == TripleShape.TOP ? SHAPE_TOP : SHAPE_BOTTOM;
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return state.getValue(SHAPE) == TripleShape.TOP ? SHAPE_TOP : SHAPE_BOTTOM;
 	}
 }

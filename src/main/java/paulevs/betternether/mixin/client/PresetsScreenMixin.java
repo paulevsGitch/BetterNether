@@ -1,36 +1,36 @@
 package paulevs.betternether.mixin.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.gui.screen.PresetsScreen;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.gen.chunk.FlatChunkGeneratorLayer;
-import net.minecraft.world.gen.feature.StructureFeature;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-
 import java.util.Collections;
 import java.util.List;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.screens.PresetFlatWorldScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.flat.FlatLayerInfo;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+
 @Environment(EnvType.CLIENT)
-@Mixin(PresetsScreen.class)
+@Mixin(PresetFlatWorldScreen.class)
 public class PresetsScreenMixin {
 	@Shadow
-	private static void addPreset(Text text, ItemConvertible icon, RegistryKey<Biome> registryKey, List<StructureFeature<?>> structures, boolean bl, boolean bl2, boolean bl3, FlatChunkGeneratorLayer... flatChunkGeneratorLayers) {}
+	private static void addPreset(Component text, ItemLike icon, ResourceKey<Biome> registryKey, List<StructureFeature<?>> structures, boolean bl, boolean bl2, boolean bl3, FlatLayerInfo... flatChunkGeneratorLayers) {}
 
 	static {
-		addPreset(new TranslatableText("betternether.flat_nether"),
+		addPreset(new TranslatableComponent("betternether.flat_nether"),
 				Blocks.NETHERRACK,
-				BiomeKeys.NETHER_WASTES,
+				Biomes.NETHER_WASTES,
 				Collections.emptyList(),
 				false, false, false,
-				new FlatChunkGeneratorLayer(63, Blocks.NETHERRACK),
-				new FlatChunkGeneratorLayer(1, Blocks.BEDROCK));
+				new FlatLayerInfo(63, Blocks.NETHERRACK),
+				new FlatLayerInfo(1, Blocks.BEDROCK));
 	}
 }

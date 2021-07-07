@@ -1,10 +1,11 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.BiomeParticleConfig;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.AmbientParticleSettings;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
@@ -16,8 +17,6 @@ import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSepiaBoneGrass;
 
-import java.util.Random;
-
 public class NetherSulfuricBoneReef extends NetherBiome {
 	public NetherSulfuricBoneReef(String name) {
 		super(new BiomeDefinition(name)
@@ -26,7 +25,7 @@ public class NetherSulfuricBoneReef extends NetherBiome {
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setStalactites(false)
-				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.ASH, 0.01F)));
+				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.ASH, 0.01F)));
 
 		addStructure("bone_stalactite", new StructureStalactiteFloor(BlocksRegistry.BONE_STALACTITE, BlocksRegistry.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 
@@ -41,7 +40,7 @@ public class NetherSulfuricBoneReef extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SEPIA_MUSHROOM_GRASS.getDefaultState());
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SEPIA_MUSHROOM_GRASS.defaultBlockState());
 	}
 }

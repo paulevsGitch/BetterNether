@@ -1,10 +1,11 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.ServerWorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.blocks.BlockLucisSpore;
@@ -12,42 +13,40 @@ import paulevs.betternether.blocks.BlockProperties.EnumLucisShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureLucis implements IStructure {
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		if (canGenerate(world, pos)) {
-			BlockState center = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, EnumLucisShape.CENTER);
-			BlockState side = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, EnumLucisShape.SIDE);
-			BlockState corner = BlocksRegistry.LUCIS_MUSHROOM.getDefaultState().with(BlockLucisMushroom.SHAPE, EnumLucisShape.CORNER);
+			BlockState center = BlocksRegistry.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.CENTER);
+			BlockState side = BlocksRegistry.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.SIDE);
+			BlockState corner = BlocksRegistry.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.CORNER);
 
 			if (random.nextInt(3) == 0) {
 				if (canReplace(world.getBlockState(pos)))
 					BlocksHelper.setWithUpdate(world, pos, center);
 				if (canReplace(world.getBlockState(pos.north())))
-					BlocksHelper.setWithUpdate(world, pos.north(), side.with(BlockLucisMushroom.FACING, Direction.NORTH));
+					BlocksHelper.setWithUpdate(world, pos.north(), side.setValue(BlockLucisMushroom.FACING, Direction.NORTH));
 				if (canReplace(world.getBlockState(pos.south())))
-					BlocksHelper.setWithUpdate(world, pos.south(), side.with(BlockLucisMushroom.FACING, Direction.SOUTH));
+					BlocksHelper.setWithUpdate(world, pos.south(), side.setValue(BlockLucisMushroom.FACING, Direction.SOUTH));
 				if (canReplace(world.getBlockState(pos.east())))
-					BlocksHelper.setWithUpdate(world, pos.east(), side.with(BlockLucisMushroom.FACING, Direction.EAST));
+					BlocksHelper.setWithUpdate(world, pos.east(), side.setValue(BlockLucisMushroom.FACING, Direction.EAST));
 				if (canReplace(world.getBlockState(pos.west())))
-					BlocksHelper.setWithUpdate(world, pos.west(), side.with(BlockLucisMushroom.FACING, Direction.WEST));
+					BlocksHelper.setWithUpdate(world, pos.west(), side.setValue(BlockLucisMushroom.FACING, Direction.WEST));
 
 				if (canReplace(world.getBlockState(pos.north().east())))
-					BlocksHelper.setWithUpdate(world, pos.north().east(), corner.with(BlockLucisMushroom.FACING, Direction.SOUTH));
+					BlocksHelper.setWithUpdate(world, pos.north().east(), corner.setValue(BlockLucisMushroom.FACING, Direction.SOUTH));
 				if (canReplace(world.getBlockState(pos.north().west())))
-					BlocksHelper.setWithUpdate(world, pos.north().west(), corner.with(BlockLucisMushroom.FACING, Direction.EAST));
+					BlocksHelper.setWithUpdate(world, pos.north().west(), corner.setValue(BlockLucisMushroom.FACING, Direction.EAST));
 				if (canReplace(world.getBlockState(pos.south().east())))
-					BlocksHelper.setWithUpdate(world, pos.south().east(), corner.with(BlockLucisMushroom.FACING, Direction.WEST));
+					BlocksHelper.setWithUpdate(world, pos.south().east(), corner.setValue(BlockLucisMushroom.FACING, Direction.WEST));
 				if (canReplace(world.getBlockState(pos.south().west())))
-					BlocksHelper.setWithUpdate(world, pos.south().west(), corner.with(BlockLucisMushroom.FACING, Direction.NORTH));
+					BlocksHelper.setWithUpdate(world, pos.south().west(), corner.setValue(BlockLucisMushroom.FACING, Direction.NORTH));
 			}
 			else {
 				BlockState state = world.getBlockState(pos);
 				if (state.getBlock() == BlocksRegistry.LUCIS_SPORE) {
-					if (state.get(BlockLucisSpore.FACING) == Direction.SOUTH) pos = pos.north();
-					else if (state.get(BlockLucisSpore.FACING) == Direction.WEST) pos = pos.east();
+					if (state.getValue(BlockLucisSpore.FACING) == Direction.SOUTH) pos = pos.north();
+					else if (state.getValue(BlockLucisSpore.FACING) == Direction.WEST) pos = pos.east();
 				}
 				else {
 					if (!world.getBlockState(pos.north()).isAir()) {
@@ -58,10 +57,10 @@ public class StructureLucis implements IStructure {
 					}
 				}
 
-				if (canReplace(world.getBlockState(pos))) BlocksHelper.setWithUpdate(world, pos, corner.with(BlockLucisMushroom.FACING, Direction.SOUTH));
-				if (canReplace(world.getBlockState(pos.west()))) BlocksHelper.setWithUpdate(world, pos.west(), corner.with(BlockLucisMushroom.FACING, Direction.EAST));
-				if (canReplace(world.getBlockState(pos.south()))) BlocksHelper.setWithUpdate(world, pos.south(), corner.with(BlockLucisMushroom.FACING, Direction.WEST));
-				if (canReplace(world.getBlockState(pos.south().west()))) BlocksHelper.setWithUpdate(world, pos.south().west(), corner.with(BlockLucisMushroom.FACING, Direction.NORTH));
+				if (canReplace(world.getBlockState(pos))) BlocksHelper.setWithUpdate(world, pos, corner.setValue(BlockLucisMushroom.FACING, Direction.SOUTH));
+				if (canReplace(world.getBlockState(pos.west()))) BlocksHelper.setWithUpdate(world, pos.west(), corner.setValue(BlockLucisMushroom.FACING, Direction.EAST));
+				if (canReplace(world.getBlockState(pos.south()))) BlocksHelper.setWithUpdate(world, pos.south(), corner.setValue(BlockLucisMushroom.FACING, Direction.WEST));
+				if (canReplace(world.getBlockState(pos.south().west()))) BlocksHelper.setWithUpdate(world, pos.south().west(), corner.setValue(BlockLucisMushroom.FACING, Direction.NORTH));
 			}
 		}
 	}
@@ -70,10 +69,10 @@ public class StructureLucis implements IStructure {
 		return state.getBlock() == BlocksRegistry.LUCIS_SPORE || state.getMaterial().isReplaceable();
 	}
 
-	private boolean canGenerate(ServerWorldAccess world, BlockPos pos) {
+	private boolean canGenerate(ServerLevelAccessor world, BlockPos pos) {
 		BlockState state;
-		for (Direction dir : HorizontalFacingBlock.FACING.getValues())
-			if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.offset(dir))) || BlocksRegistry.ANCHOR_TREE.isTreeLog(state.getBlock()))
+		for (Direction dir : HorizontalDirectionalBlock.FACING.getPossibleValues())
+			if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.relative(dir))) || BlocksRegistry.ANCHOR_TREE.isTreeLog(state.getBlock()))
 				return true;
 		return false;
 	}

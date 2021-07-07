@@ -1,23 +1,23 @@
 package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.BrewingStandBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BrewingStandBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import paulevs.betternether.blockentities.BNBrewingStandBlockEntity;
 import paulevs.betternether.client.IRenderTypeable;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
@@ -27,53 +27,53 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
 		super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS)
 				.strength(0.5F, 0.5F)
 				.luminance(1)
-				.nonOpaque());
+				.noOcclusion());
 	}
 	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-		return world.isClient ? null : checkType(type, BlockEntitiesRegistry.NETHER_BREWING_STAND, BNBrewingStandBlockEntity::tick);
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+		return world.isClientSide ? null : createTickerHelper(type, BlockEntitiesRegistry.NETHER_BREWING_STAND, BNBrewingStandBlockEntity::tick);
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockPos blockPos, BlockState blockState) {
+	public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
 		return new BNBrewingStandBlockEntity(blockPos, blockState);
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (world.isClient) {
-			return ActionResult.SUCCESS;
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (world.isClientSide) {
+			return InteractionResult.SUCCESS;
 		}
 		else {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if (blockEntity instanceof BNBrewingStandBlockEntity) {
-				player.openHandledScreen((BNBrewingStandBlockEntity) blockEntity);
-				player.incrementStat(Stats.INTERACT_WITH_BREWINGSTAND);
+				player.openMenu((BNBrewingStandBlockEntity) blockEntity);
+				player.awardStat(Stats.INTERACT_WITH_BREWINGSTAND);
 			}
 
-			return ActionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
 	}
 
 	@Override
-	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-		if (itemStack.hasCustomName()) {
+	public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+		if (itemStack.hasCustomHoverName()) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if (blockEntity instanceof BNBrewingStandBlockEntity) {
-				((BNBrewingStandBlockEntity) blockEntity).setCustomName(itemStack.getName());
+				((BNBrewingStandBlockEntity) blockEntity).setCustomName(itemStack.getHoverName());
 			}
 		}
 	}
 
 	@Override
-	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean notify) {
-		if (!state.isOf(newState.getBlock())) {
+	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean notify) {
+		if (!state.is(newState.getBlock())) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if (blockEntity instanceof BNBrewingStandBlockEntity) {
-				ItemScatterer.spawn(world, (BlockPos) pos, (Inventory) ((BNBrewingStandBlockEntity) blockEntity));
+				Containers.dropContents(world, (BlockPos) pos, (Container) ((BNBrewingStandBlockEntity) blockEntity));
 			}
 
-			super.onStateReplaced(state, world, pos, newState, notify);
+			super.onRemove(state, world, pos, newState, notify);
 		}
 	}
 

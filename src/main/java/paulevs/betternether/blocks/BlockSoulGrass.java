@@ -1,24 +1,24 @@
 package paulevs.betternether.blocks;
 
+import java.util.Random;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
-
-import java.util.Random;
 
 public class BlockSoulGrass extends BlockNetherGrass {
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return BlocksHelper.isSoulSand(world.getBlockState(pos.down()));
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return BlocksHelper.isSoulSand(world.getBlockState(pos.below()));
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
 		if (random.nextInt(4) == 0) {
 			world.addParticle(
 					ParticleTypes.PORTAL,

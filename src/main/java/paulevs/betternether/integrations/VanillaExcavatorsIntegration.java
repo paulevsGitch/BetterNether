@@ -1,19 +1,19 @@
 package paulevs.betternether.integrations;
 
+import java.lang.reflect.Constructor;
+
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tier;
 import org.apache.logging.log4j.LogManager;
 import paulevs.betternether.registry.ItemsRegistry;
-
-import java.lang.reflect.Constructor;
 
 public class VanillaExcavatorsIntegration {
 	private static boolean hasExcavators;
 	private static Constructor<?> excavatorConstructor;
 
-	public static Item makeExcavator(ToolMaterial material, int attackDamage, float attackSpeed) {
+	public static Item makeExcavator(Tier material, int attackDamage, float attackSpeed) {
 		if (!hasExcavators)
 			return Items.AIR;
 		try {

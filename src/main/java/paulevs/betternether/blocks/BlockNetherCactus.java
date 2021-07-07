@@ -1,87 +1,92 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import paulevs.betternether.BlocksHelper;
-
 import java.util.Random;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import paulevs.betternether.BlocksHelper;
+
 public class BlockNetherCactus extends BlockBaseNotFull {
-	private static final VoxelShape TOP_SHAPE = Block.createCuboidShape(4, 0, 4, 12, 8, 12);
-	private static final VoxelShape SIDE_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 16, 11);
-	public static final BooleanProperty TOP = BooleanProperty.of("top");
+	private static final VoxelShape TOP_SHAPE = Block.box(4, 0, 4, 12, 8, 12);
+	private static final VoxelShape SIDE_SHAPE = Block.box(5, 0, 5, 11, 16, 11);
+	public static final BooleanProperty TOP = BooleanProperty.create("top");
 
 	public BlockNetherCactus() {
 		super(FabricBlockSettings.of(Material.CACTUS)
-				.materialColor(MapColor.TERRACOTTA_ORANGE)
-				.sounds(BlockSoundGroup.WOOL)
-				.nonOpaque()
-				.ticksRandomly());
+				.materialColor(MaterialColor.TERRACOTTA_ORANGE)
+				.sound(SoundType.WOOL)
+				.noOcclusion()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
-		this.setDefaultState(getStateManager().getDefaultState().with(TOP, true));
+		this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(TOP);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return state.get(TOP).booleanValue() ? TOP_SHAPE : SIDE_SHAPE;
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return state.getValue(TOP).booleanValue() ? TOP_SHAPE : SIDE_SHAPE;
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (canPlaceAt(state, world, pos)) {
-			Block up = world.getBlockState(pos.up()).getBlock();
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (canSurvive(state, world, pos)) {
+			Block up = world.getBlockState(pos.above()).getBlock();
 			if (up == this)
-				return state.with(TOP, false);
+				return state.setValue(TOP, false);
 			else
-				return this.getDefaultState();
+				return this.defaultBlockState();
 		}
 		else
-			return Blocks.AIR.getDefaultState();
+			return Blocks.AIR.defaultBlockState();
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		Block down = world.getBlockState(pos.down()).getBlock();
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		Block down = world.getBlockState(pos.below()).getBlock();
 		return down == Blocks.GRAVEL || down == this;
 	}
 
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		if (!canPlaceAt(state, world, pos)) {
-			world.breakBlock(pos, true);
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+		if (!canSurvive(state, world, pos)) {
+			world.destroyBlock(pos, true);
 			return;
 		}
-		if (state.get(TOP).booleanValue() && random.nextInt(16) == 0) {
-			BlockPos up = pos.up();
+		if (state.getValue(TOP).booleanValue() && random.nextInt(16) == 0) {
+			BlockPos up = pos.above();
 			boolean grow = world.getBlockState(up).getBlock() == Blocks.AIR;
 			grow = grow && (BlocksHelper.getLengthDown(world, pos, this) < 3);
 			if (grow) {
-				BlocksHelper.setWithUpdate(world, up, getDefaultState());
-				BlocksHelper.setWithUpdate(world, pos, getDefaultState().with(TOP, false));
+				BlocksHelper.setWithUpdate(world, up, defaultBlockState());
+				BlocksHelper.setWithUpdate(world, pos, defaultBlockState().setValue(TOP, false));
 			}
 		}
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-		entity.damage(DamageSource.CACTUS, 1.0F);
+	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+		entity.hurt(DamageSource.CACTUS, 1.0F);
 	}
 }

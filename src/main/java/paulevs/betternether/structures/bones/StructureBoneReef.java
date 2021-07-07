@@ -1,12 +1,11 @@
 package paulevs.betternether.structures.bones;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ServerWorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ServerLevelAccessor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureNBT;
-
-import java.util.Random;
 
 public class StructureBoneReef implements IStructure {
 	private static final StructureNBT[] BONES = new StructureNBT[] {
@@ -16,11 +15,11 @@ public class StructureBoneReef implements IStructure {
 	};
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (BlocksHelper.isNetherGround(world.getBlockState(pos.down())) && world.isAir(pos.up(2)) && world.isAir(pos.up(4))) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (BlocksHelper.isNetherGround(world.getBlockState(pos.below())) && world.isEmptyBlock(pos.above(2)) && world.isEmptyBlock(pos.above(4))) {
 			StructureNBT bone = BONES[random.nextInt(BONES.length)];
 			bone.randomRM(random);
-			bone.generateCentered(world, pos.down(random.nextInt(4)));
+			bone.generateCentered(world, pos.below(random.nextInt(4)));
 		}
 	}
 }

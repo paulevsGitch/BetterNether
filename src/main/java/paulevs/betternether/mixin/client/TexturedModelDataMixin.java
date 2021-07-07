@@ -1,12 +1,12 @@
 package paulevs.betternether.mixin.client;
 
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.TexturedModelData;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(TexturedModelData.class)
+@Mixin(LayerDefinition.class)
 public interface TexturedModelDataMixin {
     @Accessor("data")
-    public ModelData getData();
+    public MeshDefinition getData();
 }

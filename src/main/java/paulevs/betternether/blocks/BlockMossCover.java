@@ -1,20 +1,20 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockMossCover extends BlockMold {
-	private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 4, 16);
+	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 4, 16);
 
 	public BlockMossCover() {
-		super(MapColor.GREEN);
+		super(MaterialColor.COLOR_GREEN);
 	}
 
 	@Override
@@ -23,12 +23,12 @@ public class BlockMossCover extends BlockMold {
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return world.getBlockState(pos.down()).isSideSolidFullSquare(world, pos, Direction.UP);
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return world.getBlockState(pos.below()).isFaceSturdy(world, pos, Direction.UP);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
 		return SHAPE;
 	}
 }

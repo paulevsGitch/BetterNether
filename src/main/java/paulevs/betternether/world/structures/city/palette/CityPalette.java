@@ -1,16 +1,27 @@
 package paulevs.betternether.world.structures.city.palette;
 
-import net.minecraft.block.*;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
+import net.minecraft.world.level.block.LanternBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.WallTorchBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockProperties.PottedPlantShape;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.registry.BlocksRegistry;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class CityPalette {
 	private static final Random RANDOM = new Random();
@@ -190,7 +201,7 @@ public class CityPalette {
 		else if (list.size() == 1)
 			return list.get(0);
 
-		String seed = Registry.BLOCK.getId(state.getBlock()).getPath();
+		String seed = Registry.BLOCK.getKey(state.getBlock()).getPath();
 		RANDOM.setSeed(seed.hashCode());
 		return list.get(RANDOM.nextInt(list.size()));
 	}
@@ -199,9 +210,9 @@ public class CityPalette {
 		if (list.isEmpty())
 			return input;
 		else if (list.size() == 1)
-			return list.get(0).getDefaultState();
+			return list.get(0).defaultBlockState();
 		else {
-			return getRandomBlock(input, list).getDefaultState();
+			return getRandomBlock(input, list).defaultBlockState();
 		}
 	}
 
@@ -226,63 +237,63 @@ public class CityPalette {
 	}
 
 	private BlockState copySlab(BlockState source, Block block) {
-		BlockState state = block.getDefaultState()
-				.with(SlabBlock.TYPE, source.get(SlabBlock.TYPE))
-				.with(SlabBlock.WATERLOGGED, source.get(SlabBlock.WATERLOGGED));
+		BlockState state = block.defaultBlockState()
+				.setValue(SlabBlock.TYPE, source.getValue(SlabBlock.TYPE))
+				.setValue(SlabBlock.WATERLOGGED, source.getValue(SlabBlock.WATERLOGGED));
 		return state;
 	}
 
 	private BlockState copyStair(BlockState source, Block block) {
-		BlockState state = block.getDefaultState()
-				.with(StairsBlock.FACING, source.get(StairsBlock.FACING))
-				.with(StairsBlock.HALF, source.get(StairsBlock.HALF))
-				.with(StairsBlock.SHAPE, source.get(StairsBlock.SHAPE))
-				.with(StairsBlock.WATERLOGGED, source.get(StairsBlock.WATERLOGGED));
+		BlockState state = block.defaultBlockState()
+				.setValue(StairBlock.FACING, source.getValue(StairBlock.FACING))
+				.setValue(StairBlock.HALF, source.getValue(StairBlock.HALF))
+				.setValue(StairBlock.SHAPE, source.getValue(StairBlock.SHAPE))
+				.setValue(StairBlock.WATERLOGGED, source.getValue(StairBlock.WATERLOGGED));
 		return state;
 	}
 
 	private BlockState copyWall(BlockState source, Block block) {
-		BlockState state = block.getDefaultState()
-				.with(WallBlock.EAST_SHAPE, source.get(WallBlock.EAST_SHAPE))
-				.with(WallBlock.NORTH_SHAPE, source.get(WallBlock.NORTH_SHAPE))
-				.with(WallBlock.SOUTH_SHAPE, source.get(WallBlock.SOUTH_SHAPE))
-				.with(WallBlock.WEST_SHAPE, source.get(WallBlock.WEST_SHAPE))
-				.with(WallBlock.UP, source.get(WallBlock.UP))
-				.with(StairsBlock.WATERLOGGED, source.get(StairsBlock.WATERLOGGED));
+		BlockState state = block.defaultBlockState()
+				.setValue(WallBlock.EAST_WALL, source.getValue(WallBlock.EAST_WALL))
+				.setValue(WallBlock.NORTH_WALL, source.getValue(WallBlock.NORTH_WALL))
+				.setValue(WallBlock.SOUTH_WALL, source.getValue(WallBlock.SOUTH_WALL))
+				.setValue(WallBlock.WEST_WALL, source.getValue(WallBlock.WEST_WALL))
+				.setValue(WallBlock.UP, source.getValue(WallBlock.UP))
+				.setValue(StairBlock.WATERLOGGED, source.getValue(StairBlock.WATERLOGGED));
 		return state;
 	}
 
 	private BlockState copyFence(BlockState source, Block block) {
-		BlockState state = block.getDefaultState()
-				.with(FenceBlock.EAST, source.get(FenceBlock.EAST))
-				.with(FenceBlock.NORTH, source.get(FenceBlock.NORTH))
-				.with(FenceBlock.SOUTH, source.get(FenceBlock.SOUTH))
-				.with(FenceBlock.WEST, source.get(FenceBlock.WEST))
-				.with(FenceBlock.WATERLOGGED, source.get(FenceBlock.WATERLOGGED));
+		BlockState state = block.defaultBlockState()
+				.setValue(FenceBlock.EAST, source.getValue(FenceBlock.EAST))
+				.setValue(FenceBlock.NORTH, source.getValue(FenceBlock.NORTH))
+				.setValue(FenceBlock.SOUTH, source.getValue(FenceBlock.SOUTH))
+				.setValue(FenceBlock.WEST, source.getValue(FenceBlock.WEST))
+				.setValue(FenceBlock.WATERLOGGED, source.getValue(FenceBlock.WATERLOGGED));
 		return state;
 	}
 
 	private BlockState copyGate(BlockState source, Block block) {
-		BlockState state = block.getDefaultState()
-				.with(FenceGateBlock.IN_WALL, source.get(FenceGateBlock.IN_WALL))
-				.with(FenceGateBlock.OPEN, source.get(FenceGateBlock.OPEN))
-				.with(FenceGateBlock.POWERED, source.get(FenceGateBlock.POWERED))
-				.with(FenceGateBlock.FACING, source.get(FenceGateBlock.FACING));
+		BlockState state = block.defaultBlockState()
+				.setValue(FenceGateBlock.IN_WALL, source.getValue(FenceGateBlock.IN_WALL))
+				.setValue(FenceGateBlock.OPEN, source.getValue(FenceGateBlock.OPEN))
+				.setValue(FenceGateBlock.POWERED, source.getValue(FenceGateBlock.POWERED))
+				.setValue(FenceGateBlock.FACING, source.getValue(FenceGateBlock.FACING));
 		return state;
 	}
 
 	private BlockState copyPillar(BlockState source, Block block) {
-		BlockState state = block.getDefaultState()
-				.with(PillarBlock.AXIS, source.get(PillarBlock.AXIS));
+		BlockState state = block.defaultBlockState()
+				.setValue(RotatedPillarBlock.AXIS, source.getValue(RotatedPillarBlock.AXIS));
 		return state;
 	}
 
 	private BlockState copyLanternWall(BlockState source, Block block) {
 		if (source.getBlock() instanceof BlockSmallLantern && !(block instanceof BlockSmallLantern)) {
-			Direction facing = source.get(BlockSmallLantern.FACING);
-			BlockState state = block.getDefaultState();
+			Direction facing = source.getValue(BlockSmallLantern.FACING);
+			BlockState state = block.defaultBlockState();
 			if (block instanceof WallTorchBlock) {
-				return state.with(WallTorchBlock.FACING, facing);
+				return state.setValue(WallTorchBlock.FACING, facing);
 			}
 			return state;
 		}
@@ -291,9 +302,9 @@ public class CityPalette {
 
 	private BlockState copyLanternCeiling(BlockState source, Block block) {
 		if (source.getBlock() instanceof BlockSmallLantern && !(block instanceof BlockSmallLantern)) {
-			BlockState state = block.getDefaultState();
+			BlockState state = block.defaultBlockState();
 			if (block instanceof LanternBlock) {
-				return state.with(LanternBlock.HANGING, true);
+				return state.setValue(LanternBlock.HANGING, true);
 			}
 			return state;
 		}
@@ -301,32 +312,32 @@ public class CityPalette {
 	}
 
 	private BlockState copyDoor(BlockState source, Block block) {
-		BlockState state = block.getDefaultState()
-				.with(DoorBlock.FACING, source.get(DoorBlock.FACING))
-				.with(DoorBlock.HALF, source.get(DoorBlock.HALF))
-				.with(DoorBlock.HINGE, source.get(DoorBlock.HINGE))
-				.with(DoorBlock.OPEN, source.get(DoorBlock.OPEN))
-				.with(DoorBlock.POWERED, source.get(DoorBlock.POWERED));
+		BlockState state = block.defaultBlockState()
+				.setValue(DoorBlock.FACING, source.getValue(DoorBlock.FACING))
+				.setValue(DoorBlock.HALF, source.getValue(DoorBlock.HALF))
+				.setValue(DoorBlock.HINGE, source.getValue(DoorBlock.HINGE))
+				.setValue(DoorBlock.OPEN, source.getValue(DoorBlock.OPEN))
+				.setValue(DoorBlock.POWERED, source.getValue(DoorBlock.POWERED));
 		return state;
 	}
 
 	private BlockState copyTrapdoor(BlockState source, Block block) {
-		BlockState state = block.getDefaultState()
-				.with(TrapdoorBlock.FACING, source.get(TrapdoorBlock.FACING))
-				.with(TrapdoorBlock.HALF, source.get(TrapdoorBlock.HALF))
-				.with(TrapdoorBlock.OPEN, source.get(TrapdoorBlock.OPEN))
-				.with(TrapdoorBlock.POWERED, source.get(TrapdoorBlock.POWERED))
-				.with(TrapdoorBlock.WATERLOGGED, source.get(TrapdoorBlock.WATERLOGGED));
+		BlockState state = block.defaultBlockState()
+				.setValue(TrapDoorBlock.FACING, source.getValue(TrapDoorBlock.FACING))
+				.setValue(TrapDoorBlock.HALF, source.getValue(TrapDoorBlock.HALF))
+				.setValue(TrapDoorBlock.OPEN, source.getValue(TrapDoorBlock.OPEN))
+				.setValue(TrapDoorBlock.POWERED, source.getValue(TrapDoorBlock.POWERED))
+				.setValue(TrapDoorBlock.WATERLOGGED, source.getValue(TrapDoorBlock.WATERLOGGED));
 		return state;
 	}
 
 	private BlockState copyPane(BlockState source, Block block) {
-		BlockState state = block.getDefaultState()
-				.with(PaneBlock.EAST, source.get(PaneBlock.EAST))
-				.with(PaneBlock.NORTH, source.get(PaneBlock.NORTH))
-				.with(PaneBlock.SOUTH, source.get(PaneBlock.SOUTH))
-				.with(PaneBlock.WEST, source.get(PaneBlock.WEST))
-				.with(PaneBlock.WATERLOGGED, source.get(PaneBlock.WATERLOGGED));
+		BlockState state = block.defaultBlockState()
+				.setValue(IronBarsBlock.EAST, source.getValue(IronBarsBlock.EAST))
+				.setValue(IronBarsBlock.NORTH, source.getValue(IronBarsBlock.NORTH))
+				.setValue(IronBarsBlock.SOUTH, source.getValue(IronBarsBlock.SOUTH))
+				.setValue(IronBarsBlock.WEST, source.getValue(IronBarsBlock.WEST))
+				.setValue(IronBarsBlock.WATERLOGGED, source.getValue(IronBarsBlock.WATERLOGGED));
 		return state;
 	}
 
@@ -515,8 +526,8 @@ public class CityPalette {
 	}
 
 	public BlockState getPlant(BlockState input) {
-		String seed = Registry.BLOCK.getId(input.getBlock()).getPath();
+		String seed = Registry.BLOCK.getKey(input.getBlock()).getPath();
 		RANDOM.setSeed(seed.hashCode());
-		return BlocksRegistry.POTTED_PLANT.getDefaultState().with(BlockPottedPlant.PLANT, PottedPlantShape.values()[RANDOM.nextInt(PottedPlantShape.values().length)]);
+		return BlocksRegistry.POTTED_PLANT.defaultBlockState().setValue(BlockPottedPlant.PLANT, PottedPlantShape.values()[RANDOM.nextInt(PottedPlantShape.values().length)]);
 	}
 }

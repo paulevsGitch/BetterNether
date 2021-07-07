@@ -1,14 +1,14 @@
 package paulevs.betternether.mixin.client;
 
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.NetworkThreadUtils;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.network.packet.s2c.play.SignEditorOpenS2CPacket;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.thread.ThreadExecutor;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.protocol.PacketUtils;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.network.protocol.game.ClientboundOpenSignEditorPacket;
+import net.minecraft.util.thread.BlockableEventLoop;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,32 +17,32 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.betternether.BNSignEditScreen;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public class ClientPlayNetworkHandlerMixin {
 	@Shadow
-	private MinecraftClient client;
+	private Minecraft client;
 
 	@Shadow
-	private ClientWorld world;
+	private ClientLevel world;
 
 	@Inject(method = "onSignEditorOpen", at = @At(value = "HEAD"), cancellable = true)
-	public void openSignEditor(SignEditorOpenS2CPacket packet, CallbackInfo info) {
-		NetworkThreadUtils.forceMainThread(packet, (ClientPlayNetworkHandler) (Object) this, (ThreadExecutor<?>) client);
+	public void openSignEditor(ClientboundOpenSignEditorPacket packet, CallbackInfo info) {
+		PacketUtils.ensureRunningOnSameThread(packet, (ClientPacketListener) (Object) this, (BlockableEventLoop<?>) client);
 		BlockEntity blockEntity = this.world.getBlockEntity(packet.getPos());
 		if (blockEntity instanceof BNSignBlockEntity) {
 			BNSignBlockEntity sign = (BNSignBlockEntity) blockEntity;
-			client.openScreen(new BNSignEditScreen(sign, this.client.shouldFilterText()));
+			client.setScreen(new BNSignEditScreen(sign, this.client.isTextFilteringEnabled()));
 			info.cancel();
 		}
 	}
 
 	@Inject(method = "onBlockEntityUpdate", at = @At(value = "HEAD"), cancellable = true)
-	public void onEntityUpdate(BlockEntityUpdateS2CPacket packet, CallbackInfo info) {
-		NetworkThreadUtils.forceMainThread(packet, (ClientPlayNetworkHandler) (Object) this, (ThreadExecutor<?>) client);
+	public void onEntityUpdate(ClientboundBlockEntityDataPacket packet, CallbackInfo info) {
+		PacketUtils.ensureRunningOnSameThread(packet, (ClientPacketListener) (Object) this, (BlockableEventLoop<?>) client);
 		BlockPos blockPos = packet.getPos();
-		BlockEntity blockEntity = this.client.world.getBlockEntity(blockPos);
+		BlockEntity blockEntity = this.client.level.getBlockEntity(blockPos);
 		if (blockEntity instanceof BNSignBlockEntity) {
-			blockEntity.readNbt(packet.getNbt());
+			blockEntity.load(packet.getTag());
 			info.cancel();
 		}
 	}

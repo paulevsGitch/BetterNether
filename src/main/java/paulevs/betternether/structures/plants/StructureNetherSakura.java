@@ -1,30 +1,29 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureNetherSakura implements IStructure {
-	private static final Mutable POS = new Mutable();
-	private static final Mutable POS2 = new Mutable();
+	private static final MutableBlockPos POS = new MutableBlockPos();
+	private static final MutableBlockPos POS2 = new MutableBlockPos();
 
 	public StructureNetherSakura() {}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		if (pos.getY() < 96) return;
 		grow(world, pos, random, true);
 	}
 
-	public void grow(ServerWorldAccess world, BlockPos pos, Random random, boolean natural) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
 		int l = MHelper.randRange(15, 24, random);
 		double height = MHelper.randRange(10, 15, random);
 		double radius = height * (0.2 + random.nextDouble() * 0.1);
@@ -47,9 +46,9 @@ public class StructureNetherSakura implements IStructure {
 						int start = MHelper.randRange(-2, 0, random);
 						for (int y = start; y < length; y++) {
 							POS.setY(pos.getY() - y);
-							if (canReplace(world.getBlockState(POS))) BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.log.getDefaultState());
+							if (canReplace(world.getBlockState(POS))) BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.log.defaultBlockState());
 						}
-						if (BlocksRegistry.NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.bark.getDefaultState());
+						if (BlocksRegistry.NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.bark.defaultBlockState());
 					}
 
 					if (d < 2) {
@@ -60,8 +59,8 @@ public class StructureNetherSakura implements IStructure {
 		}
 	}
 
-	private void crown(WorldAccess world, BlockPos pos, double radius, double height, Random random) {
-		BlockState leaves = BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState();
+	private void crown(LevelAccessor world, BlockPos pos, double radius, double height, Random random) {
+		BlockState leaves = BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState();
 		double r2 = radius * radius;
 		int start = (int) Math.floor(-radius);
 		for (int cy = 0; cy <= radius; cy++) {

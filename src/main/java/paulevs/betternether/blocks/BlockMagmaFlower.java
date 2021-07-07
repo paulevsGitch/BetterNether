@@ -1,25 +1,29 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockMagmaFlower extends BlockCommonPlant {
-	private static final VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 12, 15);
+	private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 12, 15);
 
 	public BlockMagmaFlower() {
-		super(MapColor.TERRACOTTA_ORANGE);
+		super(MaterialColor.TERRACOTTA_ORANGE);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
 		return SHAPE;
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return world.getBlockState(pos.down()).getBlock() == Blocks.MAGMA_BLOCK;
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return world.getBlockState(pos.below()).getBlock() == Blocks.MAGMA_BLOCK;
 	}
 }

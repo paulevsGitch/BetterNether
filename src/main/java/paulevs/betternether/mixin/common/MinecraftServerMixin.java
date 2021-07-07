@@ -1,8 +1,11 @@
 package paulevs.betternether.mixin.common;
 
+import java.util.Collection;
+import java.util.concurrent.CompletableFuture;
+
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.resource.ServerResourceManager;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.ServerResources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,13 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.betternether.recipes.BNRecipeManager;
 
-import java.util.Collection;
-import java.util.concurrent.CompletableFuture;
-
 @Mixin(MinecraftServer.class)
 public class MinecraftServerMixin {
 	@Shadow
-	private ServerResourceManager serverResourceManager;
+	private ServerResources serverResourceManager;
 
 	@Inject(method = "reloadResources", at = @At(value = "RETURN"), cancellable = true)
 	private void onReload(Collection<String> collection, CallbackInfoReturnable<CompletableFuture<Void>> info) {

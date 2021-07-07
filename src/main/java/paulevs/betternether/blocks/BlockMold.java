@@ -1,49 +1,49 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShearsItem;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.blocks.materials.Materials;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
+
 public class BlockMold extends BlockBaseNotFull {
-	public BlockMold(MapColor color) {
+	public BlockMold(MaterialColor color) {
 		super(Materials.makeGrass(color)
-				.sounds(BlockSoundGroup.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
-				.ticksRandomly());
+				.sound(SoundType.CROP)
+				.noOcclusion()
+				.noCollission()
+				.instabreak()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}
 
-	public BlockMold(Settings settings) {
+	public BlockMold(Properties settings) {
 		super(settings);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}
 
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
+	public float getShadeBrightness(BlockState state, BlockGetter view, BlockPos pos) {
 		return 1.0F;
 	}
 
@@ -53,21 +53,21 @@ public class BlockMold extends BlockBaseNotFull {
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return BlocksHelper.isNetherMycelium(world.getBlockState(pos.down()));
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return BlocksHelper.isNetherMycelium(world.getBlockState(pos.below()));
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (!canPlaceAt(state, world, pos))
-			return Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (!canSurvive(state, world, pos))
+			return Blocks.AIR.defaultBlockState();
 		else
 			return state;
 	}
 
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		super.scheduledTick(state, world, pos, random);
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+		super.tick(state, world, pos, random);
 		if (random.nextInt(16) == 0) {
 			int c = 0;
 			c = world.getBlockState(pos.north()).getBlock() == this ? c++ : c;
@@ -78,30 +78,30 @@ public class BlockMold extends BlockBaseNotFull {
 				BlockPos npos = new BlockPos(pos);
 				switch (random.nextInt(4)) {
 					case 0:
-						npos = npos.add(-1, 0, 0);
+						npos = npos.offset(-1, 0, 0);
 						break;
 					case 1:
-						npos = npos.add(1, 0, 0);
+						npos = npos.offset(1, 0, 0);
 						break;
 					case 2:
-						npos = npos.add(0, 0, -1);
+						npos = npos.offset(0, 0, -1);
 						break;
 					default:
-						npos = npos.add(0, 0, 1);
+						npos = npos.offset(0, 0, 1);
 						break;
 				}
-				if (world.isAir(npos) && canPlaceAt(state, world, npos)) {
-					BlocksHelper.setWithoutUpdate(world, npos, getDefaultState());
+				if (world.isEmptyBlock(npos) && canSurvive(state, world, npos)) {
+					BlocksHelper.setWithoutUpdate(world, npos, defaultBlockState());
 				}
 			}
 		}
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
-		if (builder.get(LootContextParameters.TOOL).getItem() instanceof ShearsItem)
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+		if (builder.getParameter(LootContextParams.TOOL).getItem() instanceof ShearsItem)
 			return Collections.singletonList(new ItemStack(this.asItem()));
 		else
-			return super.getDroppedStacks(state, builder);
+			return super.getDrops(state, builder);
 	}
 }

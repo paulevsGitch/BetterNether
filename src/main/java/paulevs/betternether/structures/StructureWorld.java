@@ -1,16 +1,15 @@
 package paulevs.betternether.structures;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 
-import java.util.Random;
-
 public class StructureWorld extends StructureNBT implements IStructure {
-	protected static final Mutable POS = new Mutable();
+	protected static final MutableBlockPos POS = new MutableBlockPos();
 	protected final StructureType type;
 	protected final int offsetY;
 
@@ -21,16 +20,16 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		randomRM(random);
 		if (canGenerate(world, pos)) {
-			generateCentered(world, pos.up(offsetY));
+			generateCentered(world, pos.above(offsetY));
 		}
 	}
 
-	private boolean canGenerate(WorldAccess world, BlockPos pos) {
+	private boolean canGenerate(LevelAccessor world, BlockPos pos) {
 		for (int i = 0; i < this.structure.getSize().getY(); i += 2) {
-			if (world.getBlockState(pos.up(i)).isOf(Blocks.BEDROCK)) {
+			if (world.getBlockState(pos.above(i)).is(Blocks.BEDROCK)) {
 				return false;
 			}
 		}
@@ -46,15 +45,15 @@ public class StructureWorld extends StructureNBT implements IStructure {
 			return false;
 	}
 
-	private float getAirFraction(WorldAccess world, BlockPos pos) {
+	private float getAirFraction(LevelAccessor world, BlockPos pos) {
 		int airCount = 0;
 
-		Mutable size = new Mutable().set(new BlockPos(structure.getSize()).rotate(rotation));
+		MutableBlockPos size = new MutableBlockPos().set(new BlockPos(structure.getSize()).rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 
-		BlockPos start = pos.add(-(size.getX() >> 1), 0, -(size.getZ() >> 1));
-		BlockPos end = pos.add(size.getX() >> 1, size.getY() + offsetY, size.getZ() >> 1);
+		BlockPos start = pos.offset(-(size.getX() >> 1), 0, -(size.getZ() >> 1));
+		BlockPos end = pos.offset(size.getX() >> 1, size.getY() + offsetY, size.getZ() >> 1);
 		int count = 0;
 
 		for (int x = start.getX(); x <= end.getX(); x++) {
@@ -63,7 +62,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 				POS.setY(y);
 				for (int z = start.getZ(); z <= end.getZ(); z++) {
 					POS.setZ(z);
-					if (world.isAir(POS))
+					if (world.isEmptyBlock(POS))
 						airCount++;
 					count++;
 				}
@@ -73,15 +72,15 @@ public class StructureWorld extends StructureNBT implements IStructure {
 		return (float) airCount / count;
 	}
 
-	private float getLavaFractionFoundation(WorldAccess world, BlockPos pos) {
+	private float getLavaFractionFoundation(LevelAccessor world, BlockPos pos) {
 		int lavaCount = 0;
 
-		Mutable size = new Mutable().set(new BlockPos(structure.getSize()).rotate(rotation));
+		MutableBlockPos size = new MutableBlockPos().set(new BlockPos(structure.getSize()).rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 
-		BlockPos start = pos.add(-(size.getX() >> 1), 0, -(size.getZ() >> 1));
-		BlockPos end = pos.add(size.getX() >> 1, 0, size.getZ() >> 1);
+		BlockPos start = pos.offset(-(size.getX() >> 1), 0, -(size.getZ() >> 1));
+		BlockPos end = pos.offset(size.getX() >> 1, 0, size.getZ() >> 1);
 		int count = 0;
 
 		POS.setY(pos.getY() - 1);
@@ -98,15 +97,15 @@ public class StructureWorld extends StructureNBT implements IStructure {
 		return (float) lavaCount / count;
 	}
 
-	private float getAirFractionFoundation(WorldAccess world, BlockPos pos) {
+	private float getAirFractionFoundation(LevelAccessor world, BlockPos pos) {
 		int airCount = 0;
 
-		Mutable size = new Mutable().set(new BlockPos(structure.getSize()).rotate(rotation));
+		MutableBlockPos size = new MutableBlockPos().set(new BlockPos(structure.getSize()).rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 
-		BlockPos start = pos.add(-(size.getX() >> 1), -1, -(size.getZ() >> 1));
-		BlockPos end = pos.add(size.getX() >> 1, 0, size.getZ() >> 1);
+		BlockPos start = pos.offset(-(size.getX() >> 1), -1, -(size.getZ() >> 1));
+		BlockPos end = pos.offset(size.getX() >> 1, 0, size.getZ() >> 1);
 		int count = 0;
 
 		for (int x = start.getX(); x <= end.getX(); x++) {
@@ -125,17 +124,17 @@ public class StructureWorld extends StructureNBT implements IStructure {
 		return (float) airCount / count;
 	}
 
-	private float getAirFractionBottom(WorldAccess world, BlockPos pos) {
+	private float getAirFractionBottom(LevelAccessor world, BlockPos pos) {
 		int airCount = 0;
 
-		Mutable size = new Mutable().set(new BlockPos(structure.getSize()).rotate(rotation));
+		MutableBlockPos size = new MutableBlockPos().set(new BlockPos(structure.getSize()).rotate(rotation));
 		size.setX(Math.abs(size.getX()));
 		size.setZ(Math.abs(size.getZ()));
 
 		float y1 = Math.min(offsetY, 0);
 		float y2 = Math.max(offsetY, 0);
-		BlockPos start = pos.add(-(size.getX() >> 1), y1, -(size.getZ() >> 1));
-		BlockPos end = pos.add(size.getX() >> 1, y2, size.getZ() >> 1);
+		BlockPos start = pos.offset(-(size.getX() >> 1), y1, -(size.getZ() >> 1));
+		BlockPos end = pos.offset(size.getX() >> 1, y2, size.getZ() >> 1);
 		int count = 0;
 
 		for (int x = start.getX(); x <= end.getX(); x++) {

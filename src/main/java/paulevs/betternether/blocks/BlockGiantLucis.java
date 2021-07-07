@@ -1,39 +1,40 @@
 package paulevs.betternether.blocks;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
 
-import java.util.List;
-
-public class BlockGiantLucis extends MushroomBlock {
+public class BlockGiantLucis extends HugeMushroomBlock {
 	public BlockGiantLucis() {
-		super(FabricBlockSettings.of(Material.SOLID_ORGANIC)
-				.materialColor(MapColor.YELLOW)
+		super(FabricBlockSettings.of(Material.GRASS)
+				.materialColor(MaterialColor.COLOR_YELLOW)
 				.breakByTool(FabricToolTags.AXES)
-				.sounds(BlockSoundGroup.WOOD)
-				.hardness(1F)
+				.sound(SoundType.WOOD)
+				.destroyTime(1F)
 				.luminance(15)
-				.nonOpaque());
+				.noOcclusion());
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
-		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0) return Lists.newArrayList(new ItemStack(this.asItem()));
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+		ItemStack tool = builder.getParameter(LootContextParams.TOOL);
+		if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0) return Lists.newArrayList(new ItemStack(this.asItem()));
 		return Lists.newArrayList(new ItemStack(BlocksRegistry.LUCIS_SPORE, MHelper.randRange(0, 1, MHelper.RANDOM)),
 				new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM)));
 	}
