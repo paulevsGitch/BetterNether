@@ -59,11 +59,11 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig> {
 			for (CityPiece p : buildings)
 				cityBox.encompass(p.getBoundingBox());
 
-			int d1 = Math.max((center.getX() - cityBox.getMaxZ()), (cityBox.getMinZ() - center.getX()));
-			int d2 = Math.max((center.getZ() - cityBox.getMinY()), (cityBox.getMaxY() - center.getZ()));
-			int radius = Math.max(d1, d2);
-			if (radius / 2 + center.getY() < cityBox.getMaxX()) {
-				radius = (cityBox.getMaxX() - center.getY()) / 2;
+            int d1 = Math.max((center.getX() - cityBox.getMinX()), (cityBox.getMaxX() - center.getX()));
+            int d2 = Math.max((center.getZ() - cityBox.getMinZ()), (cityBox.getMaxZ() - center.getZ()));
+            int radius = Math.max(d1, d2);
+            if (radius / 2 + center.getY() < cityBox.getMaxY()) {
+				radius = (cityBox.getMaxY() - center.getY()) / 2;
 			}
 
 			if (!(chunkGenerator instanceof FlatChunkGenerator)) {
