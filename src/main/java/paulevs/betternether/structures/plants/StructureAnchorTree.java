@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MushroomBlock;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
@@ -66,8 +67,10 @@ public class StructureAnchorTree implements IStructure {
 
 		BlockState state;
 		int offset = random.nextInt(4);
+		final int minBuildHeight = world.getBottomY()+1;
+		final BlockBox blockBox = BlocksHelper.decorationBounds(world, up, minBuildHeight, 126);
 		for (BlockPos bpos : BLOCKS) {
-			if (bpos.getY() < 1 || bpos.getY() > 126) continue;
+			if (!blockBox.contains(bpos)) continue;
 			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
 			boolean blockUp = true;
 			if ((blockUp = BLOCKS.contains(bpos.up())) && BLOCKS.contains(bpos.down()))
@@ -77,13 +80,13 @@ public class StructureAnchorTree implements IStructure {
 
 			if (bpos.getY() > 45 && bpos.getY() < 90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
-					makeMushroom(world, bpos.north(), random.nextDouble() * 3 + 1.5);
+					makeMushroom(world, bpos.north(), random.nextDouble() * 3 + 1.5, blockBox);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.south()))
-					makeMushroom(world, bpos.south(), random.nextDouble() * 3 + 1.5);
+					makeMushroom(world, bpos.south(), random.nextDouble() * 3 + 1.5, blockBox);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.east()))
-					makeMushroom(world, bpos.east(), random.nextDouble() * 3 + 1.5);
+					makeMushroom(world, bpos.east(), random.nextDouble() * 3 + 1.5, blockBox);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.west()))
-					makeMushroom(world, bpos.west(), random.nextDouble() * 3 + 1.5);
+					makeMushroom(world, bpos.west(), random.nextDouble() * 3 + 1.5, blockBox);
 			}
 
 			if (bpos.getY() > 64) {
@@ -94,13 +97,13 @@ public class StructureAnchorTree implements IStructure {
 				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
 					state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
-						BlocksHelper.setWithUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
+						BlocksHelper.setWithUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH), blockBox);
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
-						BlocksHelper.setWithUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
+						BlocksHelper.setWithUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH), blockBox);
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
-						BlocksHelper.setWithUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
+						BlocksHelper.setWithUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST), blockBox);
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
-						BlocksHelper.setWithUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
+						BlocksHelper.setWithUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST), blockBox);
 				}
 			}
 		}
@@ -202,7 +205,7 @@ public class StructureAnchorTree implements IStructure {
 		return result;
 	}
 
-	protected static void makeMushroom(ServerWorldAccess world, BlockPos pos, double radius) {
+	protected static void makeMushroom(ServerWorldAccess world, BlockPos pos, double radius, BlockBox bounds) {
 		if (!world.getBlockState(pos).getMaterial().isReplaceable()) return;
 
 		int x1 = MHelper.floor(pos.getX() - radius);
@@ -237,7 +240,7 @@ public class StructureAnchorTree implements IStructure {
 					.with(MushroomBlock.NORTH, north)
 					.with(MushroomBlock.SOUTH, south)
 					.with(MushroomBlock.EAST, east)
-					.with(MushroomBlock.WEST, west));
+					.with(MushroomBlock.WEST, west), bounds);
 		}
 	}
 }
