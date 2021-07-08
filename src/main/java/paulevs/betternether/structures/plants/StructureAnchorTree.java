@@ -96,14 +96,21 @@ public class StructureAnchorTree implements IStructure {
 
 				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
 					state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
-						BlocksHelper.setWithUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH), blockBox);
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
-						BlocksHelper.setWithUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH), blockBox);
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
-						BlocksHelper.setWithUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST), blockBox);
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
-						BlocksHelper.setWithUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST), blockBox);
+					BlockPos _pos = bpos.north();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos) && _pos.getZ() >= blockBox.getMinZ())
+						BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.NORTH));
+
+					_pos = bpos.south();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos) && _pos.getZ() <= blockBox.getMaxZ())
+						BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.SOUTH));
+
+					_pos = bpos.east();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos) && _pos.getX() <= blockBox.getMaxX())
+						BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.EAST));
+
+					_pos = bpos.west();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos) && _pos.getX() >= blockBox.getMinX())
+						BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.WEST));
 				}
 			}
 		}
@@ -223,7 +230,7 @@ public class StructureAnchorTree implements IStructure {
 				pz2 *= pz2;
 				if (px2 + pz2 <= radius) {
 					BlockPos p = new BlockPos(x, pos.getY(), z);
-					if (world.getBlockState(p).getMaterial().isReplaceable()) {
+					if (world.getBlockState(p).getMaterial().isReplaceable() && bounds.contains(p)) {
 						placed.add(p);
 					}
 				}
@@ -240,7 +247,7 @@ public class StructureAnchorTree implements IStructure {
 					.with(MushroomBlock.NORTH, north)
 					.with(MushroomBlock.SOUTH, south)
 					.with(MushroomBlock.EAST, east)
-					.with(MushroomBlock.WEST, west), bounds);
+					.with(MushroomBlock.WEST, west));
 		}
 	}
 }

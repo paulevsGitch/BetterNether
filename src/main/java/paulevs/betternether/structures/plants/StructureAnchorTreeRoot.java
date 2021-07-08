@@ -96,14 +96,21 @@ public class StructureAnchorTreeRoot implements IStructure {
 			}
 
 			state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
-				BlocksHelper.setWithoutUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH)/*, blockBox*/);
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
-				BlocksHelper.setWithoutUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH)/*, blockBox*/);
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
-				BlocksHelper.setWithoutUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST)/*, blockBox*/);
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
-				BlocksHelper.setWithoutUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST)/*, blockBox*/);
+			BlockPos _pos = bpos.north();
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos))
+				BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.NORTH));
+
+			_pos = bpos.south();
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos))
+				BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.SOUTH));
+
+			_pos = bpos.east();
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos))
+				BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.EAST));
+
+			_pos = bpos.west();
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos))
+				BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.WEST));
 
 			if (blockUp && !blockDown && random.nextInt(16) == 0) {
 				bpos = bpos.down();
