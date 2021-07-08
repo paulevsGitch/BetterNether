@@ -29,9 +29,9 @@ public class DestructionPiece extends CustomPiece {
 		radius = random.nextInt(5) + 1;
 		radSqr = radius * radius;
 		center = new BlockPos(
-				MHelper.randRange(bounds.maxZ(), bounds.minZ(), random),
 				MHelper.randRange(bounds.minX(), bounds.maxX(), random),
-				MHelper.randRange(bounds.minY(), bounds.maxY(), random));
+				MHelper.randRange(bounds.minY(), bounds.maxY(), random),
+				MHelper.randRange(bounds.minZ(), bounds.maxZ(), random));
 		makeBoundingBox();
 	}
 

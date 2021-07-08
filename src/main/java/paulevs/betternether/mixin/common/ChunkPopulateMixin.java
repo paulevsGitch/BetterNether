@@ -5,6 +5,7 @@ import net.minecraft.ReportedException;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
@@ -23,8 +24,9 @@ public abstract class ChunkPopulateMixin {
 
 	@Inject(method = "applyBiomeDecoration", at = @At("HEAD"), cancellable = true)
 	private void customPopulate(WorldGenRegion region, StructureFeatureManager accessor, CallbackInfo info) {
-		int chunkX = region.getCenter().x;
-		int chunkZ = region.getCenter().z;
+		ChunkPos chunkPos = region.getCenter();
+		int chunkX = chunkPos.x;
+		int chunkZ = chunkPos.z;
 		if (!region.isClientSide() && isNetherBiome(region, chunkX, chunkZ) && region.getChunk(chunkX, chunkZ) != null) {
 			RANDOM.setBaseChunkSeed(chunkX, chunkZ);
 			int sx = chunkX << 4;
@@ -35,14 +37,14 @@ public abstract class ChunkPopulateMixin {
 			ChunkGenerator generator = (ChunkGenerator) (Object) this;
 			for (Biome biome : BNWorldGenerator.getPopulateBiomes()) {
 				try {
-					biome.generate(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, 0, sz));
+					biome.generate(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, region.getMinBuildHeight(), sz));
 				}
 				catch (Exception e) {
 					CrashReport crashReport = CrashReport.forThrowable(e, "Biome decoration");
 					crashReport
 							.addCategory("Generation")
-							.setDetail("CenterX", region.getCenter().x)
-							.setDetail("CenterZ", region.getCenter().z)
+							.setDetail("CenterX", chunkX)
+							.setDetail("CenterZ", chunkZ)
 							.setDetail("Seed", featureSeed)
 							.setDetail("Biome", biome);
 					throw new ReportedException(crashReport);

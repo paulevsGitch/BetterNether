@@ -1,6 +1,7 @@
 package paulevs.betternether.world.structures.piece;
 
 import java.util.Random;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -65,28 +66,29 @@ public class CityPiece extends CustomPiece {
 		if (!this.boundingBox.intersects(blockBox))
 			return true;
 
-		BoundingBox clamped = new BoundingBox(boundingBox.minX(), boundingBox.minY(), boundingBox.minZ(), boundingBox.maxX(), boundingBox.maxY(), boundingBox.maxZ());
-		clamped.encapsulate(blockBox);
-		/*clamped.maxZ = Math.max(clamped.getMaxZ(), blockBox.getMaxZ());
-		clamped.minZ = Math.min(clamped.getMinZ(), blockBox.getMinZ());
+        BoundingBox clamped = new BoundingBox(boundingBox.minX(), boundingBox.minY(), boundingBox.minZ(), boundingBox.maxX(), boundingBox.maxY(), boundingBox.maxZ());
+		//clamped.encompass(blockBox);
+		int cminZ = Math.max(clamped.minZ(), blockBox.minZ());
+		int cmaxZ = Math.min(clamped.maxZ(), blockBox.maxZ());
 
-		clamped.minX = Math.max(clamped.getMinX(), blockBox.getMinX());
-		clamped.maxX = Math.min(clamped.getMaxX(), blockBox.getMaxX());
+		int cminX = Math.max(clamped.minX(), blockBox.minX());
+		int cmaxX = Math.min(clamped.maxX(), blockBox.maxX());
 
-		clamped.minY = Math.max(clamped.getMinY(), blockBox.getMinY());
-		clamped.maxY = Math.min(clamped.getMaxY(), blockBox.getMaxY());*/
+		int cminY = Math.max(clamped.minY(), blockBox.minY());
+		int cmaxY = Math.min(clamped.maxY(), blockBox.maxY());
+		clamped = new BoundingBox(cminX, cminY, cminZ, cmaxX, cmaxY, cmaxZ);
 
 		building.placeInChunk(world, pos, clamped, paletteProcessor);
 
 		ChunkAccess chunk = world.getChunk(chunkPos.x, chunkPos.z);
 
 		BlockState state;
-		for (int x = clamped.maxZ(); x <= clamped.minZ(); x++)
-			for (int z = clamped.minY(); z <= clamped.maxY(); z++) {
-				POS.set(x, clamped.minX(), z);
+		for (int x = clamped.minX(); x <= clamped.maxX(); x++)
+			for (int z = clamped.minZ(); z <= clamped.maxZ(); z++) {
+				POS.set(x, clamped.minY(), z);
 				state = world.getBlockState(POS);
 				if (!state.isAir() && state.isCollisionShapeFullBlock(world, POS)) {
-					for (int y = clamped.minX() - 1; y > 4; y--) {
+					for (int y = clamped.minY() - 1; y > 4; y--) {
 						POS.setY(y);
 						BlocksHelper.setWithoutUpdate(world, POS, state);
 						if (BlocksHelper.isNetherGroundMagma(world.getBlockState(POS.below())))
@@ -95,7 +97,7 @@ public class CityPiece extends CustomPiece {
 				}
 
 				// POS.set(x - clamped.minX, clamped.minY - clamped.minZ, z);
-				for (int y = clamped.minX(); y <= clamped.maxX(); y++) {
+				for (int y = clamped.minY(); y <= clamped.maxY(); y++) {
 					POS.setY(y);
 					chunk.markPosForPostprocessing(POS);
 				}
