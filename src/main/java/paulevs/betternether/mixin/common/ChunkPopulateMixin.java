@@ -25,12 +25,12 @@ public abstract class ChunkPopulateMixin {
 	@Inject(method = "applyBiomeDecoration", at = @At("HEAD"), cancellable = true)
 	private void customPopulate(WorldGenRegion region, StructureFeatureManager accessor, CallbackInfo info) {
 		ChunkPos chunkPos = region.getCenter();
-		int chunkX = chunkPos.x;
-		int chunkZ = chunkPos.z;
+		final int chunkX = chunkPos.x;
+		final int chunkZ = chunkPos.z;
 		if (!region.isClientSide() && isNetherBiome(region, chunkX, chunkZ) && region.getChunk(chunkX, chunkZ) != null) {
 			RANDOM.setBaseChunkSeed(chunkX, chunkZ);
-			int sx = chunkX << 4;
-			int sz = chunkZ << 4;
+			final int sx = chunkX << 4;
+			final int sz = chunkZ << 4;
 			BNWorldGenerator.prePopulate(region, sx, sz, RANDOM);
 
 			long featureSeed = RANDOM.setDecorationSeed(region.getSeed(), chunkX, chunkZ);

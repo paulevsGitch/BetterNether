@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockPlantWall;
@@ -34,11 +35,11 @@ public class StructureAnchorTree implements IStructure {
 		return (pos.getX() & 15) == 7 && (pos.getZ() & 15) == 7;
 	}
 
-	private void grow(ServerLevelAccessor world, BlockPos up, BlockPos down, Random random) {
+	private void grow(ServerLevelAccessor level, BlockPos up, BlockPos down, Random random) {
 		if (up.getY() - down.getY() < 30) return;
-		int pd = BlocksHelper.downRay(world, down, 128) + 1;
+		int pd = BlocksHelper.downRay(level, down, 128) + 1;
 		for (int i = 0; i < 5; i++) {
-			Block block = world.getBlockState(down.below(pd + i)).getBlock();
+			Block block = level.getBlockState(down.below(pd + i)).getBlock();
 			if (block == Blocks.NETHER_BRICKS || block == BlocksRegistry.NETHER_BRICK_TILE_LARGE || block == BlocksRegistry.NETHER_BRICK_TILE_SMALL)
 				return;
 		}
@@ -65,41 +66,50 @@ public class StructureAnchorTree implements IStructure {
 
 		BlockState state;
 		int offset = random.nextInt(4);
+		final int minBuildHeight = level.getMinBuildHeight()+1;
+		final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(level, up, minBuildHeight, 126);
 		for (BlockPos bpos : BLOCKS) {
-			if (bpos.getY() < 1 || bpos.getY() > 126) continue;
-			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
+			if (!blockBox.isInside(bpos)) continue;
+			if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
 			boolean blockUp = true;
 			if ((blockUp = BLOCKS.contains(bpos.above())) && BLOCKS.contains(bpos.below()))
-				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.log.defaultBlockState());
+				BlocksHelper.setWithUpdate(level, bpos, BlocksRegistry.ANCHOR_TREE.log.defaultBlockState());
 			else
-				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.defaultBlockState());
+				BlocksHelper.setWithUpdate(level, bpos, BlocksRegistry.ANCHOR_TREE.bark.defaultBlockState());
 
 			if (bpos.getY() > 45 && bpos.getY() < 90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
-					makeMushroom(world, bpos.north(), random.nextDouble() * 3 + 1.5);
+					makeMushroom(level, bpos.north(), random.nextDouble() * 3 + 1.5, blockBox);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.south()))
-					makeMushroom(world, bpos.south(), random.nextDouble() * 3 + 1.5);
+					makeMushroom(level, bpos.south(), random.nextDouble() * 3 + 1.5, blockBox);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.east()))
-					makeMushroom(world, bpos.east(), random.nextDouble() * 3 + 1.5);
+					makeMushroom(level, bpos.east(), random.nextDouble() * 3 + 1.5, blockBox);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.west()))
-					makeMushroom(world, bpos.west(), random.nextDouble() * 3 + 1.5);
+					makeMushroom(level, bpos.west(), random.nextDouble() * 3 + 1.5, blockBox);
 			}
 
 			if (bpos.getY() > 64) {
-				if (!blockUp && world.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
-					BlocksHelper.setWithUpdate(world, bpos.above(), BlocksRegistry.MOSS_COVER.defaultBlockState());
+				if (!blockUp && level.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
+					BlocksHelper.setWithUpdate(level, bpos.above(), BlocksRegistry.MOSS_COVER.defaultBlockState());
 				}
 
 				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
 					state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isEmptyBlock(bpos.north()))
-						BlocksHelper.setWithUpdate(world, bpos.north(), state.setValue(BlockPlantWall.FACING, Direction.NORTH));
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isEmptyBlock(bpos.south()))
-						BlocksHelper.setWithUpdate(world, bpos.south(), state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isEmptyBlock(bpos.east()))
-						BlocksHelper.setWithUpdate(world, bpos.east(), state.setValue(BlockPlantWall.FACING, Direction.EAST));
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isEmptyBlock(bpos.west()))
-						BlocksHelper.setWithUpdate(world, bpos.west(), state.setValue(BlockPlantWall.FACING, Direction.WEST));
+					BlockPos _pos = bpos.north();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() >= blockBox.minZ())
+						BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.NORTH));
+
+					_pos = bpos.south();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() <= blockBox.maxZ())
+						BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
+
+					_pos = bpos.east();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() <= blockBox.maxX())
+						BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.EAST));
+
+					_pos = bpos.west();
+					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() >= blockBox.minX())
+						BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.WEST));
 				}
 			}
 		}
@@ -201,7 +211,7 @@ public class StructureAnchorTree implements IStructure {
 		return result;
 	}
 
-	protected static void makeMushroom(ServerLevelAccessor world, BlockPos pos, double radius) {
+	protected static void makeMushroom(ServerLevelAccessor world, BlockPos pos, double radius, BoundingBox bounds) {
 		if (!world.getBlockState(pos).getMaterial().isReplaceable()) return;
 
 		int x1 = MHelper.floor(pos.getX() - radius);
@@ -219,7 +229,7 @@ public class StructureAnchorTree implements IStructure {
 				pz2 *= pz2;
 				if (px2 + pz2 <= radius) {
 					BlockPos p = new BlockPos(x, pos.getY(), z);
-					if (world.getBlockState(p).getMaterial().isReplaceable()) {
+					if (world.getBlockState(p).getMaterial().isReplaceable() && bounds.isInside(p)) {
 						placed.add(p);
 					}
 				}

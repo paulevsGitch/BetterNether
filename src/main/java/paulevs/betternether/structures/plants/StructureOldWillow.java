@@ -3,6 +3,7 @@ package paulevs.betternether.structures.plants;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockPlantWall;
@@ -41,6 +43,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 		int minCount = scale < 1 ? 3 : 4;
 		int maxCount = scale < 1 ? 5 : 7;
 		int count = MHelper.randRange(minCount, maxCount, random);
+		final BoundingBox blockBox = BlocksHelper.decorationBounds(world, pos);
 		for (int n = 0; n < count; n++) {
 			float branchSize = MHelper.randRange(0.5F, 1F, random) * scale;
 			float angle = n * MHelper.PI2 / count;
@@ -50,7 +53,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 			int z1 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F, 2F, random) * branchSize);
 			float crownR = 10 * branchSize;
 			if (crownR < 1.5F) crownR = 1.5F;
-			crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random);
+			crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random, blockBox);
 
 			boolean generate = true;
 			for (int i = 1; i < CURVE_X.length && generate; i++) {
@@ -89,7 +92,9 @@ public class StructureOldWillow extends StructureFuncScatter {
 		}
 
 		BlockState state;
+
 		for (BlockPos bpos : BLOCKS) {
+			//if (!blockBox.contains(bpos)) continue;
 			if (BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) || state.getMaterial().isReplaceable()) {
 				if (!BLOCKS.contains(bpos.above()) || !BLOCKS.contains(bpos.below()))
 					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_BARK.defaultBlockState());
@@ -183,7 +188,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 		}
 	}
 
-	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random) {
+	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random, BoundingBox bounds) {
 		BlockState leaves = BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.NATURAL, false);
 		BlockState vine = BlocksRegistry.WILLOW_BRANCH.defaultBlockState();
 		float halfR = radius * 0.5F;
@@ -205,19 +210,19 @@ public class StructureOldWillow extends StructureFuncScatter {
 							if (random.nextBoolean()) {
 								int length = BlocksHelper.downRay(world, POS, 12);
 								if (length < 3) {
-									BlocksHelper.setWithUpdate(world, POS, leaves);
+									BlocksHelper.setWithUpdate(world, POS, leaves, bounds);
 									continue;
 								} ;
 								length = MHelper.randRange(3, length, random);
 								for (int i = 1; i < length - 1; i++) {
-									BlocksHelper.setWithUpdate(world, POS.below(i), vine);
+									BlocksHelper.setWithUpdate(world, POS.below(i), vine, bounds);
 								}
-								BlocksHelper.setWithUpdate(world, POS.below(length - 1), vine.setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+								BlocksHelper.setWithUpdate(world, POS.below(length - 1), vine.setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END), bounds);
 							}
 							else if (random.nextBoolean() && world.getBlockState(POS.below()).getMaterial().isReplaceable()) {
-								BlocksHelper.setWithUpdate(world, POS.below(), leaves);
+								BlocksHelper.setWithUpdate(world, POS.below(), leaves, bounds);
 							}
-							BlocksHelper.setWithUpdate(world, POS, leaves);
+							BlocksHelper.setWithUpdate(world, POS, leaves, bounds);
 						}
 					}
 				}

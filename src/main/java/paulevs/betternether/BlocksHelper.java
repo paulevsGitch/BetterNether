@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.SectionPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelAccessor;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.LavaFluid;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -42,6 +44,32 @@ public class BlocksHelper {
 			new Vec3i(1, 0, -1), new Vec3i(1, 0, 0), new Vec3i(1, 0, 1),
 			new Vec3i(1, 1, -1), new Vec3i(1, 1, 0), new Vec3i(1, 1, 1)
 	};
+
+	public static BoundingBox chunkBounds(LevelAccessor world, BlockPos pos){
+		final int minBuildHeight = world.getMinBuildHeight()+1;
+		final int maxBuildHeight = world.getMaxBuildHeight()-1;
+		return chunkBounds(world, pos, minBuildHeight, maxBuildHeight);
+	}
+
+	public static BoundingBox chunkBounds(LevelAccessor world, BlockPos pos, int minY, int maxY){
+		final int chunkStartX = (pos.getX() >> 4) << 4;
+		final int chunkStartZ = (pos.getZ() >> 4) << 4;
+
+		return new BoundingBox(chunkStartX, minY, chunkStartZ, chunkStartX+31, maxY, chunkStartZ+31);
+	}
+
+	public static BoundingBox decorationBounds(LevelAccessor world, BlockPos pos){
+		final int minBuildHeight = world.getMinBuildHeight()+1;
+		final int maxBuildHeight = world.getMaxBuildHeight()-1;
+		return decorationBounds(world, pos, minBuildHeight, maxBuildHeight);
+	}
+
+	public static BoundingBox decorationBounds(LevelAccessor world, BlockPos pos, int minY, int maxY){
+		final int chunkStartX = (pos.getX() >> 4) << 4;
+		final int chunkStartZ = (pos.getZ() >> 4) << 4;
+
+		return new BoundingBox(chunkStartX-16, minY, chunkStartZ-16, chunkStartX+31, maxY, chunkStartZ+31);
+	}
 
 	public static boolean isLava(BlockState state) {
 		return state.getFluidState().getType() instanceof LavaFluid;
@@ -73,8 +101,18 @@ public class BlocksHelper {
 		return state.is(NetherTags.MYCELIUM);
 	}
 
+	public static void setWithUpdate(LevelAccessor world, BlockPos pos, BlockState state, BoundingBox bounds) {
+		if (bounds.isInside(pos))
+            world.setBlock(pos, state, SET_UPDATE);
+	}
+
 	public static void setWithUpdate(LevelAccessor world, BlockPos pos, BlockState state) {
 		world.setBlock(pos, state, SET_UPDATE);
+	}
+
+	public static void setWithoutUpdate(LevelAccessor world, BlockPos pos, BlockState state, BoundingBox bounds) {
+		if (bounds.isInside(pos))
+			world.setBlock(pos, state, SET_SILENT);
 	}
 	
 	public static void setWithoutUpdate(LevelAccessor world, BlockPos pos, BlockState state) {
