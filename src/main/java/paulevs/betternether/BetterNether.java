@@ -1,6 +1,7 @@
 package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
+import paulevs.betternether.commands.CommandRegistry;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.recipes.IntegrationRecipes;
@@ -37,6 +38,7 @@ public class BetterNether implements ModInitializer {
 		BNWorldGenerator.onModInit();
 		BiomesRegistry.register();
 		BrewingRegistry.register();
+		CommandRegistry.register();
 		Config.save();
 
 		IntegrationRecipes.register();
