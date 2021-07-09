@@ -1,9 +1,11 @@
 package paulevs.betternether.mixin.common;
 
+import net.minecraft.structure.NetherFortressGenerator;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -23,8 +25,9 @@ public abstract class ChunkPopulateMixin {
 
 	@Inject(method = "generateFeatures", at = @At("HEAD"), cancellable = true)
 	private void customPopulate(ChunkRegion region, StructureAccessor accessor, CallbackInfo info) {
-		int chunkX = region.getCenterPos().x;
-		int chunkZ = region.getCenterPos().z;
+		ChunkPos chunkPos = region.getCenterPos();
+		int chunkX = chunkPos.x;
+		int chunkZ = chunkPos.z;
 		if (!region.isClient() && isNetherBiome(region, chunkX, chunkZ) && region.getChunk(chunkX, chunkZ) != null) {
 			RANDOM.setTerrainSeed(chunkX, chunkZ);
 			int sx = chunkX << 4;
@@ -35,14 +38,14 @@ public abstract class ChunkPopulateMixin {
 			ChunkGenerator generator = (ChunkGenerator) (Object) this;
 			for (Biome biome : BNWorldGenerator.getPopulateBiomes()) {
 				try {
-					biome.generateFeatureStep(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, 0, sz));
+					biome.generateFeatureStep(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, region.getBottomY(), sz));
 				}
 				catch (Exception e) {
 					CrashReport crashReport = CrashReport.create(e, "Biome decoration");
 					crashReport
 							.addElement("Generation")
-							.add("CenterX", region.getCenterPos().x)
-							.add("CenterZ", region.getCenterPos().z)
+							.add("CenterX", chunkX)
+							.add("CenterZ", chunkZ)
 							.add("Seed", featureSeed)
 							.add("Biome", biome);
 					throw new CrashException(crashReport);

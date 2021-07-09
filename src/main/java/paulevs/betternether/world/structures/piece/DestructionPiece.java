@@ -30,9 +30,9 @@ public class DestructionPiece extends CustomPiece {
 		radius = random.nextInt(5) + 1;
 		radSqr = radius * radius;
 		center = new BlockPos(
-				MHelper.randRange(bounds.getMaxZ(), bounds.getMinZ(), random),
 				MHelper.randRange(bounds.getMinX(), bounds.getMaxX(), random),
-				MHelper.randRange(bounds.getMinY(), bounds.getMaxY(), random));
+				MHelper.randRange(bounds.getMinY(), bounds.getMaxY(), random),
+				MHelper.randRange(bounds.getMinZ(), bounds.getMaxZ(), random));
 		makeBoundingBox();
 	}
 

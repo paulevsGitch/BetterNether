@@ -2,6 +2,7 @@ package paulevs.betternether.structures.plants;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
@@ -54,8 +55,11 @@ public class StructureAnchorTreeRoot implements IStructure {
 			wallPlants = new Block[] { BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.WALL_MUSHROOM_BROWN, BlocksRegistry.WALL_MUSHROOM_RED };
 		}
 		BlockState vine = BlocksRegistry.ANCHOR_TREE_VINE.getDefaultState();
+		final int minBuildHeight = world.getBottomY()+1;
+		final BlockBox blockBox = BlocksHelper.decorationBounds(world, pos, minBuildHeight, 126);
 		for (BlockPos bpos : BLOCKS) {
-			if (bpos.getY() < 1 || bpos.getY() > 126) continue;
+			//if (!blockBox.contains(bpos)) continue;
+			if (bpos.getY() < minBuildHeight || bpos.getY() > 126) continue;
 			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !canReplace(state)) continue;
 			boolean blockUp = true;
 			boolean blockDown = true;
@@ -71,35 +75,42 @@ public class StructureAnchorTreeRoot implements IStructure {
 			if ((bpos.getY() & 3) == 0 && StructureAnchorTree.NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
 					if (random.nextBoolean())
-						StructureAnchorTree.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5);
+						StructureAnchorTree.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5, blockBox);
 					else
 					LUCIS.generate(world, bpos, random);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.south()))
 					if (random.nextBoolean())
-						StructureAnchorTree.makeMushroom(world, bpos.south(), random.nextDouble() + 1.5);
+						StructureAnchorTree.makeMushroom(world, bpos.south(), random.nextDouble() + 1.5, blockBox);
 					else
 					LUCIS.generate(world, bpos, random);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.east()))
 					if (random.nextBoolean())
-						StructureAnchorTree.makeMushroom(world, bpos.east(), random.nextDouble() + 1.5);
+						StructureAnchorTree.makeMushroom(world, bpos.east(), random.nextDouble() + 1.5, blockBox);
 					else
 					LUCIS.generate(world, bpos, random);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.west()))
 					if (random.nextBoolean())
-						StructureAnchorTree.makeMushroom(world, bpos.west(), random.nextDouble() + 1.5);
+						StructureAnchorTree.makeMushroom(world, bpos.west(), random.nextDouble() + 1.5, blockBox);
 					else
 					LUCIS.generate(world, bpos, random);
 			}
 
 			state = wallPlants[random.nextInt(wallPlants.length)].getDefaultState();
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.north()) && world.isAir(bpos.north()))
-				BlocksHelper.setWithoutUpdate(world, bpos.north(), state.with(BlockPlantWall.FACING, Direction.NORTH));
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.south()) && world.isAir(bpos.south()))
-				BlocksHelper.setWithoutUpdate(world, bpos.south(), state.with(BlockPlantWall.FACING, Direction.SOUTH));
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.east()) && world.isAir(bpos.east()))
-				BlocksHelper.setWithoutUpdate(world, bpos.east(), state.with(BlockPlantWall.FACING, Direction.EAST));
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(bpos.west()) && world.isAir(bpos.west()))
-				BlocksHelper.setWithoutUpdate(world, bpos.west(), state.with(BlockPlantWall.FACING, Direction.WEST));
+			BlockPos _pos = bpos.north();
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos))
+				BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.NORTH));
+
+			_pos = bpos.south();
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos))
+				BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.SOUTH));
+
+			_pos = bpos.east();
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos))
+				BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.EAST));
+
+			_pos = bpos.west();
+			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isAir(_pos))
+				BlocksHelper.setWithUpdate(world, _pos, state.with(BlockPlantWall.FACING, Direction.WEST));
 
 			if (blockUp && !blockDown && random.nextInt(16) == 0) {
 				bpos = bpos.down();

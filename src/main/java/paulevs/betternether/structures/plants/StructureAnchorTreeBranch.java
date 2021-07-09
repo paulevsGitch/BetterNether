@@ -176,7 +176,7 @@ public class StructureAnchorTreeBranch implements IStructure {
 			for (int cx = start; cx <= radius; cx++) {
 				int cx2 = cx * cx;
 				POS.setX(pos.getX() + cx);
-				for (int cz = start; cz <= radius; cz++) {
+				for (int cz = start+(cx%2); cz <= radius; cz+=2) {
 					int cz2 = cz * cz;
 					if (cx2 + cy2_out + cz2 < r2 && cx2 + cy2_in + cz2 > r2) {
 						POS.setZ(pos.getZ() + cz);
