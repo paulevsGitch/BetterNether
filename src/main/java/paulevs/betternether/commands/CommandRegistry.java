@@ -13,14 +13,21 @@ import com.mojang.brigadier.Command;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import paulevs.betternether.BetterNether;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.BiomesRegistry;
+import paulevs.betternether.registry.BlocksRegistry;
 
 public class CommandRegistry {
     private static final DynamicCommandExceptionType ERROR_BIOME_NOT_FOUND = new DynamicCommandExceptionType(
@@ -41,6 +48,10 @@ public class CommandRegistry {
                             .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                             .executes(ctx -> teleportToNextBiome(ctx))
                     )
+                    .then(Commands.literal("placeall")
+                            .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
+                            .executes(ctx -> placeAllBlocks(ctx))
+                    )
         );
     }
 
@@ -54,8 +65,6 @@ public class CommandRegistry {
         final NetherBiome biome = BiomesRegistry.getAllBiomes().get(biomeIndex);
         source.sendSuccess(new TextComponent("Locating Biome " + biome).setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
         biomeIndex = (biomeIndex+1) % BiomesRegistry.getAllBiomes().size();
-
-
 
         final BlockPos currentPosition = new BlockPos(source.getPosition());
         final BlockPos biomePosition = source.getLevel().findNearestBiome(biome.getActualBiome(), currentPosition, MAX_SEARCH_RADIUS, SEARCH_STEP);
@@ -80,5 +89,20 @@ public class CommandRegistry {
             return LocateCommand.showLocateResult(source, biomeName, currentPosition, biomePosition,
                     "commands.locatebiome.success");
         }
+    }
+
+    private static int placeAllBlocks(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        final CommandSourceStack source = ctx.getSource();
+        final ServerPlayer player = source.getPlayerOrException();
+        Vec3 pos = source.getPosition();
+
+        int i=0;
+        for (String name : BlocksRegistry.getPossibleBlocks()) {
+            Block bl = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
+            BlockState state = bl.defaultBlockState();
+            BlocksHelper.setWithUpdate(player.getLevel(), new BlockPos((int) pos.x + i, (int) pos.y, (int) pos.z), state);
+            i++;
+        }
+        return 0;
     }
 }
