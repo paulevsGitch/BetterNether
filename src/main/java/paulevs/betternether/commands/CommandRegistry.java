@@ -77,11 +77,16 @@ public class CommandRegistry {
             BlockState state;
             BlockPos target;
             double yPos = source.getPosition().y();
+            boolean didWrap = false;
             do {
                 target = new BlockPos(biomePosition.getX(), yPos, biomePosition.getZ());
                 state = player.level.getBlockState(target);
-                yPos++;
-                if (yPos >= player.level.getMaxBuildHeight()-1) {yPos =  player.level.getMinBuildHeight()+1;}
+                yPos--;
+                if (yPos <= player.level.getMinBuildHeight()+1) {
+                    if (didWrap) break;
+                    yPos = 127;
+                    didWrap = true;
+                }
             } while (!state.isAir() && yPos > player.level.getMinBuildHeight() && yPos < player.level.getMaxBuildHeight());
             Vector3d targetPlayerPos = new Vector3d(target.getX() + 0.5,target.getY()-1, target.getZ() + 0.5);
 
