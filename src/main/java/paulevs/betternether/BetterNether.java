@@ -12,6 +12,7 @@ import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.NetherTags;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.NetherBiomeSource;

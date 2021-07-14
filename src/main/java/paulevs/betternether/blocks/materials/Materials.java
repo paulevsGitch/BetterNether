@@ -8,7 +8,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 public class Materials {
-	public static final Material COMMON_WOOD = new Material.Builder(MaterialColor.WOOD).build();
 	public static final Material COMMON_GRASS = new Material.Builder(MaterialColor.PLANT).noCollider().nonSolid().replaceable().build();
 	public static final Material COMMON_LEAVES = new Material.Builder(MaterialColor.PLANT).nonSolid().build();
 
@@ -21,7 +20,7 @@ public class Materials {
 	}
 
 	public static FabricBlockSettings makeGrass(MaterialColor color) {
-		return FabricBlockSettings.of(COMMON_GRASS)
+		return FabricBlockSettings.of(Material.GRASS)
 				.allowsSpawning((state, world, pos, type) -> {
 					return true;
 				})
@@ -33,7 +32,7 @@ public class Materials {
 	}
 
 	public static Properties makeLeaves(MaterialColor color) {
-		return FabricBlockSettings.of(COMMON_LEAVES, color)
+		return FabricBlockSettings.of(Material.LEAVES, color)
 				.breakByHand(true)
 				.breakByTool(FabricToolTags.SHEARS)
 				.sounds(SoundType.GRASS)
