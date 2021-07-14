@@ -29,7 +29,9 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/javax.annotation/jsr305
 	compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-	modCompileOnly "com.terraformersmc:modmenu:${modmenu_version}"
+	modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+
+    useApi "com.github.paulevsGitch:BCLib:${project.bclib_version}"
 }
 
 repositories {
@@ -41,9 +43,20 @@ repositories {
     }
     maven { url "https://maven.shedaniel.me/" }
 	//maven { url "https://maven.terraformersmc.com/releases/"}
-    
+    maven { url 'https://jitpack.io' }
     flatDir {
-        dirs '/Users/frank/Library/Application Support/minecraft/mods'
+        dirs 'libs'
+    }
+}
+
+def useApi(String dep) {
+    dependencies.modApi(dep) {
+        exclude group: 'net.fabricmc.fabric-api'
+        exclude group: 'net.fabricmc'
+        if (!dep.contains("me.shedaniel")) {
+            exclude group: 'me.shedaniel.cloth'
+            exclude group: 'me.shedaniel'
+        }
     }
 }
 

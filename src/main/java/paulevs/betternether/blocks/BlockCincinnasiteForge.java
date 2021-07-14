@@ -17,9 +17,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import paulevs.betternether.blockentities.BlockEntityForge;
+import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
@@ -35,6 +38,10 @@ public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
 
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new BlockEntityForge(pos, state);
+	}
+
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+		return createFurnaceTicker(world, type, BlockEntitiesRegistry.CINCINNASITE_FORGE);
 	}
 
 	@Override

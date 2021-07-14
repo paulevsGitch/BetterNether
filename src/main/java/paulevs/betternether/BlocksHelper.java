@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.SectionPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,6 +18,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.LavaFluid;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherTags;
 
 public class BlocksHelper {
 	public static final int FLAG_UPDATE_BLOCK = 1;
