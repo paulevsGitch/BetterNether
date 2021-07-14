@@ -1,11 +1,15 @@
 package paulevs.betternether.commands;
 
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.math.Vector3d;
+import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
+import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
 import com.mojang.brigadier.CommandDispatcher;
@@ -21,13 +25,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlocksRegistry;
+import ru.bclib.api.TagAPI;
+import ru.bclib.util.TagHelper;
 
 public class CommandRegistry {
     private static final DynamicCommandExceptionType ERROR_BIOME_NOT_FOUND = new DynamicCommandExceptionType(
@@ -101,13 +112,49 @@ public class CommandRegistry {
         final ServerPlayer player = source.getPlayerOrException();
         Vec3 pos = source.getPosition();
 
-        int i=0;
+        List<Block> pickaxes = new LinkedList<>();
+        List<Block> axes = new LinkedList<>();
+        List<Block> hoes = new LinkedList<>();
+        List<Block> shovels = new LinkedList<>();
+        List<Block> other = new LinkedList<>();
+
         for (String name : BlocksRegistry.getPossibleBlocks()) {
-            Block bl = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
+            Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
+            BlockBehaviour.Properties properties = ((AbstractBlockAccessor) block).getSettings();
+            Material material = ((AbstractBlockSettingsAccessor) properties).getMaterial();
+
+            if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
+                pickaxes.add(block);
+            } else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
+                axes.add(block);
+            } else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Material.WATER_PLANT)) {
+                hoes.add(block);
+            } else if (material.equals(Material.SAND)) {
+                shovels.add(block);
+            } else {
+                other.add(block);
+            }
+        }
+
+
+        placeBlockRow(player, pos, pickaxes, 1);
+        placeBlockRow(player, pos, axes, 2);
+        placeBlockRow(player, pos, hoes, 3);
+        placeBlockRow(player, pos, shovels, 4);
+        placeBlockRow(player, pos, other, 5);
+        return 0;
+    }
+
+    private static void placeBlockRow(ServerPlayer player, Vec3 pos, List<Block> blocklist, int offset) {
+        int i=0;
+        for (Block bl : blocklist) {
             BlockState state = bl.defaultBlockState();
-            BlocksHelper.setWithUpdate(player.getLevel(), new BlockPos((int) pos.x + i, (int) pos.y, (int) pos.z), state);
+            BlockPos blockPos = new BlockPos((int) pos.x + i, (int) pos.y, (int) pos.z + offset);
+            BlocksHelper.setWithoutUpdate(player.getLevel(), blockPos, state);
+            if (bl instanceof DoorBlock){
+                BlocksHelper.setWithoutUpdate(player.getLevel(), blockPos.above(), (BlockState)state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
+            }
             i++;
         }
-        return 0;
     }
 }
