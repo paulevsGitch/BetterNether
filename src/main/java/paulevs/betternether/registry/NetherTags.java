@@ -42,7 +42,7 @@ public class NetherTags {
 			else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
 				TagHelper.addTag(TagAPI.MINEABLE_AXE, block);
 			}
-			else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Material.WATER_PLANT) || material.equals(Materials.COMMON_LEAVES)) {
+			else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Material.WATER_PLANT)) {
 				TagHelper.addTag(TagAPI.MINEABLE_HOE, block);
 			}
 			else if (material.equals(Material.SAND)) {

@@ -8,9 +8,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 public class Materials {
-	public static final Material COMMON_GRASS = new Material.Builder(MaterialColor.PLANT).noCollider().nonSolid().replaceable().build();
-	public static final Material COMMON_LEAVES = new Material.Builder(MaterialColor.PLANT).nonSolid().build();
-
 	public static FabricBlockSettings makeWood(MaterialColor color) {
 		return FabricBlockSettings.of(Material.NETHER_WOOD)
 				.breakByTool(FabricToolTags.AXES)
