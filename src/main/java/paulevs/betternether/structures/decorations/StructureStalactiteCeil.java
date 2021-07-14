@@ -1,18 +1,17 @@
 package paulevs.betternether.structures.decorations;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureStalactiteCeil implements IStructure {
-	private static final Mutable POS = new Mutable();
+	private static final MutableBlockPos POS = new MutableBlockPos();
 	private final Block block;
 	private final Block upper;
 	private final Block[] ground;
@@ -29,8 +28,8 @@ public class StructureStalactiteCeil implements IStructure {
 		this.ground = ground;
 	}
 
-	private boolean canPlaceAt(ServerWorldAccess world, BlockPos pos) {
-		return world.isAir(pos) && (ground == null ? BlocksHelper.isNetherrack(world.getBlockState(pos.up())) : groundContains(world.getBlockState(pos.up()).getBlock()));
+	private boolean canPlaceAt(ServerLevelAccessor world, BlockPos pos) {
+		return world.isEmptyBlock(pos) && (ground == null ? BlocksHelper.isNetherrack(world.getBlockState(pos.above())) : groundContains(world.getBlockState(pos.above()).getBlock()));
 	}
 
 	private boolean groundContains(Block block) {
@@ -41,7 +40,7 @@ public class StructureStalactiteCeil implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		if (canPlaceAt(world, pos)) {
 			for (int i = 0; i < 16; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2F);
@@ -67,18 +66,18 @@ public class StructureStalactiteCeil implements IStructure {
 
 					if (upper != null && h > 2) {
 						POS.setY(y + 1);
-						BlocksHelper.setWithoutUpdate(world, POS, upper.getDefaultState());
+						BlocksHelper.setWithoutUpdate(world, POS, upper.defaultBlockState());
 						if (stalagnate) {
 							POS.setY(y - h);
-							BlocksHelper.setWithoutUpdate(world, POS, upper.getDefaultState());
+							BlocksHelper.setWithoutUpdate(world, POS, upper.defaultBlockState());
 						}
 					}
 					for (int n = 0; n < h; n++) {
 						POS.setY(y - n);
-						if (!world.isAir(POS))
+						if (!world.isEmptyBlock(POS))
 							break;
 						int size = stalagnate ? (Math.abs(h / 2 - n) + offset) : (h - n - 1);
-						BlocksHelper.setWithoutUpdate(world, POS, block.getDefaultState().with(BlockStalactite.SIZE, size));
+						BlocksHelper.setWithoutUpdate(world, POS, block.defaultBlockState().setValue(BlockStalactite.SIZE, size));
 					}
 				}
 			}

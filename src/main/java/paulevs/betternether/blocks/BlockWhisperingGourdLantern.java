@@ -1,40 +1,40 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.MapColor;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockWhisperingGourdLantern extends Block {
-	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
 	public BlockWhisperingGourdLantern() {
-		super(Materials.makeWood(MapColor.BLUE).luminance(15));
+		super(Materials.makeWood(MaterialColor.COLOR_BLUE).luminance(15));
 	}
 
-	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
+	public BlockState rotate(BlockState state, Rotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror) {
+	public BlockState mirror(BlockState state, Mirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
 	}
 }

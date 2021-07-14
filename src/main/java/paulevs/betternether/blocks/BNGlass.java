@@ -4,39 +4,39 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class BNGlass extends BlockBaseNotFull {
 	public BNGlass(Block block) {
 		super(FabricBlockSettings.copyOf(block)
+				.breakByTool(FabricToolTags.PICKAXES)
 				.resistance(0.3F)
 				.nonOpaque()
-				.breakByTool(FabricToolTags.PICKAXES)
-				.suffocates((arg1, arg2, arg3) -> {
+				.isSuffocating((arg1, arg2, arg3) -> {
 					return false;
 				})
-				.blockVision((arg1, arg2, arg3) -> {
+				.isViewBlocking((arg1, arg2, arg3) -> {
 					return false;
 				}));
 		this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
 	}
 
 	@Environment(EnvType.CLIENT)
-	public float getAmbientOcclusionLightLevel(BlockState state, BlockView view, BlockPos pos) {
+	public float getShadeBrightness(BlockState state, BlockGetter view, BlockPos pos) {
 		return 1.0F;
 	}
 
 	@Override
-	public boolean isTranslucent(BlockState state, BlockView view, BlockPos pos) {
+	public boolean propagatesSkylightDown(BlockState state, BlockGetter view, BlockPos pos) {
 		return true;
 	}
 
 	@Environment(EnvType.CLIENT)
-	public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing) {
-		return neighbor.getBlock() == this ? true : super.isSideInvisible(state, neighbor, facing);
+	public boolean skipRendering(BlockState state, BlockState neighbor, Direction facing) {
+		return neighbor.getBlock() == this ? true : super.skipRendering(state, neighbor, facing);
 	}
 }

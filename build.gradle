@@ -17,7 +17,7 @@ minecraft {
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	mappings minecraft.officialMojangMappings()
     //mappings fileTree(dir: "mappings", include: "**.jar")
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
@@ -40,7 +40,11 @@ repositories {
         url = 'https://jitpack.io'
     }
     maven { url "https://maven.shedaniel.me/" }
-	maven { url "https://maven.terraformersmc.com/releases/"}
+	//maven { url "https://maven.terraformersmc.com/releases/"}
+    
+    flatDir {
+        dirs '/Users/frank/Library/Application Support/minecraft/mods'
+    }
 }
 
 processResources {

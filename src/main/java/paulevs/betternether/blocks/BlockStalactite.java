@@ -1,56 +1,56 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-
 import javax.annotation.Nullable;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
 public class BlockStalactite extends BlockBaseNotFull {
-	public static final IntProperty SIZE = IntProperty.of("size", 0, 7);
-	private static final Mutable POS = new Mutable();
+	public static final IntegerProperty SIZE = IntegerProperty.create("size", 0, 7);
+	private static final MutableBlockPos POS = new MutableBlockPos();
 	private static final VoxelShape[] SHAPES;
 
 	public BlockStalactite(Block source) {
-		super(FabricBlockSettings.copy(source).nonOpaque());
-		this.setDefaultState(getStateManager().getDefaultState().with(SIZE, 0));
+		super(FabricBlockSettings.copy(source).noOcclusion());
+		this.registerDefaultState(getStateDefinition().any().setValue(SIZE, 0));
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(SIZE);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return SHAPES[state.get(SIZE)];
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return SHAPES[state.getValue(SIZE)];
 	}
 
 	@Override
-	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-		if (world.getBlockState(pos.down()).getBlock() instanceof BlockStalactite) {
+	public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+		if (world.getBlockState(pos.below()).getBlock() instanceof BlockStalactite) {
 			POS.setX(pos.getX());
 			POS.setZ(pos.getZ());
 			for (int i = 1; i < 8; i++) {
 				POS.setY(pos.getY() - i);
 				if (world.getBlockState(POS).getBlock() instanceof BlockStalactite) {
 					BlockState state2 = world.getBlockState(POS);
-					int size = state2.get(SIZE);
+					int size = state2.getValue(SIZE);
 					if (size < i) {
-						world.setBlockState(POS, state2.with(SIZE, i));
+						world.setBlockAndUpdate(POS, state2.setValue(SIZE, i));
 					}
 					else
 						break;
@@ -59,16 +59,16 @@ public class BlockStalactite extends BlockBaseNotFull {
 					break;
 			}
 		}
-		if (world.getBlockState(pos.up()).getBlock() instanceof BlockStalactite) {
+		if (world.getBlockState(pos.above()).getBlock() instanceof BlockStalactite) {
 			POS.setX(pos.getX());
 			POS.setZ(pos.getZ());
 			for (int i = 1; i < 8; i++) {
 				POS.setY(pos.getY() + i);
 				if (world.getBlockState(POS).getBlock() instanceof BlockStalactite) {
 					BlockState state2 = world.getBlockState(POS);
-					int size = state2.get(SIZE);
+					int size = state2.getValue(SIZE);
 					if (size < i) {
-						world.setBlockState(POS, state2.with(SIZE, i));
+						world.setBlockAndUpdate(POS, state2.setValue(SIZE, i));
 					}
 					else
 						break;
@@ -80,34 +80,34 @@ public class BlockStalactite extends BlockBaseNotFull {
 	}
 
 	@Override
-	public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
-		BlockPos pos2 = pos.up();
+	public void destroy(LevelAccessor world, BlockPos pos, BlockState state) {
+		BlockPos pos2 = pos.above();
 		BlockState state2 = world.getBlockState(pos2);
-		if (state2.getBlock() instanceof BlockStalactite && state2.get(SIZE) < state.get(SIZE)) {
-			state2.getBlock().onBroken(world, pos2, state2);
-			world.breakBlock(pos2, true);
+		if (state2.getBlock() instanceof BlockStalactite && state2.getValue(SIZE) < state.getValue(SIZE)) {
+			state2.getBlock().destroy(world, pos2, state2);
+			world.destroyBlock(pos2, true);
 		}
 
-		pos2 = pos.down();
+		pos2 = pos.below();
 		state2 = world.getBlockState(pos2);
-		if (state2.getBlock() instanceof BlockStalactite && state2.get(SIZE) < state.get(SIZE)) {
-			state2.getBlock().onBroken(world, pos2, state2);
-			world.breakBlock(pos2, true);
+		if (state2.getBlock() instanceof BlockStalactite && state2.getValue(SIZE) < state.getValue(SIZE)) {
+			state2.getBlock().destroy(world, pos2, state2);
+			world.destroyBlock(pos2, true);
 		}
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
 		return canPlace(world, pos, Direction.UP) || canPlace(world, pos, Direction.DOWN);
 	}
 
-	private boolean canPlace(WorldView world, BlockPos pos, Direction dir) {
-		return world.getBlockState(pos.offset(dir)).getBlock() instanceof BlockStalactite || Block.sideCoversSmallSquare(world, pos.offset(dir), dir.getOpposite());
+	private boolean canPlace(LevelReader world, BlockPos pos, Direction dir) {
+		return world.getBlockState(pos.relative(dir)).getBlock() instanceof BlockStalactite || Block.canSupportCenter(world, pos.relative(dir), dir.getOpposite());
 	}
 
 	static {
 		SHAPES = new VoxelShape[8];
 		for (int i = 0; i < 8; i++)
-			SHAPES[i] = Block.createCuboidShape(7 - i, 0, 7 - i, 9 + i, 16, 9 + i);
+			SHAPES[i] = Block.box(7 - i, 0, 7 - i, 9 + i, 16, 9 + i);
 	}
 }

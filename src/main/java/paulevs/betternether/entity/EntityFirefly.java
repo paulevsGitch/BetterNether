@@ -1,102 +1,110 @@
 package paulevs.betternether.entity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
-import net.minecraft.entity.EntityGroup;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Flutterer;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.AboveGroundTargeting;
-import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.control.LookControl;
-import net.minecraft.entity.ai.goal.AnimalMateGoal;
-import net.minecraft.entity.ai.goal.FollowParentGoal;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.pathing.BirdNavigation;
-import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.ai.pathing.Path;
-import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.tag.Tag;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.control.LookControl;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.FollowParentGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.HoverRandomPos;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.FlyingAnimal;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.entity.EntityFirefly.FreflyLookControl;
+import paulevs.betternether.entity.EntityFirefly.MoveRandomGoal;
+import paulevs.betternether.entity.EntityFirefly.MoveToFlowersGoal;
+import paulevs.betternether.entity.EntityFirefly.SittingGoal;
+import paulevs.betternether.entity.EntityFirefly.WanderAroundGoal;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 
-import java.util.*;
-
-public class EntityFirefly extends AnimalEntity implements Flutterer {
+public class EntityFirefly extends Animal implements FlyingAnimal {
 	private static final HashSet<Block> FLOWERS;
 	private static final Vec3i[] SEARCH;
 
-	private static final TrackedData<Float> COLOR_RED = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
-	private static final TrackedData<Float> COLOR_GREEN = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
-	private static final TrackedData<Float> COLOR_BLUE = DataTracker.registerData(EntityFirefly.class, TrackedDataHandlerRegistry.FLOAT);
+	private static final EntityDataAccessor<Float> COLOR_RED = SynchedEntityData.defineId(EntityFirefly.class, EntityDataSerializers.FLOAT);
+	private static final EntityDataAccessor<Float> COLOR_GREEN = SynchedEntityData.defineId(EntityFirefly.class, EntityDataSerializers.FLOAT);
+	private static final EntityDataAccessor<Float> COLOR_BLUE = SynchedEntityData.defineId(EntityFirefly.class, EntityDataSerializers.FLOAT);
 
 	private boolean mustSit = false;
 
-	public EntityFirefly(EntityType<? extends EntityFirefly> type, World world) {
+	public EntityFirefly(EntityType<? extends EntityFirefly> type, Level world) {
 		super(type, world);
-		this.moveControl = new FlightMoveControl(this, 20, true);
+		this.moveControl = new FlyingMoveControl(this, 20, true);
 		this.lookControl = new FreflyLookControl(this);
-		this.setPathfindingPenalty(PathNodeType.LAVA, -1.0F);
-		this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
-		this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, 0.0F);
-		this.experiencePoints = 1;
+		this.setPathfindingMalus(BlockPathTypes.LAVA, -1.0F);
+		this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
+		this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
+		this.xpReward = 1;
 	}
 
 	@Override
-	protected void initDataTracker() {
-		super.initDataTracker();
+	protected void defineSynchedData() {
+		super.defineSynchedData();
 		makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.25F, 1);
 	}
 
-	public static DefaultAttributeContainer getAttributeContainer() {
-		return MobEntity
+	public static AttributeSupplier getAttributeContainer() {
+		return Mob
 				.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
-				.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.6)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-				.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0)
+				.add(Attributes.MAX_HEALTH, 1.0)
+				.add(Attributes.FLYING_SPEED, 0.6)
+				.add(Attributes.MOVEMENT_SPEED, 0.25)
+				.add(Attributes.FOLLOW_RANGE, 48.0)
 				.build();
 	}
 
 	@Override
-	protected EntityNavigation createNavigation(World world) {
-		BirdNavigation birdNavigation = new BirdNavigation(this, world) {
-			public boolean isValidPosition(BlockPos pos) {
-				BlockState state = this.world.getBlockState(pos.down());
+	protected PathNavigation createNavigation(Level world) {
+		FlyingPathNavigation birdNavigation = new FlyingPathNavigation(this, world) {
+			public boolean isStableDestination(BlockPos pos) {
+				BlockState state = this.level.getBlockState(pos.below());
 				boolean valid = !state.isAir() && state.getMaterial() != Material.LAVA;
 				if (valid) {
-					state = this.world.getBlockState(pos);
-					valid = state.isAir() || !state.getMaterial().blocksMovement();
+					state = this.level.getBlockState(pos);
+					valid = state.isAir() || !state.getMaterial().blocksMotion();
 					valid = valid && state.getBlock() != BlocksRegistry.EGG_PLANT;
-					valid = valid && !state.getMaterial().blocksMovement();
+					valid = valid && !state.getMaterial().blocksMotion();
 				}
 				return valid;
 			}
@@ -105,81 +113,81 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 				super.tick();
 			}
 		};
-		birdNavigation.setCanPathThroughDoors(false);
-		birdNavigation.setCanSwim(false);
-		birdNavigation.setCanEnterOpenDoors(true);
+		birdNavigation.setCanOpenDoors(false);
+		birdNavigation.setCanFloat(false);
+		birdNavigation.setCanPassDoors(true);
 		return birdNavigation;
 	}
 
 	@Override
-	protected void initGoals() {
-		this.goalSelector.add(1, new SwimGoal(this));
-		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
-		this.goalSelector.add(3, new FollowParentGoal(this, 1.0D));
-		this.goalSelector.add(4, new SittingGoal());
-		this.goalSelector.add(5, new MoveToFlowersGoal());
-		this.goalSelector.add(6, new WanderAroundGoal());
-		this.goalSelector.add(7, new MoveRandomGoal());
+	protected void registerGoals() {
+		this.goalSelector.addGoal(1, new FloatGoal(this));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.0D));
+		this.goalSelector.addGoal(4, new SittingGoal());
+		this.goalSelector.addGoal(5, new MoveToFlowersGoal());
+		this.goalSelector.addGoal(6, new WanderAroundGoal());
+		this.goalSelector.addGoal(7, new MoveRandomGoal());
 	}
 
 	@Override
-	public float getPathfindingFavor(BlockPos pos, WorldView worldView) {
+	public float getWalkTargetValue(BlockPos pos, LevelReader worldView) {
 		return worldView.getBlockState(pos).isAir() ? 10.0F : 0.0F;
 	}
 
 	@Override
-	public boolean isBreedingItem(ItemStack stack) {
+	public boolean isFood(ItemStack stack) {
 		return stack.getItem() == Items.GLOWSTONE_DUST;
 	}
 
 	@Override
-	protected boolean hasWings() {
+	protected boolean isFlapping() {
 		return true;
 	}
 
 	@Override
-	public EntityGroup getGroup() {
-		return EntityGroup.ARTHROPOD;
+	public MobType getMobType() {
+		return MobType.ARTHROPOD;
 	}
 
 	@Override
-	protected void swimUpward(Tag<Fluid> fluid) {
-		this.setVelocity(this.getVelocity().add(0.0D, 0.01D, 0.0D));
+	protected void jumpInLiquid(Tag<Fluid> fluid) {
+		this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.01D, 0.0D));
 	}
 
 	@Override
-	public float getBrightnessAtEyes() {
+	public float getBrightness() {
 		return 1.0F;
 	}
 
 	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+	public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
 		return false;
 	}
 
 	@Override
-	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
+	protected void checkFallDamage(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
 
 	@Override
-	public boolean hasNoGravity() {
+	public boolean isNoGravity() {
 		return true;
 	}
 
 	public float getRed() {
-		return this.dataTracker.get(COLOR_RED);
+		return this.entityData.get(COLOR_RED);
 	}
 
 	public float getGreen() {
-		return this.dataTracker.get(COLOR_GREEN);
+		return this.entityData.get(COLOR_GREEN);
 	}
 
 	public float getBlue() {
-		return this.dataTracker.get(COLOR_BLUE);
+		return this.entityData.get(COLOR_BLUE);
 	}
 
 	@Override
-	public void writeCustomDataToNbt(NbtCompound tag) {
-		super.writeCustomDataToNbt(tag);
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
 
 		tag.putFloat("ColorRed", getRed());
 		tag.putFloat("ColorGreen", getGreen());
@@ -187,85 +195,85 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public void readCustomDataFromNbt(NbtCompound tag) {
-		super.readCustomDataFromNbt(tag);
+	public void readAdditionalSaveData(CompoundTag tag) {
+		super.readAdditionalSaveData(tag);
 
 		if (tag.contains("ColorRed")) {
-			this.dataTracker.set(COLOR_RED, tag.getFloat("ColorRed"));
+			this.entityData.set(COLOR_RED, tag.getFloat("ColorRed"));
 		}
 
 		if (tag.contains("ColorGreen")) {
-			this.dataTracker.set(COLOR_GREEN, tag.getFloat("ColorGreen"));
+			this.entityData.set(COLOR_GREEN, tag.getFloat("ColorGreen"));
 		}
 
 		if (tag.contains("ColorBlue")) {
-			this.dataTracker.set(COLOR_BLUE, tag.getFloat("ColorBlue"));
+			this.entityData.set(COLOR_BLUE, tag.getFloat("ColorBlue"));
 		}
 	}
 
 	@Override
-	public PassiveEntity createChild(ServerWorld world, PassiveEntity mate) {
+	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mate) {
 		return EntityRegistry.FIREFLY.create(world);
 	}
 
 	@Override
-	public boolean isInAir() {
+	public boolean isFlying() {
 		return !this.onGround;
 	}
 
 	class FreflyLookControl extends LookControl {
-		FreflyLookControl(MobEntity entity) {
+		FreflyLookControl(Mob entity) {
 			super(entity);
 		}
 
-		protected boolean shouldStayHorizontal() {
+		protected boolean resetXRotOnTick() {
 			return true;
 		}
 	}
 
 	class WanderAroundGoal extends Goal {
 		WanderAroundGoal() {
-			this.setControls(EnumSet.of(Goal.Control.MOVE));
+			this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 		}
 
-		public boolean canStart() {
-			return EntityFirefly.this.navigation.isIdle() && EntityFirefly.this.random.nextInt(10) == 0;
+		public boolean canUse() {
+			return EntityFirefly.this.navigation.isDone() && EntityFirefly.this.random.nextInt(10) == 0;
 		}
 
-		public boolean shouldContinue() {
-			return EntityFirefly.this.navigation.isFollowingPath();
+		public boolean canContinueToUse() {
+			return EntityFirefly.this.navigation.isInProgress();
 		}
 
 		public void start() {
 			BlockPos pos = this.getRandomLocation();
 			// if (pos != null)
 			// {
-			Path path = EntityFirefly.this.navigation.findPathTo(pos, 1);
+			Path path = EntityFirefly.this.navigation.createPath(pos, 1);
 			if (path != null)
-				EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
+				EntityFirefly.this.navigation.moveTo(path, 1.0D);
 			else
-				EntityFirefly.this.setVelocity(0, -0.2, 0);
+				EntityFirefly.this.setDeltaMovement(0, -0.2, 0);
 			// }
 			super.start();
 		}
 
 		private BlockPos getRandomLocation() {
-			World w = EntityFirefly.this.world;
-			Mutable bpos = new Mutable();
+			Level w = EntityFirefly.this.level;
+			MutableBlockPos bpos = new MutableBlockPos();
 			bpos.set(EntityFirefly.this.getX(), EntityFirefly.this.getY(), EntityFirefly.this.getZ());
 
-			if (w.isAir(bpos.down(2)) && w.isAir(bpos.down())) {
+			if (w.isEmptyBlock(bpos.below(2)) && w.isEmptyBlock(bpos.below())) {
 				int y = bpos.getY() - 1;
-				while (w.isAir(bpos.down(2)) && y > 0)
+				while (w.isEmptyBlock(bpos.below(2)) && y > 0)
 					bpos.setY(y--);
 				return bpos;
 			}
 
-			Vec3d angle = EntityFirefly.this.getRotationVec(0.0F);
-			Vec3d airTarget = AboveGroundTargeting.find(EntityFirefly.this, 8, 7, angle.x, angle.z, 1.5707964F, 2, 1);
+			Vec3 angle = EntityFirefly.this.getViewVector(0.0F);
+			Vec3 airTarget = HoverRandomPos.getPos(EntityFirefly.this, 8, 7, angle.x, angle.z, 1.5707964F, 2, 1);
 
 			if (airTarget == null) {
-				airTarget = AboveGroundTargeting.find(EntityFirefly.this, 16, 10, angle.x, angle.z, 1.5707964F, 3, 1);
+				airTarget = HoverRandomPos.getPos(EntityFirefly.this, 16, 10, angle.x, angle.z, 1.5707964F, 3, 1);
 			}
 
 			if (airTarget == null) {
@@ -275,7 +283,7 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 				return bpos;
 			}
 
-			bpos.set(airTarget.getX(), airTarget.getY(), airTarget.getZ());
+			bpos.set(airTarget.x(), airTarget.y(), airTarget.z());
 
 			return bpos;
 		}
@@ -294,39 +302,39 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 
 	class MoveToFlowersGoal extends Goal {
 		MoveToFlowersGoal() {
-			this.setControls(EnumSet.of(Goal.Control.MOVE));
+			this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 		}
 
 		@Override
-		public boolean canStart() {
-			return EntityFirefly.this.navigation.isIdle() && EntityFirefly.this.random.nextInt(30) == 0;
+		public boolean canUse() {
+			return EntityFirefly.this.navigation.isDone() && EntityFirefly.this.random.nextInt(30) == 0;
 		}
 
 		@Override
-		public boolean shouldContinue() {
-			return EntityFirefly.this.navigation.isFollowingPath();
+		public boolean canContinueToUse() {
+			return EntityFirefly.this.navigation.isInProgress();
 		}
 
 		@Override
 		public void start() {
 			BlockPos pos = this.getFlowerLocation();
 			if (pos != null) {
-				Path path = EntityFirefly.this.navigation.findPathTo((BlockPos) (new BlockPos(pos)), 1);
-				EntityFirefly.this.navigation.startMovingAlong(path, 1.0D);
+				Path path = EntityFirefly.this.navigation.createPath((BlockPos) (new BlockPos(pos)), 1);
+				EntityFirefly.this.navigation.moveTo(path, 1.0D);
 			}
 			super.start();
 		}
 
 		@Override
 		public void stop() {
-			if (isFlower(EntityFirefly.this.getBlockStateAtPos()))
+			if (isFlower(EntityFirefly.this.getFeetBlockState()))
 				EntityFirefly.this.mustSit = true;
 			super.stop();
 		}
 
 		private BlockPos getFlowerLocation() {
-			World w = EntityFirefly.this.world;
-			Mutable bpos = new Mutable();
+			Level w = EntityFirefly.this.level;
+			MutableBlockPos bpos = new MutableBlockPos();
 
 			for (Vec3i offset : SEARCH) {
 				bpos.set(
@@ -353,10 +361,10 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 	}
 
 	private void checkMovement() {
-		Vec3d vel = EntityFirefly.this.getVelocity();
+		Vec3 vel = EntityFirefly.this.getDeltaMovement();
 		if (Math.abs(vel.x) > 0.1 || Math.abs(vel.z) > 0.1) {
-			double d = Math.abs(EntityFirefly.this.prevX - EntityFirefly.this.getX());
-			d += Math.abs(EntityFirefly.this.prevZ - EntityFirefly.this.getZ());
+			double d = Math.abs(EntityFirefly.this.xo - EntityFirefly.this.getX());
+			d += Math.abs(EntityFirefly.this.zo - EntityFirefly.this.getZ());
 			if (d < 0.1)
 				EntityFirefly.this.navigation.stop();
 		}
@@ -369,17 +377,17 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 		SittingGoal() {}
 
 		@Override
-		public boolean canStart() {
-			if (EntityFirefly.this.mustSit && EntityFirefly.this.navigation.isIdle()) {
+		public boolean canUse() {
+			if (EntityFirefly.this.mustSit && EntityFirefly.this.navigation.isDone()) {
 				BlockPos pos = new BlockPos(EntityFirefly.this.getX(), EntityFirefly.this.getY(), EntityFirefly.this.getZ());
-				BlockState state = EntityFirefly.this.world.getBlockState(pos.down());
+				BlockState state = EntityFirefly.this.level.getBlockState(pos.below());
 				return !state.isAir() && !state.getMaterial().isLiquid();
 			}
 			return false;
 		}
 
 		@Override
-		public boolean shouldContinue() {
+		public boolean canContinueToUse() {
 			return timer < ammount;
 		}
 
@@ -388,13 +396,13 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 			timer = 0;
 			ammount = EntityFirefly.this.random.nextInt(21) + 20;
 			EntityFirefly.this.mustSit = false;
-			EntityFirefly.this.setVelocity(0, -0.1, 0);
+			EntityFirefly.this.setDeltaMovement(0, -0.1, 0);
 			super.start();
 		}
 
 		@Override
 		public void stop() {
-			EntityFirefly.this.setVelocity(0, 0.1, 0);
+			EntityFirefly.this.setDeltaMovement(0, 0.1, 0);
 			super.stop();
 		}
 
@@ -412,12 +420,12 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 		MoveRandomGoal() {}
 
 		@Override
-		public boolean canStart() {
-			return EntityFirefly.this.navigation.isIdle() && EntityFirefly.this.random.nextInt(20) == 0;
+		public boolean canUse() {
+			return EntityFirefly.this.navigation.isDone() && EntityFirefly.this.random.nextInt(20) == 0;
 		}
 
 		@Override
-		public boolean shouldContinue() {
+		public boolean canContinueToUse() {
 			return timer < ammount;
 		}
 
@@ -425,13 +433,13 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 		public void start() {
 			timer = 0;
 			ammount = EntityFirefly.this.random.nextInt(30) + 10;
-			Vec3d velocity = new Vec3d(
+			Vec3 velocity = new Vec3(
 					EntityFirefly.this.random.nextDouble(),
 					EntityFirefly.this.random.nextDouble(),
 					EntityFirefly.this.random.nextDouble());
-			if (velocity.lengthSquared() == 0)
-				velocity = new Vec3d(1, 0, 0);
-			EntityFirefly.this.setVelocity(velocity.normalize().multiply(EntityFirefly.this.flyingSpeed));
+			if (velocity.lengthSqr() == 0)
+				velocity = new Vec3(1, 0, 0);
+			EntityFirefly.this.setDeltaMovement(velocity.normalize().scale(EntityFirefly.this.flyingSpeed));
 			super.start();
 		}
 
@@ -493,13 +501,13 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 				blue = (byte) (f6 * 255F + 0.5F);
 				break;
 		}
-		this.dataTracker.startTracking(COLOR_RED, red / 255F);
-		this.dataTracker.startTracking(COLOR_GREEN, green / 255F);
-		this.dataTracker.startTracking(COLOR_BLUE, blue / 255F);
+		this.entityData.define(COLOR_RED, red / 255F);
+		this.entityData.define(COLOR_GREEN, green / 255F);
+		this.entityData.define(COLOR_BLUE, blue / 255F);
 	}
 
 	@Override
-	public int getLimitPerChunk() {
+	public int getMaxSpawnClusterSize() {
 		return 5;
 	}
 
@@ -536,13 +544,13 @@ public class EntityFirefly extends AnimalEntity implements Flutterer {
 		FLOWERS.add(Blocks.NETHER_WART);
 	}
 
-	public static boolean canSpawn(EntityType<? extends EntityFirefly> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if (pos.getY() >= world.getDimension().getMinimumY()) return false;
+	public static boolean canSpawn(EntityType<? extends EntityFirefly> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
+		if (pos.getY() >= world.dimensionType().minY()) return false;
 		int h = BlocksHelper.downRay(world, pos, 10);
 		if (h > 8)
 			return false;
 		for (int i = 1; i <= h; i++)
-			if (BlocksHelper.isLava(world.getBlockState(pos.down(i))))
+			if (BlocksHelper.isLava(world.getBlockState(pos.below(i))))
 				return false;
 		return true;
 	}

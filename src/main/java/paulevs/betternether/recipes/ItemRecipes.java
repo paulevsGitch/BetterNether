@@ -1,11 +1,11 @@
 package paulevs.betternether.recipes;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
 
@@ -63,10 +63,10 @@ public class ItemRecipes {
 	}
 
 	private static boolean itemExists(Item item) {
-		return Registry.ITEM.getId(item) != Registry.ITEM.getDefaultId();
+		return Registry.ITEM.getKey(item) != Registry.ITEM.getDefaultKey();
 	}
 
 	private static boolean blockExists(Block block) {
-		return Registry.BLOCK.getId(block) != Registry.BLOCK.getDefaultId();
+		return Registry.BLOCK.getKey(block) != Registry.BLOCK.getDefaultKey();
 	}
 }

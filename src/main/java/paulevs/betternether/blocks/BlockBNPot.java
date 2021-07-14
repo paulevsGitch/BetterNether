@@ -1,61 +1,61 @@
 package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 
 public class BlockBNPot extends BlockBaseNotFull {
-	private static final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 8, 13);
+	private static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 8, 13);
 
 	public BlockBNPot(Block material) {
-		super(FabricBlockSettings.copy(material).nonOpaque());
+		super(FabricBlockSettings.copy(material).noOcclusion());
 	}
 
-	public boolean hasSidedTransparency(BlockState state) {
+	public boolean useShapeForLightOcclusion(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
 		return SHAPE;
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		BlockPos plantPos = pos.up();
-		if (hit.getSide() == Direction.UP && world.isAir(plantPos)) {
-			BlockState plant = BlockPottedPlant.getPlant(player.getMainHandStack().getItem());
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		BlockPos plantPos = pos.above();
+		if (hit.getDirection() == Direction.UP && world.isEmptyBlock(plantPos)) {
+			BlockState plant = BlockPottedPlant.getPlant(player.getMainHandItem().getItem());
 			if (plant != null) {
-				if (!world.isClient())
-					BlocksHelper.setWithUpdate((ServerWorld) world, plantPos, plant);
-				world.playSound(
+				if (!world.isClientSide())
+					BlocksHelper.setWithUpdate((ServerLevel) world, plantPos, plant);
+				world.playLocalSound(
 						pos.getX() + 0.5,
 						pos.getY() + 1.5,
 						pos.getZ() + 0.5,
-						SoundEvents.ITEM_CROP_PLANT,
-						SoundCategory.BLOCKS,
+						SoundEvents.CROP_PLANTED,
+						SoundSource.BLOCKS,
 						0.8F,
 						1.0F,
 						true);
 				if (!player.isCreative())
-					player.getMainHandStack().decrement(1);
-				return ActionResult.SUCCESS;
+					player.getMainHandItem().shrink(1);
+				return InteractionResult.SUCCESS;
 			}
 		}
-		return ActionResult.FAIL;
+		return InteractionResult.FAIL;
 	}
 }

@@ -1,17 +1,16 @@
 package paulevs.betternether.mixin.common;
 
-import net.minecraft.structure.NetherFortressGenerator;
-import net.minecraft.util.crash.CrashException;
-import net.minecraft.util.crash.CrashReport;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.gen.ChunkRandom;
-import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.CrashReport;
+import net.minecraft.ReportedException;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.StructureFeatureManager;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,35 +19,35 @@ import paulevs.betternether.world.BNWorldGenerator;
 
 @Mixin(ChunkGenerator.class)
 public abstract class ChunkPopulateMixin {
-	private static final ChunkRandom RANDOM = new ChunkRandom();
-	private static final Mutable POS = new Mutable();
+	private static final WorldgenRandom RANDOM = new WorldgenRandom();
+	private static final MutableBlockPos POS = new MutableBlockPos();
 
-	@Inject(method = "generateFeatures", at = @At("HEAD"), cancellable = true)
-	private void customPopulate(ChunkRegion region, StructureAccessor accessor, CallbackInfo info) {
-		ChunkPos chunkPos = region.getCenterPos();
-		int chunkX = chunkPos.x;
-		int chunkZ = chunkPos.z;
-		if (!region.isClient() && isNetherBiome(region, chunkX, chunkZ) && region.getChunk(chunkX, chunkZ) != null) {
-			RANDOM.setTerrainSeed(chunkX, chunkZ);
-			int sx = chunkX << 4;
-			int sz = chunkZ << 4;
+	@Inject(method = "applyBiomeDecoration", at = @At("HEAD"), cancellable = true)
+	private void customPopulate(WorldGenRegion region, StructureFeatureManager accessor, CallbackInfo info) {
+		ChunkPos chunkPos = region.getCenter();
+		final int chunkX = chunkPos.x;
+		final int chunkZ = chunkPos.z;
+		if (!region.isClientSide() && isNetherBiome(region, chunkX, chunkZ) && region.getChunk(chunkX, chunkZ) != null) {
+			RANDOM.setBaseChunkSeed(chunkX, chunkZ);
+			final int sx = chunkX << 4;
+			final int sz = chunkZ << 4;
 			BNWorldGenerator.prePopulate(region, sx, sz, RANDOM);
 
-			long featureSeed = RANDOM.setPopulationSeed(region.getSeed(), chunkX, chunkZ);
+			long featureSeed = RANDOM.setDecorationSeed(region.getSeed(), chunkX, chunkZ);
 			ChunkGenerator generator = (ChunkGenerator) (Object) this;
 			for (Biome biome : BNWorldGenerator.getPopulateBiomes()) {
 				try {
-					biome.generateFeatureStep(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, region.getBottomY(), sz));
+					biome.generate(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, region.getMinBuildHeight(), sz));
 				}
 				catch (Exception e) {
-					CrashReport crashReport = CrashReport.create(e, "Biome decoration");
+					CrashReport crashReport = CrashReport.forThrowable(e, "Biome decoration");
 					crashReport
-							.addElement("Generation")
-							.add("CenterX", chunkX)
-							.add("CenterZ", chunkZ)
-							.add("Seed", featureSeed)
-							.add("Biome", biome);
-					throw new CrashException(crashReport);
+							.addCategory("Generation")
+							.setDetail("CenterX", chunkX)
+							.setDetail("CenterZ", chunkZ)
+							.setDetail("Seed", featureSeed)
+							.setDetail("Biome", biome);
+					throw new ReportedException(crashReport);
 				}
 			}
 
@@ -59,20 +58,20 @@ public abstract class ChunkPopulateMixin {
 		}
 	}
 
-	private boolean isNetherBiome(ChunkRegion world, int cx, int cz) {
+	private boolean isNetherBiome(WorldGenRegion world, int cx, int cz) {
 		POS.set(cx << 4, 0, cx << 4);
 		return isNetherBiome(world.getBiome(POS)) ||
-				isNetherBiome(world.getBiome(POS.add(0, 0, 7))) ||
-				isNetherBiome(world.getBiome(POS.add(0, 0, 15))) ||
-				isNetherBiome(world.getBiome(POS.add(7, 0, 0))) ||
-				isNetherBiome(world.getBiome(POS.add(7, 0, 7))) ||
-				isNetherBiome(world.getBiome(POS.add(7, 0, 15))) ||
-				isNetherBiome(world.getBiome(POS.add(15, 0, 0))) ||
-				isNetherBiome(world.getBiome(POS.add(15, 0, 7))) ||
-				isNetherBiome(world.getBiome(POS.add(15, 0, 15)));
+				isNetherBiome(world.getBiome(POS.offset(0, 0, 7))) ||
+				isNetherBiome(world.getBiome(POS.offset(0, 0, 15))) ||
+				isNetherBiome(world.getBiome(POS.offset(7, 0, 0))) ||
+				isNetherBiome(world.getBiome(POS.offset(7, 0, 7))) ||
+				isNetherBiome(world.getBiome(POS.offset(7, 0, 15))) ||
+				isNetherBiome(world.getBiome(POS.offset(15, 0, 0))) ||
+				isNetherBiome(world.getBiome(POS.offset(15, 0, 7))) ||
+				isNetherBiome(world.getBiome(POS.offset(15, 0, 15)));
 	}
 
 	private boolean isNetherBiome(Biome biome) {
-		return biome.getCategory() == Category.NETHER;
+		return biome.getBiomeCategory() == BiomeCategory.NETHER;
 	}
 }

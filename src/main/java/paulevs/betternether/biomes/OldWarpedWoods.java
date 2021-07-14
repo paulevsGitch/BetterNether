@@ -1,17 +1,20 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.BiomeParticleConfig;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.AmbientParticleSettings;
+import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.*;
-
-import java.util.Random;
+import paulevs.betternether.structures.plants.StructureBigWarpedTree;
+import paulevs.betternether.structures.plants.StructureBlackVine;
+import paulevs.betternether.structures.plants.StructureTwistedVines;
+import paulevs.betternether.structures.plants.StructureWarpedFungus;
+import paulevs.betternether.structures.plants.StructureWarpedRoots;
 
 public class OldWarpedWoods extends NetherBiome {
 	public OldWarpedWoods(String name) {
@@ -20,7 +23,7 @@ public class OldWarpedWoods extends NetherBiome {
 				.setLoop(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_WARPED_FOREST_MOOD)
-				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.WARPED_SPORE, 0.025F))
+				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.WARPED_SPORE, 0.025F))
 				.setDefaultMobs(false)
 				.addMobSpawn(EntityType.ENDERMAN, 1, 4, 4)
 				.addMobSpawn(EntityType.STRIDER, 60, 1, 2));
@@ -32,7 +35,7 @@ public class OldWarpedWoods extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, Blocks.WARPED_NYLIUM.getDefaultState());
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+		BlocksHelper.setWithoutUpdate(world, pos, Blocks.WARPED_NYLIUM.defaultBlockState());
 	}
 }

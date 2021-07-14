@@ -1,22 +1,22 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-
 import java.util.Collections;
 import java.util.List;
 
-public class BNStairs extends StairsBlock {
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
+
+public class BNStairs extends StairBlock {
 	public BNStairs(Block block) {
-		super(block.getDefaultState(), FabricBlockSettings.copyOf(block));
+		super(block.defaultBlockState(), FabricBlockSettings.copyOf(block));
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		return Collections.singletonList(new ItemStack(this.asItem()));
 	}
 }

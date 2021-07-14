@@ -1,17 +1,24 @@
 package paulevs.betternether.mixin.common;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
-import net.minecraft.util.profiler.Profiler;
-import net.minecraft.world.World;
+import net.minecraft.Util;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,20 +27,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.betternether.recipes.BNRecipeManager;
 
-import java.util.*;
-
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
 	@Shadow
-	private Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes;
+	private Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipes;
 
 	@Inject(method = "apply", at = @At(value = "RETURN"))
-	private void be_setRecipes(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo info) {
+	private void be_setRecipes(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo info) {
 		recipes = BNRecipeManager.getMap(recipes);
 	}
 
-	@Inject(method = "deserialize", at = @At(value = "HEAD"), cancellable = true)
-	private static void be_checkMissing(Identifier id, JsonObject json, CallbackInfoReturnable<Recipe<?>> info) {
+	@Inject(method = "fromJson", at = @At(value = "HEAD"), cancellable = true)
+	private static void be_checkMissing(ResourceLocation id, JsonObject json, CallbackInfoReturnable<Recipe<?>> info) {
 		if (id.getNamespace().equals("techreborn") && !FabricLoader.getInstance().isModLoaded("techreborn")) {
 			info.setReturnValue(BNRecipeManager.makeEmtyRecipe(id));
 			info.cancel();
@@ -41,13 +46,13 @@ public class RecipeManagerMixin {
 	}
 
 	@Shadow
-	private <C extends Inventory, T extends Recipe<C>> Map<Identifier, Recipe<C>> getAllOfType(RecipeType<T> type) {
+	private <C extends Container, T extends Recipe<C>> Map<ResourceLocation, Recipe<C>> byType(RecipeType<T> type) {
 		return null;
 	}
 	
-	@Inject(method = "getFirstMatch", at = @At(value = "HEAD"), cancellable = true)
-	private <C extends Inventory, T extends Recipe<C>> void be_getFirstMatch(RecipeType<T> type, C inventory, World world, CallbackInfoReturnable<Optional<T>> info) {
-		Collection<Recipe<C>> values = getAllOfType(type).values();
+	@Inject(method = "getRecipeFor", at = @At(value = "HEAD"), cancellable = true)
+	private <C extends Container, T extends Recipe<C>> void be_getFirstMatch(RecipeType<T> type, C inventory, Level world, CallbackInfoReturnable<Optional<T>> info) {
+		Collection<Recipe<C>> values = byType(type).values();
 		List<Recipe<C>> list = new ArrayList<Recipe<C>>(values);
 		list.sort((v1, v2) -> {
 			boolean b1 = v1.getId().getNamespace().equals("minecraft");
@@ -56,7 +61,7 @@ public class RecipeManagerMixin {
 		});
 		
 		info.setReturnValue(list.stream().flatMap((recipe) -> {
-			return Util.stream(type.get(recipe, world, inventory));
+			return Util.toStream(type.tryMatch(recipe, world, inventory));
 		}).findFirst());
 		info.cancel();
 	}

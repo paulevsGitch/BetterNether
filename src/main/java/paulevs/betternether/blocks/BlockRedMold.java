@@ -1,24 +1,24 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockRedMold extends BlockMold {
-	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 12, 14);
+	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
 
 	public BlockRedMold() {
-		super(MapColor.TERRACOTTA_RED);
+		super(MaterialColor.TERRACOTTA_RED);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		Vec3d vec3d = state.getModelOffset(view, pos);
-		return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		Vec3 vec3d = state.getOffset(view, pos);
+		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
 	}
 }

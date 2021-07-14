@@ -1,65 +1,70 @@
 package paulevs.betternether.entity.model;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.AnimalModel;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
+import net.minecraft.client.model.AgeableListModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import paulevs.betternether.entity.EntitySkull;
 
-public class ModelSkull extends AnimalModel<EntitySkull> {
+public class ModelSkull extends AgeableListModel<EntitySkull> {
 	private final ModelPart head;
 	private float pitch;
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData modelData = new ModelData();
-		ModelPartData modelPartData = modelData.getRoot();
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition modelData = new MeshDefinition();
+		PartDefinition modelPartData = modelData.getRoot();
 
-		modelPartData.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create()
-				.uv(0, 0)
-				.cuboid(-4, -4, -4, 8, 8, 8), ModelTransform.pivot(0, 20, 0));
+		modelPartData.addOrReplaceChild(PartNames.HEAD, CubeListBuilder.create()
+				.texOffs(0, 0)
+				.addBox(-4, -4, -4, 8, 8, 8), PartPose.offset(0, 20, 0));
 		/*head = ModelPart new (this, 0, 0);
 		head.setPivot(0, 20, 0);
 		head.addCuboid(-4, -4, -4, 8, 8, 8);*/
 
 		/* textureHeight = 16;
 		textureWidth = 32; */
-		return TexturedModelData.of(modelData, 32, 16);
+		return LayerDefinition.create(modelData, 32, 16);
 	}
 
 	public ModelSkull(ModelPart root) {
-		this.head = root.getChild(EntityModelPartNames.HEAD);
+		this.head = root.getChild(PartNames.HEAD);
 	}
 
 	@Override
-	protected Iterable<ModelPart> getHeadParts() {
+	protected Iterable<ModelPart> headParts() {
 		return ImmutableList.of(head);
 	}
 
 	@Override
-	protected Iterable<ModelPart> getBodyParts() {
+	protected Iterable<ModelPart> bodyParts() {
 		return ImmutableList.of();
 	}
 
 	@Override
-	public void animateModel(EntitySkull livingEntity, float f, float g, float h) {
-		this.pitch = livingEntity.getLeaningPitch(h);
-		super.animateModel(livingEntity, f, g, h);
+	public void prepareMobModel(EntitySkull livingEntity, float f, float g, float h) {
+		this.pitch = livingEntity.getSwimAmount(h);
+		super.prepareMobModel(livingEntity, f, g, h);
 	}
 
 	@Override
-	public void setAngles(EntitySkull entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+	public void setupAnim(EntitySkull entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		// head.pitch = (float) Math.toRadians(headPitch);
 
-		boolean rollTooBig = entity.getRoll() > 4;
-		this.head.yaw = headYaw * 0.017453292F;
+		boolean rollTooBig = entity.getFallFlyingTicks() > 4;
+		this.head.yRot = headYaw * 0.017453292F;
 		if (rollTooBig) {
-			this.head.pitch = -0.7853982F;
+			this.head.xRot = -0.7853982F;
 		}
 		else if (this.pitch > 0.0F) {
-			this.head.pitch = this.lerpAngle(this.head.pitch, headPitch * 0.017453292F, this.pitch);
+			this.head.xRot = this.lerpAngle(this.head.xRot, headPitch * 0.017453292F, this.pitch);
 		}
 		else {
-			this.head.pitch = headPitch * 0.017453292F;
+			this.head.xRot = headPitch * 0.017453292F;
 		}
 	}
 

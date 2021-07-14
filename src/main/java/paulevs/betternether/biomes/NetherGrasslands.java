@@ -1,15 +1,25 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.*;
-
-import java.util.Random;
+import paulevs.betternether.structures.plants.StructureBlackApple;
+import paulevs.betternether.structures.plants.StructureBlackBush;
+import paulevs.betternether.structures.plants.StructureInkBush;
+import paulevs.betternether.structures.plants.StructureMagmaFlower;
+import paulevs.betternether.structures.plants.StructureNetherGrass;
+import paulevs.betternether.structures.plants.StructureNetherWart;
+import paulevs.betternether.structures.plants.StructureReeds;
+import paulevs.betternether.structures.plants.StructureSmoker;
+import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
+import paulevs.betternether.structures.plants.StructureWallMoss;
+import paulevs.betternether.structures.plants.StructureWallRedMushroom;
+import paulevs.betternether.structures.plants.StructureWartSeed;
 
 public class NetherGrasslands extends NetherBiome {
 	public NetherGrasslands(String name) {
@@ -33,22 +43,22 @@ public class NetherGrasslands extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
 		switch (random.nextInt(3)) {
 			case 0:
-				BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.getDefaultState());
+				BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
 				break;
 			case 1:
-				BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.getDefaultState());
+				BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.defaultBlockState());
 				break;
 			default:
 				super.genSurfColumn(world, pos, random);
 				break;
 		}
 		for (int i = 1; i < random.nextInt(3); i++) {
-			BlockPos down = pos.down(i);
+			BlockPos down = pos.below(i);
 			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down))) {
-				BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.getDefaultState());
+				BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.defaultBlockState());
 			}
 		}
 	}

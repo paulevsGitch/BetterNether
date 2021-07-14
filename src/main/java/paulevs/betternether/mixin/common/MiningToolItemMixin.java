@@ -1,12 +1,12 @@
 package paulevs.betternether.mixin.common;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.MiningToolItem;
-import net.minecraft.item.ToolItem;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.Vanishable;
-import net.minecraft.tag.Tag;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.Vanishable;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,15 +15,15 @@ import paulevs.betternether.blocks.BNObsidian;
 import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.registry.BlocksRegistry;
 
-@Mixin(MiningToolItem.class)
-public abstract class MiningToolItemMixin extends ToolItem implements Vanishable {
-	protected MiningToolItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Tag<Block> effectiveBlocks, Settings settings) {
+@Mixin(DiggerItem.class)
+public abstract class MiningToolItemMixin extends TieredItem implements Vanishable {
+	protected MiningToolItemMixin(float attackDamage, float attackSpeed, Tier material, Tag<Block> effectiveBlocks, Properties settings) {
 		super(material, settings);
 	}
 
-	@Inject(method = "isSuitableFor", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "isCorrectToolForDrops", at = @At(value = "HEAD"), cancellable = true)
 	private void effectiveOn(BlockState state, CallbackInfoReturnable<Boolean> info) {
-		int level = this.getMaterial().getMiningLevel();
+		int level = this.getTier().getLevel();
 		if (state.getBlock() == BlocksRegistry.CINCINNASITE_ORE) {
 			info.setReturnValue(level >= 1);
 			info.cancel();

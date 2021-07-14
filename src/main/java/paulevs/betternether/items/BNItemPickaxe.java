@@ -1,21 +1,21 @@
 package paulevs.betternether.items;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.registry.ItemsRegistry;
 
 public class BNItemPickaxe extends PickaxeItem {
 	protected float speed;
 
-	public BNItemPickaxe(ToolMaterial material, int durability, float speed) {
-		super(material, 1, -2.8F, ItemsRegistry.defaultSettings().fireproof());
+	public BNItemPickaxe(Tier material, int durability, float speed) {
+		super(material, 1, -2.8F, ItemsRegistry.defaultSettings().fireResistant());
 		this.speed = speed;
 	}
 
 	@Override
-	public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-		return super.getMiningSpeedMultiplier(stack, state) * speed;
+	public float getDestroySpeed(ItemStack stack, BlockState state) {
+		return super.getDestroySpeed(stack, state) * speed;
 	}
 }

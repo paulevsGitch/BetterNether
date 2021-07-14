@@ -1,21 +1,26 @@
 package paulevs.betternether.world;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStep.Feature;
-import net.minecraft.world.gen.chunk.StructureConfig;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
@@ -29,11 +34,6 @@ import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.structures.CityFeature;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-
 public class BNWorldGenerator {
 	private static boolean hasCleaningPass;
 	private static boolean hasFixPass;
@@ -45,9 +45,9 @@ public class BNWorldGenerator {
 	private static float lavaStructureDensity;
 	private static float globalDensity;
 
-	private static final BlockState AIR = Blocks.AIR.getDefaultState();
+	private static final BlockState AIR = Blocks.AIR.defaultBlockState();
 
-	private static Mutable popPos = new Mutable();
+	private static MutableBlockPos popPos = new MutableBlockPos();
 
 	private static final NetherBiome[][][] BIOMES = new NetherBiome[8][64][8];
 
@@ -69,7 +69,7 @@ public class BNWorldGenerator {
 	protected static boolean volumetric;
 
 	public static final CityFeature CITY = new CityFeature();
-	public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CITY_CONFIGURED = CITY.configure(DefaultFeatureConfig.DEFAULT);
+	public static final ConfiguredStructureFeature<NoneFeatureConfiguration, ? extends StructureFeature<NoneFeatureConfiguration>> CITY_CONFIGURED = CITY.configured(NoneFeatureConfiguration.NONE);
 	
 	public static void onModInit() {
 		hasCleaningPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
@@ -93,13 +93,13 @@ public class BNWorldGenerator {
 		int separation = distance >> 1;
 
 		Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true);
-		FabricStructureBuilder.create(new Identifier(BetterNether.MOD_ID, "nether_city"), CITY)
-				.step(Feature.RAW_GENERATION)
-				.defaultConfig(new StructureConfig(distance, separation, 1234))
+		FabricStructureBuilder.create(new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY)
+				.step(Decoration.RAW_GENERATION)
+				.defaultConfig(new StructureFeatureConfiguration(distance, separation, 1234))
 				.superflatFeature(CITY_CONFIGURED)
 				.register();
 
-		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
+		BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
 	}
 
 	public static void init(long seed) {
@@ -118,14 +118,14 @@ public class BNWorldGenerator {
 		return x < 0 ? 0 : x > max ? max : x;
 	}
 
-	public static void populate(ChunkRegion world, int sx, int sz, Random random) {
+	public static void populate(WorldGenRegion world, int sx, int sz, Random random) {
 		// Structure Generator
 		if (random.nextFloat() < structureDensity) {
 			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, 100, random), sz + random.nextInt(16));
 			StructureType type = StructureType.FLOOR;
 			boolean isAir = world.getBlockState(popPos).getMaterial().isReplaceable();
-			boolean airUp = world.getBlockState(popPos.up()).getMaterial().isReplaceable() && world.getBlockState(popPos.up(3)).getMaterial().isReplaceable();
-			boolean airDown = world.getBlockState(popPos.down()).getMaterial().isReplaceable() && world.getBlockState(popPos.down(3)).getMaterial().isReplaceable();
+			boolean airUp = world.getBlockState(popPos.above()).getMaterial().isReplaceable() && world.getBlockState(popPos.above(3)).getMaterial().isReplaceable();
+			boolean airDown = world.getBlockState(popPos.below()).getMaterial().isReplaceable() && world.getBlockState(popPos.below(3)).getMaterial().isReplaceable();
 			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
 			if (!isAir && !airUp && !airDown && random.nextInt(8) == 0)
 				type = StructureType.UNDER;
@@ -137,7 +137,7 @@ public class BNWorldGenerator {
 							popPos.setY(popPos.getY() - 1);
 						}
 					}
-					while (world.getBlockState(popPos.down()).getMaterial().isReplaceable() && popPos.getY() > 1) {
+					while (world.getBlockState(popPos.below()).getMaterial().isReplaceable() && popPos.getY() > 1) {
 						popPos.setY(popPos.getY() - 1);
 					}
 				}
@@ -148,7 +148,7 @@ public class BNWorldGenerator {
 							popPos.setY(popPos.getY() + 1);
 						}
 					}
-					while (!BlocksHelper.isNetherGroundMagma(world.getBlockState(popPos.up())) && popPos.getY() < 127) {
+					while (!BlocksHelper.isNetherGroundMagma(world.getBlockState(popPos.above())) && popPos.getY() < 127) {
 						popPos.setY(popPos.getY() + 1);
 					}
 					type = StructureType.CEIL;
@@ -157,12 +157,12 @@ public class BNWorldGenerator {
 			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
 			if (world.getBlockState(popPos).getMaterial().isReplaceable()) {
 				if (type == StructureType.FLOOR) {
-					BlockState down = world.getBlockState(popPos.down());
+					BlockState down = world.getBlockState(popPos.below());
 					if (BlocksHelper.isNetherGroundMagma(down))
 						biome.genFloorBuildings(world, popPos, random);
 				}
 				else if (type == StructureType.CEIL) {
-					BlockState up = world.getBlockState(popPos.up());
+					BlockState up = world.getBlockState(popPos.above());
 					if (BlocksHelper.isNetherGroundMagma(up)) {
 						biome.genCeilBuildings(world, popPos, random);
 					}
@@ -174,7 +174,7 @@ public class BNWorldGenerator {
 
 		if (random.nextFloat() < lavaStructureDensity) {
 			popPos.set(sx + random.nextInt(16), 32, sz + random.nextInt(16));
-			if (world.isAir(popPos) && BlocksHelper.isLava(world.getBlockState(popPos.down()))) {
+			if (world.isEmptyBlock(popPos) && BlocksHelper.isLava(world.getBlockState(popPos.below()))) {
 				biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
 				biome.genLavaBuildings(world, popPos, random);
 			}
@@ -202,29 +202,29 @@ public class BNWorldGenerator {
 					BlockState state = world.getBlockState(popPos);
 					boolean lava = BlocksHelper.isLava(state);
 					if (lava || BlocksHelper.isNetherGroundMagma(state) || state.getBlock() == Blocks.GRAVEL) {
-						if (!lava && ((state = world.getBlockState(popPos.up())).isAir() || !state.getMaterial().blocksLight() || !state.getMaterial().blocksMovement()) && state.getFluidState().isEmpty())// world.isAir(popPos.up()))
+						if (!lava && ((state = world.getBlockState(popPos.above())).isAir() || !state.getMaterial().isSolidBlocking() || !state.getMaterial().blocksMotion()) && state.getFluidState().isEmpty())// world.isAir(popPos.up()))
 							biome.genSurfColumn(world, popPos, random);
 
 						if (((x + y + z) & 1) == 0 && random.nextFloat() < globalDensity && random.nextFloat() < biome.getPlantDensity()) {
 							// Ground Generation
-							if (world.isAir(popPos.up())) {
+							if (world.isEmptyBlock(popPos.above())) {
 								if (lava)
-									LIST_LAVA.add(popPos.up());
+									LIST_LAVA.add(popPos.above());
 								else
-									LIST_FLOOR.add(new BlockPos(popPos.up()));
+									LIST_FLOOR.add(new BlockPos(popPos.above()));
 							}
 
 							// Ceiling Generation
-							else if (world.isAir(popPos.down())) {
-								LIST_CEIL.add(new BlockPos(popPos.down()));
+							else if (world.isEmptyBlock(popPos.below())) {
+								LIST_CEIL.add(new BlockPos(popPos.below()));
 							}
 
 							// Wall Generation
 							else {
-								boolean bNorth = world.isAir(popPos.north());
-								boolean bSouth = world.isAir(popPos.south());
-								boolean bEast = world.isAir(popPos.east());
-								boolean bWest = world.isAir(popPos.west());
+								boolean bNorth = world.isEmptyBlock(popPos.north());
+								boolean bSouth = world.isEmptyBlock(popPos.south());
+								boolean bEast = world.isEmptyBlock(popPos.east());
+								boolean bWest = world.isEmptyBlock(popPos.west());
 								if (bNorth || bSouth || bEast || bWest) {
 									BlockPos objPos = null;
 									if (bNorth)
@@ -237,8 +237,8 @@ public class BNWorldGenerator {
 										objPos = popPos.west();
 
 									if ((popPos.getX() >= sx) && (popPos.getX() < ex) && (popPos.getZ() >= sz) && (popPos.getZ() < ez)) {
-										boolean bDown = world.isAir(objPos.down());
-										boolean bUp = world.isAir(objPos.up());
+										boolean bDown = world.isEmptyBlock(objPos.below());
+										boolean bUp = world.isEmptyBlock(objPos.above());
 
 										if (bDown && bUp) {
 											LIST_WALL.add(new BlockPos(objPos));
@@ -248,18 +248,18 @@ public class BNWorldGenerator {
 							}
 						}
 						if (random.nextFloat() < cincinnasiteDensity)
-							spawnOre(BlocksRegistry.CINCINNASITE_ORE.getDefaultState(), world, popPos, random, 6, 14);
+							spawnOre(BlocksRegistry.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 6, 14);
 						if (random.nextFloat() < rubyDensity)
-							spawnOre(BlocksRegistry.NETHER_RUBY_ORE.getDefaultState(), world, popPos, random, 1, 5);
+							spawnOre(BlocksRegistry.NETHER_RUBY_ORE.defaultBlockState(), world, popPos, random, 1, 5);
 						if (random.nextFloat() < lapisDensity)
-							spawnOre(BlocksRegistry.NETHER_LAPIS_ORE.getDefaultState(), world, popPos, random, 1, 6);
+							spawnOre(BlocksRegistry.NETHER_LAPIS_ORE.defaultBlockState(), world, popPos, random, 1, 6);
 					}
 				}
 			}
 		}
 
 		for (BlockPos pos : LIST_LAVA) {
-			if (world.isAir(pos)) {
+			if (world.isEmptyBlock(pos)) {
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
 				if (biome != null)
 					biome.genLavaObjects(world, pos, random);
@@ -267,28 +267,28 @@ public class BNWorldGenerator {
 		}
 
 		for (BlockPos pos : LIST_FLOOR)
-			if (world.isAir(pos)) {
+			if (world.isEmptyBlock(pos)) {
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
 				if (biome != null)
 					biome.genFloorObjects(world, pos, random);
 			}
 
 		for (BlockPos pos : LIST_WALL)
-			if (world.isAir(pos)) {
+			if (world.isEmptyBlock(pos)) {
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
 				if (biome != null)
 					biome.genWallObjects(world, pos, random);
 			}
 
 		for (BlockPos pos : LIST_CEIL)
-			if (world.isAir(pos)) {
+			if (world.isEmptyBlock(pos)) {
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
 				if (biome != null)
 					biome.genCeilObjects(world, pos, random);
 			}
 	}
 
-	private static void makeLocalBiomes(ChunkRegion world, int sx, int sz) {
+	private static void makeLocalBiomes(WorldGenRegion world, int sx, int sz) {
 		MC_BIOMES.clear();
 		for (int x = 0; x < 8; x++) {
 			popPos.setX(sx + (x << 1) + 2);
@@ -304,7 +304,7 @@ public class BNWorldGenerator {
 		}
 	}
 
-	public static void prePopulate(ChunkRegion world, int sx, int sz, Random random) {
+	public static void prePopulate(WorldGenRegion world, int sx, int sz, Random random) {
 		makeLocalBiomes(world, sx, sz);
 
 		if (hasCaves) {
@@ -327,25 +327,25 @@ public class BNWorldGenerator {
 					for (int z = 0; z < 16; z++) {
 						popPos.setZ(z | sz);
 						if (canReplace(world, popPos)) {
-							up = popPos.up();
-							down = popPos.down();
+							up = popPos.above();
+							down = popPos.below();
 							north = popPos.north();
 							south = popPos.south();
 							east = popPos.east();
 							west = popPos.west();
-							if (world.isAir(north) && world.isAir(south))
+							if (world.isEmptyBlock(north) && world.isEmptyBlock(south))
 								pos.add(new BlockPos(popPos));
-							else if (world.isAir(east) && world.isAir(west))
+							else if (world.isEmptyBlock(east) && world.isEmptyBlock(west))
 								pos.add(new BlockPos(popPos));
-							else if (world.isAir(up) && world.isAir(down))
+							else if (world.isEmptyBlock(up) && world.isEmptyBlock(down))
 								pos.add(new BlockPos(popPos));
-							else if (world.isAir(popPos.north().east().down()) && world.isAir(popPos.south().west().up()))
+							else if (world.isEmptyBlock(popPos.north().east().below()) && world.isEmptyBlock(popPos.south().west().above()))
 								pos.add(new BlockPos(popPos));
-							else if (world.isAir(popPos.south().east().down()) && world.isAir(popPos.north().west().up()))
+							else if (world.isEmptyBlock(popPos.south().east().below()) && world.isEmptyBlock(popPos.north().west().above()))
 								pos.add(new BlockPos(popPos));
-							else if (world.isAir(popPos.north().west().down()) && world.isAir(popPos.south().east().up()))
+							else if (world.isEmptyBlock(popPos.north().west().below()) && world.isEmptyBlock(popPos.south().east().above()))
 								pos.add(new BlockPos(popPos));
-							else if (world.isAir(popPos.south().west().down()) && world.isAir(popPos.north().east().up()))
+							else if (world.isEmptyBlock(popPos.south().west().below()) && world.isEmptyBlock(popPos.north().east().above()))
 								pos.add(new BlockPos(popPos));
 						}
 					}
@@ -353,9 +353,9 @@ public class BNWorldGenerator {
 			}
 			for (BlockPos p : pos) {
 				BlocksHelper.setWithoutUpdate(world, p, AIR);
-				up = p.up();
+				up = p.above();
 				BlockState state = world.getBlockState(up);
-				if (!state.getBlock().canPlaceAt(state, world, up))
+				if (!state.getBlock().canSurvive(state, world, up))
 					BlocksHelper.setWithoutUpdate(world, up, AIR);
 			}
 		}
@@ -366,28 +366,28 @@ public class BNWorldGenerator {
 		}
 	}
 
-	private static boolean canReplace(WorldAccess world, BlockPos pos) {
+	private static boolean canReplace(LevelAccessor world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 		return BlocksHelper.isNetherGround(state) || state.getBlock() == Blocks.GRAVEL;
 	}
 
-	private static void spawnOre(BlockState state, WorldAccess world, BlockPos pos, Random random, int minSize, int maxSize) {
+	private static void spawnOre(BlockState state, LevelAccessor world, BlockPos pos, Random random, int minSize, int maxSize) {
 		int size = MHelper.randRange(minSize, maxSize, random);
 		for (int i = 0; i < size; i++) {
-			BlockPos local = pos.add(random.nextInt(3), random.nextInt(3), random.nextInt(3));
+			BlockPos local = pos.offset(random.nextInt(3), random.nextInt(3), random.nextInt(3));
 			if (BlocksHelper.isNetherrack(world.getBlockState(local))) {
 				BlocksHelper.setWithoutUpdate(world, local, state);
 			}
 		}
 	}
 
-	public static void cleaningPass(WorldAccess world, int sx, int sz) {
+	public static void cleaningPass(LevelAccessor world, int sx, int sz) {
 		if (hasFixPass) {
 			fixBlocks(world, sx, 30, sz, sx + 15, 110, sz + 15);
 		}
 	}
 
-	private static void fixBlocks(WorldAccess world, int x1, int y1, int z1, int x2, int y2, int z2) {
+	private static void fixBlocks(LevelAccessor world, int x1, int y1, int z1, int x2, int y2, int z2) {
 		// List<BlockPos> lavafalls = Lists.newArrayList();
 		// List<BlockPos> update = Lists.newArrayList();
 
@@ -418,32 +418,32 @@ public class BNWorldGenerator {
 					 * continue; }
 					 */
 
-					if (!state.canPlaceAt(world, popPos)) {
+					if (!state.canSurvive(world, popPos)) {
 						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
 						continue;
 					}
 
-					if (!state.isOpaque() && world.getBlockState(popPos.up()).getBlock() == Blocks.NETHER_BRICKS) {
-						BlocksHelper.setWithoutUpdate(world, popPos, Blocks.NETHER_BRICKS.getDefaultState());
+					if (!state.canOcclude() && world.getBlockState(popPos.above()).getBlock() == Blocks.NETHER_BRICKS) {
+						BlocksHelper.setWithoutUpdate(world, popPos, Blocks.NETHER_BRICKS.defaultBlockState());
 						continue;
 					}
 
-					if (BlocksHelper.isLava(state) && world.isAir(popPos.up()) && world.isAir(popPos.down())) {
+					if (BlocksHelper.isLava(state) && world.isEmptyBlock(popPos.above()) && world.isEmptyBlock(popPos.below())) {
 						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
 						continue;
 					}
 
 					if (state.getBlock() == Blocks.NETHER_WART_BLOCK || state.getBlock() == Blocks.WARPED_WART_BLOCK) {
-						if (world.isAir(popPos.down()) && world.isAir(popPos.up()) && world.isAir(popPos.north()) && world.isAir(popPos.south()) && world.isAir(popPos.east()) && world.isAir(popPos.west()))
+						if (world.isEmptyBlock(popPos.below()) && world.isEmptyBlock(popPos.above()) && world.isEmptyBlock(popPos.north()) && world.isEmptyBlock(popPos.south()) && world.isEmptyBlock(popPos.east()) && world.isEmptyBlock(popPos.west()))
 							BlocksHelper.setWithoutUpdate(world, popPos, AIR);
 						continue;
 					}
 
-					if (state.getBlock() instanceof BlockStalactite && !(state = world.getBlockState(popPos.down())).isFullCube(world, popPos.down()) && !(state.getBlock() instanceof BlockStalactite)) {
-						Mutable sp = new Mutable().set(popPos);
+					if (state.getBlock() instanceof BlockStalactite && !(state = world.getBlockState(popPos.below())).isCollisionShapeFullBlock(world, popPos.below()) && !(state.getBlock() instanceof BlockStalactite)) {
+						MutableBlockPos sp = new MutableBlockPos().set(popPos);
 						while (world.getBlockState(sp).getBlock() instanceof BlockStalactite) {
 							BlocksHelper.setWithoutUpdate(world, sp, AIR);
-							sp.offset(Direction.UP);
+							sp.relative(Direction.UP);
 						}
 						continue;
 					}

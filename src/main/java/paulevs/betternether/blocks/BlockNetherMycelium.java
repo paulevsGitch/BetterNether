@@ -1,44 +1,44 @@
 package paulevs.betternether.blocks;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+
 public class BlockNetherMycelium extends BlockBase {
-	public static final BooleanProperty IS_BLUE = BooleanProperty.of("blue");
+	public static final BooleanProperty IS_BLUE = BooleanProperty.create("blue");
 
 	public BlockNetherMycelium() {
-		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).materialColor(MapColor.GRAY).requiresTool());
-		this.setDefaultState(getStateManager().getDefaultState().with(IS_BLUE, false));
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).mapColor(MaterialColor.COLOR_GRAY).requiresTool());
+		this.registerDefaultState(getStateDefinition().any().setValue(IS_BLUE, false));
 		this.setDropItself(false);
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(IS_BLUE);
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-		super.randomDisplayTick(state, world, pos, random);
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+		super.animateTick(state, world, pos, random);
 		world.addParticle(ParticleTypes.MYCELIUM,
 				pos.getX() + random.nextDouble(),
 				pos.getY() + 1.1D,
@@ -47,15 +47,15 @@ public class BlockNetherMycelium extends BlockBase {
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
-		ItemStack tool = builder.get(LootContextParameters.TOOL);
-		if (tool.isSuitableFor(state)) {
-			if (EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) > 0)
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+		ItemStack tool = builder.getParameter(LootContextParams.TOOL);
+		if (tool.isCorrectToolForDrops(state)) {
+			if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0)
 				return Collections.singletonList(new ItemStack(this.asItem()));
 			else
 				return Collections.singletonList(new ItemStack(Blocks.NETHERRACK));
 		}
 		else
-			return super.getDroppedStacks(state, builder);
+			return super.getDrops(state, builder);
 	}
 }

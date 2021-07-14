@@ -1,53 +1,52 @@
 package paulevs.betternether.blocks;
 
+import java.util.EnumMap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import com.google.common.collect.Maps;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Direction.Axis;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
 import paulevs.betternether.blocks.materials.Materials;
 
-import java.util.EnumMap;
-
 public class BlockStem extends BlockBaseNotFull {
-	public static final EnumProperty<Axis> AXIS = Properties.AXIS;
+	public static final EnumProperty<Axis> AXIS = BlockStateProperties.AXIS;
 	private static final EnumMap<Axis, VoxelShape> OUTLINES = Maps.newEnumMap(Axis.class);
 
-	public BlockStem(MapColor color) {
+	public BlockStem(MaterialColor color) {
 		super(Materials.makeWood(color).nonOpaque());
-		this.setDefaultState(this.getDefaultState().with(AXIS, Axis.Y));
+		this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Axis.Y));
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return OUTLINES.get(state.get(AXIS));
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return OUTLINES.get(state.getValue(AXIS));
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return OUTLINES.get(state.get(AXIS));
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return OUTLINES.get(state.getValue(AXIS));
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
+	public BlockState rotate(BlockState state, Rotation rotation) {
 		switch (rotation) {
 			case COUNTERCLOCKWISE_90:
 			case CLOCKWISE_90:
-				switch ((Direction.Axis) state.get(AXIS)) {
+				switch ((Direction.Axis) state.getValue(AXIS)) {
 					case X:
-						return (BlockState) state.with(AXIS, Direction.Axis.Z);
+						return (BlockState) state.setValue(AXIS, Direction.Axis.Z);
 					case Z:
-						return (BlockState) state.with(AXIS, Direction.Axis.X);
+						return (BlockState) state.setValue(AXIS, Direction.Axis.X);
 					default:
 						return state;
 				}
@@ -57,18 +56,18 @@ public class BlockStem extends BlockBaseNotFull {
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(AXIS);
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		return (BlockState) this.getDefaultState().with(AXIS, ctx.getSide().getAxis());
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		return (BlockState) this.defaultBlockState().setValue(AXIS, ctx.getClickedFace().getAxis());
 	}
 
 	static {
-		OUTLINES.put(Axis.X, Block.createCuboidShape(0, 5, 5, 16, 11, 11));
-		OUTLINES.put(Axis.Y, Block.createCuboidShape(5, 0, 5, 11, 16, 11));
-		OUTLINES.put(Axis.Z, Block.createCuboidShape(5, 5, 0, 11, 11, 16));
+		OUTLINES.put(Axis.X, Block.box(0, 5, 5, 16, 11, 11));
+		OUTLINES.put(Axis.Y, Block.box(5, 0, 5, 11, 16, 11));
+		OUTLINES.put(Axis.Z, Block.box(5, 5, 0, 11, 11, 16));
 	}
 }

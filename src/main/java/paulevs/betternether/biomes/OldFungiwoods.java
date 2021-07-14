@@ -1,17 +1,24 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.BiomeParticleConfig;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.AmbientParticleSettings;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.*;
-
-import java.util.Random;
+import paulevs.betternether.structures.plants.StructureGrayMold;
+import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
+import paulevs.betternether.structures.plants.StructureMedRedMushroom;
+import paulevs.betternether.structures.plants.StructureOldBrownMushrooms;
+import paulevs.betternether.structures.plants.StructureOldRedMushrooms;
+import paulevs.betternether.structures.plants.StructureRedMold;
+import paulevs.betternether.structures.plants.StructureVanillaMushroom;
+import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
+import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
 public class OldFungiwoods extends NetherBiome {
 	public OldFungiwoods(String name) {
@@ -20,8 +27,8 @@ public class OldFungiwoods extends NetherBiome {
 				.setLoop(SoundsRegistry.AMBIENT_MUSHROOM_FOREST)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setMusic(SoundEvents.MUSIC_NETHER_CRIMSON_FOREST)
-				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.MYCELIUM, 0.1F)));
+				.setMusic(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
+				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.MYCELIUM, 0.1F)));
 		this.setNoiseDensity(0.5F);
 		addStructure("old_red_mushrooms", new StructureOldRedMushrooms(), StructureType.FLOOR, 0.1F, false);
 		addStructure("old_brown_mushrooms", new StructureOldBrownMushrooms(), StructureType.FLOOR, 0.1F, false);
@@ -35,7 +42,7 @@ public class OldFungiwoods extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.getDefaultState());
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.defaultBlockState());
 	}
 }

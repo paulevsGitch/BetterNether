@@ -1,49 +1,49 @@
 package paulevs.betternether.mixin.client;
 
+import java.util.Iterator;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
-import net.minecraft.client.render.entity.feature.FeatureRenderer;
-import net.minecraft.client.render.entity.model.ArmorStandArmorEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.model.ArmorStandArmorModel;
+import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.betternether.BetterNether;
 
-import java.util.Iterator;
-
 @Environment(EnvType.CLIENT)
-@Mixin(PlayerEntityRenderer.class)
-public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
-	public PlayerArmorMixin(EntityRendererFactory.Context context, PlayerEntityModel<AbstractClientPlayerEntity> entityModel, float f) {
+@Mixin(PlayerRenderer.class)
+public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+	public PlayerArmorMixin(EntityRendererProvider.Context context, PlayerModel<AbstractClientPlayer> entityModel, float f) {
 		super(context, entityModel, f);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Inject(method = "<init>*", at = @At(value = "RETURN"))
-	private void onInit(EntityRendererFactory.Context context, boolean bl, CallbackInfo info) {
+	private void onInit(EntityRendererProvider.Context context, boolean bl, CallbackInfo info) {
 		if (BetterNether.hasThinArmor()) {
-			Iterator<FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>> iterator = this.features.iterator();
+			Iterator<RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>>> iterator = this.layers.iterator();
 			while (iterator.hasNext()) {
-				FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> feature = iterator.next();
-				if (feature instanceof ArmorFeatureRenderer) {
-					this.features.remove(feature);
+				RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> feature = iterator.next();
+				if (feature instanceof HumanoidArmorLayer) {
+					this.layers.remove(feature);
 					break;
 				}
 			}
-			this.features.add(
+			this.layers.add(
 					0,
-					new ArmorFeatureRenderer(
+					new HumanoidArmorLayer(
 							this,
-							new ArmorStandArmorEntityModel(context.getPart(EntityModelLayers.PLAYER_SLIM_INNER_ARMOR)),
-							new ArmorStandArmorEntityModel(context.getPart(EntityModelLayers.PLAYER_SLIM_OUTER_ARMOR))
+							new ArmorStandArmorModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)),
+							new ArmorStandArmorModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR))
 					)
 			);
 		}

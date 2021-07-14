@@ -1,15 +1,14 @@
 package paulevs.betternether.structures;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
-
 import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class StructureObjScatter implements IStructure {
-	private static final Mutable POS = new Mutable();
+	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	final StructureWorld[] structures;
 	final int distance;
@@ -22,8 +21,8 @@ public abstract class StructureObjScatter implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (isGround(world.getBlockState(pos.down())) && isGround(world.getBlockState(pos.down(2))) && noObjNear(world, pos)) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (isGround(world.getBlockState(pos.below())) && isGround(world.getBlockState(pos.below(2))) && noObjNear(world, pos)) {
 			StructureWorld tree = structures[random.nextInt(structures.length)];
 			tree.generate(world, pos, random);
 		}
@@ -33,7 +32,7 @@ public abstract class StructureObjScatter implements IStructure {
 
 	protected abstract boolean isGround(BlockState state);
 
-	private boolean noObjNear(WorldAccess world, BlockPos pos) {
+	private boolean noObjNear(LevelAccessor world, BlockPos pos) {
 		int x1 = pos.getX() - distance;
 		int z1 = pos.getZ() - distance;
 		int x2 = pos.getX() + distance;

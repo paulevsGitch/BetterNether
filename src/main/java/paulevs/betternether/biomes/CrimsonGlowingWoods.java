@@ -1,19 +1,25 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.BiomeParticleConfig;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.AmbientParticleSettings;
+import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.*;
-
-import java.util.Random;
+import paulevs.betternether.structures.plants.StructureCrimsonFungus;
+import paulevs.betternether.structures.plants.StructureCrimsonGlowingTree;
+import paulevs.betternether.structures.plants.StructureCrimsonRoots;
+import paulevs.betternether.structures.plants.StructureGoldenVine;
+import paulevs.betternether.structures.plants.StructureWallMoss;
+import paulevs.betternether.structures.plants.StructureWallRedMushroom;
+import paulevs.betternether.structures.plants.StructureWartBush;
+import paulevs.betternether.structures.plants.StructureWartSeed;
 
 public class CrimsonGlowingWoods extends NetherBiome {
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
@@ -24,7 +30,7 @@ public class CrimsonGlowingWoods extends NetherBiome {
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setParticleConfig(new BiomeParticleConfig(ParticleTypes.CRIMSON_SPORE, 0.025F))
+				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.025F))
 				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
 		addStructure("crimson_glowing_tree", new StructureCrimsonGlowingTree(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.05F, false);
@@ -37,10 +43,10 @@ public class CrimsonGlowingWoods extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
 		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
 		else
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.getDefaultState());
+			BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.defaultBlockState());
 	}
 }

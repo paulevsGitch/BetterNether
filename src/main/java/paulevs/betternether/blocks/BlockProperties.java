@@ -1,36 +1,35 @@
 package paulevs.betternether.blocks;
 
 import java.util.function.Supplier;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockProperties {
-	public static final EnumProperty<CincinnasitPillarShape> PILLAR_SHAPE = EnumProperty.of("shape", CincinnasitPillarShape.class);
-	public static final EnumProperty<BrownMushroomShape> BROWN_MUSHROOM_SHAPE = EnumProperty.of("shape", BrownMushroomShape.class);
-	public static final EnumProperty<WillowBranchShape> WILLOW_SHAPE = EnumProperty.of("shape", WillowBranchShape.class);
-	public static final EnumProperty<JellyShape> JELLY_MUSHROOM_VISUAL = EnumProperty.of("visual", JellyShape.class);
-	public static final EnumProperty<EnumLucisShape> LUCIS_SHAPE = EnumProperty.of("shape", EnumLucisShape.class);
-	public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.of("plant", PottedPlantShape.class);
-	public static final EnumProperty<TripleShape> TRIPLE_SHAPE = EnumProperty.of("shape", TripleShape.class);
-	public static final EnumProperty<FoodShape> FOOD = EnumProperty.of("food", FoodShape.class);
+	public static final EnumProperty<CincinnasitPillarShape> PILLAR_SHAPE = EnumProperty.create("shape", CincinnasitPillarShape.class);
+	public static final EnumProperty<BrownMushroomShape> BROWN_MUSHROOM_SHAPE = EnumProperty.create("shape", BrownMushroomShape.class);
+	public static final EnumProperty<WillowBranchShape> WILLOW_SHAPE = EnumProperty.create("shape", WillowBranchShape.class);
+	public static final EnumProperty<JellyShape> JELLY_MUSHROOM_VISUAL = EnumProperty.create("visual", JellyShape.class);
+	public static final EnumProperty<EnumLucisShape> LUCIS_SHAPE = EnumProperty.create("shape", EnumLucisShape.class);
+	public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.create("plant", PottedPlantShape.class);
+	public static final EnumProperty<TripleShape> TRIPLE_SHAPE = EnumProperty.create("shape", TripleShape.class);
+	public static final EnumProperty<FoodShape> FOOD = EnumProperty.create("food", FoodShape.class);
 	
-	public static final BooleanProperty DESTRUCTED = BooleanProperty.of("destructed");
-	public static final BooleanProperty BOTTOM = BooleanProperty.of("bottom");
-	public static final BooleanProperty FLOOR = BooleanProperty.of("floor");
-	public static final BooleanProperty OPEN = BooleanProperty.of("open");
-	public static final BooleanProperty FIRE = BooleanProperty.of("fire");
+	public static final BooleanProperty DESTRUCTED = BooleanProperty.create("destructed");
+	public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
+	public static final BooleanProperty FLOOR = BooleanProperty.create("floor");
+	public static final BooleanProperty OPEN = BooleanProperty.create("open");
+	public static final BooleanProperty FIRE = BooleanProperty.create("fire");
 	
-	public static final IntProperty AGE_THREE = IntProperty.of("age", 0, 2);
-	public static final IntProperty AGE_FOUR = IntProperty.of("age", 0, 3);
+	public static final IntegerProperty AGE_THREE = IntegerProperty.create("age", 0, 2);
+	public static final IntegerProperty AGE_FOUR = IntegerProperty.create("age", 0, 3);
 	
-	public static enum CincinnasitPillarShape implements StringIdentifiable {
+	public static enum CincinnasitPillarShape implements StringRepresentable {
 		SMALL("small"),
 		TOP("top"),
 		MIDDLE("middle"),
@@ -43,7 +42,7 @@ public class BlockProperties {
 		}
 
 		@Override
-		public String asString() {
+		public String getSerializedName() {
 			return name;
 		}
 
@@ -53,7 +52,7 @@ public class BlockProperties {
 		}
 	}
 	
-	public static enum BrownMushroomShape implements StringIdentifiable {
+	public static enum BrownMushroomShape implements StringRepresentable {
 		TOP("top"),
 		SIDE_N("side_n"),
 		SIDE_S("side_s"),
@@ -73,7 +72,7 @@ public class BlockProperties {
 		}
 
 		@Override
-		public String asString() {
+		public String getSerializedName() {
 			return name;
 		}
 
@@ -83,7 +82,7 @@ public class BlockProperties {
 		}
 	}
 	
-	public static enum EnumLucisShape implements StringIdentifiable {
+	public static enum EnumLucisShape implements StringRepresentable {
 		CORNER("corner"),
 		SIDE("side"),
 		CENTER("center");
@@ -95,7 +94,7 @@ public class BlockProperties {
 		}
 
 		@Override
-		public String asString() {
+		public String getSerializedName() {
 			return name;
 		}
 
@@ -105,7 +104,7 @@ public class BlockProperties {
 		}
 	}
 	
-	public static enum JellyShape implements StringIdentifiable {
+	public static enum JellyShape implements StringRepresentable {
 		NORMAL("normal"), SEPIA("sepia"), POOR("poor");
 
 		final String name;
@@ -115,7 +114,7 @@ public class BlockProperties {
 		}
 
 		@Override
-		public String asString() {
+		public String getSerializedName() {
 			return name;
 		}
 
@@ -125,7 +124,7 @@ public class BlockProperties {
 		}
 	}
 	
-	public static enum TripleShape implements StringIdentifiable {
+	public static enum TripleShape implements StringRepresentable {
 		TOP("top"), MIDDLE("middle"), BOTTOM("bottom");
 
 		final String name;
@@ -135,7 +134,7 @@ public class BlockProperties {
 		}
 
 		@Override
-		public String asString() {
+		public String getSerializedName() {
 			return name;
 		}
 
@@ -145,7 +144,7 @@ public class BlockProperties {
 		}
 	}
 	
-	public static enum FoodShape implements StringIdentifiable {
+	public static enum FoodShape implements StringRepresentable {
 		NONE("none"), WART("wart"), MUSHROOM("mushroom"), APPLE("apple");
 
 		private final String name;
@@ -160,7 +159,7 @@ public class BlockProperties {
 		}
 
 		@Override
-		public String asString() {
+		public String getSerializedName() {
 			return name;
 		}
 
@@ -174,7 +173,7 @@ public class BlockProperties {
 		}
 	}
 	
-	public static enum PottedPlantShape implements StringIdentifiable {
+	public static enum PottedPlantShape implements StringRepresentable {
 		AGAVE("agave", () -> BlocksRegistry.AGAVE),
 		BARREL_CACTUS("barrel_cactus", () -> BlocksRegistry.BARREL_CACTUS),
 		BLACK_APPLE("black_apple", () -> BlocksRegistry.BLACK_APPLE_SEED),
@@ -208,7 +207,7 @@ public class BlockProperties {
 		}
 
 		@Override
-		public String asString() {
+		public String getSerializedName() {
 			return name;
 		}
 
@@ -226,7 +225,7 @@ public class BlockProperties {
 		}
 	}
 	
-	public static enum WillowBranchShape implements StringIdentifiable {
+	public static enum WillowBranchShape implements StringRepresentable {
 		END("end"),
 		MIDDLE("middle");
 
@@ -237,7 +236,7 @@ public class BlockProperties {
 		}
 
 		@Override
-		public String asString() {
+		public String getSerializedName() {
 			return name;
 		}
 

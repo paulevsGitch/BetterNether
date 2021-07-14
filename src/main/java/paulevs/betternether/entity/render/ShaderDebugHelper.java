@@ -1,19 +1,5 @@
 package paulevs.betternether.entity.render;
 
-import com.google.common.collect.Sets;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.GLImportProcessor;
-import net.minecraft.client.gl.Program;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderPhase;
-import net.minecraft.client.render.VertexFormats;
-import net.minecraft.resource.Resource;
-import net.minecraft.resource.ResourceFactory;
-import net.minecraft.util.FileNameUtil;
-import net.minecraft.util.Identifier;
-import org.apache.commons.io.IOUtils;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,37 +8,51 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Set;
 import java.util.function.Function;
+import net.minecraft.FileUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceProvider;
+import org.jetbrains.annotations.Nullable;
 
-abstract class ShaderDebugHelper extends RenderPhase {
+import com.google.common.collect.Sets;
+import com.mojang.blaze3d.preprocessor.GlslPreprocessor;
+import com.mojang.blaze3d.shaders.Program;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import org.apache.commons.io.IOUtils;
+
+abstract class ShaderDebugHelper extends RenderStateShard {
     static int targetCacheID = 50;
 
     ShaderDebugHelper(String name, Runnable beginAction, Runnable endAction) {
         super(name, beginAction, endAction);
     }
 
-    protected static net.minecraft.client.render.Shader myDebugShader;
-    protected static RenderPhase.Shader MY_DEBUG_SHADER;
+    protected static net.minecraft.client.renderer.ShaderInstance myDebugShader;
+    protected static RenderStateShard.ShaderStateShard MY_DEBUG_SHADER;
     @Nullable
-    static net.minecraft.client.render.Shader getRenderTypeMyShader() {
+    static net.minecraft.client.renderer.ShaderInstance getRenderTypeMyShader() {
         return myDebugShader;
     }
 
     static void initDebugShader(){
         if (myDebugShader ==null) {
-            ResourceFactory factory = MinecraftClient.getInstance().getResourceManager();
+            ResourceProvider factory = Minecraft.getInstance().getResourceManager();
             try {
                 myDebugShader = new DebugShader(factory);
-                MY_DEBUG_SHADER = new RenderPhase.Shader(ShaderDebugHelper::getRenderTypeMyShader);
+                MY_DEBUG_SHADER = new RenderStateShard.ShaderStateShard(ShaderDebugHelper::getRenderTypeMyShader);
             } catch (IOException e) {
                 e.printStackTrace();
-                MY_DEBUG_SHADER = RenderPhase.EYES_SHADER;
+                MY_DEBUG_SHADER = RenderStateShard.RENDERTYPE_EYES_SHADER;
             }
         }
     }
 
     private static int debugCachingID = 0;
-    private static RenderLayer reloadableDebugLayer = null;
-    static RenderLayer getDebugLayer(Identifier texture, Function<Identifier, RenderLayer> setup){
+    private static RenderType reloadableDebugLayer = null;
+    static RenderType getDebugLayer(ResourceLocation texture, Function<ResourceLocation, RenderType> setup){
 
         if (debugCachingID<targetCacheID || reloadableDebugLayer == null){
             myDebugShader = null;
@@ -64,58 +64,58 @@ abstract class ShaderDebugHelper extends RenderPhase {
     }
 }
 
-class DebugShader extends net.minecraft.client.render.Shader {
+class DebugShader extends net.minecraft.client.renderer.ShaderInstance {
     private static Program vertexShader;
     private static Program fragmentShader;
-    private static String doInit(final ResourceFactory factory, final String baseName){
+    private static String doInit(final ResourceProvider factory, final String baseName){
         try {
             System.out.println("Reloading Shader");
-            vertexShader = loadProgram(factory, Program.Type.VERTEX, "bn_debug");
-            fragmentShader = loadProgram(factory, Program.Type.FRAGMENT, "bn_debug");
+            vertexShader = getOrCreate(factory, Program.Type.VERTEX, "bn_debug");
+            fragmentShader = getOrCreate(factory, Program.Type.FRAGMENT, "bn_debug");
         } catch (IOException e){
             e.printStackTrace();
         }
         return baseName;
     }
-    public DebugShader(ResourceFactory factory) throws IOException {
-        super(factory, doInit(factory, "rendertype_eyes"), VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL);
+    public DebugShader(ResourceProvider factory) throws IOException {
+        super(factory, doInit(factory, "rendertype_eyes"), DefaultVertexFormat.NEW_ENTITY);
     }
 
-    public Program getFragmentShader() {
+    public Program getFragmentProgram() {
         return DebugShader.fragmentShader;
     }
 
-    public Program getVertexShader() {
+    public Program getVertexProgram() {
         return DebugShader.vertexShader;
     }
 
-    public void attachReferencedShaders() {
-        this.getFragmentShader().attachTo(this);
-        this.getVertexShader().attachTo(this);
+    public void attachToProgram() {
+        this.getFragmentProgram().attachToShader(this);
+        this.getVertexProgram().attachToShader(this);
     }
 
-    private static Program loadProgram(final ResourceFactory factory, Program.Type type, String name) throws IOException {
+    private static Program getOrCreate(final ResourceProvider factory, Program.Type type, String name) throws IOException {
         Program program;
-        System.out.println("Loading " + name + type.getFileExtension());
+        System.out.println("Loading " + name + type.getExtension());
 
 
         String workingDirAbs = Paths.get("").toAbsolutePath().toString();
-        final String shaderFile = workingDirAbs + "/" + name + type.getFileExtension();
-        String dummyName = "shaders/core/" + name + type.getFileExtension();
-        final String basePath = FileNameUtil.getPosixFullPath(dummyName);
+        final String shaderFile = workingDirAbs + "/" + name + type.getExtension();
+        String dummyName = "shaders/core/" + name + type.getExtension();
+        final String basePath = FileUtil.getFullResourcePath(dummyName);
 
         try {
             InputStream file = new FileInputStream(new File(shaderFile));
-            program = Program.createFromResource(type, name, file, "betternether", new GLImportProcessor() {
+            program = Program.compileShader(type, name, file, "betternether", new GlslPreprocessor() {
                 private final Set<String> visitedImports = Sets.newHashSet();
 
-                public String loadImport(boolean inline, String name) {
+                public String applyImport(boolean inline, String name) {
                     String inludePath = inline ? basePath : "shaders/include/";
-                    name = FileNameUtil.normalizeToPosix(inludePath + name);
+                    name = FileUtil.normalizeResourcePath(inludePath + name);
                     if (!this.visitedImports.add(name)) {
                         return null;
                     } else {
-                        Identifier identifier = new Identifier(name);
+                        ResourceLocation identifier = new ResourceLocation(name);
 
                         try {
                             Resource resource = factory.getResource(identifier);

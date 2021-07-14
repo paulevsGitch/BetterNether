@@ -1,11 +1,15 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.Biome;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.BlocksRegistry;
@@ -16,11 +20,6 @@ import paulevs.betternether.structures.StructureWorld;
 import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureWartCap;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
 public class NetherBiome {
 	private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
@@ -36,7 +35,7 @@ public class NetherBiome {
 	private ArrayList<StructureInfo> buildGeneratorsLava = new ArrayList<StructureInfo>();
 	private ArrayList<StructureInfo> buildGeneratorsUnder = new ArrayList<StructureInfo>();
 
-	protected final Identifier mcID;
+	protected final ResourceLocation mcID;
 	protected final Biome biome;
 	
 	protected float maxSubBiomeChance = 1;
@@ -152,27 +151,27 @@ public class NetherBiome {
 		setNoiseDensity(Configs.BIOMES.getFloat(group, "noise_density", getNoiseDensity()));
 	}
 
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {}
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {}
 
-	public void genFloorObjects(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void genFloorObjects(ServerLevelAccessor world, BlockPos pos, Random random) {
 		for (StructureInfo info : generatorsFloor)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 
-	public void genWallObjects(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void genWallObjects(ServerLevelAccessor world, BlockPos pos, Random random) {
 		for (StructureInfo info : generatorsWall)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 
-	public void genCeilObjects(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void genCeilObjects(ServerLevelAccessor world, BlockPos pos, Random random) {
 		for (StructureInfo info : generatorsCeil)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
 	}
 
-	public void genLavaObjects(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void genLavaObjects(ServerLevelAccessor world, BlockPos pos, Random random) {
 		for (StructureInfo info : generatorsLava)
 			if (info.canGenerate(random, pos))
 				info.structure.generate(world, pos, random);
@@ -305,23 +304,23 @@ public class NetherBiome {
 		return String.format(Locale.ROOT, "name: %s; offset: %d; type: %s; chance: %f", name, offset, type.getName(), chance);
 	}
 
-	public void genFloorBuildings(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void genFloorBuildings(ServerLevelAccessor world, BlockPos pos, Random random) {
 		chancedStructure(world, pos, random, buildGeneratorsFloor);
 	}
 	
-	public void genCeilBuildings(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void genCeilBuildings(ServerLevelAccessor world, BlockPos pos, Random random) {
 		chancedStructure(world, pos, random, buildGeneratorsCeil);
 	}
 
-	public void genLavaBuildings(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void genLavaBuildings(ServerLevelAccessor world, BlockPos pos, Random random) {
 		chancedStructure(world, pos, random, buildGeneratorsLava);
 	}
 
-	public void genUnderBuildings(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void genUnderBuildings(ServerLevelAccessor world, BlockPos pos, Random random) {
 		chancedStructure(world, pos, random, buildGeneratorsUnder);
 	}
 
-	private void chancedStructure(ServerWorldAccess world, BlockPos pos, Random random, List<StructureInfo> infoList) {
+	private void chancedStructure(ServerLevelAccessor world, BlockPos pos, Random random, List<StructureInfo> infoList) {
 		float chance = getLastChance(infoList);
 		if (chance > 0) {
 			float rnd = random.nextFloat() * chance;
@@ -406,7 +405,7 @@ public class NetherBiome {
 		return mcID.toString();
 	}
 
-	public Identifier getID() {
+	public ResourceLocation getID() {
 		return mcID;
 	}
 

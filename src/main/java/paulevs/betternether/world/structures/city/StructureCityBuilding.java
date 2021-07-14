@@ -1,28 +1,27 @@
 package paulevs.betternether.world.structures.city;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.Structure.StructureBlockInfo;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.processor.StructureProcessor;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockBox;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.ServerWorldAccess;
-import paulevs.betternether.structures.StructureNBT;
-
 import java.util.List;
 import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
+import paulevs.betternether.structures.StructureNBT;
 
 public class StructureCityBuilding extends StructureNBT {
-	protected static final BlockState AIR = Blocks.AIR.getDefaultState();
+	protected static final BlockState AIR = Blocks.AIR.defaultBlockState();
 
-	private BoundingBox bb;
+	private paulevs.betternether.world.structures.city.BoundingBox bb;
 	public BlockPos[] ends;
 	private Direction[] dirs;
 	private BlockPos rotationOffset;
@@ -40,25 +39,25 @@ public class StructureCityBuilding extends StructureNBT {
 		init();
 	}
 
-	protected StructureCityBuilding(Identifier location, Structure structure) {
+	protected StructureCityBuilding(ResourceLocation location, StructureTemplate structure) {
 		super(location, structure);
 		init();
 	}
 
 	private void init() {
 		Vec3i size = structure.getSize();
-		bb = new BoundingBox(0, 0, size.getX(), size.getZ());
-		List<StructureBlockInfo> map = structure.getInfosForBlock(BlockPos.ORIGIN, new StructurePlacementData(), Blocks.STRUCTURE_BLOCK, false);
+		bb = new paulevs.betternether.world.structures.city.BoundingBox(0, 0, size.getX(), size.getZ());
+		List<StructureBlockInfo> map = structure.filterBlocks(BlockPos.ZERO, new StructurePlaceSettings(), Blocks.STRUCTURE_BLOCK, false);
 		ends = new BlockPos[map.size()];
 		dirs = new Direction[map.size()];
 		int i = 0;
 		BlockPos center = new BlockPos(size.getX() >> 1, size.getY(), size.getZ() >> 1);
 		for (StructureBlockInfo info : map) {
 			ends[i] = info.pos;
-			dirs[i++] = getDir(info.pos.add(-center.getX(), 0, -center.getZ()));
+			dirs[i++] = getDir(info.pos.offset(-center.getX(), 0, -center.getZ()));
 		}
 		rotationOffset = new BlockPos(0, 0, 0);
-		rotation = BlockRotation.NONE;
+		rotation = Rotation.NONE;
 	}
 
 	private Direction getDir(BlockPos pos) {
@@ -79,27 +78,27 @@ public class StructureCityBuilding extends StructureNBT {
 		}
 	}
 
-	public BoundingBox getBoungingBox() {
+	public paulevs.betternether.world.structures.city.BoundingBox getBoungingBox() {
 		return bb;
 	}
 
-	protected BlockRotation mirrorRotation(BlockRotation r) {
+	protected Rotation mirrorRotation(Rotation r) {
 		switch (r) {
 			case CLOCKWISE_90:
-				return BlockRotation.COUNTERCLOCKWISE_90;
+				return Rotation.COUNTERCLOCKWISE_90;
 			default:
 				return r;
 		}
 	}
 
-	public void placeInChunk(ServerWorldAccess world, BlockPos pos, BlockBox boundingBox, StructureProcessor paletteProcessor) {
-		BlockPos p = pos.add(rotationOffset);
-		structure.place(world, p, p, new StructurePlacementData()
+	public void placeInChunk(ServerLevelAccessor world, BlockPos pos, BoundingBox boundingBox, StructureProcessor paletteProcessor) {
+		BlockPos p = pos.offset(rotationOffset);
+		structure.placeInWorld(world, p, p, new StructurePlaceSettings()
 				.setRotation(rotation)
 				.setMirror(mirror)
 				.setBoundingBox(boundingBox)
 				.addProcessor(paletteProcessor),
-				world.getRandom(), Block.NOTIFY_LISTENERS);
+				world.getRandom(), Block.UPDATE_CLIENTS);
 	}
 
 	public BlockPos[] getEnds() {
@@ -111,14 +110,14 @@ public class StructureCityBuilding extends StructureNBT {
 	}
 
 	public BlockPos getOffsettedPos(int index) {
-		return ends[index].offset(dirs[index]);
+		return ends[index].relative(dirs[index]);
 	}
 
 	public BlockPos getPos(int index) {
 		return ends[index];
 	}
 
-	public StructureCityBuilding getRotated(BlockRotation rotation) {
+	public StructureCityBuilding getRotated(Rotation rotation) {
 		StructureCityBuilding building = this.clone();
 		building.rotation = rotation;
 		building.rotationOffset = new BlockPos(building.structure.getSize()).rotate(rotation);
@@ -135,7 +134,7 @@ public class StructureCityBuilding extends StructureNBT {
 		building.rotationOffset = new BlockPos(x, 0, z);
 		for (int i = 0; i < building.dirs.length; i++) {
 			building.dirs[i] = rotated(building.dirs[i], rotation);
-			building.ends[i] = building.ends[i].rotate(rotation).add(building.rotationOffset);
+			building.ends[i] = building.ends[i].rotate(rotation).offset(building.rotationOffset);
 		}
 		building.bb.rotate(rotation);
 		building.offsetY = this.offsetY;
@@ -143,24 +142,24 @@ public class StructureCityBuilding extends StructureNBT {
 	}
 
 	public StructureCityBuilding getRandomRotated(Random random) {
-		return getRotated(BlockRotation.values()[random.nextInt(4)]);
+		return getRotated(Rotation.values()[random.nextInt(4)]);
 	}
 
 	public StructureCityBuilding clone() {
 		return new StructureCityBuilding(location, structure);
 	}
 
-	private Direction rotated(Direction dir, BlockRotation rotation) {
+	private Direction rotated(Direction dir, Rotation rotation) {
 		Direction f;
 		switch (rotation) {
 			case CLOCKWISE_90:
-				f = dir.rotateYClockwise();
+				f = dir.getClockWise();
 				break;
 			case CLOCKWISE_180:
 				f = dir.getOpposite();
 				break;
 			case COUNTERCLOCKWISE_90:
-				f = dir.rotateYCounterclockwise();
+				f = dir.getCounterClockWise();
 				break;
 			default:
 				f = dir;
@@ -173,7 +172,7 @@ public class StructureCityBuilding extends StructureNBT {
 		return offsetY;
 	}
 
-	public BlockRotation getRotation() {
+	public Rotation getRotation() {
 		return rotation;
 	}
 
@@ -185,12 +184,12 @@ public class StructureCityBuilding extends StructureNBT {
 	 */
 
 	@Override
-	public BlockBox getBoundingBox(BlockPos pos) {
-		return structure.calculateBoundingBox(new StructurePlacementData().setRotation(this.rotation).setMirror(mirror), pos.add(rotationOffset));
+	public BoundingBox getBoundingBox(BlockPos pos) {
+		return structure.getBoundingBox(new StructurePlaceSettings().setRotation(this.rotation).setMirror(mirror), pos.offset(rotationOffset));
 	}
 
 	@Override
-	public StructureCityBuilding setRotation(BlockRotation rotation) {
+	public StructureCityBuilding setRotation(Rotation rotation) {
 		this.rotation = rotation;
 		rotationOffset = new BlockPos(structure.getSize()).rotate(rotation);
 		return this;

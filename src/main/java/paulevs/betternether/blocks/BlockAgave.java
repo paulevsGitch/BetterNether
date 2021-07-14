@@ -1,46 +1,53 @@
 package paulevs.betternether.blocks;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.ItemsRegistry;
 
-import java.util.List;
-
 public class BlockAgave extends BlockCommonPlant {
-	private static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 14, 14);
+	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
 	public BlockAgave() {
 		super(FabricBlockSettings.of(Material.CACTUS)
-				.materialColor(MapColor.TERRACOTTA_ORANGE)
-				.sounds(BlockSoundGroup.WOOL)
+				.mapColor(MaterialColor.TERRACOTTA_ORANGE)
+				.breakByTool(FabricToolTags.SHEARS)
+				.sounds(SoundType.WOOL)
 				.nonOpaque()
 				.noCollision()
 				.hardness(0.4F)
 				.ticksRandomly()
-				.breakByTool(FabricToolTags.SHEARS));
+		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		Vec3d vec3d = state.getModelOffset(view, pos);
-		return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		Vec3 vec3d = state.getOffset(view, pos);
+		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
 	}
 
 	@Override
@@ -49,27 +56,27 @@ public class BlockAgave extends BlockCommonPlant {
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		Block down = world.getBlockState(pos.down()).getBlock();
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		Block down = world.getBlockState(pos.below()).getBlock();
 		return down == Blocks.GRAVEL;
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (canPlaceAt(state, world, pos))
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (canSurvive(state, world, pos))
 			return state;
 		else
-			return Blocks.AIR.getDefaultState();
+			return Blocks.AIR.defaultBlockState();
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-		if (state.get(BlockCommonPlant.AGE) > 1) entity.damage(DamageSource.CACTUS, 1.0F);
+	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+		if (state.getValue(BlockCommonPlant.AGE) > 1) entity.hurt(DamageSource.CACTUS, 1.0F);
 	}
 
 	@Override
-	public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
-		if (state.get(BlockCommonPlant.AGE) == 3) {
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+		if (state.getValue(BlockCommonPlant.AGE) == 3) {
 			return Lists.newArrayList(new ItemStack(this, MHelper.randRange(1, 2, MHelper.RANDOM)), new ItemStack(ItemsRegistry.AGAVE_LEAF, MHelper.randRange(2, 5, MHelper.RANDOM)));
 		}
 		return Lists.newArrayList(new ItemStack(this));

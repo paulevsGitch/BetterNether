@@ -1,7 +1,7 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureObjScatter;
 import paulevs.betternether.structures.StructureType;

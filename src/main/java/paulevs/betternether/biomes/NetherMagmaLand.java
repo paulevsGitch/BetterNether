@@ -1,11 +1,12 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureCrystal;
@@ -13,10 +14,8 @@ import paulevs.betternether.structures.decorations.StructureGeyser;
 import paulevs.betternether.structures.plants.StructureGoldenVine;
 import paulevs.betternether.structures.plants.StructureMagmaFlower;
 
-import java.util.Random;
-
 public class NetherMagmaLand extends NetherBiome {
-	private static final Mutable POS = new Mutable();
+	private static final MutableBlockPos POS = new MutableBlockPos();
 	private static final boolean[] MASK;
 
 	public NetherMagmaLand(String name) {
@@ -32,13 +31,13 @@ public class NetherMagmaLand extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
 		if (isMask(pos.getX(), pos.getZ())) {
 			POS.set(pos);
 			boolean magma = true;
 			if (random.nextInt(4) == 0) {
-				if (validWall(world, POS.down()) && validWall(world, POS.north()) && validWall(world, POS.south()) && validWall(world, POS.east()) && validWall(world, POS.west())) {
-					BlocksHelper.setWithoutUpdate(world, POS, Blocks.LAVA.getDefaultState());
+				if (validWall(world, POS.below()) && validWall(world, POS.north()) && validWall(world, POS.south()) && validWall(world, POS.east()) && validWall(world, POS.west())) {
+					BlocksHelper.setWithoutUpdate(world, POS, Blocks.LAVA.defaultBlockState());
 					magma = false;
 				}
 			}
@@ -46,14 +45,14 @@ public class NetherMagmaLand extends NetherBiome {
 				for (int y = 0; y < random.nextInt(3) + 1; y++) {
 				POS.setY(pos.getY() - y);
 				if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
-					BlocksHelper.setWithoutUpdate(world, POS, Blocks.MAGMA_BLOCK.getDefaultState());
+					BlocksHelper.setWithoutUpdate(world, POS, Blocks.MAGMA_BLOCK.defaultBlockState());
 				}
 		}
 		else
 			super.genSurfColumn(world, pos, random);
 	}
 
-	protected boolean validWall(WorldAccess world, BlockPos pos) {
+	protected boolean validWall(LevelAccessor world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 		return BlocksHelper.isLava(state) || BlocksHelper.isNetherGroundMagma(state);
 	}

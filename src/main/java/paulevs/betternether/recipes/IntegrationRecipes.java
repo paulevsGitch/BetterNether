@@ -1,18 +1,17 @@
 package paulevs.betternether.recipes;
 
+import java.util.Map;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import paulevs.betternether.integrations.VanillaExcavatorsIntegration;
 import paulevs.betternether.integrations.VanillaHammersIntegration;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.ItemsRegistry;
-
-import java.util.Map;
 
 public class IntegrationRecipes {
 	public static void register() {
@@ -20,8 +19,8 @@ public class IntegrationRecipes {
 			makeHammerRecipe(ItemsRegistry.CINCINNASITE_HAMMER, BlocksRegistry.CINCINNASITE_FORGED, ItemsRegistry.CINCINNASITE_INGOT);
 			makeHammerRecipe(ItemsRegistry.NETHER_RUBY_HAMMER, BlocksRegistry.NETHER_RUBY_BLOCK, ItemsRegistry.NETHER_RUBY);
 
-			Identifier id = Registry.ITEM.getId(ItemsRegistry.CINCINNASITE_HAMMER_DIAMOND);
-			boolean register = id != Registry.ITEM.getDefaultId() && Registry.ITEM.getId(ItemsRegistry.CINCINNASITE_HAMMER) != Registry.ITEM.getDefaultId();
+			ResourceLocation id = Registry.ITEM.getKey(ItemsRegistry.CINCINNASITE_HAMMER_DIAMOND);
+			boolean register = id != Registry.ITEM.getDefaultKey() && Registry.ITEM.getKey(ItemsRegistry.CINCINNASITE_HAMMER) != Registry.ITEM.getDefaultKey();
 			if (register) {
 				String[] shape = new String[] { "#I#" };
 				Map<String, ItemStack> materials = ImmutableMap.of(
@@ -36,8 +35,8 @@ public class IntegrationRecipes {
 			makeExcavatorRecipe(ItemsRegistry.CINCINNASITE_EXCAVATOR, BlocksRegistry.CINCINNASITE_FORGED, ItemsRegistry.CINCINNASITE_INGOT);
 			makeExcavatorRecipe(ItemsRegistry.NETHER_RUBY_EXCAVATOR, BlocksRegistry.NETHER_RUBY_BLOCK, ItemsRegistry.NETHER_RUBY);
 
-			Identifier id = Registry.ITEM.getId(ItemsRegistry.CINCINNASITE_EXCAVATOR_DIAMOND);
-			boolean register = id != Registry.ITEM.getDefaultId() && Registry.ITEM.getId(ItemsRegistry.CINCINNASITE_EXCAVATOR) != Registry.ITEM.getDefaultId();
+			ResourceLocation id = Registry.ITEM.getKey(ItemsRegistry.CINCINNASITE_EXCAVATOR_DIAMOND);
+			boolean register = id != Registry.ITEM.getDefaultKey() && Registry.ITEM.getKey(ItemsRegistry.CINCINNASITE_EXCAVATOR) != Registry.ITEM.getDefaultKey();
 			if (register) {
 				String[] shape = new String[] { "#I#" };
 				Map<String, ItemStack> materials = ImmutableMap.of(
@@ -50,11 +49,11 @@ public class IntegrationRecipes {
 	}
 
 	private static void makeHammerRecipe(Item hammer, Block block, Item item) {
-		Identifier id = Registry.ITEM.getId(hammer);
-		boolean register = id != Registry.ITEM.getDefaultId() &&
-				Registry.BLOCK.getId(BlocksRegistry.NETHER_REED) != Registry.BLOCK.getDefaultId() &&
-				Registry.BLOCK.getId(block) != Registry.BLOCK.getDefaultId() &&
-				Registry.ITEM.getId(item) != Registry.ITEM.getDefaultId();
+		ResourceLocation id = Registry.ITEM.getKey(hammer);
+		boolean register = id != Registry.ITEM.getDefaultKey() &&
+				Registry.BLOCK.getKey(BlocksRegistry.NETHER_REED) != Registry.BLOCK.getDefaultKey() &&
+				Registry.BLOCK.getKey(block) != Registry.BLOCK.getDefaultKey() &&
+				Registry.ITEM.getKey(item) != Registry.ITEM.getDefaultKey();
 		if (register) {
 			Map<String, ItemStack> materials = ImmutableMap.of(
 					"#", new ItemStack(block),
@@ -66,11 +65,11 @@ public class IntegrationRecipes {
 	}
 
 	private static void makeExcavatorRecipe(Item excavator, Block block, Item item) {
-		Identifier id = Registry.ITEM.getId(excavator);
-		boolean register = id != Registry.ITEM.getDefaultId() &&
-				Registry.BLOCK.getId(BlocksRegistry.NETHER_REED) != Registry.BLOCK.getDefaultId() &&
-				Registry.BLOCK.getId(block) != Registry.BLOCK.getDefaultId() &&
-				Registry.ITEM.getId(item) != Registry.ITEM.getDefaultId();
+		ResourceLocation id = Registry.ITEM.getKey(excavator);
+		boolean register = id != Registry.ITEM.getDefaultKey() &&
+				Registry.BLOCK.getKey(BlocksRegistry.NETHER_REED) != Registry.BLOCK.getDefaultKey() &&
+				Registry.BLOCK.getKey(block) != Registry.BLOCK.getDefaultKey() &&
+				Registry.ITEM.getKey(item) != Registry.ITEM.getDefaultKey();
 		if (register) {
 			Map<String, ItemStack> materials = ImmutableMap.of(
 					"#", new ItemStack(block),

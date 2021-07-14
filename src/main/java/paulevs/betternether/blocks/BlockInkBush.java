@@ -2,21 +2,21 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.registry.BlocksRegistry;
 
 public class BlockInkBush extends BlockCommonPlant {
 	public BlockInkBush() {
-		super(MapColor.BLACK);
+		super(MaterialColor.COLOR_BLACK);
 	}
 
 	@Override
 	@Environment(EnvType.CLIENT)
-	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		return new ItemStack(BlocksRegistry.INK_BUSH_SEED);
 	}
 }

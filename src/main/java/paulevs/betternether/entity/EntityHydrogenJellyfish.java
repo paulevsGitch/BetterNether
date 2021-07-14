@@ -1,134 +1,137 @@
 package paulevs.betternether.entity;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.EntityDamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.tag.Tag;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.explosion.Explosion;
-import paulevs.betternether.registry.SoundsRegistry;
-
 import java.util.List;
 import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.Tag;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.FlyingAnimal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import paulevs.betternether.registry.SoundsRegistry;
 
-public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
-	private static final TrackedData<Float> SCALE = DataTracker.registerData(EntityHydrogenJellyfish.class, TrackedDataHandlerRegistry.FLOAT);
+public class EntityHydrogenJellyfish extends Animal implements FlyingAnimal {
+	private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(EntityHydrogenJellyfish.class, EntityDataSerializers.FLOAT);
 
-	private Vec3d preVelocity;
-	private Vec3d newVelocity = new Vec3d(0, 0, 0);
+	private Vec3 preVelocity;
+	private Vec3 newVelocity = new Vec3(0, 0, 0);
 	private int timer;
 	private int timeOut;
 	private float prewYaw;
 	private float nextYaw;
 
-	public EntityHydrogenJellyfish(EntityType<? extends EntityHydrogenJellyfish> type, World world) {
+	public EntityHydrogenJellyfish(EntityType<? extends EntityHydrogenJellyfish> type, Level world) {
 		super(type, world);
 	}
 
 	@Override
-	protected void initDataTracker() {
-		super.initDataTracker();
-		this.dataTracker.startTracking(SCALE, 0.5F + random.nextFloat());
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(SCALE, 0.5F + random.nextFloat());
 	}
 
-	public static DefaultAttributeContainer getAttributeContainer() {
-		return MobEntity
+	public static AttributeSupplier getAttributeContainer() {
+		return Mob
 				.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, 0.5)
-				.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.05)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 20.0)
+				.add(Attributes.MAX_HEALTH, 0.5)
+				.add(Attributes.FLYING_SPEED, 0.05)
+				.add(Attributes.MOVEMENT_SPEED, 0.5)
+				.add(Attributes.ATTACK_DAMAGE, 20.0)
 				.build();
 	}
 
 	@Override
-	protected boolean hasWings() {
+	protected boolean isFlapping() {
 		return true;
 	}
 
 	@Override
-	protected void swimUpward(Tag<Fluid> fluid) {
-		this.setVelocity(this.getVelocity().add(0.0D, 0.01D, 0.0D));
+	protected void jumpInLiquid(Tag<Fluid> fluid) {
+		this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.01D, 0.0D));
 	}
 
 	@Override
-	public boolean hasNoGravity() {
+	public boolean isNoGravity() {
 		return true;
 	}
 
 	@Override
-	public void writeCustomDataToNbt(NbtCompound tag) {
-		super.writeCustomDataToNbt(tag);
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
 
 		tag.putFloat("Scale", getScale());
 	}
 
 	@Override
-	public void readCustomDataFromNbt(NbtCompound tag) {
-		super.readCustomDataFromNbt(tag);
+	public void readAdditionalSaveData(CompoundTag tag) {
+		super.readAdditionalSaveData(tag);
 
 		if (tag.contains("Scale")) {
-			this.dataTracker.set(SCALE, tag.getFloat("Scale"));
+			this.entityData.set(SCALE, tag.getFloat("Scale"));
 		}
 
-		this.calculateDimensions();
+		this.refreshDimensions();
 	}
 
 	public float getScale() {
-		return this.dataTracker.get(SCALE);
+		return this.entityData.get(SCALE);
 	}
 
-	public EntityDimensions getDimensions(EntityPose pose) {
-		return super.getDimensions(pose).scaled(this.getScale());
-	}
-
-	@Override
-	public void onPlayerCollision(PlayerEntity player) {
-		player.damage(DamageSource.GENERIC, 3);
+	public EntityDimensions getDimensions(Pose pose) {
+		return super.getDimensions(pose).scale(this.getScale());
 	}
 
 	@Override
-	public void calculateDimensions() {
+	public void playerTouch(Player player) {
+		player.hurt(DamageSource.GENERIC, 3);
+	}
+
+	@Override
+	public void refreshDimensions() {
 		double x = this.getX();
 		double y = this.getY();
 		double z = this.getZ();
-		super.calculateDimensions();
-		this.setPos(x, y, z);
+		super.refreshDimensions();
+		this.setPosRaw(x, y, z);
 	}
 
 	@Override
-	public void onTrackedDataSet(TrackedData<?> data) {
+	public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
 		if (SCALE.equals(data)) {
-			this.calculateDimensions();
+			this.refreshDimensions();
 		}
 	}
 
 	@Override
-	protected void mobTick() {
+	protected void customServerAiStep() {
 		timer++;
 		if (timer > timeOut) {
-			prewYaw = this.getYaw();
+			prewYaw = this.getYRot();
 			nextYaw = random.nextFloat() * 360;
 
 			double rads = Math.toRadians(nextYaw + 90);
@@ -136,59 +139,59 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 			double vx = Math.cos(rads) * this.flyingSpeed;
 			double vz = Math.sin(rads) * this.flyingSpeed;
 
-			BlockPos bp = getBlockPos();
+			BlockPos bp = blockPosition();
 			double vy = random.nextDouble() * this.flyingSpeed * 0.75;
-			if (world.getBlockState(bp).isAir() &&
-					world.getBlockState(bp.down(2)).isAir() &&
-					world.getBlockState(bp.down(3)).isAir() &&
-					world.getBlockState(bp.down(4)).isAir()) {
+			if (level.getBlockState(bp).isAir() &&
+					level.getBlockState(bp.below(2)).isAir() &&
+					level.getBlockState(bp.below(3)).isAir() &&
+					level.getBlockState(bp.below(4)).isAir()) {
 				vy = -vy;
 			}
 
 			preVelocity = newVelocity;
-			newVelocity = new Vec3d(vx, vy, vz);
+			newVelocity = new Vec3(vx, vy, vz);
 			timer = 0;
 			timeOut = random.nextInt(300) + 120;
 		}
 		if (timer <= 120) {
-			if (this.getYaw() != nextYaw) {
+			if (this.getYRot() != nextYaw) {
 				float delta = timer / 120F;
-				this.setYaw(lerpAngleDegrees(delta, prewYaw, nextYaw));
-				this.setVelocity(
-						MathHelper.lerp(delta, preVelocity.x, newVelocity.x),
-						MathHelper.lerp(delta, preVelocity.y, newVelocity.y),
-						MathHelper.lerp(delta, preVelocity.z, newVelocity.z));
+				this.setYRot(lerpAngleDegrees(delta, prewYaw, nextYaw));
+				this.setDeltaMovement(
+						Mth.lerp(delta, preVelocity.x, newVelocity.x),
+						Mth.lerp(delta, preVelocity.y, newVelocity.y),
+						Mth.lerp(delta, preVelocity.z, newVelocity.z));
 			}
 		}
 		else {
-			this.setVelocity(newVelocity);
+			this.setDeltaMovement(newVelocity);
 		}
 	}
 
 	public static float lerpAngleDegrees(float delta, float first, float second) {
-		return first + delta * MathHelper.wrapDegrees(second - first);
+		return first + delta * Mth.wrapDegrees(second - first);
 	}
 
 	@Override
-	public int getLimitPerChunk() {
+	public int getMaxSpawnClusterSize() {
 		return 1;
 	}
 
 	@Override
-	public void onDeath(DamageSource source) {
-		super.onDeath(source);
-		if (world.isClient) {
+	public void die(DamageSource source) {
+		super.die(source);
+		if (level.isClientSide) {
 			float scale = getScale() * 3;
 			for (int i = 0; i < 20; i++)
-				this.world.addParticle(ParticleTypes.EXPLOSION,
+				this.level.addParticle(ParticleTypes.EXPLOSION,
 						getX() + random.nextGaussian() * scale,
 						getEyeY() + random.nextGaussian() * scale,
 						getZ() + random.nextGaussian() * scale,
 						0, 0, 0);
 		}
 		else {
-			Explosion.DestructionType destructionType = this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING) ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE;
-			this.world.createExplosion(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
+			Explosion.BlockInteraction destructionType = this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+			this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
 		}
 	}
 
@@ -203,30 +206,30 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public PassiveEntity createChild(ServerWorld world, PassiveEntity mate) {
+	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mate) {
 		return null;
 	}
 
 	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+	public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
 		return false;
 	}
 
 	@Override
-	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
+	protected void checkFallDamage(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
 
 	@Override
-	public boolean damage(DamageSource source, float amount) {
+	public boolean hurt(DamageSource source, float amount) {
 		if (source == DamageSource.WITHER || source instanceof EntityDamageSource) {
-			return super.damage(source, amount);
+			return super.hurt(source, amount);
 		}
 		return false;
 	}
 
-	public static boolean canSpawn(EntityType<? extends EntityHydrogenJellyfish> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+	public static boolean canSpawn(EntityType<? extends EntityHydrogenJellyfish> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
 		try {
-			Box box = new Box(pos).expand(64, 256, 64);
-			List<EntityHydrogenJellyfish> list = world.getEntitiesByClass(EntityHydrogenJellyfish.class, box, (entity) -> {
+			AABB box = new AABB(pos).inflate(64, 256, 64);
+			List<EntityHydrogenJellyfish> list = world.getEntitiesOfClass(EntityHydrogenJellyfish.class, box, (entity) -> {
 				return true;
 			});
 			return list.size() < 4;
@@ -237,7 +240,7 @@ public class EntityHydrogenJellyfish extends AnimalEntity implements Flutterer {
 	}
 
 	@Override
-	public boolean isInAir() {
+	public boolean isFlying() {
 		return !this.onGround;
 	}
 }

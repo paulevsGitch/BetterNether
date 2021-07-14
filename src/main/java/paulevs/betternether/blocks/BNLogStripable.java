@@ -1,19 +1,19 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.PillarBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AxeItem;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.BlockHitResult;
 import paulevs.betternether.blocks.materials.Materials;
 
 public class BNLogStripable extends BNPillar {
@@ -24,23 +24,23 @@ public class BNLogStripable extends BNPillar {
 		this.result = result;
 	}
 
-	public BNLogStripable(MapColor color, Block result) {
-		super(Materials.makeWood(MapColor.TERRACOTTA_LIME));
+	public BNLogStripable(MaterialColor color, Block result) {
+		super(Materials.makeWood(MaterialColor.TERRACOTTA_LIGHT_GREEN));
 		this.result = result;
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (player.getMainHandStack().getItem() instanceof AxeItem) {
-			world.playSound(player, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			if (!world.isClient) {
-				world.setBlockState(pos, result.getDefaultState().with(PillarBlock.AXIS, state.get(PillarBlock.AXIS)), 11);
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (player.getMainHandItem().getItem() instanceof AxeItem) {
+			world.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+			if (!world.isClientSide) {
+				world.setBlock(pos, result.defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)), 11);
 				if (player != null && !player.isCreative()) {
-					player.getMainHandStack().damage(1, world.random, (ServerPlayerEntity) player);
+					player.getMainHandItem().hurt(1, world.random, (ServerPlayer) player);
 				}
 			}
-			return ActionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
-		return ActionResult.FAIL;
+		return InteractionResult.FAIL;
 	}
 }

@@ -1,13 +1,12 @@
 package paulevs.betternether.registry;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
-
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 
 public class BrewingRegistry {
 	private static final List<BrewingRecipe> RECIPES = new ArrayList<BrewingRecipe>();
@@ -22,7 +21,7 @@ public class BrewingRegistry {
 	}
 
 	private static ItemStack makePotion(Potion potion) {
-		return PotionUtil.setPotion(new ItemStack(Items.POTION), potion);
+		return PotionUtils.setPotion(new ItemStack(Items.POTION), potion);
 	}
 
 	public static class BrewingRecipe {
@@ -37,11 +36,11 @@ public class BrewingRegistry {
 		}
 
 		public boolean isValid(ItemStack source, ItemStack bottle) {
-			return ItemStack.areItemsEqualIgnoreDamage(this.source, source) && ItemStack.areItemsEqualIgnoreDamage(this.bottle, bottle);
+			return ItemStack.isSame(this.source, source) && ItemStack.isSame(this.bottle, bottle);
 		}
 
 		public boolean isValid(ItemStack source) {
-			return ItemStack.areItemsEqualIgnoreDamage(this.source, source);
+			return ItemStack.isSame(this.source, source);
 		}
 
 		public ItemStack getResult() {

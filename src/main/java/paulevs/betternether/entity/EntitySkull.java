@@ -1,38 +1,43 @@
 package paulevs.betternether.entity;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.control.LookControl;
-import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ShieldItem;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import paulevs.betternether.MHelper;
-import paulevs.betternether.registry.SoundsRegistry;
-
 import java.util.List;
 import java.util.Random;
 
-public class EntitySkull extends HostileEntity implements Flutterer {
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.control.LookControl;
+import net.minecraft.world.entity.animal.FlyingAnimal;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import paulevs.betternether.MHelper;
+import paulevs.betternether.entity.EntitySkull.SkullLookControl;
+import paulevs.betternether.registry.SoundsRegistry;
+
+public class EntitySkull extends Monster implements FlyingAnimal {
 	private static double particleX;
 	private static double particleY;
 	private static double particleZ;
@@ -40,70 +45,70 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 	private int dirTickTick;
 	private int collideTick;
 
-	public EntitySkull(EntityType<? extends EntitySkull> type, World world) {
+	public EntitySkull(EntityType<? extends EntitySkull> type, Level world) {
 		super(type, world);
-		this.moveControl = new FlightMoveControl(this, 20, true);
+		this.moveControl = new FlyingMoveControl(this, 20, true);
 		this.lookControl = new SkullLookControl(this);
-		this.setPathfindingPenalty(PathNodeType.LAVA, -1.0F);
-		this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
-		this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, 0.0F);
-		this.experiencePoints = 1;
+		this.setPathfindingMalus(BlockPathTypes.LAVA, -1.0F);
+		this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
+		this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
+		this.xpReward = 1;
 		this.flyingSpeed = 0.5F;
 	}
 
-	public static DefaultAttributeContainer getAttributeContainer() {
-		return MobEntity
+	public static AttributeSupplier getAttributeContainer() {
+		return Mob
 				.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
-				.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-				.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5)
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
+				.add(Attributes.MAX_HEALTH, 4.0)
+				.add(Attributes.FOLLOW_RANGE, 20.0)
+				.add(Attributes.MOVEMENT_SPEED, 0.5)
+				.add(Attributes.FLYING_SPEED, 0.5)
+				.add(Attributes.ATTACK_DAMAGE, 1.0)
 				.build();
 	}
 
 	@Override
-	public boolean isInAir() {
+	public boolean isFlying() {
 		return !this.onGround;
 	}
 
 	class SkullLookControl extends LookControl {
-		SkullLookControl(MobEntity entity) {
+		SkullLookControl(Mob entity) {
 			super(entity);
 		}
 
-		protected boolean shouldStayHorizontal() {
+		protected boolean resetXRotOnTick() {
 			return false;
 		}
 	}
 
 	@Override
-	public void onPlayerCollision(PlayerEntity player) {
+	public void playerTouch(Player player) {
 		collideTick++;
 		if (collideTick > 25) {
 			collideTick = 0;
 
-			boolean shield = player.getActiveItem().getItem() instanceof ShieldItem && player.isUsingItem();
+			boolean shield = player.getUseItem().getItem() instanceof ShieldItem && player.isUsingItem();
 			if (shield) {
-				player.playSound(SoundEvents.ITEM_SHIELD_BLOCK, MHelper.randRange(0.8F, 1.2F, random), MHelper.randRange(0.8F, 1.2F, random));
-				this.setVelocity(new Vec3d(0, 0, 0).subtract(getVelocity()));
+				player.playSound(SoundEvents.SHIELD_BLOCK, MHelper.randRange(0.8F, 1.2F, random), MHelper.randRange(0.8F, 1.2F, random));
+				this.setDeltaMovement(new Vec3(0, 0, 0).subtract(getDeltaMovement()));
 			}
-			if (player instanceof ServerPlayerEntity) {
+			if (player instanceof ServerPlayer) {
 				if (shield) {
-					player.getActiveItem().damage(1, random, (ServerPlayerEntity) player);
-					if (player.getActiveItem().getDamage() > player.getActiveItem().getMaxDamage()) {
-						player.sendToolBreakStatus(player.getActiveHand());
-						if (player.getActiveHand().equals(Hand.MAIN_HAND))
-							player.getInventory().main.clear();
-						else if (player.getActiveHand().equals(Hand.OFF_HAND))
-							player.getInventory().offHand.clear();
-						player.clearActiveItem();
+					player.getUseItem().hurt(1, random, (ServerPlayer) player);
+					if (player.getUseItem().getDamageValue() > player.getUseItem().getMaxDamage()) {
+						player.broadcastBreakEvent(player.getUsedItemHand());
+						if (player.getUsedItemHand().equals(InteractionHand.MAIN_HAND))
+							player.getInventory().items.clear();
+						else if (player.getUsedItemHand().equals(InteractionHand.OFF_HAND))
+							player.getInventory().offhand.clear();
+						player.stopUsingItem();
 					}
 					return;
 				}
-				player.damage(DamageSource.GENERIC, 1);
+				player.hurt(DamageSource.GENERIC, 1);
 				if (random.nextInt(16) == 0)
-					player.setOnFireFor(3);
+					player.setSecondsOnFire(3);
 			}
 		}
 	}
@@ -113,29 +118,29 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 		super.tick();
 		if (random.nextInt(3) == 0) {
 			updateParticlePos();
-			this.world.addParticle(ParticleTypes.SMOKE, particleX, particleY, particleZ, 0, 0, 0);
+			this.level.addParticle(ParticleTypes.SMOKE, particleX, particleY, particleZ, 0, 0, 0);
 		}
 		if (random.nextInt(3) == 0) {
 			updateParticlePos();
-			this.world.addParticle(ParticleTypes.DRIPPING_LAVA, particleX, particleY, particleZ, 0, 0, 0);
+			this.level.addParticle(ParticleTypes.DRIPPING_LAVA, particleX, particleY, particleZ, 0, 0, 0);
 		}
 		if (random.nextInt(3) == 0) {
 			updateParticlePos();
-			this.world.addParticle(ParticleTypes.FLAME, particleX, particleY, particleZ, 0, 0, 0);
+			this.level.addParticle(ParticleTypes.FLAME, particleX, particleY, particleZ, 0, 0, 0);
 		}
 
 		if (attackTick > 40 && this.isAlive()) {
-			PlayerEntity target = EntitySkull.this.world.getClosestPlayer(getX(), getY(), getZ(), 20, true);
-			if (target != null && this.canSee(target)) {
+			Player target = EntitySkull.this.level.getNearestPlayer(getX(), getY(), getZ(), 20, true);
+			if (target != null && this.hasLineOfSight(target)) {
 				attackTick = 0;
-				Vec3d velocity = target
-						.getPos()
-						.add(0, target.getHeight() * 0.5F, 0)
-						.subtract(EntitySkull.this.getPos())
+				Vec3 velocity = target
+						.position()
+						.add(0, target.getBbHeight() * 0.5F, 0)
+						.subtract(EntitySkull.this.position())
 						.normalize()
-						.multiply(EntitySkull.this.flyingSpeed);
-				setVelocity(velocity);
-				this.lookAtEntity(target, 360, 360);
+						.scale(EntitySkull.this.flyingSpeed);
+				setDeltaMovement(velocity);
+				this.lookAt(target, 360, 360);
 				this.playSound(SoundsRegistry.MOB_SKULL_FLIGHT, MHelper.randRange(0.15F, 0.3F, random), MHelper.randRange(0.9F, 1.5F, random));
 			}
 			else if (dirTickTick < 0) {
@@ -155,17 +160,17 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_SKELETON_AMBIENT;
+		return SoundEvents.SKELETON_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return SoundEvents.ENTITY_SKELETON_HURT;
+		return SoundEvents.SKELETON_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_SKELETON_DEATH;
+		return SoundEvents.SKELETON_DEATH;
 	}
 
 	private void moveRandomDir() {
@@ -181,22 +186,22 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 		dx /= l;
 		dy /= l;
 		dz /= l;
-		setVelocity(dx, dy, dz);
-		lookAt(this.getPos().add(this.getVelocity()));
+		setDeltaMovement(dx, dy, dz);
+		lookAt(this.position().add(this.getDeltaMovement()));
 		this.playSound(SoundsRegistry.MOB_SKULL_FLIGHT, MHelper.randRange(0.15F, 0.3F, random), MHelper.randRange(0.75F, 1.25F, random));
 	}
 
-	private void lookAt(Vec3d target) {
-		double d = target.getX() - this.getX();
-		double e = target.getZ() - this.getZ();
-		double g = target.getY() - this.getY();
+	private void lookAt(Vec3 target) {
+		double d = target.x() - this.getX();
+		double e = target.z() - this.getZ();
+		double g = target.y() - this.getY();
 
 		double h = Math.sqrt(d * d + e * e);
-		float i = (float) (MathHelper.atan2(e, d) * 57.2957763671875D) - 90.0F;
-		float j = (float) (-(MathHelper.atan2(g, h) * 57.2957763671875D));
+		float i = (float) (Mth.atan2(e, d) * 57.2957763671875D) - 90.0F;
+		float j = (float) (-(Mth.atan2(g, h) * 57.2957763671875D));
 
-		this.setPitch(j);
-		this.setYaw(i);
+		this.setXRot(j);
+		this.setYRot(i);
 	}
 
 	private void updateParticlePos() {
@@ -215,30 +220,30 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 
 	@Override
 	@Environment(EnvType.CLIENT)
-	public float getEyeHeight(EntityPose pose) {
+	public float getEyeHeight(Pose pose) {
 		return this.getDimensions(pose).height * 0.5F;
 	}
 
 	@Override
-	protected boolean hasWings() {
+	protected boolean isFlapping() {
 		return true;
 	}
 
 	@Override
-	public EntityGroup getGroup() {
-		return EntityGroup.UNDEAD;
+	public MobType getMobType() {
+		return MobType.UNDEAD;
 	}
 
 	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {
+	public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {
 		return false;
 	}
 
 	@Override
-	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
+	protected void checkFallDamage(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {}
 
 	@Override
-	public boolean hasNoGravity() {
+	public boolean isNoGravity() {
 		return true;
 	}
 
@@ -247,15 +252,15 @@ public class EntitySkull extends HostileEntity implements Flutterer {
 		return false;
 	}
 
-	public static boolean canSpawn(EntityType<? extends EntitySkull> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+	public static boolean canSpawn(EntityType<? extends EntitySkull> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
 		try {
-			if (world.getDifficulty() == Difficulty.PEACEFUL || world.getLightLevel(pos) > 7)
+			if (world.getDifficulty() == Difficulty.PEACEFUL || world.getMaxLocalRawBrightness(pos) > 7)
 				return false;
 
-			if (pos.getY() >= world.getDimension().getMinimumY()) return false;
+			if (pos.getY() >= world.dimensionType().minY()) return false;
 
-			Box box = new Box(pos).expand(256, 256, 256);
-			List<EntitySkull> list = world.getEntitiesByClass(EntitySkull.class, box, (entity) -> {
+			AABB box = new AABB(pos).inflate(256, 256, 256);
+			List<EntitySkull> list = world.getEntitiesOfClass(EntitySkull.class, box, (entity) -> {
 				return true;
 			});
 			return list.size() < 4;

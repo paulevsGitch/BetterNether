@@ -1,16 +1,16 @@
 package paulevs.betternether.world.structures.piece;
 
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.structure.StructurePiece;
-import net.minecraft.structure.StructurePieceType;
-import net.minecraft.util.math.BlockBox;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.levelgen.feature.StructurePieceType;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.StructurePiece;
 
 public abstract class CustomPiece extends StructurePiece {
-	protected CustomPiece(StructurePieceType type, int i, BlockBox blockBox) {
+	protected CustomPiece(StructurePieceType type, int i, BoundingBox blockBox) {
 		super(type, i, blockBox);
 	}
 
-	protected CustomPiece(StructurePieceType type, NbtCompound tag) {
+	protected CustomPiece(StructurePieceType type, CompoundTag tag) {
 		super(type, tag);
 	}
 }

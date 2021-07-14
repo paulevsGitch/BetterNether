@@ -1,7 +1,7 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.block.NetherWartBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.NetherWartBlock;
 
 public class StructureNetherWart extends StructureScatter {
 	public StructureNetherWart() {

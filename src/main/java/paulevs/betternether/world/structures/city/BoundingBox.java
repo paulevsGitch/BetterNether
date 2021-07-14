@@ -1,7 +1,7 @@
 package paulevs.betternether.world.structures.city;
 
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Rotation;
 
 public class BoundingBox {
 	int x1, x2, z1, z2;
@@ -45,7 +45,7 @@ public class BoundingBox {
 		return x1 + " " + z1 + " " + x2 + " " + z2;
 	}
 
-	public void rotate(BlockRotation rotation) {
+	public void rotate(Rotation rotation) {
 		BlockPos start = new BlockPos(x1, 0, z1);
 		BlockPos end = new BlockPos(x2, 0, z2);
 		start = start.rotate(rotation);

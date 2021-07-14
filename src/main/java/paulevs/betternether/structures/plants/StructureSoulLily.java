@@ -1,26 +1,25 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLily.SoulLilyShape;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureSoulLily implements IStructure {
-	Mutable npos = new Mutable();
+	MutableBlockPos npos = new MutableBlockPos();
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		Block under;
-		if (world.getBlockState(pos.down()).getBlock() == Blocks.SOUL_SAND) {
+		if (world.getBlockState(pos.below()).getBlock() == Blocks.SOUL_SAND) {
 			for (int i = 0; i < 10; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
@@ -28,8 +27,8 @@ public class StructureSoulLily implements IStructure {
 				for (int j = 0; j < 6; j++) {
 					npos.set(x, y - j, z);
 					if (npos.getY() > 31) {
-						under = world.getBlockState(npos.down()).getBlock();
-						if (under == Blocks.SOUL_SAND && world.isAir(npos)) {
+						under = world.getBlockState(npos.below()).getBlock();
+						if (under == Blocks.SOUL_SAND && world.isEmptyBlock(npos)) {
 							growTree(world, npos, random);
 						}
 					}
@@ -40,10 +39,10 @@ public class StructureSoulLily implements IStructure {
 		}
 	}
 
-	private void growTree(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (world.getBlockState(pos.down()).getBlock() == Blocks.SOUL_SAND) {
-			if (world.isAir(pos.up())) {
-				if (world.isAir(pos.up(2)) && isAirSides(world, pos.up(2))) {
+	private void growTree(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (world.getBlockState(pos.below()).getBlock() == Blocks.SOUL_SAND) {
+			if (world.isEmptyBlock(pos.above())) {
+				if (world.isEmptyBlock(pos.above(2)) && isAirSides(world, pos.above(2))) {
 					growBig(world, pos);
 				}
 				else
@@ -54,52 +53,52 @@ public class StructureSoulLily implements IStructure {
 		}
 	}
 
-	public void growSmall(WorldAccess world, BlockPos pos) {
-		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.SOUL_LILY.getDefaultState());
+	public void growSmall(LevelAccessor world, BlockPos pos) {
+		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.SOUL_LILY.defaultBlockState());
 	}
 
-	public void growMedium(WorldAccess world, BlockPos pos) {
+	public void growMedium(LevelAccessor world, BlockPos pos) {
 		BlocksHelper.setWithUpdate(world, pos,
 				BlocksRegistry.SOUL_LILY
-						.getDefaultState()
-						.with(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_BOTTOM));
-		BlocksHelper.setWithUpdate(world, pos.up(),
+						.defaultBlockState()
+						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_BOTTOM));
+		BlocksHelper.setWithUpdate(world, pos.above(),
 				BlocksRegistry.SOUL_LILY
-						.getDefaultState()
-						.with(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_TOP));
+						.defaultBlockState()
+						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_TOP));
 	}
 
-	public void growBig(WorldAccess world, BlockPos pos) {
+	public void growBig(LevelAccessor world, BlockPos pos) {
 		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.SOUL_LILY
-				.getDefaultState()
-				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_BOTTOM));
-		BlocksHelper.setWithUpdate(world, pos.up(),
+				.defaultBlockState()
+				.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_BOTTOM));
+		BlocksHelper.setWithUpdate(world, pos.above(),
 				BlocksRegistry.SOUL_LILY
-						.getDefaultState()
-						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_MIDDLE));
-		BlockPos up = pos.up(2);
+						.defaultBlockState()
+						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_MIDDLE));
+		BlockPos up = pos.above(2);
 		BlocksHelper.setWithUpdate(world, up,
 				BlocksRegistry.SOUL_LILY
-						.getDefaultState()
-						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_CENTER));
+						.defaultBlockState()
+						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_CENTER));
 		BlocksHelper.setWithUpdate(world, up.north(), BlocksRegistry.SOUL_LILY
-				.getDefaultState()
-				.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_S));
+				.defaultBlockState()
+				.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_S));
 		BlocksHelper.setWithUpdate(world, up.south(),
 				BlocksRegistry.SOUL_LILY
-						.getDefaultState()
-						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_N));
+						.defaultBlockState()
+						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_N));
 		BlocksHelper.setWithUpdate(world, up.east(),
 				BlocksRegistry.SOUL_LILY
-						.getDefaultState()
-						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_W));
+						.defaultBlockState()
+						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_W));
 		BlocksHelper.setWithUpdate(world, up.west(),
 				BlocksRegistry.SOUL_LILY
-						.getDefaultState()
-						.with(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_E));
+						.defaultBlockState()
+						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_E));
 	}
 
-	private boolean isAirSides(WorldAccess world, BlockPos pos) {
-		return world.isAir(pos.north()) && world.isAir(pos.south()) && world.isAir(pos.east()) && world.isAir(pos.west());
+	private boolean isAirSides(LevelAccessor world, BlockPos pos) {
+		return world.isEmptyBlock(pos.north()) && world.isEmptyBlock(pos.south()) && world.isEmptyBlock(pos.east()) && world.isEmptyBlock(pos.west());
 	}
 }

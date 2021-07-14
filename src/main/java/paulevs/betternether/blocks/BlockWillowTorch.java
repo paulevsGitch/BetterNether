@@ -1,45 +1,49 @@
 package paulevs.betternether.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockWillowTorch extends BlockBaseNotFull {
-	private static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(5, 0, 8, 11, 16, 16);
-	private static final VoxelShape SHAPE_SOUTH = Block.createCuboidShape(5, 0, 0, 11, 16, 8);
-	private static final VoxelShape SHAPE_WEST = Block.createCuboidShape(8, 0, 5, 16, 16, 11);
-	private static final VoxelShape SHAPE_EAST = Block.createCuboidShape(0, 0, 5, 8, 16, 11);
-	private static final VoxelShape SHAPE_UP = Block.createCuboidShape(5, 0, 5, 11, 9, 11);
-	private static final VoxelShape SHAPE_DOWN = Block.createCuboidShape(5, 3, 5, 11, 16, 11);
+	private static final VoxelShape SHAPE_NORTH = Block.box(5, 0, 8, 11, 16, 16);
+	private static final VoxelShape SHAPE_SOUTH = Block.box(5, 0, 0, 11, 16, 8);
+	private static final VoxelShape SHAPE_WEST = Block.box(8, 0, 5, 16, 16, 11);
+	private static final VoxelShape SHAPE_EAST = Block.box(0, 0, 5, 8, 16, 11);
+	private static final VoxelShape SHAPE_UP = Block.box(5, 0, 5, 11, 9, 11);
+	private static final VoxelShape SHAPE_DOWN = Block.box(5, 3, 5, 11, 16, 11);
 
-	public static final DirectionProperty FACING = Properties.FACING;
+	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
 	public BlockWillowTorch() {
-		super(Materials.makeWood(MapColor.LIGHT_BLUE).luminance(15).noCollision().nonOpaque());
-		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.DOWN));
+		super(Materials.makeWood(MaterialColor.COLOR_LIGHT_BLUE).luminance(15).noCollision().nonOpaque());
+		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		switch (state.get(FACING)) {
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		switch (state.getValue(FACING)) {
 			case NORTH:
 				return SHAPE_NORTH;
 			case SOUTH:
@@ -57,40 +61,40 @@ public class BlockWillowTorch extends BlockBaseNotFull {
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		Direction direction = (Direction) state.get(FACING).getOpposite();
-		return Block.sideCoversSmallSquare(world, pos.offset(direction), direction.getOpposite());
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		Direction direction = (Direction) state.getValue(FACING).getOpposite();
+		return Block.canSupportCenter(world, pos.relative(direction), direction.getOpposite());
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
+	public BlockState rotate(BlockState state, Rotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror) {
+	public BlockState mirror(BlockState state, Mirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (canPlaceAt(state, world, pos))
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (canSurvive(state, world, pos))
 			return state;
 		else
-			return Blocks.AIR.getDefaultState();
+			return Blocks.AIR.defaultBlockState();
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		BlockState blockState = this.getDefaultState();
-		WorldView worldView = ctx.getWorld();
-		BlockPos blockPos = ctx.getBlockPos();
-		Direction[] directions = ctx.getPlacementDirections();
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		BlockState blockState = this.defaultBlockState();
+		LevelReader worldView = ctx.getLevel();
+		BlockPos blockPos = ctx.getClickedPos();
+		Direction[] directions = ctx.getNearestLookingDirections();
 		for (int i = 0; i < directions.length; ++i) {
 			Direction direction = directions[i];
 			Direction direction2 = direction.getOpposite();
-			blockState = blockState.with(FACING, direction2);
-			if (blockState.canPlaceAt(worldView, blockPos)) {
+			blockState = blockState.setValue(FACING, direction2);
+			if (blockState.canSurvive(worldView, blockPos)) {
 				return blockState;
 			}
 		}

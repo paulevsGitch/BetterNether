@@ -1,16 +1,32 @@
 package paulevs.betternether.biomes;
 
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.LevelAccessor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.structures.plants.*;
-
-import java.util.Random;
+import paulevs.betternether.structures.plants.StructureBlackVine;
+import paulevs.betternether.structures.plants.StructureBloomingVine;
+import paulevs.betternether.structures.plants.StructureEggPlant;
+import paulevs.betternether.structures.plants.StructureEye;
+import paulevs.betternether.structures.plants.StructureFeatherFern;
+import paulevs.betternether.structures.plants.StructureGoldenVine;
+import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
+import paulevs.betternether.structures.plants.StructureJungleMoss;
+import paulevs.betternether.structures.plants.StructureJunglePlant;
+import paulevs.betternether.structures.plants.StructureLucis;
+import paulevs.betternether.structures.plants.StructureMagmaFlower;
+import paulevs.betternether.structures.plants.StructureReeds;
+import paulevs.betternether.structures.plants.StructureRubeus;
+import paulevs.betternether.structures.plants.StructureRubeusBush;
+import paulevs.betternether.structures.plants.StructureStalagnate;
+import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
+import paulevs.betternether.structures.plants.StructureWallMoss;
+import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
 public class NetherJungle extends NetherBiome {
 	public NetherJungle(String name) {
@@ -52,7 +68,7 @@ public class NetherJungle extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(WorldAccess world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JUNGLE_GRASS.getDefaultState());
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JUNGLE_GRASS.defaultBlockState());
 	}
 }

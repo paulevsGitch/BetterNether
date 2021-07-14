@@ -1,22 +1,21 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureNetherSakuraBush implements IStructure {
-	private static final Mutable POS = new Mutable();
+	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (!world.isAir(pos) || !world.isAir(pos.up()) || !world.isAir(pos.up(15)))
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
 			return;
 
 		float r = random.nextFloat() * 1.5F + 0.5F;
@@ -43,21 +42,21 @@ public class StructureNetherSakuraBush implements IStructure {
 					sqz *= sqz;
 					POS.setZ(z);
 					if (sqx + sqz < r2 + random.nextFloat() * r) {
-						setIfAir(world, POS, BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
+						setIfAir(world, POS, BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
 					}
 				}
 			}
 		}
 
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_SAKURA.bark.getDefaultState());
-		setIfAir(world, pos.up(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
-		setIfAir(world, pos.north(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
-		setIfAir(world, pos.south(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
-		setIfAir(world, pos.east(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
-		setIfAir(world, pos.west(), BlocksRegistry.NETHER_SAKURA_LEAVES.getDefaultState());
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_SAKURA.bark.defaultBlockState());
+		setIfAir(world, pos.above(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
+		setIfAir(world, pos.north(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
+		setIfAir(world, pos.south(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
+		setIfAir(world, pos.east(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
+		setIfAir(world, pos.west(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
 	}
 
-	private void setIfAir(WorldAccess world, BlockPos pos, BlockState state) {
+	private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {
 		if (world.getBlockState(pos).getMaterial().isReplaceable())
 			BlocksHelper.setWithoutUpdate(world, pos, state);
 	}

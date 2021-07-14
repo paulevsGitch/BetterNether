@@ -1,88 +1,87 @@
 package paulevs.betternether.blockentities;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
+import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockChestOfDrawers;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 
-import java.util.List;
-
-public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity {
-	private DefaultedList<ItemStack> inventory;
+public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity {
+	private NonNullList<ItemStack> inventory;
 	private int watchers = 0;
 
 	public BlockEntityChestOfDrawers(BlockPos pos, BlockState state) {
 		super(BlockEntitiesRegistry.CHEST_OF_DRAWERS, pos, state);
-		this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
+		this.inventory = NonNullList.withSize(27, ItemStack.EMPTY);
 	}
 
 	@Override
-	public int size() {
+	public int getContainerSize() {
 		return 27;
 	}
 
 	@Override
-	protected DefaultedList<ItemStack> getInvStackList() {
+	protected NonNullList<ItemStack> getItems() {
 		return this.inventory;
 	}
 
 	@Override
-	protected void setInvStackList(DefaultedList<ItemStack> list) {
+	protected void setItems(NonNullList<ItemStack> list) {
 		this.inventory = list;
 	}
 
 	@Override
-	protected Text getContainerName() {
-		return new TranslatableText("container.chest_of_drawers", new Object[0]);
+	protected Component getDefaultName() {
+		return new TranslatableComponent("container.chest_of_drawers", new Object[0]);
 	}
 
 	@Override
-	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return GenericContainerScreenHandler.createGeneric9x3(syncId, playerInventory, this);
+	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
+		return ChestMenu.threeRows(syncId, playerInventory, this);
 	}
 
-	public void readNbt(NbtCompound tag) {
-		super.readNbt(tag);
-		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-		if (!this.deserializeLootTable(tag)) {
-			Inventories.readNbt(tag, this.inventory);
+	public void load(CompoundTag tag) {
+		super.load(tag);
+		this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+		if (!this.tryLoadLootTable(tag)) {
+			ContainerHelper.loadAllItems(tag, this.inventory);
 		}
 	}
 
-	public NbtCompound writeNbt(NbtCompound tag) {
-		super.writeNbt(tag);
-		if (!this.serializeLootTable(tag)) {
-			Inventories.writeNbt(tag, this.inventory);
+	public CompoundTag save(CompoundTag tag) {
+		super.save(tag);
+		if (!this.trySaveLootTable(tag)) {
+			ContainerHelper.saveAllItems(tag, this.inventory);
 		}
 		return tag;
 	}
 
-	public void onInvOpen(PlayerEntity player) {
+	public void onInvOpen(Player player) {
 		if (!player.isSpectator()) {
 			if (this.watchers < 0) {
 				this.watchers = 0;
 			}
 			if (this.watchers == 0) {
-				this.playSound(this.getCachedState(), SoundEvents.BLOCK_BARREL_OPEN);
+				this.playSound(this.getBlockState(), SoundEvents.BARREL_OPEN);
 			}
 
 			++this.watchers;
@@ -91,7 +90,7 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity {
 	}
 
 	@Override
-	public void onClose(PlayerEntity player) {
+	public void stopOpen(Player player) {
 		if (!player.isSpectator()) {
 			--this.watchers;
 			this.onInvOpenOrClose();
@@ -99,24 +98,24 @@ public class BlockEntityChestOfDrawers extends LootableContainerBlockEntity {
 	}
 
 	protected void onInvOpenOrClose() {
-		BlockState state = this.getCachedState();
+		BlockState state = this.getBlockState();
 		Block block = state.getBlock();
-		if (block instanceof BlockChestOfDrawers && !world.isClient) {
-			if (watchers > 0 && !state.get(BlockChestOfDrawers.OPEN)) {
-				BlocksHelper.setWithoutUpdate((ServerWorld) world, pos, state.with(BlockChestOfDrawers.OPEN, true));
+		if (block instanceof BlockChestOfDrawers && !level.isClientSide) {
+			if (watchers > 0 && !state.getValue(BlockChestOfDrawers.OPEN)) {
+				BlocksHelper.setWithoutUpdate((ServerLevel) level, worldPosition, state.setValue(BlockChestOfDrawers.OPEN, true));
 			}
-			else if (watchers == 0 && state.get(BlockChestOfDrawers.OPEN)) {
-				BlocksHelper.setWithoutUpdate((ServerWorld) world, pos, state.with(BlockChestOfDrawers.OPEN, false));
+			else if (watchers == 0 && state.getValue(BlockChestOfDrawers.OPEN)) {
+				BlocksHelper.setWithoutUpdate((ServerLevel) level, worldPosition, state.setValue(BlockChestOfDrawers.OPEN, false));
 			}
 		}
 	}
 
 	private void playSound(BlockState blockState, SoundEvent soundEvent) {
-		Vec3i vec3i = ((Direction) blockState.get(BlockChestOfDrawers.FACING)).getVector();
-		double d = (double) this.pos.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
-		double e = (double) this.pos.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
-		double f = (double) this.pos.getZ() + 0.5D + (double) vec3i.getZ() / 2.0D;
-		this.world.playSound((PlayerEntity) null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+		Vec3i vec3i = ((Direction) blockState.getValue(BlockChestOfDrawers.FACING)).getNormal();
+		double d = (double) this.worldPosition.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
+		double e = (double) this.worldPosition.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
+		double f = (double) this.worldPosition.getZ() + 0.5D + (double) vec3i.getZ() / 2.0D;
+		this.level.playSound((Player) null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
 	}
 
 	public void addItemsToList(List<ItemStack> items) {

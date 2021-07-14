@@ -1,29 +1,28 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Direction.Axis;
-import net.minecraft.util.math.Direction.AxisDirection;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.Direction.AxisDirection;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureWillowBush implements IStructure {
-	private static final Mutable POS = new Mutable();
+	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	public StructureWillowBush() {}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (!world.isAir(pos) || !world.isAir(pos.up()) || !world.isAir(pos.up(15)))
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
 			return;
 
 		float r = random.nextFloat() * 2F + 0.5F;
@@ -58,26 +57,26 @@ public class StructureWillowBush implements IStructure {
 						int az = Math.abs(dz);
 						int max = Math.max(ax, Math.max(ay, az));
 						Direction dir;
-						if (max == ax) dir = Direction.from(Axis.X, dx > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
-						else if (max == ay) dir = Direction.from(Axis.Y, dy > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
+						if (max == ax) dir = Direction.fromAxisAndDirection(Axis.X, dx > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
+						else if (max == ay) dir = Direction.fromAxisAndDirection(Axis.Y, dy > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
 						else
-							dir = Direction.from(Axis.Z, dz > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
-						setIfAir(world, POS, BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, dir));
+							dir = Direction.fromAxisAndDirection(Axis.Z, dz > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
+						setIfAir(world, POS, BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, dir));
 					}
 				}
 			}
 		}
 
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.WILLOW_BARK.getDefaultState());
-		setIfAir(world, pos.up(), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.UP));
-		setIfAir(world, pos.north(), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.NORTH));
-		setIfAir(world, pos.south(), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.SOUTH));
-		setIfAir(world, pos.east(), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.EAST));
-		setIfAir(world, pos.west(), BlocksRegistry.WILLOW_LEAVES.getDefaultState().with(BlockWillowLeaves.FACING, Direction.WEST));
+		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.WILLOW_BARK.defaultBlockState());
+		setIfAir(world, pos.above(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.UP));
+		setIfAir(world, pos.north(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.NORTH));
+		setIfAir(world, pos.south(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.SOUTH));
+		setIfAir(world, pos.east(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.EAST));
+		setIfAir(world, pos.west(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.WEST));
 	}
 
-	private void setIfAir(WorldAccess world, BlockPos pos, BlockState state) {
-		if (world.isAir(pos) || world.getBlockState(pos).getBlock() instanceof BlockNetherGrass)
+	private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {
+		if (world.isEmptyBlock(pos) || world.getBlockState(pos).getBlock() instanceof BlockNetherGrass)
 			BlocksHelper.setWithoutUpdate(world, pos, state);
 	}
 }

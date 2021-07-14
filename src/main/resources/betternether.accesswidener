@@ -1,12 +1,12 @@
 accessWidener   v1  named
 
 # Classes
-accessible    class    net/minecraft/client/render/RenderPhase$Transparency
-accessible    class    net/minecraft/client/render/RenderPhase$WriteMaskState
-accessible    class    net/minecraft/client/render/RenderPhase$DepthTest
-accessible    class    net/minecraft/client/render/RenderPhase$Layering
-accessible    class    net/minecraft/client/render/RenderPhase$Target
-accessible    class    net/minecraft/client/render/RenderPhase$Texture
-accessible    class    net/minecraft/client/render/RenderLayer$MultiPhaseParameters
-accessible    class    net/minecraft/client/render/RenderLayer$MultiPhase
-accessible    class    net/minecraft/block/entity/BlockEntityType$BlockEntityFactory
+accessible    class    net/minecraft/client/renderer/RenderStateShard$TransparencyStateShard
+accessible    class    net/minecraft/client/renderer/RenderStateShard$WriteMaskStateShard
+accessible    class    net/minecraft/client/renderer/RenderStateShard$DepthTestStateShard
+accessible    class    net/minecraft/client/renderer/RenderStateShard$LayeringStateShard
+accessible    class    net/minecraft/client/renderer/RenderStateShard$OutputStateShard
+accessible    class    net/minecraft/client/renderer/RenderType$CompositeState
+accessible    class    net/minecraft/client/renderer/RenderType$CompositeRenderType
+accessible    class    net/minecraft/client/renderer/RenderStateShard$MultiPhase
+accessible    class    net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier

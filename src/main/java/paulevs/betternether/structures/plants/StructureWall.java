@@ -1,18 +1,17 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.ServerWorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureWall implements IStructure {
-	private static final Direction[] DIRECTIONS = HorizontalFacingBlock.FACING.getValues().toArray(new Direction[] {});
+	private static final Direction[] DIRECTIONS = HorizontalDirectionalBlock.FACING.getPossibleValues().toArray(new Direction[] {});
 	private static final Direction[] SHUFFLED = new Direction[DIRECTIONS.length];
 	private final Block plantBlock;
 
@@ -21,22 +20,22 @@ public class StructureWall implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (world.isAir(pos)) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (world.isEmptyBlock(pos)) {
 			BlockState state = getPlacementState(world, pos, random);
 			if (state != null)
 				BlocksHelper.setWithoutUpdate(world, pos, state);
 		}
 	}
 
-	private BlockState getPlacementState(ServerWorldAccess world, BlockPos pos, Random random) {
-		BlockState blockState = plantBlock.getDefaultState();
+	private BlockState getPlacementState(ServerLevelAccessor world, BlockPos pos, Random random) {
+		BlockState blockState = plantBlock.defaultBlockState();
 		shuffle(random);
 		for (int i = 0; i < 4; i++) {
 			Direction direction = SHUFFLED[i];
 			Direction direction2 = direction.getOpposite();
-			blockState = blockState.with(HorizontalFacingBlock.FACING, direction2);
-			if (blockState.canPlaceAt(world, pos)) {
+			blockState = blockState.setValue(HorizontalDirectionalBlock.FACING, direction2);
+			if (blockState.canSurvive(world, pos)) {
 				return blockState;
 			}
 		}

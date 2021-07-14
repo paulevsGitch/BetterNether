@@ -1,122 +1,131 @@
 package paulevs.betternether.blocks;
 
+import java.util.EnumMap;
+import java.util.Random;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.plants.StructureLucis;
 
-import java.util.EnumMap;
-import java.util.Random;
-
-public class BlockLucisSpore extends BlockBaseNotFull implements Fertilizable {
+public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlock {
 	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
-			Direction.NORTH, Block.createCuboidShape(4, 4, 8, 12, 12, 16),
-			Direction.SOUTH, Block.createCuboidShape(4, 4, 0, 12, 12, 8),
-			Direction.WEST, Block.createCuboidShape(8, 4, 4, 16, 12, 12),
-			Direction.EAST, Block.createCuboidShape(0, 4, 4, 8, 12, 12)));
+			Direction.NORTH, Block.box(4, 4, 8, 12, 12, 16),
+			Direction.SOUTH, Block.box(4, 4, 0, 12, 12, 8),
+			Direction.WEST, Block.box(8, 4, 4, 16, 12, 12),
+			Direction.EAST, Block.box(0, 4, 4, 8, 12, 12)));
 	private static final StructureLucis STRUCTURE = new StructureLucis();
-	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
 	public BlockLucisSpore() {
 		super(FabricBlockSettings.of(Material.PLANT)
-				.materialColor(MapColor.LIME)
-				.sounds(BlockSoundGroup.CROP)
+				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
+				.luminance(7)
+				.sounds(SoundType.CROP)
 				.breakInstantly()
 				.nonOpaque()
 				.noCollision()
 				.ticksRandomly()
-				.luminance(7));
-		this.setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH));
+		);
+		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
 		stateManager.add(FACING);
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
-		return BOUNDING_SHAPES.get(state.get(FACING));
+	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
+		return BOUNDING_SHAPES.get(state.getValue(FACING));
 	}
 
 	@Override
-	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
 		return random.nextInt(16) == 0;
 	}
 
 	@Override
-	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
 		STRUCTURE.generate(world, pos, random);
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-		if (canPlaceAt(state, world, pos))
+	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		if (canSurvive(state, world, pos))
 			return state;
 		else
-			return Blocks.AIR.getDefaultState();
+			return Blocks.AIR.defaultBlockState();
 	}
 
 	@Override
-	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		super.scheduledTick(state, world, pos, random);
-		if (canGrow(world, random, pos, state)) {
-			grow(world, random, pos, state);
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+		super.tick(state, world, pos, random);
+		if (isBonemealSuccess(world, random, pos, state)) {
+			performBonemeal(world, random, pos, state);
 		}
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
+	public BlockState rotate(BlockState state, Rotation rotation) {
 		return BlocksHelper.rotateHorizontal(state, rotation, FACING);
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, BlockMirror mirror) {
+	public BlockState mirror(BlockState state, Mirror mirror) {
 		return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		Direction direction = (Direction) state.get(FACING);
-		BlockPos blockPos = pos.offset(direction.getOpposite());
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		Direction direction = (Direction) state.getValue(FACING);
+		BlockPos blockPos = pos.relative(direction.getOpposite());
 		BlockState blockState = world.getBlockState(blockPos);
 		return BlocksHelper.isNetherrack(blockState) || BlocksRegistry.ANCHOR_TREE.isTreeLog(blockState.getBlock());
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		BlockState blockState = this.getDefaultState();
-		WorldView worldView = ctx.getWorld();
-		BlockPos blockPos = ctx.getBlockPos();
-		Direction[] directions = ctx.getPlacementDirections();
+	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+		BlockState blockState = this.defaultBlockState();
+		LevelReader worldView = ctx.getLevel();
+		BlockPos blockPos = ctx.getClickedPos();
+		Direction[] directions = ctx.getNearestLookingDirections();
 		for (int i = 0; i < directions.length; ++i) {
 			Direction direction = directions[i];
 			if (direction.getAxis().isHorizontal()) {
 				Direction direction2 = direction.getOpposite();
-				blockState = blockState.with(FACING, direction2);
-				if (blockState.canPlaceAt(worldView, blockPos)) {
+				blockState = blockState.setValue(FACING, direction2);
+				if (blockState.canSurvive(worldView, blockPos)) {
 					return blockState;
 				}
 			}

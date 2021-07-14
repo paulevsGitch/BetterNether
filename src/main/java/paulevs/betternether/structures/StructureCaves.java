@@ -1,17 +1,16 @@
 package paulevs.betternether.structures;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
-import java.util.Random;
-
 public class StructureCaves implements IStructure {
 	private static final boolean[][][] MASK = new boolean[16][24][16];
-	private static final Mutable B_POS = new Mutable();
+	private static final MutableBlockPos B_POS = new MutableBlockPos();
 	private static int offset = 12;
 	private OpenSimplexNoise heightNoise;
 	private OpenSimplexNoise rigidNoise;
@@ -27,7 +26,7 @@ public class StructureCaves implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		boolean isVoid = true;
 		offset = (int) (getHeight(pos.getX() + 8, pos.getZ() + 8) - 12);
 
@@ -72,7 +71,7 @@ public class StructureCaves implements IStructure {
 						 * BlocksHelper.setWithoutUpdate(world, B_POS,
 						 * Blocks.NETHER_WART_BLOCK.getDefaultState()); else
 						 */
-						BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.AIR.getDefaultState());
+						BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.AIR.defaultBlockState());
 					}
 				}
 			}

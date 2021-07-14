@@ -1,6 +1,6 @@
 package paulevs.betternether.structures.decorations;
 
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.StructureObjScatter;

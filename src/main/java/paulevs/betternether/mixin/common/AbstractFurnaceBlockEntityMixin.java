@@ -1,10 +1,10 @@
 package paulevs.betternether.mixin.common;
 
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.recipe.AbstractCookingRecipe;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.world.World;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,8 +14,8 @@ import paulevs.betternether.blockentities.ChangebleCookTime;
 @Mixin(AbstractFurnaceBlockEntity.class)
 public abstract class AbstractFurnaceBlockEntityMixin {
 
-    @Inject(method = "getCookTime", at = @At("RETURN"), cancellable = true)
-    private static void betternether$getCookTime(World world, RecipeType<? extends AbstractCookingRecipe> recipeType, Inventory inventory, CallbackInfoReturnable<Integer> cir) {
+    @Inject(method = "getTotalCookTime", at = @At("RETURN"), cancellable = true)
+    private static void betternether$getTotalCookTime(Level world, RecipeType<? extends AbstractCookingRecipe> recipeType, Container inventory, CallbackInfoReturnable<Integer> cir) {
         if (inventory instanceof ChangebleCookTime) {
             ChangebleCookTime cct = (ChangebleCookTime)inventory;
             int val = cir.getReturnValue();

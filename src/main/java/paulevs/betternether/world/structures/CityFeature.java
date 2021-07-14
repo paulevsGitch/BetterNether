@@ -1,31 +1,30 @@
 package paulevs.betternether.world.structures;
 
-import net.minecraft.structure.StructureManager;
-import net.minecraft.structure.StructureStart;
-import net.minecraft.util.math.BlockBox;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.world.HeightLimitView;
-import net.minecraft.world.Heightmap.Type;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.FlatChunkGenerator;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
+import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.FlatLevelSource;
+import net.minecraft.world.level.levelgen.Heightmap.Types;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.StructureStart;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
 import paulevs.betternether.world.structures.piece.CityPiece;
 
-import java.util.List;
-
-public class CityFeature extends StructureFeature<DefaultFeatureConfig> {
+public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 	private static CityGenerator generator;
 	public static final int RADIUS = 8 * 8;
 
 	public CityFeature() {
-		super(DefaultFeatureConfig.CODEC);
+		super(NoneFeatureConfiguration.CODEC);
 	}
 
 	public static void initGenerator() {
@@ -33,51 +32,51 @@ public class CityFeature extends StructureFeature<DefaultFeatureConfig> {
 	}
 
 	@Override
-	public StructureStartFactory<DefaultFeatureConfig> getStructureStartFactory() {
+	public StructureStartFactory<NoneFeatureConfiguration> getStartFactory() {
 		return CityFeature.CityStart::new;
 	}
 
-	public static class CityStart extends StructureStart<DefaultFeatureConfig> {
-		public CityStart(StructureFeature<DefaultFeatureConfig> structureFeature, ChunkPos chunkPos, int i, long l) {
+	public static class CityStart extends StructureStart<NoneFeatureConfiguration> {
+		public CityStart(StructureFeature<NoneFeatureConfiguration> structureFeature, ChunkPos chunkPos, int i, long l) {
 			super(structureFeature, chunkPos, i, l);
 		}
 
 		@Override
-		public void init(DynamicRegistryManager dynamicRegistryManager, ChunkGenerator chunkGenerator, StructureManager structureManager, ChunkPos cpos, Biome biome, DefaultFeatureConfig featureConfig, HeightLimitView heightLimitView) {
-			int px = cpos.getOffsetX(8);
-			int pz = cpos.getOffsetZ(8);
+		public void generatePieces(RegistryAccess dynamicRegistryManager, ChunkGenerator chunkGenerator, StructureManager structureManager, ChunkPos cpos, Biome biome, NoneFeatureConfiguration featureConfig, LevelHeightAccessor heightLimitView) {
+			int px = cpos.getBlockX(8);
+			int pz = cpos.getBlockZ(8);
 			int y = 40;
-			if (chunkGenerator instanceof FlatChunkGenerator) {
-				y = chunkGenerator.getHeight(px, pz, Type.WORLD_SURFACE, heightLimitView);
+			if (chunkGenerator instanceof FlatLevelSource) {
+				y = chunkGenerator.getBaseHeight(px, pz, Types.WORLD_SURFACE, heightLimitView);
 			}
 			BlockPos center = new BlockPos(px, y, pz);
 
 
 			// CityPalette palette = Palettes.getRandom(random);
 			List<CityPiece> buildings = generator.generate(center, this.random, Palettes.EMPTY);
-			BlockBox cityBox = BlockBox.infinite();
+			BoundingBox cityBox = BoundingBox.infinite();
 			for (CityPiece p : buildings)
-				cityBox.encompass(p.getBoundingBox());
+				cityBox.encapsulate(p.getBoundingBox());
 
-            int d1 = Math.max((center.getX() - cityBox.getMinX()), (cityBox.getMaxX() - center.getX()));
-            int d2 = Math.max((center.getZ() - cityBox.getMinZ()), (cityBox.getMaxZ() - center.getZ()));
+            int d1 = Math.max((center.getX() - cityBox.minX()), (cityBox.maxX() - center.getX()));
+            int d2 = Math.max((center.getZ() - cityBox.minZ()), (cityBox.maxZ() - center.getZ()));
             int radius = Math.max(d1, d2);
-            if (radius / 2 + center.getY() < cityBox.getMaxY()) {
-				radius = (cityBox.getMaxY() - center.getY()) / 2;
+            if (radius / 2 + center.getY() < cityBox.maxY()) {
+				radius = (cityBox.maxY() - center.getY()) / 2;
 			}
 
-			if (!(chunkGenerator instanceof FlatChunkGenerator)) {
+			if (!(chunkGenerator instanceof FlatLevelSource)) {
 				CavePiece cave = new CavePiece(center, radius, random, cityBox);
-				this.children.add(cave);
-				this.children.addAll(buildings);
+				this.pieces.add(cave);
+				this.pieces.addAll(buildings);
 				//this.boundingBox = cave.getBoundingBox();
 			}
 			else {
-				this.children.addAll(buildings);
-				this.setBoundingBoxFromChildren();
+				this.pieces.addAll(buildings);
+				this.getBoundingBox();
 			}
 
-			this.setBoundingBoxFromChildren();
+			this.getBoundingBox();
 
 			/*this.boundingBox.maxZ -= 12;
 			this.boundingBox.minZ += 12;

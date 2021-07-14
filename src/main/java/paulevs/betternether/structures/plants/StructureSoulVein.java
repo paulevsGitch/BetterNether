@@ -1,28 +1,27 @@
 package paulevs.betternether.structures.plants;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.BlocksRegistry;
 import paulevs.betternether.structures.IStructure;
 
-import java.util.Random;
-
 public class StructureSoulVein implements IStructure {
-	private Mutable npos = new Mutable();
+	private MutableBlockPos npos = new MutableBlockPos();
 
-	private boolean canPlaceAt(WorldAccess world, BlockPos pos) {
-		return BlocksRegistry.SOUL_VEIN.canPlaceAt(BlocksRegistry.SOUL_VEIN.getDefaultState(), world, pos);
+	private boolean canPlaceAt(LevelAccessor world, BlockPos pos) {
+		return BlocksRegistry.SOUL_VEIN.canSurvive(BlocksRegistry.SOUL_VEIN.defaultBlockState(), world, pos);
 	}
 
 	@Override
-	public void generate(ServerWorldAccess world, BlockPos pos, Random random) {
-		if (world.isAir(pos) && canPlaceAt(world, pos)) {
-			BlockState state = BlocksRegistry.SOUL_VEIN.getDefaultState();
-			BlockState sand = BlocksRegistry.VEINED_SAND.getDefaultState();
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+		if (world.isEmptyBlock(pos) && canPlaceAt(world, pos)) {
+			BlockState state = BlocksRegistry.SOUL_VEIN.defaultBlockState();
+			BlockState sand = BlocksRegistry.VEINED_SAND.defaultBlockState();
 			int x1 = pos.getX() - 1;
 			int x2 = pos.getX() + 1;
 			int z1 = pos.getZ() - 1;
@@ -32,9 +31,9 @@ public class StructureSoulVein implements IStructure {
 					int y = pos.getY() + 2;
 					for (int j = 0; j < 4; j++) {
 						npos.set(x, y - j, z);
-						if (world.isAir(npos) && canPlaceAt(world, npos)) {
+						if (world.isEmptyBlock(npos) && canPlaceAt(world, npos)) {
 							BlocksHelper.setWithoutUpdate(world, npos, state);
-							BlocksHelper.setWithoutUpdate(world, npos.down(), sand);
+							BlocksHelper.setWithoutUpdate(world, npos.below(), sand);
 						}
 					}
 				}
