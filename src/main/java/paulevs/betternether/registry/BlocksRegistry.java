@@ -143,6 +143,8 @@ import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.structures.plants.StructureLumabusVine;
 import paulevs.betternether.tab.CreativeTab;
+import ru.bclib.api.TagAPI;
+import ru.bclib.util.TagHelper;
 
 public class BlocksRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
@@ -842,15 +844,21 @@ public class BlocksRegistry {
 		return block;
 	}
 
-	public static Block registerChest(String name, Block source) {
-		Block block = new BNChest(source);
+	public static Block registerChest(String name, Block planks) {
+		Block chest = new BNChest(planks);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, block);
-			addFuel(source, block);
-			RecipesHelper.makeRoundRecipe(source, block, "nether_chest");
+			registerBlockDirectly(name, chest);
+			addFuel(planks, chest);
+			RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
+
+			TagHelper.addTag(TagAPI.ITEM_CHEST, chest);
+			TagHelper.addTag(TagAPI.BLOCK_CHEST, chest);
+
+			//Nether wood is not flammable!
+			//FlammableBlockRegistry.getDefaultInstance().add(chest, 5, 20);
 		}
 		BLOCKS.add(name);
-		return block;
+		return chest;
 	}
 
 	public static Block registerSign(String name, Block source) {
