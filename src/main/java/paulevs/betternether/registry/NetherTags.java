@@ -8,6 +8,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -53,7 +54,7 @@ public class NetherTags {
 			if (block instanceof BlockTerrain) {
 				TagAPI.addNetherGround(block);
 				TagHelper.addTag(NYLIUM, block);
-				BonemealAPI.addSpreadableBlock(block);
+				BonemealAPI.addSpreadableBlock(block, Blocks.NETHERRACK);
 			}
 			else if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
 				TagHelper.addTag(BlockTags.LEAVES, block);
