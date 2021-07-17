@@ -46,6 +46,8 @@ public class BetterNether implements ModInitializer {
 		NetherTags.register();
 		ItemRecipes.register();
 		NetherBiomeSource.register();
+
+		Configs.saveConfigs();
 	}
 
 	private void initOptions() {
