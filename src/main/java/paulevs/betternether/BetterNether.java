@@ -17,17 +17,19 @@ import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.NetherBiomeSource;
 import paulevs.betternether.world.structures.piece.StructureTypes;
+import ru.bclib.util.Logger;
 
 public class BetterNether implements ModInitializer {
 	public static final String MOD_ID = "betternether";
+	public static final Logger LOGGER = new Logger(MOD_ID);
 	private static boolean thinArmor = true;
 	private static boolean lavafallParticles = true;
 	private static float fogStart = 0.05F;
 	private static float fogEnd = 0.5F;
-
+	
 	@Override
 	public void onInitialize() {
-		System.out.println("######## BetterNether for 1.17.1 ########");
+		LOGGER.info("######## BetterNether for 1.17.1 ########");
 		//MinecraftClient.getInstance().getEntityModelLoader().reload(MinecraftClient.getInstance().getResourceManager());
 		initOptions();
 		SoundsRegistry.register();
@@ -41,44 +43,47 @@ public class BetterNether implements ModInitializer {
 		BrewingRegistry.register();
 		CommandRegistry.register();
 		Config.save();
-
+		
 		IntegrationRecipes.register();
 		NetherTags.register();
 		ItemRecipes.register();
 		NetherBiomeSource.register();
-
+		
 		Configs.saveConfigs();
+		
+		Patcher.register();
 	}
-
+	
 	private void initOptions() {
 		thinArmor = Configs.MAIN.getBoolean("improvement", "smaller_armor_offset", true);
 		lavafallParticles = Configs.MAIN.getBoolean("improvement", "lavafall_particles", true);
 		float density = Configs.MAIN.getFloat("improvement", "fog_density[vanilla: 1.0]", 0.75F);
 		changeFogDensity(density);
 	}
-
+	
 	public static boolean hasThinArmor() {
 		return thinArmor;
 	}
-
+	
 	public static void setThinArmor(boolean value) {
 		thinArmor = value;
 	}
-
+	
 	public static boolean hasLavafallParticles() {
 		return lavafallParticles;
 	}
-
+	
 	public static void changeFogDensity(float density) {
 		fogStart = -0.45F * density + 0.5F;
 		fogEnd = -0.5F * density + 1;
 	}
-
+	
 	public static float getFogStart() {
 		return fogStart;
 	}
-
+	
 	public static float getFogEnd() {
 		return fogEnd;
 	}
 }
+

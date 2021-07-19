@@ -144,6 +144,8 @@ import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.structures.plants.StructureLumabusVine;
 import paulevs.betternether.tab.CreativeTab;
 import ru.bclib.api.TagAPI;
+import ru.bclib.blocks.BaseChestBlock;
+import ru.bclib.registry.BaseBlockEntities;
 import ru.bclib.util.TagHelper;
 
 public class BlocksRegistry {
@@ -845,8 +847,9 @@ public class BlocksRegistry {
 	}
 
 	public static Block registerChest(String name, Block planks) {
-		Block chest = new BNChest(planks);
+		Block chest = new BaseChestBlock(planks);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+			BaseBlockEntities.CHEST.registerBlock(chest);
 			registerBlockDirectly(name, chest);
 			addFuel(planks, chest);
 			RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
