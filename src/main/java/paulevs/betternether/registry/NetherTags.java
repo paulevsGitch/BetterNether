@@ -19,7 +19,6 @@ import ru.bclib.api.TagAPI;
 import ru.bclib.blocks.BaseVineBlock;
 import ru.bclib.blocks.SimpleLeavesBlock;
 import ru.bclib.mixin.common.ComposterBlockAccessor;
-import ru.bclib.util.TagHelper;
 
 public class NetherTags {
 	public static final Tag<Block> SOUL_GROUND_BLOCK = TagAPI.makeCommonBlockTag( "soul_ground");
@@ -37,31 +36,31 @@ public class NetherTags {
 			Material material = ((AbstractBlockSettingsAccessor) properties).getMaterial();
 
 			if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
-				TagHelper.addTag(TagAPI.MINEABLE_PICKAXE, block);
+				TagAPI.addTag(TagAPI.MINEABLE_PICKAXE, block);
 			}
 			else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
-				TagHelper.addTag(TagAPI.MINEABLE_AXE, block);
+				TagAPI.addTag(TagAPI.MINEABLE_AXE, block);
 			}
 			else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Material.WATER_PLANT)) {
-				TagHelper.addTag(TagAPI.MINEABLE_HOE, block);
-				TagHelper.addTag(BlockTags.LEAVES, block);
+				TagAPI.addTag(TagAPI.MINEABLE_HOE, block);
+				TagAPI.addTag(BlockTags.LEAVES, block);
 				ComposterBlockAccessor.callAdd(0.3F, block);
 			}
 			else if (material.equals(Material.SAND)) {
-				TagHelper.addTag(TagAPI.MINEABLE_SHOVEL, block);
+				TagAPI.addTag(TagAPI.MINEABLE_SHOVEL, block);
 			}
 
 			if (block instanceof BlockTerrain) {
 				TagAPI.addNetherGround(block);
-				TagHelper.addTag(NYLIUM, block);
+				TagAPI.addTag(NYLIUM, block);
 				BonemealAPI.addSpreadableBlock(block, Blocks.NETHERRACK);
 			}
 			else if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
-				TagHelper.addTag(BlockTags.LEAVES, block);
+				TagAPI.addTag(BlockTags.LEAVES, block);
 				ComposterBlockAccessor.callAdd(0.3F, block);
 			}
 			else if (block instanceof BaseVineBlock) {
-				TagHelper.addTag(BlockTags.CLIMBABLE, block);
+				TagAPI.addTag(BlockTags.CLIMBABLE, block);
 			}
 			/*else if (block instanceof BlockCincinnasitePedestal) {
 				TagHelper.addTag(PEDESTALS, block);

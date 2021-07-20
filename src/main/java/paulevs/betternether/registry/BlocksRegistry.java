@@ -146,7 +146,6 @@ import paulevs.betternether.tab.CreativeTab;
 import ru.bclib.api.TagAPI;
 import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.registry.BaseBlockEntities;
-import ru.bclib.util.TagHelper;
 
 public class BlocksRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
@@ -853,9 +852,9 @@ public class BlocksRegistry {
 			registerBlockDirectly(name, chest);
 			addFuel(planks, chest);
 			RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
-
-			TagHelper.addTag(TagAPI.ITEM_CHEST, chest);
-			TagHelper.addTag(TagAPI.BLOCK_CHEST, chest);
+			
+			TagAPI.addTag(TagAPI.ITEM_CHEST, chest);
+			TagAPI.addTag(TagAPI.BLOCK_CHEST, chest);
 
 			//Nether wood is not flammable!
 			//FlammableBlockRegistry.getDefaultInstance().add(chest, 5, 20);
