@@ -8,3 +8,19 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+def isIDE = properties.containsKey('android.injected.invoked.from.ide') ||
+        (System.getenv("XPC_SERVICE_NAME") ?: "").contains("intellij")
+(System.getenv("XPC_SERVICE_NAME") ?: "").contains("intellij") ||
+        System.getenv("IDEA_INITIAL_DIRECTORY") != null
+
+println "IntelliJ: ${isIDE}"
+
+def BCLibFolder = new File( '../BCLib' )
+if( isIDE && BCLibFolder.exists() ) {
+    println "Using local BCLib in IntelliJ"
+
+    include ':BCLib'
+    project(":BCLib").projectDir = BCLibFolder
+    project(':BCLib').buildFileName = './bclib-composit.gradle'    
+} 
