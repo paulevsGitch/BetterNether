@@ -158,8 +158,9 @@ public class NetherBlocks extends ru.bclib.registry.BlocksRegistry {
 
 
 	// Stalagnate //
-	public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
-	public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStem(MaterialColor.TERRACOTTA_LIGHT_GREEN));
+	public static final WoodenMaterial MAT_STALAGNATE = new WoodenMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN);
+	//public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
+	//public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStem(MaterialColor.TERRACOTTA_LIGHT_GREEN));
 	public static final Block STALAGNATE_SEED = registerBlock("stalagnate_seed", new BlockStalagnateSeed());
 	//public static final Block STRIPED_LOG_STALAGNATE = registerBlock("striped_log_stalagnate", new BNPillar(MaterialColor.TERRACOTTA_LIGHT_GREEN));
 	//public static final Block STRIPED_BARK_STALAGNATE = registerBlock("striped_bark_stalagnate", new BNPillar(MaterialColor.TERRACOTTA_LIGHT_GREEN));
@@ -175,7 +176,7 @@ public class NetherBlocks extends ru.bclib.registry.BlocksRegistry {
 	//public static final Block STALAGNATE_TRAPDOOR = registerTrapdoor("stalagnate_planks_trapdoor", STALAGNATE_PLANKS);
 	//public static final Block STALAGNATE_DOOR = registerDoor("stalagnate_planks_door", STALAGNATE_PLANKS);
 	public static final Block STALAGNATE_BOWL = registerBlockNI("stalagnate_bowl", new BlockStalagnateBowl());
-	public static final WoodenMaterial MAT_STALAGNATE = new WoodenMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN);
+
 
 	// Reed //
 	public static final Block NETHER_REED = registerBlock("nether_reed", new BlockNetherReed());
@@ -574,7 +575,7 @@ public class NetherBlocks extends ru.bclib.registry.BlocksRegistry {
 	public static final Block TABURET_WARPED = registerTaburet("taburet_warped", Blocks.WARPED_SLAB);
 
 	public static final Block TABURET_REEDS = registerTaburet("taburet_reeds", REEDS_SLAB);
-	public static final Block TABURET_STALAGNATE = registerTaburet("taburet_stalagnate", MAT_STALAGNATE.slab);
+	//public static final Block TABURET_STALAGNATE = registerTaburet("taburet_stalagnate", MAT_STALAGNATE.slab);
 	public static final Block TABURET_WILLOW = registerTaburet("taburet_willow", WILLOW_SLAB);
 	public static final Block TABURET_WART = registerTaburet("taburet_wart", WART_SLAB);
 	public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
@@ -593,7 +594,7 @@ public class NetherBlocks extends ru.bclib.registry.BlocksRegistry {
 	public static final Block CHAIR_WARPED = registerChair("chair_warped", Blocks.WARPED_SLAB);
 
 	public static final Block CHAIR_REEDS = registerChair("chair_reeds", REEDS_SLAB);
-	public static final Block CHAIR_STALAGNATE = registerChair("chair_stalagnate", MAT_STALAGNATE.slab);
+	//public static final Block CHAIR_STALAGNATE = registerChair("chair_stalagnate", MAT_STALAGNATE.slab);
 	public static final Block CHAIR_WILLOW = registerChair("chair_willow", WILLOW_SLAB);
 	public static final Block CHAIR_WART = registerChair("chair_wart", WART_SLAB);
 	public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
@@ -612,7 +613,7 @@ public class NetherBlocks extends ru.bclib.registry.BlocksRegistry {
 	public static final Block BAR_STOOL_WARPED = registerBarStool("bar_stool_warped", Blocks.WARPED_SLAB);
 
 	public static final Block BAR_STOOL_REEDS = registerBarStool("bar_stool_reeds", REEDS_SLAB);
-	public static final Block BAR_STOOL_STALAGNATE = registerBarStool("bar_stool_stalagnate", MAT_STALAGNATE.slab);
+	//public static final Block BAR_STOOL_STALAGNATE = registerBarStool("bar_stool_stalagnate", MAT_STALAGNATE.slab);
 	public static final Block BAR_STOOL_WILLOW = registerBarStool("bar_stool_willow", WILLOW_SLAB);
 	public static final Block BAR_STOOL_WART = registerBarStool("bar_stool_wart", WART_SLAB);
 	public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);

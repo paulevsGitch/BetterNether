@@ -18,9 +18,9 @@ public class StructureStalagnate implements IStructure {
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		int length = BlocksHelper.upRay(world, pos, MAX_LENGTH);
 		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.above(length + 1)))) {
-			BlockState bottom = NetherBlocks.STALAGNATE.defaultBlockState().setValue(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
-			BlockState middle = NetherBlocks.STALAGNATE.defaultBlockState();
-			BlockState top = NetherBlocks.STALAGNATE.defaultBlockState().setValue(BlockStalagnate.SHAPE, TripleShape.TOP);
+			BlockState bottom = NetherBlocks.MAT_STALAGNATE.main.defaultBlockState().setValue(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
+			BlockState middle = NetherBlocks.MAT_STALAGNATE.main.defaultBlockState();
+			BlockState top = NetherBlocks.MAT_STALAGNATE.main.defaultBlockState().setValue(BlockStalagnate.SHAPE, TripleShape.TOP);
 
 			BlocksHelper.setWithUpdate(world, pos, bottom);
 			BlocksHelper.setWithUpdate(world, pos.above(length), top);
@@ -32,9 +32,9 @@ public class StructureStalagnate implements IStructure {
 	public void generateDown(ServerLevelAccessor world, BlockPos pos, Random random) {
 		int length = BlocksHelper.downRay(world, pos, MAX_LENGTH);
 		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.below(length + 1)))) {
-			BlockState bottom = NetherBlocks.STALAGNATE.defaultBlockState().setValue(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
-			BlockState middle = NetherBlocks.STALAGNATE.defaultBlockState();
-			BlockState top = NetherBlocks.STALAGNATE.defaultBlockState().setValue(BlockStalagnate.SHAPE, TripleShape.TOP);
+			BlockState bottom = NetherBlocks.MAT_STALAGNATE.main.defaultBlockState().setValue(BlockStalagnate.SHAPE, TripleShape.BOTTOM);
+			BlockState middle = NetherBlocks.MAT_STALAGNATE.main.defaultBlockState();
+			BlockState top = NetherBlocks.MAT_STALAGNATE.main.defaultBlockState().setValue(BlockStalagnate.SHAPE, TripleShape.TOP);
 
 			BlocksHelper.setWithUpdate(world, pos.below(length), bottom);
 			BlocksHelper.setWithUpdate(world, pos, top);

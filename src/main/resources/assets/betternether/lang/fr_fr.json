@@ -321,7 +321,7 @@
 	"block.betternether.roof_tile_wart_slab": "Wart Roof Tile Slab",
 	
 	"block.betternether.taburet_reeds": "Reeds Stool",
-	"block.betternether.taburet_stalagnate": "Stalagnate Stool",
+	"block.betternether.stalagnate_taburet": "Stalagnate Stool",
 	"block.betternether.taburet_willow": "Willow Stool",
 	"block.betternether.taburet_wart": "Wart Stool",
 	"block.betternether.taburet_cincinnasite": "Cincinnasite Stool",
@@ -331,7 +331,7 @@
 	"block.betternether.wart_ladder": "Wart Ladder",
 	
 	"block.betternether.chair_reeds": "Reeds Chair",
-	"block.betternether.chair_stalagnate": "Stalagnate Chair",
+	"block.betternether.stalagnate_chair": "Stalagnate Chair",
 	"block.betternether.chair_willow": "Willow Chair",
 	"block.betternether.chair_wart": "Wart Chair",
 	"block.betternether.chair_cincinnasite": "Cincinnasite Chair",
@@ -348,7 +348,7 @@
 	"block.betternether.giant_mold_sapling": "Giant Mold Sapling",
 	
 	"block.betternether.bar_stool_reeds": "Reed Bar Stool",
-	"block.betternether.bar_stool_stalagnate": "Stalagnate Bar Stool",
+	"block.betternether.stalagnate_bar_stool": "Stalagnate Bar Stool",
 	"block.betternether.bar_stool_willow": "Willow Bar Stool",
 	"block.betternether.bar_stool_wart": "Wart Bar Stool",
 	"block.betternether.bar_stool_cincinnasite": "Cincinnasite Bar Stool",

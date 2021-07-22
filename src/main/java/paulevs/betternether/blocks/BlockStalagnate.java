@@ -46,6 +46,6 @@ public class BlockStalagnate extends BlockBaseNotFull {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(NetherBlocks.STALAGNATE_STEM);
+		return new ItemStack(NetherBlocks.MAT_STALAGNATE.stem);
 	}
 }

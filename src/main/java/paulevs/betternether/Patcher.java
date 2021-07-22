@@ -37,7 +37,10 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:barrel_stalagnate", "betternether:stalagnate_barrel"),
 				Map.entry("betternether:roof_tile_stalagnate", "betternether:stalagnate_roof"),
 				Map.entry("betternether:roof_tile_stalagnate_stairs", "betternether:stalagnate_roof_stairs"),
-				Map.entry("betternether:roof_tile_stalagnate_slab", "betternether:stalagnate_roof_slab")
+				Map.entry("betternether:roof_tile_stalagnate_slab", "betternether:stalagnate_roof_slab"),
+				Map.entry("betternether:taburet_stalagnate", "betternether:stalagnate_taburet"),
+				Map.entry("betternether:chair_stalagnate", "betternether:stalagnate_chair"),
+				Map.entry("betternether:bar_stool_stalagnate", "betternether:stalagnate_bar_stool")
 		);
 	}
 }
