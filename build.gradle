@@ -29,6 +29,7 @@ dependencies {
 	compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 	modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
 
+	println "Using local BCLib: ${local_bclib}"
     if (local_bclib){
 		compileOnly(project(":BCLib"))
         modRuntimeMapped(project(":BCLib"))
