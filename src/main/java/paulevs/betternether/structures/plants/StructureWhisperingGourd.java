@@ -9,7 +9,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.BlockWhisperingGourdVine;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureWhisperingGourd implements IStructure {
@@ -24,9 +24,9 @@ public class StructureWhisperingGourd implements IStructure {
 			return;
 		h = MHelper.randRange(1, h, random);
 
-		BlockState bottom = BlocksRegistry.WHISPERING_GOURD_VINE.defaultBlockState().setValue(BlockWhisperingGourdVine.SHAPE, TripleShape.BOTTOM);
-		BlockState middle = BlocksRegistry.WHISPERING_GOURD_VINE.defaultBlockState().setValue(BlockWhisperingGourdVine.SHAPE, TripleShape.MIDDLE);
-		BlockState top = BlocksRegistry.WHISPERING_GOURD_VINE.defaultBlockState().setValue(BlockWhisperingGourdVine.SHAPE, TripleShape.TOP);
+		BlockState bottom = NetherBlocks.WHISPERING_GOURD_VINE.defaultBlockState().setValue(BlockWhisperingGourdVine.SHAPE, TripleShape.BOTTOM);
+		BlockState middle = NetherBlocks.WHISPERING_GOURD_VINE.defaultBlockState().setValue(BlockWhisperingGourdVine.SHAPE, TripleShape.MIDDLE);
+		BlockState top = NetherBlocks.WHISPERING_GOURD_VINE.defaultBlockState().setValue(BlockWhisperingGourdVine.SHAPE, TripleShape.TOP);
 
 		blockPos.set(pos);
 		for (int y = 0; y < h - 1; y++) {

@@ -9,13 +9,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import paulevs.betternether.blocks.BlockProperties.CincinnasitPillarShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockCincinnasitPillar extends BlockBase {
 	public static final EnumProperty<CincinnasitPillarShape> SHAPE = BlockProperties.PILLAR_SHAPE;
 
 	public BlockCincinnasitPillar() {
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK));
+		super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK));
 	}
 
 	@Override

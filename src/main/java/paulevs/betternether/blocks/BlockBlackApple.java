@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockBlackApple extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 16, 12);
@@ -27,6 +27,6 @@ public class BlockBlackApple extends BlockCommonPlant {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(BlocksRegistry.BLACK_APPLE_SEED);
+		return new ItemStack(NetherBlocks.BLACK_APPLE_SEED);
 	}
 }

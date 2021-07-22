@@ -49,12 +49,7 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.entity.EntityFirefly.FreflyLookControl;
-import paulevs.betternether.entity.EntityFirefly.MoveRandomGoal;
-import paulevs.betternether.entity.EntityFirefly.MoveToFlowersGoal;
-import paulevs.betternether.entity.EntityFirefly.SittingGoal;
-import paulevs.betternether.entity.EntityFirefly.WanderAroundGoal;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 
@@ -103,7 +98,7 @@ public class EntityFirefly extends Animal implements FlyingAnimal {
 				if (valid) {
 					state = this.level.getBlockState(pos);
 					valid = state.isAir() || !state.getMaterial().blocksMotion();
-					valid = valid && state.getBlock() != BlocksRegistry.EGG_PLANT;
+					valid = valid && state.getBlock() != NetherBlocks.EGG_PLANT;
 					valid = valid && !state.getMaterial().blocksMotion();
 				}
 				return valid;
@@ -531,16 +526,16 @@ public class EntityFirefly extends Animal implements FlyingAnimal {
 		SEARCH = points.toArray(new Vec3i[] {});
 
 		FLOWERS = new HashSet<Block>();
-		FLOWERS.add(BlocksRegistry.NETHER_GRASS);
-		FLOWERS.add(BlocksRegistry.SOUL_GRASS);
-		FLOWERS.add(BlocksRegistry.SWAMP_GRASS);
-		FLOWERS.add(BlocksRegistry.BLACK_APPLE);
-		FLOWERS.add(BlocksRegistry.MAGMA_FLOWER);
-		FLOWERS.add(BlocksRegistry.SOUL_VEIN);
-		FLOWERS.add(BlocksRegistry.NETHER_REED);
-		FLOWERS.add(BlocksRegistry.INK_BUSH);
-		FLOWERS.add(BlocksRegistry.INK_BUSH_SEED);
-		FLOWERS.add(BlocksRegistry.POTTED_PLANT);
+		FLOWERS.add(NetherBlocks.NETHER_GRASS);
+		FLOWERS.add(NetherBlocks.SOUL_GRASS);
+		FLOWERS.add(NetherBlocks.SWAMP_GRASS);
+		FLOWERS.add(NetherBlocks.BLACK_APPLE);
+		FLOWERS.add(NetherBlocks.MAGMA_FLOWER);
+		FLOWERS.add(NetherBlocks.SOUL_VEIN);
+		FLOWERS.add(NetherBlocks.NETHER_REED);
+		FLOWERS.add(NetherBlocks.INK_BUSH);
+		FLOWERS.add(NetherBlocks.INK_BUSH_SEED);
+		FLOWERS.add(NetherBlocks.POTTED_PLANT);
 		FLOWERS.add(Blocks.NETHER_WART);
 	}
 

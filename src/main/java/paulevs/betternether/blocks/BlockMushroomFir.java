@@ -18,7 +18,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockMushroomFir extends BlockBaseNotFull {
 	public static final EnumProperty<MushroomFirShape> SHAPE = EnumProperty.create("shape", MushroomFirShape.class);
@@ -97,7 +97,7 @@ public class BlockMushroomFir extends BlockBaseNotFull {
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		MushroomFirShape shape = state.getValue(SHAPE);
-		return shape == MushroomFirShape.BOTTOM || shape == MushroomFirShape.MIDDLE ? new ItemStack(BlocksRegistry.MUSHROOM_FIR_STEM) : new ItemStack(BlocksRegistry.MUSHROOM_FIR_SAPLING);
+		return shape == MushroomFirShape.BOTTOM || shape == MushroomFirShape.MIDDLE ? new ItemStack(NetherBlocks.MUSHROOM_FIR_STEM) : new ItemStack(NetherBlocks.MUSHROOM_FIR_SAPLING);
 	}
 
 	@Override

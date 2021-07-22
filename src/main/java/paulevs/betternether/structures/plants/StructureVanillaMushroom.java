@@ -8,14 +8,14 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureVanillaMushroom implements IStructure {
 	private MutableBlockPos npos = new MutableBlockPos();
 
 	private boolean canPlaceAt(LevelAccessor world, BlockPos pos) {
-		return world.getBlockState(pos.below()).getBlock() == BlocksRegistry.NETHER_MYCELIUM;
+		return world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM;
 	}
 
 	@Override

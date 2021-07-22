@@ -4,13 +4,13 @@ import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.state.BlockState;
-import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.NetherItems;
 
 public class BNItemHoe extends HoeItem {
 	protected float speed;
 
 	public BNItemHoe(Tier material, int durability, float speed) {
-		super(material, 1, -2.8F, ItemsRegistry.defaultSettings().fireResistant());
+		super(material, 1, -2.8F, NetherItems.defaultSettings().fireResistant());
 		this.speed = speed;
 	}
 

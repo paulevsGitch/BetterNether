@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
@@ -69,6 +69,6 @@ public class NetherJungle extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.JUNGLE_GRASS.defaultBlockState());
+		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.JUNGLE_GRASS.defaultBlockState());
 	}
 }

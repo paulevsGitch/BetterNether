@@ -12,7 +12,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureSoulGrass;
@@ -54,7 +54,7 @@ public class NetherSoulPlain extends NetherBiome {
 		for (int i = d1; i < d2; i++) {
 			POS.setY(pos.getY() - i);
 			if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
-				BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.SOUL_SANDSTONE.defaultBlockState().setValue(BlockSoulSandstone.UP, i == d1));
+				BlocksHelper.setWithoutUpdate(world, POS, NetherBlocks.SOUL_SANDSTONE.defaultBlockState().setValue(BlockSoulSandstone.UP, i == d1));
 			else
 				return;
 		}

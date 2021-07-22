@@ -7,11 +7,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockCincinnasiteFrame extends BlockBaseNotFull {
 	public BlockCincinnasiteFrame() {
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).noOcclusion());
+		super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

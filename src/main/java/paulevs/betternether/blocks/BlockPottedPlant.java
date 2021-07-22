@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.PottedPlantShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockPottedPlant extends BlockBaseNotFull {
 	public static final EnumProperty<PottedPlantShape> PLANT = BlockProperties.PLANT;
@@ -88,7 +88,7 @@ public class BlockPottedPlant extends BlockBaseNotFull {
 	public static BlockState getPlant(Item item) {
 		for (PottedPlantShape shape : PottedPlantShape.values()) {
 			if (shape.getItem().equals(item))
-				return BlocksRegistry.POTTED_PLANT.defaultBlockState().setValue(PLANT, shape);
+				return NetherBlocks.POTTED_PLANT.defaultBlockState().setValue(PLANT, shape);
 		}
 		return null;
 	}

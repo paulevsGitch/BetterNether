@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockVeinedSand extends BlockBase {
 	public BlockVeinedSand() {
@@ -26,7 +26,7 @@ public class BlockVeinedSand extends BlockBase {
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
-		if (world.getBlockState(pos.above()).getBlock() == BlocksRegistry.SOUL_VEIN)
+		if (world.getBlockState(pos.above()).getBlock() == NetherBlocks.SOUL_VEIN)
 			return state;
 		else
 			return Blocks.SOUL_SAND.defaultBlockState();

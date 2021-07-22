@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import org.apache.logging.log4j.LogManager;
-import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.NetherItems;
 
 public class VanillaExcavatorsIntegration {
 	private static boolean hasExcavators;
@@ -17,7 +17,7 @@ public class VanillaExcavatorsIntegration {
 		if (!hasExcavators)
 			return Items.AIR;
 		try {
-			return (Item) excavatorConstructor.newInstance(material, attackDamage, attackSpeed, ItemsRegistry.defaultSettings());
+			return (Item) excavatorConstructor.newInstance(material, attackDamage, attackSpeed, NetherItems.defaultSettings());
 		}
 		catch (Exception e) {
 			e.printStackTrace();

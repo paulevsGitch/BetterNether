@@ -7,21 +7,21 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureSoulVein implements IStructure {
 	private MutableBlockPos npos = new MutableBlockPos();
 
 	private boolean canPlaceAt(LevelAccessor world, BlockPos pos) {
-		return BlocksRegistry.SOUL_VEIN.canSurvive(BlocksRegistry.SOUL_VEIN.defaultBlockState(), world, pos);
+		return NetherBlocks.SOUL_VEIN.canSurvive(NetherBlocks.SOUL_VEIN.defaultBlockState(), world, pos);
 	}
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		if (world.isEmptyBlock(pos) && canPlaceAt(world, pos)) {
-			BlockState state = BlocksRegistry.SOUL_VEIN.defaultBlockState();
-			BlockState sand = BlocksRegistry.VEINED_SAND.defaultBlockState();
+			BlockState state = NetherBlocks.SOUL_VEIN.defaultBlockState();
+			BlockState sand = NetherBlocks.VEINED_SAND.defaultBlockState();
 			int x1 = pos.getX() - 1;
 			int x2 = pos.getX() + 1;
 			int z1 = pos.getZ() - 1;

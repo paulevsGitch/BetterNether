@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherCactus;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureNetherCactus implements IStructure {
@@ -22,8 +22,8 @@ public class StructureNetherCactus implements IStructure {
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		if (canPlaceAt(world, pos)) {
-			BlockState top = BlocksRegistry.NETHER_CACTUS.defaultBlockState();
-			BlockState bottom = BlocksRegistry.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, false);
+			BlockState top = NetherBlocks.NETHER_CACTUS.defaultBlockState();
+			BlockState bottom = NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, false);
 			for (int i = 0; i < 16; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 4);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 4);

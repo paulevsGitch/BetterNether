@@ -1,76 +1,67 @@
 package paulevs.betternether.blocks.complex;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
-import paulevs.betternether.blocks.BNLogStripable;
-import paulevs.betternether.blocks.BNPillar;
-import paulevs.betternether.blocks.BNPlanks;
+import paulevs.betternether.BetterNether;
+import paulevs.betternether.blocks.BNBarStool;
+import paulevs.betternether.blocks.BNChair;
+import paulevs.betternether.blocks.BNNormalChair;
+import paulevs.betternether.blocks.BNTaburet;
+import paulevs.betternether.blocks.BlockStalagnate;
+import paulevs.betternether.blocks.BlockStem;
 import paulevs.betternether.recipes.RecipesHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
+import ru.bclib.blocks.BaseBlock;
+import ru.bclib.blocks.BaseSlabBlock;
+import ru.bclib.blocks.BaseStairsBlock;
+import ru.bclib.config.Configs;
+import ru.bclib.recipes.GridRecipe;
 
-public class WoodenMaterial {
-	public final Block log;
-	public final Block bark;
+public class WoodenMaterial extends ru.bclib.blocks.complex.WoodenMaterial {
+    public final static String NAME_STEM = "stem";
+    public final static String NAME_ROOF = "roof";
+    public final static String NAME_ROOF_STAIRS = "roof_stair";
+    public final static String NAME_ROOF_SLAB = "roof_slab";
+    public final static String NAME_TABURET = "taburet";
+    public final static String NAME_CHAIR = "chair";
+    public final static String NAME_BAR_STOOL = "bar_stool";
 
-	public final Block log_striped;
-	public final Block bark_striped;
+    public final Block main;
+    public final Block stem;
 
-	public final Block planks;
+    public final Block roof;
+    public final Block root_stairs;
+    public final Block roof_slab;
 
-	public final Block planks_stairs;
-	public final Block planks_slab;
+    public final Block taburet;
+    public final Block chair;
+    public final Block bar_stool;
 
-	public final Block fence;
-	public final Block gate;
-	public final Block button;
-	public final Block pressure_plate;
-	public final Block trapdoor;
-	public final Block door;
+    public WoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
+        super(BetterNether.MOD_ID, name, woodColor, planksColor, "nether", NetherBlocks::registerBlockBCLib);
 
-	public final Block taburet;
-	public final Block chair;
-	public final Block bar_stool;
 
-	public final Block crafting_table;
-	public final Block ladder;
-	public final Block sign;
+        main = NetherBlocks.registerBlockNI(name , new BlockStalagnate());
+        stem = NetherBlocks.registerBlockBCLib(name + "_" + NAME_STEM, new BlockStem(woodColor));
 
-	public final Block chest;
-	public final Block barrel;
+        roof = NetherBlocks.registerBlockBCLib(name + "_" + NAME_ROOF, new BaseBlock(FabricBlockSettings.copyOf(planks)));
+        root_stairs = NetherBlocks.registerBlockBCLib(name + "_" + NAME_ROOF_STAIRS, new BaseStairsBlock(roof));
+        roof_slab = NetherBlocks.registerBlockBCLib(name + "_" + NAME_ROOF_SLAB, new BaseSlabBlock(roof));
 
-	public WoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
-		log_striped = BlocksRegistry.registerBlock("striped_log_" + name, new BNPillar(woodColor));
-		bark_striped = BlocksRegistry.registerBlock("striped_bark_" + name, new BNPillar(woodColor));
+        taburet = NetherBlocks.registerBlockBCLib(name + "_" + NAME_TABURET, new BNTaburet(slab));
+        chair = NetherBlocks.registerBlockBCLib(name + "_" + NAME_CHAIR, new BNNormalChair(slab));
+        bar_stool = NetherBlocks.registerBlockBCLib(name + "_" + NAME_BAR_STOOL, new BNBarStool(slab));
 
-		log = BlocksRegistry.registerBlock(name + "_log", new BNLogStripable(woodColor, log_striped));
-		bark = BlocksRegistry.registerBark(name + "_bark", new BNLogStripable(woodColor, bark_striped), log);
 
-		planks = BlocksRegistry.registerPlanks(name + "_planks", new BNPlanks(planksColor), log_striped, bark_striped, log, bark);
-		planks_stairs = BlocksRegistry.registerStairs(name + "_stairs", planks);
-		planks_slab = BlocksRegistry.registerSlab(name + "_slab", planks);
+        GridRecipe.make(modID, name + "_" + NAME_ROOF_STAIRS, stairs).checkConfig(Configs.RECIPE_CONFIG).setOutputCount(4).setShape( "# #", "###", " # ").addMaterial('#', planks).setGroup(receipGroupPrefix + "_planks_roof").build();
+        GridRecipe.make(modID, name + "_" + NAME_ROOF_STAIRS, stairs).checkConfig(Configs.RECIPE_CONFIG).setOutputCount(4).setShape("#  ", "## ", "###").addMaterial('#', planks).setGroup(receipGroupPrefix + "_planks_stairs").build();
+        GridRecipe.make(modID, name + "_" + NAME_ROOF_SLAB, slab).checkConfig(Configs.RECIPE_CONFIG).setOutputCount(6).setShape("###").addMaterial('#', planks).setGroup(receipGroupPrefix + "_planks_slabs").build();
 
-		fence = BlocksRegistry.registerFence(name + "_fence", planks);
-		gate = BlocksRegistry.registerGate(name + "_gate", planks);
-		button = BlocksRegistry.registerButton(name + "_button", planks);
-		pressure_plate = BlocksRegistry.registerPlate(name + "_plate", planks);
-		trapdoor = BlocksRegistry.registerTrapdoor(name + "_trapdoor", planks);
-		door = BlocksRegistry.registerDoor(name + "_door", planks);
-
-		taburet = BlocksRegistry.registerTaburet("taburet_" + name, planks_slab);
-		chair = BlocksRegistry.registerChair("chair_" + name, planks_slab);
-		bar_stool = BlocksRegistry.registerBarStool("bar_stool_" + name, planks_slab);
-
-		crafting_table = BlocksRegistry.registerCraftingTable("crafting_table_" + name, planks);
-		ladder = BlocksRegistry.registerLadder(name + "_ladder", planks);
-		sign = BlocksRegistry.registerSign("sign_" + name, planks);
-
-		chest = BlocksRegistry.registerChest("chest_" + name, planks);
-		barrel = BlocksRegistry.registerBarrel("barrel_" + name, planks, planks_slab);
-
-		RecipesHelper.makeSimpleRecipe2(log_striped, bark_striped, 3, "nether_bark_striped");
-	}
-
-	public boolean isTreeLog(Block block) {
-		return block == log || block == bark;
-	}
+        RecipesHelper.makeTaburetRecipe(slab, taburet);
+        RecipesHelper.makeChairRecipe(slab, chair);
+        RecipesHelper.makeBarStoolRecipe(slab, bar_stool);
+    }
 }

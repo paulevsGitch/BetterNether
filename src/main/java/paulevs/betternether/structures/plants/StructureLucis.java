@@ -10,16 +10,16 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.blocks.BlockLucisSpore;
 import paulevs.betternether.blocks.BlockProperties.EnumLucisShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureLucis implements IStructure {
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		if (canGenerate(world, pos)) {
-			BlockState center = BlocksRegistry.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.CENTER);
-			BlockState side = BlocksRegistry.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.SIDE);
-			BlockState corner = BlocksRegistry.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.CORNER);
+			BlockState center = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.CENTER);
+			BlockState side = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.SIDE);
+			BlockState corner = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.CORNER);
 
 			if (random.nextInt(3) == 0) {
 				if (canReplace(world.getBlockState(pos)))
@@ -44,7 +44,7 @@ public class StructureLucis implements IStructure {
 			}
 			else {
 				BlockState state = world.getBlockState(pos);
-				if (state.getBlock() == BlocksRegistry.LUCIS_SPORE) {
+				if (state.getBlock() == NetherBlocks.LUCIS_SPORE) {
 					if (state.getValue(BlockLucisSpore.FACING) == Direction.SOUTH) pos = pos.north();
 					else if (state.getValue(BlockLucisSpore.FACING) == Direction.WEST) pos = pos.east();
 				}
@@ -66,13 +66,13 @@ public class StructureLucis implements IStructure {
 	}
 
 	private boolean canReplace(BlockState state) {
-		return state.getBlock() == BlocksRegistry.LUCIS_SPORE || state.getMaterial().isReplaceable();
+		return state.getBlock() == NetherBlocks.LUCIS_SPORE || state.getMaterial().isReplaceable();
 	}
 
 	private boolean canGenerate(ServerLevelAccessor world, BlockPos pos) {
 		BlockState state;
 		for (Direction dir : HorizontalDirectionalBlock.FACING.getPossibleValues())
-			if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.relative(dir))) || BlocksRegistry.ANCHOR_TREE.isTreeLog(state.getBlock()))
+			if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.relative(dir))) || NetherBlocks.ANCHOR_TREE.isTreeLog(state.getBlock()))
 				return true;
 		return false;
 	}

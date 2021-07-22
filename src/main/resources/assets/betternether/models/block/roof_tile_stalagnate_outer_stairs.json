@@ -1,8 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "betternether:block/roof_tile_stalagnate",
-        "top": "betternether:block/roof_tile_stalagnate",
-        "side": "betternether:block/roof_tile_stalagnate"
-    }
-}

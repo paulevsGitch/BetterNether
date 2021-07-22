@@ -16,7 +16,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockEyeVine extends BlockBaseNotFull {
 	protected static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 16, 12);
@@ -63,6 +63,6 @@ public class BlockEyeVine extends BlockBaseNotFull {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(BlocksRegistry.EYE_SEED);
+		return new ItemStack(NetherBlocks.EYE_SEED);
 	}
 }

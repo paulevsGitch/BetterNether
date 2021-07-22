@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockSmallLantern extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE_NORTH = Block.box(5, 0, 8, 11, 16, 16);
@@ -31,7 +31,7 @@ public class BlockSmallLantern extends BlockBaseNotFull {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
 	public BlockSmallLantern() {
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_LANTERN).noOcclusion());
+		super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_LANTERN).noOcclusion());
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.DOWN));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

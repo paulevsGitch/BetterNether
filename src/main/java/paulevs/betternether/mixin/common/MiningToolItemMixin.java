@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.betternether.blocks.BNObsidian;
 import paulevs.betternether.blocks.BlockObsidianGlass;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 @Mixin(DiggerItem.class)
 public abstract class MiningToolItemMixin extends TieredItem implements Vanishable {
@@ -24,11 +24,11 @@ public abstract class MiningToolItemMixin extends TieredItem implements Vanishab
 	@Inject(method = "isCorrectToolForDrops", at = @At(value = "HEAD"), cancellable = true)
 	private void effectiveOn(BlockState state, CallbackInfoReturnable<Boolean> info) {
 		int level = this.getTier().getLevel();
-		if (state.getBlock() == BlocksRegistry.CINCINNASITE_ORE) {
+		if (state.getBlock() == NetherBlocks.CINCINNASITE_ORE) {
 			info.setReturnValue(level >= 1);
 			info.cancel();
 		}
-		else if (state.getBlock() == BlocksRegistry.NETHER_RUBY_ORE) {
+		else if (state.getBlock() == NetherBlocks.NETHER_RUBY_ORE) {
 			info.setReturnValue(level >= 2);
 			info.cancel();
 		}

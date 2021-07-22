@@ -28,7 +28,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
-import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.NetherItems;
 
 public class BlockLumabusVine extends BlockBaseNotFull {
 	private static final VoxelShape MIDDLE_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
@@ -91,7 +91,7 @@ public class BlockLumabusVine extends BlockBaseNotFull {
 	@Override
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		if (state.getValue(SHAPE) == TripleShape.BOTTOM) {
-			return Lists.newArrayList(new ItemStack(seed, MHelper.randRange(1, 3, RANDOM)), new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(1, 3, RANDOM)));
+			return Lists.newArrayList(new ItemStack(seed, MHelper.randRange(1, 3, RANDOM)), new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(1, 3, RANDOM)));
 		}
 		return Lists.newArrayList();
 	}

@@ -11,7 +11,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockEyeBase extends BlockBase {
 	public BlockEyeBase(Properties settings) {
@@ -27,7 +27,7 @@ public class BlockEyeBase extends BlockBase {
 	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
 		BlockPos blockPos = pos.above();
 		Block up = world.getBlockState(blockPos).getBlock();
-		if (up != BlocksRegistry.EYE_VINE && up != Blocks.NETHERRACK)
+		if (up != NetherBlocks.EYE_VINE && up != Blocks.NETHERRACK)
 			return Blocks.AIR.defaultBlockState();
 		else
 			return state;
@@ -36,6 +36,6 @@ public class BlockEyeBase extends BlockBase {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(BlocksRegistry.EYE_SEED);
+		return new ItemStack(NetherBlocks.EYE_SEED);
 	}
 }

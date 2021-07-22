@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockWartSeed;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureFuncScatter;
 
 public class StructureWartTree extends StructureFuncScatter {
@@ -43,9 +43,9 @@ public class StructureWartTree extends StructureFuncScatter {
 				POS.set(px, py, pz);
 				if (isReplaceable(world.getBlockState(POS))) {
 				if (y == 0 && !isReplaceable(world.getBlockState(POS.below())))
-					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_ROOTS.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, POS, NetherBlocks.WART_ROOTS.defaultBlockState());
 				else if (y < h2)
-					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_LOG.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, POS, NetherBlocks.WART_LOG.defaultBlockState());
 				else
 				BlocksHelper.setWithUpdate(world, POS, WART_BLOCK);
 				if (random.nextInt(8) == 0) {
@@ -66,9 +66,9 @@ public class StructureWartTree extends StructureFuncScatter {
 				POS.set(px, py, pz);
 				if (isReplaceable(world.getBlockState(POS))) {
 				if (isReplaceable(world.getBlockState(POS.below())))
-					BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_LOG.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, POS, NetherBlocks.WART_LOG.defaultBlockState());
 				else {
-				BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.WART_ROOTS.defaultBlockState());
+				BlocksHelper.setWithUpdate(world, POS, NetherBlocks.WART_ROOTS.defaultBlockState());
 				break;
 				}
 				}
@@ -103,7 +103,7 @@ public class StructureWartTree extends StructureFuncScatter {
 	}
 
 	private void PlaceRandomSeed(LevelAccessor world, BlockPos pos) {
-		BlockState seed = BlocksRegistry.WART_SEED.defaultBlockState();
+		BlockState seed = NetherBlocks.WART_SEED.defaultBlockState();
 		if (isReplaceable(world.getBlockState(pos))) {
 			if (isWart(world.getBlockState(pos.above())))
 				seed = seed.setValue(BlockWartSeed.FACING, Direction.DOWN);
@@ -125,16 +125,16 @@ public class StructureWartTree extends StructureFuncScatter {
 		Block block = state.getBlock();
 		return state.getMaterial().isReplaceable() ||
 				block == Blocks.AIR ||
-				block == BlocksRegistry.WART_SEED ||
-				block == BlocksRegistry.BLACK_BUSH ||
-				block == BlocksRegistry.SOUL_VEIN ||
-				block == BlocksRegistry.SOUL_LILY ||
-				block == BlocksRegistry.SOUL_LILY_SAPLING ||
+				block == NetherBlocks.WART_SEED ||
+				block == NetherBlocks.BLACK_BUSH ||
+				block == NetherBlocks.SOUL_VEIN ||
+				block == NetherBlocks.SOUL_LILY ||
+				block == NetherBlocks.SOUL_LILY_SAPLING ||
 				block == Blocks.NETHER_WART;
 	}
 
 	private boolean isWart(BlockState state) {
-		return state == WART_BLOCK || state.getBlock() == BlocksRegistry.WART_LOG;
+		return state == WART_BLOCK || state.getBlock() == NetherBlocks.WART_LOG;
 	}
 
 	@Override

@@ -19,7 +19,7 @@ import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
 import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureFuncScatter;
 
 public class StructureOldWillow extends StructureFuncScatter {
@@ -88,7 +88,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 		}
 
 		if (wallPlants == null) {
-			wallPlants = new Block[] { BlocksRegistry.WALL_MOSS, BlocksRegistry.WALL_MOSS, BlocksRegistry.WALL_MUSHROOM_BROWN, BlocksRegistry.WALL_MUSHROOM_RED };
+			wallPlants = new Block[] { NetherBlocks.WALL_MOSS, NetherBlocks.WALL_MOSS, NetherBlocks.WALL_MUSHROOM_BROWN, NetherBlocks.WALL_MUSHROOM_RED };
 		}
 
 		BlockState state;
@@ -97,9 +97,9 @@ public class StructureOldWillow extends StructureFuncScatter {
 			//if (!blockBox.contains(bpos)) continue;
 			if (BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) || state.getMaterial().isReplaceable()) {
 				if (!BLOCKS.contains(bpos.above()) || !BLOCKS.contains(bpos.below()))
-					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_BARK.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.WILLOW_BARK.defaultBlockState());
 				else
-					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LOG.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.WILLOW_LOG.defaultBlockState());
 
 				if (random.nextInt(8) == 0) {
 					state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
@@ -127,7 +127,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 
 	@Override
 	protected boolean isStructure(BlockState state) {
-		return state.getBlock() == BlocksRegistry.RUBEUS_LOG;
+		return state.getBlock() == NetherBlocks.RUBEUS_LOG;
 	}
 
 	@Override
@@ -189,8 +189,8 @@ public class StructureOldWillow extends StructureFuncScatter {
 	}
 
 	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random, BoundingBox bounds) {
-		BlockState leaves = BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.NATURAL, false);
-		BlockState vine = BlocksRegistry.WILLOW_BRANCH.defaultBlockState();
+		BlockState leaves = NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.NATURAL, false);
+		BlockState vine = NetherBlocks.WILLOW_BRANCH.defaultBlockState();
 		float halfR = radius * 0.5F;
 		float r2 = radius * radius;
 		int start = (int) Math.floor(-radius);

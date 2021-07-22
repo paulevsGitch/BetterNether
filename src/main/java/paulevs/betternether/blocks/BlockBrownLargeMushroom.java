@@ -20,7 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.BrownMushroomShape;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockBrownLargeMushroom extends BlockBaseNotFull {
 	private static final VoxelShape TOP_CENTER_SHAPE = Block.box(0, 0.1, 0, 16, 16, 16);
@@ -51,7 +51,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull {
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		BrownMushroomShape shape = state.getValue(SHAPE);
-		return shape == BrownMushroomShape.BOTTOM || shape == BrownMushroomShape.MIDDLE ? new ItemStack(BlocksRegistry.MUSHROOM_STEM) : new ItemStack(Items.BROWN_MUSHROOM);
+		return shape == BrownMushroomShape.BOTTOM || shape == BrownMushroomShape.MIDDLE ? new ItemStack(NetherBlocks.MUSHROOM_STEM) : new ItemStack(Items.BROWN_MUSHROOM);
 	}
 
 	@Override

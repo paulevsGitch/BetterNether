@@ -34,7 +34,7 @@ import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.blockentities.BNChestBlockEntity;
 import paulevs.betternether.blocks.BNChest;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BNChestBlockEntityRenderer implements BlockEntityRenderer<BNChestBlockEntity> {
 	private static final HashMap<Block, RenderType[]> LAYERS = Maps.newHashMap();
@@ -179,7 +179,7 @@ public class BNChestBlockEntityRenderer implements BlockEntityRenderer<BNChestBl
 				RenderType.entitySolid(new ResourceLocation("entity/chest/normal_left.png")),
 				RenderType.entitySolid(new ResourceLocation("entity/chest/normal_right.png"))
 		};
-		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
+		NetherBlocks.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
 			if (block instanceof BNChest) {
 				LAYERS.put(block, new RenderType[] {

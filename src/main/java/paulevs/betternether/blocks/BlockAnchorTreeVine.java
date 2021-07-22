@@ -23,7 +23,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockAnchorTreeVine extends BlockBaseNotFull {
 	protected static final VoxelShape SHAPE_SELECTION = Block.box(4, 0, 4, 12, 16, 12);
@@ -76,7 +76,7 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull {
 	@Override
 	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
 		Block up = world.getBlockState(pos.above()).getBlock();
-		if (up != this && up != BlocksRegistry.ANCHOR_TREE_LEAVES && up != Blocks.NETHERRACK)
+		if (up != this && up != NetherBlocks.ANCHOR_TREE_LEAVES && up != Blocks.NETHERRACK)
 			return Blocks.AIR.defaultBlockState();
 		else
 			return state;
@@ -85,6 +85,6 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(BlocksRegistry.ANCHOR_TREE_LEAVES);
+		return new ItemStack(NetherBlocks.ANCHOR_TREE_LEAVES);
 	}
 }

@@ -8,14 +8,14 @@ import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import paulevs.betternether.tab.CreativeTab;
+import paulevs.betternether.tab.CreativeTabs;
 
 public class ItemBlackApple extends Item {
 	public static final FoodProperties BLACK_APPLE = new FoodProperties.Builder().nutrition(6).saturationMod(0.5F).build();
 
 	public ItemBlackApple() {
 		super(new Item.Properties()
-				.tab(CreativeTab.BN_TAB)
+				.tab(CreativeTabs.BN_TAB)
 				.food(BLACK_APPLE)
 				.food(Foods.APPLE));
 	}

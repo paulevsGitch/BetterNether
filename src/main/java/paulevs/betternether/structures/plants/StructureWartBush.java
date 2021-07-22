@@ -7,7 +7,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockWartSeed;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureWartBush implements IStructure {
@@ -25,6 +25,6 @@ public class StructureWartBush implements IStructure {
 	private void setSeed(ServerLevelAccessor world, BlockPos pos, Direction dir) {
 		BlockPos p = pos.relative(dir);
 		if (world.isEmptyBlock(p))
-			BlocksHelper.setWithoutUpdate(world, p, BlocksRegistry.WART_SEED.defaultBlockState().setValue(BlockWartSeed.FACING, dir));
+			BlocksHelper.setWithoutUpdate(world, p, NetherBlocks.WART_SEED.defaultBlockState().setValue(BlockWartSeed.FACING, dir));
 	}
 }

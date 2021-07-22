@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLumabusVine;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureLumabusVine implements IStructure {
@@ -20,13 +20,13 @@ public class StructureLumabusVine implements IStructure {
 		if (h2 < 3)
 			return;
 
-		BlockState vineState = BlocksRegistry.LUMABUS_VINE.defaultBlockState().setValue(BlockLumabusVine.SHAPE, TripleShape.MIDDLE);
+		BlockState vineState = NetherBlocks.LUMABUS_VINE.defaultBlockState().setValue(BlockLumabusVine.SHAPE, TripleShape.MIDDLE);
 
-		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.LUMABUS_VINE.defaultBlockState());
+		BlocksHelper.setWithUpdate(world, pos, NetherBlocks.LUMABUS_VINE.defaultBlockState());
 
 		for (int y = 1; y < h2; y++)
 			BlocksHelper.setWithUpdate(world, pos.below(y), vineState);
 
-		BlocksHelper.setWithUpdate(world, pos.below(h2), BlocksRegistry.LUMABUS_VINE.defaultBlockState().setValue(BlockLumabusVine.SHAPE, TripleShape.BOTTOM));
+		BlocksHelper.setWithUpdate(world, pos.below(h2), NetherBlocks.LUMABUS_VINE.defaultBlockState().setValue(BlockLumabusVine.SHAPE, TripleShape.BOTTOM));
 	}
 }

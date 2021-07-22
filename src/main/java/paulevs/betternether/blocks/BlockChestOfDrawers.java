@@ -36,7 +36,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blockentities.BlockEntityChestOfDrawers;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockChestOfDrawers extends BaseEntityBlock {
 	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(
@@ -48,7 +48,7 @@ public class BlockChestOfDrawers extends BaseEntityBlock {
 	public static final BooleanProperty OPEN = BlockProperties.OPEN;
 
 	public BlockChestOfDrawers() {
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).noOcclusion());
+		super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(OPEN, false));
 	}
 

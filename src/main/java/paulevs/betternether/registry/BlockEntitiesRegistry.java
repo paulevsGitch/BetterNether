@@ -21,10 +21,10 @@ import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.blocks.BlockNetherFurnace;
 
 public class BlockEntitiesRegistry {
-	public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = BlockEntityType.Builder.of(BlockEntityForge::new, BlocksRegistry.CINCINNASITE_FORGE).build(null);
+	public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = BlockEntityType.Builder.of(BlockEntityForge::new, NetherBlocks.CINCINNASITE_FORGE).build(null);
 	public static final BlockEntityType<BlockEntityFurnace> NETHERRACK_FURNACE = BlockEntityType.Builder.of(BlockEntityFurnace::new, getFurnaces()).build(null);
-	public static final BlockEntityType<BlockEntityChestOfDrawers> CHEST_OF_DRAWERS = BlockEntityType.Builder.of(BlockEntityChestOfDrawers::new, BlocksRegistry.CHEST_OF_DRAWERS).build(null);
-	public static final BlockEntityType<BNBrewingStandBlockEntity> NETHER_BREWING_STAND = BlockEntityType.Builder.of(BNBrewingStandBlockEntity::new, BlocksRegistry.NETHER_BREWING_STAND).build(null);
+	public static final BlockEntityType<BlockEntityChestOfDrawers> CHEST_OF_DRAWERS = BlockEntityType.Builder.of(BlockEntityChestOfDrawers::new, NetherBlocks.CHEST_OF_DRAWERS).build(null);
+	public static final BlockEntityType<BNBrewingStandBlockEntity> NETHER_BREWING_STAND = BlockEntityType.Builder.of(BNBrewingStandBlockEntity::new, NetherBlocks.NETHER_BREWING_STAND).build(null);
 	public static final BlockEntityType<BNChestBlockEntity> CHEST = BlockEntityType.Builder.of(BNChestBlockEntity::new, getChests()).build(null);
 	public static final BlockEntityType<BNBarrelBlockEntity> BARREL = BlockEntityType.Builder.of(BNBarrelBlockEntity::new, getBarrels()).build(null);
 	public static final BlockEntityType<BNSignBlockEntity> SIGN = BlockEntityType.Builder.of(BNSignBlockEntity::new, getSigns()).build(null);
@@ -45,7 +45,7 @@ public class BlockEntitiesRegistry {
 
 	private static Block[] getChests() {
 		List<Block> result = new ArrayList<Block>();
-		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
+		NetherBlocks.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
 			if (block instanceof BNChest)
 				result.add(block);
@@ -55,7 +55,7 @@ public class BlockEntitiesRegistry {
 
 	private static Block[] getBarrels() {
 		List<Block> result = new ArrayList<Block>();
-		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
+		NetherBlocks.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
 			if (block instanceof BNBarrel)
 				result.add(block);
@@ -65,7 +65,7 @@ public class BlockEntitiesRegistry {
 
 	private static Block[] getSigns() {
 		List<Block> result = new ArrayList<Block>();
-		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
+		NetherBlocks.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
 			if (block instanceof BNSign)
 				result.add(block);
@@ -75,7 +75,7 @@ public class BlockEntitiesRegistry {
 
 	private static Block[] getFurnaces() {
 		List<Block> result = new ArrayList<Block>();
-		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
+		NetherBlocks.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
 			if (block instanceof BlockNetherFurnace)
 				result.add(block);

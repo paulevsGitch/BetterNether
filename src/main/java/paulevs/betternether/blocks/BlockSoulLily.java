@@ -30,7 +30,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.plants.StructureSoulLily;
 
 public class BlockSoulLily extends BlockBaseNotFull {
@@ -193,7 +193,7 @@ public class BlockSoulLily extends BlockBaseNotFull {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(BlocksRegistry.SOUL_LILY_SAPLING);
+		return new ItemStack(NetherBlocks.SOUL_LILY_SAPLING);
 	}
 
 	@Override
@@ -221,20 +221,20 @@ public class BlockSoulLily extends BlockBaseNotFull {
 		switch (state.getValue(SHAPE)) {
 			case BIG_BOTTOM:
 			case BIG_MIDDLE:
-				return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM));
 			case BIG_TOP_CENTER:
-				return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM), new ItemStack(BlocksRegistry.SOUL_LILY_SAPLING));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM), new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
 			case MEDIUM_BOTTOM:
-				return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM));
 			case BIG_TOP_SIDE_N:
 			case BIG_TOP_SIDE_S:
 			case BIG_TOP_SIDE_E:
 			case BIG_TOP_SIDE_W:
-				return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM), new ItemStack(BlocksRegistry.SOUL_LILY_SAPLING, MHelper.randRange(0, 1, MHelper.RANDOM)));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM), new ItemStack(NetherBlocks.SOUL_LILY_SAPLING, MHelper.randRange(0, 1, MHelper.RANDOM)));
 			case SMALL:
 			case MEDIUM_TOP:
 			default:
-				return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM), new ItemStack(BlocksRegistry.SOUL_LILY_SAPLING));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM), new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
 		}
 	}
 }

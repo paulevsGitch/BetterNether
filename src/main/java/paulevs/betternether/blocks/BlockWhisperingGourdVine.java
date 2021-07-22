@@ -40,7 +40,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SELECTION = Block.box(2, 0, 2, 14, 16, 14);
@@ -142,9 +142,9 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 		if (FabricToolTags.SHEARS.contains(tool.getItem()) && state.getValue(SHAPE) == TripleShape.MIDDLE) {
 			if (!world.isClientSide) {
 				BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, TripleShape.BOTTOM));
-				world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(BlocksRegistry.WHISPERING_GOURD)));
+				world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(NetherBlocks.WHISPERING_GOURD)));
 				if (world.random.nextBoolean()) {
-					world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(BlocksRegistry.WHISPERING_GOURD)));
+					world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(NetherBlocks.WHISPERING_GOURD)));
 				}
 			}
 			return InteractionResult.sidedSuccess(world.isClientSide);

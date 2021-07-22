@@ -1,10 +1,10 @@
 package paulevs.betternether.structures.plants;
 
 import paulevs.betternether.blocks.BlockCommonPlant;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class StructureAgave extends StructureScatter {
 	public StructureAgave() {
-		super(BlocksRegistry.AGAVE, BlockCommonPlant.AGE, 4);
+		super(NetherBlocks.AGAVE, BlockCommonPlant.AGE, 4);
 	}
 }

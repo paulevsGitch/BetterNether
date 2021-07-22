@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureGrayMold;
 import paulevs.betternether.structures.plants.StructureOrangeMushroom;
@@ -29,8 +29,8 @@ public class NetherMushroomForestEdge extends NetherBiome {
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
 		if (random.nextInt(4) > 0)
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_MYCELIUM.defaultBlockState());
+			BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_MYCELIUM.defaultBlockState());
 		else if (random.nextBoolean())
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.defaultBlockState());
+			BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
 	}
 }

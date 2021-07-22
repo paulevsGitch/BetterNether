@@ -1,9 +1,9 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class StructureBlackBush extends StructureScatter {
 	public StructureBlackBush() {
-		super(BlocksRegistry.BLACK_BUSH);
+		super(NetherBlocks.BLACK_BUSH);
 	}
 }

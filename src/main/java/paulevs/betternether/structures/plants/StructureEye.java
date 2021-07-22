@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureEye implements IStructure {
@@ -19,8 +19,8 @@ public class StructureEye implements IStructure {
 
 		h2 -= 1;
 
-		BlockState vineState = BlocksRegistry.EYE_VINE.defaultBlockState();
-		BlockState eyeState = random.nextBoolean() ? BlocksRegistry.EYEBALL.defaultBlockState() : BlocksRegistry.EYEBALL_SMALL.defaultBlockState();
+		BlockState vineState = NetherBlocks.EYE_VINE.defaultBlockState();
+		BlockState eyeState = random.nextBoolean() ? NetherBlocks.EYEBALL.defaultBlockState() : NetherBlocks.EYEBALL_SMALL.defaultBlockState();
 
 		for (int y = 0; y < h2; y++)
 			BlocksHelper.setWithUpdate(world, pos.below(y), vineState);

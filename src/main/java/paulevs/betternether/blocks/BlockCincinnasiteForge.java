@@ -23,11 +23,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import paulevs.betternether.blockentities.BlockEntityForge;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
 	public BlockCincinnasiteForge() {
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).requiresCorrectToolForDrops().lightLevel(getLuminance()));
+		super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK).requiresCorrectToolForDrops().lightLevel(getLuminance()));
 	}
 
 	private static ToIntFunction<BlockState> getLuminance() {

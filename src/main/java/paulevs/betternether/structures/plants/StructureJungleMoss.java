@@ -1,9 +1,9 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class StructureJungleMoss extends StructureWall {
 	public StructureJungleMoss() {
-		super(BlocksRegistry.JUNGLE_MOSS);
+		super(NetherBlocks.JUNGLE_MOSS);
 	}
 }

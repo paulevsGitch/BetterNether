@@ -37,7 +37,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockStatueRespawner extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 16, 15);
@@ -47,7 +47,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
 	private final ItemStack requiredItem;
 
 	public BlockStatueRespawner() {
-		super(FabricBlockSettings.copyOf(BlocksRegistry.CINCINNASITE_BLOCK).luminance(15).nonOpaque());
+		super(FabricBlockSettings.copyOf(NetherBlocks.CINCINNASITE_BLOCK).luminance(15).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false));
 		this.setDropItself(false);

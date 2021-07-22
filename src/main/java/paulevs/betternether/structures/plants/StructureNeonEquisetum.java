@@ -9,7 +9,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockNeonEquisetum;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureNeonEquisetum implements IStructure {
@@ -24,9 +24,9 @@ public class StructureNeonEquisetum implements IStructure {
 			return;
 		h = MHelper.randRange(3, h, random);
 
-		BlockState bottom = BlocksRegistry.NEON_EQUISETUM.defaultBlockState().setValue(BlockNeonEquisetum.SHAPE, TripleShape.BOTTOM);
-		BlockState middle = BlocksRegistry.NEON_EQUISETUM.defaultBlockState().setValue(BlockNeonEquisetum.SHAPE, TripleShape.MIDDLE);
-		BlockState top = BlocksRegistry.NEON_EQUISETUM.defaultBlockState().setValue(BlockNeonEquisetum.SHAPE, TripleShape.TOP);
+		BlockState bottom = NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(BlockNeonEquisetum.SHAPE, TripleShape.BOTTOM);
+		BlockState middle = NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(BlockNeonEquisetum.SHAPE, TripleShape.MIDDLE);
+		BlockState top = NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(BlockNeonEquisetum.SHAPE, TripleShape.TOP);
 
 		blockPos.set(pos);
 		for (int y = 0; y < h - 2; y++) {

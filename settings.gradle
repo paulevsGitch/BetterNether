@@ -8,3 +8,39 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+// #### Custom Settings ####
+
+//Change the next line to disable local BCLib loading
+def allowLocalLibUse = true
+
+//When true, the local BCLib is also used in commandline builds
+def allowLocalLibInConsoleMode = false
+
+//The path were to look for the local BCLib
+def BCLibPath = '../BCLib'
+
+
+// #### Logic ####
+def isIDE = properties.containsKey('android.injected.invoked.from.ide') 
+            || (System.getenv("XPC_SERVICE_NAME") ?: "").contains("intellij")
+            || (System.getenv("XPC_SERVICE_NAME") ?: "").contains(".idea") 
+            || System.getenv("IDEA_INITIAL_DIRECTORY") != null
+
+println "IntelliJ: ${isIDE}"
+
+def BCLibFolder = new File( BCLibPath )
+if( allowLocalLibUse && (isIDE || allowLocalLibInConsoleMode)  && BCLibFolder.exists() ) {
+    println "Using local BCLib from '${BCLibFolder}' in IntelliJ"
+    println "If you do not want to load the local version of BClib"
+    println "either rename the Folder containing BCLib to something"
+    println "else, or set 'allowLocalLibUse' in settings.gradle"
+    println "to false."
+    println ""
+    println "If you receive version-errors when launching minecraft"
+    println "in IntelliJ, make sure you have set up gradle instead"
+    println "of IntelliJ to compile and run."
+
+    include ':BCLib'
+    project(":BCLib").projectDir = BCLibFolder
+    project(':BCLib').buildFileName = './bclib-composit.gradle'    
+} 

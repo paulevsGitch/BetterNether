@@ -29,8 +29,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.EnumLucisShape;
-import paulevs.betternether.registry.BlocksRegistry;
-import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherItems;
 
 public class BlockLucisMushroom extends BlockBaseNotFull {
 	private static final VoxelShape V_SHAPE = Block.box(0, 0, 0, 16, 9, 16);
@@ -59,7 +59,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 
 	@Override
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-		return Lists.newArrayList(new ItemStack(BlocksRegistry.LUCIS_SPORE), new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(2, 4, MHelper.RANDOM)));
+		return Lists.newArrayList(new ItemStack(NetherBlocks.LUCIS_SPORE), new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(2, 4, MHelper.RANDOM)));
 	}
 
 	@Override
@@ -89,6 +89,6 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(BlocksRegistry.LUCIS_SPORE);
+		return new ItemStack(NetherBlocks.LUCIS_SPORE);
 	}
 }

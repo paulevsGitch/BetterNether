@@ -46,7 +46,7 @@ public class ConfigScreen extends Screen {
 				},
 				(gameOptions, value) -> {
 					float val = value.floatValue();
-					Configs.MAIN.setFloat("improvement", varFog, fogDefault, val);
+					Configs.MAIN.setFloat("improvement", varFog, val);
 					BetterNether.changeFogDensity(val);
 				},
 				(gameOptions, doubleOption) -> {
@@ -59,7 +59,7 @@ public class ConfigScreen extends Screen {
 		this.addRenderableWidget(new Button(this.width / 2 + 40 + 20, 27, 40, 20, new TranslatableComponent("config.betternether.reset"), new OnPress() {
 			@Override
 			public void onPress(Button button) {
-				Configs.MAIN.setFloat("improvement", varFog, fogDefault, fogDefault);
+				Configs.MAIN.setFloat("improvement", varFog, fogDefault);
 				BetterNether.changeFogDensity(fogDefault);
 				fogButton.onClick(fogButton.getWidth() * fogDefault + fogButton.x, fogButton.y);
 			}
@@ -73,7 +73,7 @@ public class ConfigScreen extends Screen {
 			@Override
 			public void onPress(Button button) {
 				boolean value = !Configs.MAIN.getBoolean("improvement", varArmour, true);
-				Configs.MAIN.setBoolean("improvement", varArmour, true, value);
+				Configs.MAIN.setBoolean("improvement", varArmour, value);
 				String color = value ? ": \u00A7a" : ": \u00A7c";
 				button.setMessage(new TranslatableComponent("config.betternether.armour")
 						.append(color + CommonComponents.optionStatus(value).getString()));
@@ -86,7 +86,7 @@ public class ConfigScreen extends Screen {
 		this.addRenderableWidget(new Button(this.width / 2 + 40 + 20, 27 * 2, 40, 20, new TranslatableComponent("config.betternether.reset"), new OnPress() {
 			@Override
 			public void onPress(Button button) {
-				Configs.MAIN.setBoolean("improvement", varArmour, true, true);
+				Configs.MAIN.setBoolean("improvement", varArmour, true);
 				BetterNether.setThinArmor(true);
 				armorButton.setMessage(new TranslatableComponent("config.betternether.armour").append(": \u00A7a" + CommonComponents.optionStatus(true).getString()));
 			}
@@ -100,7 +100,7 @@ public class ConfigScreen extends Screen {
 			@Override
 			public void onPress(Button button) {
 				boolean value = !Configs.MAIN.getBoolean("improvement", varLava, true);
-				Configs.MAIN.setBoolean("improvement", varLava, true, value);
+				Configs.MAIN.setBoolean("improvement", varLava, value);
 				String color = value ? ": \u00A7a" : ": \u00A7c";
 				button.setMessage(new TranslatableComponent("config.betternether.lavafalls")
 						.append(color + CommonComponents.optionStatus(value).getString()));
@@ -113,7 +113,7 @@ public class ConfigScreen extends Screen {
 		this.addRenderableWidget(new Button(this.width / 2 + 40 + 20, 27 * 3, 40, 20, new TranslatableComponent("config.betternether.reset"), new OnPress() {
 			@Override
 			public void onPress(Button button) {
-				Configs.MAIN.setBoolean("improvement", varLava, true, true);
+				Configs.MAIN.setBoolean("improvement", varLava, true);
 				BetterNether.setThinArmor(true);
 				lavaButton.setMessage(new TranslatableComponent("config.betternether.lavafalls").append(": \u00A7a" + CommonComponents.optionStatus(true).getString()));
 			}

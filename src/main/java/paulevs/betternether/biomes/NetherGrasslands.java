@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackApple;
 import paulevs.betternether.structures.plants.StructureBlackBush;
@@ -49,7 +49,7 @@ public class NetherGrasslands extends NetherBiome {
 				BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
 				break;
 			case 1:
-				BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.defaultBlockState());
+				BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
 				break;
 			default:
 				super.genSurfColumn(world, pos, random);

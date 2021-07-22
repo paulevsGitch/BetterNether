@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
@@ -60,7 +60,7 @@ public class NetherSwampland extends NetherBiome {
 		if (value > 0.3 && validWalls(world, pos))
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.defaultBlockState());
 		else if (value > -0.3)
-			BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.SWAMPLAND_GRASS.defaultBlockState());
+			BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.SWAMPLAND_GRASS.defaultBlockState());
 		else {
 			value = TERRAIN.eval(pos.getX() * 0.5, pos.getZ() * 0.5);
 			BlocksHelper.setWithoutUpdate(world, pos, value > 0 ? Blocks.SOUL_SAND.defaultBlockState() : Blocks.SOUL_SOIL.defaultBlockState());

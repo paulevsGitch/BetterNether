@@ -7,13 +7,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockCincinnasitePedestal extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 16, 14);
 
 	public BlockCincinnasitePedestal() {
-		super(FabricBlockSettings.copy(BlocksRegistry.CINCINNASITE_BLOCK).noOcclusion());
+		super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());
 	}
 
 	@Override

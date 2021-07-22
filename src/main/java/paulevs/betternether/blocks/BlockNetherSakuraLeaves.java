@@ -24,7 +24,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockNetherSakuraLeaves extends BlockBaseNotFull {
 	private static final Random RANDOM = new Random();
@@ -60,7 +60,7 @@ public class BlockNetherSakuraLeaves extends BlockBaseNotFull {
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		}
 		else {
-			return RANDOM.nextInt(5) == 0 ? Lists.newArrayList(new ItemStack(BlocksRegistry.NETHER_SAKURA_SAPLING)) : super.getDrops(state, builder);
+			return RANDOM.nextInt(5) == 0 ? Lists.newArrayList(new ItemStack(NetherBlocks.NETHER_SAKURA_SAPLING)) : super.getDrops(state, builder);
 		}
 	}
 
