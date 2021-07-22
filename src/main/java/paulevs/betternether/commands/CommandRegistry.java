@@ -1,6 +1,8 @@
 package paulevs.betternether.commands;
 
+import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
@@ -20,6 +22,7 @@ import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -34,6 +37,7 @@ import paulevs.betternether.registry.NetherBlocks;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommandRegistry {
     private static final DynamicCommandExceptionType ERROR_BIOME_NOT_FOUND = new DynamicCommandExceptionType(
@@ -57,6 +61,11 @@ public class CommandRegistry {
                     .then(Commands.literal("placeall")
                             .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                             .executes(ctx -> placeAllBlocks(ctx))
+                    )
+                    .then(Commands.literal("placewood")
+                            .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
+                            .then(Commands.argument("type", StringArgumentType.string())
+                                .executes(ctx -> placeWoodBlocks(ctx, StringArgumentType.getString(ctx, "type"))))
                     )
         );
     }
@@ -102,6 +111,23 @@ public class CommandRegistry {
         }
     }
 
+    private static int placeWoodBlocks(CommandContext<CommandSourceStack> ctx, String type) throws CommandSyntaxException {
+        final CommandSourceStack source = ctx.getSource();
+        final ServerPlayer player = source.getPlayerOrException();
+        Vec3 pos = source.getPosition();
+
+        List<Block> blocks = new LinkedList<>();
+        for (String name :  NetherBlocks.getPossibleBlocks().stream().sorted().collect(Collectors.toList())) {
+            if (name.indexOf(type)>=0){
+                Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
+                blocks.add(block);
+            }
+        }
+
+        placeBlockRow(player, pos, blocks, 1, true);
+        return Command.SINGLE_SUCCESS;
+    }
+
     private static int placeAllBlocks(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
         final ServerPlayer player = source.getPlayerOrException();
@@ -113,7 +139,7 @@ public class CommandRegistry {
         List<Block> shovels = new LinkedList<>();
         List<Block> other = new LinkedList<>();
 
-        for (String name : NetherBlocks.getPossibleBlocks()) {
+        for (String name : NetherBlocks.getPossibleBlocks().stream().sorted().collect(Collectors.toList())) {
             Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
             BlockBehaviour.Properties properties = ((AbstractBlockAccessor) block).getSettings();
             Material material = ((AbstractBlockSettingsAccessor) properties).getMaterial();
@@ -131,25 +157,47 @@ public class CommandRegistry {
             }
         }
 
+        placeBlockRow(player, pos, pickaxes, 1, false);
+        placeBlockRow(player, pos, axes, 2, false);
+        placeBlockRow(player, pos, hoes, 3, false);
+        placeBlockRow(player, pos, shovels, 4, false);
+        placeBlockRow(player, pos, other, 5, false);
 
-        placeBlockRow(player, pos, pickaxes, 1);
-        placeBlockRow(player, pos, axes, 2);
-        placeBlockRow(player, pos, hoes, 3);
-        placeBlockRow(player, pos, shovels, 4);
-        placeBlockRow(player, pos, other, 5);
-        return 0;
+        return Command.SINGLE_SUCCESS;
     }
 
-    private static void placeBlockRow(ServerPlayer player, Vec3 pos, List<Block> blocklist, int offset) {
+    private static void placeBlockRow(ServerPlayer player, Vec3 pos, List<Block> blocklist, int offset, boolean square) {
         int i=0;
+        int j=0;
+        int rowLen = (int)Math.ceil(Math.sqrt(blocklist.size()));
+        blocklist.sort((a, b) -> {
+            if ((a instanceof DoorBlock) && !(b instanceof DoorBlock))
+                    return 1;
+            if (!(a instanceof DoorBlock) && (b instanceof DoorBlock))
+                    return -1;
+
+            return 0;
+        });
         for (Block bl : blocklist) {
             BlockState state = bl.defaultBlockState();
-            BlockPos blockPos = new BlockPos((int) pos.x + i, (int) pos.y, (int) pos.z + offset);
-            BlocksHelper.setWithoutUpdate(player.getLevel(), blockPos, state);
-            if (bl instanceof DoorBlock){
-                BlocksHelper.setWithoutUpdate(player.getLevel(), blockPos.above(), (BlockState)state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
-            }
+            BlockPos blockPos = new BlockPos((int) pos.x + i, (int) pos.y + j, (int) pos.z + offset);
+            place(player, bl, state, blockPos);
             i++;
+            if (i>=rowLen) {
+                i=0;
+                j++;
+            }
+        }
+    }
+
+    private static void place(ServerPlayer player, Block bl, BlockState state, BlockPos blockPos) {
+
+        if (bl instanceof LadderBlock) {
+
+        }
+        BlocksHelper.setWithoutUpdate(player.getLevel(), blockPos, state);
+        if (bl instanceof DoorBlock){
+            BlocksHelper.setWithoutUpdate(player.getLevel(), blockPos.above(), (BlockState) state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
         }
     }
 }
