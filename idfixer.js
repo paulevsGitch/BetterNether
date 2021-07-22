@@ -11,21 +11,9 @@ const Map = {
 }
 
 const replacments = [
-            Map.entry("betternether:chest", "bclib:chest"),
-            Map.entry("betternether:striped_log_stalagnate", "betternether:stalagnate_stripped_log"),
-            Map.entry("betternether:striped_bark_stalagnate", "betternether:stalagnate_stripped_bark"),
-            Map.entry("betternether:stalagnate_planks_stairs", "betternether:stalagnate_stairs"),
-            Map.entry("betternether:stalagnate_planks_slab", "betternether:stalagnate_slab"),
-            Map.entry("betternether:stalagnate_planks_fence", "betternether:stalagnate_fence"),
-            Map.entry("betternether:stalagnate_planks_gate", "betternether:stalagnate_gate"),
-            Map.entry("betternether:stalagnate_planks_button", "betternether:stalagnate_button"),
-            Map.entry("betternether:stalagnate_planks_plate", "betternether:stalagnate_plate"),
-            Map.entry("betternether:stalagnate_planks_trapdoor", "betternether:stalagnate_trapdoor"),
-            Map.entry("betternether:stalagnate_planks_door", "betternether:stalagnate_door"),
-            Map.entry("betternether:crafting_table_stalagnate", "betternether:stalagnate_crafting_table"),
-            Map.entry("betternether:sign_stalagnate", "betternether:stalagnate_sign"),
-            Map.entry("betternether:chest_stalagnate", "betternether:stalagnate_chest"),
-            Map.entry("betternether:barrel_stalagnate", "betternether:stalagnate_barrel")
+    Map.entry("betternether:taburet_stalagnate", "betternether:stalagnate_taburet"),
+				Map.entry("betternether:chair_stalagnate", "betternether:stalagnate_chair"),
+				Map.entry("betternether:bar_stool_stalagnate", "betternether:stalagnate_bar_stool")
         ]
 
 function findFiles(dir, indent=""){
@@ -45,12 +33,14 @@ function findFiles(dir, indent=""){
                     let jsonnew = json;
 
                     replacments.forEach(what => {
-                        const search = what.old  
-                        const replacer = new RegExp(search, 'g')
-                        jsonnew = jsonnew.replace(search, what.new)
+                        // const search = what.old  
+                        // const replacer = new RegExp(search, 'g')
+                        // jsonnew = jsonnew.replace(replacer, what.new)
+                        jsonnew = jsonnew.split(what.old).join( what.new)
+                        
                     })
                     if (json!=jsonnew){
-                        console.error(`${indent}  |   - changed ${name}${ext}`)
+                        console.log(`${indent}  |   - changed ${name}${ext}`)
                         fs.writeFileSync(path.join(dir, file), jsonnew);
                     }
                 } catch (e) {
@@ -64,7 +54,7 @@ function findFiles(dir, indent=""){
                     const newName = name.replace(what.old, what.new);
                     fs.renameSync(path.join(dir, name+ext), path.join(dir, newName+ext), function (err) {
                         if (err) throw err
-                        console.error(`${indent}  |   - moved ${name}${ext} -> ${newName}${ext}`)
+                        console.log(`${indent}  |   - moved ${name}${ext} -> ${newName}${ext}`)
                       })
                 }
             })
