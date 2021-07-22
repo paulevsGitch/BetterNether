@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockSoulSandstone;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureWartDeadwood;
@@ -55,7 +55,7 @@ public class NetherWartForest extends NetherBiome {
 				BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
 				break;
 			case 3:
-				BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHERRACK_MOSS.defaultBlockState());
+				BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
 				break;
 		}
 
@@ -86,7 +86,7 @@ public class NetherWartForest extends NetherBiome {
 		for (int i = d1; i < d2; i++) {
 			POS.setY(pos.getY() - i);
 			if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
-				BlocksHelper.setWithoutUpdate(world, POS, BlocksRegistry.SOUL_SANDSTONE.defaultBlockState().setValue(BlockSoulSandstone.UP, i == d1));
+				BlocksHelper.setWithoutUpdate(world, POS, NetherBlocks.SOUL_SANDSTONE.defaultBlockState().setValue(BlockSoulSandstone.UP, i == d1));
 			else
 				return;
 		}

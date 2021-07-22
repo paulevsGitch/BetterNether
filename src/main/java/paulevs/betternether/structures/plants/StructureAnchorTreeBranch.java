@@ -14,7 +14,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockAnchorTreeVine;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureAnchorTreeBranch implements IStructure {
@@ -109,9 +109,9 @@ public class StructureAnchorTreeBranch implements IStructure {
 
 		for (BlockPos bpos : POINTS) {
 			if (POINTS.contains(bpos.above()) && POINTS.contains(bpos.below()))
-				state = BlocksRegistry.ANCHOR_TREE.log.defaultBlockState();
+				state = NetherBlocks.ANCHOR_TREE.log.defaultBlockState();
 			else
-				state = BlocksRegistry.ANCHOR_TREE.bark.defaultBlockState();
+				state = NetherBlocks.ANCHOR_TREE.bark.defaultBlockState();
 			BlocksHelper.setWithUpdate(world, bpos, state);
 		}
 
@@ -162,8 +162,8 @@ public class StructureAnchorTreeBranch implements IStructure {
 	}
 
 	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random) {
-		BlockState leaves = BlocksRegistry.ANCHOR_TREE_LEAVES.defaultBlockState();
-		BlockState vine = BlocksRegistry.ANCHOR_TREE_VINE.defaultBlockState();
+		BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState();
+		BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
 		float halfR = radius * 0.5F;
 		float r2 = radius * radius;
 		int start = (int) Math.floor(-radius);

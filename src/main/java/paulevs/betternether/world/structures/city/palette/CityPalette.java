@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockProperties.PottedPlantShape;
 import paulevs.betternether.blocks.BlockSmallLantern;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class CityPalette {
 	private static final Random RANDOM = new Random();
@@ -528,6 +528,6 @@ public class CityPalette {
 	public BlockState getPlant(BlockState input) {
 		String seed = Registry.BLOCK.getKey(input.getBlock()).getPath();
 		RANDOM.setSeed(seed.hashCode());
-		return BlocksRegistry.POTTED_PLANT.defaultBlockState().setValue(BlockPottedPlant.PLANT, PottedPlantShape.values()[RANDOM.nextInt(PottedPlantShape.values().length)]);
+		return NetherBlocks.POTTED_PLANT.defaultBlockState().setValue(BlockPottedPlant.PLANT, PottedPlantShape.values()[RANDOM.nextInt(PottedPlantShape.values().length)]);
 	}
 }

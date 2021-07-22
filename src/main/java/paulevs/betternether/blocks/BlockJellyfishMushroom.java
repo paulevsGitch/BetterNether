@@ -32,8 +32,8 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.JellyShape;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
-import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherItems;
 
 public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	private static final VoxelShape TOP_SHAPE = Block.box(1, 0, 1, 15, 16, 15);
@@ -60,7 +60,7 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING);
+		return new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING);
 	}
 
 	@Environment(EnvType.CLIENT)
@@ -130,13 +130,13 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	@Override
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		if (state.getValue(SHAPE) == TripleShape.TOP) {
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)),
-					new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM)),
+			return Lists.newArrayList(new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)),
+					new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM)),
 					new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, MHelper.RANDOM)));
 		}
 		else if (state.getValue(SHAPE) == TripleShape.BOTTOM)
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)));
+			return Lists.newArrayList(new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)));
 		else
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.MUSHROOM_STEM));
+			return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM));
 	}
 }

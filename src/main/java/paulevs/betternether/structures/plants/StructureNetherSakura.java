@@ -8,7 +8,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureNetherSakura implements IStructure {
@@ -46,9 +46,9 @@ public class StructureNetherSakura implements IStructure {
 						int start = MHelper.randRange(-2, 0, random);
 						for (int y = start; y < length; y++) {
 							POS.setY(pos.getY() - y);
-							if (canReplace(world.getBlockState(POS))) BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.log.defaultBlockState());
+							if (canReplace(world.getBlockState(POS))) BlocksHelper.setWithUpdate(world, POS, NetherBlocks.NETHER_SAKURA.log.defaultBlockState());
 						}
-						if (BlocksRegistry.NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) BlocksHelper.setWithUpdate(world, POS, BlocksRegistry.NETHER_SAKURA.bark.defaultBlockState());
+						if (NetherBlocks.NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) BlocksHelper.setWithUpdate(world, POS, NetherBlocks.NETHER_SAKURA.bark.defaultBlockState());
 					}
 
 					if (d < 2) {
@@ -60,7 +60,7 @@ public class StructureNetherSakura implements IStructure {
 	}
 
 	private void crown(LevelAccessor world, BlockPos pos, double radius, double height, Random random) {
-		BlockState leaves = BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState();
+		BlockState leaves = NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState();
 		double r2 = radius * radius;
 		int start = (int) Math.floor(-radius);
 		for (int cy = 0; cy <= radius; cy++) {
@@ -85,7 +85,7 @@ public class StructureNetherSakura implements IStructure {
 			POS2.setX(pos.getX());
 			POS2.setZ(pos.getZ());
 			POS2.setY(pos.getY() - cy);
-			if (!(state = world.getBlockState(POS2)).getMaterial().isReplaceable() && !BlocksRegistry.NETHER_SAKURA.isTreeLog(state.getBlock())) return;
+			if (!(state = world.getBlockState(POS2)).getMaterial().isReplaceable() && !NetherBlocks.NETHER_SAKURA.isTreeLog(state.getBlock())) return;
 			for (int cx = start; cx <= radius; cx++) {
 				int cx2 = cx * cx;
 				POS2.setX(pos.getX() + cx);

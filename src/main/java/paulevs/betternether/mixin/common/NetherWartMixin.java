@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
 import paulevs.betternether.structures.plants.StructureMedRedMushroom;
 
@@ -29,7 +29,7 @@ public abstract class NetherWartMixin extends BushBlock {
 
 	@Inject(method = "mayPlaceOn", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
 	private void canStay(BlockState floor, BlockGetter view, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
-		if (floor.getBlock() == BlocksRegistry.FARMLAND)
+		if (floor.getBlock() == NetherBlocks.FARMLAND)
 			info.setReturnValue(true);
 	}
 

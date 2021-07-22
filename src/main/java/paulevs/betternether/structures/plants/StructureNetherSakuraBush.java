@@ -7,7 +7,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureNetherSakuraBush implements IStructure {
@@ -42,18 +42,18 @@ public class StructureNetherSakuraBush implements IStructure {
 					sqz *= sqz;
 					POS.setZ(z);
 					if (sqx + sqz < r2 + random.nextFloat() * r) {
-						setIfAir(world, POS, BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
+						setIfAir(world, POS, NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
 					}
 				}
 			}
 		}
 
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_SAKURA.bark.defaultBlockState());
-		setIfAir(world, pos.above(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
-		setIfAir(world, pos.north(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
-		setIfAir(world, pos.south(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
-		setIfAir(world, pos.east(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
-		setIfAir(world, pos.west(), BlocksRegistry.NETHER_SAKURA_LEAVES.defaultBlockState());
+		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_SAKURA.bark.defaultBlockState());
+		setIfAir(world, pos.above(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
+		setIfAir(world, pos.north(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
+		setIfAir(world, pos.south(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
+		setIfAir(world, pos.east(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
+		setIfAir(world, pos.west(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
 	}
 
 	private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {

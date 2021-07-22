@@ -159,14 +159,14 @@
 	"block.betternether.stalagnate_bark": "Stalagnatowcowe drewno",
 	"block.betternether.stalagnate_bowl_placed": "Stalagnatowcowa miska",
 	"block.betternether.stalagnate_planks": "Stalagnatowcowe deski",
-	"block.betternether.stalagnate_planks_button": "Stalagnatowcowy przycisk",
-	"block.betternether.stalagnate_planks_fence": "Stalagnatowcowy płot",
-	"block.betternether.stalagnate_planks_gate": "Stalagnatowcowa furtka",
-	"block.betternether.stalagnate_planks_plate": "Stalagnatowcowa płyta naciskowa",
-	"block.betternether.stalagnate_planks_slab": "Stalagnatowcowa płyta",
-	"block.betternether.stalagnate_planks_stairs": "Stalagnatowcowe schody",
-	"block.betternether.stalagnate_planks_door": "Stalagnatowcowe drzwi",
-	"block.betternether.stalagnate_planks_trapdoor": "Stalagnatowcowa klapa",
+	"block.betternether.stalagnate_button": "Stalagnatowcowy przycisk",
+	"block.betternether.stalagnate_fence": "Stalagnatowcowy płot",
+	"block.betternether.stalagnate_gate": "Stalagnatowcowa furtka",
+	"block.betternether.stalagnate_plate": "Stalagnatowcowa płyta naciskowa",
+	"block.betternether.stalagnate_slab": "Stalagnatowcowa płyta",
+	"block.betternether.stalagnate_stairs": "Stalagnatowcowe schody",
+	"block.betternether.stalagnate_door": "Stalagnatowcowe drzwi",
+	"block.betternether.stalagnate_trapdoor": "Stalagnatowcowa klapa",
 	"block.betternether.stalagnate_seed": "Nasiona stalagnatowca",
 	"block.betternether.wart_seed": "Nasiona brodawki",
 
@@ -317,11 +317,11 @@
 	"block.betternether.chair_wart": "Brodawczanowa drabina",
 	"block.betternether.chair_cincinnasite": "Cyncenazytowa drabina",
 	
-	"block.betternether.striped_log_stalagnate": "Okorowany stalagnatowcowy pień",
+	"block.betternether.stalagnate_stripped_log": "Okorowany stalagnatowcowy pień",
 	"block.betternether.striped_log_willow": "Okorowany wierzbowy pień",
 	"block.betternether.striped_log_wart": "Ociosany brodawczanowy pień",
 	
-	"block.betternether.striped_bark_stalagnate": "Okorowane stalagnatowcowe drewno",
+	"block.betternether.stalagnate_stripped_bark": "Okorowane stalagnatowcowe drewno",
 	"block.betternether.striped_bark_willow": "Okorowane wierzbowe drewno",
 	"block.betternether.striped_bark_wart": "Ociosane brodawczane drewno"
 }

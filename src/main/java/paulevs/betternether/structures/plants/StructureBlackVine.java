@@ -1,9 +1,9 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class StructureBlackVine extends StructureVine {
 	public StructureBlackVine() {
-		super(BlocksRegistry.BLACK_VINE);
+		super(NetherBlocks.BLACK_VINE);
 	}
 }

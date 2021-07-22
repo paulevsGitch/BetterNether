@@ -1,5 +1,5 @@
 {
-    "parent": "betternether:block/stalagnate_planks_door_bottom_hinge",
+    "parent": "betternether:block/stalagnate_door_bottom_hinge",
     "textures": {
         "texture": "betternether:block/anchor_tree_door_bottom",
         "particle": "betternether:block/anchor_tree_door_bottom"

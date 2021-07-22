@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "betternether:block/stalagnate_stripped_log" },
+        "axis=z": { "model": "betternether:block/stalagnate_stripped_log", "x": 90 },
+        "axis=x": { "model": "betternether:block/stalagnate_stripped_log", "x": 90, "y": 90 }
+    }
+}

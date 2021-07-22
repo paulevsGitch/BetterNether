@@ -20,7 +20,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.plants.StructureGiantMold;
 
 public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock {
@@ -46,7 +46,7 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Bonemeala
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return world.getBlockState(pos.below()).getBlock() == BlocksRegistry.NETHER_MYCELIUM;
+		return world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM;
 	}
 
 	@Override

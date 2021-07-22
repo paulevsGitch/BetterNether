@@ -29,7 +29,7 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.BiomesRegistry;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -113,7 +113,7 @@ public class CommandRegistry {
         List<Block> shovels = new LinkedList<>();
         List<Block> other = new LinkedList<>();
 
-        for (String name : BlocksRegistry.getPossibleBlocks()) {
+        for (String name : NetherBlocks.getPossibleBlocks()) {
             Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
             BlockBehaviour.Properties properties = ((AbstractBlockAccessor) block).getSettings();
             Material material = ((AbstractBlockSettingsAccessor) properties).getMaterial();

@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.LavaFluid;
 import paulevs.betternether.blocks.BlockFarmland;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherTags;
 
 public class BlocksHelper {
@@ -94,7 +94,7 @@ public class BlocksHelper {
 
 	public static boolean isBone(BlockState state) {
 		Block b = state.getBlock();
-		return b == Blocks.BONE_BLOCK || b == BlocksRegistry.BONE_BLOCK;
+		return b == Blocks.BONE_BLOCK || b == NetherBlocks.BONE_BLOCK;
 	}
 
 	public static boolean isNetherMycelium(BlockState state) {

@@ -1,6 +1,7 @@
 package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.resources.ResourceLocation;
 import paulevs.betternether.commands.CommandRegistry;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
@@ -8,10 +9,10 @@ import paulevs.betternether.recipes.IntegrationRecipes;
 import paulevs.betternether.recipes.ItemRecipes;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.BrewingRegistry;
 import paulevs.betternether.registry.EntityRegistry;
-import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.NetherItems;
 import paulevs.betternether.registry.NetherTags;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
@@ -33,9 +34,9 @@ public class BetterNether implements ModInitializer {
 		//MinecraftClient.getInstance().getEntityModelLoader().reload(MinecraftClient.getInstance().getResourceManager());
 		initOptions();
 		SoundsRegistry.register();
-		BlocksRegistry.register();
+		NetherBlocks.register();
 		BlockEntitiesRegistry.register();
-		ItemsRegistry.register();
+		NetherItems.register();
 		EntityRegistry.register();
 		StructureTypes.init();
 		BNWorldGenerator.onModInit();
@@ -84,6 +85,10 @@ public class BetterNether implements ModInitializer {
 	
 	public static float getFogEnd() {
 		return fogEnd;
+	}
+
+	public static ResourceLocation makeID(String path) {
+		return new ResourceLocation(MOD_ID, path);
 	}
 }
 

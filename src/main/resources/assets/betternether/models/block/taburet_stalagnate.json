@@ -4,7 +4,7 @@
 	"textures": {
 		"particle": "betternether:block/stalagnate_planks",
 		"texture": "betternether:block/stalagnate_planks",
-		"top": "betternether:block/stalagnate_planks_trapdoor"
+		"top": "betternether:block/stalagnate_trapdoor"
 	},
 	"elements": [ 	 
 		{

@@ -26,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.NetherItems;
 
 public class BlockAgave extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
@@ -77,7 +77,7 @@ public class BlockAgave extends BlockCommonPlant {
 	@Override
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		if (state.getValue(BlockCommonPlant.AGE) == 3) {
-			return Lists.newArrayList(new ItemStack(this, MHelper.randRange(1, 2, MHelper.RANDOM)), new ItemStack(ItemsRegistry.AGAVE_LEAF, MHelper.randRange(2, 5, MHelper.RANDOM)));
+			return Lists.newArrayList(new ItemStack(this, MHelper.randRange(1, 2, MHelper.RANDOM)), new ItemStack(NetherItems.AGAVE_LEAF, MHelper.randRange(2, 5, MHelper.RANDOM)));
 		}
 		return Lists.newArrayList(new ItemStack(this));
 	}

@@ -29,7 +29,7 @@ public class NetherTags {
 	public static final Tag<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
 
 	public static void register() {
-		BlocksRegistry.getPossibleBlocks().forEach(name -> {
+		NetherBlocks.getPossibleBlocks().forEach(name -> {
 			//TODO: maybe we should keep a list of references to all blocks
 			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
 			BlockBehaviour.Properties properties = ((AbstractBlockAccessor) block).getSettings();

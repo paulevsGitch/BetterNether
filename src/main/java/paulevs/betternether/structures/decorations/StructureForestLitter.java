@@ -2,7 +2,7 @@ package paulevs.betternether.structures.decorations;
 
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureObjScatter;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.StructureWorld;
@@ -22,7 +22,7 @@ public class StructureForestLitter extends StructureObjScatter {
 
 	@Override
 	protected boolean isStructure(BlockState state) {
-		return BlocksRegistry.ANCHOR_TREE.isTreeLog(state.getBlock());
+		return NetherBlocks.ANCHOR_TREE.isTreeLog(state.getBlock());
 	}
 
 	@Override

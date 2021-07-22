@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockRubeusLeaves extends BlockBase {
 	private static final int MAX_DIST = 10;
@@ -90,7 +90,7 @@ public class BlockRubeusLeaves extends BlockBase {
 	}
 
 	private static int getDistanceFromLog(BlockState state) {
-		if (state.getBlock() == BlocksRegistry.RUBEUS_LOG || state.getBlock() == BlocksRegistry.RUBEUS_BARK) {
+		if (state.getBlock() == NetherBlocks.RUBEUS_LOG || state.getBlock() == NetherBlocks.RUBEUS_BARK) {
 			return 0;
 		}
 		else {

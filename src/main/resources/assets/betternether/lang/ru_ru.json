@@ -178,14 +178,14 @@
 	"block.betternether.stalagnate_bark": "Древесина сталагната",
 	"block.betternether.stalagnate_bowl_placed": "Сталагнатовая миска",
 	"block.betternether.stalagnate_planks": "Сталагнатовые доски",
-	"block.betternether.stalagnate_planks_button": "Сталагнатовая кнопка",
-	"block.betternether.stalagnate_planks_fence": "Сталагнатовый забор",
-	"block.betternether.stalagnate_planks_gate": "Сталагнатовая калитка",
-	"block.betternether.stalagnate_planks_plate": "Сталагнатовая нажимная плита",
-	"block.betternether.stalagnate_planks_slab": "Сталагнатовая плита",
-	"block.betternether.stalagnate_planks_stairs": "Сталагнатовые ступени",
-	"block.betternether.stalagnate_planks_door": "Сталагнатовая дверь",
-	"block.betternether.stalagnate_planks_trapdoor": "Сталагнатовый люк",
+	"block.betternether.stalagnate_button": "Сталагнатовая кнопка",
+	"block.betternether.stalagnate_fence": "Сталагнатовый забор",
+	"block.betternether.stalagnate_gate": "Сталагнатовая калитка",
+	"block.betternether.stalagnate_plate": "Сталагнатовая нажимная плита",
+	"block.betternether.stalagnate_slab": "Сталагнатовая плита",
+	"block.betternether.stalagnate_stairs": "Сталагнатовые ступени",
+	"block.betternether.stalagnate_door": "Сталагнатовая дверь",
+	"block.betternether.stalagnate_trapdoor": "Сталагнатовый люк",
 	"block.betternether.stalagnate_seed": "Семя сталагната",
 	"block.betternether.wart_seed": "Семя нароста",
 	
@@ -339,11 +339,11 @@
 	"block.betternether.chair_wart": "Наростовый стул",
 	"block.betternether.chair_cincinnasite": "Цинцинназитовый стул",
 	
-	"block.betternether.striped_log_stalagnate": "Обтёсанное бревно сталагната",
+	"block.betternether.stalagnate_stripped_log": "Обтёсанное бревно сталагната",
 	"block.betternether.striped_log_willow": "Обтёсанное бревно ивы",
 	"block.betternether.striped_log_wart": "Обтёсанное бревно нароста",
 	
-	"block.betternether.striped_bark_stalagnate": "Обтёсанная древесина сталагната",
+	"block.betternether.stalagnate_stripped_bark": "Обтёсанная древесина сталагната",
 	"block.betternether.striped_bark_willow": "Обтёсанная древесина ивы",
 	"block.betternether.striped_bark_wart": "Обтёсанная древесина нароста",
 	
@@ -544,7 +544,7 @@
 	"block.betternether.crafting_table_crimson": "Багровый верстак",
 	"block.betternether.crafting_table_warped": "Искажённый верстак",
 	
-	"block.betternether.crafting_table_stalagnate": "Сталагнатовый верстак",
+	"block.betternether.stalagnate_crafting_table": "Сталагнатовый верстак",
 	"block.betternether.crafting_table_reed": "Тростниковый верстак",
 	"block.betternether.crafting_table_willow": "Ивовый верстак",
 	"block.betternether.crafting_table_wart": "Верстак из нароста",
@@ -552,7 +552,7 @@
 	"block.betternether.crafting_table_mushroom": "Грибной верстак",
 	"block.betternether.crafting_table_mushroom_fir": "Верстак из грибной ели",
 	
-	"block.betternether.chest_stalagnate": "Сталагнатовый сундук",
+	"block.betternether.stalagnate_chest": "Сталагнатовый сундук",
 	"block.betternether.chest_reed": "Тростниковый сундук",
 	"block.betternether.chest_willow": "Ивовый сундук",
 	"block.betternether.chest_wart": "Сундук из нароста",
@@ -567,7 +567,7 @@
 	
 	"block.betternether.feather_fern": "Перистый папоротник",
 	
-	"block.betternether.sign_stalagnate": "Сталагнатовая табличка",
+	"block.betternether.stalagnate_sign": "Сталагнатовая табличка",
 	"block.betternether.sign_reed": "Тростниковая табличка",
 	"block.betternether.sign_willow": "Ивовая табличка",
 	"block.betternether.sign_wart": "Табличка из нароста",
@@ -575,7 +575,7 @@
 	"block.betternether.sign_mushroom": "Грибная табличка",
 	"block.betternether.sign_mushroom_fir": "Табличка из грибной ели",
 	
-	"block.betternether.barrel_stalagnate": "Сталагнатовая бочка",
+	"block.betternether.stalagnate_barrel": "Сталагнатовая бочка",
 	"block.betternether.barrel_reed": "Тростниковая бочка",
 	"block.betternether.barrel_willow": "Ивовая бочка",
 	"block.betternether.barrel_wart": "Бочка из нароста",

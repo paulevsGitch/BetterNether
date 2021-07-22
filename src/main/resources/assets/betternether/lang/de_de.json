@@ -178,14 +178,14 @@
   "block.betternether.stalagnate_bark": "Stalagnatholz",
   "block.betternether.stalagnate_bowl_placed": "Stalagnatschüssel",
   "block.betternether.stalagnate_planks": "Stalagnatbretter",
-  "block.betternether.stalagnate_planks_button": "Stalagnatknopf",
-  "block.betternether.stalagnate_planks_fence": "Stalagnatzaun",
-  "block.betternether.stalagnate_planks_gate": "Stalagnatzauntor",
-  "block.betternether.stalagnate_planks_plate": "Stalagnatdruckplatte",
-  "block.betternether.stalagnate_planks_slab": "Stalagnatstufe",
-  "block.betternether.stalagnate_planks_stairs": "Stalagnattreppe",
-  "block.betternether.stalagnate_planks_door": "Stalagnattür",
-  "block.betternether.stalagnate_planks_trapdoor": "Stalagnatfalltüe",
+  "block.betternether.stalagnate_button": "Stalagnatknopf",
+  "block.betternether.stalagnate_fence": "Stalagnatzaun",
+  "block.betternether.stalagnate_gate": "Stalagnatzauntor",
+  "block.betternether.stalagnate_plate": "Stalagnatdruckplatte",
+  "block.betternether.stalagnate_slab": "Stalagnatstufe",
+  "block.betternether.stalagnate_stairs": "Stalagnattreppe",
+  "block.betternether.stalagnate_door": "Stalagnattür",
+  "block.betternether.stalagnate_trapdoor": "Stalagnatfalltüe",
   "block.betternether.stalagnate_seed": "Stalagnatsamen",
   "block.betternether.wart_seed": "Warzensamen",
 
@@ -339,11 +339,11 @@
   "block.betternether.chair_wart": "Warzenstuhl",
   "block.betternether.chair_cincinnasite": "Cincinnasitstuhl",
 
-  "block.betternether.striped_log_stalagnate": "Entrindeter Stalagnatstamm",
+  "block.betternether.stalagnate_stripped_log": "Entrindeter Stalagnatstamm",
   "block.betternether.striped_log_willow": "Entrindeter Weidenstamm",
   "block.betternether.striped_log_wart": "Entrindeter Warzenstamm",
 
-  "block.betternether.striped_bark_stalagnate": "Entrindetes Stalagnatholz",
+  "block.betternether.stalagnate_stripped_bark": "Entrindetes Stalagnatholz",
   "block.betternether.striped_bark_willow": "Entrindetes Weidenholz",
   "block.betternether.striped_bark_wart": "Entrindetes Warzenholz",
 
@@ -543,7 +543,7 @@
   "block.betternether.crafting_table_crimson": "Karmesinwerkbank",
   "block.betternether.crafting_table_warped": "Wirrwerkbank",
 
-  "block.betternether.crafting_table_stalagnate": "Stalagnatwerkbank",
+  "block.betternether.stalagnate_crafting_table": "Stalagnatwerkbank",
   "block.betternether.crafting_table_reed": "Schilfwerkbank",
   "block.betternether.crafting_table_willow": "Weidenwerkbank",
   "block.betternether.crafting_table_wart": "Warzenwerkbank",
@@ -551,7 +551,7 @@
   "block.betternether.crafting_table_mushroom": "Pilzwerkbank",
   "block.betternether.crafting_table_mushroom_fir": "Pilztannenwerkbank",
 
-  "block.betternether.chest_stalagnate": "Stalagnattruhe",
+  "block.betternether.stalagnate_chest": "Stalagnattruhe",
   "block.betternether.chest_reed": "Schilftruhe",
   "block.betternether.chest_willow": "Weidentruhe",
   "block.betternether.chest_wart": "Warzentruhe",
@@ -566,7 +566,7 @@
 
   "block.betternether.feather_fern": "Federfarn",
 
-  "block.betternether.sign_stalagnate": "Stalagnatschild",
+  "block.betternether.stalagnate_sign": "Stalagnatschild",
   "block.betternether.sign_reed": "Schilfschild",
   "block.betternether.sign_willow": "Weidenschild",
   "block.betternether.sign_wart": "Warzenschild",
@@ -574,7 +574,7 @@
   "block.betternether.sign_mushroom": "Pilzschild",
   "block.betternether.sign_mushroom_fir": "Pilztannenschild",
 
-  "block.betternether.barrel_stalagnate": "Stalagnatfass",
+  "block.betternether.stalagnate_barrel": "Stalagnatfass",
   "block.betternether.barrel_reed": "Schilffass",
   "block.betternether.barrel_willow": "Weidenfass",
   "block.betternether.barrel_wart": "Warzenfass",

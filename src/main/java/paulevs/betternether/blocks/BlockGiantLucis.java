@@ -17,8 +17,8 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.registry.BlocksRegistry;
-import paulevs.betternether.registry.ItemsRegistry;
+import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherItems;
 
 public class BlockGiantLucis extends HugeMushroomBlock {
 	public BlockGiantLucis() {
@@ -35,7 +35,7 @@ public class BlockGiantLucis extends HugeMushroomBlock {
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.getParameter(LootContextParams.TOOL);
 		if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0) return Lists.newArrayList(new ItemStack(this.asItem()));
-		return Lists.newArrayList(new ItemStack(BlocksRegistry.LUCIS_SPORE, MHelper.randRange(0, 1, MHelper.RANDOM)),
-				new ItemStack(ItemsRegistry.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM)));
+		return Lists.newArrayList(new ItemStack(NetherBlocks.LUCIS_SPORE, MHelper.randRange(0, 1, MHelper.RANDOM)),
+				new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM)));
 	}
 }

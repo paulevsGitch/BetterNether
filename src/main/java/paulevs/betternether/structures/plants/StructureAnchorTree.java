@@ -18,7 +18,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureAnchorTree implements IStructure {
@@ -40,7 +40,7 @@ public class StructureAnchorTree implements IStructure {
 		int pd = BlocksHelper.downRay(level, down, 128) + 1;
 		for (int i = 0; i < 5; i++) {
 			Block block = level.getBlockState(down.below(pd + i)).getBlock();
-			if (block == Blocks.NETHER_BRICKS || block == BlocksRegistry.NETHER_BRICK_TILE_LARGE || block == BlocksRegistry.NETHER_BRICK_TILE_SMALL)
+			if (block == Blocks.NETHER_BRICKS || block == NetherBlocks.NETHER_BRICK_TILE_LARGE || block == NetherBlocks.NETHER_BRICK_TILE_SMALL)
 				return;
 		}
 
@@ -54,7 +54,7 @@ public class StructureAnchorTree implements IStructure {
 		BLOCKS.clear();
 
 		if (wallPlants == null) {
-			wallPlants = new Block[] { BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.WALL_MUSHROOM_BROWN, BlocksRegistry.WALL_MUSHROOM_RED };
+			wallPlants = new Block[] { NetherBlocks.JUNGLE_MOSS, NetherBlocks.JUNGLE_MOSS, NetherBlocks.WALL_MUSHROOM_BROWN, NetherBlocks.WALL_MUSHROOM_RED };
 		}
 
 		buildLine(blocks, 4);
@@ -73,9 +73,9 @@ public class StructureAnchorTree implements IStructure {
 			if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
 			boolean blockUp = true;
 			if ((blockUp = BLOCKS.contains(bpos.above())) && BLOCKS.contains(bpos.below()))
-				BlocksHelper.setWithUpdate(level, bpos, BlocksRegistry.ANCHOR_TREE.log.defaultBlockState());
+				BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.ANCHOR_TREE.log.defaultBlockState());
 			else
-				BlocksHelper.setWithUpdate(level, bpos, BlocksRegistry.ANCHOR_TREE.bark.defaultBlockState());
+				BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.ANCHOR_TREE.bark.defaultBlockState());
 
 			if (bpos.getY() > 45 && bpos.getY() < 90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
@@ -90,7 +90,7 @@ public class StructureAnchorTree implements IStructure {
 
 			if (bpos.getY() > 64) {
 				if (!blockUp && level.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
-					BlocksHelper.setWithUpdate(level, bpos.above(), BlocksRegistry.MOSS_COVER.defaultBlockState());
+					BlocksHelper.setWithUpdate(level, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
 				}
 
 				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
@@ -237,11 +237,11 @@ public class StructureAnchorTree implements IStructure {
 		}
 
 		for (BlockPos p : placed) {
-			boolean north = world.getBlockState(p.north()).getBlock() != BlocksRegistry.GIANT_LUCIS;
-			boolean south = world.getBlockState(p.south()).getBlock() != BlocksRegistry.GIANT_LUCIS;
-			boolean east = world.getBlockState(p.east()).getBlock() != BlocksRegistry.GIANT_LUCIS;
-			boolean west = world.getBlockState(p.west()).getBlock() != BlocksRegistry.GIANT_LUCIS;
-			BlockState state = BlocksRegistry.GIANT_LUCIS.defaultBlockState();
+			boolean north = world.getBlockState(p.north()).getBlock() != NetherBlocks.GIANT_LUCIS;
+			boolean south = world.getBlockState(p.south()).getBlock() != NetherBlocks.GIANT_LUCIS;
+			boolean east = world.getBlockState(p.east()).getBlock() != NetherBlocks.GIANT_LUCIS;
+			boolean west = world.getBlockState(p.west()).getBlock() != NetherBlocks.GIANT_LUCIS;
+			BlockState state = NetherBlocks.GIANT_LUCIS.defaultBlockState();
 			BlocksHelper.setWithUpdate(world, p, state
 					.setValue(HugeMushroomBlock.NORTH, north)
 					.setValue(HugeMushroomBlock.SOUTH, south)

@@ -26,7 +26,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 1, 16);
@@ -50,7 +50,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
 		Block block = world.getBlockState(pos.below()).getBlock();
-		return block == Blocks.SOUL_SAND || block == BlocksRegistry.VEINED_SAND;
+		return block == Blocks.SOUL_SAND || block == NetherBlocks.VEINED_SAND;
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
 
 	public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
 		if (world.getBlockState(pos.below()).getBlock() == Blocks.SOUL_SAND)
-			world.setBlockAndUpdate(pos.below(), BlocksRegistry.VEINED_SAND.defaultBlockState());
+			world.setBlockAndUpdate(pos.below(), NetherBlocks.VEINED_SAND.defaultBlockState());
 	}
 
 	@Override

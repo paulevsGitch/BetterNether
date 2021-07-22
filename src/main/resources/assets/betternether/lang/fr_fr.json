@@ -175,14 +175,14 @@
 	"block.betternether.stalagnate_bark": "Stalagnate Wood",
 	"block.betternether.stalagnate_bowl_placed": "Stalagnate Bowl",
 	"block.betternether.stalagnate_planks": "Stalagnate Planks",
-	"block.betternether.stalagnate_planks_button": "Stalagnate Button",
-	"block.betternether.stalagnate_planks_fence": "Stalagnate Fence",
-	"block.betternether.stalagnate_planks_gate": "Stalagnate Gate",
-	"block.betternether.stalagnate_planks_plate": "Stalagnate Pressure Plate",
-	"block.betternether.stalagnate_planks_slab": "Stalagnate Slab",
-	"block.betternether.stalagnate_planks_stairs": "Stalagnate Stairs",
-	"block.betternether.stalagnate_planks_door": "Stalagnate Door",
-	"block.betternether.stalagnate_planks_trapdoor": "Stalagnate Trapdoor",
+	"block.betternether.stalagnate_button": "Stalagnate Button",
+	"block.betternether.stalagnate_fence": "Stalagnate Fence",
+	"block.betternether.stalagnate_gate": "Stalagnate Gate",
+	"block.betternether.stalagnate_plate": "Stalagnate Pressure Plate",
+	"block.betternether.stalagnate_slab": "Stalagnate Slab",
+	"block.betternether.stalagnate_stairs": "Stalagnate Stairs",
+	"block.betternether.stalagnate_door": "Stalagnate Door",
+	"block.betternether.stalagnate_trapdoor": "Stalagnate Trapdoor",
 	"block.betternether.stalagnate_seed": "Stalagnate Seed",
 	"block.betternether.wart_seed": "Wart Seed",
 	
@@ -336,11 +336,11 @@
 	"block.betternether.chair_wart": "Wart Chair",
 	"block.betternether.chair_cincinnasite": "Cincinnasite Chair",
 	
-	"block.betternether.striped_log_stalagnate": "Striped Stalagnate Log",
+	"block.betternether.stalagnate_stripped_log": "Striped Stalagnate Log",
 	"block.betternether.striped_log_willow": "Striped Willow Log",
 	"block.betternether.striped_log_wart": "Striped Wart Log",
 	
-	"block.betternether.striped_bark_stalagnate": "Striped Stalagnate Wood",
+	"block.betternether.stalagnate_stripped_bark": "Striped Stalagnate Wood",
 	"block.betternether.striped_bark_willow": "Striped Willow Wood",
 	"block.betternether.striped_bark_wart": "Striped Wart Wood",
 	
@@ -539,7 +539,7 @@
 	"block.betternether.crafting_table_crimson": "Crimson Crafting Table",
 	"block.betternether.crafting_table_warped": "Warped Crafting Table",
 	
-	"block.betternether.crafting_table_stalagnate": "Stalagnate Crafting Table",
+	"block.betternether.stalagnate_crafting_table": "Stalagnate Crafting Table",
 	"block.betternether.crafting_table_reed": "Reeds Crafting Table",
 	"block.betternether.crafting_table_willow": "Willow Crafting Table",
 	"block.betternether.crafting_table_wart": "Wart Crafting Table",
@@ -547,7 +547,7 @@
 	"block.betternether.crafting_table_mushroom": "Mushroom Crafting Table",
 	"block.betternether.crafting_table_mushroom_fir": "Mushroom Fir Crafting Table",
 	
-	"block.betternether.chest_stalagnate": "Stalagnate Chest",
+	"block.betternether.stalagnate_chest": "Stalagnate Chest",
 	"block.betternether.chest_reed": "Reeds Chest",
 	"block.betternether.chest_willow": "Willow Chest",
 	"block.betternether.chest_wart": "Wart Chest",
@@ -562,7 +562,7 @@
 	
 	"block.betternether.feather_fern": "Feather Fern",
 	
-	"block.betternether.sign_stalagnate": "Stalagnate Sign",
+	"block.betternether.stalagnate_sign": "Stalagnate Sign",
 	"block.betternether.sign_reed": "Reeds Sign",
 	"block.betternether.sign_willow": "Willow Sign",
 	"block.betternether.sign_wart": "Wart Sign",
@@ -570,7 +570,7 @@
 	"block.betternether.sign_mushroom": "Mushroom Sign",
 	"block.betternether.sign_mushroom_fir": "Mushroom Fir Sign",
 	
-	"block.betternether.barrel_stalagnate": "Stalagnate Barrel",
+	"block.betternether.stalagnate_barrel": "Stalagnate Barrel",
 	"block.betternether.barrel_reed": "Reeds Barrel",
 	"block.betternether.barrel_willow": "Willow Barrel",
 	"block.betternether.barrel_wart": "Wart Barrel",

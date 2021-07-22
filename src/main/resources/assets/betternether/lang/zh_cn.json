@@ -178,14 +178,14 @@
 	"block.betternether.stalagnate_bark": "石结木",
 	"block.betternether.stalagnate_bowl_placed": "石结木碗",
 	"block.betternether.stalagnate_planks": "石结木板",
-	"block.betternether.stalagnate_planks_button": "石结木按钮",
-	"block.betternether.stalagnate_planks_fence": "石结木栅栏",
-	"block.betternether.stalagnate_planks_gate": "石结木栅栏门",
-	"block.betternether.stalagnate_planks_plate": "石结木压力板",
-	"block.betternether.stalagnate_planks_slab": "石结木台阶",
-	"block.betternether.stalagnate_planks_stairs": "石结木楼梯",
-	"block.betternether.stalagnate_planks_door": "石结木门",
-	"block.betternether.stalagnate_planks_trapdoor": "石结木活板门",
+	"block.betternether.stalagnate_button": "石结木按钮",
+	"block.betternether.stalagnate_fence": "石结木栅栏",
+	"block.betternether.stalagnate_gate": "石结木栅栏门",
+	"block.betternether.stalagnate_plate": "石结木压力板",
+	"block.betternether.stalagnate_slab": "石结木台阶",
+	"block.betternether.stalagnate_stairs": "石结木楼梯",
+	"block.betternether.stalagnate_door": "石结木门",
+	"block.betternether.stalagnate_trapdoor": "石结木活板门",
 	"block.betternether.stalagnate_seed": "石结木幼苗",
 	"block.betternether.wart_seed": "下界疣幼苗",
 	
@@ -339,11 +339,11 @@
 	"block.betternether.chair_wart": "下界疣椅子",
 	"block.betternether.chair_cincinnasite": "辛辛那金椅子",
 	
-	"block.betternether.striped_log_stalagnate": "去皮石结木原木",
+	"block.betternether.stalagnate_stripped_log": "去皮石结木原木",
 	"block.betternether.striped_log_willow": "去皮下界柳木原木",
 	"block.betternether.striped_log_wart": "去皮下界疣原木",
 	
-	"block.betternether.striped_bark_stalagnate": "去皮石结木",
+	"block.betternether.stalagnate_stripped_bark": "去皮石结木",
 	"block.betternether.striped_bark_willow": "去皮下界柳木",
 	"block.betternether.striped_bark_wart": "去皮下界疣",
 	
@@ -542,7 +542,7 @@
 	"block.betternether.crafting_table_crimson": "绯红木工作台",
 	"block.betternether.crafting_table_warped": "诡异木工作台",
 	
-	"block.betternether.crafting_table_stalagnate": "石结木工作台",
+	"block.betternether.stalagnate_crafting_table": "石结木工作台",
 	"block.betternether.crafting_table_reed": "下界芦苇工作台",
 	"block.betternether.crafting_table_willow": "下界柳木工作台",
 	"block.betternether.crafting_table_wart": "下界疣工作台",
@@ -550,7 +550,7 @@
 	"block.betternether.crafting_table_mushroom": "蘑菇工作台",
 	"block.betternether.crafting_table_mushroom_fir": "下界冷杉菇木工作台",
 	
-	"block.betternether.chest_stalagnate": "石结木箱子",
+	"block.betternether.stalagnate_chest": "石结木箱子",
 	"block.betternether.chest_reed": "下界芦苇箱子",
 	"block.betternether.chest_willow": "下界柳木箱子",
 	"block.betternether.chest_wart": "下界疣箱子",
@@ -565,7 +565,7 @@
 	
 	"block.betternether.feather_fern": "毛蕨",
 	
-	"block.betternether.sign_stalagnate": "石结木告示牌",
+	"block.betternether.stalagnate_sign": "石结木告示牌",
 	"block.betternether.sign_reed": "下界芦苇告示牌",
 	"block.betternether.sign_willow": "下界柳木告示牌",
 	"block.betternether.sign_wart": "下界疣告示牌",
@@ -573,7 +573,7 @@
 	"block.betternether.sign_mushroom": "蘑菇告示牌",
 	"block.betternether.sign_mushroom_fir": "下界冷杉菇木告示牌",
 	
-	"block.betternether.barrel_stalagnate": "石结木桶",
+	"block.betternether.stalagnate_barrel": "石结木桶",
 	"block.betternether.barrel_reed": "下界芦苇桶",
 	"block.betternether.barrel_willow": "下界柳木桶",
 	"block.betternether.barrel_wart": "下界疣桶",

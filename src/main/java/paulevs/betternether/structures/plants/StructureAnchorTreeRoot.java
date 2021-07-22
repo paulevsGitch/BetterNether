@@ -18,7 +18,7 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockAnchorTreeVine;
 import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureAnchorTreeRoot implements IStructure {
@@ -51,9 +51,9 @@ public class StructureAnchorTreeRoot implements IStructure {
 
 		BlockState state;
 		if (wallPlants == null) {
-			wallPlants = new Block[] { BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.JUNGLE_MOSS, BlocksRegistry.WALL_MUSHROOM_BROWN, BlocksRegistry.WALL_MUSHROOM_RED };
+			wallPlants = new Block[] { NetherBlocks.JUNGLE_MOSS, NetherBlocks.JUNGLE_MOSS, NetherBlocks.WALL_MUSHROOM_BROWN, NetherBlocks.WALL_MUSHROOM_RED };
 		}
-		BlockState vine = BlocksRegistry.ANCHOR_TREE_VINE.defaultBlockState();
+		BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
 		final int minBuildHeight = world.getMinBuildHeight()+1;
 		final BoundingBox blockBox = BlocksHelper.decorationBounds(world, pos, minBuildHeight, 126);
 		for (BlockPos bpos : BLOCKS) {
@@ -63,12 +63,12 @@ public class StructureAnchorTreeRoot implements IStructure {
 			boolean blockUp = true;
 			boolean blockDown = true;
 			if ((blockUp = BLOCKS.contains(bpos.above())) && (blockDown = BLOCKS.contains(bpos.below())))
-				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.log.defaultBlockState());
+				BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.ANCHOR_TREE.log.defaultBlockState());
 			else
-				BlocksHelper.setWithoutUpdate(world, bpos, BlocksRegistry.ANCHOR_TREE.bark.defaultBlockState());
+				BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.ANCHOR_TREE.bark.defaultBlockState());
 
 			if (!blockUp && world.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
-				BlocksHelper.setWithoutUpdate(world, bpos.above(), BlocksRegistry.MOSS_COVER.defaultBlockState());
+				BlocksHelper.setWithoutUpdate(world, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
 			}
 
 			if ((bpos.getY() & 3) == 0 && StructureAnchorTree.NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
@@ -128,8 +128,8 @@ public class StructureAnchorTreeRoot implements IStructure {
 
 	private boolean canReplace(BlockState state) {
 		return state.getMaterial().isReplaceable()
-				|| state.getBlock() == BlocksRegistry.GIANT_LUCIS
-				|| state.getBlock() == BlocksRegistry.LUCIS_MUSHROOM
+				|| state.getBlock() == NetherBlocks.GIANT_LUCIS
+				|| state.getBlock() == NetherBlocks.LUCIS_MUSHROOM
 				|| state.getBlock() instanceof BlockPlantWall;
 	}
 

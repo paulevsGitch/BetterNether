@@ -10,15 +10,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureCrystal implements IStructure {
 	private static final Block[] PALETTES = new Block[] {
-			BlocksRegistry.OBSIDIAN_GLASS,
+			NetherBlocks.OBSIDIAN_GLASS,
 			Blocks.OBSIDIAN,
-			BlocksRegistry.BLUE_OBSIDIAN_GLASS,
-			BlocksRegistry.BLUE_OBSIDIAN
+			NetherBlocks.BLUE_OBSIDIAN_GLASS,
+			NetherBlocks.BLUE_OBSIDIAN
 	};
 	private static final double SQRT05 = Math.sqrt(0.5);
 	private static final MutableBlockPos POS = new MutableBlockPos();

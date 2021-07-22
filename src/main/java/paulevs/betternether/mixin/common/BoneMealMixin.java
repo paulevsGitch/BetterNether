@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 @Mixin(BoneMealItem.class)
 public class BoneMealMixin {
@@ -73,7 +73,7 @@ public class BoneMealMixin {
 					if (grass != null) {
 						BlocksHelper.setWithUpdate(world, POS, grass);
 						if (world.random.nextInt(3) == 0 && world.getBlockState(down).getBlock() == Blocks.NETHERRACK)
-							BlocksHelper.setWithUpdate(world, down, BlocksRegistry.NETHERRACK_MOSS.defaultBlockState());
+							BlocksHelper.setWithUpdate(world, down, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
 						result = true;
 					}
 					break;
@@ -85,16 +85,16 @@ public class BoneMealMixin {
 
 	private BlockState bnGetGrassState(Level world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
-		if (state.getBlock() == BlocksRegistry.JUNGLE_GRASS)
-			return BlocksRegistry.JUNGLE_PLANT.defaultBlockState();
+		if (state.getBlock() == NetherBlocks.JUNGLE_GRASS)
+			return NetherBlocks.JUNGLE_PLANT.defaultBlockState();
 		else if (BlocksHelper.isSoulSand(state))
-			return BlocksRegistry.SOUL_GRASS.defaultBlockState();
-		else if (state.getBlock() == BlocksRegistry.MUSHROOM_GRASS)
-			return BlocksRegistry.BONE_GRASS.defaultBlockState();
-		else if (state.getBlock() == BlocksRegistry.SWAMPLAND_GRASS)
-			return BlocksRegistry.SWAMP_GRASS.defaultBlockState();
+			return NetherBlocks.SOUL_GRASS.defaultBlockState();
+		else if (state.getBlock() == NetherBlocks.MUSHROOM_GRASS)
+			return NetherBlocks.BONE_GRASS.defaultBlockState();
+		else if (state.getBlock() == NetherBlocks.SWAMPLAND_GRASS)
+			return NetherBlocks.SWAMP_GRASS.defaultBlockState();
 		else if (BlocksHelper.isNetherrack(state) && !BlocksHelper.isNylium(state))
-			return BlocksRegistry.NETHER_GRASS.defaultBlockState();
+			return NetherBlocks.NETHER_GRASS.defaultBlockState();
 		return null;
 	}
 
