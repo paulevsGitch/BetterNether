@@ -1,9 +1,9 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class StructureBoneGrass extends StructureScatter {
 	public StructureBoneGrass() {
-		super(BlocksRegistry.BONE_GRASS);
+		super(NetherBlocks.BONE_GRASS);
 	}
 }

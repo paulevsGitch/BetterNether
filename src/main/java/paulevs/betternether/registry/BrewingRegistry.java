@@ -12,8 +12,8 @@ public class BrewingRegistry {
 	private static final List<BrewingRecipe> RECIPES = new ArrayList<BrewingRecipe>();
 
 	public static void register() {
-		register(new ItemStack(BlocksRegistry.BARREL_CACTUS), new ItemStack(Items.GLASS_BOTTLE), makePotion(Potions.WATER));
-		register(new ItemStack(BlocksRegistry.HOOK_MUSHROOM), makePotion(Potions.AWKWARD), makePotion(Potions.HEALING));
+		register(new ItemStack(NetherBlocks.BARREL_CACTUS), new ItemStack(Items.GLASS_BOTTLE), makePotion(Potions.WATER));
+		register(new ItemStack(NetherBlocks.HOOK_MUSHROOM), makePotion(Potions.AWKWARD), makePotion(Potions.HEALING));
 	}
 
 	private static void register(ItemStack source, ItemStack bottle, ItemStack result) {

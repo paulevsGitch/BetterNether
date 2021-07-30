@@ -12,7 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockWillowLeaves;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.blocks.complex.WillowMaterial;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureWillowBush implements IStructure {
@@ -61,18 +62,18 @@ public class StructureWillowBush implements IStructure {
 						else if (max == ay) dir = Direction.fromAxisAndDirection(Axis.Y, dy > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
 						else
 							dir = Direction.fromAxisAndDirection(Axis.Z, dz > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
-						setIfAir(world, POS, BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, dir));
+						setIfAir(world, POS, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, dir));
 					}
 				}
 			}
 		}
 
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.WILLOW_BARK.defaultBlockState());
-		setIfAir(world, pos.above(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.UP));
-		setIfAir(world, pos.north(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.NORTH));
-		setIfAir(world, pos.south(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.SOUTH));
-		setIfAir(world, pos.east(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.EAST));
-		setIfAir(world, pos.west(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.WEST));
+		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK).defaultBlockState());
+		setIfAir(world, pos.above(), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.UP));
+		setIfAir(world, pos.north(), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.NORTH));
+		setIfAir(world, pos.south(), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.SOUTH));
+		setIfAir(world, pos.east(), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.EAST));
+		setIfAir(world, pos.west(), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.WEST));
 	}
 
 	private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {

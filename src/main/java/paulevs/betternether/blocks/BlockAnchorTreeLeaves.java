@@ -21,7 +21,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockAnchorTreeLeaves extends BlockBaseNotFull {
 	private Random random = new Random();
@@ -70,7 +70,7 @@ public class BlockAnchorTreeLeaves extends BlockBaseNotFull {
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		}
 		else {
-			return random.nextInt(5) == 0 ? Lists.newArrayList(new ItemStack(BlocksRegistry.ANCHOR_TREE_SAPLING)) : super.getDrops(state, builder);
+			return random.nextInt(5) == 0 ? Lists.newArrayList(new ItemStack(NetherBlocks.ANCHOR_TREE_SAPLING)) : super.getDrops(state, builder);
 		}
 	}
 }

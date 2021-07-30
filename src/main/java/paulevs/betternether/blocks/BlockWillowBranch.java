@@ -22,8 +22,10 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
+import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
+import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockWillowBranch extends BlockBaseNotFull {
 	private static final VoxelShape V_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
@@ -68,13 +70,13 @@ public class BlockWillowBranch extends BlockBaseNotFull {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(state.getValue(SHAPE) == WillowBranchShape.END ? BlocksRegistry.WILLOW_TORCH : BlocksRegistry.WILLOW_LEAVES);
+		return new ItemStack(state.getValue(SHAPE) == WillowBranchShape.END ? NetherBlocks.MAT_WILLOW.getTorch() : NetherBlocks.WILLOW_LEAVES);
 	}
 
 	@Override
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		if (state.getValue(SHAPE) == WillowBranchShape.END) {
-			return Lists.newArrayList(new ItemStack(BlocksRegistry.WILLOW_TORCH));
+			return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_WILLOW.getTorch()));
 		}
 		else {
 			return Lists.newArrayList();

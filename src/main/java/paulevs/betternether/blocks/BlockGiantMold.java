@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockGiantMold extends BlockBaseNotFull {
 	private static final VoxelShape TOP_SHAPE = Block.box(2, 2, 2, 14, 14, 14);
@@ -44,7 +44,7 @@ public class BlockGiantMold extends BlockBaseNotFull {
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		TripleShape shape = state.getValue(SHAPE);
-		return shape == TripleShape.TOP ? new ItemStack(BlocksRegistry.GIANT_MOLD_SAPLING) : new ItemStack(BlocksRegistry.MUSHROOM_STEM);
+		return shape == TripleShape.TOP ? new ItemStack(NetherBlocks.GIANT_MOLD_SAPLING) : new ItemStack(NetherBlocks.MUSHROOM_STEM);
 	}
 
 	@Override

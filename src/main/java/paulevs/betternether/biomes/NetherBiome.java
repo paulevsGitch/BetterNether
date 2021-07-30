@@ -12,7 +12,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureType;
@@ -84,15 +84,15 @@ public class NetherBiome {
 	private ArrayList<String> structures;
 	private Biome actualBiome;
 
-	protected static final StructureStalactiteFloor STALACTITE_NETHERRACK = new StructureStalactiteFloor(BlocksRegistry.NETHERRACK_STALACTITE, null);
-	protected static final StructureStalactiteFloor STALACTITE_GLOWSTONE = new StructureStalactiteFloor(BlocksRegistry.GLOWSTONE_STALACTITE, Blocks.GLOWSTONE);
-	protected static final StructureStalactiteFloor STALACTITE_BLACKSTONE = new StructureStalactiteFloor(BlocksRegistry.BLACKSTONE_STALACTITE, Blocks.BLACKSTONE, Blocks.BLACKSTONE, Blocks.NETHERRACK);
-	protected static final StructureStalactiteFloor STALACTITE_BASALT = new StructureStalactiteFloor(BlocksRegistry.BASALT_STALACTITE, Blocks.BASALT, Blocks.BASALT, Blocks.NETHERRACK);
+	protected static final StructureStalactiteFloor STALACTITE_NETHERRACK = new StructureStalactiteFloor(NetherBlocks.NETHERRACK_STALACTITE, null);
+	protected static final StructureStalactiteFloor STALACTITE_GLOWSTONE = new StructureStalactiteFloor(NetherBlocks.GLOWSTONE_STALACTITE, Blocks.GLOWSTONE);
+	protected static final StructureStalactiteFloor STALACTITE_BLACKSTONE = new StructureStalactiteFloor(NetherBlocks.BLACKSTONE_STALACTITE, Blocks.BLACKSTONE, Blocks.BLACKSTONE, Blocks.NETHERRACK);
+	protected static final StructureStalactiteFloor STALACTITE_BASALT = new StructureStalactiteFloor(NetherBlocks.BASALT_STALACTITE, Blocks.BASALT, Blocks.BASALT, Blocks.NETHERRACK);
 
-	protected static final StructureStalactiteCeil STALAGMITE_NETHERRACK = new StructureStalactiteCeil(BlocksRegistry.NETHERRACK_STALACTITE, null);
-	protected static final StructureStalactiteCeil STALAGMITE_GLOWSTONE = new StructureStalactiteCeil(BlocksRegistry.GLOWSTONE_STALACTITE, Blocks.GLOWSTONE);
-	protected static final StructureStalactiteCeil STALAGMITE_BLACKSTONE = new StructureStalactiteCeil(BlocksRegistry.BLACKSTONE_STALACTITE, Blocks.BLACKSTONE, Blocks.BLACKSTONE, Blocks.NETHERRACK);
-	protected static final StructureStalactiteCeil STALAGMITE_BASALT = new StructureStalactiteCeil(BlocksRegistry.BASALT_STALACTITE, Blocks.BASALT, Blocks.BASALT, Blocks.NETHERRACK);
+	protected static final StructureStalactiteCeil STALAGMITE_NETHERRACK = new StructureStalactiteCeil(NetherBlocks.NETHERRACK_STALACTITE, null);
+	protected static final StructureStalactiteCeil STALAGMITE_GLOWSTONE = new StructureStalactiteCeil(NetherBlocks.GLOWSTONE_STALACTITE, Blocks.GLOWSTONE);
+	protected static final StructureStalactiteCeil STALAGMITE_BLACKSTONE = new StructureStalactiteCeil(NetherBlocks.BLACKSTONE_STALACTITE, Blocks.BLACKSTONE, Blocks.BLACKSTONE, Blocks.NETHERRACK);
+	protected static final StructureStalactiteCeil STALAGMITE_BASALT = new StructureStalactiteCeil(NetherBlocks.BASALT_STALACTITE, Blocks.BASALT, Blocks.BASALT, Blocks.NETHERRACK);
 
 	public NetherBiome(BiomeDefinition definition) {
 		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 2, 6);

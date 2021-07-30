@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
@@ -12,7 +13,8 @@ import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
 import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowTrunk;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.blocks.complex.WillowMaterial;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureWillow implements IStructure {
@@ -30,27 +32,28 @@ public class StructureWillow implements IStructure {
 			return;
 
 		h2 = Math.min(h2, mh);
-
-		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.WILLOW_TRUNK.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.BOTTOM));
+		
+		final Block trunk =  NetherBlocks.MAT_WILLOW.getTrunk();
+		BlocksHelper.setWithUpdate(world, pos, trunk.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.BOTTOM));
 		for (int h = 1; h < h2; h++)
 			if (world.isEmptyBlock(pos.above(h)))
-				BlocksHelper.setWithUpdate(world, pos.above(h), BlocksRegistry.WILLOW_TRUNK.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.MIDDLE));
+				BlocksHelper.setWithUpdate(world, pos.above(h), trunk.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.MIDDLE));
 		if (world.isEmptyBlock(pos.above(h2)))
-			BlocksHelper.setWithUpdate(world, pos.above(h2), BlocksRegistry.WILLOW_TRUNK.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.TOP));
+			BlocksHelper.setWithUpdate(world, pos.above(h2), trunk.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.TOP));
 
 		for (int i = 0; i < 4; i++)
 			branch(world, pos.above(h2).relative(HOR[i]), 3 + random.nextInt(2), random, HOR[i], pos.above(h2), 0);
 
-		BlocksHelper.setWithUpdate(world, pos.above(h2 + 1), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.UP));
+		BlocksHelper.setWithUpdate(world, pos.above(h2 + 1), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.UP));
 		for (int i = 0; i < 4; i++)
-			BlocksHelper.setWithUpdate(world, pos.above(h2 + 1).relative(HOR[i]), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, HOR[i]));
+			BlocksHelper.setWithUpdate(world, pos.above(h2 + 1).relative(HOR[i]), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, HOR[i]));
 	}
 
 	private void branch(ServerLevelAccessor world, BlockPos pos, int length, Random random, Direction direction, BlockPos center, int level) {
 		if (level > 5)
 			return;
 		MutableBlockPos bpos = new MutableBlockPos().set(pos);
-		BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, direction));
+		BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, direction));
 		vine(world, pos.below(), 1 + random.nextInt(1));
 		Direction preDir = direction;
 		int l2 = length * length;
@@ -61,15 +64,15 @@ public class StructureWillow implements IStructure {
 				bpos.set(p);
 				if (bpos.distManhattan(center) > length)
 					break;
-				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, dir));
+				BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, dir));
 
 				if (random.nextBoolean()) {
-					BlocksHelper.setWithUpdate(world, bpos.above(), BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.UP));
+					BlocksHelper.setWithUpdate(world, bpos.above(), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.UP));
 				}
 
 				if (random.nextInt(3) == 0) {
 					bpos.setY(bpos.getY() - 1);
-					BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.DOWN));
+					BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.DOWN));
 				}
 
 				if (random.nextBoolean())
@@ -89,7 +92,7 @@ public class StructureWillow implements IStructure {
 				Direction dir2 = HOR[random.nextInt(4)];
 				BlockPos p2 = bpos.relative(dir2);
 				if (world.isEmptyBlock(p2))
-					BlocksHelper.setWithUpdate(world, p2, BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, dir2));
+					BlocksHelper.setWithUpdate(world, p2, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, dir2));
 
 				preDir = dir;
 			}
@@ -97,23 +100,24 @@ public class StructureWillow implements IStructure {
 
 		if (random.nextBoolean()) {
 			if (world.isEmptyBlock(bpos))
-				BlocksHelper.setWithUpdate(world, bpos, BlocksRegistry.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, preDir));
+				BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, preDir));
 		}
 	}
 
 	private void vine(ServerLevelAccessor world, BlockPos pos, int length) {
 		if (!world.isEmptyBlock(pos))
 			return;
-
+		
+		final Block branch =  NetherBlocks.MAT_WILLOW.getBranch();
 		for (int i = 0; i < length; i++) {
 			BlockPos p = pos.below(i);
 			if (world.isEmptyBlock(p.below()))
-				BlocksHelper.setWithUpdate(world, p, BlocksRegistry.WILLOW_BRANCH.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.MIDDLE));
+				BlocksHelper.setWithUpdate(world, p, branch.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.MIDDLE));
 			else {
-				BlocksHelper.setWithUpdate(world, p, BlocksRegistry.WILLOW_BRANCH.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+				BlocksHelper.setWithUpdate(world, p, branch.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
 				return;
 			}
 		}
-		BlocksHelper.setWithUpdate(world, pos.below(length), BlocksRegistry.WILLOW_BRANCH.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+		BlocksHelper.setWithUpdate(world, pos.below(length), branch.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
 	}
 }

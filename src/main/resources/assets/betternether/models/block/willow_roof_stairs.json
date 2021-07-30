@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "betternether:block/willow_roof",
+        "top": "betternether:block/willow_roof",
+        "side": "betternether:block/willow_roof"
+    }
+}

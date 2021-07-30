@@ -28,7 +28,7 @@ import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.registry.BiomesRegistry;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
@@ -248,11 +248,11 @@ public class BNWorldGenerator {
 							}
 						}
 						if (random.nextFloat() < cincinnasiteDensity)
-							spawnOre(BlocksRegistry.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 6, 14);
+							spawnOre(NetherBlocks.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 6, 14);
 						if (random.nextFloat() < rubyDensity)
-							spawnOre(BlocksRegistry.NETHER_RUBY_ORE.defaultBlockState(), world, popPos, random, 1, 5);
+							spawnOre(NetherBlocks.NETHER_RUBY_ORE.defaultBlockState(), world, popPos, random, 1, 5);
 						if (random.nextFloat() < lapisDensity)
-							spawnOre(BlocksRegistry.NETHER_LAPIS_ORE.defaultBlockState(), world, popPos, random, 1, 6);
+							spawnOre(NetherBlocks.NETHER_LAPIS_ORE.defaultBlockState(), world, popPos, random, 1, 6);
 					}
 				}
 			}

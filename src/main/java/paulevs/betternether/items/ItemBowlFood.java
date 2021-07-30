@@ -16,15 +16,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.FoodShape;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
-import paulevs.betternether.registry.BlocksRegistry;
-import paulevs.betternether.registry.ItemsRegistry;
-import paulevs.betternether.tab.CreativeTab;
+import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
+import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherItems;
+import paulevs.betternether.tab.CreativeTabs;
 
 public class ItemBowlFood extends Item {
 	private FoodShape bowlFood;
 
 	public ItemBowlFood(FoodProperties component, FoodShape food) {
-		super(new Item.Properties().tab(CreativeTab.BN_TAB).food(component).stacksTo(16));
+		super(new Item.Properties().tab(CreativeTabs.BN_TAB).food(component).stacksTo(16));
 		food.setItem(this);
 		this.bowlFood = food;
 	}
@@ -32,9 +33,9 @@ public class ItemBowlFood extends Item {
 	public InteractionResult useOn(UseOnContext context) {
 		Level world = context.getLevel();
 		BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
-		if (context.getPlayer().isShiftKeyDown() && world.isEmptyBlock(pos) && BlocksRegistry.STALAGNATE_BOWL.canSurvive(world.getBlockState(pos), world, pos)) {
+		if (context.getPlayer().isShiftKeyDown() && world.isEmptyBlock(pos) && NetherBlocks.MAT_STALAGNATE.getBowl().canSurvive(world.getBlockState(pos), world, pos)) {
 			if (!world.isClientSide()) {
-				BlockState state = BlocksRegistry.STALAGNATE_BOWL.defaultBlockState().setValue(BlockStalagnateBowl.FOOD, bowlFood);
+				BlockState state = NetherBlocks.MAT_STALAGNATE.getBowl().defaultBlockState().setValue(BlockStalagnateBowl.FOOD, bowlFood);
 				BlocksHelper.setWithoutUpdate((ServerLevel) world, pos, state);
 			}
 			if (!context.getPlayer().isCreative()) {
@@ -58,13 +59,13 @@ public class ItemBowlFood extends Item {
 	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
 		if (stack.getCount() == 1) {
 			super.finishUsingItem(stack, world, user);
-			return new ItemStack(ItemsRegistry.STALAGNATE_BOWL, 1);
+			return new ItemStack(NetherItems.STALAGNATE_BOWL, 1);
 		}
 		else {
 			if (user instanceof Player) {
 				Player player = (Player) user;
 				if (!player.isCreative())
-					player.addItem(new ItemStack(ItemsRegistry.STALAGNATE_BOWL));
+					player.addItem(new ItemStack(NetherItems.STALAGNATE_BOWL));
 			}
 			return super.finishUsingItem(stack, world, user);
 		}

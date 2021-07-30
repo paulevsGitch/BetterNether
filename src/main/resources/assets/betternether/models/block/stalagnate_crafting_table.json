@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "betternether:block/stalagnate_crafting_table_front",
+    "north": "betternether:block/stalagnate_crafting_table_front",
+    "south": "betternether:block/stalagnate_crafting_table_side",
+    "east": "betternether:block/stalagnate_crafting_table_side",
+    "west": "betternether:block/stalagnate_crafting_table_front",
+    "up": "betternether:block/stalagnate_crafting_table_top",
+    "down": "betternether:block/stalagnate_crafting_table_bottom"
+  }
+}

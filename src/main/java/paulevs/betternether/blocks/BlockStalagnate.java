@@ -13,8 +13,9 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
+import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockStalagnate extends BlockBaseNotFull {
 	private static final VoxelShape SELECT_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
@@ -46,6 +47,6 @@ public class BlockStalagnate extends BlockBaseNotFull {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return new ItemStack(BlocksRegistry.STALAGNATE_STEM);
+		return new ItemStack(NetherBlocks.MAT_STALAGNATE.getStem());
 	}
 }

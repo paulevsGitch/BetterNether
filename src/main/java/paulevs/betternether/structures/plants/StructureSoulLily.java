@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLily.SoulLilyShape;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureSoulLily implements IStructure {
@@ -54,46 +54,46 @@ public class StructureSoulLily implements IStructure {
 	}
 
 	public void growSmall(LevelAccessor world, BlockPos pos) {
-		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.SOUL_LILY.defaultBlockState());
+		BlocksHelper.setWithUpdate(world, pos, NetherBlocks.SOUL_LILY.defaultBlockState());
 	}
 
 	public void growMedium(LevelAccessor world, BlockPos pos) {
 		BlocksHelper.setWithUpdate(world, pos,
-				BlocksRegistry.SOUL_LILY
+				NetherBlocks.SOUL_LILY
 						.defaultBlockState()
 						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_BOTTOM));
 		BlocksHelper.setWithUpdate(world, pos.above(),
-				BlocksRegistry.SOUL_LILY
+				NetherBlocks.SOUL_LILY
 						.defaultBlockState()
 						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.MEDIUM_TOP));
 	}
 
 	public void growBig(LevelAccessor world, BlockPos pos) {
-		BlocksHelper.setWithUpdate(world, pos, BlocksRegistry.SOUL_LILY
+		BlocksHelper.setWithUpdate(world, pos, NetherBlocks.SOUL_LILY
 				.defaultBlockState()
 				.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_BOTTOM));
 		BlocksHelper.setWithUpdate(world, pos.above(),
-				BlocksRegistry.SOUL_LILY
+				NetherBlocks.SOUL_LILY
 						.defaultBlockState()
 						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_MIDDLE));
 		BlockPos up = pos.above(2);
 		BlocksHelper.setWithUpdate(world, up,
-				BlocksRegistry.SOUL_LILY
+				NetherBlocks.SOUL_LILY
 						.defaultBlockState()
 						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_CENTER));
-		BlocksHelper.setWithUpdate(world, up.north(), BlocksRegistry.SOUL_LILY
+		BlocksHelper.setWithUpdate(world, up.north(), NetherBlocks.SOUL_LILY
 				.defaultBlockState()
 				.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_S));
 		BlocksHelper.setWithUpdate(world, up.south(),
-				BlocksRegistry.SOUL_LILY
+				NetherBlocks.SOUL_LILY
 						.defaultBlockState()
 						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_N));
 		BlocksHelper.setWithUpdate(world, up.east(),
-				BlocksRegistry.SOUL_LILY
+				NetherBlocks.SOUL_LILY
 						.defaultBlockState()
 						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_W));
 		BlocksHelper.setWithUpdate(world, up.west(),
-				BlocksRegistry.SOUL_LILY
+				NetherBlocks.SOUL_LILY
 						.defaultBlockState()
 						.setValue(BlockSoulLily.SHAPE, SoulLilyShape.BIG_TOP_SIDE_E));
 	}

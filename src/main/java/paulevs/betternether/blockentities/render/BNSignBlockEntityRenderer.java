@@ -38,7 +38,7 @@ import com.mojang.math.Vector3f;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
 import paulevs.betternether.blocks.BNSign;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 
 
@@ -196,7 +196,7 @@ public class BNSignBlockEntityRenderer implements BlockEntityRenderer<BNSignBloc
 
 	static {
 		defaultLayer = RenderType.entitySolid(new ResourceLocation("textures/entity/signs/oak.png"));
-		BlocksRegistry.getPossibleBlocks().forEach((name) -> {
+		NetherBlocks.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
 			if (block instanceof BNSign) {
 				RenderType layer = RenderType.entitySolid(new ResourceLocation(BetterNether.MOD_ID, "textures/entity/signs/" + name + ".png"));

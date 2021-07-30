@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class StructurePath implements IStructure {
 	private static final MutableBlockPos B_POS = new MutableBlockPos();
@@ -76,7 +76,7 @@ public class StructurePath implements IStructure {
 	}
 
 	private void makeLantern(LevelAccessor world, BlockPos pos) {
-		BlocksHelper.setWithoutUpdate(world, pos, BlocksRegistry.NETHER_BRICK_WALL.defaultBlockState());
+		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_BRICK_WALL.defaultBlockState());
 		BlocksHelper.setWithoutUpdate(world, pos.above(), Blocks.NETHER_BRICK_FENCE.defaultBlockState());
 		BlocksHelper.setWithoutUpdate(world, pos.above(2), Blocks.NETHER_BRICK_FENCE.defaultBlockState());
 		Direction dir = Direction.NORTH;
@@ -116,14 +116,14 @@ public class StructurePath implements IStructure {
 		 * NetherWartForest || biome instanceof NetherWartForestEdge) { return
 		 * BlocksRegistry.SOUL_SANDSTONE_SLAB.getDefaultState(); }
 		 */
-		return BlocksRegistry.BASALT_SLAB.defaultBlockState();
+		return NetherBlocks.BASALT_SLAB.defaultBlockState();
 	}
 
 	private boolean needsSlab(ServerLevelAccessor world, BlockPos pos) {
 		BlockState state;
 		for (Direction dir : BlocksHelper.HORIZONTAL) {
 			if ((BlocksHelper.isNetherGround(state = world.getBlockState(pos.relative(dir))) ||
-					state.getBlock() == Blocks.BASALT || state.getBlock() == BlocksRegistry.SOUL_SANDSTONE) &&
+					state.getBlock() == Blocks.BASALT || state.getBlock() == NetherBlocks.SOUL_SANDSTONE) &&
 					!world.getBlockState(pos.below().relative(dir.getOpposite())).isAir())
 				return true;
 		}

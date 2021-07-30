@@ -1,5 +1,5 @@
 {
-	"parent": "betternether:block/stalagnate_planks_trapdoor",
+	"parent": "betternether:block/stalagnate_trapdoor",
 	"textures": {
 		"particle": "betternether:block/anchor_tree_trapdoor",
 		"texture": "betternether:block/anchor_tree_trapdoor",

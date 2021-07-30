@@ -1,9 +1,9 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class StructureWallBrownMushroom extends StructureWall {
 	public StructureWallBrownMushroom() {
-		super(BlocksRegistry.WALL_MUSHROOM_BROWN);
+		super(NetherBlocks.WALL_MUSHROOM_BROWN);
 	}
 }

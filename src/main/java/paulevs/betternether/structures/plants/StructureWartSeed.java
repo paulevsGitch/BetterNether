@@ -1,9 +1,9 @@
 package paulevs.betternether.structures.plants;
 
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 
 public class StructureWartSeed extends StructureScatter {
 	public StructureWartSeed() {
-		super(BlocksRegistry.WART_SEED);
+		super(NetherBlocks.WART_SEED);
 	}
 }

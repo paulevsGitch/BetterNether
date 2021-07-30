@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "betternether:block/willow_crafting_table_front",
+    "north": "betternether:block/willow_crafting_table_front",
+    "south": "betternether:block/willow_crafting_table_side",
+    "east": "betternether:block/willow_crafting_table_side",
+    "west": "betternether:block/willow_crafting_table_front",
+    "up": "betternether:block/willow_crafting_table_top",
+    "down": "betternether:block/willow_crafting_table_bottom"
+  }
+}

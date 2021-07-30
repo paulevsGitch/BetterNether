@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.BlockSmoker;
-import paulevs.betternether.registry.BlocksRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureSmoker implements IStructure {
@@ -21,9 +21,9 @@ public class StructureSmoker implements IStructure {
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
 		if (canPlaceAt(world, pos)) {
-			BlockState top = BlocksRegistry.SMOKER.defaultBlockState();
-			BlockState middle = BlocksRegistry.SMOKER.defaultBlockState().setValue(BlockSmoker.SHAPE, TripleShape.MIDDLE);
-			BlockState bottom = BlocksRegistry.SMOKER.defaultBlockState().setValue(BlockSmoker.SHAPE, TripleShape.BOTTOM);
+			BlockState top = NetherBlocks.SMOKER.defaultBlockState();
+			BlockState middle = NetherBlocks.SMOKER.defaultBlockState().setValue(BlockSmoker.SHAPE, TripleShape.MIDDLE);
+			BlockState bottom = NetherBlocks.SMOKER.defaultBlockState().setValue(BlockSmoker.SHAPE, TripleShape.BOTTOM);
 			for (int i = 0; i < 8; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
