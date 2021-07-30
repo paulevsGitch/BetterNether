@@ -1,5 +1,5 @@
 {
-    "parent": "betternether:block/stalagnate",
+    "parent": "betternether:block/stalagnate_trunk",
 	"textures":
 	{
         "side": "betternether:block/mushroom_stem_side",

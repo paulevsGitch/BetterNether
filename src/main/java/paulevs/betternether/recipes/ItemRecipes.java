@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import paulevs.betternether.blocks.complex.WoodenMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 
@@ -57,7 +58,7 @@ public class ItemRecipes {
 
 		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MUSHROOM_FIR_LOG, NetherBlocks.MUSHROOM_FIR_WOOD, 3, "nether_bark_striped");
 		RecipesHelper.makeSimpleRecipe2(NetherBlocks.STRIPED_LOG_RUBEUS, NetherBlocks.STRIPED_BARK_RUBEUS, 3, "nether_bark_striped");
-		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_STALAGNATE.log_stripped, NetherBlocks.MAT_STALAGNATE.bark_stripped, 3, "nether_bark_striped");
+		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_STALAGNATE.getBlock(WoodenMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_STALAGNATE.getBlock(WoodenMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
 		RecipesHelper.makeSimpleRecipe2(NetherBlocks.STRIPED_LOG_WART, NetherBlocks.STRIPED_BARK_WART, 3, "nether_bark_striped");
 		RecipesHelper.makeSimpleRecipe2(NetherBlocks.STRIPED_LOG_WILLOW, NetherBlocks.STRIPED_BARK_WILLOW, 3, "nether_bark_striped");
 	}

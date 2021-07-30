@@ -19,14 +19,15 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.FoodShape;
+import paulevs.betternether.blocks.complex.WoodenMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockStalagnateBowl extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.box(5, 0, 5, 11, 3, 11);
 	public static final EnumProperty<FoodShape> FOOD = BlockProperties.FOOD;
 
-	public BlockStalagnateBowl() {
-		super(FabricBlockSettings.copyOf(NetherBlocks.MAT_STALAGNATE.main).nonOpaque());
+	public BlockStalagnateBowl(Block source) {
+		super(FabricBlockSettings.copyOf(source).nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(FOOD, FoodShape.NONE));
 	}

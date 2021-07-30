@@ -153,12 +153,12 @@ import ru.bclib.blocks.BaseFurnaceBlock;
 import ru.bclib.blocks.BaseSignBlock;
 import ru.bclib.registry.BaseBlockEntities;
 
-public class NetherBlocks extends ru.bclib.registry.BlocksRegistry {
+public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
 
 
 	// Stalagnate //
-	public static final WoodenMaterial MAT_STALAGNATE = new WoodenMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN);
+	public static final WoodenMaterial MAT_STALAGNATE = new WoodenMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN).init();
 	//public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
 	//public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStem(MaterialColor.TERRACOTTA_LIGHT_GREEN));
 	public static final Block STALAGNATE_SEED = registerBlock("stalagnate_seed", new BlockStalagnateSeed());
@@ -175,7 +175,7 @@ public class NetherBlocks extends ru.bclib.registry.BlocksRegistry {
 	//public static final Block STALAGNATE_PLATE = registerPlate("stalagnate_planks_plate", STALAGNATE_PLANKS);
 	//public static final Block STALAGNATE_TRAPDOOR = registerTrapdoor("stalagnate_planks_trapdoor", STALAGNATE_PLANKS);
 	//public static final Block STALAGNATE_DOOR = registerDoor("stalagnate_planks_door", STALAGNATE_PLANKS);
-	public static final Block STALAGNATE_BOWL = registerBlockNI("stalagnate_bowl", new BlockStalagnateBowl());
+	//public static final Block STALAGNATE_BOWL = registerBlockNI("stalagnate_bowl", new BlockStalagnateBowl());
 
 
 	// Reed //
@@ -646,9 +646,9 @@ public class NetherBlocks extends ru.bclib.registry.BlocksRegistry {
 		super(creativeTab);
 	}
 
-	private static ru.bclib.registry.BlocksRegistry BLOCKS_REGISTRY;
+	private static ru.bclib.registry.BlockRegistry BLOCKS_REGISTRY;
 	@NotNull
-	private static ru.bclib.registry.BlocksRegistry getBlockRegistry() {
+	public static ru.bclib.registry.BlockRegistry getBlockRegistry() {
 		if (BLOCKS_REGISTRY == null) {
 			BLOCKS_REGISTRY = new NetherBlocks(CreativeTabs.BN_TAB);
 		}
@@ -657,22 +657,6 @@ public class NetherBlocks extends ru.bclib.registry.BlocksRegistry {
 
 	public static List<Block> getModBlocks() {
 		return getModBlocks(BetterNether.MOD_ID).stream().filter(BlockItem.class::isInstance).map(item -> ((BlockItem) item).getBlock()).collect(Collectors.toList());
-	}
-
-	public static Block registerBlockBCLib(String name, Block block) {
-		if (block==null) return null;
-		return registerBlockBCLib(BetterNether.makeID(name), block);
-	}
-
-	public static Block registerBlockBCLib(ResourceLocation id, Block block) {
-		if (!Configs.BLOCKS.getBooleanRoot(id.getPath(), true)) {
-			return block;
-		}
-
-		BaseBlockEntities.registerSpecialBlock(block);
-		getBlockRegistry().register(id, block);
-
-		return block;
 	}
 
 	public static Block registerBlock(String name, Block block) {
