@@ -30,7 +30,12 @@ import ru.bclib.registry.BlockRegistry;
 import ru.bclib.registry.ItemRegistry;
 
 public class NetherWoodenMaterial extends ru.bclib.complexmaterials.WoodenComplexMaterial {
-    public final static String BLOCK_TRUNK = "trunk";
+    public final static String BLOCK_OPTIONAL_TRUNK = "trunk";
+    public final static String BLOCK_OPTIONAL_BRANCH = "branch";
+    public final static String BLOCK_OPTIONAL_ROOT = "root";
+    public final static String BLOCK_OPTIONAL_SAPLING = "sapling";
+    public final static String BLOCK_OPTIONAL_SEED = "seed";
+    
     public final static String BLOCK_STEM = "stem";
     public final static String BLOCK_ROOF = "roof";
     public final static String BLOCK_ROOF_STAIRS = "roof_stair";
@@ -84,14 +89,6 @@ public class NetherWoodenMaterial extends ru.bclib.complexmaterials.WoodenComple
         }));
         addBlockEntry(new BlockEntry(BLOCK_BAR_STOOL, (complexMaterial, settings) -> {
             return new BNBarStool(getBlock(BLOCK_SLAB));
-        }));
-    
-    
-        addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> {
-            return new BlockStalagnate();
-        }));
-        addBlockEntry(new BlockEntry(BLOCK_BOWL, false, (complexMaterial, settings) -> {
-            return new BlockStalagnateBowl(getBlock(NetherWoodenMaterial.BLOCK_TRUNK));
         }));
     }
     

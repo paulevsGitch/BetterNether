@@ -138,6 +138,7 @@ import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.RubeusLog;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
+import paulevs.betternether.blocks.complex.StalagnateMaterial;
 import paulevs.betternether.blocks.complex.WoodenMaterialOld;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.recipes.RecipesHelper;
@@ -153,24 +154,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 
 
 	// Stalagnate //
-	public static final NetherWoodenMaterial MAT_STALAGNATE = new NetherWoodenMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN).init();
-	//public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
-	//public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStem(MaterialColor.TERRACOTTA_LIGHT_GREEN));
-	public static final Block STALAGNATE_SEED = registerBlock("stalagnate_seed", new BlockStalagnateSeed());
-	//public static final Block STRIPED_LOG_STALAGNATE = registerBlock("striped_log_stalagnate", new BNPillar(MaterialColor.TERRACOTTA_LIGHT_GREEN));
-	//public static final Block STRIPED_BARK_STALAGNATE = registerBlock("striped_bark_stalagnate", new BNPillar(MaterialColor.TERRACOTTA_LIGHT_GREEN));
-	//public static final Block STALAGNATE_LOG = registerLog("stalagnate_log", new BNLogStripable(MaterialColor.TERRACOTTA_LIGHT_GREEN, STRIPED_LOG_STALAGNATE), STALAGNATE_STEM);
-	//public static final Block STALAGNATE_BARK = registerBark("stalagnate_bark", new BNLogStripable(MaterialColor.TERRACOTTA_LIGHT_GREEN, STRIPED_BARK_STALAGNATE), STALAGNATE_LOG);
-	//public static final Block STALAGNATE_PLANKS = registerPlanks("stalagnate_planks", new BNPlanks(MaterialColor.TERRACOTTA_LIGHT_GREEN), 1, STALAGNATE_STEM, STALAGNATE_LOG, STALAGNATE_BARK, STRIPED_LOG_STALAGNATE, STRIPED_BARK_STALAGNATE);
-	//public static final Block STALAGNATE_STAIRS = registerStairs("stalagnate_planks_stairs", STALAGNATE_PLANKS);
-	//public static final Block STALAGNATE_SLAB = registerSlab("stalagnate_planks_slab", STALAGNATE_PLANKS);
-	//public static final Block STALAGNATE_FENCE = registerFence("stalagnate_planks_fence", STALAGNATE_PLANKS);
-	//public static final Block STALAGNATE_GATE = registerGate("stalagnate_planks_gate", STALAGNATE_PLANKS);
-	//public static final Block STALAGNATE_BUTTON = registerButton("stalagnate_planks_button", STALAGNATE_PLANKS);
-	//public static final Block STALAGNATE_PLATE = registerPlate("stalagnate_planks_plate", STALAGNATE_PLANKS);
-	//public static final Block STALAGNATE_TRAPDOOR = registerTrapdoor("stalagnate_planks_trapdoor", STALAGNATE_PLANKS);
-	//public static final Block STALAGNATE_DOOR = registerDoor("stalagnate_planks_door", STALAGNATE_PLANKS);
-	//public static final Block STALAGNATE_BOWL = registerBlockNI("stalagnate_bowl", new BlockStalagnateBowl());
+	public static final NetherWoodenMaterial MAT_STALAGNATE = new StalagnateMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN).init();
 
 
 	// Reed //
@@ -649,11 +633,25 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		}
 		return BLOCKS_REGISTRY;
 	}
+	
+	public static Block registerBlockBCLib(String name, Block block){
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+			return registerBlockBCLib(new ResourceLocation(BetterNether.MOD_ID, name), block);
+		}
+		return block;
+	}
+	
+	private static Block registerBlockBCLib(ResourceLocation id, Block block){
+		getBlockRegistry().register(id, block);
+		return block;
+	}
 
 	public static List<Block> getModBlocks() {
 		return getModBlocks(BetterNether.MOD_ID).stream().filter(BlockItem.class::isInstance).map(item -> ((BlockItem) item).getBlock()).collect(Collectors.toList());
 	}
 
+	
+	
 	public static Block registerBlock(String name, Block block) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
