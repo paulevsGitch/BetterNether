@@ -50,7 +50,7 @@ public class StructureRubeusBush implements IStructure {
 			}
 		}
 
-		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.RUBEUS_BARK.defaultBlockState().setValue(RubeusLog.SHAPE, TripleShape.MIDDLE));
+		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MAT_RUBEUS.getBark().defaultBlockState().setValue(RubeusLog.SHAPE, TripleShape.MIDDLE));
 		setIfAir(world, pos.above(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState());
 		setIfAir(world, pos.north(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState());
 		setIfAir(world, pos.south(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState());

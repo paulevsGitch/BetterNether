@@ -55,7 +55,17 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:roof_tile_willow_slab", "betternether:willow_roof_slab"),
 				Map.entry("betternether:taburet_willow", "betternether:willow_taburet"),
 				Map.entry("betternether:chair_willow", "betternether:willow_chair"),
-				Map.entry("betternether:bar_stool_willow", "betternether:willow_bar_stool")
+				Map.entry("betternether:bar_stool_willow", "betternether:willow_bar_stool"),
+				// Rubeus //
+				Map.entry("betternether:striped_log_rubeus", "betternether:rubeus_stripped_log"),
+				Map.entry("betternether:striped_bark_rubeus", "betternether:rubeus_stripped_bark"),
+				Map.entry("betternether:crafting_table_rubeus", "betternether:rubeus_crafting_table"),
+				Map.entry("betternether:sign_rubeus", "betternether:rubeus_sign"),
+				Map.entry("betternether:chest_rubeus", "betternether:rubeus_chest"),
+				Map.entry("betternether:barrel_rubeus", "betternether:rubeus_barrel"),
+				Map.entry("betternether:taburet_rubeus", "betternether:rubeus_taburet"),
+				Map.entry("betternether:chair_rubeus", "betternether:rubeus_chair"),
+				Map.entry("betternether:bar_stool_rubeus", "betternether:rubeus_bar_stool")
 		);
 	}
 }

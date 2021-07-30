@@ -90,7 +90,7 @@ public class BlockRubeusLeaves extends BlockBase {
 	}
 
 	private static int getDistanceFromLog(BlockState state) {
-		if (state.getBlock() == NetherBlocks.RUBEUS_LOG || state.getBlock() == NetherBlocks.RUBEUS_BARK) {
+		if (state.getBlock() == NetherBlocks.MAT_RUBEUS.getLog() || state.getBlock() == NetherBlocks.MAT_RUBEUS.getBark()) {
 			return 0;
 		}
 		else {

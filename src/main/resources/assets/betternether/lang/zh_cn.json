@@ -449,8 +449,8 @@
 	"item.betternether.spawn_egg_hydrogen_jellyfish": "氢水母刷怪蛋",
 	"block.betternether.brick_pot": "砖花盆",
 	
-	"block.betternether.striped_log_rubeus": "去皮宝红木原木",
-	"block.betternether.striped_bark_rubeus": "去皮宝红木",
+	"block.betternether.rubeus_stripped_log": "去皮宝红木原木",
+	"block.betternether.rubeus_stripped_bark": "去皮宝红木",
 	"block.betternether.rubeus_cone": "宝红木果",
 	"block.betternether.rubeus_sapling": "宝红木幼苗",
 	"block.betternether.rubeus_log": "宝红木原木",
@@ -465,9 +465,9 @@
 	"block.betternether.rubeus_plate": "宝红木压力板",
 	"block.betternether.rubeus_trapdoor": "宝红木活板门",
 	"block.betternether.rubeus_door": "宝红木门",
-	"block.betternether.taburet_rubeus": "宝红木凳子",
-	"block.betternether.chair_rubeus": "宝红木椅子",
-	"block.betternether.bar_stool_rubeus": "宝红木高脚凳",
+	"block.betternether.rubeus_taburet": "宝红木凳子",
+	"block.betternether.rubeus_chair": "宝红木椅子",
+	"block.betternether.rubeus_bar_stool": "宝红木高脚凳",
 	"block.betternether.rubeus_ladder": "宝红木梯子",
 	
 	"item.betternether.cincinnasite_shears": "辛辛那金剪刀",
@@ -546,7 +546,7 @@
 	"block.betternether.crafting_table_reed": "下界芦苇工作台",
 	"block.betternether.willow_crafting_table": "下界柳木工作台",
 	"block.betternether.crafting_table_wart": "下界疣工作台",
-	"block.betternether.crafting_table_rubeus": "宝红木工作台",
+	"block.betternether.rubeus_crafting_table": "宝红木工作台",
 	"block.betternether.crafting_table_mushroom": "蘑菇工作台",
 	"block.betternether.crafting_table_mushroom_fir": "下界冷杉菇木工作台",
 	
@@ -554,7 +554,7 @@
 	"block.betternether.chest_reed": "下界芦苇箱子",
 	"block.betternether.willow_chest": "下界柳木箱子",
 	"block.betternether.chest_wart": "下界疣箱子",
-	"block.betternether.chest_rubeus": "宝红木箱子",
+	"block.betternether.rubeus_chest": "宝红木箱子",
 	"block.betternether.chest_mushroom": "蘑菇箱子",
 	"block.betternether.chest_mushroom_fir": "下界冷杉菇木箱子",
 	
@@ -569,7 +569,7 @@
 	"block.betternether.sign_reed": "下界芦苇告示牌",
 	"block.betternether.willow_sign": "下界柳木告示牌",
 	"block.betternether.sign_wart": "下界疣告示牌",
-	"block.betternether.sign_rubeus": "宝红木告示牌",
+	"block.betternether.rubeus_sign": "宝红木告示牌",
 	"block.betternether.sign_mushroom": "蘑菇告示牌",
 	"block.betternether.sign_mushroom_fir": "下界冷杉菇木告示牌",
 	
@@ -577,7 +577,7 @@
 	"block.betternether.barrel_reed": "下界芦苇桶",
 	"block.betternether.willow_barrel": "下界柳木桶",
 	"block.betternether.barrel_wart": "下界疣桶",
-	"block.betternether.barrel_rubeus": "宝红木桶",
+	"block.betternether.rubeus_barrel": "宝红木桶",
 	"block.betternether.barrel_mushroom": "蘑菇桶",
 	"block.betternether.barrel_mushroom_fir": "下界冷杉菇木桶",
 	

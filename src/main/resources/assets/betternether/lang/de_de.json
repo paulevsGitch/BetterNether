@@ -450,8 +450,8 @@
   "item.betternether.spawn_egg_hydrogen_jellyfish": "Wasserstoffqualle Spawn-Ei",
   "block.betternether.brick_pot": "Nethersteintopf",
 
-  "block.betternether.striped_log_rubeus": "Entrindeter Rubeusstamm",
-  "block.betternether.striped_bark_rubeus": "Entrindetes Rubeusholz",
+  "block.betternether.rubeus_stripped_log": "Entrindeter Rubeusstamm",
+  "block.betternether.rubeus_stripped_bark": "Entrindetes Rubeusholz",
   "block.betternether.rubeus_cone": "Rubeuszapfen",
   "block.betternether.rubeus_sapling": "Rubeussetzling",
   "block.betternether.rubeus_log": "Rubeusstamm",
@@ -466,9 +466,9 @@
   "block.betternether.rubeus_plate": "Rubeusdruckplatte",
   "block.betternether.rubeus_trapdoor": "Rubeusfalltür",
   "block.betternether.rubeus_door": "Rubeustür",
-  "block.betternether.taburet_rubeus": "Rubeushocker",
-  "block.betternether.chair_rubeus": "Rubeusstuhl",
-  "block.betternether.bar_stool_rubeus": "Rubeusbarhocker",
+  "block.betternether.rubeus_taburet": "Rubeushocker",
+  "block.betternether.rubeus_chair": "Rubeusstuhl",
+  "block.betternether.rubeus_bar_stool": "Rubeusbarhocker",
   "block.betternether.rubeus_ladder": "Rubeusleiter",
 
   "item.betternether.cincinnasite_shears": "Cincinnasitschere",
@@ -547,7 +547,7 @@
   "block.betternether.crafting_table_reed": "Schilfwerkbank",
   "block.betternether.willow_crafting_table": "Weidenwerkbank",
   "block.betternether.crafting_table_wart": "Warzenwerkbank",
-  "block.betternether.crafting_table_rubeus": "Rubeuswerkbank",
+  "block.betternether.rubeus_crafting_table": "Rubeuswerkbank",
   "block.betternether.crafting_table_mushroom": "Pilzwerkbank",
   "block.betternether.crafting_table_mushroom_fir": "Pilztannenwerkbank",
 
@@ -555,7 +555,7 @@
   "block.betternether.chest_reed": "Schilftruhe",
   "block.betternether.willow_chest": "Weidentruhe",
   "block.betternether.chest_wart": "Warzentruhe",
-  "block.betternether.chest_rubeus": "Rubeustruhe",
+  "block.betternether.rubeus_chest": "Rubeustruhe",
   "block.betternether.chest_mushroom": "Pilztruhe",
   "block.betternether.chest_mushroom_fir": "Pilztannentruhe",
 
@@ -570,7 +570,7 @@
   "block.betternether.sign_reed": "Schilfschild",
   "block.betternether.willow_sign": "Weidenschild",
   "block.betternether.sign_wart": "Warzenschild",
-  "block.betternether.sign_rubeus": "Rubeusschild",
+  "block.betternether.rubeus_sign": "Rubeusschild",
   "block.betternether.sign_mushroom": "Pilzschild",
   "block.betternether.sign_mushroom_fir": "Pilztannenschild",
 
@@ -578,7 +578,7 @@
   "block.betternether.barrel_reed": "Schilffass",
   "block.betternether.willow_barrel": "Weidenfass",
   "block.betternether.barrel_wart": "Warzenfass",
-  "block.betternether.barrel_rubeus": "Rubeusfass",
+  "block.betternether.rubeus_barrel": "Rubeusfass",
   "block.betternether.barrel_mushroom": "Pilzfass",
   "block.betternether.barrel_mushroom_fir": "Pilztannenfass",
 

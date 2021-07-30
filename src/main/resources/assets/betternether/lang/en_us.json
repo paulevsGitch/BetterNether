@@ -450,8 +450,8 @@
 	"item.betternether.spawn_egg_hydrogen_jellyfish": "Hydrogen Jellyfish Spawn Egg",
 	"block.betternether.brick_pot": "Nether Brick Pot",
 	
-	"block.betternether.striped_log_rubeus": "Stripped Rubeus Log",
-	"block.betternether.striped_bark_rubeus": "Stripped Rubeus Bark",
+	"block.betternether.rubeus_stripped_log": "Stripped Rubeus Log",
+	"block.betternether.rubeus_stripped_bark": "Stripped Rubeus Bark",
 	"block.betternether.rubeus_cone": "Rubeus Cone",
 	"block.betternether.rubeus_sapling": "Rubeus Sapling",
 	"block.betternether.rubeus_log": "Rubeus Log",
@@ -466,9 +466,9 @@
 	"block.betternether.rubeus_plate": "Rubeus Pressure Plate",
 	"block.betternether.rubeus_trapdoor": "Rubeus Trapdoor",
 	"block.betternether.rubeus_door": "Rubeus Door",
-	"block.betternether.taburet_rubeus": "Rubeus Stool",
-	"block.betternether.chair_rubeus": "Rubeus Chair",
-	"block.betternether.bar_stool_rubeus": "Rubeus Bar Stool",
+	"block.betternether.rubeus_taburet": "Rubeus Stool",
+	"block.betternether.rubeus_chair": "Rubeus Chair",
+	"block.betternether.rubeus_bar_stool": "Rubeus Bar Stool",
 	"block.betternether.rubeus_ladder": "Rubeus Ladder",
 	
 	"item.betternether.cincinnasite_shears": "Cincinnasite Shears",
@@ -547,7 +547,7 @@
 	"block.betternether.crafting_table_reed": "Reeds Crafting Table",
 	"block.betternether.willow_crafting_table": "Willow Crafting Table",
 	"block.betternether.crafting_table_wart": "Wart Crafting Table",
-	"block.betternether.crafting_table_rubeus": "Rubeus Crafting Table",
+	"block.betternether.rubeus_crafting_table": "Rubeus Crafting Table",
 	"block.betternether.crafting_table_mushroom": "Mushroom Crafting Table",
 	"block.betternether.crafting_table_mushroom_fir": "Mushroom Fir Crafting Table",
 	
@@ -555,7 +555,7 @@
 	"block.betternether.chest_reed": "Reeds Chest",
 	"block.betternether.willow_chest": "Willow Chest",
 	"block.betternether.chest_wart": "Wart Chest",
-	"block.betternether.chest_rubeus": "Rubeus Chest",
+	"block.betternether.rubeus_chest": "Rubeus Chest",
 	"block.betternether.chest_mushroom": "Mushroom Chest",
 	"block.betternether.chest_mushroom_fir": "Mushroom Fir Chest",
 	
@@ -570,7 +570,7 @@
 	"block.betternether.sign_reed": "Reeds Sign",
 	"block.betternether.willow_sign": "Willow Sign",
 	"block.betternether.sign_wart": "Wart Sign",
-	"block.betternether.sign_rubeus": "Rubeus Sign",
+	"block.betternether.rubeus_sign": "Rubeus Sign",
 	"block.betternether.sign_mushroom": "Mushroom Sign",
 	"block.betternether.sign_mushroom_fir": "Mushroom Fir Sign",
 	
@@ -578,7 +578,7 @@
 	"block.betternether.barrel_reed": "Reeds Barrel",
 	"block.betternether.willow_barrel": "Willow Barrel",
 	"block.betternether.barrel_wart": "Wart Barrel",
-	"block.betternether.barrel_rubeus": "Rubeus Barrel",
+	"block.betternether.rubeus_barrel": "Rubeus Barrel",
 	"block.betternether.barrel_mushroom": "Mushroom Barrel",
 	"block.betternether.barrel_mushroom_fir": "Mushroom Fir Barrel",
 	

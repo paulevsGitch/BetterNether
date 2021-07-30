@@ -128,7 +128,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 
 	@Override
 	protected boolean isStructure(BlockState state) {
-		return state.getBlock() == NetherBlocks.RUBEUS_LOG;
+		return state.getBlock() == NetherBlocks.MAT_RUBEUS.getLog();
 	}
 
 	@Override

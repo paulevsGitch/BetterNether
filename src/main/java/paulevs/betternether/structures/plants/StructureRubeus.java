@@ -110,7 +110,7 @@ public class StructureRubeus extends StructureFuncScatter {
 
 		for (BlockPos bpos : POINTS) {
 			if (POINTS.contains(bpos.above()) && POINTS.contains(bpos.below())) {
-				state = NetherBlocks.RUBEUS_LOG.defaultBlockState();
+				state = NetherBlocks.MAT_RUBEUS.getLog().defaultBlockState();
 				if (MIDDLE.contains(bpos))
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.MIDDLE), false, random);
 				else if (TOP.contains(bpos))
@@ -119,7 +119,7 @@ public class StructureRubeus extends StructureFuncScatter {
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.BOTTOM), natural, random);
 			}
 			else {
-				state = NetherBlocks.RUBEUS_BARK.defaultBlockState();
+				state = NetherBlocks.MAT_RUBEUS.getBark().defaultBlockState();
 				if (MIDDLE.contains(bpos))
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.MIDDLE), false, random);
 				else if (TOP.contains(bpos))
@@ -143,7 +143,7 @@ public class StructureRubeus extends StructureFuncScatter {
 
 	@Override
 	protected boolean isStructure(BlockState state) {
-		return state.getBlock() == NetherBlocks.RUBEUS_LOG;
+		return state.getBlock() == NetherBlocks.MAT_RUBEUS.getLog();
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public class StructureRubeus extends StructureFuncScatter {
 
 	private void crown(LevelAccessor world, int x, int y, int z, float radius, Random random) {
 		BlockState leaves = NetherBlocks.RUBEUS_LEAVES.defaultBlockState();
-		BlockState cone = NetherBlocks.RUBEUS_CONE.defaultBlockState();
+		BlockState cone = NetherBlocks.MAT_RUBEUS.getCone().defaultBlockState();
 		float halfR = radius * 0.5F;
 		float r2 = radius * radius;
 		int start = (int) Math.floor(-radius);
@@ -234,7 +234,7 @@ public class StructureRubeus extends StructureFuncScatter {
 
 	private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {
 		BlockState bState = world.getBlockState(pos);
-		if (world.isEmptyBlock(pos) || bState.getMaterial().isReplaceable() || bState.getBlock() == NetherBlocks.RUBEUS_LEAVES || bState.getBlock() == NetherBlocks.RUBEUS_CONE)
+		if (world.isEmptyBlock(pos) || bState.getMaterial().isReplaceable() || bState.getBlock() == NetherBlocks.RUBEUS_LEAVES || bState.getBlock() == NetherBlocks.MAT_RUBEUS.getCone())
 			BlocksHelper.setWithoutUpdate(world, pos, state);
 	}
 

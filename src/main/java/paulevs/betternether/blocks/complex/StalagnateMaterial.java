@@ -10,7 +10,7 @@ import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStem;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 
-public class StalagnateMaterial extends NetherWoodenMaterial{
+public class StalagnateMaterial extends RoofMaterial{
 	public final static String BLOCK_BOWL = "bowl";
 	public final static String BLOCK_TRUNK = BLOCK_OPTIONAL_TRUNK;
 	public final static String BLOCK_SEED = BLOCK_OPTIONAL_SEED;

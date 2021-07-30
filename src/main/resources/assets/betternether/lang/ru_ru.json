@@ -451,8 +451,8 @@
 	"item.betternether.spawn_egg_hydrogen_jellyfish": "Яйцо призыва водородной медузы",
 	"block.betternether.brick_pot": "Кирпичный горшок",
 	
-	"block.betternether.striped_log_rubeus": "Обтёсанное бревно рубейса",
-	"block.betternether.striped_bark_rubeus": "Обтёсанная древесина рубейса",
+	"block.betternether.rubeus_stripped_log": "Обтёсанное бревно рубейса",
+	"block.betternether.rubeus_stripped_bark": "Обтёсанная древесина рубейса",
 	"block.betternether.rubeus_cone": "Шишка рубейса",
 	"block.betternether.rubeus_sapling": "Саженец рубейса",
 	"block.betternether.rubeus_log": "Бревно рубейса",
@@ -467,9 +467,9 @@
 	"block.betternether.rubeus_plate": "Рубейсовая нажимная плита",
 	"block.betternether.rubeus_trapdoor": "Рубейсовый люк",
 	"block.betternether.rubeus_door": "Рубейсовая дверь",
-	"block.betternether.taburet_rubeus": "Рубейсовый табурет",
-	"block.betternether.chair_rubeus": "Рубейсовый стул",
-	"block.betternether.bar_stool_rubeus": "Рубейсовый барный стул",
+	"block.betternether.rubeus_taburet": "Рубейсовый табурет",
+	"block.betternether.rubeus_chair": "Рубейсовый стул",
+	"block.betternether.rubeus_bar_stool": "Рубейсовый барный стул",
 	"block.betternether.rubeus_ladder": "Рубейсовая лестница",
 	
 	"item.betternether.cincinnasite_shears": "Цинцинназитовые ножницы",
@@ -548,7 +548,7 @@
 	"block.betternether.crafting_table_reed": "Тростниковый верстак",
 	"block.betternether.willow_crafting_table": "Ивовый верстак",
 	"block.betternether.crafting_table_wart": "Верстак из нароста",
-	"block.betternether.crafting_table_rubeus": "Рубейсовый верстак",
+	"block.betternether.rubeus_crafting_table": "Рубейсовый верстак",
 	"block.betternether.crafting_table_mushroom": "Грибной верстак",
 	"block.betternether.crafting_table_mushroom_fir": "Верстак из грибной ели",
 	
@@ -556,7 +556,7 @@
 	"block.betternether.chest_reed": "Тростниковый сундук",
 	"block.betternether.willow_chest": "Ивовый сундук",
 	"block.betternether.chest_wart": "Сундук из нароста",
-	"block.betternether.chest_rubeus": "Рубейсовый сундук",
+	"block.betternether.rubeus_chest": "Рубейсовый сундук",
 	"block.betternether.chest_mushroom": "Грибной сундук",
 	"block.betternether.chest_mushroom_fir": "Сундук из грибной ели",
 	
@@ -571,7 +571,7 @@
 	"block.betternether.sign_reed": "Тростниковая табличка",
 	"block.betternether.willow_sign": "Ивовая табличка",
 	"block.betternether.sign_wart": "Табличка из нароста",
-	"block.betternether.sign_rubeus": "Рубейсовая табличка",
+	"block.betternether.rubeus_sign": "Рубейсовая табличка",
 	"block.betternether.sign_mushroom": "Грибная табличка",
 	"block.betternether.sign_mushroom_fir": "Табличка из грибной ели",
 	
@@ -579,7 +579,7 @@
 	"block.betternether.barrel_reed": "Тростниковая бочка",
 	"block.betternether.willow_barrel": "Ивовая бочка",
 	"block.betternether.barrel_wart": "Бочка из нароста",
-	"block.betternether.barrel_rubeus": "Рубейсовая бочка",
+	"block.betternether.rubeus_barrel": "Рубейсовая бочка",
 	"block.betternether.barrel_mushroom": "Грибная бочка",
 	"block.betternether.barrel_mushroom_fir": "бочка из грибной ели",
 	

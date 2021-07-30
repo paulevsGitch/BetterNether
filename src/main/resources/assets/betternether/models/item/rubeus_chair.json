@@ -1,5 +1,5 @@
 {
-    "parent": "betternether:block/chair_rubeus",
+    "parent": "betternether:block/rubeus_chair",
 	"display": {
         "gui": {
             "rotation": [ 30, 45, 0 ],

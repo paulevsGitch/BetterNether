@@ -10,7 +10,7 @@ import paulevs.betternether.blocks.BlockWillowTorch;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 
-public class WillowMaterial extends NetherWoodenMaterial {
+public class WillowMaterial extends RoofMaterial {
 	public final static String BLOCK_TORCH = "torch";
 	public final static String BLOCK_TRUNK = BLOCK_OPTIONAL_TRUNK;
 	public final static String BLOCK_BRANCH = BLOCK_OPTIONAL_BRANCH;
