@@ -21,6 +21,7 @@ class Patcher_001 extends Patch {
 	public Map<String, String> getIDReplacements() {
 		return Map.ofEntries(
 				Map.entry("betternether:chest", "bclib:chest"),
+				// Stalagnate //
 				Map.entry("betternether:striped_log_stalagnate", "betternether:stalagnate_stripped_log"),
 				Map.entry("betternether:striped_bark_stalagnate", "betternether:stalagnate_stripped_bark"),
 				Map.entry("betternether:stalagnate_planks_stairs", "betternether:stalagnate_stairs"),
@@ -41,7 +42,20 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:taburet_stalagnate", "betternether:stalagnate_taburet"),
 				Map.entry("betternether:chair_stalagnate", "betternether:stalagnate_chair"),
 				Map.entry("betternether:bar_stool_stalagnate", "betternether:stalagnate_bar_stool"),
-				Map.entry("betternether:stalagnate", "betternether:stalagnate_main")
+				Map.entry("betternether:stalagnate", "betternether:stalagnate_trunk"),
+				// Willow //
+				Map.entry("betternether:striped_log_willow", "betternether:willow_stripped_log"),
+				Map.entry("betternether:striped_bark_willow", "betternether:willow_stripped_bark"),
+				Map.entry("betternether:crafting_table_willow", "betternether:willow_crafting_table"),
+				Map.entry("betternether:sign_willow", "betternether:willow_sign"),
+				Map.entry("betternether:chest_willow", "betternether:willow_chest"),
+				Map.entry("betternether:barrel_willow", "betternether:willow_barrel"),
+				Map.entry("betternether:roof_tile_willow", "betternether:willow_roof"),
+				Map.entry("betternether:roof_tile_willow_stairs", "betternether:willow_roof_stairs"),
+				Map.entry("betternether:roof_tile_willow_slab", "betternether:willow_roof_slab"),
+				Map.entry("betternether:taburet_willow", "betternether:willow_taburet"),
+				Map.entry("betternether:chair_willow", "betternether:willow_chair"),
+				Map.entry("betternether:bar_stool_willow", "betternether:willow_bar_stool")
 		);
 	}
 }

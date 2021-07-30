@@ -19,6 +19,7 @@ import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
 import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
+import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureFuncScatter;
 
@@ -97,9 +98,9 @@ public class StructureOldWillow extends StructureFuncScatter {
 			//if (!blockBox.contains(bpos)) continue;
 			if (BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) || state.getMaterial().isReplaceable()) {
 				if (!BLOCKS.contains(bpos.above()) || !BLOCKS.contains(bpos.below()))
-					BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.WILLOW_BARK.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK).defaultBlockState());
 				else
-					BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.WILLOW_LOG.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, bpos, NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_LOG).defaultBlockState());
 
 				if (random.nextInt(8) == 0) {
 					state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
@@ -190,7 +191,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 
 	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random, BoundingBox bounds) {
 		BlockState leaves = NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.NATURAL, false);
-		BlockState vine = NetherBlocks.WILLOW_BRANCH.defaultBlockState();
+		BlockState vine = NetherBlocks.MAT_WILLOW.getBranch().defaultBlockState();
 		float halfR = radius * 0.5F;
 		float r2 = radius * radius;
 		int start = (int) Math.floor(-radius);

@@ -316,16 +316,16 @@
   "block.betternether.roof_tile_cincinnasite": "Cincinnasitschindel",
   "block.betternether.roof_tile_cincinnasite_stairs": "Cincinnasitschindeltreppe",
   "block.betternether.roof_tile_cincinnasite_slab": "Cincinnasitschindelstufe",
-  "block.betternether.roof_tile_willow": "Weidenschindel",
-  "block.betternether.roof_tile_willow_stairs": "Weidenschindeltreppe",
-  "block.betternether.roof_tile_willow_slab": "Weidenschindelstufe",
+  "block.betternether.willow_roof": "Weidenschindel",
+  "block.betternether.willow_roof_stairs": "Weidenschindeltreppe",
+  "block.betternether.willow_roof_slab": "Weidenschindelstufe",
   "block.betternether.roof_tile_wart": "Warzenschindel",
   "block.betternether.roof_tile_wart_stairs": "Warzenschindeltreppe",
   "block.betternether.roof_tile_wart_slab": "Warzenschindelstufe",
 
   "block.betternether.taburet_reeds": "Schilfhocker",
   "block.betternether.stalagnate_taburet": "Stalagnathocker",
-  "block.betternether.taburet_willow": "Weidenhocker",
+  "block.betternether.willow_taburet": "Weidenhocker",
   "block.betternether.taburet_wart": "Warzenhocker",
   "block.betternether.taburet_cincinnasite": "Cincinnasithocker",
 
@@ -335,16 +335,16 @@
 
   "block.betternether.chair_reeds": "Schilfstuhl",
   "block.betternether.stalagnate_chair": "Stalagnatstuhl",
-  "block.betternether.chair_willow": "Weidenstuhl",
+  "block.betternether.willow_chair": "Weidenstuhl",
   "block.betternether.chair_wart": "Warzenstuhl",
   "block.betternether.chair_cincinnasite": "Cincinnasitstuhl",
 
   "block.betternether.stalagnate_stripped_log": "Entrindeter Stalagnatstamm",
-  "block.betternether.striped_log_willow": "Entrindeter Weidenstamm",
+  "block.betternether.willow_stripped_log": "Entrindeter Weidenstamm",
   "block.betternether.striped_log_wart": "Entrindeter Warzenstamm",
 
   "block.betternether.stalagnate_stripped_bark": "Entrindetes Stalagnatholz",
-  "block.betternether.striped_bark_willow": "Entrindetes Weidenholz",
+  "block.betternether.willow_stripped_bark": "Entrindetes Weidenholz",
   "block.betternether.striped_bark_wart": "Entrindetes Warzenholz",
 
   "block.betternether.giant_mold": "Riesenschimmel",
@@ -352,7 +352,7 @@
 
   "block.betternether.bar_stool_reeds": "Schilfbarhocker",
   "block.betternether.stalagnate_bar_stool": "Stalagnatbarhocker",
-  "block.betternether.bar_stool_willow": "Weidenbarhocker",
+  "block.betternether.willow_bar_stool": "Weidenbarhocker",
   "block.betternether.bar_stool_wart": "Warzenbarhocker",
   "block.betternether.bar_stool_cincinnasite": "Cincinnasitbarhocker",
 
@@ -545,7 +545,7 @@
 
   "block.betternether.stalagnate_crafting_table": "Stalagnatwerkbank",
   "block.betternether.crafting_table_reed": "Schilfwerkbank",
-  "block.betternether.crafting_table_willow": "Weidenwerkbank",
+  "block.betternether.willow_crafting_table": "Weidenwerkbank",
   "block.betternether.crafting_table_wart": "Warzenwerkbank",
   "block.betternether.crafting_table_rubeus": "Rubeuswerkbank",
   "block.betternether.crafting_table_mushroom": "Pilzwerkbank",
@@ -553,7 +553,7 @@
 
   "block.betternether.stalagnate_chest": "Stalagnattruhe",
   "block.betternether.chest_reed": "Schilftruhe",
-  "block.betternether.chest_willow": "Weidentruhe",
+  "block.betternether.willow_chest": "Weidentruhe",
   "block.betternether.chest_wart": "Warzentruhe",
   "block.betternether.chest_rubeus": "Rubeustruhe",
   "block.betternether.chest_mushroom": "Pilztruhe",
@@ -568,7 +568,7 @@
 
   "block.betternether.stalagnate_sign": "Stalagnatschild",
   "block.betternether.sign_reed": "Schilfschild",
-  "block.betternether.sign_willow": "Weidenschild",
+  "block.betternether.willow_sign": "Weidenschild",
   "block.betternether.sign_wart": "Warzenschild",
   "block.betternether.sign_rubeus": "Rubeusschild",
   "block.betternether.sign_mushroom": "Pilzschild",
@@ -576,7 +576,7 @@
 
   "block.betternether.stalagnate_barrel": "Stalagnatfass",
   "block.betternether.barrel_reed": "Schilffass",
-  "block.betternether.barrel_willow": "Weidenfass",
+  "block.betternether.willow_barrel": "Weidenfass",
   "block.betternether.barrel_wart": "Warzenfass",
   "block.betternether.barrel_rubeus": "Rubeusfass",
   "block.betternether.barrel_mushroom": "Pilzfass",

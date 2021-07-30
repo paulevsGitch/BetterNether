@@ -139,6 +139,7 @@ import paulevs.betternether.blocks.RubeusLog;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
 import paulevs.betternether.blocks.complex.StalagnateMaterial;
+import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.blocks.complex.WoodenMaterialOld;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.recipes.RecipesHelper;
@@ -152,11 +153,43 @@ import ru.bclib.registry.BaseBlockEntities;
 public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
 
-
 	// Stalagnate //
-	public static final NetherWoodenMaterial MAT_STALAGNATE = new StalagnateMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN).init();
-
-
+	public static final StalagnateMaterial MAT_STALAGNATE = new StalagnateMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN).init();
+	
+	
+	// Willow //
+	public static final WillowMaterial MAT_WILLOW = new WillowMaterial("willow", MaterialColor.TERRACOTTA_RED, MaterialColor.TERRACOTTA_RED).init();
+	public static final Block WILLOW_LEAVES = registerBlockBCLib("willow_leaves", new BlockWillowLeaves());
+	//public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());
+	//public static final Block WILLOW_TRUNK = registerBlockNI("willow_trunk", new BlockWillowTrunk());
+	//public static final Block STRIPED_LOG_WILLOW = registerBlock("striped_log_willow", new BNPillar(MaterialColor.COLOR_PINK));
+	//public static final Block STRIPED_BARK_WILLOW = registerBlock("striped_bark_willow", new BNPillar(MaterialColor.COLOR_PINK));
+	//public static final Block WILLOW_LOG = registerBlock("willow_log", new BNLogStripable(MaterialColor.TERRACOTTA_RED, STRIPED_LOG_WILLOW));
+	//public static final Block WILLOW_BARK = registerBark("willow_bark", new BNLogStripable(MaterialColor.TERRACOTTA_RED, STRIPED_BARK_WILLOW), WILLOW_LOG);
+	//public static final Block WILLOW_SAPLING = registerBlock("willow_sapling", new BlockWillowSapling());
+	//public static final Block WILLOW_PLANKS = registerPlanks("willow_planks", new BNPlanks(MaterialColor.TERRACOTTA_RED), WILLOW_LOG, WILLOW_BARK, STRIPED_LOG_WILLOW, STRIPED_BARK_WILLOW);
+	//public static final Block WILLOW_STAIRS = registerStairs("willow_stairs", WILLOW_PLANKS);
+	//public static final Block WILLOW_SLAB = registerSlab("willow_slab", WILLOW_PLANKS);
+	//public static final Block WILLOW_FENCE = registerFence("willow_fence", WILLOW_PLANKS);
+	//public static final Block WILLOW_GATE = registerGate("willow_gate", WILLOW_PLANKS);
+	//public static final Block WILLOW_BUTTON = registerButton("willow_button", WILLOW_PLANKS);
+	//public static final Block WILLOW_PLATE = registerPlate("willow_plate", WILLOW_PLANKS);
+	//public static final Block WILLOW_TRAPDOOR = registerTrapdoor("willow_trapdoor", WILLOW_PLANKS);
+	//public static final Block WILLOW_DOOR = registerDoor("willow_door", WILLOW_PLANKS);
+	//public static final Block WILLOW_TORCH = registerBlock("willow_torch", new BlockWillowTorch());
+	//public static final Block ROOF_TILE_WILLOW = registerRoof("roof_tile_willow", WILLOW_PLANKS);
+	//public static final Block ROOF_TILE_WILLOW_STAIRS = registerStairs("roof_tile_willow_stairs", ROOF_TILE_WILLOW);
+	//public static final Block ROOF_TILE_WILLOW_SLAB = registerSlab("roof_tile_willow_slab", ROOF_TILE_WILLOW);
+	//public static final Block CRAFTING_TABLE_WILLOW = registerCraftingTable("crafting_table_willow", WILLOW_PLANKS);
+	//public static final Block CHEST_WILLOW = registerChest("chest_willow", WILLOW_PLANKS);
+	//public static final Block BARREL_WILLOW = registerBarrel("barrel_willow", WILLOW_PLANKS, WILLOW_SLAB);
+	//public static final Block TABURET_WILLOW = registerTaburet("taburet_willow", WILLOW_SLAB);
+	//public static final Block CHAIR_WILLOW = registerChair("chair_willow", WILLOW_SLAB);
+	//public static final Block BAR_STOOL_WILLOW = registerBarStool("bar_stool_willow", WILLOW_SLAB);
+	//public static final Block WILLOW_LADDER = registerLadder("willow_ladder", WILLOW_PLANKS);
+	//public static final Block SIGN_WILLOW = registerSign("sign_willow", WILLOW_PLANKS);
+	
+	
 	// Reed //
 	public static final Block NETHER_REED = registerBlock("nether_reed", new BlockNetherReed());
 	public static final Block REEDS_BLOCK = registerBlock("reeds_block", new BlockReedsBlock());
@@ -275,24 +308,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
 	public static final Block BASALT_SLAB = registerSlab("basalt_slab", Blocks.BASALT);
 
-	// Willow //
-	public static final Block WILLOW_BRANCH = registerBlockNI("willow_branch", new BlockWillowBranch());
-	public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BlockWillowLeaves());
-	public static final Block WILLOW_TRUNK = registerBlockNI("willow_trunk", new BlockWillowTrunk());
-	public static final Block STRIPED_LOG_WILLOW = registerBlock("striped_log_willow", new BNPillar(MaterialColor.COLOR_PINK));
-	public static final Block STRIPED_BARK_WILLOW = registerBlock("striped_bark_willow", new BNPillar(MaterialColor.COLOR_PINK));
-	public static final Block WILLOW_LOG = registerBlock("willow_log", new BNLogStripable(MaterialColor.TERRACOTTA_RED, STRIPED_LOG_WILLOW));
-	public static final Block WILLOW_BARK = registerBark("willow_bark", new BNLogStripable(MaterialColor.TERRACOTTA_RED, STRIPED_BARK_WILLOW), WILLOW_LOG);
-	public static final Block WILLOW_SAPLING = registerBlock("willow_sapling", new BlockWillowSapling());
-	public static final Block WILLOW_PLANKS = registerPlanks("willow_planks", new BNPlanks(MaterialColor.TERRACOTTA_RED), WILLOW_LOG, WILLOW_BARK, STRIPED_LOG_WILLOW, STRIPED_BARK_WILLOW);
-	public static final Block WILLOW_STAIRS = registerStairs("willow_stairs", WILLOW_PLANKS);
-	public static final Block WILLOW_SLAB = registerSlab("willow_slab", WILLOW_PLANKS);
-	public static final Block WILLOW_FENCE = registerFence("willow_fence", WILLOW_PLANKS);
-	public static final Block WILLOW_GATE = registerGate("willow_gate", WILLOW_PLANKS);
-	public static final Block WILLOW_BUTTON = registerButton("willow_button", WILLOW_PLANKS);
-	public static final Block WILLOW_PLATE = registerPlate("willow_plate", WILLOW_PLANKS);
-	public static final Block WILLOW_TRAPDOOR = registerTrapdoor("willow_trapdoor", WILLOW_PLANKS);
-	public static final Block WILLOW_DOOR = registerDoor("willow_door", WILLOW_PLANKS);
+	
 
 	// Wart //
 	public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.COLOR_RED));
@@ -457,7 +473,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BLACKSTONE_STALACTITE = registerStalactite("blackstone_stalactite", Blocks.BLACKSTONE);
 	public static final Block BASALT_STALACTITE = registerStalactite("basalt_stalactite", Blocks.BASALT);
 	public static final Block BONE_STALACTITE = registerStalactite("bone_stalactite", BONE_BLOCK);
-	public static final Block WILLOW_TORCH = registerBlock("willow_torch", new BlockWillowTorch());
+	
 
 	// Fire Bowls
 	public static final Block CINCINNASITE_FIRE_BOWL = registerFireBowl("cincinnasite_fire_bowl", CINCINNASITE_FORGED, Blocks.NETHERRACK, NetherItems.CINCINNASITE_INGOT);
@@ -483,18 +499,12 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);
 	public static final Block ROOF_TILE_REEDS_STAIRS = registerStairs("roof_tile_reeds_stairs", ROOF_TILE_REEDS);
 	public static final Block ROOF_TILE_REEDS_SLAB = registerSlab("roof_tile_reeds_slab", ROOF_TILE_REEDS);
-	//public static final Block ROOF_TILE_STALAGNATE = registerRoof("roof_tile_stalagnate", MAT_STALAGNATE.planks);
-	//public static final Block ROOF_TILE_STALAGNATE_STAIRS = registerStairs("roof_tile_stalagnate_stairs", ROOF_TILE_STALAGNATE);
-	//public static final Block ROOF_TILE_STALAGNATE_SLAB = registerSlab("roof_tile_stalagnate_slab", ROOF_TILE_STALAGNATE);
 	public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS);
 	public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerStairs("roof_tile_nether_bricks_stairs", ROOF_TILE_NETHER_BRICKS);
 	public static final Block ROOF_TILE_NETHER_BRICKS_SLAB = registerSlab("roof_tile_nether_bricks_slab", ROOF_TILE_NETHER_BRICKS);
 	public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED);
 	public static final Block ROOF_TILE_CINCINNASITE_STAIRS = registerStairs("roof_tile_cincinnasite_stairs", ROOF_TILE_CINCINNASITE);
 	public static final Block ROOF_TILE_CINCINNASITE_SLAB = registerSlab("roof_tile_cincinnasite_slab", ROOF_TILE_CINCINNASITE);
-	public static final Block ROOF_TILE_WILLOW = registerRoof("roof_tile_willow", WILLOW_PLANKS);
-	public static final Block ROOF_TILE_WILLOW_STAIRS = registerStairs("roof_tile_willow_stairs", ROOF_TILE_WILLOW);
-	public static final Block ROOF_TILE_WILLOW_SLAB = registerSlab("roof_tile_willow_slab", ROOF_TILE_WILLOW);
 	public static final Block ROOF_TILE_WART = registerRoof("roof_tile_wart", WART_PLANKS);
 	public static final Block ROOF_TILE_WART_STAIRS = registerStairs("roof_tile_wart_stairs", ROOF_TILE_WART);
 	public static final Block ROOF_TILE_WART_SLAB = registerSlab("roof_tile_wart_slab", ROOF_TILE_WART);
@@ -512,7 +522,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 
 	//public static final Block CRAFTING_TABLE_STALAGNATE = registerCraftingTable("crafting_table_stalagnate", STALAGNATE_PLANKS);
 	public static final Block CRAFTING_TABLE_REED = registerCraftingTable("crafting_table_reed", REEDS_BLOCK);
-	public static final Block CRAFTING_TABLE_WILLOW = registerCraftingTable("crafting_table_willow", WILLOW_PLANKS);
 	public static final Block CRAFTING_TABLE_WART = registerCraftingTable("crafting_table_wart", WART_PLANKS);
 	public static final Block CRAFTING_TABLE_RUBEUS = registerCraftingTable("crafting_table_rubeus", RUBEUS_PLANKS);
 	public static final Block CRAFTING_TABLE_MUSHROOM = registerCraftingTable("crafting_table_mushroom", MUSHROOM_PLANKS);
@@ -524,9 +533,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CHEST_CRIMSON = registerChest("chest_crimson", Blocks.CRIMSON_PLANKS);
 	public static final Block CHEST_WARPED = registerChest("chest_warped", Blocks.WARPED_PLANKS);
 
-	//public static final Block CHEST_STALAGNATE = registerChest("chest_stalagnate", STALAGNATE_PLANKS);
 	public static final Block CHEST_REED = registerChest("chest_reed", REEDS_BLOCK);
-	public static final Block CHEST_WILLOW = registerChest("chest_willow", WILLOW_PLANKS);
 	public static final Block CHEST_WART = registerChest("chest_wart", WART_PLANKS);
 	public static final Block CHEST_RUBEUS = registerChest("chest_rubeus", RUBEUS_PLANKS);
 	public static final Block CHEST_MUSHROOM = registerChest("chest_mushroom", MUSHROOM_PLANKS);
@@ -535,9 +542,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BARREL_CRIMSON = registerBarrel("barrel_crimson", Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_SLAB);
 	public static final Block BARREL_WARPED = registerBarrel("barrel_warped", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB);
 
-	//public static final Block BARREL_STALAGNATE = registerBarrel("barrel_stalagnate", STALAGNATE_PLANKS, STALAGNATE_SLAB);
 	public static final Block BARREL_REED = registerBarrel("barrel_reed", REEDS_BLOCK, REEDS_SLAB);
-	public static final Block BARREL_WILLOW = registerBarrel("barrel_willow", WILLOW_PLANKS, WILLOW_SLAB);
 	public static final Block BARREL_WART = registerBarrel("barrel_wart", WART_PLANKS, WART_SLAB);
 	public static final Block BARREL_RUBEUS = registerBarrel("barrel_rubeus", RUBEUS_PLANKS, RUBEUS_SLAB);
 	public static final Block BARREL_MUSHROOM = registerBarrel("barrel_mushroom", MUSHROOM_PLANKS, MUSHROOM_SLAB);
@@ -554,8 +559,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block TABURET_WARPED = registerTaburet("taburet_warped", Blocks.WARPED_SLAB);
 
 	public static final Block TABURET_REEDS = registerTaburet("taburet_reeds", REEDS_SLAB);
-	//public static final Block TABURET_STALAGNATE = registerTaburet("taburet_stalagnate", MAT_STALAGNATE.slab);
-	public static final Block TABURET_WILLOW = registerTaburet("taburet_willow", WILLOW_SLAB);
 	public static final Block TABURET_WART = registerTaburet("taburet_wart", WART_SLAB);
 	public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
 	public static final Block TABURET_MUSHROOM = registerTaburet("taburet_mushroom", MUSHROOM_SLAB);
@@ -573,8 +576,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CHAIR_WARPED = registerChair("chair_warped", Blocks.WARPED_SLAB);
 
 	public static final Block CHAIR_REEDS = registerChair("chair_reeds", REEDS_SLAB);
-	//public static final Block CHAIR_STALAGNATE = registerChair("chair_stalagnate", MAT_STALAGNATE.slab);
-	public static final Block CHAIR_WILLOW = registerChair("chair_willow", WILLOW_SLAB);
 	public static final Block CHAIR_WART = registerChair("chair_wart", WART_SLAB);
 	public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
 	public static final Block CHAIR_MUSHROOM = registerChair("chair_mushroom", MUSHROOM_SLAB);
@@ -592,8 +593,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BAR_STOOL_WARPED = registerBarStool("bar_stool_warped", Blocks.WARPED_SLAB);
 
 	public static final Block BAR_STOOL_REEDS = registerBarStool("bar_stool_reeds", REEDS_SLAB);
-	//public static final Block BAR_STOOL_STALAGNATE = registerBarStool("bar_stool_stalagnate", MAT_STALAGNATE.slab);
-	public static final Block BAR_STOOL_WILLOW = registerBarStool("bar_stool_willow", WILLOW_SLAB);
 	public static final Block BAR_STOOL_WART = registerBarStool("bar_stool_wart", WART_SLAB);
 	public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
 	public static final Block BAR_STOOL_MUSHROOM = registerBarStool("bar_stool_mushroom", MUSHROOM_SLAB);
@@ -605,17 +604,13 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block WARPED_LADDER = registerLadder("warped_ladder", Blocks.WARPED_PLANKS);
 
 	public static final Block REEDS_LADDER = registerLadder("reeds_ladder", REEDS_BLOCK);
-	//public static final Block STALAGNATE_LADDER = registerLadder("stalagnate_ladder", STALAGNATE_PLANKS);
-	public static final Block WILLOW_LADDER = registerLadder("willow_ladder", WILLOW_PLANKS);
 	public static final Block WART_LADDER = registerLadder("wart_ladder", WART_PLANKS);
 	public static final Block MUSHROOM_LADDER = registerLadder("mushroom_ladder", MUSHROOM_PLANKS);
 	public static final Block MUSHROOM_FIR_LADDER = registerLadder("mushroom_fir_ladder", MUSHROOM_FIR_PLANKS);
 	public static final Block RUBEUS_LADDER = registerLadder("rubeus_ladder", RUBEUS_PLANKS);
 
 	// Signs
-	//public static final Block SIGN_STALAGNATE = registerSign("sign_stalagnate", STALAGNATE_PLANKS);
 	public static final Block SIGN_REED = registerSign("sign_reed", REEDS_BLOCK);
-	public static final Block SIGN_WILLOW = registerSign("sign_willow", WILLOW_PLANKS);
 	public static final Block SIGN_WART = registerSign("sign_wart", WART_PLANKS);
 	public static final Block SIGN_RUBEUS = registerSign("sign_rubeus", RUBEUS_PLANKS);
 	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
@@ -650,7 +645,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return getModBlocks(BetterNether.MOD_ID).stream().filter(BlockItem.class::isInstance).map(item -> ((BlockItem) item).getBlock()).collect(Collectors.toList());
 	}
 
-	
 	
 	public static Block registerBlock(String name, Block block) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {

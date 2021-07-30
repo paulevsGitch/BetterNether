@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
@@ -12,6 +13,7 @@ import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
 import paulevs.betternether.blocks.BlockWillowBranch;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.BlockWillowTrunk;
+import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
@@ -30,13 +32,14 @@ public class StructureWillow implements IStructure {
 			return;
 
 		h2 = Math.min(h2, mh);
-
-		BlocksHelper.setWithUpdate(world, pos, NetherBlocks.WILLOW_TRUNK.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.BOTTOM));
+		
+		final Block trunk =  NetherBlocks.MAT_WILLOW.getTrunk();
+		BlocksHelper.setWithUpdate(world, pos, trunk.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.BOTTOM));
 		for (int h = 1; h < h2; h++)
 			if (world.isEmptyBlock(pos.above(h)))
-				BlocksHelper.setWithUpdate(world, pos.above(h), NetherBlocks.WILLOW_TRUNK.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.MIDDLE));
+				BlocksHelper.setWithUpdate(world, pos.above(h), trunk.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.MIDDLE));
 		if (world.isEmptyBlock(pos.above(h2)))
-			BlocksHelper.setWithUpdate(world, pos.above(h2), NetherBlocks.WILLOW_TRUNK.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.TOP));
+			BlocksHelper.setWithUpdate(world, pos.above(h2), trunk.defaultBlockState().setValue(BlockWillowTrunk.SHAPE, TripleShape.TOP));
 
 		for (int i = 0; i < 4; i++)
 			branch(world, pos.above(h2).relative(HOR[i]), 3 + random.nextInt(2), random, HOR[i], pos.above(h2), 0);
@@ -104,16 +107,17 @@ public class StructureWillow implements IStructure {
 	private void vine(ServerLevelAccessor world, BlockPos pos, int length) {
 		if (!world.isEmptyBlock(pos))
 			return;
-
+		
+		final Block branch =  NetherBlocks.MAT_WILLOW.getBranch();
 		for (int i = 0; i < length; i++) {
 			BlockPos p = pos.below(i);
 			if (world.isEmptyBlock(p.below()))
-				BlocksHelper.setWithUpdate(world, p, NetherBlocks.WILLOW_BRANCH.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.MIDDLE));
+				BlocksHelper.setWithUpdate(world, p, branch.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.MIDDLE));
 			else {
-				BlocksHelper.setWithUpdate(world, p, NetherBlocks.WILLOW_BRANCH.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+				BlocksHelper.setWithUpdate(world, p, branch.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
 				return;
 			}
 		}
-		BlocksHelper.setWithUpdate(world, pos.below(length), NetherBlocks.WILLOW_BRANCH.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
+		BlocksHelper.setWithUpdate(world, pos.below(length), branch.defaultBlockState().setValue(BlockWillowBranch.SHAPE, WillowBranchShape.END));
 	}
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
+import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 
@@ -60,7 +61,7 @@ public class ItemRecipes {
 		RecipesHelper.makeSimpleRecipe2(NetherBlocks.STRIPED_LOG_RUBEUS, NetherBlocks.STRIPED_BARK_RUBEUS, 3, "nether_bark_striped");
 		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
 		RecipesHelper.makeSimpleRecipe2(NetherBlocks.STRIPED_LOG_WART, NetherBlocks.STRIPED_BARK_WART, 3, "nether_bark_striped");
-		RecipesHelper.makeSimpleRecipe2(NetherBlocks.STRIPED_LOG_WILLOW, NetherBlocks.STRIPED_BARK_WILLOW, 3, "nether_bark_striped");
+		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
 	}
 
 	private static boolean itemExists(Item item) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import net.minecraft.world.level.block.Blocks;
+import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class Palettes {
@@ -22,8 +23,8 @@ public class Palettes {
 			.addFences(NetherBlocks.WART_FENCE)
 			.addGates(NetherBlocks.WART_GATE)
 			.addWalls(NetherBlocks.NETHER_BRICK_WALL)
-			.addLogs(NetherBlocks.WART_LOG, NetherBlocks.WILLOW_LOG, NetherBlocks.STRIPED_LOG_WART)
-			.addBark(NetherBlocks.WART_BARK, NetherBlocks.WILLOW_BARK, NetherBlocks.STRIPED_BARK_WART)
+			.addLogs(NetherBlocks.WART_LOG, NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_LOG), NetherBlocks.STRIPED_LOG_WART)
+			.addBark(NetherBlocks.WART_BARK, NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK), NetherBlocks.STRIPED_BARK_WART)
 			.addStoneBlocks(Blocks.NETHER_BRICKS, Blocks.NETHER_WART_BLOCK, NetherBlocks.NETHER_BRICK_TILE_LARGE, NetherBlocks.NETHER_BRICK_TILE_SMALL)
 			.addStoneSlabs(Blocks.NETHER_BRICK_SLAB, NetherBlocks.NETHER_BRICK_TILE_SLAB)
 			.addStoneStairs(Blocks.NETHER_BRICK_STAIRS, NetherBlocks.NETHER_BRICK_TILE_STAIRS)

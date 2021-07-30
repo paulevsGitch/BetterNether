@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockWillowLeaves;
+import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
@@ -67,7 +68,7 @@ public class StructureWillowBush implements IStructure {
 			}
 		}
 
-		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.WILLOW_BARK.defaultBlockState());
+		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK).defaultBlockState());
 		setIfAir(world, pos.above(), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.UP));
 		setIfAir(world, pos.north(), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.NORTH));
 		setIfAir(world, pos.south(), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, Direction.SOUTH));

@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockProperties {
@@ -188,7 +189,7 @@ public class BlockProperties {
 		GRAY_MOLD("gray_mold", () -> NetherBlocks.GRAY_MOLD),
 		MAGMA_FLOWER("magma_flower", () -> NetherBlocks.MAGMA_FLOWER),
 		NETHER_WART("nether_wart", () -> NetherBlocks.WART_SEED),
-		WILLOW("willow", () -> NetherBlocks.WILLOW_SAPLING),
+		WILLOW("willow", () -> NetherBlocks.MAT_WILLOW.getSapling()),
 		SMOKER("smoker", () -> NetherBlocks.SMOKER),
 		WART("wart", () -> Blocks.NETHER_WART),
 		JUNGLE_PLANT("jungle_plant", () -> NetherBlocks.JUNGLE_PLANT),
