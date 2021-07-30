@@ -120,8 +120,6 @@ import paulevs.betternether.blocks.BlockSoulLilySapling;
 import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.blocks.BlockSoulVein;
 import paulevs.betternether.blocks.BlockStalactite;
-import paulevs.betternether.blocks.BlockStalagnate;
-import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStatueRespawner;
 import paulevs.betternether.blocks.BlockStem;
@@ -139,7 +137,7 @@ import paulevs.betternether.blocks.BlockWillowTorch;
 import paulevs.betternether.blocks.BlockWillowTrunk;
 import paulevs.betternether.blocks.RubeusLog;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
-import paulevs.betternether.blocks.complex.WoodenMaterial;
+import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
 import paulevs.betternether.blocks.complex.WoodenMaterialOld;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.recipes.RecipesHelper;
@@ -147,10 +145,7 @@ import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.structures.plants.StructureLumabusVine;
 import paulevs.betternether.tab.CreativeTabs;
 import ru.bclib.api.TagAPI;
-import ru.bclib.blocks.BaseBarrelBlock;
 import ru.bclib.blocks.BaseChestBlock;
-import ru.bclib.blocks.BaseFurnaceBlock;
-import ru.bclib.blocks.BaseSignBlock;
 import ru.bclib.registry.BaseBlockEntities;
 
 public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
@@ -158,7 +153,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 
 
 	// Stalagnate //
-	public static final WoodenMaterial MAT_STALAGNATE = new WoodenMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN).init();
+	public static final NetherWoodenMaterial MAT_STALAGNATE = new NetherWoodenMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN).init();
 	//public static final Block STALAGNATE = registerBlockNI("stalagnate", new BlockStalagnate());
 	//public static final Block STALAGNATE_STEM = registerBlock("stalagnate_stem", new BlockStem(MaterialColor.TERRACOTTA_LIGHT_GREEN));
 	public static final Block STALAGNATE_SEED = registerBlock("stalagnate_seed", new BlockStalagnateSeed());

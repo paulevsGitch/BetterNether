@@ -29,7 +29,7 @@ import ru.bclib.recipes.GridRecipe;
 import ru.bclib.registry.BlockRegistry;
 import ru.bclib.registry.ItemRegistry;
 
-public class WoodenMaterial extends ru.bclib.complexmaterials.WoodenComplexMaterial {
+public class NetherWoodenMaterial extends ru.bclib.complexmaterials.WoodenComplexMaterial {
     public final static String BLOCK_TRUNK = "trunk";
     public final static String BLOCK_STEM = "stem";
     public final static String BLOCK_ROOF = "roof";
@@ -40,7 +40,7 @@ public class WoodenMaterial extends ru.bclib.complexmaterials.WoodenComplexMater
     public final static String BLOCK_BAR_STOOL = "bar_stool";
     public final static String BLOCK_BOWL = "bowl";
 
-    public WoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
+    public NetherWoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
         super(BetterNether.MOD_ID, name, "nether", woodColor, planksColor);
     }
     
@@ -49,8 +49,8 @@ public class WoodenMaterial extends ru.bclib.complexmaterials.WoodenComplexMater
         return super.init(blocksRegistry, itemsRegistry, recipeConfig);
     }
     
-    public WoodenMaterial init() {
-        return (WoodenMaterial) super.init(NetherBlocks.getBlockRegistry(), NetherItems.getItemRegistry(), Configs.RECIPE_CONFIG);
+    public NetherWoodenMaterial init() {
+        return (NetherWoodenMaterial) super.init(NetherBlocks.getBlockRegistry(), NetherItems.getItemRegistry(), Configs.RECIPE_CONFIG);
     }
     
     @Override
@@ -91,7 +91,7 @@ public class WoodenMaterial extends ru.bclib.complexmaterials.WoodenComplexMater
             return new BlockStalagnate();
         }));
         addBlockEntry(new BlockEntry(BLOCK_BOWL, false, (complexMaterial, settings) -> {
-            return new BlockStalagnateBowl(getBlock(WoodenMaterial.BLOCK_TRUNK));
+            return new BlockStalagnateBowl(getBlock(NetherWoodenMaterial.BLOCK_TRUNK));
         }));
     }
     

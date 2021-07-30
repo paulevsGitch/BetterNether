@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.FoodShape;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
-import paulevs.betternether.blocks.complex.WoodenMaterial;
+import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 import paulevs.betternether.tab.CreativeTabs;
@@ -33,9 +33,9 @@ public class ItemBowlFood extends Item {
 	public InteractionResult useOn(UseOnContext context) {
 		Level world = context.getLevel();
 		BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
-		if (context.getPlayer().isShiftKeyDown() && world.isEmptyBlock(pos) && NetherBlocks.MAT_STALAGNATE.getBlock(WoodenMaterial.BLOCK_BOWL).canSurvive(world.getBlockState(pos), world, pos)) {
+		if (context.getPlayer().isShiftKeyDown() && world.isEmptyBlock(pos) && NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_BOWL).canSurvive(world.getBlockState(pos), world, pos)) {
 			if (!world.isClientSide()) {
-				BlockState state = NetherBlocks.MAT_STALAGNATE.getBlock(WoodenMaterial.BLOCK_BOWL).defaultBlockState().setValue(BlockStalagnateBowl.FOOD, bowlFood);
+				BlockState state = NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_BOWL).defaultBlockState().setValue(BlockStalagnateBowl.FOOD, bowlFood);
 				BlocksHelper.setWithoutUpdate((ServerLevel) world, pos, state);
 			}
 			if (!context.getPlayer().isCreative()) {
