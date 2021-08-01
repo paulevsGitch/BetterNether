@@ -8,4 +8,4 @@ Building:
 * Import project to IDE
 
 Mappings:
-* https://modmuss50.me/fabric.html?&version=1.16.4
+* https://fabricmc.net/versions.html?&version=1.17.1
