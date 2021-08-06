@@ -1,9 +1,9 @@
 {
 	"container.forge": "Forja",
-	"container.chest_of_drawers": "Chest of Drawers",*
+	"container.chest_of_drawers": "Gaveteiro",
 
-	"entity.betternether.firefly": "Vagalume",*
-	"entity.betternether.hydrogen_jellyfish": "Hydrogen Jellyfish",*
+	"entity.betternether.firefly": "Vagalume",
+	"entity.betternether.hydrogen_jellyfish": "Medusa-hidrogênio",
 	"entity.betternether.naga_projectile": "Projétil de naga",
 	"entity.betternether.naga": "Naga",
 	"item.betternether.spawn_egg_naga": "Ovo gerador de naga",
@@ -25,27 +25,27 @@
 	"block.betternether.stalagnate_bowl": "Tijela de estalagnata",
 	"item.betternether.stalagnate_bowl": "Tijela de estalagnata",
 	"item.betternether.stalagnate_bowl_apple": "Tijela com maçã negra",
-	"item.betternether.stalagnate_bowl_mushroom": "Ensopado de cogumelos",
-	"item.betternether.stalagnate_bowl_wart": "Sopa de fungo do Nether",
+	"item.betternether.stalagnate_bowl_mushroom": "Tijela com ensopado de cogumelos",
+	"item.betternether.stalagnate_bowl_wart": "Tijela com sopa de fungo do Nether",
 
 	"itemGroup.betternether.items": "Better Nether",
 
 	"message.spawn_help": "§c§lYou must hold§r %s §c§lto set your spawn point here",
 	"message.spawn_set": "§2§lYour spawn point was set here",
 
-	"block.betternether.agave": "Agave Seed",
-	"item.betternether.agave_leaf": "Agave Leaf",
-	"item.betternether.agave_medicine": "Agave Medicine",
-	"item.betternether.herbal_medicine": "Herbal Medicine",
+	"block.betternether.agave": "Semente de agave do Nether",
+	"item.betternether.agave_leaf": "Folha de agave do Nether",
+	"item.betternether.agave_medicine": "Remédio de agave do Nether",
+	"item.betternether.herbal_medicine": "Remédio de ervas",
 
-	"block.betternether.barrel_cactus": "Barrel Cactus",
+	"block.betternether.barrel_cactus": "Cacto-barril do Nether",
 
 	"block.betternether.black_apple_seed": "Semente de maçã negra",
 	"block.betternether.black_bush": "Arbusto negro",
 	
 	"block.betternether.red_large_mushroom": "Cogumelo vermelho grande",
 	"block.betternether.brown_large_mushroom": "Cogumelo marrom grande",
-	"block.betternether.lucis_mushroom": "Lucis Mushroom",
+	"block.betternether.lucis_mushroom": "Cogumelo lucis",
 
 	"block.betternether.eyeball": "Globo ocular",
 	"block.betternether.eyeball_small": "Globo ocular pequeno",
@@ -61,7 +61,7 @@
 	"block.betternether.bone_tile": "Bloco ósseo talhado",
 	"block.betternether.bone_wall": "Muro ósseo",
 	
-	"block.betternether.chest_of_drawers": "Chest of Drawers",
+	"block.betternether.chest_of_drawers": "Gaveteiro",
 
 	"block.betternether.cincinnasite_bars": "Cincinnasite Bars",
 	"block.betternether.cincinnasite_block": "Cincinnasite Block",
@@ -85,26 +85,26 @@
 	"block.betternether.cincinnasite_tile_small": "Small Cincinnasite Tile",
 	"block.betternether.cincinnasite_wall": "Cincinnasite Wall",
 
-	"block.betternether.egg_plant": "Egg Plant",
+	"block.betternether.egg_plant": "Egg Plant",*
 
-	"block.betternether.eye_seed": "Eye Seed",
+	"block.betternether.eye_seed": "Semente de globo ocular",
 	
-	"block.betternether.farmland": "Farmland",
+	"block.betternether.farmland": "Solo agrícola do Nether",
 
-	"block.betternether.gray_mold": "Gray Mold",
+	"block.betternether.gray_mold": "Mofo-cinza",
 
 	"block.betternether.ink_bush": "Ink Bush",
 	"block.betternether.ink_bush_seed": "Ink Bush Seed",
 
-	"block.betternether.lucis_spore": "Lucis Spore",
+	"block.betternether.lucis_spore": "Esporo de lucis",
 
-	"block.betternether.magma_flower": "Magma Flower Seed",
+	"block.betternether.magma_flower": "Semente de flor-de-magma",
 
 	"block.betternether.nether_brick_tile_large": "Bloco de tijolo do Nether",
 	"block.betternether.nether_brick_tile_slab": "Laje de ladrilhos do Nether",
 	"block.betternether.nether_brick_tile_small": "Ladrilhos do Nether",
 	"block.betternether.nether_brick_tile_stairs": "Escadas de ladrilhos do Nether",
-	"block.betternether.nether_brick_wall": "Muro de ladrilhos do Nether",
+	"block.betternether.nether_brick_wall": "Muro de blocos de tijolo do Nether",
 	"block.betternether.nether_cactus": "Cacto do Nether",
 	"block.betternether.nether_grass": "Grama do Nether",
 	"block.betternether.nether_mycelium": "Micélio do Nether",
@@ -118,7 +118,7 @@
 
 	"block.betternether.pig_statue_respawner": "Respawner Statue",
 
-	"block.betternether.potted_plant": "Potted Plant",
+	"block.betternether.potted_plant": "Planta envasada",
 
 	"block.betternether.quartz_glass": "Quartz Glass",
 	"block.betternether.quartz_glass_framed": "Framed Quartz Glass",
@@ -226,10 +226,10 @@
 	"block.betternether.wart_door": "Porta de fungo do Nether",
 	
 	"block.betternether.black_vine": "Trepadeira-negra",
-	"block.betternether.veined_sand": "Veined Sand",
-	"block.betternether.soul_vein": "Soul Vein",
-	"block.betternether.blooming_vine": "Blooming Vine",
-	"block.betternether.golden_vine": "Golden Vine",
+	"block.betternether.veined_sand": "Areia das almas venosa",
+	"block.betternether.soul_vein": "Veia das almas",
+	"block.betternether.blooming_vine": "Trepadeira florescente",
+	"block.betternether.golden_vine": "Trepadeira dourada",
 	"block.betternether.geyser": "Gêiser",
 	
 	"item.betternether.cincinnasite_shovel": "Cincinnasite Shovel",
@@ -242,7 +242,7 @@
 	"item.betternether.cincinnasite_sword": "Cincinnasite Sword",
 	"item.betternether.cincinnasite_sword_diamond": "Cincinnasite-Diamond Sword",
 	
-	"item.betternether.spawn_egg_firefly": "Firefly Spawn Egg",
+	"item.betternether.spawn_egg_firefly": "Ovo gerador de vagalume",
 	"item.betternether.cincinnasite_ingot": "Cincinnasite Ingot",
 	
 	"block.betternether.mushroom_stem": "Talo de cogumelo",
@@ -323,20 +323,20 @@
 	"block.betternether.roof_tile_wart_stairs": "Escadas de telhas de fungo do Nether",
 	"block.betternether.roof_tile_wart_slab": "Laje de telhas de fungo do Nether",
 	
-	"block.betternether.taburet_reeds": "Reeds Stool",
+	"block.betternether.taburet_reeds": "Banco de junco do Nether",
 	"block.betternether.stalagnate_taburet": "Stalagnate Stool",
-	"block.betternether.willow_taburet": "Willow Stool",
-	"block.betternether.taburet_wart": "Wart Stool",
+	"block.betternether.willow_taburet": "Banco de infra-salgueiro",
+	"block.betternether.taburet_wart": "Banco de fungo do Nether",
 	"block.betternether.taburet_cincinnasite": "Cincinnasite Stool",
 	
 	"block.betternether.stalagnate_ladder": "Stalagnate Ladder",
 	"block.betternether.willow_ladder": "Escada de mão de infra-salgueiro",
 	"block.betternether.wart_ladder": "Escada de mão de fungo do Nether",
 	
-	"block.betternether.chair_reeds": "Reeds Chair",
+	"block.betternether.chair_reeds": "Cadeira de fungo do Nether",
 	"block.betternether.stalagnate_chair": "Stalagnate Chair",
-	"block.betternether.willow_chair": "Willow Chair",
-	"block.betternether.chair_wart": "Wart Chair",
+	"block.betternether.willow_chair": "Cadeira de infra-salgueiro",
+	"block.betternether.chair_wart": "Cadeira de fungo do Nether",
 	"block.betternether.chair_cincinnasite": "Cincinnasite Chair",
 	
 	"block.betternether.stalagnate_stripped_log": "Stripped Stalagnate Log",
@@ -350,10 +350,10 @@
 	"block.betternether.giant_mold": "Mofo gigante",
 	"block.betternether.giant_mold_sapling": "Muda de mofo gigante",
 	
-	"block.betternether.bar_stool_reeds": "Reed Bar Stool",
+	"block.betternether.bar_stool_reeds": "Banqueta de junco do Nether",
 	"block.betternether.stalagnate_bar_stool": "Stalagnate Bar Stool",
-	"block.betternether.willow_bar_stool": "Willow Bar Stool",
-	"block.betternether.bar_stool_wart": "Wart Bar Stool",
+	"block.betternether.willow_bar_stool": "Banqueta de infra-salgueiro",
+	"block.betternether.bar_stool_wart": "Banqueta de fungo do Nether",
 	"block.betternether.bar_stool_cincinnasite": "Cincinnasite Bar Stool",
 	
 	"biome.betternether.gravel_desert": "Deserto de cascalho",
@@ -377,9 +377,9 @@
 	"biome.betternether.poor_nether_grasslands": "Prados do Nether estéreis",
 	"biome.betternether.upside_down_forest": "Floresta invertida",
 	"biome.betternether.old_swampland": "Pântano do Nether antigo",
-	"biome.betternether.flooded_deltas": "Deltas inundadas",
+	"biome.betternether.flooded_deltas": "Deltas de basalto inundadas",
 	
-	"block.betternether.mushroom_fir": "Cogumelo-abeto grande",
+	"block.betternether.mushroom_fir": "Cogumelo-abeto gigante",
 	"block.betternether.mushroom_fir_sapling": "Cogumelo-abeto",
 	"block.betternether.mushroom_fir_stem": "Talo de cogumelo-abeto",
 	"block.betternether.mushroom_fir_log": "Tora de cogumelo-abeto",
@@ -421,33 +421,33 @@
 	"block.betternether.blue_obsidian_glass": "Vidro de obsidiana azul",
 	"block.betternether.blue_obsidian_glass_pane": "Vidraça de obsidiana azul",
 	
-	"block.betternether.taburet_oak": "Oak Stool",
-	"block.betternether.chair_oak": "Oak Chair",
-	"block.betternether.bar_stool_oak": "Oak Bar Stool",
-	"block.betternether.taburet_spruce": "Spruce Stool",
-	"block.betternether.chair_spruce": "Spruce Chair",
-	"block.betternether.bar_stool_spruce": "Spruce Bar Stool",
-	"block.betternether.taburet_birch": "Birch Stool",
-	"block.betternether.chair_birch": "Birch Chair",
-	"block.betternether.bar_stool_birch": "Birch Bar Stool",
-	"block.betternether.taburet_jungle": "Jungle Stool",
-	"block.betternether.chair_jungle": "Jungle Chair",
-	"block.betternether.bar_stool_jungle": "Jungle Bar Stool",
-	"block.betternether.taburet_acacia": "Acacia Stool",
-	"block.betternether.chair_acacia": "Acacia Chair",
-	"block.betternether.bar_stool_acacia": "Acacia Bar Stool",
-	"block.betternether.taburet_dark_oak": "Dark Oak Stool",
-	"block.betternether.chair_dark_oak": "Dark Oak Chair",
-	"block.betternether.bar_stool_dark_oak": "Dark Oak Bar Stool",
+	"block.betternether.taburet_oak": "Banco de carvalho",
+	"block.betternether.chair_oak": "Cadeira de carvalho",
+	"block.betternether.bar_stool_oak": "Banqueta de carvalho",
+	"block.betternether.taburet_spruce": "Banco de pinheiro",
+	"block.betternether.chair_spruce": "Cadeira de pinheiro",
+	"block.betternether.bar_stool_spruce": "Banqueta de pinheiro",
+	"block.betternether.taburet_birch": "Banco de bétula",
+	"block.betternether.chair_birch": "Cadeira de bétula",
+	"block.betternether.bar_stool_birch": "Banqueta de bétula",
+	"block.betternether.taburet_jungle": "Banco da selva",
+	"block.betternether.chair_jungle": "Cadeira da selva",
+	"block.betternether.bar_stool_jungle": "Banqueta da selva",
+	"block.betternether.taburet_acacia": "Banco de acácia",
+	"block.betternether.chair_acacia": "Cadeira de acácia",
+	"block.betternether.bar_stool_acacia": "Banqueta de acácia",
+	"block.betternether.taburet_dark_oak": "Banco de carvalho escuro",
+	"block.betternether.chair_dark_oak": "Cadeira de carvalho escuro",
+	"block.betternether.bar_stool_dark_oak": "Banqueta de carvalho escuro",
 	
 	"item.betternether.cincinnasite_hammer": "Cincinnasite Hammer",
 	"item.betternether.cincinnasite_hammer_diamond": "Cincinnasite-Diamond Hammer",
 	
-	"block.betternether.nether_brewing_stand": "Nether Brewing Stand",
+	"block.betternether.nether_brewing_stand": "Suporte de poções do Nether",
 	
-	"betternether.flat_nether": "Flat Nether",
+	"betternether.flat_nether": "Nether plano",
 	
-	"item.betternether.spawn_egg_hydrogen_jellyfish": "Hydrogen Jellyfish Spawn Egg",
+	"item.betternether.spawn_egg_hydrogen_jellyfish": "Ovo gerador de medusa-hidrogenio",
 	"block.betternether.brick_pot": "Vaso de tijolo do Nether",
 	
 	"block.betternether.rubeus_stripped_log": "Stripped Rubeus Log",
@@ -589,37 +589,37 @@
 	"block.betternether.warped_ladder": "Escada de mão distorcida",
 	"block.betternether.mushroom_ladder": "Escada de mão de cogumelo",
 	
-	"block.betternether.taburet_crimson": "Crimson Stool",
-	"block.betternether.taburet_warped": "Warped Stool",
-	"block.betternether.taburet_mushroom": "Mushroom Stool",
+	"block.betternether.taburet_crimson": "Banco carmesim",
+	"block.betternether.taburet_warped": "Banco distorcido",
+	"block.betternether.taburet_mushroom": "Banco de cogumelo",
 	
-	"block.betternether.chair_crimson": "Crimson Chair",
-	"block.betternether.chair_warped": "Warped Chair",
-	"block.betternether.chair_mushroom": "Mushroom Chair",
+	"block.betternether.chair_crimson": "Cadeira carmesim",
+	"block.betternether.chair_warped": "Cadeira distorcida",
+	"block.betternether.chair_mushroom": "Cadeira de cogumelo",
 	
-	"block.betternether.bar_stool_crimson": "Crimson Bar Stool",
-	"block.betternether.bar_stool_warped": "Warped Bar Stool",
-	"block.betternether.bar_stool_mushroom": "Mushroom Bar Stool",
+	"block.betternether.bar_stool_crimson": "Banqueta carmesim",
+	"block.betternether.bar_stool_warped": "Banqueta distorcida",
+	"block.betternether.bar_stool_mushroom": "Banqueta de cogumelo",
 	
-	"block.betternether.mushroom_grass": "Grama de cogumelo",
+	"block.betternether.mushroom_grass": "Cogugrama",
 	"block.betternether.bone_grass": "Grama óssea",
-	"block.betternether.lumabus_seed": "Lumabus Seed",
-	"block.betternether.lumabus_vine": "Lumabus Vine",
-	"item.betternether.glowstone_pile": "Glowstone Pile",
+	"block.betternether.lumabus_seed": "Semente de lumábus",
+	"block.betternether.lumabus_vine": "Trepadeira de lumábus",
+	"item.betternether.glowstone_pile": "Pilha de pedra luminosa",
 	"block.betternether.jellyfish_mushroom": "Cogumelo-medusa",
 	"block.betternether.jellyfish_mushroom_sapling": "Muda de cogumelo-medusa",
 	"block.betternether.bone_stalactite": "Espeleotema de osso",
 	"block.betternether.cincinnasite_chain": "Cincinnasite Chain",
 	"block.betternether.nether_lapis_ore": "Minério de lápis-lazúli do Nether",
-	"item.betternether.lapis_pile": "Lapis Pile",
+	"item.betternether.lapis_pile": "Pilha de lápis-lazúli",
 	"item.betternether.cincinnasite_excavator": "Cincinnasite Excavator",
 	"item.betternether.cincinnasite_excavator_diamond": "Cincinnasite-Diamond Excavator",
 	"item.betternether.nether_ruby_excavator": "Ruby Excavator",
 	
-	"block.betternether.sepia_mushroom_grass": "Sepian Mushroom Grass",
-	"block.betternether.sepia_bone_grass": "Sepian Bone Grass",
-	"block.betternether.golden_lumabus_seed": "Golden Lumabus Seed",
-	"block.betternether.golden_lumabus_vine": "Golden Lumabus Vine",
+	"block.betternether.sepia_mushroom_grass": "Cogugrama sulfúrica",
+	"block.betternether.sepia_bone_grass": "Grama de osso sulfúrica",
+	"block.betternether.golden_lumabus_seed": "Semente de lumábus-dourado",
+	"block.betternether.golden_lumabus_vine": "Trepadeira de lumábus-dourado",
 	
 	"block.betternether.cincinnasite_fire_bowl": "Cincinnasite Fire Bowl",
 	"block.betternether.bricks_fire_bowl": "Nether Brick Fire Bowl",
@@ -657,8 +657,8 @@
 	"block.betternether.anchor_tree_leaves": "Anchor Tree Leaves",
 	"block.betternether.anchor_tree_sapling": "Anchor Tree Sapling",
 	
-	"block.betternether.giant_lucis": "Giant Lucis",
-	"block.betternether.moss_cover": "Moss Cover",
+	"block.betternether.giant_lucis": "Lucis gigante",
+	"block.betternether.moss_cover": "Tapete de infra-musgo",
 	
 	"block.betternether.nether_sakura_bark": "Madeira de sakura do Nether",
 	"block.betternether.nether_sakura_button": "Botão de sakura do Nether",
