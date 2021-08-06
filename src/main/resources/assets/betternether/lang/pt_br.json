@@ -9,8 +9,8 @@
 	"item.betternether.spawn_egg_naga": "Ovo gerador de naga",
 	"entity.betternether.flying_pig": "Porco voador",
 	"item.betternether.spawn_egg_flying_pig": "Ovo gerador de porco voador",
-	"entity.betternether.jungle_skeleton": "Esqueleto da infra-selva",
-	"item.betternether.spawn_egg_jungle_skeleton": "Ovo gerador de esqueleto da infra-selva",
+	"entity.betternether.jungle_skeleton": "Esqueleto da selva do Nether",
+	"item.betternether.spawn_egg_jungle_skeleton": "Ovo gerador de esqueleto da selva do Nether",
 	"entity.betternether.skull": "Crânio",
 	"item.betternether.spawn_egg_skull": "Ovo gerador de crânio",
 
@@ -22,8 +22,8 @@
 	"item.betternether.cincinnasite_pickaxe": "Cincinnasite Pickaxe",
 	"item.betternether.cincinnasite_pickaxe_diamond": "Cincinnasite-Diamond Pickaxe",
 
-	"block.betternether.stalagnate_bowl": "Tijela de estalagnata",
-	"item.betternether.stalagnate_bowl": "Tijela de estalagnata",
+	"block.betternether.stalagnate_bowl": "Tijela de estalagnato",
+	"item.betternether.stalagnate_bowl": "Tijela de estalagnato",
 	"item.betternether.stalagnate_bowl_apple": "Tijela com maçã negra",
 	"item.betternether.stalagnate_bowl_mushroom": "Tijela com ensopado de cogumelos",
 	"item.betternether.stalagnate_bowl_wart": "Tijela com sopa de fungo do Nether",
@@ -85,7 +85,7 @@
 	"block.betternether.cincinnasite_tile_small": "Ladrilhos de cincinnasita",
 	"block.betternether.cincinnasite_wall": "Muro de cincinnasita",
 
-	"block.betternether.egg_plant": "Egg Plant",*
+	"block.betternether.egg_plant": "Ovácea",
 
 	"block.betternether.eye_seed": "Semente de globo ocular",
 	
@@ -93,8 +93,8 @@
 
 	"block.betternether.gray_mold": "Mofo-cinza",
 
-	"block.betternether.ink_bush": "Ink Bush",
-	"block.betternether.ink_bush_seed": "Ink Bush Seed",
+	"block.betternether.ink_bush": "Arbusto-tinta",
+	"block.betternether.ink_bush_seed": "Semente de arbusto-tinta",
 
 	"block.betternether.lucis_spore": "Esporo de lucis",
 
