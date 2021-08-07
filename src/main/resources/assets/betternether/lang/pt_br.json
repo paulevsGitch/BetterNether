@@ -18,9 +18,9 @@
 
 	"item.betternether.cincinnasite": "Cincinnasita bruta",
 	"item.betternether.cincinnasite_axe": "Machado de cincinnasita",
-	"item.betternether.cincinnasite_axe_diamond": "Cincinnasite-Diamond Axe",
+	"item.betternether.cincinnasite_axe_diamond": "Machado de cincinnasita com diamante",
 	"item.betternether.cincinnasite_pickaxe": "Picareta de cincinnasita",
-	"item.betternether.cincinnasite_pickaxe_diamond": "Cincinnasite-Diamond Pickaxe",
+	"item.betternether.cincinnasite_pickaxe_diamond": "Picareta de cincinnasita com diamante",
 
 	"block.betternether.stalagnate_bowl": "Tijela de estalagnato",
 	"item.betternether.stalagnate_bowl": "Tijela de estalagnato",
@@ -33,12 +33,12 @@
 	"message.spawn_help": "§c§lVocê precisa segurar§r %s §c§lpara definir seu ponto de renascimento.",
 	"message.spawn_set": "§2§lSeu ponto de renascimento foi definido.",
 
-	"block.betternether.agave": "Semente de agave do Nether",
-	"item.betternether.agave_leaf": "Folha de agave do Nether",
-	"item.betternether.agave_medicine": "Remédio de agave do Nether",
-	"item.betternether.herbal_medicine": "Remédio de ervas",
+	"block.betternether.agave": "Semente de infragave",
+	"item.betternether.agave_leaf": "Folha de infragave",
+	"item.betternether.agave_medicine": "Remédio de infragave",
+	"item.betternether.herbal_medicine": "Remédio de infra-ervas",
 
-	"block.betternether.barrel_cactus": "Cacto-barril do Nether",
+	"block.betternether.barrel_cactus": "Infra-cacto barril",
 
 	"block.betternether.black_apple_seed": "Semente de maçã-negra",
 	"block.betternether.black_bush": "Arbusto-negro",
@@ -233,14 +233,14 @@
 	"block.betternether.geyser": "Gêiser",
 	
 	"item.betternether.cincinnasite_shovel": "Pá de cincinnasita",
-	"item.betternether.cincinnasite_shovel_diamond": "Cincinnasite-Diamond Shovel",
+	"item.betternether.cincinnasite_shovel_diamond": "Pá de cincinnasita com diamante",
 	
 	"item.betternether.cincinnasite_helmet": "Capacete de cincinnasita",
 	"item.betternether.cincinnasite_chestplate": "Peitoral de cincinnasita",
 	"item.betternether.cincinnasite_leggings": "Calças de cincinnasita",
 	"item.betternether.cincinnasite_boots": "Botas de cincinnasita",
 	"item.betternether.cincinnasite_sword": "Espada de cincinnasita",
-	"item.betternether.cincinnasite_sword_diamond": "Cincinnasite-Diamond Sword",
+	"item.betternether.cincinnasite_sword_diamond": "Espada de cincinnasita com diamante",
 	
 	"item.betternether.spawn_egg_firefly": "Ovo gerador de vagalume",
 	"item.betternether.cincinnasite_ingot": "Barra de cincinnasita",
@@ -333,7 +333,7 @@
 	"block.betternether.willow_ladder": "Escada de mão de infra-salgueiro",
 	"block.betternether.wart_ladder": "Escada de mão de fungo do Nether",
 	
-	"block.betternether.chair_reeds": "Cadeira de fungo do Nether",
+	"block.betternether.chair_reeds": "Cadeira de junco do Nether",
 	"block.betternether.stalagnate_chair": "Cadeira de estalagnato",
 	"block.betternether.willow_chair": "Cadeira de infra-salgueiro",
 	"block.betternether.chair_wart": "Cadeira de fungo do Nether",
@@ -441,7 +441,7 @@
 	"block.betternether.bar_stool_dark_oak": "Banqueta de carvalho escuro",
 	
 	"item.betternether.cincinnasite_hammer": "Martelo de cincinnasita",
-	"item.betternether.cincinnasite_hammer_diamond": "Cincinnasite-Diamond Hammer",
+	"item.betternether.cincinnasite_hammer_diamond": "Martelo de cincinnasita com diamante",
 	
 	"block.betternether.nether_brewing_stand": "Suporte de poções do Nether",
 	
@@ -518,7 +518,7 @@
 	"block.betternether.basalt_bricks_wall": "Muro de tijolos de basalto",
 	
 	"item.betternether.cincinnasite_hoe": "Enchada de cincinnasita",
-	"item.betternether.cincinnasite_hoe_diamond": "Cincinnasite-Diamond Hoe",
+	"item.betternether.cincinnasite_hoe_diamond": "Enchada de cincinnasita com diamante",
 	"item.betternether.nether_ruby_hoe": "Enchada de rubi do Nether",
 	"item.betternether.nether_ruby_hammer": "Martelo de rubi do Nether",
 	
@@ -531,14 +531,14 @@
 	"config.betternether.subbiomes": "Opções de sub-biomas",
 	"config.betternether.biomes_edges": "Opções de margens de biomas",
 	"config.betternether.generator": "Opções de geração",
-	"config.betternether.global_structures_density": "Densidade global das estruturas",*
+	"config.betternether.global_structures_density": "Densidade global das estruturas",
 	"config.betternether.structures_density": "Densidade das estruturas",
 	"config.betternether.cities_dist": "Dist. entre as cidades do Nether [em chunks]",
 	
 	"config.betternether.reset": "Resetar",
 	"config.betternether.fog": "Distância do nevoeiro",
-	"config.betternether.lavafalls": "§b*§rPartículas de cachoeiras de lava",
-	"config.betternether.armour": "§b*§rThin Armor",
+	"config.betternether.lavafalls": "§b*§rPartículas das cachoeiras de lava",
+	"config.betternether.armour": "§b*§rArmadura fina",
 	
 	"block.betternether.crafting_table_crimson": "Bancada carmesim",
 	"block.betternether.crafting_table_warped": "Bancada distorcida",
