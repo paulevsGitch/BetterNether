@@ -33,9 +33,9 @@
 	"message.spawn_help": "§c§lVocê precisa segurar§r %s §c§lpara definir seu ponto de renascimento.",
 	"message.spawn_set": "§2§lSeu ponto de renascimento foi definido.",
 
-	"block.betternether.agave": "Semente de infragave",
-	"item.betternether.agave_leaf": "Folha de infragave",
-	"item.betternether.agave_medicine": "Remédio de infragave",
+	"block.betternether.agave": "Semente de agave do Nether",
+	"item.betternether.agave_leaf": "Folha de agave do Nether",
+	"item.betternether.agave_medicine": "Remédio de agave do Nether",
 	"item.betternether.herbal_medicine": "Remédio de infra-ervas",
 
 	"block.betternether.barrel_cactus": "Cacto barril do Nether",
@@ -189,7 +189,7 @@
 	"block.betternether.stalagnate_seed": "Muda de estalagnato",
 	"block.betternether.wart_seed": "Primórdia de fungo do Nether",
 	
-	"block.betternether.eye_vine": "Trepadeira de globo ocular",
+	"block.betternether.eye_vine": "Trepadeiras de globo ocular",
 	"block.betternether.black_apple": "Arbusto de maçã-negra",
 
 	"commands.findnethercity.usage.console": "Não há coordenadas definidas",
@@ -225,11 +225,11 @@
 	"block.betternether.wart_trapdoor": "Alçapão de fungo do Nether",
 	"block.betternether.wart_door": "Porta de fungo do Nether",
 	
-	"block.betternether.black_vine": "Trepadeira negra",
+	"block.betternether.black_vine": "Trepadeiras negras",
 	"block.betternether.veined_sand": "Areia das almas venosa",
-	"block.betternether.soul_vein": "Veia das almas",
-	"block.betternether.blooming_vine": "Trepadeira florescente",
-	"block.betternether.golden_vine": "Trepadeira dourada",
+	"block.betternether.soul_vein": "Veias das almas",
+	"block.betternether.blooming_vine": "Trepadeiras florescentes",
+	"block.betternether.golden_vine": "Trepadeiras douradas",
 	"block.betternether.geyser": "Gêiser",
 	
 	"item.betternether.cincinnasite_shovel": "Pá de cincinnasita",
@@ -242,7 +242,7 @@
 	"item.betternether.cincinnasite_sword": "Espada de cincinnasita",
 	"item.betternether.cincinnasite_sword_diamond": "Espada de cincinnasita com diamante",
 	
-	"item.betternether.spawn_egg_firefly": "Ovo gerador de vagalume",
+	"item.betternether.spawn_egg_firefly": "Ovo gerador de vagalume do Nether",
 	"item.betternether.cincinnasite_ingot": "Barra de cincinnasita",
 	
 	"block.betternether.mushroom_stem": "Talo de cogumelo",
@@ -300,9 +300,9 @@
 	"block.betternether.wart_bark": "Hifas de fungo do Nether",
 	"block.betternether.wart_roots": "Volva de fungo do Nether",
 	
-	"block.betternether.wall_moss": "Infra-musgo",
-	"block.betternether.wall_mushroom_brown": "Cogumelo marrom de parede",
-	"block.betternether.wall_mushroom_red": "Cogumelo vermelho de parede",
+	"block.betternether.wall_moss": "Musgo do Nether",
+	"block.betternether.wall_mushroom_brown": "Políporo de cogumelo marrom",
+	"block.betternether.wall_mushroom_red": "Políporo de cogumelo vermelho",
 	
 	"block.betternether.roof_tile_reeds": "Telhas de junco do Nether",
 	"block.betternether.roof_tile_reeds_stairs": "Escadas de telhas de junco do Nether",
@@ -379,12 +379,12 @@
 	"biome.betternether.old_swampland": "Pântano do Nether antigo",
 	"biome.betternether.flooded_deltas": "Deltas de basalto inundadas",
 	
-	"block.betternether.mushroom_fir": "Abetomelo gigante",
+	"block.betternether.mushroom_fir": "Abetomelo",
 	"block.betternether.mushroom_fir_sapling": "Primórdia de abetomelo",
 	"block.betternether.mushroom_fir_stem": "Talo de abetomelo",
-	"block.betternether.mushroom_fir_log": "Tora de abetomelo",
+	"block.betternether.mushroom_fir_log": "Caule de abetomelo",
 	"block.betternether.mushroom_fir_wood": "Hifas de abetomelo",
-	"block.betternether.striped_log_mushroom_fir": "Tora de abetomelo descascada",
+	"block.betternether.striped_log_mushroom_fir": "Caule de abetomelo descascado",
 	"block.betternether.striped_wood_mushroom_fir": "Hifas de abetomelo descascadas",
 	"block.betternether.mushroom_fir_planks": "Tábuas de abetomelo",
 	"block.betternether.mushroom_fir_stairs": "Escadas de abetomelo",
@@ -441,7 +441,7 @@
 	"block.betternether.bar_stool_dark_oak": "Banqueta de carvalho escuro",
 	
 	"item.betternether.cincinnasite_hammer": "Martelo de cincinnasita",
-	"item.betternether.cincinnasite_hammer_diamond": "Martelo de cincinnasita e diamante",
+	"item.betternether.cincinnasite_hammer_diamond": "Martelo de cincinnasita com diamante",
 	
 	"block.betternether.nether_brewing_stand": "Suporte de poções do Nether",
 	
@@ -604,7 +604,7 @@
 	"block.betternether.mushroom_grass": "Cogugrama",
 	"block.betternether.bone_grass": "Grama óssea",
 	"block.betternether.lumabus_seed": "Semente de lumábus",
-	"block.betternether.lumabus_vine": "Trepadeira de lumábus",
+	"block.betternether.lumabus_vine": "Trepadeiras de lumábus",
 	"item.betternether.glowstone_pile": "Pilha de pedra luminosa",
 	"block.betternether.jellyfish_mushroom": "Cogumelo-medusa",
 	"block.betternether.jellyfish_mushroom_sapling": "Primórdia de cogumelo-medusa",
@@ -619,7 +619,7 @@
 	"block.betternether.sepia_mushroom_grass": "Cogugrama sulfúrica",
 	"block.betternether.sepia_bone_grass": "Grama óssea sulfúrica",
 	"block.betternether.golden_lumabus_seed": "Semente de lumábus-dourado",
-	"block.betternether.golden_lumabus_vine": "Trepadeira de lumábus-dourado",
+	"block.betternether.golden_lumabus_vine": "Trepadeiras de lumábus-dourado",
 	
 	"block.betternether.cincinnasite_fire_bowl": "Lareira de cincinnasita",
 	"block.betternether.bricks_fire_bowl": "Lareira de tijolo do Nether",
@@ -653,12 +653,12 @@
 	"block.betternether.striped_log_anchor_tree": "Tronco de ancorácea descascado",
 	"block.betternether.taburet_anchor_tree": "Banco de ancorácea",
 	
-	"block.betternether.anchor_tree_vine": "Trepadeira de ancorácea",
+	"block.betternether.anchor_tree_vine": "Trepadeiras de ancorácea",
 	"block.betternether.anchor_tree_leaves": "Folhas de ancorácea",
 	"block.betternether.anchor_tree_sapling": "Muda de ancorácea",
 	
 	"block.betternether.giant_lucis": "Lúcis gigante",
-	"block.betternether.moss_cover": "Infra-musgo invertido",
+	"block.betternether.moss_cover": "Infra-musgo",
 	
 	"block.betternether.nether_sakura_bark": "Madeira de sakura do Nether",
 	"block.betternether.nether_sakura_button": "Botão de sakura do Nether",
@@ -685,7 +685,7 @@
 	"block.betternether.nether_sakura_leaves": "Folhas de sakura do Nether",
 	"block.betternether.nether_sakura_sapling": "Muda de sakura do Nether",
 	
-	"block.betternether.ceiling_mushrooms": "Cogugrama de teto",
+	"block.betternether.ceiling_mushrooms": "Cogugrama invertida",
 	"block.betternether.neon_equisetum": "Cavalinha néon",
 	"block.betternether.hook_mushroom": "Cogumelo-anzol",
 	"item.betternether.hook_mushroom_cooked": "Cogumelo-anzol assado",
@@ -694,5 +694,5 @@
 	"block.betternether.whispering_gourd": "Cabaça-sussurrante",
 	"block.betternether.whispering_gourd_lantern": "Cabaça-sussurrante de Halloween",
 	
-	"block.betternether.willow_torch": "Luminóforo de infra-salgueiro"
+	"block.betternether.willow_torch": "Luminóforo de salgueiro do Nether"
 }
