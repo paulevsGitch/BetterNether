@@ -69,7 +69,7 @@
 	"block.betternether.cincinnasite_bricks": "Tijolos de cincinnasita",
 	"block.betternether.cincinnasite_bricks_pillar": "Pilar de tijolos de cincinnasita",
 	"block.betternether.cincinnasite_button": "Botão de cincinnasita",
-	"block.betternether.cincinnasite_carved": "Cincinnasita talhada",
+	"block.betternether.cincinnasite_carved": "Cincinnasita cinzelada",
 	"block.betternether.cincinnasite_forge": "Forja de cincinnasita",
 	"block.betternether.cincinnasite_forged": "Bloco de cincinnasita",
 	"block.betternether.cincinnasite_frame": "Emoldurado de cincinnasita",
@@ -538,7 +538,7 @@
 	"config.betternether.reset": "Resetar",
 	"config.betternether.fog": "Distância do nevoeiro",
 	"config.betternether.lavafalls": "§b*§rPartículas das cachoeiras de lava",
-	"config.betternether.armour": "§b*§rArmadura",
+	"config.betternether.armour": "§b*§rArmadura",*
 	
 	"block.betternether.crafting_table_crimson": "Bancada carmesim",
 	"block.betternether.crafting_table_warped": "Bancada distorcida",
