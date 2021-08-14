@@ -538,7 +538,7 @@
 	"config.betternether.reset": "Resetar",
 	"config.betternether.fog": "Distância do nevoeiro",
 	"config.betternether.lavafalls": "§b*§rPartículas das cachoeiras de lava",
-	"config.betternether.armour": "§b*§rArmadura",*
+	"config.betternether.armour": "§b*§rMenor offset das armaduras",
 	
 	"block.betternether.crafting_table_crimson": "Bancada carmesim",
 	"block.betternether.crafting_table_warped": "Bancada distorcida",
