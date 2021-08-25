@@ -14,7 +14,7 @@ public class Patcher {
 //--- Level 01
 class Patcher_001 extends Patch {
 	public Patcher_001() {
-		super(BetterNether.MOD_ID, "5.2.0");
+		super(BetterNether.MOD_ID, "5.3.0");
 	}
 	
 	@Override
