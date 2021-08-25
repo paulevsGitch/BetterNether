@@ -46,6 +46,7 @@ public class RoofMaterial extends NetherWoodenMaterial {
 	
 	@Override
 	public void initDefaultRecipes() {
+		super.initDefaultRecipes();
 		final Block planks = getBlock(BLOCK_PLANKS);
 		final Block slab = getBlock(BLOCK_SLAB);
 		
