@@ -21,6 +21,7 @@ class Patcher_001 extends Patch {
 	public Map<String, String> getIDReplacements() {
 		return Map.ofEntries(
 				Map.entry("betternether:chest", "bclib:chest"),
+				Map.entry("betternether:barrel", "bclib:barrel"),
 				// Stalagnate //
 				Map.entry("betternether:striped_log_stalagnate", "betternether:stalagnate_stripped_log"),
 				Map.entry("betternether:striped_bark_stalagnate", "betternether:stalagnate_stripped_bark"),

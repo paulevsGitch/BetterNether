@@ -148,6 +148,7 @@ import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.structures.plants.StructureLumabusVine;
 import paulevs.betternether.tab.CreativeTabs;
 import ru.bclib.api.TagAPI;
+import ru.bclib.blocks.BaseBarrelBlock;
 import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.registry.BaseBlockEntities;
 
@@ -862,8 +863,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	}
 
 	public static Block registerBarrel(String name, Block source, Block slab) {
-		Block block = new BNBarrel(source);
+		Block block = new BaseBarrelBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+			BaseBlockEntities.BARREL.registerBlock(block);
 			registerBlockDirectly(name, block);
 			addFuel(source, block);
 			RecipesHelper.makeBarrelRecipe(source, slab, block);
