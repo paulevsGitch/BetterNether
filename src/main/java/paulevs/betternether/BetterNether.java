@@ -18,6 +18,7 @@ import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.NetherBiomeSource;
 import paulevs.betternether.world.structures.piece.StructureTypes;
+import ru.bclib.api.WorldDataAPI;
 import ru.bclib.api.dataexchange.DataExchangeAPI;
 import ru.bclib.util.Logger;
 
@@ -32,7 +33,6 @@ public class BetterNether implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("######## BetterNether for 1.17.1 ########");
-		DataExchangeAPI.registerMod(BetterNether.MOD_ID);
 		//MinecraftClient.getInstance().getEntityModelLoader().reload(MinecraftClient.getInstance().getResourceManager());
 		initOptions();
 		SoundsRegistry.register();
@@ -53,7 +53,8 @@ public class BetterNether implements ModInitializer {
 		NetherBiomeSource.register();
 		
 		Configs.saveConfigs();
-		
+		WorldDataAPI.registerModCache(MOD_ID);
+		DataExchangeAPI.registerMod(BetterNether.MOD_ID);
 		Patcher.register();
 	}
 	

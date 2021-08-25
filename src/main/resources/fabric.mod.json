@@ -31,7 +31,7 @@
 			"paulevs.betternether.client.BetterNetherClient"
 		],
 		"modmenu": [
-			"paulevs.betternether.config.ModMenuEntry"
+			"paulevs.betternether.config.ModMenuEntry::entrypointObject"
 		]
 	},
     "accessWidener" : "betternether.accesswidener",

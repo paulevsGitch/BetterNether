@@ -27,7 +27,7 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/javax.annotation/jsr305
 	compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-	modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+	//modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
 
 	println "Using local BCLib: ${local_bclib}"
     if (local_bclib){
@@ -44,7 +44,7 @@ repositories {
     //mavenLocal()
     maven { url 'https://jitpack.io' }
     maven { url "https://maven.shedaniel.me/" }
-	maven { url "https://maven.terraformersmc.com/releases/"}
+	//maven { url "https://maven.terraformersmc.com/releases/"}
     flatDir {
         dirs 'libs'
     }
