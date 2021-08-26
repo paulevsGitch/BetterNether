@@ -23,7 +23,7 @@ public class OldWarpedWoods extends NetherBiome {
 				.setLoop(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_WARPED_FOREST_MOOD)
-				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.WARPED_SPORE, 0.025F))
+				.setParticles(ParticleTypes.WARPED_SPORE, 0.025F)
 				.setDefaultMobs(false)
 				.addMobSpawn(EntityType.ENDERMAN, 1, 4, 4)
 				.addMobSpawn(EntityType.STRIDER, 60, 1, 2));

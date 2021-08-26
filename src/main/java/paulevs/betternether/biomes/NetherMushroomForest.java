@@ -30,7 +30,7 @@ public class NetherMushroomForest extends NetherBiome {
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setMusic(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.MYCELIUM, 0.1F)));
+				.setParticles(ParticleTypes.MYCELIUM, 0.1F));
 		this.setNoiseDensity(0.5F);
 		addStructure("large_red_mushroom", new StructureMedRedMushroom(), StructureType.FLOOR, 0.12F, true);
 		addStructure("large_brown_mushroom", new StructureMedBrownMushroom(), StructureType.FLOOR, 0.12F, true);

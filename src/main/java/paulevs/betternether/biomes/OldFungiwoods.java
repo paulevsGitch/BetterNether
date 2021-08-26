@@ -28,7 +28,8 @@ public class OldFungiwoods extends NetherBiome {
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setMusic(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.MYCELIUM, 0.1F)));
+				.setGenChance(0.3F)
+				.setParticles(ParticleTypes.MYCELIUM, 0.1F));
 		this.setNoiseDensity(0.5F);
 		addStructure("old_red_mushrooms", new StructureOldRedMushrooms(), StructureType.FLOOR, 0.1F, false);
 		addStructure("old_brown_mushrooms", new StructureOldBrownMushrooms(), StructureType.FLOOR, 0.1F, false);

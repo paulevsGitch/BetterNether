@@ -18,6 +18,7 @@ import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.mixin.common.GenerationSettingsAccessor;
 import paulevs.betternether.registry.BiomesRegistry;
+import ru.bclib.world.biomes.BCLBiome;
 
 public class NetherBiomeSource extends BiomeSource {
 	public static final Codec<NetherBiomeSource> CODEC = RecordCodecBuilder.create((instance) -> {
@@ -59,7 +60,7 @@ public class NetherBiomeSource extends BiomeSource {
 
 	@Override
 	public Biome getNoiseBiome(int biomeX, int biomeY, int biomeZ) {
-		NetherBiome netherBiome = map.getBiome(biomeX << 2, biomeY << 2, biomeZ << 2);
+		BCLBiome netherBiome = map.getBiome(biomeX << 2, biomeY << 2, biomeZ << 2);
 		if (biomeX == 0 && biomeZ == 0) {
 			map.clearCache();
 		}

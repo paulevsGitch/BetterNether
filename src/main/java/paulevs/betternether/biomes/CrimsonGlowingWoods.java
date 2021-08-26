@@ -30,7 +30,8 @@ public class CrimsonGlowingWoods extends NetherBiome {
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.025F))
+				.setParticles(ParticleTypes.CRIMSON_SPORE, 0.025F)
+				.setGenChance(0.3F)
 				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
 		addStructure("crimson_glowing_tree", new StructureCrimsonGlowingTree(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.05F, false);

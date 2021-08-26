@@ -36,7 +36,9 @@ public class NetherJungle extends NetherBiome {
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setDefaultMobs(false)
-				.addMobSpawn(EntityRegistry.JUNGLE_SKELETON, 40, 2, 4));
+				.addMobSpawn(EntityRegistry.JUNGLE_SKELETON, 40, 2, 4)
+		);
+		
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);
 		addStructure("rubeus_tree", new StructureRubeus(), StructureType.FLOOR, 0.1F, false);

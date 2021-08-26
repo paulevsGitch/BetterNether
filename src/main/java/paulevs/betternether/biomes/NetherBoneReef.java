@@ -26,7 +26,8 @@ public class NetherBoneReef extends NetherBiome {
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setStalactites(false)
-				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.WARPED_SPORE, 0.01F)));
+				.setParticles(ParticleTypes.WARPED_SPORE, 0.01F)
+		);
 
 		addStructure("bone_stalactite", new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 

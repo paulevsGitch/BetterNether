@@ -25,7 +25,8 @@ public class NetherSulfuricBoneReef extends NetherBiome {
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setStalactites(false)
-				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.ASH, 0.01F)));
+				.setGenChance(0.3F)
+				.setParticles(ParticleTypes.ASH, 0.01F));
 
 		addStructure("bone_stalactite", new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 

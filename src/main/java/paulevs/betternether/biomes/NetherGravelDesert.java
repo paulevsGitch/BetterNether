@@ -22,7 +22,7 @@ public class NetherGravelDesert extends NetherBiome {
 				.setMood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
 				.setAdditions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
 				.setMusic(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
-				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.ASH, 0.02F)));
+				.setParticles(ParticleTypes.ASH, 0.02F));
 		addStructure("nether_cactus", new StructureNetherCactus(), StructureType.FLOOR, 0.02F, true);
 		addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);
 		addStructure("barrel_cactus", new StructureBarrelCactus(), StructureType.FLOOR, 0.02F, true);

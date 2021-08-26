@@ -40,6 +40,8 @@ import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.biomes.UpsideDownForest;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
+import ru.bclib.api.BiomeAPI;
+import ru.bclib.world.biomes.BCLBiome;
 
 public class BiomesRegistry {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
@@ -171,7 +173,7 @@ public class BiomesRegistry {
 			while (OCCUPIED_IDS.contains(biomeID)) {
 				biomeID ++;
 			}
-			Registry.registerMapping(BuiltinRegistries.BIOME, biomeID, biome.getID().toString(), biome.getBiome());
+			//Registry.registerMapping(BuiltinRegistries.BIOME, biomeID, biome.getID().toString(), biome.getBiome());
 		}
 	}
 
@@ -186,12 +188,17 @@ public class BiomesRegistry {
 			REGISTRY.add(biome);
 			ALL_BIOMES.add(biome);
 			register(biome);
+			
+			Biome b = BuiltinRegistries.BIOME.get(biome.getID());
+			if (b==null) {
+				BiomeAPI.registerNetherBiome(biome);
+			}
 		}
 	}
 
 	public static void registerEdgeBiome(NetherBiome biome, NetherBiome mainBiome, int size) {
 		String regName = biome.getRegistryName();
-		float sizeConf = Configs.GENERATOR.getFloat("biomes.betternether.edge", regName + "_size", size);
+		int sizeConf = (int)Configs.GENERATOR.getFloat("biomes.betternether.edge", regName + "_size", size);
 		if (sizeConf > 0.0F) {
 			String path = "generator.biome." + biome.getID().getNamespace() + "." + biome.getID().getPath();
 			biome.setPlantDensity(Configs.BIOMES.getFloat(path, "plants_and_structures_density", 1));
@@ -200,6 +207,8 @@ public class BiomesRegistry {
 			biome.build();
 			ALL_BIOMES.add(biome);
 			register(biome);
+			
+			BiomeAPI.registerBiome(biome);
 		}
 	}
 
@@ -213,6 +222,8 @@ public class BiomesRegistry {
 			biome.build();
 			ALL_BIOMES.add(biome);
 			register(biome);
+			
+			BiomeAPI.registerBiome(biome);
 		}
 	}
 

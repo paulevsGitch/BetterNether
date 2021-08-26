@@ -28,7 +28,8 @@ public class NetherSoulPlain extends NetherBiome {
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.PORTAL, 0.02F)));
+				.setGenChance(1F)
+				.setParticles(ParticleTypes.PORTAL, 0.02F));
 		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, true);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
 		addStructure("soul_grass", new StructureSoulGrass(), StructureType.FLOOR, 0.3F, false);

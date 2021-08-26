@@ -24,6 +24,7 @@ public class NetherPoorGrasslands extends NetherBiome {
 				.setFogColor(113, 73, 133)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				.setGenChance(0.3F)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD));
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.05F, false);
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.005F, true);

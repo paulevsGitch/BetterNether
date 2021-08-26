@@ -45,16 +45,11 @@ public class NetherGrasslands extends NetherBiome {
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
 		switch (random.nextInt(3)) {
-			case 0:
-				BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
-				break;
-			case 1:
-				BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
-				break;
-			default:
-				super.genSurfColumn(world, pos, random);
-				break;
+			case 0 -> BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
+			case 1 -> BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
+			default -> super.genSurfColumn(world, pos, random);
 		}
+		
 		for (int i = 1; i < random.nextInt(3); i++) {
 			BlockPos down = pos.below(i);
 			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down))) {

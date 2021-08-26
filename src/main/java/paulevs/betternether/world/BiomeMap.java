@@ -6,6 +6,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.noise.OpenSimplexNoise;
+import ru.bclib.world.biomes.BCLBiome;
 
 public class BiomeMap {
 	private static final HashMap<ChunkPos, BiomeChunk> MAPS = new HashMap<ChunkPos, BiomeChunk>();
@@ -84,11 +85,11 @@ public class BiomeMap {
 		return chunk.getBiome((int) x, Mth.clamp((int) y, 0, maxHeight - 1), (int) z);
 	}
 
-	public NetherBiome getBiome(int x, int y, int z) {
-		NetherBiome biome = getRawBiome(x, y > 30 ? y : 30, z);
+	public BCLBiome getBiome(int x, int y, int z) {
+		BCLBiome biome = getRawBiome(x, y > 30 ? y : 30, z);
 
 		if (biome.hasEdge() || (biome.hasParentBiome() && biome.getParentBiome().hasEdge())) {
-			NetherBiome search = biome;
+			BCLBiome search = biome;
 			if (biome.hasParentBiome()) {
 				search = biome.getParentBiome();
 			}

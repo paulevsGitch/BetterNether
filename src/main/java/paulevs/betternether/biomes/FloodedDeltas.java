@@ -24,7 +24,7 @@ public class FloodedDeltas extends NetherBiome {
 				.setMood(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD)
 				.setMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS)
 				.setStalactites(false)
-				.setParticleConfig(new AmbientParticleSettings(ParticleTypes.WHITE_ASH, 0.12F)));
+				.setParticles(ParticleTypes.WHITE_ASH, 0.12F));
 
 		addStructure("blackstone_stalactite", STALACTITE_BLACKSTONE, StructureType.FLOOR, 0.2F, true);
 		addStructure("stalactite_stalactite", STALACTITE_BASALT, StructureType.FLOOR, 0.2F, true);
