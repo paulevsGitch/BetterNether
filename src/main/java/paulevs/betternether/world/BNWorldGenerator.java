@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 
+import com.google.common.collect.Lists;
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -27,6 +29,7 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.mixin.common.GenerationSettingsAccessor;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureCaves;
@@ -74,7 +77,14 @@ public class BNWorldGenerator {
 	public static final ConfiguredStructureFeature<NoneFeatureConfiguration, ? extends StructureFeature<NoneFeatureConfiguration>> CITY_CONFIGURED = CITY.configured(NoneFeatureConfiguration.NONE);
 	
 	public static void onModInit() {
-		BCLibNetherBiomeSource.onInit = (reg) -> BiomesRegistry.mutateRegistry(reg);
+		BCLibNetherBiomeSource.onInit.add( (biomeSource) -> {
+			biomeSource.possibleBiomes().forEach((biome) -> {
+				GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
+				List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureStarts());
+				structures.add(() -> BNWorldGenerator.CITY_CONFIGURED);
+				accessor.setStructureStarts(structures);
+			});
+		});
 		
 		hasCleaningPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
 		hasFixPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "world_fixing_pass", true);
