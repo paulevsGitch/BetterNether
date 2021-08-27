@@ -8,25 +8,21 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.blockentities.BNBarrelBlockEntity;
 import paulevs.betternether.blockentities.BNBrewingStandBlockEntity;
-import paulevs.betternether.blockentities.BNChestBlockEntity;
 import paulevs.betternether.blockentities.BNSignBlockEntity;
 import paulevs.betternether.blockentities.BlockEntityChestOfDrawers;
 import paulevs.betternether.blockentities.BlockEntityForge;
 import paulevs.betternether.blockentities.BlockEntityFurnace;
-import paulevs.betternether.blocks.BNBarrel;
-import paulevs.betternether.blocks.BNChest;
 import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.blocks.BlockNetherFurnace;
+import ru.bclib.blocks.BaseBarrelBlock;
+import ru.bclib.blocks.BaseChestBlock;
 
 public class BlockEntitiesRegistry {
 	public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = BlockEntityType.Builder.of(BlockEntityForge::new, NetherBlocks.CINCINNASITE_FORGE).build(null);
 	public static final BlockEntityType<BlockEntityFurnace> NETHERRACK_FURNACE = BlockEntityType.Builder.of(BlockEntityFurnace::new, getFurnaces()).build(null);
 	public static final BlockEntityType<BlockEntityChestOfDrawers> CHEST_OF_DRAWERS = BlockEntityType.Builder.of(BlockEntityChestOfDrawers::new, NetherBlocks.CHEST_OF_DRAWERS).build(null);
 	public static final BlockEntityType<BNBrewingStandBlockEntity> NETHER_BREWING_STAND = BlockEntityType.Builder.of(BNBrewingStandBlockEntity::new, NetherBlocks.NETHER_BREWING_STAND).build(null);
-	public static final BlockEntityType<BNChestBlockEntity> CHEST = BlockEntityType.Builder.of(BNChestBlockEntity::new, getChests()).build(null);
-	public static final BlockEntityType<BNBarrelBlockEntity> BARREL = BlockEntityType.Builder.of(BNBarrelBlockEntity::new, getBarrels()).build(null);
 	public static final BlockEntityType<BNSignBlockEntity> SIGN = BlockEntityType.Builder.of(BNSignBlockEntity::new, getSigns()).build(null);
 
 	public static void register() {
@@ -34,8 +30,6 @@ public class BlockEntitiesRegistry {
 		RegisterBlockEntity("furnace", NETHERRACK_FURNACE);
 		RegisterBlockEntity("chest_of_drawers", CHEST_OF_DRAWERS);
 		RegisterBlockEntity("nether_brewing_stand", NETHER_BREWING_STAND);
-		RegisterBlockEntity("chest", CHEST);
-		RegisterBlockEntity("barrel", BARREL);
 		RegisterBlockEntity("sign", SIGN);
 	}
 
@@ -47,7 +41,7 @@ public class BlockEntitiesRegistry {
 		List<Block> result = new ArrayList<Block>();
 		NetherBlocks.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
-			if (block instanceof BNChest)
+			if (block instanceof BaseChestBlock)
 				result.add(block);
 		});
 		return result.toArray(new Block[] {});
@@ -57,7 +51,7 @@ public class BlockEntitiesRegistry {
 		List<Block> result = new ArrayList<Block>();
 		NetherBlocks.getPossibleBlocks().forEach((name) -> {
 			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
-			if (block instanceof BNBarrel)
+			if (block instanceof BaseBarrelBlock)
 				result.add(block);
 		});
 		return result.toArray(new Block[] {});
