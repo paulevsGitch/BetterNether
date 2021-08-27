@@ -36,6 +36,7 @@ public class NetherJungle extends NetherBiome {
 				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setDefaultMobs(false)
+				.setSurface(NetherBlocks.JUNGLE_GRASS)
 				.addMobSpawn(EntityRegistry.JUNGLE_SKELETON, 40, 2, 4)
 		);
 		

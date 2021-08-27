@@ -14,7 +14,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
+import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import ru.bclib.world.biomes.BCLBiomeDef;
@@ -281,7 +284,11 @@ public class BiomeDefinition extends BCLBiomeDef {
 	
 	@Override
 	public BiomeDefinition setSurface(Block block){
-		super.setSurface(block);
+		super.setSurface(SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderBaseConfiguration(
+			block.defaultBlockState(),
+			Blocks.NETHERRACK.defaultBlockState(),
+			Blocks.NETHERRACK.defaultBlockState()
+		)));
 		return this;
 	}
 }

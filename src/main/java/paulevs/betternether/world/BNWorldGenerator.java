@@ -33,6 +33,8 @@ import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.structures.CityFeature;
+import ru.bclib.api.BiomeAPI;
+import ru.bclib.world.generator.BCLibNetherBiomeSource;
 
 public class BNWorldGenerator {
 	private static boolean hasCleaningPass;
@@ -72,6 +74,8 @@ public class BNWorldGenerator {
 	public static final ConfiguredStructureFeature<NoneFeatureConfiguration, ? extends StructureFeature<NoneFeatureConfiguration>> CITY_CONFIGURED = CITY.configured(NoneFeatureConfiguration.NONE);
 	
 	public static void onModInit() {
+		BCLibNetherBiomeSource.onInit = (reg) -> BiomesRegistry.mutateRegistry(reg);
+		
 		hasCleaningPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
 		hasFixPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "world_fixing_pass", true);
 
@@ -100,6 +104,8 @@ public class BNWorldGenerator {
 				.register();
 
 		BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
+		
+		
 	}
 
 	public static void init(long seed) {
@@ -297,7 +303,12 @@ public class BNWorldGenerator {
 				for (int z = 0; z < 8; z++) {
 					popPos.setZ(sz + (z << 1) + 2);
 					Biome b = world.getBiome(popPos);
-					BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
+					if (BiomeAPI.getFromBiome(b) instanceof NetherBiome nBiome) {
+						BIOMES[x][y][z] = nBiome;
+					} else {
+						BIOMES[x][y][z] = BiomesRegistry.BIOME_EMPTY_NETHER;
+					}
+					//BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
 					MC_BIOMES.add(b);
 				}
 			}

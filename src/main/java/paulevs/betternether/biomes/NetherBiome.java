@@ -26,6 +26,7 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.StructureWorld;
 import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
+import paulevs.betternether.structures.plants.StructureRubeus;
 import paulevs.betternether.structures.plants.StructureWartCap;
 import paulevs.betternether.world.BNWorldGenerator;
 import ru.bclib.world.biomes.BCLBiome;
@@ -186,25 +187,6 @@ public class NetherBiome extends BCLBiome{
 		return mcID.getPath();
 	}
 	
-	public void addSubBiome(NetherBiome biome, float chance) {
-		maxSubBiomeChance += chance;
-		biome.setGenChance(maxSubBiomeChance);
-		super.addSubBiome(biome);
-	}
-
-    @Override
-    public NetherBiome getSubBiome(Random random) {
-		float chance = random.nextFloat() * maxSubBiomeChance;
-		for (int i=0; i<subbiomes.size(); i++) {
-			BCLBiome biome = subbiomes.get(i);
-			if (biome instanceof NetherBiome nbiome) {
-				if (nbiome.canGenerate(chance)) return nbiome;
-			} else {
-				BetterNether.LOGGER.error("Worng Biome Type " + biome);
-			}
-		}
-		return this;
-	}
 	
 	protected void addStructure(String name, IStructure structure, StructureType type, float density, boolean useNoise) {
 		String group = getGroup() + ".procedural." + type.getName() + "." + name;
@@ -250,17 +232,6 @@ public class NetherBiome extends BCLBiome{
 		boolean canGenerate(Random random, BlockPos pos) {
 			return (!useNoise || getFeatureNoise(pos, id) > noiseDensity) && random.nextFloat() < density;
 		}
-	}
-	
-	public boolean canGenerate(float chance) {
-		return chance <= this.localGenChance;
-	}
-	
-	public float getGenChance() {
-		return this.localGenChance;
-	}
-	public void setGenChance(float chance) {
-		this.localGenChance = chance;
 	}
 
 	protected static String structureFormat(String name, int offset, StructureType type, float chance) {

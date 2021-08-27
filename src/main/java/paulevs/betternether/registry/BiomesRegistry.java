@@ -150,7 +150,7 @@ public class BiomesRegistry {
 				float chance = Configs.GENERATOR.getFloat("biomes." + id.getNamespace() + ".main", id.getPath() + "_chance", 1);
 				if (chance > 0.0F) {
 					maxChance += chance;
-					netherBiome.setGenChance(maxChance);
+					//netherBiome.setGenChance(maxChance);
 					String path = "generator.biome." + netherBiome.getID().getNamespace() + "." + netherBiome.getID().getPath();
 					netherBiome.setPlantDensity(Configs.BIOMES.getFloat(path, "plants_and_structures_density", 1));
 					netherBiome.build();
@@ -183,7 +183,7 @@ public class BiomesRegistry {
 			maxChance += chance;
 			String path = "generator.biome." + biome.getID().getNamespace() + "." + biome.getID().getPath();
 			biome.setPlantDensity(Configs.BIOMES.getFloat(path, "plants_and_structures_density", 1));
-			biome.setGenChance(maxChance);
+			//biome.setGenChance(maxChance);
 			biome.build();
 			REGISTRY.add(biome);
 			ALL_BIOMES.add(biome);
@@ -218,26 +218,26 @@ public class BiomesRegistry {
 		if (chance > 0.0F) {
 			String path = "generator.biome." + biome.getID().getNamespace() + "." + biome.getID().getPath();
 			biome.setPlantDensity(Configs.BIOMES.getFloat(path, "plants_and_structures_density", 1));
-			mainBiome.addSubBiome(biome, chance);
 			biome.build();
 			ALL_BIOMES.add(biome);
 			register(biome);
 			
-			BiomeAPI.registerBiome(biome);
+			BiomeAPI.registerSubBiome(mainBiome, biome);
 		}
 	}
 
-	public static NetherBiome getBiome(Random random) {
-		float chance = random.nextFloat() * maxChance;
-		for (NetherBiome biome : GENERATOR)
+	public static BCLBiome getBiome(Random random) {
+		return BiomeAPI.NETHER_BIOME_PICKER.getBiome(random);
+		//float chance = random.nextFloat() * maxChance;
+		/*for (NetherBiome biome : GENERATOR)
 			if (biome.canGenerate(chance))
-				return biome;
-		return BIOME_EMPTY_NETHER;
+				return biome;*/
+		//return BIOME_EMPTY_NETHER;
 	}
 
-	public static NetherBiome getFromBiome(Biome biome) {
+	/*public static NetherBiome getFromBiome(Biome biome) {
 		return MUTABLE.getOrDefault(biome, BIOME_EMPTY_NETHER);
-	}
+	}*/
 
 	public static ArrayList<NetherBiome> getRegisteredBiomes() {
 		return REGISTRY;

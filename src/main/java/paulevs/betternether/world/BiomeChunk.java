@@ -4,6 +4,7 @@ import java.util.Random;
 
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.BiomesRegistry;
+import ru.bclib.world.biomes.BCLBiome;
 
 public class BiomeChunk {
 	protected static final int WIDTH = 16;
@@ -13,13 +14,13 @@ public class BiomeChunk {
 
 	private final int maxY;
 	private final int maskB;
-	private final NetherBiome[][][] biomes;
+	private final BCLBiome[][][] biomes;
 
 	public BiomeChunk(BiomeMap map, Random random) {
 		int sm_height = clampOne(map.maxHeight >> 1);
 		maskB = sm_height - 1;
 		maxY = map.maxHeight - 1;
-		NetherBiome[][][] PreBio = new NetherBiome[sm_height][SM_WIDTH][SM_WIDTH];
+		BCLBiome[][][] PreBio = new NetherBiome[sm_height][SM_WIDTH][SM_WIDTH];
 		biomes = new NetherBiome[map.maxHeight][WIDTH][WIDTH];
 
 		for (int y = 0; y < sm_height; y++)
@@ -33,7 +34,7 @@ public class BiomeChunk {
 					biomes[y][x][z] = PreBio[offsetY(y, random)][offsetXZ(x, random)][offsetXZ(z, random)].getSubBiome(random);
 	}
 
-	public NetherBiome getBiome(int x, int y, int z) {
+	public BCLBiome getBiome(int x, int y, int z) {
 		return biomes[clamp(y)][x & MASK_C][z & MASK_C];
 	}
 

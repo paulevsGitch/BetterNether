@@ -28,6 +28,7 @@ public class NetherBiomeSource extends BiomeSource {
 			return theEndBiomeSource.seed;
 		})).apply(instance, instance.stable(NetherBiomeSource::new));
 	});
+	
 	private BiomeMap map;
 	private final long seed;
 	private final Registry<Biome> biomeRegistry;

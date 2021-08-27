@@ -42,7 +42,7 @@ public class BiomeMap {
 			MAPS.clear();
 	}
 
-	private NetherBiome getRawBiome(int bx, int by, int bz) {
+	private BCLBiome getRawBiome(int bx, int by, int bz) {
 		double x = bx * size / sizeXZ;
 		double y = volumetric ? by * size / sizeY : 0;
 		double z = bz * size / sizeXZ;
