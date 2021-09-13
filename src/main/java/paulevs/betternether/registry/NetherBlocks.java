@@ -180,8 +180,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	//public static final Block BAR_STOOL_RUBEUS = registerBarStool("bar_stool_rubeus", RUBEUS_SLAB);
 	//public static final Block RUBEUS_LADDER = registerLadder("rubeus_ladder", RUBEUS_PLANKS);
 	//public static final Block SIGN_RUBEUS = registerSign("sign_rubeus", RUBEUS_PLANKS);
-	
-	
+
 	// Reed //
 	public static final Block NETHER_REED = registerBlock("nether_reed", new BlockNetherReed());
 	public static final Block REEDS_BLOCK = registerBlock("reeds_block", new BlockReedsBlock());
@@ -193,6 +192,103 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block REEDS_PLATE = registerPlate("reeds_plate", REEDS_BLOCK);
 	public static final Block REEDS_TRAPDOOR = registerTrapdoor("reeds_trapdoor", REEDS_BLOCK);
 	public static final Block REEDS_DOOR = registerDoor("reeds_door", REEDS_BLOCK);
+	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);
+	public static final Block ROOF_TILE_REEDS_STAIRS = registerStairs("roof_tile_reeds_stairs", ROOF_TILE_REEDS);
+	public static final Block ROOF_TILE_REEDS_SLAB = registerSlab("roof_tile_reeds_slab", ROOF_TILE_REEDS);
+	public static final Block CRAFTING_TABLE_REED = registerCraftingTable("crafting_table_reed", REEDS_BLOCK);
+	public static final Block CHEST_REED = registerChest("chest_reed", REEDS_BLOCK);
+	public static final Block BARREL_REED = registerBarrel("barrel_reed", REEDS_BLOCK, REEDS_SLAB);
+	public static final Block TABURET_REEDS = registerTaburet("taburet_reeds", REEDS_SLAB);
+	public static final Block CHAIR_REEDS = registerChair("chair_reeds", REEDS_SLAB);
+	public static final Block BAR_STOOL_REEDS = registerBarStool("bar_stool_reeds", REEDS_SLAB);
+	public static final Block REEDS_LADDER = registerLadder("reeds_ladder", REEDS_BLOCK);
+	public static final Block SIGN_REED = registerSign("sign_reed", REEDS_BLOCK);
+
+	// Wart //
+	public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.COLOR_RED));
+	public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MaterialColor.COLOR_RED));
+	public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_LOG_WART));
+	public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_BARK_WART), WART_LOG);
+	public static final Block WART_ROOTS = registerBlockNI("wart_roots", new BlockWartRoots());
+	public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MaterialColor.COLOR_RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
+	public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);
+	public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
+	public static final Block WART_FENCE = registerFence("wart_fence", WART_PLANKS);
+	public static final Block WART_GATE = registerGate("wart_gate", WART_PLANKS);
+	public static final Block WART_BUTTON = registerButton("wart_button", WART_PLANKS);
+	public static final Block WART_PLATE = registerPlate("wart_plate", WART_PLANKS);
+	public static final Block WART_TRAPDOOR = registerTrapdoor("wart_trapdoor", WART_PLANKS);
+	public static final Block WART_DOOR = registerDoor("wart_door", WART_PLANKS);
+	public static final Block ROOF_TILE_WART = registerRoof("roof_tile_wart", WART_PLANKS);
+	public static final Block ROOF_TILE_WART_STAIRS = registerStairs("roof_tile_wart_stairs", ROOF_TILE_WART);
+	public static final Block ROOF_TILE_WART_SLAB = registerSlab("roof_tile_wart_slab", ROOF_TILE_WART);
+	public static final Block CRAFTING_TABLE_WART = registerCraftingTable("crafting_table_wart", WART_PLANKS);
+	public static final Block CHEST_WART = registerChest("chest_wart", WART_PLANKS);
+	public static final Block BARREL_WART = registerBarrel("barrel_wart", WART_PLANKS, WART_SLAB);
+	public static final Block TABURET_WART = registerTaburet("taburet_wart", WART_SLAB);
+	public static final Block CHAIR_WART = registerChair("chair_wart", WART_SLAB);
+	public static final Block BAR_STOOL_WART = registerBarStool("bar_stool_wart", WART_SLAB);
+	public static final Block WART_LADDER = registerLadder("wart_ladder", WART_PLANKS);
+	public static final Block SIGN_WART = registerSign("sign_wart", WART_PLANKS);
+
+	// Mushroom //
+	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStem(MaterialColor.TERRACOTTA_WHITE));
+	public static final Block MUSHROOM_PLANKS = registerPlanks("mushroom_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 2, MUSHROOM_STEM);
+	public static final Block MUSHROOM_STAIRS = registerStairs("mushroom_stairs", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_SLAB = registerSlab("mushroom_slab", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_FENCE = registerFence("mushroom_fence", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_GATE = registerGate("mushroom_gate", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_BUTTON = registerButton("mushroom_button", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_PLATE = registerPlate("mushroom_plate", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_TRAPDOOR = registerTrapdoor("mushroom_trapdoor", MUSHROOM_PLANKS);
+	public static final Block MUSHROOM_DOOR = registerDoor("mushroom_door", MUSHROOM_PLANKS);
+	public static final Block CRAFTING_TABLE_MUSHROOM = registerCraftingTable("crafting_table_mushroom", MUSHROOM_PLANKS);
+	public static final Block CHEST_MUSHROOM = registerChest("chest_mushroom", MUSHROOM_PLANKS);
+	public static final Block BARREL_MUSHROOM = registerBarrel("barrel_mushroom", MUSHROOM_PLANKS, MUSHROOM_SLAB);
+	public static final Block TABURET_MUSHROOM = registerTaburet("taburet_mushroom", MUSHROOM_SLAB);
+	public static final Block CHAIR_MUSHROOM = registerChair("chair_mushroom", MUSHROOM_SLAB);
+	public static final Block BAR_STOOL_MUSHROOM = registerBarStool("bar_stool_mushroom", MUSHROOM_SLAB);
+	public static final Block MUSHROOM_LADDER = registerLadder("mushroom_ladder", MUSHROOM_PLANKS);
+	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
+
+	// Mushroom Fir //
+	public static final Block MUSHROOM_FIR = registerBlockNI("mushroom_fir", new BlockMushroomFir());
+	public static final Block MUSHROOM_FIR_SAPLING = registerBlock("mushroom_fir_sapling", new BlockMushroomFirSapling());
+	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem", new BlockStem(MaterialColor.TERRACOTTA_BLACK));
+	public static final Block STRIPED_LOG_MUSHROOM_FIR = registerBlock("striped_log_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
+	public static final Block STRIPED_WOOD_MUSHROOM_FIR = registerBlock("striped_wood_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
+	public static final Block MUSHROOM_FIR_LOG = registerLog("mushroom_fir_log", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_LOG_MUSHROOM_FIR), MUSHROOM_FIR_STEM);
+	public static final Block MUSHROOM_FIR_WOOD = registerBark("mushroom_fir_wood", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_WOOD_MUSHROOM_FIR), MUSHROOM_FIR_LOG);
+	public static final Block MUSHROOM_FIR_PLANKS = registerPlanks("mushroom_fir_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 1, MUSHROOM_FIR_STEM, MUSHROOM_FIR_LOG, MUSHROOM_FIR_WOOD, STRIPED_LOG_MUSHROOM_FIR, STRIPED_WOOD_MUSHROOM_FIR);
+	public static final Block MUSHROOM_FIR_STAIRS = registerStairs("mushroom_fir_stairs", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_FENCE = registerFence("mushroom_fir_fence", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_GATE = registerGate("mushroom_fir_gate", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_BUTTON = registerButton("mushroom_fir_button", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_PLATE = registerPlate("mushroom_fir_plate", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_TRAPDOOR = registerTrapdoor("mushroom_fir_trapdoor", MUSHROOM_FIR_PLANKS);
+	public static final Block MUSHROOM_FIR_DOOR = registerDoor("mushroom_fir_door", MUSHROOM_FIR_PLANKS);
+	public static final Block CRAFTING_TABLE_MUSHROOM_FIR = registerCraftingTable("crafting_table_mushroom_fir", MUSHROOM_FIR_PLANKS);
+	public static final Block CHEST_MUSHROOM_FIR = registerChest("chest_mushroom_fir", MUSHROOM_FIR_PLANKS);
+	public static final Block BARREL_MUSHROOM_FIR = registerBarrel("barrel_mushroom_fir", MUSHROOM_FIR_PLANKS, MUSHROOM_FIR_SLAB);
+	public static final Block TABURET_MUSHROOM_FIR = registerTaburet("taburet_mushroom_fir", MUSHROOM_FIR_SLAB);
+	public static final Block CHAIR_MUSHROOM_FIR = registerChair("chair_mushroom_fir", MUSHROOM_FIR_SLAB);
+	public static final Block BAR_STOOL_MUSHROOM_FIR = registerBarStool("bar_stool_mushroom_fir", MUSHROOM_FIR_SLAB);
+	public static final Block MUSHROOM_FIR_LADDER = registerLadder("mushroom_fir_ladder", MUSHROOM_FIR_PLANKS);
+	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
+
+	// Anchor Tree
+	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
+	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
+	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
+	public static final WoodenMaterialOld ANCHOR_TREE = new WoodenMaterialOld("anchor_tree", MaterialColor.COLOR_BLUE, MaterialColor.COLOR_GREEN);
+
+	// Nether Sakura
+	public static final Block NETHER_SAKURA_SAPLING = registerBlock("nether_sakura_sapling", new BlockNetherSakuraSapling());
+	public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves", new BlockNetherSakuraLeaves());
+	public static final WoodenMaterialOld NETHER_SAKURA = new WoodenMaterialOld("nether_sakura", MaterialColor.COLOR_PINK, MaterialColor.COLOR_BROWN);
+
+
 
 	// Cincinnasite //
 	public static final Block CINCINNASITE_ORE = registerBlock("cincinnasite_ore", new BlockOre(NetherItems.CINCINNASITE, 1, 3));
@@ -300,38 +396,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
 	public static final Block BASALT_SLAB = registerSlab("basalt_slab", Blocks.BASALT);
 
-	
-
-	// Wart //
-	public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.COLOR_RED));
-	public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MaterialColor.COLOR_RED));
-	public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_LOG_WART));
-	public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_BARK_WART), WART_LOG);
-	public static final Block WART_ROOTS = registerBlockNI("wart_roots", new BlockWartRoots());
-	public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MaterialColor.COLOR_RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
-	public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);
-	public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
-	public static final Block WART_FENCE = registerFence("wart_fence", WART_PLANKS);
-	public static final Block WART_GATE = registerGate("wart_gate", WART_PLANKS);
-	public static final Block WART_BUTTON = registerButton("wart_button", WART_PLANKS);
-	public static final Block WART_PLATE = registerPlate("wart_plate", WART_PLANKS);
-	public static final Block WART_TRAPDOOR = registerTrapdoor("wart_trapdoor", WART_PLANKS);
-	public static final Block WART_DOOR = registerDoor("wart_door", WART_PLANKS);
-
-	
-
-	// Mushroom //
-	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStem(MaterialColor.TERRACOTTA_WHITE));
-	public static final Block MUSHROOM_PLANKS = registerPlanks("mushroom_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 2, MUSHROOM_STEM);
-	public static final Block MUSHROOM_STAIRS = registerStairs("mushroom_stairs", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_SLAB = registerSlab("mushroom_slab", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_FENCE = registerFence("mushroom_fence", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_GATE = registerGate("mushroom_gate", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_BUTTON = registerButton("mushroom_button", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_PLATE = registerPlate("mushroom_plate", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_TRAPDOOR = registerTrapdoor("mushroom_trapdoor", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_DOOR = registerDoor("mushroom_door", MUSHROOM_PLANKS);
-
 	// Soul lily //
 	public static final Block SOUL_LILY = registerBlockNI("soul_lily", new BlockSoulLily());
 	public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", new BlockSoulLilySapling());
@@ -355,34 +419,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block JELLYFISH_MUSHROOM = registerBlockNI("jellyfish_mushroom", new BlockJellyfishMushroom());
 	public static final Block JELLYFISH_MUSHROOM_SAPLING = registerBlock("jellyfish_mushroom_sapling", new BlockJellyfishMushroomSapling());
 
-	// Mushroom Fir //
-	public static final Block MUSHROOM_FIR = registerBlockNI("mushroom_fir", new BlockMushroomFir());
-	public static final Block MUSHROOM_FIR_SAPLING = registerBlock("mushroom_fir_sapling", new BlockMushroomFirSapling());
-	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem", new BlockStem(MaterialColor.TERRACOTTA_BLACK));
-	public static final Block STRIPED_LOG_MUSHROOM_FIR = registerBlock("striped_log_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
-	public static final Block STRIPED_WOOD_MUSHROOM_FIR = registerBlock("striped_wood_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
-	public static final Block MUSHROOM_FIR_LOG = registerLog("mushroom_fir_log", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_LOG_MUSHROOM_FIR), MUSHROOM_FIR_STEM);
-	public static final Block MUSHROOM_FIR_WOOD = registerBark("mushroom_fir_wood", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_WOOD_MUSHROOM_FIR), MUSHROOM_FIR_LOG);
-	public static final Block MUSHROOM_FIR_PLANKS = registerPlanks("mushroom_fir_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 1, MUSHROOM_FIR_STEM, MUSHROOM_FIR_LOG, MUSHROOM_FIR_WOOD, STRIPED_LOG_MUSHROOM_FIR, STRIPED_WOOD_MUSHROOM_FIR);
-	public static final Block MUSHROOM_FIR_STAIRS = registerStairs("mushroom_fir_stairs", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_FENCE = registerFence("mushroom_fir_fence", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_GATE = registerGate("mushroom_fir_gate", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_BUTTON = registerButton("mushroom_fir_button", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_PLATE = registerPlate("mushroom_fir_plate", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_TRAPDOOR = registerTrapdoor("mushroom_fir_trapdoor", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_DOOR = registerDoor("mushroom_fir_door", MUSHROOM_FIR_PLANKS);
-
-	// Anchor Tree
-	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
-	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
-	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
-	public static final WoodenMaterialOld ANCHOR_TREE = new WoodenMaterialOld("anchor_tree", MaterialColor.COLOR_BLUE, MaterialColor.COLOR_GREEN);
-
-	// Nether Sakura
-	public static final Block NETHER_SAKURA_SAPLING = registerBlock("nether_sakura_sapling", new BlockNetherSakuraSapling());
-	public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves", new BlockNetherSakuraLeaves());
-	public static final WoodenMaterialOld NETHER_SAKURA = new WoodenMaterialOld("nether_sakura", MaterialColor.COLOR_PINK, MaterialColor.COLOR_BROWN);
 
 	// Eyes //
 	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
@@ -472,18 +508,13 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
 
 	// Roofs //
-	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);
-	public static final Block ROOF_TILE_REEDS_STAIRS = registerStairs("roof_tile_reeds_stairs", ROOF_TILE_REEDS);
-	public static final Block ROOF_TILE_REEDS_SLAB = registerSlab("roof_tile_reeds_slab", ROOF_TILE_REEDS);
 	public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS);
 	public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerStairs("roof_tile_nether_bricks_stairs", ROOF_TILE_NETHER_BRICKS);
 	public static final Block ROOF_TILE_NETHER_BRICKS_SLAB = registerSlab("roof_tile_nether_bricks_slab", ROOF_TILE_NETHER_BRICKS);
 	public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED);
 	public static final Block ROOF_TILE_CINCINNASITE_STAIRS = registerStairs("roof_tile_cincinnasite_stairs", ROOF_TILE_CINCINNASITE);
 	public static final Block ROOF_TILE_CINCINNASITE_SLAB = registerSlab("roof_tile_cincinnasite_slab", ROOF_TILE_CINCINNASITE);
-	public static final Block ROOF_TILE_WART = registerRoof("roof_tile_wart", WART_PLANKS);
-	public static final Block ROOF_TILE_WART_STAIRS = registerStairs("roof_tile_wart_stairs", ROOF_TILE_WART);
-	public static final Block ROOF_TILE_WART_SLAB = registerSlab("roof_tile_wart_slab", ROOF_TILE_WART);
+
 
 	// Craft Stations //
 	public static final Block BLACKSTONE_FURNACE = registerFurnace("blackstone_furnace", Blocks.BLACKSTONE);
@@ -496,10 +527,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CRAFTING_TABLE_CRIMSON = registerCraftingTable("crafting_table_crimson", Blocks.CRIMSON_PLANKS);
 	public static final Block CRAFTING_TABLE_WARPED = registerCraftingTable("crafting_table_warped", Blocks.WARPED_PLANKS);
 
-	public static final Block CRAFTING_TABLE_REED = registerCraftingTable("crafting_table_reed", REEDS_BLOCK);
-	public static final Block CRAFTING_TABLE_WART = registerCraftingTable("crafting_table_wart", WART_PLANKS);
-	public static final Block CRAFTING_TABLE_MUSHROOM = registerCraftingTable("crafting_table_mushroom", MUSHROOM_PLANKS);
-	public static final Block CRAFTING_TABLE_MUSHROOM_FIR = registerCraftingTable("crafting_table_mushroom_fir", MUSHROOM_FIR_PLANKS);
 
 	// Storage
 	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
@@ -507,18 +534,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CHEST_CRIMSON = registerChest("chest_crimson", Blocks.CRIMSON_PLANKS);
 	public static final Block CHEST_WARPED = registerChest("chest_warped", Blocks.WARPED_PLANKS);
 
-	public static final Block CHEST_REED = registerChest("chest_reed", REEDS_BLOCK);
-	public static final Block CHEST_WART = registerChest("chest_wart", WART_PLANKS);
-	public static final Block CHEST_MUSHROOM = registerChest("chest_mushroom", MUSHROOM_PLANKS);
-	public static final Block CHEST_MUSHROOM_FIR = registerChest("chest_mushroom_fir", MUSHROOM_FIR_PLANKS);
-
 	public static final Block BARREL_CRIMSON = registerBarrel("barrel_crimson", Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_SLAB);
 	public static final Block BARREL_WARPED = registerBarrel("barrel_warped", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB);
 
-	public static final Block BARREL_REED = registerBarrel("barrel_reed", REEDS_BLOCK, REEDS_SLAB);
-	public static final Block BARREL_WART = registerBarrel("barrel_wart", WART_PLANKS, WART_SLAB);
-	public static final Block BARREL_MUSHROOM = registerBarrel("barrel_mushroom", MUSHROOM_PLANKS, MUSHROOM_SLAB);
-	public static final Block BARREL_MUSHROOM_FIR = registerBarrel("barrel_mushroom_fir", MUSHROOM_FIR_PLANKS, MUSHROOM_FIR_SLAB);
 
 	// Taburets //
 	public static final Block TABURET_OAK = registerTaburet("taburet_oak", Blocks.OAK_SLAB);
@@ -530,11 +548,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block TABURET_CRIMSON = registerTaburet("taburet_crimson", Blocks.CRIMSON_SLAB);
 	public static final Block TABURET_WARPED = registerTaburet("taburet_warped", Blocks.WARPED_SLAB);
 
-	public static final Block TABURET_REEDS = registerTaburet("taburet_reeds", REEDS_SLAB);
-	public static final Block TABURET_WART = registerTaburet("taburet_wart", WART_SLAB);
-	public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
-	public static final Block TABURET_MUSHROOM = registerTaburet("taburet_mushroom", MUSHROOM_SLAB);
-	public static final Block TABURET_MUSHROOM_FIR = registerTaburet("taburet_mushroom_fir", MUSHROOM_FIR_SLAB);
+	public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
+
 	
 	// Chairs
 	public static final Block CHAIR_OAK = registerChair("chair_oak", Blocks.OAK_SLAB);
@@ -546,11 +561,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CHAIR_CRIMSON = registerChair("chair_crimson", Blocks.CRIMSON_SLAB);
 	public static final Block CHAIR_WARPED = registerChair("chair_warped", Blocks.WARPED_SLAB);
 
-	public static final Block CHAIR_REEDS = registerChair("chair_reeds", REEDS_SLAB);
-	public static final Block CHAIR_WART = registerChair("chair_wart", WART_SLAB);
-	public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
-	public static final Block CHAIR_MUSHROOM = registerChair("chair_mushroom", MUSHROOM_SLAB);
-	public static final Block CHAIR_MUSHROOM_FIR = registerChair("chair_mushroom_fir", MUSHROOM_FIR_SLAB);
+	public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
 	
 	// Stools //
 	public static final Block BAR_STOOL_OAK = registerBarStool("bar_stool_oak", Blocks.OAK_SLAB);
@@ -562,26 +573,12 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BAR_STOOL_CRIMSON = registerBarStool("bar_stool_crimson", Blocks.CRIMSON_SLAB);
 	public static final Block BAR_STOOL_WARPED = registerBarStool("bar_stool_warped", Blocks.WARPED_SLAB);
 
-	public static final Block BAR_STOOL_REEDS = registerBarStool("bar_stool_reeds", REEDS_SLAB);
-	public static final Block BAR_STOOL_WART = registerBarStool("bar_stool_wart", WART_SLAB);
 	public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
-	public static final Block BAR_STOOL_MUSHROOM = registerBarStool("bar_stool_mushroom", MUSHROOM_SLAB);
-	public static final Block BAR_STOOL_MUSHROOM_FIR = registerBarStool("bar_stool_mushroom_fir", MUSHROOM_FIR_SLAB);
 	
 	// Ladders //
 	public static final Block CRIMSON_LADDER = registerLadder("crimson_ladder", Blocks.CRIMSON_PLANKS);
 	public static final Block WARPED_LADDER = registerLadder("warped_ladder", Blocks.WARPED_PLANKS);
 
-	public static final Block REEDS_LADDER = registerLadder("reeds_ladder", REEDS_BLOCK);
-	public static final Block WART_LADDER = registerLadder("wart_ladder", WART_PLANKS);
-	public static final Block MUSHROOM_LADDER = registerLadder("mushroom_ladder", MUSHROOM_PLANKS);
-	public static final Block MUSHROOM_FIR_LADDER = registerLadder("mushroom_fir_ladder", MUSHROOM_FIR_PLANKS);
-	
-	// Signs
-	public static final Block SIGN_REED = registerSign("sign_reed", REEDS_BLOCK);
-	public static final Block SIGN_WART = registerSign("sign_wart", WART_PLANKS);
-	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
-	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
 
 	protected NetherBlocks(CreativeModeTab creativeTab) {
 		super(creativeTab);
