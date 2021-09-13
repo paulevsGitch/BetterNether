@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import net.minecraft.world.level.block.Blocks;
+import paulevs.betternether.blocks.complex.RoofMaterial;
 import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.registry.NetherBlocks;
+import ru.bclib.complexmaterials.WoodenComplexMaterial;
 
 public class Palettes {
 	private static final HashMap<String, CityPalette> REGISTRY = new HashMap<String, CityPalette>();
@@ -14,17 +16,17 @@ public class Palettes {
 	public static final CityPalette EMPTY = register(new CityPalette("empty"));
 
 	public static final CityPalette RED = register(new CityPalette("red")
-			.addRoofBlocks(NetherBlocks.ROOF_TILE_WART)
-			.addRoofSlabs(NetherBlocks.ROOF_TILE_WART_SLAB)
-			.addRoofStairs(NetherBlocks.ROOF_TILE_WART_STAIRS)
-			.addPlanksBlocks(NetherBlocks.WART_PLANKS)
-			.addPlanksSlabs(NetherBlocks.WART_SLAB)
-			.addPlanksStairs(NetherBlocks.WART_STAIRS)
-			.addFences(NetherBlocks.WART_FENCE)
-			.addGates(NetherBlocks.WART_GATE)
+			.addRoofBlocks(NetherBlocks.MAT_WART.getBlock(RoofMaterial.BLOCK_ROOF))
+			.addRoofSlabs(NetherBlocks.MAT_WART.getBlock(RoofMaterial.BLOCK_ROOF_SLAB))
+			.addRoofStairs(NetherBlocks.MAT_WART.getBlock(RoofMaterial.BLOCK_ROOF_STAIRS))
+			.addPlanksBlocks(NetherBlocks.MAT_WART.getPlanks())
+			.addPlanksSlabs(NetherBlocks.MAT_WART.getSlab())
+			.addPlanksStairs(NetherBlocks.MAT_WART.getBlock(WoodenComplexMaterial.BLOCK_STAIRS))
+			.addFences(NetherBlocks.MAT_WART.getBlock(WoodenComplexMaterial.BLOCK_FENCE))
+			.addGates(NetherBlocks.MAT_WART.getBlock(WoodenComplexMaterial.BLOCK_GATE))
 			.addWalls(NetherBlocks.NETHER_BRICK_WALL)
-			.addLogs(NetherBlocks.WART_LOG, NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_LOG), NetherBlocks.STRIPED_LOG_WART)
-			.addBark(NetherBlocks.WART_BARK, NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK), NetherBlocks.STRIPED_BARK_WART)
+			.addLogs(NetherBlocks.MAT_WART.getLog(), NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_LOG), NetherBlocks.MAT_WART.getStrippedLog())
+			.addBark(NetherBlocks.MAT_WART.getBark(), NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK), NetherBlocks.MAT_WART.getStrippedBark())
 			.addStoneBlocks(Blocks.NETHER_BRICKS, Blocks.NETHER_WART_BLOCK, NetherBlocks.NETHER_BRICK_TILE_LARGE, NetherBlocks.NETHER_BRICK_TILE_SMALL)
 			.addStoneSlabs(Blocks.NETHER_BRICK_SLAB, NetherBlocks.NETHER_BRICK_TILE_SLAB)
 			.addStoneStairs(Blocks.NETHER_BRICK_STAIRS, NetherBlocks.NETHER_BRICK_TILE_STAIRS)
@@ -32,11 +34,11 @@ public class Palettes {
 			.addCeilingLights(Blocks.LANTERN, NetherBlocks.CINCINNASITE_LANTERN_SMALL)
 			.addWallLights(Blocks.WALL_TORCH, NetherBlocks.CINCINNASITE_LANTERN_SMALL)
 			.addFloorLights(Blocks.TORCH, NetherBlocks.CINCINNASITE_LANTERN_SMALL)
-			.addDoors(NetherBlocks.WART_DOOR)
-			.addTrapdoors(NetherBlocks.WART_TRAPDOOR)
+			.addDoors(NetherBlocks.MAT_WART.getBlock(WoodenComplexMaterial.BLOCK_DOOR))
+			.addTrapdoors(NetherBlocks.MAT_WART.getBlock(WoodenComplexMaterial.BLOCK_TRAPDOOR))
 			.addGlassBlocks(NetherBlocks.QUARTZ_GLASS_FRAMED_COLORED.red, NetherBlocks.QUARTZ_GLASS_COLORED.red, NetherBlocks.CINCINNASITE_FRAME)
 			.addGlassPanes(NetherBlocks.QUARTZ_GLASS_FRAMED_PANE_COLORED.red, NetherBlocks.QUARTZ_GLASS_PANE_COLORED.red, NetherBlocks.CINCINNASITE_BARS)
-			.addWoodPlates(NetherBlocks.WART_PLATE)
+			.addWoodPlates(NetherBlocks.MAT_WART.getBlock(WoodenComplexMaterial.BLOCK_PRESSURE_PLATE))
 			.addPotsPanes(NetherBlocks.BRICK_POT));
 
 	private static CityPalette register(CityPalette palette) {

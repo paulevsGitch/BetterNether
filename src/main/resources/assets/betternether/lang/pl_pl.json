@@ -297,14 +297,14 @@
 	"block.betternether.willow_roof": "Wierzbowe dachówki",
 	"block.betternether.willow_roof_stairs": "Schody z wierzbowych dachówek",
 	"block.betternether.willow_roof_slab": "Płyta z wierzbowych dachówek",
-	"block.betternether.roof_tile_wart": "Brodawczane dachówki",
-	"block.betternether.roof_tile_wart_stairs": "Schody z brodawczanych dachówek",
-	"block.betternether.roof_tile_wart_slab": "Płyta z brodawczanych dachówek",
+	"block.betternether.wart_roof": "Brodawczane dachówki",
+	"block.betternether.wart_roof_stairs": "Schody z brodawczanych dachówek",
+	"block.betternether.wart_roof_slab": "Płyta z brodawczanych dachówek",
 	
 	"block.betternether.taburet_reeds": "Trzcinowy taboret",
 	"block.betternether.stalagnate_taburet": "Stalagnatowcoy taboret",
 	"block.betternether.willow_taburet": "Wierzbowy taboret",
-	"block.betternether.taburet_wart": "Brodawczanowy taboret",
+	"block.betternether.wart_taburet": "Brodawczanowy taboret",
 	"block.betternether.taburet_cincinnasite": "Cyncenazytowy taboret",
 	
 	"block.betternether.stalagnate_ladder": "Stalagnatowcowa drabina",
@@ -314,14 +314,14 @@
 	"block.betternether.chair_reeds": "Trzcinowe krzesło",
 	"block.betternether.stalagnate_chair": "Stalagnatowcowa drabina",
 	"block.betternether.willow_chair": "Wierzbowa drabina",
-	"block.betternether.chair_wart": "Brodawczanowa drabina",
+	"block.betternether.wart_chair": "Brodawczanowa drabina",
 	"block.betternether.chair_cincinnasite": "Cyncenazytowa drabina",
 	
 	"block.betternether.stalagnate_stripped_log": "Okorowany stalagnatowcowy pień",
 	"block.betternether.willow_stripped_log": "Okorowany wierzbowy pień",
-	"block.betternether.striped_log_wart": "Ociosany brodawczanowy pień",
+	"block.betternether.wart_stripped_log": "Ociosany brodawczanowy pień",
 	
 	"block.betternether.stalagnate_stripped_bark": "Okorowane stalagnatowcowe drewno",
 	"block.betternether.willow_stripped_bark": "Okorowane wierzbowe drewno",
-	"block.betternether.striped_bark_wart": "Ociosane brodawczane drewno"
+	"block.betternether.wart_stripped_bark": "Ociosane brodawczane drewno"
 }

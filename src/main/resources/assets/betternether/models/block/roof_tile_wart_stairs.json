@@ -1,8 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "betternether:block/roof_tile_wart",
-        "top": "betternether:block/roof_tile_wart",
-        "side": "betternether:block/roof_tile_wart"
-    }
-}

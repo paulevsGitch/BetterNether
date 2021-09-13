@@ -187,7 +187,7 @@ public class BlockProperties {
 		RED_MOLD("red_mold", () -> NetherBlocks.RED_MOLD),
 		GRAY_MOLD("gray_mold", () -> NetherBlocks.GRAY_MOLD),
 		MAGMA_FLOWER("magma_flower", () -> NetherBlocks.MAGMA_FLOWER),
-		NETHER_WART("nether_wart", () -> NetherBlocks.WART_SEED),
+		NETHER_WART("nether_wart", () -> NetherBlocks.MAT_WART.getSeed()),
 		WILLOW("willow", () -> NetherBlocks.MAT_WILLOW.getSapling()),
 		SMOKER("smoker", () -> NetherBlocks.SMOKER),
 		WART("wart", () -> Blocks.NETHER_WART),

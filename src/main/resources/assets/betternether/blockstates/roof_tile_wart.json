@@ -1,9 +1,0 @@
-{
-    "variants":
-	{
-        "":
-		[
-			{ "model": "betternether:block/roof_tile_wart" }
-		]
-    }
-}

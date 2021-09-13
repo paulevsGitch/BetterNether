@@ -4,6 +4,6 @@ import paulevs.betternether.registry.NetherBlocks;
 
 public class StructureWartSeed extends StructureScatter {
 	public StructureWartSeed() {
-		super(NetherBlocks.WART_SEED);
+		super(NetherBlocks.MAT_WART.getSeed());
 	}
 }

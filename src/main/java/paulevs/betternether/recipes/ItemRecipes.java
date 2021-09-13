@@ -58,10 +58,10 @@ public class ItemRecipes {
 		}
 
 		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MUSHROOM_FIR_LOG, NetherBlocks.MUSHROOM_FIR_WOOD, 3, "nether_bark_striped");
-		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_RUBEUS.getStrippedLog(), NetherBlocks.MAT_RUBEUS.getStrippedBark(), 3, "nether_bark_striped");
-		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
-		RecipesHelper.makeSimpleRecipe2(NetherBlocks.STRIPED_LOG_WART, NetherBlocks.STRIPED_BARK_WART, 3, "nether_bark_striped");
-		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
+		// RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_RUBEUS.getStrippedLog(), NetherBlocks.MAT_RUBEUS.getStrippedBark(), 3, "nether_bark_striped");
+		// RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
+		// RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_WART.getStrippedLog(), NetherBlocks.MAT_WART.getStrippedBark(), 3, "nether_bark_striped");
+		// RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
 	}
 
 	private static boolean itemExists(Item item) {

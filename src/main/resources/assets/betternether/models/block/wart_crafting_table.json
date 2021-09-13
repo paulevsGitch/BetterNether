@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "betternether:block/wart_crafting_table_front",
+    "north": "betternether:block/wart_crafting_table_front",
+    "south": "betternether:block/wart_crafting_table_side",
+    "east": "betternether:block/wart_crafting_table_side",
+    "west": "betternether:block/wart_crafting_table_front",
+    "up": "betternether:block/wart_crafting_table_top",
+    "down": "betternether:block/wart_crafting_table_bottom"
+  }
+}

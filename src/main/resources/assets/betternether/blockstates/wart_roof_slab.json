@@ -1,0 +1,8 @@
+{
+    "variants":
+	{
+        "type=bottom": { "model": "betternether:block/wart_roof_slab" },
+        "type=top": { "model": "betternether:block/wart_roof_slab", "x": 180, "uvlock": true },
+        "type=double": { "model": "betternether:block/wart_roof" }
+    }
+}

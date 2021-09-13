@@ -43,9 +43,9 @@ public class StructureWartTree extends StructureFuncScatter {
 				POS.set(px, py, pz);
 				if (isReplaceable(world.getBlockState(POS))) {
 				if (y == 0 && !isReplaceable(world.getBlockState(POS.below())))
-					BlocksHelper.setWithUpdate(world, POS, NetherBlocks.WART_ROOTS.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_WART.getRoot().defaultBlockState());
 				else if (y < h2)
-					BlocksHelper.setWithUpdate(world, POS, NetherBlocks.WART_LOG.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_WART.getLog().defaultBlockState());
 				else
 				BlocksHelper.setWithUpdate(world, POS, WART_BLOCK);
 				if (random.nextInt(8) == 0) {
@@ -66,9 +66,9 @@ public class StructureWartTree extends StructureFuncScatter {
 				POS.set(px, py, pz);
 				if (isReplaceable(world.getBlockState(POS))) {
 				if (isReplaceable(world.getBlockState(POS.below())))
-					BlocksHelper.setWithUpdate(world, POS, NetherBlocks.WART_LOG.defaultBlockState());
+					BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_WART.getLog().defaultBlockState());
 				else {
-				BlocksHelper.setWithUpdate(world, POS, NetherBlocks.WART_ROOTS.defaultBlockState());
+				BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_WART.getRoot().defaultBlockState());
 				break;
 				}
 				}
@@ -103,7 +103,7 @@ public class StructureWartTree extends StructureFuncScatter {
 	}
 
 	private void PlaceRandomSeed(LevelAccessor world, BlockPos pos) {
-		BlockState seed = NetherBlocks.WART_SEED.defaultBlockState();
+		BlockState seed = NetherBlocks.MAT_WART.getSeed().defaultBlockState();
 		if (isReplaceable(world.getBlockState(pos))) {
 			if (isWart(world.getBlockState(pos.above())))
 				seed = seed.setValue(BlockWartSeed.FACING, Direction.DOWN);
@@ -125,7 +125,7 @@ public class StructureWartTree extends StructureFuncScatter {
 		Block block = state.getBlock();
 		return state.getMaterial().isReplaceable() ||
 				block == Blocks.AIR ||
-				block == NetherBlocks.WART_SEED ||
+				block == NetherBlocks.MAT_WART.getSeed() ||
 				block == NetherBlocks.BLACK_BUSH ||
 				block == NetherBlocks.SOUL_VEIN ||
 				block == NetherBlocks.SOUL_LILY ||
@@ -134,7 +134,7 @@ public class StructureWartTree extends StructureFuncScatter {
 	}
 
 	private boolean isWart(BlockState state) {
-		return state == WART_BLOCK || state.getBlock() == NetherBlocks.WART_LOG;
+		return state == WART_BLOCK || state.getBlock() == NetherBlocks.MAT_WART.getLog();
 	}
 
 	@Override

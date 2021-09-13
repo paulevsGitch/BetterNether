@@ -11,15 +11,18 @@ const Map = {
 }
 
 const replacments = [
-    Map.entry("betternether:striped_log_rubeus", "betternether:rubeus_stripped_log"),
-				Map.entry("betternether:striped_bark_rubeus", "betternether:rubeus_stripped_bark"),
-				Map.entry("betternether:crafting_table_rubeus", "betternether:rubeus_crafting_table"),
-				Map.entry("betternether:sign_rubeus", "betternether:rubeus_sign"),
-				Map.entry("betternether:chest_rubeus", "betternether:rubeus_chest"),
-				Map.entry("betternether:barrel_rubeus", "betternether:rubeus_barrel"),
-				Map.entry("betternether:taburet_rubeus", "betternether:rubeus_taburet"),
-				Map.entry("betternether:chair_rubeus", "betternether:rubeus_chair"),
-				Map.entry("betternether:bar_stool_rubeus", "betternether:rubeus_bar_stool")
+    Map.entry("betternether:striped_log_wart", "betternether:wart_stripped_log"),
+				Map.entry("betternether:striped_bark_wart", "betternether:wart_stripped_bark"),
+				Map.entry("betternether:crafting_table_wart", "betternether:wart_crafting_table"),
+				Map.entry("betternether:sign_wart", "betternether:wart_sign"),
+				Map.entry("betternether:chest_wart", "betternether:wart_chest"),
+				Map.entry("betternether:barrel_wart", "betternether:wart_barrel"),
+				Map.entry("betternether:roof_tile_wart", "betternether:wart_roof"),
+				Map.entry("betternether:roof_tile_wart_stairs", "betternether:wart_roof_stairs"),
+				Map.entry("betternether:roof_tile_wart_slab", "betternether:wart_roof_slab"),
+				Map.entry("betternether:taburet_wart", "betternether:wart_taburet"),
+				Map.entry("betternether:chair_wart", "betternether:wart_chair"),
+				Map.entry("betternether:bar_stool_wart", "betternether:wart_bar_stool")
         ]
 
 function findFiles(dir, indent=""){

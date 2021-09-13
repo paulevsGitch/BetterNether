@@ -130,6 +130,7 @@ import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.blocks.complex.RubeusMaterial;
 import paulevs.betternether.blocks.complex.StalagnateMaterial;
+import paulevs.betternether.blocks.complex.WartMaterial;
 import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.blocks.complex.WoodenMaterialOld;
 import paulevs.betternether.config.Configs;
@@ -205,31 +206,34 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block SIGN_REED = registerSign("sign_reed", REEDS_BLOCK);
 
 	// Wart //
-	public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.COLOR_RED));
-	public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MaterialColor.COLOR_RED));
-	public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_LOG_WART));
-	public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_BARK_WART), WART_LOG);
-	public static final Block WART_ROOTS = registerBlockNI("wart_roots", new BlockWartRoots());
-	public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MaterialColor.COLOR_RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
-	public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);
-	public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
-	public static final Block WART_FENCE = registerFence("wart_fence", WART_PLANKS);
-	public static final Block WART_GATE = registerGate("wart_gate", WART_PLANKS);
-	public static final Block WART_BUTTON = registerButton("wart_button", WART_PLANKS);
-	public static final Block WART_PLATE = registerPlate("wart_plate", WART_PLANKS);
-	public static final Block WART_TRAPDOOR = registerTrapdoor("wart_trapdoor", WART_PLANKS);
-	public static final Block WART_DOOR = registerDoor("wart_door", WART_PLANKS);
-	public static final Block ROOF_TILE_WART = registerRoof("roof_tile_wart", WART_PLANKS);
-	public static final Block ROOF_TILE_WART_STAIRS = registerStairs("roof_tile_wart_stairs", ROOF_TILE_WART);
-	public static final Block ROOF_TILE_WART_SLAB = registerSlab("roof_tile_wart_slab", ROOF_TILE_WART);
-	public static final Block CRAFTING_TABLE_WART = registerCraftingTable("crafting_table_wart", WART_PLANKS);
-	public static final Block CHEST_WART = registerChest("chest_wart", WART_PLANKS);
-	public static final Block BARREL_WART = registerBarrel("barrel_wart", WART_PLANKS, WART_SLAB);
-	public static final Block TABURET_WART = registerTaburet("taburet_wart", WART_SLAB);
-	public static final Block CHAIR_WART = registerChair("chair_wart", WART_SLAB);
-	public static final Block BAR_STOOL_WART = registerBarStool("bar_stool_wart", WART_SLAB);
-	public static final Block WART_LADDER = registerLadder("wart_ladder", WART_PLANKS);
-	public static final Block SIGN_WART = registerSign("sign_wart", WART_PLANKS);
+	public static final WartMaterial MAT_WART = new WartMaterial("wart", MaterialColor.COLOR_RED, MaterialColor.COLOR_RED).init();
+
+	//public static final Block WART_SEED = registerBlock("wart_seed", new BlockWartSeed());
+	// public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.COLOR_RED));
+	// public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MaterialColor.COLOR_RED));
+	// public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_LOG_WART));
+	// public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_BARK_WART), WART_LOG);
+	// public static final Block WART_ROOTS = registerBlockNI("wart_roots", new BlockWartRoots());
+	// public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MaterialColor.COLOR_RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
+	// public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);
+	// public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
+	// public static final Block WART_FENCE = registerFence("wart_fence", WART_PLANKS);
+	// public static final Block WART_GATE = registerGate("wart_gate", WART_PLANKS);
+	// public static final Block WART_BUTTON = registerButton("wart_button", WART_PLANKS);
+	// public static final Block WART_PLATE = registerPlate("wart_plate", WART_PLANKS);
+	// public static final Block WART_TRAPDOOR = registerTrapdoor("wart_trapdoor", WART_PLANKS);
+	// public static final Block WART_DOOR = registerDoor("wart_door", WART_PLANKS);
+	// public static final Block ROOF_TILE_WART = registerRoof("roof_tile_wart", WART_PLANKS);
+	// public static final Block ROOF_TILE_WART_STAIRS = registerStairs("roof_tile_wart_stairs", ROOF_TILE_WART);
+	// public static final Block ROOF_TILE_WART_SLAB = registerSlab("roof_tile_wart_slab", ROOF_TILE_WART);
+	// public static final Block CRAFTING_TABLE_WART = registerCraftingTable("crafting_table_wart", WART_PLANKS);
+	// public static final Block CHEST_WART = registerChest("chest_wart", WART_PLANKS);
+	// public static final Block BARREL_WART = registerBarrel("barrel_wart", WART_PLANKS, WART_SLAB);
+	// public static final Block TABURET_WART = registerTaburet("taburet_wart", WART_SLAB);
+	// public static final Block CHAIR_WART = registerChair("chair_wart", WART_SLAB);
+	// public static final Block BAR_STOOL_WART = registerBarStool("bar_stool_wart", WART_SLAB);
+	// public static final Block WART_LADDER = registerLadder("wart_ladder", WART_PLANKS);
+	// public static final Block SIGN_WART = registerSign("sign_wart", WART_PLANKS);
 
 	// Mushroom //
 	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStem(MaterialColor.TERRACOTTA_WHITE));
@@ -446,7 +450,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// Small Plants
 	public static final Block SOUL_VEIN = registerBlock("soul_vein", new BlockSoulVein());
 	public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", new BlockBoneMushroom());
-	public static final Block WART_SEED = registerBlock("wart_seed", new BlockWartSeed());
 	public static final Block BLACK_BUSH = registerBlock("black_bush", new BlockBlackBush());
 	public static final Block INK_BUSH = registerBlockNI("ink_bush", new BlockInkBush());
 	public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", new BlockInkBushSeed());

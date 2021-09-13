@@ -25,6 +25,6 @@ public class StructureWartBush implements IStructure {
 	private void setSeed(ServerLevelAccessor world, BlockPos pos, Direction dir) {
 		BlockPos p = pos.relative(dir);
 		if (world.isEmptyBlock(p))
-			BlocksHelper.setWithoutUpdate(world, p, NetherBlocks.WART_SEED.defaultBlockState().setValue(BlockWartSeed.FACING, dir));
+			BlocksHelper.setWithoutUpdate(world, p, NetherBlocks.MAT_WART.getSeed().defaultBlockState().setValue(BlockWartSeed.FACING, dir));
 	}
 }

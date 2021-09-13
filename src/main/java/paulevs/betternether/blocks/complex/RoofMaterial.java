@@ -13,9 +13,9 @@ import ru.bclib.complexmaterials.entry.RecipeEntry;
 import ru.bclib.recipes.GridRecipe;
 
 public class RoofMaterial extends NetherWoodenMaterial {
-	protected final static String BLOCK_ROOF = BLOCK_OPTIONAL_ROOF;
-	protected final static String BLOCK_ROOF_STAIRS = BLOCK_OPTIONAL_ROOF_STAIRS;
-	protected final static String BLOCK_ROOF_SLAB = BLOCK_OPTIONAL_ROOF_SLAB;
+	public final static String BLOCK_ROOF = BLOCK_OPTIONAL_ROOF;
+	public final static String BLOCK_ROOF_STAIRS = BLOCK_OPTIONAL_ROOF_STAIRS;
+	public final static String BLOCK_ROOF_SLAB = BLOCK_OPTIONAL_ROOF_SLAB;
 	public RoofMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
 		super(name, woodColor, planksColor);
 	}
@@ -45,6 +45,7 @@ public class RoofMaterial extends NetherWoodenMaterial {
 		super.initDefaultRecipes();
 		final Block planks = getBlock(BLOCK_PLANKS);
 		final Block slab = getBlock(BLOCK_SLAB);
+		final Block roof = getBlock(BLOCK_ROOF);
 		
 		if (Registry.BLOCK.getKey(slab) != Registry.BLOCK.getDefaultKey()) {
 			addRecipeEntry(new RecipeEntry(BLOCK_ROOF, (material, config, id) -> {
@@ -62,7 +63,7 @@ public class RoofMaterial extends NetherWoodenMaterial {
 						  .checkConfig(config)
 						  .setOutputCount(4)
 						  .setShape("#  ", "## ", "###")
-						  .addMaterial('#', planks)
+						  .addMaterial('#', roof)
 						  .setGroup(receipGroupPrefix + "_planks_roof_stairs")
 						  .build();
 			}));
@@ -72,7 +73,7 @@ public class RoofMaterial extends NetherWoodenMaterial {
 						  .checkConfig(config)
 						  .setOutputCount(6)
 						  .setShape("###")
-						  .addMaterial('#', planks)
+						  .addMaterial('#', roof)
 						  .setGroup(receipGroupPrefix + "_planks_roof_slabs")
 						  .build();
 			}));
