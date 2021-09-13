@@ -12,7 +12,6 @@ import net.minecraft.util.Mth;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.entity.EntitySkull;
 import paulevs.betternether.entity.model.ModelSkull;
-import paulevs.betternether.entity.render.RenderSkull.GlowFeatureRenderer;
 import paulevs.betternether.registry.EntityRenderRegistry;
 
 public class RenderSkull extends MobRenderer<EntitySkull, AgeableListModel<EntitySkull>> {

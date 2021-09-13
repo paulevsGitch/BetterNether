@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockProperties {

@@ -1,26 +1,14 @@
 package paulevs.betternether.world;
 
-import java.util.List;
-import java.util.function.Supplier;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryLookupCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biome.BiomeCategory;
-import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
-import com.google.common.collect.Lists;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.config.Configs;
-import paulevs.betternether.mixin.common.GenerationSettingsAccessor;
-import paulevs.betternether.registry.BiomesRegistry;
-import ru.bclib.world.biomes.BCLBiome;
 import ru.bclib.world.generator.BCLibNetherBiomeSource;
-import ru.bclib.world.generator.BiomeMap;
 
 public class NetherBiomeSource extends BCLibNetherBiomeSource {
 	public static final Codec<NetherBiomeSource> CODEC = RecordCodecBuilder.create((instance) -> {

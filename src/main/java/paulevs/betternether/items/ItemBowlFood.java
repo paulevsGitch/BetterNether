@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.FoodShape;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
-import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 import paulevs.betternether.tab.CreativeTabs;

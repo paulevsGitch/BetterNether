@@ -50,10 +50,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.entity.EntityFlyingPig.FindFoodGoal;
-import paulevs.betternether.entity.EntityFlyingPig.RoostingGoal;
-import paulevs.betternether.entity.EntityFlyingPig.SittingGoal;
-import paulevs.betternether.entity.EntityFlyingPig.WanderAroundGoal;
 import paulevs.betternether.registry.EntityRegistry;
 
 public class EntityFlyingPig extends Animal implements FlyingAnimal {

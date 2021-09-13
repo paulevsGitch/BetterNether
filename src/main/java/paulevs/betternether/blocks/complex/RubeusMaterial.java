@@ -12,8 +12,6 @@ import paulevs.betternether.blocks.BlockRubeusCone;
 import paulevs.betternether.blocks.BlockRubeusSapling;
 import paulevs.betternether.blocks.RubeusBark;
 import paulevs.betternether.blocks.RubeusLog;
-import ru.bclib.blocks.BaseStripableLogBlock;
-import ru.bclib.blocks.StripableBarkBlock;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 
 public class RubeusMaterial extends NetherWoodenMaterial{

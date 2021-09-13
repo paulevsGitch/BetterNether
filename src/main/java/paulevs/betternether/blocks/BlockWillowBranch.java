@@ -22,8 +22,6 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
-import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
-import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 

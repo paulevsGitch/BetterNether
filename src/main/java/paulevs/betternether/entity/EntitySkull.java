@@ -34,7 +34,6 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.entity.EntitySkull.SkullLookControl;
 import paulevs.betternether.registry.SoundsRegistry;
 
 public class EntitySkull extends Monster implements FlyingAnimal {
