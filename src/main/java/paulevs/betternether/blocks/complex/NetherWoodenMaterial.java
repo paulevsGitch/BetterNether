@@ -31,7 +31,7 @@ public class NetherWoodenMaterial extends ru.bclib.complexmaterials.WoodenComple
 	protected final static String BLOCK_OPTIONAL_SEED = "seed";
 	protected final static String BLOCK_OPTIONAL_STEM = "stem";
 	protected final static String BLOCK_OPTIONAL_ROOF = "roof";
-	protected final static String BLOCK_OPTIONAL_ROOF_STAIRS = "roof_stair";
+	protected final static String BLOCK_OPTIONAL_ROOF_STAIRS = "roof_stairs";
 	protected final static String BLOCK_OPTIONAL_ROOF_SLAB = "roof_slab";
 	
 	public final static String BLOCK_TABURET = "taburet";

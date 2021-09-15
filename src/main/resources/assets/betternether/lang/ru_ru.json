@@ -108,7 +108,7 @@
 	"block.betternether.nether_cactus": "Кактус нижнего мира",
 	"block.betternether.nether_grass": "Трава нижнего мира",
 	"block.betternether.nether_mycelium": "Мицелий нижнего мира",
-	"block.betternether.nether_reed": "Тростник нижнего мира",
+	"block.betternether.nether_reed_stem": "Тростник нижнего мира",
 	"block.betternether.netherrack_furnace": "Печь из камня нижнего мира",
 	"block.betternether.blackstone_furnace": "Печь из чернита",
 	"block.betternether.basalt_furnace": "Печь из базальта",
@@ -159,16 +159,16 @@
 
 	"block.betternether.red_mold": "Красная плесень",
 
-	"block.betternether.reeds_block": "Тростниковый блок",
-	"block.betternether.reeds_button": "Тростниковая кнопка",
-	"block.betternether.reeds_fence": "Тростниковый забор",
-	"block.betternether.reeds_gate": "Тростниковая калитка",
-	"block.betternether.reeds_ladder": "Тростниковая лестница",
-	"block.betternether.reeds_plate": "Тростниковая нажимная плита",
-	"block.betternether.reeds_slab": "Тростниковая плита",
-	"block.betternether.reeds_stairs": "Тростниковые ступени",
-	"block.betternether.reeds_door": "Тростниковая дверь",
-	"block.betternether.reeds_trapdoor": "Тростниковый люк",
+	"block.betternether.nether_reed_planks": "Тростниковый блок",
+	"block.betternether.nether_reed_button": "Тростниковая кнопка",
+	"block.betternether.nether_reed_fence": "Тростниковый забор",
+	"block.betternether.nether_reed_gate": "Тростниковая калитка",
+	"block.betternether.nether_reed_ladder": "Тростниковая лестница",
+	"block.betternether.nether_reed_plate": "Тростниковая нажимная плита",
+	"block.betternether.nether_reed_slab": "Тростниковая плита",
+	"block.betternether.nether_reed_stairs": "Тростниковые ступени",
+	"block.betternether.nether_reed_door": "Тростниковая дверь",
+	"block.betternether.nether_reed_trapdoor": "Тростниковый люк",
 
 	"block.betternether.smoker": "Курильщик",
 
@@ -304,9 +304,9 @@
 	"block.betternether.wall_mushroom_brown": "Настенный коричневый гриб",
 	"block.betternether.wall_mushroom_red": "Настенный красный гриб",
 	
-	"block.betternether.roof_tile_reeds": "Тростниковая черепица",
-	"block.betternether.roof_tile_reeds_stairs": "Ступени из тростниковой черепицы",
-	"block.betternether.roof_tile_reeds_slab": "Плита из тростниковой черепица",
+	"block.betternether.nether_reed_roof": "Тростниковая черепица",
+	"block.betternether.nether_reed_roof_stairs": "Ступени из тростниковой черепицы",
+	"block.betternether.nether_reed_roof_slab": "Плита из тростниковой черепица",
 	"block.betternether.stalagnate_roof": "Сталагнатовая черепица",
 	"block.betternether.stalagnate_roof_stairs": "Ступени из сталагнатовой черепицы",
 	"block.betternether.stalagnate_roof_slab": "Плита из сталагнатовой черепица",
@@ -323,7 +323,7 @@
 	"block.betternether.wart_roof_stairs": "Ступени из наростовой черепицы",
 	"block.betternether.wart_roof_slab": "Плита из наростовой черепица",
 	
-	"block.betternether.taburet_reeds": "Тростниковый табурет",
+	"block.betternether.nether_reed_taburet": "Тростниковый табурет",
 	"block.betternether.stalagnate_taburet": "Сталагнатовый табурет",
 	"block.betternether.willow_taburet": "Ивовый табурет",
 	"block.betternether.wart_taburet": "Наростовый табурет",
@@ -333,7 +333,7 @@
 	"block.betternether.willow_ladder": "Ивовая лестница",
 	"block.betternether.wart_ladder": "Наростовая лестница",
 	
-	"block.betternether.chair_reeds": "Тростниковый стул",
+	"block.betternether.nether_reed_chair": "Тростниковый стул",
 	"block.betternether.stalagnate_chair": "Сталагнатовый стул",
 	"block.betternether.willow_chair": "Ивовый стул",
 	"block.betternether.wart_chair": "Наростовый стул",
@@ -350,7 +350,7 @@
 	"block.betternether.giant_mold": "Гигантская плесень",
 	"block.betternether.giant_mold_sapling": "Саженец гигантской плесени",
 	
-	"block.betternether.bar_stool_reeds": "Тростниковый барный стул",
+	"block.betternether.nether_reed_bar_stool": "Тростниковый барный стул",
 	"block.betternether.stalagnate_bar_stool": "Сталагнатовый барный стул",
 	"block.betternether.willow_bar_stool": "Ивовый барный стул",
 	"block.betternether.wart_bar_stool": "Наростовый барный стул",
@@ -545,7 +545,7 @@
 	"block.betternether.crafting_table_warped": "Искажённый верстак",
 	
 	"block.betternether.stalagnate_crafting_table": "Сталагнатовый верстак",
-	"block.betternether.crafting_table_reed": "Тростниковый верстак",
+	"block.betternether.nether_reed_crafting_table": "Тростниковый верстак",
 	"block.betternether.willow_crafting_table": "Ивовый верстак",
 	"block.betternether.wart_crafting_table": "Верстак из нароста",
 	"block.betternether.rubeus_crafting_table": "Рубейсовый верстак",
@@ -553,7 +553,7 @@
 	"block.betternether.mushroom_fir_crafting_table": "Верстак из грибной ели",
 	
 	"block.betternether.stalagnate_chest": "Сталагнатовый сундук",
-	"block.betternether.chest_reed": "Тростниковый сундук",
+	"block.betternether.nether_reed_chest": "Тростниковый сундук",
 	"block.betternether.willow_chest": "Ивовый сундук",
 	"block.betternether.wart_chest": "Сундук из нароста",
 	"block.betternether.rubeus_chest": "Рубейсовый сундук",
@@ -568,7 +568,7 @@
 	"block.betternether.feather_fern": "Перистый папоротник",
 	
 	"block.betternether.stalagnate_sign": "Сталагнатовая табличка",
-	"block.betternether.sign_reed": "Тростниковая табличка",
+	"block.betternether.nether_reed_sign": "Тростниковая табличка",
 	"block.betternether.willow_sign": "Ивовая табличка",
 	"block.betternether.wart_sign": "Табличка из нароста",
 	"block.betternether.rubeus_sign": "Рубейсовая табличка",
@@ -576,7 +576,7 @@
 	"block.betternether.mushroom_fir_sign": "Табличка из грибной ели",
 	
 	"block.betternether.stalagnate_barrel": "Сталагнатовая бочка",
-	"block.betternether.barrel_reed": "Тростниковая бочка",
+	"block.betternether.nether_reed_barrel": "Тростниковая бочка",
 	"block.betternether.willow_barrel": "Ивовая бочка",
 	"block.betternether.wart_barrel": "Бочка из нароста",
 	"block.betternether.rubeus_barrel": "Рубейсовая бочка",

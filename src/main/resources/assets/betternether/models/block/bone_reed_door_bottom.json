@@ -3,7 +3,7 @@
 	"textures": {
 		"particle": "betternether:block/bone_reed_door_lower",
 		"front": "betternether:block/bone_reed_door_lower",
-		"side": "betternether:block/reeds_trapdoor"
+		"side": "betternether:block/nether_reed_trapdoor"
 	},
 	"elements": [ 	 
 		{

@@ -1,7 +1,6 @@
 {
 	"replace": "false",
 	"values": [
-		"betternether:reeds_slab",
 		"betternether:anchor_tree_slab"
 	]
 }

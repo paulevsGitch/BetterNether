@@ -1,0 +1,7 @@
+{
+    "parent": "betternether:block/stalagnate_door_bottom_hinge",
+    "textures": {
+        "texture": "betternether:block/nether_reed_door_bottom",
+        "particle": "betternether:block/nether_reed_door_bottom"
+    }
+}

@@ -2,9 +2,9 @@
 	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
 	"parent": "block/stairs",
 	"textures": {
-		"bottom": "betternether:block/reeds_block_side",
-		"top": "betternether:block/reeds_block_side",
-		"side": "betternether:block/reeds_block_side"
+		"bottom": "betternether:block/nether_reed_planks_side",
+		"top": "betternether:block/nether_reed_planks_side",
+		"side": "betternether:block/nether_reed_planks_side"
 	},
 	"elements": [ 	 
 		{

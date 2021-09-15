@@ -51,14 +51,14 @@ public class IntegrationRecipes {
 	private static void makeHammerRecipe(Item hammer, Block block, Item item) {
 		ResourceLocation id = Registry.ITEM.getKey(hammer);
 		boolean register = id != Registry.ITEM.getDefaultKey() &&
-				Registry.BLOCK.getKey(NetherBlocks.NETHER_REED) != Registry.BLOCK.getDefaultKey() &&
+				Registry.BLOCK.getKey(NetherBlocks.MAT_REED.getStem()) != Registry.BLOCK.getDefaultKey() &&
 				Registry.BLOCK.getKey(block) != Registry.BLOCK.getDefaultKey() &&
 				Registry.ITEM.getKey(item) != Registry.ITEM.getDefaultKey();
 		if (register) {
 			Map<String, ItemStack> materials = ImmutableMap.of(
 					"#", new ItemStack(block),
 					"I", new ItemStack(item),
-					"S", new ItemStack(NetherBlocks.NETHER_REED));
+					"S", new ItemStack(NetherBlocks.MAT_REED.getStem()));
 			ItemStack result = new ItemStack(hammer);
 			BNRecipeManager.addCraftingRecipe(id.getPath(), new String[] { "#I#", " S ", " S " }, materials, result);
 		}
@@ -67,14 +67,14 @@ public class IntegrationRecipes {
 	private static void makeExcavatorRecipe(Item excavator, Block block, Item item) {
 		ResourceLocation id = Registry.ITEM.getKey(excavator);
 		boolean register = id != Registry.ITEM.getDefaultKey() &&
-				Registry.BLOCK.getKey(NetherBlocks.NETHER_REED) != Registry.BLOCK.getDefaultKey() &&
+				Registry.BLOCK.getKey(NetherBlocks.MAT_REED.getStem()) != Registry.BLOCK.getDefaultKey() &&
 				Registry.BLOCK.getKey(block) != Registry.BLOCK.getDefaultKey() &&
 				Registry.ITEM.getKey(item) != Registry.ITEM.getDefaultKey();
 		if (register) {
 			Map<String, ItemStack> materials = ImmutableMap.of(
 					"#", new ItemStack(block),
 					"I", new ItemStack(item),
-					"S", new ItemStack(NetherBlocks.NETHER_REED));
+					"S", new ItemStack(NetherBlocks.MAT_REED.getStem()));
 			ItemStack result = new ItemStack(excavator);
 			BNRecipeManager.addCraftingRecipe(id.getPath(), new String[] { " I ", "#S#", " S " }, materials, result);
 		}

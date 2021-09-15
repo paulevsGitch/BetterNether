@@ -130,6 +130,7 @@ import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.blocks.complex.MushroomFirMaterial;
 import paulevs.betternether.blocks.complex.NetherMushroomMaterial;
+import paulevs.betternether.blocks.complex.NetherReedMaterial;
 import paulevs.betternether.blocks.complex.RubeusMaterial;
 import paulevs.betternether.blocks.complex.StalagnateMaterial;
 import paulevs.betternether.blocks.complex.WartMaterial;
@@ -185,27 +186,28 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	//public static final Block SIGN_RUBEUS = registerSign("sign_rubeus", RUBEUS_PLANKS);
 
 	// Reed //
-	public static final Block NETHER_REED = registerBlock("nether_reed", new BlockNetherReed());
-	public static final Block REEDS_BLOCK = registerBlock("reeds_block", new BlockReedsBlock());
-	public static final Block REEDS_STAIRS = registerStairs("reeds_stairs", REEDS_BLOCK);
-	public static final Block REEDS_SLAB = registerSlab("reeds_slab", REEDS_BLOCK);
-	public static final Block REEDS_FENCE = registerFence("reeds_fence", REEDS_BLOCK);
-	public static final Block REEDS_GATE = registerGate("reeds_gate", REEDS_BLOCK);
-	public static final Block REEDS_BUTTON = registerButton("reeds_button", REEDS_BLOCK);
-	public static final Block REEDS_PLATE = registerPlate("reeds_plate", REEDS_BLOCK);
-	public static final Block REEDS_TRAPDOOR = registerTrapdoor("reeds_trapdoor", REEDS_BLOCK);
-	public static final Block REEDS_DOOR = registerDoor("reeds_door", REEDS_BLOCK);
-	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);
-	public static final Block ROOF_TILE_REEDS_STAIRS = registerStairs("roof_tile_reeds_stairs", ROOF_TILE_REEDS);
-	public static final Block ROOF_TILE_REEDS_SLAB = registerSlab("roof_tile_reeds_slab", ROOF_TILE_REEDS);
-	public static final Block CRAFTING_TABLE_REED = registerCraftingTable("crafting_table_reed", REEDS_BLOCK);
-	public static final Block CHEST_REED = registerChest("chest_reed", REEDS_BLOCK);
-	public static final Block BARREL_REED = registerBarrel("barrel_reed", REEDS_BLOCK, REEDS_SLAB);
-	public static final Block TABURET_REEDS = registerTaburet("taburet_reeds", REEDS_SLAB);
-	public static final Block CHAIR_REEDS = registerChair("chair_reeds", REEDS_SLAB);
-	public static final Block BAR_STOOL_REEDS = registerBarStool("bar_stool_reeds", REEDS_SLAB);
-	public static final Block REEDS_LADDER = registerLadder("reeds_ladder", REEDS_BLOCK);
-	public static final Block SIGN_REED = registerSign("sign_reed", REEDS_BLOCK);
+	public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
+//	public static final Block NETHER_REED = registerBlock("nether_reed", new BlockNetherReed());
+//	public static final Block REEDS_BLOCK = registerBlock("reeds_block", new BlockReedsBlock());
+//	public static final Block REEDS_STAIRS = registerStairs("reeds_stairs", REEDS_BLOCK);
+//	public static final Block REEDS_SLAB = registerSlab("reeds_slab", REEDS_BLOCK);
+//	public static final Block REEDS_FENCE = registerFence("reeds_fence", REEDS_BLOCK);
+//	public static final Block REEDS_GATE = registerGate("reeds_gate", REEDS_BLOCK);
+//	public static final Block REEDS_BUTTON = registerButton("reeds_button", REEDS_BLOCK);
+//	public static final Block REEDS_PLATE = registerPlate("reeds_plate", REEDS_BLOCK);
+//	public static final Block REEDS_TRAPDOOR = registerTrapdoor("reeds_trapdoor", REEDS_BLOCK);
+//	public static final Block REEDS_DOOR = registerDoor("reeds_door", REEDS_BLOCK);
+//	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);
+//	public static final Block ROOF_TILE_REEDS_STAIRS = registerStairs("roof_tile_reeds_stairs", ROOF_TILE_REEDS);
+//	public static final Block ROOF_TILE_REEDS_SLAB = registerSlab("roof_tile_reeds_slab", ROOF_TILE_REEDS);
+//	public static final Block CRAFTING_TABLE_REED = registerCraftingTable("crafting_table_reed", REEDS_BLOCK);
+//	public static final Block CHEST_REED = registerChest("chest_reed", REEDS_BLOCK);
+//	public static final Block BARREL_REED = registerBarrel("barrel_reed", REEDS_BLOCK, REEDS_SLAB);
+//	public static final Block TABURET_REEDS = registerTaburet("taburet_reeds", REEDS_SLAB);
+//	public static final Block CHAIR_REEDS = registerChair("chair_reeds", REEDS_SLAB);
+//	public static final Block BAR_STOOL_REEDS = registerBarStool("bar_stool_reeds", REEDS_SLAB);
+//	public static final Block REEDS_LADDER = registerLadder("reeds_ladder", REEDS_BLOCK);
+//	public static final Block SIGN_REED = registerSign("sign_reed", REEDS_BLOCK);
 
 	// Wart //
 	public static final WartMaterial MAT_WART = new WartMaterial("wart", MaterialColor.COLOR_RED, MaterialColor.COLOR_RED).init();

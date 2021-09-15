@@ -532,7 +532,7 @@ public class EntityFirefly extends Animal implements FlyingAnimal {
 		FLOWERS.add(NetherBlocks.BLACK_APPLE);
 		FLOWERS.add(NetherBlocks.MAGMA_FLOWER);
 		FLOWERS.add(NetherBlocks.SOUL_VEIN);
-		FLOWERS.add(NetherBlocks.NETHER_REED);
+		FLOWERS.add(NetherBlocks.MAT_REED.getStem());
 		FLOWERS.add(NetherBlocks.INK_BUSH);
 		FLOWERS.add(NetherBlocks.INK_BUSH_SEED);
 		FLOWERS.add(NetherBlocks.POTTED_PLANT);

@@ -1,8 +1,8 @@
 {
     "parent": "block/slab",
     "textures": {
-        "bottom": "betternether:block/reeds_block_top",
-        "top": "betternether:block/reeds_block_top",
-        "side": "betternether:block/reeds_block_side"
+        "bottom": "betternether:block/nether_reed_planks_top",
+        "top": "betternether:block/nether_reed_planks_top",
+        "side": "betternether:block/nether_reed_planks_side"
     }
 }

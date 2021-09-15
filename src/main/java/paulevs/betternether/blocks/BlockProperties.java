@@ -180,7 +180,7 @@ public class BlockProperties {
 		BLACK_BUSH("black_bush", () -> NetherBlocks.BLACK_BUSH),
 		EGG_PLANT("egg_plant", () -> NetherBlocks.EGG_PLANT),
 		INK_BUSH("ink_bush", () -> NetherBlocks.INK_BUSH_SEED),
-		REEDS("reeds", () -> NetherBlocks.NETHER_REED),
+		REEDS("reeds", () -> NetherBlocks.MAT_REED.getStem()),
 		NETHER_CACTUS("nether_cactus", () -> NetherBlocks.NETHER_CACTUS),
 		NETHER_GRASS("nether_grass", () -> NetherBlocks.NETHER_GRASS),
 		ORANGE_MUSHROOM("orange_mushroom", () -> NetherBlocks.ORANGE_MUSHROOM),

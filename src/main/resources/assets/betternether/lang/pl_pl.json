@@ -91,7 +91,7 @@
 	"block.betternether.nether_cactus": "Netherowy kaktus",
 	"block.betternether.nether_grass": "Netherowa trawa",
 	"block.betternether.nether_mycelium": "Netherowa grzybnia",
-	"block.betternether.nether_reed": "Netherowa trzcina",
+	"block.betternether.nether_reed_stem": "Netherowa trzcina",
 	"block.betternether.netherrack_furnace": "Netherrackowy piec",
 	"block.betternether.netherrack_moss": "Zamszony netherrack",
 
@@ -140,16 +140,16 @@
 
 	"block.betternether.red_mold": "Czerwona pleśń",
 
-	"block.betternether.reeds_block": "Blok trzciny",
-	"block.betternether.reeds_button": "Trzcinowy przyciski",
-	"block.betternether.reeds_fence": "Trzcinowy płot",
-	"block.betternether.reeds_gate": "Trzcinowa furtka",
-	"block.betternether.reeds_ladder": "Trzcinowa drabina",
-	"block.betternether.reeds_plate": "Trzcinowa płyta naciskowa",
-	"block.betternether.reeds_slab": "Trzcinowa płyta",
-	"block.betternether.reeds_stairs": "Trzcinowe schody",
-	"block.betternether.reeds_door": "Trzcinowe drzwi",
-	"block.betternether.reeds_trapdoor": "Trzcinowa klapa",
+	"block.betternether.nether_reed_planks": "Blok trzciny",
+	"block.betternether.nether_reed_button": "Trzcinowy przyciski",
+	"block.betternether.nether_reed_fence": "Trzcinowy płot",
+	"block.betternether.nether_reed_gate": "Trzcinowa furtka",
+	"block.betternether.nether_reed_ladder": "Trzcinowa drabina",
+	"block.betternether.nether_reed_plate": "Trzcinowa płyta naciskowa",
+	"block.betternether.nether_reed_slab": "Trzcinowa płyta",
+	"block.betternether.nether_reed_stairs": "Trzcinowe schody",
+	"block.betternether.nether_reed_door": "Trzcinowe drzwi",
+	"block.betternether.nether_reed_trapdoor": "Trzcinowa klapa",
 
 	"block.betternether.smoker": "Garek wędzarniczy",
 
@@ -282,9 +282,9 @@
 	"block.betternether.wall_mushroom_brown": "Ścienny borowik",
 	"block.betternether.wall_mushroom_red": "Ścienny muchomor",
 	
-	"block.betternether.roof_tile_reeds": "Trzcinowe dachówki",
-	"block.betternether.roof_tile_reeds_stairs": "Schody z trzcinowych dachówek",
-	"block.betternether.roof_tile_reeds_slab": "Płyta z trzcinowych dachówek",
+	"block.betternether.nether_reed_roof": "Trzcinowe dachówki",
+	"block.betternether.nether_reed_roof_stairs": "Schody z trzcinowych dachówek",
+	"block.betternether.nether_reed_roof_slab": "Płyta z trzcinowych dachówek",
 	"block.betternether.stalagnate_roof": "Stalagnatowcowe dachówki",
 	"block.betternether.stalagnate_roof_stairs": "Schody ze stalagnatowcowych dachówek",
 	"block.betternether.stalagnate_roof_slab": "Płyta ze stalagnatowcowych dachówek",
@@ -301,7 +301,7 @@
 	"block.betternether.wart_roof_stairs": "Schody z brodawczanych dachówek",
 	"block.betternether.wart_roof_slab": "Płyta z brodawczanych dachówek",
 	
-	"block.betternether.taburet_reeds": "Trzcinowy taboret",
+	"block.betternether.nether_reed_taburet": "Trzcinowy taboret",
 	"block.betternether.stalagnate_taburet": "Stalagnatowcoy taboret",
 	"block.betternether.willow_taburet": "Wierzbowy taboret",
 	"block.betternether.wart_taburet": "Brodawczanowy taboret",
@@ -311,7 +311,7 @@
 	"block.betternether.willow_ladder": "Wierzbowa drabina",
 	"block.betternether.wart_ladder": "Brodawczanowa drabina",
 	
-	"block.betternether.chair_reeds": "Trzcinowe krzesło",
+	"block.betternether.nether_reed_chair": "Trzcinowe krzesło",
 	"block.betternether.stalagnate_chair": "Stalagnatowcowa drabina",
 	"block.betternether.willow_chair": "Wierzbowa drabina",
 	"block.betternether.wart_chair": "Brodawczanowa drabina",

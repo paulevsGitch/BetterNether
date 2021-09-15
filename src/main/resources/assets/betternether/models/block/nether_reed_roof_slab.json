@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab",
+    "textures": {
+        "bottom": "betternether:block/nether_reed_roof",
+        "top": "betternether:block/nether_reed_roof",
+        "side": "betternether:block/nether_reed_roof"
+    }
+}

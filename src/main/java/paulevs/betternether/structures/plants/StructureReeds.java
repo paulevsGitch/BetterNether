@@ -11,8 +11,8 @@ import paulevs.betternether.structures.IStructure;
 
 public class StructureReeds implements IStructure {
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
-		if (world.isEmptyBlock(pos) && NetherBlocks.NETHER_REED.canSurvive(world.getBlockState(pos), world, pos)) {
-			BlockState med = NetherBlocks.NETHER_REED.defaultBlockState().setValue(BlockNetherReed.TOP, false);
+		if (world.isEmptyBlock(pos) && NetherBlocks.MAT_REED.getStem().canSurvive(world.getBlockState(pos), world, pos)) {
+			BlockState med = NetherBlocks.MAT_REED.getStem().defaultBlockState().setValue(BlockNetherReed.TOP, false);
 			int h = random.nextInt(3);
 			for (int i = 0; i < h; i++) {
 				BlockPos posN = pos.above(i);
@@ -21,12 +21,12 @@ public class StructureReeds implements IStructure {
 					if (world.isEmptyBlock(up))
 						BlocksHelper.setWithUpdate(world, posN, med);
 					else {
-						BlocksHelper.setWithUpdate(world, posN, NetherBlocks.NETHER_REED.defaultBlockState());
+						BlocksHelper.setWithUpdate(world, posN, NetherBlocks.MAT_REED.getStem().defaultBlockState());
 						return;
 					}
 				}
 			}
-			BlocksHelper.setWithUpdate(world, pos.above(h), NetherBlocks.NETHER_REED.defaultBlockState());
+			BlocksHelper.setWithUpdate(world, pos.above(h), NetherBlocks.MAT_REED.getStem().defaultBlockState());
 		}
 	}
 }

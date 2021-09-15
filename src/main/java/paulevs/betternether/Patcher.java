@@ -110,7 +110,29 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:chair_mushroom","betternether:nether_mushroom_chair"),
 				Map.entry("betternether:bar_stool_mushroom","betternether:nether_mushroom_bar_stool"),
 				Map.entry("betternether:mushroom_ladder","betternether:nether_mushroom_ladder"),
-				Map.entry("betternether:sign_mushroom","betternether:nether_mushroom_sign")
+				Map.entry("betternether:sign_mushroom","betternether:nether_mushroom_sign"),
+				// Nether Reed //
+				Map.entry("betternether:nether_reed", "betternether:nether_reed_stem"),
+				Map.entry("betternether:reeds_block", "betternether:nether_reed_planks"),
+				Map.entry("betternether:reeds_stairs", "betternether:nether_reed_stairs"),
+				Map.entry("betternether:reeds_slab", "betternether:nether_reed_slab"),
+				Map.entry("betternether:reeds_fence", "betternether:nether_reed_fence"),
+				Map.entry("betternether:reeds_gate", "betternether:nether_reed_gate"),
+				Map.entry("betternether:reeds_button", "betternether:nether_reed_button"),
+				Map.entry("betternether:reeds_plate", "betternether:nether_reed_plate"),
+				Map.entry("betternether:reeds_trapdoor", "betternether:nether_reed_trapdoor"),
+				Map.entry("betternether:reeds_door", "betternether:nether_reed_door"),
+				Map.entry("betternether:roof_tile_reeds", "betternether:nether_reed_roof"),
+				Map.entry("betternether:roof_tile_reeds_stairs", "betternether:nether_reed_roof_stairs"),
+				Map.entry("betternether:roof_tile_reeds_slab", "betternether:nether_reed_roof_slab"),
+				Map.entry("betternether:crafting_table_reed", "betternether:nether_reed_crafting_table"),
+				Map.entry("betternether:chest_reed", "betternether:nether_reed_chest"),
+				Map.entry("betternether:barrel_reed", "betternether:nether_reed_barrel"),
+				Map.entry("betternether:taburet_reeds", "betternether:nether_reed_taburet"),
+				Map.entry("betternether:chair_reeds", "betternether:nether_reed_chair"),
+				Map.entry("betternether:bar_stool_reeds", "betternether:nether_reed_bar_stool"),
+				Map.entry("betternether:reeds_ladder", "betternether:nether_reed_ladder"),
+				Map.entry("betternether:sign_reed", "betternether:nether_reed_sign")
 		);
 	}
 }

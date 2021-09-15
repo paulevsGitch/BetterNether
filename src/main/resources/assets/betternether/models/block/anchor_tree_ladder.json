@@ -1,5 +1,5 @@
 {
-    "parent": "betternether:block/reeds_ladder",
+    "parent": "betternether:block/nether_reed_ladder",
     "textures": {
         "particle": "betternether:block/anchor_tree_ladder",
 		"texture": "betternether:block/anchor_tree_ladder"

@@ -7,11 +7,11 @@
   ],
   "key": {
     "#": {
-      "item": "betternether:reeds_block"
+      "item": "betternether:nether_reed_planks"
     }
   },
   "result": {
-    "item": "betternether:nether_reed",
+    "item": "betternether:nether_reed_stem",
 	"count": 36
   }
 }

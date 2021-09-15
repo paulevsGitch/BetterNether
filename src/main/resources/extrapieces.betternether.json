@@ -26,7 +26,7 @@
 		},
 		
 		"reeds": {
-			"base": "betternether:reeds_block",
+			"base": "betternether:nether_reed_planks",
 			"stonecuttable": true,
 			"exclude": [
 				"extrapieces:slab",
@@ -35,9 +35,9 @@
 				"extrapieces:stairs"
 			],
 			"textures": {
-				"top": "betternether:block/reeds_block_top",
-				"bottom": "betternether:block/reeds_block_top",
-				"main": "betternether:block/reeds_block_side"
+				"top": "betternether:block/nether_reed_planks_top",
+				"bottom": "betternether:block/nether_reed_planks_top",
+				"main": "betternether:block/nether_reed_planks_side"
 			}
 		},
 		
