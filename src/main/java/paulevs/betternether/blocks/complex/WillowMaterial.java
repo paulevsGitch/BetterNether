@@ -17,8 +17,8 @@ public class WillowMaterial extends RoofMaterial {
 	public final static String BLOCK_SAPLING = BLOCK_OPTIONAL_SAPLING;
 	
 	
-	public WillowMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
-		super(name, woodColor, planksColor);
+	public WillowMaterial() {
+		super("willow", MaterialColor.TERRACOTTA_RED, MaterialColor.TERRACOTTA_RED);
 	}
 	
 	@Override

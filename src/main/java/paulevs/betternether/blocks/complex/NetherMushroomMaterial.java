@@ -6,10 +6,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MaterialColor;
-import paulevs.betternether.blocks.BlockMushroomFir;
-import paulevs.betternether.blocks.BlockMushroomFirSapling;
 import paulevs.betternether.blocks.BlockStem;
 import ru.bclib.blocks.BaseBlock;
 import ru.bclib.blocks.BaseDoorBlock;
@@ -90,7 +87,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
     @Override
     public void initDefaultRecipes() {
         Block planks = getBlock(BLOCK_PLANKS);
-        addRecipeEntry(new RecipeEntry("planks", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_PLANKS, (material, config, id) -> {
             Block log = getBlock(BLOCK_STEM);
 
             GridRecipe.make(id, planks)
@@ -101,7 +98,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_planks")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("stairs", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_STAIRS, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_STAIRS))
                     .checkConfig(config)
                     .setOutputCount(4)
@@ -110,7 +107,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_planks_stairs")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("slab", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_SLAB, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_SLAB))
                     .checkConfig(config)
                     .setOutputCount(6)
@@ -119,7 +116,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_planks_slabs")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("fence", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_FENCE, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_FENCE))
                     .checkConfig(config)
                     .setOutputCount(3)
@@ -129,7 +126,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_planks_fences")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("gate", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_GATE, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_GATE))
                     .checkConfig(config)
                     .setShape("I#I", "I#I")
@@ -138,7 +135,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_planks_gates")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("button", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_BUTTON, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_BUTTON))
                     .checkConfig(config)
                     .setList("#")
@@ -146,7 +143,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_planks_buttons")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("pressure_plate", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_PRESSURE_PLATE, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_PRESSURE_PLATE))
                     .checkConfig(config)
                     .setShape("##")
@@ -154,7 +151,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_planks_plates")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("trapdoor", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_TRAPDOOR, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_TRAPDOOR))
                     .checkConfig(config)
                     .setOutputCount(2)
@@ -163,7 +160,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_trapdoors")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("door", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_DOOR, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_DOOR))
                     .checkConfig(config)
                     .setOutputCount(3)
@@ -172,7 +169,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_doors")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("crafting_table", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_CRAFTING_TABLE, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_CRAFTING_TABLE))
                     .checkConfig(config)
                     .setShape("##", "##")
@@ -180,7 +177,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_tables")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("ladder", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_LADDER, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_LADDER))
                     .checkConfig(config)
                     .setOutputCount(3)
@@ -190,7 +187,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_ladders")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("sign", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_SIGN, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_SIGN))
                     .checkConfig(config)
                     .setOutputCount(3)
@@ -200,7 +197,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_signs")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("chest", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_CHEST, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_CHEST))
                     .checkConfig(config)
                     .setShape("###", "# #", "###")
@@ -208,7 +205,7 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_chests")
                     .build();
         }));
-        addRecipeEntry(new RecipeEntry("barrel", (material, config, id) -> {
+        addRecipeEntry(new RecipeEntry(BLOCK_BARREL, (material, config, id) -> {
             GridRecipe.make(id, getBlock(BLOCK_BARREL))
                     .checkConfig(config)
                     .setShape("#S#", "# #", "#S#")

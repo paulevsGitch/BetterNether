@@ -17,8 +17,8 @@ public class StalagnateMaterial extends RoofMaterial{
 	public final static String BLOCK_SEED = BLOCK_OPTIONAL_SEED;
 	public final static String BLOCK_STEM = BLOCK_OPTIONAL_STEM;
 	
-	public StalagnateMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
-		super(name, woodColor, planksColor);
+	public StalagnateMaterial() {
+		super("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN);
 	}
 	
 	@Override

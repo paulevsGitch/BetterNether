@@ -17,8 +17,8 @@ import ru.bclib.complexmaterials.entry.BlockEntry;
 public class RubeusMaterial extends NetherWoodenMaterial{
 	public final static String BLOCK_SAPLING = BLOCK_OPTIONAL_SAPLING;
 	public final static String BLOCK_CONE = "cone";
-	public RubeusMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
-		super(name, woodColor, planksColor);
+	public RubeusMaterial() {
+		super("rubeus", MaterialColor.COLOR_MAGENTA, MaterialColor.COLOR_MAGENTA);
 	}
 	
 	@Override

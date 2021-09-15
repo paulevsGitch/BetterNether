@@ -143,22 +143,22 @@ import paulevs.betternether.tab.CreativeTabs;
 import ru.bclib.api.TagAPI;
 import ru.bclib.blocks.BaseBarrelBlock;
 import ru.bclib.blocks.BaseChestBlock;
+import ru.bclib.blocks.BaseLeavesBlock;
 import ru.bclib.registry.BaseBlockEntities;
 
 public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
 
 	// Stalagnate //
-	public static final StalagnateMaterial MAT_STALAGNATE = new StalagnateMaterial("stalagnate", MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN).init();
-	
+	public static final StalagnateMaterial MAT_STALAGNATE = new StalagnateMaterial().init();
 	
 	// Willow //
-	public static final WillowMaterial MAT_WILLOW = new WillowMaterial("willow", MaterialColor.TERRACOTTA_RED, MaterialColor.TERRACOTTA_RED).init();
+	public static final WillowMaterial MAT_WILLOW = new WillowMaterial().init();
 	public static final Block WILLOW_LEAVES = registerBlockBCLib("willow_leaves", new BlockWillowLeaves());
 	
 	// Rubeus //
-	public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial("rubeus", MaterialColor.COLOR_MAGENTA, MaterialColor.COLOR_MAGENTA).init();
-	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves());
+	public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
+	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BaseLeavesBlock(MAT_RUBEUS.getSapling(), MaterialColor.COLOR_LIGHT_BLUE));
 	//public static final Block RUBEUS_SAPLING = registerBlock("rubeus_sapling", new BlockRubeusSapling());
 	//public static final Block RUBEUS_CONE = registerBlock("rubeus_cone", new BlockRubeusCone());
 	//public static final Block STRIPED_LOG_RUBEUS = registerBlock("striped_log_rubeus", new BNPillar(MaterialColor.COLOR_MAGENTA));
@@ -265,24 +265,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 
 	// Mushroom //
 	public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
-//	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStem(MaterialColor.TERRACOTTA_WHITE));
-//	public static final Block MUSHROOM_PLANKS = registerPlanks("mushroom_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 2, MUSHROOM_STEM);
-//	public static final Block MUSHROOM_STAIRS = registerStairs("mushroom_stairs", MUSHROOM_PLANKS);
-//	public static final Block MUSHROOM_SLAB = registerSlab("mushroom_slab", MUSHROOM_PLANKS);
-//	public static final Block MUSHROOM_FENCE = registerFence("mushroom_fence", MUSHROOM_PLANKS);
-//	public static final Block MUSHROOM_GATE = registerGate("mushroom_gate", MUSHROOM_PLANKS);
-//	public static final Block MUSHROOM_BUTTON = registerButton("mushroom_button", MUSHROOM_PLANKS);
-//	public static final Block MUSHROOM_PLATE = registerPlate("mushroom_plate", MUSHROOM_PLANKS);
-//	public static final Block MUSHROOM_TRAPDOOR = registerTrapdoor("mushroom_trapdoor", MUSHROOM_PLANKS);
-//	public static final Block MUSHROOM_DOOR = registerDoor("mushroom_door", MUSHROOM_PLANKS);
-//	public static final Block CRAFTING_TABLE_MUSHROOM = registerCraftingTable("crafting_table_mushroom", MUSHROOM_PLANKS);
-//	public static final Block CHEST_MUSHROOM = registerChest("chest_mushroom", MUSHROOM_PLANKS);
-//	public static final Block BARREL_MUSHROOM = registerBarrel("barrel_mushroom", MUSHROOM_PLANKS, MUSHROOM_SLAB);
-//	public static final Block TABURET_MUSHROOM = registerTaburet("taburet_mushroom", MUSHROOM_SLAB);
-//	public static final Block CHAIR_MUSHROOM = registerChair("chair_mushroom", MUSHROOM_SLAB);
-//	public static final Block BAR_STOOL_MUSHROOM = registerBarStool("bar_stool_mushroom", MUSHROOM_SLAB);
-//	public static final Block MUSHROOM_LADDER = registerLadder("mushroom_ladder", MUSHROOM_PLANKS);
-//	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
 
 	// Anchor Tree
 	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
