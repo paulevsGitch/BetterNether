@@ -57,7 +57,7 @@ public class ItemRecipes {
 			BNRecipeManager.addCraftingRecipe("wall_mushroom_red_2", "wall_mushroom", new String[] { "#" }, materials, new ItemStack(NetherBlocks.WALL_MUSHROOM_RED));
 		}
 
-		RecipesHelper.makeSimpleRecipe2(NetherBlocks.MUSHROOM_FIR_LOG, NetherBlocks.MUSHROOM_FIR_WOOD, 3, "nether_bark_striped");
+		// RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_MUSHROOM_FIR.getLog(), NetherBlocks.MAT_MUSHROOM_FIR.getBark(), 3, "nether_bark_striped");
 		// RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_RUBEUS.getStrippedLog(), NetherBlocks.MAT_RUBEUS.getStrippedBark(), 3, "nether_bark_striped");
 		// RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
 		// RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_WART.getStrippedLog(), NetherBlocks.MAT_WART.getStrippedBark(), 3, "nether_bark_striped");

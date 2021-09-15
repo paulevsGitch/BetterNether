@@ -379,8 +379,8 @@
 	"block.betternether.mushroom_fir_sapling": "Mushroom Fir Sapling",
 	"block.betternether.mushroom_fir_stem": "Mushroom Fir Stem",
 	"block.betternether.mushroom_fir_log": "Mushroom Fir Log",
-	"block.betternether.mushroom_fir_wood": "Mushroom Fir Wood",
-	"block.betternether.striped_log_mushroom_fir": "Striped Mushroom Fir Log",
+	"block.betternether.mushroom_fir_bark": "Mushroom Fir Wood",
+	"block.betternether.mushroom_fir_stripped_log": "Striped Mushroom Fir Log",
 	"block.betternether.striped_wood_mushroom_fir": "Striped Mushroom Fir Wood",
 	"block.betternether.mushroom_fir_planks": "Mushroom Fir Planks",
 	"block.betternether.mushroom_fir_stairs": "Mushroom Fir Stairs",
@@ -393,9 +393,9 @@
 	"block.betternether.mushroom_fir_door": "Mushroom Fir Door",
 	"block.betternether.mushroom_fir_ladder": "Mushroom Fir Ladder",
 	
-	"block.betternether.chair_mushroom_fir": "Mushroom Fir Chair",
-	"block.betternether.taburet_mushroom_fir": "Mushroom Fir Stool",
-	"block.betternether.bar_stool_mushroom_fir": "Mushroom Fir Bar Stool",
+	"block.betternether.mushroom_fir_chair": "Mushroom Fir Chair",
+	"block.betternether.mushroom_fir_taburet": "Mushroom Fir Stool",
+	"block.betternether.mushroom_fir_bar_stool": "Mushroom Fir Bar Stool",
 	
 	"block.betternether.obsidian_bricks": "Obsidian Bricks",
 	"block.betternether.obsidian_bricks_stairs": "Obsidian Bricks Stairs",
@@ -545,7 +545,7 @@
 	"block.betternether.wart_crafting_table": "Wart Crafting Table",
 	"block.betternether.rubeus_crafting_table": "Rubeus Crafting Table",
 	"block.betternether.crafting_table_mushroom": "Mushroom Crafting Table",
-	"block.betternether.crafting_table_mushroom_fir": "Mushroom Fir Crafting Table",
+	"block.betternether.mushroom_fir_crafting_table": "Mushroom Fir Crafting Table",
 	
 	"block.betternether.stalagnate_chest": "Stalagnate Chest",
 	"block.betternether.chest_reed": "Reeds Chest",
@@ -553,7 +553,7 @@
 	"block.betternether.wart_chest": "Wart Chest",
 	"block.betternether.rubeus_chest": "Rubeus Chest",
 	"block.betternether.chest_mushroom": "Mushroom Chest",
-	"block.betternether.chest_mushroom_fir": "Mushroom Fir Chest",
+	"block.betternether.mushroom_fir_chest": "Mushroom Fir Chest",
 	
 	"block.betternether.chest_crimson": "Crimson Chest",
 	"block.betternether.chest_warped": "Warped Chest",
@@ -568,7 +568,7 @@
 	"block.betternether.wart_sign": "Wart Sign",
 	"block.betternether.rubeus_sign": "Rubeus Sign",
 	"block.betternether.sign_mushroom": "Mushroom Sign",
-	"block.betternether.sign_mushroom_fir": "Mushroom Fir Sign",
+	"block.betternether.mushroom_fir_sign": "Mushroom Fir Sign",
 	
 	"block.betternether.stalagnate_barrel": "Stalagnate Barrel",
 	"block.betternether.barrel_reed": "Reeds Barrel",
@@ -576,7 +576,7 @@
 	"block.betternether.wart_barrel": "Wart Barrel",
 	"block.betternether.rubeus_barrel": "Rubeus Barrel",
 	"block.betternether.barrel_mushroom": "Mushroom Barrel",
-	"block.betternether.barrel_mushroom_fir": "Mushroom Fir Barrel",
+	"block.betternether.mushroom_fir_barrel": "Mushroom Fir Barrel",
 	
 	"block.betternether.barrel_crimson": "Crimson Barrel",
 	"block.betternether.barrel_warped": "Warped Barrel",

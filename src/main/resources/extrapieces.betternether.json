@@ -185,7 +185,7 @@
 		},
 		
 		"mushroom_fir_bark": {
-			"base": "betternether:mushroom_fir_wood",
+			"base": "betternether:mushroom_fir_bark",
 			"stonecuttable": true,
 			"exclude": [
 				"extrapieces:slab",

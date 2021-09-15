@@ -383,8 +383,8 @@
 	"block.betternether.mushroom_fir_sapling": "Primórdia de abetomelo",
 	"block.betternether.mushroom_fir_stem": "Talo de abetomelo",
 	"block.betternether.mushroom_fir_log": "Caule de abetomelo",
-	"block.betternether.mushroom_fir_wood": "Hifas de abetomelo",
-	"block.betternether.striped_log_mushroom_fir": "Caule de abetomelo descascado",
+	"block.betternether.mushroom_fir_bark": "Hifas de abetomelo",
+	"block.betternether.mushroom_fir_stripped_log": "Caule de abetomelo descascado",
 	"block.betternether.striped_wood_mushroom_fir": "Hifas de abetomelo descascadas",
 	"block.betternether.mushroom_fir_planks": "Tábuas de abetomelo",
 	"block.betternether.mushroom_fir_stairs": "Escadas de abetomelo",
@@ -397,9 +397,9 @@
 	"block.betternether.mushroom_fir_door": "Porta de abetomelo",
 	"block.betternether.mushroom_fir_ladder": "Escada de mão de abetomelo",
 	
-	"block.betternether.chair_mushroom_fir": "Cadeira de abetomelo",
-	"block.betternether.taburet_mushroom_fir": "Banco de abetomelo",
-	"block.betternether.bar_stool_mushroom_fir": "Banqueta de abetomelo",
+	"block.betternether.mushroom_fir_chair": "Cadeira de abetomelo",
+	"block.betternether.mushroom_fir_taburet": "Banco de abetomelo",
+	"block.betternether.mushroom_fir_bar_stool": "Banqueta de abetomelo",
 	
 	"block.betternether.obsidian_bricks": "Tijolos de obsidiana",
 	"block.betternether.obsidian_bricks_stairs": "Escadas de tijolos de obsidiana",
@@ -549,7 +549,7 @@
 	"block.betternether.wart_crafting_table": "Bancada de fungo do Nether",
 	"block.betternether.rubeus_crafting_table": "Bancada de rúbeus",
 	"block.betternether.crafting_table_mushroom": "Bancada de cogumelo",
-	"block.betternether.crafting_table_mushroom_fir": "Bancada de abetomelo",
+	"block.betternether.mushroom_fir_crafting_table": "Bancada de abetomelo",
 	
 	"block.betternether.stalagnate_chest": "Baú de estalagnato",
 	"block.betternether.chest_reed": "Baú de junco do Nether",
@@ -557,7 +557,7 @@
 	"block.betternether.wart_chest": "Baú de fungo do Nether",
 	"block.betternether.rubeus_chest": "Baú de rúbeus",
 	"block.betternether.chest_mushroom": "Baú de cogumelo",
-	"block.betternether.chest_mushroom_fir": "Baú de abetomelo",
+	"block.betternether.mushroom_fir_chest": "Baú de abetomelo",
 	
 	"block.betternether.chest_crimson": "Baú carmesim",
 	"block.betternether.chest_warped": "Baú distorcido",
@@ -572,7 +572,7 @@
 	"block.betternether.wart_sign": "Placa de fungo do Nether",
 	"block.betternether.rubeus_sign": "Placa de rúbeus",
 	"block.betternether.sign_mushroom": "Placa de cogumelo",
-	"block.betternether.sign_mushroom_fir": "Placa de abetomelo",
+	"block.betternether.mushroom_fir_sign": "Placa de abetomelo",
 	
 	"block.betternether.stalagnate_barrel": "Barril de estalagnato",
 	"block.betternether.barrel_reed": "Barril de junco do Nether",
@@ -580,7 +580,7 @@
 	"block.betternether.wart_barrel": "Barril de fungo do Nether",
 	"block.betternether.rubeus_barrel": "Barril de rúbeus",
 	"block.betternether.barrel_mushroom": "Barril de cogumelo",
-	"block.betternether.barrel_mushroom_fir": "Barril de abetomelo",
+	"block.betternether.mushroom_fir_barrel": "Barril de abetomelo",
 	
 	"block.betternether.barrel_crimson": "Barril carmesim",
 	"block.betternether.barrel_warped": "Barril distorcido",

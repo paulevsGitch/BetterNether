@@ -97,7 +97,7 @@ public class BlockMushroomFir extends BlockBaseNotFull {
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		MushroomFirShape shape = state.getValue(SHAPE);
-		return shape == MushroomFirShape.BOTTOM || shape == MushroomFirShape.MIDDLE ? new ItemStack(NetherBlocks.MUSHROOM_FIR_STEM) : new ItemStack(NetherBlocks.MUSHROOM_FIR_SAPLING);
+		return shape == MushroomFirShape.BOTTOM || shape == MushroomFirShape.MIDDLE ? new ItemStack(NetherBlocks.MAT_MUSHROOM_FIR.getStem()) : new ItemStack(NetherBlocks.MAT_MUSHROOM_FIR.getSapling());
 	}
 
 	@Override

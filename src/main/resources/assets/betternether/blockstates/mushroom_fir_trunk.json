@@ -1,0 +1,67 @@
+{
+    "variants":
+	{
+        "shape=bottom": [
+			{ "model": "betternether:block/mushroom_fir_trunk_bottom" },
+			{ "model": "betternether:block/mushroom_fir_trunk_bottom", "y": 90 },
+			{ "model": "betternether:block/mushroom_fir_trunk_bottom", "y": 180 },
+			{ "model": "betternether:block/mushroom_fir_trunk_bottom", "y": 270 }
+		],
+        "shape=middle": [
+			{ "model": "betternether:block/mushroom_fir_trunk_middle" },
+			{ "model": "betternether:block/mushroom_fir_trunk_middle_2" },
+			{ "model": "betternether:block/mushroom_fir_trunk_middle_2", "y": 90 },
+			{ "model": "betternether:block/mushroom_fir_trunk_middle_2", "y": 180 },
+			{ "model": "betternether:block/mushroom_fir_trunk_middle_2", "y": 270 },
+			{ "model": "betternether:block/mushroom_fir_trunk_middle_3" },
+			{ "model": "betternether:block/mushroom_fir_trunk_middle_3", "y": 90 },
+			{ "model": "betternether:block/mushroom_fir_trunk_middle_3", "y": 180 },
+			{ "model": "betternether:block/mushroom_fir_trunk_middle_3", "y": 270 }
+		],
+        "shape=top": [
+			{ "model": "betternether:block/mushroom_fir_trunk_top" },
+			{ "model": "betternether:block/mushroom_fir_trunk_top_2" },
+			{ "model": "betternether:block/mushroom_fir_trunk_top_2", "y": 90 },
+			{ "model": "betternether:block/mushroom_fir_trunk_top_2", "y": 180 },
+			{ "model": "betternether:block/mushroom_fir_trunk_top_2", "y": 270 }
+		],
+        "shape=side_big_n": [
+			{ "model": "betternether:block/mushroom_fir_branch" },
+			{ "model": "betternether:block/mushroom_fir_branch_2" }
+		],
+        "shape=side_big_s": [
+			{ "model": "betternether:block/mushroom_fir_branch", "y": 180 },
+			{ "model": "betternether:block/mushroom_fir_branch_2", "y": 180 }
+		],
+        "shape=side_big_e": [
+			{ "model": "betternether:block/mushroom_fir_branch", "y": 90 },
+			{ "model": "betternether:block/mushroom_fir_branch_2", "y": 90 }
+		],
+        "shape=side_big_w": [
+			{ "model": "betternether:block/mushroom_fir_branch", "y": 270 },
+			{ "model": "betternether:block/mushroom_fir_branch_2", "y": 270 }
+		],
+		"shape=side_small_n": [
+			{ "model": "betternether:block/mushroom_fir_branch_small" },
+			{ "model": "betternether:block/mushroom_fir_branch_small_2" }
+		],
+        "shape=side_small_s": [
+			{ "model": "betternether:block/mushroom_fir_branch_small", "y": 180 },
+			{ "model": "betternether:block/mushroom_fir_branch_small_2", "y": 180 }
+		],
+        "shape=side_small_e": [
+			{ "model": "betternether:block/mushroom_fir_branch_small", "y": 90 },
+			{ "model": "betternether:block/mushroom_fir_branch_small_2", "y": 90 }
+		],
+        "shape=side_small_w": [
+			{ "model": "betternether:block/mushroom_fir_branch_small", "y": 270 },
+			{ "model": "betternether:block/mushroom_fir_branch_small_2", "y": 270 }
+		],
+		"shape=end": [
+			{ "model": "betternether:block/mushroom_fir_end" },
+			{ "model": "betternether:block/mushroom_fir_end", "y": 90 },
+			{ "model": "betternether:block/mushroom_fir_end", "y": 180 },
+			{ "model": "betternether:block/mushroom_fir_end", "y": 270 }
+		]
+    }
+}

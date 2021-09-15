@@ -2,6 +2,7 @@ package paulevs.betternether.blocks.complex;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.blocks.BlockStalagnate;
@@ -36,7 +37,7 @@ public class StalagnateMaterial extends RoofMaterial{
 		
 		addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> {
 			return new BlockStalagnate();
-		}));
+		}).setBlockTags(BlockTags.CLIMBABLE));
 		
 		addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> {
 			return new BlockStalagnateSeed();

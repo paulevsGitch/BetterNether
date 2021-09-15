@@ -383,8 +383,8 @@
   "block.betternether.mushroom_fir_sapling": "Pilztannen Setzling",
   "block.betternether.mushroom_fir_stem": "Pilztannenstiel",
   "block.betternether.mushroom_fir_log": "Pilztannenstamm",
-  "block.betternether.mushroom_fir_wood": "Pilztannenholz",
-  "block.betternether.striped_log_mushroom_fir": "Entrindeter Pilztannenstamm",
+  "block.betternether.mushroom_fir_bark": "Pilztannenholz",
+  "block.betternether.mushroom_fir_stripped_log": "Entrindeter Pilztannenstamm",
   "block.betternether.striped_wood_mushroom_fir": "Entrindetes Pilztannenholz",
   "block.betternether.mushroom_fir_planks": "Pilztannenbretter",
   "block.betternether.mushroom_fir_stairs": "Pilztannentreppe",
@@ -397,9 +397,9 @@
   "block.betternether.mushroom_fir_door": "Pilztannentür",
   "block.betternether.mushroom_fir_ladder": "Pilztannenleiter",
 
-  "block.betternether.chair_mushroom_fir": "Pilztannenstuhl",
-  "block.betternether.taburet_mushroom_fir": "Pilztannenhocker",
-  "block.betternether.bar_stool_mushroom_fir": "Pilztannenbarhocker",
+  "block.betternether.mushroom_fir_chair": "Pilztannenstuhl",
+  "block.betternether.mushroom_fir_taburet": "Pilztannenhocker",
+  "block.betternether.mushroom_fir_bar_stool": "Pilztannenbarhocker",
 
   "block.betternether.obsidian_bricks": "Obsidianziegel",
   "block.betternether.obsidian_bricks_stairs": "Obsidianziegeltreppe",
@@ -549,7 +549,7 @@
   "block.betternether.wart_crafting_table": "Warzenwerkbank",
   "block.betternether.rubeus_crafting_table": "Rubeuswerkbank",
   "block.betternether.crafting_table_mushroom": "Pilzwerkbank",
-  "block.betternether.crafting_table_mushroom_fir": "Pilztannenwerkbank",
+  "block.betternether.mushroom_fir_crafting_table": "Pilztannenwerkbank",
 
   "block.betternether.stalagnate_chest": "Stalagnattruhe",
   "block.betternether.chest_reed": "Schilftruhe",
@@ -557,7 +557,7 @@
   "block.betternether.wart_chest": "Warzentruhe",
   "block.betternether.rubeus_chest": "Rubeustruhe",
   "block.betternether.chest_mushroom": "Pilztruhe",
-  "block.betternether.chest_mushroom_fir": "Pilztannentruhe",
+  "block.betternether.mushroom_fir_chest": "Pilztannentruhe",
 
   "block.betternether.chest_crimson": "Karmesintruhe",
   "block.betternether.chest_warped": "Wirrtruhe",
@@ -572,7 +572,7 @@
   "block.betternether.wart_sign": "Warzenschild",
   "block.betternether.rubeus_sign": "Rubeusschild",
   "block.betternether.sign_mushroom": "Pilzschild",
-  "block.betternether.sign_mushroom_fir": "Pilztannenschild",
+  "block.betternether.mushroom_fir_sign": "Pilztannenschild",
 
   "block.betternether.stalagnate_barrel": "Stalagnatfass",
   "block.betternether.barrel_reed": "Schilffass",
@@ -580,7 +580,7 @@
   "block.betternether.wart_barrel": "Warzenfass",
   "block.betternether.rubeus_barrel": "Rubeusfass",
   "block.betternether.barrel_mushroom": "Pilzfass",
-  "block.betternether.barrel_mushroom_fir": "Pilztannenfass",
+  "block.betternether.mushroom_fir_barrel": "Pilztannenfass",
 
   "block.betternether.barrel_crimson": "Karmesinfass",
   "block.betternether.barrel_warped": "Wirrfass",

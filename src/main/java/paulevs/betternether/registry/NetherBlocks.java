@@ -128,6 +128,7 @@ import paulevs.betternether.blocks.BlockWhisperingGourdLantern;
 import paulevs.betternether.blocks.BlockWhisperingGourdVine;
 import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
+import paulevs.betternether.blocks.complex.MushroomFirMaterial;
 import paulevs.betternether.blocks.complex.RubeusMaterial;
 import paulevs.betternether.blocks.complex.StalagnateMaterial;
 import paulevs.betternether.blocks.complex.WartMaterial;
@@ -207,7 +208,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 
 	// Wart //
 	public static final WartMaterial MAT_WART = new WartMaterial("wart", MaterialColor.COLOR_RED, MaterialColor.COLOR_RED).init();
-
 	//public static final Block WART_SEED = registerBlock("wart_seed", new BlockWartSeed());
 	// public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.COLOR_RED));
 	// public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MaterialColor.COLOR_RED));
@@ -235,6 +235,33 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// public static final Block WART_LADDER = registerLadder("wart_ladder", WART_PLANKS);
 	// public static final Block SIGN_WART = registerSign("sign_wart", WART_PLANKS);
 
+	// Mushroom Fir //
+	public static final MushroomFirMaterial MAT_MUSHROOM_FIR = new MushroomFirMaterial().init();
+//	public static final Block MUSHROOM_FIR = registerBlockNI("mushroom_fir", new BlockMushroomFir());
+//	public static final Block MUSHROOM_FIR_SAPLING = registerBlock("mushroom_fir_sapling", new BlockMushroomFirSapling());
+//	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem", new BlockStem(MaterialColor.TERRACOTTA_BLACK));
+//	public static final Block STRIPED_LOG_MUSHROOM_FIR = registerBlock("striped_log_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
+//	public static final Block STRIPED_WOOD_MUSHROOM_FIR = registerBlock("striped_wood_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
+//	public static final Block MUSHROOM_FIR_LOG = registerLog("mushroom_fir_log", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_LOG_MUSHROOM_FIR), MUSHROOM_FIR_STEM);
+//	public static final Block MUSHROOM_FIR_WOOD = registerBark("mushroom_fir_wood", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_WOOD_MUSHROOM_FIR), MUSHROOM_FIR_LOG);
+//	public static final Block MUSHROOM_FIR_PLANKS = registerPlanks("mushroom_fir_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 1, MUSHROOM_FIR_STEM, MUSHROOM_FIR_LOG, MUSHROOM_FIR_WOOD, STRIPED_LOG_MUSHROOM_FIR, STRIPED_WOOD_MUSHROOM_FIR);
+//	public static final Block MUSHROOM_FIR_STAIRS = registerStairs("mushroom_fir_stairs", MUSHROOM_FIR_PLANKS);
+//	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab", MUSHROOM_FIR_PLANKS);
+//	public static final Block MUSHROOM_FIR_FENCE = registerFence("mushroom_fir_fence", MUSHROOM_FIR_PLANKS);
+//	public static final Block MUSHROOM_FIR_GATE = registerGate("mushroom_fir_gate", MUSHROOM_FIR_PLANKS);
+//	public static final Block MUSHROOM_FIR_BUTTON = registerButton("mushroom_fir_button", MUSHROOM_FIR_PLANKS);
+//	public static final Block MUSHROOM_FIR_PLATE = registerPlate("mushroom_fir_plate", MUSHROOM_FIR_PLANKS);
+//	public static final Block MUSHROOM_FIR_TRAPDOOR = registerTrapdoor("mushroom_fir_trapdoor", MUSHROOM_FIR_PLANKS);
+//	public static final Block MUSHROOM_FIR_DOOR = registerDoor("mushroom_fir_door", MUSHROOM_FIR_PLANKS);
+//	public static final Block CRAFTING_TABLE_MUSHROOM_FIR = registerCraftingTable("crafting_table_mushroom_fir", MUSHROOM_FIR_PLANKS);
+//	public static final Block CHEST_MUSHROOM_FIR = registerChest("chest_mushroom_fir", MUSHROOM_FIR_PLANKS);
+//	public static final Block BARREL_MUSHROOM_FIR = registerBarrel("barrel_mushroom_fir", MUSHROOM_FIR_PLANKS, MUSHROOM_FIR_SLAB);
+//	public static final Block TABURET_MUSHROOM_FIR = registerTaburet("taburet_mushroom_fir", MUSHROOM_FIR_SLAB);
+//	public static final Block CHAIR_MUSHROOM_FIR = registerChair("chair_mushroom_fir", MUSHROOM_FIR_SLAB);
+//	public static final Block BAR_STOOL_MUSHROOM_FIR = registerBarStool("bar_stool_mushroom_fir", MUSHROOM_FIR_SLAB);
+//	public static final Block MUSHROOM_FIR_LADDER = registerLadder("mushroom_fir_ladder", MUSHROOM_FIR_PLANKS);
+//	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
+
 	// Mushroom //
 	public static final Block MUSHROOM_STEM = registerBlock("mushroom_stem", new BlockStem(MaterialColor.TERRACOTTA_WHITE));
 	public static final Block MUSHROOM_PLANKS = registerPlanks("mushroom_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 2, MUSHROOM_STEM);
@@ -254,32 +281,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BAR_STOOL_MUSHROOM = registerBarStool("bar_stool_mushroom", MUSHROOM_SLAB);
 	public static final Block MUSHROOM_LADDER = registerLadder("mushroom_ladder", MUSHROOM_PLANKS);
 	public static final Block SIGN_MUSHROOM = registerSign("sign_mushroom", MUSHROOM_PLANKS);
-
-	// Mushroom Fir //
-	public static final Block MUSHROOM_FIR = registerBlockNI("mushroom_fir", new BlockMushroomFir());
-	public static final Block MUSHROOM_FIR_SAPLING = registerBlock("mushroom_fir_sapling", new BlockMushroomFirSapling());
-	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem", new BlockStem(MaterialColor.TERRACOTTA_BLACK));
-	public static final Block STRIPED_LOG_MUSHROOM_FIR = registerBlock("striped_log_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
-	public static final Block STRIPED_WOOD_MUSHROOM_FIR = registerBlock("striped_wood_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
-	public static final Block MUSHROOM_FIR_LOG = registerLog("mushroom_fir_log", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_LOG_MUSHROOM_FIR), MUSHROOM_FIR_STEM);
-	public static final Block MUSHROOM_FIR_WOOD = registerBark("mushroom_fir_wood", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_WOOD_MUSHROOM_FIR), MUSHROOM_FIR_LOG);
-	public static final Block MUSHROOM_FIR_PLANKS = registerPlanks("mushroom_fir_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 1, MUSHROOM_FIR_STEM, MUSHROOM_FIR_LOG, MUSHROOM_FIR_WOOD, STRIPED_LOG_MUSHROOM_FIR, STRIPED_WOOD_MUSHROOM_FIR);
-	public static final Block MUSHROOM_FIR_STAIRS = registerStairs("mushroom_fir_stairs", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_FENCE = registerFence("mushroom_fir_fence", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_GATE = registerGate("mushroom_fir_gate", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_BUTTON = registerButton("mushroom_fir_button", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_PLATE = registerPlate("mushroom_fir_plate", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_TRAPDOOR = registerTrapdoor("mushroom_fir_trapdoor", MUSHROOM_FIR_PLANKS);
-	public static final Block MUSHROOM_FIR_DOOR = registerDoor("mushroom_fir_door", MUSHROOM_FIR_PLANKS);
-	public static final Block CRAFTING_TABLE_MUSHROOM_FIR = registerCraftingTable("crafting_table_mushroom_fir", MUSHROOM_FIR_PLANKS);
-	public static final Block CHEST_MUSHROOM_FIR = registerChest("chest_mushroom_fir", MUSHROOM_FIR_PLANKS);
-	public static final Block BARREL_MUSHROOM_FIR = registerBarrel("barrel_mushroom_fir", MUSHROOM_FIR_PLANKS, MUSHROOM_FIR_SLAB);
-	public static final Block TABURET_MUSHROOM_FIR = registerTaburet("taburet_mushroom_fir", MUSHROOM_FIR_SLAB);
-	public static final Block CHAIR_MUSHROOM_FIR = registerChair("chair_mushroom_fir", MUSHROOM_FIR_SLAB);
-	public static final Block BAR_STOOL_MUSHROOM_FIR = registerBarStool("bar_stool_mushroom_fir", MUSHROOM_FIR_SLAB);
-	public static final Block MUSHROOM_FIR_LADDER = registerLadder("mushroom_fir_ladder", MUSHROOM_FIR_PLANKS);
-	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
 
 	// Anchor Tree
 	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());

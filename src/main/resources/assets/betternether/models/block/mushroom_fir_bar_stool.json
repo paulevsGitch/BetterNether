@@ -1,0 +1,7 @@
+{
+    "parent": "betternether:block/bn_bar_stool",
+    "textures": {
+        "texture": "betternether:block/mushroom_fir_planks",
+        "cloth": "betternether:block/nether_brick_tile_large"
+    }
+}

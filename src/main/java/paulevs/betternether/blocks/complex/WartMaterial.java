@@ -10,7 +10,7 @@ import ru.bclib.complexmaterials.entry.BlockEntry;
 
 public class WartMaterial extends RoofMaterial{
     public final static String BLOCK_SEED = BLOCK_OPTIONAL_SEED;
-    public final static String BLOCK_ROOTS = "roots";
+    public final static String BLOCK_ROOTS = BLOCK_OPTIONAL_ROOT;
 
     public WartMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
         super(name, woodColor, planksColor);

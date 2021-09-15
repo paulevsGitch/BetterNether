@@ -384,8 +384,8 @@
 	"block.betternether.mushroom_fir_sapling": "Саженец грибной ели",
 	"block.betternether.mushroom_fir_stem": "Ствол грибной ели",
 	"block.betternether.mushroom_fir_log": "Бревно грибной ели",
-	"block.betternether.mushroom_fir_wood": "Древесина грибной ели",
-	"block.betternether.striped_log_mushroom_fir": "Обтёсанное бревно грибной ели",
+	"block.betternether.mushroom_fir_bark": "Древесина грибной ели",
+	"block.betternether.mushroom_fir_stripped_log": "Обтёсанное бревно грибной ели",
 	"block.betternether.striped_wood_mushroom_fir": "Обтёсанная древесина грибной ели",
 	"block.betternether.mushroom_fir_planks": "Доски из грибной ели",
 	"block.betternether.mushroom_fir_stairs": "Ступени из грибной ели",
@@ -398,9 +398,9 @@
 	"block.betternether.mushroom_fir_door": "Дверь из грибной ели",
 	"block.betternether.mushroom_fir_ladder": "Лестница из грибной ели",
 	
-	"block.betternether.chair_mushroom_fir": "Стул из грибной ели",
-	"block.betternether.taburet_mushroom_fir": "Табурет из грибной ели",
-	"block.betternether.bar_stool_mushroom_fir": "Барный стул из грибной ели",
+	"block.betternether.mushroom_fir_chair": "Стул из грибной ели",
+	"block.betternether.mushroom_fir_taburet": "Табурет из грибной ели",
+	"block.betternether.mushroom_fir_bar_stool": "Барный стул из грибной ели",
 	
 	"block.betternether.obsidian_bricks": "Обсидиановые кирпичи",
 	"block.betternether.obsidian_bricks_stairs": "Ступени из обсидиановых кирпичей",
@@ -550,7 +550,7 @@
 	"block.betternether.wart_crafting_table": "Верстак из нароста",
 	"block.betternether.rubeus_crafting_table": "Рубейсовый верстак",
 	"block.betternether.crafting_table_mushroom": "Грибной верстак",
-	"block.betternether.crafting_table_mushroom_fir": "Верстак из грибной ели",
+	"block.betternether.mushroom_fir_crafting_table": "Верстак из грибной ели",
 	
 	"block.betternether.stalagnate_chest": "Сталагнатовый сундук",
 	"block.betternether.chest_reed": "Тростниковый сундук",
@@ -558,7 +558,7 @@
 	"block.betternether.wart_chest": "Сундук из нароста",
 	"block.betternether.rubeus_chest": "Рубейсовый сундук",
 	"block.betternether.chest_mushroom": "Грибной сундук",
-	"block.betternether.chest_mushroom_fir": "Сундук из грибной ели",
+	"block.betternether.mushroom_fir_chest": "Сундук из грибной ели",
 	
 	"block.betternether.chest_crimson": "Багровый сундук",
 	"block.betternether.chest_warped": "Искажённый сундук",
@@ -573,7 +573,7 @@
 	"block.betternether.wart_sign": "Табличка из нароста",
 	"block.betternether.rubeus_sign": "Рубейсовая табличка",
 	"block.betternether.sign_mushroom": "Грибная табличка",
-	"block.betternether.sign_mushroom_fir": "Табличка из грибной ели",
+	"block.betternether.mushroom_fir_sign": "Табличка из грибной ели",
 	
 	"block.betternether.stalagnate_barrel": "Сталагнатовая бочка",
 	"block.betternether.barrel_reed": "Тростниковая бочка",
@@ -581,7 +581,7 @@
 	"block.betternether.wart_barrel": "Бочка из нароста",
 	"block.betternether.rubeus_barrel": "Рубейсовая бочка",
 	"block.betternether.barrel_mushroom": "Грибная бочка",
-	"block.betternether.barrel_mushroom_fir": "бочка из грибной ели",
+	"block.betternether.mushroom_fir_barrel": "бочка из грибной ели",
 	
 	"block.betternether.barrel_crimson": "Багровая бочка",
 	"block.betternether.barrel_warped": "Искажённая бочка",

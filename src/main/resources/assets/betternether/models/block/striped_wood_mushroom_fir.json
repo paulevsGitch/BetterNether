@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "betternether:block/striped_log_mushroom_fir_side"
+        "all": "betternether:block/mushroom_fir_stripped_log_side"
     }
 }

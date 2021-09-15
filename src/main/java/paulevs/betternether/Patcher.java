@@ -14,7 +14,7 @@ public class Patcher {
 //--- Level 01
 class Patcher_001 extends Patch {
 	public Patcher_001() {
-		super(BetterNether.MOD_ID, "5.3.1");
+		super(BetterNether.MOD_ID, "5.3.2");
 	}
 	
 	@Override
@@ -79,7 +79,19 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:roof_tile_wart_slab", "betternether:wart_roof_slab"),
 				Map.entry("betternether:taburet_wart", "betternether:wart_taburet"),
 				Map.entry("betternether:chair_wart", "betternether:wart_chair"),
-				Map.entry("betternether:bar_stool_wart", "betternether:wart_bar_stool")
+				Map.entry("betternether:bar_stool_wart", "betternether:wart_bar_stool"),
+				// Mushroom Fir //
+				Map.entry("betternether:mushroom_fir_wood", "betternether:mushroom_fir_bark"),
+				Map.entry("betternether:striped_log_mushroom_fir", "betternether:mushroom_fir_stripped_log"),
+				Map.entry("betternether:striped_bark_mushroom_fir", "betternether:mushroom_fir_stripped_bark"),
+				Map.entry("betternether:crafting_table_mushroom_fir", "betternether:mushroom_fir_crafting_table"),
+				Map.entry("betternether:sign_mushroom_fir", "betternether:mushroom_fir_sign"),
+				Map.entry("betternether:chest_mushroom_fir", "betternether:mushroom_fir_chest"),
+				Map.entry("betternether:barrel_mushroom_fir", "betternether:mushroom_fir_barrel"),
+				Map.entry("betternether:taburet_mushroom_fir", "betternether:mushroom_fir_taburet"),
+				Map.entry("betternether:chair_mushroom_fir", "betternether:mushroom_fir_chair"),
+				Map.entry("betternether:bar_stool_mushroom_fir", "betternether:mushroom_fir_bar_stool"),
+				Map.entry("betternether:mushroom_fir", "betternether:mushroom_fir_trunk")
 		);
 	}
 }

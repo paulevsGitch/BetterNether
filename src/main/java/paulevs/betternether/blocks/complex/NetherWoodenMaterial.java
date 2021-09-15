@@ -26,7 +26,7 @@ import ru.bclib.registry.ItemRegistry;
 public class NetherWoodenMaterial extends ru.bclib.complexmaterials.WoodenComplexMaterial {
 	protected final static String BLOCK_OPTIONAL_TRUNK = "trunk";
 	protected final static String BLOCK_OPTIONAL_BRANCH = "branch";
-	protected final static String BLOCK_OPTIONAL_ROOT = "root";
+	protected final static String BLOCK_OPTIONAL_ROOT = "roots";
 	protected final static String BLOCK_OPTIONAL_SAPLING = "sapling";
 	protected final static String BLOCK_OPTIONAL_SEED = "seed";
 	protected final static String BLOCK_OPTIONAL_STEM = "stem";

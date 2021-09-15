@@ -382,8 +382,8 @@
 	"block.betternether.mushroom_fir_sapling": "下界冷杉菇木幼苗",
 	"block.betternether.mushroom_fir_stem": "下界冷杉菇木柄",
 	"block.betternether.mushroom_fir_log": "下界冷杉菇木原木",
-	"block.betternether.mushroom_fir_wood": "下界冷杉菇木",
-	"block.betternether.striped_log_mushroom_fir": "去皮菇下界冷杉木原木",
+	"block.betternether.mushroom_fir_bark": "下界冷杉菇木",
+	"block.betternether.mushroom_fir_stripped_log": "去皮菇下界冷杉木原木",
 	"block.betternether.striped_wood_mushroom_fir": "去皮菇下界冷杉木",
 	"block.betternether.mushroom_fir_planks": "下界冷杉菇木板",
 	"block.betternether.mushroom_fir_stairs": "下界冷杉菇木楼梯",
@@ -396,9 +396,9 @@
 	"block.betternether.mushroom_fir_door": "下界冷杉菇木门",
 	"block.betternether.mushroom_fir_ladder": "下界冷杉菇木梯子",
 	
-	"block.betternether.chair_mushroom_fir": "下界冷杉菇木椅子",
-	"block.betternether.taburet_mushroom_fir": "下界冷杉菇木凳子",
-	"block.betternether.bar_stool_mushroom_fir": "下界冷杉菇木高脚凳",
+	"block.betternether.mushroom_fir_chair": "下界冷杉菇木椅子",
+	"block.betternether.mushroom_fir_taburet": "下界冷杉菇木凳子",
+	"block.betternether.mushroom_fir_bar_stool": "下界冷杉菇木高脚凳",
 	
 	"block.betternether.obsidian_bricks": "黑曜石砖",
 	"block.betternether.obsidian_bricks_stairs": "黑曜石砖楼梯",
@@ -548,7 +548,7 @@
 	"block.betternether.wart_crafting_table": "下界疣工作台",
 	"block.betternether.rubeus_crafting_table": "宝红木工作台",
 	"block.betternether.crafting_table_mushroom": "蘑菇工作台",
-	"block.betternether.crafting_table_mushroom_fir": "下界冷杉菇木工作台",
+	"block.betternether.mushroom_fir_crafting_table": "下界冷杉菇木工作台",
 	
 	"block.betternether.stalagnate_chest": "石结木箱子",
 	"block.betternether.chest_reed": "下界芦苇箱子",
@@ -556,7 +556,7 @@
 	"block.betternether.wart_chest": "下界疣箱子",
 	"block.betternether.rubeus_chest": "宝红木箱子",
 	"block.betternether.chest_mushroom": "蘑菇箱子",
-	"block.betternether.chest_mushroom_fir": "下界冷杉菇木箱子",
+	"block.betternether.mushroom_fir_chest": "下界冷杉菇木箱子",
 	
 	"block.betternether.chest_crimson": "绯红木箱子",
 	"block.betternether.chest_warped": "诡异木箱子",
@@ -571,7 +571,7 @@
 	"block.betternether.wart_sign": "下界疣告示牌",
 	"block.betternether.rubeus_sign": "宝红木告示牌",
 	"block.betternether.sign_mushroom": "蘑菇告示牌",
-	"block.betternether.sign_mushroom_fir": "下界冷杉菇木告示牌",
+	"block.betternether.mushroom_fir_sign": "下界冷杉菇木告示牌",
 	
 	"block.betternether.stalagnate_barrel": "石结木桶",
 	"block.betternether.barrel_reed": "下界芦苇桶",
@@ -579,7 +579,7 @@
 	"block.betternether.wart_barrel": "下界疣桶",
 	"block.betternether.rubeus_barrel": "宝红木桶",
 	"block.betternether.barrel_mushroom": "蘑菇桶",
-	"block.betternether.barrel_mushroom_fir": "下界冷杉菇木桶",
+	"block.betternether.mushroom_fir_barrel": "下界冷杉菇木桶",
 	
 	"block.betternether.barrel_crimson": "绯红木桶",
 	"block.betternether.barrel_warped": "诡异木桶",
