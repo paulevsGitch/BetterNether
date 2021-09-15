@@ -4,7 +4,7 @@
 		"particle": "betternether:block/giant_mold_top",
 		"texture": "betternether:block/giant_mold_top",
 		"fur": "betternether:block/giant_mold_fur",
-		"cut": "betternether:block/mushroom_stem_top"
+		"cut": "betternether:block/nether_mushroom_stem_top"
 	},
 	"elements": [ 	 
 		{

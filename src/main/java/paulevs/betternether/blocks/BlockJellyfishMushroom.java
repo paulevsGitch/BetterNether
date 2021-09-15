@@ -137,6 +137,6 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
 		else if (state.getValue(SHAPE) == TripleShape.BOTTOM)
 			return Lists.newArrayList(new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING, MHelper.randRange(1, 2, MHelper.RANDOM)));
 		else
-			return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM));
+			return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
 	}
 }

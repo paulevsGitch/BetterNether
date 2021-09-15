@@ -1,0 +1,9 @@
+{
+    "variants":
+	{
+        "":
+		[
+			{ "model": "betternether:block/nether_mushroom_planks" }
+		]
+    }
+}

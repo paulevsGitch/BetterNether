@@ -34,7 +34,7 @@
 						},
 						{
 							"type": "minecraft:item",
-							"name": "betternether:mushroom_stem"
+							"name": "betternether:nether_mushroom_stem"
 						}
 					]
 				}

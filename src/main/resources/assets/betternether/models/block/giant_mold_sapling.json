@@ -3,7 +3,7 @@
 	"textures": {
 		"particle": "betternether:block/giant_mold_stem_side",
 		"texture": "betternether:block/giant_mold_stem_side",
-		"cut": "betternether:block/mushroom_stem_top",
+		"cut": "betternether:block/nether_mushroom_stem_top",
 		"texture1": "betternether:block/giant_mold_small"
 	},
 	"elements": [ 	 

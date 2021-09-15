@@ -91,7 +91,26 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:taburet_mushroom_fir", "betternether:mushroom_fir_taburet"),
 				Map.entry("betternether:chair_mushroom_fir", "betternether:mushroom_fir_chair"),
 				Map.entry("betternether:bar_stool_mushroom_fir", "betternether:mushroom_fir_bar_stool"),
-				Map.entry("betternether:mushroom_fir", "betternether:mushroom_fir_trunk")
+				Map.entry("betternether:mushroom_fir", "betternether:mushroom_fir_trunk"),
+				// Nether Mushroom //
+				Map.entry("betternether:mushroom_stem","betternether:nether_mushroom_stem"),
+				Map.entry("betternether:mushroom_planks","betternether:nether_mushroom_planks"),
+				Map.entry("betternether:mushroom_stairs","betternether:nether_mushroom_stairs"),
+				Map.entry("betternether:mushroom_slab","betternether:nether_mushroom_slab"),
+				Map.entry("betternether:mushroom_fence","betternether:nether_mushroom_fence"),
+				Map.entry("betternether:mushroom_gate","betternether:nether_mushroom_gate"),
+				Map.entry("betternether:mushroom_button","betternether:nether_mushroom_button"),
+				Map.entry("betternether:mushroom_plate","betternether:nether_mushroom_plate"),
+				Map.entry("betternether:mushroom_trapdoor","betternether:nether_mushroom_trapdoor"),
+				Map.entry("betternether:mushroom_door","betternether:nether_mushroom_door"),
+				Map.entry("betternether:crafting_table_mushroom","betternether:nether_mushroom_crafting_table"),
+				Map.entry("betternether:chest_mushroom","betternether:nether_mushroom_chest"),
+				Map.entry("betternether:barrel_mushroom","betternether:nether_mushroom_barrel"),
+				Map.entry("betternether:taburet_mushroom","betternether:nether_mushroom_taburet"),
+				Map.entry("betternether:chair_mushroom","betternether:nether_mushroom_chair"),
+				Map.entry("betternether:bar_stool_mushroom","betternether:nether_mushroom_bar_stool"),
+				Map.entry("betternether:mushroom_ladder","betternether:nether_mushroom_ladder"),
+				Map.entry("betternether:sign_mushroom","betternether:nether_mushroom_sign")
 		);
 	}
 }

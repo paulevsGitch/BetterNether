@@ -245,16 +245,16 @@
 	"item.betternether.spawn_egg_firefly": "Яйцо призыва светлячка",
 	"item.betternether.cincinnasite_ingot": "Цинцинназитовый слиток",
 	
-	"block.betternether.mushroom_stem": "Грибной ствол",
-	"block.betternether.mushroom_planks": "Грибные доски",
-	"block.betternether.mushroom_stairs": "Грибные ступени",
-	"block.betternether.mushroom_slab": "Грибная плита",
-	"block.betternether.mushroom_fence": "Грибной забор",
-	"block.betternether.mushroom_gate": "Грибная калитка",
-	"block.betternether.mushroom_button": "Грибная кнопка",
-	"block.betternether.mushroom_plate": "Грибная нажимная плита",
-	"block.betternether.mushroom_trapdoor": "Грибной люк",
-	"block.betternether.mushroom_door": "Грибная дверь",
+	"block.betternether.nether_mushroom_stem": "Грибной ствол",
+	"block.betternether.nether_mushroom_planks": "Грибные доски",
+	"block.betternether.nether_mushroom_stairs": "Грибные ступени",
+	"block.betternether.nether_mushroom_slab": "Грибная плита",
+	"block.betternether.nether_mushroom_fence": "Грибной забор",
+	"block.betternether.nether_mushroom_gate": "Грибная калитка",
+	"block.betternether.nether_mushroom_button": "Грибная кнопка",
+	"block.betternether.nether_mushroom_plate": "Грибная нажимная плита",
+	"block.betternether.nether_mushroom_trapdoor": "Грибной люк",
+	"block.betternether.nether_mushroom_door": "Грибная дверь",
 	
 	"block.betternether.cincinnasite_lantern_small": "Маленький цинцинназитовый фонарь",
 	
@@ -549,7 +549,7 @@
 	"block.betternether.willow_crafting_table": "Ивовый верстак",
 	"block.betternether.wart_crafting_table": "Верстак из нароста",
 	"block.betternether.rubeus_crafting_table": "Рубейсовый верстак",
-	"block.betternether.crafting_table_mushroom": "Грибной верстак",
+	"block.betternether.nether_mushroom_crafting_table": "Грибной верстак",
 	"block.betternether.mushroom_fir_crafting_table": "Верстак из грибной ели",
 	
 	"block.betternether.stalagnate_chest": "Сталагнатовый сундук",
@@ -557,7 +557,7 @@
 	"block.betternether.willow_chest": "Ивовый сундук",
 	"block.betternether.wart_chest": "Сундук из нароста",
 	"block.betternether.rubeus_chest": "Рубейсовый сундук",
-	"block.betternether.chest_mushroom": "Грибной сундук",
+	"block.betternether.nether_mushroom_chest": "Грибной сундук",
 	"block.betternether.mushroom_fir_chest": "Сундук из грибной ели",
 	
 	"block.betternether.chest_crimson": "Багровый сундук",
@@ -572,7 +572,7 @@
 	"block.betternether.willow_sign": "Ивовая табличка",
 	"block.betternether.wart_sign": "Табличка из нароста",
 	"block.betternether.rubeus_sign": "Рубейсовая табличка",
-	"block.betternether.sign_mushroom": "Грибная табличка",
+	"block.betternether.nether_mushroom_sign": "Грибная табличка",
 	"block.betternether.mushroom_fir_sign": "Табличка из грибной ели",
 	
 	"block.betternether.stalagnate_barrel": "Сталагнатовая бочка",
@@ -580,7 +580,7 @@
 	"block.betternether.willow_barrel": "Ивовая бочка",
 	"block.betternether.wart_barrel": "Бочка из нароста",
 	"block.betternether.rubeus_barrel": "Рубейсовая бочка",
-	"block.betternether.barrel_mushroom": "Грибная бочка",
+	"block.betternether.nether_mushroom_barrel": "Грибная бочка",
 	"block.betternether.mushroom_fir_barrel": "бочка из грибной ели",
 	
 	"block.betternether.barrel_crimson": "Багровая бочка",
@@ -588,19 +588,19 @@
 	
 	"block.betternether.crimson_ladder": "Багровая лестница",
 	"block.betternether.warped_ladder": "Искажённая лестница",
-	"block.betternether.mushroom_ladder": "Грибная лестница",
+	"block.betternether.nether_mushroom_ladder": "Грибная лестница",
 	
 	"block.betternether.taburet_crimson": "Багровый табурет",
 	"block.betternether.taburet_warped": "Искажённый табурет",
-	"block.betternether.taburet_mushroom": "Грибной табурет",
+	"block.betternether.nether_mushroom_taburet": "Грибной табурет",
 	
 	"block.betternether.chair_crimson": "Багровый стул",
 	"block.betternether.chair_warped": "Искажённый стул",
-	"block.betternether.chair_mushroom": "Грибной стул",
+	"block.betternether.nether_mushroom_chair": "Грибной стул",
 	
 	"block.betternether.bar_stool_crimson": "Багровый барный стул",
 	"block.betternether.bar_stool_warped": "Искажённый барный стул",
-	"block.betternether.bar_stool_mushroom": "Грибной барный стул",
+	"block.betternether.nether_mushroom_bar_stool": "Грибной барный стул",
 	
 	"block.betternether.mushroom_grass": "Грибная трава",
 	"block.betternether.bone_grass": "Костяная трава",

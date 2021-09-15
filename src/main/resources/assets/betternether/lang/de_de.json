@@ -245,16 +245,16 @@
   "item.betternether.spawn_egg_firefly": "Irrlicht Spawn-Ei",
   "item.betternether.cincinnasite_ingot": "Cincinnasitbarren",
 
-  "block.betternether.mushroom_stem": "Pilzstiel",
-  "block.betternether.mushroom_planks": "Pilzbretter",
-  "block.betternether.mushroom_stairs": "Pilztreppe",
-  "block.betternether.mushroom_slab": "Pilzstufe",
-  "block.betternether.mushroom_fence": "Pilzzaun",
-  "block.betternether.mushroom_gate": "Pilzzauntor",
-  "block.betternether.mushroom_button": "Pilzknopf",
-  "block.betternether.mushroom_plate": "Pilzplatte",
-  "block.betternether.mushroom_trapdoor": "Pilzfalltür",
-  "block.betternether.mushroom_door": "Pilztür",
+  "block.betternether.nether_mushroom_stem": "Pilzstiel",
+  "block.betternether.nether_mushroom_planks": "Pilzbretter",
+  "block.betternether.nether_mushroom_stairs": "Pilztreppe",
+  "block.betternether.nether_mushroom_slab": "Pilzstufe",
+  "block.betternether.nether_mushroom_fence": "Pilzzaun",
+  "block.betternether.nether_mushroom_gate": "Pilzzauntor",
+  "block.betternether.nether_mushroom_button": "Pilzknopf",
+  "block.betternether.nether_mushroom_plate": "Pilzplatte",
+  "block.betternether.nether_mushroom_trapdoor": "Pilzfalltür",
+  "block.betternether.nether_mushroom_door": "Pilztür",
 
   "block.betternether.cincinnasite_lantern_small": "Kleine Cincinnasitlaterne",
 
@@ -548,7 +548,7 @@
   "block.betternether.willow_crafting_table": "Weidenwerkbank",
   "block.betternether.wart_crafting_table": "Warzenwerkbank",
   "block.betternether.rubeus_crafting_table": "Rubeuswerkbank",
-  "block.betternether.crafting_table_mushroom": "Pilzwerkbank",
+  "block.betternether.nether_mushroom_crafting_table": "Pilzwerkbank",
   "block.betternether.mushroom_fir_crafting_table": "Pilztannenwerkbank",
 
   "block.betternether.stalagnate_chest": "Stalagnattruhe",
@@ -556,7 +556,7 @@
   "block.betternether.willow_chest": "Weidentruhe",
   "block.betternether.wart_chest": "Warzentruhe",
   "block.betternether.rubeus_chest": "Rubeustruhe",
-  "block.betternether.chest_mushroom": "Pilztruhe",
+  "block.betternether.nether_mushroom_chest": "Pilztruhe",
   "block.betternether.mushroom_fir_chest": "Pilztannentruhe",
 
   "block.betternether.chest_crimson": "Karmesintruhe",
@@ -571,7 +571,7 @@
   "block.betternether.willow_sign": "Weidenschild",
   "block.betternether.wart_sign": "Warzenschild",
   "block.betternether.rubeus_sign": "Rubeusschild",
-  "block.betternether.sign_mushroom": "Pilzschild",
+  "block.betternether.nether_mushroom_sign": "Pilzschild",
   "block.betternether.mushroom_fir_sign": "Pilztannenschild",
 
   "block.betternether.stalagnate_barrel": "Stalagnatfass",
@@ -579,7 +579,7 @@
   "block.betternether.willow_barrel": "Weidenfass",
   "block.betternether.wart_barrel": "Warzenfass",
   "block.betternether.rubeus_barrel": "Rubeusfass",
-  "block.betternether.barrel_mushroom": "Pilzfass",
+  "block.betternether.nether_mushroom_barrel": "Pilzfass",
   "block.betternether.mushroom_fir_barrel": "Pilztannenfass",
 
   "block.betternether.barrel_crimson": "Karmesinfass",
@@ -587,19 +587,19 @@
 
   "block.betternether.crimson_ladder": "Karmesinleiter",
   "block.betternether.warped_ladder": "Wirrleiter",
-  "block.betternether.mushroom_ladder": "Pilzleiter",
+  "block.betternether.nether_mushroom_ladder": "Pilzleiter",
 
   "block.betternether.taburet_crimson": "Karmesinhocker",
   "block.betternether.taburet_warped": "Wirrhocker",
-  "block.betternether.taburet_mushroom": "Pilzhocker",
+  "block.betternether.nether_mushroom_taburet": "Pilzhocker",
 
   "block.betternether.chair_crimson": "Karmesinstuhl",
   "block.betternether.chair_warped": "Wirrstuhl",
-  "block.betternether.chair_mushroom": "Pilzstuhl",
+  "block.betternether.nether_mushroom_chair": "Pilzstuhl",
 
   "block.betternether.bar_stool_crimson": "Karmesinbarhocker",
   "block.betternether.bar_stool_warped": "Wirrbarhocker",
-  "block.betternether.bar_stool_mushroom": "Pilzbarhocker",
+  "block.betternether.nether_mushroom_bar_stool": "Pilzbarhocker",
 
   "block.betternether.mushroom_grass": "Pilzgras",
   "block.betternether.bone_grass": "Knochengras",

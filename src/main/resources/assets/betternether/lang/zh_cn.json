@@ -245,16 +245,16 @@
 	"item.betternether.spawn_egg_firefly": "萤火虫刷怪蛋",
 	"item.betternether.cincinnasite_ingot": "辛辛那金锭",
 	
-	"block.betternether.mushroom_stem": "蘑菇柄",
-	"block.betternether.mushroom_planks": "蘑菇木板",
-	"block.betternether.mushroom_stairs": "蘑菇楼梯",
-	"block.betternether.mushroom_slab": "蘑菇台阶",
-	"block.betternether.mushroom_fence": "蘑菇木栅栏",
-	"block.betternether.mushroom_gate": "蘑菇木栅栏门",
-	"block.betternether.mushroom_button": "蘑菇按钮",
-	"block.betternether.mushroom_plate": "蘑菇压力板",
-	"block.betternether.mushroom_trapdoor": "蘑菇活板门",
-	"block.betternether.mushroom_door": "蘑菇木门",
+	"block.betternether.nether_mushroom_stem": "蘑菇柄",
+	"block.betternether.nether_mushroom_planks": "蘑菇木板",
+	"block.betternether.nether_mushroom_stairs": "蘑菇楼梯",
+	"block.betternether.nether_mushroom_slab": "蘑菇台阶",
+	"block.betternether.nether_mushroom_fence": "蘑菇木栅栏",
+	"block.betternether.nether_mushroom_gate": "蘑菇木栅栏门",
+	"block.betternether.nether_mushroom_button": "蘑菇按钮",
+	"block.betternether.nether_mushroom_plate": "蘑菇压力板",
+	"block.betternether.nether_mushroom_trapdoor": "蘑菇活板门",
+	"block.betternether.nether_mushroom_door": "蘑菇木门",
 	
 	"block.betternether.cincinnasite_lantern_small": "小辛辛那金灯",
 	
@@ -547,7 +547,7 @@
 	"block.betternether.willow_crafting_table": "下界柳木工作台",
 	"block.betternether.wart_crafting_table": "下界疣工作台",
 	"block.betternether.rubeus_crafting_table": "宝红木工作台",
-	"block.betternether.crafting_table_mushroom": "蘑菇工作台",
+	"block.betternether.nether_mushroom_crafting_table": "蘑菇工作台",
 	"block.betternether.mushroom_fir_crafting_table": "下界冷杉菇木工作台",
 	
 	"block.betternether.stalagnate_chest": "石结木箱子",
@@ -555,7 +555,7 @@
 	"block.betternether.willow_chest": "下界柳木箱子",
 	"block.betternether.wart_chest": "下界疣箱子",
 	"block.betternether.rubeus_chest": "宝红木箱子",
-	"block.betternether.chest_mushroom": "蘑菇箱子",
+	"block.betternether.nether_mushroom_chest": "蘑菇箱子",
 	"block.betternether.mushroom_fir_chest": "下界冷杉菇木箱子",
 	
 	"block.betternether.chest_crimson": "绯红木箱子",
@@ -570,7 +570,7 @@
 	"block.betternether.willow_sign": "下界柳木告示牌",
 	"block.betternether.wart_sign": "下界疣告示牌",
 	"block.betternether.rubeus_sign": "宝红木告示牌",
-	"block.betternether.sign_mushroom": "蘑菇告示牌",
+	"block.betternether.nether_mushroom_sign": "蘑菇告示牌",
 	"block.betternether.mushroom_fir_sign": "下界冷杉菇木告示牌",
 	
 	"block.betternether.stalagnate_barrel": "石结木桶",
@@ -578,7 +578,7 @@
 	"block.betternether.willow_barrel": "下界柳木桶",
 	"block.betternether.wart_barrel": "下界疣桶",
 	"block.betternether.rubeus_barrel": "宝红木桶",
-	"block.betternether.barrel_mushroom": "蘑菇桶",
+	"block.betternether.nether_mushroom_barrel": "蘑菇桶",
 	"block.betternether.mushroom_fir_barrel": "下界冷杉菇木桶",
 	
 	"block.betternether.barrel_crimson": "绯红木桶",
@@ -586,19 +586,19 @@
 	
 	"block.betternether.crimson_ladder": "绯红木梯子",
 	"block.betternether.warped_ladder": "诡异木梯子",
-	"block.betternether.mushroom_ladder": "蘑菇木梯子",
+	"block.betternether.nether_mushroom_ladder": "蘑菇木梯子",
 	
 	"block.betternether.taburet_crimson": "绯红木凳子",
 	"block.betternether.taburet_warped": "诡异木凳子",
-	"block.betternether.taburet_mushroom": "蘑菇凳子",
+	"block.betternether.nether_mushroom_taburet": "蘑菇凳子",
 	
 	"block.betternether.chair_crimson": "绯红木椅子",
 	"block.betternether.chair_warped": "诡异木椅子",
-	"block.betternether.chair_mushroom": "蘑菇椅子",
+	"block.betternether.nether_mushroom_chair": "蘑菇椅子",
 	
 	"block.betternether.bar_stool_crimson": "绯红木高脚凳",
 	"block.betternether.bar_stool_warped": "诡异木高脚凳",
-	"block.betternether.bar_stool_mushroom": "蘑菇高脚凳",
+	"block.betternether.nether_mushroom_bar_stool": "蘑菇高脚凳",
 	
 	"block.betternether.mushroom_grass": "蘑菇草方块",
 	"block.betternether.bone_grass": "骨草",

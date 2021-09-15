@@ -1,6 +1,6 @@
 {
     "parent": "block/pressure_plate_down",
     "textures": {
-        "texture": "betternether:block/mushroom_plate"
+        "texture": "betternether:block/nether_mushroom_plate"
     }
 }

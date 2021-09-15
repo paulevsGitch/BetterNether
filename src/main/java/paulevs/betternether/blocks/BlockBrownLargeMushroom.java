@@ -51,7 +51,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull {
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		BrownMushroomShape shape = state.getValue(SHAPE);
-		return shape == BrownMushroomShape.BOTTOM || shape == BrownMushroomShape.MIDDLE ? new ItemStack(NetherBlocks.MUSHROOM_STEM) : new ItemStack(Items.BROWN_MUSHROOM);
+		return shape == BrownMushroomShape.BOTTOM || shape == BrownMushroomShape.MIDDLE ? new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()) : new ItemStack(Items.BROWN_MUSHROOM);
 	}
 
 	@Override

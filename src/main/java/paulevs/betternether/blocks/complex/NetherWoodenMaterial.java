@@ -50,10 +50,14 @@ public class NetherWoodenMaterial extends ru.bclib.complexmaterials.WoodenComple
 	public NetherWoodenMaterial init() {
 		return (NetherWoodenMaterial) super.init(NetherBlocks.getBlockRegistry(), NetherItems.getItemRegistry(), Configs.RECIPE_CONFIG);
 	}
+
+	protected void _initBase(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
+		super.initBase(blockSettings, itemSettings);
+	}
 	
 	@Override
 	protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
-		super.initBase(blockSettings, itemSettings);
+		_initBase(blockSettings, itemSettings);
 		super.initStorage(blockSettings, itemSettings);
 		
 		

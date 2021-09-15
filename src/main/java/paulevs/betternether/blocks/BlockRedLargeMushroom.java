@@ -44,7 +44,7 @@ public class BlockRedLargeMushroom extends BlockBaseNotFull {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
-		return state.getValue(SHAPE) == TripleShape.TOP ? new ItemStack(Items.RED_MUSHROOM) : new ItemStack(NetherBlocks.MUSHROOM_STEM);
+		return state.getValue(SHAPE) == TripleShape.TOP ? new ItemStack(Items.RED_MUSHROOM) : new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem());
 	}
 
 	@Override

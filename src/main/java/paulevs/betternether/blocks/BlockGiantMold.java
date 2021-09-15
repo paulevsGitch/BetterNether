@@ -44,7 +44,7 @@ public class BlockGiantMold extends BlockBaseNotFull {
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		TripleShape shape = state.getValue(SHAPE);
-		return shape == TripleShape.TOP ? new ItemStack(NetherBlocks.GIANT_MOLD_SAPLING) : new ItemStack(NetherBlocks.MUSHROOM_STEM);
+		return shape == TripleShape.TOP ? new ItemStack(NetherBlocks.GIANT_MOLD_SAPLING) : new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem());
 	}
 
 	@Override

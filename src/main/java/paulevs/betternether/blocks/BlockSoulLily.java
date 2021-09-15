@@ -221,20 +221,20 @@ public class BlockSoulLily extends BlockBaseNotFull {
 		switch (state.getValue(SHAPE)) {
 			case BIG_BOTTOM:
 			case BIG_MIDDLE:
-				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
 			case BIG_TOP_CENTER:
-				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM), new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()), new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
 			case MEDIUM_BOTTOM:
-				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
 			case BIG_TOP_SIDE_N:
 			case BIG_TOP_SIDE_S:
 			case BIG_TOP_SIDE_E:
 			case BIG_TOP_SIDE_W:
-				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM), new ItemStack(NetherBlocks.SOUL_LILY_SAPLING, MHelper.randRange(0, 1, MHelper.RANDOM)));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()), new ItemStack(NetherBlocks.SOUL_LILY_SAPLING, MHelper.randRange(0, 1, MHelper.RANDOM)));
 			case SMALL:
 			case MEDIUM_TOP:
 			default:
-				return Lists.newArrayList(new ItemStack(NetherBlocks.MUSHROOM_STEM), new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
+				return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()), new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
 		}
 	}
 }

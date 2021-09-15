@@ -4,7 +4,7 @@
 		"particle": "betternether:block/jellyfish_mushroom_top",
 		"texture": "betternether:block/jellyfish_mushroom_top",
 		"side": "betternether:block/jellyfish_mushroom_side",
-		"stem": "betternether:block/jellyfish_mushroom_stem",
+		"stem": "betternether:block/jellyfish_nether_mushroom_stem",
 		"bottom": "betternether:block/jellyfish_mushroom_bottom"
 	},
 	"elements": [ 	 

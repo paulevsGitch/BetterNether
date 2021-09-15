@@ -1,7 +1,7 @@
 {
 	"replace": "false",
 	"values": [
-		"betternether:mushroom_planks",
+		"betternether:nether_mushroom_planks",
 		"betternether:anchor_tree_planks"
 	]
 }

@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"facing=east,top=false":  { "model": "betternether:block/nether_mushroom_chair", "y": 90 },
+		"facing=west,top=false":  { "model": "betternether:block/nether_mushroom_chair", "y": 270 },
+		"facing=south,top=false": { "model": "betternether:block/nether_mushroom_chair", "y": 180 },
+		"facing=north,top=false": { "model": "betternether:block/nether_mushroom_chair" },
+		"top=true": { "model": "betternether:block/empty_mushroom" }
+	}
+}

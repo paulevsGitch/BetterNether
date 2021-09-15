@@ -245,16 +245,16 @@
 	"item.betternether.spawn_egg_firefly": "Ovo gerador de vagalume do Nether",
 	"item.betternether.cincinnasite_ingot": "Barra de cincinnasita",
 	
-	"block.betternether.mushroom_stem": "Talo de cogumelo",
-	"block.betternether.mushroom_planks": "Tábuas de cogumelo",
-	"block.betternether.mushroom_stairs": "Escadas de cogumelo",
-	"block.betternether.mushroom_slab": "Laje de cogumelo",
-	"block.betternether.mushroom_fence": "Cerca de cogumelo",
-	"block.betternether.mushroom_gate": "Portão de cogumelo",
-	"block.betternether.mushroom_button": "Botão de cogumelo",
-	"block.betternether.mushroom_plate": "Placa de pressão de cogumelo",
-	"block.betternether.mushroom_trapdoor": "Alçapão de cogumelo",
-	"block.betternether.mushroom_door": "Porta de cogumelo",
+	"block.betternether.nether_mushroom_stem": "Talo de cogumelo",
+	"block.betternether.nether_mushroom_planks": "Tábuas de cogumelo",
+	"block.betternether.nether_mushroom_stairs": "Escadas de cogumelo",
+	"block.betternether.nether_mushroom_slab": "Laje de cogumelo",
+	"block.betternether.nether_mushroom_fence": "Cerca de cogumelo",
+	"block.betternether.nether_mushroom_gate": "Portão de cogumelo",
+	"block.betternether.nether_mushroom_button": "Botão de cogumelo",
+	"block.betternether.nether_mushroom_plate": "Placa de pressão de cogumelo",
+	"block.betternether.nether_mushroom_trapdoor": "Alçapão de cogumelo",
+	"block.betternether.nether_mushroom_door": "Porta de cogumelo",
 	
 	"block.betternether.cincinnasite_lantern_small": "Lampião de cincinnasita",
 	
@@ -548,7 +548,7 @@
 	"block.betternether.willow_crafting_table": "Bancada de salgueiro do Nether",
 	"block.betternether.wart_crafting_table": "Bancada de fungo do Nether",
 	"block.betternether.rubeus_crafting_table": "Bancada de rúbeus",
-	"block.betternether.crafting_table_mushroom": "Bancada de cogumelo",
+	"block.betternether.nether_mushroom_crafting_table": "Bancada de cogumelo",
 	"block.betternether.mushroom_fir_crafting_table": "Bancada de abetomelo",
 	
 	"block.betternether.stalagnate_chest": "Baú de estalagnato",
@@ -556,7 +556,7 @@
 	"block.betternether.willow_chest": "Baú de salgueiro do Nether",
 	"block.betternether.wart_chest": "Baú de fungo do Nether",
 	"block.betternether.rubeus_chest": "Baú de rúbeus",
-	"block.betternether.chest_mushroom": "Baú de cogumelo",
+	"block.betternether.nether_mushroom_chest": "Baú de cogumelo",
 	"block.betternether.mushroom_fir_chest": "Baú de abetomelo",
 	
 	"block.betternether.chest_crimson": "Baú carmesim",
@@ -571,7 +571,7 @@
 	"block.betternether.willow_sign": "Placa de salgueiro do Nether",
 	"block.betternether.wart_sign": "Placa de fungo do Nether",
 	"block.betternether.rubeus_sign": "Placa de rúbeus",
-	"block.betternether.sign_mushroom": "Placa de cogumelo",
+	"block.betternether.nether_mushroom_sign": "Placa de cogumelo",
 	"block.betternether.mushroom_fir_sign": "Placa de abetomelo",
 	
 	"block.betternether.stalagnate_barrel": "Barril de estalagnato",
@@ -579,7 +579,7 @@
 	"block.betternether.willow_barrel": "Barril de salgueiro do Nether",
 	"block.betternether.wart_barrel": "Barril de fungo do Nether",
 	"block.betternether.rubeus_barrel": "Barril de rúbeus",
-	"block.betternether.barrel_mushroom": "Barril de cogumelo",
+	"block.betternether.nether_mushroom_barrel": "Barril de cogumelo",
 	"block.betternether.mushroom_fir_barrel": "Barril de abetomelo",
 	
 	"block.betternether.barrel_crimson": "Barril carmesim",
@@ -587,19 +587,19 @@
 	
 	"block.betternether.crimson_ladder": "Escada de mão carmesim",
 	"block.betternether.warped_ladder": "Escada de mão distorcida",
-	"block.betternether.mushroom_ladder": "Escada de mão de cogumelo",
+	"block.betternether.nether_mushroom_ladder": "Escada de mão de cogumelo",
 	
 	"block.betternether.taburet_crimson": "Banco carmesim",
 	"block.betternether.taburet_warped": "Banco distorcido",
-	"block.betternether.taburet_mushroom": "Banco de cogumelo",
+	"block.betternether.nether_mushroom_taburet": "Banco de cogumelo",
 	
 	"block.betternether.chair_crimson": "Cadeira carmesim",
 	"block.betternether.chair_warped": "Cadeira distorcida",
-	"block.betternether.chair_mushroom": "Cadeira de cogumelo",
+	"block.betternether.nether_mushroom_chair": "Cadeira de cogumelo",
 	
 	"block.betternether.bar_stool_crimson": "Banqueta carmesim",
 	"block.betternether.bar_stool_warped": "Banqueta distorcida",
-	"block.betternether.bar_stool_mushroom": "Banqueta de cogumelo",
+	"block.betternether.nether_mushroom_bar_stool": "Banqueta de cogumelo",
 	
 	"block.betternether.mushroom_grass": "Cogugrama",
 	"block.betternether.bone_grass": "Grama óssea",

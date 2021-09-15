@@ -163,7 +163,7 @@
 		},
 		
 		"mushroom": {
-			"base": "betternether:mushroom_planks",
+			"base": "betternether:nether_mushroom_planks",
 			"stonecuttable": true,
 			"exclude": [
 				"extrapieces:slab",
