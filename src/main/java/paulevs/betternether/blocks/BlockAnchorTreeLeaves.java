@@ -70,7 +70,7 @@ public class BlockAnchorTreeLeaves extends BlockBaseNotFull {
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		}
 		else {
-			return random.nextInt(5) == 0 ? Lists.newArrayList(new ItemStack(NetherBlocks.ANCHOR_TREE_SAPLING)) : super.getDrops(state, builder);
+			return random.nextInt(5) == 0 ? Lists.newArrayList(new ItemStack(NetherBlocks.MAT_ANCHOR_TREE.getSapling())) : super.getDrops(state, builder);
 		}
 	}
 }

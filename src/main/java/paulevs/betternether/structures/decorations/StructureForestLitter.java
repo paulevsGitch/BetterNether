@@ -22,7 +22,7 @@ public class StructureForestLitter extends StructureObjScatter {
 
 	@Override
 	protected boolean isStructure(BlockState state) {
-		return NetherBlocks.ANCHOR_TREE.isTreeLog(state.getBlock());
+		return NetherBlocks.MAT_ANCHOR_TREE.isTreeLog(state.getBlock());
 	}
 
 	@Override

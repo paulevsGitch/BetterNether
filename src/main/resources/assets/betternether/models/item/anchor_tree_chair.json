@@ -1,5 +1,5 @@
 {
-    "parent": "betternether:block/chair_anchor_tree",
+    "parent": "betternether:block/anchor_tree_chair",
 	"display": {
         "gui": {
             "rotation": [ 30, 45, 0 ],

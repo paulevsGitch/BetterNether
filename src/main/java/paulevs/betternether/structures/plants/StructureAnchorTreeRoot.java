@@ -63,9 +63,9 @@ public class StructureAnchorTreeRoot implements IStructure {
 			boolean blockUp = true;
 			boolean blockDown = true;
 			if ((blockUp = BLOCKS.contains(bpos.above())) && (blockDown = BLOCKS.contains(bpos.below())))
-				BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.ANCHOR_TREE.log.defaultBlockState());
+				BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
 			else
-				BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.ANCHOR_TREE.bark.defaultBlockState());
+				BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
 			if (!blockUp && world.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
 				BlocksHelper.setWithoutUpdate(world, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());

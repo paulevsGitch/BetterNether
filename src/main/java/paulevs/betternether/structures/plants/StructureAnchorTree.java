@@ -73,9 +73,9 @@ public class StructureAnchorTree implements IStructure {
 			if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
 			boolean blockUp = true;
 			if ((blockUp = BLOCKS.contains(bpos.above())) && BLOCKS.contains(bpos.below()))
-				BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.ANCHOR_TREE.log.defaultBlockState());
+				BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
 			else
-				BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.ANCHOR_TREE.bark.defaultBlockState());
+				BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
 			if (bpos.getY() > 45 && bpos.getY() < 90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))

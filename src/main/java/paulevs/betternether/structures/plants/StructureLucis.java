@@ -72,7 +72,7 @@ public class StructureLucis implements IStructure {
 	private boolean canGenerate(ServerLevelAccessor world, BlockPos pos) {
 		BlockState state;
 		for (Direction dir : HorizontalDirectionalBlock.FACING.getPossibleValues())
-			if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.relative(dir))) || NetherBlocks.ANCHOR_TREE.isTreeLog(state.getBlock()))
+			if (BlocksHelper.isNetherrack(state = world.getBlockState(pos.relative(dir))) || NetherBlocks.MAT_ANCHOR_TREE.isTreeLog(state.getBlock()))
 				return true;
 		return false;
 	}

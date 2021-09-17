@@ -127,6 +127,7 @@ import paulevs.betternether.blocks.BlockWhisperingGourd;
 import paulevs.betternether.blocks.BlockWhisperingGourdLantern;
 import paulevs.betternether.blocks.BlockWhisperingGourdVine;
 import paulevs.betternether.blocks.BlockWillowLeaves;
+import paulevs.betternether.blocks.complex.AnchorTreeMaterial;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.blocks.complex.MushroomFirMaterial;
 import paulevs.betternether.blocks.complex.NetherMushroomMaterial;
@@ -269,10 +270,13 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
 
 	// Anchor Tree
-	public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
-	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
+	//public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
+	//public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
+
+	public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
+	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BaseLeavesBlock(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
 	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
-	public static final WoodenMaterialOld ANCHOR_TREE = new WoodenMaterialOld("anchor_tree", MaterialColor.COLOR_BLUE, MaterialColor.COLOR_GREEN);
+
 
 	// Nether Sakura
 	public static final Block NETHER_SAKURA_SAPLING = registerBlock("nether_sakura_sapling", new BlockNetherSakuraSapling());

@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "axis=y": [
+			{ "model": "betternether:block/anchor_tree_stripped_log_1" },
+			{ "model": "betternether:block/anchor_tree_stripped_log_2" },
+			{ "model": "betternether:block/anchor_tree_stripped_log_3" }
+		],
+        "axis=z": [
+			{ "model": "betternether:block/anchor_tree_stripped_log_1", "x": 90 },
+			{ "model": "betternether:block/anchor_tree_stripped_log_2", "x": 90 },
+			{ "model": "betternether:block/anchor_tree_stripped_log_3", "x": 90 }
+		],
+        "axis=x": [
+			{ "model": "betternether:block/anchor_tree_stripped_log_1", "x": 90, "y": 90 },
+			{ "model": "betternether:block/anchor_tree_stripped_log_2", "x": 90, "y": 90 },
+			{ "model": "betternether:block/anchor_tree_stripped_log_3", "x": 90, "y": 90 }
+		]
+    }
+}

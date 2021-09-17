@@ -111,7 +111,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
 		Direction direction = (Direction) state.getValue(FACING);
 		BlockPos blockPos = pos.relative(direction.getOpposite());
 		BlockState blockState = world.getBlockState(blockPos);
-		return BlocksHelper.isNetherrack(blockState) || NetherBlocks.ANCHOR_TREE.isTreeLog(blockState.getBlock());
+		return BlocksHelper.isNetherrack(blockState) || NetherBlocks.MAT_ANCHOR_TREE.isTreeLog(blockState.getBlock());
 	}
 
 	@Override

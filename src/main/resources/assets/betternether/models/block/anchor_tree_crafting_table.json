@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "betternether:block/anchor_tree_crafting_table_front",
+    "north": "betternether:block/anchor_tree_crafting_table_front",
+    "south": "betternether:block/anchor_tree_crafting_table_side",
+    "east": "betternether:block/anchor_tree_crafting_table_side",
+    "west": "betternether:block/anchor_tree_crafting_table_front",
+    "up": "betternether:block/anchor_tree_crafting_table_top",
+    "down": "betternether:block/anchor_tree_crafting_table_bottom"
+  }
+}

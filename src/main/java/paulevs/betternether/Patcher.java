@@ -132,7 +132,18 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:chair_reeds", "betternether:nether_reed_chair"),
 				Map.entry("betternether:bar_stool_reeds", "betternether:nether_reed_bar_stool"),
 				Map.entry("betternether:reeds_ladder", "betternether:nether_reed_ladder"),
-				Map.entry("betternether:sign_reed", "betternether:nether_reed_sign")
-		);
+				Map.entry("betternether:sign_reed", "betternether:nether_reed_sign"),
+				// Anchor Tree //
+				Map.entry("betternether:striped_log_anchor_tree", "betternether:anchor_tree_stripped_log"),
+				Map.entry("betternether:striped_bark_anchor_tree", "betternether:anchor_tree_stripped_bark"),
+				Map.entry("betternether:crafting_table_anchor_tree", "betternether:anchor_tree_crafting_table"),
+				Map.entry("betternether:sign_anchor_tree", "betternether:anchor_tree_sign"),
+				Map.entry("betternether:chest_anchor_tree", "betternether:anchor_tree_chest"),
+				Map.entry("betternether:barrel_anchor_tree", "betternether:anchor_tree_barrel"),
+				Map.entry("betternether:taburet_anchor_tree", "betternether:anchor_tree_taburet"),
+				Map.entry("betternether:chair_anchor_tree", "betternether:anchor_tree_chair"),
+				Map.entry("betternether:bar_stool_anchor_tree", "betternether:anchor_tree_bar_stool")
+
+				);
 	}
 }

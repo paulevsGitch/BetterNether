@@ -109,9 +109,9 @@ public class StructureAnchorTreeBranch implements IStructure {
 
 		for (BlockPos bpos : POINTS) {
 			if (POINTS.contains(bpos.above()) && POINTS.contains(bpos.below()))
-				state = NetherBlocks.ANCHOR_TREE.log.defaultBlockState();
+				state = NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState();
 			else
-				state = NetherBlocks.ANCHOR_TREE.bark.defaultBlockState();
+				state = NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState();
 			BlocksHelper.setWithUpdate(world, bpos, state);
 		}
 
