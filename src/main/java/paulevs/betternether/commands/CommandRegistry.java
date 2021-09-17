@@ -62,7 +62,7 @@ public class CommandRegistry {
                             .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                             .executes(ctx -> placeAllBlocks(ctx))
                     )
-                    .then(Commands.literal("placewood")
+                    .then(Commands.literal("placematching")
                             .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                             .then(Commands.argument("type", StringArgumentType.string())
                                 .executes(ctx -> placeWoodBlocks(ctx, StringArgumentType.getString(ctx, "type"))))
