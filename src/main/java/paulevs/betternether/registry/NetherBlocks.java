@@ -132,6 +132,7 @@ import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.blocks.complex.MushroomFirMaterial;
 import paulevs.betternether.blocks.complex.NetherMushroomMaterial;
 import paulevs.betternether.blocks.complex.NetherReedMaterial;
+import paulevs.betternether.blocks.complex.NetherSakuraMaterial;
 import paulevs.betternether.blocks.complex.RubeusMaterial;
 import paulevs.betternether.blocks.complex.StalagnateMaterial;
 import paulevs.betternether.blocks.complex.WartMaterial;
@@ -156,132 +157,34 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Willow //
 	public static final WillowMaterial MAT_WILLOW = new WillowMaterial().init();
-	public static final Block WILLOW_LEAVES = registerBlockBCLib("willow_leaves", new BlockWillowLeaves());
-	
+	//public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BaseLeavesBlock(MAT_WILLOW.getSapling(), MaterialColor.TERRACOTTA_RED));
+	public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BlockWillowLeaves());
+
 	// Rubeus //
 	public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
 	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BaseLeavesBlock(MAT_RUBEUS.getSapling(), MaterialColor.COLOR_LIGHT_BLUE));
-	//public static final Block RUBEUS_SAPLING = registerBlock("rubeus_sapling", new BlockRubeusSapling());
-	//public static final Block RUBEUS_CONE = registerBlock("rubeus_cone", new BlockRubeusCone());
-	//public static final Block STRIPED_LOG_RUBEUS = registerBlock("striped_log_rubeus", new BNPillar(MaterialColor.COLOR_MAGENTA));
-	//public static final Block STRIPED_BARK_RUBEUS = registerBlock("striped_bark_rubeus", new BNPillar(MaterialColor.COLOR_MAGENTA));
-	//public static final Block RUBEUS_LOG = registerBlock("rubeus_log", new RubeusLog(STRIPED_LOG_RUBEUS));
-	//public static final Block RUBEUS_BARK = registerBark("rubeus_bark", new RubeusLog(STRIPED_BARK_RUBEUS), RUBEUS_LOG);
-	
-	//public static final Block RUBEUS_PLANKS = registerPlanks("rubeus_planks", new BNPlanks(MaterialColor.COLOR_MAGENTA), RUBEUS_LOG, RUBEUS_BARK, STRIPED_LOG_RUBEUS, STRIPED_BARK_RUBEUS);
-	//public static final Block RUBEUS_STAIRS = registerStairs("rubeus_stairs", RUBEUS_PLANKS);
-	//public static final Block RUBEUS_SLAB = registerSlab("rubeus_slab", RUBEUS_PLANKS);
-	//public static final Block RUBEUS_FENCE = registerFence("rubeus_fence", RUBEUS_PLANKS);
-	//public static final Block RUBEUS_GATE = registerGate("rubeus_gate", RUBEUS_PLANKS);
-	//public static final Block RUBEUS_BUTTON = registerButton("rubeus_button", RUBEUS_PLANKS);
-	//public static final Block RUBEUS_PLATE = registerPlate("rubeus_plate", RUBEUS_PLANKS);
-	//public static final Block RUBEUS_TRAPDOOR = registerTrapdoor("rubeus_trapdoor", RUBEUS_PLANKS);
-	//public static final Block RUBEUS_DOOR = registerDoor("rubeus_door", RUBEUS_PLANKS);
-	//public static final Block CRAFTING_TABLE_RUBEUS = registerCraftingTable("crafting_table_rubeus", RUBEUS_PLANKS);
-	//public static final Block CHEST_RUBEUS = registerChest("chest_rubeus", RUBEUS_PLANKS);
-	//public static final Block BARREL_RUBEUS = registerBarrel("barrel_rubeus", RUBEUS_PLANKS, RUBEUS_SLAB);
-	//public static final Block TABURET_RUBEUS = registerTaburet("taburet_rubeus", RUBEUS_SLAB);
-	//public static final Block CHAIR_RUBEUS = registerChair("chair_rubeus", RUBEUS_SLAB);
-	//public static final Block BAR_STOOL_RUBEUS = registerBarStool("bar_stool_rubeus", RUBEUS_SLAB);
-	//public static final Block RUBEUS_LADDER = registerLadder("rubeus_ladder", RUBEUS_PLANKS);
-	//public static final Block SIGN_RUBEUS = registerSign("sign_rubeus", RUBEUS_PLANKS);
 
 	// Reed //
 	public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
-//	public static final Block NETHER_REED = registerBlock("nether_reed", new BlockNetherReed());
-//	public static final Block REEDS_BLOCK = registerBlock("reeds_block", new BlockReedsBlock());
-//	public static final Block REEDS_STAIRS = registerStairs("reeds_stairs", REEDS_BLOCK);
-//	public static final Block REEDS_SLAB = registerSlab("reeds_slab", REEDS_BLOCK);
-//	public static final Block REEDS_FENCE = registerFence("reeds_fence", REEDS_BLOCK);
-//	public static final Block REEDS_GATE = registerGate("reeds_gate", REEDS_BLOCK);
-//	public static final Block REEDS_BUTTON = registerButton("reeds_button", REEDS_BLOCK);
-//	public static final Block REEDS_PLATE = registerPlate("reeds_plate", REEDS_BLOCK);
-//	public static final Block REEDS_TRAPDOOR = registerTrapdoor("reeds_trapdoor", REEDS_BLOCK);
-//	public static final Block REEDS_DOOR = registerDoor("reeds_door", REEDS_BLOCK);
-//	public static final Block ROOF_TILE_REEDS = registerRoof("roof_tile_reeds", REEDS_BLOCK);
-//	public static final Block ROOF_TILE_REEDS_STAIRS = registerStairs("roof_tile_reeds_stairs", ROOF_TILE_REEDS);
-//	public static final Block ROOF_TILE_REEDS_SLAB = registerSlab("roof_tile_reeds_slab", ROOF_TILE_REEDS);
-//	public static final Block CRAFTING_TABLE_REED = registerCraftingTable("crafting_table_reed", REEDS_BLOCK);
-//	public static final Block CHEST_REED = registerChest("chest_reed", REEDS_BLOCK);
-//	public static final Block BARREL_REED = registerBarrel("barrel_reed", REEDS_BLOCK, REEDS_SLAB);
-//	public static final Block TABURET_REEDS = registerTaburet("taburet_reeds", REEDS_SLAB);
-//	public static final Block CHAIR_REEDS = registerChair("chair_reeds", REEDS_SLAB);
-//	public static final Block BAR_STOOL_REEDS = registerBarStool("bar_stool_reeds", REEDS_SLAB);
-//	public static final Block REEDS_LADDER = registerLadder("reeds_ladder", REEDS_BLOCK);
-//	public static final Block SIGN_REED = registerSign("sign_reed", REEDS_BLOCK);
 
 	// Wart //
 	public static final WartMaterial MAT_WART = new WartMaterial("wart", MaterialColor.COLOR_RED, MaterialColor.COLOR_RED).init();
-	//public static final Block WART_SEED = registerBlock("wart_seed", new BlockWartSeed());
-	// public static final Block STRIPED_LOG_WART = registerBlock("striped_log_wart", new BNPillar(MaterialColor.COLOR_RED));
-	// public static final Block STRIPED_BARK_WART = registerBlock("striped_bark_wart", new BNPillar(MaterialColor.COLOR_RED));
-	// public static final Block WART_LOG = registerBlock("wart_log", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_LOG_WART));
-	// public static final Block WART_BARK = registerBark("wart_bark", new BNLogStripable(MaterialColor.COLOR_RED, STRIPED_BARK_WART), WART_LOG);
-	// public static final Block WART_ROOTS = registerBlockNI("wart_roots", new BlockWartRoots());
-	// public static final Block WART_PLANKS = registerPlanks("wart_planks", new BNPlanks(MaterialColor.COLOR_RED), WART_LOG, WART_BARK, STRIPED_LOG_WART, STRIPED_BARK_WART);
-	// public static final Block WART_STAIRS = registerStairs("wart_stairs", WART_PLANKS);
-	// public static final Block WART_SLAB = registerSlab("wart_slab", WART_PLANKS);
-	// public static final Block WART_FENCE = registerFence("wart_fence", WART_PLANKS);
-	// public static final Block WART_GATE = registerGate("wart_gate", WART_PLANKS);
-	// public static final Block WART_BUTTON = registerButton("wart_button", WART_PLANKS);
-	// public static final Block WART_PLATE = registerPlate("wart_plate", WART_PLANKS);
-	// public static final Block WART_TRAPDOOR = registerTrapdoor("wart_trapdoor", WART_PLANKS);
-	// public static final Block WART_DOOR = registerDoor("wart_door", WART_PLANKS);
-	// public static final Block ROOF_TILE_WART = registerRoof("roof_tile_wart", WART_PLANKS);
-	// public static final Block ROOF_TILE_WART_STAIRS = registerStairs("roof_tile_wart_stairs", ROOF_TILE_WART);
-	// public static final Block ROOF_TILE_WART_SLAB = registerSlab("roof_tile_wart_slab", ROOF_TILE_WART);
-	// public static final Block CRAFTING_TABLE_WART = registerCraftingTable("crafting_table_wart", WART_PLANKS);
-	// public static final Block CHEST_WART = registerChest("chest_wart", WART_PLANKS);
-	// public static final Block BARREL_WART = registerBarrel("barrel_wart", WART_PLANKS, WART_SLAB);
-	// public static final Block TABURET_WART = registerTaburet("taburet_wart", WART_SLAB);
-	// public static final Block CHAIR_WART = registerChair("chair_wart", WART_SLAB);
-	// public static final Block BAR_STOOL_WART = registerBarStool("bar_stool_wart", WART_SLAB);
-	// public static final Block WART_LADDER = registerLadder("wart_ladder", WART_PLANKS);
-	// public static final Block SIGN_WART = registerSign("sign_wart", WART_PLANKS);
 
 	// Mushroom Fir //
 	public static final MushroomFirMaterial MAT_MUSHROOM_FIR = new MushroomFirMaterial().init();
-//	public static final Block MUSHROOM_FIR = registerBlockNI("mushroom_fir", new BlockMushroomFir());
-//	public static final Block MUSHROOM_FIR_SAPLING = registerBlock("mushroom_fir_sapling", new BlockMushroomFirSapling());
-//	public static final Block MUSHROOM_FIR_STEM = registerBlock("mushroom_fir_stem", new BlockStem(MaterialColor.TERRACOTTA_BLACK));
-//	public static final Block STRIPED_LOG_MUSHROOM_FIR = registerBlock("striped_log_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
-//	public static final Block STRIPED_WOOD_MUSHROOM_FIR = registerBlock("striped_wood_mushroom_fir", new BNPillar(MaterialColor.COLOR_BLUE));
-//	public static final Block MUSHROOM_FIR_LOG = registerLog("mushroom_fir_log", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_LOG_MUSHROOM_FIR), MUSHROOM_FIR_STEM);
-//	public static final Block MUSHROOM_FIR_WOOD = registerBark("mushroom_fir_wood", new BNLogStripable(MaterialColor.COLOR_BLUE, STRIPED_WOOD_MUSHROOM_FIR), MUSHROOM_FIR_LOG);
-//	public static final Block MUSHROOM_FIR_PLANKS = registerPlanks("mushroom_fir_planks", new BNPlanks(MaterialColor.COLOR_LIGHT_GRAY), 1, MUSHROOM_FIR_STEM, MUSHROOM_FIR_LOG, MUSHROOM_FIR_WOOD, STRIPED_LOG_MUSHROOM_FIR, STRIPED_WOOD_MUSHROOM_FIR);
-//	public static final Block MUSHROOM_FIR_STAIRS = registerStairs("mushroom_fir_stairs", MUSHROOM_FIR_PLANKS);
-//	public static final Block MUSHROOM_FIR_SLAB = registerSlab("mushroom_fir_slab", MUSHROOM_FIR_PLANKS);
-//	public static final Block MUSHROOM_FIR_FENCE = registerFence("mushroom_fir_fence", MUSHROOM_FIR_PLANKS);
-//	public static final Block MUSHROOM_FIR_GATE = registerGate("mushroom_fir_gate", MUSHROOM_FIR_PLANKS);
-//	public static final Block MUSHROOM_FIR_BUTTON = registerButton("mushroom_fir_button", MUSHROOM_FIR_PLANKS);
-//	public static final Block MUSHROOM_FIR_PLATE = registerPlate("mushroom_fir_plate", MUSHROOM_FIR_PLANKS);
-//	public static final Block MUSHROOM_FIR_TRAPDOOR = registerTrapdoor("mushroom_fir_trapdoor", MUSHROOM_FIR_PLANKS);
-//	public static final Block MUSHROOM_FIR_DOOR = registerDoor("mushroom_fir_door", MUSHROOM_FIR_PLANKS);
-//	public static final Block CRAFTING_TABLE_MUSHROOM_FIR = registerCraftingTable("crafting_table_mushroom_fir", MUSHROOM_FIR_PLANKS);
-//	public static final Block CHEST_MUSHROOM_FIR = registerChest("chest_mushroom_fir", MUSHROOM_FIR_PLANKS);
-//	public static final Block BARREL_MUSHROOM_FIR = registerBarrel("barrel_mushroom_fir", MUSHROOM_FIR_PLANKS, MUSHROOM_FIR_SLAB);
-//	public static final Block TABURET_MUSHROOM_FIR = registerTaburet("taburet_mushroom_fir", MUSHROOM_FIR_SLAB);
-//	public static final Block CHAIR_MUSHROOM_FIR = registerChair("chair_mushroom_fir", MUSHROOM_FIR_SLAB);
-//	public static final Block BAR_STOOL_MUSHROOM_FIR = registerBarStool("bar_stool_mushroom_fir", MUSHROOM_FIR_SLAB);
-//	public static final Block MUSHROOM_FIR_LADDER = registerLadder("mushroom_fir_ladder", MUSHROOM_FIR_PLANKS);
-//	public static final Block SIGN_MUSHROOM_FIR = registerSign("sign_mushroom_fir", MUSHROOM_FIR_PLANKS);
 
 	// Mushroom //
 	public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
 
 	// Anchor Tree
-	//public static final Block ANCHOR_TREE_SAPLING = registerBlock("anchor_tree_sapling", new BlockAnchorTreeSapling());
-	//public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BlockAnchorTreeLeaves());
-
 	public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
 	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BaseLeavesBlock(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
 	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
 
 
 	// Nether Sakura
-	public static final Block NETHER_SAKURA_SAPLING = registerBlock("nether_sakura_sapling", new BlockNetherSakuraSapling());
-	public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves", new BlockNetherSakuraLeaves());
-	public static final WoodenMaterialOld NETHER_SAKURA = new WoodenMaterialOld("nether_sakura", MaterialColor.COLOR_PINK, MaterialColor.COLOR_BROWN);
+	public static final NetherSakuraMaterial MAT_NETHER_SAKURA = new NetherSakuraMaterial().init();
+	public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves", new BlockNetherSakuraLeaves(MAT_NETHER_SAKURA.getSapling()));
 
 
 

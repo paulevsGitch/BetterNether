@@ -2,55 +2,55 @@
   "variants": {
     "facing=down,open=false": {
       "x": 180,
-      "model": "betternether:block/barrel_nether_sakura"
+      "model": "betternether:block/nether_sakura_barrel"
     },
     "facing=down,open=true": {
       "x": 180,
-      "model": "betternether:block/barrel_nether_sakura_open"
+      "model": "betternether:block/nether_sakura_barrel_open"
     },
     "facing=east,open=false": {
       "x": 90,
       "y": 90,
-      "model": "betternether:block/barrel_nether_sakura"
+      "model": "betternether:block/nether_sakura_barrel"
     },
     "facing=east,open=true": {
       "x": 90,
       "y": 90,
-      "model": "betternether:block/barrel_nether_sakura_open"
+      "model": "betternether:block/nether_sakura_barrel_open"
     },
     "facing=north,open=false": {
       "x": 90,
-      "model": "betternether:block/barrel_nether_sakura"
+      "model": "betternether:block/nether_sakura_barrel"
     },
     "facing=north,open=true": {
       "x": 90,
-      "model": "betternether:block/barrel_nether_sakura_open"
+      "model": "betternether:block/nether_sakura_barrel_open"
     },
     "facing=south,open=false": {
       "x": 90,
       "y": 180,
-      "model": "betternether:block/barrel_nether_sakura"
+      "model": "betternether:block/nether_sakura_barrel"
     },
     "facing=south,open=true": {
       "x": 90,
       "y": 180,
-      "model": "betternether:block/barrel_nether_sakura_open"
+      "model": "betternether:block/nether_sakura_barrel_open"
     },
     "facing=up,open=false": {
-      "model": "betternether:block/barrel_nether_sakura"
+      "model": "betternether:block/nether_sakura_barrel"
     },
     "facing=up,open=true": {
-      "model": "betternether:block/barrel_nether_sakura_open"
+      "model": "betternether:block/nether_sakura_barrel_open"
     },
     "facing=west,open=false": {
       "x": 90,
       "y": 270,
-      "model": "betternether:block/barrel_nether_sakura"
+      "model": "betternether:block/nether_sakura_barrel"
     },
     "facing=west,open=true": {
       "x": 90,
       "y": 270,
-      "model": "betternether:block/barrel_nether_sakura_open"
+      "model": "betternether:block/nether_sakura_barrel_open"
     }
   }
 }

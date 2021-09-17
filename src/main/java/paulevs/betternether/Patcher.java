@@ -142,7 +142,17 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:barrel_anchor_tree", "betternether:anchor_tree_barrel"),
 				Map.entry("betternether:taburet_anchor_tree", "betternether:anchor_tree_taburet"),
 				Map.entry("betternether:chair_anchor_tree", "betternether:anchor_tree_chair"),
-				Map.entry("betternether:bar_stool_anchor_tree", "betternether:anchor_tree_bar_stool")
+				Map.entry("betternether:bar_stool_anchor_tree", "betternether:anchor_tree_bar_stool"),
+				// Nether Sakura Tree //
+				Map.entry("betternether:striped_log_nether_sakura", "betternether:nether_sakura_stripped_log"),
+				Map.entry("betternether:striped_bark_nether_sakura", "betternether:nether_sakura_stripped_bark"),
+				Map.entry("betternether:crafting_table_nether_sakura", "betternether:nether_sakura_crafting_table"),
+				Map.entry("betternether:sign_nether_sakura", "betternether:nether_sakura_sign"),
+				Map.entry("betternether:chest_nether_sakura", "betternether:nether_sakura_chest"),
+				Map.entry("betternether:barrel_nether_sakura", "betternether:nether_sakura_barrel"),
+				Map.entry("betternether:taburet_nether_sakura", "betternether:nether_sakura_taburet"),
+				Map.entry("betternether:chair_nether_sakura", "betternether:nether_sakura_chair"),
+				Map.entry("betternether:bar_stool_nether_sakura", "betternether:nether_sakura_bar_stool")
 
 				);
 	}

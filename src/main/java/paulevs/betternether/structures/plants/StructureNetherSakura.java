@@ -46,9 +46,9 @@ public class StructureNetherSakura implements IStructure {
 						int start = MHelper.randRange(-2, 0, random);
 						for (int y = start; y < length; y++) {
 							POS.setY(pos.getY() - y);
-							if (canReplace(world.getBlockState(POS))) BlocksHelper.setWithUpdate(world, POS, NetherBlocks.NETHER_SAKURA.log.defaultBlockState());
+							if (canReplace(world.getBlockState(POS))) BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_NETHER_SAKURA.getLog().defaultBlockState());
 						}
-						if (NetherBlocks.NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) BlocksHelper.setWithUpdate(world, POS, NetherBlocks.NETHER_SAKURA.bark.defaultBlockState());
+						if (NetherBlocks.MAT_NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_NETHER_SAKURA.getBark().defaultBlockState());
 					}
 
 					if (d < 2) {
@@ -85,7 +85,7 @@ public class StructureNetherSakura implements IStructure {
 			POS2.setX(pos.getX());
 			POS2.setZ(pos.getZ());
 			POS2.setY(pos.getY() - cy);
-			if (!(state = world.getBlockState(POS2)).getMaterial().isReplaceable() && !NetherBlocks.NETHER_SAKURA.isTreeLog(state.getBlock())) return;
+			if (!(state = world.getBlockState(POS2)).getMaterial().isReplaceable() && !NetherBlocks.MAT_NETHER_SAKURA.isTreeLog(state.getBlock())) return;
 			for (int cx = start; cx <= radius; cx++) {
 				int cx2 = cx * cx;
 				POS2.setX(pos.getX() + cx);

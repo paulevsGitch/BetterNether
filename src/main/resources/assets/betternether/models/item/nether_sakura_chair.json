@@ -1,5 +1,5 @@
 {
-    "parent": "betternether:block/chair_nether_sakura",
+    "parent": "betternether:block/nether_sakura_chair",
 	"display": {
         "gui": {
             "rotation": [ 30, 45, 0 ],

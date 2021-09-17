@@ -11,15 +11,15 @@ const Map = {
 }
 
 const replacments = [  
-    Map.entry("betternether:striped_log_anchor_tree", "betternether:anchor_tree_stripped_log"),
-    Map.entry("betternether:striped_bark_anchor_tree", "betternether:anchor_tree_stripped_bark"),
-    Map.entry("betternether:crafting_table_anchor_tree", "betternether:anchor_tree_crafting_table"),
-    Map.entry("betternether:sign_anchor_tree", "betternether:anchor_tree_sign"),
-    Map.entry("betternether:chest_anchor_tree", "betternether:anchor_tree_chest"),
-    Map.entry("betternether:barrel_anchor_tree", "betternether:anchor_tree_barrel"),
-    Map.entry("betternether:taburet_anchor_tree", "betternether:anchor_tree_taburet"),
-    Map.entry("betternether:chair_anchor_tree", "betternether:anchor_tree_chair"),
-    Map.entry("betternether:bar_stool_anchor_tree", "betternether:anchor_tree_bar_stool") 
+    Map.entry("betternether:striped_log_nether_sakura", "betternether:nether_sakura_stripped_log"),
+				Map.entry("betternether:striped_bark_nether_sakura", "betternether:nether_sakura_stripped_bark"),
+				Map.entry("betternether:crafting_table_nether_sakura", "betternether:nether_sakura_crafting_table"),
+				Map.entry("betternether:sign_nether_sakura", "betternether:nether_sakura_sign"),
+				Map.entry("betternether:chest_nether_sakura", "betternether:nether_sakura_chest"),
+				Map.entry("betternether:barrel_nether_sakura", "betternether:nether_sakura_barrel"),
+				Map.entry("betternether:taburet_nether_sakura", "betternether:nether_sakura_taburet"),
+				Map.entry("betternether:chair_nether_sakura", "betternether:nether_sakura_chair"),
+				Map.entry("betternether:bar_stool_nether_sakura", "betternether:nether_sakura_bar_stool")
         
 ]
 

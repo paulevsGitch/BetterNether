@@ -16,6 +16,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -25,17 +26,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
+import ru.bclib.blocks.BaseLeavesBlock;
 
-public class BlockNetherSakuraLeaves extends BlockBaseNotFull {
+public class BlockNetherSakuraLeaves extends BaseLeavesBlock {
 	private static final Random RANDOM = new Random();
 	private static final int COLOR = MHelper.color(251, 113, 143);
 
-	public BlockNetherSakuraLeaves() {
-		super(Materials.makeLeaves(MaterialColor.COLOR_PINK).lightLevel((state) -> {
+	public BlockNetherSakuraLeaves(Block sapling) {
+		super(sapling, MaterialColor.COLOR_PINK, (settings)-> settings.lightLevel((state) -> {
 			return 13;
 		}));
-		this.setDropItself(false);
-		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 
 	@Environment(EnvType.CLIENT)
@@ -46,22 +46,6 @@ public class BlockNetherSakuraLeaves extends BlockBaseNotFull {
 	@Override
 	public boolean propagatesSkylightDown(BlockState state, BlockGetter view, BlockPos pos) {
 		return true;
-	}
-
-	@Override
-	public VoxelShape getBlockSupportShape(BlockState state, BlockGetter world, BlockPos pos) {
-		return Shapes.empty();
-	}
-
-	@Override
-	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-		ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-		if (tool != null && FabricToolTags.SHEARS.contains(tool.getItem()) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0) {
-			return Lists.newArrayList(new ItemStack(this.asItem()));
-		}
-		else {
-			return RANDOM.nextInt(5) == 0 ? Lists.newArrayList(new ItemStack(NetherBlocks.NETHER_SAKURA_SAPLING)) : super.getDrops(state, builder);
-		}
 	}
 
 	@Environment(EnvType.CLIENT)

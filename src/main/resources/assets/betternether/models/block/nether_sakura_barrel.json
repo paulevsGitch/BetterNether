@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "betternether:block/nether_sakura_barrel_top",
+    "bottom": "betternether:block/nether_sakura_barrel_bottom",
+    "side": "betternether:block/nether_sakura_barrel_side"
+  }
+}

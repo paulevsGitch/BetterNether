@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
     "textures": {
-        "layer0": "betternether:item/sign_nether_sakura"
+        "layer0": "betternether:item/nether_sakura_sign"
     }
 }

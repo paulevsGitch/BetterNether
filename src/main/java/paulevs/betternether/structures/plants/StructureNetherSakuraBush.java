@@ -48,7 +48,7 @@ public class StructureNetherSakuraBush implements IStructure {
 			}
 		}
 
-		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_SAKURA.bark.defaultBlockState());
+		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MAT_NETHER_SAKURA.getBark().defaultBlockState());
 		setIfAir(world, pos.above(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
 		setIfAir(world, pos.north(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
 		setIfAir(world, pos.south(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
