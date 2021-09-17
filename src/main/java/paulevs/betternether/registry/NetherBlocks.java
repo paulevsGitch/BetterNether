@@ -420,7 +420,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CHEST_CRIMSON = registerChest("crimson_chest", Blocks.CRIMSON_PLANKS);
 	public static final Block CHEST_WARPED = registerChest("warped_chest", Blocks.WARPED_PLANKS);
 
-	public static final Block BARREL_CRIMSON = registerBarrel("warped_chest", Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_SLAB);
+	public static final Block BARREL_CRIMSON = registerBarrel("crimson_barrel", Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_SLAB);
 	public static final Block BARREL_WARPED = registerBarrel("warped_barrel", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB);
 
 
