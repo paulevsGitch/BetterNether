@@ -54,6 +54,7 @@ public class CommandRegistry {
     private static void register(CommandDispatcher<CommandSourceStack> dispatcher, boolean dedicated) {
         dispatcher.register(
             Commands.literal("bn")
+                    .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                     .then(Commands.literal("tpnext")
                             .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                             .executes(ctx -> teleportToNextBiome(ctx))
