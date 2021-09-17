@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.blocks.BlockReedsBlock;
-import ru.bclib.blocks.BaseBlock;
 import ru.bclib.blocks.BaseDoorBlock;
 import ru.bclib.blocks.BaseFenceBlock;
 import ru.bclib.blocks.BaseGateBlock;

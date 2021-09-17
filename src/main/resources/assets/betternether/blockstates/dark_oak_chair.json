@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"facing=east,top=false":  { "model": "betternether:block/dark_oak_chair", "y": 90 },
+		"facing=west,top=false":  { "model": "betternether:block/dark_oak_chair", "y": 270 },
+		"facing=south,top=false": { "model": "betternether:block/dark_oak_chair", "y": 180 },
+		"facing=north,top=false": { "model": "betternether:block/dark_oak_chair" },
+		"top=true": { "model": "betternether:block/dark_oak_chair_top" }
+	}
+}

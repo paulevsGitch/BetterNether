@@ -1,0 +1,6 @@
+{
+    "parent": "betternether:block/bn_chair",
+    "textures": {
+        "texture": "block/crimson_planks"
+    }
+}

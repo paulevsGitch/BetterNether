@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -23,29 +26,20 @@ import paulevs.betternether.blocks.BNBoneBlock;
 import paulevs.betternether.blocks.BNBrewingStand;
 import paulevs.betternether.blocks.BNButton;
 import paulevs.betternether.blocks.BNChain;
-import paulevs.betternether.blocks.BNCraftingTable;
 import paulevs.betternether.blocks.BNDoor;
-import paulevs.betternether.blocks.BNFence;
-import paulevs.betternether.blocks.BNGate;
 import paulevs.betternether.blocks.BNGlass;
-import paulevs.betternether.blocks.BNLadder;
-import paulevs.betternether.blocks.BNLogStripable;
 import paulevs.betternether.blocks.BNNetherBrick;
 import paulevs.betternether.blocks.BNNormalChair;
 import paulevs.betternether.blocks.BNObsidian;
 import paulevs.betternether.blocks.BNPane;
 import paulevs.betternether.blocks.BNPillar;
-import paulevs.betternether.blocks.BNPlanks;
 import paulevs.betternether.blocks.BNPlate;
 import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.blocks.BNSlab;
 import paulevs.betternether.blocks.BNStairs;
 import paulevs.betternether.blocks.BNTaburet;
-import paulevs.betternether.blocks.BNTrapdoor;
 import paulevs.betternether.blocks.BNWall;
 import paulevs.betternether.blocks.BlockAgave;
-import paulevs.betternether.blocks.BlockAnchorTreeLeaves;
-import paulevs.betternether.blocks.BlockAnchorTreeSapling;
 import paulevs.betternether.blocks.BlockAnchorTreeVine;
 import paulevs.betternether.blocks.BlockBNPot;
 import paulevs.betternether.blocks.BlockBarrelCactus;
@@ -89,17 +83,13 @@ import paulevs.betternether.blocks.BlockLumabusSeed;
 import paulevs.betternether.blocks.BlockLumabusVine;
 import paulevs.betternether.blocks.BlockMagmaFlower;
 import paulevs.betternether.blocks.BlockMossCover;
-import paulevs.betternether.blocks.BlockMushroomFir;
-import paulevs.betternether.blocks.BlockMushroomFirSapling;
 import paulevs.betternether.blocks.BlockNeonEquisetum;
 import paulevs.betternether.blocks.BlockNetherCactus;
 import paulevs.betternether.blocks.BlockNetherFurnace;
 import paulevs.betternether.blocks.BlockNetherGrass;
 import paulevs.betternether.blocks.BlockNetherMycelium;
-import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.blocks.BlockNetherRuby;
 import paulevs.betternether.blocks.BlockNetherSakuraLeaves;
-import paulevs.betternether.blocks.BlockNetherSakuraSapling;
 import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.blocks.BlockOrangeMushroom;
 import paulevs.betternether.blocks.BlockOre;
@@ -107,8 +97,6 @@ import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.BlockRedMold;
-import paulevs.betternether.blocks.BlockReedsBlock;
-import paulevs.betternether.blocks.BlockRubeusLeaves;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.BlockSoulGrass;
@@ -118,11 +106,8 @@ import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.blocks.BlockSoulVein;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.blocks.BlockStatueRespawner;
-import paulevs.betternether.blocks.BlockStem;
 import paulevs.betternether.blocks.BlockTerrain;
 import paulevs.betternether.blocks.BlockVeinedSand;
-import paulevs.betternether.blocks.BlockWartRoots;
-import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.blocks.BlockWhisperingGourd;
 import paulevs.betternether.blocks.BlockWhisperingGourdLantern;
 import paulevs.betternether.blocks.BlockWhisperingGourdVine;
@@ -137,7 +122,6 @@ import paulevs.betternether.blocks.complex.RubeusMaterial;
 import paulevs.betternether.blocks.complex.StalagnateMaterial;
 import paulevs.betternether.blocks.complex.WartMaterial;
 import paulevs.betternether.blocks.complex.WillowMaterial;
-import paulevs.betternether.blocks.complex.WoodenMaterialOld;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
@@ -146,8 +130,13 @@ import paulevs.betternether.tab.CreativeTabs;
 import ru.bclib.api.TagAPI;
 import ru.bclib.blocks.BaseBarrelBlock;
 import ru.bclib.blocks.BaseChestBlock;
+import ru.bclib.blocks.BaseCraftingTableBlock;
+import ru.bclib.blocks.BaseLadderBlock;
 import ru.bclib.blocks.BaseLeavesBlock;
-import ru.bclib.registry.BaseBlockEntities;
+import ru.bclib.blocks.BaseSignBlock;
+import ru.bclib.recipes.GridRecipe;
+import ru.bclib.registry.BlockRegistry;
+import ru.bclib.registry.ItemRegistry;
 
 public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
@@ -428,47 +417,47 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// Storage
 	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
 
-	public static final Block CHEST_CRIMSON = registerChest("chest_crimson", Blocks.CRIMSON_PLANKS);
-	public static final Block CHEST_WARPED = registerChest("chest_warped", Blocks.WARPED_PLANKS);
+	public static final Block CHEST_CRIMSON = registerChest("crimson_chest", Blocks.CRIMSON_PLANKS);
+	public static final Block CHEST_WARPED = registerChest("warped_chest", Blocks.WARPED_PLANKS);
 
-	public static final Block BARREL_CRIMSON = registerBarrel("barrel_crimson", Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_SLAB);
-	public static final Block BARREL_WARPED = registerBarrel("barrel_warped", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB);
+	public static final Block BARREL_CRIMSON = registerBarrel("warped_chest", Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_SLAB);
+	public static final Block BARREL_WARPED = registerBarrel("warped_barrel", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB);
 
 
 	// Taburets //
-	public static final Block TABURET_OAK = registerTaburet("taburet_oak", Blocks.OAK_SLAB);
-	public static final Block TABURET_SPRUCE = registerTaburet("taburet_spruce", Blocks.SPRUCE_SLAB);
-	public static final Block TABURET_BIRCH = registerTaburet("taburet_birch", Blocks.BIRCH_SLAB);
-	public static final Block TABURET_JUNGLE = registerTaburet("taburet_jungle", Blocks.JUNGLE_SLAB);
-	public static final Block TABURET_ACACIA = registerTaburet("taburet_acacia", Blocks.ACACIA_SLAB);
-	public static final Block TABURET_DARK_OAK = registerTaburet("taburet_dark_oak", Blocks.DARK_OAK_SLAB);
-	public static final Block TABURET_CRIMSON = registerTaburet("taburet_crimson", Blocks.CRIMSON_SLAB);
-	public static final Block TABURET_WARPED = registerTaburet("taburet_warped", Blocks.WARPED_SLAB);
+	public static final Block TABURET_OAK = registerTaburet("oak_taburet", Blocks.OAK_SLAB);
+	public static final Block TABURET_SPRUCE = registerTaburet("spruce_taburet", Blocks.SPRUCE_SLAB);
+	public static final Block TABURET_BIRCH = registerTaburet("birch_taburet", Blocks.BIRCH_SLAB);
+	public static final Block TABURET_JUNGLE = registerTaburet("jungle_taburet", Blocks.JUNGLE_SLAB);
+	public static final Block TABURET_ACACIA = registerTaburet("acacia_taburet", Blocks.ACACIA_SLAB);
+	public static final Block TABURET_DARK_OAK = registerTaburet("dark_oak_taburet", Blocks.DARK_OAK_SLAB);
+	public static final Block TABURET_CRIMSON = registerTaburet("crimson_taburet", Blocks.CRIMSON_SLAB);
+	public static final Block TABURET_WARPED = registerTaburet("warped_taburet", Blocks.WARPED_SLAB);
 
-	public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
+	public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
 
 	
 	// Chairs
-	public static final Block CHAIR_OAK = registerChair("chair_oak", Blocks.OAK_SLAB);
-	public static final Block CHAIR_SPRUCE = registerChair("chair_spruce", Blocks.SPRUCE_SLAB);
-	public static final Block CHAIR_BIRCH = registerChair("chair_birch", Blocks.BIRCH_SLAB);
-	public static final Block CHAIR_JUNGLE = registerChair("chair_jungle", Blocks.JUNGLE_SLAB);
-	public static final Block CHAIR_ACACIA = registerChair("chair_acacia", Blocks.ACACIA_SLAB);
-	public static final Block CHAIR_DARK_OAK = registerChair("chair_dark_oak", Blocks.DARK_OAK_SLAB);
-	public static final Block CHAIR_CRIMSON = registerChair("chair_crimson", Blocks.CRIMSON_SLAB);
-	public static final Block CHAIR_WARPED = registerChair("chair_warped", Blocks.WARPED_SLAB);
+	public static final Block CHAIR_OAK = registerChair("oak_chair", Blocks.OAK_SLAB);
+	public static final Block CHAIR_SPRUCE = registerChair("spruce_chair", Blocks.SPRUCE_SLAB);
+	public static final Block CHAIR_BIRCH = registerChair("birch_chair", Blocks.BIRCH_SLAB);
+	public static final Block CHAIR_JUNGLE = registerChair("jungle_chair", Blocks.JUNGLE_SLAB);
+	public static final Block CHAIR_ACACIA = registerChair("acacia_chair", Blocks.ACACIA_SLAB);
+	public static final Block CHAIR_DARK_OAK = registerChair("dark_oak_chair", Blocks.DARK_OAK_SLAB);
+	public static final Block CHAIR_CRIMSON = registerChair("crimson_chair", Blocks.CRIMSON_SLAB);
+	public static final Block CHAIR_WARPED = registerChair("warped_chair", Blocks.WARPED_SLAB);
 
-	public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
+	public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
 	
 	// Stools //
-	public static final Block BAR_STOOL_OAK = registerBarStool("bar_stool_oak", Blocks.OAK_SLAB);
-	public static final Block BAR_STOOL_SPRUCE = registerBarStool("bar_stool_spruce", Blocks.SPRUCE_SLAB);
-	public static final Block BAR_STOOL_BIRCH = registerBarStool("bar_stool_birch", Blocks.BIRCH_SLAB);
-	public static final Block BAR_STOOL_JUNGLE = registerBarStool("bar_stool_jungle", Blocks.JUNGLE_SLAB);
-	public static final Block BAR_STOOL_ACACIA = registerBarStool("bar_stool_acacia", Blocks.ACACIA_SLAB);
-	public static final Block BAR_STOOL_DARK_OAK = registerBarStool("bar_stool_dark_oak", Blocks.DARK_OAK_SLAB);
-	public static final Block BAR_STOOL_CRIMSON = registerBarStool("bar_stool_crimson", Blocks.CRIMSON_SLAB);
-	public static final Block BAR_STOOL_WARPED = registerBarStool("bar_stool_warped", Blocks.WARPED_SLAB);
+	public static final Block BAR_STOOL_OAK = registerBarStool("oak_bar_stool", Blocks.OAK_SLAB);
+	public static final Block BAR_STOOL_SPRUCE = registerBarStool("spruce_bar_stool", Blocks.SPRUCE_SLAB);
+	public static final Block BAR_STOOL_BIRCH = registerBarStool("birch_bar_stool", Blocks.BIRCH_SLAB);
+	public static final Block BAR_STOOL_JUNGLE = registerBarStool("jungle_bar_stool", Blocks.JUNGLE_SLAB);
+	public static final Block BAR_STOOL_ACACIA = registerBarStool("acacia_bar_stool", Blocks.ACACIA_SLAB);
+	public static final Block BAR_STOOL_DARK_OAK = registerBarStool("dark_oak_bar_stool", Blocks.DARK_OAK_SLAB);
+	public static final Block BAR_STOOL_CRIMSON = registerBarStool("crimson_bar_stool", Blocks.CRIMSON_SLAB);
+	public static final Block BAR_STOOL_WARPED = registerBarStool("warped_bar_stool", Blocks.WARPED_SLAB);
 
 	public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
 	
@@ -489,24 +478,11 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		}
 		return BLOCKS_REGISTRY;
 	}
-	
-	public static Block registerBlockBCLib(String name, Block block){
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			return registerBlockBCLib(new ResourceLocation(BetterNether.MOD_ID, name), block);
-		}
-		return block;
-	}
-	
-	private static Block registerBlockBCLib(ResourceLocation id, Block block){
-		getBlockRegistry().register(id, block);
-		return block;
-	}
 
 	public static List<Block> getModBlocks() {
 		return getModBlocks(BetterNether.MOD_ID).stream().filter(BlockItem.class::isInstance).map(item -> ((BlockItem) item).getBlock()).collect(Collectors.toList());
 	}
 
-	
 	public static Block registerBlock(String name, Block block) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
@@ -516,20 +492,34 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	}
 
 	public static Block registerBlockNI(String name, Block block) {
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
-		}
-		BLOCKS.add(name);
-		return block;
+//		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+//			Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
+//		}
+//		BLOCKS.add(name);
+//		return block;
+		return registerBlock(name, block, false);
 	}
 
-	private static void registerBlockDirectly(String name, Block block) {
-		Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
-		Item.Properties settings = new Item.Properties().tab(CreativeTabs.BN_TAB);
-		if (block instanceof BNSign) {
-			settings.stacksTo(16);
+	private static Block registerBlockDirectly(String name, Block block) {
+//		Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
+//		Item.Properties settings = new Item.Properties().tab(CreativeTabs.BN_TAB);
+//		if (block instanceof BNSign) {
+//			settings.stacksTo(16);
+//		}
+//		NetherItems.registerItem(name, new BlockItem(block, settings));
+		return registerBlock(name, block, true);
+	}
+
+	private static Block registerBlock(String name, Block block, boolean hasItem){
+		final BlockRegistry blockRegistry = getBlockRegistry();
+		final ResourceLocation location =  new ResourceLocation(BetterNether.MOD_ID, name);
+		if (hasItem) {
+			blockRegistry.register(location, block);
 		}
-		NetherItems.registerItem(name, new BlockItem(block, settings));
+		else {
+			blockRegistry.registerBlockOnly(location, block);
+		}
+		return block;
 	}
 	
 	private static void addFuel(Block source, Block result) {
@@ -604,89 +594,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return plate;
 	}
 
-	public static Block registerPlanks(String name, Block planks, Block... logs) {
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, planks);
-			for (Block log : logs)
-				RecipesHelper.makeSimpleRecipe(log, planks, 4, "nether_planks");
-		}
-		BLOCKS.add(name);
-		return planks;
-	}
-
-	private static Block registerPlanks(String name, Block planks, int output, Block stem, Block... logs) {
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, planks);
-			RecipesHelper.makeSimpleRecipe(stem, planks, output, "nether_planks");
-			for (Block log : logs)
-				RecipesHelper.makeSimpleRecipe(log, planks, 4, "nether_planks");
-		}
-		BLOCKS.add(name);
-		return planks;
-	}
-
-	public static Block registerLog(String name, Block log, Block stem) {
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, log);
-			RecipesHelper.makeSimpleRecipe2(stem, log, 1, "nether_stem_log");
-		}
-		BLOCKS.add(name);
-		return log;
-	}
-
-	public static Block registerBark(String name, Block bark, Block log) {
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, bark);
-			RecipesHelper.makeSimpleRecipe2(log, bark, 3, "nether_bark");
-		}
-		BLOCKS.add(name);
-		return bark;
-	}
-
-	public static Block registerFence(String name, Block source) {
-		Block fence = new BNFence(source);
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, fence);
-			addFuel(source, fence);
-			RecipesHelper.makeFenceRecipe(source, fence);
-		}
-		BLOCKS.add(name);
-		return fence;
-	}
-
-	public static Block registerGate(String name, Block source) {
-		Block gate = new BNGate(source);
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, gate);
-			addFuel(source, gate);
-			RecipesHelper.makeGateRecipe(source, gate);
-		}
-		BLOCKS.add(name);
-		return gate;
-	}
-
-	public static Block registerDoor(String name, Block source) {
-		Block door = new BNDoor(source);
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, door);
-			addFuel(source, door);
-			RecipesHelper.makeDoorRecipe(source, door);
-		}
-		BLOCKS.add(name);
-		return door;
-	}
-
-	public static Block registerTrapdoor(String name, Block source) {
-		Block trapdoor = new BNTrapdoor(source);
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, trapdoor);
-			addFuel(source, trapdoor);
-			RecipesHelper.makeTrapdoorRecipe(source, trapdoor);
-		}
-		BLOCKS.add(name);
-		return trapdoor;
-	}
-
 	public static Block registerMakeable2X2(String name, Block result, String group, Block... sources) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, result);
@@ -708,10 +615,20 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	}
 
 	public static Block registerCraftingTable(String name, Block source) {
-		Block block = new BNCraftingTable(source);
+		Block block = new BaseCraftingTableBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
-			RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
+			TagAPI.addTags(block, BlockTags.SIGNS);
+			TagAPI.addTags(block, ItemTags.SIGNS);
+			//RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
+			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
+					.checkConfig(Configs.RECIPES)
+					.setShape("##", "##")
+					.addMaterial('#', source)
+					.setGroup("nether" + "_tables")
+					.build();
+
+			FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
 		}
 		BLOCKS.add(name);
 		return block;
@@ -720,50 +637,62 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static Block registerChest(String name, Block planks) {
 		Block chest = new BaseChestBlock(planks);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			BaseBlockEntities.CHEST.registerBlock(chest);
 			registerBlockDirectly(name, chest);
+			TagAPI.addTags(chest, TagAPI.BLOCK_CHEST);
+			TagAPI.addTags(chest, TagAPI.ITEM_CHEST);
 			addFuel(planks, chest);
-			RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
-			
-			TagAPI.addTag(TagAPI.ITEM_CHEST, chest);
-			TagAPI.addTag(TagAPI.BLOCK_CHEST, chest);
+			//RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
+			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), chest)
+					.checkConfig(Configs.RECIPES)
+					.setShape("###", "# #", "###")
+					.addMaterial('#', planks)
+					.setGroup("nether" + "_chests")
+					.build();
 
-			//Nether wood is not flammable!
-			//FlammableBlockRegistry.getDefaultInstance().add(chest, 5, 20);
+			FlammableBlockRegistry.getDefaultInstance().add(chest, 5, 20);
 		}
 		BLOCKS.add(name);
 		return chest;
 	}
 
-	public static Block registerSign(String name, Block source) {
-		Block block = new BNSign(source);
-		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			registerBlockDirectly(name, block);
-			addFuel(source, block);
-			RecipesHelper.makeSignRecipe(source, block);
-		}
-		BLOCKS.add(name);
-		return block;
-	}
-
 	public static Block registerBarrel(String name, Block source, Block slab) {
 		Block block = new BaseBarrelBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			BaseBlockEntities.BARREL.registerBlock(block);
 			registerBlockDirectly(name, block);
 			addFuel(source, block);
-			RecipesHelper.makeBarrelRecipe(source, slab, block);
+			//RecipesHelper.makeBarrelRecipe(source, slab, block);
+			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
+					.checkConfig(Configs.RECIPES)
+					.setShape("#S#", "# #", "#S#")
+					.addMaterial('#', source)
+					.addMaterial('S', slab)
+					.setGroup("nether" + "_barrels")
+					.build();
+
+			FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
 		}
 		BLOCKS.add(name);
 		return block;
 	}
 
 	public static Block registerLadder(String name, Block source) {
-		Block block = new BNLadder(source);
+		Block block = new BaseLadderBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
+			TagAPI.addTags(block, BlockTags.CLIMBABLE);
+
 			addFuel(source, block);
-			RecipesHelper.makeLadderRecipe(source, block);
+			//RecipesHelper.makeLadderRecipe(source, block);
+
+			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
+					.checkConfig(Configs.RECIPES)
+					.setOutputCount(3)
+					.setShape("I I", "I#I", "I I")
+					.addMaterial('#', source)
+					.addMaterial('I', Items.STICK)
+					.setGroup("nether" + "_ladders")
+					.build();
+			FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
 		}
 		BLOCKS.add(name);
 		return block;

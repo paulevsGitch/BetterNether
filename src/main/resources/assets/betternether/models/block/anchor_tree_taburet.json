@@ -1,5 +1,5 @@
 {
-	"parent": "betternether:block/taburet_oak",
+	"parent": "betternether:block/oak_taburet",
 	"textures": {
 		"particle": "betternether:block/anchor_tree_planks",
 		"texture": "betternether:block/anchor_tree_planks",

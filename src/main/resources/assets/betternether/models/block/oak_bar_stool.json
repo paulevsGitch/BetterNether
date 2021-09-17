@@ -1,0 +1,7 @@
+{
+    "parent": "betternether:block/bn_bar_stool",
+    "textures": {
+        "texture": "block/oak_planks",
+        "cloth": "block/red_wool"
+    }
+}

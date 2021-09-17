@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "betternether:block/crimson_barrel_top",
+    "bottom": "betternether:block/crimson_barrel_bottom",
+    "side": "betternether:block/crimson_barrel_side"
+  }
+}

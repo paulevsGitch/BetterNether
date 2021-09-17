@@ -15,6 +15,7 @@ import paulevs.betternether.registry.NetherItems;
 import ru.bclib.api.TagAPI;
 import ru.bclib.blocks.BaseCraftingTableBlock;
 import ru.bclib.complexmaterials.ComplexMaterial;
+import ru.bclib.complexmaterials.WoodenComplexMaterial;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 import ru.bclib.complexmaterials.entry.RecipeEntry;
 import ru.bclib.config.Configs;
@@ -23,7 +24,7 @@ import ru.bclib.recipes.GridRecipe;
 import ru.bclib.registry.BlockRegistry;
 import ru.bclib.registry.ItemRegistry;
 
-public class NetherWoodenMaterial extends ru.bclib.complexmaterials.WoodenComplexMaterial {
+public class NetherWoodenMaterial extends WoodenComplexMaterial {
 	protected final static String BLOCK_OPTIONAL_TRUNK = "trunk";
 	protected final static String BLOCK_OPTIONAL_BRANCH = "branch";
 	protected final static String BLOCK_OPTIONAL_ROOT = "roots";
@@ -59,8 +60,7 @@ public class NetherWoodenMaterial extends ru.bclib.complexmaterials.WoodenComple
 	protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
 		_initBase(blockSettings, itemSettings);
 		super.initStorage(blockSettings, itemSettings);
-		
-		
+
 		addBlockEntry(new BlockEntry(BLOCK_CRAFTING_TABLE, (complexMaterial, settings) -> {
 			return new BaseCraftingTableBlock(getBlock(BLOCK_PLANKS));
 		}).setBlockTags(TagAPI.BLOCK_WORKBENCHES)

@@ -152,7 +152,36 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:barrel_nether_sakura", "betternether:nether_sakura_barrel"),
 				Map.entry("betternether:taburet_nether_sakura", "betternether:nether_sakura_taburet"),
 				Map.entry("betternether:chair_nether_sakura", "betternether:nether_sakura_chair"),
-				Map.entry("betternether:bar_stool_nether_sakura", "betternether:nether_sakura_bar_stool")
+				Map.entry("betternether:bar_stool_nether_sakura", "betternether:nether_sakura_bar_stool"),
+				// Original Wood Stuff //
+				Map.entry("betternether:chest_crimson", "betternether:crimson_chest"),
+				Map.entry("betternether:barrel_crimson", "betternether:crimson_barrel"),
+				Map.entry("betternether:chest_warped", "betternether:warped_chest"),
+				Map.entry("betternether:barrel_warped", "betternether:warped_barrel"),
+				Map.entry("betternether:taburet_oak", "betternether:oak_taburet"),
+				Map.entry("betternether:taburet_spruce", "betternether:spruce_taburet"),
+				Map.entry("betternether:taburet_birch", "betternether:birch_taburet"),
+				Map.entry("betternether:taburet_jungle", "betternether:jungle_taburet"),
+				Map.entry("betternether:taburet_acacia", "betternether:acacia_taburet"),
+				Map.entry("betternether:taburet_dark_oak", "betternether:dark_oak_taburet"),
+				Map.entry("betternether:taburet_crimson", "betternether:crimson_taburet"),
+				Map.entry("betternether:taburet_warped", "betternether:warped_taburet"),
+				Map.entry("betternether:chair_oak", "betternether:oak_chair"),
+				Map.entry("betternether:chair_spruce", "betternether:spruce_chair"),
+				Map.entry("betternether:chair_birch", "betternether:birch_chair"),
+				Map.entry("betternether:chair_jungle", "betternether:jungle_chair"),
+				Map.entry("betternether:chair_acacia", "betternether:acacia_chair"),
+				Map.entry("betternether:chair_dark_oak", "betternether:dark_oak_chair"),
+				Map.entry("betternether:chair_crimson", "betternether:crimson_chair"),
+				Map.entry("betternether:chair_warped", "betternether:warped_chair"),
+				Map.entry("betternether:bar_stool_oak", "betternether:oak_bar_stool"),
+				Map.entry("betternether:bar_stool_spruce", "betternether:spruce_bar_stool"),
+				Map.entry("betternether:bar_stool_birch", "betternether:birch_bar_stool"),
+				Map.entry("betternether:bar_stool_jungle", "betternether:jungle_bar_stool"),
+				Map.entry("betternether:bar_stool_acacia", "betternether:acacia_bar_stool"),
+				Map.entry("betternether:bar_stool_dark_oak", "betternether:dark_oak_bar_stool"),
+				Map.entry("betternether:bar_stool_crimson", "betternether:crimson_bar_stool"),
+				Map.entry("betternether:bar_stool_warped", "betternether:warped_bar_stool")
 
 				);
 	}

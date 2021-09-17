@@ -9,7 +9,7 @@ import paulevs.betternether.blocks.BlockMushroomFirSapling;
 import paulevs.betternether.blocks.BlockStem;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 
-public class MushroomFirMaterial extends NetherWoodenMaterial{
+public class MushroomFirMaterial extends NetherWoodenMaterial {
     public final static String BLOCK_SAPLING = BLOCK_OPTIONAL_SAPLING;
     public final static String BLOCK_STEM = BLOCK_OPTIONAL_STEM;
     public final static String BLOCK_TRUNK = BLOCK_OPTIONAL_TRUNK;
