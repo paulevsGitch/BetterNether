@@ -8,6 +8,8 @@ import paulevs.betternether.blocks.BlockMushroomFir;
 import paulevs.betternether.blocks.BlockMushroomFirSapling;
 import paulevs.betternether.blocks.BlockStem;
 import ru.bclib.complexmaterials.entry.BlockEntry;
+import ru.bclib.complexmaterials.entry.RecipeEntry;
+import ru.bclib.recipes.GridRecipe;
 
 public class MushroomFirMaterial extends NetherWoodenMaterial {
     public final static String BLOCK_SAPLING = BLOCK_OPTIONAL_SAPLING;
@@ -36,6 +38,22 @@ public class MushroomFirMaterial extends NetherWoodenMaterial {
 
         addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) -> {
             return new BlockStem(MaterialColor.TERRACOTTA_BLACK);
+        }));
+    }
+
+    @Override
+    public void initDefaultRecipes() {
+        addRecipeEntry(new RecipeEntry(BLOCK_LOG, (material, config, id) -> {
+            final Block log = getBlock(BLOCK_LOG);
+            final Block stem = getBlock(BLOCK_STEM);
+
+            GridRecipe.make(id, log)
+                    .checkConfig(config)
+                    .setOutputCount(1)
+                    .setShape("##", "##")
+                    .addMaterial('#', stem)
+                    .setGroup(receipGroupPrefix +"_planks")
+                    .build();
         }));
     }
 
