@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
@@ -41,7 +42,7 @@ public class CityPiece extends CustomPiece {
 		this.paletteProcessor = new BuildingStructureProcessor(palette);
 	}
 
-	public CityPiece(ServerLevel serverWorld, CompoundTag tag) {
+	public CityPiece(StructurePieceType type, CompoundTag tag) {
 		super(StructureTypes.NETHER_CITY, tag);
 		this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"));
 		this.building = this.building.getRotated(Rotation.values()[tag.getInt("rotation")]);

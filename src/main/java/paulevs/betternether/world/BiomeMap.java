@@ -1,8 +1,10 @@
 package paulevs.betternether.world;
 
+import java.time.Instant;
 import java.util.HashMap;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.noise.OpenSimplexNoise;
@@ -10,7 +12,7 @@ import ru.bclib.world.biomes.BCLBiome;
 
 public class BiomeMap {
 	private static final HashMap<ChunkPos, BiomeChunk> MAPS = new HashMap<ChunkPos, BiomeChunk>();
-	private static final WorldgenRandom RANDOM = new WorldgenRandom();
+	private static final WorldgenRandom RANDOM = new WorldgenRandom(new LegacyRandomSource(Instant.now().getEpochSecond()));
 
 	private final int sizeXZ;
 	private final int sizeY;

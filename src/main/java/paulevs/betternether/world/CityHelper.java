@@ -1,5 +1,6 @@
 package paulevs.betternether.world;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -8,6 +9,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import paulevs.betternether.world.structures.CityFeature;
@@ -49,7 +51,9 @@ public class CityHelper {
 			POS.setX(x << 4);
 			for (int z = z1; z <= z2; z += 8) {
 				POS.setZ(z << 4);
-				if (world.getBiome(POS).getGenerationSettings().isValidStart(BNWorldGenerator.CITY)) {
+				//TODO: isValidStart does no longer exists...
+				//if (world.getBiome(POS).getGenerationSettings().isValidStart(BNWorldGenerator.CITY))
+				{
 					ChunkPos chunk = BNWorldGenerator.CITY.getPotentialFeatureChunk(config, worldSeed, chunkRandom, x, z);
 					POSITIONS.add(chunk);
 				}
@@ -79,7 +83,7 @@ public class CityHelper {
 		if (config == null || config.spacing() < 1)
 			return null;
 
-		collectNearby(world, cx, cz, config, world.getSeed(), new WorldgenRandom());
+		collectNearby(world, cx, cz, config, world.getSeed(), new WorldgenRandom(new LegacyRandomSource(Instant.now().getEpochSecond())));
 		Iterator<ChunkPos> iterator = POSITIONS.iterator();
 		if (iterator.hasNext()) {
 			ChunkPos nearest = POSITIONS.iterator().next();

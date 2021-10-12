@@ -11,6 +11,7 @@ import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import paulevs.betternether.BlocksHelper;
@@ -36,7 +37,7 @@ public class DestructionPiece extends CustomPiece {
 		makeBoundingBox();
 	}
 
-	protected DestructionPiece(ServerLevel serverWorld, CompoundTag tag) {
+	protected DestructionPiece(StructurePieceType type, CompoundTag tag) {
 		super(StructureTypes.DESTRUCTION, tag);
 		this.center = NbtUtils.readBlockPos(tag.getCompound("center"));
 		this.radius = tag.getInt("radius");

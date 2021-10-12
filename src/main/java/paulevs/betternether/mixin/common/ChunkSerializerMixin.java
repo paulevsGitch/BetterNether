@@ -11,20 +11,21 @@ import net.minecraft.world.level.chunk.storage.ChunkSerializer;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import it.unimi.dsi.fastutil.longs.LongSet;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(ChunkSerializer.class)
 public class ChunkSerializerMixin {
 	@Overwrite
-	private static CompoundTag packStructureData(ServerLevel serverWorld, ChunkPos pos, Map<StructureFeature<?>, StructureStart<?>> structureStarts, Map<StructureFeature<?>, LongSet> structureReferences) {
+	private static CompoundTag packStructureData(StructurePieceSerializationContext structurePieceSerializationContext, ChunkPos pos, Map<StructureFeature<?>, StructureStart<?>> structureStarts, Map<StructureFeature<?>, LongSet> structureReferences) {
 		CompoundTag tagResult = new CompoundTag();
 		CompoundTag tagStarts = new CompoundTag();
 		Iterator<Entry<StructureFeature<?>, StructureStart<?>>> startsIterator = structureStarts.entrySet().iterator();
 
 		while (startsIterator.hasNext()) {
 			Entry<StructureFeature<?>, StructureStart<?>> start = startsIterator.next();
-			tagStarts.put((start.getKey()).getFeatureName(), (start.getValue()).createTag(serverWorld, pos));
+			tagStarts.put((start.getKey()).getFeatureName(), (start.getValue()).createTag(structurePieceSerializationContext, pos));
 		}
 
 		tagResult.put("Starts", tagStarts);

@@ -20,6 +20,7 @@ import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.mixin.client.IStructureFeatures;
 import ru.bclib.world.biomes.BCLBiomeDef;
 
 public class BiomeDefinition extends BCLBiomeDef {
@@ -208,9 +209,10 @@ public class BiomeDefinition extends BCLBiomeDef {
 	}
 
 	private void addDefaultStructures(BiomeGenerationSettings.Builder generationSettings) {
-		generationSettings.addStructureStart(StructureFeatures.RUINED_PORTAL_NETHER);
-		generationSettings.addStructureStart(StructureFeatures.NETHER_BRIDGE);
-		generationSettings.addStructureStart(StructureFeatures.BASTION_REMNANT);
+		IStructureFeatures sf = (IStructureFeatures)(Object)structureFeatures;
+		addStructureFeature(sf.getRUINED_PORTAL_NETHER());
+		addStructureFeature(sf.getNETHER_BRIDGE());
+		addStructureFeature(sf.getBASTION_REMNANT());
 		generationSettings.addCarver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
 		generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.SPRING_LAVA);
 	}

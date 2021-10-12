@@ -11,7 +11,8 @@
       "PresetsScreenMixin",
       "RenderLayerMixin",
       "StandArmorMixin",
-      "TexturedModelDataMixin"
+      "TexturedModelDataMixin",
+      "StructureFeaturesMixin"
     ],
 	"injectors": {
 		"defaultRequire": 1

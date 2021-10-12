@@ -15,6 +15,7 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -110,7 +111,9 @@ public class BNWorldGenerator {
 		FabricStructureBuilder.create(new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY)
 				.step(Decoration.RAW_GENERATION)
 				.defaultConfig(new StructureFeatureConfiguration(distance, separation, 1234))
-				.superflatFeature(CITY_CONFIGURED)
+				//TODO: check if enableSuperflat does the job
+				//.superflatFeature(CITY_CONFIGURED)
+				.enableSuperflat()
 				.register();
 
 		BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
@@ -134,7 +137,7 @@ public class BNWorldGenerator {
 		return x < 0 ? 0 : x > max ? max : x;
 	}
 
-	public static void populate(WorldGenRegion world, int sx, int sz, Random random) {
+	public static void populate(WorldGenLevel world, int sx, int sz, Random random) {
 		// Structure Generator
 		if (random.nextFloat() < structureDensity) {
 			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, 100, random), sz + random.nextInt(16));
@@ -304,7 +307,7 @@ public class BNWorldGenerator {
 			}
 	}
 
-	private static void makeLocalBiomes(WorldGenRegion world, int sx, int sz) {
+	private static void makeLocalBiomes(WorldGenLevel world, int sx, int sz) {
 		MC_BIOMES.clear();
 		for (int x = 0; x < 8; x++) {
 			popPos.setX(sx + (x << 1) + 2);
@@ -325,7 +328,7 @@ public class BNWorldGenerator {
 		}
 	}
 
-	public static void prePopulate(WorldGenRegion world, int sx, int sz, Random random) {
+	public static void prePopulate(WorldGenLevel world, int sx, int sz, Random random) {
 		makeLocalBiomes(world, sx, sz);
 
 		if (hasCaves) {
