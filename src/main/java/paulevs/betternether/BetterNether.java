@@ -16,7 +16,6 @@ import paulevs.betternether.registry.NetherItems;
 import paulevs.betternether.registry.NetherTags;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
-import paulevs.betternether.world.NetherBiomeSource;
 import paulevs.betternether.world.structures.piece.StructureTypes;
 import ru.bclib.api.WorldDataAPI;
 import ru.bclib.api.dataexchange.DataExchangeAPI;
@@ -50,7 +49,6 @@ public class BetterNether implements ModInitializer {
 		IntegrationRecipes.register();
 		NetherTags.register();
 		ItemRecipes.register();
-		NetherBiomeSource.register();
 		
 		Configs.saveConfigs();
 		WorldDataAPI.registerModCache(MOD_ID);

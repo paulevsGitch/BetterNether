@@ -32,7 +32,7 @@ dependencies {
 	println "Using local BCLib: ${local_bclib}"
     if (local_bclib){
 		compileOnly(project(":BCLib"))
-        modRuntimeMapped(project(":BCLib"))
+        api project(":BCLib")
     } else {
         useApi "com.github.paulevsGitch:BCLib:${project.bclib_version}"
     }
