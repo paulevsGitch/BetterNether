@@ -32,7 +32,7 @@ public class BetterNether implements ModInitializer {
 	
 	@Override
 	public void onInitialize() {
-		LOGGER.info("######## BetterNether for 1.17.1 ########");
+		LOGGER.info("######## BetterNether for 1.18 ########");
 		//MinecraftClient.getInstance().getEntityModelLoader().reload(MinecraftClient.getInstance().getResourceManager());
 		initOptions();
 		SoundsRegistry.register();

@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Supplier;
 
-import com.google.common.collect.Lists;
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
@@ -30,7 +27,6 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.mixin.common.GenerationSettingsAccessor;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureCaves;
@@ -80,10 +76,11 @@ public class BNWorldGenerator {
 	public static void onModInit() {
 		BCLibNetherBiomeSource.onInit.add( (biomeSource) -> {
 			biomeSource.possibleBiomes().forEach((biome) -> {
-				GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
-				List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureStarts());
-				structures.add(() -> BNWorldGenerator.CITY_CONFIGURED);
-				accessor.setStructureStarts(structures);
+//TODO: structureStarts are handle different now
+//				GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
+//				List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureStarts());
+//				structures.add(() -> BNWorldGenerator.CITY_CONFIGURED);
+//				accessor.setStructureStarts(structures);
 			});
 		});
 		

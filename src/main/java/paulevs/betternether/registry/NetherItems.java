@@ -44,8 +44,9 @@ import paulevs.betternether.items.ItemBlackApple;
 import paulevs.betternether.items.ItemBowlFood;
 import paulevs.betternether.items.materials.BNItemMaterials;
 import paulevs.betternether.tab.CreativeTabs;
+import ru.bclib.registry.ItemRegistry;
 
-public class NetherItems extends ru.bclib.registry.ItemRegistry {
+public class NetherItems extends ItemRegistry {
 	private static final List<String> ITEMS = new ArrayList<String>();
 	public static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
 	public static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
@@ -117,9 +118,9 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 		super(creativeTab);
 	}
 
-	private static ru.bclib.registry.ItemRegistry ITEMS_REGISTRY;
+	private static ItemRegistry ITEMS_REGISTRY;
 	@NotNull
-	public static ru.bclib.registry.ItemRegistry getItemRegistry() {
+	public static ItemRegistry getItemRegistry() {
 		if (ITEMS_REGISTRY == null) {
 			ITEMS_REGISTRY = new NetherItems(CreativeTabs.TAB_ITEMS);
 		}

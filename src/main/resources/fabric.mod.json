@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "betternether",
-	"version": "5.2.0",
+	"version": "${version}",
 
 	"name": "Better Nether",
 	"description": "Mod that improves Nether",

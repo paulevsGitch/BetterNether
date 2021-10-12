@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.WorldGenLevel;
@@ -42,7 +41,7 @@ public class CityPiece extends CustomPiece {
 		this.paletteProcessor = new BuildingStructureProcessor(palette);
 	}
 
-	public CityPiece(StructurePieceType type, CompoundTag tag) {
+	public CityPiece(StructurePieceSerializationContext context, CompoundTag tag) {
 		super(StructureTypes.NETHER_CITY, tag);
 		this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"));
 		this.building = this.building.getRotated(Rotation.values()[tag.getInt("rotation")]);

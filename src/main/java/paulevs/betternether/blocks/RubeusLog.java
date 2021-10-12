@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
-import ru.bclib.blocks.BaseRotatedPillarBlock;
 import ru.bclib.blocks.BaseStripableLogBlock;
 
 public class RubeusLog extends BaseStripableLogBlock {

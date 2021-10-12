@@ -1,4 +1,4 @@
-package paulevs.betternether.mixin.client;
+package paulevs.betternether.interfaces;
 
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;

@@ -36,7 +36,7 @@ public class CavePiece extends CustomPiece {
 		makeBoundingBox();
 	}
 
-	protected CavePiece(StructurePieceType type, CompoundTag tag) {
+	protected CavePiece(StructurePieceSerializationContext context, CompoundTag tag) {
 		super(StructureTypes.CAVE, tag);
 		this.center = NbtUtils.readBlockPos(tag.getCompound("center"));
 		this.radius = tag.getInt("radius");

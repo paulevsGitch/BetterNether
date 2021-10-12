@@ -9,9 +9,10 @@ import net.minecraft.world.level.levelgen.feature.configurations.RuinedPortalCon
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import paulevs.betternether.interfaces.IStructureFeatures;
 
 @Mixin(StructureFeatures.class)
-public abstract class StructureFeaturesMixin implements IStructureFeatures{
+public abstract class StructureFeaturesMixin implements IStructureFeatures {
     @Shadow @Final private static ConfiguredStructureFeature<RuinedPortalConfiguration, ? extends StructureFeature<RuinedPortalConfiguration>> RUINED_PORTAL_NETHER;
     @Shadow @Final private static ConfiguredStructureFeature<NoneFeatureConfiguration, ? extends StructureFeature<NoneFeatureConfiguration>> NETHER_BRIDGE;
     @Shadow @Final private static ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> BASTION_REMNANT;

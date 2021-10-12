@@ -9,6 +9,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.network.protocol.game.ClientboundOpenSignEditorPacket;
 import net.minecraft.util.thread.BlockableEventLoop;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,6 +20,7 @@ import paulevs.betternether.blockentities.BNSignBlockEntity;
 
 @Mixin(ClientPacketListener.class)
 public class ClientPlayNetworkHandlerMixin {
+	@Final
 	@Shadow
 	private Minecraft minecraft;
 

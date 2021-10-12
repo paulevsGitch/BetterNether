@@ -5,7 +5,6 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.Features;
-import net.minecraft.data.worldgen.StructureFeatures;
 import net.minecraft.data.worldgen.SurfaceBuilders;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -20,7 +19,7 @@ import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.mixin.client.IStructureFeatures;
+import paulevs.betternether.interfaces.IStructureFeatures;
 import ru.bclib.world.biomes.BCLBiomeDef;
 
 public class BiomeDefinition extends BCLBiomeDef {

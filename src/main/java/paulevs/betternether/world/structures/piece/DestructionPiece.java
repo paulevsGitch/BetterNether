@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.WorldGenLevel;
@@ -37,7 +36,7 @@ public class DestructionPiece extends CustomPiece {
 		makeBoundingBox();
 	}
 
-	protected DestructionPiece(StructurePieceType type, CompoundTag tag) {
+	protected DestructionPiece(StructurePieceSerializationContext context, CompoundTag tag) {
 		super(StructureTypes.DESTRUCTION, tag);
 		this.center = NbtUtils.readBlockPos(tag.getCompound("center"));
 		this.radius = tag.getInt("radius");

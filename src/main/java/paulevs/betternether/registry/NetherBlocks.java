@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -34,7 +33,6 @@ import paulevs.betternether.blocks.BNObsidian;
 import paulevs.betternether.blocks.BNPane;
 import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNPlate;
-import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.blocks.BNSlab;
 import paulevs.betternether.blocks.BNStairs;
 import paulevs.betternether.blocks.BNTaburet;
@@ -133,12 +131,10 @@ import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
 import ru.bclib.blocks.BaseLadderBlock;
 import ru.bclib.blocks.BaseLeavesBlock;
-import ru.bclib.blocks.BaseSignBlock;
 import ru.bclib.recipes.GridRecipe;
 import ru.bclib.registry.BlockRegistry;
-import ru.bclib.registry.ItemRegistry;
 
-public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
+public class NetherBlocks extends BlockRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
 
 	// Stalagnate //
@@ -470,9 +466,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		super(creativeTab);
 	}
 
-	private static ru.bclib.registry.BlockRegistry BLOCKS_REGISTRY;
+	private static BlockRegistry BLOCKS_REGISTRY;
 	@NotNull
-	public static ru.bclib.registry.BlockRegistry getBlockRegistry() {
+	public static BlockRegistry getBlockRegistry() {
 		if (BLOCKS_REGISTRY == null) {
 			BLOCKS_REGISTRY = new NetherBlocks(CreativeTabs.BN_TAB);
 		}
