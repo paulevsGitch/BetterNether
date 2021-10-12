@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.8-SNAPSHOT'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -11,8 +11,8 @@ version = project.mod_version
 group = project.maven_group
 def local_bclib = findProject(':BCLib') != null
 
-minecraft {
-    accessWidener = file("src/main/resources/betternether.accesswidener")
+loom {
+    accessWidenerPath = file("src/main/resources/betternether.accesswidener")
 }
 
 dependencies {
