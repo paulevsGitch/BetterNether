@@ -13,6 +13,7 @@ import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
+import net.minecraft.world.level.levelgen.structure.pieces.PiecesContainer;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
@@ -37,8 +38,8 @@ public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 	}
 
 	public static class CityStart extends StructureStart<NoneFeatureConfiguration> {
-		public CityStart(StructureFeature<NoneFeatureConfiguration> structureFeature, ChunkPos chunkPos, int i, long l) {
-			super(structureFeature, chunkPos, i, l);
+		public CityStart(StructureFeature<NoneFeatureConfiguration> structureFeature, ChunkPos chunkPos, int i, PiecesContainer piecesContainer) {
+			super(structureFeature, chunkPos, i, piecesContainer);
 		}
 
 		@Override

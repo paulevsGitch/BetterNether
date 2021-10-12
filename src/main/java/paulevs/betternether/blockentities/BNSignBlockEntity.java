@@ -53,7 +53,7 @@ public class BNSignBlockEntity extends BlockEntity {
 	}
 
 	public CompoundTag save(CompoundTag tag) {
-		super.save(tag);
+		super.saveAdditional(tag);
 
 		for (int i = 0; i < 4; ++i) {
 			Component text = this.text[i];

@@ -230,8 +230,9 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
 		this.fuel = tag.getByte("Fuel");
 	}
 
-	public CompoundTag save(CompoundTag tag) {
-		super.save(tag);
+	@Override
+	public CompoundTag saveAdditional(CompoundTag tag) {
+		super.saveAdditional(tag);
 		tag.putShort("BrewTime", (short) this.brewTime);
 		ContainerHelper.saveAllItems(tag, this.inventory);
 		tag.putByte("Fuel", (byte) this.fuel);

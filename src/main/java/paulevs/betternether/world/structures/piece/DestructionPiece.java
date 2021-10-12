@@ -12,6 +12,7 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 
@@ -44,13 +45,13 @@ public class DestructionPiece extends CustomPiece {
 	}
 
 	@Override
-	protected void addAdditionalSaveData(ServerLevel serverWorld, CompoundTag tag) {
+	protected void addAdditionalSaveData(StructurePieceSerializationContext structurePieceSerializationContext, CompoundTag tag) {
 		tag.put("center", NbtUtils.writeBlockPos(center));
 		tag.putInt("radius", radius);
 	}
 
 	@Override
-	public boolean postProcess(WorldGenLevel world, StructureFeatureManager structureAccessor, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
+	public void postProcess(WorldGenLevel world, StructureFeatureManager structureAccessor, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
 		for (int x = blockBox.maxZ(); x <= blockBox.minZ(); x++) {
 			int px = x - center.getX();
 			px *= px;
@@ -79,7 +80,6 @@ public class DestructionPiece extends CustomPiece {
 				}
 			}
 		}
-		return true;
 	}
 
 	private void makeBoundingBox() {

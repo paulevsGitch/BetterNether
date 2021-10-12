@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
 public class CavePiece extends CustomPiece {
@@ -43,13 +44,13 @@ public class CavePiece extends CustomPiece {
 	}
 
 	@Override
-	protected void addAdditionalSaveData(ServerLevel serverWorld, CompoundTag tag) {
+	protected void addAdditionalSaveData(StructurePieceSerializationContext structurePieceSerializationContext, CompoundTag tag) {
 		tag.put("center", NbtUtils.writeBlockPos(center));
 		tag.putInt("radius", radius);
 	}
 
 	@Override
-	public boolean postProcess(WorldGenLevel world, StructureFeatureManager arg, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
+	public void postProcess(WorldGenLevel world, StructureFeatureManager arg, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
 		BlockState bottom = LAVA;
 		if (!(world.dimensionType().hasCeiling())) {
 			bottom = Blocks.NETHERRACK.defaultBlockState();
@@ -74,7 +75,6 @@ public class CavePiece extends CustomPiece {
 				}
 			}
 		}
-		return true;
 	}
 
 	private void makeBoundingBox() {

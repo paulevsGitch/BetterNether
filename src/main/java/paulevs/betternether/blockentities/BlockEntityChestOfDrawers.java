@@ -68,7 +68,7 @@ public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity 
 	}
 
 	public CompoundTag save(CompoundTag tag) {
-		super.save(tag);
+		super.saveAdditional(tag);
 		if (!this.trySaveLootTable(tag)) {
 			ContainerHelper.saveAllItems(tag, this.inventory);
 		}

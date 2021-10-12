@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.city.BuildingStructureProcessor;
@@ -52,7 +53,7 @@ public class CityPiece extends CustomPiece {
 	}
 
 	@Override
-	protected void addAdditionalSaveData(ServerLevel serverWorld, CompoundTag tag) {
+	protected void addAdditionalSaveData(StructurePieceSerializationContext structurePieceSerializationContext, CompoundTag tag) {
 		tag.putString("building", building.getName());
 		tag.putInt("rotation", building.getRotation().ordinal());
 		tag.putInt("mirror", building.getMirror().ordinal());
@@ -62,9 +63,9 @@ public class CityPiece extends CustomPiece {
 	}
 
 	@Override
-	public boolean postProcess(WorldGenLevel world, StructureFeatureManager arg, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
+	public void postProcess(WorldGenLevel world, StructureFeatureManager arg, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
 		if (!this.boundingBox.intersects(blockBox))
-			return true;
+			return;
 
         BoundingBox clamped = new BoundingBox(boundingBox.minX(), boundingBox.minY(), boundingBox.minZ(), boundingBox.maxX(), boundingBox.maxY(), boundingBox.maxZ());
 		//clamped.encompass(blockBox);
@@ -102,7 +103,5 @@ public class CityPiece extends CustomPiece {
 					chunk.markPosForPostprocessing(POS);
 				}
 			}
-
-		return true;
 	}
 }
