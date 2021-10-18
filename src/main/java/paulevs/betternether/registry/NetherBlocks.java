@@ -133,10 +133,8 @@ import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
 import ru.bclib.blocks.BaseLadderBlock;
 import ru.bclib.blocks.BaseLeavesBlock;
-import ru.bclib.blocks.BaseSignBlock;
 import ru.bclib.recipes.GridRecipe;
 import ru.bclib.registry.BlockRegistry;
-import ru.bclib.registry.ItemRegistry;
 
 public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
@@ -146,8 +144,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Willow //
 	public static final WillowMaterial MAT_WILLOW = new WillowMaterial().init();
-	//public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BaseLeavesBlock(MAT_WILLOW.getSapling(), MaterialColor.TERRACOTTA_RED));
-	public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BlockWillowLeaves());
+	public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BlockWillowLeaves(MAT_WILLOW.getSapling()));
 
 	// Rubeus //
 	public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
