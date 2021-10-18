@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import paulevs.betternether.blocks.BNRenderLayer;
-import paulevs.betternether.registry.BlockEntityRenderRegistry;
 import paulevs.betternether.registry.EntityRenderRegistry;
 
 public class BetterNetherClient implements ClientModInitializer {
@@ -13,7 +12,6 @@ public class BetterNetherClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		registerRenderLayers();
 		EntityRenderRegistry.register();
-		BlockEntityRenderRegistry.register();
 	}
 
 	private void registerRenderLayers() {

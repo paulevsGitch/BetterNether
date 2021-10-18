@@ -14,7 +14,7 @@ public class Patcher {
 //--- Level 01
 class Patcher_001 extends Patch {
 	public Patcher_001() {
-		super(BetterNether.MOD_ID, "5.3.3");
+		super(BetterNether.MOD_ID, "5.3.4");
 	}
 	
 	@Override
@@ -22,6 +22,7 @@ class Patcher_001 extends Patch {
 		return Map.ofEntries(
 				Map.entry("betternether:chest", "bclib:chest"),
 				Map.entry("betternether:barrel", "bclib:barrel"),
+				Map.entry("betternether:sign", "bclib:sign"),
 				// Stalagnate //
 				Map.entry("betternether:striped_log_stalagnate", "betternether:stalagnate_stripped_log"),
 				Map.entry("betternether:striped_bark_stalagnate", "betternether:stalagnate_stripped_bark"),
