@@ -1,9 +1,5 @@
 package paulevs.betternether.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -23,18 +19,13 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.blocks.BNBarStool;
 import paulevs.betternether.blocks.BNBoneBlock;
 import paulevs.betternether.blocks.BNBrewingStand;
-import paulevs.betternether.blocks.BNButton;
 import paulevs.betternether.blocks.BNChain;
-import paulevs.betternether.blocks.BNDoor;
 import paulevs.betternether.blocks.BNGlass;
 import paulevs.betternether.blocks.BNNetherBrick;
 import paulevs.betternether.blocks.BNNormalChair;
 import paulevs.betternether.blocks.BNObsidian;
 import paulevs.betternether.blocks.BNPane;
 import paulevs.betternether.blocks.BNPillar;
-import paulevs.betternether.blocks.BNPlate;
-import paulevs.betternether.blocks.BNSlab;
-import paulevs.betternether.blocks.BNStairs;
 import paulevs.betternether.blocks.BNTaburet;
 import paulevs.betternether.blocks.BNWall;
 import paulevs.betternether.blocks.BlockAgave;
@@ -130,49 +121,57 @@ import ru.bclib.api.TagAPI;
 import ru.bclib.blocks.BaseBarrelBlock;
 import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
+import ru.bclib.blocks.BaseDoorBlock;
 import ru.bclib.blocks.BaseLadderBlock;
 import ru.bclib.blocks.BaseLeavesBlock;
+import ru.bclib.blocks.BasePressurePlateBlock;
+import ru.bclib.blocks.BaseSlabBlock;
+import ru.bclib.blocks.BaseStairsBlock;
+import ru.bclib.blocks.BaseWoodenButtonBlock;
 import ru.bclib.recipes.GridRecipe;
 import ru.bclib.registry.BlockRegistry;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	private static final List<String> BLOCKS = new ArrayList<String>();
-
+	
 	// Stalagnate //
 	public static final StalagnateMaterial MAT_STALAGNATE = new StalagnateMaterial().init();
 	
 	// Willow //
 	public static final WillowMaterial MAT_WILLOW = new WillowMaterial().init();
 	public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", new BlockWillowLeaves(MAT_WILLOW.getSapling()));
-
+	
 	// Rubeus //
 	public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
 	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves(MAT_RUBEUS.getSapling(), MaterialColor.COLOR_LIGHT_BLUE));
-
+	
 	// Reed //
 	public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
-
+	
 	// Wart //
 	public static final WartMaterial MAT_WART = new WartMaterial("wart", MaterialColor.COLOR_RED, MaterialColor.COLOR_RED).init();
-
+	
 	// Mushroom Fir //
 	public static final MushroomFirMaterial MAT_MUSHROOM_FIR = new MushroomFirMaterial().init();
-
+	
 	// Mushroom //
 	public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
-
+	
 	// Anchor Tree
 	public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
 	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BaseLeavesBlock(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
 	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
-
-
+	
+	
 	// Nether Sakura
 	public static final NetherSakuraMaterial MAT_NETHER_SAKURA = new NetherSakuraMaterial().init();
 	public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves", new BlockNetherSakuraLeaves(MAT_NETHER_SAKURA.getSapling()));
-
-
-
+	
+	
 	// Cincinnasite //
 	public static final Block CINCINNASITE_ORE = registerBlock("cincinnasite_ore", new BlockOre(NetherItems.CINCINNASITE, 1, 3));
 	public static final Block CINCINNASITE_BLOCK = registerBlock("cincinnasite_block", new BlockCincinnasite());
@@ -182,7 +181,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CINCINNASITE_BRICK_PLATE = registerBlock("cincinnasite_brick_plate", new BlockCincinnasite());
 	public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED);
 	public static final Block CINCINNASITE_SLAB = registerSlab("cincinnasite_slab", CINCINNASITE_FORGED);
-	public static final Block CINCINNASITE_BUTTON = registerBlock("cincinnasite_button", new BNButton(CINCINNASITE_FORGED));
+	public static final Block CINCINNASITE_BUTTON = registerBlock("cincinnasite_button", new BaseWoodenButtonBlock(CINCINNASITE_FORGED));
 	public static final Block CINCINNASITE_PLATE = registerPlate("cincinnasite_plate", CINCINNASITE_FORGED, Sensitivity.MOBS);
 	public static final Block CINCINNASITE_LANTERN = registerBlock("cincinnasite_lantern", new BlockCincinnasiteLantern());
 	public static final Block CINCINNASITE_TILE_LARGE = registerBlock("cincinnasite_tile_large", new BlockCincinnasite());
@@ -195,23 +194,23 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CINCINNASITE_FRAME = registerBlock("cincinnasite_frame", new BlockCincinnasiteFrame());
 	public static final Block CINCINNASITE_LANTERN_SMALL = registerBlock("cincinnasite_lantern_small", new BlockSmallLantern());
 	public static final Block CINCINNASITE_CHAIN = registerBlock("cincinnasite_chain", new BNChain());
-
+	
 	// Ruby //
 	public static final Block NETHER_RUBY_ORE = registerBlock("nether_ruby_ore", new BlockOre(NetherItems.NETHER_RUBY, 1, 2));
 	public static final Block NETHER_RUBY_BLOCK = registerBlock("nether_ruby_block", new BlockNetherRuby());
 	public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK);
 	public static final Block NETHER_RUBY_SLAB = registerSlab("nether_ruby_slab", NETHER_RUBY_BLOCK);
-
+	
 	// Lapis
 	public static final Block NETHER_LAPIS_ORE = registerBlock("nether_lapis_ore", new BlockOre(NetherItems.LAPIS_PILE, 3, 6));
-
+	
 	// Bricks //
 	public static final Block NETHER_BRICK_TILE_LARGE = registerBlock("nether_brick_tile_large", new BNNetherBrick());
 	public static final Block NETHER_BRICK_TILE_SMALL = registerBlock("nether_brick_tile_small", new BNNetherBrick());
 	public static final Block NETHER_BRICK_WALL = registerWall("nether_brick_wall", NETHER_BRICK_TILE_LARGE);
 	public static final Block NETHER_BRICK_TILE_SLAB = registerSlab("nether_brick_tile_slab", NETHER_BRICK_TILE_SMALL);
 	public static final Block NETHER_BRICK_TILE_STAIRS = registerStairs("nether_brick_tile_stairs", NETHER_BRICK_TILE_SMALL);
-
+	
 	// Bone //
 	public static final Block BONE_BLOCK = registerBlock("bone_block", new BNBoneBlock());
 	public static final Block BONE_STAIRS = registerStairs("bone_stairs", BONE_BLOCK);
@@ -220,21 +219,21 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BONE_PLATE = registerPlate("bone_plate", BONE_BLOCK);
 	public static final Block BONE_WALL = registerWall("bone_wall", BONE_BLOCK);
 	public static final Block BONE_TILE = registerBlock("bone_tile", new BNBoneBlock());
-	public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BNDoor(BONE_BLOCK));
-	public static final Block BONE_CINCINNASITE_DOOR = registerBlock("bone_cincinnasite_door", new BNDoor(BONE_BLOCK));
-
+	public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BaseDoorBlock(BONE_BLOCK));
+	public static final Block BONE_CINCINNASITE_DOOR = registerBlock("bone_cincinnasite_door", new BaseDoorBlock(BONE_BLOCK));
+	
 	// Quartz Glass //
 	public static final Block QUARTZ_GLASS = registerBlock("quartz_glass", new BNGlass(Blocks.GLASS));
 	public static final Block QUARTZ_GLASS_FRAMED = registerBlock("quartz_glass_framed", new BNGlass(CINCINNASITE_BLOCK));
 	public static final Block QUARTZ_GLASS_PANE = registerBlock("quartz_glass_pane", new BNPane(QUARTZ_GLASS, true));
 	public static final Block QUARTZ_GLASS_FRAMED_PANE = registerBlock("quartz_glass_framed_pane", new BNPane(CINCINNASITE_BLOCK, true));
-
+	
 	// Quartz Glass Colored //
 	public static final ColoredGlassMaterial QUARTZ_GLASS_COLORED = new ColoredGlassMaterial("quartz_glass", QUARTZ_GLASS);
 	public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_COLORED = new ColoredGlassMaterial("quartz_glass_framed", QUARTZ_GLASS_FRAMED);
 	public static final ColoredGlassMaterial QUARTZ_GLASS_PANE_COLORED = new ColoredGlassMaterial("quartz_glass_pane", QUARTZ_GLASS_PANE, false);
 	public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_PANE_COLORED = new ColoredGlassMaterial("quartz_glass_framed_pane", QUARTZ_GLASS_FRAMED_PANE, true);
-
+	
 	// Obsidian //
 	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian());
 	public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs", OBSIDIAN_BRICKS);
@@ -255,60 +254,60 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL);
 	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass());
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
-
+	
 	// Soul Sandstone //
 	public static final Block SOUL_SANDSTONE = registerBlock("soul_sandstone", new BlockSoulSandstone());
 	public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2("soul_sandstone_cut", new BlockSoulSandstone(), "soul_sandstone", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_SMOOTH = registerMakeable2X2("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_CUT);
 	public static final Block SOUL_SANDSTONE_CHISELED = registerMakeable2X2("soul_sandstone_chiseled", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_SMOOTH);
-
+	
 	public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs("soul_sandstone_cut_stairs", SOUL_SANDSTONE_CUT);
 	public static final Block SOUL_SANDSTONE_SMOOTH_STAIRS = registerStairs("soul_sandstone_smooth_stairs", SOUL_SANDSTONE_SMOOTH);
-
+	
 	public static final Block SOUL_SANDSTONE_SLAB = registerSlab("soul_sandstone_slab", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_CUT_SLAB = registerSlab("soul_sandstone_cut_slab", SOUL_SANDSTONE_CUT);
 	public static final Block SOUL_SANDSTONE_SMOOTH_SLAB = registerSlab("soul_sandstone_smooth_slab", SOUL_SANDSTONE_SMOOTH);
-
+	
 	public static final Block SOUL_SANDSTONE_WALL = registerWall("soul_sandstone_wall", SOUL_SANDSTONE_CUT);
-
+	
 	// Basalt Bricks //
 	public static final Block BASALT_BRICKS = registerMakeable2X2("basalt_bricks", new BlockBase(FabricBlockSettings.copyOf(Blocks.BASALT)), "basalt_bricks", Blocks.POLISHED_BASALT);
 	public static final Block BASALT_BRICKS_STAIRS = registerStairs("basalt_bricks_stairs", BASALT_BRICKS);
 	public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS);
 	public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
 	public static final Block BASALT_SLAB = registerSlab("basalt_slab", Blocks.BASALT);
-
+	
 	// Soul lily //
 	public static final Block SOUL_LILY = registerBlockNI("soul_lily", new BlockSoulLily());
 	public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", new BlockSoulLilySapling());
-
+	
 	// Large & Small Mushrooms //
 	public static final Block RED_LARGE_MUSHROOM = registerBlockNI("red_large_mushroom", new BlockRedLargeMushroom());
 	public static final Block BROWN_LARGE_MUSHROOM = registerBlockNI("brown_large_mushroom", new BlockBrownLargeMushroom());
 	public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", new BlockOrangeMushroom());
 	public static final Block RED_MOLD = registerBlock("red_mold", new BlockRedMold());
 	public static final Block GRAY_MOLD = registerBlock("gray_mold", new BlockGrayMold());
-
+	
 	// Lucis //
 	public static final Block LUCIS_MUSHROOM = registerBlockNI("lucis_mushroom", new BlockLucisMushroom());
 	public static final Block LUCIS_SPORE = registerBlock("lucis_spore", new BlockLucisSpore());
 	public static final Block GIANT_LUCIS = registerBlock("giant_lucis", new BlockGiantLucis());
-
+	
 	// Giant Mold //
 	public static final Block GIANT_MOLD = registerBlockNI("giant_mold", new BlockGiantMold());
 	public static final Block GIANT_MOLD_SAPLING = registerBlock("giant_mold_sapling", new BlockGiantMoldSapling());
-
+	
 	public static final Block JELLYFISH_MUSHROOM = registerBlockNI("jellyfish_mushroom", new BlockJellyfishMushroom());
 	public static final Block JELLYFISH_MUSHROOM_SAPLING = registerBlock("jellyfish_mushroom_sapling", new BlockJellyfishMushroomSapling());
-
-
+	
+	
 	// Eyes //
 	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
 	public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
 	public static final Block EYE_VINE = registerBlockNI("eye_vine", new BlockEyeVine());
 	public static final Block EYE_SEED = registerBlock("eye_seed", new BlockEyeSeed());
-
+	
 	// Grass //
 	public static final Block NETHER_GRASS = registerBlock("nether_grass", new BlockNetherGrass());
 	public static final Block SWAMP_GRASS = registerBlock("swamp_grass", new BlockNetherGrass());
@@ -316,7 +315,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", new BlockNetherGrass());
 	public static final Block BONE_GRASS = registerBlock("bone_grass", new BlockNetherGrass());
 	public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", new BlockNetherGrass());
-
+	
 	// Vines //
 	public static final Block BLACK_VINE = registerBlock("black_vine", new BlockBlackVine());
 	public static final Block BLOOMING_VINE = registerBlock("blooming_vine", new BlockBlackVine());
@@ -325,7 +324,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine(LUMABUS_SEED));
 	public static final Block GOLDEN_LUMABUS_SEED = registerBlock("golden_lumabus_seed", new BlockLumabusSeed(new StructureGoldenLumabusVine()));
 	public static final Block GOLDEN_LUMABUS_VINE = registerBlockNI("golden_lumabus_vine", new BlockLumabusVine(GOLDEN_LUMABUS_SEED));
-
+	
 	// Small Plants
 	public static final Block SOUL_VEIN = registerBlock("soul_vein", new BlockSoulVein());
 	public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", new BlockBoneMushroom());
@@ -344,18 +343,18 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block WHISPERING_GOURD_VINE = registerBlock("whispering_gourd_vine", new BlockWhisperingGourdVine());
 	public static final Block WHISPERING_GOURD = registerBlock("whispering_gourd", new BlockWhisperingGourd());
 	public static final Block WHISPERING_GOURD_LANTERN = registerBlock("whispering_gourd_lantern", new BlockWhisperingGourdLantern());
-
+	
 	// Cactuses //
 	public static final Block AGAVE = registerBlock("agave", new BlockAgave());
 	public static final Block BARREL_CACTUS = registerBlock("barrel_cactus", new BlockBarrelCactus());
 	public static final Block NETHER_CACTUS = registerBlock("nether_cactus", new BlockNetherCactus());
-
+	
 	// Wall plants
 	public static final Block WALL_MOSS = registerBlock("wall_moss", new BlockPlantWall(MaterialColor.COLOR_RED));
 	public static final Block WALL_MUSHROOM_BROWN = registerBlock("wall_mushroom_brown", new BlockPlantWall(MaterialColor.COLOR_BROWN));
 	public static final Block WALL_MUSHROOM_RED = registerBlock("wall_mushroom_red", new BlockPlantWall(MaterialColor.COLOR_RED));
 	public static final Block JUNGLE_MOSS = registerBlock("jungle_moss", new BlockPlantWall(MaterialColor.COLOR_LIGHT_GREEN));
-
+	
 	// Decorations //
 	public static final Block PIG_STATUE_RESPAWNER = registerBlock("pig_statue_respawner", new BlockStatueRespawner());
 	public static final Block CINCINNASITE_POT = registerBlock("cincinnasite_pot", new BlockBNPot(CINCINNASITE_BLOCK));
@@ -368,16 +367,16 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BASALT_STALACTITE = registerStalactite("basalt_stalactite", Blocks.BASALT);
 	public static final Block BONE_STALACTITE = registerStalactite("bone_stalactite", BONE_BLOCK);
 	
-
+	
 	// Fire Bowls
 	public static final Block CINCINNASITE_FIRE_BOWL = registerFireBowl("cincinnasite_fire_bowl", CINCINNASITE_FORGED, Blocks.NETHERRACK, NetherItems.CINCINNASITE_INGOT);
 	public static final Block BRICKS_FIRE_BOWL = registerFireBowl("bricks_fire_bowl", NETHER_BRICK_TILE_LARGE, Blocks.NETHERRACK, Items.NETHER_BRICK);
 	public static final Block NETHERITE_FIRE_BOWL = registerFireBowl("netherite_fire_bowl", Blocks.NETHERITE_BLOCK, Blocks.NETHERRACK, Items.NETHERITE_INGOT);
-
+	
 	public static final Block CINCINNASITE_FIRE_BOWL_SOUL = registerFireBowl("cincinnasite_fire_bowl_soul", CINCINNASITE_FORGED, Blocks.SOUL_SAND, NetherItems.CINCINNASITE_INGOT);
 	public static final Block BRICKS_FIRE_BOWL_SOUL = registerFireBowl("bricks_fire_bowl_soul", NETHER_BRICK_TILE_LARGE, Blocks.SOUL_SAND, Items.NETHER_BRICK);
 	public static final Block NETHERITE_FIRE_BOWL_SOUL = registerFireBowl("netherite_fire_bowl_soul", Blocks.NETHERITE_BLOCK, Blocks.SOUL_SAND, Items.NETHERITE_INGOT);
-
+	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
 	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium());
@@ -388,7 +387,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
 	public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass", new BlockTerrain());
 	public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
-
+	
 	// Roofs //
 	public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS);
 	public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerStairs("roof_tile_nether_bricks_stairs", ROOF_TILE_NETHER_BRICKS);
@@ -396,8 +395,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block ROOF_TILE_CINCINNASITE = registerRoof("roof_tile_cincinnasite", CINCINNASITE_FORGED);
 	public static final Block ROOF_TILE_CINCINNASITE_STAIRS = registerStairs("roof_tile_cincinnasite_stairs", ROOF_TILE_CINCINNASITE);
 	public static final Block ROOF_TILE_CINCINNASITE_SLAB = registerSlab("roof_tile_cincinnasite_slab", ROOF_TILE_CINCINNASITE);
-
-
+	
+	
 	// Craft Stations //
 	public static final Block BLACKSTONE_FURNACE = registerFurnace("blackstone_furnace", Blocks.BLACKSTONE);
 	public static final Block BASALT_FURNACE = registerFurnace("basalt_furnace", Blocks.BASALT);
@@ -405,21 +404,21 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new BlockCincinnasiteForge());
 	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
 	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil());
-
+	
 	public static final Block CRAFTING_TABLE_CRIMSON = registerCraftingTable("crafting_table_crimson", Blocks.CRIMSON_PLANKS);
 	public static final Block CRAFTING_TABLE_WARPED = registerCraftingTable("crafting_table_warped", Blocks.WARPED_PLANKS);
-
-
+	
+	
 	// Storage
 	public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
-
+	
 	public static final Block CHEST_CRIMSON = registerChest("crimson_chest", Blocks.CRIMSON_PLANKS);
 	public static final Block CHEST_WARPED = registerChest("warped_chest", Blocks.WARPED_PLANKS);
-
+	
 	public static final Block BARREL_CRIMSON = registerBarrel("crimson_barrel", Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_SLAB);
 	public static final Block BARREL_WARPED = registerBarrel("warped_barrel", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB);
-
-
+	
+	
 	// Taburets //
 	public static final Block TABURET_OAK = registerTaburet("oak_taburet", Blocks.OAK_SLAB);
 	public static final Block TABURET_SPRUCE = registerTaburet("spruce_taburet", Blocks.SPRUCE_SLAB);
@@ -429,9 +428,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block TABURET_DARK_OAK = registerTaburet("dark_oak_taburet", Blocks.DARK_OAK_SLAB);
 	public static final Block TABURET_CRIMSON = registerTaburet("crimson_taburet", Blocks.CRIMSON_SLAB);
 	public static final Block TABURET_WARPED = registerTaburet("warped_taburet", Blocks.WARPED_SLAB);
-
+	
 	public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
-
+	
 	
 	// Chairs
 	public static final Block CHAIR_OAK = registerChair("oak_chair", Blocks.OAK_SLAB);
@@ -442,7 +441,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CHAIR_DARK_OAK = registerChair("dark_oak_chair", Blocks.DARK_OAK_SLAB);
 	public static final Block CHAIR_CRIMSON = registerChair("crimson_chair", Blocks.CRIMSON_SLAB);
 	public static final Block CHAIR_WARPED = registerChair("warped_chair", Blocks.WARPED_SLAB);
-
+	
 	public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
 	
 	// Stools //
@@ -454,19 +453,20 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BAR_STOOL_DARK_OAK = registerBarStool("dark_oak_bar_stool", Blocks.DARK_OAK_SLAB);
 	public static final Block BAR_STOOL_CRIMSON = registerBarStool("crimson_bar_stool", Blocks.CRIMSON_SLAB);
 	public static final Block BAR_STOOL_WARPED = registerBarStool("warped_bar_stool", Blocks.WARPED_SLAB);
-
+	
 	public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
 	
 	// Ladders //
 	public static final Block CRIMSON_LADDER = registerLadder("crimson_ladder", Blocks.CRIMSON_PLANKS);
 	public static final Block WARPED_LADDER = registerLadder("warped_ladder", Blocks.WARPED_PLANKS);
-
-
+	
+	
 	protected NetherBlocks(CreativeModeTab creativeTab) {
 		super(creativeTab);
 	}
-
+	
 	private static ru.bclib.registry.BlockRegistry BLOCKS_REGISTRY;
+	
 	@NotNull
 	public static ru.bclib.registry.BlockRegistry getBlockRegistry() {
 		if (BLOCKS_REGISTRY == null) {
@@ -474,11 +474,14 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		}
 		return BLOCKS_REGISTRY;
 	}
-
+	
 	public static List<Block> getModBlocks() {
-		return getModBlocks(BetterNether.MOD_ID).stream().filter(BlockItem.class::isInstance).map(item -> ((BlockItem) item).getBlock()).collect(Collectors.toList());
+		return getModBlocks(BetterNether.MOD_ID).stream()
+												.filter(BlockItem.class::isInstance)
+												.map(item -> ((BlockItem) item).getBlock())
+												.collect(Collectors.toList());
 	}
-
+	
 	public static Block registerBlock(String name, Block block) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
@@ -486,29 +489,29 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	public static Block registerBlockNI(String name, Block block) {
-//		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-//			Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
-//		}
-//		BLOCKS.add(name);
-//		return block;
+		//		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+		//			Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
+		//		}
+		//		BLOCKS.add(name);
+		//		return block;
 		return registerBlock(name, block, false);
 	}
-
+	
 	private static Block registerBlockDirectly(String name, Block block) {
-//		Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
-//		Item.Properties settings = new Item.Properties().tab(CreativeTabs.BN_TAB);
-//		if (block instanceof BNSign) {
-//			settings.stacksTo(16);
-//		}
-//		NetherItems.registerItem(name, new BlockItem(block, settings));
+		//		Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
+		//		Item.Properties settings = new Item.Properties().tab(CreativeTabs.BN_TAB);
+		//		if (block instanceof BNSign) {
+		//			settings.stacksTo(16);
+		//		}
+		//		NetherItems.registerItem(name, new BlockItem(block, settings));
 		return registerBlock(name, block, true);
 	}
-
-	private static Block registerBlock(String name, Block block, boolean hasItem){
+	
+	private static Block registerBlock(String name, Block block, boolean hasItem) {
 		final BlockRegistry blockRegistry = getBlockRegistry();
-		final ResourceLocation location =  new ResourceLocation(BetterNether.MOD_ID, name);
+		final ResourceLocation location = new ResourceLocation(BetterNether.MOD_ID, name);
 		if (hasItem) {
 			blockRegistry.register(location, block);
 		}
@@ -519,13 +522,15 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	}
 	
 	private static void addFuel(Block source, Block result) {
-		if (source.defaultBlockState().getMaterial().isFlammable()) {
+		if (source.defaultBlockState()
+				  .getMaterial()
+				  .isFlammable()) {
 			FuelRegistry.INSTANCE.add(result, 40);
 		}
 	}
-
+	
 	public static Block registerStairs(String name, Block source) {
-		Block stairs = new BNStairs(source);
+		Block stairs = new BaseStairsBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, stairs);
 			addFuel(source, stairs);
@@ -534,9 +539,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return stairs;
 	}
-
+	
 	public static Block registerSlab(String name, Block source) {
-		Block slab = new BNSlab(source);
+		Block slab = new BaseSlabBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, slab);
 			addFuel(source, slab);
@@ -545,7 +550,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return slab;
 	}
-
+	
 	private static Block registerRoof(String name, Block source) {
 		Block roof = new BlockBase(FabricBlockSettings.copyOf(source));
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -556,9 +561,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return roof;
 	}
-
+	
 	public static Block registerButton(String name, Block source) {
-		Block button = new BNButton(source);
+		Block button = new BaseWoodenButtonBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, button);
 			addFuel(source, button);
@@ -567,9 +572,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return button;
 	}
-
+	
 	public static Block registerPlate(String name, Block source) {
-		Block plate = new BNPlate(Sensitivity.EVERYTHING, source);
+		Block plate = new BasePressurePlateBlock(Sensitivity.EVERYTHING, source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, plate);
 			addFuel(source, plate);
@@ -578,9 +583,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return plate;
 	}
-
+	
 	private static Block registerPlate(String name, Block source, Sensitivity rule) {
-		Block plate = new BNPlate(rule, source);
+		Block plate = new BasePressurePlateBlock(rule, source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, plate);
 			addFuel(source, plate);
@@ -589,17 +594,18 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return plate;
 	}
-
+	
 	public static Block registerMakeable2X2(String name, Block result, String group, Block... sources) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, result);
-			for (Block source : sources)
+			for (Block source : sources) {
 				RecipesHelper.makeSimpleRecipe2(source, result, 4, group);
+			}
 		}
 		BLOCKS.add(name);
 		return result;
 	}
-
+	
 	public static Block registerWall(String name, Block source) {
 		Block wall = new BNWall(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -609,7 +615,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return wall;
 	}
-
+	
 	public static Block registerCraftingTable(String name, Block source) {
 		Block block = new BaseCraftingTableBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -618,18 +624,19 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			TagAPI.addTags(block, ItemTags.SIGNS);
 			//RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
-					.checkConfig(Configs.RECIPES)
-					.setShape("##", "##")
-					.addMaterial('#', source)
-					.setGroup("nether" + "_tables")
-					.build();
-
-			FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
+					  .checkConfig(Configs.RECIPES)
+					  .setShape("##", "##")
+					  .addMaterial('#', source)
+					  .setGroup("nether" + "_tables")
+					  .build();
+			
+			FlammableBlockRegistry.getDefaultInstance()
+								  .add(block, 5, 20);
 		}
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	public static Block registerChest(String name, Block planks) {
 		Block chest = new BaseChestBlock(planks);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -639,18 +646,19 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(planks, chest);
 			//RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), chest)
-					.checkConfig(Configs.RECIPES)
-					.setShape("###", "# #", "###")
-					.addMaterial('#', planks)
-					.setGroup("nether" + "_chests")
-					.build();
-
-			FlammableBlockRegistry.getDefaultInstance().add(chest, 5, 20);
+					  .checkConfig(Configs.RECIPES)
+					  .setShape("###", "# #", "###")
+					  .addMaterial('#', planks)
+					  .setGroup("nether" + "_chests")
+					  .build();
+			
+			FlammableBlockRegistry.getDefaultInstance()
+								  .add(chest, 5, 20);
 		}
 		BLOCKS.add(name);
 		return chest;
 	}
-
+	
 	public static Block registerBarrel(String name, Block source, Block slab) {
 		Block block = new BaseBarrelBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -658,42 +666,44 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, block);
 			//RecipesHelper.makeBarrelRecipe(source, slab, block);
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
-					.checkConfig(Configs.RECIPES)
-					.setShape("#S#", "# #", "#S#")
-					.addMaterial('#', source)
-					.addMaterial('S', slab)
-					.setGroup("nether" + "_barrels")
-					.build();
-
-			FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
+					  .checkConfig(Configs.RECIPES)
+					  .setShape("#S#", "# #", "#S#")
+					  .addMaterial('#', source)
+					  .addMaterial('S', slab)
+					  .setGroup("nether" + "_barrels")
+					  .build();
+			
+			FlammableBlockRegistry.getDefaultInstance()
+								  .add(block, 5, 20);
 		}
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	public static Block registerLadder(String name, Block source) {
 		Block block = new BaseLadderBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			TagAPI.addTags(block, BlockTags.CLIMBABLE);
-
+			
 			addFuel(source, block);
 			//RecipesHelper.makeLadderRecipe(source, block);
-
+			
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
-					.checkConfig(Configs.RECIPES)
-					.setOutputCount(3)
-					.setShape("I I", "I#I", "I I")
-					.addMaterial('#', source)
-					.addMaterial('I', Items.STICK)
-					.setGroup("nether" + "_ladders")
-					.build();
-			FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
+					  .checkConfig(Configs.RECIPES)
+					  .setOutputCount(3)
+					  .setShape("I I", "I#I", "I I")
+					  .addMaterial('#', source)
+					  .addMaterial('I', Items.STICK)
+					  .setGroup("nether" + "_ladders")
+					  .build();
+			FlammableBlockRegistry.getDefaultInstance()
+								  .add(block, 5, 20);
 		}
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	public static Block registerTaburet(String name, Block source) {
 		Block block = new BNTaburet(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -704,7 +714,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	public static Block registerChair(String name, Block source) {
 		Block block = new BNNormalChair(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -715,7 +725,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	public static Block registerBarStool(String name, Block source) {
 		Block block = new BNBarStool(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -726,7 +736,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	public static Block registerFurnace(String name, Block source) {
 		Block block = new BlockNetherFurnace(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -736,7 +746,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	private static Block registerStalactite(String name, Block source) {
 		Block block = new BlockStalactite(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -746,7 +756,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	private static Block registerFireBowl(String name, Block source, Block inside, Item leg) {
 		Block block = new BlockFireBowl(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
@@ -758,7 +768,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		BLOCKS.add(name);
 		return block;
 	}
-
+	
 	public static List<String> getPossibleBlocks() {
 		return BLOCKS;
 	}
