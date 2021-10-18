@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -34,7 +33,6 @@ import paulevs.betternether.blocks.BNObsidian;
 import paulevs.betternether.blocks.BNPane;
 import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNPlate;
-import paulevs.betternether.blocks.BNSign;
 import paulevs.betternether.blocks.BNSlab;
 import paulevs.betternether.blocks.BNStairs;
 import paulevs.betternether.blocks.BNTaburet;
@@ -97,6 +95,7 @@ import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.blocks.BlockRedMold;
+import paulevs.betternether.blocks.BlockRubeusLeaves;
 import paulevs.betternether.blocks.BlockSmallLantern;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.blocks.BlockSoulGrass;
@@ -148,7 +147,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 
 	// Rubeus //
 	public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
-	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BaseLeavesBlock(MAT_RUBEUS.getSapling(), MaterialColor.COLOR_LIGHT_BLUE));
+	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves(MAT_RUBEUS.getSapling(), MaterialColor.COLOR_LIGHT_BLUE));
 
 	// Reed //
 	public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
