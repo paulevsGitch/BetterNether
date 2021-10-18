@@ -10,8 +10,8 @@
 	"elements": [ 	 
 		{
 			"__comment": "PlaneY1",
-			"from": [ 3, 0, 3 ],
-			"to": [ 13, 0.001, 13 ],
+			"from": [ 3, 0.001, 3 ],
+			"to": [ 13, 0.002, 13 ],
 			"faces": {
 				"down": { "uv": [ 3, 3, 13, 13 ], "texture": "#bottom", "cullface": "down" },
 				"up": { "uv": [ 3, 3, 13, 13 ], "texture": "#bottom" }
