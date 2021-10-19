@@ -9,9 +9,9 @@ import paulevs.betternether.recipes.IntegrationRecipes;
 import paulevs.betternether.recipes.ItemRecipes;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
-import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.BrewingRegistry;
 import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 import paulevs.betternether.registry.NetherTags;
 import paulevs.betternether.registry.SoundsRegistry;
@@ -56,6 +56,8 @@ public class BetterNether implements ModInitializer {
 		WorldDataAPI.registerModCache(MOD_ID);
 		DataExchangeAPI.registerMod(BetterNether.MOD_ID);
 		Patcher.register();
+		
+		//MigrationProfile.fixCustomFolder(new File("/Users/frank/Entwicklung/BetterNether/src/main/resources/data/betternether/structures"));
 	}
 	
 	private void initOptions() {
