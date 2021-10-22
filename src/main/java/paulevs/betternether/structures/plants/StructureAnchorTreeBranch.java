@@ -1,15 +1,20 @@
 package paulevs.betternether.structures.plants;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockAnchorTreeVine;
@@ -25,7 +30,7 @@ public class StructureAnchorTreeBranch implements IStructure {
 	private static final Set<BlockPos> MIDDLE = new HashSet<BlockPos>();
 	private static final Set<BlockPos> TOP = new HashSet<BlockPos>();
 	private static final MutableBlockPos POS = new MutableBlockPos();
-
+	private static final Map<BlockPos, Byte> LOGS_DIST = new HashMap<>();
 	public StructureAnchorTreeBranch() {}
 
 	@Override
@@ -40,6 +45,8 @@ public class StructureAnchorTreeBranch implements IStructure {
 		int minCount = scale < 0.75 ? 3 : 4;
 		int maxCount = scale < 0.75 ? 5 : 7;
 		int count = MHelper.randRange(minCount, maxCount, random);
+		MutableBlockPos mutableBlockPos = new MutableBlockPos();
+		
 		for (int n = 0; n < count; n++) {
 			float branchSize = MHelper.randRange(0.5F, 0.8F, random) * scale;
 			float angle = n * MHelper.PI2 / count;
@@ -113,11 +120,39 @@ public class StructureAnchorTreeBranch implements IStructure {
 			else
 				state = NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState();
 			BlocksHelper.setWithUpdate(world, bpos, state);
+			
+			for (int x=-7; x<=7; x++) {
+				for (int y = -7; y <= 7; y++) {
+					for (int z = -7; z <= 7; z++) {
+						if (x == 0 && y == 0 && z == 0) continue;
+						final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
+						if (dist<=7) {
+							final BlockPos blPos = bpos.offset(x, y, z);
+							LOGS_DIST.merge(blPos, (byte) dist, (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
+						}
+					}
+				}
+			}
 		}
 
 		POINTS.clear();
 		MIDDLE.clear();
 		TOP.clear();
+		
+		for (Entry<BlockPos, Byte> entry : LOGS_DIST.entrySet()){
+			final int dist = entry.getValue();
+			final BlockPos logPos = entry.getKey();
+			
+			BlockState currentState = world.getBlockState(logPos);
+			if (currentState.hasProperty(BlockStateProperties.DISTANCE) ) {
+				int cDist = currentState.getValue(BlockStateProperties.DISTANCE);
+				if (dist < cDist) {
+					BlocksHelper.setWithoutUpdate(world, logPos, currentState.setValue(BlockStateProperties.DISTANCE, dist));
+				}
+			}
+		}
+		
+		LOGS_DIST.clear();
 	}
 
 	private void line(LevelAccessor world, int x1, int y1, int z1, int x2, int y2, int z2, int middleY) {
@@ -164,10 +199,14 @@ public class StructureAnchorTreeBranch implements IStructure {
 	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random) {
 		BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState();
 		BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
+		BlockState log = NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState();
 		float halfR = radius * 0.5F;
 		float r2 = radius * radius;
 		int start = (int) Math.floor(-radius);
-		for (int cy = start; cy <= radius; cy++) {
+		
+		final Direction[] directions = Direction.values();
+		MutableBlockPos mutableBlockPos = new MutableBlockPos();
+		for (int cy = (int)Math.floor(radius); cy >= start; cy--) {
 			int cy2_out = cy * cy;
 			float cy2_in = cy + halfR;
 			cy2_in *= cy2_in;
@@ -183,6 +222,7 @@ public class StructureAnchorTreeBranch implements IStructure {
 							int length = BlocksHelper.downRay(world, POS, 17);
 							if (length < 5) {
 								BlocksHelper.setWithoutUpdate(world, POS, leaves);
+								//BlocksHelper.createLogIfFree(world, POS, log, directions, mutableBlockPos);
 								continue;
 							} ;
 							if (length > 15) length = MHelper.randRange(12, 15, random);
@@ -193,13 +233,15 @@ public class StructureAnchorTreeBranch implements IStructure {
 							BlocksHelper.setWithoutUpdate(world, POS.below(length - 2), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
 							BlocksHelper.setWithoutUpdate(world, POS.below(length - 1), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
 							BlocksHelper.setWithoutUpdate(world, POS, leaves);
+							
+							//BlocksHelper.createLogIfFree(world, POS, log, directions, mutableBlockPos);
 						}
 					}
 				}
 			}
 		}
 	}
-
+	
 	private boolean canReplace(BlockState state) {
 		return BlocksHelper.isNetherGround(state) || state.getMaterial().isReplaceable();
 	}
