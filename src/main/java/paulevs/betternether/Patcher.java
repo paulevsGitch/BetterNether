@@ -1,9 +1,16 @@
 package paulevs.betternether;
 
+import java.util.List;
 import java.util.Map;
 
+import com.ibm.icu.impl.locale.XCldrStub.ImmutableSet;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import paulevs.betternether.registry.NetherBlocks;
 import ru.bclib.api.datafixer.DataFixerAPI;
+import ru.bclib.api.datafixer.MigrationProfile;
 import ru.bclib.api.datafixer.Patch;
+import ru.bclib.api.datafixer.PatchBiFunction;
 
 public class Patcher {
 	public static void register() {
@@ -185,5 +192,33 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:bar_stool_warped", "betternether:warped_bar_stool")
 
 				);
+	}
+	
+	@Override
+	public PatchBiFunction<ListTag, ListTag, Boolean> getBlockStatePatcher() {
+		return Patcher_001::patchBlockState;
+	}
+	
+	private static final List<String> LEAVE_IDS = List.of(
+		"betternether:willow_leaves",
+		"betternether:rubeus_leaves",
+		"betternether:anchor_tree_leaves",
+		"betternether:nether_sakura_leaves"
+	);
+	
+	private static boolean patchBlockState(ListTag palette, ListTag states, MigrationProfile profile){
+		boolean[] changed = {false};
+		palette.forEach((blockTag) -> {
+			CompoundTag blockTagCompound = ((CompoundTag) blockTag);
+			final String id = blockTagCompound.getString("Name");
+			if (LEAVE_IDS.contains(id)) {
+				final CompoundTag props = blockTagCompound.getCompound("Properties");
+				if (!props.contains("persistent") || !"true".equals(props.getString("persistent"))) {
+					props.putString("persistent", "true");
+					changed[0] = true;
+				}
+			}
+		});
+		return changed[0];
 	}
 }
