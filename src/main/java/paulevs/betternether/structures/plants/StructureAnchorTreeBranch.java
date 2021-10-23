@@ -3,6 +3,8 @@ package paulevs.betternether.structures.plants;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -12,6 +14,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -121,24 +124,39 @@ public class StructureAnchorTreeBranch implements IStructure {
 				state = NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState();
 			BlocksHelper.setWithUpdate(world, bpos, state);
 			
-			for (int x=-7; x<=7; x++) {
-				for (int y = -7; y <= 7; y++) {
-					for (int z = -7; z <= 7; z++) {
-						if (x == 0 && y == 0 && z == 0) continue;
-						final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
-						if (dist<=7) {
-							final BlockPos blPos = bpos.offset(x, y, z);
-							LOGS_DIST.merge(blPos, (byte) dist, (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
-						}
-					}
-				}
-			}
+			updateSDFFrom(bpos);
 		}
 
 		POINTS.clear();
 		MIDDLE.clear();
 		TOP.clear();
 		
+		updateDistances(world);
+		
+//		final Block[] woool = {
+//			Blocks.BLACK_WOOL,
+//			Blocks.BLUE_WOOL,
+//			Blocks.CYAN_WOOL,
+//			Blocks.GREEN_WOOL,
+//			Blocks.LIME_WOOL,
+//			Blocks.YELLOW_WOOL,
+//			Blocks.ORANGE_WOOL,
+//			Blocks.RED_WOOL
+//		};
+//
+//		for (Entry<BlockPos, Byte> entry : LOGS_DIST.entrySet()){
+//			final int dist = entry.getValue();
+//			final BlockPos logPos = entry.getKey();
+//			BlockState currentState = world.getBlockState(logPos);
+//			if (currentState.hasProperty(BlockStateProperties.DISTANCE) ) {
+//				BlocksHelper.setWithoutUpdate(world, logPos, woool[dist].defaultBlockState());
+//			}
+//		}
+		
+		LOGS_DIST.clear();
+	}
+	
+	private void updateDistances(ServerLevelAccessor world) {
 		for (Entry<BlockPos, Byte> entry : LOGS_DIST.entrySet()){
 			final int dist = entry.getValue();
 			final BlockPos logPos = entry.getKey();
@@ -148,13 +166,40 @@ public class StructureAnchorTreeBranch implements IStructure {
 				int cDist = currentState.getValue(BlockStateProperties.DISTANCE);
 				if (dist < cDist) {
 					BlocksHelper.setWithoutUpdate(world, logPos, currentState.setValue(BlockStateProperties.DISTANCE, dist));
+					cDist = dist;
+				}
+				
+				if (cDist>=7){
+					BlocksHelper.setWithoutUpdate(world, logPos, Blocks.AIR.defaultBlockState());
+					
+					BlockPos pos = logPos.below();
+					currentState = world.getBlockState(pos);
+					
+					while (currentState.is(NetherBlocks.ANCHOR_TREE_VINE)) {
+						BlocksHelper.setWithoutUpdate(world, pos, Blocks.AIR.defaultBlockState());
+						pos = pos.below();
+						currentState = world.getBlockState(pos);
+					}
 				}
 			}
 		}
-		
-		LOGS_DIST.clear();
 	}
-
+	
+	private void updateSDFFrom(BlockPos bpos) {
+		for (int x=-7; x<=7; x++) {
+			for (int y = -7; y <= 7; y++) {
+				for (int z = -7; z <= 7; z++) {
+					if (x == 0 && y == 0 && z == 0) continue;
+					final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
+					if (dist<=7) {
+						final BlockPos blPos = bpos.offset(x, y, z);
+						LOGS_DIST.merge(blPos, (byte) dist, (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
+					}
+				}
+			}
+		}
+	}
+	
 	private void line(LevelAccessor world, int x1, int y1, int z1, int x2, int y2, int z2, int middleY) {
 		int dx = x2 - x1;
 		int dy = y2 - y1;
@@ -199,13 +244,11 @@ public class StructureAnchorTreeBranch implements IStructure {
 	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random) {
 		BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState();
 		BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
-		BlockState log = NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState();
-		float halfR = radius * 0.5F;
-		float r2 = radius * radius;
-		int start = (int) Math.floor(-radius);
 		
-		final Direction[] directions = Direction.values();
-		MutableBlockPos mutableBlockPos = new MutableBlockPos();
+		final float halfR = radius * 0.5F;
+		final float r2 = radius * radius;
+		final int start = (int) Math.floor(-radius);
+		
 		for (int cy = (int)Math.floor(radius); cy >= start; cy--) {
 			int cy2_out = cy * cy;
 			float cy2_in = cy + halfR;
@@ -226,9 +269,11 @@ public class StructureAnchorTreeBranch implements IStructure {
 							} ;
 							if (length > 15) length = MHelper.randRange(10, 15, random);
 							else if (length > 10) length = MHelper.randRange(10, length, random);
+							
 							if (cz%2 == cx%2) {
-								length/=3;
+								length /= 3;
 							}
+							
 							if (length>4) {
 								for (int i = 1; i < length - 2; i++) {
 									BlocksHelper.setWithoutUpdate(world, POS.below(i), vine);
