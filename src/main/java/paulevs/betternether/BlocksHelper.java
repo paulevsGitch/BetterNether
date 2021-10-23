@@ -4,15 +4,18 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.LavaFluid;
@@ -183,5 +186,24 @@ public class BlocksHelper {
 
 	public static boolean isNylium(BlockState state) {
 		return state.is(NetherTags.NYLIUM);
+	}
+	
+	public static boolean createLogIfFree(LevelAccessor world, BlockPos pos, BlockState anchorBlock, Direction[] directions, MutableBlockPos mutableBlockPos) {
+		boolean hasNeighbor = false;
+		for (Direction dir : directions){
+			mutableBlockPos.setWithOffset(pos, dir);
+			BlockState currentState = world.getBlockState(mutableBlockPos);
+			if (currentState.hasProperty(BlockStateProperties.DISTANCE) || currentState.is(BlockTags.LOGS)) {
+				hasNeighbor = true;
+				break;
+			}
+		}
+		
+		if (!hasNeighbor){
+			setWithoutUpdate(world, pos.above(), anchorBlock);
+			return true;
+		}
+		
+		return false;
 	}
 }

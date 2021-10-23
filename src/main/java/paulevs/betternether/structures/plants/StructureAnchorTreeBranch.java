@@ -214,7 +214,7 @@ public class StructureAnchorTreeBranch implements IStructure {
 			for (int cx = start; cx <= radius; cx++) {
 				int cx2 = cx * cx;
 				POS.setX(pos.getX() + cx);
-				for (int cz = start+(cx%2); cz <= radius; cz+=2) {
+				for (int cz = start; cz <= radius; cz++) {
 					int cz2 = cz * cz;
 					if (cx2 + cy2_out + cz2 < r2 && cx2 + cy2_in + cz2 > r2) {
 						POS.setZ(pos.getZ() + cz);
@@ -222,19 +222,21 @@ public class StructureAnchorTreeBranch implements IStructure {
 							int length = BlocksHelper.downRay(world, POS, 17);
 							if (length < 5) {
 								BlocksHelper.setWithoutUpdate(world, POS, leaves);
-								//BlocksHelper.createLogIfFree(world, POS, log, directions, mutableBlockPos);
 								continue;
 							} ;
-							if (length > 15) length = MHelper.randRange(12, 15, random);
-							else if (length > 12) length = MHelper.randRange(12, length, random);
-							for (int i = 1; i < length - 2; i++) {
-								BlocksHelper.setWithoutUpdate(world, POS.below(i), vine);
+							if (length > 15) length = MHelper.randRange(10, 15, random);
+							else if (length > 10) length = MHelper.randRange(10, length, random);
+							if (cz%2 == cx%2) {
+								length/=3;
 							}
-							BlocksHelper.setWithoutUpdate(world, POS.below(length - 2), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
-							BlocksHelper.setWithoutUpdate(world, POS.below(length - 1), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
+							if (length>4) {
+								for (int i = 1; i < length - 2; i++) {
+									BlocksHelper.setWithoutUpdate(world, POS.below(i), vine);
+								}
+								BlocksHelper.setWithoutUpdate(world, POS.below(length - 2), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
+								BlocksHelper.setWithoutUpdate(world, POS.below(length - 1), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
+							}
 							BlocksHelper.setWithoutUpdate(world, POS, leaves);
-							
-							//BlocksHelper.createLogIfFree(world, POS, log, directions, mutableBlockPos);
 						}
 					}
 				}
