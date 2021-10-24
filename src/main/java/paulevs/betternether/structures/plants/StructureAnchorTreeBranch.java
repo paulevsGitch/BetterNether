@@ -16,6 +16,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import paulevs.betternether.BlocksHelper;
@@ -49,6 +50,8 @@ public class StructureAnchorTreeBranch implements IStructure {
 		int maxCount = scale < 0.75 ? 5 : 7;
 		int count = MHelper.randRange(minCount, maxCount, random);
 		MutableBlockPos mutableBlockPos = new MutableBlockPos();
+		final BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState();
+		final Direction[] directions = { Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.DOWN, Direction.UP};
 		
 		for (int n = 0; n < count; n++) {
 			float branchSize = MHelper.randRange(0.5F, 0.8F, random) * scale;
@@ -117,13 +120,56 @@ public class StructureAnchorTreeBranch implements IStructure {
 				iterator.remove();
 		}
 
+		
 		for (BlockPos bpos : POINTS) {
 			if (POINTS.contains(bpos.above()) && POINTS.contains(bpos.below()))
 				state = NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState();
 			else
 				state = NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState();
+			
 			BlocksHelper.setWithUpdate(world, bpos, state);
 			
+			boolean hasLeavesOnLevel = false;
+			for (Direction d : directions){
+				//do not fill down on the stem
+				if (!hasLeavesOnLevel && d == Direction.DOWN) continue;
+				int max = 0;
+				
+				//find the last leave in the current direction within reach
+				for (int i=1; i<= LeavesBlock.DECAY_DISTANCE; i++){
+					mutableBlockPos.setWithOffset(bpos, d.getStepX()*i, d.getStepY()*i, d.getStepZ()*i);
+					BlockState currentState = world.getBlockState(mutableBlockPos);
+					if (currentState.hasProperty(BlockStateProperties.DISTANCE) ) {
+						max=i;
+					}
+				}
+				
+				//check if this y-level has any leaves
+				if (d!=Direction.DOWN && d!=Direction.UP) {
+					hasLeavesOnLevel |= max > 0;
+				}
+				
+				//fill any airpockets/veins with leaves
+				for (int i=1; i< max; i++){
+					mutableBlockPos.setWithOffset(bpos, d.getStepX()*i, d.getStepY()*i, d.getStepZ()*i);
+					BlockState currentState = world.getBlockState(mutableBlockPos);
+					if (currentState.is(NetherBlocks.ANCHOR_TREE_VINE) || currentState.is(Blocks.AIR) ) {
+						BlocksHelper.setWithUpdate(world, mutableBlockPos, leaves);
+						//BlocksHelper.setWithoutUpdate(world, mutableBlockPos, Blocks.WHITE_CONCRETE.defaultBlockState());
+						
+						//replace upward veins with leaves
+						BlockPos vpos = mutableBlockPos.above();
+						currentState = world.getBlockState(vpos);
+						
+						while (currentState.is(NetherBlocks.ANCHOR_TREE_VINE)) {
+							BlocksHelper.setWithoutUpdate(world, vpos, leaves);
+							//BlocksHelper.setWithoutUpdate(world, vpos, Blocks.YELLOW_WOOL.defaultBlockState());
+							vpos = vpos.above();
+							currentState = world.getBlockState(vpos);
+						}
+					}
+				}
+			}
 			updateSDFFrom(bpos);
 		}
 
@@ -171,12 +217,14 @@ public class StructureAnchorTreeBranch implements IStructure {
 				
 				if (cDist>=7){
 					BlocksHelper.setWithoutUpdate(world, logPos, Blocks.AIR.defaultBlockState());
+					//BlocksHelper.setWithoutUpdate(world, logPos, Blocks.ORANGE_WOOL.defaultBlockState());
 					
 					BlockPos pos = logPos.below();
 					currentState = world.getBlockState(pos);
 					
 					while (currentState.is(NetherBlocks.ANCHOR_TREE_VINE)) {
 						BlocksHelper.setWithoutUpdate(world, pos, Blocks.AIR.defaultBlockState());
+						//BlocksHelper.setWithoutUpdate(world, pos, Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState());
 						pos = pos.below();
 						currentState = world.getBlockState(pos);
 					}

@@ -21,7 +21,6 @@ import paulevs.betternether.blocks.BNBoneBlock;
 import paulevs.betternether.blocks.BNBrewingStand;
 import paulevs.betternether.blocks.BNChain;
 import paulevs.betternether.blocks.BNGlass;
-import paulevs.betternether.blocks.BNLeaves;
 import paulevs.betternether.blocks.BNNetherBrick;
 import paulevs.betternether.blocks.BNNormalChair;
 import paulevs.betternether.blocks.BNObsidian;
@@ -164,7 +163,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Anchor Tree
 	public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
-	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BNLeaves(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
+	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BaseLeavesBlock(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
 	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
 	
 	
