@@ -478,6 +478,11 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return BLOCKS_REGISTRY;
 	}
 	
+	@Override
+	public ResourceLocation createModId(String name) {
+		return BetterNether.makeID(name);
+	}
+	
 	public static List<Block> getModBlocks() {
 		return getModBlocks(BetterNether.MOD_ID).stream()
 												.filter(BlockItem.class::isInstance)

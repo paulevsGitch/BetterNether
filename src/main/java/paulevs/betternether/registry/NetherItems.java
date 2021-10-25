@@ -151,7 +151,8 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	
 	public static Item registerItem(String name, Item item, Tag.Named<Item>... tags) {
 		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
-			item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
+			getItemRegistry().register(name, item);
+			//item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
 			if (tags.length>0)
 				TagAPI.addTags(item, tags);
 			
