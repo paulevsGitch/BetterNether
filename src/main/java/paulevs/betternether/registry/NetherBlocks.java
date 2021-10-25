@@ -102,6 +102,7 @@ import paulevs.betternether.blocks.BlockWhisperingGourd;
 import paulevs.betternether.blocks.BlockWhisperingGourdLantern;
 import paulevs.betternether.blocks.BlockWhisperingGourdVine;
 import paulevs.betternether.blocks.BlockWillowLeaves;
+import paulevs.betternether.blocks.RedstoneOreBlock;
 import paulevs.betternether.blocks.complex.AnchorTreeMaterial;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
 import paulevs.betternether.blocks.complex.MushroomFirMaterial;
@@ -201,7 +202,10 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK);
 	public static final Block NETHER_RUBY_SLAB = registerSlab("nether_ruby_slab", NETHER_RUBY_BLOCK);
 	
+	// Vanilla Ores
 	public static final Block NETHER_LAPIS_ORE = registerBlock("nether_lapis_ore", new BlockOre(NetherItems.LAPIS_PILE, 3, 6, 3));
+	public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", new RedstoneOreBlock());
+	
 	
 	// Bricks //
 	public static final Block NETHER_BRICK_TILE_LARGE = registerBlock("nether_brick_tile_large", new BNNetherBrick());
