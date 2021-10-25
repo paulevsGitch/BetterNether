@@ -3,12 +3,8 @@ package paulevs.betternether.blocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,19 +12,15 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import ru.bclib.blocks.BaseOreBlock;
 import ru.bclib.interfaces.BlockModelProvider;
-import ru.bclib.util.MHelper;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
 public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProvider {
 	private final int minCount;
 	private final int maxCount;
-	
 	public RedstoneOreBlock() {
 		super(
 			FabricBlockSettings.of(Material.STONE, MaterialColor.COLOR_RED)
