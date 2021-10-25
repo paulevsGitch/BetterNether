@@ -6,6 +6,7 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.ShearsDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
@@ -46,7 +47,9 @@ import paulevs.betternether.items.ItemBlackApple;
 import paulevs.betternether.items.ItemBowlFood;
 import paulevs.betternether.items.materials.BNItemMaterials;
 import paulevs.betternether.tab.CreativeTabs;
+import ru.bclib.BCLib;
 import ru.bclib.api.TagAPI;
+import ru.bclib.items.tool.BaseShearsItem;
 
 public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	private static final List<String> ITEMS = new ArrayList<String>();
@@ -74,7 +77,7 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	public static final Item CINCINNASITE_SHOVEL_DIAMOND = registerItem("cincinnasite_shovel_diamond", new BNItemShovel(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
 	public static final Item CINCINNASITE_HOE = registerItem("cincinnasite_hoe", new BNItemHoe(BNItemMaterials.CINCINNASITE_TOOLS, 512, 1F));
 	public static final Item CINCINNASITE_HOE_DIAMOND = registerItem("cincinnasite_hoe_diamond", new BNItemHoe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
-	public static final Item CINCINNASITE_SHEARS = registerItem("cincinnasite_shears", new ShearsItem(defaultSettings().durability(380)));
+	public static final Item CINCINNASITE_SHEARS = registerShears("cincinnasite_shears", new BaseShearsItem(defaultSettings().durability(380)));
 
 	public static final Item CINCINNASITE_HELMET = registerItem("cincinnasite_helmet", new BNArmor(BNItemMaterials.CINCINNASITE_ARMOR, EquipmentSlot.HEAD));
 	public static final Item CINCINNASITE_CHESTPLATE = registerItem("cincinnasite_chestplate", new BNArmor(BNItemMaterials.CINCINNASITE_ARMOR, EquipmentSlot.CHEST));
@@ -128,11 +131,23 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 		}
 		return ITEMS_REGISTRY;
 	}
-
+	
+	@Override
+	public ResourceLocation createModId(String name) {
+		return BetterNether.makeID(name);
+	}
+	
 	public static List<Item> getModItems() {
 		return getModItems(BetterNether.MOD_ID);
 	}
 	
+	public static Item registerShears(String name, Item item){
+		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
+			return getItemRegistry().registerTool(name, item);
+		}
+		
+		return item;
+	}
 	
 	public static Item registerItem(String name, Item item, Tag.Named<Item>... tags) {
 		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
