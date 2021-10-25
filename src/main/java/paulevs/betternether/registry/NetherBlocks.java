@@ -137,8 +137,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
-	private static final List<String> BLOCKS = new ArrayList<String>();
-	
 	// Stalagnate //
 	public static final StalagnateMaterial MAT_STALAGNATE = new StalagnateMaterial().init();
 	
@@ -494,26 +492,17 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 		}
-		BLOCKS.add(name);
 		return block;
 	}
 	
-	public static Block registerBlockNI(String name, Block block) {
-		//		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-		//			Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
-		//		}
-		//		BLOCKS.add(name);
-		//		return block;
-		return registerBlock(name, block, false);
+	private static Block registerBlockNI(String name, Block block) {
+		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
+			return registerBlock(name, block, false);
+		}
+		return block;
 	}
 	
 	private static Block registerBlockDirectly(String name, Block block) {
-		//		Registry.register(Registry.BLOCK, new ResourceLocation(BetterNether.MOD_ID, name), block);
-		//		Item.Properties settings = new Item.Properties().tab(CreativeTabs.BN_TAB);
-		//		if (block instanceof BNSign) {
-		//			settings.stacksTo(16);
-		//		}
-		//		NetherItems.registerItem(name, new BlockItem(block, settings));
 		return registerBlock(name, block, true);
 	}
 	
@@ -544,7 +533,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, stairs);
 			RecipesHelper.makeStairsRecipe(source, stairs);
 		}
-		BLOCKS.add(name);
 		return stairs;
 	}
 	
@@ -555,7 +543,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, slab);
 			RecipesHelper.makeSlabRecipe(source, slab);
 		}
-		BLOCKS.add(name);
 		return slab;
 	}
 	
@@ -566,7 +553,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, roof);
 			RecipesHelper.makeRoofRecipe(source, roof);
 		}
-		BLOCKS.add(name);
 		return roof;
 	}
 	
@@ -577,7 +563,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, button);
 			RecipesHelper.makeButtonRecipe(source, button);
 		}
-		BLOCKS.add(name);
 		return button;
 	}
 	
@@ -588,7 +573,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
-		BLOCKS.add(name);
 		return plate;
 	}
 	
@@ -599,7 +583,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, plate);
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
-		BLOCKS.add(name);
 		return plate;
 	}
 	
@@ -610,7 +593,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 				RecipesHelper.makeSimpleRecipe2(source, result, 4, group);
 			}
 		}
-		BLOCKS.add(name);
 		return result;
 	}
 	
@@ -620,7 +602,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			registerBlockDirectly(name, wall);
 			RecipesHelper.makeWallRecipe(source, wall);
 		}
-		BLOCKS.add(name);
 		return wall;
 	}
 	
@@ -628,8 +609,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		Block block = new BaseCraftingTableBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
-			TagAPI.addTags(block, BlockTags.SIGNS);
-			TagAPI.addTags(block, ItemTags.SIGNS);
+			TagAPI.addTags(block, TagAPI.BLOCK_WORKBENCHES);
+			TagAPI.addTags(block, TagAPI.ITEM_WORKBENCHES);
 			//RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
 					  .checkConfig(Configs.RECIPES)
@@ -641,7 +622,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			FlammableBlockRegistry.getDefaultInstance()
 								  .add(block, 5, 20);
 		}
-		BLOCKS.add(name);
+		
 		return block;
 	}
 	
@@ -663,7 +644,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			FlammableBlockRegistry.getDefaultInstance()
 								  .add(chest, 5, 20);
 		}
-		BLOCKS.add(name);
+		
 		return chest;
 	}
 	
@@ -684,7 +665,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			FlammableBlockRegistry.getDefaultInstance()
 								  .add(block, 5, 20);
 		}
-		BLOCKS.add(name);
+		
 		return block;
 	}
 	
@@ -708,7 +689,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			FlammableBlockRegistry.getDefaultInstance()
 								  .add(block, 5, 20);
 		}
-		BLOCKS.add(name);
+		
 		return block;
 	}
 	
@@ -719,7 +700,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, block);
 			RecipesHelper.makeTaburetRecipe(source, block);
 		}
-		BLOCKS.add(name);
+		
 		return block;
 	}
 	
@@ -730,7 +711,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, block);
 			RecipesHelper.makeChairRecipe(source, block);
 		}
-		BLOCKS.add(name);
+		
 		return block;
 	}
 	
@@ -741,7 +722,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			addFuel(source, block);
 			RecipesHelper.makeBarStoolRecipe(source, block);
 		}
-		BLOCKS.add(name);
+		
 		return block;
 	}
 	
@@ -751,7 +732,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeRoundRecipe(source, block, "nether_furnace");
 		}
-		BLOCKS.add(name);
+		
 		return block;
 	}
 	
@@ -761,7 +742,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			registerBlockDirectly(name, block);
 			RecipesHelper.makeSimpleRecipe2(block, source, 1, "nether_stalactite");
 		}
-		BLOCKS.add(name);
+		
 		return block;
 	}
 	
@@ -773,11 +754,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 				RecipesHelper.makeFireBowlRecipe(source, inside, leg, block);
 			}
 		}
-		BLOCKS.add(name);
+		
 		return block;
-	}
-	
-	public static List<String> getPossibleBlocks() {
-		return BLOCKS;
 	}
 }
