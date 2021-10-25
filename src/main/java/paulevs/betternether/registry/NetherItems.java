@@ -7,6 +7,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -44,6 +46,7 @@ import paulevs.betternether.items.ItemBlackApple;
 import paulevs.betternether.items.ItemBowlFood;
 import paulevs.betternether.items.materials.BNItemMaterials;
 import paulevs.betternether.tab.CreativeTabs;
+import ru.bclib.api.TagAPI;
 
 public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	private static final List<String> ITEMS = new ArrayList<String>();
@@ -61,7 +64,7 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	public static final Item HOOK_MUSHROOM = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
 	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
-	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()));
+	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()), TagAPI.ITEM_IRON_INGOTS);
 
 	public static final Item CINCINNASITE_PICKAXE = registerItem("cincinnasite_pickaxe", new BNItemPickaxe(BNItemMaterials.CINCINNASITE_TOOLS, 512, 1F));
 	public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerItem("cincinnasite_pickaxe_diamond", new BNItemPickaxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 2048, 1.5F));
@@ -129,10 +132,14 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	public static List<Item> getModItems() {
 		return getModItems(BetterNether.MOD_ID);
 	}
-
-	public static Item registerItem(String name, Item item) {
+	
+	
+	public static Item registerItem(String name, Item item, Tag.Named<Item>... tags) {
 		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
-			Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
+			item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
+			if (tags.length>0)
+				TagAPI.addTags(item, tags);
+			
 			if (item instanceof BlockItem)
 				MOD_BLOCKS.add(item);
 			else
