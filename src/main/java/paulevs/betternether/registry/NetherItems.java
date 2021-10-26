@@ -115,7 +115,7 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	public static final Item HERBAL_MEDICINE = registerMedicine("herbal_medicine", 10, 5, true);
 
 	protected NetherItems(CreativeModeTab creativeTab) {
-		super(creativeTab);
+		super(creativeTab, Configs.ITEMS);
 	}
 
 	private static ru.bclib.registry.ItemRegistry ITEMS_REGISTRY;
@@ -127,18 +127,13 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 		return ITEMS_REGISTRY;
 	}
 	
-	@Override
-	public ResourceLocation createModId(String name) {
-		return BetterNether.makeID(name);
-	}
-	
 	public static List<Item> getModItems() {
 		return getModItems(BetterNether.MOD_ID);
 	}
 	
 	public static Item registerShears(String name, Item item){
 		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
-			return getItemRegistry().registerTool(name, item);
+			return getItemRegistry().registerTool(BetterNether.makeID(name), item);
 		}
 		
 		return item;
@@ -146,7 +141,7 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	
 	public static Item registerItem(String name, Item item, Tag.Named<Item>... tags) {
 		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
-			getItemRegistry().register(name, item);
+			getItemRegistry().register(BetterNether.makeID(name), item);
 			//item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
 			if (tags.length>0)
 				TagAPI.addTags(item, tags);

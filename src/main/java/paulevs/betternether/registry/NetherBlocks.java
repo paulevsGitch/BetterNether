@@ -464,7 +464,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	
 	protected NetherBlocks(CreativeModeTab creativeTab) {
-		super(creativeTab);
+		super(creativeTab, Configs.BLOCKS);
 	}
 	
 	private static ru.bclib.registry.BlockRegistry BLOCKS_REGISTRY;
@@ -475,11 +475,6 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			BLOCKS_REGISTRY = new NetherBlocks(CreativeTabs.BN_TAB);
 		}
 		return BLOCKS_REGISTRY;
-	}
-	
-	@Override
-	public ResourceLocation createModId(String name) {
-		return BetterNether.makeID(name);
 	}
 	
 	public static List<Block> getModBlocks() {
