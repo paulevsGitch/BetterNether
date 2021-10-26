@@ -4,6 +4,7 @@ import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
@@ -31,7 +32,9 @@ public class CrimsonGlowingWoods extends NetherBiome {
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setParticles(ParticleTypes.CRIMSON_SPORE, 0.025F)
 				.setGenChance(0.3F)
+				.addMobSpawn(EntityType.HOGLIN, 9, 1, 2)
 				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
+				
 		addStructure("crimson_glowing_tree", new StructureCrimsonGlowingTree(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.05F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.02F, true);
