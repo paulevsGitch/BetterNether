@@ -1,15 +1,15 @@
 package paulevs.betternether.items;
 
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.registry.NetherItems;
+import ru.bclib.items.tool.BaseHoeItem;
 
-public class BNItemHoe extends HoeItem {
+public class NetherHoe extends BaseHoeItem {
 	protected float speed;
 
-	public BNItemHoe(Tier material, int durability, float speed) {
+	public NetherHoe(Tier material, float speed) {
 		super(material, 1, -2.8F, NetherItems.defaultSettings().fireResistant());
 		this.speed = speed;
 	}

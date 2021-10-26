@@ -1,15 +1,15 @@
 package paulevs.betternether.items;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.registry.NetherItems;
+import ru.bclib.items.tool.BaseShovelItem;
 
-public class BNItemShovel extends ShovelItem {
+public class NetherShovel extends BaseShovelItem {
 	protected float speed;
 
-	public BNItemShovel(Tier material, int durability, float speed) {
+	public NetherShovel(Tier material, float speed) {
 		super(material, 1, -2.8F, NetherItems.defaultSettings().fireResistant());
 		this.speed = speed;
 	}
