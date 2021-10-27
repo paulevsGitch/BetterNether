@@ -10,15 +10,15 @@ public class BNToolMaterial implements Tier {
 	private final int level;
 	private final int enchantibility;
 	private final float damage;
-	private final ItemLike reapair;
+	private final ItemLike repair;
 
-	public BNToolMaterial(int durability, float speed, int level, int enchantibility, float damage, ItemLike reapair) {
+	public BNToolMaterial(int durability, float speed, int level, int enchantibility, float damage, ItemLike repair) {
 		this.durability = durability;
 		this.speed = speed;
 		this.level = level;
 		this.enchantibility = enchantibility;
 		this.damage = damage;
-		this.reapair = reapair;
+		this.repair = repair;
 	}
 
 	@Override
@@ -48,6 +48,6 @@ public class BNToolMaterial implements Tier {
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.of(reapair);
+		return Ingredient.of(repair);
 	}
 }
