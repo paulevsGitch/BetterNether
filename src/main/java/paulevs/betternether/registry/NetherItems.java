@@ -64,8 +64,8 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
 	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()), TagAPI.ITEM_IRON_INGOTS);
 
-	public static final Item CINCINNASITE_PICKAXE = registerItem("cincinnasite_pickaxe", new NetherPickaxe(BNItemMaterials.CINCINNASITE_TOOLS, 1F));
-	public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerItem("cincinnasite_pickaxe_diamond", new NetherPickaxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 1.5F));
+	public static final Item CINCINNASITE_PICKAXE = registerItem("cincinnasite_pickaxe", new NetherPickaxe(BNItemMaterials.CINCINNASITE_TOOLS));
+	public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerItem("cincinnasite_pickaxe_diamond", new NetherPickaxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
 	public static final Item CINCINNASITE_AXE = registerItem("cincinnasite_axe", new NetherAxe(BNItemMaterials.CINCINNASITE_TOOLS, 1F));
 	public static final Item CINCINNASITE_AXE_DIAMOND = registerItem("cincinnasite_axe_diamond", new NetherAxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 1.5F));
 	public static final Item CINCINNASITE_SHOVEL = registerItem("cincinnasite_shovel", new NetherShovel(BNItemMaterials.CINCINNASITE_TOOLS, 1F));
@@ -82,7 +82,7 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	public static final Item CINCINNASITE_SWORD_DIAMOND = registerItem("cincinnasite_sword_diamond", new NetherSword(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 3, -2.4F));
 
 	public static final Item NETHER_RUBY = registerItem("nether_ruby", new Item(defaultSettings()));
-	public static final Item NETHER_RUBY_PICKAXE = registerItem("nether_ruby_pickaxe", new NetherPickaxe(BNItemMaterials.NETHER_RUBY_TOOLS, 1F));
+	public static final Item NETHER_RUBY_PICKAXE = registerItem("nether_ruby_pickaxe", new NetherPickaxe(BNItemMaterials.NETHER_RUBY_TOOLS));
 	public static final Item NETHER_RUBY_AXE = registerItem("nether_ruby_axe", new NetherAxe(BNItemMaterials.NETHER_RUBY_TOOLS, 1F));
 	public static final Item NETHER_RUBY_SHOVEL = registerItem("nether_ruby_shovel", new NetherShovel(BNItemMaterials.NETHER_RUBY_TOOLS, 1F));
 	public static final Item NETHER_RUBY_HOE = registerItem("nether_ruby_hoe", new NetherHoe(BNItemMaterials.NETHER_RUBY_TOOLS, 1F));
