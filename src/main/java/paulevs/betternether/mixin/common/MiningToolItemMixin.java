@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.betternether.blocks.BNObsidian;
 import paulevs.betternether.blocks.BlockObsidianGlass;
 import paulevs.betternether.registry.NetherBlocks;
+import ru.bclib.api.TagAPI;
 
 @Mixin(DiggerItem.class)
 public abstract class MiningToolItemMixin extends TieredItem implements Vanishable {
@@ -32,7 +33,7 @@ public abstract class MiningToolItemMixin extends TieredItem implements Vanishab
 			info.setReturnValue(level >= 2);
 			info.cancel();
 		}
-		else if (state.getBlock() instanceof BNObsidian || state.getBlock() instanceof BlockObsidianGlass) {
+		else if (state.is(TagAPI.BLOCK_NETHER_PORTAL_FRAME)) {
 			info.setReturnValue(level >= 3);
 			info.cancel();
 		}
