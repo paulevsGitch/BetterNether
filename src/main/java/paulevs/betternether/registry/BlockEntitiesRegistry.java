@@ -35,8 +35,7 @@ public class BlockEntitiesRegistry {
 
 	private static Block[] getChests() {
 		List<Block> result = new ArrayList<Block>();
-		NetherBlocks.getPossibleBlocks().forEach((name) -> {
-			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
+		NetherBlocks.getModBlocks().forEach((block) -> {
 			if (block instanceof BaseChestBlock)
 				result.add(block);
 		});
@@ -45,8 +44,7 @@ public class BlockEntitiesRegistry {
 
 	private static Block[] getBarrels() {
 		List<Block> result = new ArrayList<Block>();
-		NetherBlocks.getPossibleBlocks().forEach((name) -> {
-			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
+		NetherBlocks.getModBlocks().forEach((block) -> {
 			if (block instanceof BaseBarrelBlock)
 				result.add(block);
 		});
@@ -55,8 +53,7 @@ public class BlockEntitiesRegistry {
 
 	private static Block[] getFurnaces() {
 		List<Block> result = new ArrayList<Block>();
-		NetherBlocks.getPossibleBlocks().forEach((name) -> {
-			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
+		NetherBlocks.getModBlocks().forEach((block) -> {
 			if (block instanceof BlockNetherFurnace)
 				result.add(block);
 		});
