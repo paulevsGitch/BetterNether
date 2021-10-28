@@ -260,7 +260,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// Soul Sandstone //
 	public static final Block SOUL_SANDSTONE = registerBlock("soul_sandstone", new BlockSoulSandstone(), BlockTags.SOUL_SPEED_BLOCKS, BlockTags.SOUL_FIRE_BASE_BLOCKS);
 	public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2Soul("soul_sandstone_cut", new BlockSoulSandstone(), "soul_sandstone", SOUL_SANDSTONE);
-	public static final Block SOUL_SANDSTONE_SMOOTH = registerMakeable2X2Soul("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_CUT);
+	public static final Block SOUL_SANDSTONE_SMOOTH = registerSoulBlock("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)));
 	public static final Block SOUL_SANDSTONE_CHISELED = registerMakeable2X2Soul("soul_sandstone_chiseled", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_SMOOTH);
 	
 	public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs", SOUL_SANDSTONE, BlockTags.SOUL_SPEED_BLOCKS, BlockTags.SOUL_FIRE_BASE_BLOCKS);
@@ -589,6 +589,12 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			RecipesHelper.makePlateRecipe(source, plate);
 		}
 		return plate;
+	}
+
+	public static Block registerSoulBlock(String name, Block result) {
+		Block block = registerBlockDirectly(name, result);
+		TagAPI.addTags(block, BlockTags.SOUL_FIRE_BASE_BLOCKS, BlockTags.SOUL_SPEED_BLOCKS);
+		return block;
 	}
 	
 	public static Block registerMakeable2X2Soul(String name, Block result, String group, Block... sources) {
