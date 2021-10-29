@@ -694,5 +694,9 @@
   "block.betternether.whispering_gourd": "Säuselnde Kalebasse",
   "block.betternether.whispering_gourd_lantern": "Säuselnde Kalebassenlaterne",
 
-  "block.betternether.willow_torch": "Weidenfackel"
+  "block.betternether.willow_torch": "Weidenfackel",
+  
+  "block.betternether.nether_redstone_ore": "Nether Redstone-Erz",
+  "block.betternether.blue_crying_obsidian": "Blauer weinender Obsidian",
+  "block.betternether.blue_weeping_obsidian": "Blauer schluchzender Obsidian"
 }

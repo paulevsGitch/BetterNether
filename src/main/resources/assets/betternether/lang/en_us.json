@@ -694,5 +694,9 @@
 	"block.betternether.whispering_gourd": "Whispering Gourd",
 	"block.betternether.whispering_gourd_lantern": "Whispering Gourd Lantern",
 	
-	"block.betternether.willow_torch": "Willow Torch"
+	"block.betternether.willow_torch": "Willow Torch",
+	
+    "block.betternether.nether_redstone_ore": "Nether Redstone Ore",
+	"block.betternether.blue_crying_obsidian": "Blue Crying Obsidian",
+	"block.betternether.blue_weeping_obsidian": "Blue Weeping Obsidian"
 }
