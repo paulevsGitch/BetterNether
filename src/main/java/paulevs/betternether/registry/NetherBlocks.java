@@ -103,6 +103,7 @@ import paulevs.betternether.blocks.BlockWhisperingGourd;
 import paulevs.betternether.blocks.BlockWhisperingGourdLantern;
 import paulevs.betternether.blocks.BlockWhisperingGourdVine;
 import paulevs.betternether.blocks.BlockWillowLeaves;
+import paulevs.betternether.blocks.BlueCryingObsidianBlock;
 import paulevs.betternether.blocks.RedstoneOreBlock;
 import paulevs.betternether.blocks.complex.AnchorTreeMaterial;
 import paulevs.betternether.blocks.complex.ColoredGlassMaterial;
@@ -256,6 +257,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL);
 	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
+	public static final Block BLUE_CRYING_OBSIDIAN = registerBlock("blue_crying_obsidian", new BlueCryingObsidianBlock());
 	
 	// Soul Sandstone //
 	public static final Block SOUL_SANDSTONE = registerBlock("soul_sandstone", new BlockSoulSandstone(), BlockTags.SOUL_SPEED_BLOCKS, BlockTags.SOUL_FIRE_BASE_BLOCKS);

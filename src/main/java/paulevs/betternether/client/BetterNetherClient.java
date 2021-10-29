@@ -6,12 +6,15 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import paulevs.betternether.blocks.BNRenderLayer;
 import paulevs.betternether.registry.EntityRenderRegistry;
+import paulevs.betternether.registry.NetherParticles;
 
 public class BetterNetherClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		registerRenderLayers();
 		EntityRenderRegistry.register();
+		
+		NetherParticles.register();
 	}
 
 	private void registerRenderLayers() {
