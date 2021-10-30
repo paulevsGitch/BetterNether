@@ -238,28 +238,28 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_PANE_COLORED = new ColoredGlassMaterial("quartz_glass_framed_pane", QUARTZ_GLASS_FRAMED_PANE, true);
 	
 	// Obsidian //
-	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
-	public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs", OBSIDIAN_BRICKS);
-	public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab("obsidian_bricks_slab", OBSIDIAN_BRICKS);
-	public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
-	public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
-	public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs", OBSIDIAN_TILE_SMALL);
-	public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab", OBSIDIAN_TILE_SMALL);
-	public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
+	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
+	public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs", OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE);
+	public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab("obsidian_bricks_slab", OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE);
+	public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
+	public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
+	public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs", OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
+	public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab", OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
+	public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
 	public static final Block OBSIDIAN_GLASS_PANE = registerBlock("obsidian_glass_pane", new BNPane(OBSIDIAN_GLASS, true));
-	public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
-	public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
-	public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs("blue_obsidian_bricks_stairs", BLUE_OBSIDIAN_BRICKS);
-	public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab("blue_obsidian_bricks_slab", BLUE_OBSIDIAN_BRICKS);
-	public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
-	public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
-	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs("blue_obsidian_tile_stairs", BLUE_OBSIDIAN_TILE_SMALL);
-	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL);
-	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME);
+	public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs("blue_obsidian_bricks_stairs", BLUE_OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab("blue_obsidian_bricks_slab", BLUE_OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs("blue_obsidian_tile_stairs", BLUE_OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
-	public static final Block BLUE_CRYING_OBSIDIAN = registerBlock("blue_crying_obsidian", new BlueCryingObsidianBlock());
-	public static final Block BLUE_WEEPING_OBSIDIAN = registerBlock("blue_weeping_obsidian", new BlueWeepingObsidianBlock());
-	public static final Block WEEPING_OBSIDIAN = registerBlock("weeping_obsidian", new VanillaWeepingObsidianBlock());
+	public static final Block BLUE_CRYING_OBSIDIAN = registerBlock("blue_crying_obsidian", new BlueCryingObsidianBlock(), TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_WEEPING_OBSIDIAN = registerBlock("blue_weeping_obsidian", new BlueWeepingObsidianBlock(), TagAPI.BLOCK_IMMOBILE);
+	public static final Block WEEPING_OBSIDIAN = registerBlock("weeping_obsidian", new VanillaWeepingObsidianBlock(), TagAPI.BLOCK_IMMOBILE);
 	
 	// Soul Sandstone //
 	public static final Block SOUL_SANDSTONE = registerBlock("soul_sandstone", new BlockSoulSandstone(), BlockTags.SOUL_SPEED_BLOCKS, BlockTags.SOUL_FIRE_BASE_BLOCKS);
