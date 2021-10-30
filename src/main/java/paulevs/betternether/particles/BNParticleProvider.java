@@ -50,6 +50,8 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
 	private static final float BLUE_DRIP_R =  0x12/255.0f;
 	private static final float BLUE_DRIP_G =  0x5a/255.0f;
 	private static final float BLUE_DRIP_B =  0xf9/255.0f;
+	
+	
 	@Environment(EnvType.CLIENT)
 	public static class ObsidianTearLandProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
 		protected final SpriteSet sprite;
@@ -67,22 +69,7 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
 		}
 	}
 	
-	@Environment(EnvType.CLIENT)
-	public static class ObsidianWeepLandProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
-		protected final SpriteSet sprite;
-		
-		public ObsidianWeepLandProvider(SpriteSet spriteSet) {
-			this.sprite = spriteSet;
-		}
-		
-		public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
-			BNDripLandParticle dripParticle = new BNDripLandParticle(clientLevel, d, e, f, Fluids.EMPTY);
-			dripParticle.setup(true, (int)(Math.random() * 10) + 1);
-			dripParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
-			dripParticle.pickSprite(this.sprite);
-			return dripParticle;
-		}
-	}
+	
 	
 	@Environment(EnvType.CLIENT)
 	public static class ObsidianTearFallProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
@@ -94,23 +81,6 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
 		
 		public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
 			BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(clientLevel, d, e, f, Fluids.EMPTY, NetherParticles.BLUE_LANDING_OBSIDIAN_TEAR);
-			dripParticle.setup(true, 0.01F);
-			dripParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
-			dripParticle.pickSprite(this.sprite);
-			return dripParticle;
-		}
-	}
-	
-	@Environment(EnvType.CLIENT)
-	public static class ObsidianWeepFallProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
-		protected final SpriteSet sprite;
-		
-		public ObsidianWeepFallProvider(SpriteSet spriteSet) {
-			this.sprite = spriteSet;
-		}
-		
-		public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
-			BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(clientLevel, d, e, f, Fluids.EMPTY, NetherParticles.BLUE_LANDING_OBSIDIAN_WEEP);
 			dripParticle.setup(true, 0.01F);
 			dripParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
 			dripParticle.pickSprite(this.sprite);
@@ -135,6 +105,44 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
 		}
 	}
 	
+	
+	
+	
+	
+	@Environment(EnvType.CLIENT)
+	public static class ObsidianWeepLandProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
+		protected final SpriteSet sprite;
+		
+		public ObsidianWeepLandProvider(SpriteSet spriteSet) {
+			this.sprite = spriteSet;
+		}
+		
+		public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
+			BNDripLandParticle dripParticle = new BNDripLandParticle(clientLevel, d, e, f, Fluids.EMPTY);
+			dripParticle.setup(true, (int)(Math.random() * 10) + 1);
+			dripParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
+			dripParticle.pickSprite(this.sprite);
+			return dripParticle;
+		}
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public static class ObsidianWeepFallProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
+		protected final SpriteSet sprite;
+		
+		public ObsidianWeepFallProvider(SpriteSet spriteSet) {
+			this.sprite = spriteSet;
+		}
+		
+		public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
+			BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(clientLevel, d, e, f, Fluids.EMPTY, NetherParticles.BLUE_LANDING_OBSIDIAN_WEEP);
+			dripParticle.setup(true, 0.01F);
+			dripParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
+			dripParticle.pickSprite(this.sprite);
+			return dripParticle;
+		}
+	}
+	
 	@Environment(EnvType.CLIENT)
 	public static class ObsidianWeepHangProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
 		protected final SpriteSet sprite;
@@ -151,4 +159,61 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
 			return dripHangParticle;
 		}
 	}
+	
+	private static final float DRIP_R =  0.51171875F;
+	private static final float DRIP_G =  0.03125F;
+	private static final float DRIP_B =  0.890625F;
+	
+	@Environment(EnvType.CLIENT)
+	public static class ObsidianVanillaWeepLandProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
+		protected final SpriteSet sprite;
+		
+		public ObsidianVanillaWeepLandProvider(SpriteSet spriteSet) {
+			this.sprite = spriteSet;
+		}
+		
+		public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
+			BNDripLandParticle dripParticle = new BNDripLandParticle(clientLevel, d, e, f, Fluids.EMPTY);
+			dripParticle.setup(true, (int)(Math.random() * 10) + 1);
+			dripParticle.setColor(DRIP_R, DRIP_G, DRIP_B);
+			dripParticle.pickSprite(this.sprite);
+			return dripParticle;
+		}
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public static class ObsidianVanillaWeepFallProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
+		protected final SpriteSet sprite;
+		
+		public ObsidianVanillaWeepFallProvider(SpriteSet spriteSet) {
+			this.sprite = spriteSet;
+		}
+		
+		public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
+			BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(clientLevel, d, e, f, Fluids.EMPTY, NetherParticles.LANDING_OBSIDIAN_WEEP);
+			dripParticle.setup(true, 0.01F);
+			dripParticle.setColor(DRIP_R, DRIP_G, DRIP_B);
+			dripParticle.pickSprite(this.sprite);
+			return dripParticle;
+		}
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public static class ObsidianVanillaWeepHangProvider implements net.minecraft.client.particle.ParticleProvider<SimpleParticleType> {
+		protected final SpriteSet sprite;
+		
+		public ObsidianVanillaWeepHangProvider(SpriteSet spriteSet) {
+			this.sprite = spriteSet;
+		}
+		
+		public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
+			BNDripHangParticle dripHangParticle = new BNDripHangParticle(clientLevel, d, e, f, Fluids.EMPTY, NetherParticles.FALLING_OBSIDIAN_WEEP);
+			dripHangParticle.setup(true, 0.01F, 5 + (int)(Math.random()*10));
+			dripHangParticle.setColor(DRIP_R, DRIP_G, DRIP_B);
+			dripHangParticle.pickSprite(this.sprite);
+			return dripHangParticle;
+		}
+	}
+	
+	
 }

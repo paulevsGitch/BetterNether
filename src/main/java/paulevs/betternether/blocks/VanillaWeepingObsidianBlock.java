@@ -14,8 +14,8 @@ import ru.bclib.interfaces.BlockModelProvider;
 
 import java.util.Random;
 
-public class BlueWeepingObsidianBlock extends Block implements BlockModelProvider {
-	public BlueWeepingObsidianBlock() {
+public class VanillaWeepingObsidianBlock extends Block implements BlockModelProvider {
+	public VanillaWeepingObsidianBlock() {
 		super(FabricBlockSettings.copyOf(Blocks.CRYING_OBSIDIAN).luminance(14));
 	}
 	
@@ -29,7 +29,7 @@ public class BlueWeepingObsidianBlock extends Block implements BlockModelProvide
 					double d = direction.getStepX() == 0 ? random.nextDouble() : 0.5D + (double) direction.getStepX() * 0.6D;
 					double e = direction.getStepY() == 0 ? random.nextDouble() : 0.5D + (double) direction.getStepY() * 0.6D;
 					double f = direction.getStepZ() == 0 ? random.nextDouble() : 0.5D + (double) direction.getStepZ() * 0.6D;
-					level.addParticle(NetherParticles.BLUE_DRIPPING_OBSIDIAN_WEEP, (double) blockPos.getX() + d, (double) blockPos.getY() + e, (double) blockPos.getZ() + f, 0.0D, 0.0D, 0.0D);
+					level.addParticle(NetherParticles.DRIPPING_OBSIDIAN_WEEP, (double) blockPos.getX() + d, (double) blockPos.getY() + e, (double) blockPos.getZ() + f, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}

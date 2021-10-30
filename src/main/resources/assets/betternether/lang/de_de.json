@@ -697,6 +697,7 @@
   "block.betternether.willow_torch": "Weidenfackel",
   
   "block.betternether.nether_redstone_ore": "Nether Redstone-Erz",
-  "block.betternether.blue_crying_obsidian": "Blauer weinender Obsidian",
-  "block.betternether.blue_weeping_obsidian": "Blauer schluchzender Obsidian"
+  "block.betternether.blue_crying_obsidian": "Blauer Weinender Obsidian",
+  "block.betternether.blue_weeping_obsidian": "Blauer Schluchzender Obsidian",
+  "block.betternether.weeping_obsidian": "Schluchzender Obsidian"
 }
