@@ -26,7 +26,8 @@
       "RecipeManagerAccessor",
       "RecipeManagerMixin",
       "ServerWorldMixin",
-      "SpawnRestrictionMixin"
+      "SpawnRestrictionMixin",
+		"BlockAgeProcessorMixin"
     ],
 	"injectors": {
 		"defaultRequire": 1
