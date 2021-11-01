@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import paulevs.betternether.commands.CommandRegistry;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.loot.BNLoot;
 import paulevs.betternether.recipes.IntegrationRecipes;
 import paulevs.betternether.recipes.ItemRecipes;
 import paulevs.betternether.registry.BiomesRegistry;
@@ -51,6 +52,7 @@ public class BetterNether implements ModInitializer {
 		NetherTags.register();
 		ItemRecipes.register();
 		NetherBiomeSource.register();
+		BNLoot.register();
 		
 		Configs.saveConfigs();
 		WorldDataAPI.registerModCache(MOD_ID);
