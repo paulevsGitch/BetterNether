@@ -10,14 +10,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherParticles;
 import ru.bclib.interfaces.BlockModelProvider;
 
 import java.util.Random;
 
-public class BlueCryingObsidianBlock extends Block implements BlockModelProvider {
+public class BlueCryingObsidianBlock extends BNObsidian  {
 	public BlueCryingObsidianBlock() {
-		super(FabricBlockSettings.copyOf(Blocks.CRYING_OBSIDIAN));
+		super(FabricBlockSettings.copyOf(Blocks.CRYING_OBSIDIAN), NetherBlocks.BLUE_WEEPING_OBSIDIAN);
 	}
 	
 	public void animateTick(BlockState blockState, Level level, BlockPos blockPos, Random random) {
@@ -34,10 +35,5 @@ public class BlueCryingObsidianBlock extends Block implements BlockModelProvider
 				}
 			}
 		}
-	}
-	
-	@Override
-	public BlockModel getItemModel(ResourceLocation resourceLocation) {
-		return getBlockModel(resourceLocation, defaultBlockState());
 	}
 }

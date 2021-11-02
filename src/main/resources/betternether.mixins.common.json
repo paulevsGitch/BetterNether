@@ -28,7 +28,8 @@
       "ServerWorldMixin",
       "SpawnRestrictionMixin",
 	  "BlockAgeProcessorMixin",
-	  "LiquidBlockMixin"
+	  "LiquidBlockMixin",
+      "LightningRodBlockMixin"
     ],
 	"injectors": {
 		"defaultRequire": 1

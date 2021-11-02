@@ -14,9 +14,9 @@ import ru.bclib.interfaces.BlockModelProvider;
 
 import java.util.Random;
 
-public class BlueWeepingObsidianBlock extends Block implements BlockModelProvider {
+public class BlueWeepingObsidianBlock extends BNObsidian {
 	public BlueWeepingObsidianBlock() {
-		super(FabricBlockSettings.copyOf(Blocks.CRYING_OBSIDIAN).luminance(14));
+		super(FabricBlockSettings.copyOf(Blocks.CRYING_OBSIDIAN).luminance(14), null);
 	}
 	
 	public void animateTick(BlockState blockState, Level level, BlockPos blockPos, Random random) {
@@ -33,10 +33,5 @@ public class BlueWeepingObsidianBlock extends Block implements BlockModelProvide
 				}
 			}
 		}
-	}
-	
-	@Override
-	public BlockModel getItemModel(ResourceLocation resourceLocation) {
-		return getBlockModel(resourceLocation, defaultBlockState());
 	}
 }
