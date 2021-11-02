@@ -709,6 +709,14 @@
     "advancements.betternether.ruby_ore.title":"Ruby Ore",
     "advancements.betternether.ruby_ore.description":"Obtain Ruby Ore in the Nether",
     "advancements.betternether.make_crying.title":"Make 'em Cry",
-    "advancements.betternether.make_crying.description":"Use a Lightning-Rod to create all types of crying and weeping obsidian."
+    "advancements.betternether.make_crying.description":"Use a Lightning-Rod to create all types of crying and weeping obsidian.",
+    "advancements.betternether.obsidian_blocks.title":"Obsidian Masterbuilder",
+    "advancements.betternether.obsidian_blocks.description":"Manufacture all Obsidian Variants",
+    "advancements.betternether.nether_wood.title":"Into the Woods",
+    "advancements.betternether.nether_wood.description":"Gather all Nether Wood Types",
+    "advancements.betternether.ruby_gear.title":"Covered in Flames",
+    "advancements.betternether.ruby_gear.description":"Cover yourself in flaming red ruby gear",
+    "advancements.betternether.ruby_tools.title":"Red Nether",
+    "advancements.betternether.ruby_tools.description":"Use some ruby tools from the depth of the Nether"
     
 }  
