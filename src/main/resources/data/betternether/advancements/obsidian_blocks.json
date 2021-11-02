@@ -19,81 +19,81 @@
         "made_brick": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
-                "item": {
+                "items": [{
                     "items": [
                         "betternether:obsidian_bricks"
                     ]
-                }
+                }]
             }
         },
         "made_blue_brick": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
-                "item": {
+                "items": [{
                     "items": [
                         "betternether:blue_obsidian_bricks"
                     ]
-                }
+                }]
             }
         },       
         "made_tile": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
-                "item": {
+                "items": [{
                     "items": [
                         "betternether:obsidian_tile"
                     ]
-                }
+                }]
             }
         },
         "made_blue_tile": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
-                "item": {
+                "items": [{
                     "items": [
                         "betternether:blue_obsidian_tile"
                     ]
-                }
+                }]
             }
         },       
         "made_tile_small": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
-                "item": {
+                "items": [{
                     "items": [
                         "betternether:obsidian_tile_small"
                     ]
-                }
+                }]
             }
         },
         "made_blue_tile_small": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
-                "item": {
+                "items": [{
                     "items": [
                         "betternether:blue_obsidian_tile_small"
                     ]
-                }
+                }]
             }
         },       
         "made_rod_tiles": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
-                "item": {
+                "items": [{
                     "items": [
                         "betternether:obsidian_rod_tiles"
                     ]
-                }
+                }]
             }
         },
         "made_blue_rod_tiles": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
-                "item": {
+                "items": [{
                     "items": [
                         "betternether:blue_obsidian_rod_tiles"
                     ]
-                }
+                }]
             }
         }
     },

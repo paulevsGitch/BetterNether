@@ -123,7 +123,7 @@
                     "items": [
                         "minecraft:crimson_planks",
                         "minecraft:crimson_stem",
-                        "minecraft:stripped_crimson_stem"                        
+                        "minecraft:crimson_hyphae"                       
                     ]
                 }]
             }
@@ -135,7 +135,19 @@
                     "items": [
                         "minecraft:warped_planks",
                         "minecraft:warped_stem",
-                        "minecraft:stripped_warped_stem"                        
+                        "minecraft:warped_hyphae"                              
+                    ]
+                }]
+            }
+        },
+        "anchor_tree": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:anchor_tree_log",
+                        "betternether:anchor_tree_bark",
+                        "betternether:anchor_tree_planks"                       
                     ]
                 }]
             }
@@ -151,6 +163,7 @@
         ["nether_mushroom"],
         ["nether_sakura"],
         ["crimson"],
-        ["warped"]        
+        ["warped"],
+        ["anchor_tree"]        
     ]
 }
