@@ -75,6 +75,26 @@
                     ]
                 }
             }
+        },       
+        "made_rod_tiles": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "betternether:obsidian_rod_tiles"
+                    ]
+                }
+            }
+        },
+        "made_blue_rod_tiles": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "betternether:blue_obsidian_rod_tiles"
+                    ]
+                }
+            }
         }
     },
     "requirements": [
@@ -83,6 +103,8 @@
         ["made_tile"],
         ["made_blue_tile"],
         ["made_tile_small"],
-        ["made_blue_tile_small"]
+        ["made_blue_tile_small"],
+        ["made_rod_tiles"],
+        ["made_blue_rod_tiles"]
     ]
 }

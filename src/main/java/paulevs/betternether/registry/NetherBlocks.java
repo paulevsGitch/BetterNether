@@ -249,6 +249,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
 	public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs", OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
 	public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab", OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
+	public static final Block OBSIDIAN_ROD_TILES = registerBlock("obsidian_rod_tiles", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
 	public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
 	public static final Block OBSIDIAN_GLASS_PANE = registerBlock("obsidian_glass_pane", new BNPane(OBSIDIAN_GLASS, true));
 	public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian(BLUE_CRYING_OBSIDIAN), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
@@ -259,6 +260,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
 	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs("blue_obsidian_tile_stairs", BLUE_OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
 	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlock("blue_obsidian_rod_tiles", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
 	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
 	

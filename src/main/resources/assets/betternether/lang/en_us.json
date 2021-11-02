@@ -700,6 +700,8 @@
 	"block.betternether.blue_crying_obsidian": "Blue Crying Obsidian",
 	"block.betternether.blue_weeping_obsidian": "Blue Weeping Obsidian",
 	"block.betternether.weeping_obsidian": " Weeping Obsidian",
+    "block.betternether.blue_obsidian_rod_tiles": "Thin Blue Obsidian Tile",
+    "block.betternether.obsidian_rod_tiles": "Thin Obsidian Tile",
     "itemGroup.betternether.nether_blocks":"BetterNether Blocks",
     "itemGroup.betternether.nether_items":"BetterNether Items",
     "advancements.betternether.root.title": "BetterNether",
