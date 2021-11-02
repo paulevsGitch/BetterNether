@@ -707,5 +707,7 @@
   "advancements.betternether.blue_obsidian.title": "Blauer Funkel",
   "advancements.betternether.blue_obsidian.description": "Erschaffe blauen Obsidian indem du Lava über Seelensand oder Seelenstein in Obsidian umwandelst",
   "advancements.betternether.ruby_ore.title":"Rubinerz",
- "advancements.betternether.ruby_ore.description":"Finde im Nether Rubinerz"
+ "advancements.betternether.ruby_ore.description":"Finde im Nether Rubinerz",
+ "advancements.betternether.make_crying.title":"Las' sie weinen",
+ "advancements.betternether.make_crying.description":"Verwende einen Blitzableiter um alle weinenden und schluchzenden Varianten von Obsidian herzustellen."
 }

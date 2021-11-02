@@ -707,6 +707,8 @@
     "advancements.betternether.blue_obsidian.title": "Something Blue",
     "advancements.betternether.blue_obsidian.description": "Obtain blue Obsidian by converting Lava above Soulsand or Soulstone to Obsidian",
     "advancements.betternether.ruby_ore.title":"Ruby Ore",
-    "advancements.betternether.ruby_ore.description":"Obtain Ruby Ore in the Nether"
+    "advancements.betternether.ruby_ore.description":"Obtain Ruby Ore in the Nether",
+    "advancements.betternether.make_crying.title":"Make 'em Cry",
+    "advancements.betternether.make_crying.description":"Use a Lightning-Rod to create all types of crying and weeping obsidian."
     
 }  
