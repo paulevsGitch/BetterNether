@@ -4,7 +4,10 @@ import net.fabricmc.fabric.api.loot.v1.FabricLootPool;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback.LootTableSetter;
+import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
 import net.fabricmc.fabric.mixin.loot.table.LootSupplierBuilderHooks;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.critereon.LocationTrigger;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -95,14 +98,14 @@ public class BNLoot {
 						pools.set(0, newPool);
 						
 					}
-					System.out.println(" + " + id);
+					//System.out.println(" + " + id);
 				}
 				catch (Throwable t) {
 					BetterNether.LOGGER.error("ERROR building bartering table: " + t.getMessage());
 				}
 			}
 			else {
-				System.out.println(" - " + id);
+				//System.out.println(" - " + id);
 			}
 		});
 	}

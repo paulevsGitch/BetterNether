@@ -2,6 +2,7 @@ package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
+import paulevs.betternether.advancements.BNCriterion;
 import paulevs.betternether.commands.CommandRegistry;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
@@ -53,6 +54,7 @@ public class BetterNether implements ModInitializer {
 		ItemRecipes.register();
 		NetherBiomeSource.register();
 		BNLoot.register();
+		BNCriterion.register();
 		
 		Configs.saveConfigs();
 		WorldDataAPI.registerModCache(MOD_ID);

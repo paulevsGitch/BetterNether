@@ -699,5 +699,14 @@
     "block.betternether.nether_redstone_ore": "Nether Redstone Ore",
 	"block.betternether.blue_crying_obsidian": "Blue Crying Obsidian",
 	"block.betternether.blue_weeping_obsidian": "Blue Weeping Obsidian",
-	"block.betternether.weeping_obsidian": " Weeping Obsidian"
-}
+	"block.betternether.weeping_obsidian": " Weeping Obsidian",
+    "itemGroup.betternether.nether_blocks":"BetterNether Blocks",
+    "itemGroup.betternether.nether_items":"BetterNether Items",
+    "advancements.betternether.root.title": "BetterNether",
+    "advancements.betternether.root.decription": "Discover the BetterNether",
+    "advancements.betternether.blue_obsidian.title": "Something Blue",
+    "advancements.betternether.blue_obsidian.description": "Obtain blue Obsidian by converting Lava above Soulsand or Soulstone to Obsidian",
+    "advancements.betternether.ruby_ore.title":"Ruby Ore",
+    "advancements.betternether.ruby_ore.description":"Obtain Ruby Ore in the Nether"
+    
+}  

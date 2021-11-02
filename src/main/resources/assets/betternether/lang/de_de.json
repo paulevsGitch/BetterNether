@@ -699,5 +699,13 @@
   "block.betternether.nether_redstone_ore": "Nether Redstone-Erz",
   "block.betternether.blue_crying_obsidian": "Blauer Weinender Obsidian",
   "block.betternether.blue_weeping_obsidian": "Blauer Schluchzender Obsidian",
-  "block.betternether.weeping_obsidian": "Schluchzender Obsidian"
+  "block.betternether.weeping_obsidian": "Schluchzender Obsidian",
+  "itemGroup.betternether.nether_blocks":"BetterNether Blöcke",
+  "itemGroup.betternether.nether_items":"BetterNether Items",
+  "advancements.betternether.root.title": "BetterNether",
+  "advancements.betternether.root.decription": "Noch mehr Nether",
+  "advancements.betternether.blue_obsidian.title": "Blauer Funkel",
+  "advancements.betternether.blue_obsidian.description": "Erschaffe blauen Obsidian indem du Lava über Seelensand oder Seelenstein in Obsidian umwandelst",
+  "advancements.betternether.ruby_ore.title":"Rubinerz",
+ "advancements.betternether.ruby_ore.description":"Finde im Nether Rubinerz"
 }
