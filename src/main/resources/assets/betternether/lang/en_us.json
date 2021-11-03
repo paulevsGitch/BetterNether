@@ -694,5 +694,31 @@
 	"block.betternether.whispering_gourd": "Whispering Gourd",
 	"block.betternether.whispering_gourd_lantern": "Whispering Gourd Lantern",
 	
-	"block.betternether.willow_torch": "Willow Torch"
-}
+	"block.betternether.willow_torch": "Willow Torch",
+	
+    "block.betternether.nether_redstone_ore": "Nether Redstone Ore",
+	"block.betternether.blue_crying_obsidian": "Blue Crying Obsidian",
+	"block.betternether.blue_weeping_obsidian": "Blue Weeping Obsidian",
+	"block.betternether.weeping_obsidian": " Weeping Obsidian",
+    "block.betternether.blue_obsidian_rod_tiles": "Thin Blue Obsidian Tile",
+    "block.betternether.obsidian_rod_tiles": "Thin Obsidian Tile",
+    "itemGroup.betternether.nether_blocks":"BetterNether Blocks",
+    "itemGroup.betternether.nether_items":"BetterNether Items",
+    "advancements.betternether.root.title": "BetterNether",
+    "advancements.betternether.root.decription": "Discover the BetterNether",
+    "advancements.betternether.blue_obsidian.title": "Something Blue",
+    "advancements.betternether.blue_obsidian.description": "Obtain blue Obsidian by converting Lava above Soulsand or Soulstone to Obsidian",
+    "advancements.betternether.ruby_ore.title":"Ruby Ore",
+    "advancements.betternether.ruby_ore.description":"Obtain Ruby Ore in the Nether",
+    "advancements.betternether.make_crying.title":"Make 'em Cry",
+    "advancements.betternether.make_crying.description":"Use a Lightning-Rod to create all types of crying and weeping obsidian.",
+    "advancements.betternether.obsidian_blocks.title":"Obsidian Masterbuilder",
+    "advancements.betternether.obsidian_blocks.description":"Manufacture all Obsidian Variants",
+    "advancements.betternether.nether_wood.title":"Into the Woods",
+    "advancements.betternether.nether_wood.description":"Gather all Nether Wood Types",
+    "advancements.betternether.ruby_gear.title":"Covered in Flames",
+    "advancements.betternether.ruby_gear.description":"Cover yourself in flaming red ruby gear",
+    "advancements.betternether.ruby_tools.title":"Red Nether",
+    "advancements.betternether.ruby_tools.description":"Use some ruby tools from the depth of the Nether"
+    
+}  

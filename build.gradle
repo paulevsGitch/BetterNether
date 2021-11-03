@@ -26,15 +26,13 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// https://mvnrepository.com/artifact/javax.annotation/jsr305
-	compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-	//modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+	compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'	
 
 	println "Using local BCLib: ${local_bclib}"
     if (local_bclib){
-		compileOnly(project(":BCLib"))
-        api project(":BCLib")
+		implementation project(path:":BCLib", configuration:'dev')
     } else {
-        useApi "com.github.paulevsGitch:BCLib:${project.bclib_version}"
+        modImplementation "com.github.paulevsGitch:BCLib:${project.bclib_version}"
     }
     
 }
@@ -51,7 +49,7 @@ repositories {
 }
 
 def useApi(String dep) {
-    dependencies.modApi(dep) {
+    dependencies.modImplementation(dep) {
         exclude group: 'net.fabricmc.fabric-api'
         exclude group: 'net.fabricmc'
         if (!dep.contains("me.shedaniel")) {
@@ -64,15 +62,6 @@ def useApi(String dep) {
 processResources {
     println "Version: ${project.version}"
 	inputs.property "version", project.version
-    // duplicatesStrategy = 'WARN'
-	// from(sourceSets.main.resources.srcDirs) {
-	// 	include "fabric.mod.json"
-	// 	expand "version": project.version
-	// }
-
-	// from(sourceSets.main.resources.srcDirs) {
-	// 	exclude "fabric.mod.json"
-	// }
     filesMatching("fabric.mod.json") {
 		expand "version": project.version
 	}

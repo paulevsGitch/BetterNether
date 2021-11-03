@@ -1,0 +1,80 @@
+{
+    "parent": "betternether:ruby_ore",
+    "display": {
+        "icon": {
+            "item": "betternether:nether_ruby_pickaxe",
+            "nbt": "{Damage:0}"   
+        },
+        "title": {
+            "translate": "advancements.betternether.ruby_tools.title"
+        },
+        "description": {
+            "translate": "advancements.betternether.ruby_tools.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "hoe": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:nether_ruby_hoe"
+                    ]
+                }]
+            }
+        },        
+        "pickaxe": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:nether_ruby_pickaxe"
+                    ]
+                }]
+            }
+        },        
+        "shovel": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:nether_ruby_shovel"
+                    ]
+                }]
+            }
+        },        
+        "sword": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:nether_ruby_sword"
+                    ]
+                }]
+            }
+        },        
+        "axe": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:nether_ruby_axe"
+                    ]
+                }]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "hoe",
+            "pickaxe",
+            "shovel",
+            "sword",
+            "axe"
+        ]
+    ]
+}

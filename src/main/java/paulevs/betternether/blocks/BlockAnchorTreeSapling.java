@@ -15,68 +15,40 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureAnchorTreeBranch;
+import paulevs.betternether.structures.plants.StructureWillow;
+import ru.bclib.blocks.FeatureHangingSaplingBlock;
+import ru.bclib.blocks.FeatureSaplingBlock;
+import ru.bclib.world.features.DefaultFeature;
 
-public class BlockAnchorTreeSapling extends BlockBaseNotFull implements BonemealableBlock {
-	private static final VoxelShape SHAPE = Block.box(4, 2, 4, 12, 16, 12);
+class AnchorTreeFeature extends DefaultFeature {
 	private static final StructureAnchorTreeBranch STRUCTURE = new StructureAnchorTreeBranch();
-
-	public BlockAnchorTreeSapling() {
-		super(FabricBlockSettings.of(Material.PLANT)
-				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
-				.luminance(10)
-				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.dropsNothing()
-				.breakInstantly()
-				.noCollision()
-				.ticksRandomly()
-				);
-		this.setRenderLayer(BNRenderLayer.CUTOUT);
-	}
-
+	
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
-		return SHAPE;
-	}
-
-	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isNetherrack(world.getBlockState(pos.above()));
-	}
-
-	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
-		if (!canSurvive(state, world, pos))
-			return Blocks.AIR.defaultBlockState();
-		else
-			return state;
-	}
-
-	@Override
-	public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+		STRUCTURE.grow(featurePlaceContext.level(), featurePlaceContext.origin(), featurePlaceContext.random(), false);
 		return true;
 	}
+}
 
+public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implements BonemealableBlock {
+	private static final DefaultFeature FEATURE = new AnchorTreeFeature();
+	
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
-		return random.nextInt(16) == 0;
+	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+		return BlocksHelper.isNetherrack(blockState);
 	}
-
+	
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
-		STRUCTURE.grow(world, pos, random, false);
-	}
-
-	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-		super.tick(state, world, pos, random);
-		if (isBonemealSuccess(world, random, pos, state))
-			performBonemeal(world, random, pos, state);
+	protected Feature<?> getFeature(BlockState state) {
+		return FEATURE;
 	}
 }

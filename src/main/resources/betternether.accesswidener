@@ -11,3 +11,9 @@ accessible    class    net/minecraft/client/renderer/RenderType$CompositeRenderT
 accessible    class    net/minecraft/client/renderer/RenderStateShard$MultiPhase
 accessible    class    net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
 extendable    class    net/minecraft/world/level/levelgen/structure/StructureStart
+accessible    class    net/minecraft/client/particle/DripParticle$DripHangParticle
+
+# Constructors
+accessible method net/minecraft/client/particle/DripParticle$DripHangParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
+accessible method net/minecraft/client/particle/DripParticle$FallAndLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
+accessible method net/minecraft/client/particle/DripParticle$DripLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;)V

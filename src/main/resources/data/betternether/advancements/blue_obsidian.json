@@ -1,0 +1,29 @@
+{
+    "parent": "betternether:root",
+    "display": {
+        "icon": {
+            "item": "betternether:blue_obsidian"
+        },
+        "title": {
+            "translate": "advancements.betternether.blue_obsidian.title"
+        },
+        "description": {
+            "translate": "advancements.betternether.blue_obsidian.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "brew_blue": {
+            "trigger": "betternether:brew_blue",
+            "conditions": {}
+        }
+    },
+    "requirements": [
+        [
+            "brew_blue"
+        ]
+    ]
+}

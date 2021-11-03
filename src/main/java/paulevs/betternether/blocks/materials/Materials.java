@@ -27,22 +27,4 @@ public class Materials {
 				.nonOpaque()
 				.breakInstantly();
 	}
-
-	public static Properties makeLeaves(MaterialColor color) {
-		return FabricBlockSettings.of(Material.LEAVES, color)
-				.breakByHand(true)
-				.breakByTool(FabricToolTags.SHEARS)
-				.sounds(SoundType.GRASS)
-				.nonOpaque()
-				.strength(0.2F)
-				.allowsSpawning((state, world, pos, type) -> {
-					return false;
-				})
-				.isSuffocating((state, worls, pos) -> {
-					return false;
-				})
-				.isViewBlocking((state, worls, pos) -> {
-					return false;
-				});
-	}
 }

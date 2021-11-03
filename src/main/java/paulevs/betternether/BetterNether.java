@@ -2,16 +2,18 @@ package paulevs.betternether;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
+import paulevs.betternether.advancements.BNCriterion;
 import paulevs.betternether.commands.CommandRegistry;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.loot.BNLoot;
 import paulevs.betternether.recipes.IntegrationRecipes;
 import paulevs.betternether.recipes.ItemRecipes;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
-import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.BrewingRegistry;
 import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 import paulevs.betternether.registry.NetherTags;
 import paulevs.betternether.registry.SoundsRegistry;
@@ -49,11 +51,16 @@ public class BetterNether implements ModInitializer {
 		IntegrationRecipes.register();
 		NetherTags.register();
 		ItemRecipes.register();
+		NetherBiomeSource.register();
+		BNLoot.register();
+		BNCriterion.register();
 		
 		Configs.saveConfigs();
 		WorldDataAPI.registerModCache(MOD_ID);
 		DataExchangeAPI.registerMod(BetterNether.MOD_ID);
 		Patcher.register();
+		
+		//MigrationProfile.fixCustomFolder(new File("/Users/frank/Entwicklung/BetterNether/src/main/resources/data/betternether/structures"));
 	}
 	
 	private void initOptions() {

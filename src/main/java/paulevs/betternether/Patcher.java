@@ -1,9 +1,16 @@
 package paulevs.betternether;
 
+import java.util.List;
 import java.util.Map;
 
+import com.ibm.icu.impl.locale.XCldrStub.ImmutableSet;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import paulevs.betternether.registry.NetherBlocks;
 import ru.bclib.api.datafixer.DataFixerAPI;
+import ru.bclib.api.datafixer.MigrationProfile;
 import ru.bclib.api.datafixer.Patch;
+import ru.bclib.api.datafixer.PatchBiFunction;
 
 public class Patcher {
 	public static void register() {
@@ -14,7 +21,7 @@ public class Patcher {
 //--- Level 01
 class Patcher_001 extends Patch {
 	public Patcher_001() {
-		super(BetterNether.MOD_ID, "5.3.3");
+		super(BetterNether.MOD_ID, "5.3.5");
 	}
 	
 	@Override
@@ -22,6 +29,7 @@ class Patcher_001 extends Patch {
 		return Map.ofEntries(
 				Map.entry("betternether:chest", "bclib:chest"),
 				Map.entry("betternether:barrel", "bclib:barrel"),
+				Map.entry("betternether:sign", "bclib:sign"),
 				// Stalagnate //
 				Map.entry("betternether:striped_log_stalagnate", "betternether:stalagnate_stripped_log"),
 				Map.entry("betternether:striped_bark_stalagnate", "betternether:stalagnate_stripped_bark"),
@@ -184,5 +192,33 @@ class Patcher_001 extends Patch {
 				Map.entry("betternether:bar_stool_warped", "betternether:warped_bar_stool")
 
 				);
+	}
+	
+	@Override
+	public PatchBiFunction<ListTag, ListTag, Boolean> getBlockStatePatcher() {
+		return Patcher_001::patchBlockState;
+	}
+	
+	private static final List<String> LEAVE_IDS = List.of(
+		"betternether:willow_leaves",
+		"betternether:rubeus_leaves",
+		"betternether:anchor_tree_leaves",
+		"betternether:nether_sakura_leaves"
+	);
+	
+	private static boolean patchBlockState(ListTag palette, ListTag states, MigrationProfile profile){
+		boolean[] changed = {false};
+		palette.forEach((blockTag) -> {
+			CompoundTag blockTagCompound = ((CompoundTag) blockTag);
+			final String id = blockTagCompound.getString("Name");
+			if (LEAVE_IDS.contains(id)) {
+				final CompoundTag props = blockTagCompound.getCompound("Properties");
+				if (!props.contains("persistent") || !"true".equals(props.getString("persistent"))) {
+					props.putString("persistent", "true");
+					changed[0] = true;
+				}
+			}
+		});
+		return changed[0];
 	}
 }

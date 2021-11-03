@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.blocks.BlockWartRoots;
 import paulevs.betternether.blocks.BlockWartSeed;
+import ru.bclib.api.TagAPI;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 
 public class WartMaterial extends RoofMaterial{
@@ -26,7 +27,7 @@ public class WartMaterial extends RoofMaterial{
         super.initDefault(blockSettings, itemSettings);
         addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> {
             return new BlockWartSeed();
-        }));
+        }).setBlockTags(TagAPI.BLOCK_SAPLINGS).setItemTags(TagAPI.ITEM_SAPLINGS));
 
         addBlockEntry(new BlockEntry(BLOCK_ROOTS, false, (complexMaterial, settings) -> {
             return new BlockWartRoots();

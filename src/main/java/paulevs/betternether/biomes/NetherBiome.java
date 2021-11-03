@@ -93,7 +93,7 @@ public class NetherBiome extends BCLBiome{
 		super(definition);
 		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 2, 6);
 		definition.addMobSpawn(EntityRegistry.SKULL, 2, 2, 4);
-		definition.addMobSpawn(EntityRegistry.NAGA, 20, 2, 4);
+		definition.addMobSpawn(EntityRegistry.NAGA, 6, 2, 4);
 		definition.addMobSpawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
 		
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
