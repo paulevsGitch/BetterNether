@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
@@ -44,18 +45,18 @@ public class StructureRubeusBush implements IStructure {
 					sqz *= sqz;
 					POS.setZ(z);
 					if (sqx + sqz < r2 + random.nextFloat() * r) {
-						setIfAir(world, POS, NetherBlocks.RUBEUS_LEAVES.defaultBlockState());
+						setIfAir(world, POS, NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true));
 					}
 				}
 			}
 		}
 
 		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MAT_RUBEUS.getBark().defaultBlockState().setValue(RubeusLog.SHAPE, TripleShape.MIDDLE));
-		setIfAir(world, pos.above(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState());
-		setIfAir(world, pos.north(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState());
-		setIfAir(world, pos.south(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState());
-		setIfAir(world, pos.east(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState());
-		setIfAir(world, pos.west(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState());
+		setIfAir(world, pos.above(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+		setIfAir(world, pos.north(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+		setIfAir(world, pos.south(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+		setIfAir(world, pos.east(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+		setIfAir(world, pos.west(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
 	}
 
 	private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {

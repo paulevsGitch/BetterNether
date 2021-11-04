@@ -1,11 +1,16 @@
 package paulevs.betternether.structures.plants;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
@@ -14,6 +19,42 @@ import paulevs.betternether.structures.IStructure;
 public class StructureNetherSakura implements IStructure {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 	private static final MutableBlockPos POS2 = new MutableBlockPos();
+	private static final Map<BlockPos, Byte> LOGS_DIST = new HashMap<>();
+	
+	private void updateSDFFrom(BlockPos bpos) {
+		for (int x=-7; x<=7; x++) {
+			for (int y = -7; y <= 7; y++) {
+				for (int z = -7; z <= 7; z++) {
+					if (x == 0 && y == 0 && z == 0) continue;
+					final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
+					if (dist<=7) {
+						final BlockPos blPos = bpos.offset(x, y, z);
+						LOGS_DIST.merge(blPos, (byte) dist, (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
+					}
+				}
+			}
+		}
+	}
+	
+	private void updateDistances(ServerLevelAccessor world) {
+		for (Entry<BlockPos, Byte> entry : LOGS_DIST.entrySet()){
+			final int dist = entry.getValue();
+			final BlockPos logPos = entry.getKey();
+			
+			BlockState currentState = world.getBlockState(logPos);
+			if (currentState.hasProperty(BlockStateProperties.DISTANCE) ) {
+				int cDist = currentState.getValue(BlockStateProperties.DISTANCE);
+				if (dist < cDist) {
+					BlocksHelper.setWithoutUpdate(world, logPos, currentState.setValue(BlockStateProperties.DISTANCE, dist));
+					cDist = dist;
+				}
+				
+				if (cDist>=7){
+					BlocksHelper.setWithoutUpdate(world, logPos, Blocks.AIR.defaultBlockState());
+				}
+			}
+		}
+	}
 
 	public StructureNetherSakura() {}
 
@@ -24,6 +65,7 @@ public class StructureNetherSakura implements IStructure {
 	}
 
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
+		LOGS_DIST.clear();
 		int l = MHelper.randRange(15, 24, random);
 		double height = MHelper.randRange(10, 15, random);
 		double radius = height * (0.2 + random.nextDouble() * 0.1);
@@ -46,9 +88,16 @@ public class StructureNetherSakura implements IStructure {
 						int start = MHelper.randRange(-2, 0, random);
 						for (int y = start; y < length; y++) {
 							POS.setY(pos.getY() - y);
-							if (canReplace(world.getBlockState(POS))) BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_NETHER_SAKURA.getLog().defaultBlockState());
+							if (canReplace(world.getBlockState(POS))) {
+								BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_NETHER_SAKURA.getLog().defaultBlockState());
+								updateSDFFrom(POS);
+							}
 						}
-						if (NetherBlocks.MAT_NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_NETHER_SAKURA.getBark().defaultBlockState());
+						if (NetherBlocks.MAT_NETHER_SAKURA.isTreeLog(world.getBlockState(POS).getBlock())) {
+							BlocksHelper.setWithUpdate(world, POS, NetherBlocks.MAT_NETHER_SAKURA.getBark()
+																								 .defaultBlockState());
+							updateSDFFrom(POS);
+						}
 					}
 
 					if (d < 2) {
@@ -57,6 +106,9 @@ public class StructureNetherSakura implements IStructure {
 				}
 			}
 		}
+		
+		updateDistances(world);
+		LOGS_DIST.clear();
 	}
 
 	private void crown(LevelAccessor world, BlockPos pos, double radius, double height, Random random) {

@@ -1,7 +1,10 @@
 package paulevs.betternether.structures.plants;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
@@ -9,7 +12,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockPlantWall;
@@ -25,6 +30,42 @@ public class StructureRubeus extends StructureFuncScatter {
 	private static final Set<BlockPos> POINTS = new HashSet<BlockPos>();
 	private static final Set<BlockPos> MIDDLE = new HashSet<BlockPos>();
 	private static final Set<BlockPos> TOP = new HashSet<BlockPos>();
+	private static final Map<BlockPos, Byte> LOGS_DIST = new HashMap<>();
+	
+	private void updateSDFFrom(BlockPos bpos) {
+		for (int x=-7; x<=7; x++) {
+			for (int y = -7; y <= 7; y++) {
+				for (int z = -7; z <= 7; z++) {
+					if (x == 0 && y == 0 && z == 0) continue;
+					final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
+					if (dist<=7) {
+						final BlockPos blPos = bpos.offset(x, y, z);
+						LOGS_DIST.merge(blPos, (byte) dist, (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
+					}
+				}
+			}
+		}
+	}
+	
+	private void updateDistances(ServerLevelAccessor world) {
+		for (Entry<BlockPos, Byte> entry : LOGS_DIST.entrySet()){
+			final int dist = entry.getValue();
+			final BlockPos logPos = entry.getKey();
+			
+			BlockState currentState = world.getBlockState(logPos);
+			if (currentState.hasProperty(BlockStateProperties.DISTANCE) ) {
+				int cDist = currentState.getValue(BlockStateProperties.DISTANCE);
+				if (dist < cDist) {
+					BlocksHelper.setWithoutUpdate(world, logPos, currentState.setValue(BlockStateProperties.DISTANCE, dist));
+					cDist = dist;
+				}
+				
+				if (cDist>=7){
+					BlocksHelper.setWithoutUpdate(world, logPos, Blocks.AIR.defaultBlockState());
+				}
+			}
+		}
+	}
 
 	public StructureRubeus() {
 		super(7);
@@ -36,6 +77,7 @@ public class StructureRubeus extends StructureFuncScatter {
 	}
 
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
+		LOGS_DIST.clear();
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		float scale = MHelper.randRange(0.5F, 1F, random);
 		int minCount = scale < 0.75 ? 3 : 4;
@@ -127,7 +169,11 @@ public class StructureRubeus extends StructureFuncScatter {
 				else
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.BOTTOM), natural, random);
 			}
+			updateSDFFrom(bpos);
 		}
+		
+		updateDistances(world);
+		LOGS_DIST.clear();
 
 		POINTS.clear();
 		MIDDLE.clear();

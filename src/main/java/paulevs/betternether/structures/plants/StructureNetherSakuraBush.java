@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
@@ -42,18 +43,18 @@ public class StructureNetherSakuraBush implements IStructure {
 					sqz *= sqz;
 					POS.setZ(z);
 					if (sqx + sqz < r2 + random.nextFloat() * r) {
-						setIfAir(world, POS, NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
+						setIfAir(world, POS, NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true));
 					}
 				}
 			}
 		}
 
 		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MAT_NETHER_SAKURA.getBark().defaultBlockState());
-		setIfAir(world, pos.above(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
-		setIfAir(world, pos.north(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
-		setIfAir(world, pos.south(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
-		setIfAir(world, pos.east(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
-		setIfAir(world, pos.west(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState());
+		setIfAir(world, pos.above(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+		setIfAir(world, pos.north(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+		setIfAir(world, pos.south(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+		setIfAir(world, pos.east(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+		setIfAir(world, pos.west(), NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
 	}
 
 	private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {
