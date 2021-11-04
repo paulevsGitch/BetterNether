@@ -2,9 +2,15 @@ package paulevs.betternether.blocks.complex;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.blocks.BNBarStool;
@@ -13,7 +19,11 @@ import paulevs.betternether.blocks.BNTaburet;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 import ru.bclib.api.TagAPI;
+import ru.bclib.blocks.BaseBarkBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
+import ru.bclib.blocks.BaseRotatedPillarBlock;
+import ru.bclib.blocks.BaseStripableLogBlock;
+import ru.bclib.blocks.StripableBarkBlock;
 import ru.bclib.complexmaterials.ComplexMaterial;
 import ru.bclib.complexmaterials.WoodenComplexMaterial;
 import ru.bclib.complexmaterials.entry.BlockEntry;
@@ -51,9 +61,39 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 	public NetherWoodenMaterial init() {
 		return (NetherWoodenMaterial) super.init(NetherBlocks.getBlockRegistry(), NetherItems.getItemRegistry(), Configs.RECIPE_CONFIG);
 	}
+	
+	@Override
+	protected FabricBlockSettings getBlockSettings() {
+		return FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)
+								  .materialColor(planksColor);
+	}
 
 	protected void _initBase(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
 		super.initBase(blockSettings, itemSettings);
+		final Tag.Named<Block> tagBlockLog = getBlockTag(TAG_LOGS);
+		final Tag.Named<Item> tagItemLog = getItemTag(TAG_LOGS);
+		
+		replaceOrAddBlockEntry(
+			new BlockEntry(BLOCK_STRIPPED_LOG, (complexMaterial, settings) -> new BaseRotatedPillarBlock(settings))
+				.setBlockTags(BlockTags.LOGS, tagBlockLog)
+				.setItemTags(ItemTags.LOGS, tagItemLog)
+		);
+		replaceOrAddBlockEntry(
+			new BlockEntry(BLOCK_STRIPPED_BARK, (complexMaterial, settings) -> new BaseBarkBlock(settings))
+				.setBlockTags(BlockTags.LOGS, tagBlockLog)
+				.setItemTags(ItemTags.LOGS, tagItemLog)
+		);
+		
+		replaceOrAddBlockEntry(
+			new BlockEntry(BLOCK_LOG, (complexMaterial, settings) -> new BaseStripableLogBlock(woodColor, getBlock(BLOCK_STRIPPED_LOG)))
+				.setBlockTags(BlockTags.LOGS, tagBlockLog)
+				.setItemTags(ItemTags.LOGS, tagItemLog)
+		);
+		replaceOrAddBlockEntry(
+			new BlockEntry(BLOCK_BARK, (complexMaterial, settings) -> new StripableBarkBlock(woodColor, getBlock(BLOCK_STRIPPED_BARK)))
+				.setBlockTags(BlockTags.LOGS, tagBlockLog)
+				.setItemTags(ItemTags.LOGS, tagItemLog)
+		);
 	}
 	
 	@Override
@@ -116,6 +156,11 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 						  .build();
 			}));
 		}
+	}
+	
+	@Override
+	protected void initFlammable(FlammableBlockRegistry registry) {
+		//Nothing burns in the nether
 	}
 	
 	public Block getPlanks() {

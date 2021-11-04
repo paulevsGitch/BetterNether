@@ -21,6 +21,7 @@ import paulevs.betternether.blocks.BNBoneBlock;
 import paulevs.betternether.blocks.BNBrewingStand;
 import paulevs.betternether.blocks.BNChain;
 import paulevs.betternether.blocks.BNGlass;
+import paulevs.betternether.blocks.BNLeaves;
 import paulevs.betternether.blocks.BNNetherBrick;
 import paulevs.betternether.blocks.BNNormalChair;
 import paulevs.betternether.blocks.BNObsidian;
@@ -127,7 +128,6 @@ import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
 import ru.bclib.blocks.BaseDoorBlock;
 import ru.bclib.blocks.BaseLadderBlock;
-import ru.bclib.blocks.BaseLeavesBlock;
 import ru.bclib.blocks.BasePressurePlateBlock;
 import ru.bclib.blocks.BaseSlabBlock;
 import ru.bclib.blocks.BaseStairsBlock;
@@ -148,7 +148,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Rubeus //
 	public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
-	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves(MAT_RUBEUS.getSapling(), MaterialColor.COLOR_LIGHT_BLUE));
+	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves(MAT_RUBEUS.getSapling()));
 	
 	// Reed //
 	public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
@@ -164,7 +164,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Anchor Tree
 	public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
-	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BaseLeavesBlock(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
+	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BNLeaves(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
 	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
 	
 	
@@ -599,7 +599,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	}
 
 	public static Block registerSoulBlock(String name, Block block) {
-		return registerBlock(name, block, BlockTags.SOUL_FIRE_BASE_BLOCKS, BlockTags.SOUL_SPEED_BLOCKS);		
+		return registerBlock(name, block, BlockTags.SOUL_FIRE_BASE_BLOCKS, BlockTags.SOUL_SPEED_BLOCKS);
 	}
 	
 	public static Block registerMakeable2X2Soul(String name, Block result, String group, Block... sources) {

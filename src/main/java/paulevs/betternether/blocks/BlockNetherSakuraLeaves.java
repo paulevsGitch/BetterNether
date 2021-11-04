@@ -15,7 +15,7 @@ import ru.bclib.blocks.BaseLeavesBlock;
 
 import java.util.Random;
 
-public class BlockNetherSakuraLeaves extends BaseLeavesBlock {
+public class BlockNetherSakuraLeaves extends BNLeaves {
 	private static final Random RANDOM = new Random();
 	private static final int COLOR = MHelper.color(251, 113, 143);
 
