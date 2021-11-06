@@ -485,10 +485,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	}
 	
 	public static List<Block> getModBlocks() {
-		return getModBlocks(BetterNether.MOD_ID).stream()
-												.filter(BlockItem.class::isInstance)
-												.map(item -> ((BlockItem) item).getBlock())
-												.collect(Collectors.toList());
+		return BlockRegistry.getModBlocks(BetterNether.MOD_ID);
 	}
 	
 	public static Block registerBlock(String name, Block block, Tag.Named<Block>... tags) {
