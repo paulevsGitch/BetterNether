@@ -2,8 +2,8 @@ package paulevs.betternether.registry;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -27,21 +27,21 @@ import paulevs.betternether.entity.render.RenderSkull;
 
 @Environment(EnvType.CLIENT)
 public class EntityRenderRegistry {
-
+	
 	public static final ModelLayerLocation FIREFLY_MODEL = registerMain("firefly");
 	public static final ModelLayerLocation NAGA_MODEL = registerMain("naga");
 	public static final ModelLayerLocation JUNGLE_SKELETON_MODEL = registerMain("jungle_skeleton");
 	public static final ModelLayerLocation FLYING_PIG_MODEL = registerMain("flying_pig");
 	public static final ModelLayerLocation HYDROGEN_JELLYFISH_MODEL = registerMain("hydrogen_jelly");
 	public static final ModelLayerLocation SKULL_MODEL = registerMain("skull");
-
-
-	public static ModelLayerLocation registerMain(String id){
+	
+	
+	public static ModelLayerLocation registerMain(String id) {
 		//System.out.println("Register Entity: " + id);
 		return new ModelLayerLocation(new ResourceLocation(BetterNether.MOD_ID, id), "main");
 		//return EntityModelLayersMixin.callRegisterMain(key);
 	}
-
+	
 	public static void register() {
 		registerRenderMob(EntityRegistry.FIREFLY, RenderFirefly.class);
 		registerRenderMob(EntityRegistry.CHAIR, RenderChair.class);
@@ -51,7 +51,7 @@ public class EntityRenderRegistry {
 		registerRenderMob(EntityRegistry.FLYING_PIG, RenderFlyingPig.class);
 		registerRenderMob(EntityRegistry.JUNGLE_SKELETON, RenderJungleSkeleton.class);
 		registerRenderMob(EntityRegistry.SKULL, RenderSkull.class);
-
+		
 		EntityModelLayerRegistry.registerModelLayer(FIREFLY_MODEL, ModelEntityFirefly::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(NAGA_MODEL, ModelNaga::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(JUNGLE_SKELETON_MODEL, ModelJungleSkeleton::createBodyLayer);
@@ -59,12 +59,13 @@ public class EntityRenderRegistry {
 		EntityModelLayerRegistry.registerModelLayer(HYDROGEN_JELLYFISH_MODEL, ModelEntityHydrogenJellyfish::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(SKULL_MODEL, ModelSkull::getTexturedModelData);
 	}
-
+	
 	private static void registerRenderMob(EntityType<?> entity, Class<? extends MobRenderer<?, ?>> renderer) {
-		EntityRendererRegistry.INSTANCE.register(entity, (context) -> {
+		EntityRendererRegistry.register(entity, (context) -> {
 			MobRenderer render = null;
 			try {
-				render = renderer.getConstructor(context.getClass()).newInstance(context);
+				render = renderer.getConstructor(context.getClass())
+								 .newInstance(context);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -72,12 +73,13 @@ public class EntityRenderRegistry {
 			return render;
 		});
 	}
-
+	
 	private static void registerRenderAny(EntityType<?> entity, Class<? extends EntityRenderer<?>> renderer) {
-		EntityRendererRegistry.INSTANCE.register(entity, (context) -> {
+		EntityRendererRegistry.register(entity, (context) -> {
 			EntityRenderer render = null;
 			try {
-				render = renderer.getConstructor(context.getClass()).newInstance(context);
+				render = renderer.getConstructor(context.getClass())
+								 .newInstance(context);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
