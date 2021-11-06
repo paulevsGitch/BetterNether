@@ -488,6 +488,10 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return BlockRegistry.getModBlocks(BetterNether.MOD_ID);
 	}
 	
+	public static List<Item> getModBlockItems() {
+		return BlockRegistry.getModBlockItems(BetterNether.MOD_ID);
+	}
+	
 	public static Block registerBlock(String name, Block block, Tag.Named<Block>... tags) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
