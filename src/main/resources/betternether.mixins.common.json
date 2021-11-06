@@ -14,7 +14,7 @@
       "DeltaFeatureMixin",
       "GenerationSettingsAccessor",
       "LeavesBlockMixin",
-      "LightStorageMixin",
+      "LayerLightSectionStorageMixin",
       "MapMixin",
       "MapStateMixin",
       "MinecraftServerMixin",
