@@ -190,8 +190,11 @@ public class EntityHydrogenJellyfish extends Animal implements FlyingAnimal {
 						0, 0, 0);
 		}
 		else {
-			Explosion.BlockInteraction destructionType = this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
-			this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
+			if (source!=DamageSource.OUT_OF_WORLD) {
+				Explosion.BlockInteraction destructionType = this.level.getGameRules()
+																	   .getBoolean(GameRules.RULE_MOBGRIEFING) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+				this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
+			}
 		}
 	}
 
@@ -220,7 +223,7 @@ public class EntityHydrogenJellyfish extends Animal implements FlyingAnimal {
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
-		if (source == DamageSource.WITHER || source instanceof EntityDamageSource) {
+		if (source == DamageSource.WITHER || source instanceof EntityDamageSource || source == DamageSource.OUT_OF_WORLD) {
 			return super.hurt(source, amount);
 		}
 		return false;
