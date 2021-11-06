@@ -47,9 +47,9 @@ public class StructureCrystal implements IStructure {
 						POS.setZ(pos.getZ() + z);
 						BlockState state;
 						if (d<=-0.3) {
-							state = random.nextInt(10) == 0  ? (isBlue?NetherBlocks.BLUE_WEEPING_OBSIDIAN:NetherBlocks.WEEPING_OBSIDIAN).defaultBlockState() : getState(index, v);
+							state = random.nextInt(12) == 0  ? (isBlue?NetherBlocks.BLUE_WEEPING_OBSIDIAN:NetherBlocks.WEEPING_OBSIDIAN).defaultBlockState() : getState(index, v);
 						} else if (d<=-0.15) {
-							state = random.nextInt(20) == 0 ?  (isBlue?NetherBlocks.BLUE_CRYING_OBSIDIAN:Blocks.CRYING_OBSIDIAN).defaultBlockState() : getState(index, v);
+							state = random.nextInt(9) == 0 ?  (isBlue?NetherBlocks.BLUE_CRYING_OBSIDIAN:Blocks.CRYING_OBSIDIAN).defaultBlockState() : getState(index, v);
 						} else if (isNotEdge(v.x, v.y, v.z, radius)) {
 							state = random.nextInt(20) == 0  ?  Blocks.GLOWSTONE.defaultBlockState() : getState(index, v);
 						} else if (random.nextInt(50) == 0 ){
