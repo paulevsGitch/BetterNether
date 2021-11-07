@@ -55,6 +55,8 @@ public class MushroomFirMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_planks")
                     .build();
         }));
+    
+        initDefaultFurniture();
     }
 
     public Block getStem(){

@@ -214,6 +214,8 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
                     .setGroup(receipGroupPrefix +"_barrels")
                     .build();
         }));
+    
+        initDefaultFurniture();
     }
 
     public Block getStem(){

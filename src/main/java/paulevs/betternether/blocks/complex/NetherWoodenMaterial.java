@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
@@ -28,6 +29,7 @@ import ru.bclib.complexmaterials.ComplexMaterial;
 import ru.bclib.complexmaterials.WoodenComplexMaterial;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 import ru.bclib.complexmaterials.entry.RecipeEntry;
+import ru.bclib.config.Config;
 import ru.bclib.config.Configs;
 import ru.bclib.config.PathConfig;
 import ru.bclib.recipes.GridRecipe;
@@ -117,45 +119,58 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 		}));
 	}
 	
-	@Override
-	public void initDefaultRecipes() {
-		super.initDefaultRecipes();
-		
-		final Block planks = getPlanks();
+	public static void makeTaburetRecipe(PathConfig config, ResourceLocation id, Block taburet, Block planks){
+		GridRecipe.make(id, taburet)
+				  .checkConfig(config)
+				  .setShape("##", "II")
+				  .addMaterial('#', planks)
+				  .addMaterial('I', Items.STICK)
+				  .setGroup("nether" + "_taburet")
+				  .build();
+	}
+	
+	public static void makeChairRecipe(PathConfig config, ResourceLocation id, Block chair, Block planks){
+		GridRecipe.make(id, chair)
+				  .checkConfig(config)
+				  .setShape("I ", "##", "II")
+				  .addMaterial('#', planks)
+				  .addMaterial('I', Items.STICK)
+				  .setGroup("nether" + "_chair")
+				  .build();
+	}
+	
+	public static void makeBarStoolRecipe(PathConfig config, ResourceLocation id, Block barStool, Block planks){
+		GridRecipe.make(id, barStool)
+				  .checkConfig(config)
+				  .setShape("##", "II", "II")
+				  .addMaterial('#', planks)
+				  .addMaterial('I', Items.STICK)
+				  .setGroup("nether" + "_bar_stool")
+				  .build();
+	}
+	
+	protected void initDefaultFurniture() {
 		final Block slab = getSlab();
-		
 		
 		if (Registry.BLOCK.getKey(slab) != Registry.BLOCK.getDefaultKey()) {
 			addRecipeEntry(new RecipeEntry(BLOCK_TABURET, (material, config, id) -> {
-				GridRecipe.make(id, getBlock(BLOCK_TABURET))
-						  .checkConfig(config)
-						  .setShape("##", "II")
-						  .addMaterial('#', planks)
-						  .addMaterial('I', Items.STICK)
-						  .setGroup(receipGroupPrefix + "_taburet")
-						  .build();
+				makeTaburetRecipe(config, id, getBlock(BLOCK_TABURET), slab);
 			}));
 			
 			addRecipeEntry(new RecipeEntry(BLOCK_CHAIR, (material, config, id) -> {
-				GridRecipe.make(id, getBlock(BLOCK_CHAIR))
-						  .checkConfig(config)
-						  .setShape("I ", "##", "II")
-						  .addMaterial('#', planks)
-						  .addMaterial('I', Items.STICK)
-						  .setGroup(receipGroupPrefix + "_chair")
-						  .build();
+				makeChairRecipe(config, id, getBlock(BLOCK_CHAIR), slab);
 			}));
 			
 			addRecipeEntry(new RecipeEntry(BLOCK_BAR_STOOL, (material, config, id) -> {
-				GridRecipe.make(id, getBlock(BLOCK_BAR_STOOL))
-						  .checkConfig(config)
-						  .setShape("##", "II", "II")
-						  .addMaterial('#', planks)
-						  .addMaterial('I', Items.STICK)
-						  .setGroup(receipGroupPrefix + "_bar_stool")
-						  .build();
+				makeBarStoolRecipe(config, id, getBlock(BLOCK_BAR_STOOL), slab);
 			}));
 		}
+	}
+	
+	@Override
+	public void initDefaultRecipes() {
+		super.initDefaultRecipes();
+		initDefaultFurniture();
 	}
 	
 	@Override

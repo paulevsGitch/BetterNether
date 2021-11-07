@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -113,6 +112,7 @@ import paulevs.betternether.blocks.complex.MushroomFirMaterial;
 import paulevs.betternether.blocks.complex.NetherMushroomMaterial;
 import paulevs.betternether.blocks.complex.NetherReedMaterial;
 import paulevs.betternether.blocks.complex.NetherSakuraMaterial;
+import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
 import paulevs.betternether.blocks.complex.RubeusMaterial;
 import paulevs.betternether.blocks.complex.StalagnateMaterial;
 import paulevs.betternether.blocks.complex.WartMaterial;
@@ -634,7 +634,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			registerBlockDirectly(name, block);
 			TagAPI.addTags(block, TagAPI.BLOCK_WORKBENCHES);
 			TagAPI.addTags(block, TagAPI.ITEM_WORKBENCHES);
-			//RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
+			
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
 					  .checkConfig(Configs.RECIPES)
 					  .setShape("##", "##")
@@ -721,7 +721,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			addFuel(source, block);
-			RecipesHelper.makeTaburetRecipe(source, block);
+			NetherWoodenMaterial.makeTaburetRecipe(Configs.RECIPES, new ResourceLocation(BetterNether.MOD_ID, name), block, source);
 		}
 		
 		return block;
@@ -732,7 +732,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			addFuel(source, block);
-			RecipesHelper.makeChairRecipe(source, block);
+			NetherWoodenMaterial.makeChairRecipe(Configs.RECIPES, new ResourceLocation(BetterNether.MOD_ID, name), block, source);
 		}
 		
 		return block;
@@ -743,7 +743,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			addFuel(source, block);
-			RecipesHelper.makeBarStoolRecipe(source, block);
+			NetherWoodenMaterial.makeBarStoolRecipe(Configs.RECIPES, new ResourceLocation(BetterNether.MOD_ID, name), block, source);
 		}
 		
 		return block;
