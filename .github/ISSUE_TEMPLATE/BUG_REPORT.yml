@@ -51,7 +51,7 @@ body:
       description: What version of Fabric Loader do you use
       placeholder: 0.12.x
     validations:
-      required: true
+      required: false
   - type: dropdown
     id: mc_version
     attributes:
@@ -76,7 +76,7 @@ body:
       description: Check this box if you have other Mods (Besides BetterNether and BCLib) installed.
       options:
         - label: There are Other Mods installed
-          required: true 
+          required: false 
   - type: textarea
     id: logs
     attributes:
