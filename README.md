@@ -1,11 +1,10 @@
 # BetterNether
-BetterNether Mod for Fabric, MC 1.17
+BetterNether Mod for Fabric, MC 1.17.1
 
 Building:
 * Clone repo
 * Edit gradle.properties if necessary
-* Run command line in folder: gradlew genSources eclipse (or Another-IDE-Name)
-* Import project to IDE
+* Open `build.gradle` as new Project in IntelliJ
 
 Mappings:
 * https://fabricmc.net/versions.html?&version=1.17.1
