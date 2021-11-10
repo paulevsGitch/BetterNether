@@ -219,6 +219,8 @@ public class NetherReedMaterial extends RoofMaterial {
                     .setGroup(receipGroupPrefix +"_barrels")
                     .build();
         }));
+    
+        initDefaultFurniture();
     }
 
     public Block getStem(){
