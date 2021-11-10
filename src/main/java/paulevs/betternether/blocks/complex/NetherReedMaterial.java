@@ -221,6 +221,7 @@ public class NetherReedMaterial extends RoofMaterial {
         }));
     
         initDefaultFurniture();
+        initRoofRecipes();
     }
 
     public Block getStem(){
