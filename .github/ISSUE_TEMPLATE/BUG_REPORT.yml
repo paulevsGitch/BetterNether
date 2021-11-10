@@ -19,7 +19,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ### Versions
+        ## Versions
   - type: input
     id: bn_version
     attributes:
@@ -69,14 +69,16 @@ body:
         - Before 1.16
     validations:
       required: true 
-  - type: checkboxes
+  - type: markdown
+    attributes:
+      value: |
+        ## Additional Information
+  - type: textarea
     id: other_mods
     attributes:
       label: Other Mods
-      description: Check this box if you have other Mods (Besides BetterNether and BCLib) installed.
-      options:
-        - label: There are Other Mods installed
-          required: false 
+      description: If you can, please supply a list of installed Mods (Besides BetterNether and BCLib). This information may also be included in the Log-File.
+      render: shell
   - type: textarea
     id: logs
     attributes:
