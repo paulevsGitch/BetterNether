@@ -43,7 +43,7 @@ body:
       description: What version of Fabric API is installed
       placeholder: 0.4x.x
     validations:
-      required: true
+      required: false
   - type: input
     id: fabric_loader_version
     attributes:
@@ -74,14 +74,14 @@ body:
       value: |
         ## Additional Information
   - type: textarea
-    id: other_mods
-    attributes:
-      label: Other Mods
-      description: If you can, please supply a list of installed Mods (Besides BetterNether and BCLib). This information may also be included in the Log-File.
-      render: shell
-  - type: textarea
     id: logs
     attributes:
       label: Relevant log output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: textarea
+    id: other_mods
+    attributes:
+      label: Other Mods
+      description: If you can, please supply a list of installed Mods (besides BetterNether and BCLib). This information may already be included in the log above.
       render: shell
