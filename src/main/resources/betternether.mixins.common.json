@@ -12,7 +12,6 @@
       "CraftingScreenHandlerMixin",
       "DefaultAttributeRegistryMixin",
       "DeltaFeatureMixin",
-      "DimensionTypeMixin",
       "GenerationSettingsAccessor",
       "LeavesBlockMixin",
       "LightStorageMixin",
@@ -26,10 +25,11 @@
       "PlayerEntityMixin",
       "RecipeManagerAccessor",
       "RecipeManagerMixin",
-      "ServerPlayNetworkHandlerMixin",
       "ServerWorldMixin",
-      "SheepEntityMixin",
-      "SpawnRestrictionMixin"
+      "SpawnRestrictionMixin",
+	  "BlockAgeProcessorMixin",
+	  "LiquidBlockMixin",
+      "LightningRodBlockMixin"
     ],
 	"injectors": {
 		"defaultRequire": 1

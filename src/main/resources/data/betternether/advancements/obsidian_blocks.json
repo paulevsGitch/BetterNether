@@ -1,0 +1,110 @@
+{
+    "parent": "betternether:blue_obsidian",
+    "display": {
+        "icon": {
+            "item": "betternether:blue_obsidian_bricks"
+        },
+        "title": {
+            "translate": "advancements.betternether.obsidian_blocks.title"
+        },
+        "description": {
+            "translate": "advancements.betternether.obsidian_blocks.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {        
+        "made_brick": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:obsidian_bricks"
+                    ]
+                }]
+            }
+        },
+        "made_blue_brick": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:blue_obsidian_bricks"
+                    ]
+                }]
+            }
+        },       
+        "made_tile": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:obsidian_tile"
+                    ]
+                }]
+            }
+        },
+        "made_blue_tile": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:blue_obsidian_tile"
+                    ]
+                }]
+            }
+        },       
+        "made_tile_small": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:obsidian_tile_small"
+                    ]
+                }]
+            }
+        },
+        "made_blue_tile_small": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:blue_obsidian_tile_small"
+                    ]
+                }]
+            }
+        },       
+        "made_rod_tiles": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:obsidian_rod_tiles"
+                    ]
+                }]
+            }
+        },
+        "made_blue_rod_tiles": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "items": [
+                        "betternether:blue_obsidian_rod_tiles"
+                    ]
+                }]
+            }
+        }
+    },
+    "requirements": [
+        ["made_brick"],
+        ["made_blue_brick"],
+        ["made_tile"],
+        ["made_blue_tile"],
+        ["made_tile_small"],
+        ["made_blue_tile_small"],
+        ["made_rod_tiles"],
+        ["made_blue_rod_tiles"]
+    ]
+}

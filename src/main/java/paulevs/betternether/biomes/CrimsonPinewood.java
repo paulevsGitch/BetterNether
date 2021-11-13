@@ -4,6 +4,7 @@ import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
@@ -31,6 +32,7 @@ public class CrimsonPinewood extends NetherBiome {
 				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				.setParticles(ParticleTypes.CRIMSON_SPORE, 0.025F)
 				.setGenChance(0.3F)
+				.addMobSpawn(EntityType.HOGLIN, 9, 2, 5)
 				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
 		addStructure("crimson_pinewood", new StructureCrimsonPinewood(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.1F, false);

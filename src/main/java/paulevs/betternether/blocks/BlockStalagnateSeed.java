@@ -18,33 +18,54 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.structures.plants.StructureStalagnate;
+import paulevs.betternether.structures.plants.StructureWillow;
+import ru.bclib.blocks.FeatureSaplingBlock;
+import ru.bclib.world.features.DefaultFeature;
 
-public class BlockStalagnateSeed extends BlockBaseNotFull implements BonemealableBlock {
+class StalagnateTreeFeatureUp extends DefaultFeature {
+	static final StructureStalagnate STRUCTURE = new StructureStalagnate();
+	
+	@Override
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+		STRUCTURE.generate(featurePlaceContext.level(), featurePlaceContext.origin(), featurePlaceContext.random());
+		return true;
+	}
+}
+
+class StalagnateTreeFeatureDown extends DefaultFeature {
+	@Override
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+		StalagnateTreeFeatureUp.STRUCTURE.generateDown(featurePlaceContext.level(), featurePlaceContext.origin(), featurePlaceContext.random());
+		return true;
+	}
+}
+
+public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock {
 	protected static final VoxelShape SHAPE_TOP = Block.box(4, 6, 4, 12, 16, 12);
 	protected static final VoxelShape SHAPE_BOTTOM = Block.box(4, 0, 4, 12, 12, 12);
-	private static final StructureStalagnate STRUCTURE = new StructureStalagnate();
+	
+	private static final DefaultFeature FEATURE_UP = new StalagnateTreeFeatureUp();
+	private static final DefaultFeature FEATURE_DOWN = new StalagnateTreeFeatureDown();
+	
 	public static final BooleanProperty TOP = BooleanProperty.create("top");
 
 	public BlockStalagnateSeed() {
-		super(FabricBlockSettings.of(Material.PLANT)
-				.mapColor(MaterialColor.COLOR_CYAN)
-				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.breakInstantly()
-				.noCollision()
-				.ticksRandomly());
-		this.setRenderLayer(BNRenderLayer.CUTOUT);
+		super();
 		this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
+		super.createBlockStateDefinition(stateManager);
 		stateManager.add(TOP);
 	}
 
@@ -60,59 +81,47 @@ public class BlockStalagnateSeed extends BlockBaseNotFull implements Bonemealabl
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
-		return state.getValue(TOP).booleanValue() ? SHAPE_TOP : SHAPE_BOTTOM;
+		return growsDownward(state) ? SHAPE_TOP : SHAPE_BOTTOM;
 	}
-
-	@Override
-	public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
-		return true;
+	
+	private boolean growsDownward(BlockState state) {
+		return state.getValue(TOP)
+					.booleanValue();
 	}
-
+	
 	@Override
 	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
-		if (random.nextInt(16) == 0) {
-			if (state.getValue(TOP).booleanValue())
+		if (super.isBonemealSuccess(world, random, pos, state)) {
+			if (growsDownward(state))
 				return BlocksHelper.downRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
 			else
 				return BlocksHelper.upRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
 		}
 		return false;
 	}
-
+	
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
-		if (state.getValue(TOP).booleanValue())
-			STRUCTURE.generateDown(world, pos, random);
-		else
-			STRUCTURE.generate(world, pos, random);
+	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+		return BlocksHelper.isNetherrack(blockState);
 	}
-
+	
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isNetherrack(world.getBlockState(pos.above())) || BlocksHelper.isNetherrack(world.getBlockState(pos.below()));
-	}
-
-	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
-		if (state.getValue(TOP).booleanValue()) {
-			if (BlocksHelper.isNetherrack(world.getBlockState(pos.above())))
-				return state;
-			else
-				return Blocks.AIR.defaultBlockState();
+	public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+		final BlockPos target;
+		if (growsDownward(blockState)) {
+		 	target = blockPos.above();
+		} else {
+			target = blockPos.below();
 		}
-		else {
-			if (BlocksHelper.isNetherrack(world.getBlockState(pos.below())))
-				return state;
-			else
-				return Blocks.AIR.defaultBlockState();
-		}
+		return this.mayPlaceOn(levelReader.getBlockState(target), levelReader, target);
 	}
-
+	
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-		super.tick(state, world, pos, random);
-		if (isBonemealSuccess(world, random, pos, state)) {
-			performBonemeal(world, random, pos, state);
+	protected Feature<?> getFeature(BlockState state) {
+		if (growsDownward(state)){
+			return FEATURE_DOWN;
+		} else {
+			return FEATURE_UP;
 		}
 	}
 }

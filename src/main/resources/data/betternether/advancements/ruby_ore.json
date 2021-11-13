@@ -1,0 +1,37 @@
+{
+    "parent": "betternether:root",
+    "display": {
+      "icon": {
+        "item": "betternether:nether_ruby"
+      },
+      "title": {
+        "translate": "advancements.betternether.ruby_ore.title"
+      },
+      "description": {
+        "translate": "advancements.betternether.ruby_ore.description"
+      },
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "ruby_ore": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "betternether:nether_ruby"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "requirements": [
+      [
+        "ruby_ore"
+      ]
+    ]
+  }

@@ -415,6 +415,8 @@
   "block.betternether.blue_obsidian_bricks_stairs": "Blaue Obsidianziegeltreppe",
   "block.betternether.blue_obsidian_bricks_slab": "Blaue Obsidianziegelstufe",
   "block.betternether.blue_obsidian_tile": "Blauer polierter Obsidian",
+  "block.betternether.blue_obsidian_rod_tiles": "Blauer Obsidianstäbchen",
+  "block.betternether.obsidian_rod_tiles": "Obsidianstäbchen",
   "block.betternether.blue_obsidian_tile_small": "Blaue Obsidianfliese",
   "block.betternether.blue_obsidian_tile_stairs": "Blaue Obsidianfliesentreppe",
   "block.betternether.blue_obsidian_tile_slab": "Blaue Obsidianfliesenstufe",
@@ -694,5 +696,28 @@
   "block.betternether.whispering_gourd": "Säuselnde Kalebasse",
   "block.betternether.whispering_gourd_lantern": "Säuselnde Kalebassenlaterne",
 
-  "block.betternether.willow_torch": "Weidenfackel"
+  "block.betternether.willow_torch": "Weidenfackel",
+  
+  "block.betternether.nether_redstone_ore": "Nether Redstone-Erz",
+  "block.betternether.blue_crying_obsidian": "Blauer Weinender Obsidian",
+  "block.betternether.blue_weeping_obsidian": "Blauer Schluchzender Obsidian",
+  "block.betternether.weeping_obsidian": "Schluchzender Obsidian",
+  "itemGroup.betternether.nether_blocks":"BetterNether Blöcke",
+  "itemGroup.betternether.nether_items":"BetterNether Items",
+  "advancements.betternether.root.title": "BetterNether",
+  "advancements.betternether.root.decription": "Noch mehr Nether",
+  "advancements.betternether.blue_obsidian.title": "Blauer Funkel",
+  "advancements.betternether.blue_obsidian.description": "Erschaffe blauen Obsidian indem du Lava über Seelensand oder Seelenstein in Obsidian umwandelst",
+  "advancements.betternether.ruby_ore.title":"Rubinerz",
+ "advancements.betternether.ruby_ore.description":"Finde im Nether Rubinerz",
+ "advancements.betternether.make_crying.title":"Las' sie weinen",
+ "advancements.betternether.make_crying.description":"Verwende einen Blitzableiter um alle weinenden und schluchzenden Varianten von Obsidian herzustellen",
+ "advancements.betternether.obsidian_blocks.title":"Obsidian Meister",
+ "advancements.betternether.obsidian_blocks.description":"Stelle alle Obsidian-Varianten her",
+ "advancements.betternether.nether_wood.title":"Ab in den Wald",
+ "advancements.betternether.nether_wood.description":"Sammle alle Netherhölzer",
+ "advancements.betternether.ruby_gear.title":"Mit Flammen bedeckt",
+ "advancements.betternether.ruby_gear.description":"Hülle dich in falmmenrote Rubinausrüstung",
+ "advancements.betternether.ruby_tools.title":"Das Rote Nether",
+ "advancements.betternether.ruby_tools.description":"Verwende Rubinwerkzeuge aus den Tiefen des Nether"
 }

@@ -43,6 +43,7 @@ public class BNWorldGenerator {
 	private static float cincinnasiteDensity;
 	private static float rubyDensity;
 	private static float lapisDensity;
+	private static float redstoneDensity;
 	private static float structureDensity;
 	private static float lavaStructureDensity;
 	private static float globalDensity;
@@ -90,9 +91,10 @@ public class BNWorldGenerator {
 		hasCaves = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_caves", true);
 		hasPaths = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_paths", true);
 
-		cincinnasiteDensity = Configs.GENERATOR.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 1024F);
-		rubyDensity = Configs.GENERATOR.getFloat("generator.world.ores", "ruby_ore_density", 1F / 4000F);
+		cincinnasiteDensity = Configs.GENERATOR.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 2000F);
+		rubyDensity = Configs.GENERATOR.getFloat("generator.world.ores", "ruby_ore_density", 1F / 6000F);
 		lapisDensity = Configs.GENERATOR.getFloat("generator.world.ores", "lapis_ore_density", 1F / 4000F);
+		redstoneDensity = Configs.GENERATOR.getFloat("generator.world.ores", "redstone_ore_density", 1F / 4000F);
 		structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
 		lavaStructureDensity = Configs.GENERATOR.getFloat("generator.world", "lava_structures_density", 1F / 200F) * 1.0001F;
 		globalDensity = Configs.GENERATOR.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
@@ -264,11 +266,13 @@ public class BNWorldGenerator {
 							}
 						}
 						if (random.nextFloat() < cincinnasiteDensity)
-							spawnOre(NetherBlocks.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 6, 14);
+							spawnOre(NetherBlocks.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 3, 12);
 						if (random.nextFloat() < rubyDensity)
 							spawnOre(NetherBlocks.NETHER_RUBY_ORE.defaultBlockState(), world, popPos, random, 1, 5);
 						if (random.nextFloat() < lapisDensity)
 							spawnOre(NetherBlocks.NETHER_LAPIS_ORE.defaultBlockState(), world, popPos, random, 1, 6);
+						if (random.nextFloat() < redstoneDensity)
+							spawnOre(NetherBlocks.NETHER_REDSTONE_ORE.defaultBlockState(), world, popPos, random, 1, 3);
 					}
 				}
 			}

@@ -29,9 +29,8 @@ public class NetherTags {
 	public static final Tag<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
 
 	public static void register() {
-		NetherBlocks.getPossibleBlocks().forEach(name -> {
+		NetherBlocks.getModBlocks().forEach(block -> {
 			//TODO: maybe we should keep a list of references to all blocks
-			Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
 			BlockBehaviour.Properties properties = ((AbstractBlockAccessor) block).getSettings();
 			Material material = ((AbstractBlockSettingsAccessor) properties).getMaterial();
 
@@ -55,6 +54,7 @@ public class NetherTags {
 				TagAPI.addTag(NYLIUM, block);
 				BonemealAPI.addSpreadableBlock(block, Blocks.NETHERRACK);
 			}
+			
 			else if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
 				TagAPI.addTag(BlockTags.LEAVES, block);
 				ComposterBlockAccessor.callAdd(0.3F, block);

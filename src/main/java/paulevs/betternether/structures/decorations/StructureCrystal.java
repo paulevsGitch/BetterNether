@@ -28,8 +28,9 @@ public class StructureCrystal implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
-		int index = random.nextInt(PALETTES.length >> 1);
-		double a = random.nextDouble();
+		final int index = random.nextInt(PALETTES.length >> 1);
+		final boolean isBlue = index == 1;
+		final double a = random.nextDouble();
 		double radius = 2 + a * a * 5;
 		int sideXZ = (int) Math.ceil(radius * 2);
 		int sideY = (int) Math.ceil(radius * 3);
@@ -39,14 +40,30 @@ public class StructureCrystal implements IStructure {
 			for (int x = -sideXZ; x <= sideXZ; x++)
 				for (int z = -sideXZ; z <= sideXZ; z++) {
 					Vec3 v = new Vec3(x, y, z).xRot(angleX).yRot(angleY);
-					if (isInside(v.x, v.y, v.z, radius)) {
+					final double d = depth(v.x, v.y, v.z, radius);
+					if (d<=0) {
 						POS.setX(pos.getX() + x);
 						POS.setY(pos.getY() + y);
 						POS.setZ(pos.getZ() + z);
-						BlockState state = random.nextInt(40) == 0 && isNotEdge(v.x, v.y, v.z, radius) ? Blocks.GLOWSTONE.defaultBlockState() : getState(index, v);
+						BlockState state;
+						if (d<=-0.3) {
+							state = random.nextInt(10) == 0  ? (isBlue?NetherBlocks.BLUE_WEEPING_OBSIDIAN:NetherBlocks.WEEPING_OBSIDIAN).defaultBlockState() : getState(index, v);
+						} else if (d<=-0.15) {
+							state = random.nextInt(20) == 0 ?  (isBlue?NetherBlocks.BLUE_CRYING_OBSIDIAN:Blocks.CRYING_OBSIDIAN).defaultBlockState() : getState(index, v);
+						} else if (isNotEdge(v.x, v.y, v.z, radius)) {
+							state = random.nextInt(20) == 0  ?  Blocks.GLOWSTONE.defaultBlockState() : getState(index, v);
+						} else if (random.nextInt(50) == 0 ){
+							state = random.nextInt(4) == 0  ?  (isBlue?NetherBlocks.BLUE_WEEPING_OBSIDIAN:NetherBlocks.WEEPING_OBSIDIAN).defaultBlockState() : (isBlue?NetherBlocks.BLUE_CRYING_OBSIDIAN:Blocks.CRYING_OBSIDIAN).defaultBlockState();
+						} else {
+							state = getState(index, v);
+						}
 						BlocksHelper.setWithoutUpdate(world, POS, state);
 					}
 				}
+	}
+	
+	private double depth(double x, double y, double z, double size){
+		return dodecahedronSDF(x / size, y / size * 0.3, z / size);
 	}
 
 	private boolean isInside(double x, double y, double z, double size) {

@@ -17,7 +17,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
@@ -28,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
-import paulevs.betternether.BetterNether;
+import org.jetbrains.annotations.NotNull;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.BiomesRegistry;
@@ -66,7 +65,7 @@ public class CommandRegistry {
                     .then(Commands.literal("placematching")
                             .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                             .then(Commands.argument("type", StringArgumentType.string())
-                                .executes(ctx -> placeWoodBlocks(ctx, StringArgumentType.getString(ctx, "type"))))
+                                .executes(ctx -> placeMatchingBlocks(ctx, StringArgumentType.getString(ctx, "type"))))
                     )
         );
     }
@@ -112,15 +111,15 @@ public class CommandRegistry {
         }
     }
 
-    private static int placeWoodBlocks(CommandContext<CommandSourceStack> ctx, String type) throws CommandSyntaxException {
+    private static int placeMatchingBlocks(CommandContext<CommandSourceStack> ctx, String type) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
         final ServerPlayer player = source.getPlayerOrException();
         Vec3 pos = source.getPosition();
 
         List<Block> blocks = new LinkedList<>();
-        for (String name :  NetherBlocks.getPossibleBlocks().stream().sorted().collect(Collectors.toList())) {
+        for (Block block :  NetherBlocks.getModBlocks().stream().sorted(CommandRegistry::compareBlockNames).collect(Collectors.toList())) {
+            final String name = Registry.BLOCK.getKey(block).getPath();
             if (name.indexOf(type)>=0){
-                Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
                 blocks.add(block);
             }
         }
@@ -128,7 +127,17 @@ public class CommandRegistry {
         placeBlockRow(player, pos, blocks, 1, true);
         return Command.SINGLE_SUCCESS;
     }
-
+    
+    @NotNull
+    private static int compareBlockNames(Block a, Block b) {
+       
+        final String as = Registry.BLOCK.getKey(a)
+                                        .getPath();
+        final String bs = Registry.BLOCK.getKey(b)
+                                        .getPath();
+        return as.compareTo(bs);
+    }
+    
     private static int placeAllBlocks(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
         final ServerPlayer player = source.getPlayerOrException();
@@ -140,8 +149,7 @@ public class CommandRegistry {
         List<Block> shovels = new LinkedList<>();
         List<Block> other = new LinkedList<>();
 
-        for (String name : NetherBlocks.getPossibleBlocks().stream().sorted().collect(Collectors.toList())) {
-            Block block = Registry.BLOCK.get(new ResourceLocation(BetterNether.MOD_ID, name));
+        for (Block block : NetherBlocks.getModBlocks().stream().sorted(CommandRegistry::compareBlockNames).collect(Collectors.toList())) {
             BlockBehaviour.Properties properties = ((AbstractBlockAccessor) block).getSettings();
             Material material = ((AbstractBlockSettingsAccessor) properties).getMaterial();
 

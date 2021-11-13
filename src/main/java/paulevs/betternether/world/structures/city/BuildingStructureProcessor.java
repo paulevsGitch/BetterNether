@@ -3,6 +3,8 @@ package paulevs.betternether.world.structures.city;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -24,7 +26,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
-import paulevs.betternether.blocks.BNPlanks;
 import paulevs.betternether.blocks.BlockBNPot;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockSmallLantern;
@@ -72,7 +73,7 @@ public class BuildingStructureProcessor extends StructureProcessor {
 			}
 			return setState(palette.getFoundationBlock(state), structureBlockInfo2);
 		}
-		else if (name.contains("plank") || name.contains("reed") || block instanceof BNPlanks) {
+		else if (name.contains("plank") || name.contains("reed") || BlockTags.PLANKS.contains(block)) {
 			if (block instanceof StairBlock) {
 				return setState(palette.getPlanksStair(state), structureBlockInfo2);
 			}
