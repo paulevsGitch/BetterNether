@@ -7,15 +7,13 @@ import paulevs.betternether.registry.NetherItems;
 import ru.bclib.items.tool.BaseHoeItem;
 
 public class NetherHoe extends BaseHoeItem {
-	protected float speed;
 
-	public NetherHoe(Tier material, float speed) {
+	public NetherHoe(Tier material) {
 		super(material, 1, -2.8F, NetherItems.defaultSettings().fireResistant());
-		this.speed = speed;
 	}
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
-		return super.getDestroySpeed(stack, state) * speed;
+		return super.getDestroySpeed(stack, state);
 	}
 }
