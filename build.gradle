@@ -31,10 +31,10 @@ dependencies {
 
 	println "Using local BCLib: ${local_bclib}"
     if (local_bclib){
-		compileOnly(project(":BCLib"))
-        api project(":BCLib")
+		//compileJava.dependsOn ':BCLib:build'
+		modImplementation project(":BCLib")
     } else {
-        useApi "com.github.paulevsGitch:BCLib:${project.bclib_version}"
+        modImplementation "com.github.paulevsGitch:BCLib:${project.bclib_version}"
     }
     
 }
