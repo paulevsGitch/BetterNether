@@ -4,10 +4,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import paulevs.betternether.BetterNether;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
-import paulevs.betternether.registry.NetherTags;
 import ru.bclib.api.TagAPI;
 import ru.bclib.items.tool.BasePickaxeItem;
 

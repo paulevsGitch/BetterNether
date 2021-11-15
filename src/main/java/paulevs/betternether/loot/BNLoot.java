@@ -1,21 +1,12 @@
 package paulevs.betternether.loot;
 
-import net.fabricmc.fabric.api.loot.v1.FabricLootPool;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback.LootTableSetter;
-import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
 import net.fabricmc.fabric.mixin.loot.table.LootSupplierBuilderHooks;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.advancements.critereon.LocationTrigger;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import paulevs.betternether.BetterNether;

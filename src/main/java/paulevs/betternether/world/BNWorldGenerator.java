@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Supplier;
 
-import com.google.common.collect.Lists;
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -29,16 +27,13 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.mixin.common.GenerationSettingsAccessor;
 import paulevs.betternether.registry.BiomesRegistry;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.structures.CityFeature;
-import ru.bclib.BCLib;
 import ru.bclib.api.BiomeAPI;
-import ru.bclib.world.generator.BCLibNetherBiomeSource;
 
 public class BNWorldGenerator {
 	private static boolean hasCleaningPass;

@@ -4,9 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 
 public class RecipesHelper {
 	private static final String[] SHAPE_ROOF = new String[] { "# #", "###", " # " };

@@ -136,7 +136,6 @@ import ru.bclib.recipes.GridRecipe;
 import ru.bclib.registry.BlockRegistry;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// Stalagnate //

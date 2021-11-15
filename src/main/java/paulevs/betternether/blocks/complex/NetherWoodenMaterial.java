@@ -29,7 +29,6 @@ import ru.bclib.complexmaterials.ComplexMaterial;
 import ru.bclib.complexmaterials.WoodenComplexMaterial;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 import ru.bclib.complexmaterials.entry.RecipeEntry;
-import ru.bclib.config.Config;
 import ru.bclib.config.Configs;
 import ru.bclib.config.PathConfig;
 import ru.bclib.recipes.GridRecipe;

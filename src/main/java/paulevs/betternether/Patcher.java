@@ -3,10 +3,8 @@ package paulevs.betternether;
 import java.util.List;
 import java.util.Map;
 
-import com.ibm.icu.impl.locale.XCldrStub.ImmutableSet;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import paulevs.betternether.registry.NetherBlocks;
 import ru.bclib.api.datafixer.DataFixerAPI;
 import ru.bclib.api.datafixer.MigrationProfile;
 import ru.bclib.api.datafixer.Patch;

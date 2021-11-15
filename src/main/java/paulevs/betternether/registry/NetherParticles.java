@@ -5,9 +5,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.particles.SimpleParticleType;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.particles.BNParticleProvider.ObsidianWeepFallProvider;
-import paulevs.betternether.particles.BNParticleProvider.ObsidianWeepHangProvider;
-import paulevs.betternether.particles.BNParticleProvider.ObsidianWeepLandProvider;
 import paulevs.betternether.particles.BNSimpleParticleType;
 import paulevs.betternether.particles.BNParticleProvider;
 

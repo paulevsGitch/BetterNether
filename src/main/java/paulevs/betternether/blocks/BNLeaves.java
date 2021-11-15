@@ -6,7 +6,6 @@ import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import ru.bclib.blocks.BaseBlock;
 import ru.bclib.blocks.BaseLeavesBlock;
 
 import java.util.function.Consumer;

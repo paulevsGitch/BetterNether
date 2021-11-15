@@ -1,7 +1,6 @@
 package paulevs.betternether.advancements;
 
 import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
-import net.minecraft.advancements.critereon.ConsumeItemTrigger;
 import net.minecraft.advancements.critereon.LocationTrigger;
 import paulevs.betternether.BetterNether;
 

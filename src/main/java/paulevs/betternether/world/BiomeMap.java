@@ -4,7 +4,6 @@ import java.util.HashMap;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import ru.bclib.world.biomes.BCLBiome;
 

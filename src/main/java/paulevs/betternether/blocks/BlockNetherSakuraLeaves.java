@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.MHelper;
-import ru.bclib.blocks.BaseLeavesBlock;
 
 import java.util.Random;
 

@@ -21,7 +21,6 @@ import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureWartCap;
 import ru.bclib.world.biomes.BCLBiome;
-import ru.bclib.world.biomes.BCLBiomeDef;
 
 public class NetherBiome extends BCLBiome{
 	private static final String[] DEF_STRUCTURES = new String[] {
