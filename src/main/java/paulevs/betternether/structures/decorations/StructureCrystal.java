@@ -7,6 +7,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.dimension.DimensionDefaults;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
@@ -45,6 +46,10 @@ public class StructureCrystal implements IStructure {
 						POS.setX(pos.getX() + x);
 						POS.setY(pos.getY() + y);
 						POS.setZ(pos.getZ() + z);
+						
+						if (POS.getY() <= DimensionDefaults.NETHER_MIN_Y || POS.getY()>= DimensionDefaults.NETHER_GENERATION_HEIGHT) {
+							continue;
+						}
 						BlockState state;
 						if (d<=-0.3) {
 							state = random.nextInt(12) == 0  ? (isBlue?NetherBlocks.BLUE_WEEPING_OBSIDIAN:NetherBlocks.WEEPING_OBSIDIAN).defaultBlockState() : getState(index, v);
