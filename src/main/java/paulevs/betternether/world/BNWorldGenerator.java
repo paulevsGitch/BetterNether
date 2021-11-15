@@ -36,6 +36,7 @@ import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.structures.CityFeature;
+import ru.bclib.BCLib;
 import ru.bclib.api.BiomeAPI;
 import ru.bclib.world.generator.BCLibNetherBiomeSource;
 
@@ -78,14 +79,7 @@ public class BNWorldGenerator {
 	public static final ConfiguredStructureFeature<NoneFeatureConfiguration, ? extends StructureFeature<NoneFeatureConfiguration>> CITY_CONFIGURED = CITY.configured(NoneFeatureConfiguration.NONE);
 	
 	public static void onModInit() {
-		BCLibNetherBiomeSource.onInit.add( (biomeSource) -> {
-			biomeSource.possibleBiomes().forEach((biome) -> {
-				GenerationSettingsAccessor accessor = (GenerationSettingsAccessor) biome.getGenerationSettings();
-				List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = Lists.newArrayList(accessor.getStructureStarts());
-				structures.add(() -> BNWorldGenerator.CITY_CONFIGURED);
-				accessor.setStructureStarts(structures);
-			});
-		});
+		BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> BiomeAPI.addBiomeStructure(biome, BNWorldGenerator.CITY_CONFIGURED));
 		
 		hasCleaningPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
 		hasFixPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "world_fixing_pass", true);
