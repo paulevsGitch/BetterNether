@@ -34,8 +34,8 @@ public class NetherTags {
 		if (item!=null && item != Items.AIR) {
 			ComposterBlockAccessor.callAdd(chance, item);
 		}
-		
 	}
+	
 	public static void register() {
 		NetherBlocks.getModBlocks().forEach(block -> {
 			BlockBehaviour.Properties properties = ((AbstractBlockAccessor) block).getSettings();
