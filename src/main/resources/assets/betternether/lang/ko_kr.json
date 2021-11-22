@@ -451,11 +451,11 @@
 	"block.betternether.brick_pot": "네더 벽돌 냄비",
 	
 	"block.betternether.rubeus_stripped_log": "껍질 벗긴 루베우스나무 원목",
-	"block.betternether.rubeus_stripped_bark": "껍질 벗긴 루베우스나무 껍질",
+	"block.betternether.rubeus_stripped_bark": "껍질 벗긴 루베우스나무",
 	"block.betternether.rubeus_cone": "루베우스나무 방울",
 	"block.betternether.rubeus_sapling": "루베우스나무 묘목",
 	"block.betternether.rubeus_log": "루베우스나무 원목",
-	"block.betternether.rubeus_bark": "루베우스나무 껍질",
+	"block.betternether.rubeus_bark": "루베우스나무",
 	"block.betternether.rubeus_leaves": "루베우스나무 잎",
 	"block.betternether.rubeus_planks": "루베우스나무 판자",
 	"block.betternether.rubeus_stairs": "루베우스나무 계단",
@@ -631,7 +631,7 @@
 	"block.betternether.swampland_grass": "습지대 잔디",
 	"block.betternether.basalt_slab": "현무암 반 블록",
 	
-	"block.betternether.anchor_tree_bark": "닻나무 껍질",
+	"block.betternether.anchor_tree_bark": "닻나무",
 	"block.betternether.anchor_tree_button": "닻나무 버튼",
 	"block.betternether.anchor_tree_door": "닻나무 문",
 	"block.betternether.anchor_tree_fence": "닻나무 울타리",
@@ -649,7 +649,7 @@
 	"block.betternether.anchor_tree_chest": "닻나무 상자",
 	"block.betternether.anchor_tree_crafting_table": "닻나무 제작대",
 	"block.betternether.anchor_tree_sign": "닻나무 표지판",
-	"block.betternether.anchor_tree_stripped_bark": "껍질 벗긴 닻나무 껍질",
+	"block.betternether.anchor_tree_stripped_bark": "껍질 벗긴 닻나무",
 	"block.betternether.anchor_tree_stripped_log": "껍질 벗긴 닻나무 원목",
 	"block.betternether.anchor_tree_taburet": "닻나무 스툴",
 	
@@ -660,7 +660,7 @@
 	"block.betternether.giant_lucis": "거대 루시스",
 	"block.betternether.moss_cover": "이끼 덮개",
 	
-	"block.betternether.nether_sakura_bark": "네더 벚나무 껍질",
+	"block.betternether.nether_sakura_bark": "네더 벚나무",
 	"block.betternether.nether_sakura_button": "네더 벚나무 버튼",
 	"block.betternether.nether_sakura_door": "네더 벚나무 문",
 	"block.betternether.nether_sakura_fence": "네더 벚나무 울타리",
@@ -678,7 +678,7 @@
 	"block.betternether.nether_sakura_chest": "네더 벚나무 상자",
 	"block.betternether.nether_sakura_crafting_table": "네더 벚나무 제작대",
 	"block.betternether.nether_sakura_sign": "네더 벚나무 표지판",
-	"block.betternether.nether_sakura_stripped_bark": "껍질 벗긴 네더 벚나무 껍질",
+	"block.betternether.nether_sakura_stripped_bark": "껍질 벗긴 네더 벚나무",
 	"block.betternether.nether_sakura_stripped_log": "껍질 벗긴 네더 벚나무 원목",
 	"block.betternether.nether_sakura_taburet": "네더 벚나무 스툴",
 	
