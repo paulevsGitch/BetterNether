@@ -1,3 +1,4 @@
+/**
 package paulevs.betternether.mixin.common;
 
 import net.minecraft.core.BlockPos;
@@ -38,3 +39,4 @@ public class LayerLightSectionStorageMixin {
 	}
 
 }
+**/
