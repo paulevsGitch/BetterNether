@@ -14,6 +14,7 @@ import net.minecraft.world.level.material.Material;
 import paulevs.betternether.blocks.BlockTerrain;
 import ru.bclib.api.BonemealAPI;
 import ru.bclib.api.TagAPI;
+import ru.bclib.api.ComposterAPI;
 import ru.bclib.blocks.BaseVineBlock;
 import ru.bclib.blocks.SimpleLeavesBlock;
 import ru.bclib.mixin.common.ComposterBlockAccessor;
@@ -25,12 +26,6 @@ public class NetherTags {
 	public static final Tag.Named<Block> NYLIUM = BlockTags.NYLIUM;
 
 	public static final Tag<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
-
-	private static void allowCompost(float chance, Item item){
-		if (item!=null && item != Items.AIR) {
-			ComposterBlockAccessor.callAdd(chance, item);
-		}
-	}
 	
 	public static void register() {
 		NetherBlocks.getModBlocks().forEach(block -> {
@@ -47,9 +42,7 @@ public class NetherTags {
 			else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Material.WATER_PLANT)) {
 				TagAPI.addTag(TagAPI.MINEABLE_HOE, block);
 				TagAPI.addTag(BlockTags.LEAVES, block);
-				//TODO: for BCLib 0.5.3
-				//ComposterAPI.allowCompost(0.3f, item);
-				allowCompost(0.3F, item);
+				ComposterAPI.allowCompost(0.3f, item);
 			}
 			else if (material.equals(Material.SAND)) {
 				TagAPI.addTag(TagAPI.MINEABLE_SHOVEL, block);
@@ -63,9 +56,7 @@ public class NetherTags {
 			
 			else if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
 				TagAPI.addTag(BlockTags.LEAVES, block);
-				//TODO: for BCLib 0.5.3
-				//ComposterAPI.allowCompost(0.3f, item);
-				allowCompost(0.3F, item);
+				ComposterAPI.allowCompost(0.3f, item);
 			}
 			else if (block instanceof BaseVineBlock) {
 				TagAPI.addTag(BlockTags.CLIMBABLE, block);
@@ -76,9 +67,7 @@ public class NetherTags {
 
 			Material mat = block.defaultBlockState().getMaterial();
 			if (mat.equals(Material.PLANT) || mat.equals(Material.REPLACEABLE_PLANT)) {
-				//TODO: for BCLib 0.5.3
-				//ComposterAPI.allowCompost(0.1f, item);
-				allowCompost(0.1F, item);
+				ComposterAPI.allowCompost(0.1f, item);
 			}
 		});
 	}
