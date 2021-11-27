@@ -22,9 +22,9 @@ public class SpawnRestrictionMixin {
 
 	static {
 		register(EntityRegistry.NAGA, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new SpawnAPI<>(EntityNaga.class).notPeacefulBelowBrightness(8).maxAlive()::canSpawn);
-		register(EntityRegistry.FIREFLY, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, new SpawnAPI<>(EntityFirefly.class).notAboveBlock(BlocksHelper::isLava, 7).maxAlive(8)::canSpawn);
+		register(EntityRegistry.FIREFLY, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, new SpawnAPI<>(EntityFirefly.class).belowMaxHeight().notAboveBlock(BlocksHelper::isLava, 7).maxAlive(8)::canSpawn);
 		register(EntityRegistry.HYDROGEN_JELLYFISH, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new SpawnAPI<>(EntityHydrogenJellyfish.class).maxAlive()::canSpawn);
 		register(EntityRegistry.JUNGLE_SKELETON, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new SpawnAPI<>(EntityJungleSkeleton.class).notPeaceful()::canSpawn);
-		register(EntityRegistry.SKULL, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, new SpawnAPI<>(EntitySkull.class).notPeacefulBelowBrightness().belowMinHeight().maxAlive()::canSpawn);
+		register(EntityRegistry.SKULL, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, new SpawnAPI<>(EntitySkull.class).belowMaxHeight().notPeacefulBelowBrightness().maxAlive()::canSpawn);
 	}
 }
