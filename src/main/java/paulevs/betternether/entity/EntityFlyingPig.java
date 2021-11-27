@@ -52,7 +52,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.EntityRegistry;
 
-public class EntityFlyingPig extends Animal implements FlyingAnimal {
+public class EntityFlyingPig extends NetherAnimal implements FlyingAnimal {
 	private static final EntityDataAccessor<Byte> DATA_SHARED_FLAGS_ID;
 	private static final int BIT_ROOSTING = 0;
 	private static final int BIT_WARTED = 1;
