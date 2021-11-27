@@ -35,7 +35,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.registry.SoundsRegistry;
 
-public class EntityHydrogenJellyfish extends Animal implements FlyingAnimal {
+public class EntityHydrogenJellyfish extends NetherAnimal implements FlyingAnimal {
 	private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(EntityHydrogenJellyfish.class, EntityDataSerializers.FLOAT);
 
 	private Vec3 preVelocity;

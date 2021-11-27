@@ -53,7 +53,7 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
 
-public class EntityFirefly extends Animal implements FlyingAnimal {
+public class EntityFirefly extends NetherAnimal implements FlyingAnimal {
 	private static final HashSet<Block> FLOWERS;
 	private static final Vec3i[] SEARCH;
 
