@@ -3,42 +3,42 @@ package paulevs.betternether.world.structures.city;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Rotation;
 
-public class BoundingBox {
+public class BoundingBox2D {
 	int x1, x2, z1, z2;
 
-	public BoundingBox(int x1, int z1, int x2, int z2) {
+	public BoundingBox2D(int x1, int z1, int x2, int z2) {
 		this.x1 = x1;
 		this.x2 = x2;
 		this.z1 = z1;
 		this.z2 = z2;
 	}
 
-	public BoundingBox(BlockPos size, int offsetX, int offsetZ) {
+	public BoundingBox2D(BlockPos size, int offsetX, int offsetZ) {
 		this.x1 = offsetX;
 		this.x2 = x1 + size.getX();
 		this.z1 = offsetZ;
 		this.z2 = z1 + size.getZ();
 	}
 
-	public BoundingBox(BlockPos size) {
+	public BoundingBox2D(BlockPos size) {
 		this.x1 = 0;
 		this.x2 = size.getX();
 		this.z1 = 0;
 		this.z2 = size.getZ();
 	}
 
-	public boolean isColliding(BoundingBox bb) {
+	public boolean isColliding(BoundingBox2D bb) {
 		boolean colX = (bb.x1 < x2) && (x1 < bb.x2);
 		boolean colZ = (bb.z1 < z2) && (z1 < bb.z2);
 		return colX && colZ;
 	}
 
-	public BoundingBox offset(BlockPos offset) {
-		return new BoundingBox(x1 + offset.getX(), z1 + offset.getZ(), x2 + offset.getX(), z2 + offset.getZ());
+	public BoundingBox2D offset(BlockPos offset) {
+		return new BoundingBox2D(x1 + offset.getX(), z1 + offset.getZ(), x2 + offset.getX(), z2 + offset.getZ());
 	}
 
-	public BoundingBox offsetNegative(BlockPos offset) {
-		return new BoundingBox(x1 - offset.getX(), z1 - offset.getZ(), x2 - offset.getX(), z2 - offset.getZ());
+	public BoundingBox2D offsetNegative(BlockPos offset) {
+		return new BoundingBox2D(x1 - offset.getX(), z1 - offset.getZ(), x2 - offset.getX(), z2 - offset.getZ());
 	}
 
 	public String toString() {

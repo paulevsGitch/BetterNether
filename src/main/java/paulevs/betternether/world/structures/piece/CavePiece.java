@@ -12,6 +12,7 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
@@ -23,23 +24,19 @@ public class CavePiece extends CustomPiece {
 	private BlockPos center;
 	private int radius;
 	private int radSqr;
-	private int minY;
-	private int maxY;
 
 	public CavePiece(BlockPos center, int radius, Random random, BoundingBox blockBox) {
-		super(StructureTypes.CAVE, random.nextInt(), blockBox);
+		super(StructureTypes.CAVE, random.nextInt(), makeBoundingBox(center, radius));
 		this.center = center.immutable();
 		this.radius = radius;
 		this.radSqr = radius * radius;
-		makeBoundingBox();
 	}
 
-	protected CavePiece(ServerLevel serverWorld, CompoundTag tag) {
+	protected CavePiece(ServerLevel serverLevel, CompoundTag tag) {
 		super(StructureTypes.CAVE, tag);
 		this.center = NbtUtils.readBlockPos(tag.getCompound("center"));
 		this.radius = tag.getInt("radius");
 		this.radSqr = radius * radius;
-		makeBoundingBox();
 	}
 
 	@Override
@@ -54,13 +51,13 @@ public class CavePiece extends CustomPiece {
 		if (!(world.dimensionType().hasCeiling())) {
 			bottom = Blocks.NETHERRACK.defaultBlockState();
 		}
-		for (int x = blockBox.maxZ(); x <= blockBox.minZ(); x++) {
+		for (int x = blockBox.minX(); x <= blockBox.maxX(); x++) {
 			int px = x - center.getX();
 			px *= px;
-			for (int z = blockBox.minY(); z <= blockBox.maxY(); z++) {
+			for (int z = blockBox.minZ(); z <= blockBox.maxZ(); z++) {
 				int pz = z - center.getZ();
 				pz *= pz;
-				for (int y = minY; y <= maxY; y++) {
+				for (int y = blockBox.minY(); y <= blockBox.maxY(); y++) {
 					int py = (y - center.getY()) << 1;
 					py *= py;
 					if (px + py + pz <= radSqr + NOISE.eval(x * 0.1, y * 0.1, z * 0.1) * 800) {
@@ -77,13 +74,13 @@ public class CavePiece extends CustomPiece {
 		return true;
 	}
 
-	private void makeBoundingBox() {
-		int x1 = center.getX() - radius;
-		int x2 = center.getX() + radius;
-		minY = Math.max(22, center.getY() - radius);
-		maxY = Math.min(96, center.getY() + radius);
-		int z1 = center.getZ() - radius;
-		int z2 = center.getZ() + radius;
-		this.boundingBox = new BoundingBox(x1, minY, z1, x2, maxY, z2);
+	private static BoundingBox makeBoundingBox(BlockPos center, int radius) {
+		final int x1 = center.getX() - radius;
+		final int x2 = center.getX() + radius;
+		final int minY = Math.max(22, center.getY() - radius);
+		final int maxY = Math.min(96, center.getY() + radius);
+		final int z1 = center.getZ() - radius;
+		final int z2 = center.getZ() + radius;
+		return new BoundingBox(x1-12, minY, z1-12, x2+12, maxY, z2+12);
 	}
 }

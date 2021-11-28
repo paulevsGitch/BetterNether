@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
@@ -43,23 +44,23 @@ public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 
 		@Override
 		public void generatePieces(RegistryAccess dynamicRegistryManager, ChunkGenerator chunkGenerator, StructureManager structureManager, ChunkPos cpos, Biome biome, NoneFeatureConfiguration featureConfig, LevelHeightAccessor heightLimitView) {
-			int px = cpos.getBlockX(8);
-			int pz = cpos.getBlockZ(8);
-			int y = 40;
-			if (chunkGenerator instanceof FlatLevelSource) {
-				y = chunkGenerator.getBaseHeight(px, pz, Types.WORLD_SURFACE, heightLimitView);
-			}
-			BlockPos center = new BlockPos(px, y, pz);
-
-
-			// CityPalette palette = Palettes.getRandom(random);
-			List<CityPiece> buildings = generator.generate(center, this.random, Palettes.EMPTY);
-			BoundingBox cityBox = BoundingBox.infinite();
+			final int px = cpos.getBlockX(8);
+			final int pz = cpos.getBlockZ(8);
+			final int y = chunkGenerator instanceof FlatLevelSource
+				? chunkGenerator.getBaseHeight(px, pz, Types.WORLD_SURFACE, heightLimitView)
+				: 40;
+			final BlockPos center = new BlockPos(px, y, pz);
+			
+			//CityPalette palette = Palettes.getRandom(random);
+			final List<CityPiece> buildings = generator.generate(center, this.random, Palettes.EMPTY);
+			this.pieces.addAll(buildings);
+			
+			BoundingBox cityBox = new BoundingBox(center);
 			for (CityPiece p : buildings)
-				cityBox.encapsulate(p.getBoundingBox());
+				cityBox = cityBox.encapsulate(p.getBoundingBox());
 
-            int d1 = Math.max((center.getX() - cityBox.minX()), (cityBox.maxX() - center.getX()));
-            int d2 = Math.max((center.getZ() - cityBox.minZ()), (cityBox.maxZ() - center.getZ()));
+            final int d1 = Math.max((center.getX() - cityBox.minX()), (cityBox.maxX() - center.getX()));
+            final int d2 = Math.max((center.getZ() - cityBox.minZ()), (cityBox.maxZ() - center.getZ()));
             int radius = Math.max(d1, d2);
             if (radius / 2 + center.getY() < cityBox.maxY()) {
 				radius = (cityBox.maxY() - center.getY()) / 2;
@@ -68,20 +69,10 @@ public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 			if (!(chunkGenerator instanceof FlatLevelSource)) {
 				CavePiece cave = new CavePiece(center, radius, random, cityBox);
 				this.pieces.add(cave);
-				this.pieces.addAll(buildings);
-				//this.boundingBox = cave.getBoundingBox();
 			}
-			else {
-				this.pieces.addAll(buildings);
-				this.getBoundingBox();
-			}
-
-			this.getBoundingBox();
-
-			/*this.boundingBox.maxZ -= 12;
-			this.boundingBox.minZ += 12;
-			this.boundingBox.minY -= 12;
-			this.boundingBox.maxY += 12;*/
+			this.pieces.addAll(buildings);
+			
+			BetterNether.LOGGER.info("BBox after Cave:" + this.getBoundingBox().toString());
 		}
 	}
 }
