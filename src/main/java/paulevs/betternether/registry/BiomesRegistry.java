@@ -15,6 +15,7 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.CrimsonGlowingWoods;
 import paulevs.betternether.biomes.CrimsonPinewood;
 import paulevs.betternether.biomes.FloodedDeltas;
@@ -40,6 +41,7 @@ import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.biomes.UpsideDownForest;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
+import ru.bclib.BCLib;
 import ru.bclib.api.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiome;
 
@@ -120,6 +122,14 @@ public class BiomesRegistry {
 			if (biome.getBiomeCategory() == BiomeCategory.NETHER) {
 				ResourceLocation bioID = BuiltinRegistries.BIOME.getKey(biome);
 				Configs.GENERATOR.getFloat("biomes." + bioID.getNamespace() + ".main", bioID.getPath() + "_chance", 1);
+			}
+		});
+		
+		BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> {
+			if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
+				BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.FIREFLY, 5, 3, 6);
+				BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
+				BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.NAGA, 8, 3, 5);
 			}
 		});
 	}

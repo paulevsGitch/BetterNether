@@ -170,16 +170,6 @@ public class EntityRegistry {
 		
 		registerEntity("chair", CHAIR, EntityChair.getAttributeContainer());
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
-		//
-		//		registerEntity("firefly", FIREFLY, EntityFirefly.getAttributeContainer());
-		//		registerEntity("hydrogen_jellyfish", HYDROGEN_JELLYFISH, EntityHydrogenJellyfish.getAttributeContainer());
-		//		registerEntity("naga", NAGA, EntityNaga.getAttributeContainer());
-		//		registerEntity("flying_pig", FLYING_PIG, EntityFlyingPig.getAttributeContainer());
-		//		registerEntity("jungle_skeleton", JUNGLE_SKELETON, AbstractSkeleton.createAttributes().build());
-		//		registerEntity("skull", SKULL, EntitySkull.getAttributeContainer());
-		
-		
-		
 		
 		SpawnRuleBuilder
 			.start(FIREFLY)

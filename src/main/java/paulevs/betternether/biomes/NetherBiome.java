@@ -89,7 +89,7 @@ public class NetherBiome extends BCLBiome{
 	protected float localGenChance;
 
 	protected static BiomeDefinition addSpawns(BiomeDefinition definition){
-		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 2, 6);
+		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 3, 6);
 		definition.addMobSpawn(EntityRegistry.SKULL, 2, 2, 4);
 		definition.addMobSpawn(EntityRegistry.NAGA, 8, 3, 5);
 		definition.addMobSpawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
