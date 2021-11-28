@@ -55,14 +55,13 @@ public class EntityHydrogenJellyfish extends NetherAnimal implements FlyingAnima
 		this.entityData.define(SCALE, 0.5F + random.nextFloat());
 	}
 
-	public static AttributeSupplier getAttributeContainer() {
+	public static AttributeSupplier.Builder createMobAttributes() {
 		return Mob
 				.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 0.5)
 				.add(Attributes.FLYING_SPEED, 0.05)
 				.add(Attributes.MOVEMENT_SPEED, 0.5)
-				.add(Attributes.ATTACK_DAMAGE, 20.0)
-				.build();
+				.add(Attributes.ATTACK_DAMAGE, 20.0);
 	}
 
 	@Override

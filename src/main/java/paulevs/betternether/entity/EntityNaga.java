@@ -45,15 +45,14 @@ public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
 		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 	}
 
-	public static AttributeSupplier getAttributeContainer() {
+	public static AttributeSupplier.Builder createMobAttributes() {
 		return Mob
 				.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 10.0)
 				.add(Attributes.FOLLOW_RANGE, 35.0)
 				.add(Attributes.MOVEMENT_SPEED, 0.23)
 				.add(Attributes.ATTACK_DAMAGE, 3.0)
-				.add(Attributes.ARMOR, 2.0)
-				.build();
+				.add(Attributes.ARMOR, 2.0);
 	}
 
 	@Override

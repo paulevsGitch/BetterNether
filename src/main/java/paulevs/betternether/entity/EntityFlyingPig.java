@@ -79,7 +79,7 @@ public class EntityFlyingPig extends NetherAnimal implements FlyingAnimal {
 		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
 	}
 
-	public static AttributeSupplier getAttributeContainer() {
+	public static AttributeSupplier.Builder createMobAttributes() {
 		return Mob
 				.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 6.0)
@@ -87,8 +87,7 @@ public class EntityFlyingPig extends NetherAnimal implements FlyingAnimal {
 				.add(Attributes.MOVEMENT_SPEED, 0.3)
 				.add(Attributes.FLYING_SPEED, 0.3)
 				.add(Attributes.ATTACK_DAMAGE, 3.0)
-				.add(Attributes.ARMOR, 1.0)
-				.build();
+				.add(Attributes.ARMOR, 1.0);
 	}
 
 	@Override

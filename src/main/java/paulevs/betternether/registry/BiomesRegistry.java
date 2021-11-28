@@ -48,8 +48,6 @@ import ru.bclib.world.biomes.BCLBiome;
 public class BiomesRegistry {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
-	private static final HashMap<Biome, NetherBiome> MUTABLE = Maps.newHashMap();
-	private static final ArrayList<NetherBiome> GENERATOR = new ArrayList<NetherBiome>();
 	private static final Set<Integer> OCCUPIED_IDS = Sets.newHashSet();
 
 	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper(new ResourceLocation("nether_wastes"));
@@ -134,44 +132,6 @@ public class BiomesRegistry {
 		});
 	}
 	
-	public static void mutateRegistry(Registry<Biome> biomeRegistry) {
-		GENERATOR.clear();
-		GENERATOR.addAll(REGISTRY);
-
-		MUTABLE.clear();
-		for (NetherBiome netherBiome : BiomesRegistry.getAllBiomes()) {
-			Biome biome = biomeRegistry.get(netherBiome.getID());
-			netherBiome.setActualBiome(biome);
-			MUTABLE.put(biome, netherBiome);
-		}
-
-		if (maxDefChance == 0) maxDefChance = maxChance;
-		maxChance = maxDefChance;
-
-		Iterator<Biome> iterator = biomeRegistry.iterator();
-		while (iterator.hasNext()) {
-			Biome biome = iterator.next();
-			if (biome.getBiomeCategory() == BiomeCategory.NETHER && !BiomesRegistry.MUTABLE.containsKey(biome)) {
-				ResourceLocation id = biomeRegistry.getKey(biome);
-				NetherBiome netherBiome = new NetherBiomeWrapper(biomeRegistry.getKey(biome), biome);
-				netherBiome.setActualBiome(biome);
-				MUTABLE.put(biome, netherBiome);
-
-				float chance = Configs.GENERATOR.getFloat("biomes." + id.getNamespace() + ".main", id.getPath() + "_chance", 1);
-				if (chance > 0.0F) {
-					maxChance += chance;
-					//netherBiome.setGenChance(maxChance);
-					String path = "generator.biome." + netherBiome.getID().getNamespace() + "." + netherBiome.getID().getPath();
-					netherBiome.setPlantDensity(Configs.BIOMES.getFloat(path, "plants_and_structures_density", 1));
-					netherBiome.build();
-					GENERATOR.add(netherBiome);
-				}
-			}
-		}
-		
-		Config.save();
-	}
-
 	private static void register(NetherBiome biome) {
 		if (BuiltinRegistries.BIOME.get(biome.getID()) == null) {
 			if (OCCUPIED_IDS.isEmpty()) {
@@ -238,19 +198,6 @@ public class BiomesRegistry {
 
 	public static BCLBiome getBiome(Random random) {
 		return BiomeAPI.NETHER_BIOME_PICKER.getBiome(random);
-		//float chance = random.nextFloat() * maxChance;
-		/*for (NetherBiome biome : GENERATOR)
-			if (biome.canGenerate(chance))
-				return biome;*/
-		//return BIOME_EMPTY_NETHER;
-	}
-
-	/*public static NetherBiome getFromBiome(Biome biome) {
-		return MUTABLE.getOrDefault(biome, BIOME_EMPTY_NETHER);
-	}*/
-
-	public static ArrayList<NetherBiome> getRegisteredBiomes() {
-		return REGISTRY;
 	}
 
 	public static ArrayList<NetherBiome> getAllBiomes() {

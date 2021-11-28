@@ -21,6 +21,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier.Builder;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
@@ -145,11 +146,11 @@ public class EntityRegistry {
 		return type;
 	}
 	
-	private static boolean canSpawnAboveLava(LevelAccessor world, BlockPos pos, boolean allow){
-		int h = ru.bclib.util.BlocksHelper.downRay(world, pos, MAX_FLOAT_HEIGHT+1);
+	private static boolean testSpawnAboveLava(LevelAccessor world, BlockPos pos, boolean allow){
+		int h = ru.bclib.util.BlocksHelper.downRay(world, pos, MAX_FLOAT_HEIGHT+2);
 		if  (h>MAX_FLOAT_HEIGHT) return false;
 		
-		for (int i = 1; i <= h; i++)
+		for (int i = 1; i <= h+1; i++)
 			if (BlocksHelper.isLava(world.getBlockState(pos.below(i))))
 				return allow;
 		
@@ -157,8 +158,9 @@ public class EntityRegistry {
 	}
 	
 	public static final int MAX_FLOAT_HEIGHT = 7;
-	public static final SpawnRule RULE_FLOAT_NOT_ABOVE_LAVA = (type, world, spawnReason, pos, random) -> canSpawnAboveLava(world, pos, false);
-	public static final SpawnRule RULE_FLOAT_ABOVE_LAVA = (type, world, spawnReason, pos, random) -> canSpawnAboveLava(world, pos, true);
+	public static final SpawnRule RULE_FLOAT_NOT_ABOVE_LAVA = (type, world, spawnReason, pos, random) -> testSpawnAboveLava(world, pos, false);
+	public static final SpawnRule RULE_FLOAT_ABOVE_LAVA = (type, world, spawnReason, pos, random) -> testSpawnAboveLava(world, pos, true);
+	
 	
 	public static void register() {
 		NETHER_ENTITIES.add(EntityType.GHAST);
@@ -175,39 +177,39 @@ public class EntityRegistry {
 			.start(FIREFLY)
 			.belowMaxHeight()
 			.customRule(RULE_FLOAT_NOT_ABOVE_LAVA)
-			.maxNearby(32)
+			.maxNearby(32, 64)
 			.buildNoRestrictions(Types.MOTION_BLOCKING_NO_LEAVES);
 		
 		SpawnRuleBuilder
 			.start(HYDROGEN_JELLYFISH)
 			.belowMaxHeight()
-			.customRule(RULE_FLOAT_ABOVE_LAVA)
-			.maxNearby(24)
+			.maxNearby(24, 64)
 			.buildNoRestrictions(Types.MOTION_BLOCKING);
 		
 		SpawnRuleBuilder
 			.start(NAGA)
 			.hostile(8)
-			.maxNearby(32)
+			.maxNearby(32, 64)
 			.buildOnGround(Types.MOTION_BLOCKING_NO_LEAVES);
 		
 		SpawnRuleBuilder
 			.start(FLYING_PIG)
 			.belowMaxHeight()
-			.maxNearby(16)
+			.customRule(RULE_FLOAT_NOT_ABOVE_LAVA)
+			.maxNearby(16, 64)
 			.buildNoRestrictions(Types.MOTION_BLOCKING);
 		
 		SpawnRuleBuilder
 			.start(JUNGLE_SKELETON)
 			.notPeaceful()
-			.maxNearby(16)
+			.maxNearby(16, 64)
 			.buildOnGround(Types.MOTION_BLOCKING_NO_LEAVES);
 		
 		SpawnRuleBuilder
 			.start(SKULL)
 			.belowMaxHeight()
 			.vanillaHostile()
-			.maxNearby(16)
+			.maxNearby(16, 64)
 			.buildNoRestrictions(Types.MOTION_BLOCKING);
 	}
 	

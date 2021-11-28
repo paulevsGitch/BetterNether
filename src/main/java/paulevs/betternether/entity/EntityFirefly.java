@@ -18,6 +18,7 @@ import net.minecraft.tags.Tag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.MobType;
@@ -78,17 +79,16 @@ public class EntityFirefly extends NetherAnimal implements FlyingAnimal {
 		super.defineSynchedData();
 		makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.25F, 1);
 	}
-
-	public static AttributeSupplier getAttributeContainer() {
+	
+	public static AttributeSupplier.Builder createMobAttributes() {
 		return Mob
-				.createMobAttributes()
-				.add(Attributes.MAX_HEALTH, 1.0)
-				.add(Attributes.FLYING_SPEED, 0.6)
-				.add(Attributes.MOVEMENT_SPEED, 0.25)
-				.add(Attributes.FOLLOW_RANGE, 48.0)
-				.build();
+			.createMobAttributes()
+			.add(Attributes.MAX_HEALTH, 1.0)
+			.add(Attributes.FLYING_SPEED, 0.6)
+			.add(Attributes.MOVEMENT_SPEED, 0.25)
+			.add(Attributes.FOLLOW_RANGE, 48.0);
 	}
-
+	
 	@Override
 	protected PathNavigation createNavigation(Level world) {
 		FlyingPathNavigation birdNavigation = new FlyingPathNavigation(this, world) {
