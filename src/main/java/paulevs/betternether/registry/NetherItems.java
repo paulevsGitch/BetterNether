@@ -50,8 +50,6 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	public static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
 	public static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
 
-	private static final int ALPHA = 255 << 24;
-
 	public static final Item BLACK_APPLE = registerItem("black_apple", new ItemBlackApple());
 
 	public static final Item STALAGNATE_BOWL = registerItem("stalagnate_bowl", new ItemBowlFood(null, FoodShape.NONE));
@@ -98,13 +96,6 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 	public static final Item CINCINNASITE_EXCAVATOR = registerItem("cincinnasite_excavator", VanillaExcavatorsIntegration.makeExcavator(BNItemMaterials.CINCINNASITE_TOOLS, 4, -2.0F));
 	public static final Item CINCINNASITE_EXCAVATOR_DIAMOND = registerItem("cincinnasite_excavator_diamond", VanillaExcavatorsIntegration.makeExcavator(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 5, -2.0F));
 	public static final Item NETHER_RUBY_EXCAVATOR = registerItem("nether_ruby_excavator", VanillaExcavatorsIntegration.makeExcavator(BNItemMaterials.NETHER_RUBY_TOOLS, 5, -2.0F));
-
-	public static final Item SPAWN_EGG_FIREFLY = registerItem("spawn_egg_firefly", makeEgg("firefly", EntityRegistry.FIREFLY, color(255, 223, 168), color(233, 182, 95)));
-	public static final Item SPAWN_EGG_JELLYFISH = registerItem("spawn_egg_hydrogen_jellyfish", makeEgg("hydrogen_jellyfish", EntityRegistry.HYDROGEN_JELLYFISH, color(253, 164, 24), color(88, 21, 4)));
-	public static final Item SPAWN_NAGA = registerItem("spawn_egg_naga", makeEgg("naga", EntityRegistry.NAGA, MHelper.color(12, 12, 12), MHelper.color(210, 90, 26)));
-	public static final Item SPAWN_FLYING_PIG = registerItem("spawn_egg_flying_pig", makeEgg("flying_pig", EntityRegistry.FLYING_PIG, MHelper.color(241, 140, 93), MHelper.color(176, 58, 47)));
-	public static final Item SPAWN_JUNGLE_SKELETON = registerItem("spawn_egg_jungle_skeleton", makeEgg("jungle_skeleton", EntityRegistry.JUNGLE_SKELETON, MHelper.color(134, 162, 149), MHelper.color(6, 111, 79)));
-	public static final Item SPAWN_SKULL = registerItem("spawn_egg_skull", makeEgg("skull", EntityRegistry.SKULL, MHelper.color(24, 19, 19), MHelper.color(255, 28, 18)));
 
 	public static final Item GLOWSTONE_PILE = registerItem("glowstone_pile", new Item(defaultSettings()));
 	public static final Item LAPIS_PILE = registerItem("lapis_pile", new Item(defaultSettings()));
@@ -187,7 +178,7 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 		return new Item.Properties().tab(CreativeTabs.BN_TAB);
 	}
 
-	private static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {
+	public static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {
 		if (Configs.MOBS.getBoolean("mobs", name, true)) {
 			SpawnEggItem item = new SpawnEggItem(type, background, dots, defaultSettings());
 			DefaultDispenseItemBehavior behavior = new DefaultDispenseItemBehavior() {
@@ -205,10 +196,6 @@ public class NetherItems extends ru.bclib.registry.ItemRegistry {
 		else {
 			return Items.AIR;
 		}
-	}
-
-	private static int color(int r, int g, int b) {
-		return ALPHA | (r << 16) | (g << 8) | b;
 	}
 
 	public static List<String> getPossibleItems() {

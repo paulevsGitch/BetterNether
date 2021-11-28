@@ -8,7 +8,7 @@ import net.minecraft.nbt.ListTag;
 import ru.bclib.api.datafixer.DataFixerAPI;
 import ru.bclib.api.datafixer.MigrationProfile;
 import ru.bclib.api.datafixer.Patch;
-import ru.bclib.api.datafixer.PatchBiFunction;
+import ru.bclib.interfaces.PatchBiFunction;
 
 public class Patcher {
 	public static void register() {
