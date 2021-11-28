@@ -34,7 +34,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -51,8 +50,9 @@ import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.EntityRegistry;
+import ru.bclib.entity.DespawnableAnimal;
 
-public class EntityFlyingPig extends NetherAnimal implements FlyingAnimal {
+public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 	private static final EntityDataAccessor<Byte> DATA_SHARED_FLAGS_ID;
 	private static final int BIT_ROOSTING = 0;
 	private static final int BIT_WARTED = 1;

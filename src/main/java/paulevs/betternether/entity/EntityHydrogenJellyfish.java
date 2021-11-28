@@ -22,7 +22,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
@@ -34,8 +33,9 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.registry.SoundsRegistry;
+import ru.bclib.entity.DespawnableAnimal;
 
-public class EntityHydrogenJellyfish extends NetherAnimal implements FlyingAnimal {
+public class EntityHydrogenJellyfish extends DespawnableAnimal implements FlyingAnimal {
 	private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(EntityHydrogenJellyfish.class, EntityDataSerializers.FLOAT);
 
 	private Vec3 preVelocity;
