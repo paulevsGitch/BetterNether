@@ -207,6 +207,9 @@ public class NetherBiome extends BCLBiome{
 			case WALL:
 				generatorsWall.add(new StructureInfo(structure, density, useNoise));
 				break;
+			case LAVA:
+				generatorsLava.add(new StructureInfo(structure, density, useNoise));
+				break;
 			default:
 				break;
 		}
