@@ -1,16 +1,12 @@
 package paulevs.betternether.registry;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
-import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -20,7 +16,6 @@ import paulevs.betternether.biomes.CrimsonGlowingWoods;
 import paulevs.betternether.biomes.CrimsonPinewood;
 import paulevs.betternether.biomes.FloodedDeltas;
 import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.biomes.NetherBiomeWrapper;
 import paulevs.betternether.biomes.NetherBoneReef;
 import paulevs.betternether.biomes.NetherGrasslands;
 import paulevs.betternether.biomes.NetherGravelDesert;
@@ -39,9 +34,7 @@ import paulevs.betternether.biomes.OldFungiwoods;
 import paulevs.betternether.biomes.OldSwampland;
 import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.biomes.UpsideDownForest;
-import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
-import ru.bclib.BCLib;
 import ru.bclib.api.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiome;
 

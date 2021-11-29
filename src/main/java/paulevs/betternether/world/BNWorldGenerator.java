@@ -13,6 +13,7 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -125,7 +126,7 @@ public class BNWorldGenerator {
 		return x < 0 ? 0 : x > max ? max : x;
 	}
 
-	public static void populate(WorldGenRegion world, int sx, int sz, Random random) {
+	public static void populate(WorldGenLevel world, int sx, int sz, Random random) {
 		// Structure Generator
 		if (random.nextFloat() < structureDensity) {
 			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, 100, random), sz + random.nextInt(16));
@@ -299,7 +300,7 @@ public class BNWorldGenerator {
 			}
 	}
 
-	private static void makeLocalBiomes(WorldGenRegion world, int sx, int sz) {
+	private static void makeLocalBiomes(WorldGenLevel world, int sx, int sz) {
 		MC_BIOMES.clear();
 		for (int x = 0; x < 8; x++) {
 			popPos.setX(sx + (x << 1) + 2);
@@ -320,7 +321,7 @@ public class BNWorldGenerator {
 		}
 	}
 
-	public static void prePopulate(WorldGenRegion world, int sx, int sz, Random random) {
+	public static void prePopulate(WorldGenLevel world, int sx, int sz, Random random) {
 		makeLocalBiomes(world, sx, sz);
 
 		if (hasCaves) {
@@ -382,12 +383,12 @@ public class BNWorldGenerator {
 		}
 	}
 
-	private static boolean canReplace(LevelAccessor world, BlockPos pos) {
+	private static boolean canReplace(WorldGenLevel world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 		return BlocksHelper.isNetherGround(state) || state.getBlock() == Blocks.GRAVEL;
 	}
 
-	private static void spawnOre(BlockState state, LevelAccessor world, BlockPos pos, Random random, int minSize, int maxSize) {
+	private static void spawnOre(BlockState state, WorldGenLevel world, BlockPos pos, Random random, int minSize, int maxSize) {
 		int size = MHelper.randRange(minSize, maxSize, random);
 		for (int i = 0; i < size; i++) {
 			BlockPos local = pos.offset(random.nextInt(3), random.nextInt(3), random.nextInt(3));
@@ -397,13 +398,13 @@ public class BNWorldGenerator {
 		}
 	}
 
-	public static void cleaningPass(LevelAccessor world, int sx, int sz) {
+	public static void cleaningPass(WorldGenLevel world, int sx, int sz) {
 		if (hasFixPass) {
 			fixBlocks(world, sx, 30, sz, sx + 15, 110, sz + 15);
 		}
 	}
 
-	private static void fixBlocks(LevelAccessor world, int x1, int y1, int z1, int x2, int y2, int z2) {
+	private static void fixBlocks(WorldGenLevel world, int x1, int y1, int z1, int x2, int y2, int z2) {
 		// List<BlockPos> lavafalls = Lists.newArrayList();
 		// List<BlockPos> update = Lists.newArrayList();
 

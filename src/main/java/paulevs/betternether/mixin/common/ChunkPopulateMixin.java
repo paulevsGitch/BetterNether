@@ -24,38 +24,38 @@ public abstract class ChunkPopulateMixin {
 
 	@Inject(method = "applyBiomeDecoration", at = @At("HEAD"), cancellable = true)
 	private void customPopulate(WorldGenRegion region, StructureFeatureManager accessor, CallbackInfo info) {
-		ChunkPos chunkPos = region.getCenter();
-		final int chunkX = chunkPos.x;
-		final int chunkZ = chunkPos.z;
-		if (!region.isClientSide() && isNetherBiome(region, chunkX, chunkZ) && region.getChunk(chunkX, chunkZ) != null) {
-			RANDOM.setBaseChunkSeed(chunkX, chunkZ);
-			final int sx = chunkX << 4;
-			final int sz = chunkZ << 4;
-			BNWorldGenerator.prePopulate(region, sx, sz, RANDOM);
-
-			long featureSeed = RANDOM.setDecorationSeed(region.getSeed(), chunkX, chunkZ);
-			ChunkGenerator generator = (ChunkGenerator) (Object) this;
-			for (Biome biome : BNWorldGenerator.getPopulateBiomes()) {
-				try {
-					biome.generate(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, region.getMinBuildHeight(), sz));
-				}
-				catch (Exception e) {
-					CrashReport crashReport = CrashReport.forThrowable(e, "Biome decoration");
-					crashReport
-							.addCategory("Generation")
-							.setDetail("CenterX", chunkX)
-							.setDetail("CenterZ", chunkZ)
-							.setDetail("Seed", featureSeed)
-							.setDetail("Biome", biome);
-					throw new ReportedException(crashReport);
-				}
-			}
-
-			BNWorldGenerator.populate(region, sx, sz, RANDOM);
-			BNWorldGenerator.cleaningPass(region, sx, sz);
-
-			info.cancel();
-		}
+//		ChunkPos chunkPos = region.getCenter();
+//		final int chunkX = chunkPos.x;
+//		final int chunkZ = chunkPos.z;
+//		if (!region.isClientSide() && isNetherBiome(region, chunkX, chunkZ) && region.getChunk(chunkX, chunkZ) != null) {
+//			RANDOM.setBaseChunkSeed(chunkX, chunkZ);
+//			final int sx = chunkX << 4;
+//			final int sz = chunkZ << 4;
+//			BNWorldGenerator.prePopulate(region, sx, sz, RANDOM);
+//
+//			long featureSeed = RANDOM.setDecorationSeed(region.getSeed(), chunkX, chunkZ);
+//			ChunkGenerator generator = (ChunkGenerator) (Object) this;
+//			for (Biome biome : BNWorldGenerator.getPopulateBiomes()) {
+//				try {
+//					biome.generate(accessor, generator, region, featureSeed, RANDOM, new BlockPos(sx, region.getMinBuildHeight(), sz));
+//				}
+//				catch (Exception e) {
+//					CrashReport crashReport = CrashReport.forThrowable(e, "Biome decoration");
+//					crashReport
+//							.addCategory("Generation")
+//							.setDetail("CenterX", chunkX)
+//							.setDetail("CenterZ", chunkZ)
+//							.setDetail("Seed", featureSeed)
+//							.setDetail("Biome", biome);
+//					throw new ReportedException(crashReport);
+//				}
+//			}
+//
+//			BNWorldGenerator.populate(region, sx, sz, RANDOM);
+//			BNWorldGenerator.cleaningPass(region, sx, sz);
+//
+//			info.cancel();
+//		}
 	}
 
 	private boolean isNetherBiome(WorldGenRegion world, int cx, int cz) {

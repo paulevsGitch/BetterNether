@@ -9,7 +9,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.block.Blocks;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
@@ -20,7 +22,11 @@ import paulevs.betternether.structures.StructureWorld;
 import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureWartCap;
+import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
+import ru.bclib.api.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiome;
+import ru.bclib.world.biomes.BCLBiomeDef;
+import ru.bclib.world.features.BCLFeature;
 
 public class NetherBiome extends BCLBiome{
 	private static final String[] DEF_STRUCTURES = new String[] {
@@ -97,8 +103,17 @@ public class NetherBiome extends BCLBiome{
 		return definition;
 	}
 	
+	private static BiomeDefinition makeDef(BiomeDefinition definition) {
+		BCLFeature feature = BCLFeature.makeChunkFeature(
+			BetterNether.makeID(definition.getID().getPath() + "_nether_populator"),
+			new NetherChunkPopulatorFeature(() -> (NetherBiome) BiomeAPI.getBiome(definition.getID()))
+		);
+		definition.setCategory(BiomeCategory.NETHER).addFeature(feature);
+		return definition;
+	}
+	
 	public NetherBiome(BiomeDefinition definition) {
-		super(addSpawns(definition));
+		super(addSpawns(makeDef(definition)));
 		
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
 		
