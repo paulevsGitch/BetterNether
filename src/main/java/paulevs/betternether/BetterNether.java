@@ -16,6 +16,7 @@ import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherItems;
+import paulevs.betternether.registry.NetherStructures;
 import paulevs.betternether.registry.NetherTags;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
@@ -45,6 +46,7 @@ public class BetterNether implements ModInitializer {
 		StructureTypes.init();
 		BNWorldGenerator.onModInit();
 		NetherFeatures.register();
+		NetherStructures.register();
 		NetherBiomes.register();
 		BrewingRegistry.register();
 		CommandRegistry.register();

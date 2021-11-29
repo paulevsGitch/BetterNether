@@ -1,26 +1,12 @@
 package paulevs.betternether.world;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-
-import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
-import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.biomes.NetherBiome;
@@ -29,17 +15,17 @@ import paulevs.betternether.config.Configs;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
-import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.BiomeAPI;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 
 public class BNWorldGenerator {
 	private static boolean hasCleaningPass;
 	private static boolean hasFixPass;
-
-	private static float cincinnasiteDensity;
-	private static float rubyDensity;
-	private static float lapisDensity;
-	private static float redstoneDensity;
+	
 	private static float structureDensity;
 	private static float lavaStructureDensity;
 	private static float globalDensity;
@@ -67,22 +53,14 @@ public class BNWorldGenerator {
 	protected static int biomeSizeY;
 	protected static boolean volumetric;
 
-	public static final CityFeature CITY = new CityFeature();
-	public static final ConfiguredStructureFeature<NoneFeatureConfiguration, ? extends StructureFeature<NoneFeatureConfiguration>> CITY_CONFIGURED = CITY.configured(NoneFeatureConfiguration.NONE);
 	
 	public static void onModInit() {
-		BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> BiomeAPI.addBiomeStructure(biome, BNWorldGenerator.CITY_CONFIGURED));
-		
 		hasCleaningPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
 		hasFixPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "world_fixing_pass", true);
 
 		hasCaves = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_caves", true);
 		hasPaths = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_paths", true);
 
-		cincinnasiteDensity = Configs.GENERATOR.getFloat("generator.world.ores", "cincinnasite_ore_density", 1F / 2000F);
-		rubyDensity = Configs.GENERATOR.getFloat("generator.world.ores", "ruby_ore_density", 1F / 6000F);
-		lapisDensity = Configs.GENERATOR.getFloat("generator.world.ores", "lapis_ore_density", 1F / 4000F);
-		redstoneDensity = Configs.GENERATOR.getFloat("generator.world.ores", "redstone_ore_density", 1F / 4000F);
 		structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
 		lavaStructureDensity = Configs.GENERATOR.getFloat("generator.world", "lava_structures_density", 1F / 200F) * 1.0001F;
 		globalDensity = Configs.GENERATOR.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
@@ -90,20 +68,6 @@ public class BNWorldGenerator {
 		biomeSizeXZ = Configs.GENERATOR.getInt("generator_world", "biome_size_xz", 200);
 		biomeSizeY = Configs.GENERATOR.getInt("generator_world", "biome_size_y", 40);
 		volumetric = Configs.GENERATOR.getBoolean("generator_world", "volumetric_biomes", true);
-
-		int distance = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
-		int separation = distance >> 1;
-
-		Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true);
-		FabricStructureBuilder.create(new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY)
-				.step(Decoration.RAW_GENERATION)
-				.defaultConfig(new StructureFeatureConfiguration(distance, separation, 1234))
-				.superflatFeature(CITY_CONFIGURED)
-				.register();
-
-		BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
-		
-		
 	}
 
 	public static void init(long seed) {
@@ -252,14 +216,6 @@ public class BNWorldGenerator {
 									}
 								}
 							}
-//							if (random.nextFloat() < cincinnasiteDensity)
-//								spawnOre(NetherBlocks.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 3, 12);
-//							if (random.nextFloat() < rubyDensity)
-//								spawnOre(NetherBlocks.NETHER_RUBY_ORE.defaultBlockState(), world, popPos, random, 1, 5);
-//							if (random.nextFloat() < lapisDensity)
-//								spawnOre(NetherBlocks.NETHER_LAPIS_ORE.defaultBlockState(), world, popPos, random, 1, 6);
-//							if (random.nextFloat() < redstoneDensity)
-//								spawnOre(NetherBlocks.NETHER_REDSTONE_ORE.defaultBlockState(), world, popPos, random, 1, 3);
 						}
 					}
 				}
@@ -384,16 +340,6 @@ public class BNWorldGenerator {
 		return BlocksHelper.isNetherGround(state) || state.getBlock() == Blocks.GRAVEL;
 	}
 
-	private static void spawnOre(BlockState state, WorldGenLevel world, BlockPos pos, Random random, int minSize, int maxSize) {
-		int size = MHelper.randRange(minSize, maxSize, random);
-		for (int i = 0; i < size; i++) {
-			BlockPos local = pos.offset(random.nextInt(3), random.nextInt(3), random.nextInt(3));
-			if (BlocksHelper.isNetherrack(world.getBlockState(local))) {
-				BlocksHelper.setWithoutUpdate(world, local, state);
-			}
-		}
-	}
-
 	public static void cleaningPass(WorldGenLevel world, int sx, int sz) {
 		if (hasFixPass) {
 			fixBlocks(world, sx, 30, sz, sx + 15, 110, sz + 15);
@@ -401,9 +347,6 @@ public class BNWorldGenerator {
 	}
 
 	private static void fixBlocks(WorldGenLevel world, int x1, int y1, int z1, int x2, int y2, int z2) {
-		// List<BlockPos> lavafalls = Lists.newArrayList();
-		// List<BlockPos> update = Lists.newArrayList();
-
 		for (int y = y1; y <= y2; y++) {
 			popPos.setY(y);
 			for (int x = x1; x <= x2; x++) {
@@ -412,24 +355,6 @@ public class BNWorldGenerator {
 					popPos.setZ(z);
 
 					BlockState state = world.getBlockState(popPos);
-
-					/*
-					 * if (y > 32 && BlocksHelper.isLava(state) &&
-					 * !BlocksHelper.isLava(world.getBlockState(popPos.down())))
-					 * {
-					 * 
-					 * if (world.isAir(popPos.down())) { Mutable p = new
-					 * Mutable().set(popPos.down()); while(likeAir(world, p)) {
-					 * lavafalls.add(p.toImmutable()); p.move(Direction.DOWN); }
-					 * update.add(p.up()); } else { for(Direction dir:
-					 * BlocksHelper.HORIZONTAL) { BlockPos start =
-					 * popPos.offset(dir); if (likeAir(world, start)) { Mutable
-					 * p = new Mutable().set(start); while(likeAir(world, p)) {
-					 * lavafalls.add(p.toImmutable()); p.move(Direction.DOWN); }
-					 * update.add(p.up()); } } }
-					 * 
-					 * continue; }
-					 */
 
 					if (!state.canSurvive(world, popPos)) {
 						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
@@ -463,48 +388,9 @@ public class BNWorldGenerator {
 				}
 			}
 		}
-
-		/*
-		 * for (BlockPos pos: lavafalls) BlocksHelper.setWithoutUpdate(world,
-		 * pos, Blocks.LAVA.getDefaultState().with(FluidBlock.LEVEL, 8));
-		 * 
-		 * for (BlockPos pos: update)
-		 * world.getChunk(pos).markBlockForPostProcessing(popPos.set(pos.getX()
-		 * & 15, pos.getY(), pos.getZ() & 15));
-		 */
 	}
 
 	public static HashSet<Biome> getPopulateBiomes() {
 		return MC_BIOMES;
 	}
-
-	/*
-	 * private static List<BlockPos> blockStream(WorldAccess world, BlockPos
-	 * pos) { List<BlockPos> path = new ArrayList<BlockPos>();
-	 * 
-	 * Mutable mutable = new Mutable().set(pos); Mutable center = new Mutable();
-	 * path.add(mutable.toImmutable());
-	 * 
-	 * int d = 0;
-	 * 
-	 * for (int i = 0; i < 256; i++) { if (d >= 3 || Math.abs(pos.getX() -
-	 * mutable.getX()) > 8 || Math.abs(pos.getZ() - mutable.getZ()) > 8) { for
-	 * (int x = -3; x <= 3; x++) { int x2 = x * x; for (int z = -3; z <= 3; z++)
-	 * { int z2 = z * z; for (int y = -3; y <= 0; y++) { int y2 = y * y; if (x2
-	 * + z2 + y2 < 9) { path.add(center.add(x, y, z)); } } } } break; }
-	 * 
-	 * if (mutable.getY() < 33) break;
-	 * 
-	 * if (likeAir(world, mutable.down())) { mutable.move(Direction.DOWN);
-	 * path.add(mutable.toImmutable()); center.set(mutable); d = 0; continue; }
-	 * for(Direction dir: BlocksHelper.HORIZONTAL) { if (likeAir(world,
-	 * mutable.offset(dir))) { mutable.offset(dir);
-	 * path.add(mutable.toImmutable()); d ++; break; } } }
-	 * 
-	 * return path; }
-	 * 
-	 * private static boolean likeAir(WorldAccess world, BlockPos pos) {
-	 * BlockState state = world.getBlockState(pos); return state.isAir() ||
-	 * !state.isFullCube(world, pos); }
-	 */
 }

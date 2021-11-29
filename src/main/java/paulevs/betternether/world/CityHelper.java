@@ -10,6 +10,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
+import paulevs.betternether.registry.NetherStructures;
 import paulevs.betternether.world.structures.CityFeature;
 
 public class CityHelper {
@@ -17,7 +18,7 @@ public class CityHelper {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	public static boolean stopStructGen(int chunkX, int chunkZ, ChunkGenerator chunkGenerator, long worldSeed, WorldgenRandom chunkRandom) {
-		StructureFeatureConfiguration config = chunkGenerator.getSettings().getConfig(BNWorldGenerator.CITY);
+		StructureFeatureConfiguration config = chunkGenerator.getSettings().getConfig(NetherStructures.CITY);
 		if (config != null && config.spacing() > 0) collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
 		return stopGeneration(chunkX, chunkZ);
 	}
@@ -31,7 +32,7 @@ public class CityHelper {
 		POSITIONS.clear();
 		for (int x = x1; x <= x2; x += 8) {
 			for (int z = z1; z <= z2; z += 8) {
-				ChunkPos chunk = BNWorldGenerator.CITY.getPotentialFeatureChunk(config, worldSeed, chunkRandom, x, z);
+				ChunkPos chunk = NetherStructures.CITY.getPotentialFeatureChunk(config, worldSeed, chunkRandom, x, z);
 				POSITIONS.add(chunk);
 			}
 		}
@@ -49,8 +50,8 @@ public class CityHelper {
 			POS.setX(x << 4);
 			for (int z = z1; z <= z2; z += 8) {
 				POS.setZ(z << 4);
-				if (world.getBiome(POS).getGenerationSettings().isValidStart(BNWorldGenerator.CITY)) {
-					ChunkPos chunk = BNWorldGenerator.CITY.getPotentialFeatureChunk(config, worldSeed, chunkRandom, x, z);
+				if (world.getBiome(POS).getGenerationSettings().isValidStart(NetherStructures.CITY)) {
+					ChunkPos chunk = NetherStructures.CITY.getPotentialFeatureChunk(config, worldSeed, chunkRandom, x, z);
 					POSITIONS.add(chunk);
 				}
 			}
@@ -75,7 +76,7 @@ public class CityHelper {
 		int cx = pos.getX() >> 4;
 		int cz = pos.getZ() >> 4;
 
-		StructureFeatureConfiguration config = world.getChunkSource().getGenerator().getSettings().getConfig(BNWorldGenerator.CITY);
+		StructureFeatureConfiguration config = world.getChunkSource().getGenerator().getSettings().getConfig(NetherStructures.CITY);
 		if (config == null || config.spacing() < 1)
 			return null;
 
