@@ -117,6 +117,7 @@ public class NetherBiomes {
 			if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
 				modifyNonBNBiome(biome);
 				NetherFeatures.modifyNonBNBiome(biome);
+				NetherStructures.modifyNonBNBiome(biome);
 			}
 		});
 		

@@ -3,6 +3,7 @@ package paulevs.betternether.registry;
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
@@ -23,8 +24,6 @@ public class NetherStructures {
 			int distance = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
 			int separation = distance >> 1;
 			
-			BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> BiomeAPI.addBiomeStructure(biome, CITY_CONFIGURED));
-			
 			FabricStructureBuilder.create(new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY)
 								  .step(Decoration.RAW_GENERATION)
 								  .defaultConfig(new StructureFeatureConfiguration(distance, separation, 1234))
@@ -33,5 +32,9 @@ public class NetherStructures {
 			
 			BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
 		}
+	}
+	
+	public static void modifyNonBNBiome(Biome biome) {
+		BiomeAPI.addBiomeStructure(biome, CITY_CONFIGURED);
 	}
 }
