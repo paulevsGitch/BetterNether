@@ -50,11 +50,7 @@ public class BiomesRegistry {
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
 	private static final Set<Integer> OCCUPIED_IDS = Sets.newHashSet();
 
-	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper(new ResourceLocation("nether_wastes"));
-	public static final NetherBiome BIOME_CRIMSON_FOREST = new NetherBiomeWrapper(new ResourceLocation("crimson_forest"));
-	public static final NetherBiome BIOME_WARPED_FOREST = new NetherBiomeWrapper(new ResourceLocation("warped_forest"));
-	public static final NetherBiome BIOME_BASALT_DELTAS = new NetherBiomeWrapper(new ResourceLocation("basalt_deltas"));
-
+	
 	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherGravelDesert("Gravel Desert");
 	public static final NetherBiome BIOME_NETHER_JUNGLE = new NetherJungle("Nether Jungle");
 	public static final NetherBiome BIOME_WART_FOREST = new NetherWartForest("Wart Forest");
@@ -103,18 +99,15 @@ public class BiomesRegistry {
 		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
 		registerNetherBiome(MAGMA_LAND);
 		registerSubBiome(SOUL_PLAIN, BIOME_WART_FOREST, 1F);
-		registerSubBiome(CRIMSON_GLOWING_WOODS, BIOME_CRIMSON_FOREST, 0.3F);
-		registerSubBiome(OLD_WARPED_WOODS, BIOME_WARPED_FOREST, 1F);
-		registerSubBiome(CRIMSON_PINEWOOD, BIOME_CRIMSON_FOREST, 0.3F);
+		registerSubBiome(CRIMSON_GLOWING_WOODS, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
+		registerSubBiome(OLD_WARPED_WOODS, BiomeAPI.WARPED_FOREST_BIOME, 1F);
+		registerSubBiome(CRIMSON_PINEWOOD, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
 		registerSubBiome(OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
-		registerSubBiome(FLOODED_DELTAS, BIOME_BASALT_DELTAS, 1F);
+		registerSubBiome(FLOODED_DELTAS, BiomeAPI.BASALT_DELTAS_BIOME, 1F);
 		registerNetherBiome(UPSIDE_DOWN_FOREST);
 		registerSubBiome(OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
 
-		registerNetherBiome(BIOME_EMPTY_NETHER);
-		registerNetherBiome(BIOME_CRIMSON_FOREST);
-		registerNetherBiome(BIOME_WARPED_FOREST);
-		registerNetherBiome(BIOME_BASALT_DELTAS);
+		
 		
 		RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register((i, id, biome) -> {
 			if (biome.getBiomeCategory() == BiomeCategory.NETHER) {
@@ -182,7 +175,7 @@ public class BiomesRegistry {
 		}
 	}
 
-	public static void registerSubBiome(NetherBiome biome, NetherBiome mainBiome, float chance) {
+	public static void registerSubBiome(NetherBiome biome, BCLBiome mainBiome, float chance) {
 		String regName = biome.getRegistryName();
 		chance = Configs.GENERATOR.getFloat("biomes.betternether.variation", regName + "_chance", chance);
 		if (chance > 0.0F) {

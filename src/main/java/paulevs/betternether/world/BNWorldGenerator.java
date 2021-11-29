@@ -115,9 +115,9 @@ public class BNWorldGenerator {
 	}
 
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random) {
-		int px = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
-		int py = (int) Math.round(y + random.nextGaussian() * 0.5) >> 1;
-		int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
+		final int px = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
+		final int py = (int) Math.round(y + random.nextGaussian() * 0.5) >> 1;
+		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
 		return BIOMES[clamp(px, 7)][clamp(py, 63)][clamp(pz, 7)];
 	}
 
@@ -137,7 +137,7 @@ public class BNWorldGenerator {
 			if (!isAir && !airUp && !airDown && random.nextInt(8) == 0)
 				type = StructureType.UNDER;
 			else {
-				if (popPos.getY() < 45 || !biome.hasCeilStructures() || random.nextBoolean()) // Floor
+				if (popPos.getY() < 45 || (biome!=null && !biome.hasCeilStructures()) || random.nextBoolean()) // Floor
 				{
 					if (!isAir) {
 						while (!world.getBlockState(popPos).getMaterial().isReplaceable() && popPos.getY() > 1) {
@@ -162,28 +162,32 @@ public class BNWorldGenerator {
 				}
 			}
 			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
-			if (world.getBlockState(popPos).getMaterial().isReplaceable()) {
-				if (type == StructureType.FLOOR) {
-					BlockState down = world.getBlockState(popPos.below());
-					if (BlocksHelper.isNetherGroundMagma(down))
-						biome.genFloorBuildings(world, popPos, random);
-				}
-				else if (type == StructureType.CEIL) {
-					BlockState up = world.getBlockState(popPos.above());
-					if (BlocksHelper.isNetherGroundMagma(up)) {
-						biome.genCeilBuildings(world, popPos, random);
+			if (biome!=null) {
+				if (world.getBlockState(popPos)
+						 .getMaterial()
+						 .isReplaceable()) {
+					if (type == StructureType.FLOOR) {
+						BlockState down = world.getBlockState(popPos.below());
+						if (BlocksHelper.isNetherGroundMagma(down)) biome.genFloorBuildings(world, popPos, random);
+					}
+					else if (type == StructureType.CEIL) {
+						BlockState up = world.getBlockState(popPos.above());
+						if (BlocksHelper.isNetherGroundMagma(up)) {
+							biome.genCeilBuildings(world, popPos, random);
+						}
 					}
 				}
+				else biome.genUnderBuildings(world, popPos, random);
 			}
-			else
-				biome.genUnderBuildings(world, popPos, random);
 		}
 
 		if (random.nextFloat() < lavaStructureDensity) {
 			popPos.set(sx + random.nextInt(16), 32, sz + random.nextInt(16));
 			if (world.isEmptyBlock(popPos) && BlocksHelper.isLava(world.getBlockState(popPos.below()))) {
 				biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
-				biome.genLavaBuildings(world, popPos, random);
+				if (biome!=null) {
+					biome.genLavaBuildings(world, popPos, random);
+				}
 			}
 		}
 
@@ -204,64 +208,62 @@ public class BNWorldGenerator {
 						continue;
 
 					biome = getBiomeLocal(x, y, z, random);
-
-					popPos.set(wx, y, wz);
-					BlockState state = world.getBlockState(popPos);
-					boolean lava = BlocksHelper.isLava(state);
-					if (lava || BlocksHelper.isNetherGroundMagma(state) || state.getBlock() == Blocks.GRAVEL) {
-						if (!lava && ((state = world.getBlockState(popPos.above())).isAir() || !state.getMaterial().isSolidBlocking() || !state.getMaterial().blocksMotion()) && state.getFluidState().isEmpty())// world.isAir(popPos.up()))
-							biome.genSurfColumn(world, popPos, random);
-
-						if (((x + y + z) & 1) == 0 && random.nextFloat() < globalDensity && random.nextFloat() < biome.getPlantDensity()) {
-							// Ground Generation
-							if (world.isEmptyBlock(popPos.above())) {
-								if (lava)
-									LIST_LAVA.add(popPos.above());
-								else
-									LIST_FLOOR.add(new BlockPos(popPos.above()));
-							}
-
-							// Ceiling Generation
-							else if (world.isEmptyBlock(popPos.below())) {
-								LIST_CEIL.add(new BlockPos(popPos.below()));
-							}
-
-							// Wall Generation
-							else {
-								boolean bNorth = world.isEmptyBlock(popPos.north());
-								boolean bSouth = world.isEmptyBlock(popPos.south());
-								boolean bEast = world.isEmptyBlock(popPos.east());
-								boolean bWest = world.isEmptyBlock(popPos.west());
-								if (bNorth || bSouth || bEast || bWest) {
-									BlockPos objPos = null;
-									if (bNorth)
-										objPos = popPos.north();
-									else if (bSouth)
-										objPos = popPos.south();
-									else if (bEast)
-										objPos = popPos.east();
-									else
-										objPos = popPos.west();
-
-									if ((popPos.getX() >= sx) && (popPos.getX() < ex) && (popPos.getZ() >= sz) && (popPos.getZ() < ez)) {
-										boolean bDown = world.isEmptyBlock(objPos.below());
-										boolean bUp = world.isEmptyBlock(objPos.above());
-
-										if (bDown && bUp) {
-											LIST_WALL.add(new BlockPos(objPos));
+					if (biome!=null) {
+						popPos.set(wx, y, wz);
+						BlockState state = world.getBlockState(popPos);
+						boolean lava = BlocksHelper.isLava(state);
+						if (lava || BlocksHelper.isNetherGroundMagma(state) || state.getBlock() == Blocks.GRAVEL) {
+							if (!lava && ((state = world.getBlockState(popPos.above())).isAir() || !state.getMaterial()
+																										 .isSolidBlocking() || !state.getMaterial()
+																																	 .blocksMotion()) && state.getFluidState()
+																																							  .isEmpty())// world.isAir(popPos.up()))
+								biome.genSurfColumn(world, popPos, random);
+							
+							if (((x + y + z) & 1) == 0 && random.nextFloat() < globalDensity && random.nextFloat() < biome.getPlantDensity()) {
+								// Ground Generation
+								if (world.isEmptyBlock(popPos.above())) {
+									if (lava) LIST_LAVA.add(popPos.above());
+									else LIST_FLOOR.add(new BlockPos(popPos.above()));
+								}
+								
+								// Ceiling Generation
+								else if (world.isEmptyBlock(popPos.below())) {
+									LIST_CEIL.add(new BlockPos(popPos.below()));
+								}
+								
+								// Wall Generation
+								else {
+									boolean bNorth = world.isEmptyBlock(popPos.north());
+									boolean bSouth = world.isEmptyBlock(popPos.south());
+									boolean bEast = world.isEmptyBlock(popPos.east());
+									boolean bWest = world.isEmptyBlock(popPos.west());
+									if (bNorth || bSouth || bEast || bWest) {
+										BlockPos objPos = null;
+										if (bNorth) objPos = popPos.north();
+										else if (bSouth) objPos = popPos.south();
+										else if (bEast) objPos = popPos.east();
+										else objPos = popPos.west();
+										
+										if ((popPos.getX() >= sx) && (popPos.getX() < ex) && (popPos.getZ() >= sz) && (popPos.getZ() < ez)) {
+											boolean bDown = world.isEmptyBlock(objPos.below());
+											boolean bUp = world.isEmptyBlock(objPos.above());
+											
+											if (bDown && bUp) {
+												LIST_WALL.add(new BlockPos(objPos));
+											}
 										}
 									}
 								}
 							}
+							if (random.nextFloat() < cincinnasiteDensity)
+								spawnOre(NetherBlocks.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 3, 12);
+							if (random.nextFloat() < rubyDensity)
+								spawnOre(NetherBlocks.NETHER_RUBY_ORE.defaultBlockState(), world, popPos, random, 1, 5);
+							if (random.nextFloat() < lapisDensity)
+								spawnOre(NetherBlocks.NETHER_LAPIS_ORE.defaultBlockState(), world, popPos, random, 1, 6);
+							if (random.nextFloat() < redstoneDensity)
+								spawnOre(NetherBlocks.NETHER_REDSTONE_ORE.defaultBlockState(), world, popPos, random, 1, 3);
 						}
-						if (random.nextFloat() < cincinnasiteDensity)
-							spawnOre(NetherBlocks.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 3, 12);
-						if (random.nextFloat() < rubyDensity)
-							spawnOre(NetherBlocks.NETHER_RUBY_ORE.defaultBlockState(), world, popPos, random, 1, 5);
-						if (random.nextFloat() < lapisDensity)
-							spawnOre(NetherBlocks.NETHER_LAPIS_ORE.defaultBlockState(), world, popPos, random, 1, 6);
-						if (random.nextFloat() < redstoneDensity)
-							spawnOre(NetherBlocks.NETHER_REDSTONE_ORE.defaultBlockState(), world, popPos, random, 1, 3);
 					}
 				}
 			}
@@ -309,7 +311,7 @@ public class BNWorldGenerator {
 					if (BiomeAPI.getFromBiome(b) instanceof NetherBiome nBiome) {
 						BIOMES[x][y][z] = nBiome;
 					} else {
-						BIOMES[x][y][z] = BiomesRegistry.BIOME_EMPTY_NETHER;
+						BIOMES[x][y][z] = null;//BiomesRegistry.BIOME_EMPTY_NETHER;
 					}
 					//BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
 					MC_BIOMES.add(b);
