@@ -26,7 +26,7 @@ public class BNWorldGenerator {
 
 	private static MutableBlockPos popPos = new MutableBlockPos();
 
-	private static final NetherBiome[][][] BIOMES = new NetherBiome[8][64][8];
+	private static final NetherBiome[][] BIOMES = new NetherBiome[8][8];
 
 	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(4096);
 	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(4096);
@@ -53,9 +53,8 @@ public class BNWorldGenerator {
 
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random) {
 		final int px = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
-		final int py = (int) Math.round(y + random.nextGaussian() * 0.5) >> 1;
 		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
-		return BIOMES[clamp(px, 7)][clamp(py, 63)][clamp(pz, 7)];
+		return BIOMES[clamp(px, 7)][clamp(pz, 7)];
 	}
 
 	private static int clamp(int x, int max) {
@@ -230,21 +229,19 @@ public class BNWorldGenerator {
 
 	private static void makeLocalBiomes(WorldGenLevel world, int sx, int sz) {
 		MC_BIOMES.clear();
+		popPos.setY(5);
 		for (int x = 0; x < 8; x++) {
 			popPos.setX(sx + (x << 1) + 2);
-			for (int y = 0; y < 64; y++) {
-				popPos.setY((y << 1) + 2);
-				for (int z = 0; z < 8; z++) {
-					popPos.setZ(sz + (z << 1) + 2);
-					Biome b = world.getBiome(popPos);
-					if (BiomeAPI.getFromBiome(b) instanceof NetherBiome nBiome) {
-						BIOMES[x][y][z] = nBiome;
-					} else {
-						BIOMES[x][y][z] = null;//BiomesRegistry.BIOME_EMPTY_NETHER;
-					}
-					//BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
-					MC_BIOMES.add(b);
+			for (int z = 0; z < 8; z++) {
+				popPos.setZ(sz + (z << 1) + 2);
+				Biome b = world.getBiome(popPos);
+				if (BiomeAPI.getFromBiome(b) instanceof NetherBiome nBiome) {
+					BIOMES[x][z] = nBiome;
+				} else {
+					BIOMES[x][z] = null;//BiomesRegistry.BIOME_EMPTY_NETHER;
 				}
+				//BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
+				MC_BIOMES.add(b);
 			}
 		}
 	}
