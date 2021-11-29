@@ -72,7 +72,7 @@ public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 			}
 			this.pieces.addAll(buildings);
 			
-			BetterNether.LOGGER.info("BBox after Cave:" + this.getBoundingBox().toString());
+			//BetterNether.LOGGER.info("BBox after Cave:" + this.getBoundingBox().toString());
 		}
 	}
 }
