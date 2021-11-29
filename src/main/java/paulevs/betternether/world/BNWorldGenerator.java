@@ -2,7 +2,6 @@ package paulevs.betternether.world;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -10,10 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.structures.StructureCaves;
-import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.features.CavesFeature;
 import ru.bclib.api.BiomeAPI;
@@ -24,13 +20,9 @@ import java.util.List;
 import java.util.Random;
 
 public class BNWorldGenerator {
-	private static boolean hasFixPass;
-	
 	private static float structureDensity;
 	private static float lavaStructureDensity;
 	private static float globalDensity;
-
-	private static final BlockState AIR = Blocks.AIR.defaultBlockState();
 
 	private static MutableBlockPos popPos = new MutableBlockPos();
 
@@ -50,8 +42,6 @@ public class BNWorldGenerator {
 
 	
 	public static void onModInit() {
-		hasFixPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "world_fixing_pass", true);
-		
 		structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
 		lavaStructureDensity = Configs.GENERATOR.getFloat("generator.world", "lava_structures_density", 1F / 200F) * 1.0001F;
 		globalDensity = Configs.GENERATOR.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
@@ -261,59 +251,5 @@ public class BNWorldGenerator {
 
 	public static void prePopulate(WorldGenLevel world, int sx, int sz, Random random) {
 		makeLocalBiomes(world, sx, sz);
-	}
-	
-	public static void cleaningPass(WorldGenLevel world, int sx, int sz) {
-		if (hasFixPass) {
-			fixBlocks(world, sx, 30, sz, sx + 15, 110, sz + 15);
-		}
-	}
-
-	private static void fixBlocks(WorldGenLevel world, int x1, int y1, int z1, int x2, int y2, int z2) {
-		for (int y = y1; y <= y2; y++) {
-			popPos.setY(y);
-			for (int x = x1; x <= x2; x++) {
-				popPos.setX(x);
-				for (int z = z1; z <= z2; z++) {
-					popPos.setZ(z);
-
-					BlockState state = world.getBlockState(popPos);
-
-					if (!state.canSurvive(world, popPos)) {
-						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
-						continue;
-					}
-
-					if (!state.canOcclude() && world.getBlockState(popPos.above()).getBlock() == Blocks.NETHER_BRICKS) {
-						BlocksHelper.setWithoutUpdate(world, popPos, Blocks.NETHER_BRICKS.defaultBlockState());
-						continue;
-					}
-
-					if (BlocksHelper.isLava(state) && world.isEmptyBlock(popPos.above()) && world.isEmptyBlock(popPos.below())) {
-						BlocksHelper.setWithoutUpdate(world, popPos, AIR);
-						continue;
-					}
-
-					if (state.getBlock() == Blocks.NETHER_WART_BLOCK || state.getBlock() == Blocks.WARPED_WART_BLOCK) {
-						if (world.isEmptyBlock(popPos.below()) && world.isEmptyBlock(popPos.above()) && world.isEmptyBlock(popPos.north()) && world.isEmptyBlock(popPos.south()) && world.isEmptyBlock(popPos.east()) && world.isEmptyBlock(popPos.west()))
-							BlocksHelper.setWithoutUpdate(world, popPos, AIR);
-						continue;
-					}
-
-					if (state.getBlock() instanceof BlockStalactite && !(state = world.getBlockState(popPos.below())).isCollisionShapeFullBlock(world, popPos.below()) && !(state.getBlock() instanceof BlockStalactite)) {
-						MutableBlockPos sp = new MutableBlockPos().set(popPos);
-						while (world.getBlockState(sp).getBlock() instanceof BlockStalactite) {
-							BlocksHelper.setWithoutUpdate(world, sp, AIR);
-							sp.relative(Direction.UP);
-						}
-						continue;
-					}
-				}
-			}
-		}
-	}
-
-	public static HashSet<Biome> getPopulateBiomes() {
-		return MC_BIOMES;
 	}
 }

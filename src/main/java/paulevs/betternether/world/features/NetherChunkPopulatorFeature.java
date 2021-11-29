@@ -1,17 +1,13 @@
 package paulevs.betternether.world.features;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.world.BNWorldGenerator;
 import ru.bclib.world.features.DefaultFeature;
 
 import java.util.Random;
-import java.util.function.Supplier;
 
 public class NetherChunkPopulatorFeature extends DefaultFeature {
 	@Override
@@ -26,7 +22,6 @@ public class NetherChunkPopulatorFeature extends DefaultFeature {
 		
 		BNWorldGenerator.prePopulate(level, sx, sz, random);
 		BNWorldGenerator.populate(level, sx, sz, random);
-		BNWorldGenerator.cleaningPass(level, sx, sz);
 		
 		return true;
 	}
