@@ -7,8 +7,10 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import paulevs.betternether.BetterNether;
@@ -35,10 +37,14 @@ import paulevs.betternether.biomes.OldSwampland;
 import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.biomes.UpsideDownForest;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.util.FeaturesHelper;
+import paulevs.betternether.world.BNWorldGenerator;
+import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.BiomeAPI;
+import ru.bclib.api.LifeCycleAPI;
 import ru.bclib.world.biomes.BCLBiome;
 
-public class BiomesRegistry {
+public class NetherBiomes {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
 	private static final Set<Integer> OCCUPIED_IDS = Sets.newHashSet();
@@ -116,6 +122,8 @@ public class BiomesRegistry {
 				BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.NAGA, 8, 3, 5);
 			}
 		});
+		
+		LifeCycleAPI.onLevelLoad(NetherBiomes::onWorldLoad);
 	}
 	
 	private static void register(NetherBiome biome) {
@@ -133,7 +141,7 @@ public class BiomesRegistry {
 		}
 	}
 
-	public static void registerNetherBiome(NetherBiome biome) {
+	private static void registerNetherBiome(NetherBiome biome) {
 		float chance = Configs.GENERATOR.getFloat("biomes." + biome.getID().getNamespace() + ".main", biome.getID().getPath() + "_chance", 1);
 		if (chance > 0.0F) {
 			maxChance += chance;
@@ -151,8 +159,8 @@ public class BiomesRegistry {
 			}
 		}
 	}
-
-	public static void registerEdgeBiome(NetherBiome biome, NetherBiome mainBiome, int size) {
+	
+	private static void registerEdgeBiome(NetherBiome biome, NetherBiome mainBiome, int size) {
 		String regName = biome.getRegistryName();
 		int sizeConf = (int)Configs.GENERATOR.getFloat("biomes.betternether.edge", regName + "_size", size);
 		if (sizeConf > 0.0F) {
@@ -167,8 +175,8 @@ public class BiomesRegistry {
 			BiomeAPI.registerBiome(biome);
 		}
 	}
-
-	public static void registerSubBiome(NetherBiome biome, BCLBiome mainBiome, float chance) {
+	
+	private static void registerSubBiome(NetherBiome biome, BCLBiome mainBiome, float chance) {
 		String regName = biome.getRegistryName();
 		chance = Configs.GENERATOR.getFloat("biomes.betternether.variation", regName + "_chance", chance);
 		if (chance > 0.0F) {
@@ -188,5 +196,12 @@ public class BiomesRegistry {
 
 	public static ArrayList<NetherBiome> getAllBiomes() {
 		return ALL_BIOMES;
+	}
+	
+	private static void onWorldLoad(ServerLevel level, long seed, Registry<Biome> registry) {
+		BNWorldGenerator.init(seed);
+		CityFeature.initGenerator();
+		
+		FeaturesHelper.addFeatures(registry);
 	}
 }

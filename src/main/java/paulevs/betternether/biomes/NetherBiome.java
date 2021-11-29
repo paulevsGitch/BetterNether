@@ -16,6 +16,7 @@ import paulevs.betternether.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.StructureWorld;
@@ -94,26 +95,30 @@ public class NetherBiome extends BCLBiome{
 	private Biome actualBiome;
 	protected float localGenChance;
 
-	protected static BiomeDefinition addSpawns(BiomeDefinition definition){
+	protected static void addSpawns(BiomeDefinition definition){
 		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 3, 6);
 		definition.addMobSpawn(EntityRegistry.SKULL, 2, 2, 4);
 		definition.addMobSpawn(EntityRegistry.NAGA, 8, 3, 5);
 		definition.addMobSpawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
-		
-		return definition;
 	}
 	
-	private static BiomeDefinition makeDef(BiomeDefinition definition) {
+	private static void makeDef(BiomeDefinition definition) {
 		BCLFeature feature = BCLFeature.makeChunkFeature(
 			BetterNether.makeID(definition.getID().getPath() + "_nether_populator"),
 			new NetherChunkPopulatorFeature(() -> (NetherBiome) BiomeAPI.getBiome(definition.getID()))
 		);
 		definition.setCategory(BiomeCategory.NETHER).addFeature(feature);
-		return definition;
+	}
+	
+	private static BiomeDefinition updateDef(BiomeDefinition def) {
+		addSpawns(def);
+		makeDef(def);
+		NetherFeatures.addDefaultFeatures(def);
+		return def;
 	}
 	
 	public NetherBiome(BiomeDefinition definition) {
-		super(addSpawns(makeDef(definition)));
+		super(updateDef(definition));
 		
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
 		

@@ -3,7 +3,7 @@ package paulevs.betternether.world;
 import java.util.Random;
 
 import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.registry.BiomesRegistry;
+import paulevs.betternether.registry.NetherBiomes;
 import ru.bclib.world.biomes.BCLBiome;
 
 public class BiomeChunk {
@@ -26,7 +26,7 @@ public class BiomeChunk {
 		for (int y = 0; y < sm_height; y++)
 			for (int x = 0; x < SM_WIDTH; x++)
 				for (int z = 0; z < SM_WIDTH; z++)
-					PreBio[y][x][z] = BiomesRegistry.getBiome(random);
+					PreBio[y][x][z] = NetherBiomes.getBiome(random);
 
 		for (int y = 0; y < map.maxHeight; y++)
 			for (int x = 0; x < WIDTH; x++)

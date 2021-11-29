@@ -11,8 +11,6 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.WorldGenRegion;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -28,8 +26,6 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.registry.BiomesRegistry;
-import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
@@ -256,14 +252,14 @@ public class BNWorldGenerator {
 									}
 								}
 							}
-							if (random.nextFloat() < cincinnasiteDensity)
-								spawnOre(NetherBlocks.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 3, 12);
-							if (random.nextFloat() < rubyDensity)
-								spawnOre(NetherBlocks.NETHER_RUBY_ORE.defaultBlockState(), world, popPos, random, 1, 5);
-							if (random.nextFloat() < lapisDensity)
-								spawnOre(NetherBlocks.NETHER_LAPIS_ORE.defaultBlockState(), world, popPos, random, 1, 6);
-							if (random.nextFloat() < redstoneDensity)
-								spawnOre(NetherBlocks.NETHER_REDSTONE_ORE.defaultBlockState(), world, popPos, random, 1, 3);
+//							if (random.nextFloat() < cincinnasiteDensity)
+//								spawnOre(NetherBlocks.CINCINNASITE_ORE.defaultBlockState(), world, popPos, random, 3, 12);
+//							if (random.nextFloat() < rubyDensity)
+//								spawnOre(NetherBlocks.NETHER_RUBY_ORE.defaultBlockState(), world, popPos, random, 1, 5);
+//							if (random.nextFloat() < lapisDensity)
+//								spawnOre(NetherBlocks.NETHER_LAPIS_ORE.defaultBlockState(), world, popPos, random, 1, 6);
+//							if (random.nextFloat() < redstoneDensity)
+//								spawnOre(NetherBlocks.NETHER_REDSTONE_ORE.defaultBlockState(), world, popPos, random, 1, 3);
 						}
 					}
 				}

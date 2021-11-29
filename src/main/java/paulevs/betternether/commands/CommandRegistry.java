@@ -30,7 +30,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.registry.BiomesRegistry;
+import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
 
 import java.util.Collections;
@@ -73,13 +73,13 @@ public class CommandRegistry {
     private static int biomeIndex = 0;
     private static int teleportToNextBiome(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
-        if (biomeIndex<0 || biomeIndex>=BiomesRegistry.getAllBiomes().size()){
+        if (biomeIndex<0 || biomeIndex>= NetherBiomes.getAllBiomes().size()){
             source.sendFailure(new TextComponent("Failed to find the next biome...").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
             return 0;
         }
-        final NetherBiome biome = BiomesRegistry.getAllBiomes().get(biomeIndex);
+        final NetherBiome biome = NetherBiomes.getAllBiomes().get(biomeIndex);
         source.sendSuccess(new TextComponent("Locating Biome " + biome).setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
-        biomeIndex = (biomeIndex+1) % BiomesRegistry.getAllBiomes().size();
+        biomeIndex = (biomeIndex+1) % NetherBiomes.getAllBiomes().size();
 
         final BlockPos currentPosition = new BlockPos(source.getPosition());
         final BlockPos biomePosition = source.getLevel().findNearestBiome(biome.getActualBiome(), currentPosition, MAX_SEARCH_RADIUS, SEARCH_STEP);
