@@ -37,8 +37,6 @@ import paulevs.betternether.biomes.OldSwampland;
 import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.biomes.UpsideDownForest;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.util.FeaturesHelper;
-import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.features.CavesFeature;
 import paulevs.betternether.world.features.PathsFeature;
 import paulevs.betternether.world.structures.CityFeature;
@@ -107,8 +105,6 @@ public class NetherBiomes {
 		registerSubBiome(FLOODED_DELTAS, BiomeAPI.BASALT_DELTAS_BIOME, 1F);
 		registerNetherBiome(UPSIDE_DOWN_FOREST);
 		registerSubBiome(OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
-
-		
 		
 		RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register((i, id, biome) -> {
 			if (biome.getBiomeCategory() == BiomeCategory.NETHER) {
@@ -119,13 +115,18 @@ public class NetherBiomes {
 		
 		BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> {
 			if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
-				BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.FIREFLY, 5, 3, 6);
-				BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
-				BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.NAGA, 8, 3, 5);
+				modifyNonBNBiome(biome);
+				NetherFeatures.modifyNonBNBiome(biome);
 			}
 		});
 		
 		LifeCycleAPI.onLevelLoad(NetherBiomes::onWorldLoad);
+	}
+	
+	private static void modifyNonBNBiome(Biome biome) {
+		BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.FIREFLY, 5, 3, 6);
+		BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
+		BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.NAGA, 8, 3, 5);
 	}
 	
 	private static void register(NetherBiome biome) {
@@ -204,7 +205,5 @@ public class NetherBiomes {
 		CavesFeature.onLoad(seed);
 		PathsFeature.onLoad(seed);
 		CityFeature.initGenerator();
-		
-		FeaturesHelper.addFeatures(registry);
 	}
 }

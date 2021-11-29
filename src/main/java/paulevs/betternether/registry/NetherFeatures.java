@@ -10,15 +10,18 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.BiomeDefinition;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.mixin.common.BiomeGenerationSettingsAccessor;
 import paulevs.betternether.world.features.BlockFixFeature;
 import paulevs.betternether.world.features.CavesFeature;
 import paulevs.betternether.world.features.CleanupFeature;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.features.PathsFeature;
+import ru.bclib.api.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiomeDef;
 import ru.bclib.world.features.BCLFeature;
 import ru.bclib.world.features.DefaultFeature;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -102,13 +105,34 @@ public class NetherFeatures {
 		}
 	}
 	
-	public static void registerBiomeFeatures(ResourceLocation id, Biome biome, List<List<Supplier<ConfiguredFeature<?, ?>>>> features) {
+	private static void registerBiomeFeatures(List<List<Supplier<ConfiguredFeature<?, ?>>>> features) {
+		if (NetherFeatures.HAS_CAVES){
+			addFeature(CAVES_FEATURE, features);
+		}
+		if (NetherFeatures.HAS_PATHS){
+			addFeature(PATHS_FEATURE, features);
+		}
+		
+		addFeature(POPULATOR_FEATURE, features);
+		
 		addFeature(CINCINNASITE_ORE, features);
 		addFeature(NETHER_RUBY_ORE, features);
 		addFeature(NETHER_LAPIS_ORE, features);
 		addFeature(NETHER_REDSTONE_ORE, features);
 	}
 	
+	public static void modifyNonBNBiome(Biome biome) {
+		BiomeGenerationSettingsAccessor accessor = (BiomeGenerationSettingsAccessor) biome.getGenerationSettings();
+		List<List<Supplier<ConfiguredFeature<?, ?>>>> preFeatures = accessor.be_getFeatures();
+		List<List<Supplier<ConfiguredFeature<?, ?>>>> features = new ArrayList<>(preFeatures.size());
+		preFeatures.forEach((list) -> features.add(Lists.newArrayList(list)));
+		
+		registerBiomeFeatures(features);
+		
+		accessor.be_setFeatures(features);
+	}
+	
 	public static void register() {
+	
 	}
 }
