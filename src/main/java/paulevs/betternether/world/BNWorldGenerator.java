@@ -15,6 +15,7 @@ import paulevs.betternether.config.Configs;
 import paulevs.betternether.structures.StructureCaves;
 import paulevs.betternether.structures.StructurePath;
 import paulevs.betternether.structures.StructureType;
+import paulevs.betternether.world.features.CavesFeature;
 import ru.bclib.api.BiomeAPI;
 
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ import java.util.List;
 import java.util.Random;
 
 public class BNWorldGenerator {
-	private static boolean hasCleaningPass;
 	private static boolean hasFixPass;
 	
 	private static float structureDensity;
@@ -42,11 +42,6 @@ public class BNWorldGenerator {
 	private static final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
 	private static final HashSet<Biome> MC_BIOMES = new HashSet<Biome>();
 
-	private static boolean hasCaves;
-	private static boolean hasPaths;
-
-	private static StructureCaves caves;
-	private static StructurePath paths;
 	private static NetherBiome biome;
 
 	protected static int biomeSizeXZ;
@@ -55,12 +50,8 @@ public class BNWorldGenerator {
 
 	
 	public static void onModInit() {
-		hasCleaningPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
 		hasFixPass = Configs.GENERATOR.getBoolean("generator.world.terrain", "world_fixing_pass", true);
-
-		hasCaves = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_caves", true);
-		hasPaths = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_paths", true);
-
+		
 		structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
 		lavaStructureDensity = Configs.GENERATOR.getFloat("generator.world", "lava_structures_density", 1F / 200F) * 1.0001F;
 		globalDensity = Configs.GENERATOR.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
@@ -68,11 +59,6 @@ public class BNWorldGenerator {
 		biomeSizeXZ = Configs.GENERATOR.getInt("generator_world", "biome_size_xz", 200);
 		biomeSizeY = Configs.GENERATOR.getInt("generator_world", "biome_size_y", 40);
 		volumetric = Configs.GENERATOR.getBoolean("generator_world", "volumetric_biomes", true);
-	}
-
-	public static void init(long seed) {
-		caves = new StructureCaves(seed);
-		paths = new StructurePath(seed + 1);
 	}
 
 	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random) {
@@ -165,7 +151,7 @@ public class BNWorldGenerator {
 			for (int z = 0; z < 16; z++) {
 				int wz = sz + z;
 				for (int y = 1; y < 126; y++) {
-					if (caves.isInCave(x, y, z))
+					if (CavesFeature.isInCave(x, y, z))
 						continue;
 
 					biome = getBiomeLocal(x, y, z, random);
@@ -275,71 +261,8 @@ public class BNWorldGenerator {
 
 	public static void prePopulate(WorldGenLevel world, int sx, int sz, Random random) {
 		makeLocalBiomes(world, sx, sz);
-
-		if (hasCaves) {
-			popPos.set(sx, 0, sz);
-			caves.generate(world, popPos, random);
-		}
-
-		if (hasCleaningPass) {
-			List<BlockPos> pos = new ArrayList<BlockPos>();
-			BlockPos up;
-			BlockPos down;
-			BlockPos north;
-			BlockPos south;
-			BlockPos east;
-			BlockPos west;
-			for (int y = 32; y < 110; y++) {
-				popPos.setY(y);
-				for (int x = 0; x < 16; x++) {
-					popPos.setX(x | sx);
-					for (int z = 0; z < 16; z++) {
-						popPos.setZ(z | sz);
-						if (canReplace(world, popPos)) {
-							up = popPos.above();
-							down = popPos.below();
-							north = popPos.north();
-							south = popPos.south();
-							east = popPos.east();
-							west = popPos.west();
-							if (world.isEmptyBlock(north) && world.isEmptyBlock(south))
-								pos.add(new BlockPos(popPos));
-							else if (world.isEmptyBlock(east) && world.isEmptyBlock(west))
-								pos.add(new BlockPos(popPos));
-							else if (world.isEmptyBlock(up) && world.isEmptyBlock(down))
-								pos.add(new BlockPos(popPos));
-							else if (world.isEmptyBlock(popPos.north().east().below()) && world.isEmptyBlock(popPos.south().west().above()))
-								pos.add(new BlockPos(popPos));
-							else if (world.isEmptyBlock(popPos.south().east().below()) && world.isEmptyBlock(popPos.north().west().above()))
-								pos.add(new BlockPos(popPos));
-							else if (world.isEmptyBlock(popPos.north().west().below()) && world.isEmptyBlock(popPos.south().east().above()))
-								pos.add(new BlockPos(popPos));
-							else if (world.isEmptyBlock(popPos.south().west().below()) && world.isEmptyBlock(popPos.north().east().above()))
-								pos.add(new BlockPos(popPos));
-						}
-					}
-				}
-			}
-			for (BlockPos p : pos) {
-				BlocksHelper.setWithoutUpdate(world, p, AIR);
-				up = p.above();
-				BlockState state = world.getBlockState(up);
-				if (!state.getBlock().canSurvive(state, world, up))
-					BlocksHelper.setWithoutUpdate(world, up, AIR);
-			}
-		}
-
-		if (hasPaths) {
-			popPos.set(sx, 0, sz);
-			paths.generate(world, popPos, random);
-		}
 	}
-
-	private static boolean canReplace(WorldGenLevel world, BlockPos pos) {
-		BlockState state = world.getBlockState(pos);
-		return BlocksHelper.isNetherGround(state) || state.getBlock() == Blocks.GRAVEL;
-	}
-
+	
 	public static void cleaningPass(WorldGenLevel world, int sx, int sz) {
 		if (hasFixPass) {
 			fixBlocks(world, sx, 30, sz, sx + 15, 110, sz + 15);

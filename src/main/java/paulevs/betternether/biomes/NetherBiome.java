@@ -11,11 +11,10 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.block.Blocks;
-import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureType;
@@ -23,11 +22,7 @@ import paulevs.betternether.structures.StructureWorld;
 import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureWartCap;
-import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
-import ru.bclib.api.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiome;
-import ru.bclib.world.biomes.BCLBiomeDef;
-import ru.bclib.world.features.BCLFeature;
 
 public class NetherBiome extends BCLBiome{
 	private static final String[] DEF_STRUCTURES = new String[] {
@@ -94,31 +89,23 @@ public class NetherBiome extends BCLBiome{
 	private ArrayList<String> structures;
 	private Biome actualBiome;
 	protected float localGenChance;
-
-	protected static void addSpawns(BiomeDefinition definition){
+	
+	private static void addDefaultSpawns(BiomeDefinition definition){
 		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 3, 6);
 		definition.addMobSpawn(EntityRegistry.SKULL, 2, 2, 4);
 		definition.addMobSpawn(EntityRegistry.NAGA, 8, 3, 5);
 		definition.addMobSpawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
 	}
 	
-	private static void makeDef(BiomeDefinition definition) {
-		BCLFeature feature = BCLFeature.makeChunkFeature(
-			BetterNether.makeID(definition.getID().getPath() + "_nether_populator"),
-			new NetherChunkPopulatorFeature(() -> (NetherBiome) BiomeAPI.getBiome(definition.getID()))
-		);
-		definition.setCategory(BiomeCategory.NETHER).addFeature(feature);
-	}
-	
-	private static BiomeDefinition updateDef(BiomeDefinition def) {
-		addSpawns(def);
-		makeDef(def);
+	private static BiomeDefinition makeDef(BiomeDefinition def) {
+		def.setCategory(BiomeCategory.NETHER);
+		addDefaultSpawns(def);
 		NetherFeatures.addDefaultFeatures(def);
 		return def;
 	}
 	
 	public NetherBiome(BiomeDefinition definition) {
-		super(updateDef(definition));
+		super(makeDef(definition));
 		
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
 		

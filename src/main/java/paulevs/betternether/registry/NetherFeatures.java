@@ -5,11 +5,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.biomes.BiomeDefinition;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.world.features.BlockFixFeature;
+import paulevs.betternether.world.features.CavesFeature;
+import paulevs.betternether.world.features.CleanupFeature;
+import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
+import paulevs.betternether.world.features.PathsFeature;
 import ru.bclib.world.biomes.BCLBiomeDef;
 import ru.bclib.world.features.BCLFeature;
+import ru.bclib.world.features.DefaultFeature;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -21,20 +29,42 @@ public class NetherFeatures {
 	public static final BCLFeature NETHER_LAPIS_ORE = registerOre("nether_lapis", NetherBlocks.NETHER_LAPIS_ORE, 18, 4, 32, 128);
 	public static final BCLFeature NETHER_REDSTONE_ORE = registerOre("nether_redstone", NetherBlocks.NETHER_REDSTONE_ORE, 2, 16, 32, 80);
 	
+	// Maintainance //
+	public static final BCLFeature CLEANUP_FEATURE =registerChunkFeature("nether_clean", Decoration.RAW_GENERATION, CleanupFeature::new);
+	public static final BCLFeature FIX_FEATURE =registerChunkFeature("nether_fix", Decoration.TOP_LAYER_MODIFICATION, BlockFixFeature::new);
+	
+	// Terrain //
+	public static final BCLFeature CAVES_FEATURE =registerChunkFeature("nether_caves", Decoration.UNDERGROUND_STRUCTURES, CavesFeature::new);
+	public static final BCLFeature PATHS_FEATURE =registerChunkFeature("nether_paths", Decoration.SURFACE_STRUCTURES, PathsFeature::new);
+	public static final BCLFeature POPULATOR_FEATURE =registerChunkFeature("nether_populator", Decoration.SURFACE_STRUCTURES, NetherChunkPopulatorFeature::new);
+	
+	// Cached Config data //
+	public static final boolean HAS_CLEANING_PASS = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
+	public static final boolean HAS_CAVES = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_caves", true);
+	public static final boolean HAS_PATHS = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_paths", true);
+	public static final boolean HAS_FIXING_PASS = Configs.GENERATOR.getBoolean("generator.world.terrain", "world_fixing_pass", true);
+	
+	private static <T extends DefaultFeature> BCLFeature registerChunkFeature(String name, Decoration step, Supplier<T> feature){
+		return BCLFeature.makeChunkFeature(
+			BetterNether.makeID("feature_" + name),
+			step,
+			feature.get()
+		);
+	}
+	
 	private static BCLFeature registerOre(String name, Block blockOre, int veins, int veinSize, int minY, int maxY){
-		return registerOre(
+		return _registerOre(
 			name+"_ore",
 			blockOre,
 			Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_count", veins),
 			Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_size", veinSize),
-			0,
 			Configs.GENERATOR.getInt("generator.world.ores." + name, "minY", minY),
 			Configs.GENERATOR.getInt("generator.world.ores." + name, "maxY", maxY)
 		);
 	}
 	
-	private static BCLFeature registerOre(String name, Block blockOre, int veins, int veinSize, int offset, int minY, int maxY) {
-		return BCLFeature.makeOreFeature(BetterNether.makeID(name), blockOre, Blocks.NETHERRACK, veins, veinSize, offset, minY, maxY);
+	private static BCLFeature _registerOre(String name, Block blockOre, int veins, int veinSize,  int minY, int maxY) {
+		return BCLFeature.makeOreFeature(BetterNether.makeID(name), blockOre, Blocks.NETHERRACK, veins, veinSize, minY, maxY);
 	}
 	
 	private static void addFeature(BCLFeature feature, List<List<Supplier<ConfiguredFeature<?, ?>>>> features) {
@@ -50,10 +80,26 @@ public class NetherFeatures {
 	}
 	
 	public static void addDefaultFeatures(BCLBiomeDef def) {
+		if (NetherFeatures.HAS_CLEANING_PASS) {
+			def.addFeature(CLEANUP_FEATURE);
+		}
+		if (NetherFeatures.HAS_CAVES){
+			def.addFeature(CAVES_FEATURE);
+		}
+		if (NetherFeatures.HAS_PATHS){
+			def.addFeature(PATHS_FEATURE);
+		}
+		
+		def.addFeature(POPULATOR_FEATURE);
+		
 		def.addFeature(CINCINNASITE_ORE);
 		def.addFeature(NETHER_RUBY_ORE);
 		def.addFeature(NETHER_LAPIS_ORE);
 		def.addFeature(NETHER_REDSTONE_ORE);
+		
+		if (NetherFeatures.HAS_FIXING_PASS){
+			def.addFeature(FIX_FEATURE);
+		}
 	}
 	
 	public static void registerBiomeFeatures(ResourceLocation id, Biome biome, List<List<Supplier<ConfiguredFeature<?, ?>>>> features) {

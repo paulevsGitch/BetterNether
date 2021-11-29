@@ -39,6 +39,8 @@ import paulevs.betternether.biomes.UpsideDownForest;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.util.FeaturesHelper;
 import paulevs.betternether.world.BNWorldGenerator;
+import paulevs.betternether.world.features.CavesFeature;
+import paulevs.betternether.world.features.PathsFeature;
 import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.BiomeAPI;
 import ru.bclib.api.LifeCycleAPI;
@@ -199,7 +201,8 @@ public class NetherBiomes {
 	}
 	
 	private static void onWorldLoad(ServerLevel level, long seed, Registry<Biome> registry) {
-		BNWorldGenerator.init(seed);
+		CavesFeature.onLoad(seed);
+		PathsFeature.onLoad(seed);
 		CityFeature.initGenerator();
 		
 		FeaturesHelper.addFeatures(registry);
