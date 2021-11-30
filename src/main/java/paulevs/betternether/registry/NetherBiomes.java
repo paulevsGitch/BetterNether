@@ -41,6 +41,7 @@ import paulevs.betternether.world.features.CavesFeature;
 import paulevs.betternether.world.features.PathsFeature;
 import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.BiomeAPI;
+import ru.bclib.api.LifeCycleAPI;
 import ru.bclib.world.biomes.BCLBiome;
 
 public class NetherBiomes {
@@ -119,6 +120,8 @@ public class NetherBiomes {
 				NetherStructures.modifyNonBNBiome(biome);
 			}
 		});
+
+		LifeCycleAPI.onLevelLoad(NetherBiomes::onWorldLoad);
 	}
 	
 	private static void modifyNonBNBiome(Biome biome) {
