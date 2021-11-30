@@ -27,7 +27,8 @@
       "RecipeManagerMixin",
 	  "BlockAgeProcessorMixin",
 	  "LiquidBlockMixin",
-      "LightningRodBlockMixin"
+      "LightningRodBlockMixin",
+	  "ServerLevelMixin"
     ],
 	"injectors": {
 		"defaultRequire": 1
