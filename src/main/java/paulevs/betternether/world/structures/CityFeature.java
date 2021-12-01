@@ -23,6 +23,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplie
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier.Context;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
@@ -44,10 +45,9 @@ public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 	}
 	
 	private static <C extends FeatureConfiguration> boolean checkLocation(Context<C> context) {
-		return context.getLowestY(12, 15) >= context.chunkGenerator().getSeaLevel();
+		return Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true) &&
+			context.getLowestY(12, 15) >= context.chunkGenerator().getSeaLevel();
 	}
-	
-	
 	
 	private static void generatePieces(StructurePiecesBuilder structurePiecesBuilder, net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator.Context<NoneFeatureConfiguration> context) {
 		final ChunkPos cPos = context.chunkPos();

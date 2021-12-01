@@ -14,32 +14,28 @@ import paulevs.betternether.config.Configs;
 import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiomeDef;
+import ru.bclib.world.structures.BCLStructureFeature;
 
 public class NetherStructures {
+	public static final int CITY_SPACING = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
 	// Nether City
-	public static final CityFeature CITY = new CityFeature();
-	public static final ConfiguredStructureFeature<NoneFeatureConfiguration, ? extends StructureFeature<NoneFeatureConfiguration>> CITY_CONFIGURED = CITY.configured(NoneFeatureConfiguration.NONE);
+	public static final BCLStructureFeature CITY_STRUCTURE = new BCLStructureFeature(
+		new ResourceLocation(BetterNether.MOD_ID, "nether_city"),
+		new CityFeature(),
+		Decoration.RAW_GENERATION,
+		CITY_SPACING,
+		CITY_SPACING>>1
+	);
 	
 	public static void register() {
-		if (Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)) {
-			int distance = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
-			int separation = distance >> 1;
-			
-			 FabricStructureBuilder.create(new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY)
-								  .step(Decoration.RAW_GENERATION)
-								  .defaultConfig(new StructureFeatureConfiguration(distance, separation, 1234))
-								  //.superflatFeature(CITY_CONFIGURED)
-								  .register();
-			//TODO: 1.18 superflatFeature?
-			BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
-		}
+	
 	}
 	
 	public static void modifyNonBNBiome(Biome biome) {
-		BiomeAPI.addBiomeStructure(biome, CITY_CONFIGURED);
+		BiomeAPI.addBiomeStructure(biome, CITY_STRUCTURE);
 	}
 	
 	public static void addDefaultFeatures(BCLBiomeDef def) {
-		def.addStructureFeature(NetherStructures.CITY_CONFIGURED);
+		def.addStructureFeature(CITY_STRUCTURE);
 	}
 }

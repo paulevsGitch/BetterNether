@@ -20,7 +20,7 @@ public class CityHelper {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	public static boolean stopStructGen(int chunkX, int chunkZ, ChunkGenerator chunkGenerator, long worldSeed, WorldgenRandom chunkRandom) {
-		StructureFeatureConfiguration config = chunkGenerator.getSettings().getConfig(NetherStructures.CITY);
+		StructureFeatureConfiguration config = chunkGenerator.getSettings().getConfig(NetherStructures.CITY_STRUCTURE.getStructure());
 		if (config != null && config.spacing() > 0) collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
 		return stopGeneration(chunkX, chunkZ);
 	}
@@ -34,7 +34,7 @@ public class CityHelper {
 		POSITIONS.clear();
 		for (int x = x1; x <= x2; x += 8) {
 			for (int z = z1; z <= z2; z += 8) {
-				ChunkPos chunk = NetherStructures.CITY.getPotentialFeatureChunk(config, worldSeed, x, z);
+				ChunkPos chunk = NetherStructures.CITY_STRUCTURE.getStructure().getPotentialFeatureChunk(config, worldSeed, x, z);
 				POSITIONS.add(chunk);
 			}
 		}
@@ -55,7 +55,7 @@ public class CityHelper {
 				//TODO: 1.18 isValidStart does no longer exists...
 				//if (world.getBiome(POS).getGenerationSettings().isValidStart(BNWorldGenerator.CITY))
 				{
-					ChunkPos chunk = NetherStructures.CITY.getPotentialFeatureChunk(config, worldSeed, x, z);
+					ChunkPos chunk = NetherStructures.CITY_STRUCTURE.getStructure().getPotentialFeatureChunk(config, worldSeed, x, z);
 					POSITIONS.add(chunk);
 				}
 			}
@@ -80,7 +80,7 @@ public class CityHelper {
 		int cx = pos.getX() >> 4;
 		int cz = pos.getZ() >> 4;
 
-		StructureFeatureConfiguration config = world.getChunkSource().getGenerator().getSettings().getConfig(NetherStructures.CITY);
+		StructureFeatureConfiguration config = world.getChunkSource().getGenerator().getSettings().getConfig(NetherStructures.CITY_STRUCTURE.getStructure());
 		if (config == null || config.spacing() < 1)
 			return null;
 
