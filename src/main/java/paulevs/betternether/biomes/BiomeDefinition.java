@@ -4,8 +4,10 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.Carvers;
-import net.minecraft.data.worldgen.Features;
-import net.minecraft.data.worldgen.SurfaceBuilders;
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
+import net.minecraft.data.worldgen.placement.NetherPlacements;
+import net.minecraft.data.worldgen.placement.OrePlacements;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
@@ -15,8 +17,6 @@ import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
-import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.interfaces.IStructureFeatures;
@@ -37,7 +37,9 @@ public class BiomeDefinition extends BCLBiomeDef {
 	public BiomeDefinition(ResourceLocation id) {
 		super(id);
 		netherBiome();
-		setSurface(SurfaceBuilders.NETHER);
+		//TODO: 1.18 surface changes
+		setSurface(Blocks.NETHERRACK);
+		//setSurface(SurfaceBuilders.NETHER);
 		setTemperature(2F);
 	}
 
@@ -208,24 +210,24 @@ public class BiomeDefinition extends BCLBiomeDef {
 	}
 
 	private void addDefaultStructures(BiomeGenerationSettings.Builder generationSettings) {
-		IStructureFeatures sf = (IStructureFeatures)(Object)structureFeatures;
-		addStructureFeature(sf.getRUINED_PORTAL_NETHER());
-		addStructureFeature(sf.getNETHER_BRIDGE());
-		addStructureFeature(sf.getBASTION_REMNANT());
+//		IStructureFeatures sf = (IStructureFeatures)(Object)structureFeatures;
+//		addStructureFeature(sf.getRUINED_PORTAL_NETHER());
+//		addStructureFeature(sf.getNETHER_BRIDGE());
+//		addStructureFeature(sf.getBASTION_REMNANT());
 		generationSettings.addCarver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
-		generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Features.SPRING_LAVA);
+		generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA);
 	}
 
 	private void addDefaultFeatures(BiomeGenerationSettings.Builder generationSettings) {
-		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.SPRING_OPEN);
-		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.PATCH_FIRE);
-		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.PATCH_SOUL_FIRE);
-		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.GLOWSTONE_EXTRA);
-		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.GLOWSTONE);
-		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.BROWN_MUSHROOM_NETHER);
-		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.RED_MUSHROOM_NETHER);
-		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.ORE_MAGMA);
-		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, Features.SPRING_CLOSED);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_OPEN);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.PATCH_FIRE);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.PATCH_SOUL_FIRE);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.GLOWSTONE_EXTRA);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.GLOWSTONE);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, VegetationPlacements.BROWN_MUSHROOM_NETHER);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, VegetationPlacements.RED_MUSHROOM_NETHER);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, OrePlacements.ORE_MAGMA);
+		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_CLOSED);
 		BiomeDefaultFeatures.addDefaultMushrooms(generationSettings);
 		BiomeDefaultFeatures.addNetherDefaultOres(generationSettings);
 	}
@@ -285,11 +287,13 @@ public class BiomeDefinition extends BCLBiomeDef {
 	
 	@Override
 	public BiomeDefinition setSurface(Block block){
-		super.setSurface(SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderBaseConfiguration(
-			block.defaultBlockState(),
-			Blocks.NETHERRACK.defaultBlockState(),
-			Blocks.NETHERRACK.defaultBlockState()
-		)));
+//		super.setSurface(SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderBaseConfiguration(
+//			block.defaultBlockState(),
+//			Blocks.NETHERRACK.defaultBlockState(),
+//			Blocks.NETHERRACK.defaultBlockState()
+//		)));
+		//TODO: 1.18 Surfa
+		super.setSurface(Blocks.NETHERRACK);
 		return this;
 	}
 }

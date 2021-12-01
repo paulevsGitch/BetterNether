@@ -34,7 +34,7 @@ public class CityHelper {
 		POSITIONS.clear();
 		for (int x = x1; x <= x2; x += 8) {
 			for (int z = z1; z <= z2; z += 8) {
-				ChunkPos chunk = NetherStructures.CITY.getPotentialFeatureChunk(config, worldSeed, chunkRandom, x, z);
+				ChunkPos chunk = NetherStructures.CITY.getPotentialFeatureChunk(config, worldSeed, x, z);
 				POSITIONS.add(chunk);
 			}
 		}
@@ -55,7 +55,7 @@ public class CityHelper {
 				//TODO: 1.18 isValidStart does no longer exists...
 				//if (world.getBiome(POS).getGenerationSettings().isValidStart(BNWorldGenerator.CITY))
 				{
-					ChunkPos chunk = BNWorldGenerator.CITY.getPotentialFeatureChunk(config, worldSeed, chunkRandom, x, z);
+					ChunkPos chunk = NetherStructures.CITY.getPotentialFeatureChunk(config, worldSeed, x, z);
 					POSITIONS.add(chunk);
 				}
 			}

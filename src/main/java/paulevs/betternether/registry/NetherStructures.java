@@ -27,8 +27,9 @@ public class NetherStructures {
 			FabricStructureBuilder.create(new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY)
 								  .step(Decoration.RAW_GENERATION)
 								  .defaultConfig(new StructureFeatureConfiguration(distance, separation, 1234))
-								  .superflatFeature(CITY_CONFIGURED)
+								  //.superflatFeature(CITY_CONFIGURED)
 								  .register();
+			//TODO: 1.18 superflatFeature?
 			
 			BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
 		}

@@ -5,7 +5,6 @@
 	"mixins": [
       "AbstractFurnaceBlockEntityMixin",
       "BastionRemnantFeatureMixin",
-	  "BiomeGenerationSettingsAccessor",
       "BoneMealMixin",
       "BrewingRecipeRegistryMixin",      
       "ChunkSerializerMixin",

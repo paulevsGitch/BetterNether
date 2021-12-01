@@ -78,7 +78,7 @@ public class BiomeMap {
 				(int) Math.floor((double) z / BiomeChunk.WIDTH));
 		BiomeChunk chunk = MAPS.get(cpos);
 		if (chunk == null) {
-			RANDOM.setBaseChunkSeed(cpos.x, cpos.z);
+			RANDOM.setLargeFeatureWithSalt(0, cpos.x, cpos.z, 0);
 			chunk = new BiomeChunk(this, RANDOM);
 			MAPS.put(cpos, chunk);
 		}

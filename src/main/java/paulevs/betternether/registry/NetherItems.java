@@ -44,6 +44,7 @@ import paulevs.betternether.items.materials.BNItemMaterials;
 import paulevs.betternether.tab.CreativeTabs;
 import ru.bclib.api.TagAPI;
 import ru.bclib.items.tool.BaseShearsItem;
+import ru.bclib.registry.ItemRegistry;
 
 public class NetherItems extends ItemRegistry {
 	private static final List<String> ITEMS = new ArrayList<String>();

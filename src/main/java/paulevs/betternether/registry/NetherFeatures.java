@@ -1,16 +1,14 @@
 package paulevs.betternether.registry;
 
 import com.google.common.collect.Lists;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.biomes.BiomeDefinition;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.mixin.common.BiomeGenerationSettingsAccessor;
 import paulevs.betternether.world.features.BlockFixFeature;
 import paulevs.betternether.world.features.CavesFeature;
 import paulevs.betternether.world.features.CleanupFeature;
@@ -70,14 +68,14 @@ public class NetherFeatures {
 		return BCLFeature.makeOreFeature(BetterNether.makeID(name), blockOre, Blocks.NETHERRACK, veins, veinSize, minY, maxY);
 	}
 	
-	private static void addFeature(BCLFeature feature, List<List<Supplier<ConfiguredFeature<?, ?>>>> features) {
+	private static void addFeature(BCLFeature feature, List<List<Supplier<PlacedFeature>>> features) {
 		int index = feature.getFeatureStep().ordinal();
 		if (features.size() > index) {
-			features.get(index).add(() -> feature.getFeatureConfigured());
+			features.get(index).add(() -> feature.getPlacedFeature());
 		}
 		else {
-			List<Supplier<ConfiguredFeature<?, ?>>> newFeature = Lists.newArrayList();
-			newFeature.add(() -> feature.getFeatureConfigured());
+			List<Supplier<PlacedFeature>> newFeature = Lists.newArrayList();
+			newFeature.add(() -> feature.getPlacedFeature());
 			features.add(newFeature);
 		}
 	}
@@ -105,31 +103,20 @@ public class NetherFeatures {
 		}
 	}
 	
-	private static void registerBiomeFeatures(List<List<Supplier<ConfiguredFeature<?, ?>>>> features) {
+	public static void modifyNonBNBiome(Biome biome) {
 		if (NetherFeatures.HAS_CAVES){
-			addFeature(CAVES_FEATURE, features);
+			BiomeAPI.addBiomeFeature(biome, CAVES_FEATURE);
 		}
 		if (NetherFeatures.HAS_PATHS){
-			addFeature(PATHS_FEATURE, features);
+			BiomeAPI.addBiomeFeature(biome, PATHS_FEATURE);
 		}
 		
-		addFeature(POPULATOR_FEATURE, features);
+		BiomeAPI.addBiomeFeature(biome, POPULATOR_FEATURE);
 		
-		addFeature(CINCINNASITE_ORE, features);
-		addFeature(NETHER_RUBY_ORE, features);
-		addFeature(NETHER_LAPIS_ORE, features);
-		addFeature(NETHER_REDSTONE_ORE, features);
-	}
-	
-	public static void modifyNonBNBiome(Biome biome) {
-		BiomeGenerationSettingsAccessor accessor = (BiomeGenerationSettingsAccessor) biome.getGenerationSettings();
-		List<List<Supplier<ConfiguredFeature<?, ?>>>> preFeatures = accessor.be_getFeatures();
-		List<List<Supplier<ConfiguredFeature<?, ?>>>> features = new ArrayList<>(preFeatures.size());
-		preFeatures.forEach((list) -> features.add(Lists.newArrayList(list)));
-		
-		registerBiomeFeatures(features);
-		
-		accessor.be_setFeatures(features);
+		BiomeAPI.addBiomeFeature(biome, CINCINNASITE_ORE);
+		BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE);
+		BiomeAPI.addBiomeFeature(biome, NETHER_LAPIS_ORE);
+		BiomeAPI.addBiomeFeature(biome, NETHER_REDSTONE_ORE);
 	}
 	
 	public static void register() {
