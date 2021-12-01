@@ -2,6 +2,7 @@ package paulevs.betternether.biomes;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import paulevs.betternether.BlocksHelper;
@@ -27,8 +28,25 @@ import paulevs.betternether.structures.plants.StructureStalagnate;
 import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherJungleData extends NetherBiomeData {
+	public void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(62, 169, 61)
+			.loop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
+			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+			//TODO: 1.18 Surface Blocks
+			//.surface(NetherBlocks.JUNGLE_GRASS)
+			.spawn(EntityRegistry.JUNGLE_SKELETON, 40, 2, 4);
+	}
+	
+	@Override
+	public boolean spawnVanillaMobs(){
+		return false;
+	}
+	
 	public NetherJungleData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(62, 169, 61)

@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.function.Consumer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
-import net.minecraft.data.worldgen.biome.OverworldBiomes;
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
+import net.minecraft.data.worldgen.placement.NetherPlacements;
+import net.minecraft.data.worldgen.placement.OrePlacements;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
@@ -99,21 +102,50 @@ public abstract class NetherBiomeData {
 	private ArrayList<String> structures;
 	private static final String DATA_RECORD = "NETHER_DATA";
 	
-	private static BCLBiomeBuilder addDefaultSpawns(BCLBiomeBuilder builder){
+	
+	private static void addDefaultStructures(BCLBiomeBuilder builder) {
+		//		IStructureFeatures sf = (IStructureFeatures)(Object)structureFeatures;
+		//		addStructureFeature(sf.getRUINED_PORTAL_NETHER());
+		//		addStructureFeature(sf.getNETHER_BRIDGE());
+		//		addStructureFeature(sf.getBASTION_REMNANT());
+		
+		//TODO: 1.18 Missing Carvers
+		//builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
+		builder.feature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA);
+	}
+	
+	private static void addDefaultFeatures(BCLBiomeBuilder builder) {
+		builder
+			.defaultMushrooms()
+			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_OPEN)
+			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.PATCH_FIRE)
+			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.PATCH_SOUL_FIRE)
+			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.GLOWSTONE_EXTRA)
+			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.GLOWSTONE)
+			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, VegetationPlacements.BROWN_MUSHROOM_NETHER)
+			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, VegetationPlacements.RED_MUSHROOM_NETHER)
+			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, OrePlacements.ORE_MAGMA)
+			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_CLOSED);
+	}
+	
+	private static void addDefaultBNMobs(BCLBiomeBuilder builder){
 		builder
 			.spawn(EntityRegistry.FIREFLY, 5, 3, 6)
 			.spawn(EntityRegistry.SKULL, 2, 2, 4)
 			.spawn(EntityRegistry.NAGA, 8, 3, 5)
 			.spawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
-		return builder;
 	}
 	
-	
-	private static int calculateSkyColor() {
-		float g = 2.0f / 3.0f;
-		g = Mth.clamp(g, -1.0F, 1.0F);
-		return Mth.hsvToRgb(0.62222224F - g * 0.05F, 0.5F + g * 0.1F, 1.0F);
+	private static void addVanillaMobs(BCLBiomeBuilder builder) {
+		builder
+			.spawn(EntityType.GHAST, 50, 4, 4)
+			.spawn(EntityType.ZOMBIFIED_PIGLIN, 100, 4, 4)
+			.spawn(EntityType.MAGMA_CUBE, 2, 4, 4)
+			.spawn(EntityType.ENDERMAN, 1, 4, 4)
+			.spawn(EntityType.PIGLIN, 15, 4, 4)
+			.spawn(EntityType.STRIDER, 60, 1, 2);
 	}
+	
 	public static BCLBiome create(NetherBiomeData data){
 		final ResourceLocation ID = data.id;
 		Biome BASE_BIOME = NetherBiomes.netherWastes();
@@ -128,7 +160,15 @@ public abstract class NetherBiomeData {
 			.waterFogColor(BASE_BIOME.getWaterFogColor())
 			.skyColor(BASE_BIOME.getSkyColor());
 		
-		addDefaultSpawns(builder);
+		if (data.hasVanillaStructures()) addDefaultStructures(builder);
+		if (data.hasVanillaFeatures()) addDefaultFeatures(builder);
+		if (data.hasVanillaOres()) builder.netherDefaultOres();
+		
+		if (data.spawnVanillaMobs()){
+			addVanillaMobs(builder);
+		}
+		addDefaultBNMobs(builder);
+		
 		NetherFeatures.addDefaultFeatures(builder);
 		data.addCustomBuildData(builder);
 		BCLBiome biome = builder.build();
@@ -167,6 +207,22 @@ public abstract class NetherBiomeData {
 			addStructure("netherrack_stalagmite", STALAGMITE_NETHERRACK, StructureType.CEIL, 0.01F, true);
 			addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
 		}
+	}
+	
+	public boolean spawnVanillaMobs(){
+		return true;
+	}
+	
+	public boolean hasVanillaFeatures(){
+		return true;
+	}
+	
+	public boolean hasVanillaOres(){
+		return true;
+	}
+	
+	public boolean hasVanillaStructures(){
+		return true;
 	}
 	
 	public boolean hasBNStructures(){

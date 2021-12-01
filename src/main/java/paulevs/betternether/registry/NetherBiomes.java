@@ -70,6 +70,7 @@ public class NetherBiomes {
 	}
 	
 	public static final BCLBiome BIOME_GRAVEL_DESERT = NetherBiomeData.create(Data.BIOME_GRAVEL_DESERT);
+	public static final BCLBiome BIOME_NETHER_JUNGLE = NetherBiomeData.create(Data.BIOME_NETHER_JUNGLE);
 
 	private static int maxDefChance = 0;
 	private static int maxChance = 0;
@@ -84,7 +85,7 @@ public class NetherBiomes {
 		});
 		
 		registerNetherBiome(BIOME_GRAVEL_DESERT);
-//		registerNetherBiome(BIOME_NETHER_JUNGLE);
+		registerNetherBiome(BIOME_NETHER_JUNGLE);
 //		registerNetherBiome(BIOME_WART_FOREST);
 //		registerNetherBiome(BIOME_GRASSLANDS);
 //		registerNetherBiome(BIOME_MUSHROOM_FOREST);
