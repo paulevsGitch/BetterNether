@@ -1,11 +1,5 @@
 package paulevs.betternether.registry;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Set;
-
-import com.google.common.collect.Sets;
-
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
@@ -44,10 +38,12 @@ import ru.bclib.api.BiomeAPI;
 import ru.bclib.api.LifeCycleAPI;
 import ru.bclib.world.biomes.BCLBiome;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class NetherBiomes {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
-	private static final Set<Integer> OCCUPIED_IDS = Sets.newHashSet();
 
 	
 	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherGravelDesert("Gravel Desert");
@@ -130,21 +126,7 @@ public class NetherBiomes {
 		BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.NAGA, 8, 3, 5);
 	}
 	
-	private static void register(NetherBiome biome) {
-		if (BuiltinRegistries.BIOME.get(biome.getID()) == null) {
-			if (OCCUPIED_IDS.isEmpty()) {
-				BuiltinRegistries.BIOME.forEach((bio) -> {
-					OCCUPIED_IDS.add(BuiltinRegistries.BIOME.getId(bio));
-				});
-			}
-			biomeID ++;
-			while (OCCUPIED_IDS.contains(biomeID)) {
-				biomeID ++;
-			}
-			//Registry.registerMapping(BuiltinRegistries.BIOME, biomeID, biome.getID().toString(), biome.getBiome());
-		}
-	}
-
+	
 	private static void registerNetherBiome(NetherBiome biome) {
 		float chance = Configs.GENERATOR.getFloat("biomes." + biome.getID().getNamespace() + ".main", biome.getID().getPath() + "_chance", 1);
 		if (chance > 0.0F) {
@@ -155,7 +137,6 @@ public class NetherBiomes {
 			biome.build();
 			REGISTRY.add(biome);
 			ALL_BIOMES.add(biome);
-			register(biome);
 			
 			Biome b = BuiltinRegistries.BIOME.get(biome.getID());
 			if (b==null) {
@@ -174,7 +155,6 @@ public class NetherBiomes {
 			mainBiome.setEdgeSize(sizeConf);
 			biome.build();
 			ALL_BIOMES.add(biome);
-			register(biome);
 			
 			BiomeAPI.registerBiome(biome);
 		}
@@ -188,7 +168,6 @@ public class NetherBiomes {
 			biome.setPlantDensity(Configs.BIOMES.getFloat(path, "plants_and_structures_density", 1));
 			biome.build();
 			ALL_BIOMES.add(biome);
-			register(biome);
 			
 			BiomeAPI.registerSubBiome(mainBiome, biome);
 		}
