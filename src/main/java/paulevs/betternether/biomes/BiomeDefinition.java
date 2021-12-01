@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.interfaces.IStructureFeatures;
+import paulevs.betternether.registry.NetherStructures;
 import ru.bclib.world.biomes.BCLBiomeDef;
 
 public class BiomeDefinition extends BCLBiomeDef {

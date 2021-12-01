@@ -16,6 +16,7 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherFeatures;
+import paulevs.betternether.registry.NetherStructures;
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.StructureWorld;
@@ -101,6 +102,7 @@ public class NetherBiome extends BCLBiome{
 		def.setCategory(BiomeCategory.NETHER);
 		addDefaultSpawns(def);
 		NetherFeatures.addDefaultFeatures(def);
+		NetherStructures.addDefaultFeatures(def);
 		return def;
 	}
 	

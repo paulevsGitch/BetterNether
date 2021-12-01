@@ -13,6 +13,7 @@ import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.BiomeAPI;
+import ru.bclib.world.biomes.BCLBiomeDef;
 
 public class NetherStructures {
 	// Nether City
@@ -24,18 +25,21 @@ public class NetherStructures {
 			int distance = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
 			int separation = distance >> 1;
 			
-			FabricStructureBuilder.create(new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY)
+			 FabricStructureBuilder.create(new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY)
 								  .step(Decoration.RAW_GENERATION)
 								  .defaultConfig(new StructureFeatureConfiguration(distance, separation, 1234))
 								  //.superflatFeature(CITY_CONFIGURED)
 								  .register();
 			//TODO: 1.18 superflatFeature?
-			
 			BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(BetterNether.MOD_ID, "nether_city"), CITY_CONFIGURED);
 		}
 	}
 	
 	public static void modifyNonBNBiome(Biome biome) {
 		BiomeAPI.addBiomeStructure(biome, CITY_CONFIGURED);
+	}
+	
+	public static void addDefaultFeatures(BCLBiomeDef def) {
+		def.addStructureFeature(NetherStructures.CITY_CONFIGURED);
 	}
 }
