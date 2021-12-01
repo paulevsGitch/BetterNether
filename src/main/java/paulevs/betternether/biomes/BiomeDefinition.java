@@ -22,6 +22,8 @@ import paulevs.betternether.config.Configs;
 import paulevs.betternether.registry.NetherStructures;
 import ru.bclib.world.biomes.BCLBiomeDef;
 
+
+@Deprecated(forRemoval = true)
 public class BiomeDefinition extends BCLBiomeDef {
 	private boolean defaultOres = true;
 	private boolean defaultMobs = true;

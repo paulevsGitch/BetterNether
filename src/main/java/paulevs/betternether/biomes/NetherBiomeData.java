@@ -156,6 +156,8 @@ public abstract class NetherBiomeData {
 		BCLBiomeBuilder builder = BCLBiomeBuilder
 			.start(ID)
 			.category(BiomeCategory.NETHER)
+			//TODO: 1.18 surface changes
+			//.surface(Blocks.NETHERRACK);
 			.temperature(BASE_BIOME.getBaseTemperature())
 			.wetness(BASE_BIOME.getDownfall())
 			.precipitation(Precipitation.NONE)

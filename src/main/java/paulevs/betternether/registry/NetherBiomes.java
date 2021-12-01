@@ -91,10 +91,6 @@ public class NetherBiomes {
 	public static final BCLBiome UPSIDE_DOWN_FOREST = NetherBiomeData.create(Data.UPSIDE_DOWN_FOREST);
 	public static final BCLBiome OLD_SWAMPLAND = NetherBiomeData.create(Data.OLD_SWAMPLAND);
 
-	private static int maxDefChance = 0;
-	private static int maxChance = 0;
-	private static int biomeID = 7000;
-
 	public static void register() {
 		BuiltinRegistries.BIOME.forEach((biome) -> {
 			if (biome.getBiomeCategory() == BiomeCategory.NETHER) {
@@ -153,11 +149,12 @@ public class NetherBiomes {
 	private static void registerNetherBiome(BCLBiome biome) {
 		float chance = Configs.GENERATOR.getFloat("biomes." + biome.getID().getNamespace() + ".main", biome.getID().getPath() + "_chance", 1);
 		if (chance > 0.0F) {
-			maxChance += chance;
 			REGISTRY.add(biome);
 			ALL_BIOMES.add(biome);
+			biome.setGenChance(chance);
 			
 			Biome b = BuiltinRegistries.BIOME.get(biome.getID());
+			
 			if (b==null) {
 				BiomeAPI.registerNetherBiome(biome);
 			}
