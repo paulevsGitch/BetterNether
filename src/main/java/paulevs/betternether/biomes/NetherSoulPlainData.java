@@ -17,11 +17,11 @@ import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureSoulGrass;
 import paulevs.betternether.structures.plants.StructureSoulVein;
 
-public class NetherSoulPlain extends NetherBiome {
+public class NetherSoulPlainData extends NetherBiomeData {
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
-	public NetherSoulPlain(String name) {
+	public NetherSoulPlainData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(196, 113, 239)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)

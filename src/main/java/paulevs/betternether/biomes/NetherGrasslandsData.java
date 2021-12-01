@@ -21,8 +21,8 @@ import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 
-public class NetherGrasslands extends NetherBiome {
-	public NetherGrasslands(String name) {
+public class NetherGrasslandsData extends NetherBiomeData {
+	public NetherGrasslandsData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(113, 73, 133)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)

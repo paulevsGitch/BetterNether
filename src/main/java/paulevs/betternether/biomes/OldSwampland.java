@@ -27,7 +27,7 @@ import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWillow;
 import paulevs.betternether.structures.plants.StructureWillowBush;
 
-public class OldSwampland extends NetherBiome {
+public class OldSwampland extends NetherBiomeData {
 	protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);
 
 	public OldSwampland(String name) {

@@ -28,8 +28,8 @@ import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
-public class NetherJungle extends NetherBiome {
-	public NetherJungle(String name) {
+public class NetherJungleData extends NetherBiomeData {
+	public NetherJungleData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(62, 169, 61)
 				.setLoop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)

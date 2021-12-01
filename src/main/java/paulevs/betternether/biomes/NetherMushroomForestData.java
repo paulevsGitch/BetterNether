@@ -21,8 +21,8 @@ import paulevs.betternether.structures.plants.StructureVanillaMushroom;
 import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
-public class NetherMushroomForest extends NetherBiome {
-	public NetherMushroomForest(String name) {
+public class NetherMushroomForestData extends NetherBiomeData {
+	public NetherMushroomForestData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(166, 38, 95)
 				.setLoop(SoundsRegistry.AMBIENT_MUSHROOM_FOREST)

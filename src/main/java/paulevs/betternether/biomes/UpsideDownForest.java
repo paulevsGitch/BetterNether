@@ -23,7 +23,7 @@ import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWhisperingGourd;
 
-public class UpsideDownForest extends NetherBiome {
+public class UpsideDownForest extends NetherBiomeData {
 	public UpsideDownForest(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(111, 188, 111)

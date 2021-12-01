@@ -19,7 +19,7 @@ import paulevs.betternether.structures.plants.StructureVanillaMushroom;
 import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 
-public class OldFungiwoods extends NetherBiome {
+public class OldFungiwoods extends NetherBiomeData {
 	public OldFungiwoods(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(166, 38, 95)

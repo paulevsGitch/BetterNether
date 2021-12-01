@@ -12,7 +12,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.structures.StructureType;
 
-public class FloodedDeltas extends NetherBiome {
+public class FloodedDeltas extends NetherBiomeData {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	public FloodedDeltas(String name) {

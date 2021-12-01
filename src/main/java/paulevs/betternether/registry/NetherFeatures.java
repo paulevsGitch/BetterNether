@@ -14,7 +14,8 @@ import paulevs.betternether.world.features.CavesFeature;
 import paulevs.betternether.world.features.CleanupFeature;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.features.PathsFeature;
-import ru.bclib.api.BiomeAPI;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiomeDef;
 import ru.bclib.world.features.BCLFeature;
 import ru.bclib.world.features.DefaultFeature;
@@ -69,7 +70,7 @@ public class NetherFeatures {
 	}
 	
 	private static void addFeature(BCLFeature feature, List<List<Supplier<PlacedFeature>>> features) {
-		int index = feature.getFeatureStep().ordinal();
+		int index = feature.getDecoration().ordinal();
 		if (features.size() > index) {
 			features.get(index).add(() -> feature.getPlacedFeature());
 		}
@@ -80,27 +81,29 @@ public class NetherFeatures {
 		}
 	}
 	
-	public static void addDefaultFeatures(BCLBiomeDef def) {
+	public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {
 		if (NetherFeatures.HAS_CLEANING_PASS) {
-			def.addFeature(CLEANUP_FEATURE);
+			builder.feature(CLEANUP_FEATURE);
 		}
 		if (NetherFeatures.HAS_CAVES){
-			def.addFeature(CAVES_FEATURE);
+			builder.feature(CAVES_FEATURE);
 		}
 		if (NetherFeatures.HAS_PATHS){
-			def.addFeature(PATHS_FEATURE);
+			builder.feature(PATHS_FEATURE);
 		}
 		
-		def.addFeature(POPULATOR_FEATURE);
-		
-		def.addFeature(CINCINNASITE_ORE);
-		def.addFeature(NETHER_RUBY_ORE);
-		def.addFeature(NETHER_LAPIS_ORE);
-		def.addFeature(NETHER_REDSTONE_ORE);
+		builder
+			.feature(POPULATOR_FEATURE)
+			.feature(CINCINNASITE_ORE)
+			.feature(NETHER_RUBY_ORE)
+			.feature(NETHER_LAPIS_ORE)
+			.feature(NETHER_REDSTONE_ORE);
 		
 		if (NetherFeatures.HAS_FIXING_PASS){
-			def.addFeature(FIX_FEATURE);
+			builder.feature(FIX_FEATURE);
 		}
+		
+		return builder;
 	}
 	
 	public static void modifyNonBNBiome(Biome biome) {

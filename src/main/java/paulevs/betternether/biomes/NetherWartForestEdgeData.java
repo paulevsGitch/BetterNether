@@ -13,8 +13,8 @@ import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureNetherWart;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 
-public class NetherWartForestEdge extends NetherBiome {
-	public NetherWartForestEdge(String name) {
+public class NetherWartForestEdgeData extends NetherBiomeData {
+	public NetherWartForestEdgeData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(191, 28, 28)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)

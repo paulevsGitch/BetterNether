@@ -18,8 +18,8 @@ import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSmoker;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 
-public class NetherPoorGrasslands extends NetherBiome {
-	public NetherPoorGrasslands(String name) {
+public class NetherPoorGrasslandsData extends NetherBiomeData {
+	public NetherPoorGrasslandsData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(113, 73, 133)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)

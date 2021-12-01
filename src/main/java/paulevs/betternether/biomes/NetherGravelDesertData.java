@@ -12,16 +12,22 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureAgave;
 import paulevs.betternether.structures.plants.StructureBarrelCactus;
 import paulevs.betternether.structures.plants.StructureNetherCactus;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
-public class NetherGravelDesert extends NetherBiome {
-	public NetherGravelDesert(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(170, 48, 0)
-				.setLoop(SoundsRegistry.AMBIENT_GRAVEL_DESERT)
-				.setMood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
-				.setAdditions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
-				.setMusic(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
-				.setParticles(ParticleTypes.ASH, 0.02F));
+public class NetherGravelDesertData extends NetherBiomeData {
+	public void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(170, 48, 0)
+			.loop(SoundsRegistry.AMBIENT_GRAVEL_DESERT)
+			.loop(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
+			.additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
+			.music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
+			.particles(ParticleTypes.ASH, 0.02F);
+	}
+	
+	public NetherGravelDesertData(String name) {
+		super(name);
+		
 		addStructure("nether_cactus", new StructureNetherCactus(), StructureType.FLOOR, 0.02F, true);
 		addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);
 		addStructure("barrel_cactus", new StructureBarrelCactus(), StructureType.FLOOR, 0.02F, true);

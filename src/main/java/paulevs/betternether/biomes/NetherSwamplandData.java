@@ -26,10 +26,10 @@ import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWillow;
 import paulevs.betternether.structures.plants.StructureWillowBush;
 
-public class NetherSwampland extends NetherBiome {
+public class NetherSwamplandData extends NetherBiomeData {
 	protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);
 
-	public NetherSwampland(String name) {
+	public NetherSwamplandData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(137, 19, 78)
 				.setLoop(SoundsRegistry.AMBIENT_SWAMPLAND)

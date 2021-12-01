@@ -20,10 +20,10 @@ import paulevs.betternether.structures.plants.StructureSoulLily;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 import paulevs.betternether.structures.plants.StructureWartTree;
 
-public class NetherWartForest extends NetherBiome {
+public class NetherWartForestData extends NetherBiomeData {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
-	public NetherWartForest(String name) {
+	public NetherWartForestData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(151, 6, 6)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)

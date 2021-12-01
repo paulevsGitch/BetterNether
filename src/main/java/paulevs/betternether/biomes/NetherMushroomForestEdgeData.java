@@ -12,8 +12,8 @@ import paulevs.betternether.structures.plants.StructureOrangeMushroom;
 import paulevs.betternether.structures.plants.StructureRedMold;
 import paulevs.betternether.structures.plants.StructureVanillaMushroom;
 
-public class NetherMushroomForestEdge extends NetherBiome {
-	public NetherMushroomForestEdge(String name) {
+public class NetherMushroomForestEdgeData extends NetherBiomeData {
+	public NetherMushroomForestEdgeData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(200, 121, 157)
 				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)

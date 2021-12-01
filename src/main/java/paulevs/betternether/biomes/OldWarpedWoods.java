@@ -15,7 +15,7 @@ import paulevs.betternether.structures.plants.StructureTwistedVines;
 import paulevs.betternether.structures.plants.StructureWarpedFungus;
 import paulevs.betternether.structures.plants.StructureWarpedRoots;
 
-public class OldWarpedWoods extends NetherBiome {
+public class OldWarpedWoods extends NetherBiomeData {
 	public OldWarpedWoods(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(26, 5, 26)

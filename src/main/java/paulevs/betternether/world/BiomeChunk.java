@@ -2,7 +2,7 @@ package paulevs.betternether.world;
 
 import java.util.Random;
 
-import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.biomes.NetherBiomeData;
 import paulevs.betternether.registry.NetherBiomes;
 import ru.bclib.world.biomes.BCLBiome;
 
@@ -20,8 +20,8 @@ public class BiomeChunk {
 		int sm_height = clampOne(map.maxHeight >> 1);
 		maskB = sm_height - 1;
 		maxY = map.maxHeight - 1;
-		BCLBiome[][][] PreBio = new NetherBiome[sm_height][SM_WIDTH][SM_WIDTH];
-		biomes = new NetherBiome[map.maxHeight][WIDTH][WIDTH];
+		BCLBiome[][][] PreBio = new BCLBiome[sm_height][SM_WIDTH][SM_WIDTH];
+		biomes = new BCLBiome[map.maxHeight][WIDTH][WIDTH];
 
 		for (int y = 0; y < sm_height; y++)
 			for (int x = 0; x < SM_WIDTH; x++)

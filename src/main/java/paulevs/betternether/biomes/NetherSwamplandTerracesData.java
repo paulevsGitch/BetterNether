@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 
-public class NetherSwamplandTerraces extends NetherSwampland {
-	public NetherSwamplandTerraces(String name) {
+public class NetherSwamplandTerracesData extends NetherSwamplandData {
+	public NetherSwamplandTerracesData(String name) {
 		super(name);
 	}
 

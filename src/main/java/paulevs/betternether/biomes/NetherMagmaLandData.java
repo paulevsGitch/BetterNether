@@ -14,11 +14,11 @@ import paulevs.betternether.structures.decorations.StructureGeyser;
 import paulevs.betternether.structures.plants.StructureGoldenVine;
 import paulevs.betternether.structures.plants.StructureMagmaFlower;
 
-public class NetherMagmaLand extends NetherBiome {
+public class NetherMagmaLandData extends NetherBiomeData {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 	private static final boolean[] MASK;
 
-	public NetherMagmaLand(String name) {
+	public NetherMagmaLandData(String name) {
 		super(new BiomeDefinition(name)
 				.setFogColor(248, 158, 68)
 				.setLoop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)

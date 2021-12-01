@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.function.Consumer;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.data.worldgen.biome.NetherBiomes;
+import net.minecraft.data.worldgen.biome.OverworldBiomes;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.block.Blocks;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.EntityRegistry;
@@ -23,9 +30,10 @@ import paulevs.betternether.structures.StructureWorld;
 import paulevs.betternether.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.structures.plants.StructureWartCap;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.world.biomes.BCLBiome;
 
-public class NetherBiome extends BCLBiome{
+public abstract class NetherBiomeData {
 	private static final String[] DEF_STRUCTURES = new String[] {
 		structureFormat("altar_01", -2, StructureType.FLOOR, 1),
 		structureFormat("altar_02", -4, StructureType.FLOOR, 1),
@@ -86,39 +94,73 @@ public class NetherBiome extends BCLBiome{
 	
 	protected float plantDensity = 1.0001F;
 	protected float noiseDensity = 0.3F;
+	private final ResourceLocation id;
 	
 	private ArrayList<String> structures;
-	private Biome actualBiome;
-	protected float localGenChance;
+	private static final String DATA_RECORD = "NETHER_DATA";
 	
-	private static void addDefaultSpawns(BiomeDefinition definition){
-		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 3, 6);
-		definition.addMobSpawn(EntityRegistry.SKULL, 2, 2, 4);
-		definition.addMobSpawn(EntityRegistry.NAGA, 8, 3, 5);
-		definition.addMobSpawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
+	private static BCLBiomeBuilder addDefaultSpawns(BCLBiomeBuilder builder){
+		builder
+			.spawn(EntityRegistry.FIREFLY, 5, 3, 6)
+			.spawn(EntityRegistry.SKULL, 2, 2, 4)
+			.spawn(EntityRegistry.NAGA, 8, 3, 5)
+			.spawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
+		return builder;
 	}
 	
-	private static BiomeDefinition makeDef(BiomeDefinition def) {
-		def.setCategory(BiomeCategory.NETHER);
-		addDefaultSpawns(def);
-		NetherFeatures.addDefaultFeatures(def);
-		NetherStructures.addDefaultFeatures(def);
-		return def;
-	}
 	
-	public NetherBiome(BiomeDefinition definition) {
-		super(makeDef(definition));
+	private static int calculateSkyColor() {
+		float g = 2.0f / 3.0f;
+		g = Mth.clamp(g, -1.0F, 1.0F);
+		return Mth.hsvToRgb(0.62222224F - g * 0.05F, 0.5F + g * 0.1F, 1.0F);
+	}
+	public static BCLBiome create(NetherBiomeData data){
+		final ResourceLocation ID = data.id;
+		Biome BASE_BIOME = NetherBiomes.netherWastes();
 		
+		BCLBiomeBuilder builder = BCLBiomeBuilder
+			.start(ID)
+			.category(BiomeCategory.NETHER)
+			.temperature(BASE_BIOME.getBaseTemperature())
+			.wetness(BASE_BIOME.getDownfall())
+			.precipitation(Precipitation.NONE)
+			.waterColor(BASE_BIOME.getWaterColor())
+			.waterFogColor(BASE_BIOME.getWaterFogColor())
+			.skyColor(BASE_BIOME.getSkyColor());
+		
+		addDefaultSpawns(builder);
+		NetherFeatures.addDefaultFeatures(builder);
+		data.addCustomBuildData(builder);
+		BCLBiome biome = builder.build();
+		data.build();
+		biome.addCustomData(DATA_RECORD, data);
+		
+		NetherStructures.addDefaultFeatures(biome);
+		return biome;
+	}
+	
+	
+	public static NetherBiomeData getCustomNetherData(BCLBiome biome){
+		if (biome==null) return null;
+		return biome.getCustomData(DATA_RECORD);
+	}
+	
+	public NetherBiomeData(BiomeDefinition definition) {
+		this("");
+	}
+	
+	public NetherBiomeData(String name) {
+		id = BetterNether.makeID(name.replace(' ', '_').toLowerCase());
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
 		
 		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.8F, true);
 		
-		if (definition.hasBNStructures()) {
+		if (hasBNStructures()) {
 			for (String s : DEF_STRUCTURES)
 				structures.add(s);
 		}
 
-		if (definition.hasStalactites()) {
+		if (hasStalactites()) {
 			addStructure("netherrack_stalactite", STALACTITE_NETHERRACK, StructureType.FLOOR, 0.05F, true);
 			addStructure("glowstone_stalactite", STALACTITE_GLOWSTONE, StructureType.FLOOR, 0.01F, true);
 
@@ -126,6 +168,16 @@ public class NetherBiome extends BCLBiome{
 			addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
 		}
 	}
+	
+	public boolean hasBNStructures(){
+		return true;
+	}
+	
+	public boolean hasStalactites(){
+		return true;
+	}
+	
+	public void addCustomBuildData(BCLBiomeBuilder builder){}
 
 	public void setPlantDensity(float density) {
 		this.plantDensity = density * 1.0001F;
@@ -144,15 +196,16 @@ public class NetherBiome extends BCLBiome{
 	}
 
 	private String getGroup() {
-		return "generator.biome." + mcID.getNamespace() + "." + getRegistryName();
+		return "generator.biome." + id.getNamespace() + "." + getRegistryName();
 	}
 
 	public void build() {
-		String group = getGroup();
+		final String group = getGroup();
 		String[] structAll = Configs.BIOMES.getStringArray(group, "schematics", structures.toArray(new String[] {}));
 		for (String struct : structAll) {
 			structureFromString(struct);
 		}
+		setPlantDensity(Configs.BIOMES.getFloat(group, "plants_and_structures_density", 1));
 		setNoiseDensity(Configs.BIOMES.getFloat(group, "noise_density", getNoiseDensity()));
 	}
 
@@ -187,7 +240,7 @@ public class NetherBiome extends BCLBiome{
 	}
 
 	public String getRegistryName() {
-		return mcID.getPath();
+		return id.getPath();
 	}
 	
 	
@@ -327,17 +380,13 @@ public class NetherBiome extends BCLBiome{
 		int size = info.size();
 		return size > 0 ? info.get(size - 1).density : 0;
 	}
-
-
+	
 	public boolean hasCeilStructures() {
 		return !buildGeneratorsCeil.isEmpty();
 	}
-	public String getNamespace() {
-		return mcID.getNamespace();
-	}
 	
-	public void setActualBiome(Biome actualBiome) {
-		this.actualBiome = actualBiome;
+	public String getNamespace() {
+		return id.getNamespace();
 	}
 	
 }

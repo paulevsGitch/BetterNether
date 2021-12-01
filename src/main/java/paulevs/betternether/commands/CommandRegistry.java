@@ -29,9 +29,10 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.biomes.NetherBiomeData;
 import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
+import ru.bclib.world.biomes.BCLBiome;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -77,7 +78,7 @@ public class CommandRegistry {
             source.sendFailure(new TextComponent("Failed to find the next biome...").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
             return 0;
         }
-        final NetherBiome biome = NetherBiomes.getAllBiomes().get(biomeIndex);
+        final BCLBiome biome = NetherBiomes.getAllBiomes().get(biomeIndex);
         source.sendSuccess(new TextComponent("Locating Biome " + biome).setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
         biomeIndex = (biomeIndex+1) % NetherBiomes.getAllBiomes().size();
 

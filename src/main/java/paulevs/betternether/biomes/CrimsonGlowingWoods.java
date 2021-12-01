@@ -21,7 +21,7 @@ import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWartBush;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 
-public class CrimsonGlowingWoods extends NetherBiome {
+public class CrimsonGlowingWoods extends NetherBiomeData {
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
 
 	public CrimsonGlowingWoods(String name) {

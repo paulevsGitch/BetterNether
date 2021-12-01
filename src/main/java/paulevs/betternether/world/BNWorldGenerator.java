@@ -8,11 +8,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.biomes.NetherBiome;
+import paulevs.betternether.biomes.NetherBiomeData;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.features.CavesFeature;
-import ru.bclib.api.BiomeAPI;
+import ru.bclib.api.biomes.BiomeAPI;
+import ru.bclib.world.biomes.BCLBiome;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ public class BNWorldGenerator {
 
 	private static MutableBlockPos popPos = new MutableBlockPos();
 
-	private static final NetherBiome[][] BIOMES = new NetherBiome[8][8];
+	private static final NetherBiomeData[][] BIOMES = new NetherBiomeData[8][8];
 
 	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(4096);
 	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(4096);
@@ -34,7 +35,7 @@ public class BNWorldGenerator {
 	private static final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
 	private static final HashSet<Biome> MC_BIOMES = new HashSet<Biome>();
 
-	private static NetherBiome biome;
+	private static NetherBiomeData biome;
 
 	protected static int biomeSizeXZ;
 	protected static int biomeSizeY;
@@ -51,7 +52,7 @@ public class BNWorldGenerator {
 		volumetric = Configs.GENERATOR.getBoolean("generator_world", "volumetric_biomes", true);
 	}
 
-	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random) {
+	private static NetherBiomeData getBiomeLocal(int x, int y, int z, Random random) {
 		final int px = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
 		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
 		return BIOMES[clamp(px, 7)][clamp(pz, 7)];
@@ -69,7 +70,7 @@ public class BNWorldGenerator {
 			boolean isAir = world.getBlockState(popPos).getMaterial().isReplaceable();
 			boolean airUp = world.getBlockState(popPos.above()).getMaterial().isReplaceable() && world.getBlockState(popPos.above(3)).getMaterial().isReplaceable();
 			boolean airDown = world.getBlockState(popPos.below()).getMaterial().isReplaceable() && world.getBlockState(popPos.below(3)).getMaterial().isReplaceable();
-			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+			NetherBiomeData biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
 			if (!isAir && !airUp && !airDown && random.nextInt(8) == 0)
 				type = StructureType.UNDER;
 			else {
@@ -235,10 +236,14 @@ public class BNWorldGenerator {
 			for (int z = 0; z < 8; z++) {
 				popPos.setZ(sz + (z << 1) + 2);
 				Biome b = world.getBiome(popPos);
-				if (BiomeAPI.getFromBiome(b) instanceof NetherBiome nBiome) {
-					BIOMES[x][z] = nBiome;
+				BCLBiome nBiome = BiomeAPI.getFromBiome(b);
+				NetherBiomeData data = NetherBiomeData.getCustomNetherData(nBiome);
+				
+				if (data!=null) {
+					BIOMES[x][z] = data;
 				} else {
-					BIOMES[x][z] = null;//BiomesRegistry.BIOME_EMPTY_NETHER;
+					//BiomesRegistry.BIOME_EMPTY_NETHER;
+					BIOMES[x][z] = null;
 				}
 				//BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
 				MC_BIOMES.add(b);
