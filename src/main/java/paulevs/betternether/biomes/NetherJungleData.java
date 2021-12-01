@@ -31,7 +31,7 @@ import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherJungleData extends NetherBiomeData {
-	public void addCustomBuildData(BCLBiomeBuilder builder){
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
 		builder
 			.fogColor(62, 169, 61)
 			.loop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
@@ -48,15 +48,7 @@ public class NetherJungleData extends NetherBiomeData {
 	}
 	
 	public NetherJungleData(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(62, 169, 61)
-				.setLoop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
-				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setDefaultMobs(false)
-				.setSurface(NetherBlocks.JUNGLE_GRASS)
-				.addMobSpawn(EntityRegistry.JUNGLE_SKELETON, 40, 2, 4)
-		);
+		super(name);
 		
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);

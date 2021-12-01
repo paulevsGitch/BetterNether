@@ -12,6 +12,7 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureWartDeadwood;
 import paulevs.betternether.structures.plants.StructureBlackBush;
@@ -19,20 +20,28 @@ import paulevs.betternether.structures.plants.StructureNetherWart;
 import paulevs.betternether.structures.plants.StructureSoulLily;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 import paulevs.betternether.structures.plants.StructureWartTree;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherWartForestData extends NetherBiomeData {
 	private static final MutableBlockPos POS = new MutableBlockPos();
+	
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(151, 6, 6)
+			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+			.music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
+			.particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
+			.spawn(EntityRegistry.FLYING_PIG, 20, 2, 4);
+	}
 
 	public NetherWartForestData(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(151, 6, 6)
-				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setMusic(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				.setParticles(ParticleTypes.CRIMSON_SPORE, 0.05F)
-				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
+		super(name);
+		
 		this.setNoiseDensity(0.45F);
+		
 		addStructure("wart_deadwood", new StructureWartDeadwood(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.1F, false);
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.2F, false);

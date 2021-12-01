@@ -185,11 +185,12 @@ public abstract class NetherBiomeData {
 		return biome.getCustomData(DATA_RECORD);
 	}
 	
-	public NetherBiomeData(BiomeDefinition definition) {
+	@Deprecated(forRemoval = true)
+	protected NetherBiomeData(BiomeDefinition definition) {
 		this("");
 	}
 	
-	public NetherBiomeData(String name) {
+	protected NetherBiomeData(String name) {
 		id = BetterNether.makeID(name.replace(' ', '_').toLowerCase());
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
 		
@@ -233,7 +234,7 @@ public abstract class NetherBiomeData {
 		return true;
 	}
 	
-	public void addCustomBuildData(BCLBiomeBuilder builder){}
+	protected void addCustomBuildData(BCLBiomeBuilder builder){}
 
 	public void setPlantDensity(float density) {
 		this.plantDensity = density * 1.0001F;

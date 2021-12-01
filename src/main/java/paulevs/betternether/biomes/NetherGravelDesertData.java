@@ -15,7 +15,7 @@ import paulevs.betternether.structures.plants.StructureNetherCactus;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherGravelDesertData extends NetherBiomeData {
-	public void addCustomBuildData(BCLBiomeBuilder builder){
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
 		builder
 			.fogColor(170, 48, 0)
 			.loop(SoundsRegistry.AMBIENT_GRAVEL_DESERT)

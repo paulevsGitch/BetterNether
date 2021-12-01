@@ -71,6 +71,11 @@ public class NetherBiomes {
 	
 	public static final BCLBiome BIOME_GRAVEL_DESERT = NetherBiomeData.create(Data.BIOME_GRAVEL_DESERT);
 	public static final BCLBiome BIOME_NETHER_JUNGLE = NetherBiomeData.create(Data.BIOME_NETHER_JUNGLE);
+	public static final BCLBiome BIOME_WART_FOREST = NetherBiomeData.create(Data.BIOME_WART_FOREST);
+	public static final BCLBiome BIOME_GRASSLANDS = NetherBiomeData.create(Data.BIOME_GRASSLANDS);
+	public static final BCLBiome BIOME_MUSHROOM_FOREST = NetherBiomeData.create(Data.BIOME_MUSHROOM_FOREST);
+	public static final BCLBiome BIOME_MUSHROOM_FOREST_EDGE = NetherBiomeData.create(Data.BIOME_MUSHROOM_FOREST_EDGE);
+	public static final BCLBiome BIOME_WART_FOREST_EDGE = NetherBiomeData.create(Data.BIOME_WART_FOREST_EDGE);
 
 	private static int maxDefChance = 0;
 	private static int maxChance = 0;
@@ -86,11 +91,11 @@ public class NetherBiomes {
 		
 		registerNetherBiome(BIOME_GRAVEL_DESERT);
 		registerNetherBiome(BIOME_NETHER_JUNGLE);
-//		registerNetherBiome(BIOME_WART_FOREST);
-//		registerNetherBiome(BIOME_GRASSLANDS);
-//		registerNetherBiome(BIOME_MUSHROOM_FOREST);
-//		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 2);
-//		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 2);
+		registerNetherBiome(BIOME_WART_FOREST);
+		registerNetherBiome(BIOME_GRASSLANDS);
+		registerNetherBiome(BIOME_MUSHROOM_FOREST);
+		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 2);
+		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 2);
 //		registerNetherBiome(BIOME_BONE_REEF);
 //		registerSubBiome(BIOME_SULFURIC_BONE_REEF, BIOME_BONE_REEF, 0.3F);
 //		registerSubBiome(BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);

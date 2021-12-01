@@ -20,17 +20,25 @@ import paulevs.betternether.structures.plants.StructureRedMold;
 import paulevs.betternether.structures.plants.StructureVanillaMushroom;
 import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherMushroomForestData extends NetherBiomeData {
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(166, 38, 95)
+			.loop(SoundsRegistry.AMBIENT_MUSHROOM_FOREST)
+			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+			.music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
+			.particles(ParticleTypes.MYCELIUM, 0.1F);
+	}
+	
 	public NetherMushroomForestData(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(166, 38, 95)
-				.setLoop(SoundsRegistry.AMBIENT_MUSHROOM_FOREST)
-				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setMusic(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				.setParticles(ParticleTypes.MYCELIUM, 0.1F));
+		super(name);
+		
 		this.setNoiseDensity(0.5F);
+		
 		addStructure("large_red_mushroom", new StructureMedRedMushroom(), StructureType.FLOOR, 0.12F, true);
 		addStructure("large_brown_mushroom", new StructureMedBrownMushroom(), StructureType.FLOOR, 0.12F, true);
 		addStructure("giant_mold", new StructureGiantMold(), StructureType.FLOOR, 0.12F, true);

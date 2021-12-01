@@ -12,16 +12,23 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureNetherWart;
 import paulevs.betternether.structures.plants.StructureWartSeed;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherWartForestEdgeData extends NetherBiomeData {
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(191, 28, 28)
+			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+			.music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
+			.spawn(EntityRegistry.FLYING_PIG, 20, 2, 4);
+	}
+	
 	public NetherWartForestEdgeData(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(191, 28, 28)
-				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setMusic(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
+		super(name);
+		
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.01F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.01F, false);
