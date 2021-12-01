@@ -5,9 +5,11 @@ import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.NetherFortressFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier.Context;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,12 +18,16 @@ import paulevs.betternether.world.CityHelper;
 
 @Mixin(NetherFortressFeature.class)
 public class NetherFortressFeatureMixin {
-	@Inject(method = "isFeatureChunk", at = @At("HEAD"), cancellable = true)
-	private void checkCity(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long worldSeed, WorldgenRandom chunkRandom, ChunkPos chunkPos, ChunkPos chunkPos2, NoneFeatureConfiguration defaultFeatureConfig,
-						   LevelHeightAccessor heightLimitView, CallbackInfoReturnable<Boolean> info) {
-		if (CityHelper.stopStructGen(chunkPos.x, chunkPos.z, chunkGenerator, worldSeed, chunkRandom)) {
-			info.setReturnValue(false);
-			info.cancel();
+	@Inject(method = "checkLocation", at = @At("HEAD"), cancellable = true)
+	private static void checkCity(Context<NoneFeatureConfiguration> context, CallbackInfoReturnable<Boolean> cir) {
+		final ChunkPos chunkPos = context.chunkPos();
+		final long seed = context.seed();
+		final WorldgenRandom chunkRandom = new WorldgenRandom(new LegacyRandomSource(0L));
+		chunkRandom.setLargeFeatureSeed(seed, chunkPos.x, chunkPos.z);
+		
+		if (CityHelper.stopStructGen(chunkPos.x, chunkPos.z, context.chunkGenerator(), seed, chunkRandom)) {
+			cir.setReturnValue(false);
+			cir.cancel();
 		}
 	}
 }
