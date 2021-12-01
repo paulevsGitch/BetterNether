@@ -194,10 +194,9 @@ public class BiomeDefinition extends BCLBiomeDef {
 	
 	@Override
 	protected void addCustomToBuild(BiomeGenerationSettings.Builder generationSettings) {
-		
-		if (defaultOres) BiomeDefaultFeatures.addNetherDefaultOres(generationSettings);
 		if (defaultStructureFeatures) addDefaultStructures(generationSettings);
 		if (defaultFeatures) addDefaultFeatures(generationSettings);
+		if (defaultOres) BiomeDefaultFeatures.addNetherDefaultOres(generationSettings);
 	}
 
 	public boolean didAddDefaultSpaw = false;
@@ -219,6 +218,7 @@ public class BiomeDefinition extends BCLBiomeDef {
 	}
 
 	private void addDefaultFeatures(BiomeGenerationSettings.Builder generationSettings) {
+		BiomeDefaultFeatures.addDefaultMushrooms(generationSettings);
 		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_OPEN);
 		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.PATCH_FIRE);
 		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.PATCH_SOUL_FIRE);
@@ -228,8 +228,6 @@ public class BiomeDefinition extends BCLBiomeDef {
 		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, VegetationPlacements.RED_MUSHROOM_NETHER);
 		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, OrePlacements.ORE_MAGMA);
 		generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_CLOSED);
-		BiomeDefaultFeatures.addDefaultMushrooms(generationSettings);
-		BiomeDefaultFeatures.addNetherDefaultOres(generationSettings);
 	}
 
 	private void addDefaultMobs() {
