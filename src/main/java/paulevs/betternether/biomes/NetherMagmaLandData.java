@@ -4,26 +4,35 @@ import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureCrystal;
 import paulevs.betternether.structures.decorations.StructureGeyser;
 import paulevs.betternether.structures.plants.StructureGoldenVine;
 import paulevs.betternether.structures.plants.StructureMagmaFlower;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherMagmaLandData extends NetherBiomeData {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 	private static final boolean[] MASK;
-
+	
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(248, 158, 68)
+			.loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
+			.additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD);
+	}
+	
 	public NetherMagmaLandData(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(248, 158, 68)
-				.setLoop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
-				.setAdditions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD));
+		super(name);
+		
 		addStructure("geyser", new StructureGeyser(), StructureType.FLOOR, 0.1F, false);
 		addStructure("obsidian_crystals", new StructureCrystal(), StructureType.FLOOR, 0.04F, true);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.4F, false);

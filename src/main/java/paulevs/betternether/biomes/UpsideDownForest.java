@@ -2,6 +2,7 @@ package paulevs.betternether.biomes;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -22,18 +23,34 @@ import paulevs.betternether.structures.plants.StructureNetherSakuraBush;
 import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWhisperingGourd;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class UpsideDownForest extends NetherBiomeData {
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(111, 188, 111)
+			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+			.music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST);
+	}
+	
+	@Override
+	public boolean hasStalactites() {
+		return false;
+	}
+	
+	@Override
+	public boolean hasBNStructures() {
+		return false;
+	}
+	
 	public UpsideDownForest(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(111, 188, 111)
-				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setMusic(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				.setBNStructures(false)
-				.setStalactites(false));
+		super(name);
+		
 		this.setNoiseDensity(0.5F);
+		
 		addStructure("anchor_tree", new StructureAnchorTree(), StructureType.CEIL, 0.2F, false);
 		addStructure("anchor_tree_root", new StructureAnchorTreeRoot(), StructureType.CEIL, 0.03F, false);
 		addStructure("anchor_tree_branch", new StructureAnchorTreeBranch(), StructureType.CEIL, 0.02F, true);

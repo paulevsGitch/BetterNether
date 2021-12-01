@@ -16,19 +16,25 @@ import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureSoulGrass;
 import paulevs.betternether.structures.plants.StructureSoulVein;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherSoulPlainData extends NetherBiomeData {
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);
 	private static final MutableBlockPos POS = new MutableBlockPos();
-
+	
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(196, 113, 239)
+			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+			.particles(ParticleTypes.PORTAL, 0.02F);
+	}
+	
 	public NetherSoulPlainData(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(196, 113, 239)
-				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setGenChance(1F)
-				.setParticles(ParticleTypes.PORTAL, 0.02F));
+		super(name);
+		
 		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, true);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
 		addStructure("soul_grass", new StructureSoulGrass(), StructureType.FLOOR, 0.3F, false);

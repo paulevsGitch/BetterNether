@@ -15,17 +15,26 @@ import paulevs.betternether.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSepiaBoneGrass;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherSulfuricBoneReefData extends NetherBiomeData {
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(154, 144, 49)
+			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+			.particles(ParticleTypes.ASH, 0.01F);
+	}
+	
+	@Override
+	public boolean hasStalactites() {
+		return false;
+	}
+	
 	public NetherSulfuricBoneReefData(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(154, 144, 49)
-				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setStalactites(false)
-				.setGenChance(0.3F)
-				.setParticles(ParticleTypes.ASH, 0.01F));
+		super(name);
 
 		addStructure("bone_stalactite", new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 

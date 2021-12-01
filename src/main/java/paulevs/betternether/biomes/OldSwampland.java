@@ -26,20 +26,31 @@ import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWillow;
 import paulevs.betternether.structures.plants.StructureWillowBush;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class OldSwampland extends NetherBiomeData {
 	protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);
-
+	
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(137, 19, 78)
+			.loop(SoundsRegistry.AMBIENT_SWAMPLAND)
+			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+			.music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
+			.spawn(EntityType.STRIDER, 40, 2, 4)
+			.spawn(EntityType.MAGMA_CUBE, 40, 2, 4);
+	}
+	
+	@Override
+	public boolean spawnVanillaMobs() {
+		return false;
+	}
+	
 	public OldSwampland(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(137, 19, 78)
-				.setLoop(SoundsRegistry.AMBIENT_SWAMPLAND)
-				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setMusic(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				.setDefaultMobs(false)
-				.addMobSpawn(EntityType.STRIDER, 40, 2, 4)
-				.addMobSpawn(EntityType.MAGMA_CUBE, 40, 2, 4));
+		super(name);
+		
 		addStructure("old_willow", new StructureOldWillow(), StructureType.FLOOR, 0.02F, false);
 		addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.02F, false);
 		addStructure("willow_bush", new StructureWillowBush(), StructureType.FLOOR, 0.1F, true);

@@ -8,24 +8,36 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBigWarpedTree;
 import paulevs.betternether.structures.plants.StructureBlackVine;
 import paulevs.betternether.structures.plants.StructureTwistedVines;
 import paulevs.betternether.structures.plants.StructureWarpedFungus;
 import paulevs.betternether.structures.plants.StructureWarpedRoots;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class OldWarpedWoods extends NetherBiomeData {
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(26, 5, 26)
+			.loop(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
+			.additions(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_WARPED_FOREST_MOOD)
+			.particles(ParticleTypes.WARPED_SPORE, 0.025F)
+			.spawn(EntityType.ENDERMAN, 1, 4, 4)
+			.spawn(EntityType.STRIDER, 60, 1, 2);
+	}
+	
+	@Override
+	public boolean spawnVanillaMobs() {
+		return false;
+	}
+	
 	public OldWarpedWoods(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(26, 5, 26)
-				.setLoop(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
-				.setAdditions(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_WARPED_FOREST_MOOD)
-				.setParticles(ParticleTypes.WARPED_SPORE, 0.025F)
-				.setDefaultMobs(false)
-				.addMobSpawn(EntityType.ENDERMAN, 1, 4, 4)
-				.addMobSpawn(EntityType.STRIDER, 60, 1, 2));
+		super(name);
+		
 		addStructure("big_warped_tree", new StructureBigWarpedTree(), StructureType.FLOOR, 0.1F, false);
 		addStructure("warped_fungus", new StructureWarpedFungus(), StructureType.FLOOR, 0.05F, true);
 		addStructure("warped_roots", new StructureWarpedRoots(), StructureType.FLOOR, 0.2F, true);

@@ -146,9 +146,12 @@ public abstract class NetherBiomeData {
 			.spawn(EntityType.STRIDER, 60, 1, 2);
 	}
 	
+	private static Biome BASE_BIOME;
 	public static BCLBiome create(NetherBiomeData data){
+		if (BASE_BIOME==null) {
+			BASE_BIOME = NetherBiomes.netherWastes();
+		}
 		final ResourceLocation ID = data.id;
-		Biome BASE_BIOME = NetherBiomes.netherWastes();
 		
 		BCLBiomeBuilder builder = BCLBiomeBuilder
 			.start(ID)
@@ -164,13 +167,12 @@ public abstract class NetherBiomeData {
 		if (data.hasVanillaFeatures()) addDefaultFeatures(builder);
 		if (data.hasVanillaOres()) builder.netherDefaultOres();
 		
-		if (data.spawnVanillaMobs()){
-			addVanillaMobs(builder);
-		}
+		if (data.spawnVanillaMobs()) addVanillaMobs(builder);
 		addDefaultBNMobs(builder);
 		
 		NetherFeatures.addDefaultFeatures(builder);
 		data.addCustomBuildData(builder);
+		
 		BCLBiome biome = builder.build();
 		data.build();
 		biome.addCustomData(DATA_RECORD, data);
@@ -183,11 +185,6 @@ public abstract class NetherBiomeData {
 	public static NetherBiomeData getCustomNetherData(BCLBiome biome){
 		if (biome==null) return null;
 		return biome.getCustomData(DATA_RECORD);
-	}
-	
-	@Deprecated(forRemoval = true)
-	protected NetherBiomeData(BiomeDefinition definition) {
-		this("");
 	}
 	
 	protected NetherBiomeData(String name) {
@@ -234,7 +231,7 @@ public abstract class NetherBiomeData {
 		return true;
 	}
 	
-	protected void addCustomBuildData(BCLBiomeBuilder builder){}
+	protected abstract void addCustomBuildData(BCLBiomeBuilder builder);
 
 	public void setPlantDensity(float density) {
 		this.plantDensity = density * 1.0001F;

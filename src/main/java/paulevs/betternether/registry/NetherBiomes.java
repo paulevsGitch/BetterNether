@@ -76,6 +76,20 @@ public class NetherBiomes {
 	public static final BCLBiome BIOME_MUSHROOM_FOREST = NetherBiomeData.create(Data.BIOME_MUSHROOM_FOREST);
 	public static final BCLBiome BIOME_MUSHROOM_FOREST_EDGE = NetherBiomeData.create(Data.BIOME_MUSHROOM_FOREST_EDGE);
 	public static final BCLBiome BIOME_WART_FOREST_EDGE = NetherBiomeData.create(Data.BIOME_WART_FOREST_EDGE);
+	public static final BCLBiome BIOME_BONE_REEF = NetherBiomeData.create(Data.BIOME_BONE_REEF);
+	public static final BCLBiome BIOME_SULFURIC_BONE_REEF = NetherBiomeData.create(Data.BIOME_SULFURIC_BONE_REEF);
+	public static final BCLBiome BIOME_POOR_GRASSLANDS = NetherBiomeData.create(Data.BIOME_POOR_GRASSLANDS);
+	public static final BCLBiome NETHER_SWAMPLAND = NetherBiomeData.create(Data.NETHER_SWAMPLAND);
+	public static final BCLBiome NETHER_SWAMPLAND_TERRACES = NetherBiomeData.create(Data.NETHER_SWAMPLAND_TERRACES);
+	public static final BCLBiome MAGMA_LAND = NetherBiomeData.create(Data.MAGMA_LAND);
+	public static final BCLBiome SOUL_PLAIN = NetherBiomeData.create(Data.SOUL_PLAIN);
+	public static final BCLBiome CRIMSON_GLOWING_WOODS = NetherBiomeData.create(Data.CRIMSON_GLOWING_WOODS);
+	public static final BCLBiome OLD_WARPED_WOODS = NetherBiomeData.create(Data.OLD_WARPED_WOODS);
+	public static final BCLBiome CRIMSON_PINEWOOD = NetherBiomeData.create(Data.CRIMSON_PINEWOOD);
+	public static final BCLBiome OLD_FUNGIWOODS = NetherBiomeData.create(Data.OLD_FUNGIWOODS);
+	public static final BCLBiome FLOODED_DELTAS = NetherBiomeData.create(Data.FLOODED_DELTAS);
+	public static final BCLBiome UPSIDE_DOWN_FOREST = NetherBiomeData.create(Data.UPSIDE_DOWN_FOREST);
+	public static final BCLBiome OLD_SWAMPLAND = NetherBiomeData.create(Data.OLD_SWAMPLAND);
 
 	private static int maxDefChance = 0;
 	private static int maxChance = 0;
@@ -96,20 +110,20 @@ public class NetherBiomes {
 		registerNetherBiome(BIOME_MUSHROOM_FOREST);
 		registerEdgeBiome(BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 2);
 		registerEdgeBiome(BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 2);
-//		registerNetherBiome(BIOME_BONE_REEF);
-//		registerSubBiome(BIOME_SULFURIC_BONE_REEF, BIOME_BONE_REEF, 0.3F);
-//		registerSubBiome(BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);
-//		registerNetherBiome(NETHER_SWAMPLAND);
-//		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
-//		registerNetherBiome(MAGMA_LAND);
-//		registerSubBiome(SOUL_PLAIN, BIOME_WART_FOREST, 1F);
-//		registerSubBiome(CRIMSON_GLOWING_WOODS, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
-//		registerSubBiome(OLD_WARPED_WOODS, BiomeAPI.WARPED_FOREST_BIOME, 1F);
-//		registerSubBiome(CRIMSON_PINEWOOD, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
-//		registerSubBiome(OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
-//		registerSubBiome(FLOODED_DELTAS, BiomeAPI.BASALT_DELTAS_BIOME, 1F);
-//		registerNetherBiome(UPSIDE_DOWN_FOREST);
-//		registerSubBiome(OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
+		registerNetherBiome(BIOME_BONE_REEF);
+		registerSubBiome(BIOME_SULFURIC_BONE_REEF, BIOME_BONE_REEF, 0.3F);
+		registerSubBiome(BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);
+		registerNetherBiome(NETHER_SWAMPLAND);
+		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
+		registerNetherBiome(MAGMA_LAND);
+		registerSubBiome(SOUL_PLAIN, BIOME_WART_FOREST, 1F);
+		registerSubBiome(CRIMSON_GLOWING_WOODS, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
+		registerSubBiome(OLD_WARPED_WOODS, BiomeAPI.WARPED_FOREST_BIOME, 1F);
+		registerSubBiome(CRIMSON_PINEWOOD, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
+		registerSubBiome(OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
+		registerSubBiome(FLOODED_DELTAS, BiomeAPI.BASALT_DELTAS_BIOME, 1F);
+		registerNetherBiome(UPSIDE_DOWN_FOREST);
+		registerSubBiome(OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
 		
 		RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register((i, id, biome) -> {
 			if (biome.getBiomeCategory() == BiomeCategory.NETHER) {
@@ -169,6 +183,7 @@ public class NetherBiomes {
 		chance = Configs.GENERATOR.getFloat("biomes.betternether.variation", regName + "_chance", chance);
 		if (chance > 0.0F) {
 			ALL_BIOMES.add(biome);
+			biome.setGenChance(chance);
 			
 			BiomeAPI.registerSubBiome(mainBiome, biome);
 		}

@@ -2,10 +2,14 @@ package paulevs.betternether.biomes;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.SoundsRegistry;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherSwamplandTerracesData extends NetherSwamplandData {
 	public NetherSwamplandTerracesData(String name) {

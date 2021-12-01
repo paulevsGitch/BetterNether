@@ -10,20 +10,31 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class FloodedDeltas extends NetherBiomeData {
 	private static final MutableBlockPos POS = new MutableBlockPos();
-
+	
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(104, 95, 112)
+			.loop(SoundEvents.AMBIENT_BASALT_DELTAS_LOOP)
+			.additions(SoundEvents.AMBIENT_BASALT_DELTAS_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD)
+			.music(SoundEvents.MUSIC_BIOME_BASALT_DELTAS)
+			.particles(ParticleTypes.WHITE_ASH, 0.12F);
+	}
+	
+	@Override
+	public boolean hasStalactites() {
+		return false;
+	}
+	
 	public FloodedDeltas(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(104, 95, 112)
-				.setLoop(SoundEvents.AMBIENT_BASALT_DELTAS_LOOP)
-				.setAdditions(SoundEvents.AMBIENT_BASALT_DELTAS_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD)
-				.setMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS)
-				.setStalactites(false)
-				.setParticles(ParticleTypes.WHITE_ASH, 0.12F));
+		super(name);
 
 		addStructure("blackstone_stalactite", STALACTITE_BLACKSTONE, StructureType.FLOOR, 0.2F, true);
 		addStructure("stalactite_stalactite", STALACTITE_BASALT, StructureType.FLOOR, 0.2F, true);

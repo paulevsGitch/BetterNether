@@ -20,20 +20,25 @@ import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWartBush;
 import paulevs.betternether.structures.plants.StructureWartSeed;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class CrimsonGlowingWoods extends NetherBiomeData {
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
-
+	
+	@Override
+	protected void addCustomBuildData(BCLBiomeBuilder builder){
+		builder
+			.fogColor(51, 3, 3)
+			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+			.particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
+			.spawn(EntityType.HOGLIN, 9, 1, 2)
+			.spawn(EntityRegistry.FLYING_PIG, 20, 2, 4);
+	}
+	
 	public CrimsonGlowingWoods(String name) {
-		super(new BiomeDefinition(name)
-				.setFogColor(51, 3, 3)
-				.setLoop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-				.setAdditions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				.setMood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				.setParticles(ParticleTypes.CRIMSON_SPORE, 0.025F)
-				.setGenChance(0.3F)
-				.addMobSpawn(EntityType.HOGLIN, 9, 1, 2)
-				.addMobSpawn(EntityRegistry.FLYING_PIG, 20, 2, 4));
+		super(name);
 				
 		addStructure("crimson_glowing_tree", new StructureCrimsonGlowingTree(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.05F, false);
