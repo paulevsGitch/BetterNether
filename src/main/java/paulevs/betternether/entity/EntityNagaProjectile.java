@@ -98,7 +98,7 @@ public class EntityNagaProjectile extends FlyingMob {
 				LivingEntity living = (LivingEntity) entity;
 				if (!(living.hasEffect(MobEffects.WITHER))) {
 					living.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 1));
-					living.hurt(DamageSource.GENERIC, 2.0F);
+					living.hurt(DamageSource.GENERIC, 1.0F);
 				}
 				effectKill();
 			}

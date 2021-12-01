@@ -9,12 +9,14 @@ import paulevs.betternether.config.Configs;
 import paulevs.betternether.loot.BNLoot;
 import paulevs.betternether.recipes.IntegrationRecipes;
 import paulevs.betternether.recipes.ItemRecipes;
-import paulevs.betternether.registry.BiomesRegistry;
+import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherItems;
+import paulevs.betternether.registry.NetherStructures;
 import paulevs.betternether.registry.NetherTags;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.BNWorldGenerator;
@@ -43,7 +45,9 @@ public class BetterNether implements ModInitializer {
 		EntityRegistry.register();
 		StructureTypes.init();
 		BNWorldGenerator.onModInit();
-		BiomesRegistry.register();
+		NetherFeatures.register();
+		NetherStructures.register();
+		NetherBiomes.register();
 		BrewingRegistry.register();
 		CommandRegistry.register();
 		Config.save();
@@ -51,7 +55,7 @@ public class BetterNether implements ModInitializer {
 		IntegrationRecipes.register();
 		NetherTags.register();
 		ItemRecipes.register();
-		NetherBiomeSource.register();
+		//NetherBiomeSource.register();
 		BNLoot.register();
 		BNCriterion.register();
 		

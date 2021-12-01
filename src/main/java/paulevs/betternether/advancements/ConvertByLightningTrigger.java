@@ -1,6 +1,5 @@
 package paulevs.betternether.advancements;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
 import net.minecraft.advancements.critereon.DeserializationContext;

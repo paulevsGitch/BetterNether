@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -21,6 +20,7 @@ import paulevs.betternether.blocks.BNBoneBlock;
 import paulevs.betternether.blocks.BNBrewingStand;
 import paulevs.betternether.blocks.BNChain;
 import paulevs.betternether.blocks.BNGlass;
+import paulevs.betternether.blocks.BNLeaves;
 import paulevs.betternether.blocks.BNNetherBrick;
 import paulevs.betternether.blocks.BNNormalChair;
 import paulevs.betternether.blocks.BNObsidian;
@@ -112,6 +112,7 @@ import paulevs.betternether.blocks.complex.MushroomFirMaterial;
 import paulevs.betternether.blocks.complex.NetherMushroomMaterial;
 import paulevs.betternether.blocks.complex.NetherReedMaterial;
 import paulevs.betternether.blocks.complex.NetherSakuraMaterial;
+import paulevs.betternether.blocks.complex.NetherWoodenMaterial;
 import paulevs.betternether.blocks.complex.RubeusMaterial;
 import paulevs.betternether.blocks.complex.StalagnateMaterial;
 import paulevs.betternether.blocks.complex.WartMaterial;
@@ -127,7 +128,6 @@ import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
 import ru.bclib.blocks.BaseDoorBlock;
 import ru.bclib.blocks.BaseLadderBlock;
-import ru.bclib.blocks.BaseLeavesBlock;
 import ru.bclib.blocks.BasePressurePlateBlock;
 import ru.bclib.blocks.BaseSlabBlock;
 import ru.bclib.blocks.BaseStairsBlock;
@@ -136,7 +136,6 @@ import ru.bclib.recipes.GridRecipe;
 import ru.bclib.registry.BlockRegistry;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// Stalagnate //
@@ -148,7 +147,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Rubeus //
 	public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
-	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves(MAT_RUBEUS.getSapling(), MaterialColor.COLOR_LIGHT_BLUE));
+	public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves", new BlockRubeusLeaves(MAT_RUBEUS.getSapling()));
 	
 	// Reed //
 	public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
@@ -164,7 +163,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Anchor Tree
 	public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
-	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BaseLeavesBlock(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
+	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BNLeaves(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
 	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
 	
 	
@@ -265,9 +264,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
 	
 	// Soul Sandstone //
-	public static final Block SOUL_SANDSTONE = registerBlock("soul_sandstone", new BlockSoulSandstone(), BlockTags.SOUL_SPEED_BLOCKS, BlockTags.SOUL_FIRE_BASE_BLOCKS);
+	public static final Block SOUL_SANDSTONE = registerSoulBlock("soul_sandstone", new BlockSoulSandstone());
 	public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2Soul("soul_sandstone_cut", new BlockSoulSandstone(), "soul_sandstone", SOUL_SANDSTONE);
-	public static final Block SOUL_SANDSTONE_SMOOTH = registerMakeable2X2Soul("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_CUT);
+	public static final Block SOUL_SANDSTONE_SMOOTH = registerSoulBlock("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)));
 	public static final Block SOUL_SANDSTONE_CHISELED = registerMakeable2X2Soul("soul_sandstone_chiseled", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_SMOOTH);
 	
 	public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs", SOUL_SANDSTONE, BlockTags.SOUL_SPEED_BLOCKS, BlockTags.SOUL_FIRE_BASE_BLOCKS);
@@ -485,10 +484,11 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	}
 	
 	public static List<Block> getModBlocks() {
-		return getModBlocks(BetterNether.MOD_ID).stream()
-												.filter(BlockItem.class::isInstance)
-												.map(item -> ((BlockItem) item).getBlock())
-												.collect(Collectors.toList());
+		return BlockRegistry.getModBlocks(BetterNether.MOD_ID);
+	}
+	
+	public static List<Item> getModBlockItems() {
+		return BlockRegistry.getModBlockItems(BetterNether.MOD_ID);
 	}
 	
 	public static Block registerBlock(String name, Block block, Tag.Named<Block>... tags) {
@@ -597,6 +597,10 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		}
 		return plate;
 	}
+
+	public static Block registerSoulBlock(String name, Block block) {
+		return registerBlock(name, block, BlockTags.SOUL_FIRE_BASE_BLOCKS, BlockTags.SOUL_SPEED_BLOCKS);
+	}
 	
 	public static Block registerMakeable2X2Soul(String name, Block result, String group, Block... sources) {
 		final Block block = registerMakeable2X2(name, result, group, sources);
@@ -629,7 +633,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			registerBlockDirectly(name, block);
 			TagAPI.addTags(block, TagAPI.BLOCK_WORKBENCHES);
 			TagAPI.addTags(block, TagAPI.ITEM_WORKBENCHES);
-			//RecipesHelper.makeSimpleRecipe2(source, block, 1, "nether_crafting_table");
+			
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
 					  .checkConfig(Configs.RECIPES)
 					  .setShape("##", "##")
@@ -716,7 +720,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			addFuel(source, block);
-			RecipesHelper.makeTaburetRecipe(source, block);
+			NetherWoodenMaterial.makeTaburetRecipe(Configs.RECIPES, new ResourceLocation(BetterNether.MOD_ID, name), block, source);
 		}
 		
 		return block;
@@ -727,7 +731,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			addFuel(source, block);
-			RecipesHelper.makeChairRecipe(source, block);
+			NetherWoodenMaterial.makeChairRecipe(Configs.RECIPES, new ResourceLocation(BetterNether.MOD_ID, name), block, source);
 		}
 		
 		return block;
@@ -738,7 +742,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			addFuel(source, block);
-			RecipesHelper.makeBarStoolRecipe(source, block);
+			NetherWoodenMaterial.makeBarStoolRecipe(Configs.RECIPES, new ResourceLocation(BetterNether.MOD_ID, name), block, source);
 		}
 		
 		return block;

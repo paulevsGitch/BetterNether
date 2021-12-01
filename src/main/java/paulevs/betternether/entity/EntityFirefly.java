@@ -32,7 +32,6 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -52,8 +51,9 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.SoundsRegistry;
+import ru.bclib.entity.DespawnableAnimal;
 
-public class EntityFirefly extends Animal implements FlyingAnimal {
+public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 	private static final HashSet<Block> FLOWERS;
 	private static final Vec3i[] SEARCH;
 
@@ -78,17 +78,16 @@ public class EntityFirefly extends Animal implements FlyingAnimal {
 		super.defineSynchedData();
 		makeColor(random.nextFloat(), random.nextFloat() * 0.5F + 0.25F, 1);
 	}
-
-	public static AttributeSupplier getAttributeContainer() {
+	
+	public static AttributeSupplier.Builder createMobAttributes() {
 		return Mob
-				.createMobAttributes()
-				.add(Attributes.MAX_HEALTH, 1.0)
-				.add(Attributes.FLYING_SPEED, 0.6)
-				.add(Attributes.MOVEMENT_SPEED, 0.25)
-				.add(Attributes.FOLLOW_RANGE, 48.0)
-				.build();
+			.createMobAttributes()
+			.add(Attributes.MAX_HEALTH, 1.0)
+			.add(Attributes.FLYING_SPEED, 0.6)
+			.add(Attributes.MOVEMENT_SPEED, 0.25)
+			.add(Attributes.FOLLOW_RANGE, 48.0);
 	}
-
+	
 	@Override
 	protected PathNavigation createNavigation(Level world) {
 		FlyingPathNavigation birdNavigation = new FlyingPathNavigation(this, world) {

@@ -1,0 +1,33 @@
+{
+	"parent": "betternether:root",
+	"display": {
+		"icon": {
+			"item": "betternether:cincinnasite_carved"
+		},
+		"title": {
+			"translate": "advancements.betternether.city.title"
+		},
+		"description": {
+			"translate": "advancements.betternether.city.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"fortress": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"location": {
+					"feature": "betternether:nether_city"
+				}
+			}
+		}
+	},
+	"requirements": [
+		[
+			"fortress"
+		]
+	]
+}

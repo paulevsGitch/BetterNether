@@ -2,9 +2,16 @@ package paulevs.betternether.blocks.complex;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.blocks.BNBarStool;
@@ -13,7 +20,11 @@ import paulevs.betternether.blocks.BNTaburet;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 import ru.bclib.api.TagAPI;
+import ru.bclib.blocks.BaseBarkBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
+import ru.bclib.blocks.BaseRotatedPillarBlock;
+import ru.bclib.blocks.BaseStripableLogBlock;
+import ru.bclib.blocks.StripableBarkBlock;
 import ru.bclib.complexmaterials.ComplexMaterial;
 import ru.bclib.complexmaterials.WoodenComplexMaterial;
 import ru.bclib.complexmaterials.entry.BlockEntry;
@@ -51,9 +62,39 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 	public NetherWoodenMaterial init() {
 		return (NetherWoodenMaterial) super.init(NetherBlocks.getBlockRegistry(), NetherItems.getItemRegistry(), Configs.RECIPE_CONFIG);
 	}
+	
+	@Override
+	protected FabricBlockSettings getBlockSettings() {
+		return FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)
+								  .materialColor(planksColor);
+	}
 
 	protected void _initBase(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
 		super.initBase(blockSettings, itemSettings);
+		final Tag.Named<Block> tagBlockLog = getBlockTag(TAG_LOGS);
+		final Tag.Named<Item> tagItemLog = getItemTag(TAG_LOGS);
+		
+		replaceOrAddBlockEntry(
+			new BlockEntry(BLOCK_STRIPPED_LOG, (complexMaterial, settings) -> new BaseRotatedPillarBlock(settings))
+				.setBlockTags(BlockTags.LOGS, tagBlockLog)
+				.setItemTags(ItemTags.LOGS, tagItemLog)
+		);
+		replaceOrAddBlockEntry(
+			new BlockEntry(BLOCK_STRIPPED_BARK, (complexMaterial, settings) -> new BaseBarkBlock(settings))
+				.setBlockTags(BlockTags.LOGS, tagBlockLog)
+				.setItemTags(ItemTags.LOGS, tagItemLog)
+		);
+		
+		replaceOrAddBlockEntry(
+			new BlockEntry(BLOCK_LOG, (complexMaterial, settings) -> new BaseStripableLogBlock(woodColor, getBlock(BLOCK_STRIPPED_LOG)))
+				.setBlockTags(BlockTags.LOGS, tagBlockLog)
+				.setItemTags(ItemTags.LOGS, tagItemLog)
+		);
+		replaceOrAddBlockEntry(
+			new BlockEntry(BLOCK_BARK, (complexMaterial, settings) -> new StripableBarkBlock(woodColor, getBlock(BLOCK_STRIPPED_BARK)))
+				.setBlockTags(BlockTags.LOGS, tagBlockLog)
+				.setItemTags(ItemTags.LOGS, tagItemLog)
+		);
 	}
 	
 	@Override
@@ -77,45 +118,63 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 		}));
 	}
 	
-	@Override
-	public void initDefaultRecipes() {
-		super.initDefaultRecipes();
-		
-		final Block planks = getPlanks();
+	public static void makeTaburetRecipe(PathConfig config, ResourceLocation id, Block taburet, Block planks){
+		GridRecipe.make(id, taburet)
+				  .checkConfig(config)
+				  .setShape("##", "II")
+				  .addMaterial('#', planks)
+				  .addMaterial('I', Items.STICK)
+				  .setGroup("nether" + "_taburet")
+				  .build();
+	}
+	
+	public static void makeChairRecipe(PathConfig config, ResourceLocation id, Block chair, Block planks){
+		GridRecipe.make(id, chair)
+				  .checkConfig(config)
+				  .setShape("I ", "##", "II")
+				  .addMaterial('#', planks)
+				  .addMaterial('I', Items.STICK)
+				  .setGroup("nether" + "_chair")
+				  .build();
+	}
+	
+	public static void makeBarStoolRecipe(PathConfig config, ResourceLocation id, Block barStool, Block planks){
+		GridRecipe.make(id, barStool)
+				  .checkConfig(config)
+				  .setShape("##", "II", "II")
+				  .addMaterial('#', planks)
+				  .addMaterial('I', Items.STICK)
+				  .setGroup("nether" + "_bar_stool")
+				  .build();
+	}
+	
+	protected void initDefaultFurniture() {
 		final Block slab = getSlab();
-		
 		
 		if (Registry.BLOCK.getKey(slab) != Registry.BLOCK.getDefaultKey()) {
 			addRecipeEntry(new RecipeEntry(BLOCK_TABURET, (material, config, id) -> {
-				GridRecipe.make(id, getBlock(BLOCK_TABURET))
-						  .checkConfig(config)
-						  .setShape("##", "II")
-						  .addMaterial('#', planks)
-						  .addMaterial('I', Items.STICK)
-						  .setGroup(receipGroupPrefix + "_taburet")
-						  .build();
+				makeTaburetRecipe(config, id, getBlock(BLOCK_TABURET), slab);
 			}));
 			
 			addRecipeEntry(new RecipeEntry(BLOCK_CHAIR, (material, config, id) -> {
-				GridRecipe.make(id, getBlock(BLOCK_CHAIR))
-						  .checkConfig(config)
-						  .setShape("I ", "##", "II")
-						  .addMaterial('#', planks)
-						  .addMaterial('I', Items.STICK)
-						  .setGroup(receipGroupPrefix + "_chair")
-						  .build();
+				makeChairRecipe(config, id, getBlock(BLOCK_CHAIR), slab);
 			}));
 			
 			addRecipeEntry(new RecipeEntry(BLOCK_BAR_STOOL, (material, config, id) -> {
-				GridRecipe.make(id, getBlock(BLOCK_BAR_STOOL))
-						  .checkConfig(config)
-						  .setShape("##", "II", "II")
-						  .addMaterial('#', planks)
-						  .addMaterial('I', Items.STICK)
-						  .setGroup(receipGroupPrefix + "_bar_stool")
-						  .build();
+				makeBarStoolRecipe(config, id, getBlock(BLOCK_BAR_STOOL), slab);
 			}));
 		}
+	}
+	
+	@Override
+	public void initDefaultRecipes() {
+		super.initDefaultRecipes();
+		initDefaultFurniture();
+	}
+	
+	@Override
+	protected void initFlammable(FlammableBlockRegistry registry) {
+		//Nothing burns in the nether
 	}
 	
 	public Block getPlanks() {

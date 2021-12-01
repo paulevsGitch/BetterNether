@@ -20,15 +20,14 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.blocks.materials.Materials;
-import ru.bclib.blocks.BaseLeavesBlock;
 
-public class BlockWillowLeaves extends BaseLeavesBlock {
+public class BlockWillowLeaves extends BNLeaves {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty NATURAL = BooleanProperty.create("natural");
 
 	public BlockWillowLeaves(Block sapling) {
 		super(sapling, MaterialColor.TERRACOTTA_RED);
+		
 		//this.setDropItself(false);
 		this.registerDefaultState(getStateDefinition().any().setValue(DISTANCE, 7).setValue(PERSISTENT, false));
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.UP).setValue(NATURAL, true));

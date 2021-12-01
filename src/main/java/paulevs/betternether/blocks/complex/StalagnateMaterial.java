@@ -10,6 +10,8 @@ import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStem;
 import ru.bclib.complexmaterials.entry.BlockEntry;
+import ru.bclib.complexmaterials.entry.RecipeEntry;
+import ru.bclib.recipes.GridRecipe;
 
 public class StalagnateMaterial extends RoofMaterial{
 	public final static String BLOCK_BOWL = "bowl";
@@ -30,21 +32,26 @@ public class StalagnateMaterial extends RoofMaterial{
 	protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
 		super.initDefault(blockSettings, itemSettings);
 		
-		addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) -> {
-			return new BlockStem(woodColor);
-		}));
+		addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) ->  new BlockStem(woodColor)));
+		addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> new BlockStalagnate()).setBlockTags(BlockTags.CLIMBABLE));
+		addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> new BlockStalagnateSeed()));
+		addBlockEntry(new BlockEntry(BLOCK_BOWL, false, (complexMaterial, settings) -> new BlockStalagnateBowl(getBlock(BLOCK_OPTIONAL_TRUNK))));
+	}
+	
+	@Override
+	public void initDefaultRecipes() {
+		super.initDefaultRecipes();
 		
-		
-		addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> {
-			return new BlockStalagnate();
-		}).setBlockTags(BlockTags.CLIMBABLE));
-		
-		addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> {
-			return new BlockStalagnateSeed();
-		}));
-		
-		addBlockEntry(new BlockEntry(BLOCK_BOWL, false, (complexMaterial, settings) -> {
-			return new BlockStalagnateBowl(getBlock(BLOCK_OPTIONAL_TRUNK));
+		addRecipeEntry(new RecipeEntry(BLOCK_LOG, (material, config, id) -> {
+			Block stem = getStem();
+			
+			GridRecipe.make(id, getBlock(BLOCK_LOG))
+					  .checkConfig(config)
+					  .setOutputCount(1)
+					  .setShape("##", "##")
+					  .addMaterial('#', stem)
+					  .setGroup(receipGroupPrefix + "_logs")
+					  .build();
 		}));
 	}
 	

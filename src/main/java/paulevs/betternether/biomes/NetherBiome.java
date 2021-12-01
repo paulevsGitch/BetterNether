@@ -9,11 +9,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.structures.IStructure;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.StructureWorld;
@@ -87,14 +89,23 @@ public class NetherBiome extends BCLBiome{
 	private ArrayList<String> structures;
 	private Biome actualBiome;
 	protected float localGenChance;
-
+	
+	private static void addDefaultSpawns(BiomeDefinition definition){
+		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 3, 6);
+		definition.addMobSpawn(EntityRegistry.SKULL, 2, 2, 4);
+		definition.addMobSpawn(EntityRegistry.NAGA, 8, 3, 5);
+		definition.addMobSpawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
+	}
+	
+	private static BiomeDefinition makeDef(BiomeDefinition def) {
+		def.setCategory(BiomeCategory.NETHER);
+		addDefaultSpawns(def);
+		NetherFeatures.addDefaultFeatures(def);
+		return def;
+	}
 	
 	public NetherBiome(BiomeDefinition definition) {
-		super(definition);
-		definition.addMobSpawn(EntityRegistry.FIREFLY, 5, 2, 6);
-		definition.addMobSpawn(EntityRegistry.SKULL, 2, 2, 4);
-		definition.addMobSpawn(EntityRegistry.NAGA, 6, 2, 4);
-		definition.addMobSpawn(EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
+		super(makeDef(definition));
 		
 		structures = new ArrayList<String>(DEF_STRUCTURES.length);
 		
@@ -195,6 +206,9 @@ public class NetherBiome extends BCLBiome{
 				break;
 			case WALL:
 				generatorsWall.add(new StructureInfo(structure, density, useNoise));
+				break;
+			case LAVA:
+				generatorsLava.add(new StructureInfo(structure, density, useNoise));
 				break;
 			default:
 				break;

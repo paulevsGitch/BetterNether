@@ -1,25 +1,23 @@
 package paulevs.betternether.registry;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.CrimsonGlowingWoods;
 import paulevs.betternether.biomes.CrimsonPinewood;
 import paulevs.betternether.biomes.FloodedDeltas;
 import paulevs.betternether.biomes.NetherBiome;
-import paulevs.betternether.biomes.NetherBiomeWrapper;
 import paulevs.betternether.biomes.NetherBoneReef;
 import paulevs.betternether.biomes.NetherGrasslands;
 import paulevs.betternether.biomes.NetherGravelDesert;
@@ -38,23 +36,20 @@ import paulevs.betternether.biomes.OldFungiwoods;
 import paulevs.betternether.biomes.OldSwampland;
 import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.biomes.UpsideDownForest;
-import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.world.features.CavesFeature;
+import paulevs.betternether.world.features.PathsFeature;
+import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.BiomeAPI;
+import ru.bclib.api.LifeCycleAPI;
 import ru.bclib.world.biomes.BCLBiome;
 
-public class BiomesRegistry {
+public class NetherBiomes {
 	private static final ArrayList<NetherBiome> REGISTRY = new ArrayList<NetherBiome>();
 	private static final ArrayList<NetherBiome> ALL_BIOMES = new ArrayList<NetherBiome>();
-	private static final HashMap<Biome, NetherBiome> MUTABLE = Maps.newHashMap();
-	private static final ArrayList<NetherBiome> GENERATOR = new ArrayList<NetherBiome>();
 	private static final Set<Integer> OCCUPIED_IDS = Sets.newHashSet();
 
-	public static final NetherBiome BIOME_EMPTY_NETHER = new NetherBiomeWrapper(new ResourceLocation("nether_wastes"));
-	public static final NetherBiome BIOME_CRIMSON_FOREST = new NetherBiomeWrapper(new ResourceLocation("crimson_forest"));
-	public static final NetherBiome BIOME_WARPED_FOREST = new NetherBiomeWrapper(new ResourceLocation("warped_forest"));
-	public static final NetherBiome BIOME_BASALT_DELTAS = new NetherBiomeWrapper(new ResourceLocation("basalt_deltas"));
-
+	
 	public static final NetherBiome BIOME_GRAVEL_DESERT = new NetherGravelDesert("Gravel Desert");
 	public static final NetherBiome BIOME_NETHER_JUNGLE = new NetherJungle("Nether Jungle");
 	public static final NetherBiome BIOME_WART_FOREST = new NetherWartForest("Wart Forest");
@@ -103,18 +98,13 @@ public class BiomesRegistry {
 		registerSubBiome(NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
 		registerNetherBiome(MAGMA_LAND);
 		registerSubBiome(SOUL_PLAIN, BIOME_WART_FOREST, 1F);
-		registerSubBiome(CRIMSON_GLOWING_WOODS, BIOME_CRIMSON_FOREST, 0.3F);
-		registerSubBiome(OLD_WARPED_WOODS, BIOME_WARPED_FOREST, 1F);
-		registerSubBiome(CRIMSON_PINEWOOD, BIOME_CRIMSON_FOREST, 0.3F);
+		registerSubBiome(CRIMSON_GLOWING_WOODS, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
+		registerSubBiome(OLD_WARPED_WOODS, BiomeAPI.WARPED_FOREST_BIOME, 1F);
+		registerSubBiome(CRIMSON_PINEWOOD, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
 		registerSubBiome(OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
-		registerSubBiome(FLOODED_DELTAS, BIOME_BASALT_DELTAS, 1F);
+		registerSubBiome(FLOODED_DELTAS, BiomeAPI.BASALT_DELTAS_BIOME, 1F);
 		registerNetherBiome(UPSIDE_DOWN_FOREST);
 		registerSubBiome(OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
-
-		registerNetherBiome(BIOME_EMPTY_NETHER);
-		registerNetherBiome(BIOME_CRIMSON_FOREST);
-		registerNetherBiome(BIOME_WARPED_FOREST);
-		registerNetherBiome(BIOME_BASALT_DELTAS);
 		
 		RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register((i, id, biome) -> {
 			if (biome.getBiomeCategory() == BiomeCategory.NETHER) {
@@ -122,46 +112,24 @@ public class BiomesRegistry {
 				Configs.GENERATOR.getFloat("biomes." + bioID.getNamespace() + ".main", bioID.getPath() + "_chance", 1);
 			}
 		});
+		
+		BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> {
+			if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
+				modifyNonBNBiome(biome);
+				NetherFeatures.modifyNonBNBiome(biome);
+				NetherStructures.modifyNonBNBiome(biome);
+			}
+		});
+
+		LifeCycleAPI.onLevelLoad(NetherBiomes::onWorldLoad);
 	}
 	
-	public static void mutateRegistry(Registry<Biome> biomeRegistry) {
-		GENERATOR.clear();
-		GENERATOR.addAll(REGISTRY);
-
-		MUTABLE.clear();
-		for (NetherBiome netherBiome : BiomesRegistry.getAllBiomes()) {
-			Biome biome = biomeRegistry.get(netherBiome.getID());
-			netherBiome.setActualBiome(biome);
-			MUTABLE.put(biome, netherBiome);
-		}
-
-		if (maxDefChance == 0) maxDefChance = maxChance;
-		maxChance = maxDefChance;
-
-		Iterator<Biome> iterator = biomeRegistry.iterator();
-		while (iterator.hasNext()) {
-			Biome biome = iterator.next();
-			if (biome.getBiomeCategory() == BiomeCategory.NETHER && !BiomesRegistry.MUTABLE.containsKey(biome)) {
-				ResourceLocation id = biomeRegistry.getKey(biome);
-				NetherBiome netherBiome = new NetherBiomeWrapper(biomeRegistry.getKey(biome), biome);
-				netherBiome.setActualBiome(biome);
-				MUTABLE.put(biome, netherBiome);
-
-				float chance = Configs.GENERATOR.getFloat("biomes." + id.getNamespace() + ".main", id.getPath() + "_chance", 1);
-				if (chance > 0.0F) {
-					maxChance += chance;
-					//netherBiome.setGenChance(maxChance);
-					String path = "generator.biome." + netherBiome.getID().getNamespace() + "." + netherBiome.getID().getPath();
-					netherBiome.setPlantDensity(Configs.BIOMES.getFloat(path, "plants_and_structures_density", 1));
-					netherBiome.build();
-					GENERATOR.add(netherBiome);
-				}
-			}
-		}
-		
-		Config.save();
+	private static void modifyNonBNBiome(Biome biome) {
+		BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.FIREFLY, 5, 3, 6);
+		BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.HYDROGEN_JELLYFISH, 5, 2, 5);
+		BiomeAPI.addBiomeMobSpawn(biome, EntityRegistry.NAGA, 8, 3, 5);
 	}
-
+	
 	private static void register(NetherBiome biome) {
 		if (BuiltinRegistries.BIOME.get(biome.getID()) == null) {
 			if (OCCUPIED_IDS.isEmpty()) {
@@ -177,7 +145,7 @@ public class BiomesRegistry {
 		}
 	}
 
-	public static void registerNetherBiome(NetherBiome biome) {
+	private static void registerNetherBiome(NetherBiome biome) {
 		float chance = Configs.GENERATOR.getFloat("biomes." + biome.getID().getNamespace() + ".main", biome.getID().getPath() + "_chance", 1);
 		if (chance > 0.0F) {
 			maxChance += chance;
@@ -195,8 +163,8 @@ public class BiomesRegistry {
 			}
 		}
 	}
-
-	public static void registerEdgeBiome(NetherBiome biome, NetherBiome mainBiome, int size) {
+	
+	private static void registerEdgeBiome(NetherBiome biome, NetherBiome mainBiome, int size) {
 		String regName = biome.getRegistryName();
 		int sizeConf = (int)Configs.GENERATOR.getFloat("biomes.betternether.edge", regName + "_size", size);
 		if (sizeConf > 0.0F) {
@@ -211,8 +179,8 @@ public class BiomesRegistry {
 			BiomeAPI.registerBiome(biome);
 		}
 	}
-
-	public static void registerSubBiome(NetherBiome biome, NetherBiome mainBiome, float chance) {
+	
+	private static void registerSubBiome(NetherBiome biome, BCLBiome mainBiome, float chance) {
 		String regName = biome.getRegistryName();
 		chance = Configs.GENERATOR.getFloat("biomes.betternether.variation", regName + "_chance", chance);
 		if (chance > 0.0F) {
@@ -228,22 +196,15 @@ public class BiomesRegistry {
 
 	public static BCLBiome getBiome(Random random) {
 		return BiomeAPI.NETHER_BIOME_PICKER.getBiome(random);
-		//float chance = random.nextFloat() * maxChance;
-		/*for (NetherBiome biome : GENERATOR)
-			if (biome.canGenerate(chance))
-				return biome;*/
-		//return BIOME_EMPTY_NETHER;
-	}
-
-	/*public static NetherBiome getFromBiome(Biome biome) {
-		return MUTABLE.getOrDefault(biome, BIOME_EMPTY_NETHER);
-	}*/
-
-	public static ArrayList<NetherBiome> getRegisteredBiomes() {
-		return REGISTRY;
 	}
 
 	public static ArrayList<NetherBiome> getAllBiomes() {
 		return ALL_BIOMES;
+	}
+	
+	public static void onWorldLoad(ServerLevel level, long seed, Registry<Biome> registry) {
+		CavesFeature.onLoad(seed);
+		PathsFeature.onLoad(seed);
+		CityFeature.initGenerator();
 	}
 }

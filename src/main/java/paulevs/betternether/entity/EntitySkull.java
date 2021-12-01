@@ -55,15 +55,14 @@ public class EntitySkull extends Monster implements FlyingAnimal {
 		this.flyingSpeed = 0.5F;
 	}
 
-	public static AttributeSupplier getAttributeContainer() {
+	public static AttributeSupplier.Builder createMobAttributes() {
 		return Mob
 				.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 4.0)
 				.add(Attributes.FOLLOW_RANGE, 20.0)
 				.add(Attributes.MOVEMENT_SPEED, 0.5)
 				.add(Attributes.FLYING_SPEED, 0.5)
-				.add(Attributes.ATTACK_DAMAGE, 1.0)
-				.build();
+				.add(Attributes.ATTACK_DAMAGE, 1.0);
 	}
 
 	@Override

@@ -1,0 +1,87 @@
+name: Report a Bug
+description: File a bug report
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a Bug in BetterNether!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## Versions
+  - type: input
+    id: bn_version
+    attributes:
+      label: BetterNether
+      description: What version of BetterNether are you running?
+      placeholder: 5.3.x
+    validations:
+      required: true
+  - type: input
+    id: bclib_version
+    attributes:
+      label: BCLib
+      description: What version of BCLib are you running? Older Versions of BetterNether did not require BCLib.
+      placeholder: 0.4.x
+    validations:
+      required: true
+  - type: input
+    id: fabric_api_version
+    attributes:
+      label: Fabric API
+      description: What version of Fabric API is installed
+      placeholder: 0.4x.x
+    validations:
+      required: false
+  - type: input
+    id: fabric_loader_version
+    attributes:
+      label: Fabric Loader
+      description: What version of Fabric Loader do you use
+      placeholder: 0.12.x
+    validations:
+      required: false
+  - type: dropdown
+    id: mc_version
+    attributes:
+      label: Minecraft
+      description: What version BCLib is installed?
+      options:
+        - 1.17.1
+        - 1.17
+        - 1.16.5
+        - 1.16.4
+        - 1.16.3
+        - 1.16.2
+        - 1.16.1
+        - 1.16.0
+        - Before 1.16
+    validations:
+      required: true 
+  - type: markdown
+    attributes:
+      value: |
+        ## Additional Information
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: textarea
+    id: other_mods
+    attributes:
+      label: Other Mods
+      description: If you can, please supply a list of installed Mods (besides BetterNether and BCLib). This information may already be included in the log above.
+      render: shell

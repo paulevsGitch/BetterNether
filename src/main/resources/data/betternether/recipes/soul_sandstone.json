@@ -1,16 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "##",
-    "##"
-  ],
-  "key": {
-    "#": {
-      "tag": "c:soul_ground"
-    }
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "betternether:soul_sandstone"
   },
-  "result": {
-    "item": "betternether:soul_sandstone",
-	"count": 4
-  }
+  "result": "betternether:soul_sandstone_smooth",
+  "experience": 0.1,
+  "cookingtime": 200
 }

@@ -13,7 +13,7 @@ public class CityGenerator {
 	private List<StructureCityBuilding> buildings = new ArrayList<StructureCityBuilding>();
 	private List<StructureCityBuilding> roadEnds = new ArrayList<StructureCityBuilding>();
 	private List<StructureCityBuilding> total = new ArrayList<StructureCityBuilding>();
-	private List<BoundingBox> bounds = new ArrayList<BoundingBox>();
+	private List<BoundingBox2D> bounds = new ArrayList<BoundingBox2D>();
 	private List<BlockPos> ends = new ArrayList<BlockPos>();
 	private List<BlockPos> add = new ArrayList<BlockPos>();
 	private List<BlockPos> rem = new ArrayList<BlockPos>();
@@ -82,7 +82,7 @@ public class CityGenerator {
 	}
 
 	private void placeCenterBuilding(BlockPos pos, StructureCityBuilding building, ArrayList<CityPiece> city, Random random, CityPalette palette) {
-		BoundingBox bb = building.getBoungingBox().offset(pos);
+		BoundingBox2D bb = building.getBoungingBox().offset(pos);
 		bounds.add(bb);
 		city.add(new CityPiece(building, pos.offset(0, building.getYOffset(), 0), random.nextInt(), palette));
 		for (int i = 0; i < building.getEndsCount(); i++)
@@ -98,7 +98,7 @@ public class CityGenerator {
 					StructureCityBuilding building = buildings.get(b | r);
 					int index = random.nextInt(building.getEndsCount());
 					BlockPos offset = building.getPos(index);
-					BoundingBox bb = building.getBoungingBox().offset(pos).offsetNegative(offset);
+					BoundingBox2D bb = building.getBoungingBox().offset(pos).offsetNegative(offset);
 					if (noCollisions(bb)) {
 						boolean validHeight = true;
 						BlockPos npos = new BlockPos(bb.x1, pos.getY() - offset.getY() + building.getYOffset(), bb.z1);
@@ -132,7 +132,7 @@ public class CityGenerator {
 			for (int n = 0; n < roadEnds.size(); n++) {
 				StructureCityBuilding building = roadEnds.get(n);
 				BlockPos offset = building.getPos(0);
-				BoundingBox bb = building.getBoungingBox().offset(pos).offsetNegative(offset);
+				BoundingBox2D bb = building.getBoungingBox().offset(pos).offsetNegative(offset);
 				if (noCollisions(bb)) {
 					BlockPos npos = new BlockPos(bb.x1, pos.getY() - offset.getY() + building.getYOffset(), bb.z1);
 					bounds.add(bb);
@@ -162,8 +162,8 @@ public class CityGenerator {
 		return city;
 	}
 
-	private boolean noCollisions(BoundingBox bb) {
-		for (BoundingBox b : bounds)
+	private boolean noCollisions(BoundingBox2D bb) {
+		for (BoundingBox2D b : bounds)
 			if (bb.isColliding(b))
 				return false;
 		return true;

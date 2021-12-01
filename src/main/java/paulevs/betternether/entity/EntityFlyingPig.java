@@ -34,7 +34,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -51,8 +50,9 @@ import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.EntityRegistry;
+import ru.bclib.entity.DespawnableAnimal;
 
-public class EntityFlyingPig extends Animal implements FlyingAnimal {
+public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 	private static final EntityDataAccessor<Byte> DATA_SHARED_FLAGS_ID;
 	private static final int BIT_ROOSTING = 0;
 	private static final int BIT_WARTED = 1;
@@ -79,7 +79,7 @@ public class EntityFlyingPig extends Animal implements FlyingAnimal {
 		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
 	}
 
-	public static AttributeSupplier getAttributeContainer() {
+	public static AttributeSupplier.Builder createMobAttributes() {
 		return Mob
 				.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 6.0)
@@ -87,8 +87,7 @@ public class EntityFlyingPig extends Animal implements FlyingAnimal {
 				.add(Attributes.MOVEMENT_SPEED, 0.3)
 				.add(Attributes.FLYING_SPEED, 0.3)
 				.add(Attributes.ATTACK_DAMAGE, 3.0)
-				.add(Attributes.ARMOR, 1.0)
-				.build();
+				.add(Attributes.ARMOR, 1.0);
 	}
 
 	@Override

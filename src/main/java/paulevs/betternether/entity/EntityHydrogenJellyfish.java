@@ -22,7 +22,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
@@ -34,8 +33,9 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.registry.SoundsRegistry;
+import ru.bclib.entity.DespawnableAnimal;
 
-public class EntityHydrogenJellyfish extends Animal implements FlyingAnimal {
+public class EntityHydrogenJellyfish extends DespawnableAnimal implements FlyingAnimal {
 	private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(EntityHydrogenJellyfish.class, EntityDataSerializers.FLOAT);
 
 	private Vec3 preVelocity;
@@ -55,14 +55,13 @@ public class EntityHydrogenJellyfish extends Animal implements FlyingAnimal {
 		this.entityData.define(SCALE, 0.5F + random.nextFloat());
 	}
 
-	public static AttributeSupplier getAttributeContainer() {
+	public static AttributeSupplier.Builder createMobAttributes() {
 		return Mob
 				.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 0.5)
 				.add(Attributes.FLYING_SPEED, 0.05)
 				.add(Attributes.MOVEMENT_SPEED, 0.5)
-				.add(Attributes.ATTACK_DAMAGE, 20.0)
-				.build();
+				.add(Attributes.ATTACK_DAMAGE, 20.0);
 	}
 
 	@Override
@@ -190,8 +189,11 @@ public class EntityHydrogenJellyfish extends Animal implements FlyingAnimal {
 						0, 0, 0);
 		}
 		else {
-			Explosion.BlockInteraction destructionType = this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
-			this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
+			if (source!=DamageSource.OUT_OF_WORLD) {
+				Explosion.BlockInteraction destructionType = this.level.getGameRules()
+																	   .getBoolean(GameRules.RULE_MOBGRIEFING) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+				this.level.explode(this, getX(), getEyeY(), getZ(), 7 * getScale(), destructionType);
+			}
 		}
 	}
 
@@ -220,7 +222,7 @@ public class EntityHydrogenJellyfish extends Animal implements FlyingAnimal {
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
-		if (source == DamageSource.WITHER || source instanceof EntityDamageSource) {
+		if (source == DamageSource.WITHER || source instanceof EntityDamageSource || source == DamageSource.OUT_OF_WORLD) {
 			return super.hurt(source, amount);
 		}
 		return false;
