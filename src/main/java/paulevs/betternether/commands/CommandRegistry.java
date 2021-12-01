@@ -32,6 +32,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.biomes.NetherBiomeData;
 import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
+import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiome;
 
 import java.util.Collections;
@@ -74,13 +75,14 @@ public class CommandRegistry {
     private static int biomeIndex = 0;
     private static int teleportToNextBiome(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
-        if (biomeIndex<0 || biomeIndex>= NetherBiomes.getAllBiomes().size()){
-            source.sendFailure(new TextComponent("Failed to find the next biome...").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
+        List<BCLBiome> biomes = BiomeAPI.NETHER_BIOME_PICKER.getBiomes().stream().filter(b -> NetherBiomeData.getCustomNetherData(b)!=null).collect(Collectors.toList());
+        if (biomeIndex<0 || biomeIndex>=biomes.size()){
+            source.sendFailure(new TextComponent("Failed to find the next Biome...").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
             return 0;
         }
-        final BCLBiome biome = NetherBiomes.getAllBiomes().get(biomeIndex);
+        final BCLBiome biome = biomes.get(biomeIndex);
         source.sendSuccess(new TextComponent("Locating Biome " + biome).setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
-        biomeIndex = (biomeIndex+1) % NetherBiomes.getAllBiomes().size();
+        biomeIndex = (biomeIndex+1) % biomes.size();
 
         final BlockPos currentPosition = new BlockPos(source.getPosition());
         final BlockPos biomePosition = source.getLevel().findNearestBiome(biome.getActualBiome(), currentPosition, MAX_SEARCH_RADIUS, SEARCH_STEP);

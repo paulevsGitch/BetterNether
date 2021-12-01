@@ -38,13 +38,9 @@ import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.api.LifeCycleAPI;
 import ru.bclib.world.biomes.BCLBiome;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class NetherBiomes {
-	private static final ArrayList<BCLBiome> REGISTRY = new ArrayList<>();
-	private static final ArrayList<BCLBiome> ALL_BIOMES = new ArrayList<>();
-
 	private static class Data {
 		public static final NetherBiomeData BIOME_GRAVEL_DESERT = new NetherGravelDesertData("Gravel Desert");
 		public static final NetherBiomeData BIOME_NETHER_JUNGLE = new NetherJungleData("Nether Jungle");
@@ -149,10 +145,7 @@ public class NetherBiomes {
 	private static void registerNetherBiome(BCLBiome biome) {
 		float chance = Configs.GENERATOR.getFloat("biomes." + biome.getID().getNamespace() + ".main", biome.getID().getPath() + "_chance", 1);
 		if (chance > 0.0F) {
-			REGISTRY.add(biome);
-			ALL_BIOMES.add(biome);
 			biome.setGenChance(chance);
-			
 			Biome b = BuiltinRegistries.BIOME.get(biome.getID());
 			
 			if (b==null) {
@@ -168,7 +161,6 @@ public class NetherBiomes {
 		if (sizeConf > 0.0F) {
 			mainBiome.setEdge(biome);
 			mainBiome.setEdgeSize(sizeConf);
-			ALL_BIOMES.add(biome);
 			
 			BiomeAPI.registerBiome(biome);
 		}
@@ -179,7 +171,6 @@ public class NetherBiomes {
 		final String regName = data.getRegistryName();
 		chance = Configs.GENERATOR.getFloat("biomes.betternether.variation", regName + "_chance", chance);
 		if (chance > 0.0F) {
-			ALL_BIOMES.add(biome);
 			biome.setGenChance(chance);
 			
 			BiomeAPI.registerSubBiome(mainBiome, biome);
@@ -188,10 +179,6 @@ public class NetherBiomes {
 
 	public static BCLBiome getBiome(Random random) {
 		return BiomeAPI.NETHER_BIOME_PICKER.getBiome(random);
-	}
-
-	public static ArrayList<BCLBiome> getAllBiomes() {
-		return ALL_BIOMES;
 	}
 	
 	public static void onWorldLoad(ServerLevel level, long seed, Registry<Biome> registry) {
