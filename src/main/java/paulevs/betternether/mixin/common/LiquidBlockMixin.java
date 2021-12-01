@@ -1,6 +1,8 @@
 package paulevs.betternether.mixin.common;
 
+import com.google.common.collect.UnmodifiableIterator;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -51,7 +53,7 @@ public abstract class LiquidBlockMixin {
 	@Shadow protected abstract void fizz(LevelAccessor levelAccessor, BlockPos blockPos);
 	
 	@Inject(method="shouldSpreadLiquid", locals=LocalCapture.CAPTURE_FAILSOFT, cancellable = true, at=@At(value="INVOKE", target="Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"))
-	void bn_shouldSpreadLiquid(Level level, BlockPos blockPos, BlockState arg2, CallbackInfoReturnable<Boolean> cir, Block block) {
+	void bn_shouldSpreadLiquid(Level level, BlockPos blockPos, BlockState arg2, CallbackInfoReturnable<Boolean> cir, boolean bl, UnmodifiableIterator var5, Direction direction, BlockPos blockPos2, Block block) {
 		if (block == Blocks.OBSIDIAN){
 			final BlockState belowState = level.getBlockState(blockPos.below());
 			if (belowState.is(Blocks.SOUL_SOIL) ||belowState.is(Blocks.SOUL_SAND)) {
