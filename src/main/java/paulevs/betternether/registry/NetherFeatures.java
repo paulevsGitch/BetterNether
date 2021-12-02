@@ -17,6 +17,7 @@ import paulevs.betternether.world.features.CleanupFeature;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.features.PathsFeature;
 import paulevs.betternether.world.structures.CityFeature;
+import ru.bclib.api.LifeCycleAPI;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiomeDef;
@@ -126,7 +127,7 @@ public class NetherFeatures {
 	}
 	
 	public static void register() {
-	
+		LifeCycleAPI.onLevelLoad(NetherFeatures::onWorldLoad);
 	}
 	
 	public static void onWorldLoad(ServerLevel level, long seed, Registry<Biome> registry) {

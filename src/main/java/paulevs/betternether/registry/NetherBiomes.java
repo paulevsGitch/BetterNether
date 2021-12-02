@@ -1,8 +1,12 @@
 package paulevs.betternether.registry;
 
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.biomes.CrimsonGlowingWoods;
@@ -30,13 +34,23 @@ import paulevs.betternether.biomes.OldSwampland;
 import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.biomes.UpsideDownForest;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.world.features.CavesFeature;
+import paulevs.betternether.world.features.PathsFeature;
+import paulevs.betternether.world.structures.CityFeature;
+import ru.bclib.api.WorldDataAPI;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.api.LifeCycleAPI;
+import ru.bclib.util.ModUtil;
 import ru.bclib.world.biomes.BCLBiome;
+import ru.bclib.world.generator.BCLibNetherBiomeSource;
+import ru.bclib.world.generator.GeneratorOptions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class NetherBiomes {
+	public static final List<NetherBiome> ALL_BN_BIOMES = new ArrayList<>(21);
 	private static class Config {
 		public static final NetherBiomeConfig BIOME_GRAVEL_DESERT = new NetherGravelDesert.Config("Gravel Desert");
 		public static final NetherBiomeConfig BIOME_NETHER_JUNGLE = new NetherJungle.Config("Nether Jungle");
@@ -105,8 +119,8 @@ public class NetherBiomes {
 				NetherStructures.modifyNonBNBiome(biome);
 			}
 		});
-
-		LifeCycleAPI.onLevelLoad(NetherFeatures::onWorldLoad);
+		
+		LifeCycleAPI.beforeLevelLoad(NetherBiomes::onWorldLoad);
 	}
 	
 	private static NetherBiome registerNetherBiome(NetherBiomeConfig config) {
@@ -115,6 +129,7 @@ public class NetherBiomes {
 		biome.setGenChance(chance);
 		
 		if (chance > 0.0F) {
+			ALL_BN_BIOMES.add(biome);
 			BiomeAPI.registerNetherBiome(biome);
 		}
 		
@@ -129,6 +144,7 @@ public class NetherBiomes {
 		mainBiome.setEdge(biome);
 		mainBiome.setEdgeSize(sizeConf);
 		if (sizeConf > 0.0F) {
+			ALL_BN_BIOMES.add(biome);
 			BiomeAPI.registerBiome(biome);
 		}
 		
@@ -142,6 +158,7 @@ public class NetherBiomes {
 		biome.setGenChance(chance);
 		
 		if (chance > 0.0F) {
+			ALL_BN_BIOMES.add(biome);
 			BiomeAPI.registerSubBiome(mainBiome, biome);
 		}
 		
@@ -150,5 +167,30 @@ public class NetherBiomes {
 
 	public static BCLBiome getBiome(Random random) {
 		return BiomeAPI.NETHER_BIOME_PICKER.getBiome(random);
+	}
+	public static boolean useLegacyGeneration = false;
+	
+	public static void onWorldLoad() {
+		CompoundTag root = WorldDataAPI.getRootTag(BetterNether.MOD_ID);
+		String version = "0.0.0";
+		if (root.contains("version")){
+			version = root.getString("version");
+		}
+		
+		if (!ModUtil.isLargerOrEqualVersion(version, "6.0.0")){
+			root.putString("version", ModUtil.getModVersion(BetterNether.MOD_ID));
+			root.putString("generatore_version", "1.17");
+			useLegacyGeneration = true;
+			WorldDataAPI.saveFile(BetterNether.MOD_ID);
+		} else if (!root.contains("generatore_version")){
+			root.putString("generatore_version", GeneratorOptions.useOldBiomeGenerator()?"1.17":"1.18");
+			useLegacyGeneration = false;
+			WorldDataAPI.saveFile(BetterNether.MOD_ID);
+		} else {
+			useLegacyGeneration = "1.17".equals(root.getString("generatore_version"));
+		}
+		
+		BCLibNetherBiomeSource.setForceLegacyGeneration(useLegacyGeneration);
+		BetterNether.LOGGER.info("Using legacy (1.17) generator: " + useLegacyGeneration);
 	}
 }

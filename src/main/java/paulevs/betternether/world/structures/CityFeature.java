@@ -25,6 +25,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplie
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
@@ -78,8 +79,9 @@ public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 		}
 
 		if (!(chunkGenerator instanceof FlatLevelSource)) {
-			CavePiece cave = new CavePiece(center, radius, random, cityBox);
+			CavePiece cave = new CavePiece(center, radius+(NetherBiomes.useLegacyGeneration?0:8), random, cityBox);
 			structurePiecesBuilder.addPiece(cave);
+			
 		}
 		buildings.forEach(b -> structurePiecesBuilder.addPiece(b));
 		
