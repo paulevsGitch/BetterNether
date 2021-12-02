@@ -1,13 +1,16 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackVine;
@@ -30,25 +33,36 @@ import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 
-public class NetherJungleData extends NetherBiomeData {
-	protected void addCustomBuildData(BCLBiomeBuilder builder){
-		builder
-			.fogColor(62, 169, 61)
-			.loop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
-			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-			//TODO: 1.18 Surface Blocks
-			//.surface(NetherBlocks.JUNGLE_GRASS)
-			.spawn(EntityRegistry.JUNGLE_SKELETON, 40, 2, 4);
+public class NetherJungle extends NetherBiome {
+	public static class Config extends NetherBiomeConfig {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		protected void addCustomBuildData(BCLBiomeBuilder builder) {
+			builder.fogColor(62, 169, 61)
+				   .loop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
+				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   //TODO: 1.18 Surface Blocks
+				   //.surface(NetherBlocks.JUNGLE_GRASS)
+				   .spawn(NetherEntities.JUNGLE_SKELETON, 40, 2, 4);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return NetherJungle::new;
+		}
+		
+		@Override
+		public boolean spawnVanillaMobs() {
+			return false;
+		}
 	}
 	
-	@Override
-	public boolean spawnVanillaMobs(){
-		return false;
-	}
-	
-	public NetherJungleData(String name) {
-		super(name);
+	public NetherJungle(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 		
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);
@@ -69,13 +83,13 @@ public class NetherJungleData extends NetherBiomeData {
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
 		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
 
-		addWorldStructures(structureFormat("ruined_temple", -4, StructureType.FLOOR, 10F));
-		addWorldStructures(structureFormat("jungle_temple_altar", -2, StructureType.FLOOR, 10F));
-		addWorldStructures(structureFormat("jungle_temple_2", -2, StructureType.FLOOR, 10F));
+		addStructures(structureFormat("ruined_temple", -4, StructureType.FLOOR, 10F));
+		addStructures(structureFormat("jungle_temple_altar", -2, StructureType.FLOOR, 10F));
+		addStructures(structureFormat("jungle_temple_2", -2, StructureType.FLOOR, 10F));
 
-		addWorldStructures(structureFormat("jungle_bones_1", 0, StructureType.FLOOR, 20F));
-		addWorldStructures(structureFormat("jungle_bones_2", 0, StructureType.FLOOR, 20F));
-		addWorldStructures(structureFormat("jungle_bones_3", 0, StructureType.FLOOR, 20F));
+		addStructures(structureFormat("jungle_bones_1", 0, StructureType.FLOOR, 20F));
+		addStructures(structureFormat("jungle_bones_2", 0, StructureType.FLOOR, 20F));
+		addStructures(structureFormat("jungle_bones_3", 0, StructureType.FLOOR, 20F));
 
 		this.setNoiseDensity(0.5F);
 	}

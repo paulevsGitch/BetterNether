@@ -27,7 +27,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.SoundsRegistry;
 
 public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
@@ -57,7 +57,7 @@ public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
 
 	@Override
 	public void performRangedAttack(LivingEntity target, float f) {
-		EntityNagaProjectile projectile = EntityRegistry.NAGA_PROJECTILE.create(level);
+		EntityNagaProjectile projectile = NetherEntities.NAGA_PROJECTILE.create(level);
 		projectile.absMoveTo(getX(), getEyeY(), getZ(), 0, 0);
 		projectile.setParams(this, target);
 		level.addFreshEntity(projectile);

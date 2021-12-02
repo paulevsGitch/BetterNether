@@ -29,8 +29,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.biomes.NetherBiomeData;
-import paulevs.betternether.registry.NetherBiomes;
+import paulevs.betternether.biomes.NetherBiome;
 import paulevs.betternether.registry.NetherBlocks;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiome;
@@ -75,7 +74,7 @@ public class CommandRegistry {
     private static int biomeIndex = 0;
     private static int teleportToNextBiome(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
-        List<BCLBiome> biomes = BiomeAPI.NETHER_BIOME_PICKER.getBiomes().stream().filter(b -> NetherBiomeData.getCustomNetherData(b)!=null).collect(Collectors.toList());
+        List<BCLBiome> biomes = BiomeAPI.NETHER_BIOME_PICKER.getBiomes().stream().filter(b -> b instanceof NetherBiome).collect(Collectors.toList());
         if (biomeIndex<0 || biomeIndex>=biomes.size()){
             source.sendFailure(new TextComponent("Failed to find the next Biome...").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
             return 0;

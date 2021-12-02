@@ -1,18 +1,21 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.registry.EntityRegistry;
-import paulevs.betternether.registry.SoundsRegistry;
+import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.decorations.StructureWartDeadwood;
 import paulevs.betternether.structures.plants.StructureBlackBush;
@@ -22,23 +25,33 @@ import paulevs.betternether.structures.plants.StructureWartSeed;
 import paulevs.betternether.structures.plants.StructureWartTree;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 
-public class NetherWartForestData extends NetherBiomeData {
-	private static final MutableBlockPos POS = new MutableBlockPos();
-	
-	@Override
-	protected void addCustomBuildData(BCLBiomeBuilder builder){
-		builder
-			.fogColor(151, 6, 6)
-			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-			.music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-			.particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
-			.spawn(EntityRegistry.FLYING_PIG, 20, 2, 4);
+public class NetherWartForest extends NetherBiome {
+	public static class Config extends NetherBiomeConfig {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		protected void addCustomBuildData(BCLBiomeBuilder builder) {
+			builder.fogColor(151, 6, 6)
+				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
+				   .particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
+				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return NetherWartForest::new;
+		}
 	}
+	
+	private static final MutableBlockPos POS = new MutableBlockPos();
 
-	public NetherWartForestData(String name) {
-		super(name);
+	public NetherWartForest(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 		
 		this.setNoiseDensity(0.45F);
 		

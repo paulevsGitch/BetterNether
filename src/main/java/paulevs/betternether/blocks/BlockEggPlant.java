@@ -31,7 +31,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 
 public class BlockEggPlant extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 8, 16);
@@ -74,7 +74,7 @@ public class BlockEggPlant extends BlockCommonPlant {
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
 		if (!state.getValue(DESTRUCTED)) {
 			if (enableModDamage && entity instanceof LivingEntity && !((LivingEntity) entity).hasEffect(MobEffects.POISON)) {
-				if (!EntityRegistry.isNetherEntity(entity))
+				if (!NetherEntities.isNetherEntity(entity))
 					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.POISON, 100, 3));
 			}
 			else if (enablePlayerDamage && entity instanceof Player && !((Player) entity).hasEffect(MobEffects.POISON))

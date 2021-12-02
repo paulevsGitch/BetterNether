@@ -1,10 +1,13 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
@@ -24,16 +27,27 @@ import paulevs.betternether.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWhisperingGourd;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.world.biomes.BCLBiome;
 
-public class UpsideDownForest extends NetherBiomeData {
-	@Override
-	protected void addCustomBuildData(BCLBiomeBuilder builder){
-		builder
-			.fogColor(111, 188, 111)
-			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-			.music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST);
+public class UpsideDownForest extends NetherBiome {
+	public static class Config extends NetherBiomeConfig {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		protected void addCustomBuildData(BCLBiomeBuilder builder) {
+			builder.fogColor(111, 188, 111)
+				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return UpsideDownForest::new;
+		}
 	}
 	
 	@Override
@@ -46,8 +60,8 @@ public class UpsideDownForest extends NetherBiomeData {
 		return false;
 	}
 	
-	public UpsideDownForest(String name) {
-		super(name);
+	public UpsideDownForest(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 		
 		this.setNoiseDensity(0.5F);
 		

@@ -43,14 +43,14 @@ public class EntityRenderRegistry {
 	}
 	
 	public static void register() {
-		registerRenderMob(EntityRegistry.FIREFLY, RenderFirefly.class);
-		registerRenderMob(EntityRegistry.CHAIR, RenderChair.class);
-		registerRenderMob(EntityRegistry.HYDROGEN_JELLYFISH, RenderHydrogenJellyfish.class);
-		registerRenderMob(EntityRegistry.NAGA, RenderNaga.class);
-		registerRenderAny(EntityRegistry.NAGA_PROJECTILE, RenderNagaProjectile.class);
-		registerRenderMob(EntityRegistry.FLYING_PIG, RenderFlyingPig.class);
-		registerRenderMob(EntityRegistry.JUNGLE_SKELETON, RenderJungleSkeleton.class);
-		registerRenderMob(EntityRegistry.SKULL, RenderSkull.class);
+		registerRenderMob(NetherEntities.FIREFLY, RenderFirefly.class);
+		registerRenderMob(NetherEntities.CHAIR, RenderChair.class);
+		registerRenderMob(NetherEntities.HYDROGEN_JELLYFISH, RenderHydrogenJellyfish.class);
+		registerRenderMob(NetherEntities.NAGA, RenderNaga.class);
+		registerRenderAny(NetherEntities.NAGA_PROJECTILE, RenderNagaProjectile.class);
+		registerRenderMob(NetherEntities.FLYING_PIG, RenderFlyingPig.class);
+		registerRenderMob(NetherEntities.JUNGLE_SKELETON, RenderJungleSkeleton.class);
+		registerRenderMob(NetherEntities.SKULL, RenderSkull.class);
 		
 		EntityModelLayerRegistry.registerModelLayer(FIREFLY_MODEL, ModelEntityFirefly::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(NAGA_MODEL, ModelNaga::getTexturedModelData);

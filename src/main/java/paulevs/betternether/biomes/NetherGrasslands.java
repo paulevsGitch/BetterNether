@@ -1,13 +1,15 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.registry.EntityRegistry;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackApple;
@@ -23,19 +25,30 @@ import paulevs.betternether.structures.plants.StructureWallMoss;
 import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.world.biomes.BCLBiome;
 
-public class NetherGrasslandsData extends NetherBiomeData {
-	@Override
-	protected void addCustomBuildData(BCLBiomeBuilder builder){
-		builder
-			.fogColor(113, 73, 133)
-			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD);
+public class NetherGrasslands extends NetherBiome {
+	public static class Config extends NetherBiomeConfig {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		protected void addCustomBuildData(BCLBiomeBuilder builder) {
+			builder.fogColor(113, 73, 133)
+				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return NetherGrasslands::new;
+		}
 	}
 	
-	public NetherGrasslandsData(String name) {
-		super(name);
+	public NetherGrasslands(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 		
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.05F, true);

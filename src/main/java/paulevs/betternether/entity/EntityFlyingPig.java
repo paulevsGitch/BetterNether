@@ -49,7 +49,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 import ru.bclib.entity.DespawnableAnimal;
 
 public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
@@ -445,7 +445,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mate) {
-		EntityFlyingPig pig = EntityRegistry.FLYING_PIG.create(this.level);
+		EntityFlyingPig pig = NetherEntities.FLYING_PIG.create(this.level);
 		pig.setWarted(pig.isWarted());
 		return pig;
 	}

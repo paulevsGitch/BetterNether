@@ -2,7 +2,6 @@ package paulevs.betternether.world;
 
 import java.util.Random;
 
-import paulevs.betternether.biomes.NetherBiomeData;
 import paulevs.betternether.registry.NetherBiomes;
 import ru.bclib.world.biomes.BCLBiome;
 

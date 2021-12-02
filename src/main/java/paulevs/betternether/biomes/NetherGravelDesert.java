@@ -1,10 +1,14 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.SoundsRegistry;
@@ -13,20 +17,32 @@ import paulevs.betternether.structures.plants.StructureAgave;
 import paulevs.betternether.structures.plants.StructureBarrelCactus;
 import paulevs.betternether.structures.plants.StructureNetherCactus;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.world.biomes.BCLBiome;
 
-public class NetherGravelDesertData extends NetherBiomeData {
-	protected void addCustomBuildData(BCLBiomeBuilder builder){
-		builder
-			.fogColor(170, 48, 0)
-			.loop(SoundsRegistry.AMBIENT_GRAVEL_DESERT)
-			.loop(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
-			.additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
-			.music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
-			.particles(ParticleTypes.ASH, 0.02F);
+public class NetherGravelDesert extends NetherBiome {
+	public static class Config extends NetherBiomeConfig {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		protected void addCustomBuildData(BCLBiomeBuilder builder) {
+			builder.fogColor(170, 48, 0)
+				   .loop(SoundsRegistry.AMBIENT_GRAVEL_DESERT)
+				   .loop(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
+				   .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
+				   .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
+				   .particles(ParticleTypes.ASH, 0.02F);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return NetherGravelDesert::new;
+		}
 	}
 	
-	public NetherGravelDesertData(String name) {
-		super(name);
+	public NetherGravelDesert(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 		
 		addStructure("nether_cactus", new StructureNetherCactus(), StructureType.FLOOR, 0.02F, true);
 		addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);

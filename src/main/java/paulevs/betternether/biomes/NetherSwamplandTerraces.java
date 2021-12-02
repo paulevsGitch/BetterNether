@@ -1,19 +1,30 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.registry.SoundsRegistry;
-import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.world.biomes.BCLBiome;
 
-public class NetherSwamplandTerracesData extends NetherSwamplandData {
-	public NetherSwamplandTerracesData(String name) {
-		super(name);
+public class NetherSwamplandTerraces extends NetherSwampland {
+	public static class Config extends NetherSwampland.Config {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return NetherSwamplandTerraces::new;
+		}
+	}
+	public NetherSwamplandTerraces(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 	}
 
 	@Override

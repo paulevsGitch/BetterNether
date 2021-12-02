@@ -21,6 +21,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier.Builder;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import paulevs.betternether.BetterNether;
@@ -34,11 +35,12 @@ import paulevs.betternether.entity.EntityJungleSkeleton;
 import paulevs.betternether.entity.EntityNaga;
 import paulevs.betternether.entity.EntityNagaProjectile;
 import paulevs.betternether.entity.EntitySkull;
+import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.api.spawning.SpawnRuleBuilder;
 import ru.bclib.interfaces.SpawnRule;
 import ru.bclib.util.ColorUtil;
 
-public class EntityRegistry {
+public class NetherEntities {
 	public static final Map<EntityType<? extends LivingEntity>, AttributeSupplier> ATTRIBUTES = Maps.newHashMap();
 	private static final List<EntityType<?>> NETHER_ENTITIES = Lists.newArrayList();
 	
@@ -225,8 +227,13 @@ public class EntityRegistry {
 		}
 	}
 	
-	
 	public static boolean isNetherEntity(Entity entity) {
 		return NETHER_ENTITIES.contains(entity.getType());
+	}
+	
+	static void modifyNonBNBiome(Biome biome) {
+		BiomeAPI.addBiomeMobSpawn(biome, FIREFLY, 5, 3, 6);
+		BiomeAPI.addBiomeMobSpawn(biome, HYDROGEN_JELLYFISH, 5, 2, 5);
+		BiomeAPI.addBiomeMobSpawn(biome, NAGA, 8, 3, 5);
 	}
 }

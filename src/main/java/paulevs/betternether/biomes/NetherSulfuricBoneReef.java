@@ -1,10 +1,14 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureType;
@@ -16,16 +20,27 @@ import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.structures.plants.StructureReeds;
 import paulevs.betternether.structures.plants.StructureSepiaBoneGrass;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.world.biomes.BCLBiome;
 
-public class NetherSulfuricBoneReefData extends NetherBiomeData {
-	@Override
-	protected void addCustomBuildData(BCLBiomeBuilder builder){
-		builder
-			.fogColor(154, 144, 49)
-			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-			.particles(ParticleTypes.ASH, 0.01F);
+public class NetherSulfuricBoneReef extends NetherBiome {
+	public static class Config extends NetherBiomeConfig {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		protected void addCustomBuildData(BCLBiomeBuilder builder) {
+			builder.fogColor(154, 144, 49)
+				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .particles(ParticleTypes.ASH, 0.01F);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return NetherSulfuricBoneReef::new;
+		}
 	}
 	
 	@Override
@@ -33,8 +48,8 @@ public class NetherSulfuricBoneReefData extends NetherBiomeData {
 		return false;
 	}
 	
-	public NetherSulfuricBoneReefData(String name) {
-		super(name);
+	public NetherSulfuricBoneReef(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 
 		addStructure("bone_stalactite", new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 

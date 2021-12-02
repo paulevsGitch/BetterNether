@@ -8,13 +8,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 
 @Mixin(DefaultAttributes.class)
 public class DefaultAttributeRegistryMixin {
 	@Inject(method = "getSupplier", at = @At("HEAD"), cancellable = true)
 	private static void getAttribute(EntityType<? extends LivingEntity> type, CallbackInfoReturnable<AttributeSupplier> info) {
-		AttributeSupplier container = EntityRegistry.ATTRIBUTES.get(type);
+		AttributeSupplier container = NetherEntities.ATTRIBUTES.get(type);
 		if (container != null) {
 			info.setReturnValue(container);
 			info.cancel();
@@ -23,7 +23,7 @@ public class DefaultAttributeRegistryMixin {
 
 	@Inject(method = "hasSupplier", at = @At("HEAD"), cancellable = true)
 	private static void hasDefinition(EntityType<?> type, CallbackInfoReturnable<Boolean> info) {
-		if (EntityRegistry.ATTRIBUTES.containsKey(type)) {
+		if (NetherEntities.ATTRIBUTES.containsKey(type)) {
 			info.setReturnValue(true);
 			info.cancel();
 		}

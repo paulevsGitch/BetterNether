@@ -12,7 +12,7 @@ import paulevs.betternether.recipes.ItemRecipes;
 import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherItems;
@@ -35,14 +35,14 @@ public class BetterNether implements ModInitializer {
 	
 	@Override
 	public void onInitialize() {
-		LOGGER.info("######## BetterNether for 1.18 ########");
-		//MinecraftClient.getInstance().getEntityModelLoader().reload(MinecraftClient.getInstance().getResourceManager());
+		LOGGER.info("=^..^=    BetterNether for 1.18    =^..^=");
+		
 		initOptions();
 		SoundsRegistry.register();
 		NetherBlocks.register();
 		BlockEntitiesRegistry.register();
 		NetherItems.register();
-		EntityRegistry.register();
+		NetherEntities.register();
 		StructureTypes.init();
 		BNWorldGenerator.onModInit();
 		NetherFeatures.register();
@@ -55,7 +55,6 @@ public class BetterNether implements ModInitializer {
 		IntegrationRecipes.register();
 		NetherTags.register();
 		ItemRecipes.register();
-		//NetherBiomeSource.register();
 		BNLoot.register();
 		BNCriterion.register();
 		

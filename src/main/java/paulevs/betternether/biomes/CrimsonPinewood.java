@@ -1,16 +1,20 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureCrimsonFungus;
 import paulevs.betternether.structures.plants.StructureCrimsonPinewood;
@@ -22,23 +26,33 @@ import paulevs.betternether.structures.plants.StructureWartBush;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 
-public class CrimsonPinewood extends NetherBiomeData {
-	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
-	
-	@Override
-	protected void addCustomBuildData(BCLBiomeBuilder builder){
-		builder
-			.fogColor(51, 3, 3)
-			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-			.particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
-			.spawn(EntityType.HOGLIN, 9, 2, 5)
-			.spawn(EntityRegistry.FLYING_PIG, 20, 2, 4);
+public class CrimsonPinewood extends NetherBiome {
+	public static class Config extends NetherBiomeConfig {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		protected void addCustomBuildData(BCLBiomeBuilder builder) {
+			builder.fogColor(51, 3, 3)
+				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
+				   .spawn(EntityType.HOGLIN, 9, 2, 5)
+				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return CrimsonPinewood::new;
+		}
 	}
 	
-	public CrimsonPinewood(String name) {
-		super(name);
+	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
+	
+	public CrimsonPinewood(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 		
 		addStructure("crimson_pinewood", new StructureCrimsonPinewood(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.1F, false);

@@ -1,33 +1,47 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.structures.plants.StructureBlackBush;
 import paulevs.betternether.structures.plants.StructureNetherWart;
 import paulevs.betternether.structures.plants.StructureWartSeed;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 
-public class NetherWartForestEdgeData extends NetherBiomeData {
-	@Override
-	protected void addCustomBuildData(BCLBiomeBuilder builder){
-		builder
-			.fogColor(191, 28, 28)
-			.loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
-			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-			.music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-			.spawn(EntityRegistry.FLYING_PIG, 20, 2, 4);
+public class NetherWartForestEdge extends NetherBiome {
+	public static class Config extends NetherBiomeConfig {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		protected void addCustomBuildData(BCLBiomeBuilder builder) {
+			builder.fogColor(191, 28, 28)
+				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
+				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
+				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return NetherWartForestEdge::new;
+		}
 	}
 	
-	public NetherWartForestEdgeData(String name) {
-		super(name);
+	public NetherWartForestEdge(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 		
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.01F, false);

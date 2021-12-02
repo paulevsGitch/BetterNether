@@ -1,6 +1,8 @@
 package paulevs.betternether.registry;
 
 import com.google.common.collect.Lists;
+import net.minecraft.core.Registry;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -14,6 +16,7 @@ import paulevs.betternether.world.features.CavesFeature;
 import paulevs.betternether.world.features.CleanupFeature;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.features.PathsFeature;
+import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiomeDef;
@@ -124,5 +127,12 @@ public class NetherFeatures {
 	
 	public static void register() {
 	
+	}
+	
+	public static void onWorldLoad(ServerLevel level, long seed, Registry<Biome> registry) {
+		CavesFeature.onLoad(seed);
+		PathsFeature.onLoad(seed);
+		
+		CityFeature.initGenerator();
 	}
 }

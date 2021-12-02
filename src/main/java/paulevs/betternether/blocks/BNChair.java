@@ -21,7 +21,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.entity.EntityChair;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 
 public class BNChair extends BlockBaseNotFull {
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -65,7 +65,7 @@ public class BNChair extends BlockBaseNotFull {
 				return InteractionResult.FAIL;
 
 			float yaw = state.getValue(FACING).getOpposite().toYRot();
-			EntityChair entity = EntityRegistry.CHAIR.create(world);
+			EntityChair entity = NetherEntities.CHAIR.create(world);
 			entity.moveTo(px, py, pz, yaw, 0);
 			entity.setNoGravity(true);
 			entity.setSilent(true);

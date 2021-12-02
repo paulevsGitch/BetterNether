@@ -15,7 +15,6 @@ import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.world.biomes.BCLBiome;
-import ru.bclib.world.biomes.BCLBiomeDef;
 import ru.bclib.world.structures.BCLStructureFeature;
 
 public class NetherStructures {
@@ -37,7 +36,7 @@ public class NetherStructures {
 		BiomeAPI.addBiomeStructure(biome, CITY_STRUCTURE);
 	}
 	
-	public static void addDefaultFeatures(BCLBiome biome) {
-		modifyNonBNBiome(biome.getBiome());
+	public static void addDefaultFeatures(BCLBiomeBuilder builder) {
+		builder.structure(CITY_STRUCTURE);
 	}
 }

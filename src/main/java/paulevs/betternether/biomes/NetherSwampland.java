@@ -1,11 +1,14 @@
 package paulevs.betternether.biomes;
 
 import java.util.Random;
+import java.util.function.BiFunction;
+
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
@@ -27,29 +30,40 @@ import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.structures.plants.StructureWillow;
 import paulevs.betternether.structures.plants.StructureWillowBush;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.world.biomes.BCLBiome;
 
-public class NetherSwamplandData extends NetherBiomeData {
+public class NetherSwampland extends NetherBiome {
+	public static class Config extends NetherBiomeConfig {
+		public Config(String name) {
+			super(name);
+		}
+		
+		@Override
+		protected void addCustomBuildData(BCLBiomeBuilder builder) {
+			builder.fogColor(137, 19, 78)
+				   .loop(SoundsRegistry.AMBIENT_SWAMPLAND)
+				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
+				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
+				   .spawn(EntityType.STRIDER, 40, 2, 4)
+				   .spawn(EntityType.MAGMA_CUBE, 40, 2, 4);
+		}
+		
+		@Override
+		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+			return NetherSwampland::new;
+		}
+		
+		@Override
+		public boolean spawnVanillaMobs() {
+			return false;
+		}
+	}
+	
 	protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);
 	
-	@Override
-	protected void addCustomBuildData(BCLBiomeBuilder builder){
-		builder
-			.fogColor(137, 19, 78)
-			.loop(SoundsRegistry.AMBIENT_SWAMPLAND)
-			.additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-			.mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-			.music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-			.spawn(EntityType.STRIDER, 40, 2, 4)
-			.spawn(EntityType.MAGMA_CUBE, 40, 2, 4);
-	}
-	
-	@Override
-	public boolean spawnVanillaMobs() {
-		return false;
-	}
-	
-	public NetherSwamplandData(String name) {
-		super(name);
+	public NetherSwampland(ResourceLocation biomeID, Biome biome) {
+		super(biomeID, biome);
 		
 		addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.05F, false);
 		addStructure("willow_bush", new StructureWillowBush(), StructureType.FLOOR, 0.2F, true);

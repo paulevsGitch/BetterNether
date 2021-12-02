@@ -49,7 +49,7 @@ import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.registry.EntityRegistry;
+import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.SoundsRegistry;
 import ru.bclib.entity.DespawnableAnimal;
 
@@ -207,7 +207,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mate) {
-		return EntityRegistry.FIREFLY.create(world);
+		return NetherEntities.FIREFLY.create(world);
 	}
 
 	@Override
