@@ -1,5 +1,7 @@
 package paulevs.betternether.biomes;
 
+import net.minecraft.data.worldgen.Carvers;
+import net.minecraft.data.worldgen.StructureFeatures;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
@@ -25,8 +27,7 @@ public class NetherBiomeBuilder {
 		//		addStructureFeature(sf.getNETHER_BRIDGE());
 		//		addStructureFeature(sf.getBASTION_REMNANT());
 		
-		//TODO: 1.18 Missing Carvers
-		//builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
+		builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
 		builder.feature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA);
 	}
 	
