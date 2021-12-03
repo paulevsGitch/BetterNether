@@ -75,27 +75,27 @@ public class NetherBiomes {
 		public static final NetherBiomeConfig OLD_SWAMPLAND = new OldSwampland.Config("Old Swampland");
 	}
 	
-//	public static final BCLBiome BIOME_GRAVEL_DESERT = registerNetherBiome(Config.BIOME_GRAVEL_DESERT);
-//	public static final BCLBiome BIOME_NETHER_JUNGLE = registerNetherBiome(Config.BIOME_NETHER_JUNGLE);
-//	public static final BCLBiome BIOME_WART_FOREST = registerNetherBiome(Config.BIOME_WART_FOREST);
-//	public static final BCLBiome BIOME_GRASSLANDS = registerNetherBiome(Config.BIOME_GRASSLANDS);
-//	public static final BCLBiome BIOME_MUSHROOM_FOREST = registerNetherBiome(Config.BIOME_MUSHROOM_FOREST);
-//	public static final BCLBiome BIOME_MUSHROOM_FOREST_EDGE = registerEdgeBiome(Config.BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 2);;
-//	public static final BCLBiome BIOME_WART_FOREST_EDGE = registerEdgeBiome(Config.BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 2);
-//	public static final BCLBiome BIOME_BONE_REEF = registerNetherBiome(Config.BIOME_BONE_REEF);
-//	public static final BCLBiome BIOME_SULFURIC_BONE_REEF = registerSubBiome(Config.BIOME_SULFURIC_BONE_REEF, BIOME_BONE_REEF, 0.3F);
-//	public static final BCLBiome BIOME_POOR_GRASSLANDS = registerSubBiome(Config.BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);;
-//	public static final BCLBiome NETHER_SWAMPLAND = registerNetherBiome(Config.NETHER_SWAMPLAND);
-//	public static final BCLBiome NETHER_SWAMPLAND_TERRACES = registerSubBiome(Config.NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
-//	public static final BCLBiome MAGMA_LAND = registerNetherBiome(Config.MAGMA_LAND);
-//	public static final BCLBiome SOUL_PLAIN = registerSubBiome(Config.SOUL_PLAIN, BIOME_WART_FOREST, 1F);
-//	public static final BCLBiome CRIMSON_GLOWING_WOODS = registerSubBiome(Config.CRIMSON_GLOWING_WOODS, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
-//	public static final BCLBiome OLD_WARPED_WOODS = registerSubBiome(Config.OLD_WARPED_WOODS, BiomeAPI.WARPED_FOREST_BIOME, 1F);
-//	public static final BCLBiome CRIMSON_PINEWOOD = registerSubBiome(Config.CRIMSON_PINEWOOD, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
-//	public static final BCLBiome OLD_FUNGIWOODS = registerSubBiome(Config.OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
-//	public static final BCLBiome FLOODED_DELTAS = registerSubBiome(Config.FLOODED_DELTAS, BiomeAPI.BASALT_DELTAS_BIOME, 1F);
-//	public static final BCLBiome UPSIDE_DOWN_FOREST = registerNetherBiome(Config.UPSIDE_DOWN_FOREST);
-//	public static final BCLBiome OLD_SWAMPLAND = registerSubBiome(Config.OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
+	public static final BCLBiome BIOME_GRAVEL_DESERT = registerNetherBiome(Config.BIOME_GRAVEL_DESERT);
+	public static final BCLBiome BIOME_NETHER_JUNGLE = registerNetherBiome(Config.BIOME_NETHER_JUNGLE);
+	public static final BCLBiome BIOME_WART_FOREST = registerNetherBiome(Config.BIOME_WART_FOREST);
+	public static final BCLBiome BIOME_GRASSLANDS = registerNetherBiome(Config.BIOME_GRASSLANDS);
+	public static final BCLBiome BIOME_MUSHROOM_FOREST = registerNetherBiome(Config.BIOME_MUSHROOM_FOREST);
+	public static final BCLBiome BIOME_MUSHROOM_FOREST_EDGE = registerEdgeBiome(Config.BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 2);;
+	public static final BCLBiome BIOME_WART_FOREST_EDGE = registerEdgeBiome(Config.BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 2);
+	public static final BCLBiome BIOME_BONE_REEF = registerNetherBiome(Config.BIOME_BONE_REEF);
+	public static final BCLBiome BIOME_SULFURIC_BONE_REEF = registerSubBiome(Config.BIOME_SULFURIC_BONE_REEF, BIOME_BONE_REEF, 0.3F);
+	public static final BCLBiome BIOME_POOR_GRASSLANDS = registerSubBiome(Config.BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);;
+	public static final BCLBiome NETHER_SWAMPLAND = registerNetherBiome(Config.NETHER_SWAMPLAND);
+	public static final BCLBiome NETHER_SWAMPLAND_TERRACES = registerSubBiome(Config.NETHER_SWAMPLAND_TERRACES, NETHER_SWAMPLAND, 1F);
+	public static final BCLBiome MAGMA_LAND = registerNetherBiome(Config.MAGMA_LAND);
+	public static final BCLBiome SOUL_PLAIN = registerSubBiome(Config.SOUL_PLAIN, BIOME_WART_FOREST, 1F);
+	public static final BCLBiome CRIMSON_GLOWING_WOODS = registerSubBiome(Config.CRIMSON_GLOWING_WOODS, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
+	public static final BCLBiome OLD_WARPED_WOODS = registerSubBiome(Config.OLD_WARPED_WOODS, BiomeAPI.WARPED_FOREST_BIOME, 1F);
+	public static final BCLBiome CRIMSON_PINEWOOD = registerSubBiome(Config.CRIMSON_PINEWOOD, BiomeAPI.CRIMSON_FOREST_BIOME, 0.3F);
+	public static final BCLBiome OLD_FUNGIWOODS = registerSubBiome(Config.OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
+	public static final BCLBiome FLOODED_DELTAS = registerSubBiome(Config.FLOODED_DELTAS, BiomeAPI.BASALT_DELTAS_BIOME, 1F);
+	public static final BCLBiome UPSIDE_DOWN_FOREST = registerNetherBiome(Config.UPSIDE_DOWN_FOREST);
+	public static final BCLBiome OLD_SWAMPLAND = registerSubBiome(Config.OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
 
 	public static void register() {
 		BuiltinRegistries.BIOME.forEach((biome) -> {

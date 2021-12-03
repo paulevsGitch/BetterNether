@@ -35,7 +35,9 @@ public class NetherSoulPlain extends NetherBiome {
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				   .particles(ParticleTypes.PORTAL, 0.02F);
+				   .particles(ParticleTypes.PORTAL, 0.02F)
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE())
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
 		}
 		
 		@Override

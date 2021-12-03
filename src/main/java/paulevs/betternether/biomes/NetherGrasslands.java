@@ -38,7 +38,8 @@ public class NetherGrasslands extends NetherBiome {
 			builder.fogColor(113, 73, 133)
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
-				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD);
+				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
 		}
 		
 		@Override

@@ -40,7 +40,8 @@ public class CrimsonGlowingWoods extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
 				   .spawn(EntityType.HOGLIN, 9, 1, 2)
-				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4);
+				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());
 		}
 		
 		@Override

@@ -40,7 +40,8 @@ public class NetherMushroomForest extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				   .particles(ParticleTypes.MYCELIUM, 0.1F);
+				   .particles(ParticleTypes.MYCELIUM, 0.1F)
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
 		}
 		
 		@Override

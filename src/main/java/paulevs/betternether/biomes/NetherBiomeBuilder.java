@@ -13,6 +13,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import paulevs.betternether.interfaces.IStructureFeatures;
 import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
@@ -20,19 +21,17 @@ import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherBiomeBuilder {
 	private static Biome BASE_BIOME;
+	static final IStructureFeatures VANILLA_STRUCTURES = (IStructureFeatures)(Object)new StructureFeatures();
 	
 	private static void addDefaultStructures(BCLBiomeBuilder builder) {
-		//		IStructureFeatures sf = (IStructureFeatures)(Object)structureFeatures;
-		//		addStructureFeature(sf.getRUINED_PORTAL_NETHER());
-		//		addStructureFeature(sf.getNETHER_BRIDGE());
-		//		addStructureFeature(sf.getBASTION_REMNANT());
-		
 		builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
-		builder.feature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA);
+		builder.structure(VANILLA_STRUCTURES.getNETHER_BRIDGE());
+		builder.structure(VANILLA_STRUCTURES.getRUINED_PORTAL_NETHER());
 	}
 	
 	private static void addDefaultFeatures(BCLBiomeBuilder builder) {
 		builder
+			.feature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA)
 			.defaultMushrooms()
 			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_OPEN)
 			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.PATCH_FIRE)

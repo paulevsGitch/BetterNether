@@ -47,7 +47,8 @@ public class NetherJungle extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   //TODO: 1.18 Surface Blocks
 				   //.surface(NetherBlocks.JUNGLE_GRASS)
-				   .spawn(NetherEntities.JUNGLE_SKELETON, 40, 2, 4);
+				   .spawn(NetherEntities.JUNGLE_SKELETON, 40, 2, 4)
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
 		}
 		
 		@Override
