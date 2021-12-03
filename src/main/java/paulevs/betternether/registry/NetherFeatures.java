@@ -2,6 +2,7 @@ package paulevs.betternether.registry;
 
 import com.google.common.collect.Lists;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -110,20 +111,20 @@ public class NetherFeatures {
 		return builder;
 	}
 	
-	public static void modifyNonBNBiome(Biome biome) {
+	public static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
 		if (NetherFeatures.HAS_CAVES){
-			BiomeAPI.addBiomeFeature(biome, CAVES_FEATURE);
+			BiomeAPI.addBiomeFeature(biomeID, CAVES_FEATURE);
 		}
 		if (NetherFeatures.HAS_PATHS){
-			BiomeAPI.addBiomeFeature(biome, PATHS_FEATURE);
+			BiomeAPI.addBiomeFeature(biomeID, PATHS_FEATURE);
 		}
 		
-		BiomeAPI.addBiomeFeature(biome, POPULATOR_FEATURE);
+		BiomeAPI.addBiomeFeature(biomeID, POPULATOR_FEATURE);
 		
-		BiomeAPI.addBiomeFeature(biome, CINCINNASITE_ORE);
-		BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE);
-		BiomeAPI.addBiomeFeature(biome, NETHER_LAPIS_ORE);
-		BiomeAPI.addBiomeFeature(biome, NETHER_REDSTONE_ORE);
+		BiomeAPI.addBiomeFeature(biomeID, CINCINNASITE_ORE);
+		BiomeAPI.addBiomeFeature(biomeID, NETHER_RUBY_ORE);
+		BiomeAPI.addBiomeFeature(biomeID, NETHER_LAPIS_ORE);
+		BiomeAPI.addBiomeFeature(biomeID, NETHER_REDSTONE_ORE);
 	}
 	
 	public static void register() {

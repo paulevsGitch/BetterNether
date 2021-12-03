@@ -231,9 +231,9 @@ public class NetherEntities {
 		return NETHER_ENTITIES.contains(entity.getType());
 	}
 	
-	static void modifyNonBNBiome(Biome biome) {
-		BiomeAPI.addBiomeMobSpawn(biome, FIREFLY, 5, 3, 6);
-		BiomeAPI.addBiomeMobSpawn(biome, HYDROGEN_JELLYFISH, 5, 2, 5);
-		BiomeAPI.addBiomeMobSpawn(biome, NAGA, 8, 3, 5);
+	static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
+		BiomeAPI.addBiomeMobSpawn(biomeID, FIREFLY, 5, 3, 6);
+		BiomeAPI.addBiomeMobSpawn(biomeID, HYDROGEN_JELLYFISH, 5, 2, 5);
+		BiomeAPI.addBiomeMobSpawn(biomeID, NAGA, 8, 3, 5);
 	}
 }
