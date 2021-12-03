@@ -87,26 +87,26 @@ public class NetherFeatures {
 	}
 	
 	public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {
-		if (NetherFeatures.HAS_CLEANING_PASS) {
-			builder.feature(CLEANUP_FEATURE);
-		}
+		
+		builder.feature(CINCINNASITE_ORE);
 		if (NetherFeatures.HAS_CAVES){
 			builder.feature(CAVES_FEATURE);
 		}
+		if (NetherFeatures.HAS_CLEANING_PASS) {
+			builder.feature(CLEANUP_FEATURE);
+		}
+		if (NetherFeatures.HAS_FIXING_PASS){
+			builder.feature(FIX_FEATURE);
+		}
+		builder.feature(NETHER_LAPIS_ORE);
 		if (NetherFeatures.HAS_PATHS){
 			builder.feature(PATHS_FEATURE);
 		}
 		
-		builder
-			.feature(POPULATOR_FEATURE)
-			.feature(CINCINNASITE_ORE)
-			.feature(NETHER_RUBY_ORE)
-			.feature(NETHER_LAPIS_ORE)
-			.feature(NETHER_REDSTONE_ORE);
+		builder.feature(POPULATOR_FEATURE);
+		builder.feature(NETHER_REDSTONE_ORE);
+	    builder.feature(NETHER_RUBY_ORE);
 		
-		if (NetherFeatures.HAS_FIXING_PASS){
-			builder.feature(FIX_FEATURE);
-		}
 		
 		return builder;
 	}
