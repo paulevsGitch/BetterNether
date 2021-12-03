@@ -12,6 +12,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.Biome.Precipitation;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import paulevs.betternether.interfaces.IStructureFeatures;
 import paulevs.betternether.registry.NetherEntities;
@@ -63,8 +64,7 @@ public class NetherBiomeBuilder {
 		BCLBiomeBuilder builder = BCLBiomeBuilder
 			.start(ID)
 			.category(BiomeCategory.NETHER)
-			//TODO: 1.18 surface changes
-			//.surface(Blocks.NETHERRACK);
+			.surface(Blocks.NETHERRACK)
 			.temperature(BASE_BIOME.getBaseTemperature())
 			.wetness(BASE_BIOME.getDownfall())
 			.precipitation(Precipitation.NONE)

@@ -87,44 +87,34 @@ public class NetherFeatures {
 	}
 	
 	public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {
+		if (NetherFeatures.HAS_CLEANING_PASS) builder.feature(CLEANUP_FEATURE);
+		if (NetherFeatures.HAS_CAVES) builder.feature(CAVES_FEATURE);
+		if (NetherFeatures.HAS_PATHS) builder.feature(PATHS_FEATURE);
+		if (NetherFeatures.HAS_FIXING_PASS) builder.feature(FIX_FEATURE);
 		
-		builder.feature(CINCINNASITE_ORE);
-		if (NetherFeatures.HAS_CAVES){
-			builder.feature(CAVES_FEATURE);
-		}
-		if (NetherFeatures.HAS_CLEANING_PASS) {
-			builder.feature(CLEANUP_FEATURE);
-		}
-		if (NetherFeatures.HAS_FIXING_PASS){
-			builder.feature(FIX_FEATURE);
-		}
-		builder.feature(NETHER_LAPIS_ORE);
-		if (NetherFeatures.HAS_PATHS){
-			builder.feature(PATHS_FEATURE);
-		}
-		
-		builder.feature(POPULATOR_FEATURE);
-		builder.feature(NETHER_REDSTONE_ORE);
-	    builder.feature(NETHER_RUBY_ORE);
-		
+		builder.feature(POPULATOR_FEATURE)
+			   .feature(CINCINNASITE_ORE)
+			   .feature(NETHER_RUBY_ORE)
+			   .feature(NETHER_LAPIS_ORE)
+			   .feature(NETHER_REDSTONE_ORE);
 		
 		return builder;
 	}
 	
 	public static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
 		if (NetherFeatures.HAS_CAVES){
-			BiomeAPI.addBiomeFeature(biomeID, CAVES_FEATURE);
+			BiomeAPI.addBiomeFeature(biome, CAVES_FEATURE);
 		}
 		if (NetherFeatures.HAS_PATHS){
-			BiomeAPI.addBiomeFeature(biomeID, PATHS_FEATURE);
+			BiomeAPI.addBiomeFeature(biome, PATHS_FEATURE);
 		}
 		
-		BiomeAPI.addBiomeFeature(biomeID, POPULATOR_FEATURE);
+		BiomeAPI.addBiomeFeature(biome, POPULATOR_FEATURE);
 		
-		BiomeAPI.addBiomeFeature(biomeID, CINCINNASITE_ORE);
-		BiomeAPI.addBiomeFeature(biomeID, NETHER_RUBY_ORE);
-		BiomeAPI.addBiomeFeature(biomeID, NETHER_LAPIS_ORE);
-		BiomeAPI.addBiomeFeature(biomeID, NETHER_REDSTONE_ORE);
+		BiomeAPI.addBiomeFeature(biome, CINCINNASITE_ORE);
+		BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE);
+		BiomeAPI.addBiomeFeature(biome, NETHER_LAPIS_ORE);
+		BiomeAPI.addBiomeFeature(biome, NETHER_REDSTONE_ORE);
 	}
 	
 	public static void register() {

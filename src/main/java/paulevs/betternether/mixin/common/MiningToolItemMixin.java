@@ -7,7 +7,9 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -16,6 +18,8 @@ import ru.bclib.api.TagAPI;
 
 @Mixin(DiggerItem.class)
 public abstract class MiningToolItemMixin extends TieredItem implements Vanishable {
+	@Shadow @Final private Tag<Block> blocks;
+	
 	protected MiningToolItemMixin(float attackDamage, float attackSpeed, Tier material, Tag<Block> effectiveBlocks, Properties settings) {
 		super(material, settings);
 	}
@@ -23,16 +27,8 @@ public abstract class MiningToolItemMixin extends TieredItem implements Vanishab
 	@Inject(method = "isCorrectToolForDrops", at = @At(value = "HEAD"), cancellable = true)
 	private void effectiveOn(BlockState state, CallbackInfoReturnable<Boolean> info) {
 		int level = this.getTier().getLevel();
-		if (state.getBlock() == NetherBlocks.CINCINNASITE_ORE) {
-			info.setReturnValue(level >= 1);
-			info.cancel();
-		}
-		else if (state.getBlock() == NetherBlocks.NETHER_RUBY_ORE) {
-			info.setReturnValue(level >= 2);
-			info.cancel();
-		}
-		else if (state.is(TagAPI.BLOCK_NETHER_PORTAL_FRAME)) {
-			info.setReturnValue(level >= 3);
+		if (state.is(TagAPI.BLOCK_NETHER_PORTAL_FRAME)) {
+			info.setReturnValue(level >= 3 && state.is(this.blocks));
 			info.cancel();
 		}
 	}

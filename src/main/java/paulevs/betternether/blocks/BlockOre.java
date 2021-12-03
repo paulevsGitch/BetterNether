@@ -9,18 +9,20 @@ import ru.bclib.blocks.BaseOreBlock;
 
 public class BlockOre extends BaseOreBlock {
 	
-	public BlockOre(Item drop, int minCount, int maxCount, int experience) {
+	public BlockOre(Item drop, int minCount, int maxCount, int experience, int miningLevel) {
 		super(
 			drop,
 			minCount,
 			maxCount,
 			experience,
+			miningLevel,
 			
 			FabricBlockSettings.of(Material.STONE, MaterialColor.COLOR_RED)
 				.hardness(3F)
 				.resistance(5F)
 				.requiresTool()
-				.sounds(SoundType.NETHERRACK));
+				
+							   .sounds(SoundType.NETHERRACK));
 	}
 
 }
