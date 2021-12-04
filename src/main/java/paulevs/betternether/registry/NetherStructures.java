@@ -23,7 +23,7 @@ public class NetherStructures {
 	public static final BCLStructureFeature CITY_STRUCTURE = new BCLStructureFeature(
 		new ResourceLocation(BetterNether.MOD_ID, "nether_city"),
 		new CityFeature(),
-		Decoration.RAW_GENERATION,
+		Decoration.STRONGHOLDS,
 		CITY_SPACING,
 		CITY_SPACING>>1
 	);

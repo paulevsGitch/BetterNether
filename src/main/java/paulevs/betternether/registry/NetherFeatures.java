@@ -38,40 +38,40 @@ public class NetherFeatures {
 			10, 8,
 			PlacementUtils.RANGE_10_10,
 			false);
-	
+
 	public static final BCLFeature NETHER_RUBY_ORE =
 		registerOre("nether_ruby", NetherBlocks.NETHER_RUBY_ORE,
 			5, 8,
 			HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(10), VerticalAnchor.belowTop(32)),
 			false);
-	
+
 	public static final BCLFeature NETHER_RUBY_ORE_TOP =
 		registerOre("nether_ruby_top", NetherBlocks.NETHER_RUBY_ORE,
 			3, 6,
 			HeightRangePlacement.triangle(VerticalAnchor.belowTop(30), VerticalAnchor.top()),
 			true);
-	
+
 	public static final BCLFeature NETHER_LAPIS_ORE =
 		registerOre("nether_lapis", NetherBlocks.NETHER_LAPIS_ORE,
 			18, 4,
 			HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(10)),
 			false);
-	
+
 	public static final BCLFeature NETHER_REDSTONE_ORE =
 		registerOre("nether_redstone", NetherBlocks.NETHER_REDSTONE_ORE,
 			1, 16,
 			HeightRangePlacement.triangle(VerticalAnchor.absolute(8), VerticalAnchor.absolute(32)),
 			false);
-	
+
 	// Maintainance //
-	public static final BCLFeature CLEANUP_FEATURE =registerChunkFeature("nether_clean", Decoration.RAW_GENERATION, CleanupFeature::new);
-	public static final BCLFeature FIX_FEATURE =registerChunkFeature("nether_fix", Decoration.TOP_LAYER_MODIFICATION, BlockFixFeature::new);
-	
+	public static final BCLFeature CLEANUP_FEATURE = registerChunkFeature("nether_clean", Decoration.RAW_GENERATION, CleanupFeature::new);
+	public static final BCLFeature FIX_FEATURE = registerChunkFeature("nether_fix", Decoration.TOP_LAYER_MODIFICATION, BlockFixFeature::new);
+
 	// Terrain //
-	public static final BCLFeature CAVES_FEATURE =registerChunkFeature("nether_caves", Decoration.UNDERGROUND_STRUCTURES, CavesFeature::new);
-	public static final BCLFeature PATHS_FEATURE =registerChunkFeature("nether_paths", Decoration.SURFACE_STRUCTURES, PathsFeature::new);
-	public static final BCLFeature POPULATOR_FEATURE =registerChunkFeature("nether_populator", Decoration.SURFACE_STRUCTURES, NetherChunkPopulatorFeature::new);
-	
+	public static final BCLFeature CAVES_FEATURE = registerChunkFeature("nether_caves", Decoration.UNDERGROUND_STRUCTURES, CavesFeature::new);
+	public static final BCLFeature PATHS_FEATURE = registerChunkFeature("nether_paths", Decoration.SURFACE_STRUCTURES, PathsFeature::new);
+	public static final BCLFeature POPULATOR_FEATURE = registerChunkFeature("nether_populator", Decoration.SURFACE_STRUCTURES, NetherChunkPopulatorFeature::new);
+
 	// Cached Config data //
 	public static final boolean HAS_CLEANING_PASS = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);
 	public static final boolean HAS_CAVES = Configs.GENERATOR.getBoolean("generator.world.environment", "generate_caves", true);
@@ -125,7 +125,7 @@ public class NetherFeatures {
 		if (NetherFeatures.HAS_CAVES) builder.feature(CAVES_FEATURE);
 		if (NetherFeatures.HAS_PATHS) builder.feature(PATHS_FEATURE);
 		if (NetherFeatures.HAS_FIXING_PASS) builder.feature(FIX_FEATURE);
-		
+
 		builder.feature(POPULATOR_FEATURE)
 			   .feature(CINCINNASITE_ORE)
 			   .feature(NETHER_RUBY_ORE)
@@ -143,9 +143,9 @@ public class NetherFeatures {
 		if (NetherFeatures.HAS_PATHS){
 			BiomeAPI.addBiomeFeature(biome, PATHS_FEATURE);
 		}
-		
+
 		BiomeAPI.addBiomeFeature(biome, POPULATOR_FEATURE);
-		
+
 		BiomeAPI.addBiomeFeature(biome, CINCINNASITE_ORE);
 		BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE_TOP);
 		BiomeAPI.addBiomeFeature(biome, NETHER_LAPIS_ORE);
