@@ -19,28 +19,20 @@ import org.spongepowered.asm.mixin.Overwrite;
 public class ChunkSerializerMixin {
 	@Overwrite
 	private static CompoundTag packStructureData(StructurePieceSerializationContext structurePieceSerializationContext, ChunkPos pos, Map<StructureFeature<?>, StructureStart<?>> structureStarts, Map<StructureFeature<?>, LongSet> structureReferences) {
-		CompoundTag tagResult = new CompoundTag();
-		CompoundTag tagStarts = new CompoundTag();
-		Iterator<Entry<StructureFeature<?>, StructureStart<?>>> startsIterator = structureStarts.entrySet().iterator();
-
-		while (startsIterator.hasNext()) {
-			Entry<StructureFeature<?>, StructureStart<?>> start = startsIterator.next();
-			tagStarts.put((start.getKey()).getFeatureName(), (start.getValue()).createTag(structurePieceSerializationContext, pos));
-		}
-
-		tagResult.put("Starts", tagStarts);
-		CompoundTag tagReferences = new CompoundTag();
-		Iterator<Entry<StructureFeature<?>, LongSet>> refIterator = structureReferences.entrySet().iterator();
-
-		while (refIterator.hasNext()) {
-			Entry<StructureFeature<?>, LongSet> feature = refIterator.next();
-			// Structures sometimes can be null
+        CompoundTag tagResult = new CompoundTag();
+        CompoundTag tagStarts = new CompoundTag();
+        for (Entry<StructureFeature<?>, StructureStart<?>> start : structureStarts.entrySet()) {
+            tagStarts.put(start.getKey().getFeatureName(), start.getValue().createTag(structurePieceSerializationContext, pos));
+        }
+        tagResult.put("starts", tagStarts);
+        CompoundTag tagReferences = new CompoundTag();
+        for (Entry<StructureFeature<?>, LongSet> feature : structureReferences.entrySet()) {
+            // Structures sometimes can be null
 			if (feature.getKey() != null) {
-				tagReferences.put((feature.getKey()).getFeatureName(), new LongArrayTag(feature.getValue()));
-			}
-		}
-
-		tagResult.put("References", tagReferences);
-		return tagResult;
+                tagReferences.put(feature.getKey().getFeatureName(), new LongArrayTag(feature.getValue()));
+            }
+        }
+        tagResult.put("References", tagReferences);
+        return tagResult;
 	}
 }
