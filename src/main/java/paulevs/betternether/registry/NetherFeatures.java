@@ -21,11 +21,9 @@ import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.LifeCycleAPI;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
-import ru.bclib.world.biomes.BCLBiomeDef;
 import ru.bclib.world.features.BCLFeature;
 import ru.bclib.world.features.DefaultFeature;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
