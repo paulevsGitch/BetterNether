@@ -8,6 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherEntities;
@@ -34,6 +36,7 @@ import paulevs.betternether.structures.plants.StructureWallRedMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class NetherJungle extends NetherBiome {
+	private static final SurfaceRules.RuleSource JUNGLE_GRASS = SurfaceRules.state(NetherBlocks.JUNGLE_GRASS.defaultBlockState());
 	public static class Config extends NetherBiomeConfig {
 		public Config(String name) {
 			super(name);
@@ -96,6 +99,6 @@ public class NetherJungle extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.JUNGLE_GRASS.defaultBlockState());
+		//BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.JUNGLE_GRASS.defaultBlockState());
 	}
 }
