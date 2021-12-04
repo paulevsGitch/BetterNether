@@ -81,6 +81,6 @@ public class CavePiece extends CustomPiece {
 		final int maxY = Math.min(96, center.getY() + radius);
 		final int z1 = center.getZ() - radius;
 		final int z2 = center.getZ() + radius;
-		return new BoundingBox(x1-12, minY, z1-12, x2+12, maxY, z2+12);
+		return new BoundingBox(x1, minY, z1, x2, maxY, z2);
 	}
 }
