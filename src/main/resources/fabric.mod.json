@@ -44,7 +44,7 @@
 		"fabricloader": ">=0.12.6",
 		"fabric": ">=0.43.0",
 		"minecraft": ">=1.18",
-        "bclib": ">=1.0.0"
+        "bclib": ">=1.0.1"
 	},
 	
 	"custom": {
