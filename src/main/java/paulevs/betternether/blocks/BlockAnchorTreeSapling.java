@@ -12,6 +12,8 @@ import paulevs.betternether.structures.plants.StructureAnchorTreeBranch;
 import ru.bclib.blocks.FeatureHangingSaplingBlock;
 import ru.bclib.world.features.DefaultFeature;
 
+import java.util.function.Function;
+
 class AnchorTreeFeature extends DefaultFeature {
 	private static final StructureAnchorTreeBranch STRUCTURE = new StructureAnchorTreeBranch();
 	
@@ -25,13 +27,12 @@ class AnchorTreeFeature extends DefaultFeature {
 public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implements BonemealableBlock {
 	private static final DefaultFeature FEATURE = new AnchorTreeFeature();
 	
-	@Override
-	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-		return BlocksHelper.isNetherrack(blockState);
+	public BlockAnchorTreeSapling() {
+		super((state)->FEATURE);
 	}
 	
 	@Override
-	protected Feature<?> getFeature(BlockState state) {
-		return FEATURE;
+	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+		return BlocksHelper.isNetherrack(blockState);
 	}
 }

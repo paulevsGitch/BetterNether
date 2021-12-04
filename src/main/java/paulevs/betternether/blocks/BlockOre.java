@@ -1,28 +1,42 @@
 package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.tags.Tag.Named;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import paulevs.betternether.registry.NetherItems;
+import ru.bclib.api.TagAPI;
 import ru.bclib.blocks.BaseOreBlock;
+import ru.bclib.interfaces.TagProvider;
 
-public class BlockOre extends BaseOreBlock {
+import java.util.List;
+
+public class BlockOre extends BaseOreBlock implements TagProvider {
 	
 	public BlockOre(Item drop, int minCount, int maxCount, int experience, int miningLevel) {
 		super(
-			drop,
+			FabricBlockSettings.of(Material.STONE, MaterialColor.COLOR_RED)
+							   .hardness(3F)
+							   .resistance(5F)
+							   .requiresTool()
+							   .sounds(SoundType.NETHERRACK),
+			()->drop,
 			minCount,
 			maxCount,
 			experience,
-			miningLevel,
-			
-			FabricBlockSettings.of(Material.STONE, MaterialColor.COLOR_RED)
-				.hardness(3F)
-				.resistance(5F)
-				.requiresTool()
-				
-							   .sounds(SoundType.NETHERRACK));
+			miningLevel
+		);
 	}
-
+	
+	private static Item dropper(){
+		return NetherItems.AGAVE_LEAF;
+	}
+	
+	@Override
+	public void addTags(List<Named<Block>> blockTags, List<Named<Item>> itemTags) {
+		blockTags.add(TagAPI.MINEABLE_PICKAXE);
+	}
 }

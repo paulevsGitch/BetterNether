@@ -12,6 +12,8 @@ import paulevs.betternether.structures.plants.StructureNetherSakura;
 import ru.bclib.blocks.FeatureHangingSaplingBlock;
 import ru.bclib.world.features.DefaultFeature;
 
+import java.util.function.Function;
+
 class NetherSakuraFeature extends DefaultFeature {
 	private static final StructureNetherSakura STRUCTURE = new StructureNetherSakura();
 	
@@ -25,13 +27,17 @@ class NetherSakuraFeature extends DefaultFeature {
 public class BlockNetherSakuraSapling extends FeatureHangingSaplingBlock implements BonemealableBlock {
 	private static final DefaultFeature FEATURE = new NetherSakuraFeature();
 	
+	public BlockNetherSakuraSapling() {
+		super((state)->FEATURE);
+	}
+	
 	@Override
 	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
 		return BlocksHelper.isNetherrack(blockState);
 	}
-	
-	@Override
-	protected Feature<?> getFeature() {
-		return FEATURE;
-	}
+//
+//	@Override
+//	protected Feature<?> getFeature() {
+//		return FEATURE;
+//	}
 }

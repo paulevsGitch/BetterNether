@@ -51,7 +51,7 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
 	public static final BooleanProperty TOP = BooleanProperty.create("top");
 
 	public BlockStalagnateSeed() {
-		super();
+		super((state)->growsDownward(state) ? FEATURE_DOWN : FEATURE_UP);
 		this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
 	}
 
@@ -76,7 +76,7 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
 		return growsDownward(state) ? SHAPE_TOP : SHAPE_BOTTOM;
 	}
 	
-	private boolean growsDownward(BlockState state) {
+	private static boolean growsDownward(BlockState state) {
 		return state.getValue(TOP)
 					.booleanValue();
 	}

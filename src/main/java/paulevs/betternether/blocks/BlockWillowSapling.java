@@ -1,6 +1,7 @@
 package paulevs.betternether.blocks;
 
 import java.util.Random;
+import java.util.function.Function;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -28,6 +29,10 @@ class WillowTreeFeature extends DefaultFeature {
 public class BlockWillowSapling extends FeatureSaplingBlock implements BonemealableBlock {
 	private static final DefaultFeature FEATURE = new WillowTreeFeature();
 	
+	public BlockWillowSapling() {
+		super((state)->FEATURE);
+	}
+	
 	@Override
 	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
 		return BlocksHelper.isFertile(world.getBlockState(pos.below())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
@@ -37,9 +42,9 @@ public class BlockWillowSapling extends FeatureSaplingBlock implements Bonemeala
 	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
 		return BlocksHelper.isNetherGround(blockState);
 	}
-	
-	@Override
-	protected Feature<?> getFeature() {
-		return FEATURE;
-	}
+//
+//	@Override
+//	protected Feature<?> getFeature() {
+//		return FEATURE;
+//	}
 }

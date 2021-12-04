@@ -1,6 +1,7 @@
 package paulevs.betternether.blocks;
 
 import java.util.Random;
+import java.util.function.Function;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -29,6 +30,10 @@ class MushroomFirTreeFeature extends DefaultFeature {
 public class BlockMushroomFirSapling extends FeatureSaplingBlock implements BonemealableBlock {
 	private static final DefaultFeature FEATURE = new MushroomFirTreeFeature();
 	
+	public BlockMushroomFirSapling() {
+		super((state)->FEATURE);
+	}
+	
 	@Override
 	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
 		return BlocksHelper.isNetherMycelium(blockState);
@@ -38,9 +43,9 @@ public class BlockMushroomFirSapling extends FeatureSaplingBlock implements Bone
 	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
 		return BlocksHelper.isFertile(world.getBlockState(pos.below())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
 	}
-	
-	@Override
-	protected Feature<?> getFeature() {
-		return FEATURE;
-	}
+//
+//	@Override
+//	protected Feature<?> getFeature() {
+//		return FEATURE;
+//	}
 }
