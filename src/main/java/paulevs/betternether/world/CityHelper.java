@@ -52,12 +52,8 @@ public class CityHelper {
 			POS.setX(x << 4);
 			for (int z = z1; z <= z2; z += 8) {
 				POS.setZ(z << 4);
-				//TODO: 1.18 isValidStart does no longer exists...
-				//if (world.getBiome(POS).getGenerationSettings().isValidStart(BNWorldGenerator.CITY))
-				{
-					ChunkPos chunk = NetherStructures.CITY_STRUCTURE.getStructure().getPotentialFeatureChunk(config, worldSeed, x, z);
-					POSITIONS.add(chunk);
-				}
+				ChunkPos chunk = NetherStructures.CITY_STRUCTURE.getStructure().getPotentialFeatureChunk(config, worldSeed, x, z);
+				POSITIONS.add(chunk);
 			}
 		}
 	}
