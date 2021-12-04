@@ -2,6 +2,7 @@ package paulevs.betternether.biomes;
 
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.StructureFeatures;
+import net.minecraft.data.worldgen.SurfaceRuleData;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
@@ -14,14 +15,22 @@ import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.interfaces.IStructureFeatures;
 import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.SurfaceRuleBuilder;
 
 public class NetherBiomeBuilder {
 	private static Biome BASE_BIOME;
+	private static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
+	private static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM = new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_floor"), VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5));
+	private static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP = new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_roof"), VerticalAnchor.belowTop(5), VerticalAnchor.top());
+
 	static final IStructureFeatures VANILLA_STRUCTURES = (IStructureFeatures)(Object)new StructureFeatures();
 	
 	private static void addDefaultStructures(BCLBiomeBuilder builder) {
@@ -64,7 +73,8 @@ public class NetherBiomeBuilder {
 		BCLBiomeBuilder builder = BCLBiomeBuilder
 			.start(ID)
 			.category(BiomeCategory.NETHER)
-			.surface(Blocks.NETHERRACK)
+			.surface(SurfaceRules.ifTrue(BEDROCK_BOTTOM, BEDROCK))
+			.surface(SurfaceRules.ifTrue(SurfaceRules.not(BEDROCK_TOP), BEDROCK))
 			.temperature(BASE_BIOME.getBaseTemperature())
 			.wetness(BASE_BIOME.getDownfall())
 			.precipitation(Precipitation.NONE)
