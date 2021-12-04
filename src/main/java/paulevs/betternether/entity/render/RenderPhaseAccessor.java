@@ -21,6 +21,7 @@ public abstract class RenderPhaseAccessor extends RenderStateShard { //extends S
 	protected static final RenderStateShard.TransparencyStateShard ALPHA_ADD_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("alpha_transparency", () -> {
 		RenderSystem.enableBlend();
 		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+		RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 	}, () -> {
 		RenderSystem.disableBlend();
 		RenderSystem.defaultBlendFunc();
