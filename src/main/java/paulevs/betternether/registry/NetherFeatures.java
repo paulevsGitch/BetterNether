@@ -2,14 +2,18 @@ package paulevs.betternether.registry;
 
 import com.google.common.collect.Lists;
 import net.minecraft.core.Registry;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
+import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.world.features.BlockFixFeature;
@@ -29,10 +33,35 @@ import java.util.function.Supplier;
 
 public class NetherFeatures {
 	// Ores //
-	public static final BCLFeature CINCINNASITE_ORE = registerOre("cincinnasite", NetherBlocks.CINCINNASITE_ORE, 9, 8, 5, 128);
-	public static final BCLFeature NETHER_RUBY_ORE = registerOre("nether_ruby", NetherBlocks.NETHER_RUBY_ORE, 5, 3, 5, 64);
-	public static final BCLFeature NETHER_LAPIS_ORE = registerOre("nether_lapis", NetherBlocks.NETHER_LAPIS_ORE, 18, 4, 32, 128);
-	public static final BCLFeature NETHER_REDSTONE_ORE = registerOre("nether_redstone", NetherBlocks.NETHER_REDSTONE_ORE, 2, 16, 32, 80);
+	public static final BCLFeature CINCINNASITE_ORE =
+		registerOre("cincinnasite", NetherBlocks.CINCINNASITE_ORE,
+			10, 8,
+			PlacementUtils.RANGE_10_10,
+			false);
+	
+	public static final BCLFeature NETHER_RUBY_ORE =
+		registerOre("nether_ruby", NetherBlocks.NETHER_RUBY_ORE,
+			5, 8,
+			HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(10), VerticalAnchor.belowTop(32)),
+			false);
+	
+	public static final BCLFeature NETHER_RUBY_ORE_TOP =
+		registerOre("nether_ruby_top", NetherBlocks.NETHER_RUBY_ORE,
+			3, 6,
+			HeightRangePlacement.triangle(VerticalAnchor.belowTop(30), VerticalAnchor.top()),
+			true);
+	
+	public static final BCLFeature NETHER_LAPIS_ORE =
+		registerOre("nether_lapis", NetherBlocks.NETHER_LAPIS_ORE,
+			18, 4,
+			HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(10)),
+			false);
+	
+	public static final BCLFeature NETHER_REDSTONE_ORE =
+		registerOre("nether_redstone", NetherBlocks.NETHER_REDSTONE_ORE,
+			1, 16,
+			HeightRangePlacement.triangle(VerticalAnchor.absolute(8), VerticalAnchor.absolute(32)),
+			false);
 	
 	// Maintainance //
 	public static final BCLFeature CLEANUP_FEATURE =registerChunkFeature("nether_clean", Decoration.RAW_GENERATION, CleanupFeature::new);
@@ -57,19 +86,26 @@ public class NetherFeatures {
 		);
 	}
 	
-	private static BCLFeature registerOre(String name, Block blockOre, int veins, int veinSize, int minY, int maxY){
+	private static BCLFeature registerOre(String name, Block blockOre, int veins, int veinSize, PlacementModifier placement, boolean rare){
 		return _registerOre(
 			name+"_ore",
 			blockOre,
 			Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_count", veins),
 			Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_size", veinSize),
-			Configs.GENERATOR.getInt("generator.world.ores." + name, "minY", minY),
-			Configs.GENERATOR.getInt("generator.world.ores." + name, "maxY", maxY)
+			placement,
+			rare
 		);
 	}
 	
-	private static BCLFeature _registerOre(String name, Block blockOre, int veins, int veinSize,  int minY, int maxY) {
-		return BCLFeature.makeOreFeature(BetterNether.makeID(name), blockOre, Blocks.NETHERRACK, veins, veinSize, minY, maxY);
+	private static BCLFeature _registerOre(String name, Block blockOre, int veins, int veinSize, PlacementModifier placementModifier, boolean rare) {
+		return BCLFeature.makeOreFeature(
+			BetterNether.makeID(name),
+			blockOre,
+			Blocks.NETHERRACK,
+			veins,
+			veinSize,
+			placementModifier,
+			rare);
 	}
 	
 	private static void addFeature(BCLFeature feature, List<List<Supplier<PlacedFeature>>> features) {
@@ -93,6 +129,7 @@ public class NetherFeatures {
 		builder.feature(POPULATOR_FEATURE)
 			   .feature(CINCINNASITE_ORE)
 			   .feature(NETHER_RUBY_ORE)
+			   .feature(NETHER_RUBY_ORE_TOP)
 			   .feature(NETHER_LAPIS_ORE)
 			   .feature(NETHER_REDSTONE_ORE);
 		
@@ -110,7 +147,7 @@ public class NetherFeatures {
 		BiomeAPI.addBiomeFeature(biome, POPULATOR_FEATURE);
 		
 		BiomeAPI.addBiomeFeature(biome, CINCINNASITE_ORE);
-		BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE);
+		BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE_TOP);
 		BiomeAPI.addBiomeFeature(biome, NETHER_LAPIS_ORE);
 		BiomeAPI.addBiomeFeature(biome, NETHER_REDSTONE_ORE);
 	}

@@ -73,10 +73,10 @@ public class NetherBiomeBuilder {
 			.skyColor(BASE_BIOME.getSkyColor())
 		
 		//BN Spawns
-			.spawn(NetherEntities.FIREFLY, 5, 3, 6)
+			.spawn(NetherEntities.FIREFLY, 5, 1, 3)
 			.spawn(NetherEntities.SKULL, 2, 2, 4)
 			.spawn(NetherEntities.NAGA, 8, 3, 5)
-			.spawn(NetherEntities.HYDROGEN_JELLYFISH, 5, 2, 5);
+			.spawn(NetherEntities.HYDROGEN_JELLYFISH, 5, 2, 6);
 		
 		if (data.hasVanillaStructures()) addDefaultStructures(builder);
 		if (data.hasVanillaFeatures()) addDefaultFeatures(builder);
