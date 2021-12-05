@@ -1,6 +1,7 @@
 package paulevs.betternether.world.structures;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.QuartPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -38,9 +39,16 @@ public class CityFeature extends NoiseAffectingStructureFeature<NoneFeatureConfi
 	public static void initGenerator() {
 		generator = new CityGenerator();
 	}
-	
+	private static final int DEFAULT_HEIGHT = 40;
 	private static <C extends FeatureConfiguration> boolean checkLocation(Context<C> context) {
-		return Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true);
+		BlockPos blockPos = context.chunkPos().getMiddleBlockPosition(DEFAULT_HEIGHT);
+
+		return
+				Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)
+				&& (
+						Configs.GENERATOR.getBoolean("generator.world.cities", "overworld", false)
+								|| context.validBiome().test(context.chunkGenerator().getNoiseBiome(QuartPos.fromBlock(blockPos.getX()), QuartPos.fromBlock(blockPos.getY()), QuartPos.fromBlock(blockPos.getZ())))
+					);
 	}
 	
 	private static void generatePieces(StructurePiecesBuilder structurePiecesBuilder, PieceGenerator.Context<NoneFeatureConfiguration> context) {
@@ -53,7 +61,7 @@ public class CityFeature extends NoiseAffectingStructureFeature<NoneFeatureConfi
 		final int pz = cPos.getBlockZ(8);
 		final int y = chunkGenerator instanceof FlatLevelSource
 			? chunkGenerator.getBaseHeight(px, pz, Types.WORLD_SURFACE, heightAccessor)
-			: 40;
+			: DEFAULT_HEIGHT;
 		final BlockPos center = new BlockPos(px, y, pz);
 
 		//CityPalette palette = Palettes.getRandom(random);
