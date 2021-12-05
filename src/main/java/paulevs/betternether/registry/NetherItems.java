@@ -181,7 +181,7 @@ public class NetherItems extends ItemRegistry {
 
 	public static Item makeEgg(String name, EntityType<? extends Mob> type, int background, int dots) {
 		if (Configs.MOBS.getBoolean("mobs", name, true)) {
-			SpawnEggItem item = new SpawnEggItem(type, background, dots, defaultSettings());
+			SpawnEggItem egg = new SpawnEggItem(type, background, dots, defaultSettings());
 			DefaultDispenseItemBehavior behavior = new DefaultDispenseItemBehavior() {
 				public ItemStack execute(BlockSource pointer, ItemStack stack) {
 					Direction direction = (Direction) pointer.getBlockState().getValue(DispenserBlock.FACING);
@@ -191,8 +191,9 @@ public class NetherItems extends ItemRegistry {
 					return stack;
 				}
 			};
-			DispenserBlock.registerBehavior(item, behavior);
-			return item;
+			DispenserBlock.registerBehavior(egg, behavior);
+			NetherItems.registerItem(name, egg);
+			return egg;
 		}
 		else {
 			return Items.AIR;

@@ -139,9 +139,10 @@ public class NetherEntities {
 													.fireImmune() //Nether Entities are by default immune to fire
 													.build();
 		if (Configs.MOBS.getBooleanRoot(id.getPath(), true)) {
+			type = Registry.register(Registry.ENTITY_TYPE, BetterNether.makeID(name), type);
 			FabricDefaultAttributeRegistry.register(type, attributes);
 			NetherItems.makeEgg("spawn_egg_" + name, type, eggColor, dotsColor);
-			return Registry.register(Registry.ENTITY_TYPE, BetterNether.makeID(name), type);
+			return type;
 		}
 		
 		NETHER_ENTITIES.add(type);
