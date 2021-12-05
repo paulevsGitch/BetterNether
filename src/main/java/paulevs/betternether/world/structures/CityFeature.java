@@ -45,10 +45,9 @@ public class CityFeature extends NoiseAffectingStructureFeature<NoneFeatureConfi
 
 		return
 				Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)
-				&& (
-						Configs.GENERATOR.getBoolean("generator.world.cities", "overworld", false)
-								|| context.validBiome().test(context.chunkGenerator().getNoiseBiome(QuartPos.fromBlock(blockPos.getX()), QuartPos.fromBlock(blockPos.getY()), QuartPos.fromBlock(blockPos.getZ())))
-					);
+				&& context.validBiome().test(
+						context.chunkGenerator().getNoiseBiome(QuartPos.fromBlock(blockPos.getX()), QuartPos.fromBlock(blockPos.getY()), QuartPos.fromBlock(blockPos.getZ()))
+				);
 	}
 	
 	private static void generatePieces(StructurePiecesBuilder structurePiecesBuilder, PieceGenerator.Context<NoneFeatureConfiguration> context) {

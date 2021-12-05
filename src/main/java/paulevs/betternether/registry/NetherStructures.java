@@ -29,7 +29,13 @@ public class NetherStructures {
 	);
 	
 	public static void register() {
-	
+		if (Configs.GENERATOR.getBoolean("generator.world.cities", "overworld", false)) {
+			BiomeAPI.registerOverworldBiomeModification((biomeID, biome) -> {
+				if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
+					modifyNonBNBiome(biomeID, biome);
+				}
+			});
+		}
 	}
 	
 	public static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
