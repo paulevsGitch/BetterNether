@@ -508,7 +508,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return block;
 	}
 	
-	private static Block registerBlockDirectly(String name, Block block) {
+	public static Block registerBlockDirectly(String name, Block block) {
 		return registerBlock(name, block, true);
 	}
 	
