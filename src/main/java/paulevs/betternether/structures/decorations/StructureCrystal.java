@@ -29,6 +29,7 @@ public class StructureCrystal implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+		final int MAX_HEIGHT = world.dimensionType().logicalHeight();
 		final int index = random.nextInt(PALETTES.length >> 1);
 		final boolean isBlue = index == 1;
 		final double a = random.nextDouble();
@@ -47,7 +48,7 @@ public class StructureCrystal implements IStructure {
 						POS.setY(pos.getY() + y);
 						POS.setZ(pos.getZ() + z);
 						
-						if (POS.getY() <= DimensionDefaults.NETHER_MIN_Y || POS.getY()>= DimensionDefaults.NETHER_GENERATION_HEIGHT) {
+						if (POS.getY() <= DimensionDefaults.NETHER_MIN_Y || POS.getY() >= MAX_HEIGHT-2) {
 							continue;
 						}
 						BlockState state;
