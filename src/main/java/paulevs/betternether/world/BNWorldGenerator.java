@@ -62,9 +62,10 @@ public class BNWorldGenerator {
 	}
 
 	public static void populate(WorldGenLevel world, int sx, int sz, Random random) {
+		final int MAX_HEIGHT = world.dimensionType().logicalHeight();
 		// Structure Generator
 		if (random.nextFloat() < structureDensity) {
-			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, 100, random), sz + random.nextInt(16));
+			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, MAX_HEIGHT-28, random), sz + random.nextInt(16));
 			StructureType type = StructureType.FLOOR;
 			boolean isAir = world.getBlockState(popPos).getMaterial().isReplaceable();
 			boolean airUp = world.getBlockState(popPos.above()).getMaterial().isReplaceable() && world.getBlockState(popPos.above(3)).getMaterial().isReplaceable();
@@ -139,7 +140,7 @@ public class BNWorldGenerator {
 			int wx = sx + x;
 			for (int z = 0; z < 16; z++) {
 				int wz = sz + z;
-				for (int y = 1; y < 126; y++) {
+				for (int y = 1; y < MAX_HEIGHT-2; y++) {
 					if (CavesFeature.isInCave(x, y, z))
 						continue;
 
