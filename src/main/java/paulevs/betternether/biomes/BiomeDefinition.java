@@ -8,7 +8,7 @@ import net.minecraft.data.worldgen.Features;
 import net.minecraft.data.worldgen.StructureFeatures;
 import net.minecraft.data.worldgen.SurfaceBuilders;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
@@ -32,6 +32,7 @@ public class BiomeDefinition extends BCLBiomeDef {
 
 	public BiomeDefinition(String name) {
 		this(new ResourceLocation(BetterNether.MOD_ID, name.replace(' ', '_').toLowerCase()));
+        this.setMusic(SoundEvents.MUSIC_BIOME_NETHER_WASTES);
 	}
 
 	public BiomeDefinition(ResourceLocation id) {
