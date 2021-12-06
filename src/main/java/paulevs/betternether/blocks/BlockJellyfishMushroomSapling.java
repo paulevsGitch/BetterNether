@@ -21,6 +21,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.structures.plants.StructureJellyfishMushroom;
 
 public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock {
@@ -28,7 +29,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
 	private static final StructureJellyfishMushroom STRUCTURE = new StructureJellyfishMushroom();
 
 	public BlockJellyfishMushroomSapling() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_CYAN)
 				.luminance(9)
 				.sounds(SoundType.CROP)

@@ -26,13 +26,14 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 1, 16);
 
 	public BlockSoulVein() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_PURPLE)
 				.sounds(SoundType.CROP)
 				.nonOpaque()

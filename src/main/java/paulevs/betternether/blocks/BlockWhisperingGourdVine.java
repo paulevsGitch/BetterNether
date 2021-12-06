@@ -40,6 +40,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock {
@@ -47,7 +48,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockWhisperingGourdVine() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_RED)
 				.breakByTool(FabricToolTags.SHEARS)
 				.sounds(SoundType.CROP)

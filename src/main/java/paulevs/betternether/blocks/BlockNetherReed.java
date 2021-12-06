@@ -20,12 +20,13 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockNetherReed extends BlockBase {
 	public static final BooleanProperty TOP = BooleanProperty.create("top");
 
 	public BlockNetherReed() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_CYAN)
 				.sounds(SoundType.CROP)
 				.noCollision()

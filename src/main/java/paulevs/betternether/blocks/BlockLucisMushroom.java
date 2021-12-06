@@ -29,6 +29,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.EnumLucisShape;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 
@@ -38,7 +39,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 	public static final EnumProperty<EnumLucisShape> SHAPE = BlockProperties.LUCIS_SHAPE;
 
 	public BlockLucisMushroom() {
-		super(FabricBlockSettings.of(Material.GRASS)
+		super(FabricBlockSettings.of(Materials.NETHER_GRASS)
 				.mapColor(MaterialColor.COLOR_YELLOW)
 				.luminance(15)
 				.breakByTool(FabricToolTags.AXES)

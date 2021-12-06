@@ -28,6 +28,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherItems;
 
 public class BlockLumabusVine extends BlockBaseNotFull {
@@ -38,7 +39,7 @@ public class BlockLumabusVine extends BlockBaseNotFull {
 	private final Block seed;
 
 	public BlockLumabusVine(Block seed) {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_CYAN)
 				.sounds(SoundType.CROP)
 				.noCollision()

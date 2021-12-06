@@ -25,13 +25,14 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.PottedPlantShape;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockPottedPlant extends BlockBaseNotFull {
 	public static final EnumProperty<PottedPlantShape> PLANT = BlockProperties.PLANT;
 
 	public BlockPottedPlant() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_BLACK)
 				.sounds(SoundType.CROP)
 				.nonOpaque()

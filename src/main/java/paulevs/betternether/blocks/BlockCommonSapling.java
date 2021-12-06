@@ -20,13 +20,14 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockCommonSapling extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 14, 12);
 	private Block plant;
 
 	public BlockCommonSapling(Block plant, MaterialColor color) {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(color)
 				.sounds(SoundType.CROP)
 				.nonOpaque()

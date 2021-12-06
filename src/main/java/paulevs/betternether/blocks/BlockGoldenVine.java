@@ -34,13 +34,14 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 16, 14);
 	public static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
 
 	public BlockGoldenVine() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_RED)
 				.luminance(15)
 				.sounds(SoundType.CROP)
