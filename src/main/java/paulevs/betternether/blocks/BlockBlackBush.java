@@ -21,12 +21,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
 
 	public BlockBlackBush() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_BLACK)
 				.sounds(SoundType.CROP)
 				.nonOpaque()

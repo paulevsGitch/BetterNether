@@ -20,6 +20,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.plants.StructureGiantMold;
 
@@ -28,7 +29,7 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Bonemeala
 	private static final StructureGiantMold STRUCTURE = new StructureGiantMold();
 
 	public BlockGiantMoldSapling() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
 				.sounds(SoundType.CROP)
 				.nonOpaque()

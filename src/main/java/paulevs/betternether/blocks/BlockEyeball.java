@@ -16,10 +16,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockEyeball extends BlockEyeBase {
 	public BlockEyeball() {
-		super(FabricBlockSettings.of(Material.WOOD)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_BROWN)
 				.sounds(SoundType.SLIME_BLOCK)
 				.hardness(0.5F)

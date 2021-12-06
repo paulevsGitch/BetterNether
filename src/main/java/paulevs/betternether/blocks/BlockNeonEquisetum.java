@@ -39,13 +39,14 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock {
 	protected static final VoxelShape SHAPE_SELECTION = Block.box(2, 0, 2, 14, 16, 14);
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockNeonEquisetum() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_GREEN)
 				.luminance(15)
 				.sounds(SoundType.CROP)

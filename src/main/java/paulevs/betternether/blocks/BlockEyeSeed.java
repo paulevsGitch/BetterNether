@@ -20,6 +20,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.structures.plants.StructureEye;
 
 public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock {
@@ -27,7 +28,7 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock 
 	private static final StructureEye STRUCTURE = new StructureEye();
 
 	public BlockEyeSeed() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(MaterialColor.COLOR_RED)
 				.sounds(SoundType.CROP)
 				.nonOpaque()

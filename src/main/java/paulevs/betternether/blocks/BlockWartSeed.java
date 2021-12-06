@@ -24,12 +24,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.structures.plants.StructureWartTree;
 
 public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock {
@@ -47,7 +47,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
 	}
 
 	public BlockWartSeed() {
-		super(FabricBlockSettings.of(Material.WOOD)
+		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(MaterialColor.TERRACOTTA_RED)
 				.sounds(SoundType.WART_BLOCK)
 				.hardness(1F)

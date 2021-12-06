@@ -16,12 +16,13 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockEyeballSmall extends BlockEyeBase {
 	protected static final VoxelShape SHAPE = Block.box(4, 8, 4, 12, 16, 12);
 
 	public BlockEyeballSmall() {
-		super(FabricBlockSettings.of(Material.WOOD)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_BROWN)
 				.sounds(SoundType.SLIME_BLOCK)
 				.hardness(0.5F)

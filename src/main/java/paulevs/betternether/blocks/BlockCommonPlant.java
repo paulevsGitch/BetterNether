@@ -20,13 +20,14 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBlock {
 	public static final IntegerProperty AGE = BlockProperties.AGE_FOUR;
 
 	public BlockCommonPlant(MaterialColor color) {
-		super(FabricBlockSettings.of(Material.PLANT)
-				.mapColor(MaterialColor.COLOR_BLACK)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
+				.mapColor(color)
 				.sounds(SoundType.CROP)
 				.nonOpaque()
 				.noCollision()

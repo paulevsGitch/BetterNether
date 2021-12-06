@@ -27,6 +27,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockBoneMushroom extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE_NORTH = Block.box(1, 1, 8, 15, 15, 16);
@@ -38,7 +39,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull {
 	public static final IntegerProperty AGE = BlockProperties.AGE_THREE;
 
 	public BlockBoneMushroom() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
 				.sounds(SoundType.CROP)
 				.nonOpaque()

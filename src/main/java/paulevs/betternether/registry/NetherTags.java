@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import paulevs.betternether.blocks.BlockTerrain;
+import paulevs.betternether.blocks.materials.Materials;
 import ru.bclib.api.BonemealAPI;
 import ru.bclib.api.TagAPI;
 import ru.bclib.api.ComposterAPI;
@@ -39,7 +40,7 @@ public class NetherTags {
 			else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
 				TagAPI.addTag(TagAPI.MINEABLE_AXE, block);
 			}
-			else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Material.WATER_PLANT)) {
+			else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || material.equals(Material.WATER_PLANT)) {
 				TagAPI.addTag(TagAPI.MINEABLE_HOE, block);
 				TagAPI.addTag(BlockTags.LEAVES, block);
 				ComposterAPI.allowCompost(0.3f, item);
@@ -66,7 +67,7 @@ public class NetherTags {
 			}*/
 
 			Material mat = block.defaultBlockState().getMaterial();
-			if (mat.equals(Material.PLANT) || mat.equals(Material.REPLACEABLE_PLANT)) {
+			if (mat.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || mat.equals(Material.REPLACEABLE_PLANT)) {
 				ComposterAPI.allowCompost(0.1f, item);
 			}
 		});

@@ -12,6 +12,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 
 public class BlockOrangeMushroom extends BlockCommonPlant {
 	private static final VoxelShape[] SHAPES = new VoxelShape[] {
@@ -22,7 +23,7 @@ public class BlockOrangeMushroom extends BlockCommonPlant {
 	};
 
 	public BlockOrangeMushroom() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_ORANGE)
 				.sounds(SoundType.CROP)
 				.nonOpaque()

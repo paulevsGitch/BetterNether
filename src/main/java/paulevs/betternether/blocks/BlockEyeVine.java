@@ -16,13 +16,14 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class BlockEyeVine extends BlockBaseNotFull {
 	protected static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 16, 12);
 
 	public BlockEyeVine() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_RED)
 				.sounds(SoundType.CROP)
 				.noCollision()

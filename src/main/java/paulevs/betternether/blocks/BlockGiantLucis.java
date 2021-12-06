@@ -17,12 +17,13 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
 
 public class BlockGiantLucis extends HugeMushroomBlock {
 	public BlockGiantLucis() {
-		super(FabricBlockSettings.of(Material.GRASS)
+		super(FabricBlockSettings.of(Materials.NETHER_GRASS)
 				.mapColor(MaterialColor.COLOR_YELLOW)
 				.breakByTool(FabricToolTags.AXES)
 				.luminance(15)

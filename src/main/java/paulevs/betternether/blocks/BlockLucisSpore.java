@@ -30,6 +30,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.plants.StructureLucis;
 
@@ -43,7 +44,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
 	public BlockLucisSpore() {
-		super(FabricBlockSettings.of(Material.PLANT)
+		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
 				.luminance(7)
 				.sounds(SoundType.CROP)
