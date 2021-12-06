@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockBrownLargeMushroom;
 import paulevs.betternether.blocks.BlockProperties.BrownMushroomShape;
+import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
@@ -17,6 +18,9 @@ public class StructureMedBrownMushroom implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		final int RANDOM_BOUND = (int)(NetherBiomes.useLegacyGeneration?6:8*scale_factor);
+		
 		Block under;
 		if (world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM) {
 			for (int i = 0; i < 10; i++) {
@@ -30,8 +34,8 @@ public class StructureMedBrownMushroom implements IStructure {
 						z += random.nextBoolean() ? 1 : -1;
 					}
 				}
-				int y = pos.getY() + random.nextInt(6);
-				for (int j = 0; j < 12; j++) {
+				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
+				for (int j = 0; j < 2*RANDOM_BOUND; j++) {
 					POS.set(x, y - j, z);
 					under = world.getBlockState(POS.below()).getBlock();
 					if (under == NetherBlocks.NETHER_MYCELIUM) {

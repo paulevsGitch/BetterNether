@@ -21,6 +21,9 @@ public class StructureNetherCactus implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		final int RANDOM_BOUND = (int)(8*scale_factor);
+		
 		if (canPlaceAt(world, pos)) {
 			BlockState top = NetherBlocks.NETHER_CACTUS.defaultBlockState();
 			BlockState bottom = NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, false);
@@ -35,8 +38,8 @@ public class StructureNetherCactus implements IStructure {
 						z += random.nextBoolean() ? 1 : -1;
 					}
 				}
-				int y = pos.getY() + random.nextInt(8);
-				for (int j = 0; j < 8; j++) {
+				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
+				for (int j = 0; j < RANDOM_BOUND; j++) {
 					npos.set(x, y - j, z);
 					if (world.isEmptyBlock(npos) && canPlaceAt(world, npos)) {
 						int h = random.nextInt(3);

@@ -7,19 +7,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLumabusVine;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
+import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IGrowableStructure;
 import paulevs.betternether.structures.IStructure;
 
 public class StructureGoldenLumabusVine implements IStructure, IGrowableStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		grow(world, pos, random);
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+		generate(world, pos, random, 128);
 	}
 	
 	@Override
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
-		int h = random.nextInt(19) + 5;
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		final int RANDOM_BOUND = (int)(19*scale_factor);
+		
+		int h = random.nextInt(RANDOM_BOUND) + 5;
 		int h2 = BlocksHelper.downRay(world, pos, h);
 		h2 -= 2;
 

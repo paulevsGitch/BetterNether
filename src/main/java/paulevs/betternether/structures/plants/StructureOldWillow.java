@@ -39,6 +39,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 	}
 
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
+		
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		float scale = MHelper.randRange(0.7F, 1.3F, random);
 		int minCount = scale < 1 ? 3 : 4;

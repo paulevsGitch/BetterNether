@@ -18,8 +18,10 @@ public class StructureNeonEquisetum implements IStructure {
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (pos.getY() < (MAX_HEIGHT*0.75) || !BlocksHelper.isNetherrack(world.getBlockState(pos.above()))) return;
-
-		int h = BlocksHelper.downRay(world, pos, 10);
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		final int RANDOM_BOUND = (int)(10*scale_factor);
+		
+		int h = BlocksHelper.downRay(world, pos, RANDOM_BOUND);
 		if (h < 3)
 			return;
 		h = MHelper.randRange(3, h, random);

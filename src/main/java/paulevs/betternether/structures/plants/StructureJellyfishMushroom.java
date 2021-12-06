@@ -18,13 +18,16 @@ public class StructureJellyfishMushroom implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		final int RANDOM_BOUND = (int)(6*scale_factor);
+		
 		Block under;
 		if (BlockTags.NYLIUM.contains(world.getBlockState(pos.below()).getBlock())) {
 			for (int i = 0; i < 10; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
-				int y = pos.getY() + random.nextInt(6);
-				for (int j = 0; j < 6; j++) {
+				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
+				for (int j = 0; j < RANDOM_BOUND; j++) {
 					npos.set(x, y - j, z);
 					if (npos.getY() > 32) {
 						under = world.getBlockState(npos.below()).getBlock();

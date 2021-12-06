@@ -9,20 +9,25 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
+import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.structures.IGrowableStructure;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureGiantMold implements IStructure {
+public class StructureGiantMold implements IStructure, IGrowableStructure {
 	MutableBlockPos npos = new MutableBlockPos();
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		final int RANDOM_BOUND = (int)(6*scale_factor);
+		
 		Block under;
 		if (world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM) {
 			for (int i = 0; i < 10; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
-				int y = pos.getY() + random.nextInt(6);
+				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
 				for (int j = 0; j < 16; j++) {
 					npos.set(x, y - j, z);
 					under = world.getBlockState(npos.below()).getBlock();
@@ -34,6 +39,7 @@ public class StructureGiantMold implements IStructure {
 		}
 	}
 
+	@Override
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
 		int size = 2 + random.nextInt(6);
 		for (int y = 1; y <= size; y++)

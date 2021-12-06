@@ -14,9 +14,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.structures.IGrowableStructure;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureNetherSakura implements IStructure {
+public class StructureNetherSakura implements IStructure, IGrowableStructure {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 	private static final MutableBlockPos POS2 = new MutableBlockPos();
 	private static final Map<BlockPos, Byte> LOGS_DIST = new HashMap<>();
@@ -61,13 +62,16 @@ public class StructureNetherSakura implements IStructure {
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (pos.getY() < MAX_HEIGHT*0.75) return;
-		grow(world, pos, random, true);
+		grow(world, pos, random, true, MAX_HEIGHT);
 	}
-
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
+	
+	
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural, final int MAX_HEIGHT) {
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		
 		LOGS_DIST.clear();
-		int l = MHelper.randRange(15, 24, random);
-		double height = MHelper.randRange(10, 15, random);
+		int l = MHelper.randRange((int)(15*scale_factor), (int)(24*scale_factor), random);
+		double height = MHelper.randRange((int)(10*scale_factor), (int)(15*scale_factor), random);
 		double radius = height * (0.2 + random.nextDouble() * 0.1);
 
 		if ((l + height) - BlocksHelper.downRay(world, pos, (int) (l + height)) > 10) return;
@@ -154,5 +158,10 @@ public class StructureNetherSakura implements IStructure {
 
 	private boolean canReplace(BlockState state) {
 		return BlocksHelper.isNetherGround(state) || state.getMaterial().isReplaceable();
+	}
+	
+	@Override
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+		grow(world, pos, random, false, 128);
 	}
 }
