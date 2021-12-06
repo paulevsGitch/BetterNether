@@ -18,6 +18,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.noise.OpenSimplexNoise;
+import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
@@ -28,16 +29,29 @@ public class StructureAnchorTree implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		if (canGenerate(pos)) grow(world, pos, pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT)), random);
+		if (canGenerate(pos)) grow(world, pos, pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT)), random, MAX_HEIGHT);
 	}
 
 	private boolean canGenerate(BlockPos pos) {
 		return (pos.getX() & 15) == 7 && (pos.getZ() & 15) == 7;
 	}
 
-	private void grow(ServerLevelAccessor level, BlockPos up, BlockPos down, Random random) {
+	private void grow(ServerLevelAccessor level, BlockPos up, BlockPos down, Random random, final int MAX_HEIGHT) {
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		final int HEIGHT_64;
+		final int HEIGHT_45;
+		final int HEIGHT_90;
+		if (NetherBiomes.useLegacyGeneration){
+			HEIGHT_64 = MAX_HEIGHT / 2;
+			HEIGHT_45 = (int)(MAX_HEIGHT * 0.36);
+			HEIGHT_90 = (int)(MAX_HEIGHT * 0.7);
+		} else {
+			HEIGHT_64 = (int) (MAX_HEIGHT / 2.0 + random.nextFloat(10 * scale_factor));
+			HEIGHT_45 = (int) (40 + random.nextFloat(7 * scale_factor));
+			HEIGHT_90 = (int) (MAX_HEIGHT / 2.0 + random.nextFloat(15 * scale_factor));
+		}
 		if (up.getY() - down.getY() < 30) return;
-		int pd = BlocksHelper.downRay(level, down, 128) + 1;
+		int pd = BlocksHelper.downRay(level, down, MAX_HEIGHT) + 1;
 		for (int i = 0; i < 5; i++) {
 			Block block = level.getBlockState(down.below(pd + i)).getBlock();
 			if (block == Blocks.NETHER_BRICKS || block == NetherBlocks.NETHER_BRICK_TILE_LARGE || block == NetherBlocks.NETHER_BRICK_TILE_SMALL)
@@ -67,7 +81,7 @@ public class StructureAnchorTree implements IStructure {
 		BlockState state;
 		int offset = random.nextInt(4);
 		final int minBuildHeight = level.getMinBuildHeight()+1;
-		final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(level, up, minBuildHeight, 126);
+		final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(level, up, minBuildHeight, MAX_HEIGHT-2);
 		for (BlockPos bpos : BLOCKS) {
 			if (!blockBox.isInside(bpos)) continue;
 			if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
@@ -77,18 +91,18 @@ public class StructureAnchorTree implements IStructure {
 			else
 				BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
-			if (bpos.getY() > 45 && bpos.getY() < 90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
-				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
+			if (bpos.getY() > HEIGHT_45 && bpos.getY() < HEIGHT_90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
+				if (random.nextInt((int)(32*scale_factor)) == 0 && !BLOCKS.contains(bpos.north()))
 					makeMushroom(level, bpos.north(), random.nextDouble() * 3 + 1.5, blockBox);
-				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.south()))
+				if (random.nextInt((int)(32*scale_factor)) == 0 && !BLOCKS.contains(bpos.south()))
 					makeMushroom(level, bpos.south(), random.nextDouble() * 3 + 1.5, blockBox);
-				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.east()))
+				if (random.nextInt((int)(32*scale_factor)) == 0 && !BLOCKS.contains(bpos.east()))
 					makeMushroom(level, bpos.east(), random.nextDouble() * 3 + 1.5, blockBox);
-				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.west()))
+				if (random.nextInt((int)(32*scale_factor)) == 0 && !BLOCKS.contains(bpos.west()))
 					makeMushroom(level, bpos.west(), random.nextDouble() * 3 + 1.5, blockBox);
 			}
 
-			if (bpos.getY() > 64) {
+			if (bpos.getY() > HEIGHT_64) {
 				if (!blockUp && level.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
 					BlocksHelper.setWithUpdate(level, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
 				}
