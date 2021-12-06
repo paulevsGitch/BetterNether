@@ -38,6 +38,7 @@ public class CrimsonPinewood extends NetherBiome {
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
 				   .spawn(EntityType.HOGLIN, 9, 2, 5)
 				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)

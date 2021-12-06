@@ -40,6 +40,7 @@ public class NetherSoulPlain extends NetherBiome {
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .music(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY)
 				   .particles(ParticleTypes.PORTAL, 0.02F)
 				   //.surface(Blocks.SOUL_SOIL)
 					.surface(

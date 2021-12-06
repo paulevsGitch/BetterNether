@@ -48,6 +48,7 @@ public class NetherJungle extends NetherBiome {
 				   .loop(SoundsRegistry.AMBIENT_NETHER_JUNGLE)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
+				   .music(SoundEvents.MUSIC_BIOME_WARPED_FOREST)
 				   .surface(NetherBlocks.JUNGLE_GRASS)
 				   .spawn(NetherEntities.JUNGLE_SKELETON, 40, 2, 4)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;

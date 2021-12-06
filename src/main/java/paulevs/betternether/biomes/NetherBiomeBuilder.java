@@ -9,6 +9,7 @@ import net.minecraft.data.worldgen.placement.NetherPlacements;
 import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
@@ -81,6 +82,7 @@ public class NetherBiomeBuilder {
 			.waterColor(BASE_BIOME.getWaterColor())
 			.waterFogColor(BASE_BIOME.getWaterFogColor())
 			.skyColor(BASE_BIOME.getSkyColor())
+			.music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
 		
 		//BN Spawns
 			.spawn(NetherEntities.FIREFLY, 5, 1, 3)
