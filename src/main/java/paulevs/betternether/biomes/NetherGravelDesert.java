@@ -28,8 +28,8 @@ public class NetherGravelDesert extends NetherBiome {
 		@Override
 		protected void addCustomBuildData(BCLBiomeBuilder builder) {
 			builder.fogColor(170, 48, 0)
+				   .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
 				   .loop(SoundsRegistry.AMBIENT_GRAVEL_DESERT)
-				   .loop(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
 				   .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
 				   .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
 				   .particles(ParticleTypes.ASH, 0.02F)

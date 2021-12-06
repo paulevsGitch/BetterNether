@@ -83,6 +83,9 @@ public class NetherBiomeBuilder {
 			.waterFogColor(BASE_BIOME.getWaterFogColor())
 			.skyColor(BASE_BIOME.getSkyColor())
 			.music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
+			.mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
+			.loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
+			.additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
 		
 		//BN Spawns
 			.spawn(NetherEntities.FIREFLY, 5, 1, 3)
