@@ -29,10 +29,12 @@ public class StructureCrystal implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final float scale_factor = ((MAX_HEIGHT/128.0f)-1)*0.5f+1;
+		
 		final int index = random.nextInt(PALETTES.length >> 1);
 		final boolean isBlue = index == 1;
 		final double a = random.nextDouble();
-		double radius = 2 + a * a * 5;
+		double radius = 2 + a * a * 5 * scale_factor;
 		int sideXZ = (int) Math.ceil(radius * 2);
 		int sideY = (int) Math.ceil(radius * 3);
 		float angleX = random.nextFloat() * MAX_ANGLE_X;

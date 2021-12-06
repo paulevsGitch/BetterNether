@@ -20,10 +20,12 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockAnchorTreeVine;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
+import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.structures.IGrowableStructure;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureAnchorTreeBranch implements IStructure {
+public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure {
 	private static final float[] CURVE_X = new float[] { 9F, 7F, 1.5F, 0.5F, 3F, 7F };
 	private static final float[] CURVE_Y = new float[] { -20F, -17F, -12F, -4F, 0F, 2F };
 	private static final int MIDDLE_Y = 10;
@@ -37,12 +39,14 @@ public class StructureAnchorTreeBranch implements IStructure {
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (pos.getY() < MAX_HEIGHT*0.75) return;
-		grow(world, pos, random, true);
+		grow(world, pos, random, MAX_HEIGHT, true);
 	}
 
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
+	private void grow(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, boolean natural) {
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
-		float scale = MHelper.randRange(0.5F, 1F, random);
+		float scale = MHelper.randRange(0.5F, 1F, random) * scale_factor;
 		int minCount = scale < 0.75 ? 3 : 4;
 		int maxCount = scale < 0.75 ? 5 : 7;
 		int count = MHelper.randRange(minCount, maxCount, random);
@@ -60,7 +64,7 @@ public class StructureAnchorTreeBranch implements IStructure {
 			float crownR = 9 * branchSize;
 			if (crownR < 1.5F)
 				crownR = 1.5F;
-			crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random);
+			crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random, scale_factor);
 
 			int middle = Math.round(pos.getY() + (MIDDLE_Y + MHelper.randRange(-2, 2, random)) * branchSize);
 			boolean generate = true;
@@ -286,7 +290,23 @@ public class StructureAnchorTreeBranch implements IStructure {
 		}
 	}
 
-	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random) {
+	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random, float scale_factor) {
+		scale_factor = (scale_factor-1)*0.5f + 1;
+		final int HEIGHT_10;
+		final int HEIGHT_15;
+		final int HEIGHT_17;
+		
+		if (NetherBiomes.useLegacyGeneration){
+			HEIGHT_10 = (int)(10 * scale_factor);
+			HEIGHT_15 = (int)(15 * scale_factor);
+			HEIGHT_17 = (int)(17 * scale_factor);
+		} else {
+			float rnd = random.nextFloat(5 * scale_factor);
+			HEIGHT_10 = (int)(10 * scale_factor + rnd);
+			HEIGHT_15 = (int)(15 * scale_factor + rnd);
+			HEIGHT_17 = (int)(17 * scale_factor + rnd);
+		}
+		
 		BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState();
 		BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
 		
@@ -307,13 +327,13 @@ public class StructureAnchorTreeBranch implements IStructure {
 					if (cx2 + cy2_out + cz2 < r2 && cx2 + cy2_in + cz2 > r2) {
 						POS.setZ(pos.getZ() + cz);
 						if (world.getBlockState(POS).getMaterial().isReplaceable()) {
-							int length = BlocksHelper.downRay(world, POS, 17);
+							int length = BlocksHelper.downRay(world, POS, HEIGHT_17);
 							if (length < 5) {
 								BlocksHelper.setWithoutUpdate(world, POS, leaves);
 								continue;
 							} ;
-							if (length > 15) length = MHelper.randRange(10, 15, random);
-							else if (length > 10) length = MHelper.randRange(10, length, random);
+							if (length > HEIGHT_15) length = MHelper.randRange(HEIGHT_10, HEIGHT_15, random);
+							else if (length > HEIGHT_10) length = MHelper.randRange(HEIGHT_10, length, random);
 							
 							if (cz%2 == cx%2) {
 								length /= 3;
@@ -336,5 +356,10 @@ public class StructureAnchorTreeBranch implements IStructure {
 	
 	private boolean canReplace(BlockState state) {
 		return BlocksHelper.isNetherGround(state) || state.getMaterial().isReplaceable();
+	}
+	
+	@Override
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+		grow(world, pos, random, 128, false);
 	}
 }

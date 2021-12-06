@@ -19,7 +19,7 @@ class AnchorTreeFeature extends DefaultFeature {
 	
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
-		STRUCTURE.grow(featurePlaceContext.level(), featurePlaceContext.origin(), featurePlaceContext.random(), false);
+		STRUCTURE.grow(featurePlaceContext.level(), featurePlaceContext.origin(), featurePlaceContext.random());
 		return true;
 	}
 }

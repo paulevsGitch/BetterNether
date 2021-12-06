@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -22,14 +23,33 @@ import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.IStructure;
 
+
 public class StructureAnchorTree implements IStructure {
 	protected static final OpenSimplexNoise NOISE = new OpenSimplexNoise(2145);
 	private static final Set<BlockPos> BLOCKS = new HashSet<BlockPos>(2048);
 	private Block[] wallPlants;
+	final private LegacyStructureAnchorTree legacyStructure;
+	
+	public StructureAnchorTree(){
+		legacyStructure = new LegacyStructureAnchorTree();
+	}
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		if (canGenerate(pos)) grow(world, pos, pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT)), random, MAX_HEIGHT);
+		if (NetherBiomes.useLegacyGeneration) {
+			legacyStructure.generate(world, pos, random, MAX_HEIGHT);
+			return;
+		}
+		
+		BlockPos down = pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT));
+		if (canGenerate(pos)) {
+			grow(world, pos, down, random, MAX_HEIGHT);
+			BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.WEEPING_OBSIDIAN.defaultBlockState());
+			BlocksHelper.setWithoutUpdate(world, down.east(), NetherBlocks.BLUE_WEEPING_OBSIDIAN.defaultBlockState());
+			BlocksHelper.setWithoutUpdate(world, down.west(), NetherBlocks.BLUE_WEEPING_OBSIDIAN.defaultBlockState());
+			BlocksHelper.setWithoutUpdate(world, down.south(), NetherBlocks.BLUE_WEEPING_OBSIDIAN.defaultBlockState());
+			BlocksHelper.setWithoutUpdate(world, down.north(), NetherBlocks.BLUE_WEEPING_OBSIDIAN.defaultBlockState());
+		}
 	}
 
 	private boolean canGenerate(BlockPos pos) {
@@ -41,14 +61,17 @@ public class StructureAnchorTree implements IStructure {
 		final int HEIGHT_64;
 		final int HEIGHT_45;
 		final int HEIGHT_90;
+		final int SEGMENT_LENGTH;
 		if (NetherBiomes.useLegacyGeneration){
 			HEIGHT_64 = MAX_HEIGHT / 2;
 			HEIGHT_45 = (int)(MAX_HEIGHT * 0.36);
 			HEIGHT_90 = (int)(MAX_HEIGHT * 0.7);
+			SEGMENT_LENGTH = (int)(15*scale_factor);
 		} else {
-			HEIGHT_64 = (int) (MAX_HEIGHT / 2.0 + random.nextFloat(10 * scale_factor));
-			HEIGHT_45 = (int) (40 + random.nextFloat(7 * scale_factor));
+			HEIGHT_64 = (int) (MAX_HEIGHT / 4.0 + random.nextFloat(32));
+			HEIGHT_45 = (int) (20 + random.nextFloat(20 * scale_factor));
 			HEIGHT_90 = (int) (MAX_HEIGHT / 2.0 + random.nextFloat(15 * scale_factor));
+			SEGMENT_LENGTH = (int) ((15 + random.nextFloat(5 * scale_factor))*scale_factor);
 		}
 		if (up.getY() - down.getY() < 30) return;
 		int pd = BlocksHelper.downRay(level, down, MAX_HEIGHT) + 1;
@@ -58,8 +81,8 @@ public class StructureAnchorTree implements IStructure {
 				return;
 		}
 
-		BlockPos trunkTop = lerp(down, up, 0.6);
-		BlockPos trunkBottom = lerp(down, up, 0.3);
+		final BlockPos trunkTop = lerp(down, up, 0.6);
+		final BlockPos trunkBottom = lerp(down, up, 0.3);
 
 		int count = (trunkTop.getY() - trunkBottom.getY()) / 7;
 		if (count < 2) count = 2;
@@ -70,13 +93,14 @@ public class StructureAnchorTree implements IStructure {
 		if (wallPlants == null) {
 			wallPlants = new Block[] { NetherBlocks.JUNGLE_MOSS, NetherBlocks.JUNGLE_MOSS, NetherBlocks.WALL_MUSHROOM_BROWN, NetherBlocks.WALL_MUSHROOM_RED };
 		}
-
-		buildLine(blocks, 4);
-
-		count = (up.getY() - down.getY()) / 10 - 1;
-		if (count < 3) count = 3;
-		buildBigCircle(trunkTop, 15, count, 2, random.nextDouble() * Math.PI * 2, 3.5, random);
-		buildBigCircle(trunkBottom, -15, count, 2, random.nextDouble() * Math.PI * 2, 3.5, random);
+		
+		count = Math.min(7, Math.max(3, (up.getY() - down.getY()) / (int)(10*scale_factor) - 1));
+		double radius = Math.min(7, Math.max(3.5, (up.getY() - down.getY()) / 15));
+		
+		drawLine(level, blocks, radius+(0.5*scale_factor), MAX_HEIGHT);
+		
+		buildBigCircle(level, up, trunkTop, SEGMENT_LENGTH, count, 2, random.nextDouble() * Math.PI * 2, radius, random, MAX_HEIGHT);
+		buildBigCircle(level, up, trunkBottom, -SEGMENT_LENGTH, count, 2, random.nextDouble() * Math.PI * 2, radius, random, MAX_HEIGHT);
 
 		BlockState state;
 		int offset = random.nextInt(4);
@@ -129,20 +153,20 @@ public class StructureAnchorTree implements IStructure {
 		}
 	}
 
-	private void buildBigCircle(BlockPos pos, int length, int count, int iteration, double angle, double size, Random random) {
+	private void buildBigCircle(ServerLevelAccessor level, BlockPos seedPos, BlockPos pos, int length, int count, int iteration, double angle, double size, Random random, final int MAX_HEIGHT) {
 		if (iteration < 0) return;
-		List<List<BlockPos>> lines = circleLinesEnds(pos, angle, count, length, Math.abs(length) * 0.7, random);
+		List<List<BlockPos>> lines = circleLinesEnds(level, seedPos, pos, angle, count, length, Math.abs(length) * 0.7, random, iteration==0, MAX_HEIGHT);
 		double sizeSmall = size * 0.8;
 		length *= 0.8;
 		angle += Math.PI * 4 / count;
 		angle += random.nextDouble() * angle * 0.75;
 		for (List<BlockPos> line : lines) {
-			buildLine(line, size);
-			buildBigCircle(line.get(1), length, count, iteration - 1, angle, sizeSmall, random);
+			drawLine(level, line, size, MAX_HEIGHT);
+			buildBigCircle(level, seedPos, line.get(1), length, count, iteration - 1, angle, sizeSmall, random, MAX_HEIGHT);
 		}
 	}
 
-	private void buildLine(List<BlockPos> blocks, double radius) {
+	private void drawLine(ServerLevelAccessor level, List<BlockPos> blocks, double radius, final int MAX_HEIGHT) {
 		for (int i = 0; i < blocks.size() - 1; i++) {
 			BlockPos a = blocks.get(i);
 			BlockPos b = blocks.get(i + 1);
@@ -154,7 +178,7 @@ public class StructureAnchorTree implements IStructure {
 			double max = b.getY() - a.getY();
 			if (max < 1) max = 1;
 			for (int y = a.getY(); y <= b.getY(); y++)
-				cylinder(lerpCos(a, b, y, (y - a.getY()) / max), radius);
+				cylinder(lerpCos(a, b, y, (y - a.getY()) / max), radius, MAX_HEIGHT);
 		}
 	}
 
@@ -191,7 +215,7 @@ public class StructureAnchorTree implements IStructure {
 		return result;
 	}
 
-	private void cylinder(BlockPos pos, double radius) {
+	private void cylinder(BlockPos pos, double radius, final int MAX_HEIGHT) {
 		int x1 = MHelper.floor(pos.getX() - radius);
 		int z1 = MHelper.floor(pos.getZ() - radius);
 		int x2 = MHelper.floor(pos.getX() + radius + 1);
@@ -204,22 +228,40 @@ public class StructureAnchorTree implements IStructure {
 			for (int z = z1; z <= z2; z++) {
 				int pz2 = z - pos.getZ();
 				pz2 *= pz2;
-				if (px2 + pz2 <= radius * (NOISE.eval(x * 0.5, pos.getY() * 0.5, z * 0.5) * 0.25 + 0.75)) BLOCKS.add(new BlockPos(x, pos.getY(), z));
+				if (px2 + pz2 <= radius * (NOISE.eval(x * 0.5, pos.getY() * 0.5, z * 0.5) * 0.25 + 0.75) && pos.getY()>2 && pos.getY()<MAX_HEIGHT-2) BLOCKS.add(new BlockPos(x, pos.getY(), z));
 			}
 		}
 	}
 
-	private List<List<BlockPos>> circleLinesEnds(BlockPos pos, double startAngle, int count, int height, double radius, Random random) {
+	private List<List<BlockPos>> circleLinesEnds(ServerLevelAccessor level, BlockPos seedPos, BlockPos pos, double startAngle, int count, int length, double inRadius, Random random, boolean findSurface, final int MAX_HEIGHT) {
+		final int MAX_DIST = 16;
 		List<List<BlockPos>> result = new ArrayList<List<BlockPos>>(count);
 		double angle = Math.PI * 2 / count;
 		for (int i = 0; i < count; i++) {
+			double radius = inRadius * (random.nextDouble(0.25)+0.8); //jes the sum may be bigger than one :)
+			
 			double x = pos.getX() + Math.sin(startAngle) * radius;
+			if (x-seedPos.getX()>MAX_DIST) x = seedPos.getX()+MAX_DIST - random.nextInt(10);
+			if (x-seedPos.getX()<-MAX_DIST) x = seedPos.getX()-MAX_DIST + random.nextInt(10);
+			
 			double z = pos.getZ() + Math.cos(startAngle) * radius;
-			BlockPos end = new BlockPos(x, pos.getY() + height + height * random.nextDouble() * 0.5, z);
+			if (z-seedPos.getZ()>MAX_DIST) z = seedPos.getZ()+MAX_DIST - random.nextInt(10);
+			if (z-seedPos.getZ()<-MAX_DIST) z = seedPos.getZ()-MAX_DIST + random.nextInt(10);
+			
+			BlockPos end = new BlockPos(x, pos.getY() + length + length * random.nextDouble() * 0.5, z);
 			List<BlockPos> elem = new ArrayList<>(2);
 			elem.add(pos);
 			elem.add(end);
 			result.add(elem);
+			
+			if (findSurface && end.getY()>2 && end.getY()<MAX_HEIGHT-2) {
+				int dist = length<0?-BlocksHelper.downRay(level, end, Math.abs(length*2)):BlocksHelper.upRay(level, end, Math.abs(length*2));
+				if (dist>0){
+					if (Math.abs(seedPos.getX()-x)>MAX_DIST || Math.abs(seedPos.getZ()-z)>MAX_DIST) radius = 2;
+					result.addAll(circleLinesEnds(level, seedPos, end, random.nextFloat(360), radius<5?1:(count%2 + 1), dist, radius/2, random, findSurface, MAX_HEIGHT));
+				}
+			}
+			
 			startAngle += angle;
 		}
 		return result;
