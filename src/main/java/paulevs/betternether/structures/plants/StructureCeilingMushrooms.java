@@ -9,8 +9,8 @@ import paulevs.betternether.structures.IStructure;
 
 public class StructureCeilingMushrooms implements IStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
-		if (pos.getY() < 90) return;
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		if (pos.getY() < MAX_HEIGHT*0.7) return;
 		pos = pos.above();
 		if (canPlace(world, pos)) BlocksHelper.setWithUpdate(world, pos, NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
 		if (canPlace(world, pos.north())) BlocksHelper.setWithUpdate(world, pos.north(), NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());

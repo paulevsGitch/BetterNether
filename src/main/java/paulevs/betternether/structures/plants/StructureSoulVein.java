@@ -18,7 +18,7 @@ public class StructureSoulVein implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (world.isEmptyBlock(pos) && canPlaceAt(world, pos)) {
 			BlockState state = NetherBlocks.SOUL_VEIN.defaultBlockState();
 			BlockState sand = NetherBlocks.VEINED_SAND.defaultBlockState();

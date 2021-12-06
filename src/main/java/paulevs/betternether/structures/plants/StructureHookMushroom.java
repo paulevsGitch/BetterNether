@@ -9,8 +9,8 @@ import paulevs.betternether.structures.IStructure;
 
 public class StructureHookMushroom implements IStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
-		if (pos.getY() < 90 || !BlocksHelper.isNetherrack(world.getBlockState(pos.above()))) return;
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		if (pos.getY() < (MAX_HEIGHT*0.7) || !BlocksHelper.isNetherrack(world.getBlockState(pos.above()))) return;
 		BlocksHelper.setWithUpdate(world, pos, NetherBlocks.HOOK_MUSHROOM.defaultBlockState());
 	}
 }

@@ -21,7 +21,7 @@ class RubeusTreeFeature extends DefaultFeature {
 	
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
-		STRUCTURE.generate(featurePlaceContext.level(), featurePlaceContext.origin(), featurePlaceContext.random());
+		STRUCTURE.generate(featurePlaceContext.level(), featurePlaceContext.origin(), featurePlaceContext.random(), featurePlaceContext.chunkGenerator().getGenDepth());
 		return true;
 	}
 }

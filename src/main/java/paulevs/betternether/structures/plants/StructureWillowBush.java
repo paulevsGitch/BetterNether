@@ -23,7 +23,7 @@ public class StructureWillowBush implements IStructure {
 	public StructureWillowBush() {}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
 			return;
 

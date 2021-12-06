@@ -21,10 +21,10 @@ public abstract class StructureObjScatter implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (isGround(world.getBlockState(pos.below())) && isGround(world.getBlockState(pos.below(2))) && noObjNear(world, pos)) {
 			StructureWorld tree = structures[random.nextInt(structures.length)];
-			tree.generate(world, pos, random);
+			tree.generate(world, pos, random, MAX_HEIGHT);
 		}
 	}
 

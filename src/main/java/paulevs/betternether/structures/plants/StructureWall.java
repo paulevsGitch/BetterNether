@@ -20,7 +20,7 @@ public class StructureWall implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (world.isEmptyBlock(pos)) {
 			BlockState state = getPlacementState(world, pos, random);
 			if (state != null)

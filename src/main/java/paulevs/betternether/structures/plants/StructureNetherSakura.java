@@ -59,8 +59,8 @@ public class StructureNetherSakura implements IStructure {
 	public StructureNetherSakura() {}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
-		if (pos.getY() < 96) return;
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		if (pos.getY() < MAX_HEIGHT*0.75) return;
 		grow(world, pos, random, true);
 	}
 

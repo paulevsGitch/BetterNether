@@ -28,9 +28,9 @@ public class StructureAnchorTreeRoot implements IStructure {
 	private static final StructureLucis LUCIS = new StructureLucis();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
-		if (pos.getY() < 96) return;
-
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		if (pos.getY() < MAX_HEIGHT*0.75) return;
+		
 		double angle = random.nextDouble() * Math.PI * 2;
 		double dx = Math.sin(angle);
 		double dz = Math.cos(angle);
@@ -55,10 +55,10 @@ public class StructureAnchorTreeRoot implements IStructure {
 		}
 		BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
 		final int minBuildHeight = world.getMinBuildHeight()+1;
-		final BoundingBox blockBox = BlocksHelper.decorationBounds(world, pos, minBuildHeight, 126);
+		final BoundingBox blockBox = BlocksHelper.decorationBounds(world, pos, minBuildHeight, MAX_HEIGHT-2);
 		for (BlockPos bpos : BLOCKS) {
 			//if (!blockBox.contains(bpos)) continue;
-			if (bpos.getY() < minBuildHeight || bpos.getY() > 126) continue;
+			if (bpos.getY() < minBuildHeight || bpos.getY() > MAX_HEIGHT-2) continue;
 			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !canReplace(state)) continue;
 			boolean blockUp = true;
 			boolean blockDown = true;
@@ -76,22 +76,22 @@ public class StructureAnchorTreeRoot implements IStructure {
 					if (random.nextBoolean())
 						StructureAnchorTree.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5, blockBox);
 					else
-					LUCIS.generate(world, bpos, random);
+					LUCIS.generate(world, bpos, random, MAX_HEIGHT);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.south()))
 					if (random.nextBoolean())
 						StructureAnchorTree.makeMushroom(world, bpos.south(), random.nextDouble() + 1.5, blockBox);
 					else
-					LUCIS.generate(world, bpos, random);
+					LUCIS.generate(world, bpos, random, MAX_HEIGHT);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.east()))
 					if (random.nextBoolean())
 						StructureAnchorTree.makeMushroom(world, bpos.east(), random.nextDouble() + 1.5, blockBox);
 					else
-					LUCIS.generate(world, bpos, random);
+					LUCIS.generate(world, bpos, random, MAX_HEIGHT);
 				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.west()))
 					if (random.nextBoolean())
 						StructureAnchorTree.makeMushroom(world, bpos.west(), random.nextDouble() + 1.5, blockBox);
 					else
-					LUCIS.generate(world, bpos, random);
+					LUCIS.generate(world, bpos, random, MAX_HEIGHT);
 			}
 
 			state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();

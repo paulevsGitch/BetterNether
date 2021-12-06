@@ -19,13 +19,13 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import paulevs.betternether.structures.IStructure;
+import paulevs.betternether.structures.IGrowableStructure;
 
 public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SHAPE = Block.box(4, 6, 4, 12, 16, 12);
-	private final IStructure structure;
+	private final IGrowableStructure structure;
 
-	public BlockLumabusSeed(IStructure structure) {
+	public BlockLumabusSeed(IGrowableStructure structure) {
 		super(FabricBlockSettings.of(Material.PLANT)
 				.mapColor(MaterialColor.COLOR_RED)
 				.sounds(SoundType.CROP)
@@ -54,7 +54,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
 
 	@Override
 	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
-		structure.generate(world, pos, random);
+		structure.grow(world, pos, random);
 	}
 
 	@Override

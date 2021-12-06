@@ -14,7 +14,7 @@ public class StructureWartBush implements IStructure {
 	private static final Direction[] DIRS = new Direction[] { Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST };
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (world.isEmptyBlock(pos)) {
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
 			for (Direction dir : DIRS)

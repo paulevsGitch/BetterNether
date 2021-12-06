@@ -15,7 +15,7 @@ public class StructureBoneReef implements IStructure {
 	};
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (BlocksHelper.isNetherGround(world.getBlockState(pos.below())) && world.isEmptyBlock(pos.above(2)) && world.isEmptyBlock(pos.above(4))) {
 			StructureNBT bone = BONES[random.nextInt(BONES.length)];
 			bone.randomRM(random);

@@ -20,7 +20,7 @@ public class StructureVine implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		int h = BlocksHelper.downRay(world, pos, 25);
 		if (h < 2)
 			return;

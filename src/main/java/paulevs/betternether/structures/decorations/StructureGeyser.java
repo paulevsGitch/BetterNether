@@ -9,7 +9,7 @@ import paulevs.betternether.structures.IStructure;
 
 public class StructureGeyser implements IStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (BlocksHelper.isNetherrack(world.getBlockState(pos.below())))
 			BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.GEYSER.defaultBlockState());
 	}

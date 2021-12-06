@@ -26,7 +26,7 @@ public class StructureCaves implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		boolean isVoid = true;
 		offset = (int) (getHeight(pos.getX() + 8, pos.getZ() + 8) - 12);
 

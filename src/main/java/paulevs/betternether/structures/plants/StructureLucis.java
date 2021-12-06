@@ -11,11 +11,17 @@ import paulevs.betternether.blocks.BlockLucisMushroom;
 import paulevs.betternether.blocks.BlockLucisSpore;
 import paulevs.betternether.blocks.BlockProperties.EnumLucisShape;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.structures.IGrowableStructure;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureLucis implements IStructure {
+public class StructureLucis implements IStructure, IGrowableStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		grow(world, pos, random);
+	}
+	
+	@Override
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
 		if (canGenerate(world, pos)) {
 			BlockState center = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.CENTER);
 			BlockState side = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.SIDE);

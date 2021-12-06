@@ -21,7 +21,7 @@ public class StructureWillow implements IStructure {
 	private static final Direction[] HOR = HorizontalDirectionalBlock.FACING.getPossibleValues().toArray(new Direction[] {});
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (!BlocksHelper.isNetherGround(world.getBlockState(pos.below())))
 			return;
 

@@ -33,7 +33,7 @@ public class StructureScatter implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (world.isEmptyBlock(pos) && canPlaceAt(world, pos)) {
 			BlockState state = plantBlock.defaultBlockState();
 			int rndState = random.nextInt(2);

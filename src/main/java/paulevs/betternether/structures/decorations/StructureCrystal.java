@@ -28,8 +28,7 @@ public class StructureCrystal implements IStructure {
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
-		final int MAX_HEIGHT = world.dimensionType().logicalHeight();
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		final int index = random.nextInt(PALETTES.length >> 1);
 		final boolean isBlue = index == 1;
 		final double a = random.nextDouble();

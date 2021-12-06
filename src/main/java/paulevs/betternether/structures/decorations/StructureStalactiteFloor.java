@@ -40,7 +40,7 @@ public class StructureStalactiteFloor implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (canPlaceAt(world, pos)) {
 			for (int i = 0; i < 16; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2F);

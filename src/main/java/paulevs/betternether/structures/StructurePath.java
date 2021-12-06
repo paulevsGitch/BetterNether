@@ -31,7 +31,7 @@ public class StructurePath implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		for (int x = 0; x < 16; x++) {
 			int wx = pos.getX() + x;
 			B_POS.setX(wx);

@@ -18,10 +18,10 @@ public class StructureWartDeadwood implements IStructure {
 	};
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (isGround(world.getBlockState(pos.below())) && isGround(world.getBlockState(pos.below(2)))) {
 			StructureWorld tree = TREES[random.nextInt(TREES.length)];
-			tree.generate(world, pos, random);
+			tree.generate(world, pos, random, MAX_HEIGHT);
 		}
 	}
 

@@ -8,11 +8,17 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLumabusVine;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.structures.IGrowableStructure;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureGoldenLumabusVine implements IStructure {
+public class StructureGoldenLumabusVine implements IStructure, IGrowableStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		grow(world, pos, random);
+	}
+	
+	@Override
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
 		int h = random.nextInt(19) + 5;
 		int h2 = BlocksHelper.downRay(world, pos, h);
 		h2 -= 2;

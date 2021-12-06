@@ -54,7 +54,7 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock 
 
 	@Override
 	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
-		STRUCTURE.generate(world, pos, random);
+		STRUCTURE.grow(world, pos, random);
 	}
 
 	@Override

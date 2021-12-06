@@ -19,7 +19,7 @@ public class StructureSmoker implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (canPlaceAt(world, pos)) {
 			BlockState top = NetherBlocks.SMOKER.defaultBlockState();
 			BlockState middle = NetherBlocks.SMOKER.defaultBlockState().setValue(BlockSmoker.SHAPE, TripleShape.MIDDLE);

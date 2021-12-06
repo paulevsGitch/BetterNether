@@ -6,11 +6,16 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.structures.IGrowableStructure;
 import paulevs.betternether.structures.IStructure;
 
-public class StructureEye implements IStructure {
+public class StructureEye implements IStructure, IGrowableStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		grow(world, pos, random);
+	}
+	
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
 		int h = random.nextInt(19) + 5;
 		int h2 = BlocksHelper.downRay(world, pos, h);
 

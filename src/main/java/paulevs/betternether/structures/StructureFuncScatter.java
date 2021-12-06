@@ -19,7 +19,7 @@ public abstract class StructureFuncScatter implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (isGround(world.getBlockState(pos.below())) && noObjNear(world, pos)) {
 			grow(world, pos, random);
 		}

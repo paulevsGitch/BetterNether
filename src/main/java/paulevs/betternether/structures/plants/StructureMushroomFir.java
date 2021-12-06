@@ -15,7 +15,7 @@ public class StructureMushroomFir implements IStructure {
 	MutableBlockPos npos = new MutableBlockPos();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM) {
 			int h = 3 + random.nextInt(5);
 			for (int y = 1; y < h; y++)

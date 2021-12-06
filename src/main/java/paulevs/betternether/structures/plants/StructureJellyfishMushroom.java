@@ -17,7 +17,7 @@ public class StructureJellyfishMushroom implements IStructure {
 	MutableBlockPos npos = new MutableBlockPos();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		Block under;
 		if (BlockTags.NYLIUM.contains(world.getBlockState(pos.below()).getBlock())) {
 			for (int i = 0; i < 10; i++) {
@@ -26,7 +26,7 @@ public class StructureJellyfishMushroom implements IStructure {
 				int y = pos.getY() + random.nextInt(6);
 				for (int j = 0; j < 6; j++) {
 					npos.set(x, y - j, z);
-					if (npos.getY() > 31) {
+					if (npos.getY() > 32) {
 						under = world.getBlockState(npos.below()).getBlock();
 						if (BlockTags.NYLIUM.contains(under) && world.isEmptyBlock(npos)) {
 							grow(world, npos, random);

@@ -27,8 +27,8 @@ public class StructureAnchorTree implements IStructure {
 	private Block[] wallPlants;
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
-		if (canGenerate(pos)) grow(world, pos, pos.below(BlocksHelper.downRay(world, pos, 255)), random);
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		if (canGenerate(pos)) grow(world, pos, pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT)), random);
 	}
 
 	private boolean canGenerate(BlockPos pos) {

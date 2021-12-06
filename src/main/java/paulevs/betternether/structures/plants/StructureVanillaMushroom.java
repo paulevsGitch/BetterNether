@@ -19,7 +19,7 @@ public class StructureVanillaMushroom implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (canPlaceAt(world, pos)) {
 			BlockState state = random.nextBoolean() ? Blocks.RED_MUSHROOM.defaultBlockState() : Blocks.BROWN_MUSHROOM.defaultBlockState();
 			for (int i = 0; i < 16; i++) {

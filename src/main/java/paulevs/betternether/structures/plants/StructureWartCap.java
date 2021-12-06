@@ -26,8 +26,8 @@ public class StructureWartCap implements IStructure {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
-		if (!isWall(world, pos) || pos.getY() > 57 || pos.getY() < 34 || world.isEmptyBlock(pos.below(3)))
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		if (!isWall(world, pos) || pos.getY() > (MAX_HEIGHT*0.45) || pos.getY() < (MAX_HEIGHT*0.25) || world.isEmptyBlock(pos.below(3)))
 			return;
 
 		int radius = 3 + random.nextInt(3);

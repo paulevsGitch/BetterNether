@@ -180,10 +180,10 @@ public class StructureRubeus extends StructureFuncScatter {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
 		if (length >= StructureStalagnate.MAX_LENGTH)
-			super.generate(world, pos, random);
+			super.generate(world, pos, random, MAX_HEIGHT);
 	}
 
 	@Override

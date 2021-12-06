@@ -16,7 +16,7 @@ public class StructureMedBrownMushroom implements IStructure {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		Block under;
 		if (world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM) {
 			for (int i = 0; i < 10; i++) {

@@ -20,7 +20,7 @@ public class StructureNetherCactus implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (canPlaceAt(world, pos)) {
 			BlockState top = NetherBlocks.NETHER_CACTUS.defaultBlockState();
 			BlockState bottom = NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, false);

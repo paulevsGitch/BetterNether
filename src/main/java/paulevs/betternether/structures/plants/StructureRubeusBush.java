@@ -17,7 +17,7 @@ public class StructureRubeusBush implements IStructure {
 	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
 			return;
 
