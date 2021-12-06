@@ -72,8 +72,4 @@ public class EntityJungleSkeleton extends Skeleton {
 	private ItemStack getRandomOffhandItem() {
 		return this.random.nextInt(8) == 0 ? new ItemStack(Items.SHIELD) : new ItemStack(Items.AIR);
 	}
-
-	public static boolean canSpawn(EntityType<? extends EntityJungleSkeleton> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
-		return world.getDifficulty() != Difficulty.PEACEFUL;
-	}
 }
