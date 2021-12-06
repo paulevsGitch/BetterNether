@@ -113,7 +113,7 @@ public class NetherEntities {
 			0.6F,
 			1.99F,
 			EntityJungleSkeleton::new,
-			EntityJungleSkeleton.createMobAttributes(),
+			EntityJungleSkeleton.createMonsterAttributes(),
 			true,
 			ColorUtil.color(134, 162, 149),
 			ColorUtil.color(6, 111, 79)
