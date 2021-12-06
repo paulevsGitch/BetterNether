@@ -13,7 +13,12 @@ public class Configs {
 	public static final PathConfig RECIPES = new PathConfig(BetterNether.MOD_ID, "recipes");
 
 	public static void saveConfigs() {
+		MAIN.saveChanges();
 		GENERATOR.saveChanges();
+		BIOMES.markToSave();
+		BLOCKS.saveChanges();
+		ITEMS.saveChanges();
+		MOBS.saveChanges();
 		RECIPES.saveChanges();
 	}
 }
