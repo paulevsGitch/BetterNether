@@ -38,15 +38,14 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		if (pos.getY() < MAX_HEIGHT*0.75) return;
-		grow(world, pos, random, MAX_HEIGHT, true);
+		final float scale_factor = MAX_HEIGHT/128.0f;
+		if (pos.getY() < 56 + 40 * scale_factor) return;
+		grow(world, pos, random, scale_factor, true);
 	}
 
-	private void grow(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, boolean natural) {
-		final float scale_factor = MAX_HEIGHT/128.0f;
-		
+	private void grow(ServerLevelAccessor world, BlockPos pos, Random random, float scale_factor, boolean natural) {
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
-		float scale = MHelper.randRange(0.5F, 1F, random) * scale_factor;
+		float scale = MHelper.randRange(0.5F, 1F, random);
 		int minCount = scale < 0.75 ? 3 : 4;
 		int maxCount = scale < 0.75 ? 5 : 7;
 		int count = MHelper.randRange(minCount, maxCount, random);
@@ -57,7 +56,7 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 		for (int n = 0; n < count; n++) {
 			float branchSize = MHelper.randRange(0.5F, 0.8F, random) * scale;
 			float angle = n * MHelper.PI2 / count;
-			float radius = CURVE_X[0] * branchSize;
+			float radius = CURVE_X[0] * branchSize *  scale_factor;
 			int x1 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F, 2F, random) * branchSize);
 			int y1 = Math.round(pos.getY() + CURVE_Y[0] * branchSize + MHelper.randRange(-2F, 2F, random) * branchSize);
 			int z1 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F, 2F, random) * branchSize);
@@ -291,7 +290,8 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 	}
 
 	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random, float scale_factor) {
-		scale_factor = (scale_factor-1)*0.5f + 1;
+		scale_factor = (scale_factor-1)*0.25f + 1;
+		
 		final int HEIGHT_10;
 		final int HEIGHT_15;
 		final int HEIGHT_17;
@@ -360,6 +360,6 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 	
 	@Override
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
-		grow(world, pos, random, 128, false);
+		grow(world, pos, random, 1, false);
 	}
 }

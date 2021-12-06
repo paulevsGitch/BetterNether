@@ -44,11 +44,6 @@ public class StructureAnchorTree implements IStructure {
 		BlockPos down = pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT));
 		if (canGenerate(pos)) {
 			grow(world, pos, down, random, MAX_HEIGHT);
-			BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.WEEPING_OBSIDIAN.defaultBlockState());
-			BlocksHelper.setWithoutUpdate(world, down.east(), NetherBlocks.BLUE_WEEPING_OBSIDIAN.defaultBlockState());
-			BlocksHelper.setWithoutUpdate(world, down.west(), NetherBlocks.BLUE_WEEPING_OBSIDIAN.defaultBlockState());
-			BlocksHelper.setWithoutUpdate(world, down.south(), NetherBlocks.BLUE_WEEPING_OBSIDIAN.defaultBlockState());
-			BlocksHelper.setWithoutUpdate(world, down.north(), NetherBlocks.BLUE_WEEPING_OBSIDIAN.defaultBlockState());
 		}
 	}
 
@@ -111,9 +106,9 @@ public class StructureAnchorTree implements IStructure {
 			if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
 			boolean blockUp = true;
 			if ((blockUp = BLOCKS.contains(bpos.above())) && BLOCKS.contains(bpos.below()))
-				BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
+				BlocksHelper.setWithoutUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
 			else
-				BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
+				BlocksHelper.setWithoutUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
 			if (bpos.getY() > HEIGHT_45 && bpos.getY() < HEIGHT_90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
 				if (random.nextInt((int)(32*scale_factor)) == 0 && !BLOCKS.contains(bpos.north()))
@@ -128,26 +123,26 @@ public class StructureAnchorTree implements IStructure {
 
 			if (bpos.getY() > HEIGHT_64) {
 				if (!blockUp && level.getBlockState(bpos.above()).getMaterial().isReplaceable()) {
-					BlocksHelper.setWithUpdate(level, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
+					BlocksHelper.setWithoutUpdate(level, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
 				}
 
 				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
 					state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
 					BlockPos _pos = bpos.north();
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() >= blockBox.minZ())
-						BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.NORTH));
+						BlocksHelper.setWithoutUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.NORTH));
 
 					_pos = bpos.south();
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() <= blockBox.maxZ())
-						BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
+						BlocksHelper.setWithoutUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
 
 					_pos = bpos.east();
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() <= blockBox.maxX())
-						BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.EAST));
+						BlocksHelper.setWithoutUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.EAST));
 
 					_pos = bpos.west();
 					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() >= blockBox.minX())
-						BlocksHelper.setWithUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.WEST));
+						BlocksHelper.setWithoutUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.WEST));
 				}
 			}
 		}
@@ -298,7 +293,7 @@ public class StructureAnchorTree implements IStructure {
 			boolean east = world.getBlockState(p.east()).getBlock() != NetherBlocks.GIANT_LUCIS;
 			boolean west = world.getBlockState(p.west()).getBlock() != NetherBlocks.GIANT_LUCIS;
 			BlockState state = NetherBlocks.GIANT_LUCIS.defaultBlockState();
-			BlocksHelper.setWithUpdate(world, p, state
+			BlocksHelper.setWithoutUpdate(world, p, state
 					.setValue(HugeMushroomBlock.NORTH, north)
 					.setValue(HugeMushroomBlock.SOUTH, south)
 					.setValue(HugeMushroomBlock.EAST, east)
