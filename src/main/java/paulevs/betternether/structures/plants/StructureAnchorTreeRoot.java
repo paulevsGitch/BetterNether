@@ -39,10 +39,10 @@ public class StructureAnchorTreeRoot implements IStructure {
 		if (count < 3) count = 3;
 		if ((count & 1) == 0) count++;
 		POS.set(pos.getX() - dx * size, pos.getY() + 10, pos.getZ() - dz * size);
-		BlockPos start = POS.above(BlocksHelper.upRay(world, POS, 64));
+		BlockPos start = POS.above(BlocksHelper.upRay(world, POS, (int)(MAX_HEIGHT*0.75)));
 		if (start.getY() < pos.getY()) start = POS.set(start).offset(0, 10, 0).immutable();
 		POS.set(pos.getX() + dx * size, pos.getY() + 10, pos.getZ() + dz * size);
-		BlockPos end = POS.above(BlocksHelper.upRay(world, POS, 64));
+		BlockPos end = POS.above(BlocksHelper.upRay(world, POS, (int)(MAX_HEIGHT*0.75)));
 		if (end.getY() < pos.getY()) end = POS.set(end).offset(0, 10, 0).immutable();
 		List<BlockPos> blocks = lineParable(start, end, count, random, 0.2);
 
