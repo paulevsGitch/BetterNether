@@ -27,7 +27,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
 	private final IStructure structure;
 
 	public BlockLumabusSeed(IStructure structure) {
-		super(FabricBlockSettings.of(.Materials.NETHER_SAPLING)
+		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(MaterialColor.COLOR_RED)
 				.sounds(SoundType.CROP)
 				.nonOpaque()
