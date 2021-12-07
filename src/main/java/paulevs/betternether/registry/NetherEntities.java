@@ -166,13 +166,6 @@ public class NetherEntities {
 	
 	
 	public static void register() {
-		NETHER_ENTITIES.add(EntityType.GHAST);
-		NETHER_ENTITIES.add(EntityType.ZOMBIFIED_PIGLIN);
-		NETHER_ENTITIES.add(EntityType.PIGLIN);
-		NETHER_ENTITIES.add(EntityType.HOGLIN);
-		NETHER_ENTITIES.add(EntityType.BLAZE);
-		NETHER_ENTITIES.add(EntityType.STRIDER);
-		
 		registerEntity("chair", CHAIR, EntityChair.getAttributeContainer());
 		registerEntity("naga_projectile", NAGA_PROJECTILE);
 		

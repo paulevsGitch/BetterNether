@@ -9,11 +9,11 @@ import paulevs.betternether.config.Configs;
 import paulevs.betternether.loot.BNLoot;
 import paulevs.betternether.recipes.IntegrationRecipes;
 import paulevs.betternether.recipes.ItemRecipes;
-import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
-import paulevs.betternether.registry.NetherEntities;
+import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherItems;
 import paulevs.betternether.registry.NetherStructures;
@@ -36,7 +36,7 @@ public class BetterNether implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("=^..^=    BetterNether for 1.18    =^..^=");
-		
+		//MigrationProfile.fixCustomFolder(new File("/Users/frank/Entwicklung/BetterNether/src/main/resources/data/betternether/structures/lava"));
 		initOptions();
 		SoundsRegistry.register();
 		NetherBlocks.register();
@@ -63,7 +63,7 @@ public class BetterNether implements ModInitializer {
 		DataExchangeAPI.registerMod(BetterNether.MOD_ID);
 		Patcher.register();
 		
-		//MigrationProfile.fixCustomFolder(new File("/Users/frank/Entwicklung/BetterNether/src/main/resources/data/betternether/structures"));
+		
 	}
 	
 	private void initOptions() {
