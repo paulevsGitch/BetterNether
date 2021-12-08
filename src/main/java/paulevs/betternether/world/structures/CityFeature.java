@@ -22,6 +22,7 @@ import paulevs.betternether.world.structures.city.CityGenerator;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
 import paulevs.betternether.world.structures.piece.CityPiece;
+import ru.bclib.world.structures.BCLStructureFeature;
 
 import java.util.List;
 
@@ -41,13 +42,9 @@ public class CityFeature extends NoiseAffectingStructureFeature<NoneFeatureConfi
 	}
 	private static final int DEFAULT_HEIGHT = 40;
 	private static <C extends FeatureConfiguration> boolean checkLocation(Context<C> context) {
-		BlockPos blockPos = context.chunkPos().getMiddleBlockPosition(DEFAULT_HEIGHT);
-
 		return
 				Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)
-				&& context.validBiome().test(
-						context.chunkGenerator().getNoiseBiome(QuartPos.fromBlock(blockPos.getX()), QuartPos.fromBlock(blockPos.getY()), QuartPos.fromBlock(blockPos.getZ()))
-				);
+				&& BCLStructureFeature.isValidBiome(context, DEFAULT_HEIGHT);
 	}
 	
 	private static void generatePieces(StructurePiecesBuilder structurePiecesBuilder, PieceGenerator.Context<NoneFeatureConfiguration> context) {
