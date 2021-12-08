@@ -9,6 +9,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Noises;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.structures.StructureType;
@@ -30,6 +32,11 @@ import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.world.biomes.BCLBiome;
 
 public class UpsideDownForest extends NetherBiome {
+	private static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
+	private static final SurfaceRules.RuleSource NETHERRACK = SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState());
+	private static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherBlocks.JUNGLE_MOSS.defaultBlockState());
+	private static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition(Noises.NETHER_STATE_SELECTOR, 0.0);
+	private static final SurfaceRules.ConditionSource NOISE_FLOOR_LAYER = SurfaceRules.noiseCondition(Noises.NETHER_WART, 1.17);
 	public static class Config extends NetherBiomeConfig {
 		public Config(String name) {
 			super(name);
@@ -42,6 +49,18 @@ public class UpsideDownForest extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST);
+			//TODO: 1.18 reenable once surface rules work with Datapacks
+//				   .surface(SurfaceRules.sequence(
+//					   SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
+//						   SurfaceRules.sequence(SurfaceRules.ifTrue(NOISE_CEIL_LAYER, CEILEING_MOSS), NETHERRACK)
+//						   CEILEING_MOSS
+//					   ),
+//					   SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
+//						   NETHERRACK_MOSS
+//						   SurfaceRules.sequence(SurfaceRules.ifTrue(NOISE_FLOOR_LAYER, NETHERRACK_MOSS), NETHERRACK)
+//					   ),
+//					   NETHERRACK)
+//				   );
 		}
 		
 		@Override
