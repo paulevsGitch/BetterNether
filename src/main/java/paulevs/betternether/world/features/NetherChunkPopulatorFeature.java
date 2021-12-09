@@ -15,12 +15,10 @@ public class NetherChunkPopulatorFeature extends DefaultFeature {
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
 		final BlockPos worldPos = featurePlaceContext.origin();
 		final WorldGenLevel level = featurePlaceContext.level();
-		//final ChunkPos cPos = level.getChunk(pos).getPos();
-		
 		final int sx = (worldPos.getX() >> 4) << 4;
 		final int sz = (worldPos.getZ() >> 4) << 4;
 		
-		BNWorldGenerator.prePopulate(level, sx, sz, featurePlaceContext.random());
+		BNWorldGenerator.prePopulate(level, sx, sz, featurePlaceContext);
 		BNWorldGenerator.populate(level, sx, sz, featurePlaceContext);
 		
 		return true;

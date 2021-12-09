@@ -6,7 +6,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import paulevs.betternether.BlocksHelper;
@@ -16,7 +15,7 @@ import paulevs.betternether.config.Configs;
 import paulevs.betternether.structures.StructureType;
 import paulevs.betternether.world.features.CavesFeature;
 import ru.bclib.api.biomes.BiomeAPI;
-import ru.bclib.world.biomes.BCLBiome;
+import ru.bclib.world.generator.GeneratorOptions;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,7 +29,7 @@ public class BNWorldGenerator {
 
 	private static MutableBlockPos popPos = new MutableBlockPos();
 
-	private static final NetherBiome[][] BIOMES = new NetherBiome[8][8];
+	private static final NetherBiome[][][] BIOMES = new NetherBiome[8][8][8];
 
 	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(4096);
 	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(4096);
@@ -54,13 +53,6 @@ public class BNWorldGenerator {
 		biomeSizeY = Configs.GENERATOR.getInt("generator_world", "biome_size_y", 40);
 		volumetric = Configs.GENERATOR.getBoolean("generator_world", "volumetric_biomes", true);
 	}
-
-	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random) {
-		final int px = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
-		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
-		return BIOMES[clamp(px, 7)][clamp(pz, 7)];
-	}
-
 	private static int clamp(int x, int max) {
 		return x < 0 ? 0 : x > max ? max : x;
 	}
@@ -68,6 +60,9 @@ public class BNWorldGenerator {
 	public static void populate(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
 		final Random random = featurePlaceContext.random();
 		final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
+		
+		int layerHeight = getLayerHeight(MAX_HEIGHT);
+		
 		// Structure Generator
 		if (random.nextFloat() < structureDensity) {
 			popPos.set(sx + random.nextInt(16), MHelper.randRange(33, MAX_HEIGHT-28, random), sz + random.nextInt(16));
@@ -75,7 +70,7 @@ public class BNWorldGenerator {
 			boolean isAir = world.getBlockState(popPos).getMaterial().isReplaceable();
 			boolean airUp = world.getBlockState(popPos.above()).getMaterial().isReplaceable() && world.getBlockState(popPos.above(3)).getMaterial().isReplaceable();
 			boolean airDown = world.getBlockState(popPos.below()).getMaterial().isReplaceable() && world.getBlockState(popPos.below(3)).getMaterial().isReplaceable();
-			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+			NetherBiome biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random, layerHeight, world, popPos);
 			if (!isAir && !airUp && !airDown && random.nextInt(8) == 0)
 				type = StructureType.UNDER;
 			else {
@@ -103,7 +98,7 @@ public class BNWorldGenerator {
 					type = StructureType.CEIL;
 				}
 			}
-			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+			biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random, layerHeight, world, popPos);
 			if (biome!=null) {
 				if (world.getBlockState(popPos)
 						 .getMaterial()
@@ -126,7 +121,7 @@ public class BNWorldGenerator {
 		if (random.nextFloat() < lavaStructureDensity) {
 			popPos.set(sx + random.nextInt(16), 32, sz + random.nextInt(16));
 			if (world.isEmptyBlock(popPos) && BlocksHelper.isLava(world.getBlockState(popPos.below()))) {
-				biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random);
+				biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome!=null) {
 					biome.genLavaBuildings(world, popPos, random, MAX_HEIGHT);
 				}
@@ -149,7 +144,7 @@ public class BNWorldGenerator {
 					if (CavesFeature.isInCave(x, y, z))
 						continue;
 
-					biome = getBiomeLocal(x, y, z, random);
+					biome = getBiomeLocal(x, y, z, random, layerHeight, world, popPos);
 					if (biome!=null) {
 						popPos.set(wx, y, wz);
 						BlockState state = world.getBlockState(popPos);
@@ -202,10 +197,10 @@ public class BNWorldGenerator {
 				}
 			}
 		}
-
+		
 		for (BlockPos pos : LIST_LAVA) {
 			if (world.isEmptyBlock(pos)) {
-				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
+				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome != null)
 					biome.genLavaObjects(world, pos, random, MAX_HEIGHT);
 			}
@@ -213,48 +208,72 @@ public class BNWorldGenerator {
 
 		for (BlockPos pos : LIST_FLOOR)
 			if (world.isEmptyBlock(pos)) {
-				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
+				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome != null)
 					biome.genFloorObjects(world, pos, random, MAX_HEIGHT);
 			}
 
 		for (BlockPos pos : LIST_WALL)
 			if (world.isEmptyBlock(pos)) {
-				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
+				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome != null)
 					biome.genWallObjects(world, pos, random, MAX_HEIGHT);
 			}
 
 		for (BlockPos pos : LIST_CEIL)
 			if (world.isEmptyBlock(pos)) {
-				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random);
+				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome != null)
 					biome.genCeilObjects(world, pos, random, MAX_HEIGHT);
 			}
 	}
-
-	private static void makeLocalBiomes(WorldGenLevel world, int sx, int sz) {
+	
+	private static int getLayerHeight(int MAX_HEIGHT) {
+		int layerHeight = MAX_HEIGHT;
+		//we have vertical biomes
+		if (MAX_HEIGHT > 128 && GeneratorOptions.useVerticalBiomes()){
+			layerHeight = MAX_HEIGHT/8;
+		}
+		return layerHeight;
+	}
+	
+	private static void makeLocalBiomes(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+		final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
+		int layerHeight = getLayerHeight(MAX_HEIGHT);
 		MC_BIOMES.clear();
 		popPos.setY(5);
+		final int ySteps = ((MAX_HEIGHT<=128)?1:8);
 		for (int x = 0; x < 8; x++) {
 			popPos.setX(sx + (x << 1) + 2);
-			for (int z = 0; z < 8; z++) {
-				popPos.setZ(sz + (z << 1) + 2);
-				Biome b = world.getBiome(popPos);
-				
-				if ( BiomeAPI.getFromBiome(b) instanceof NetherBiome nBiome) {
-					BIOMES[x][z] = nBiome;
-				} else {
-					//BiomesRegistry.BIOME_EMPTY_NETHER;
-					BIOMES[x][z] = null;
+			for (int y = 0; y < ySteps; y++) {
+				popPos.setY((int)(y*layerHeight + 0.5*layerHeight));
+				for (int z = 0; z < 8; z++) {
+					popPos.setZ(sz + (z << 1) + 2);
+					Biome b = world.getBiome(popPos);
+					
+					if (BiomeAPI.getFromBiome(b) instanceof NetherBiome nBiome) {
+						BIOMES[x][z][y] = nBiome;
+					} else {
+						//BiomesRegistry.BIOME_EMPTY_NETHER;
+						BIOMES[x][z][y] = null;
+					}
+					//BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
+					MC_BIOMES.add(b);
 				}
-				//BIOMES[x][y][z] = BiomesRegistry.getFromBiome(b);
-				MC_BIOMES.add(b);
 			}
 		}
 	}
 
-	public static void prePopulate(WorldGenLevel world, int sx, int sz, Random random) {
-		makeLocalBiomes(world, sx, sz);
+	public static void prePopulate(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+		makeLocalBiomes(world, sx, sz, featurePlaceContext);
 	}
+	
+	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random, int layerHeight, WorldGenLevel world, BlockPos pos) {
+		final int px = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
+		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
+		final int py = y/layerHeight;
+
+		return BIOMES[clamp(px, 7)][clamp(pz, 7)][clamp(py, 7)];
+	}
+	
 }
