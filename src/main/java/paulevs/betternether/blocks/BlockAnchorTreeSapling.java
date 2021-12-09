@@ -4,15 +4,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.structures.plants.StructureAnchorTreeBranch;
+import paulevs.betternether.world.structures.plants.StructureAnchorTreeBranch;
 import ru.bclib.blocks.FeatureHangingSaplingBlock;
 import ru.bclib.world.features.DefaultFeature;
-
-import java.util.function.Function;
 
 class AnchorTreeFeature extends DefaultFeature {
 	private static final StructureAnchorTreeBranch STRUCTURE = new StructureAnchorTreeBranch();

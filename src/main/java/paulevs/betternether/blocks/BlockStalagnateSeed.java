@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.structures.plants.StructureStalagnate;
+import paulevs.betternether.world.structures.plants.StructureStalagnate;
 import ru.bclib.blocks.FeatureSaplingBlock;
 import ru.bclib.world.features.DefaultFeature;
 

@@ -1,20 +1,13 @@
 package paulevs.betternether.registry;
 
-import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.world.structures.CityFeature;
+import paulevs.betternether.world.structures.city.CityFeature;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
-import ru.bclib.world.biomes.BCLBiome;
 import ru.bclib.world.structures.BCLStructureFeature;
 
 public class NetherStructures {

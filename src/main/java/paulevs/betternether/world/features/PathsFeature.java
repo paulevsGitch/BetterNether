@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import paulevs.betternether.structures.StructurePath;
+import paulevs.betternether.world.structures.StructurePath;
 import ru.bclib.world.features.DefaultFeature;
 
 import java.util.Random;

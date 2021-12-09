@@ -30,7 +30,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
-import paulevs.betternether.structures.plants.StructureWartTree;
+import paulevs.betternether.world.structures.plants.StructureWartTree;
 
 public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock {
 	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(Direction.class);

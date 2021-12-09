@@ -49,7 +49,6 @@ public abstract class MapMixin extends ComplexItem {
 			boolean bl = false;
 
 			BlockState blockState = Blocks.BEDROCK.defaultBlockState();
-			Blocks.BEDROCK.defaultBlockState();
 
 			for (int o = l - n + 1; o < l + n; ++o) {
 				if ((o & 15) == (playerUpdateTracker.step & 15) || bl) {
@@ -81,6 +80,7 @@ public abstract class MapMixin extends ComplexItem {
 										mutable.set(x + u, 127, z + v);
 
 										blockState = Blocks.NETHERRACK.defaultBlockState();
+										//TODO: Amplified, get value from worldChunk.getHeight()?
 										for (int y = 126; y > 0; y--) {
 											mutable.setY(y);
 											if (!world.isEmptyBlock(mutable) && world.isEmptyBlock(mutable.above())) {

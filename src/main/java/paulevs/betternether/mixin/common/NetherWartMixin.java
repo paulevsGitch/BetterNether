@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.structures.plants.StructureMedBrownMushroom;
-import paulevs.betternether.structures.plants.StructureMedRedMushroom;
+import paulevs.betternether.world.structures.plants.StructureMedBrownMushroom;
+import paulevs.betternether.world.structures.plants.StructureMedRedMushroom;
 
 @Mixin(NetherWartBlock.class)
 public abstract class NetherWartMixin extends BushBlock {

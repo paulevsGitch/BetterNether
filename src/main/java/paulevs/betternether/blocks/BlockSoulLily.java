@@ -31,7 +31,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.structures.plants.StructureSoulLily;
+import paulevs.betternether.world.structures.plants.StructureSoulLily;
 
 public class BlockSoulLily extends BlockBaseNotFull {
 	public static final EnumProperty<SoulLilyShape> SHAPE = EnumProperty.create("shape", SoulLilyShape.class);
