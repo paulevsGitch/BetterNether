@@ -59,6 +59,7 @@ public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity 
 		return ChestMenu.threeRows(syncId, playerInventory, this);
 	}
 
+	@Override
 	public void load(CompoundTag tag) {
 		super.load(tag);
 		this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
@@ -67,12 +68,12 @@ public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity 
 		}
 	}
 
-	public CompoundTag save(CompoundTag tag) {
+	@Override
+	public void saveAdditional(CompoundTag tag) {
 		super.saveAdditional(tag);
 		if (!this.trySaveLootTable(tag)) {
 			ContainerHelper.saveAllItems(tag, this.inventory);
 		}
-		return tag;
 	}
 
 	public void onInvOpen(Player player) {
