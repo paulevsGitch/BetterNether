@@ -207,7 +207,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mate) {
-		return NetherEntities.FIREFLY.create(world);
+		return NetherEntities.FIREFLY.type().create(world);
 	}
 
 	@Override

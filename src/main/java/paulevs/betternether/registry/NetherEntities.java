@@ -37,12 +37,13 @@ import paulevs.betternether.entity.EntityNagaProjectile;
 import paulevs.betternether.entity.EntitySkull;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.api.spawning.SpawnRuleBuilder;
+import ru.bclib.entity.BCLEntityWrapper;
 import ru.bclib.interfaces.SpawnRule;
 import ru.bclib.util.ColorUtil;
 
 public class NetherEntities {
 	public static final Map<EntityType<? extends LivingEntity>, AttributeSupplier> ATTRIBUTES = Maps.newHashMap();
-	private static final List<EntityType<?>> NETHER_ENTITIES = Lists.newArrayList();
+	private static final List<BCLEntityWrapper<?>> NETHER_ENTITIES = Lists.newArrayList();
 	
 	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(MobCategory.MISC, EntityChair::new)
 																			   .dimensions(EntityDimensions.fixed(0.0F, 0.0F))
@@ -54,7 +55,7 @@ public class NetherEntities {
 																								  .disableSummon()
 																								  .build();
 	
-	public static final EntityType<EntityFirefly> FIREFLY =
+	public static final BCLEntityWrapper<EntityFirefly> FIREFLY =
 		register(
 			"firefly",
 			MobCategory.AMBIENT,
@@ -67,7 +68,7 @@ public class NetherEntities {
 			ColorUtil.color(233, 182, 95)
 		);
 	
-	public static final EntityType<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH =
+	public static final BCLEntityWrapper<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH =
 		register(
 			"hydrogen_jellyfish",
 			MobCategory.AMBIENT,
@@ -80,7 +81,7 @@ public class NetherEntities {
 			ColorUtil.color(88, 21, 4)
 		);
 	
-	public static final EntityType<EntityNaga> NAGA =
+	public static final BCLEntityWrapper<EntityNaga> NAGA =
 		register(
 			"naga",
 			MobCategory.MONSTER,
@@ -93,7 +94,7 @@ public class NetherEntities {
 			ColorUtil.color(210, 90, 26)
 		);
 	
-	public static final EntityType<EntityFlyingPig> FLYING_PIG =
+	public static final BCLEntityWrapper<EntityFlyingPig> FLYING_PIG =
 		register(
 			"flying_pig",
 			MobCategory.AMBIENT,
@@ -106,7 +107,7 @@ public class NetherEntities {
 			ColorUtil.color(176, 58, 47)
 		);
 	
-	public static final EntityType<EntityJungleSkeleton> JUNGLE_SKELETON =
+	public static final BCLEntityWrapper<EntityJungleSkeleton> JUNGLE_SKELETON =
 		register(
 			"jungle_skeleton",
 			MobCategory.MONSTER,
@@ -119,7 +120,7 @@ public class NetherEntities {
 			ColorUtil.color(6, 111, 79)
 		);
 	
-	public static final EntityType<EntitySkull> SKULL =
+	public static final BCLEntityWrapper<EntitySkull> SKULL =
 		register(
 			"skull",
 			MobCategory.MONSTER,
@@ -132,21 +133,25 @@ public class NetherEntities {
 			ColorUtil.color(255, 28, 18)
 		);
 	
-	private static <T extends Mob> EntityType<T> register(String name, MobCategory group, float width, float height, EntityFactory<T> entity, Builder attributes, boolean fixedSize, int eggColor, int dotsColor) {
+	
+	private static <T extends Mob> BCLEntityWrapper<T> register(String name, MobCategory group, float width, float height, EntityFactory<T> entity, Builder attributes, boolean fixedSize, int eggColor, int dotsColor) {
 		ResourceLocation id = BetterNether.makeID(name);
 		EntityType<T> type = FabricEntityTypeBuilder.<T>create(group, entity)
 													.dimensions(fixedSize ? EntityDimensions.fixed(width, height) : EntityDimensions.scalable(width, height))
 													.fireImmune() //Nether Entities are by default immune to fire
 													.build();
+		
+		type = Registry.register(Registry.ENTITY_TYPE, id, type);
+		FabricDefaultAttributeRegistry.register(type, attributes);
+		NetherItems.makeEgg("spawn_egg_" + name, type, eggColor, dotsColor);
+		
 		if (Configs.MOBS.getBooleanRoot(id.getPath(), true)) {
-			type = Registry.register(Registry.ENTITY_TYPE, BetterNether.makeID(name), type);
-			FabricDefaultAttributeRegistry.register(type, attributes);
-			NetherItems.makeEgg("spawn_egg_" + name, type, eggColor, dotsColor);
-			return type;
+			return new BCLEntityWrapper<>(type, true);
 		}
 		
-		NETHER_ENTITIES.add(type);
-		return type;
+		var wrapper = new BCLEntityWrapper<>(type, false);
+		NETHER_ENTITIES.add(wrapper);
+		return wrapper;
 	}
 	
 	private static boolean testSpawnAboveLava(LevelAccessor world, BlockPos pos, boolean allow){

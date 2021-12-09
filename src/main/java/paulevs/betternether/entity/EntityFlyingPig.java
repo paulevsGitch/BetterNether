@@ -445,7 +445,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob mate) {
-		EntityFlyingPig pig = NetherEntities.FLYING_PIG.create(this.level);
+		EntityFlyingPig pig = NetherEntities.FLYING_PIG.type().create(this.level);
 		pig.setWarted(pig.isWarted());
 		return pig;
 	}
