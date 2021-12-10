@@ -86,10 +86,14 @@ public class CommandRegistry {
                                   .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                                   .executes(ctx -> revealOre(ctx))
                     )
+                    .then(Commands.literal("place_pyramid")
+                                  .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
+                                  .executes(ctx -> placeNbt(ctx, "lava/pyramid_4"))
+                    )
                     .then(Commands.literal("place_nbt")
                                   .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                                   .then(Commands.argument("name", StringArgumentType.string())
-                                    .executes(ctx -> placeNbt(ctx, StringArgumentType.getString(ctx, "type"))))
+                                    .executes(ctx -> placeNbt(ctx, StringArgumentType.getString(ctx, "name"))))
                     )
         );
     }
