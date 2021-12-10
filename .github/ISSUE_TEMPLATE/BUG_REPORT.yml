@@ -58,6 +58,7 @@ body:
       label: Minecraft
       description: What version BCLib is installed?
       options:
+        - 1.18.1
         - 1.18
         - 1.17.1
         - 1.17
