@@ -174,7 +174,7 @@ public class CommandRegistry {
             if (structure==null){
                 throw ERROR_NBT_STRUCTURE_NOT_FOUND.create(type);
             }
-            structure.generate(level, new BlockPos(pos.x + 1, pos.y, pos.z + 1), MHelper.RANDOM, 128);
+            structure.generate(level, new BlockPos(pos), MHelper.RANDOM, 128);
         } catch (Throwable t){
             BCLib.LOGGER.error("Error loading from nbt: " + type);
             BCLib.LOGGER.error(t.toString());
