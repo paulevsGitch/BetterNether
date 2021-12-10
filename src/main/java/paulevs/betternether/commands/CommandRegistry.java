@@ -39,6 +39,7 @@ import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.StructureWorld;
+import ru.bclib.BCLib;
 import ru.bclib.world.biomes.BCLBiome;
 
 import java.util.Collections;
@@ -53,6 +54,10 @@ public class CommandRegistry {
             (object) -> {
                 return new TextComponent("The next biome ("+object+") was not found.");
             });
+    private static final DynamicCommandExceptionType ERROR_NBT_STRUCTURE_NOT_FOUND = new DynamicCommandExceptionType(
+        (object) -> {
+            return new TextComponent("The nbt-structure ("+object+") was not found.");
+        });
     private static final int MAX_SEARCH_RADIUS = 6400*2;
     private static final int SEARCH_STEP = 8;
 
@@ -81,9 +86,10 @@ public class CommandRegistry {
                                   .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                                   .executes(ctx -> revealOre(ctx))
                     )
-                    .then(Commands.literal("place_pyramid")
+                    .then(Commands.literal("place_nbt")
                                   .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
-                                  .executes(ctx -> placePyramid(ctx))
+                                  .then(Commands.argument("name", StringArgumentType.string())
+                                  .executes(ctx -> placeNbt(ctx, StringArgumentType.getString(ctx, "type")))
                     )
         );
     }
@@ -158,13 +164,22 @@ public class CommandRegistry {
         return as.compareTo(bs);
     }
     
-    private static int placePyramid(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+    private static int placeNbt(CommandContext<CommandSourceStack> ctx, String type) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
         final ServerPlayer player = source.getPlayerOrException();
         Vec3 pos = source.getPosition();
         final ServerLevel level = source.getLevel();
-        StructureWorld structure = new StructureWorld("lava/pyramid_4", 0, StructureType.FLOOR);
-        structure.generate(level, new BlockPos(pos.x+1, pos.y, pos.z+1), MHelper.RANDOM, 128);
+        try {
+            StructureWorld structure = new StructureWorld(type, 0, StructureType.FLOOR);
+            if (structure==null){
+                throw ERROR_NBT_STRUCTURE_NOT_FOUND.create(type);
+            }
+            structure.generate(level, new BlockPos(pos.x + 1, pos.y, pos.z + 1), MHelper.RANDOM, 128);
+        } catch (Throwable t){
+            BCLib.LOGGER.error("Error loading from nbt: " + type);
+            BCLib.LOGGER.error(t.toString());
+            throw ERROR_NBT_STRUCTURE_NOT_FOUND.create(type);
+        }
         return Command.SINGLE_SUCCESS;
     }
     
