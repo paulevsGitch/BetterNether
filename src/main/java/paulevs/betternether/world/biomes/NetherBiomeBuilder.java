@@ -32,7 +32,7 @@ public class NetherBiomeBuilder {
 
 	static final IStructureFeatures VANILLA_STRUCTURES = (IStructureFeatures)(Object)new StructureFeatures();
 	
-	private static void addDefaultStructures(BCLBiomeBuilder builder) {
+	private static void addVanillaStructures(BCLBiomeBuilder builder) {
 		builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
 		builder.structure(VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		builder.structure(VANILLA_STRUCTURES.getRUINED_PORTAL_NETHER());
@@ -91,7 +91,7 @@ public class NetherBiomeBuilder {
 			.spawn(NetherEntities.NAGA, 8, 3, 5)
 			.spawn(NetherEntities.HYDROGEN_JELLYFISH, 5, 2, 6);
 		
-		if (data.hasVanillaStructures()) addDefaultStructures(builder);
+		if (data.hasVanillaStructures()) addVanillaStructures(builder);
 		if (data.hasVanillaFeatures()) addDefaultFeatures(builder);
 		if (data.hasVanillaOres()) builder.netherDefaultOres();
 		
