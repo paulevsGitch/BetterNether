@@ -89,7 +89,7 @@ public class CommandRegistry {
                     .then(Commands.literal("place_nbt")
                                   .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                                   .then(Commands.argument("name", StringArgumentType.string())
-                                  .executes(ctx -> placeNbt(ctx, StringArgumentType.getString(ctx, "type")))
+                                    .executes(ctx -> placeNbt(ctx, StringArgumentType.getString(ctx, "type"))))
                     )
         );
     }
