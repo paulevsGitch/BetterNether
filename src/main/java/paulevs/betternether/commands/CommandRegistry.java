@@ -33,9 +33,12 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.MHelper;
 import paulevs.betternether.world.biomes.NetherBiome;
 import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.world.structures.StructureType;
+import paulevs.betternether.world.structures.StructureWorld;
 import ru.bclib.world.biomes.BCLBiome;
 
 import java.util.Collections;
@@ -77,6 +80,10 @@ public class CommandRegistry {
                     .then(Commands.literal("debug_ore")
                                   .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                                   .executes(ctx -> revealOre(ctx))
+                    )
+                    .then(Commands.literal("place_pyramid")
+                                  .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
+                                  .executes(ctx -> placePyramid(ctx))
                     )
         );
     }
@@ -149,6 +156,16 @@ public class CommandRegistry {
         final String bs = Registry.BLOCK.getKey(b)
                                         .getPath();
         return as.compareTo(bs);
+    }
+    
+    private static int placePyramid(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        final CommandSourceStack source = ctx.getSource();
+        final ServerPlayer player = source.getPlayerOrException();
+        Vec3 pos = source.getPosition();
+        final ServerLevel level = source.getLevel();
+        StructureWorld structure = new StructureWorld("lava/pyramid_4", 0, StructureType.FLOOR);
+        structure.generate(level, new BlockPos(pos.x+1, pos.y, pos.z+1), MHelper.RANDOM, 128);
+        return Command.SINGLE_SUCCESS;
     }
     
     private static Map<Biome, BlockState> biomeMap = new HashMap<>();
