@@ -1,5 +1,7 @@
 package paulevs.betternether.world.biomes;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.StructureFeatures;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
@@ -38,7 +40,7 @@ public class NetherBiomeBuilder {
 		builder.structure(VANILLA_STRUCTURES.getRUINED_PORTAL_NETHER());
 	}
 	
-	private static void addDefaultFeatures(BCLBiomeBuilder builder) {
+	private static void addVanillaFeatures(BCLBiomeBuilder builder) {
 		builder
 			.feature(GenerationStep.Decoration.VEGETAL_DECORATION, MiscOverworldPlacements.SPRING_LAVA)
 			.defaultMushrooms()
@@ -92,7 +94,7 @@ public class NetherBiomeBuilder {
 			.spawn(NetherEntities.HYDROGEN_JELLYFISH, 5, 2, 6);
 		
 		if (data.hasVanillaStructures()) addVanillaStructures(builder);
-		if (data.hasVanillaFeatures()) addDefaultFeatures(builder);
+		if (data.hasVanillaFeatures()) addVanillaFeatures(builder);
 		if (data.hasVanillaOres()) builder.netherDefaultOres();
 		
 		if (data.spawnVanillaMobs()) addVanillaMobs(builder);
@@ -101,6 +103,14 @@ public class NetherBiomeBuilder {
 		NetherStructures.addDefaultFeatures(builder);
 		data.addCustomBuildData(builder);
 		
-		return builder.build(data.getSupplier());
+		NetherBiome b =  builder.build(data.getSupplier());
+//		BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE
+//			.getResourceKey(NetherStructures.CITY_STRUCTURE.getFeatureConfigured())
+//			.ifPresent(key -> BiomeModifications.addStructure(ctx -> {
+//				return ctx.getBiomeKey()
+//						  .location()
+//						  .equals(b.getID());
+//			}, key));
+		return b;
 	}
 }
