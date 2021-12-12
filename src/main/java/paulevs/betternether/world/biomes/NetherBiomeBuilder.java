@@ -104,6 +104,7 @@ public class NetherBiomeBuilder {
 		data.addCustomBuildData(builder);
 		
 		NetherBiome b =  builder.build(data.getSupplier());
+		if (data.vertical()) b.setVertical();
 //		BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE
 //			.getResourceKey(NetherStructures.CITY_STRUCTURE.getFeatureConfigured())
 //			.ifPresent(key -> BiomeModifications.addStructure(ctx -> {

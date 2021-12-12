@@ -66,6 +66,11 @@ public class UpsideDownForest extends NetherBiome {
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return UpsideDownForest::new;
 		}
+		
+		@Override
+		public boolean vertical() {
+			return true;
+		}
 	}
 	
 	@Override

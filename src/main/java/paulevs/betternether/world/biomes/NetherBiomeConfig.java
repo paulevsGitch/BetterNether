@@ -31,6 +31,10 @@ public abstract class NetherBiomeConfig {
 		return true;
 	}
 	
+	public boolean vertical() {
+		return false;
+	}
+	
 	protected abstract void addCustomBuildData(BCLBiomeBuilder builder);
 	
 	public abstract BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier();
