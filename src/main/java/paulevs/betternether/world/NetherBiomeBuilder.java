@@ -30,7 +30,7 @@ public class NetherBiomeBuilder {
 	private static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM = new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_floor"), VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5));
 	private static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP = new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_roof"), VerticalAnchor.belowTop(5), VerticalAnchor.top());
 
-	static final IStructureFeatures VANILLA_STRUCTURES = (IStructureFeatures)(Object)new StructureFeatures();
+	public static final IStructureFeatures VANILLA_STRUCTURES = (IStructureFeatures)(Object)new StructureFeatures();
 	
 	private static void addVanillaStructures(BCLBiomeBuilder builder) {
 		builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);

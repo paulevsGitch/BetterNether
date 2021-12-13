@@ -10,7 +10,7 @@ import ru.bclib.api.biomes.BCLBiomeBuilder;
 import java.util.function.BiFunction;
 
 public abstract class NetherBiomeConfig {
-	static final SurfaceRules.RuleSource NETHERRACK = SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState());
+	public static final SurfaceRules.RuleSource NETHERRACK = SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState());
 	public final ResourceLocation ID;
 	
 	protected NetherBiomeConfig(String name) {
