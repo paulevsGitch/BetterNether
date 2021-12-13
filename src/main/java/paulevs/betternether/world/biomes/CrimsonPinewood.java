@@ -10,11 +10,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
-import paulevs.betternether.BlocksHelper;
-import paulevs.betternether.MHelper;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherEntities;
+import paulevs.betternether.world.NetherBiome;
+import paulevs.betternether.world.NetherBiomeBuilder;
+import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.plants.StructureCrimsonFungus;
 import paulevs.betternether.world.structures.plants.StructureCrimsonPinewood;
@@ -24,6 +25,7 @@ import paulevs.betternether.world.structures.plants.StructureWallMoss;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWartBush;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
+import paulevs.betternether.world.surface.CrimsonWoodNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 public class CrimsonPinewood extends NetherBiome {
@@ -42,7 +44,19 @@ public class CrimsonPinewood extends NetherBiome {
 				   .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
 				   .spawn(EntityType.HOGLIN, 9, 2, 5)
 				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
+				   .surface(
+					   SurfaceRules.sequence(
+						   SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
+							   SurfaceRules.sequence(
+								   SurfaceRules.ifTrue(new CrimsonWoodNoiseCondition(), CrimsonGlowingWoods.NETHER_WART_BLOCK),
+								   CrimsonGlowingWoods.CRIMSON_NYLIUM
+							   )
+						   ),
+						   NETHERRACK
+					   )
+				   )
+				   ;
 		}
 		
 		@Override
@@ -68,9 +82,9 @@ public class CrimsonPinewood extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
-		else
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.defaultBlockState());
+//		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
+//			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
+//		else
+//			BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.defaultBlockState());
 	}
 }
