@@ -36,7 +36,8 @@ public class NetherBoneReef extends NetherBiome {
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				   .particles(ParticleTypes.WARPED_SPORE, 0.01F);
+				   .particles(ParticleTypes.WARPED_SPORE, 0.01F)
+				   .surface(NetherBlocks.MUSHROOM_GRASS);
 		}
 		
 		@Override
@@ -68,6 +69,6 @@ public class NetherBoneReef extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MUSHROOM_GRASS.defaultBlockState());
+		//BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MUSHROOM_GRASS.defaultBlockState());
 	}
 }
