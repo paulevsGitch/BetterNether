@@ -11,9 +11,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
+import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.plants.StructureCrimsonFungus;
@@ -25,8 +27,27 @@ import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWartBush;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
+import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
+import ru.bclib.world.surface.DoubleBlockSurfaceNoiseCondition;
+
+class NoiseCondition extends SurfaceNoiseCondition {
+	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
+	
+	@Override
+	public boolean test(SurfaceRulesContextAccessor context) {
+		final int x = context.getBlockX();
+		final int z = context.getBlockZ();
+		
+		return TERRAIN.eval(x * 0.1, z * 0.1) > MHelper.randRange(0.5F, 0.7F, MHelper.RANDOM);
+	}
+}
 
 public class CrimsonGlowingWoods extends NetherBiome {
+	private static final SurfaceRules.RuleSource NETHER_WART_BLOCK = SurfaceRules.state(Blocks.NETHER_WART_BLOCK.defaultBlockState());
+	private static final SurfaceRules.RuleSource CRIMSON_NYLIUM = SurfaceRules.state(Blocks.CRIMSON_NYLIUM.defaultBlockState());
+	
+	
 	public static class Config extends NetherBiomeConfig {
 		public Config(String name) {
 			super(name);
@@ -42,7 +63,19 @@ public class CrimsonGlowingWoods extends NetherBiome {
 				   .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
 				   .spawn(EntityType.HOGLIN, 9, 1, 2)
 				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
+					.surface(
+						SurfaceRules.sequence(
+							SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
+								SurfaceRules.sequence(
+									SurfaceRules.ifTrue(new NoiseCondition(), NETHER_WART_BLOCK),
+									CRIMSON_NYLIUM
+								)
+							),
+							NETHERRACK
+						)
+					)
+			;
 		}
 		
 		@Override
@@ -51,7 +84,7 @@ public class CrimsonGlowingWoods extends NetherBiome {
 		}
 	}
 	
-	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
+	//private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
 	
 	public CrimsonGlowingWoods(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
@@ -68,9 +101,9 @@ public class CrimsonGlowingWoods extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
-		else
-			BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.defaultBlockState());
+//		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
+//			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
+//		else
+//			BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.defaultBlockState());
 	}
 }

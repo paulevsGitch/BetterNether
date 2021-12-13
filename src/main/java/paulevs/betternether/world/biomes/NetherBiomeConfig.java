@@ -2,12 +2,15 @@ package paulevs.betternether.world.biomes;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BetterNether;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 
 import java.util.function.BiFunction;
 
 public abstract class NetherBiomeConfig {
+	static final SurfaceRules.RuleSource NETHERRACK = SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState());
 	public final ResourceLocation ID;
 	
 	protected NetherBiomeConfig(String name) {
