@@ -12,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import paulevs.betternether.BlocksHelper;
@@ -238,7 +239,7 @@ public class StructureRubeus extends StructureFuncScatter {
 	}
 
 	private void crown(LevelAccessor world, int x, int y, int z, float radius, Random random) {
-		BlockState leaves = NetherBlocks.RUBEUS_LEAVES.defaultBlockState();
+		BlockState leaves = NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
 		BlockState cone = NetherBlocks.MAT_RUBEUS.getCone().defaultBlockState();
 		float halfR = radius * 0.5F;
 		float r2 = radius * radius;

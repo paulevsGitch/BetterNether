@@ -50,7 +50,7 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 		int maxCount = scale < 0.75 ? 5 : 7;
 		int count = MHelper.randRange(minCount, maxCount, random);
 		MutableBlockPos mutableBlockPos = new MutableBlockPos();
-		final BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState();
+		final BlockState leaves = NetherBlocks.ANCHOR_TREE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
 		final Direction[] directions = { Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.DOWN, Direction.UP};
 		
 		for (int n = 0; n < count; n++) {
