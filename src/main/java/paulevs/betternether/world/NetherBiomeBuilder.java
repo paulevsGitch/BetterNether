@@ -1,7 +1,5 @@
-package paulevs.betternether.world.biomes;
+package paulevs.betternether.world;
 
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.StructureFeatures;
 import net.minecraft.data.worldgen.biome.NetherBiomes;

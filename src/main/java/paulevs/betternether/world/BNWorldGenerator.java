@@ -10,7 +10,6 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
-import paulevs.betternether.world.biomes.NetherBiome;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.features.CavesFeature;

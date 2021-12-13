@@ -13,6 +13,8 @@ import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.world.NetherBiome;
+import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.decorations.StructureForestLitter;
 import paulevs.betternether.world.structures.plants.StructureAnchorTree;

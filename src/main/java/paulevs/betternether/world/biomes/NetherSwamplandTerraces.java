@@ -10,6 +10,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.world.NetherBiome;
 
 public class NetherSwamplandTerraces extends NetherSwampland {
 	public static class Config extends NetherSwampland.Config {

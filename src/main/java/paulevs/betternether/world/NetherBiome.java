@@ -1,4 +1,4 @@
-package paulevs.betternether.world.biomes;
+package paulevs.betternether.world;
 
 import java.util.ArrayList;
 import java.util.List;

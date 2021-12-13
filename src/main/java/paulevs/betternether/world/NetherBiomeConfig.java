@@ -1,4 +1,4 @@
-package paulevs.betternether.world.biomes;
+package paulevs.betternether.world;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
