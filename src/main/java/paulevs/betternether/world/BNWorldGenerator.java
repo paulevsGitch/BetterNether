@@ -23,23 +23,19 @@ public class BNWorldGenerator {
 	private static float structureDensity;
 	private static float lavaStructureDensity;
 	private static float globalDensity;
-
-	private static MutableBlockPos popPos = new MutableBlockPos();
-
-	private static final NetherBiome[][] BIOMES = new NetherBiome[8][8];
-
-	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(4096);
-	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(4096);
-	private static final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(4096);
-	private static final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
-	private static final HashSet<Biome> MC_BIOMES = new HashSet<Biome>();
-
-	private static NetherBiome biome;
-
 	protected static int biomeSizeXZ;
 	protected static int biomeSizeY;
-	protected static boolean volumetric;
 
+	private MutableBlockPos popPos = new MutableBlockPos();
+	private final NetherBiome[][] BIOMES = new NetherBiome[8][8];
+
+	private final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(4096);
+	private final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(4096);
+	private final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(4096);
+	private final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
+	private final HashSet<Biome> MC_BIOMES = new HashSet<Biome>();
+
+	private NetherBiome biome;
 	
 	public static void onModInit() {
 		structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
@@ -48,10 +44,9 @@ public class BNWorldGenerator {
 
 		biomeSizeXZ = Configs.GENERATOR.getInt("generator_world", "biome_size_xz", 200);
 		biomeSizeY = Configs.GENERATOR.getInt("generator_world", "biome_size_y", 40);
-		volumetric = Configs.GENERATOR.getBoolean("generator_world", "volumetric_biomes", true);
 	}
 
-	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random) {
+	private NetherBiome getBiomeLocal(int x, int y, int z, Random random) {
 		final int px = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
 		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
 		return BIOMES[clamp(px, 7)][clamp(pz, 7)];
@@ -61,7 +56,7 @@ public class BNWorldGenerator {
 		return x < 0 ? 0 : x > max ? max : x;
 	}
 
-	public static void populate(WorldGenLevel world, int sx, int sz, Random random) {
+	public void populate(WorldGenLevel world, int sx, int sz, Random random) {
 		final int MAX_HEIGHT = world.dimensionType().logicalHeight();
 		// Structure Generator
 		if (random.nextFloat() < structureDensity) {
@@ -228,7 +223,7 @@ public class BNWorldGenerator {
 			}
 	}
 
-	private static void makeLocalBiomes(WorldGenLevel world, int sx, int sz) {
+	private void makeLocalBiomes(WorldGenLevel world, int sx, int sz) {
 		MC_BIOMES.clear();
 		popPos.setY(5);
 		for (int x = 0; x < 8; x++) {
@@ -247,7 +242,7 @@ public class BNWorldGenerator {
 		}
 	}
 
-	public static void prePopulate(WorldGenLevel world, int sx, int sz, Random random) {
+	public void prePopulate(WorldGenLevel world, int sx, int sz, Random random) {
 		makeLocalBiomes(world, sx, sz);
 	}
 }

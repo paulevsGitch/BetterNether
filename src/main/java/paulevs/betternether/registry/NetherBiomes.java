@@ -38,6 +38,7 @@ import paulevs.betternether.biomes.OldWarpedWoods;
 import paulevs.betternether.biomes.UpsideDownForest;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.world.features.CavesFeature;
+import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.features.PathsFeature;
 import paulevs.betternether.world.structures.CityFeature;
 import ru.bclib.api.BiomeAPI;
@@ -206,5 +207,6 @@ public class NetherBiomes {
 		CavesFeature.onLoad(seed);
 		PathsFeature.onLoad(seed);
 		CityFeature.initGenerator();
+        NetherChunkPopulatorFeature.clearGeneratorPool();
 	}
 }
