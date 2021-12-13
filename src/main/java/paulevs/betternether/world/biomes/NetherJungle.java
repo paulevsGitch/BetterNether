@@ -48,7 +48,6 @@ public class NetherJungle extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_WARPED_FOREST)
-				   //TODO: 1.18 reenable once surface rules work with Datapacks
 				   .surface(NetherBlocks.JUNGLE_GRASS)
 				   .spawn(NetherEntities.JUNGLE_SKELETON, 40, 2, 4)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
@@ -100,6 +99,6 @@ public class NetherJungle extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.JUNGLE_GRASS.defaultBlockState());
+		//BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.JUNGLE_GRASS.defaultBlockState());
 	}
 }
