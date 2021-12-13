@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import paulevs.betternether.BlocksHelper;
@@ -112,7 +113,7 @@ public class StructureNetherSakura implements IStructure {
 	}
 
 	private void crown(LevelAccessor world, BlockPos pos, double radius, double height, Random random) {
-		BlockState leaves = NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState();
+		BlockState leaves = NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
 		double r2 = radius * radius;
 		int start = (int) Math.floor(-radius);
 		for (int cy = 0; cy <= radius; cy++) {
