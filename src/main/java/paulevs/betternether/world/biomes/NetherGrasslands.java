@@ -30,6 +30,7 @@ import paulevs.betternether.world.structures.plants.StructureWallMoss;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.SwitchRuleSource;
 
 public class NetherGrasslands extends NetherBiome {
@@ -64,18 +65,22 @@ public class NetherGrasslands extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
-				   .surface(new SwitchRuleSource(ctx -> {
-					   final int depth = ctx.getStoneDepthAbove();
-					   if (depth<=1) return MHelper.RANDOM.nextInt(3);
-					   if (depth<=MHelper.RANDOM.nextInt(3)+1) return 0;
-					   return 2;
-				   }, List.of(SOUL_SOIL, MOSS, NETHERRACK) ))
 			;
 		}
 		
 		@Override
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return NetherGrasslands::new;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super.surface().rule(new SwitchRuleSource(ctx -> {
+				final int depth = ctx.getStoneDepthAbove();
+				if (depth<=1) return MHelper.RANDOM.nextInt(3);
+				if (depth<=MHelper.RANDOM.nextInt(3)+1) return 0;
+				return 2;
+			}, List.of(SOUL_SOIL, MOSS, NETHERRACK) ));
 		}
 	}
 	

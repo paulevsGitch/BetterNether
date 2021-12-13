@@ -22,6 +22,7 @@ import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.world.structures.plants.StructureReeds;
 import paulevs.betternether.world.structures.plants.StructureSepiaBoneGrass;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class NetherSulfuricBoneReef extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -41,6 +42,11 @@ public class NetherSulfuricBoneReef extends NetherBiome {
 		@Override
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return NetherSulfuricBoneReef::new;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super.surface().floor(NetherBlocks.SEPIA_MUSHROOM_GRASS.defaultBlockState());
 		}
 	}
 	
@@ -66,6 +72,6 @@ public class NetherSulfuricBoneReef extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.SEPIA_MUSHROOM_GRASS.defaultBlockState());
+		//BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.SEPIA_MUSHROOM_GRASS.defaultBlockState());
 	}
 }

@@ -91,7 +91,7 @@ public class CommandRegistry {
                                   .then(Commands.argument("name", StringArgumentType.string())
                                     .executes(ctx -> placeNbt(ctx, StringArgumentType.getString(ctx, "name"))))
                     )
-                    .then(Commands.literal("sliceY")
+                    .then(Commands.literal("sliceZ")
                                   .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                                   .executes(ctx -> slice(ctx, true))
                     )

@@ -22,6 +22,7 @@ import paulevs.betternether.world.structures.plants.StructureTwistedVines;
 import paulevs.betternether.world.structures.plants.StructureWarpedFungus;
 import paulevs.betternether.world.structures.plants.StructureWarpedRoots;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class OldWarpedWoods extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -50,6 +51,11 @@ public class OldWarpedWoods extends NetherBiome {
 		public boolean spawnVanillaMobs() {
 			return false;
 		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super.surface().floor(Blocks.WARPED_NYLIUM.defaultBlockState());
+		}
 	}
 	
 	public OldWarpedWoods(ResourceLocation biomeID, Biome biome) {
@@ -64,6 +70,6 @@ public class OldWarpedWoods extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, Blocks.WARPED_NYLIUM.defaultBlockState());
+		//BlocksHelper.setWithoutUpdate(world, pos, Blocks.WARPED_NYLIUM.defaultBlockState());
 	}
 }

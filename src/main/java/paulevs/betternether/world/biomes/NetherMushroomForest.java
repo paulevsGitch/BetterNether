@@ -28,6 +28,7 @@ import paulevs.betternether.world.structures.plants.StructureVanillaMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class NetherMushroomForest extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -49,6 +50,11 @@ public class NetherMushroomForest extends NetherBiome {
 		@Override
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return NetherMushroomForest::new;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super.surface().floor(NetherBlocks.NETHER_MYCELIUM.defaultBlockState());
 		}
 	}
 	
@@ -72,6 +78,6 @@ public class NetherMushroomForest extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_MYCELIUM.defaultBlockState());
+		//BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_MYCELIUM.defaultBlockState());
 	}
 }

@@ -10,6 +10,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.NetherBiome;
@@ -19,9 +21,14 @@ import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.plants.StructureAgave;
 import paulevs.betternether.world.structures.plants.StructureBarrelCactus;
 import paulevs.betternether.world.structures.plants.StructureNetherCactus;
+import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.world.surface.DoubleBlockSurfaceNoiseCondition;
 
 public class NetherGravelDesert extends NetherBiome {
+	public static final SurfaceRules.RuleSource GRAVEL = SurfaceRules.state(Blocks.GRAVEL.defaultBlockState());
+	
 	public static class Config extends NetherBiomeConfig {
 		public Config(String name) {
 			super(name);
@@ -35,12 +42,23 @@ public class NetherGravelDesert extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
 				   .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
 				   .particles(ParticleTypes.ASH, 0.02F)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());
 		}
 		
 		@Override
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return NetherGravelDesert::new;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super.surface()
+						.ceil(Blocks.NETHERRACK.defaultBlockState())
+						.floor(Blocks.GRAVEL.defaultBlockState())
+						.rule(3, SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, GRAVEL))
+						.belowFloor(Blocks.GRAVEL.defaultBlockState(), 4, NetherNoiseCondition.DEFAULT)
+						//.rule(SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(3, true, false, CaveSurface.FLOOR), SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, GRAVEL)))
+				;
 		}
 	}
 	
@@ -51,18 +69,18 @@ public class NetherGravelDesert extends NetherBiome {
 		addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);
 		addStructure("barrel_cactus", new StructureBarrelCactus(), StructureType.FLOOR, 0.02F, true);
 	}
-
+	
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		for (int i = 0; i < 1 + random.nextInt(3); i++) {
-			BlockPos p2 = pos.below(i);
-			if (BlocksHelper.isNetherGround(world.getBlockState(p2)))
-				if (world.isEmptyBlock(p2.below())) {
-				BlocksHelper.setWithoutUpdate(world, p2, Blocks.NETHERRACK.defaultBlockState());
-				return;
-				}
-				else
-				BlocksHelper.setWithoutUpdate(world, p2, Blocks.GRAVEL.defaultBlockState());
-		}
+		//		for (int i = 0; i < 1 + random.nextInt(3); i++) {
+		//			BlockPos p2 = pos.below(i);
+		//			if (BlocksHelper.isNetherGround(world.getBlockState(p2)))
+		//				if (world.isEmptyBlock(p2.below())) {
+		//				BlocksHelper.setWithoutUpdate(world, p2, Blocks.NETHERRACK.defaultBlockState());
+		//				return;
+		//				}
+		//				else
+		//				BlocksHelper.setWithoutUpdate(world, p2, Blocks.GRAVEL.defaultBlockState());
+		//		}
 	}
 }

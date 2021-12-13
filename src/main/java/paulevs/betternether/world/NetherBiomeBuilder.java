@@ -23,12 +23,16 @@ import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class NetherBiomeBuilder {
 	private static Biome BASE_BIOME;
-	private static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
-	private static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM = new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_floor"), VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5));
-	private static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP = new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_roof"), VerticalAnchor.belowTop(5), VerticalAnchor.top());
+	static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
+	//(ResourceLocation randomName, VerticalAnchor trueAtAndBelow, VerticalAnchor falseAtAndAbove)
+	static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM =
+		new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_floor"), VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5));
+	static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP =
+		new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_roof"), VerticalAnchor.belowTop(5), VerticalAnchor.top());
 
 	public static final IStructureFeatures VANILLA_STRUCTURES = (IStructureFeatures)(Object)new StructureFeatures();
 	
@@ -72,8 +76,7 @@ public class NetherBiomeBuilder {
 		BCLBiomeBuilder builder = BCLBiomeBuilder
 			.start(ID)
 			.category(BiomeCategory.NETHER)
-			.surface(SurfaceRules.ifTrue(BEDROCK_BOTTOM, BEDROCK))
-			.surface(SurfaceRules.ifTrue(SurfaceRules.not(BEDROCK_TOP), BEDROCK))
+			.surface(data.surface().build())
 			.temperature(BASE_BIOME.getBaseTemperature())
 			.wetness(BASE_BIOME.getDownfall())
 			.precipitation(Precipitation.NONE)

@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeConfig;
@@ -31,11 +32,14 @@ import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWhisperingGourd;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
+import ru.bclib.api.surface.rules.SwitchRuleSource;
+import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 
 public class UpsideDownForest extends NetherBiome {
 	private static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
-	private static final SurfaceRules.RuleSource NETHERRACK = SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState());
-	private static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherBlocks.JUNGLE_MOSS.defaultBlockState());
+	private static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
 	private static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition(Noises.NETHER_STATE_SELECTOR, 0.0);
 	private static final SurfaceRules.ConditionSource NOISE_FLOOR_LAYER = SurfaceRules.noiseCondition(Noises.NETHER_WART, 1.17);
 	public static class Config extends NetherBiomeConfig {
@@ -50,18 +54,6 @@ public class UpsideDownForest extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST);
-			//TODO: 1.18 reenable once surface rules work with Datapacks
-//				   .surface(SurfaceRules.sequence(
-//					   SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
-//						   SurfaceRules.sequence(SurfaceRules.ifTrue(NOISE_CEIL_LAYER, CEILEING_MOSS), NETHERRACK)
-//						   CEILEING_MOSS
-//					   ),
-//					   SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
-//						   NETHERRACK_MOSS
-//						   SurfaceRules.sequence(SurfaceRules.ifTrue(NOISE_FLOOR_LAYER, NETHERRACK_MOSS), NETHERRACK)
-//					   ),
-//					   NETHERRACK)
-//				   );
 		}
 		
 		@Override
@@ -72,6 +64,24 @@ public class UpsideDownForest extends NetherBiome {
 		@Override
 		public boolean vertical() {
 			return true;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super.surface().rule(3,
+				SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
+					SurfaceRules.sequence(SurfaceRules.ifTrue(NOISE_CEIL_LAYER, CEILEING_MOSS), NETHERRACK)
+				)
+			).rule(2,
+			   SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
+				   SurfaceRules.sequence(SurfaceRules.ifTrue(new SurfaceNoiseCondition(){
+					   @Override
+					   public boolean test(SurfaceRulesContextAccessor context) {
+						   return MHelper.RANDOM.nextInt(3) == 0 ;
+					   }
+				   }, NETHERRACK_MOSS), NETHERRACK)
+			   )
+			);
 		}
 	}
 	
@@ -108,6 +118,6 @@ public class UpsideDownForest extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, random.nextInt(3) == 0 ? NetherBlocks.NETHERRACK_MOSS.defaultBlockState() : Blocks.NETHERRACK.defaultBlockState());
+		//BlocksHelper.setWithoutUpdate(world, pos, random.nextInt(3) == 0 ? NetherBlocks.NETHERRACK_MOSS.defaultBlockState() : Blocks.NETHERRACK.defaultBlockState());
 	}
 }

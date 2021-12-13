@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherEntities;
@@ -27,6 +28,7 @@ import paulevs.betternether.world.structures.plants.StructureWartBush;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import paulevs.betternether.world.surface.CrimsonWoodNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class CrimsonPinewood extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -45,23 +47,23 @@ public class CrimsonPinewood extends NetherBiome {
 				   .spawn(EntityType.HOGLIN, 9, 2, 5)
 				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
-				   .surface(
-					   SurfaceRules.sequence(
-						   SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
-							   SurfaceRules.sequence(
-								   SurfaceRules.ifTrue(new CrimsonWoodNoiseCondition(), CrimsonGlowingWoods.NETHER_WART_BLOCK),
-								   CrimsonGlowingWoods.CRIMSON_NYLIUM
-							   )
-						   ),
-						   NETHERRACK
-					   )
-				   )
 				   ;
 		}
 		
 		@Override
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return CrimsonPinewood::new;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super
+				.surface()
+				.chancedFloor(
+					Blocks.NETHER_WART_BLOCK.defaultBlockState(),
+					Blocks.CRIMSON_NYLIUM.defaultBlockState(),
+					new CrimsonWoodNoiseCondition()
+				);
 		}
 	}
 	

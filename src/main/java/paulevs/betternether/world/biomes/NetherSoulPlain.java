@@ -23,14 +23,16 @@ import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.plants.StructureBlackBush;
 import paulevs.betternether.world.structures.plants.StructureSoulGrass;
 import paulevs.betternether.world.structures.plants.StructureSoulVein;
+import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class NetherSoulPlain extends NetherBiome {
 	private static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
 	private static final SurfaceRules.RuleSource SOUL_SOIL = SurfaceRules.state(Blocks.SOUL_SOIL.defaultBlockState());
 	private static final SurfaceRules.RuleSource SOUL_SANDSTONE = SurfaceRules.state(NetherBlocks.SOUL_SANDSTONE.defaultBlockState());
-	private static final SurfaceRules.ConditionSource NOISE_SOUL_LAYER = SurfaceRules.noiseCondition(Noises.SOUL_SAND_LAYER, -0.012);
-	private static final SurfaceRules.ConditionSource NOISE_NETHER_STATE = SurfaceRules.noiseCondition(Noises.NETHER_STATE_SELECTOR, 0.0);
+	public static final SurfaceRules.ConditionSource NOISE_SOUL_LAYER = SurfaceRules.noiseCondition(Noises.SOUL_SAND_LAYER, -0.012);
+	public static final SurfaceRules.ConditionSource NOISE_NETHER_STATE = SurfaceRules.noiseCondition(Noises.NETHER_STATE_SELECTOR, 0.0);
 
 	public static class Config extends NetherBiomeConfig {
 		public Config(String name) {
@@ -45,15 +47,6 @@ public class NetherSoulPlain extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY)
 				   .particles(ParticleTypes.PORTAL, 0.02F)
-				   .surface(
-						SurfaceRules.sequence(
-								SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, SOUL_SANDSTONE),
-								SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(3, true, false, CaveSurface.FLOOR),
-										SurfaceRules.sequence(SurfaceRules.ifTrue(NOISE_SOUL_LAYER, SOUL_SOIL), SOUL_SAND)
-								),
-								SurfaceRules.ifTrue(NOISE_NETHER_STATE, SOUL_SOIL), SOUL_SANDSTONE
-						)
-					)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE())
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());
 		}
@@ -61,6 +54,19 @@ public class NetherSoulPlain extends NetherBiome {
 		@Override
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return NetherSoulPlain::new;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super
+				.surface()
+				.ceil(NetherBlocks.SOUL_SANDSTONE.defaultBlockState())
+				.rule(SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(3, true, false, CaveSurface.FLOOR),
+					SurfaceRules.sequence(SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, SOUL_SOIL), SOUL_SAND)
+				))
+				.rule(SurfaceRules.ifTrue(NOISE_NETHER_STATE, SOUL_SOIL))
+				.rule(3, SOUL_SANDSTONE)
+				;
 		}
 	}
 	

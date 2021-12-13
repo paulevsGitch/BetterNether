@@ -26,6 +26,7 @@ import paulevs.betternether.world.structures.plants.StructureVanillaMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class OldFungiwoods extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -48,6 +49,11 @@ public class OldFungiwoods extends NetherBiome {
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return OldFungiwoods::new;
 		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super.surface().floor( NetherBlocks.NETHER_MYCELIUM.defaultBlockState());
+		}
 	}
 	
 	public OldFungiwoods(ResourceLocation biomeID, Biome biome) {
@@ -68,6 +74,6 @@ public class OldFungiwoods extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
-		BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_MYCELIUM.defaultBlockState());
+		//BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_MYCELIUM.defaultBlockState());
 	}
 }

@@ -12,6 +12,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
@@ -26,7 +27,9 @@ import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWartBush;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import paulevs.betternether.world.surface.CrimsonWoodNoiseCondition;
+import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class CrimsonGlowingWoods extends NetherBiome {
 	public static final SurfaceRules.RuleSource NETHER_WART_BLOCK = SurfaceRules.state(Blocks.NETHER_WART_BLOCK.defaultBlockState());
@@ -49,23 +52,28 @@ public class CrimsonGlowingWoods extends NetherBiome {
 				   .spawn(EntityType.HOGLIN, 9, 1, 2)
 				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
-					.surface(
-						SurfaceRules.sequence(
-							SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
-								SurfaceRules.sequence(
-									SurfaceRules.ifTrue(new CrimsonWoodNoiseCondition(), NETHER_WART_BLOCK),
-									CRIMSON_NYLIUM
-								)
-							),
-							NETHERRACK
-						)
-					)
 			;
 		}
 		
 		@Override
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return CrimsonGlowingWoods::new;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super
+				.surface()
+				.chancedFloor(
+					Blocks.NETHER_WART_BLOCK.defaultBlockState(),
+					Blocks.CRIMSON_NYLIUM.defaultBlockState(),
+					new CrimsonWoodNoiseCondition()
+				)
+//						.rule(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, SurfaceRules.sequence(
+//							SurfaceRules.ifTrue(new CrimsonWoodNoiseCondition(), NETHER_WART_BLOCK),
+//							CRIMSON_NYLIUM
+//						)))
+				;
 		}
 	}
 	

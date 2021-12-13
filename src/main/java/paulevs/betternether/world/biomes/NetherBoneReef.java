@@ -23,6 +23,7 @@ import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.world.structures.plants.StructureLumabusVine;
 import paulevs.betternether.world.structures.plants.StructureReeds;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class NetherBoneReef extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -36,13 +37,17 @@ public class NetherBoneReef extends NetherBiome {
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				   .particles(ParticleTypes.WARPED_SPORE, 0.01F)
-				   .surface(NetherBlocks.MUSHROOM_GRASS);
+				   .particles(ParticleTypes.WARPED_SPORE, 0.01F);
 		}
 		
 		@Override
 		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
 			return NetherBoneReef::new;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super.surface().floor(NetherBlocks.MUSHROOM_GRASS.defaultBlockState());
 		}
 	}
 	

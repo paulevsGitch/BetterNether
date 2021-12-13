@@ -35,9 +35,9 @@ import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallMoss;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 public class NetherJungle extends NetherBiome {
-	private static final SurfaceRules.RuleSource JUNGLE_GRASS = SurfaceRules.state(NetherBlocks.JUNGLE_GRASS.defaultBlockState());
 	public static class Config extends NetherBiomeConfig {
 		public Config(String name) {
 			super(name);
@@ -50,7 +50,6 @@ public class NetherJungle extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_WARPED_FOREST)
-				   .surface(NetherBlocks.JUNGLE_GRASS)
 				   .spawn(NetherEntities.JUNGLE_SKELETON, 40, 2, 4)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
 		}
@@ -63,6 +62,11 @@ public class NetherJungle extends NetherBiome {
 		@Override
 		public boolean spawnVanillaMobs() {
 			return false;
+		}
+		
+		@Override
+		public SurfaceRuleBuilder surface() {
+			return super.surface().floor(NetherBlocks.JUNGLE_GRASS.defaultBlockState());
 		}
 	}
 	
