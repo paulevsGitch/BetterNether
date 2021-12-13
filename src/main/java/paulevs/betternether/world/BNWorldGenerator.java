@@ -26,23 +26,19 @@ public class BNWorldGenerator {
 	private static float structureDensity;
 	private static float lavaStructureDensity;
 	private static float globalDensity;
-
-	private static MutableBlockPos popPos = new MutableBlockPos();
-
-	private static final NetherBiome[][][] BIOMES = new NetherBiome[8][8][8];
-
-	private static final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(4096);
-	private static final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(4096);
-	private static final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(4096);
-	private static final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
-	private static final HashSet<Biome> MC_BIOMES = new HashSet<Biome>();
-
-	private static NetherBiome biome;
-
 	protected static int biomeSizeXZ;
 	protected static int biomeSizeY;
-	protected static boolean volumetric;
 
+	private MutableBlockPos popPos = new MutableBlockPos();
+	private final NetherBiome[][][] BIOMES = new NetherBiome[8][8][8];
+
+	private final List<BlockPos> LIST_FLOOR = new ArrayList<BlockPos>(4096);
+	private final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(4096);
+	private final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(4096);
+	private final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
+	private final HashSet<Biome> MC_BIOMES = new HashSet<Biome>();
+
+	private NetherBiome biome;
 	
 	public static void onModInit() {
 		structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
@@ -51,13 +47,12 @@ public class BNWorldGenerator {
 
 		biomeSizeXZ = Configs.GENERATOR.getInt("generator_world", "biome_size_xz", 200);
 		biomeSizeY = Configs.GENERATOR.getInt("generator_world", "biome_size_y", 40);
-		volumetric = Configs.GENERATOR.getBoolean("generator_world", "volumetric_biomes", true);
 	}
 	private static int clamp(int x, int max) {
 		return x < 0 ? 0 : x > max ? max : x;
 	}
 
-	public static void populate(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+	public void populate(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
 		final Random random = featurePlaceContext.random();
 		final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
 		
@@ -237,7 +232,7 @@ public class BNWorldGenerator {
 		return layerHeight;
 	}
 	
-	private static void makeLocalBiomes(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+	private void makeLocalBiomes(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
 		final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
 		int layerHeight = getLayerHeight(MAX_HEIGHT);
 		MC_BIOMES.clear();
@@ -264,11 +259,11 @@ public class BNWorldGenerator {
 		}
 	}
 
-	public static void prePopulate(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+	public void prePopulate(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
 		makeLocalBiomes(world, sx, sz, featurePlaceContext);
 	}
 	
-	private static NetherBiome getBiomeLocal(int x, int y, int z, Random random, int layerHeight, WorldGenLevel world, BlockPos pos) {
+	private NetherBiome getBiomeLocal(int x, int y, int z, Random random, int layerHeight, WorldGenLevel world, BlockPos pos) {
 		final int px = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
 		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
 		final int py = y/layerHeight;

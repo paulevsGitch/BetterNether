@@ -31,6 +31,7 @@ import paulevs.betternether.world.biomes.OldSwampland;
 import paulevs.betternether.world.biomes.OldWarpedWoods;
 import paulevs.betternether.world.biomes.UpsideDownForest;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import ru.bclib.api.WorldDataAPI;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.api.LifeCycleAPI;
@@ -187,5 +188,7 @@ public class NetherBiomes {
 		
 		BCLibNetherBiomeSource.setForceLegacyGeneration(useLegacyGeneration);
 		BetterNether.LOGGER.info("Using legacy (1.17) generator: " + useLegacyGeneration);
+		
+		NetherChunkPopulatorFeature.clearGeneratorPool();
 	}
 }
