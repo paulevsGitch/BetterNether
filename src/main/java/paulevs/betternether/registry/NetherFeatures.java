@@ -69,7 +69,7 @@ public class NetherFeatures {
 	// Terrain //
 	public static final BCLFeature CAVES_FEATURE = registerChunkFeature("nether_caves", Decoration.UNDERGROUND_STRUCTURES, CavesFeature::new);
 	public static final BCLFeature PATHS_FEATURE = registerChunkFeature("nether_paths", Decoration.SURFACE_STRUCTURES, PathsFeature::new);
-	public static final BCLFeature POPULATOR_FEATURE = registerChunkFeature("nether_populator", Decoration.SURFACE_STRUCTURES, NetherChunkPopulatorFeature::new);
+	public static final BCLFeature POPULATOR_FEATURE = registerChunkFeature("nether_populator", Decoration.VEGETAL_DECORATION, NetherChunkPopulatorFeature::new);
 
 	// Cached Config data //
 	public static final boolean HAS_CLEANING_PASS = Configs.GENERATOR.getBoolean("generator.world.terrain", "terrain_cleaning_pass", true);

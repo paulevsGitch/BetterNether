@@ -108,7 +108,7 @@ public class NetherBiomes {
 		});
 		
 		BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> {
-			if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
+			if (!biomeID.getNamespace().equals(BetterNether.MOD_ID) && biome.getBiomeCategory()==BiomeCategory.NETHER) {
 				NetherEntities.modifyNonBNBiome(biomeID, biome);
 				NetherFeatures.modifyNonBNBiome(biomeID, biome);
 				NetherStructures.modifyNonBNBiome(biomeID, biome);
