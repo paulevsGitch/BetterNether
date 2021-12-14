@@ -75,7 +75,6 @@ public class CityFeature extends NoiseAffectingStructureFeature<NoneFeatureConfi
 		if (!(chunkGenerator instanceof FlatLevelSource)) {
 			CavePiece cave = new CavePiece(center, radius+(NetherBiomes.useLegacyGeneration?0:8), random, cityBox);
 			structurePiecesBuilder.addPiece(cave);
-			
 		}
 		buildings.forEach(b -> structurePiecesBuilder.addPiece(b));
 		

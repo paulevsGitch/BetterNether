@@ -32,7 +32,10 @@ public class NetherStructures {
 	}
 	
 	public static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
-		BiomeAPI.addBiomeStructure(biome, CITY_STRUCTURE.getFeatureConfigured());
+		if (!biomeID.equals(BiomeAPI.BASALT_DELTAS_BIOME.getID()))
+		{
+			BiomeAPI.addBiomeStructure(biome, CITY_STRUCTURE.getFeatureConfigured());
+		}
 	}
 	
 	public static void addDefaultFeatures(BCLBiomeBuilder builder) {
