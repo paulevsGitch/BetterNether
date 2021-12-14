@@ -2,6 +2,7 @@ package paulevs.betternether.registry;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
@@ -32,8 +33,7 @@ public class NetherStructures {
 	}
 	
 	public static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
-		if (!biomeID.equals(BiomeAPI.BASALT_DELTAS_BIOME.getID()))
-		{
+		if (biomeID!=null && !biomeID.equals(BiomeAPI.BASALT_DELTAS_BIOME.getID()) && !biomeID.equals(Biomes.THE_VOID.location())) {
 			BiomeAPI.addBiomeStructure(biome, CITY_STRUCTURE.getFeatureConfigured());
 		}
 	}
