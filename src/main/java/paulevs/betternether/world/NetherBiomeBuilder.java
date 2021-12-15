@@ -99,7 +99,9 @@ public class NetherBiomeBuilder {
 		
 		if (data.spawnVanillaMobs()) addVanillaMobs(builder);
 		
+		
 		NetherFeatures.addDefaultFeatures(builder);
+		if (data.hasDefaultOres()) NetherFeatures.addDefaultOres(builder);
 		NetherStructures.addDefaultFeatures(builder);
 		data.addCustomBuildData(builder);
 		

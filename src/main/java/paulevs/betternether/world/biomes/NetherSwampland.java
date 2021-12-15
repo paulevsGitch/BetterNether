@@ -62,6 +62,10 @@ public class NetherSwampland extends NetherBiome {
 		public boolean spawnVanillaMobs() {
 			return false;
 		}
+		
+		public boolean hasDefaultOres() {
+			return false;
+		}
 	}
 	
 	protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);

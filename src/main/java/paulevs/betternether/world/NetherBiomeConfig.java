@@ -36,6 +36,10 @@ public abstract class NetherBiomeConfig {
 		return true;
 	}
 	
+	public boolean hasDefaultOres() {
+		return true;
+	}
+	
 	public boolean hasVanillaStructures() {
 		return true;
 	}
