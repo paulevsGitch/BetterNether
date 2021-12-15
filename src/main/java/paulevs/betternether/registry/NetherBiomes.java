@@ -31,6 +31,7 @@ import paulevs.betternether.world.biomes.OldSwampland;
 import paulevs.betternether.world.biomes.OldWarpedWoods;
 import paulevs.betternether.world.biomes.UpsideDownForest;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.world.biomes.UpsideDownForestCleared;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import ru.bclib.api.WorldDataAPI;
 import ru.bclib.api.biomes.BiomeAPI;
@@ -67,6 +68,7 @@ public class NetherBiomes {
 		public static final NetherBiomeConfig OLD_FUNGIWOODS = new OldFungiwoods.Config("Old Fungiwoods");
 		public static final NetherBiomeConfig FLOODED_DELTAS = new FloodedDeltas.Config("Flooded Deltas");
 		public static final NetherBiomeConfig UPSIDE_DOWN_FOREST = new UpsideDownForest.Config("Upside Down Forest");
+		public static final NetherBiomeConfig UPSIDE_DOWN_FOREST_CLEARED = new UpsideDownForestCleared.Config("upside_down_forest_cleared");
 		public static final NetherBiomeConfig OLD_SWAMPLAND = new OldSwampland.Config("Old Swampland");
 	}
 	
@@ -90,6 +92,7 @@ public class NetherBiomes {
 	public static final BCLBiome OLD_FUNGIWOODS = registerSubBiome(Config.OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST, 0.3F);
 	public static final BCLBiome FLOODED_DELTAS = registerSubBiome(Config.FLOODED_DELTAS, BiomeAPI.BASALT_DELTAS_BIOME, 1F);
 	public static final BCLBiome UPSIDE_DOWN_FOREST = registerNetherBiome(Config.UPSIDE_DOWN_FOREST);
+	public static final BCLBiome UPSIDE_DOWN_FOREST_CLEARED = registerNetherBiome(Config.UPSIDE_DOWN_FOREST_CLEARED);
 	public static final BCLBiome OLD_SWAMPLAND = registerSubBiome(Config.OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
 
 	public static void register() {

@@ -721,6 +721,7 @@
     "advancements.betternether.ruby_tools.title":"Red Nether",
     "advancements.betternether.ruby_tools.description":"Use some ruby tools from the depth of the Nether",
 	"advancements.betternether.city.title":"A glorious Past",
-	"advancements.betternether.city.description":"Find a long abandoned Nether City"
-    
-}  
+	"advancements.betternether.city.description":"Find a long abandoned Nether City",
+	
+	"biome.betternether.upside_down_forest_cleared": "Cleared Upside Down Forest"
+}

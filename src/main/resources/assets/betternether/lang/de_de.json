@@ -721,5 +721,7 @@
  "advancements.betternether.ruby_tools.title":"Das Rote Nether",
  "advancements.betternether.ruby_tools.description":"Verwende Rubinwerkzeuge aus den Tiefen des Nether",
   "advancements.betternether.city.title":"Eine glorreiche Vergangenheit",
-  "advancements.betternether.city.description":"Finde eine längst verlassene Nether-Stadt"
+  "advancements.betternether.city.description":"Finde eine längst verlassene Nether-Stadt",
+  
+  "biome.betternether.upside_down_forest_cleared": "Gerodeter Kopfüberwald"
 }
