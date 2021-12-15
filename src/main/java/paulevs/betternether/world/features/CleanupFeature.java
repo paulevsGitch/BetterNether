@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.registry.NetherBiomes;
 import ru.bclib.world.features.DefaultFeature;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import java.util.List;
 public class CleanupFeature extends DefaultFeature {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+		if (!NetherBiomes.useLegacyGeneration) return false;
+		
+		final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
 		final MutableBlockPos popPos = new MutableBlockPos();
 		final BlockPos worldPos = featurePlaceContext.origin();
 		final WorldGenLevel level = featurePlaceContext.level();
@@ -31,7 +35,7 @@ public class CleanupFeature extends DefaultFeature {
 		BlockPos south;
 		BlockPos east;
 		BlockPos west;
-		for (int y = 32; y < 110; y++) {
+		for (int y = 32; y < MAX_HEIGHT-18; y++) {
 			popPos.setY(y);
 			for (int x = 0; x < 16; x++) {
 				popPos.setX(x | sx);
