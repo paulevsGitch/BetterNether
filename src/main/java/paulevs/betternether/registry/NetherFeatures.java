@@ -68,7 +68,7 @@ public class NetherFeatures {
 
 	// Terrain //
 	public static final BCLFeature CAVES_FEATURE = registerChunkFeature("nether_caves", Decoration.UNDERGROUND_STRUCTURES, CavesFeature::new);
-	public static final BCLFeature PATHS_FEATURE = registerChunkFeature("nether_paths", Decoration.SURFACE_STRUCTURES, PathsFeature::new);
+	public static final BCLFeature PATHS_FEATURE = registerChunkFeature("nether_paths", Decoration.LAKES, PathsFeature::new);
 	public static final BCLFeature POPULATOR_FEATURE = registerChunkFeature("nether_populator", Decoration.VEGETAL_DECORATION, NetherChunkPopulatorFeature::new);
 
 	// Cached Config data //
@@ -125,14 +125,18 @@ public class NetherFeatures {
 		if (NetherFeatures.HAS_PATHS) builder.feature(PATHS_FEATURE);
 		if (NetherFeatures.HAS_FIXING_PASS) builder.feature(FIX_FEATURE);
 
-		builder.feature(POPULATOR_FEATURE)
+		builder.feature(POPULATOR_FEATURE);
+		
+		return builder;
+	}
+	
+	public static BCLBiomeBuilder addDefaultOres(BCLBiomeBuilder builder) {
+		return builder
 			   .feature(CINCINNASITE_ORE)
 			   .feature(NETHER_RUBY_ORE)
 			   .feature(NETHER_RUBY_ORE_TOP)
 			   .feature(NETHER_LAPIS_ORE)
 			   .feature(NETHER_REDSTONE_ORE);
-		
-		return builder;
 	}
 	
 	public static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
