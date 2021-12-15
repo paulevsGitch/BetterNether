@@ -38,7 +38,7 @@ public class UpsideDownForestCleared extends NetherBiome {
 		
 		@Override
 		protected void addCustomBuildData(BCLBiomeBuilder builder) {
-			builder.fogColor(111, 188, 111)
+			builder.fogColor(111, 188, 121)
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
@@ -55,18 +55,19 @@ public class UpsideDownForestCleared extends NetherBiome {
 		
 		@Override
 		public SurfaceRuleBuilder surface() {
+			final SurfaceNoiseCondition noise = new SurfaceNoiseCondition(){
+				@Override
+				public boolean test(SurfaceRulesContextAccessor context) {
+					return MHelper.RANDOM.nextInt(3) == 0 ;
+				}
+			};
 			return super.surface().rule(3,
 				SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
 					SurfaceRules.sequence(SurfaceRules.ifTrue(UpsideDownForest.NOISE_CEIL_LAYER, UpsideDownForest.CEILEING_MOSS), NETHERRACK)
 				)
 			).rule(2,
 				SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
-					SurfaceRules.sequence(SurfaceRules.ifTrue(new SurfaceNoiseCondition(){
-						@Override
-						public boolean test(SurfaceRulesContextAccessor context) {
-							return MHelper.RANDOM.nextInt(3) == 0 ;
-						}
-					}, UpsideDownForest.NETHERRACK_MOSS), SurfaceRules.state(NetherBlocks.JUNGLE_MOSS.defaultBlockState()))
+					SurfaceRules.sequence(SurfaceRules.ifTrue(noise, UpsideDownForest.NETHERRACK_MOSS), SurfaceRules.state(NetherBlocks.MUSHROOM_GRASS.defaultBlockState()))
 				)
 			);
 		}
@@ -85,7 +86,7 @@ public class UpsideDownForestCleared extends NetherBiome {
 	public UpsideDownForestCleared(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
 		
-		this.setNoiseDensity(0.6F);
+		this.setNoiseDensity(0.3F);
 		
 		addStructure("moss_cover", new StructureMossCover(), StructureType.FLOOR, 0.6F, false);
 		addStructure("jungle_moss", new StructureJungleMoss(), StructureType.WALL, 0.4F, true);
