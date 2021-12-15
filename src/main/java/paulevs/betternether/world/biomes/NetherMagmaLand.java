@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.NetherBiome;
+import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.decorations.StructureCrystal;
@@ -32,7 +33,8 @@ public class NetherMagmaLand extends NetherBiome {
 			builder.fogColor(248, 158, 68)
 				   .loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
 				   .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
-				   .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD);
+				   .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		}
 		
 		@Override

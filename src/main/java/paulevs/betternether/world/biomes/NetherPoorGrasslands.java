@@ -38,7 +38,8 @@ public class NetherPoorGrasslands extends NetherBiome {
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		}
 		
 		@Override

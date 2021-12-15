@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.world.NetherBiome;
+import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
@@ -32,7 +33,8 @@ public class FloodedDeltas extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_BASALT_DELTAS_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_BASALT_DELTAS)
-				   .particles(ParticleTypes.WHITE_ASH, 0.12F);
+				   .particles(ParticleTypes.WHITE_ASH, 0.12F)
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		}
 		
 		@Override

@@ -38,7 +38,6 @@ public class NetherBiomeBuilder {
 	
 	private static void addVanillaStructures(BCLBiomeBuilder builder) {
 		builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
-		builder.structure(VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		builder.structure(VANILLA_STRUCTURES.getRUINED_PORTAL_NETHER());
 	}
 	

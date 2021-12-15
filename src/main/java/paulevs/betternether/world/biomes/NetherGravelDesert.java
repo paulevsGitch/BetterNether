@@ -42,7 +42,8 @@ public class NetherGravelDesert extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
 				   .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
 				   .particles(ParticleTypes.ASH, 0.02F)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		}
 		
 		@Override

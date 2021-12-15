@@ -34,8 +34,7 @@ public class NetherWartForestEdge extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
+				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4);
 		}
 		
 		@Override

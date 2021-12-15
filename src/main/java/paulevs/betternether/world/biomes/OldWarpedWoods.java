@@ -39,7 +39,8 @@ public class OldWarpedWoods extends NetherBiome {
 				   .particles(ParticleTypes.WARPED_SPORE, 0.025F)
 				   .spawn(EntityType.ENDERMAN, 1, 4, 4)
 				   .spawn(EntityType.STRIDER, 60, 1, 2)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		}
 		
 		@Override

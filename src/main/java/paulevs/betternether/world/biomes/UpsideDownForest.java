@@ -15,6 +15,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.NetherBiome;
+import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.decorations.StructureForestLitter;
@@ -38,10 +39,9 @@ import ru.bclib.api.surface.rules.SwitchRuleSource;
 import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 
 public class UpsideDownForest extends NetherBiome {
-	private static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
-	private static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
-	private static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition(Noises.NETHER_STATE_SELECTOR, 0.0);
-	private static final SurfaceRules.ConditionSource NOISE_FLOOR_LAYER = SurfaceRules.noiseCondition(Noises.NETHER_WART, 1.17);
+	static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
+	static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
+	static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition(Noises.NETHER_STATE_SELECTOR, 0.0);
 	public static class Config extends NetherBiomeConfig {
 		public Config(String name) {
 			super(name);
@@ -53,7 +53,8 @@ public class UpsideDownForest extends NetherBiome {
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST);
+				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE());
 		}
 		
 		@Override

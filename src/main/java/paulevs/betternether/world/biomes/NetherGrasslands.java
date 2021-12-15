@@ -65,6 +65,7 @@ public class NetherGrasslands extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE())
 			;
 		}
 		

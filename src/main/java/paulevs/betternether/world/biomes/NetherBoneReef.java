@@ -12,6 +12,7 @@ import net.minecraft.world.level.biome.Biome;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.NetherBiome;
+import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.bones.StructureBoneReef;
@@ -37,7 +38,8 @@ public class NetherBoneReef extends NetherBiome {
 				   .loop(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
-				   .particles(ParticleTypes.WARPED_SPORE, 0.01F);
+				   .particles(ParticleTypes.WARPED_SPORE, 0.01F)
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		}
 		
 		@Override

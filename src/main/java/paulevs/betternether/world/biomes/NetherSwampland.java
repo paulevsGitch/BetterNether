@@ -49,7 +49,8 @@ public class NetherSwampland extends NetherBiome {
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .spawn(EntityType.STRIDER, 40, 2, 4)
 				   .spawn(EntityType.MAGMA_CUBE, 40, 2, 4)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT());;
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		}
 		
 		@Override
