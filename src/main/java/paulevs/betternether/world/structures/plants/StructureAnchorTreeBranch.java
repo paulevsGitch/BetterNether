@@ -39,7 +39,7 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
-		if (pos.getY() < 56 + 40 * scale_factor) return;
+		if (pos.getY() < 56 + random.nextInt(0, (int)(20 * scale_factor))) return;
 		grow(world, pos, random, scale_factor, true);
 	}
 

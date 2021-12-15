@@ -19,7 +19,7 @@ public class StructureNeonEquisetum implements IStructure {
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		
-		if (pos.getY() < (30 + 66*scale_factor) || !BlocksHelper.isNetherrack(world.getBlockState(pos.above()))) return;
+		if (pos.getY() < (30 + random.nextInt(0, (int)(10*scale_factor))) || !BlocksHelper.isNetherrack(world.getBlockState(pos.above()))) return;
 		
 		final int RANDOM_BOUND = (int)(5 + 5*scale_factor);
 		
