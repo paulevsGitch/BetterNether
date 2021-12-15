@@ -73,6 +73,12 @@ public class CleanupFeature extends DefaultFeature {
 			BlockState state = level.getBlockState(up);
 			if (!state.getBlock().canSurvive(state, level, up))
 				BlocksHelper.setWithoutUpdate(level, up, AIR);
+			
+			down = p.below();
+			state = level.getBlockState(p);
+			if (level.getBlockState(down).is(Blocks.NETHERRACK) && BlocksHelper.isNetherGround(state)){
+				BlocksHelper.setWithoutUpdate(level, down, state);
+			}
 		}
 		
 		return true;
