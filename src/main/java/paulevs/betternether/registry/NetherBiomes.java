@@ -77,8 +77,8 @@ public class NetherBiomes {
 	public static final BCLBiome BIOME_WART_FOREST = registerNetherBiome(Config.BIOME_WART_FOREST);
 	public static final BCLBiome BIOME_GRASSLANDS = registerNetherBiome(Config.BIOME_GRASSLANDS);
 	public static final BCLBiome BIOME_MUSHROOM_FOREST = registerNetherBiome(Config.BIOME_MUSHROOM_FOREST);
-	public static final BCLBiome BIOME_MUSHROOM_FOREST_EDGE = registerEdgeBiome(Config.BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 2);;
-	public static final BCLBiome BIOME_WART_FOREST_EDGE = registerEdgeBiome(Config.BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 2);
+	public static final BCLBiome BIOME_MUSHROOM_FOREST_EDGE = registerEdgeBiome(Config.BIOME_MUSHROOM_FOREST_EDGE, BIOME_MUSHROOM_FOREST, 6);
+	public static final BCLBiome BIOME_WART_FOREST_EDGE = registerEdgeBiome(Config.BIOME_WART_FOREST_EDGE, BIOME_WART_FOREST, 9);
 	public static final BCLBiome BIOME_BONE_REEF = registerNetherBiome(Config.BIOME_BONE_REEF);
 	public static final BCLBiome BIOME_SULFURIC_BONE_REEF = registerSubBiome(Config.BIOME_SULFURIC_BONE_REEF, BIOME_BONE_REEF, 0.3F);
 	public static final BCLBiome BIOME_POOR_GRASSLANDS = registerSubBiome(Config.BIOME_POOR_GRASSLANDS, BIOME_GRASSLANDS, 0.3F);;
