@@ -6,6 +6,7 @@ import paulevs.betternether.advancements.BNCriterion;
 import paulevs.betternether.commands.CommandRegistry;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.config.screen.ConfigScreen;
 import paulevs.betternether.loot.BNLoot;
 import paulevs.betternether.recipes.IntegrationRecipes;
 import paulevs.betternether.recipes.ItemRecipes;
@@ -23,6 +24,7 @@ import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.structures.piece.StructureTypes;
 import ru.bclib.api.WorldDataAPI;
 import ru.bclib.api.dataexchange.DataExchangeAPI;
+import ru.bclib.integration.modmenu.ModMenu;
 import ru.bclib.util.Logger;
 
 public class BetterNether implements ModInitializer {
@@ -62,7 +64,7 @@ public class BetterNether implements ModInitializer {
 		WorldDataAPI.registerModCache(MOD_ID);
 		DataExchangeAPI.registerMod(BetterNether.MOD_ID);
 		Patcher.register();
-		
+		ModMenu.addModMenuScreen(MOD_ID, ConfigScreen::new);
 		
 	}
 	
