@@ -4,9 +4,12 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.blocks.BNRenderLayer;
+import paulevs.betternether.config.screen.ConfigScreen;
 import paulevs.betternether.registry.EntityRenderRegistry;
 import paulevs.betternether.registry.NetherParticles;
+import ru.bclib.integration.modmenu.ModMenu;
 
 public class BetterNetherClient implements ClientModInitializer {
 	@Override
@@ -15,6 +18,7 @@ public class BetterNetherClient implements ClientModInitializer {
 		EntityRenderRegistry.register();
 		
 		NetherParticles.register();
+		ModMenu.addModMenuScreen(BetterNether.MOD_ID, ConfigScreen::new);
 	}
 
 	private void registerRenderLayers() {
