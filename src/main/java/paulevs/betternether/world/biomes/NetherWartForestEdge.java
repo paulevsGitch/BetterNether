@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherEntities;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
@@ -34,7 +35,8 @@ public class NetherWartForestEdge extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4);
+				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
+				   .feature(NetherFeatures.NETHER_RUBY_ORE);
 		}
 		
 		@Override

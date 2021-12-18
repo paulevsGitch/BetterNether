@@ -18,6 +18,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules.RuleSource;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
@@ -49,7 +50,8 @@ public class NetherSoulPlain extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY)
 				   .particles(ParticleTypes.PORTAL, 0.02F)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE());
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE())
+				   .feature(NetherFeatures.NETHER_RUBY_ORE_SOUL);
 		}
 		
 		@Override

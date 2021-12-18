@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherEntities;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
@@ -46,6 +47,7 @@ public class CrimsonPinewood extends NetherBiome {
 				   .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
 				   .spawn(EntityType.HOGLIN, 9, 2, 5)
 				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
+				   .feature(NetherFeatures.NETHER_RUBY_ORE)
 				   ;
 		}
 		

@@ -11,6 +11,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
@@ -43,7 +44,8 @@ public class OldFungiwoods extends NetherBiome {
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .particles(ParticleTypes.MYCELIUM, 0.1F)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE())
+				   .feature(NetherFeatures.NETHER_RUBY_ORE);
 		}
 		
 		@Override

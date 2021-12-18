@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
@@ -55,7 +56,8 @@ public class UpsideDownForest extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE());
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE())
+				   .feature(NetherFeatures.NETHER_RUBY_ORE);
 		}
 		
 		@Override

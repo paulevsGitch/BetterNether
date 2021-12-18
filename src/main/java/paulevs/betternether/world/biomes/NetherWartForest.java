@@ -16,6 +16,7 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherEntities;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
@@ -42,7 +43,8 @@ public class NetherWartForest extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
-				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4);
+				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
+				   .feature(NetherFeatures.NETHER_RUBY_ORE);
 		}
 		
 		@Override
