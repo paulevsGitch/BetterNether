@@ -49,6 +49,12 @@ public class NetherFeatures {
 			3, 16, 0.8f,
 			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(30), VerticalAnchor.top()),
 			false);
+	
+	public static final BCLFeature NETHER_RUBY_ORE_LARGE =
+		registerOre("nether_ruby_large", NetherBlocks.NETHER_RUBY_ORE,
+			3, 16, 0.8f,
+			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(30), VerticalAnchor.top()),
+			false);
 
 	public static final BCLFeature NETHER_RUBY_ORE_RARE =
 		registerOre("nether_ruby_rare", NetherBlocks.NETHER_RUBY_ORE,
@@ -176,7 +182,7 @@ public class NetherFeatures {
 		BiomeAPI.addBiomeFeature(biome, NETHER_REDSTONE_ORE);
 		
 		if (biomeID.equals(BiomeAPI.SOUL_SAND_VALLEY_BIOME.getID())){
-			BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE_SOUL);
+			BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE_LARGE);
 		}
 		
 		if (biomeID.equals(BiomeAPI.CRIMSON_FOREST_BIOME.getID()) || biomeID.equals(BiomeAPI.WARPED_FOREST_BIOME.getID())){
