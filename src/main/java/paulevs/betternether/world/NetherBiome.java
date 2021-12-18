@@ -107,14 +107,13 @@ public abstract class NetherBiome extends BCLBiome{
 		
 		onInit();
 		
-		setupFromConfig();
-		
-		final String group = configGroup();
-		List<String> structAll = Configs.BIOMES_CONFIG.getStringArray(group, "schematics", structures);
+		final String structureGroup = configGroup() + ".structures" ;
+		List<String> structAll = Configs.BIOMES_CONFIG.getStringArray(structureGroup, "schematics", structures);
 		for (String struct : structAll) {
 			structureFromString(struct);
 		}
 		
+		final String group = configGroup();
 		setPlantDensity(Configs.BIOMES_CONFIG.getFloat(group, "plants_and_structures_density", getPlantDensity()));
 		setNoiseDensity(Configs.BIOMES_CONFIG.getFloat(group, "noise_density", getNoiseDensity()));
 	}
