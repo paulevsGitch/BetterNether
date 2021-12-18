@@ -25,8 +25,6 @@ public class BNWorldGenerator {
 	private static float structureDensity;
 	private static float lavaStructureDensity;
 	private static float globalDensity;
-	protected static int biomeSizeXZ;
-	protected static int biomeSizeY;
 
 	private MutableBlockPos popPos = new MutableBlockPos();
 	private final NetherBiome[][][] BIOMES = new NetherBiome[8][8][8];
@@ -43,9 +41,6 @@ public class BNWorldGenerator {
 		structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
 		lavaStructureDensity = Configs.GENERATOR.getFloat("generator.world", "lava_structures_density", 1F / 200F) * 1.0001F;
 		globalDensity = Configs.GENERATOR.getFloat("generator.world", "global_plant_and_structures_density", 1F) * 1.0001F;
-
-		biomeSizeXZ = Configs.GENERATOR.getInt("generator_world", "biome_size_xz", 200);
-		biomeSizeY = Configs.GENERATOR.getInt("generator_world", "biome_size_y", 40);
 	}
 	private static int clamp(int x, int max) {
 		return x < 0 ? 0 : x > max ? max : x;

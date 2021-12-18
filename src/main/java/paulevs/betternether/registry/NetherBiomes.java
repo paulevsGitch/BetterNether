@@ -96,20 +96,6 @@ public class NetherBiomes {
 	public static final BCLBiome OLD_SWAMPLAND = registerSubBiome(Config.OLD_SWAMPLAND, NETHER_SWAMPLAND, 1F);
 
 	public static void register() {
-		BuiltinRegistries.BIOME.forEach((biome) -> {
-			if (biome.getBiomeCategory() == BiomeCategory.NETHER) {
-				ResourceLocation id = BuiltinRegistries.BIOME.getKey(biome);
-				Configs.GENERATOR.getFloat("biomes." + id.getNamespace() + ".main", id.getPath() + "_chance", 1);
-			}
-		});
-		
-		RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register((i, id, biome) -> {
-			if (biome.getBiomeCategory() == BiomeCategory.NETHER) {
-				ResourceLocation bioID = BuiltinRegistries.BIOME.getKey(biome);
-				Configs.GENERATOR.getFloat("biomes." + bioID.getNamespace() + ".main", bioID.getPath() + "_chance", 1);
-			}
-		});
-		
 		BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> {
 			if (!biomeID.getNamespace().equals(BetterNether.MOD_ID) && biome.getBiomeCategory()==BiomeCategory.NETHER) {
 				NetherEntities.modifyNonBNBiome(biomeID, biome);
@@ -123,10 +109,9 @@ public class NetherBiomes {
 	
 	private static NetherBiome registerNetherBiome(NetherBiomeConfig config) {
 		final NetherBiome biome = NetherBiomeBuilder.create(config);
-		final float chance = Configs.GENERATOR.getFloat("biomes." + biome.getID().getNamespace() + ".main", biome.getID().getPath() + "_chance", 1);
-		biome.setGenChance(chance);
 		
-		if (chance > 0.0F) {
+		//if (chance > 0.0F)
+		{
 			ALL_BN_BIOMES.add(biome);
 			BiomeAPI.registerNetherBiome(biome);
 		}
@@ -137,11 +122,11 @@ public class NetherBiomes {
 	private static NetherBiome registerEdgeBiome(NetherBiomeConfig config, BCLBiome mainBiome, int size) {
 		final NetherBiome biome = NetherBiomeBuilder.create(config);
 		final String regName = biome.getRegistryName();
-		final int sizeConf = (int)Configs.GENERATOR.getFloat("biomes.betternether.edge", regName + "_size", size);
 		
 		mainBiome.setEdge(biome);
-		mainBiome.setEdgeSize(sizeConf);
-		if (sizeConf > 0.0F) {
+		mainBiome.setEdgeSize(size);
+		//if (sizeConf > 0.0F)
+		{
 			ALL_BN_BIOMES.add(biome);
 			BiomeAPI.registerBiome(biome);
 		}
@@ -152,10 +137,9 @@ public class NetherBiomes {
 	private static NetherBiome registerSubBiome(NetherBiomeConfig config, BCLBiome mainBiome, float chance) {
 		final NetherBiome biome = NetherBiomeBuilder.create(config);
 		final String regName = biome.getRegistryName();
-		chance = Configs.GENERATOR.getFloat("biomes.betternether.variation", regName + "_chance", chance);
-		biome.setGenChance(chance);
 		
-		if (chance > 0.0F) {
+		//if (chance > 0.0F)
+		{
 			ALL_BN_BIOMES.add(biome);
 			BiomeAPI.registerSubBiome(mainBiome, biome);
 		}

@@ -147,7 +147,7 @@ public class NetherFeatures {
 			BiomeAPI.addBiomeFeature(biome, PATHS_FEATURE);
 		}
 
-		BiomeAPI.addBiomeFeature(biome, POPULATOR_FEATURE);
+		//BiomeAPI.addBiomeFeature(biome, POPULATOR_FEATURE);
 
 		BiomeAPI.addBiomeFeature(biome, CINCINNASITE_ORE);
 		BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE_TOP);
