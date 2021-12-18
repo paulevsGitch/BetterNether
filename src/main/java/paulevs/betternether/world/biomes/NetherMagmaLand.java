@@ -48,7 +48,10 @@ public class NetherMagmaLand extends NetherBiome {
 	
 	public NetherMagmaLand(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		addStructure("geyser", new StructureGeyser(), StructureType.FLOOR, 0.1F, false);
 		addStructure("obsidian_crystals", new StructureCrystal(), StructureType.FLOOR, 0.04F, true);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.4F, false);

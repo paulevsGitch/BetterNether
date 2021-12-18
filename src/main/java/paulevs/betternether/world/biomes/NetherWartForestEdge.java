@@ -45,7 +45,10 @@ public class NetherWartForestEdge extends NetherBiome {
 	
 	public NetherWartForestEdge(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.01F, false);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.01F, false);

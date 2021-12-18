@@ -60,7 +60,10 @@ public class NetherBoneReef extends NetherBiome {
 	
 	public NetherBoneReef(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-
+	}
+	
+	@Override
+	protected void onInit(){
 		addStructure("bone_stalactite", new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);

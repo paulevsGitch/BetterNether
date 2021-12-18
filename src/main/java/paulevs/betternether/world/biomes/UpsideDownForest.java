@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherStructures;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
@@ -98,7 +99,10 @@ public class UpsideDownForest extends NetherBiome {
 	
 	public UpsideDownForest(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		this.setNoiseDensity(0.5F);
 		
 		addStructure("anchor_tree", new StructureAnchorTree(), StructureType.CEIL, 0.2F, false);

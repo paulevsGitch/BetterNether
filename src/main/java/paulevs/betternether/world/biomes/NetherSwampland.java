@@ -72,7 +72,10 @@ public class NetherSwampland extends NetherBiome {
 	
 	public NetherSwampland(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.05F, false);
 		addStructure("willow_bush", new StructureWillowBush(), StructureType.FLOOR, 0.2F, true);
 		addStructure("feather_fern", new StructureFeatherFern(), StructureType.FLOOR, 0.05F, true);

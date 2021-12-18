@@ -87,7 +87,10 @@ public class NetherGrasslands extends NetherBiome {
 	
 	public NetherGrasslands(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.05F, true);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, true);

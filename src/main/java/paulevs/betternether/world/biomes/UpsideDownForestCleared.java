@@ -85,7 +85,10 @@ public class UpsideDownForestCleared extends NetherBiome {
 	
 	public UpsideDownForestCleared(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		this.setNoiseDensity(0.3F);
 		
 		addStructure("moss_cover", new StructureMossCover(), StructureType.FLOOR, 0.6F, false);

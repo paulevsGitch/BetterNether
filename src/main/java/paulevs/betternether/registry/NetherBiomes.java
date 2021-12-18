@@ -121,7 +121,6 @@ public class NetherBiomes {
 	
 	private static NetherBiome registerEdgeBiome(NetherBiomeConfig config, BCLBiome mainBiome, int size) {
 		final NetherBiome biome = NetherBiomeBuilder.create(config);
-		final String regName = biome.getRegistryName();
 		
 		mainBiome.setEdge(biome);
 		mainBiome.setEdgeSize(size);
@@ -136,7 +135,6 @@ public class NetherBiomes {
 	
 	private static NetherBiome registerSubBiome(NetherBiomeConfig config, BCLBiome mainBiome, float chance) {
 		final NetherBiome biome = NetherBiomeBuilder.create(config);
-		final String regName = biome.getRegistryName();
 		
 		//if (chance > 0.0F)
 		{

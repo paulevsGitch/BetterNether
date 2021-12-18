@@ -60,7 +60,10 @@ public class NetherMushroomForest extends NetherBiome {
 	
 	public NetherMushroomForest(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		this.setNoiseDensity(0.5F);
 		
 		addStructure("large_red_mushroom", new StructureMedRedMushroom(), StructureType.FLOOR, 0.12F, true);

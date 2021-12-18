@@ -82,7 +82,10 @@ public class NetherSoulPlain extends NetherBiome {
 	
 	public NetherSoulPlain(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, true);
 		addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
 		addStructure("soul_grass", new StructureSoulGrass(), StructureType.FLOOR, 0.3F, false);

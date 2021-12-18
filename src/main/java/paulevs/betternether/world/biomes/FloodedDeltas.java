@@ -52,7 +52,10 @@ public class FloodedDeltas extends NetherBiome {
 	
 	public FloodedDeltas(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-
+	}
+	
+	@Override
+	protected void onInit(){
 		addStructure("blackstone_stalactite", STALACTITE_BLACKSTONE, StructureType.FLOOR, 0.2F, true);
 		addStructure("stalactite_stalactite", STALACTITE_BASALT, StructureType.FLOOR, 0.2F, true);
 

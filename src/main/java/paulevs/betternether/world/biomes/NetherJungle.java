@@ -72,7 +72,10 @@ public class NetherJungle extends NetherBiome {
 	
 	public NetherJungle(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
 		addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);
 		addStructure("rubeus_tree", new StructureRubeus(), StructureType.FLOOR, 0.1F, false);

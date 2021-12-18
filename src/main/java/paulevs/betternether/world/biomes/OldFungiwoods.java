@@ -59,7 +59,10 @@ public class OldFungiwoods extends NetherBiome {
 	
 	public OldFungiwoods(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		
+	}
+	
+	@Override
+	protected void onInit(){
 		this.setNoiseDensity(0.5F);
 		
 		addStructure("old_red_mushrooms", new StructureOldRedMushrooms(), StructureType.FLOOR, 0.1F, false);

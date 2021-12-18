@@ -11,7 +11,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
-import paulevs.betternether.config.Configs;
+import ru.bclib.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
@@ -105,15 +105,19 @@ public abstract class NetherBiome extends BCLBiome{
 			addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
 		}
 		
-		final String group = getGroup();
-		String[] structAll = Configs.BIOMES.getStringArray(group, "schematics", structures.toArray(new String[] {}));
+		onInit();
+		
+		final String group = configGroup();
+		List<String> structAll = Configs.BIOMES_CONFIG.getStringArray(group, "schematics", structures);
 		for (String struct : structAll) {
 			structureFromString(struct);
 		}
 		
-		setPlantDensity(Configs.BIOMES.getFloat(group, "plants_and_structures_density", 1));
-		setNoiseDensity(Configs.BIOMES.getFloat(group, "noise_density", getNoiseDensity()));
+		setPlantDensity(Configs.BIOMES_CONFIG.getFloat(group, "plants_and_structures_density", getPlantDensity()));
+		setNoiseDensity(Configs.BIOMES_CONFIG.getFloat(group, "noise_density", getNoiseDensity()));
 	}
+	
+	protected abstract void onInit();
 	
 	public boolean hasBNStructures(){
 		return true;
@@ -137,10 +141,6 @@ public abstract class NetherBiome extends BCLBiome{
 
 	public float getNoiseDensity() {
 		return (1F - this.noiseDensity) / 2F;
-	}
-
-	private String getGroup() {
-		return "generator.biome." + getID().getNamespace() + "." + getRegistryName();
 	}
 
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {}
@@ -172,16 +172,12 @@ public abstract class NetherBiome extends BCLBiome{
 	protected static double getFeatureNoise(BlockPos pos, int id) {
 		return SCATTER.eval(pos.getX() * 0.1, pos.getY() * 0.1 + id * 10, pos.getZ() * 0.1);
 	}
-
-	public String getRegistryName() {
-		return getID().getPath();
-	}
 	
 	
 	protected void addStructure(String name, IStructure structure, StructureType type, float density, boolean useNoise) {
-		String group = getGroup() + ".procedural." + type.getName() + "." + name;
-		float dens = Configs.BIOMES.getFloat(group, "density", density);
-		boolean limit = Configs.BIOMES.getBoolean(group, "limit", useNoise);
+		String group = configGroup() + ".structures." + type.getName() + "." + name;
+		float dens = Configs.BIOMES_CONFIG.getFloat(group, "density", density);
+		boolean limit = Configs.BIOMES_CONFIG.getBoolean(group, "limit", useNoise);
 		this.addStructure(structure, type, dens, limit);
 	}
 
