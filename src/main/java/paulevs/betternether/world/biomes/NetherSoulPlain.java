@@ -1,5 +1,6 @@
 package paulevs.betternether.world.biomes;
 
+import java.util.List;
 import java.util.Random;
 import java.util.function.BiFunction;
 
@@ -13,6 +14,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.SurfaceRules.RuleSource;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
@@ -26,14 +28,14 @@ import paulevs.betternether.world.structures.plants.StructureSoulVein;
 import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.api.surface.rules.SwitchRuleSource;
 
 public class NetherSoulPlain extends NetherBiome {
 	private static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
 	private static final SurfaceRules.RuleSource SOUL_SOIL = SurfaceRules.state(Blocks.SOUL_SOIL.defaultBlockState());
 	private static final SurfaceRules.RuleSource SOUL_SANDSTONE = SurfaceRules.state(NetherBlocks.SOUL_SANDSTONE.defaultBlockState());
-	public static final SurfaceRules.ConditionSource NOISE_SOUL_LAYER = SurfaceRules.noiseCondition(Noises.SOUL_SAND_LAYER, -0.012);
-	public static final SurfaceRules.ConditionSource NOISE_NETHER_STATE = SurfaceRules.noiseCondition(Noises.NETHER_STATE_SELECTOR, 0.0);
-
+	private static final SurfaceRules.RuleSource LAVA = SurfaceRules.state(Blocks.MAGMA_BLOCK.defaultBlockState());
+	
 	public static class Config extends NetherBiomeConfig {
 		public Config(String name) {
 			super(name);
@@ -57,15 +59,21 @@ public class NetherSoulPlain extends NetherBiome {
 		
 		@Override
 		public SurfaceRuleBuilder surface() {
+			RuleSource soilSandDist
+				= SurfaceRules.sequence(SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, SOUL_SOIL), SOUL_SAND);
+			
+			RuleSource soilSandStoneDist
+				= SurfaceRules.sequence(new SwitchRuleSource(NetherNoiseCondition.DEFAULT, List.of(SOUL_SOIL, SOUL_SAND, SOUL_SANDSTONE, LAVA, LAVA, SOUL_SAND)));
+			
+			RuleSource soilStoneDist
+				= SurfaceRules.sequence(SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, SOUL_SOIL), SOUL_SANDSTONE);
 			return super
 				.surface()
+				.rule(2, SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, soilSandDist))
 				.ceil(NetherBlocks.SOUL_SANDSTONE.defaultBlockState())
-				.rule(SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(3, true, false, CaveSurface.FLOOR),
-					SurfaceRules.sequence(SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, SOUL_SOIL), SOUL_SAND)
-				))
-				.rule(SurfaceRules.ifTrue(NOISE_NETHER_STATE, SOUL_SOIL))
-				.rule(3, SOUL_SANDSTONE)
-				;
+				.rule(4, SurfaceRules.ifTrue(SurfaceRules.UNDER_CEILING, soilStoneDist))
+				.rule(5, soilSandStoneDist);
+				
 		}
 	}
 	
