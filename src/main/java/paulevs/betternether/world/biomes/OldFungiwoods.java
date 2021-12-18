@@ -64,6 +64,7 @@ public class OldFungiwoods extends NetherBiome {
 	@Override
 	protected void onInit(){
 		this.setNoiseDensity(0.5F);
+		setGenChance(0.3F);
 		
 		addStructure("old_red_mushrooms", new StructureOldRedMushrooms(), StructureType.FLOOR, 0.1F, false);
 		addStructure("old_brown_mushrooms", new StructureOldBrownMushrooms(), StructureType.FLOOR, 0.1F, false);

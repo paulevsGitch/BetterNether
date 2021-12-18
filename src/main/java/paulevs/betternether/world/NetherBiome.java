@@ -106,6 +106,7 @@ public abstract class NetherBiome extends BCLBiome{
 		}
 		
 		onInit();
+		setupFromConfig();
 		
 		final String structureGroup = configGroup() + ".structures" ;
 		List<String> structAll = Configs.BIOMES_CONFIG.getStringArray(structureGroup, "schematics", structures);

@@ -84,6 +84,7 @@ public class CrimsonGlowingWoods extends NetherBiome {
 	
 	@Override
 	protected void onInit(){
+		setGenChance(0.3F);
 		addStructure("crimson_glowing_tree", new StructureCrimsonGlowingTree(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.05F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.02F, true);

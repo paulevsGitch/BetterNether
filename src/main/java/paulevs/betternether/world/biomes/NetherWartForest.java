@@ -60,6 +60,7 @@ public class NetherWartForest extends NetherBiome {
 	@Override
 	protected void onInit(){
 		this.setNoiseDensity(0.45F);
+		this.setEdgeSize(9);
 		
 		addStructure("wart_deadwood", new StructureWartDeadwood(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.1F, false);

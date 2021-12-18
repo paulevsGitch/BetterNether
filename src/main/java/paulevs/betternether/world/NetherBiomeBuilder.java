@@ -24,6 +24,8 @@ import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.config.Configs;
+import ru.bclib.world.biomes.BCLBiome;
 
 public class NetherBiomeBuilder {
 	private static Biome BASE_BIOME;
@@ -65,8 +67,11 @@ public class NetherBiomeBuilder {
 			.spawn(EntityType.PIGLIN, 15, 4, 4)
 			.spawn(EntityType.STRIDER, 60, 1, 2);
 	}
-	
 	public static NetherBiome create(NetherBiomeConfig data){
+		return create(data, null);
+	}
+	
+	public static NetherBiome create(NetherBiomeConfig data, BCLBiome edgeBiome){
 		if (BASE_BIOME==null) {
 			BASE_BIOME = NetherBiomes.netherWastes();
 		}
@@ -105,8 +110,15 @@ public class NetherBiomeBuilder {
 		NetherStructures.addDefaultFeatures(builder);
 		data.addCustomBuildData(builder);
 		
-		NetherBiome b =  builder.build(data.getSupplier());
-		if (data.vertical()) b.setVertical();
+		NetherBiome b = builder.build(data.getSupplier());
+		if (Configs.BIOMES_CONFIG.getBoolean(b.configGroup(), "vertical", data.vertical())) b.setVertical();
+		
+		if (edgeBiome!=null) {
+			final int edgeSize = Configs.BIOMES_CONFIG.getInt(b.configGroup(), "edge_size", b.getEdgeSize());
+			if (edgeSize > 0) {
+				b.setEdge(edgeBiome);
+			}
+		}
 		return b;
 	}
 }

@@ -74,6 +74,8 @@ public class CrimsonPinewood extends NetherBiome {
 	
 	@Override
 	protected void onInit(){
+		setGenChance(0.3F);
+		
 		addStructure("crimson_pinewood", new StructureCrimsonPinewood(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.1F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, true);

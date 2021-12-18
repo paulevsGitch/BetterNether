@@ -63,6 +63,7 @@ public class NetherSulfuricBoneReef extends NetherBiome {
 	
 	@Override
 	protected void onInit(){
+		setGenChance(0.3F);
 		addStructure("bone_stalactite", new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
