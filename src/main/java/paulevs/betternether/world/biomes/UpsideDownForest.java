@@ -34,6 +34,8 @@ import paulevs.betternether.world.structures.plants.StructureNetherSakuraBush;
 import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWhisperingGourd;
+import paulevs.betternether.world.surface.CrimsonWoodNoiseCondition;
+import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
@@ -72,9 +74,9 @@ public class UpsideDownForest extends NetherBiome {
 		
 		@Override
 		public SurfaceRuleBuilder surface() {
-			return super.surface().rule(3,
+			return super.surface().rule(2,
 				SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
-					SurfaceRules.sequence(SurfaceRules.ifTrue(NOISE_CEIL_LAYER, CEILEING_MOSS), NETHERRACK)
+					SurfaceRules.sequence(SurfaceRules.ifTrue(CrimsonWoodNoiseCondition.DEFAULT, CEILEING_MOSS), NETHERRACK)
 				)
 			).rule(2,
 			   SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
@@ -117,7 +119,7 @@ public class UpsideDownForest extends NetherBiome {
 		addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.4F, true);
 		addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.4F, true);
 		addStructure("forest_litter", new StructureForestLitter(), StructureType.FLOOR, 0.1F, false);
-		addStructure("ceiling_mushrooms", new StructureCeilingMushrooms(), StructureType.CEIL, 1F, false);
+		//addStructure("ceiling_mushrooms", new StructureCeilingMushrooms(), StructureType.CEIL, 1F, false);
 		addStructure("neon_equisetum", new StructureNeonEquisetum(), StructureType.CEIL, 0.1F, true);
 		addStructure("hook_mushroom", new StructureHookMushroom(), StructureType.CEIL, 0.03F, true);
 		addStructure("whispering_gourd", new StructureWhisperingGourd(), StructureType.CEIL, 0.02F, true);

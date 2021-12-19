@@ -13,7 +13,7 @@ public class CrimsonWoodNoiseCondition extends SurfaceNoiseCondition {
 	public boolean test(SurfaceRulesContextAccessor context) {
 		final int x = context.getBlockX();
 		final int z = context.getBlockZ();
-		return TERRAIN.eval(x * 0.1, z * 0.1) > MHelper.randRange(0.2F, 0.4F, MHelper.RANDOM);
+		return TERRAIN.eval(x * 0.1, z * 0.1) > MHelper.randRange(0.0F, 0.2F, MHelper.RANDOM);
 	}
 }
 
