@@ -28,6 +28,7 @@ import paulevs.betternether.blocks.BNPane;
 import paulevs.betternether.blocks.BNPillar;
 import paulevs.betternether.blocks.BNTaburet;
 import paulevs.betternether.blocks.BNWall;
+import paulevs.betternether.blocks.BNWoodlikeDoor;
 import paulevs.betternether.blocks.BlockAgave;
 import paulevs.betternether.blocks.BlockAnchorTreeVine;
 import paulevs.betternether.blocks.BlockBNPot;
@@ -164,7 +165,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// Anchor Tree
 	public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
 	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BNLeaves(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
-	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine());
+	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine(), BlockTags.CLIMBABLE);
 	
 	
 	// Nether Sakura
@@ -221,8 +222,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BONE_PLATE = registerPlate("bone_plate", BONE_BLOCK);
 	public static final Block BONE_WALL = registerWall("bone_wall", BONE_BLOCK);
 	public static final Block BONE_TILE = registerBlock("bone_tile", new BNBoneBlock());
-	public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BaseDoorBlock(BONE_BLOCK));
-	public static final Block BONE_CINCINNASITE_DOOR = registerBlock("bone_cincinnasite_door", new BaseDoorBlock(BONE_BLOCK));
+	public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BNWoodlikeDoor(BONE_BLOCK));
+	public static final Block BONE_CINCINNASITE_DOOR = registerBlock("bone_cincinnasite_door", new BNWoodlikeDoor(BONE_BLOCK));
 	
 	// Quartz Glass //
 	public static final Block QUARTZ_GLASS = registerBlock("quartz_glass", new BNGlass(Blocks.GLASS));
@@ -313,7 +314,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// Eyes //
 	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
 	public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
-	public static final Block EYE_VINE = registerBlockNI("eye_vine", new BlockEyeVine());
+	public static final Block EYE_VINE = registerBlockNI("eye_vine", new BlockEyeVine(), BlockTags.CLIMBABLE);
 	public static final Block EYE_SEED = registerBlock("eye_seed", new BlockEyeSeed());
 	
 	// Grass //
@@ -325,9 +326,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", new BlockNetherGrass());
 	
 	// Vines //
-	public static final Block BLACK_VINE = registerBlock("black_vine", new BlockBlackVine());
-	public static final Block BLOOMING_VINE = registerBlock("blooming_vine", new BlockBlackVine());
-	public static final Block GOLDEN_VINE = registerBlock("golden_vine", new BlockGoldenVine());
+	public static final Block BLACK_VINE = registerBlock("black_vine", new BlockBlackVine(), BlockTags.CLIMBABLE);
+	public static final Block BLOOMING_VINE = registerBlock("blooming_vine", new BlockBlackVine(), BlockTags.CLIMBABLE);
+	public static final Block GOLDEN_VINE = registerBlock("golden_vine", new BlockGoldenVine(), BlockTags.CLIMBABLE);
 	public static final Block LUMABUS_SEED = registerBlock("lumabus_seed", new BlockLumabusSeed(new StructureLumabusVine()));
 	public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine(LUMABUS_SEED));
 	public static final Block GOLDEN_LUMABUS_SEED = registerBlock("golden_lumabus_seed", new BlockLumabusSeed(new StructureGoldenLumabusVine()));
@@ -387,13 +388,13 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
-	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium());
-	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockTerrain());
-	public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass", new BlockTerrain());
-	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain());
+	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium(), BlockTags.NYLIUM);
+	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockTerrain(), BlockTags.NYLIUM);
+	public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass", new BlockTerrain(), BlockTags.NYLIUM);
+	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain(), BlockTags.NYLIUM);
 	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand());
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
-	public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass", new BlockTerrain());
+	public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass", new BlockTerrain(), BlockTags.NYLIUM);
 	public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
 	
 	// Roofs //
@@ -411,7 +412,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block NETHERRACK_FURNACE = registerFurnace("netherrack_furnace", Blocks.NETHERRACK);
 	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new BlockCincinnasiteForge());
 	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
-	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil());
+	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil(), BlockTags.ANVIL);
 	
 	public static final Block CRAFTING_TABLE_CRIMSON = registerCraftingTable("crafting_table_crimson", Blocks.CRIMSON_PLANKS);
 	public static final Block CRAFTING_TABLE_WARPED = registerCraftingTable("crafting_table_warped", Blocks.WARPED_PLANKS);
@@ -501,9 +502,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return block;
 	}
 	
-	private static Block registerBlockNI(String name, Block block) {
+	private static Block registerBlockNI(String name, Block block, Tag.Named<Block>... tags) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
-			return registerBlock(name, block, false);
+			return registerBlock(name, block, false, tags);
 		}
 		return block;
 	}
@@ -512,7 +513,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return registerBlock(name, block, true);
 	}
 	
-	private static Block registerBlock(String name, Block block, boolean hasItem) {
+	private static Block registerBlock(String name, Block block, boolean hasItem, Tag.Named<Block>... tags) {
 		final BlockRegistry blockRegistry = getBlockRegistry();
 		final ResourceLocation location = new ResourceLocation(BetterNether.MOD_ID, name);
 		if (hasItem) {
@@ -520,6 +521,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		}
 		else {
 			blockRegistry.registerBlockOnly(location, block);
+		}
+		if (tags.length>0){
+			TagAPI.addTags(block, tags);
 		}
 		return block;
 	}
@@ -622,6 +626,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		Block wall = new BNWall(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, wall);
+			TagAPI.addTags(wall, BlockTags.WALLS);
 			RecipesHelper.makeWallRecipe(source, wall);
 		}
 		return wall;
