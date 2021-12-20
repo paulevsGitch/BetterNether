@@ -37,6 +37,7 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.StructureWorld;
 import ru.bclib.BCLib;
@@ -182,7 +183,7 @@ public class CommandRegistry {
             if (structure==null){
                 throw ERROR_NBT_STRUCTURE_NOT_FOUND.create(type);
             }
-            structure.generate(level, new BlockPos(pos), MHelper.RANDOM, 128);
+            structure.generate(level, new BlockPos(pos), MHelper.RANDOM, 128, NetherChunkPopulatorFeature.generatorForThread().context);
         } catch (Throwable t){
             BCLib.LOGGER.error("Error loading from nbt: " + type);
             BCLib.LOGGER.error(t.toString());

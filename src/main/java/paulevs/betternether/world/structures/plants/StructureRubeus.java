@@ -1,12 +1,5 @@
 package paulevs.betternether.world.structures.plants;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
@@ -22,17 +15,18 @@ import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.RubeusLog;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.StructureFuncScatter;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
+
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Random;
 
 public class StructureRubeus extends StructureFuncScatter {
 	private static final float[] CURVE_X = new float[] { 9F, 7F, 1.5F, 0.5F, 3F, 7F };
 	private static final float[] CURVE_Y = new float[] { 20F, 17F, 12F, 4F, 0F, -2F };
 	private static final int MIDDLE_Y = 10;
-	private static final Set<BlockPos> POINTS = new HashSet<BlockPos>();
-	private static final Set<BlockPos> MIDDLE = new HashSet<BlockPos>();
-	private static final Set<BlockPos> TOP = new HashSet<BlockPos>();
-	private static final Map<BlockPos, Byte> LOGS_DIST = new HashMap<>();
-	
-	private void updateSDFFrom(BlockPos bpos) {
+
+	private void updateSDFFrom(BlockPos bpos, StructureGeneratorThreadContext context) {
 		for (int x=-7; x<=7; x++) {
 			for (int y = -7; y <= 7; y++) {
 				for (int z = -7; z <= 7; z++) {
@@ -40,15 +34,15 @@ public class StructureRubeus extends StructureFuncScatter {
 					final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
 					if (dist<=7) {
 						final BlockPos blPos = bpos.offset(x, y, z);
-						LOGS_DIST.merge(blPos, (byte) dist, (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
+						context.LOGS_DIST.merge(blPos, (byte) dist, (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
 					}
 				}
 			}
 		}
 	}
 	
-	private void updateDistances(ServerLevelAccessor world) {
-		for (Entry<BlockPos, Byte> entry : LOGS_DIST.entrySet()){
+	private void updateDistances(ServerLevelAccessor world, StructureGeneratorThreadContext context) {
+		for (Entry<BlockPos, Byte> entry : context.LOGS_DIST.entrySet()){
 			final int dist = entry.getValue();
 			final BlockPos logPos = entry.getKey();
 			
@@ -71,14 +65,10 @@ public class StructureRubeus extends StructureFuncScatter {
 		super(7);
 	}
 
-	@Override
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
-		grow(world, pos, random, true);
-	}
 
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
-		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
-		LOGS_DIST.clear();
+	@Override
+	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural, StructureGeneratorThreadContext context) {
+		context.clear();
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		float scale = MHelper.randRange(0.5F, 1F, random);
 		int minCount = scale < 0.75 ? 3 : 4;
@@ -105,10 +95,10 @@ public class StructureRubeus extends StructureFuncScatter {
 				int z2 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F, 2F, random) * branchSize);
 
 				if (CURVE_Y[i] <= 0) {
-					if (!isGround(world.getBlockState(POS.set(x2, y2, z2)))) {
+					if (!isGround(world.getBlockState(context.POS.set(x2, y2, z2)))) {
 						boolean noGround = true;
 						for (int d = 1; d < 3; d++) {
-							if (isGround(world.getBlockState(POS.set(x2, y2 - d, z2)))) {
+							if (isGround(world.getBlockState(context.POS.set(x2, y2 - d, z2)))) {
 								y2 -= d;
 								noGround = false;
 								break;
@@ -122,7 +112,7 @@ public class StructureRubeus extends StructureFuncScatter {
 					}
 				}
 
-				line(world, x1, y1, z1, x2, y2, z2, middle);
+				line(world, x1, y1, z1, x2, y2, z2, middle, context);
 				x1 = x2;
 				y1 = y2;
 				z1 = z2;
@@ -130,62 +120,62 @@ public class StructureRubeus extends StructureFuncScatter {
 		}
 
 		BlockState state;
-		Iterator<BlockPos> iterator = TOP.iterator();
+		Iterator<BlockPos> iterator = context.TOP.iterator();
 		while (iterator.hasNext()) {
 			BlockPos bpos = iterator.next();
 			if (bpos != null) {
-				if (POINTS.contains(bpos.above()) && !TOP.contains(bpos.above()))
+				if (context.POINTS.contains(bpos.above()) && !context.TOP.contains(bpos.above()))
 					iterator.remove();
 			}
 		}
 
-		iterator = MIDDLE.iterator();
+		iterator = context.MIDDLE.iterator();
 		while (iterator.hasNext()) {
 			BlockPos bpos = iterator.next();
 			if (bpos != null) {
 				BlockPos up = bpos.above();
-				if (MIDDLE.contains(up) || (!TOP.contains(up) && POINTS.contains(up)))
+				if (context.MIDDLE.contains(up) || (!context.TOP.contains(up) && context.POINTS.contains(up)))
 					iterator.remove();
 			}
 			else
 				iterator.remove();
 		}
 
-		for (BlockPos bpos : POINTS) {
-			if (POINTS.contains(bpos.above()) && POINTS.contains(bpos.below())) {
+		for (BlockPos bpos : context.POINTS) {
+			if (context.POINTS.contains(bpos.above()) && context.POINTS.contains(bpos.below())) {
 				state = NetherBlocks.MAT_RUBEUS.getLog().defaultBlockState();
-				if (MIDDLE.contains(bpos))
+				if (context.MIDDLE.contains(bpos))
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.MIDDLE), false, random);
-				else if (TOP.contains(bpos))
+				else if (context.TOP.contains(bpos))
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.TOP), false, random);
 				else
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.BOTTOM), natural, random);
 			}
 			else {
 				state = NetherBlocks.MAT_RUBEUS.getBark().defaultBlockState();
-				if (MIDDLE.contains(bpos))
+				if (context.MIDDLE.contains(bpos))
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.MIDDLE), false, random);
-				else if (TOP.contains(bpos))
+				else if (context.TOP.contains(bpos))
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.TOP), false, random);
 				else
 					setCondition(world, bpos, pos.getY(), state.setValue(RubeusLog.SHAPE, TripleShape.BOTTOM), natural, random);
 			}
-			updateSDFFrom(bpos);
+			updateSDFFrom(bpos, context);
 		}
 		
-		updateDistances(world);
-		LOGS_DIST.clear();
+		updateDistances(world, context);
+		context.LOGS_DIST.clear();
 
-		POINTS.clear();
-		MIDDLE.clear();
-		TOP.clear();
+		context.POINTS.clear();
+		context.MIDDLE.clear();
+		context.TOP.clear();
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
 		if (length >= StructureStalagnate.MAX_LENGTH)
-			super.generate(world, pos, random, MAX_HEIGHT);
+			super.generate(world, pos, random, MAX_HEIGHT, context);
 	}
 
 	@Override
@@ -198,9 +188,7 @@ public class StructureRubeus extends StructureFuncScatter {
 		return BlocksHelper.isNetherGround(state);
 	}
 
-	private void line(LevelAccessor world, int x1, int y1, int z1, int x2, int y2, int z2, int middleY) {
-		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
-
+	private void line(LevelAccessor world, int x1, int y1, int z1, int x2, int y2, int z2, int middleY, StructureGeneratorThreadContext context) {
 		int dx = x2 - x1;
 		int dy = y2 - y1;
 		int dz = z2 - z1;
@@ -212,32 +200,32 @@ public class StructureRubeus extends StructureFuncScatter {
 		float py = y1;
 		float pz = z1;
 
-		BlockPos pos = POS.set(x1, y1, z1).immutable();
-		POINTS.add(pos);
+		BlockPos pos = context.POS.set(x1, y1, z1).immutable();
+		context.POINTS.add(pos);
 		if (pos.getY() == middleY)
-			MIDDLE.add(pos);
+			context.MIDDLE.add(pos);
 		else if (pos.getY() > middleY)
-			TOP.add(pos);
+			context.TOP.add(pos);
 
-		pos = POS.set(x2, y2, z2).immutable();
-		POINTS.add(pos);
+		pos = context.POS.set(x2, y2, z2).immutable();
+		context.POINTS.add(pos);
 		if (pos.getY() == middleY)
-			MIDDLE.add(pos);
+			context.MIDDLE.add(pos);
 		else if (pos.getY() > middleY)
-			TOP.add(pos);
+			context.TOP.add(pos);
 
 		for (int i = 0; i < mx; i++) {
 			px += fdx;
 			py += fdy;
 			pz += fdz;
 
-			POS.set(Math.round(px), Math.round(py), Math.round(pz));
-			pos = POS.immutable();
-			POINTS.add(pos);
-			if (POS.getY() == middleY)
-				MIDDLE.add(pos);
-			else if (POS.getY() > middleY)
-				TOP.add(pos);
+			context.POS.set(Math.round(px), Math.round(py), Math.round(pz));
+			pos = context.POS.immutable();
+			context.POINTS.add(pos);
+			if (context.POS.getY() == middleY)
+				context.MIDDLE.add(pos);
+			else if (context.POS.getY() > middleY)
+				context.TOP.add(pos);
 		}
 	}
 

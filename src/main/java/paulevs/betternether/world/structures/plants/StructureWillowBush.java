@@ -2,7 +2,6 @@ package paulevs.betternether.world.structures.plants;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.AxisDirection;
@@ -16,16 +15,16 @@ import paulevs.betternether.blocks.BlockWillowLeaves;
 import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureWillowBush implements IStructure {
 	public StructureWillowBush() {}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
 			return;
 
-		final MutableBlockPos POS = new MutableBlockPos();
 		float r = random.nextFloat() * 2F + 0.5F;
 		int count = (int) r;
 
@@ -39,20 +38,20 @@ public class StructureWillowBush implements IStructure {
 			int z1 = pos.getZ() - ir;
 			int z2 = pos.getZ() + ir;
 
-			POS.setY(pos.getY() + i);
+			context.POS.setY(pos.getY() + i);
 
 			for (int x = x1; x < x2; x++) {
-				POS.setX(x);
+				context.POS.setX(x);
 				int sqx = x - pos.getX();
 				sqx *= sqx;
 				for (int z = z1; z < z2; z++) {
 					int sqz = z - pos.getZ();
 					sqz *= sqz;
-					POS.setZ(z);
+					context.POS.setZ(z);
 					if (sqx + sqz < r2 + random.nextFloat() * r) {
-						int dx = POS.getX() - pos.getX();
-						int dy = POS.getY() - pos.getY();
-						int dz = POS.getZ() - pos.getZ();
+						int dx = context.POS.getX() - pos.getX();
+						int dy = context.POS.getY() - pos.getY();
+						int dz = context.POS.getZ() - pos.getZ();
 						int ax = Math.abs(dx);
 						int ay = Math.abs(dy);
 						int az = Math.abs(dz);
@@ -62,7 +61,7 @@ public class StructureWillowBush implements IStructure {
 						else if (max == ay) dir = Direction.fromAxisAndDirection(Axis.Y, dy > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
 						else
 							dir = Direction.fromAxisAndDirection(Axis.Z, dz > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
-						setIfAir(world, POS, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, dir).setValue(LeavesBlock.PERSISTENT, true));
+						setIfAir(world, context.POS, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, dir).setValue(LeavesBlock.PERSISTENT, true));
 					}
 				}
 			}

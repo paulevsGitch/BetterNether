@@ -7,5 +7,5 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 public interface IStructure {
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT);
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context);
 }

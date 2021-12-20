@@ -1,16 +1,9 @@
 package paulevs.betternether.world.structures.plants;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import paulevs.betternether.BlocksHelper;
@@ -20,16 +13,18 @@ import paulevs.betternether.blocks.BlockPlantWall;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class StructureAnchorTreeRoot implements IStructure {
-	private static final Set<BlockPos> BLOCKS = new HashSet<BlockPos>(2048);
-	private Block[] wallPlants;
 	private static final StructureLucis LUCIS = new StructureLucis();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (pos.getY() < MAX_HEIGHT*0.75) return;
-		final MutableBlockPos POS = new MutableBlockPos();
 
 		double angle = random.nextDouble() * Math.PI * 2;
 		double dx = Math.sin(angle);
@@ -38,31 +33,28 @@ public class StructureAnchorTreeRoot implements IStructure {
 		int count = MHelper.floor(size * 2);
 		if (count < 3) count = 3;
 		if ((count & 1) == 0) count++;
-		POS.set(pos.getX() - dx * size, pos.getY() + 10, pos.getZ() - dz * size);
-		BlockPos start = POS.above(BlocksHelper.upRay(world, POS, (int)(MAX_HEIGHT*0.75)));
-		if (start.getY() < pos.getY()) start = POS.set(start).offset(0, 10, 0).immutable();
-		POS.set(pos.getX() + dx * size, pos.getY() + 10, pos.getZ() + dz * size);
-		BlockPos end = POS.above(BlocksHelper.upRay(world, POS, (int)(MAX_HEIGHT*0.75)));
-		if (end.getY() < pos.getY()) end = POS.set(end).offset(0, 10, 0).immutable();
+		context.POS.set(pos.getX() - dx * size, pos.getY() + 10, pos.getZ() - dz * size);
+		BlockPos start = context.POS.above(BlocksHelper.upRay(world, context.POS, (int)(MAX_HEIGHT*0.75)));
+		if (start.getY() < pos.getY()) start = context.POS.set(start).offset(0, 10, 0).immutable();
+		context.POS.set(pos.getX() + dx * size, pos.getY() + 10, pos.getZ() + dz * size);
+		BlockPos end = context.POS.above(BlocksHelper.upRay(world, context.POS, (int)(MAX_HEIGHT*0.75)));
+		if (end.getY() < pos.getY()) end = context.POS.set(end).offset(0, 10, 0).immutable();
 		List<BlockPos> blocks = lineParable(start, end, count, random, 0.2);
 
-		BLOCKS.clear();
-		buildLine(blocks, 1.3 + random.nextDouble());
+		context.BLOCKS.clear();
+		buildLine(blocks, 1.3 + random.nextDouble(), context);
 
 		BlockState state;
-		if (wallPlants == null) {
-			wallPlants = new Block[] { NetherBlocks.JUNGLE_MOSS, NetherBlocks.JUNGLE_MOSS, NetherBlocks.WALL_MUSHROOM_BROWN, NetherBlocks.WALL_MUSHROOM_RED };
-		}
 		BlockState vine = NetherBlocks.ANCHOR_TREE_VINE.defaultBlockState();
 		final int minBuildHeight = world.getMinBuildHeight()+1;
 		final BoundingBox blockBox = BlocksHelper.decorationBounds(world, pos, minBuildHeight, MAX_HEIGHT-2);
-		for (BlockPos bpos : BLOCKS) {
+		for (BlockPos bpos : context.BLOCKS) {
 			//if (!blockBox.contains(bpos)) continue;
 			if (bpos.getY() < minBuildHeight || bpos.getY() > MAX_HEIGHT-2) continue;
 			if (!BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) && !canReplace(state)) continue;
-			boolean blockUp = true;
+			boolean blockUp;
 			boolean blockDown = true;
-			if ((blockUp = BLOCKS.contains(bpos.above())) && (blockDown = BLOCKS.contains(bpos.below())))
+			if ((blockUp = context.BLOCKS.contains(bpos.above())) && (blockDown = context.BLOCKS.contains(bpos.below())))
 				BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
 			else
 				BlocksHelper.setWithoutUpdate(world, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
@@ -72,43 +64,43 @@ public class StructureAnchorTreeRoot implements IStructure {
 			}
 
 			if ((bpos.getY() & 3) == 0 && StructureAnchorTree.NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
-				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.north()))
+				if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.north()))
 					if (random.nextBoolean())
 						StructureAnchorTree.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5, blockBox);
 					else
-					LUCIS.generate(world, bpos, random, MAX_HEIGHT);
-				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.south()))
+					LUCIS.generate(world, bpos, random, MAX_HEIGHT, context);
+				if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.south()))
 					if (random.nextBoolean())
 						StructureAnchorTree.makeMushroom(world, bpos.south(), random.nextDouble() + 1.5, blockBox);
 					else
-					LUCIS.generate(world, bpos, random, MAX_HEIGHT);
-				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.east()))
+					LUCIS.generate(world, bpos, random, MAX_HEIGHT, context);
+				if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.east()))
 					if (random.nextBoolean())
 						StructureAnchorTree.makeMushroom(world, bpos.east(), random.nextDouble() + 1.5, blockBox);
 					else
-					LUCIS.generate(world, bpos, random, MAX_HEIGHT);
-				if (random.nextInt(32) == 0 && !BLOCKS.contains(bpos.west()))
+					LUCIS.generate(world, bpos, random, MAX_HEIGHT, context);
+				if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.west()))
 					if (random.nextBoolean())
 						StructureAnchorTree.makeMushroom(world, bpos.west(), random.nextDouble() + 1.5, blockBox);
 					else
-					LUCIS.generate(world, bpos, random, MAX_HEIGHT);
+					LUCIS.generate(world, bpos, random, MAX_HEIGHT, context);
 			}
 
-			state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
+			state = StructureAnchorTree.wallPlants[random.nextInt(StructureAnchorTree.wallPlants.length)].defaultBlockState();
 			BlockPos _pos = bpos.north();
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isEmptyBlock(_pos))
+			if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && world.isEmptyBlock(_pos))
 				BlocksHelper.setWithUpdate(world, _pos, state.setValue(BlockPlantWall.FACING, Direction.NORTH));
 
 			_pos = bpos.south();
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isEmptyBlock(_pos))
+			if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && world.isEmptyBlock(_pos))
 				BlocksHelper.setWithUpdate(world, _pos, state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
 
 			_pos = bpos.east();
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isEmptyBlock(_pos))
+			if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && world.isEmptyBlock(_pos))
 				BlocksHelper.setWithUpdate(world, _pos, state.setValue(BlockPlantWall.FACING, Direction.EAST));
 
 			_pos = bpos.west();
-			if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && world.isEmptyBlock(_pos))
+			if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && world.isEmptyBlock(_pos))
 				BlocksHelper.setWithUpdate(world, _pos, state.setValue(BlockPlantWall.FACING, Direction.WEST));
 
 			if (blockUp && !blockDown && random.nextInt(16) == 0) {
@@ -133,7 +125,7 @@ public class StructureAnchorTreeRoot implements IStructure {
 				|| state.getBlock() instanceof BlockPlantWall;
 	}
 
-	private void buildLine(List<BlockPos> blocks, double radius) {
+	private void buildLine(List<BlockPos> blocks, double radius, StructureGeneratorThreadContext context) {
 		for (int i = 0; i < blocks.size() - 1; i++) {
 			BlockPos a = blocks.get(i);
 			BlockPos b = blocks.get(i + 1);
@@ -144,7 +136,7 @@ public class StructureAnchorTreeRoot implements IStructure {
 			}
 			int count = (int) Math.ceil(Math.sqrt(b.distSqr(a)));
 			for (int j = 0; j < count; j++)
-				sphere(lerpCos(a, b, (double) j / count), radius);
+				sphere(lerpCos(a, b, (double) j / count), radius, context);
 		}
 	}
 
@@ -161,7 +153,7 @@ public class StructureAnchorTreeRoot implements IStructure {
 	}
 
 	private List<BlockPos> lineParable(BlockPos start, BlockPos end, int count, Random random, double range) {
-		List<BlockPos> result = new ArrayList<BlockPos>(count);
+		List<BlockPos> result = new ArrayList<>(count);
 		int max = count - 1;
 		int middle = count / 2;
 		result.add(start);
@@ -179,7 +171,7 @@ public class StructureAnchorTreeRoot implements IStructure {
 		return result;
 	}
 
-	private void sphere(BlockPos pos, double radius) {
+	private void sphere(BlockPos pos, double radius, StructureGeneratorThreadContext context) {
 		int x1 = MHelper.floor(pos.getX() - radius);
 		int y1 = MHelper.floor(pos.getY() - radius);
 		int z1 = MHelper.floor(pos.getZ() - radius);
@@ -197,7 +189,7 @@ public class StructureAnchorTreeRoot implements IStructure {
 				for (int y = y1; y <= y2; y++) {
 					int py2 = y - pos.getY();
 					py2 *= py2;
-					if (px2 + pz2 + py2 <= radius) BLOCKS.add(new BlockPos(x, y, z));
+					if (px2 + pz2 + py2 <= radius) context.BLOCKS.add(new BlockPos(x, y, z));
 				}
 			}
 		}

@@ -17,7 +17,7 @@ public class PathsFeature extends DefaultFeature {
 		final int sx = (worldPos.getX() >> 4) << 4;
 		final int sz = (worldPos.getZ() >> 4) << 4;
 		
-		paths.generate(level, new BlockPos(sx, 0, sz), random, featurePlaceContext.chunkGenerator().getGenDepth());
+		paths.generate(level, new BlockPos(sx, 0, sz), random, featurePlaceContext.chunkGenerator().getGenDepth(), NetherChunkPopulatorFeature.generatorForThread().context);
 		return true;
 	}
 	

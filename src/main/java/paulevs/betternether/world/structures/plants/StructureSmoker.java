@@ -2,7 +2,6 @@ package paulevs.betternether.world.structures.plants;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
@@ -10,6 +9,7 @@ import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.BlockSmoker;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureSmoker implements IStructure {
 	private boolean canPlaceAt(ServerLevelAccessor world, BlockPos pos) {
@@ -17,8 +17,7 @@ public class StructureSmoker implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		MutableBlockPos npos = new MutableBlockPos();
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		
@@ -31,12 +30,12 @@ public class StructureSmoker implements IStructure {
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
 				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
 				for (int j = 0; j < RANDOM_BOUND; j++) {
-					npos.set(x, y - j, z);
-					if (world.isEmptyBlock(npos) && canPlaceAt(world, npos)) {
+					context.POS.set(x, y - j, z);
+					if (world.isEmptyBlock(context.POS) && canPlaceAt(world, context.POS)) {
 						int h = random.nextInt(5);
-						BlocksHelper.setWithoutUpdate(world, npos, bottom);
+						BlocksHelper.setWithoutUpdate(world, context.POS, bottom);
 						for (int n = 1; n < h; n++) {
-							BlockPos up = npos.above(n);
+							BlockPos up = context.POS.above(n);
 							if (world.isEmptyBlock(up.above()))
 								BlocksHelper.setWithoutUpdate(world, up, middle);
 							else {
@@ -44,7 +43,7 @@ public class StructureSmoker implements IStructure {
 								return;
 							}
 						}
-						BlocksHelper.setWithoutUpdate(world, npos.above(h), top);
+						BlocksHelper.setWithoutUpdate(world, context.POS.above(h), top);
 						break;
 					}
 				}

@@ -2,7 +2,6 @@ package paulevs.betternether.world.structures;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -16,10 +15,10 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class StructurePath implements IStructure {
-	private OpenSimplexNoise heightNoise;
-	private OpenSimplexNoise rigidNoise;
-	private OpenSimplexNoise distortX;
-	private OpenSimplexNoise distortY;
+	private final OpenSimplexNoise heightNoise;
+	private final OpenSimplexNoise rigidNoise;
+	private final OpenSimplexNoise distortX;
+	private final OpenSimplexNoise distortY;
 
 	public StructurePath(long seed) {
 		Random random = new Random(seed);
@@ -30,29 +29,27 @@ public class StructurePath implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		final MutableBlockPos B_POS = new MutableBlockPos();
-
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		for (int x = 0; x < 16; x++) {
 			int wx = pos.getX() + x;
-			B_POS.setX(wx);
+			context.POS.setX(wx);
 			for (int z = 0; z < 16; z++) {
 				int wz = pos.getZ() + z;
-				B_POS.setZ(wz);
+				context.POS.setZ(wz);
 				double rigid = getRigid(wx, wz) + MHelper.randRange(0, 0.015F, random);
 
 				if (rigid < 0.015) {
 					int height = getHeight(wx, wz);
-					B_POS.setY(height);
-					height -= BlocksHelper.downRay(world, B_POS, height);
-					B_POS.setY(height);
-					if (world.isEmptyBlock(B_POS) && world.getBlockState(B_POS.move(Direction.DOWN)).isCollisionShapeFullBlock(world, B_POS) && isHeightValid(world, B_POS.above())) {
-						Biome biome = world.getBiome(B_POS);
-						BlocksHelper.setWithoutUpdate(world, B_POS, getRoadMaterial(world, B_POS, biome));
-						if (needsSlab(world, B_POS.above()))
-							BlocksHelper.setWithoutUpdate(world, B_POS.above(), getSlabMaterial(world, B_POS, biome));
+					context.POS.setY(height);
+					height -= BlocksHelper.downRay(world, context.POS, height);
+					context.POS.setY(height);
+					if (world.isEmptyBlock(context.POS) && world.getBlockState(context.POS.move(Direction.DOWN)).isCollisionShapeFullBlock(world, context.POS) && isHeightValid(world, context.POS.above())) {
+						Biome biome = world.getBiome(context.POS);
+						BlocksHelper.setWithoutUpdate(world, context.POS, getRoadMaterial(world, context.POS, biome));
+						if (needsSlab(world, context.POS.above()))
+							BlocksHelper.setWithoutUpdate(world, context.POS.above(), getSlabMaterial(world, context.POS, biome));
 						else if (rigid > 0.01 && ((x & 3) == 0) && ((z & 3) == 0) && random.nextInt(8) == 0)
-							makeLantern(world, B_POS.above());
+							makeLantern(world, context.POS.above());
 					}
 				}
 			}

@@ -20,6 +20,8 @@ public class NetherChunkPopulatorFeature extends DefaultFeature {
 	public static void clearGeneratorPool(){
 		generatorPool.clear();
 	}
+
+	public static BNWorldGenerator generatorForThread() { return generatorPool.computeIfAbsent(Thread.currentThread(), t-> new BNWorldGenerator()); }
 	
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
@@ -28,7 +30,7 @@ public class NetherChunkPopulatorFeature extends DefaultFeature {
 		final int sx = (worldPos.getX() >> 4) << 4;
 		final int sz = (worldPos.getZ() >> 4) << 4;
 		
-		BNWorldGenerator generator = generatorPool.computeIfAbsent(Thread.currentThread(), t-> new BNWorldGenerator());
+		BNWorldGenerator generator = generatorForThread();
 		
 		//BetterNether.LOGGER.info(" +++ Starting populate " + sx + "/" + sz + " on " + Thread.currentThread() + " (" + generatorPool.size()  +")");
 		generator.prePopulate(level, sx, sz, featurePlaceContext);

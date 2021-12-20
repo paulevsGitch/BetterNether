@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.features.CavesFeature;
 import ru.bclib.api.biomes.BiomeAPI;
@@ -36,6 +37,7 @@ public class BNWorldGenerator {
 	private final HashSet<Biome> MC_BIOMES = new HashSet<Biome>();
 
 	private NetherBiome biome;
+	public final StructureGeneratorThreadContext context = new StructureGeneratorThreadContext();
 	
 	public static void onModInit() {
 		structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
@@ -94,16 +96,16 @@ public class BNWorldGenerator {
 						 .isReplaceable()) {
 					if (type == StructureType.FLOOR) {
 						BlockState down = world.getBlockState(popPos.below());
-						if (BlocksHelper.isNetherGroundMagma(down)) biome.genFloorBuildings(world, popPos, random, MAX_HEIGHT);
+						if (BlocksHelper.isNetherGroundMagma(down)) biome.genFloorBuildings(world, popPos, random, MAX_HEIGHT, context);
 					}
 					else if (type == StructureType.CEIL) {
 						BlockState up = world.getBlockState(popPos.above());
 						if (BlocksHelper.isNetherGroundMagma(up)) {
-							biome.genCeilBuildings(world, popPos, random, MAX_HEIGHT);
+							biome.genCeilBuildings(world, popPos, random, MAX_HEIGHT, context);
 						}
 					}
 				}
-				else biome.genUnderBuildings(world, popPos, random, MAX_HEIGHT);
+				else biome.genUnderBuildings(world, popPos, random, MAX_HEIGHT, context);
 			}
 		}
 
@@ -112,7 +114,7 @@ public class BNWorldGenerator {
 			if (world.isEmptyBlock(popPos) && BlocksHelper.isLava(world.getBlockState(popPos.below()))) {
 				biome = getBiomeLocal(popPos.getX() - sx, popPos.getY(), popPos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome!=null) {
-					biome.genLavaBuildings(world, popPos, random, MAX_HEIGHT);
+					biome.genLavaBuildings(world, popPos, random, MAX_HEIGHT, context);
 				}
 			}
 		}
@@ -191,7 +193,7 @@ public class BNWorldGenerator {
 			if (world.isEmptyBlock(pos)) {
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome != null)
-					biome.genLavaObjects(world, pos, random, MAX_HEIGHT);
+					biome.genLavaObjects(world, pos, random, MAX_HEIGHT, context);
 			}
 		}
 
@@ -199,21 +201,21 @@ public class BNWorldGenerator {
 			if (world.isEmptyBlock(pos)) {
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome != null)
-					biome.genFloorObjects(world, pos, random, MAX_HEIGHT);
+					biome.genFloorObjects(world, pos, random, MAX_HEIGHT, context);
 			}
 
 		for (BlockPos pos : LIST_WALL)
 			if (world.isEmptyBlock(pos)) {
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome != null)
-					biome.genWallObjects(world, pos, random, MAX_HEIGHT);
+					biome.genWallObjects(world, pos, random, MAX_HEIGHT, context);
 			}
 
 		for (BlockPos pos : LIST_CEIL)
 			if (world.isEmptyBlock(pos)) {
 				biome = getBiomeLocal(pos.getX() - sx, pos.getY(), pos.getZ() - sz, random, layerHeight, world, popPos);
 				if (biome != null)
-					biome.genCeilObjects(world, pos, random, MAX_HEIGHT);
+					biome.genCeilObjects(world, pos, random, MAX_HEIGHT, context);
 			}
 	}
 	
@@ -254,6 +256,7 @@ public class BNWorldGenerator {
 	}
 
 	public void prePopulate(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+		context.clear();
 		makeLocalBiomes(world, sx, sz, featurePlaceContext);
 	}
 	

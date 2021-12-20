@@ -53,7 +53,6 @@ public class NetherWartForest extends NetherBiome {
 		}
 	}
 	
-	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	public NetherWartForest(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
@@ -74,6 +73,7 @@ public class NetherWartForest extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+		final MutableBlockPos POS = new MutableBlockPos();
 		switch (random.nextInt(4)) {
 			case 0:
 				super.genSurfColumn(world, pos, random);

@@ -11,12 +11,12 @@ import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.BlockWhisperingGourdVine;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureWhisperingGourd implements IStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (pos.getY() < (MAX_HEIGHT-38) || !BlocksHelper.isNetherrack(world.getBlockState(pos.above()))) return;
-		MutableBlockPos blockPos = new MutableBlockPos();
 
 		int h = BlocksHelper.downRay(world, pos, 4);
 		if (h < 1)
@@ -27,11 +27,11 @@ public class StructureWhisperingGourd implements IStructure {
 		BlockState middle = NetherBlocks.WHISPERING_GOURD_VINE.defaultBlockState().setValue(BlockWhisperingGourdVine.SHAPE, TripleShape.MIDDLE);
 		BlockState top = NetherBlocks.WHISPERING_GOURD_VINE.defaultBlockState().setValue(BlockWhisperingGourdVine.SHAPE, TripleShape.TOP);
 
-		blockPos.set(pos);
+		context.POS.set(pos);
 		for (int y = 0; y < h - 1; y++) {
-			blockPos.setY(pos.getY() - y);
-			BlocksHelper.setWithUpdate(world, blockPos, random.nextBoolean() ? top : middle);
+			context.POS.setY(pos.getY() - y);
+			BlocksHelper.setWithUpdate(world, context.POS, random.nextBoolean() ? top : middle);
 		}
-		BlocksHelper.setWithUpdate(world, blockPos.below(), bottom);
+		BlocksHelper.setWithUpdate(world, context.POS.below(), bottom);
 	}
 }

@@ -11,11 +11,11 @@ import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureMedRedMushroom implements IStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		final MutableBlockPos POS = new MutableBlockPos();
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		
@@ -34,10 +34,10 @@ public class StructureMedRedMushroom implements IStructure {
 				}
 				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
 				for (int j = 0; j < 2*RANDOM_BOUND; j++) {
-					POS.set(x, y - j, z);
-					under = world.getBlockState(POS.below()).getBlock();
+					context.POS.set(x, y - j, z);
+					under = world.getBlockState(context.POS.below()).getBlock();
 					if (under == NetherBlocks.NETHER_MYCELIUM) {
-						grow(world, POS, random);
+						grow(world, context.POS, random);
 					}
 				}
 			}

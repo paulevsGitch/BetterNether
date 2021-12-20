@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureWartCap implements IStructure {
 	private static final BlockState INSIDE = Blocks.RED_MUSHROOM_BLOCK
@@ -25,11 +26,10 @@ public class StructureWartCap implements IStructure {
 			.defaultBlockState();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (!isWall(world, pos) || pos.getY() > (MAX_HEIGHT*0.45) || pos.getY() < (MAX_HEIGHT*0.25) || world.isEmptyBlock(pos.below(3)))
 			return;
 
-		final MutableBlockPos POS = new MutableBlockPos();
 		int radius = 3 + random.nextInt(3);
 		int r2 = radius * radius;
 		int side = radius * 2 + 1;
@@ -37,12 +37,12 @@ public class StructureWartCap implements IStructure {
 		BlockState[][][] shape = new BlockState[side][y1 + 1][side];
 
 		for (int y = 0; y <= y1; y++) {
-			POS.setY(pos.getY() + y);
+			context.POS.setY(pos.getY() + y);
 			for (int x = -radius; x <= radius; x++) {
-				POS.setX(pos.getX() + x);
+				context.POS.setX(pos.getX() + x);
 				int sx = x + radius;
 				for (int z = -radius; z <= radius; z++) {
-					POS.setZ(pos.getZ() + z);
+					context.POS.setZ(pos.getZ() + z);
 					int sz = z + radius;
 					int d = x * x + y * y * 6 + z * z;
 					if (d <= r2) {
@@ -68,13 +68,13 @@ public class StructureWartCap implements IStructure {
 		}
 
 		for (int y = 0; y <= y1; y++) {
-			POS.setY(pos.getY() + y);
+			context.POS.setY(pos.getY() + y);
 			for (int x = 0; x < side; x++) {
-				POS.setX(pos.getX() + x - radius);
+				context.POS.setX(pos.getX() + x - radius);
 				for (int z = 0; z < side; z++) {
-					POS.setZ(pos.getZ() + z - radius);
-					if (shape[x][y][z] != null && world.isEmptyBlock(POS))
-						BlocksHelper.setWithoutUpdate(world, POS, shape[x][y][z]);
+					context.POS.setZ(pos.getZ() + z - radius);
+					if (shape[x][y][z] != null && world.isEmptyBlock(context.POS))
+						BlocksHelper.setWithoutUpdate(world, context.POS, shape[x][y][z]);
 				}
 			}
 		}

@@ -12,12 +12,11 @@ import paulevs.betternether.blocks.BlockSoulLily;
 import paulevs.betternether.blocks.BlockSoulLily.SoulLilyShape;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureSoulLily implements IStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		MutableBlockPos npos = new MutableBlockPos();
-
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		
@@ -28,11 +27,11 @@ public class StructureSoulLily implements IStructure {
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
 				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
 				for (int j = 0; j < RANDOM_BOUND; j++) {
-					npos.set(x, y - j, z);
-					if (npos.getY() > 31) {
-						under = world.getBlockState(npos.below()).getBlock();
-						if (under == Blocks.SOUL_SAND && world.isEmptyBlock(npos)) {
-							growTree(world, npos, random);
+					context.POS.set(x, y - j, z);
+					if (context.POS.getY() > 31) {
+						under = world.getBlockState(context.POS.below()).getBlock();
+						if (under == Blocks.SOUL_SAND && world.isEmptyBlock(context.POS)) {
+							growTree(world, context.POS, random);
 						}
 					}
 					else

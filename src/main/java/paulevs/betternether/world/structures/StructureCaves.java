@@ -2,19 +2,18 @@ package paulevs.betternether.world.structures;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
 public class StructureCaves implements IStructure {
-	private static final boolean[][][] MASK = new boolean[16][24][16];
-	private static int offset = 12;
-	private OpenSimplexNoise heightNoise;
-	private OpenSimplexNoise rigidNoise;
-	private OpenSimplexNoise distortX;
-	private OpenSimplexNoise distortY;
+
+	private int offset = 12;
+	private final OpenSimplexNoise heightNoise;
+	private final OpenSimplexNoise rigidNoise;
+	private final OpenSimplexNoise distortX;
+	private final OpenSimplexNoise distortY;
 
 	public StructureCaves(long seed) {
 		Random random = new Random(seed);
@@ -25,8 +24,7 @@ public class StructureCaves implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		final MutableBlockPos B_POS = new MutableBlockPos();
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		boolean isVoid = true;
 		offset = (int) (getHeight(pos.getX() + 8, pos.getZ() + 8) - 12);
 
@@ -45,11 +43,11 @@ public class StructureCaves implements IStructure {
 					double sdf = -opSmoothUnion(-hRigid / 30, -rigid, 0.15);
 
 					if (sdf < 0.15) {
-						MASK[x][y][z] = true;
+						context.MASK[x][y][z] = true;
 						isVoid = false;
 					}
 					else
-						MASK[x][y][z] = false;
+						context.MASK[x][y][z] = false;
 				}
 			}
 		}
@@ -63,15 +61,15 @@ public class StructureCaves implements IStructure {
 				int wz = pos.getZ() + z;
 				for (int y = 23; y >= 0; y--) {
 					int wy = offset + y;
-					B_POS.set(wx, wy, wz);
-					if (MASK[x][y][z] && BlocksHelper.isNetherGroundMagma(world.getBlockState(B_POS))) {
+					context.POS.set(wx, wy, wz);
+					if (context.MASK[x][y][z] && BlocksHelper.isNetherGroundMagma(world.getBlockState(context.POS))) {
 						/*
 						 * if (world.getBlockState(B_POS.up()).getBlock() ==
 						 * Blocks.NETHER_WART_BLOCK)
 						 * BlocksHelper.setWithoutUpdate(world, B_POS,
 						 * Blocks.NETHER_WART_BLOCK.getDefaultState()); else
 						 */
-						BlocksHelper.setWithoutUpdate(world, B_POS, Blocks.AIR.defaultBlockState());
+						BlocksHelper.setWithoutUpdate(world, context.POS, Blocks.AIR.defaultBlockState());
 					}
 				}
 			}
@@ -100,10 +98,10 @@ public class StructureCaves implements IStructure {
 		return mix(dist2, dist1, h) - blend * h * (1 - h);
 	}
 
-	public boolean isInCave(int x, int y, int z) {
+	public boolean isInCave(int x, int y, int z, StructureGeneratorThreadContext context) {
 		int y2 = y - offset;
 		if (y2 >= 0 && y < 24)
-			return MASK[x][y2][z];
+			return context.MASK[x][y2][z];
 		else
 			return false;
 	}

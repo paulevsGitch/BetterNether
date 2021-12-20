@@ -6,6 +6,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.StructureWorld;
 
@@ -18,10 +19,10 @@ public class StructureWartDeadwood implements IStructure {
 	};
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (isGround(world.getBlockState(pos.below())) && isGround(world.getBlockState(pos.below(2)))) {
 			StructureWorld tree = TREES[random.nextInt(TREES.length)];
-			tree.generate(world, pos, random, MAX_HEIGHT);
+			tree.generate(world, pos, random, MAX_HEIGHT, context);
 		}
 	}
 

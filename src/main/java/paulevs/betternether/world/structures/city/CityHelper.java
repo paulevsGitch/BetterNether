@@ -1,9 +1,12 @@
 package paulevs.betternether.world.structures.city;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -16,8 +19,7 @@ import paulevs.betternether.registry.NetherStructures;
 import paulevs.betternether.world.structures.city.CityFeature;
 
 public class CityHelper {
-	private static final Set<ChunkPos> POSITIONS = new HashSet<ChunkPos>(16);
-	private static final MutableBlockPos POS = new MutableBlockPos();
+	private static final Set<ChunkPos> POSITIONS = Collections.newSetFromMap(new ConcurrentHashMap<ChunkPos,Boolean>(16));
 
 	public static boolean stopStructGen(int chunkX, int chunkZ, ChunkGenerator chunkGenerator, long worldSeed, WorldgenRandom chunkRandom) {
 		StructureFeatureConfiguration config = chunkGenerator.getSettings().getConfig(NetherStructures.CITY_STRUCTURE.getStructure());
@@ -41,6 +43,8 @@ public class CityHelper {
 	}
 	
 	private static void collectNearby(ServerLevel world, int chunkX, int chunkZ, StructureFeatureConfiguration config, long worldSeed, WorldgenRandom chunkRandom) {
+		final MutableBlockPos POS = new MutableBlockPos();
+
 		int x1 = chunkX - 16;
 		int x2 = chunkX + 16;
 		int z1 = chunkZ - 16;

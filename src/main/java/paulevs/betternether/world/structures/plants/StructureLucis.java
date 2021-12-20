@@ -13,10 +13,11 @@ import paulevs.betternether.blocks.BlockProperties.EnumLucisShape;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IGrowableStructure;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureLucis implements IStructure, IGrowableStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		grow(world, pos, random);
 	}
 	

@@ -48,8 +48,6 @@ public class FloodedDeltas extends NetherBiome {
 		return false;
 	}
 	
-	private static final MutableBlockPos POS = new MutableBlockPos();
-	
 	public FloodedDeltas(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
 	}
@@ -65,6 +63,7 @@ public class FloodedDeltas extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+		final MutableBlockPos POS = new MutableBlockPos();
 		POS.set(pos);
 		int d = MHelper.randRange(2, 4, random);
 		BlockState state = isLavaValid(world, pos) ? Blocks.LAVA.defaultBlockState() : (random.nextInt(16) > 0 ? Blocks.BASALT.defaultBlockState() : Blocks.AIR.defaultBlockState());

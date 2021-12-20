@@ -19,9 +19,9 @@ import paulevs.betternether.MHelper;
 public class DestructionPiece extends CustomPiece {
 	private final MutableBlockPos POS = new MutableBlockPos();
 
-	private BlockPos center;
-	private int radius;
-	private int radSqr;
+	private final BlockPos center;
+	private final int radius;
+	private final int radSqr;
 	private int minY;
 	private int maxY;
 

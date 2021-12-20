@@ -79,8 +79,7 @@ public class NetherSoulPlain extends NetherBiome {
 		}
 	}
 	
-	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);
-	private static final MutableBlockPos POS = new MutableBlockPos();
+	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);	
 	
 	public NetherSoulPlain(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
@@ -95,6 +94,7 @@ public class NetherSoulPlain extends NetherBiome {
 
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+//		final MutableBlockPos POS = new MutableBlockPos();
 //		POS.set(pos);
 //		int d1 = MHelper.randRange(2, 4, random);
 //

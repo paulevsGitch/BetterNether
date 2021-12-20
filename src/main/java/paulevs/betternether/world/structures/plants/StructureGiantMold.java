@@ -12,13 +12,13 @@ import paulevs.betternether.blocks.BlockRedLargeMushroom;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IGrowableStructure;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureGiantMold implements IStructure, IGrowableStructure {
 
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		final MutableBlockPos npos = new MutableBlockPos();
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		
@@ -29,10 +29,10 @@ public class StructureGiantMold implements IStructure, IGrowableStructure {
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
 				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
 				for (int j = 0; j < 16; j++) {
-					npos.set(x, y - j, z);
-					under = world.getBlockState(npos.below()).getBlock();
+					context.POS.set(x, y - j, z);
+					under = world.getBlockState(context.POS.below()).getBlock();
 					if (under == NetherBlocks.NETHER_MYCELIUM) {
-						grow(world, npos, random);
+						grow(world, context.POS, random);
 					}
 				}
 			}

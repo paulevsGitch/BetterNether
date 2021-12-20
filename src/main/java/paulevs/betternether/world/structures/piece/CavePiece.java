@@ -15,16 +15,16 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
 public class CavePiece extends CustomPiece {
-	private final MutableBlockPos POS = new MutableBlockPos();
 	private static final BlockState LAVA = Blocks.LAVA.defaultBlockState();
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(927649);
 
-	private BlockPos center;
-	private int radius;
-	private int radSqr;
+	private final BlockPos center;
+	private final int radius;
+	private final int radSqr;
 
 	public CavePiece(BlockPos center, int radius, Random random, BoundingBox blockBox) {
 		super(StructureTypes.CAVE, random.nextInt(), makeBoundingBox(center, radius));
@@ -48,6 +48,7 @@ public class CavePiece extends CustomPiece {
 
 	@Override
 	public void postProcess(WorldGenLevel world, StructureFeatureManager arg, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
+		MutableBlockPos POS = new MutableBlockPos();
 		BlockState bottom = LAVA;
 		if (!(world.dimensionType().hasCeiling())) {
 			bottom = Blocks.NETHERRACK.defaultBlockState();
@@ -64,10 +65,13 @@ public class CavePiece extends CustomPiece {
 					if (px + py + pz <= radSqr + NOISE.eval(x * 0.1, y * 0.1, z * 0.1) * 800) {
 						POS.set(x, y, z);
 						if (y > 31) {
-							world.setBlock(POS, CAVE_AIR, 0);
+							BlocksHelper.setWithoutUpdate(world, POS, CAVE_AIR);
+							//world.setBlock(POS, CAVE_AIR, 0);
 						}
-						else
-							world.setBlock(POS, bottom, 0);
+						else {
+							BlocksHelper.setWithoutUpdate(world, POS, bottom);
+							//world.setBlock(POS, bottom, 0);
+						}
 					}
 				}
 			}

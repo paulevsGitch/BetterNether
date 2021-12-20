@@ -8,9 +8,10 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherReed;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureReeds implements IStructure {
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (world.isEmptyBlock(pos) && NetherBlocks.MAT_REED.getStem().canSurvive(world.getBlockState(pos), world, pos)) {
 			BlockState med = NetherBlocks.MAT_REED.getStem().defaultBlockState().setValue(BlockNetherReed.TOP, false);
 			int h = random.nextInt(3);

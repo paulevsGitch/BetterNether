@@ -18,7 +18,7 @@ public class CavesFeature extends DefaultFeature {
 		final int sx = (worldPos.getX() >> 4) << 4;
 		final int sz = (worldPos.getZ() >> 4) << 4;
 		
-		caves.generate(level, new BlockPos(sx, 0, sz), random, featurePlaceContext.chunkGenerator().getGenDepth());
+		caves.generate(level, new BlockPos(sx, 0, sz), random, featurePlaceContext.chunkGenerator().getGenDepth(), NetherChunkPopulatorFeature.generatorForThread().context);
 		return true;
 	}
 	
@@ -28,6 +28,6 @@ public class CavesFeature extends DefaultFeature {
 	}
 	
 	public static boolean isInCave(int x, int y, int z){
-		return caves.isInCave(x, y, z);
+		return caves.isInCave(x, y, z, NetherChunkPopulatorFeature.generatorForThread().context);
 	}
 }

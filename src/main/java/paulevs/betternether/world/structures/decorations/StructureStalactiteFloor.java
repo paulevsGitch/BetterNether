@@ -9,6 +9,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureStalactiteFloor implements IStructure {
 	private final Block block;
@@ -39,7 +40,7 @@ public class StructureStalactiteFloor implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final MutableBlockPos POS = new MutableBlockPos();
 
 		if (canPlaceAt(world, pos)) {

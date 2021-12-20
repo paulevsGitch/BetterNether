@@ -2,7 +2,6 @@ package paulevs.betternether.world.structures.plants;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockMushroomFir;
@@ -10,12 +9,11 @@ import paulevs.betternether.blocks.BlockMushroomFir.MushroomFirShape;
 import paulevs.betternether.blocks.BlockNetherMycelium;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureMushroomFir implements IStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		MutableBlockPos npos = new MutableBlockPos();
-
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(5*scale_factor);
 		if (world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM) {
@@ -34,46 +32,46 @@ public class StructureMushroomFir implements IStructure {
 			int h2 = (h + 1) >> 1;
 			h += pos.getY();
 			h2 += pos.getY();
-			npos.set(pos);
+			context.POS.set(pos);
 			for (int y = pos.getY() + 1; y < h2; y++) {
-				npos.setY(y);
-				BlocksHelper.setWithUpdate(world, npos, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
+				context.POS.setY(y);
+				BlocksHelper.setWithUpdate(world, context.POS, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 						.defaultBlockState()
 						.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.MIDDLE));
 			}
 			for (int y = h2; y < h; y++) {
-				npos.setY(y);
-				BlocksHelper.setWithUpdate(world, npos, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
+				context.POS.setY(y);
+				BlocksHelper.setWithUpdate(world, context.POS, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 						.defaultBlockState()
 						.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.TOP));
 			}
 			int h3 = (h2 + h) >> 1;
 			for (int y = h2 - 1; y < h3; y++) {
-				npos.setY(y);
+				context.POS.setY(y);
 				BlockPos branch;
 				if (random.nextBoolean()) {
-					branch = npos.north();
+					branch = context.POS.north();
 					if (world.isEmptyBlock(branch))
 						BlocksHelper.setWithUpdate(world, branch,NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 								.defaultBlockState()
 								.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.SIDE_BIG_S));
 				}
 				if (random.nextBoolean()) {
-					branch = npos.south();
+					branch = context.POS.south();
 					if (world.isEmptyBlock(branch))
 						BlocksHelper.setWithUpdate(world, branch, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 								.defaultBlockState()
 								.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.SIDE_BIG_N));
 				}
 				if (random.nextBoolean()) {
-					branch = npos.east();
+					branch = context.POS.east();
 					if (world.isEmptyBlock(branch))
 						BlocksHelper.setWithUpdate(world, branch, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 								.defaultBlockState()
 								.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.SIDE_BIG_W));
 				}
 				if (random.nextBoolean()) {
-					branch = npos.west();
+					branch = context.POS.west();
 					if (world.isEmptyBlock(branch))
 						BlocksHelper.setWithUpdate(world, branch,NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 								.defaultBlockState()
@@ -81,40 +79,40 @@ public class StructureMushroomFir implements IStructure {
 				}
 			}
 			for (int y = h3; y < h; y++) {
-				npos.setY(y);
+				context.POS.setY(y);
 				BlockPos branch;
 				if (random.nextBoolean()) {
-					branch = npos.north();
+					branch = context.POS.north();
 					if (world.isEmptyBlock(branch))
 						BlocksHelper.setWithUpdate(world, branch, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 								.defaultBlockState()
 								.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.SIDE_SMALL_S));
 				}
 				if (random.nextBoolean()) {
-					branch = npos.south();
+					branch = context.POS.south();
 					if (world.isEmptyBlock(branch))
 						BlocksHelper.setWithUpdate(world, branch, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 								.defaultBlockState()
 								.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.SIDE_SMALL_N));
 				}
 				if (random.nextBoolean()) {
-					branch = npos.east();
+					branch = context.POS.east();
 					if (world.isEmptyBlock(branch))
 						BlocksHelper.setWithUpdate(world, branch, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 								.defaultBlockState()
 								.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.SIDE_SMALL_W));
 				}
 				if (random.nextBoolean()) {
-					branch = npos.west();
+					branch = context.POS.west();
 					if (world.isEmptyBlock(branch))
 						BlocksHelper.setWithUpdate(world, branch, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 								.defaultBlockState()
 								.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.SIDE_SMALL_E));
 				}
 			}
-			npos.setY(h);
-			if (world.isEmptyBlock(npos))
-				BlocksHelper.setWithUpdate(world, npos, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
+			context.POS.setY(h);
+			if (world.isEmptyBlock(context.POS))
+				BlocksHelper.setWithUpdate(world, context.POS, NetherBlocks.MAT_MUSHROOM_FIR.geTrunk()
 						.defaultBlockState()
 						.setValue(BlockMushroomFir.SHAPE, MushroomFirShape.END));
 

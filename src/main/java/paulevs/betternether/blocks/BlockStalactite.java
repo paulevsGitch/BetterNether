@@ -20,8 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockStalactite extends BlockBaseNotFull {
-	public static final IntegerProperty SIZE = IntegerProperty.create("size", 0, 7);
-	private static final MutableBlockPos POS = new MutableBlockPos();
+	public static final IntegerProperty SIZE = IntegerProperty.create("size", 0, 7);	
 	private static final VoxelShape[] SHAPES;
 
 	public BlockStalactite(Block source) {
@@ -41,6 +40,8 @@ public class BlockStalactite extends BlockBaseNotFull {
 
 	@Override
 	public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+		final MutableBlockPos POS = new MutableBlockPos();
+		
 		if (world.getBlockState(pos.below()).getBlock() instanceof BlockStalactite) {
 			POS.setX(pos.getX());
 			POS.setZ(pos.getZ());

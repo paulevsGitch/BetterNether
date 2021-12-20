@@ -2,7 +2,6 @@ package paulevs.betternether.world.structures.plants;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -11,6 +10,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockNetherCactus;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureNetherCactus implements IStructure {
 	private boolean canPlaceAt(LevelAccessor world, BlockPos pos) {
@@ -18,9 +18,7 @@ public class StructureNetherCactus implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		MutableBlockPos npos = new MutableBlockPos();
-
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(8*scale_factor);
 		
@@ -40,12 +38,12 @@ public class StructureNetherCactus implements IStructure {
 				}
 				int y = pos.getY() + random.nextInt(RANDOM_BOUND);
 				for (int j = 0; j < RANDOM_BOUND; j++) {
-					npos.set(x, y - j, z);
-					if (world.isEmptyBlock(npos) && canPlaceAt(world, npos)) {
+					context.POS.set(x, y - j, z);
+					if (world.isEmptyBlock(context.POS) && canPlaceAt(world, context.POS)) {
 						int h = random.nextInt(3);
 						for (int n = 0; n < h; n++)
-							BlocksHelper.setWithUpdate(world, npos.above(n), bottom);
-						BlocksHelper.setWithUpdate(world, npos.above(h), top);
+							BlocksHelper.setWithUpdate(world, context.POS.above(n), bottom);
+						BlocksHelper.setWithUpdate(world, context.POS.above(h), top);
 						break;
 					}
 				}

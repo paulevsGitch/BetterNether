@@ -8,17 +8,19 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockLumabusVine;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.structures.IGrowableStructure;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureGoldenLumabusVine implements IStructure, IGrowableStructure {
 	@Override
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
-		generate(world, pos, random, 128);
+		generate(world, pos, random, 128, NetherChunkPopulatorFeature.generatorForThread().context);
 	}
 	
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(19*scale_factor);
 		

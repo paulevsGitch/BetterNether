@@ -21,12 +21,12 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 
 public class StructureAnchorTree implements IStructure {
 	protected static final OpenSimplexNoise NOISE = new OpenSimplexNoise(2145);
-	private static final Set<BlockPos> BLOCKS = new HashSet<BlockPos>(2048);
-	private Block[] wallPlants;
+	public static final Block[] wallPlants = { NetherBlocks.JUNGLE_MOSS, NetherBlocks.JUNGLE_MOSS, NetherBlocks.WALL_MUSHROOM_BROWN, NetherBlocks.WALL_MUSHROOM_RED };
 	final private LegacyStructureAnchorTree legacyStructure;
 	
 	public StructureAnchorTree(){
@@ -34,15 +34,15 @@ public class StructureAnchorTree implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (NetherBiomes.useLegacyGeneration) {
-			legacyStructure.generate(world, pos, random, MAX_HEIGHT);
+			legacyStructure.generate(world, pos, random, MAX_HEIGHT, context);
 			return;
 		}
 		
 		BlockPos down = pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT));
 		if (canGenerate(pos)) {
-			grow(world, pos, down, random, MAX_HEIGHT);
+			grow(world, pos, down, random, MAX_HEIGHT, context);
 		}
 	}
 
@@ -50,7 +50,7 @@ public class StructureAnchorTree implements IStructure {
 		return (pos.getX() & 15) == 7 && (pos.getZ() & 15) == 7;
 	}
 
-	private void grow(ServerLevelAccessor level, BlockPos up, BlockPos down, Random random, final int MAX_HEIGHT) {
+	private void grow(ServerLevelAccessor level, BlockPos up, BlockPos down, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int HEIGHT_64;
 		final int HEIGHT_45;
@@ -82,41 +82,38 @@ public class StructureAnchorTree implements IStructure {
 		if (count < 2) count = 2;
 		List<BlockPos> blocks = line(trunkBottom, trunkTop, count, random, 2.5);
 
-		BLOCKS.clear();
+		context.BLOCKS.clear();
 
-		if (wallPlants == null) {
-			wallPlants = new Block[] { NetherBlocks.JUNGLE_MOSS, NetherBlocks.JUNGLE_MOSS, NetherBlocks.WALL_MUSHROOM_BROWN, NetherBlocks.WALL_MUSHROOM_RED };
-		}
 		
 		count = Math.min(7, Math.max(3, (up.getY() - down.getY()) / (int)(10*scale_factor) - 1));
 		double radius = Math.min(7, Math.max(3.5, (up.getY() - down.getY()) / 15));
 		
-		drawLine(level, blocks, radius+(0.5*scale_factor), MAX_HEIGHT);
+		drawLine(level, blocks, radius+(0.5*scale_factor), MAX_HEIGHT, context);
 		
-		buildBigCircle(level, up, trunkTop, SEGMENT_LENGTH, count, 2, random.nextDouble() * Math.PI * 2, radius, random, MAX_HEIGHT);
-		buildBigCircle(level, up, trunkBottom, -SEGMENT_LENGTH, count, 2, random.nextDouble() * Math.PI * 2, radius, random, MAX_HEIGHT);
+		buildBigCircle(level, up, trunkTop, SEGMENT_LENGTH, count, 2, random.nextDouble() * Math.PI * 2, radius, random, MAX_HEIGHT, context);
+		buildBigCircle(level, up, trunkBottom, -SEGMENT_LENGTH, count, 2, random.nextDouble() * Math.PI * 2, radius, random, MAX_HEIGHT, context);
 
 		BlockState state;
 		int offset = random.nextInt(4);
 		final int minBuildHeight = level.getMinBuildHeight()+1;
 		final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(level, up, minBuildHeight, MAX_HEIGHT-2);
-		for (BlockPos bpos : BLOCKS) {
+		for (BlockPos bpos : context.BLOCKS) {
 			if (!blockBox.isInside(bpos)) continue;
 			if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.getMaterial().isReplaceable()) continue;
 			boolean blockUp = true;
-			if ((blockUp = BLOCKS.contains(bpos.above())) && BLOCKS.contains(bpos.below()))
+			if ((blockUp = context.BLOCKS.contains(bpos.above())) &&  context.BLOCKS.contains(bpos.below()))
 				BlocksHelper.setWithoutUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getLog().defaultBlockState());
 			else
 				BlocksHelper.setWithoutUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
 			if (bpos.getY() > HEIGHT_45 && bpos.getY() < HEIGHT_90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1, bpos.getY() * 0.1, bpos.getZ() * 0.1) > 0) {
-				if (random.nextInt((int)(32*scale_factor)) == 0 && !BLOCKS.contains(bpos.north()))
+				if (random.nextInt((int)(32*scale_factor)) == 0 && ! context.BLOCKS.contains(bpos.north()))
 					makeMushroom(level, bpos.north(), random.nextDouble() * 3 + 1.5, blockBox);
-				if (random.nextInt((int)(32*scale_factor)) == 0 && !BLOCKS.contains(bpos.south()))
+				if (random.nextInt((int)(32*scale_factor)) == 0 && ! context.BLOCKS.contains(bpos.south()))
 					makeMushroom(level, bpos.south(), random.nextDouble() * 3 + 1.5, blockBox);
-				if (random.nextInt((int)(32*scale_factor)) == 0 && !BLOCKS.contains(bpos.east()))
+				if (random.nextInt((int)(32*scale_factor)) == 0 && ! context.BLOCKS.contains(bpos.east()))
 					makeMushroom(level, bpos.east(), random.nextDouble() * 3 + 1.5, blockBox);
-				if (random.nextInt((int)(32*scale_factor)) == 0 && !BLOCKS.contains(bpos.west()))
+				if (random.nextInt((int)(32*scale_factor)) == 0 && ! context.BLOCKS.contains(bpos.west()))
 					makeMushroom(level, bpos.west(), random.nextDouble() * 3 + 1.5, blockBox);
 			}
 
@@ -128,26 +125,26 @@ public class StructureAnchorTree implements IStructure {
 				if (NOISE.eval(bpos.getX() * 0.05, bpos.getY() * 0.05, bpos.getZ() * 0.05) > 0) {
 					state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
 					BlockPos _pos = bpos.north();
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() >= blockBox.minZ())
+					if (random.nextInt(8) == 0 && ! context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() >= blockBox.minZ())
 						BlocksHelper.setWithoutUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.NORTH));
 
 					_pos = bpos.south();
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() <= blockBox.maxZ())
+					if (random.nextInt(8) == 0 && ! context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() <= blockBox.maxZ())
 						BlocksHelper.setWithoutUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
 
 					_pos = bpos.east();
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() <= blockBox.maxX())
+					if (random.nextInt(8) == 0 && ! context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() <= blockBox.maxX())
 						BlocksHelper.setWithoutUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.EAST));
 
 					_pos = bpos.west();
-					if (random.nextInt(8) == 0 && !BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() >= blockBox.minX())
+					if (random.nextInt(8) == 0 && ! context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() >= blockBox.minX())
 						BlocksHelper.setWithoutUpdate(level, _pos, state.setValue(BlockPlantWall.FACING, Direction.WEST));
 				}
 			}
 		}
 	}
 
-	private void buildBigCircle(ServerLevelAccessor level, BlockPos seedPos, BlockPos pos, int length, int count, int iteration, double angle, double size, Random random, final int MAX_HEIGHT) {
+	private void buildBigCircle(ServerLevelAccessor level, BlockPos seedPos, BlockPos pos, int length, int count, int iteration, double angle, double size, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (iteration < 0) return;
 		List<List<BlockPos>> lines = circleLinesEnds(level, seedPos, pos, angle, count, length, Math.abs(length) * 0.7, random, iteration==0, MAX_HEIGHT);
 		double sizeSmall = size * 0.8;
@@ -155,12 +152,12 @@ public class StructureAnchorTree implements IStructure {
 		angle += Math.PI * 4 / count;
 		angle += random.nextDouble() * angle * 0.75;
 		for (List<BlockPos> line : lines) {
-			drawLine(level, line, size, MAX_HEIGHT);
-			buildBigCircle(level, seedPos, line.get(1), length, count, iteration - 1, angle, sizeSmall, random, MAX_HEIGHT);
+			drawLine(level, line, size, MAX_HEIGHT, context);
+			buildBigCircle(level, seedPos, line.get(1), length, count, iteration - 1, angle, sizeSmall, random, MAX_HEIGHT, context);
 		}
 	}
 
-	private void drawLine(ServerLevelAccessor level, List<BlockPos> blocks, double radius, final int MAX_HEIGHT) {
+	private void drawLine(ServerLevelAccessor level, List<BlockPos> blocks, double radius, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		for (int i = 0; i < blocks.size() - 1; i++) {
 			BlockPos a = blocks.get(i);
 			BlockPos b = blocks.get(i + 1);
@@ -172,7 +169,7 @@ public class StructureAnchorTree implements IStructure {
 			double max = b.getY() - a.getY();
 			if (max < 1) max = 1;
 			for (int y = a.getY(); y <= b.getY(); y++)
-				cylinder(lerpCos(a, b, y, (y - a.getY()) / max), radius, MAX_HEIGHT);
+				cylinder(lerpCos(a, b, y, (y - a.getY()) / max), radius, MAX_HEIGHT, context);
 		}
 	}
 
@@ -209,7 +206,7 @@ public class StructureAnchorTree implements IStructure {
 		return result;
 	}
 
-	private void cylinder(BlockPos pos, double radius, final int MAX_HEIGHT) {
+	private void cylinder(BlockPos pos, double radius, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		int x1 = MHelper.floor(pos.getX() - radius);
 		int z1 = MHelper.floor(pos.getZ() - radius);
 		int x2 = MHelper.floor(pos.getX() + radius + 1);
@@ -222,7 +219,7 @@ public class StructureAnchorTree implements IStructure {
 			for (int z = z1; z <= z2; z++) {
 				int pz2 = z - pos.getZ();
 				pz2 *= pz2;
-				if (px2 + pz2 <= radius * (NOISE.eval(x * 0.5, pos.getY() * 0.5, z * 0.5) * 0.25 + 0.75) && pos.getY()>2 && pos.getY()<MAX_HEIGHT-2) BLOCKS.add(new BlockPos(x, pos.getY(), z));
+				if (px2 + pz2 <= radius * (NOISE.eval(x * 0.5, pos.getY() * 0.5, z * 0.5) * 0.25 + 0.75) && pos.getY()>2 && pos.getY()<MAX_HEIGHT-2)  context.BLOCKS.add(new BlockPos(x, pos.getY(), z));
 			}
 		}
 	}

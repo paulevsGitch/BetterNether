@@ -1,6 +1,8 @@
 package paulevs.betternether.world;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import ru.bclib.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
@@ -70,31 +73,30 @@ public abstract class NetherBiome extends BCLBiome{
 	private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
 	private static int structureID = 0;
 
-	private ArrayList<StructureInfo> generatorsFloor = new ArrayList<StructureInfo>();
-	private ArrayList<StructureInfo> generatorsWall = new ArrayList<StructureInfo>();
-	private ArrayList<StructureInfo> generatorsCeil = new ArrayList<StructureInfo>();
-	private ArrayList<StructureInfo> generatorsLava = new ArrayList<StructureInfo>();
+	private final ArrayList<StructureInfo> generatorsFloor = new ArrayList<>();
+	private final ArrayList<StructureInfo> generatorsWall = new ArrayList<>();
+	private final ArrayList<StructureInfo> generatorsCeil = new ArrayList<>();
+	private final ArrayList<StructureInfo> generatorsLava = new ArrayList<>();
 
-	private ArrayList<StructureInfo> buildGeneratorsFloor = new ArrayList<StructureInfo>();
-	private ArrayList<StructureInfo> buildGeneratorsCeil = new ArrayList<StructureInfo>();
-	private ArrayList<StructureInfo> buildGeneratorsLava = new ArrayList<StructureInfo>();
-	private ArrayList<StructureInfo> buildGeneratorsUnder = new ArrayList<StructureInfo>();
+	private final ArrayList<StructureInfo> buildGeneratorsFloor = new ArrayList<>();
+	private final ArrayList<StructureInfo> buildGeneratorsCeil = new ArrayList<>();
+	private final ArrayList<StructureInfo> buildGeneratorsLava = new ArrayList<>();
+	private final ArrayList<StructureInfo> buildGeneratorsUnder = new ArrayList<>();
 	
 	
 	protected float plantDensity = 1.0001F;
 	protected float noiseDensity = 0.3F;
 	
-	private ArrayList<String> structures;
+	private final ArrayList<String> structures;
 	
 	protected NetherBiome(ResourceLocation biomeID, Biome biome) {
 		super(biomeID, biome);
-		structures = new ArrayList<String>(DEF_STRUCTURES.length);
+		structures = new ArrayList<>(DEF_STRUCTURES.length);
 		
 		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.8F, true);
 		
 		if (hasBNStructures()) {
-			for (String s : DEF_STRUCTURES)
-				structures.add(s);
+			Collections.addAll(structures, DEF_STRUCTURES);
 		}
 
 		if (hasStalactites()) {
@@ -147,28 +149,28 @@ public abstract class NetherBiome extends BCLBiome{
 
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {}
 
-	public void genFloorObjects(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void genFloorObjects(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		for (StructureInfo info : generatorsFloor)
 			if (info.canGenerate(random, pos))
-				info.structure.generate(world, pos, random, MAX_HEIGHT);
+				info.structure.generate(world, pos, random, MAX_HEIGHT, context);
 	}
 
-	public void genWallObjects(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void genWallObjects(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		for (StructureInfo info : generatorsWall)
 			if (info.canGenerate(random, pos))
-				info.structure.generate(world, pos, random, MAX_HEIGHT);
+				info.structure.generate(world, pos, random, MAX_HEIGHT, context);
 	}
 
-	public void genCeilObjects(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void genCeilObjects(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		for (StructureInfo info : generatorsCeil)
 			if (info.canGenerate(random, pos))
-				info.structure.generate(world, pos, random, MAX_HEIGHT);
+				info.structure.generate(world, pos, random, MAX_HEIGHT, context);
 	}
 
-	public void genLavaObjects(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void genLavaObjects(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		for (StructureInfo info : generatorsLava)
 			if (info.canGenerate(random, pos))
-				info.structure.generate(world, pos, random, MAX_HEIGHT);
+				info.structure.generate(world, pos, random, MAX_HEIGHT, context);
 	}
 
 	protected static double getFeatureNoise(BlockPos pos, int id) {
@@ -203,8 +205,7 @@ public abstract class NetherBiome extends BCLBiome{
 	}
 
 	protected void addStructures(String... structures) {
-		for (String s : structures)
-			this.structures.add(s);
+		this.structures.addAll(Arrays.asList(structures));
 	}
 	
 	protected class StructureInfo {
@@ -229,29 +230,29 @@ public abstract class NetherBiome extends BCLBiome{
 		return String.format(Locale.ROOT, "name: %s; offset: %d; type: %s; chance: %f", name, offset, type.getName(), chance);
 	}
 
-	public void genFloorBuildings(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		chancedStructure(world, pos, random, MAX_HEIGHT, buildGeneratorsFloor);
+	public void genFloorBuildings(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+		chancedStructure(world, pos, random, MAX_HEIGHT, context, buildGeneratorsFloor);
 	}
 	
-	public void genCeilBuildings(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		chancedStructure(world, pos, random, MAX_HEIGHT, buildGeneratorsCeil);
+	public void genCeilBuildings(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+		chancedStructure(world, pos, random, MAX_HEIGHT, context, buildGeneratorsCeil);
 	}
 
-	public void genLavaBuildings(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		chancedStructure(world, pos, random, MAX_HEIGHT, buildGeneratorsLava);
+	public void genLavaBuildings(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+		chancedStructure(world, pos, random, MAX_HEIGHT, context, buildGeneratorsLava);
 	}
 
-	public void genUnderBuildings(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		chancedStructure(world, pos, random, MAX_HEIGHT, buildGeneratorsUnder);
+	public void genUnderBuildings(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+		chancedStructure(world, pos, random, MAX_HEIGHT, context, buildGeneratorsUnder);
 	}
 
-	private void chancedStructure(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, List<StructureInfo> infoList) {
+	private void chancedStructure(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context, List<StructureInfo> infoList) {
 		float chance = getLastChance(infoList);
 		if (chance > 0) {
 			float rnd = random.nextFloat() * chance;
 			for (StructureInfo info : infoList)
 				if (rnd <= info.density) {
-					info.structure.generate(world, pos, random, MAX_HEIGHT);
+					info.structure.generate(world, pos, random, MAX_HEIGHT, context);
 					return;
 				}
 		}

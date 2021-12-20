@@ -7,17 +7,19 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.structures.IGrowableStructure;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureEye implements IStructure, IGrowableStructure {
 	@Override
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
-		generate(world, pos, random, 128);
+		generate(world, pos, random, 128, NetherChunkPopulatorFeature.generatorForThread().context);
 	}
 	
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(NetherBiomes.useLegacyGeneration?19:21*scale_factor);
 		int h = random.nextInt(RANDOM_BOUND) + 5;

@@ -19,7 +19,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		randomRM(random);
 		if (canGenerate(world, pos)) {
 			generateCentered(world, pos.above(offsetY));

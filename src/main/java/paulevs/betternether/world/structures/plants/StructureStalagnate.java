@@ -10,13 +10,14 @@ import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.BlockStalagnate;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureStalagnate implements IStructure {
 	public static final int MAX_LENGTH = 25; // 27
 	public static final int MIN_LENGTH = 3; // 5
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		int length = BlocksHelper.upRay(world, pos, MAX_LENGTH);
 		Block main = NetherBlocks.MAT_STALAGNATE.getTrunk();
 		if (length > MIN_LENGTH && BlocksHelper.isNetherrack(world.getBlockState(pos.above(length + 1)))) {

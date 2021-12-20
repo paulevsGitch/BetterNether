@@ -42,8 +42,7 @@ public class NetherMagmaLand extends NetherBiome {
 			return NetherMagmaLand::new;
 		}
 	}
-	
-	private static final MutableBlockPos POS = new MutableBlockPos();
+
 	private static final boolean[] MASK;
 	
 	public NetherMagmaLand(ResourceLocation biomeID, Biome biome) {
@@ -61,6 +60,7 @@ public class NetherMagmaLand extends NetherBiome {
 	@Override
 	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
 		if (isMask(pos.getX(), pos.getZ())) {
+			final MutableBlockPos POS = new MutableBlockPos();
 			POS.set(pos);
 			boolean magma = true;
 			if (random.nextInt(4) == 0) {

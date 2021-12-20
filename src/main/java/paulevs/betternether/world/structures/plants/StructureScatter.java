@@ -2,13 +2,13 @@ package paulevs.betternether.world.structures.plants;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureScatter implements IStructure {
 	private final Block plantBlock;
@@ -32,9 +32,7 @@ public class StructureScatter implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		final MutableBlockPos npos = new MutableBlockPos();
-
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (world.isEmptyBlock(pos) && canPlaceAt(world, pos)) {
 			BlockState state = plantBlock.defaultBlockState();
 			int rndState = random.nextInt(2);
@@ -51,12 +49,12 @@ public class StructureScatter implements IStructure {
 				}
 				int y = pos.getY() + random.nextInt(8);
 				for (int j = 0; j < 8; j++) {
-					npos.set(x, y - j, z);
-					if (world.isEmptyBlock(npos) && canPlaceAt(world, npos)) {
+					context.POS.set(x, y - j, z);
+					if (world.isEmptyBlock(context.POS) && canPlaceAt(world, context.POS)) {
 						if (ageProp != null)
-							BlocksHelper.setWithoutUpdate(world, npos, state.setValue(ageProp, random.nextInt(maxAge)));
+							BlocksHelper.setWithoutUpdate(world, context.POS, state.setValue(ageProp, random.nextInt(maxAge)));
 						else
-							BlocksHelper.setWithoutUpdate(world, npos, state);
+							BlocksHelper.setWithoutUpdate(world, context.POS, state);
 						break;
 					}
 				}

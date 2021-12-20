@@ -2,13 +2,13 @@ package paulevs.betternether.world.structures.plants;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class StructureSoulVein implements IStructure {
 	private boolean canPlaceAt(LevelAccessor world, BlockPos pos) {
@@ -16,9 +16,7 @@ public class StructureSoulVein implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
-		MutableBlockPos npos = new MutableBlockPos();
-
+	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (world.isEmptyBlock(pos) && canPlaceAt(world, pos)) {
 			BlockState state = NetherBlocks.SOUL_VEIN.defaultBlockState();
 			BlockState sand = NetherBlocks.VEINED_SAND.defaultBlockState();
@@ -30,10 +28,10 @@ public class StructureSoulVein implements IStructure {
 				for (int z = z1; z <= z2; z++) {
 					int y = pos.getY() + 2;
 					for (int j = 0; j < 4; j++) {
-						npos.set(x, y - j, z);
-						if (world.isEmptyBlock(npos) && canPlaceAt(world, npos)) {
-							BlocksHelper.setWithoutUpdate(world, npos, state);
-							BlocksHelper.setWithoutUpdate(world, npos.below(), sand);
+						context.POS.set(x, y - j, z);
+						if (world.isEmptyBlock(context.POS) && canPlaceAt(world, context.POS)) {
+							BlocksHelper.setWithoutUpdate(world, context.POS, state);
+							BlocksHelper.setWithoutUpdate(world, context.POS.below(), sand);
 						}
 					}
 				}
