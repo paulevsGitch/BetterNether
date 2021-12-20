@@ -11,14 +11,14 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureSoulVein implements IStructure {
-	private MutableBlockPos npos = new MutableBlockPos();
-
 	private boolean canPlaceAt(LevelAccessor world, BlockPos pos) {
 		return NetherBlocks.SOUL_VEIN.canSurvive(NetherBlocks.SOUL_VEIN.defaultBlockState(), world, pos);
 	}
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		MutableBlockPos npos = new MutableBlockPos();
+
 		if (world.isEmptyBlock(pos) && canPlaceAt(world, pos)) {
 			BlockState state = NetherBlocks.SOUL_VEIN.defaultBlockState();
 			BlockState sand = NetherBlocks.VEINED_SAND.defaultBlockState();

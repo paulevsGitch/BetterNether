@@ -19,8 +19,6 @@ import paulevs.betternether.world.structures.IGrowableStructure;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureNetherSakura implements IStructure, IGrowableStructure {
-	private static final MutableBlockPos POS = new MutableBlockPos();
-	private static final MutableBlockPos POS2 = new MutableBlockPos();
 	private static final Map<BlockPos, Byte> LOGS_DIST = new HashMap<>();
 	
 	private void updateSDFFrom(BlockPos bpos) {
@@ -68,6 +66,8 @@ public class StructureNetherSakura implements IStructure, IGrowableStructure {
 	
 	
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural, final int MAX_HEIGHT) {
+		final MutableBlockPos POS = new MutableBlockPos();
+
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		
 		LOGS_DIST.clear();
@@ -117,6 +117,7 @@ public class StructureNetherSakura implements IStructure, IGrowableStructure {
 	}
 
 	private void crown(LevelAccessor world, BlockPos pos, double radius, double height, Random random) {
+		final MutableBlockPos POS2 = new MutableBlockPos();
 		BlockState leaves = NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
 		double r2 = radius * radius;
 		int start = (int) Math.floor(-radius);

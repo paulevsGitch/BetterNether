@@ -11,7 +11,6 @@ import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureStalactiteCeil implements IStructure {
-	private static final MutableBlockPos POS = new MutableBlockPos();
 	private final Block block;
 	private final Block upper;
 	private final Block[] ground;
@@ -41,6 +40,8 @@ public class StructureStalactiteCeil implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final MutableBlockPos POS = new MutableBlockPos();
+
 		if (canPlaceAt(world, pos)) {
 			for (int i = 0; i < 16; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2F);

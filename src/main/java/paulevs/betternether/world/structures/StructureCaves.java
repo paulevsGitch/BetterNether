@@ -10,7 +10,6 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 
 public class StructureCaves implements IStructure {
 	private static final boolean[][][] MASK = new boolean[16][24][16];
-	private static final MutableBlockPos B_POS = new MutableBlockPos();
 	private static int offset = 12;
 	private OpenSimplexNoise heightNoise;
 	private OpenSimplexNoise rigidNoise;
@@ -27,6 +26,7 @@ public class StructureCaves implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final MutableBlockPos B_POS = new MutableBlockPos();
 		boolean isVoid = true;
 		offset = (int) (getHeight(pos.getX() + 8, pos.getZ() + 8) - 12);
 

@@ -12,10 +12,10 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureMushroomFir implements IStructure {
-	MutableBlockPos npos = new MutableBlockPos();
-
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		MutableBlockPos npos = new MutableBlockPos();
+
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(5*scale_factor);
 		if (world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM) {

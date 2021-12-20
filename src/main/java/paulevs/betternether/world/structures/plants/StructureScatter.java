@@ -11,7 +11,6 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureScatter implements IStructure {
-	private MutableBlockPos npos = new MutableBlockPos();
 	private final Block plantBlock;
 	private final Property<Integer> ageProp;
 	private final int maxAge;
@@ -34,6 +33,8 @@ public class StructureScatter implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final MutableBlockPos npos = new MutableBlockPos();
+
 		if (world.isEmptyBlock(pos) && canPlaceAt(world, pos)) {
 			BlockState state = plantBlock.defaultBlockState();
 			int rndState = random.nextInt(2);

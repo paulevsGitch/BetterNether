@@ -23,14 +23,14 @@ import paulevs.betternether.world.structures.IStructure;
 
 public class StructureAnchorTreeRoot implements IStructure {
 	private static final Set<BlockPos> BLOCKS = new HashSet<BlockPos>(2048);
-	private static final MutableBlockPos POS = new MutableBlockPos();
 	private Block[] wallPlants;
 	private static final StructureLucis LUCIS = new StructureLucis();
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (pos.getY() < MAX_HEIGHT*0.75) return;
-		
+		final MutableBlockPos POS = new MutableBlockPos();
+
 		double angle = random.nextDouble() * Math.PI * 2;
 		double dx = Math.sin(angle);
 		double dz = Math.cos(angle);

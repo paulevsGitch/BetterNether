@@ -12,14 +12,13 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureSmoker implements IStructure {
-	private MutableBlockPos npos = new MutableBlockPos();
-
 	private boolean canPlaceAt(ServerLevelAccessor world, BlockPos pos) {
 		return BlocksHelper.isNetherGround(world.getBlockState(pos.below()));
 	}
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		MutableBlockPos npos = new MutableBlockPos();
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		

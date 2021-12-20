@@ -17,7 +17,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 
 public class DestructionPiece extends CustomPiece {
-	private static final MutableBlockPos POS = new MutableBlockPos();
+	private final MutableBlockPos POS = new MutableBlockPos();
 
 	private BlockPos center;
 	private int radius;

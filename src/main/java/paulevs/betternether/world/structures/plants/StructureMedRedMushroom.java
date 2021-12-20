@@ -13,10 +13,9 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureMedRedMushroom implements IStructure {
-	private static final MutableBlockPos POS = new MutableBlockPos();
-
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final MutableBlockPos POS = new MutableBlockPos();
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		

@@ -18,9 +18,9 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSeriali
 import paulevs.betternether.noise.OpenSimplexNoise;
 
 public class CavePiece extends CustomPiece {
+	private final MutableBlockPos POS = new MutableBlockPos();
 	private static final BlockState LAVA = Blocks.LAVA.defaultBlockState();
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(927649);
-	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	private BlockPos center;
 	private int radius;

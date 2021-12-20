@@ -8,8 +8,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class StructureFuncScatter implements IStructure {
-	protected static final MutableBlockPos POS = new MutableBlockPos();
-
 	final int distance;
 	final int manDist;
 
@@ -32,6 +30,8 @@ public abstract class StructureFuncScatter implements IStructure {
 	protected abstract boolean isGround(BlockState state);
 
 	private boolean noObjNear(LevelAccessor world, BlockPos pos) {
+		final MutableBlockPos POS = new MutableBlockPos();
+
 		int x1 = pos.getX() - distance;
 		int z1 = pos.getZ() - distance;
 		int x2 = pos.getX() + distance;

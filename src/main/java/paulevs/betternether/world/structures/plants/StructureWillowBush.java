@@ -18,8 +18,6 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureWillowBush implements IStructure {
-	private static final MutableBlockPos POS = new MutableBlockPos();
-
 	public StructureWillowBush() {}
 
 	@Override
@@ -27,6 +25,7 @@ public class StructureWillowBush implements IStructure {
 		if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
 			return;
 
+		final MutableBlockPos POS = new MutableBlockPos();
 		float r = random.nextFloat() * 2F + 0.5F;
 		int count = (int) r;
 

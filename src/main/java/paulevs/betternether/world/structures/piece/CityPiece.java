@@ -25,8 +25,7 @@ import paulevs.betternether.world.structures.city.palette.CityPalette;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 
 public class CityPiece extends CustomPiece {
-	private static final MutableBlockPos POS = new MutableBlockPos();
-
+	private final MutableBlockPos POS = new MutableBlockPos();
 	private StructureProcessor paletteProcessor;
 	private StructureCityBuilding building;
 	private CityPalette palette;
@@ -67,6 +66,7 @@ public class CityPiece extends CustomPiece {
 		if (!this.boundingBox.intersects(blockBox))
 			return;
 
+		
         BoundingBox clamped = new BoundingBox(boundingBox.minX(), boundingBox.minY(), boundingBox.minZ(), boundingBox.maxX(), boundingBox.maxY(), boundingBox.maxZ());
 		//clamped.encompass(blockBox);
 		int cminZ = Math.max(clamped.minZ(), blockBox.minZ());

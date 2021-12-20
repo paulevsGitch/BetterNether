@@ -14,10 +14,11 @@ import paulevs.betternether.world.structures.IGrowableStructure;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureGiantMold implements IStructure, IGrowableStructure {
-	MutableBlockPos npos = new MutableBlockPos();
+
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final MutableBlockPos npos = new MutableBlockPos();
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		

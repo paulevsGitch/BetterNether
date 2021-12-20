@@ -11,8 +11,6 @@ import paulevs.betternether.blocks.BlockProperties;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureVine implements IStructure {
-	private MutableBlockPos blockPos = new MutableBlockPos();
-
 	private final Block block;
 
 	public StructureVine(Block block) {
@@ -21,6 +19,8 @@ public class StructureVine implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final MutableBlockPos blockPos = new MutableBlockPos();
+
 		int h = BlocksHelper.downRay(world, pos, 25);
 		if (h < 2)
 			return;

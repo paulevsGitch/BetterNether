@@ -39,7 +39,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 	}
 
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
-		
+		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		float scale = MHelper.randRange(0.7F, 1.3F, random);
 		int minCount = scale < 1 ? 3 : 4;
@@ -138,6 +138,8 @@ public class StructureOldWillow extends StructureFuncScatter {
 	}
 
 	private void line(LevelAccessor world, int x1, int y1, int z1, int x2, int y2, int z2, int startY) {
+		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
+
 		int dx = x2 - x1;
 		int dy = y2 - y1;
 		int dz = z2 - z1;
@@ -191,6 +193,8 @@ public class StructureOldWillow extends StructureFuncScatter {
 	}
 
 	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random, BoundingBox bounds) {
+		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
+		
 		BlockState leaves = NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.NATURAL, false);
 		BlockState vine = NetherBlocks.MAT_WILLOW.getBranch().defaultBlockState();
 		float halfR = radius * 0.5F;

@@ -14,13 +14,12 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureRubeusBush implements IStructure {
-	private static final MutableBlockPos POS = new MutableBlockPos();
-
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
 			return;
 
+		final MutableBlockPos POS = new MutableBlockPos();
 		float r = random.nextFloat() * 3 + 1;
 		int count = (int) r;
 

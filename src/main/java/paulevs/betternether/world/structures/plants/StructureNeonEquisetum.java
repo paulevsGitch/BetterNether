@@ -13,10 +13,9 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureNeonEquisetum implements IStructure {
-	private MutableBlockPos blockPos = new MutableBlockPos();
-
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		MutableBlockPos blockPos = new MutableBlockPos();
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		
 		if (pos.getY() < (30 + random.nextInt(0, (int)(10*scale_factor))) || !BlocksHelper.isNetherrack(world.getBlockState(pos.above()))) return;

@@ -23,13 +23,13 @@ public class StructureWartCap implements IStructure {
 			.setValue(HugeMushroomBlock.DOWN, false);
 	private static final BlockState SKIN = Blocks.NETHER_WART_BLOCK
 			.defaultBlockState();
-	private static final MutableBlockPos POS = new MutableBlockPos();
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (!isWall(world, pos) || pos.getY() > (MAX_HEIGHT*0.45) || pos.getY() < (MAX_HEIGHT*0.25) || world.isEmptyBlock(pos.below(3)))
 			return;
 
+		final MutableBlockPos POS = new MutableBlockPos();
 		int radius = 3 + random.nextInt(3);
 		int r2 = radius * radius;
 		int side = radius * 2 + 1;

@@ -26,6 +26,7 @@ public class StructureWartTree extends StructureFuncScatter {
 
 	@Override
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
 		if (world.isEmptyBlock(pos.above(1)) && world.isEmptyBlock(pos.above(2))) {
 			if (world.isEmptyBlock(pos.above(2).north()) && world.isEmptyBlock(pos.above(2).south()) && world.isEmptyBlock(pos.above(2).east()) && world.isEmptyBlock(pos.above(2).west()))
 				if (world.isEmptyBlock(pos.above(3).north(2)) && world.isEmptyBlock(pos.above(3).south(2)) && world.isEmptyBlock(pos.above(3).east(2)) && world.isEmptyBlock(pos.above(3).west(2))) {

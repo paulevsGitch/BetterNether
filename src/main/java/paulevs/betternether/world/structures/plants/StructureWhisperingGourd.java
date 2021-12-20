@@ -13,11 +13,10 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 
 public class StructureWhisperingGourd implements IStructure {
-	private MutableBlockPos blockPos = new MutableBlockPos();
-
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
 		if (pos.getY() < (MAX_HEIGHT-38) || !BlocksHelper.isNetherrack(world.getBlockState(pos.above()))) return;
+		MutableBlockPos blockPos = new MutableBlockPos();
 
 		int h = BlocksHelper.downRay(world, pos, 4);
 		if (h < 1)

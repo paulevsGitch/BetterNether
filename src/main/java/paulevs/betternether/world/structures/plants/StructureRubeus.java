@@ -77,6 +77,7 @@ public class StructureRubeus extends StructureFuncScatter {
 	}
 
 	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural) {
+		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
 		LOGS_DIST.clear();
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		float scale = MHelper.randRange(0.5F, 1F, random);
@@ -198,6 +199,8 @@ public class StructureRubeus extends StructureFuncScatter {
 	}
 
 	private void line(LevelAccessor world, int x1, int y1, int z1, int x2, int y2, int z2, int middleY) {
+		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
+
 		int dx = x2 - x1;
 		int dy = y2 - y1;
 		int dz = z2 - z1;
@@ -239,6 +242,8 @@ public class StructureRubeus extends StructureFuncScatter {
 	}
 
 	private void crown(LevelAccessor world, int x, int y, int z, float radius, Random random) {
+		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
+
 		BlockState leaves = NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
 		BlockState cone = NetherBlocks.MAT_RUBEUS.getCone().defaultBlockState();
 		float halfR = radius * 0.5F;

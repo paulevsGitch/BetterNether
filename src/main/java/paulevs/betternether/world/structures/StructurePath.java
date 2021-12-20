@@ -16,7 +16,6 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
 
 public class StructurePath implements IStructure {
-	private static final MutableBlockPos B_POS = new MutableBlockPos();
 	private OpenSimplexNoise heightNoise;
 	private OpenSimplexNoise rigidNoise;
 	private OpenSimplexNoise distortX;
@@ -32,6 +31,8 @@ public class StructurePath implements IStructure {
 
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT) {
+		final MutableBlockPos B_POS = new MutableBlockPos();
+
 		for (int x = 0; x < 16; x++) {
 			int wx = pos.getX() + x;
 			B_POS.setX(wx);
