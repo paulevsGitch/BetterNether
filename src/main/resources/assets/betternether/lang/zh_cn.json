@@ -693,7 +693,7 @@
 	"block.betternether.whispering_gourd": "窃语葫芦",
 	"block.betternether.whispering_gourd_lantern": "窃语葫芦灯",
 	
-	"block.betternether.willow_torch": "下界柳木火把"
+	"block.betternether.willow_torch": "下界柳木火把",
 	
 	"block.betternether.nether_redstone_ore": "下界红石矿",
 	"block.betternether.blue_crying_obsidian": "蓝色哭泣的黑曜石",
@@ -702,13 +702,13 @@
 	"block.betternether.blue_obsidian_rod_tiles": "精制蓝色黑曜石瓷砖",
 	"block.betternether.obsidian_rod_tiles": "精制黑曜石瓷砖",
 	"itemGroup.betternether.nether_blocks":"更好的下界方块",
-	"itemGroup.betternether.nether_items":"更哈的下界物品",
+	"itemGroup.betternether.nether_items":"更好的下界物品",
 	"advancements.betternether.root.title": "更好的下界",
 	"advancements.betternether.root.decription": "探索更好的下界",
 	"advancements.betternether.blue_obsidian.title": "蓝色的黑曜石",
 	"advancements.betternether.blue_obsidian.description": "通过将灵魂沙或灵魂沙石上的岩浆变为黑曜石来获得蓝色的黑曜石",
-	"advancements.betternether.ruby_ore.title":"下界红宝石矿",
-	"advancements.betternether.ruby_ore.description":"在下界获得红宝石矿",
+	"advancements.betternether.ruby_ore.title":"下界红宝石矿石",
+	"advancements.betternether.ruby_ore.description":"在下界获得红宝石矿石",
 	"advancements.betternether.make_crying.title":"痛哭流涕",
 	"advancements.betternether.make_crying.description":"用避雷针创造所有种类的哭泣的黑曜石和垂泪的黑曜石",
 	"advancements.betternether.obsidian_blocks.title":"黑曜石全种类制霸",
