@@ -38,10 +38,10 @@
 	],
 
 	"depends": {
-		"fabricloader": ">=0.12.9",
+		"fabricloader": ">=0.12.12",
 		"fabric": ">=0.44.0",
-		"minecraft": ">=1.18.1",
-        "bclib": ">=1.1.3"
+		"minecraft": ">=1.18",
+        "bclib": ">=1.1.4"
 	},
 	
 	"custom": {
