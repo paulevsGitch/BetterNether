@@ -22,10 +22,6 @@ public class BNWoodlikeDoor extends BaseDoorBlock implements TagProvider {
 	
 	@Override
 	public void addTags(List<Named<Block>> blockTags, List<Named<Item>> itemTags) {
-		//TODO: Remove after BCLib 1.1.4
-		blockTags.add(BlockTags.DOORS);
-		itemTags.add(ItemTags.DOORS);
-		
 		blockTags.add(BlockTags.WOODEN_DOORS);
 		itemTags.add(ItemTags.WOODEN_DOORS);
 	}

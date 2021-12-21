@@ -2,9 +2,6 @@
 	"replace": "false",
 	"values": [
 		"minecraft:soul_sand",
-		"minecraft:soul_soil",
-		
-		"betternether:veined_sand",
-		"betternether:farmland"
+		"minecraft:soul_soil"
 	]
 }

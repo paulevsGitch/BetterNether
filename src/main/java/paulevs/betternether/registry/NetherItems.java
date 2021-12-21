@@ -62,14 +62,14 @@ public class NetherItems extends ItemRegistry {
 	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
 	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()), TagAPI.ITEM_IRON_INGOTS);
 
-	public static final Item CINCINNASITE_PICKAXE = registerItem("cincinnasite_pickaxe", new NetherPickaxe(BNItemMaterials.CINCINNASITE_TOOLS));
-	public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerItem("cincinnasite_pickaxe_diamond", new NetherPickaxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
-	public static final Item CINCINNASITE_AXE = registerItem("cincinnasite_axe", new NetherAxe(BNItemMaterials.CINCINNASITE_TOOLS));
-	public static final Item CINCINNASITE_AXE_DIAMOND = registerItem("cincinnasite_axe_diamond", new NetherAxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
-	public static final Item CINCINNASITE_SHOVEL = registerItem("cincinnasite_shovel", new NetherShovel(BNItemMaterials.CINCINNASITE_TOOLS));
-	public static final Item CINCINNASITE_SHOVEL_DIAMOND = registerItem("cincinnasite_shovel_diamond", new NetherShovel(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
-	public static final Item CINCINNASITE_HOE = registerItem("cincinnasite_hoe", new NetherHoe(BNItemMaterials.CINCINNASITE_TOOLS));
-	public static final Item CINCINNASITE_HOE_DIAMOND = registerItem("cincinnasite_hoe_diamond", new NetherHoe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
+	public static final Item CINCINNASITE_PICKAXE = registerTool("cincinnasite_pickaxe", new NetherPickaxe(BNItemMaterials.CINCINNASITE_TOOLS));
+	public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerTool("cincinnasite_pickaxe_diamond", new NetherPickaxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
+	public static final Item CINCINNASITE_AXE = registerTool("cincinnasite_axe", new NetherAxe(BNItemMaterials.CINCINNASITE_TOOLS));
+	public static final Item CINCINNASITE_AXE_DIAMOND = registerTool("cincinnasite_axe_diamond", new NetherAxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
+	public static final Item CINCINNASITE_SHOVEL = registerTool("cincinnasite_shovel", new NetherShovel(BNItemMaterials.CINCINNASITE_TOOLS));
+	public static final Item CINCINNASITE_SHOVEL_DIAMOND = registerTool("cincinnasite_shovel_diamond", new NetherShovel(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
+	public static final Item CINCINNASITE_HOE = registerTool("cincinnasite_hoe", new NetherHoe(BNItemMaterials.CINCINNASITE_TOOLS));
+	public static final Item CINCINNASITE_HOE_DIAMOND = registerTool("cincinnasite_hoe_diamond", new NetherHoe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
 	public static final Item CINCINNASITE_SHEARS = registerShears("cincinnasite_shears", new BaseShearsItem(defaultSettings().durability(380)));
 
 	public static final Item CINCINNASITE_HELMET = registerItem("cincinnasite_helmet", new NetherArmor(BNItemMaterials.CINCINNASITE_ARMOR, EquipmentSlot.HEAD));
@@ -80,10 +80,10 @@ public class NetherItems extends ItemRegistry {
 	public static final Item CINCINNASITE_SWORD_DIAMOND = registerItem("cincinnasite_sword_diamond", new NetherSword(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS, 3, -2.4F));
 
 	public static final Item NETHER_RUBY = registerItem("nether_ruby", new Item(defaultSettings()));
-	public static final Item NETHER_RUBY_PICKAXE = registerItem("nether_ruby_pickaxe", new NetherPickaxe(BNItemMaterials.NETHER_RUBY_TOOLS));
-	public static final Item NETHER_RUBY_AXE = registerItem("nether_ruby_axe", new NetherAxe(BNItemMaterials.NETHER_RUBY_TOOLS));
-	public static final Item NETHER_RUBY_SHOVEL = registerItem("nether_ruby_shovel", new NetherShovel(BNItemMaterials.NETHER_RUBY_TOOLS));
-	public static final Item NETHER_RUBY_HOE = registerItem("nether_ruby_hoe", new NetherHoe(BNItemMaterials.NETHER_RUBY_TOOLS));
+	public static final Item NETHER_RUBY_PICKAXE = registerTool("nether_ruby_pickaxe", new NetherPickaxe(BNItemMaterials.NETHER_RUBY_TOOLS));
+	public static final Item NETHER_RUBY_AXE = registerTool("nether_ruby_axe", new NetherAxe(BNItemMaterials.NETHER_RUBY_TOOLS));
+	public static final Item NETHER_RUBY_SHOVEL = registerTool("nether_ruby_shovel", new NetherShovel(BNItemMaterials.NETHER_RUBY_TOOLS));
+	public static final Item NETHER_RUBY_HOE = registerTool("nether_ruby_hoe", new NetherHoe(BNItemMaterials.NETHER_RUBY_TOOLS));
 	public static final Item NETHER_RUBY_SWORD = registerItem("nether_ruby_sword", new NetherSword(BNItemMaterials.NETHER_RUBY_TOOLS, 3, -2.4F));
 	public static final Item NETHER_RUBY_HELMET = registerItem("nether_ruby_helmet", new NetherArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.HEAD));
 	public static final Item NETHER_RUBY_CHESTPLATE = registerItem("nether_ruby_chestplate", new NetherArmor(BNItemMaterials.NETHER_RUBY_ARMOR, EquipmentSlot.CHEST));
@@ -123,10 +123,23 @@ public class NetherItems extends ItemRegistry {
 	}
 	
 	public static Item registerShears(String name, Item item){
-		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
+		if (item != Items.AIR) {
 			return getItemRegistry().registerTool(BetterNether.makeID(name), item);
 		}
 		
+		return item;
+	}
+
+	public static Item registerTool(String name, Item item, Tag.Named<Item>... tags) {
+		if (item != Items.AIR) {
+			getItemRegistry().registerTool(BetterNether.makeID(name), item);
+			if (tags.length>0)
+				TagAPI.addTags(item, tags);
+
+			MOD_ITEMS.add(item);
+		}
+
+		ITEMS.add(name);
 		return item;
 	}
 	

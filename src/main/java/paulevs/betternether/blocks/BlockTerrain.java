@@ -5,16 +5,21 @@ import java.util.List;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import ru.bclib.api.TagAPI;
+import ru.bclib.interfaces.TagProvider;
 
-public class BlockTerrain extends BlockBase {
+public class BlockTerrain extends BlockBase implements TagProvider {
 	public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,
 			SoundEvents.NETHERRACK_BREAK,
 			SoundEvents.WART_BLOCK_STEP,
@@ -38,5 +43,13 @@ public class BlockTerrain extends BlockBase {
 		}
 		else
 			return super.getDrops(state, builder);
+	}
+
+	@Override
+	public void addTags(List<Tag.Named<Block>> blockTags, List<Tag.Named<Item>> itemTags) {
+		blockTags.add(TagAPI.BLOCK_NETHERRACK);
+		blockTags.add(TagAPI.BLOCK_NETHER_GROUND);
+		blockTags.add(TagAPI.BLOCK_GEN_TERRAIN);
+		//TagAPI.addNetherGround(block);
 	}
 }

@@ -16,14 +16,13 @@ import paulevs.betternether.blocks.materials.Materials;
 import ru.bclib.api.BonemealAPI;
 import ru.bclib.api.TagAPI;
 import ru.bclib.api.ComposterAPI;
-import ru.bclib.blocks.BaseVineBlock;
 import ru.bclib.blocks.SimpleLeavesBlock;
 import ru.bclib.mixin.common.ComposterBlockAccessor;
 
 public class NetherTags {
-	public static final Tag<Block> SOUL_GROUND_BLOCK = TagAPI.makeCommonBlockTag( "soul_ground");
-	public static final Tag<Block> NETHERRACK = TagAPI.makeCommonBlockTag("netherrack");
-	public static final Tag<Block> MYCELIUM = TagAPI.makeCommonBlockTag("nether_mycelium");
+//	public static final Tag<Block> SOUL_GROUND_BLOCK = TagAPI.makeCommonBlockTag( "soul_ground");
+//	public static final Tag<Block> NETHERRACK = TagAPI.makeCommonBlockTag("netherrack");
+//	public static final Tag<Block> MYCELIUM = TagAPI.makeCommonBlockTag("nether_mycelium");
 	public static final Tag.Named<Block> NYLIUM = BlockTags.NYLIUM;
 
 	public static final Tag<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
@@ -50,17 +49,12 @@ public class NetherTags {
 			}
 
 			if (block instanceof BlockTerrain) {
-				TagAPI.addNetherGround(block);
-				TagAPI.addTag(NYLIUM, block);
 				BonemealAPI.addSpreadableBlock(block, Blocks.NETHERRACK);
 			}
 			
 			else if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
 				TagAPI.addTag(BlockTags.LEAVES, block);
 				ComposterAPI.allowCompost(0.3f, item);
-			}
-			else if (block instanceof BaseVineBlock) {
-				TagAPI.addTag(BlockTags.CLIMBABLE, block);
 			}
 			/*else if (block instanceof BlockCincinnasitePedestal) {
 				TagHelper.addTag(PEDESTALS, block);

@@ -1,10 +1,17 @@
 package paulevs.betternether.items;
 
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.registry.NetherItems;
+import ru.bclib.interfaces.TagProvider;
 import ru.bclib.items.tool.BaseAxeItem;
+
+import java.util.List;
 
 public class NetherAxe extends BaseAxeItem {
 	public NetherAxe(Tier material) {

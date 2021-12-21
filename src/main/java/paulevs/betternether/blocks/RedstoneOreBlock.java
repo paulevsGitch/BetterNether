@@ -3,8 +3,11 @@ package paulevs.betternether.blocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -12,13 +15,15 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
+import ru.bclib.api.TagAPI;
 import ru.bclib.blocks.BaseOreBlock;
 import ru.bclib.interfaces.BlockModelProvider;
+import ru.bclib.interfaces.TagProvider;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProvider {
+public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProvider, TagProvider {
 	private final int minCount;
 	private final int maxCount;
 	public RedstoneOreBlock() {
@@ -50,5 +55,10 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
 	@Override
 	public BlockModel getItemModel(ResourceLocation resourceLocation) {
 		return getBlockModel(resourceLocation, defaultBlockState());
+	}
+
+	@Override
+	public void addTags(List<Tag.Named<Block>> blockTags, List<Tag.Named<Item>> itemTags) {
+		blockTags.add(TagAPI.BLOCK_NETHERRACK);
 	}
 }

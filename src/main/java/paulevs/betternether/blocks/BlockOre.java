@@ -38,8 +38,6 @@ public class BlockOre extends BaseOreBlock implements TagProvider {
 	@Override
 	public void addTags(List<Named<Block>> blockTags, List<Named<Item>> itemTags) {
 		blockTags.add(TagAPI.MINEABLE_PICKAXE);
-		
-		//TODO: enable after BCLIb 1.1.4
-		//blockTags.add(TagAPI.BLOCK_NETHERRACK);
+		blockTags.add(TagAPI.BLOCK_NETHERRACK);
 	}
 }

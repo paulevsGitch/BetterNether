@@ -388,7 +388,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
-	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium(), BlockTags.NYLIUM);
+	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium(), BlockTags.NYLIUM, TagAPI.BLOCK_NETHER_MYCELIUM);
 	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockTerrain(), BlockTags.NYLIUM);
 	public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass", new BlockTerrain(), BlockTags.NYLIUM);
 	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain(), BlockTags.NYLIUM);
