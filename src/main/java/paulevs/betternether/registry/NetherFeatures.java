@@ -46,14 +46,14 @@ public class NetherFeatures {
 	
 	public static final BCLFeature NETHER_RUBY_ORE_SOUL =
 		registerOre("nether_ruby_soul", NetherBlocks.NETHER_RUBY_ORE, Blocks.SOUL_SOIL,
-			3, 16, 0.8f,
-			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(30), VerticalAnchor.top()),
+			3, 16, 0.6f,
+			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
 			false);
 	
 	public static final BCLFeature NETHER_RUBY_ORE_LARGE =
 		registerOre("nether_ruby_large", NetherBlocks.NETHER_RUBY_ORE,
-			3, 16, 0.8f,
-			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(30), VerticalAnchor.top()),
+			3, 16, 0.6f,
+			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
 			false);
 
 	public static final BCLFeature NETHER_RUBY_ORE_RARE =
