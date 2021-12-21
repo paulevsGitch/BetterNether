@@ -215,9 +215,8 @@ public class CommandRegistry {
         BlockState state;
         BlockState fillState;
         final BlockState AIR = Blocks.AIR.defaultBlockState();
-        
        
-        for (int y=1; y<127; y++){
+        for (int y=1; y<level.getHeight(); y++){
             bp.setY(y);
             for (int x=-64; x<64; x++){
                 bp.setX((int)pos.x+x);
@@ -236,6 +235,7 @@ public class CommandRegistry {
                     state = level.getBlockState(bp);
                     if (y==1 || !state.is(Blocks.AIR)) {
                         if (!(state.is(NetherBlocks.CINCINNASITE_ORE) || state.is(NetherBlocks.NETHER_RUBY_ORE) || state.is(NetherBlocks.NETHER_LAPIS_ORE) || state.is(NetherBlocks.NETHER_REDSTONE_ORE) || state.is(Blocks.NETHER_QUARTZ_ORE) || state.is(Blocks.NETHER_GOLD_ORE) || state.is(Blocks.ANCIENT_DEBRIS))) {
+                        //if (!(state.is(NetherBlocks.NETHER_RUBY_ORE)||state.is(Blocks.ANCIENT_DEBRIS)||state.is(Blocks.NETHER_QUARTZ_ORE))){
                             BlocksHelper.setWithoutUpdate(level, bp, fillState);
                         }
                     }
@@ -254,9 +254,10 @@ public class CommandRegistry {
         MutableBlockPos bp = new MutableBlockPos();
         BlockState state;
         BlockState fillState;
+
         
         
-        for (int y=1; y<127; y++){
+        for (int y=1; y<level.getHeight(); y++){
             bp.setY(y);
             for (int x=constX?0:-64; x<64; x++){
                 bp.setX((int)pos.x+x);
