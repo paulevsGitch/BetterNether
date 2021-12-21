@@ -12,6 +12,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
@@ -40,7 +41,8 @@ public class OldWarpedWoods extends NetherBiome {
 				   .spawn(EntityType.ENDERMAN, 1, 4, 4)
 				   .spawn(EntityType.STRIDER, 60, 1, 2)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE())
+			       .feature(NetherFeatures.NETHER_RUBY_ORE);
 		}
 		
 		@Override

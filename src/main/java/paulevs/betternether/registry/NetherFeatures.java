@@ -40,38 +40,38 @@ public class NetherFeatures {
 
 	public static final BCLFeature NETHER_RUBY_ORE =
 		registerOre("nether_ruby", NetherBlocks.NETHER_RUBY_ORE,
-			3, 8, 0.6f,
+			3, 8, 0, //0.6f,
 			HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(32)),
 			false);
 	
 	public static final BCLFeature NETHER_RUBY_ORE_SOUL =
 		registerOre("nether_ruby_soul", NetherBlocks.NETHER_RUBY_ORE, Blocks.SOUL_SOIL,
-			3, 16, 0.6f,
-			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
+			16, 12, 0, //0.6f,
+			HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
 			false);
 	
 	public static final BCLFeature NETHER_RUBY_ORE_LARGE =
 		registerOre("nether_ruby_large", NetherBlocks.NETHER_RUBY_ORE,
-			3, 16, 0.6f,
-			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
+			16, 12, 0, //0.6f,
+			HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
 			false);
 
 	public static final BCLFeature NETHER_RUBY_ORE_RARE =
 		registerOre("nether_ruby_rare", NetherBlocks.NETHER_RUBY_ORE,
-			2, 6, 0.0f,
+			2, 12, 0.0f,
 			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(70), VerticalAnchor.top()),
 			true);
 
 	public static final BCLFeature NETHER_LAPIS_ORE =
 		registerOre("nether_lapis", NetherBlocks.NETHER_LAPIS_ORE,
 			18, 4, 0.0f,
-			HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(10)),
+			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(10)),
 			false);
 
 	public static final BCLFeature NETHER_REDSTONE_ORE =
 		registerOre("nether_redstone", NetherBlocks.NETHER_REDSTONE_ORE,
-			1, 16, 0.0f,
-			HeightRangePlacement.triangle(VerticalAnchor.absolute(8), VerticalAnchor.absolute(32)),
+			1, 16, 0.3f,
+			HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(8), VerticalAnchor.aboveBottom(40)),
 			true);
 
 	// Maintainance //
