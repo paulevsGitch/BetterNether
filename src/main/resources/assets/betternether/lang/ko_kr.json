@@ -702,10 +702,10 @@
 	"block.betternether.weeping_obsidian": "특 우는 흑요석",
     "block.betternether.blue_obsidian_rod_tiles": "얇은 파란색 흑요석 타일",
     "block.betternether.obsidian_rod_tiles": "얇은 흑요석 타일",
-    "itemGroup.betternether.nether_blocks":"더좋은네더 블록",
-    "itemGroup.betternether.nether_items":"더좋은네더 아이템",
-    "advancements.betternether.root.title": "더좋은네더",
-    "advancements.betternether.root.decription": "더좋은네더를 탐험",
+    "itemGroup.betternether.nether_blocks":"더좋은 네더 블록",
+    "itemGroup.betternether.nether_items":"더좋은 네더 아이템",
+    "advancements.betternether.root.title": "더좋은 네더",
+    "advancements.betternether.root.decription": "더좋은 네더를 탐험",
     "advancements.betternether.blue_obsidian.title": "푸른 무언가",
     "advancements.betternether.blue_obsidian.description": "영혼 모래나 영혼 돌 위의 용암을 흑요석으로 개조하여 푸른 흑요석 획득",
     "advancements.betternether.ruby_ore.title":"루비 광석",
@@ -721,6 +721,7 @@
     "advancements.betternether.ruby_tools.title":"붉은 네더",
     "advancements.betternether.ruby_tools.description":"네더의 깊은 곳에서 가져온 루비 도구를 사용합니다.",
 	"advancements.betternether.city.title":"영광스러운 과거",
-	"advancements.betternether.city.description":"버려진 네더 도시 찾기"
-    
+	"advancements.betternether.city.description":"버려진 네더 도시 찾기",
+
+	"biome.betternether.upside_down_forest_cleared": "죽은 역림"
 }  
