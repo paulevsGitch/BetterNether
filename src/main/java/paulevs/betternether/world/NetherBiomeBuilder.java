@@ -18,13 +18,12 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.interfaces.IStructureFeatures;
 import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
-import ru.bclib.api.surface.SurfaceRuleBuilder;
-import ru.bclib.config.Configs;
 import ru.bclib.world.biomes.BCLBiome;
 
 public class NetherBiomeBuilder {
@@ -111,10 +110,10 @@ public class NetherBiomeBuilder {
 		data.addCustomBuildData(builder);
 		
 		NetherBiome b = builder.build(data.getSupplier());
-		if (Configs.BIOMES_CONFIG.getBoolean(b.configGroup(), "vertical", data.vertical())) b.setVertical();
+		if (Configs.BIOMES.getBoolean(b.configGroup(), "vertical", data.vertical())) b.setVertical();
 		
 		if (edgeBiome!=null) {
-			final int edgeSize = Configs.BIOMES_CONFIG.getInt(b.configGroup(), "edge_size", b.getEdgeSize());
+			final int edgeSize = Configs.BIOMES.getInt(b.configGroup(), "edge_size", b.getEdgeSize());
 			if (edgeSize > 0) {
 				b.setEdge(edgeBiome);
 			}

@@ -13,8 +13,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
+import paulevs.betternether.config.Configs;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
-import ru.bclib.config.Configs;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
@@ -111,14 +111,14 @@ public abstract class NetherBiome extends BCLBiome{
 		setupFromConfig();
 		
 		final String structureGroup = configGroup() + ".structures" ;
-		List<String> structAll = Configs.BIOMES_CONFIG.getStringArray(structureGroup, "schematics", structures);
+		List<String> structAll = Configs.BIOMES.getStringArray(structureGroup, "schematics", structures);
 		for (String struct : structAll) {
 			structureFromString(struct);
 		}
 		
 		final String group = configGroup();
-		setPlantDensity(Configs.BIOMES_CONFIG.getFloat(group, "plants_and_structures_density", getPlantDensity()));
-		setNoiseDensity(Configs.BIOMES_CONFIG.getFloat(group, "noise_density", getNoiseDensity()));
+		setPlantDensity(Configs.BIOMES.getFloat(group, "plants_and_structures_density", getPlantDensity()));
+		setNoiseDensity(Configs.BIOMES.getFloat(group, "noise_density", getNoiseDensity()));
 	}
 	
 	protected abstract void onInit();
@@ -180,27 +180,19 @@ public abstract class NetherBiome extends BCLBiome{
 	
 	protected void addStructure(String name, IStructure structure, StructureType type, float density, boolean useNoise) {
 		String group = configGroup() + ".structures." + type.getName() + "." + name;
-		float dens = Configs.BIOMES_CONFIG.getFloat(group, "density", density);
-		boolean limit = Configs.BIOMES_CONFIG.getBoolean(group, "limit", useNoise);
+		float dens = Configs.BIOMES.getFloat(group, "density", density);
+		boolean limit = Configs.BIOMES.getBoolean(group, "limit", useNoise);
 		this.addStructure(structure, type, dens, limit);
 	}
 
 	private void addStructure(IStructure structure, StructureType type, float density, boolean useNoise) {
 		switch (type) {
-			case CEIL:
-				generatorsCeil.add(new StructureInfo(structure, density, useNoise));
-				break;
-			case FLOOR:
-				generatorsFloor.add(new StructureInfo(structure, density, useNoise));
-				break;
-			case WALL:
-				generatorsWall.add(new StructureInfo(structure, density, useNoise));
-				break;
-			case LAVA:
-				generatorsLava.add(new StructureInfo(structure, density, useNoise));
-				break;
-			default:
-				break;
+			case CEIL -> generatorsCeil.add(new StructureInfo(structure, density, useNoise));
+			case FLOOR -> generatorsFloor.add(new StructureInfo(structure, density, useNoise));
+			case WALL -> generatorsWall.add(new StructureInfo(structure, density, useNoise));
+			case LAVA -> generatorsLava.add(new StructureInfo(structure, density, useNoise));
+			default -> {
+			}
 		}
 	}
 
@@ -286,20 +278,12 @@ public abstract class NetherBiome extends BCLBiome{
 			if (structure.loaded()) {
 				List<StructureInfo> infoList = null;
 				switch (structure.getType()) {
-					case CEIL:
-						infoList = buildGeneratorsCeil;
-						break;
-					case FLOOR:
-						infoList = buildGeneratorsFloor;
-						break;
-					case LAVA:
-						infoList = buildGeneratorsLava;
-						break;
-					case UNDER:
-						infoList = buildGeneratorsUnder;
-						break;
-					default:
-						break;
+					case CEIL -> infoList = buildGeneratorsCeil;
+					case FLOOR -> infoList = buildGeneratorsFloor;
+					case LAVA -> infoList = buildGeneratorsLava;
+					case UNDER -> infoList = buildGeneratorsUnder;
+					default -> {
+					}
 				}
 
 				chance += getLastChance(infoList);
