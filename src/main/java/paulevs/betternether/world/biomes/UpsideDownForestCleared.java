@@ -48,7 +48,9 @@ public class UpsideDownForestCleared extends NetherBiome {
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE())
-				   .feature(NetherFeatures.NETHER_RUBY_ORE);
+				   .feature(NetherFeatures.NETHER_RUBY_ORE)
+				   .genChance(0.5f)
+			;
 		}
 		
 		@Override
