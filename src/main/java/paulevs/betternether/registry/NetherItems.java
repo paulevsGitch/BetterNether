@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -60,7 +61,7 @@ public class NetherItems extends ItemRegistry {
 	public static final Item HOOK_MUSHROOM = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
 	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
-	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()), TagAPI.ITEM_IRON_INGOTS);
+	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()), TagAPI.ITEM_IRON_INGOTS.getName());
 
 	public static final Item CINCINNASITE_PICKAXE = registerTool("cincinnasite_pickaxe", new NetherPickaxe(BNItemMaterials.CINCINNASITE_TOOLS));
 	public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerTool("cincinnasite_pickaxe_diamond", new NetherPickaxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));
@@ -130,11 +131,11 @@ public class NetherItems extends ItemRegistry {
 		return item;
 	}
 
-	public static Item registerTool(String name, Item item, Tag.Named<Item>... tags) {
+	public static Item registerTool(String name, Item item, ResourceLocation... tags) {
 		if (item != Items.AIR) {
 			getItemRegistry().registerTool(BetterNether.makeID(name), item);
 			if (tags.length>0)
-				TagAPI.addTags(item, tags);
+				TagAPI.addItemTags(item, tags);
 
 			MOD_ITEMS.add(item);
 		}
@@ -143,12 +144,12 @@ public class NetherItems extends ItemRegistry {
 		return item;
 	}
 	
-	public static Item registerItem(String name, Item item, Tag.Named<Item>... tags) {
+	public static Item registerItem(String name, Item item, ResourceLocation... tags) {
 		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
 			getItemRegistry().register(BetterNether.makeID(name), item);
 			//item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
 			if (tags.length>0)
-				TagAPI.addTags(item, tags);
+				TagAPI.addItemTags(item, tags);
 			
 			if (item instanceof BlockItem)
 				MOD_BLOCKS.add(item);
@@ -174,8 +175,7 @@ public class NetherItems extends ItemRegistry {
 						return new ItemStack(NetherItems.STALAGNATE_BOWL, stack.getCount());
 					}
 					else {
-						if (user instanceof Player) {
-							Player player = (Player) user;
+						if (user instanceof Player player) {
 							if (!player.isCreative())
 								player.addItem(new ItemStack(NetherItems.STALAGNATE_BOWL));
 						}
@@ -197,9 +197,9 @@ public class NetherItems extends ItemRegistry {
 			SpawnEggItem egg = new SpawnEggItem(type, background, dots, defaultSettings());
 			DefaultDispenseItemBehavior behavior = new DefaultDispenseItemBehavior() {
 				public ItemStack execute(BlockSource pointer, ItemStack stack) {
-					Direction direction = (Direction) pointer.getBlockState().getValue(DispenserBlock.FACING);
+					Direction direction = pointer.getBlockState().getValue(DispenserBlock.FACING);
 					EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
-					entityType.spawn(pointer.getLevel(), stack, (Player) null, pointer.getPos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
+					entityType.spawn(pointer.getLevel(), stack, null, pointer.getPos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
 					stack.shrink(1);
 					return stack;
 				}

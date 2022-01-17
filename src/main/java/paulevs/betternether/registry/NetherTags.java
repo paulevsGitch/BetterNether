@@ -34,18 +34,18 @@ public class NetherTags {
 			Item item = block.asItem();
 
 			if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
-				TagAPI.addTag(TagAPI.MINEABLE_PICKAXE, block);
+				TagAPI.addBlockTag(TagAPI.NAMED_MINEABLE_PICKAXE, block);
 			}
 			else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
-				TagAPI.addTag(TagAPI.MINEABLE_AXE, block);
+				TagAPI.addBlockTag(TagAPI.NAMED_MINEABLE_AXE, block);
 			}
 			else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || material.equals(Material.WATER_PLANT)) {
-				TagAPI.addTag(TagAPI.MINEABLE_HOE, block);
-				TagAPI.addTag(BlockTags.LEAVES, block);
+				TagAPI.addBlockTag(TagAPI.NAMED_MINEABLE_HOE, block);
+				TagAPI.addBlockTag(TagAPI.LEAVES, block);
 				ComposterAPI.allowCompost(0.3f, item);
 			}
 			else if (material.equals(Material.SAND)) {
-				TagAPI.addTag(TagAPI.MINEABLE_SHOVEL, block);
+				TagAPI.addBlockTag(TagAPI.NAMED_MINEABLE_SHOVEL, block);
 			}
 
 			if (block instanceof BlockTerrain) {
@@ -53,7 +53,7 @@ public class NetherTags {
 			}
 			
 			else if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
-				TagAPI.addTag(BlockTags.LEAVES, block);
+				TagAPI.addBlockTag(TagAPI.LEAVES, block);
 				ComposterAPI.allowCompost(0.3f, item);
 			}
 			/*else if (block instanceof BlockCincinnasitePedestal) {

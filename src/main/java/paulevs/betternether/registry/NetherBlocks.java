@@ -4,8 +4,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -127,7 +125,6 @@ import ru.bclib.api.TagAPI;
 import ru.bclib.blocks.BaseBarrelBlock;
 import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
-import ru.bclib.blocks.BaseDoorBlock;
 import ru.bclib.blocks.BaseLadderBlock;
 import ru.bclib.blocks.BasePressurePlateBlock;
 import ru.bclib.blocks.BaseSlabBlock;
@@ -165,7 +162,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// Anchor Tree
 	public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
 	public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves", new BNLeaves(MAT_ANCHOR_TREE.getSapling(), MaterialColor.COLOR_GREEN));
-	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine(), BlockTags.CLIMBABLE);
+	public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine", new BlockAnchorTreeVine(), TagAPI.NAMED_CLIMBABLE);
 	
 	
 	// Nether Sakura
@@ -238,30 +235,30 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_PANE_COLORED = new ColoredGlassMaterial("quartz_glass_framed_pane", QUARTZ_GLASS_FRAMED_PANE, true);
 	
 	// Obsidian //
-	public static final Block BLUE_WEEPING_OBSIDIAN = registerBlock("blue_weeping_obsidian", new BlueWeepingObsidianBlock(), TagAPI.BLOCK_IMMOBILE);
-	public static final Block WEEPING_OBSIDIAN = registerBlock("weeping_obsidian", new VanillaWeepingObsidianBlock(), TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_CRYING_OBSIDIAN = registerBlock("blue_crying_obsidian", new BlueCryingObsidianBlock(), TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_WEEPING_OBSIDIAN = registerBlock("blue_weeping_obsidian", new BlueWeepingObsidianBlock(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block WEEPING_OBSIDIAN = registerBlock("weeping_obsidian", new VanillaWeepingObsidianBlock(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_CRYING_OBSIDIAN = registerBlock("blue_crying_obsidian", new BlueCryingObsidianBlock(), TagAPI.BLOCK_IMMOBILE.getName());
 	
-	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
-	public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs", OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE);
-	public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab("obsidian_bricks_slab", OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE);
-	public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
-	public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
-	public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs", OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
-	public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab", OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
-	public static final Block OBSIDIAN_ROD_TILES = registerBlock("obsidian_rod_tiles", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
-	public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
+	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs", OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab("obsidian_bricks_slab", OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs", OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab", OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block OBSIDIAN_ROD_TILES = registerBlock("obsidian_rod_tiles", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
 	public static final Block OBSIDIAN_GLASS_PANE = registerBlock("obsidian_glass_pane", new BNPane(OBSIDIAN_GLASS, true));
-	public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian(BLUE_CRYING_OBSIDIAN), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs("blue_obsidian_bricks_stairs", BLUE_OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab("blue_obsidian_bricks_slab", BLUE_OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs("blue_obsidian_tile_stairs", BLUE_OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlock("blue_obsidian_rod_tiles", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME, TagAPI.BLOCK_IMMOBILE);
+	public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian(BLUE_CRYING_OBSIDIAN), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs("blue_obsidian_bricks_stairs", BLUE_OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab("blue_obsidian_bricks_slab", BLUE_OBSIDIAN_BRICKS, TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs("blue_obsidian_tile_stairs", BLUE_OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL, TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlock("blue_obsidian_rod_tiles", new BNObsidian(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
+	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass(), TagAPI.BLOCK_NETHER_PORTAL_FRAME.getName(), TagAPI.BLOCK_IMMOBILE.getName());
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
 	
 	// Soul Sandstone //
@@ -270,9 +267,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block SOUL_SANDSTONE_SMOOTH = registerSoulBlock("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)));
 	public static final Block SOUL_SANDSTONE_CHISELED = registerMakeable2X2Soul("soul_sandstone_chiseled", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_SMOOTH);
 	
-	public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs", SOUL_SANDSTONE, BlockTags.SOUL_SPEED_BLOCKS, BlockTags.SOUL_FIRE_BASE_BLOCKS);
-	public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs("soul_sandstone_cut_stairs", SOUL_SANDSTONE_CUT, BlockTags.SOUL_SPEED_BLOCKS, BlockTags.SOUL_FIRE_BASE_BLOCKS);
-	public static final Block SOUL_SANDSTONE_SMOOTH_STAIRS = registerStairs("soul_sandstone_smooth_stairs", SOUL_SANDSTONE_SMOOTH, BlockTags.SOUL_SPEED_BLOCKS, BlockTags.SOUL_FIRE_BASE_BLOCKS);
+	public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs", SOUL_SANDSTONE, TagAPI.NAMED_SOUL_SPEED_BLOCKS, TagAPI.NAMED_SOUL_FIRE_BASE_BLOCKS);
+	public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs("soul_sandstone_cut_stairs", SOUL_SANDSTONE_CUT, TagAPI.NAMED_SOUL_SPEED_BLOCKS, TagAPI.NAMED_SOUL_FIRE_BASE_BLOCKS);
+	public static final Block SOUL_SANDSTONE_SMOOTH_STAIRS = registerStairs("soul_sandstone_smooth_stairs", SOUL_SANDSTONE_SMOOTH, TagAPI.NAMED_SOUL_SPEED_BLOCKS, TagAPI.NAMED_SOUL_FIRE_BASE_BLOCKS);
 	
 	public static final Block SOUL_SANDSTONE_SLAB = registerSlab("soul_sandstone_slab", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_CUT_SLAB = registerSlab("soul_sandstone_cut_slab", SOUL_SANDSTONE_CUT);
@@ -314,7 +311,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	// Eyes //
 	public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
 	public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
-	public static final Block EYE_VINE = registerBlockNI("eye_vine", new BlockEyeVine(), BlockTags.CLIMBABLE);
+	public static final Block EYE_VINE = registerBlockNI("eye_vine", new BlockEyeVine(), TagAPI.NAMED_CLIMBABLE);
 	public static final Block EYE_SEED = registerBlock("eye_seed", new BlockEyeSeed());
 	
 	// Grass //
@@ -326,9 +323,9 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", new BlockNetherGrass());
 	
 	// Vines //
-	public static final Block BLACK_VINE = registerBlock("black_vine", new BlockBlackVine(), BlockTags.CLIMBABLE);
-	public static final Block BLOOMING_VINE = registerBlock("blooming_vine", new BlockBlackVine(), BlockTags.CLIMBABLE);
-	public static final Block GOLDEN_VINE = registerBlock("golden_vine", new BlockGoldenVine(), BlockTags.CLIMBABLE);
+	public static final Block BLACK_VINE = registerBlock("black_vine", new BlockBlackVine(), TagAPI.NAMED_CLIMBABLE);
+	public static final Block BLOOMING_VINE = registerBlock("blooming_vine", new BlockBlackVine(), TagAPI.NAMED_CLIMBABLE);
+	public static final Block GOLDEN_VINE = registerBlock("golden_vine", new BlockGoldenVine(), TagAPI.NAMED_CLIMBABLE);
 	public static final Block LUMABUS_SEED = registerBlock("lumabus_seed", new BlockLumabusSeed(new StructureLumabusVine()));
 	public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine(LUMABUS_SEED));
 	public static final Block GOLDEN_LUMABUS_SEED = registerBlock("golden_lumabus_seed", new BlockLumabusSeed(new StructureGoldenLumabusVine()));
@@ -388,13 +385,13 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
-	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium(), BlockTags.NYLIUM, TagAPI.BLOCK_NETHER_MYCELIUM);
-	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockTerrain(), BlockTags.NYLIUM);
-	public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass", new BlockTerrain(), BlockTags.NYLIUM);
-	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain(), BlockTags.NYLIUM);
+	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium(), TagAPI.NAMED_NYLIUM, TagAPI.BLOCK_NETHER_MYCELIUM.getName());
+	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockTerrain(), TagAPI.NAMED_NYLIUM);
+	public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass", new BlockTerrain(), TagAPI.NAMED_NYLIUM);
+	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain(), TagAPI.NAMED_NYLIUM);
 	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand());
 	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
-	public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass", new BlockTerrain(), BlockTags.NYLIUM);
+	public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass", new BlockTerrain(), TagAPI.NAMED_NYLIUM);
 	public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
 	
 	// Roofs //
@@ -412,7 +409,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block NETHERRACK_FURNACE = registerFurnace("netherrack_furnace", Blocks.NETHERRACK);
 	public static final Block CINCINNASITE_FORGE = registerBlock("cincinnasite_forge", new BlockCincinnasiteForge());
 	public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
-	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil(), BlockTags.ANVIL);
+	public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil", new BlockCincinnasiteAnvil(), TagAPI.NAMED_ANVIL);
 	
 	public static final Block CRAFTING_TABLE_CRIMSON = registerCraftingTable("crafting_table_crimson", Blocks.CRIMSON_PLANKS);
 	public static final Block CRAFTING_TABLE_WARPED = registerCraftingTable("crafting_table_warped", Blocks.WARPED_PLANKS);
@@ -492,17 +489,17 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return BlockRegistry.getModBlockItems(BetterNether.MOD_ID);
 	}
 	
-	public static Block registerBlock(String name, Block block, Tag.Named<Block>... tags) {
+	public static Block registerBlock(String name, Block block,ResourceLocation... tags) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			if (tags.length>0){
-				TagAPI.addTags(block, tags);
+				TagAPI.addBlockTags(block, tags);
 			}
 		}
 		return block;
 	}
 	
-	private static Block registerBlockNI(String name, Block block, Tag.Named<Block>... tags) {
+	private static Block registerBlockNI(String name, Block block, ResourceLocation... tags) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			return registerBlock(name, block, false, tags);
 		}
@@ -513,7 +510,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return registerBlock(name, block, true);
 	}
 	
-	private static Block registerBlock(String name, Block block, boolean hasItem, Tag.Named<Block>... tags) {
+	private static Block registerBlock(String name, Block block, boolean hasItem, ResourceLocation... tags) {
 		final BlockRegistry blockRegistry = getBlockRegistry();
 		final ResourceLocation location = new ResourceLocation(BetterNether.MOD_ID, name);
 		if (hasItem) {
@@ -523,7 +520,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 			blockRegistry.registerBlockOnly(location, block);
 		}
 		if (tags.length>0){
-			TagAPI.addTags(block, tags);
+			TagAPI.addBlockTags(block, tags);
 		}
 		return block;
 	}
@@ -536,27 +533,27 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		}
 	}
 	
-	public static Block registerStairs(String name, Block source, Tag.Named<Block>... tags) {
+	public static Block registerStairs(String name, Block source, ResourceLocation... tags) {
 		Block stairs = new BaseStairsBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, stairs);
 			addFuel(source, stairs);
 			RecipesHelper.makeStairsRecipe(source, stairs);
 			if (tags.length>0){
-				TagAPI.addTags(stairs, tags);
+				TagAPI.addBlockTags(stairs, tags);
 			}
 		}
 		return stairs;
 	}
 	
-	public static Block registerSlab(String name, Block source, Tag.Named<Block>... tags) {
+	public static Block registerSlab(String name, Block source, ResourceLocation... tags) {
 		Block slab = new BaseSlabBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, slab);
 			addFuel(source, slab);
 			RecipesHelper.makeSlabRecipe(source, slab);
 			if (tags.length>0){
-				TagAPI.addTags(slab, tags);
+				TagAPI.addBlockTags(slab, tags);
 			}
 		}
 		return slab;
@@ -603,12 +600,12 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	}
 
 	public static Block registerSoulBlock(String name, Block block) {
-		return registerBlock(name, block, BlockTags.SOUL_FIRE_BASE_BLOCKS, BlockTags.SOUL_SPEED_BLOCKS);
+		return registerBlock(name, block, TagAPI.NAMED_SOUL_FIRE_BASE_BLOCKS, TagAPI.NAMED_SOUL_SPEED_BLOCKS);
 	}
 	
 	public static Block registerMakeable2X2Soul(String name, Block result, String group, Block... sources) {
 		final Block block = registerMakeable2X2(name, result, group, sources);
-		TagAPI.addTags(block, BlockTags.SOUL_FIRE_BASE_BLOCKS, BlockTags.SOUL_SPEED_BLOCKS);
+		TagAPI.addBlockTags(block, TagAPI.NAMED_SOUL_FIRE_BASE_BLOCKS, TagAPI.NAMED_SOUL_SPEED_BLOCKS);
 		return block;
 	}
 	
@@ -626,7 +623,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		Block wall = new BNWall(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, wall);
-			TagAPI.addTags(wall, BlockTags.WALLS);
+			TagAPI.addBlockTags(wall, TagAPI.NAMED_WALLS);
 			RecipesHelper.makeWallRecipe(source, wall);
 		}
 		return wall;
@@ -636,8 +633,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		Block block = new BaseCraftingTableBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
-			TagAPI.addTags(block, TagAPI.BLOCK_WORKBENCHES);
-			TagAPI.addTags(block, TagAPI.ITEM_WORKBENCHES);
+			TagAPI.addBlockTags(block, TagAPI.BLOCK_WORKBENCHES.getName());
+			TagAPI.addItemTags(block, TagAPI.ITEM_WORKBENCHES.getName());
 			
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
 					  .checkConfig(Configs.RECIPES)
@@ -657,8 +654,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		Block chest = new BaseChestBlock(planks);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, chest);
-			TagAPI.addTags(chest, TagAPI.BLOCK_CHEST);
-			TagAPI.addTags(chest, TagAPI.ITEM_CHEST);
+			TagAPI.addBlockTags(chest, TagAPI.BLOCK_CHEST.getName());
+			TagAPI.addItemTags(chest, TagAPI.ITEM_CHEST.getName());
 			addFuel(planks, chest);
 			//RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), chest)
@@ -700,7 +697,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		Block block = new BaseLadderBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
-			TagAPI.addTags(block, BlockTags.CLIMBABLE);
+			TagAPI.addBlockTags(block, TagAPI.NAMED_CLIMBABLE);
 			
 			addFuel(source, block);
 			//RecipesHelper.makeLadderRecipe(source, block);
