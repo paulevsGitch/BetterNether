@@ -11,6 +11,8 @@ import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.NetherBiome;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherSwamplandTerraces extends NetherSwampland {
 	public static class Config extends NetherSwampland.Config {
@@ -19,12 +21,12 @@ public class NetherSwamplandTerraces extends NetherSwampland {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherSwamplandTerraces::new;
 		}
 	}
-	public NetherSwamplandTerraces(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherSwamplandTerraces(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 
 	@Override

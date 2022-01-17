@@ -24,7 +24,9 @@ import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.world.structures.plants.StructureLumabusVine;
 import paulevs.betternether.world.structures.plants.StructureReeds;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherBoneReef extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -43,7 +45,7 @@ public class NetherBoneReef extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherBoneReef::new;
 		}
 		
@@ -58,8 +60,8 @@ public class NetherBoneReef extends NetherBiome {
 		return false;
 	}
 	
-	public NetherBoneReef(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherBoneReef(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

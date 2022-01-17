@@ -35,7 +35,9 @@ import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallMoss;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherJungle extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -55,7 +57,7 @@ public class NetherJungle extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherJungle::new;
 		}
 		
@@ -70,8 +72,8 @@ public class NetherJungle extends NetherBiome {
 		}
 	}
 	
-	public NetherJungle(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherJungle(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

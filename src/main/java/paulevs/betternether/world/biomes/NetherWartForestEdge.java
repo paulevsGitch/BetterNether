@@ -21,6 +21,8 @@ import paulevs.betternether.world.structures.plants.StructureBlackBush;
 import paulevs.betternether.world.structures.plants.StructureNetherWart;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherWartForestEdge extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -40,13 +42,13 @@ public class NetherWartForestEdge extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherWartForestEdge::new;
 		}
 	}
 	
-	public NetherWartForestEdge(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherWartForestEdge(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

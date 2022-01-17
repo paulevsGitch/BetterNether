@@ -30,8 +30,10 @@ import paulevs.betternether.world.structures.plants.StructureWallMoss;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.SwitchRuleSource;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherGrasslands extends NetherBiome {
 	private static final SurfaceRules.RuleSource SOUL_SOIL = SurfaceRules.state(Blocks.SOUL_SOIL.defaultBlockState());
@@ -70,7 +72,7 @@ public class NetherGrasslands extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherGrasslands::new;
 		}
 		
@@ -85,8 +87,8 @@ public class NetherGrasslands extends NetherBiome {
 		}
 	}
 	
-	public NetherGrasslands(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherGrasslands(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

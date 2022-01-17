@@ -23,7 +23,9 @@ import paulevs.betternether.world.structures.plants.StructureTwistedVines;
 import paulevs.betternether.world.structures.plants.StructureWarpedFungus;
 import paulevs.betternether.world.structures.plants.StructureWarpedRoots;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class OldWarpedWoods extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -46,7 +48,7 @@ public class OldWarpedWoods extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return OldWarpedWoods::new;
 		}
 		
@@ -61,8 +63,8 @@ public class OldWarpedWoods extends NetherBiome {
 		}
 	}
 	
-	public OldWarpedWoods(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public OldWarpedWoods(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

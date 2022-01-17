@@ -24,6 +24,7 @@ import paulevs.betternether.world.structures.decorations.StructureStalactiteCeil
 import paulevs.betternether.world.structures.decorations.StructureStalactiteFloor;
 import paulevs.betternether.world.structures.plants.StructureWartCap;
 import ru.bclib.world.biomes.BCLBiome;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public abstract class NetherBiome extends BCLBiome{
 	private static final String[] DEF_STRUCTURES = new String[] {
@@ -89,8 +90,8 @@ public abstract class NetherBiome extends BCLBiome{
 	
 	private final ArrayList<String> structures;
 	
-	protected NetherBiome(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	protected NetherBiome(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 		structures = new ArrayList<>(DEF_STRUCTURES.length);
 		
 		addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.8F, true);
@@ -108,7 +109,6 @@ public abstract class NetherBiome extends BCLBiome{
 		}
 		
 		onInit();
-		setupFromConfig();
 		
 		final String structureGroup = configGroup() + ".structures" ;
 		List<String> structAll = Configs.BIOMES.getStringArray(structureGroup, "schematics", structures);

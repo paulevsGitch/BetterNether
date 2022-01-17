@@ -28,6 +28,8 @@ import paulevs.betternether.world.structures.plants.StructureSoulLily;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import paulevs.betternether.world.structures.plants.StructureWartTree;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherWartForest extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -44,24 +46,25 @@ public class NetherWartForest extends NetherBiome {
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
 				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
-				   .feature(NetherFeatures.NETHER_RUBY_ORE);
+				   .feature(NetherFeatures.NETHER_RUBY_ORE)
+				   .edgeSize(9)
+				;
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherWartForest::new;
 		}
 	}
 	
 
-	public NetherWartForest(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherWartForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override
 	protected void onInit(){
 		this.setNoiseDensity(0.45F);
-		this.setEdgeSize(9);
 		
 		addStructure("wart_deadwood", new StructureWartDeadwood(), StructureType.FLOOR, 0.02F, false);
 		addStructure("wart_tree", new StructureWartTree(), StructureType.FLOOR, 0.1F, false);

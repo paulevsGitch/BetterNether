@@ -25,6 +25,8 @@ import paulevs.betternether.world.structures.plants.StructureReeds;
 import paulevs.betternether.world.structures.plants.StructureSmoker;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherPoorGrasslands extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -39,23 +41,22 @@ public class NetherPoorGrasslands extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE())
+				   .genChance(0.3F);
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherPoorGrasslands::new;
 		}
 	}
 	
-	public NetherPoorGrasslands(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherPoorGrasslands(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override
 	protected void onInit(){
-		setGenChance(0.3F);
-		
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.05F, false);
 		addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.005F, true);
 		addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.05F, true);

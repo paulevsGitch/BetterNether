@@ -30,7 +30,9 @@ import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import paulevs.betternether.world.surface.CrimsonWoodNoiseCondition;
 import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class CrimsonGlowingWoods extends NetherBiome {
 	public static final SurfaceRules.RuleSource NETHER_WART_BLOCK = SurfaceRules.state(Blocks.NETHER_WART_BLOCK.defaultBlockState());
@@ -53,11 +55,12 @@ public class CrimsonGlowingWoods extends NetherBiome {
 				   .spawn(EntityType.HOGLIN, 9, 1, 2)
 				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
 				   .feature(NetherFeatures.NETHER_RUBY_ORE)
+				   .genChance(0.3f)
 			;
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return CrimsonGlowingWoods::new;
 		}
 		
@@ -80,13 +83,12 @@ public class CrimsonGlowingWoods extends NetherBiome {
 	
 	//private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
 	
-	public CrimsonGlowingWoods(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public CrimsonGlowingWoods(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override
 	protected void onInit(){
-		setGenChance(0.3F);
 		addStructure("crimson_glowing_tree", new StructureCrimsonGlowingTree(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.05F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.02F, true);

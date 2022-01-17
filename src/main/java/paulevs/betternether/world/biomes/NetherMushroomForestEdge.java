@@ -22,9 +22,11 @@ import paulevs.betternether.world.structures.plants.StructureOrangeMushroom;
 import paulevs.betternether.world.structures.plants.StructureRedMold;
 import paulevs.betternether.world.structures.plants.StructureVanillaMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.RandomIntProvider;
 import ru.bclib.api.surface.rules.SwitchRuleSource;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherMushroomForestEdge extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -43,7 +45,7 @@ public class NetherMushroomForestEdge extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherMushroomForestEdge::new;
 		}
 		
@@ -66,8 +68,8 @@ public class NetherMushroomForestEdge extends NetherBiome {
 		}
 	}
 	
-	public NetherMushroomForestEdge(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherMushroomForestEdge(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

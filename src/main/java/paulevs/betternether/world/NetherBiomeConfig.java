@@ -7,6 +7,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import paulevs.betternether.BetterNether;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 
 import java.util.function.BiFunction;
@@ -44,13 +45,9 @@ public abstract class NetherBiomeConfig {
 		return true;
 	}
 	
-	public boolean vertical() {
-		return false;
-	}
-	
 	protected abstract void addCustomBuildData(BCLBiomeBuilder builder);
 	
-	public abstract BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier();
+	public abstract BiomeSupplier<NetherBiome> getSupplier();
 	
 	public SurfaceRuleBuilder surface(){
 		return SurfaceRuleBuilder

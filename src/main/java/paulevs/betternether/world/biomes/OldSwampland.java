@@ -34,6 +34,8 @@ import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWillow;
 import paulevs.betternether.world.structures.plants.StructureWillowBush;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class OldSwampland extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -55,7 +57,7 @@ public class OldSwampland extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return OldSwampland::new;
 		}
 		
@@ -67,8 +69,8 @@ public class OldSwampland extends NetherBiome {
 	
 	protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);
 	
-	public OldSwampland(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public OldSwampland(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

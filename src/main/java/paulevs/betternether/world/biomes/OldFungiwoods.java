@@ -27,7 +27,9 @@ import paulevs.betternether.world.structures.plants.StructureVanillaMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class OldFungiwoods extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -45,11 +47,13 @@ public class OldFungiwoods extends NetherBiome {
 				   .particles(ParticleTypes.MYCELIUM, 0.1F)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE())
-				   .feature(NetherFeatures.NETHER_RUBY_ORE);
+				   .feature(NetherFeatures.NETHER_RUBY_ORE)
+				   .genChance(0.3f)
+			;
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return OldFungiwoods::new;
 		}
 		
@@ -59,14 +63,13 @@ public class OldFungiwoods extends NetherBiome {
 		}
 	}
 	
-	public OldFungiwoods(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public OldFungiwoods(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override
 	protected void onInit(){
 		this.setNoiseDensity(0.5F);
-		setGenChance(0.3F);
 		
 		addStructure("old_red_mushrooms", new StructureOldRedMushrooms(), StructureType.FLOOR, 0.1F, false);
 		addStructure("old_brown_mushrooms", new StructureOldBrownMushrooms(), StructureType.FLOOR, 0.1F, false);

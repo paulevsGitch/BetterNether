@@ -28,8 +28,10 @@ import paulevs.betternether.world.structures.plants.StructureSoulGrass;
 import paulevs.betternether.world.structures.plants.StructureSoulVein;
 import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.SwitchRuleSource;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherSoulPlain extends NetherBiome {
 	private static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
@@ -55,7 +57,7 @@ public class NetherSoulPlain extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherSoulPlain::new;
 		}
 		
@@ -81,8 +83,8 @@ public class NetherSoulPlain extends NetherBiome {
 	
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);	
 	
-	public NetherSoulPlain(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherSoulPlain(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

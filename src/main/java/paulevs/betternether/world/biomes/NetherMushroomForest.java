@@ -29,7 +29,9 @@ import paulevs.betternether.world.structures.plants.StructureVanillaMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherMushroomForest extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -46,11 +48,13 @@ public class NetherMushroomForest extends NetherBiome {
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .particles(ParticleTypes.MYCELIUM, 0.1F)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
-				   .feature(NetherFeatures.NETHER_RUBY_ORE);
+				   .feature(NetherFeatures.NETHER_RUBY_ORE)
+				   .edgeSize(6)
+			;
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherMushroomForest::new;
 		}
 		
@@ -60,14 +64,13 @@ public class NetherMushroomForest extends NetherBiome {
 		}
 	}
 	
-	public NetherMushroomForest(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherMushroomForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override
 	protected void onInit(){
 		this.setNoiseDensity(0.5F);
-		this.setEdgeSize(6);
 		
 		addStructure("large_red_mushroom", new StructureMedRedMushroom(), StructureType.FLOOR, 0.12F, true);
 		addStructure("large_brown_mushroom", new StructureMedBrownMushroom(), StructureType.FLOOR, 0.12F, true);

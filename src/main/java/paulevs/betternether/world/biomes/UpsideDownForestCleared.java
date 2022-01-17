@@ -27,9 +27,11 @@ import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWhisperingGourd;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
 import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class UpsideDownForestCleared extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -50,7 +52,7 @@ public class UpsideDownForestCleared extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return UpsideDownForestCleared::new;
 		}
 		
@@ -85,8 +87,8 @@ public class UpsideDownForestCleared extends NetherBiome {
 		return false;
 	}
 	
-	public UpsideDownForestCleared(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public UpsideDownForestCleared(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

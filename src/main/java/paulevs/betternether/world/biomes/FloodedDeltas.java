@@ -19,6 +19,8 @@ import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class FloodedDeltas extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -38,7 +40,7 @@ public class FloodedDeltas extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return FloodedDeltas::new;
 		}
 	}
@@ -48,8 +50,8 @@ public class FloodedDeltas extends NetherBiome {
 		return false;
 	}
 	
-	public FloodedDeltas(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public FloodedDeltas(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

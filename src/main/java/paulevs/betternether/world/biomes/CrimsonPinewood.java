@@ -29,7 +29,9 @@ import paulevs.betternether.world.structures.plants.StructureWartBush;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import paulevs.betternether.world.surface.CrimsonWoodNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class CrimsonPinewood extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -48,11 +50,12 @@ public class CrimsonPinewood extends NetherBiome {
 				   .spawn(EntityType.HOGLIN, 9, 2, 5)
 				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
 				   .feature(NetherFeatures.NETHER_RUBY_ORE)
+				.genChance(0.3f)
 				   ;
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return CrimsonPinewood::new;
 		}
 		
@@ -70,14 +73,12 @@ public class CrimsonPinewood extends NetherBiome {
 	
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
 	
-	public CrimsonPinewood(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public CrimsonPinewood(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override
 	protected void onInit(){
-		setGenChance(0.3F);
-		
 		addStructure("crimson_pinewood", new StructureCrimsonPinewood(), StructureType.FLOOR, 0.2F, false);
 		addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.1F, false);
 		addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.05F, true);

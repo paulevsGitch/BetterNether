@@ -23,7 +23,9 @@ import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
 import paulevs.betternether.world.structures.plants.StructureReeds;
 import paulevs.betternether.world.structures.plants.StructureSepiaBoneGrass;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherSulfuricBoneReef extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -38,11 +40,12 @@ public class NetherSulfuricBoneReef extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .particles(ParticleTypes.ASH, 0.01F)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
+				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE())
+				   .genChance(0.3f);
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherSulfuricBoneReef::new;
 		}
 		
@@ -57,13 +60,12 @@ public class NetherSulfuricBoneReef extends NetherBiome {
 		return false;
 	}
 	
-	public NetherSulfuricBoneReef(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherSulfuricBoneReef(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override
 	protected void onInit(){
-		setGenChance(0.3F);
 		addStructure("bone_stalactite", new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK), StructureType.FLOOR, 0.05F, true);
 
 		addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);

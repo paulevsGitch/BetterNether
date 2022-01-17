@@ -37,10 +37,12 @@ import paulevs.betternether.world.structures.plants.StructureWhisperingGourd;
 import paulevs.betternether.world.surface.CrimsonWoodNoiseCondition;
 import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
 import ru.bclib.api.surface.rules.SwitchRuleSource;
 import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class UpsideDownForest extends NetherBiome {
 	static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
@@ -59,18 +61,17 @@ public class UpsideDownForest extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE())
-				   .feature(NetherFeatures.NETHER_RUBY_ORE);
+				   .feature(NetherFeatures.NETHER_RUBY_ORE)
+			       .vertical()
+				   .genChance(0.25f);
+			;
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return UpsideDownForest::new;
 		}
-		
-		@Override
-		public boolean vertical() {
-			return true;
-		}
+
 		
 		@Override
 		public SurfaceRuleBuilder surface() {
@@ -101,8 +102,8 @@ public class UpsideDownForest extends NetherBiome {
 		return false;
 	}
 	
-	public UpsideDownForest(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public UpsideDownForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override

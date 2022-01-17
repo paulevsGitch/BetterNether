@@ -21,6 +21,8 @@ import paulevs.betternether.world.structures.decorations.StructureGeyser;
 import paulevs.betternether.world.structures.plants.StructureGoldenVine;
 import paulevs.betternether.world.structures.plants.StructureMagmaFlower;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
+import ru.bclib.world.biomes.BCLBiomeSettings;
 
 public class NetherMagmaLand extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -38,15 +40,15 @@ public class NetherMagmaLand extends NetherBiome {
 		}
 		
 		@Override
-		public BiFunction<ResourceLocation, Biome, NetherBiome> getSupplier() {
+		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherMagmaLand::new;
 		}
 	}
 
 	private static final boolean[] MASK;
 	
-	public NetherMagmaLand(ResourceLocation biomeID, Biome biome) {
-		super(biomeID, biome);
+	public NetherMagmaLand(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
+		super(biomeID, biome, settings);
 	}
 	
 	@Override
