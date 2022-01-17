@@ -122,6 +122,7 @@ import paulevs.betternether.world.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.world.structures.plants.StructureLumabusVine;
 import paulevs.betternether.tab.CreativeTabs;
 import ru.bclib.api.TagAPI;
+import ru.bclib.api.TagAPI.TagLocation;
 import ru.bclib.blocks.BaseBarrelBlock;
 import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
@@ -489,7 +490,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return BlockRegistry.getModBlockItems(BetterNether.MOD_ID);
 	}
 	
-	public static Block registerBlock(String name, Block block,ResourceLocation... tags) {
+	public static Block registerBlock(String name, Block block, TagLocation<Block>... tags) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			if (tags.length>0){
@@ -499,7 +500,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return block;
 	}
 	
-	private static Block registerBlockNI(String name, Block block, ResourceLocation... tags) {
+	private static Block registerBlockNI(String name, Block block, TagLocation<Block>... tags) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			return registerBlock(name, block, false, tags);
 		}
@@ -510,7 +511,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return registerBlock(name, block, true);
 	}
 	
-	private static Block registerBlock(String name, Block block, boolean hasItem, ResourceLocation... tags) {
+	private static Block registerBlock(String name, Block block, boolean hasItem, TagLocation<Block>... tags) {
 		final BlockRegistry blockRegistry = getBlockRegistry();
 		final ResourceLocation location = new ResourceLocation(BetterNether.MOD_ID, name);
 		if (hasItem) {
@@ -533,7 +534,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		}
 	}
 	
-	public static Block registerStairs(String name, Block source, ResourceLocation... tags) {
+	public static Block registerStairs(String name, Block source, TagLocation<Block>... tags) {
 		Block stairs = new BaseStairsBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, stairs);
@@ -546,7 +547,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return stairs;
 	}
 	
-	public static Block registerSlab(String name, Block source, ResourceLocation... tags) {
+	public static Block registerSlab(String name, Block source, TagLocation<Block>... tags) {
 		Block slab = new BaseSlabBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, slab);

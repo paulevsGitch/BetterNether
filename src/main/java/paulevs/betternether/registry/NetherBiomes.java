@@ -123,14 +123,13 @@ public class NetherBiomes {
 		final NetherBiome edge = NetherBiomeBuilder.create(edgeConfig);
 		final NetherBiome biome = NetherBiomeBuilder.create(config, edge);
 		
-		
 		if (biome.getGenChance() > 0.0F)
 		{
 			ALL_BN_BIOMES.add(biome);
 			BiomeAPI.registerNetherBiome(biome);
 		}
 		
-		if (biome.getEdge()!=null && edge.getGenChance()> 0.0f){
+		if (biome.getEdge()!=null && edge.getGenChance()> 0.0f && biome.getEdgeSize()>0){
 			ALL_BN_BIOMES.add(edge);
 			BiomeAPI.registerNetherBiome(edge);
 		}

@@ -25,6 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DispenserBlock;
 import org.jetbrains.annotations.NotNull;
 import paulevs.betternether.BetterNether;
@@ -44,6 +45,7 @@ import paulevs.betternether.items.ItemBowlFood;
 import paulevs.betternether.items.materials.BNItemMaterials;
 import paulevs.betternether.tab.CreativeTabs;
 import ru.bclib.api.TagAPI;
+import ru.bclib.api.TagAPI.TagLocation;
 import ru.bclib.items.tool.BaseShearsItem;
 import ru.bclib.registry.ItemRegistry;
 
@@ -131,7 +133,7 @@ public class NetherItems extends ItemRegistry {
 		return item;
 	}
 
-	public static Item registerTool(String name, Item item, ResourceLocation... tags) {
+	public static Item registerTool(String name, Item item, TagLocation<Item>... tags) {
 		if (item != Items.AIR) {
 			getItemRegistry().registerTool(BetterNether.makeID(name), item);
 			if (tags.length>0)
@@ -144,7 +146,7 @@ public class NetherItems extends ItemRegistry {
 		return item;
 	}
 	
-	public static Item registerItem(String name, Item item, ResourceLocation... tags) {
+	public static Item registerItem(String name, Item item, TagLocation<Item>... tags) {
 		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
 			getItemRegistry().register(BetterNether.makeID(name), item);
 			//item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
