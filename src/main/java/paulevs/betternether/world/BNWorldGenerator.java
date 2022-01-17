@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 public class BNWorldGenerator {
+	private static final float ditherScale = Configs.GENERATOR.getFloat("generator.world", "dither_scale", 4);
 	private static float structureDensity;
 	private static float lavaStructureDensity;
 	private static float globalDensity;
@@ -261,8 +262,10 @@ public class BNWorldGenerator {
 	}
 	
 	private NetherBiome getBiomeLocal(int x, int y, int z, Random random, int layerHeight, WorldGenLevel world, BlockPos pos) {
-		final int px = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
-		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
+//		final int ppx = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
+//		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
+		final int px = (int) Math.round(x + (random.nextFloat() - 0.5f) * 2 * ditherScale) ;
+		final int pz = (int) Math.round(z + (random.nextFloat() - 0.5) * 12 * ditherScale) ;
 		final int py = y/layerHeight;
 
 		return BIOMES[clamp(px, 7)][clamp(pz, 7)][clamp(py, 7)];
