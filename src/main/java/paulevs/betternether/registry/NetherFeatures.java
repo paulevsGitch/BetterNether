@@ -24,6 +24,7 @@ import paulevs.betternether.world.structures.city.CityFeature;
 import ru.bclib.api.LifeCycleAPI;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
+import ru.bclib.api.features.BCLCommonFeatures;
 import ru.bclib.world.features.BCLFeature;
 import ru.bclib.world.features.DefaultFeature;
 
@@ -90,7 +91,7 @@ public class NetherFeatures {
 	public static final boolean HAS_FIXING_PASS = Configs.GENERATOR.getBoolean("generator.world.terrain", "world_fixing_pass", true);
 	
 	private static <T extends DefaultFeature> BCLFeature registerChunkFeature(String name, Decoration step, Supplier<T> feature){
-		return BCLFeature.makeChunkFeature(
+		return BCLCommonFeatures.makeChunkFeature(
 			BetterNether.makeID("feature_" + name),
 			step,
 			feature.get()
@@ -124,7 +125,7 @@ public class NetherFeatures {
 	}
 	
 	private static BCLFeature _registerOre(String name, Block blockOre, Block baseBlock, int veins, int veinSize, float airDiscardChance, PlacementModifier placementModifier, boolean rare) {
-		return BCLFeature.makeOreFeature(
+		return BCLCommonFeatures.makeOreFeature(
 			BetterNether.makeID(name),
 			blockOre,
 			baseBlock,
