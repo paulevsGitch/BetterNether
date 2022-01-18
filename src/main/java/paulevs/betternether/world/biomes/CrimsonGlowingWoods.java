@@ -71,7 +71,7 @@ public class CrimsonGlowingWoods extends NetherBiome {
 				.chancedFloor(
 					Blocks.NETHER_WART_BLOCK.defaultBlockState(),
 					Blocks.CRIMSON_NYLIUM.defaultBlockState(),
-					new CrimsonWoodNoiseCondition()
+					CrimsonWoodNoiseCondition.DEFAULT
 				)
 //						.rule(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, SurfaceRules.sequence(
 //							SurfaceRules.ifTrue(new CrimsonWoodNoiseCondition(), NETHER_WART_BLOCK),

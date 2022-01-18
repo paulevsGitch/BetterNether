@@ -66,7 +66,7 @@ public class CrimsonPinewood extends NetherBiome {
 				.chancedFloor(
 					Blocks.NETHER_WART_BLOCK.defaultBlockState(),
 					Blocks.CRIMSON_NYLIUM.defaultBlockState(),
-					new CrimsonWoodNoiseCondition()
+					CrimsonWoodNoiseCondition.DEFAULT
 				);
 		}
 	}

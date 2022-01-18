@@ -36,6 +36,7 @@ import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWhisperingGourd;
 import paulevs.betternether.world.surface.CrimsonWoodNoiseCondition;
 import paulevs.betternether.world.surface.NetherNoiseCondition;
+import paulevs.betternether.world.surface.UpsideDownForrestCeilCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
@@ -77,7 +78,7 @@ public class UpsideDownForest extends NetherBiome {
 		public SurfaceRuleBuilder surface() {
 			return super.surface().rule(2,
 				SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
-					SurfaceRules.sequence(SurfaceRules.ifTrue(CrimsonWoodNoiseCondition.DEFAULT, CEILEING_MOSS), NETHERRACK)
+					SurfaceRules.sequence(SurfaceRules.ifTrue(UpsideDownForrestCeilCondition.DEFAULT, CEILEING_MOSS), NETHERRACK)
 				)
 			).rule(2,
 			   SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,

@@ -9,7 +9,8 @@ import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 public class NetherNoiseCondition extends VolumeNoiseCondition implements NumericProvider {
 	public static final NetherNoiseCondition DEFAULT = new NetherNoiseCondition();
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);
-	
+	private NetherNoiseCondition(){}
+
 	@Override
 	public boolean test(SurfaceRulesContextAccessor context) {
 		final int x = context.getBlockX();
