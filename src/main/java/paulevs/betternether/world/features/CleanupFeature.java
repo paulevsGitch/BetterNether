@@ -2,6 +2,7 @@ package paulevs.betternether.world.features;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -9,26 +10,34 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBiomes;
+import paulevs.betternether.world.BNWorldGenerator;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import ru.bclib.world.features.DefaultFeature;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class CleanupFeature extends DefaultFeature {
+
+	private final static BlockPos rel(BlockPos pos, int x, int y, int z){
+		return new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+	}
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
 		if (!NetherBiomes.useLegacyGeneration) return false;
-		
+		final StructureGeneratorThreadContext ctx = NetherChunkPopulatorFeature.generatorForThread().context;
 		final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
-		final MutableBlockPos popPos = new MutableBlockPos();
+		final MutableBlockPos popPos = ctx.POS;
 		final BlockPos worldPos = featurePlaceContext.origin();
 		final WorldGenLevel level = featurePlaceContext.level();
 		
 		final int sx = (worldPos.getX() >> 4) << 4;
 		final int sz = (worldPos.getZ() >> 4) << 4;
-		
-		final List<BlockPos> pos = new ArrayList<BlockPos>();
-		
+
+
+		final Set<BlockPos> pos = ctx.BLOCKS;
+		pos.clear();
 		BlockPos up;
 		BlockPos down;
 		BlockPos north;
@@ -54,14 +63,22 @@ public class CleanupFeature extends DefaultFeature {
 							pos.add(new BlockPos(popPos));
 						else if (level.isEmptyBlock(up) && level.isEmptyBlock(down))
 							pos.add(new BlockPos(popPos));
-						else if (level.isEmptyBlock(popPos.north().east().below()) && level.isEmptyBlock(popPos.south().west().above()))
+						else if (level.isEmptyBlock(rel(popPos, 1, -1, -1)) && level.isEmptyBlock(rel(popPos, -1, 1, 1)))
 							pos.add(new BlockPos(popPos));
-						else if (level.isEmptyBlock(popPos.south().east().below()) && level.isEmptyBlock(popPos.north().west().above()))
+						else if (level.isEmptyBlock(rel(popPos, 1, -1, 1)) && level.isEmptyBlock(rel(popPos, -1, 1, -1)))
 							pos.add(new BlockPos(popPos));
-						else if (level.isEmptyBlock(popPos.north().west().below()) && level.isEmptyBlock(popPos.south().east().above()))
+						else if (level.isEmptyBlock(rel(popPos, -1, -1, -1)) && level.isEmptyBlock(rel(popPos, 1, 1, 1)))
 							pos.add(new BlockPos(popPos));
-						else if (level.isEmptyBlock(popPos.south().west().below()) && level.isEmptyBlock(popPos.north().east().above()))
+						else if (level.isEmptyBlock(rel(popPos, -1, -1, 1)) && level.isEmptyBlock(rel(popPos, 1, 1, -1)))
 							pos.add(new BlockPos(popPos));
+//						else if (level.isEmptyBlock(north.east().below()) && level.isEmptyBlock(south.west().above()))
+//							pos.add(new BlockPos(popPos));
+//						else if (level.isEmptyBlock(south.east().below()) && level.isEmptyBlock(north.west().above()))
+//							pos.add(new BlockPos(popPos));
+//						else if (level.isEmptyBlock(north.west().below()) && level.isEmptyBlock(south.east().above()))
+//							pos.add(new BlockPos(popPos));
+//						else if (level.isEmptyBlock(south.west().below()) && level.isEmptyBlock(north.east().above()))
+//							pos.add(new BlockPos(popPos));
 					}
 				}
 			}
@@ -80,6 +97,7 @@ public class CleanupFeature extends DefaultFeature {
 				BlocksHelper.setWithoutUpdate(level, down, state);
 			}
 		}
+		pos.clear();
 		
 		return true;
 	}

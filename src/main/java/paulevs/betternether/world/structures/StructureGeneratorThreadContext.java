@@ -10,6 +10,7 @@ import java.util.Set;
 public class StructureGeneratorThreadContext {
     public final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
     public final BlockPos.MutableBlockPos POS2 = new BlockPos.MutableBlockPos();
+    public final BlockPos.MutableBlockPos POS3 = new BlockPos.MutableBlockPos();
     public final Set<BlockPos> POINTS = new HashSet<BlockPos>();
     public final Set<BlockPos> MIDDLE = new HashSet<BlockPos>();
     public final Set<BlockPos> TOP = new HashSet<BlockPos>();

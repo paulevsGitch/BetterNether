@@ -51,7 +51,8 @@ public class BlockNetherGrass extends BlockBase {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isNetherrack(world.getBlockState(pos.below())) || BlocksHelper.isNylium(world.getBlockState(pos.below()));
+		final BlockState below = world.getBlockState(pos.below());
+		return BlocksHelper.isNetherrack(below) || BlocksHelper.isNylium(below);
 	}
 
 	@Override

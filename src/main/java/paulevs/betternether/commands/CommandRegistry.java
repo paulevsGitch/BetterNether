@@ -70,6 +70,10 @@ public class CommandRegistry {
         dispatcher.register(
             Commands.literal("bn")
                     .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
+                    .then(Commands.literal("request_garbage_collection")
+                            .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
+                            .executes(ctx -> requestGC(ctx))
+                    )
                     .then(Commands.literal("tpnext")
                             .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS) )
                             .executes(ctx -> teleportToNextBiome(ctx))
@@ -101,6 +105,11 @@ public class CommandRegistry {
                                   .executes(ctx -> slice(ctx, false))
                     )
         );
+    }
+
+    private static int requestGC(CommandContext<CommandSourceStack> ctx){
+        System.gc();
+        return Command.SINGLE_SUCCESS;
     }
 
     private static int biomeIndex = 0;
