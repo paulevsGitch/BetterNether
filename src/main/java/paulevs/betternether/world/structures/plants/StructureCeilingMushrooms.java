@@ -12,7 +12,7 @@ public class StructureCeilingMushrooms implements IStructure {
 	@Override
 	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
-		if (pos.getY() < 30 + random.nextInt(0, (int)(10*scale_factor))) return;
+		if (pos.getY() < 30 + random.nextInt((int)(10*scale_factor))) return;
 		pos = pos.above();
 		if (canPlace(world, pos)) BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
 		if (canPlace(world, pos.north())) BlocksHelper.setWithoutUpdate(world, pos.north(), NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
