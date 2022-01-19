@@ -102,7 +102,10 @@ public class BlockMushroomFir extends BlockBaseNotFull {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		MushroomFirShape shape = state.getValue(SHAPE);
+		final var _shape = state.getValues().get(SHAPE);
+		if (_shape==null) return false;
+		final MushroomFirShape shape = SHAPE.getValueClass().cast(_shape);
+
 		if (shape == MushroomFirShape.SIDE_BIG_N || shape == MushroomFirShape.SIDE_SMALL_N)
 			return world.getBlockState(pos.north()).getBlock() == this;
 		else if (shape == MushroomFirShape.SIDE_BIG_S || shape == MushroomFirShape.SIDE_SMALL_S)

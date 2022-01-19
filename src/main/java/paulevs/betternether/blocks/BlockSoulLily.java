@@ -198,7 +198,10 @@ public class BlockSoulLily extends BlockBaseNotFull {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		SoulLilyShape shape = state.getValue(SHAPE);
+		var _shape = state.getValues().get(SHAPE);
+		if (_shape==null) return false;
+		final SoulLilyShape shape = SHAPE.getValueClass().cast(_shape);
+
 		if (shape == SoulLilyShape.BIG_TOP_SIDE_N)
 			return world.getBlockState(pos.north()).getBlock() == this;
 		if (shape == SoulLilyShape.BIG_TOP_SIDE_S)

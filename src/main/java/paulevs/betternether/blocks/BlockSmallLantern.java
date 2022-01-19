@@ -62,7 +62,10 @@ public class BlockSmallLantern extends BlockBaseNotFull {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		Direction direction = (Direction) state.getValue(FACING).getOpposite();
+		var _facing = state.getValues().get(FACING);
+		if (_facing==null) return false;
+		final var shape = FACING.getValueClass().cast(_facing);
+		Direction direction = shape.getOpposite();
 		return Block.canSupportCenter(world, pos.relative(direction), direction.getOpposite());
 	}
 
