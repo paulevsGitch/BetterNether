@@ -263,7 +263,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
 	
 	// Soul Sandstone //
-	public static final Block SOUL_SANDSTONE = registerSoulBlock("soul_sandstone", new BlockSoulSandstone());
+	public static final Block SOUL_SANDSTONE = registerMakeable2X2Soul("soul_sandstone", new BlockSoulSandstone(), "soul_sandstone", Blocks.SOUL_SAND);
 	public static final Block SOUL_SANDSTONE_CUT = registerMakeable2X2Soul("soul_sandstone_cut", new BlockSoulSandstone(), "soul_sandstone", SOUL_SANDSTONE);
 	public static final Block SOUL_SANDSTONE_SMOOTH = registerSoulBlock("soul_sandstone_smooth", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)));
 	public static final Block SOUL_SANDSTONE_CHISELED = registerMakeable2X2Soul("soul_sandstone_chiseled", new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)), "soul_sandstone", SOUL_SANDSTONE_SMOOTH);
