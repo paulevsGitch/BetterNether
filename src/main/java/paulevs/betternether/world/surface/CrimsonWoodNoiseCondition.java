@@ -3,6 +3,7 @@ package paulevs.betternether.world.surface;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
@@ -29,7 +30,7 @@ public class CrimsonWoodNoiseCondition extends SurfaceNoiseCondition {
 	}
 
 	static {
-		Registry.register(Registry.CONDITION , "betternether_crimson_wood_noise", CrimsonWoodNoiseCondition.CODEC);
+		Registry.register(Registry.CONDITION , BetterNether.makeID("crimson_wood_noise"), CrimsonWoodNoiseCondition.CODEC);
 	}
 }
 

@@ -13,6 +13,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.NetherBiome;
@@ -59,7 +60,7 @@ class NetherGrasslandsNumericProvider implements NumericProvider{
 	}
 
 	static {
-		Registry.register(NumericProvider.NUMERIC_PROVIDER , "nether_grasslands", NetherGrasslandsNumericProvider.CODEC);
+		Registry.register(NumericProvider.NUMERIC_PROVIDER , BetterNether.makeID("nether_grasslands"), NetherGrasslandsNumericProvider.CODEC);
 	}
 }
 

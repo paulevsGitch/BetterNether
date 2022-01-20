@@ -3,6 +3,7 @@ package paulevs.betternether.world.surface;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
@@ -28,6 +29,6 @@ public class UpsideDownForrestCeilCondition extends SurfaceNoiseCondition {
     }
 
     static {
-        Registry.register(Registry.CONDITION , "betternether_upside_down_ceil", UpsideDownForrestCeilCondition.CODEC);
+        Registry.register(Registry.CONDITION , BetterNether.makeID("upside_down_ceil"), UpsideDownForrestCeilCondition.CODEC);
     }
 }

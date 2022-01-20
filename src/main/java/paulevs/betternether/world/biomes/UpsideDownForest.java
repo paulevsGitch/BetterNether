@@ -11,6 +11,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherFeatures;
@@ -57,7 +58,7 @@ class UpsideDownFloorCondition extends SurfaceNoiseCondition {
 	}
 
 	static {
-		Registry.register(Registry.CONDITION , "betternether_upside_down_floor", UpsideDownFloorCondition.CODEC);
+		Registry.register(Registry.CONDITION , BetterNether.makeID("upside_down_floor"), UpsideDownFloorCondition.CODEC);
 	}
 }
 

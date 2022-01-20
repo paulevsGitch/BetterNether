@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
@@ -47,7 +48,7 @@ class NetherMushroomForestEdgeNumericProvider implements NumericProvider {
 	}
 
 	static {
-		Registry.register(NumericProvider.NUMERIC_PROVIDER , "nether_mushroom_forrest_edge", NetherMushroomForestEdgeNumericProvider.CODEC);
+		Registry.register(NumericProvider.NUMERIC_PROVIDER , BetterNether.makeID("nether_mushroom_forrest_edge"), NetherMushroomForestEdgeNumericProvider.CODEC);
 	}
 }
 

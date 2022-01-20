@@ -10,6 +10,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
+import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import ru.bclib.api.surface.rules.RandomIntProvider;
@@ -58,7 +59,7 @@ public class NetherNoiseCondition extends VolumeNoiseCondition implements Numeri
 	}
 
 	static {
-		Registry.register(NumericProvider.NUMERIC_PROVIDER , "nether_noise", NetherNoiseCondition.CODEC);
-		Registry.register(Registry.CONDITION, "betternether_noise", NetherNoiseCondition.CODEC);
+		Registry.register(NumericProvider.NUMERIC_PROVIDER , BetterNether.makeID("nether_noise"), NetherNoiseCondition.CODEC);
+		Registry.register(Registry.CONDITION, BetterNether.makeID("noise"), NetherNoiseCondition.CODEC);
 	}
 }
