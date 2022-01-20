@@ -34,7 +34,7 @@ import ru.bclib.world.biomes.BCLBiomeSettings;
 
 class NetherMushroomForestEdgeNumericProvider implements NumericProvider {
 	public static final NetherMushroomForestEdgeNumericProvider DEFAULT = new NetherMushroomForestEdgeNumericProvider();
-	public static final Codec<NetherMushroomForestEdgeNumericProvider> CODEC = Codec.BYTE.fieldOf("obj").xmap((obj)->DEFAULT, obj -> (byte)0).codec();
+	public static final Codec<NetherMushroomForestEdgeNumericProvider> CODEC = Codec.BYTE.fieldOf("nether_mushroom_forrest_edge").xmap((obj)->DEFAULT, obj -> (byte)0).codec();
 
 	@Override
 	public int getNumber(SurfaceRulesContextAccessor ctx) {

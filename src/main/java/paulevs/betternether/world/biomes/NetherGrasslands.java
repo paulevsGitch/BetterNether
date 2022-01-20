@@ -43,7 +43,7 @@ import ru.bclib.world.biomes.BCLBiomeSettings;
 
 class NetherGrasslandsNumericProvider implements NumericProvider{
 	public static final NetherGrasslandsNumericProvider DEFAULT = new NetherGrasslandsNumericProvider();
-	public static final Codec<NetherGrasslandsNumericProvider> CODEC = Codec.BYTE.fieldOf("obj").xmap((obj)->DEFAULT, obj -> (byte)0).codec();
+	public static final Codec<NetherGrasslandsNumericProvider> CODEC = Codec.BYTE.fieldOf("nether_grasslands").xmap((obj)->DEFAULT, obj -> (byte)0).codec();
 
 	@Override
 	public int getNumber(SurfaceRulesContextAccessor ctx) {

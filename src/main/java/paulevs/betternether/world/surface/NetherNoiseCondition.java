@@ -19,7 +19,7 @@ import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 
 public class NetherNoiseCondition extends VolumeNoiseCondition implements NumericProvider {
 	public static final NetherNoiseCondition DEFAULT = new NetherNoiseCondition();
-	public static final Codec<NetherNoiseCondition> CODEC = Codec.BYTE.fieldOf("obj").xmap((obj) -> DEFAULT, obj -> (byte)0).codec();
+	public static final Codec<NetherNoiseCondition> CODEC = Codec.BYTE.fieldOf("nether_noise").xmap((obj) -> DEFAULT, obj -> (byte)0).codec();
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);
 
 	private NetherNoiseCondition(){ }
@@ -59,5 +59,6 @@ public class NetherNoiseCondition extends VolumeNoiseCondition implements Numeri
 
 	static {
 		Registry.register(NumericProvider.NUMERIC_PROVIDER , "nether_noise", NetherNoiseCondition.CODEC);
+		Registry.register(Registry.CONDITION, "betternether_noise", NetherNoiseCondition.CODEC);
 	}
 }
