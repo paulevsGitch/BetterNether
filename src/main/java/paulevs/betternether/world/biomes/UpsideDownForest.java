@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
@@ -37,6 +38,7 @@ import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
 import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+import ru.bclib.world.surface.DoubleBlockSurfaceNoiseCondition;
 
 class UpsideDownFloorCondition extends SurfaceNoiseCondition {
 	public static final UpsideDownFloorCondition DEFAULT = new UpsideDownFloorCondition();
@@ -52,6 +54,10 @@ class UpsideDownFloorCondition extends SurfaceNoiseCondition {
 	@Override
 	public boolean test(SurfaceRulesContextAccessor context) {
 		return MHelper.RANDOM.nextInt(3) == 0 ;
+	}
+
+	static {
+		Registry.register(Registry.CONDITION , "betternether_upside_down_floor", UpsideDownFloorCondition.CODEC);
 	}
 }
 

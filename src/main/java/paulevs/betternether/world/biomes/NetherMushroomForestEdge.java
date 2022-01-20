@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiFunction;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
@@ -26,7 +28,28 @@ import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.RandomIntProvider;
 import ru.bclib.api.surface.rules.SwitchRuleSource;
+import ru.bclib.interfaces.NumericProvider;
+import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+class NetherMushroomForestEdgeNumericProvider implements NumericProvider {
+	public static final NetherMushroomForestEdgeNumericProvider DEFAULT = new NetherMushroomForestEdgeNumericProvider();
+	public static final Codec<NetherMushroomForestEdgeNumericProvider> CODEC = Codec.BYTE.fieldOf("obj").xmap((obj)->DEFAULT, obj -> (byte)0).codec();
+
+	@Override
+	public int getNumber(SurfaceRulesContextAccessor ctx) {
+		return MHelper.RANDOM.nextInt(4) > 0 ? 0 : (MHelper.RANDOM.nextBoolean() ? 1 : 2);
+	}
+
+	@Override
+	public Codec<? extends NumericProvider> pcodec() {
+		return CODEC;
+	}
+
+	static {
+		Registry.register(NumericProvider.NUMERIC_PROVIDER , "nether_mushroom_forrest_edge", NetherMushroomForestEdgeNumericProvider.CODEC);
+	}
+}
 
 public class NetherMushroomForestEdge extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -56,7 +79,7 @@ public class NetherMushroomForestEdge extends NetherBiome {
 							SurfaceRules.ifTrue(
 								SurfaceRules.ON_FLOOR,
 								new SwitchRuleSource(
-									ctx -> MHelper.RANDOM.nextInt(4) > 0 ? 0 : (MHelper.RANDOM.nextBoolean() ? 1 : 2),
+										NetherMushroomForestEdgeNumericProvider.DEFAULT,
 									List.of(
 										SurfaceRules.state(NetherBlocks.NETHER_MYCELIUM.defaultBlockState()),
 										SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState()),

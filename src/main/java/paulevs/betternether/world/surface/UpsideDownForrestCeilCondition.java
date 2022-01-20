@@ -1,6 +1,7 @@
 package paulevs.betternether.world.surface;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
@@ -24,5 +25,9 @@ public class UpsideDownForrestCeilCondition extends SurfaceNoiseCondition {
         final int x = context.getBlockX();
         final int z = context.getBlockZ();
         return TERRAIN.eval(x * 0.1, z * 0.1) > MHelper.randRange(0.0F, 0.2F, MHelper.RANDOM);
+    }
+
+    static {
+        Registry.register(Registry.CONDITION , "betternether_upside_down_ceil", UpsideDownForrestCeilCondition.CODEC);
     }
 }
