@@ -61,12 +61,7 @@ public class UpsideDownForestCleared extends NetherBiome {
 		
 		@Override
 		public SurfaceRuleBuilder surface() {
-			final SurfaceNoiseCondition noise = new SurfaceNoiseCondition(){
-				@Override
-				public boolean test(SurfaceRulesContextAccessor context) {
-					return MHelper.RANDOM.nextInt(3) == 0 ;
-				}
-			};
+			final SurfaceNoiseCondition noise = UpsideDownFloorCondition.DEFAULT;
 			return super.surface().rule(3,
 				SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
 					SurfaceRules.sequence(SurfaceRules.ifTrue(UpsideDownForest.NOISE_CEIL_LAYER, UpsideDownForest.CEILEING_MOSS), NETHERRACK)

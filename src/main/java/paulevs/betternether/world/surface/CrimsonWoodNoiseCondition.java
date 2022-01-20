@@ -1,5 +1,7 @@
 package paulevs.betternether.world.surface;
 
+import com.mojang.serialization.Codec;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
@@ -9,6 +11,14 @@ public class CrimsonWoodNoiseCondition extends SurfaceNoiseCondition {
 	public static final CrimsonWoodNoiseCondition DEFAULT = new CrimsonWoodNoiseCondition();
 	static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
 	private CrimsonWoodNoiseCondition(){}
+
+	public static final Codec<CrimsonWoodNoiseCondition> CODEC = Codec.BYTE.fieldOf("nether_noise").xmap(CrimsonWoodNoiseCondition::create, obj -> (byte)0).codec();
+	private static CrimsonWoodNoiseCondition create(byte dummy){ return DEFAULT; }
+
+	@Override
+	public Codec<? extends SurfaceRules.ConditionSource> codec() {
+		return CrimsonWoodNoiseCondition.CODEC;
+	}
 
 	@Override
 	public boolean test(SurfaceRulesContextAccessor context) {

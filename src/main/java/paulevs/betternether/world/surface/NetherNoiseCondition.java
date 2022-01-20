@@ -1,5 +1,14 @@
 package paulevs.betternether.world.surface;
 
+import com.mojang.datafixers.kinds.Applicative;
+import com.mojang.datafixers.kinds.K1;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.Decoder;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import ru.bclib.api.surface.rules.VolumeNoiseCondition;
@@ -8,8 +17,16 @@ import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 
 public class NetherNoiseCondition extends VolumeNoiseCondition implements NumericProvider {
 	public static final NetherNoiseCondition DEFAULT = new NetherNoiseCondition();
+	public static final Codec<NetherNoiseCondition> CODEC = Codec.BYTE.fieldOf("nether_noise").xmap(NetherNoiseCondition::create, obj -> (byte)0).codec();
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);
-	private NetherNoiseCondition(){}
+
+	private static NetherNoiseCondition create(byte dummy){ return DEFAULT; }
+	private NetherNoiseCondition(){ }
+
+	@Override
+	public Codec<? extends SurfaceRules.ConditionSource> codec() {
+		return NetherNoiseCondition.CODEC;
+	}
 
 	@Override
 	public boolean test(SurfaceRulesContextAccessor context) {
