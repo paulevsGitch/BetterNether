@@ -27,6 +27,10 @@ public class NetherNoiseCondition extends VolumeNoiseCondition implements Numeri
 	public Codec<? extends SurfaceRules.ConditionSource> codec() {
 		return NetherNoiseCondition.CODEC;
 	}
+	@Override
+	public Codec<? extends NumericProvider> pcodec() {
+		return CODEC;
+	}
 
 	@Override
 	public boolean test(SurfaceRulesContextAccessor context) {
