@@ -12,6 +12,7 @@ import paulevs.betternether.blocks.BlockRubeusCone;
 import paulevs.betternether.blocks.BlockRubeusSapling;
 import paulevs.betternether.blocks.RubeusBark;
 import paulevs.betternether.blocks.RubeusLog;
+import ru.bclib.api.TagAPI;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 
 public class RubeusMaterial extends NetherWoodenMaterial {
@@ -29,8 +30,8 @@ public class RubeusMaterial extends NetherWoodenMaterial {
 	@Override
 	protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
 		super.initDefault(blockSettings, itemSettings);
-		final Tag.Named<Block> tagBlockLog = getBlockTag(TAG_LOGS);
-		final Tag.Named<Item> tagItemLog = getItemTag(TAG_LOGS);
+		final TagAPI.TagLocation<Block> tagBlockLog = TagAPI.TagLocation.of(getBlockTag(TAG_LOGS));
+		final TagAPI.TagLocation<Item> tagItemLog = TagAPI.TagLocation.of(getItemTag(TAG_LOGS));
 		
 		addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> {
 			return new BlockRubeusSapling();
@@ -44,16 +45,16 @@ public class RubeusMaterial extends NetherWoodenMaterial {
 			new BlockEntry(BLOCK_LOG, (complexMaterial, settings) -> {
 				return new RubeusLog(woodColor, getStrippedLog());
 			})
-				.setBlockTags(BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, tagBlockLog)
-				.setItemTags(ItemTags.LOGS, ItemTags.LOGS_THAT_BURN, tagItemLog)
+				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, TagAPI.NAMED_BLOCK_LOGS_THAT_BURN, tagBlockLog)
+				.setItemTags(TagAPI.NAMED_ITEM_LOGS, TagAPI.NAMED_ITEM_LOGS_THAT_BURN, tagItemLog)
 		);
 		
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_BARK, (complexMaterial, settings) -> {
 				return new RubeusBark(woodColor, getStrippedBark());
 			})
-				.setBlockTags(BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, tagBlockLog)
-				.setItemTags(ItemTags.LOGS, ItemTags.LOGS_THAT_BURN, tagItemLog)
+				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, TagAPI.NAMED_BLOCK_LOGS_THAT_BURN, tagBlockLog)
+				.setItemTags(TagAPI.NAMED_ITEM_LOGS, TagAPI.NAMED_ITEM_LOGS_THAT_BURN, tagItemLog)
 		);
 	}
 	

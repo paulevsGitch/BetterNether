@@ -27,7 +27,7 @@ public class WartMaterial extends RoofMaterial{
         super.initDefault(blockSettings, itemSettings);
         addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> {
             return new BlockWartSeed();
-        }).setBlockTags(TagAPI.BLOCK_SAPLINGS).setItemTags(TagAPI.ITEM_SAPLINGS));
+        }).setBlockTags(TagAPI.NAMED_BLOCK_SAPLINGS).setItemTags(TagAPI.NAMED_ITEM_SAPLINGS));
 
         addBlockEntry(new BlockEntry(BLOCK_ROOTS, false, (complexMaterial, settings) -> {
             return new BlockWartRoots();

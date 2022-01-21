@@ -9,6 +9,7 @@ import paulevs.betternether.blocks.BlockStalagnate;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStem;
+import ru.bclib.api.TagAPI;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 import ru.bclib.complexmaterials.entry.RecipeEntry;
 import ru.bclib.recipes.GridRecipe;
@@ -33,7 +34,7 @@ public class StalagnateMaterial extends RoofMaterial{
 		super.initDefault(blockSettings, itemSettings);
 		
 		addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) ->  new BlockStem(woodColor)));
-		addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> new BlockStalagnate()).setBlockTags(BlockTags.CLIMBABLE));
+		addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> new BlockStalagnate()).setBlockTags(TagAPI.NAMED_BLOCK_CLIMBABLE));
 		addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> new BlockStalagnateSeed()));
 		addBlockEntry(new BlockEntry(BLOCK_BOWL, false, (complexMaterial, settings) -> new BlockStalagnateBowl(getBlock(BLOCK_OPTIONAL_TRUNK))));
 	}

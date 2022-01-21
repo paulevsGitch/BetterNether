@@ -63,7 +63,7 @@ public class NetherItems extends ItemRegistry {
 	public static final Item HOOK_MUSHROOM = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
 	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
-	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()), TagAPI.ITEM_IRON_INGOTS.getName());
+	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()), TagAPI.NAMED_COMMON_ITEM_IRON_INGOTS);
 
 	public static final Item CINCINNASITE_PICKAXE = registerTool("cincinnasite_pickaxe", new NetherPickaxe(BNItemMaterials.CINCINNASITE_TOOLS));
 	public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerTool("cincinnasite_pickaxe_diamond", new NetherPickaxe(BNItemMaterials.CINCINNASITE_DIAMOND_TOOLS));

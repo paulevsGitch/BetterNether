@@ -71,29 +71,29 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 
 	protected void _initBase(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
 		super.initBase(blockSettings, itemSettings);
-		final Tag.Named<Block> tagBlockLog = getBlockTag(TAG_LOGS);
-		final Tag.Named<Item> tagItemLog = getItemTag(TAG_LOGS);
+		final TagAPI.TagLocation<Block> tagBlockLog = TagAPI.TagLocation.of(getBlockTag(TAG_LOGS));
+		final TagAPI.TagLocation<Item>  tagItemLog = TagAPI.TagLocation.of(getItemTag(TAG_LOGS));
 		
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_STRIPPED_LOG, (complexMaterial, settings) -> new BaseRotatedPillarBlock(settings))
-				.setBlockTags(BlockTags.LOGS, tagBlockLog)
-				.setItemTags(ItemTags.LOGS, tagItemLog)
+				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, tagBlockLog)
+				.setItemTags(TagAPI.NAMED_ITEM_LOGS, tagItemLog)
 		);
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_STRIPPED_BARK, (complexMaterial, settings) -> new BaseBarkBlock(settings))
-				.setBlockTags(BlockTags.LOGS, tagBlockLog)
-				.setItemTags(ItemTags.LOGS, tagItemLog)
+				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, tagBlockLog)
+				.setItemTags(TagAPI.NAMED_ITEM_LOGS, tagItemLog)
 		);
 		
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_LOG, (complexMaterial, settings) -> new BaseStripableLogBlock(woodColor, getBlock(BLOCK_STRIPPED_LOG)))
-				.setBlockTags(BlockTags.LOGS, tagBlockLog)
-				.setItemTags(ItemTags.LOGS, tagItemLog)
+				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, tagBlockLog)
+				.setItemTags(TagAPI.NAMED_ITEM_LOGS, tagItemLog)
 		);
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_BARK, (complexMaterial, settings) -> new StripableBarkBlock(woodColor, getBlock(BLOCK_STRIPPED_BARK)))
-				.setBlockTags(BlockTags.LOGS, tagBlockLog)
-				.setItemTags(ItemTags.LOGS, tagItemLog)
+				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, tagBlockLog)
+				.setItemTags(TagAPI.NAMED_ITEM_LOGS, tagItemLog)
 		);
 	}
 	
@@ -104,8 +104,8 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 
 		addBlockEntry(new BlockEntry(BLOCK_CRAFTING_TABLE, (complexMaterial, settings) -> {
 			return new BaseCraftingTableBlock(getBlock(BLOCK_PLANKS));
-		}).setBlockTags(TagAPI.BLOCK_WORKBENCHES)
-		  .setItemTags(TagAPI.ITEM_WORKBENCHES));
+		}).setBlockTags(TagAPI.NAMED_COMMON_BLOCK_WORKBENCHES)
+		  .setItemTags(TagAPI.NAMED_COMMON_ITEM_WORKBENCHES));
 		
 		addBlockEntry(new BlockEntry(BLOCK_TABURET, (complexMaterial, settings) -> {
 			return new BNTaburet(getBlock(BLOCK_SLAB));

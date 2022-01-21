@@ -46,10 +46,8 @@ public class BlockTerrain extends BlockBase implements TagProvider {
 	}
 
 	@Override
-	public void addTags(List<Tag.Named<Block>> blockTags, List<Tag.Named<Item>> itemTags) {
-		blockTags.add(TagAPI.BLOCK_NETHERRACK);
-		blockTags.add(TagAPI.BLOCK_NETHER_GROUND);
-		blockTags.add(TagAPI.BLOCK_GEN_TERRAIN);
-		//TagAPI.addNetherGround(block);
+	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
+		blockTags.add(TagAPI.NAMED_COMMON_BLOCK_NETHERRACK);
+		blockTags.add(TagAPI.NAMED_COMMON_BLOCK_NETHER_STONES);
 	}
 }

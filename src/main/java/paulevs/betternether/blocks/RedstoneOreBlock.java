@@ -58,7 +58,7 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
 	}
 
 	@Override
-	public void addTags(List<Tag.Named<Block>> blockTags, List<Tag.Named<Item>> itemTags) {
-		blockTags.add(TagAPI.BLOCK_NETHERRACK);
+	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
+		blockTags.add(TagAPI.NAMED_COMMON_BLOCK_NETHERRACK);
 	}
 }

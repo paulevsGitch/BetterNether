@@ -16,8 +16,8 @@ public class NetherPickaxe extends BasePickaxeItem {
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
-		if ((state.is(TagAPI.BLOCK_NETHER_STONES)
-			|| state.is(TagAPI.BLOCK_NETHER_PORTAL_FRAME)
+		if ((state.is(TagAPI.COMMON_BLOCK_NETHER_STONES)
+			|| state.is(TagAPI.COMMON_BLOCK_NETHER_PORTAL_FRAME)
 			|| state.is(Blocks.OBSIDIAN)
 			|| state.is(Blocks.CRYING_OBSIDIAN)
 			|| state.is(NetherBlocks.BLUE_CRYING_OBSIDIAN)

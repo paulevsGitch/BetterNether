@@ -46,7 +46,7 @@ public class BlockVeinedSand extends BlockBase implements TagProvider {
 	}
 	
 	@Override
-	public void addTags(List<Named<Block>> blockTags, List<Named<Item>> itemTags) {
-		blockTags.add(TagAPI.BLOCK_SOUL_GROUND);
+	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
+		blockTags.add(TagAPI.NAMED_COMMON_BLOCK_SOUL_GROUND);
 	}
 }

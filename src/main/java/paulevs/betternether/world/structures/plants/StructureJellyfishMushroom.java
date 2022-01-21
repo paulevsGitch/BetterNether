@@ -20,7 +20,7 @@ public class StructureJellyfishMushroom implements IStructure {
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		
 		Block under;
-		if (BlockTags.NYLIUM.contains(world.getBlockState(pos.below()).getBlock())) {
+		if (TagAPI.NAMED_BLOCK_NYLIUM.contains(world.getBlockState(pos.below()).getBlock())) {
 			for (int i = 0; i < 10; i++) {
 				int x = pos.getX() + (int) (random.nextGaussian() * 2);
 				int z = pos.getZ() + (int) (random.nextGaussian() * 2);
@@ -29,7 +29,7 @@ public class StructureJellyfishMushroom implements IStructure {
 					context.POS.set(x, y - j, z);
 					if (context.POS.getY() > 32) {
 						under = world.getBlockState(context.POS.below()).getBlock();
-						if (BlockTags.NYLIUM.contains(under) && world.isEmptyBlock(context.POS)) {
+						if (TagAPI.NAMED_BLOCK_NYLIUM.contains(under) && world.isEmptyBlock(context.POS)) {
 							grow(world, context.POS, random);
 						}
 					}

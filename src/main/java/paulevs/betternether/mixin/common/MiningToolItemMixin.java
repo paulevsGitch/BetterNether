@@ -27,7 +27,7 @@ public abstract class MiningToolItemMixin extends TieredItem implements Vanishab
 	@Inject(method = "isCorrectToolForDrops", at = @At(value = "HEAD"), cancellable = true)
 	private void effectiveOn(BlockState state, CallbackInfoReturnable<Boolean> info) {
 		int level = this.getTier().getLevel();
-		if (state.is(TagAPI.BLOCK_NETHER_PORTAL_FRAME)) {
+		if (state.is(TagAPI.COMMON_BLOCK_NETHER_PORTAL_FRAME)) {
 			info.setReturnValue(level >= 3 && state.is(this.blocks));
 			info.cancel();
 		}

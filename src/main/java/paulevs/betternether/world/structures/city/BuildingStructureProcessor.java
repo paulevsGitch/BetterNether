@@ -72,7 +72,7 @@ public class BuildingStructureProcessor extends StructureProcessor {
 			}
 			return setState(palette.getFoundationBlock(state), structureBlockInfo2);
 		}
-		else if (name.contains("plank") || name.contains("reed") || BlockTags.PLANKS.contains(block)) {
+		else if (name.contains("plank") || name.contains("reed") || TagAPI.NAMED_BLOCK_PLANKS.contains(block)) {
 			if (block instanceof StairBlock) {
 				return setState(palette.getPlanksStair(state), structureBlockInfo2);
 			}

@@ -80,11 +80,11 @@ public class BlocksHelper {
 	}
 
 	public static boolean isNetherrack(BlockState state) {
-		return state.is(TagAPI.BLOCK_NETHERRACK);
+		return state.is(TagAPI.COMMON_BLOCK_NETHERRACK);
 	}
 
 	public static boolean isSoulSand(BlockState state) {
-		return state.is(TagAPI.BLOCK_SOUL_GROUND);
+		return state.is(TagAPI.COMMON_BLOCK_SOUL_GROUND);
 	}
 
 	public static boolean isNetherGround(BlockState state) {
@@ -102,7 +102,7 @@ public class BlocksHelper {
 	}
 
 	public static boolean isNetherMycelium(BlockState state) {
-		return state.is(TagAPI.BLOCK_NETHER_MYCELIUM);
+		return state.is(TagAPI.COMMON_BLOCK_NETHER_MYCELIUM);
 	}
 
 	public static void setWithUpdate(LevelAccessor world, BlockPos pos, BlockState state, BoundingBox bounds) {
@@ -186,7 +186,7 @@ public class BlocksHelper {
 	}
 
 	public static boolean isNylium(BlockState state) {
-		return state.is(NetherTags.NYLIUM);
+		return state.is(BlockTags.NYLIUM);
 	}
 	
 	public static boolean createLogIfFree(LevelAccessor world, BlockPos pos, BlockState anchorBlock, Direction[] directions, MutableBlockPos mutableBlockPos) {
