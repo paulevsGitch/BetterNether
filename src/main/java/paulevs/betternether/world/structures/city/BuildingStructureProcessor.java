@@ -28,7 +28,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import paulevs.betternether.blocks.BlockBNPot;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockSmallLantern;
+import paulevs.betternether.blocks.BlockTerrain;
 import paulevs.betternether.world.structures.city.palette.CityPalette;
+import ru.bclib.api.TagAPI;
 
 public class BuildingStructureProcessor extends StructureProcessor {
 	protected final CityPalette palette;
@@ -72,7 +74,7 @@ public class BuildingStructureProcessor extends StructureProcessor {
 			}
 			return setState(palette.getFoundationBlock(state), structureBlockInfo2);
 		}
-		else if (name.contains("plank") || name.contains("reed") || TagAPI.NAMED_BLOCK_PLANKS.contains(block)) {
+		else if (name.contains("plank") || name.contains("reed") || state.is(BlockTags.PLANKS)) {
 			if (block instanceof StairBlock) {
 				return setState(palette.getPlanksStair(state), structureBlockInfo2);
 			}
