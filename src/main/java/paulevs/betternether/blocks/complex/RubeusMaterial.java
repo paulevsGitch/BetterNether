@@ -2,9 +2,6 @@ package paulevs.betternether.blocks.complex;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
@@ -12,7 +9,9 @@ import paulevs.betternether.blocks.BlockRubeusCone;
 import paulevs.betternether.blocks.BlockRubeusSapling;
 import paulevs.betternether.blocks.RubeusBark;
 import paulevs.betternether.blocks.RubeusLog;
-import ru.bclib.api.TagAPI;
+import ru.bclib.api.tag.NamedBlockTags;
+import ru.bclib.api.tag.NamedItemTags;
+import ru.bclib.api.tag.TagAPI;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 
 public class RubeusMaterial extends NetherWoodenMaterial {
@@ -45,16 +44,16 @@ public class RubeusMaterial extends NetherWoodenMaterial {
 			new BlockEntry(BLOCK_LOG, (complexMaterial, settings) -> {
 				return new RubeusLog(woodColor, getStrippedLog());
 			})
-				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, TagAPI.NAMED_BLOCK_LOGS_THAT_BURN, tagBlockLog)
-				.setItemTags(TagAPI.NAMED_ITEM_LOGS, TagAPI.NAMED_ITEM_LOGS_THAT_BURN, tagItemLog)
+				.setBlockTags(NamedBlockTags.LOGS, NamedBlockTags.LOGS_THAT_BURN, tagBlockLog)
+				.setItemTags(NamedItemTags.LOGS, NamedItemTags.LOGS_THAT_BURN, tagItemLog)
 		);
 		
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_BARK, (complexMaterial, settings) -> {
 				return new RubeusBark(woodColor, getStrippedBark());
 			})
-				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, TagAPI.NAMED_BLOCK_LOGS_THAT_BURN, tagBlockLog)
-				.setItemTags(TagAPI.NAMED_ITEM_LOGS, TagAPI.NAMED_ITEM_LOGS_THAT_BURN, tagItemLog)
+				.setBlockTags(NamedBlockTags.LOGS, NamedBlockTags.LOGS_THAT_BURN, tagBlockLog)
+				.setItemTags(NamedItemTags.LOGS, NamedItemTags.LOGS_THAT_BURN, tagItemLog)
 		);
 	}
 	

@@ -21,8 +21,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.LavaFluid;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.registry.NetherTags;
-import ru.bclib.api.TagAPI;
+import ru.bclib.api.tag.CommonBlockTags;
 
 public class BlocksHelper {
 	public static final int FLAG_UPDATE_BLOCK = 1;
@@ -80,11 +79,11 @@ public class BlocksHelper {
 	}
 
 	public static boolean isNetherrack(BlockState state) {
-		return state.is(TagAPI.COMMON_BLOCK_NETHERRACK);
+		return state.is(CommonBlockTags.NETHERRACK);
 	}
 
 	public static boolean isSoulSand(BlockState state) {
-		return state.is(TagAPI.COMMON_BLOCK_SOUL_GROUND);
+		return state.is(CommonBlockTags.SOUL_GROUND);
 	}
 
 	public static boolean isNetherGround(BlockState state) {
@@ -102,7 +101,7 @@ public class BlocksHelper {
 	}
 
 	public static boolean isNetherMycelium(BlockState state) {
-		return state.is(TagAPI.COMMON_BLOCK_NETHER_MYCELIUM);
+		return state.is(CommonBlockTags.NETHER_MYCELIUM);
 	}
 
 	public static void setWithUpdate(LevelAccessor world, BlockPos pos, BlockState state, BoundingBox bounds) {

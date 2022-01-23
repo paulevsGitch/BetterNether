@@ -28,9 +28,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import paulevs.betternether.blocks.BlockBNPot;
 import paulevs.betternether.blocks.BlockPottedPlant;
 import paulevs.betternether.blocks.BlockSmallLantern;
-import paulevs.betternether.blocks.BlockTerrain;
 import paulevs.betternether.world.structures.city.palette.CityPalette;
-import ru.bclib.api.TagAPI;
 
 public class BuildingStructureProcessor extends StructureProcessor {
 	protected final CityPalette palette;

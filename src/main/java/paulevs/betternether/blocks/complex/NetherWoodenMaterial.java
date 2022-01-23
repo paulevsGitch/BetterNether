@@ -5,9 +5,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +16,11 @@ import paulevs.betternether.blocks.BNNormalChair;
 import paulevs.betternether.blocks.BNTaburet;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
-import ru.bclib.api.TagAPI;
+import ru.bclib.api.tag.NamedBlockTags;
+import ru.bclib.api.tag.NamedCommonBlockTags;
+import ru.bclib.api.tag.NamedCommonItemTags;
+import ru.bclib.api.tag.NamedItemTags;
+import ru.bclib.api.tag.TagAPI;
 import ru.bclib.blocks.BaseBarkBlock;
 import ru.bclib.blocks.BaseCraftingTableBlock;
 import ru.bclib.blocks.BaseRotatedPillarBlock;
@@ -76,24 +77,24 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 		
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_STRIPPED_LOG, (complexMaterial, settings) -> new BaseRotatedPillarBlock(settings))
-				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, tagBlockLog)
-				.setItemTags(TagAPI.NAMED_ITEM_LOGS, tagItemLog)
+				.setBlockTags(NamedBlockTags.LOGS, tagBlockLog)
+				.setItemTags(NamedItemTags.LOGS, tagItemLog)
 		);
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_STRIPPED_BARK, (complexMaterial, settings) -> new BaseBarkBlock(settings))
-				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, tagBlockLog)
-				.setItemTags(TagAPI.NAMED_ITEM_LOGS, tagItemLog)
+				.setBlockTags(NamedBlockTags.LOGS, tagBlockLog)
+				.setItemTags(NamedItemTags.LOGS, tagItemLog)
 		);
 		
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_LOG, (complexMaterial, settings) -> new BaseStripableLogBlock(woodColor, getBlock(BLOCK_STRIPPED_LOG)))
-				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, tagBlockLog)
-				.setItemTags(TagAPI.NAMED_ITEM_LOGS, tagItemLog)
+				.setBlockTags(NamedBlockTags.LOGS, tagBlockLog)
+				.setItemTags(NamedItemTags.LOGS, tagItemLog)
 		);
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_BARK, (complexMaterial, settings) -> new StripableBarkBlock(woodColor, getBlock(BLOCK_STRIPPED_BARK)))
-				.setBlockTags(TagAPI.NAMED_BLOCK_LOGS, tagBlockLog)
-				.setItemTags(TagAPI.NAMED_ITEM_LOGS, tagItemLog)
+				.setBlockTags(NamedBlockTags.LOGS, tagBlockLog)
+				.setItemTags(NamedItemTags.LOGS, tagItemLog)
 		);
 	}
 	
@@ -104,8 +105,8 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 
 		addBlockEntry(new BlockEntry(BLOCK_CRAFTING_TABLE, (complexMaterial, settings) -> {
 			return new BaseCraftingTableBlock(getBlock(BLOCK_PLANKS));
-		}).setBlockTags(TagAPI.NAMED_COMMON_BLOCK_WORKBENCHES)
-		  .setItemTags(TagAPI.NAMED_COMMON_ITEM_WORKBENCHES));
+		}).setBlockTags(NamedCommonBlockTags.WORKBENCHES)
+		  .setItemTags(NamedCommonItemTags.WORKBENCHES));
 		
 		addBlockEntry(new BlockEntry(BLOCK_TABURET, (complexMaterial, settings) -> {
 			return new BNTaburet(getBlock(BLOCK_SLAB));

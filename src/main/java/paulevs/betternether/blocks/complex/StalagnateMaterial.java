@@ -2,14 +2,13 @@ package paulevs.betternether.blocks.complex;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.blocks.BlockStalagnate;
 import paulevs.betternether.blocks.BlockStalagnateBowl;
 import paulevs.betternether.blocks.BlockStalagnateSeed;
 import paulevs.betternether.blocks.BlockStem;
-import ru.bclib.api.TagAPI;
+import ru.bclib.api.tag.NamedBlockTags;
 import ru.bclib.complexmaterials.entry.BlockEntry;
 import ru.bclib.complexmaterials.entry.RecipeEntry;
 import ru.bclib.recipes.GridRecipe;
@@ -34,7 +33,7 @@ public class StalagnateMaterial extends RoofMaterial{
 		super.initDefault(blockSettings, itemSettings);
 		
 		addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) ->  new BlockStem(woodColor)));
-		addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> new BlockStalagnate()).setBlockTags(TagAPI.NAMED_BLOCK_CLIMBABLE));
+		addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> new BlockStalagnate()).setBlockTags(NamedBlockTags.CLIMBABLE));
 		addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> new BlockStalagnateSeed()));
 		addBlockEntry(new BlockEntry(BLOCK_BOWL, false, (complexMaterial, settings) -> new BlockStalagnateBowl(getBlock(BLOCK_OPTIONAL_TRUNK))));
 	}

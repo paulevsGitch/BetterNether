@@ -5,7 +5,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.Tag.Named;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -17,7 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.registry.NetherBlocks;
-import ru.bclib.api.TagAPI;
+import ru.bclib.api.tag.NamedCommonBlockTags;
+import ru.bclib.api.tag.TagAPI;
 import ru.bclib.interfaces.TagProvider;
 
 import java.util.List;
@@ -47,6 +47,6 @@ public class BlockVeinedSand extends BlockBase implements TagProvider {
 	
 	@Override
 	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
-		blockTags.add(TagAPI.NAMED_COMMON_BLOCK_SOUL_GROUND);
+		blockTags.add(NamedCommonBlockTags.SOUL_GROUND);
 	}
 }

@@ -13,7 +13,6 @@ import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
-import ru.bclib.api.TagAPI;
 
 public class StructureJellyfishMushroom implements IStructure {
 	@Override

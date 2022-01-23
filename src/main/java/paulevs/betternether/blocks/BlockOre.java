@@ -1,14 +1,15 @@
 package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.tags.Tag.Named;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.registry.NetherItems;
-import ru.bclib.api.TagAPI;
+import ru.bclib.api.tag.NamedCommonBlockTags;
+import ru.bclib.api.tag.NamedMineableTags;
+import ru.bclib.api.tag.TagAPI;
 import ru.bclib.blocks.BaseOreBlock;
 import ru.bclib.interfaces.TagProvider;
 
@@ -37,7 +38,7 @@ public class BlockOre extends BaseOreBlock implements TagProvider {
 	
 	@Override
 	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
-		blockTags.add(TagAPI.NAMED_MINEABLE_PICKAXE);
-		blockTags.add(TagAPI.NAMED_COMMON_BLOCK_NETHERRACK);
+		blockTags.add(NamedMineableTags.PICKAXE);
+		blockTags.add(NamedCommonBlockTags.NETHERRACK);
 	}
 }

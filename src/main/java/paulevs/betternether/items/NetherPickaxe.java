@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
-import ru.bclib.api.TagAPI;
+import ru.bclib.api.tag.CommonBlockTags;
 import ru.bclib.items.tool.BasePickaxeItem;
 
 public class NetherPickaxe extends BasePickaxeItem {
@@ -16,8 +16,8 @@ public class NetherPickaxe extends BasePickaxeItem {
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
-		if ((state.is(TagAPI.COMMON_BLOCK_NETHER_STONES)
-			|| state.is(TagAPI.COMMON_BLOCK_NETHER_PORTAL_FRAME)
+		if ((state.is(CommonBlockTags.NETHER_STONES)
+			|| state.is(CommonBlockTags.NETHER_PORTAL_FRAME)
 			|| state.is(Blocks.OBSIDIAN)
 			|| state.is(Blocks.CRYING_OBSIDIAN)
 			|| state.is(NetherBlocks.BLUE_CRYING_OBSIDIAN)

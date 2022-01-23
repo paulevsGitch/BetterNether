@@ -22,7 +22,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
-import ru.bclib.api.TagAPI;
 
 public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 6, 12);
