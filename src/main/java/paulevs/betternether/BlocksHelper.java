@@ -92,7 +92,7 @@ public class BlocksHelper {
 	}
 
 	public static boolean isNetherGroundMagma(BlockState state) {
-		return isNetherGround(state) || state.getBlock() == Blocks.MAGMA_BLOCK;
+		return isNetherGround(state) || state.is(Blocks.MAGMA_BLOCK);
 	}
 
 	public static boolean isBone(BlockState state) {
