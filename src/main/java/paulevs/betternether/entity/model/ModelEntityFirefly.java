@@ -44,7 +44,7 @@ public class ModelEntityFirefly extends AgeableListModel<EntityFirefly> {
 
 		modelPartData.addOrReplaceChild(GLOW, CubeListBuilder.create()
 					.texOffs(0, 10)
-					.addBox(0F, 0F, 0F, 5F, 5F, 5F), PartPose.offset(-2.5F, 18F, -2.5F));
+					.addBox(0F, 0F, 0F, 5.2F, 5.2F, 5.2F), PartPose.offset(-2.6F, 18.1F, -2.6F));
 		/*glow = new ModelPart(this, 0, 10);
 		glow.addCuboid(0F, 0F, 0F, 6F, 6F, 6F);
 		glow.setPivot(-0.5F, -0.5F, -0.5F);

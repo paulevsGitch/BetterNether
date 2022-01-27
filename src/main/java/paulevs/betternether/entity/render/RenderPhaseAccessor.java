@@ -21,7 +21,7 @@ public abstract class RenderPhaseAccessor extends RenderStateShard { //extends S
 	protected static final RenderStateShard.TransparencyStateShard ALPHA_ADD_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("alpha_transparency", () -> {
 		RenderSystem.enableBlend();
 		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-		RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		//RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 	}, () -> {
 		RenderSystem.disableBlend();
 		RenderSystem.defaultBlendFunc();
@@ -32,7 +32,8 @@ public abstract class RenderPhaseAccessor extends RenderStateShard { //extends S
 
 		RenderType.CompositeState multiPhaseParameters = RenderType.CompositeState.builder()
 				//.shader(MY_DEBUG_SHADER)
-				.setShaderState(RENDERTYPE_EYES_SHADER)
+				//.setShaderState(RENDERTYPE_EYES_SHADER)
+				.setShaderState(RenderStateShard.RENDERTYPE_TRANSLUCENT_SHADER)
 				.setTextureState(new RenderStateShard.TextureStateShard(texture, false, false))
 				.setWriteMaskState(COLOR_WRITE)
 				.setCullState(NO_CULL)
