@@ -1,16 +1,28 @@
 package paulevs.betternether.entity;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import paulevs.betternether.blocks.BNChair;
 
-public class EntityChair extends Mob {
+public class EntityChair extends Entity {
 	public EntityChair(EntityType<? extends EntityChair> type, Level world) {
 		super(type, world);
+	}
+
+	@Override
+	protected void defineSynchedData() {
+
 	}
 
 	@Override
@@ -26,18 +38,54 @@ public class EntityChair extends Mob {
 	}
 
 	@Override
-	public void aiStep() {
-		super.aiStep();
-		this.setDeltaMovement(Vec3.ZERO);
+	protected void readAdditionalSaveData(CompoundTag compoundTag) {
+
+	}
+
+	@Override
+	protected void addAdditionalSaveData(CompoundTag compoundTag) {
+
 	}
 	
 	@Override
 	public boolean isAlive() {
 		return !this.isRemoved();
 	}
-	
+
+	@Override
+	public Packet<?> getAddEntityPacket() {
+		return new ClientboundAddEntityPacket(this);
+	}
+
+	@Override
+	protected boolean canAddPassenger(Entity entity) {
+		return this.getPassengers().size() == 0;
+	}
+
+
+	@Override
+	public void push(Entity entity) {
+		//Do nothing. Should not be pushable
+	}
+
+	@Override
+	public InteractionResult interact(Player player, InteractionHand interactionHand) {
+		if (player.isSecondaryUseActive()) {
+			return InteractionResult.PASS;
+		}
+
+		if (!this.level.isClientSide) {
+			return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
+		}
+		return InteractionResult.SUCCESS;
+	}
+
 	public static AttributeSupplier getAttributeContainer() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 0).build();
-		
+		return AttributeSupplier.builder().build();
+	}
+
+	@Override
+	public boolean isPickable() {
+		return !this.isRemoved();
 	}
 }

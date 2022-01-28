@@ -44,7 +44,7 @@ public class EntityRenderRegistry {
 	
 	public static void register() {
 		registerRenderMob(NetherEntities.FIREFLY.type(), RenderFirefly.class);
-		registerRenderMob(NetherEntities.CHAIR, RenderChair.class);
+		registerRenderAny(NetherEntities.CHAIR, RenderChair.class);
 		registerRenderMob(NetherEntities.HYDROGEN_JELLYFISH.type(), RenderHydrogenJellyfish.class);
 		registerRenderMob(NetherEntities.NAGA.type(), RenderNaga.class);
 		registerRenderAny(NetherEntities.NAGA_PROJECTILE, RenderNagaProjectile.class);

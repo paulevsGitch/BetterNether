@@ -42,7 +42,7 @@ import ru.bclib.interfaces.SpawnRule;
 import ru.bclib.util.ColorUtil;
 
 public class NetherEntities {
-	public static final Map<EntityType<? extends LivingEntity>, AttributeSupplier> ATTRIBUTES = Maps.newHashMap();
+	public static final Map<EntityType<? extends Entity>, AttributeSupplier> ATTRIBUTES = Maps.newHashMap();
 	private static final List<BCLEntityWrapper<?>> NETHER_ENTITIES = Lists.newArrayList();
 	
 	public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(MobCategory.MISC, EntityChair::new)
@@ -219,7 +219,7 @@ public class NetherEntities {
 		ATTRIBUTES.put(entity, Mob.createMobAttributes().build());
 	}
 	
-	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity, AttributeSupplier container) {
+	public static void registerEntity(String name, EntityType<? extends Entity> entity, AttributeSupplier container) {
 		if (Configs.MOBS.getBoolean("mobs", name, true)) {
 			Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), entity);
 			ATTRIBUTES.put(entity, container);
