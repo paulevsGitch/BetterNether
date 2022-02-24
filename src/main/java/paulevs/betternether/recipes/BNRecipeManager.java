@@ -18,44 +18,15 @@ import com.google.common.collect.Sets;
 import com.google.gson.JsonSyntaxException;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
+import ru.bclib.recipes.BCLRecipeManager;
 
-public class BNRecipeManager {
-	private static final Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> RECIPES = Maps.newHashMap();
-
+public class BNRecipeManager extends BCLRecipeManager {
 	public static void addRecipe(RecipeType<?> type, Recipe<?> recipe) {
 		if (Configs.RECIPES.getBoolean("recipes", recipe.getId().getPath(), true)) {
-			Map<ResourceLocation, Recipe<?>> list = RECIPES.get(type);
-			if (list == null) {
-				list = Maps.newHashMap();
-				RECIPES.put(type, list);
-			}
-			list.put(recipe.getId(), recipe);
+			BCLRecipeManager.addRecipe(type, recipe);
 		}
 	}
-
-	public static Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> getMap(Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipes) {
-		Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> result = Maps.newHashMap();
-
-		for (RecipeType<?> type : recipes.keySet()) {
-			Map<ResourceLocation, Recipe<?>> typeList = Maps.newHashMap();
-			typeList.putAll(recipes.get(type));
-			result.put(type, typeList);
-		}
-
-		for (RecipeType<?> type : RECIPES.keySet()) {
-			Map<ResourceLocation, Recipe<?>> list = RECIPES.get(type);
-			if (list != null) {
-				Map<ResourceLocation, Recipe<?>> typeList = result.get(type);
-				list.forEach((id, recipe) -> {
-					if (!typeList.containsKey(id))
-						typeList.put(id, recipe);
-				});
-			}
-		}
-
-		return result;
-	}
-
+	
 	public static NonNullList<Ingredient> getIngredients(String[] pattern, Map<String, Ingredient> key, int width, int height) {
 		NonNullList<Ingredient> defaultedList = NonNullList.withSize(width * height, Ingredient.EMPTY);
 		Set<String> set = Sets.newHashSet(key.keySet());
@@ -105,7 +76,7 @@ public class BNRecipeManager {
 		return Ingredient.of(Arrays.stream(stacks));
 	}
 
-	public static ShapelessRecipe makeEmtyRecipe(ResourceLocation id) {
+	public static ShapelessRecipe makeEmptyRecipe(ResourceLocation id) {
 		ShapelessRecipe recipe = new ShapelessRecipe(id, "empty", new ItemStack(Items.AIR), NonNullList.create());
 		return recipe;
 	}

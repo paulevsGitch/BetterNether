@@ -14,7 +14,6 @@
       "LeavesBlockMixin",
       "MapMixin",
       "MapStateMixin",
-      "MinecraftServerMixin",
       "MiningToolItemMixin",
       "MushroomMixin",
       "NetherFortressFeatureMixin",
