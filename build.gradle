@@ -26,7 +26,11 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// https://mvnrepository.com/artifact/javax.annotation/jsr305
-	compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'	
+	compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+
+
+	modCompileOnly "mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}" // compile against the API
+	modRuntime "mcp.mobius.waila:wthit:fabric-${project.wthit_version}" // run against the full jar
 
 	println "Using local BCLib: ${local_bclib}"
     if (local_bclib){
@@ -44,6 +48,7 @@ repositories {
     //maven { url "https://maven.shedaniel.me/" }
 	//maven { url "https://maven.terraformersmc.com/releases/"}
     //maven { url 'https://maven.terraformersmc.com/releases' }
+	maven { url "https://maven.bai.lol" }
     flatDir {
         dirs 'libs'
     }

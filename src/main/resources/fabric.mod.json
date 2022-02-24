@@ -49,6 +49,10 @@
 		"modupdater": {
 			"strategy": "curseforge",
 			"projectID": 311377
-        }
+        },
+		"waila:plugins": {
+			"id": "betternether:global",
+			"initializer": "paulevs.betternether.integrations.wthit.WailaPlugin"
+		}
 	}
 }

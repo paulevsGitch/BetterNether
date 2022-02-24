@@ -42,6 +42,14 @@ public class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBl
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}
+	
+	public int getMaxAge(){
+		return 3;
+	}
+	
+	public IntegerProperty getAgeProperty(){
+		return AGE;
+	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
