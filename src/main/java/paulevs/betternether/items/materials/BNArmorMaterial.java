@@ -1,12 +1,17 @@
 package paulevs.betternether.items.materials;
 
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import paulevs.betternether.registry.NetherItems;
 
-public class BNArmorMaterial implements ArmorMaterial {
+public enum BNArmorMaterial implements ArmorMaterial {
+	CINCINNASITE("cincinnasite", 12, 4, SoundEvents.ARMOR_EQUIP_IRON, NetherItems.CINCINNASITE_INGOT, 1F, new int[] { 3, 5, 7, 3 }),
+	NETHER_RUBY("nether_ruby", 13, 3, SoundEvents.ARMOR_EQUIP_IRON, NetherItems.NETHER_RUBY, 1F, new int[] { 3, 5, 7, 3 });
+	
 	private static final int[] DURABILITY = new int[] { 3, 6, 8, 3 };
 	private final String name;
 	private final int multiplier;
@@ -16,7 +21,7 @@ public class BNArmorMaterial implements ArmorMaterial {
 	private final float toughness;
 	private final int[] protection;
 
-	public BNArmorMaterial(String name, int durabilityMultiplier, int enchantLevel, SoundEvent equipSound, ItemLike repairItem, float toughness, int[] protection) {
+	BNArmorMaterial(String name, int durabilityMultiplier, int enchantLevel, SoundEvent equipSound, ItemLike repairItem, float toughness, int[] protection) {
 		this.name = name;
 		this.multiplier = durabilityMultiplier;
 		this.enchantLevel = enchantLevel;
