@@ -1,12 +1,11 @@
 package paulevs.betternether.world.biomes;
 
 import java.util.Random;
-import java.util.function.BiFunction;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -14,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
@@ -50,8 +50,6 @@ public class OldSwampland extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				   .spawn(EntityType.STRIDER, 40, 2, 4)
-				   .spawn(EntityType.MAGMA_CUBE, 40, 2, 4)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
 		}
@@ -62,8 +60,13 @@ public class OldSwampland extends NetherBiome {
 		}
 		
 		@Override
-		public boolean spawnVanillaMobs() {
-			return false;
+		public <M extends Mob> int spawnWeight(KnownSpawnTypes type) {
+			int res = super.spawnWeight(type);
+			switch(type){
+				case ENDERMAN,GHAST,ZOMBIFIED_PIGLIN,PIGLIN,HOGLIN,PIGLIN_BRUTE -> res = 0;
+				case MAGMA_CUBE,STRIDER -> res = 40;
+			}
+			return res;
 		}
 	}
 	

@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.interfaces.IStructureFeatures;
-import paulevs.betternether.registry.NetherEntities;
+import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
@@ -57,18 +57,11 @@ public class NetherBiomeBuilder {
 			.feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_CLOSED);
 	}
 	
-	private static void addVanillaMobs(BCLBiomeBuilder builder) {
-		builder
-			.spawn(EntityType.GHAST, 50, 4, 4)
-			.spawn(EntityType.ZOMBIFIED_PIGLIN, 100, 4, 4)
-			.spawn(EntityType.MAGMA_CUBE, 2, 4, 4)
-			.spawn(EntityType.ENDERMAN, 1, 4, 4)
-			.spawn(EntityType.PIGLIN, 15, 4, 4)
-			.spawn(EntityType.STRIDER, 60, 1, 2);
-	}
 	public static NetherBiome create(NetherBiomeConfig data){
 		return create(data, null);
 	}
+	
+
 	
 	public static NetherBiome create(NetherBiomeConfig data, BCLBiome edgeBiome){
 		if (BASE_BIOME==null) {
@@ -90,20 +83,16 @@ public class NetherBiomeBuilder {
 			.mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
 			.loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
 			.additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
-			.edge(edgeBiome)
+			.edge(edgeBiome);
 		
-		//BN Spawns
-			.spawn(NetherEntities.FIREFLY, 5, 1, 3)
-			.spawn(NetherEntities.SKULL, 2, 2, 4)
-			.spawn(NetherEntities.NAGA, 8, 3, 5)
-			.spawn(NetherEntities.HYDROGEN_JELLYFISH, 5, 2, 6);
 		
 		if (data.hasVanillaStructures()) addVanillaStructures(builder);
 		if (data.hasVanillaFeatures()) addVanillaFeatures(builder);
 		if (data.hasVanillaOres()) builder.netherDefaultOres();
 		
-		if (data.spawnVanillaMobs()) addVanillaMobs(builder);
-		
+		for (KnownSpawnTypes spawnType : KnownSpawnTypes.values()) {
+			spawnType.addSpawn(builder, data);
+		}
 		
 		NetherFeatures.addDefaultFeatures(builder);
 		if (data.hasDefaultOres()) NetherFeatures.addDefaultOres(builder);

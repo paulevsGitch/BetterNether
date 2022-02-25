@@ -1,20 +1,19 @@
 package paulevs.betternether.world.biomes;
 
 import java.util.Random;
-import java.util.function.BiFunction;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.registry.NetherEntities;
+import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
-import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.plants.StructureBlackBush;
@@ -37,13 +36,22 @@ public class NetherWartForestEdge extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
 				   .feature(NetherFeatures.NETHER_RUBY_ORE);
 		}
 		
 		@Override
 		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherWartForestEdge::new;
+		}
+		
+		@Override
+		public <M extends Mob> int spawnWeight(KnownSpawnTypes type) {
+			int res = super.spawnWeight(type);
+			switch(type){
+				case FLYING_PIG -> res = type.weight;
+				case NAGA -> res = 0;
+			}
+			return res;
 		}
 	}
 	

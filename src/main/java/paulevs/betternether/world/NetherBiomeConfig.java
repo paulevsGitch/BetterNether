@@ -1,16 +1,14 @@
 package paulevs.betternether.world;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
-
-import java.util.function.BiFunction;
 
 public abstract class NetherBiomeConfig {
 	public static final SurfaceRules.RuleSource NETHERRACK = SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState());
@@ -25,9 +23,16 @@ public abstract class NetherBiomeConfig {
 										  .toLowerCase());
 	}
 	
-	public boolean spawnVanillaMobs() {
-		return true;
+	/**
+	 * Returns the group used in the config Files for this biome
+	 *
+	 * Example: {@code Configs.BIOMES_CONFIG.getFloat(configGroup(), "generation_chance", 1.0);}
+	 * @return The group name
+	 */
+	public String configGroup() {
+		return ID.getNamespace() + "." + ID.getPath();
 	}
+	
 	
 	public boolean hasVanillaFeatures() {
 		return true;
@@ -43,6 +48,15 @@ public abstract class NetherBiomeConfig {
 	
 	public boolean hasVanillaStructures() {
 		return true;
+	}
+	
+	
+	public <M extends Mob> int spawnWeight(KnownSpawnTypes type) {
+		int res = type.weight;
+		switch (type){
+			case JUNGLE_SKELETON, FLYING_PIG, HOGLIN, PIGLIN_BRUTE-> res = 0;
+		}
+		return res;
 	}
 	
 	protected abstract void addCustomBuildData(BCLBiomeBuilder builder);

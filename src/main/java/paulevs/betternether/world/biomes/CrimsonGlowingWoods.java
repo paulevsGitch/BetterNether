@@ -1,22 +1,19 @@
 package paulevs.betternether.world.biomes;
 
 import java.util.Random;
-import java.util.function.BiFunction;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
-import net.minecraft.world.level.levelgen.placement.CaveSurface;
-import paulevs.betternether.registry.NetherEntities;
+import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
-import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.plants.StructureCrimsonFungus;
@@ -28,7 +25,6 @@ import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
 import paulevs.betternether.world.structures.plants.StructureWartBush;
 import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import paulevs.betternether.world.surface.CrimsonWoodNoiseCondition;
-import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
@@ -52,11 +48,19 @@ public class CrimsonGlowingWoods extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
-				   .spawn(EntityType.HOGLIN, 9, 1, 2)
-				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
 				   .feature(NetherFeatures.NETHER_RUBY_ORE)
 				   .genChance(0.3f)
 			;
+		}
+		
+		@Override
+		public <M extends Mob> int spawnWeight(KnownSpawnTypes type) {
+			int res = super.spawnWeight(type);
+			switch(type){
+				case HOGLIN, FLYING_PIG -> res = type.weight;
+				case NAGA -> res = 0;
+			}
+			return res;
 		}
 		
 		@Override

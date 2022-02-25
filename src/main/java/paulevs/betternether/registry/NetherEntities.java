@@ -22,7 +22,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier.Builder;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
@@ -35,6 +35,8 @@ import paulevs.betternether.entity.EntityJungleSkeleton;
 import paulevs.betternether.entity.EntityNaga;
 import paulevs.betternether.entity.EntityNagaProjectile;
 import paulevs.betternether.entity.EntitySkull;
+import paulevs.betternether.world.NetherBiomeConfig;
+import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.api.spawning.SpawnRuleBuilder;
 import ru.bclib.entity.BCLEntityWrapper;
@@ -42,6 +44,74 @@ import ru.bclib.interfaces.SpawnRule;
 import ru.bclib.util.ColorUtil;
 
 public class NetherEntities {
+	public static enum KnownSpawnTypes {
+		GHAST(50, 4, 4 ,EntityType.GHAST),
+		ZOMBIFIED_PIGLIN(100, 4, 4, EntityType.ZOMBIFIED_PIGLIN),
+		MAGMA_CUBE(2, 4, 4, EntityType.MAGMA_CUBE),
+		SKULL(2, 2, 4, NetherEntities.SKULL),
+		ENDERMAN(1, 4, 4, EntityType.ENDERMAN),
+		PIGLIN(15, 4, 4, EntityType.PIGLIN),
+		STRIDER(60, 1, 2, EntityType.STRIDER),
+		HOGLIN(9, 1, 2, EntityType.HOGLIN),
+		FIREFLY(5, 1, 3, NetherEntities.FIREFLY),
+		HYDROGEN_JELLYFISH(5, 2, 6, NetherEntities.HYDROGEN_JELLYFISH),
+		NAGA(8, 3, 5, NetherEntities.NAGA),
+		FLYING_PIG(20, 2, 4, NetherEntities.FLYING_PIG),
+		JUNGLE_SKELETON(40, 2, 4, NetherEntities.JUNGLE_SKELETON),
+		PIGLIN_BRUTE(0, 1, 1, EntityType.PIGLIN_BRUTE);
+		
+		public final int weight;
+		public final int minGroupSize;
+		public final int maxGroupSize;
+		public final EntityType type;
+		public final BCLEntityWrapper wrapper;
+		
+		public boolean isVanilla(){
+			return wrapper == null;
+		}
+		
+		public void addSpawn(BCLBiomeBuilder builder, NetherBiomeConfig data){
+			final String category = data.configGroup()+".spawn."+this.type.getCategory().getName()+"."+this.type.getDescriptionId().replace("entity.", "");
+			int weight = Configs.BIOMES.getInt(category, "weight", data.spawnWeight(this));
+			int min = Configs.BIOMES.getInt(category, "minGroupSize", minGroupSize);
+			int max = Configs.BIOMES.getInt(category, "maxGroupSize", maxGroupSize);
+			
+			if (wrapper==null){
+				builder.spawn(this.type, weight, min, max);
+			} else {
+				builder.spawn(this.wrapper, weight, min, max);
+			}
+		}
+		
+		public void addSpawn(ResourceLocation ID, Biome biome, float multiplier){
+			final String category = ID.getNamespace() + "." + ID.getPath()+".spawn."+this.type.getCategory().getName()+"."+this.type.getDescriptionId().replace("entity.", "");
+			int dweight = Configs.BIOMES.getInt(category, "weight", (int)(weight*multiplier));
+			int min = Configs.BIOMES.getInt(category, "minGroupSize", minGroupSize);
+			int max = Configs.BIOMES.getInt(category, "maxGroupSize", maxGroupSize);
+			
+			BiomeAPI.addBiomeMobSpawn(biome, this.type, dweight, min, max);
+		}
+		
+		public void addSpawn(ResourceLocation ID, Biome biome){
+			addSpawn(ID, biome, 1);
+		}
+		
+		private KnownSpawnTypes(int w, int min, int max, EntityType type){
+			weight = w;
+			minGroupSize = min;
+			maxGroupSize = max;
+			this.type = type;
+			this.wrapper = null;
+		}
+		
+		private <M extends Mob> KnownSpawnTypes(int w, int min, int max, BCLEntityWrapper type){
+			weight = w;
+			minGroupSize = min;
+			maxGroupSize = max;
+			this.type = type.type();
+			this.wrapper = type;
+		}
+	}
 	public static final Map<EntityType<? extends Entity>, AttributeSupplier> ATTRIBUTES = Maps.newHashMap();
 	private static final List<BCLEntityWrapper<?>> NETHER_ENTITIES = Lists.newArrayList();
 	
@@ -231,8 +301,14 @@ public class NetherEntities {
 	}
 	
 	static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
-		BiomeAPI.addBiomeMobSpawn(biome, FIREFLY, 5, 3, 6);
-		BiomeAPI.addBiomeMobSpawn(biome, HYDROGEN_JELLYFISH, 5, 2, 5);
-		BiomeAPI.addBiomeMobSpawn(biome, NAGA, 8, 3, 5);
+		final boolean isCrimson = biomeID.equals(Biomes.CRIMSON_FOREST.location());
+		
+		KnownSpawnTypes.FIREFLY.addSpawn(biomeID, biome, isCrimson?3:1);
+		KnownSpawnTypes.HYDROGEN_JELLYFISH.addSpawn(biomeID, biome);
+		KnownSpawnTypes.NAGA.addSpawn(biomeID, biome, isCrimson?0:1);
+		
+		synchronized (Configs.BIOMES) {
+			Configs.BIOMES.saveChanges();
+		}
 	}
 }

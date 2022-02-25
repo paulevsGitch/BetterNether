@@ -7,12 +7,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
@@ -62,6 +64,15 @@ public class NetherGravelDesert extends NetherBiome {
 						.belowFloor(Blocks.GRAVEL.defaultBlockState(), 4, NetherNoiseCondition.DEFAULT)
 						//.rule(SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(3, true, false, CaveSurface.FLOOR), SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, GRAVEL)))
 				;
+		}
+		
+		@Override
+		public <M extends Mob> int spawnWeight(KnownSpawnTypes type) {
+			int res = super.spawnWeight(type);
+			switch(type){
+				case NAGA -> res = 20;
+			}
+			return res;
 		}
 	}
 	

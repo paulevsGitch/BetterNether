@@ -1,13 +1,13 @@
 package paulevs.betternether.world.biomes;
 
 import java.util.Random;
-import java.util.function.BiFunction;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -15,10 +15,9 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockSoulSandstone;
 import paulevs.betternether.registry.NetherBlocks;
-import paulevs.betternether.registry.NetherEntities;
+import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
-import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.decorations.StructureWartDeadwood;
@@ -45,7 +44,6 @@ public class NetherWartForest extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
 				   .particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
-				   .spawn(NetherEntities.FLYING_PIG, 20, 2, 4)
 				   .feature(NetherFeatures.NETHER_RUBY_ORE)
 				   .edgeSize(9)
 				;
@@ -55,8 +53,17 @@ public class NetherWartForest extends NetherBiome {
 		public BiomeSupplier<NetherBiome> getSupplier() {
 			return NetherWartForest::new;
 		}
+		
+		@Override
+		public <M extends Mob> int spawnWeight(KnownSpawnTypes type) {
+			int res = super.spawnWeight(type);
+			switch(type){
+				case FLYING_PIG -> res = type.weight;
+				case NAGA -> res = 0;
+			}
+			return res;
+		}
 	}
-	
 
 	public NetherWartForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
 		super(biomeID, biome, settings);

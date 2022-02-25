@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
+import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
@@ -108,6 +110,15 @@ public class NetherGrasslands extends NetherBiome {
 		@Override
 		public SurfaceRuleBuilder surface() {
 			return super.surface().rule(new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT, List.of(SOUL_SOIL, MOSS, NETHERRACK) ));
+		}
+		
+		@Override
+		public <M extends Mob> int spawnWeight(KnownSpawnTypes type) {
+			int res = super.spawnWeight(type);
+			switch(type){
+				case FIREFLY -> res = type.weight*3;
+			}
+			return res;
 		}
 	}
 	

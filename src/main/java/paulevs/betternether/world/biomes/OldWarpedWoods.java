@@ -1,17 +1,16 @@
 package paulevs.betternether.world.biomes;
 
 import java.util.Random;
-import java.util.function.BiFunction;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
-import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
@@ -40,8 +39,6 @@ public class OldWarpedWoods extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_WARPED_FOREST_MOOD)
 				   .particles(ParticleTypes.WARPED_SPORE, 0.025F)
-				   .spawn(EntityType.ENDERMAN, 1, 4, 4)
-				   .spawn(EntityType.STRIDER, 60, 1, 2)
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
 				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE())
 			       .feature(NetherFeatures.NETHER_RUBY_ORE);
@@ -53,8 +50,13 @@ public class OldWarpedWoods extends NetherBiome {
 		}
 		
 		@Override
-		public boolean spawnVanillaMobs() {
-			return false;
+		public <M extends Mob> int spawnWeight(KnownSpawnTypes type) {
+			int res = super.spawnWeight(type);
+			switch(type){
+				case GHAST,ZOMBIFIED_PIGLIN,MAGMA_CUBE,PIGLIN,HOGLIN,PIGLIN_BRUTE -> res = 0;
+				case ENDERMAN,STRIDER -> res = type.weight;
+			}
+			return res;
 		}
 		
 		@Override
