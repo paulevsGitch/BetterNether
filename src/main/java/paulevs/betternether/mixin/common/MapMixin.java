@@ -2,7 +2,6 @@ package paulevs.betternether.mixin.common;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultiset;
-import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -15,7 +14,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MaterialColor.Brightness;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -35,103 +36,96 @@ public abstract class MapMixin extends ComplexItem {
 	}
 
 	@Inject(method = "update", at = @At(value = "HEAD"), cancellable = true)
-	private void customColors(Level world, Entity entity, MapItemSavedData state, CallbackInfo info) {
-		if (world.dimensionType().hasCeiling() && world.dimension() == state.dimension && entity instanceof Player) {
-			int i = 1 << state.scale;
-			int j = state.x;
-			int k = state.z;
-			int l = Mth.floor(entity.getX() - (double) j) / i + 64;
-			int m = Mth.floor(entity.getZ() - (double) k) / i + 64;
-			int n = 128 / i;
-
-			MapItemSavedData.HoldingPlayer playerUpdateTracker = state.getHoldingPlayer((Player) entity);
-			++playerUpdateTracker.step;
+	private void customColors(Level level, Entity entity, MapItemSavedData state, CallbackInfo info) {
+		//Code derived and adapted from Vanilla Minecraft Code in net.minecraft.world.item.MapItem.update
+		if (level.dimensionType().hasCeiling() && level.dimension() == state.dimension && entity instanceof Player) {
+			BlockPos.MutableBlockPos POS2 = new BlockPos.MutableBlockPos();
+			final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
+			
+			int scale = 1 << state.scale;
+			int sx = state.x;
+			int sz = state.z;
+			int px = Mth.floor(entity.getX() - (double)sx) / scale + 64;
+			int py = Mth.floor(entity.getZ() - (double)sz) / scale + 64;
+			int stepWidth = 128 / scale;
+			if (level.dimensionType().hasCeiling()) {
+				stepWidth /= 2;
+			}
+			MapItemSavedData.HoldingPlayer holdingPlayer = state.getHoldingPlayer((Player)entity);
+			++holdingPlayer.step;
 			boolean bl = false;
-
-			BlockState blockState = Blocks.BEDROCK.defaultBlockState();
-
-			for (int o = l - n + 1; o < l + n; ++o) {
-				if ((o & 15) == (playerUpdateTracker.step & 15) || bl) {
-					bl = false;
-					double d = 0.0D;
-
-					for (int p = m - n - 1; p < m + n; ++p) {
-						if (o >= 0 && p >= -1 && o < 128 && p < 128) {
-							int q = o - l;
-							int r = p - m;
-							boolean bl2 = q * q + r * r > (n - 2) * (n - 2);
-							int s = (j / i + o - 64) * i;
-							int t = (k / i + p - 64) * i;
-							Multiset<MaterialColor> multiset = LinkedHashMultiset.create();
-							LevelChunk worldChunk = world.getChunkAt(new BlockPos(s, 0, t));
-							if (!worldChunk.isEmpty()) {
-								ChunkPos chunkPos = worldChunk.getPos();
-
-								int u = chunkPos.getMinBlockX() + (s & 15);
-								int v = chunkPos.getMinBlockZ() + (t & 15);
-
-								int w = 0;
-								double e = 0.0D;
-								BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-								new BlockPos.MutableBlockPos();
-
-								for (int x = 0; x < i; ++x) {
-									for (int z = 0; z < i; ++z) {
-										mutable.set(x + u, 127, z + v);
-
-										blockState = Blocks.NETHERRACK.defaultBlockState();
-										//TODO: Amplified, get value from worldChunk.getHeight()?
-										for (int y = 126; y > 0; y--) {
-											mutable.setY(y);
-											if (!world.isEmptyBlock(mutable) && world.isEmptyBlock(mutable.above())) {
-												blockState = world.getBlockState(mutable);
-												break;
-											}
-										}
-
-										multiset.add(blockState.getMapColor(world, mutable));
-									}
-								}
-
-								w /= i * i;
-								double f = (e - d) * 4.0D / (double) (i + 4) + ((double) (o + p & 1) - 0.5D) * 0.4D;
-								int ac = 1;
-								if (f > 0.6D) {
-									ac = 2;
-								}
-
-								if (f < -0.6D) {
-									ac = 0;
-								}
-
-								MaterialColor materialColor = (MaterialColor) Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.NONE);
-
-								if (materialColor == MaterialColor.WATER) {
-									f = (double) w * 0.1D + (double) (o + p & 1) * 0.2D;
-									ac = 1;
-									if (f < 0.5D) {
-										ac = 2;
-									}
-
-									if (f > 0.9D) {
-										ac = 0;
-									}
-								}
-
-								d = e;
-								if (p >= 0 && q * q + r * r < n * n && (!bl2 || (o + p & 1) != 0)) {
-									byte b = state.colors[o + p * 128];
-									byte c = (byte) (materialColor.id * 4 + ac);
-									if (b != c) {
-										state.setColor(o, p, c);
-										/*state.colors[o + p * 128] = c;
-										state.markDirty(o, p);*/
-										bl = true;
-									}
+			for (int xx = px - stepWidth + 1; xx < px + stepWidth; ++xx) {
+				if ((xx & 0xF) != (holdingPlayer.step & 0xF) && !bl) continue;
+				bl = false;
+				double d = 0.0;
+				for (int yy = py - stepWidth - 1; yy < py + stepWidth; ++yy) {
+					double y;
+					
+					if (xx < 0 || yy < -1 || xx >= 128 || yy >= 128) continue;
+					int dx = xx - px;
+					int dy = yy - py;
+					boolean bl2 = dx * dx + dy * dy > (stepWidth - 2) * (stepWidth - 2);
+					int x = (sx / scale + xx - 64) * scale;
+					int z = (sz / scale + yy - 64) * scale;
+					LinkedHashMultiset<MaterialColor> multiset = LinkedHashMultiset.create();
+					LevelChunk levelChunk = level.getChunkAt(new BlockPos(x, 0, z));
+					if (levelChunk.isEmpty()) continue;
+					ChunkPos chunkPos = levelChunk.getPos();
+					int cx = x & 0xF;
+					int cz = z & 0xF;
+					int w = 0;
+					double height = 0.0;
+					
+					//we do not want the special ceiling code for the nether
+//					if (level.dimensionType().hasCeiling()) {
+//
+//					}
+					
+					for (int bx = 0; bx < scale; ++bx) {
+						for (int bz = 0; bz < scale; ++bz) {
+							BlockState blockState;
+							int testY = levelChunk.getHeight(Heightmap.Types.WORLD_SURFACE, bx + cx, bz + cz) + 1;
+							if (testY > level.getMinBuildHeight() + 1) {
+								
+								//make sure we get under the nether ceiling and find the first "AIR" block
+								do {
+									POS.set(chunkPos.getMinBlockX() + bx + cx, --testY, chunkPos.getMinBlockZ() + bz + cz);
+									blockState = levelChunk.getBlockState(POS);
+								} while (blockState.is(Blocks.BEDROCK) || blockState.getMapColor(level, POS) != MaterialColor.NONE && testY > level.getMinBuildHeight());
+								
+								do {
+									POS.set(chunkPos.getMinBlockX() + bx + cx, --testY, chunkPos.getMinBlockZ() + bz + cz);
+								} while ((blockState = levelChunk.getBlockState(POS)).getMapColor(level, POS) == MaterialColor.NONE && testY > level.getMinBuildHeight());
+								if (testY > level.getMinBuildHeight() && !blockState.getFluidState()
+																				 .isEmpty()) {
+									BlockState blockState2;
+									int ab = testY - 1;
+									POS2.set(POS);
+									do {
+										POS2.setY(ab--);
+										blockState2 = levelChunk.getBlockState( POS2);
+										++w;
+									} while (ab > level.getMinBuildHeight() && !blockState2.getFluidState()
+																						   .isEmpty());
+									blockState = this.getCorrectStateForFluidBlock(level, blockState, (BlockPos) POS);
 								}
 							}
+							else {
+								blockState = Blocks.BEDROCK.defaultBlockState();
+							}
+							state.checkBanners(level, chunkPos.getMinBlockX() + bx + cx, chunkPos.getMinBlockZ() + bz + cz);
+							height += (double) testY / (double) (scale * scale);
+							multiset.add(blockState.getMapColor(level, (BlockPos) POS));
 						}
 					}
+					
+					
+					MaterialColor mc = Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.NONE);
+					Brightness br = mc == MaterialColor.WATER ? ((y = (double) (w /= scale * scale) * 0.1 + (double) (xx + yy & 1) * 0.2) < 0.5 ? MaterialColor.Brightness.HIGH : (y > 0.9 ? MaterialColor.Brightness.LOW : MaterialColor.Brightness.NORMAL)) : ((y = (height - d) * 4.0 / (double) (scale + 4) + ((double) (xx + yy & 1) - 0.5) * 0.4) > 0.6 ? MaterialColor.Brightness.HIGH : (y < -0.6 ? MaterialColor.Brightness.LOW : MaterialColor.Brightness.NORMAL));
+					d = height;
+					if (yy < 0 || dx * dx + dy * dy >= stepWidth * stepWidth || bl2 && (xx + yy & 1) == 0) continue;
+					bl |= state.updateColor(xx, yy, mc.getPackedId(br));
+					
 				}
 			}
 
