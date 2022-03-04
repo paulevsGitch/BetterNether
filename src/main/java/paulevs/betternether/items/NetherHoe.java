@@ -5,15 +5,18 @@ import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import paulevs.betternether.interfaces.InitialStackStateProvider;
+import paulevs.betternether.items.materials.BNToolMaterial;
 import paulevs.betternether.registry.NetherItems;
 import ru.bclib.interfaces.TagProvider;
 import ru.bclib.items.tool.BaseHoeItem;
 
 import java.util.List;
 
-public class NetherHoe extends BaseHoeItem {
+public class NetherHoe extends BaseHoeItem  implements InitialStackStateProvider {
 
 	public NetherHoe(Tier material) {
 		super(material, 1, -2.8F, NetherItems.defaultSettings().fireResistant());
@@ -22,5 +25,12 @@ public class NetherHoe extends BaseHoeItem {
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
 		return super.getDestroySpeed(stack, state);
+	}
+	
+	@Override
+	public void initializeState(ItemStack stack) {
+		if (getTier()== BNToolMaterial.NETHER_RUBY) {
+			EnchantmentHelper.setEnchantments(NetherArmor.DEFAULT_RUBY_ENCHANTS, stack);
+		}
 	}
 }

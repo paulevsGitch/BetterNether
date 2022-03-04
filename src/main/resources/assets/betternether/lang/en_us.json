@@ -723,5 +723,7 @@
 	"advancements.betternether.city.title":"A glorious Past",
 	"advancements.betternether.city.description":"Find a long abandoned Nether City",
 	
-	"biome.betternether.upside_down_forest_cleared": "Dead Upside Down Forest"
+	"biome.betternether.upside_down_forest_cleared": "Dead Upside Down Forest",
+	"enchantment.betternether.obsidian_breaker": "Obsidian Breaker",
+	"enchantment.betternether.ruby_fire": "Rubys' Fire"
 }

@@ -32,10 +32,6 @@ public class BlockOre extends BaseOreBlock implements TagProvider {
 		);
 	}
 	
-	private static Item dropper(){
-		return NetherItems.AGAVE_LEAF;
-	}
-	
 	@Override
 	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
 		blockTags.add(NamedMineableTags.PICKAXE);
