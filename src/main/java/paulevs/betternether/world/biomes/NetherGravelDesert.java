@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
@@ -42,8 +43,8 @@ public class NetherGravelDesert extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
 				   .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
 				   .particles(ParticleTypes.ASH, 0.02F)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
+				   .structure(BiomeTags.HAS_BASTION_REMNANT)
+				   .structure(BiomeTags.HAS_NETHER_FORTRESS);
 		}
 		
 		@Override

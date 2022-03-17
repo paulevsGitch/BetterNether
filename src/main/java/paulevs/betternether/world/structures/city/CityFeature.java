@@ -7,10 +7,10 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.FlatLevelSource;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.structure.NoiseAffectingStructureFeature;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier.Context;
@@ -24,7 +24,7 @@ import ru.bclib.world.structures.BCLStructureFeature;
 
 import java.util.List;
 
-public class CityFeature extends NoiseAffectingStructureFeature<NoneFeatureConfiguration> {
+public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 	private static CityGenerator generator;
 	public static final int RADIUS = 8 * 8;
 	
@@ -80,5 +80,5 @@ public class CityFeature extends NoiseAffectingStructureFeature<NoneFeatureConfi
 		
 		//BetterNether.LOGGER.info("BBox after Cave:" + structurePiecesBuilder.getBoundingBox().toString());
 	}
-	
+
 }

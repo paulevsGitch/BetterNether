@@ -16,7 +16,10 @@ import java.util.Map.Entry;
 
 @Mixin(ChunkSerializer.class)
 public class ChunkSerializerMixin {
-	@Overwrite
+	/**
+     * @author
+     */
+    @Overwrite
 	private static CompoundTag packStructureData(StructurePieceSerializationContext structurePieceSerializationContext, ChunkPos pos, Map<StructureFeature<?>, StructureStart<?>> structureStarts, Map<StructureFeature<?>, LongSet> structureReferences) {
         CompoundTag tagResult = new CompoundTag();
         CompoundTag tagStarts = new CompoundTag();

@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
@@ -70,7 +71,7 @@ public class NetherEntities {
 			}
 		}
 		
-		public void addSpawn(ResourceLocation ID, Biome biome, float multiplier){
+		public void addSpawn(ResourceLocation ID, Holder<Biome> biome, float multiplier){
 			final String category = ID.getNamespace() + "." + ID.getPath()+".spawn."+this.type.getCategory().getName()+"."+this.type.getDescriptionId().replace("entity.", "");
 			int dweight = Configs.BIOMES.getInt(category, "weight", (int)(weight*multiplier));
 			int min = Configs.BIOMES.getInt(category, "minGroupSize", minGroupSize);
@@ -79,7 +80,7 @@ public class NetherEntities {
 			BiomeAPI.addBiomeMobSpawn(biome, this.type, dweight, min, max);
 		}
 		
-		public void addSpawn(ResourceLocation ID, Biome biome){
+		public void addSpawn(ResourceLocation ID, Holder<Biome> biome){
 			addSpawn(ID, biome, 1);
 		}
 		
@@ -287,7 +288,7 @@ public class NetherEntities {
 		return NETHER_ENTITIES.contains(entity.getType());
 	}
 	
-	static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
+	static void modifyNonBNBiome(ResourceLocation biomeID, Holder<Biome> biome) {
 		final boolean isCrimson = biomeID.equals(Biomes.CRIMSON_FOREST.location());
 		
 		KnownSpawnTypes.FIREFLY.addSpawn(biomeID, biome, isCrimson?3:1);

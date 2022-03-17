@@ -1,5 +1,6 @@
 package paulevs.betternether.world;
 
+import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.StructureFeatures;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
@@ -9,6 +10,7 @@ import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.Biome.Precipitation;
@@ -16,6 +18,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.carver.CaveCarverConfiguration;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.interfaces.IStructureFeatures;
 import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
@@ -37,7 +41,7 @@ public class NetherBiomeBuilder {
 	
 	private static void addVanillaStructures(BCLBiomeBuilder builder) {
 		builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
-		builder.structure(VANILLA_STRUCTURES.getRUINED_PORTAL_NETHER());
+		builder.structure(BiomeTags.HAS_RUINED_PORTAL_NETHER);
 	}
 	
 	private static void addVanillaFeatures(BCLBiomeBuilder builder) {

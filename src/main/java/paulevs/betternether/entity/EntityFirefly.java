@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -138,7 +139,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 	}
 
 	@Override
-	protected void jumpInLiquid(Tag<Fluid> fluid) {
+	protected void jumpInLiquid(TagKey<Fluid> fluid) {
 		this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.01D, 0.0D));
 	}
 

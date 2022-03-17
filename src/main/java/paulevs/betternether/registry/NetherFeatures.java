@@ -1,6 +1,7 @@
 package paulevs.betternether.registry;
 
 import com.google.common.collect.Lists;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -163,7 +164,7 @@ public class NetherFeatures {
 			   .feature(NETHER_REDSTONE_ORE);
 	}
 	
-	public static void modifyNonBNBiome(ResourceLocation biomeID, Biome biome) {
+	public static void modifyNonBNBiome(ResourceLocation biomeID, Holder<Biome> biome) {
 		if (NetherFeatures.HAS_CAVES){
 			BiomeAPI.addBiomeFeature(biome, CAVES_FEATURE);
 		}

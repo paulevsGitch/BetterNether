@@ -2,6 +2,7 @@ package paulevs.betternether.world;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -35,7 +36,7 @@ public class BNWorldGenerator {
 	private final List<BlockPos> LIST_WALL = new ArrayList<BlockPos>(4096);
 	private final List<BlockPos> LIST_CEIL = new ArrayList<BlockPos>(4096);
 	private final List<BlockPos> LIST_LAVA = new ArrayList<BlockPos>(1024);
-	private final HashSet<Biome> MC_BIOMES = new HashSet<Biome>();
+	private final HashSet<Holder<Biome>> MC_BIOMES = new HashSet<Holder<Biome>>();
 
 	private NetherBiome biome;
 	public final StructureGeneratorThreadContext context = new StructureGeneratorThreadContext();
@@ -241,7 +242,7 @@ public class BNWorldGenerator {
 				popPos.setY((int)(y*layerHeight + 0.5*layerHeight));
 				for (int z = 0; z < 8; z++) {
 					popPos.setZ(sz + (z << 1) + 2);
-					Biome b = world.getBiome(popPos);
+					Holder<Biome> b = world.getBiome(popPos);
 					
 					if (BiomeAPI.getFromBiome(b) instanceof NetherBiome nBiome) {
 						BIOMES[x][z][y] = nBiome;
