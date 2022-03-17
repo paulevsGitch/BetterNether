@@ -6,6 +6,8 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
+import com.mojang.datafixers.util.Either;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Vector3d;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
@@ -13,14 +15,19 @@ import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -147,7 +154,28 @@ public class CommandRegistry {
             Vector3d targetPlayerPos = new Vector3d(target.getX() + 0.5,target.getY()-1, target.getZ() + 0.5);
 
             player.connection.teleport(targetPlayerPos.x, targetPlayerPos.y, targetPlayerPos.z, 0, 0, Collections.EMPTY_SET);
-            return LocateCommand.showLocateResult(source, biomeName, currentPosition, biomePosition,
+            ResourceOrTagLocationArgument.Result result = new ResourceOrTagLocationArgument.Result() {
+                @Override
+                public Either<ResourceKey, TagKey> unwrap() {
+                    return Either.left(biome.getActualBiome().unwrapKey().orElseThrow());
+                }
+
+                @Override
+                public Optional<ResourceOrTagLocationArgument.Result> cast(ResourceKey resourceKey) {
+                    return Optional.empty();
+                }
+
+                @Override
+                public String asPrintable() {
+                    return biomeName;
+                }
+
+                @Override
+                public boolean test(Object o) {
+                    return false;
+                }
+            };
+            return LocateCommand.showLocateResult(source, result, currentPosition, new Pair<>(biomePosition, biome.getActualBiome()),
                     "commands.locatebiome.success");
         }
     }
@@ -198,7 +226,7 @@ public class CommandRegistry {
         return Command.SINGLE_SUCCESS;
     }
     
-    private static Map<Biome, BlockState> biomeMap = new HashMap<>();
+    private static Map<Holder<Biome>, BlockState> biomeMap = new HashMap<>();
     private static int biomeMapIdx = 0;
     private static BlockState[] states = {
         Blocks.RED_STAINED_GLASS.defaultBlockState(),
@@ -229,7 +257,7 @@ public class CommandRegistry {
                 for (int z=-64; z<64; z++){
                     bp.setZ((int)pos.z+z);
                     if (y==1) {
-                        Biome b = level.getBiome(bp);
+                        Holder<Biome> b = level.getBiome(bp);
                         fillState = biomeMap.computeIfAbsent(b, (bb)-> {
                             biomeMapIdx = (biomeMapIdx + 1) % states.length;
                             return states[biomeMapIdx];
@@ -270,7 +298,7 @@ public class CommandRegistry {
                 for (int z=constX?-64:0; z<64; z++){
                     bp.setZ((int)pos.z+z);
                     if (y==1) {
-                        Biome b = level.getBiome(bp);
+                        Holder<Biome> b = level.getBiome(bp);
                         fillState = biomeMap.computeIfAbsent(b, (bb)-> {
                             biomeMapIdx = (biomeMapIdx + 1) % states.length;
                             return states[biomeMapIdx];

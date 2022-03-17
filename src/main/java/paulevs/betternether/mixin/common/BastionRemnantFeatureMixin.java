@@ -14,7 +14,8 @@ import paulevs.betternether.world.structures.city.CityHelper;
 
 @Mixin(BastionFeature.class)
 public class BastionRemnantFeatureMixin {
-	@Inject(method = "checkLocation", at = @At("HEAD"), cancellable = true)
+	//TODO: 1.18.2 Find an alternative
+	/*@Inject(method = "checkLocation", at = @At("HEAD"), cancellable = true)
 	private static void checkCity(Context<JigsawConfiguration> context, CallbackInfoReturnable<Boolean> cir) {
 		final ChunkPos chunkPos = context.chunkPos();
 		final long seed = context.seed();
@@ -24,5 +25,5 @@ public class BastionRemnantFeatureMixin {
 			cir.setReturnValue(false);
 			cir.cancel();
 		}
-	}
+	}*/
 }

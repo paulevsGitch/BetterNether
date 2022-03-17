@@ -133,18 +133,6 @@ public class NetherFeatures {
 			rare);
 	}
 	
-	private static void addFeature(BCLFeature feature, List<List<Supplier<PlacedFeature>>> features) {
-		int index = feature.getDecoration().ordinal();
-		if (features.size() > index) {
-			features.get(index).add(() -> feature.getPlacedFeature());
-		}
-		else {
-			List<Supplier<PlacedFeature>> newFeature = Lists.newArrayList();
-			newFeature.add(() -> feature.getPlacedFeature());
-			features.add(newFeature);
-		}
-	}
-	
 	public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {
 		if (NetherFeatures.HAS_CLEANING_PASS) builder.feature(CLEANUP_FEATURE);
 		if (NetherFeatures.HAS_CAVES) builder.feature(CAVES_FEATURE);

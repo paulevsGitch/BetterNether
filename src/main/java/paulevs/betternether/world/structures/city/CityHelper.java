@@ -7,7 +7,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
+import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
 import paulevs.betternether.registry.NetherStructures;
 
 import java.time.Instant;
@@ -20,12 +20,12 @@ public class CityHelper {
 	private static final Set<ChunkPos> POSITIONS = Collections.newSetFromMap(new ConcurrentHashMap<ChunkPos,Boolean>(16));
 
 	public static boolean stopStructGen(int chunkX, int chunkZ, ChunkGenerator chunkGenerator, long worldSeed, WorldgenRandom chunkRandom) {
-		StructureFeatureConfiguration config = chunkGenerator.getSettings().getConfig(NetherStructures.CITY_STRUCTURE.getStructure());
+		RandomSpreadStructurePlacement config = NetherStructures.CITY_STRUCTURE.spreadConfig;
 		if (config != null && config.spacing() > 0) collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
 		return stopGeneration(chunkX, chunkZ);
 	}
 
-	private static void collectNearby(int chunkX, int chunkZ, StructureFeatureConfiguration config, long worldSeed, WorldgenRandom chunkRandom) {
+	private static void collectNearby(int chunkX, int chunkZ, RandomSpreadStructurePlacement config, long worldSeed, WorldgenRandom chunkRandom) {
 		int x1 = chunkX - 16;
 		int x2 = chunkX + 16;
 		int z1 = chunkZ - 16;
@@ -34,13 +34,13 @@ public class CityHelper {
 		POSITIONS.clear();
 		for (int x = x1; x <= x2; x += 8) {
 			for (int z = z1; z <= z2; z += 8) {
-				ChunkPos chunk = NetherStructures.CITY_STRUCTURE.getStructure().getPotentialFeatureChunk(config, worldSeed, x, z);
+				ChunkPos chunk = config.getPotentialFeatureChunk(worldSeed, x, z);
 				POSITIONS.add(chunk);
 			}
 		}
 	}
 	
-	private static void collectNearby(ServerLevel world, int chunkX, int chunkZ, StructureFeatureConfiguration config, long worldSeed, WorldgenRandom chunkRandom) {
+	private static void collectNearby(ServerLevel world, int chunkX, int chunkZ, RandomSpreadStructurePlacement config, long worldSeed, WorldgenRandom chunkRandom) {
 		final MutableBlockPos POS = new MutableBlockPos();
 
 		int x1 = chunkX - 16;
@@ -54,7 +54,7 @@ public class CityHelper {
 			POS.setX(x << 4);
 			for (int z = z1; z <= z2; z += 8) {
 				POS.setZ(z << 4);
-				ChunkPos chunk = NetherStructures.CITY_STRUCTURE.getStructure().getPotentialFeatureChunk(config, worldSeed, x, z);
+				ChunkPos chunk = config.getPotentialFeatureChunk(worldSeed, x, z);
 				POSITIONS.add(chunk);
 			}
 		}
@@ -78,7 +78,7 @@ public class CityHelper {
 		int cx = pos.getX() >> 4;
 		int cz = pos.getZ() >> 4;
 
-		StructureFeatureConfiguration config = world.getChunkSource().getGenerator().getSettings().getConfig(NetherStructures.CITY_STRUCTURE.getStructure());
+		RandomSpreadStructurePlacement config = NetherStructures.CITY_STRUCTURE.spreadConfig;
 		if (config == null || config.spacing() < 1)
 			return null;
 

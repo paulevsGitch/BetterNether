@@ -8,7 +8,6 @@
 		"BlockAgeProcessorMixin",
 		"BoneMealMixin",
 		"BrewingRecipeRegistryMixin",
-		"ChunkSerializerMixin",
 		"CraftingScreenHandlerMixin",
 		"DefaultAttributeRegistryMixin",
 		"DeltaFeatureMixin",
@@ -26,8 +25,7 @@
 		"BlockBehaviourMixin",
 		"PlayerEntityMixin",
 		"RecipeManagerAccessor",
-		"RecipeManagerMixin",
-		"StructureFeaturesAcessor"
+		"RecipeManagerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

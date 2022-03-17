@@ -1,8 +1,6 @@
 package paulevs.betternether.world;
 
-import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.Carvers;
-import net.minecraft.data.worldgen.StructureFeatures;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
@@ -18,10 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.carver.CaveCarverConfiguration;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.interfaces.IStructureFeatures;
 import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
@@ -37,8 +32,6 @@ public class NetherBiomeBuilder {
 	static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP =
 		new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_roof"), VerticalAnchor.belowTop(5), VerticalAnchor.top());
 
-	public static final IStructureFeatures VANILLA_STRUCTURES = (IStructureFeatures)(Object)new StructureFeatures();
-	
 	private static void addVanillaStructures(BCLBiomeBuilder builder) {
 		builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
 		builder.structure(BiomeTags.HAS_RUINED_PORTAL_NETHER);

@@ -12,25 +12,35 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.flat.FlatLayerInfo;
+import net.minecraft.world.level.levelgen.structure.StructureSet;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Environment(EnvType.CLIENT)
 @Mixin(PresetFlatWorldScreen.class)
-public class PresetsScreenMixin {
+public abstract class PresetsScreenMixin {
 	@Shadow
-	private static void preset(Component text, ItemLike icon, ResourceKey<Biome> registryKey, List<StructureFeature<?>> structures, boolean bl, boolean bl2, boolean bl3, FlatLayerInfo... flatChunkGeneratorLayers) {}
+	private static void preset(
+			Component component,
+			ItemLike itemLike,
+			ResourceKey<Biome> resourceKey,
+			Set<ResourceKey<StructureSet>> set,
+			boolean bl,
+			boolean bl2,
+			FlatLayerInfo... flatLayerInfos) {
+
+	}
 
 	static {
 		preset(new TranslatableComponent("betternether.flat_nether"),
 				Blocks.NETHERRACK,
 				Biomes.NETHER_WASTES,
-				Collections.emptyList(),
-				false, false, false,
+				Collections.emptySet(),
+				false, false,
 				new FlatLayerInfo(63, Blocks.NETHERRACK),
 				new FlatLayerInfo(1, Blocks.BEDROCK));
-	}
-}
+	}}

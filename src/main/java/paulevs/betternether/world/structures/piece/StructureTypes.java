@@ -2,7 +2,7 @@ package paulevs.betternether.world.structures.piece;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.levelgen.feature.StructurePieceType;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import paulevs.betternether.BetterNether;
 
 public class StructureTypes {
