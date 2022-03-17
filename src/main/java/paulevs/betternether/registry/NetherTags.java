@@ -3,6 +3,7 @@ package paulevs.betternether.registry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -23,7 +24,7 @@ public class NetherTags {
 //	public static final Tag<Block> MYCELIUM = TagAPI.makeCommonBlockTag("nether_mycelium");
 	//public static final TagAPI.TagLocation<Block> NYLIUM = TagAPI.BLOCK_NYLIUM;
 
-	public static final Tag<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
+	public static final TagKey<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
 	
 	public static void register() {
 		NetherBlocks.getModBlocks().forEach(block -> {

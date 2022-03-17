@@ -2,6 +2,7 @@ package paulevs.betternether.world.structures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
@@ -45,7 +46,7 @@ public class StructurePath implements IStructure {
 					height -= BlocksHelper.downRay(world, context.POS, height);
 					context.POS.setY(height);
 					if (world.isEmptyBlock(context.POS) && world.getBlockState(context.POS.move(Direction.DOWN)).isCollisionShapeFullBlock(world, context.POS) && isHeightValid(world, context.POS.above())) {
-						Biome biome = world.getBiome(context.POS);
+						Holder<Biome> biome = world.getBiome(context.POS);
 						BlocksHelper.setWithoutUpdate(world, context.POS, getRoadMaterial(world, context.POS, biome));
 						if (needsSlab(world, context.POS.above()))
 							BlocksHelper.setWithoutUpdate(world, context.POS.above(), getSlabMaterial(world, context.POS, biome));
@@ -100,7 +101,7 @@ public class StructurePath implements IStructure {
 		BlocksHelper.setWithoutUpdate(world, p.below(), Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
 	}
 
-	private BlockState getRoadMaterial(ServerLevelAccessor world, BlockPos pos, Biome biome) {
+	private BlockState getRoadMaterial(ServerLevelAccessor world, BlockPos pos, Holder<Biome> biome) {
 		/*
 		 * if (biome == Biomes.SOUL_SAND_VALLEY || biome instanceof
 		 * NetherWartForest || biome instanceof NetherWartForestEdge) { return
@@ -109,7 +110,7 @@ public class StructurePath implements IStructure {
 		return Blocks.BASALT.defaultBlockState();
 	}
 
-	private BlockState getSlabMaterial(ServerLevelAccessor world, BlockPos pos, Biome biome) {
+	private BlockState getSlabMaterial(ServerLevelAccessor world, BlockPos pos, Holder<Biome> biome) {
 		/*
 		 * if (biome == BuiltInBiomes.SOUL_SAND_VALLEY || biome instanceof
 		 * NetherWartForest || biome instanceof NetherWartForestEdge) { return

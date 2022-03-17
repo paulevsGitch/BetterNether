@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
@@ -35,8 +36,8 @@ public class OldWarpedWoods extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_WARPED_FOREST_MOOD)
 				   .particles(ParticleTypes.WARPED_SPORE, 0.025F)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getBASTION_REMNANT())
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE())
+					.structure(BiomeTags.HAS_BASTION_REMNANT)
+					.structure(BiomeTags.HAS_NETHER_FORTRESS)
 			       .feature(NetherFeatures.NETHER_RUBY_ORE);
 		}
 		

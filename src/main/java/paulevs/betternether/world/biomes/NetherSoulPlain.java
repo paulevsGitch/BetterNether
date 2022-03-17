@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -48,7 +49,7 @@ public class NetherSoulPlain extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY)
 				   .particles(ParticleTypes.PORTAL, 0.02F)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_FOSSILE())
+					.structure(BiomeTags.HAS_NETHER_FOSSIL)
 				   .feature(NetherFeatures.NETHER_RUBY_ORE_SOUL);
 		}
 		

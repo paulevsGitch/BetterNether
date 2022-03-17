@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -35,7 +36,7 @@ public class NetherMagmaLand extends NetherBiome {
 				   .loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
 				   .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
+					.structure(BiomeTags.HAS_NETHER_FORTRESS);
 		}
 		
 		@Override
