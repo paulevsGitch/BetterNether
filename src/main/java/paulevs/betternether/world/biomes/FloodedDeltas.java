@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -35,7 +36,7 @@ public class FloodedDeltas extends NetherBiome {
 				   .mood(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD)
 				   .music(SoundEvents.MUSIC_BIOME_BASALT_DELTAS)
 				   .particles(ParticleTypes.WHITE_ASH, 0.12F)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
+				   .structure(BiomeTags.HAS_NETHER_FORTRESS);
 		}
 		
 		@Override

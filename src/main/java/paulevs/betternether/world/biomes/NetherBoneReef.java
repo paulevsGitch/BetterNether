@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import paulevs.betternether.registry.NetherBlocks;
@@ -35,7 +36,7 @@ public class NetherBoneReef extends NetherBiome {
 				   .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
 				   .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
 				   .particles(ParticleTypes.WARPED_SPORE, 0.01F)
-				   .structure(NetherBiomeBuilder.VANILLA_STRUCTURES.getNETHER_BRIDGE());
+				   .structure(BiomeTags.HAS_NETHER_FORTRESS);
 		}
 		
 		@Override
