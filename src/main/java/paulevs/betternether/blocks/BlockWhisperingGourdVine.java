@@ -1,14 +1,9 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -16,6 +11,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -30,7 +26,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -42,15 +37,24 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
+import ru.bclib.api.tag.NamedMineableTags;
+import ru.bclib.api.tag.TagAPI;
+import ru.bclib.interfaces.TagProvider;
+import ru.bclib.items.tool.BaseShearsItem;
 
-public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock {
+import java.util.List;
+import java.util.Random;
+
+public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, TagProvider {
 	private static final VoxelShape SELECTION = Block.box(2, 0, 2, 14, 16, 14);
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockWhisperingGourdVine() {
 		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_RED)
-				.breakByTool(FabricToolTags.SHEARS)
+				//TODO: 1.18.2 test this
+				//.breakByTool(FabricToolTags.SHEARS)
+				.requiresTool()
 				.sounds(SoundType.CROP)
 				.noCollision()
 				.breakInstantly()
@@ -119,7 +123,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 	@Override
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-		if (tool != null && (FabricToolTags.SHEARS.contains(tool.getItem()) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0))
+		if (tool != null && (BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0))
 			return Lists.newArrayList(new ItemStack(this.asItem()));
 		else if (state.getValue(SHAPE) == TripleShape.BOTTOM || MHelper.RANDOM.nextBoolean())
 			return Lists.newArrayList(new ItemStack(this.asItem()));
@@ -140,7 +144,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack tool = player.getItemInHand(hand);
-		if (FabricToolTags.SHEARS.contains(tool.getItem()) && state.getValue(SHAPE) == TripleShape.MIDDLE) {
+		if (BaseShearsItem.isShear(tool) && state.getValue(SHAPE) == TripleShape.MIDDLE) {
 			if (!world.isClientSide) {
 				BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, TripleShape.BOTTOM));
 				world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(NetherBlocks.WHISPERING_GOURD)));
@@ -153,5 +157,10 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 		else {
 			return super.use(state, world, pos, player, hand, hit);
 		}
+	}
+
+	@Override
+	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
+		blockTags.add(NamedMineableTags.SHEARS);
 	}
 }

@@ -1,6 +1,5 @@
 package paulevs.betternether.world.structures.decorations;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -10,6 +9,8 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
+
+import java.util.Random;
 
 public class StructureStalactiteCeil implements IStructure {
 	private final Block block;

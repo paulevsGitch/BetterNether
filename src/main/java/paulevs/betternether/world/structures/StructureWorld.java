@@ -1,12 +1,13 @@
 package paulevs.betternether.world.structures;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
+
+import java.util.Random;
 
 public class StructureWorld extends StructureNBT implements IStructure {
 	protected final StructureType type;

@@ -1,6 +1,5 @@
 package paulevs.betternether.world.structures.decorations;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -9,6 +8,8 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.StructureWorld;
+
+import java.util.Random;
 
 public class StructureWartDeadwood implements IStructure {
 	private static final StructureWorld[] TREES = new StructureWorld[] {

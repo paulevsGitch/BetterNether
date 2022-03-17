@@ -1,27 +1,19 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -32,8 +24,13 @@ import paulevs.betternether.blocks.BlockProperties.EnumLucisShape;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
+import ru.bclib.api.tag.NamedMineableTags;
+import ru.bclib.api.tag.TagAPI;
+import ru.bclib.interfaces.TagProvider;
 
-public class BlockLucisMushroom extends BlockBaseNotFull {
+import java.util.List;
+
+public class BlockLucisMushroom extends BlockBaseNotFull implements TagProvider {
 	private static final VoxelShape V_SHAPE = Block.box(0, 0, 0, 16, 9, 16);
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	public static final EnumProperty<EnumLucisShape> SHAPE = BlockProperties.LUCIS_SHAPE;
@@ -42,7 +39,9 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 		super(FabricBlockSettings.of(Materials.NETHER_GRASS)
 				.mapColor(MaterialColor.COLOR_YELLOW)
 				.luminance(15)
-				.breakByTool(FabricToolTags.AXES)
+				//TODO: 1.18.2 test this
+				//.breakByTool(FabricToolTags.AXES)
+				.requiresTool()
 				.sounds(SoundType.WOOD)
 				.hardness(1F)
 				.nonOpaque());
@@ -91,5 +90,10 @@ public class BlockLucisMushroom extends BlockBaseNotFull {
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		return new ItemStack(NetherBlocks.LUCIS_SPORE);
+	}
+
+	@Override
+	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
+		blockTags.add(NamedMineableTags.AXE);
 	}
 }

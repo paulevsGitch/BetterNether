@@ -3,17 +3,24 @@ package paulevs.betternether.blocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import ru.bclib.api.tag.NamedMineableTags;
+import ru.bclib.api.tag.TagAPI;
+import ru.bclib.interfaces.TagProvider;
 
-public class BNGlass extends BlockBaseNotFull {
+import java.util.List;
+
+public class BNGlass extends BlockBaseNotFull implements TagProvider {
 	public BNGlass(Block block) {
 		super(FabricBlockSettings.copyOf(block)
-				.breakByTool(FabricToolTags.PICKAXES)
+				//TODO:1.18.2 test this
+				//.breakByTool(FabricToolTags.PICKAXES)
+				.requiresTool()
 				.resistance(0.3F)
 				.nonOpaque()
 				.isSuffocating((arg1, arg2, arg3) -> {
@@ -38,5 +45,10 @@ public class BNGlass extends BlockBaseNotFull {
 	@Environment(EnvType.CLIENT)
 	public boolean skipRendering(BlockState state, BlockState neighbor, Direction facing) {
 		return neighbor.getBlock() == this ? true : super.skipRendering(state, neighbor, facing);
+	}
+
+	@Override
+	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
+		blockTags.add(NamedMineableTags.SHEARS);
 	}
 }

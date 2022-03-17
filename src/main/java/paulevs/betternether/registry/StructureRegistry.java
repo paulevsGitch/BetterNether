@@ -1,65 +1,15 @@
 package paulevs.betternether.registry;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.bones.StructureBoneReef;
 import paulevs.betternether.world.structures.decorations.StructureCrystal;
 import paulevs.betternether.world.structures.decorations.StructureGeyser;
 import paulevs.betternether.world.structures.decorations.StructureWartDeadwood;
-import paulevs.betternether.world.structures.plants.StructureAgave;
-import paulevs.betternether.world.structures.plants.StructureBarrelCactus;
-import paulevs.betternether.world.structures.plants.StructureBigWarpedTree;
-import paulevs.betternether.world.structures.plants.StructureBlackApple;
-import paulevs.betternether.world.structures.plants.StructureBlackBush;
-import paulevs.betternether.world.structures.plants.StructureBlackVine;
-import paulevs.betternether.world.structures.plants.StructureBloomingVine;
-import paulevs.betternether.world.structures.plants.StructureCrimsonFungus;
-import paulevs.betternether.world.structures.plants.StructureCrimsonGlowingTree;
-import paulevs.betternether.world.structures.plants.StructureCrimsonPinewood;
-import paulevs.betternether.world.structures.plants.StructureCrimsonRoots;
-import paulevs.betternether.world.structures.plants.StructureEggPlant;
-import paulevs.betternether.world.structures.plants.StructureEye;
-import paulevs.betternether.world.structures.plants.StructureGiantMold;
-import paulevs.betternether.world.structures.plants.StructureGoldenVine;
-import paulevs.betternether.world.structures.plants.StructureGrayMold;
-import paulevs.betternether.world.structures.plants.StructureInkBush;
-import paulevs.betternether.world.structures.plants.StructureJunglePlant;
-import paulevs.betternether.world.structures.plants.StructureLucis;
-import paulevs.betternether.world.structures.plants.StructureMagmaFlower;
-import paulevs.betternether.world.structures.plants.StructureMedBrownMushroom;
-import paulevs.betternether.world.structures.plants.StructureMedRedMushroom;
-import paulevs.betternether.world.structures.plants.StructureMushroomFir;
-import paulevs.betternether.world.structures.plants.StructureNetherCactus;
-import paulevs.betternether.world.structures.plants.StructureNetherGrass;
-import paulevs.betternether.world.structures.plants.StructureNetherWart;
-import paulevs.betternether.world.structures.plants.StructureOldBrownMushrooms;
-import paulevs.betternether.world.structures.plants.StructureOldRedMushrooms;
-import paulevs.betternether.world.structures.plants.StructureOrangeMushroom;
-import paulevs.betternether.world.structures.plants.StructureRedMold;
-import paulevs.betternether.world.structures.plants.StructureReeds;
-import paulevs.betternether.world.structures.plants.StructureRubeus;
-import paulevs.betternether.world.structures.plants.StructureRubeusBush;
-import paulevs.betternether.world.structures.plants.StructureSmoker;
-import paulevs.betternether.world.structures.plants.StructureSoulGrass;
-import paulevs.betternether.world.structures.plants.StructureSoulLily;
-import paulevs.betternether.world.structures.plants.StructureSoulVein;
-import paulevs.betternether.world.structures.plants.StructureStalagnate;
-import paulevs.betternether.world.structures.plants.StructureSwampGrass;
-import paulevs.betternether.world.structures.plants.StructureTwistedVines;
-import paulevs.betternether.world.structures.plants.StructureVanillaMushroom;
-import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.world.structures.plants.StructureWallMoss;
-import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
-import paulevs.betternether.world.structures.plants.StructureWarpedFungus;
-import paulevs.betternether.world.structures.plants.StructureWarpedRoots;
-import paulevs.betternether.world.structures.plants.StructureWartBush;
-import paulevs.betternether.world.structures.plants.StructureWartSeed;
-import paulevs.betternether.world.structures.plants.StructureWartTree;
-import paulevs.betternether.world.structures.plants.StructureWillow;
+import paulevs.betternether.world.structures.plants.*;
+
+import java.util.Map;
 
 public class StructureRegistry {
 	private static final Map<StructureType, Map<String, IStructure>> REGISTRY;

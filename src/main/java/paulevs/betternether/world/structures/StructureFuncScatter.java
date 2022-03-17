@@ -1,12 +1,13 @@
 package paulevs.betternether.world.structures;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
+
+import java.util.Random;
 
 public abstract class StructureFuncScatter implements IStructure {
 	final int distance;

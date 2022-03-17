@@ -1,12 +1,13 @@
 package paulevs.betternether.registry;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BrewingRegistry {
 	private static final List<BrewingRecipe> RECIPES = new ArrayList<BrewingRecipe>();

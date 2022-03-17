@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -14,6 +12,8 @@ import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.structures.plants.StructureRubeus;
 import ru.bclib.blocks.FeatureSaplingBlock;
 import ru.bclib.world.features.DefaultFeature;
+
+import java.util.Random;
 
 class RubeusTreeFeature extends DefaultFeature {
 	private static final StructureRubeus STRUCTURE = new StructureRubeus();

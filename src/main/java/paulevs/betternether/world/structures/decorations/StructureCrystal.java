@@ -1,6 +1,5 @@
 package paulevs.betternether.world.structures.decorations;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -14,6 +13,8 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
+
+import java.util.Random;
 
 public class StructureCrystal implements IStructure {
 	private static final Block[] PALETTES = new Block[] {

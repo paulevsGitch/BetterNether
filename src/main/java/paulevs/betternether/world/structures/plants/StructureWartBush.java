@@ -1,6 +1,5 @@
 package paulevs.betternether.world.structures.plants;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -10,6 +9,8 @@ import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
+
+import java.util.Random;
 
 public class StructureWartBush implements IStructure {
 	private static final Direction[] DIRS = new Direction[] { Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST };

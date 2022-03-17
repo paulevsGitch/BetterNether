@@ -1,6 +1,5 @@
 package paulevs.betternether.world.structures.piece;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -10,11 +9,12 @@ import net.minecraft.world.level.StructureFeatureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+
+import java.util.Random;
 
 public class DestructionPiece extends CustomPiece {
 	private final MutableBlockPos POS = new MutableBlockPos();

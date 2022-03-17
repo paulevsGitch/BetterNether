@@ -1,8 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-import java.util.function.BiFunction;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -12,8 +9,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
-import net.minecraft.world.level.levelgen.placement.CaveSurface;
-import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.SoundsRegistry;
 import paulevs.betternether.world.NetherBiome;
@@ -28,7 +23,8 @@ import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.world.biomes.BCLBiomeSettings;
-import ru.bclib.world.surface.DoubleBlockSurfaceNoiseCondition;
+
+import java.util.Random;
 
 public class NetherGravelDesert extends NetherBiome {
 	public static final SurfaceRules.RuleSource GRAVEL = SurfaceRules.state(Blocks.GRAVEL.defaultBlockState());

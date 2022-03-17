@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,6 +16,9 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.FoodShape;
+
+import java.util.Collections;
+import java.util.List;
 
 public class BlockStalagnateBowl extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.box(5, 0, 5, 11, 3, 11);

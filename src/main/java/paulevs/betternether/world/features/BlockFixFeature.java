@@ -13,8 +13,6 @@ import paulevs.betternether.blocks.BlockStalactite;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import ru.bclib.world.features.DefaultFeature;
 
-import java.util.Random;
-
 public class BlockFixFeature extends DefaultFeature {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {

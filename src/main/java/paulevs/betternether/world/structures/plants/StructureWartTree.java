@@ -1,9 +1,5 @@
 package paulevs.betternether.world.structures.plants;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
@@ -17,6 +13,10 @@ import paulevs.betternether.blocks.BlockWartSeed;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.StructureFuncScatter;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class StructureWartTree extends StructureFuncScatter {
     private static final BlockState WART_BLOCK = Blocks.NETHER_WART_BLOCK.defaultBlockState();

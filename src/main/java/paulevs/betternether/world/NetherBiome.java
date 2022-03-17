@@ -1,12 +1,5 @@
 package paulevs.betternether.world;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.LevelAccessor;
@@ -14,10 +7,10 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
+import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.StructureWorld;
 import paulevs.betternether.world.structures.decorations.StructureStalactiteCeil;
@@ -25,6 +18,8 @@ import paulevs.betternether.world.structures.decorations.StructureStalactiteFloo
 import paulevs.betternether.world.structures.plants.StructureWartCap;
 import ru.bclib.world.biomes.BCLBiome;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.*;
 
 public abstract class NetherBiome extends BCLBiome{
 	private static final String[] DEF_STRUCTURES = new String[] {

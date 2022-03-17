@@ -1,8 +1,5 @@
 package paulevs.betternether.blockentities;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -31,6 +28,10 @@ import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.BrewingRegistry;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
 	private static final int[] TOP_SLOTS = new int[] { 3 };

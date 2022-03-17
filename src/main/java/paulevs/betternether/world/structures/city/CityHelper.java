@@ -1,12 +1,5 @@
 package paulevs.betternether.world.structures.city;
 
-import java.time.Instant;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -16,7 +9,12 @@ import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import paulevs.betternether.registry.NetherStructures;
-import paulevs.betternether.world.structures.city.CityFeature;
+
+import java.time.Instant;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CityHelper {
 	private static final Set<ChunkPos> POSITIONS = Collections.newSetFromMap(new ConcurrentHashMap<ChunkPos,Boolean>(16));

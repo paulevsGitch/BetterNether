@@ -1,7 +1,5 @@
 package paulevs.betternether.world.structures.piece;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -14,7 +12,6 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
@@ -23,6 +20,8 @@ import paulevs.betternether.world.structures.city.BuildingStructureProcessor;
 import paulevs.betternether.world.structures.city.StructureCityBuilding;
 import paulevs.betternether.world.structures.city.palette.CityPalette;
 import paulevs.betternether.world.structures.city.palette.Palettes;
+
+import java.util.Random;
 
 public class CityPiece extends CustomPiece {
 	private final MutableBlockPos POS = new MutableBlockPos();

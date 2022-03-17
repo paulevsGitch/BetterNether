@@ -1,12 +1,13 @@
 package paulevs.betternether.world.structures.plants;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
+
+import java.util.Random;
 
 public class StructureHookMushroom implements IStructure {
 	@Override

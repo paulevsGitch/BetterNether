@@ -10,20 +10,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.entity.model.ModelEntityFirefly;
-import paulevs.betternether.entity.model.ModelEntityFlyingPig;
-import paulevs.betternether.entity.model.ModelEntityHydrogenJellyfish;
-import paulevs.betternether.entity.model.ModelJungleSkeleton;
-import paulevs.betternether.entity.model.ModelNaga;
-import paulevs.betternether.entity.model.ModelSkull;
-import paulevs.betternether.entity.render.RenderChair;
-import paulevs.betternether.entity.render.RenderFirefly;
-import paulevs.betternether.entity.render.RenderFlyingPig;
-import paulevs.betternether.entity.render.RenderHydrogenJellyfish;
-import paulevs.betternether.entity.render.RenderJungleSkeleton;
-import paulevs.betternether.entity.render.RenderNaga;
-import paulevs.betternether.entity.render.RenderNagaProjectile;
-import paulevs.betternether.entity.render.RenderSkull;
+import paulevs.betternether.entity.model.*;
+import paulevs.betternether.entity.render.*;
 
 @Environment(EnvType.CLIENT)
 public class EntityRenderRegistry {

@@ -11,10 +11,10 @@ import net.minecraft.world.level.material.Material;
 import paulevs.betternether.blocks.BlockTerrain;
 import paulevs.betternether.blocks.materials.Materials;
 import ru.bclib.api.BonemealAPI;
+import ru.bclib.api.ComposterAPI;
 import ru.bclib.api.tag.NamedBlockTags;
 import ru.bclib.api.tag.NamedMineableTags;
 import ru.bclib.api.tag.TagAPI;
-import ru.bclib.api.ComposterAPI;
 import ru.bclib.blocks.SimpleLeavesBlock;
 
 public class NetherTags {

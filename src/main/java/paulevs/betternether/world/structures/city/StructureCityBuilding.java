@@ -1,7 +1,5 @@
 package paulevs.betternether.world.structures.city;
 
-import java.util.List;
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -17,6 +15,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
 import paulevs.betternether.world.structures.StructureNBT;
+
+import java.util.List;
+import java.util.Random;
 
 public class StructureCityBuilding extends StructureNBT {
 	protected static final BlockState AIR = Blocks.AIR.defaultBlockState();

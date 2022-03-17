@@ -1,24 +1,20 @@
 package paulevs.betternether.recipes;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import com.google.common.collect.Sets;
+import com.google.gson.JsonSyntaxException;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraft.world.item.crafting.ShapelessRecipe;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.gson.JsonSyntaxException;
+import net.minecraft.world.item.crafting.*;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
 import ru.bclib.recipes.BCLRecipeManager;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class BNRecipeManager extends BCLRecipeManager {
 	public static void addRecipe(RecipeType<?> type, Recipe<?> recipe) {

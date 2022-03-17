@@ -1,8 +1,5 @@
 package paulevs.betternether.world.structures;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Vec3i;
@@ -18,6 +15,10 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import paulevs.betternether.BetterNether;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Random;
 
 public class StructureNBT {
 	protected ResourceLocation location;

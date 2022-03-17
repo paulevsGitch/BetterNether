@@ -1,10 +1,5 @@
 package paulevs.betternether.entity;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Vec3i;
@@ -16,11 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -52,6 +43,8 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.SoundsRegistry;
 import ru.bclib.entity.DespawnableAnimal;
+
+import java.util.*;
 
 public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 	private static final HashSet<Block> FLOWERS;

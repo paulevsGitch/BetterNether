@@ -1,6 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.function.Supplier;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -9,6 +8,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import paulevs.betternether.registry.NetherBlocks;
+
+import java.util.function.Supplier;
 
 public class BlockProperties {
 	public static final EnumProperty<CincinnasitPillarShape> PILLAR_SHAPE = EnumProperty.create("shape", CincinnasitPillarShape.class);

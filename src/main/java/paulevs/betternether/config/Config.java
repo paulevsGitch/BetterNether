@@ -1,24 +1,14 @@
 package paulevs.betternether.config;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
+import com.google.common.collect.Lists;
+import com.google.gson.*;
+import paulevs.betternether.BetterNether;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-
-import com.google.common.collect.Lists;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import paulevs.betternether.BetterNether;
 
 public final class Config {
 	private static final List<Config> ALL = Lists.newArrayList();

@@ -1,13 +1,14 @@
 package paulevs.betternether.world.structures.city.palette;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.blocks.complex.RoofMaterial;
 import paulevs.betternether.blocks.complex.WillowMaterial;
 import paulevs.betternether.registry.NetherBlocks;
 import ru.bclib.complexmaterials.WoodenComplexMaterial;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 public class Palettes {
 	private static final HashMap<String, CityPalette> REGISTRY = new HashMap<String, CityPalette>();

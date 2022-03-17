@@ -1,7 +1,5 @@
 package paulevs.betternether.mixin.client;
 
-import java.util.Iterator;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ArmorStandArmorModel;
@@ -18,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.betternether.BetterNether;
+
+import java.util.Iterator;
 
 @Environment(EnvType.CLIENT)
 @Mixin(PlayerRenderer.class)

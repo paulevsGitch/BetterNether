@@ -1,15 +1,11 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-import java.util.function.BiFunction;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
@@ -18,15 +14,13 @@ import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.bones.StructureBoneReef;
 import paulevs.betternether.world.structures.decorations.StructureStalactiteCeil;
 import paulevs.betternether.world.structures.decorations.StructureStalactiteFloor;
-import paulevs.betternether.world.structures.plants.StructureBoneGrass;
-import paulevs.betternether.world.structures.plants.StructureFeatherFern;
-import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
-import paulevs.betternether.world.structures.plants.StructureLumabusVine;
-import paulevs.betternether.world.structures.plants.StructureReeds;
+import paulevs.betternether.world.structures.plants.*;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.Random;
 
 public class NetherBoneReef extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {

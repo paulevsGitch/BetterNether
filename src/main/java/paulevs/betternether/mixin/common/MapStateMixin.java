@@ -1,7 +1,5 @@
 package paulevs.betternether.mixin.common;
 
-import java.util.List;
-import java.util.Map;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
@@ -15,6 +13,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Map;
 
 @Mixin(MapItemSavedData.class)
 public abstract class MapStateMixin extends SavedData {

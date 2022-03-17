@@ -5,8 +5,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.particles.SimpleParticleType;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.particles.BNSimpleParticleType;
 import paulevs.betternether.particles.BNParticleProvider;
+import paulevs.betternether.particles.BNSimpleParticleType;
 
 public class NetherParticles {
 	public static SimpleParticleType BLUE_DRIPPING_OBSIDIAN_TEAR;

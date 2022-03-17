@@ -1,6 +1,7 @@
 package paulevs.betternether.mixin.common;
 
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TieredItem;
@@ -17,7 +18,7 @@ import ru.bclib.api.tag.CommonBlockTags;
 
 @Mixin(DiggerItem.class)
 public abstract class MiningToolItemMixin extends TieredItem implements Vanishable {
-	@Shadow @Final private Tag<Block> blocks;
+	@Shadow @Final private TagKey<Block> blocks;
 	
 	protected MiningToolItemMixin(float attackDamage, float attackSpeed, Tier material, Tag<Block> effectiveBlocks, Properties settings) {
 		super(material, settings);

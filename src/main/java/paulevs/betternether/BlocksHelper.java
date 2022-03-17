@@ -1,8 +1,5 @@
 package paulevs.betternether;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -22,6 +19,10 @@ import net.minecraft.world.level.material.LavaFluid;
 import paulevs.betternether.blocks.BlockFarmland;
 import paulevs.betternether.registry.NetherBlocks;
 import ru.bclib.api.tag.CommonBlockTags;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
 
 public class BlocksHelper {
 	public static final int FLAG_UPDATE_BLOCK = 1;

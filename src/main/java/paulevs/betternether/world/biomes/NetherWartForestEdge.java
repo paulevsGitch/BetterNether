@@ -1,7 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -22,6 +20,8 @@ import paulevs.betternether.world.structures.plants.StructureWartSeed;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.Random;
 
 public class NetherWartForestEdge extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {

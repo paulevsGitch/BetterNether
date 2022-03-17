@@ -1,13 +1,13 @@
 package paulevs.betternether.integrations;
 
-import java.lang.reflect.Constructor;
-
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import org.apache.logging.log4j.LogManager;
 import paulevs.betternether.registry.NetherItems;
+
+import java.lang.reflect.Constructor;
 
 public class VanillaHammersIntegration {
 	private static boolean hasHammers;

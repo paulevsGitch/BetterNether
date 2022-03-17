@@ -1,7 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -19,23 +17,12 @@ import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
-import paulevs.betternether.world.structures.plants.StructureBlackBush;
-import paulevs.betternether.world.structures.plants.StructureBlackVine;
-import paulevs.betternether.world.structures.plants.StructureFeatherFern;
-import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
-import paulevs.betternether.world.structures.plants.StructureOldWillow;
-import paulevs.betternether.world.structures.plants.StructureReeds;
-import paulevs.betternether.world.structures.plants.StructureSmoker;
-import paulevs.betternether.world.structures.plants.StructureSoulVein;
-import paulevs.betternether.world.structures.plants.StructureSwampGrass;
-import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.world.structures.plants.StructureWallMoss;
-import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
-import paulevs.betternether.world.structures.plants.StructureWillow;
-import paulevs.betternether.world.structures.plants.StructureWillowBush;
+import paulevs.betternether.world.structures.plants.*;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.Random;
 
 public class OldSwampland extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {

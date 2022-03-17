@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -23,6 +21,8 @@ import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.structures.plants.StructureStalagnate;
 import ru.bclib.blocks.FeatureSaplingBlock;
 import ru.bclib.world.features.DefaultFeature;
+
+import java.util.Random;
 
 class StalagnateTreeFeatureUp extends DefaultFeature {
 	static final StructureStalagnate STRUCTURE = new StructureStalagnate();

@@ -1,9 +1,5 @@
 package paulevs.betternether.entity;
 
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -51,6 +47,11 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherEntities;
 import ru.bclib.entity.DespawnableAnimal;
+
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 	private static final EntityDataAccessor<Byte> DATA_SHARED_FLAGS_ID;

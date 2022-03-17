@@ -2,7 +2,6 @@ package paulevs.betternether.world.features;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -10,12 +9,9 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBiomes;
-import paulevs.betternether.world.BNWorldGenerator;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import ru.bclib.world.features.DefaultFeature;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class CleanupFeature extends DefaultFeature {

@@ -1,7 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,14 +19,12 @@ import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.decorations.StructureWartDeadwood;
-import paulevs.betternether.world.structures.plants.StructureBlackBush;
-import paulevs.betternether.world.structures.plants.StructureNetherWart;
-import paulevs.betternether.world.structures.plants.StructureSoulLily;
-import paulevs.betternether.world.structures.plants.StructureWartSeed;
-import paulevs.betternether.world.structures.plants.StructureWartTree;
+import paulevs.betternether.world.structures.plants.*;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.Random;
 
 public class NetherWartForest extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {

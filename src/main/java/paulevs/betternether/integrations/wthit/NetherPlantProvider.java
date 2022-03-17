@@ -1,10 +1,6 @@
 package paulevs.betternether.integrations.wthit;
 
-import mcp.mobius.waila.api.IBlockAccessor;
-import mcp.mobius.waila.api.IBlockComponentProvider;
-import mcp.mobius.waila.api.IPluginConfig;
-import mcp.mobius.waila.api.ITooltip;
-import mcp.mobius.waila.api.ITooltipComponent;
+import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.PairComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;

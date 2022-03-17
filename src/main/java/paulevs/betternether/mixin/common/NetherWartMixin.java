@@ -1,6 +1,5 @@
 package paulevs.betternether.mixin.common;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
@@ -17,6 +16,8 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.plants.StructureMedBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureMedRedMushroom;
+
+import java.util.Random;
 
 @Mixin(NetherWartBlock.class)
 public abstract class NetherWartMixin extends BushBlock {

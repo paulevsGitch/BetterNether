@@ -1,8 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-import java.util.function.BiFunction;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -15,18 +12,12 @@ import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
-import paulevs.betternether.world.structures.plants.StructureBlackApple;
-import paulevs.betternether.world.structures.plants.StructureBlackBush;
-import paulevs.betternether.world.structures.plants.StructureInkBush;
-import paulevs.betternether.world.structures.plants.StructureMagmaFlower;
-import paulevs.betternether.world.structures.plants.StructureNetherGrass;
-import paulevs.betternether.world.structures.plants.StructureNetherWart;
-import paulevs.betternether.world.structures.plants.StructureReeds;
-import paulevs.betternether.world.structures.plants.StructureSmoker;
-import paulevs.betternether.world.structures.plants.StructureWartSeed;
+import paulevs.betternether.world.structures.plants.*;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.Random;
 
 public class NetherPoorGrasslands extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {

@@ -1,17 +1,18 @@
 package paulevs.betternether.recipes;
 
-import java.util.Map;
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import com.google.common.collect.ImmutableMap;
 import paulevs.betternether.integrations.VanillaExcavatorsIntegration;
 import paulevs.betternether.integrations.VanillaHammersIntegration;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
+
+import java.util.Map;
 
 public class IntegrationRecipes {
 	public static void register() {

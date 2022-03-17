@@ -11,9 +11,9 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.config.Configs;
+import paulevs.betternether.world.features.CavesFeature;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import paulevs.betternether.world.structures.StructureType;
-import paulevs.betternether.world.features.CavesFeature;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.world.generator.GeneratorOptions;
 

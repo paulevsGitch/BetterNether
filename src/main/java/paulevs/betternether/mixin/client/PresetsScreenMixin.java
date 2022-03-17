@@ -1,8 +1,5 @@
 package paulevs.betternether.mixin.client;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.PresetFlatWorldScreen;
@@ -17,6 +14,9 @@ import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.flat.FlatLayerInfo;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+
+import java.util.Collections;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 @Mixin(PresetFlatWorldScreen.class)

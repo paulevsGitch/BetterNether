@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
@@ -18,6 +15,9 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import ru.bclib.api.tag.NamedCommonBlockTags;
 import ru.bclib.api.tag.TagAPI;
 import ru.bclib.interfaces.TagProvider;
+
+import java.util.Collections;
+import java.util.List;
 
 public class BlockTerrain extends BlockBase implements TagProvider {
 	public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,

@@ -1,7 +1,5 @@
 package paulevs.betternether.registry;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -15,6 +13,9 @@ import paulevs.betternether.blockentities.BlockEntityFurnace;
 import paulevs.betternether.blocks.BlockNetherFurnace;
 import ru.bclib.blocks.BaseBarrelBlock;
 import ru.bclib.blocks.BaseChestBlock;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockEntitiesRegistry {
 	public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = BlockEntityType.Builder.of(BlockEntityForge::new, NetherBlocks.CINCINNASITE_FORGE).build(null);

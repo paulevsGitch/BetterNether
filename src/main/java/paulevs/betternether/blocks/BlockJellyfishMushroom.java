@@ -1,9 +1,6 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
@@ -34,6 +31,8 @@ import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
+
+import java.util.List;
 
 public class BlockJellyfishMushroom extends BlockBaseNotFull {
 	private static final VoxelShape TOP_SHAPE = Block.box(1, 0, 1, 15, 16, 15);

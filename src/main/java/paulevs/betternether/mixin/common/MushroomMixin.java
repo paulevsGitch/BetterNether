@@ -1,6 +1,5 @@
 package paulevs.betternether.mixin.common;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelReader;
@@ -16,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.plants.StructureMedBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureMedRedMushroom;
+
+import java.util.Random;
 
 @Mixin(MushroomBlock.class)
 public abstract class MushroomMixin {

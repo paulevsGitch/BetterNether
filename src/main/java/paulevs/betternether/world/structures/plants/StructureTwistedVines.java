@@ -1,6 +1,5 @@
 package paulevs.betternether.world.structures.plants;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -9,6 +8,8 @@ import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
+
+import java.util.Random;
 
 public class StructureTwistedVines implements IStructure {
 	private boolean canPlaceAt(LevelAccessor world, BlockPos pos) {

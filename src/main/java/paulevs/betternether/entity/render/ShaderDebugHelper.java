@@ -1,5 +1,19 @@
 package paulevs.betternether.entity.render;
 
+import com.google.common.collect.Sets;
+import com.mojang.blaze3d.preprocessor.GlslPreprocessor;
+import com.mojang.blaze3d.shaders.Program;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import net.minecraft.FileUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceProvider;
+import org.apache.commons.io.IOUtils;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,20 +22,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Set;
 import java.util.function.Function;
-import net.minecraft.FileUtil;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderStateShard;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
-import net.minecraft.server.packs.resources.ResourceProvider;
-import org.jetbrains.annotations.Nullable;
-
-import com.google.common.collect.Sets;
-import com.mojang.blaze3d.preprocessor.GlslPreprocessor;
-import com.mojang.blaze3d.shaders.Program;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import org.apache.commons.io.IOUtils;
 
 abstract class ShaderDebugHelper extends RenderStateShard {
     static int targetCacheID = 50;

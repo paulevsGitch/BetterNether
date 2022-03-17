@@ -1,20 +1,13 @@
 package paulevs.betternether.items;
 
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.interfaces.InitialStackStateProvider;
 import paulevs.betternether.items.materials.BNToolMaterial;
 import paulevs.betternether.registry.NetherItems;
-import ru.bclib.interfaces.TagProvider;
 import ru.bclib.items.tool.BaseHoeItem;
-
-import java.util.List;
 
 public class NetherHoe extends BaseHoeItem  implements InitialStackStateProvider {
 

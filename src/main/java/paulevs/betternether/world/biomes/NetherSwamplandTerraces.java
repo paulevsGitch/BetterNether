@@ -1,8 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-import java.util.function.BiFunction;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.LevelAccessor;
@@ -13,6 +10,8 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.NetherBiome;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.Random;
 
 public class NetherSwamplandTerraces extends NetherSwampland {
 	public static class Config extends NetherSwampland.Config {

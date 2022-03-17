@@ -1,23 +1,14 @@
 package paulevs.betternether.registry;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.EntityType.EntityFactory;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier.Builder;
 import net.minecraft.world.level.LevelAccessor;
@@ -27,14 +18,7 @@ import net.minecraft.world.level.levelgen.Heightmap.Types;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.config.Configs;
-import paulevs.betternether.entity.EntityChair;
-import paulevs.betternether.entity.EntityFirefly;
-import paulevs.betternether.entity.EntityFlyingPig;
-import paulevs.betternether.entity.EntityHydrogenJellyfish;
-import paulevs.betternether.entity.EntityJungleSkeleton;
-import paulevs.betternether.entity.EntityNaga;
-import paulevs.betternether.entity.EntityNagaProjectile;
-import paulevs.betternether.entity.EntitySkull;
+import paulevs.betternether.entity.*;
 import paulevs.betternether.world.NetherBiomeConfig;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
@@ -42,6 +26,9 @@ import ru.bclib.api.spawning.SpawnRuleBuilder;
 import ru.bclib.entity.BCLEntityWrapper;
 import ru.bclib.interfaces.SpawnRule;
 import ru.bclib.util.ColorUtil;
+
+import java.util.List;
+import java.util.Map;
 
 public class NetherEntities {
 	public static enum KnownSpawnTypes {

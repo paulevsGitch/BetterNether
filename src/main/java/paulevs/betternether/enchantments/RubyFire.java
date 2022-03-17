@@ -25,11 +25,7 @@ import paulevs.betternether.items.NetherArmor;
 import paulevs.betternether.items.materials.BNToolMaterial;
 import paulevs.betternether.registry.NetherEnchantments;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class RubyFire extends Enchantment {
 	private static final EquipmentSlot[] ARMOR_SLOTS = new EquipmentSlot[] {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};

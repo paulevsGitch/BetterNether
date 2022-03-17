@@ -1,6 +1,5 @@
 package paulevs.betternether.world.structures.plants;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -10,6 +9,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
+
+import java.util.Random;
 
 public class StructureWall implements IStructure {
 	private static final Direction[] DIRECTIONS = HorizontalDirectionalBlock.FACING.getPossibleValues().toArray(new Direction[] {});

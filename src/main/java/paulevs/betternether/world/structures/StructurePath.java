@@ -1,6 +1,5 @@
 package paulevs.betternether.world.structures;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
@@ -13,6 +12,8 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
+
+import java.util.Random;
 
 public class StructurePath implements IStructure {
 	private final OpenSimplexNoise heightNoise;

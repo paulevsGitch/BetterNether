@@ -1,10 +1,6 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.function.ToIntFunction;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
@@ -24,6 +20,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.BlockProperties.WillowBranchShape;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
+
+import java.util.List;
+import java.util.function.ToIntFunction;
 
 public class BlockWillowBranch extends BlockBaseNotFull {
 	private static final VoxelShape V_SHAPE = Block.box(4, 0, 4, 12, 16, 12);

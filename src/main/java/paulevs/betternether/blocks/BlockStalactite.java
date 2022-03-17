@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import javax.annotation.Nullable;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -18,6 +16,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import javax.annotation.Nullable;
 
 public class BlockStalactite extends BlockBaseNotFull {
 	public static final IntegerProperty SIZE = IntegerProperty.create("size", 0, 7);	

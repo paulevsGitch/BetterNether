@@ -1,8 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -22,6 +19,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.entity.EntityChair;
 import paulevs.betternether.registry.NetherEntities;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class BNChair extends BlockBaseNotFull {
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;

@@ -1,9 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiFunction;
-
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -22,27 +18,17 @@ import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
-import paulevs.betternether.world.structures.plants.StructureBlackApple;
-import paulevs.betternether.world.structures.plants.StructureBlackBush;
-import paulevs.betternether.world.structures.plants.StructureInkBush;
-import paulevs.betternether.world.structures.plants.StructureMagmaFlower;
-import paulevs.betternether.world.structures.plants.StructureNetherGrass;
-import paulevs.betternether.world.structures.plants.StructureNetherWart;
-import paulevs.betternether.world.structures.plants.StructureReeds;
-import paulevs.betternether.world.structures.plants.StructureSmoker;
-import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.world.structures.plants.StructureWallMoss;
-import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
-import paulevs.betternether.world.structures.plants.StructureWartSeed;
-import paulevs.betternether.world.surface.NetherNoiseCondition;
+import paulevs.betternether.world.structures.plants.*;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
-import ru.bclib.api.surface.rules.RandomIntProvider;
 import ru.bclib.api.surface.rules.SwitchRuleSource;
 import ru.bclib.interfaces.NumericProvider;
 import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.List;
+import java.util.Random;
 
 class NetherGrasslandsNumericProvider implements NumericProvider{
 	public static final NetherGrasslandsNumericProvider DEFAULT = new NetherGrasslandsNumericProvider();

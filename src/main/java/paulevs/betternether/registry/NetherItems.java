@@ -1,27 +1,16 @@
 package paulevs.betternether.registry;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import org.jetbrains.annotations.NotNull;
@@ -30,14 +19,7 @@ import paulevs.betternether.blocks.BlockProperties.FoodShape;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.integrations.VanillaExcavatorsIntegration;
 import paulevs.betternether.integrations.VanillaHammersIntegration;
-import paulevs.betternether.items.NetherArmor;
-import paulevs.betternether.items.NetherAxe;
-import paulevs.betternether.items.NetherHoe;
-import paulevs.betternether.items.NetherPickaxe;
-import paulevs.betternether.items.NetherShovel;
-import paulevs.betternether.items.NetherSword;
-import paulevs.betternether.items.ItemBlackApple;
-import paulevs.betternether.items.ItemBowlFood;
+import paulevs.betternether.items.*;
 import paulevs.betternether.items.materials.BNArmorMaterial;
 import paulevs.betternether.items.materials.BNToolMaterial;
 import paulevs.betternether.tab.CreativeTabs;
@@ -46,6 +28,9 @@ import ru.bclib.api.tag.TagAPI;
 import ru.bclib.api.tag.TagAPI.TagLocation;
 import ru.bclib.items.tool.BaseShearsItem;
 import ru.bclib.registry.ItemRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NetherItems extends ItemRegistry {
 	private static final List<String> ITEMS = new ArrayList<String>();

@@ -1,7 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -15,28 +13,13 @@ import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
-import paulevs.betternether.world.structures.plants.StructureBlackVine;
-import paulevs.betternether.world.structures.plants.StructureBloomingVine;
-import paulevs.betternether.world.structures.plants.StructureEggPlant;
-import paulevs.betternether.world.structures.plants.StructureEye;
-import paulevs.betternether.world.structures.plants.StructureFeatherFern;
-import paulevs.betternether.world.structures.plants.StructureGoldenVine;
-import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
-import paulevs.betternether.world.structures.plants.StructureJungleMoss;
-import paulevs.betternether.world.structures.plants.StructureJunglePlant;
-import paulevs.betternether.world.structures.plants.StructureLucis;
-import paulevs.betternether.world.structures.plants.StructureMagmaFlower;
-import paulevs.betternether.world.structures.plants.StructureReeds;
-import paulevs.betternether.world.structures.plants.StructureRubeus;
-import paulevs.betternether.world.structures.plants.StructureRubeusBush;
-import paulevs.betternether.world.structures.plants.StructureStalagnate;
-import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.world.structures.plants.StructureWallMoss;
-import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
+import paulevs.betternether.world.structures.plants.*;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.Random;
 
 public class NetherJungle extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {

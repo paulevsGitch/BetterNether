@@ -1,11 +1,12 @@
 package paulevs.betternether.world.structures;
 
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
+
+import java.util.Random;
 
 public class StructureCaves implements IStructure {
 

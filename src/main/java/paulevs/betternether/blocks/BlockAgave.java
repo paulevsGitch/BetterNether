@@ -1,15 +1,12 @@
 package paulevs.betternether.blocks;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -27,14 +24,21 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherItems;
+import ru.bclib.api.tag.NamedMineableTags;
+import ru.bclib.api.tag.TagAPI;
+import ru.bclib.interfaces.TagProvider;
 
-public class BlockAgave extends BlockCommonPlant {
+import java.util.List;
+
+public class BlockAgave extends BlockCommonPlant implements TagProvider {
 	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
 	public BlockAgave() {
 		super(FabricBlockSettings.of(Material.CACTUS)
 				.mapColor(MaterialColor.TERRACOTTA_ORANGE)
-				.breakByTool(FabricToolTags.SHEARS)
+				//TODO: 1.18.2 Test if this still works
+				//.breakByTool(FabricToolTags.SHEARS)
+				.requiresTool()
 				.sounds(SoundType.WOOL)
 				.nonOpaque()
 				.noCollision()
@@ -80,5 +84,10 @@ public class BlockAgave extends BlockCommonPlant {
 			return Lists.newArrayList(new ItemStack(this, MHelper.randRange(1, 2, MHelper.RANDOM)), new ItemStack(NetherItems.AGAVE_LEAF, MHelper.randRange(2, 5, MHelper.RANDOM)));
 		}
 		return Lists.newArrayList(new ItemStack(this));
+	}
+
+	@Override
+	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
+		blockTags.add(NamedMineableTags.SHEARS);
 	}
 }

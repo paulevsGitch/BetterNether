@@ -1,9 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiFunction;
-
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -13,7 +9,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherFeatures;
@@ -27,11 +22,13 @@ import paulevs.betternether.world.structures.plants.StructureVanillaMushroom;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
-import ru.bclib.api.surface.rules.RandomIntProvider;
 import ru.bclib.api.surface.rules.SwitchRuleSource;
 import ru.bclib.interfaces.NumericProvider;
 import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.List;
+import java.util.Random;
 
 class NetherMushroomForestEdgeNumericProvider implements NumericProvider {
 	public static final NetherMushroomForestEdgeNumericProvider DEFAULT = new NetherMushroomForestEdgeNumericProvider();

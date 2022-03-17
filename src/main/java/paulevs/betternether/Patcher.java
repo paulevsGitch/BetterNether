@@ -1,14 +1,14 @@
 package paulevs.betternether;
 
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import ru.bclib.api.datafixer.DataFixerAPI;
 import ru.bclib.api.datafixer.MigrationProfile;
 import ru.bclib.api.datafixer.Patch;
 import ru.bclib.interfaces.PatchBiFunction;
+
+import java.util.List;
+import java.util.Map;
 
 public class Patcher {
 	public static void register() {

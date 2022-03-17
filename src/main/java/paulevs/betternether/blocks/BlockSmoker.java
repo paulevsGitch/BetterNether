@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
@@ -22,6 +20,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
+
+import java.util.Random;
 
 public class BlockSmoker extends BlockBaseNotFull {
 	private static final VoxelShape TOP_SHAPE = Block.box(4, 0, 4, 12, 8, 12);

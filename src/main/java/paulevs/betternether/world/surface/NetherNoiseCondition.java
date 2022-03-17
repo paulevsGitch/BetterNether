@@ -1,19 +1,11 @@
 package paulevs.betternether.world.surface;
 
-import com.mojang.datafixers.kinds.Applicative;
-import com.mojang.datafixers.kinds.K1;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.Decoder;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.SurfaceRules;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
-import ru.bclib.api.surface.rules.RandomIntProvider;
 import ru.bclib.api.surface.rules.VolumeNoiseCondition;
 import ru.bclib.interfaces.NumericProvider;
 import ru.bclib.mixin.common.SurfaceRulesContextAccessor;

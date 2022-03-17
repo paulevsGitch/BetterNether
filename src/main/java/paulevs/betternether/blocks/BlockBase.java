@@ -1,12 +1,13 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import paulevs.betternether.client.IRenderTypeable;
+
+import java.util.Collections;
+import java.util.List;
 
 public class BlockBase extends Block implements IRenderTypeable {
 	private boolean dropItself = true;

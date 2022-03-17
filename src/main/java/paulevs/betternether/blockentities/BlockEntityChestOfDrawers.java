@@ -1,6 +1,5 @@
 package paulevs.betternether.blockentities;
 
-import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -24,6 +23,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockChestOfDrawers;
 import paulevs.betternether.registry.BlockEntitiesRegistry;
+
+import java.util.List;
 
 public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity {
 	private NonNullList<ItemStack> inventory;

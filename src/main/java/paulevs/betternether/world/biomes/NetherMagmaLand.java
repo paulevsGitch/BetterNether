@@ -1,8 +1,5 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-import java.util.function.BiFunction;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -23,6 +20,8 @@ import paulevs.betternether.world.structures.plants.StructureMagmaFlower;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.Random;
 
 public class NetherMagmaLand extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {

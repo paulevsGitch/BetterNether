@@ -4,12 +4,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import paulevs.betternether.BetterNether;
 import paulevs.betternether.world.BNWorldGenerator;
 import ru.bclib.world.features.DefaultFeature;
 
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class NetherChunkPopulatorFeature extends DefaultFeature {

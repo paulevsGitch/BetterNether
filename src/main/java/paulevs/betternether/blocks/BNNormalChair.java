@@ -1,7 +1,5 @@
 package paulevs.betternether.blocks;
 
-import java.util.Collections;
-import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -25,6 +23,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+
+import java.util.Collections;
+import java.util.List;
 
 public class BNNormalChair extends BNChair {
 	private static final VoxelShape SHAPE_BOTTOM = Block.box(3, 0, 3, 13, 16, 13);

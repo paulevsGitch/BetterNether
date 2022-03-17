@@ -3,8 +3,8 @@ package paulevs.betternether.registry;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.enchantment.Enchantment;
 import paulevs.betternether.BetterNether;
-import paulevs.betternether.enchantments.RubyFire;
 import paulevs.betternether.enchantments.ObsidianBreaker;
+import paulevs.betternether.enchantments.RubyFire;
 
 public class NetherEnchantments {
 	public static ObsidianBreaker OBSIDIAN_BREAKER = register("obsidian_breaker", new ObsidianBreaker());

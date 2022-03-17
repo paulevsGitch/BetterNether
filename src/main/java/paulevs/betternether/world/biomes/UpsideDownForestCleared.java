@@ -1,16 +1,11 @@
 package paulevs.betternether.world.biomes;
 
-import java.util.Random;
-import java.util.function.BiFunction;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
-import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
@@ -18,20 +13,14 @@ import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.decorations.StructureForestLitter;
-import paulevs.betternether.world.structures.plants.StructureCeilingMushrooms;
-import paulevs.betternether.world.structures.plants.StructureHookMushroom;
-import paulevs.betternether.world.structures.plants.StructureJungleMoss;
-import paulevs.betternether.world.structures.plants.StructureMossCover;
-import paulevs.betternether.world.structures.plants.StructureNeonEquisetum;
-import paulevs.betternether.world.structures.plants.StructureWallBrownMushroom;
-import paulevs.betternether.world.structures.plants.StructureWallRedMushroom;
-import paulevs.betternether.world.structures.plants.StructureWhisperingGourd;
+import paulevs.betternether.world.structures.plants.*;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
-import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 import ru.bclib.world.biomes.BCLBiomeSettings;
+
+import java.util.Random;
 
 public class UpsideDownForestCleared extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
