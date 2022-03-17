@@ -52,7 +52,7 @@ public abstract class LiquidBlockMixin {
 	// *******************************************
 	@Shadow protected abstract void fizz(LevelAccessor levelAccessor, BlockPos blockPos);
 	
-	@Inject(method="shouldSpreadLiquid", locals=LocalCapture.CAPTURE_FAILSOFT, cancellable = true, at=@At(value="INVOKE", target="Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"))
+	@Inject(method="shouldSpreadLiquid", locals=LocalCapture.CAPTURE_FAILSOFT, cancellable = true, at=@At(value="INVOKE", target="Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z", ordinal = 0))
 	void bn_shouldSpreadLiquid(Level level, BlockPos blockPos, BlockState arg2, CallbackInfoReturnable<Boolean> cir, boolean bl, UnmodifiableIterator var5, Direction direction, BlockPos blockPos2, Block block) {
 		if (block == Blocks.OBSIDIAN){
 			final BlockState belowState = level.getBlockState(blockPos.below());
