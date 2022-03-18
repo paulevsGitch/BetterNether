@@ -11,7 +11,6 @@ public class BNStainedGlass extends BNGlass {
 
 	public BNStainedGlass(Block block) {
 		super(block);
-		this.setRenderLayer(BNRenderLayer.TRANSLUCENT);
 	}
 
 	@Override

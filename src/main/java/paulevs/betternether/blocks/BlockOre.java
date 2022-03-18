@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import ru.bclib.api.tag.NamedCommonBlockTags;
-import ru.bclib.api.tag.NamedMineableTags;
 import ru.bclib.api.tag.TagAPI;
 import ru.bclib.blocks.BaseOreBlock;
 import ru.bclib.interfaces.TagProvider;

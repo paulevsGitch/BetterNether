@@ -28,8 +28,6 @@ public class BlockGiantLucis extends HugeMushroomBlock implements AddMineableAxe
 	public BlockGiantLucis() {
 		super(FabricBlockSettings.of(Materials.NETHER_GRASS)
 				.mapColor(MaterialColor.COLOR_YELLOW)
-				//TODO: 1.18.2 Test this
-				// .breakByTool(FabricToolTags.AXES)
 				.requiresTool()
 				.luminance(15)
 				.sounds(SoundType.WOOD)

@@ -39,8 +39,6 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
 	public BlockBarrelCactus() {
 		super(FabricBlockSettings.of(Material.CACTUS)
 				.mapColor(MaterialColor.TERRACOTTA_BLUE)
-				//TODO: 1.18.2 Test this
-				//.breakByTool(FabricToolTags.SHEARS)
 				.requiresTool()
 				.sounds(SoundType.WOOL)
 				.nonOpaque()

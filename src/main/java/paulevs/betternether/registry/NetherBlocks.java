@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock.Sensitivity;
@@ -67,7 +68,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	
 	// Cincinnasite //
-	public static final Block CINCINNASITE_ORE = registerBlock("cincinnasite_ore", new BlockOre(NetherItems.CINCINNASITE, 1, 3,0, 1));
+	public static final Block CINCINNASITE_ORE = registerBlock("cincinnasite_ore", new BlockOre(NetherItems.CINCINNASITE, 1, 3,0, Tiers.IRON.getLevel()));
 	public static final Block CINCINNASITE_BLOCK = registerBlock("cincinnasite_block", new BlockCincinnasite());
 	public static final Block CINCINNASITE_FORGED = registerBlock("cincinnasite_forged", new BlockCincinnasite());
 	public static final Block CINCINNASITE_PILLAR = registerBlock("cincinnasite_pillar", new BlockCincinnasitPillar());
@@ -90,13 +91,13 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block CINCINNASITE_CHAIN = registerBlock("cincinnasite_chain", new BNChain());
 	
 	// Ruby //
-	public static final Block NETHER_RUBY_ORE = registerBlock("nether_ruby_ore", new BlockOre(NetherItems.NETHER_RUBY, 1, 2, 5, 2));
+	public static final Block NETHER_RUBY_ORE = registerBlock("nether_ruby_ore", new BlockOre(NetherItems.NETHER_RUBY, 1, 2, 5, Tiers.NETHERITE.getLevel()));
 	public static final Block NETHER_RUBY_BLOCK = registerBlock("nether_ruby_block", new BlockNetherRuby());
 	public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK);
 	public static final Block NETHER_RUBY_SLAB = registerSlab("nether_ruby_slab", NETHER_RUBY_BLOCK);
 	
 	// Vanilla Ores
-	public static final Block NETHER_LAPIS_ORE = registerBlock("nether_lapis_ore", new BlockOre(NetherItems.LAPIS_PILE, 3, 6, 3, 1));
+	public static final Block NETHER_LAPIS_ORE = registerBlock("nether_lapis_ore", new BlockOre(NetherItems.LAPIS_PILE, 3, 6, 3, Tiers.IRON.getLevel()));
 	public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", new RedstoneOreBlock());
 	
 	

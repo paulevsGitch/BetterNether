@@ -37,8 +37,6 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableA
 		super(FabricBlockSettings.of(Materials.NETHER_GRASS)
 				.mapColor(MaterialColor.COLOR_YELLOW)
 				.luminance(15)
-				//TODO: 1.18.2 test this
-				//.breakByTool(FabricToolTags.AXES)
 				.requiresTool()
 				.sounds(SoundType.WOOD)
 				.hardness(1F)

@@ -49,8 +49,6 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 	public BlockWhisperingGourdVine() {
 		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_RED)
-				//TODO: 1.18.2 test this
-				//.breakByTool(FabricToolTags.SHEARS)
 				.requiresTool()
 				.sounds(SoundType.CROP)
 				.noCollision()

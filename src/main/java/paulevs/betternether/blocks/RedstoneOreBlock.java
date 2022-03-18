@@ -3,9 +3,7 @@ package paulevs.betternether.blocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RedStoneOreBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -49,7 +47,7 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
 	@Override
 	@SuppressWarnings("deprecation")
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-		return BaseOreBlock.getDroppedItems(this, Items.REDSTONE, maxCount, minCount, state, builder);
+		return BaseOreBlock.getDroppedItems(this, Items.REDSTONE, maxCount, minCount, Tiers.IRON.getLevel(), state, builder);
 	}
 	
 	@Override
