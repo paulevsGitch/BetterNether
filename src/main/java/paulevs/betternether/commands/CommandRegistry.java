@@ -129,7 +129,6 @@ public class CommandRegistry {
         biomeIndex = (biomeIndex+1) % biomes.size();
 
         final BlockPos currentPosition = new BlockPos(source.getPosition());
-        //TODO: 1.18.2 Test this (validates that Holders have a working equals method)
         final BlockPos biomePosition = source.getLevel().findNearestBiome(b -> b.equals(biome.getActualBiome()), currentPosition, MAX_SEARCH_RADIUS, SEARCH_STEP).getFirst();
         final String biomeName = biome.toString();
 
