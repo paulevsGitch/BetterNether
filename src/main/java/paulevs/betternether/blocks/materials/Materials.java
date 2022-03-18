@@ -12,8 +12,6 @@ public class Materials {
 	public static final Material NETHER_PLANT =  Material.PLANT;
 	public static FabricBlockSettings makeWood(MaterialColor color) {
 		return FabricBlockSettings.of(Material.NETHER_WOOD)
-				//TODO: 1.18.2 Test blocks that use this material
-				//.breakByTool(FabricToolTags.AXES)
 				.requiresTool()
 				.mapColor(color)
 				.sounds(SoundType.WOOD)

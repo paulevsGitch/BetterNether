@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -24,13 +22,12 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.MHelper;
-import ru.bclib.api.tag.NamedMineableTags;
-import ru.bclib.api.tag.TagAPI;
-import ru.bclib.interfaces.TagProvider;
+import ru.bclib.interfaces.tools.AddMineableShears;
+import ru.bclib.interfaces.tools.AddMineableHoe;
 
 import java.util.List;
 
-public class BlockBarrelCactus extends BlockCommonPlant implements BonemealableBlock, TagProvider {
+public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableShears, AddMineableHoe {
 	private static final VoxelShape EMPTY = Block.box(0, 0, 0, 0, 0, 0);
 	private static final VoxelShape[] SHAPES = new VoxelShape[] {
 			Block.box(5, 0, 5, 11, 5, 11),
@@ -97,10 +94,5 @@ public class BlockBarrelCactus extends BlockCommonPlant implements BonemealableB
 			return Lists.newArrayList(new ItemStack(this, MHelper.randRange(1, 3, MHelper.RANDOM)));
 		}
 		return Lists.newArrayList(new ItemStack(this));
-	}
-
-	@Override
-	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
-		blockTags.add(NamedMineableTags.SHEARS);
 	}
 }

@@ -19,6 +19,5 @@ public class BlockFarmland extends BlockBase implements TagProvider {
 	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
 		blockTags.add(NamedCommonBlockTags.SOUL_GROUND);
 		blockTags.add(NamedCommonBlockTags.NETHERRACK);
-
 	}
 }

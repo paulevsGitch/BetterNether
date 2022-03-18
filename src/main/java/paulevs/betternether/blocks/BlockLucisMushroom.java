@@ -24,13 +24,11 @@ import paulevs.betternether.blocks.BlockProperties.EnumLucisShape;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherItems;
-import ru.bclib.api.tag.NamedMineableTags;
-import ru.bclib.api.tag.TagAPI;
-import ru.bclib.interfaces.TagProvider;
+import ru.bclib.interfaces.tools.AddMineableAxe;
 
 import java.util.List;
 
-public class BlockLucisMushroom extends BlockBaseNotFull implements TagProvider {
+public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableAxe {
 	private static final VoxelShape V_SHAPE = Block.box(0, 0, 0, 16, 9, 16);
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	public static final EnumProperty<EnumLucisShape> SHAPE = BlockProperties.LUCIS_SHAPE;
@@ -90,10 +88,5 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements TagProvider 
 	@Environment(EnvType.CLIENT)
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		return new ItemStack(NetherBlocks.LUCIS_SPORE);
-	}
-
-	@Override
-	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
-		blockTags.add(NamedMineableTags.AXE);
 	}
 }

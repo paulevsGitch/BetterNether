@@ -5,17 +5,14 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import ru.bclib.api.tag.NamedMineableTags;
-import ru.bclib.api.tag.TagAPI;
-import ru.bclib.interfaces.TagProvider;
+import ru.bclib.interfaces.tools.AddMineablePickaxe;
 
 import java.util.List;
 
-public class BNGlass extends BlockBaseNotFull implements TagProvider {
+public class BNGlass extends BlockBaseNotFull implements AddMineablePickaxe {
 	public BNGlass(Block block) {
 		super(FabricBlockSettings.copyOf(block)
 				//TODO:1.18.2 test this
@@ -45,10 +42,5 @@ public class BNGlass extends BlockBaseNotFull implements TagProvider {
 	@Environment(EnvType.CLIENT)
 	public boolean skipRendering(BlockState state, BlockState neighbor, Direction facing) {
 		return neighbor.getBlock() == this ? true : super.skipRendering(state, neighbor, facing);
-	}
-
-	@Override
-	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
-		blockTags.add(NamedMineableTags.SHEARS);
 	}
 }

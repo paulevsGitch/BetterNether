@@ -20,10 +20,11 @@ import paulevs.betternether.registry.NetherItems;
 import ru.bclib.api.tag.NamedMineableTags;
 import ru.bclib.api.tag.TagAPI;
 import ru.bclib.interfaces.TagProvider;
+import ru.bclib.interfaces.tools.AddMineableAxe;
 
 import java.util.List;
 
-public class BlockGiantLucis extends HugeMushroomBlock implements TagProvider {
+public class BlockGiantLucis extends HugeMushroomBlock implements AddMineableAxe {
 	public BlockGiantLucis() {
 		super(FabricBlockSettings.of(Materials.NETHER_GRASS)
 				.mapColor(MaterialColor.COLOR_YELLOW)
@@ -42,10 +43,5 @@ public class BlockGiantLucis extends HugeMushroomBlock implements TagProvider {
 		if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0) return Lists.newArrayList(new ItemStack(this.asItem()));
 		return Lists.newArrayList(new ItemStack(NetherBlocks.LUCIS_SPORE, MHelper.randRange(0, 1, MHelper.RANDOM)),
 				new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM)));
-	}
-
-	@Override
-	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
-		blockTags.add(NamedMineableTags.AXE);
 	}
 }

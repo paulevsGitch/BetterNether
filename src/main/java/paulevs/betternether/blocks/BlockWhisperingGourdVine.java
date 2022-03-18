@@ -11,7 +11,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -37,15 +36,13 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.registry.NetherBlocks;
-import ru.bclib.api.tag.NamedMineableTags;
-import ru.bclib.api.tag.TagAPI;
-import ru.bclib.interfaces.TagProvider;
+import ru.bclib.interfaces.tools.AddMineableShears;
 import ru.bclib.items.tool.BaseShearsItem;
 
 import java.util.List;
 import java.util.Random;
 
-public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, TagProvider {
+public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, AddMineableShears {
 	private static final VoxelShape SELECTION = Block.box(2, 0, 2, 14, 16, 14);
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
@@ -157,10 +154,5 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 		else {
 			return super.use(state, world, pos, player, hand, hit);
 		}
-	}
-
-	@Override
-	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
-		blockTags.add(NamedMineableTags.SHEARS);
 	}
 }
