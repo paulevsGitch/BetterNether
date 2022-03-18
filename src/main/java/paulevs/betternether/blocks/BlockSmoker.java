@@ -20,10 +20,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherGround;
 
 import java.util.Random;
 
-public class BlockSmoker extends BlockBaseNotFull {
+public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGround {
 	private static final VoxelShape TOP_SHAPE = Block.box(4, 0, 4, 12, 8, 12);
 	private static final VoxelShape MIDDLE_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
@@ -67,6 +68,6 @@ public class BlockSmoker extends BlockBaseNotFull {
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
 		BlockState down = world.getBlockState(pos.below());
-		return down.getBlock() == this || BlocksHelper.isNetherGround(down);
+		return down.getBlock() == this || isSurvivable(down);
 	}
 }

@@ -17,6 +17,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.interfaces.SurvivesOnNetherrack;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.structures.plants.StructureStalagnate;
 import ru.bclib.blocks.FeatureSaplingBlock;
@@ -42,7 +43,7 @@ class StalagnateTreeFeatureDown extends DefaultFeature {
 	}
 }
 
-public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock {
+public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack {
 	protected static final VoxelShape SHAPE_TOP = Block.box(4, 6, 4, 12, 16, 12);
 	protected static final VoxelShape SHAPE_BOTTOM = Block.box(4, 0, 4, 12, 12, 12);
 	
@@ -95,7 +96,7 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
 	
 	@Override
 	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-		return BlocksHelper.isNetherrack(blockState);
+		return isSurvivable(blockState);
 	}
 	
 	@Override

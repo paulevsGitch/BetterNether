@@ -26,13 +26,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnSouldGround;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.plants.StructureSoulLily;
 
 import java.util.List;
 import java.util.Random;
 
-public class BlockSoulLily extends BlockBaseNotFull {
+public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGround {
 	public static final EnumProperty<SoulLilyShape> SHAPE = EnumProperty.create("shape", SoulLilyShape.class);
 
 	private static final VoxelShape SHAPE_SMALL = Block.box(6, 0, 6, 10, 16, 10);
@@ -210,7 +211,7 @@ public class BlockSoulLily extends BlockBaseNotFull {
 		if (shape == SoulLilyShape.BIG_TOP_SIDE_W)
 			return world.getBlockState(pos.west()).getBlock() == this;
 		BlockState down = world.getBlockState(pos.below());
-		return down.getBlock() == this || BlocksHelper.isSoulSand(down);
+		return down.getBlock() == this || isSurvivable(down);
 	}
 
 	@Override

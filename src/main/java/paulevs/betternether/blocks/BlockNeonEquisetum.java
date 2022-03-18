@@ -33,13 +33,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.BlockProperties.TripleShape;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherrack;
 import ru.bclib.items.tool.BaseShearsItem;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack {
 	protected static final VoxelShape SHAPE_SELECTION = Block.box(2, 0, 2, 14, 16, 14);
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
@@ -86,7 +87,7 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
 		BlockState up = world.getBlockState(pos.above());
-		return up.getBlock() == this || BlocksHelper.isNetherrack(up);
+		return up.getBlock() == this || isSurvivable(up);
 	}
 
 	@Override

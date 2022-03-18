@@ -95,12 +95,6 @@ public class BlocksHelper {
 	public static boolean isNetherGroundMagma(BlockState state) {
 		return isNetherGround(state) || state.is(Blocks.MAGMA_BLOCK);
 	}
-
-	public static boolean isBone(BlockState state) {
-		Block b = state.getBlock();
-		return b == Blocks.BONE_BLOCK || b == NetherBlocks.BONE_BLOCK;
-	}
-
 	public static boolean isNetherMycelium(BlockState state) {
 		return state.is(CommonBlockTags.NETHER_MYCELIUM);
 	}

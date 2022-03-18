@@ -19,10 +19,11 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherGround;
 
 import java.util.Random;
 
-public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherGround {
 	private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
 
 	public BlockBlackBush() {
@@ -42,7 +43,7 @@ public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBloc
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isNetherGround(world.getBlockState(pos.below()));
+		return canSurviveOnTop(state, world, pos);
 	}
 
 	@Override

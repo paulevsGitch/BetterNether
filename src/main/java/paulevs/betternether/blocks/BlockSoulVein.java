@@ -22,13 +22,14 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherSand;
 import paulevs.betternether.registry.NetherBlocks;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherSand {
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 1, 16);
 
 	public BlockSoulVein() {
@@ -49,8 +50,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		Block block = world.getBlockState(pos.below()).getBlock();
-		return block == Blocks.SOUL_SAND || block == NetherBlocks.VEINED_SAND;
+		return canSurviveOnTop(state, world, pos);
 	}
 
 	@Override

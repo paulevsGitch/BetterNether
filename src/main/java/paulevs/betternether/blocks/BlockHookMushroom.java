@@ -7,8 +7,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherrack;
 
-public class BlockHookMushroom extends BlockMold {
+public class BlockHookMushroom extends BaseBlockMold implements SurvivesOnNetherrack {
 	public BlockHookMushroom() {
 		super(Materials.makeGrass(MaterialColor.COLOR_PINK)
 				.luminance(13)
@@ -22,6 +23,6 @@ public class BlockHookMushroom extends BlockMold {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isNetherrack(world.getBlockState(pos.above()));
+		return canSurviveOnBottom(state, world, pos);
 	}
 }

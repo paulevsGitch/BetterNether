@@ -50,7 +50,7 @@
   "block.betternether.eyeball": "Augapfelblock",
   "block.betternether.eyeball_small": "Kleiner Augapfelblock",
 
-  "block.betternether.bone_block": "Knochenblock",
+  "block.betternether.bone_block": "Voller Knochenblock",
   "block.betternether.bone_button": "Knochenknopf",
   "block.betternether.bone_cincinnasite_door": "Knochen-Cincinnasittür",
   "block.betternether.bone_mushroom": "Knochenpilzsporen",
@@ -725,5 +725,6 @@
   
   "biome.betternether.upside_down_forest_cleared": "Abgestorbener Kopfüberwald",
   "enchantment.betternether.obsidian_breaker": "Obsidiangräber",
-  "enchantment.betternether.ruby_fire": "Rubinfeuer"
+  "enchantment.betternether.ruby_fire": "Rubinfeuer",
+  "betternether.survive.nethergound": "Netherböden"
 }

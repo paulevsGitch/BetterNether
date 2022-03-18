@@ -4,9 +4,12 @@ import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -27,13 +30,17 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.interfaces.SurvivesOnGravel;
 import paulevs.betternether.registry.NetherItems;
+import ru.bclib.interfaces.SurvivesOnSpecialGround;
 import ru.bclib.interfaces.tools.AddMineableShears;
 import ru.bclib.interfaces.tools.AddMineableHoe;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class BlockAgave extends BlockCommonPlant implements AddMineableShears, AddMineableHoe {
+public class BlockAgave extends BlockCommonPlant implements AddMineableShears, AddMineableHoe, SurvivesOnGravel {
 	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
 	public BlockAgave() {
@@ -60,11 +67,6 @@ public class BlockAgave extends BlockCommonPlant implements AddMineableShears, A
 		return Block.OffsetType.XZ;
 	}
 
-	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		Block down = world.getBlockState(pos.below()).getBlock();
-		return down == Blocks.GRAVEL;
-	}
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
@@ -88,9 +90,7 @@ public class BlockAgave extends BlockCommonPlant implements AddMineableShears, A
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
-	public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter blockGetter, List<Component> list, TooltipFlag tooltipFlag) {
-		super.appendHoverText(itemStack, blockGetter, list, tooltipFlag);
-		//TODO: 1.18.2 Show Hint where this can survive
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return canSurviveOnTop(state, world, pos);
 	}
 }

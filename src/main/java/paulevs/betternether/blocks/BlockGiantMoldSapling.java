@@ -18,12 +18,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherMycelium;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.structures.plants.StructureGiantMold;
 
 import java.util.Random;
 
-public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherMycelium {
 	private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 14, 12);
 	private static final StructureGiantMold STRUCTURE = new StructureGiantMold();
 
@@ -45,8 +46,8 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Bonemeala
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return world.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM;
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return canSurviveOnTop(state, level, pos);
 	}
 
 	@Override

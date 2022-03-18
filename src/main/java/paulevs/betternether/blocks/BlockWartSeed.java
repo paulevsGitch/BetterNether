@@ -21,12 +21,13 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnSouldSand;
 import paulevs.betternether.world.structures.plants.StructureWartTree;
 
 import java.util.EnumMap;
 import java.util.Random;
 
-public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnSouldSand {
 	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(Direction.class);
 	private static final StructureWartTree STRUCTURE = new StructureWartTree();
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -79,9 +80,9 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		Direction direction = (Direction) state.getValue(FACING);
+		Direction direction = state.getValue(FACING);
 		BlockPos blockPos = pos.relative(direction.getOpposite());
-		return canSupportCenter(world, blockPos, direction) || world.getBlockState(pos.below()).getBlock() == Blocks.SOUL_SAND;
+		return canSupportCenter(world, blockPos, direction) || canSurviveOnTop(state, world, pos);
 	}
 
 	@Override

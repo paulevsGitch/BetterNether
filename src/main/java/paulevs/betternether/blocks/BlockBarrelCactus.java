@@ -22,12 +22,13 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.interfaces.SurvivesOnGravel;
 import ru.bclib.interfaces.tools.AddMineableShears;
 import ru.bclib.interfaces.tools.AddMineableHoe;
 
 import java.util.List;
 
-public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableShears, AddMineableHoe {
+public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableShears, AddMineableHoe, SurvivesOnGravel {
 	private static final VoxelShape EMPTY = Block.box(0, 0, 0, 0, 0, 0);
 	private static final VoxelShape[] SHAPES = new VoxelShape[] {
 			Block.box(5, 0, 5, 11, 5, 11),
@@ -51,8 +52,7 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		Block down = world.getBlockState(pos.below()).getBlock();
-		return down == Blocks.GRAVEL;
+		return canSurviveOnTop(state, world, pos);
 	}
 
 	@Override

@@ -19,13 +19,27 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherMycelium;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-public class BlockMold extends BlockBaseNotFull {
+public class BlockMold extends BaseBlockMold implements SurvivesOnNetherMycelium {
 	public BlockMold(MaterialColor color) {
+		super(color);
+	}
+
+	public BlockMold(Properties settings) {
+		super(settings);
+	}
+
+	@Override
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return canSurviveOnTop(state, world, pos);
+	}
+}
+class BaseBlockMold extends BlockBaseNotFull {
+	public BaseBlockMold(MaterialColor color) {
 		super(Materials.makeGrass(color)
 				.sounds(SoundType.CROP)
 				.nonOpaque()
@@ -36,7 +50,7 @@ public class BlockMold extends BlockBaseNotFull {
 		this.setDropItself(false);
 	}
 
-	public BlockMold(Properties settings) {
+	public BaseBlockMold(Properties settings) {
 		super(settings);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
@@ -50,11 +64,6 @@ public class BlockMold extends BlockBaseNotFull {
 	@Override
 	public Block.OffsetType getOffsetType() {
 		return Block.OffsetType.XZ;
-	}
-
-	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isNetherMycelium(world.getBlockState(pos.below()));
 	}
 
 	@Override

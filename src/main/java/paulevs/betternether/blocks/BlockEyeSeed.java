@@ -18,11 +18,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherrack;
 import paulevs.betternether.world.structures.plants.StructureEye;
 
 import java.util.Random;
 
-public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack {
 	private static final VoxelShape SHAPE = Block.box(4, 6, 4, 12, 16, 12);
 	private static final StructureEye STRUCTURE = new StructureEye();
 
@@ -58,8 +59,8 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock 
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isNetherrack(world.getBlockState(pos.above()));
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return canSurviveOnBottom(state, level, pos);
 	}
 
 	@Override

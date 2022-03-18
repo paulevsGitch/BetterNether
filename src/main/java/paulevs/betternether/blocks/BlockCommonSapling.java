@@ -18,14 +18,28 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherGround;
 
 import java.util.Random;
 
-public class BlockCommonSapling extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockCommonSapling extends BaseBlockCommonSapling implements SurvivesOnNetherGround {
+
+
+	public BlockCommonSapling(Block plant, MaterialColor color) {
+		super(plant, color);
+	}
+
+	@Override
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return canSurviveOnTop(state, level, pos);
+	}
+}
+
+abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 14, 12);
 	private Block plant;
 
-	public BlockCommonSapling(Block plant, MaterialColor color) {
+	public BaseBlockCommonSapling(Block plant, MaterialColor color) {
 		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(color)
 				.sounds(SoundType.CROP)
@@ -43,10 +57,6 @@ public class BlockCommonSapling extends BlockBaseNotFull implements Bonemealable
 		return SHAPE;
 	}
 
-	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isNetherGround(world.getBlockState(pos.below()));
-	}
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {

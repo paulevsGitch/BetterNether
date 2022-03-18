@@ -50,7 +50,7 @@
 	"block.betternether.eyeball": "Eyeball Block",
 	"block.betternether.eyeball_small": "Small Eyeball Block",
 
-	"block.betternether.bone_block": "Bone Block",
+	"block.betternether.bone_block": "Full Bone Block",
 	"block.betternether.bone_button": "Bone Button",
 	"block.betternether.bone_cincinnasite_door": "Bone-Cincinnasite Door",
 	"block.betternether.bone_mushroom": "Bone Mushroom Spores",
@@ -725,5 +725,6 @@
 	
 	"biome.betternether.upside_down_forest_cleared": "Dead Upside Down Forest",
 	"enchantment.betternether.obsidian_breaker": "Obsidian Breaker",
-	"enchantment.betternether.ruby_fire": "Rubys' Fire"
+	"enchantment.betternether.ruby_fire": "Rubys' Fire",
+	"betternether.survive.nethergound": "Nether Ground"
 }

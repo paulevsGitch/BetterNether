@@ -286,8 +286,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockTerrain(), NamedBlockTags.NYLIUM);
 	public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass", new BlockTerrain(), NamedBlockTags.NYLIUM);
 	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain(), NamedBlockTags.NYLIUM);
-	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand());
-	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland());
+	public static final Block VEINED_SAND = registerBlockNI("veined_sand", new BlockVeinedSand(), NetherTags.NETHER_SAND_LOCATION);
+	public static final Block FARMLAND = registerBlock("farmland", new BlockFarmland(), NetherTags.NETHER_FARMLAND_LOCATION);
 	public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass", new BlockTerrain(), NamedBlockTags.NYLIUM);
 	public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
 	

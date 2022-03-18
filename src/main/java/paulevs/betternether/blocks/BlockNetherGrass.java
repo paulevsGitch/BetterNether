@@ -20,14 +20,23 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherrackAndNylium;
 
 import java.util.Collections;
 import java.util.List;
 
-public class BlockNetherGrass extends BlockBase {
+public class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOnNetherrackAndNylium {
+
+	@Override
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		return canSurviveOnTop(state, world, pos);
+	}
+}
+
+class BaseBlockNetherGrass extends BlockBase {
 	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
 
-	public BlockNetherGrass() {
+	public BaseBlockNetherGrass() {
 		super(Materials.makeGrass(MaterialColor.TERRACOTTA_GRAY).ticksRandomly());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
@@ -49,11 +58,6 @@ public class BlockNetherGrass extends BlockBase {
 		return Block.OffsetType.XZ;
 	}
 
-	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		final BlockState below = world.getBlockState(pos.below());
-		return BlocksHelper.isNetherrack(below) || BlocksHelper.isNylium(below);
-	}
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {

@@ -12,8 +12,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherMycelium;
 
-public class BlockOrangeMushroom extends BlockCommonPlant {
+public class BlockOrangeMushroom extends BlockCommonPlant implements SurvivesOnNetherMycelium {
 	private static final VoxelShape[] SHAPES = new VoxelShape[] {
 			Shapes.box(0.25, 0.0, 0.25, 0.75, 0.375, 0.75),
 			Shapes.box(0.125, 0.0, 0.125, 0.875, 0.625, 0.875),
@@ -33,7 +34,7 @@ public class BlockOrangeMushroom extends BlockCommonPlant {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isNetherMycelium(world.getBlockState(pos.below()));
+		return canSurviveOnTop(state, world, pos);
 	}
 
 	@Override

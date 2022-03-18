@@ -9,8 +9,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import paulevs.betternether.interfaces.SurvivesOnMagmaBlock;
 
-public class BlockMagmaFlower extends BlockCommonPlant {
+public class BlockMagmaFlower extends BlockCommonPlant implements SurvivesOnMagmaBlock {
 	private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 12, 15);
 
 	public BlockMagmaFlower() {
@@ -24,6 +25,6 @@ public class BlockMagmaFlower extends BlockCommonPlant {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return world.getBlockState(pos.below()).getBlock() == Blocks.MAGMA_BLOCK;
+		return canSurviveOnTop(state, world, pos);
 	}
 }

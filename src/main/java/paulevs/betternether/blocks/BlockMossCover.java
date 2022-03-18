@@ -10,7 +10,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockMossCover extends BlockMold {
+public class BlockMossCover extends BaseBlockMold {
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 4, 16);
 
 	public BlockMossCover() {

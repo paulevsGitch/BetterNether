@@ -19,11 +19,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNylium;
 import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
 
 import java.util.Random;
 
-public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock {
+public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNylium {
 	private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 6, 12);
 	private static final StructureJellyfishMushroom STRUCTURE = new StructureJellyfishMushroom();
 
@@ -46,8 +47,8 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return world.getBlockState(pos.below()).is(BlockTags.NYLIUM);
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return canSurviveOnTop(state, level, pos);
 	}
 
 	@Override

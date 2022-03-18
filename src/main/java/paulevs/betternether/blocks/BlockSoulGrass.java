@@ -8,13 +8,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.interfaces.SurvivesOnSouldGround;
 
 import java.util.Random;
 
-public class BlockSoulGrass extends BlockNetherGrass {
+public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSouldGround {
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return BlocksHelper.isSoulSand(world.getBlockState(pos.below()));
+		return canSurviveOnTop(state, world, pos);
 	}
 
 	@Environment(EnvType.CLIENT)

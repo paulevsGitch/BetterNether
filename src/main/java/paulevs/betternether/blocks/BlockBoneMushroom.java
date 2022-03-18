@@ -21,10 +21,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnBoneBlocks;
 
 import java.util.Random;
 
-public class BlockBoneMushroom extends BlockBaseNotFull {
+public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBoneBlocks {
 	private static final VoxelShape SHAPE_NORTH = Block.box(1, 1, 8, 15, 15, 16);
 	private static final VoxelShape SHAPE_SOUTH = Block.box(1, 1, 0, 15, 15, 8);
 	private static final VoxelShape SHAPE_WEST = Block.box(8, 1, 1, 16, 15, 15);
@@ -75,12 +76,12 @@ public class BlockBoneMushroom extends BlockBaseNotFull {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		Direction direction = (Direction) state.getValue(FACING);
+		Direction direction = state.getValue(FACING);
 		if (direction == Direction.DOWN)
 			return false;
 		BlockPos blockPos = pos.relative(direction.getOpposite());
 		BlockState blockState = world.getBlockState(blockPos);
-		return BlocksHelper.isBone(blockState);
+		return isSurvivable(blockState);
 	}
 
 	@Override

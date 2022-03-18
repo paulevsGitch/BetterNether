@@ -18,10 +18,11 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.interfaces.SurvivesOnNetherGround;
 
 import java.util.Random;
 
-public class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBlock {
+public abstract class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBlock {
 	public static final IntegerProperty AGE = BlockProperties.AGE_FOUR;
 
 	public BlockCommonPlant(MaterialColor color) {
