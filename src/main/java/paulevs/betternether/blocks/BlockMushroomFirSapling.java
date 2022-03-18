@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.interfaces.SurvivesOnNetherMycelium;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.structures.plants.StructureMushroomFir;
 import ru.bclib.blocks.FeatureSaplingBlock;
@@ -26,7 +27,7 @@ class MushroomFirTreeFeature extends DefaultFeature {
 }
 
 
-public class BlockMushroomFirSapling extends FeatureSaplingBlock implements BonemealableBlock {
+public class BlockMushroomFirSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherMycelium {
 	private static final DefaultFeature FEATURE = new MushroomFirTreeFeature();
 	
 	public BlockMushroomFirSapling() {
@@ -35,7 +36,7 @@ public class BlockMushroomFirSapling extends FeatureSaplingBlock implements Bone
 	
 	@Override
 	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-		return BlocksHelper.isNetherMycelium(blockState);
+		return isSurvivable(blockState);
 	}
 
 	@Override

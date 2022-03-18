@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.interfaces.SurvivesOnNetherrack;
 import paulevs.betternether.world.structures.plants.StructureAnchorTreeBranch;
 import ru.bclib.blocks.FeatureHangingSaplingBlock;
 import ru.bclib.world.features.DefaultFeature;
@@ -21,7 +22,7 @@ class AnchorTreeFeature extends DefaultFeature {
 	}
 }
 
-public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implements BonemealableBlock {
+public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack{
 	private static final DefaultFeature FEATURE = new AnchorTreeFeature();
 	
 	public BlockAnchorTreeSapling() {
@@ -30,6 +31,6 @@ public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implement
 	
 	@Override
 	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-		return BlocksHelper.isNetherrack(blockState);
+		return isSurvivable(blockState);
 	}
 }

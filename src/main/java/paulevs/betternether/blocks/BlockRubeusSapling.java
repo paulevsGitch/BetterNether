@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import paulevs.betternether.BlocksHelper;
+import paulevs.betternether.interfaces.SurvivesOnNetherGround;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 import paulevs.betternether.world.structures.plants.StructureRubeus;
 import ru.bclib.blocks.FeatureSaplingBlock;
@@ -25,7 +26,7 @@ class RubeusTreeFeature extends DefaultFeature {
 	}
 }
 
-public class BlockRubeusSapling extends FeatureSaplingBlock implements BonemealableBlock {
+public class BlockRubeusSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherGround {
 	private static final DefaultFeature FEATURE = new RubeusTreeFeature();
 	
 	public BlockRubeusSapling() {
@@ -34,7 +35,7 @@ public class BlockRubeusSapling extends FeatureSaplingBlock implements Bonemeala
 	
 	@Override
 	protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-		return BlocksHelper.isNetherGround(blockState);
+		return isSurvivable(blockState);
 	}
 
 	@Override
