@@ -18,10 +18,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -127,15 +124,26 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-		super.tick(state, world, pos, random);
-		if (isBonemealSuccess(world, random, pos, state)) {
-			performBonemeal(world, random, pos, state);
-		}
-		if (state.getValue(SHAPE) != TripleShape.MIDDLE && state.getValue(SHAPE) != TripleShape.BOTTOM && random.nextInt(16) == 0) {
-			BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, TripleShape.MIDDLE));
+	public boolean isRandomlyTicking(BlockState state) {
+		return state.getValue(SHAPE) == TripleShape.BOTTOM;
+	}
+
+	@Override
+	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+		super.randomTick(state, world, pos, random);
+
+		if (random.nextInt(8) == 0) {
+			if (isBonemealSuccess(world, random, pos, state)) {
+				if (world.getBlockState(pos.above()).getBlock() != this){
+					performBonemeal(world, random, pos, state);
+				} else {
+					BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, TripleShape.MIDDLE));
+					BlocksHelper.setWithUpdate(world, pos.below(), defaultBlockState());
+				}
+			}
 		}
 	}
+
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack tool = player.getItemInHand(hand);
