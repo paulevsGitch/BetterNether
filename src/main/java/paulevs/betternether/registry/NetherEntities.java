@@ -273,15 +273,12 @@ public class NetherEntities {
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends LivingEntity> entity) {
-		Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), entity);
-		ATTRIBUTES.put(entity, Mob.createMobAttributes().build());
+		registerEntity(name, entity, Mob.createMobAttributes().build());
 	}
 	
 	public static void registerEntity(String name, EntityType<? extends Entity> entity, AttributeSupplier container) {
-		if (Configs.MOBS.getBoolean("mobs", name, true)) {
-			Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), entity);
-			ATTRIBUTES.put(entity, container);
-		}
+		Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(BetterNether.MOD_ID, name), entity);
+		ATTRIBUTES.put(entity, container);
 	}
 	
 	public static boolean isNetherEntity(Entity entity) {
