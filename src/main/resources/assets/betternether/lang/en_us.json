@@ -50,7 +50,7 @@
 	"block.betternether.eyeball": "Eyeball Block",
 	"block.betternether.eyeball_small": "Small Eyeball Block",
 
-	"block.betternether.bone_block": "Bone Block",
+	"block.betternether.bone_block": "Full Bone Block",
 	"block.betternether.bone_button": "Bone Button",
 	"block.betternether.bone_cincinnasite_door": "Bone-Cincinnasite Door",
 	"block.betternether.bone_mushroom": "Bone Mushroom Spores",
@@ -385,7 +385,7 @@
 	"block.betternether.mushroom_fir_log": "Mushroom Fir Log",
 	"block.betternether.mushroom_fir_bark": "Mushroom Fir Wood",
 	"block.betternether.mushroom_fir_stripped_log": "Stripped Mushroom Fir Log",
-	"block.betternether.mushroom_fir_stripped_bark": "Stripped Mushroom Fir Wood",
+	"block.betternether.striped_wood_mushroom_fir": "Stripped Mushroom Fir Wood",
 	"block.betternether.mushroom_fir_planks": "Mushroom Fir Planks",
 	"block.betternether.mushroom_fir_stairs": "Mushroom Fir Stairs",
 	"block.betternether.mushroom_fir_slab": "Mushroom Fir Slab",
@@ -725,5 +725,9 @@
 	
 	"biome.betternether.upside_down_forest_cleared": "Dead Upside Down Forest",
 	"enchantment.betternether.obsidian_breaker": "Obsidian Breaker",
-	"enchantment.betternether.ruby_fire": "Rubys' Fire"
+	"enchantment.betternether.obsidian_breaker.desc": "Increases the breaking speed of Obsidian",
+	"enchantment.betternether.ruby_fire": "Rubys' Fire",
+	"enchantment.betternether.ruby_fire.desc": "Auto-Smelts ores (Pickaxe) \n Flame and Knockback (Armor and Sword)",
+	"betternether.survive.nethergound": "Nether Ground"
+
 }
