@@ -149,15 +149,15 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 					BlockState currentState = world.getBlockState(context.POS);
 					if (currentState.is(NetherBlocks.ANCHOR_TREE_VINE) || currentState.is(Blocks.AIR) ) {
 						BlocksHelper.setWithUpdate(world, context.POS, leaves);
-						//BlocksHelper.setWithoutUpdate(world, mutableBlockPos, Blocks.WHITE_CONCRETE.defaultBlockState());
+						//safeSet(world, mutableBlockPos, Blocks.WHITE_CONCRETE.defaultBlockState());
 						
 						//replace upward veins with leaves
 						BlockPos vpos = context.POS.above();
 						currentState = world.getBlockState(vpos);
 						
 						while (currentState.is(NetherBlocks.ANCHOR_TREE_VINE)) {
-							BlocksHelper.setWithoutUpdate(world, vpos, leaves);
-							//BlocksHelper.setWithoutUpdate(world, vpos, Blocks.YELLOW_WOOL.defaultBlockState());
+							safeSet(world, vpos, leaves);
+							//safeSet(world, vpos, Blocks.YELLOW_WOOL.defaultBlockState());
 							vpos = vpos.above();
 							currentState = world.getBlockState(vpos);
 						}
@@ -187,11 +187,17 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 //			final BlockPos logPos = entry.getKey();
 //			BlockState currentState = world.getBlockState(logPos);
 //			if (currentState.hasProperty(BlockStateProperties.DISTANCE) ) {
-//				BlocksHelper.setWithoutUpdate(world, logPos, woool[dist].defaultBlockState());
+//				safeSet(world, logPos, woool[dist].defaultBlockState());
 //			}
 //		}
 		
 		context.LOGS_DIST.clear();
+	}
+
+	public static void safeSet(LevelAccessor level, BlockPos pos, BlockState state){
+		if (!state.is(Blocks.BEDROCK)) {
+			BlocksHelper.setWithoutUpdate(level, pos, state);
+		}
 	}
 	
 	private void updateDistances(ServerLevelAccessor world, StructureGeneratorThreadContext context) {
@@ -203,20 +209,20 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 			if (currentState.hasProperty(BlockStateProperties.DISTANCE) ) {
 				int cDist = currentState.getValue(BlockStateProperties.DISTANCE);
 				if (dist < cDist) {
-					BlocksHelper.setWithoutUpdate(world, logPos, currentState.setValue(BlockStateProperties.DISTANCE, dist));
+					safeSet(world, logPos, currentState.setValue(BlockStateProperties.DISTANCE, dist));
 					cDist = dist;
 				}
 				
 				if (cDist>=7){
-					BlocksHelper.setWithoutUpdate(world, logPos, Blocks.AIR.defaultBlockState());
-					//BlocksHelper.setWithoutUpdate(world, logPos, Blocks.ORANGE_WOOL.defaultBlockState());
+					safeSet(world, logPos, Blocks.AIR.defaultBlockState());
+					//safeSet(world, logPos, Blocks.ORANGE_WOOL.defaultBlockState());
 					
 					BlockPos pos = logPos.below();
 					currentState = world.getBlockState(pos);
 					
 					while (currentState.is(NetherBlocks.ANCHOR_TREE_VINE)) {
-						BlocksHelper.setWithoutUpdate(world, pos, Blocks.AIR.defaultBlockState());
-						//BlocksHelper.setWithoutUpdate(world, pos, Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState());
+						safeSet(world, pos, Blocks.AIR.defaultBlockState());
+						//safeSet(world, pos, Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState());
 						pos = pos.below();
 						currentState = world.getBlockState(pos);
 					}
@@ -321,7 +327,7 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 						if (world.getBlockState(context.POS).getMaterial().isReplaceable()) {
 							int length = BlocksHelper.downRay(world, context.POS, HEIGHT_17);
 							if (length < 5) {
-								BlocksHelper.setWithoutUpdate(world, context.POS, leaves);
+								safeSet(world, context.POS, leaves);
 								continue;
 							} ;
 							if (length > HEIGHT_15) length = MHelper.randRange(HEIGHT_10, HEIGHT_15, random);
@@ -333,12 +339,12 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 							
 							if (length>4) {
 								for (int i = 1; i < length - 2; i++) {
-									BlocksHelper.setWithoutUpdate(world, context.POS.below(i), vine);
+									safeSet(world, context.POS.below(i), vine);
 								}
-								BlocksHelper.setWithoutUpdate(world, context.POS.below(length - 2), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
-								BlocksHelper.setWithoutUpdate(world, context.POS.below(length - 1), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
+								safeSet(world, context.POS.below(length - 2), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.MIDDLE));
+								safeSet(world, context.POS.below(length - 1), vine.setValue(BlockAnchorTreeVine.SHAPE, TripleShape.BOTTOM));
 							}
-							BlocksHelper.setWithoutUpdate(world, context.POS, leaves);
+							safeSet(world, context.POS, leaves);
 						}
 					}
 				}
