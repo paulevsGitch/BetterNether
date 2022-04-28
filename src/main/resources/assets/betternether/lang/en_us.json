@@ -725,6 +725,9 @@
 	
 	"biome.betternether.upside_down_forest_cleared": "Dead Upside Down Forest",
 	"enchantment.betternether.obsidian_breaker": "Obsidian Breaker",
+	"enchantment.betternether.obsidian_breaker.desc": "Increases the breaking speed of Obsidian",
 	"enchantment.betternether.ruby_fire": "Rubys' Fire",
+	"enchantment.betternether.ruby_fire.desc": "Auto-Smelts ores (Pickaxe) \n Flame and Knockback (Armor and Sword)",
 	"betternether.survive.nethergound": "Nether Ground"
+
 }
