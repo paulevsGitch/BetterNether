@@ -59,7 +59,7 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 	@Override
 	protected FabricBlockSettings getBlockSettings() {
 		return FabricBlockSettings.copyOf(Blocks.WARPED_PLANKS)
-								  .materialColor(planksColor);
+								  .mapColor(planksColor);
 	}
 
 	protected void _initBase(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {

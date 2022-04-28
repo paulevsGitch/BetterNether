@@ -33,10 +33,10 @@ public class RoofMaterial extends NetherWoodenMaterial {
 			return new BaseBlock(FabricBlockSettings.copyOf(getBlock(BLOCK_PLANKS)));
 		}));
 		addBlockEntry(new BlockEntry(BLOCK_ROOF_STAIRS, (complexMaterial, settings) -> {
-			return new BaseStairsBlock(getBlock(BLOCK_ROOF));
+			return new BaseStairsBlock(getBlock(BLOCK_ROOF), false);
 		}));
 		addBlockEntry(new BlockEntry(BLOCK_ROOF_SLAB, (complexMaterial, settings) -> {
-			return new BaseSlabBlock(getBlock(BLOCK_ROOF));
+			return new BaseSlabBlock(getBlock(BLOCK_ROOF), false);
 		}));
 	}
 	

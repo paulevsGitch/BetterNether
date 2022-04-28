@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class NetherArmor extends BaseArmorItem implements InitialStackStateProvider {
 	public NetherArmor(ArmorMaterial material, EquipmentSlot slot) {
-		super(material, slot, NetherItems.defaultSettings());
+		super(material, slot, NetherItems.defaultSettings().fireResistant());
 	}
 	
 	static final Map<Enchantment, Integer> DEFAULT_RUBY_ENCHANTS;
