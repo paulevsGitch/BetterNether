@@ -2,13 +2,13 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricMaterialBuilder;
-import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import paulevs.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import ru.bclib.blocks.BaseLeavesBlock;
 
 import java.util.Random;
@@ -19,7 +19,7 @@ public class BNLeaves extends BaseLeavesBlock {
 	
 	public BNLeaves(Block sapling, MaterialColor color) {
 		super(sapling, color, (settings)-> {
-			AbstractBlockSettingsAccessor accessor = (AbstractBlockSettingsAccessor)settings;
+			BlockBehaviourPropertiesAccessor accessor = (BlockBehaviourPropertiesAccessor) settings;
 			accessor.setMaterial(NETHER_LEAVES);
 		});
 	}
@@ -27,7 +27,7 @@ public class BNLeaves extends BaseLeavesBlock {
 	public BNLeaves(Block sapling, MaterialColor color, Consumer<FabricBlockSettings> customizeProperties) {
 		super(sapling, color, (settings)-> {
 			customizeProperties.accept(settings);
-			AbstractBlockSettingsAccessor accessor = (AbstractBlockSettingsAccessor)settings;
+			BlockBehaviourPropertiesAccessor accessor = (BlockBehaviourPropertiesAccessor) settings;
 			accessor.setMaterial(NETHER_LEAVES);
 		});
 	}

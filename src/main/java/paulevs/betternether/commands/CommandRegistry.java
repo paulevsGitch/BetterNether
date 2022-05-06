@@ -10,8 +10,6 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Vector3d;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
-import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -41,6 +39,8 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
+import paulevs.betternether.mixin.common.BlockBehaviourAccessor;
+import paulevs.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.world.NetherBiome;
@@ -325,8 +325,8 @@ public class CommandRegistry {
         List<Block> other = new LinkedList<>();
 
         for (Block block : NetherBlocks.getModBlocks().stream().sorted(CommandRegistry::compareBlockNames).collect(Collectors.toList())) {
-            BlockBehaviour.Properties properties = ((AbstractBlockAccessor) block).getSettings();
-            Material material = ((AbstractBlockSettingsAccessor) properties).getMaterial();
+            BlockBehaviour.Properties properties = ((BlockBehaviourAccessor) block).getProperties();
+            Material material = ((BlockBehaviourPropertiesAccessor) properties).getMaterial();
 
             if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
                 pickaxes.add(block);

@@ -2,7 +2,6 @@ package paulevs.betternether.loot;
 
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
-import net.fabricmc.fabric.mixin.loot.table.LootSupplierBuilderHooks;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
@@ -10,6 +9,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import paulevs.betternether.BetterNether;
+import paulevs.betternether.mixin.common.LootTableBuilderAccessor;
 import paulevs.betternether.registry.NetherBlocks;
 
 import java.lang.reflect.Field;
@@ -61,9 +61,9 @@ public class BNLoot {
 				try {
 					for (Field f : table.getClass()
 										.getDeclaredFields()) {
-						if (LootSupplierBuilderHooks.class.isAssignableFrom(f.getType())) {
+						if (LootTableLoadingCallback.class.isAssignableFrom(f.getType())) {
 							f.setAccessible(true);
-							LootSupplierBuilderHooks hook = (LootSupplierBuilderHooks) f.get(table);
+							LootTableBuilderAccessor hook = (LootTableBuilderAccessor) f.get(table);
 							if (hook != null) {
 								pools = hook.getPools();
 							}
