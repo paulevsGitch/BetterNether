@@ -25,6 +25,9 @@
 		"BlockBehaviourMixin",
 		"PlayerEntityMixin",
 		"RecipeManagerAccessor",
+		"BlockBehaviourAccessor",
+		"BlockBehaviourPropertiesAccessor",
+		"LootTableBuilderAccessor",
 		"RecipeManagerMixin"
 	],
 	"injectors": {

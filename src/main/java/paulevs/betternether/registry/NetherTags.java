@@ -1,8 +1,5 @@
 package paulevs.betternether.registry;
 
-import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
-import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -12,6 +9,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import paulevs.betternether.blocks.BlockTerrain;
 import paulevs.betternether.blocks.materials.Materials;
+import paulevs.betternether.mixin.common.BlockBehaviourAccessor;
+import paulevs.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import ru.bclib.api.BonemealAPI;
 import ru.bclib.api.ComposterAPI;
 import ru.bclib.api.tag.NamedBlockTags;
@@ -37,8 +36,8 @@ public class NetherTags {
 	public static void register() {
 		TagAPI.addBlockTag(NETHER_SAND_LOCATION, Blocks.SOUL_SAND);
 		NetherBlocks.getModBlocks().forEach(block -> {
-			BlockBehaviour.Properties properties = ((AbstractBlockAccessor) block).getSettings();
-			Material material = ((AbstractBlockSettingsAccessor) properties).getMaterial();
+			BlockBehaviour.Properties properties = ((BlockBehaviourAccessor) block).getProperties();
+			Material material = ((BlockBehaviourPropertiesAccessor) properties).getMaterial();
 			Item item = block.asItem();
 
 			if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
