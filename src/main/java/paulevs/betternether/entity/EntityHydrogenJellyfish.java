@@ -31,6 +31,7 @@ import ru.bclib.entity.DespawnableAnimal;
 
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class EntityHydrogenJellyfish extends DespawnableAnimal implements FlyingAnimal {
 	private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(EntityHydrogenJellyfish.class, EntityDataSerializers.FLOAT);
@@ -225,7 +226,7 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
 		return false;
 	}
 
-	public static boolean canSpawn(EntityType<? extends EntityHydrogenJellyfish> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
+	public static boolean canSpawn(EntityType<? extends EntityHydrogenJellyfish> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
 		try {
 			AABB box = new AABB(pos).inflate(64, 256, 64);
 			List<EntityHydrogenJellyfish> list = world.getEntitiesOfClass(EntityHydrogenJellyfish.class, box, (entity) -> {

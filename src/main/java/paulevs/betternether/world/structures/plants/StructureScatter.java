@@ -10,6 +10,7 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureScatter implements IStructure {
 	private final Block plantBlock;
@@ -33,7 +34,7 @@ public class StructureScatter implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (world.isEmptyBlock(pos) && canPlaceAt(world, pos)) {
 			BlockState state = plantBlock.defaultBlockState();
 			int rndState = random.nextInt(2);

@@ -22,6 +22,7 @@ import paulevs.betternether.interfaces.SurvivesOnNetherrack;
 import paulevs.betternether.world.structures.plants.StructureEye;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack {
 	private static final VoxelShape SHAPE = Block.box(4, 6, 4, 12, 16, 12);
@@ -49,12 +50,12 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock,
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return random.nextInt(4) == 0 && world.getBlockState(pos.below()).getBlock() == Blocks.AIR;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		STRUCTURE.grow(world, pos, random);
 	}
 
@@ -72,7 +73,7 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock,
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.tick(state, world, pos, random);
 		if (isBonemealSuccess(world, random, pos, state)) {
 			performBonemeal(world, random, pos, state);

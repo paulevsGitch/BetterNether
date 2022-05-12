@@ -29,6 +29,7 @@ import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class NetherSoulPlain extends NetherBiome {
 	private static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
@@ -92,7 +93,7 @@ public class NetherSoulPlain extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 //		final MutableBlockPos POS = new MutableBlockPos();
 //		POS.set(pos);
 //		int d1 = MHelper.randRange(2, 4, random);

@@ -9,13 +9,15 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.MHelper;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockNetherSakuraLeaves extends BNLeaves {
-	private static final Random RANDOM = new Random();
+	private static final RandomSource RANDOM = new LegacyRandomSource(130520220101l);
 	private static final int COLOR = MHelper.color(251, 113, 143);
 
 	public BlockNetherSakuraLeaves(Block sapling) {
@@ -35,7 +37,7 @@ public class BlockNetherSakuraLeaves extends BNLeaves {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (random.nextInt(10) == 0) {
 			BlockPos blockPos = pos.below();
 			if (world.isEmptyBlock(blockPos)) {

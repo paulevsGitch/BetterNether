@@ -6,7 +6,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -52,7 +52,7 @@ public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity 
 
 	@Override
 	protected Component getDefaultName() {
-		return new TranslatableComponent("container.chest_of_drawers", new Object[0]);
+		return Component.translatable("container.chest_of_drawers", new Object[0]);
 	}
 
 	@Override

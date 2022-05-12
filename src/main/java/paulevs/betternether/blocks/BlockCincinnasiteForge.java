@@ -23,6 +23,7 @@ import paulevs.betternether.registry.BlockEntitiesRegistry;
 import paulevs.betternether.registry.NetherBlocks;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 import java.util.function.ToIntFunction;
 
 public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
@@ -54,7 +55,7 @@ public class BlockCincinnasiteForge extends AbstractFurnaceBlock {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if ((Boolean) state.getValue(LIT)) {
 			double d = (double) pos.getX() + 0.5D;
 			double e = (double) pos.getY();

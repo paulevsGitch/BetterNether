@@ -17,6 +17,7 @@ import paulevs.betternether.world.structures.plants.StructureMedBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureMedRedMushroom;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 @Mixin(MushroomBlock.class)
 public abstract class MushroomMixin {
@@ -30,7 +31,7 @@ public abstract class MushroomMixin {
 	}
 
 	@Inject(method = "performBonemeal", at = @At(value = "HEAD"), cancellable = true)
-	private void growStructure(ServerLevel world, Random random, BlockPos pos, BlockState state, CallbackInfo info) {
+	private void growStructure(ServerLevel world, RandomSource random, BlockPos pos, BlockState state, CallbackInfo info) {
 		if (BlocksHelper.isNetherMycelium(world.getBlockState(pos.below()))) {
 			if (state.getBlock() == Blocks.RED_MUSHROOM) {
 				redStucture.grow(world, pos, random);

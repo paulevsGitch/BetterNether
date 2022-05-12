@@ -17,6 +17,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.registry.NetherBlocks;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 @Mixin(BoneMealItem.class)
 public class BoneMealMixin {
@@ -99,7 +100,7 @@ public class BoneMealMixin {
 		return null;
 	}
 
-	private void bnShuffle(Random random) {
+	private void bnShuffle(RandomSource random) {
 		for (int i = 0; i < 4; i++) {
 			int j = random.nextInt(4);
 			Direction d = DIR[i];

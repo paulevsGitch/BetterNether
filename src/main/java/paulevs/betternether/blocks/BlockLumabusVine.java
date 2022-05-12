@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -27,13 +28,14 @@ import paulevs.betternether.registry.NetherItems;
 
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 import java.util.function.ToIntFunction;
 
 public class BlockLumabusVine extends BlockBaseNotFull {
 	private static final VoxelShape MIDDLE_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
 	private static final VoxelShape BOTTOM_SHAPE = Block.box(2, 4, 2, 14, 16, 14);
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
-	private static final Random RANDOM = new Random();
+	private static final RandomSource RANDOM = new LegacyRandomSource(130520220102l);
 	private final Block seed;
 
 	public BlockLumabusVine(Block seed) {

@@ -38,6 +38,7 @@ import ru.bclib.items.tool.BaseShearsItem;
 
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, AddMineableShears {
 	private static final VoxelShape SELECTION = Block.box(2, 0, 2, 14, 16, 14);
@@ -102,12 +103,12 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return world.getBlockState(pos.above(3)).getBlock() != this && world.getBlockState(pos.below()).getMaterial().isReplaceable();
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, TripleShape.TOP));
 		BlocksHelper.setWithUpdate(world, pos.below(), defaultBlockState());
 	}
@@ -129,7 +130,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.randomTick(state, world, pos, random);
 
 		if (random.nextInt(8) == 0) {

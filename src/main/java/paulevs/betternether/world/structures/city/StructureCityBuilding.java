@@ -18,6 +18,7 @@ import paulevs.betternether.world.structures.StructureNBT;
 
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureCityBuilding extends StructureNBT {
 	protected static final BlockState AIR = Blocks.AIR.defaultBlockState();
@@ -142,7 +143,7 @@ public class StructureCityBuilding extends StructureNBT {
 		return building;
 	}
 
-	public StructureCityBuilding getRandomRotated(Random random) {
+	public StructureCityBuilding getRandomRotated(RandomSource random) {
 		return getRotated(Rotation.values()[random.nextInt(4)]);
 	}
 

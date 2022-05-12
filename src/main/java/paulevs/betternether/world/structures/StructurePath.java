@@ -15,6 +15,8 @@ import paulevs.betternether.noise.OpenSimplexNoise;
 import paulevs.betternether.registry.NetherBlocks;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 
 public class StructurePath implements IStructure {
 	private final OpenSimplexNoise heightNoise;
@@ -23,7 +25,7 @@ public class StructurePath implements IStructure {
 	private final OpenSimplexNoise distortY;
 
 	public StructurePath(long seed) {
-		Random random = new Random(seed);
+		RandomSource random = new LegacyRandomSource(seed);
 		heightNoise = new OpenSimplexNoise(random.nextLong());
 		rigidNoise = new OpenSimplexNoise(random.nextLong());
 		distortX = new OpenSimplexNoise(random.nextLong());
@@ -31,7 +33,7 @@ public class StructurePath implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		for (int x = 0; x < 16; x++) {
 			int wx = pos.getX() + x;
 			context.POS.setX(wx);

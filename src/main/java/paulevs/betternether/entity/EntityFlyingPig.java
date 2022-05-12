@@ -52,6 +52,7 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 	private static final EntityDataAccessor<Byte> DATA_SHARED_FLAGS_ID;
@@ -276,7 +277,7 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
 		}
 
 		private int randomRange(int side) {
-			Random random = EntityFlyingPig.this.random;
+			RandomSource random = EntityFlyingPig.this.random;
 			return random.nextInt(side + 1) - (side >> 1);
 		}
 

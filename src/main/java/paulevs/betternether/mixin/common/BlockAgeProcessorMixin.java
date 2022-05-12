@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.betternether.registry.NetherBlocks;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 //make some ruined portals blue
 @Mixin(BlockAgeProcessor.class)
@@ -25,7 +26,7 @@ public class BlockAgeProcessorMixin {
 		
 		if (makeBlue && structureBlockInfo2.state.is(Blocks.OBSIDIAN)){
 			final BlockPos structurePos = structureBlockInfo2.pos;
-			final Random random = structurePlaceSettings.getRandom(structurePos);
+			final RandomSource random = structurePlaceSettings.getRandom(structurePos);
 			
 			Block block = random.nextFloat() < 0.15F ? NetherBlocks.BLUE_CRYING_OBSIDIAN : NetherBlocks.BLUE_OBSIDIAN;
 			cir.setReturnValue(new StructureTemplate.StructureBlockInfo(structurePos, block.defaultBlockState(), structureBlockInfo2.nbt));

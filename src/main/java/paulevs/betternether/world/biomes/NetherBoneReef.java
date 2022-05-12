@@ -22,6 +22,7 @@ import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class NetherBoneReef extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -75,7 +76,7 @@ public class NetherBoneReef extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 		//BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MUSHROOM_GRASS.defaultBlockState());
 	}
 }

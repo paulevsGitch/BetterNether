@@ -23,6 +23,7 @@ import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.interfaces.SurvivesOnNetherGround;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGround {
 	private static final VoxelShape TOP_SHAPE = Block.box(4, 0, 4, 12, 8, 12);
@@ -40,7 +41,7 @@ public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGro
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (world.isEmptyBlock(pos.above()))
 			world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0);
 	}

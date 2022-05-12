@@ -12,6 +12,7 @@ import paulevs.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import ru.bclib.blocks.BaseLeavesBlock;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 import java.util.function.Consumer;
 
 public class BNLeaves extends BaseLeavesBlock {
@@ -38,10 +39,10 @@ public class BNLeaves extends BaseLeavesBlock {
 	}
 	
 	@Override
-	public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random) {
+	public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
 	}
 	
 	@Override
-	public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random) {
+	public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
 	}
 }

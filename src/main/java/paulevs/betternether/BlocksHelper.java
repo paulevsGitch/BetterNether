@@ -23,6 +23,7 @@ import ru.bclib.api.tag.CommonBlockTags;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlocksHelper {
 	public static final int FLAG_UPDATE_BLOCK = 1;
@@ -150,7 +151,7 @@ public class BlocksHelper {
 		return state.getBlock() instanceof BlockFarmland;
 	}
 
-	public static void cover(LevelAccessor world, BlockPos center, Block ground, BlockState cover, int radius, Random random) {
+	public static void cover(LevelAccessor world, BlockPos center, Block ground, BlockState cover, int radius, RandomSource random) {
 		HashSet<BlockPos> points = new HashSet<BlockPos>();
 		HashSet<BlockPos> points2 = new HashSet<BlockPos>();
 		if (world.getBlockState(center).getBlock() == ground) {

@@ -11,6 +11,7 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureWall implements IStructure {
 	private static final Direction[] DIRECTIONS = HorizontalDirectionalBlock.FACING.getPossibleValues().toArray(new Direction[] {});
@@ -22,7 +23,7 @@ public class StructureWall implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (world.isEmptyBlock(pos)) {
 			BlockState state = getPlacementState(world, pos, random);
 			if (state != null)
@@ -30,7 +31,7 @@ public class StructureWall implements IStructure {
 		}
 	}
 
-	private BlockState getPlacementState(ServerLevelAccessor world, BlockPos pos, Random random) {
+	private BlockState getPlacementState(ServerLevelAccessor world, BlockPos pos, RandomSource random) {
 		BlockState blockState = plantBlock.defaultBlockState();
 		shuffle(random);
 		for (int i = 0; i < 4; i++) {
@@ -44,7 +45,7 @@ public class StructureWall implements IStructure {
 		return null;
 	}
 
-	private void shuffle(Random random) {
+	private void shuffle(RandomSource random) {
 		for (int i = 0; i < 4; i++)
 			SHUFFLED[i] = DIRECTIONS[i];
 		for (int i = 0; i < 4; i++) {

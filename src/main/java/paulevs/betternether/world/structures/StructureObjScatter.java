@@ -7,6 +7,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public abstract class StructureObjScatter implements IStructure {
 	final StructureWorld[] structures;
@@ -20,7 +21,7 @@ public abstract class StructureObjScatter implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (isGround(world.getBlockState(pos.below())) && isGround(world.getBlockState(pos.below(2))) && noObjNear(world, pos)) {
 			StructureWorld tree = structures[random.nextInt(structures.length)];
 			tree.generate(world, pos, random, MAX_HEIGHT, context);

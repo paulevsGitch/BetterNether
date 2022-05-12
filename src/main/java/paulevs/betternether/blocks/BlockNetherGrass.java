@@ -37,7 +37,7 @@ class BaseBlockNetherGrass extends BlockBase {
 	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
 
 	public BaseBlockNetherGrass() {
-		super(Materials.makeGrass(MaterialColor.TERRACOTTA_GRAY).ticksRandomly());
+		super(Materials.makeGrass(MaterialColor.TERRACOTTA_GRAY).ticksRandomly().offsetType(Block.OffsetType.XZ));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}
@@ -53,10 +53,6 @@ class BaseBlockNetherGrass extends BlockBase {
 		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
 	}
 
-	@Override
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XZ;
-	}
 
 
 	@Override

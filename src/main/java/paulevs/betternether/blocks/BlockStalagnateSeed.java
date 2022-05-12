@@ -24,6 +24,7 @@ import ru.bclib.blocks.FeatureSaplingBlock;
 import ru.bclib.world.features.DefaultFeature;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 class StalagnateTreeFeatureUp extends DefaultFeature {
 	static final StructureStalagnate STRUCTURE = new StructureStalagnate();
@@ -84,7 +85,7 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
 	}
 	
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		if (super.isBonemealSuccess(world, random, pos, state)) {
 			if (growsDownward(state))
 				return BlocksHelper.downRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;

@@ -18,12 +18,13 @@ import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureAnchorTreeRoot implements IStructure {
 	private static final StructureLucis LUCIS = new StructureLucis();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (pos.getY() < MAX_HEIGHT*0.75) return;
 
 		double angle = random.nextDouble() * Math.PI * 2;
@@ -152,7 +153,7 @@ public class StructureAnchorTreeRoot implements IStructure {
 		return Mth.clamp(0.5 - Math.cos(mix * Math.PI) * 0.5, 0, 1);
 	}
 
-	private List<BlockPos> lineParable(BlockPos start, BlockPos end, int count, Random random, double range) {
+	private List<BlockPos> lineParable(BlockPos start, BlockPos end, int count, RandomSource random, double range) {
 		List<BlockPos> result = new ArrayList<>(count);
 		int max = count - 1;
 		int middle = count / 2;

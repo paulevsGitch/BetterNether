@@ -13,11 +13,13 @@ import paulevs.betternether.entity.EntityJungleSkeleton;
 import paulevs.betternether.mixin.client.TexturedModelDataMixin;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 
 public class ModelJungleSkeleton extends SkeletonModel<EntityJungleSkeleton> {
 	private static final float ANGLE45 = (float) Math.PI * 0.25F;
 	private static final float ANGLE90 = (float) Math.PI * 0.5F;
-	private static final Random RANDOM = new Random();
+	private static final RandomSource RANDOM = new LegacyRandomSource(130520220100l);
 	private static final float BOUND_MIN = ANGLE90 * 2F / 3F;
 	private static final float BOUND_MAX = ANGLE90 * 4F / 5F;
 

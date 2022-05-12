@@ -8,6 +8,7 @@ import paulevs.betternether.world.structures.piece.CityPiece;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CityGenerator {
 	private List<StructureCityBuilding> centers = new ArrayList<StructureCityBuilding>();
@@ -82,7 +83,7 @@ public class CityGenerator {
 		buildings.add(building.getRotated(Rotation.COUNTERCLOCKWISE_90));
 	}
 
-	private void placeCenterBuilding(BlockPos pos, StructureCityBuilding building, ArrayList<CityPiece> city, Random random, CityPalette palette) {
+	private void placeCenterBuilding(BlockPos pos, StructureCityBuilding building, ArrayList<CityPiece> city, RandomSource random, CityPalette palette) {
 		BoundingBox2D bb = building.getBoungingBox().offset(pos);
 		bounds.add(bb);
 		city.add(new CityPiece(building, pos.offset(0, building.getYOffset(), 0), random.nextInt(), palette));
@@ -90,7 +91,7 @@ public class CityGenerator {
 			ends.add(pos.offset(building.getOffsettedPos(i).offset(0, building.getYOffset(), 0)));
 	}
 
-	private void attachBuildings(Random random, ArrayList<CityPiece> city, CityPalette palette) {
+	private void attachBuildings(RandomSource random, ArrayList<CityPiece> city, CityPalette palette) {
 		for (BlockPos pos : ends) {
 			boolean generate = true;
 			for (int n = 0; n < 8 && generate; n++) {
@@ -128,7 +129,7 @@ public class CityGenerator {
 		add.clear();
 	}
 
-	private void closeRoads(ArrayList<CityPiece> city, Random random, CityPalette palette) {
+	private void closeRoads(ArrayList<CityPiece> city, RandomSource random, CityPalette palette) {
 		for (BlockPos pos : ends) {
 			for (int n = 0; n < roadEnds.size(); n++) {
 				StructureCityBuilding building = roadEnds.get(n);
@@ -148,7 +149,7 @@ public class CityGenerator {
 		add.clear();
 	}
 
-	public ArrayList<CityPiece> generate(BlockPos pos, Random random, CityPalette palette) {
+	public ArrayList<CityPiece> generate(BlockPos pos, RandomSource random, CityPalette palette) {
 		ArrayList<CityPiece> city = new ArrayList<CityPiece>();
 		placeCenterBuilding(pos, centers.get(random.nextInt(centers.size())), city, random, palette);
 

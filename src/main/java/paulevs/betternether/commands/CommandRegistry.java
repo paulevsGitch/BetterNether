@@ -20,7 +20,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
@@ -56,11 +56,11 @@ import java.util.stream.Collectors;
 public class CommandRegistry {
     private static final DynamicCommandExceptionType ERROR_BIOME_NOT_FOUND = new DynamicCommandExceptionType(
             (object) -> {
-                return new TextComponent("The next biome ("+object+") was not found.");
+                return Component.literal("The next biome ("+object+") was not found.");
             });
     private static final DynamicCommandExceptionType ERROR_NBT_STRUCTURE_NOT_FOUND = new DynamicCommandExceptionType(
         (object) -> {
-            return new TextComponent("The nbt-structure ("+object+") was not found.");
+            return Component.literal("The nbt-structure ("+object+") was not found.");
         });
     private static final int MAX_SEARCH_RADIUS = 6400*2;
     private static final int SEARCH_STEP = 8;
@@ -121,11 +121,11 @@ public class CommandRegistry {
         List<NetherBiome> biomes = NetherBiomes.ALL_BN_BIOMES;
        
         if (biomeIndex<0 || biomeIndex>=biomes.size()){
-            source.sendFailure(new TextComponent("Failed to find the next Biome...").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
+            source.sendFailure(Component.literal("Failed to find the next Biome...").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
             return 0;
         }
         final BCLBiome biome = biomes.get(biomeIndex);
-        source.sendSuccess(new TextComponent("Locating Biome " + biome).setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
+        source.sendSuccess(Component.literal("Locating Biome " + biome).setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GREEN)), false);
         biomeIndex = (biomeIndex+1) % biomes.size();
 
         final BlockPos currentPosition = new BlockPos(source.getPosition());

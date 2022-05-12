@@ -20,6 +20,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockNetherReed extends BlockBase {
 	public static final BooleanProperty TOP = BooleanProperty.create("top");
@@ -85,7 +86,7 @@ public class BlockNetherReed extends BlockBase {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		if (!canSurvive(state, world, pos)) {
 			world.destroyBlock(pos, true);
 			return;

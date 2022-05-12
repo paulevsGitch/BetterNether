@@ -27,6 +27,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 import java.util.function.ToIntFunction;
 
 public class BlockFireBowl extends BlockBaseNotFull {
@@ -82,7 +83,7 @@ public class BlockFireBowl extends BlockBaseNotFull {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (state.getValue(FIRE)) {
 			if (random.nextInt(24) == 0)
 				world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.FIRE_AMBIENT, SoundSource.BLOCKS, 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);

@@ -2,7 +2,7 @@ package paulevs.betternether.blockentities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.FurnaceMenu;
@@ -19,7 +19,7 @@ public class BlockEntityForge extends AbstractFurnaceBlockEntity implements Chan
 
 	@Override
 	protected Component getDefaultName() {
-		return new TranslatableComponent("container.forge", new Object[0]);
+		return Component.translatable("container.forge", new Object[0]);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.StructureFeatureManager;
+import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
@@ -22,6 +22,7 @@ import paulevs.betternether.world.structures.city.palette.CityPalette;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CityPiece extends CustomPiece {
 	private final MutableBlockPos POS = new MutableBlockPos();
@@ -61,7 +62,7 @@ public class CityPiece extends CustomPiece {
 	}
 
 	@Override
-	public void postProcess(WorldGenLevel world, StructureFeatureManager arg, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
+	public void postProcess(WorldGenLevel world, StructureManager arg, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
 		if (!this.boundingBox.intersects(blockBox))
 			return;
 

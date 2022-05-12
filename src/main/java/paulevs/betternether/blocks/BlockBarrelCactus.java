@@ -47,6 +47,7 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
 				.ticksRandomly()
 
 				.dynamicShape()
+					  .offsetType(Block.OffsetType.XYZ)
         );
 	}
 
@@ -79,11 +80,6 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
 		if (state.getValue(BlockCommonPlant.AGE) < 2) return EMPTY;
 		Vec3 vec3d = state.getOffset(view, pos);
 		return SHAPES[state.getValue(BlockCommonPlant.AGE)].move(vec3d.x, vec3d.y, vec3d.z);
-	}
-
-	@Override
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XYZ;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureWartCap implements IStructure {
 	private static final BlockState INSIDE = Blocks.RED_MUSHROOM_BLOCK
@@ -26,7 +27,7 @@ public class StructureWartCap implements IStructure {
 			.defaultBlockState();
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (!isWall(world, pos) || pos.getY() > (MAX_HEIGHT*0.45) || pos.getY() < (MAX_HEIGHT*0.25) || world.isEmptyBlock(pos.below(3)))
 			return;
 

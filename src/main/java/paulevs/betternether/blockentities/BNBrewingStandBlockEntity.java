@@ -6,7 +6,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
@@ -77,7 +77,7 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
 	}
 
 	protected Component getDefaultName() {
-		return new TranslatableComponent("container.brewing", new Object[0]);
+		return Component.translatable("container.brewing", new Object[0]);
 	}
 
 	public int getContainerSize() {

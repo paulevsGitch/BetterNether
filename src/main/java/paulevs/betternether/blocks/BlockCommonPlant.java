@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,20 +20,26 @@ import net.minecraft.world.level.material.MaterialColor;
 import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.interfaces.SurvivesOnNetherGround;
-
 import java.util.Random;
+import net.minecraft.util.RandomSource;
+import java.util.Random;
+import java.util.function.Function;
 
 public abstract class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBlock {
 	public static final IntegerProperty AGE = BlockProperties.AGE_FOUR;
 
 	public BlockCommonPlant(MaterialColor color) {
-		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
-				.mapColor(color)
-				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
-				.ticksRandomly());
+		this(color, p->p);
+	}
+
+	public BlockCommonPlant(MaterialColor color, Function<Properties, Properties> adaptProperties) {
+		super(adaptProperties.apply(FabricBlockSettings.of(Materials.NETHER_PLANT)
+								 .mapColor(color)
+								 .sounds(SoundType.CROP)
+								 .nonOpaque()
+								 .noCollision()
+								 .breakInstantly()
+								 .ticksRandomly()));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}
@@ -75,7 +82,7 @@ public abstract class BlockCommonPlant extends BlockBaseNotFull implements Bonem
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		int age = state.getValue(AGE);
 		if (age < 3)
 			return BlocksHelper.isFertile(world.getBlockState(pos.below())) ? (random.nextBoolean()) : (random.nextInt(4) == 0);
@@ -83,7 +90,7 @@ public abstract class BlockCommonPlant extends BlockBaseNotFull implements Bonem
 			return false;
 	}
 
-	protected boolean canGrowTerrain(Level world, Random random, BlockPos pos, BlockState state) {
+	protected boolean canGrowTerrain(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		int age = state.getValue(AGE);
 		if (age < 3)
 			return BlocksHelper.isFertile(world.getBlockState(pos.below())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
@@ -92,13 +99,13 @@ public abstract class BlockCommonPlant extends BlockBaseNotFull implements Bonem
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		int age = state.getValue(AGE);
 		world.setBlockAndUpdate(pos, state.setValue(AGE, age + 1));
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.tick(state, world, pos, random);
 		if (canGrowTerrain(world, random, pos, state))
 			performBonemeal(world, random, pos, state);

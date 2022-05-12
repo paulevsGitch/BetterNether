@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -20,6 +21,7 @@ import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.world.structures.IGrowableStructure;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBlock {
 	private static final VoxelShape SHAPE = Block.box(4, 6, 4, 12, 16, 12);
@@ -48,13 +50,13 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
-		return random.nextInt(4) == 0 && world.getBlockState(pos.below()).getBlock() == Blocks.AIR;
+	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+		return random.nextInt(4) == 0 && level.getBlockState(pos.below()).getBlock() == Blocks.AIR;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
-		structure.grow(world, pos, random);
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+		structure.grow(level, pos, random);
 	}
 
 	@Override
@@ -72,7 +74,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.tick(state, world, pos, random);
 		if (isBonemealSuccess(world, random, pos, state)) {
 			performBonemeal(world, random, pos, state);

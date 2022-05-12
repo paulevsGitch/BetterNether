@@ -6,6 +6,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Noises;
@@ -15,7 +16,6 @@ import paulevs.betternether.MHelper;
 import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.world.NetherBiome;
-import paulevs.betternether.world.NetherBiomeBuilder;
 import paulevs.betternether.world.NetherBiomeConfig;
 import paulevs.betternether.world.structures.StructureType;
 import paulevs.betternether.world.structures.decorations.StructureForestLitter;
@@ -28,17 +28,18 @@ import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
 import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 class UpsideDownFloorCondition extends SurfaceNoiseCondition {
 	public static final UpsideDownFloorCondition DEFAULT = new UpsideDownFloorCondition();
 	public static final Codec<UpsideDownFloorCondition> CODEC = Codec.BYTE.fieldOf("nether_noise").xmap(UpsideDownFloorCondition::create, obj -> (byte)0).codec();
+	private static final KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> KEY_CODEC = KeyDispatchDataCodec.of(CODEC);
 
 	private static UpsideDownFloorCondition create(byte dummy){ return DEFAULT; }
 
 	@Override
-	public Codec<? extends SurfaceRules.ConditionSource> codec() {
-		return UpsideDownFloorCondition.CODEC;
+	public KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> codec() {
+		return UpsideDownFloorCondition.KEY_CODEC;
 	}
 
 	@Override
@@ -129,7 +130,7 @@ public class UpsideDownForest extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 		//BlocksHelper.setWithoutUpdate(world, pos, random.nextInt(3) == 0 ? NetherBlocks.NETHERRACK_MOSS.defaultBlockState() : Blocks.NETHERRACK.defaultBlockState());
 	}
 }

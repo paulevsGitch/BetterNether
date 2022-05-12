@@ -1,21 +1,23 @@
 package paulevs.betternether;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 
 public class MHelper {
 	public static final float PI2 = (float) (Math.PI * 2);
 	private static final int ALPHA = 255 << 24;
-	public static final Random RANDOM = new Random();
+	public static final RandomSource RANDOM = new LegacyRandomSource(130520220119l);
 
 	public static int color(int r, int g, int b) {
 		return ALPHA | (r << 16) | (g << 8) | b;
 	}
 
-	public static int randRange(int min, int max, Random random) {
+	public static int randRange(int min, int max, RandomSource random) {
 		return min + random.nextInt(max - min + 1);
 	}
 
-	public static float randRange(float min, float max, Random random) {
+	public static float randRange(float min, float max, RandomSource random) {
 		return min + random.nextFloat() * (max - min);
 	}
 
@@ -47,5 +49,13 @@ public class MHelper {
 
 	public static int floor(double x) {
 		return x < 0 ? (int) (x - 1) : (int) x;
+	}
+
+	public static float nextFloat(RandomSource random, float d){
+		return random.nextFloat()*d;
+	}
+
+	public static double nextDouble(RandomSource random, float d){
+		return random.nextDouble()*d;
 	}
 }

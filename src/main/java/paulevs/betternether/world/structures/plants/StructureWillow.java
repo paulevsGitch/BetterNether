@@ -18,12 +18,13 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureWillow implements IStructure {
 	private static final Direction[] HOR = HorizontalDirectionalBlock.FACING.getPossibleValues().toArray(new Direction[] {});
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (!BlocksHelper.isNetherGround(world.getBlockState(pos.below())))
 			return;
 
@@ -51,7 +52,7 @@ public class StructureWillow implements IStructure {
 			BlocksHelper.setWithUpdate(world, pos.above(h2 + 1).relative(HOR[i]), NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.FACING, HOR[i]).setValue(LeavesBlock.PERSISTENT, true));
 	}
 
-	private void branch(ServerLevelAccessor world, BlockPos pos, int length, Random random, Direction direction, BlockPos center, int level) {
+	private void branch(ServerLevelAccessor world, BlockPos pos, int length, RandomSource random, Direction direction, BlockPos center, int level) {
 		if (level > 5)
 			return;
 		MutableBlockPos bpos = new MutableBlockPos().set(pos);

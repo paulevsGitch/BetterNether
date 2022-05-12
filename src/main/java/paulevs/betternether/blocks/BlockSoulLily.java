@@ -32,6 +32,7 @@ import paulevs.betternether.world.structures.plants.StructureSoulLily;
 
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGround {
 	public static final EnumProperty<SoulLilyShape> SHAPE = EnumProperty.create("shape", SoulLilyShape.class);
@@ -114,7 +115,7 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGr
 		}
 	}
 
-	public boolean canGrow(Level world, BlockPos pos, Random random) {
+	public boolean canGrow(Level world, BlockPos pos, RandomSource random) {
 		BlockState state = world.getBlockState(pos.below());
 		if (state.getBlock() == this || state.getBlock() == Blocks.SOUL_SAND || BlocksHelper.isFertile(world.getBlockState(pos.below()))) {
 			return BlocksHelper.isFertile(world.getBlockState(pos.below())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
@@ -123,7 +124,7 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGr
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.tick(state, world, pos, random);
 		if (canGrow(world, pos, random)) {
 			SoulLilyShape shape = state.getValue(SHAPE);

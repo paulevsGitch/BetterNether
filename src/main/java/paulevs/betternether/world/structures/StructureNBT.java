@@ -19,6 +19,7 @@ import paulevs.betternether.BetterNether;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureNBT {
 	protected ResourceLocation location;
@@ -50,7 +51,7 @@ public class StructureNBT {
 		return this;
 	}
 
-	public void randomRM(Random random) {
+	public void randomRM(RandomSource random) {
 		rotation = Rotation.values()[random.nextInt(4)];
 		mirror = Mirror.values()[random.nextInt(3)];
 	}

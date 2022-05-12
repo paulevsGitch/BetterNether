@@ -26,6 +26,7 @@ import paulevs.betternether.registry.NetherEntities;
 import paulevs.betternether.registry.SoundsRegistry;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
 	public EntityNaga(EntityType<? extends EntityNaga> type, Level world) {
@@ -96,7 +97,7 @@ public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
 		return 1;
 	}
 
-	public static boolean canSpawn(EntityType<? extends EntityNaga> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
+	public static boolean canSpawn(EntityType<? extends EntityNaga> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
 		return world.getDifficulty() != Difficulty.PEACEFUL && world.getMaxLocalRawBrightness(pos) < 8;
 	}
 }

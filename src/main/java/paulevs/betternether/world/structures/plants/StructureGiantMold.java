@@ -1,6 +1,7 @@
 package paulevs.betternether.world.structures.plants;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,12 +14,13 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureGiantMold implements IStructure, IGrowableStructure {
 
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		
@@ -40,7 +42,7 @@ public class StructureGiantMold implements IStructure, IGrowableStructure {
 	}
 
 	@Override
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random) {
 		int size = 2 + random.nextInt(6);
 		for (int y = 1; y <= size; y++)
 			if (!world.isEmptyBlock(pos.above(y))) {

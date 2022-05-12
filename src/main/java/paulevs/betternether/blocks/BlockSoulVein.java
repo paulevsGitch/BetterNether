@@ -28,6 +28,7 @@ import paulevs.betternether.registry.NetherBlocks;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherSand {
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 1, 16);
@@ -67,12 +68,12 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		popResource(world, pos, new ItemStack(this.asItem()));
 	}
 

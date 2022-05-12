@@ -24,6 +24,7 @@ import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class NetherSwampland extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -86,7 +87,7 @@ public class NetherSwampland extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 		double value = TERRAIN.eval(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2);
 		if (value > 0.3 && validWalls(world, pos))
 			BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.defaultBlockState());

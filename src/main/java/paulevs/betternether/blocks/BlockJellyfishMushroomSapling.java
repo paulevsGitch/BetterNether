@@ -23,6 +23,7 @@ import paulevs.betternether.interfaces.SurvivesOnNylium;
 import paulevs.betternether.world.structures.plants.StructureJellyfishMushroom;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNylium {
 	private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 6, 12);
@@ -65,17 +66,17 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return BlocksHelper.isFertile(world.getBlockState(pos.below())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		STRUCTURE.grow(world, pos, random);
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.tick(state, world, pos, random);
 		if (isBonemealSuccess(world, random, pos, state))
 			performBonemeal(world, random, pos, state);

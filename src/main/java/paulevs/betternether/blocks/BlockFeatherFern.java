@@ -13,17 +13,12 @@ public class BlockFeatherFern extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
 	public BlockFeatherFern() {
-		super(MaterialColor.COLOR_LIGHT_BLUE);
+		super(MaterialColor.COLOR_LIGHT_BLUE, p->p.offsetType(Block.OffsetType.XZ));
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {
 		Vec3 vec3d = state.getOffset(view, pos);
 		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
-	}
-
-	@Override
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XZ;
 	}
 }

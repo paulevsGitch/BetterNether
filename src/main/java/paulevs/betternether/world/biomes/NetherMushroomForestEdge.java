@@ -29,6 +29,7 @@ import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 class NetherMushroomForestEdgeNumericProvider implements NumericProvider {
 	public static final NetherMushroomForestEdgeNumericProvider DEFAULT = new NetherMushroomForestEdgeNumericProvider();
@@ -102,7 +103,7 @@ public class NetherMushroomForestEdge extends NetherBiome {
 	}
 	
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 //		if (random.nextInt(4) > 0)
 //			BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_MYCELIUM.defaultBlockState());
 //		else if (random.nextBoolean())

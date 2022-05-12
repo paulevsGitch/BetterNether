@@ -4,13 +4,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.PresetFlatWorldScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.flat.FlatLayerInfo;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,7 +35,7 @@ public abstract class PresetsScreenMixin {
 	}
 
 	static {
-		preset(new TranslatableComponent("betternether.flat_nether"),
+		preset(Component.translatable("betternether.flat_nether"),
 				Blocks.NETHERRACK,
 				Biomes.NETHER_WASTES,
 				Collections.emptySet(),

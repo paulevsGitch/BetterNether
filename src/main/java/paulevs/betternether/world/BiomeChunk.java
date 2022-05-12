@@ -4,6 +4,8 @@ import paulevs.betternether.registry.NetherBiomes;
 import ru.bclib.world.biomes.BCLBiome;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 
 public class BiomeChunk {
 	protected static final int WIDTH = 16;
@@ -15,7 +17,7 @@ public class BiomeChunk {
 	private final int maskB;
 	private final BCLBiome[][][] biomes;
 
-	public BiomeChunk(BiomeMap map, Random random) {
+	public BiomeChunk(BiomeMap map, WorldgenRandom random) {
 		int sm_height = clampOne(map.maxHeight >> 1);
 		maskB = sm_height - 1;
 		maxY = map.maxHeight - 1;
@@ -37,11 +39,11 @@ public class BiomeChunk {
 		return biomes[clamp(y)][x & MASK_C][z & MASK_C];
 	}
 
-	private int offsetXZ(int x, Random random) {
+	private int offsetXZ(int x, RandomSource random) {
 		return ((x + random.nextInt(2)) >> 1) & MASK_A;
 	}
 
-	private int offsetY(int y, Random random) {
+	private int offsetY(int y, RandomSource random) {
 		return ((y + random.nextInt(2)) >> 1) & maskB;
 	}
 

@@ -13,11 +13,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.betternether.BetterNether;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 @Mixin(LavaFluid.class)
 public class LavaFluidMixin {
 	@Inject(method = "animateTick", at = @At(value = "HEAD"))
-	private void displayTick(Level world, BlockPos blockPos, FluidState fluidState, Random random, CallbackInfo info) {
+	private void displayTick(Level world, BlockPos blockPos, FluidState fluidState, RandomSource random, CallbackInfo info) {
 		if (BetterNether.hasLavafallParticles() && !fluidState.isSource()) {
 			FluidState state = world.getFluidState(blockPos.below());
 			if (state.isEmpty() || state.isSource()) {
@@ -33,7 +34,7 @@ public class LavaFluidMixin {
 		}
 	}
 
-	private void spawnParticle(ParticleOptions effect, Level world, Random random, BlockPos pos) {
+	private void spawnParticle(ParticleOptions effect, Level world, RandomSource random, BlockPos pos) {
 		double angle = random.nextDouble() * Math.PI * 2;
 		world.addParticle(ParticleTypes.LARGE_SMOKE,
 				pos.getX() + random.nextDouble(),

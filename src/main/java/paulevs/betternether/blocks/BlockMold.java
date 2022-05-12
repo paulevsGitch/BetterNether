@@ -23,7 +23,11 @@ import paulevs.betternether.interfaces.SurvivesOnNetherMycelium;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
+import java.util.function.Function;
+
+import net.minecraft.util.RandomSource;
 public class BlockMold extends BaseBlockMold implements SurvivesOnNetherMycelium {
 	public BlockMold(MaterialColor color) {
 		super(color);
@@ -40,12 +44,17 @@ public class BlockMold extends BaseBlockMold implements SurvivesOnNetherMycelium
 }
 class BaseBlockMold extends BlockBaseNotFull {
 	public BaseBlockMold(MaterialColor color) {
-		super(Materials.makeGrass(color)
+		this(color, p->p);
+	}
+
+	public BaseBlockMold(MaterialColor color, Function<Properties, Properties> adaptProperties) {
+		super(adaptProperties.apply(Materials.makeGrass(color)
 				.sounds(SoundType.CROP)
 				.nonOpaque()
 				.noCollision()
 				.breakInstantly()
-				.ticksRandomly());
+				.ticksRandomly()
+					  .offsetType(Block.OffsetType.XZ)));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}
@@ -62,11 +71,6 @@ class BaseBlockMold extends BlockBaseNotFull {
 	}
 
 	@Override
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XZ;
-	}
-
-	@Override
 	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
 		if (!canSurvive(state, world, pos))
 			return Blocks.AIR.defaultBlockState();
@@ -75,7 +79,7 @@ class BaseBlockMold extends BlockBaseNotFull {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.tick(state, world, pos, random);
 		if (random.nextInt(16) == 0) {
 			int c = 0;

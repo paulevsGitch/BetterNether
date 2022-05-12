@@ -22,6 +22,7 @@ import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CrimsonPinewood extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -88,7 +89,7 @@ public class CrimsonPinewood extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 //		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
 //			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
 //		else

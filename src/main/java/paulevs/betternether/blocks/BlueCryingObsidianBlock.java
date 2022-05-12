@@ -10,13 +10,14 @@ import paulevs.betternether.registry.NetherBlocks;
 import paulevs.betternether.registry.NetherParticles;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlueCryingObsidianBlock extends BNObsidian  {
 	public BlueCryingObsidianBlock() {
 		super(FabricBlockSettings.copyOf(Blocks.CRYING_OBSIDIAN), NetherBlocks.BLUE_WEEPING_OBSIDIAN);
 	}
 	
-	public void animateTick(BlockState blockState, Level level, BlockPos blockPos, Random random) {
+	public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource random) {
 		if (random.nextInt(5) == 0) {
 			Direction direction = Direction.getRandom(random);
 			if (direction != Direction.UP) {

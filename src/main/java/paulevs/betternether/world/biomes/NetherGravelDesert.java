@@ -26,6 +26,7 @@ import ru.bclib.api.surface.SurfaceRuleBuilder;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class NetherGravelDesert extends NetherBiome {
 	public static final SurfaceRules.RuleSource GRAVEL = SurfaceRules.state(Blocks.GRAVEL.defaultBlockState());
@@ -85,7 +86,7 @@ public class NetherGravelDesert extends NetherBiome {
 	}
 	
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 		//		for (int i = 0; i < 1 + random.nextInt(3); i++) {
 		//			BlockPos p2 = pos.below(i);
 		//			if (BlocksHelper.isNetherGround(world.getBlockState(p2)))

@@ -15,6 +15,7 @@ import ru.bclib.blocks.FeatureSaplingBlock;
 import ru.bclib.world.features.DefaultFeature;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 class MushroomFirTreeFeature extends DefaultFeature {
 	private static final StructureMushroomFir STRUCTURE = new StructureMushroomFir();
@@ -40,7 +41,7 @@ public class BlockMushroomFirSapling extends FeatureSaplingBlock implements Bone
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return BlocksHelper.isFertile(world.getBlockState(pos.below())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
 	}
 //

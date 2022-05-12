@@ -9,6 +9,7 @@ import ru.bclib.complexmaterials.WoodenComplexMaterial;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class Palettes {
 	private static final HashMap<String, CityPalette> REGISTRY = new HashMap<String, CityPalette>();
@@ -53,7 +54,7 @@ public class Palettes {
 		return palette == null ? EMPTY : palette;
 	}
 
-	public static CityPalette getRandom(Random random) {
+	public static CityPalette getRandom(RandomSource random) {
 		return random.nextBoolean() ? EMPTY : PALETTES.get(random.nextInt(PALETTES.size()));
 	}
 }

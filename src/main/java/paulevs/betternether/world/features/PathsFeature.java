@@ -8,10 +8,11 @@ import paulevs.betternether.world.structures.StructurePath;
 import ru.bclib.world.features.DefaultFeature;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 public class PathsFeature extends DefaultFeature {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
-		final Random random = featurePlaceContext.random();
+		final RandomSource random = featurePlaceContext.random();
 		final BlockPos worldPos = featurePlaceContext.origin();
 		final WorldGenLevel level = featurePlaceContext.level();
 		final int sx = (worldPos.getX() >> 4) << 4;

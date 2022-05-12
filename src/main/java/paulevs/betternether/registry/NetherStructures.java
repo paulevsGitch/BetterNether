@@ -11,12 +11,12 @@ import paulevs.betternether.world.structures.city.CityFeature;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BiomeAPI;
 import ru.bclib.api.tag.TagAPI;
-import ru.bclib.world.structures.BCLStructureFeature;
+import ru.bclib.world.structures.BCLStructure;
 
 public class NetherStructures {
     public static final int CITY_SPACING = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
     // Nether City
-    public static final BCLStructureFeature CITY_STRUCTURE = new BCLStructureFeature(
+    public static final BCLStructure CITY_STRUCTURE = new BCLStructure(
             new ResourceLocation(BetterNether.MOD_ID, "nether_city"),
             new CityFeature(),
             Decoration.STRONGHOLDS,

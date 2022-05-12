@@ -1,7 +1,6 @@
 package paulevs.betternether.registry;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.world.NetherBiome;
 import paulevs.betternether.world.NetherBiomeBuilder;
@@ -19,6 +18,8 @@ import ru.bclib.world.generator.GeneratorOptions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 
 public class NetherBiomes {
 	public static final List<NetherBiome> ALL_BN_BIOMES = new ArrayList<>(21);
@@ -125,7 +126,7 @@ public class NetherBiomes {
 		return biome;
 	}
 
-	public static BCLBiome getBiome(Random random) {
+	public static BCLBiome getBiome(WorldgenRandom random) {
 		return BiomeAPI.NETHER_BIOME_PICKER.getBiome(random);
 	}
 	public static boolean useLegacyGeneration = false;

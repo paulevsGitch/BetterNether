@@ -17,6 +17,7 @@ import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureWartTree extends StructureFuncScatter {
     private static final BlockState WART_BLOCK = Blocks.NETHER_WART_BLOCK.defaultBlockState();
@@ -29,7 +30,7 @@ public class StructureWartTree extends StructureFuncScatter {
 
 
     @Override
-    public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural, StructureGeneratorThreadContext context) {
+    public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random, boolean natural, StructureGeneratorThreadContext context) {
         if (world.isEmptyBlock(pos.above(1)) && world.isEmptyBlock(pos.above(2))) {
             if (world.isEmptyBlock(pos.above(2).north()) && world.isEmptyBlock(pos.above(2).south()) && world.isEmptyBlock(pos.above(2).east()) && world.isEmptyBlock(pos.above(2).west()))
                 if (world.isEmptyBlock(pos.above(3).north(2)) && world.isEmptyBlock(pos.above(3).south(2)) && world.isEmptyBlock(pos.above(3).east(2)) && world.isEmptyBlock(pos.above(3).west(2))) {

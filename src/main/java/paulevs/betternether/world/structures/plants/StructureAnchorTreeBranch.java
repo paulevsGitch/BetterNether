@@ -2,6 +2,7 @@ package paulevs.betternether.world.structures.plants;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -22,6 +23,7 @@ import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure {
 	private static final float[] CURVE_X = new float[] { 9F, 7F, 1.5F, 0.5F, 3F, 7F };
@@ -30,13 +32,13 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 	public StructureAnchorTreeBranch() {}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		if (pos.getY() < 56 + random.nextInt((int)(20 * scale_factor))) return;
 		grow(world, pos, random, scale_factor, true, context);
 	}
 
-	private void grow(ServerLevelAccessor world, BlockPos pos, Random random, float scale_factor, boolean natural, StructureGeneratorThreadContext context) {
+	private void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random, float scale_factor, boolean natural, StructureGeneratorThreadContext context) {
 		context.clear();
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		float scale = MHelper.randRange(0.5F, 1F, random);
@@ -287,7 +289,7 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 		}
 	}
 
-	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random, float scale_factor, StructureGeneratorThreadContext context) {
+	private void crown(LevelAccessor world, BlockPos pos, float radius, RandomSource random, float scale_factor, StructureGeneratorThreadContext context) {
 		scale_factor = (scale_factor-1)*0.25f + 1;
 		
 		final int HEIGHT_10;
@@ -299,7 +301,7 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 			HEIGHT_15 = (int)(15 * scale_factor);
 			HEIGHT_17 = (int)(17 * scale_factor);
 		} else {
-			float rnd = random.nextFloat(5 * scale_factor);
+			float rnd = MHelper.nextFloat(random, 5 * scale_factor);
 			HEIGHT_10 = (int)(10 * scale_factor + rnd);
 			HEIGHT_15 = (int)(15 * scale_factor + rnd);
 			HEIGHT_17 = (int)(17 * scale_factor + rnd);
@@ -357,7 +359,7 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
 	}
 	
 	@Override
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random) {
 		grow(world, pos, random, 1, false, NetherChunkPopulatorFeature.generatorForThread().context);
 	}
 }

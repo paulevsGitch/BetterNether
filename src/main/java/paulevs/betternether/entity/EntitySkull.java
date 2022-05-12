@@ -31,6 +31,7 @@ import paulevs.betternether.registry.SoundsRegistry;
 
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class EntitySkull extends Monster implements FlyingAnimal {
 	private static double particleX;
@@ -246,7 +247,7 @@ public class EntitySkull extends Monster implements FlyingAnimal {
 		return false;
 	}
 
-	public static boolean canSpawn(EntityType<? extends EntitySkull> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
+	public static boolean canSpawn(EntityType<? extends EntitySkull> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
 		try {
 			if (world.getDifficulty() == Difficulty.PEACEFUL || world.getMaxLocalRawBrightness(pos) > 7)
 				return false;

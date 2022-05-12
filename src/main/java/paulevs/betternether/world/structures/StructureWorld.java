@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import paulevs.betternether.BlocksHelper;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureWorld extends StructureNBT implements IStructure {
 	protected final StructureType type;
@@ -20,7 +21,7 @@ public class StructureWorld extends StructureNBT implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		randomRM(random);
 		if (canGenerate(world, pos)) {
 			generateCentered(world, pos.above(offsetY));

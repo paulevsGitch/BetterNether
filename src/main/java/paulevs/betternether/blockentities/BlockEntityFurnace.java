@@ -2,7 +2,7 @@ package paulevs.betternether.blockentities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.FurnaceMenu;
@@ -17,7 +17,7 @@ public class BlockEntityFurnace extends AbstractFurnaceBlockEntity {
 	}
 
 	protected Component getDefaultName() {
-		return new TranslatableComponent("container.furnace", new Object[0]);
+		return Component.translatable("container.furnace", new Object[0]);
 	}
 
 	@Override

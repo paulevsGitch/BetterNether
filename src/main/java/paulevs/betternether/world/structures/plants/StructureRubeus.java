@@ -20,6 +20,7 @@ import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureRubeus extends StructureFuncScatter {
 	private static final float[] CURVE_X = new float[] { 9F, 7F, 1.5F, 0.5F, 3F, 7F };
@@ -67,7 +68,7 @@ public class StructureRubeus extends StructureFuncScatter {
 
 
 	@Override
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural, StructureGeneratorThreadContext context) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random, boolean natural, StructureGeneratorThreadContext context) {
 		context.clear();
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		float scale = MHelper.randRange(0.5F, 1F, random);
@@ -172,7 +173,7 @@ public class StructureRubeus extends StructureFuncScatter {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
 		if (length >= StructureStalagnate.MAX_LENGTH)
 			super.generate(world, pos, random, MAX_HEIGHT, context);
@@ -229,7 +230,7 @@ public class StructureRubeus extends StructureFuncScatter {
 		}
 	}
 
-	private void crown(LevelAccessor world, int x, int y, int z, float radius, Random random) {
+	private void crown(LevelAccessor world, int x, int y, int z, float radius, RandomSource random) {
 		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
 
 		BlockState leaves = NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
@@ -258,7 +259,7 @@ public class StructureRubeus extends StructureFuncScatter {
 		}
 	}
 
-	private void setCondition(LevelAccessor world, BlockPos pos, int y, BlockState state, boolean moss, Random random) {
+	private void setCondition(LevelAccessor world, BlockPos pos, int y, BlockState state, boolean moss, RandomSource random) {
 		if (pos.getY() > y)
 			setIfAir(world, pos, state);
 		else

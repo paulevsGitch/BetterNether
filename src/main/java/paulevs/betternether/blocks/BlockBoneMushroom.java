@@ -24,6 +24,7 @@ import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.interfaces.SurvivesOnBoneBlocks;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBoneBlocks {
 	private static final VoxelShape SHAPE_NORTH = Block.box(1, 1, 8, 15, 15, 16);
@@ -103,7 +104,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.tick(state, world, pos, random);
 		int age = state.getValue(AGE);
 		if (age < 2 && random.nextInt(32) == 0) {

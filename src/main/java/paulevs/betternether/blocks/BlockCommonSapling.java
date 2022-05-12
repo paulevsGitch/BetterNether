@@ -21,6 +21,7 @@ import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.interfaces.SurvivesOnNetherGround;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockCommonSapling extends BaseBlockCommonSapling implements SurvivesOnNetherGround {
 
@@ -72,21 +73,21 @@ abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements Boneme
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return BlocksHelper.isFertile(world.getBlockState(pos.below())) ? (random.nextBoolean()) : (random.nextInt(4) == 0);
 	}
 
-	protected boolean canGrowTerrain(Level world, Random random, BlockPos pos, BlockState state) {
+	protected boolean canGrowTerrain(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return BlocksHelper.isFertile(world.getBlockState(pos.below())) ? (random.nextInt(8) == 0) : (random.nextInt(16) == 0);
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		world.setBlockAndUpdate(pos, plant.defaultBlockState());
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		super.tick(state, world, pos, random);
 		if (canGrowTerrain(world, random, pos, state))
 			performBonemeal(world, random, pos, state);

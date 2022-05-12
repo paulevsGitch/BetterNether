@@ -26,6 +26,7 @@ import paulevs.betternether.world.structures.plants.StructureWartTree;
 
 import java.util.EnumMap;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnSouldSand {
 	private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(Direction.class);
@@ -92,12 +93,12 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return random.nextInt(8) == 0;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		STRUCTURE.grow(world, pos, random);
 	}
 

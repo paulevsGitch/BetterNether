@@ -12,9 +12,11 @@ import paulevs.betternether.registry.NetherBlocks;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 
 public class CityPalette {
-	private static final Random RANDOM = new Random();
+	private static final RandomSource RANDOM = new LegacyRandomSource(130520220057l);
 	private final String name;
 
 	private final List<Block> foundationBlocks = new ArrayList<Block>();

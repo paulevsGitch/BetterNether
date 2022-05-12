@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.world.features.NetherChunkPopulatorFeature;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public abstract class StructureFuncScatter implements IStructure {
 	final int distance;
@@ -19,17 +20,17 @@ public abstract class StructureFuncScatter implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (isGround(world.getBlockState(pos.below())) && noObjNear(world, pos)) {
 			grow(world, pos, random, true, context);
 		}
 	}
 
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random){
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random){
 		grow(world, pos, random,false, NetherChunkPopulatorFeature.generatorForThread().context);
 	}
 
-	public abstract void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural, StructureGeneratorThreadContext context);
+	public abstract void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random, boolean natural, StructureGeneratorThreadContext context);
 
 	protected abstract boolean isStructure(BlockState state);
 

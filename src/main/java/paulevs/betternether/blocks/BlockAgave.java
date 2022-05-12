@@ -8,8 +8,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -52,6 +52,7 @@ public class BlockAgave extends BlockCommonPlant implements AddMineableShears, A
 				.noCollision()
 				.hardness(0.4F)
 				.ticksRandomly()
+					  .offsetType(Block.OffsetType.XZ)
 		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
@@ -61,13 +62,6 @@ public class BlockAgave extends BlockCommonPlant implements AddMineableShears, A
 		Vec3 vec3d = state.getOffset(view, pos);
 		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
 	}
-
-	@Override
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XZ;
-	}
-
-
 	@Override
 	public BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
 		if (canSurvive(state, world, pos))

@@ -16,6 +16,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import paulevs.betternether.blocks.materials.Materials;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockEyeballSmall extends BlockEyeBase {
 	protected static final VoxelShape SHAPE = Block.box(4, 8, 4, 12, 16, 12);
@@ -34,7 +35,7 @@ public class BlockEyeballSmall extends BlockEyeBase {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (random.nextInt(5) == 0) {
 			double x = pos.getX() + random.nextDouble() * 0.5 + 0.25;
 			double y = pos.getY() + random.nextDouble() * 0.1 + 0.5;

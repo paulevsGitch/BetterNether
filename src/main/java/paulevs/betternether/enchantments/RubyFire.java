@@ -2,6 +2,7 @@ package paulevs.betternether.enchantments;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,6 +22,8 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import paulevs.betternether.MHelper;
 import paulevs.betternether.items.NetherArmor;
 import paulevs.betternether.items.materials.BNToolMaterial;
 import paulevs.betternether.registry.NetherEnchantments;
@@ -68,17 +71,17 @@ public class RubyFire extends Enchantment {
 	
 	@Override
 	public void doPostHurt(LivingEntity player, Entity entity, int i) {
-		final Random random = player.getRandom();
+		final RandomSource random = player.getRandom();
 		Map.Entry<EquipmentSlot, ItemStack> entry = EnchantmentHelper.getRandomItemWith(NetherEnchantments.RUBY_FIRE, player);
 		if (shouldHit(i, random)) {
 			if (entity != null) {
 				entity.hurt(DamageSource.indirectMagic(entity, entity), getDamage(i, random));
 				entity.setRemainingFireTicks(100 + 50 * random.nextInt(3));
 				if (entity instanceof LivingEntity living){
-					living.knockback(1 + random.nextFloat(2.0f), player.getX() - living.getX(), player.getZ() - living.getZ());
+					living.knockback(1 + MHelper.nextFloat(random, 2.0f), player.getX() - living.getX(), player.getZ() - living.getZ());
 				}
 			}
-			
+
 			if (entry != null) {
 				entry.getValue()
 					 .hurtAndBreak(1, player, livingEntity -> livingEntity.broadcastBreakEvent(entry.getKey()));
@@ -86,12 +89,12 @@ public class RubyFire extends Enchantment {
 		}
 	}
 	
-	private static boolean shouldHit(int i, Random random) {
+	private static boolean shouldHit(int i, RandomSource random) {
 		if (i <= 0) return false;
 		return random.nextFloat() < 0.20f * i;
 	}
 	
-	private static int getDamage(int i, Random random) {
+	private static int getDamage(int i, RandomSource random) {
 		if (i > 10) return i - 10;
 		return 2 + random.nextInt(5);
 	}

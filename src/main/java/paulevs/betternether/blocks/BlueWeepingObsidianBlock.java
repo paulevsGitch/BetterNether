@@ -9,13 +9,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import paulevs.betternether.registry.NetherParticles;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlueWeepingObsidianBlock extends BNObsidian {
 	public BlueWeepingObsidianBlock() {
 		super(FabricBlockSettings.copyOf(Blocks.CRYING_OBSIDIAN).luminance(14), null);
 	}
 	
-	public void animateTick(BlockState blockState, Level level, BlockPos blockPos, Random random) {
+	public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource random) {
 		for (int i=0; i<random.nextInt(2)+2; i++) {
 			Direction direction = Direction.getRandom(random);
 			if (direction != Direction.UP) {

@@ -13,10 +13,11 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureMedBrownMushroom implements IStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(NetherBiomes.useLegacyGeneration?6:8*scale_factor);
 		
@@ -45,7 +46,7 @@ public class StructureMedBrownMushroom implements IStructure {
 		}
 	}
 
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random) {
 		int size = 2 + random.nextInt(3);
 		for (int y = 1; y <= size; y++)
 			if (!world.isEmptyBlock(pos.above(y))) {

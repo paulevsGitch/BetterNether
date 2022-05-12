@@ -21,6 +21,7 @@ import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class FloodedDeltas extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -64,7 +65,7 @@ public class FloodedDeltas extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 		final MutableBlockPos POS = new MutableBlockPos();
 		POS.set(pos);
 		int d = MHelper.randRange(2, 4, random);

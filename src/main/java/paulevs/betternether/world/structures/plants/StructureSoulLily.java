@@ -13,10 +13,11 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureSoulLily implements IStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(6*scale_factor);
 		
@@ -41,7 +42,7 @@ public class StructureSoulLily implements IStructure {
 		}
 	}
 
-	private void growTree(ServerLevelAccessor world, BlockPos pos, Random random) {
+	private void growTree(ServerLevelAccessor world, BlockPos pos, RandomSource random) {
 		if (world.getBlockState(pos.below()).getBlock() == Blocks.SOUL_SAND) {
 			if (world.isEmptyBlock(pos.above())) {
 				if (world.isEmptyBlock(pos.above(2)) && isAirSides(world, pos.above(2))) {

@@ -21,12 +21,13 @@ import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class LegacyStructureAnchorTree implements IStructure {
 	protected static final OpenSimplexNoise NOISE = new OpenSimplexNoise(2145);
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (canGenerate(pos)) grow(world, pos, pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT)), random, MAX_HEIGHT, context);
 	}
 	
@@ -34,7 +35,7 @@ public class LegacyStructureAnchorTree implements IStructure {
 		return (pos.getX() & 15) == 7 && (pos.getZ() & 15) == 7;
 	}
 	
-	private void grow(ServerLevelAccessor level, BlockPos up, BlockPos down, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	private void grow(ServerLevelAccessor level, BlockPos up, BlockPos down, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int HEIGHT_64;
 		final int HEIGHT_45;
@@ -44,9 +45,9 @@ public class LegacyStructureAnchorTree implements IStructure {
 			HEIGHT_45 = (int)(MAX_HEIGHT * 0.36);
 			HEIGHT_90 = (int)(MAX_HEIGHT * 0.7);
 		} else {
-			HEIGHT_64 = (int) (MAX_HEIGHT / 2.0 + random.nextFloat(10 * scale_factor));
-			HEIGHT_45 = (int) (40 + random.nextFloat(7 * scale_factor));
-			HEIGHT_90 = (int) (MAX_HEIGHT / 2.0 + random.nextFloat(15 * scale_factor));
+			HEIGHT_64 = (int) (MAX_HEIGHT / 2.0 + MHelper.nextFloat(random, 10 * scale_factor));
+			HEIGHT_45 = (int) (40 + MHelper.nextFloat(random, 7 * scale_factor));
+			HEIGHT_90 = (int) (MAX_HEIGHT / 2.0 + MHelper.nextFloat(random, 15 * scale_factor));
 		}
 		if (up.getY() - down.getY() < 30) return;
 		int pd = BlocksHelper.downRay(level, down, MAX_HEIGHT) + 1;
@@ -124,7 +125,7 @@ public class LegacyStructureAnchorTree implements IStructure {
 		}
 	}
 	
-	private void buildBigCircle(BlockPos pos, int length, int count, int iteration, double angle, double size, Random random, StructureGeneratorThreadContext context) {
+	private void buildBigCircle(BlockPos pos, int length, int count, int iteration, double angle, double size, RandomSource random, StructureGeneratorThreadContext context) {
 		if (iteration < 0) return;
 		List<List<BlockPos>> lines = circleLinesEnds(pos, angle, count, length, Math.abs(length) * 0.7, random);
 		double sizeSmall = size * 0.8;
@@ -171,7 +172,7 @@ public class LegacyStructureAnchorTree implements IStructure {
 		return Mth.clamp(0.5 - Math.cos(mix * Math.PI) * 0.5, 0, 1);
 	}
 	
-	private List<BlockPos> line(BlockPos start, BlockPos end, int count, Random random, double range) {
+	private List<BlockPos> line(BlockPos start, BlockPos end, int count, RandomSource random, double range) {
 		List<BlockPos> result = new ArrayList<>(count);
 		int max = count - 1;
 		result.add(start);
@@ -204,7 +205,7 @@ public class LegacyStructureAnchorTree implements IStructure {
 		}
 	}
 	
-	private List<List<BlockPos>> circleLinesEnds(BlockPos pos, double startAngle, int count, int height, double radius, Random random) {
+	private List<List<BlockPos>> circleLinesEnds(BlockPos pos, double startAngle, int count, int height, double radius, RandomSource random) {
 		List<List<BlockPos>> result = new ArrayList<>(count);
 		double angle = Math.PI * 2 / count;
 		for (int i = 0; i < count; i++) {

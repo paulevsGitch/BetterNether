@@ -22,6 +22,7 @@ import paulevs.betternether.world.structures.StructureFuncScatter;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureOldWillow extends StructureFuncScatter {
 	private static final float[] CURVE_X = new float[] { 9F, 7F, 1.5F, 0.5F, 3F, 7F };
@@ -33,12 +34,12 @@ public class StructureOldWillow extends StructureFuncScatter {
 	}
 
 
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random) {
 		grow(world, pos, random, false, NetherChunkPopulatorFeature.generatorForThread().context);
 	}
 
 	@Override
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, boolean natural, StructureGeneratorThreadContext context) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random, boolean natural, StructureGeneratorThreadContext context) {
 		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		float scale = MHelper.randRange(0.7F, 1.3F, random);
 		int minCount = scale < 1 ? 3 : 4;
@@ -117,7 +118,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
 		if (length >= StructureStalagnate.MAX_LENGTH)
 			super.generate(world, pos, random, MAX_HEIGHT, context);
@@ -188,7 +189,7 @@ public class StructureOldWillow extends StructureFuncScatter {
 		}
 	}
 
-	private void crown(LevelAccessor world, BlockPos pos, float radius, Random random, BoundingBox bounds) {
+	private void crown(LevelAccessor world, BlockPos pos, float radius, RandomSource random, BoundingBox bounds) {
 		final BlockPos.MutableBlockPos POS = new BlockPos.MutableBlockPos();
 		
 		BlockState leaves = NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(BlockWillowLeaves.NATURAL, false);

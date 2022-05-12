@@ -11,6 +11,7 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureVanillaMushroom implements IStructure {
 	private boolean canPlaceAt(LevelAccessor world, BlockPos pos) {
@@ -18,7 +19,7 @@ public class StructureVanillaMushroom implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		final int RANDOM_BOUND = (int)(8*scale_factor);
 		

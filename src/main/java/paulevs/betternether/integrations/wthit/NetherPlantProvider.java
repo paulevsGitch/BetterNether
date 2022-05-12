@@ -2,8 +2,8 @@ package paulevs.betternether.integrations.wthit;
 
 import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.PairComponent;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+
 import org.jetbrains.annotations.Nullable;
 import paulevs.betternether.blocks.BlockCommonPlant;
 
@@ -15,10 +15,10 @@ public enum NetherPlantProvider implements IBlockComponentProvider {
 		growthValue *= 100.0F;
 		if (growthValue < 100.0F) {
 			tooltip.addLine(new PairComponent(
-				new TranslatableComponent("tooltip.waila.crop_growth"), new TextComponent(String.format("%.0f%%", growthValue))));
+				Component.translatable("tooltip.waila.crop_growth"), Component.literal(String.format("%.0f%%", growthValue))));
 		} else {
 			tooltip.addLine(new PairComponent(
-				new TranslatableComponent("tooltip.waila.crop_growth"), new TranslatableComponent("tooltip.waila.crop_mature")));
+				Component.translatable("tooltip.waila.crop_growth"), Component.translatable("tooltip.waila.crop_mature")));
 		}
 	}
 	

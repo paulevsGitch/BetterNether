@@ -7,6 +7,8 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 
 public class StructureCaves implements IStructure {
 
@@ -17,7 +19,7 @@ public class StructureCaves implements IStructure {
 	private final OpenSimplexNoise distortY;
 
 	public StructureCaves(long seed) {
-		Random random = new Random(seed);
+		RandomSource random = new LegacyRandomSource(seed);
 		heightNoise = new OpenSimplexNoise(random.nextLong());
 		rigidNoise = new OpenSimplexNoise(random.nextLong());
 		distortX = new OpenSimplexNoise(random.nextLong());
@@ -25,7 +27,7 @@ public class StructureCaves implements IStructure {
 	}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		boolean isVoid = true;
 		offset = (int) (getHeight(pos.getX() + 8, pos.getZ() + 8) - 12);
 

@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.StructureFeatureManager;
+import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -15,6 +15,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.MHelper;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class DestructionPiece extends CustomPiece {
 	private final MutableBlockPos POS = new MutableBlockPos();
@@ -25,7 +26,7 @@ public class DestructionPiece extends CustomPiece {
 	private int minY;
 	private int maxY;
 
-	public DestructionPiece(BoundingBox bounds, Random random) {
+	public DestructionPiece(BoundingBox bounds, RandomSource random) {
 		super(StructureTypes.DESTRUCTION, random.nextInt(), bounds);
 		radius = random.nextInt(5) + 1;
 		radSqr = radius * radius;
@@ -51,7 +52,7 @@ public class DestructionPiece extends CustomPiece {
 	}
 
 	@Override
-	public void postProcess(WorldGenLevel world, StructureFeatureManager structureAccessor, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
+	public void postProcess(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
 		for (int x = blockBox.maxZ(); x <= blockBox.minZ(); x++) {
 			int px = x - center.getX();
 			px *= px;

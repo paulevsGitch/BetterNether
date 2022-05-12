@@ -30,6 +30,7 @@ import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 class NetherGrasslandsNumericProvider implements NumericProvider{
 	public static final NetherGrasslandsNumericProvider DEFAULT = new NetherGrasslandsNumericProvider();
@@ -130,7 +131,7 @@ public class NetherGrasslands extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 //		switch (random.nextInt(3)) {
 //			case 0 -> BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
 //			case 1 -> BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());

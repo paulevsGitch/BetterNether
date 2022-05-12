@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -277,7 +278,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 		}
 
 		private int randomRange(int side) {
-			Random random = EntityFirefly.this.random;
+			RandomSource random = EntityFirefly.this.random;
 			return random.nextInt(side + 1) - (side >> 1);
 		}
 
@@ -532,7 +533,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 		FLOWERS.add(Blocks.NETHER_WART);
 	}
 
-	public static boolean canSpawn(EntityType<? extends EntityFirefly> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
+	public static boolean canSpawn(EntityType<? extends EntityFirefly> type, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
 		if (pos.getY() >= world.dimensionType().minY()) return false;
 		int h = BlocksHelper.downRay(world, pos, 10);
 		if (h > 8)

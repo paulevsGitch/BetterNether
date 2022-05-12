@@ -2,6 +2,7 @@ package paulevs.betternether.world.structures.plants;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,15 +16,16 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureLucis implements IStructure, IGrowableStructure {
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		grow(world, pos, random);
 	}
 	
 	@Override
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random) {
 		if (canGenerate(world, pos)) {
 			BlockState center = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.CENTER);
 			BlockState side = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState().setValue(BlockLucisMushroom.SHAPE, EnumLucisShape.SIDE);

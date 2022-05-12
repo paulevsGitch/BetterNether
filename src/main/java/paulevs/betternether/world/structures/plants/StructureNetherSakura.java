@@ -1,6 +1,7 @@
 package paulevs.betternether.world.structures.plants;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -17,6 +18,7 @@ import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Map.Entry;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureNetherSakura implements IStructure, IGrowableStructure {
 	private void updateSDFFrom(BlockPos bpos, StructureGeneratorThreadContext context) {
@@ -57,13 +59,13 @@ public class StructureNetherSakura implements IStructure, IGrowableStructure {
 	public StructureNetherSakura() {}
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (pos.getY() < MAX_HEIGHT*0.75) return;
 		grow(world, pos, random, MAX_HEIGHT, context);
 	}
 	
 	
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final float scale_factor = MAX_HEIGHT/128.0f;
 		
 		context.LOGS_DIST.clear();
@@ -158,7 +160,7 @@ public class StructureNetherSakura implements IStructure, IGrowableStructure {
 	}
 	
 	@Override
-	public void grow(ServerLevelAccessor world, BlockPos pos, Random random) {
+	public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random) {
 		grow(world, pos, random, 128, NetherChunkPopulatorFeature.generatorForThread().context);
 	}
 }

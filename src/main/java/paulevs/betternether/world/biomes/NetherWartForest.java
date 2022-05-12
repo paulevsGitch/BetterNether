@@ -25,6 +25,7 @@ import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class NetherWartForest extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -78,7 +79,7 @@ public class NetherWartForest extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 		final MutableBlockPos POS = new MutableBlockPos();
 		switch (random.nextInt(4)) {
 			case 0:

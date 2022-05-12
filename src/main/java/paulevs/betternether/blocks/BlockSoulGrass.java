@@ -11,6 +11,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.interfaces.SurvivesOnSouldGround;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSouldGround {
 	@Override
@@ -19,7 +20,7 @@ public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSo
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (random.nextInt(4) == 0) {
 			world.addParticle(
 					ParticleTypes.PORTAL,

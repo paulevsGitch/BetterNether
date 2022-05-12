@@ -16,6 +16,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.blocks.materials.Materials;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockEyeball extends BlockEyeBase {
 	public BlockEyeball() {
@@ -28,7 +29,7 @@ public class BlockEyeball extends BlockEyeBase {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (random.nextInt(5) == 0) {
 			double x = pos.getX() + random.nextDouble();
 			double y = pos.getY() + random.nextDouble() * 0.3;
@@ -38,7 +39,7 @@ public class BlockEyeball extends BlockEyeBase {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		if (random.nextInt(64) == 0) {
 			int y = BlocksHelper.downRay(world, pos, 64) + 1;
 			BlockPos down = pos.below(y);

@@ -18,6 +18,7 @@ import paulevs.betternether.world.structures.plants.StructureMedBrownMushroom;
 import paulevs.betternether.world.structures.plants.StructureMedRedMushroom;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 @Mixin(NetherWartBlock.class)
 public abstract class NetherWartMixin extends BushBlock {
@@ -35,7 +36,7 @@ public abstract class NetherWartMixin extends BushBlock {
 	}
 
 	@Inject(method = "randomTick", at = @At(value = "HEAD"), cancellable = true)
-	private void tick(BlockState state, ServerLevel world, BlockPos pos, Random random, CallbackInfo info) {
+	private void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo info) {
 		super.tick(state, world, pos, random);
 
 		int i = (Integer) state.getValue(NetherWartBlock.AGE);

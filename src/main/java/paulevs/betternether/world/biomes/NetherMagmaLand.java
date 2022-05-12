@@ -23,6 +23,7 @@ import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class NetherMagmaLand extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -60,7 +61,7 @@ public class NetherMagmaLand extends NetherBiome {
 	}
 
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 		if (isMask(pos.getX(), pos.getZ())) {
 			final MutableBlockPos POS = new MutableBlockPos();
 			POS.set(pos);

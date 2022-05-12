@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.StructureFeatureManager;
+import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,6 +16,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.noise.OpenSimplexNoise;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CavePiece extends CustomPiece {
 	private static final BlockState LAVA = Blocks.LAVA.defaultBlockState();
@@ -25,7 +26,7 @@ public class CavePiece extends CustomPiece {
 	private final int radius;
 	private final int radSqr;
 
-	public CavePiece(BlockPos center, int radius, Random random, BoundingBox blockBox) {
+	public CavePiece(BlockPos center, int radius, RandomSource random, BoundingBox blockBox) {
 		super(StructureTypes.CAVE, random.nextInt(), makeBoundingBox(center, radius));
 		this.center = center.immutable();
 		this.radius = radius;
@@ -46,7 +47,7 @@ public class CavePiece extends CustomPiece {
 	}
 
 	@Override
-	public void postProcess(WorldGenLevel world, StructureFeatureManager arg, ChunkGenerator chunkGenerator, Random random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
+	public void postProcess(WorldGenLevel world, StructureManager arg, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox blockBox, ChunkPos chunkPos, BlockPos blockPos) {
 		MutableBlockPos POS = new MutableBlockPos();
 		BlockState bottom = LAVA;
 		if (!(world.dimensionType().hasCeiling())) {

@@ -2,6 +2,7 @@ package paulevs.betternether.world.surface;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
+import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
@@ -15,11 +16,12 @@ public class UpsideDownForrestCeilCondition extends SurfaceNoiseCondition {
     private UpsideDownForrestCeilCondition(){}
 
     public static final Codec<UpsideDownForrestCeilCondition> CODEC = Codec.BYTE.fieldOf("nether_noise").xmap(UpsideDownForrestCeilCondition::create, obj -> (byte)0).codec();
+    private static final KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> KEY_CODEC = KeyDispatchDataCodec.of(CODEC);
     private static UpsideDownForrestCeilCondition create(byte dummy){ return DEFAULT; }
 
     @Override
-    public Codec<? extends SurfaceRules.ConditionSource> codec() {
-        return UpsideDownForrestCeilCondition.CODEC;
+    public KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> codec() {
+        return UpsideDownForrestCeilCondition.KEY_CODEC;
     }
     @Override
     public boolean test(SurfaceRulesContextAccessor context) {

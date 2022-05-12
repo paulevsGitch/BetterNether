@@ -23,6 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockGeyser extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 4, 15);
@@ -37,7 +38,7 @@ public class BlockGeyser extends BlockBaseNotFull {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		for (int i = 0; i < 5; i++) {
 			world.addParticle(
 					ParticleTypes.FLAME,

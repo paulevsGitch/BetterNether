@@ -14,13 +14,9 @@ public class BlockMossCover extends BaseBlockMold {
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 4, 16);
 
 	public BlockMossCover() {
-		super(MaterialColor.COLOR_GREEN);
+		super(MaterialColor.COLOR_GREEN, p->p.offsetType(Block.OffsetType.NONE));
 	}
 
-	@Override
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.NONE;
-	}
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {

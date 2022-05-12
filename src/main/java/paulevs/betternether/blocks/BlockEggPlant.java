@@ -32,6 +32,7 @@ import paulevs.betternether.registry.NetherEntities;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockEggPlant extends BlockCommonPlant {
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 8, 16);
@@ -60,7 +61,7 @@ public class BlockEggPlant extends BlockCommonPlant {
 
 	@Override
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (!state.getValue(DESTRUCTED))
 			world.addParticle(
 					ParticleTypes.ENTITY_EFFECT,
@@ -86,7 +87,7 @@ public class BlockEggPlant extends BlockCommonPlant {
 			if (world.isClientSide) {
 				world.playLocalSound(px, py, pz, SoundType.WART_BLOCK.getBreakSound(), SoundSource.BLOCKS, 1, 1, false);
 				BlockParticleOption effect = new BlockParticleOption(ParticleTypes.BLOCK, state);
-				Random random = world.random;
+				RandomSource random = world.random;
 				for (int i = 0; i < 24; i++)
 					world.addParticle(effect,
 							px + random.nextGaussian() * 0.2,
@@ -110,7 +111,7 @@ public class BlockEggPlant extends BlockCommonPlant {
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		if (state.getValue(DESTRUCTED))
 			world.setBlockAndUpdate(pos, this.defaultBlockState());
 	}

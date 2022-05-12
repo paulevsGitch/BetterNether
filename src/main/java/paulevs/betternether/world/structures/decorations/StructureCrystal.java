@@ -15,6 +15,7 @@ import paulevs.betternether.world.structures.IStructure;
 import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureCrystal implements IStructure {
 	private static final Block[] PALETTES = new Block[] {
@@ -29,7 +30,7 @@ public class StructureCrystal implements IStructure {
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		final MutableBlockPos POS = new MutableBlockPos();
 		final float scale_factor = ((MAX_HEIGHT/128.0f)-1)*0.5f+1;
 		

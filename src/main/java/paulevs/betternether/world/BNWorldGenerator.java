@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BNWorldGenerator {
 	private static final float ditherScale = Configs.GENERATOR.getFloat("generator.world", "dither_scale", 4);
@@ -51,7 +52,7 @@ public class BNWorldGenerator {
 	}
 
 	public void populate(WorldGenLevel world, int sx, int sz, FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
-		final Random random = featurePlaceContext.random();
+		final RandomSource random = featurePlaceContext.random();
 		final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
 		
 		int layerHeight = getLayerHeight(MAX_HEIGHT);
@@ -262,7 +263,7 @@ public class BNWorldGenerator {
 		makeLocalBiomes(world, sx, sz, featurePlaceContext);
 	}
 	
-	private NetherBiome getBiomeLocal(int x, int y, int z, Random random, int layerHeight, WorldGenLevel world, BlockPos pos) {
+	private NetherBiome getBiomeLocal(int x, int y, int z, RandomSource random, int layerHeight, WorldGenLevel world, BlockPos pos) {
 //		final int ppx = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
 //		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
 		final int px = (int) Math.round(x + (random.nextFloat() - 0.5f) * 2 * ditherScale) ;

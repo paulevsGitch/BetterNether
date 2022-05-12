@@ -118,7 +118,7 @@ class DebugShader extends net.minecraft.client.renderer.ShaderInstance {
                         ResourceLocation identifier = new ResourceLocation(name);
 
                         try {
-                            Resource resource = factory.getResource(identifier);
+                            Resource resource = factory.getResource(identifier).orElse(null);
 
                             String content;
                             try {

@@ -24,6 +24,7 @@ import paulevs.betternether.BlocksHelper;
 import paulevs.betternether.interfaces.SurvivesOnGravel;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGravel {
 	private static final VoxelShape TOP_SHAPE = Block.box(4, 0, 4, 12, 8, 12);
@@ -70,7 +71,7 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		if (!canSurvive(state, world, pos)) {
 			world.destroyBlock(pos, true);
 			return;

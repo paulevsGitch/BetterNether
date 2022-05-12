@@ -22,6 +22,7 @@ import ru.bclib.api.surface.rules.SurfaceNoiseCondition;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class UpsideDownForestCleared extends NetherBiome {
 	public static class Config extends NetherBiomeConfig {
@@ -94,7 +95,7 @@ public class UpsideDownForestCleared extends NetherBiome {
 	}
 	
 	@Override
-	public void genSurfColumn(LevelAccessor world, BlockPos pos, Random random) {
+	public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
 		//BlocksHelper.setWithoutUpdate(world, pos, random.nextInt(3) == 0 ? NetherBlocks.NETHERRACK_MOSS.defaultBlockState() : Blocks.NETHERRACK.defaultBlockState());
 	}
 }

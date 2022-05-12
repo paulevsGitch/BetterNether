@@ -22,6 +22,7 @@ import paulevs.betternether.blocks.materials.Materials;
 import paulevs.betternether.interfaces.SurvivesOnNetherGround;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherGround {
 	private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.625, 0.8125);
@@ -60,12 +61,12 @@ public class BlockBlackBush extends BlockBaseNotFull implements BonemealableBloc
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		popResource(world, pos, new ItemStack(this.asItem()));
 	}
 }

@@ -2,6 +2,7 @@ package paulevs.betternether.world.surface;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
+import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.MHelper;
@@ -13,13 +14,14 @@ import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
 public class NetherNoiseCondition extends VolumeNoiseCondition implements NumericProvider {
 	public static final NetherNoiseCondition DEFAULT = new NetherNoiseCondition();
 	public static final Codec<NetherNoiseCondition> CODEC = Codec.BYTE.fieldOf("nether_noise").xmap((obj) -> DEFAULT, obj -> (byte)0).codec();
+	private static final KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> KEY_CODEC = KeyDispatchDataCodec.of(CODEC);
 	private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(245);
 
 	private NetherNoiseCondition(){ }
 
 	@Override
-	public Codec<? extends SurfaceRules.ConditionSource> codec() {
-		return NetherNoiseCondition.CODEC;
+	public KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> codec() {
+		return NetherNoiseCondition.KEY_CODEC;
 	}
 	@Override
 	public Codec<? extends NumericProvider> pcodec() {

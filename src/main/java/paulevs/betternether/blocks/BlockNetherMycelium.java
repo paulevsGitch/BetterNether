@@ -21,6 +21,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class BlockNetherMycelium extends BlockBase {
 	public static final BooleanProperty IS_BLUE = BooleanProperty.create("blue");
@@ -37,7 +38,7 @@ public class BlockNetherMycelium extends BlockBase {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(state, world, pos, random);
 		world.addParticle(ParticleTypes.MYCELIUM,
 				pos.getX() + random.nextDouble(),

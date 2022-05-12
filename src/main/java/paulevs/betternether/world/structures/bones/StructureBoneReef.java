@@ -8,6 +8,7 @@ import paulevs.betternether.world.structures.StructureGeneratorThreadContext;
 import paulevs.betternether.world.structures.StructureNBT;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class StructureBoneReef implements IStructure {
 	private static final StructureNBT[] BONES = new StructureNBT[] {
@@ -17,7 +18,7 @@ public class StructureBoneReef implements IStructure {
 	};
 
 	@Override
-	public void generate(ServerLevelAccessor world, BlockPos pos, Random random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
+	public void generate(ServerLevelAccessor world, BlockPos pos, RandomSource random, final int MAX_HEIGHT, StructureGeneratorThreadContext context) {
 		if (BlocksHelper.isNetherGround(world.getBlockState(pos.below())) && world.isEmptyBlock(pos.above(2)) && world.isEmptyBlock(pos.above(4))) {
 			StructureNBT bone = BONES[random.nextInt(BONES.length)];
 			bone.randomRM(random);

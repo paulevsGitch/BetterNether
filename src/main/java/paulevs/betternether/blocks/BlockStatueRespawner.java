@@ -6,7 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.network.chat.TranslatableComponent;
+
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -84,7 +85,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
 						pos.getX() + world.random.nextFloat(),
 						pos.getY() + y + world.random.nextFloat() * 0.2,
 						pos.getZ() + world.random.nextFloat(), 0, 0, 0);
-			player.displayClientMessage(new TranslatableComponent("message.spawn_set", new Object[0]), true);
+			player.displayClientMessage(Component.translatable("message.spawn_set", new Object[0]), true);
 			if (!world.isClientSide) {
 				((ServerPlayer) player).setRespawnPosition(world.dimension(), pos, player.getYHeadRot(), false, true);
 			}
@@ -92,7 +93,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
 			return InteractionResult.SUCCESS;
 		}
 		else {
-			player.displayClientMessage(new TranslatableComponent("message.spawn_help", requiredItem), true);
+			player.displayClientMessage(Component.translatable("message.spawn_help", requiredItem), true);
 		}
 		return InteractionResult.SUCCESS;
 	}

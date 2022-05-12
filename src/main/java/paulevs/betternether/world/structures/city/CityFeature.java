@@ -7,10 +7,10 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.FlatLevelSource;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier.Context;
@@ -20,11 +20,11 @@ import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
 import paulevs.betternether.world.structures.piece.CityPiece;
-import ru.bclib.world.structures.BCLStructureFeature;
+import ru.bclib.world.structures.BCLStructure;
 
 import java.util.List;
 
-public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
+public class CityFeature extends Structure {
 	private static CityGenerator generator;
 	public static final int RADIUS = 8 * 8;
 	
@@ -42,7 +42,7 @@ public class CityFeature extends StructureFeature<NoneFeatureConfiguration> {
 	private static <C extends FeatureConfiguration> boolean checkLocation(Context<C> context) {
 		return
 				Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)
-				&& BCLStructureFeature.isValidBiome(context, DEFAULT_HEIGHT);
+				&& BCLStructure.isValidBiome(context, DEFAULT_HEIGHT);
 	}
 	
 	private static void generatePieces(StructurePiecesBuilder structurePiecesBuilder, PieceGenerator.Context<NoneFeatureConfiguration> context) {
