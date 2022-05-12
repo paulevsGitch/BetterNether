@@ -30,7 +30,7 @@ dependencies {
 
 
 	modCompileOnly "mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}" // compile against the API
-	modRuntime "mcp.mobius.waila:wthit:fabric-${project.wthit_version}" // run against the full jar
+	// modRuntime "mcp.mobius.waila:wthit:fabric-${project.wthit_version}" // run against the full jar
 
 	println "Using local BCLib: ${local_bclib}"
     if (local_bclib){
