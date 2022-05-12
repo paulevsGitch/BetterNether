@@ -34,7 +34,7 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull {
 				.mapColor(MaterialColor.COLOR_GREEN)
 				.sounds(SoundType.CROP)
 				.noCollision()
-				.dropsNothing()
+				.noLootTable()
 				.breakInstantly()
 				.nonOpaque()
 				.lightLevel(getLuminance()));

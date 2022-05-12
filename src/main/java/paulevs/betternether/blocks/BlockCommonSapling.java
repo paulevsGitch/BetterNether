@@ -45,7 +45,7 @@ abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements Boneme
 				.mapColor(color)
 				.sounds(SoundType.CROP)
 				.nonOpaque()
-				.dropsNothing()
+				.noLootTable()
 				.breakInstantly()
 				.noCollision()
 				.ticksRandomly());

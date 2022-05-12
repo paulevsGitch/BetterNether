@@ -26,7 +26,7 @@ public class BlockEyeVine extends BlockBaseNotFull {
 				.mapColor(MaterialColor.COLOR_RED)
 				.sounds(SoundType.CROP)
 				.noCollision()
-				.dropsNothing()
+				.noLootTable()
 				.breakInstantly()
 				.nonOpaque());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);

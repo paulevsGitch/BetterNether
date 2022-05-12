@@ -51,7 +51,7 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
 				.luminance(15)
 				.sounds(SoundType.CROP)
 				.noCollision()
-				.dropsNothing()
+				.noLootTable()
 				.breakInstantly()
 				.nonOpaque()
 		);
