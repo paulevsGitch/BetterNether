@@ -16,13 +16,14 @@ import ru.bclib.world.structures.BCLStructure;
 public class NetherStructures {
     public static final int CITY_SPACING = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
     // Nether City
-    public static final BCLStructure CITY_STRUCTURE = new BCLStructure(
+    public static final BCLStructure<CityFeature> CITY_STRUCTURE = new BCLStructure<>(
             new ResourceLocation(BetterNether.MOD_ID, "nether_city"),
-            new CityFeature(),
+            CityFeature::new,
             Decoration.STRONGHOLDS,
             CITY_SPACING,
             CITY_SPACING >> 1,
-            true
+            true,
+            CityFeature.CODEC
     );
 
     public static void register() {

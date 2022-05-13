@@ -28,6 +28,7 @@ import net.minecraft.world.level.levelgen.structure.structures.EndCityStructure;
 import com.mojang.serialization.Codec;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.registry.NetherBiomes;
+import paulevs.betternether.registry.NetherStructures;
 import paulevs.betternether.world.structures.city.palette.Palettes;
 import paulevs.betternether.world.structures.piece.CavePiece;
 import paulevs.betternether.world.structures.piece.CityPiece;
@@ -39,33 +40,12 @@ import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 public class CityFeature extends Structure {
-
-	//TODO: 1.19 Add to BCLib
-	private static HolderSet<Biome> biomes(TagKey<Biome> tagKey) {
-		return BuiltinRegistries.BIOME.getOrCreateTag(tagKey);
-	}
-	private static Structure.StructureSettings structure(TagKey<Biome> tagKey, Map<MobCategory, StructureSpawnOverride> map, GenerationStep.Decoration decoration, TerrainAdjustment terrainAdjustment) {
-		return new Structure.StructureSettings(biomes(tagKey), map, decoration, terrainAdjustment);
-	}
-
-	private static Structure.StructureSettings structure(TagKey<Biome> tagKey, GenerationStep.Decoration decoration, TerrainAdjustment terrainAdjustment) {
-		return structure(tagKey, Map.of(), decoration, terrainAdjustment);
-	}
-
 	public static final Codec<CityFeature> CODEC = simpleCodec(CityFeature::new);
 	private static CityGenerator generator;
 	public static final int RADIUS = 8 * 8;
 
-	protected CityFeature(Structure.StructureSettings structureSettings) {
+	public CityFeature(Structure.StructureSettings structureSettings) {
 		super(structureSettings);
-	}
-	public CityFeature() {
-		//TODO: 1.19 Tag-Handling should be different!
-		super(structure(BiomeTags.HAS_MINESHAFT, GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE));
-//		super(
-//			NoneFeatureConfiguration.CODEC,
-//			PieceGeneratorSupplier.simple(CityFeature::checkLocation, CityFeature::generatePieces)
-//		);
 	}
 	
 	public static void initGenerator() {
@@ -73,7 +53,7 @@ public class CityFeature extends Structure {
 	}
 	private static final int DEFAULT_HEIGHT = 40;
 
-
+EndCityStructure s;
 
 	@Override
 	public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
@@ -141,7 +121,6 @@ public class CityFeature extends Structure {
 
 	@Override
 	public StructureType<?> type() {
-		//TODO: 1.19 Need custom Type
-		return StructureType.END_CITY;
+		return NetherStructures.CITY_STRUCTURE.structureType;
 	}
 }

@@ -21,9 +21,13 @@ import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.tag.TagAPI;
+import ru.bclib.util.MHelper;
 import ru.bclib.world.biomes.BCLBiome;
 
+import java.util.Random;
+
 public class NetherBiomeBuilder {
+	private static final Random RANDOM = new Random(130520221830l);
 	private static Biome BASE_BIOME;
 	static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
 	//(ResourceLocation randomName, VerticalAnchor trueAtAndBelow, VerticalAnchor falseAtAndAbove)
@@ -78,7 +82,9 @@ public class NetherBiomeBuilder {
 			.mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
 			.loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
 			.additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
-			.edge(edgeBiome);
+			.edge(edgeBiome)
+			.addNetherClimateParamater(MHelper.randRange(-1.5F, 1.5F, RANDOM),
+									   MHelper.randRange(-1.5F, 1.5F, RANDOM));
 		
 		
 		if (data.hasVanillaStructures()) addVanillaStructures(builder);

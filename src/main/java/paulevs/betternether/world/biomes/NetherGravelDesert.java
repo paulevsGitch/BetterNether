@@ -8,6 +8,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
@@ -23,6 +24,7 @@ import paulevs.betternether.world.surface.NetherNoiseCondition;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import ru.bclib.api.surface.SurfaceRuleBuilder;
+import ru.bclib.util.MHelper;
 import ru.bclib.world.biomes.BCLBiomeSettings;
 
 import java.util.Random;
@@ -45,7 +47,8 @@ public class NetherGravelDesert extends NetherBiome {
 				   .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
 				   .particles(ParticleTypes.ASH, 0.02F)
 				   .structure(BiomeTags.HAS_BASTION_REMNANT)
-				   .structure(BiomeTags.HAS_NETHER_FORTRESS);
+				   .structure(BiomeTags.HAS_NETHER_FORTRESS)
+					;
 		}
 		
 		@Override
