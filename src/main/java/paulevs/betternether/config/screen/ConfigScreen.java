@@ -1,7 +1,8 @@
 package paulevs.betternether.config.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.ProgressOption;
+
+import net.minecraft.client.OptionInstance;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
@@ -10,6 +11,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 
+import com.mojang.serialization.Codec;
 import paulevs.betternether.BetterNether;
 import paulevs.betternether.config.Config;
 import paulevs.betternether.config.Configs;
@@ -40,20 +42,33 @@ public class ConfigScreen extends Screen {
 		final String varFog = "fog_density[vanilla: 1.0]";
 		final float fogDefault = 0.75F;
 
-		AbstractWidget fogButton = new ProgressOption("fog", 0.0, 1.0, 0.05F,
-				(gameOptions) -> {
-					return (double) Configs.MAIN.getFloat("improvement", varFog, fogDefault);
-				},
-				(gameOptions, value) -> {
-					float val = value.floatValue();
-					Configs.MAIN.setFloat("improvement", varFog, val);
-					BetterNether.changeFogDensity(val);
-				},
-				(gameOptions, doubleOption) -> {
-					double val = doubleOption.get(gameOptions);
-					String color = Math.abs(val - fogDefault) < 0.001 ? "" : "\u00A7b";
-					return Component.translatable("config.betternether.fog").append(String.format(": %s%.2f", color, val));
-				}).createButton(this.minecraft.options, this.width / 2 - 100, 27, 150);
+		AbstractWidget fogButton = new OptionInstance<Double>("fog",
+								   OptionInstance.noTooltip(),
+								   (gameOptions, value) -> {
+										float val = value.floatValue();
+										Configs.MAIN.setFloat("improvement", varFog, val);
+										BetterNether.changeFogDensity(val);
+									   return gameOptions;
+								   } ,
+								   new OptionInstance.IntRange(0, 10).xmap(i -> (double)i / 10.0, double_ -> (int)(double_ * 10.0)),
+								   Codec.doubleRange(0.0, 1.0),
+								   0.05,
+								   (gameOptions) -> Configs.MAIN.getFloat("improvement", varFog, fogDefault)
+		).createButton(this.minecraft.options, this.width / 2 - 100, 27, 150);
+//		AbstractWidget fogButton = new ProgressOption("fog", 0.0, 1.0, 0.05F,
+//				(gameOptions) -> {
+//					return (double) Configs.MAIN.getFloat("improvement", varFog, fogDefault);
+//				},
+//				(gameOptions, value) -> {
+//					float val = value.floatValue();
+//					Configs.MAIN.setFloat("improvement", varFog, val);
+//					BetterNether.changeFogDensity(val);
+//				},
+//				(gameOptions, doubleOption) -> {
+//					double val = doubleOption.get(gameOptions);
+//					String color = Math.abs(val - fogDefault) < 0.001 ? "" : "\u00A7b";
+//					return Component.translatable("config.betternether.fog").append(String.format(": %s%.2f", color, val));
+//				}).createButton(this.minecraft.options, this.width / 2 - 100, 27, 150);
 		this.addRenderableWidget(fogButton);
 
 		this.addRenderableWidget(new Button(this.width / 2 + 40 + 20, 27, 40, 20, Component.translatable("config.betternether.reset"), new OnPress() {
