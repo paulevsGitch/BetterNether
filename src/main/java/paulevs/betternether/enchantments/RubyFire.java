@@ -130,7 +130,7 @@ public class RubyFire extends Enchantment {
 					popExperience(level, blockPos, xpDrop);
 				}
 				convertedDrops.get().forEach(itemStack -> Block.popResource(level, blockPos, itemStack));
-				brokenBlock.spawnAfterBreak(level, blockPos, breakingItem);
+				brokenBlock.spawnAfterBreak(level, blockPos, breakingItem, true);
 				convertedDrops.get().clear();
 				return true;
 			}

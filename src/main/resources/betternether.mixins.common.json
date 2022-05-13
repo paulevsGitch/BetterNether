@@ -4,7 +4,6 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"AbstractFurnaceBlockEntityMixin",
-		"BastionRemnantFeatureMixin",
 		"BlockAgeProcessorMixin",
 		"BoneMealMixin",
 		"BrewingRecipeRegistryMixin",
@@ -20,7 +19,6 @@
 		"MapStateMixin",
 		"MiningToolItemMixin",
 		"MushroomMixin",
-		"NetherFortressFeatureMixin",
 		"NetherWartMixin",
 		"BlockBehaviourMixin",
 		"PlayerEntityMixin",

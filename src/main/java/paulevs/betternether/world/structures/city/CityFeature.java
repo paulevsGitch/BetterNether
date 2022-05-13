@@ -1,20 +1,31 @@
 package paulevs.betternether.world.structures.city;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderSet;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.data.worldgen.Structures;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.FlatLevelSource;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier.Context;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
+import net.minecraft.world.level.levelgen.structure.structures.EndCityStructure;
+
+import com.mojang.serialization.Codec;
 import paulevs.betternether.config.Configs;
 import paulevs.betternether.registry.NetherBiomes;
 import paulevs.betternether.world.structures.city.palette.Palettes;
@@ -23,40 +34,72 @@ import paulevs.betternether.world.structures.piece.CityPiece;
 import ru.bclib.world.structures.BCLStructure;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 public class CityFeature extends Structure {
+
+	//TODO: 1.19 Add to BCLib
+	private static HolderSet<Biome> biomes(TagKey<Biome> tagKey) {
+		return BuiltinRegistries.BIOME.getOrCreateTag(tagKey);
+	}
+	private static Structure.StructureSettings structure(TagKey<Biome> tagKey, Map<MobCategory, StructureSpawnOverride> map, GenerationStep.Decoration decoration, TerrainAdjustment terrainAdjustment) {
+		return new Structure.StructureSettings(biomes(tagKey), map, decoration, terrainAdjustment);
+	}
+
+	private static Structure.StructureSettings structure(TagKey<Biome> tagKey, GenerationStep.Decoration decoration, TerrainAdjustment terrainAdjustment) {
+		return structure(tagKey, Map.of(), decoration, terrainAdjustment);
+	}
+
+	public static final Codec<CityFeature> CODEC = simpleCodec(CityFeature::new);
 	private static CityGenerator generator;
 	public static final int RADIUS = 8 * 8;
-	
+
+	protected CityFeature(Structure.StructureSettings structureSettings) {
+		super(structureSettings);
+	}
 	public CityFeature() {
-		super(
-			NoneFeatureConfiguration.CODEC,
-			PieceGeneratorSupplier.simple(CityFeature::checkLocation, CityFeature::generatePieces)
-		);
+		//TODO: 1.19 Tag-Handling should be different!
+		super(structure(BiomeTags.HAS_MINESHAFT, GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE));
+//		super(
+//			NoneFeatureConfiguration.CODEC,
+//			PieceGeneratorSupplier.simple(CityFeature::checkLocation, CityFeature::generatePieces)
+//		);
 	}
 	
 	public static void initGenerator() {
 		generator = new CityGenerator();
 	}
 	private static final int DEFAULT_HEIGHT = 40;
-	private static <C extends FeatureConfiguration> boolean checkLocation(Context<C> context) {
-		return
-				Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)
-				&& BCLStructure.isValidBiome(context, DEFAULT_HEIGHT);
+
+
+
+	@Override
+	public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
+		if (Configs.GENERATOR.getBoolean("generator.world.cities", "generate", true)
+				&& BCLStructure.isValidBiome(context, DEFAULT_HEIGHT)){
+			final ChunkPos cPos = context.chunkPos();
+			final ChunkGenerator chunkGenerator = context.chunkGenerator();
+			final LevelHeightAccessor heightAccessor = context.heightAccessor();
+
+			final BlockPos center = getCenter(context, cPos, chunkGenerator, heightAccessor);
+			return Optional.of(new Structure.GenerationStub(center, (structurePiecesBuilder) -> {
+				generatePieces(structurePiecesBuilder, context);
+			}));
+		}
+		return Optional.empty();
+
+
 	}
 	
-	private static void generatePieces(StructurePiecesBuilder structurePiecesBuilder, PieceGenerator.Context<NoneFeatureConfiguration> context) {
+	private static void generatePieces(StructurePiecesBuilder structurePiecesBuilder, Structure.GenerationContext context) {
 		final ChunkPos cPos = context.chunkPos();
 		final ChunkGenerator chunkGenerator = context.chunkGenerator();
 		final LevelHeightAccessor heightAccessor = context.heightAccessor();
 		final WorldgenRandom random = context.random();
-		
-		final int px = cPos.getBlockX(8);
-		final int pz = cPos.getBlockZ(8);
-		final int y = chunkGenerator instanceof FlatLevelSource
-			? chunkGenerator.getBaseHeight(px, pz, Types.WORLD_SURFACE, heightAccessor)
-			: DEFAULT_HEIGHT;
-		final BlockPos center = new BlockPos(px, y, pz);
+
+		final BlockPos center = getCenter(context, cPos, chunkGenerator, heightAccessor);
 
 		//CityPalette palette = Palettes.getRandom(random);
 		final List<CityPiece> buildings = generator.generate(center, random, Palettes.EMPTY);
@@ -81,4 +124,24 @@ public class CityFeature extends Structure {
 		//BetterNether.LOGGER.info("BBox after Cave:" + structurePiecesBuilder.getBoundingBox().toString());
 	}
 
+	@NotNull
+	private static BlockPos getCenter(GenerationContext context,
+										ChunkPos cPos,
+										ChunkGenerator chunkGenerator,
+										LevelHeightAccessor heightAccessor) {
+		final int px = cPos.getBlockX(8);
+		final int pz = cPos.getBlockZ(8);
+		final int y = chunkGenerator instanceof FlatLevelSource
+			? chunkGenerator.getBaseHeight(px, pz, Types.WORLD_SURFACE, heightAccessor, context.randomState())
+			: DEFAULT_HEIGHT;
+		final BlockPos center = new BlockPos(px, y, pz);
+		return center;
+	}
+
+
+	@Override
+	public StructureType<?> type() {
+		//TODO: 1.19 Need custom Type
+		return StructureType.END_CITY;
+	}
 }

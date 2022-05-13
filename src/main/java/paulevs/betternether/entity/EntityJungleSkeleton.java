@@ -1,6 +1,7 @@
 package paulevs.betternether.entity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -30,14 +31,15 @@ public class EntityJungleSkeleton extends Skeleton {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverWorldAccess, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData entityData, @Nullable CompoundTag entityTag) {
-		entityData = super.finalizeSpawn(serverWorldAccess, difficulty, spawnReason, entityData, entityTag);
-		super.populateDefaultEquipmentSlots(difficulty);
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData entityData, @Nullable CompoundTag entityTag) {
+		entityData = super.finalizeSpawn(level, difficulty, spawnReason, entityData, entityTag);
+		final RandomSource randomSource = level.getRandom();
+		super.populateDefaultEquipmentSlots(randomSource, difficulty);
 
 		this.setItemSlot(EquipmentSlot.MAINHAND, getHandItem());
 		this.setItemSlot(EquipmentSlot.OFFHAND, getRandomOffhandItem());
 
-		this.populateDefaultEquipmentEnchantments(difficulty);
+		this.populateDefaultEquipmentEnchantments(randomSource, difficulty);
 		this.reassessWeaponGoal();
 		this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * difficulty.getSpecialMultiplier());
 		if (this.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {

@@ -20,6 +20,7 @@ import paulevs.betternether.registry.NetherEntities.KnownSpawnTypes;
 import paulevs.betternether.registry.NetherFeatures;
 import paulevs.betternether.registry.NetherStructures;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
+import ru.bclib.api.tag.TagAPI;
 import ru.bclib.world.biomes.BCLBiome;
 
 public class NetherBiomeBuilder {
@@ -65,7 +66,7 @@ public class NetherBiomeBuilder {
 		
 		BCLBiomeBuilder builder = BCLBiomeBuilder
 			.start(ID)
-			.category(BiomeCategory.NETHER)
+			//.category(BiomeCategory.NETHER)
 			.surface(data.surface().build())
 			.temperature(BASE_BIOME.getBaseTemperature())
 			.wetness(BASE_BIOME.getDownfall())
@@ -94,6 +95,7 @@ public class NetherBiomeBuilder {
 		data.addCustomBuildData(builder);
 		
 		NetherBiome b = builder.build(data.getSupplier());
+		TagAPI.addBiomeTag(BiomeTags.IS_NETHER, b.getBiome());
 		return b;
 	}
 }

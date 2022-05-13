@@ -3,6 +3,7 @@ package paulevs.betternether.entity.render;
 import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
@@ -29,9 +30,11 @@ public class RenderJungleSkeleton extends MobRenderer<EntityJungleSkeleton, Skel
 		afm = new HumanoidArmorLayer<>(this, afm_sem_legins, afm_sem_body);
 		this.addLayer(afm);
 
-		this.addLayer(new ItemInHandLayer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>>(this));
-		this.addLayer(new ElytraLayer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>>(this, ctx.getModelSet()));
-		this.addLayer(new CustomHeadLayer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>>(this, ctx.getModelSet()));
+		final ItemInHandRenderer itemInHandRenderer = ctx.getItemInHandRenderer();
+
+		this.addLayer(new ItemInHandLayer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>>(this,itemInHandRenderer ));
+		this.addLayer(new ElytraLayer<>(this, ctx.getModelSet()));
+		this.addLayer(new CustomHeadLayer<EntityJungleSkeleton, SkeletonModel<EntityJungleSkeleton>>(this, ctx.getModelSet(), itemInHandRenderer));
 	}
 
 	@Override

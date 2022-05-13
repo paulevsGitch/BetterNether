@@ -3,8 +3,6 @@ package paulevs.betternether.mixin.common;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.world.level.levelgen.feature.BastionFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier.Context;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.betternether.world.structures.city.CityHelper;
 
-@Mixin(BastionFeature.class)
+//@Mixin(BastionFeature.class)
 public class BastionRemnantFeatureMixin {
 	//TODO: 1.18.2 Find an alternative
 	/*@Inject(method = "checkLocation", at = @At("HEAD"), cancellable = true)

@@ -121,22 +121,10 @@ class DebugShader extends net.minecraft.client.renderer.ShaderInstance {
                             Resource resource = factory.getResource(identifier).orElse(null);
 
                             String content;
-                            try {
-                                content = IOUtils.toString(resource.getInputStream(), StandardCharsets.UTF_8);
+                            try (InputStream is = resource.open()){
+                                content = IOUtils.toString(is, StandardCharsets.UTF_8);
                             } catch (Throwable error) {
-                                if (resource != null) {
-                                    try {
-                                        resource.close();
-                                    } catch (Throwable innerError) {
-                                        error.addSuppressed(innerError);
-                                    }
-                                }
-
                                 throw error;
-                            }
-
-                            if (resource != null) {
-                                resource.close();
                             }
 
                             return content;

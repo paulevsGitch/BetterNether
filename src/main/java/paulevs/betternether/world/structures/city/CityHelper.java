@@ -34,7 +34,7 @@ public class CityHelper {
 		POSITIONS.clear();
 		for (int x = x1; x <= x2; x += 8) {
 			for (int z = z1; z <= z2; z += 8) {
-				ChunkPos chunk = config.getPotentialFeatureChunk(worldSeed, x, z);
+				ChunkPos chunk = config.getPotentialStructureChunk(worldSeed, x, z);
 				POSITIONS.add(chunk);
 			}
 		}
@@ -54,7 +54,7 @@ public class CityHelper {
 			POS.setX(x << 4);
 			for (int z = z1; z <= z2; z += 8) {
 				POS.setZ(z << 4);
-				ChunkPos chunk = config.getPotentialFeatureChunk(worldSeed, x, z);
+				ChunkPos chunk = config.getPotentialStructureChunk(worldSeed, x, z);
 				POSITIONS.add(chunk);
 			}
 		}

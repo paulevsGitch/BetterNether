@@ -62,8 +62,10 @@ public class CommandRegistry {
         (object) -> {
             return Component.literal("The nbt-structure ("+object+") was not found.");
         });
+
     private static final int MAX_SEARCH_RADIUS = 6400*2;
-    private static final int SEARCH_STEP = 8;
+    private static final int SAMPLE_RESOLUTION_HORIZONTAL = 32;
+    private static final int SAMPLE_RESOLUTION_VERTICAL = 64;
 
     public static void register(){
         CommandRegistrationCallback.EVENT.register(CommandRegistry::register);
@@ -129,7 +131,7 @@ public class CommandRegistry {
         biomeIndex = (biomeIndex+1) % biomes.size();
 
         final BlockPos currentPosition = new BlockPos(source.getPosition());
-        final BlockPos biomePosition = source.getLevel().findNearestBiome(b -> b.equals(biome.getActualBiome()), currentPosition, MAX_SEARCH_RADIUS, SEARCH_STEP).getFirst();
+        final BlockPos biomePosition = source.getLevel().findClosestBiome3d(b -> b.equals(biome.getActualBiome()), currentPosition, MAX_SEARCH_RADIUS, SAMPLE_RESOLUTION_HORIZONTAL, SAMPLE_RESOLUTION_VERTICAL).getFirst();
         final String biomeName = biome.toString();
 
         if (biomePosition == null) {
@@ -175,7 +177,7 @@ public class CommandRegistry {
                 }
             };
             return LocateCommand.showLocateResult(source, result, currentPosition, new Pair<>(biomePosition, biome.getActualBiome()),
-                    "commands.locatebiome.success");
+                    "commands.locatebiome.success", false);
         }
     }
 
