@@ -40,7 +40,6 @@ import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 public class CityFeature extends Structure {
-	public static final Codec<CityFeature> CODEC = simpleCodec(CityFeature::new);
 	private static CityGenerator generator;
 	public static final int RADIUS = 8 * 8;
 
@@ -52,8 +51,6 @@ public class CityFeature extends Structure {
 		generator = new CityGenerator();
 	}
 	private static final int DEFAULT_HEIGHT = 40;
-
-EndCityStructure s;
 
 	@Override
 	public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
@@ -69,8 +66,6 @@ EndCityStructure s;
 			}));
 		}
 		return Optional.empty();
-
-
 	}
 	
 	private static void generatePieces(StructurePiecesBuilder structurePiecesBuilder, Structure.GenerationContext context) {

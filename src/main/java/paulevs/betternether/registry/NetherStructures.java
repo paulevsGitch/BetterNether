@@ -22,8 +22,7 @@ public class NetherStructures {
             Decoration.STRONGHOLDS,
             CITY_SPACING,
             CITY_SPACING >> 1,
-            true,
-            CityFeature.CODEC
+            true
     );
 
     public static void register() {
