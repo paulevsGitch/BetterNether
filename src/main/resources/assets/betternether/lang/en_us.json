@@ -728,6 +728,8 @@
 	"enchantment.betternether.obsidian_breaker.desc": "Increases the breaking speed of Obsidian",
 	"enchantment.betternether.ruby_fire": "Rubys' Fire",
 	"enchantment.betternether.ruby_fire.desc": "Auto-Smelts ores (Pickaxe) \n Flame and Knockback (Armor and Sword)",
-	"betternether.survive.nethergound": "Nether Ground"
+	"betternether.survive.nethergound": "Nether Ground",
+
+	"flat_world_preset.betternether.plat": "Flat Nether"
 
 }

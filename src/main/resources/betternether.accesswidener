@@ -12,6 +12,7 @@ accessible    class    net/minecraft/world/level/block/entity/BlockEntityType$Bl
 extendable    class    net/minecraft/world/level/levelgen/structure/StructureStart
 accessible    class    net/minecraft/client/particle/DripParticle$DripHangParticle
 accessible    class    net/minecraft/world/level/levelgen/SurfaceRules$VerticalGradientConditionSource
+accessible    class    net/minecraft/world/level/levelgen/flat/FlatLevelGeneratorPresets$Bootstrap
 
 # Constructors
 accessible method net/minecraft/client/particle/DripParticle$DripHangParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V

@@ -7,7 +7,6 @@
       "LavaFluidMixin",
       "MinecraftClientMixin",
       "PlayerArmorMixin",
-      "PresetsScreenMixin",
       "RenderLayerMixin",
       "StandArmorMixin",
       "TexturedModelDataMixin"

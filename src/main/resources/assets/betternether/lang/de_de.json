@@ -728,5 +728,7 @@
   "enchantment.betternether.obsidian_breaker.desc": "Beschleunigt das graben von Obsidian.",
   "enchantment.betternether.ruby_fire": "Rubinfeuer",
   "enchantment.betternether.ruby_fire.desc": "Automatische Schmelzen von Erzen mit Spitzhacke / Flamme und Rückstoß bei Rüstung und Schwertern.",
-  "betternether.survive.nethergound": "Netherböden"
+  "betternether.survive.nethergound": "Netherböden",
+
+  "flat_world_preset.betternether.plat": "Flaches Nether"
 }

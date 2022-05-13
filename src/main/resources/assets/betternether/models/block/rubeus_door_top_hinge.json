@@ -1,5 +1,5 @@
 {
-    "parent": "block/door_top_rh",
+    "parent": "block/door_top_right",
     "textures": {
         "bottom": "betternether:block/rubeus_door_top",
         "top": "betternether:block/rubeus_door_top"

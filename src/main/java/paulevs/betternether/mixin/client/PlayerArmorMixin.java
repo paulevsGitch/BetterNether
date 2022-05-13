@@ -28,11 +28,9 @@ public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClie
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Inject(method = "<init>*", at = @At(value = "RETURN"))
-	private void onInit(EntityRendererProvider.Context context, boolean bl, CallbackInfo info) {
+	private void bcl_onInit(EntityRendererProvider.Context context, boolean bl, CallbackInfo info) {
 		if (BetterNether.hasThinArmor()) {
-			Iterator<RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>>> iterator = this.layers.iterator();
-			while (iterator.hasNext()) {
-				RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> feature = iterator.next();
+			for (RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> feature : this.layers) {
 				if (feature instanceof HumanoidArmorLayer) {
 					this.layers.remove(feature);
 					break;

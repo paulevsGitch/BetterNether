@@ -16,7 +16,7 @@ import paulevs.betternether.BetterNether;
 @Mixin(FogRenderer.class)
 public class BackgroundRenderMixin {
 	@Inject(method = "setupFog", at = @At(value = "HEAD"), cancellable = true)
-	private static void applyThickFog(Camera camera, FogRenderer.FogMode fogType, float viewDistance, boolean thickFog, CallbackInfo info) {
+	private static void bcl_applyThickFog(Camera camera, FogRenderer.FogMode fogType, float viewDistance, boolean thickFog, float i, CallbackInfo info) {
 
 		FogType cameraSubmersionType = camera.getFluidInCamera();
 		Entity entity = camera.getEntity();

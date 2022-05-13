@@ -26,7 +26,7 @@ public class BetterNether implements ModInitializer {
 	
 	@Override
 	public void onInitialize() {
-		LOGGER.info("=^..^=    BetterNether for 1.18.2    =^..^=");
+		LOGGER.info("=^..^=    BetterNether for 1.19    =^..^=");
 		//MigrationProfile.fixCustomFolder(new File("/Users/frank/Entwicklung/BetterNether/src/main/resources/data/betternether/structures/lava"));
 		initOptions();
 		SoundsRegistry.register();
@@ -41,6 +41,7 @@ public class BetterNether implements ModInitializer {
 		NetherBiomes.register();
 		BrewingRegistry.register();
 		CommandRegistry.register();
+		FlatLevelPresets.register();
 		Config.save();
 		
 		IntegrationRecipes.register();
