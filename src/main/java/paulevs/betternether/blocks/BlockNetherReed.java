@@ -29,10 +29,10 @@ public class BlockNetherReed extends BlockBase {
 		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_CYAN)
 				.sounds(SoundType.CROP)
-				.noCollision()
-				.breakInstantly()
-				.nonOpaque()
-				.ticksRandomly());
+				.noCollission()
+				.instabreak()
+				.noOcclusion()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
 	}

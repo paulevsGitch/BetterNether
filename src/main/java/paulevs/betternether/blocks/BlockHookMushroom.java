@@ -14,10 +14,10 @@ public class BlockHookMushroom extends BaseBlockMold implements SurvivesOnNether
 		super(Materials.makeGrass(MaterialColor.COLOR_PINK)
 				.luminance(13)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
-				.ticksRandomly()
+				.noOcclusion()
+				.noCollission()
+				.instabreak()
+				.randomTicks()
 				);
 	}
 

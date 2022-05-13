@@ -49,11 +49,11 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 				.mapColor(MaterialColor.COLOR_RED)
 				.requiresTool()
 				.sounds(SoundType.CROP)
-				.noCollision()
-				.breakInstantly()
-				.nonOpaque()
-				.ticksRandomly()
-				.breakInstantly());
+				.noCollission()
+				.instabreak()
+				.noOcclusion()
+				.randomTicks()
+				.instabreak());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.BOTTOM));

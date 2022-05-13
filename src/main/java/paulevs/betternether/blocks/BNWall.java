@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BNWall extends WallBlock {
 	public BNWall(Block block) {
-		super(FabricBlockSettings.copyOf(block).nonOpaque());
+		super(FabricBlockSettings.copyOf(block).noOcclusion());
 	}
 
 	@Override

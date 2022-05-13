@@ -26,10 +26,10 @@ public class BlockOrangeMushroom extends BlockCommonPlant implements SurvivesOnN
 		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_ORANGE)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.hardness(0.5F)
-				.ticksRandomly()
-				.noCollision());
+				.noOcclusion()
+				.destroyTime(0.5F)
+				.randomTicks()
+				.noCollission());
 	}
 
 	@Override

@@ -31,10 +31,10 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
 		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(MaterialColor.COLOR_RED)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.breakInstantly()
-				.noCollision()
-				.ticksRandomly());
+				.noOcclusion()
+				.instabreak()
+				.noCollission()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.structure = structure;
 	}

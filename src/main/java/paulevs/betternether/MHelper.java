@@ -55,7 +55,7 @@ public class MHelper {
 		return random.nextFloat()*d;
 	}
 
-	public static double nextDouble(RandomSource random, float d){
+	public static double nextDouble(RandomSource random, double d){
 		return random.nextDouble()*d;
 	}
 }

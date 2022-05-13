@@ -25,7 +25,7 @@ public class BlockEyeball extends BlockEyeBase {
 				.sounds(SoundType.SLIME_BLOCK)
 				.hardness(0.5F)
 				.resistance(0.5F)
-				.ticksRandomly());
+				.randomTicks());
 	}
 
 	@Environment(EnvType.CLIENT)

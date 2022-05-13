@@ -27,7 +27,7 @@ public class BlockEyeballSmall extends BlockEyeBase {
 				.sounds(SoundType.SLIME_BLOCK)
 				.hardness(0.5F)
 				.resistance(0.5F)
-				.nonOpaque());
+				.noOcclusion());
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter view, BlockPos pos, CollisionContext ePos) {

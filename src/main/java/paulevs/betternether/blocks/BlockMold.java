@@ -50,10 +50,10 @@ class BaseBlockMold extends BlockBaseNotFull {
 	public BaseBlockMold(MaterialColor color, Function<Properties, Properties> adaptProperties) {
 		super(adaptProperties.apply(Materials.makeGrass(color)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
-				.ticksRandomly()
+				.noOcclusion()
+				.noCollission()
+				.instabreak()
+				.randomTicks()
 					  .offsetType(Block.OffsetType.XZ)));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);

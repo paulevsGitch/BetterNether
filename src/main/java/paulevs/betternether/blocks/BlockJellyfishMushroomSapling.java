@@ -34,10 +34,10 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
 				.mapColor(MaterialColor.COLOR_CYAN)
 				.luminance(9)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.breakInstantly()
-				.noCollision()
-				.ticksRandomly()
+				.noOcclusion()
+				.instabreak()
+				.noCollission()
+				.randomTicks()
 		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

@@ -33,10 +33,10 @@ public class BlockAnchorTreeVine extends BlockBaseNotFull {
 		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_GREEN)
 				.sounds(SoundType.CROP)
-				.noCollision()
+				.noCollission()
 				.noLootTable()
-				.breakInstantly()
-				.nonOpaque()
+				.instabreak()
+				.noOcclusion()
 				.lightLevel(getLuminance()));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		setDropItself(false);

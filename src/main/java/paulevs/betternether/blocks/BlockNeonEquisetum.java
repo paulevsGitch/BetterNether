@@ -50,10 +50,10 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
 				.mapColor(MaterialColor.COLOR_GREEN)
 				.luminance(15)
 				.sounds(SoundType.CROP)
-				.noCollision()
+				.noCollission()
 				.noLootTable()
-				.breakInstantly()
-				.nonOpaque()
+				.instabreak()
+				.noOcclusion()
 		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.BOTTOM));

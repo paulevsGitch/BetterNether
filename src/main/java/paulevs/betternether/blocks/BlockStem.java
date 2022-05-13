@@ -24,7 +24,7 @@ public class BlockStem extends BlockBaseNotFull {
 	private static final EnumMap<Axis, VoxelShape> OUTLINES = Maps.newEnumMap(Axis.class);
 
 	public BlockStem(MaterialColor color) {
-		super(Materials.makeWood(color).nonOpaque());
+		super(Materials.makeWood(color).noOcclusion());
 		this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Axis.Y));
 	}
 

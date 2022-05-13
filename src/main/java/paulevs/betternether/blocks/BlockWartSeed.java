@@ -47,8 +47,8 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
 				.mapColor(MaterialColor.TERRACOTTA_RED)
 				.sounds(SoundType.WART_BLOCK)
 				.hardness(1F)
-				.nonOpaque()
-				.noCollision());
+				.noOcclusion()
+				.noCollission());
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.UP));
 	}
 

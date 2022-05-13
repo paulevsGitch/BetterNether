@@ -33,11 +33,11 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Bonemeala
 		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
+				.noOcclusion()
 				.noLootTable()
-				.breakInstantly()
-				.noCollision()
-				.ticksRandomly());
+				.instabreak()
+				.noCollission()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

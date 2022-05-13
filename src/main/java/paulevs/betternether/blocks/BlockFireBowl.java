@@ -35,7 +35,7 @@ public class BlockFireBowl extends BlockBaseNotFull {
 	public static final BooleanProperty FIRE = BlockProperties.FIRE;
 
 	public BlockFireBowl(Block source) {
-		super(FabricBlockSettings.copyOf(source).nonOpaque().lightLevel(getLuminance()));
+		super(FabricBlockSettings.copyOf(source).noOcclusion().lightLevel(getLuminance()));
 		this.registerDefaultState(getStateDefinition().any().setValue(FIRE, false));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

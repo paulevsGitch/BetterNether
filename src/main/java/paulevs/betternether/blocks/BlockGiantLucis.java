@@ -32,7 +32,7 @@ public class BlockGiantLucis extends HugeMushroomBlock implements AddMineableAxe
 				.luminance(15)
 				.sounds(SoundType.WOOD)
 				.hardness(1F)
-				.nonOpaque());
+				.noOcclusion());
 	}
 
 	@Override

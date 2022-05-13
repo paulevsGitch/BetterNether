@@ -37,10 +37,10 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
 		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_PURPLE)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
-				.ticksRandomly());
+				.noOcclusion()
+				.noCollission()
+				.instabreak()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

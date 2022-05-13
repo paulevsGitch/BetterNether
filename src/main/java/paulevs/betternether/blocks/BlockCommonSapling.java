@@ -44,11 +44,11 @@ abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements Boneme
 		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(color)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
+				.noOcclusion()
 				.noLootTable()
-				.breakInstantly()
-				.noCollision()
-				.ticksRandomly());
+				.instabreak()
+				.noCollission()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.plant = plant;
 	}

@@ -44,9 +44,9 @@ public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlo
 				.mapColor(MaterialColor.COLOR_RED)
 				.luminance(15)
 				.sounds(SoundType.CROP)
-				.noCollision()
-				.breakInstantly()
-				.nonOpaque()
+				.noCollission()
+				.instabreak()
+				.noOcclusion()
 		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);

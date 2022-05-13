@@ -43,7 +43,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull {
 	};
 
 	public BlockBrownLargeMushroom() {
-		super(Materials.makeWood(MaterialColor.COLOR_BROWN).nonOpaque());
+		super(Materials.makeWood(MaterialColor.COLOR_BROWN).noOcclusion());
 		this.setDropItself(false);
 	}
 

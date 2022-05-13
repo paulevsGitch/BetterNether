@@ -32,10 +32,10 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock,
 		super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
 				.mapColor(MaterialColor.COLOR_RED)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.breakInstantly()
-				.noCollision()
-				.ticksRandomly());
+				.noOcclusion()
+				.instabreak()
+				.noCollission()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}
 

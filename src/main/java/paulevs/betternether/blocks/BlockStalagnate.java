@@ -22,7 +22,7 @@ public class BlockStalagnate extends BlockBaseNotFull {
 	public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
 
 	public BlockStalagnate() {
-		super(Materials.makeWood(MaterialColor.TERRACOTTA_LIGHT_GREEN).nonOpaque());
+		super(Materials.makeWood(MaterialColor.TERRACOTTA_LIGHT_GREEN).noOcclusion());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.MIDDLE));
 		this.setDropItself(false);

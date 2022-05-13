@@ -48,10 +48,10 @@ public class BlockAgave extends BlockCommonPlant implements AddMineableShears, A
 				.mapColor(MaterialColor.TERRACOTTA_ORANGE)
 				.requiresTool()
 				.sounds(SoundType.WOOL)
-				.nonOpaque()
-				.noCollision()
-				.hardness(0.4F)
-				.ticksRandomly()
+				.noOcclusion()
+				.noCollission()
+				.destroyTime(0.4F)
+				.randomTicks()
 					  .offsetType(Block.OffsetType.XZ)
 		);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);

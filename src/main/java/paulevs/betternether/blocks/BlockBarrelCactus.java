@@ -42,9 +42,9 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
 				.mapColor(MaterialColor.TERRACOTTA_BLUE)
 				.requiresTool()
 				.sounds(SoundType.WOOL)
-				.nonOpaque()
-				.hardness(0.4F)
-				.ticksRandomly()
+				.noOcclusion()
+				.destroyTime(0.4F)
+				.randomTicks()
 
 				.dynamicShape()
 					  .offsetType(Block.OffsetType.XYZ)

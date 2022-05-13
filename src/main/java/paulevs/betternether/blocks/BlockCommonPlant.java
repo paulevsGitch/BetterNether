@@ -36,10 +36,10 @@ public abstract class BlockCommonPlant extends BlockBaseNotFull implements Bonem
 		super(adaptProperties.apply(FabricBlockSettings.of(Materials.NETHER_PLANT)
 								 .mapColor(color)
 								 .sounds(SoundType.CROP)
-								 .nonOpaque()
-								 .noCollision()
-								 .breakInstantly()
-								 .ticksRandomly()));
+								 .noOcclusion()
+								 .noCollission()
+								 .instabreak()
+								 .randomTicks()));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 	}

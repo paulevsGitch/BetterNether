@@ -39,10 +39,10 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
 		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_LIGHT_GREEN)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
-				.ticksRandomly());
+				.noOcclusion()
+				.noCollission()
+				.instabreak()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.setDropItself(false);
 		this.registerDefaultState(getStateDefinition().any().setValue(AGE, 0).setValue(FACING, Direction.UP));

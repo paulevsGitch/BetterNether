@@ -44,7 +44,7 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
 	private final ItemStack requiredItem;
 
 	public BlockStatueRespawner() {
-		super(FabricBlockSettings.copyOf(NetherBlocks.CINCINNASITE_BLOCK).luminance(15).nonOpaque());
+		super(FabricBlockSettings.copyOf(NetherBlocks.CINCINNASITE_BLOCK).luminance(15).noOcclusion());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false));
 		this.setDropItself(false);

@@ -145,7 +145,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
 	}
 
 	@Override
-	public float getBrightness() {
+	public float getLightLevelDependentMagicValue() {
 		return 1.0F;
 	}
 

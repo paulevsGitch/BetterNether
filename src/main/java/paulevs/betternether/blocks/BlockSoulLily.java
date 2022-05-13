@@ -58,7 +58,7 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGr
 	};
 
 	public BlockSoulLily() {
-		super(Materials.makeWood(MaterialColor.COLOR_ORANGE).nonOpaque().ticksRandomly());
+		super(Materials.makeWood(MaterialColor.COLOR_ORANGE).noOcclusion().randomTicks());
 		this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, SoulLilyShape.SMALL));
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 	}

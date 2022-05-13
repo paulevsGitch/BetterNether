@@ -35,8 +35,8 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
 		super(FabricBlockSettings.of(Material.CACTUS)
 				.mapColor(MaterialColor.TERRACOTTA_ORANGE)
 				.sounds(SoundType.WOOL)
-				.nonOpaque()
-				.ticksRandomly());
+				.noOcclusion()
+				.randomTicks());
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
 		this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
 	}

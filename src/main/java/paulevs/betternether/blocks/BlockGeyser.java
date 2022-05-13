@@ -29,7 +29,7 @@ public class BlockGeyser extends BlockBaseNotFull {
 	private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 4, 15);
 
 	public BlockGeyser() {
-		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).luminance(10).nonOpaque());
+		super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).luminance(10).noOcclusion());
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class BNPane extends IronBarsBlock implements IRenderTypeable {
 	private boolean dropSelf;
 
 	public BNPane(Block block, boolean dropSelf) {
-		super(FabricBlockSettings.copyOf(block).strength(0.3F, 0.3F).nonOpaque());
+		super(FabricBlockSettings.copyOf(block).strength(0.3F, 0.3F).noOcclusion());
 		this.dropSelf = dropSelf;
 	}
 

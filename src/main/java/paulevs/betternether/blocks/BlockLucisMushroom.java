@@ -40,7 +40,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableA
 				.requiresTool()
 				.sounds(SoundType.WOOD)
 				.hardness(1F)
-				.nonOpaque());
+				.noOcclusion());
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(SHAPE, EnumLucisShape.CORNER));
 	}
 

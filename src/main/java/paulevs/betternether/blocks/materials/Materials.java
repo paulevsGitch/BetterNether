@@ -23,8 +23,8 @@ public class Materials {
 				.allowsSpawning((state, world, pos, type) ->true)
 				.sounds(SoundType.GRASS)
 				.mapColor(color)
-				.noCollision()
-				.nonOpaque()
-				.breakInstantly();
+				.noCollission()
+				.noOcclusion()
+				.instabreak();
 	}
 }

@@ -34,9 +34,9 @@ public class BlockPottedPlant extends BlockBaseNotFull {
 		super(FabricBlockSettings.of(Materials.NETHER_PLANT)
 				.mapColor(MaterialColor.COLOR_BLACK)
 				.sounds(SoundType.CROP)
-				.nonOpaque()
-				.noCollision()
-				.breakInstantly()
+				.noOcclusion()
+				.noCollission()
+				.instabreak()
 				.lightLevel(getLuminance()));
 		this.setDropItself(false);
 		this.setRenderLayer(BNRenderLayer.CUTOUT);
