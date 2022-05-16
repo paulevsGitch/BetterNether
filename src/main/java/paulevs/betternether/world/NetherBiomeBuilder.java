@@ -101,7 +101,6 @@ public class NetherBiomeBuilder {
 		data.addCustomBuildData(builder);
 		
 		NetherBiome b = builder.build(data.getSupplier());
-		TagAPI.addBiomeTag(BiomeTags.IS_NETHER, b.getBiome());
 		return b;
 	}
 }

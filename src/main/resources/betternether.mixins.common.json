@@ -27,8 +27,7 @@
 		"BlockBehaviourPropertiesAccessor",
 		"LootTableBuilderAccessor",
 		"RecipeManagerMixin",
-		"FlatLevelGeneratorPresetsMixin",
-		"FlatLevelGeneratorPresetTagsProviderMixin"
+		"FlatLevelGeneratorPresetsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

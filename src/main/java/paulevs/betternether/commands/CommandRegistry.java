@@ -131,7 +131,7 @@ public class CommandRegistry {
         biomeIndex = (biomeIndex+1) % biomes.size();
 
         final BlockPos currentPosition = new BlockPos(source.getPosition());
-        final BlockPos biomePosition = source.getLevel().findClosestBiome3d(b -> b.equals(biome.getActualBiome()), currentPosition, MAX_SEARCH_RADIUS, SAMPLE_RESOLUTION_HORIZONTAL, SAMPLE_RESOLUTION_VERTICAL).getFirst();
+        final BlockPos biomePosition = source.getLevel().findClosestBiome3d(b -> b.equals(biome.getBiome()), currentPosition, MAX_SEARCH_RADIUS, SAMPLE_RESOLUTION_HORIZONTAL, SAMPLE_RESOLUTION_VERTICAL).getFirst();
         final String biomeName = biome.toString();
 
         if (biomePosition == null) {
@@ -158,7 +158,7 @@ public class CommandRegistry {
             ResourceOrTagLocationArgument.Result result = new ResourceOrTagLocationArgument.Result() {
                 @Override
                 public Either<ResourceKey, TagKey> unwrap() {
-                    return Either.left(biome.getActualBiome().unwrapKey().orElseThrow());
+                    return Either.left(biome.getBiomeHolder().unwrapKey().orElseThrow());
                 }
 
                 @Override
@@ -176,7 +176,7 @@ public class CommandRegistry {
                     return false;
                 }
             };
-            return LocateCommand.showLocateResult(source, result, currentPosition, new Pair<>(biomePosition, biome.getActualBiome()),
+            return LocateCommand.showLocateResult(source, result, currentPosition, new Pair<>(biomePosition, biome.getBiomeHolder()),
                     "commands.locatebiome.success", false);
         }
     }

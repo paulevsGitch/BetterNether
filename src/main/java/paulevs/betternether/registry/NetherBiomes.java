@@ -126,9 +126,6 @@ public class NetherBiomes {
 		return biome;
 	}
 
-	public static BCLBiome getBiome(WorldgenRandom random) {
-		return BiomeAPI.NETHER_BIOME_PICKER.getBiome(random);
-	}
 	public static boolean useLegacyGeneration = false;
 	private static final String TAG_GEN_VERSION = "generator_version";
 	private static final String TAG_VERSION = "version";
