@@ -16,18 +16,26 @@
 		"hidden": false
 	},
 	"criteria": {
-		"fortress": {
-			"trigger": "minecraft:location",
+		"ncity": {
 			"conditions": {
-				"location": {
-					"feature": "betternether:nether_city"
-				}
-			}
+				"player": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"location": {
+								"structure": "betternether:nether_city"
+							}
+						}
+					}
+				]
+			},
+			"trigger": "minecraft:location"
 		}
 	},
 	"requirements": [
 		[
-			"fortress"
+			"ncity"
 		]
 	]
 }
