@@ -26,16 +26,17 @@ public class NetherStructures {
     );
 
     public static void register() {
+        TagAPI.addBiomeTag(CITY_STRUCTURE.biomeTag, BiomeAPI.NETHER_WASTES_BIOME.getBiome());
         if (Configs.GENERATOR.getBoolean("generator.world.cities", "overworld", false)) {
             BiomeAPI.registerOverworldBiomeModification((biomeID, biome) -> {
                 if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
-                    modifyNonBNBiome(biomeID, biome);
+                    addNonBNBiomeTags(biomeID, biome);
                 }
             });
         }
     }
 
-    public static void modifyNonBNBiome(ResourceLocation biomeID, Holder<Biome> biome) {
+    public static void addNonBNBiomeTags(ResourceLocation biomeID, Holder<Biome> biome) {
         if (biomeID != null && !biomeID.equals(BiomeAPI.BASALT_DELTAS_BIOME.getID()) && !biomeID.equals(Biomes.THE_VOID.location())) {
             TagAPI.addBiomeTag(CITY_STRUCTURE.biomeTag, biome.value());
         }

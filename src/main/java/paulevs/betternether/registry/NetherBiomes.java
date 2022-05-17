@@ -17,9 +17,6 @@ import ru.bclib.world.generator.GeneratorOptions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
 
 public class NetherBiomes {
 	public static final List<NetherBiome> ALL_BN_BIOMES = new ArrayList<>(21);
@@ -76,7 +73,11 @@ public class NetherBiomes {
 			if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
 				NetherEntities.modifyNonBNBiome(biomeID, biome);
 				NetherFeatures.modifyNonBNBiome(biomeID, biome);
-				NetherStructures.modifyNonBNBiome(biomeID, biome);
+			}
+		});
+		BiomeAPI.onFinishingNetherBiomeTags((biomeID, biome) -> {
+			if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
+				NetherStructures.addNonBNBiomeTags(biomeID, biome);
 			}
 		});
 		
