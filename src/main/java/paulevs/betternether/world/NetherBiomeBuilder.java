@@ -9,10 +9,12 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import paulevs.betternether.BetterNether;
@@ -27,7 +29,7 @@ import ru.bclib.world.biomes.BCLBiome;
 import java.util.Random;
 
 public class NetherBiomeBuilder {
-	private static final Random RANDOM = new Random(130520221830l);
+	private static final RandomSource RANDOM = new LegacyRandomSource(130520221830l);
 	private static Biome BASE_BIOME;
 	static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
 	//(ResourceLocation randomName, VerticalAnchor trueAtAndBelow, VerticalAnchor falseAtAndAbove)
