@@ -25,10 +25,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"paulevs.betternether.BetterNether"
+          "org.betterx.betternether.BetterNether"
 		],
 		"client": [
-			"paulevs.betternether.client.BetterNetherClient"
+          "org.betterx.betternether.client.BetterNetherClient"
 		]
 	},
     "accessWidener" : "betternether.accesswidener",

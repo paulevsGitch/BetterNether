@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "paulevs.betternether.mixin.client",
+	"package": "org.betterx.betternether.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
       "BackgroundRenderMixin",
