@@ -42,6 +42,7 @@ public class ObsidianBreaker extends Enchantment {
     public static float getDestroySpeedMultiplier(BlockState state, float baseSpeed, float level) {
         if ((state.is(CommonBlockTags.NETHER_STONES)
                 || state.is(CommonBlockTags.NETHER_PORTAL_FRAME)
+                || state.is(CommonBlockTags.IS_OBSIDIAN)
                 || state.is(Blocks.OBSIDIAN)
                 || state.is(Blocks.CRYING_OBSIDIAN)
                 || state.is(NetherBlocks.BLUE_CRYING_OBSIDIAN)

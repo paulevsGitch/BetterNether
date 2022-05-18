@@ -15,6 +15,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 
+import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.bclib.api.tag.CommonItemTags;
 import org.betterx.bclib.blocks.BaseLadderBlock;
 import org.betterx.bclib.recipes.GridRecipe;
@@ -39,42 +40,12 @@ public class NetherBlocks extends BlockRegistry {
     public static final WillowMaterial MAT_WILLOW = new WillowMaterial().init();
     public static final Block WILLOW_LEAVES = registerBlock("willow_leaves",
                                                             new BlockWillowLeaves(MAT_WILLOW.getSapling()));
-
-    // Rubeus //
-    public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
-    public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves",
-                                                            new BlockRubeusLeaves(MAT_RUBEUS.getSapling()));
-
     // Reed //
     public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
-
     // Wart //
     public static final WartMaterial MAT_WART = new WartMaterial("wart",
                                                                  MaterialColor.COLOR_RED,
                                                                  MaterialColor.COLOR_RED).init();
-
-    // Mushroom Fir //
-    public static final MushroomFirMaterial MAT_MUSHROOM_FIR = new MushroomFirMaterial().init();
-
-    // Mushroom //
-    public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
-
-    // Anchor Tree
-    public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
-    public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves",
-                                                                 new BNLeaves(MAT_ANCHOR_TREE.getSapling(),
-                                                                              MaterialColor.COLOR_GREEN));
-    public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine",
-                                                                 new BlockAnchorTreeVine(),
-                                                                 org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
-
-
-    // Nether Sakura
-    public static final NetherSakuraMaterial MAT_NETHER_SAKURA = new NetherSakuraMaterial().init();
-    public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves",
-                                                                   new BlockNetherSakuraLeaves(MAT_NETHER_SAKURA.getSapling()));
-
-
     // Cincinnasite //
     public static final Block CINCINNASITE_ORE = registerBlock("cincinnasite_ore",
                                                                new BlockOre(NetherItems.CINCINNASITE,
@@ -91,6 +62,9 @@ public class NetherBlocks extends BlockRegistry {
                                                                        new BlockCincinnasite());
     public static final Block CINCINNASITE_STAIRS = registerStairs("cincinnasite_stairs", CINCINNASITE_FORGED, false);
     public static final Block CINCINNASITE_SLAB = registerSlab("cincinnasite_slab", CINCINNASITE_FORGED, false);
+    public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
+    public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
+    public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
     public static final Block CINCINNASITE_BUTTON = registerBlock("cincinnasite_button",
                                                                   new org.betterx.bclib.blocks.BaseWoodenButtonBlock(
                                                                           CINCINNASITE_FORGED));
@@ -115,7 +89,6 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block CINCINNASITE_LANTERN_SMALL = registerBlock("cincinnasite_lantern_small",
                                                                          new BlockSmallLantern());
     public static final Block CINCINNASITE_CHAIN = registerBlock("cincinnasite_chain", new BNChain());
-
     // Ruby //
     public static final Block NETHER_RUBY_ORE = registerBlock("nether_ruby_ore",
                                                               new BlockOre(NetherItems.NETHER_RUBY,
@@ -127,7 +100,6 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block NETHER_RUBY_BLOCK = registerBlock("nether_ruby_block", new BlockNetherRuby());
     public static final Block NETHER_RUBY_STAIRS = registerStairs("nether_ruby_stairs", NETHER_RUBY_BLOCK, true);
     public static final Block NETHER_RUBY_SLAB = registerSlab("nether_ruby_slab", NETHER_RUBY_BLOCK, true);
-
     // Vanilla Ores
     public static final Block NETHER_LAPIS_ORE = registerBlock("nether_lapis_ore",
                                                                new BlockOre(NetherItems.LAPIS_PILE,
@@ -137,8 +109,6 @@ public class NetherBlocks extends BlockRegistry {
                                                                             Tiers.IRON.getLevel(),
                                                                             false));
     public static final Block NETHER_REDSTONE_ORE = registerBlock("nether_redstone_ore", new RedstoneOreBlock());
-
-
     // Bricks //
     public static final Block NETHER_BRICK_TILE_LARGE = registerBlock("nether_brick_tile_large", new BNNetherBrick());
     public static final Block NETHER_BRICK_TILE_SMALL = registerBlock("nether_brick_tile_small", new BNNetherBrick());
@@ -149,7 +119,6 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block NETHER_BRICK_TILE_STAIRS = registerStairs("nether_brick_tile_stairs",
                                                                         NETHER_BRICK_TILE_SMALL,
                                                                         false);
-
     // Bone //
     public static final Block BONE_BLOCK = registerBlock("bone_block", new BNBoneBlock());
     public static final Block BONE_STAIRS = registerStairs("bone_stairs", BONE_BLOCK, false);
@@ -161,101 +130,136 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BONE_REED_DOOR = registerBlock("bone_reed_door", new BNWoodlikeDoor(BONE_BLOCK));
     public static final Block BONE_CINCINNASITE_DOOR = registerBlock("bone_cincinnasite_door",
                                                                      new BNWoodlikeDoor(BONE_BLOCK));
-
     // Quartz Glass //
     public static final Block QUARTZ_GLASS = registerBlock("quartz_glass", new BNGlass(Blocks.GLASS));
     public static final Block QUARTZ_GLASS_FRAMED = registerBlock("quartz_glass_framed",
                                                                   new BNGlass(CINCINNASITE_BLOCK));
-    public static final Block QUARTZ_GLASS_PANE = registerBlock("quartz_glass_pane", new BNPane(QUARTZ_GLASS, true));
-    public static final Block QUARTZ_GLASS_FRAMED_PANE = registerBlock("quartz_glass_framed_pane",
-                                                                       new BNPane(CINCINNASITE_BLOCK, true));
-
-    // Quartz Glass Colored //
-    public static final ColoredGlassMaterial QUARTZ_GLASS_COLORED = new ColoredGlassMaterial("quartz_glass",
-                                                                                             QUARTZ_GLASS);
     public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_COLORED = new ColoredGlassMaterial(
             "quartz_glass_framed",
             QUARTZ_GLASS_FRAMED);
+    public static final Block QUARTZ_GLASS_PANE = registerBlock("quartz_glass_pane", new BNPane(QUARTZ_GLASS, true));
     public static final ColoredGlassMaterial QUARTZ_GLASS_PANE_COLORED = new ColoredGlassMaterial("quartz_glass_pane",
                                                                                                   QUARTZ_GLASS_PANE,
                                                                                                   false);
+    public static final Block QUARTZ_GLASS_FRAMED_PANE = registerBlock("quartz_glass_framed_pane",
+                                                                       new BNPane(CINCINNASITE_BLOCK, true));
     public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_PANE_COLORED = new ColoredGlassMaterial(
             "quartz_glass_framed_pane",
             QUARTZ_GLASS_FRAMED_PANE,
             true);
-
+    // Quartz Glass Colored //
+    public static final ColoredGlassMaterial QUARTZ_GLASS_COLORED = new ColoredGlassMaterial("quartz_glass",
+                                                                                             QUARTZ_GLASS);
     // Obsidian //
     public static final Block BLUE_WEEPING_OBSIDIAN = registerBlock("blue_weeping_obsidian",
                                                                     new BlueWeepingObsidianBlock(),
-                                                                    org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block WEEPING_OBSIDIAN = registerBlock("weeping_obsidian", new VanillaWeepingObsidianBlock(),
-                                                               org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
+                                                                    CommonBlockTags.IMMOBILE,
+                                                                    CommonBlockTags.IS_OBSIDIAN);
+    public static final Block WEEPING_OBSIDIAN = registerBlock("weeping_obsidian",
+                                                               new VanillaWeepingObsidianBlock(),
+                                                               CommonBlockTags.IMMOBILE,
+                                                               CommonBlockTags.IS_OBSIDIAN);
     public static final Block BLUE_CRYING_OBSIDIAN = registerBlock("blue_crying_obsidian",
                                                                    new BlueCryingObsidianBlock(),
-                                                                   org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-
-    public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian(),
-                                                              org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                              org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs", OBSIDIAN_BRICKS, false,
-                                                                      org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab("obsidian_bricks_slab", OBSIDIAN_BRICKS, false,
-                                                                  org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile", new BNObsidian(),
-                                                            org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                            org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian(),
-                                                                  org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                                  org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs", OBSIDIAN_TILE_SMALL, false,
-                                                                    org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab", OBSIDIAN_TILE_SMALL, false,
-                                                                org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block OBSIDIAN_ROD_TILES = registerBlock("obsidian_rod_tiles", new BNObsidian(),
-                                                                 org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                                 org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass(),
-                                                             org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                             org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
+                                                                   CommonBlockTags.IMMOBILE,
+                                                                   CommonBlockTags.IS_OBSIDIAN);
+    public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks",
+                                                              new BNObsidian(),
+                                                              CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                              CommonBlockTags.IMMOBILE,
+                                                              CommonBlockTags.IS_OBSIDIAN);
+    public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs",
+                                                                      OBSIDIAN_BRICKS,
+                                                                      false,
+                                                                      CommonBlockTags.IMMOBILE,
+                                                                      CommonBlockTags.IS_OBSIDIAN);
+    public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab("obsidian_bricks_slab",
+                                                                  OBSIDIAN_BRICKS,
+                                                                  false,
+                                                                  CommonBlockTags.IMMOBILE,
+                                                                  CommonBlockTags.IS_OBSIDIAN);
+    public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile",
+                                                            new BNObsidian(),
+                                                            CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                            CommonBlockTags.IMMOBILE,
+                                                            CommonBlockTags.IS_OBSIDIAN);
+    public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small",
+                                                                  new BNObsidian(),
+                                                                  CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                                  CommonBlockTags.IMMOBILE,
+                                                                  CommonBlockTags.IS_OBSIDIAN);
+    public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs",
+                                                                    OBSIDIAN_TILE_SMALL,
+                                                                    false,
+                                                                    CommonBlockTags.IMMOBILE,
+                                                                    CommonBlockTags.IS_OBSIDIAN);
+    public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab",
+                                                                OBSIDIAN_TILE_SMALL,
+                                                                false,
+                                                                CommonBlockTags.IMMOBILE,
+                                                                CommonBlockTags.IS_OBSIDIAN);
+    public static final Block OBSIDIAN_ROD_TILES = registerBlock("obsidian_rod_tiles",
+                                                                 new BNObsidian(),
+                                                                 CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                                 CommonBlockTags.IMMOBILE,
+                                                                 CommonBlockTags.IS_OBSIDIAN);
+    public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass",
+                                                             new BlockObsidianGlass(),
+                                                             CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                             CommonBlockTags.IMMOBILE);
     public static final Block OBSIDIAN_GLASS_PANE = registerBlock("obsidian_glass_pane",
                                                                   new BNPane(OBSIDIAN_GLASS, true));
-    public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian(BLUE_CRYING_OBSIDIAN),
-                                                            org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                            org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks", new BNObsidian(),
-                                                                   org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                                   org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
+    public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian",
+                                                            new BNObsidian(BLUE_CRYING_OBSIDIAN),
+                                                            CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                            CommonBlockTags.IMMOBILE,
+                                                            CommonBlockTags.IS_OBSIDIAN);
+    public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks",
+                                                                   new BNObsidian(),
+                                                                   CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                                   CommonBlockTags.IMMOBILE,
+                                                                   CommonBlockTags.IS_OBSIDIAN);
     public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs("blue_obsidian_bricks_stairs",
                                                                            BLUE_OBSIDIAN_BRICKS,
                                                                            false,
-                                                                           org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
+                                                                           CommonBlockTags.IMMOBILE,
+                                                                           CommonBlockTags.IS_OBSIDIAN);
     public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab("blue_obsidian_bricks_slab",
                                                                        BLUE_OBSIDIAN_BRICKS,
                                                                        false,
-                                                                       org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile", new BNObsidian(),
-                                                                 org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                                 org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian(),
-                                                                       org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                                       org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
+                                                                       CommonBlockTags.IMMOBILE,
+                                                                       CommonBlockTags.IS_OBSIDIAN);
+    public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile",
+                                                                 new BNObsidian(),
+                                                                 CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                                 CommonBlockTags.IMMOBILE,
+                                                                 CommonBlockTags.IS_OBSIDIAN);
+    public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small",
+                                                                       new BNObsidian(),
+                                                                       CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                                       CommonBlockTags.IMMOBILE,
+                                                                       CommonBlockTags.IS_OBSIDIAN);
     public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs("blue_obsidian_tile_stairs",
                                                                          BLUE_OBSIDIAN_TILE_SMALL,
                                                                          false,
-                                                                         org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
+                                                                         CommonBlockTags.IMMOBILE,
+                                                                         CommonBlockTags.IS_OBSIDIAN);
     public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab",
                                                                      BLUE_OBSIDIAN_TILE_SMALL,
                                                                      false,
-                                                                     org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlock("blue_obsidian_rod_tiles", new BNObsidian(),
-                                                                      org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                                      org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
-    public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass(),
-                                                                  org.betterx.bclib.api.tag.CommonBlockTags.NETHER_PORTAL_FRAME,
-                                                                  org.betterx.bclib.api.tag.CommonBlockTags.IMMOBILE);
+                                                                     CommonBlockTags.IMMOBILE,
+                                                                     CommonBlockTags.IS_OBSIDIAN);
+    public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlock("blue_obsidian_rod_tiles",
+                                                                      new BNObsidian(),
+                                                                      CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                                      CommonBlockTags.IMMOBILE,
+                                                                      CommonBlockTags.IS_OBSIDIAN);
+    public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass",
+                                                                  new BlockObsidianGlass(),
+                                                                  CommonBlockTags.NETHER_PORTAL_FRAME,
+                                                                  CommonBlockTags.IMMOBILE);
     public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane",
                                                                        new BNPane(BLUE_OBSIDIAN_GLASS, true));
-
     // Soul Sandstone //
     public static final Block SOUL_SANDSTONE = registerMakeable2X2Soul("soul_sandstone",
                                                                        new BlockSoulSandstone(),
@@ -265,6 +269,15 @@ public class NetherBlocks extends BlockRegistry {
                                                                            new BlockSoulSandstone(),
                                                                            "soul_sandstone",
                                                                            SOUL_SANDSTONE);
+    public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs("soul_sandstone_cut_stairs",
+                                                                         SOUL_SANDSTONE_CUT,
+                                                                         false,
+                                                                         org.betterx.bclib.api.tag.NamedBlockTags.SOUL_SPEED_BLOCKS,
+                                                                         org.betterx.bclib.api.tag.NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
+    public static final Block SOUL_SANDSTONE_CUT_SLAB = registerSlab("soul_sandstone_cut_slab",
+                                                                     SOUL_SANDSTONE_CUT,
+                                                                     false);
+    public static final Block SOUL_SANDSTONE_WALL = registerWall("soul_sandstone_wall", SOUL_SANDSTONE_CUT);
     public static final Block SOUL_SANDSTONE_SMOOTH = registerSoulBlock("soul_sandstone_smooth",
                                                                         new BlockBase(FabricBlockSettings.copyOf(Blocks.SANDSTONE)));
     public static final Block SOUL_SANDSTONE_CHISELED = registerMakeable2X2Soul("soul_sandstone_chiseled",
@@ -272,33 +285,20 @@ public class NetherBlocks extends BlockRegistry {
                                                                                         Blocks.SANDSTONE)),
                                                                                 "soul_sandstone",
                                                                                 SOUL_SANDSTONE_SMOOTH);
-
     public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs",
                                                                      SOUL_SANDSTONE,
                                                                      false,
                                                                      org.betterx.bclib.api.tag.NamedBlockTags.SOUL_SPEED_BLOCKS,
                                                                      org.betterx.bclib.api.tag.NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
-    public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs("soul_sandstone_cut_stairs",
-                                                                         SOUL_SANDSTONE_CUT,
-                                                                         false,
-                                                                         org.betterx.bclib.api.tag.NamedBlockTags.SOUL_SPEED_BLOCKS,
-                                                                         org.betterx.bclib.api.tag.NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
     public static final Block SOUL_SANDSTONE_SMOOTH_STAIRS = registerStairs("soul_sandstone_smooth_stairs",
                                                                             SOUL_SANDSTONE_SMOOTH,
                                                                             false,
                                                                             org.betterx.bclib.api.tag.NamedBlockTags.SOUL_SPEED_BLOCKS,
                                                                             org.betterx.bclib.api.tag.NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
-
     public static final Block SOUL_SANDSTONE_SLAB = registerSlab("soul_sandstone_slab", SOUL_SANDSTONE, false);
-    public static final Block SOUL_SANDSTONE_CUT_SLAB = registerSlab("soul_sandstone_cut_slab",
-                                                                     SOUL_SANDSTONE_CUT,
-                                                                     false);
     public static final Block SOUL_SANDSTONE_SMOOTH_SLAB = registerSlab("soul_sandstone_smooth_slab",
                                                                         SOUL_SANDSTONE_SMOOTH,
                                                                         false);
-
-    public static final Block SOUL_SANDSTONE_WALL = registerWall("soul_sandstone_wall", SOUL_SANDSTONE_CUT);
-
     // Basalt Bricks //
     public static final Block BASALT_BRICKS = registerMakeable2X2("basalt_bricks",
                                                                   new BlockBase(FabricBlockSettings.copyOf(Blocks.BASALT)),
@@ -308,41 +308,16 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS, false);
     public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
     public static final Block BASALT_SLAB = registerSlab("basalt_slab", Blocks.BASALT, false);
-
-    // Soul lily //
-    public static final Block SOUL_LILY = registerBlockNI("soul_lily", new BlockSoulLily());
     public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", new BlockSoulLilySapling());
-
-    // Large & Small Mushrooms //
-    public static final Block RED_LARGE_MUSHROOM = registerBlockNI("red_large_mushroom", new BlockRedLargeMushroom());
-    public static final Block BROWN_LARGE_MUSHROOM = registerBlockNI("brown_large_mushroom",
-                                                                     new BlockBrownLargeMushroom());
     public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", new BlockOrangeMushroom());
     public static final Block RED_MOLD = registerBlock("red_mold", new BlockRedMold());
     public static final Block GRAY_MOLD = registerBlock("gray_mold", new BlockGrayMold());
-
-    // Lucis //
-    public static final Block LUCIS_MUSHROOM = registerBlockNI("lucis_mushroom", new BlockLucisMushroom());
     public static final Block LUCIS_SPORE = registerBlock("lucis_spore", new BlockLucisSpore());
     public static final Block GIANT_LUCIS = registerBlock("giant_lucis", new BlockGiantLucis());
-
-    // Giant Mold //
-    public static final Block GIANT_MOLD = registerBlockNI("giant_mold", new BlockGiantMold());
     public static final Block GIANT_MOLD_SAPLING = registerBlock("giant_mold_sapling", new BlockGiantMoldSapling());
-
-    public static final Block JELLYFISH_MUSHROOM = registerBlockNI("jellyfish_mushroom", new BlockJellyfishMushroom());
     public static final Block JELLYFISH_MUSHROOM_SAPLING = registerBlock("jellyfish_mushroom_sapling",
                                                                          new BlockJellyfishMushroomSapling());
-
-
-    // Eyes //
-    public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
-    public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
-    public static final Block EYE_VINE = registerBlockNI("eye_vine",
-                                                         new BlockEyeVine(),
-                                                         org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
     public static final Block EYE_SEED = registerBlock("eye_seed", new BlockEyeSeed());
-
     // Grass //
     public static final Block NETHER_GRASS = registerBlock("nether_grass", new BlockNetherGrass());
     public static final Block SWAMP_GRASS = registerBlock("swamp_grass", new BlockNetherGrass());
@@ -350,7 +325,6 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block JUNGLE_PLANT = registerBlock("jungle_plant", new BlockNetherGrass());
     public static final Block BONE_GRASS = registerBlock("bone_grass", new BlockNetherGrass());
     public static final Block SEPIA_BONE_GRASS = registerBlock("sepia_bone_grass", new BlockNetherGrass());
-
     // Vines //
     public static final Block BLACK_VINE = registerBlock("black_vine",
                                                          new BlockBlackVine(),
@@ -363,21 +337,15 @@ public class NetherBlocks extends BlockRegistry {
                                                           org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
     public static final Block LUMABUS_SEED = registerBlock("lumabus_seed",
                                                            new BlockLumabusSeed(new StructureLumabusVine()));
-    public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine(LUMABUS_SEED));
     public static final Block GOLDEN_LUMABUS_SEED = registerBlock("golden_lumabus_seed",
                                                                   new BlockLumabusSeed(new StructureGoldenLumabusVine()));
-    public static final Block GOLDEN_LUMABUS_VINE = registerBlockNI("golden_lumabus_vine",
-                                                                    new BlockLumabusVine(GOLDEN_LUMABUS_SEED));
-
     // Small Plants
     public static final Block SOUL_VEIN = registerBlock("soul_vein", new BlockSoulVein());
     public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", new BlockBoneMushroom());
     public static final Block BLACK_BUSH = registerBlock("black_bush", new BlockBlackBush());
-    public static final Block INK_BUSH = registerBlockNI("ink_bush", new BlockInkBush());
     public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", new BlockInkBushSeed());
     public static final Block SMOKER = registerBlock("smoker", new BlockSmoker());
     public static final Block EGG_PLANT = registerBlock("egg_plant", new BlockEggPlant());
-    public static final Block BLACK_APPLE = registerBlockNI("black_apple", new BlockBlackApple());
     public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", new BlockBlackAppleSeed());
     public static final Block MAGMA_FLOWER = registerBlock("magma_flower", new BlockMagmaFlower());
     public static final Block FEATHER_FERN = registerBlock("feather_fern", new BlockFeatherFern());
@@ -389,12 +357,10 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block WHISPERING_GOURD = registerBlock("whispering_gourd", new BlockWhisperingGourd());
     public static final Block WHISPERING_GOURD_LANTERN = registerBlock("whispering_gourd_lantern",
                                                                        new BlockWhisperingGourdLantern());
-
     // Cactuses //
     public static final Block AGAVE = registerBlock("agave", new BlockAgave());
     public static final Block BARREL_CACTUS = registerBlock("barrel_cactus", new BlockBarrelCactus());
     public static final Block NETHER_CACTUS = registerBlock("nether_cactus", new BlockNetherCactus());
-
     // Wall plants
     public static final Block WALL_MOSS = registerBlock("wall_moss", new BlockPlantWall(MaterialColor.COLOR_RED));
     public static final Block WALL_MUSHROOM_BROWN = registerBlock("wall_mushroom_brown",
@@ -403,20 +369,16 @@ public class NetherBlocks extends BlockRegistry {
                                                                 new BlockPlantWall(MaterialColor.COLOR_RED));
     public static final Block JUNGLE_MOSS = registerBlock("jungle_moss",
                                                           new BlockPlantWall(MaterialColor.COLOR_LIGHT_GREEN));
-
     // Decorations //
     public static final Block PIG_STATUE_RESPAWNER = registerBlock("pig_statue_respawner", new BlockStatueRespawner());
     public static final Block CINCINNASITE_POT = registerBlock("cincinnasite_pot", new BlockBNPot(CINCINNASITE_BLOCK));
     public static final Block BRICK_POT = registerBlock("brick_pot", new BlockBNPot(Blocks.NETHER_BRICKS));
-    public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
     public static final Block GEYSER = registerBlock("geyser", new BlockGeyser());
     public static final Block NETHERRACK_STALACTITE = registerStalactite("netherrack_stalactite", Blocks.NETHERRACK);
     public static final Block GLOWSTONE_STALACTITE = registerStalactite("glowstone_stalactite", Blocks.GLOWSTONE);
     public static final Block BLACKSTONE_STALACTITE = registerStalactite("blackstone_stalactite", Blocks.BLACKSTONE);
     public static final Block BASALT_STALACTITE = registerStalactite("basalt_stalactite", Blocks.BASALT);
     public static final Block BONE_STALACTITE = registerStalactite("bone_stalactite", BONE_BLOCK);
-
-
     // Fire Bowls
     public static final Block CINCINNASITE_FIRE_BOWL = registerFireBowl("cincinnasite_fire_bowl",
                                                                         CINCINNASITE_FORGED,
@@ -430,7 +392,6 @@ public class NetherBlocks extends BlockRegistry {
                                                                      Blocks.NETHERITE_BLOCK,
                                                                      Blocks.NETHERRACK,
                                                                      Items.NETHERITE_INGOT);
-
     public static final Block CINCINNASITE_FIRE_BOWL_SOUL = registerFireBowl("cincinnasite_fire_bowl_soul",
                                                                              CINCINNASITE_FORGED,
                                                                              Blocks.SOUL_SAND,
@@ -443,13 +404,12 @@ public class NetherBlocks extends BlockRegistry {
                                                                           Blocks.NETHERITE_BLOCK,
                                                                           Blocks.SOUL_SAND,
                                                                           Items.NETHERITE_INGOT);
-
     // Terrain //
     public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
     public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium",
                                                               new BlockNetherMycelium(),
                                                               org.betterx.bclib.api.tag.NamedBlockTags.NYLIUM,
-                                                              org.betterx.bclib.api.tag.CommonBlockTags.NETHER_MYCELIUM);
+                                                              CommonBlockTags.NETHER_MYCELIUM);
     public static final Block JUNGLE_GRASS = registerBlock("jungle_grass",
                                                            new BlockTerrain(),
                                                            org.betterx.bclib.api.tag.NamedBlockTags.NYLIUM);
@@ -459,9 +419,6 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass",
                                                                    new BlockTerrain(),
                                                                    org.betterx.bclib.api.tag.NamedBlockTags.NYLIUM);
-    public static final Block VEINED_SAND = registerBlockNI("veined_sand",
-                                                            new BlockVeinedSand(),
-                                                            NetherTags.NETHER_SAND_LOCATION);
     public static final Block FARMLAND = registerBlock("farmland",
                                                        new BlockFarmland(),
                                                        NetherTags.NETHER_FARMLAND_LOCATION);
@@ -469,7 +426,6 @@ public class NetherBlocks extends BlockRegistry {
                                                               new BlockTerrain(),
                                                               org.betterx.bclib.api.tag.NamedBlockTags.NYLIUM);
     public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
-
     // Roofs //
     public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS);
     public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerStairs("roof_tile_nether_bricks_stairs",
@@ -485,8 +441,6 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block ROOF_TILE_CINCINNASITE_SLAB = registerSlab("roof_tile_cincinnasite_slab",
                                                                          ROOF_TILE_CINCINNASITE,
                                                                          false);
-
-
     // Craft Stations //
     public static final Block BLACKSTONE_FURNACE = registerFurnace("blackstone_furnace", Blocks.BLACKSTONE);
     public static final Block BASALT_FURNACE = registerFurnace("basalt_furnace", Blocks.BASALT);
@@ -496,25 +450,18 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil",
                                                                  new BlockCincinnasiteAnvil(),
                                                                  org.betterx.bclib.api.tag.NamedBlockTags.ANVIL);
-
     public static final Block CRAFTING_TABLE_CRIMSON = registerCraftingTable("crafting_table_crimson",
                                                                              Blocks.CRIMSON_PLANKS);
     public static final Block CRAFTING_TABLE_WARPED = registerCraftingTable("crafting_table_warped",
                                                                             Blocks.WARPED_PLANKS);
-
-
     // Storage
     public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
-
     public static final Block CHEST_CRIMSON = registerChest("crimson_chest", Blocks.CRIMSON_PLANKS);
     public static final Block CHEST_WARPED = registerChest("warped_chest", Blocks.WARPED_PLANKS);
-
     public static final Block BARREL_CRIMSON = registerBarrel("crimson_barrel",
                                                               Blocks.CRIMSON_PLANKS,
                                                               Blocks.CRIMSON_SLAB);
     public static final Block BARREL_WARPED = registerBarrel("warped_barrel", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB);
-
-
     // Taburets //
     public static final Block TABURET_OAK = registerTaburet("oak_taburet", Blocks.OAK_SLAB);
     public static final Block TABURET_SPRUCE = registerTaburet("spruce_taburet", Blocks.SPRUCE_SLAB);
@@ -524,10 +471,6 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block TABURET_DARK_OAK = registerTaburet("dark_oak_taburet", Blocks.DARK_OAK_SLAB);
     public static final Block TABURET_CRIMSON = registerTaburet("crimson_taburet", Blocks.CRIMSON_SLAB);
     public static final Block TABURET_WARPED = registerTaburet("warped_taburet", Blocks.WARPED_SLAB);
-
-    public static final Block TABURET_CINCINNASITE = registerTaburet("taburet_cincinnasite", CINCINNASITE_SLAB);
-
-
     // Chairs
     public static final Block CHAIR_OAK = registerChair("oak_chair", Blocks.OAK_SLAB);
     public static final Block CHAIR_SPRUCE = registerChair("spruce_chair", Blocks.SPRUCE_SLAB);
@@ -537,9 +480,6 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block CHAIR_DARK_OAK = registerChair("dark_oak_chair", Blocks.DARK_OAK_SLAB);
     public static final Block CHAIR_CRIMSON = registerChair("crimson_chair", Blocks.CRIMSON_SLAB);
     public static final Block CHAIR_WARPED = registerChair("warped_chair", Blocks.WARPED_SLAB);
-
-    public static final Block CHAIR_CINCINNASITE = registerChair("chair_cincinnasite", CINCINNASITE_SLAB);
-
     // Stools //
     public static final Block BAR_STOOL_OAK = registerBarStool("oak_bar_stool", Blocks.OAK_SLAB);
     public static final Block BAR_STOOL_SPRUCE = registerBarStool("spruce_bar_stool", Blocks.SPRUCE_SLAB);
@@ -549,19 +489,60 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BAR_STOOL_DARK_OAK = registerBarStool("dark_oak_bar_stool", Blocks.DARK_OAK_SLAB);
     public static final Block BAR_STOOL_CRIMSON = registerBarStool("crimson_bar_stool", Blocks.CRIMSON_SLAB);
     public static final Block BAR_STOOL_WARPED = registerBarStool("warped_bar_stool", Blocks.WARPED_SLAB);
-
-    public static final Block BAR_STOOL_CINCINNASITE = registerBarStool("bar_stool_cincinnasite", CINCINNASITE_SLAB);
-
     // Ladders //
     public static final Block CRIMSON_LADDER = registerLadder("crimson_ladder", Blocks.CRIMSON_PLANKS);
     public static final Block WARPED_LADDER = registerLadder("warped_ladder", Blocks.WARPED_PLANKS);
-
+    private static BlockRegistry BLOCKS_REGISTRY;
+    // Rubeus //
+    public static final RubeusMaterial MAT_RUBEUS = new RubeusMaterial().init();
+    public static final Block RUBEUS_LEAVES = registerBlock("rubeus_leaves",
+                                                            new BlockRubeusLeaves(MAT_RUBEUS.getSapling()));
+    // Mushroom Fir //
+    public static final MushroomFirMaterial MAT_MUSHROOM_FIR = new MushroomFirMaterial().init();
+    // Mushroom //
+    public static final NetherMushroomMaterial MAT_NETHER_MUSHROOM = new NetherMushroomMaterial().init();
+    // Anchor Tree
+    public static final AnchorTreeMaterial MAT_ANCHOR_TREE = new AnchorTreeMaterial().init();
+    public static final Block ANCHOR_TREE_LEAVES = registerBlock("anchor_tree_leaves",
+                                                                 new BNLeaves(MAT_ANCHOR_TREE.getSapling(),
+                                                                              MaterialColor.COLOR_GREEN));
+    public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine",
+                                                                 new BlockAnchorTreeVine(),
+                                                                 org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
+    // Nether Sakura
+    public static final NetherSakuraMaterial MAT_NETHER_SAKURA = new NetherSakuraMaterial().init();
+    public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves",
+                                                                   new BlockNetherSakuraLeaves(MAT_NETHER_SAKURA.getSapling()));
+    // Soul lily //
+    public static final Block SOUL_LILY = registerBlockNI("soul_lily", new BlockSoulLily());
+    // Large & Small Mushrooms //
+    public static final Block RED_LARGE_MUSHROOM = registerBlockNI("red_large_mushroom", new BlockRedLargeMushroom());
+    public static final Block BROWN_LARGE_MUSHROOM = registerBlockNI("brown_large_mushroom",
+                                                                     new BlockBrownLargeMushroom());
+    // Lucis //
+    public static final Block LUCIS_MUSHROOM = registerBlockNI("lucis_mushroom", new BlockLucisMushroom());
+    // Giant Mold //
+    public static final Block GIANT_MOLD = registerBlockNI("giant_mold", new BlockGiantMold());
+    public static final Block JELLYFISH_MUSHROOM = registerBlockNI("jellyfish_mushroom", new BlockJellyfishMushroom());
+    // Eyes //
+    public static final Block EYEBALL = registerBlockNI("eyeball", new BlockEyeball());
+    public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
+    public static final Block EYE_VINE = registerBlockNI("eye_vine",
+                                                         new BlockEyeVine(),
+                                                         org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
+    public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine(LUMABUS_SEED));
+    public static final Block GOLDEN_LUMABUS_VINE = registerBlockNI("golden_lumabus_vine",
+                                                                    new BlockLumabusVine(GOLDEN_LUMABUS_SEED));
+    public static final Block INK_BUSH = registerBlockNI("ink_bush", new BlockInkBush());
+    public static final Block BLACK_APPLE = registerBlockNI("black_apple", new BlockBlackApple());
+    public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
+    public static final Block VEINED_SAND = registerBlockNI("veined_sand",
+                                                            new BlockVeinedSand(),
+                                                            NetherTags.NETHER_SAND_LOCATION);
 
     protected NetherBlocks(CreativeModeTab creativeTab) {
         super(creativeTab, Configs.BLOCKS);
     }
-
-    private static BlockRegistry BLOCKS_REGISTRY;
 
     @NotNull
     public static BlockRegistry getBlockRegistry() {
@@ -615,9 +596,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     private static void addFuel(Block source, Block result) {
-        if (source.defaultBlockState()
-                  .getMaterial()
-                  .isFlammable()) {
+        if (source.defaultBlockState().getMaterial().isFlammable()) {
             FuelRegistry.INSTANCE.add(result, 40);
         }
     }
@@ -727,7 +706,7 @@ public class NetherBlocks extends BlockRegistry {
         Block block = new org.betterx.bclib.blocks.BaseCraftingTableBlock(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            org.betterx.bclib.api.tag.TagAPI.addBlockTags(block, org.betterx.bclib.api.tag.CommonBlockTags.WORKBENCHES);
+            org.betterx.bclib.api.tag.TagAPI.addBlockTags(block, CommonBlockTags.WORKBENCHES);
             org.betterx.bclib.api.tag.TagAPI.addItemTags(block, org.betterx.bclib.api.tag.CommonItemTags.WORKBENCHES);
 
             GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
@@ -737,8 +716,7 @@ public class NetherBlocks extends BlockRegistry {
                       .setGroup("nether" + "_tables")
                       .build();
 
-            FlammableBlockRegistry.getDefaultInstance()
-                                  .add(block, 5, 20);
+            FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
         }
 
         return block;
@@ -748,7 +726,7 @@ public class NetherBlocks extends BlockRegistry {
         Block chest = new org.betterx.bclib.blocks.BaseChestBlock(planks);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, chest);
-            org.betterx.bclib.api.tag.TagAPI.addBlockTags(chest, org.betterx.bclib.api.tag.CommonBlockTags.CHEST);
+            org.betterx.bclib.api.tag.TagAPI.addBlockTags(chest, CommonBlockTags.CHEST);
             org.betterx.bclib.api.tag.TagAPI.addItemTags(chest, CommonItemTags.CHEST);
             addFuel(planks, chest);
             //RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
@@ -759,8 +737,7 @@ public class NetherBlocks extends BlockRegistry {
                       .setGroup("nether" + "_chests")
                       .build();
 
-            FlammableBlockRegistry.getDefaultInstance()
-                                  .add(chest, 5, 20);
+            FlammableBlockRegistry.getDefaultInstance().add(chest, 5, 20);
         }
 
         return chest;
@@ -780,8 +757,7 @@ public class NetherBlocks extends BlockRegistry {
                       .setGroup("nether" + "_barrels")
                       .build();
 
-            FlammableBlockRegistry.getDefaultInstance()
-                                  .add(block, 5, 20);
+            FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
         }
 
         return block;
@@ -804,8 +780,7 @@ public class NetherBlocks extends BlockRegistry {
                       .addMaterial('I', Items.STICK)
                       .setGroup("nether" + "_ladders")
                       .build();
-            FlammableBlockRegistry.getDefaultInstance()
-                                  .add(block, 5, 20);
+            FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
         }
 
         return block;
