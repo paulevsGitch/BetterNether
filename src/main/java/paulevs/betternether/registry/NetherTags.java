@@ -22,16 +22,16 @@ public class NetherTags {
 //	public static final Tag<Block> SOUL_GROUND_BLOCK = TagAPI.makeCommonBlockTag( "soul_ground");
 //	public static final Tag<Block> NETHERRACK = TagAPI.makeCommonBlockTag("netherrack");
 //	public static final Tag<Block> MYCELIUM = TagAPI.makeCommonBlockTag("nether_mycelium");
-	//public static final TagAPI.TagLocation<Block> NYLIUM = TagAPI.BLOCK_NYLIUM;
+	//public static final TagAPI.TagKey<Block> NYLIUM = TagAPI.BLOCK_NYLIUM;
 
 	public static final TagKey<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
 
 	public static final TagKey<Block> NETHER_FARMLAND = TagAPI.makeCommonBlockTag("nether_farmland");
-	public static final TagAPI.TagLocation<Block> NETHER_FARMLAND_LOCATION = new TagAPI.TagLocation<>("c", "nether_farmland");
+	public static final TagKey<Block> NETHER_FARMLAND_LOCATION = TagAPI.makeCommonBlockTag("nether_farmland");
 
 
 	public static final TagKey<Block> NETHER_SAND = TagAPI.makeCommonBlockTag("nether_sand");
-	public static final TagAPI.TagLocation<Block> NETHER_SAND_LOCATION = new TagAPI.TagLocation<>("c", "nether_sand");
+	public static final TagKey<Block> NETHER_SAND_LOCATION = TagAPI.makeCommonBlockTag("nether_sand");
 
 	public static void register() {
 		TagAPI.addBlockTag(NETHER_SAND_LOCATION, Blocks.SOUL_SAND);

@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -21,11 +22,8 @@ import paulevs.betternether.recipes.RecipesHelper;
 import paulevs.betternether.tab.CreativeTabs;
 import paulevs.betternether.world.structures.plants.StructureGoldenLumabusVine;
 import paulevs.betternether.world.structures.plants.StructureLumabusVine;
-import ru.bclib.api.tag.NamedBlockTags;
-import ru.bclib.api.tag.NamedCommonBlockTags;
-import ru.bclib.api.tag.NamedCommonItemTags;
-import ru.bclib.api.tag.TagAPI;
-import ru.bclib.api.tag.TagAPI.TagLocation;
+import ru.bclib.api.tag.*;
+
 import ru.bclib.blocks.*;
 import ru.bclib.recipes.GridRecipe;
 import ru.bclib.registry.BlockRegistry;
@@ -132,30 +130,63 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	public static final ColoredGlassMaterial QUARTZ_GLASS_FRAMED_PANE_COLORED = new ColoredGlassMaterial("quartz_glass_framed_pane", QUARTZ_GLASS_FRAMED_PANE, true);
 	
 	// Obsidian //
-	public static final Block BLUE_WEEPING_OBSIDIAN = registerBlock("blue_weeping_obsidian", new BlueWeepingObsidianBlock(), NamedCommonBlockTags.IMMOBILE);
-	public static final Block WEEPING_OBSIDIAN = registerBlock("weeping_obsidian", new VanillaWeepingObsidianBlock(),  NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_CRYING_OBSIDIAN = registerBlock("blue_crying_obsidian", new BlueCryingObsidianBlock(),  NamedCommonBlockTags.IMMOBILE);
+	public static final Block BLUE_WEEPING_OBSIDIAN = registerBlock("blue_weeping_obsidian", new BlueWeepingObsidianBlock(),
+																	CommonBlockTags.IMMOBILE);
+	public static final Block WEEPING_OBSIDIAN = registerBlock("weeping_obsidian", new VanillaWeepingObsidianBlock(),
+															   CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_CRYING_OBSIDIAN = registerBlock("blue_crying_obsidian", new BlueCryingObsidianBlock(),
+																   CommonBlockTags.IMMOBILE);
 	
-	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
-	public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs", OBSIDIAN_BRICKS, false, NamedCommonBlockTags.IMMOBILE);
-	public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab("obsidian_bricks_slab", OBSIDIAN_BRICKS, false, NamedCommonBlockTags.IMMOBILE);
-	public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile", new BNObsidian(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
-	public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
-	public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs", OBSIDIAN_TILE_SMALL, false, NamedCommonBlockTags.IMMOBILE);
-	public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab", OBSIDIAN_TILE_SMALL, false, NamedCommonBlockTags.IMMOBILE);
-	public static final Block OBSIDIAN_ROD_TILES = registerBlock("obsidian_rod_tiles", new BNObsidian(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
-	public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
+	public static final Block OBSIDIAN_BRICKS = registerBlock("obsidian_bricks", new BNObsidian(),
+															  CommonBlockTags.NETHER_PORTAL_FRAME,
+															  CommonBlockTags.IMMOBILE);
+	public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs("obsidian_bricks_stairs", OBSIDIAN_BRICKS, false,
+																	  CommonBlockTags.IMMOBILE);
+	public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab("obsidian_bricks_slab", OBSIDIAN_BRICKS, false,
+																  CommonBlockTags.IMMOBILE);
+	public static final Block OBSIDIAN_TILE = registerBlock("obsidian_tile", new BNObsidian(),
+															CommonBlockTags.NETHER_PORTAL_FRAME,
+															CommonBlockTags.IMMOBILE);
+	public static final Block OBSIDIAN_TILE_SMALL = registerBlock("obsidian_tile_small", new BNObsidian(),
+																  CommonBlockTags.NETHER_PORTAL_FRAME,
+																  CommonBlockTags.IMMOBILE);
+	public static final Block OBSIDIAN_TILE_STAIRS = registerStairs("obsidian_tile_stairs", OBSIDIAN_TILE_SMALL, false,
+																	CommonBlockTags.IMMOBILE);
+	public static final Block OBSIDIAN_TILE_SLAB = registerSlab("obsidian_tile_slab", OBSIDIAN_TILE_SMALL, false,
+																CommonBlockTags.IMMOBILE);
+	public static final Block OBSIDIAN_ROD_TILES = registerBlock("obsidian_rod_tiles", new BNObsidian(),
+																 CommonBlockTags.NETHER_PORTAL_FRAME,
+																 CommonBlockTags.IMMOBILE);
+	public static final Block OBSIDIAN_GLASS = registerBlock("obsidian_glass", new BlockObsidianGlass(),
+															 CommonBlockTags.NETHER_PORTAL_FRAME,
+															 CommonBlockTags.IMMOBILE);
 	public static final Block OBSIDIAN_GLASS_PANE = registerBlock("obsidian_glass_pane", new BNPane(OBSIDIAN_GLASS, true));
-	public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian(BLUE_CRYING_OBSIDIAN), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks", new BNObsidian(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs("blue_obsidian_bricks_stairs", BLUE_OBSIDIAN_BRICKS, false, NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab("blue_obsidian_bricks_slab", BLUE_OBSIDIAN_BRICKS, false, NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile", new BNObsidian(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs("blue_obsidian_tile_stairs", BLUE_OBSIDIAN_TILE_SMALL, false, NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL, false, NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlock("blue_obsidian_rod_tiles", new BNObsidian(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
-	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass(), NamedCommonBlockTags.NETHER_PORTAL_FRAME,  NamedCommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN = registerBlock("blue_obsidian", new BNObsidian(BLUE_CRYING_OBSIDIAN),
+															CommonBlockTags.NETHER_PORTAL_FRAME,
+															CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock("blue_obsidian_bricks", new BNObsidian(),
+																   CommonBlockTags.NETHER_PORTAL_FRAME,
+																   CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs("blue_obsidian_bricks_stairs", BLUE_OBSIDIAN_BRICKS, false,
+																		   CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab("blue_obsidian_bricks_slab", BLUE_OBSIDIAN_BRICKS, false,
+																	   CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_TILE = registerBlock("blue_obsidian_tile", new BNObsidian(),
+																 CommonBlockTags.NETHER_PORTAL_FRAME,
+																 CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock("blue_obsidian_tile_small", new BNObsidian(),
+																	   CommonBlockTags.NETHER_PORTAL_FRAME,
+																	   CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs("blue_obsidian_tile_stairs", BLUE_OBSIDIAN_TILE_SMALL, false,
+																		 CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab("blue_obsidian_tile_slab", BLUE_OBSIDIAN_TILE_SMALL, false,
+																	 CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlock("blue_obsidian_rod_tiles", new BNObsidian(),
+																	  CommonBlockTags.NETHER_PORTAL_FRAME,
+																	  CommonBlockTags.IMMOBILE);
+	public static final Block BLUE_OBSIDIAN_GLASS = registerBlock("blue_obsidian_glass", new BlockObsidianGlass(),
+																  CommonBlockTags.NETHER_PORTAL_FRAME,
+																  CommonBlockTags.IMMOBILE);
 	public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock("blue_obsidian_glass_pane", new BNPane(BLUE_OBSIDIAN_GLASS, true));
 	
 	// Soul Sandstone //
@@ -282,7 +313,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 	
 	// Terrain //
 	public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
-	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium(), NamedBlockTags.NYLIUM, NamedCommonBlockTags.NETHER_MYCELIUM);
+	public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium", new BlockNetherMycelium(), NamedBlockTags.NYLIUM,
+															  CommonBlockTags.NETHER_MYCELIUM);
 	public static final Block JUNGLE_GRASS = registerBlock("jungle_grass", new BlockTerrain(), NamedBlockTags.NYLIUM);
 	public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass", new BlockTerrain(), NamedBlockTags.NYLIUM);
 	public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass", new BlockTerrain(), NamedBlockTags.NYLIUM);
@@ -386,7 +418,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return BlockRegistry.getModBlockItems(BetterNether.MOD_ID);
 	}
 	
-	public static Block registerBlock(String name, Block block, TagLocation<Block>... tags) {
+	public static Block registerBlock(String name, Block block, TagKey<Block>... tags) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
 			if (tags.length>0){
@@ -396,7 +428,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return block;
 	}
 	
-	private static Block registerBlockNI(String name, Block block, TagLocation<Block>... tags) {
+	private static Block registerBlockNI(String name, Block block, TagKey<Block>... tags) {
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			return registerBlock(name, block, false, tags);
 		}
@@ -407,7 +439,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return registerBlock(name, block, true);
 	}
 	
-	private static Block registerBlock(String name, Block block, boolean hasItem, TagLocation<Block>... tags) {
+	private static Block registerBlock(String name, Block block, boolean hasItem, TagKey<Block>... tags) {
 		final BlockRegistry blockRegistry = getBlockRegistry();
 		final ResourceLocation location = new ResourceLocation(BetterNether.MOD_ID, name);
 		if (hasItem) {
@@ -430,7 +462,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		}
 	}
 	
-	public static Block registerStairs(String name, Block source, boolean fireproof, TagLocation<Block>... tags) {
+	public static Block registerStairs(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
 		Block stairs = new BaseStairsBlock(source, fireproof);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, stairs);
@@ -443,7 +475,7 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		return stairs;
 	}
 
-	public static Block registerSlab(String name, Block source, boolean fireproof, TagLocation<Block>... tags) {
+	public static Block registerSlab(String name, Block source, boolean fireproof, TagKey<Block>... tags) {
 		Block slab = new BaseSlabBlock(source, fireproof);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, slab);
@@ -530,8 +562,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		Block block = new BaseCraftingTableBlock(source);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, block);
-			TagAPI.addBlockTags(block, NamedCommonBlockTags.WORKBENCHES);
-			TagAPI.addItemTags(block, NamedCommonItemTags.WORKBENCHES);
+			TagAPI.addBlockTags(block, CommonBlockTags.WORKBENCHES);
+			TagAPI.addItemTags(block, CommonItemTags.WORKBENCHES);
 			
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
 					  .checkConfig(Configs.RECIPES)
@@ -551,8 +583,8 @@ public class NetherBlocks extends ru.bclib.registry.BlockRegistry {
 		Block chest = new BaseChestBlock(planks);
 		if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
 			registerBlockDirectly(name, chest);
-			TagAPI.addBlockTags(chest, NamedCommonBlockTags.CHEST);
-			TagAPI.addItemTags(chest, NamedCommonItemTags.CHEST);
+			TagAPI.addBlockTags(chest, CommonBlockTags.CHEST);
+			TagAPI.addItemTags(chest, CommonItemTags.CHEST);
 			addFuel(planks, chest);
 			//RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
 			GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), chest)

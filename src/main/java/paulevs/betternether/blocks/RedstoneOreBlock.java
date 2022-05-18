@@ -3,6 +3,7 @@ package paulevs.betternether.blocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RedStoneOreBlock;
@@ -12,8 +13,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
-import ru.bclib.api.tag.NamedCommonBlockTags;
-import ru.bclib.api.tag.TagAPI;
+
+import ru.bclib.api.tag.CommonBlockTags;
 import ru.bclib.blocks.BaseOreBlock;
 import ru.bclib.interfaces.BlockModelProvider;
 import ru.bclib.interfaces.TagProvider;
@@ -56,7 +57,7 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
 	}
 
 	@Override
-	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
-		blockTags.add(NamedCommonBlockTags.NETHERRACK);
+	public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
+		blockTags.add(CommonBlockTags.NETHERRACK);
 	}
 }

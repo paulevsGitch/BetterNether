@@ -2,6 +2,7 @@ package paulevs.betternether.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -12,8 +13,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import ru.bclib.api.tag.NamedCommonBlockTags;
-import ru.bclib.api.tag.TagAPI;
+
+import ru.bclib.api.tag.CommonBlockTags;
 import ru.bclib.interfaces.TagProvider;
 
 import java.util.Collections;
@@ -46,8 +47,8 @@ public class BlockTerrain extends BlockBase implements TagProvider {
 	}
 
 	@Override
-	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
-		blockTags.add(NamedCommonBlockTags.NETHERRACK);
-		blockTags.add(NamedCommonBlockTags.NETHER_STONES);
+	public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
+		blockTags.add(CommonBlockTags.NETHERRACK);
+		blockTags.add(CommonBlockTags.NETHER_STONES);
 	}
 }

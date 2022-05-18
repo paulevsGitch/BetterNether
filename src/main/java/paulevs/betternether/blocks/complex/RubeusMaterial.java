@@ -2,6 +2,8 @@ package paulevs.betternether.blocks.complex;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
@@ -29,8 +31,8 @@ public class RubeusMaterial extends NetherWoodenMaterial {
 	@Override
 	protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
 		super.initDefault(blockSettings, itemSettings);
-		final TagAPI.TagLocation<Block> tagBlockLog = TagAPI.TagLocation.of(getBlockTag(TAG_LOGS));
-		final TagAPI.TagLocation<Item> tagItemLog = TagAPI.TagLocation.of(getItemTag(TAG_LOGS));
+		final TagKey<Block> tagBlockLog =getBlockTag(TAG_LOGS);
+		final TagKey<Item> tagItemLog = getItemTag(TAG_LOGS);
 		
 		addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> {
 			return new BlockRubeusSapling();

@@ -1,5 +1,6 @@
 package paulevs.betternether.blocks;
 
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import ru.bclib.api.tag.NamedBlockTags;
@@ -21,7 +22,7 @@ public class BNWoodlikeDoor extends BaseDoorBlock implements TagProvider {
 	}
 	
 	@Override
-	public void addTags(List<TagAPI.TagLocation<Block>> blockTags, List<TagAPI.TagLocation<Item>> itemTags) {
+	public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
 		blockTags.add(NamedBlockTags.WOODEN_DOORS);
 		itemTags.add(NamedItemTags.WOODEN_DOORS);
 	}

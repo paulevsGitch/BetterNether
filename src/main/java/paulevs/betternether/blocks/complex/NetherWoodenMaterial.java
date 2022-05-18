@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -64,8 +65,8 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 
 	protected void _initBase(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
 		super.initBase(blockSettings, itemSettings);
-		final TagAPI.TagLocation<Block> tagBlockLog = TagAPI.TagLocation.of(getBlockTag(TAG_LOGS));
-		final TagAPI.TagLocation<Item>  tagItemLog = TagAPI.TagLocation.of(getItemTag(TAG_LOGS));
+		final TagKey<Block> tagBlockLog = getBlockTag(TAG_LOGS);
+		final TagKey<Item>  tagItemLog = getItemTag(TAG_LOGS);
 		
 		replaceOrAddBlockEntry(
 			new BlockEntry(BLOCK_STRIPPED_LOG, (complexMaterial, settings) -> new BaseRotatedPillarBlock(settings))
@@ -97,8 +98,8 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 
 		addBlockEntry(new BlockEntry(BLOCK_CRAFTING_TABLE, (complexMaterial, settings) -> {
 			return new BaseCraftingTableBlock(getBlock(BLOCK_PLANKS));
-		}).setBlockTags(NamedCommonBlockTags.WORKBENCHES)
-		  .setItemTags(NamedCommonItemTags.WORKBENCHES));
+		}).setBlockTags(CommonBlockTags.WORKBENCHES)
+		  .setItemTags(CommonItemTags.WORKBENCHES));
 		
 		addBlockEntry(new BlockEntry(BLOCK_TABURET, (complexMaterial, settings) -> {
 			return new BNTaburet(getBlock(BLOCK_SLAB));

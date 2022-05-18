@@ -3,6 +3,7 @@ package paulevs.betternether.registry;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -23,9 +24,9 @@ import paulevs.betternether.items.*;
 import paulevs.betternether.items.materials.BNArmorMaterial;
 import paulevs.betternether.items.materials.BNToolMaterial;
 import paulevs.betternether.tab.CreativeTabs;
-import ru.bclib.api.tag.NamedCommonItemTags;
+import ru.bclib.api.tag.CommonItemTags;
 import ru.bclib.api.tag.TagAPI;
-import ru.bclib.api.tag.TagAPI.TagLocation;
+
 import ru.bclib.items.tool.BaseShearsItem;
 import ru.bclib.registry.ItemRegistry;
 
@@ -46,7 +47,8 @@ public class NetherItems extends ItemRegistry {
 	public static final Item HOOK_MUSHROOM = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
 	public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
-	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()), NamedCommonItemTags.IRON_INGOTS);
+	public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()),
+															   CommonItemTags.IRON_INGOTS);
 
 	public static final Item CINCINNASITE_PICKAXE = registerTool("cincinnasite_pickaxe", new NetherPickaxe(BNToolMaterial.CINCINNASITE));
 	public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerTool("cincinnasite_pickaxe_diamond", new NetherPickaxe(BNToolMaterial.CINCINNASITE_DIAMOND));
@@ -116,7 +118,7 @@ public class NetherItems extends ItemRegistry {
 		return item;
 	}
 
-	public static Item registerTool(String name, Item item, TagLocation<Item>... tags) {
+	public static Item registerTool(String name, Item item, TagKey<Item>... tags) {
 		if (item != Items.AIR) {
 			getItemRegistry().registerTool(BetterNether.makeID(name), item);
 			if (tags.length>0)
@@ -129,7 +131,7 @@ public class NetherItems extends ItemRegistry {
 		return item;
 	}
 	
-	public static Item registerItem(String name, Item item, TagLocation<Item>... tags) {
+	public static Item registerItem(String name, Item item, TagKey<Item>... tags) {
 		if ((item instanceof BlockItem || Configs.ITEMS.getBoolean("items", name, true)) && item != Items.AIR) {
 			getItemRegistry().register(BetterNether.makeID(name), item);
 			//item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
