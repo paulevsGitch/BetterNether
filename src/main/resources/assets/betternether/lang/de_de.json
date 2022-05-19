@@ -1,7 +1,6 @@
 {
   "container.forge": "Schmiede",
   "container.chest_of_drawers": "Kommode",
-
   "entity.betternether.firefly": "Irrlicht",
   "entity.betternether.hydrogen_jellyfish": "Wasserstoffqualle",
   "entity.betternether.naga_projectile": "Naga Projektil",
@@ -13,43 +12,32 @@
   "item.betternether.spawn_egg_jungle_skeleton": "Dschungelskelett Spawn-Ei",
   "entity.betternether.skull": "Totenkopf",
   "item.betternether.spawn_egg_skull": "Totenkopf Spawn-Ei",
-
   "item.betternether.black_apple": "Dunkelapfel",
-
   "item.betternether.cincinnasite": "Cincinnasit",
   "item.betternether.cincinnasite_axe": "Cincinnasitaxt",
   "item.betternether.cincinnasite_axe_diamond": "Cincinnasit-Diamantenaxt",
   "item.betternether.cincinnasite_pickaxe": "Cincinnasitspitzhacke",
   "item.betternether.cincinnasite_pickaxe_diamond": "Cincinnasit-Diamentenspitzhacke",
-
   "block.betternether.stalagnate_bowl": "Stalagnatschüssel",
   "item.betternether.stalagnate_bowl": "Stalagnatschüssel",
   "item.betternether.stalagnate_bowl_apple": "Schüssel mit Dunkelapfel",
   "item.betternether.stalagnate_bowl_mushroom": "Pilzeintopf",
   "item.betternether.stalagnate_bowl_wart": "Warzensuppe",
-
   "itemGroup.betternether.items": "Better Nether",
-
   "message.spawn_help": "§c§lDu musst §r %s §c§lhalten um deinen Spawn-Punkt hier zu setzen.",
   "message.spawn_set": "§2§lDein Span-Punkt wurde hier gesetzt.",
-
   "block.betternether.agave": "Agavensamen",
   "item.betternether.agave_leaf": "Agavenblatt",
   "item.betternether.agave_medicine": "Agavenmedizin",
   "item.betternether.herbal_medicine": "Pflanzliche Medizin",
-
   "block.betternether.barrel_cactus": "Tonnenkaktus",
-
   "block.betternether.black_apple_seed": "Dunkelapfelsamen",
   "block.betternether.black_bush": "Dunkelbusch",
-
   "block.betternether.red_large_mushroom": "Großer roter Pilz",
   "block.betternether.brown_large_mushroom": "Großer brauner Pilz",
   "block.betternether.lucis_mushroom": "Lucispilz",
-
   "block.betternether.eyeball": "Augapfelblock",
   "block.betternether.eyeball_small": "Kleiner Augapfelblock",
-
   "block.betternether.bone_block": "Voller Knochenblock",
   "block.betternether.bone_button": "Knochenknopf",
   "block.betternether.bone_cincinnasite_door": "Knochen-Cincinnasittür",
@@ -60,9 +48,7 @@
   "block.betternether.bone_stairs": "Knochentreppe",
   "block.betternether.bone_tile": "Behauener Knochenblock",
   "block.betternether.bone_wall": "Knochenwand",
-
   "block.betternether.chest_of_drawers": "Kommode",
-
   "block.betternether.cincinnasite_bars": "Cincinnasitgitter",
   "block.betternether.cincinnasite_block": "Cincinnasitblock",
   "block.betternether.cincinnasite_brick_plate": "Cincinnasitziegelornament",
@@ -84,22 +70,14 @@
   "block.betternether.cincinnasite_tile_large": "Cincinnasitfliese",
   "block.betternether.cincinnasite_tile_small": "Cincinnasitkachel",
   "block.betternether.cincinnasite_wall": "Cincinnasitmauer",
-
   "block.betternether.egg_plant": "Aubergine",
-
   "block.betternether.eye_seed": "Augsamen",
-
   "block.betternether.farmland": "Ackerboden",
-
   "block.betternether.gray_mold": "Grauschimmel",
-
   "block.betternether.ink_bush": "Tintenbusch",
   "block.betternether.ink_bush_seed": "Tintenbuschsamen",
-
   "block.betternether.lucis_spore": "Lucis-Sporen",
-
   "block.betternether.magma_flower": "Magmablumensamen",
-
   "block.betternether.nether_brick_tile_large": "Polierter Netherstein",
   "block.betternether.nether_brick_tile_slab": "Nethersteinziegelstufe",
   "block.betternether.nether_brick_tile_small": "Nethersteinziegel",
@@ -113,13 +91,9 @@
   "block.betternether.blackstone_furnace": "Schwarzstein-Brennofen",
   "block.betternether.basalt_furnace": "Basalt-Brennofen",
   "block.betternether.netherrack_moss": "Nethermoos",
-
   "block.betternether.orange_mushroom": "Oranger Pilz",
-
   "block.betternether.pig_statue_respawner": "Statue der Wiederkehr",
-
   "block.betternether.potted_plant": "Eingetopfte Pflanze",
-
   "block.betternether.quartz_glass": "Quartzglas",
   "block.betternether.quartz_glass_framed": "Gerahmtes Quartzglas",
   "block.betternether.quartz_glass_framed_pane": "Gerahmte Quartzglasscheibe",
@@ -156,9 +130,7 @@
   "block.betternether.quartz_glass_framed_light_gray": "Hellgraues gerahmtes Quartzglas",
   "block.betternether.quartz_glass_framed_white": "Weißes gerahmtes Quartzglas",
   "block.betternether.quartz_glass_framed_yellow": "Gelbes gerahmtes Quartzglas",
-
   "block.betternether.red_mold": "Rotschimmel",
-
   "block.betternether.nether_reed_planks": "Schilfblock",
   "block.betternether.nether_reed_button": "Schilfknopf",
   "block.betternether.nether_reed_fence": "Schilfzaun",
@@ -169,9 +141,7 @@
   "block.betternether.nether_reed_stairs": "Schilftreppe",
   "block.betternether.nether_reed_door": "Schilftür",
   "block.betternether.nether_reed_trapdoor": "Schilffalltür",
-
   "block.betternether.smoker": "Smoker",
-
   "block.betternether.stalagnate": "Stalagnat",
   "block.betternether.stalagnate_stem": "Stalagnatstiel",
   "block.betternether.stalagnate_log": "Stalagnatstamm",
@@ -188,23 +158,18 @@
   "block.betternether.stalagnate_trapdoor": "Stalagnatfalltüe",
   "block.betternether.stalagnate_seed": "Stalagnatsamen",
   "block.betternether.wart_seed": "Warzensamen",
-
   "block.betternether.eye_vine": "Augranke",
   "block.betternether.black_apple": "Dunkelapfelbusch",
-
   "commands.findnethercity.usage.console": "Eingabe enthält keine Koordinaten",
   "commands.findnethercity.usage.coordinates": "Falsche Koordinaten",
   "commands.findnethercity.usage": "Falsche Verwendung, muss entweder /findNetherCity oder /findNetherCity x y z sein",
-
   "block.betternether.willow_branch": "Weidenast",
   "block.betternether.willow_leaves": "Weidenblätter",
   "block.betternether.willow_trunk": "Weidenbaumstamm",
   "block.betternether.willow_log": "Weidenstamm",
   "block.betternether.willow_bark": "Weidenholz",
   "block.betternether.willow_sapling": "Weidensetzling",
-
   "block.betternether.swamp_grass": "Sumpfgras",
-
   "block.betternether.willow_planks": "Widenbretter",
   "block.betternether.willow_stairs": "Weidentreppe",
   "block.betternether.willow_slab": "Weidenstufe",
@@ -214,7 +179,6 @@
   "block.betternether.willow_plate": "Weidendruckplatte",
   "block.betternether.willow_trapdoor": "Weidenfallrtür",
   "block.betternether.willow_door": "Weidentür",
-
   "block.betternether.wart_planks": "Warzenbretter",
   "block.betternether.wart_stairs": "warzentreppe",
   "block.betternether.wart_slab": "Warzenstufe",
@@ -224,27 +188,22 @@
   "block.betternether.wart_plate": "Warzendruckplatte",
   "block.betternether.wart_trapdoor": "Warzenfalltür",
   "block.betternether.wart_door": "Warzentür",
-
   "block.betternether.black_vine": "Dunkelranke",
   "block.betternether.veined_sand": "Ädriger Sand",
   "block.betternether.soul_vein": "Seelenranke",
   "block.betternether.blooming_vine": "Blühende Ranke",
   "block.betternether.golden_vine": "Goldranke",
   "block.betternether.geyser": "Geysir",
-
   "item.betternether.cincinnasite_shovel": "Cincinnasitschaufel",
   "item.betternether.cincinnasite_shovel_diamond": "Cincinnasit-Diamantschaufel",
-
   "item.betternether.cincinnasite_helmet": "Cincinnasithelm",
   "item.betternether.cincinnasite_chestplate": "Cincinnasitharnisch",
   "item.betternether.cincinnasite_leggings": "Cincinnasithose",
   "item.betternether.cincinnasite_boots": "Cincinnasitstiefel",
   "item.betternether.cincinnasite_sword": "Cincinnasitschwert",
   "item.betternether.cincinnasite_sword_diamond": "Cincinnasit-Diamantenschwert",
-
   "item.betternether.spawn_egg_firefly": "Irrlicht Spawn-Ei",
   "item.betternether.cincinnasite_ingot": "Cincinnasitbarren",
-
   "block.betternether.nether_mushroom_stem": "Pilzstiel",
   "block.betternether.nether_mushroom_planks": "Pilzbretter",
   "block.betternether.nether_mushroom_stairs": "Pilztreppe",
@@ -255,9 +214,7 @@
   "block.betternether.nether_mushroom_plate": "Pilzplatte",
   "block.betternether.nether_mushroom_trapdoor": "Pilzfalltür",
   "block.betternether.nether_mushroom_door": "Pilztür",
-
   "block.betternether.cincinnasite_lantern_small": "Kleine Cincinnasitlaterne",
-
   "block.betternether.quartz_glass_pane_white": "Weiße Quartzglasscheibe",
   "block.betternether.quartz_glass_pane_orange": "Orange Quartzglasscheibe",
   "block.betternether.quartz_glass_pane_magenta": "Magenta Quartzglasscheibe",
@@ -274,7 +231,6 @@
   "block.betternether.quartz_glass_pane_green": "Grüne Quartzglasscheibe",
   "block.betternether.quartz_glass_pane_red": "Rote Quartzglasscheibe",
   "block.betternether.quartz_glass_pane_black": "Schwarze Quartzglasscheibe",
-
   "block.betternether.quartz_glass_framed_pane_white": "Weiße gerahmte Quartzglasscheibe",
   "block.betternether.quartz_glass_framed_pane_orange": "Orange gerahmte Quartzglasscheibe",
   "block.betternether.quartz_glass_framed_pane_magenta": "Magenta gerahmte Quartzglasscheibe",
@@ -291,19 +247,15 @@
   "block.betternether.quartz_glass_framed_pane_green": "Grüne gerahmte Quartzglasscheibe",
   "block.betternether.quartz_glass_framed_pane_red": "Rote gerahmte Quartzglasscheibe",
   "block.betternether.quartz_glass_framed_pane_black": "Schwarze gerahmte Quartzglasscheibe",
-
   "block.betternether.soul_lily": "Seelenlilie",
   "block.betternether.soul_lily_sapling": "Seelenliliensamen",
   "block.betternether.soul_grass": "Seelengras",
-
   "block.betternether.wart_log": "Warzenstamm",
   "block.betternether.wart_bark": "Warzenholz",
   "block.betternether.wart_roots": "Warzenwurzel",
-
   "block.betternether.wall_moss": "Wandmoos",
   "block.betternether.wall_mushroom_brown": "Brauner Wandpilz",
   "block.betternether.wall_mushroom_red": "Roter Wandpilz",
-
   "block.betternether.nether_reed_roof": "Schilfschindel",
   "block.betternether.nether_reed_roof_stairs": "Schilfschindeltreppe",
   "block.betternether.nether_reed_roof_slab": "Schilfschindelstufe",
@@ -322,40 +274,32 @@
   "block.betternether.wart_roof": "Warzenschindel",
   "block.betternether.wart_roof_stairs": "Warzenschindeltreppe",
   "block.betternether.wart_roof_slab": "Warzenschindelstufe",
-
   "block.betternether.nether_reed_taburet": "Schilfhocker",
   "block.betternether.stalagnate_taburet": "Stalagnathocker",
   "block.betternether.willow_taburet": "Weidenhocker",
   "block.betternether.wart_taburet": "Warzenhocker",
   "block.betternether.taburet_cincinnasite": "Cincinnasithocker",
-
   "block.betternether.stalagnate_ladder": "Stalagnatleiter",
   "block.betternether.willow_ladder": "Weidenleiter",
   "block.betternether.wart_ladder": "Warzenleiter",
-
   "block.betternether.nether_reed_chair": "Schilfstuhl",
   "block.betternether.stalagnate_chair": "Stalagnatstuhl",
   "block.betternether.willow_chair": "Weidenstuhl",
   "block.betternether.wart_chair": "Warzenstuhl",
   "block.betternether.chair_cincinnasite": "Cincinnasitstuhl",
-
   "block.betternether.stalagnate_stripped_log": "Entrindeter Stalagnatstamm",
   "block.betternether.willow_stripped_log": "Entrindeter Weidenstamm",
   "block.betternether.wart_stripped_log": "Entrindeter Warzenstamm",
-
   "block.betternether.stalagnate_stripped_bark": "Entrindetes Stalagnatholz",
   "block.betternether.willow_stripped_bark": "Entrindetes Weidenholz",
   "block.betternether.wart_stripped_bark": "Entrindetes Warzenholz",
-
   "block.betternether.giant_mold": "Riesenschimmel",
   "block.betternether.giant_mold_sapling": "Riesenschimmel Setzling",
-
   "block.betternether.nether_reed_bar_stool": "Schilfbarhocker",
   "block.betternether.stalagnate_bar_stool": "Stalagnatbarhocker",
   "block.betternether.willow_bar_stool": "Weidenbarhocker",
   "block.betternether.wart_bar_stool": "Warzenbarhocker",
   "block.betternether.bar_stool_cincinnasite": "Cincinnasitbarhocker",
-
   "biome.betternether.gravel_desert": "Kieswüste",
   "biome.betternether.nether_jungle": "Netherdschungel",
   "biome.betternether.wart_forest": "Warzenwald",
@@ -378,14 +322,13 @@
   "biome.betternether.upside_down_forest": "Kopfüberwald",
   "biome.betternether.old_swampland": "Alte Sümpfe",
   "biome.betternether.flooded_deltas": "Versunkenes Delta",
-
   "block.betternether.mushroom_fir": "Pilztanne",
   "block.betternether.mushroom_fir_sapling": "Pilztannen Setzling",
   "block.betternether.mushroom_fir_stem": "Pilztannenstiel",
   "block.betternether.mushroom_fir_log": "Pilztannenstamm",
   "block.betternether.mushroom_fir_bark": "Pilztannenholz",
   "block.betternether.mushroom_fir_stripped_log": "Entrindeter Pilztannenstamm",
-  "block.betternether.striped_wood_mushroom_fir": "Entrindetes Pilztannenholz",
+  "block.betternether.mushroom_fir_stripped_bark": "Entrindetes Pilztannenholz",
   "block.betternether.mushroom_fir_planks": "Pilztannenbretter",
   "block.betternether.mushroom_fir_stairs": "Pilztannentreppe",
   "block.betternether.mushroom_fir_slab": "Pilztannenstufe",
@@ -396,11 +339,9 @@
   "block.betternether.mushroom_fir_trapdoor": "Pilztannenfalltür",
   "block.betternether.mushroom_fir_door": "Pilztannentür",
   "block.betternether.mushroom_fir_ladder": "Pilztannenleiter",
-
   "block.betternether.mushroom_fir_chair": "Pilztannenstuhl",
   "block.betternether.mushroom_fir_taburet": "Pilztannenhocker",
   "block.betternether.mushroom_fir_bar_stool": "Pilztannenbarhocker",
-
   "block.betternether.obsidian_bricks": "Obsidianziegel",
   "block.betternether.obsidian_bricks_stairs": "Obsidianziegeltreppe",
   "block.betternether.obsidian_bricks_slab": "Obsidianziegelstufe",
@@ -422,7 +363,6 @@
   "block.betternether.blue_obsidian_tile_slab": "Blaue Obsidianfliesenstufe",
   "block.betternether.blue_obsidian_glass": "Blaues Obsidianglas",
   "block.betternether.blue_obsidian_glass_pane": "Blaue Obsidianglasscheibe",
-
   "block.betternether.oak_taburet": "Eichenhocker",
   "block.betternether.oak_chair": "Eichenstuhl",
   "block.betternether.oak_bar_stool": "Eichenbarhocker",
@@ -441,17 +381,12 @@
   "block.betternether.dark_oak_taburet": "Schwarzeichenhocker",
   "block.betternether.dark_oak_chair": "Schwarzeichenstuhl",
   "block.betternether.dark_oak_bar_stool": "Schwarzeichenbarhocker",
-
   "item.betternether.cincinnasite_hammer": "Cincinnasithammer",
   "item.betternether.cincinnasite_hammer_diamond": "Cincinnasit-Diamanthammer",
-
   "block.betternether.nether_brewing_stand": "Nether-Braustand",
-
   "betternether.flat_nether": "Flachnether",
-
   "item.betternether.spawn_egg_hydrogen_jellyfish": "Wasserstoffqualle Spawn-Ei",
   "block.betternether.brick_pot": "Nethersteintopf",
-
   "block.betternether.rubeus_stripped_log": "Entrindeter Rubeusstamm",
   "block.betternether.rubeus_stripped_bark": "Entrindetes Rubeusholz",
   "block.betternether.rubeus_cone": "Rubeuszapfen",
@@ -472,23 +407,18 @@
   "block.betternether.rubeus_chair": "Rubeusstuhl",
   "block.betternether.rubeus_bar_stool": "Rubeusbarhocker",
   "block.betternether.rubeus_ladder": "Rubeusleiter",
-
   "item.betternether.cincinnasite_shears": "Cincinnasitschere",
   "block.betternether.cincinnasite_anvil": "Cincinnasitamboss",
-
   "block.betternether.jungle_grass": "Dschungelgras",
   "block.betternether.jungle_plant": "Dschungelpflanze",
-
   "block.betternether.netherrack_stalactite": "Netherrack Tropfstein",
   "block.betternether.glowstone_stalactite": "Glowstone Tropfstein",
   "block.betternether.blackstone_stalactite": "Schwarztropfstein",
   "block.betternether.basalt_stalactite": "Basalt Tropfstein",
-
   "block.betternether.nether_ruby_ore": "Nether-Rubinerz",
   "block.betternether.nether_ruby_block": "Nether-Rubinblock",
   "block.betternether.nether_ruby_stairs": "Nether-Rubintreppe",
   "block.betternether.nether_ruby_slab": "Nether-Rubinstufe",
-
   "item.betternether.nether_ruby": "Nether-Rubin",
   "item.betternether.nether_ruby_pickaxe": "Nether-Rubinspitzhacke",
   "item.betternether.nether_ruby_axe": "Nether-Rubinaxt",
@@ -498,32 +428,25 @@
   "item.betternether.nether_ruby_chestplate": "Nether-Rubinharnisch",
   "item.betternether.nether_ruby_leggings": "Nether-Rubinhose",
   "item.betternether.nether_ruby_boots": "Nether-Rubinstiefel",
-
   "block.betternether.soul_sandstone": "Seelensandsetin",
   "block.betternether.soul_sandstone_cut": "Geschnittener Seelensandsetin",
   "block.betternether.soul_sandstone_smooth": "Glatter Seelensandsetin",
   "block.betternether.soul_sandstone_chiseled": "Gemeißelter Seelensandsetin",
-
   "block.betternether.soul_sandstone_stairs": "Seelensandsetintreppe",
   "block.betternether.soul_sandstone_cut_stairs": "Geschnittener Seelensandsetintreppe",
   "block.betternether.soul_sandstone_smooth_stairs": "Glatter Seelensandsetintreppe",
-
   "block.betternether.soul_sandstone_slab": "Seelensandsetinstufe",
   "block.betternether.soul_sandstone_cut_slab": "Geschnittener Seelensandsetinstufe",
   "block.betternether.soul_sandstone_smooth_slab": "Glatter Seelensandsetinstufe",
-
   "block.betternether.soul_sandstone_wall": "Seelensandsetinmauer",
-
   "block.betternether.basalt_bricks": "Basaltziegel",
   "block.betternether.basalt_bricks_stairs": "Basaltziegeltreppe",
   "block.betternether.basalt_bricks_slab": "Basaltziegelkstufe",
   "block.betternether.basalt_bricks_wall": "Basaltziegelmauer",
-
   "item.betternether.cincinnasite_hoe": "Cincinnasithacke",
   "item.betternether.cincinnasite_hoe_diamond": "Cincinnasite-Diamanthacke",
   "item.betternether.nether_ruby_hoe": "Nether-Rubinhacke",
   "item.betternether.nether_ruby_hammer": "Nether-Rubinhammer",
-
   "config.betternether.config": "Better Nether Einstellungen",
   "config.betternether.mod_reload": "§b§lMinecraft muss neu gestartet werden!",
   "config.betternether.rendering": "Anzeige Optionen",
@@ -536,15 +459,12 @@
   "config.betternether.global_structures_density": "GLobale Blatt und Bauwerkdichte",
   "config.betternether.structures_density": "Bauwerkdichte",
   "config.betternether.cities_dist": "Abstand zwischen Städten [in Chunks]",
-
   "config.betternether.reset": "Zurücksetzen",
   "config.betternether.fog": "Nebel Reichweite",
   "config.betternether.lavafalls": "§b*§rLavafall-Pratikel",
   "config.betternether.armour": "§b*§rDünne Rüstung",
-
   "block.betternether.crafting_table_crimson": "Karmesinwerkbank",
   "block.betternether.crafting_table_warped": "Wirrwerkbank",
-
   "block.betternether.stalagnate_crafting_table": "Stalagnatwerkbank",
   "block.betternether.nether_reed_crafting_table": "Schilfwerkbank",
   "block.betternether.willow_crafting_table": "Weidenwerkbank",
@@ -552,7 +472,6 @@
   "block.betternether.rubeus_crafting_table": "Rubeuswerkbank",
   "block.betternether.nether_mushroom_crafting_table": "Pilzwerkbank",
   "block.betternether.mushroom_fir_crafting_table": "Pilztannenwerkbank",
-
   "block.betternether.stalagnate_chest": "Stalagnattruhe",
   "block.betternether.nether_reed_chest": "Schilftruhe",
   "block.betternether.willow_chest": "Weidentruhe",
@@ -560,14 +479,10 @@
   "block.betternether.rubeus_chest": "Rubeustruhe",
   "block.betternether.nether_mushroom_chest": "Pilztruhe",
   "block.betternether.mushroom_fir_chest": "Pilztannentruhe",
-
   "block.betternether.crimson_chest": "Karmesintruhe",
   "block.betternether.warped_chest": "Wirrtruhe",
-
   "block.betternether.jungle_moss": "Dschungelmos",
-
   "block.betternether.feather_fern": "Federfarn",
-
   "block.betternether.stalagnate_sign": "Stalagnatschild",
   "block.betternether.nether_reed_sign": "Schilfschild",
   "block.betternether.willow_sign": "Weidenschild",
@@ -575,7 +490,6 @@
   "block.betternether.rubeus_sign": "Rubeusschild",
   "block.betternether.nether_mushroom_sign": "Pilzschild",
   "block.betternether.mushroom_fir_sign": "Pilztannenschild",
-
   "block.betternether.stalagnate_barrel": "Stalagnatfass",
   "block.betternether.nether_reed_barrel": "Schilffass",
   "block.betternether.willow_barrel": "Weidenfass",
@@ -583,26 +497,20 @@
   "block.betternether.rubeus_barrel": "Rubeusfass",
   "block.betternether.nether_mushroom_barrel": "Pilzfass",
   "block.betternether.mushroom_fir_barrel": "Pilztannenfass",
-
   "block.betternether.crimson_barrel": "Karmesinfass",
   "block.betternether.warped_barrel": "Wirrfass",
-
   "block.betternether.crimson_ladder": "Karmesinleiter",
   "block.betternether.warped_ladder": "Wirrleiter",
   "block.betternether.nether_mushroom_ladder": "Pilzleiter",
-
   "block.betternether.crimson_taburet": "Karmesinhocker",
   "block.betternether.warped_taburet": "Wirrhocker",
   "block.betternether.nether_mushroom_taburet": "Pilzhocker",
-
   "block.betternether.crimson_chair": "Karmesinstuhl",
   "block.betternether.warped_chair": "Wirrstuhl",
   "block.betternether.nether_mushroom_chair": "Pilzstuhl",
-
   "block.betternether.crimson_bar_stool": "Karmesinbarhocker",
   "block.betternether.warped_bar_stool": "Wirrbarhocker",
   "block.betternether.nether_mushroom_bar_stool": "Pilzbarhocker",
-
   "block.betternether.mushroom_grass": "Pilzgras",
   "block.betternether.bone_grass": "Knochengras",
   "block.betternether.lumabus_seed": "Lumabussamen",
@@ -617,22 +525,18 @@
   "item.betternether.cincinnasite_excavator": "Cincinnasitbagger",
   "item.betternether.cincinnasite_excavator_diamond": "Cincinnasite-Diamentenbagger",
   "item.betternether.nether_ruby_excavator": "Rubinbagger",
-
   "block.betternether.sepia_mushroom_grass": "Sepiapilzgras",
   "block.betternether.sepia_bone_grass": "Sepiaknochengras",
   "block.betternether.golden_lumabus_seed": "Goldener Lumabussamen",
   "block.betternether.golden_lumabus_vine": "Goldene Lumabusranke",
-
   "block.betternether.cincinnasite_fire_bowl": "Cincinnasit Feuerschale",
   "block.betternether.bricks_fire_bowl": "Nethersetine Feuerschale",
   "block.betternether.netherite_fire_bowl": "Netherit Feuerschale",
   "block.betternether.cincinnasite_fire_bowl_soul": "Cincinnasit Seelenfeuerschale",
   "block.betternether.bricks_fire_bowl_soul": "Netherstein Seelenfeuerschale",
   "block.betternether.netherite_fire_bowl_soul": "Netherit Seelenfeuerschale",
-
   "block.betternether.swampland_grass": "Sumpflandgras",
   "block.betternether.basalt_slab": "Basaltstufe",
-
   "block.betternether.anchor_tree_bark": "Ankerbaumholz",
   "block.betternether.anchor_tree_button": "Ankerbaumknopf",
   "block.betternether.anchor_tree_door": "Ankerbaumtür",
@@ -654,14 +558,11 @@
   "block.betternether.anchor_tree_stripped_bark": "Entrindetes Ankerbaumholz",
   "block.betternether.anchor_tree_stripped_log": "Entrindeter Ankerbaumstamm",
   "block.betternether.anchor_tree_taburet": "Ankerbaumtischchen",
-
   "block.betternether.anchor_tree_vine": "Ankerbaumranke",
   "block.betternether.anchor_tree_leaves": "Ankerbaumblätter",
   "block.betternether.anchor_tree_sapling": "Ankerbaumsetzling",
-
   "block.betternether.giant_lucis": "Riesenlucis",
   "block.betternether.moss_cover": "Moosdecke",
-
   "block.betternether.nether_sakura_bark": "Nether Sakuraholz",
   "block.betternether.nether_sakura_button": "Nether Sakuraknopf",
   "block.betternether.nether_sakura_door": "Nether Sakura Door",
@@ -683,52 +584,45 @@
   "block.betternether.nether_sakura_stripped_bark": "Entrindetes Nether Sakuraholz",
   "block.betternether.nether_sakura_stripped_log": "Entrindeter Nether Sakurastamm",
   "block.betternether.nether_sakura_taburet": "Nether Sakurahocker",
-
   "block.betternether.nether_sakura_leaves": "Nether Sakurablätter",
   "block.betternether.nether_sakura_sapling": "Nether Sakurasetzling",
-
   "block.betternether.ceiling_mushrooms": "Deckenpilze",
   "block.betternether.neon_equisetum": "Neon Equisetum",
   "block.betternether.hook_mushroom": "Hakenpilz",
   "item.betternether.hook_mushroom_cooked": "Gekochter Hakenpilz",
-
   "block.betternether.whispering_gourd_vine": "Säuselnde Kalebassensamen",
   "block.betternether.whispering_gourd": "Säuselnde Kalebasse",
   "block.betternether.whispering_gourd_lantern": "Säuselnde Kalebassenlaterne",
-
   "block.betternether.willow_torch": "Weidenfackel",
-  
   "block.betternether.nether_redstone_ore": "Nether Redstone-Erz",
   "block.betternether.blue_crying_obsidian": "Blauer Weinender Obsidian",
   "block.betternether.blue_weeping_obsidian": "Blauer Schluchzender Obsidian",
   "block.betternether.weeping_obsidian": "Schluchzender Obsidian",
-  "itemGroup.betternether.nether_blocks":"BetterNether Blöcke",
-  "itemGroup.betternether.nether_items":"BetterNether Items",
+  "itemGroup.betternether.nether_blocks": "BetterNether Blöcke",
+  "itemGroup.betternether.nether_items": "BetterNether Items",
   "advancements.betternether.root.title": "BetterNether",
   "advancements.betternether.root.decription": "Noch mehr Nether",
   "advancements.betternether.blue_obsidian.title": "Blauer Funkel",
   "advancements.betternether.blue_obsidian.description": "Erschaffe blauen Obsidian indem du Lava über Seelensand oder Seelenstein in Obsidian umwandelst",
-  "advancements.betternether.ruby_ore.title":"Rubinerz",
- "advancements.betternether.ruby_ore.description":"Finde im Nether Rubinerz",
- "advancements.betternether.make_crying.title":"Las' sie weinen",
- "advancements.betternether.make_crying.description":"Verwende einen Blitzableiter um alle weinenden und schluchzenden Varianten von Obsidian herzustellen",
- "advancements.betternether.obsidian_blocks.title":"Obsidian Meister",
- "advancements.betternether.obsidian_blocks.description":"Stelle alle Obsidian-Varianten her",
- "advancements.betternether.nether_wood.title":"Ab in den Wald",
- "advancements.betternether.nether_wood.description":"Sammle alle Netherhölzer",
- "advancements.betternether.ruby_gear.title":"Mit Flammen bedeckt",
- "advancements.betternether.ruby_gear.description":"Hülle dich in falmmenrote Rubinausrüstung",
- "advancements.betternether.ruby_tools.title":"Das Rote Nether",
- "advancements.betternether.ruby_tools.description":"Verwende Rubinwerkzeuge aus den Tiefen des Nether",
-  "advancements.betternether.city.title":"Eine glorreiche Vergangenheit",
-  "advancements.betternether.city.description":"Finde eine längst verlassene Nether-Stadt",
-  
+  "advancements.betternether.ruby_ore.title": "Rubinerz",
+  "advancements.betternether.ruby_ore.description": "Finde im Nether Rubinerz",
+  "advancements.betternether.make_crying.title": "Las' sie weinen",
+  "advancements.betternether.make_crying.description": "Verwende einen Blitzableiter um alle weinenden und schluchzenden Varianten von Obsidian herzustellen",
+  "advancements.betternether.obsidian_blocks.title": "Obsidian Meister",
+  "advancements.betternether.obsidian_blocks.description": "Stelle alle Obsidian-Varianten her",
+  "advancements.betternether.nether_wood.title": "Ab in den Wald",
+  "advancements.betternether.nether_wood.description": "Sammle alle Netherhölzer",
+  "advancements.betternether.ruby_gear.title": "Mit Flammen bedeckt",
+  "advancements.betternether.ruby_gear.description": "Hülle dich in falmmenrote Rubinausrüstung",
+  "advancements.betternether.ruby_tools.title": "Das Rote Nether",
+  "advancements.betternether.ruby_tools.description": "Verwende Rubinwerkzeuge aus den Tiefen des Nether",
+  "advancements.betternether.city.title": "Eine glorreiche Vergangenheit",
+  "advancements.betternether.city.description": "Finde eine längst verlassene Nether-Stadt",
   "biome.betternether.upside_down_forest_cleared": "Abgestorbener Kopfüberwald",
   "enchantment.betternether.obsidian_breaker": "Obsidiangräber",
   "enchantment.betternether.obsidian_breaker.desc": "Beschleunigt das graben von Obsidian.",
   "enchantment.betternether.ruby_fire": "Rubinfeuer",
   "enchantment.betternether.ruby_fire.desc": "Automatische Schmelzen von Erzen mit Spitzhacke / Flamme und Rückstoß bei Rüstung und Schwertern.",
   "betternether.survive.nethergound": "Netherböden",
-
-  "flat_world_preset.betternether.plat": "Flaches Nether"
+  "flat_world_preset.betternether.flat": "Flaches Nether"
 }

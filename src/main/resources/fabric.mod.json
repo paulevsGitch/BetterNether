@@ -6,17 +6,17 @@
 	"name": "Better Nether",
 	"description": "Mod that improves Nether",
 	"authors": [
-		"paulevs"
+		"quiqueck"
 	],
 	"contributors": [
-		"paulevs (programming, art, ideas, ru/en translations)",
-		"quiqueck (version porting, fixes and improvements)",
+		"quiqueck (programming, porting, fixes and improvements)",
+		"paulevs (original author, art, ideas, ru/en translations)",
 		"edos_ (builder, design help)"
 	],
 	"contact": {
 		"homepage": "https://www.curseforge.com/minecraft/mc-mods/betternether",
-		"sources": "https://github.com/paulevsGitch/BetterNether/tree/snapshots",
-		"issues": "https://github.com/paulevsGitch/BetterNether/issues"
+		"sources": "https://github.com/quiqueck/BetterNether/tree/snapshots",
+		"issues": "https://github.com/quiqueck/BetterNether/issues"
 	},
 
 	"license": "GPLv3",

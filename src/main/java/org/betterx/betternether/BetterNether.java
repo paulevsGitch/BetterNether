@@ -6,6 +6,7 @@ import net.fabricmc.api.ModInitializer;
 
 import org.betterx.bclib.api.WorldDataAPI;
 import org.betterx.bclib.api.dataexchange.DataExchangeAPI;
+import org.betterx.bclib.presets.FlatLevelPresets;
 import org.betterx.bclib.util.Logger;
 import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.commands.CommandRegistry;
@@ -43,7 +44,7 @@ public class BetterNether implements ModInitializer {
         NetherBiomes.register();
         BrewingRegistry.register();
         CommandRegistry.register();
-        FlatLevelPresets.register();
+        FlatLevelPresetsRegistry.register();
         Config.save();
 
         IntegrationRecipes.register();

@@ -12,7 +12,8 @@ import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorPreset;
 import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorPresets;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 
-import org.betterx.betternether.registry.FlatLevelPresets;
+import org.betterx.bclib.presets.FlatLevelPresets;
+import org.betterx.betternether.registry.FlatLevelPresetsRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,7 +40,7 @@ public abstract class FlatLevelGeneratorPresetsMixin {
 
     @Inject(method = "run", at = @At(value = "HEAD"))
     void bcl_run(CallbackInfoReturnable<Holder<FlatLevelGeneratorPreset>> cir) {
-        this.register(FlatLevelPresets.BN_FLAT,
+        this.register(FlatLevelPresetsRegistry.BN_FLAT,
                       Blocks.NETHERRACK,
                       Biomes.NETHER_WASTES,
                       Collections.emptySet(),
