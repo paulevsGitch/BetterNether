@@ -1,6 +1,5 @@
 package org.betterx.betternether.mixin.common;
 
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Tier;
@@ -23,13 +22,10 @@ public abstract class MiningToolItemMixin extends TieredItem implements Vanishab
     @Final
     private TagKey<Block> blocks;
 
-    protected MiningToolItemMixin(float attackDamage,
-                                  float attackSpeed,
-                                  Tier material,
-                                  Tag<Block> effectiveBlocks,
-                                  Properties settings) {
-        super(material, settings);
+    public MiningToolItemMixin(Tier tier, Properties properties) {
+        super(tier, properties);
     }
+
 
     @Inject(method = "isCorrectToolForDrops", at = @At(value = "HEAD"), cancellable = true)
     private void effectiveOn(BlockState state, CallbackInfoReturnable<Boolean> info) {
