@@ -1,20 +1,12 @@
 package org.betterx.betternether.registry;
 
-import net.minecraft.nbt.CompoundTag;
-
-import org.betterx.bclib.api.LifeCycleAPI;
-import org.betterx.bclib.api.WorldDataAPI;
 import org.betterx.bclib.api.biomes.BiomeAPI;
-import org.betterx.bclib.util.ModUtil;
 import org.betterx.bclib.world.biomes.BCLBiome;
-import org.betterx.bclib.world.generator.BCLibNetherBiomeSource;
-import org.betterx.bclib.world.generator.GeneratorOptions;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeBuilder;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.biomes.*;
-import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,28 +50,28 @@ public class NetherBiomes {
     public static final BCLBiome BIOME_GRAVEL_DESERT = registerNetherBiome(Config.BIOME_GRAVEL_DESERT);
     public static final BCLBiome BIOME_NETHER_JUNGLE = registerNetherBiome(Config.BIOME_NETHER_JUNGLE);
     public static final BCLBiome BIOME_WART_FOREST = registerNetherBiome(Config.BIOME_WART_FOREST,
-                                                                         Config.BIOME_WART_FOREST_EDGE);
+            Config.BIOME_WART_FOREST_EDGE);
     public static final BCLBiome BIOME_GRASSLANDS = registerNetherBiome(Config.BIOME_GRASSLANDS);
     public static final BCLBiome BIOME_MUSHROOM_FOREST = registerNetherBiome(Config.BIOME_MUSHROOM_FOREST,
-                                                                             Config.BIOME_MUSHROOM_FOREST_EDGE);
+            Config.BIOME_MUSHROOM_FOREST_EDGE);
     public static final BCLBiome BIOME_MUSHROOM_FOREST_EDGE = BIOME_MUSHROOM_FOREST.getEdge();
     public static final BCLBiome BIOME_WART_FOREST_EDGE = BIOME_WART_FOREST.getEdge();
     public static final BCLBiome BIOME_BONE_REEF = registerNetherBiome(Config.BIOME_BONE_REEF);
     public static final BCLBiome BIOME_SULFURIC_BONE_REEF = registerSubBiome(Config.BIOME_SULFURIC_BONE_REEF,
-                                                                             BIOME_BONE_REEF);
+            BIOME_BONE_REEF);
     public static final BCLBiome BIOME_POOR_GRASSLANDS = registerSubBiome(Config.BIOME_POOR_GRASSLANDS,
-                                                                          BIOME_GRASSLANDS);
+            BIOME_GRASSLANDS);
     public static final BCLBiome NETHER_SWAMPLAND = registerNetherBiome(Config.NETHER_SWAMPLAND);
     public static final BCLBiome NETHER_SWAMPLAND_TERRACES = registerSubBiome(Config.NETHER_SWAMPLAND_TERRACES,
-                                                                              NETHER_SWAMPLAND);
+            NETHER_SWAMPLAND);
     public static final BCLBiome MAGMA_LAND = registerNetherBiome(Config.MAGMA_LAND);
     public static final BCLBiome SOUL_PLAIN = registerSubBiome(Config.SOUL_PLAIN, BIOME_WART_FOREST);
     public static final BCLBiome CRIMSON_GLOWING_WOODS = registerSubBiome(Config.CRIMSON_GLOWING_WOODS,
-                                                                          BiomeAPI.CRIMSON_FOREST_BIOME);
+            BiomeAPI.CRIMSON_FOREST_BIOME);
     public static final BCLBiome OLD_WARPED_WOODS = registerSubBiome(Config.OLD_WARPED_WOODS,
-                                                                     BiomeAPI.WARPED_FOREST_BIOME);
+            BiomeAPI.WARPED_FOREST_BIOME);
     public static final BCLBiome CRIMSON_PINEWOOD = registerSubBiome(Config.CRIMSON_PINEWOOD,
-                                                                     BiomeAPI.CRIMSON_FOREST_BIOME);
+            BiomeAPI.CRIMSON_FOREST_BIOME);
     public static final BCLBiome OLD_FUNGIWOODS = registerSubBiome(Config.OLD_FUNGIWOODS, BIOME_MUSHROOM_FOREST);
     public static final BCLBiome FLOODED_DELTAS = registerSubBiome(Config.FLOODED_DELTAS, BiomeAPI.BASALT_DELTAS_BIOME);
     public static final BCLBiome UPSIDE_DOWN_FOREST = registerNetherBiome(Config.UPSIDE_DOWN_FOREST);
@@ -98,8 +90,6 @@ public class NetherBiomes {
                 NetherStructures.addNonBNBiomeTags(biomeID, biome);
             }
         });
-
-        LifeCycleAPI.beforeLevelLoad(NetherBiomes::onWorldLoad);
     }
 
     private static NetherBiome registerNetherBiome(NetherBiomeConfig config) {
@@ -145,30 +135,4 @@ public class NetherBiomes {
     public static boolean useLegacyGeneration = false;
     private static final String TAG_GEN_VERSION = "generator_version";
     private static final String TAG_VERSION = "version";
-
-    public static void onWorldLoad() {
-        CompoundTag root = WorldDataAPI.getRootTag(BetterNether.MOD_ID);
-        String version = "0.0.0";
-        if (root.contains(TAG_VERSION)) {
-            version = root.getString(TAG_VERSION);
-        }
-
-        if (!ModUtil.isLargerOrEqualVersion(version, "6.0.0")) {
-            root.putString(TAG_VERSION, ModUtil.getModVersion(BetterNether.MOD_ID));
-            root.putString(TAG_GEN_VERSION, "1.17");
-            useLegacyGeneration = true;
-            WorldDataAPI.saveFile(BetterNether.MOD_ID);
-        } else if (!root.contains(TAG_GEN_VERSION)) {
-            root.putString(TAG_GEN_VERSION, GeneratorOptions.useOldBiomeGenerator() ? "1.17" : "1.18");
-            useLegacyGeneration = false;
-            WorldDataAPI.saveFile(BetterNether.MOD_ID);
-        } else {
-            useLegacyGeneration = "1.17".equals(root.getString(TAG_GEN_VERSION));
-        }
-
-        BCLibNetherBiomeSource.setForceLegacyGeneration(useLegacyGeneration);
-        BetterNether.LOGGER.info("Using legacy (1.17) generator: " + useLegacyGeneration);
-
-        NetherChunkPopulatorFeature.clearGeneratorPool();
-    }
 }
