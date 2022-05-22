@@ -2,6 +2,7 @@ package org.betterx.betternether.registry;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -15,6 +16,7 @@ import org.betterx.bclib.api.tag.NamedBlockTags;
 import org.betterx.bclib.api.tag.NamedMineableTags;
 import org.betterx.bclib.api.tag.TagAPI;
 import org.betterx.bclib.blocks.SimpleLeavesBlock;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BlockTerrain;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
@@ -34,6 +36,7 @@ public class NetherTags {
 
     public static final TagKey<Block> NETHER_SAND = TagAPI.makeCommonBlockTag("nether_sand");
     public static final TagKey<Block> NETHER_SAND_LOCATION = TagAPI.makeCommonBlockTag("nether_sand");
+    public static final TagKey<Biome> BETTER_NETHER = TagAPI.makeBiomeTag(BetterNether.MOD_ID, "biome");
 
     public static void register() {
         TagAPI.addBlockTag(NETHER_SAND_LOCATION, Blocks.SOUL_SAND);

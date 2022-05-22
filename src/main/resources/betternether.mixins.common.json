@@ -1,35 +1,35 @@
 {
-	"required": true,
-	"package": "org.betterx.betternether.mixin.common",
-	"compatibilityLevel": "JAVA_17",
-	"mixins": [
-      "AbstractFurnaceBlockEntityMixin",
-      "BlockAgeProcessorMixin",
-      "BoneMealMixin",
-      "BrewingRecipeRegistryMixin",
-      "CraftingScreenHandlerMixin",
-      "DefaultAttributeRegistryMixin",
-      "DeltaFeatureMixin",
-      "DiggerItemMixin",
-      "ItemStackMixin",
-      "LeavesBlockMixin",
-      "LightningRodBlockMixin",
-      "LiquidBlockMixin",
-      "MapMixin",
-      "MapStateMixin",
-      "MiningToolItemMixin",
-      "MushroomMixin",
-      "NetherWartMixin",
-      "BlockBehaviourMixin",
-      "PlayerEntityMixin",
-      "RecipeManagerAccessor",
-      "BlockBehaviourAccessor",
-      "BlockBehaviourPropertiesAccessor",
-      "LootTableBuilderAccessor",
-      "RecipeManagerMixin",
-      "FlatLevelGeneratorPresetsMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	}
+  "required": true,
+  "package": "org.betterx.betternether.mixin.common",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AbstractFurnaceBlockEntityMixin",
+    "BlockAgeProcessorMixin",
+    "BlockBehaviourAccessor",
+    "BlockBehaviourMixin",
+    "BlockBehaviourPropertiesAccessor",
+    "BoneMealMixin",
+    "BrewingRecipeRegistryMixin",
+    "CraftingScreenHandlerMixin",
+    "DefaultAttributeRegistryMixin",
+    "DeltaFeatureMixin",
+    "DiggerItemMixin",
+    "FlatLevelGeneratorPresetsMixin",
+    "ItemStackMixin",
+    "LeavesBlockMixin",
+    "LightningRodBlockMixin",
+    "LiquidBlockMixin",
+    "LootTableBuilderAccessor",
+    "MapMixin",
+    "MapStateMixin",
+    "MiningToolItemMixin",
+    "MushroomMixin",
+    "NetherWartMixin",
+    "PlayerEntityMixin",
+    "RecipeManagerAccessor",
+    "RecipeManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
