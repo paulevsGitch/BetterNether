@@ -31,8 +31,13 @@ public class BlockWillowLeaves extends BNLeaves {
         super(sapling, MaterialColor.TERRACOTTA_RED);
 
         //this.setDropItself(false);
-        this.registerDefaultState(getStateDefinition().any().setValue(DISTANCE, 7).setValue(PERSISTENT, false));
-        this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.UP).setValue(NATURAL, true));
+        this.registerDefaultState(getStateDefinition()
+                .any()
+                .setValue(DISTANCE, 7)
+                .setValue(PERSISTENT, false)
+                .setValue(FACING, Direction.UP)
+                .setValue(NATURAL, true)
+                .setValue(WATERLOGGED, false));
         //this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
