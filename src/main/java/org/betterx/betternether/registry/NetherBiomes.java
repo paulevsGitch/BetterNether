@@ -126,7 +126,7 @@ public class NetherBiomes {
 
         if (biome.getGenChance() > 0.0F) {
             ALL_BN_BIOMES.add(biome);
-            BiomeAPI.registerSubBiome(mainBiome, biome);
+            BiomeAPI.registerSubBiome(mainBiome, biome, BiomeAPI.Dimension.BCL_NETHER);
         }
 
         return biome;
