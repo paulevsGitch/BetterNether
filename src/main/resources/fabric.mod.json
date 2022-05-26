@@ -1,58 +1,53 @@
 {
-	"schemaVersion": 1,
-	"id": "betternether",
-	"version": "${version}",
-
-	"name": "Better Nether",
-	"description": "Mod that improves Nether",
-	"authors": [
-		"quiqueck"
-	],
-	"contributors": [
-		"quiqueck (programming, porting, fixes and improvements)",
-		"paulevs (original author, art, ideas, ru/en translations)",
-		"edos_ (builder, design help)"
-	],
-	"contact": {
-		"homepage": "https://www.curseforge.com/minecraft/mc-mods/betternether",
-		"sources": "https://github.com/quiqueck/BetterNether/tree/snapshots",
-		"issues": "https://github.com/quiqueck/BetterNether/issues"
-	},
-
-	"license": "GPLv3",
-	"icon": "assets/betternether/icon.png",
-
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-          "org.betterx.betternether.BetterNether"
-		],
-		"client": [
-          "org.betterx.betternether.client.BetterNetherClient"
-		]
-	},
-    "accessWidener" : "betternether.accesswidener",
-	"mixins": [
-		"betternether.mixins.common.json",
-		"betternether.mixins.client.json"
-	],
-
-	"depends": {
-		"fabricloader": ">=0.14.5",
-		"fabric": ">=0.52.4",
-		"minecraft": "1.19-beta.1",
-        "bclib": "2.0.x"
-	},
-	
-	"custom": {
-		"extrapieces:piecepack": "extrapieces.betternether.json",
-		"modupdater": {
-			"strategy": "curseforge",
-			"projectID": 311377
-        },
-		"waila:plugins": {
-			"id": "betternether:global",
-			"initializer": "paulevs.betternether.integrations.wthit.WailaPlugin"
-		}
-	}
+  "schemaVersion": 1,
+  "id": "betternether",
+  "version": "${version}",
+  "name": "Better Nether",
+  "description": "Mod that improves Nether",
+  "authors": [
+    "quiqueck"
+  ],
+  "contributors": [
+    "quiqueck (programming, porting, fixes and improvements)",
+    "paulevs (original author, art, ideas, ru/en translations)",
+    "edos_ (builder, design help)"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/betternether",
+    "sources": "https://github.com/quiqueck/BetterNether/tree/snapshots",
+    "issues": "https://github.com/quiqueck/BetterNether/issues"
+  },
+  "license": "GPLv3",
+  "icon": "assets/betternether/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "org.betterx.betternether.BetterNether"
+    ],
+    "client": [
+      "org.betterx.betternether.client.BetterNetherClient"
+    ]
+  },
+  "accessWidener": "betternether.accesswidener",
+  "mixins": [
+    "betternether.mixins.common.json",
+    "betternether.mixins.client.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": ">=0.53.4",
+    "minecraft": "1.19-beta.3",
+    "bclib": "2.0.x"
+  },
+  "custom": {
+    "extrapieces:piecepack": "extrapieces.betternether.json",
+    "modupdater": {
+      "strategy": "curseforge",
+      "projectID": 311377
+    },
+    "waila:plugins": {
+      "id": "betternether:global",
+      "initializer": "paulevs.betternether.integrations.wthit.WailaPlugin"
+    }
+  }
 }
