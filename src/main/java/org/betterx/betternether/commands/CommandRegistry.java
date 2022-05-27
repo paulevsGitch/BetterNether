@@ -183,7 +183,7 @@ public class CommandRegistry {
             ResourceOrTagLocationArgument.Result result = new ResourceOrTagLocationArgument.Result() {
                 @Override
                 public Either<ResourceKey, TagKey> unwrap() {
-                    return Either.left(BiomeAPI.getBiomeKey(BuiltinRegistries.BIOME, biome.getBiome()));
+                    return Either.left(BiomeAPI.getBiomeKey(biome.getBiome()));
                 }
 
                 @Override
@@ -201,7 +201,7 @@ public class CommandRegistry {
                     return false;
                 }
             };
-            ResourceKey<Biome> a = BiomeAPI.getBiomeKey(BuiltinRegistries.BIOME, biome.getBiome());
+            ResourceKey<Biome> a = BiomeAPI.getBiomeKey(biome.getBiome());
             Holder<Biome> h = BuiltinRegistries.BIOME.getHolder(a).orElseThrow();
             return LocateCommand.showLocateResult(source,
                                                   result,
