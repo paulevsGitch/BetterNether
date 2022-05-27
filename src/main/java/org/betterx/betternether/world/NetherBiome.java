@@ -8,8 +8,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 
-import org.betterx.bclib.world.biomes.BCLBiome;
-import org.betterx.bclib.world.biomes.BCLBiomeSettings;
+import org.betterx.bclib.api.biomes.BCLBiome;
+import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
