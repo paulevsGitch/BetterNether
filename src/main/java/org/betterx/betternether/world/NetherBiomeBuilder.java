@@ -20,7 +20,6 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 
 import org.betterx.bclib.api.biomes.BCLBiome;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.tag.TagAPI;
 import org.betterx.bclib.util.MHelper;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherEntities;
@@ -77,6 +76,7 @@ public class NetherBiomeBuilder {
                 .start(ID)
                 //.category(BiomeCategory.NETHER)
                 .surface(data.surface().build())
+                .tag(NetherTags.BETTER_NETHER)
                 .temperature(BASE_BIOME.getBaseTemperature())
                 .wetness(BASE_BIOME.getDownfall())
                 .precipitation(Precipitation.NONE)
@@ -106,7 +106,6 @@ public class NetherBiomeBuilder {
         data.addCustomBuildData(builder);
 
         NetherBiome b = builder.build(data.getSupplier());
-        TagAPI.addBiomeTag(NetherTags.BETTER_NETHER, b.getBiome());
         return b;
     }
 }
