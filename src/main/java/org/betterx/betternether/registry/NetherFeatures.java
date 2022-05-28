@@ -32,10 +32,10 @@ import java.util.function.Supplier;
 public class NetherFeatures {
     // Surface Features //
     public static final Feature<PointedDripstoneConfiguration> STALAGMITE_NETHERRACK = register("stalagmite_netherrack",
-            new ClusterFeature(Block));
+            new ClusterFeature());
     public static final BCLFeature CRYSTAL_FATURE = CrystalFeature.createAndRegister();
     public static final BCLFeature STALAGMITE_NETHERRACK_CLUSTER = ClusterFeature.createAndRegister(
-            "stalagmite_netherrack_cluster", NetherBlocks.NETHERRACK_STALACTITE, null);
+            "stalagmite_netherrack_cluster");
 
     // Ores //
     public static final BCLFeature CINCINNASITE_ORE =
