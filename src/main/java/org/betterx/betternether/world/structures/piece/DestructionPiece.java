@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSeriali
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
+import org.betterx.betternether.registry.NetherStructurePieces;
 
 public class DestructionPiece extends CustomPiece {
     private final MutableBlockPos POS = new MutableBlockPos();
@@ -26,7 +27,7 @@ public class DestructionPiece extends CustomPiece {
     private int maxY;
 
     public DestructionPiece(BoundingBox bounds, RandomSource random) {
-        super(StructureTypes.DESTRUCTION, random.nextInt(), bounds);
+        super(NetherStructurePieces.DESTRUCTION_PIECE, random.nextInt(), bounds);
         radius = random.nextInt(5) + 1;
         radSqr = radius * radius;
         center = new BlockPos(
@@ -36,8 +37,8 @@ public class DestructionPiece extends CustomPiece {
         makeBoundingBox();
     }
 
-    protected DestructionPiece(StructurePieceSerializationContext context, CompoundTag tag) {
-        super(StructureTypes.DESTRUCTION, tag);
+    public DestructionPiece(StructurePieceSerializationContext context, CompoundTag tag) {
+        super(NetherStructurePieces.DESTRUCTION_PIECE, tag);
         this.center = NbtUtils.readBlockPos(tag.getCompound("center"));
         this.radius = tag.getInt("radius");
         radSqr = radius * radius;

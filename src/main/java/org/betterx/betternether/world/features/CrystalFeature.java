@@ -1,23 +1,34 @@
-package org.betterx.betternether.world.structures.decorations;
+package org.betterx.betternether.world.features;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.dimension.DimensionDefaults;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.phys.Vec3;
 
+import org.betterx.bclib.api.features.BCLFeatureBuilder;
+import org.betterx.bclib.world.features.BCLFeature;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+public class CrystalFeature extends NetherSurfaceFeature {
+    public static BCLFeature createAndRegister() {
+        return BCLFeatureBuilder.start(BetterNether.makeID("nether_crystal"), new CrystalFeature())
+                                .decoration(GenerationStep.Decoration.LOCAL_MODIFICATIONS)
+                                .oncePerChunks(1)
+                                .squarePlacement()
+                                .distanceToTopAndBottom10()
+                                .onlyInBiome()
+                                .buildAndRegister();
+    }
 
-public class StructureCrystal implements IStructure {
     private static final Block[] PALETTES = new Block[]{
             NetherBlocks.OBSIDIAN_GLASS,
             Blocks.OBSIDIAN,
@@ -27,15 +38,16 @@ public class StructureCrystal implements IStructure {
     private static final double SQRT05 = Math.sqrt(0.5);
     private static final float MAX_ANGLE_X = (float) Math.toRadians(45);
     private static final float MAX_ANGLE_Y = (float) (Math.PI * 2);
+    private static final float MAX_ANGLE_Z = (float) Math.toRadians(30);
     private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);
 
     @Override
-    public void generate(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         final int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
-        final MutableBlockPos POS = new MutableBlockPos();
+    protected void generate(ServerLevelAccessor world,
+                            BlockPos pos,
+                            RandomSource random,
+                            final int MAX_HEIGHT,
+                            StructureGeneratorThreadContext context) {
+        final BlockPos.MutableBlockPos POS = context.POS;
         final float scale_factor = ((MAX_HEIGHT / 128.0f) - 1) * 0.5f + 1;
 
         final int index = random.nextInt(PALETTES.length >> 1);
@@ -46,10 +58,11 @@ public class StructureCrystal implements IStructure {
         int sideY = (int) Math.ceil(radius * 3);
         float angleX = random.nextFloat() * MAX_ANGLE_X;
         float angleY = random.nextFloat() * MAX_ANGLE_Y;
+        float angleZ = (random.nextFloat() * 2 - 1) * MAX_ANGLE_Z;
         for (int y = -sideY; y <= sideY; y++)
             for (int x = -sideXZ; x <= sideXZ; x++)
                 for (int z = -sideXZ; z <= sideXZ; z++) {
-                    Vec3 v = new Vec3(x, y, z).xRot(angleX).yRot(angleY);
+                    Vec3 v = new Vec3(x, y, z).zRot(angleZ).xRot(angleX).yRot(angleY);
                     final double d = depth(v.x, v.y, v.z, radius);
                     if (d <= 0) {
                         POS.setX(pos.getX() + x);

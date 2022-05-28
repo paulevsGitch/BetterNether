@@ -18,7 +18,7 @@ public class NetherStructures {
     public static final int CITY_SPACING = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
     // Nether City
     public static final BCLStructure<CityFeature> CITY_STRUCTURE = new BCLStructure<>(
-            new ResourceLocation(BetterNether.MOD_ID, "nether_city"),
+            BetterNether.makeID("nether_city"),
             CityFeature::new,
             Decoration.STRONGHOLDS,
             CITY_SPACING,
@@ -26,7 +26,10 @@ public class NetherStructures {
             true
     );
 
+
     public static void register() {
+        NetherStructurePieces.ensureStaticLoad();
+
         TagAPI.addBiomeTag(CITY_STRUCTURE.biomeTag, BiomeAPI.NETHER_WASTES_BIOME.getBiome());
         if (Configs.GENERATOR.getBoolean("generator.world.cities", "overworld", false)) {
             BiomeAPI.registerOverworldBiomeModification((biomeID, biome) -> {
@@ -46,4 +49,5 @@ public class NetherStructures {
     public static void addDefaultFeatures(BCLBiomeBuilder builder) {
         builder.structure(CITY_STRUCTURE);
     }
+
 }

@@ -6,7 +6,6 @@ import net.fabricmc.api.ModInitializer;
 
 import org.betterx.bclib.api.WorldDataAPI;
 import org.betterx.bclib.api.dataexchange.DataExchangeAPI;
-import org.betterx.bclib.presets.FlatLevelPresets;
 import org.betterx.bclib.util.Logger;
 import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.commands.CommandRegistry;
@@ -17,7 +16,6 @@ import org.betterx.betternether.recipes.IntegrationRecipes;
 import org.betterx.betternether.recipes.ItemRecipes;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.world.BNWorldGenerator;
-import org.betterx.betternether.world.structures.piece.StructureTypes;
 
 public class BetterNether implements ModInitializer {
     public static final String MOD_ID = "betternether";
@@ -37,7 +35,6 @@ public class BetterNether implements ModInitializer {
         BlockEntitiesRegistry.register();
         NetherItems.register();
         NetherEntities.register();
-        StructureTypes.init();
         BNWorldGenerator.onModInit();
         NetherFeatures.register();
         NetherStructures.register();

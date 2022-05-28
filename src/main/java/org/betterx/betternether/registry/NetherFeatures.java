@@ -10,6 +10,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.PointedDripstoneConfiguration;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
@@ -27,81 +30,88 @@ import org.betterx.betternether.world.structures.city.CityFeature;
 import java.util.function.Supplier;
 
 public class NetherFeatures {
+    // Surface Features //
+    public static final Feature<PointedDripstoneConfiguration> STALAGMITE_NETHERRACK = register("stalagmite_netherrack",
+            new ClusterFeature());
+    public static final BCLFeature CRYSTAL_FATURE = CrystalFeature.createAndRegister();
+    public static final BCLFeature STALAGMITE_NETHERRACK_CLUSTER = ClusterFeature.createAndRegister(
+            "stalagmite_netherrack_cluster");
+
     // Ores //
     public static final BCLFeature CINCINNASITE_ORE =
             registerOre("cincinnasite", NetherBlocks.CINCINNASITE_ORE,
-                        10, 8, 0.0f,
-                        PlacementUtils.RANGE_10_10,
-                        false);
+                    10, 8, 0.0f,
+                    PlacementUtils.RANGE_10_10,
+                    false);
 
     public static final BCLFeature NETHER_RUBY_ORE =
             registerOre("nether_ruby", NetherBlocks.NETHER_RUBY_ORE,
-                        3, 8, 0, //0.6f,
-                        HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(32)),
-                        false);
+                    3, 8, 0, //0.6f,
+                    HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(32)),
+                    false);
 
     public static final BCLFeature NETHER_RUBY_ORE_SOUL =
             registerOre("nether_ruby_soul", NetherBlocks.NETHER_RUBY_ORE, Blocks.SOUL_SOIL,
-                        16, 12, 0, //0.6f,
-                        HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
-                        false);
+                    16, 12, 0, //0.6f,
+                    HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
+                    false);
 
     public static final BCLFeature NETHER_RUBY_ORE_LARGE =
             registerOre("nether_ruby_large", NetherBlocks.NETHER_RUBY_ORE,
-                        16, 12, 0, //0.6f,
-                        HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
-                        false);
+                    16, 12, 0, //0.6f,
+                    HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
+                    false);
 
     public static final BCLFeature NETHER_RUBY_ORE_RARE =
             registerOre("nether_ruby_rare", NetherBlocks.NETHER_RUBY_ORE,
-                        2, 12, 0.0f,
-                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(70), VerticalAnchor.top()),
-                        true);
+                    2, 12, 0.0f,
+                    HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(70), VerticalAnchor.top()),
+                    true);
 
     public static final BCLFeature NETHER_LAPIS_ORE =
             registerOre("nether_lapis", NetherBlocks.NETHER_LAPIS_ORE,
-                        18, 4, 0.0f,
-                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(10)),
-                        false);
+                    18, 4, 0.0f,
+                    HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(10)),
+                    false);
 
     public static final BCLFeature NETHER_REDSTONE_ORE =
             registerOre("nether_redstone", NetherBlocks.NETHER_REDSTONE_ORE,
-                        1, 16, 0.3f,
-                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(8), VerticalAnchor.aboveBottom(40)),
-                        true);
+                    1, 16, 0.3f,
+                    HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(8), VerticalAnchor.aboveBottom(40)),
+                    true);
 
     // Maintainance //
     public static final BCLFeature CLEANUP_FEATURE = registerChunkFeature("nether_clean",
-                                                                          Decoration.RAW_GENERATION,
-                                                                          CleanupFeature::new);
+            Decoration.RAW_GENERATION,
+            CleanupFeature::new);
     public static final BCLFeature FIX_FEATURE = registerChunkFeature("nether_fix",
-                                                                      Decoration.TOP_LAYER_MODIFICATION,
-                                                                      BlockFixFeature::new);
+            Decoration.TOP_LAYER_MODIFICATION,
+            BlockFixFeature::new);
 
     // Terrain //
     public static final BCLFeature CAVES_FEATURE = registerChunkFeature("nether_caves",
-                                                                        Decoration.UNDERGROUND_STRUCTURES,
-                                                                        CavesFeature::new);
+            Decoration.UNDERGROUND_STRUCTURES,
+            CavesFeature::new);
     public static final BCLFeature PATHS_FEATURE = registerChunkFeature("nether_paths",
-                                                                        Decoration.LAKES,
-                                                                        PathsFeature::new);
+            Decoration.LAKES,
+            PathsFeature::new);
     public static final BCLFeature POPULATOR_FEATURE = registerChunkFeature("nether_populator",
-                                                                            Decoration.VEGETAL_DECORATION,
-                                                                            NetherChunkPopulatorFeature::new);
+            Decoration.VEGETAL_DECORATION,
+            NetherChunkPopulatorFeature::new);
 
     // Cached Config data //
     public static final boolean HAS_CLEANING_PASS = Configs.GENERATOR.getBoolean("generator.world.terrain",
-                                                                                 "terrain_cleaning_pass",
-                                                                                 true);
+            "terrain_cleaning_pass",
+            true);
     public static final boolean HAS_CAVES = Configs.GENERATOR.getBoolean("generator.world.environment",
-                                                                         "generate_caves",
-                                                                         true);
+            "generate_caves",
+            true);
     public static final boolean HAS_PATHS = Configs.GENERATOR.getBoolean("generator.world.environment",
-                                                                         "generate_paths",
-                                                                         true);
+            "generate_paths",
+            true);
     public static final boolean HAS_FIXING_PASS = Configs.GENERATOR.getBoolean("generator.world.terrain",
-                                                                               "world_fixing_pass",
-                                                                               true);
+            "world_fixing_pass",
+            true);
 
     private static <T extends DefaultFeature> BCLFeature registerChunkFeature(String name,
                                                                               Decoration step,
@@ -110,7 +120,7 @@ public class NetherFeatures {
                 BetterNether.makeID("feature_" + name),
                 step,
                 feature.get()
-                                                 );
+        );
     }
 
     private static BCLFeature registerOre(String name,
@@ -130,7 +140,7 @@ public class NetherFeatures {
                 Configs.GENERATOR.getFloat("generator.world.ores." + name, "air_discard_chance", airDiscardChance),
                 placement,
                 rare
-                           );
+        );
     }
 
     private static BCLFeature registerOre(String name,
@@ -149,7 +159,7 @@ public class NetherFeatures {
                 Configs.GENERATOR.getFloat("generator.world.ores." + name, "air_discard_chance", airDiscardChance),
                 placement,
                 rare
-                           );
+        );
     }
 
     private static BCLFeature _registerOre(String name,
@@ -212,6 +222,10 @@ public class NetherFeatures {
         if (biomeID.equals(BiomeAPI.CRIMSON_FOREST_BIOME.getID()) || biomeID.equals(BiomeAPI.WARPED_FOREST_BIOME.getID())) {
             BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE);
         }
+    }
+
+    private static <C extends FeatureConfiguration, F extends Feature<C>> F register(String string, F feature) {
+        return Registry.register(Registry.FEATURE, string, feature);
     }
 
     public static void register() {

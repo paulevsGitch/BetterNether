@@ -18,6 +18,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSeriali
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.registry.NetherStructurePieces;
 import org.betterx.betternether.world.structures.city.BuildingStructureProcessor;
 import org.betterx.betternether.world.structures.city.StructureCityBuilding;
 import org.betterx.betternether.world.structures.city.palette.CityPalette;
@@ -31,7 +32,7 @@ public class CityPiece extends CustomPiece {
     private final BlockPos pos;
 
     public CityPiece(StructureCityBuilding building, BlockPos pos, int id, CityPalette palette) {
-        super(StructureTypes.NETHER_CITY, id, building.getBoundingBox(pos));
+        super(NetherStructurePieces.NETHER_CITY_PIECE, id, building.getBoundingBox(pos));
         this.building = building;
         this.pos = pos.immutable();
         this.boundingBox = building.getBoundingBox(pos);
@@ -40,7 +41,7 @@ public class CityPiece extends CustomPiece {
     }
 
     public CityPiece(StructurePieceSerializationContext context, CompoundTag tag) {
-        super(StructureTypes.NETHER_CITY, tag);
+        super(NetherStructurePieces.NETHER_CITY_PIECE, tag);
         this.building = new StructureCityBuilding(tag.getString("building"), tag.getInt("offset"))
                 .getRotated(Rotation.values()[tag.getInt("rotation")]);
         this.building.setMirror(Mirror.values()[tag.getInt("mirror")]);
@@ -74,11 +75,11 @@ public class CityPiece extends CustomPiece {
 
 
         BoundingBox clamped = new BoundingBox(boundingBox.minX(),
-                                              boundingBox.minY(),
-                                              boundingBox.minZ(),
-                                              boundingBox.maxX(),
-                                              boundingBox.maxY(),
-                                              boundingBox.maxZ());
+                boundingBox.minY(),
+                boundingBox.minZ(),
+                boundingBox.maxX(),
+                boundingBox.maxY(),
+                boundingBox.maxZ());
         //clamped.encompass(blockBox);
         int cminZ = Math.max(clamped.minZ(), blockBox.minZ());
         int cmaxZ = Math.min(clamped.maxZ(), blockBox.maxZ());

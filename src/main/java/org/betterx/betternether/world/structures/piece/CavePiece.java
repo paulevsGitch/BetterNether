@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSeriali
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.noise.OpenSimplexNoise;
+import org.betterx.betternether.registry.NetherStructurePieces;
 
 public class CavePiece extends CustomPiece {
     private static final BlockState LAVA = Blocks.LAVA.defaultBlockState();
@@ -26,14 +27,14 @@ public class CavePiece extends CustomPiece {
     private final int radSqr;
 
     public CavePiece(BlockPos center, int radius, RandomSource random, BoundingBox blockBox) {
-        super(StructureTypes.CAVE, random.nextInt(), makeBoundingBox(center, radius));
+        super(NetherStructurePieces.CAVE_PIECE, random.nextInt(), makeBoundingBox(center, radius));
         this.center = center.immutable();
         this.radius = radius;
         this.radSqr = radius * radius;
     }
 
-    protected CavePiece(StructurePieceSerializationContext context, CompoundTag tag) {
-        super(StructureTypes.CAVE, tag);
+    public CavePiece(StructurePieceSerializationContext context, CompoundTag tag) {
+        super(NetherStructurePieces.CAVE_PIECE, tag);
         this.center = NbtUtils.readBlockPos(tag.getCompound("center"));
         this.radius = tag.getInt("radius");
         this.radSqr = radius * radius;

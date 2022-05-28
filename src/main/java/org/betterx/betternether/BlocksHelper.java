@@ -130,6 +130,7 @@ public class BlocksHelper {
         return length;
     }
 
+
     public static int downRay(LevelAccessor world, BlockPos pos, int maxDist) {
         int length = 0;
         for (int j = 1; j < maxDist && (world.isEmptyBlock(pos.below(j))); j++)

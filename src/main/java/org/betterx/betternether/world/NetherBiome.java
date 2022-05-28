@@ -58,30 +58,30 @@ public abstract class NetherBiome extends BCLBiome {
     };
 
     protected static final StructureStalactiteFloor STALACTITE_NETHERRACK = new StructureStalactiteFloor(NetherBlocks.NETHERRACK_STALACTITE,
-                                                                                                         null);
+            null);
     protected static final StructureStalactiteFloor STALACTITE_GLOWSTONE = new StructureStalactiteFloor(NetherBlocks.GLOWSTONE_STALACTITE,
-                                                                                                        Blocks.GLOWSTONE);
+            Blocks.GLOWSTONE);
     protected static final StructureStalactiteFloor STALACTITE_BLACKSTONE = new StructureStalactiteFloor(NetherBlocks.BLACKSTONE_STALACTITE,
-                                                                                                         Blocks.BLACKSTONE,
-                                                                                                         Blocks.BLACKSTONE,
-                                                                                                         Blocks.NETHERRACK);
+            Blocks.BLACKSTONE,
+            Blocks.BLACKSTONE,
+            Blocks.NETHERRACK);
     protected static final StructureStalactiteFloor STALACTITE_BASALT = new StructureStalactiteFloor(NetherBlocks.BASALT_STALACTITE,
-                                                                                                     Blocks.BASALT,
-                                                                                                     Blocks.BASALT,
-                                                                                                     Blocks.NETHERRACK);
+            Blocks.BASALT,
+            Blocks.BASALT,
+            Blocks.NETHERRACK);
 
     protected static final StructureStalactiteCeil STALAGMITE_NETHERRACK = new StructureStalactiteCeil(NetherBlocks.NETHERRACK_STALACTITE,
-                                                                                                       null);
+            null);
     protected static final StructureStalactiteCeil STALAGMITE_GLOWSTONE = new StructureStalactiteCeil(NetherBlocks.GLOWSTONE_STALACTITE,
-                                                                                                      Blocks.GLOWSTONE);
+            Blocks.GLOWSTONE);
     protected static final StructureStalactiteCeil STALAGMITE_BLACKSTONE = new StructureStalactiteCeil(NetherBlocks.BLACKSTONE_STALACTITE,
-                                                                                                       Blocks.BLACKSTONE,
-                                                                                                       Blocks.BLACKSTONE,
-                                                                                                       Blocks.NETHERRACK);
+            Blocks.BLACKSTONE,
+            Blocks.BLACKSTONE,
+            Blocks.NETHERRACK);
     protected static final StructureStalactiteCeil STALAGMITE_BASALT = new StructureStalactiteCeil(NetherBlocks.BASALT_STALACTITE,
-                                                                                                   Blocks.BASALT,
-                                                                                                   Blocks.BASALT,
-                                                                                                   Blocks.NETHERRACK);
+            Blocks.BASALT,
+            Blocks.BASALT,
+            Blocks.NETHERRACK);
 
 
     private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
@@ -114,10 +114,10 @@ public abstract class NetherBiome extends BCLBiome {
         }
 
         if (hasStalactites()) {
-            addStructure("netherrack_stalactite", STALACTITE_NETHERRACK, StructureType.FLOOR, 0.05F, true);
+            //addStructure("netherrack_stalactite", STALACTITE_NETHERRACK, StructureType.FLOOR, 0.05F, true);
             addStructure("glowstone_stalactite", STALACTITE_GLOWSTONE, StructureType.FLOOR, 0.01F, true);
 
-            addStructure("netherrack_stalagmite", STALAGMITE_NETHERRACK, StructureType.CEIL, 0.01F, true);
+            //addStructure("netherrack_stalagmite", STALAGMITE_NETHERRACK, StructureType.CEIL, 0.01F, true);
             addStructure("glowstone_stalagmite", STALAGMITE_GLOWSTONE, StructureType.CEIL, 0.005F, true);
         }
 
@@ -254,11 +254,11 @@ public abstract class NetherBiome extends BCLBiome {
 
     protected static String structureFormat(String name, int offset, StructureType type, float chance) {
         return String.format(Locale.ROOT,
-                             "name: %s; offset: %d; type: %s; chance: %f",
-                             name,
-                             offset,
-                             type.getName(),
-                             chance);
+                "name: %s; offset: %d; type: %s; chance: %f",
+                name,
+                offset,
+                type.getName(),
+                chance);
     }
 
     public void genFloorBuildings(ServerLevelAccessor world,

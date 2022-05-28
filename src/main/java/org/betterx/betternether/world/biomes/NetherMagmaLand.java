@@ -15,10 +15,10 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.StructureType;
-import org.betterx.betternether.world.structures.decorations.StructureCrystal;
 import org.betterx.betternether.world.structures.decorations.StructureGeyser;
 import org.betterx.betternether.world.structures.plants.StructureGoldenVine;
 import org.betterx.betternether.world.structures.plants.StructureMagmaFlower;
@@ -35,7 +35,9 @@ public class NetherMagmaLand extends NetherBiome {
                    .loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
                    .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
                    .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
-                   .structure(BiomeTags.HAS_NETHER_FORTRESS);
+                   .structure(BiomeTags.HAS_NETHER_FORTRESS)
+                   .feature(NetherFeatures.CRYSTAL_FATURE)
+            ;
         }
 
         @Override
@@ -53,7 +55,6 @@ public class NetherMagmaLand extends NetherBiome {
     @Override
     protected void onInit() {
         addStructure("geyser", new StructureGeyser(), StructureType.FLOOR, 0.1F, false);
-        addStructure("obsidian_crystals", new StructureCrystal(), StructureType.FLOOR, 0.04F, true);
         addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.4F, false);
         addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.2F, true);
     }
@@ -66,7 +67,7 @@ public class NetherMagmaLand extends NetherBiome {
             boolean magma = true;
             if (random.nextInt(4) == 0) {
                 if (validWall(world, POS.below()) && validWall(world, POS.north()) && validWall(world,
-                                                                                                POS.south()) && validWall(
+                        POS.south()) && validWall(
                         world,
                         POS.east()) && validWall(world, POS.west())) {
                     BlocksHelper.setWithoutUpdate(world, POS, Blocks.LAVA.defaultBlockState());
