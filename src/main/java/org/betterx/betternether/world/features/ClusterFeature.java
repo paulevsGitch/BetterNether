@@ -37,14 +37,14 @@ public class ClusterFeature
     public static BCLFeature createAndRegister(String name) {
         SimpleRandomFeatureConfiguration configuration = new SimpleRandomFeatureConfiguration(HolderSet.direct(
                 PlacementUtils.inlinePlaced(NetherFeatures.STALAGMITE_NETHERRACK,
-                        new PointedDripstoneConfiguration(0.2f, 0.7f, 0.5f, 0.5f),
+                        new ClusterFeatureConfig(0.2f, 0.7f, 0.5f, 0.5f),
                         EnvironmentScanPlacement.scanningFor(Direction.DOWN,
                                 BlockPredicate.solid(),
                                 BlockPredicate.ONLY_IN_AIR_PREDICATE,
                                 12),
                         RandomOffsetPlacement.vertical(ConstantInt.of(1))),
                 PlacementUtils.inlinePlaced(NetherFeatures.STALAGMITE_NETHERRACK,
-                        new PointedDripstoneConfiguration(0.2f, 0.7f, 0.5f, 0.5f),
+                        new ClusterFeatureConfig(0.2f, 0.7f, 0.5f, 0.5f),
                         EnvironmentScanPlacement.scanningFor(Direction.UP,
                                 BlockPredicate.solid(),
                                 BlockPredicate.ONLY_IN_AIR_PREDICATE,
