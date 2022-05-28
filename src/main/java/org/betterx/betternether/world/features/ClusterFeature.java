@@ -27,6 +27,7 @@ import org.betterx.bclib.api.features.BCLFeatureBuilder;
 import org.betterx.bclib.world.features.BCLFeature;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BlockStalactite;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 
@@ -119,10 +120,10 @@ public class ClusterFeature
         }
     }
 
-    private BlockState createPointedDripstone(Direction direction, DripstoneThickness dripstoneThickness) {
+    private BlockState createPointedDripstone(Direction direction, int size) {
         return block
                 .defaultBlockState()
-                //.setValue(PointedDripstoneBlock.TIP_DIRECTION, direction)
+                .setValue(BlockStalactite.SIZE, Math.min(0, Math.max(7, size)))
                 //.setValue(PointedDripstoneBlock.THICKNESS, dripstoneThickness)
                 ;
     }
