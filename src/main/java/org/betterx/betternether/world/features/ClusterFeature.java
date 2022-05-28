@@ -13,10 +13,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.PointedDripstoneConfiguration;
@@ -90,8 +88,7 @@ public class ClusterFeature
                 blockPos2,
                 config);
 
-        int i = random.nextFloat() < config.chanceOfTallerDripstone && DripstoneUtils.isEmptyOrWater(
-                level.getBlockState(origin.relative(direction.get()))) ? 2 : 1;
+        int i = (int) (random.nextFloat() * 6 + 1);
         growPointedDripstone(level, origin, blockPos2, direction.get(), i, false);
         return true;
     }
@@ -104,11 +101,11 @@ public class ClusterFeature
                                         BlockPos blockPos,
                                         BlockPos blockPos2,
                                         Direction direction,
-                                        int i,
+                                        int height,
                                         boolean bl) {
         if (isValidBase(levelAccessor.getBlockState(blockPos2))) {
             BlockPos.MutableBlockPos mutableBlockPos = blockPos.mutable();
-            buildBaseToTipColumn(direction, i, bl, (blockState) -> {
+            buildBaseToTipColumn(direction, height, bl, (blockState) -> {
                 if (blockState.is(block)) {
                    /* blockState = blockState.setValue(PointedDripstoneBlock.WATERLOGGED,
                             levelAccessor.isWaterAt(mutableBlockPos));*/
@@ -123,28 +120,30 @@ public class ClusterFeature
     private BlockState createPointedDripstone(Direction direction, int size) {
         return block
                 .defaultBlockState()
-                .setValue(BlockStalactite.SIZE, Math.min(0, Math.max(7, size)))
-                //.setValue(PointedDripstoneBlock.THICKNESS, dripstoneThickness)
+                .setValue(BlockStalactite.SIZE, Math.max(0, Math.min(7, size)))
                 ;
     }
 
     protected void buildBaseToTipColumn(Direction direction, int i, boolean bl, Consumer<BlockState> consumer) {
-        if (i >= 3) {
-            consumer.accept(createPointedDripstone(direction, DripstoneThickness.BASE));
-
-            for (int j = 0; j < i - 3; ++j) {
-                consumer.accept(createPointedDripstone(direction, DripstoneThickness.MIDDLE));
-            }
+        for (int j = i; j >= 0; j--) {
+            consumer.accept(createPointedDripstone(direction, j));
         }
-
-        if (i >= 2) {
-            consumer.accept(createPointedDripstone(direction, DripstoneThickness.FRUSTUM));
-        }
-
-        if (i >= 1) {
-            consumer.accept(createPointedDripstone(direction,
-                    bl ? DripstoneThickness.TIP_MERGE : DripstoneThickness.TIP));
-        }
+//        if (i >= 3) {
+//            consumer.accept(createPointedDripstone(direction, DripstoneThickness.BASE));
+//
+//            for (int j = 0; j < i - 3; ++j) {
+//                consumer.accept(createPointedDripstone(direction, DripstoneThickness.MIDDLE));
+//            }
+//        }
+//
+//        if (i >= 2) {
+//            consumer.accept(createPointedDripstone(direction, DripstoneThickness.FRUSTUM));
+//        }
+//
+//        if (i >= 1) {
+//            consumer.accept(createPointedDripstone(direction,
+//                    bl ? DripstoneThickness.TIP_MERGE : DripstoneThickness.TIP));
+//        }
 
     }
 
