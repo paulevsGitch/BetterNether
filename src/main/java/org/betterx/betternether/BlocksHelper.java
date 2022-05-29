@@ -31,7 +31,7 @@ public class BlocksHelper {
     public static final int FORSE_RERENDER = 8;
     public static final int FLAG_IGNORE_OBSERVERS = 16;
 
-    public static final int SET_SILENT = FLAG_UPDATE_BLOCK | FLAG_IGNORE_OBSERVERS | FLAG_SEND_CLIENT_CHANGES;
+    public static final int SET_SILENT = /*FLAG_UPDATE_BLOCK |*/ FLAG_IGNORE_OBSERVERS | FLAG_SEND_CLIENT_CHANGES;
     public static final int SET_UPDATE = FLAG_UPDATE_BLOCK | FLAG_SEND_CLIENT_CHANGES;
     public static final Direction[] HORIZONTAL = new Direction[]{
             Direction.NORTH,

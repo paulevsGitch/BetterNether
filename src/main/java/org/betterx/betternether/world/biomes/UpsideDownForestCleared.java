@@ -47,30 +47,30 @@ public class UpsideDownForestCleared extends NetherBiome {
             return UpsideDownForestCleared::new;
         }
 
+        @Override
+        public boolean hasStalactites() {
+            return false;
+        }
+
 
         @Override
         public SurfaceRuleBuilder surface() {
             final SurfaceNoiseCondition noise = UpsideDownFloorCondition.DEFAULT;
             return super.surface().rule(3,
-                                        SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
-                                                            SurfaceRules.sequence(SurfaceRules.ifTrue(UpsideDownForest.NOISE_CEIL_LAYER,
-                                                                                                      UpsideDownForest.CEILEING_MOSS),
-                                                                                  NETHERRACK)
-                                                           )
-                                       ).rule(2,
-                                              SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
-                                                                  SurfaceRules.sequence(SurfaceRules.ifTrue(noise,
-                                                                                                            UpsideDownForest.NETHERRACK_MOSS),
-                                                                                        SurfaceRules.state(
-                                                                                                NetherBlocks.MUSHROOM_GRASS.defaultBlockState()))
-                                                                 )
-                                             );
+                    SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
+                            SurfaceRules.sequence(SurfaceRules.ifTrue(UpsideDownForest.NOISE_CEIL_LAYER,
+                                            UpsideDownForest.CEILEING_MOSS),
+                                    NETHERRACK)
+                    )
+            ).rule(2,
+                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
+                            SurfaceRules.sequence(SurfaceRules.ifTrue(noise,
+                                            UpsideDownForest.NETHERRACK_MOSS),
+                                    SurfaceRules.state(
+                                            NetherBlocks.MUSHROOM_GRASS.defaultBlockState()))
+                    )
+            );
         }
-    }
-
-    @Override
-    public boolean hasStalactites() {
-        return false;
     }
 
     @Override

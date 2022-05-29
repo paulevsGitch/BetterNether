@@ -34,7 +34,7 @@ class UpsideDownFloorCondition extends SurfaceNoiseCondition {
     public static final UpsideDownFloorCondition DEFAULT = new UpsideDownFloorCondition();
     public static final Codec<UpsideDownFloorCondition> CODEC = Codec.BYTE.fieldOf("nether_noise")
                                                                           .xmap(UpsideDownFloorCondition::create,
-                                                                                obj -> (byte) 0)
+                                                                                  obj -> (byte) 0)
                                                                           .codec();
     private static final KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> KEY_CODEC = KeyDispatchDataCodec.of(
             CODEC);
@@ -62,7 +62,7 @@ public class UpsideDownForest extends NetherBiome {
     static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
     static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
     static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition(Noises.NETHER_STATE_SELECTOR,
-                                                                                             0.0);
+            0.0);
 
     public static class Config extends NetherBiomeConfig {
         public Config(String name) {
@@ -87,29 +87,30 @@ public class UpsideDownForest extends NetherBiome {
             return UpsideDownForest::new;
         }
 
+        @Override
+        public boolean hasStalactites() {
+            return false;
+        }
+
 
         @Override
         public SurfaceRuleBuilder surface() {
             return super.surface().rule(2,
-                                        SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
-                                                            SurfaceRules.sequence(SurfaceRules.ifTrue(
-                                                                    UpsideDownForrestCeilCondition.DEFAULT,
-                                                                    CEILEING_MOSS), NETHERRACK)
-                                                           )
-                                       ).rule(2,
-                                              SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
-                                                                  SurfaceRules.sequence(SurfaceRules.ifTrue(
-                                                                          UpsideDownFloorCondition.DEFAULT,
-                                                                          NETHERRACK_MOSS), NETHERRACK)
-                                                                 )
-                                             );
+                    SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
+                            SurfaceRules.sequence(SurfaceRules.ifTrue(
+                                    UpsideDownForrestCeilCondition.DEFAULT,
+                                    CEILEING_MOSS), NETHERRACK)
+                    )
+            ).rule(2,
+                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
+                            SurfaceRules.sequence(SurfaceRules.ifTrue(
+                                    UpsideDownFloorCondition.DEFAULT,
+                                    NETHERRACK_MOSS), NETHERRACK)
+                    )
+            );
         }
     }
 
-    @Override
-    public boolean hasStalactites() {
-        return false;
-    }
 
     @Override
     public boolean hasBNStructures() {

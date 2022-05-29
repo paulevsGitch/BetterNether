@@ -102,7 +102,10 @@ public class NetherBiomeBuilder {
 
         NetherFeatures.addDefaultFeatures(builder);
 
-        builder.feature(NetherFeatures.STALAGMITE_NETHERRACK_CLUSTER);
+        if (data.hasStalactites()) {
+            builder.feature(NetherFeatures.STALAGMITE_NETHERRACK_CLUSTER);
+            builder.feature(NetherFeatures.STALAGMITE_GLOWSTONE_CLUSTER);
+        }
 
         if (data.hasDefaultOres()) NetherFeatures.addDefaultOres(builder);
         NetherStructures.addDefaultFeatures(builder);

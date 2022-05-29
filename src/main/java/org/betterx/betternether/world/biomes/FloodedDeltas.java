@@ -42,12 +42,13 @@ public class FloodedDeltas extends NetherBiome {
         public BiomeSupplier<NetherBiome> getSupplier() {
             return FloodedDeltas::new;
         }
+
+        @Override
+        public boolean hasStalactites() {
+            return false;
+        }
     }
 
-    @Override
-    public boolean hasStalactites() {
-        return false;
-    }
 
     public FloodedDeltas(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);

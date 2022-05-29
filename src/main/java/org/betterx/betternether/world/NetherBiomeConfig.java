@@ -14,9 +14,9 @@ import org.betterx.betternether.registry.NetherEntities.KnownSpawnTypes;
 public abstract class NetherBiomeConfig {
     public static final SurfaceRules.RuleSource NETHERRACK = SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState());
     public static final SurfaceRules.RuleSource BEDROCK_BOTTOM = SurfaceRules.ifTrue(NetherBiomeBuilder.BEDROCK_BOTTOM,
-                                                                                     NetherBiomeBuilder.BEDROCK);
+            NetherBiomeBuilder.BEDROCK);
     public static final SurfaceRules.RuleSource BEDROCK_TOP = SurfaceRules.ifTrue(SurfaceRules.not(NetherBiomeBuilder.BEDROCK_TOP),
-                                                                                  NetherBiomeBuilder.BEDROCK);
+            NetherBiomeBuilder.BEDROCK);
 
 
     public final ResourceLocation ID;
@@ -43,6 +43,10 @@ public abstract class NetherBiomeConfig {
     }
 
     public boolean hasVanillaOres() {
+        return true;
+    }
+
+    public boolean hasStalactites() {
         return true;
     }
 

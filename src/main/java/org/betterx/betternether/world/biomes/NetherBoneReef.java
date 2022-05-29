@@ -14,11 +14,11 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.bones.StructureBoneReef;
-import org.betterx.betternether.world.structures.decorations.StructureStalactiteCeil;
 import org.betterx.betternether.world.structures.decorations.StructureStalactiteFloor;
 import org.betterx.betternether.world.structures.plants.*;
 
@@ -35,7 +35,8 @@ public class NetherBoneReef extends NetherBiome {
                    .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .particles(ParticleTypes.WARPED_SPORE, 0.01F)
-                   .structure(BiomeTags.HAS_NETHER_FORTRESS);
+                   .structure(BiomeTags.HAS_NETHER_FORTRESS)
+                   .feature(NetherFeatures.STALAGMITE_BONE_CLUSTER);
         }
 
         @Override
@@ -44,14 +45,14 @@ public class NetherBoneReef extends NetherBiome {
         }
 
         @Override
+        public boolean hasStalactites() {
+            return false;
+        }
+
+        @Override
         public SurfaceRuleBuilder surface() {
             return super.surface().floor(NetherBlocks.MUSHROOM_GRASS.defaultBlockState());
         }
-    }
-
-    @Override
-    public boolean hasStalactites() {
-        return false;
     }
 
     public NetherBoneReef(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
@@ -61,10 +62,10 @@ public class NetherBoneReef extends NetherBiome {
     @Override
     protected void onInit() {
         addStructure("bone_stalactite",
-                     new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
-                     StructureType.FLOOR,
-                     0.05F,
-                     true);
+                new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
+                StructureType.FLOOR,
+                0.05F,
+                true);
 
         addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
         addStructure("bone_reef", new StructureBoneReef(), StructureType.FLOOR, 0.2F, true);
@@ -72,11 +73,11 @@ public class NetherBoneReef extends NetherBiome {
         addStructure("feather_fern", new StructureFeatherFern(), StructureType.FLOOR, 0.05F, true);
         addStructure("bone_grass", new StructureBoneGrass(), StructureType.FLOOR, 0.1F, false);
 
-        addStructure("bone_stalagmite",
-                     new StructureStalactiteCeil(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
-                     StructureType.CEIL,
-                     0.05F,
-                     true);
+//        addStructure("bone_stalagmite",
+//                new StructureStalactiteCeil(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
+//                StructureType.CEIL,
+//                0.05F,
+//                true);
 
         addStructure("lumabus_vine", new StructureLumabusVine(), StructureType.CEIL, 0.3F, true);
     }

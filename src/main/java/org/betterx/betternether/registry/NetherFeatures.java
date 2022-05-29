@@ -12,7 +12,6 @@ import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.PointedDripstoneConfiguration;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
@@ -27,15 +26,51 @@ import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityFeature;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class NetherFeatures {
     // Surface Features //
-    public static final Feature<PointedDripstoneConfiguration> STALAGMITE_NETHERRACK = register("stalagmite_netherrack",
-            new ClusterFeature());
+    public static final Feature<ScatterFeatureConfig> STALAGMITES = register("stalagmites", new ScatterFeature());
     public static final BCLFeature CRYSTAL_FATURE = CrystalFeature.createAndRegister();
-    public static final BCLFeature STALAGMITE_NETHERRACK_CLUSTER = ClusterFeature.createAndRegister(
-            "stalagmite_netherrack_cluster");
+    public static final BCLFeature STALAGMITE_NETHERRACK_CLUSTER = ScatterFeature.createAndRegister(
+            "stalagmite_netherrack_cluster",
+            30,
+            60,
+            new ScatterFeatureConfig(NetherBlocks.NETHERRACK_STALACTITE.defaultBlockState(),
+                    Optional.empty(),
+                    0.9f,
+                    0.75f,
+                    0.5f,
+                    2,
+                    7,
+                    0.3f));
+
+    public static final BCLFeature STALAGMITE_GLOWSTONE_CLUSTER = ScatterFeature.createAndRegister(
+            "stalagmite_glowstone_cluster",
+            20,
+            50,
+            new ScatterFeatureConfig(NetherBlocks.GLOWSTONE_STALACTITE.defaultBlockState(),
+                    Optional.empty(),
+                    0.9f,
+                    0.75f,
+                    0.5f,
+                    2,
+                    7,
+                    0.5f));
+
+    public static final BCLFeature STALAGMITE_BONE_CLUSTER = ScatterFeature.createAndRegister(
+            "stalagmite_bone_cluster",
+            50,
+            90,
+            new ScatterFeatureConfig(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
+                    Optional.empty(),
+                    1f,
+                    0.75f,
+                    0.5f,
+                    2,
+                    7,
+                    1));
 
     // Ores //
     public static final BCLFeature CINCINNASITE_ORE =

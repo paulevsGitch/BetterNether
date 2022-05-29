@@ -48,14 +48,14 @@ public class NetherSulfuricBoneReef extends NetherBiome {
         }
 
         @Override
+        public boolean hasStalactites() {
+            return false;
+        }
+
+        @Override
         public SurfaceRuleBuilder surface() {
             return super.surface().floor(NetherBlocks.SEPIA_MUSHROOM_GRASS.defaultBlockState());
         }
-    }
-
-    @Override
-    public boolean hasStalactites() {
-        return false;
     }
 
     public NetherSulfuricBoneReef(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
@@ -65,10 +65,10 @@ public class NetherSulfuricBoneReef extends NetherBiome {
     @Override
     protected void onInit() {
         addStructure("bone_stalactite",
-                     new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
-                     StructureType.FLOOR,
-                     0.05F,
-                     true);
+                new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
+                StructureType.FLOOR,
+                0.05F,
+                true);
 
         addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
         addStructure("bone_reef", new StructureBoneReef(), StructureType.FLOOR, 0.2F, true);
@@ -76,10 +76,10 @@ public class NetherSulfuricBoneReef extends NetherBiome {
         addStructure("sulfuric_bone_grass", new StructureSepiaBoneGrass(), StructureType.FLOOR, 0.1F, false);
 
         addStructure("bone_stalagmite",
-                     new StructureStalactiteCeil(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
-                     StructureType.CEIL,
-                     0.05F,
-                     true);
+                new StructureStalactiteCeil(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
+                StructureType.CEIL,
+                0.05F,
+                true);
 
         addStructure("golden_lumabus_vine", new StructureGoldenLumabusVine(), StructureType.CEIL, 0.3F, true);
     }
