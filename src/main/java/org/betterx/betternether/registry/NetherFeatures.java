@@ -51,7 +51,7 @@ public class NetherFeatures {
             20,
             50,
             new ScatterFeatureConfig(NetherBlocks.GLOWSTONE_STALACTITE.defaultBlockState(),
-                    Optional.empty(),
+                    Optional.of(Blocks.GLOWSTONE.defaultBlockState()),
                     0.9f,
                     0.75f,
                     0.5f,
