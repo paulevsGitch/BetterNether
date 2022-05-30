@@ -58,7 +58,8 @@ public class BlockFixFeature extends DefaultFeature {
                         continue;
                     }
 
-                    if (BlocksHelper.isLava(state) && world.isEmptyBlock(abovePos) && world.isEmptyBlock(belowPos)) {
+                    if (org.betterx.bclib.util.BlocksHelper.isLava(state) && world.isEmptyBlock(abovePos) && world.isEmptyBlock(
+                            belowPos)) {
                         BlocksHelper.setWithoutUpdate(world, popPos, AIR);
                         continue;
                     }

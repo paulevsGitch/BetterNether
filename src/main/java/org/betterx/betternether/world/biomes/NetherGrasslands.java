@@ -20,13 +20,13 @@ import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
 import org.betterx.bclib.interfaces.NumericProvider;
 import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.*;
 
 import java.util.List;
@@ -35,7 +35,7 @@ class NetherGrasslandsNumericProvider implements NumericProvider {
     public static final NetherGrasslandsNumericProvider DEFAULT = new NetherGrasslandsNumericProvider();
     public static final Codec<NetherGrasslandsNumericProvider> CODEC = Codec.BYTE.fieldOf("nether_grasslands")
                                                                                  .xmap((obj) -> DEFAULT,
-                                                                                       obj -> (byte) 0)
+                                                                                         obj -> (byte) 0)
                                                                                  .codec();
 
     @Override
@@ -53,8 +53,8 @@ class NetherGrasslandsNumericProvider implements NumericProvider {
 
     static {
         Registry.register(NumericProvider.NUMERIC_PROVIDER,
-                          BetterNether.makeID("nether_grasslands"),
-                          NetherGrasslandsNumericProvider.CODEC);
+                BetterNether.makeID("nether_grasslands"),
+                NetherGrasslandsNumericProvider.CODEC);
     }
 }
 
@@ -103,7 +103,7 @@ public class NetherGrasslands extends NetherBiome {
         public SurfaceRuleBuilder surface() {
             return super.surface()
                         .rule(new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
-                                                   List.of(SOUL_SOIL, MOSS, NETHERRACK)));
+                                List.of(SOUL_SOIL, MOSS, NETHERRACK)));
         }
 
         @Override
@@ -122,18 +122,18 @@ public class NetherGrasslands extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
-        addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.05F, true);
-        addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, true);
-        addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.05F, true);
-        addStructure("ink_bush", new StructureInkBush(), StructureType.FLOOR, 0.05F, true);
-        addStructure("black_apple", new StructureBlackApple(), StructureType.FLOOR, 0.01F, true);
-        addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, true);
-        addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.02F, true);
-        addStructure("nether_grass", new StructureNetherGrass(), StructureType.FLOOR, 0.4F, true);
-        addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
-        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
+        addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.5F, false);
+        addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("magma_flower", new StructureMagmaFlower(), StructurePlacementType.FLOOR, 0.5F, true);
+        addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("ink_bush", new StructureInkBush(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("black_apple", new StructureBlackApple(), StructurePlacementType.FLOOR, 0.01F, true);
+        addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.02F, true);
+        addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.02F, true);
+        addStructure("nether_grass", new StructureNetherGrass(), StructurePlacementType.FLOOR, 0.4F, true);
+        addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
+        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.8F, true);
+        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.8F, true);
     }
 
     @Override

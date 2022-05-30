@@ -58,10 +58,10 @@ public class BlockNetherReed extends BlockBase {
         BlockState down = world.getBlockState(pos.below());
         if (BlocksHelper.isNetherGround(down)) {
             BlockPos posDown = pos.below();
-            boolean lava = BlocksHelper.isLava(world.getBlockState(posDown.north()));
-            lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.south()));
-            lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.east()));
-            lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.west()));
+            boolean lava = org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(posDown.north()));
+            lava = lava || org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(posDown.south()));
+            lava = lava || org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(posDown.east()));
+            lava = lava || org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(posDown.west()));
             if (lava) {
                 return up == this ? this.defaultBlockState().setValue(TOP, false) : this.defaultBlockState();
             }
@@ -79,10 +79,10 @@ public class BlockNetherReed extends BlockBase {
         BlockPos posDown = pos.below();
         BlockState down = world.getBlockState(posDown);
         if (BlocksHelper.isNetherGround(down)) {
-            boolean lava = BlocksHelper.isLava(world.getBlockState(posDown.north()));
-            lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.south()));
-            lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.east()));
-            lava = lava || BlocksHelper.isLava(world.getBlockState(posDown.west()));
+            boolean lava = org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(posDown.north()));
+            lava = lava || org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(posDown.south()));
+            lava = lava || org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(posDown.east()));
+            lava = lava || org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(posDown.west()));
             return lava;
         } else
             return down.getBlock() == this;

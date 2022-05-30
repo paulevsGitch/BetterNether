@@ -25,7 +25,6 @@ import org.betterx.bclib.entity.BCLEntityWrapper;
 import org.betterx.bclib.interfaces.SpawnRule;
 import org.betterx.bclib.util.ColorUtil;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.entity.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
@@ -62,10 +61,11 @@ public class NetherEntities {
 
         public void addSpawn(BCLBiomeBuilder builder, NetherBiomeConfig data) {
             final String category = data.configGroup() + ".spawn." + this.type.getCategory()
-                                                                              .getName() + "." + this.type.getDescriptionId()
-                                                                                                          .replace(
-                                                                                                                  "entity.",
-                                                                                                                  "");
+                                                                              .getName() + "." + this.type
+                    .getDescriptionId()
+                    .replace(
+                            "entity.",
+                            "");
             int weight = Configs.BIOMES.getInt(category, "weight", data.spawnWeight(this));
             int min = Configs.BIOMES.getInt(category, "minGroupSize", minGroupSize);
             int max = Configs.BIOMES.getInt(category, "maxGroupSize", maxGroupSize);
@@ -79,10 +79,11 @@ public class NetherEntities {
 
         public void addSpawn(ResourceLocation ID, Holder<Biome> biome, float multiplier) {
             final String category = ID.getNamespace() + "." + ID.getPath() + ".spawn." + this.type.getCategory()
-                                                                                                  .getName() + "." + this.type.getDescriptionId()
-                                                                                                                              .replace(
-                                                                                                                                      "entity.",
-                                                                                                                                      "");
+                                                                                                  .getName() + "." + this.type
+                    .getDescriptionId()
+                    .replace(
+                            "entity.",
+                            "");
             int dweight = Configs.BIOMES.getInt(category, "weight", (int) (weight * multiplier));
             int min = Configs.BIOMES.getInt(category, "minGroupSize", minGroupSize);
             int max = Configs.BIOMES.getInt(category, "maxGroupSize", maxGroupSize);
@@ -117,18 +118,19 @@ public class NetherEntities {
     public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(MobCategory.MISC,
                                                                                        EntityChair::new)
                                                                                .dimensions(EntityDimensions.fixed(0.0F,
-                                                                                                                  0.0F))
+                                                                                       0.0F))
                                                                                .fireImmune()
                                                                                .disableSummon()
                                                                                .build();
-    public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder.create(MobCategory.MISC,
-                                                                                                          EntityNagaProjectile::new)
-                                                                                                  .dimensions(
-                                                                                                          EntityDimensions.fixed(
-                                                                                                                  1F,
-                                                                                                                  1F))
-                                                                                                  .disableSummon()
-                                                                                                  .build();
+    public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder
+            .create(MobCategory.MISC,
+                    EntityNagaProjectile::new)
+            .dimensions(
+                    EntityDimensions.fixed(
+                            1F,
+                            1F))
+            .disableSummon()
+            .build();
 
     public static final BCLEntityWrapper<EntityFirefly> FIREFLY =
             register(
@@ -141,7 +143,7 @@ public class NetherEntities {
                     true,
                     ColorUtil.color(255, 223, 168),
                     ColorUtil.color(233, 182, 95)
-                    );
+            );
 
     public static final BCLEntityWrapper<EntityHydrogenJellyfish> HYDROGEN_JELLYFISH =
             register(
@@ -154,7 +156,7 @@ public class NetherEntities {
                     false,
                     ColorUtil.color(253, 164, 24),
                     ColorUtil.color(88, 21, 4)
-                    );
+            );
 
     public static final BCLEntityWrapper<EntityNaga> NAGA =
             register(
@@ -167,7 +169,7 @@ public class NetherEntities {
                     true,
                     ColorUtil.color(12, 12, 12),
                     ColorUtil.color(210, 90, 26)
-                    );
+            );
 
     public static final BCLEntityWrapper<EntityFlyingPig> FLYING_PIG =
             register(
@@ -180,7 +182,7 @@ public class NetherEntities {
                     true,
                     ColorUtil.color(241, 140, 93),
                     ColorUtil.color(176, 58, 47)
-                    );
+            );
 
     public static final BCLEntityWrapper<EntityJungleSkeleton> JUNGLE_SKELETON =
             register(
@@ -193,7 +195,7 @@ public class NetherEntities {
                     true,
                     ColorUtil.color(134, 162, 149),
                     ColorUtil.color(6, 111, 79)
-                    );
+            );
 
     public static final BCLEntityWrapper<EntitySkull> SKULL =
             register(
@@ -206,7 +208,7 @@ public class NetherEntities {
                     true,
                     ColorUtil.color(24, 19, 19),
                     ColorUtil.color(255, 28, 18)
-                    );
+            );
 
 
     private static <T extends Mob> BCLEntityWrapper<T> register(String name,
@@ -221,8 +223,8 @@ public class NetherEntities {
         ResourceLocation id = BetterNether.makeID(name);
         EntityType<T> type = FabricEntityTypeBuilder.create(group, entity)
                                                     .dimensions(fixedSize
-                                                                        ? EntityDimensions.fixed(width, height)
-                                                                        : EntityDimensions.scalable(width, height))
+                                                            ? EntityDimensions.fixed(width, height)
+                                                            : EntityDimensions.scalable(width, height))
                                                     .fireImmune() //Nether Entities are by default immune to fire
                                                     .build();
 
@@ -244,7 +246,7 @@ public class NetherEntities {
         if (h > MAX_FLOAT_HEIGHT) return false;
 
         for (int i = 1; i <= h + 1; i++)
-            if (BlocksHelper.isLava(world.getBlockState(pos.below(i))))
+            if (org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(pos.below(i))))
                 return allow;
 
         return !allow;

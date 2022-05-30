@@ -17,12 +17,12 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.StructureBlackBush;
 import org.betterx.betternether.world.structures.plants.StructureSoulGrass;
 import org.betterx.betternether.world.structures.plants.StructureSoulVein;
@@ -65,16 +65,16 @@ public class NetherSoulPlain extends NetherBiome {
 
             RuleSource soilSandStoneDist
                     = SurfaceRules.sequence(new SwitchRuleSource(NetherNoiseCondition.DEFAULT,
-                                                                 List.of(SOUL_SOIL,
-                                                                         SOUL_SAND,
-                                                                         SOUL_SANDSTONE,
-                                                                         LAVA,
-                                                                         LAVA,
-                                                                         SOUL_SAND)));
+                    List.of(SOUL_SOIL,
+                            SOUL_SAND,
+                            SOUL_SANDSTONE,
+                            LAVA,
+                            LAVA,
+                            SOUL_SAND)));
 
             RuleSource soilStoneDist
                     = SurfaceRules.sequence(SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, SOUL_SOIL),
-                                            SOUL_SANDSTONE);
+                    SOUL_SANDSTONE);
             return super
                     .surface()
                     .rule(2, SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, soilSandDist))
@@ -93,9 +93,9 @@ public class NetherSoulPlain extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, true);
-        addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.02F, false);
-        addStructure("soul_grass", new StructureSoulGrass(), StructureType.FLOOR, 0.3F, false);
+        addStructure("soul_vein", new StructureSoulVein(), StructurePlacementType.FLOOR, 0.5F, true);
+        addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.02F, false);
+        addStructure("soul_grass", new StructureSoulGrass(), StructurePlacementType.FLOOR, 0.3F, false);
     }
 
     @Override

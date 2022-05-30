@@ -4,16 +4,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 
+import org.betterx.bclib.world.structures.StructureNBT;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.world.structures.IStructure;
+import org.betterx.betternether.world.structures.NetherStructureNBT;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.betternether.world.structures.StructureNBT;
 
 public class StructureBoneReef implements IStructure {
     private static final StructureNBT[] BONES = new StructureNBT[]{
-            new StructureNBT("bone_01"),
-            new StructureNBT("bone_02"),
-            new StructureNBT("bone_03")
+            new NetherStructureNBT("bone_01"),
+            new NetherStructureNBT("bone_02"),
+            new NetherStructureNBT("bone_03")
     };
 
     @Override

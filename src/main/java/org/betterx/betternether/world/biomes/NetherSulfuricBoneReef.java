@@ -13,13 +13,12 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.bones.StructureBoneReef;
-import org.betterx.betternether.world.structures.decorations.StructureStalactiteCeil;
-import org.betterx.betternether.world.structures.decorations.StructureStalactiteFloor;
 import org.betterx.betternether.world.structures.plants.StructureGoldenLumabusVine;
 import org.betterx.betternether.world.structures.plants.StructureJellyfishMushroom;
 import org.betterx.betternether.world.structures.plants.StructureReeds;
@@ -39,6 +38,8 @@ public class NetherSulfuricBoneReef extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .particles(ParticleTypes.ASH, 0.01F)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
+                   .feature(NetherFeatures.STALACTITE_BONE_CLUSTER)
+                   .feature(NetherFeatures.STALAGMITE_BONE_CLUSTER)
                    .genChance(0.3f);
         }
 
@@ -64,24 +65,13 @@ public class NetherSulfuricBoneReef extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("bone_stalactite",
-                new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
-                StructureType.FLOOR,
-                0.05F,
-                true);
 
-        addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
-        addStructure("bone_reef", new StructureBoneReef(), StructureType.FLOOR, 0.2F, true);
-        addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructureType.FLOOR, 0.02F, true);
-        addStructure("sulfuric_bone_grass", new StructureSepiaBoneGrass(), StructureType.FLOOR, 0.1F, false);
+        addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.5F, false);
+        addStructure("bone_reef", new StructureBoneReef(), StructurePlacementType.FLOOR, 0.2F, true);
+        addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.02F, true);
+        addStructure("sulfuric_bone_grass", new StructureSepiaBoneGrass(), StructurePlacementType.FLOOR, 0.1F, false);
 
-        addStructure("bone_stalagmite",
-                new StructureStalactiteCeil(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
-                StructureType.CEIL,
-                0.05F,
-                true);
-
-        addStructure("golden_lumabus_vine", new StructureGoldenLumabusVine(), StructureType.CEIL, 0.3F, true);
+        addStructure("golden_lumabus_vine", new StructureGoldenLumabusVine(), StructurePlacementType.CEIL, 0.3F, true);
     }
 
     @Override

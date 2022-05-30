@@ -15,11 +15,11 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.*;
 
 public class OldWarpedWoods extends NetherBiome {
@@ -67,11 +67,11 @@ public class OldWarpedWoods extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("big_warped_tree", new StructureBigWarpedTree(), StructureType.FLOOR, 0.1F, false);
-        addStructure("warped_fungus", new StructureWarpedFungus(), StructureType.FLOOR, 0.05F, true);
-        addStructure("warped_roots", new StructureWarpedRoots(), StructureType.FLOOR, 0.2F, true);
-        addStructure("twisted_vine", new StructureTwistedVines(), StructureType.FLOOR, 0.1F, true);
-        addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.3F, true);
+        addStructure("big_warped_tree", new StructureBigWarpedTree(), StructurePlacementType.FLOOR, 0.1F, false);
+        addStructure("warped_fungus", new StructureWarpedFungus(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("warped_roots", new StructureWarpedRoots(), StructurePlacementType.FLOOR, 0.2F, true);
+        addStructure("twisted_vine", new StructureTwistedVines(), StructurePlacementType.FLOOR, 0.1F, true);
+        addStructure("black_vine", new StructureBlackVine(), StructurePlacementType.CEIL, 0.3F, true);
     }
 
     @Override

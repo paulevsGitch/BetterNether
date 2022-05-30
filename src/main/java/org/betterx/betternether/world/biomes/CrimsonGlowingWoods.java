@@ -15,11 +15,11 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.*;
 import org.betterx.betternether.world.surface.CrimsonWoodNoiseCondition;
 
@@ -69,7 +69,7 @@ public class CrimsonGlowingWoods extends NetherBiome {
                             Blocks.NETHER_WART_BLOCK.defaultBlockState(),
                             Blocks.CRIMSON_NYLIUM.defaultBlockState(),
                             CrimsonWoodNoiseCondition.DEFAULT
-                                 )
+                    )
 //						.rule(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, SurfaceRules.sequence(
 //							SurfaceRules.ifTrue(new CrimsonWoodNoiseCondition(), NETHER_WART_BLOCK),
 //							CRIMSON_NYLIUM
@@ -86,14 +86,18 @@ public class CrimsonGlowingWoods extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("crimson_glowing_tree", new StructureCrimsonGlowingTree(), StructureType.FLOOR, 0.2F, false);
-        addStructure("wart_bush", new StructureWartBush(), StructureType.FLOOR, 0.05F, false);
-        addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.02F, true);
-        addStructure("crimson_fungus", new StructureCrimsonFungus(), StructureType.FLOOR, 0.05F, true);
-        addStructure("crimson_roots", new StructureCrimsonRoots(), StructureType.FLOOR, 0.2F, true);
-        addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.3F, true);
-        addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.4F, true);
+        addStructure("crimson_glowing_tree",
+                new StructureCrimsonGlowingTree(),
+                StructurePlacementType.FLOOR,
+                0.2F,
+                false);
+        addStructure("wart_bush", new StructureWartBush(), StructurePlacementType.FLOOR, 0.05F, false);
+        addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.02F, true);
+        addStructure("crimson_fungus", new StructureCrimsonFungus(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("crimson_roots", new StructureCrimsonRoots(), StructurePlacementType.FLOOR, 0.2F, true);
+        addStructure("golden_vine", new StructureGoldenVine(), StructurePlacementType.CEIL, 0.3F, true);
+        addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
+        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.4F, true);
     }
 
     @Override

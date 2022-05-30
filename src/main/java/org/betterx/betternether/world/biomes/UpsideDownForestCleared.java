@@ -14,11 +14,11 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.SurfaceNoiseCondition;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.decorations.StructureForestLitter;
 import org.betterx.betternether.world.structures.plants.*;
 
@@ -86,15 +86,15 @@ public class UpsideDownForestCleared extends NetherBiome {
     protected void onInit() {
         this.setNoiseDensity(0.3F);
 
-        addStructure("moss_cover", new StructureMossCover(), StructureType.FLOOR, 0.6F, false);
-        addStructure("jungle_moss", new StructureJungleMoss(), StructureType.WALL, 0.4F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.4F, true);
-        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.4F, true);
-        addStructure("forest_litter", new StructureForestLitter(), StructureType.FLOOR, 0.1F, false);
-        //addStructure("ceiling_mushrooms", new StructureCeilingMushrooms(), StructureType.CEIL, 1F, false);
-        addStructure("neon_equisetum", new StructureNeonEquisetum(), StructureType.CEIL, 0.1F, true);
-        addStructure("hook_mushroom", new StructureHookMushroom(), StructureType.CEIL, 0.03F, true);
-        addStructure("whispering_gourd", new StructureWhisperingGourd(), StructureType.CEIL, 0.02F, true);
+        addStructure("moss_cover", new StructureMossCover(), StructurePlacementType.FLOOR, 0.6F, false);
+        addStructure("jungle_moss", new StructureJungleMoss(), StructurePlacementType.WALL, 0.4F, true);
+        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.4F, true);
+        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.4F, true);
+        addStructure("forest_litter", new StructureForestLitter(), StructurePlacementType.FLOOR, 0.1F, false);
+        //addStructure("ceiling_mushrooms", new StructureCeilingMushrooms(), StructurePlacementType.CEIL, 1F, false);
+        addStructure("neon_equisetum", new StructureNeonEquisetum(), StructurePlacementType.CEIL, 0.1F, true);
+        addStructure("hook_mushroom", new StructureHookMushroom(), StructurePlacementType.CEIL, 0.03F, true);
+        addStructure("whispering_gourd", new StructureWhisperingGourd(), StructurePlacementType.CEIL, 0.02F, true);
     }
 
     @Override

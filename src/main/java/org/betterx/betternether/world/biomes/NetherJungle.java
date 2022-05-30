@@ -13,12 +13,12 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.*;
 
 public class NetherJungle extends NetherBiome {
@@ -64,32 +64,32 @@ public class NetherJungle extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
-        addStructure("stalagnate", new StructureStalagnate(), StructureType.FLOOR, 0.2F, false);
-        addStructure("rubeus_tree", new StructureRubeus(), StructureType.FLOOR, 0.1F, false);
-        addStructure("bush_rubeus", new StructureRubeusBush(), StructureType.FLOOR, 0.1F, false);
-        addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.5F, false);
-        addStructure("egg_plant", new StructureEggPlant(), StructureType.FLOOR, 0.05F, true);
-        addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructureType.FLOOR, 0.03F, true);
-        addStructure("feather_fern", new StructureFeatherFern(), StructureType.FLOOR, 0.05F, true);
-        addStructure("jungle_plant", new StructureJunglePlant(), StructureType.FLOOR, 0.1F, false);
-        addStructure("lucis", new StructureLucis(), StructureType.WALL, 0.1F, false);
-        addStructure("eye", new StructureEye(), StructureType.CEIL, 0.1F, true);
-        addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.1F, true);
-        addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.1F, true);
-        addStructure("flowered_vine", new StructureBloomingVine(), StructureType.CEIL, 0.1F, true);
-        addStructure("jungle_moss", new StructureJungleMoss(), StructureType.WALL, 0.8F, true);
-        addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.2F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
-        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
+        addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.5F, false);
+        addStructure("stalagnate", new StructureStalagnate(), StructurePlacementType.FLOOR, 0.2F, false);
+        addStructure("rubeus_tree", new StructureRubeus(), StructurePlacementType.FLOOR, 0.1F, false);
+        addStructure("bush_rubeus", new StructureRubeusBush(), StructurePlacementType.FLOOR, 0.1F, false);
+        addStructure("magma_flower", new StructureMagmaFlower(), StructurePlacementType.FLOOR, 0.5F, false);
+        addStructure("egg_plant", new StructureEggPlant(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.03F, true);
+        addStructure("feather_fern", new StructureFeatherFern(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("jungle_plant", new StructureJunglePlant(), StructurePlacementType.FLOOR, 0.1F, false);
+        addStructure("lucis", new StructureLucis(), StructurePlacementType.WALL, 0.1F, false);
+        addStructure("eye", new StructureEye(), StructurePlacementType.CEIL, 0.1F, true);
+        addStructure("black_vine", new StructureBlackVine(), StructurePlacementType.CEIL, 0.1F, true);
+        addStructure("golden_vine", new StructureGoldenVine(), StructurePlacementType.CEIL, 0.1F, true);
+        addStructure("flowered_vine", new StructureBloomingVine(), StructurePlacementType.CEIL, 0.1F, true);
+        addStructure("jungle_moss", new StructureJungleMoss(), StructurePlacementType.WALL, 0.8F, true);
+        addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.2F, true);
+        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.8F, true);
+        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.8F, true);
 
-        addStructures(structureFormat("ruined_temple", -4, StructureType.FLOOR, 10F));
-        addStructures(structureFormat("jungle_temple_altar", -2, StructureType.FLOOR, 10F));
-        addStructures(structureFormat("jungle_temple_2", -2, StructureType.FLOOR, 10F));
+        addStructures(structureFormat("ruined_temple", -4, StructurePlacementType.FLOOR, 10F));
+        addStructures(structureFormat("jungle_temple_altar", -2, StructurePlacementType.FLOOR, 10F));
+        addStructures(structureFormat("jungle_temple_2", -2, StructurePlacementType.FLOOR, 10F));
 
-        addStructures(structureFormat("jungle_bones_1", 0, StructureType.FLOOR, 20F));
-        addStructures(structureFormat("jungle_bones_2", 0, StructureType.FLOOR, 20F));
-        addStructures(structureFormat("jungle_bones_3", 0, StructureType.FLOOR, 20F));
+        addStructures(structureFormat("jungle_bones_1", 0, StructurePlacementType.FLOOR, 20F));
+        addStructures(structureFormat("jungle_bones_2", 0, StructurePlacementType.FLOOR, 20F));
+        addStructures(structureFormat("jungle_bones_3", 0, StructurePlacementType.FLOOR, 20F));
 
         this.setNoiseDensity(0.5F);
     }

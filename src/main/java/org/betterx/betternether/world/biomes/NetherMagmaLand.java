@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.decorations.StructureGeyser;
 import org.betterx.betternether.world.structures.plants.StructureGoldenVine;
 import org.betterx.betternether.world.structures.plants.StructureMagmaFlower;
@@ -54,9 +54,9 @@ public class NetherMagmaLand extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("geyser", new StructureGeyser(), StructureType.FLOOR, 0.1F, false);
-        addStructure("magma_flower", new StructureMagmaFlower(), StructureType.FLOOR, 0.4F, false);
-        addStructure("golden_vine", new StructureGoldenVine(), StructureType.CEIL, 0.2F, true);
+        addStructure("geyser", new StructureGeyser(), StructurePlacementType.FLOOR, 0.1F, false);
+        addStructure("magma_flower", new StructureMagmaFlower(), StructurePlacementType.FLOOR, 0.4F, false);
+        addStructure("golden_vine", new StructureGoldenVine(), StructurePlacementType.CEIL, 0.2F, true);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class NetherMagmaLand extends NetherBiome {
 
     protected boolean validWall(LevelAccessor world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
-        return BlocksHelper.isLava(state) || BlocksHelper.isNetherGroundMagma(state);
+        return org.betterx.bclib.util.BlocksHelper.isLava(state) || BlocksHelper.isNetherGroundMagma(state);
     }
 
     protected boolean isMask(int x, int z) {

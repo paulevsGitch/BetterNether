@@ -61,6 +61,11 @@ public class NetherBiomeBuilder {
                 .feature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_CLOSED);
     }
 
+    private static void addBNStructures(BCLBiomeBuilder builder) {
+
+    }
+
+
     public static NetherBiome create(NetherBiomeConfig data) {
         return create(data, null);
     }
@@ -93,8 +98,11 @@ public class NetherBiomeBuilder {
 
 
         if (data.hasVanillaStructures()) addVanillaStructures(builder);
+        if (data.hasBNStructures()) addBNStructures(builder);
         if (data.hasVanillaFeatures()) addVanillaFeatures(builder);
         if (data.hasVanillaOres()) builder.netherDefaultOres();
+
+        if (data.hasBNFeatures()) NetherFeatures.addDefaultBNFeatures(builder);
 
         for (NetherEntities.KnownSpawnTypes spawnType : NetherEntities.KnownSpawnTypes.values()) {
             spawnType.addSpawn(builder, data);
@@ -103,8 +111,8 @@ public class NetherBiomeBuilder {
         NetherFeatures.addDefaultFeatures(builder);
 
         if (data.hasStalactites()) {
-            builder.feature(NetherFeatures.STALAGMITE_NETHERRACK_CLUSTER);
-            builder.feature(NetherFeatures.STALAGMITE_GLOWSTONE_CLUSTER);
+            builder.feature(NetherFeatures.STALAGNATE_NETHERRACK_CLUSTER);
+            builder.feature(NetherFeatures.STALAGNATE_GLOWSTONE_CLUSTER);
         }
 
         if (data.hasDefaultOres()) NetherFeatures.addDefaultOres(builder);

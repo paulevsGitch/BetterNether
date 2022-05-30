@@ -3,18 +3,18 @@ package org.betterx.betternether.world.structures.plants;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.world.structures.NetherStructureWorld;
 import org.betterx.betternether.world.structures.StructureObjScatter;
-import org.betterx.betternether.world.structures.StructureType;
-import org.betterx.betternether.world.structures.StructureWorld;
 
 public class StructureCrimsonPinewood extends StructureObjScatter {
-    private static final StructureWorld[] TREES = new StructureWorld[]{
-            new StructureWorld("trees/crimson_pine_01", -2, StructureType.FLOOR),
-            new StructureWorld("trees/crimson_pine_02", -2, StructureType.FLOOR),
-            new StructureWorld("trees/crimson_pine_03", -2, StructureType.FLOOR),
-            new StructureWorld("trees/crimson_pine_04", -1, StructureType.FLOOR),
-            new StructureWorld("trees/crimson_pine_05", -1, StructureType.FLOOR)
+    private static final NetherStructureWorld[] TREES = new NetherStructureWorld[]{
+            new NetherStructureWorld("trees/crimson_pine_01", -2, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/crimson_pine_02", -2, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/crimson_pine_03", -2, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/crimson_pine_04", -1, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/crimson_pine_05", -1, StructurePlacementType.FLOOR)
     };
 
     public StructureCrimsonPinewood() {

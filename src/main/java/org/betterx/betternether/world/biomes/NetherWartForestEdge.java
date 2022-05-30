@@ -12,13 +12,13 @@ import net.minecraft.world.level.block.Blocks;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.StructureBlackBush;
 import org.betterx.betternether.world.structures.plants.StructureNetherWart;
 import org.betterx.betternether.world.structures.plants.StructureWartSeed;
@@ -61,9 +61,9 @@ public class NetherWartForestEdge extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("nether_wart", new StructureNetherWart(), StructureType.FLOOR, 0.02F, false);
-        addStructure("wart_seed", new StructureWartSeed(), StructureType.FLOOR, 0.01F, false);
-        addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.01F, false);
+        addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.02F, false);
+        addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.01F, false);
+        addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.01F, false);
     }
 
     @Override

@@ -13,12 +13,12 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 
 import org.betterx.bclib.api.biomes.BiomeAPI;
 import org.betterx.bclib.world.generator.GeneratorOptions;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.features.CavesFeature;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.betternether.world.structures.StructureType;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -45,11 +45,11 @@ public class BNWorldGenerator {
     public static void onModInit() {
         structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
         lavaStructureDensity = Configs.GENERATOR.getFloat("generator.world",
-                                                          "lava_structures_density",
-                                                          1F / 200F) * 1.0001F;
+                "lava_structures_density",
+                1F / 200F) * 1.0001F;
         globalDensity = Configs.GENERATOR.getFloat("generator.world",
-                                                   "global_plant_and_structures_density",
-                                                   1F) * 1.0001F;
+                "global_plant_and_structures_density",
+                1F) * 1.0001F;
     }
 
     private static int clamp(int x, int max) {
@@ -68,23 +68,23 @@ public class BNWorldGenerator {
         // Structure Generator
         if (random.nextFloat() < structureDensity) {
             popPos.set(sx + random.nextInt(16),
-                       MHelper.randRange(33, MAX_HEIGHT - 28, random),
-                       sz + random.nextInt(16));
-            StructureType type = StructureType.FLOOR;
+                    MHelper.randRange(33, MAX_HEIGHT - 28, random),
+                    sz + random.nextInt(16));
+            StructurePlacementType type = StructurePlacementType.FLOOR;
             boolean isAir = world.getBlockState(popPos).getMaterial().isReplaceable();
             boolean airUp = world.getBlockState(popPos.above()).getMaterial().isReplaceable() && world.getBlockState(
                     popPos.above(3)).getMaterial().isReplaceable();
             boolean airDown = world.getBlockState(popPos.below()).getMaterial().isReplaceable() && world.getBlockState(
                     popPos.below(3)).getMaterial().isReplaceable();
             NetherBiome biome = getBiomeLocal(popPos.getX() - sx,
-                                              popPos.getY(),
-                                              popPos.getZ() - sz,
-                                              random,
-                                              layerHeight,
-                                              world,
-                                              popPos);
+                    popPos.getY(),
+                    popPos.getZ() - sz,
+                    random,
+                    layerHeight,
+                    world,
+                    popPos);
             if (!isAir && !airUp && !airDown && random.nextInt(8) == 0)
-                type = StructureType.UNDER;
+                type = StructurePlacementType.UNDER;
             else {
                 if (popPos.getY() < 45 || (biome != null && !biome.hasCeilStructures()) || random.nextBoolean()) // Floor
                 {
@@ -106,25 +106,25 @@ public class BNWorldGenerator {
                     while (!BlocksHelper.isNetherGroundMagma(world.getBlockState(popPos.above())) && popPos.getY() < 127) {
                         popPos.setY(popPos.getY() + 1);
                     }
-                    type = StructureType.CEIL;
+                    type = StructurePlacementType.CEIL;
                 }
             }
             biome = getBiomeLocal(popPos.getX() - sx,
-                                  popPos.getY(),
-                                  popPos.getZ() - sz,
-                                  random,
-                                  layerHeight,
-                                  world,
-                                  popPos);
+                    popPos.getY(),
+                    popPos.getZ() - sz,
+                    random,
+                    layerHeight,
+                    world,
+                    popPos);
             if (biome != null) {
                 if (world.getBlockState(popPos)
                          .getMaterial()
                          .isReplaceable()) {
-                    if (type == StructureType.FLOOR) {
+                    if (type == StructurePlacementType.FLOOR) {
                         BlockState down = world.getBlockState(popPos.below());
                         if (BlocksHelper.isNetherGroundMagma(down))
                             biome.genFloorBuildings(world, popPos, random, MAX_HEIGHT, context);
-                    } else if (type == StructureType.CEIL) {
+                    } else if (type == StructurePlacementType.CEIL) {
                         BlockState up = world.getBlockState(popPos.above());
                         if (BlocksHelper.isNetherGroundMagma(up)) {
                             biome.genCeilBuildings(world, popPos, random, MAX_HEIGHT, context);
@@ -136,14 +136,14 @@ public class BNWorldGenerator {
 
         if (random.nextFloat() < lavaStructureDensity) {
             popPos.set(sx + random.nextInt(16), 32, sz + random.nextInt(16));
-            if (world.isEmptyBlock(popPos) && BlocksHelper.isLava(world.getBlockState(popPos.below()))) {
+            if (world.isEmptyBlock(popPos) && org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(popPos.below()))) {
                 biome = getBiomeLocal(popPos.getX() - sx,
-                                      popPos.getY(),
-                                      popPos.getZ() - sz,
-                                      random,
-                                      layerHeight,
-                                      world,
-                                      popPos);
+                        popPos.getY(),
+                        popPos.getZ() - sz,
+                        random,
+                        layerHeight,
+                        world,
+                        popPos);
                 if (biome != null) {
                     biome.genLavaBuildings(world, popPos, random, MAX_HEIGHT, context);
                 }
@@ -170,12 +170,14 @@ public class BNWorldGenerator {
                     if (biome != null) {
                         popPos.set(wx, y, wz);
                         BlockState state = world.getBlockState(popPos);
-                        boolean lava = BlocksHelper.isLava(state);
+                        boolean lava = org.betterx.bclib.util.BlocksHelper.isLava(state);
                         if (lava || BlocksHelper.isNetherGroundMagma(state) || state.getBlock() == Blocks.GRAVEL) {
                             if (!lava && ((state = world.getBlockState(popPos.above())).isAir() || !state.getMaterial()
-                                                                                                         .isSolidBlocking() || !state.getMaterial()
-                                                                                                                                     .blocksMotion()) && state.getFluidState()
-                                                                                                                                                              .isEmpty())// world.isAir(popPos.up()))
+                                                                                                         .isSolidBlocking() || !state
+                                    .getMaterial()
+                                    .blocksMotion()) && state
+                                    .getFluidState()
+                                    .isEmpty())// world.isAir(popPos.up()))
                                 biome.genSurfColumn(world, popPos, random);
 
                             if (((x + y + z) & 1) == 0 && random.nextFloat() < globalDensity && random.nextFloat() < biome.getPlantDensity()) {

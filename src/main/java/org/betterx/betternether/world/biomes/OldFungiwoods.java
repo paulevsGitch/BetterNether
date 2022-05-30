@@ -13,12 +13,12 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.*;
 
 public class OldFungiwoods extends NetherBiome {
@@ -61,15 +61,23 @@ public class OldFungiwoods extends NetherBiome {
     protected void onInit() {
         this.setNoiseDensity(0.5F);
 
-        addStructure("old_red_mushrooms", new StructureOldRedMushrooms(), StructureType.FLOOR, 0.1F, false);
-        addStructure("old_brown_mushrooms", new StructureOldBrownMushrooms(), StructureType.FLOOR, 0.1F, false);
-        addStructure("large_red_mushroom", new StructureMedRedMushroom(), StructureType.FLOOR, 0.12F, true);
-        addStructure("large_brown_mushroom", new StructureMedBrownMushroom(), StructureType.FLOOR, 0.12F, true);
-        addStructure("vanilla_mushrooms", new StructureVanillaMushroom(), StructureType.FLOOR, 0.5F, false);
-        addStructure("red_mold", new StructureRedMold(), StructureType.FLOOR, 0.9F, true);
-        addStructure("gray_mold", new StructureGrayMold(), StructureType.FLOOR, 0.9F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.9F, true);
-        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.9F, true);
+        addStructure("old_red_mushrooms", new StructureOldRedMushrooms(), StructurePlacementType.FLOOR, 0.1F, false);
+        addStructure("old_brown_mushrooms",
+                new StructureOldBrownMushrooms(),
+                StructurePlacementType.FLOOR,
+                0.1F,
+                false);
+        addStructure("large_red_mushroom", new StructureMedRedMushroom(), StructurePlacementType.FLOOR, 0.12F, true);
+        addStructure("large_brown_mushroom",
+                new StructureMedBrownMushroom(),
+                StructurePlacementType.FLOOR,
+                0.12F,
+                true);
+        addStructure("vanilla_mushrooms", new StructureVanillaMushroom(), StructurePlacementType.FLOOR, 0.5F, false);
+        addStructure("red_mold", new StructureRedMold(), StructurePlacementType.FLOOR, 0.9F, true);
+        addStructure("gray_mold", new StructureGrayMold(), StructurePlacementType.FLOOR, 0.9F, true);
+        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.9F, true);
+        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.9F, true);
     }
 
     @Override

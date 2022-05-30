@@ -56,11 +56,11 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
     private static final Vec3i[] SEARCH;
 
     private static final EntityDataAccessor<Float> COLOR_RED = SynchedEntityData.defineId(EntityFirefly.class,
-                                                                                          EntityDataSerializers.FLOAT);
+            EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> COLOR_GREEN = SynchedEntityData.defineId(EntityFirefly.class,
-                                                                                            EntityDataSerializers.FLOAT);
+            EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> COLOR_BLUE = SynchedEntityData.defineId(EntityFirefly.class,
-                                                                                           EntityDataSerializers.FLOAT);
+            EntityDataSerializers.FLOAT);
 
     private boolean mustSit = false;
 
@@ -380,8 +380,8 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         public boolean canUse() {
             if (EntityFirefly.this.mustSit && EntityFirefly.this.navigation.isDone()) {
                 BlockPos pos = new BlockPos(EntityFirefly.this.getX(),
-                                            EntityFirefly.this.getY(),
-                                            EntityFirefly.this.getZ());
+                        EntityFirefly.this.getY(),
+                        EntityFirefly.this.getZ());
                 BlockState state = EntityFirefly.this.level.getBlockState(pos.below());
                 return !state.isAir() && !state.getMaterial().isLiquid();
             }
@@ -557,7 +557,7 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         if (h > 8)
             return false;
         for (int i = 1; i <= h; i++)
-            if (BlocksHelper.isLava(world.getBlockState(pos.below(i))))
+            if (org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(pos.below(i))))
                 return false;
         return true;
     }

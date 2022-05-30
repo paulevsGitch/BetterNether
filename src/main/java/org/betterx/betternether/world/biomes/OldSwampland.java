@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -21,7 +22,6 @@ import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.*;
 
 public class OldSwampland extends NetherBiome {
@@ -65,20 +65,20 @@ public class OldSwampland extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("old_willow", new StructureOldWillow(), StructureType.FLOOR, 0.02F, false);
-        addStructure("willow", new StructureWillow(), StructureType.FLOOR, 0.02F, false);
-        addStructure("willow_bush", new StructureWillowBush(), StructureType.FLOOR, 0.1F, true);
-        addStructure("feather_fern", new StructureFeatherFern(), StructureType.FLOOR, 0.05F, true);
-        addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.8F, false);
-        addStructure("soul_vein", new StructureSoulVein(), StructureType.FLOOR, 0.5F, false);
-        addStructure("smoker", new StructureSmoker(), StructureType.FLOOR, 0.05F, false);
-        addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructureType.FLOOR, 0.03F, true);
-        addStructure("black_bush", new StructureBlackBush(), StructureType.FLOOR, 0.01F, false);
-        addStructure("swamp_grass", new StructureSwampGrass(), StructureType.FLOOR, 0.4F, false);
-        addStructure("black_vine", new StructureBlackVine(), StructureType.CEIL, 0.4F, true);
-        addStructure("wall_moss", new StructureWallMoss(), StructureType.WALL, 0.8F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructureType.WALL, 0.8F, true);
-        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructureType.WALL, 0.8F, true);
+        addStructure("old_willow", new StructureOldWillow(), StructurePlacementType.FLOOR, 0.02F, false);
+        addStructure("willow", new StructureWillow(), StructurePlacementType.FLOOR, 0.02F, false);
+        addStructure("willow_bush", new StructureWillowBush(), StructurePlacementType.FLOOR, 0.1F, true);
+        addStructure("feather_fern", new StructureFeatherFern(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.8F, false);
+        addStructure("soul_vein", new StructureSoulVein(), StructurePlacementType.FLOOR, 0.5F, false);
+        addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, false);
+        addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.03F, true);
+        addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.01F, false);
+        addStructure("swamp_grass", new StructureSwampGrass(), StructurePlacementType.FLOOR, 0.4F, false);
+        addStructure("black_vine", new StructureBlackVine(), StructurePlacementType.CEIL, 0.4F, true);
+        addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
+        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.8F, true);
+        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.8F, true);
     }
 
     @Override
@@ -91,10 +91,10 @@ public class OldSwampland extends NetherBiome {
         else {
             value = TERRAIN.eval(pos.getX() * 0.5, pos.getZ() * 0.5);
             BlocksHelper.setWithoutUpdate(world,
-                                          pos,
-                                          value > 0
-                                                  ? Blocks.SOUL_SAND.defaultBlockState()
-                                                  : Blocks.SOUL_SOIL.defaultBlockState());
+                    pos,
+                    value > 0
+                            ? Blocks.SOUL_SAND.defaultBlockState()
+                            : Blocks.SOUL_SOIL.defaultBlockState());
         }
     }
 
@@ -108,6 +108,6 @@ public class OldSwampland extends NetherBiome {
 
     protected boolean validWall(LevelAccessor world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
-        return BlocksHelper.isLava(state) || BlocksHelper.isNetherGround(state);
+        return org.betterx.bclib.util.BlocksHelper.isLava(state) || BlocksHelper.isNetherGround(state);
     }
 }

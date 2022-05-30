@@ -34,13 +34,14 @@ public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemPro
                 maxCount,
                 experience,
                 miningLevel
-             );
+        );
         this.fireproof = fireproof;
     }
 
     @Override
     public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
         blockTags.add(CommonBlockTags.NETHERRACK);
+        blockTags.add(CommonBlockTags.NETHER_ORES);
     }
 
     @Override

@@ -13,13 +13,12 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.bones.StructureBoneReef;
-import org.betterx.betternether.world.structures.decorations.StructureStalactiteFloor;
 import org.betterx.betternether.world.structures.plants.*;
 
 public class NetherBoneReef extends NetherBiome {
@@ -61,25 +60,19 @@ public class NetherBoneReef extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("bone_stalactite",
-                new StructureStalactiteFloor(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
-                StructureType.FLOOR,
-                0.05F,
-                true);
-
-        addStructure("nether_reed", new StructureReeds(), StructureType.FLOOR, 0.5F, false);
-        addStructure("bone_reef", new StructureBoneReef(), StructureType.FLOOR, 0.2F, true);
-        addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructureType.FLOOR, 0.02F, true);
-        addStructure("feather_fern", new StructureFeatherFern(), StructureType.FLOOR, 0.05F, true);
-        addStructure("bone_grass", new StructureBoneGrass(), StructureType.FLOOR, 0.1F, false);
+        addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.5F, false);
+        addStructure("bone_reef", new StructureBoneReef(), StructurePlacementType.FLOOR, 0.2F, true);
+        addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.02F, true);
+        addStructure("feather_fern", new StructureFeatherFern(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("bone_grass", new StructureBoneGrass(), StructurePlacementType.FLOOR, 0.1F, false);
 
 //        addStructure("bone_stalagmite",
 //                new StructureStalactiteCeil(NetherBlocks.BONE_STALACTITE, NetherBlocks.BONE_BLOCK),
-//                StructureType.CEIL,
+//                StructurePlacementType.CEIL,
 //                0.05F,
 //                true);
 
-        addStructure("lumabus_vine", new StructureLumabusVine(), StructureType.CEIL, 0.3F, true);
+        addStructure("lumabus_vine", new StructureLumabusVine(), StructurePlacementType.CEIL, 0.3F, true);
     }
 
     @Override

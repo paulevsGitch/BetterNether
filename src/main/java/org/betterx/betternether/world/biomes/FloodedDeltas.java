@@ -17,9 +17,9 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
+import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 
 public class FloodedDeltas extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -35,7 +35,9 @@ public class FloodedDeltas extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD)
                    .music(SoundEvents.MUSIC_BIOME_BASALT_DELTAS)
                    .particles(ParticleTypes.WHITE_ASH, 0.12F)
-                   .structure(BiomeTags.HAS_NETHER_FORTRESS);
+                   .structure(BiomeTags.HAS_NETHER_FORTRESS)
+                   .feature(NetherFeatures.STALAGNATE_BLACKSTONE_CLUSTER)
+                   .feature(NetherFeatures.STALAGNATE_BASALT_CLUSTER);
         }
 
         @Override
@@ -56,11 +58,7 @@ public class FloodedDeltas extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("blackstone_stalactite", STALACTITE_BLACKSTONE, StructureType.FLOOR, 0.2F, true);
-        addStructure("stalactite_stalactite", STALACTITE_BASALT, StructureType.FLOOR, 0.2F, true);
 
-        addStructure("blackstone_stalagmite", STALAGMITE_BLACKSTONE, StructureType.CEIL, 0.1F, true);
-        addStructure("basalt_stalagmite", STALAGMITE_BASALT, StructureType.CEIL, 0.1F, true);
     }
 
     @Override
@@ -95,6 +93,6 @@ public class FloodedDeltas extends NetherBiome {
 
     protected boolean validWall(LevelAccessor world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
-        return BlocksHelper.isLava(state) || state.isCollisionShapeFullBlock(world, pos);
+        return org.betterx.bclib.util.BlocksHelper.isLava(state) || state.isCollisionShapeFullBlock(world, pos);
     }
 }

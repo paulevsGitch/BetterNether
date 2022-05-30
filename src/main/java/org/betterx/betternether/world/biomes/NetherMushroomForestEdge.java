@@ -17,13 +17,13 @@ import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
 import org.betterx.bclib.interfaces.NumericProvider;
 import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.StructureGrayMold;
 import org.betterx.betternether.world.structures.plants.StructureOrangeMushroom;
 import org.betterx.betternether.world.structures.plants.StructureRedMold;
@@ -48,8 +48,8 @@ class NetherMushroomForestEdgeNumericProvider implements NumericProvider {
 
     static {
         Registry.register(NumericProvider.NUMERIC_PROVIDER,
-                          BetterNether.makeID("nether_mushroom_forrest_edge"),
-                          NetherMushroomForestEdgeNumericProvider.CODEC);
+                BetterNether.makeID("nether_mushroom_forrest_edge"),
+                NetherMushroomForestEdgeNumericProvider.CODEC);
     }
 }
 
@@ -86,10 +86,10 @@ public class NetherMushroomForestEdge extends NetherBiome {
                                                         SurfaceRules.state(NetherBlocks.NETHER_MYCELIUM.defaultBlockState()),
                                                         SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState()),
                                                         NETHERRACK
-                                                       )
+                                                )
                                         )
-                                                   )
-                             );
+                                )
+                        );
         }
     }
 
@@ -99,10 +99,10 @@ public class NetherMushroomForestEdge extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("orange_mushroom", new StructureOrangeMushroom(), StructureType.FLOOR, 0.05F, true);
-        addStructure("vanilla_mushrooms", new StructureVanillaMushroom(), StructureType.FLOOR, 0.1F, false);
-        addStructure("red_mold", new StructureRedMold(), StructureType.FLOOR, 0.5F, false);
-        addStructure("gray_mold", new StructureGrayMold(), StructureType.FLOOR, 0.5F, false);
+        addStructure("orange_mushroom", new StructureOrangeMushroom(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("vanilla_mushrooms", new StructureVanillaMushroom(), StructurePlacementType.FLOOR, 0.1F, false);
+        addStructure("red_mold", new StructureRedMold(), StructurePlacementType.FLOOR, 0.5F, false);
+        addStructure("gray_mold", new StructureGrayMold(), StructurePlacementType.FLOOR, 0.5F, false);
     }
 
     @Override

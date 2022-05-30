@@ -16,11 +16,11 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.StructureType;
 import org.betterx.betternether.world.structures.plants.StructureAgave;
 import org.betterx.betternether.world.structures.plants.StructureBarrelCactus;
 import org.betterx.betternether.world.structures.plants.StructureNetherCactus;
@@ -79,9 +79,9 @@ public class NetherGravelDesert extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("nether_cactus", new StructureNetherCactus(), StructureType.FLOOR, 0.02F, true);
-        addStructure("agave", new StructureAgave(), StructureType.FLOOR, 0.02F, true);
-        addStructure("barrel_cactus", new StructureBarrelCactus(), StructureType.FLOOR, 0.02F, true);
+        addStructure("nether_cactus", new StructureNetherCactus(), StructurePlacementType.FLOOR, 0.02F, true);
+        addStructure("agave", new StructureAgave(), StructurePlacementType.FLOOR, 0.02F, true);
+        addStructure("barrel_cactus", new StructureBarrelCactus(), StructurePlacementType.FLOOR, 0.02F, true);
     }
 
     @Override

@@ -3,18 +3,18 @@ package org.betterx.betternether.world.structures.plants;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.world.structures.NetherStructureWorld;
 import org.betterx.betternether.world.structures.StructureObjScatter;
-import org.betterx.betternether.world.structures.StructureType;
-import org.betterx.betternether.world.structures.StructureWorld;
 
 public class StructureBigWarpedTree extends StructureObjScatter {
-    private static final StructureWorld[] TREES = new StructureWorld[]{
-            new StructureWorld("trees/warped_tree_01", -2, StructureType.FLOOR),
-            new StructureWorld("trees/warped_tree_02", -2, StructureType.FLOOR),
-            new StructureWorld("trees/warped_tree_03", -2, StructureType.FLOOR),
-            new StructureWorld("trees/warped_tree_04", -2, StructureType.FLOOR),
-            new StructureWorld("trees/warped_tree_05", -4, StructureType.FLOOR)
+    private static final NetherStructureWorld[] TREES = new NetherStructureWorld[]{
+            new NetherStructureWorld("trees/warped_tree_01", -2, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/warped_tree_02", -2, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/warped_tree_03", -2, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/warped_tree_04", -2, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/warped_tree_05", -4, StructurePlacementType.FLOOR)
     };
 
     public StructureBigWarpedTree() {

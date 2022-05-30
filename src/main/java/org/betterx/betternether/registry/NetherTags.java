@@ -11,7 +11,6 @@ import net.minecraft.world.level.material.Material;
 
 import org.betterx.bclib.api.BonemealAPI;
 import org.betterx.bclib.api.ComposterAPI;
-import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.bclib.api.tag.NamedBlockTags;
 import org.betterx.bclib.api.tag.NamedMineableTags;
 import org.betterx.bclib.api.tag.TagAPI;
@@ -40,7 +39,7 @@ public class NetherTags {
 
     public static void register() {
         TagAPI.addBlockTag(NETHER_SAND_LOCATION, Blocks.SOUL_SAND);
-        TagAPI.addBlockTag(CommonBlockTags.IS_OBSIDIAN, Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN);
+
 
         NetherBlocks.getModBlocks().forEach(block -> {
             BlockBehaviour.Properties properties = ((BlockBehaviourAccessor) block).getProperties();

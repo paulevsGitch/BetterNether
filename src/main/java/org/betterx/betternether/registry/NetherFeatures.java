@@ -11,66 +11,120 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
+import com.google.common.collect.Lists;
 import org.betterx.bclib.api.LifeCycleAPI;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BiomeAPI;
 import org.betterx.bclib.api.features.BCLCommonFeatures;
 import org.betterx.bclib.world.features.BCLFeature;
 import org.betterx.bclib.world.features.DefaultFeature;
+import org.betterx.bclib.world.features.TemplateFeature;
+import org.betterx.bclib.world.features.TemplateFeatureConfig;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityFeature;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class NetherFeatures {
+    private static final List<BCLFeature> defaultFeatures = Lists.newArrayList();
+    
     // Surface Features //
-    public static final Feature<ScatterFeatureConfig> STALAGMITES = register("stalagmites", new ScatterFeature());
+    public static final Feature<ScatterFeatureConfig> STALAGMITES = BCLFeature.register("stalagmites",
+            new ScatterFeature(ScatterFeatureConfig.WithSize.CODEC));
+    public static final Feature<ScatterFeatureConfig> STALAGMITES_BLOCK_FILTERED = BCLFeature.register(
+            "stalagmites_block_filtered",
+            new ScatterFeature(ScatterFeatureConfig.WithSizeOnBase.CODEC));
     public static final BCLFeature CRYSTAL_FATURE = CrystalFeature.createAndRegister();
-    public static final BCLFeature STALAGMITE_NETHERRACK_CLUSTER = ScatterFeature.createAndRegister(
+    public static final BCLFeature STALAGNATE_NETHERRACK_CLUSTER = ScatterFeature.createAndRegister(
             "stalagmite_netherrack_cluster",
-            30,
-            60,
-            new ScatterFeatureConfig(NetherBlocks.NETHERRACK_STALACTITE.defaultBlockState(),
-                    Optional.empty(),
-                    0.9f,
-                    0.75f,
-                    0.5f,
-                    2,
-                    7,
-                    0.3f));
-
-    public static final BCLFeature STALAGMITE_GLOWSTONE_CLUSTER = ScatterFeature.createAndRegister(
-            "stalagmite_glowstone_cluster",
+            5,
             20,
-            50,
-            new ScatterFeatureConfig(NetherBlocks.GLOWSTONE_STALACTITE.defaultBlockState(),
-                    Optional.of(Blocks.GLOWSTONE.defaultBlockState()),
-                    0.9f,
-                    0.75f,
-                    0.5f,
+            new ScatterFeatureConfig.WithSize(NetherBlocks.NETHERRACK_STALACTITE.defaultBlockState(),
                     2,
                     7,
-                    0.5f));
+                    2,
+                    0.7f,
+                    0.3f),
+            NetherFeatures.STALAGMITES);
+
+    public static final BCLFeature STALAGNATE_BLACKSTONE_CLUSTER = ScatterFeature.createAndRegister(
+            "stalagmite_blackstone_cluster",
+            5,
+            40,
+            new ScatterFeatureConfig.WithSize(NetherBlocks.BLACKSTONE_STALACTITE.defaultBlockState(),
+                    2,
+                    7,
+                    2,
+                    0.5f,
+                    0.8f),
+            NetherFeatures.STALAGMITES);
+
+    public static final BCLFeature STALAGNATE_BASALT_CLUSTER = ScatterFeature.createAndRegister(
+            "stalagmite_basalt_cluster",
+            5,
+            40,
+            new ScatterFeatureConfig.WithSize(NetherBlocks.BASALT_STALACTITE.defaultBlockState(),
+                    2,
+                    7,
+                    2,
+                    0.5f,
+                    0.8f),
+            NetherFeatures.STALAGMITES);
+
+    public static final BCLFeature STALAGNATE_GLOWSTONE_CLUSTER = ScatterFeature.createAndRegister(
+            "stalagmite_glowstone_cluster",
+            2,
+            4,
+            new ScatterFeatureConfig.WithSizeOnBase(NetherBlocks.GLOWSTONE_STALACTITE.defaultBlockState(),
+                    Blocks.GLOWSTONE.defaultBlockState(),
+                    3,
+                    8,
+                    3,
+                    0.8f,
+                    0.5f),
+            NetherFeatures.STALAGMITES_BLOCK_FILTERED);
 
     public static final BCLFeature STALAGMITE_BONE_CLUSTER = ScatterFeature.createAndRegister(
             "stalagmite_bone_cluster",
-            50,
-            90,
-            new ScatterFeatureConfig(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
-                    Optional.empty(),
-                    1f,
+            6,
+            10,
+            new ScatterFeatureConfig.WithSize(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
+                    Blocks.BONE_BLOCK.defaultBlockState(),
+                    0.75f,
+                    .3f,
                     0.75f,
                     0.5f,
-                    2,
+                    3,
                     7,
-                    1));
+                    3,
+                    0.2f,
+                    1),
+            NetherFeatures.STALAGMITES);
+
+    public static final BCLFeature STALACTITE_BONE_CLUSTER = ScatterFeature.createAndRegister(
+            "stalagmite_bone_cluster",
+            6,
+            10,
+            new ScatterFeatureConfig.WithSize(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
+                    Blocks.BONE_BLOCK.defaultBlockState(),
+                    0.75f,
+                    .3f,
+                    0.75f,
+                    0.5f,
+                    3,
+                    7,
+                    3,
+                    0.2f,
+                    0),
+            NetherFeatures.STALAGMITES);
+
 
     // Ores //
     public static final BCLFeature CINCINNASITE_ORE =
@@ -216,15 +270,52 @@ public class NetherFeatures {
                 rare);
     }
 
-    public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {
-        if (NetherFeatures.HAS_CLEANING_PASS) builder.feature(CLEANUP_FEATURE);
-        if (NetherFeatures.HAS_CAVES) builder.feature(CAVES_FEATURE);
-        if (NetherFeatures.HAS_PATHS) builder.feature(PATHS_FEATURE);
-        if (NetherFeatures.HAS_FIXING_PASS) builder.feature(FIX_FEATURE);
+    // BUILDINGS //
+    public static final BCLFeature PILLAR_01 = registerDefault("pillar_01", -1, StructurePlacementType.FLOOR, 16);
+    public static final BCLFeature PILLAR_02 = registerDefault("pillar_02", -1, StructurePlacementType.FLOOR, 16);
+    public static final BCLFeature PILLAR_03 = registerDefault("pillar_03", -1, StructurePlacementType.FLOOR, 16);
+    public static final BCLFeature PILLAR_04 = registerDefault("pillar_04", -1, StructurePlacementType.FLOOR, 16);
+    public static final BCLFeature PILLAR_05 = registerDefault("pillar_05", -1, StructurePlacementType.FLOOR, 16);
+    public static final BCLFeature PILLAR_06 = registerDefault("pillar_06", -1, StructurePlacementType.FLOOR, 16);
 
-        builder.feature(POPULATOR_FEATURE);
+
+    // MANAGE DEFAULT FEATTURES //
+
+
+    private static BCLFeature registerDefault(BCLFeature f) {
+        defaultFeatures.add(f);
+        return f;
+    }
+
+    private static BCLFeature registerDefault(String name,
+                                              int offsetY,
+                                              StructurePlacementType type,
+                                              int onceEveryChunk) {
+
+        return registerDefault(TemplateFeature.createAndRegister(
+                new TemplateFeatureConfig(
+                        BetterNether.makeID(name),
+                        offsetY,
+                        type
+                ), onceEveryChunk));
+
+    }
+
+    public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {
+        //if (NetherFeatures.HAS_CLEANING_PASS) builder.feature(CLEANUP_FEATURE);
+        //if (NetherFeatures.HAS_CAVES) builder.feature(CAVES_FEATURE);
+        //if (NetherFeatures.HAS_PATHS) builder.feature(PATHS_FEATURE);
+        //if (NetherFeatures.HAS_FIXING_PASS) builder.feature(FIX_FEATURE);
+
+        //builder.feature(POPULATOR_FEATURE);
 
         return builder;
+    }
+
+    public static void addDefaultBNFeatures(BCLBiomeBuilder builder) {
+        for (BCLFeature f : defaultFeatures) {
+            builder.feature(f);
+        }
     }
 
     public static BCLBiomeBuilder addDefaultOres(BCLBiomeBuilder builder) {
@@ -236,12 +327,12 @@ public class NetherFeatures {
     }
 
     public static void modifyNonBNBiome(ResourceLocation biomeID, Holder<Biome> biome) {
-        if (NetherFeatures.HAS_CAVES) {
-            BiomeAPI.addBiomeFeature(biome, CAVES_FEATURE);
-        }
-        if (NetherFeatures.HAS_PATHS) {
-            BiomeAPI.addBiomeFeature(biome, PATHS_FEATURE);
-        }
+//        if (NetherFeatures.HAS_CAVES) {
+//            BiomeAPI.addBiomeFeature(biome, CAVES_FEATURE);
+//        }
+//        if (NetherFeatures.HAS_PATHS) {
+//            BiomeAPI.addBiomeFeature(biome, PATHS_FEATURE);
+//        }
 
         //BiomeAPI.addBiomeFeature(biome, POPULATOR_FEATURE);
 
@@ -257,10 +348,6 @@ public class NetherFeatures {
         if (biomeID.equals(BiomeAPI.CRIMSON_FOREST_BIOME.getID()) || biomeID.equals(BiomeAPI.WARPED_FOREST_BIOME.getID())) {
             BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE);
         }
-    }
-
-    private static <C extends FeatureConfiguration, F extends Feature<C>> F register(String string, F feature) {
-        return Registry.register(Registry.FEATURE, string, feature);
     }
 
     public static void register() {

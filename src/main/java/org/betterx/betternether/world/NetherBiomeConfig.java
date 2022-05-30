@@ -58,6 +58,14 @@ public abstract class NetherBiomeConfig {
         return true;
     }
 
+    public boolean hasBNStructures() {
+        return true;
+    }
+
+    public boolean hasBNFeatures() {
+        return true;
+    }
+
 
     public <M extends Mob> int spawnWeight(KnownSpawnTypes type) {
         int res = type.weight;

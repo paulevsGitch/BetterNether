@@ -6,82 +6,52 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
 
 import org.betterx.bclib.api.biomes.BCLBiome;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.noise.OpenSimplexNoise;
-import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.IStructure;
+import org.betterx.betternether.world.structures.NetherStructureWorld;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.betternether.world.structures.StructureType;
-import org.betterx.betternether.world.structures.StructureWorld;
-import org.betterx.betternether.world.structures.decorations.StructureStalactiteCeil;
-import org.betterx.betternether.world.structures.decorations.StructureStalactiteFloor;
 import org.betterx.betternether.world.structures.plants.StructureWartCap;
 
 import java.util.*;
 
 public abstract class NetherBiome extends BCLBiome {
     private static final String[] DEF_STRUCTURES = new String[]{
-            structureFormat("altar_01", -2, StructureType.FLOOR, 1),
-            structureFormat("altar_02", -4, StructureType.FLOOR, 1),
-            structureFormat("altar_03", -3, StructureType.FLOOR, 1),
-            structureFormat("altar_04", -3, StructureType.FLOOR, 1),
-            structureFormat("altar_05", -2, StructureType.FLOOR, 1),
-            structureFormat("altar_06", -2, StructureType.FLOOR, 1),
-            structureFormat("altar_07", -2, StructureType.FLOOR, 1),
-            structureFormat("altar_08", -2, StructureType.FLOOR, 1),
-            structureFormat("portal_01", -4, StructureType.FLOOR, 1),
-            structureFormat("portal_02", -3, StructureType.FLOOR, 1),
-            structureFormat("garden_01", -3, StructureType.FLOOR, 1),
-            structureFormat("garden_02", -2, StructureType.FLOOR, 1),
-            structureFormat("pillar_01", -1, StructureType.FLOOR, 1),
-            structureFormat("pillar_02", -1, StructureType.FLOOR, 1),
-            structureFormat("pillar_03", -1, StructureType.FLOOR, 1),
-            structureFormat("pillar_04", -1, StructureType.FLOOR, 1),
-            structureFormat("pillar_05", -1, StructureType.FLOOR, 1),
-            structureFormat("pillar_06", -1, StructureType.FLOOR, 1),
-            structureFormat("respawn_point_01", -3, StructureType.FLOOR, 1),
-            structureFormat("respawn_point_02", -2, StructureType.FLOOR, 1),
-            structureFormat("respawn_point_03", -3, StructureType.FLOOR, 1),
-            structureFormat("respawn_point_04", -2, StructureType.FLOOR, 1),
-            structureFormat("spawn_altar_ladder", -5, StructureType.FLOOR, 1),
+            structureFormat("altar_01", -2, StructurePlacementType.FLOOR, 1),
+            structureFormat("altar_02", -4, StructurePlacementType.FLOOR, 1),
+            structureFormat("altar_03", -3, StructurePlacementType.FLOOR, 1),
+            structureFormat("altar_04", -3, StructurePlacementType.FLOOR, 1),
+            structureFormat("altar_05", -2, StructurePlacementType.FLOOR, 1),
+            structureFormat("altar_06", -2, StructurePlacementType.FLOOR, 1),
+            structureFormat("altar_07", -2, StructurePlacementType.FLOOR, 1),
+            structureFormat("altar_08", -2, StructurePlacementType.FLOOR, 1),
+            structureFormat("portal_01", -4, StructurePlacementType.FLOOR, 1),
+            structureFormat("portal_02", -3, StructurePlacementType.FLOOR, 1),
+            structureFormat("garden_01", -3, StructurePlacementType.FLOOR, 1),
+            structureFormat("garden_02", -2, StructurePlacementType.FLOOR, 1),
+            structureFormat("pillar_01", -1, StructurePlacementType.FLOOR, 1),
+            structureFormat("pillar_02", -1, StructurePlacementType.FLOOR, 1),
+            structureFormat("pillar_03", -1, StructurePlacementType.FLOOR, 1),
+            structureFormat("pillar_04", -1, StructurePlacementType.FLOOR, 1),
+            structureFormat("pillar_05", -1, StructurePlacementType.FLOOR, 1),
+            structureFormat("pillar_06", -1, StructurePlacementType.FLOOR, 1),
+            structureFormat("respawn_point_01", -3, StructurePlacementType.FLOOR, 1),
+            structureFormat("respawn_point_02", -2, StructurePlacementType.FLOOR, 1),
+            structureFormat("respawn_point_03", -3, StructurePlacementType.FLOOR, 1),
+            structureFormat("respawn_point_04", -2, StructurePlacementType.FLOOR, 1),
+            structureFormat("spawn_altar_ladder", -5, StructurePlacementType.FLOOR, 1),
 
-            structureFormat("ghast_hive", -20, StructureType.CEIL, 1F),
+            structureFormat("ghast_hive", -20, StructurePlacementType.CEIL, 1F),
 
-            structureFormat("lava/pyramid_1", -1, StructureType.LAVA, 1F),
-            structureFormat("lava/pyramid_2", -1, StructureType.LAVA, 1F),
-            structureFormat("lava/pyramid_3", -1, StructureType.LAVA, 1F),
-            structureFormat("lava/pyramid_4", -1, StructureType.LAVA, 1F)
+            structureFormat("lava/pyramid_1", -1, StructurePlacementType.LAVA, 1F),
+            structureFormat("lava/pyramid_2", -1, StructurePlacementType.LAVA, 1F),
+            structureFormat("lava/pyramid_3", -1, StructurePlacementType.LAVA, 1F),
+            structureFormat("lava/pyramid_4", -1, StructurePlacementType.LAVA, 1F)
     };
-
-    protected static final StructureStalactiteFloor STALACTITE_NETHERRACK = new StructureStalactiteFloor(NetherBlocks.NETHERRACK_STALACTITE,
-            null);
-    protected static final StructureStalactiteFloor STALACTITE_GLOWSTONE = new StructureStalactiteFloor(NetherBlocks.GLOWSTONE_STALACTITE,
-            Blocks.GLOWSTONE);
-    protected static final StructureStalactiteFloor STALACTITE_BLACKSTONE = new StructureStalactiteFloor(NetherBlocks.BLACKSTONE_STALACTITE,
-            Blocks.BLACKSTONE,
-            Blocks.BLACKSTONE,
-            Blocks.NETHERRACK);
-    protected static final StructureStalactiteFloor STALACTITE_BASALT = new StructureStalactiteFloor(NetherBlocks.BASALT_STALACTITE,
-            Blocks.BASALT,
-            Blocks.BASALT,
-            Blocks.NETHERRACK);
-
-    protected static final StructureStalactiteCeil STALAGMITE_NETHERRACK = new StructureStalactiteCeil(NetherBlocks.NETHERRACK_STALACTITE,
-            null);
-    protected static final StructureStalactiteCeil STALAGMITE_GLOWSTONE = new StructureStalactiteCeil(NetherBlocks.GLOWSTONE_STALACTITE,
-            Blocks.GLOWSTONE);
-    protected static final StructureStalactiteCeil STALAGMITE_BLACKSTONE = new StructureStalactiteCeil(NetherBlocks.BLACKSTONE_STALACTITE,
-            Blocks.BLACKSTONE,
-            Blocks.BLACKSTONE,
-            Blocks.NETHERRACK);
-    protected static final StructureStalactiteCeil STALAGMITE_BASALT = new StructureStalactiteCeil(NetherBlocks.BASALT_STALACTITE,
-            Blocks.BASALT,
-            Blocks.BASALT,
-            Blocks.NETHERRACK);
 
 
     private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
@@ -107,7 +77,7 @@ public abstract class NetherBiome extends BCLBiome {
         super(biomeID, biome, settings);
         structures = new ArrayList<>(DEF_STRUCTURES.length);
 
-        addStructure("cap_gen", new StructureWartCap(), StructureType.WALL, 0.8F, true);
+        addStructure("cap_gen", new StructureWartCap(), StructurePlacementType.WALL, 0.8F, true);
 
         if (hasBNStructures()) {
             Collections.addAll(structures, DEF_STRUCTURES);
@@ -199,7 +169,7 @@ public abstract class NetherBiome extends BCLBiome {
 
     protected void addStructure(String name,
                                 IStructure structure,
-                                StructureType type,
+                                StructurePlacementType type,
                                 float density,
                                 boolean useNoise) {
         String group = configGroup() + ".structures." + type.getName() + "." + name;
@@ -208,7 +178,7 @@ public abstract class NetherBiome extends BCLBiome {
         this.addStructure(structure, type, dens, limit);
     }
 
-    private void addStructure(IStructure structure, StructureType type, float density, boolean useNoise) {
+    private void addStructure(IStructure structure, StructurePlacementType type, float density, boolean useNoise) {
         switch (type) {
             case CEIL -> generatorsCeil.add(new StructureInfo(structure, density, useNoise));
             case FLOOR -> generatorsFloor.add(new StructureInfo(structure, density, useNoise));
@@ -241,7 +211,7 @@ public abstract class NetherBiome extends BCLBiome {
         }
     }
 
-    protected static String structureFormat(String name, int offset, StructureType type, float chance) {
+    protected static String structureFormat(String name, int offset, StructurePlacementType type, float chance) {
         return String.format(Locale.ROOT,
                 "name: %s; offset: %d; type: %s; chance: %f",
                 name,
@@ -299,12 +269,26 @@ public abstract class NetherBiome extends BCLBiome {
         }
     }
 
+    private static StructurePlacementType typeFromString(String a) {
+        if (a.contains("floor"))
+            return StructurePlacementType.FLOOR;
+        else if (a.contains("wall"))
+            return StructurePlacementType.WALL;
+        else if (a.contains("ceil"))
+            return StructurePlacementType.CEIL;
+        else if (a.contains("lava"))
+            return StructurePlacementType.LAVA;
+        else if (a.contains("under"))
+            return StructurePlacementType.UNDER;
+        return StructurePlacementType.FLOOR;
+    }
+
     private void structureFromString(String structureString) {
         String[] args = structureString.split(";");
 
         String name = "";
         int offset = 0;
-        StructureType type = StructureType.FLOOR;
+        StructurePlacementType type = StructurePlacementType.FLOOR;
         float chance = 0;
 
         for (String a : args) {
@@ -313,17 +297,17 @@ public abstract class NetherBiome extends BCLBiome {
             } else if (a.contains("offset:")) {
                 offset = Integer.parseInt(a.replace("offset:", "").trim());
             } else if (a.contains("type:")) {
-                type = StructureType.fromString(a);
+                type = typeFromString(a);
             } else if (a.contains("chance:")) {
                 chance = Float.parseFloat(a.replace("chance:", "").trim());
             }
         }
 
         if (!name.isEmpty()) {
-            StructureWorld structure = new StructureWorld(name, offset, type);
+            NetherStructureWorld structure = new NetherStructureWorld(name, offset, type);
             if (structure.loaded()) {
                 List<StructureInfo> infoList = null;
-                switch (structure.getType()) {
+                switch (structure.type) {
                     case CEIL -> infoList = buildGeneratorsCeil;
                     case FLOOR -> infoList = buildGeneratorsFloor;
                     case LAVA -> infoList = buildGeneratorsLava;

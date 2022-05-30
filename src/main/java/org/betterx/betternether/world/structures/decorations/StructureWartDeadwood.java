@@ -5,18 +5,18 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.world.structures.IStructure;
+import org.betterx.betternether.world.structures.NetherStructureWorld;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.betternether.world.structures.StructureType;
-import org.betterx.betternether.world.structures.StructureWorld;
 
 public class StructureWartDeadwood implements IStructure {
-    private static final StructureWorld[] TREES = new StructureWorld[]{
-            new StructureWorld("trees/wart_root_01", 0, StructureType.FLOOR),
-            new StructureWorld("trees/wart_root_02", 0, StructureType.FLOOR),
-            new StructureWorld("trees/wart_root_03", -2, StructureType.FLOOR),
-            new StructureWorld("trees/wart_fallen_log", 0, StructureType.FLOOR)
+    private static final NetherStructureWorld[] TREES = new NetherStructureWorld[]{
+            new NetherStructureWorld("trees/wart_root_01", 0, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/wart_root_02", 0, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/wart_root_03", -2, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/wart_fallen_log", 0, StructurePlacementType.FLOOR)
     };
 
     @Override
@@ -26,7 +26,7 @@ public class StructureWartDeadwood implements IStructure {
                          final int MAX_HEIGHT,
                          StructureGeneratorThreadContext context) {
         if (isGround(world.getBlockState(pos.below())) && isGround(world.getBlockState(pos.below(2)))) {
-            StructureWorld tree = TREES[random.nextInt(TREES.length)];
+            NetherStructureWorld tree = TREES[random.nextInt(TREES.length)];
             tree.generate(world, pos, random, MAX_HEIGHT, context);
         }
     }

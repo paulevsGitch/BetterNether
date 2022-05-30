@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.material.LavaFluid;
 
 import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.betternether.blocks.BlockFarmland;
@@ -80,10 +79,6 @@ public class BlocksHelper {
         return new BoundingBox(chunkStartX - 16, minY, chunkStartZ - 16, chunkStartX + 31, maxY, chunkStartZ + 31);
     }
 
-    public static boolean isLava(BlockState state) {
-        return state.getFluidState().getType() instanceof LavaFluid;
-    }
-
     public static boolean isNetherrack(BlockState state) {
         return state.is(CommonBlockTags.NETHERRACK);
     }
@@ -93,8 +88,7 @@ public class BlocksHelper {
     }
 
     public static boolean isNetherGround(BlockState state) {
-        return isNetherrack(state) || isSoulSand(state) || isNetherMycelium(state) || isNylium(state);
-        // return state.isIn(NetherTags.NETHER_GROUND);
+        return state.is(CommonBlockTags.NETHER_STONES) || isSoulSand(state) || isNetherMycelium(state) || isNylium(state);
     }
 
     public static boolean isNetherGroundMagma(BlockState state) {

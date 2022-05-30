@@ -8,11 +8,11 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class StructureObjScatter implements IStructure {
-    final StructureWorld[] structures;
+    final NetherStructureWorld[] structures;
     final int distance;
     final int manDist;
 
-    public StructureObjScatter(int distance, StructureWorld[] structures) {
+    public StructureObjScatter(int distance, NetherStructureWorld[] structures) {
         this.distance = distance;
         this.manDist = (int) Math.ceil(distance * 1.5);
         this.structures = structures;
@@ -25,8 +25,8 @@ public abstract class StructureObjScatter implements IStructure {
                          final int MAX_HEIGHT,
                          StructureGeneratorThreadContext context) {
         if (isGround(world.getBlockState(pos.below())) && isGround(world.getBlockState(pos.below(2))) && noObjNear(world,
-                                                                                                                   pos)) {
-            StructureWorld tree = structures[random.nextInt(structures.length)];
+                pos)) {
+            NetherStructureWorld tree = structures[random.nextInt(structures.length)];
             tree.generate(world, pos, random, MAX_HEIGHT, context);
         }
     }
