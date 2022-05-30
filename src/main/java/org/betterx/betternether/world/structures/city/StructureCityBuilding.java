@@ -16,11 +16,12 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
 
-import org.betterx.betternether.world.structures.NetherStructureNBT;
+import org.betterx.bclib.world.structures.StructureNBT;
+import org.betterx.betternether.BetterNether;
 
 import java.util.List;
 
-public class StructureCityBuilding extends NetherStructureNBT {
+public class StructureCityBuilding extends StructureNBT {
     protected static final BlockState AIR = Blocks.AIR.defaultBlockState();
 
     private BoundingBox2D bb;
@@ -30,13 +31,13 @@ public class StructureCityBuilding extends NetherStructureNBT {
     private int offsetY;
 
     public StructureCityBuilding(String structure) {
-        super(structure);
+        super(BetterNether.makeID(structure));
         this.offsetY = 0;
         init();
     }
 
     public StructureCityBuilding(String structure, int offsetY) {
-        super(structure);
+        super(BetterNether.makeID(structure));
         this.offsetY = offsetY;
         init();
     }

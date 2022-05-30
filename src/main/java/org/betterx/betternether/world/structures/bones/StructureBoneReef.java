@@ -12,9 +12,9 @@ import org.betterx.betternether.world.structures.StructureGeneratorThreadContext
 
 public class StructureBoneReef implements IStructure {
     private static final StructureNBT[] BONES = new StructureNBT[]{
-            new NetherStructureNBT("bone_01"),
-            new NetherStructureNBT("bone_02"),
-            new NetherStructureNBT("bone_03")
+            NetherStructureNBT.create("bone_01"),
+            NetherStructureNBT.create("bone_02"),
+            NetherStructureNBT.create("bone_03")
     };
 
     @Override
