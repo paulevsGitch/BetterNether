@@ -143,10 +143,6 @@ public abstract class NetherBiome extends BCLBiome {
         }
     }
 
-    protected void addStructures(String... structures) {
-        //TODO: 1.19 replace this
-    }
-
     protected class StructureInfo {
         final IStructure structure;
         final float density;
