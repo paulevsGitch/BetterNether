@@ -272,13 +272,13 @@ public class NetherFeatures {
     }
 
     // BONES //
-    public static final BCLFeature JUNGLE_BONES = TemplateFeature.createAndRegisterRare(
+    public static final BCLFeature JUNGLE_BONES = TemplateFeature.createAndRegister(
             BetterNether.makeID("jungle_bones"),
             new TemplateFeatureConfig(List.of(
                     cfg(BetterNether.makeID("jungle_bones_1"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_2"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_3"), -1, StructurePlacementType.FLOOR, 1.0f)
-            )), 3);
+            )), 5);
 
     public static final BCLFeature BONES = TemplateFeature.createAndRegisterRare(
             BetterNether.makeID("bones"),
@@ -286,7 +286,7 @@ public class NetherFeatures {
                     cfg(BetterNether.makeID("bone_01"), 0, StructurePlacementType.FLOOR_FREE_ABOVE, 1.0f),
                     cfg(BetterNether.makeID("bone_02"), 0, StructurePlacementType.FLOOR_FREE_ABOVE, 1.0f),
                     cfg(BetterNether.makeID("bone_03"), 0, StructurePlacementType.FLOOR_FREE_ABOVE, 1.0f)
-            )), 10);
+            )), 2);
 
 
     // MANAGE DEFAULT FEATTURES //
