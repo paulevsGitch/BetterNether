@@ -25,8 +25,9 @@ public class CityHelper {
                                         ChunkGenerator chunkGenerator,
                                         long worldSeed,
                                         WorldgenRandom chunkRandom) {
-        RandomSpreadStructurePlacement config = NetherStructures.CITY_STRUCTURE.spreadConfig;
-        if (config != null && config.spacing() > 0) collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
+        if (NetherStructures.CITY_STRUCTURE.spreadConfig instanceof RandomSpreadStructurePlacement config) {
+            if (config != null && config.spacing() > 0) collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
+        }
         return stopGeneration(chunkX, chunkZ);
     }
 
@@ -92,16 +93,18 @@ public class CityHelper {
         int cx = pos.getX() >> 4;
         int cz = pos.getZ() >> 4;
 
-        RandomSpreadStructurePlacement config = NetherStructures.CITY_STRUCTURE.spreadConfig;
-        if (config == null || config.spacing() < 1)
-            return null;
+        if (NetherStructures.CITY_STRUCTURE.spreadConfig instanceof RandomSpreadStructurePlacement config) {
+            if (config == null || config.spacing() < 1)
+                return null;
 
-        collectNearby(world,
-                      cx,
-                      cz,
-                      config,
-                      world.getSeed(),
-                      new WorldgenRandom(new LegacyRandomSource(Instant.now().getEpochSecond())));
+            collectNearby(world,
+                    cx,
+                    cz,
+                    config,
+                    world.getSeed(),
+                    new WorldgenRandom(new LegacyRandomSource(Instant.now().getEpochSecond())));
+        }
+
         Iterator<ChunkPos> iterator = POSITIONS.iterator();
         if (iterator.hasNext()) {
             ChunkPos nearest = POSITIONS.iterator().next();

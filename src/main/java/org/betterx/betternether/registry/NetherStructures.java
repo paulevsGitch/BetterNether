@@ -8,8 +8,9 @@ import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BiomeAPI;
+import org.betterx.bclib.api.structures.BCLStructure;
+import org.betterx.bclib.api.structures.BCLStructureBuilder;
 import org.betterx.bclib.api.tag.TagAPI;
-import org.betterx.bclib.world.structures.BCLStructure;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.structures.city.CityFeature;
@@ -18,115 +19,84 @@ import org.betterx.betternether.world.structures.templates.*;
 public class NetherStructures {
     public static final int CITY_SPACING = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
     // Nether City
-    public static final BCLStructure<CityFeature> CITY_STRUCTURE = new BCLStructure<>(
-            BetterNether.makeID("nether_city"),
-            CityFeature::new,
-            Decoration.STRONGHOLDS,
-            CITY_SPACING,
-            CITY_SPACING >> 1,
-            true
-    );
+    public static final BCLStructure<CityFeature> CITY_STRUCTURE = BCLStructureBuilder
+            .start(BetterNether.makeID("nether_city"), CityFeature::new)
+            .step(Decoration.STRONGHOLDS)
+            .randomPlacement(CITY_SPACING, CITY_SPACING >> 1)
+            .build();
 
-    public static final BCLStructure<Pyramids> PYRAMIDS = new BCLStructure<>(
-            BetterNether.makeID("pyramid"),
-            Pyramids::new,
-            Decoration.SURFACE_STRUCTURES,
-            32,
-            8,
-            true,
-            Pyramids.CODEC,
-            null
-    );
+    public static final BCLStructure<Pyramids> PYRAMIDS = BCLStructureBuilder
+            .start(BetterNether.makeID("pyramid"), Pyramids::new)
+            .step(Decoration.SURFACE_STRUCTURES)
+            .randomPlacement(32, 8)
+            .codec(Pyramids.CODEC)
+            .build();
 
-    public static final BCLStructure<GhastHive> GHAST_HIVE = new BCLStructure<>(
-            BetterNether.makeID("ghast_hive"),
-            GhastHive::new,
-            Decoration.SURFACE_STRUCTURES,
-            80,
-            32,
-            true,
-            GhastHive.CODEC,
-            null
-    );
+    public static final BCLStructure<GhastHive> GHAST_HIVE = BCLStructureBuilder
+            .start(BetterNether.makeID("ghast_hive"), GhastHive::new)
+            .step(Decoration.SURFACE_STRUCTURES)
+            .randomPlacement(80, 32)
+            .codec(GhastHive.CODEC)
+            .build();
 
 
-    public static final BCLStructure<SpawnAltarLadder> SPAWN_ALTAR_LADDER = new BCLStructure<>(
-            BetterNether.makeID("spawn_altar_ladder"),
-            SpawnAltarLadder::new,
-            Decoration.SURFACE_STRUCTURES,
-            40,
-            20,
-            true,
-            SpawnAltarLadder.CODEC,
-            NetherTags.BETTER_NETHER_DECORATIONS
-    );
+    public static final BCLStructure<SpawnAltarLadder> SPAWN_ALTAR_LADDER = BCLStructureBuilder
+            .start(BetterNether.makeID("spawn_altar_ladder"), SpawnAltarLadder::new)
+            .step(Decoration.SURFACE_STRUCTURES)
+            .randomPlacement(40, 20)
+            .codec(SpawnAltarLadder.CODEC)
+            .biomeTag(NetherTags.BETTER_NETHER_DECORATIONS)
+            .build();
+
+    public static final BCLStructure<RespawnPoints> RESPAWN_POINTS = BCLStructureBuilder
+            .start(BetterNether.makeID("respawn_points"), RespawnPoints::new)
+            .step(Decoration.SURFACE_STRUCTURES)
+            .randomPlacement(32, 24)
+            .codec(RespawnPoints.CODEC)
+            .biomeTag(NetherTags.BETTER_NETHER_DECORATIONS)
+            .build();
 
 
-    public static final BCLStructure<RespawnPoints> RESPAWN_POINTS = new BCLStructure<>(
-            BetterNether.makeID("respawn_points"),
-            RespawnPoints::new,
-            Decoration.SURFACE_STRUCTURES,
-            32,
-            24,
-            true,
-            RespawnPoints.CODEC,
-            NetherTags.BETTER_NETHER_DECORATIONS
-    );
+    public static final BCLStructure<Pillars> PILLARS = BCLStructureBuilder
+            .start(BetterNether.makeID("pillars"), Pillars::new)
+            .step(Decoration.SURFACE_STRUCTURES)
+            .randomPlacement(20, 8)
+            .codec(Pillars.CODEC)
+            .biomeTag(NetherTags.BETTER_NETHER_DECORATIONS)
+            .build();
 
-    public static final BCLStructure<Pillars> PILLARS = new BCLStructure<>(
-            BetterNether.makeID("pillars"),
-            Pillars::new,
-            Decoration.SURFACE_STRUCTURES,
-            20,
-            8,
-            true,
-            Pillars.CODEC,
-            NetherTags.BETTER_NETHER_DECORATIONS
-    );
 
-    public static final BCLStructure<Gardens> GARDENS = new BCLStructure<>(
-            BetterNether.makeID("gardens"),
-            Gardens::new,
-            Decoration.SURFACE_STRUCTURES,
-            50,
-            16,
-            true,
-            Gardens.CODEC,
-            NetherTags.BETTER_NETHER_DECORATIONS
-    );
+    public static final BCLStructure<Gardens> GARDENS = BCLStructureBuilder
+            .start(BetterNether.makeID("gardens"), Gardens::new)
+            .step(Decoration.SURFACE_STRUCTURES)
+            .randomPlacement(50, 16)
+            .codec(Gardens.CODEC)
+            .biomeTag(NetherTags.BETTER_NETHER_DECORATIONS)
+            .build();
 
-    public static final BCLStructure<Portals> PORTALS = new BCLStructure<>(
-            BetterNether.makeID("portals"),
-            Portals::new,
-            Decoration.SURFACE_STRUCTURES,
-            40,
-            15,
-            true,
-            Portals.CODEC,
-            NetherTags.BETTER_NETHER_DECORATIONS
-    );
+    public static final BCLStructure<Portals> PORTALS = BCLStructureBuilder
+            .start(BetterNether.makeID("portals"), Portals::new)
+            .step(Decoration.SURFACE_STRUCTURES)
+            .randomPlacement(40, 15)
+            .codec(Portals.CODEC)
+            .biomeTag(NetherTags.BETTER_NETHER_DECORATIONS)
+            .build();
 
-    public static final BCLStructure<Altars> ALTARS = new BCLStructure<>(
-            BetterNether.makeID("altars"),
-            Altars::new,
-            Decoration.SURFACE_STRUCTURES,
-            40,
-            16,
-            true,
-            Altars.CODEC,
-            NetherTags.BETTER_NETHER_DECORATIONS
-    );
+    public static final BCLStructure<Altars> ALTARS = BCLStructureBuilder
+            .start(BetterNether.makeID("altars"), Altars::new)
+            .step(Decoration.SURFACE_STRUCTURES)
+            .randomPlacement(40, 16)
+            .codec(Altars.CODEC)
+            .biomeTag(NetherTags.BETTER_NETHER_DECORATIONS)
+            .build();
 
-    public static final BCLStructure<JungleTemples> JUNGLE_TEMPLES = new BCLStructure<>(
-            BetterNether.makeID("jungle_temples"),
-            JungleTemples::new,
-            Decoration.SURFACE_STRUCTURES,
-            32,
-            8,
-            true,
-            JungleTemples.CODEC,
-            null
-    );
+    public static final BCLStructure<JungleTemples> JUNGLE_TEMPLES = BCLStructureBuilder
+            .start(BetterNether.makeID("jungle_temples"), JungleTemples::new)
+            .step(Decoration.SURFACE_STRUCTURES)
+            .randomPlacement(32, 8)
+            .codec(JungleTemples.CODEC)
+            .biomeTag(NetherTags.BETTER_NETHER_DECORATIONS)
+            .build();
 
 
     public static void register() {
