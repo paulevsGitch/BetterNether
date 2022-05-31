@@ -117,6 +117,17 @@ public class NetherStructures {
             NetherTags.BETTER_NETHER_DECORATIONS
     );
 
+    public static final BCLStructure<JungleTemples> JUNGLE_TEMPLES = new BCLStructure<>(
+            BetterNether.makeID("jungle_temples"),
+            JungleTemples::new,
+            Decoration.SURFACE_STRUCTURES,
+            32,
+            8,
+            true,
+            JungleTemples.CODEC,
+            null
+    );
+
 
     public static void register() {
         NetherStructurePieces.ensureStaticLoad();

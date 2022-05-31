@@ -16,6 +16,7 @@ import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
+import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
@@ -34,12 +35,18 @@ public class NetherJungle extends NetherBiome {
                    .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .music(SoundEvents.MUSIC_BIOME_WARPED_FOREST)
-                   .structure(BiomeTags.HAS_BASTION_REMNANT);
+                   .structure(BiomeTags.HAS_BASTION_REMNANT)
+                   .structure(NetherStructures.JUNGLE_TEMPLES);
         }
 
         @Override
         public BiomeSupplier<NetherBiome> getSupplier() {
             return NetherJungle::new;
+        }
+
+        @Override
+        public boolean hasBNStructures() {
+            return false;
         }
 
         @Override
@@ -82,10 +89,6 @@ public class NetherJungle extends NetherBiome {
         addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.2F, true);
         addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.8F, true);
         addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.8F, true);
-
-        addStructures(structureFormat("ruined_temple", -4, StructurePlacementType.FLOOR, 10F));
-        addStructures(structureFormat("jungle_temple_altar", -2, StructurePlacementType.FLOOR, 10F));
-        addStructures(structureFormat("jungle_temple_2", -2, StructurePlacementType.FLOOR, 10F));
 
         addStructures(structureFormat("jungle_bones_1", 0, StructurePlacementType.FLOOR, 20F));
         addStructures(structureFormat("jungle_bones_2", 0, StructurePlacementType.FLOOR, 20F));
