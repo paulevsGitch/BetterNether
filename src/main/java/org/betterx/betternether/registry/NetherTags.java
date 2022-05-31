@@ -27,6 +27,9 @@ public class NetherTags {
 //	public static final Tag<Block> MYCELIUM = TagAPI.makeCommonBlockTag("nether_mycelium");
     //public static final TagAPI.TagKey<Block> NYLIUM = TagAPI.BLOCK_NYLIUM;
 
+    public static final TagKey<Biome> BETTER_NETHER_DECORATIONS = TagAPI.makeStructureTag(BetterNether.MOD_ID,
+            "nether_decorations");
+
     public static final TagKey<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
 
     public static final TagKey<Block> NETHER_FARMLAND = TagAPI.makeCommonBlockTag("nether_farmland");

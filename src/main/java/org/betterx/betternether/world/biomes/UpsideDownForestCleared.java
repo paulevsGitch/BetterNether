@@ -54,6 +54,16 @@ public class UpsideDownForestCleared extends NetherBiome {
 
 
         @Override
+        public boolean hasBNStructures() {
+            return false;
+        }
+
+        @Override
+        public boolean hasBNFeatures() {
+            return false;
+        }
+
+        @Override
         public SurfaceRuleBuilder surface() {
             final SurfaceNoiseCondition noise = UpsideDownFloorCondition.DEFAULT;
             return super.surface().rule(3,
@@ -71,11 +81,6 @@ public class UpsideDownForestCleared extends NetherBiome {
                     )
             );
         }
-    }
-
-    @Override
-    public boolean hasBNStructures() {
-        return false;
     }
 
     public UpsideDownForestCleared(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {

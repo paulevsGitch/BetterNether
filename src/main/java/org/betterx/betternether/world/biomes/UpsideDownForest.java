@@ -92,6 +92,16 @@ public class UpsideDownForest extends NetherBiome {
             return false;
         }
 
+        @Override
+        public boolean hasBNStructures() {
+            return false;
+        }
+
+        @Override
+        public boolean hasBNFeatures() {
+            return false;
+        }
+
 
         @Override
         public SurfaceRuleBuilder surface() {
@@ -111,11 +121,6 @@ public class UpsideDownForest extends NetherBiome {
         }
     }
 
-
-    @Override
-    public boolean hasBNStructures() {
-        return false;
-    }
 
     public UpsideDownForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);

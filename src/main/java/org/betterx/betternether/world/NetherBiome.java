@@ -17,41 +17,11 @@ import org.betterx.betternether.world.structures.NetherStructureWorld;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 import org.betterx.betternether.world.structures.plants.StructureWartCap;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public abstract class NetherBiome extends BCLBiome {
-    private static final String[] DEF_STRUCTURES = new String[]{
-            structureFormat("altar_01", -2, StructurePlacementType.FLOOR, 1),
-            structureFormat("altar_02", -4, StructurePlacementType.FLOOR, 1),
-            structureFormat("altar_03", -3, StructurePlacementType.FLOOR, 1),
-            structureFormat("altar_04", -3, StructurePlacementType.FLOOR, 1),
-            structureFormat("altar_05", -2, StructurePlacementType.FLOOR, 1),
-            structureFormat("altar_06", -2, StructurePlacementType.FLOOR, 1),
-            structureFormat("altar_07", -2, StructurePlacementType.FLOOR, 1),
-            structureFormat("altar_08", -2, StructurePlacementType.FLOOR, 1),
-            structureFormat("portal_01", -4, StructurePlacementType.FLOOR, 1),
-            structureFormat("portal_02", -3, StructurePlacementType.FLOOR, 1),
-            structureFormat("garden_01", -3, StructurePlacementType.FLOOR, 1),
-            structureFormat("garden_02", -2, StructurePlacementType.FLOOR, 1),
-            structureFormat("pillar_01", -1, StructurePlacementType.FLOOR, 1),
-            structureFormat("pillar_02", -1, StructurePlacementType.FLOOR, 1),
-            structureFormat("pillar_03", -1, StructurePlacementType.FLOOR, 1),
-            structureFormat("pillar_04", -1, StructurePlacementType.FLOOR, 1),
-            structureFormat("pillar_05", -1, StructurePlacementType.FLOOR, 1),
-            structureFormat("pillar_06", -1, StructurePlacementType.FLOOR, 1),
-            structureFormat("respawn_point_01", -3, StructurePlacementType.FLOOR, 1),
-            structureFormat("respawn_point_02", -2, StructurePlacementType.FLOOR, 1),
-            structureFormat("respawn_point_03", -3, StructurePlacementType.FLOOR, 1),
-            structureFormat("respawn_point_04", -2, StructurePlacementType.FLOOR, 1),
-            structureFormat("spawn_altar_ladder", -5, StructurePlacementType.FLOOR, 1),
-
-            structureFormat("ghast_hive", -20, StructurePlacementType.CEIL, 1F),
-
-            structureFormat("lava/pyramid_1", -1, StructurePlacementType.LAVA, 1F),
-            structureFormat("lava/pyramid_2", -1, StructurePlacementType.LAVA, 1F),
-            structureFormat("lava/pyramid_3", -1, StructurePlacementType.LAVA, 1F),
-            structureFormat("lava/pyramid_4", -1, StructurePlacementType.LAVA, 1F)
-    };
 
 
     private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
@@ -71,25 +41,13 @@ public abstract class NetherBiome extends BCLBiome {
     protected float plantDensity = 1.0001F;
     protected float noiseDensity = 0.3F;
 
-    private final ArrayList<String> structures;
-
     protected NetherBiome(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
-        structures = new ArrayList<>(DEF_STRUCTURES.length);
 
         addStructure("cap_gen", new StructureWartCap(), StructurePlacementType.WALL, 0.8F, true);
 
-        if (hasBNStructures()) {
-            Collections.addAll(structures, DEF_STRUCTURES);
-        }
 
         onInit();
-
-        final String structureGroup = configGroup() + ".structures";
-        List<String> structAll = Configs.BIOMES.getStringArray(structureGroup, "schematics", structures);
-        for (String struct : structAll) {
-            structureFromString(struct);
-        }
 
         final String group = configGroup();
         setPlantDensity(Configs.BIOMES.getFloat(group, "plants_and_structures_density", getPlantDensity()));
@@ -97,10 +55,6 @@ public abstract class NetherBiome extends BCLBiome {
     }
 
     protected abstract void onInit();
-
-    public boolean hasBNStructures() {
-        return true;
-    }
 
 
     public void setPlantDensity(float density) {
@@ -190,7 +144,7 @@ public abstract class NetherBiome extends BCLBiome {
     }
 
     protected void addStructures(String... structures) {
-        this.structures.addAll(Arrays.asList(structures));
+        //TODO: 1.19 replace this
     }
 
     protected class StructureInfo {

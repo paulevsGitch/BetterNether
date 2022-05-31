@@ -34,12 +34,12 @@ public class NetherBiomeBuilder {
     //(ResourceLocation randomName, VerticalAnchor trueAtAndBelow, VerticalAnchor falseAtAndAbove)
     static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM =
             new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_floor"),
-                                                             VerticalAnchor.bottom(),
-                                                             VerticalAnchor.aboveBottom(5));
+                    VerticalAnchor.bottom(),
+                    VerticalAnchor.aboveBottom(5));
     static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP =
             new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_roof"),
-                                                             VerticalAnchor.belowTop(5),
-                                                             VerticalAnchor.top());
+                    VerticalAnchor.belowTop(5),
+                    VerticalAnchor.top());
 
     private static void addVanillaStructures(BCLBiomeBuilder builder) {
         builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
@@ -62,9 +62,12 @@ public class NetherBiomeBuilder {
     }
 
     private static void addBNStructures(BCLBiomeBuilder builder) {
-        builder.structure(NetherStructures.PYRAMID_1);
+        builder.structure(NetherStructures.PYRAMIDS);
+        builder.structure(NetherStructures.GHAST_HIVE);
+        builder.structure(NetherStructures.SPAWN_ALTAR_LADDER);
+        builder.structure(NetherStructures.RESPAWN_POINTS);
+        builder.structure(NetherStructures.PILLARS);
     }
-
 
     public static NetherBiome create(NetherBiomeConfig data) {
         return create(data, null);
@@ -94,7 +97,7 @@ public class NetherBiomeBuilder {
                 .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
                 .edge(edgeBiome)
                 .addNetherClimateParamater(MHelper.randRange(-1.5F, 1.5F, RANDOM),
-                                           MHelper.randRange(-1.5F, 1.5F, RANDOM));
+                        MHelper.randRange(-1.5F, 1.5F, RANDOM));
 
 
         if (data.hasVanillaStructures()) addVanillaStructures(builder);
@@ -116,7 +119,7 @@ public class NetherBiomeBuilder {
         }
 
         if (data.hasDefaultOres()) NetherFeatures.addDefaultOres(builder);
-        NetherStructures.addDefaultFeatures(builder);
+        NetherStructures.addDefaultStructures(builder);
 
         data.addCustomBuildData(builder);
 
