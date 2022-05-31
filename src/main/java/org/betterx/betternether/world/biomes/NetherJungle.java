@@ -14,10 +14,7 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.world.structures.StructurePlacementType;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.NetherStructures;
-import org.betterx.betternether.registry.SoundsRegistry;
+import org.betterx.betternether.registry.*;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.plants.*;
@@ -36,7 +33,8 @@ public class NetherJungle extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .music(SoundEvents.MUSIC_BIOME_WARPED_FOREST)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
-                   .structure(NetherStructures.JUNGLE_TEMPLES);
+                   .structure(NetherStructures.JUNGLE_TEMPLES)
+                   .feature(NetherFeatures.JUNGLE_BONES);
         }
 
         @Override
@@ -89,10 +87,6 @@ public class NetherJungle extends NetherBiome {
         addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.2F, true);
         addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.8F, true);
         addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.8F, true);
-
-        addStructures(structureFormat("jungle_bones_1", 0, StructurePlacementType.FLOOR, 20F));
-        addStructures(structureFormat("jungle_bones_2", 0, StructurePlacementType.FLOOR, 20F));
-        addStructures(structureFormat("jungle_bones_3", 0, StructurePlacementType.FLOOR, 20F));
 
         this.setNoiseDensity(0.5F);
     }

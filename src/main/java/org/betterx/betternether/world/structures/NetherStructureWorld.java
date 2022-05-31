@@ -5,7 +5,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 import com.google.common.collect.Maps;
-import org.betterx.bclib.world.structures.StructureNBT;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
@@ -13,18 +12,21 @@ import org.betterx.betternether.BetterNether;
 import java.util.Map;
 
 public class NetherStructureWorld extends StructureWorldNBT implements IStructure {
-    public final StructurePlacementType type;
-
+    @Deprecated(forRemoval = true)
     public NetherStructureWorld(String name, int offsetY, StructurePlacementType type) {
-        super(BetterNether.makeID(name), offsetY, type);
-        this.type = type;
+        this(name, offsetY, type, 1.0f);
+    }
+
+    @Deprecated(forRemoval = true)
+    public NetherStructureWorld(String name, int offsetY, StructurePlacementType type, float chance) {
+        super(BetterNether.makeID(name), offsetY, type, chance);
     }
 
     private static final Map<String, NetherStructureWorld> READER_CACHE = Maps.newHashMap();
 
     public static NetherStructureWorld create(String name, int offsetY, StructurePlacementType type) {
         String key = name + "::" + offsetY + "::" + type.getSerializedName();
-        return READER_CACHE.computeIfAbsent(key, r -> new NetherStructureWorld(name, offsetY, type));
+        return READER_CACHE.computeIfAbsent(key, r -> new NetherStructureWorld(name, offsetY, type, 1.0f));
     }
 
     @Override
@@ -34,9 +36,8 @@ public class NetherStructureWorld extends StructureWorldNBT implements IStructur
                          int MAX_HEIGHT,
                          StructureGeneratorThreadContext context) {
         generateIfPlaceable(world,
-                            pos,
-                            StructureNBT.getRandomRotation(random),
-                            StructureNBT.getRandomMirror(random)
-                           );
+                pos,
+                random
+        );
     }
 }

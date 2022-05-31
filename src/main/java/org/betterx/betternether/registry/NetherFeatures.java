@@ -24,6 +24,7 @@ import org.betterx.bclib.world.features.DefaultFeature;
 import org.betterx.bclib.world.features.TemplateFeature;
 import org.betterx.bclib.world.features.TemplateFeatureConfig;
 import org.betterx.bclib.world.structures.StructurePlacementType;
+import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.features.*;
@@ -34,7 +35,7 @@ import java.util.function.Supplier;
 
 public class NetherFeatures {
     private static final List<BCLFeature> defaultFeatures = Lists.newArrayList();
-    
+
     // Surface Features //
     public static final Feature<ScatterFeatureConfig> STALAGMITES = BCLFeature.register("stalagmites",
             new ScatterFeature(ScatterFeatureConfig.WithSize.CODEC));
@@ -271,34 +272,37 @@ public class NetherFeatures {
     }
 
     // BUILDINGS //
-    public static final BCLFeature PILLAR_01 = registerDefault("pillar_01", -1, StructurePlacementType.FLOOR, 16);
-    public static final BCLFeature PILLAR_02 = registerDefault("pillar_02", -1, StructurePlacementType.FLOOR, 16);
-    public static final BCLFeature PILLAR_03 = registerDefault("pillar_03", -1, StructurePlacementType.FLOOR, 16);
-    public static final BCLFeature PILLAR_04 = registerDefault("pillar_04", -1, StructurePlacementType.FLOOR, 16);
-    public static final BCLFeature PILLAR_05 = registerDefault("pillar_05", -1, StructurePlacementType.FLOOR, 16);
-    public static final BCLFeature PILLAR_06 = registerDefault("pillar_06", -1, StructurePlacementType.FLOOR, 16);
+    public static final BCLFeature JUNGLE_BONES = TemplateFeature.createAndRegister(
+            BetterNether.makeID("jungle_bones"),
+            new TemplateFeatureConfig(List.of(
+                    cfg(BetterNether.makeID("jungle_bones_1"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("jungle_bones_2"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("jungle_bones_3"), -1, StructurePlacementType.FLOOR, 1.0f)
+            )), 2);
 
 
     // MANAGE DEFAULT FEATTURES //
 
+
+    public static StructureWorldNBT cfg(ResourceLocation location,
+                                        int offsetY,
+                                        StructurePlacementType type,
+                                        float chance) {
+        return TemplateFeatureConfig.cfg(location, offsetY, type, chance);
+    }
 
     private static BCLFeature registerDefault(BCLFeature f) {
         defaultFeatures.add(f);
         return f;
     }
 
-    private static BCLFeature registerDefault(String name,
-                                              int offsetY,
-                                              StructurePlacementType type,
+    private static BCLFeature registerDefault(ResourceLocation location,
+                                              List<StructureWorldNBT> structures,
                                               int onceEveryChunk) {
-
         return registerDefault(TemplateFeature.createAndRegister(
-                new TemplateFeatureConfig(
-                        BetterNether.makeID(name),
-                        offsetY,
-                        type
-                ), onceEveryChunk));
-
+                location,
+                new TemplateFeatureConfig(structures),
+                onceEveryChunk));
     }
 
     public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {
