@@ -18,7 +18,6 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.bones.StructureBoneReef;
 import org.betterx.betternether.world.structures.plants.*;
 
 public class NetherBoneReef extends NetherBiome {
@@ -35,7 +34,8 @@ public class NetherBoneReef extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .particles(ParticleTypes.WARPED_SPORE, 0.01F)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(NetherFeatures.STALAGMITE_BONE_CLUSTER);
+                   .feature(NetherFeatures.STALAGMITE_BONE_CLUSTER)
+                   .feature(NetherFeatures.BONES);
         }
 
         @Override
@@ -61,7 +61,6 @@ public class NetherBoneReef extends NetherBiome {
     @Override
     protected void onInit() {
         addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.5F, false);
-        addStructure("bone_reef", new StructureBoneReef(), StructurePlacementType.FLOOR, 0.2F, true);
         addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.02F, true);
         addStructure("feather_fern", new StructureFeatherFern(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("bone_grass", new StructureBoneGrass(), StructurePlacementType.FLOOR, 0.1F, false);

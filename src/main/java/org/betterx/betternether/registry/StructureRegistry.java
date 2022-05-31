@@ -3,7 +3,6 @@ package org.betterx.betternether.registry;
 import com.google.common.collect.Maps;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.world.structures.IStructure;
-import org.betterx.betternether.world.structures.bones.StructureBoneReef;
 import org.betterx.betternether.world.structures.decorations.StructureCrystal;
 import org.betterx.betternether.world.structures.decorations.StructureGeyser;
 import org.betterx.betternether.world.structures.decorations.StructureWartDeadwood;
@@ -34,7 +33,6 @@ public class StructureRegistry {
         register("big_warped_tree", new StructureBigWarpedTree(), StructurePlacementType.FLOOR);
         register("black_apple", new StructureBlackApple(), StructurePlacementType.FLOOR);
         register("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR);
-        register("bone_reef", new StructureBoneReef(), StructurePlacementType.FLOOR);
         register("bush_rubeus", new StructureRubeusBush(), StructurePlacementType.FLOOR);
         register("crimson_fungus", new StructureCrimsonFungus(), StructurePlacementType.FLOOR);
         register("crimson_glowing_tree", new StructureCrimsonGlowingTree(), StructurePlacementType.FLOOR);

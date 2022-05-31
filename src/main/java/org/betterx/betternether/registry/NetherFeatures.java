@@ -271,14 +271,22 @@ public class NetherFeatures {
                 rare);
     }
 
-    // BUILDINGS //
-    public static final BCLFeature JUNGLE_BONES = TemplateFeature.createAndRegister(
+    // BONES //
+    public static final BCLFeature JUNGLE_BONES = TemplateFeature.createAndRegisterRare(
             BetterNether.makeID("jungle_bones"),
             new TemplateFeatureConfig(List.of(
                     cfg(BetterNether.makeID("jungle_bones_1"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_2"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_3"), -1, StructurePlacementType.FLOOR, 1.0f)
-            )), 4);
+            )), 3);
+
+    public static final BCLFeature BONES = TemplateFeature.createAndRegisterRare(
+            BetterNether.makeID("bones"),
+            new TemplateFeatureConfig(List.of(
+                    cfg(BetterNether.makeID("bone_01"), 0, StructurePlacementType.FLOOR_FREE_ABOVE, 1.0f),
+                    cfg(BetterNether.makeID("bone_02"), 0, StructurePlacementType.FLOOR_FREE_ABOVE, 1.0f),
+                    cfg(BetterNether.makeID("bone_03"), 0, StructurePlacementType.FLOOR_FREE_ABOVE, 1.0f)
+            )), 10);
 
 
     // MANAGE DEFAULT FEATTURES //

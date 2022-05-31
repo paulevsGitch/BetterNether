@@ -18,7 +18,6 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.bones.StructureBoneReef;
 import org.betterx.betternether.world.structures.plants.StructureGoldenLumabusVine;
 import org.betterx.betternether.world.structures.plants.StructureJellyfishMushroom;
 import org.betterx.betternether.world.structures.plants.StructureReeds;
@@ -40,6 +39,7 @@ public class NetherSulfuricBoneReef extends NetherBiome {
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.STALACTITE_BONE_CLUSTER)
                    .feature(NetherFeatures.STALAGMITE_BONE_CLUSTER)
+                   .feature(NetherFeatures.BONES)
                    .genChance(0.3f);
         }
 
@@ -67,7 +67,6 @@ public class NetherSulfuricBoneReef extends NetherBiome {
     protected void onInit() {
 
         addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.5F, false);
-        addStructure("bone_reef", new StructureBoneReef(), StructurePlacementType.FLOOR, 0.2F, true);
         addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.02F, true);
         addStructure("sulfuric_bone_grass", new StructureSepiaBoneGrass(), StructurePlacementType.FLOOR, 0.1F, false);
 
