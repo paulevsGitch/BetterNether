@@ -26,8 +26,11 @@ public class StructureBoneReef implements IStructure {
         if (BlocksHelper.isNetherGround(world.getBlockState(pos.below())) && world.isEmptyBlock(pos.above(2)) && world.isEmptyBlock(
                 pos.above(4))) {
             StructureNBT bone = BONES[random.nextInt(BONES.length)];
-            bone.randomRM(random);
-            bone.generateCentered(world, pos.below(random.nextInt(4)));
+            bone.generateCentered(world,
+                                  pos.below(random.nextInt(4)),
+                                  StructureNBT.getRandomRotation(random),
+                                  StructureNBT.getRandomMirror(random)
+                                 );
         }
     }
 }

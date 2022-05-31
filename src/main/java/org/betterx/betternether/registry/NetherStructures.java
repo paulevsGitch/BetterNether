@@ -10,9 +10,11 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BiomeAPI;
 import org.betterx.bclib.api.tag.TagAPI;
 import org.betterx.bclib.world.structures.BCLStructure;
+import org.betterx.bclib.world.structures.TemplateStructure;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.structures.city.CityFeature;
+import org.betterx.betternether.world.structures.templates.Pyramids;
 
 public class NetherStructures {
     public static final int CITY_SPACING = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
@@ -23,6 +25,15 @@ public class NetherStructures {
             Decoration.STRONGHOLDS,
             CITY_SPACING,
             CITY_SPACING >> 1,
+            true
+    );
+
+    public static final BCLStructure<TemplateStructure> PYRAMID_1 = new BCLStructure<>(
+            BetterNether.makeID("pyramid_01"),
+            Pyramids.Variant1::new,
+            Decoration.SURFACE_STRUCTURES,
+            64,
+            32,
             true
     );
 

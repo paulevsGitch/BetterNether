@@ -5,6 +5,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 import com.google.common.collect.Maps;
+import org.betterx.bclib.world.structures.StructureNBT;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
@@ -32,6 +33,10 @@ public class NetherStructureWorld extends StructureWorldNBT implements IStructur
                          RandomSource random,
                          int MAX_HEIGHT,
                          StructureGeneratorThreadContext context) {
-        generateInRandomOrientation(world, pos, random);
+        generateIfPlaceable(world,
+                            pos,
+                            StructureNBT.getRandomRotation(random),
+                            StructureNBT.getRandomMirror(random)
+                           );
     }
 }
