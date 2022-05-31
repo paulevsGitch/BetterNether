@@ -64,9 +64,7 @@ public class NetherBiomeBuilder {
     private static void addBNStructures(BCLBiomeBuilder builder) {
         builder.structure(NetherStructures.PYRAMIDS);
         builder.structure(NetherStructures.GHAST_HIVE);
-        builder.structure(NetherStructures.SPAWN_ALTAR_LADDER);
-        builder.structure(NetherStructures.RESPAWN_POINTS);
-        builder.structure(NetherStructures.PILLARS);
+        builder.structure(NetherTags.BETTER_NETHER_DECORATIONS);
     }
 
     public static NetherBiome create(NetherBiomeConfig data) {
