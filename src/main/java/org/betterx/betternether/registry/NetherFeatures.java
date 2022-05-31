@@ -278,7 +278,7 @@ public class NetherFeatures {
                     cfg(BetterNether.makeID("jungle_bones_1"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_2"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_3"), -1, StructurePlacementType.FLOOR, 1.0f)
-            )), 2);
+            )), 4);
 
 
     // MANAGE DEFAULT FEATTURES //
