@@ -19,10 +19,7 @@ import org.betterx.bclib.api.LifeCycleAPI;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BiomeAPI;
 import org.betterx.bclib.api.features.BCLCommonFeatures;
-import org.betterx.bclib.world.features.BCLFeature;
-import org.betterx.bclib.world.features.DefaultFeature;
-import org.betterx.bclib.world.features.TemplateFeature;
-import org.betterx.bclib.world.features.TemplateFeatureConfig;
+import org.betterx.bclib.world.features.*;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
@@ -38,16 +35,16 @@ public class NetherFeatures {
 
     // Surface Features //
     public static final Feature<ScatterFeatureConfig> STALAGMITES = BCLFeature.register("stalagmites",
-            new ScatterFeature(ScatterFeatureConfig.WithSize.CODEC));
+            new ScatterFeature(ScatterFeatureConfigs.WithSize.CODEC));
     public static final Feature<ScatterFeatureConfig> STALAGMITES_BLOCK_FILTERED = BCLFeature.register(
             "stalagmites_block_filtered",
-            new ScatterFeature(ScatterFeatureConfig.WithSizeOnBase.CODEC));
+            new ScatterFeature(ScatterFeatureConfigs.WithSizeOnBase.CODEC));
     public static final BCLFeature CRYSTAL_FATURE = CrystalFeature.createAndRegister();
     public static final BCLFeature STALAGNATE_NETHERRACK_CLUSTER = ScatterFeature.createAndRegister(
             "stalagmite_netherrack_cluster",
             5,
             20,
-            new ScatterFeatureConfig.WithSize(NetherBlocks.NETHERRACK_STALACTITE.defaultBlockState(),
+            new ScatterFeatureConfigs.WithSize(NetherBlocks.NETHERRACK_STALACTITE.defaultBlockState(),
                     2,
                     7,
                     2,
@@ -59,7 +56,7 @@ public class NetherFeatures {
             "stalagmite_blackstone_cluster",
             5,
             40,
-            new ScatterFeatureConfig.WithSize(NetherBlocks.BLACKSTONE_STALACTITE.defaultBlockState(),
+            new ScatterFeatureConfigs.WithSize(NetherBlocks.BLACKSTONE_STALACTITE.defaultBlockState(),
                     2,
                     7,
                     2,
@@ -71,7 +68,7 @@ public class NetherFeatures {
             "stalagmite_basalt_cluster",
             5,
             40,
-            new ScatterFeatureConfig.WithSize(NetherBlocks.BASALT_STALACTITE.defaultBlockState(),
+            new ScatterFeatureConfigs.WithSize(NetherBlocks.BASALT_STALACTITE.defaultBlockState(),
                     2,
                     7,
                     2,
@@ -83,7 +80,7 @@ public class NetherFeatures {
             "stalagmite_glowstone_cluster",
             2,
             4,
-            new ScatterFeatureConfig.WithSizeOnBase(NetherBlocks.GLOWSTONE_STALACTITE.defaultBlockState(),
+            new ScatterFeatureConfigs.WithSizeOnBase(NetherBlocks.GLOWSTONE_STALACTITE.defaultBlockState(),
                     Blocks.GLOWSTONE.defaultBlockState(),
                     3,
                     8,
@@ -96,7 +93,7 @@ public class NetherFeatures {
             "stalagmite_bone_cluster",
             6,
             10,
-            new ScatterFeatureConfig.WithSize(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
+            new ScatterFeatureConfigs.WithSize(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
                     Blocks.BONE_BLOCK.defaultBlockState(),
                     0.75f,
                     .3f,
@@ -113,7 +110,7 @@ public class NetherFeatures {
             "stalagmite_bone_cluster",
             6,
             10,
-            new ScatterFeatureConfig.WithSize(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
+            new ScatterFeatureConfigs.WithSize(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
                     Blocks.BONE_BLOCK.defaultBlockState(),
                     0.75f,
                     .3f,
@@ -278,7 +275,7 @@ public class NetherFeatures {
                     cfg(BetterNether.makeID("jungle_bones_1"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_2"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_3"), -1, StructurePlacementType.FLOOR, 1.0f)
-            )), 5);
+            )), 10);
 
     public static final BCLFeature BONES = TemplateFeature.createAndRegisterRare(
             BetterNether.makeID("bones"),
