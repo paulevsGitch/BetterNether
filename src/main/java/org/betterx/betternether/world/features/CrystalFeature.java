@@ -24,7 +24,7 @@ public class CrystalFeature extends NetherSurfaceFeature {
                                 .decoration(GenerationStep.Decoration.LOCAL_MODIFICATIONS)
                                 .oncePerChunks(1)
                                 .squarePlacement()
-                                .distanceToTopAndBottom10()
+                                .randomHeight10FromFloorCeil()
                                 .onlyInBiome()
                                 .buildAndRegister();
     }
