@@ -2,7 +2,7 @@
 	"container.forge": "Печь",
 	"container.chest_of_drawers": "Комод",
 
-	"entity.betternether.firefly": "Светлячёк",
+	"entity.betternether.firefly": "Светлячок",
 	"entity.betternether.hydrogen_jellyfish": "Водородная медуза",
 	"entity.betternether.naga_projectile": "Снаряд наги",
 	"entity.betternether.naga": "Нага",
@@ -362,7 +362,7 @@
 	"biome.betternether.nether_grasslands": "Адские луга",
 	"biome.betternether.nether_mushroom_forest": "Адский грибной лес",
 	"biome.betternether.nether_mushroom_forest_edge": "Окраина адского грибного леса",
-	"biome.betternether.wart_forest_edge": "Ораина наростового леса",
+	"biome.betternether.wart_forest_edge": "Окраина наростового леса",
 	"biome.betternether.bone_reef": "Костяной риф",
 	"biome.betternether.sulfuric_bone_reef": "Серный костяной риф",
 	"biome.betternether.poor_grasslands": "Обеднённые луга",
@@ -654,7 +654,7 @@
 	"block.betternether.anchor_tree_stripped_log": "Обтёсанное бревно якорного дерева",
 	"block.betternether.anchor_tree_taburet": "Табурет из якорного дерева",
 	
-	"block.betternether.anchor_tree_vine": "Лозая якорного дерева",
+	"block.betternether.anchor_tree_vine": "Лоза якорного дерева",
 	"block.betternether.anchor_tree_leaves": "Листва якорного дерева",
 	"block.betternether.anchor_tree_sapling": "Саженец якорного дерева",
 	
