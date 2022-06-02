@@ -34,7 +34,10 @@ public class NetherJungle extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_WARPED_FOREST)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(NetherStructures.JUNGLE_TEMPLES)
-                   .feature(NetherFeatures.JUNGLE_BONES);
+                   .feature(NetherFeatures.JUNGLE_BONES)
+                   .feature(NetherFeatures.GOLDEN_VINE)
+                   .feature(NetherFeatures.MAGMA_FLOWER)
+            ;
         }
 
         @Override
@@ -73,7 +76,6 @@ public class NetherJungle extends NetherBiome {
         addStructure("stalagnate", new StructureStalagnate(), StructurePlacementType.FLOOR, 0.2F, false);
         addStructure("rubeus_tree", new StructureRubeus(), StructurePlacementType.FLOOR, 0.1F, false);
         addStructure("bush_rubeus", new StructureRubeusBush(), StructurePlacementType.FLOOR, 0.1F, false);
-        addStructure("magma_flower", new StructureMagmaFlower(), StructurePlacementType.FLOOR, 0.5F, false);
         addStructure("egg_plant", new StructureEggPlant(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.03F, true);
         addStructure("feather_fern", new StructureFeatherFern(), StructurePlacementType.FLOOR, 0.05F, true);
@@ -81,7 +83,6 @@ public class NetherJungle extends NetherBiome {
         addStructure("lucis", new StructureLucis(), StructurePlacementType.WALL, 0.1F, false);
         addStructure("eye", new StructureEye(), StructurePlacementType.CEIL, 0.1F, true);
         addStructure("black_vine", new StructureBlackVine(), StructurePlacementType.CEIL, 0.1F, true);
-        addStructure("golden_vine", new StructureGoldenVine(), StructurePlacementType.CEIL, 0.1F, true);
         addStructure("flowered_vine", new StructureBloomingVine(), StructurePlacementType.CEIL, 0.1F, true);
         addStructure("jungle_moss", new StructureJungleMoss(), StructurePlacementType.WALL, 0.8F, true);
         addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.2F, true);

@@ -14,14 +14,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
-import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.decorations.StructureGeyser;
-import org.betterx.betternether.world.structures.plants.StructureGoldenVine;
-import org.betterx.betternether.world.structures.plants.StructureMagmaFlower;
 
 public class NetherMagmaLand extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -37,8 +33,13 @@ public class NetherMagmaLand extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.CRYSTAL_FATURE)
+                   .feature(NetherFeatures.GOLDEN_VINE)
+                   .feature(NetherFeatures.GEYSER)
+                   .feature(NetherFeatures.MAGMA_FLOWER)
+
             ;
         }
+
 
         @Override
         public BiomeSupplier<NetherBiome> getSupplier() {
@@ -54,9 +55,6 @@ public class NetherMagmaLand extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("geyser", new StructureGeyser(), StructurePlacementType.FLOOR, 0.1F, false);
-        addStructure("magma_flower", new StructureMagmaFlower(), StructurePlacementType.FLOOR, 0.4F, false);
-        addStructure("golden_vine", new StructureGoldenVine(), StructurePlacementType.CEIL, 0.2F, true);
     }
 
     @Override

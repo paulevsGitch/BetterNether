@@ -25,6 +25,7 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
+import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.plants.*;
@@ -91,6 +92,7 @@ public class NetherGrasslands extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
+                   .feature(NetherFeatures.MAGMA_FLOWER)
             ;
         }
 
@@ -124,7 +126,6 @@ public class NetherGrasslands extends NetherBiome {
     protected void onInit() {
         addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.5F, false);
         addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.05F, true);
-        addStructure("magma_flower", new StructureMagmaFlower(), StructurePlacementType.FLOOR, 0.5F, true);
         addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("ink_bush", new StructureInkBush(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("black_apple", new StructureBlackApple(), StructurePlacementType.FLOOR, 0.01F, true);

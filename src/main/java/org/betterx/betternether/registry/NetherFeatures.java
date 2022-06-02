@@ -19,10 +19,13 @@ import org.betterx.bclib.api.LifeCycleAPI;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BiomeAPI;
 import org.betterx.bclib.api.features.BCLCommonFeatures;
+import org.betterx.bclib.api.features.BCLFeatureBuilder;
 import org.betterx.bclib.world.features.*;
+import org.betterx.bclib.world.features.placement.MinEmptyFilter;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityFeature;
@@ -34,94 +37,166 @@ public class NetherFeatures {
     private static final List<BCLFeature> defaultFeatures = Lists.newArrayList();
 
     // Surface Features //
-    public static final Feature<ScatterFeatureConfig> STALAGMITES = BCLFeature.register("stalagmites",
-            new ScatterFeature(ScatterFeatureConfigs.WithSize.CODEC));
-    public static final Feature<ScatterFeatureConfig> STALAGMITES_BLOCK_FILTERED = BCLFeature.register(
-            "stalagmites_block_filtered",
-            new ScatterFeature(ScatterFeatureConfigs.WithSizeOnBase.CODEC));
+    public static final Feature<ScatterFeatureConfigs.WithSize> SCATTER_WITH_SIZE = BCLFeature.register(
+            "scatter_with_size",
+            new ScatterFeature(ScatterFeatureConfigs.WithSize.CODEC)
+    );
+    public static final Feature<ScatterFeatureConfigs.WithSizeOnBase> SCATTER_WITH_SIZE_ON_BASE = BCLFeature.register(
+            "scatter_with_size_on_base",
+            new ScatterFeature(ScatterFeatureConfigs.WithSizeOnBase.CODEC)
+    );
+
+    public static final Feature<ScatterFeatureConfigs.WithPlantAge> SCATTER_WITH_PLANT_AGE = BCLFeature.register(
+            "scatter_with_plant_age",
+            new ScatterFeature(ScatterFeatureConfigs.WithPlantAge.CODEC)
+    );
+
+    public static final Feature<ScatterFeatureConfig.OnSolid> SCATTER_ON_SOLID = BCLFeature.register(
+            "scatter_on_solid",
+            new ScatterFeature(ScatterFeatureConfig.OnSolid.CODEC)
+    );
     public static final BCLFeature CRYSTAL_FATURE = CrystalFeature.createAndRegister();
     public static final BCLFeature STALAGNATE_NETHERRACK_CLUSTER = ScatterFeature.createAndRegister(
             BetterNether.makeID("stalagmite_netherrack_cluster"),
             5,
             20,
-            new ScatterFeatureConfigs.WithSize(NetherBlocks.NETHERRACK_STALACTITE.defaultBlockState(),
-                    2,
-                    7,
-                    2,
-                    0.7f,
-                    0.3f),
-            NetherFeatures.STALAGMITES);
+            ScatterFeatureConfigs.WithSize.startWithSize()
+                                          .block(NetherBlocks.NETHERRACK_STALACTITE)
+                                          .heightRange(2, 7)
+                                          .spread(2, 0.3f)
+                                          .floorChance(0.7f)
+                                          .build(),
+            NetherFeatures.SCATTER_WITH_SIZE);
 
     public static final BCLFeature STALAGNATE_BLACKSTONE_CLUSTER = ScatterFeature.createAndRegister(
             BetterNether.makeID("stalagmite_blackstone_cluster"),
             5,
             40,
-            new ScatterFeatureConfigs.WithSize(NetherBlocks.BLACKSTONE_STALACTITE.defaultBlockState(),
-                    2,
-                    7,
-                    2,
-                    0.5f,
-                    0.8f),
-            NetherFeatures.STALAGMITES);
+            ScatterFeatureConfigs.WithSize.startWithSize()
+                                          .block(NetherBlocks.BLACKSTONE_STALACTITE)
+                                          .heightRange(2, 7)
+                                          .spread(2, 0.5f)
+                                          .floorChance(0.8f)
+                                          .build(),
+            NetherFeatures.SCATTER_WITH_SIZE);
 
     public static final BCLFeature STALAGNATE_BASALT_CLUSTER = ScatterFeature.createAndRegister(
             BetterNether.makeID("stalagmite_basalt_cluster"),
             5,
             40,
-            new ScatterFeatureConfigs.WithSize(NetherBlocks.BASALT_STALACTITE.defaultBlockState(),
-                    2,
-                    7,
-                    2,
-                    0.5f,
-                    0.8f),
-            NetherFeatures.STALAGMITES);
+            ScatterFeatureConfigs.WithSize.startWithSize()
+                                          .block(NetherBlocks.BASALT_STALACTITE)
+                                          .heightRange(2, 7)
+                                          .spread(2, 0.5f)
+                                          .floorChance(0.8f)
+                                          .build(),
+            NetherFeatures.SCATTER_WITH_SIZE);
 
     public static final BCLFeature STALAGNATE_GLOWSTONE_CLUSTER = ScatterFeature.createAndRegister(
             BetterNether.makeID("stalagmite_glowstone_cluster"),
             2,
             4,
-            new ScatterFeatureConfigs.WithSizeOnBase(NetherBlocks.GLOWSTONE_STALACTITE.defaultBlockState(),
-                    Blocks.GLOWSTONE.defaultBlockState(),
-                    3,
-                    8,
-                    3,
-                    0.8f,
-                    0.5f),
-            NetherFeatures.STALAGMITES_BLOCK_FILTERED);
+            ScatterFeatureConfigs.WithSizeOnBase.startWithSizeOnBase()
+                                                .block(NetherBlocks.GLOWSTONE_STALACTITE)
+                                                .generateBaseBlock(Blocks.GLOWSTONE.defaultBlockState())
+                                                .heightRange(3, 8)
+                                                .spread(3, 0.8f)
+                                                .floorChance(0.5f)
+                                                .build(),
+            NetherFeatures.SCATTER_WITH_SIZE_ON_BASE);
 
     public static final BCLFeature STALAGMITE_BONE_CLUSTER = ScatterFeature.createAndRegister(
             BetterNether.makeID("stalagmite_bone_cluster"),
             6,
             10,
-            new ScatterFeatureConfigs.WithSize(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
-                    Blocks.BONE_BLOCK.defaultBlockState(),
-                    0.75f,
-                    .3f,
-                    0.75f,
-                    0.5f,
-                    3,
-                    7,
-                    3,
-                    0.2f,
-                    1),
-            NetherFeatures.STALAGMITES);
+            ScatterFeatureConfigs.WithSize.startWithSize()
+                                          .block(NetherBlocks.BONE_STALACTITE)
+                                          .generateBaseBlock(Blocks.BONE_BLOCK.defaultBlockState(),
+                                                  0.75f,
+                                                  0.3f,
+                                                  0.75f,
+                                                  0.5f)
+                                          .heightRange(3, 7)
+                                          .spread(3, 0.2f)
+                                          .onFloor()
+                                          .build(),
+            NetherFeatures.SCATTER_WITH_SIZE);
 
     public static final BCLFeature STALACTITE_BONE_CLUSTER = ScatterFeature.createAndRegister(
             BetterNether.makeID("stalagmite_bone_cluster"),
             6,
             10,
-            new ScatterFeatureConfigs.WithSize(NetherBlocks.BONE_STALACTITE.defaultBlockState(),
-                    Blocks.BONE_BLOCK.defaultBlockState(),
-                    0.75f,
-                    .3f,
-                    0.75f,
-                    0.5f,
-                    3,
-                    7,
-                    3,
-                    0.2f,
-                    0),
-            NetherFeatures.STALAGMITES);
+            ScatterFeatureConfigs.WithSize.startWithSize()
+                                          .block(NetherBlocks.BONE_STALACTITE)
+                                          .generateBaseBlock(Blocks.BONE_BLOCK.defaultBlockState(),
+                                                  0.75f,
+                                                  0.3f,
+                                                  0.75f,
+                                                  0.5f)
+                                          .heightRange(3, 7)
+                                          .spread(3, 0.2f)
+                                          .onCeil()
+                                          .build(),
+            NetherFeatures.SCATTER_WITH_SIZE);
+
+    // Veins //
+    public static final BCLFeature GOLDEN_VINE = BCLFeatureBuilder
+            .start(BetterNether.makeID("golden_vine"), SCATTER_ON_SOLID)
+            .count(16)
+            .squarePlacement()
+            .randomHeight4FromFloorCeil()
+            .findSolidCeil(12)
+            .modifier(MinEmptyFilter.down())
+            .buildAndRegister(ScatterFeatureConfig.OnSolid
+                    .startOnSolid()
+                    .block(NetherBlocks.GOLDEN_VINE.defaultBlockState().setValue(BlockProperties.BOTTOM, false))
+                    .tipBlock(NetherBlocks.GOLDEN_VINE.defaultBlockState().setValue(BlockProperties.BOTTOM, true))
+                    .heightRange(2, 20)
+                    .spread(3, 0.3f)
+                    .onCeil()
+                    .growWhileFree()
+                    .build()
+            );
+    private static final ScatterFeatureConfig MAGMA_FLOWER_CONFIG = ScatterFeatureConfigs.WithPlantAge
+            .startWithPlantAge()
+            .singleBlock(NetherBlocks.MAGMA_FLOWER)
+            .spread(4, 0)
+            .onFloor()
+            .growWhileFree()
+            .build();
+    public static final BCLFeature MAGMA_FLOWER = BCLFeatureBuilder
+            .start(BetterNether.makeID("magma_flower"), SCATTER_WITH_PLANT_AGE)
+            .count(32)
+            .squarePlacement()
+            .randomHeight4FromFloorCeil()
+            .findSolidFloor(12)
+            .modifier(MinEmptyFilter.up())
+            .buildAndRegister(MAGMA_FLOWER_CONFIG);
+    public static final BCLFeature MAGMA_FLOWER_SPARSE = BCLFeatureBuilder
+            .start(BetterNether.makeID("magma_flower_sparse"), SCATTER_ON_SOLID)
+            .count(16)
+            .squarePlacement()
+            .randomHeight4FromFloorCeil()
+            .oncePerChunks(4)
+            .findSolidFloor(12)
+            .modifier(MinEmptyFilter.up())
+            .buildAndRegister(MAGMA_FLOWER_CONFIG);
+
+
+    public static final BCLFeature GEYSER = BCLFeatureBuilder
+            .start(BetterNether.makeID("geyser"), SCATTER_ON_SOLID)
+            .count(32)
+            .squarePlacement()
+            .randomHeight4FromFloorCeil()
+            .findSolidFloor(12)
+            .modifier(MinEmptyFilter.up())
+            .buildAndRegister(ScatterFeatureConfig.OnSolid
+                    .startOnSolid()
+                    .singleBlock(NetherBlocks.GEYSER)
+                    .spread(2, 0)
+                    .onFloor()
+                    .build()
+            );
 
 
     // Ores //

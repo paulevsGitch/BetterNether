@@ -15,6 +15,7 @@ import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.plants.*;
@@ -33,7 +34,9 @@ public class NetherPoorGrasslands extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .genChance(0.3F);
+                   .feature(NetherFeatures.MAGMA_FLOWER_SPARSE)
+                   .genChance(0.3F)
+            ;
         }
 
         @Override
@@ -50,7 +53,6 @@ public class NetherPoorGrasslands extends NetherBiome {
     protected void onInit() {
         addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.05F, false);
         addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.005F, true);
-        addStructure("magma_flower", new StructureMagmaFlower(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.005F, true);
         addStructure("ink_bush", new StructureInkBush(), StructurePlacementType.FLOOR, 0.005F, true);
         addStructure("black_apple", new StructureBlackApple(), StructurePlacementType.FLOOR, 0.001F, true);

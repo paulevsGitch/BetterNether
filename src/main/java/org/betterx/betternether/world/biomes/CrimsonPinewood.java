@@ -38,6 +38,7 @@ public class CrimsonPinewood extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
+                   .feature(NetherFeatures.GOLDEN_VINE)
                    .genChance(0.3f)
             ;
         }
@@ -82,7 +83,6 @@ public class CrimsonPinewood extends NetherBiome {
         addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("crimson_fungus", new StructureCrimsonFungus(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("crimson_roots", new StructureCrimsonRoots(), StructurePlacementType.FLOOR, 0.2F, true);
-        addStructure("golden_vine", new StructureGoldenVine(), StructurePlacementType.CEIL, 0.3F, true);
         addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
         addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.4F, true);
     }
