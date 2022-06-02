@@ -1,15 +1,18 @@
 package org.betterx.betternether.registry;
 
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
@@ -20,6 +23,7 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BiomeAPI;
 import org.betterx.bclib.api.features.BCLCommonFeatures;
 import org.betterx.bclib.api.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.bclib.world.features.*;
 import org.betterx.bclib.world.features.placement.MinEmptyFilter;
 import org.betterx.bclib.world.structures.StructurePlacementType;
@@ -39,21 +43,26 @@ public class NetherFeatures {
     // Surface Features //
     public static final Feature<ScatterFeatureConfigs.WithSize> SCATTER_WITH_SIZE = BCLFeature.register(
             "scatter_with_size",
-            new ScatterFeature(ScatterFeatureConfigs.WithSize.CODEC)
+            new ScatterFeature<>(ScatterFeatureConfigs.WithSize.CODEC)
     );
     public static final Feature<ScatterFeatureConfigs.WithSizeOnBase> SCATTER_WITH_SIZE_ON_BASE = BCLFeature.register(
             "scatter_with_size_on_base",
-            new ScatterFeature(ScatterFeatureConfigs.WithSizeOnBase.CODEC)
+            new ScatterFeature<>(ScatterFeatureConfigs.WithSizeOnBase.CODEC)
     );
 
     public static final Feature<ScatterFeatureConfigs.WithPlantAge> SCATTER_WITH_PLANT_AGE = BCLFeature.register(
             "scatter_with_plant_age",
-            new ScatterFeature(ScatterFeatureConfigs.WithPlantAge.CODEC)
+            new ScatterFeature<>(ScatterFeatureConfigs.WithPlantAge.CODEC)
     );
 
     public static final Feature<ScatterFeatureConfig.OnSolid> SCATTER_ON_SOLID = BCLFeature.register(
             "scatter_on_solid",
-            new ScatterFeature(ScatterFeatureConfig.OnSolid.CODEC)
+            new ScatterFeature<>(ScatterFeatureConfig.OnSolid.CODEC)
+    );
+
+    public static final Feature<BlockPlaceFeatureConfig> PLACE_BLOCK = BCLFeature.register(
+            "place_block",
+            new BlockPlaceFeature<>(BlockPlaceFeatureConfig.CODEC)
     );
     public static final BCLFeature CRYSTAL_FATURE = CrystalFeature.createAndRegister();
     public static final BCLFeature STALAGNATE_NETHERRACK_CLUSTER = ScatterFeature.createAndRegister(
@@ -151,8 +160,8 @@ public class NetherFeatures {
                     .startOnSolid()
                     .block(NetherBlocks.GOLDEN_VINE.defaultBlockState().setValue(BlockProperties.BOTTOM, false))
                     .tipBlock(NetherBlocks.GOLDEN_VINE.defaultBlockState().setValue(BlockProperties.BOTTOM, true))
-                    .heightRange(2, 20)
-                    .spread(3, 0.3f)
+                    .heightRange(2, 12)
+                    .spread(3, 0.75f)
                     .onCeil()
                     .growWhileFree()
                     .build()
@@ -160,16 +169,15 @@ public class NetherFeatures {
     private static final ScatterFeatureConfig MAGMA_FLOWER_CONFIG = ScatterFeatureConfigs.WithPlantAge
             .startWithPlantAge()
             .singleBlock(NetherBlocks.MAGMA_FLOWER)
-            .spread(4, 0)
+            .spread(4, 0, UniformInt.of(1, 16))
             .onFloor()
-            .growWhileFree()
             .build();
     public static final BCLFeature MAGMA_FLOWER = BCLFeatureBuilder
             .start(BetterNether.makeID("magma_flower"), SCATTER_WITH_PLANT_AGE)
-            .count(32)
-            .squarePlacement()
+            .noiseBasedCount(0.3f, 16, 56)
             .randomHeight4FromFloorCeil()
-            .findSolidFloor(12)
+            .findSolidFloor(6)
+            .isEmptyAbove()
             .modifier(MinEmptyFilter.up())
             .buildAndRegister(MAGMA_FLOWER_CONFIG);
     public static final BCLFeature MAGMA_FLOWER_SPARSE = BCLFeatureBuilder
@@ -179,24 +187,49 @@ public class NetherFeatures {
             .randomHeight4FromFloorCeil()
             .oncePerChunks(4)
             .findSolidFloor(12)
-            .modifier(MinEmptyFilter.up())
+            .isEmptyAbove()
             .buildAndRegister(MAGMA_FLOWER_CONFIG);
 
 
     public static final BCLFeature GEYSER = BCLFeatureBuilder
             .start(BetterNether.makeID("geyser"), SCATTER_ON_SOLID)
-            .count(32)
+            .count(16)
             .squarePlacement()
             .randomHeight4FromFloorCeil()
             .findSolidFloor(12)
+            .isEmptyAbove4()
             .modifier(MinEmptyFilter.up())
             .buildAndRegister(ScatterFeatureConfig.OnSolid
                     .startOnSolid()
                     .singleBlock(NetherBlocks.GEYSER)
-                    .spread(2, 0)
+                    .spread(2, 0, UniformInt.of(1, 3))
                     .onFloor()
                     .build()
             );
+
+    // Landscape //
+    public static final BCLFeature LAVA_BLOBS = BCLFeatureBuilder
+            .start(BetterNether.makeID("lava_blobs"), PLACE_BLOCK)
+            .onEveryLayer() //put a point on every layer of the world
+            .onlyInBiome()
+            .stencilOneIn4() //select one in for from the stencil for all heights
+            .findSolidFloor(4) //try to find the floor
+            .inBasinOf(
+                    BlockPredicate.matchesTag(CommonBlockTags.TERRAIN),
+                    BlockPredicate.matchesBlocks(Blocks.LAVA)
+            ) //check if this is a Basin
+
+            .buildAndRegister(new BlockPlaceFeatureConfig(Blocks.LAVA));
+
+    public static final BCLFeature MAGMA_BLOBS = BCLFeatureBuilder
+            .start(BetterNether.makeID("magma_blobs"), PLACE_BLOCK)
+            .stencil()
+            .onlyInBiome()
+            .onEveryLayer()
+            .offset(Direction.DOWN)
+            .is(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .extendDown(0, 3)
+            .buildAndRegister(new BlockPlaceFeatureConfig(Blocks.MAGMA_BLOCK));
 
 
     // Ores //

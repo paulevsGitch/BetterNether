@@ -32,11 +32,12 @@ public class NetherMagmaLand extends NetherBiome {
                    .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
                    .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
+                   .feature(NetherFeatures.LAVA_BLOBS)
+                   .feature(NetherFeatures.MAGMA_BLOBS)
                    .feature(NetherFeatures.CRYSTAL_FATURE)
                    .feature(NetherFeatures.GOLDEN_VINE)
                    .feature(NetherFeatures.GEYSER)
                    .feature(NetherFeatures.MAGMA_FLOWER)
-
             ;
         }
 

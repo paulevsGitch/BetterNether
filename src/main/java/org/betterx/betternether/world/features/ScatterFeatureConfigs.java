@@ -1,6 +1,7 @@
 package org.betterx.betternether.world.features;
 
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
@@ -29,7 +30,8 @@ public class ScatterFeatureConfigs {
                             float maxSpread,
                             float sizeVariation,
                             float floorChance,
-                            boolean growWhileFree) {
+                            boolean growWhileFree,
+                            IntProvider spreadCount) {
             super(clusterBlock,
                     tipBlock,
                     bottomBlock,
@@ -43,8 +45,10 @@ public class ScatterFeatureConfigs {
                     maxSpread,
                     sizeVariation,
                     floorChance,
-                    growWhileFree);
+                    growWhileFree,
+                    spreadCount);
         }
+
 
         public static Builder<WithPlantAge> startWithPlantAge() {
             return Builder.start(WithPlantAge::new);
@@ -81,7 +85,8 @@ public class ScatterFeatureConfigs {
                         float maxSpread,
                         float sizeVariation,
                         float floorChance,
-                        boolean growWhileFree) {
+                        boolean growWhileFree,
+                        IntProvider spreadCount) {
             super(clusterBlock,
                     tipBlock,
                     bottomBlock,
@@ -95,8 +100,10 @@ public class ScatterFeatureConfigs {
                     maxSpread,
                     sizeVariation,
                     floorChance,
-                    growWhileFree);
+                    growWhileFree,
+                    spreadCount);
         }
+
 
         public static Builder<WithSize> startWithSize() {
             return Builder.start(WithSize::new);
@@ -134,7 +141,8 @@ public class ScatterFeatureConfigs {
                               float maxSpread,
                               float sizeVariation,
                               float floorChance,
-                              boolean growWhileFree) {
+                              boolean growWhileFree,
+                              IntProvider spreadCount) {
             super(clusterBlock,
                     tipBlock,
                     bottomBlock,
@@ -148,7 +156,8 @@ public class ScatterFeatureConfigs {
                     maxSpread,
                     sizeVariation,
                     floorChance,
-                    growWhileFree);
+                    growWhileFree,
+                    spreadCount);
         }
 
 

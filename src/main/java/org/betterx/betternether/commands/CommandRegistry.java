@@ -7,6 +7,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
@@ -17,6 +18,7 @@ import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -25,6 +27,10 @@ import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.PlacementContext;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 
@@ -42,6 +48,8 @@ import com.mojang.math.Vector3d;
 import org.betterx.bclib.BCLib;
 import org.betterx.bclib.api.biomes.BCLBiome;
 import org.betterx.bclib.api.biomes.BiomeAPI;
+import org.betterx.bclib.api.tag.CommonBlockTags;
+import org.betterx.bclib.world.features.BCLFeature;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
@@ -49,12 +57,14 @@ import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
 import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
 import org.betterx.betternether.world.structures.NetherStructureWorld;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 
 public class CommandRegistry {
@@ -84,6 +94,14 @@ public class CommandRegistry {
                         .then(Commands.literal("request_garbage_collection")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> requestGC(ctx))
+                        )
+                        .then(Commands.literal("testPlace")
+                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
+                                      .executes(ctx -> testPlace(ctx))
+                        )
+                        .then(Commands.literal("findSurface")
+                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
+                                      .executes(ctx -> findSurface(ctx))
                         )
                         .then(Commands.literal("tpnext")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
@@ -268,6 +286,7 @@ public class CommandRegistry {
 
     private static final Map<Holder<Biome>, BlockState> biomeMap = new HashMap<>();
     private static int biomeMapIdx = 0;
+    private static int placeMapIdx = 0;
     private static final BlockState[] states = {
             Blocks.RED_STAINED_GLASS.defaultBlockState(),
             Blocks.BLUE_STAINED_GLASS.defaultBlockState(),
@@ -277,7 +296,20 @@ public class CommandRegistry {
             Blocks.GREEN_STAINED_GLASS.defaultBlockState(),
             Blocks.WHITE_STAINED_GLASS.defaultBlockState(),
             Blocks.BLACK_STAINED_GLASS.defaultBlockState(),
-            Blocks.ORANGE_STAINED_GLASS.defaultBlockState()
+            Blocks.ORANGE_STAINED_GLASS.defaultBlockState(),
+            Blocks.LIGHT_BLUE_STAINED_GLASS.defaultBlockState()
+    };
+    private static final BlockState[] states2 = {
+            Blocks.RED_CONCRETE.defaultBlockState(),
+            Blocks.BLUE_CONCRETE.defaultBlockState(),
+            Blocks.YELLOW_CONCRETE.defaultBlockState(),
+            Blocks.LIME_CONCRETE.defaultBlockState(),
+            Blocks.PINK_CONCRETE.defaultBlockState(),
+            Blocks.GREEN_CONCRETE.defaultBlockState(),
+            Blocks.WHITE_CONCRETE.defaultBlockState(),
+            Blocks.BLACK_CONCRETE.defaultBlockState(),
+            Blocks.ORANGE_CONCRETE.defaultBlockState(),
+            Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState()
     };
 
     private static int revealOre(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
@@ -352,6 +384,71 @@ public class CommandRegistry {
                 }
             }
         }
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int findSurface(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        final CommandSourceStack source = ctx.getSource();
+        final ServerPlayer player = source.getPlayerOrException();
+        Vec3 pos = source.getPosition();
+        final ServerLevel level = source.getLevel();
+        MutableBlockPos mPos = new BlockPos(pos).mutable();
+        System.out.println("Staring at: " + mPos + " -> " + level.getBlockState(mPos));
+        boolean found = org.betterx.bclib.util.BlocksHelper.findSurroundingSurface(level,
+                mPos,
+                Direction.DOWN,
+                4,
+                state -> BlocksHelper.isNetherGroundMagma(state));
+        System.out.println("Ending at: " + mPos + " -> " + level.getBlockState(mPos) + " = " + found);
+        org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, new BlockPos(pos), Blocks.YELLOW_CONCRETE);
+        org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, mPos, Blocks.LIGHT_BLUE_CONCRETE);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int testPlace(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        final CommandSourceStack source = ctx.getSource();
+        final ServerPlayer player = source.getPlayerOrException();
+        Vec3 pos = source.getPosition();
+        final ServerLevel level = source.getLevel();
+
+        BCLFeature feature = NetherFeatures.MAGMA_FLOWER;
+        PlacedFeature pFeature = level
+                .registryAccess()
+                .registryOrThrow(Registry.PLACED_FEATURE_REGISTRY)
+                .getHolder(feature.getPlacedFeature().unwrapKey().get())
+                .get()
+                .value();
+        var placements = pFeature.placement();
+        PlacementContext pctx = new PlacementContext(level,
+                level.getChunkSource().getGenerator(),
+                Optional.of(pFeature));
+        Stream<BlockPos> s = Stream.of(new BlockPos(pos));
+        RandomSource rnd = new LegacyRandomSource(121212);
+        placeMapIdx = 0;
+        List<Pair<BlockPos, BlockState>> posStates = new LinkedList<>();
+        for (PlacementModifier p : placements) {
+            s = s.flatMap(bp -> p.getPositions(pctx, rnd, bp));
+            var list = s.toList();
+            placeMapIdx = (placeMapIdx + 1) % states.length;
+            BlockState state1 = states[placeMapIdx];
+            System.out.println(p.getClass().getSimpleName() + " -> " + list.size() + ", " + state1);
+
+            list.forEach(bp -> {
+                BlockState state = states[placeMapIdx];
+                if (level.getBlockState(bp).is(CommonBlockTags.TERRAIN))
+                    state = states2[placeMapIdx];
+                posStates.add(new Pair<>(bp, state));
+                //
+                //BlocksHelper.setWithoutUpdate(level, bp, state);
+            });
+            s = list.stream();
+        }
+
+        posStates.forEach(p -> {
+            System.out.println("    " + p.getFirst() + " -> " + level.getBlockState(p.getFirst()));
+            BlocksHelper.setWithoutUpdate(level, p.getFirst(), p.getSecond());
+
+        });
         return Command.SINGLE_SUCCESS;
     }
 
