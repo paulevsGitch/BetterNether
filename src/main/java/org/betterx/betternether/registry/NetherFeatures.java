@@ -22,11 +22,12 @@ import com.google.common.collect.Lists;
 import org.betterx.bclib.api.LifeCycleAPI;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BiomeAPI;
-import org.betterx.bclib.api.features.BCLCommonFeatures;
-import org.betterx.bclib.api.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.features.*;
+import org.betterx.bclib.api.features.config.BlockPlaceFeatureConfig;
+import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
+import org.betterx.bclib.api.features.config.TemplateFeatureConfig;
+import org.betterx.bclib.api.features.placement.MinEmptyFilter;
 import org.betterx.bclib.api.tag.CommonBlockTags;
-import org.betterx.bclib.world.features.*;
-import org.betterx.bclib.world.features.placement.MinEmptyFilter;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
@@ -52,7 +53,7 @@ public class NetherFeatures {
     );
 
     public static final Feature<ScatterFeatureConfigs.WithPlantAge> SCATTER_WITH_PLANT_AGE = BCLFeature.register(
-            BetterNether.makeID("scatter_with_plant_age"),
+            BetterNether.makeID("scatter_with_age"),
             new ScatterFeature<>(ScatterFeatureConfigs.WithPlantAge.CODEC)
     );
 

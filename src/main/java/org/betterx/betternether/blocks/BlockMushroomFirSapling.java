@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
+import org.betterx.bclib.api.features.DefaultFeature;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
-import org.betterx.bclib.world.features.DefaultFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
 import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
@@ -22,10 +22,10 @@ class MushroomFirTreeFeature extends DefaultFeature {
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
         STRUCTURE.generate(featurePlaceContext.level(),
-                           featurePlaceContext.origin(),
-                           featurePlaceContext.random(),
-                           featurePlaceContext.chunkGenerator().getGenDepth(),
-                           NetherChunkPopulatorFeature.generatorForThread().context);
+                featurePlaceContext.origin(),
+                featurePlaceContext.random(),
+                featurePlaceContext.chunkGenerator().getGenDepth(),
+                NetherChunkPopulatorFeature.generatorForThread().context);
         return true;
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.bclib.world.features.SurfaceFeature;
+import org.betterx.bclib.api.features.SurfaceFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 

@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import com.mojang.serialization.Codec;
-import org.betterx.bclib.world.features.ScatterFeatureConfig;
+import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockStalactite;
 

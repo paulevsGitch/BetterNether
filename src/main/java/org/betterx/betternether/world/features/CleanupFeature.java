@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.bclib.world.features.DefaultFeature;
+import org.betterx.bclib.api.features.DefaultFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
@@ -62,24 +62,24 @@ public class CleanupFeature extends DefaultFeature {
                         else if (level.isEmptyBlock(up) && level.isEmptyBlock(down))
                             pos.add(new BlockPos(popPos));
                         else if (level.isEmptyBlock(rel(popPos, 1, -1, -1)) && level.isEmptyBlock(rel(popPos,
-                                                                                                      -1,
-                                                                                                      1,
-                                                                                                      1)))
+                                -1,
+                                1,
+                                1)))
                             pos.add(new BlockPos(popPos));
                         else if (level.isEmptyBlock(rel(popPos, 1, -1, 1)) && level.isEmptyBlock(rel(popPos,
-                                                                                                     -1,
-                                                                                                     1,
-                                                                                                     -1)))
+                                -1,
+                                1,
+                                -1)))
                             pos.add(new BlockPos(popPos));
                         else if (level.isEmptyBlock(rel(popPos, -1, -1, -1)) && level.isEmptyBlock(rel(popPos,
-                                                                                                       1,
-                                                                                                       1,
-                                                                                                       1)))
+                                1,
+                                1,
+                                1)))
                             pos.add(new BlockPos(popPos));
                         else if (level.isEmptyBlock(rel(popPos, -1, -1, 1)) && level.isEmptyBlock(rel(popPos,
-                                                                                                      1,
-                                                                                                      1,
-                                                                                                      -1)))
+                                1,
+                                1,
+                                -1)))
                             pos.add(new BlockPos(popPos));
 //						else if (level.isEmptyBlock(north.east().below()) && level.isEmptyBlock(south.west().above()))
 //							pos.add(new BlockPos(popPos));
