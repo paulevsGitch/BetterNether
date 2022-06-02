@@ -6,6 +6,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -42,28 +43,19 @@ public class NetherFeatures {
 
     // Surface Features //
     public static final Feature<ScatterFeatureConfigs.WithSize> SCATTER_WITH_SIZE = BCLFeature.register(
-            "scatter_with_size",
+            BetterNether.makeID("scatter_with_size"),
             new ScatterFeature<>(ScatterFeatureConfigs.WithSize.CODEC)
     );
     public static final Feature<ScatterFeatureConfigs.WithSizeOnBase> SCATTER_WITH_SIZE_ON_BASE = BCLFeature.register(
-            "scatter_with_size_on_base",
+            BetterNether.makeID("scatter_with_size_on_base"),
             new ScatterFeature<>(ScatterFeatureConfigs.WithSizeOnBase.CODEC)
     );
 
     public static final Feature<ScatterFeatureConfigs.WithPlantAge> SCATTER_WITH_PLANT_AGE = BCLFeature.register(
-            "scatter_with_plant_age",
+            BetterNether.makeID("scatter_with_plant_age"),
             new ScatterFeature<>(ScatterFeatureConfigs.WithPlantAge.CODEC)
     );
 
-    public static final Feature<ScatterFeatureConfig.OnSolid> SCATTER_ON_SOLID = BCLFeature.register(
-            "scatter_on_solid",
-            new ScatterFeature<>(ScatterFeatureConfig.OnSolid.CODEC)
-    );
-
-    public static final Feature<BlockPlaceFeatureConfig> PLACE_BLOCK = BCLFeature.register(
-            "place_block",
-            new BlockPlaceFeature<>(BlockPlaceFeatureConfig.CODEC)
-    );
     public static final BCLFeature CRYSTAL_FATURE = CrystalFeature.createAndRegister();
     public static final BCLFeature STALAGNATE_NETHERRACK_CLUSTER = ScatterFeature.createAndRegister(
             BetterNether.makeID("stalagmite_netherrack_cluster"),
@@ -150,7 +142,7 @@ public class NetherFeatures {
 
     // Veins //
     public static final BCLFeature GOLDEN_VINE = BCLFeatureBuilder
-            .start(BetterNether.makeID("golden_vine"), SCATTER_ON_SOLID)
+            .start(BetterNether.makeID("golden_vine"), BCLFeature.SCATTER_ON_SOLID)
             .count(16)
             .squarePlacement()
             .randomHeight4FromFloorCeil()
@@ -174,25 +166,24 @@ public class NetherFeatures {
             .build();
     public static final BCLFeature MAGMA_FLOWER = BCLFeatureBuilder
             .start(BetterNether.makeID("magma_flower"), SCATTER_WITH_PLANT_AGE)
-            .noiseBasedCount(0.3f, 16, 56)
-            .randomHeight4FromFloorCeil()
-            .findSolidFloor(6)
-            .isEmptyAbove()
-            .modifier(MinEmptyFilter.up())
+            .countRange(1, 6)
+            .squarePlacement()
+            .noiseBasedCount(0.3f, 4, 16)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -6, 6))
+            .onEveryLayer()
             .buildAndRegister(MAGMA_FLOWER_CONFIG);
     public static final BCLFeature MAGMA_FLOWER_SPARSE = BCLFeatureBuilder
-            .start(BetterNether.makeID("magma_flower_sparse"), SCATTER_ON_SOLID)
-            .count(16)
+            .start(BetterNether.makeID("magma_flower_sparse"), BCLFeature.SCATTER_ON_SOLID)
+            .countRange(0, 2)
             .squarePlacement()
-            .randomHeight4FromFloorCeil()
-            .oncePerChunks(4)
-            .findSolidFloor(12)
-            .isEmptyAbove()
+            .noiseBasedCount(0.3f, 4, 16)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.1f, -4, 4))
+            .onEveryLayer()
             .buildAndRegister(MAGMA_FLOWER_CONFIG);
 
 
     public static final BCLFeature GEYSER = BCLFeatureBuilder
-            .start(BetterNether.makeID("geyser"), SCATTER_ON_SOLID)
+            .start(BetterNether.makeID("geyser"), BCLFeature.SCATTER_ON_SOLID)
             .count(16)
             .squarePlacement()
             .randomHeight4FromFloorCeil()
@@ -209,7 +200,7 @@ public class NetherFeatures {
 
     // Landscape //
     public static final BCLFeature LAVA_BLOBS = BCLFeatureBuilder
-            .start(BetterNether.makeID("lava_blobs"), PLACE_BLOCK)
+            .start(BetterNether.makeID("lava_blobs"), BCLFeature.PLACE_BLOCK)
             .onEveryLayer() //put a point on every layer of the world
             .onlyInBiome()
             .stencilOneIn4() //select one in for from the stencil for all heights
@@ -222,7 +213,7 @@ public class NetherFeatures {
             .buildAndRegister(new BlockPlaceFeatureConfig(Blocks.LAVA));
 
     public static final BCLFeature MAGMA_BLOBS = BCLFeatureBuilder
-            .start(BetterNether.makeID("magma_blobs"), PLACE_BLOCK)
+            .start(BetterNether.makeID("magma_blobs"), BCLFeature.PLACE_BLOCK)
             .stencil()
             .onlyInBiome()
             .onEveryLayer()
@@ -476,5 +467,27 @@ public class NetherFeatures {
         PathsFeature.onLoad(seed);
 
         CityFeature.initGenerator();
+    }
+
+    static {
+//        final RegistryAccess registryAccess = RegistryAccess.builtinCopy();
+//        final RegistryOps<JsonElement> registryOps = RegistryOps.create(JsonOps.INSTANCE, registryAccess);
+//
+//        registryAccess
+//                .registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY)
+//                .entrySet()
+//                .stream()
+//                .forEach(e -> {
+//                    var h = registryAccess
+//                            .registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY).getHolder(e.getKey());
+//
+//                    var o = ConfiguredFeature.DIRECT_CODEC
+//                            .encodeStart(registryOps, h.get().value())
+//                            .result()
+//                            .orElse(new JsonObject());
+//                    System.out.println(e.getKey() + ": " + GsonHelper.toStableString(o));
+//
+//                });
+
     }
 }
