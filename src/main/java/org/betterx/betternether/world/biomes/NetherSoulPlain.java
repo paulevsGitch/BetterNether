@@ -88,7 +88,6 @@ public class NetherSoulPlain extends NetherBiome {
 
     @Override
     protected void onInit() {
-        //addStructure("soul_vein", new StructureSoulVein(), StructurePlacementType.FLOOR, 0.5F, true);
         addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.02F, false);
         addStructure("soul_grass", new StructureSoulGrass(), StructurePlacementType.FLOOR, 0.3F, false);
     }

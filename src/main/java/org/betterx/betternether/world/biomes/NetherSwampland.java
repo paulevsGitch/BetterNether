@@ -19,6 +19,7 @@ import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
+import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
@@ -38,7 +39,9 @@ public class NetherSwampland extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
-                   .structure(BiomeTags.HAS_NETHER_FORTRESS);
+                   .structure(BiomeTags.HAS_NETHER_FORTRESS)
+                   .feature(NetherFeatures.SOUL_VINE)
+            ;
         }
 
         @Override
@@ -73,7 +76,6 @@ public class NetherSwampland extends NetherBiome {
         addStructure("willow_bush", new StructureWillowBush(), StructurePlacementType.FLOOR, 0.2F, true);
         addStructure("feather_fern", new StructureFeatherFern(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.8F, false);
-        addStructure("soul_vein", new StructureSoulVein(), StructurePlacementType.FLOOR, 0.5F, false);
         addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, false);
         addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.03F, true);
         addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.01F, false);
@@ -94,10 +96,10 @@ public class NetherSwampland extends NetherBiome {
         else {
             value = TERRAIN.eval(pos.getX() * 0.5, pos.getZ() * 0.5);
             BlocksHelper.setWithoutUpdate(world,
-                    pos,
-                    value > 0
-                            ? Blocks.SOUL_SAND.defaultBlockState()
-                            : Blocks.SOUL_SOIL.defaultBlockState());
+                                          pos,
+                                          value > 0
+                                                  ? Blocks.SOUL_SAND.defaultBlockState()
+                                                  : Blocks.SOUL_SOIL.defaultBlockState());
         }
     }
 
