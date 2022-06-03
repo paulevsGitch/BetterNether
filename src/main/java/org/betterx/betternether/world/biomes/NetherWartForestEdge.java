@@ -19,7 +19,6 @@ import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.plants.StructureBlackBush;
 import org.betterx.betternether.world.structures.plants.StructureNetherWart;
 import org.betterx.betternether.world.structures.plants.StructureWartSeed;
 
@@ -36,7 +35,8 @@ public class NetherWartForestEdge extends NetherBiome {
                    .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-                   .feature(NetherFeatures.NETHER_RUBY_ORE);
+                   .feature(NetherFeatures.NETHER_RUBY_ORE)
+                   .feature(NetherFeatures.BLACK_BUSH);
         }
 
         @Override
@@ -63,7 +63,6 @@ public class NetherWartForestEdge extends NetherBiome {
     protected void onInit() {
         addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.02F, false);
         addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.01F, false);
-        addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.01F, false);
     }
 
     @Override

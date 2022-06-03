@@ -24,7 +24,10 @@ import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.decorations.StructureWartDeadwood;
-import org.betterx.betternether.world.structures.plants.*;
+import org.betterx.betternether.world.structures.plants.StructureNetherWart;
+import org.betterx.betternether.world.structures.plants.StructureSoulLily;
+import org.betterx.betternether.world.structures.plants.StructureWartSeed;
+import org.betterx.betternether.world.structures.plants.StructureWartTree;
 
 public class NetherWartForest extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -41,6 +44,7 @@ public class NetherWartForest extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
+                   .feature(NetherFeatures.BLACK_BUSH_SPARSE)
                    .edgeSize(9)
             ;
         }
@@ -73,7 +77,6 @@ public class NetherWartForest extends NetherBiome {
         addStructure("wart_tree", new StructureWartTree(), StructurePlacementType.FLOOR, 0.1F, false);
         addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.2F, false);
         addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.05F, false);
-        addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.05F, false);
         addStructure("soul_lily", new StructureSoulLily(), StructurePlacementType.FLOOR, 0.2F, true);
     }
 

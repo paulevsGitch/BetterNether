@@ -36,7 +36,7 @@ class NetherGrasslandsNumericProvider implements NumericProvider {
     public static final NetherGrasslandsNumericProvider DEFAULT = new NetherGrasslandsNumericProvider();
     public static final Codec<NetherGrasslandsNumericProvider> CODEC = Codec.BYTE.fieldOf("nether_grasslands")
                                                                                  .xmap((obj) -> DEFAULT,
-                                                                                         obj -> (byte) 0)
+                                                                                       obj -> (byte) 0)
                                                                                  .codec();
 
     @Override
@@ -54,8 +54,8 @@ class NetherGrasslandsNumericProvider implements NumericProvider {
 
     static {
         Registry.register(NumericProvider.NUMERIC_PROVIDER,
-                BetterNether.makeID("nether_grasslands"),
-                NetherGrasslandsNumericProvider.CODEC);
+                          BetterNether.makeID("nether_grasslands"),
+                          NetherGrasslandsNumericProvider.CODEC);
     }
 }
 
@@ -93,6 +93,7 @@ public class NetherGrasslands extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.MAGMA_FLOWER)
+                   .feature(NetherFeatures.BLACK_BUSH)
             ;
         }
 
@@ -105,7 +106,7 @@ public class NetherGrasslands extends NetherBiome {
         public SurfaceRuleBuilder surface() {
             return super.surface()
                         .rule(new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
-                                List.of(SOUL_SOIL, MOSS, NETHERRACK)));
+                                                   List.of(SOUL_SOIL, MOSS, NETHERRACK)));
         }
 
         @Override
@@ -129,7 +130,6 @@ public class NetherGrasslands extends NetherBiome {
         addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("ink_bush", new StructureInkBush(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("black_apple", new StructureBlackApple(), StructurePlacementType.FLOOR, 0.01F, true);
-        addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.02F, true);
         addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.02F, true);
         addStructure("nether_grass", new StructureNetherGrass(), StructurePlacementType.FLOOR, 0.4F, true);
         addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);

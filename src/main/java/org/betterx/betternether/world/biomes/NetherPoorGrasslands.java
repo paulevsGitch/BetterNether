@@ -35,6 +35,7 @@ public class NetherPoorGrasslands extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.MAGMA_FLOWER_SPARSE)
+                   .feature(NetherFeatures.BLACK_BUSH_SPARSE)
                    .genChance(0.3F)
             ;
         }
@@ -56,7 +57,6 @@ public class NetherPoorGrasslands extends NetherBiome {
         addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.005F, true);
         addStructure("ink_bush", new StructureInkBush(), StructurePlacementType.FLOOR, 0.005F, true);
         addStructure("black_apple", new StructureBlackApple(), StructurePlacementType.FLOOR, 0.001F, true);
-        addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.002F, true);
         addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.002F, true);
         addStructure("nether_grass", new StructureNetherGrass(), StructurePlacementType.FLOOR, 0.04F, true);
     }

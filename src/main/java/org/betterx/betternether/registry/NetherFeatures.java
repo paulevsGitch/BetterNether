@@ -223,6 +223,39 @@ public class NetherFeatures {
                                       .build()
                              );
 
+    public static final BCLFeature BLACK_BUSH = BCLFeatureBuilder
+            .start(BetterNether.makeID("black_bush"), Feature.SIMPLE_BLOCK)
+            .countRange(2, 10)
+            .squarePlacement()
+            .noiseBasedCount(0.25f, 0, 4)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -6, 6))
+            .onEveryLayer()
+            .isEmptyAbove2()
+            .onlyInBiome()
+            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BLACK_BUSH)));
+
+    public static final BCLFeature BLACK_BUSH_SPARSE = BCLFeatureBuilder
+            .start(BetterNether.makeID("black_bush_sparse"), Feature.SIMPLE_BLOCK)
+            .countRange(1, 4)
+            .squarePlacement()
+            .noiseBasedCount(0.25f, 0, 2)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -2, 2))
+            .onEveryLayer()
+            .isEmptyAbove2()
+            .onlyInBiome()
+            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BLACK_BUSH)));
+
+    public static final BCLFeature SOUL_GRASS = BCLFeatureBuilder
+            .start(BetterNether.makeID("soul_grass"), Feature.SIMPLE_BLOCK)
+            .countRange(4, 10)
+            .squarePlacement()
+            .noiseBasedCount(-0.2f, 0, 4)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -6, 6))
+            .onEveryLayer()
+            .isEmptyAbove2()
+            .onlyInBiome()
+            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BLACK_BUSH)));
+
     // Landscape //
     public static final BCLFeature LAVA_BLOBS = BCLFeatureBuilder
             .start(BetterNether.makeID("lava_blobs"), Feature.SIMPLE_BLOCK)

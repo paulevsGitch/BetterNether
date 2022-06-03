@@ -41,6 +41,7 @@ public class OldSwampland extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.SOUL_VINE)
+                   .feature(NetherFeatures.BLACK_BUSH)
             ;
         }
 
@@ -75,7 +76,6 @@ public class OldSwampland extends NetherBiome {
         addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.8F, false);
         addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, false);
         addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.03F, true);
-        addStructure("black_bush", new StructureBlackBush(), StructurePlacementType.FLOOR, 0.01F, false);
         addStructure("swamp_grass", new StructureSwampGrass(), StructurePlacementType.FLOOR, 0.4F, false);
         addStructure("black_vine", new StructureBlackVine(), StructurePlacementType.CEIL, 0.4F, true);
         addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
