@@ -396,7 +396,7 @@ public class CommandRegistry {
         boolean found = org.betterx.bclib.util.BlocksHelper.findSurroundingSurface(level,
                 mPos,
                 Direction.DOWN,
-                4,
+                12,
                 state -> BlocksHelper.isNetherGroundMagma(
                         state));
         System.out.println("Ending at: " + mPos + " -> " + level.getBlockState(mPos) + " = " + found);
@@ -425,7 +425,7 @@ public class CommandRegistry {
         System.out.println("Noise: " + min + " - " + max);
 
 
-        BCLFeature feature = NetherFeatures.NETHER_CACTUS;
+        BCLFeature feature = NetherFeatures.BONE_GRASS;
         PlacedFeature pFeature = level
                 .registryAccess()
                 .registryOrThrow(Registry.PLACED_FEATURE_REGISTRY)

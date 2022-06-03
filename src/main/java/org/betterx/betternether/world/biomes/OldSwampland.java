@@ -42,6 +42,8 @@ public class OldSwampland extends NetherBiome {
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.SOUL_VINE)
                    .feature(NetherFeatures.BLACK_BUSH)
+                   .feature(NetherFeatures.FEATHER_FERN)
+                   .feature(NetherFeatures.NETHER_REEED)
             ;
         }
 
@@ -72,8 +74,6 @@ public class OldSwampland extends NetherBiome {
         addStructure("old_willow", new StructureOldWillow(), StructurePlacementType.FLOOR, 0.02F, false);
         addStructure("willow", new StructureWillow(), StructurePlacementType.FLOOR, 0.02F, false);
         addStructure("willow_bush", new StructureWillowBush(), StructurePlacementType.FLOOR, 0.1F, true);
-        addStructure("feather_fern", new StructureFeatherFern(), StructurePlacementType.FLOOR, 0.05F, true);
-        addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.8F, false);
         addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, false);
         addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.03F, true);
         addStructure("swamp_grass", new StructureSwampGrass(), StructurePlacementType.FLOOR, 0.4F, false);
@@ -93,10 +93,10 @@ public class OldSwampland extends NetherBiome {
         else {
             value = TERRAIN.eval(pos.getX() * 0.5, pos.getZ() * 0.5);
             BlocksHelper.setWithoutUpdate(world,
-                                          pos,
-                                          value > 0
-                                                  ? Blocks.SOUL_SAND.defaultBlockState()
-                                                  : Blocks.SOUL_SOIL.defaultBlockState());
+                    pos,
+                    value > 0
+                            ? Blocks.SOUL_SAND.defaultBlockState()
+                            : Blocks.SOUL_SOIL.defaultBlockState());
         }
     }
 

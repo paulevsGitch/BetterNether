@@ -12,6 +12,7 @@ public class MHelper {
         return ALPHA | (r << 16) | (g << 8) | b;
     }
 
+
     public static int randRange(int min, int max, RandomSource random) {
         return min + random.nextInt(max - min + 1);
     }

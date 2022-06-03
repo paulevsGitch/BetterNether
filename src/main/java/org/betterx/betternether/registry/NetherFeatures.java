@@ -7,6 +7,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -31,9 +32,15 @@ import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.blocks.BlockLumabusVine;
 import org.betterx.betternether.blocks.BlockNetherCactus;
+import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.config.Configs;
+import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.VineLikeFeatures;
+import org.betterx.betternether.registry.features.FloorFeatures;
+import org.betterx.betternether.registry.features.TerrainFeatures;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityFeature;
 
@@ -109,9 +116,9 @@ public class NetherFeatures {
             NetherFeatures.SCATTER_WITH_SIZE_ON_BASE);
 
     public static final BCLFeature STALAGMITE_BONE_CLUSTER = ScatterFeature.createAndRegister(
-            BetterNether.makeID("stalagmite_bone_cluster"),
-            6,
-            10,
+            BetterNether.makeID("old_stalagmite_bone_cluster"),
+            2,
+            5,
             ScatterFeatureConfigs.WithSize.startWithSize()
                                           .block(NetherBlocks.BONE_STALACTITE)
                                           .generateBaseBlock(Blocks.BONE_BLOCK.defaultBlockState(),
@@ -120,13 +127,13 @@ public class NetherFeatures {
                                                   0.75f,
                                                   0.5f)
                                           .heightRange(3, 7)
-                                          .spread(3, 0.2f)
+                                          .spread(3, 0.4f)
                                           .onFloor()
                                           .build(),
             NetherFeatures.SCATTER_WITH_SIZE);
 
     public static final BCLFeature STALACTITE_BONE_CLUSTER = ScatterFeature.createAndRegister(
-            BetterNether.makeID("stalagmite_bone_cluster"),
+            BetterNether.makeID("ol_stalagmite_bone_cluster"),
             6,
             10,
             ScatterFeatureConfigs.WithSize.startWithSize()
@@ -183,6 +190,28 @@ public class NetherFeatures {
                     .build()
             );
 
+    public static final BCLFeature LUMBUS_VINE = BCLFeatureBuilder
+            .start(BetterNether.makeID("old_lumbus_vine"), BCLFeature.SCATTER_ON_SOLID)
+            .count(8)
+            .squarePlacement()
+            .randomHeight4FromFloorCeil()
+            .findSolidCeil(12)
+            .isEmptyBelow2()
+            .onlyInBiome()
+            .buildAndRegister(ScatterFeatureConfig.OnSolid
+                    .startOnSolid()
+                    .block(NetherBlocks.LUMABUS_VINE.defaultBlockState().setValue(BlockLumabusVine.SHAPE,
+                            BlockProperties.TripleShape.MIDDLE))
+                    .bottomBlock(NetherBlocks.LUMABUS_VINE.defaultBlockState())
+                    .tipBlock(NetherBlocks.LUMABUS_VINE.defaultBlockState().setValue(BlockLumabusVine.SHAPE,
+                            BlockProperties.TripleShape.BOTTOM))
+                    .spread(2, 0.75f)
+                    .heightRange(2, 12)
+                    .onCeil()
+                    .growWhileFree()
+                    .build()
+            );
+
     public static final BCLFeature NETHER_CACTUS = BCLFeatureBuilder
             .start(BetterNether.makeID("nether_cactus"), BCLFeature.SCATTER_ON_SOLID)
             .countRange(1, 6)
@@ -198,6 +227,46 @@ public class NetherFeatures {
                     .tipBlock(NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, true))
                     .heightRange(2, 5)
                     .onFloor()
+                    .build()
+            );
+
+    public static final BCLFeature NETHER_REEED = BCLFeatureBuilder
+            .start(BetterNether.makeID("old_nether_reed"), BCLFeature.SCATTER_ON_SOLID)
+            .countRange(2, 12)
+            .squarePlacement()
+            .noiseBasedCount(-0.3f, 0, 4)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.1f, -3, 3))
+            .onEveryLayer()
+            .isEmptyAbove2()
+            .onlyInBiome()
+            .buildAndRegister(ScatterFeatureConfig.OnSolid
+                    .startOnSolid()
+                    .block(NetherBlocks.MAT_REED.getStem().defaultBlockState().setValue(BlockNetherReed.TOP, false))
+                    .tipBlock(NetherBlocks.MAT_REED.getStem().defaultBlockState())
+                    .spread(3, 0.75f, ConstantInt.of(24))
+                    .heightRange(1, 3)
+                    .onFloor()
+                    .growWhileFree()
+                    .build()
+            );
+
+    public static final BCLFeature NETHER_REEED_SPARSE = BCLFeatureBuilder
+            .start(BetterNether.makeID("nether_reed_sparse"), BCLFeature.SCATTER_ON_SOLID)
+            .countRange(1, 6)
+            .squarePlacement()
+            .noiseBasedCount(-0.3f, 0, 4)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.1f, -3, 3))
+            .onEveryLayer()
+            .isEmptyAbove2()
+            .onlyInBiome()
+            .buildAndRegister(ScatterFeatureConfig.OnSolid
+                    .startOnSolid()
+                    .block(NetherBlocks.MAT_REED.getStem().defaultBlockState().setValue(BlockNetherReed.TOP, false))
+                    .tipBlock(NetherBlocks.MAT_REED.getStem().defaultBlockState())
+                    .spread(2, 0.75f)
+                    .heightRange(1, 2)
+                    .onFloor()
+                    .growWhileFree()
                     .build()
             );
     private static final ScatterFeatureConfig MAGMA_FLOWER_CONFIG = ScatterFeatureConfigs.WithPlantAge
@@ -273,7 +342,7 @@ public class NetherFeatures {
             .onEveryLayer()
             .isEmptyAbove2()
             .onlyInBiome()
-            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BLACK_BUSH)));
+            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.SOUL_GRASS)));
 
     public static final BCLFeature BARREL_CACTUS = BCLFeatureBuilder
             .start(BetterNether.makeID("barrel_cactus"), Feature.SIMPLE_BLOCK)
@@ -300,6 +369,30 @@ public class NetherFeatures {
                     .spread(4, 0, UniformInt.of(1, 16))
                     .onFloor()
                     .build());
+
+    public static final BCLFeature BONE_GRASS = BCLFeatureBuilder
+            .start(BetterNether.makeID("old_bone_grass"), Feature.SIMPLE_BLOCK)
+            .countRange(23, 32)
+            .squarePlacement()
+            .randomHeight10FromFloorCeil()
+            .noiseBasedCount(0.12f, 24, 12)
+
+            .spreadHorizontal(ClampedNormalInt.of(0, 2f, -6, 6))
+            .findSolidFloor(12)
+            .isEmptyAbove()
+            .onlyInBiome()
+            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BONE_GRASS)));
+
+    public static final BCLFeature FEATHER_FERN = BCLFeatureBuilder
+            .start(BetterNether.makeID("old_feather_fern"), Feature.SIMPLE_BLOCK)
+            .countRange(3, 15)
+            .squarePlacement()
+            .noiseBasedCount(0.76f, 0, 4)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.8f, -6, 6))
+            .findSolidFloor(12)
+            .isEmptyAbove2()
+            .onlyInBiome()
+            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.FEATHER_FERN)));
 
     // Landscape //
     public static final BCLFeature LAVA_BLOBS = BCLFeatureBuilder
@@ -489,7 +582,7 @@ public class NetherFeatures {
             )), 4);
 
     public static final BCLFeature BONES = TemplateFeature.createAndRegisterRare(
-            BetterNether.makeID("bones"),
+            BetterNether.makeID("old_bones"),
             new TemplateFeatureConfig(List.of(
                     cfg(BetterNether.makeID("bone_01"), 0, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("bone_02"), 0, StructurePlacementType.FLOOR, 1.0f),
@@ -571,6 +664,10 @@ public class NetherFeatures {
     }
 
     public static void register() {
+        FloorFeatures.ensureStaticInitialization();
+        VineLikeFeatures.ensureStaticInitialization();
+        TerrainFeatures.ensureStaticInitialization();
+        BiomeFeatures.ensureStaticInitialization();
         LifeCycleAPI.onLevelLoad(NetherFeatures::onWorldLoad);
     }
 

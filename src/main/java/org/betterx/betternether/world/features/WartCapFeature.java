@@ -37,11 +37,10 @@ public class WartCapFeature extends ContextFeature<NoneFeatureConfiguration> {
                   int MAX_HEIGHT,
                   StructureGeneratorThreadContext context) {
         if (!isWall(world,
-                    pos) || pos.getY() > (MAX_HEIGHT * 0.45) || pos.getY() < (MAX_HEIGHT * 0.25) || world.isEmptyBlock(
+                pos) || pos.getY() > (MAX_HEIGHT * 0.45) || pos.getY() < (MAX_HEIGHT * 0.25) || world.isEmptyBlock(
                 pos.below(3)))
             return false;
 
-        System.out.println("Wart Cap: " + pos);
         int radius = 3 + random.nextInt(3);
         int r2 = radius * radius;
         int side = radius * 2 + 1;

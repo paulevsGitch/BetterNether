@@ -36,6 +36,7 @@ public class NetherPoorGrasslands extends NetherBiome {
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.MAGMA_FLOWER_SPARSE)
                    .feature(NetherFeatures.BLACK_BUSH_SPARSE)
+                   .feature(NetherFeatures.NETHER_REEED_SPARSE)
                    .genChance(0.3F)
             ;
         }
@@ -52,7 +53,6 @@ public class NetherPoorGrasslands extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.05F, false);
         addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.005F, true);
         addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.005F, true);
         addStructure("ink_bush", new StructureInkBush(), StructurePlacementType.FLOOR, 0.005F, true);

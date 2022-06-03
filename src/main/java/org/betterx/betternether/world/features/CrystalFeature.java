@@ -22,7 +22,7 @@ public class CrystalFeature extends NetherSurfaceFeature {
     public static BCLFeature createAndRegister() {
         return BCLFeatureBuilder.start(BetterNether.makeID("nether_crystal"), new CrystalFeature())
                                 .decoration(GenerationStep.Decoration.LOCAL_MODIFICATIONS)
-                                .oncePerChunks(1)
+                                .onceEvery(1)
                                 .squarePlacement()
                                 .randomHeight10FromFloorCeil()
                                 .onlyInBiome()

@@ -36,7 +36,7 @@ class NetherGrasslandsNumericProvider implements NumericProvider {
     public static final NetherGrasslandsNumericProvider DEFAULT = new NetherGrasslandsNumericProvider();
     public static final Codec<NetherGrasslandsNumericProvider> CODEC = Codec.BYTE.fieldOf("nether_grasslands")
                                                                                  .xmap((obj) -> DEFAULT,
-                                                                                       obj -> (byte) 0)
+                                                                                         obj -> (byte) 0)
                                                                                  .codec();
 
     @Override
@@ -54,8 +54,8 @@ class NetherGrasslandsNumericProvider implements NumericProvider {
 
     static {
         Registry.register(NumericProvider.NUMERIC_PROVIDER,
-                          BetterNether.makeID("nether_grasslands"),
-                          NetherGrasslandsNumericProvider.CODEC);
+                BetterNether.makeID("nether_grasslands"),
+                NetherGrasslandsNumericProvider.CODEC);
     }
 }
 
@@ -94,6 +94,7 @@ public class NetherGrasslands extends NetherBiome {
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.MAGMA_FLOWER)
                    .feature(NetherFeatures.BLACK_BUSH)
+                   .feature(NetherFeatures.NETHER_REEED)
             ;
         }
 
@@ -106,7 +107,7 @@ public class NetherGrasslands extends NetherBiome {
         public SurfaceRuleBuilder surface() {
             return super.surface()
                         .rule(new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
-                                                   List.of(SOUL_SOIL, MOSS, NETHERRACK)));
+                                List.of(SOUL_SOIL, MOSS, NETHERRACK)));
         }
 
         @Override
@@ -125,7 +126,6 @@ public class NetherGrasslands extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.5F, false);
         addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("ink_bush", new StructureInkBush(), StructurePlacementType.FLOOR, 0.05F, true);

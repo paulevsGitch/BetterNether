@@ -37,6 +37,7 @@ public class NetherJungle extends NetherBiome {
                    .feature(NetherFeatures.JUNGLE_BONES)
                    .feature(NetherFeatures.GOLDEN_VINE)
                    .feature(NetherFeatures.MAGMA_FLOWER)
+                   .feature(NetherFeatures.FEATHER_FERN)
             ;
         }
 
@@ -78,7 +79,6 @@ public class NetherJungle extends NetherBiome {
         addStructure("bush_rubeus", new StructureRubeusBush(), StructurePlacementType.FLOOR, 0.1F, false);
         addStructure("egg_plant", new StructureEggPlant(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.03F, true);
-        addStructure("feather_fern", new StructureFeatherFern(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("jungle_plant", new StructureJunglePlant(), StructurePlacementType.FLOOR, 0.1F, false);
         addStructure("lucis", new StructureLucis(), StructurePlacementType.WALL, 0.1F, false);
         addStructure("eye", new StructureEye(), StructurePlacementType.CEIL, 0.1F, true);
