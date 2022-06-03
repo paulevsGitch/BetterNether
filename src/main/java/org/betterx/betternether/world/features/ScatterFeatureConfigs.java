@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import com.mojang.serialization.Codec;
 import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
-import org.betterx.betternether.BlocksHelper;
+import org.betterx.bclib.util.BlocksHelper;
 import org.betterx.betternether.blocks.BlockStalactite;
 
 import java.util.Optional;
@@ -33,20 +33,20 @@ public class ScatterFeatureConfigs {
                             boolean growWhileFree,
                             IntProvider spreadCount) {
             super(clusterBlock,
-                  tipBlock,
-                  bottomBlock,
-                  baseState,
-                  baseReplaceChance,
-                  chanceOfDirectionalSpread,
-                  chanceOfSpreadRadius2,
-                  chanceOfSpreadRadius3,
-                  minHeight,
-                  maxHeight,
-                  maxSpread,
-                  sizeVariation,
-                  floorChance,
-                  growWhileFree,
-                  spreadCount);
+                    tipBlock,
+                    bottomBlock,
+                    baseState,
+                    baseReplaceChance,
+                    chanceOfDirectionalSpread,
+                    chanceOfSpreadRadius2,
+                    chanceOfSpreadRadius3,
+                    minHeight,
+                    maxHeight,
+                    maxSpread,
+                    sizeVariation,
+                    floorChance,
+                    growWhileFree,
+                    spreadCount);
         }
 
 
@@ -58,7 +58,7 @@ public class ScatterFeatureConfigs {
         @Override
         public boolean isValidBase(BlockState state) {
             if (baseState.isPresent() && state.is(baseState.get().getBlock())) return true;
-            return BlocksHelper.isNetherGroundMagma(state);
+            return BlocksHelper.isTerrain(state);
         }
 
         @Override
@@ -88,20 +88,20 @@ public class ScatterFeatureConfigs {
                         boolean growWhileFree,
                         IntProvider spreadCount) {
             super(clusterBlock,
-                  tipBlock,
-                  bottomBlock,
-                  baseState,
-                  baseReplaceChance,
-                  chanceOfDirectionalSpread,
-                  chanceOfSpreadRadius2,
-                  chanceOfSpreadRadius3,
-                  minHeight,
-                  maxHeight,
-                  maxSpread,
-                  sizeVariation,
-                  floorChance,
-                  growWhileFree,
-                  spreadCount);
+                    tipBlock,
+                    bottomBlock,
+                    baseState,
+                    baseReplaceChance,
+                    chanceOfDirectionalSpread,
+                    chanceOfSpreadRadius2,
+                    chanceOfSpreadRadius3,
+                    minHeight,
+                    maxHeight,
+                    maxSpread,
+                    sizeVariation,
+                    floorChance,
+                    growWhileFree,
+                    spreadCount);
         }
 
 
@@ -113,7 +113,7 @@ public class ScatterFeatureConfigs {
         @Override
         public boolean isValidBase(BlockState state) {
             if (baseState.isPresent() && state.is(baseState.get().getBlock())) return true;
-            return BlocksHelper.isNetherGroundMagma(state);
+            return org.betterx.bclib.util.BlocksHelper.isTerrain(state);
         }
 
         @Override
@@ -144,20 +144,20 @@ public class ScatterFeatureConfigs {
                               boolean growWhileFree,
                               IntProvider spreadCount) {
             super(clusterBlock,
-                  tipBlock,
-                  bottomBlock,
-                  baseState,
-                  baseReplaceChance,
-                  chanceOfDirectionalSpread,
-                  chanceOfSpreadRadius2,
-                  chanceOfSpreadRadius3,
-                  minHeight,
-                  maxHeight,
-                  maxSpread,
-                  sizeVariation,
-                  floorChance,
-                  growWhileFree,
-                  spreadCount);
+                    tipBlock,
+                    bottomBlock,
+                    baseState,
+                    baseReplaceChance,
+                    chanceOfDirectionalSpread,
+                    chanceOfSpreadRadius2,
+                    chanceOfSpreadRadius3,
+                    minHeight,
+                    maxHeight,
+                    maxSpread,
+                    sizeVariation,
+                    floorChance,
+                    growWhileFree,
+                    spreadCount);
         }
 
 
