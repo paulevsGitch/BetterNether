@@ -224,7 +224,14 @@ public class NetherFeatures {
             .is(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
             .extendDown(0, 3)
             .buildAndRegister(new BlockPlaceFeatureConfig(Blocks.MAGMA_BLOCK));
-
+    // Walls //
+    public static final BCLFeature WART_CAP_FEATURE = BCLFeatureBuilder
+            .start(BetterNether.makeID("wart_cap"), new WartCapFeature())
+            .count(32)
+            .squarePlacement()
+            .randomHeight10FromFloorCeil()
+            .findSolidSurface(List.of(Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH), 12)
+            .buildAndRegister();
 
     // Ores //
     public static final BCLFeature CINCINNASITE_ORE =

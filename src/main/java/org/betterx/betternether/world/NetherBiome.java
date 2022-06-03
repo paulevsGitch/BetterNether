@@ -15,7 +15,6 @@ import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.NetherStructureWorld;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.betternether.world.structures.plants.StructureWartCap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public abstract class NetherBiome extends BCLBiome {
     protected NetherBiome(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
 
-        addStructure("cap_gen", new StructureWartCap(), StructurePlacementType.WALL, 0.8F, true);
+        //addStructure("cap_gen", new StructureWartCap(), StructurePlacementType.WALL, 0.8F, true);
 
 
         onInit();
@@ -163,11 +162,11 @@ public abstract class NetherBiome extends BCLBiome {
 
     protected static String structureFormat(String name, int offset, StructurePlacementType type, float chance) {
         return String.format(Locale.ROOT,
-                "name: %s; offset: %d; type: %s; chance: %f",
-                name,
-                offset,
-                type.getName(),
-                chance);
+                             "name: %s; offset: %d; type: %s; chance: %f",
+                             name,
+                             offset,
+                             type.getName(),
+                             chance);
     }
 
     public void genFloorBuildings(ServerLevelAccessor world,

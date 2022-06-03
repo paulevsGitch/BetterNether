@@ -34,12 +34,12 @@ public class NetherBiomeBuilder {
     //(ResourceLocation randomName, VerticalAnchor trueAtAndBelow, VerticalAnchor falseAtAndAbove)
     static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM =
             new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_floor"),
-                    VerticalAnchor.bottom(),
-                    VerticalAnchor.aboveBottom(5));
+                                                             VerticalAnchor.bottom(),
+                                                             VerticalAnchor.aboveBottom(5));
     static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP =
             new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_roof"),
-                    VerticalAnchor.belowTop(5),
-                    VerticalAnchor.top());
+                                                             VerticalAnchor.belowTop(5),
+                                                             VerticalAnchor.top());
 
     private static void addVanillaStructures(BCLBiomeBuilder builder) {
         builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
@@ -95,7 +95,8 @@ public class NetherBiomeBuilder {
                 .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
                 .edge(edgeBiome)
                 .addNetherClimateParamater(MHelper.randRange(-1.5F, 1.5F, RANDOM),
-                        MHelper.randRange(-1.5F, 1.5F, RANDOM));
+                                           MHelper.randRange(-1.5F, 1.5F, RANDOM))
+                .feature(NetherFeatures.WART_CAP_FEATURE);
 
 
         if (data.hasVanillaStructures()) addVanillaStructures(builder);
