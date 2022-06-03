@@ -406,12 +406,26 @@ public class CommandRegistry {
     }
 
     private static int testPlace(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+
         final CommandSourceStack source = ctx.getSource();
         final ServerPlayer player = source.getPlayerOrException();
         Vec3 pos = source.getPosition();
         final ServerLevel level = source.getLevel();
+        double min = Double.POSITIVE_INFINITY;
+        double max = Double.NEGATIVE_INFINITY;
+        for (int x = -16; x <= 16; x++) {
+            for (int y = -16; y <= 16; y++) {
+                double v = Biome.BIOME_INFO_NOISE.getValue((x + pos.x) / 200.0,
+                        (y + pos.z) / 200.0,
+                        false);
+                if (v < min) min = v;
+                if (v > max) max = v;
+            }
+        }
+        System.out.println("Noise: " + min + " - " + max);
 
-        BCLFeature feature = NetherFeatures.SOUL_VINE;
+
+        BCLFeature feature = NetherFeatures.NETHER_CACTUS;
         PlacedFeature pFeature = level
                 .registryAccess()
                 .registryOrThrow(Registry.PLACED_FEATURE_REGISTRY)
@@ -445,7 +459,7 @@ public class CommandRegistry {
         }
 
         posStates.forEach(p -> {
-            System.out.println("    " + p.getFirst() + " -> " + level.getBlockState(p.getFirst()));
+            //System.out.println("    " + p.getFirst() + " -> " + level.getBlockState(p.getFirst()));
             BlocksHelper.setWithoutUpdate(level, p.getFirst(), p.getSecond());
 
         });

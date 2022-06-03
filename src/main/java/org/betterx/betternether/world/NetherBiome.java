@@ -41,8 +41,6 @@ public abstract class NetherBiome extends BCLBiome {
     protected NetherBiome(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
 
-        //addStructure("cap_gen", new StructureWartCap(), StructurePlacementType.WALL, 0.8F, true);
-
 
         onInit();
 

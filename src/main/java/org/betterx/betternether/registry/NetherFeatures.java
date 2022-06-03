@@ -31,6 +31,7 @@ import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.blocks.BlockNetherCactus;
 import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.features.*;
@@ -114,7 +115,7 @@ public class NetherFeatures {
             ScatterFeatureConfigs.WithSize.startWithSize()
                                           .block(NetherBlocks.BONE_STALACTITE)
                                           .generateBaseBlock(Blocks.BONE_BLOCK.defaultBlockState(),
-                                                  0.75f,
+                                                  0.95f,
                                                   0.3f,
                                                   0.75f,
                                                   0.5f)
@@ -179,6 +180,24 @@ public class NetherFeatures {
                     .spread(2, 0.75f)
                     .onFloor()
                     .growWhileFree()
+                    .build()
+            );
+
+    public static final BCLFeature NETHER_CACTUS = BCLFeatureBuilder
+            .start(BetterNether.makeID("nether_cactus"), BCLFeature.SCATTER_ON_SOLID)
+            .countRange(1, 6)
+            .squarePlacement()
+            .noiseBasedCount(0.32f, 3, 0)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -3, 3))
+            .onEveryLayer()
+            .isEmptyAbove2()
+            .onlyInBiome()
+            .buildAndRegister(ScatterFeatureConfig.OnSolid
+                    .startOnSolid()
+                    .block(NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, false))
+                    .tipBlock(NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, true))
+                    .heightRange(2, 5)
+                    .onFloor()
                     .build()
             );
     private static final ScatterFeatureConfig MAGMA_FLOWER_CONFIG = ScatterFeatureConfigs.WithPlantAge
@@ -255,6 +274,32 @@ public class NetherFeatures {
             .isEmptyAbove2()
             .onlyInBiome()
             .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BLACK_BUSH)));
+
+    public static final BCLFeature BARREL_CACTUS = BCLFeatureBuilder
+            .start(BetterNether.makeID("barrel_cactus"), Feature.SIMPLE_BLOCK)
+            .countRange(4, 10)
+            .squarePlacement()
+            .noiseBasedCount(-0.2f, 0, 4)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -6, 6))
+            .onEveryLayer()
+            .isEmptyAbove2()
+            .onlyInBiome()
+            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BARREL_CACTUS)));
+
+    public static final BCLFeature AGAVE = BCLFeatureBuilder
+            .start(BetterNether.makeID("agave"), SCATTER_WITH_PLANT_AGE)
+            .countRange(1, 6)
+            .squarePlacement()
+            .noiseBasedCount(-0.29f, 4, 2)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -6, 6))
+            .onEveryLayer()
+            .onlyInBiome()
+            .buildAndRegister(ScatterFeatureConfigs.WithPlantAge
+                    .startWithPlantAge()
+                    .singleBlock(NetherBlocks.AGAVE)
+                    .spread(4, 0, UniformInt.of(1, 16))
+                    .onFloor()
+                    .build());
 
     // Landscape //
     public static final BCLFeature LAVA_BLOBS = BCLFeatureBuilder
