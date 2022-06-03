@@ -18,8 +18,8 @@ public class ScatterFeatureConfigs {
         public static final Codec<WithPlantAge> CODEC = buildCodec(WithPlantAge::new);
 
         public WithPlantAge(BlockState clusterBlock,
-                            BlockState tipBlock,
-                            BlockState bottomBlock,
+                            Optional<BlockState> tipBlock,
+                            Optional<BlockState> bottomBlock,
                             Optional<BlockState> baseState,
                             float baseReplaceChance,
                             float chanceOfDirectionalSpread,
@@ -33,20 +33,20 @@ public class ScatterFeatureConfigs {
                             boolean growWhileFree,
                             IntProvider spreadCount) {
             super(clusterBlock,
-                    tipBlock,
-                    bottomBlock,
-                    baseState,
-                    baseReplaceChance,
-                    chanceOfDirectionalSpread,
-                    chanceOfSpreadRadius2,
-                    chanceOfSpreadRadius3,
-                    minHeight,
-                    maxHeight,
-                    maxSpread,
-                    sizeVariation,
-                    floorChance,
-                    growWhileFree,
-                    spreadCount);
+                  tipBlock,
+                  bottomBlock,
+                  baseState,
+                  baseReplaceChance,
+                  chanceOfDirectionalSpread,
+                  chanceOfSpreadRadius2,
+                  chanceOfSpreadRadius3,
+                  minHeight,
+                  maxHeight,
+                  maxSpread,
+                  sizeVariation,
+                  floorChance,
+                  growWhileFree,
+                  spreadCount);
         }
 
 
@@ -73,8 +73,8 @@ public class ScatterFeatureConfigs {
         public static final Codec<WithSize> CODEC = buildCodec(WithSize::new);
 
         public WithSize(BlockState clusterBlock,
-                        BlockState tipBlock,
-                        BlockState bottomBlock,
+                        Optional<BlockState> tipBlock,
+                        Optional<BlockState> bottomBlock,
                         Optional<BlockState> baseState,
                         float baseReplaceChance,
                         float chanceOfDirectionalSpread,
@@ -88,20 +88,20 @@ public class ScatterFeatureConfigs {
                         boolean growWhileFree,
                         IntProvider spreadCount) {
             super(clusterBlock,
-                    tipBlock,
-                    bottomBlock,
-                    baseState,
-                    baseReplaceChance,
-                    chanceOfDirectionalSpread,
-                    chanceOfSpreadRadius2,
-                    chanceOfSpreadRadius3,
-                    minHeight,
-                    maxHeight,
-                    maxSpread,
-                    sizeVariation,
-                    floorChance,
-                    growWhileFree,
-                    spreadCount);
+                  tipBlock,
+                  bottomBlock,
+                  baseState,
+                  baseReplaceChance,
+                  chanceOfDirectionalSpread,
+                  chanceOfSpreadRadius2,
+                  chanceOfSpreadRadius3,
+                  minHeight,
+                  maxHeight,
+                  maxSpread,
+                  sizeVariation,
+                  floorChance,
+                  growWhileFree,
+                  spreadCount);
         }
 
 
@@ -129,8 +129,8 @@ public class ScatterFeatureConfigs {
         public static final Codec<WithSizeOnBase> CODEC = buildCodec(WithSizeOnBase::new);
 
         public WithSizeOnBase(BlockState clusterBlock,
-                              BlockState tipBlock,
-                              BlockState bottomBlock,
+                              Optional<BlockState> tipBlock,
+                              Optional<BlockState> bottomBlock,
                               Optional<BlockState> baseState,
                               float baseReplaceChance,
                               float chanceOfDirectionalSpread,
@@ -144,20 +144,20 @@ public class ScatterFeatureConfigs {
                               boolean growWhileFree,
                               IntProvider spreadCount) {
             super(clusterBlock,
-                    tipBlock,
-                    bottomBlock,
-                    baseState,
-                    baseReplaceChance,
-                    chanceOfDirectionalSpread,
-                    chanceOfSpreadRadius2,
-                    chanceOfSpreadRadius3,
-                    minHeight,
-                    maxHeight,
-                    maxSpread,
-                    sizeVariation,
-                    floorChance,
-                    growWhileFree,
-                    spreadCount);
+                  tipBlock,
+                  bottomBlock,
+                  baseState,
+                  baseReplaceChance,
+                  chanceOfDirectionalSpread,
+                  chanceOfSpreadRadius2,
+                  chanceOfSpreadRadius3,
+                  minHeight,
+                  maxHeight,
+                  maxSpread,
+                  sizeVariation,
+                  floorChance,
+                  growWhileFree,
+                  spreadCount);
         }
 
 

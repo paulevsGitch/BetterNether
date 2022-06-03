@@ -13,12 +13,10 @@ import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.world.structures.IStructure;
-import org.betterx.betternether.world.structures.NetherStructureWorld;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public abstract class NetherBiome extends BCLBiome {
 
@@ -160,15 +158,6 @@ public abstract class NetherBiome extends BCLBiome {
         }
     }
 
-    protected static String structureFormat(String name, int offset, StructurePlacementType type, float chance) {
-        return String.format(Locale.ROOT,
-                             "name: %s; offset: %d; type: %s; chance: %f",
-                             name,
-                             offset,
-                             type.getName(),
-                             chance);
-    }
-
     public void genFloorBuildings(ServerLevelAccessor world,
                                   BlockPos pos,
                                   RandomSource random,
@@ -215,60 +204,6 @@ public abstract class NetherBiome extends BCLBiome {
                     info.structure.generate(world, pos, random, MAX_HEIGHT, context);
                     return;
                 }
-        }
-    }
-
-    private static StructurePlacementType typeFromString(String a) {
-        if (a.contains("floor"))
-            return StructurePlacementType.FLOOR;
-        else if (a.contains("wall"))
-            return StructurePlacementType.WALL;
-        else if (a.contains("ceil"))
-            return StructurePlacementType.CEIL;
-        else if (a.contains("lava"))
-            return StructurePlacementType.LAVA;
-        else if (a.contains("under"))
-            return StructurePlacementType.UNDER;
-        return StructurePlacementType.FLOOR;
-    }
-
-    private void structureFromString(String structureString) {
-        String[] args = structureString.split(";");
-
-        String name = "";
-        int offset = 0;
-        StructurePlacementType type = StructurePlacementType.FLOOR;
-        float chance = 0;
-
-        for (String a : args) {
-            if (a.contains("name:")) {
-                name = a.replace("name:", "").trim();
-            } else if (a.contains("offset:")) {
-                offset = Integer.parseInt(a.replace("offset:", "").trim());
-            } else if (a.contains("type:")) {
-                type = typeFromString(a);
-            } else if (a.contains("chance:")) {
-                chance = Float.parseFloat(a.replace("chance:", "").trim());
-            }
-        }
-
-        if (!name.isEmpty()) {
-            NetherStructureWorld structure = new NetherStructureWorld(name, offset, type);
-            if (structure.loaded()) {
-                List<StructureInfo> infoList = null;
-                switch (structure.type) {
-                    case CEIL -> infoList = buildGeneratorsCeil;
-                    case FLOOR -> infoList = buildGeneratorsFloor;
-                    case LAVA -> infoList = buildGeneratorsLava;
-                    case UNDER -> infoList = buildGeneratorsUnder;
-                    default -> {
-                    }
-                }
-
-                chance += getLastChance(infoList);
-                StructureInfo info = new StructureInfo(structure, chance, false);
-                infoList.add(info);
-            }
         }
     }
 

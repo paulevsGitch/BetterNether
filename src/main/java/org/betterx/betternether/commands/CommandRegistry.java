@@ -94,51 +94,51 @@ public class CommandRegistry {
                         .then(Commands.literal("request_garbage_collection")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> requestGC(ctx))
-                        )
-                        .then(Commands.literal("testPlace")
+                             )
+                        .then(Commands.literal("test_place")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> testPlace(ctx))
-                        )
-                        .then(Commands.literal("findSurface")
+                             )
+                        .then(Commands.literal("find_surface")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> findSurface(ctx))
-                        )
+                             )
                         .then(Commands.literal("tpnext")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> teleportToNextBiome(ctx))
-                        )
+                             )
                         .then(Commands.literal("place_all")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> placeAllBlocks(ctx))
-                        )
+                             )
                         .then(Commands.literal("place_matching")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .then(Commands.argument("type", StringArgumentType.string())
                                                     .executes(ctx -> placeMatchingBlocks(ctx,
-                                                            StringArgumentType.getString(
-                                                                    ctx,
-                                                                    "type"))))
-                        )
+                                                                                         StringArgumentType.getString(
+                                                                                                 ctx,
+                                                                                                 "type"))))
+                             )
                         .then(Commands.literal("debug_ore")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> revealOre(ctx))
-                        )
+                             )
                         .then(Commands.literal("place_nbt")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .then(Commands.argument("name", StringArgumentType.string())
                                                     .executes(ctx -> placeNbt(ctx,
-                                                            StringArgumentType.getString(ctx,
-                                                                    "name"))))
-                        )
+                                                                              StringArgumentType.getString(ctx,
+                                                                                                           "name"))))
+                             )
                         .then(Commands.literal("sliceZ")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> slice(ctx, true))
-                        )
+                             )
                         .then(Commands.literal("sliceX")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> slice(ctx, false))
-                        )
-        );
+                             )
+                           );
     }
 
     private static int requestGC(CommandContext<CommandSourceStack> ctx) {
@@ -165,10 +165,10 @@ public class CommandRegistry {
         final BlockPos currentPosition = new BlockPos(source.getPosition());
         final BlockPos biomePosition = source.getLevel()
                                              .findClosestBiome3d(b -> b.equals(biome.getBiome()),
-                                                     currentPosition,
-                                                     MAX_SEARCH_RADIUS,
-                                                     SAMPLE_RESOLUTION_HORIZONTAL,
-                                                     SAMPLE_RESOLUTION_VERTICAL)
+                                                                 currentPosition,
+                                                                 MAX_SEARCH_RADIUS,
+                                                                 SAMPLE_RESOLUTION_HORIZONTAL,
+                                                                 SAMPLE_RESOLUTION_VERTICAL)
                                              .getFirst();
         final String biomeName = biome.toString();
 
@@ -193,11 +193,11 @@ public class CommandRegistry {
             Vector3d targetPlayerPos = new Vector3d(target.getX() + 0.5, target.getY() - 1, target.getZ() + 0.5);
 
             player.connection.teleport(targetPlayerPos.x,
-                    targetPlayerPos.y,
-                    targetPlayerPos.z,
-                    0,
-                    0,
-                    Collections.EMPTY_SET);
+                                       targetPlayerPos.y,
+                                       targetPlayerPos.z,
+                                       0,
+                                       0,
+                                       Collections.EMPTY_SET);
             ResourceOrTagLocationArgument.Result result = new ResourceOrTagLocationArgument.Result() {
                 @Override
                 public Either<ResourceKey, TagKey> unwrap() {
@@ -222,11 +222,11 @@ public class CommandRegistry {
             ResourceKey<Biome> a = BiomeAPI.getBiomeKey(biome.getBiome());
             Holder<Biome> h = BuiltinRegistries.BIOME.getHolder(a).orElseThrow();
             return LocateCommand.showLocateResult(source,
-                    result,
-                    currentPosition,
-                    new Pair<>(biomePosition, h),
-                    "commands.locatebiome.success",
-                    false);
+                                                  result,
+                                                  currentPosition,
+                                                  new Pair<>(biomePosition, h),
+                                                  "commands.locatebiome.success",
+                                                  false);
         }
     }
 
@@ -272,10 +272,10 @@ public class CommandRegistry {
                 throw ERROR_NBT_STRUCTURE_NOT_FOUND.create(type);
             }
             structure.generate(level,
-                    new BlockPos(pos),
-                    MHelper.RANDOM,
-                    128,
-                    NetherChunkPopulatorFeature.generatorForThread().context);
+                               new BlockPos(pos),
+                               MHelper.RANDOM,
+                               128,
+                               NetherChunkPopulatorFeature.generatorForThread().context);
         } catch (Throwable t) {
             BCLib.LOGGER.error("Error loading from nbt: " + type);
             BCLib.LOGGER.error(t.toString());
@@ -395,10 +395,11 @@ public class CommandRegistry {
         MutableBlockPos mPos = new BlockPos(pos).mutable();
         System.out.println("Staring at: " + mPos + " -> " + level.getBlockState(mPos));
         boolean found = org.betterx.bclib.util.BlocksHelper.findSurroundingSurface(level,
-                mPos,
-                Direction.DOWN,
-                4,
-                state -> BlocksHelper.isNetherGroundMagma(state));
+                                                                                   mPos,
+                                                                                   Direction.DOWN,
+                                                                                   4,
+                                                                                   state -> BlocksHelper.isNetherGroundMagma(
+                                                                                           state));
         System.out.println("Ending at: " + mPos + " -> " + level.getBlockState(mPos) + " = " + found);
         org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, new BlockPos(pos), Blocks.YELLOW_CONCRETE);
         org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, mPos, Blocks.LIGHT_BLUE_CONCRETE);
@@ -411,7 +412,7 @@ public class CommandRegistry {
         Vec3 pos = source.getPosition();
         final ServerLevel level = source.getLevel();
 
-        BCLFeature feature = NetherFeatures.MAGMA_FLOWER;
+        BCLFeature feature = NetherFeatures.SOUL_VINE;
         PlacedFeature pFeature = level
                 .registryAccess()
                 .registryOrThrow(Registry.PLACED_FEATURE_REGISTRY)
@@ -420,8 +421,8 @@ public class CommandRegistry {
                 .value();
         var placements = pFeature.placement();
         PlacementContext pctx = new PlacementContext(level,
-                level.getChunkSource().getGenerator(),
-                Optional.of(pFeature));
+                                                     level.getChunkSource().getGenerator(),
+                                                     Optional.of(pFeature));
         Stream<BlockPos> s = Stream.of(new BlockPos(pos));
         RandomSource rnd = new LegacyRandomSource(121212);
         placeMapIdx = 0;
@@ -528,8 +529,8 @@ public class CommandRegistry {
         BlocksHelper.setWithoutUpdate(player.getLevel(), blockPos, state);
         if (bl instanceof DoorBlock) {
             BlocksHelper.setWithoutUpdate(player.getLevel(),
-                    blockPos.above(),
-                    state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
+                                          blockPos.above(),
+                                          state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
         }
     }
 }

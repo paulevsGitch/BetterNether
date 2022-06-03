@@ -15,6 +15,8 @@ import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
@@ -23,10 +25,8 @@ import org.betterx.bclib.api.LifeCycleAPI;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BiomeAPI;
 import org.betterx.bclib.api.features.*;
-import org.betterx.bclib.api.features.config.BlockPlaceFeatureConfig;
 import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
 import org.betterx.bclib.api.features.config.TemplateFeatureConfig;
-import org.betterx.bclib.api.features.placement.MinEmptyFilter;
 import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
@@ -148,7 +148,8 @@ public class NetherFeatures {
             .squarePlacement()
             .randomHeight4FromFloorCeil()
             .findSolidCeil(12)
-            .modifier(MinEmptyFilter.down())
+            .isEmptyBelow2()
+            .onlyInBiome()
             .buildAndRegister(ScatterFeatureConfig.OnSolid
                                       .startOnSolid()
                                       .block(NetherBlocks.GOLDEN_VINE.defaultBlockState()
@@ -158,6 +159,25 @@ public class NetherFeatures {
                                       .heightRange(2, 12)
                                       .spread(3, 0.75f)
                                       .onCeil()
+                                      .growWhileFree()
+                                      .build()
+                             );
+
+    public static final BCLFeature SOUL_VINE = BCLFeatureBuilder
+            .start(BetterNether.makeID("soul_vine"), BCLFeature.SCATTER_ON_SOLID)
+            .countRange(1, 6)
+            .squarePlacement()
+            .noiseBasedCount(-0.3f, 0, 4)
+            .spreadHorizontal(ClampedNormalInt.of(0, 1.1f, -3, 3))
+            .onEveryLayer()
+            .isEmptyAbove2()
+            .onlyInBiome()
+            .buildAndRegister(ScatterFeatureConfig.OnSolid
+                                      .startOnSolid()
+                                      .singleBlock(NetherBlocks.SOUL_VEIN)
+                                      .generateBaseBlock(NetherBlocks.VEINED_SAND.defaultBlockState(), 0.4f, 0.6f, 0.2f)
+                                      .spread(2, 0.75f)
+                                      .onFloor()
                                       .growWhileFree()
                                       .build()
                              );
@@ -174,6 +194,7 @@ public class NetherFeatures {
             .noiseBasedCount(0.3f, 4, 16)
             .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -6, 6))
             .onEveryLayer()
+            .onlyInBiome()
             .buildAndRegister(MAGMA_FLOWER_CONFIG);
     public static final BCLFeature MAGMA_FLOWER_SPARSE = BCLFeatureBuilder
             .start(BetterNether.makeID("magma_flower_sparse"), BCLFeature.SCATTER_ON_SOLID)
@@ -182,6 +203,7 @@ public class NetherFeatures {
             .noiseBasedCount(0.3f, 4, 16)
             .spreadHorizontal(ClampedNormalInt.of(0, 1.1f, -4, 4))
             .onEveryLayer()
+            .onlyInBiome()
             .buildAndRegister(MAGMA_FLOWER_CONFIG);
 
 
@@ -192,7 +214,7 @@ public class NetherFeatures {
             .randomHeight4FromFloorCeil()
             .findSolidFloor(12)
             .isEmptyAbove4()
-            .modifier(MinEmptyFilter.up())
+            .onlyInBiome()
             .buildAndRegister(ScatterFeatureConfig.OnSolid
                                       .startOnSolid()
                                       .singleBlock(NetherBlocks.GEYSER)
@@ -203,27 +225,29 @@ public class NetherFeatures {
 
     // Landscape //
     public static final BCLFeature LAVA_BLOBS = BCLFeatureBuilder
-            .start(BetterNether.makeID("lava_blobs"), BCLFeature.PLACE_BLOCK)
+            .start(BetterNether.makeID("lava_blobs"), Feature.SIMPLE_BLOCK)
             .onEveryLayer() //put a point on every layer of the world
-            .onlyInBiome()
             .stencilOneIn4() //select one in for from the stencil for all heights
+            .onlyInBiome()
             .findSolidFloor(4) //try to find the floor
+            .offset(Direction.DOWN)
             .inBasinOf(
                     BlockPredicate.matchesTag(CommonBlockTags.TERRAIN),
                     BlockPredicate.matchesBlocks(Blocks.LAVA)
                       ) //check if this is a Basin
 
-            .buildAndRegister(new BlockPlaceFeatureConfig(Blocks.LAVA));
+            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LAVA)));
 
     public static final BCLFeature MAGMA_BLOBS = BCLFeatureBuilder
-            .start(BetterNether.makeID("magma_blobs"), BCLFeature.PLACE_BLOCK)
+            .start(BetterNether.makeID("magma_blobs"), Feature.SIMPLE_BLOCK)
             .stencil()
             .onlyInBiome()
             .onEveryLayer()
             .offset(Direction.DOWN)
             .is(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .onlyInBiome()
             .extendDown(0, 3)
-            .buildAndRegister(new BlockPlaceFeatureConfig(Blocks.MAGMA_BLOCK));
+            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.MAGMA_BLOCK)));
     // Walls //
     public static final BCLFeature WART_CAP_FEATURE = BCLFeatureBuilder
             .start(BetterNether.makeID("wart_cap"), new WartCapFeature())
