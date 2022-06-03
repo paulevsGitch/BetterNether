@@ -44,7 +44,8 @@ public class BiomeFeatures {
             .start(BetterNether.makeID("bone_reef_ceil"), BCLFeature.RANDOM_SELECT)
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .modifier(defaultCeilModifiers)
-            .buildAndRegister(new RandomFeatureConfiguration(List.of(), VineLikeFeatures.LUMBUS_VINE.getPlacedFeature()));
+            .buildAndRegister(new RandomFeatureConfiguration(List.of(),
+                    VineLikeFeatures.LUMBUS_VINE.getPlacedFeature()));
 
     public static void ensureStaticInitialization() {
     }

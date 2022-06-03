@@ -11,10 +11,10 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.NetherBiome;
-import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.registry.features.TerrainFeatures;
+import org.betterx.betternether.world.NetherBiome;
+import org.betterx.betternether.world.NetherBiomeConfig;
 
 public class NetherBoneReef extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
