@@ -40,7 +40,7 @@ public class FloorFeatures {
             = FastFeatures.patch(BetterNether.makeID("wart_bush"), 16, 5, 3, new WartBushFeature());
 
     public static final BCLFeature CRIMSON_FUNGUS
-            = FastFeatures.patch(BetterNether.makeID("crimson_fungus"), Blocks.CRIMSON_FUNGUS, 64, 4, 2);
+            = FastFeatures.patch(BetterNether.makeID("crimson_fungus"), Blocks.CRIMSON_FUNGUS, 32, 7, 2);
 
     public static final BCLFeature CRIMSON_ROOTS
             = FastFeatures.patch(BetterNether.makeID("crimson_roots"), Blocks.CRIMSON_ROOTS, 32, 7, 2);

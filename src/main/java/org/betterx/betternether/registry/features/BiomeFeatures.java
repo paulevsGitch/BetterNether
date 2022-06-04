@@ -99,7 +99,7 @@ public class BiomeFeatures {
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .modifier(defaultFloorModifiers)
             .buildAndRegister(new RandomFeatureConfiguration(List.of(
-                    new WeightedPlacedFeature(TreeFeatures.CRIMSON_GLOWING.getPlacedFeature(), 0.2f),
+                    new WeightedPlacedFeature(TreeFeatures.CRIMSON_GLOWING.getPlacedFeature(), 0.5f),
                     new WeightedPlacedFeature(FloorFeatures.CRIMSON_ROOTS.getPlacedFeature(), 0.3f),
                     new WeightedPlacedFeature(FloorFeatures.CRIMSON_FUNGUS.getPlacedFeature(), 0.2f),
                     new WeightedPlacedFeature(FloorFeatures.WART_BUSH_PATCH.getPlacedFeature(), 0.15f),
