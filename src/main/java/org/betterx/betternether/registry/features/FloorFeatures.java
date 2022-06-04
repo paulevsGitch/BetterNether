@@ -32,7 +32,7 @@ public class FloorFeatures {
             = FastFeatures.patch(BetterNether.makeID("black_bush"), NetherBlocks.BLACK_BUSH);
 
     public static final BCLFeature BARREL_CACTUS
-            = FastFeatures.patch(BetterNether.makeID("barrel_cactus"), NetherBlocks.BARREL_CACTUS, 48, 3, 2);
+            = FastFeatures.patch(BetterNether.makeID("barrel_cactus"), NetherBlocks.BARREL_CACTUS, 12, 2, 2);
 
 
     public static final BCLFeature GEYSER

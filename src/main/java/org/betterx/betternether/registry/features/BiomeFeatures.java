@@ -83,8 +83,8 @@ public class BiomeFeatures {
             .modifier(defaultFloorModifiers)
             .buildAndRegister(new RandomFeatureConfiguration(List.of(
                     new WeightedPlacedFeature(FloorFeatures.AGAVE.getPlacedFeature(), 0.5f),
-                    new WeightedPlacedFeature(FloorFeatures.BARREL_CACTUS.getPlacedFeature(), 0.25f),
-                    new WeightedPlacedFeature(VineLikeFeatures.NETHER_CACTUS.getPlacedFeature(), 0.15f)
+                    new WeightedPlacedFeature(FloorFeatures.BARREL_CACTUS.getPlacedFeature(), 0.1f),
+                    new WeightedPlacedFeature(VineLikeFeatures.NETHER_CACTUS.getPlacedFeature(), 0.2f)
             ), FloorFeatures.AGAVE.getPlacedFeature()));
 
 
