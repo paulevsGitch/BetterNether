@@ -14,8 +14,8 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.SoundsRegistry;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.surface.NetherNoiseCondition;
@@ -38,9 +38,10 @@ public class NetherGravelDesert extends NetherBiome {
                    .particles(ParticleTypes.ASH, 0.02F)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(NetherFeatures.NETHER_CACTUS)
-                   .feature(NetherFeatures.BARREL_CACTUS)
-                   .feature(NetherFeatures.AGAVE)
+                   .feature(BiomeFeatures.GRAVEL_DESERT_FLOOR)
+//                   .feature(NetherFeatures.NETHER_CACTUS)
+//                   .feature(NetherFeatures.BARREL_CACTUS)
+//                   .feature(NetherFeatures.AGAVE)
             ;
         }
 

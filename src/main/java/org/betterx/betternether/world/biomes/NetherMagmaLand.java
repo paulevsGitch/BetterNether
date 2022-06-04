@@ -15,7 +15,8 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.TerrainFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -32,12 +33,16 @@ public class NetherMagmaLand extends NetherBiome {
                    .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
                    .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(NetherFeatures.LAVA_BLOBS)
-                   .feature(NetherFeatures.MAGMA_BLOBS)
-                   .feature(NetherFeatures.CRYSTAL_FATURE)
-                   .feature(NetherFeatures.GOLDEN_VINE)
-                   .feature(NetherFeatures.GEYSER)
-                   .feature(NetherFeatures.MAGMA_FLOWER)
+                   .feature(TerrainFeatures.LAVA_PITS)
+                   .feature(TerrainFeatures.MAGMA_BLOBS)
+                   .feature(BiomeFeatures.MAGMA_LAND_FLOOR)
+                   .feature(BiomeFeatures.MAGMA_LAND_CEIL)
+//                   .feature(NetherFeatures.LAVA_BLOBS)
+//                   .feature(NetherFeatures.MAGMA_BLOBS)
+//                   .feature(NetherFeatures.CRYSTAL_FATURE)
+//                   .feature(NetherFeatures.GOLDEN_VINE)
+//                   .feature(NetherFeatures.GEYSER)
+//                   .feature(NetherFeatures.MAGMA_FLOWER)
             ;
         }
 

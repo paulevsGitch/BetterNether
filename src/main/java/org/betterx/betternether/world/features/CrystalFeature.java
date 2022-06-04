@@ -20,7 +20,7 @@ import org.betterx.betternether.world.structures.StructureGeneratorThreadContext
 
 public class CrystalFeature extends NetherSurfaceFeature {
     public static BCLFeature createAndRegister() {
-        return BCLFeatureBuilder.start(BetterNether.makeID("nether_crystal"), new CrystalFeature())
+        return BCLFeatureBuilder.start(BetterNether.makeID("old_nether_crystal"), new CrystalFeature())
                                 .decoration(GenerationStep.Decoration.LOCAL_MODIFICATIONS)
                                 .onceEvery(1)
                                 .squarePlacement()

@@ -16,6 +16,7 @@ import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.surface.NetherNoiseCondition;
@@ -43,9 +44,10 @@ public class NetherSoulPlain extends NetherBiome {
                    .particles(ParticleTypes.PORTAL, 0.02F)
                    .structure(BiomeTags.HAS_NETHER_FOSSIL)
                    .feature(NetherFeatures.NETHER_RUBY_ORE_SOUL)
-                   .feature(NetherFeatures.SOUL_VINE)
-                   .feature(NetherFeatures.BLACK_BUSH)
-                   .feature(NetherFeatures.SOUL_GRASS)
+                   .feature(BiomeFeatures.SOUL_PLAIN_FLOOR)
+//                   .feature(NetherFeatures.SOUL_VINE)
+//                   .feature(NetherFeatures.BLACK_BUSH)
+//                   .feature(NetherFeatures.SOUL_GRASS)
             ;
         }
 
@@ -61,16 +63,16 @@ public class NetherSoulPlain extends NetherBiome {
 
             RuleSource soilSandStoneDist
                     = SurfaceRules.sequence(new SwitchRuleSource(NetherNoiseCondition.DEFAULT,
-                                                                 List.of(SOUL_SOIL,
-                                                                         SOUL_SAND,
-                                                                         SOUL_SANDSTONE,
-                                                                         LAVA,
-                                                                         LAVA,
-                                                                         SOUL_SAND)));
+                    List.of(SOUL_SOIL,
+                            SOUL_SAND,
+                            SOUL_SANDSTONE,
+                            LAVA,
+                            LAVA,
+                            SOUL_SAND)));
 
             RuleSource soilStoneDist
                     = SurfaceRules.sequence(SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, SOUL_SOIL),
-                                            SOUL_SANDSTONE);
+                    SOUL_SANDSTONE);
             return super
                     .surface()
                     .rule(2, SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, soilSandDist))

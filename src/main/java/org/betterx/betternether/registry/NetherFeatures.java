@@ -151,7 +151,7 @@ public class NetherFeatures {
 
     // Veins //
     public static final BCLFeature GOLDEN_VINE = BCLFeatureBuilder
-            .start(BetterNether.makeID("golden_vine"), BCLFeature.SCATTER_ON_SOLID)
+            .start(BetterNether.makeID("old_golden_vine"), BCLFeature.SCATTER_ON_SOLID)
             .count(16)
             .squarePlacement()
             .randomHeight4FromFloorCeil()
@@ -213,7 +213,7 @@ public class NetherFeatures {
             );
 
     public static final BCLFeature NETHER_CACTUS = BCLFeatureBuilder
-            .start(BetterNether.makeID("nether_cactus"), BCLFeature.SCATTER_ON_SOLID)
+            .start(BetterNether.makeID("old_nether_cactus"), BCLFeature.SCATTER_ON_SOLID)
             .countRange(1, 6)
             .squarePlacement()
             .noiseBasedCount(0.32f, 3, 0)
@@ -226,6 +226,7 @@ public class NetherFeatures {
                     .block(NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, false))
                     .tipBlock(NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, true))
                     .heightRange(2, 5)
+                    .spread(2, 0, UniformInt.of(4, 8))
                     .onFloor()
                     .build()
             );
@@ -276,7 +277,7 @@ public class NetherFeatures {
             .onFloor()
             .build();
     public static final BCLFeature MAGMA_FLOWER = BCLFeatureBuilder
-            .start(BetterNether.makeID("magma_flower"), SCATTER_WITH_PLANT_AGE)
+            .start(BetterNether.makeID("old_magma_flower"), SCATTER_WITH_PLANT_AGE)
             .countRange(1, 6)
             .squarePlacement()
             .noiseBasedCount(0.3f, 4, 16)
@@ -296,7 +297,7 @@ public class NetherFeatures {
 
 
     public static final BCLFeature GEYSER = BCLFeatureBuilder
-            .start(BetterNether.makeID("geyser"), BCLFeature.SCATTER_ON_SOLID)
+            .start(BetterNether.makeID("old_geyser"), BCLFeature.SCATTER_ON_SOLID)
             .count(16)
             .squarePlacement()
             .randomHeight4FromFloorCeil()
@@ -312,7 +313,7 @@ public class NetherFeatures {
             );
 
     public static final BCLFeature BLACK_BUSH = BCLFeatureBuilder
-            .start(BetterNether.makeID("black_bush"), Feature.SIMPLE_BLOCK)
+            .start(BetterNether.makeID("old_black_bush"), Feature.SIMPLE_BLOCK)
             .countRange(2, 10)
             .squarePlacement()
             .noiseBasedCount(0.25f, 0, 4)
@@ -334,7 +335,7 @@ public class NetherFeatures {
             .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BLACK_BUSH)));
 
     public static final BCLFeature SOUL_GRASS = BCLFeatureBuilder
-            .start(BetterNether.makeID("soul_grass"), Feature.SIMPLE_BLOCK)
+            .start(BetterNether.makeID("old_soul_grass"), Feature.SIMPLE_BLOCK)
             .countRange(4, 10)
             .squarePlacement()
             .noiseBasedCount(-0.2f, 0, 4)
@@ -345,7 +346,7 @@ public class NetherFeatures {
             .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.SOUL_GRASS)));
 
     public static final BCLFeature BARREL_CACTUS = BCLFeatureBuilder
-            .start(BetterNether.makeID("barrel_cactus"), Feature.SIMPLE_BLOCK)
+            .start(BetterNether.makeID("old_barrel_cactus"), Feature.SIMPLE_BLOCK)
             .countRange(4, 10)
             .squarePlacement()
             .noiseBasedCount(-0.2f, 0, 4)
@@ -356,7 +357,7 @@ public class NetherFeatures {
             .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BARREL_CACTUS)));
 
     public static final BCLFeature AGAVE = BCLFeatureBuilder
-            .start(BetterNether.makeID("agave"), SCATTER_WITH_PLANT_AGE)
+            .start(BetterNether.makeID("old_agave"), SCATTER_WITH_PLANT_AGE)
             .countRange(1, 6)
             .squarePlacement()
             .noiseBasedCount(-0.29f, 4, 2)
@@ -410,7 +411,7 @@ public class NetherFeatures {
             .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LAVA)));
 
     public static final BCLFeature MAGMA_BLOBS = BCLFeatureBuilder
-            .start(BetterNether.makeID("magma_blobs"), Feature.SIMPLE_BLOCK)
+            .start(BetterNether.makeID("old_magma_blobs"), Feature.SIMPLE_BLOCK)
             .stencil()
             .onlyInBiome()
             .onEveryLayer()
