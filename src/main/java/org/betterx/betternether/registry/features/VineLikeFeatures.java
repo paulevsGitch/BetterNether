@@ -46,7 +46,7 @@ public class VineLikeFeatures {
     );
     public static final BCLFeature SOUL_VEIN
             = FastFeatures.vine(
-            BetterNether.makeID("soul_vein"), false, false,
+            BetterNether.makeID("soul_vein"), true, false,
             ScatterFeatureConfig.OnSolid
                     .startOnSolid()
                     .singleBlock(NetherBlocks.SOUL_VEIN)
