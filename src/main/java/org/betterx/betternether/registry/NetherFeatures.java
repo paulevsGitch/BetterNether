@@ -37,10 +37,7 @@ import org.betterx.betternether.blocks.BlockNetherCactus;
 import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.registry.features.BiomeFeatures;
-import org.betterx.betternether.registry.features.FloorFeatures;
-import org.betterx.betternether.registry.features.TerrainFeatures;
-import org.betterx.betternether.registry.features.VineLikeFeatures;
+import org.betterx.betternether.registry.features.*;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityFeature;
 
@@ -667,6 +664,8 @@ public class NetherFeatures {
     public static void register() {
         FloorFeatures.ensureStaticInitialization();
         VineLikeFeatures.ensureStaticInitialization();
+        WallFeatures.ensureStaticInitialization();
+        TreeFeatures.ensureStaticInitialization();
         TerrainFeatures.ensureStaticInitialization();
         BiomeFeatures.ensureStaticInitialization();
         LifeCycleAPI.onLevelLoad(NetherFeatures::onWorldLoad);

@@ -2,6 +2,7 @@ package org.betterx.betternether.registry.features;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
 
 import org.betterx.bclib.api.features.BCLFeature;
 import org.betterx.bclib.api.features.BCLFeatureBuilder;
@@ -16,6 +17,7 @@ import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.CrystalFeature;
 import org.betterx.betternether.world.features.JellyfishMushroomFeature;
 import org.betterx.betternether.world.features.ScatterFeatureConfigs;
+import org.betterx.betternether.world.features.WartBushFeature;
 
 import java.util.List;
 
@@ -30,6 +32,18 @@ public class FloorFeatures {
 
     public static final BCLFeature BLACK_BUSH_PATCH
             = FastFeatures.patch(BetterNether.makeID("black_bush"), NetherBlocks.BLACK_BUSH);
+
+    public static final BCLFeature WART_SEED_PATCH
+            = FastFeatures.patch(BetterNether.makeID("wart_seed"), NetherBlocks.MAT_WART.getSeed(), 32, 2, 1);
+
+    public static final BCLFeature WART_BUSH_PATCH
+            = FastFeatures.patch(BetterNether.makeID("wart_bush"), 16, 5, 3, new WartBushFeature());
+
+    public static final BCLFeature CRIMSON_FUNGUS
+            = FastFeatures.patch(BetterNether.makeID("crimson_fungus"), Blocks.CRIMSON_FUNGUS, 64, 4, 2);
+
+    public static final BCLFeature CRIMSON_ROOTS
+            = FastFeatures.patch(BetterNether.makeID("crimson_roots"), Blocks.CRIMSON_ROOTS, 32, 7, 2);
 
     public static final BCLFeature BARREL_CACTUS
             = FastFeatures.patch(BetterNether.makeID("barrel_cactus"), NetherBlocks.BARREL_CACTUS, 12, 2, 2);

@@ -56,7 +56,7 @@ import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
 import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
 import org.betterx.betternether.world.structures.NetherStructureWorld;
@@ -425,7 +425,7 @@ public class CommandRegistry {
         System.out.println("Noise: " + min + " - " + max);
 
 
-        BCLFeature feature = NetherFeatures.BONE_GRASS;
+        BCLFeature feature = BiomeFeatures.CRIMSON_GLOWING_WOODS_FLOOR;
         PlacedFeature pFeature = level
                 .registryAccess()
                 .registryOrThrow(Registry.PLACED_FEATURE_REGISTRY)

@@ -18,6 +18,7 @@ import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.plants.*;
@@ -42,7 +43,9 @@ public class CrimsonGlowingWoods extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
-                   .feature(NetherFeatures.GOLDEN_VINE)
+                   .feature(BiomeFeatures.CRIMSON_GLOWING_WOODS_FLOOR)
+                   .feature(BiomeFeatures.CRIMSON_GLOWING_WOODS_CEIL)
+                   .feature(BiomeFeatures.CRIMSON_GLOWING_WOODS_WALL)
                    .genChance(0.3f)
             ;
         }
