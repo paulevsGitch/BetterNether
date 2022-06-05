@@ -17,6 +17,13 @@ public class WallFeatures {
             2,
             8);
 
+    public static final BCLFeature WALL_MUSHROOM_BROWN
+            = FastFeatures.wallPatch(BetterNether.makeID("wall_mushroom_brown"),
+            NetherBlocks.WALL_MUSHROOM_BROWN,
+            4,
+            2,
+            8);
+
     public static void ensureStaticInitialization() {
     }
 }

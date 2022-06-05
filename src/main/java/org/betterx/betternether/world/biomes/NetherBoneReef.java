@@ -33,12 +33,6 @@ public class NetherBoneReef extends NetherBiome {
                    .feature(TerrainFeatures.LAVA_PITS_SPARE)
                    .feature(BiomeFeatures.BONE_REEF_CEIL)
                    .feature(BiomeFeatures.BONE_REEF_FLOOR)
-            //.feature(NetherFeatures.STALAGMITE_BONE_CLUSTER)
-            //.feature(NetherFeatures.BONES)
-            //.feature(NetherFeatures.BONE_GRASS)
-            //.feature(NetherFeatures.FEATHER_FERN)
-            //.feature(NetherFeatures.LUMBUS_VINE)
-            //.feature(NetherFeatures.NETHER_REEED)
             ;
         }
 

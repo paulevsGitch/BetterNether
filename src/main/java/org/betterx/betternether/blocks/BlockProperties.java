@@ -4,6 +4,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -14,13 +15,13 @@ import java.util.function.Supplier;
 
 public class BlockProperties {
     public static final EnumProperty<CincinnasitPillarShape> PILLAR_SHAPE = EnumProperty.create("shape",
-                                                                                                CincinnasitPillarShape.class);
+            CincinnasitPillarShape.class);
     public static final EnumProperty<BrownMushroomShape> BROWN_MUSHROOM_SHAPE = EnumProperty.create("shape",
-                                                                                                    BrownMushroomShape.class);
+            BrownMushroomShape.class);
     public static final EnumProperty<WillowBranchShape> WILLOW_SHAPE = EnumProperty.create("shape",
-                                                                                           WillowBranchShape.class);
+            WillowBranchShape.class);
     public static final EnumProperty<JellyShape> JELLY_MUSHROOM_VISUAL = EnumProperty.create("visual",
-                                                                                             JellyShape.class);
+            JellyShape.class);
     public static final EnumProperty<EnumLucisShape> LUCIS_SHAPE = EnumProperty.create("shape", EnumLucisShape.class);
     public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.create("plant", PottedPlantShape.class);
     public static final EnumProperty<TripleShape> TRIPLE_SHAPE = EnumProperty.create("shape", TripleShape.class);
@@ -32,8 +33,8 @@ public class BlockProperties {
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
     public static final BooleanProperty FIRE = BooleanProperty.create("fire");
 
-    public static final IntegerProperty AGE_THREE = IntegerProperty.create("age", 0, 2);
-    public static final IntegerProperty AGE_FOUR = IntegerProperty.create("age", 0, 3);
+    public static final IntegerProperty AGE_THREE = BlockStateProperties.AGE_2; //IntegerProperty.create("age", 0, 2);
+    public static final IntegerProperty AGE_FOUR = BlockStateProperties.AGE_3; //IntegerProperty.create("age", 0, 3);
 
     public enum CincinnasitPillarShape implements StringRepresentable {
         SMALL("small"),

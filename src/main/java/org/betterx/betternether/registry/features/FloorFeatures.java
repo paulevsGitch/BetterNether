@@ -3,6 +3,7 @@ package org.betterx.betternether.registry.features;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import org.betterx.bclib.api.features.BCLFeature;
 import org.betterx.bclib.api.features.BCLFeatureBuilder;
@@ -25,9 +26,11 @@ import java.util.List;
 public class FloorFeatures {
     public static final BCLFeature BONE_GRASS_PATCH
             = FastFeatures.patch(BetterNether.makeID("bone_grass"), NetherBlocks.BONE_GRASS);
-
     public static final BCLFeature SOUL_GRASS_PATCH
             = FastFeatures.patch(BetterNether.makeID("soul_grass"), NetherBlocks.SOUL_GRASS);
+
+    public static final BCLFeature NETHER_GRASS_PATCH
+            = FastFeatures.patch(BetterNether.makeID("nether_grass"), NetherBlocks.NETHER_GRASS);
     public static final BCLFeature FEATHER_FERN_PATCH
             = FastFeatures.patch(BetterNether.makeID("feather_fern"), NetherBlocks.FEATHER_FERN);
 
@@ -67,9 +70,27 @@ public class FloorFeatures {
                     cfg(BetterNether.makeID("bone_03"), 0, StructurePlacementType.FLOOR, 1.0f)
             )));
 
-    public static final BCLFeature MAGMA_FLOWER = FastFeatures.patchWitRandomInt(BetterNether.makeID("magma_flower"),
+    public static final BCLFeature MAGMA_FLOWER = FastFeatures.patchWitRandomInt(
+            BetterNether.makeID("magma_flower"),
             NetherBlocks.MAGMA_FLOWER, BlockCommonPlant.AGE,
             16, 4, 1
+    );
+    public static final BCLFeature INK_BUSH = FastFeatures.patchWitRandomInt(
+            BetterNether.makeID("ink_bush"),
+            NetherBlocks.INK_BUSH, BlockCommonPlant.AGE,
+            4, 3, 2
+    );
+    public static final BCLFeature NETHER_WART = FastFeatures.patchWitRandomInt(
+            BetterNether.makeID("nether_wart"),
+            Blocks.NETHER_WART, BlockStateProperties.AGE_3,
+            16, 3, 1
+    );
+
+
+    public static final BCLFeature BLACK_APPLE = FastFeatures.patchWitRandomInt(
+            BetterNether.makeID("black_apple"),
+            NetherBlocks.BLACK_APPLE, BlockCommonPlant.AGE,
+            8, 7, 2
     );
 
     public static final BCLFeature AGAVE = agedCluster(

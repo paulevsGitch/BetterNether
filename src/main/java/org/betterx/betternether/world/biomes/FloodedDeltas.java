@@ -37,7 +37,9 @@ public class FloodedDeltas extends NetherBiome {
                    .particles(ParticleTypes.WHITE_ASH, 0.12F)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.STALAGNATE_BLACKSTONE_CLUSTER)
-                   .feature(NetherFeatures.STALAGNATE_BASALT_CLUSTER);
+                   .feature(NetherFeatures.STALAGNATE_BASALT_CLUSTER)
+                   .genChance(0.3f)
+            ;
         }
 
         @Override

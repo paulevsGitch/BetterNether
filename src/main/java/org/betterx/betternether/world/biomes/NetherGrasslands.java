@@ -25,10 +25,12 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.plants.*;
+import org.betterx.betternether.world.structures.plants.StructureWallBrownMushroom;
+import org.betterx.betternether.world.structures.plants.StructureWallMoss;
+import org.betterx.betternether.world.structures.plants.StructureWallRedMushroom;
 
 import java.util.List;
 
@@ -61,6 +63,7 @@ class NetherGrasslandsNumericProvider implements NumericProvider {
 
 public class NetherGrasslands extends NetherBiome {
     private static final SurfaceRules.RuleSource SOUL_SOIL = SurfaceRules.state(Blocks.SOUL_SOIL.defaultBlockState());
+    private static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
     private static final SurfaceRules.RuleSource MOSS = SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
 
     private static final SurfaceRules.RuleSource BLUE = SurfaceRules.state(Blocks.BLUE_CONCRETE.defaultBlockState());
@@ -92,9 +95,8 @@ public class NetherGrasslands extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(NetherFeatures.MAGMA_FLOWER)
-                   .feature(NetherFeatures.BLACK_BUSH)
-                   .feature(NetherFeatures.NETHER_REEED)
+                   .feature(BiomeFeatures.NETHER_GRASSLANDS_FLOOR)
+                   .feature(BiomeFeatures.NETHER_GRASSLANDS_WALL)
             ;
         }
 
@@ -107,7 +109,7 @@ public class NetherGrasslands extends NetherBiome {
         public SurfaceRuleBuilder surface() {
             return super.surface()
                         .rule(new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
-                                List.of(SOUL_SOIL, MOSS, NETHERRACK)));
+                                List.of(SOUL_SOIL, SOUL_SAND, MOSS, NETHERRACK)));
         }
 
         @Override
@@ -126,12 +128,6 @@ public class NetherGrasslands extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.05F, true);
-        addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, true);
-        addStructure("ink_bush", new StructureInkBush(), StructurePlacementType.FLOOR, 0.05F, true);
-        addStructure("black_apple", new StructureBlackApple(), StructurePlacementType.FLOOR, 0.01F, true);
-        addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.02F, true);
-        addStructure("nether_grass", new StructureNetherGrass(), StructurePlacementType.FLOOR, 0.4F, true);
         addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
         addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.8F, true);
         addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.8F, true);

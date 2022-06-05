@@ -1,6 +1,7 @@
 package org.betterx.betternether.registry.features;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 
@@ -8,10 +9,7 @@ import org.betterx.bclib.api.features.BCLFeature;
 import org.betterx.bclib.api.features.FastFeatures;
 import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.BlockLumabusVine;
-import org.betterx.betternether.blocks.BlockNetherCactus;
-import org.betterx.betternether.blocks.BlockNetherReed;
-import org.betterx.betternether.blocks.BlockProperties;
+import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.ScatterFeatureConfigs;
@@ -75,7 +73,24 @@ public class VineLikeFeatures {
                     .heightRange(2, 5)
     );
 
-
+    public static final BCLFeature SMOKER
+            = FastFeatures.vine(
+            BetterNether.makeID("smoker"), true, false,
+            ScatterFeatureConfig.OnSolid
+                    .startOnSolid()
+                    .block(NetherBlocks.SMOKER
+                            .defaultBlockState()
+                            .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.MIDDLE))
+                    .tipBlock(NetherBlocks.SMOKER
+                            .defaultBlockState()
+                            .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.TOP))
+                    .bottomBlock(NetherBlocks.SMOKER
+                            .defaultBlockState()
+                            .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.BOTTOM))
+                    .heightRange(1, 5)
+                    .spread(2, 0.75f, ClampedNormalInt.of(7, 1.2f, 3, 12))
+    );
+    
     public static final BCLFeature STALAGMITE_BONE_CLUSTER = sizedCluster(
             BetterNether.makeID("stalagmite_bone_cluster"), true, false,
             ScatterFeatureConfigs.WithSize.startWithSize()
