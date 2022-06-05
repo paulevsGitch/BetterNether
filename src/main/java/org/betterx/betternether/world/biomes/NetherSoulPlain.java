@@ -13,13 +13,13 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.surface.rules.Conditions;
 import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.surface.NetherNoiseCondition;
 
 import java.util.List;
 
@@ -59,10 +59,10 @@ public class NetherSoulPlain extends NetherBiome {
         @Override
         public SurfaceRuleBuilder surface() {
             RuleSource soilSandDist
-                    = SurfaceRules.sequence(SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, SOUL_SOIL), SOUL_SAND);
+                    = SurfaceRules.sequence(SurfaceRules.ifTrue(Conditions.NETHER_VOLUME_NOISE, SOUL_SOIL), SOUL_SAND);
 
             RuleSource soilSandStoneDist
-                    = SurfaceRules.sequence(new SwitchRuleSource(NetherNoiseCondition.DEFAULT,
+                    = SurfaceRules.sequence(new SwitchRuleSource(Conditions.NETHER_NOISE,
                     List.of(SOUL_SOIL,
                             SOUL_SAND,
                             SOUL_SANDSTONE,
@@ -71,7 +71,7 @@ public class NetherSoulPlain extends NetherBiome {
                             SOUL_SAND)));
 
             RuleSource soilStoneDist
-                    = SurfaceRules.sequence(SurfaceRules.ifTrue(NetherNoiseCondition.DEFAULT, SOUL_SOIL),
+                    = SurfaceRules.sequence(SurfaceRules.ifTrue(Conditions.NETHER_VOLUME_NOISE, SOUL_SOIL),
                     SOUL_SANDSTONE);
             return super
                     .surface()

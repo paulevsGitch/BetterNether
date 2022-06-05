@@ -1,12 +1,9 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 
@@ -14,14 +11,13 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
-import org.betterx.bclib.world.structures.StructurePlacementType;
+import org.betterx.bclib.api.surface.rules.Conditions;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.plants.*;
-import org.betterx.betternether.world.surface.CrimsonWoodNoiseCondition;
 
 public class CrimsonPinewood extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -38,7 +34,9 @@ public class CrimsonPinewood extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
-                   .feature(NetherFeatures.GOLDEN_VINE)
+                   .feature(BiomeFeatures.CRIMSON_PINEWOOD_FLOOR)
+                   .feature(BiomeFeatures.CRIMSON_PINEWOOD_CEIL)
+                   .feature(BiomeFeatures.CRIMSON_PINEWOOD_WALL)
                    .genChance(0.3f)
             ;
         }
@@ -65,7 +63,7 @@ public class CrimsonPinewood extends NetherBiome {
                     .chancedFloor(
                             Blocks.NETHER_WART_BLOCK.defaultBlockState(),
                             Blocks.CRIMSON_NYLIUM.defaultBlockState(),
-                            CrimsonWoodNoiseCondition.DEFAULT
+                            Conditions.FORREST_FLOOR_SURFACE_NOISE_B
                     );
         }
     }
@@ -78,20 +76,6 @@ public class CrimsonPinewood extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("crimson_pinewood", new StructureCrimsonPinewood(), StructurePlacementType.FLOOR, 0.2F, false);
-        addStructure("wart_bush", new StructureWartBush(), StructurePlacementType.FLOOR, 0.1F, false);
-        addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.05F, true);
-        addStructure("crimson_fungus", new StructureCrimsonFungus(), StructurePlacementType.FLOOR, 0.05F, true);
-        addStructure("crimson_roots", new StructureCrimsonRoots(), StructurePlacementType.FLOOR, 0.2F, true);
-        addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.4F, true);
     }
 
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-//		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
-//			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
-//		else
-//			BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.defaultBlockState());
-    }
 }

@@ -1,12 +1,9 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
@@ -15,14 +12,12 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
-import org.betterx.bclib.world.structures.StructurePlacementType;
+import org.betterx.bclib.api.surface.rules.Conditions;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.plants.*;
-import org.betterx.betternether.world.surface.CrimsonWoodNoiseCondition;
 
 public class CrimsonGlowingWoods extends NetherBiome {
     public static final SurfaceRules.RuleSource NETHER_WART_BLOCK = SurfaceRules.state(Blocks.NETHER_WART_BLOCK.defaultBlockState());
@@ -72,17 +67,11 @@ public class CrimsonGlowingWoods extends NetherBiome {
                     .chancedFloor(
                             Blocks.NETHER_WART_BLOCK.defaultBlockState(),
                             Blocks.CRIMSON_NYLIUM.defaultBlockState(),
-                            CrimsonWoodNoiseCondition.DEFAULT
+                            Conditions.FORREST_FLOOR_SURFACE_NOISE_B
                     )
-//						.rule(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, SurfaceRules.sequence(
-//							SurfaceRules.ifTrue(new CrimsonWoodNoiseCondition(), NETHER_WART_BLOCK),
-//							CRIMSON_NYLIUM
-//						)))
                     ;
         }
     }
-
-    //private static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(614);
 
     public CrimsonGlowingWoods(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
@@ -90,24 +79,5 @@ public class CrimsonGlowingWoods extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("crimson_glowing_tree",
-                new StructureCrimsonGlowingTree(),
-                StructurePlacementType.FLOOR,
-                0.2F,
-                false);
-        addStructure("wart_bush", new StructureWartBush(), StructurePlacementType.FLOOR, 0.05F, false);
-        addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.02F, true);
-        addStructure("crimson_fungus", new StructureCrimsonFungus(), StructurePlacementType.FLOOR, 0.05F, true);
-        addStructure("crimson_roots", new StructureCrimsonRoots(), StructurePlacementType.FLOOR, 0.2F, true);
-        addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.4F, true);
-    }
-
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-//		if (TERRAIN.eval(pos.getX() * 0.1, pos.getZ() * 0.1) > MHelper.randRange(0.5F, 0.7F, random))
-//			BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
-//		else
-//			BlocksHelper.setWithoutUpdate(world, pos, Blocks.CRIMSON_NYLIUM.defaultBlockState());
     }
 }

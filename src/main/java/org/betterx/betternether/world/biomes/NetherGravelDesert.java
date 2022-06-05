@@ -13,12 +13,12 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.surface.rules.Conditions;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.SoundsRegistry;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.surface.NetherNoiseCondition;
 
 public class NetherGravelDesert extends NetherBiome {
     public static final SurfaceRules.RuleSource GRAVEL = SurfaceRules.state(Blocks.GRAVEL.defaultBlockState());
@@ -56,7 +56,7 @@ public class NetherGravelDesert extends NetherBiome {
                         .ceil(Blocks.NETHERRACK.defaultBlockState())
                         .floor(Blocks.GRAVEL.defaultBlockState())
                         .rule(3, SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, GRAVEL))
-                        .belowFloor(Blocks.GRAVEL.defaultBlockState(), 4, NetherNoiseCondition.DEFAULT)
+                        .belowFloor(Blocks.GRAVEL.defaultBlockState(), 4, Conditions.NETHER_VOLUME_NOISE)
                     ;
         }
 

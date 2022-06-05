@@ -17,6 +17,7 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.surface.rules.Conditions;
 import org.betterx.bclib.api.surface.rules.SurfaceNoiseCondition;
 import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
 import org.betterx.bclib.world.structures.StructurePlacementType;
@@ -28,7 +29,6 @@ import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.decorations.StructureForestLitter;
 import org.betterx.betternether.world.structures.plants.*;
-import org.betterx.betternether.world.surface.UpsideDownForrestCeilCondition;
 
 class UpsideDownFloorCondition extends SurfaceNoiseCondition {
     public static final UpsideDownFloorCondition DEFAULT = new UpsideDownFloorCondition();
@@ -108,7 +108,7 @@ public class UpsideDownForest extends NetherBiome {
             return super.surface().rule(2,
                     SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
                             SurfaceRules.sequence(SurfaceRules.ifTrue(
-                                    UpsideDownForrestCeilCondition.DEFAULT,
+                                    Conditions.FORREST_FLOOR_SURFACE_NOISE_A,
                                     CEILEING_MOSS), NETHERRACK)
                     )
             ).rule(2,

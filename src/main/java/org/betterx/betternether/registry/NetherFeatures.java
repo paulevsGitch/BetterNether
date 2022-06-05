@@ -26,6 +26,7 @@ import org.betterx.bclib.api.LifeCycleAPI;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BiomeAPI;
 import org.betterx.bclib.api.features.*;
+import org.betterx.bclib.api.features.config.PlaceFacingBlockConfig;
 import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
 import org.betterx.bclib.api.features.config.TemplateFeatureConfig;
 import org.betterx.bclib.api.tag.CommonBlockTags;
@@ -423,7 +424,7 @@ public class NetherFeatures {
             .count(32)
             .squarePlacement()
             .randomHeight10FromFloorCeil()
-            .findSolidSurface(List.of(Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH), 12)
+            .findSolidSurface(PlaceFacingBlockConfig.HORIZONTAL, 12, false)
             .buildAndRegister();
 
     // Ores //

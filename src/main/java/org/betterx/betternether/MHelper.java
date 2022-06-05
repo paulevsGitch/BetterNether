@@ -1,12 +1,66 @@
 package org.betterx.betternether;
 
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.PositionalRandomFactory;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MHelper {
+    static class ThreadLocalRandomSource implements RandomSource {
+        @Override
+        public RandomSource fork() {
+            return this;
+        }
+
+        @Override
+        public PositionalRandomFactory forkPositional() {
+            return null;
+        }
+
+        @Override
+        public void setSeed(long l) {
+            ThreadLocalRandom.current().setSeed(l);
+        }
+
+        @Override
+        public int nextInt() {
+            return ThreadLocalRandom.current().nextInt();
+        }
+
+        @Override
+        public int nextInt(int i) {
+            return ThreadLocalRandom.current().nextInt(i);
+        }
+
+        @Override
+        public long nextLong() {
+            return ThreadLocalRandom.current().nextLong();
+        }
+
+        @Override
+        public boolean nextBoolean() {
+            return ThreadLocalRandom.current().nextBoolean();
+        }
+
+        @Override
+        public float nextFloat() {
+            return ThreadLocalRandom.current().nextFloat();
+        }
+
+        @Override
+        public double nextDouble() {
+            return ThreadLocalRandom.current().nextDouble();
+        }
+
+        @Override
+        public double nextGaussian() {
+            return ThreadLocalRandom.current().nextGaussian();
+        }
+    }
+
     public static final float PI2 = (float) (Math.PI * 2);
     private static final int ALPHA = 255 << 24;
-    public static final RandomSource RANDOM = new LegacyRandomSource(130520220119l);
+    public static final RandomSource RANDOM = new ThreadLocalRandomSource();
 
     public static int color(int r, int g, int b) {
         return ALPHA | (r << 16) | (g << 8) | b;

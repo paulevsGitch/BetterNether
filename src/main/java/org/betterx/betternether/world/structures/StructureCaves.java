@@ -6,7 +6,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 
-import org.betterx.betternether.BlocksHelper;
+import org.betterx.bclib.util.BlocksHelper;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 
 public class StructureCaves implements IStructure {
@@ -67,7 +67,8 @@ public class StructureCaves implements IStructure {
                 for (int y = 23; y >= 0; y--) {
                     int wy = offset + y;
                     context.POS.set(wx, wy, wz);
-                    if (context.MASK[x][y][z] && BlocksHelper.isNetherGroundMagma(world.getBlockState(context.POS))) {
+                    if (context.MASK[x][y][z] && BlocksHelper.isTerrain(world.getBlockState(
+                            context.POS))) {
                         /*
                          * if (world.getBlockState(B_POS.up()).getBlock() ==
                          * Blocks.NETHER_WART_BLOCK)

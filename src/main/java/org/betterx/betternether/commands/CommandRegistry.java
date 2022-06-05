@@ -432,7 +432,7 @@ public class CommandRegistry {
                 .getHolder(feature.getPlacedFeature().unwrapKey().get())
                 .get()
                 .value();
-        var placements = pFeature.placement();
+        var placements = BiomeFeatures.defaultWallModifiers; //pFeature.placement();
         PlacementContext pctx = new PlacementContext(level,
                 level.getChunkSource().getGenerator(),
                 Optional.of(pFeature));

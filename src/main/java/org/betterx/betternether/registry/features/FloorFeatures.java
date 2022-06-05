@@ -12,6 +12,7 @@ import org.betterx.bclib.api.features.config.TemplateFeatureConfig;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.blocks.BlockCommonPlant;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.CrystalFeature;
@@ -66,25 +67,10 @@ public class FloorFeatures {
                     cfg(BetterNether.makeID("bone_03"), 0, StructurePlacementType.FLOOR, 1.0f)
             )));
 
-
-    public static final BCLFeature MAGMA_FLOWER = agedCluster(
-            BetterNether.makeID("magma_flower"), true, false, ScatterFeatureConfigs.WithPlantAge
-                    .startWithPlantAge()
-                    .singleBlock(NetherBlocks.MAGMA_FLOWER)
-                    .spread(4, 0, UniformInt.of(1, 16))
+    public static final BCLFeature MAGMA_FLOWER = FastFeatures.patchWitRandomInt(BetterNether.makeID("magma_flower"),
+            NetherBlocks.MAGMA_FLOWER, BlockCommonPlant.AGE,
+            16, 4, 1
     );
-
-//            BCLFeatureBuilder
-//            .start(BetterNether.makeID("magma_flower"), NetherFeatures.SCATTER_WITH_PLANT_AGE)
-//            .findSolidFloor(3)
-//            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
-//            //.offset(Direction.DOWN)
-//            .buildAndRegister(ScatterFeatureConfigs.WithPlantAge
-//                    .startWithPlantAge()
-//                    .singleBlock(NetherBlocks.MAGMA_FLOWER)
-//                    .spread(4, 0, UniformInt.of(1, 16))
-//                    .onFloor()
-//                    .build());
 
     public static final BCLFeature AGAVE = agedCluster(
             BetterNether.makeID("agave"), true, false, ScatterFeatureConfigs.WithPlantAge
