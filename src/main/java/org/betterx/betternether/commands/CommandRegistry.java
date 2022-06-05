@@ -61,7 +61,10 @@ import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
 import org.betterx.betternether.world.structures.NetherStructureWorld;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
@@ -90,10 +93,6 @@ public class CommandRegistry {
         dispatcher.register(
                 Commands.literal("bn")
                         .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
-                        .then(Commands.literal("request_garbage_collection")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
-                                      .executes(ctx -> requestGC(ctx))
-                        )
                         .then(Commands.literal("test_place")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> testPlace(ctx))
@@ -118,10 +117,6 @@ public class CommandRegistry {
                                                                     ctx,
                                                                     "type"))))
                         )
-                        .then(Commands.literal("debug_ore")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
-                                      .executes(ctx -> revealOre(ctx))
-                        )
                         .then(Commands.literal("place_nbt")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .then(Commands.argument("name", StringArgumentType.string())
@@ -129,20 +124,7 @@ public class CommandRegistry {
                                                             StringArgumentType.getString(ctx,
                                                                     "name"))))
                         )
-                        .then(Commands.literal("sliceZ")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
-                                      .executes(ctx -> slice(ctx, true))
-                        )
-                        .then(Commands.literal("sliceX")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
-                                      .executes(ctx -> slice(ctx, false))
-                        )
         );
-    }
-
-    private static int requestGC(CommandContext<CommandSourceStack> ctx) {
-        System.gc();
-        return Command.SINGLE_SUCCESS;
     }
 
     private static int biomeIndex = 0;
@@ -283,8 +265,6 @@ public class CommandRegistry {
         return Command.SINGLE_SUCCESS;
     }
 
-    private static final Map<Holder<Biome>, BlockState> biomeMap = new HashMap<>();
-    private static int biomeMapIdx = 0;
     private static int placeMapIdx = 0;
     private static final BlockState[] states = {
             Blocks.RED_STAINED_GLASS.defaultBlockState(),
@@ -310,81 +290,6 @@ public class CommandRegistry {
             Blocks.ORANGE_CONCRETE.defaultBlockState(),
             Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState()
     };
-
-    private static int revealOre(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-        final CommandSourceStack source = ctx.getSource();
-        final ServerLevel level = source.getLevel();
-        final Vec3 pos = source.getPosition();
-
-        MutableBlockPos bp = new MutableBlockPos();
-        BlockState state;
-        BlockState fillState;
-        final BlockState AIR = Blocks.AIR.defaultBlockState();
-
-        for (int y = 1; y < level.getHeight(); y++) {
-            bp.setY(y);
-            for (int x = -64; x < 64; x++) {
-                bp.setX((int) pos.x + x);
-                for (int z = -64; z < 64; z++) {
-                    bp.setZ((int) pos.z + z);
-                    if (y == 1) {
-                        Holder<Biome> b = level.getBiome(bp);
-                        fillState = biomeMap.computeIfAbsent(b, (bb) -> {
-                            biomeMapIdx = (biomeMapIdx + 1) % states.length;
-                            return states[biomeMapIdx];
-                        });
-                    } else {
-                        fillState = AIR;
-                    }
-
-                    state = level.getBlockState(bp);
-                    if (y == 1 || !state.is(Blocks.AIR)) {
-                        if (!(state.is(NetherBlocks.CINCINNASITE_ORE) || state.is(NetherBlocks.NETHER_RUBY_ORE) || state.is(
-                                NetherBlocks.NETHER_LAPIS_ORE) || state.is(NetherBlocks.NETHER_REDSTONE_ORE) || state.is(
-                                Blocks.NETHER_QUARTZ_ORE) || state.is(Blocks.NETHER_GOLD_ORE) || state.is(Blocks.ANCIENT_DEBRIS))) {
-                            //if (!(state.is(NetherBlocks.NETHER_RUBY_ORE)||state.is(Blocks.ANCIENT_DEBRIS)||state.is(Blocks.NETHER_QUARTZ_ORE))){
-                            BlocksHelper.setWithoutUpdate(level, bp, fillState);
-                        }
-                    }
-                }
-            }
-        }
-        return Command.SINGLE_SUCCESS;
-    }
-
-    private static int slice(CommandContext<CommandSourceStack> ctx, boolean constX) throws CommandSyntaxException {
-        final CommandSourceStack source = ctx.getSource();
-        final ServerLevel level = source.getLevel();
-        final Vec3 pos = source.getPosition();
-
-        BlockState AIR = Blocks.AIR.defaultBlockState();
-        MutableBlockPos bp = new MutableBlockPos();
-        BlockState state;
-        BlockState fillState;
-
-
-        for (int y = 1; y < level.getHeight(); y++) {
-            bp.setY(y);
-            for (int x = constX ? 0 : -64; x < 64; x++) {
-                bp.setX((int) pos.x + x);
-                for (int z = constX ? -64 : 0; z < 64; z++) {
-                    bp.setZ((int) pos.z + z);
-                    if (y == 1) {
-                        Holder<Biome> b = level.getBiome(bp);
-                        fillState = biomeMap.computeIfAbsent(b, (bb) -> {
-                            biomeMapIdx = (biomeMapIdx + 1) % states.length;
-                            return states[biomeMapIdx];
-                        });
-                    } else {
-                        fillState = AIR;
-                    }
-
-                    BlocksHelper.setWithoutUpdate(level, bp, fillState);
-                }
-            }
-        }
-        return Command.SINGLE_SUCCESS;
-    }
 
     private static int findSurface(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
