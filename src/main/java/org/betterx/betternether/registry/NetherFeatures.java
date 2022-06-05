@@ -77,7 +77,7 @@ public class NetherFeatures {
             NetherFeatures.SCATTER_WITH_SIZE);
 
     public static final BCLFeature STALAGNATE_BLACKSTONE_CLUSTER = ScatterFeature.createAndRegister(
-            BetterNether.makeID("stalagmite_blackstone_cluster"),
+            BetterNether.makeID("old_stalagmite_blackstone_cluster"),
             5,
             40,
             ScatterFeatureConfigs.WithSize.startWithSize()
@@ -89,7 +89,7 @@ public class NetherFeatures {
             NetherFeatures.SCATTER_WITH_SIZE);
 
     public static final BCLFeature STALAGNATE_BASALT_CLUSTER = ScatterFeature.createAndRegister(
-            BetterNether.makeID("stalagmite_basalt_cluster"),
+            BetterNether.makeID("old_stalagmite_basalt_cluster"),
             5,
             40,
             ScatterFeatureConfigs.WithSize.startWithSize()

@@ -1,18 +1,28 @@
 package org.betterx.betternether.registry.features;
 
 import net.minecraft.core.Direction;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 
 import org.betterx.bclib.api.features.BCLFeature;
 import org.betterx.bclib.api.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.features.FastFeatures;
+import org.betterx.bclib.api.features.blockpredicates.IsFullShape;
+import org.betterx.bclib.api.features.config.ConditionFeatureConfig;
+import org.betterx.bclib.api.features.config.SequenceFeatureConfig;
+import org.betterx.bclib.api.features.placement.IsBasin;
 import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.betternether.BetterNether;
+
+import java.util.List;
 
 public class TerrainFeatures {
     public static final BCLFeature MAGMA_BLOBS = BCLFeatureBuilder
@@ -56,6 +66,57 @@ public class TerrainFeatures {
                     BlockPredicate.matchesBlocks(Blocks.LAVA)
             ))
             .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LAVA)));
+
+    Object a = new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList
+            .<BlockState>builder()
+            .add(Blocks.BASALT.defaultBlockState(), 15)
+            .add(Blocks.AIR.defaultBlockState(), 15)
+    ));
+
+    public static final BCLFeature MARK = BCLFeatureBuilder
+            .start(BetterNether.makeID("mark"), BCLFeature.MARK_POSTPROCESSING)
+            .is(BlockPredicate.matchesBlocks(Blocks.LAVA))
+            .buildAndRegister();
+
+    public static final BCLFeature LAVA = FastFeatures.single(BetterNether.makeID("lava"), Blocks.LAVA);
+    public static final BCLFeature BASALT_OR_AIR = BCLFeatureBuilder
+            .start(BetterNether.makeID("basalt_or_air"), new WeightedStateProvider(SimpleWeightedRandomList
+                    .<BlockState>builder()
+                    .add(Blocks.BASALT.defaultBlockState(), 15)
+                    .add(Blocks.AIR.defaultBlockState(), 15)
+            )).buildAndRegister();
+
+    public static final BCLFeature EXTEND_BASALT = BCLFeatureBuilder
+            .start(BetterNether.makeID("extend_basalt"), Blocks.BASALT)
+            .offset(Direction.DOWN)
+            .extendDown(1, 3)
+            .buildAndRegister();
+
+    public static final BCLFeature FLOODED_LAVA_PIT_SURFACE = BCLFeatureBuilder
+            .start(BetterNether.makeID("flooded_lava_pit_surface"), BCLFeature.CONDITION)
+            .buildAndRegister(new ConditionFeatureConfig(
+                            IsBasin.simple(
+                                    BlockPredicate.anyOf(
+                                            BlockPredicate.matchesBlocks(Blocks.LAVA),
+                                            IsFullShape.HERE
+                                    )
+                            ),
+                            LAVA,
+                            BASALT_OR_AIR
+                    )
+            );
+
+
+    public static final BCLFeature FLOODED_LAVA_PIT = BCLFeatureBuilder
+            .start(BetterNether.makeID("flooded_lava_pit"), BCLFeature.SEQUENCE)
+            .decoration(GenerationStep.Decoration.LAKES)
+            .all()
+            .onEveryLayer()
+            .offset(Direction.DOWN)
+            .onlyInBiome()
+            .buildAndRegister(
+                    SequenceFeatureConfig.create(List.of(EXTEND_BASALT, FLOODED_LAVA_PIT_SURFACE, MARK))
+            );
 
     public static void ensureStaticInitialization() {
     }

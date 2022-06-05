@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
 
 import org.betterx.bclib.api.features.BCLFeature;
 import org.betterx.bclib.api.features.FastFeatures;
@@ -90,7 +91,7 @@ public class VineLikeFeatures {
                     .heightRange(1, 5)
                     .spread(2, 0.75f, ClampedNormalInt.of(7, 1.2f, 3, 12))
     );
-    
+
     public static final BCLFeature STALAGMITE_BONE_CLUSTER = sizedCluster(
             BetterNether.makeID("stalagmite_bone_cluster"), true, false,
             ScatterFeatureConfigs.WithSize.startWithSize()
@@ -102,6 +103,54 @@ public class VineLikeFeatures {
                                                   0.5f)
                                           .heightRange(2, 7)
                                           .spread(3, 0f, UniformInt.of(3, 16))
+    );
+
+    public static final BCLFeature STALAGMITE_BLACKSTONE_CLUSTER = sizedCluster(
+            BetterNether.makeID("stalagmite_blackstone_cluster"), true, false,
+            ScatterFeatureConfigs.WithSize.startWithSize()
+                                          .block(NetherBlocks.BLACKSTONE_STALACTITE)
+                                          .generateBaseBlock(
+                                                  Blocks.BLACK_GLAZED_TERRACOTTA.defaultBlockState(),
+                                                  0.95f, 0.3f, 0.75f, 0.5f
+                                          )
+                                          .heightRange(2, 7)
+                                          .spread(2, 0.2f, UniformInt.of(5, 6))
+    );
+
+    public static final BCLFeature STALAGMITE_BASALT_CLUSTER = sizedCluster(
+            BetterNether.makeID("stalagmite_basalt_cluster"), true, false,
+            ScatterFeatureConfigs.WithSize.startWithSize()
+                                          .block(NetherBlocks.BASALT_STALACTITE)
+                                          .generateBaseBlock(
+                                                  Blocks.DEEPSLATE.defaultBlockState(),
+                                                  1, 0.6f, 0.75f, 0.5f
+                                          )
+                                          .heightRange(2, 7)
+                                          .spread(2, 0.2f, UniformInt.of(5, 6))
+    );
+
+    public static final BCLFeature STALACTITE_BLACKSTONE_CLUSTER = sizedCluster(
+            BetterNether.makeID("stalactite_blackstone_cluster"), false, false,
+            ScatterFeatureConfigs.WithSize.startWithSize()
+                                          .block(NetherBlocks.BLACKSTONE_STALACTITE)
+                                          .generateBaseBlock(
+                                                  Blocks.BLACK_GLAZED_TERRACOTTA.defaultBlockState(),
+                                                  0.95f, 0.3f, 0.75f, 0.5f
+                                          )
+                                          .heightRange(2, 7)
+                                          .spread(2, 0.2f, UniformInt.of(5, 6))
+    );
+
+    public static final BCLFeature STALACTITE_BASALT_CLUSTER = sizedCluster(
+            BetterNether.makeID("stalactite_basalt_cluster"), false, false,
+            ScatterFeatureConfigs.WithSize.startWithSize()
+                                          .block(NetherBlocks.BASALT_STALACTITE)
+                                          .generateBaseBlock(
+                                                  Blocks.DEEPSLATE.defaultBlockState(),
+                                                  1, 0.6f, 0.75f, 0.5f
+                                          )
+                                          .heightRange(2, 7)
+                                          .spread(2, 0.2f, UniformInt.of(5, 6))
     );
 
     public static void ensureStaticInitialization() {

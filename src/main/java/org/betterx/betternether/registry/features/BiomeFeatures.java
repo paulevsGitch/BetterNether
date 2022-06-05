@@ -2,6 +2,7 @@ package org.betterx.betternether.registry.features;
 
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
@@ -110,6 +111,16 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_BROWN.getPlacedFeature(), 0.25f)
     ), 1);
 
+    public static final BCLFeature FLOODED_DELTAS_FLOOR = floorFromChanced("flooded_deltas", List.of(
+            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_BASALT_CLUSTER.getPlacedFeature(), 0.3f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_BLACKSTONE_CLUSTER.getPlacedFeature(), 0.3f)
+    ), 0);
+
+    public static final BCLFeature FLOODED_DELTAS_CEIL = ceilFromChanced("flooded_deltas", List.of(
+            new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_BASALT_CLUSTER.getPlacedFeature(), 0.3f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_BLACKSTONE_CLUSTER.getPlacedFeature(), 0.3f)
+    ), 0);
+
     public static BCLFeature floorFromWeighted(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
         return fromWeighted(name, features, defaultIndex, "floor", defaultFloorModifiers);
     }
@@ -135,6 +146,30 @@ public class BiomeFeatures {
                         ? new RandomFeatureConfiguration(List.of(),
                         features.get(0).feature)
                         : new RandomFeatureConfiguration(features, features.get(defaultIndex).feature));
+    }
+
+    public static BCLFeature floorFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
+        return fromChanced(name, features, defaultIndex, "floor", defaultFloorModifiers);
+    }
+
+    public static BCLFeature ceilFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
+        return fromChanced(name, features, defaultIndex, "ceil", defaultCeilModifiers);
+    }
+
+    public static BCLFeature wallFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
+        return fromChanced(name, features, defaultIndex, "wall", defaultWallModifiers);
+    }
+
+    public static BCLFeature fromChanced(String name,
+                                         List<WeightedPlacedFeature> features,
+                                         int defaultIndex,
+                                         String postFix,
+                                         List<PlacementModifier> modifiers) {
+        return BCLFeatureBuilder
+                .start(BetterNether.makeID(name + "_" + postFix), Feature.RANDOM_SELECTOR)
+                .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+                .modifier(modifiers)
+                .buildAndRegister(new RandomFeatureConfiguration(features, features.get(defaultIndex).feature));
     }
 
     public static void ensureStaticInitialization() {
