@@ -18,6 +18,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.BigBrownMushroomFeature;
 import org.betterx.betternether.world.features.MushroomFirFeature;
 import org.betterx.betternether.world.features.RubeusTreeFeature;
+import org.betterx.betternether.world.features.WillowFeature;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 
 import java.util.List;
@@ -98,6 +99,13 @@ public class TreeFeatures {
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
                     .buildAndRegister(NaturalTreeConfiguration.natural()));
 
+    public static final BCLFeature WILLOW
+            = FastFeatures.patch(BetterNether.makeID("willow"),
+            2, 2, 4,
+            BCLFeatureBuilder
+                    .start(BetterNether.makeID("willow"), new WillowFeature())
+                    .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+                    .buildAndRegister());
 
     static StructureWorldNBT cfg(ResourceLocation location,
                                  int offsetY,

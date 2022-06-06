@@ -15,10 +15,7 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BlockCommonPlant;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.world.features.CrystalFeature;
-import org.betterx.betternether.world.features.JellyfishMushroomFeature;
-import org.betterx.betternether.world.features.RubeusBushFeature;
-import org.betterx.betternether.world.features.WartBushFeature;
+import org.betterx.betternether.world.features.*;
 
 import java.util.List;
 
@@ -36,8 +33,12 @@ public class FloorFeatures {
     public static final BCLFeature SOUL_GRASS_PATCH
             = FastFeatures.patch(BetterNether.makeID("soul_grass"), NetherBlocks.SOUL_GRASS);
 
+    public static final BCLFeature SWAMP_GRASS
+            = FastFeatures.patch(BetterNether.makeID("swamp_grass"), NetherBlocks.SWAMP_GRASS);
+
     public static final BCLFeature NETHER_GRASS_PATCH
             = FastFeatures.patch(BetterNether.makeID("nether_grass"), NetherBlocks.NETHER_GRASS);
+
     public static final BCLFeature FEATHER_FERN_PATCH
             = FastFeatures.patch(BetterNether.makeID("feather_fern"), NetherBlocks.FEATHER_FERN);
 
@@ -52,6 +53,9 @@ public class FloorFeatures {
 
     public static final BCLFeature RUBEUS_BUSH_PATCH
             = FastFeatures.patch(BetterNether.makeID("rubeus_bush"), 16, 5, 3, new RubeusBushFeature());
+
+    public static final BCLFeature WILLOW_BUSH_PATCH
+            = FastFeatures.patch(BetterNether.makeID("willow_bush"), 2, 5, 3, new WillowBush());
 
 
     public static final BCLFeature CRIMSON_FUNGUS

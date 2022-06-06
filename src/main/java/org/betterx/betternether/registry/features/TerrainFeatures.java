@@ -1,6 +1,7 @@
 package org.betterx.betternether.registry.features;
 
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.block.Blocks;
@@ -10,7 +11,9 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import org.betterx.bclib.api.features.BCLFeature;
 import org.betterx.bclib.api.features.BCLFeatureBuilder;
@@ -21,6 +24,7 @@ import org.betterx.bclib.api.features.config.SequenceFeatureConfig;
 import org.betterx.bclib.api.features.placement.IsBasin;
 import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.registry.NetherBlocks;
 
 import java.util.List;
 
@@ -66,12 +70,51 @@ public class TerrainFeatures {
                     BlockPredicate.matchesBlocks(Blocks.LAVA)
             ))
             .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LAVA)));
+    public static final SimpleBlockConfiguration LAWA_SWAMP_CONFIG = new SimpleBlockConfiguration(new NoiseProvider(
+            2345L,
+            new NormalNoise.NoiseParameters(0, 1.0, new double[0]),
+            0.021741f,
+            List.of(
+                    Blocks.LAVA.defaultBlockState(),
+                    NetherBlocks.SWAMPLAND_GRASS.defaultBlockState(),
+                    Blocks.LAVA.defaultBlockState(),
+                    Blocks.SOUL_SOIL.defaultBlockState(),
+                    Blocks.LAVA.defaultBlockState(),
+                    Blocks.SOUL_SAND.defaultBlockState()
+            )));
 
-    Object a = new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList
-            .<BlockState>builder()
-            .add(Blocks.BASALT.defaultBlockState(), 15)
-            .add(Blocks.AIR.defaultBlockState(), 15)
-    ));
+    public static final BCLFeature LAVA_SWAMP = BCLFeatureBuilder
+            .start(BetterNether.makeID("lava_swamp"), Feature.SIMPLE_BLOCK)
+            .decoration(GenerationStep.Decoration.LAKES)
+            .all()
+            .onEveryLayer()
+            .onlyInBiome()
+            .offset(Direction.DOWN)
+            .inBasinOf(BlockPredicate.anyOf(
+                    BlockPredicate.matchesTag(CommonBlockTags.TERRAIN),
+                    BlockPredicate.matchesBlocks(Blocks.LAVA)
+            ))
+            .offset(new Vec3i(0, -2, 0))
+            .inBasinOf(BlockPredicate.anyOf(
+                    BlockPredicate.matchesTag(CommonBlockTags.TERRAIN),
+                    BlockPredicate.matchesBlocks(Blocks.LAVA)
+            ))
+            .offset(new Vec3i(0, 2, 0))
+            .extendDown(1, 2)
+            .buildAndRegister(LAWA_SWAMP_CONFIG);
+
+    public static final BCLFeature LAVA_TERRACE = BCLFeatureBuilder
+            .start(BetterNether.makeID("lava_terrace"), Blocks.LAVA)
+            .decoration(GenerationStep.Decoration.LAKES)
+            .all()
+            .onEveryLayer()
+            .onlyInBiome()
+            .offset(Direction.DOWN)
+            .inBasinOf(BlockPredicate.anyOf(
+                    BlockPredicate.matchesTag(CommonBlockTags.TERRAIN),
+                    BlockPredicate.matchesBlocks(Blocks.LAVA)
+            ))
+            .buildAndRegister();
 
     public static final BCLFeature MARK = BCLFeatureBuilder
             .start(BetterNether.makeID("mark"), BCLFeature.MARK_POSTPROCESSING)

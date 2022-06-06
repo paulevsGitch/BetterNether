@@ -195,7 +195,7 @@ public class VineLikeFeatures {
             ScatterFeatureConfigs.WithSize.startWithSize()
                                           .block(NetherBlocks.NETHERRACK_STALACTITE)
                                           .heightRange(2, 7)
-                                          .spread(4, 0.3f, ClampedNormalInt.of(8, 1.4f, 2, 10))
+                                          .spread(4, 0.3f, ClampedNormalInt.of(8, 1.4f, 4, 10))
     );
 
     public static final BCLFeature STALACTITE_BLACKSTONE_CLUSTER = sizedCluster(
@@ -227,7 +227,7 @@ public class VineLikeFeatures {
             ScatterFeatureConfigs.WithSize.startWithSize()
                                           .block(NetherBlocks.NETHERRACK_STALACTITE)
                                           .heightRange(2, 7)
-                                          .spread(4, 0.3f, ClampedNormalInt.of(8, 1.4f, 2, 10))
+                                          .spread(4, 0.3f, ClampedNormalInt.of(8, 1.4f, 4, 10))
     );
 
     public static void ensureStaticInitialization() {
