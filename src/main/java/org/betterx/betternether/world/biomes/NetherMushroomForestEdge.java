@@ -1,11 +1,8 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
@@ -17,17 +14,13 @@ import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
 import org.betterx.bclib.interfaces.NumericProvider;
 import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
-import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.plants.StructureGrayMold;
-import org.betterx.betternether.world.structures.plants.StructureOrangeMushroom;
-import org.betterx.betternether.world.structures.plants.StructureRedMold;
-import org.betterx.betternether.world.structures.plants.StructureVanillaMushroom;
 
 import java.util.List;
 
@@ -66,7 +59,9 @@ public class NetherMushroomForestEdge extends NetherBiome {
                    .additions(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS)
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
-                   .feature(NetherFeatures.NETHER_RUBY_ORE);
+                   .feature(NetherFeatures.NETHER_RUBY_ORE)
+                   .feature(BiomeFeatures.MUSHROOM_FORREST_EDGE_FLOOR)
+            ;
         }
 
         @Override
@@ -99,17 +94,6 @@ public class NetherMushroomForestEdge extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("orange_mushroom", new StructureOrangeMushroom(), StructurePlacementType.FLOOR, 0.05F, true);
-        addStructure("vanilla_mushrooms", new StructureVanillaMushroom(), StructurePlacementType.FLOOR, 0.1F, false);
-        addStructure("red_mold", new StructureRedMold(), StructurePlacementType.FLOOR, 0.5F, false);
-        addStructure("gray_mold", new StructureGrayMold(), StructurePlacementType.FLOOR, 0.5F, false);
     }
 
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-//		if (random.nextInt(4) > 0)
-//			BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHER_MYCELIUM.defaultBlockState());
-//		else if (random.nextBoolean())
-//			BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
-    }
 }

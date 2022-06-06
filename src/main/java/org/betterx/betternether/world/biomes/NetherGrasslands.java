@@ -62,9 +62,9 @@ class NetherGrasslandsNumericProvider implements NumericProvider {
 }
 
 public class NetherGrasslands extends NetherBiome {
-    private static final SurfaceRules.RuleSource SOUL_SOIL = SurfaceRules.state(Blocks.SOUL_SOIL.defaultBlockState());
-    private static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
-    private static final SurfaceRules.RuleSource MOSS = SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
+    static final SurfaceRules.RuleSource SOUL_SOIL = SurfaceRules.state(Blocks.SOUL_SOIL.defaultBlockState());
+    static final SurfaceRules.RuleSource SOUL_SAND = SurfaceRules.state(Blocks.SOUL_SAND.defaultBlockState());
+    static final SurfaceRules.RuleSource MOSS = SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
 
     private static final SurfaceRules.RuleSource BLUE = SurfaceRules.state(Blocks.BLUE_CONCRETE.defaultBlockState());
     private static final SurfaceRules.RuleSource LIGHT_BLUE = SurfaceRules.state(Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState());
@@ -108,8 +108,15 @@ public class NetherGrasslands extends NetherBiome {
         @Override
         public SurfaceRuleBuilder surface() {
             return super.surface()
-                        .rule(new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
-                                List.of(SOUL_SOIL, SOUL_SAND, MOSS, NETHERRACK)));
+                        .rule(SurfaceRules.sequence(
+                                SurfaceRules.ifTrue(
+                                        SurfaceRules.ON_FLOOR,
+                                        new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
+                                                List.of(SOUL_SOIL, SOUL_SAND, NETHERRACK))
+                                ),
+                                new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
+                                        List.of(SOUL_SOIL, SOUL_SAND, MOSS, NETHERRACK))
+                        ));
         }
 
         @Override

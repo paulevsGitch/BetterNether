@@ -139,6 +139,28 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(WallFeatures.LUCIS_FEATURE.getPlacedFeature(), 0.4f)
     ), 1);
 
+    public static final BCLFeature MUSHROOM_FORREST_EDGE_FLOOR = floorFromChanced("mushroom_forrest_edge", List.of(
+            new WeightedPlacedFeature(FloorFeatures.ORANGE_MUSHROOM.getPlacedFeature(), 0.05f),
+            new WeightedPlacedFeature(FloorFeatures.VANILLA_RED_MUSHROOM.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(FloorFeatures.VANILLA_BROWN_MUSHROOM.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(FloorFeatures.RED_MOLD.getPlacedFeature(), 0.05f),
+            new WeightedPlacedFeature(FloorFeatures.GRAY_MOLD.getPlacedFeature(), 0.05f)
+    ), 0);
+
+    public static final BCLFeature POOR_GRASSLAND_FLOOR = floorFromChanced("poor_grassland", List.of(
+            new WeightedPlacedFeature(FloorFeatures.NETHER_WART.getPlacedFeature(), 0.005f),
+            new WeightedPlacedFeature(VineLikeFeatures.SMOKER.getPlacedFeature(), 0.005f),
+            new WeightedPlacedFeature(FloorFeatures.MAGMA_FLOWER.getPlacedFeature(), 0.005f),
+            new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.001f),
+            new WeightedPlacedFeature(VineLikeFeatures.NETHER_REED.getPlacedFeature(), 0.002f),
+            new WeightedPlacedFeature(FloorFeatures.INK_BUSH.getPlacedFeature(), 0.001f),
+            new WeightedPlacedFeature(FloorFeatures.BLACK_APPLE.getPlacedFeature(), 0.001f),
+            new WeightedPlacedFeature(FloorFeatures.WART_SEED_PATCH.getPlacedFeature(), 0.002f),
+            new WeightedPlacedFeature(FloorFeatures.NETHER_GRASS_PATCH.getPlacedFeature(), 0.04f)
+
+    ), 0);
+
+
     public static BCLFeature floorFromWeighted(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
         return fromWeighted(name, features, defaultIndex, "floor", defaultFloorModifiers);
     }

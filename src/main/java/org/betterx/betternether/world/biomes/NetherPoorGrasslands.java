@@ -1,24 +1,25 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
+import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.surface.rules.Conditions;
+import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
 import org.betterx.bclib.world.structures.StructurePlacementType;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.plants.*;
+
+import java.util.List;
 
 public class NetherPoorGrasslands extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -34,9 +35,7 @@ public class NetherPoorGrasslands extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(NetherFeatures.MAGMA_FLOWER_SPARSE)
-                   .feature(NetherFeatures.BLACK_BUSH_SPARSE)
-                   .feature(NetherFeatures.NETHER_REEED_SPARSE)
+                   .feature(BiomeFeatures.POOR_GRASSLAND_FLOOR)
                    .genChance(0.3F)
             ;
         }
@@ -44,6 +43,26 @@ public class NetherPoorGrasslands extends NetherBiome {
         @Override
         public BiomeSupplier<NetherBiome> getSupplier() {
             return NetherPoorGrasslands::new;
+        }
+
+        @Override
+        public SurfaceRuleBuilder surface() {
+            SurfaceRules.RuleSource soilStoneDist
+                    = SurfaceRules.sequence(SurfaceRules.ifTrue(Conditions.NETHER_VOLUME_NOISE,
+                            NetherGrasslands.SOUL_SOIL),
+                    SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState()));
+            return super
+                    .surface()
+                    .rule(SurfaceRules.sequence(
+                            SurfaceRules.ifTrue(
+                                    SurfaceRules.ON_FLOOR,
+                                    new SwitchRuleSource(
+                                            Conditions.NETHER_NOISE,
+                                            List.of(NetherGrasslands.MOSS, NetherGrasslands.SOUL_SOIL, NETHERRACK)
+                                    )
+                            ),
+                            soilStoneDist
+                    ));
         }
     }
 
@@ -59,26 +78,5 @@ public class NetherPoorGrasslands extends NetherBiome {
         addStructure("black_apple", new StructureBlackApple(), StructurePlacementType.FLOOR, 0.001F, true);
         addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.002F, true);
         addStructure("nether_grass", new StructureNetherGrass(), StructurePlacementType.FLOOR, 0.04F, true);
-    }
-
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-        switch (random.nextInt(3)) {
-            case 0:
-                BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
-                break;
-            case 1:
-                BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
-                break;
-            default:
-                super.genSurfColumn(world, pos, random);
-                break;
-        }
-        for (int i = 1; i < random.nextInt(3); i++) {
-            BlockPos down = pos.below(i);
-            if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down))) {
-                BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.defaultBlockState());
-            }
-        }
     }
 }
