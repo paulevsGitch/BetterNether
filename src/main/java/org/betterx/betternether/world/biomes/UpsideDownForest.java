@@ -1,13 +1,10 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.KeyDispatchDataCodec;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
@@ -144,10 +141,5 @@ public class UpsideDownForest extends NetherBiome {
         addStructure("neon_equisetum", new StructureNeonEquisetum(), StructurePlacementType.CEIL, 0.1F, true);
         addStructure("hook_mushroom", new StructureHookMushroom(), StructurePlacementType.CEIL, 0.03F, true);
         addStructure("whispering_gourd", new StructureWhisperingGourd(), StructurePlacementType.CEIL, 0.02F, true);
-    }
-
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-        //BlocksHelper.setWithoutUpdate(world, pos, random.nextInt(3) == 0 ? NetherBlocks.NETHERRACK_MOSS.defaultBlockState() : Blocks.NETHERRACK.defaultBlockState());
     }
 }

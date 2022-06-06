@@ -116,6 +116,16 @@ public class TerrainFeatures {
             ))
             .buildAndRegister();
 
+    public static final BCLFeature NO_SURFACE_SANDSTONE = BCLFeatureBuilder
+            .start(BetterNether.makeID("no_surface_sandstone"), Blocks.SOUL_SAND)
+            .decoration(GenerationStep.Decoration.LOCAL_MODIFICATIONS)
+            .all()
+            .onEveryLayer()
+            .onlyInBiome()
+            .offset(Direction.DOWN)
+            .is(BlockPredicate.matchesBlocks(NetherBlocks.SOUL_SANDSTONE))
+            .buildAndRegister();
+
     public static final BCLFeature MARK = BCLFeatureBuilder
             .start(BetterNether.makeID("mark"), BCLFeature.MARK_POSTPROCESSING)
             .is(BlockPredicate.matchesBlocks(Blocks.LAVA))

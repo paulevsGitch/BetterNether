@@ -56,6 +56,75 @@ public class TreeFeatures {
                     cfg(BetterNether.makeID("trees/wart_fallen_log"), 0, StructurePlacementType.FLOOR, 1.0f)
             )));
 
+    public static final BCLFeature OLD_RED_MUSHROOM = BCLFeatureBuilder
+            .start(BetterNether.makeID("old_red_mushroom"), BCLFeature.TEMPLATE)
+            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .offset(Direction.DOWN)
+            .buildAndRegister(new TemplateFeatureConfig(List.of(
+                    cfg(BetterNether.makeID("trees/red_mushroom_02"), -0, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/red_mushroom_03"), -0, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/red_mushroom_01"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/red_mushroom_04"), -3, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/red_mushroom_05"), -3, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/red_mushroom_06"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/red_mushroom_07"), -4, StructurePlacementType.FLOOR, 1.0f)
+            )));
+
+    public static final BCLFeature OLD_RED_MUSHROOM_CLUSTER = BCLFeatureBuilder
+            .start(BetterNether.makeID("old_red_mushroom_cluster"), OLD_RED_MUSHROOM.getFeature())
+            .countRange(2, 4)
+            .spreadHorizontal(UniformInt.of(-16, 16))
+            .findSolidFloor(3)
+            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
+            .buildAndRegister(OLD_RED_MUSHROOM.getConfiguration());
+
+    public static final BCLFeature OLD_BROWN_MUSHROOM = BCLFeatureBuilder
+            .start(BetterNether.makeID("old_brown_mushroom"), BCLFeature.TEMPLATE)
+            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .offset(Direction.DOWN)
+            .buildAndRegister(new TemplateFeatureConfig(List.of(
+                    cfg(BetterNether.makeID("trees/brown_mushroom_02"), -3, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/brown_mushroom_03"), -2, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/brown_mushroom_01"), -2, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/brown_mushroom_04"), -1, StructurePlacementType.FLOOR, 1.0f)
+
+            )));
+
+    public static final BCLFeature OLD_BROWN_MUSHROOM_CLUSTER = BCLFeatureBuilder
+            .start(BetterNether.makeID("old_brown_mushroom_cluster"), OLD_BROWN_MUSHROOM.getFeature())
+            .countRange(2, 4)
+            .spreadHorizontal(UniformInt.of(-16, 16))
+            .findSolidFloor(3)
+            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
+            .buildAndRegister(OLD_BROWN_MUSHROOM.getConfiguration());
+
+    public static final BCLFeature BIG_WARPED_TREE = BCLFeatureBuilder
+            .start(BetterNether.makeID("big_warped_tree"), BCLFeature.TEMPLATE)
+            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .offset(Direction.DOWN)
+            .buildAndRegister(new TemplateFeatureConfig(List.of(
+                    cfg(BetterNether.makeID("trees/warped_tree_01"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/warped_tree_02"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/warped_tree_03"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/warped_tree_04"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/warped_tree_05"), -3, StructurePlacementType.FLOOR, 1.0f)
+            )));
+
+
+    public static final BCLFeature BIG_WARPED_TREE_CLUSTER = BCLFeatureBuilder
+            .start(BetterNether.makeID("big_warped_tree_cluster"), BIG_WARPED_TREE.getFeature())
+            .countRange(2, 4)
+            .spreadHorizontal(UniformInt.of(-16, 16))
+            .findSolidFloor(3)
+            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .buildAndRegister(BIG_WARPED_TREE.getConfiguration());
+
     //TODO: 1.19 make sure we are placed over mycelium
     public static final BCLFeature BIG_RED_MUSHROOM_CLUSTER
             = FastFeatures.vine(
@@ -75,7 +144,7 @@ public class TreeFeatures {
     public static final BCLFeature BIG_BROWN_MUSHROOM_CLUSTER = BCLFeatureBuilder
             .start(BetterNether.makeID("big_brown_mushroom_cluster"), BIG_BROWN_MUSHROOM.getFeature())
             .count(10)
-            .spreadHorizontal(UniformInt.of(8, 12))
+            .spreadHorizontal(UniformInt.of(-12, 12))
             .findSolidFloor(3)
             .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
             .buildAndRegister();
@@ -118,6 +187,14 @@ public class TreeFeatures {
                     .start(BetterNether.makeID("willow_tree"), new WillowTreeFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
                     .buildAndRegister());
+
+    public static final BCLFeature OLD_WILLOW
+            = FastFeatures.patch(BetterNether.makeID("old_willow_tree"),
+            4, 8, 4,
+            BCLFeatureBuilder
+                    .start(BetterNether.makeID("old_willow_tree"), new OldWillowTree())
+                    .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+                    .buildAndRegister(NaturalTreeConfiguration.naturalLarge()));
 
     public static final BCLFeature WART
             = FastFeatures.patch(BetterNether.makeID("wart_tree"),

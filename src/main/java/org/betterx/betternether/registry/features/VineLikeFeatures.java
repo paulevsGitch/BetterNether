@@ -7,11 +7,14 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 
 import org.betterx.bclib.api.features.BCLFeature;
+import org.betterx.bclib.api.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.features.FastFeatures;
 import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
+import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockNetherCactus;
@@ -19,6 +22,8 @@ import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.ScatterFeatureConfigs;
+import org.betterx.betternether.world.features.TwistedVinesFeature;
+import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 
 public class VineLikeFeatures {
     public static final BCLFeature GOLDEN_VINE
@@ -229,6 +234,13 @@ public class VineLikeFeatures {
                                           .heightRange(2, 7)
                                           .spread(4, 0.3f, ClampedNormalInt.of(8, 1.4f, 4, 10))
     );
+
+    public static final BCLFeature TWISTED_VINES = FastFeatures.patch(BetterNether.makeID("twisted_vines"),
+            10, 8, 4,
+            BCLFeatureBuilder
+                    .start(BetterNether.makeID("twisted_vines"), new TwistedVinesFeature())
+                    .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+                    .buildAndRegister(NaturalTreeConfiguration.naturalLarge()));
 
     public static void ensureStaticInitialization() {
     }

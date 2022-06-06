@@ -330,7 +330,7 @@ public class CommandRegistry {
         System.out.println("Noise: " + min + " - " + max);
 
 
-        BCLFeature feature = TreeFeatures.BIG_RED_MUSHROOM_CLUSTER;
+        BCLFeature<?, ?> feature = TreeFeatures.BIG_RED_MUSHROOM_CLUSTER;
         PlacedFeature pFeature = level
                 .registryAccess()
                 .registryOrThrow(Registry.PLACED_FEATURE_REGISTRY)

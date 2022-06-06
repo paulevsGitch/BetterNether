@@ -14,6 +14,8 @@ public class NaturalTreeConfiguration implements FeatureConfiguration {
             .apply(instance, NaturalTreeConfiguration::new));
     private static final NaturalTreeConfiguration NATURAL = new NaturalTreeConfiguration(true, 7);
     private static final NaturalTreeConfiguration USER = new NaturalTreeConfiguration(false, 7);
+    private static final NaturalTreeConfiguration NATURAL_LARGE = new NaturalTreeConfiguration(true, 13);
+    private static final NaturalTreeConfiguration USER_LARGE = new NaturalTreeConfiguration(false, 13);
     public final boolean natural;
     public final int distance;
     public final int manDist;
@@ -30,5 +32,13 @@ public class NaturalTreeConfiguration implements FeatureConfiguration {
 
     public static NaturalTreeConfiguration userGrown() {
         return USER;
+    }
+    
+    public static NaturalTreeConfiguration naturalLarge() {
+        return NATURAL_LARGE;
+    }
+
+    public static NaturalTreeConfiguration userGrownLarge() {
+        return USER_LARGE;
     }
 }

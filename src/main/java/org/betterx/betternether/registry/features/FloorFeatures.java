@@ -3,6 +3,9 @@ package org.betterx.betternether.registry.features;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import org.betterx.bclib.api.features.BCLFeature;
 import org.betterx.bclib.api.features.BCLFeatureBuilder;
@@ -20,11 +23,30 @@ import org.betterx.betternether.world.features.*;
 import java.util.List;
 
 public class FloorFeatures {
-    public static final BCLFeature VANILLA_RED_MUSHROOM
-            = FastFeatures.patch(BetterNether.makeID("vanilla_red_mushroom"), Blocks.RED_MUSHROOM, 5, 6, 3);
 
-    public static final BCLFeature VANILLA_BROWN_MUSHROOM
-            = FastFeatures.patch(BetterNether.makeID("vanilla_brown_mushroom"), Blocks.BROWN_MUSHROOM, 5, 6, 3);
+    public static final BlockStateProvider VANILLA_MUSHROOM_PROVIDER =
+            new NoiseThresholdProvider(2345L,
+                    new NormalNoise.NoiseParameters(0, 1.0, new double[0]),
+                    0.005f,
+                    -0.8f,
+                    0.33333334f,
+                    Blocks.DANDELION.defaultBlockState(),
+                    List.of(Blocks.RED_MUSHROOM.defaultBlockState(),
+                            Blocks.CRIMSON_FUNGUS.defaultBlockState()
+                    ),
+                    List.of(Blocks.BROWN_MUSHROOM.defaultBlockState(),
+                            Blocks.WARPED_FUNGUS.defaultBlockState()
+                    )
+            );
+    public static final BCLFeature VANILLA_MUSHROOM
+            = FastFeatures.patch(BetterNether.makeID("vanilla_red_mushroom"),
+            VANILLA_MUSHROOM_PROVIDER, 8, 6, 3);
+
+    public static final BCLFeature VANILLA_WARPED_FUNGUS
+            = FastFeatures.patch(BetterNether.makeID("vanilla_warped_fungus"), Blocks.WARPED_FUNGUS, 8, 7, 3);
+
+    public static final BCLFeature VANILLA_WARPED_ROOTS
+            = FastFeatures.patch(BetterNether.makeID("vanilla_warped_roots"), Blocks.WARPED_ROOTS, 10, 7, 3);
     public static final BCLFeature BONE_GRASS_PATCH
             = FastFeatures.patch(BetterNether.makeID("bone_grass"), NetherBlocks.BONE_GRASS);
 

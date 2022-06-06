@@ -26,6 +26,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.TerrainFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -46,6 +47,7 @@ public class NetherWartForest extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
+                   .feature(TerrainFeatures.NO_SURFACE_SANDSTONE)
                    .feature(BiomeFeatures.NETHER_WART_FORREST_FLOOR)
                    .feature(BiomeFeatures.NETHER_WART_FORREST_CEIL)
                    .edgeSize(9)

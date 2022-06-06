@@ -11,9 +11,9 @@ import org.betterx.betternether.world.structures.StructureObjScatter;
 
 public class StructureOldRedMushrooms extends StructureObjScatter {
     private static final NetherStructureWorld[] TREES = new NetherStructureWorld[]{
-            new NetherStructureWorld("trees/red_mushroom_01", -2, StructurePlacementType.FLOOR),
             new NetherStructureWorld("trees/red_mushroom_02", -1, StructurePlacementType.FLOOR),
             new NetherStructureWorld("trees/red_mushroom_03", -1, StructurePlacementType.FLOOR),
+            new NetherStructureWorld("trees/red_mushroom_01", -2, StructurePlacementType.FLOOR),
             new NetherStructureWorld("trees/red_mushroom_04", -4, StructurePlacementType.FLOOR),
             new NetherStructureWorld("trees/red_mushroom_05", -4, StructurePlacementType.FLOOR),
             new NetherStructureWorld("trees/red_mushroom_06", -1, StructurePlacementType.FLOOR),

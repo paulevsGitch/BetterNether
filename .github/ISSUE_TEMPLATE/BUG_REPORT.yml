@@ -1,7 +1,7 @@
 name: Report a Bug
 description: File a bug report
 title: "[Bug] "
-labels: ["bug"]
+labels: [ "bug" ]
 body:
   - type: markdown
     attributes:
@@ -58,7 +58,7 @@ body:
       label: Minecraft
       description: What version of Minecraft is installed?
       options:
-        - 1.19-Snapshot
+        - 1.19
         - 1.18.2
         - 1.18.1
         - 1.18
@@ -72,7 +72,7 @@ body:
         - 1.16.0
         - Before 1.16
     validations:
-      required: true 
+      required: true
   - type: markdown
     attributes:
       value: |

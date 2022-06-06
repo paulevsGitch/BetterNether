@@ -141,8 +141,7 @@ public class BiomeFeatures {
     public static final BCLFeature MUSHROOM_FORREST_FLOOR = floorFromWeighted("mushroom_forrest", List.of(
             new WeightedPlacedFeature(TreeFeatures.BIG_RED_MUSHROOM_CLUSTER.getPlacedFeature(), 0.2f),
             new WeightedPlacedFeature(TreeFeatures.BIG_BROWN_MUSHROOM_CLUSTER.getPlacedFeature(), 0.12f),
-            new WeightedPlacedFeature(FloorFeatures.VANILLA_RED_MUSHROOM.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(FloorFeatures.VANILLA_BROWN_MUSHROOM.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(FloorFeatures.VANILLA_MUSHROOM.getPlacedFeature(), 0.1f),
             new WeightedPlacedFeature(TreeFeatures.GIANT_MOLD.getPlacedFeature(), 0.12f),
             new WeightedPlacedFeature(TreeFeatures.MUSHROOM_FIR.getPlacedFeature(), 0.2f),
             new WeightedPlacedFeature(FloorFeatures.ORANGE_MUSHROOM.getPlacedFeature(), 0.05f),
@@ -160,8 +159,7 @@ public class BiomeFeatures {
 
     public static final BCLFeature MUSHROOM_FORREST_EDGE_FLOOR = floorFromChanced("mushroom_forrest_edge", List.of(
             new WeightedPlacedFeature(FloorFeatures.ORANGE_MUSHROOM.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.VANILLA_RED_MUSHROOM.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(FloorFeatures.VANILLA_BROWN_MUSHROOM.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(FloorFeatures.VANILLA_MUSHROOM.getPlacedFeature(), 0.1f),
             new WeightedPlacedFeature(FloorFeatures.RED_MOLD.getPlacedFeature(), 0.05f),
             new WeightedPlacedFeature(FloorFeatures.GRAY_MOLD.getPlacedFeature(), 0.05f),
             new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
@@ -238,7 +236,8 @@ public class BiomeFeatures {
 
     public static final BCLFeature NETHER_SWAMPLAND_CEIL = ceilFromChanced("nether_swampland", List.of(
             new WeightedPlacedFeature(VineLikeFeatures.BLACK_VINE.getPlacedFeature(), 0.4f),
-            new WeightedPlacedFeature(VineLikeFeatures.BLOOMING_VINE.getPlacedFeature(), 0.03f)
+            new WeightedPlacedFeature(VineLikeFeatures.BLOOMING_VINE.getPlacedFeature(), 0.03f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
     ), 0);
 
     public static final BCLFeature NETHER_WART_FORREST_FLOOR = denseFloorFromWeighted("nether_wart_forrest", List.of(
@@ -247,7 +246,8 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(TreeFeatures.WART.getPlacedFeature(), 0.3f),
             new WeightedPlacedFeature(FloorFeatures.NETHER_WART.getPlacedFeature(), 0.2f),
             new WeightedPlacedFeature(FloorFeatures.WART_SEED_PATCH.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(TreeFeatures.SOUL_LILY.getPlacedFeature(), 0.4f)
+            new WeightedPlacedFeature(TreeFeatures.SOUL_LILY.getPlacedFeature(), 0.4f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
     ), 0);
 
     public static final BCLFeature NETHER_WART_FORREST_CEIL = SOUL_PLAIN_CEIL;
@@ -257,9 +257,55 @@ public class BiomeFeatures {
                     new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.01f),
                     new WeightedPlacedFeature(FloorFeatures.NETHER_WART.getPlacedFeature(), 0.2f),
                     new WeightedPlacedFeature(FloorFeatures.WART_SEED_PATCH.getPlacedFeature(), 0.05f),
-                    new WeightedPlacedFeature(FloorFeatures.SOUL_GRASS_PATCH.getPlacedFeature(), 0.1f)
+                    new WeightedPlacedFeature(FloorFeatures.SOUL_GRASS_PATCH.getPlacedFeature(), 0.1f),
+                    new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
             ),
             0);
+
+    public static final BCLFeature OLD_FUNGIWOODS_FLOOR = denseFloorFromWeighted("old_fungiwoods", List.of(
+            new WeightedPlacedFeature(TreeFeatures.OLD_RED_MUSHROOM_CLUSTER.getPlacedFeature(), 0.12f),
+            new WeightedPlacedFeature(TreeFeatures.OLD_BROWN_MUSHROOM_CLUSTER.getPlacedFeature(), 0.12f),
+            new WeightedPlacedFeature(TreeFeatures.BIG_RED_MUSHROOM_CLUSTER.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(TreeFeatures.BIG_BROWN_MUSHROOM_CLUSTER.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(FloorFeatures.VANILLA_MUSHROOM.getPlacedFeature(), 0.5f),
+            new WeightedPlacedFeature(FloorFeatures.RED_MOLD.getPlacedFeature(), 0.9f),
+            new WeightedPlacedFeature(FloorFeatures.GRAY_MOLD.getPlacedFeature(), 0.9f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
+    ), 0);
+
+    public static final BCLFeature OLD_FUNGIWOODS_CEIL = SOUL_PLAIN_CEIL;
+
+    public static final BCLFeature OLD_FUNGIWOODS_WALL = CRIMSON_GLOWING_WOODS_WALL;
+
+    public static final BCLFeature OLD_SWAMPLAND_FLOOR = denseFloorFromWeighted("old_swampland", List.of(
+            new WeightedPlacedFeature(TreeFeatures.OLD_WILLOW.getPlacedFeature(), 0.02f),
+            new WeightedPlacedFeature(TreeFeatures.WILLOW.getPlacedFeature(), 0.02f),
+            new WeightedPlacedFeature(FloorFeatures.WILLOW_BUSH_PATCH.getPlacedFeature(), 0.10f),
+            new WeightedPlacedFeature(FloorFeatures.JELLYFISH_MUSHROOM.getPlacedFeature(), 0.03f),
+            new WeightedPlacedFeature(FloorFeatures.SWAMP_GRASS.getPlacedFeature(), 0.4f),
+            new WeightedPlacedFeature(VineLikeFeatures.SMOKER.getPlacedFeature(), 0.05f),
+            new WeightedPlacedFeature(VineLikeFeatures.SOUL_VEIN.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(FloorFeatures.FEATHER_FERN_PATCH.getPlacedFeature(), 0.05f),
+            new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.03f),
+            new WeightedPlacedFeature(VineLikeFeatures.NETHER_REED.getPlacedFeature(), 0.03f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
+    ), 1);
+    public static final BCLFeature OLD_SWAMPLAND_WALL = NETHER_GRASSLANDS_WALL;
+
+    public static final BCLFeature OLD_SWAMPLAND_CEIL = NETHER_SWAMPLAND_CEIL;
+
+    public static final BCLFeature OLD_WARPED_WOOD_FLOOR = denseFloorFromWeighted("old_warped_wood", List.of(
+            new WeightedPlacedFeature(TreeFeatures.BIG_WARPED_TREE_CLUSTER.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(FloorFeatures.VANILLA_WARPED_FUNGUS.getPlacedFeature(), 0.2f),
+            new WeightedPlacedFeature(FloorFeatures.VANILLA_WARPED_ROOTS.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
+    ), 0);
+
+    public static final BCLFeature OLD_WARPED_WOOD_CEIL = ceilFromChanced("old_warped_wood", List.of(
+            new WeightedPlacedFeature(VineLikeFeatures.BLACK_VINE.getPlacedFeature(), 0.2f),
+            new WeightedPlacedFeature(VineLikeFeatures.TWISTED_VINES.getPlacedFeature(), 0.2f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
+    ), 0);
 
 
     public static BCLFeature denseFloorFromWeighted(String name,

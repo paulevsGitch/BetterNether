@@ -1,29 +1,24 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
-import org.betterx.bclib.world.structures.StructurePlacementType;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.noise.OpenSimplexNoise;
+import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.surface.rules.Conditions;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.SoundsRegistry;
+import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.TerrainFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.plants.*;
 
 public class OldSwampland extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -40,10 +35,10 @@ public class OldSwampland extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(NetherFeatures.SOUL_VINE)
-                   .feature(NetherFeatures.BLACK_BUSH)
-                   .feature(NetherFeatures.FEATHER_FERN)
-                   .feature(NetherFeatures.NETHER_REEED)
+                   .feature(TerrainFeatures.LAVA_SWAMP)
+                   .feature(BiomeFeatures.OLD_SWAMPLAND_FLOOR)
+                   .feature(BiomeFeatures.OLD_SWAMPLAND_CEIL)
+                   .feature(BiomeFeatures.OLD_SWAMPLAND_WALL)
             ;
         }
 
@@ -61,9 +56,27 @@ public class OldSwampland extends NetherBiome {
             }
             return res;
         }
-    }
 
-    protected static final OpenSimplexNoise TERRAIN = new OpenSimplexNoise(523);
+        @Override
+        public SurfaceRuleBuilder surface() {
+            return super
+                    .surface()
+                    .rule(SurfaceRules.sequence(
+                            SurfaceRules.ifTrue(
+                                    SurfaceRules.ON_FLOOR,
+                                    SurfaceRules.ifTrue(
+                                            Conditions.NETHER_VOLUME_NOISE_LARGE,
+                                            SurfaceRules.state(NetherBlocks.SWAMPLAND_GRASS.defaultBlockState())
+                                    )
+                            ),
+                            SurfaceRules.ifTrue(
+                                    Conditions.NETHER_SURFACE_NOISE_LARGE,
+                                    NetherGrasslands.SOUL_SOIL
+                            ),
+                            NetherGrasslands.SOUL_SAND
+                    ));
+        }
+    }
 
     public OldSwampland(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
@@ -71,45 +84,5 @@ public class OldSwampland extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("old_willow", new StructureOldWillow(), StructurePlacementType.FLOOR, 0.02F, false);
-        addStructure("willow", new StructureWillow(), StructurePlacementType.FLOOR, 0.02F, false);
-        addStructure("willow_bush", new StructureWillowBush(), StructurePlacementType.FLOOR, 0.1F, true);
-        addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.05F, false);
-        addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.03F, true);
-        addStructure("swamp_grass", new StructureSwampGrass(), StructurePlacementType.FLOOR, 0.4F, false);
-        addStructure("black_vine", new StructureBlackVine(), StructurePlacementType.CEIL, 0.4F, true);
-        addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.8F, true);
-        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.8F, true);
-    }
-
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-        double value = TERRAIN.eval(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2);
-        if (value > 0.3 && validWalls(world, pos))
-            BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.defaultBlockState());
-        else if (value > -0.3)
-            BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.SWAMPLAND_GRASS.defaultBlockState());
-        else {
-            value = TERRAIN.eval(pos.getX() * 0.5, pos.getZ() * 0.5);
-            BlocksHelper.setWithoutUpdate(world,
-                    pos,
-                    value > 0
-                            ? Blocks.SOUL_SAND.defaultBlockState()
-                            : Blocks.SOUL_SOIL.defaultBlockState());
-        }
-    }
-
-    protected boolean validWalls(LevelAccessor world, BlockPos pos) {
-        return validWall(world, pos.below())
-                && validWall(world, pos.north())
-                && validWall(world, pos.south())
-                && validWall(world, pos.east())
-                && validWall(world, pos.west());
-    }
-
-    protected boolean validWall(LevelAccessor world, BlockPos pos) {
-        BlockState state = world.getBlockState(pos);
-        return org.betterx.bclib.util.BlocksHelper.isLava(state) || BlocksHelper.isNetherGround(state);
     }
 }
