@@ -10,24 +10,26 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
-import org.betterx.bclib.world.structures.StructurePlacementType;
+import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.surface.rules.Conditions;
+import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockSoulSandstone;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.decorations.StructureWartDeadwood;
-import org.betterx.betternether.world.structures.plants.StructureNetherWart;
-import org.betterx.betternether.world.structures.plants.StructureSoulLily;
-import org.betterx.betternether.world.structures.plants.StructureWartSeed;
-import org.betterx.betternether.world.structures.plants.StructureWartTree;
+
+import java.util.List;
 
 public class NetherWartForest extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -44,7 +46,8 @@ public class NetherWartForest extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .particles(ParticleTypes.CRIMSON_SPORE, 0.05F)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
-                   .feature(NetherFeatures.BLACK_BUSH_SPARSE)
+                   .feature(BiomeFeatures.NETHER_WART_FORREST_FLOOR)
+                   .feature(BiomeFeatures.NETHER_WART_FORREST_CEIL)
                    .edgeSize(9)
             ;
         }
@@ -63,6 +66,43 @@ public class NetherWartForest extends NetherBiome {
             }
             return res;
         }
+
+        @Override
+        public SurfaceRuleBuilder surface() {
+            return super
+                    .surface()
+                    .rule(SurfaceRules.sequence(
+                            SurfaceRules.ifTrue(
+                                    SurfaceRules.ON_FLOOR,
+                                    new SwitchRuleSource(Conditions.NETHER_NOISE,
+                                            List.of(NetherGrasslands.SOUL_SOIL,
+                                                    NetherGrasslands.SOUL_SAND,
+                                                    NetherGrasslands.MOSS,
+                                                    NetherGrasslands.SOUL_SAND,
+                                                    NETHERRACK))
+                            ),
+                            SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(4, true, 1, CaveSurface.FLOOR),
+                                    new SwitchRuleSource(Conditions.NETHER_NOISE,
+                                            List.of(SurfaceRules.state(
+                                                            NetherBlocks.SOUL_SANDSTONE
+                                                                    .defaultBlockState()
+                                                                    .setValue(BlockSoulSandstone.UP, true)
+                                                    ),
+                                                    SurfaceRules.state(
+                                                            NetherBlocks.SOUL_SANDSTONE
+                                                                    .defaultBlockState()
+                                                                    .setValue(BlockSoulSandstone.UP, false)
+                                                    )
+                                            )
+                                    )
+                            ),
+                            new SwitchRuleSource(Conditions.NETHER_NOISE,
+                                    List.of(NetherGrasslands.SOUL_SOIL,
+                                            NetherGrasslands.SOUL_SAND,
+                                            NETHERRACK))
+                    ))
+                    ;
+        }
     }
 
     public NetherWartForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
@@ -71,13 +111,6 @@ public class NetherWartForest extends NetherBiome {
 
     @Override
     protected void onInit() {
-        this.setNoiseDensity(0.45F);
-
-        addStructure("wart_deadwood", new StructureWartDeadwood(), StructurePlacementType.FLOOR, 0.02F, false);
-        addStructure("wart_tree", new StructureWartTree(), StructurePlacementType.FLOOR, 0.1F, false);
-        addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.2F, false);
-        addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.05F, false);
-        addStructure("soul_lily", new StructureSoulLily(), StructurePlacementType.FLOOR, 0.2F, true);
     }
 
     @Override

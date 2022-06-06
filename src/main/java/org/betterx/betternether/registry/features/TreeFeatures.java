@@ -1,8 +1,10 @@
 package org.betterx.betternether.registry.features;
 
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 
 import org.betterx.bclib.api.features.BCLFeature;
@@ -15,10 +17,7 @@ import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.features.BigBrownMushroomFeature;
-import org.betterx.betternether.world.features.MushroomFirFeature;
-import org.betterx.betternether.world.features.RubeusTreeFeature;
-import org.betterx.betternether.world.features.WillowFeature;
+import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 
 import java.util.List;
@@ -42,6 +41,19 @@ public class TreeFeatures {
                     cfg(BetterNether.makeID("trees/crimson_pine_03"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("trees/crimson_pine_04"), 0, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("trees/crimson_pine_05"), 0, StructurePlacementType.FLOOR, 1.0f)
+            )));
+
+    public static final BCLFeature WART_DEADWOOD = BCLFeatureBuilder
+            .start(BetterNether.makeID("wart_deadwood"), BCLFeature.TEMPLATE)
+            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .offset(Direction.DOWN)
+            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .offset(Direction.UP)
+            .buildAndRegister(new TemplateFeatureConfig(List.of(
+                    cfg(BetterNether.makeID("trees/wart_root_01"), -0, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/wart_root_02"), -0, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/wart_root_03"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("trees/wart_fallen_log"), 0, StructurePlacementType.FLOOR, 1.0f)
             )));
 
     //TODO: 1.19 make sure we are placed over mycelium
@@ -90,21 +102,37 @@ public class TreeFeatures {
     );
 
     public static final BCLFeature RUBEUS
-            = FastFeatures.patch(BetterNether.makeID("rubeus"),
+            = FastFeatures.patch(BetterNether.makeID("rubeus_tree"),
             2,
             2,
             4,
             BCLFeatureBuilder
-                    .start(BetterNether.makeID("rubeus"), new RubeusTreeFeature())
+                    .start(BetterNether.makeID("rubeus_tree"), new RubeusTreeFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
                     .buildAndRegister(NaturalTreeConfiguration.natural()));
 
     public static final BCLFeature WILLOW
-            = FastFeatures.patch(BetterNether.makeID("willow"),
+            = FastFeatures.patch(BetterNether.makeID("willow_tree"),
             2, 2, 4,
             BCLFeatureBuilder
-                    .start(BetterNether.makeID("willow"), new WillowFeature())
+                    .start(BetterNether.makeID("willow_tree"), new WillowTreeFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+                    .buildAndRegister());
+
+    public static final BCLFeature WART
+            = FastFeatures.patch(BetterNether.makeID("wart_tree"),
+            32, 7, 3,
+            BCLFeatureBuilder
+                    .start(BetterNether.makeID("wart_tree"), new WartTreeFeature())
+                    .isAbove(BlockPredicate.matchesBlocks(Blocks.SOUL_SAND))
+                    .buildAndRegister(NaturalTreeConfiguration.natural()));
+
+    public static final BCLFeature SOUL_LILY
+            = FastFeatures.patch(BetterNether.makeID("soul_lily"),
+            16, 3, 3,
+            BCLFeatureBuilder
+                    .start(BetterNether.makeID("soul_lily"), new SoulLilyFeature())
+                    .isAbove(BlockPredicate.matchesTag(CommonBlockTags.SOUL_GROUND))
                     .buildAndRegister());
 
     static StructureWorldNBT cfg(ResourceLocation location,

@@ -241,6 +241,27 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(VineLikeFeatures.BLOOMING_VINE.getPlacedFeature(), 0.03f)
     ), 0);
 
+    public static final BCLFeature NETHER_WART_FORREST_FLOOR = denseFloorFromWeighted("nether_wart_forrest", List.of(
+            new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.01f),
+            new WeightedPlacedFeature(TreeFeatures.WART_DEADWOOD.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(TreeFeatures.WART.getPlacedFeature(), 0.3f),
+            new WeightedPlacedFeature(FloorFeatures.NETHER_WART.getPlacedFeature(), 0.2f),
+            new WeightedPlacedFeature(FloorFeatures.WART_SEED_PATCH.getPlacedFeature(), 0.05f),
+            new WeightedPlacedFeature(TreeFeatures.SOUL_LILY.getPlacedFeature(), 0.4f)
+    ), 0);
+
+    public static final BCLFeature NETHER_WART_FORREST_CEIL = SOUL_PLAIN_CEIL;
+
+    public static final BCLFeature NETHER_WART_FORREST_EDGE_FLOOR = floorFromWeighted("nether_wart_forrest",
+            List.of(
+                    new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.01f),
+                    new WeightedPlacedFeature(FloorFeatures.NETHER_WART.getPlacedFeature(), 0.2f),
+                    new WeightedPlacedFeature(FloorFeatures.WART_SEED_PATCH.getPlacedFeature(), 0.05f),
+                    new WeightedPlacedFeature(FloorFeatures.SOUL_GRASS_PATCH.getPlacedFeature(), 0.1f)
+            ),
+            0);
+
+
     public static BCLFeature denseFloorFromWeighted(String name,
                                                     List<WeightedPlacedFeature> features,
                                                     int defaultIndex) {

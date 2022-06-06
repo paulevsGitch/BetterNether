@@ -18,13 +18,13 @@ import org.betterx.betternether.blocks.BlockWillowTrunk;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
-public class WillowFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> {
     private static final Direction[] HOR = HorizontalDirectionalBlock
             .FACING
             .getPossibleValues()
             .toArray(new Direction[]{});
 
-    public WillowFeature() {
+    public WillowTreeFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
 

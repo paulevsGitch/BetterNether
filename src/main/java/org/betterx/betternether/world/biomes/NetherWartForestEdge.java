@@ -1,26 +1,24 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
-import org.betterx.bclib.world.structures.StructurePlacementType;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.surface.rules.Conditions;
+import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.plants.StructureNetherWart;
-import org.betterx.betternether.world.structures.plants.StructureWartSeed;
+
+import java.util.List;
 
 public class NetherWartForestEdge extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -36,7 +34,31 @@ public class NetherWartForestEdge extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
-                   .feature(NetherFeatures.BLACK_BUSH);
+                   .feature(BiomeFeatures.NETHER_WART_FORREST_EDGE_FLOOR);
+        }
+
+        @Override
+        public SurfaceRuleBuilder surface() {
+            return super
+                    .surface()
+                    .rule(
+                            SurfaceRules.sequence(
+                                    SurfaceRules.ifTrue(
+                                            SurfaceRules.ON_FLOOR,
+                                            new SwitchRuleSource(Conditions.NETHER_NOISE,
+                                                    List.of(NetherGrasslands.SOUL_SOIL,
+                                                            NetherGrasslands.SOUL_SAND,
+                                                            NetherGrasslands.MOSS,
+                                                            NETHERRACK))
+                                    ),
+                                    SurfaceRules.ifTrue(
+                                            Conditions.NETHER_VOLUME_NOISE,
+                                            NetherGrasslands.SOUL_SAND
+                                    ),
+                                    NETHERRACK
+                            )
+                    )
+                    ;
         }
 
         @Override
@@ -61,30 +83,6 @@ public class NetherWartForestEdge extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.02F, false);
-        addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.01F, false);
     }
 
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-        switch (random.nextInt(3)) {
-            case 0:
-                super.genSurfColumn(world, pos, random);
-                break;
-            case 1:
-                BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.defaultBlockState());
-                break;
-            case 2:
-                BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
-                break;
-            case 3:
-                BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
-                break;
-        }
-        for (int i = 1; i < random.nextInt(3); i++) {
-            BlockPos down = pos.below(i);
-            if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down)))
-                BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.defaultBlockState());
-        }
-    }
 }
