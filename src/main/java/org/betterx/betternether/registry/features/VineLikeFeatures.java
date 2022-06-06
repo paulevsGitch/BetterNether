@@ -1,10 +1,13 @@
 package org.betterx.betternether.registry.features;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 
 import org.betterx.bclib.api.features.BCLFeature;
 import org.betterx.bclib.api.features.FastFeatures;
@@ -90,6 +93,21 @@ public class VineLikeFeatures {
                             .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.BOTTOM))
                     .heightRange(1, 5)
                     .spread(2, 0.75f, ClampedNormalInt.of(7, 1.2f, 3, 12))
+    );
+
+    public static final BCLFeature EYE
+            = FastFeatures.vine(
+            BetterNether.makeID("eye"), true, false,
+            ScatterFeatureConfig.OnSolid
+                    .startOnSolid()
+                    .block(NetherBlocks.EYE_VINE)
+                    .tipBlock(new WeightedStateProvider(SimpleWeightedRandomList
+                            .<BlockState>builder()
+                            .add(NetherBlocks.EYEBALL.defaultBlockState(), 5)
+                            .add(NetherBlocks.EYEBALL_SMALL.defaultBlockState(), 5)))
+                    .heightRange(5, 26)
+                    .growWhileFree()
+                    .spread(3, 0.75f, ClampedNormalInt.of(7, 1.2f, 3, 12))
     );
 
     public static final BCLFeature STALAGMITE_BONE_CLUSTER = sizedCluster(
