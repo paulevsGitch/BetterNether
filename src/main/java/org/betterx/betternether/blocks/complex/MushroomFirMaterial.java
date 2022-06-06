@@ -70,7 +70,7 @@ public class MushroomFirMaterial extends NetherWoodenMaterial {
         return getBlock(BLOCK_SAPLING);
     }
 
-    public Block geTrunk() {
+    public Block getTrunk() {
         return getBlock(BLOCK_TRUNK);
     }
 }

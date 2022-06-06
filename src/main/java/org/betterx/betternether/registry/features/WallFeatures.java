@@ -4,6 +4,7 @@ import org.betterx.bclib.api.features.BCLFeature;
 import org.betterx.bclib.api.features.FastFeatures;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.features.LucisFeature;
 
 public class WallFeatures {
 
@@ -23,6 +24,9 @@ public class WallFeatures {
             4,
             2,
             8);
+
+    public static final BCLFeature LUCIS_FEATURE = FastFeatures.simple(BetterNether.makeID("lucis"),
+            new LucisFeature());
 
     public static void ensureStaticInitialization() {
     }

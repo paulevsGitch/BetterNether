@@ -1,7 +1,6 @@
 package org.betterx.betternether.registry.features;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
@@ -18,12 +17,16 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.CrystalFeature;
 import org.betterx.betternether.world.features.JellyfishMushroomFeature;
-import org.betterx.betternether.world.features.ScatterFeatureConfigs;
 import org.betterx.betternether.world.features.WartBushFeature;
 
 import java.util.List;
 
 public class FloorFeatures {
+    public static final BCLFeature VANILLA_RED_MUSHROOM
+            = FastFeatures.patch(BetterNether.makeID("vanilla_red_mushroom"), Blocks.RED_MUSHROOM, 5, 6, 3);
+
+    public static final BCLFeature VANILLA_BROWN_MUSHROOM
+            = FastFeatures.patch(BetterNether.makeID("vanilla_brown_mushroom"), Blocks.BROWN_MUSHROOM, 5, 6, 3);
     public static final BCLFeature BONE_GRASS_PATCH
             = FastFeatures.patch(BetterNether.makeID("bone_grass"), NetherBlocks.BONE_GRASS);
     public static final BCLFeature SOUL_GRASS_PATCH
@@ -59,6 +62,13 @@ public class FloorFeatures {
     public static final BCLFeature JELLYFISH_MUSHROOM
             = FastFeatures.patch(BetterNether.makeID("jellyfish_mushroom"), 64, 5, 3, new JellyfishMushroomFeature());
 
+    public static final BCLFeature RED_MOLD
+            = FastFeatures.patch(BetterNether.makeID("red_mold"), NetherBlocks.RED_MOLD, 32, 5, 3);
+
+    public static final BCLFeature GRAY_MOLD
+            = FastFeatures.patch(BetterNether.makeID("gray_mold"), NetherBlocks.GRAY_MOLD, 32, 5, 3);
+
+
     public static final BCLFeature CRYSTAL
             = FastFeatures.simple(BetterNether.makeID("crystal"), 3, true, new CrystalFeature());
 
@@ -86,18 +96,22 @@ public class FloorFeatures {
             16, 3, 1
     );
 
-
     public static final BCLFeature BLACK_APPLE = FastFeatures.patchWitRandomInt(
             BetterNether.makeID("black_apple"),
             NetherBlocks.BLACK_APPLE, BlockCommonPlant.AGE,
             8, 7, 2
     );
 
-    public static final BCLFeature AGAVE = agedCluster(
-            BetterNether.makeID("agave"), true, false, ScatterFeatureConfigs.WithPlantAge
-                    .startWithPlantAge()
-                    .singleBlock(NetherBlocks.AGAVE)
-                    .spread(4, 0, UniformInt.of(1, 16))
+    public static final BCLFeature AGAVE = FastFeatures.patchWitRandomInt(
+            BetterNether.makeID("agave"),
+            NetherBlocks.AGAVE, BlockCommonPlant.AGE,
+            16, 4, 2
+    );
+
+    public static final BCLFeature ORANGE_MUSHROOM = FastFeatures.patchWitRandomInt(
+            BetterNether.makeID("orange_mushroom"),
+            NetherBlocks.ORANGE_MUSHROOM, BlockCommonPlant.AGE,
+            12, 4, 2
     );
 
     public static void ensureStaticInitialization() {
