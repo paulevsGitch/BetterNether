@@ -74,10 +74,16 @@ public class TreeFeatures {
             .findSolidFloor(3)
             .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
             .buildAndRegister();
-
-    //TODO: 1.19 make sure we are placed over mycelium
+    
     public static final BCLFeature MUSHROOM_FIR
-            = FastFeatures.patch(BetterNether.makeID("mushroom_fir"), 2, 2, 4, new MushroomFirFeature());
+            = FastFeatures.patch(BetterNether.makeID("mushroom_fir"),
+            2,
+            2,
+            4,
+            BCLFeatureBuilder
+                    .start(BetterNether.makeID("mushroom_fir_single"), new MushroomFirFeature())
+                    .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
+                    .buildAndRegister());
 
     //TODO: 1.19 make sure we are placed over mycelium
     public static final BCLFeature GIANT_MOLD
