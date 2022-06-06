@@ -45,9 +45,7 @@ public class NetherSoulPlain extends NetherBiome {
                    .structure(BiomeTags.HAS_NETHER_FOSSIL)
                    .feature(NetherFeatures.NETHER_RUBY_ORE_SOUL)
                    .feature(BiomeFeatures.SOUL_PLAIN_FLOOR)
-//                   .feature(NetherFeatures.SOUL_VINE)
-//                   .feature(NetherFeatures.BLACK_BUSH)
-//                   .feature(NetherFeatures.SOUL_GRASS)
+                   .feature(BiomeFeatures.SOUL_PLAIN_CEIL)
             ;
         }
 

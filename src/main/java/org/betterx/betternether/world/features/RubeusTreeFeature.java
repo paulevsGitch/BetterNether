@@ -1,4 +1,4 @@
-package org.betterx.betternether.world.structures.plants;
+package org.betterx.betternether.world.features;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,13 +16,41 @@ import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockPlantWall;
 import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureFuncScatter;
+import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+import org.betterx.betternether.world.structures.plants.StructureStalagnate;
 
 import java.util.Iterator;
-import java.util.Map.Entry;
+import java.util.Map;
 
-public class StructureRubeus extends StructureFuncScatter {
+public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfiguration> {
+    public RubeusTreeFeature() {
+        super(NaturalTreeConfiguration.CODEC);
+    }
+
+    @Override
+    protected boolean isStructure(BlockState state) {
+        return state.getBlock() == NetherBlocks.MAT_RUBEUS.getLog();
+    }
+
+    @Override
+    protected boolean isGround(BlockState state) {
+        return BlocksHelper.isNetherGround(state);
+    }
+
+    @Override
+    protected boolean place(ServerLevelAccessor world,
+                            BlockPos pos,
+                            RandomSource random,
+                            NaturalTreeConfiguration config,
+                            final int MAX_HEIGHT,
+                            StructureGeneratorThreadContext context) {
+        int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
+        if (length >= StructureStalagnate.MAX_LENGTH)
+            return super.place(world, pos, random, config, MAX_HEIGHT, context);
+        return false;
+    }
+
     private static final float[] CURVE_X = new float[]{9F, 7F, 1.5F, 0.5F, 3F, 7F};
     private static final float[] CURVE_Y = new float[]{20F, 17F, 12F, 4F, 0F, -2F};
     private static final int MIDDLE_Y = 10;
@@ -45,7 +73,7 @@ public class StructureRubeus extends StructureFuncScatter {
     }
 
     private void updateDistances(ServerLevelAccessor world, StructureGeneratorThreadContext context) {
-        for (Entry<BlockPos, Byte> entry : context.LOGS_DIST.entrySet()) {
+        for (Map.Entry<BlockPos, Byte> entry : context.LOGS_DIST.entrySet()) {
             final int dist = entry.getValue();
             final BlockPos logPos = entry.getKey();
 
@@ -66,17 +94,12 @@ public class StructureRubeus extends StructureFuncScatter {
         }
     }
 
-    public StructureRubeus() {
-        super(7);
-    }
-
-
-    @Override
-    public void grow(ServerLevelAccessor world,
-                     BlockPos pos,
-                     RandomSource random,
-                     boolean natural,
-                     StructureGeneratorThreadContext context) {
+    public boolean grow(ServerLevelAccessor world,
+                        BlockPos pos,
+                        RandomSource random,
+                        NaturalTreeConfiguration config,
+                        StructureGeneratorThreadContext context) {
+        final boolean natural = config.natural;
         context.clear();
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
         float scale = MHelper.randRange(0.5F, 1F, random);
@@ -218,30 +241,12 @@ public class StructureRubeus extends StructureFuncScatter {
         context.POINTS.clear();
         context.MIDDLE.clear();
         context.TOP.clear();
+
+        return true;
     }
 
-    @Override
-    public void generate(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         final int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
-        int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
-        if (length >= StructureStalagnate.MAX_LENGTH)
-            super.generate(world, pos, random, MAX_HEIGHT, context);
-    }
 
-    @Override
-    protected boolean isStructure(BlockState state) {
-        return state.getBlock() == NetherBlocks.MAT_RUBEUS.getLog();
-    }
-
-    @Override
-    protected boolean isGround(BlockState state) {
-        return BlocksHelper.isNetherGround(state);
-    }
-
-    private void line(LevelAccessor world,
+    private void line(LevelAccessor level,
                       int x1,
                       int y1,
                       int z1,

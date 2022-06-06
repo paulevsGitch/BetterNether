@@ -18,15 +18,17 @@ public abstract class ContextFeature<FC extends FeatureConfiguration> extends Fe
     @Override
     public final boolean place(FeaturePlaceContext<FC> ctx) {
         return place(ctx.level(),
-                     ctx.origin(),
-                     ctx.random(),
-                     ctx.chunkGenerator().getGenDepth(),
-                     NetherChunkPopulatorFeature.generatorForThread().context);
+                ctx.origin(),
+                ctx.random(),
+                ctx.config(),
+                ctx.chunkGenerator().getGenDepth(),
+                NetherChunkPopulatorFeature.generatorForThread().context);
     }
 
-    abstract boolean place(ServerLevelAccessor world,
-                           BlockPos pos,
-                           RandomSource random,
-                           final int MAX_HEIGHT,
-                           StructureGeneratorThreadContext context);
+    protected abstract boolean place(ServerLevelAccessor world,
+                                     BlockPos pos,
+                                     RandomSource random,
+                                     FC config,
+                                     final int MAX_HEIGHT,
+                                     StructureGeneratorThreadContext context);
 }

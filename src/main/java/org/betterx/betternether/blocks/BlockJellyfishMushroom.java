@@ -27,9 +27,9 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 
 import com.google.common.collect.Lists;
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockProperties.JellyShape;
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
+import org.betterx.betternether.blocks.BNBlockProperties.JellyShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
@@ -39,8 +39,8 @@ import java.util.List;
 public class BlockJellyfishMushroom extends BlockBaseNotFull {
     private static final VoxelShape TOP_SHAPE = box(1, 0, 1, 15, 16, 15);
     private static final VoxelShape MIDDLE_SHAPE = box(5, 0, 5, 11, 16, 11);
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
-    public static final EnumProperty<JellyShape> VISUAL = BlockProperties.JELLY_MUSHROOM_VISUAL;
+    public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<JellyShape> VISUAL = BNBlockProperties.JELLY_MUSHROOM_VISUAL;
 
     public BlockJellyfishMushroom() {
         super(Materials.makeWood(MaterialColor.COLOR_CYAN)
@@ -93,8 +93,8 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
             case MIDDLE:
                 return world.getBlockState(pos.above()).getBlock() == this && world.getBlockState(pos.below())
                                                                                    .isFaceSturdy(world,
-                                                                                                 pos.below(),
-                                                                                                 Direction.UP)
+                                                                                           pos.below(),
+                                                                                           Direction.UP)
                         ? state
                         : Blocks.AIR.defaultBlockState();
             case TOP:
@@ -148,13 +148,13 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         if (state.getValue(SHAPE) == TripleShape.TOP) {
             return Lists.newArrayList(new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING,
-                                                    MHelper.randRange(1, 2, MHelper.RANDOM)),
-                                      new ItemStack(NetherItems.GLOWSTONE_PILE,
-                                                    MHelper.randRange(0, 2, MHelper.RANDOM)),
-                                      new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, MHelper.RANDOM)));
+                            MHelper.randRange(1, 2, MHelper.RANDOM)),
+                    new ItemStack(NetherItems.GLOWSTONE_PILE,
+                            MHelper.randRange(0, 2, MHelper.RANDOM)),
+                    new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, MHelper.RANDOM)));
         } else if (state.getValue(SHAPE) == TripleShape.BOTTOM)
             return Lists.newArrayList(new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING,
-                                                    MHelper.randRange(1, 2, MHelper.RANDOM)));
+                    MHelper.randRange(1, 2, MHelper.RANDOM)));
         else
             return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
     }

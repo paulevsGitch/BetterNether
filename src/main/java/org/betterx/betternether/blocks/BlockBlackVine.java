@@ -47,12 +47,12 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
                                  .noOcclusion());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
-        this.registerDefaultState(getStateDefinition().any().setValue(BlockProperties.BOTTOM, true));
+        this.registerDefaultState(getStateDefinition().any().setValue(BNBlockProperties.BOTTOM, true));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
-        stateManager.add(BlockProperties.BOTTOM);
+        stateManager.add(BNBlockProperties.BOTTOM);
     }
 
     @Override
@@ -85,8 +85,8 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
                                   BlockPos neighborPos) {
         if (canSurvive(state, world, pos))
             return world.getBlockState(pos.below()).getBlock() == this
-                    ? state.setValue(BlockProperties.BOTTOM, false)
-                    : state.setValue(BlockProperties.BOTTOM, true);
+                    ? state.setValue(BNBlockProperties.BOTTOM, false)
+                    : state.setValue(BNBlockProperties.BOTTOM, true);
         else
             return Blocks.AIR.defaultBlockState();
     }
@@ -116,16 +116,16 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
                 break;
         }
         BlocksHelper.setWithoutUpdate(world,
-                                      blockPos.above(),
-                                      defaultBlockState().setValue(BlockProperties.BOTTOM, false));
-        BlocksHelper.setWithoutUpdate(world, blockPos, defaultBlockState().setValue(BlockProperties.BOTTOM, true));
+                blockPos.above(),
+                defaultBlockState().setValue(BNBlockProperties.BOTTOM, false));
+        BlocksHelper.setWithoutUpdate(world, blockPos, defaultBlockState().setValue(BNBlockProperties.BOTTOM, true));
     }
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
         if (tool != null && BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH,
-                                                                                                      tool) > 0) {
+                tool) > 0) {
             return Lists.newArrayList(new ItemStack(this.asItem()));
         } else {
             return Lists.newArrayList();

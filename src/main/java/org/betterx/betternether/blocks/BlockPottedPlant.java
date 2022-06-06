@@ -21,7 +21,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.betternether.blocks.BlockProperties.PottedPlantShape;
+import org.betterx.betternether.blocks.BNBlockProperties.PottedPlantShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.function.ToIntFunction;
 
 public class BlockPottedPlant extends BlockBaseNotFull {
-    public static final EnumProperty<PottedPlantShape> PLANT = BlockProperties.PLANT;
+    public static final EnumProperty<PottedPlantShape> PLANT = BNBlockProperties.PLANT;
 
     public BlockPottedPlant() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)

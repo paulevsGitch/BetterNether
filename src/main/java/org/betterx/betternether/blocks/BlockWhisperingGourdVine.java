@@ -34,11 +34,11 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
+import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -46,7 +46,7 @@ import java.util.List;
 
 public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, AddMineableShears {
     private static final VoxelShape SELECTION = box(2, 0, 2, 14, 16, 14);
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
 
     public BlockWhisperingGourdVine() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)
@@ -60,7 +60,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
                                  .instabreak());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
-        this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.BOTTOM));
+        this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, BlockProperties.TripleShape.BOTTOM));
     }
 
     @Override
@@ -99,9 +99,9 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
         if (!canSurvive(state, world, pos))
             return Blocks.AIR.defaultBlockState();
         else if (world.getBlockState(pos.below()).getBlock() != this)
-            return state.setValue(SHAPE, TripleShape.BOTTOM);
-        else if (state.getValue(SHAPE) == TripleShape.BOTTOM)
-            return state.setValue(SHAPE, TripleShape.TOP);
+            return state.setValue(SHAPE, BlockProperties.TripleShape.BOTTOM);
+        else if (state.getValue(SHAPE) == BlockProperties.TripleShape.BOTTOM)
+            return state.setValue(SHAPE, BlockProperties.TripleShape.TOP);
         else
             return state;
     }
@@ -121,7 +121,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, TripleShape.TOP));
+        BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, BlockProperties.TripleShape.TOP));
         BlocksHelper.setWithUpdate(world, pos.below(), defaultBlockState());
     }
 
@@ -129,9 +129,9 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
         if (tool != null && (BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH,
-                                                                                                       tool) > 0))
+                tool) > 0))
             return Lists.newArrayList(new ItemStack(this.asItem()));
-        else if (state.getValue(SHAPE) == TripleShape.BOTTOM || MHelper.RANDOM.nextBoolean())
+        else if (state.getValue(SHAPE) == BlockProperties.TripleShape.BOTTOM || MHelper.RANDOM.nextBoolean())
             return Lists.newArrayList(new ItemStack(this.asItem()));
         else
             return Lists.newArrayList();
@@ -139,7 +139,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return state.getValue(SHAPE) == TripleShape.BOTTOM;
+        return state.getValue(SHAPE) == BlockProperties.TripleShape.BOTTOM;
     }
 
     @Override
@@ -151,7 +151,7 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
                 if (world.getBlockState(pos.above()).getBlock() != this) {
                     performBonemeal(world, random, pos, state);
                 } else {
-                    BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, TripleShape.MIDDLE));
+                    BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, BlockProperties.TripleShape.MIDDLE));
                     BlocksHelper.setWithUpdate(world, pos.below(), defaultBlockState());
                 }
             }
@@ -166,21 +166,21 @@ public class BlockWhisperingGourdVine extends BlockBaseNotFull implements Boneme
                                  InteractionHand hand,
                                  BlockHitResult hit) {
         ItemStack tool = player.getItemInHand(hand);
-        if (BaseShearsItem.isShear(tool) && state.getValue(SHAPE) == TripleShape.MIDDLE) {
+        if (BaseShearsItem.isShear(tool) && state.getValue(SHAPE) == BlockProperties.TripleShape.MIDDLE) {
             if (!world.isClientSide) {
-                BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, TripleShape.BOTTOM));
+                BlocksHelper.setWithUpdate(world, pos, state.setValue(SHAPE, BlockProperties.TripleShape.BOTTOM));
                 world.addFreshEntity(new ItemEntity(world,
-                                                    pos.getX() + 0.5,
-                                                    pos.getY() + 0.5,
-                                                    pos.getZ() + 0.5,
-                                                    new ItemStack(
-                                                            NetherBlocks.WHISPERING_GOURD)));
+                        pos.getX() + 0.5,
+                        pos.getY() + 0.5,
+                        pos.getZ() + 0.5,
+                        new ItemStack(
+                                NetherBlocks.WHISPERING_GOURD)));
                 if (world.random.nextBoolean()) {
                     world.addFreshEntity(new ItemEntity(world,
-                                                        pos.getX() + 0.5,
-                                                        pos.getY() + 0.5,
-                                                        pos.getZ() + 0.5,
-                                                        new ItemStack(NetherBlocks.WHISPERING_GOURD)));
+                            pos.getX() + 0.5,
+                            pos.getY() + 0.5,
+                            pos.getZ() + 0.5,
+                            new ItemStack(NetherBlocks.WHISPERING_GOURD)));
                 }
             }
             return InteractionResult.sidedSuccess(world.isClientSide);

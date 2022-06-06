@@ -37,7 +37,7 @@ import java.util.List;
 
 public class BlockEggPlant extends BlockCommonPlant {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 8, 16);
-    public static final BooleanProperty DESTRUCTED = BlockProperties.DESTRUCTED;
+    public static final BooleanProperty DESTRUCTED = BNBlockProperties.DESTRUCTED;
 
     private boolean enableModDamage = true;
     private boolean enablePlayerDamage = true;
@@ -90,12 +90,12 @@ public class BlockEggPlant extends BlockCommonPlant {
                 RandomSource random = world.random;
                 for (int i = 0; i < 24; i++)
                     world.addParticle(effect,
-                                      px + random.nextGaussian() * 0.2,
-                                      py + random.nextGaussian() * 0.2,
-                                      pz + random.nextGaussian() * 0.2,
-                                      random.nextGaussian(),
-                                      random.nextGaussian(),
-                                      random.nextGaussian());
+                            px + random.nextGaussian() * 0.2,
+                            py + random.nextGaussian() * 0.2,
+                            pz + random.nextGaussian() * 0.2,
+                            random.nextGaussian(),
+                            random.nextGaussian(),
+                            random.nextGaussian());
             }
 
             world.setBlockAndUpdate(pos, state.setValue(DESTRUCTED, true));

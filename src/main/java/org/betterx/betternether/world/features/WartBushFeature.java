@@ -27,11 +27,12 @@ public class WartBushFeature extends ContextFeature<NoneFeatureConfiguration> {
     }
 
     @Override
-    public boolean place(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         final int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
+    protected boolean place(ServerLevelAccessor world,
+                            BlockPos pos,
+                            RandomSource random,
+                            NoneFeatureConfiguration config,
+                            final int MAX_HEIGHT,
+                            StructureGeneratorThreadContext context) {
         if (world.isEmptyBlock(pos)) {
             BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHER_WART_BLOCK.defaultBlockState());
             for (Direction dir : DIRS)

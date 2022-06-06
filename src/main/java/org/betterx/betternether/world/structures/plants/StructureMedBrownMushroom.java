@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockBrownLargeMushroom;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.IStructure;
@@ -64,40 +64,40 @@ public class StructureMedBrownMushroom implements IStructure {
         if (hasAir) {
             BlockState middle = NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.MIDDLE);
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.MIDDLE);
             BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.BOTTOM));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.BOTTOM));
             for (int y = 1; y < size; y++)
                 BlocksHelper.setWithoutUpdate(world, pos.above(y), middle);
             pos = pos.above(size);
             BlocksHelper.setWithUpdate(world, pos, NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.TOP));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.TOP));
             BlocksHelper.setWithoutUpdate(world, pos.north(), NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.SIDE_N));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_N));
             BlocksHelper.setWithoutUpdate(world, pos.south(), NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.SIDE_S));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_S));
             BlocksHelper.setWithoutUpdate(world, pos.east(), NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.SIDE_E));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_E));
             BlocksHelper.setWithoutUpdate(world, pos.west(), NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.SIDE_W));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_W));
             BlocksHelper.setWithoutUpdate(world, pos.north().east(), NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.CORNER_N));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_N));
             BlocksHelper.setWithoutUpdate(world, pos.north().west(), NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.CORNER_W));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_W));
             BlocksHelper.setWithoutUpdate(world, pos.south().east(), NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.CORNER_E));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_E));
             BlocksHelper.setWithoutUpdate(world, pos.south().west(), NetherBlocks.BROWN_LARGE_MUSHROOM
                     .defaultBlockState()
-                    .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.CORNER_S));
+                    .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_S));
         }
     }
 }

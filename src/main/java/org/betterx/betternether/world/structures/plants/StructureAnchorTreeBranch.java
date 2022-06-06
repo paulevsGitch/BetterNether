@@ -10,10 +10,10 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockAnchorTreeVine;
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
@@ -72,12 +72,12 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
             float angle = n * MHelper.PI2 / count;
             float radius = CURVE_X[0] * branchSize * scale_factor;
             int x1 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F,
-                                                                                                  2F,
-                                                                                                  random) * branchSize);
+                    2F,
+                    random) * branchSize);
             int y1 = Math.round(pos.getY() + CURVE_Y[0] * branchSize + MHelper.randRange(-2F, 2F, random) * branchSize);
             int z1 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F,
-                                                                                                  2F,
-                                                                                                  random) * branchSize);
+                    2F,
+                    random) * branchSize);
             float crownR = 9 * branchSize;
             if (crownR < 1.5F)
                 crownR = 1.5F;
@@ -88,16 +88,16 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
             for (int i = 1; i < CURVE_X.length && generate; i++) {
                 radius = CURVE_X[i] * branchSize;
                 int x2 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F,
-                                                                                                      2F,
-                                                                                                      random) * branchSize);
+                        2F,
+                        random) * branchSize);
                 int y2 = Math.round(pos.getY() + CURVE_Y[i] * branchSize + (CURVE_Y[i] > 0
                         ? MHelper.randRange(-2F,
-                                            2F,
-                                            random) * branchSize
+                        2F,
+                        random) * branchSize
                         : 0));
                 int z2 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F,
-                                                                                                      2F,
-                                                                                                      random) * branchSize);
+                        2F,
+                        random) * branchSize);
 
                 if (CURVE_Y[i] >= 0) {
                     if (canReplace(world.getBlockState(context.POS.set(x2, y2, z2)))) {
@@ -271,8 +271,8 @@ public class StructureAnchorTreeBranch implements IStructure, IGrowableStructure
                     if (dist <= 7) {
                         final BlockPos blPos = bpos.offset(x, y, z);
                         context.LOGS_DIST.merge(blPos,
-                                                (byte) dist,
-                                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
+                                (byte) dist,
+                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
                     }
                 }
             }

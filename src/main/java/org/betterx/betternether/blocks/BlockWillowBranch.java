@@ -19,7 +19,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 import com.google.common.collect.Lists;
-import org.betterx.betternether.blocks.BlockProperties.WillowBranchShape;
+import org.betterx.betternether.blocks.BNBlockProperties.WillowBranchShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -28,7 +28,7 @@ import java.util.function.ToIntFunction;
 
 public class BlockWillowBranch extends BlockBaseNotFull {
     private static final VoxelShape V_SHAPE = Block.box(4, 0, 4, 12, 16, 12);
-    public static final EnumProperty<WillowBranchShape> SHAPE = BlockProperties.WILLOW_SHAPE;
+    public static final EnumProperty<WillowBranchShape> SHAPE = BNBlockProperties.WILLOW_SHAPE;
 
     public BlockWillowBranch() {
         super(Materials.makeWood(MaterialColor.TERRACOTTA_RED).noOcclusion().noCollission().lightLevel(getLuminance()));
@@ -75,8 +75,8 @@ public class BlockWillowBranch extends BlockBaseNotFull {
     @Environment(EnvType.CLIENT)
     public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
         return new ItemStack(state.getValue(SHAPE) == WillowBranchShape.END
-                                     ? NetherBlocks.MAT_WILLOW.getTorch()
-                                     : NetherBlocks.WILLOW_LEAVES);
+                ? NetherBlocks.MAT_WILLOW.getTorch()
+                : NetherBlocks.WILLOW_LEAVES);
     }
 
     @Override

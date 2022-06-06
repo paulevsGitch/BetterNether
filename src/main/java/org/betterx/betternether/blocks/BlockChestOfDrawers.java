@@ -41,7 +41,7 @@ public class BlockChestOfDrawers extends BaseEntityBlock {
             Direction.WEST, Block.box(8, 0, 0, 16, 16, 16),
             Direction.EAST, Block.box(0, 0, 0, 8, 16, 16)));
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    public static final BooleanProperty OPEN = BlockProperties.OPEN;
+    public static final BooleanProperty OPEN = BNBlockProperties.OPEN;
 
     public BlockChestOfDrawers() {
         super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK).noOcclusion());

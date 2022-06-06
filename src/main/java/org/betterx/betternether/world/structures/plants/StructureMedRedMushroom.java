@@ -6,8 +6,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.blocks.BlockRedLargeMushroom;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.IStructure;
@@ -58,18 +58,18 @@ public class StructureMedRedMushroom implements IStructure {
             }
         BlockState middle = NetherBlocks.RED_LARGE_MUSHROOM.defaultBlockState()
                                                            .setValue(BlockRedLargeMushroom.SHAPE,
-                                                                     BlockProperties.TripleShape.MIDDLE);
+                                                                   TripleShape.MIDDLE);
         for (int y = 1; y < size; y++)
             BlocksHelper.setWithoutUpdate(world, pos.above(y), middle);
         BlocksHelper.setWithoutUpdate(world,
-                                      pos.above(size),
-                                      NetherBlocks.RED_LARGE_MUSHROOM.defaultBlockState()
-                                                                     .setValue(BlockRedLargeMushroom.SHAPE,
-                                                                               BlockProperties.TripleShape.TOP));
+                pos.above(size),
+                NetherBlocks.RED_LARGE_MUSHROOM.defaultBlockState()
+                                               .setValue(BlockRedLargeMushroom.SHAPE,
+                                                       TripleShape.TOP));
         BlocksHelper.setWithUpdate(world,
-                                   pos,
-                                   NetherBlocks.RED_LARGE_MUSHROOM.defaultBlockState()
-                                                                  .setValue(BlockRedLargeMushroom.SHAPE,
-                                                                            BlockProperties.TripleShape.BOTTOM));
+                pos,
+                NetherBlocks.RED_LARGE_MUSHROOM.defaultBlockState()
+                                               .setValue(BlockRedLargeMushroom.SHAPE,
+                                                       TripleShape.BOTTOM));
     }
 }

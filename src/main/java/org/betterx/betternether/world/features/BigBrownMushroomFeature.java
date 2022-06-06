@@ -8,56 +8,57 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockBrownLargeMushroom;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class BigBrownMushroomFeature extends ContextFeature<NoneFeatureConfiguration> {
     private static final BlockState MIDDLE = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.MIDDLE);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.MIDDLE);
     private static final BlockState BOTTOM = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.BOTTOM);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.BOTTOM);
     private static final BlockState TOP = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.TOP);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.TOP);
     private static final BlockState SIDE_N = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.SIDE_N);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_N);
     private static final BlockState SIDE_S = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.SIDE_S);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_S);
     private static final BlockState SIDE_E = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.SIDE_E);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_E);
     private static final BlockState SIDE_W = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.SIDE_W);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.SIDE_W);
     private static final BlockState CORNER_N = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.CORNER_N);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_N);
     private static final BlockState CORNER_W = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.CORNER_W);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_W);
     private static final BlockState CORNER_E = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.CORNER_E);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_E);
     private static final BlockState CORNER_S = NetherBlocks.BROWN_LARGE_MUSHROOM
             .defaultBlockState()
-            .setValue(BlockBrownLargeMushroom.SHAPE, BlockProperties.BrownMushroomShape.CORNER_S);
+            .setValue(BlockBrownLargeMushroom.SHAPE, BNBlockProperties.BrownMushroomShape.CORNER_S);
 
     public BigBrownMushroomFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    boolean place(ServerLevelAccessor level,
-                  BlockPos pos,
-                  RandomSource random,
-                  int MAX_HEIGHT,
-                  StructureGeneratorThreadContext context) {
+    protected boolean place(ServerLevelAccessor level,
+                            BlockPos pos,
+                            RandomSource random,
+                            NoneFeatureConfiguration config,
+                            int MAX_HEIGHT,
+                            StructureGeneratorThreadContext context) {
         int size = org.betterx.bclib.util.BlocksHelper.blockCount(level,
                 pos,
                 Direction.UP,

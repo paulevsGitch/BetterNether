@@ -38,7 +38,7 @@ import java.util.List;
 
 public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 16, 14);
-    public static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
+    public static final BooleanProperty BOTTOM = BNBlockProperties.BOTTOM;
 
     public BlockGoldenVine() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)
@@ -48,7 +48,7 @@ public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlo
                                  .noCollission()
                                  .instabreak()
                                  .noOcclusion()
-             );
+        );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(BOTTOM, true));
@@ -127,7 +127,7 @@ public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlo
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
         if (tool != null && BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH,
-                                                                                                      tool) > 0) {
+                tool) > 0) {
             return Lists.newArrayList(new ItemStack(this.asItem()));
         } else {
             return Lists.newArrayList();

@@ -5,9 +5,9 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockLumabusVine;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
 import org.betterx.betternether.world.structures.IGrowableStructure;
@@ -38,7 +38,7 @@ public class StructureLumabusVine implements IStructure, IGrowableStructure {
 
         BlockState vineState = NetherBlocks.LUMABUS_VINE.defaultBlockState()
                                                         .setValue(BlockLumabusVine.SHAPE,
-                                                                  BlockProperties.TripleShape.MIDDLE);
+                                                                TripleShape.MIDDLE);
 
         BlocksHelper.setWithUpdate(world, pos, NetherBlocks.LUMABUS_VINE.defaultBlockState());
 
@@ -46,9 +46,9 @@ public class StructureLumabusVine implements IStructure, IGrowableStructure {
             BlocksHelper.setWithUpdate(world, pos.below(y), vineState);
 
         BlocksHelper.setWithUpdate(world,
-                                   pos.below(h2),
-                                   NetherBlocks.LUMABUS_VINE.defaultBlockState()
-                                                            .setValue(BlockLumabusVine.SHAPE,
-                                                                      BlockProperties.TripleShape.BOTTOM));
+                pos.below(h2),
+                NetherBlocks.LUMABUS_VINE.defaultBlockState()
+                                         .setValue(BlockLumabusVine.SHAPE,
+                                                 TripleShape.BOTTOM));
     }
 }

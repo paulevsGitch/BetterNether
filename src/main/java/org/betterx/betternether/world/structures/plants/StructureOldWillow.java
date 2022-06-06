@@ -13,8 +13,8 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
+import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockPlantWall;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.blocks.BlockWillowBranch;
 import org.betterx.betternether.blocks.BlockWillowLeaves;
 import org.betterx.betternether.blocks.complex.WillowMaterial;
@@ -59,12 +59,12 @@ public class StructureOldWillow extends StructureFuncScatter {
             float angle = n * MHelper.PI2 / count;
             float radius = CURVE_X[0] * branchSize;
             int x1 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F,
-                                                                                                  2F,
-                                                                                                  random) * branchSize);
+                    2F,
+                    random) * branchSize);
             int y1 = Math.round(pos.getY() + CURVE_Y[0] * branchSize + MHelper.randRange(-2F, 2F, random) * branchSize);
             int z1 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F,
-                                                                                                  2F,
-                                                                                                  random) * branchSize);
+                    2F,
+                    random) * branchSize);
             float crownR = 10 * branchSize;
             if (crownR < 1.5F) crownR = 1.5F;
             crown(world, new BlockPos(x1, y1 + 1, z1), crownR, random, blockBox);
@@ -73,16 +73,16 @@ public class StructureOldWillow extends StructureFuncScatter {
             for (int i = 1; i < CURVE_X.length && generate; i++) {
                 radius = CURVE_X[i] * branchSize;
                 int x2 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F,
-                                                                                                      2F,
-                                                                                                      random) * branchSize);
+                        2F,
+                        random) * branchSize);
                 int y2 = Math.round(pos.getY() + CURVE_Y[i] * branchSize + (CURVE_Y[i] > 0
                         ? MHelper.randRange(-2F,
-                                            2F,
-                                            random) * branchSize
+                        2F,
+                        random) * branchSize
                         : 0));
                 int z2 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F,
-                                                                                                      2F,
-                                                                                                      random) * branchSize);
+                        2F,
+                        random) * branchSize);
 
                 if (CURVE_Y[i] <= 0) {
                     if (!isGround(world.getBlockState(context.POS.set(x2, y2, z2)))) {
@@ -117,33 +117,33 @@ public class StructureOldWillow extends StructureFuncScatter {
             if (BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) || state.getMaterial().isReplaceable()) {
                 if (!context.BLOCKS.contains(bpos.above()) || !context.BLOCKS.contains(bpos.below()))
                     BlocksHelper.setWithUpdate(world,
-                                               bpos,
-                                               NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK)
-                                                                      .defaultBlockState());
+                            bpos,
+                            NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK)
+                                                   .defaultBlockState());
                 else
                     BlocksHelper.setWithUpdate(world,
-                                               bpos,
-                                               NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_LOG)
-                                                                      .defaultBlockState());
+                            bpos,
+                            NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_LOG)
+                                                   .defaultBlockState());
 
                 if (random.nextInt(8) == 0) {
                     state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(bpos.north()) && world.isEmptyBlock(bpos.north()))
                         BlocksHelper.setWithUpdate(world,
-                                                   bpos.north(),
-                                                   state.setValue(BlockPlantWall.FACING, Direction.NORTH));
+                                bpos.north(),
+                                state.setValue(BlockPlantWall.FACING, Direction.NORTH));
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(bpos.south()) && world.isEmptyBlock(bpos.south()))
                         BlocksHelper.setWithUpdate(world,
-                                                   bpos.south(),
-                                                   state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
+                                bpos.south(),
+                                state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(bpos.east()) && world.isEmptyBlock(bpos.east()))
                         BlocksHelper.setWithUpdate(world,
-                                                   bpos.east(),
-                                                   state.setValue(BlockPlantWall.FACING, Direction.EAST));
+                                bpos.east(),
+                                state.setValue(BlockPlantWall.FACING, Direction.EAST));
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(bpos.west()) && world.isEmptyBlock(bpos.west()))
                         BlocksHelper.setWithUpdate(world,
-                                                   bpos.west(),
-                                                   state.setValue(BlockPlantWall.FACING, Direction.WEST));
+                                bpos.west(),
+                                state.setValue(BlockPlantWall.FACING, Direction.WEST));
                 }
             }
         }
@@ -267,10 +267,10 @@ public class StructureOldWillow extends StructureFuncScatter {
                                     BlocksHelper.setWithUpdate(world, POS.below(i), vine, bounds);
                                 }
                                 BlocksHelper.setWithUpdate(world,
-                                                           POS.below(length - 1),
-                                                           vine.setValue(BlockWillowBranch.SHAPE,
-                                                                         BlockProperties.WillowBranchShape.END),
-                                                           bounds);
+                                        POS.below(length - 1),
+                                        vine.setValue(BlockWillowBranch.SHAPE,
+                                                BNBlockProperties.WillowBranchShape.END),
+                                        bounds);
                             } else if (random.nextBoolean() && world.getBlockState(POS.below())
                                                                     .getMaterial()
                                                                     .isReplaceable()) {

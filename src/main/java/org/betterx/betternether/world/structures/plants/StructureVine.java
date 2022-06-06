@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockProperties;
+import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
@@ -29,8 +29,8 @@ public class StructureVine implements IStructure {
             return;
         h = random.nextInt(h) + 1;
 
-        BlockState bottom = block.defaultBlockState().setValue(BlockProperties.BOTTOM, true);
-        BlockState middle = block.defaultBlockState().setValue(BlockProperties.BOTTOM, false);
+        BlockState bottom = block.defaultBlockState().setValue(BNBlockProperties.BOTTOM, true);
+        BlockState middle = block.defaultBlockState().setValue(BNBlockProperties.BOTTOM, false);
 
         context.POS.set(pos);
         for (int y = 0; y < h; y++) {

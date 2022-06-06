@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 
+import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockPottedPlant;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.blocks.BlockSmallLantern;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -522,7 +522,7 @@ public class CityPalette {
         RANDOM.setSeed(seed.hashCode());
         return NetherBlocks.POTTED_PLANT.defaultBlockState()
                                         .setValue(BlockPottedPlant.PLANT,
-                                                  BlockProperties.PottedPlantShape.values()[RANDOM.nextInt(
-                                                          BlockProperties.PottedPlantShape.values().length)]);
+                                                BNBlockProperties.PottedPlantShape.values()[RANDOM.nextInt(
+                                                        BNBlockProperties.PottedPlantShape.values().length)]);
     }
 }

@@ -39,9 +39,6 @@ public class NetherGravelDesert extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(BiomeFeatures.GRAVEL_DESERT_FLOOR)
-//                   .feature(NetherFeatures.NETHER_CACTUS)
-//                   .feature(NetherFeatures.BARREL_CACTUS)
-//                   .feature(NetherFeatures.AGAVE)
             ;
         }
 

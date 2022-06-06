@@ -22,7 +22,7 @@ import com.google.common.collect.Lists;
 import org.betterx.bclib.interfaces.tools.AddMineableAxe;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockProperties.EnumLucisShape;
+import org.betterx.betternether.blocks.BNBlockProperties.EnumLucisShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
@@ -32,7 +32,7 @@ import java.util.List;
 public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableAxe {
     private static final VoxelShape V_SHAPE = box(0, 0, 0, 16, 9, 16);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    public static final EnumProperty<EnumLucisShape> SHAPE = BlockProperties.LUCIS_SHAPE;
+    public static final EnumProperty<EnumLucisShape> SHAPE = BNBlockProperties.LUCIS_SHAPE;
 
     public BlockLucisMushroom() {
         super(FabricBlockSettings.of(Materials.NETHER_GRASS)
@@ -59,7 +59,7 @@ public class BlockLucisMushroom extends BlockBaseNotFull implements AddMineableA
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         return Lists.newArrayList(new ItemStack(NetherBlocks.LUCIS_SPORE),
-                                  new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(2, 4, MHelper.RANDOM)));
+                new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(2, 4, MHelper.RANDOM)));
     }
 
     @Override

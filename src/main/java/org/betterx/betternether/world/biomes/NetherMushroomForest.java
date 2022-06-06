@@ -34,6 +34,7 @@ public class NetherMushroomForest extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
                    .feature(BiomeFeatures.MUSHROOM_FORREST_FLOOR)
+                   .feature(BiomeFeatures.MUSHROOM_FORREST_CEIL)
                    .feature(BiomeFeatures.MUSHROOM_FORREST_WALL)
                    .edgeSize(6)
             ;

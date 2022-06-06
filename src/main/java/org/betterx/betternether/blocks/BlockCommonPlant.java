@@ -25,7 +25,7 @@ import org.betterx.betternether.blocks.materials.Materials;
 import java.util.function.Function;
 
 public abstract class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBlock {
-    public static final IntegerProperty AGE = BlockProperties.AGE_FOUR;
+    public static final IntegerProperty AGE = BNBlockProperties.AGE_FOUR;
 
     public BlockCommonPlant(MaterialColor color) {
         this(color, p -> p);

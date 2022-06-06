@@ -10,11 +10,11 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.betternether.blocks.BlockProperties.CincinnasitPillarShape;
+import org.betterx.betternether.blocks.BNBlockProperties.CincinnasitPillarShape;
 import org.betterx.betternether.registry.NetherBlocks;
 
 public class BlockCincinnasitPillar extends BlockBase {
-    public static final EnumProperty<CincinnasitPillarShape> SHAPE = BlockProperties.PILLAR_SHAPE;
+    public static final EnumProperty<CincinnasitPillarShape> SHAPE = BNBlockProperties.PILLAR_SHAPE;
 
     public BlockCincinnasitPillar() {
         super(FabricBlockSettings.copy(NetherBlocks.CINCINNASITE_BLOCK));

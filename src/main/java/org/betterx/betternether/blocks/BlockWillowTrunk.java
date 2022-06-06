@@ -10,11 +10,11 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.blocks.materials.Materials;
 
 public class BlockWillowTrunk extends BlockBaseNotFull {
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
     private static final VoxelShape SHAPE_BOTTOM = box(4, 0, 4, 12, 16, 12);
     private static final VoxelShape SHAPE_TOP = box(4, 0, 4, 12, 12, 12);
 

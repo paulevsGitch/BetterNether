@@ -18,14 +18,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
 public class BlockRedLargeMushroom extends BlockBaseNotFull {
     private static final VoxelShape TOP_SHAPE = box(0, 0.1, 0, 16, 16, 16);
     private static final VoxelShape MIDDLE_SHAPE = box(5, 0, 5, 11, 16, 11);
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
 
     public BlockRedLargeMushroom() {
         super(Materials.makeWood(MaterialColor.COLOR_RED).noOcclusion());

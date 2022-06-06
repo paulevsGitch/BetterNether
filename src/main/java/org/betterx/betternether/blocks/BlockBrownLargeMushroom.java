@@ -20,7 +20,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import org.betterx.betternether.blocks.BlockProperties.BrownMushroomShape;
+import org.betterx.betternether.blocks.BNBlockProperties.BrownMushroomShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -28,7 +28,7 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull {
     private static final VoxelShape TOP_CENTER_SHAPE = box(0, 0.1, 0, 16, 16, 16);
     private static final VoxelShape TOP_EDGE_SHAPE = box(0, 8, 0, 16, 16, 16);
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
-    public static final EnumProperty<BrownMushroomShape> SHAPE = BlockProperties.BROWN_MUSHROOM_SHAPE;
+    public static final EnumProperty<BrownMushroomShape> SHAPE = BNBlockProperties.BROWN_MUSHROOM_SHAPE;
 
     private static final BrownMushroomShape[] ROT_SIDE = new BrownMushroomShape[]{
             BrownMushroomShape.SIDE_N,

@@ -1,13 +1,10 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
@@ -20,7 +17,6 @@ import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
 import org.betterx.bclib.interfaces.NumericProvider;
 import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
-import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -28,9 +24,6 @@ import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.plants.StructureWallBrownMushroom;
-import org.betterx.betternether.world.structures.plants.StructureWallMoss;
-import org.betterx.betternether.world.structures.plants.StructureWallRedMushroom;
 
 import java.util.List;
 
@@ -96,6 +89,7 @@ public class NetherGrasslands extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(BiomeFeatures.NETHER_GRASSLANDS_FLOOR)
+                   .feature(BiomeFeatures.NETHER_GRASSLANDS_CEIL)
                    .feature(BiomeFeatures.NETHER_GRASSLANDS_WALL)
             ;
         }
@@ -135,24 +129,5 @@ public class NetherGrasslands extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.8F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.8F, true);
-        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.8F, true);
-    }
-
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-//		switch (random.nextInt(3)) {
-//			case 0 -> BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
-//			case 1 -> BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
-//			default -> super.genSurfColumn(world, pos, random);
-//		}
-//
-//		for (int i = 1; i < random.nextInt(3); i++) {
-//			BlockPos down = pos.below(i);
-//			if (random.nextInt(3) == 0 && BlocksHelper.isNetherGround(world.getBlockState(down))) {
-//				BlocksHelper.setWithoutUpdate(world, down, Blocks.SOUL_SAND.defaultBlockState());
-//			}
-//		}
     }
 }

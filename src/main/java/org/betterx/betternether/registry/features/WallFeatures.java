@@ -9,7 +9,9 @@ import org.betterx.betternether.world.features.LucisFeature;
 public class WallFeatures {
 
     public static final BCLFeature WALL_MOSS
-            = FastFeatures.wallPatch(BetterNether.makeID("wall_moss_red"), NetherBlocks.WALL_MOSS, 4, 2, 8);
+            = FastFeatures.wallPatch(BetterNether.makeID("wall_moss"), NetherBlocks.WALL_MOSS, 4, 2, 8);
+    public static final BCLFeature JUNGLE_MOSS
+            = FastFeatures.wallPatch(BetterNether.makeID("jungle_moss"), NetherBlocks.JUNGLE_MOSS, 4, 2, 8);
 
     public static final BCLFeature WALL_MUSHROOM_RED
             = FastFeatures.wallPatch(BetterNether.makeID("wall_mushroom_red"),

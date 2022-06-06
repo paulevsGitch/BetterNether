@@ -8,10 +8,10 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MaterialColor;
 
 import org.betterx.bclib.blocks.BaseStripableLogBlock;
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 
 public class RubeusLog extends BaseStripableLogBlock {
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
 
     public RubeusLog(MaterialColor color, Block striped) {
         super(color, striped);

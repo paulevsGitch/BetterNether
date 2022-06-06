@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockProperties.FoodShape;
+import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;

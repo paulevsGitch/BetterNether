@@ -5,10 +5,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockNeonEquisetum;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
@@ -33,13 +33,13 @@ public class StructureNeonEquisetum implements IStructure {
 
         BlockState bottom = NetherBlocks.NEON_EQUISETUM.defaultBlockState()
                                                        .setValue(BlockNeonEquisetum.SHAPE,
-                                                                 BlockProperties.TripleShape.BOTTOM);
+                                                               TripleShape.BOTTOM);
         BlockState middle = NetherBlocks.NEON_EQUISETUM.defaultBlockState()
                                                        .setValue(BlockNeonEquisetum.SHAPE,
-                                                                 BlockProperties.TripleShape.MIDDLE);
+                                                               TripleShape.MIDDLE);
         BlockState top = NetherBlocks.NEON_EQUISETUM.defaultBlockState()
                                                     .setValue(BlockNeonEquisetum.SHAPE,
-                                                              BlockProperties.TripleShape.TOP);
+                                                            TripleShape.TOP);
 
         context.POS.set(pos);
         for (int y = 0; y < h - 2; y++) {

@@ -47,7 +47,7 @@ public abstract class NetherBiomeConfig {
     }
 
     public boolean hasStalactites() {
-        return true;
+        return false;
     }
 
     public boolean hasDefaultOres() {

@@ -1,4 +1,4 @@
-package org.betterx.betternether.world.structures.plants;
+package org.betterx.betternether.world.features;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -6,23 +6,28 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
-public class StructureRubeusBush implements IStructure {
+public class RubeusBushFeature extends ContextFeature<NoneFeatureConfiguration> {
+    public RubeusBushFeature() {
+        super(NoneFeatureConfiguration.CODEC);
+    }
+
     @Override
-    public void generate(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         final int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
+    protected boolean place(ServerLevelAccessor world,
+                            BlockPos pos,
+                            RandomSource random,
+                            NoneFeatureConfiguration config,
+                            int MAX_HEIGHT,
+                            StructureGeneratorThreadContext context) {
         if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
-            return;
+            return false;
 
         float r = random.nextFloat() * 3 + 1;
         int count = (int) r;
@@ -63,6 +68,8 @@ public class StructureRubeusBush implements IStructure {
         setIfAir(world, pos.south(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
         setIfAir(world, pos.east(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
         setIfAir(world, pos.west(), NetherBlocks.RUBEUS_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+
+        return true;
     }
 
     private void setIfAir(LevelAccessor world, BlockPos pos, BlockState state) {

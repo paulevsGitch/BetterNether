@@ -9,9 +9,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockLucisMushroom;
 import org.betterx.betternether.blocks.BlockLucisSpore;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
@@ -19,24 +19,25 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> {
 
     private static final BlockState CENTER = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState()
                                                                         .setValue(BlockLucisMushroom.SHAPE,
-                                                                                BlockProperties.EnumLucisShape.CENTER);
+                                                                                BNBlockProperties.EnumLucisShape.CENTER);
     private static final BlockState SIDE = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState()
                                                                       .setValue(BlockLucisMushroom.SHAPE,
-                                                                              BlockProperties.EnumLucisShape.SIDE);
+                                                                              BNBlockProperties.EnumLucisShape.SIDE);
     private static BlockState CORNER = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState()
                                                                   .setValue(BlockLucisMushroom.SHAPE,
-                                                                          BlockProperties.EnumLucisShape.CORNER);
+                                                                          BNBlockProperties.EnumLucisShape.CORNER);
 
     public LucisFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    boolean place(ServerLevelAccessor world,
-                  BlockPos pos,
-                  RandomSource random,
-                  int MAX_HEIGHT,
-                  StructureGeneratorThreadContext context) {
+    protected boolean place(ServerLevelAccessor world,
+                            BlockPos pos,
+                            RandomSource random,
+                            NoneFeatureConfiguration config,
+                            int MAX_HEIGHT,
+                            StructureGeneratorThreadContext context) {
         if (canGenerate(world, pos)) {
 
             if (random.nextInt(3) == 0) {

@@ -20,7 +20,7 @@ import org.betterx.bclib.api.tag.TagAPI;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.bclib.registry.ItemRegistry;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.BlockProperties.FoodShape;
+import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.integrations.VanillaExcavatorsIntegration;
 import org.betterx.betternether.integrations.VanillaHammersIntegration;
@@ -42,110 +42,110 @@ public class NetherItems extends ItemRegistry {
 
     public static final Item STALAGNATE_BOWL = registerItem("stalagnate_bowl", new ItemBowlFood(null, FoodShape.NONE));
     public static final Item STALAGNATE_BOWL_WART = registerItem("stalagnate_bowl_wart",
-                                                                 new ItemBowlFood(Foods.COOKED_CHICKEN,
-                                                                                  FoodShape.WART));
+            new ItemBowlFood(Foods.COOKED_CHICKEN,
+                    FoodShape.WART));
     public static final Item STALAGNATE_BOWL_MUSHROOM = registerItem("stalagnate_bowl_mushroom",
-                                                                     new ItemBowlFood(Foods.MUSHROOM_STEW,
-                                                                                      FoodShape.MUSHROOM));
+            new ItemBowlFood(Foods.MUSHROOM_STEW,
+                    FoodShape.MUSHROOM));
     public static final Item STALAGNATE_BOWL_APPLE = registerItem("stalagnate_bowl_apple",
-                                                                  new ItemBowlFood(Foods.APPLE, FoodShape.APPLE));
+            new ItemBowlFood(Foods.APPLE, FoodShape.APPLE));
     public static final Item HOOK_MUSHROOM = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
     public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
     public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()),
-                                                               CommonItemTags.IRON_INGOTS);
+            CommonItemTags.IRON_INGOTS);
 
     public static final Item CINCINNASITE_PICKAXE = registerTool("cincinnasite_pickaxe", new NetherPickaxe(
             BNToolMaterial.CINCINNASITE));
     public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerTool("cincinnasite_pickaxe_diamond",
-                                                                         new NetherPickaxe(BNToolMaterial.CINCINNASITE_DIAMOND));
+            new NetherPickaxe(BNToolMaterial.CINCINNASITE_DIAMOND));
     public static final Item CINCINNASITE_AXE = registerTool("cincinnasite_axe",
-                                                             new NetherAxe(BNToolMaterial.CINCINNASITE));
+            new NetherAxe(BNToolMaterial.CINCINNASITE));
     public static final Item CINCINNASITE_AXE_DIAMOND = registerTool("cincinnasite_axe_diamond",
-                                                                     new NetherAxe(BNToolMaterial.CINCINNASITE_DIAMOND));
+            new NetherAxe(BNToolMaterial.CINCINNASITE_DIAMOND));
     public static final Item CINCINNASITE_SHOVEL = registerTool("cincinnasite_shovel",
-                                                                new NetherShovel(BNToolMaterial.CINCINNASITE));
+            new NetherShovel(BNToolMaterial.CINCINNASITE));
     public static final Item CINCINNASITE_SHOVEL_DIAMOND = registerTool("cincinnasite_shovel_diamond",
-                                                                        new NetherShovel(BNToolMaterial.CINCINNASITE_DIAMOND));
+            new NetherShovel(BNToolMaterial.CINCINNASITE_DIAMOND));
     public static final Item CINCINNASITE_HOE = registerTool("cincinnasite_hoe",
-                                                             new NetherHoe(BNToolMaterial.CINCINNASITE));
+            new NetherHoe(BNToolMaterial.CINCINNASITE));
     public static final Item CINCINNASITE_HOE_DIAMOND = registerTool("cincinnasite_hoe_diamond",
-                                                                     new NetherHoe(BNToolMaterial.CINCINNASITE_DIAMOND));
+            new NetherHoe(BNToolMaterial.CINCINNASITE_DIAMOND));
     public static final Item CINCINNASITE_SHEARS = registerShears("cincinnasite_shears",
-                                                                  new BaseShearsItem(defaultSettings().durability(380)));
+            new BaseShearsItem(defaultSettings().durability(380)));
 
     public static final Item CINCINNASITE_HELMET = registerItem("cincinnasite_helmet",
-                                                                new NetherArmor(BNArmorMaterial.CINCINNASITE,
-                                                                                EquipmentSlot.HEAD));
+            new NetherArmor(BNArmorMaterial.CINCINNASITE,
+                    EquipmentSlot.HEAD));
     public static final Item CINCINNASITE_CHESTPLATE = registerItem("cincinnasite_chestplate",
-                                                                    new NetherArmor(BNArmorMaterial.CINCINNASITE,
-                                                                                    EquipmentSlot.CHEST));
+            new NetherArmor(BNArmorMaterial.CINCINNASITE,
+                    EquipmentSlot.CHEST));
     public static final Item CINCINNASITE_LEGGINGS = registerItem("cincinnasite_leggings",
-                                                                  new NetherArmor(BNArmorMaterial.CINCINNASITE,
-                                                                                  EquipmentSlot.LEGS));
+            new NetherArmor(BNArmorMaterial.CINCINNASITE,
+                    EquipmentSlot.LEGS));
     public static final Item CINCINNASITE_BOOTS = registerItem("cincinnasite_boots",
-                                                               new NetherArmor(BNArmorMaterial.CINCINNASITE,
-                                                                               EquipmentSlot.FEET));
+            new NetherArmor(BNArmorMaterial.CINCINNASITE,
+                    EquipmentSlot.FEET));
     public static final Item CINCINNASITE_SWORD = registerItem("cincinnasite_sword",
-                                                               new NetherSword(BNToolMaterial.CINCINNASITE, 3, -2.4F));
+            new NetherSword(BNToolMaterial.CINCINNASITE, 3, -2.4F));
     public static final Item CINCINNASITE_SWORD_DIAMOND = registerItem("cincinnasite_sword_diamond",
-                                                                       new NetherSword(BNToolMaterial.CINCINNASITE_DIAMOND,
-                                                                                       3,
-                                                                                       -2.4F));
+            new NetherSword(BNToolMaterial.CINCINNASITE_DIAMOND,
+                    3,
+                    -2.4F));
 
     public static final Item NETHER_RUBY = registerItem("nether_ruby", new Item(defaultSettings()));
     public static final Item NETHER_RUBY_PICKAXE = registerTool("nether_ruby_pickaxe",
-                                                                new NetherPickaxe(BNToolMaterial.NETHER_RUBY));
+            new NetherPickaxe(BNToolMaterial.NETHER_RUBY));
     public static final Item NETHER_RUBY_AXE = registerTool("nether_ruby_axe",
-                                                            new NetherAxe(BNToolMaterial.NETHER_RUBY));
+            new NetherAxe(BNToolMaterial.NETHER_RUBY));
     public static final Item NETHER_RUBY_SHOVEL = registerTool("nether_ruby_shovel",
-                                                               new NetherShovel(BNToolMaterial.NETHER_RUBY));
+            new NetherShovel(BNToolMaterial.NETHER_RUBY));
     public static final Item NETHER_RUBY_HOE = registerTool("nether_ruby_hoe",
-                                                            new NetherHoe(BNToolMaterial.NETHER_RUBY));
+            new NetherHoe(BNToolMaterial.NETHER_RUBY));
     public static final Item NETHER_RUBY_SWORD = registerItem("nether_ruby_sword",
-                                                              new NetherSword(BNToolMaterial.NETHER_RUBY, 3, -2.4F));
+            new NetherSword(BNToolMaterial.NETHER_RUBY, 3, -2.4F));
     public static final Item NETHER_RUBY_HELMET = registerItem("nether_ruby_helmet",
-                                                               new NetherArmor(BNArmorMaterial.NETHER_RUBY,
-                                                                               EquipmentSlot.HEAD));
+            new NetherArmor(BNArmorMaterial.NETHER_RUBY,
+                    EquipmentSlot.HEAD));
     public static final Item NETHER_RUBY_CHESTPLATE = registerItem("nether_ruby_chestplate",
-                                                                   new NetherArmor(BNArmorMaterial.NETHER_RUBY,
-                                                                                   EquipmentSlot.CHEST));
+            new NetherArmor(BNArmorMaterial.NETHER_RUBY,
+                    EquipmentSlot.CHEST));
     public static final Item NETHER_RUBY_LEGGINGS = registerItem("nether_ruby_leggings",
-                                                                 new NetherArmor(BNArmorMaterial.NETHER_RUBY,
-                                                                                 EquipmentSlot.LEGS));
+            new NetherArmor(BNArmorMaterial.NETHER_RUBY,
+                    EquipmentSlot.LEGS));
     public static final Item NETHER_RUBY_BOOTS = registerItem("nether_ruby_boots",
-                                                              new NetherArmor(BNArmorMaterial.NETHER_RUBY,
-                                                                              EquipmentSlot.FEET));
+            new NetherArmor(BNArmorMaterial.NETHER_RUBY,
+                    EquipmentSlot.FEET));
 
     public static final Item CINCINNASITE_HAMMER = registerItem("cincinnasite_hammer",
-                                                                VanillaHammersIntegration.makeHammer(BNToolMaterial.CINCINNASITE,
-                                                                                                     4,
-                                                                                                     -2.0F));
+            VanillaHammersIntegration.makeHammer(BNToolMaterial.CINCINNASITE,
+                    4,
+                    -2.0F));
     public static final Item CINCINNASITE_HAMMER_DIAMOND = registerItem("cincinnasite_hammer_diamond",
-                                                                        VanillaHammersIntegration.makeHammer(
-                                                                                BNToolMaterial.CINCINNASITE_DIAMOND,
-                                                                                5,
-                                                                                -2.0F));
+            VanillaHammersIntegration.makeHammer(
+                    BNToolMaterial.CINCINNASITE_DIAMOND,
+                    5,
+                    -2.0F));
     public static final Item NETHER_RUBY_HAMMER = registerItem("nether_ruby_hammer",
-                                                               VanillaHammersIntegration.makeHammer(BNToolMaterial.NETHER_RUBY,
-                                                                                                    5,
-                                                                                                    -2.0F));
+            VanillaHammersIntegration.makeHammer(BNToolMaterial.NETHER_RUBY,
+                    5,
+                    -2.0F));
 
     public static final Item CINCINNASITE_EXCAVATOR = registerItem("cincinnasite_excavator",
-                                                                   VanillaExcavatorsIntegration.makeExcavator(
-                                                                           BNToolMaterial.CINCINNASITE,
-                                                                           4,
-                                                                           -2.0F));
+            VanillaExcavatorsIntegration.makeExcavator(
+                    BNToolMaterial.CINCINNASITE,
+                    4,
+                    -2.0F));
     public static final Item CINCINNASITE_EXCAVATOR_DIAMOND = registerItem("cincinnasite_excavator_diamond",
-                                                                           VanillaExcavatorsIntegration.makeExcavator(
-                                                                                   BNToolMaterial.CINCINNASITE_DIAMOND,
-                                                                                   5,
-                                                                                   -2.0F));
+            VanillaExcavatorsIntegration.makeExcavator(
+                    BNToolMaterial.CINCINNASITE_DIAMOND,
+                    5,
+                    -2.0F));
     public static final Item NETHER_RUBY_EXCAVATOR = registerItem("nether_ruby_excavator",
-                                                                  VanillaExcavatorsIntegration.makeExcavator(
-                                                                          BNToolMaterial.NETHER_RUBY,
-                                                                          5,
-                                                                          -2.0F));
+            VanillaExcavatorsIntegration.makeExcavator(
+                    BNToolMaterial.NETHER_RUBY,
+                    5,
+                    -2.0F));
 
     public static final Item GLOWSTONE_PILE = registerItem("glowstone_pile", new Item(defaultSettings()));
     public static final Item LAPIS_PILE = registerItem("lapis_pile", new Item(defaultSettings()));
@@ -212,10 +212,10 @@ public class NetherItems extends ItemRegistry {
 
     public static Item registerFood(String name, int hunger, float saturationMultiplier) {
         return registerItem(name,
-                            new Item(defaultSettings().food(new FoodProperties.Builder().nutrition(hunger)
-                                                                                        .saturationMod(
-                                                                                                saturationMultiplier)
-                                                                                        .build())));
+                new Item(defaultSettings().food(new FoodProperties.Builder().nutrition(hunger)
+                                                                            .saturationMod(
+                                                                                    saturationMultiplier)
+                                                                            .build())));
     }
 
     public static Item registerMedicine(String name, int ticks, int power, boolean bowl) {
@@ -242,10 +242,10 @@ public class NetherItems extends ItemRegistry {
             return registerItem(name, item);
         }
         return registerItem(name,
-                            new Item(defaultSettings().food(new FoodProperties.Builder().effect(new MobEffectInstance(
-                                    MobEffects.REGENERATION,
-                                    ticks,
-                                    power), 1).build())));
+                new Item(defaultSettings().food(new FoodProperties.Builder().effect(new MobEffectInstance(
+                        MobEffects.REGENERATION,
+                        ticks,
+                        power), 1).build())));
     }
 
     public static Properties defaultSettings() {
@@ -260,12 +260,12 @@ public class NetherItems extends ItemRegistry {
                     Direction direction = pointer.getBlockState().getValue(DispenserBlock.FACING);
                     EntityType<?> entityType = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
                     entityType.spawn(pointer.getLevel(),
-                                     stack,
-                                     null,
-                                     pointer.getPos().relative(direction),
-                                     MobSpawnType.DISPENSER,
-                                     direction != Direction.UP,
-                                     false);
+                            stack,
+                            null,
+                            pointer.getPos().relative(direction),
+                            MobSpawnType.DISPENSER,
+                            direction != Direction.UP,
+                            false);
                     stack.shrink(1);
                     return stack;
                 }

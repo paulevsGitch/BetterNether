@@ -31,11 +31,12 @@ public class WartCapFeature extends ContextFeature<NoneFeatureConfiguration> {
 
 
     @Override
-    boolean place(ServerLevelAccessor world,
-                  BlockPos pos,
-                  RandomSource random,
-                  int MAX_HEIGHT,
-                  StructureGeneratorThreadContext context) {
+    protected boolean place(ServerLevelAccessor world,
+                            BlockPos pos,
+                            RandomSource random,
+                            NoneFeatureConfiguration config,
+                            int MAX_HEIGHT,
+                            StructureGeneratorThreadContext context) {
         if (!isWall(world,
                 pos) || pos.getY() > (MAX_HEIGHT * 0.45) || pos.getY() < (MAX_HEIGHT * 0.25) || world.isEmptyBlock(
                 pos.below(3)))

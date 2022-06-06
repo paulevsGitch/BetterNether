@@ -6,8 +6,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.blocks.BlockStalagnate;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.IStructure;
@@ -29,7 +29,9 @@ public class StructureStalagnate implements IStructure {
             BlockState bottom = main.defaultBlockState()
                                     .setValue(BlockStalagnate.SHAPE, BlockProperties.TripleShape.BOTTOM);
             BlockState middle = main.defaultBlockState();
-            BlockState top = main.defaultBlockState().setValue(BlockStalagnate.SHAPE, BlockProperties.TripleShape.TOP);
+            BlockState top = main
+                    .defaultBlockState()
+                    .setValue(BlockStalagnate.SHAPE, BlockProperties.TripleShape.TOP);
 
             BlocksHelper.setWithUpdate(world, pos, bottom);
             BlocksHelper.setWithUpdate(world, pos.above(length), top);
@@ -45,7 +47,9 @@ public class StructureStalagnate implements IStructure {
             BlockState bottom = main.defaultBlockState()
                                     .setValue(BlockStalagnate.SHAPE, BlockProperties.TripleShape.BOTTOM);
             BlockState middle = main.defaultBlockState();
-            BlockState top = main.defaultBlockState().setValue(BlockStalagnate.SHAPE, BlockProperties.TripleShape.TOP);
+            BlockState top = main
+                    .defaultBlockState()
+                    .setValue(BlockStalagnate.SHAPE, BlockProperties.TripleShape.TOP);
 
             BlocksHelper.setWithUpdate(world, pos.below(length), bottom);
             BlocksHelper.setWithUpdate(world, pos, top);

@@ -7,9 +7,10 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockJellyfishMushroom;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
@@ -53,37 +54,37 @@ public class StructureJellyfishMushroom implements IStructure {
 
     public void growSmall(ServerLevelAccessor world, BlockPos pos) {
         Block down = world.getBlockState(pos.below()).getBlock();
-        BlockProperties.JellyShape visual = down == NetherBlocks.MUSHROOM_GRASS
-                ? BlockProperties.JellyShape.NORMAL
+        BNBlockProperties.JellyShape visual = down == NetherBlocks.MUSHROOM_GRASS
+                ? BNBlockProperties.JellyShape.NORMAL
                 : down == NetherBlocks.SEPIA_MUSHROOM_GRASS
-                        ? BlockProperties.JellyShape.SEPIA
-                        : BlockProperties.JellyShape.POOR;
+                        ? BNBlockProperties.JellyShape.SEPIA
+                        : BNBlockProperties.JellyShape.POOR;
         BlocksHelper.setWithUpdate(world, pos, NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
                                                                               .setValue(
                                                                                       BlockJellyfishMushroom.SHAPE,
-                                                                                      BlockProperties.TripleShape.BOTTOM)
+                                                                                      TripleShape.BOTTOM)
                                                                               .setValue(BlockJellyfishMushroom.VISUAL,
-                                                                                        visual));
+                                                                                      visual));
     }
 
     public void growMedium(ServerLevelAccessor world, BlockPos pos) {
         Block down = world.getBlockState(pos.below()).getBlock();
-        BlockProperties.JellyShape visual = down == NetherBlocks.MUSHROOM_GRASS
-                ? BlockProperties.JellyShape.NORMAL
+        BNBlockProperties.JellyShape visual = down == NetherBlocks.MUSHROOM_GRASS
+                ? BNBlockProperties.JellyShape.NORMAL
                 : down == NetherBlocks.SEPIA_MUSHROOM_GRASS
-                        ? BlockProperties.JellyShape.SEPIA
-                        : BlockProperties.JellyShape.POOR;
+                        ? BNBlockProperties.JellyShape.SEPIA
+                        : BNBlockProperties.JellyShape.POOR;
         BlocksHelper.setWithUpdate(world,
-                                   pos,
-                                   NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
-                                                                  .setValue(BlockJellyfishMushroom.SHAPE,
-                                                                            BlockProperties.TripleShape.MIDDLE)
-                                                                  .setValue(BlockJellyfishMushroom.VISUAL, visual));
+                pos,
+                NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
+                                               .setValue(BlockJellyfishMushroom.SHAPE,
+                                                       TripleShape.MIDDLE)
+                                               .setValue(BlockJellyfishMushroom.VISUAL, visual));
         BlocksHelper.setWithUpdate(world,
-                                   pos.above(),
-                                   NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
-                                                                  .setValue(BlockJellyfishMushroom.SHAPE,
-                                                                            BlockProperties.TripleShape.TOP)
-                                                                  .setValue(BlockJellyfishMushroom.VISUAL, visual));
+                pos.above(),
+                NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
+                                               .setValue(BlockJellyfishMushroom.SHAPE,
+                                                       TripleShape.TOP)
+                                               .setValue(BlockJellyfishMushroom.VISUAL, visual));
     }
 }

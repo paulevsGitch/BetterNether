@@ -20,14 +20,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 
 public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGround {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
 
     public BlockSmoker() {
         super(Materials.makeWood(MaterialColor.COLOR_BROWN));

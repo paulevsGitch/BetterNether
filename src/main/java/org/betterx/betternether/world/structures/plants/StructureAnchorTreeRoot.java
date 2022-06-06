@@ -8,11 +8,11 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockAnchorTreeVine;
 import org.betterx.betternether.blocks.BlockPlantWall;
-import org.betterx.betternether.blocks.BlockProperties;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
@@ -69,8 +69,8 @@ public class StructureAnchorTreeRoot implements IStructure {
             }
 
             if ((bpos.getY() & 3) == 0 && StructureAnchorTree.NOISE.eval(bpos.getX() * 0.1,
-                                                                         bpos.getY() * 0.1,
-                                                                         bpos.getZ() * 0.1) > 0) {
+                    bpos.getY() * 0.1,
+                    bpos.getZ() * 0.1) > 0) {
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.north()))
                     if (random.nextBoolean())
                         StructureAnchorTree.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5, blockBox);
@@ -119,13 +119,13 @@ public class StructureAnchorTreeRoot implements IStructure {
                         BlocksHelper.setWithoutUpdate(world, bpos.below(i), vine);
                     }
                     BlocksHelper.setWithoutUpdate(world,
-                                                  bpos.below(length - 2),
-                                                  vine.setValue(BlockAnchorTreeVine.SHAPE,
-                                                                BlockProperties.TripleShape.MIDDLE));
+                            bpos.below(length - 2),
+                            vine.setValue(BlockAnchorTreeVine.SHAPE,
+                                    TripleShape.MIDDLE));
                     BlocksHelper.setWithoutUpdate(world,
-                                                  bpos.below(length - 1),
-                                                  vine.setValue(BlockAnchorTreeVine.SHAPE,
-                                                                BlockProperties.TripleShape.BOTTOM));
+                            bpos.below(length - 1),
+                            vine.setValue(BlockAnchorTreeVine.SHAPE,
+                                    TripleShape.BOTTOM));
                 }
             }
         }

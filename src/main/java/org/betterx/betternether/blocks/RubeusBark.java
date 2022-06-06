@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.MaterialColor;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.bclib.blocks.StripableBarkBlock;
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
 
 public class RubeusBark extends StripableBarkBlock {
     public RubeusBark(MaterialColor color, Block striped) {

@@ -21,7 +21,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
 
@@ -29,7 +29,7 @@ import java.util.function.ToIntFunction;
 
 public class BlockAnchorTreeVine extends BlockBaseNotFull {
     protected static final VoxelShape SHAPE_SELECTION = Block.box(4, 0, 4, 12, 16, 12);
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
 
     public BlockAnchorTreeVine() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)

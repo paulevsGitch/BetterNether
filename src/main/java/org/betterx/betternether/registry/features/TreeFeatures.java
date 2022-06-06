@@ -14,11 +14,11 @@ import org.betterx.bclib.api.tag.CommonBlockTags;
 import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.bclib.world.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.BlockProperties;
-import org.betterx.betternether.blocks.BlockSmoker;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.BigBrownMushroomFeature;
 import org.betterx.betternether.world.features.MushroomFirFeature;
+import org.betterx.betternether.world.features.RubeusTreeFeature;
+import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 
 import java.util.List;
 
@@ -49,15 +49,7 @@ public class TreeFeatures {
             BetterNether.makeID("big_red_mushroom_cluster"), true, false,
             ScatterFeatureConfig.OnSolid
                     .startOnSolid()
-                    .block(NetherBlocks.RED_LARGE_MUSHROOM
-                            .defaultBlockState()
-                            .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.MIDDLE))
-                    .tipBlock(NetherBlocks.RED_LARGE_MUSHROOM
-                            .defaultBlockState()
-                            .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.TOP))
-                    .bottomBlock(NetherBlocks.RED_LARGE_MUSHROOM
-                            .defaultBlockState()
-                            .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.BOTTOM))
+                    .tripleShape(NetherBlocks.RED_LARGE_MUSHROOM)
                     .heightRange(2, 7)
                     .growWhileFree()
                     .spread(2, 0.9f, ClampedNormalInt.of(8, 1.3f, 3, 14))
@@ -74,7 +66,7 @@ public class TreeFeatures {
             .findSolidFloor(3)
             .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
             .buildAndRegister();
-    
+
     public static final BCLFeature MUSHROOM_FIR
             = FastFeatures.patch(BetterNether.makeID("mushroom_fir"),
             2,
@@ -91,18 +83,20 @@ public class TreeFeatures {
             BetterNether.makeID("giant_mold"), true, false,
             ScatterFeatureConfig.OnSolid
                     .startOnSolid()
-                    .block(NetherBlocks.GIANT_MOLD
-                            .defaultBlockState()
-                            .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.MIDDLE))
-                    .tipBlock(NetherBlocks.GIANT_MOLD
-                            .defaultBlockState()
-                            .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.TOP))
-                    .bottomBlock(NetherBlocks.GIANT_MOLD
-                            .defaultBlockState()
-                            .setValue(BlockSmoker.SHAPE, BlockProperties.TripleShape.BOTTOM))
+                    .tripleShape(NetherBlocks.GIANT_MOLD)
                     .heightRange(2, 6)
                     .spread(0, 0)
     );
+
+    public static final BCLFeature RUBEUS
+            = FastFeatures.patch(BetterNether.makeID("rubeus"),
+            2,
+            2,
+            4,
+            BCLFeatureBuilder
+                    .start(BetterNether.makeID("rubeus"), new RubeusTreeFeature())
+                    .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+                    .buildAndRegister(NaturalTreeConfiguration.natural()));
 
 
     static StructureWorldNBT cfg(ResourceLocation location,

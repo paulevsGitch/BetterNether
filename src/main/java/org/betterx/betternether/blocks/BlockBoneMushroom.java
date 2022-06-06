@@ -33,7 +33,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
     private static final VoxelShape SHAPE_EAST = box(0, 1, 1, 8, 15, 15);
     private static final VoxelShape SHAPE_UP = box(1, 0, 1, 15, 12, 15);
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
-    public static final IntegerProperty AGE = BlockProperties.AGE_THREE;
+    public static final IntegerProperty AGE = BNBlockProperties.AGE_THREE;
 
     public BlockBoneMushroom() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)

@@ -80,13 +80,14 @@ public class MushroomFirFeature extends ContextFeature<NoneFeatureConfiguration>
     }
 
     @Override
-    boolean place(ServerLevelAccessor level,
-                  BlockPos pos,
-                  RandomSource random,
-                  int MAX_HEIGHT,
-                  StructureGeneratorThreadContext context) {
+    protected boolean place(ServerLevelAccessor level,
+                            BlockPos pos,
+                            RandomSource random,
+                            NoneFeatureConfiguration config,
+                            int MAX_HEIGHT,
+                            StructureGeneratorThreadContext context) {
         if (!level.getBlockState(pos.below()).is(CommonBlockTags.MYCELIUM)) return false;
-        
+
         final float scale_factor = MAX_HEIGHT / 128.0f;
         final int RANDOM_BOUND = (int) (5 * scale_factor);
         if (level.getBlockState(pos.below()).getBlock() == NetherBlocks.NETHER_MYCELIUM) {

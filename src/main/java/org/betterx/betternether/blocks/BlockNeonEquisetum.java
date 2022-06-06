@@ -33,9 +33,9 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 
@@ -44,7 +44,7 @@ import java.util.List;
 
 public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack {
     protected static final VoxelShape SHAPE_SELECTION = box(2, 0, 2, 14, 16, 14);
-    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
 
     public BlockNeonEquisetum() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)
@@ -55,7 +55,7 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
                                  .noLootTable()
                                  .instabreak()
                                  .noOcclusion()
-             );
+        );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.BOTTOM));
         setDropItself(false);
@@ -125,7 +125,7 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
         if (tool != null && BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH,
-                                                                                                      tool) > 0) {
+                tool) > 0) {
             return Lists.newArrayList(new ItemStack(this.asItem()));
         } else {
             return Lists.newArrayList();

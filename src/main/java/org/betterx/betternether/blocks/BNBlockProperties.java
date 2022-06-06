@@ -9,11 +9,12 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
+import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import java.util.function.Supplier;
 
-public class BlockProperties {
+public class BNBlockProperties {
     public static final EnumProperty<CincinnasitPillarShape> PILLAR_SHAPE = EnumProperty.create("shape",
             CincinnasitPillarShape.class);
     public static final EnumProperty<BrownMushroomShape> BROWN_MUSHROOM_SHAPE = EnumProperty.create("shape",
@@ -24,7 +25,7 @@ public class BlockProperties {
             JellyShape.class);
     public static final EnumProperty<EnumLucisShape> LUCIS_SHAPE = EnumProperty.create("shape", EnumLucisShape.class);
     public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.create("plant", PottedPlantShape.class);
-    public static final EnumProperty<TripleShape> TRIPLE_SHAPE = EnumProperty.create("shape", TripleShape.class);
+    public static final EnumProperty<BlockProperties.TripleShape> TRIPLE_SHAPE = BlockProperties.TRIPLE_SHAPE;
     public static final EnumProperty<FoodShape> FOOD = EnumProperty.create("food", FoodShape.class);
 
     public static final BooleanProperty DESTRUCTED = BooleanProperty.create("destructed");
@@ -117,26 +118,6 @@ public class BlockProperties {
         final String name;
 
         JellyShape(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String getSerializedName() {
-            return name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-    }
-
-    public enum TripleShape implements StringRepresentable {
-        TOP("top"), MIDDLE("middle"), BOTTOM("bottom");
-
-        final String name;
-
-        TripleShape(String name) {
             this.name = name;
         }
 
