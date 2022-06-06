@@ -1,9 +1,11 @@
 package org.betterx.betternether.world.features;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 import com.mojang.serialization.Codec;
 import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
@@ -17,9 +19,9 @@ public class ScatterFeatureConfigs {
     public static class WithPlantAge extends ScatterFeatureConfig.OnSolid {
         public static final Codec<WithPlantAge> CODEC = buildCodec(WithPlantAge::new);
 
-        public WithPlantAge(BlockState clusterBlock,
-                            Optional<BlockState> tipBlock,
-                            Optional<BlockState> bottomBlock,
+        public WithPlantAge(BlockStateProvider clusterBlock,
+                            Optional<BlockStateProvider> tipBlock,
+                            Optional<BlockStateProvider> bottomBlock,
                             Optional<BlockState> baseState,
                             float baseReplaceChance,
                             float chanceOfDirectionalSpread,
@@ -62,9 +64,9 @@ public class ScatterFeatureConfigs {
         }
 
         @Override
-        public BlockState createBlock(int height, int maxHeight, RandomSource random) {
+        public BlockState createBlock(int height, int maxHeight, RandomSource random, BlockPos pos) {
             return super
-                    .createBlock(height, maxHeight, random)
+                    .createBlock(height, maxHeight, random, pos)
                     .setValue(BlockStateProperties.AGE_3, random.nextInt(4));
         }
     }
@@ -72,9 +74,9 @@ public class ScatterFeatureConfigs {
     public static class WithSize extends ScatterFeatureConfig.OnSolid {
         public static final Codec<WithSize> CODEC = buildCodec(WithSize::new);
 
-        public WithSize(BlockState clusterBlock,
-                        Optional<BlockState> tipBlock,
-                        Optional<BlockState> bottomBlock,
+        public WithSize(BlockStateProvider clusterBlock,
+                        Optional<BlockStateProvider> tipBlock,
+                        Optional<BlockStateProvider> bottomBlock,
                         Optional<BlockState> baseState,
                         float baseReplaceChance,
                         float chanceOfDirectionalSpread,
@@ -117,10 +119,10 @@ public class ScatterFeatureConfigs {
         }
 
         @Override
-        public BlockState createBlock(int height, int maxHeight, RandomSource random) {
+        public BlockState createBlock(int height, int maxHeight, RandomSource random, BlockPos pos) {
 
             return super
-                    .createBlock(height, maxHeight, random)
+                    .createBlock(height, maxHeight, random, pos)
                     .setValue(BlockStalactite.SIZE, Math.max(0, Math.min(7, maxHeight - height)));
         }
     }
@@ -128,9 +130,9 @@ public class ScatterFeatureConfigs {
     public static class WithSizeOnBase extends WithSize {
         public static final Codec<WithSizeOnBase> CODEC = buildCodec(WithSizeOnBase::new);
 
-        public WithSizeOnBase(BlockState clusterBlock,
-                              Optional<BlockState> tipBlock,
-                              Optional<BlockState> bottomBlock,
+        public WithSizeOnBase(BlockStateProvider clusterBlock,
+                              Optional<BlockStateProvider> tipBlock,
+                              Optional<BlockStateProvider> bottomBlock,
                               Optional<BlockState> baseState,
                               float baseReplaceChance,
                               float chanceOfDirectionalSpread,

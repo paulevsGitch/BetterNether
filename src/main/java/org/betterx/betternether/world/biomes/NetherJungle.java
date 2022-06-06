@@ -73,17 +73,19 @@ public class NetherJungle extends NetherBiome {
 
     @Override
     protected void onInit() {
+        addStructure("egg_plant", new StructureEggPlant(), StructurePlacementType.FLOOR, 0.05F, true);
+        addStructure("jungle_plant", new StructureJunglePlant(), StructurePlacementType.FLOOR, 0.1F, false);
         addStructure("nether_reed", new StructureReeds(), StructurePlacementType.FLOOR, 0.5F, false);
         addStructure("stalagnate", new StructureStalagnate(), StructurePlacementType.FLOOR, 0.2F, false);
         addStructure("rubeus_tree", new StructureRubeus(), StructurePlacementType.FLOOR, 0.1F, false);
         addStructure("bush_rubeus", new StructureRubeusBush(), StructurePlacementType.FLOOR, 0.1F, false);
-        addStructure("egg_plant", new StructureEggPlant(), StructurePlacementType.FLOOR, 0.05F, true);
         addStructure("jellyfish_mushroom", new StructureJellyfishMushroom(), StructurePlacementType.FLOOR, 0.03F, true);
-        addStructure("jungle_plant", new StructureJunglePlant(), StructurePlacementType.FLOOR, 0.1F, false);
-        addStructure("lucis", new StructureLucis(), StructurePlacementType.WALL, 0.1F, false);
+
         addStructure("eye", new StructureEye(), StructurePlacementType.CEIL, 0.1F, true);
         addStructure("black_vine", new StructureBlackVine(), StructurePlacementType.CEIL, 0.1F, true);
         addStructure("flowered_vine", new StructureBloomingVine(), StructurePlacementType.CEIL, 0.1F, true);
+
+        addStructure("lucis", new StructureLucis(), StructurePlacementType.WALL, 0.1F, false);
         addStructure("jungle_moss", new StructureJungleMoss(), StructurePlacementType.WALL, 0.8F, true);
         addStructure("wall_moss", new StructureWallMoss(), StructurePlacementType.WALL, 0.2F, true);
         addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.8F, true);
