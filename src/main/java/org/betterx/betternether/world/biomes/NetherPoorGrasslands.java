@@ -13,11 +13,9 @@ import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.Conditions;
 import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
-import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.plants.*;
 
 import java.util.List;
 
@@ -72,11 +70,5 @@ public class NetherPoorGrasslands extends NetherBiome {
 
     @Override
     protected void onInit() {
-        addStructure("nether_wart", new StructureNetherWart(), StructurePlacementType.FLOOR, 0.005F, true);
-        addStructure("smoker", new StructureSmoker(), StructurePlacementType.FLOOR, 0.005F, true);
-        addStructure("ink_bush", new StructureInkBush(), StructurePlacementType.FLOOR, 0.005F, true);
-        addStructure("black_apple", new StructureBlackApple(), StructurePlacementType.FLOOR, 0.001F, true);
-        addStructure("wart_seed", new StructureWartSeed(), StructurePlacementType.FLOOR, 0.002F, true);
-        addStructure("nether_grass", new StructureNetherGrass(), StructurePlacementType.FLOOR, 0.04F, true);
     }
 }

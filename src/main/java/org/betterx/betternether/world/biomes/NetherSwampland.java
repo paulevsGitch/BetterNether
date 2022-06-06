@@ -88,6 +88,7 @@ public class NetherSwampland extends NetherBiome {
 
     @Override
     public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
+        //Surface Rule with NoiseThresholdProvider or NoiseProvider
         double value = TERRAIN.eval(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2);
         if (value > 0.3 && validWalls(world, pos))
             BlocksHelper.setWithoutUpdate(world, pos, Blocks.LAVA.defaultBlockState());
