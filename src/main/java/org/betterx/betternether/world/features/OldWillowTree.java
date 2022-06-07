@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.*;
@@ -19,7 +20,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
-public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguration> {
+public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguration> implements UserGrowableFeature<NaturalTreeConfiguration> {
     private static final float[] CURVE_X = new float[]{9F, 7F, 1.5F, 0.5F, 3F, 7F};
     private static final float[] CURVE_Y = new float[]{20F, 17F, 12F, 4F, 0F, -2F};
     private static final Block[] wallPlants = {
@@ -281,5 +282,17 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
                 }
             }
         }
+    }
+
+    @Override
+    public boolean grow(ServerLevelAccessor level,
+                        BlockPos pos,
+                        RandomSource random,
+                        NaturalTreeConfiguration configuration) {
+        return grow(level,
+                pos,
+                random,
+                new NaturalTreeConfiguration(false, configuration.distance),
+                NetherChunkPopulatorFeature.generatorForThread().context);
     }
 }

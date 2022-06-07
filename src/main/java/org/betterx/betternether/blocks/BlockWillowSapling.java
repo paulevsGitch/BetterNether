@@ -16,14 +16,16 @@ import org.betterx.betternether.registry.features.TreeFeatures;
 
 public class BlockWillowSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherGround {
     public BlockWillowSapling() {
-        super((state) -> MHelper.RANDOM.nextInt(32) == 0 ? TreeFeatures.OLD_WILLOW : TreeFeatures.WILLOW);
+        super((state) -> MHelper.RANDOM.nextInt(32) == 0
+                ? TreeFeatures.OLD_WILLOW
+                : TreeFeatures.OLD_WILLOW);
     }
 
     @Override
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
-        return BlocksHelper.isFertile(world.getBlockState(pos.below()))
+        return true || (BlocksHelper.isFertile(world.getBlockState(pos.below()))
                 ? (random.nextInt(8) == 0)
-                : (random.nextInt(16) == 0);
+                : (random.nextInt(16) == 0));
     }
 
     @Override
