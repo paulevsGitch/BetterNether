@@ -28,18 +28,19 @@ import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.betternether.world.features.DeferedSeedBlock;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-public class BlockLumabusVine extends BlockBaseNotFull {
+public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlock {
     private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
     private static final VoxelShape BOTTOM_SHAPE = box(2, 4, 2, 14, 16, 14);
     public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
     private static final RandomSource RANDOM = new LegacyRandomSource(130520220102l);
-    private final Block seed;
+    private Block seed;
 
-    public BlockLumabusVine(Block seed) {
+    public BlockLumabusVine() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)
                                  .mapColor(MaterialColor.COLOR_CYAN)
                                  .sounds(SoundType.CROP)
@@ -47,10 +48,14 @@ public class BlockLumabusVine extends BlockBaseNotFull {
                                  .instabreak()
                                  .noOcclusion()
                                  .lightLevel(getLuminance()));
-        this.seed = seed;
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
         this.registerDefaultState(getStateDefinition().any().setValue(SHAPE, TripleShape.TOP));
+    }
+
+    @Override
+    public void setSeed(Block seed) {
+        this.seed = seed;
     }
 
     private static ToIntFunction<BlockState> getLuminance() {

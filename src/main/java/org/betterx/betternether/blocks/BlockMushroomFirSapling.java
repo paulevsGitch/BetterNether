@@ -6,36 +6,17 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.bclib.api.v2.levelgen.features.DefaultFeature;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
-import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
-import org.betterx.betternether.world.structures.plants.StructureMushroomFir;
-
-class MushroomFirTreeFeature extends DefaultFeature {
-    private static final StructureMushroomFir STRUCTURE = new StructureMushroomFir();
-
-    @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
-        STRUCTURE.generate(featurePlaceContext.level(),
-                featurePlaceContext.origin(),
-                featurePlaceContext.random(),
-                featurePlaceContext.chunkGenerator().getGenDepth(),
-                NetherChunkPopulatorFeature.generatorForThread().context);
-        return true;
-    }
-}
+import org.betterx.betternether.registry.features.TreeFeatures;
 
 
 public class BlockMushroomFirSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherMycelium {
-    private static final DefaultFeature FEATURE = new MushroomFirTreeFeature();
 
     public BlockMushroomFirSapling() {
-        super((state) -> FEATURE);
+        super((state) -> TreeFeatures.MUSHROOM_FIR);
     }
 
     @Override
@@ -49,9 +30,4 @@ public class BlockMushroomFirSapling extends FeatureSaplingBlock implements Bone
                 ? (random.nextInt(8) == 0)
                 : (random.nextInt(16) == 0);
     }
-//
-//	@Override
-//	protected Feature<?> getFeature() {
-//		return FEATURE;
-//	}
 }

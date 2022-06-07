@@ -27,9 +27,8 @@ import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
+import org.betterx.betternether.registry.features.VineLikeFeatures;
 import org.betterx.betternether.tab.CreativeTabs;
-import org.betterx.betternether.world.structures.plants.StructureGoldenLumabusVine;
-import org.betterx.betternether.world.structures.plants.StructureLumabusVine;
 
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
@@ -337,10 +336,12 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block GOLDEN_VINE = registerBlock("golden_vine",
             new BlockGoldenVine(),
             NamedBlockTags.CLIMBABLE);
-    public static final Block LUMABUS_SEED = registerBlock("lumabus_seed",
-            new BlockLumabusSeed(new StructureLumabusVine()));
-    public static final Block GOLDEN_LUMABUS_SEED = registerBlock("golden_lumabus_seed",
-            new BlockLumabusSeed(new StructureGoldenLumabusVine()));
+
+    public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine());
+    public static final BlockLumabusVine GOLDEN_LUMABUS_VINE = registerBlockNI("golden_lumabus_vine",
+            new BlockLumabusVine());
+
+
     // Small Plants
     public static final Block SOUL_VEIN = registerBlock("soul_vein", new BlockSoulVein());
     public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", new BlockBoneMushroom());
@@ -532,15 +533,20 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block EYE_VINE = registerBlockNI("eye_vine",
             new BlockEyeVine(),
             NamedBlockTags.CLIMBABLE);
-    public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine(LUMABUS_SEED));
-    public static final Block GOLDEN_LUMABUS_VINE = registerBlockNI("golden_lumabus_vine",
-            new BlockLumabusVine(GOLDEN_LUMABUS_SEED));
     public static final Block INK_BUSH = registerBlockNI("ink_bush", new BlockInkBush());
     public static final Block BLACK_APPLE = registerBlockNI("black_apple", new BlockBlackApple());
     public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
     public static final Block VEINED_SAND = registerBlockNI("veined_sand",
             new BlockVeinedSand(),
             NetherTags.NETHER_SAND_LOCATION);
+
+
+    // DEFERED BLOCKS //
+    public static final Block LUMABUS_SEED = registerBlock("lumabus_seed",
+            new BlockLumabusSeed(LUMABUS_VINE, VineLikeFeatures.LUMABUS_VINE));
+
+    public static final Block GOLDEN_LUMABUS_SEED = registerBlock("golden_lumabus_seed",
+            new BlockLumabusSeed(GOLDEN_LUMABUS_VINE, VineLikeFeatures.GOLDEN_LUMABUS_VINE));
 
     protected NetherBlocks(CreativeModeTab creativeTab) {
         super(creativeTab, Configs.BLOCKS);
@@ -572,7 +578,7 @@ public class NetherBlocks extends BlockRegistry {
         return block;
     }
 
-    private static Block registerBlockNI(String name, Block block, TagKey<Block>... tags) {
+    private static <B extends Block> B registerBlockNI(String name, B block, TagKey<Block>... tags) {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             return registerBlock(name, block, false, tags);
         }
@@ -583,7 +589,7 @@ public class NetherBlocks extends BlockRegistry {
         return registerBlock(name, block, true);
     }
 
-    private static Block registerBlock(String name, Block block, boolean hasItem, TagKey<Block>... tags) {
+    private static <B extends Block> B registerBlock(String name, B block, boolean hasItem, TagKey<Block>... tags) {
         final BlockRegistry blockRegistry = getBlockRegistry();
         final ResourceLocation location = new ResourceLocation(BetterNether.MOD_ID, name);
         if (hasItem) {

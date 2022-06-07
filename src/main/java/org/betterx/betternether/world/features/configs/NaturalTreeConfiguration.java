@@ -20,7 +20,7 @@ public class NaturalTreeConfiguration implements FeatureConfiguration {
     public final int distance;
     public final int manDist;
 
-    private NaturalTreeConfiguration(boolean natural, int distance) {
+    public NaturalTreeConfiguration(boolean natural, int distance) {
         this.natural = natural;
         this.distance = distance;
         this.manDist = (int) Math.ceil(distance * 1.5);
@@ -33,7 +33,7 @@ public class NaturalTreeConfiguration implements FeatureConfiguration {
     public static NaturalTreeConfiguration userGrown() {
         return USER;
     }
-    
+
     public static NaturalTreeConfiguration naturalLarge() {
         return NATURAL_LARGE;
     }

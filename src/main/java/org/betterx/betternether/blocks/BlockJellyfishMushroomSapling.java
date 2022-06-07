@@ -21,11 +21,10 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNylium;
-import org.betterx.betternether.world.structures.plants.StructureJellyfishMushroom;
+import org.betterx.betternether.registry.features.FloorFeatures;
 
 public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNylium {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 6, 12);
-    private static final StructureJellyfishMushroom STRUCTURE = new StructureJellyfishMushroom();
 
     public BlockJellyfishMushroomSapling() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)
@@ -36,7 +35,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
                                  .instabreak()
                                  .noCollission()
                                  .randomTicks()
-             );
+        );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
@@ -77,7 +76,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        STRUCTURE.grow(world, pos, random);
+        FloorFeatures.JELLYFISH_MUSHROOM.place(world, pos, random);
     }
 
     @Override

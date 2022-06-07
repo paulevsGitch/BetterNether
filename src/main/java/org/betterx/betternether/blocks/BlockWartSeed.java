@@ -25,13 +25,12 @@ import com.google.common.collect.Maps;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnSouldSand;
-import org.betterx.betternether.world.structures.plants.StructureWartTree;
+import org.betterx.betternether.registry.features.TreeFeatures;
 
 import java.util.EnumMap;
 
 public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnSouldSand {
     private static final EnumMap<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(Direction.class);
-    private static final StructureWartTree STRUCTURE = new StructureWartTree();
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
     static {
@@ -100,7 +99,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        STRUCTURE.grow(world, pos, random);
+        TreeFeatures.WART.place(world, pos, random);
     }
 
     @Override

@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockLucisMushroom;
@@ -15,7 +16,7 @@ import org.betterx.betternether.blocks.BlockLucisSpore;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
-public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
 
     private static final BlockState CENTER = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState()
                                                                         .setValue(BlockLucisMushroom.SHAPE,
@@ -38,13 +39,14 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> {
                             NoneFeatureConfiguration config,
                             int MAX_HEIGHT,
                             StructureGeneratorThreadContext context) {
-        return grow(world, pos, random);
+        return grow(world, pos, random, false);
     }
 
     protected boolean grow(ServerLevelAccessor world,
                            BlockPos pos,
-                           RandomSource random) {
-        if (canGenerate(world, pos)) {
+                           RandomSource random,
+                           boolean force) {
+        if (force || canGenerate(world, pos)) {
 
             if (random.nextInt(3) == 0) {
                 if (canReplace(world.getBlockState(pos)))
@@ -129,5 +131,13 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> {
                     state.getBlock()))
                 return true;
         return false;
+    }
+
+    @Override
+    public boolean grow(ServerLevelAccessor level,
+                        BlockPos pos,
+                        RandomSource random,
+                        NoneFeatureConfiguration configuration) {
+        return grow(level, pos, random, true);
     }
 }

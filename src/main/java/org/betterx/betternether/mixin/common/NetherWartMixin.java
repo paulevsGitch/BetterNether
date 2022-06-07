@@ -10,8 +10,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.plants.StructureMedBrownMushroom;
-import org.betterx.betternether.world.structures.plants.StructureMedRedMushroom;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,9 +22,6 @@ public abstract class NetherWartMixin extends BushBlock {
     protected NetherWartMixin(Properties settings) {
         super(settings);
     }
-
-    StructureMedRedMushroom redStucture = new StructureMedRedMushroom();
-    StructureMedBrownMushroom brownStructure = new StructureMedBrownMushroom();
 
     @Inject(method = "mayPlaceOn", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void canStay(BlockState floor, BlockGetter view, BlockPos pos, CallbackInfoReturnable<Boolean> info) {

@@ -6,35 +6,17 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.bclib.api.v2.levelgen.features.DefaultFeature;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
-import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
-import org.betterx.betternether.world.structures.plants.StructureWillow;
+import org.betterx.betternether.registry.features.TreeFeatures;
 
-class WillowTreeFeature extends DefaultFeature {
-    private static final StructureWillow STRUCTURE = new StructureWillow();
-
-    @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
-        STRUCTURE.generate(featurePlaceContext.level(),
-                featurePlaceContext.origin(),
-                featurePlaceContext.random(),
-                featurePlaceContext.chunkGenerator().getGenDepth(),
-                NetherChunkPopulatorFeature.generatorForThread().context);
-        return true;
-    }
-}
 
 public class BlockWillowSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherGround {
-    private static final DefaultFeature FEATURE = new WillowTreeFeature();
-
     public BlockWillowSapling() {
-        super((state) -> FEATURE);
+        super((state) -> MHelper.RANDOM.nextInt(32) == 0 ? TreeFeatures.OLD_WILLOW : TreeFeatures.WILLOW);
     }
 
     @Override
@@ -48,9 +30,4 @@ public class BlockWillowSapling extends FeatureSaplingBlock implements Bonemeala
     protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return isSurvivable(blockState);
     }
-//
-//	@Override
-//	protected Feature<?> getFeature() {
-//		return FEATURE;
-//	}
 }

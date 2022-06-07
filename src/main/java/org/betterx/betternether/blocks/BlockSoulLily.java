@@ -31,7 +31,7 @@ import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnSouldGround;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.plants.StructureSoulLily;
+import org.betterx.betternether.world.features.SoulLilyFeature;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGr
     private static final VoxelShape SHAPE_BIG_TOP_SIDE_E = box(8, 4, 0, 16, 6, 16);
     private static final VoxelShape SHAPE_BIG_TOP_SIDE_W = box(0, 4, 0, 8, 6, 16);
 
-    private static final StructureSoulLily STRUCTURE = new StructureSoulLily();
+    private static final SoulLilyFeature STRUCTURE = new SoulLilyFeature();
 
     private static final SoulLilyShape[] ROT = new SoulLilyShape[]{
             SoulLilyShape.BIG_TOP_SIDE_N,
@@ -136,8 +136,8 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGr
             if (shape == SoulLilyShape.SMALL && world.isEmptyBlock(pos.above())) {
                 STRUCTURE.growMedium(world, pos);
             } else if (shape == SoulLilyShape.MEDIUM_BOTTOM && world.isEmptyBlock(pos.above(2)) && isAirSides(world,
-                                                                                                              pos.above(
-                                                                                                                      2))) {
+                    pos.above(
+                            2))) {
                 STRUCTURE.growBig(world, pos);
             }
         }
@@ -239,7 +239,7 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGr
                 return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
             case BIG_TOP_CENTER:
                 return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()),
-                                          new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
+                        new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
             case MEDIUM_BOTTOM:
                 return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
             case BIG_TOP_SIDE_N:
@@ -247,13 +247,13 @@ public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGr
             case BIG_TOP_SIDE_E:
             case BIG_TOP_SIDE_W:
                 return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()),
-                                          new ItemStack(NetherBlocks.SOUL_LILY_SAPLING,
-                                                        MHelper.randRange(0, 1, MHelper.RANDOM)));
+                        new ItemStack(NetherBlocks.SOUL_LILY_SAPLING,
+                                MHelper.randRange(0, 1, MHelper.RANDOM)));
             case SMALL:
             case MEDIUM_TOP:
             default:
                 return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()),
-                                          new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
+                        new ItemStack(NetherBlocks.SOUL_LILY_SAPLING));
         }
     }
 }

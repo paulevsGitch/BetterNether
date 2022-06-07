@@ -10,20 +10,21 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockPlantWall;
+import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.betternether.world.structures.plants.StructureStalagnate;
 
 import java.util.Iterator;
 import java.util.Map;
 
-public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfiguration> {
+public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfiguration> implements UserGrowableFeature<NaturalTreeConfiguration> {
     public RubeusTreeFeature() {
         super(NaturalTreeConfiguration.CODEC);
     }
@@ -45,8 +46,8 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
                             NaturalTreeConfiguration config,
                             final int MAX_HEIGHT,
                             StructureGeneratorThreadContext context) {
-        int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
-        if (length >= StructureStalagnate.MAX_LENGTH)
+        int length = BlocksHelper.upRay(world, pos, BlockStalagnateSeed.MAX_SEARCH_LENGTH + 2);
+        if (length >= BlockStalagnateSeed.MAX_SEARCH_LENGTH)
             return super.place(world, pos, random, config, MAX_HEIGHT, context);
         return false;
     }
@@ -362,5 +363,17 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
         BlockState bState = world.getBlockState(pos);
         if (world.isEmptyBlock(pos) || bState.getMaterial().isReplaceable())
             BlocksHelper.setWithoutUpdate(world, pos, state);
+    }
+
+    @Override
+    public boolean grow(ServerLevelAccessor level,
+                        BlockPos pos,
+                        RandomSource random,
+                        NaturalTreeConfiguration configuration) {
+        return grow(level,
+                pos,
+                random,
+                new NaturalTreeConfiguration(false, configuration.distance),
+                NetherChunkPopulatorFeature.generatorForThread().context);
     }
 }

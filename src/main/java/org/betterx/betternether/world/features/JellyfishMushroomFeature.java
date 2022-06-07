@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
@@ -15,7 +16,7 @@ import org.betterx.betternether.blocks.BlockJellyfishMushroom;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
-public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
     public JellyfishMushroomFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
@@ -94,5 +95,14 @@ public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfigur
                                                .setValue(BlockJellyfishMushroom.SHAPE,
                                                        TripleShape.TOP)
                                                .setValue(BlockJellyfishMushroom.VISUAL, visual));
+    }
+
+    @Override
+    public boolean grow(ServerLevelAccessor level,
+                        BlockPos pos,
+                        RandomSource random,
+                        NoneFeatureConfiguration configuration) {
+        grow(level, pos, random);
+        return true;
     }
 }

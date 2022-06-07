@@ -18,7 +18,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
@@ -76,7 +75,7 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Bonemeala
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        BCLFeature.place(TreeFeatures.GIANT_MOLD.getFeature(), world, pos, random);
+        TreeFeatures.GIANT_MOLD.place(world, pos, random);
     }
 
     @Override

@@ -12,54 +12,26 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import org.betterx.bclib.api.v2.levelgen.features.DefaultFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
-import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
-import org.betterx.betternether.world.structures.plants.StructureStalagnate;
-
-class StalagnateTreeFeatureUp extends DefaultFeature {
-    static final StructureStalagnate STRUCTURE = new StructureStalagnate();
-
-    @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
-        STRUCTURE.generate(featurePlaceContext.level(),
-                featurePlaceContext.origin(),
-                featurePlaceContext.random(),
-                featurePlaceContext.chunkGenerator().getGenDepth(),
-                NetherChunkPopulatorFeature.generatorForThread().context);
-        return true;
-    }
-}
-
-class StalagnateTreeFeatureDown extends DefaultFeature {
-    @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
-        StalagnateTreeFeatureUp.STRUCTURE.generateDown(featurePlaceContext.level(),
-                featurePlaceContext.origin(),
-                featurePlaceContext.random());
-        return true;
-    }
-}
+import org.betterx.betternether.registry.features.VineLikeFeatures;
 
 public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack {
+    public static final int MAX_SEARCH_LENGTH = 25; // 27
+    public static final int MIN_LENGTH = 3; // 5
+
     protected static final VoxelShape SHAPE_TOP = Block.box(4, 6, 4, 12, 16, 12);
     protected static final VoxelShape SHAPE_BOTTOM = Block.box(4, 0, 4, 12, 12, 12);
-
-    private static final DefaultFeature FEATURE_UP = new StalagnateTreeFeatureUp();
-    private static final DefaultFeature FEATURE_DOWN = new StalagnateTreeFeatureDown();
 
     public static final BooleanProperty TOP = BooleanProperty.create("top");
 
     public BlockStalagnateSeed() {
-        super((state) -> growsDownward(state) ? FEATURE_DOWN : FEATURE_UP);
+        super((state) -> growsDownward(state) ? VineLikeFeatures.STALAGNATE_CEIL : VineLikeFeatures.STALAGNATE_FLOOR);
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }
 
@@ -93,9 +65,9 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
         if (super.isBonemealSuccess(world, random, pos, state)) {
             if (growsDownward(state))
-                return BlocksHelper.downRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
+                return BlocksHelper.downRay(world, pos, MIN_LENGTH) > 0;
             else
-                return BlocksHelper.upRay(world, pos, StructureStalagnate.MIN_LENGTH) > 0;
+                return BlocksHelper.upRay(world, pos, MIN_LENGTH) > 0;
         }
         return false;
     }
@@ -121,11 +93,11 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
     }
 
     @Override
-    protected Feature<?> getFeature(BlockState state) {
+    protected BCLFeature getFeature(BlockState state) {
         if (growsDownward(state)) {
-            return FEATURE_DOWN;
+            return VineLikeFeatures.STALAGNATE_CEIL;
         } else {
-            return FEATURE_UP;
+            return VineLikeFeatures.STALAGNATE_FLOOR;
         }
     }
 }

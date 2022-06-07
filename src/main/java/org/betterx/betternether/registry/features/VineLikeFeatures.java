@@ -46,7 +46,7 @@ public class VineLikeFeatures {
             BetterNether.makeID("lumabus_vine"), false, true,
             ScatterFeatureConfig
                     .startOnSolid()
-                    .tripleShape(NetherBlocks.LUMABUS_VINE)
+                    .tripleShapeCeil(NetherBlocks.LUMABUS_VINE)
                     .spread(2, 0.75f)
                     .heightRange(2, 8)
                     .growWhileFree()
@@ -57,7 +57,7 @@ public class VineLikeFeatures {
             BetterNether.makeID("golden_lumabus_vine"), false, true,
             ScatterFeatureConfig
                     .startOnSolid()
-                    .tripleShape(NetherBlocks.GOLDEN_LUMABUS_VINE)
+                    .tripleShapeCeil(NetherBlocks.GOLDEN_LUMABUS_VINE)
                     .spread(2, 0.85f)
                     .heightRange(2, 25)
                     .growWhileFree()
@@ -134,7 +134,7 @@ public class VineLikeFeatures {
                             .<BlockState>builder()
                             .add(NetherBlocks.EYEBALL.defaultBlockState(), 5)
                             .add(NetherBlocks.EYEBALL_SMALL.defaultBlockState(), 5)))
-                    .heightRange(5, 26)
+                    .heightRange(5, 16)
                     .growWhileFree()
                     .spread(3, 0.75f, ClampedNormalInt.of(7, 1.2f, 3, 12))
     );
@@ -189,7 +189,7 @@ public class VineLikeFeatures {
             BetterNether.makeID("stalagnate_ceil"), false, false,
             ScatterFeatureConfig.OnSolid
                     .startOnSolid()
-                    .tripleShape(NetherBlocks.MAT_STALAGNATE.getTrunk())
+                    .tripleShapeCeil(NetherBlocks.MAT_STALAGNATE.getTrunk())
                     .heightRange(3, 27)
                     .growWhileFree()
                     .spread(3, 0f, ClampedNormalInt.of(7, 1.2f, 3, 12))

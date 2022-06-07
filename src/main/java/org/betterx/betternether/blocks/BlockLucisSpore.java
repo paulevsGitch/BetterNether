@@ -24,7 +24,7 @@ import com.google.common.collect.Maps;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.plants.StructureLucis;
+import org.betterx.betternether.registry.features.WallFeatures;
 
 import java.util.EnumMap;
 
@@ -34,7 +34,6 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
             Direction.SOUTH, box(4, 4, 0, 12, 12, 8),
             Direction.WEST, box(8, 4, 4, 16, 12, 12),
             Direction.EAST, box(0, 4, 4, 8, 12, 12)));
-    private static final StructureLucis STRUCTURE = new StructureLucis();
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockLucisSpore() {
@@ -46,7 +45,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
                                  .noOcclusion()
                                  .noCollission()
                                  .randomTicks()
-             );
+        );
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
 
@@ -72,7 +71,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        STRUCTURE.grow(world, pos, random);
+        WallFeatures.LUCIS_FEATURE.place(world, pos, random);
     }
 
     @Override

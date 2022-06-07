@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -17,7 +18,7 @@ import org.betterx.betternether.world.structures.StructureGeneratorThreadContext
 
 import java.util.Map;
 
-public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
 
     public NetherSakuraFeature() {
         super(NoneFeatureConfiguration.CODEC);
@@ -31,6 +32,14 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
                             int MAX_HEIGHT,
                             StructureGeneratorThreadContext context) {
         if (pos.getY() < MAX_HEIGHT * 0.75) return false;
+        return grow(world, pos, random, MAX_HEIGHT, context);
+    }
+
+    protected boolean grow(ServerLevelAccessor world,
+                           BlockPos pos,
+                           RandomSource random,
+                           int MAX_HEIGHT,
+                           StructureGeneratorThreadContext context) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
 
         context.LOGS_DIST.clear();
@@ -175,5 +184,13 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
 
     private boolean canReplace(BlockState state) {
         return BlocksHelper.isNetherGround(state) || state.getMaterial().isReplaceable();
+    }
+
+    @Override
+    public boolean grow(ServerLevelAccessor level,
+                        BlockPos pos,
+                        RandomSource random,
+                        NoneFeatureConfiguration configuration) {
+        return grow(level, pos, random, 128, NetherChunkPopulatorFeature.generatorForThread().context);
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
@@ -18,7 +19,7 @@ import org.betterx.betternether.blocks.BlockWillowTrunk;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
-public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
     private static final Direction[] HOR = HorizontalDirectionalBlock
             .FACING
             .getPossibleValues()
@@ -37,7 +38,12 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                             StructureGeneratorThreadContext context) {
         if (!BlocksHelper.isNetherGround(world.getBlockState(pos.below())))
             return false;
+        return grow(world, pos, random);
+    }
 
+    protected boolean grow(ServerLevelAccessor world,
+                           BlockPos pos,
+                           RandomSource random) {
         int h2 = 5 + random.nextInt(3);
 
         int mh = BlocksHelper.upRay(world, pos.above(), h2);
@@ -194,5 +200,13 @@ public class WillowTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 pos.below(length),
                 branch.defaultBlockState()
                       .setValue(BlockWillowBranch.SHAPE, BNBlockProperties.WillowBranchShape.END));
+    }
+
+    @Override
+    public boolean grow(ServerLevelAccessor level,
+                        BlockPos pos,
+                        RandomSource random,
+                        NoneFeatureConfiguration configuration) {
+        return grow(level, pos, random);
     }
 }

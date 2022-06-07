@@ -13,15 +13,11 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BNBlockProperties;
-import org.betterx.betternether.blocks.BlockPlantWall;
-import org.betterx.betternether.blocks.BlockWillowBranch;
-import org.betterx.betternether.blocks.BlockWillowLeaves;
+import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.WillowMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.betternether.world.structures.plants.StructureStalagnate;
 
 public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguration> {
     private static final float[] CURVE_X = new float[]{9F, 7F, 1.5F, 0.5F, 3F, 7F};
@@ -157,8 +153,8 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
                             NaturalTreeConfiguration config,
                             int MAX_HEIGHT,
                             StructureGeneratorThreadContext context) {
-        int length = BlocksHelper.upRay(world, pos, StructureStalagnate.MAX_LENGTH + 2);
-        if (length >= StructureStalagnate.MAX_LENGTH)
+        int length = BlocksHelper.upRay(world, pos, BlockStalagnateSeed.MAX_SEARCH_LENGTH + 2);
+        if (length >= BlockStalagnateSeed.MAX_SEARCH_LENGTH)
             return super.place(world, pos, random, config, MAX_HEIGHT, context);
 
         return false;

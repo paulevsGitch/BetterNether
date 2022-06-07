@@ -11,7 +11,7 @@ import org.betterx.betternether.registry.features.TreeFeatures;
 
 public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack {
     public BlockAnchorTreeSapling() {
-        super((state) -> TreeFeatures.ANCHOR_TREE_BRANCH.getFeature());
+        super((state) -> TreeFeatures.ANCHOR_TREE_BRANCH);
     }
 
     @Override

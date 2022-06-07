@@ -18,14 +18,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.world.structures.IGrowableStructure;
+import org.betterx.betternether.world.features.DeferedSeedBlock;
 
 public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(4, 6, 4, 12, 16, 12);
-    private final IGrowableStructure structure;
+    private final BCLFeature feature;
 
-    public BlockLumabusSeed(IGrowableStructure structure) {
+    public BlockLumabusSeed(DeferedSeedBlock parent, BCLFeature feature) {
         super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
                                  .mapColor(MaterialColor.COLOR_RED)
                                  .sounds(SoundType.CROP)
@@ -34,7 +35,8 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
                                  .noCollission()
                                  .randomTicks());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
-        this.structure = structure;
+        this.feature = feature;
+        parent.setSeed(this);
     }
 
     @Override
@@ -54,7 +56,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        structure.grow(level, pos, random);
+        feature.place(level, pos, random);
     }
 
     @Override

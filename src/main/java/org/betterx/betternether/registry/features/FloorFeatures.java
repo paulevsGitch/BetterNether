@@ -105,8 +105,10 @@ public class FloorFeatures {
     public static final BCLFeature GEYSER
             = FastFeatures.patch(BetterNether.makeID("geyser"), NetherBlocks.GEYSER, 32, 3, 3);
 
+    public static final BCLFeature JELLYFISH_MUSHROOM_SINGLE
+            = FastFeatures.simple(BetterNether.makeID("jellyfish_mushroom"), 3, false, new JellyfishMushroomFeature());
     public static final BCLFeature JELLYFISH_MUSHROOM
-            = FastFeatures.patch(BetterNether.makeID("jellyfish_mushroom"), 64, 5, 3, new JellyfishMushroomFeature());
+            = FastFeatures.patch(BetterNether.makeID("jellyfish_mushroom"), 64, 5, 3, JELLYFISH_MUSHROOM_SINGLE);
 
     public static final BCLFeature RED_MOLD
             = FastFeatures.patch(BetterNether.makeID("red_mold"), NetherBlocks.RED_MOLD, 32, 5, 3);

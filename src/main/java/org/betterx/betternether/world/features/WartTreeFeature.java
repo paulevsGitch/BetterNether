@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockWartSeed;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -19,7 +20,7 @@ import org.betterx.betternether.world.structures.StructureGeneratorThreadContext
 import java.util.ArrayList;
 import java.util.List;
 
-public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfiguration> {
+public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfiguration> implements UserGrowableFeature<NaturalTreeConfiguration> {
     private static final BlockState WART_BLOCK = Blocks
             .NETHER_WART_BLOCK
             .defaultBlockState();
@@ -177,4 +178,15 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
         return BlocksHelper.isSoulSand(state);
     }
 
+    @Override
+    public boolean grow(ServerLevelAccessor level,
+                        BlockPos pos,
+                        RandomSource random,
+                        NaturalTreeConfiguration configuration) {
+        return grow(level,
+                pos,
+                random,
+                new NaturalTreeConfiguration(false, configuration.distance),
+                NetherChunkPopulatorFeature.generatorForThread().context);
+    }
 }
