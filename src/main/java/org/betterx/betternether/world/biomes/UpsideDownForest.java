@@ -22,6 +22,7 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 import org.betterx.betternether.world.structures.decorations.StructureForestLitter;
@@ -75,6 +76,9 @@ public class UpsideDownForest extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .structure(BiomeTags.HAS_NETHER_FOSSIL)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
+                   .feature(BiomeFeatures.UPSIDE_DOWN_FORREST_FLOOR)
+                   .feature(BiomeFeatures.UPSIDE_DOWN_FORREST_CEIL)
+                   .feature(BiomeFeatures.UPSIDE_DOWN_FORREST_WALL)
                    .vertical()
                    .genChance(0.25f);
         }

@@ -15,6 +15,7 @@ import org.betterx.bclib.api.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.features.config.PlaceFacingBlockConfig;
 import org.betterx.bclib.api.features.placement.FindSolidInDirection;
 import org.betterx.bclib.api.features.placement.OnEveryLayer;
+import org.betterx.bclib.api.features.placement.UnderEveryLayer;
 import org.betterx.betternether.BetterNether;
 
 import java.util.List;
@@ -22,8 +23,12 @@ import java.util.List;
 public class BiomeFeatures {
     public static final List<PlacementModifier> defaultCeilModifiers = List.of(CountPlacement.of(16),
             InSquarePlacement.spread(),
-            PlacementUtils.RANGE_4_4,
-            FindSolidInDirection.up(12),
+            UnderEveryLayer.min4(),
+            BiomeFilter.biome());
+
+    public static final List<PlacementModifier> defaultDenseCeilModifiers = List.of(CountPlacement.of(48),
+            InSquarePlacement.spread(),
+            UnderEveryLayer.min4(),
             BiomeFilter.biome());
     public static final List<PlacementModifier> defaultFloorModifiers = List.of(CountPlacement.of(16),
             InSquarePlacement.spread(),
@@ -307,6 +312,50 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
     ), 0);
 
+    public static final BCLFeature UPSIDE_DOWN_FORREST_FLOOR = denseFloorFromWeighted("upside_down_forrest", List.of(
+            new WeightedPlacedFeature(FloorFeatures.NETHER_SAKURA_BUSH_PATCH.getPlacedFeature(), 0.03f),
+            new WeightedPlacedFeature(FloorFeatures.MOSS_COVER.getPlacedFeature(), 0.6f),
+            new WeightedPlacedFeature(FloorFeatures.FORREST_LITTER.getPlacedFeature(), 0.01f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
+    ), 0);
+
+    public static final BCLFeature UPSIDE_DOWN_FORREST_WALL = wallFromWeighted("upside_down_forrest", List.of(
+            new WeightedPlacedFeature(WallFeatures.JUNGLE_MOSS_COVER.getPlacedFeature(), 0.4f),
+            new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_BROWN.getPlacedFeature(), 0.4f),
+            new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_RED.getPlacedFeature(), 0.4f)
+    ), 0);
+
+    public static final BCLFeature UPSIDE_DOWN_FORREST_CEIL = ceilFromWeighted("upside_down_forrest", List.of(
+            new WeightedPlacedFeature(TreeFeatures.ANCHOR_TREE.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(TreeFeatures.ANCHOR_TREE_BRANCH.getPlacedFeature(), 0.05f),
+            new WeightedPlacedFeature(TreeFeatures.ANCHOR_TREE_ROOT.getPlacedFeature(), 0.03f),
+            new WeightedPlacedFeature(TreeFeatures.NETHER_SAKURA.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(VineLikeFeatures.NEON_EQUISETUM.getPlacedFeature(), 0.1f),
+            new WeightedPlacedFeature(FloorFeatures.HOOK_MUSHROOM.getPlacedFeature(), 0.06f),
+            new WeightedPlacedFeature(VineLikeFeatures.WHISPERING_GOURD.getPlacedFeature(), 0.04f),
+            new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
+    ), 0);
+
+    public static final BCLFeature UPSIDE_DOWN_FORREST_CLEARED_FLOOR = denseFloorFromWeighted(
+            "upside_down_forrest_cleared",
+            List.of(
+                    new WeightedPlacedFeature(FloorFeatures.MOSS_COVER.getPlacedFeature(), 0.6f),
+                    new WeightedPlacedFeature(WallFeatures.JUNGLE_MOSS_COVER.getPlacedFeature(), 0.4f),
+                    new WeightedPlacedFeature(FloorFeatures.FORREST_LITTER.getPlacedFeature(), 0.4f),
+                    new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
+            ),
+            0);
+
+    public static final BCLFeature UPSIDE_DOWN_FORREST_CLEARED_CEIL = denseCeilFromWeighted(
+            "upside_down_forrest_cleared",
+            List.of(
+                    new WeightedPlacedFeature(VineLikeFeatures.NEON_EQUISETUM.getPlacedFeature(), 0.1f),
+                    new WeightedPlacedFeature(FloorFeatures.HOOK_MUSHROOM.getPlacedFeature(), 0.06f),
+                    new WeightedPlacedFeature(VineLikeFeatures.WHISPERING_GOURD.getPlacedFeature(), 0.04f),
+                    new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
+            ),
+            0);
+
 
     public static BCLFeature denseFloorFromWeighted(String name,
                                                     List<WeightedPlacedFeature> features,
@@ -318,8 +367,14 @@ public class BiomeFeatures {
         return fromWeighted(name, features, defaultIndex, "floor", defaultFloorModifiers);
     }
 
+    public static BCLFeature denseCeilFromWeighted(String name,
+                                                   List<WeightedPlacedFeature> features,
+                                                   int defaultIndex) {
+        return fromWeighted(name, features, defaultIndex, "ceil", defaultDenseCeilModifiers);
+    }
+
     public static BCLFeature ceilFromWeighted(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
-        return fromWeighted(name, features, defaultIndex, "deil", defaultCeilModifiers);
+        return fromWeighted(name, features, defaultIndex, "ceil", defaultCeilModifiers);
     }
 
     public static BCLFeature wallFromWeighted(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
@@ -347,6 +402,10 @@ public class BiomeFeatures {
 
     public static BCLFeature ceilFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
         return fromChanced(name, features, defaultIndex, "ceil", defaultCeilModifiers);
+    }
+
+    public static BCLFeature denseCeilFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
+        return fromChanced(name, features, defaultIndex, "ceil", defaultDenseCeilModifiers);
     }
 
     public static BCLFeature wallFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {

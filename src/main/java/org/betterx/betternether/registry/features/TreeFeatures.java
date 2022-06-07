@@ -212,6 +212,41 @@ public class TreeFeatures {
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.SOUL_GROUND))
                     .buildAndRegister());
 
+    public static final BCLFeature ANCHOR_TREE
+            = FastFeatures.patch(BetterNether.makeID("anchor_tree"),
+            2, 16, 8,
+            BCLFeatureBuilder
+                    .start(BetterNether.makeID("anchor_tree"), new AnchorTreeFeature())
+                    .onceEvery(14)
+                    .findSolidCeil(4)
+                    .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                    .isUnder(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+                    .buildAndRegister());
+
+    public static final BCLFeature ANCHOR_TREE_ROOT = BCLFeatureBuilder
+            .start(BetterNether.makeID("anchor_tree_root"), new AnchorTreeRootFeature())
+            .onceEvery(4)
+            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+            .isUnder(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .buildAndRegister();
+
+    public static final BCLFeature ANCHOR_TREE_BRANCH = BCLFeatureBuilder
+            .start(BetterNether.makeID("anchor_tree_branch"), new AnchorTreeBranchFeature())
+            .onceEvery(8)
+            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+            .isUnder(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+            .buildAndRegister();
+
+    public static final BCLFeature NETHER_SAKURA
+            = FastFeatures.patch(BetterNether.makeID("nether_sakura"),
+            3, 16, 4,
+            BCLFeatureBuilder
+                    .start(BetterNether.makeID("nether_sakura"), new NetherSakuraFeature())
+                    .onceEvery(3)
+                    .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                    .isUnder(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
+                    .buildAndRegister());
+
     static StructureWorldNBT cfg(ResourceLocation location,
                                  int offsetY,
                                  StructurePlacementType type,

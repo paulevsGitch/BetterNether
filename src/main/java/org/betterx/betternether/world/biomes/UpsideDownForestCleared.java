@@ -1,11 +1,8 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
@@ -14,13 +11,11 @@ import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.SurfaceNoiseCondition;
-import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.decorations.StructureForestLitter;
-import org.betterx.betternether.world.structures.plants.*;
 
 public class UpsideDownForestCleared extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -38,6 +33,8 @@ public class UpsideDownForestCleared extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
+                   .feature(BiomeFeatures.UPSIDE_DOWN_FORREST_CLEARED_FLOOR)
+                   .feature(BiomeFeatures.UPSIDE_DOWN_FORREST_CLEARED_CEIL)
                    .genChance(0.5f)
             ;
         }
@@ -89,21 +86,7 @@ public class UpsideDownForestCleared extends NetherBiome {
 
     @Override
     protected void onInit() {
-        this.setNoiseDensity(0.3F);
-
-        addStructure("moss_cover", new StructureMossCover(), StructurePlacementType.FLOOR, 0.6F, false);
-        addStructure("jungle_moss", new StructureJungleMoss(), StructurePlacementType.WALL, 0.4F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.4F, true);
-        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.4F, true);
-        addStructure("forest_litter", new StructureForestLitter(), StructurePlacementType.FLOOR, 0.1F, false);
-        //addStructure("ceiling_mushrooms", new StructureCeilingMushrooms(), StructurePlacementType.CEIL, 1F, false);
-        addStructure("neon_equisetum", new StructureNeonEquisetum(), StructurePlacementType.CEIL, 0.1F, true);
-        addStructure("hook_mushroom", new StructureHookMushroom(), StructurePlacementType.CEIL, 0.03F, true);
-        addStructure("whispering_gourd", new StructureWhisperingGourd(), StructurePlacementType.CEIL, 0.02F, true);
     }
 
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-        //BlocksHelper.setWithoutUpdate(world, pos, random.nextInt(3) == 0 ? NetherBlocks.NETHERRACK_MOSS.defaultBlockState() : Blocks.NETHERRACK.defaultBlockState());
-    }
+
 }

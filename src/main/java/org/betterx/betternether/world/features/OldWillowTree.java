@@ -110,7 +110,7 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
         BlockState state;
 
         for (BlockPos bpos : context.BLOCKS) {
-            //if (!blockBox.contains(bpos)) continue;
+            if (!blockBox.isInside(bpos)) continue;
             if (BlocksHelper.isNetherGround(state = world.getBlockState(bpos)) || state.getMaterial().isReplaceable()) {
                 if (!context.BLOCKS.contains(bpos.above()) || !context.BLOCKS.contains(bpos.below()))
                     BlocksHelper.setWithUpdate(world,

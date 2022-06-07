@@ -29,6 +29,8 @@ public class WallFeatures {
 
     public static final BCLFeature LUCIS_FEATURE = FastFeatures.simple(BetterNether.makeID("lucis"),
             new LucisFeature());
+    public static final BCLFeature JUNGLE_MOSS_COVER
+            = FastFeatures.patch(BetterNether.makeID("jungle_moss_cover"), NetherBlocks.JUNGLE_MOSS);
 
     public static void ensureStaticInitialization() {
     }

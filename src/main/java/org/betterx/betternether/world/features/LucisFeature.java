@@ -38,6 +38,12 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> {
                             NoneFeatureConfiguration config,
                             int MAX_HEIGHT,
                             StructureGeneratorThreadContext context) {
+        return grow(world, pos, random);
+    }
+
+    protected boolean grow(ServerLevelAccessor world,
+                           BlockPos pos,
+                           RandomSource random) {
         if (canGenerate(world, pos)) {
 
             if (random.nextInt(3) == 0) {

@@ -16,8 +16,8 @@ import org.betterx.betternether.blocks.complex.WillowMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
-public class WillowBush extends ContextFeature<NoneFeatureConfiguration> {
-    public WillowBush() {
+public class WillowBushFeature extends ContextFeature<NoneFeatureConfiguration> {
+    public WillowBushFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
 

@@ -47,6 +47,12 @@ public class FloorFeatures {
 
     public static final BCLFeature VANILLA_WARPED_ROOTS
             = FastFeatures.patch(BetterNether.makeID("vanilla_warped_roots"), Blocks.WARPED_ROOTS, 10, 7, 3);
+
+    public static final BCLFeature MOSS_COVER
+            = FastFeatures.patch(BetterNether.makeID("moss_cover"), NetherBlocks.MOSS_COVER);
+
+    public static final BCLFeature HOOK_MUSHROOM
+            = FastFeatures.patch(BetterNether.makeID("hook_mushroom"), NetherBlocks.HOOK_MUSHROOM);
     public static final BCLFeature BONE_GRASS_PATCH
             = FastFeatures.patch(BetterNether.makeID("bone_grass"), NetherBlocks.BONE_GRASS);
 
@@ -77,7 +83,10 @@ public class FloorFeatures {
             = FastFeatures.patch(BetterNether.makeID("rubeus_bush"), 16, 5, 3, new RubeusBushFeature());
 
     public static final BCLFeature WILLOW_BUSH_PATCH
-            = FastFeatures.patch(BetterNether.makeID("willow_bush"), 2, 5, 3, new WillowBush());
+            = FastFeatures.patch(BetterNether.makeID("willow_bush"), 2, 5, 3, new WillowBushFeature());
+
+    public static final BCLFeature NETHER_SAKURA_BUSH_PATCH
+            = FastFeatures.patch(BetterNether.makeID("nether_sakura_bush"), 2, 5, 3, new NetherSakuraBushFeature());
 
 
     public static final BCLFeature CRIMSON_FUNGUS
@@ -122,6 +131,19 @@ public class FloorFeatures {
                     cfg(BetterNether.makeID("jungle_bones_1"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_2"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("jungle_bones_3"), -1, StructurePlacementType.FLOOR, 1.0f)
+            )));
+
+    public static final BCLFeature FORREST_LITTER = BCLFeatureBuilder
+            .start(BetterNether.makeID("forrest_litter"), BCLFeature.TEMPLATE)
+            .buildAndRegister(new TemplateFeatureConfig(List.of(
+                    cfg(BetterNether.makeID("upside_down_forest/tree_fallen"), 1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("upside_down_forest/tree_needle"), 1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("upside_down_forest/tree_root"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("upside_down_forest/tree_stump"), -1, StructurePlacementType.FLOOR, 1.0f),
+                    cfg(BetterNether.makeID("upside_down_forest/tree_small_branch"),
+                            1,
+                            StructurePlacementType.FLOOR,
+                            1.0f)
             )));
 
     public static final BCLFeature MAGMA_FLOWER = FastFeatures.patchWitRandomInt(
