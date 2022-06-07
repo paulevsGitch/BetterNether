@@ -27,7 +27,7 @@ run/
 
 *.launch
 logs/
-libs/modmenu-2.0.2.jar
-libs/modmenu-2.0.4.jar
+libs/
 run-client/
+run-server/
 CurseForge/

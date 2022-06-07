@@ -1,6 +1,8 @@
 [![](https://jitpack.io/v/paulevsGitch/BetterNether.svg)](https://jitpack.io/#paulevsGitch/BetterNether)
 
 # BetterNether
+The Latest Version of BCLib can be found here: https://github.com/quiqueck/BetterNether
+
 BetterNether Mod for Fabric, MC 1.18.1
 
 Building:
