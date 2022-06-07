@@ -35,9 +35,9 @@
   ],
   "depends": {
     "fabricloader": ">=0.14.6",
-    "fabric": ">=0.55.0",
-    "minecraft": "1.19-rc2",
-    "bclib": "2.0.x"
+    "fabric": ">=0.55.1",
+    "minecraft": "1.19",
+    "bclib": "2.0.0"
   },
   "custom": {
     "extrapieces:piecepack": "extrapieces.betternether.json",

@@ -18,14 +18,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
-import org.betterx.betternether.world.structures.plants.StructureGiantMold;
+import org.betterx.betternether.registry.features.TreeFeatures;
 
 public class BlockGiantMoldSapling extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherMycelium {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 14, 12);
-    private static final StructureGiantMold STRUCTURE = new StructureGiantMold();
 
     public BlockGiantMoldSapling() {
         super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
@@ -76,7 +76,7 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Bonemeala
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        STRUCTURE.grow(world, pos, random);
+        BCLFeature.place(TreeFeatures.GIANT_MOLD.getFeature(), world, pos, random);
     }
 
     @Override

@@ -70,7 +70,7 @@ public class BiomeFeatures {
     ), 1);
 
     public static final BCLFeature BONE_REEF_CEIL = ceilFromWeighted("bone_reef", List.of(
-            new WeightedPlacedFeature(VineLikeFeatures.LUMBUS_VINE.getPlacedFeature(), 1f)
+            new WeightedPlacedFeature(VineLikeFeatures.LUMABUS_VINE.getPlacedFeature(), 1f)
     ), 0);
 
     public static final BCLFeature SOUL_PLAIN_FLOOR = floorFromWeighted("soul_plain", List.of(
@@ -222,7 +222,7 @@ public class BiomeFeatures {
     ), 1);
 
     public static final BCLFeature SULFURIC_BONE_REEF_CEIL = ceilFromWeighted("sulfuric_bone_reef", List.of(
-            new WeightedPlacedFeature(VineLikeFeatures.GOLDEN_LUMBUS_VINE.getPlacedFeature(), 1f)
+            new WeightedPlacedFeature(VineLikeFeatures.GOLDEN_LUMABUS_VINE.getPlacedFeature(), 1f)
     ), 0);
 
     public static final BCLFeature NETHER_SWAMPLAND_FLOOR = denseFloorFromWeighted("nether_swampland", List.of(

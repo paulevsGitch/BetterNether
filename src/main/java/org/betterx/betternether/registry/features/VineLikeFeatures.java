@@ -41,9 +41,9 @@ public class VineLikeFeatures {
                     .spread(3, 0.75f)
                     .growWhileFree()
     );
-    public static final BCLFeature LUMBUS_VINE
+    public static final BCLFeature LUMABUS_VINE
             = FastFeatures.vine(
-            BetterNether.makeID("lumbus_vine"), false, true,
+            BetterNether.makeID("lumabus_vine"), false, true,
             ScatterFeatureConfig
                     .startOnSolid()
                     .tripleShape(NetherBlocks.LUMABUS_VINE)
@@ -52,9 +52,9 @@ public class VineLikeFeatures {
                     .growWhileFree()
     );
 
-    public static final BCLFeature GOLDEN_LUMBUS_VINE
+    public static final BCLFeature GOLDEN_LUMABUS_VINE
             = FastFeatures.vine(
-            BetterNether.makeID("golden_lumbus_vine"), false, true,
+            BetterNether.makeID("golden_lumabus_vine"), false, true,
             ScatterFeatureConfig
                     .startOnSolid()
                     .tripleShape(NetherBlocks.GOLDEN_LUMABUS_VINE)
