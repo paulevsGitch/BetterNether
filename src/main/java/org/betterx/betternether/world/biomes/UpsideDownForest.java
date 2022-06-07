@@ -17,7 +17,6 @@ import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.surface.rules.Conditions;
 import org.betterx.bclib.api.surface.rules.SurfaceNoiseCondition;
 import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
-import org.betterx.bclib.world.structures.StructurePlacementType;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -25,8 +24,6 @@ import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
-import org.betterx.betternether.world.structures.decorations.StructureForestLitter;
-import org.betterx.betternether.world.structures.plants.*;
 
 class UpsideDownFloorCondition extends SurfaceNoiseCondition {
     public static final UpsideDownFloorCondition DEFAULT = new UpsideDownFloorCondition();
@@ -129,21 +126,5 @@ public class UpsideDownForest extends NetherBiome {
 
     @Override
     protected void onInit() {
-        this.setNoiseDensity(0.5F);
-
-        addStructure("anchor_tree", new StructureAnchorTree(), StructurePlacementType.CEIL, 0.2F, false);
-        addStructure("anchor_tree_root", new StructureAnchorTreeRoot(), StructurePlacementType.CEIL, 0.03F, false);
-        addStructure("anchor_tree_branch", new StructureAnchorTreeBranch(), StructurePlacementType.CEIL, 0.02F, true);
-        addStructure("nether_sakura", new StructureNetherSakura(), StructurePlacementType.CEIL, 0.01F, true);
-        addStructure("nether_sakura_bush", new StructureNetherSakuraBush(), StructurePlacementType.FLOOR, 0.01F, true);
-        addStructure("moss_cover", new StructureMossCover(), StructurePlacementType.FLOOR, 0.6F, false);
-        addStructure("jungle_moss", new StructureJungleMoss(), StructurePlacementType.WALL, 0.4F, true);
-        addStructure("wall_red_mushroom", new StructureWallRedMushroom(), StructurePlacementType.WALL, 0.4F, true);
-        addStructure("wall_brown_mushroom", new StructureWallBrownMushroom(), StructurePlacementType.WALL, 0.4F, true);
-        addStructure("forest_litter", new StructureForestLitter(), StructurePlacementType.FLOOR, 0.1F, false);
-        //addStructure("ceiling_mushrooms", new StructureCeilingMushrooms(), StructurePlacementType.CEIL, 1F, false);
-        addStructure("neon_equisetum", new StructureNeonEquisetum(), StructurePlacementType.CEIL, 0.1F, true);
-        addStructure("hook_mushroom", new StructureHookMushroom(), StructurePlacementType.CEIL, 0.03F, true);
-        addStructure("whispering_gourd", new StructureWhisperingGourd(), StructurePlacementType.CEIL, 0.02F, true);
     }
 }

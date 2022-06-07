@@ -126,7 +126,7 @@ public class VineLikeFeatures {
 
     public static final BCLFeature EYE
             = FastFeatures.vine(
-            BetterNether.makeID("eye"), true, false,
+            BetterNether.makeID("eye"), false, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .block(NetherBlocks.EYE_VINE)
