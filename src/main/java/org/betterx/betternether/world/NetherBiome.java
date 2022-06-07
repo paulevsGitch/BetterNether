@@ -7,9 +7,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
-import org.betterx.bclib.api.biomes.BCLBiome;
-import org.betterx.bclib.api.biomes.BCLBiomeSettings;
-import org.betterx.bclib.world.structures.StructurePlacementType;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.world.structures.IStructure;

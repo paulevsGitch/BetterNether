@@ -15,8 +15,10 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 
-import org.betterx.bclib.api.tag.CommonBlockTags;
-import org.betterx.bclib.api.tag.CommonItemTags;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.tag.CommonItemTags;
+import org.betterx.bclib.api.v2.tag.NamedBlockTags;
+import org.betterx.bclib.api.v2.tag.TagAPI;
 import org.betterx.bclib.blocks.BaseLadderBlock;
 import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.bclib.registry.BlockRegistry;
@@ -272,8 +274,8 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block SOUL_SANDSTONE_CUT_STAIRS = registerStairs("soul_sandstone_cut_stairs",
                                                                          SOUL_SANDSTONE_CUT,
                                                                          false,
-                                                                         org.betterx.bclib.api.tag.NamedBlockTags.SOUL_SPEED_BLOCKS,
-                                                                         org.betterx.bclib.api.tag.NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
+                                                                         NamedBlockTags.SOUL_SPEED_BLOCKS,
+                                                                         NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
     public static final Block SOUL_SANDSTONE_CUT_SLAB = registerSlab("soul_sandstone_cut_slab",
                                                                      SOUL_SANDSTONE_CUT,
                                                                      false);
@@ -288,13 +290,13 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block SOUL_SANDSTONE_STAIRS = registerStairs("soul_sandstone_stairs",
                                                                      SOUL_SANDSTONE,
                                                                      false,
-                                                                     org.betterx.bclib.api.tag.NamedBlockTags.SOUL_SPEED_BLOCKS,
-                                                                     org.betterx.bclib.api.tag.NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
+                                                                     NamedBlockTags.SOUL_SPEED_BLOCKS,
+                                                                     NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
     public static final Block SOUL_SANDSTONE_SMOOTH_STAIRS = registerStairs("soul_sandstone_smooth_stairs",
                                                                             SOUL_SANDSTONE_SMOOTH,
                                                                             false,
-                                                                            org.betterx.bclib.api.tag.NamedBlockTags.SOUL_SPEED_BLOCKS,
-                                                                            org.betterx.bclib.api.tag.NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
+                                                                            NamedBlockTags.SOUL_SPEED_BLOCKS,
+                                                                            NamedBlockTags.SOUL_FIRE_BASE_BLOCKS);
     public static final Block SOUL_SANDSTONE_SLAB = registerSlab("soul_sandstone_slab", SOUL_SANDSTONE, false);
     public static final Block SOUL_SANDSTONE_SMOOTH_SLAB = registerSlab("soul_sandstone_smooth_slab",
                                                                         SOUL_SANDSTONE_SMOOTH,
@@ -328,13 +330,13 @@ public class NetherBlocks extends BlockRegistry {
     // Vines //
     public static final Block BLACK_VINE = registerBlock("black_vine",
                                                          new BlockBlackVine(),
-                                                         org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
+                                                         NamedBlockTags.CLIMBABLE);
     public static final Block BLOOMING_VINE = registerBlock("blooming_vine",
                                                             new BlockBlackVine(),
-                                                            org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
+                                                            NamedBlockTags.CLIMBABLE);
     public static final Block GOLDEN_VINE = registerBlock("golden_vine",
                                                           new BlockGoldenVine(),
-                                                          org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
+                                                          NamedBlockTags.CLIMBABLE);
     public static final Block LUMABUS_SEED = registerBlock("lumabus_seed",
                                                            new BlockLumabusSeed(new StructureLumabusVine()));
     public static final Block GOLDEN_LUMABUS_SEED = registerBlock("golden_lumabus_seed",
@@ -408,23 +410,23 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
     public static final Block NETHER_MYCELIUM = registerBlock("nether_mycelium",
                                                               new BlockNetherMycelium(),
-                                                              org.betterx.bclib.api.tag.NamedBlockTags.NYLIUM,
+                                                              NamedBlockTags.NYLIUM,
                                                               CommonBlockTags.NETHER_MYCELIUM);
     public static final Block JUNGLE_GRASS = registerBlock("jungle_grass",
                                                            new BlockTerrain(),
-                                                           org.betterx.bclib.api.tag.NamedBlockTags.NYLIUM);
+                                                           NamedBlockTags.NYLIUM);
     public static final Block MUSHROOM_GRASS = registerBlock("mushroom_grass",
                                                              new BlockTerrain(),
-                                                             org.betterx.bclib.api.tag.NamedBlockTags.NYLIUM);
+                                                             NamedBlockTags.NYLIUM);
     public static final Block SEPIA_MUSHROOM_GRASS = registerBlock("sepia_mushroom_grass",
                                                                    new BlockTerrain(),
-                                                                   org.betterx.bclib.api.tag.NamedBlockTags.NYLIUM);
+                                                                   NamedBlockTags.NYLIUM);
     public static final Block FARMLAND = registerBlock("farmland",
                                                        new BlockFarmland(),
                                                        NetherTags.NETHER_FARMLAND_LOCATION);
     public static final Block SWAMPLAND_GRASS = registerBlock("swampland_grass",
                                                               new BlockTerrain(),
-                                                              org.betterx.bclib.api.tag.NamedBlockTags.NYLIUM);
+                                                              NamedBlockTags.NYLIUM);
     public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
     // Roofs //
     public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS);
@@ -449,7 +451,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block NETHER_BREWING_STAND = registerBlock("nether_brewing_stand", new BNBrewingStand());
     public static final Block CINCINNASITE_ANVIL = registerBlock("cincinnasite_anvil",
                                                                  new BlockCincinnasiteAnvil(),
-                                                                 org.betterx.bclib.api.tag.NamedBlockTags.ANVIL);
+                                                                 NamedBlockTags.ANVIL);
     public static final Block CRAFTING_TABLE_CRIMSON = registerCraftingTable("crafting_table_crimson",
                                                                              Blocks.CRIMSON_PLANKS);
     public static final Block CRAFTING_TABLE_WARPED = registerCraftingTable("crafting_table_warped",
@@ -508,7 +510,7 @@ public class NetherBlocks extends BlockRegistry {
                                                                               MaterialColor.COLOR_GREEN));
     public static final Block ANCHOR_TREE_VINE = registerBlockNI("anchor_tree_vine",
                                                                  new BlockAnchorTreeVine(),
-                                                                 org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
+                                                                 NamedBlockTags.CLIMBABLE);
     // Nether Sakura
     public static final NetherSakuraMaterial MAT_NETHER_SAKURA = new NetherSakuraMaterial().init();
     public static final Block NETHER_SAKURA_LEAVES = registerBlock("nether_sakura_leaves",
@@ -529,7 +531,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block EYEBALL_SMALL = registerBlockNI("eyeball_small", new BlockEyeballSmall());
     public static final Block EYE_VINE = registerBlockNI("eye_vine",
                                                          new BlockEyeVine(),
-                                                         org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
+                                                         NamedBlockTags.CLIMBABLE);
     public static final Block LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine(LUMABUS_SEED));
     public static final Block GOLDEN_LUMABUS_VINE = registerBlockNI("golden_lumabus_vine",
                                                                     new BlockLumabusVine(GOLDEN_LUMABUS_SEED));
@@ -564,7 +566,7 @@ public class NetherBlocks extends BlockRegistry {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             if (tags.length > 0) {
-                org.betterx.bclib.api.tag.TagAPI.addBlockTags(block, tags);
+                TagAPI.addBlockTags(block, tags);
             }
         }
         return block;
@@ -590,7 +592,7 @@ public class NetherBlocks extends BlockRegistry {
             blockRegistry.registerBlockOnly(location, block);
         }
         if (tags.length > 0) {
-            org.betterx.bclib.api.tag.TagAPI.addBlockTags(block, tags);
+            TagAPI.addBlockTags(block, tags);
         }
         return block;
     }
@@ -608,7 +610,7 @@ public class NetherBlocks extends BlockRegistry {
             addFuel(source, stairs);
             RecipesHelper.makeStairsRecipe(source, stairs);
             if (tags.length > 0) {
-                org.betterx.bclib.api.tag.TagAPI.addBlockTags(stairs, tags);
+                TagAPI.addBlockTags(stairs, tags);
             }
         }
         return stairs;
@@ -621,7 +623,7 @@ public class NetherBlocks extends BlockRegistry {
             addFuel(source, slab);
             RecipesHelper.makeSlabRecipe(source, slab);
             if (tags.length > 0) {
-                org.betterx.bclib.api.tag.TagAPI.addBlockTags(slab, tags);
+                TagAPI.addBlockTags(slab, tags);
             }
         }
         return slab;
@@ -670,15 +672,15 @@ public class NetherBlocks extends BlockRegistry {
     public static Block registerSoulBlock(String name, Block block) {
         return registerBlock(name,
                              block,
-                             org.betterx.bclib.api.tag.NamedBlockTags.SOUL_FIRE_BASE_BLOCKS,
-                             org.betterx.bclib.api.tag.NamedBlockTags.SOUL_SPEED_BLOCKS);
+                             NamedBlockTags.SOUL_FIRE_BASE_BLOCKS,
+                             NamedBlockTags.SOUL_SPEED_BLOCKS);
     }
 
     public static Block registerMakeable2X2Soul(String name, Block result, String group, Block... sources) {
         final Block block = registerMakeable2X2(name, result, group, sources);
-        org.betterx.bclib.api.tag.TagAPI.addBlockTags(block,
-                                                      org.betterx.bclib.api.tag.NamedBlockTags.SOUL_FIRE_BASE_BLOCKS,
-                                                      org.betterx.bclib.api.tag.NamedBlockTags.SOUL_SPEED_BLOCKS);
+        TagAPI.addBlockTags(block,
+                                                      NamedBlockTags.SOUL_FIRE_BASE_BLOCKS,
+                                                      NamedBlockTags.SOUL_SPEED_BLOCKS);
         return block;
     }
 
@@ -696,7 +698,7 @@ public class NetherBlocks extends BlockRegistry {
         Block wall = new BNWall(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, wall);
-            org.betterx.bclib.api.tag.TagAPI.addBlockTags(wall, org.betterx.bclib.api.tag.NamedBlockTags.WALLS);
+            TagAPI.addBlockTags(wall, NamedBlockTags.WALLS);
             RecipesHelper.makeWallRecipe(source, wall);
         }
         return wall;
@@ -706,8 +708,8 @@ public class NetherBlocks extends BlockRegistry {
         Block block = new org.betterx.bclib.blocks.BaseCraftingTableBlock(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            org.betterx.bclib.api.tag.TagAPI.addBlockTags(block, CommonBlockTags.WORKBENCHES);
-            org.betterx.bclib.api.tag.TagAPI.addItemTags(block, org.betterx.bclib.api.tag.CommonItemTags.WORKBENCHES);
+            TagAPI.addBlockTags(block, CommonBlockTags.WORKBENCHES);
+            TagAPI.addItemTags(block, CommonItemTags.WORKBENCHES);
 
             GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
                       .checkConfig(Configs.RECIPES)
@@ -726,8 +728,8 @@ public class NetherBlocks extends BlockRegistry {
         Block chest = new org.betterx.bclib.blocks.BaseChestBlock(planks);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, chest);
-            org.betterx.bclib.api.tag.TagAPI.addBlockTags(chest, CommonBlockTags.CHEST);
-            org.betterx.bclib.api.tag.TagAPI.addItemTags(chest, CommonItemTags.CHEST);
+            TagAPI.addBlockTags(chest, CommonBlockTags.CHEST);
+            TagAPI.addItemTags(chest, CommonItemTags.CHEST);
             addFuel(planks, chest);
             //RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
             GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), chest)
@@ -767,7 +769,7 @@ public class NetherBlocks extends BlockRegistry {
         Block block = new BaseLadderBlock(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            org.betterx.bclib.api.tag.TagAPI.addBlockTags(block, org.betterx.bclib.api.tag.NamedBlockTags.CLIMBABLE);
+            TagAPI.addBlockTags(block, NamedBlockTags.CLIMBABLE);
 
             addFuel(source, block);
             //RecipesHelper.makeLadderRecipe(source, block);

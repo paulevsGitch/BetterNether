@@ -5,7 +5,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
-import org.betterx.bclib.world.structures.StructurePlacementType;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.NetherStructureWorld;

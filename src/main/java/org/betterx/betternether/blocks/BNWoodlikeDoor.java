@@ -4,8 +4,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-import org.betterx.bclib.api.tag.NamedBlockTags;
-import org.betterx.bclib.api.tag.NamedItemTags;
+import org.betterx.bclib.api.v2.tag.NamedBlockTags;
+import org.betterx.bclib.api.v2.tag.NamedItemTags;
 import org.betterx.bclib.blocks.BaseDoorBlock;
 import org.betterx.bclib.interfaces.TagProvider;
 

@@ -18,9 +18,9 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.biomes.BiomeAPI;
-import org.betterx.bclib.api.spawning.SpawnRuleBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
 import org.betterx.bclib.entity.BCLEntityWrapper;
 import org.betterx.bclib.interfaces.SpawnRule;
 import org.betterx.bclib.util.ColorUtil;

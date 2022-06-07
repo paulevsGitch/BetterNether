@@ -9,11 +9,11 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
-import org.betterx.bclib.api.BonemealAPI;
-import org.betterx.bclib.api.ComposterAPI;
-import org.betterx.bclib.api.tag.NamedBlockTags;
-import org.betterx.bclib.api.tag.NamedMineableTags;
-import org.betterx.bclib.api.tag.TagAPI;
+import org.betterx.bclib.api.v2.BonemealAPI;
+import org.betterx.bclib.api.v2.ComposterAPI;
+import org.betterx.bclib.api.v2.tag.NamedBlockTags;
+import org.betterx.bclib.api.v2.tag.NamedMineableTags;
+import org.betterx.bclib.api.v2.tag.TagAPI;
 import org.betterx.bclib.blocks.SimpleLeavesBlock;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BlockTerrain;

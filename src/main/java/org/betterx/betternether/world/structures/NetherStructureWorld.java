@@ -5,8 +5,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 import com.google.common.collect.Maps;
-import org.betterx.bclib.world.structures.StructurePlacementType;
-import org.betterx.bclib.world.structures.StructureWorldNBT;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
 
 import java.util.Map;

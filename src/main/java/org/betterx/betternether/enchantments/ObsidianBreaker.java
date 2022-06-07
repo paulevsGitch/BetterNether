@@ -6,7 +6,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import org.betterx.bclib.api.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.registry.NetherBlocks;
 
 public class ObsidianBreaker extends Enchantment {

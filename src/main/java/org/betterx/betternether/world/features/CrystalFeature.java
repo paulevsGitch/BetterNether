@@ -10,8 +10,8 @@ import net.minecraft.world.level.dimension.DimensionDefaults;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.phys.Vec3;
 
-import org.betterx.bclib.api.features.BCLFeature;
-import org.betterx.bclib.api.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.noise.OpenSimplexNoise;

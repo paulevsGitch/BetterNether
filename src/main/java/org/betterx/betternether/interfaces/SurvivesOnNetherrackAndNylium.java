@@ -4,7 +4,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
-import org.betterx.bclib.api.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.bclib.interfaces.SurvivesOnTags;
 
 import java.util.List;

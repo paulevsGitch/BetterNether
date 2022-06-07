@@ -18,7 +18,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.bclib.api.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.bclib.interfaces.TagProvider;
 import org.betterx.betternether.registry.NetherBlocks;
 

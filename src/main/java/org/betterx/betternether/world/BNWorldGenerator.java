@@ -11,9 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.bclib.api.biomes.BiomeAPI;
-import org.betterx.bclib.world.generator.GeneratorOptions;
-import org.betterx.bclib.world.structures.StructurePlacementType;
+import org.betterx.bclib.api.v2.generator.GeneratorOptions;
+import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.config.Configs;

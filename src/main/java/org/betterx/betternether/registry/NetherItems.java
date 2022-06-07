@@ -15,8 +15,8 @@ import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 
-import org.betterx.bclib.api.tag.CommonItemTags;
-import org.betterx.bclib.api.tag.TagAPI;
+import org.betterx.bclib.api.v2.tag.CommonItemTags;
+import org.betterx.bclib.api.v2.tag.TagAPI;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.bclib.registry.ItemRegistry;
 import org.betterx.betternether.BetterNether;

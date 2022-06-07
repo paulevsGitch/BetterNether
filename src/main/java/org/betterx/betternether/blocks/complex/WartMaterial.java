@@ -6,8 +6,8 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.bclib.api.tag.NamedBlockTags;
-import org.betterx.bclib.api.tag.NamedItemTags;
+import org.betterx.bclib.api.v2.tag.NamedBlockTags;
+import org.betterx.bclib.api.v2.tag.NamedItemTags;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.betternether.blocks.BlockWartRoots;
 import org.betterx.betternether.blocks.BlockWartSeed;

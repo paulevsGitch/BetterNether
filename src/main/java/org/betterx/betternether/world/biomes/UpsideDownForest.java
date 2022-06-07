@@ -10,12 +10,12 @@ import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import com.mojang.serialization.Codec;
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
-import org.betterx.bclib.api.biomes.BCLBiomeSettings;
-import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
-import org.betterx.bclib.api.surface.rules.Conditions;
-import org.betterx.bclib.api.surface.rules.SurfaceNoiseCondition;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
+import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
+import org.betterx.bclib.api.v2.levelgen.surface.rules.SurfaceNoiseCondition;
 import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;

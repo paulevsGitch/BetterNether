@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 
-import org.betterx.bclib.api.structures.BCLStructure;
+import org.betterx.bclib.api.v2.levelgen.structures.BCLStructure;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherStructures;

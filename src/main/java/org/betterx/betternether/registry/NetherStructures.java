@@ -6,11 +6,11 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.biomes.BiomeAPI;
-import org.betterx.bclib.api.structures.BCLStructure;
-import org.betterx.bclib.api.structures.BCLStructureBuilder;
-import org.betterx.bclib.api.tag.TagAPI;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.levelgen.structures.BCLStructure;
+import org.betterx.bclib.api.v2.levelgen.structures.BCLStructureBuilder;
+import org.betterx.bclib.api.v2.tag.TagAPI;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.world.structures.city.CityFeature;

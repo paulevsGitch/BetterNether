@@ -2,8 +2,8 @@ package org.betterx.betternether.world.structures.templates;
 
 import net.minecraft.resources.ResourceLocation;
 
-import org.betterx.bclib.world.structures.StructurePlacementType;
-import org.betterx.bclib.world.structures.TemplateStructure;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.bclib.api.v2.levelgen.structures.TemplateStructure;
 import org.betterx.betternether.BetterNether;
 
 import java.util.List;

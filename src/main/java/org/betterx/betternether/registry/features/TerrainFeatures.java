@@ -15,14 +15,14 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
-import org.betterx.bclib.api.features.BCLFeature;
-import org.betterx.bclib.api.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.features.FastFeatures;
-import org.betterx.bclib.api.features.blockpredicates.IsFullShape;
-import org.betterx.bclib.api.features.config.ConditionFeatureConfig;
-import org.betterx.bclib.api.features.config.SequenceFeatureConfig;
-import org.betterx.bclib.api.features.placement.IsBasin;
-import org.betterx.bclib.api.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
+import org.betterx.bclib.api.v2.levelgen.features.blockpredicates.IsFullShape;
+import org.betterx.bclib.api.v2.levelgen.features.config.ConditionFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.features.config.SequenceFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.features.placement.IsBasin;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 

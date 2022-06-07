@@ -13,12 +13,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
-import org.betterx.bclib.api.biomes.BCLBiomeSettings;
-import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
-import org.betterx.bclib.api.surface.rules.Conditions;
-import org.betterx.bclib.api.surface.rules.SwitchRuleSource;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
+import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
+import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockSoulSandstone;

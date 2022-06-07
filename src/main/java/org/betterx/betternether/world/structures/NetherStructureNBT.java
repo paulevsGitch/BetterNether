@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 
 import com.google.common.collect.Maps;
-import org.betterx.bclib.world.structures.StructureNBT;
+import org.betterx.bclib.api.v2.levelgen.structures.StructureNBT;
 import org.betterx.betternether.BetterNether;
 
 import java.util.Map;

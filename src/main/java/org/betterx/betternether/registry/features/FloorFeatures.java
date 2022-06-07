@@ -7,13 +7,13 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
-import org.betterx.bclib.api.features.BCLFeature;
-import org.betterx.bclib.api.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.features.FastFeatures;
-import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
-import org.betterx.bclib.api.features.config.TemplateFeatureConfig;
-import org.betterx.bclib.world.structures.StructurePlacementType;
-import org.betterx.bclib.world.structures.StructureWorldNBT;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
+import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BlockCommonPlant;
 import org.betterx.betternether.registry.NetherBlocks;

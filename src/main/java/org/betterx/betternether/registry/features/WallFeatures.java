@@ -1,7 +1,7 @@
 package org.betterx.betternether.registry.features;
 
-import org.betterx.bclib.api.features.BCLFeature;
-import org.betterx.bclib.api.features.FastFeatures;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.LucisFeature;

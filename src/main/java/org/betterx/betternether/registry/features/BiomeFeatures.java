@@ -10,12 +10,12 @@ import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
-import org.betterx.bclib.api.features.BCLFeature;
-import org.betterx.bclib.api.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.features.config.PlaceFacingBlockConfig;
-import org.betterx.bclib.api.features.placement.FindSolidInDirection;
-import org.betterx.bclib.api.features.placement.OnEveryLayer;
-import org.betterx.bclib.api.features.placement.UnderEveryLayer;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v2.levelgen.features.config.PlaceFacingBlockConfig;
+import org.betterx.bclib.api.v2.levelgen.features.placement.FindSolidInDirection;
+import org.betterx.bclib.api.v2.levelgen.features.placement.OnEveryLayer;
+import org.betterx.bclib.api.v2.levelgen.features.placement.UnderEveryLayer;
 import org.betterx.betternether.BetterNether;
 
 import java.util.List;

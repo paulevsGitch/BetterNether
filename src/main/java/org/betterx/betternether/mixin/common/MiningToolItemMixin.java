@@ -8,7 +8,7 @@ import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-import org.betterx.bclib.api.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

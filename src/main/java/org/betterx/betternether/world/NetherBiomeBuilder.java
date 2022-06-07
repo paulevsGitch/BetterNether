@@ -18,8 +18,8 @@ import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 
-import org.betterx.bclib.api.biomes.BCLBiome;
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.util.MHelper;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherEntities;

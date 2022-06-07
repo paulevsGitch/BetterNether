@@ -3,9 +3,9 @@ package org.betterx.betternether;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 
-import org.betterx.bclib.api.datafixer.DataFixerAPI;
-import org.betterx.bclib.api.datafixer.MigrationProfile;
-import org.betterx.bclib.api.datafixer.Patch;
+import org.betterx.bclib.api.v2.datafixer.DataFixerAPI;
+import org.betterx.bclib.api.v2.datafixer.MigrationProfile;
+import org.betterx.bclib.api.v2.datafixer.Patch;
 import org.betterx.bclib.interfaces.PatchBiFunction;
 
 import java.util.List;

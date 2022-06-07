@@ -3,7 +3,7 @@ package org.betterx.betternether.world.structures.templates;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
 import com.mojang.serialization.Codec;
-import org.betterx.bclib.world.structures.StructurePlacementType;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.betternether.registry.NetherStructures;
 
 import java.util.List;

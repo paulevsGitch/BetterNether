@@ -18,7 +18,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.bclib.api.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.bclib.blocks.BaseOreBlock;
 import org.betterx.bclib.interfaces.BlockModelProvider;
 import org.betterx.bclib.interfaces.TagProvider;

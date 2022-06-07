@@ -6,11 +6,11 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
-import org.betterx.bclib.api.biomes.BCLBiomeSettings;
-import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
-import org.betterx.bclib.api.surface.rules.SurfaceNoiseCondition;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
+import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.v2.levelgen.surface.rules.SurfaceNoiseCondition;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.BiomeFeatures;

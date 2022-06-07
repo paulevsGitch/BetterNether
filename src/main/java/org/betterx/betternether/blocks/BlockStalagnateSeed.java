@@ -18,7 +18,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import org.betterx.bclib.api.features.DefaultFeature;
+import org.betterx.bclib.api.v2.levelgen.features.DefaultFeature;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;

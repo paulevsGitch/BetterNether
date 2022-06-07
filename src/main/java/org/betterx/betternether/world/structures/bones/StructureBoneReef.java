@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 
-import org.betterx.bclib.world.structures.StructureNBT;
+import org.betterx.bclib.api.v2.levelgen.structures.StructureNBT;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.NetherStructureNBT;

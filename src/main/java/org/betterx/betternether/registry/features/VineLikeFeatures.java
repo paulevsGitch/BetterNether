@@ -10,11 +10,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 
-import org.betterx.bclib.api.features.BCLFeature;
-import org.betterx.bclib.api.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.features.FastFeatures;
-import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
-import org.betterx.bclib.api.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
+import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties;

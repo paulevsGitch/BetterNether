@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 import com.mojang.serialization.Codec;
-import org.betterx.bclib.api.features.config.ScatterFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
 import org.betterx.bclib.util.BlocksHelper;
 import org.betterx.betternether.blocks.BlockStalactite;
 

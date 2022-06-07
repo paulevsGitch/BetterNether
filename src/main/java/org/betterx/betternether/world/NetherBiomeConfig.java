@@ -5,9 +5,9 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.biomes.BCLBiomeBuilder.BiomeSupplier;
-import org.betterx.bclib.api.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
+import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherEntities.KnownSpawnTypes;
 

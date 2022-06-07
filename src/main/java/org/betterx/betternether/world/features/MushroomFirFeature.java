@@ -6,7 +6,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.bclib.api.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockMushroomFir;
 import org.betterx.betternether.blocks.BlockNetherMycelium;
