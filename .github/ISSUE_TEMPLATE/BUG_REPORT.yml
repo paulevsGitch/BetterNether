@@ -25,7 +25,7 @@ body:
     attributes:
       label: BetterNether
       description: What version of BetterNether are you running?
-      placeholder: 5.3.x
+      placeholder: 7.0.x
     validations:
       required: true
   - type: input
@@ -33,7 +33,7 @@ body:
     attributes:
       label: BCLib
       description: What version of BCLib are you running? Older Versions of BetterNether did not require BCLib.
-      placeholder: 0.4.x
+      placeholder: 2.0.x
     validations:
       required: true
   - type: input
@@ -41,7 +41,7 @@ body:
     attributes:
       label: Fabric API
       description: What version of Fabric API is installed
-      placeholder: 0.4x.x
+      placeholder: 0.5x.x
     validations:
       required: false
   - type: input
@@ -49,7 +49,7 @@ body:
     attributes:
       label: Fabric Loader
       description: What version of Fabric Loader do you use
-      placeholder: 0.12.x
+      placeholder: 0.14.x
     validations:
       required: false
   - type: dropdown
@@ -62,15 +62,7 @@ body:
         - 1.18.2
         - 1.18.1
         - 1.18
-        - 1.17.1
-        - 1.17
-        - 1.16.5
-        - 1.16.4
-        - 1.16.3
-        - 1.16.2
-        - 1.16.1
-        - 1.16.0
-        - Before 1.16
+        - Older
     validations:
       required: true
   - type: markdown
