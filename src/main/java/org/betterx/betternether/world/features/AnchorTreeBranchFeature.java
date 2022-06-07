@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
@@ -22,7 +23,7 @@ import org.betterx.betternether.world.structures.StructureGeneratorThreadContext
 import java.util.Iterator;
 import java.util.Map;
 
-public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfiguration> {
+public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature {
     private static final float[] CURVE_X = new float[]{9F, 7F, 1.5F, 0.5F, 3F, 7F};
     private static final float[] CURVE_Y = new float[]{-20F, -17F, -12F, -4F, 0F, 2F};
     private static final int MIDDLE_Y = 10;
@@ -40,7 +41,14 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
                             StructureGeneratorThreadContext context) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
         if (pos.getY() < 56 + random.nextInt((int) (20 * scale_factor))) return false;
+        return grow(world, pos, random, scale_factor, context);
+    }
 
+    private boolean grow(ServerLevelAccessor world,
+                         BlockPos pos,
+                         RandomSource random,
+                         float scale_factor,
+                         StructureGeneratorThreadContext context) {
         context.clear();
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
         float scale = MHelper.randRange(0.5F, 1F, random);
@@ -398,5 +406,10 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
 
     private boolean canReplace(BlockState state) {
         return BlocksHelper.isNetherGround(state) || state.getMaterial().isReplaceable();
+    }
+
+    @Override
+    public boolean grow(ServerLevelAccessor level, BlockPos pos, RandomSource random) {
+        return grow(level, pos, random, 1, NetherChunkPopulatorFeature.generatorForThread().context);
     }
 }

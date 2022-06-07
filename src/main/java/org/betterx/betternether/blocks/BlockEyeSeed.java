@@ -20,11 +20,10 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
-import org.betterx.betternether.world.structures.plants.StructureEye;
+import org.betterx.betternether.registry.features.VineLikeFeatures;
 
 public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack {
     private static final VoxelShape SHAPE = box(4, 6, 4, 12, 16, 12);
-    private static final StructureEye STRUCTURE = new StructureEye();
 
     public BlockEyeSeed() {
         super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
@@ -53,8 +52,8 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock,
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        STRUCTURE.grow(world, pos, random);
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+        VineLikeFeatures.EYE.place(level, pos, random);
     }
 
     @Override

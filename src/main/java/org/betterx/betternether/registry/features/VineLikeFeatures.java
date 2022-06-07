@@ -68,7 +68,7 @@ public class VineLikeFeatures {
             ScatterFeatureConfig
                     .startOnSolid()
                     .singleBlock(NetherBlocks.BLACK_VINE)
-                    .spread(4, 0.85f, UniformInt.of(10, 20))
+                    .spread(4, 0.85f, UniformInt.of(2, 6))
                     .heightRange(2, 18)
                     .growWhileFree()
     );

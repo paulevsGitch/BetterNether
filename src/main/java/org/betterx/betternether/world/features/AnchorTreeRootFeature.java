@@ -16,7 +16,6 @@ import org.betterx.betternether.blocks.BlockAnchorTreeVine;
 import org.betterx.betternether.blocks.BlockPlantWall;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.betternether.world.structures.plants.StructureAnchorTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +98,7 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
                         LUCIS.grow(world, bpos, random);
             }
 
-            state = StructureAnchorTree.wallPlants[random.nextInt(StructureAnchorTree.wallPlants.length)].defaultBlockState();
+            state = AnchorTreeFeature.wallPlants[random.nextInt(AnchorTreeFeature.wallPlants.length)].defaultBlockState();
             BlockPos _pos = bpos.north();
             if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && world.isEmptyBlock(_pos))
                 BlocksHelper.setWithUpdate(world, _pos, state.setValue(BlockPlantWall.FACING, Direction.NORTH));
