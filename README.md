@@ -1,7 +1,7 @@
-[![](https://jitpack.io/v/paulevsGitch/BetterNether.svg)](https://jitpack.io/#paulevsGitch/BetterNether)
+[![](https://jitpack.io/v/quiqueck/BetterNether.svg)](https://jitpack.io/#quiqueck/BetterNether)
 
 # BetterNether
-BetterNether Mod for Fabric, MC 1.18.1
+BetterNether Mod for Fabric, MC 1.19
 
 Building:
 * Clone repo
