@@ -18,12 +18,12 @@ public class BlockWillowSapling extends FeatureSaplingBlock implements Bonemeala
     public BlockWillowSapling() {
         super((state) -> MHelper.RANDOM.nextInt(32) == 0
                 ? TreeFeatures.OLD_WILLOW
-                : TreeFeatures.OLD_WILLOW);
+                : TreeFeatures.WILLOW);
     }
 
     @Override
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
-        return true || (BlocksHelper.isFertile(world.getBlockState(pos.below()))
+        return (BlocksHelper.isFertile(world.getBlockState(pos.below()))
                 ? (random.nextInt(8) == 0)
                 : (random.nextInt(16) == 0));
     }
