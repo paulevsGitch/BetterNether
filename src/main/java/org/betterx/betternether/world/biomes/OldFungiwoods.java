@@ -35,8 +35,8 @@ public class OldFungiwoods extends NetherBiome {
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
                    .feature(BiomeFeatures.OLD_FUNGIWOODS_FLOOR)
-                   .feature(BiomeFeatures.SOUL_PLAIN_CEIL)
-                   .feature(BiomeFeatures.CRIMSON_GLOWING_WOODS_WALL)
+                   .feature(BiomeFeatures.OLD_FUNGIWOODS_CEIL)
+                   .feature(BiomeFeatures.OLD_FUNGIWOODS_WALL)
                    .genChance(0.3f)
             ;
         }

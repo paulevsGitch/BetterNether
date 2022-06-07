@@ -5,31 +5,30 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.valueproviders.ClampedNormalInt;
-import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
 import com.google.common.collect.Lists;
 import org.betterx.bclib.api.v2.LifeCycleAPI;
-import org.betterx.bclib.api.v2.levelgen.features.*;
-import org.betterx.bclib.api.v2.levelgen.features.config.PlaceFacingBlockConfig;
-import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.levelgen.features.BCLCommonFeatures;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v2.levelgen.features.config.PlaceFacingBlockConfig;
+import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.features.features.DefaultFeature;
+import org.betterx.bclib.api.v2.levelgen.features.features.ScatterFeature;
+import org.betterx.bclib.api.v2.levelgen.features.features.TemplateFeature;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.features.*;
 import org.betterx.betternether.world.features.*;
@@ -52,82 +51,6 @@ public class NetherFeatures {
             BetterNether.makeID("scatter_with_age"),
             new ScatterFeature<>(ScatterFeatureConfigs.WithPlantAge.CODEC)
     );
-
-    // Veins //
-
-    public static final BCLFeature SOUL_VINE = BCLFeatureBuilder
-            .start(BetterNether.makeID("soul_vine"), BCLFeature.SCATTER_ON_SOLID)
-            .countRange(1, 6)
-            .squarePlacement()
-            .noiseBasedCount(-0.3f, 0, 4)
-            .spreadHorizontal(ClampedNormalInt.of(0, 1.1f, -3, 3))
-            .onEveryLayer()
-            .isEmptyAbove2()
-            .onlyInBiome()
-            .buildAndRegister(ScatterFeatureConfig.OnSolid
-                    .startOnSolid()
-                    .singleBlock(NetherBlocks.SOUL_VEIN)
-                    .generateBaseBlock(NetherBlocks.VEINED_SAND.defaultBlockState(), 0.4f, 0.6f, 0.2f)
-                    .spread(2, 0.75f)
-                    .onFloor()
-                    .growWhileFree()
-                    .build()
-            );
-
-    public static final BCLFeature NETHER_REEED = BCLFeatureBuilder
-            .start(BetterNether.makeID("old_nether_reed"), BCLFeature.SCATTER_ON_SOLID)
-            .countRange(2, 12)
-            .squarePlacement()
-            .noiseBasedCount(-0.3f, 0, 4)
-            .spreadHorizontal(ClampedNormalInt.of(0, 1.1f, -3, 3))
-            .onEveryLayer()
-            .isEmptyAbove2()
-            .onlyInBiome()
-            .buildAndRegister(ScatterFeatureConfig.OnSolid
-                    .startOnSolid()
-                    .block(NetherBlocks.MAT_REED.getStem().defaultBlockState().setValue(BlockNetherReed.TOP, false))
-                    .tipBlock(NetherBlocks.MAT_REED.getStem().defaultBlockState())
-                    .spread(3, 0.75f, ConstantInt.of(24))
-                    .heightRange(1, 3)
-                    .onFloor()
-                    .growWhileFree()
-                    .build()
-            );
-
-
-    public static final BCLFeature BLACK_BUSH = BCLFeatureBuilder
-            .start(BetterNether.makeID("old_black_bush"), Feature.SIMPLE_BLOCK)
-            .countRange(2, 10)
-            .squarePlacement()
-            .noiseBasedCount(0.25f, 0, 4)
-            .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -6, 6))
-            .onEveryLayer()
-            .isEmptyAbove2()
-            .onlyInBiome()
-            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BLACK_BUSH)));
-
-    public static final BCLFeature BLACK_BUSH_SPARSE = BCLFeatureBuilder
-            .start(BetterNether.makeID("black_bush_sparse"), Feature.SIMPLE_BLOCK)
-            .countRange(1, 4)
-            .squarePlacement()
-            .noiseBasedCount(0.25f, 0, 2)
-            .spreadHorizontal(ClampedNormalInt.of(0, 1.2f, -2, 2))
-            .onEveryLayer()
-            .isEmptyAbove2()
-            .onlyInBiome()
-            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.BLACK_BUSH)));
-
-
-    public static final BCLFeature FEATHER_FERN = BCLFeatureBuilder
-            .start(BetterNether.makeID("old_feather_fern"), Feature.SIMPLE_BLOCK)
-            .countRange(3, 15)
-            .squarePlacement()
-            .noiseBasedCount(0.76f, 0, 4)
-            .spreadHorizontal(ClampedNormalInt.of(0, 1.8f, -6, 6))
-            .findSolidFloor(12)
-            .isEmptyAbove2()
-            .onlyInBiome()
-            .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(NetherBlocks.FEATHER_FERN)));
 
     // Landscape //
     public static final BCLFeature WART_CAP_FEATURE = BCLFeatureBuilder

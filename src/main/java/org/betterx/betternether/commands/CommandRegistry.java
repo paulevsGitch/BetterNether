@@ -46,9 +46,9 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Vector3d;
 import org.betterx.bclib.BCLib;
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
@@ -330,7 +330,7 @@ public class CommandRegistry {
         System.out.println("Noise: " + min + " - " + max);
 
 
-        BCLFeature<?, ?> feature = BiomeFeatures.UPSIDE_DOWN_FORREST_CEIL;
+        BCLFeature<?, ?> feature = BiomeFeatures.OLD_SWAMPLAND_SCULK;
         PlacedFeature pFeature = level
                 .registryAccess()
                 .registryOrThrow(Registry.PLACED_FEATURE_REGISTRY)

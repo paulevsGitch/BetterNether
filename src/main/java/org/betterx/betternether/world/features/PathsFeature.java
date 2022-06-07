@@ -6,7 +6,7 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.bclib.api.v2.levelgen.features.DefaultFeature;
+import org.betterx.bclib.api.v2.levelgen.features.features.DefaultFeature;
 import org.betterx.betternether.world.structures.StructurePath;
 
 public class PathsFeature extends DefaultFeature {

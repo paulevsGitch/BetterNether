@@ -1,8 +1,12 @@
 package org.betterx.betternether.registry.features;
 
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.SculkShriekerBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
@@ -14,6 +18,7 @@ import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BlockCommonPlant;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -63,6 +68,30 @@ public class FloorFeatures {
 
     public static final BCLFeature SWAMP_GRASS
             = FastFeatures.patch(BetterNether.makeID("swamp_grass"), NetherBlocks.SWAMP_GRASS);
+
+    public static final BCLFeature SCULK_VEIN
+            = FastFeatures.patch(BetterNether.makeID("sculk_vein"),
+            BlockStateProvider.simple(Blocks
+                    .SCULK_VEIN
+                    .defaultBlockState()
+                    .setValue(MultifaceBlock.getFaceProperty(Direction.DOWN), true)
+            ),
+            8, 4, 3);
+
+    public static final BCLFeature SCULK_CATALYST = BCLFeatureBuilder
+            .start(BetterNether.makeID("sculk_catalyst"), Blocks.SCULK_CATALYST)
+            .offset(Direction.DOWN)
+            .inBasinOf(BlockPredicate.anyOf(
+                    BlockPredicate.matchesTag(CommonBlockTags.TERRAIN),
+                    BlockPredicate.matchesBlocks(Blocks.SCULK)
+            ))
+            .buildAndRegister();
+
+    public static final BCLFeature SCULK_SHRIEKER = BCLFeatureBuilder
+            .start(BetterNether.makeID("sculk_shrieker"),
+                    Blocks.SCULK_SHRIEKER.defaultBlockState().setValue(SculkShriekerBlock.CAN_SUMMON, true))
+            .offset(Direction.DOWN)
+            .buildAndRegister();
 
     public static final BCLFeature NETHER_GRASS_PATCH
             = FastFeatures.patch(BetterNether.makeID("nether_grass"), NetherBlocks.NETHER_GRASS);

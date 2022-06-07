@@ -5,6 +5,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
@@ -35,7 +36,8 @@ public class OldSwampland extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(TerrainFeatures.LAVA_SWAMP)
+                   .feature(TerrainFeatures.LAVA_PITS)
+                   .feature(BiomeFeatures.OLD_SWAMPLAND_SCULK)
                    .feature(BiomeFeatures.OLD_SWAMPLAND_FLOOR)
                    .feature(BiomeFeatures.OLD_SWAMPLAND_CEIL)
                    .feature(BiomeFeatures.OLD_SWAMPLAND_WALL)
@@ -64,14 +66,17 @@ public class OldSwampland extends NetherBiome {
                     .rule(SurfaceRules.sequence(
                             SurfaceRules.ifTrue(
                                     SurfaceRules.ON_FLOOR,
-                                    SurfaceRules.ifTrue(
-                                            Conditions.NETHER_VOLUME_NOISE_LARGE,
-                                            SurfaceRules.state(NetherBlocks.SWAMPLAND_GRASS.defaultBlockState())
+                                    SurfaceRules.sequence(
+                                            SurfaceRules.ifTrue(
+                                                    Conditions.NETHER_VOLUME_NOISE,
+                                                    SurfaceRules.state(NetherBlocks.SWAMPLAND_GRASS.defaultBlockState())
+                                            ),
+                                            SurfaceRules.state(Blocks.SCULK.defaultBlockState())
                                     )
                             ),
                             SurfaceRules.ifTrue(
                                     Conditions.NETHER_SURFACE_NOISE_LARGE,
-                                    NetherGrasslands.SOUL_SOIL
+                                    SurfaceRules.state(Blocks.SCULK.defaultBlockState())
                             ),
                             NetherGrasslands.SOUL_SAND
                     ));

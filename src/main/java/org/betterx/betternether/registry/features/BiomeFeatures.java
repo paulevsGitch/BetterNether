@@ -282,6 +282,18 @@ public class BiomeFeatures {
 
     public static final BCLFeature OLD_FUNGIWOODS_WALL = CRIMSON_GLOWING_WOODS_WALL;
 
+    public static final BCLFeature OLD_SWAMPLAND_SCULK = BCLFeatureBuilder
+            .start(BetterNether.makeID("old_swampland_sculk"), Feature.RANDOM_SELECTOR)
+            .decoration(GenerationStep.Decoration.LOCAL_MODIFICATIONS)
+            .count(32)
+            .squarePlacement()
+            .modifier(OnEveryLayer.min4())
+            .onlyInBiome()
+            .buildAndRegister(new RandomFeatureConfiguration(List.of(
+                    new WeightedPlacedFeature(FloorFeatures.SCULK_CATALYST.getPlacedFeature(), 0.5f),
+                    new WeightedPlacedFeature(FloorFeatures.SCULK_SHRIEKER.getPlacedFeature(), 0.1f)
+            ), FloorFeatures.SCULK_CATALYST.getPlacedFeature()));
+
     public static final BCLFeature OLD_SWAMPLAND_FLOOR = denseFloorFromWeighted("old_swampland", List.of(
             new WeightedPlacedFeature(TreeFeatures.OLD_WILLOW.getPlacedFeature(), 0.02f),
             new WeightedPlacedFeature(TreeFeatures.WILLOW.getPlacedFeature(), 0.02f),
@@ -292,6 +304,7 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(VineLikeFeatures.SOUL_VEIN.getPlacedFeature(), 0.1f),
             new WeightedPlacedFeature(FloorFeatures.FEATHER_FERN_PATCH.getPlacedFeature(), 0.05f),
             new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.03f),
+            new WeightedPlacedFeature(FloorFeatures.SCULK_VEIN.getPlacedFeature(), 0.2f),
             new WeightedPlacedFeature(VineLikeFeatures.NETHER_REED.getPlacedFeature(), 0.03f),
             new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
     ), 1);
