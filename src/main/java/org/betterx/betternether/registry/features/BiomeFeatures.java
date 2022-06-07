@@ -291,7 +291,7 @@ public class BiomeFeatures {
             .onlyInBiome()
             .buildAndRegister(new RandomFeatureConfiguration(List.of(
                     new WeightedPlacedFeature(FloorFeatures.SCULK_CATALYST.getPlacedFeature(), 0.5f),
-                    new WeightedPlacedFeature(FloorFeatures.SCULK_SHRIEKER.getPlacedFeature(), 0.1f)
+                    new WeightedPlacedFeature(FloorFeatures.SCULK_SHRIEKER.getPlacedFeature(), 0.01f)
             ), FloorFeatures.SCULK_CATALYST.getPlacedFeature()));
 
     public static final BCLFeature OLD_SWAMPLAND_FLOOR = denseFloorFromWeighted("old_swampland", List.of(
@@ -299,12 +299,12 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(TreeFeatures.WILLOW.getPlacedFeature(), 0.02f),
             new WeightedPlacedFeature(FloorFeatures.WILLOW_BUSH_PATCH.getPlacedFeature(), 0.10f),
             new WeightedPlacedFeature(FloorFeatures.JELLYFISH_MUSHROOM.getPlacedFeature(), 0.03f),
-            new WeightedPlacedFeature(FloorFeatures.SWAMP_GRASS.getPlacedFeature(), 0.4f),
+            new WeightedPlacedFeature(FloorFeatures.SWAMP_GRASS.getPlacedFeature(), 0.2f),
             new WeightedPlacedFeature(VineLikeFeatures.SMOKER.getPlacedFeature(), 0.05f),
             new WeightedPlacedFeature(VineLikeFeatures.SOUL_VEIN.getPlacedFeature(), 0.1f),
             new WeightedPlacedFeature(FloorFeatures.FEATHER_FERN_PATCH.getPlacedFeature(), 0.05f),
             new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.03f),
-            new WeightedPlacedFeature(FloorFeatures.SCULK_VEIN.getPlacedFeature(), 0.2f),
+            new WeightedPlacedFeature(FloorFeatures.SCULK_VEIN.getPlacedFeature(), 0.3f),
             new WeightedPlacedFeature(VineLikeFeatures.NETHER_REED.getPlacedFeature(), 0.03f),
             new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
     ), 1);
