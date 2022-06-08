@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.BCLib;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.entity.EntityChair;
 import org.betterx.betternether.registry.NetherEntities;
@@ -23,7 +24,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Optional;
+import org.jetbrains.annotations.Nullable;
 
 public class BNChair extends BlockBaseNotFull {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -59,39 +61,60 @@ public class BNChair extends BlockBaseNotFull {
             if (player.isPassenger() || player.isSpectator())
                 return InteractionResult.FAIL;
 
-            double px = pos.getX() + 0.5;
-            double py = pos.getY() + height;
-            double pz = pos.getZ() + 0.5;
 
-            List<EntityChair> active = world.getEntitiesOfClass(
-                    EntityChair.class,
-                    new AABB(pos),
-                    new Predicate<EntityChair>() {
-                        @Override
-                        public boolean test(EntityChair entity) {
-                            return entity.hasExactlyOnePlayerPassenger();
-                        }
-                    }
-            );
-            if (!active.isEmpty())
-                return InteractionResult.FAIL;
+            Optional<EntityChair> active = getEntity(world, pos);
+            EntityChair entity;
 
-            float yaw = state.getValue(FACING).getOpposite().toYRot();
-            EntityChair entity = NetherEntities.CHAIR.create(world);
-            entity.moveTo(px, py, pz, yaw, 0);
-            entity.setNoGravity(true);
-            entity.setSilent(true);
-            entity.setInvisible(true);
-            entity.setYHeadRot(yaw);
-            entity.setYBodyRot(yaw);
-            if (world.addFreshEntity(entity)) {
+            if (active.isEmpty()) {
+                entity = createEntity(state, world, pos);
+            } else {
+                entity = active.get();
+                if (entity.isVehicle())
+                    return InteractionResult.FAIL;
+            }
+
+            if (entity != null) {
+                float yaw = state.getValue(FACING).getOpposite().toYRot();
                 player.startRiding(entity, true);
                 player.setYBodyRot(yaw);
                 player.setYHeadRot(yaw);
                 return InteractionResult.SUCCESS;
             }
+
             return InteractionResult.FAIL;
         }
+    }
+
+    @Nullable
+    private EntityChair createEntity(BlockState state, Level world, BlockPos pos) {
+        BCLib.LOGGER.info("Creating Chair at " + pos + ", " + state);
+        EntityChair entity;
+        double px = pos.getX() + 0.5;
+        double py = pos.getY() + height;
+        double pz = pos.getZ() + 0.5;
+        float yaw = state.getValue(FACING).getOpposite().toYRot();
+
+        entity = NetherEntities.CHAIR.create(world);
+        entity.moveTo(px, py, pz, yaw, 0);
+        entity.setNoGravity(true);
+        entity.setSilent(true);
+        entity.setInvisible(true);
+        entity.setYHeadRot(yaw);
+        entity.setYBodyRot(yaw);
+        if (!world.addFreshEntity(entity)) {
+            entity = null;
+        }
+        return entity;
+    }
+
+    private Optional<EntityChair> getEntity(Level level, BlockPos pos) {
+        List<EntityChair> list = level.getEntitiesOfClass(
+                EntityChair.class,
+                new AABB(pos),
+                entity -> true
+        );
+        if (list.isEmpty()) return Optional.empty();
+        return Optional.of(list.get(0));
     }
 
     @Override
@@ -102,5 +125,27 @@ public class BNChair extends BlockBaseNotFull {
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
         return BlocksHelper.mirrorHorizontal(state, mirror, FACING);
+    }
+
+    @Override
+    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        super.onPlace(blockState, level, blockPos, blockState2, bl);
+        BCLib.LOGGER.info("Created at " + blockPos + ", " + blockState + ", " + blockState2);
+        if (blockState.hasProperty(BNNormalChair.TOP)) {
+            if (blockState.getValue(BNNormalChair.TOP))
+                return;
+        }
+        createEntity(blockState, level, blockPos);
+    }
+
+    @Override
+    public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        super.onRemove(blockState, level, blockPos, blockState2, bl);
+//        Optional<EntityChair> e = getEntity(level, blockPos);
+//
+//        if (e.isPresent()) {
+//            BCLib.LOGGER.info("Discarding Chair at " + blockPos);
+//            e.get().discard();
+//        }
     }
 }

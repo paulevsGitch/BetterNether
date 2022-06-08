@@ -123,8 +123,8 @@ public class NetherEntities {
                                                                                        EntityChair::new
                                                                                )
                                                                                .dimensions(EntityDimensions.fixed(
-                                                                                       0.0F,
-                                                                                       0.0F
+                                                                                       0.5F,
+                                                                                       0.8F
                                                                                ))
                                                                                .fireImmune()
                                                                                .disableSummon()

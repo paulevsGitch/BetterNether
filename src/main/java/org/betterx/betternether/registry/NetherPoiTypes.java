@@ -5,7 +5,7 @@ import org.betterx.betternether.BetterNether;
 
 public class NetherPoiTypes {
     public static final BCLPoiType PIG_STATUE = BCLPoiType.register(
-            BetterNether.makeID("PIG_STATUE"),
+            BetterNether.makeID("pig_statue"),
             BCLPoiType.getBlockStates(NetherBlocks.PIG_STATUE_RESPAWNER),
             1, 1
     );
