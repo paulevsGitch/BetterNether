@@ -1,5 +1,11 @@
 package org.betterx.betternether.world.structures.decorations;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.noise.OpenSimplexNoise;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.IStructure;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.util.RandomSource;
@@ -9,12 +15,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.dimension.DimensionDefaults;
 import net.minecraft.world.phys.Vec3;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.noise.OpenSimplexNoise;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.IStructure;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 
 public class StructureCrystal implements IStructure {
@@ -30,11 +30,13 @@ public class StructureCrystal implements IStructure {
     private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);
 
     @Override
-    public void generate(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         final int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
+    public void generate(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         final MutableBlockPos POS = new MutableBlockPos();
         final float scale_factor = ((MAX_HEIGHT / 128.0f) - 1) * 0.5f + 1;
 

@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
 import org.betterx.betternether.registry.NetherBlocks;
+
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockCincinnasiteLantern extends BlockBase {
     public BlockCincinnasiteLantern() {

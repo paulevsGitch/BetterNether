@@ -1,5 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.bclib.interfaces.TagProvider;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -18,10 +22,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-import org.betterx.bclib.interfaces.TagProvider;
-import org.betterx.betternether.registry.NetherBlocks;
-
 import java.util.List;
 
 public class BlockVeinedSand extends BlockBase implements TagProvider {
@@ -34,12 +34,14 @@ public class BlockVeinedSand extends BlockBase implements TagProvider {
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (world.getBlockState(pos.above()).getBlock() == NetherBlocks.SOUL_VEIN)
             return state;
         else

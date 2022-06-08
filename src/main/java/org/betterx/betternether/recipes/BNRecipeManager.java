@@ -1,5 +1,9 @@
 package org.betterx.betternether.recipes;
 
+import org.betterx.bclib.recipes.BCLRecipeManager;
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.config.Configs;
+
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -8,9 +12,6 @@ import net.minecraft.world.item.crafting.*;
 
 import com.google.common.collect.Sets;
 import com.google.gson.JsonSyntaxException;
-import org.betterx.bclib.recipes.BCLRecipeManager;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.config.Configs;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,10 +25,12 @@ public class BNRecipeManager extends BCLRecipeManager {
         }
     }
 
-    public static NonNullList<Ingredient> getIngredients(String[] pattern,
-                                                         Map<String, Ingredient> key,
-                                                         int width,
-                                                         int height) {
+    public static NonNullList<Ingredient> getIngredients(
+            String[] pattern,
+            Map<String, Ingredient> key,
+            int width,
+            int height
+    ) {
         NonNullList<Ingredient> defaultedList = NonNullList.withSize(width * height, Ingredient.EMPTY);
         Set<String> set = Sets.newHashSet(key.keySet());
         set.remove(" ");
@@ -52,18 +55,22 @@ public class BNRecipeManager extends BCLRecipeManager {
         }
     }
 
-    public static void addCraftingRecipe(String name,
-                                         String[] shape,
-                                         Map<String, ItemStack> materials,
-                                         ItemStack result) {
+    public static void addCraftingRecipe(
+            String name,
+            String[] shape,
+            Map<String, ItemStack> materials,
+            ItemStack result
+    ) {
         addCraftingRecipe(name, "", shape, materials, result);
     }
 
-    public static void addCraftingRecipe(String name,
-                                         String group,
-                                         String[] shape,
-                                         Map<String, ItemStack> materials,
-                                         ItemStack result) {
+    public static void addCraftingRecipe(
+            String name,
+            String group,
+            String[] shape,
+            Map<String, ItemStack> materials,
+            ItemStack result
+    ) {
         int width = shape[0].length();
         int height = shape.length;
 
@@ -74,12 +81,14 @@ public class BNRecipeManager extends BCLRecipeManager {
         });
 
         NonNullList<Ingredient> list = BNRecipeManager.getIngredients(shape, mapIng, width, height);
-        ShapedRecipe recipe = new ShapedRecipe(new ResourceLocation(BetterNether.MOD_ID, name),
-                                               group,
-                                               width,
-                                               height,
-                                               list,
-                                               result);
+        ShapedRecipe recipe = new ShapedRecipe(
+                new ResourceLocation(BetterNether.MOD_ID, name),
+                group,
+                width,
+                height,
+                list,
+                result
+        );
         BNRecipeManager.addRecipe(RecipeType.CRAFTING, recipe);
     }
 

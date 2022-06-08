@@ -1,5 +1,10 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.bclib.api.v2.levelgen.features.features.DefaultFeature;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BlockStalactite;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -8,11 +13,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
-import org.betterx.bclib.api.v2.levelgen.features.features.DefaultFeature;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockStalactite;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class BlockFixFeature extends DefaultFeature {
     @Override
@@ -73,7 +73,8 @@ public class BlockFixFeature extends DefaultFeature {
 
                     if (state.getBlock() instanceof BlockStalactite && !(state = world.getBlockState(belowPos)).isCollisionShapeFullBlock(
                             world,
-                            belowPos) && !(state.getBlock() instanceof BlockStalactite)) {
+                            belowPos
+                    ) && !(state.getBlock() instanceof BlockStalactite)) {
                         MutableBlockPos sp = new MutableBlockPos().set(popPos);
                         while (world.getBlockState(sp).getBlock() instanceof BlockStalactite) {
                             BlocksHelper.setWithoutUpdate(world, sp, AIR);

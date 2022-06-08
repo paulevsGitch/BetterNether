@@ -1,22 +1,26 @@
 package org.betterx.betternether.world;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherEntities.KnownSpawnTypes;
 
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+
 public abstract class NetherBiomeConfig {
     public static final SurfaceRules.RuleSource NETHERRACK = SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState());
-    public static final SurfaceRules.RuleSource BEDROCK_BOTTOM = SurfaceRules.ifTrue(NetherBiomeBuilder.BEDROCK_BOTTOM,
-            NetherBiomeBuilder.BEDROCK);
-    public static final SurfaceRules.RuleSource BEDROCK_TOP = SurfaceRules.ifTrue(SurfaceRules.not(NetherBiomeBuilder.BEDROCK_TOP),
-            NetherBiomeBuilder.BEDROCK);
+    public static final SurfaceRules.RuleSource BEDROCK_BOTTOM = SurfaceRules.ifTrue(
+            NetherBiomeBuilder.BEDROCK_BOTTOM,
+            NetherBiomeBuilder.BEDROCK
+    );
+    public static final SurfaceRules.RuleSource BEDROCK_TOP = SurfaceRules.ifTrue(
+            SurfaceRules.not(NetherBiomeBuilder.BEDROCK_TOP),
+            NetherBiomeBuilder.BEDROCK
+    );
 
 
     public final ResourceLocation ID;

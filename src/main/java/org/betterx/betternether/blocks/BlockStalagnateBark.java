@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
-import net.minecraft.world.level.material.MaterialColor;
-
 import org.betterx.betternether.blocks.materials.Materials;
+
+import net.minecraft.world.level.material.MaterialColor;
 
 public class BlockStalagnateBark extends BNPillar {
     public BlockStalagnateBark() {

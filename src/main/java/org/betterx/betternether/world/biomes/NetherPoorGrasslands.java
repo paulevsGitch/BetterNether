@@ -1,12 +1,5 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
@@ -16,6 +9,13 @@ import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import java.util.List;
 
@@ -46,9 +46,13 @@ public class NetherPoorGrasslands extends NetherBiome {
         @Override
         public SurfaceRuleBuilder surface() {
             SurfaceRules.RuleSource soilStoneDist
-                    = SurfaceRules.sequence(SurfaceRules.ifTrue(Conditions.NETHER_VOLUME_NOISE,
-                            NetherGrasslands.SOUL_SOIL),
-                    SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState()));
+                    = SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(
+                            Conditions.NETHER_VOLUME_NOISE,
+                            NetherGrasslands.SOUL_SOIL
+                    ),
+                    SurfaceRules.state(Blocks.NETHERRACK.defaultBlockState())
+            );
             return super
                     .surface()
                     .rule(SurfaceRules.sequence(

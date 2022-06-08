@@ -1,5 +1,7 @@
 package org.betterx.betternether.entity.model;
 
+import org.betterx.betternether.entity.EntityHydrogenJellyfish;
+
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -10,7 +12,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 import com.google.common.collect.ImmutableList;
-import org.betterx.betternether.entity.EntityHydrogenJellyfish;
 
 public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydrogenJellyfish> {
     public final static String BODY_TOP = "body_top";
@@ -25,7 +26,7 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
                                .texOffs(0, 0)
                                .addBox(-14F, 0F, -14F, 28, 18, 28),
                 PartPose.offset(0F, -48, 0F)
-                                                                 );
+        );
 
         bodyPart.addOrReplaceChild(
                 BODY_TOP,
@@ -33,7 +34,7 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
                                .texOffs(0, 46)
                                .addBox(-10F, 0F, -10F, 20, 6, 20),
                 PartPose.offset(0F, -6F, 0F)
-                                  );
+        );
 
         for (int i = 0; i < LEGS; i++) {
             int li = i * 3;
@@ -46,16 +47,17 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
                                                  .texOffs(60, 46)
                                                  .addBox(-3F, 0F, -3F, 6, 14, 6),
                     PartPose.offsetAndRotation(x, 18, z, 0, angle, 0)
-                                                                           );
+            );
 
-            modelPartData_LEG_1.addOrReplaceChild("leg_det_" + li,
-                                                  CubeListBuilder.create()
-                                                                 .texOffs(97, 46)
-                                                                 .addBox(-8F, 0F, 0F, 16, 14, 0)
-                                                                 .texOffs(97, 30)
-                                                                 .addBox(0F, 0F, -8F, 0, 14, 16),
-                                                  PartPose.offsetAndRotation(0, 0, 0, 0, angle, 0)
-                                                 );
+            modelPartData_LEG_1.addOrReplaceChild(
+                    "leg_det_" + li,
+                    CubeListBuilder.create()
+                                   .texOffs(97, 46)
+                                   .addBox(-8F, 0F, 0F, 16, 14, 0)
+                                   .texOffs(97, 30)
+                                   .addBox(0F, 0F, -8F, 0, 14, 16),
+                    PartPose.offsetAndRotation(0, 0, 0, 0, angle, 0)
+            );
 
             PartDefinition modelPartData_LEG_2 = modelPartData_LEG_1.addOrReplaceChild(
                     "leg_2_" + i,
@@ -63,7 +65,7 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
                                    .texOffs(0, 72)
                                    .addBox(-2F, -24F, -2F, 4, 28, 4),
                     PartPose.offset(0F, 14F, 0F)
-                                                                                      );
+            );
 
             li++;
             modelPartData_LEG_2.addOrReplaceChild(
@@ -74,7 +76,7 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
                                    .texOffs(98, 48)
                                    .addBox(0F, -24F, -7F, 0, 28, 14),
                     PartPose.offsetAndRotation(0, 0, 0, 0, (float) Math.toRadians(45), 0)
-                                                 );
+            );
 
             PartDefinition modelPartData_LEG_3 = modelPartData_LEG_2.addOrReplaceChild(
                     "leg_3_" + i,
@@ -82,7 +84,7 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
                                    .texOffs(16, 72)
                                    .addBox(-1F, -24F, -1F, 2, 28, 2),
                     PartPose.offset(0F, -28F, 0F)
-                                                                                      );
+            );
 
             li++;
             modelPartData_LEG_3.addOrReplaceChild(
@@ -93,7 +95,7 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
                                    .texOffs(99, 76)
                                    .addBox(0F, -28F, -6F, 0, 32, 12),
                     PartPose.offsetAndRotation(0, 0, 0, 0, (float) Math.toRadians(45), 0)
-                                                 );
+            );
 
             x = (float) Math.sin(angle);
             z = (float) Math.cos(angle);
@@ -107,7 +109,7 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
                                                 .texOffs(60, 4)
                                                 .addBox(-12F, 0F, 0F, 24F, 0F, 24F),
                     PartPose.offsetAndRotation(x, 12 - (i & 1) * 6, z, 0, angle, 0)
-                                      );
+            );
         }
         return LayerDefinition.create(modelData, 128, 128);
     }
@@ -149,12 +151,14 @@ public class ModelEntityHydrogenJellyfish extends AgeableListModel<EntityHydroge
     }
 
     @Override
-    public void setupAnim(EntityHydrogenJellyfish entity,
-                          float limbAngle,
-                          float limbDistance,
-                          float animationProgress,
-                          float headYaw,
-                          float headPitch) {
+    public void setupAnim(
+            EntityHydrogenJellyfish entity,
+            float limbAngle,
+            float limbDistance,
+            float animationProgress,
+            float headYaw,
+            float headPitch
+    ) {
         double time = animationProgress * 0.03;
 
         body.setPos(0, (float) Math.sin(time) * 8 - 42, 0);

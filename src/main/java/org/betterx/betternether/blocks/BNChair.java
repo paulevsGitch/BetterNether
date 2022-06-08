@@ -1,5 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.entity.EntityChair;
+import org.betterx.betternether.registry.NetherEntities;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,10 +21,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.entity.EntityChair;
-import org.betterx.betternether.registry.NetherEntities;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -45,12 +45,14 @@ public class BNChair extends BlockBaseNotFull {
     }
 
     @Override
-    public InteractionResult use(BlockState state,
-                                 Level world,
-                                 BlockPos pos,
-                                 Player player,
-                                 InteractionHand hand,
-                                 BlockHitResult hit) {
+    public InteractionResult use(
+            BlockState state,
+            Level world,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.FAIL;
         } else {
@@ -61,14 +63,16 @@ public class BNChair extends BlockBaseNotFull {
             double py = pos.getY() + height;
             double pz = pos.getZ() + 0.5;
 
-            List<EntityChair> active = world.getEntitiesOfClass(EntityChair.class,
-                                                                new AABB(pos),
-                                                                new Predicate<EntityChair>() {
-                                                                    @Override
-                                                                    public boolean test(EntityChair entity) {
-                                                                        return entity.hasExactlyOnePlayerPassenger();
-                                                                    }
-                                                                });
+            List<EntityChair> active = world.getEntitiesOfClass(
+                    EntityChair.class,
+                    new AABB(pos),
+                    new Predicate<EntityChair>() {
+                        @Override
+                        public boolean test(EntityChair entity) {
+                            return entity.hasExactlyOnePlayerPassenger();
+                        }
+                    }
+            );
             if (!active.isEmpty())
                 return InteractionResult.FAIL;
 

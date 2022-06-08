@@ -1,5 +1,9 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
@@ -8,10 +12,6 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-
 public class NetherSakuraBushFeature extends ContextFeature<NoneFeatureConfiguration> {
 
     public NetherSakuraBushFeature() {
@@ -19,12 +19,14 @@ public class NetherSakuraBushFeature extends ContextFeature<NoneFeatureConfigura
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
             return false;
 
@@ -52,31 +54,43 @@ public class NetherSakuraBushFeature extends ContextFeature<NoneFeatureConfigura
                     sqz *= sqz;
                     context.POS.setZ(z);
                     if (sqx + sqz < r2 + random.nextFloat() * r) {
-                        setIfAir(world,
+                        setIfAir(
+                                world,
                                 context.POS,
                                 NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState()
-                                                                 .setValue(LeavesBlock.PERSISTENT, true));
+                                                                 .setValue(LeavesBlock.PERSISTENT, true)
+                        );
                     }
                 }
             }
         }
 
         BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.MAT_NETHER_SAKURA.getBark().defaultBlockState());
-        setIfAir(world,
+        setIfAir(
+                world,
                 pos.above(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world,
+                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+        );
+        setIfAir(
+                world,
                 pos.north(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world,
+                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+        );
+        setIfAir(
+                world,
                 pos.south(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world,
+                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+        );
+        setIfAir(
+                world,
                 pos.east(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world,
+                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+        );
+        setIfAir(
+                world,
                 pos.west(),
-                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
+                NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 1)
+        );
 
         return true;
     }

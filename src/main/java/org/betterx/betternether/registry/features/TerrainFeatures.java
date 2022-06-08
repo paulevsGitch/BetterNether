@@ -1,5 +1,16 @@
 package org.betterx.betternether.registry.features;
 
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
+import org.betterx.bclib.api.v2.levelgen.features.blockpredicates.IsFullShape;
+import org.betterx.bclib.api.v2.levelgen.features.config.ConditionFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.features.config.SequenceFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.features.placement.IsBasin;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -14,17 +25,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
-
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
-import org.betterx.bclib.api.v2.levelgen.features.blockpredicates.IsFullShape;
-import org.betterx.bclib.api.v2.levelgen.features.config.ConditionFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.config.SequenceFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.placement.IsBasin;
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.registry.NetherBlocks;
 
 import java.util.List;
 
@@ -72,7 +72,7 @@ public class TerrainFeatures {
             .buildAndRegister(new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LAVA)));
     public static final SimpleBlockConfiguration LAWA_SWAMP_CONFIG = new SimpleBlockConfiguration(new NoiseProvider(
             2345L,
-            new NormalNoise.NoiseParameters(0, 1.0, new double[0]),
+            new NormalNoise.NoiseParameters(0, 1.0),
             0.021741f,
             List.of(
                     Blocks.LAVA.defaultBlockState(),
@@ -81,7 +81,8 @@ public class TerrainFeatures {
                     Blocks.SOUL_SOIL.defaultBlockState(),
                     Blocks.LAVA.defaultBlockState(),
                     Blocks.SOUL_SAND.defaultBlockState()
-            )));
+            )
+    ));
 
     public static final BCLFeature LAVA_SWAMP = BCLFeatureBuilder
             .start(BetterNether.makeID("lava_swamp"), Feature.SIMPLE_BLOCK)

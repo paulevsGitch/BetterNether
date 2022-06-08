@@ -24,13 +24,15 @@ public class BlockGrayMold extends BlockMold {
     @Environment(EnvType.CLIENT)
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (random.nextInt(3) == 0) {
-            world.addParticle(ParticleTypes.MYCELIUM,
-                              pos.getX() + random.nextDouble(),
-                              pos.getY() + random.nextDouble() * 0.5,
-                              pos.getZ() + random.nextDouble(),
-                              0.0D,
-                              0.0D,
-                              0.0D);
+            world.addParticle(
+                    ParticleTypes.MYCELIUM,
+                    pos.getX() + random.nextDouble(),
+                    pos.getY() + random.nextDouble() * 0.5,
+                    pos.getZ() + random.nextDouble(),
+                    0.0D,
+                    0.0D,
+                    0.0D
+            );
         }
     }
 

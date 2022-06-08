@@ -50,15 +50,17 @@ public class EntityNagaProjectile extends FlyingMob {
     public void tick() {
         super.tick();
         level.addParticle(ParticleTypes.LARGE_SMOKE,
-                          getX() + random.nextGaussian() * 0.2,
-                          getY() + random.nextGaussian() * 0.2,
-                          getZ() + random.nextGaussian() * 0.2,
-                          0, 0, 0);
+                getX() + random.nextGaussian() * 0.2,
+                getY() + random.nextGaussian() * 0.2,
+                getZ() + random.nextGaussian() * 0.2,
+                0, 0, 0
+        );
         level.addParticle(ParticleTypes.SMOKE,
-                          getX() + random.nextGaussian() * 0.2,
-                          getY() + random.nextGaussian() * 0.2,
-                          getZ() + random.nextGaussian() * 0.2,
-                          0, 0, 0);
+                getX() + random.nextGaussian() * 0.2,
+                getY() + random.nextGaussian() * 0.2,
+                getZ() + random.nextGaussian() * 0.2,
+                0, 0, 0
+        );
 
         HitResult hitResult = ProjectileUtil.getHitResult(this, (entity) -> {
             return entity.isAlive() && entity instanceof LivingEntity;
@@ -83,13 +85,15 @@ public class EntityNagaProjectile extends FlyingMob {
         HitResult.Type type = hitResult.getType();
         if (type == HitResult.Type.BLOCK) {
             for (int i = 0; i < 10; i++) {
-                level.addParticle(ParticleTypes.LARGE_SMOKE,
-                                  getX() + random.nextGaussian() * 0.5,
-                                  getY() + random.nextGaussian() * 0.5,
-                                  getZ() + random.nextGaussian() * 0.5,
-                                  random.nextGaussian() * 0.2,
-                                  random.nextGaussian() * 0.2,
-                                  random.nextGaussian() * 0.2);
+                level.addParticle(
+                        ParticleTypes.LARGE_SMOKE,
+                        getX() + random.nextGaussian() * 0.5,
+                        getY() + random.nextGaussian() * 0.5,
+                        getZ() + random.nextGaussian() * 0.5,
+                        random.nextGaussian() * 0.2,
+                        random.nextGaussian() * 0.2,
+                        random.nextGaussian() * 0.2
+                );
             }
             effectKill();
         } else if (type == HitResult.Type.ENTITY) {
@@ -108,10 +112,11 @@ public class EntityNagaProjectile extends FlyingMob {
     private void effectKill() {
         for (int i = 0; i < 10; i++) {
             level.addParticle(ParticleTypes.ENTITY_EFFECT,
-                              getX() + random.nextGaussian() * 0.5,
-                              getY() + random.nextGaussian() * 0.5,
-                              getZ() + random.nextGaussian() * 0.5,
-                              0.1, 0.1, 0.1);
+                    getX() + random.nextGaussian() * 0.5,
+                    getY() + random.nextGaussian() * 0.5,
+                    getZ() + random.nextGaussian() * 0.5,
+                    0.1, 0.1, 0.1
+            );
         }
         this.kill();
     }

@@ -1,5 +1,8 @@
 package org.betterx.betternether.entity.render;
 
+import com.mojang.blaze3d.preprocessor.GlslPreprocessor;
+import com.mojang.blaze3d.shaders.Program;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import net.minecraft.FileUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderStateShard;
@@ -9,9 +12,6 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceProvider;
 
 import com.google.common.collect.Sets;
-import com.mojang.blaze3d.preprocessor.GlslPreprocessor;
-import com.mojang.blaze3d.shaders.Program;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
@@ -99,9 +99,11 @@ class DebugShader extends net.minecraft.client.renderer.ShaderInstance {
         this.getVertexProgram().attachToShader(this);
     }
 
-    private static Program getOrCreate(final ResourceProvider factory,
-                                       Program.Type type,
-                                       String name) throws IOException {
+    private static Program getOrCreate(
+            final ResourceProvider factory,
+            Program.Type type,
+            String name
+    ) throws IOException {
         Program program;
         System.out.println("Loading " + name + type.getExtension());
 

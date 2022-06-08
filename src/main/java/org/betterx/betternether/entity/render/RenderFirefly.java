@@ -1,5 +1,16 @@
 package org.betterx.betternether.entity.render;
 
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.entity.EntityFirefly;
+import org.betterx.betternether.entity.model.ModelEntityFirefly;
+import org.betterx.betternether.registry.EntityRenderRegistry;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Matrix3f;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,17 +23,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import org.apache.commons.lang3.tuple.Triple;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.entity.EntityFirefly;
-import org.betterx.betternether.entity.model.ModelEntityFirefly;
-import org.betterx.betternether.registry.EntityRenderRegistry;
 
 
 class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListModel<EntityFirefly>> {
@@ -34,16 +35,18 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
     }
 
     @Override
-    public void render(PoseStack matrices,
-                       MultiBufferSource vertices,
-                       int light,
-                       EntityFirefly livingEntity,
-                       float limbAngle,
-                       float limbDistance,
-                       float tickDelta,
-                       float animationProgress,
-                       float headYaw,
-                       float headPitch) {
+    public void render(
+            PoseStack matrices,
+            MultiBufferSource vertices,
+            int light,
+            EntityFirefly livingEntity,
+            float limbAngle,
+            float limbDistance,
+            float tickDelta,
+            float animationProgress,
+            float headYaw,
+            float headPitch
+    ) {
         EntityModel<EntityFirefly> model = this.getParentModel();
 
 
@@ -59,22 +62,26 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
             addViewAlignedGlow(matrices, vertexConsumer, red, green, blue);
 
             ((ModelEntityFirefly) model).getGlowPart()
-                                        .render(matrices,
+                                        .render(
+                                                matrices,
                                                 vertexConsumer,
                                                 light,
                                                 OverlayTexture.NO_OVERLAY,
                                                 red,
                                                 green,
                                                 blue,
-                                                1f);
+                                                1f
+                                        );
         }
     }
 
-    private void addViewAlignedGlow(PoseStack matrices,
-                                    VertexConsumer vertexConsumer,
-                                    float red,
-                                    float green,
-                                    float blue) {
+    private void addViewAlignedGlow(
+            PoseStack matrices,
+            VertexConsumer vertexConsumer,
+            float red,
+            float green,
+            float blue
+    ) {
         matrices.pushPose();
 
 			/* //Original transform
@@ -103,16 +110,18 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
         matrices.popPose();
     }
 
-    public static void addVertex(Matrix4f matrix4f,
-                                 Matrix3f matrix3f,
-                                 VertexConsumer vertexConsumer,
-                                 float posX,
-                                 float posY,
-                                 float u,
-                                 float v,
-                                 float red,
-                                 float green,
-                                 float blue) {
+    public static void addVertex(
+            Matrix4f matrix4f,
+            Matrix3f matrix3f,
+            VertexConsumer vertexConsumer,
+            float posX,
+            float posY,
+            float u,
+            float v,
+            float red,
+            float green,
+            float blue
+    ) {
         vertexConsumer
                 .vertex(matrix4f, posX, posY, 0)
                 .color(red, green, blue, 1F)
@@ -124,8 +133,10 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
 }
 
 public class RenderFirefly extends MobRenderer<EntityFirefly, AgeableListModel<EntityFirefly>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BetterNether.MOD_ID,
-                                                                         "textures/entity/firefly.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(
+            BetterNether.MOD_ID,
+            "textures/entity/firefly.png"
+    );
 
     public RenderFirefly(EntityRendererProvider.Context ctx) {
         super(ctx, new ModelEntityFirefly(ctx.bakeLayer(EntityRenderRegistry.FIREFLY_MODEL)), 0);

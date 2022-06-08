@@ -1,13 +1,13 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
+import org.betterx.bclib.blocks.StripableBarkBlock;
+
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.MaterialColor;
-
-import org.betterx.bclib.blocks.BlockProperties.TripleShape;
-import org.betterx.bclib.blocks.StripableBarkBlock;
 
 public class RubeusBark extends StripableBarkBlock {
     public RubeusBark(MaterialColor color, Block striped) {

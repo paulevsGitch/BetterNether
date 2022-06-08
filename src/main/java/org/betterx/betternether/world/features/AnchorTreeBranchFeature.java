@@ -1,5 +1,14 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
+import org.betterx.bclib.blocks.BlockProperties;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.blocks.BlockAnchorTreeVine;
+import org.betterx.betternether.registry.NetherBiomes;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -10,15 +19,6 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
-import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
-import org.betterx.bclib.blocks.BlockProperties;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockAnchorTreeVine;
-import org.betterx.betternether.registry.NetherBiomes;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -33,22 +33,26 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
         if (pos.getY() < 56 + random.nextInt((int) (20 * scale_factor))) return false;
         return grow(world, pos, random, scale_factor, context);
     }
 
-    private boolean grow(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         float scale_factor,
-                         StructureGeneratorThreadContext context) {
+    private boolean grow(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            float scale_factor,
+            StructureGeneratorThreadContext context
+    ) {
         context.clear();
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
         float scale = MHelper.randRange(0.5F, 1F, random);
@@ -71,13 +75,17 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
             float branchSize = MHelper.randRange(0.5F, 0.8F, random) * scale;
             float angle = n * MHelper.PI2 / count;
             float radius = CURVE_X[0] * branchSize * scale_factor;
-            int x1 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F,
+            int x1 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(
+                    -2F,
                     2F,
-                    random) * branchSize);
+                    random
+            ) * branchSize);
             int y1 = Math.round(pos.getY() + CURVE_Y[0] * branchSize + MHelper.randRange(-2F, 2F, random) * branchSize);
-            int z1 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F,
+            int z1 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(
+                    -2F,
                     2F,
-                    random) * branchSize);
+                    random
+            ) * branchSize);
             float crownR = 9 * branchSize;
             if (crownR < 1.5F)
                 crownR = 1.5F;
@@ -87,17 +95,23 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
             boolean generate = true;
             for (int i = 1; i < CURVE_X.length && generate; i++) {
                 radius = CURVE_X[i] * branchSize;
-                int x2 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F,
+                int x2 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(
+                        -2F,
                         2F,
-                        random) * branchSize);
+                        random
+                ) * branchSize);
                 int y2 = Math.round(pos.getY() + CURVE_Y[i] * branchSize + (CURVE_Y[i] > 0
-                        ? MHelper.randRange(-2F,
+                        ? MHelper.randRange(
+                        -2F,
                         2F,
-                        random) * branchSize
+                        random
+                ) * branchSize
                         : 0));
-                int z2 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F,
+                int z2 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(
+                        -2F,
                         2F,
-                        random) * branchSize);
+                        random
+                ) * branchSize);
 
                 if (CURVE_Y[i] >= 0) {
                     if (canReplace(world.getBlockState(context.POS.set(x2, y2, z2)))) {
@@ -272,24 +286,28 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
                     final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
                     if (dist <= 7) {
                         final BlockPos blPos = bpos.offset(x, y, z);
-                        context.LOGS_DIST.merge(blPos,
+                        context.LOGS_DIST.merge(
+                                blPos,
                                 (byte) dist,
-                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
+                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist)
+                        );
                     }
                 }
             }
         }
     }
 
-    private void line(LevelAccessor world,
-                      int x1,
-                      int y1,
-                      int z1,
-                      int x2,
-                      int y2,
-                      int z2,
-                      int middleY,
-                      StructureGeneratorThreadContext context) {
+    private void line(
+            LevelAccessor world,
+            int x1,
+            int y1,
+            int z1,
+            int x2,
+            int y2,
+            int z2,
+            int middleY,
+            StructureGeneratorThreadContext context
+    ) {
         int dx = x2 - x1;
         int dy = y2 - y1;
         int dz = z2 - z1;
@@ -330,12 +348,14 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
         }
     }
 
-    private void crown(LevelAccessor world,
-                       BlockPos pos,
-                       float radius,
-                       RandomSource random,
-                       float scale_factor,
-                       StructureGeneratorThreadContext context) {
+    private void crown(
+            LevelAccessor world,
+            BlockPos pos,
+            float radius,
+            RandomSource random,
+            float scale_factor,
+            StructureGeneratorThreadContext context
+    ) {
         scale_factor = (scale_factor - 1) * 0.25f + 1;
 
         final int HEIGHT_10;
@@ -389,12 +409,16 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
                                 for (int i = 1; i < length - 2; i++) {
                                     safeSet(world, context.POS.below(i), vine);
                                 }
-                                safeSet(world,
+                                safeSet(
+                                        world,
                                         context.POS.below(length - 2),
-                                        vine.setValue(BlockAnchorTreeVine.SHAPE, BlockProperties.TripleShape.MIDDLE));
-                                safeSet(world,
+                                        vine.setValue(BlockAnchorTreeVine.SHAPE, BlockProperties.TripleShape.MIDDLE)
+                                );
+                                safeSet(
+                                        world,
                                         context.POS.below(length - 1),
-                                        vine.setValue(BlockAnchorTreeVine.SHAPE, BlockProperties.TripleShape.BOTTOM));
+                                        vine.setValue(BlockAnchorTreeVine.SHAPE, BlockProperties.TripleShape.BOTTOM)
+                                );
                             }
                             safeSet(world, context.POS, leaves);
                         }

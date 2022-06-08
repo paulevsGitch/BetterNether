@@ -1,5 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.blocks.BNBlockProperties.BrownMushroomShape;
+import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -19,10 +23,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-
-import org.betterx.betternether.blocks.BNBlockProperties.BrownMushroomShape;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.registry.NetherBlocks;
 
 public class BlockBrownLargeMushroom extends BlockBaseNotFull {
     private static final VoxelShape TOP_CENTER_SHAPE = box(0, 0.1, 0, 16, 16, 16);
@@ -149,12 +149,14 @@ public class BlockBrownLargeMushroom extends BlockBaseNotFull {
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         switch (state.getValue(SHAPE)) {
             case BOTTOM:
                 return state;

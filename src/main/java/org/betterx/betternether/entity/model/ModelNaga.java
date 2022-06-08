@@ -1,5 +1,7 @@
 package org.betterx.betternether.entity.model;
 
+import org.betterx.betternether.entity.EntityNaga;
+
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -10,7 +12,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 import com.google.common.collect.ImmutableList;
-import org.betterx.betternether.entity.EntityNaga;
 
 public class ModelNaga extends AgeableListModel<EntityNaga> {
     private static final int SPIKE_COUNT = 8;
@@ -28,57 +29,77 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        PartDefinition modelPartData_HEAD = modelPartData.addOrReplaceChild(PartNames.HEAD,
-                                                                            CubeListBuilder.create()
-                                                                                           .texOffs(0,
-                                                                                                    0)
-                                                                                           .addBox(-5.0F,
-                                                                                                   -10.0F,
-                                                                                                   -5.0F - 2F,
-                                                                                                   10.0F,
-                                                                                                   10.0F,
-                                                                                                   10.0F),
-                                                                            PartPose.offset(0.0F, -9.0F, 0.0F));
+        PartDefinition modelPartData_HEAD = modelPartData.addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder.create()
+                               .texOffs(
+                                       0,
+                                       0
+                               )
+                               .addBox(
+                                       -5.0F,
+                                       -10.0F,
+                                       -5.0F - 2F,
+                                       10.0F,
+                                       10.0F,
+                                       10.0F
+                               ),
+                PartPose.offset(0.0F, -9.0F, 0.0F)
+        );
 
 		/* head = new ModelPart(this, 0, 0);
 		head.addCuboid(-5.0F, -10.0F, -5.0F - 2F, 10.0F, 10.0F, 10.0F);
 		head.setPivot(0.0F, -9.0F, 0.0F);*/
 
-        PartDefinition modelPartData_BODY = modelPartData.addOrReplaceChild(PartNames.BODY,
-                                                                            CubeListBuilder.create()
-                                                                                           .texOffs(40,
-                                                                                                    0)
-                                                                                           .addBox(-2.0F,
-                                                                                                   0.0F,
-                                                                                                   -1.0F,
-                                                                                                   4.0F,
-                                                                                                   20.0F,
-                                                                                                   2.0F)
-                                                                                           .texOffs(0,
-                                                                                                    20)
-                                                                                           .addBox(-5.0F,
-                                                                                                   3.0F,
-                                                                                                   -6.0F,
-                                                                                                   10.0F,
-                                                                                                   16.0F,
-                                                                                                   6.0F),
-                                                                            PartPose.offset(0.0F, -10F, 0.0F));
+        PartDefinition modelPartData_BODY = modelPartData.addOrReplaceChild(
+                PartNames.BODY,
+                CubeListBuilder.create()
+                               .texOffs(
+                                       40,
+                                       0
+                               )
+                               .addBox(
+                                       -2.0F,
+                                       0.0F,
+                                       -1.0F,
+                                       4.0F,
+                                       20.0F,
+                                       2.0F
+                               )
+                               .texOffs(
+                                       0,
+                                       20
+                               )
+                               .addBox(
+                                       -5.0F,
+                                       3.0F,
+                                       -6.0F,
+                                       10.0F,
+                                       16.0F,
+                                       6.0F
+                               ),
+                PartPose.offset(0.0F, -10F, 0.0F)
+        );
 		/*body = new ModelPart(this, 40, 0);
 		body.addCuboid(-2.0F, 0.0F, -1.0F, 4.0F, 20.0F, 2.0F);
 		body.setTextureOffset(0, 20);
 		body.addCuboid(-5.0F, 3.0F, -6.0F, 10.0F, 16.0F, 6.0F);
 		body.setPivot(0.0F, -10F, 0.0F*/
 
-        modelPartData_BODY.addOrReplaceChild("spike_0",
-                                             CubeListBuilder.create()
-                                                            .texOffs(33, 25)
-                                                            .addBox(0, 0, 0, 10, 18.0F, 0),
-                                             PartPose.offsetAndRotation(0.0F,
-                                                                        0F,
-                                                                        0.0F,
-                                                                        0,
-                                                                        (float) Math.toRadians(-40),
-                                                                        0));
+        modelPartData_BODY.addOrReplaceChild(
+                "spike_0",
+                CubeListBuilder.create()
+                               .texOffs(33, 25)
+                               .addBox(0, 0, 0, 10, 18.0F, 0),
+                PartPose.offsetAndRotation(
+                        0.0F,
+                        0F,
+                        0.0F,
+                        0,
+                        (float) Math.toRadians(-40),
+                        0
+                )
+        );
         //spikes = new ModelPart[8];
 
 		/*spikes[0] = new ModelPart(this, 33, 25);
@@ -87,16 +108,20 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
 		spikes[0].yaw = (float) Math.toRadians(-40);
 		body.addChild(spikes[0]);*/
 
-        modelPartData_BODY.addOrReplaceChild("spike_1",
-                                             CubeListBuilder.create()
-                                                            .texOffs(33, 25)
-                                                            .addBox(0, 0, 0, 10, 18.0F, 0),
-                                             PartPose.offsetAndRotation(0.0F,
-                                                                        0F,
-                                                                        0.0F,
-                                                                        0,
-                                                                        (float) Math.toRadians(-140),
-                                                                        0));
+        modelPartData_BODY.addOrReplaceChild(
+                "spike_1",
+                CubeListBuilder.create()
+                               .texOffs(33, 25)
+                               .addBox(0, 0, 0, 10, 18.0F, 0),
+                PartPose.offsetAndRotation(
+                        0.0F,
+                        0F,
+                        0.0F,
+                        0,
+                        (float) Math.toRadians(-140),
+                        0
+                )
+        );
 		/*spikes[1] = new ModelPart(this, 33, 25);
 		spikes[1].addCuboid(0, 0, 0, 10, 18.0F, 0);
 		spikes[1].setPivot(0.0F, 0, 0.0F);
@@ -116,21 +141,27 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
             if (width < 1)
                 width = 1;
 
-            PartDefinition modelPartData_TAIL = tailParent.addOrReplaceChild("tail_" + i,
-                                                                             CubeListBuilder.create()
-                                                                                            .texOffs(40, 0)
-                                                                                            .addBox(-height * 0.5F,
-                                                                                                    0.0F,
-                                                                                                    -width * 0.5F,
-                                                                                                    height,
-                                                                                                    20.0F,
-                                                                                                    width),
-                                                                             PartPose.offsetAndRotation(0.0F,
-                                                                                                        19.0F,
-                                                                                                        0.0F,
-                                                                                                        tailPitch[i],
-                                                                                                        0,
-                                                                                                        0));
+            PartDefinition modelPartData_TAIL = tailParent.addOrReplaceChild(
+                    "tail_" + i,
+                    CubeListBuilder.create()
+                                   .texOffs(40, 0)
+                                   .addBox(
+                                           -height * 0.5F,
+                                           0.0F,
+                                           -width * 0.5F,
+                                           height,
+                                           20.0F,
+                                           width
+                                   ),
+                    PartPose.offsetAndRotation(
+                            0.0F,
+                            19.0F,
+                            0.0F,
+                            tailPitch[i],
+                            0,
+                            0
+                    )
+            );
             tailParent = modelPartData_TAIL;
 
 			/*tail[i] = new ModelPart(this, 40, 0);
@@ -143,21 +174,27 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
                 int index = (i << 1) + 2;
 
 
-                modelPartData_TAIL.addOrReplaceChild("spike_" + index,
-                                                     CubeListBuilder.create()
-                                                                    .texOffs(px, 22)
-                                                                    .addBox(0,
-                                                                            0,
-                                                                            0,
-                                                                            height * 3,
-                                                                            20.0F,
-                                                                            0),
-                                                     PartPose.offsetAndRotation(0.0F,
-                                                                                0F,
-                                                                                0.0F,
-                                                                                0,
-                                                                                (float) Math.toRadians(-60),
-                                                                                0));
+                modelPartData_TAIL.addOrReplaceChild(
+                        "spike_" + index,
+                        CubeListBuilder.create()
+                                       .texOffs(px, 22)
+                                       .addBox(
+                                               0,
+                                               0,
+                                               0,
+                                               height * 3,
+                                               20.0F,
+                                               0
+                                       ),
+                        PartPose.offsetAndRotation(
+                                0.0F,
+                                0F,
+                                0.0F,
+                                0,
+                                (float) Math.toRadians(-60),
+                                0
+                        )
+                );
 				/*spikes[index] = new ModelPart(this, px, 22);
 				spikes[index].addCuboid(0, 0, 0, height * 3, 20.0F, 0);
 				spikes[index].setPivot(0.0F, 0, 0.0F);
@@ -165,21 +202,27 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
 				tail[i].addChild(spikes[index]);*/
 
                 index++;
-                modelPartData_TAIL.addOrReplaceChild("spike_" + index,
-                                                     CubeListBuilder.create()
-                                                                    .texOffs(px, 22)
-                                                                    .addBox(0,
-                                                                            0,
-                                                                            0,
-                                                                            height * 3,
-                                                                            20.0F,
-                                                                            0),
-                                                     PartPose.offsetAndRotation(0.0F,
-                                                                                0F,
-                                                                                0.0F,
-                                                                                0,
-                                                                                (float) Math.toRadians(-120),
-                                                                                0));
+                modelPartData_TAIL.addOrReplaceChild(
+                        "spike_" + index,
+                        CubeListBuilder.create()
+                                       .texOffs(px, 22)
+                                       .addBox(
+                                               0,
+                                               0,
+                                               0,
+                                               height * 3,
+                                               20.0F,
+                                               0
+                                       ),
+                        PartPose.offsetAndRotation(
+                                0.0F,
+                                0F,
+                                0.0F,
+                                0,
+                                (float) Math.toRadians(-120),
+                                0
+                        )
+                );
 				/*spikes[index] = new ModelPart(this, px, 22);
 				spikes[index].addCuboid(0, 0, 0, height * 3, 20.0F, 0);
 				spikes[index].setPivot(0.0F, 0, 0.0F);
@@ -241,12 +284,14 @@ public class ModelNaga extends AgeableListModel<EntityNaga> {
     }
 
     @Override
-    public void setupAnim(EntityNaga entity,
-                          float limbAngle,
-                          float limbDistance,
-                          float animationProgress,
-                          float headYaw,
-                          float headPitch) {
+    public void setupAnim(
+            EntityNaga entity,
+            float limbAngle,
+            float limbDistance,
+            float animationProgress,
+            float headYaw,
+            float headPitch
+    ) {
         boolean rollTooBig = entity.getFallFlyingTicks() > 4;
         boolean isSwimming = entity.isVisuallySwimming();
         this.head.yRot = headYaw * 0.017453292F;

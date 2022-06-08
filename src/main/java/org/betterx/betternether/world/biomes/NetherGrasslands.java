@@ -1,15 +1,5 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-
-import com.mojang.serialization.Codec;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
@@ -25,13 +15,25 @@ import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
+import com.mojang.serialization.Codec;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+
 import java.util.List;
 
 class NetherGrasslandsNumericProvider implements NumericProvider {
     public static final NetherGrasslandsNumericProvider DEFAULT = new NetherGrasslandsNumericProvider();
     public static final Codec<NetherGrasslandsNumericProvider> CODEC = Codec.BYTE.fieldOf("nether_grasslands")
-                                                                                 .xmap((obj) -> DEFAULT,
-                                                                                         obj -> (byte) 0)
+                                                                                 .xmap(
+                                                                                         (obj) -> DEFAULT,
+                                                                                         obj -> (byte) 0
+                                                                                 )
                                                                                  .codec();
 
     @Override
@@ -48,9 +50,11 @@ class NetherGrasslandsNumericProvider implements NumericProvider {
     }
 
     static {
-        Registry.register(NumericProvider.NUMERIC_PROVIDER,
+        Registry.register(
+                NumericProvider.NUMERIC_PROVIDER,
                 BetterNether.makeID("nether_grasslands"),
-                NetherGrasslandsNumericProvider.CODEC);
+                NetherGrasslandsNumericProvider.CODEC
+        );
     }
 }
 
@@ -105,11 +109,15 @@ public class NetherGrasslands extends NetherBiome {
                         .rule(SurfaceRules.sequence(
                                 SurfaceRules.ifTrue(
                                         SurfaceRules.ON_FLOOR,
-                                        new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
-                                                List.of(SOUL_SOIL, SOUL_SAND, NETHERRACK))
+                                        new SwitchRuleSource(
+                                                NetherGrasslandsNumericProvider.DEFAULT,
+                                                List.of(SOUL_SOIL, SOUL_SAND, NETHERRACK)
+                                        )
                                 ),
-                                new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
-                                        List.of(SOUL_SOIL, SOUL_SAND, MOSS, NETHERRACK))
+                                new SwitchRuleSource(
+                                        NetherGrasslandsNumericProvider.DEFAULT,
+                                        List.of(SOUL_SOIL, SOUL_SAND, MOSS, NETHERRACK)
+                                )
                         ));
         }
 

@@ -1,13 +1,13 @@
 package org.betterx.betternether.world.structures;
 
+import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
 
 public abstract class StructureFuncScatter implements IStructure {
     final int distance;
@@ -19,11 +19,13 @@ public abstract class StructureFuncScatter implements IStructure {
     }
 
     @Override
-    public void generate(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         final int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
+    public void generate(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         if (isGround(world.getBlockState(pos.below())) && noObjNear(world, pos)) {
             grow(world, pos, random, true, context);
         }
@@ -33,11 +35,13 @@ public abstract class StructureFuncScatter implements IStructure {
         grow(world, pos, random, false, NetherChunkPopulatorFeature.generatorForThread().context);
     }
 
-    public abstract void grow(ServerLevelAccessor world,
-                              BlockPos pos,
-                              RandomSource random,
-                              boolean natural,
-                              StructureGeneratorThreadContext context);
+    public abstract void grow(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            boolean natural,
+            StructureGeneratorThreadContext context
+    );
 
     protected abstract boolean isStructure(BlockState state);
 

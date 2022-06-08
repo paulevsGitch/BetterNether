@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.materials.Materials;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -14,9 +17,6 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 public class BlockEyeball extends BlockEyeBase {
     public BlockEyeball() {

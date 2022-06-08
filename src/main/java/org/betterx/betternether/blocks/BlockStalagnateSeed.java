@@ -1,5 +1,11 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.blocks.FeatureSaplingBlock;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
+import org.betterx.betternether.registry.features.VineLikeFeatures;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -14,12 +20,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
-import org.betterx.bclib.blocks.FeatureSaplingBlock;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
-import org.betterx.betternether.registry.features.VineLikeFeatures;
 
 public class BlockStalagnateSeed extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack {
     public static final int MAX_SEARCH_LENGTH = 25; // 27

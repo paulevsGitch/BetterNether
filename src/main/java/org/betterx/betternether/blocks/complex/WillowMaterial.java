@@ -1,16 +1,16 @@
 package org.betterx.betternether.blocks.complex;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
-
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.betternether.blocks.BlockWillowBranch;
 import org.betterx.betternether.blocks.BlockWillowSapling;
 import org.betterx.betternether.blocks.BlockWillowTorch;
 import org.betterx.betternether.blocks.BlockWillowTrunk;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.MaterialColor;
+
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class WillowMaterial extends RoofMaterial {
     public final static String BLOCK_TORCH = "torch";

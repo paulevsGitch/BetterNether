@@ -1,10 +1,10 @@
 package org.betterx.betternether.interfaces;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-
 import org.betterx.bclib.interfaces.SurvivesOnBlocks;
 import org.betterx.betternether.registry.NetherBlocks;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 

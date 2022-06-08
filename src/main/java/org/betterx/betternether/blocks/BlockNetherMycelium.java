@@ -41,10 +41,11 @@ public class BlockNetherMycelium extends BlockBase {
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         super.animateTick(state, world, pos, random);
         world.addParticle(ParticleTypes.MYCELIUM,
-                          pos.getX() + random.nextDouble(),
-                          pos.getY() + 1.1D,
-                          pos.getZ() + random.nextDouble(),
-                          0.0D, 0.0D, 0.0D);
+                pos.getX() + random.nextDouble(),
+                pos.getY() + 1.1D,
+                pos.getZ() + random.nextDouble(),
+                0.0D, 0.0D, 0.0D
+        );
     }
 
     @Override

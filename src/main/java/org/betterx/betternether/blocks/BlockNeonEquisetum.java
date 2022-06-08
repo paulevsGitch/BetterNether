@@ -1,5 +1,11 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
+import org.betterx.bclib.items.tool.BaseShearsItem;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -33,11 +39,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
-import org.betterx.bclib.blocks.BlockProperties.TripleShape;
-import org.betterx.bclib.items.tool.BaseShearsItem;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -93,12 +94,14 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (!canSurvive(state, world, pos))
             return Blocks.AIR.defaultBlockState();
         else
@@ -106,11 +109,13 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
     }
 
     @Override
-    public void setPlacedBy(Level world,
-                            BlockPos pos,
-                            BlockState state,
-                            @Nullable LivingEntity placer,
-                            ItemStack itemStack) {
+    public void setPlacedBy(
+            Level world,
+            BlockPos pos,
+            BlockState state,
+            @Nullable LivingEntity placer,
+            ItemStack itemStack
+    ) {
         BlockPos upPos = pos.above();
         if (world.getBlockState(upPos).getBlock() == this) {
             world.setBlockAndUpdate(upPos, defaultBlockState().setValue(SHAPE, TripleShape.MIDDLE));
@@ -124,8 +129,10 @@ public class BlockNeonEquisetum extends BlockBaseNotFull implements Bonemealable
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (tool != null && BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH,
-                tool) > 0) {
+        if (tool != null && BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(
+                Enchantments.SILK_TOUCH,
+                tool
+        ) > 0) {
             return Lists.newArrayList(new ItemStack(this.asItem()));
         } else {
             return Lists.newArrayList();

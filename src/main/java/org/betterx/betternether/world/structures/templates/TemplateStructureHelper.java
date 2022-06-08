@@ -1,20 +1,22 @@
 package org.betterx.betternether.world.structures.templates;
 
-import net.minecraft.resources.ResourceLocation;
-
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v2.levelgen.structures.TemplateStructure;
 import org.betterx.betternether.BetterNether;
+
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
 abstract class TemplateStructureHelper extends TemplateStructure {
 
-    protected TemplateStructureHelper(StructureSettings structureSettings,
-                                      ResourceLocation location,
-                                      int offsetY,
-                                      StructurePlacementType type,
-                                      float chance) {
+    protected TemplateStructureHelper(
+            StructureSettings structureSettings,
+            ResourceLocation location,
+            int offsetY,
+            StructurePlacementType type,
+            float chance
+    ) {
         super(structureSettings, location, offsetY, type, chance);
     }
 

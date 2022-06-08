@@ -1,5 +1,11 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
@@ -10,12 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-
 import java.util.Map;
 
 public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
@@ -25,21 +25,25 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         if (pos.getY() < MAX_HEIGHT * 0.75) return false;
         return grow(world, pos, random, MAX_HEIGHT, context);
     }
 
-    protected boolean grow(ServerLevelAccessor world,
-                           BlockPos pos,
-                           RandomSource random,
-                           int MAX_HEIGHT,
-                           StructureGeneratorThreadContext context) {
+    protected boolean grow(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
 
         context.LOGS_DIST.clear();
@@ -68,9 +72,11 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
                         for (int y = start; y < length; y++) {
                             context.POS.setY(pos.getY() - y);
                             if (canReplace(world.getBlockState(context.POS))) {
-                                BlocksHelper.setWithUpdate(world,
+                                BlocksHelper.setWithUpdate(
+                                        world,
                                         context.POS,
-                                        NetherBlocks.MAT_NETHER_SAKURA.getLog().defaultBlockState());
+                                        NetherBlocks.MAT_NETHER_SAKURA.getLog().defaultBlockState()
+                                );
                                 updateSDFFrom(context.POS, context);
                             }
                         }
@@ -101,9 +107,11 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
                     final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
                     if (dist <= 7) {
                         final BlockPos blPos = bpos.offset(x, y, z);
-                        context.LOGS_DIST.merge(blPos,
+                        context.LOGS_DIST.merge(
+                                blPos,
                                 (byte) dist,
-                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
+                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist)
+                        );
                     }
                 }
             }
@@ -119,9 +127,11 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
             if (currentState.hasProperty(BlockStateProperties.DISTANCE)) {
                 int cDist = currentState.getValue(BlockStateProperties.DISTANCE);
                 if (dist < cDist) {
-                    BlocksHelper.setWithoutUpdate(world,
+                    BlocksHelper.setWithoutUpdate(
+                            world,
                             logPos,
-                            currentState.setValue(BlockStateProperties.DISTANCE, dist));
+                            currentState.setValue(BlockStateProperties.DISTANCE, dist)
+                    );
                     cDist = dist;
                 }
 
@@ -132,11 +142,13 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
         }
     }
 
-    private void crown(LevelAccessor world,
-                       BlockPos pos,
-                       double radius,
-                       double height,
-                       StructureGeneratorThreadContext context) {
+    private void crown(
+            LevelAccessor world,
+            BlockPos pos,
+            double radius,
+            double height,
+            StructureGeneratorThreadContext context
+    ) {
         BlockState leaves = NetherBlocks.NETHER_SAKURA_LEAVES.defaultBlockState()
                                                              .setValue(LeavesBlock.PERSISTENT, true);
         double r2 = radius * radius;
@@ -187,10 +199,12 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
     }
 
     @Override
-    public boolean grow(ServerLevelAccessor level,
-                        BlockPos pos,
-                        RandomSource random,
-                        NoneFeatureConfiguration configuration) {
+    public boolean grow(
+            ServerLevelAccessor level,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration configuration
+    ) {
         return grow(level, pos, random, 128, NetherChunkPopulatorFeature.generatorForThread().context);
     }
 }

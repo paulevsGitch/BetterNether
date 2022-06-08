@@ -46,14 +46,16 @@ public abstract class MapStateMixin extends SavedData {
     private int trackedDecorationCount;
 
     @Inject(method = "addDecoration", at = @At(value = "HEAD"), cancellable = true)
-    private void updatePlayer(MapDecoration.Type type,
-                              LevelAccessor level,
-                              String key,
-                              double x,
-                              double z,
-                              double rotation,
-                              Component text,
-                              CallbackInfo info) {
+    private void updatePlayer(
+            MapDecoration.Type type,
+            LevelAccessor level,
+            String key,
+            double x,
+            double z,
+            double rotation,
+            Component text,
+            CallbackInfo info
+    ) {
         if (level != null && level.dimensionType().hasCeiling()) {
             //Code derived and adapted from Vanilla Minecraft Code in net.minecraft.world.item.MapItemSaveData.update
             MapDecoration mapDecoration;

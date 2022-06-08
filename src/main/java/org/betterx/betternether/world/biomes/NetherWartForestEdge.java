@@ -1,11 +1,5 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
@@ -17,6 +11,12 @@ import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import java.util.List;
 
@@ -45,11 +45,15 @@ public class NetherWartForestEdge extends NetherBiome {
                             SurfaceRules.sequence(
                                     SurfaceRules.ifTrue(
                                             SurfaceRules.ON_FLOOR,
-                                            new SwitchRuleSource(Conditions.NETHER_NOISE,
-                                                    List.of(NetherGrasslands.SOUL_SOIL,
+                                            new SwitchRuleSource(
+                                                    Conditions.NETHER_NOISE,
+                                                    List.of(
+                                                            NetherGrasslands.SOUL_SOIL,
                                                             NetherGrasslands.SOUL_SAND,
                                                             NetherGrasslands.MOSS,
-                                                            NETHERRACK))
+                                                            NETHERRACK
+                                                    )
+                                            )
                                     ),
                                     SurfaceRules.ifTrue(
                                             Conditions.NETHER_VOLUME_NOISE,

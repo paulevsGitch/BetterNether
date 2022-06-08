@@ -1,5 +1,11 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
+import org.betterx.bclib.interfaces.tools.AddMineableShears;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.interfaces.SurvivesOnGravel;
+import org.betterx.betternether.registry.NetherItems;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -25,11 +31,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
-import org.betterx.bclib.interfaces.tools.AddMineableHoe;
-import org.betterx.bclib.interfaces.tools.AddMineableShears;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.interfaces.SurvivesOnGravel;
-import org.betterx.betternether.registry.NetherItems;
 
 import java.util.List;
 
@@ -58,12 +59,14 @@ public class BlockAgave extends BlockCommonPlant implements AddMineableShears, A
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (canSurvive(state, world, pos))
             return state;
         else

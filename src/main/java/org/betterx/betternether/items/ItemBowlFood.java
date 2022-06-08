@@ -1,5 +1,12 @@
 package org.betterx.betternether.items;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
+import org.betterx.betternether.blocks.BlockStalagnateBowl;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherItems;
+import org.betterx.betternether.tab.CreativeTabs;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -12,13 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
-import org.betterx.betternether.blocks.BlockStalagnateBowl;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherItems;
-import org.betterx.betternether.tab.CreativeTabs;
 
 public class ItemBowlFood extends Item {
     private final FoodShape bowlFood;
@@ -37,7 +37,8 @@ public class ItemBowlFood extends Item {
                                                                                                                   world.getBlockState(
                                                                                                                           pos),
                                                                                                                   world,
-                                                                                                                  pos)) {
+                                                                                                                  pos
+                                                                                                          )) {
             if (!world.isClientSide()) {
                 BlockState state = NetherBlocks.MAT_STALAGNATE.getBowl()
                                                               .defaultBlockState()
@@ -55,7 +56,8 @@ public class ItemBowlFood extends Item {
                     SoundSource.BLOCKS,
                     0.8F,
                     1.0F,
-                    true);
+                    true
+            );
             return InteractionResult.CONSUME;
         }
         return super.useOn(context);

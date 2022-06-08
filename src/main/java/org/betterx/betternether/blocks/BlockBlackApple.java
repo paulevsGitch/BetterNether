@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -10,8 +12,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-
-import org.betterx.betternether.registry.NetherBlocks;
 
 public class BlockBlackApple extends BlockCommonPlant {
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 16, 12);

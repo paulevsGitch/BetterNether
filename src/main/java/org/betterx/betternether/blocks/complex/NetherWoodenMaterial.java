@@ -1,20 +1,7 @@
 package org.betterx.betternether.blocks.complex;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.MaterialColor;
-
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-
-import org.betterx.bclib.api.v2.tag.CommonItemTags;
 import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.bclib.api.v2.tag.CommonItemTags;
 import org.betterx.bclib.api.v2.tag.NamedBlockTags;
 import org.betterx.bclib.api.v2.tag.NamedItemTags;
 import org.betterx.bclib.blocks.BaseRotatedPillarBlock;
@@ -33,6 +20,19 @@ import org.betterx.betternether.blocks.BNNormalChair;
 import org.betterx.betternether.blocks.BNTaburet;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
+
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.MaterialColor;
+
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 
 public class NetherWoodenMaterial extends WoodenComplexMaterial {
     protected final static String BLOCK_OPTIONAL_TRUNK = "trunk";
@@ -59,9 +59,11 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     }
 
     public NetherWoodenMaterial init() {
-        return (NetherWoodenMaterial) super.init(NetherBlocks.getBlockRegistry(),
-                                                 NetherItems.getItemRegistry(),
-                                                 Configs.RECIPE_CONFIG);
+        return (NetherWoodenMaterial) super.init(
+                NetherBlocks.getBlockRegistry(),
+                NetherItems.getItemRegistry(),
+                Configs.RECIPE_CONFIG
+        );
     }
 
     @Override
@@ -79,30 +81,39 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
                 new BlockEntry(BLOCK_STRIPPED_LOG, (complexMaterial, settings) -> new BaseRotatedPillarBlock(settings))
                         .setBlockTags(NamedBlockTags.LOGS, tagBlockLog)
                         .setItemTags(NamedItemTags.LOGS, tagItemLog)
-                              );
+        );
         replaceOrAddBlockEntry(
-                new BlockEntry(BLOCK_STRIPPED_BARK,
-                               (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseBarkBlock(settings))
+                new BlockEntry(
+                        BLOCK_STRIPPED_BARK,
+                        (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseBarkBlock(settings)
+                )
                         .setBlockTags(NamedBlockTags.LOGS, tagBlockLog)
                         .setItemTags(NamedItemTags.LOGS, tagItemLog)
-                              );
+        );
 
         replaceOrAddBlockEntry(
-                new BlockEntry(BLOCK_LOG,
-                               (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseStripableLogBlock(
-                                       woodColor,
-                                       getBlock(BLOCK_STRIPPED_LOG)))
+                new BlockEntry(
+                        BLOCK_LOG,
+                        (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseStripableLogBlock(
+                                woodColor,
+                                getBlock(BLOCK_STRIPPED_LOG)
+                        )
+                )
                         .setBlockTags(NamedBlockTags.LOGS, tagBlockLog)
                         .setItemTags(NamedItemTags.LOGS, tagItemLog)
-                              );
+        );
         replaceOrAddBlockEntry(
-                new BlockEntry(BLOCK_BARK,
-                               (complexMaterial, settings) -> new org.betterx.bclib.blocks.StripableBarkBlock(woodColor,
-                                                                                                              getBlock(
-                                                                                                                      BLOCK_STRIPPED_BARK)))
+                new BlockEntry(
+                        BLOCK_BARK,
+                        (complexMaterial, settings) -> new org.betterx.bclib.blocks.StripableBarkBlock(
+                                woodColor,
+                                getBlock(
+                                        BLOCK_STRIPPED_BARK)
+                        )
+                )
                         .setBlockTags(NamedBlockTags.LOGS, tagBlockLog)
                         .setItemTags(NamedItemTags.LOGS, tagItemLog)
-                              );
+        );
     }
 
     @Override

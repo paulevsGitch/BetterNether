@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherParticles;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -8,9 +11,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherParticles;
 
 public class BlueCryingObsidianBlock extends BNObsidian {
     public BlueCryingObsidianBlock() {
@@ -33,13 +33,15 @@ public class BlueCryingObsidianBlock extends BNObsidian {
                     double f = direction.getStepZ() == 0
                             ? random.nextDouble()
                             : 0.5D + (double) direction.getStepZ() * 0.6D;
-                    level.addParticle(NetherParticles.BLUE_DRIPPING_OBSIDIAN_TEAR,
-                                      (double) blockPos.getX() + d,
-                                      (double) blockPos.getY() + e,
-                                      (double) blockPos.getZ() + f,
-                                      0.0D,
-                                      0.0D,
-                                      0.0D);
+                    level.addParticle(
+                            NetherParticles.BLUE_DRIPPING_OBSIDIAN_TEAR,
+                            (double) blockPos.getX() + d,
+                            (double) blockPos.getY() + e,
+                            (double) blockPos.getZ() + f,
+                            0.0D,
+                            0.0D,
+                            0.0D
+                    );
                 }
             }
         }

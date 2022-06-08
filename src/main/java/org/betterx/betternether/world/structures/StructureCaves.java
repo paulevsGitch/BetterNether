@@ -1,13 +1,13 @@
 package org.betterx.betternether.world.structures;
 
+import org.betterx.bclib.util.BlocksHelper;
+import org.betterx.betternether.noise.OpenSimplexNoise;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
-
-import org.betterx.bclib.util.BlocksHelper;
-import org.betterx.betternether.noise.OpenSimplexNoise;
 
 public class StructureCaves implements IStructure {
 
@@ -26,11 +26,13 @@ public class StructureCaves implements IStructure {
     }
 
     @Override
-    public void generate(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         final int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
+    public void generate(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         boolean isVoid = true;
         offset = (int) (getHeight(pos.getX() + 8, pos.getZ() + 8) - 12);
 
@@ -89,7 +91,8 @@ public class StructureCaves implements IStructure {
     private double getRigid(int x, int z) {
         return Math.abs(rigidNoise.eval(
                 x * 0.02 + distortX.eval(x * 0.05, z * 0.05) * 0.2,
-                z * 0.02 + distortY.eval(x * 0.05, z * 0.05) * 0.2)) * 0.6;
+                z * 0.02 + distortY.eval(x * 0.05, z * 0.05) * 0.2
+        )) * 0.6;
 
         // return Math.abs(rigidNoise.eval(x * 0.02, z * 0.02));
     }

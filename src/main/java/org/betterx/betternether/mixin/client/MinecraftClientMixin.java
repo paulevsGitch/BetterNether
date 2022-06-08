@@ -1,9 +1,10 @@
 package org.betterx.betternether.mixin.client;
 
+import org.betterx.betternether.config.Config;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.main.GameConfig;
 
-import org.betterx.betternether.config.Config;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

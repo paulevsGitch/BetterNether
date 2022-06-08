@@ -1,16 +1,5 @@
 package org.betterx.betternether.registry.features;
 
-import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.SculkShriekerBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
-import net.minecraft.world.level.levelgen.synth.NormalNoise;
-
 import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
@@ -25,27 +14,42 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.*;
 
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.SculkShriekerBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
+
 import java.util.List;
 
 public class FloorFeatures {
 
     public static final BlockStateProvider VANILLA_MUSHROOM_PROVIDER =
-            new NoiseThresholdProvider(2345L,
-                    new NormalNoise.NoiseParameters(0, 1.0, new double[0]),
+            new NoiseThresholdProvider(
+                    2345L,
+                    new NormalNoise.NoiseParameters(0, 1.0),
                     0.005f,
                     -0.8f,
                     0.33333334f,
                     Blocks.DANDELION.defaultBlockState(),
-                    List.of(Blocks.RED_MUSHROOM.defaultBlockState(),
+                    List.of(
+                            Blocks.RED_MUSHROOM.defaultBlockState(),
                             Blocks.CRIMSON_FUNGUS.defaultBlockState()
                     ),
-                    List.of(Blocks.BROWN_MUSHROOM.defaultBlockState(),
+                    List.of(
+                            Blocks.BROWN_MUSHROOM.defaultBlockState(),
                             Blocks.WARPED_FUNGUS.defaultBlockState()
                     )
             );
     public static final BCLFeature VANILLA_MUSHROOM
             = FastFeatures.patch(BetterNether.makeID("vanilla_red_mushroom"),
-            VANILLA_MUSHROOM_PROVIDER, 8, 6, 3);
+            VANILLA_MUSHROOM_PROVIDER, 8, 6, 3
+    );
 
     public static final BCLFeature VANILLA_WARPED_FUNGUS
             = FastFeatures.patch(BetterNether.makeID("vanilla_warped_fungus"), Blocks.WARPED_FUNGUS, 8, 7, 3);
@@ -76,7 +80,8 @@ public class FloorFeatures {
                     .defaultBlockState()
                     .setValue(MultifaceBlock.getFaceProperty(Direction.DOWN), true)
             ),
-            8, 4, 3);
+            8, 4, 3
+    );
 
     public static final BCLFeature SCULK_CATALYST = BCLFeatureBuilder
             .start(BetterNether.makeID("sculk_catalyst"), Blocks.SCULK_CATALYST)
@@ -88,8 +93,10 @@ public class FloorFeatures {
             .buildAndRegister();
 
     public static final BCLFeature SCULK_SHRIEKER = BCLFeatureBuilder
-            .start(BetterNether.makeID("sculk_shrieker"),
-                    Blocks.SCULK_SHRIEKER.defaultBlockState().setValue(SculkShriekerBlock.CAN_SUMMON, true))
+            .start(
+                    BetterNether.makeID("sculk_shrieker"),
+                    Blocks.SCULK_SHRIEKER.defaultBlockState().setValue(SculkShriekerBlock.CAN_SUMMON, true)
+            )
             .offset(Direction.DOWN)
             .buildAndRegister();
 
@@ -171,10 +178,12 @@ public class FloorFeatures {
                     cfg(BetterNether.makeID("upside_down_forest/tree_needle"), 1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("upside_down_forest/tree_root"), -1, StructurePlacementType.FLOOR, 1.0f),
                     cfg(BetterNether.makeID("upside_down_forest/tree_stump"), -1, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("upside_down_forest/tree_small_branch"),
+                    cfg(
+                            BetterNether.makeID("upside_down_forest/tree_small_branch"),
                             1,
                             StructurePlacementType.FLOOR,
-                            1.0f)
+                            1.0f
+                    )
             )));
 
     public static final BCLFeature MAGMA_FLOWER = FastFeatures.patchWitRandomInt(
@@ -220,17 +229,21 @@ public class FloorFeatures {
     public static void ensureStaticInitialization() {
     }
 
-    static StructureWorldNBT cfg(ResourceLocation location,
-                                 int offsetY,
-                                 StructurePlacementType type,
-                                 float chance) {
+    static StructureWorldNBT cfg(
+            ResourceLocation location,
+            int offsetY,
+            StructurePlacementType type,
+            float chance
+    ) {
         return TemplateFeatureConfig.cfg(location, offsetY, type, chance);
     }
 
-    static BCLFeature agedCluster(ResourceLocation location,
-                                  boolean onFloor,
-                                  boolean sparse,
-                                  ScatterFeatureConfig.Builder builder) {
+    static BCLFeature agedCluster(
+            ResourceLocation location,
+            boolean onFloor,
+            boolean sparse,
+            ScatterFeatureConfig.Builder builder
+    ) {
         return FastFeatures.scatter(location, onFloor, sparse, builder, NetherFeatures.SCATTER_WITH_PLANT_AGE);
     }
 }

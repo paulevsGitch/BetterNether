@@ -1,12 +1,5 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-
-import com.mojang.serialization.Codec;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
@@ -21,6 +14,13 @@ import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
+
+import com.mojang.serialization.Codec;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import java.util.List;
 
@@ -40,9 +40,11 @@ class NetherMushroomForestEdgeNumericProvider implements NumericProvider {
     }
 
     static {
-        Registry.register(NumericProvider.NUMERIC_PROVIDER,
+        Registry.register(
+                NumericProvider.NUMERIC_PROVIDER,
                 BetterNether.makeID("nether_mushroom_forrest_edge"),
-                NetherMushroomForestEdgeNumericProvider.CODEC);
+                NetherMushroomForestEdgeNumericProvider.CODEC
+        );
     }
 }
 

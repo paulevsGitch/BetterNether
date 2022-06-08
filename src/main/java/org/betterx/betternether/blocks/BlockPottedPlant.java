@@ -1,5 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.blocks.BNBlockProperties.PottedPlantShape;
+import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
@@ -20,10 +24,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.betterx.betternether.blocks.BNBlockProperties.PottedPlantShape;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.registry.NetherBlocks;
 
 import java.util.Collections;
 import java.util.List;
@@ -74,12 +74,14 @@ public class BlockPottedPlant extends BlockBaseNotFull {
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (!canSurvive(state, world, pos))
             return Blocks.AIR.defaultBlockState();
         else

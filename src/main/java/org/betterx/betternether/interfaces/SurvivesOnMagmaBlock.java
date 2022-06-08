@@ -1,9 +1,9 @@
 package org.betterx.betternether.interfaces;
 
+import org.betterx.bclib.interfaces.SurvivesOnBlocks;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-
-import org.betterx.bclib.interfaces.SurvivesOnBlocks;
 
 import java.util.List;
 

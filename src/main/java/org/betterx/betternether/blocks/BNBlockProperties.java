@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -9,20 +12,25 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-import org.betterx.bclib.blocks.BlockProperties;
-import org.betterx.betternether.registry.NetherBlocks;
-
 import java.util.function.Supplier;
 
 public class BNBlockProperties {
-    public static final EnumProperty<CincinnasitPillarShape> PILLAR_SHAPE = EnumProperty.create("shape",
-            CincinnasitPillarShape.class);
-    public static final EnumProperty<BrownMushroomShape> BROWN_MUSHROOM_SHAPE = EnumProperty.create("shape",
-            BrownMushroomShape.class);
-    public static final EnumProperty<WillowBranchShape> WILLOW_SHAPE = EnumProperty.create("shape",
-            WillowBranchShape.class);
-    public static final EnumProperty<JellyShape> JELLY_MUSHROOM_VISUAL = EnumProperty.create("visual",
-            JellyShape.class);
+    public static final EnumProperty<CincinnasitPillarShape> PILLAR_SHAPE = EnumProperty.create(
+            "shape",
+            CincinnasitPillarShape.class
+    );
+    public static final EnumProperty<BrownMushroomShape> BROWN_MUSHROOM_SHAPE = EnumProperty.create(
+            "shape",
+            BrownMushroomShape.class
+    );
+    public static final EnumProperty<WillowBranchShape> WILLOW_SHAPE = EnumProperty.create(
+            "shape",
+            WillowBranchShape.class
+    );
+    public static final EnumProperty<JellyShape> JELLY_MUSHROOM_VISUAL = EnumProperty.create(
+            "visual",
+            JellyShape.class
+    );
     public static final EnumProperty<EnumLucisShape> LUCIS_SHAPE = EnumProperty.create("shape", EnumLucisShape.class);
     public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.create("plant", PottedPlantShape.class);
     public static final EnumProperty<BlockProperties.TripleShape> TRIPLE_SHAPE = BlockProperties.TRIPLE_SHAPE;

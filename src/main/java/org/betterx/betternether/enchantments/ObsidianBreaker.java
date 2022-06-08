@@ -1,13 +1,13 @@
 package org.betterx.betternether.enchantments;
 
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-import org.betterx.betternether.registry.NetherBlocks;
 
 public class ObsidianBreaker extends Enchantment {
     public ObsidianBreaker() {

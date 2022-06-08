@@ -1,5 +1,14 @@
 package org.betterx.betternether.world;
 
+import org.betterx.bclib.api.v2.generator.GeneratorOptions;
+import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.config.Configs;
+import org.betterx.betternether.world.features.CavesFeature;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Holder;
@@ -10,15 +19,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
-import org.betterx.bclib.api.v2.generator.GeneratorOptions;
-import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
-import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.world.features.CavesFeature;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -44,22 +44,28 @@ public class BNWorldGenerator {
 
     public static void onModInit() {
         structureDensity = Configs.GENERATOR.getFloat("generator.world", "structures_density", 1F / 16F) * 1.0001F;
-        lavaStructureDensity = Configs.GENERATOR.getFloat("generator.world",
+        lavaStructureDensity = Configs.GENERATOR.getFloat(
+                "generator.world",
                 "lava_structures_density",
-                1F / 200F) * 1.0001F;
-        globalDensity = Configs.GENERATOR.getFloat("generator.world",
+                1F / 200F
+        ) * 1.0001F;
+        globalDensity = Configs.GENERATOR.getFloat(
+                "generator.world",
                 "global_plant_and_structures_density",
-                1F) * 1.0001F;
+                1F
+        ) * 1.0001F;
     }
 
     private static int clamp(int x, int max) {
         return x < 0 ? 0 : x > max ? max : x;
     }
 
-    public void populate(WorldGenLevel world,
-                         int sx,
-                         int sz,
-                         FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+    public void populate(
+            WorldGenLevel world,
+            int sx,
+            int sz,
+            FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext
+    ) {
         final RandomSource random = featurePlaceContext.random();
         final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
 
@@ -67,22 +73,26 @@ public class BNWorldGenerator {
 
         // Structure Generator
         if (random.nextFloat() < structureDensity) {
-            popPos.set(sx + random.nextInt(16),
+            popPos.set(
+                    sx + random.nextInt(16),
                     MHelper.randRange(33, MAX_HEIGHT - 28, random),
-                    sz + random.nextInt(16));
+                    sz + random.nextInt(16)
+            );
             StructurePlacementType type = StructurePlacementType.FLOOR;
             boolean isAir = world.getBlockState(popPos).getMaterial().isReplaceable();
             boolean airUp = world.getBlockState(popPos.above()).getMaterial().isReplaceable() && world.getBlockState(
                     popPos.above(3)).getMaterial().isReplaceable();
             boolean airDown = world.getBlockState(popPos.below()).getMaterial().isReplaceable() && world.getBlockState(
                     popPos.below(3)).getMaterial().isReplaceable();
-            NetherBiome biome = getBiomeLocal(popPos.getX() - sx,
+            NetherBiome biome = getBiomeLocal(
+                    popPos.getX() - sx,
                     popPos.getY(),
                     popPos.getZ() - sz,
                     random,
                     layerHeight,
                     world,
-                    popPos);
+                    popPos
+            );
             if (!isAir && !airUp && !airDown && random.nextInt(8) == 0)
                 type = StructurePlacementType.UNDER;
             else {
@@ -109,13 +119,15 @@ public class BNWorldGenerator {
                     type = StructurePlacementType.CEIL;
                 }
             }
-            biome = getBiomeLocal(popPos.getX() - sx,
+            biome = getBiomeLocal(
+                    popPos.getX() - sx,
                     popPos.getY(),
                     popPos.getZ() - sz,
                     random,
                     layerHeight,
                     world,
-                    popPos);
+                    popPos
+            );
             if (biome != null) {
                 if (world.getBlockState(popPos)
                          .getMaterial()
@@ -137,13 +149,15 @@ public class BNWorldGenerator {
         if (random.nextFloat() < lavaStructureDensity) {
             popPos.set(sx + random.nextInt(16), 32, sz + random.nextInt(16));
             if (world.isEmptyBlock(popPos) && org.betterx.bclib.util.BlocksHelper.isLava(world.getBlockState(popPos.below()))) {
-                biome = getBiomeLocal(popPos.getX() - sx,
+                biome = getBiomeLocal(
+                        popPos.getX() - sx,
                         popPos.getY(),
                         popPos.getZ() - sz,
                         random,
                         layerHeight,
                         world,
-                        popPos);
+                        popPos
+                );
                 if (biome != null) {
                     biome.genLavaBuildings(world, popPos, random, MAX_HEIGHT, context);
                 }
@@ -261,10 +275,12 @@ public class BNWorldGenerator {
         return layerHeight;
     }
 
-    private void makeLocalBiomes(WorldGenLevel world,
-                                 int sx,
-                                 int sz,
-                                 FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+    private void makeLocalBiomes(
+            WorldGenLevel world,
+            int sx,
+            int sz,
+            FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext
+    ) {
         final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
         int layerHeight = getLayerHeight(MAX_HEIGHT);
         MC_BIOMES.clear();
@@ -291,21 +307,25 @@ public class BNWorldGenerator {
         }
     }
 
-    public void prePopulate(WorldGenLevel world,
-                            int sx,
-                            int sz,
-                            FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
+    public void prePopulate(
+            WorldGenLevel world,
+            int sx,
+            int sz,
+            FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext
+    ) {
         context.clear();
         makeLocalBiomes(world, sx, sz, featurePlaceContext);
     }
 
-    private NetherBiome getBiomeLocal(int x,
-                                      int y,
-                                      int z,
-                                      RandomSource random,
-                                      int layerHeight,
-                                      WorldGenLevel world,
-                                      BlockPos pos) {
+    private NetherBiome getBiomeLocal(
+            int x,
+            int y,
+            int z,
+            RandomSource random,
+            int layerHeight,
+            WorldGenLevel world,
+            BlockPos pos
+    ) {
 //		final int ppx = (int) Math.round(x + random.nextGaussian() * 0.5) >> 1;
 //		final int pz = (int) Math.round(z + random.nextGaussian() * 0.5) >> 1;
         final int px = Math.round(x + (random.nextFloat() - 0.5f) * 2 * ditherScale);

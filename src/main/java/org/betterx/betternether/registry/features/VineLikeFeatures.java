@@ -1,15 +1,5 @@
 package org.betterx.betternether.registry.features;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.util.valueproviders.ClampedNormalInt;
-import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
-
 import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
@@ -26,6 +16,16 @@ import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.world.features.ScatterFeatureConfigs;
 import org.betterx.betternether.world.features.TwistedVinesFeature;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.valueproviders.ClampedNormalInt;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 
 public class VineLikeFeatures {
     public static final BCLFeature GOLDEN_VINE
@@ -144,12 +144,18 @@ public class VineLikeFeatures {
             BetterNether.makeID("neon_equisetum"), false, false,
             ScatterFeatureConfig
                     .startExtendBottom()
-                    .block(NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(BlockProperties.TRIPLE_SHAPE,
-                            BlockProperties.TripleShape.MIDDLE))
-                    .tipBlock(NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(BlockProperties.TRIPLE_SHAPE,
-                            BlockProperties.TripleShape.BOTTOM))
-                    .bottomBlock(NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(BlockProperties.TRIPLE_SHAPE,
-                            BlockProperties.TripleShape.TOP))
+                    .block(NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(
+                            BlockProperties.TRIPLE_SHAPE,
+                            BlockProperties.TripleShape.MIDDLE
+                    ))
+                    .tipBlock(NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(
+                            BlockProperties.TRIPLE_SHAPE,
+                            BlockProperties.TripleShape.BOTTOM
+                    ))
+                    .bottomBlock(NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(
+                            BlockProperties.TRIPLE_SHAPE,
+                            BlockProperties.TripleShape.TOP
+                    ))
                     .heightRange(3, 21)
                     .spread(2, 0.75f, ClampedNormalInt.of(4, 1.2f, 3, 12)),
             BCLFeature.SCATTER_EXTEND_BOTTOM
@@ -162,14 +168,20 @@ public class VineLikeFeatures {
                     .block(new WeightedStateProvider(SimpleWeightedRandomList
                             .<BlockState>builder()
                             .add(NetherBlocks.WHISPERING_GOURD_VINE.defaultBlockState()
-                                                                   .setValue(BlockWhisperingGourdVine.SHAPE,
-                                                                           BlockProperties.TripleShape.TOP), 5)
+                                                                   .setValue(
+                                                                           BlockWhisperingGourdVine.SHAPE,
+                                                                           BlockProperties.TripleShape.TOP
+                                                                   ), 5)
                             .add(NetherBlocks.WHISPERING_GOURD_VINE.defaultBlockState()
-                                                                   .setValue(BlockWhisperingGourdVine.SHAPE,
-                                                                           BlockProperties.TripleShape.MIDDLE), 5)))
+                                                                   .setValue(
+                                                                           BlockWhisperingGourdVine.SHAPE,
+                                                                           BlockProperties.TripleShape.MIDDLE
+                                                                   ), 5)))
                     .bottomBlock(NetherBlocks.WHISPERING_GOURD_VINE.defaultBlockState()
-                                                                   .setValue(BlockWhisperingGourdVine.SHAPE,
-                                                                           BlockProperties.TripleShape.BOTTOM))
+                                                                   .setValue(
+                                                                           BlockWhisperingGourdVine.SHAPE,
+                                                                           BlockProperties.TripleShape.BOTTOM
+                                                                   ))
                     .heightRange(1, 5)
                     .spread(4, 0.8f, ClampedNormalInt.of(7, 1.2f, 3, 12))
     );
@@ -199,11 +211,13 @@ public class VineLikeFeatures {
             BetterNether.makeID("stalagmite_bone_cluster"), true, false,
             ScatterFeatureConfigs.WithSize.startWithSize()
                                           .block(NetherBlocks.BONE_STALACTITE)
-                                          .generateBaseBlock(NetherBlocks.BONE_BLOCK.defaultBlockState(),
+                                          .generateBaseBlock(
+                                                  NetherBlocks.BONE_BLOCK.defaultBlockState(),
                                                   0.95f,
                                                   0.3f,
                                                   0.75f,
-                                                  0.5f)
+                                                  0.5f
+                                          )
                                           .heightRange(2, 7)
                                           .spread(3, 0f, UniformInt.of(3, 16))
     );
@@ -277,16 +291,19 @@ public class VineLikeFeatures {
             BCLFeatureBuilder
                     .start(BetterNether.makeID("twisted_vines"), new TwistedVinesFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-                    .buildAndRegister(NaturalTreeConfiguration.naturalLarge()));
+                    .buildAndRegister(NaturalTreeConfiguration.naturalLarge())
+    );
 
 
     public static void ensureStaticInitialization() {
     }
 
-    static BCLFeature sizedCluster(ResourceLocation location,
-                                   boolean onFloor,
-                                   boolean sparse,
-                                   ScatterFeatureConfig.Builder builder) {
+    static BCLFeature sizedCluster(
+            ResourceLocation location,
+            boolean onFloor,
+            boolean sparse,
+            ScatterFeatureConfig.Builder builder
+    ) {
         return FastFeatures.scatter(location, onFloor, sparse, builder, NetherFeatures.SCATTER_WITH_SIZE);
     }
 }

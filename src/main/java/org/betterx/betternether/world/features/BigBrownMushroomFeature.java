@@ -1,17 +1,17 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BNBlockProperties;
+import org.betterx.betternether.blocks.BlockBrownLargeMushroom;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BNBlockProperties;
-import org.betterx.betternether.blocks.BlockBrownLargeMushroom;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class BigBrownMushroomFeature extends ContextFeature<NoneFeatureConfiguration> {
     private static final BlockState MIDDLE = NetherBlocks.BROWN_LARGE_MUSHROOM
@@ -53,13 +53,16 @@ public class BigBrownMushroomFeature extends ContextFeature<NoneFeatureConfigura
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor level,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
-        int size = org.betterx.bclib.util.BlocksHelper.blockCount(level,
+    protected boolean place(
+            ServerLevelAccessor level,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
+        int size = org.betterx.bclib.util.BlocksHelper.blockCount(
+                level,
                 pos,
                 Direction.UP,
                 2 + random.nextInt(3),

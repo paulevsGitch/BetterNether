@@ -45,7 +45,8 @@ public class BlockGeyser extends BlockBaseNotFull {
                     pos.getZ() + 0.4 + random.nextDouble() * 0.1,
                     random.nextDouble() * 0.02 - 0.01,
                     0.05D + random.nextDouble() * 0.05,
-                    random.nextDouble() * 0.02 - 0.01);
+                    random.nextDouble() * 0.02 - 0.01
+            );
 
             world.addParticle(
                     ParticleTypes.LARGE_SMOKE,
@@ -54,7 +55,8 @@ public class BlockGeyser extends BlockBaseNotFull {
                     pos.getZ() + 0.4 + random.nextDouble() * 0.1,
                     random.nextDouble() * 0.02 - 0.01,
                     0.05D + random.nextDouble() * 0.05,
-                    random.nextDouble() * 0.02 - 0.01);
+                    random.nextDouble() * 0.02 - 0.01
+            );
 
             world.addParticle(
                     ParticleTypes.LAVA,
@@ -63,38 +65,45 @@ public class BlockGeyser extends BlockBaseNotFull {
                     pos.getZ() + 0.4 + random.nextDouble() * 0.1,
                     random.nextDouble() * 0.02 - 0.01,
                     0.05D + random.nextDouble() * 0.05,
-                    random.nextDouble() * 0.02 - 0.01);
+                    random.nextDouble() * 0.02 - 0.01
+            );
         }
 
         if (random.nextDouble() < 0.1D) {
-            world.playLocalSound(pos.getX() + 0.5,
-                                 pos.getY(),
-                                 pos.getZ() + 0.5,
-                                 SoundEvents.FIRE_AMBIENT,
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F,
-                                 false);
+            world.playLocalSound(
+                    pos.getX() + 0.5,
+                    pos.getY(),
+                    pos.getZ() + 0.5,
+                    SoundEvents.FIRE_AMBIENT,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    1.0F,
+                    false
+            );
         }
         if (random.nextDouble() < 0.1D) {
-            world.playLocalSound(pos.getX() + 0.5,
-                                 pos.getY(),
-                                 pos.getZ() + 0.5,
-                                 SoundEvents.FURNACE_FIRE_CRACKLE,
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F,
-                                 false);
+            world.playLocalSound(
+                    pos.getX() + 0.5,
+                    pos.getY(),
+                    pos.getZ() + 0.5,
+                    SoundEvents.FURNACE_FIRE_CRACKLE,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    1.0F,
+                    false
+            );
         }
         if (random.nextDouble() < 0.1D) {
-            world.playLocalSound(pos.getX() + 0.5,
-                                 pos.getY(),
-                                 pos.getZ() + 0.5,
-                                 SoundEvents.LAVA_POP,
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F,
-                                 false);
+            world.playLocalSound(
+                    pos.getX() + 0.5,
+                    pos.getY(),
+                    pos.getZ() + 0.5,
+                    SoundEvents.LAVA_POP,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    1.0F,
+                    false
+            );
         }
     }
 
@@ -114,12 +123,14 @@ public class BlockGeyser extends BlockBaseNotFull {
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (!canSurvive(state, world, pos))
             return Blocks.AIR.defaultBlockState();
         else

@@ -1,5 +1,15 @@
 package org.betterx.betternether.world.structures.plants;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.blocks.BlockPlantWall;
+import org.betterx.betternether.noise.OpenSimplexNoise;
+import org.betterx.betternether.registry.NetherBiomes;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.features.AnchorTreeFeature;
+import org.betterx.betternether.world.structures.IStructure;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -11,16 +21,6 @@ import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockPlantWall;
-import org.betterx.betternether.noise.OpenSimplexNoise;
-import org.betterx.betternether.registry.NetherBiomes;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.features.AnchorTreeFeature;
-import org.betterx.betternether.world.structures.IStructure;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +28,13 @@ public class LegacyStructureAnchorTree implements IStructure {
     protected static final OpenSimplexNoise NOISE = new OpenSimplexNoise(2145);
 
     @Override
-    public void generate(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         final int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
+    public void generate(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         if (canGenerate(pos))
             grow(world, pos, pos.below(BlocksHelper.downRay(world, pos, MAX_HEIGHT)), random, MAX_HEIGHT, context);
     }
@@ -41,12 +43,14 @@ public class LegacyStructureAnchorTree implements IStructure {
         return (pos.getX() & 15) == 7 && (pos.getZ() & 15) == 7;
     }
 
-    private void grow(ServerLevelAccessor level,
-                      BlockPos up,
-                      BlockPos down,
-                      RandomSource random,
-                      final int MAX_HEIGHT,
-                      StructureGeneratorThreadContext context) {
+    private void grow(
+            ServerLevelAccessor level,
+            BlockPos up,
+            BlockPos down,
+            RandomSource random,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
         final int HEIGHT_64;
         final int HEIGHT_45;
@@ -88,10 +92,12 @@ public class LegacyStructureAnchorTree implements IStructure {
         BlockState state;
         int offset = random.nextInt(4);
         final int minBuildHeight = level.getMinBuildHeight() + 1;
-        final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(level,
+        final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(
+                level,
                 up,
                 minBuildHeight,
-                MAX_HEIGHT - 2);
+                MAX_HEIGHT - 2
+        );
         for (BlockPos bpos : context.BLOCKS) {
             if (!blockBox.isInside(bpos)) continue;
             if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.getMaterial().isReplaceable())
@@ -102,9 +108,11 @@ public class LegacyStructureAnchorTree implements IStructure {
             else
                 BlocksHelper.setWithUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
-            if (bpos.getY() > HEIGHT_45 && bpos.getY() < HEIGHT_90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1,
+            if (bpos.getY() > HEIGHT_45 && bpos.getY() < HEIGHT_90 && (bpos.getY() & 3) == offset && NOISE.eval(
+                    bpos.getX() * 0.1,
                     bpos.getY() * 0.1,
-                    bpos.getZ() * 0.1) > 0) {
+                    bpos.getZ() * 0.1
+            ) > 0) {
                 if (random.nextInt((int) (32 * scale_factor)) == 0 && !context.BLOCKS.contains(bpos.north()))
                     makeMushroom(level, bpos.north(), random.nextDouble() * 3 + 1.5, blockBox);
                 if (random.nextInt((int) (32 * scale_factor)) == 0 && !context.BLOCKS.contains(bpos.south()))
@@ -142,14 +150,16 @@ public class LegacyStructureAnchorTree implements IStructure {
         }
     }
 
-    private void buildBigCircle(BlockPos pos,
-                                int length,
-                                int count,
-                                int iteration,
-                                double angle,
-                                double size,
-                                RandomSource random,
-                                StructureGeneratorThreadContext context) {
+    private void buildBigCircle(
+            BlockPos pos,
+            int length,
+            int count,
+            int iteration,
+            double angle,
+            double size,
+            RandomSource random,
+            StructureGeneratorThreadContext context
+    ) {
         if (iteration < 0) return;
         List<List<BlockPos>> lines = circleLinesEnds(pos, angle, count, length, Math.abs(length) * 0.7, random);
         double sizeSmall = size * 0.8;
@@ -230,12 +240,14 @@ public class LegacyStructureAnchorTree implements IStructure {
         }
     }
 
-    private List<List<BlockPos>> circleLinesEnds(BlockPos pos,
-                                                 double startAngle,
-                                                 int count,
-                                                 int height,
-                                                 double radius,
-                                                 RandomSource random) {
+    private List<List<BlockPos>> circleLinesEnds(
+            BlockPos pos,
+            double startAngle,
+            int count,
+            int height,
+            double radius,
+            RandomSource random
+    ) {
         List<List<BlockPos>> result = new ArrayList<>(count);
         double angle = Math.PI * 2 / count;
         for (int i = 0; i < count; i++) {

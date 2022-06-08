@@ -1,5 +1,10 @@
 package org.betterx.betternether.enchantments;
 
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.items.NetherArmor;
+import org.betterx.betternether.items.materials.BNToolMaterial;
+import org.betterx.betternether.registry.NetherEnchantments;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -22,11 +27,6 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.items.NetherArmor;
-import org.betterx.betternether.items.materials.BNToolMaterial;
-import org.betterx.betternether.registry.NetherEnchantments;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,16 +80,20 @@ public class RubyFire extends Enchantment {
     @Override
     public void doPostHurt(LivingEntity player, Entity entity, int i) {
         final RandomSource random = player.getRandom();
-        Map.Entry<EquipmentSlot, ItemStack> entry = EnchantmentHelper.getRandomItemWith(NetherEnchantments.RUBY_FIRE,
-                                                                                        player);
+        Map.Entry<EquipmentSlot, ItemStack> entry = EnchantmentHelper.getRandomItemWith(
+                NetherEnchantments.RUBY_FIRE,
+                player
+        );
         if (shouldHit(i, random)) {
             if (entity != null) {
                 entity.hurt(DamageSource.indirectMagic(entity, entity), getDamage(i, random));
                 entity.setRemainingFireTicks(100 + 50 * random.nextInt(3));
                 if (entity instanceof LivingEntity living) {
-                    living.knockback(1 + MHelper.nextFloat(random, 2.0f),
-                                     player.getX() - living.getX(),
-                                     player.getZ() - living.getZ());
+                    living.knockback(
+                            1 + MHelper.nextFloat(random, 2.0f),
+                            player.getX() - living.getX(),
+                            player.getZ() - living.getZ()
+                    );
                 }
             }
 
@@ -114,11 +118,13 @@ public class RubyFire extends Enchantment {
     private static final Map<Item, BlastingRecipe> FIRE_CONVERSIONS = new HashMap<>();
     public static final ThreadLocal<List<ItemStack>> convertedDrops = ThreadLocal.withInitial(ArrayList::new);
 
-    public static boolean getDrops(BlockState brokenBlock,
-                                   ServerLevel level,
-                                   BlockPos blockPos,
-                                   Player player,
-                                   ItemStack breakingItem) {
+    public static boolean getDrops(
+            BlockState brokenBlock,
+            ServerLevel level,
+            BlockPos blockPos,
+            Player player,
+            ItemStack breakingItem
+    ) {
         final int fireLevel = EnchantmentHelper.getItemEnchantmentLevel(NetherEnchantments.RUBY_FIRE, breakingItem);
         if (fireLevel > 0) {
             if (FIRE_CONVERSIONS.isEmpty()) buildConversionTable(level);

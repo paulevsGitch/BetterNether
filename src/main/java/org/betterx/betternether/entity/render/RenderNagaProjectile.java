@@ -1,5 +1,13 @@
 package org.betterx.betternether.entity.render;
 
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.entity.EntityNagaProjectile;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Matrix3f;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -7,17 +15,11 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.entity.EntityNagaProjectile;
-
 public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BetterNether.MOD_ID,
-                                                                         "textures/entity/naga_projectile.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(
+            BetterNether.MOD_ID,
+            "textures/entity/naga_projectile.png"
+    );
     private static final RenderType LAYER = RenderType.entityCutoutNoCull(TEXTURE);
 
     public RenderNagaProjectile(EntityRendererProvider.Context context) {
@@ -30,12 +32,14 @@ public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile> {
     }
 
     @Override
-    public void render(EntityNagaProjectile dragonFireballEntity,
-                       float f,
-                       float g,
-                       PoseStack matrixStack,
-                       MultiBufferSource vertexConsumerProvider,
-                       int i) {
+    public void render(
+            EntityNagaProjectile dragonFireballEntity,
+            float f,
+            float g,
+            PoseStack matrixStack,
+            MultiBufferSource vertexConsumerProvider,
+            int i
+    ) {
         int frame = (int) (System.currentTimeMillis() / 150) & 3;
         float start = frame * 0.25F;
         float end = start + 0.25F;
@@ -55,14 +59,16 @@ public class RenderNagaProjectile extends EntityRenderer<EntityNagaProjectile> {
         super.render(dragonFireballEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
 
-    private static void vertex(VertexConsumer vertexConsumer,
-                               Matrix4f matrix4f,
-                               Matrix3f matrix3f,
-                               int i,
-                               float f,
-                               int j,
-                               float u,
-                               float v) {
+    private static void vertex(
+            VertexConsumer vertexConsumer,
+            Matrix4f matrix4f,
+            Matrix3f matrix3f,
+            int i,
+            float f,
+            int j,
+            float u,
+            float v
+    ) {
         vertexConsumer.vertex(matrix4f, f - 0.5F, (float) j - 0.25F, 0.0F)
                       .color(255, 255, 255, 255)
                       .uv(u, v)

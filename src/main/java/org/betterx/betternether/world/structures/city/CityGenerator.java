@@ -1,11 +1,11 @@
 package org.betterx.betternether.world.structures.city;
 
+import org.betterx.betternether.world.structures.city.palette.CityPalette;
+import org.betterx.betternether.world.structures.piece.CityPiece;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Rotation;
-
-import org.betterx.betternether.world.structures.city.palette.CityPalette;
-import org.betterx.betternether.world.structures.piece.CityPiece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +83,13 @@ public class CityGenerator {
         buildings.add(building.getRotated(Rotation.COUNTERCLOCKWISE_90));
     }
 
-    private void placeCenterBuilding(BlockPos pos,
-                                     StructureCityBuilding building,
-                                     ArrayList<CityPiece> city,
-                                     RandomSource random,
-                                     CityPalette palette) {
+    private void placeCenterBuilding(
+            BlockPos pos,
+            StructureCityBuilding building,
+            ArrayList<CityPiece> city,
+            RandomSource random,
+            CityPalette palette
+    ) {
         BoundingBox2D bb = building.getBoungingBox().offset(pos);
         bounds.add(bb);
         city.add(new CityPiece(building, pos.offset(0, building.getYOffset(), 0), random.nextInt(), palette));

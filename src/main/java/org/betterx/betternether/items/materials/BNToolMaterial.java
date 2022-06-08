@@ -1,11 +1,11 @@
 package org.betterx.betternether.items.materials;
 
+import org.betterx.betternether.registry.NetherItems;
+
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-
-import org.betterx.betternether.registry.NetherItems;
 
 public enum BNToolMaterial implements Tier {
     CINCINNASITE(2, 512, 6F, 2.0F, 16, NetherItems.CINCINNASITE_INGOT),

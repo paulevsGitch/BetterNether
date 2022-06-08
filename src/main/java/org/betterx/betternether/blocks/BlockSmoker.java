@@ -1,5 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
+import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -19,10 +23,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-
-import org.betterx.bclib.blocks.BlockProperties.TripleShape;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 
 public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGround {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
@@ -51,12 +51,14 @@ public class BlockSmoker extends BlockBaseNotFull implements SurvivesOnNetherGro
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (!canSurvive(state, world, pos)) {
             return Blocks.AIR.defaultBlockState();
         }

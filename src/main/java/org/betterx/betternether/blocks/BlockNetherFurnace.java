@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.blockentities.BlockEntityFurnace;
+import org.betterx.betternether.registry.BlockEntitiesRegistry;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,9 +27,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.betternether.blockentities.BlockEntityFurnace;
-import org.betterx.betternether.registry.BlockEntitiesRegistry;
-
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -47,9 +47,11 @@ public class BlockNetherFurnace extends AbstractFurnaceBlock {
     }
 
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world,
-                                                                  BlockState state,
-                                                                  BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+            Level world,
+            BlockState state,
+            BlockEntityType<T> type
+    ) {
         return createFurnaceTicker(world, type, BlockEntitiesRegistry.NETHERRACK_FURNACE);
     }
 

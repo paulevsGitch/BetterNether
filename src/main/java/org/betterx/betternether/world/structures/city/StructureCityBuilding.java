@@ -1,5 +1,8 @@
 package org.betterx.betternether.world.structures.city;
 
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.world.structures.NetherStructureNBT;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -15,9 +18,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
-
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.world.structures.NetherStructureNBT;
 
 import java.util.List;
 
@@ -50,10 +50,12 @@ public class StructureCityBuilding extends NetherStructureNBT {
     private void init() {
         Vec3i size = structure.getSize();
         bb = new BoundingBox2D(0, 0, size.getX(), size.getZ());
-        List<StructureBlockInfo> map = structure.filterBlocks(BlockPos.ZERO,
-                                                              new StructurePlaceSettings(),
-                                                              Blocks.STRUCTURE_BLOCK,
-                                                              false);
+        List<StructureBlockInfo> map = structure.filterBlocks(
+                BlockPos.ZERO,
+                new StructurePlaceSettings(),
+                Blocks.STRUCTURE_BLOCK,
+                false
+        );
         ends = new BlockPos[map.size()];
         dirs = new Direction[map.size()];
         int i = 0;
@@ -96,17 +98,20 @@ public class StructureCityBuilding extends NetherStructureNBT {
         }
     }
 
-    public void placeInChunk(ServerLevelAccessor world,
-                             BlockPos pos,
-                             BoundingBox boundingBox,
-                             StructureProcessor paletteProcessor) {
+    public void placeInChunk(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            BoundingBox boundingBox,
+            StructureProcessor paletteProcessor
+    ) {
         BlockPos p = pos.offset(rotationOffset);
         structure.placeInWorld(world, p, p, new StructurePlaceSettings()
-                                       .setRotation(rotation)
-                                       .setMirror(mirror)
-                                       .setBoundingBox(boundingBox)
-                                       .addProcessor(paletteProcessor),
-                               world.getRandom(), Block.UPDATE_CLIENTS);
+                        .setRotation(rotation)
+                        .setMirror(mirror)
+                        .setBoundingBox(boundingBox)
+                        .addProcessor(paletteProcessor),
+                world.getRandom(), Block.UPDATE_CLIENTS
+        );
     }
 
     public BlockPos[] getEnds() {
@@ -190,10 +195,12 @@ public class StructureCityBuilding extends NetherStructureNBT {
      * BlockMatchRuleTest(Blocks.STRUCTURE_BLOCK), AlwaysTrueRuleTest.INSTANCE,
      * Blocks.AIR.getDefaultState() ) ) ); }
      */
-    
+
     public BoundingBox getBoundingBox(BlockPos pos) {
-        return structure.getBoundingBox(new StructurePlaceSettings().setRotation(this.rotation).setMirror(mirror),
-                                        pos.offset(rotationOffset));
+        return structure.getBoundingBox(
+                new StructurePlaceSettings().setRotation(this.rotation).setMirror(mirror),
+                pos.offset(rotationOffset)
+        );
     }
 
     @Override

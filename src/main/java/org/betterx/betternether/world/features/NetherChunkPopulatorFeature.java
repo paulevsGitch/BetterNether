@@ -1,12 +1,12 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.bclib.api.v2.levelgen.features.features.DefaultFeature;
+import org.betterx.betternether.world.BNWorldGenerator;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
-import org.betterx.bclib.api.v2.levelgen.features.features.DefaultFeature;
-import org.betterx.betternether.world.BNWorldGenerator;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

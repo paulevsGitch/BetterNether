@@ -1,5 +1,10 @@
 package org.betterx.betternether.entity.render;
 
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.entity.EntitySkull;
+import org.betterx.betternether.entity.model.ModelSkull;
+import org.betterx.betternether.registry.EntityRenderRegistry;
+
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -10,14 +15,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.entity.EntitySkull;
-import org.betterx.betternether.entity.model.ModelSkull;
-import org.betterx.betternether.registry.EntityRenderRegistry;
-
 public class RenderSkull extends MobRenderer<EntitySkull, AgeableListModel<EntitySkull>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BetterNether.MOD_ID,
-                                                                         "textures/entity/skull.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(
+            BetterNether.MOD_ID,
+            "textures/entity/skull.png"
+    );
 
     public RenderSkull(EntityRendererProvider.Context ctx) {
         super(ctx, new ModelSkull(ctx.bakeLayer(EntityRenderRegistry.SKULL_MODEL)), 0.7F);
@@ -30,8 +32,10 @@ public class RenderSkull extends MobRenderer<EntitySkull, AgeableListModel<Entit
     }
 
     static class GlowFeatureRenderer extends EyesLayer<EntitySkull, AgeableListModel<EntitySkull>> {
-        private static final RenderType SKIN = RenderType.entityTranslucent(new ResourceLocation(BetterNether.MOD_ID,
-                                                                                                 "textures/entity/skull_glow.png"));
+        private static final RenderType SKIN = RenderType.entityTranslucent(new ResourceLocation(
+                BetterNether.MOD_ID,
+                "textures/entity/skull_glow.png"
+        ));
 
         public GlowFeatureRenderer(RenderLayerParent<EntitySkull, AgeableListModel<EntitySkull>> featureRendererContext) {
             super(featureRendererContext);

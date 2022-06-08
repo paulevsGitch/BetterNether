@@ -1,15 +1,15 @@
 package org.betterx.betternether.blocks.complex;
 
-import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-
 import org.betterx.betternether.blocks.BNGlass;
 import org.betterx.betternether.blocks.BNPane;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.NetherBlocks;
+
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 
 public class ColoredGlassMaterial {
     public final Block white;

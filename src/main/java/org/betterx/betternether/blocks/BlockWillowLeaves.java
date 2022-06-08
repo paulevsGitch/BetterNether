@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.BlocksHelper;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -20,8 +22,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-
-import org.betterx.betternether.BlocksHelper;
 
 public class BlockWillowLeaves extends BNLeaves {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -63,12 +63,14 @@ public class BlockWillowLeaves extends BNLeaves {
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (state.getValue(NATURAL) && world.isEmptyBlock(pos.relative(state.getValue(FACING).getOpposite())))
             return Blocks.AIR.defaultBlockState();
         else

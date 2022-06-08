@@ -1,5 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableHoe;
+import org.betterx.bclib.interfaces.tools.AddMineableShears;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.interfaces.SurvivesOnGravel;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,10 +28,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
-import org.betterx.bclib.interfaces.tools.AddMineableHoe;
-import org.betterx.bclib.interfaces.tools.AddMineableShears;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.interfaces.SurvivesOnGravel;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
 
                                  .dynamicShape()
                                  .offsetType(Block.OffsetType.XYZ)
-             );
+        );
     }
 
     @Override
@@ -59,12 +60,14 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (canSurvive(state, world, pos))
             return state;
         else

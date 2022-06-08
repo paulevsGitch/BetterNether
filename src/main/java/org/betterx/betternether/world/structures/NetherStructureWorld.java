@@ -1,13 +1,14 @@
 package org.betterx.betternether.world.structures;
 
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
+import org.betterx.betternether.BetterNether;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 import com.google.common.collect.Maps;
-import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
-import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
-import org.betterx.betternether.BetterNether;
 
 import java.util.Map;
 
@@ -30,12 +31,15 @@ public class NetherStructureWorld extends StructureWorldNBT implements IStructur
     }
 
     @Override
-    public void generate(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
-        generateIfPlaceable(world,
+    public void generate(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
+        generateIfPlaceable(
+                world,
                 pos,
                 random
         );

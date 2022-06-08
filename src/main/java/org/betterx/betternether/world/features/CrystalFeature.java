@@ -1,5 +1,13 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.noise.OpenSimplexNoise;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -9,14 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.dimension.DimensionDefaults;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.phys.Vec3;
-
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.noise.OpenSimplexNoise;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class CrystalFeature extends NetherSurfaceFeature {
     public static BCLFeature createAndRegister() {
@@ -42,11 +42,13 @@ public class CrystalFeature extends NetherSurfaceFeature {
     private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);
 
     @Override
-    protected void generate(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            final int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected void generate(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         final BlockPos.MutableBlockPos POS = context.POS;
         final float scale_factor = ((MAX_HEIGHT / 128.0f) - 1) * 0.5f + 1;
 

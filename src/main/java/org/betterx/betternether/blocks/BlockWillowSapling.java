@@ -1,17 +1,17 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.FeatureSaplingBlock;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
+import org.betterx.betternether.registry.features.TreeFeatures;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.betterx.bclib.blocks.FeatureSaplingBlock;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
-import org.betterx.betternether.registry.features.TreeFeatures;
 
 
 public class BlockWillowSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherGround {

@@ -1,5 +1,7 @@
 package org.betterx.betternether.items.materials;
 
+import org.betterx.betternether.registry.NetherItems;
+
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -7,25 +9,27 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
-import org.betterx.betternether.registry.NetherItems;
-
 public enum BNArmorMaterial implements ArmorMaterial {
-    CINCINNASITE("cincinnasite",
-                 12,
-                 new int[]{3, 5, 6, 3},
-                 20,
-                 SoundEvents.ARMOR_EQUIP_GOLD,
-                 1.0F,
-                 0.05f,
-                 NetherItems.CINCINNASITE_INGOT),
-    NETHER_RUBY("nether_ruby",
-                30,
-                new int[]{3, 6, 8, 3},
-                25,
-                SoundEvents.ARMOR_EQUIP_NETHERITE,
-                2.4F,
-                0.2f,
-                NetherItems.NETHER_RUBY);
+    CINCINNASITE(
+            "cincinnasite",
+            12,
+            new int[]{3, 5, 6, 3},
+            20,
+            SoundEvents.ARMOR_EQUIP_GOLD,
+            1.0F,
+            0.05f,
+            NetherItems.CINCINNASITE_INGOT
+    ),
+    NETHER_RUBY(
+            "nether_ruby",
+            30,
+            new int[]{3, 6, 8, 3},
+            25,
+            SoundEvents.ARMOR_EQUIP_NETHERITE,
+            2.4F,
+            0.2f,
+            NetherItems.NETHER_RUBY
+    );
 	
 	/* Vanilla Settings
 	LEATHER("leather", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.of(Items.LEATHER)),
@@ -47,14 +51,16 @@ public enum BNArmorMaterial implements ArmorMaterial {
     private final float knockbackResistance;
     private final int[] protection;
 
-    BNArmorMaterial(String name,
-                    int durabilityMultiplier,
-                    int[] protection,
-                    int enchantLevel,
-                    SoundEvent equipSound,
-                    float toughness,
-                    float knockback,
-                    ItemLike repairItem) {
+    BNArmorMaterial(
+            String name,
+            int durabilityMultiplier,
+            int[] protection,
+            int enchantLevel,
+            SoundEvent equipSound,
+            float toughness,
+            float knockback,
+            ItemLike repairItem
+    ) {
         this.name = name;
         this.multiplier = durabilityMultiplier;
         this.enchantLevel = enchantLevel;

@@ -1,11 +1,5 @@
 package org.betterx.betternether.blocks.complex;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
-
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
 import org.betterx.bclib.api.v2.tag.NamedBlockTags;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
@@ -14,6 +8,12 @@ import org.betterx.betternether.blocks.BlockStalagnate;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.BlockStem;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.MaterialColor;
+
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class StalagnateMaterial extends RoofMaterial {
     public final static String BLOCK_BOWL = "bowl";
@@ -35,14 +35,18 @@ public class StalagnateMaterial extends RoofMaterial {
         super.initDefault(blockSettings, itemSettings);
 
         addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) -> new BlockStem(woodColor)));
-        addBlockEntry(new BlockEntry(BLOCK_TRUNK,
-                                     false,
-                                     (complexMaterial, settings) -> new BlockStalagnate()).setBlockTags(NamedBlockTags.CLIMBABLE));
+        addBlockEntry(new BlockEntry(
+                BLOCK_TRUNK,
+                false,
+                (complexMaterial, settings) -> new BlockStalagnate()
+        ).setBlockTags(NamedBlockTags.CLIMBABLE));
         addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> new BlockStalagnateSeed()));
-        addBlockEntry(new BlockEntry(BLOCK_BOWL,
-                                     false,
-                                     (complexMaterial, settings) -> new BlockStalagnateBowl(getBlock(
-                                             BLOCK_OPTIONAL_TRUNK))));
+        addBlockEntry(new BlockEntry(
+                BLOCK_BOWL,
+                false,
+                (complexMaterial, settings) -> new BlockStalagnateBowl(getBlock(
+                        BLOCK_OPTIONAL_TRUNK))
+        ));
     }
 
     @Override

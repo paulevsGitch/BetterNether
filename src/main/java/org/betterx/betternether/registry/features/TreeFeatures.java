@@ -1,24 +1,24 @@
 package org.betterx.betternether.registry.features;
 
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
+import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.features.*;
+import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
+
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
-import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
-import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.features.*;
-import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 
 import java.util.List;
 
@@ -150,14 +150,16 @@ public class TreeFeatures {
             .buildAndRegister();
 
     public static final BCLFeature MUSHROOM_FIR
-            = FastFeatures.patch(BetterNether.makeID("mushroom_fir"),
+            = FastFeatures.patch(
+            BetterNether.makeID("mushroom_fir"),
             2,
             2,
             4,
             BCLFeatureBuilder
                     .start(BetterNether.makeID("mushroom_fir_single"), new MushroomFirFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
-                    .buildAndRegister());
+                    .buildAndRegister()
+    );
 
     //TODO: 1.19 make sure we are placed over mycelium
     public static final BCLFeature GIANT_MOLD
@@ -171,14 +173,16 @@ public class TreeFeatures {
     );
 
     public static final BCLFeature RUBEUS
-            = FastFeatures.patch(BetterNether.makeID("rubeus_tree"),
+            = FastFeatures.patch(
+            BetterNether.makeID("rubeus_tree"),
             2,
             2,
             4,
             BCLFeatureBuilder
                     .start(BetterNether.makeID("rubeus_tree"), new RubeusTreeFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-                    .buildAndRegister(NaturalTreeConfiguration.natural()));
+                    .buildAndRegister(NaturalTreeConfiguration.natural())
+    );
 
     public static final BCLFeature WILLOW
             = FastFeatures.patch(BetterNether.makeID("willow_tree"),
@@ -186,7 +190,8 @@ public class TreeFeatures {
             BCLFeatureBuilder
                     .start(BetterNether.makeID("willow_tree"), new WillowTreeFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-                    .buildAndRegister());
+                    .buildAndRegister()
+    );
 
     public static final BCLFeature OLD_WILLOW
             = FastFeatures.patch(BetterNether.makeID("old_willow_tree"),
@@ -194,7 +199,8 @@ public class TreeFeatures {
             BCLFeatureBuilder
                     .start(BetterNether.makeID("old_willow_tree"), new OldWillowTree())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-                    .buildAndRegister(NaturalTreeConfiguration.naturalLarge()));
+                    .buildAndRegister(NaturalTreeConfiguration.naturalLarge())
+    );
 
     public static final BCLFeature WART
             = FastFeatures.patch(BetterNether.makeID("wart_tree"),
@@ -202,7 +208,8 @@ public class TreeFeatures {
             BCLFeatureBuilder
                     .start(BetterNether.makeID("wart_tree"), new WartTreeFeature())
                     .isAbove(BlockPredicate.matchesBlocks(Blocks.SOUL_SAND))
-                    .buildAndRegister(NaturalTreeConfiguration.natural()));
+                    .buildAndRegister(NaturalTreeConfiguration.natural())
+    );
 
     public static final BCLFeature SOUL_LILY
             = FastFeatures.patch(BetterNether.makeID("soul_lily"),
@@ -210,7 +217,8 @@ public class TreeFeatures {
             BCLFeatureBuilder
                     .start(BetterNether.makeID("soul_lily"), new SoulLilyFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.SOUL_GROUND))
-                    .buildAndRegister());
+                    .buildAndRegister()
+    );
 
     public static final BCLFeature ANCHOR_TREE
             = FastFeatures.patch(BetterNether.makeID("anchor_tree"),
@@ -221,7 +229,8 @@ public class TreeFeatures {
                     .findSolidCeil(4)
                     .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                     .isUnder(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-                    .buildAndRegister());
+                    .buildAndRegister()
+    );
 
     public static final BCLFeature ANCHOR_TREE_ROOT = BCLFeatureBuilder
             .start(BetterNether.makeID("anchor_tree_root"), new AnchorTreeRootFeature())
@@ -245,12 +254,15 @@ public class TreeFeatures {
                     .onceEvery(3)
                     .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                     .isUnder(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-                    .buildAndRegister());
+                    .buildAndRegister()
+    );
 
-    static StructureWorldNBT cfg(ResourceLocation location,
-                                 int offsetY,
-                                 StructurePlacementType type,
-                                 float chance) {
+    static StructureWorldNBT cfg(
+            ResourceLocation location,
+            int offsetY,
+            StructurePlacementType type,
+            float chance
+    ) {
         return TemplateFeatureConfig.cfg(location, offsetY, type, chance);
     }
 

@@ -40,11 +40,13 @@ public class BlockStalactite extends BlockBaseNotFull {
     }
 
     @Override
-    public void setPlacedBy(Level world,
-                            BlockPos pos,
-                            BlockState state,
-                            @Nullable LivingEntity placer,
-                            ItemStack itemStack) {
+    public void setPlacedBy(
+            Level world,
+            BlockPos pos,
+            BlockState state,
+            @Nullable LivingEntity placer,
+            ItemStack itemStack
+    ) {
         final MutableBlockPos POS = new MutableBlockPos();
 
         if (world.getBlockState(pos.below()).getBlock() instanceof BlockStalactite) {
@@ -104,10 +106,12 @@ public class BlockStalactite extends BlockBaseNotFull {
     }
 
     private boolean canPlace(LevelReader world, BlockPos pos, Direction dir) {
-        return world.getBlockState(pos.relative(dir)).getBlock() instanceof BlockStalactite || canSupportCenter(world,
-                                                                                                                pos.relative(
-                                                                                                                        dir),
-                                                                                                                dir.getOpposite());
+        return world.getBlockState(pos.relative(dir)).getBlock() instanceof BlockStalactite || canSupportCenter(
+                world,
+                pos.relative(
+                        dir),
+                dir.getOpposite()
+        );
     }
 
     static {

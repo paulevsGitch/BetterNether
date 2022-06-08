@@ -1,13 +1,13 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.FeatureHangingSaplingBlock;
+import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
+import org.betterx.betternether.registry.features.TreeFeatures;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.betterx.bclib.blocks.FeatureHangingSaplingBlock;
-import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
-import org.betterx.betternether.registry.features.TreeFeatures;
 
 public class BlockAnchorTreeSapling extends FeatureHangingSaplingBlock implements BonemealableBlock, SurvivesOnNetherrack {
     public BlockAnchorTreeSapling() {

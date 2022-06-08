@@ -1,5 +1,8 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -9,9 +12,6 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 public class WartCapFeature extends ContextFeature<NoneFeatureConfiguration> {
     private static final BlockState INSIDE = Blocks.RED_MUSHROOM_BLOCK
@@ -31,14 +31,18 @@ public class WartCapFeature extends ContextFeature<NoneFeatureConfiguration> {
 
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
-        if (!isWall(world,
-                pos) || pos.getY() > (MAX_HEIGHT * 0.45) || pos.getY() < (MAX_HEIGHT * 0.25) || world.isEmptyBlock(
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
+        if (!isWall(
+                world,
+                pos
+        ) || pos.getY() > (MAX_HEIGHT * 0.45) || pos.getY() < (MAX_HEIGHT * 0.25) || world.isEmptyBlock(
                 pos.below(3)))
             return false;
 

@@ -1,5 +1,9 @@
 package org.betterx.betternether.entity.model;
 
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.entity.EntityJungleSkeleton;
+import org.betterx.betternether.mixin.client.TexturedModelDataMixin;
+
 import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -10,10 +14,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
-
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.entity.EntityJungleSkeleton;
-import org.betterx.betternether.mixin.client.TexturedModelDataMixin;
 
 public class ModelJungleSkeleton extends SkeletonModel<EntityJungleSkeleton> {
     private static final float ANGLE45 = (float) Math.PI * 0.25F;
@@ -31,23 +31,31 @@ public class ModelJungleSkeleton extends SkeletonModel<EntityJungleSkeleton> {
         for (int i = 0; i < 4; i++) {
             float angle = ANGLE45 + (i / 4F) * MHelper.PI2;
 
-            modelPartData_HEAD.addOrReplaceChild("leave_" + i,
-                                                 CubeListBuilder.create()
-                                                                .texOffs(24, 0)
-                                                                .addBox(-3.0F,
-                                                                        -8.0F,
-                                                                        0.0F,
-                                                                        6.0F,
-                                                                        8.0F,
-                                                                        0.0F),
-                                                 PartPose.offsetAndRotation((float) -Math.sin(angle),
-                                                                            -8,
-                                                                            (float) -Math.cos(angle),
-                                                                            MHelper.randRange(BOUND_MIN,
-                                                                                              BOUND_MAX,
-                                                                                              RANDOM),
-                                                                            angle,
-                                                                            0));
+            modelPartData_HEAD.addOrReplaceChild(
+                    "leave_" + i,
+                    CubeListBuilder.create()
+                                   .texOffs(24, 0)
+                                   .addBox(
+                                           -3.0F,
+                                           -8.0F,
+                                           0.0F,
+                                           6.0F,
+                                           8.0F,
+                                           0.0F
+                                   ),
+                    PartPose.offsetAndRotation(
+                            (float) -Math.sin(angle),
+                            -8,
+                            (float) -Math.cos(angle),
+                            MHelper.randRange(
+                                    BOUND_MIN,
+                                    BOUND_MAX,
+                                    RANDOM
+                            ),
+                            angle,
+                            0
+                    )
+            );
 			/*ModelPart leaf = new ModelPart(this, 24, 0);
 			leaf.setPivot((float) -Math.sin(angle), -8, (float) -Math.cos(angle));
 			leaf.addCuboid(-3.0F, -8.0F, 0.0F, 6.0F, 8.0F, 0.0F);

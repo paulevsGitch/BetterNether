@@ -1,5 +1,11 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.NetherItems;
+import org.betterx.betternether.world.features.DeferedSeedBlock;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -24,11 +30,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
-import org.betterx.bclib.blocks.BlockProperties.TripleShape;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.registry.NetherItems;
-import org.betterx.betternether.world.features.DeferedSeedBlock;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -91,12 +92,14 @@ public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlo
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         return canSurvive(state, world, pos) && (world.getBlockState(pos.below()).getBlock() == this || state.getValue(
                 SHAPE) == TripleShape.BOTTOM) ? state : Blocks.AIR.defaultBlockState();
     }
@@ -104,8 +107,10 @@ public class BlockLumabusVine extends BlockBaseNotFull implements DeferedSeedBlo
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         if (state.getValue(SHAPE) == TripleShape.BOTTOM) {
-            return Lists.newArrayList(new ItemStack(seed, MHelper.randRange(1, 3, RANDOM)),
-                    new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(1, 3, RANDOM)));
+            return Lists.newArrayList(
+                    new ItemStack(seed, MHelper.randRange(1, 3, RANDOM)),
+                    new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(1, 3, RANDOM))
+            );
         }
         return Lists.newArrayList();
     }

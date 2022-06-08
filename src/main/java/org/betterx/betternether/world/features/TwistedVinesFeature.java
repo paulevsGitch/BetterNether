@@ -1,5 +1,8 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
@@ -8,21 +11,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-
 public class TwistedVinesFeature extends ContextFeature<NoneFeatureConfiguration> {
     public TwistedVinesFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
         final int RANDOM_BOUND = (int) (6 * scale_factor);
         if (canPlaceAt(world, pos)) {
@@ -37,14 +39,18 @@ public class TwistedVinesFeature extends ContextFeature<NoneFeatureConfiguration
                     for (int n = 0; n < h; n++) {
                         context.POS.setY(sy + n);
                         if (!world.isEmptyBlock(context.POS.above())) {
-                            BlocksHelper.setWithoutUpdate(world,
+                            BlocksHelper.setWithoutUpdate(
+                                    world,
                                     context.POS,
-                                    Blocks.TWISTING_VINES.defaultBlockState());
+                                    Blocks.TWISTING_VINES.defaultBlockState()
+                            );
                             break;
                         }
-                        BlocksHelper.setWithoutUpdate(world,
+                        BlocksHelper.setWithoutUpdate(
+                                world,
                                 context.POS,
-                                Blocks.TWISTING_VINES_PLANT.defaultBlockState());
+                                Blocks.TWISTING_VINES_PLANT.defaultBlockState()
+                        );
                     }
                     BlocksHelper.setWithoutUpdate(world, context.POS, Blocks.TWISTING_VINES.defaultBlockState());
                     break;

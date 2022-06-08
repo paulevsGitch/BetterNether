@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.bclib.interfaces.TagProvider;
+
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -15,19 +18,17 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-import org.betterx.bclib.interfaces.TagProvider;
-
 import java.util.Collections;
 import java.util.List;
 
 public class BlockTerrain extends BlockBase implements TagProvider {
     public static final SoundType TERRAIN_SOUND = new SoundType(1.0F, 1.0F,
-                                                                SoundEvents.NETHERRACK_BREAK,
-                                                                SoundEvents.WART_BLOCK_STEP,
-                                                                SoundEvents.NETHERRACK_PLACE,
-                                                                SoundEvents.NETHERRACK_HIT,
-                                                                SoundEvents.NETHERRACK_FALL);
+            SoundEvents.NETHERRACK_BREAK,
+            SoundEvents.WART_BLOCK_STEP,
+            SoundEvents.NETHERRACK_PLACE,
+            SoundEvents.NETHERRACK_HIT,
+            SoundEvents.NETHERRACK_FALL
+    );
 
     public BlockTerrain() {
         super(FabricBlockSettings.copyOf(Blocks.NETHERRACK).sounds(TERRAIN_SOUND).requiresTool());

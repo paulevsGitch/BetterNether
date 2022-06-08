@@ -1,18 +1,5 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-import net.minecraft.world.level.levelgen.placement.CaveSurface;
-
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
@@ -29,6 +16,19 @@ import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.registry.features.TerrainFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 import java.util.List;
 
@@ -76,16 +76,23 @@ public class NetherWartForest extends NetherBiome {
                     .rule(SurfaceRules.sequence(
                             SurfaceRules.ifTrue(
                                     SurfaceRules.ON_FLOOR,
-                                    new SwitchRuleSource(Conditions.NETHER_NOISE,
-                                            List.of(NetherGrasslands.SOUL_SOIL,
+                                    new SwitchRuleSource(
+                                            Conditions.NETHER_NOISE,
+                                            List.of(
+                                                    NetherGrasslands.SOUL_SOIL,
                                                     NetherGrasslands.SOUL_SAND,
                                                     NetherGrasslands.MOSS,
                                                     NetherGrasslands.SOUL_SAND,
-                                                    NETHERRACK))
+                                                    NETHERRACK
+                                            )
+                                    )
                             ),
-                            SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(4, true, 1, CaveSurface.FLOOR),
-                                    new SwitchRuleSource(Conditions.NETHER_NOISE,
-                                            List.of(SurfaceRules.state(
+                            SurfaceRules.ifTrue(
+                                    SurfaceRules.stoneDepthCheck(4, true, 1, CaveSurface.FLOOR),
+                                    new SwitchRuleSource(
+                                            Conditions.NETHER_NOISE,
+                                            List.of(
+                                                    SurfaceRules.state(
                                                             NetherBlocks.SOUL_SANDSTONE
                                                                     .defaultBlockState()
                                                                     .setValue(BlockSoulSandstone.UP, true)
@@ -98,10 +105,14 @@ public class NetherWartForest extends NetherBiome {
                                             )
                                     )
                             ),
-                            new SwitchRuleSource(Conditions.NETHER_NOISE,
-                                    List.of(NetherGrasslands.SOUL_SOIL,
+                            new SwitchRuleSource(
+                                    Conditions.NETHER_NOISE,
+                                    List.of(
+                                            NetherGrasslands.SOUL_SOIL,
                                             NetherGrasslands.SOUL_SAND,
-                                            NETHERRACK))
+                                            NETHERRACK
+                                    )
+                            )
                     ))
                     ;
         }

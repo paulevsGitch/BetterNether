@@ -1,5 +1,10 @@
 package org.betterx.betternether.world.structures;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.noise.OpenSimplexNoise;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -11,11 +16,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.noise.OpenSimplexNoise;
-import org.betterx.betternether.registry.NetherBlocks;
 
 public class StructurePath implements IStructure {
     private final OpenSimplexNoise heightNoise;
@@ -32,11 +32,13 @@ public class StructurePath implements IStructure {
     }
 
     @Override
-    public void generate(ServerLevelAccessor world,
-                         BlockPos pos,
-                         RandomSource random,
-                         final int MAX_HEIGHT,
-                         StructureGeneratorThreadContext context) {
+    public void generate(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         for (int x = 0; x < 16; x++) {
             int wx = pos.getX() + x;
             context.POS.setX(wx);
@@ -51,16 +53,21 @@ public class StructurePath implements IStructure {
                     height -= BlocksHelper.downRay(world, context.POS, height);
                     context.POS.setY(height);
                     if (world.isEmptyBlock(context.POS) && world.getBlockState(context.POS.move(Direction.DOWN))
-                                                                .isCollisionShapeFullBlock(world,
-                                                                                           context.POS) && isHeightValid(
+                                                                .isCollisionShapeFullBlock(
+                                                                        world,
+                                                                        context.POS
+                                                                ) && isHeightValid(
                             world,
-                            context.POS.above())) {
+                            context.POS.above()
+                    )) {
                         Holder<Biome> biome = world.getBiome(context.POS);
                         BlocksHelper.setWithoutUpdate(world, context.POS, getRoadMaterial(world, context.POS, biome));
                         if (needsSlab(world, context.POS.above()))
-                            BlocksHelper.setWithoutUpdate(world,
-                                                          context.POS.above(),
-                                                          getSlabMaterial(world, context.POS, biome));
+                            BlocksHelper.setWithoutUpdate(
+                                    world,
+                                    context.POS.above(),
+                                    getSlabMaterial(world, context.POS, biome)
+                            );
                         else if (rigid > 0.01 && ((x & 3) == 0) && ((z & 3) == 0) && random.nextInt(8) == 0)
                             makeLantern(world, context.POS.above());
                     }
@@ -78,13 +85,16 @@ public class StructurePath implements IStructure {
         z *= 0.1;
         return Math.abs(rigidNoise.eval(
                 x * 0.02 + distortX.eval(x * 0.05, z * 0.05) * 0.2,
-                z * 0.02 + distortY.eval(x * 0.05, z * 0.05) * 0.2));
+                z * 0.02 + distortY.eval(x * 0.05, z * 0.05) * 0.2
+        ));
     }
 
     private boolean isHeightValid(LevelAccessor world, BlockPos pos) {
-        return Math.abs(BlocksHelper.downRay(world, pos.north(2), 5) - BlocksHelper.downRay(world,
-                                                                                            pos.south(2),
-                                                                                            5)) < 3 &&
+        return Math.abs(BlocksHelper.downRay(world, pos.north(2), 5) - BlocksHelper.downRay(
+                world,
+                pos.south(2),
+                5
+        )) < 3 &&
                 Math.abs(BlocksHelper.downRay(world, pos.east(2), 5) - BlocksHelper.downRay(world, pos.west(2), 5)) < 3;
     }
 
@@ -111,9 +121,11 @@ public class StructurePath implements IStructure {
         p = p.relative(dir.getOpposite());
         BlocksHelper.setWithoutUpdate(world, p, Blocks.NETHER_BRICK_FENCE.defaultBlockState());
         world.getChunk(p).markPosForPostprocessing(new BlockPos(p.getX() & 15, p.getY(), p.getZ() & 15));
-        BlocksHelper.setWithoutUpdate(world,
-                                      p.below(),
-                                      Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+        BlocksHelper.setWithoutUpdate(
+                world,
+                p.below(),
+                Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true)
+        );
     }
 
     private BlockState getRoadMaterial(ServerLevelAccessor world, BlockPos pos, Holder<Biome> biome) {

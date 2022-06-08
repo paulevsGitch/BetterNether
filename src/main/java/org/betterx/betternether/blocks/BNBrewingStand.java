@@ -1,5 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.blockentities.BNBrewingStandBlockEntity;
+import org.betterx.betternether.client.IRenderTypeable;
+import org.betterx.betternether.registry.BlockEntitiesRegistry;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Containers;
@@ -19,10 +23,6 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import org.betterx.betternether.blockentities.BNBrewingStandBlockEntity;
-import org.betterx.betternether.client.IRenderTypeable;
-import org.betterx.betternether.registry.BlockEntitiesRegistry;
-
 public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable {
     public BNBrewingStand() {
         super(FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS)
@@ -32,9 +32,11 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world,
-                                                                  BlockState state,
-                                                                  BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
+            Level world,
+            BlockState state,
+            BlockEntityType<T> type
+    ) {
         return world.isClientSide
                 ? null
                 : createTickerHelper(type, BlockEntitiesRegistry.NETHER_BREWING_STAND, BNBrewingStandBlockEntity::tick);
@@ -46,12 +48,14 @@ public class BNBrewingStand extends BrewingStandBlock implements IRenderTypeable
     }
 
     @Override
-    public InteractionResult use(BlockState state,
-                                 Level world,
-                                 BlockPos pos,
-                                 Player player,
-                                 InteractionHand hand,
-                                 BlockHitResult hit) {
+    public InteractionResult use(
+            BlockState state,
+            Level world,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {

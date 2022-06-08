@@ -1,11 +1,11 @@
 package org.betterx.betternether.registry;
 
-import net.minecraft.core.Registry;
-import net.minecraft.world.item.enchantment.Enchantment;
-
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.enchantments.ObsidianBreaker;
 import org.betterx.betternether.enchantments.RubyFire;
+
+import net.minecraft.core.Registry;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public class NetherEnchantments {
     public static ObsidianBreaker OBSIDIAN_BREAKER = register("obsidian_breaker", new ObsidianBreaker());

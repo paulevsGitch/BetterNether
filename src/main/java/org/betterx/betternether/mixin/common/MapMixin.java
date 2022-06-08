@@ -90,19 +90,27 @@ public abstract class MapMixin extends ComplexItem {
 
                                 //make sure we get under the nether ceiling and find the first "AIR" block
                                 do {
-                                    POS.set(chunkPos.getMinBlockX() + bx + cx,
+                                    POS.set(
+                                            chunkPos.getMinBlockX() + bx + cx,
                                             --testY,
-                                            chunkPos.getMinBlockZ() + bz + cz);
+                                            chunkPos.getMinBlockZ() + bz + cz
+                                    );
                                     blockState = levelChunk.getBlockState(POS);
-                                } while (blockState.is(Blocks.BEDROCK) || blockState.getMapColor(level,
-                                                                                                 POS) != MaterialColor.NONE && testY > level.getMinBuildHeight());
+                                } while (blockState.is(Blocks.BEDROCK) || blockState.getMapColor(
+                                        level,
+                                        POS
+                                ) != MaterialColor.NONE && testY > level.getMinBuildHeight());
 
                                 do {
-                                    POS.set(chunkPos.getMinBlockX() + bx + cx,
+                                    POS.set(
+                                            chunkPos.getMinBlockX() + bx + cx,
                                             --testY,
-                                            chunkPos.getMinBlockZ() + bz + cz);
-                                } while ((blockState = levelChunk.getBlockState(POS)).getMapColor(level,
-                                                                                                  POS) == MaterialColor.NONE && testY > level.getMinBuildHeight());
+                                            chunkPos.getMinBlockZ() + bz + cz
+                                    );
+                                } while ((blockState = levelChunk.getBlockState(POS)).getMapColor(
+                                        level,
+                                        POS
+                                ) == MaterialColor.NONE && testY > level.getMinBuildHeight());
                                 if (testY > level.getMinBuildHeight() && !blockState.getFluidState()
                                                                                     .isEmpty()) {
                                     BlockState blockState2;
@@ -119,17 +127,21 @@ public abstract class MapMixin extends ComplexItem {
                             } else {
                                 blockState = Blocks.BEDROCK.defaultBlockState();
                             }
-                            state.checkBanners(level,
-                                               chunkPos.getMinBlockX() + bx + cx,
-                                               chunkPos.getMinBlockZ() + bz + cz);
+                            state.checkBanners(
+                                    level,
+                                    chunkPos.getMinBlockX() + bx + cx,
+                                    chunkPos.getMinBlockZ() + bz + cz
+                            );
                             height += (double) testY / (double) (scale * scale);
                             multiset.add(blockState.getMapColor(level, POS));
                         }
                     }
 
 
-                    MaterialColor mc = Iterables.getFirst(Multisets.copyHighestCountFirst(multiset),
-                                                          MaterialColor.NONE);
+                    MaterialColor mc = Iterables.getFirst(
+                            Multisets.copyHighestCountFirst(multiset),
+                            MaterialColor.NONE
+                    );
                     Brightness br = mc == MaterialColor.WATER
                             ? ((y = (double) (w /= scale * scale) * 0.1 + (double) (xx + yy & 1) * 0.2) < 0.5
                             ? MaterialColor.Brightness.HIGH

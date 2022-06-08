@@ -1,14 +1,5 @@
 package org.betterx.betternether.registry;
 
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-
 import org.betterx.bclib.api.v2.BonemealAPI;
 import org.betterx.bclib.api.v2.ComposterAPI;
 import org.betterx.bclib.api.v2.tag.NamedBlockTags;
@@ -21,14 +12,25 @@ import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
 import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
+
 public class NetherTags {
 //	public static final Tag<Block> SOUL_GROUND_BLOCK = TagAPI.makeCommonBlockTag( "soul_ground");
 //	public static final Tag<Block> NETHERRACK = TagAPI.makeCommonBlockTag("netherrack");
 //	public static final Tag<Block> MYCELIUM = TagAPI.makeCommonBlockTag("nether_mycelium");
     //public static final TagAPI.TagKey<Block> NYLIUM = TagAPI.BLOCK_NYLIUM;
 
-    public static final TagKey<Biome> BETTER_NETHER_DECORATIONS = TagAPI.makeStructureTag(BetterNether.MOD_ID,
-            "nether_decorations");
+    public static final TagKey<Biome> BETTER_NETHER_DECORATIONS = TagAPI.makeStructureTag(
+            BetterNether.MOD_ID,
+            "nether_decorations"
+    );
 
     public static final TagKey<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
 

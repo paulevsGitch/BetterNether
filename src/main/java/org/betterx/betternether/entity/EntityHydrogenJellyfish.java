@@ -1,5 +1,8 @@
 package org.betterx.betternether.entity;
 
+import org.betterx.bclib.entity.DespawnableAnimal;
+import org.betterx.betternether.registry.SoundsRegistry;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -27,14 +30,13 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-import org.betterx.bclib.entity.DespawnableAnimal;
-import org.betterx.betternether.registry.SoundsRegistry;
-
 import java.util.List;
 
 public class EntityHydrogenJellyfish extends DespawnableAnimal implements FlyingAnimal {
-    private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(EntityHydrogenJellyfish.class,
-                                                                                      EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(
+            EntityHydrogenJellyfish.class,
+            EntityDataSerializers.FLOAT
+    );
 
     private Vec3 preVelocity;
     private Vec3 newVelocity = new Vec3(0, 0, 0);
@@ -157,7 +159,8 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
                 this.setDeltaMovement(
                         Mth.lerp(delta, preVelocity.x, newVelocity.x),
                         Mth.lerp(delta, preVelocity.y, newVelocity.y),
-                        Mth.lerp(delta, preVelocity.z, newVelocity.z));
+                        Mth.lerp(delta, preVelocity.z, newVelocity.z)
+                );
             }
         } else {
             this.setDeltaMovement(newVelocity);
@@ -180,10 +183,11 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
             float scale = getScale() * 3;
             for (int i = 0; i < 20; i++)
                 this.level.addParticle(ParticleTypes.EXPLOSION,
-                                       getX() + random.nextGaussian() * scale,
-                                       getEyeY() + random.nextGaussian() * scale,
-                                       getZ() + random.nextGaussian() * scale,
-                                       0, 0, 0);
+                        getX() + random.nextGaussian() * scale,
+                        getEyeY() + random.nextGaussian() * scale,
+                        getZ() + random.nextGaussian() * scale,
+                        0, 0, 0
+                );
         } else {
             if (source != DamageSource.OUT_OF_WORLD) {
                 Explosion.BlockInteraction destructionType = this.level.getGameRules()
@@ -216,10 +220,12 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
     }
 
     @Override
-    protected void checkFallDamage(double heightDifference,
-                                   boolean onGround,
-                                   BlockState landedState,
-                                   BlockPos landedPosition) {
+    protected void checkFallDamage(
+            double heightDifference,
+            boolean onGround,
+            BlockState landedState,
+            BlockPos landedPosition
+    ) {
     }
 
     @Override
@@ -230,18 +236,22 @@ public class EntityHydrogenJellyfish extends DespawnableAnimal implements Flying
         return false;
     }
 
-    public static boolean canSpawn(EntityType<? extends EntityHydrogenJellyfish> type,
-                                   LevelAccessor world,
-                                   MobSpawnType spawnReason,
-                                   BlockPos pos,
-                                   RandomSource random) {
+    public static boolean canSpawn(
+            EntityType<? extends EntityHydrogenJellyfish> type,
+            LevelAccessor world,
+            MobSpawnType spawnReason,
+            BlockPos pos,
+            RandomSource random
+    ) {
         try {
             AABB box = new AABB(pos).inflate(64, 256, 64);
-            List<EntityHydrogenJellyfish> list = world.getEntitiesOfClass(EntityHydrogenJellyfish.class,
-                                                                          box,
-                                                                          (entity) -> {
-                                                                              return true;
-                                                                          });
+            List<EntityHydrogenJellyfish> list = world.getEntitiesOfClass(
+                    EntityHydrogenJellyfish.class,
+                    box,
+                    (entity) -> {
+                        return true;
+                    }
+            );
             return list.size() < 4;
         } catch (Exception e) {
             return true;

@@ -1,5 +1,7 @@
 package org.betterx.betternether.entity;
 
+import org.betterx.betternether.blocks.BNChair;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -10,8 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-
-import org.betterx.betternether.blocks.BNChair;
 
 public class EntityChair extends Entity {
     public EntityChair(EntityType<? extends EntityChair> type, Level world) {

@@ -1,13 +1,13 @@
 package org.betterx.betternether.blocks;
 
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-
 import org.betterx.bclib.api.v2.tag.NamedBlockTags;
 import org.betterx.bclib.api.v2.tag.NamedItemTags;
 import org.betterx.bclib.blocks.BaseDoorBlock;
 import org.betterx.bclib.interfaces.TagProvider;
+
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 

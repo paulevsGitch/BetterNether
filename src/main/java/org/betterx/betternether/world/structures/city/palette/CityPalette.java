@@ -1,16 +1,16 @@
 package org.betterx.betternether.world.structures.city.palette;
 
+import org.betterx.betternether.blocks.BNBlockProperties;
+import org.betterx.betternether.blocks.BlockPottedPlant;
+import org.betterx.betternether.blocks.BlockSmallLantern;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
-
-import org.betterx.betternether.blocks.BNBlockProperties;
-import org.betterx.betternether.blocks.BlockPottedPlant;
-import org.betterx.betternether.blocks.BlockSmallLantern;
-import org.betterx.betternether.registry.NetherBlocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -521,8 +521,10 @@ public class CityPalette {
         String seed = Registry.BLOCK.getKey(input.getBlock()).getPath();
         RANDOM.setSeed(seed.hashCode());
         return NetherBlocks.POTTED_PLANT.defaultBlockState()
-                                        .setValue(BlockPottedPlant.PLANT,
+                                        .setValue(
+                                                BlockPottedPlant.PLANT,
                                                 BNBlockProperties.PottedPlantShape.values()[RANDOM.nextInt(
-                                                        BNBlockProperties.PottedPlantShape.values().length)]);
+                                                        BNBlockProperties.PottedPlantShape.values().length)]
+                                        );
     }
 }

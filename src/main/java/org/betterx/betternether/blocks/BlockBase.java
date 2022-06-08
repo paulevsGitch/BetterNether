@@ -1,11 +1,11 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.client.IRenderTypeable;
+
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
-
-import org.betterx.betternether.client.IRenderTypeable;
 
 import java.util.Collections;
 import java.util.List;

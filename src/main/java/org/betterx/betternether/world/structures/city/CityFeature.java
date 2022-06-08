@@ -1,5 +1,13 @@
 package org.betterx.betternether.world.structures.city;
 
+import org.betterx.bclib.api.v2.levelgen.structures.BCLStructure;
+import org.betterx.betternether.config.Configs;
+import org.betterx.betternether.registry.NetherBiomes;
+import org.betterx.betternether.registry.NetherStructures;
+import org.betterx.betternether.world.structures.city.palette.Palettes;
+import org.betterx.betternether.world.structures.piece.CavePiece;
+import org.betterx.betternether.world.structures.piece.CityPiece;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -11,14 +19,6 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
-
-import org.betterx.bclib.api.v2.levelgen.structures.BCLStructure;
-import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.registry.NetherBiomes;
-import org.betterx.betternether.registry.NetherStructures;
-import org.betterx.betternether.world.structures.city.palette.Palettes;
-import org.betterx.betternether.world.structures.piece.CavePiece;
-import org.betterx.betternether.world.structures.piece.CityPiece;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,8 +54,10 @@ public class CityFeature extends Structure {
         return Optional.empty();
     }
 
-    private static void generatePieces(StructurePiecesBuilder structurePiecesBuilder,
-                                       Structure.GenerationContext context) {
+    private static void generatePieces(
+            StructurePiecesBuilder structurePiecesBuilder,
+            Structure.GenerationContext context
+    ) {
         final ChunkPos cPos = context.chunkPos();
         final ChunkGenerator chunkGenerator = context.chunkGenerator();
         final LevelHeightAccessor heightAccessor = context.heightAccessor();
@@ -78,10 +80,12 @@ public class CityFeature extends Structure {
         }
 
         if (!(chunkGenerator instanceof FlatLevelSource)) {
-            CavePiece cave = new CavePiece(center,
+            CavePiece cave = new CavePiece(
+                    center,
                     radius + (NetherBiomes.useLegacyGeneration ? 0 : 8),
                     random,
-                    cityBox);
+                    cityBox
+            );
             structurePiecesBuilder.addPiece(cave);
         }
         buildings.forEach(b -> structurePiecesBuilder.addPiece(b));
@@ -90,10 +94,12 @@ public class CityFeature extends Structure {
     }
 
     @NotNull
-    private static BlockPos getCenter(GenerationContext context,
-                                      ChunkPos cPos,
-                                      ChunkGenerator chunkGenerator,
-                                      LevelHeightAccessor heightAccessor) {
+    private static BlockPos getCenter(
+            GenerationContext context,
+            ChunkPos cPos,
+            ChunkGenerator chunkGenerator,
+            LevelHeightAccessor heightAccessor
+    ) {
         final int px = cPos.getBlockX(8);
         final int pz = cPos.getBlockZ(8);
         final int y = chunkGenerator instanceof FlatLevelSource

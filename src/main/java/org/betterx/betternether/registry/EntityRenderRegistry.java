@@ -1,5 +1,9 @@
 package org.betterx.betternether.registry;
 
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.entity.model.*;
+import org.betterx.betternether.entity.render.*;
+
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -10,10 +14,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.entity.model.*;
-import org.betterx.betternether.entity.render.*;
 
 @Environment(EnvType.CLIENT)
 public class EntityRenderRegistry {
@@ -46,8 +46,10 @@ public class EntityRenderRegistry {
         EntityModelLayerRegistry.registerModelLayer(NAGA_MODEL, ModelNaga::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(JUNGLE_SKELETON_MODEL, ModelJungleSkeleton::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(FLYING_PIG_MODEL, ModelEntityFlyingPig::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(HYDROGEN_JELLYFISH_MODEL,
-                                                    ModelEntityHydrogenJellyfish::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(
+                HYDROGEN_JELLYFISH_MODEL,
+                ModelEntityHydrogenJellyfish::getTexturedModelData
+        );
         EntityModelLayerRegistry.registerModelLayer(SKULL_MODEL, ModelSkull::getTexturedModelData);
     }
 

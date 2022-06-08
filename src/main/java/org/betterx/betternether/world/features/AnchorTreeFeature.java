@@ -1,5 +1,14 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.blocks.BlockPlantWall;
+import org.betterx.betternether.noise.OpenSimplexNoise;
+import org.betterx.betternether.registry.NetherBiomes;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+import org.betterx.betternether.world.structures.plants.LegacyStructureAnchorTree;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -11,15 +20,6 @@ import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockPlantWall;
-import org.betterx.betternether.noise.OpenSimplexNoise;
-import org.betterx.betternether.registry.NetherBiomes;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-import org.betterx.betternether.world.structures.plants.LegacyStructureAnchorTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +45,14 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         pos = new BlockPos(toMiddle(pos.getX()), pos.getY(), toMiddle(pos.getZ()));
         if (NetherBiomes.useLegacyGeneration) {
             legacyStructure.generate(world, pos, random, MAX_HEIGHT, context);
@@ -69,12 +71,14 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
         return true;
     }
 
-    private void grow(ServerLevelAccessor level,
-                      BlockPos up,
-                      BlockPos down,
-                      RandomSource random,
-                      final int MAX_HEIGHT,
-                      StructureGeneratorThreadContext context) {
+    private void grow(
+            ServerLevelAccessor level,
+            BlockPos up,
+            BlockPos down,
+            RandomSource random,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
         final int HEIGHT_64;
         final int HEIGHT_45;
@@ -114,7 +118,8 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
 
         drawLine(level, blocks, radius + (0.5 * scale_factor), MAX_HEIGHT, context);
 
-        buildBigCircle(level,
+        buildBigCircle(
+                level,
                 up,
                 trunkTop,
                 SEGMENT_LENGTH,
@@ -124,8 +129,10 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 radius,
                 random,
                 MAX_HEIGHT,
-                context);
-        buildBigCircle(level,
+                context
+        );
+        buildBigCircle(
+                level,
                 up,
                 trunkBottom,
                 -SEGMENT_LENGTH,
@@ -135,15 +142,18 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 radius,
                 random,
                 MAX_HEIGHT,
-                context);
+                context
+        );
 
         BlockState state;
         int offset = random.nextInt(4);
         final int minBuildHeight = level.getMinBuildHeight() + 1;
-        final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(level,
+        final net.minecraft.world.level.levelgen.structure.BoundingBox blockBox = BlocksHelper.decorationBounds(
+                level,
                 up,
                 minBuildHeight,
-                MAX_HEIGHT - 2);
+                MAX_HEIGHT - 2
+        );
         for (BlockPos bpos : context.BLOCKS) {
             if (!blockBox.isInside(bpos)) continue;
             if (!BlocksHelper.isNetherGround(state = level.getBlockState(bpos)) && !state.getMaterial().isReplaceable())
@@ -154,9 +164,11 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             else
                 BlocksHelper.setWithoutUpdate(level, bpos, NetherBlocks.MAT_ANCHOR_TREE.getBark().defaultBlockState());
 
-            if (bpos.getY() > HEIGHT_45 && bpos.getY() < HEIGHT_90 && (bpos.getY() & 3) == offset && NOISE.eval(bpos.getX() * 0.1,
+            if (bpos.getY() > HEIGHT_45 && bpos.getY() < HEIGHT_90 && (bpos.getY() & 3) == offset && NOISE.eval(
+                    bpos.getX() * 0.1,
                     bpos.getY() * 0.1,
-                    bpos.getZ() * 0.1) > 0) {
+                    bpos.getZ() * 0.1
+            ) > 0) {
                 if (random.nextInt((int) (32 * scale_factor)) == 0 && !context.BLOCKS.contains(bpos.north()))
                     makeMushroom(level, bpos.north(), random.nextDouble() * 3 + 1.5, blockBox);
                 if (random.nextInt((int) (32 * scale_factor)) == 0 && !context.BLOCKS.contains(bpos.south()))
@@ -176,45 +188,56 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                     state = wallPlants[random.nextInt(wallPlants.length)].defaultBlockState();
                     BlockPos _pos = bpos.north();
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() >= blockBox.minZ())
-                        BlocksHelper.setWithoutUpdate(level,
+                        BlocksHelper.setWithoutUpdate(
+                                level,
                                 _pos,
-                                state.setValue(BlockPlantWall.FACING, Direction.NORTH));
+                                state.setValue(BlockPlantWall.FACING, Direction.NORTH)
+                        );
 
                     _pos = bpos.south();
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getZ() <= blockBox.maxZ())
-                        BlocksHelper.setWithoutUpdate(level,
+                        BlocksHelper.setWithoutUpdate(
+                                level,
                                 _pos,
-                                state.setValue(BlockPlantWall.FACING, Direction.SOUTH));
+                                state.setValue(BlockPlantWall.FACING, Direction.SOUTH)
+                        );
 
                     _pos = bpos.east();
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() <= blockBox.maxX())
-                        BlocksHelper.setWithoutUpdate(level,
+                        BlocksHelper.setWithoutUpdate(
+                                level,
                                 _pos,
-                                state.setValue(BlockPlantWall.FACING, Direction.EAST));
+                                state.setValue(BlockPlantWall.FACING, Direction.EAST)
+                        );
 
                     _pos = bpos.west();
                     if (random.nextInt(8) == 0 && !context.BLOCKS.contains(_pos) && level.isEmptyBlock(_pos) && _pos.getX() >= blockBox.minX())
-                        BlocksHelper.setWithoutUpdate(level,
+                        BlocksHelper.setWithoutUpdate(
+                                level,
                                 _pos,
-                                state.setValue(BlockPlantWall.FACING, Direction.WEST));
+                                state.setValue(BlockPlantWall.FACING, Direction.WEST)
+                        );
                 }
             }
         }
     }
 
-    private void buildBigCircle(ServerLevelAccessor level,
-                                BlockPos seedPos,
-                                BlockPos pos,
-                                int length,
-                                int count,
-                                int iteration,
-                                double angle,
-                                double size,
-                                RandomSource random,
-                                final int MAX_HEIGHT,
-                                StructureGeneratorThreadContext context) {
+    private void buildBigCircle(
+            ServerLevelAccessor level,
+            BlockPos seedPos,
+            BlockPos pos,
+            int length,
+            int count,
+            int iteration,
+            double angle,
+            double size,
+            RandomSource random,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         if (iteration < 0) return;
-        List<List<BlockPos>> lines = circleLinesEnds(level,
+        List<List<BlockPos>> lines = circleLinesEnds(
+                level,
                 seedPos,
                 pos,
                 angle,
@@ -223,14 +246,16 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                 Math.abs(length) * 0.7,
                 random,
                 iteration == 0,
-                MAX_HEIGHT);
+                MAX_HEIGHT
+        );
         double sizeSmall = size * 0.8;
         length *= 0.8;
         angle += Math.PI * 4 / count;
         angle += random.nextDouble() * angle * 0.75;
         for (List<BlockPos> line : lines) {
             drawLine(level, line, size, MAX_HEIGHT, context);
-            buildBigCircle(level,
+            buildBigCircle(
+                    level,
                     seedPos,
                     line.get(1),
                     length,
@@ -240,15 +265,18 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                     sizeSmall,
                     random,
                     MAX_HEIGHT,
-                    context);
+                    context
+            );
         }
     }
 
-    private void drawLine(ServerLevelAccessor level,
-                          List<BlockPos> blocks,
-                          double radius,
-                          final int MAX_HEIGHT,
-                          StructureGeneratorThreadContext context) {
+    private void drawLine(
+            ServerLevelAccessor level,
+            List<BlockPos> blocks,
+            double radius,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         for (int i = 0; i < blocks.size() - 1; i++) {
             BlockPos a = blocks.get(i);
             BlockPos b = blocks.get(i + 1);
@@ -310,24 +338,28 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
             for (int z = z1; z <= z2; z++) {
                 int pz2 = z - pos.getZ();
                 pz2 *= pz2;
-                if (px2 + pz2 <= radius * (NOISE.eval(x * 0.5,
+                if (px2 + pz2 <= radius * (NOISE.eval(
+                        x * 0.5,
                         pos.getY() * 0.5,
-                        z * 0.5) * 0.25 + 0.75) && pos.getY() > 2 && pos.getY() < MAX_HEIGHT - 2)
+                        z * 0.5
+                ) * 0.25 + 0.75) && pos.getY() > 2 && pos.getY() < MAX_HEIGHT - 2)
                     context.BLOCKS.add(new BlockPos(x, pos.getY(), z));
             }
         }
     }
 
-    private List<List<BlockPos>> circleLinesEnds(ServerLevelAccessor level,
-                                                 BlockPos seedPos,
-                                                 BlockPos pos,
-                                                 double startAngle,
-                                                 int count,
-                                                 int length,
-                                                 double inRadius,
-                                                 RandomSource random,
-                                                 boolean findSurface,
-                                                 final int MAX_HEIGHT) {
+    private List<List<BlockPos>> circleLinesEnds(
+            ServerLevelAccessor level,
+            BlockPos seedPos,
+            BlockPos pos,
+            double startAngle,
+            int count,
+            int length,
+            double inRadius,
+            RandomSource random,
+            boolean findSurface,
+            final int MAX_HEIGHT
+    ) {
         final int MAX_DIST = 16;
         List<List<BlockPos>> result = new ArrayList<List<BlockPos>>(count);
         double angle = Math.PI * 2 / count;
@@ -354,7 +386,8 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                         : BlocksHelper.upRay(level, end, Math.abs(length * 2));
                 if (dist > 0) {
                     if (Math.abs(seedPos.getX() - x) > MAX_DIST || Math.abs(seedPos.getZ() - z) > MAX_DIST) radius = 2;
-                    result.addAll(circleLinesEnds(level,
+                    result.addAll(circleLinesEnds(
+                            level,
                             seedPos,
                             end,
                             MHelper.nextFloat(random, 360),
@@ -363,7 +396,8 @@ public class AnchorTreeFeature extends ContextFeature<NoneFeatureConfiguration> 
                             radius / 2,
                             random,
                             findSurface,
-                            MAX_HEIGHT));
+                            MAX_HEIGHT
+                    ));
                 }
             }
 

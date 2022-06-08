@@ -1,5 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.bclib.blocks.BaseOreBlock;
+import org.betterx.bclib.interfaces.CustomItemProvider;
+import org.betterx.bclib.interfaces.TagProvider;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -11,11 +16,6 @@ import net.minecraft.world.level.material.MaterialColor;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-import org.betterx.bclib.blocks.BaseOreBlock;
-import org.betterx.bclib.interfaces.CustomItemProvider;
-import org.betterx.bclib.interfaces.TagProvider;
 
 import java.util.List;
 

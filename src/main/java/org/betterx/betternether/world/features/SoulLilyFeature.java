@@ -1,5 +1,10 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BlockSoulLily;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
@@ -8,23 +13,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockSoulLily;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-
 public class SoulLilyFeature extends ContextFeature<NoneFeatureConfiguration> {
     public SoulLilyFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         final float scale_factor = MAX_HEIGHT / 128.0f;
         final int RANDOM_BOUND = (int) (6 * scale_factor);
 
@@ -73,11 +75,13 @@ public class SoulLilyFeature extends ContextFeature<NoneFeatureConfiguration> {
         BlocksHelper.setWithUpdate(world, pos,
                 NetherBlocks.SOUL_LILY
                         .defaultBlockState()
-                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.MEDIUM_BOTTOM));
+                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.MEDIUM_BOTTOM)
+        );
         BlocksHelper.setWithUpdate(world, pos.above(),
                 NetherBlocks.SOUL_LILY
                         .defaultBlockState()
-                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.MEDIUM_TOP));
+                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.MEDIUM_TOP)
+        );
     }
 
     public void growBig(LevelAccessor world, BlockPos pos) {
@@ -87,27 +91,32 @@ public class SoulLilyFeature extends ContextFeature<NoneFeatureConfiguration> {
         BlocksHelper.setWithUpdate(world, pos.above(),
                 NetherBlocks.SOUL_LILY
                         .defaultBlockState()
-                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_MIDDLE));
+                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_MIDDLE)
+        );
         BlockPos up = pos.above(2);
         BlocksHelper.setWithUpdate(world, up,
                 NetherBlocks.SOUL_LILY
                         .defaultBlockState()
-                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_TOP_CENTER));
+                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_TOP_CENTER)
+        );
         BlocksHelper.setWithUpdate(world, up.north(), NetherBlocks.SOUL_LILY
                 .defaultBlockState()
                 .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_S));
         BlocksHelper.setWithUpdate(world, up.south(),
                 NetherBlocks.SOUL_LILY
                         .defaultBlockState()
-                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_N));
+                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_N)
+        );
         BlocksHelper.setWithUpdate(world, up.east(),
                 NetherBlocks.SOUL_LILY
                         .defaultBlockState()
-                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_W));
+                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_W)
+        );
         BlocksHelper.setWithUpdate(world, up.west(),
                 NetherBlocks.SOUL_LILY
                         .defaultBlockState()
-                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_E));
+                        .setValue(BlockSoulLily.SHAPE, BlockSoulLily.SoulLilyShape.BIG_TOP_SIDE_E)
+        );
     }
 
     private boolean isAirSides(LevelAccessor world, BlockPos pos) {

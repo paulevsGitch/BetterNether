@@ -1,11 +1,5 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
@@ -16,6 +10,12 @@ import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 public class UpsideDownForestCleared extends NetherBiome {
     public static class Config extends NetherBiomeConfig {
@@ -63,18 +63,30 @@ public class UpsideDownForestCleared extends NetherBiome {
         @Override
         public SurfaceRuleBuilder surface() {
             final SurfaceNoiseCondition noise = UpsideDownFloorCondition.DEFAULT;
-            return super.surface().rule(3,
-                    SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
-                            SurfaceRules.sequence(SurfaceRules.ifTrue(UpsideDownForest.NOISE_CEIL_LAYER,
-                                            UpsideDownForest.CEILEING_MOSS),
-                                    NETHERRACK)
+            return super.surface().rule(
+                    3,
+                    SurfaceRules.ifTrue(
+                            SurfaceRules.ON_CEILING,
+                            SurfaceRules.sequence(
+                                    SurfaceRules.ifTrue(
+                                            UpsideDownForest.NOISE_CEIL_LAYER,
+                                            UpsideDownForest.CEILEING_MOSS
+                                    ),
+                                    NETHERRACK
+                            )
                     )
-            ).rule(2,
-                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
-                            SurfaceRules.sequence(SurfaceRules.ifTrue(noise,
-                                            UpsideDownForest.NETHERRACK_MOSS),
+            ).rule(
+                    2,
+                    SurfaceRules.ifTrue(
+                            SurfaceRules.ON_FLOOR,
+                            SurfaceRules.sequence(
+                                    SurfaceRules.ifTrue(
+                                            noise,
+                                            UpsideDownForest.NETHERRACK_MOSS
+                                    ),
                                     SurfaceRules.state(
-                                            NetherBlocks.MUSHROOM_GRASS.defaultBlockState()))
+                                            NetherBlocks.MUSHROOM_GRASS.defaultBlockState())
+                            )
                     )
             );
         }

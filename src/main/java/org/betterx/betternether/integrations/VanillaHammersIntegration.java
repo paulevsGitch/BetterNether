@@ -1,5 +1,7 @@
 package org.betterx.betternether.integrations;
 
+import org.betterx.betternether.registry.NetherItems;
+
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
@@ -7,7 +9,6 @@ import net.minecraft.world.item.Tier;
 import net.fabricmc.loader.api.FabricLoader;
 
 import org.apache.logging.log4j.LogManager;
-import org.betterx.betternether.registry.NetherItems;
 
 import java.lang.reflect.Constructor;
 
@@ -19,10 +20,12 @@ public class VanillaHammersIntegration {
         if (!hasHammers)
             return Items.AIR;
         try {
-            return (Item) hammerConstructor.newInstance(material,
-                                                        attackDamage,
-                                                        attackSpeed,
-                                                        NetherItems.defaultSettings());
+            return (Item) hammerConstructor.newInstance(
+                    material,
+                    attackDamage,
+                    attackSpeed,
+                    NetherItems.defaultSettings()
+            );
         } catch (Exception e) {
             e.printStackTrace();
             return Items.AIR;

@@ -31,11 +31,13 @@ public class EntityJungleSkeleton extends Skeleton {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level,
-                                        DifficultyInstance difficulty,
-                                        MobSpawnType spawnReason,
-                                        @Nullable SpawnGroupData entityData,
-                                        @Nullable CompoundTag entityTag) {
+    public SpawnGroupData finalizeSpawn(
+            ServerLevelAccessor level,
+            DifficultyInstance difficulty,
+            MobSpawnType spawnReason,
+            @Nullable SpawnGroupData entityData,
+            @Nullable CompoundTag entityTag
+    ) {
         entityData = super.finalizeSpawn(level, difficulty, spawnReason, entityData, entityTag);
         final RandomSource randomSource = level.getRandom();
         super.populateDefaultEquipmentSlots(randomSource, difficulty);
@@ -51,10 +53,12 @@ public class EntityJungleSkeleton extends Skeleton {
             int i = localDate.get(ChronoField.DAY_OF_MONTH);
             int j = localDate.get(ChronoField.MONTH_OF_YEAR);
             if (j == 10 && i == 31 && this.random.nextFloat() < 0.25F) {
-                this.setItemSlot(EquipmentSlot.HEAD,
-                                 new ItemStack(this.random.nextFloat() < 0.1F
-                                                       ? Blocks.JACK_O_LANTERN
-                                                       : Blocks.CARVED_PUMPKIN));
+                this.setItemSlot(
+                        EquipmentSlot.HEAD,
+                        new ItemStack(this.random.nextFloat() < 0.1F
+                                ? Blocks.JACK_O_LANTERN
+                                : Blocks.CARVED_PUMPKIN)
+                );
                 this.armorDropChances[EquipmentSlot.HEAD.getIndex()] = 0.0F;
             }
         }

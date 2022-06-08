@@ -1,15 +1,5 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.KeyDispatchDataCodec;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.Noises;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-
-import com.mojang.serialization.Codec;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
@@ -25,11 +15,23 @@ import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
+import com.mojang.serialization.Codec;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.util.KeyDispatchDataCodec;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.Noises;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+
 class UpsideDownFloorCondition extends SurfaceNoiseCondition {
     public static final UpsideDownFloorCondition DEFAULT = new UpsideDownFloorCondition();
     public static final Codec<UpsideDownFloorCondition> CODEC = Codec.BYTE.fieldOf("nether_noise")
-                                                                          .xmap(UpsideDownFloorCondition::create,
-                                                                                  obj -> (byte) 0)
+                                                                          .xmap(
+                                                                                  UpsideDownFloorCondition::create,
+                                                                                  obj -> (byte) 0
+                                                                          )
                                                                           .codec();
     private static final KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> KEY_CODEC = KeyDispatchDataCodec.of(
             CODEC);
@@ -56,8 +58,10 @@ class UpsideDownFloorCondition extends SurfaceNoiseCondition {
 public class UpsideDownForest extends NetherBiome {
     static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
     static final SurfaceRules.RuleSource NETHERRACK_MOSS = SurfaceRules.state(NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
-    static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition(Noises.NETHER_STATE_SELECTOR,
-            0.0);
+    static final SurfaceRules.ConditionSource NOISE_CEIL_LAYER = SurfaceRules.noiseCondition(
+            Noises.NETHER_STATE_SELECTOR,
+            0.0
+    );
 
     public static class Config extends NetherBiomeConfig {
         public Config(String name) {
@@ -103,17 +107,23 @@ public class UpsideDownForest extends NetherBiome {
 
         @Override
         public SurfaceRuleBuilder surface() {
-            return super.surface().rule(2,
-                    SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
+            return super.surface().rule(
+                    2,
+                    SurfaceRules.ifTrue(
+                            SurfaceRules.ON_CEILING,
                             SurfaceRules.sequence(SurfaceRules.ifTrue(
                                     Conditions.FORREST_FLOOR_SURFACE_NOISE_A,
-                                    CEILEING_MOSS), NETHERRACK)
+                                    CEILEING_MOSS
+                            ), NETHERRACK)
                     )
-            ).rule(2,
-                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
+            ).rule(
+                    2,
+                    SurfaceRules.ifTrue(
+                            SurfaceRules.ON_FLOOR,
                             SurfaceRules.sequence(SurfaceRules.ifTrue(
                                     UpsideDownFloorCondition.DEFAULT,
-                                    NETHERRACK_MOSS), NETHERRACK)
+                                    NETHERRACK_MOSS
+                            ), NETHERRACK)
                     )
             );
         }

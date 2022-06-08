@@ -1,13 +1,13 @@
 package org.betterx.betternether.tab;
 
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherItems;
+
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherItems;
 
 import java.util.stream.Collectors;
 

@@ -1,5 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.config.Configs;
+import org.betterx.betternether.registry.NetherBlocks;
+
+import com.mojang.math.Vector3f;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -31,11 +36,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-import com.mojang.math.Vector3f;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.registry.NetherBlocks;
-
 public class BlockStatueRespawner extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(1, 0, 1, 15, 16, 15);
     private static final DustParticleOptions EFFECT = new DustParticleOptions(Vector3f.XP, 1.0F);
@@ -49,9 +49,11 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false));
         this.setDropItself(false);
 
-        String itemName = Configs.MAIN.getString("respawn_statue",
-                                                 "respawn_item",
-                                                 Registry.ITEM.getKey(Items.GLOWSTONE).toString());
+        String itemName = Configs.MAIN.getString(
+                "respawn_statue",
+                "respawn_item",
+                Registry.ITEM.getKey(Items.GLOWSTONE).toString()
+        );
         Item item = Registry.ITEM.get(new ResourceLocation(itemName));
         if (item == Items.AIR)
             item = Items.GLOWSTONE;
@@ -75,12 +77,14 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
     }
 
     @Override
-    public InteractionResult use(BlockState state,
-                                 Level world,
-                                 BlockPos pos,
-                                 Player player,
-                                 InteractionHand hand,
-                                 BlockHitResult hit) {
+    public InteractionResult use(
+            BlockState state,
+            Level world,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hit
+    ) {
         ItemStack stack = player.getMainHandItem();
         if (stack.getItem() == requiredItem.getItem() && stack.getCount() >= requiredItem.getCount()) {
             float y = state.getValue(TOP) ? 0.4F : 1.4F;
@@ -89,9 +93,10 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
             }
             for (int i = 0; i < 50; i++)
                 world.addParticle(EFFECT,
-                                  pos.getX() + world.random.nextFloat(),
-                                  pos.getY() + y + world.random.nextFloat() * 0.2,
-                                  pos.getZ() + world.random.nextFloat(), 0, 0, 0);
+                        pos.getX() + world.random.nextFloat(),
+                        pos.getY() + y + world.random.nextFloat() * 0.2,
+                        pos.getZ() + world.random.nextFloat(), 0, 0, 0
+                );
             player.displayClientMessage(Component.translatable("message.spawn_set", new Object[0]), true);
             if (!world.isClientSide) {
                 ((ServerPlayer) player).setRespawnPosition(world.dimension(), pos, player.getYHeadRot(), false, true);
@@ -119,12 +124,14 @@ public class BlockStatueRespawner extends BlockBaseNotFull {
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (state.getValue(TOP)) {
             return world.getBlockState(pos.below()).getBlock() == this ? state : Blocks.AIR.defaultBlockState();
         } else {

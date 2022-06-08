@@ -1,5 +1,7 @@
 package org.betterx.betternether.mixin.client;
 
+import org.betterx.betternether.BetterNether;
+
 import net.minecraft.client.model.ArmorStandArmorModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -13,7 +15,6 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import org.betterx.betternether.BetterNether;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,9 +23,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Environment(EnvType.CLIENT)
 @Mixin(PlayerRenderer.class)
 public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
-    public PlayerArmorMixin(EntityRendererProvider.Context context,
-                            PlayerModel<AbstractClientPlayer> entityModel,
-                            float f) {
+    public PlayerArmorMixin(
+            EntityRendererProvider.Context context,
+            PlayerModel<AbstractClientPlayer> entityModel,
+            float f
+    ) {
         super(context, entityModel, f);
     }
 
@@ -45,7 +48,7 @@ public abstract class PlayerArmorMixin extends LivingEntityRenderer<AbstractClie
                             new ArmorStandArmorModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)),
                             new ArmorStandArmorModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR))
                     )
-                           );
+            );
         }
     }
 }

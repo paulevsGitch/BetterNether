@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.MHelper;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -13,8 +15,6 @@ import net.minecraft.world.level.material.MaterialColor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-
-import org.betterx.betternether.MHelper;
 
 public class BlockNetherSakuraLeaves extends BNLeaves {
     private static final RandomSource RANDOM = new LegacyRandomSource(130520220101l);
@@ -44,13 +44,15 @@ public class BlockNetherSakuraLeaves extends BNLeaves {
                 double x = (double) pos.getX() + random.nextDouble();
                 double y = (double) pos.getY() - 0.05D;
                 double z = (double) pos.getZ() + random.nextDouble();
-                world.addParticle(new BlockParticleOption(ParticleTypes.FALLING_DUST, state),
-                                  x,
-                                  y,
-                                  z,
-                                  0.0D,
-                                  0.0D,
-                                  0.0D);
+                world.addParticle(
+                        new BlockParticleOption(ParticleTypes.FALLING_DUST, state),
+                        x,
+                        y,
+                        z,
+                        0.0D,
+                        0.0D,
+                        0.0D
+                );
             }
         }
     }

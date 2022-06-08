@@ -1,5 +1,8 @@
 package org.betterx.betternether.mixin.common;
 
+import org.betterx.betternether.advancements.BNCriterion;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,8 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 import com.google.common.collect.UnmodifiableIterator;
-import org.betterx.betternether.advancements.BNCriterion;
-import org.betterx.betternether.registry.NetherBlocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -55,15 +56,17 @@ public abstract class LiquidBlockMixin {
     protected abstract void fizz(LevelAccessor levelAccessor, BlockPos blockPos);
 
     @Inject(method = "shouldSpreadLiquid", locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z", ordinal = 0))
-    void bn_shouldSpreadLiquid(Level level,
-                               BlockPos blockPos,
-                               BlockState arg2,
-                               CallbackInfoReturnable<Boolean> cir,
-                               boolean bl,
-                               UnmodifiableIterator var5,
-                               Direction direction,
-                               BlockPos blockPos2,
-                               Block block) {
+    void bn_shouldSpreadLiquid(
+            Level level,
+            BlockPos blockPos,
+            BlockState arg2,
+            CallbackInfoReturnable<Boolean> cir,
+            boolean bl,
+            UnmodifiableIterator var5,
+            Direction direction,
+            BlockPos blockPos2,
+            Block block
+    ) {
         if (block == Blocks.OBSIDIAN) {
             final BlockState belowState = level.getBlockState(blockPos.below());
             if (belowState.is(Blocks.SOUL_SOIL) || belowState.is(Blocks.SOUL_SAND)) {
@@ -73,10 +76,14 @@ public abstract class LiquidBlockMixin {
                 final int x = blockPos.getX();
                 final int y = blockPos.getY();
                 final int z = blockPos.getZ();
-                Iterator nearbyPlayer = level.getEntitiesOfClass(ServerPlayer.class,
-                                                                 (new AABB(x, y, z, x, y - 4, z)).inflate(10.0D,
-                                                                                                          5.0D,
-                                                                                                          10.0D))
+                Iterator nearbyPlayer = level.getEntitiesOfClass(
+                                                     ServerPlayer.class,
+                                                     (new AABB(x, y, z, x, y - 4, z)).inflate(
+                                                             10.0D,
+                                                             5.0D,
+                                                             10.0D
+                                                     )
+                                             )
                                              .iterator();
 
                 while (nearbyPlayer.hasNext()) {

@@ -1,5 +1,11 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.tools.AddMineableAxe;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherItems;
+
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -13,11 +19,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
-import org.betterx.bclib.interfaces.tools.AddMineableAxe;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherItems;
 
 import java.util.List;
 
@@ -37,7 +38,9 @@ public class BlockGiantLucis extends HugeMushroomBlock implements AddMineableAxe
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
         if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0)
             return Lists.newArrayList(new ItemStack(this.asItem()));
-        return Lists.newArrayList(new ItemStack(NetherBlocks.LUCIS_SPORE, MHelper.randRange(0, 1, MHelper.RANDOM)),
-                                  new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM)));
+        return Lists.newArrayList(
+                new ItemStack(NetherBlocks.LUCIS_SPORE, MHelper.randRange(0, 1, MHelper.RANDOM)),
+                new ItemStack(NetherItems.GLOWSTONE_PILE, MHelper.randRange(0, 2, MHelper.RANDOM))
+        );
     }
 }

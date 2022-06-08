@@ -1,5 +1,30 @@
 package org.betterx.betternether.commands;
 
+import org.betterx.bclib.BCLib;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
+import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
+import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
+import org.betterx.betternether.registry.NetherBiomes;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.world.NetherBiome;
+import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
+import org.betterx.betternether.world.structures.NetherStructureWorld;
+
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
+import com.mojang.datafixers.util.Either;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.math.Vector3d;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -36,31 +61,6 @@ import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
-import com.mojang.brigadier.Command;
-import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
-import com.mojang.datafixers.util.Either;
-import com.mojang.datafixers.util.Pair;
-import com.mojang.math.Vector3d;
-import org.betterx.bclib.BCLib;
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
-import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
-import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
-import org.betterx.betternether.registry.NetherBiomes;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.features.BiomeFeatures;
-import org.betterx.betternether.world.NetherBiome;
-import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
-import org.betterx.betternether.world.structures.NetherStructureWorld;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -87,9 +87,11 @@ public class CommandRegistry {
         CommandRegistrationCallback.EVENT.register(CommandRegistry::register);
     }
 
-    private static void register(CommandDispatcher<CommandSourceStack> dispatcher,
-                                 CommandBuildContext commandBuildContext,
-                                 Commands.CommandSelection commandSelection) {
+    private static void register(
+            CommandDispatcher<CommandSourceStack> dispatcher,
+            CommandBuildContext commandBuildContext,
+            Commands.CommandSelection commandSelection
+    ) {
         dispatcher.register(
                 Commands.literal("bn")
                         .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
@@ -112,17 +114,24 @@ public class CommandRegistry {
                         .then(Commands.literal("place_matching")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .then(Commands.argument("type", StringArgumentType.string())
-                                                    .executes(ctx -> placeMatchingBlocks(ctx,
+                                                    .executes(ctx -> placeMatchingBlocks(
+                                                            ctx,
                                                             StringArgumentType.getString(
                                                                     ctx,
-                                                                    "type"))))
+                                                                    "type"
+                                                            )
+                                                    )))
                         )
                         .then(Commands.literal("place_nbt")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .then(Commands.argument("name", StringArgumentType.string())
-                                                    .executes(ctx -> placeNbt(ctx,
-                                                            StringArgumentType.getString(ctx,
-                                                                    "name"))))
+                                                    .executes(ctx -> placeNbt(
+                                                            ctx,
+                                                            StringArgumentType.getString(
+                                                                    ctx,
+                                                                    "name"
+                                                            )
+                                                    )))
                         )
         );
     }
@@ -145,11 +154,13 @@ public class CommandRegistry {
 
         final BlockPos currentPosition = new BlockPos(source.getPosition());
         final BlockPos biomePosition = source.getLevel()
-                                             .findClosestBiome3d(b -> b.equals(biome.getBiome()),
+                                             .findClosestBiome3d(
+                                                     b -> b.equals(biome.getBiome()),
                                                      currentPosition,
                                                      MAX_SEARCH_RADIUS,
                                                      SAMPLE_RESOLUTION_HORIZONTAL,
-                                                     SAMPLE_RESOLUTION_VERTICAL)
+                                                     SAMPLE_RESOLUTION_VERTICAL
+                                             )
                                              .getFirst();
         final String biomeName = biome.toString();
 
@@ -173,12 +184,14 @@ public class CommandRegistry {
             } while (!state.isAir() && yPos > player.level.getMinBuildHeight() && yPos < player.level.getMaxBuildHeight());
             Vector3d targetPlayerPos = new Vector3d(target.getX() + 0.5, target.getY() - 1, target.getZ() + 0.5);
 
-            player.connection.teleport(targetPlayerPos.x,
+            player.connection.teleport(
+                    targetPlayerPos.x,
                     targetPlayerPos.y,
                     targetPlayerPos.z,
                     0,
                     0,
-                    Collections.EMPTY_SET);
+                    Collections.EMPTY_SET
+            );
             ResourceOrTagLocationArgument.Result result = new ResourceOrTagLocationArgument.Result() {
                 @Override
                 public Either<ResourceKey, TagKey> unwrap() {
@@ -202,17 +215,21 @@ public class CommandRegistry {
             };
             ResourceKey<Biome> a = BiomeAPI.getBiomeKey(biome.getBiome());
             Holder<Biome> h = BuiltinRegistries.BIOME.getHolder(a).orElseThrow();
-            return LocateCommand.showLocateResult(source,
+            return LocateCommand.showLocateResult(
+                    source,
                     result,
                     currentPosition,
                     new Pair<>(biomePosition, h),
                     "commands.locatebiome.success",
-                    false);
+                    false
+            );
         }
     }
 
-    private static int placeMatchingBlocks(CommandContext<CommandSourceStack> ctx,
-                                           String type) throws CommandSyntaxException {
+    private static int placeMatchingBlocks(
+            CommandContext<CommandSourceStack> ctx,
+            String type
+    ) throws CommandSyntaxException {
         final CommandSourceStack source = ctx.getSource();
         final ServerPlayer player = source.getPlayerOrException();
         Vec3 pos = source.getPosition();
@@ -252,11 +269,13 @@ public class CommandRegistry {
             if (structure == null) {
                 throw ERROR_NBT_STRUCTURE_NOT_FOUND.create(type);
             }
-            structure.generate(level,
+            structure.generate(
+                    level,
                     new BlockPos(pos),
                     MHelper.RANDOM,
                     128,
-                    NetherChunkPopulatorFeature.generatorForThread().context);
+                    NetherChunkPopulatorFeature.generatorForThread().context
+            );
         } catch (Throwable t) {
             BCLib.LOGGER.error("Error loading from nbt: " + type);
             BCLib.LOGGER.error(t.toString());
@@ -298,12 +317,14 @@ public class CommandRegistry {
         final ServerLevel level = source.getLevel();
         MutableBlockPos mPos = new BlockPos(pos).mutable();
         System.out.println("Staring at: " + mPos + " -> " + level.getBlockState(mPos));
-        boolean found = org.betterx.bclib.util.BlocksHelper.findSurroundingSurface(level,
+        boolean found = org.betterx.bclib.util.BlocksHelper.findSurroundingSurface(
+                level,
                 mPos,
                 Direction.DOWN,
                 12,
                 state -> BlocksHelper.isNetherGroundMagma(
-                        state));
+                        state)
+        );
         System.out.println("Ending at: " + mPos + " -> " + level.getBlockState(mPos) + " = " + found);
         org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, new BlockPos(pos), Blocks.YELLOW_CONCRETE);
         org.betterx.bclib.util.BlocksHelper.setWithoutUpdate(level, mPos, Blocks.LIGHT_BLUE_CONCRETE);
@@ -320,9 +341,11 @@ public class CommandRegistry {
         double max = Double.NEGATIVE_INFINITY;
         for (int x = -16; x <= 16; x++) {
             for (int y = -16; y <= 16; y++) {
-                double v = Biome.BIOME_INFO_NOISE.getValue((x + pos.x) / 200.0,
+                double v = Biome.BIOME_INFO_NOISE.getValue(
+                        (x + pos.x) / 200.0,
                         (y + pos.z) / 200.0,
-                        false);
+                        false
+                );
                 if (v < min) min = v;
                 if (v > max) max = v;
             }
@@ -338,9 +361,11 @@ public class CommandRegistry {
                 .get()
                 .value();
         var placements = pFeature.placement();
-        PlacementContext pctx = new PlacementContext(level,
+        PlacementContext pctx = new PlacementContext(
+                level,
                 level.getChunkSource().getGenerator(),
-                Optional.of(pFeature));
+                Optional.of(pFeature)
+        );
         Stream<BlockPos> s = Stream.of(new BlockPos(pos));
         RandomSource rnd = new LegacyRandomSource(121212);
         placeMapIdx = 0;
@@ -411,11 +436,13 @@ public class CommandRegistry {
         return Command.SINGLE_SUCCESS;
     }
 
-    private static void placeBlockRow(ServerPlayer player,
-                                      Vec3 pos,
-                                      List<Block> blocklist,
-                                      int offset,
-                                      boolean square) {
+    private static void placeBlockRow(
+            ServerPlayer player,
+            Vec3 pos,
+            List<Block> blocklist,
+            int offset,
+            boolean square
+    ) {
         int i = 0;
         int j = 0;
         int rowLen = (int) Math.ceil(Math.sqrt(blocklist.size()));
@@ -446,9 +473,11 @@ public class CommandRegistry {
         }
         BlocksHelper.setWithoutUpdate(player.getLevel(), blockPos, state);
         if (bl instanceof DoorBlock) {
-            BlocksHelper.setWithoutUpdate(player.getLevel(),
+            BlocksHelper.setWithoutUpdate(
+                    player.getLevel(),
                     blockPos.above(),
-                    state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
+                    state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER)
+            );
         }
     }
 }

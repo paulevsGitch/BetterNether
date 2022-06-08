@@ -57,32 +57,38 @@ public class BlockFireBowl extends BlockBaseNotFull {
     }
 
     @Override
-    public InteractionResult use(BlockState state,
-                                 Level world,
-                                 BlockPos pos,
-                                 Player player,
-                                 InteractionHand hand,
-                                 BlockHitResult hit) {
+    public InteractionResult use(
+            BlockState state,
+            Level world,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hit
+    ) {
         if (hit.getDirection() == Direction.UP) {
             if (player.getMainHandItem().getItem() == Items.FLINT_AND_STEEL && !state.getValue(FIRE)) {
                 world.setBlockAndUpdate(pos, state.setValue(FIRE, true));
                 if (!player.isCreative() && !world.isClientSide)
                     player.getMainHandItem().hurt(1, world.random, (ServerPlayer) player);
-                world.playSound(player,
+                world.playSound(
+                        player,
                         pos,
                         SoundEvents.FLINTANDSTEEL_USE,
                         SoundSource.BLOCKS,
                         1.0F,
-                        world.random.nextFloat() * 0.4F + 0.8F);
+                        world.random.nextFloat() * 0.4F + 0.8F
+                );
                 return InteractionResult.SUCCESS;
             } else if (player.getMainHandItem().isEmpty() && state.getValue(FIRE)) {
                 world.setBlockAndUpdate(pos, state.setValue(FIRE, false));
-                world.playSound(player,
+                world.playSound(
+                        player,
                         pos,
                         SoundEvents.FIRE_EXTINGUISH,
                         SoundSource.BLOCKS,
                         1.0F,
-                        world.random.nextFloat() * 0.4F + 0.8F);
+                        world.random.nextFloat() * 0.4F + 0.8F
+                );
                 return InteractionResult.SUCCESS;
             }
         }
@@ -100,22 +106,26 @@ public class BlockFireBowl extends BlockBaseNotFull {
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (state.getValue(FIRE)) {
             if (random.nextInt(24) == 0)
-                world.playLocalSound(pos.getX() + 0.5,
+                world.playLocalSound(
+                        pos.getX() + 0.5,
                         pos.getY() + 0.5,
                         pos.getZ() + 0.5,
                         SoundEvents.FIRE_AMBIENT,
                         SoundSource.BLOCKS,
                         1.0F + random.nextFloat(),
                         random.nextFloat() * 0.7F + 0.3F,
-                        false);
+                        false
+                );
             if (random.nextInt(4) == 0)
-                world.addParticle(ParticleTypes.LARGE_SMOKE,
+                world.addParticle(
+                        ParticleTypes.LARGE_SMOKE,
                         pos.getX() + random.nextDouble(),
                         pos.getY() + 0.75,
                         pos.getZ() + random.nextDouble(),
                         0.0D,
                         0.0D,
-                        0.0D);
+                        0.0D
+                );
         }
     }
 }

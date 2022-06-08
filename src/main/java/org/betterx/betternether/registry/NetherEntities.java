@@ -1,5 +1,16 @@
 package org.betterx.betternether.registry;
 
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
+import org.betterx.bclib.entity.BCLEntityWrapper;
+import org.betterx.bclib.interfaces.SpawnRule;
+import org.betterx.bclib.util.ColorUtil;
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.config.Configs;
+import org.betterx.betternether.entity.*;
+import org.betterx.betternether.world.NetherBiomeConfig;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -18,16 +29,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
-import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
-import org.betterx.bclib.entity.BCLEntityWrapper;
-import org.betterx.bclib.interfaces.SpawnRule;
-import org.betterx.bclib.util.ColorUtil;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.entity.*;
-import org.betterx.betternether.world.NetherBiomeConfig;
 
 import java.util.List;
 import java.util.Map;
@@ -65,7 +66,8 @@ public class NetherEntities {
                     .getDescriptionId()
                     .replace(
                             "entity.",
-                            "");
+                            ""
+                    );
             int weight = Configs.BIOMES.getInt(category, "weight", data.spawnWeight(this));
             int min = Configs.BIOMES.getInt(category, "minGroupSize", minGroupSize);
             int max = Configs.BIOMES.getInt(category, "maxGroupSize", maxGroupSize);
@@ -83,7 +85,8 @@ public class NetherEntities {
                     .getDescriptionId()
                     .replace(
                             "entity.",
-                            "");
+                            ""
+                    );
             int dweight = Configs.BIOMES.getInt(category, "weight", (int) (weight * multiplier));
             int min = Configs.BIOMES.getInt(category, "minGroupSize", minGroupSize);
             int max = Configs.BIOMES.getInt(category, "maxGroupSize", maxGroupSize);
@@ -115,20 +118,27 @@ public class NetherEntities {
     public static final Map<EntityType<? extends Entity>, AttributeSupplier> ATTRIBUTES = Maps.newHashMap();
     private static final List<BCLEntityWrapper<?>> NETHER_ENTITIES = Lists.newArrayList();
 
-    public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(MobCategory.MISC,
-                                                                                       EntityChair::new)
-                                                                               .dimensions(EntityDimensions.fixed(0.0F,
-                                                                                       0.0F))
+    public static final EntityType<EntityChair> CHAIR = FabricEntityTypeBuilder.create(
+                                                                                       MobCategory.MISC,
+                                                                                       EntityChair::new
+                                                                               )
+                                                                               .dimensions(EntityDimensions.fixed(
+                                                                                       0.0F,
+                                                                                       0.0F
+                                                                               ))
                                                                                .fireImmune()
                                                                                .disableSummon()
                                                                                .build();
     public static final EntityType<EntityNagaProjectile> NAGA_PROJECTILE = FabricEntityTypeBuilder
-            .create(MobCategory.MISC,
-                    EntityNagaProjectile::new)
+            .create(
+                    MobCategory.MISC,
+                    EntityNagaProjectile::new
+            )
             .dimensions(
                     EntityDimensions.fixed(
                             1F,
-                            1F))
+                            1F
+                    ))
             .disableSummon()
             .build();
 
@@ -211,15 +221,17 @@ public class NetherEntities {
             );
 
 
-    private static <T extends Mob> BCLEntityWrapper<T> register(String name,
-                                                                MobCategory group,
-                                                                float width,
-                                                                float height,
-                                                                EntityFactory<T> entity,
-                                                                Builder attributes,
-                                                                boolean fixedSize,
-                                                                int eggColor,
-                                                                int dotsColor) {
+    private static <T extends Mob> BCLEntityWrapper<T> register(
+            String name,
+            MobCategory group,
+            float width,
+            float height,
+            EntityFactory<T> entity,
+            Builder attributes,
+            boolean fixedSize,
+            int eggColor,
+            int dotsColor
+    ) {
         ResourceLocation id = BetterNether.makeID(name);
         EntityType<T> type = FabricEntityTypeBuilder.create(group, entity)
                                                     .dimensions(fixedSize
@@ -256,11 +268,13 @@ public class NetherEntities {
     public static final SpawnRule RULE_FLOAT_NOT_ABOVE_LAVA = (type, world, spawnReason, pos, random) -> testSpawnAboveLava(
             world,
             pos,
-            false);
+            false
+    );
     public static final SpawnRule RULE_FLOAT_ABOVE_LAVA = (type, world, spawnReason, pos, random) -> testSpawnAboveLava(
             world,
             pos,
-            true);
+            true
+    );
 
 
     public static void register() {

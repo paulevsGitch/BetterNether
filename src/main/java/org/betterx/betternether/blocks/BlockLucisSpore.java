@@ -1,5 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.features.WallFeatures;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -21,10 +26,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.features.WallFeatures;
 
 import java.util.EnumMap;
 
@@ -33,7 +34,8 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
             Direction.NORTH, box(4, 4, 8, 12, 12, 16),
             Direction.SOUTH, box(4, 4, 0, 12, 12, 8),
             Direction.WEST, box(8, 4, 4, 16, 12, 12),
-            Direction.EAST, box(0, 4, 4, 8, 12, 12)));
+            Direction.EAST, box(0, 4, 4, 8, 12, 12)
+    ));
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockLucisSpore() {
@@ -75,12 +77,14 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (canSurvive(state, world, pos))
             return state;
         else

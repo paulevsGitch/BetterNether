@@ -1,20 +1,5 @@
 package org.betterx.betternether.registry;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
-
-import com.google.common.collect.Lists;
 import org.betterx.bclib.api.v2.LifeCycleAPI;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
@@ -33,6 +18,22 @@ import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.features.*;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityFeature;
+
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+
+import com.google.common.collect.Lists;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -66,80 +67,107 @@ public class NetherFeatures {
             registerOre("cincinnasite", NetherBlocks.CINCINNASITE_ORE,
                     10, 8, 0.0f,
                     PlacementUtils.RANGE_10_10,
-                    false);
+                    false
+            );
 
     public static final BCLFeature NETHER_RUBY_ORE =
             registerOre("nether_ruby", NetherBlocks.NETHER_RUBY_ORE,
                     3, 8, 0, //0.6f,
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(32)),
-                    false);
+                    false
+            );
 
     public static final BCLFeature NETHER_RUBY_ORE_SOUL =
             registerOre("nether_ruby_soul", NetherBlocks.NETHER_RUBY_ORE, Blocks.SOUL_SOIL,
                     16, 12, 0, //0.6f,
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
-                    false);
+                    false
+            );
 
     public static final BCLFeature NETHER_RUBY_ORE_LARGE =
             registerOre("nether_ruby_large", NetherBlocks.NETHER_RUBY_ORE,
                     16, 12, 0, //0.6f,
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
-                    false);
+                    false
+            );
 
     public static final BCLFeature NETHER_RUBY_ORE_RARE =
             registerOre("nether_ruby_rare", NetherBlocks.NETHER_RUBY_ORE,
                     2, 12, 0.0f,
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(70), VerticalAnchor.top()),
-                    true);
+                    true
+            );
 
     public static final BCLFeature NETHER_LAPIS_ORE =
             registerOre("nether_lapis", NetherBlocks.NETHER_LAPIS_ORE,
                     18, 4, 0.0f,
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(10)),
-                    false);
+                    false
+            );
 
     public static final BCLFeature NETHER_REDSTONE_ORE =
             registerOre("nether_redstone", NetherBlocks.NETHER_REDSTONE_ORE,
                     1, 16, 0.3f,
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(8), VerticalAnchor.aboveBottom(40)),
-                    true);
+                    true
+            );
 
     // Maintainance //
-    public static final BCLFeature CLEANUP_FEATURE = registerChunkFeature("nether_clean",
+    public static final BCLFeature CLEANUP_FEATURE = registerChunkFeature(
+            "nether_clean",
             Decoration.RAW_GENERATION,
-            CleanupFeature::new);
-    public static final BCLFeature FIX_FEATURE = registerChunkFeature("nether_fix",
+            CleanupFeature::new
+    );
+    public static final BCLFeature FIX_FEATURE = registerChunkFeature(
+            "nether_fix",
             Decoration.TOP_LAYER_MODIFICATION,
-            BlockFixFeature::new);
+            BlockFixFeature::new
+    );
 
     // Terrain //
-    public static final BCLFeature CAVES_FEATURE = registerChunkFeature("nether_caves",
+    public static final BCLFeature CAVES_FEATURE = registerChunkFeature(
+            "nether_caves",
             Decoration.UNDERGROUND_STRUCTURES,
-            CavesFeature::new);
-    public static final BCLFeature PATHS_FEATURE = registerChunkFeature("nether_paths",
+            CavesFeature::new
+    );
+    public static final BCLFeature PATHS_FEATURE = registerChunkFeature(
+            "nether_paths",
             Decoration.LAKES,
-            PathsFeature::new);
-    public static final BCLFeature POPULATOR_FEATURE = registerChunkFeature("nether_populator",
+            PathsFeature::new
+    );
+    public static final BCLFeature POPULATOR_FEATURE = registerChunkFeature(
+            "nether_populator",
             Decoration.VEGETAL_DECORATION,
-            NetherChunkPopulatorFeature::new);
+            NetherChunkPopulatorFeature::new
+    );
 
     // Cached Config data //
-    public static final boolean HAS_CLEANING_PASS = Configs.GENERATOR.getBoolean("generator.world.terrain",
+    public static final boolean HAS_CLEANING_PASS = Configs.GENERATOR.getBoolean(
+            "generator.world.terrain",
             "terrain_cleaning_pass",
-            true);
-    public static final boolean HAS_CAVES = Configs.GENERATOR.getBoolean("generator.world.environment",
+            true
+    );
+    public static final boolean HAS_CAVES = Configs.GENERATOR.getBoolean(
+            "generator.world.environment",
             "generate_caves",
-            true);
-    public static final boolean HAS_PATHS = Configs.GENERATOR.getBoolean("generator.world.environment",
+            true
+    );
+    public static final boolean HAS_PATHS = Configs.GENERATOR.getBoolean(
+            "generator.world.environment",
             "generate_paths",
-            true);
-    public static final boolean HAS_FIXING_PASS = Configs.GENERATOR.getBoolean("generator.world.terrain",
+            true
+    );
+    public static final boolean HAS_FIXING_PASS = Configs.GENERATOR.getBoolean(
+            "generator.world.terrain",
             "world_fixing_pass",
-            true);
+            true
+    );
 
-    private static <T extends DefaultFeature> BCLFeature registerChunkFeature(String name,
-                                                                              Decoration step,
-                                                                              Supplier<T> feature) {
+    private static <T extends DefaultFeature> BCLFeature registerChunkFeature(
+            String name,
+            Decoration step,
+            Supplier<T> feature
+    ) {
         return BCLCommonFeatures.makeChunkFeature(
                 BetterNether.makeID("feature_" + name),
                 step,
@@ -147,14 +175,16 @@ public class NetherFeatures {
         );
     }
 
-    private static BCLFeature registerOre(String name,
-                                          Block blockOre,
-                                          Block baseBlock,
-                                          int veins,
-                                          int veinSize,
-                                          float airDiscardChance,
-                                          PlacementModifier placement,
-                                          boolean rare) {
+    private static BCLFeature registerOre(
+            String name,
+            Block blockOre,
+            Block baseBlock,
+            int veins,
+            int veinSize,
+            float airDiscardChance,
+            PlacementModifier placement,
+            boolean rare
+    ) {
         return _registerOre(
                 name + "_ore",
                 blockOre,
@@ -167,13 +197,15 @@ public class NetherFeatures {
         );
     }
 
-    private static BCLFeature registerOre(String name,
-                                          Block blockOre,
-                                          int veins,
-                                          int veinSize,
-                                          float airDiscardChance,
-                                          PlacementModifier placement,
-                                          boolean rare) {
+    private static BCLFeature registerOre(
+            String name,
+            Block blockOre,
+            int veins,
+            int veinSize,
+            float airDiscardChance,
+            PlacementModifier placement,
+            boolean rare
+    ) {
         return _registerOre(
                 name + "_ore",
                 blockOre,
@@ -186,14 +218,16 @@ public class NetherFeatures {
         );
     }
 
-    private static BCLFeature _registerOre(String name,
-                                           Block blockOre,
-                                           Block baseBlock,
-                                           int veins,
-                                           int veinSize,
-                                           float airDiscardChance,
-                                           PlacementModifier placementModifier,
-                                           boolean rare) {
+    private static BCLFeature _registerOre(
+            String name,
+            Block blockOre,
+            Block baseBlock,
+            int veins,
+            int veinSize,
+            float airDiscardChance,
+            PlacementModifier placementModifier,
+            boolean rare
+    ) {
         return BCLCommonFeatures.makeOreFeature(
                 BetterNether.makeID(name),
                 blockOre,
@@ -202,14 +236,17 @@ public class NetherFeatures {
                 veinSize,
                 airDiscardChance,
                 placementModifier,
-                rare);
+                rare
+        );
     }
 
     // MANAGE DEFAULT FEATURES //
-    public static StructureWorldNBT cfg(ResourceLocation location,
-                                        int offsetY,
-                                        StructurePlacementType type,
-                                        float chance) {
+    public static StructureWorldNBT cfg(
+            ResourceLocation location,
+            int offsetY,
+            StructurePlacementType type,
+            float chance
+    ) {
         return TemplateFeatureConfig.cfg(location, offsetY, type, chance);
     }
 
@@ -218,13 +255,16 @@ public class NetherFeatures {
         return f;
     }
 
-    private static BCLFeature registerDefault(ResourceLocation location,
-                                              List<StructureWorldNBT> structures,
-                                              int onceEveryChunk) {
+    private static BCLFeature registerDefault(
+            ResourceLocation location,
+            List<StructureWorldNBT> structures,
+            int onceEveryChunk
+    ) {
         return registerDefault(TemplateFeature.createAndRegister(
                 location,
                 new TemplateFeatureConfig(structures),
-                onceEveryChunk));
+                onceEveryChunk
+        ));
     }
 
     public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {

@@ -1,12 +1,13 @@
 package org.betterx.betternether.mixin.common;
 
+import org.betterx.betternether.enchantments.ObsidianBreaker;
+import org.betterx.betternether.registry.NetherEnchantments;
+
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.state.BlockState;
 
-import org.betterx.betternether.enchantments.ObsidianBreaker;
-import org.betterx.betternether.registry.NetherEnchantments;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

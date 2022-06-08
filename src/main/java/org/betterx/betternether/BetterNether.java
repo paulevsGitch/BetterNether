@@ -1,9 +1,5 @@
 package org.betterx.betternether;
 
-import net.minecraft.resources.ResourceLocation;
-
-import net.fabricmc.api.ModInitializer;
-
 import org.betterx.bclib.api.v2.WorldDataAPI;
 import org.betterx.bclib.api.v2.dataexchange.DataExchangeAPI;
 import org.betterx.bclib.util.Logger;
@@ -16,6 +12,10 @@ import org.betterx.betternether.recipes.IntegrationRecipes;
 import org.betterx.betternether.recipes.ItemRecipes;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.world.BNWorldGenerator;
+
+import net.minecraft.resources.ResourceLocation;
+
+import net.fabricmc.api.ModInitializer;
 
 public class BetterNether implements ModInitializer {
     public static final String MOD_ID = "betternether";

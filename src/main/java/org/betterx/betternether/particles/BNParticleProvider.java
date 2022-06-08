@@ -1,5 +1,7 @@
 package org.betterx.betternether.particles;
 
+import org.betterx.betternether.registry.NetherParticles;
+
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.DripParticle;
 import net.minecraft.client.particle.Particle;
@@ -13,15 +15,15 @@ import net.minecraft.world.level.material.Fluids;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import org.betterx.betternether.registry.NetherParticles;
-
 class BNDripHangParticle extends DripParticle.DripHangParticle {
-    public BNDripHangParticle(ClientLevel clientLevel,
-                              double d,
-                              double e,
-                              double f,
-                              Fluid fluid,
-                              ParticleOptions particleOptions) {
+    public BNDripHangParticle(
+            ClientLevel clientLevel,
+            double d,
+            double e,
+            double f,
+            Fluid fluid,
+            ParticleOptions particleOptions
+    ) {
         super(clientLevel, d, e, f, fluid, particleOptions);
     }
 
@@ -33,12 +35,14 @@ class BNDripHangParticle extends DripParticle.DripHangParticle {
 }
 
 class BNFallAndLandParticle extends DripParticle.FallAndLandParticle {
-    public BNFallAndLandParticle(ClientLevel clientLevel,
-                                 double d,
-                                 double e,
-                                 double f,
-                                 Fluid fluid,
-                                 ParticleOptions particleOptions) {
+    public BNFallAndLandParticle(
+            ClientLevel clientLevel,
+            double d,
+            double e,
+            double f,
+            Fluid fluid,
+            ParticleOptions particleOptions
+    ) {
         super(clientLevel, d, e, f, fluid, particleOptions);
     }
 
@@ -73,14 +77,16 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType,
-                                       ClientLevel clientLevel,
-                                       double d,
-                                       double e,
-                                       double f,
-                                       double g,
-                                       double h,
-                                       double i) {
+        public Particle createParticle(
+                SimpleParticleType simpleParticleType,
+                ClientLevel clientLevel,
+                double d,
+                double e,
+                double f,
+                double g,
+                double h,
+                double i
+        ) {
             BNDripLandParticle dripParticle = new BNDripLandParticle(clientLevel, d, e, f, Fluids.EMPTY);
             dripParticle.setup(true, (int) (28.0D / (Math.random() * 0.8D + 0.2D)));
             dripParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
@@ -98,20 +104,24 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType,
-                                       ClientLevel clientLevel,
-                                       double d,
-                                       double e,
-                                       double f,
-                                       double g,
-                                       double h,
-                                       double i) {
-            BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(clientLevel,
-                                                                           d,
-                                                                           e,
-                                                                           f,
-                                                                           Fluids.EMPTY,
-                                                                           NetherParticles.BLUE_LANDING_OBSIDIAN_TEAR);
+        public Particle createParticle(
+                SimpleParticleType simpleParticleType,
+                ClientLevel clientLevel,
+                double d,
+                double e,
+                double f,
+                double g,
+                double h,
+                double i
+        ) {
+            BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(
+                    clientLevel,
+                    d,
+                    e,
+                    f,
+                    Fluids.EMPTY,
+                    NetherParticles.BLUE_LANDING_OBSIDIAN_TEAR
+            );
             dripParticle.setup(true, 0.01F);
             dripParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
             dripParticle.pickSprite(this.sprite);
@@ -127,20 +137,24 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType,
-                                       ClientLevel clientLevel,
-                                       double d,
-                                       double e,
-                                       double f,
-                                       double g,
-                                       double h,
-                                       double i) {
-            BNDripHangParticle dripHangParticle = new BNDripHangParticle(clientLevel,
-                                                                         d,
-                                                                         e,
-                                                                         f,
-                                                                         Fluids.EMPTY,
-                                                                         NetherParticles.BLUE_FALLING_OBSIDIAN_TEAR);
+        public Particle createParticle(
+                SimpleParticleType simpleParticleType,
+                ClientLevel clientLevel,
+                double d,
+                double e,
+                double f,
+                double g,
+                double h,
+                double i
+        ) {
+            BNDripHangParticle dripHangParticle = new BNDripHangParticle(
+                    clientLevel,
+                    d,
+                    e,
+                    f,
+                    Fluids.EMPTY,
+                    NetherParticles.BLUE_FALLING_OBSIDIAN_TEAR
+            );
             dripHangParticle.setup(true, 0.01F, 100);
             dripHangParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
             dripHangParticle.pickSprite(this.sprite);
@@ -157,14 +171,16 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType,
-                                       ClientLevel clientLevel,
-                                       double d,
-                                       double e,
-                                       double f,
-                                       double g,
-                                       double h,
-                                       double i) {
+        public Particle createParticle(
+                SimpleParticleType simpleParticleType,
+                ClientLevel clientLevel,
+                double d,
+                double e,
+                double f,
+                double g,
+                double h,
+                double i
+        ) {
             BNDripLandParticle dripParticle = new BNDripLandParticle(clientLevel, d, e, f, Fluids.EMPTY);
             dripParticle.setup(true, (int) (Math.random() * 10) + 1);
             dripParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
@@ -181,20 +197,24 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType,
-                                       ClientLevel clientLevel,
-                                       double d,
-                                       double e,
-                                       double f,
-                                       double g,
-                                       double h,
-                                       double i) {
-            BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(clientLevel,
-                                                                           d,
-                                                                           e,
-                                                                           f,
-                                                                           Fluids.EMPTY,
-                                                                           NetherParticles.BLUE_LANDING_OBSIDIAN_WEEP);
+        public Particle createParticle(
+                SimpleParticleType simpleParticleType,
+                ClientLevel clientLevel,
+                double d,
+                double e,
+                double f,
+                double g,
+                double h,
+                double i
+        ) {
+            BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(
+                    clientLevel,
+                    d,
+                    e,
+                    f,
+                    Fluids.EMPTY,
+                    NetherParticles.BLUE_LANDING_OBSIDIAN_WEEP
+            );
             dripParticle.setup(true, 0.01F);
             dripParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
             dripParticle.pickSprite(this.sprite);
@@ -210,20 +230,24 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType,
-                                       ClientLevel clientLevel,
-                                       double d,
-                                       double e,
-                                       double f,
-                                       double g,
-                                       double h,
-                                       double i) {
-            BNDripHangParticle dripHangParticle = new BNDripHangParticle(clientLevel,
-                                                                         d,
-                                                                         e,
-                                                                         f,
-                                                                         Fluids.EMPTY,
-                                                                         NetherParticles.BLUE_FALLING_OBSIDIAN_WEEP);
+        public Particle createParticle(
+                SimpleParticleType simpleParticleType,
+                ClientLevel clientLevel,
+                double d,
+                double e,
+                double f,
+                double g,
+                double h,
+                double i
+        ) {
+            BNDripHangParticle dripHangParticle = new BNDripHangParticle(
+                    clientLevel,
+                    d,
+                    e,
+                    f,
+                    Fluids.EMPTY,
+                    NetherParticles.BLUE_FALLING_OBSIDIAN_WEEP
+            );
             dripHangParticle.setup(true, 0.01F, 5 + (int) (Math.random() * 10));
             dripHangParticle.setColor(BLUE_DRIP_R, BLUE_DRIP_G, BLUE_DRIP_B);
             dripHangParticle.pickSprite(this.sprite);
@@ -243,14 +267,16 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType,
-                                       ClientLevel clientLevel,
-                                       double d,
-                                       double e,
-                                       double f,
-                                       double g,
-                                       double h,
-                                       double i) {
+        public Particle createParticle(
+                SimpleParticleType simpleParticleType,
+                ClientLevel clientLevel,
+                double d,
+                double e,
+                double f,
+                double g,
+                double h,
+                double i
+        ) {
             BNDripLandParticle dripParticle = new BNDripLandParticle(clientLevel, d, e, f, Fluids.EMPTY);
             dripParticle.setup(true, (int) (Math.random() * 10) + 1);
             dripParticle.setColor(DRIP_R, DRIP_G, DRIP_B);
@@ -267,20 +293,24 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType,
-                                       ClientLevel clientLevel,
-                                       double d,
-                                       double e,
-                                       double f,
-                                       double g,
-                                       double h,
-                                       double i) {
-            BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(clientLevel,
-                                                                           d,
-                                                                           e,
-                                                                           f,
-                                                                           Fluids.EMPTY,
-                                                                           NetherParticles.LANDING_OBSIDIAN_WEEP);
+        public Particle createParticle(
+                SimpleParticleType simpleParticleType,
+                ClientLevel clientLevel,
+                double d,
+                double e,
+                double f,
+                double g,
+                double h,
+                double i
+        ) {
+            BNFallAndLandParticle dripParticle = new BNFallAndLandParticle(
+                    clientLevel,
+                    d,
+                    e,
+                    f,
+                    Fluids.EMPTY,
+                    NetherParticles.LANDING_OBSIDIAN_WEEP
+            );
             dripParticle.setup(true, 0.01F);
             dripParticle.setColor(DRIP_R, DRIP_G, DRIP_B);
             dripParticle.pickSprite(this.sprite);
@@ -296,20 +326,24 @@ public class BNParticleProvider<S extends ParticleType<SimpleParticleType>> {
             this.sprite = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType,
-                                       ClientLevel clientLevel,
-                                       double d,
-                                       double e,
-                                       double f,
-                                       double g,
-                                       double h,
-                                       double i) {
-            BNDripHangParticle dripHangParticle = new BNDripHangParticle(clientLevel,
-                                                                         d,
-                                                                         e,
-                                                                         f,
-                                                                         Fluids.EMPTY,
-                                                                         NetherParticles.FALLING_OBSIDIAN_WEEP);
+        public Particle createParticle(
+                SimpleParticleType simpleParticleType,
+                ClientLevel clientLevel,
+                double d,
+                double e,
+                double f,
+                double g,
+                double h,
+                double i
+        ) {
+            BNDripHangParticle dripHangParticle = new BNDripHangParticle(
+                    clientLevel,
+                    d,
+                    e,
+                    f,
+                    Fluids.EMPTY,
+                    NetherParticles.FALLING_OBSIDIAN_WEEP
+            );
             dripHangParticle.setup(true, 0.01F, 5 + (int) (Math.random() * 10));
             dripHangParticle.setColor(DRIP_R, DRIP_G, DRIP_B);
             dripHangParticle.pickSprite(this.sprite);

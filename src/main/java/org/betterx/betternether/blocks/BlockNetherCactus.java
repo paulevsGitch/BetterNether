@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.interfaces.SurvivesOnGravel;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -22,9 +25,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.interfaces.SurvivesOnGravel;
 
 public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGravel {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
@@ -52,12 +52,14 @@ public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGra
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (canSurvive(state, world, pos)) {
             Block up = world.getBlockState(pos.above()).getBlock();
             if (up == this)

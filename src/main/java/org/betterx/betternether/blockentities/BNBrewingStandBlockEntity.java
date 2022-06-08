@@ -1,5 +1,8 @@
 package org.betterx.betternether.blockentities;
 
+import org.betterx.betternether.registry.BlockEntitiesRegistry;
+import org.betterx.betternether.registry.BrewingRegistry;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -25,9 +28,6 @@ import net.minecraft.world.level.block.BrewingStandBlock;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.betterx.betternether.registry.BlockEntitiesRegistry;
-import org.betterx.betternether.registry.BrewingRegistry;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -209,7 +209,8 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
                 source = itemStack2;
             } else if (!world.isClientSide) {
                 Containers.dropItemStack(world, blockPos.getX(), blockPos.getY(),
-                                         blockPos.getZ(), itemStack2);
+                        blockPos.getZ(), itemStack2
+                );
             }
         }
 
@@ -256,9 +257,11 @@ public class BNBrewingStandBlockEntity extends BaseContainerBlockEntity implemen
         if (this.level.getBlockEntity(this.worldPosition) != this) {
             return false;
         } else {
-            return player.distanceToSqr((double) this.worldPosition.getX() + 0.5D,
-                                        (double) this.worldPosition.getY() + 0.5D,
-                                        (double) this.worldPosition.getZ() + 0.5D) <= 64.0D;
+            return player.distanceToSqr(
+                    (double) this.worldPosition.getX() + 0.5D,
+                    (double) this.worldPosition.getY() + 0.5D,
+                    (double) this.worldPosition.getZ() + 0.5D
+            ) <= 64.0D;
         }
     }
 

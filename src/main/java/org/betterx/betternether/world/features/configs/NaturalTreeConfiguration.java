@@ -1,9 +1,8 @@
 package org.betterx.betternether.world.features.configs;
 
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
 public class NaturalTreeConfiguration implements FeatureConfiguration {
     public static final Codec<NaturalTreeConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance

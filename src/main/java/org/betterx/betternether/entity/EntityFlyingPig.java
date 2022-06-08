@@ -1,5 +1,10 @@
 package org.betterx.betternether.entity;
 
+import org.betterx.bclib.entity.DespawnableAnimal;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.registry.NetherEntities;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -44,11 +49,6 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-
-import org.betterx.bclib.entity.DespawnableAnimal;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.registry.NetherEntities;
 
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -196,10 +196,12 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
     }
 
     @Override
-    protected void checkFallDamage(double heightDifference,
-                                   boolean onGround,
-                                   BlockState landedState,
-                                   BlockPos landedPosition) {
+    protected void checkFallDamage(
+            double heightDifference,
+            boolean onGround,
+            BlockState landedState,
+            BlockPos landedPosition
+    ) {
     }
 
     @Override
@@ -422,16 +424,18 @@ public class EntityFlyingPig extends DespawnableAnimal implements FlyingAnimal {
                 while (var14.hasNext()) {
                     ServerPlayer serverPlayerEntity = (ServerPlayer) var14.next();
                     if (serverPlayerEntity.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4096.0D) {
-                        serverPlayerEntity.connection.send(new ClientboundLevelParticlesPacket(effect,
-                                                                                               false,
-                                                                                               target.getX(),
-                                                                                               target.getY() + 0.2,
-                                                                                               target.getZ(),
-                                                                                               0.2F,
-                                                                                               0.2F,
-                                                                                               0.2F,
-                                                                                               0,
-                                                                                               16));
+                        serverPlayerEntity.connection.send(new ClientboundLevelParticlesPacket(
+                                effect,
+                                false,
+                                target.getX(),
+                                target.getY() + 0.2,
+                                target.getZ(),
+                                0.2F,
+                                0.2F,
+                                0.2F,
+                                0,
+                                16
+                        ));
                     }
                 }
 

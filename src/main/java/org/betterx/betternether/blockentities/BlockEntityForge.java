@@ -1,5 +1,7 @@
 package org.betterx.betternether.blockentities;
 
+import org.betterx.betternether.registry.BlockEntitiesRegistry;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -9,8 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
 public class BlockEntityForge extends AbstractFurnaceBlockEntity implements ChangebleCookTime {
     public BlockEntityForge(BlockPos pos, BlockState state) {

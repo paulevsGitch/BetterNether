@@ -76,10 +76,12 @@ public class RecipesHelper {
     public static void makeColoringRecipe(Block source, Block result, Item dye, String group) {
         if (Registry.BLOCK.getKey(source) != Registry.BLOCK.getDefaultKey()) {
             String name = Registry.BLOCK.getKey(result).getPath();
-            ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#",
-                                                                        new ItemStack(source),
-                                                                        "I",
-                                                                        new ItemStack(dye));
+            ImmutableMap<String, ItemStack> materials = ImmutableMap.of(
+                    "#",
+                    new ItemStack(source),
+                    "I",
+                    new ItemStack(dye)
+            );
             BNRecipeManager.addCraftingRecipe(name, group, SHAPE_COLORING, materials, new ItemStack(result, 8));
         }
     }
@@ -96,12 +98,14 @@ public class RecipesHelper {
         if (Registry.BLOCK.getKey(material) != Registry.BLOCK.getDefaultKey() && Registry.BLOCK.getKey(inside) != Registry.BLOCK.getDefaultKey() && Registry.ITEM.getKey(
                 leg) != Registry.ITEM.getDefaultKey()) {
             String name = Registry.BLOCK.getKey(result).getPath();
-            ImmutableMap<String, ItemStack> materials = ImmutableMap.of("#",
-                                                                        new ItemStack(material),
-                                                                        "I",
-                                                                        new ItemStack(inside),
-                                                                        "L",
-                                                                        new ItemStack(leg));
+            ImmutableMap<String, ItemStack> materials = ImmutableMap.of(
+                    "#",
+                    new ItemStack(material),
+                    "I",
+                    new ItemStack(inside),
+                    "L",
+                    new ItemStack(leg)
+            );
             BNRecipeManager.addCraftingRecipe(name, "fire_bowl", SHAPE_FIRE_BOWL, materials, new ItemStack(result));
         }
     }

@@ -1,5 +1,12 @@
 package org.betterx.betternether.entity;
 
+import org.betterx.bclib.entity.DespawnableAnimal;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherEntities;
+import org.betterx.betternether.registry.SoundsRegistry;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Vec3i;
@@ -39,13 +46,6 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 
-import org.betterx.bclib.entity.DespawnableAnimal;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.SoundsRegistry;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumSet;
@@ -55,12 +55,18 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
     private static final HashSet<Block> FLOWERS;
     private static final Vec3i[] SEARCH;
 
-    private static final EntityDataAccessor<Float> COLOR_RED = SynchedEntityData.defineId(EntityFirefly.class,
-            EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> COLOR_GREEN = SynchedEntityData.defineId(EntityFirefly.class,
-            EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> COLOR_BLUE = SynchedEntityData.defineId(EntityFirefly.class,
-            EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> COLOR_RED = SynchedEntityData.defineId(
+            EntityFirefly.class,
+            EntityDataSerializers.FLOAT
+    );
+    private static final EntityDataAccessor<Float> COLOR_GREEN = SynchedEntityData.defineId(
+            EntityFirefly.class,
+            EntityDataSerializers.FLOAT
+    );
+    private static final EntityDataAccessor<Float> COLOR_BLUE = SynchedEntityData.defineId(
+            EntityFirefly.class,
+            EntityDataSerializers.FLOAT
+    );
 
     private boolean mustSit = false;
 
@@ -161,10 +167,12 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
     }
 
     @Override
-    protected void checkFallDamage(double heightDifference,
-                                   boolean onGround,
-                                   BlockState landedState,
-                                   BlockPos landedPosition) {
+    protected void checkFallDamage(
+            double heightDifference,
+            boolean onGround,
+            BlockState landedState,
+            BlockPos landedPosition
+    ) {
     }
 
     @Override
@@ -339,7 +347,8 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
                 bpos.set(
                         EntityFirefly.this.getX() + offset.getX(),
                         EntityFirefly.this.getY() + offset.getY(),
-                        EntityFirefly.this.getZ() + offset.getZ());
+                        EntityFirefly.this.getZ() + offset.getZ()
+                );
                 if (isFlower(w.getBlockState(bpos)))
                     return bpos;
             }
@@ -379,9 +388,11 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         @Override
         public boolean canUse() {
             if (EntityFirefly.this.mustSit && EntityFirefly.this.navigation.isDone()) {
-                BlockPos pos = new BlockPos(EntityFirefly.this.getX(),
+                BlockPos pos = new BlockPos(
+                        EntityFirefly.this.getX(),
                         EntityFirefly.this.getY(),
-                        EntityFirefly.this.getZ());
+                        EntityFirefly.this.getZ()
+                );
                 BlockState state = EntityFirefly.this.level.getBlockState(pos.below());
                 return !state.isAir() && !state.getMaterial().isLiquid();
             }
@@ -439,7 +450,8 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
             Vec3 velocity = new Vec3(
                     EntityFirefly.this.random.nextDouble(),
                     EntityFirefly.this.random.nextDouble(),
-                    EntityFirefly.this.random.nextDouble());
+                    EntityFirefly.this.random.nextDouble()
+            );
             if (velocity.lengthSqr() == 0)
                 velocity = new Vec3(1, 0, 0);
             EntityFirefly.this.setDeltaMovement(velocity.normalize().scale(EntityFirefly.this.flyingSpeed));
@@ -547,11 +559,13 @@ public class EntityFirefly extends DespawnableAnimal implements FlyingAnimal {
         FLOWERS.add(Blocks.NETHER_WART);
     }
 
-    public static boolean canSpawn(EntityType<? extends EntityFirefly> type,
-                                   LevelAccessor world,
-                                   MobSpawnType spawnReason,
-                                   BlockPos pos,
-                                   RandomSource random) {
+    public static boolean canSpawn(
+            EntityType<? extends EntityFirefly> type,
+            LevelAccessor world,
+            MobSpawnType spawnReason,
+            BlockPos pos,
+            RandomSource random
+    ) {
         if (pos.getY() >= world.dimensionType().minY()) return false;
         int h = BlocksHelper.downRay(world, pos, 10);
         if (h > 8)

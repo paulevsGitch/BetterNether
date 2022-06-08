@@ -1,12 +1,12 @@
 package org.betterx.betternether;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-
 import org.betterx.bclib.api.v2.datafixer.DataFixerAPI;
 import org.betterx.bclib.api.v2.datafixer.MigrationProfile;
 import org.betterx.bclib.api.v2.datafixer.Patch;
 import org.betterx.bclib.interfaces.PatchBiFunction;
+
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 
 import java.util.List;
 import java.util.Map;
@@ -190,7 +190,7 @@ class Patcher_001 extends Patch {
                 Map.entry("betternether:bar_stool_crimson", "betternether:crimson_bar_stool"),
                 Map.entry("betternether:bar_stool_warped", "betternether:warped_bar_stool")
 
-                            );
+        );
     }
 
     @Override
@@ -203,7 +203,7 @@ class Patcher_001 extends Patch {
             "betternether:rubeus_leaves",
             "betternether:anchor_tree_leaves",
             "betternether:nether_sakura_leaves"
-                                                         );
+    );
 
     private static boolean patchBlockState(ListTag palette, ListTag states, MigrationProfile profile) {
         boolean[] changed = {false};

@@ -1,5 +1,7 @@
 package org.betterx.betternether.world.structures.city;
 
+import org.betterx.betternether.registry.NetherStructures;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -8,8 +10,6 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
-
-import org.betterx.betternether.registry.NetherStructures;
 
 import java.time.Instant;
 import java.util.Collections;
@@ -20,22 +20,26 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CityHelper {
     private static final Set<ChunkPos> POSITIONS = Collections.newSetFromMap(new ConcurrentHashMap<ChunkPos, Boolean>(16));
 
-    public static boolean stopStructGen(int chunkX,
-                                        int chunkZ,
-                                        ChunkGenerator chunkGenerator,
-                                        long worldSeed,
-                                        WorldgenRandom chunkRandom) {
+    public static boolean stopStructGen(
+            int chunkX,
+            int chunkZ,
+            ChunkGenerator chunkGenerator,
+            long worldSeed,
+            WorldgenRandom chunkRandom
+    ) {
         if (NetherStructures.CITY_STRUCTURE.spreadConfig instanceof RandomSpreadStructurePlacement config) {
             if (config != null && config.spacing() > 0) collectNearby(chunkX, chunkZ, config, worldSeed, chunkRandom);
         }
         return stopGeneration(chunkX, chunkZ);
     }
 
-    private static void collectNearby(int chunkX,
-                                      int chunkZ,
-                                      RandomSpreadStructurePlacement config,
-                                      long worldSeed,
-                                      WorldgenRandom chunkRandom) {
+    private static void collectNearby(
+            int chunkX,
+            int chunkZ,
+            RandomSpreadStructurePlacement config,
+            long worldSeed,
+            WorldgenRandom chunkRandom
+    ) {
         int x1 = chunkX - 16;
         int x2 = chunkX + 16;
         int z1 = chunkZ - 16;
@@ -50,12 +54,14 @@ public class CityHelper {
         }
     }
 
-    private static void collectNearby(ServerLevel world,
-                                      int chunkX,
-                                      int chunkZ,
-                                      RandomSpreadStructurePlacement config,
-                                      long worldSeed,
-                                      WorldgenRandom chunkRandom) {
+    private static void collectNearby(
+            ServerLevel world,
+            int chunkX,
+            int chunkZ,
+            RandomSpreadStructurePlacement config,
+            long worldSeed,
+            WorldgenRandom chunkRandom
+    ) {
         final MutableBlockPos POS = new MutableBlockPos();
 
         int x1 = chunkX - 16;
@@ -97,12 +103,14 @@ public class CityHelper {
             if (config == null || config.spacing() < 1)
                 return null;
 
-            collectNearby(world,
+            collectNearby(
+                    world,
                     cx,
                     cz,
                     config,
                     world.getSeed(),
-                    new WorldgenRandom(new LegacyRandomSource(Instant.now().getEpochSecond())));
+                    new WorldgenRandom(new LegacyRandomSource(Instant.now().getEpochSecond()))
+            );
         }
 
         Iterator<ChunkPos> iterator = POSITIONS.iterator();

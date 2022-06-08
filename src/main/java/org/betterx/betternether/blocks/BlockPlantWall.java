@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.materials.Materials;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -19,8 +22,6 @@ import net.fabricmc.api.Environment;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import java.util.EnumMap;
 
@@ -29,7 +30,8 @@ public class BlockPlantWall extends BlockBaseNotFull {
             Direction.NORTH, box(2, 2, 10, 14, 14, 16),
             Direction.SOUTH, box(2, 2, 0, 14, 14, 6),
             Direction.WEST, box(10, 2, 2, 16, 14, 14),
-            Direction.EAST, box(0, 2, 2, 6, 14, 14)));
+            Direction.EAST, box(0, 2, 2, 6, 14, 14)
+    ));
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockPlantWall(MaterialColor color) {
@@ -61,12 +63,14 @@ public class BlockPlantWall extends BlockBaseNotFull {
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (canSurvive(state, world, pos))
             return state;
         else

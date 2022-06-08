@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.config.Configs;
+import org.betterx.betternether.registry.NetherEntities;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -28,9 +31,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-
-import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.registry.NetherEntities;
 
 import java.util.Collections;
 import java.util.List;
@@ -69,7 +69,8 @@ public class BlockEggPlant extends BlockCommonPlant {
                     pos.getX() + random.nextDouble(),
                     pos.getY() + 0.4,
                     pos.getZ() + random.nextDouble(),
-                    0.46, 0.28, 0.55);
+                    0.46, 0.28, 0.55
+            );
     }
 
     @Override
@@ -89,13 +90,15 @@ public class BlockEggPlant extends BlockCommonPlant {
                 BlockParticleOption effect = new BlockParticleOption(ParticleTypes.BLOCK, state);
                 RandomSource random = world.random;
                 for (int i = 0; i < 24; i++)
-                    world.addParticle(effect,
+                    world.addParticle(
+                            effect,
                             px + random.nextGaussian() * 0.2,
                             py + random.nextGaussian() * 0.2,
                             pz + random.nextGaussian() * 0.2,
                             random.nextGaussian(),
                             random.nextGaussian(),
-                            random.nextGaussian());
+                            random.nextGaussian()
+                    );
             }
 
             world.setBlockAndUpdate(pos, state.setValue(DESTRUCTED, true));

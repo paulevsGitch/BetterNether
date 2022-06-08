@@ -1,10 +1,11 @@
 package org.betterx.betternether.entity.model;
 
+import org.betterx.betternether.entity.EntityChair;
+
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 
 import com.google.common.collect.ImmutableList;
-import org.betterx.betternether.entity.EntityChair;
 
 public class ModelEmpty extends AgeableListModel<EntityChair> {
     @Override
@@ -18,12 +19,14 @@ public class ModelEmpty extends AgeableListModel<EntityChair> {
     }
 
     @Override
-    public void setupAnim(EntityChair entity,
-                          float limbAngle,
-                          float limbDistance,
-                          float customAngle,
-                          float headYaw,
-                          float headPitch) {
+    public void setupAnim(
+            EntityChair entity,
+            float limbAngle,
+            float limbDistance,
+            float customAngle,
+            float headYaw,
+            float headPitch
+    ) {
 
     }
 }

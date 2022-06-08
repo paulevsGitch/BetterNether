@@ -1,12 +1,12 @@
 package org.betterx.betternether.world.structures.decorations;
 
-import net.minecraft.world.level.block.state.BlockState;
-
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.NetherStructureWorld;
 import org.betterx.betternether.world.structures.StructureObjScatter;
+
+import net.minecraft.world.level.block.state.BlockState;
 
 public class StructureForestLitter extends StructureObjScatter {
     private static final NetherStructureWorld[] STRUCTURES = new NetherStructureWorld[]{

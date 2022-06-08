@@ -1,13 +1,13 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.bclib.complexmaterials.entry.BlockEntry;
+import org.betterx.betternether.blocks.BlockAnchorTreeSapling;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.betterx.bclib.complexmaterials.entry.BlockEntry;
-import org.betterx.betternether.blocks.BlockAnchorTreeSapling;
 
 public class AnchorTreeMaterial extends NetherWoodenMaterial {
     public final static String BLOCK_SAPLING = BLOCK_OPTIONAL_SAPLING;

@@ -1,5 +1,10 @@
 package org.betterx.betternether.world.structures.city;
 
+import org.betterx.betternether.blocks.BlockBNPot;
+import org.betterx.betternether.blocks.BlockPottedPlant;
+import org.betterx.betternether.blocks.BlockSmallLantern;
+import org.betterx.betternether.world.structures.city.palette.CityPalette;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -11,11 +16,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
-
-import org.betterx.betternether.blocks.BlockBNPot;
-import org.betterx.betternether.blocks.BlockPottedPlant;
-import org.betterx.betternether.blocks.BlockSmallLantern;
-import org.betterx.betternether.world.structures.city.palette.CityPalette;
 
 public class BuildingStructureProcessor extends StructureProcessor {
     protected final CityPalette palette;
@@ -29,12 +29,14 @@ public class BuildingStructureProcessor extends StructureProcessor {
     }
 
     @Override
-    public StructureBlockInfo processBlock(LevelReader worldView,
-                                           BlockPos pos,
-                                           BlockPos blockPos,
-                                           StructureBlockInfo structureBlockInfo,
-                                           StructureBlockInfo structureBlockInfo2,
-                                           StructurePlaceSettings structurePlacementData) {
+    public StructureBlockInfo processBlock(
+            LevelReader worldView,
+            BlockPos pos,
+            BlockPos blockPos,
+            StructureBlockInfo structureBlockInfo,
+            StructureBlockInfo structureBlockInfo2,
+            StructurePlaceSettings structurePlacementData
+    ) {
         BlockState state = structureBlockInfo.state;
 
         if (state.isAir())
@@ -107,8 +109,10 @@ public class BuildingStructureProcessor extends StructureProcessor {
             return setState(palette.getPlant(state), structureBlockInfo2);
         } else if (block instanceof StructureBlock) {
             return setState(Blocks.AIR.defaultBlockState(), structureBlockInfo2);
-        } else if (!name.contains("nether") && !name.contains("mycelium") && state.isCollisionShapeFullBlock(worldView,
-                                                                                                             structureBlockInfo.pos) && state.canOcclude() && !(state.getBlock() instanceof BaseEntityBlock)) {
+        } else if (!name.contains("nether") && !name.contains("mycelium") && state.isCollisionShapeFullBlock(
+                worldView,
+                structureBlockInfo.pos
+        ) && state.canOcclude() && !(state.getBlock() instanceof BaseEntityBlock)) {
             if (state.getLightEmission() > 0)
                 return setState(palette.getGlowingBlock(state), structureBlockInfo2);
             return setState(palette.getStoneBlock(state), structureBlockInfo2);

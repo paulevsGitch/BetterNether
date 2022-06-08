@@ -1,15 +1,15 @@
 package org.betterx.betternether.entity.render;
 
-import net.minecraft.Util;
-import net.minecraft.client.renderer.RenderStateShard;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import org.betterx.betternether.mixin.client.RenderLayerMixin;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import org.betterx.betternether.mixin.client.RenderLayerMixin;
+import net.minecraft.Util;
+import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
 
 
 public abstract class RenderPhaseAccessor extends RenderStateShard { //extends ShaderDebugHelper{
@@ -21,16 +21,19 @@ public abstract class RenderPhaseAccessor extends RenderStateShard { //extends S
             "alpha_transparency",
             () -> {
                 RenderSystem.enableBlend();
-                RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
-                                               GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-                                               GlStateManager.SourceFactor.ONE,
-                                               GlStateManager.DestFactor.ZERO);
+                RenderSystem.blendFuncSeparate(
+                        GlStateManager.SourceFactor.SRC_ALPHA,
+                        GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+                        GlStateManager.SourceFactor.ONE,
+                        GlStateManager.DestFactor.ZERO
+                );
                 //RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             },
             () -> {
                 RenderSystem.disableBlend();
                 RenderSystem.defaultBlendFunc();
-            });
+            }
+    );
 
     private static final RenderType getFireflySetup(ResourceLocation texture) {
         //initDebugShader();
@@ -42,7 +45,8 @@ public abstract class RenderPhaseAccessor extends RenderStateShard { //extends S
                                                                                   .setTextureState(new RenderStateShard.TextureStateShard(
                                                                                           texture,
                                                                                           false,
-                                                                                          false))
+                                                                                          false
+                                                                                  ))
                                                                                   .setWriteMaskState(COLOR_WRITE)
                                                                                   .setCullState(NO_CULL)
                                                                                   .setOverlayState(OVERLAY)
@@ -50,13 +54,15 @@ public abstract class RenderPhaseAccessor extends RenderStateShard { //extends S
                                                                                   .setTransparencyState(
                                                                                           ALPHA_ADD_TRANSPARENCY)
                                                                                   .createCompositeState(false);
-        return RenderLayerMixin.callCreate("firefly",
-                                           DefaultVertexFormat.NEW_ENTITY,
-                                           VertexFormat.Mode.QUADS,
-                                           256,
-                                           false,
-                                           true,
-                                           multiPhaseParameters);
+        return RenderLayerMixin.callCreate(
+                "firefly",
+                DefaultVertexFormat.NEW_ENTITY,
+                VertexFormat.Mode.QUADS,
+                256,
+                false,
+                true,
+                multiPhaseParameters
+        );
     }
 
     private static final java.util.function.Function<ResourceLocation, RenderType> FIREFLY_RENDER_LAYER = Util.memoize(

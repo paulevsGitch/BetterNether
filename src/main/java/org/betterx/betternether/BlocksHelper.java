@@ -1,5 +1,8 @@
 package org.betterx.betternether;
 
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.betternether.blocks.BlockFarmland;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -16,9 +19,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-import org.betterx.betternether.blocks.BlockFarmland;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -151,12 +151,14 @@ public class BlocksHelper {
         return state.getBlock() instanceof BlockFarmland;
     }
 
-    public static void cover(LevelAccessor world,
-                             BlockPos center,
-                             Block ground,
-                             BlockState cover,
-                             int radius,
-                             RandomSource random) {
+    public static void cover(
+            LevelAccessor world,
+            BlockPos center,
+            Block ground,
+            BlockState cover,
+            int radius,
+            RandomSource random
+    ) {
         HashSet<BlockPos> points = new HashSet<BlockPos>();
         HashSet<BlockPos> points2 = new HashSet<BlockPos>();
         if (world.getBlockState(center).getBlock() == ground) {
@@ -190,11 +192,13 @@ public class BlocksHelper {
         return state.is(BlockTags.NYLIUM);
     }
 
-    public static boolean createLogIfFree(LevelAccessor world,
-                                          BlockPos pos,
-                                          BlockState anchorBlock,
-                                          Direction[] directions,
-                                          MutableBlockPos mutableBlockPos) {
+    public static boolean createLogIfFree(
+            LevelAccessor world,
+            BlockPos pos,
+            BlockState anchorBlock,
+            Direction[] directions,
+            MutableBlockPos mutableBlockPos
+    ) {
         boolean hasNeighbor = false;
         for (Direction dir : directions) {
             mutableBlockPos.setWithOffset(pos, dir);

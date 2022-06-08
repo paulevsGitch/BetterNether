@@ -1,5 +1,7 @@
 package org.betterx.betternether.items;
 
+import org.betterx.betternether.tab.CreativeTabs;
+
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -9,8 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-import org.betterx.betternether.tab.CreativeTabs;
-
 public class ItemBlackApple extends Item {
     public static final FoodProperties BLACK_APPLE = new FoodProperties.Builder().nutrition(6)
                                                                                  .saturationMod(0.5F)
@@ -18,9 +18,9 @@ public class ItemBlackApple extends Item {
 
     public ItemBlackApple() {
         super(new Item.Properties()
-                      .tab(CreativeTabs.BN_TAB)
-                      .food(BLACK_APPLE)
-                      .food(Foods.APPLE));
+                .tab(CreativeTabs.BN_TAB)
+                .food(BLACK_APPLE)
+                .food(Foods.APPLE));
     }
 
     @Override

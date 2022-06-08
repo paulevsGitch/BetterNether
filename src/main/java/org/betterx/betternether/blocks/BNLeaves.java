@@ -1,5 +1,8 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BaseLeavesBlock;
+import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -10,9 +13,6 @@ import net.minecraft.world.level.material.MaterialColor;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricMaterialBuilder;
-
-import org.betterx.bclib.blocks.BaseLeavesBlock;
-import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 
 import java.util.function.Consumer;
 

@@ -1,13 +1,5 @@
 package org.betterx.betternether.blocks.complex;
 
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.MaterialColor;
-
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
 import org.betterx.bclib.api.v2.tag.NamedBlockTags;
 import org.betterx.bclib.api.v2.tag.NamedItemTags;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
@@ -15,6 +7,14 @@ import org.betterx.betternether.blocks.BlockRubeusCone;
 import org.betterx.betternether.blocks.BlockRubeusSapling;
 import org.betterx.betternether.blocks.RubeusBark;
 import org.betterx.betternether.blocks.RubeusLog;
+
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.MaterialColor;
+
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class RubeusMaterial extends NetherWoodenMaterial {
     public final static String BLOCK_SAPLING = BLOCK_OPTIONAL_SAPLING;
@@ -49,7 +49,7 @@ public class RubeusMaterial extends NetherWoodenMaterial {
                 })
                         .setBlockTags(NamedBlockTags.LOGS, NamedBlockTags.LOGS_THAT_BURN, tagBlockLog)
                         .setItemTags(NamedItemTags.LOGS, NamedItemTags.LOGS_THAT_BURN, tagItemLog)
-                              );
+        );
 
         replaceOrAddBlockEntry(
                 new BlockEntry(BLOCK_BARK, (complexMaterial, settings) -> {
@@ -57,7 +57,7 @@ public class RubeusMaterial extends NetherWoodenMaterial {
                 })
                         .setBlockTags(NamedBlockTags.LOGS, NamedBlockTags.LOGS_THAT_BURN, tagBlockLog)
                         .setItemTags(NamedItemTags.LOGS, NamedItemTags.LOGS_THAT_BURN, tagItemLog)
-                              );
+        );
     }
 
     public Block getCone() {

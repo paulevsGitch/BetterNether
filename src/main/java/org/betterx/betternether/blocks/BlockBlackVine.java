@@ -1,5 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.items.tool.BaseShearsItem;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.materials.Materials;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -29,9 +33,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.Lists;
-import org.betterx.bclib.items.tool.BaseShearsItem;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.materials.Materials;
 
 import java.util.List;
 
@@ -77,12 +78,14 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         if (canSurvive(state, world, pos))
             return world.getBlockState(pos.below()).getBlock() == this
                     ? state.setValue(BNBlockProperties.BOTTOM, false)
@@ -115,17 +118,21 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
             if (world.getBlockState(blockPos).getBlock() != this)
                 break;
         }
-        BlocksHelper.setWithoutUpdate(world,
+        BlocksHelper.setWithoutUpdate(
+                world,
                 blockPos.above(),
-                defaultBlockState().setValue(BNBlockProperties.BOTTOM, false));
+                defaultBlockState().setValue(BNBlockProperties.BOTTOM, false)
+        );
         BlocksHelper.setWithoutUpdate(world, blockPos, defaultBlockState().setValue(BNBlockProperties.BOTTOM, true));
     }
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (tool != null && BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH,
-                tool) > 0) {
+        if (tool != null && BaseShearsItem.isShear(tool) || EnchantmentHelper.getItemEnchantmentLevel(
+                Enchantments.SILK_TOUCH,
+                tool
+        ) > 0) {
             return Lists.newArrayList(new ItemStack(this.asItem()));
         } else {
             return Lists.newArrayList();

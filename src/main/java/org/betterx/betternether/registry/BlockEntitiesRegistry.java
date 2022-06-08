@@ -1,11 +1,5 @@
 package org.betterx.betternether.registry;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-
 import org.betterx.bclib.blocks.BaseBarrelBlock;
 import org.betterx.bclib.blocks.BaseChestBlock;
 import org.betterx.betternether.BetterNether;
@@ -15,22 +9,32 @@ import org.betterx.betternether.blockentities.BlockEntityForge;
 import org.betterx.betternether.blockentities.BlockEntityFurnace;
 import org.betterx.betternether.blocks.BlockNetherFurnace;
 
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlockEntitiesRegistry {
     public static final BlockEntityType<BlockEntityForge> CINCINNASITE_FORGE = BlockEntityType.Builder.of(
             BlockEntityForge::new,
-            NetherBlocks.CINCINNASITE_FORGE).build(null);
+            NetherBlocks.CINCINNASITE_FORGE
+    ).build(null);
     public static final BlockEntityType<BlockEntityFurnace> NETHERRACK_FURNACE = BlockEntityType.Builder.of(
             BlockEntityFurnace::new,
-            getFurnaces()).build(null);
+            getFurnaces()
+    ).build(null);
     public static final BlockEntityType<BlockEntityChestOfDrawers> CHEST_OF_DRAWERS = BlockEntityType.Builder.of(
             BlockEntityChestOfDrawers::new,
-            NetherBlocks.CHEST_OF_DRAWERS).build(null);
+            NetherBlocks.CHEST_OF_DRAWERS
+    ).build(null);
     public static final BlockEntityType<BNBrewingStandBlockEntity> NETHER_BREWING_STAND = BlockEntityType.Builder.of(
             BNBrewingStandBlockEntity::new,
-            NetherBlocks.NETHER_BREWING_STAND).build(null);
+            NetherBlocks.NETHER_BREWING_STAND
+    ).build(null);
 
     public static void register() {
         RegisterBlockEntity("forge", CINCINNASITE_FORGE);

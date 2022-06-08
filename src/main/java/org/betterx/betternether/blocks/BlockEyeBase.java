@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
@@ -13,8 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import org.betterx.betternether.registry.NetherBlocks;
-
 public class BlockEyeBase extends BlockBase {
     public BlockEyeBase(Properties settings) {
         super(settings);
@@ -26,12 +26,14 @@ public class BlockEyeBase extends BlockBase {
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         BlockPos blockPos = pos.above();
         Block up = world.getBlockState(blockPos).getBlock();
         if (up != NetherBlocks.EYE_VINE && up != Blocks.NETHERRACK)

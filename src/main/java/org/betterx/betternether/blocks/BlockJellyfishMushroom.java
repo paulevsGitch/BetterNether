@@ -1,5 +1,12 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties.TripleShape;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.blocks.BNBlockProperties.JellyShape;
+import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherItems;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.damagesource.DamageSource;
@@ -27,12 +34,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 
 import com.google.common.collect.Lists;
-import org.betterx.bclib.blocks.BlockProperties.TripleShape;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BNBlockProperties.JellyShape;
-import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherItems;
 
 import java.util.List;
 
@@ -79,12 +80,14 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction facing,
-                                  BlockState neighborState,
-                                  LevelAccessor world,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
+    public BlockState updateShape(
+            BlockState state,
+            Direction facing,
+            BlockState neighborState,
+            LevelAccessor world,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
         switch (state.getValue(SHAPE)) {
             case BOTTOM:
                 return world.getBlockState(pos.below()).isFaceSturdy(world, pos.below(), Direction.UP)
@@ -92,9 +95,11 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
                         : Blocks.AIR.defaultBlockState();
             case MIDDLE:
                 return world.getBlockState(pos.above()).getBlock() == this && world.getBlockState(pos.below())
-                                                                                   .isFaceSturdy(world,
+                                                                                   .isFaceSturdy(
+                                                                                           world,
                                                                                            pos.below(),
-                                                                                           Direction.UP)
+                                                                                           Direction.UP
+                                                                                   )
                         ? state
                         : Blocks.AIR.defaultBlockState();
             case TOP:
@@ -147,14 +152,22 @@ public class BlockJellyfishMushroom extends BlockBaseNotFull {
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         if (state.getValue(SHAPE) == TripleShape.TOP) {
-            return Lists.newArrayList(new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING,
-                            MHelper.randRange(1, 2, MHelper.RANDOM)),
-                    new ItemStack(NetherItems.GLOWSTONE_PILE,
-                            MHelper.randRange(0, 2, MHelper.RANDOM)),
-                    new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, MHelper.RANDOM)));
+            return Lists.newArrayList(
+                    new ItemStack(
+                            NetherBlocks.JELLYFISH_MUSHROOM_SAPLING,
+                            MHelper.randRange(1, 2, MHelper.RANDOM)
+                    ),
+                    new ItemStack(
+                            NetherItems.GLOWSTONE_PILE,
+                            MHelper.randRange(0, 2, MHelper.RANDOM)
+                    ),
+                    new ItemStack(Items.SLIME_BALL, MHelper.randRange(0, 1, MHelper.RANDOM))
+            );
         } else if (state.getValue(SHAPE) == TripleShape.BOTTOM)
-            return Lists.newArrayList(new ItemStack(NetherBlocks.JELLYFISH_MUSHROOM_SAPLING,
-                    MHelper.randRange(1, 2, MHelper.RANDOM)));
+            return Lists.newArrayList(new ItemStack(
+                    NetherBlocks.JELLYFISH_MUSHROOM_SAPLING,
+                    MHelper.randRange(1, 2, MHelper.RANDOM)
+            ));
         else
             return Lists.newArrayList(new ItemStack(NetherBlocks.MAT_NETHER_MUSHROOM.getStem()));
     }

@@ -1,5 +1,12 @@
 package org.betterx.betternether.world.structures.piece;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.registry.NetherStructurePieces;
+import org.betterx.betternether.world.structures.city.BuildingStructureProcessor;
+import org.betterx.betternether.world.structures.city.StructureCityBuilding;
+import org.betterx.betternether.world.structures.city.palette.CityPalette;
+import org.betterx.betternether.world.structures.city.palette.Palettes;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -16,13 +23,6 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.registry.NetherStructurePieces;
-import org.betterx.betternether.world.structures.city.BuildingStructureProcessor;
-import org.betterx.betternether.world.structures.city.StructureCityBuilding;
-import org.betterx.betternether.world.structures.city.palette.CityPalette;
-import org.betterx.betternether.world.structures.city.palette.Palettes;
 
 public class CityPiece extends CustomPiece {
     private final MutableBlockPos POS = new MutableBlockPos();
@@ -52,8 +52,10 @@ public class CityPiece extends CustomPiece {
     }
 
     @Override
-    protected void addAdditionalSaveData(StructurePieceSerializationContext structurePieceSerializationContext,
-                                         CompoundTag tag) {
+    protected void addAdditionalSaveData(
+            StructurePieceSerializationContext structurePieceSerializationContext,
+            CompoundTag tag
+    ) {
         tag.putString("building", building.getName());
         tag.putInt("rotation", building.getRotation().ordinal());
         tag.putInt("mirror", building.getMirror().ordinal());
@@ -63,23 +65,27 @@ public class CityPiece extends CustomPiece {
     }
 
     @Override
-    public void postProcess(WorldGenLevel world,
-                            StructureManager arg,
-                            ChunkGenerator chunkGenerator,
-                            RandomSource random,
-                            BoundingBox blockBox,
-                            ChunkPos chunkPos,
-                            BlockPos blockPos) {
+    public void postProcess(
+            WorldGenLevel world,
+            StructureManager arg,
+            ChunkGenerator chunkGenerator,
+            RandomSource random,
+            BoundingBox blockBox,
+            ChunkPos chunkPos,
+            BlockPos blockPos
+    ) {
         if (!this.boundingBox.intersects(blockBox))
             return;
 
 
-        BoundingBox clamped = new BoundingBox(boundingBox.minX(),
+        BoundingBox clamped = new BoundingBox(
+                boundingBox.minX(),
                 boundingBox.minY(),
                 boundingBox.minZ(),
                 boundingBox.maxX(),
                 boundingBox.maxY(),
-                boundingBox.maxZ());
+                boundingBox.maxZ()
+        );
         //clamped.encompass(blockBox);
         int cminZ = Math.max(clamped.minZ(), blockBox.minZ());
         int cmaxZ = Math.min(clamped.maxZ(), blockBox.maxZ());

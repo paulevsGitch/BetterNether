@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.BlocksHelper;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -16,8 +18,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.betterx.betternether.BlocksHelper;
 
 public class BlockBNPot extends BlockBaseNotFull {
     private static final VoxelShape SHAPE = box(3, 0, 3, 13, 8, 13);
@@ -36,12 +36,14 @@ public class BlockBNPot extends BlockBaseNotFull {
     }
 
     @Override
-    public InteractionResult use(BlockState state,
-                                 Level world,
-                                 BlockPos pos,
-                                 Player player,
-                                 InteractionHand hand,
-                                 BlockHitResult hit) {
+    public InteractionResult use(
+            BlockState state,
+            Level world,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hit
+    ) {
         BlockPos plantPos = pos.above();
         if (hit.getDirection() == Direction.UP && world.isEmptyBlock(plantPos)) {
             BlockState plant = BlockPottedPlant.getPlant(player.getMainHandItem().getItem());
@@ -56,7 +58,8 @@ public class BlockBNPot extends BlockBaseNotFull {
                         SoundSource.BLOCKS,
                         0.8F,
                         1.0F,
-                        true);
+                        true
+                );
                 if (!player.isCreative())
                     player.getMainHandItem().shrink(1);
                 return InteractionResult.SUCCESS;

@@ -1,11 +1,5 @@
 package org.betterx.betternether.world.features;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
 import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.BlocksHelper;
@@ -14,79 +8,105 @@ import org.betterx.betternether.blocks.BlockNetherMycelium;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+
 public class MushroomFirFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
 
     private static final BlockState SIDE_BIG_N = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                               .defaultBlockState()
                                                                               .setValue(
                                                                                       BlockMushroomFir.SHAPE,
-                                                                                      BlockMushroomFir.MushroomFirShape.SIDE_BIG_N);
+                                                                                      BlockMushroomFir.MushroomFirShape.SIDE_BIG_N
+                                                                              );
     private static final BlockState SIDE_BIG_W = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                               .defaultBlockState()
                                                                               .setValue(
                                                                                       BlockMushroomFir.SHAPE,
-                                                                                      BlockMushroomFir.MushroomFirShape.SIDE_BIG_W);
+                                                                                      BlockMushroomFir.MushroomFirShape.SIDE_BIG_W
+                                                                              );
     private static final BlockState SIDE_BIG_E = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                               .defaultBlockState()
                                                                               .setValue(
                                                                                       BlockMushroomFir.SHAPE,
-                                                                                      BlockMushroomFir.MushroomFirShape.SIDE_BIG_E);
+                                                                                      BlockMushroomFir.MushroomFirShape.SIDE_BIG_E
+                                                                              );
     private static final BlockState SIDE_SMALL_S = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                                 .defaultBlockState()
                                                                                 .setValue(
                                                                                         BlockMushroomFir.SHAPE,
-                                                                                        BlockMushroomFir.MushroomFirShape.SIDE_SMALL_S);
+                                                                                        BlockMushroomFir.MushroomFirShape.SIDE_SMALL_S
+                                                                                );
     private static final BlockState SIDE_SMALL_N = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                                 .defaultBlockState()
                                                                                 .setValue(
                                                                                         BlockMushroomFir.SHAPE,
-                                                                                        BlockMushroomFir.MushroomFirShape.SIDE_SMALL_N);
+                                                                                        BlockMushroomFir.MushroomFirShape.SIDE_SMALL_N
+                                                                                );
     private static final BlockState SIDE_SMALL_W = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                                 .defaultBlockState()
                                                                                 .setValue(
                                                                                         BlockMushroomFir.SHAPE,
-                                                                                        BlockMushroomFir.MushroomFirShape.SIDE_SMALL_W);
+                                                                                        BlockMushroomFir.MushroomFirShape.SIDE_SMALL_W
+                                                                                );
     private static final BlockState SIDE_SMALL_E = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                                 .defaultBlockState()
                                                                                 .setValue(
                                                                                         BlockMushroomFir.SHAPE,
-                                                                                        BlockMushroomFir.MushroomFirShape.SIDE_SMALL_E);
+                                                                                        BlockMushroomFir.MushroomFirShape.SIDE_SMALL_E
+                                                                                );
     private static final BlockState END = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                        .defaultBlockState()
-                                                                       .setValue(BlockMushroomFir.SHAPE,
-                                                                               BlockMushroomFir.MushroomFirShape.END);
+                                                                       .setValue(
+                                                                               BlockMushroomFir.SHAPE,
+                                                                               BlockMushroomFir.MushroomFirShape.END
+                                                                       );
     private static final BlockState BLUE_MYCELIUM = NetherBlocks.NETHER_MYCELIUM.defaultBlockState()
-                                                                                .setValue(BlockNetherMycelium.IS_BLUE,
-                                                                                        true);
+                                                                                .setValue(
+                                                                                        BlockNetherMycelium.IS_BLUE,
+                                                                                        true
+                                                                                );
     private static final BlockState SIDE_BIG_S = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                               .defaultBlockState()
                                                                               .setValue(
                                                                                       BlockMushroomFir.SHAPE,
-                                                                                      BlockMushroomFir.MushroomFirShape.SIDE_BIG_S);
+                                                                                      BlockMushroomFir.MushroomFirShape.SIDE_BIG_S
+                                                                              );
     private static final BlockState TOP = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                        .defaultBlockState()
-                                                                       .setValue(BlockMushroomFir.SHAPE,
-                                                                               BlockMushroomFir.MushroomFirShape.TOP);
+                                                                       .setValue(
+                                                                               BlockMushroomFir.SHAPE,
+                                                                               BlockMushroomFir.MushroomFirShape.TOP
+                                                                       );
     private static final BlockState MIDDLE = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                           .defaultBlockState()
-                                                                          .setValue(BlockMushroomFir.SHAPE,
-                                                                                  BlockMushroomFir.MushroomFirShape.MIDDLE);
+                                                                          .setValue(
+                                                                                  BlockMushroomFir.SHAPE,
+                                                                                  BlockMushroomFir.MushroomFirShape.MIDDLE
+                                                                          );
     private static final BlockState BOTTOM = NetherBlocks.MAT_MUSHROOM_FIR.getTrunk()
                                                                           .defaultBlockState()
-                                                                          .setValue(BlockMushroomFir.SHAPE,
-                                                                                  BlockMushroomFir.MushroomFirShape.BOTTOM);
+                                                                          .setValue(
+                                                                                  BlockMushroomFir.SHAPE,
+                                                                                  BlockMushroomFir.MushroomFirShape.BOTTOM
+                                                                          );
 
     public MushroomFirFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor level,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor level,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         if (!level.getBlockState(pos.below()).is(CommonBlockTags.MYCELIUM)) return false;
 
         final float scale_factor = MAX_HEIGHT / 128.0f;
@@ -97,11 +117,13 @@ public class MushroomFirFeature extends ContextFeature<NoneFeatureConfiguration>
         return false;
     }
 
-    protected boolean grow(ServerLevelAccessor level,
-                           BlockPos pos,
-                           RandomSource random,
-                           float scale_factor,
-                           StructureGeneratorThreadContext context) {
+    protected boolean grow(
+            ServerLevelAccessor level,
+            BlockPos pos,
+            RandomSource random,
+            float scale_factor,
+            StructureGeneratorThreadContext context
+    ) {
         final int RANDOM_BOUND = (int) (5 * scale_factor);
         int h = 3 + random.nextInt(RANDOM_BOUND);
         for (int y = 1; y < h; y++)
@@ -179,20 +201,24 @@ public class MushroomFirFeature extends ContextFeature<NoneFeatureConfiguration>
         if (level.isEmptyBlock(context.POS))
             BlocksHelper.setWithUpdate(level, context.POS, END);
 
-        BlocksHelper.cover(level,
+        BlocksHelper.cover(
+                level,
                 pos.below(),
                 NetherBlocks.NETHER_MYCELIUM,
                 BLUE_MYCELIUM,
                 5,
-                random);
+                random
+        );
         return true;
     }
 
     @Override
-    public boolean grow(ServerLevelAccessor level,
-                        BlockPos pos,
-                        RandomSource random,
-                        NoneFeatureConfiguration configuration) {
+    public boolean grow(
+            ServerLevelAccessor level,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration configuration
+    ) {
         return grow(level, pos, random, 1, NetherChunkPopulatorFeature.generatorForThread().context);
     }
 }

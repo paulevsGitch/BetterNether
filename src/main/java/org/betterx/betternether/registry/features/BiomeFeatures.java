@@ -1,5 +1,13 @@
 package org.betterx.betternether.registry.features;
 
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v2.levelgen.features.config.PlaceFacingBlockConfig;
+import org.betterx.bclib.api.v2.levelgen.features.placement.FindSolidInDirection;
+import org.betterx.bclib.api.v2.levelgen.features.placement.OnEveryLayer;
+import org.betterx.bclib.api.v2.levelgen.features.placement.UnderEveryLayer;
+import org.betterx.betternether.BetterNether;
+
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -10,41 +18,43 @@ import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.v2.levelgen.features.config.PlaceFacingBlockConfig;
-import org.betterx.bclib.api.v2.levelgen.features.placement.FindSolidInDirection;
-import org.betterx.bclib.api.v2.levelgen.features.placement.OnEveryLayer;
-import org.betterx.bclib.api.v2.levelgen.features.placement.UnderEveryLayer;
-import org.betterx.betternether.BetterNether;
-
 import java.util.List;
 
 public class BiomeFeatures {
-    public static final List<PlacementModifier> defaultCeilModifiers = List.of(CountPlacement.of(16),
+    public static final List<PlacementModifier> defaultCeilModifiers = List.of(
+            CountPlacement.of(16),
             InSquarePlacement.spread(),
             UnderEveryLayer.min4(),
-            BiomeFilter.biome());
+            BiomeFilter.biome()
+    );
 
-    public static final List<PlacementModifier> defaultDenseCeilModifiers = List.of(CountPlacement.of(48),
+    public static final List<PlacementModifier> defaultDenseCeilModifiers = List.of(
+            CountPlacement.of(48),
             InSquarePlacement.spread(),
             UnderEveryLayer.min4(),
-            BiomeFilter.biome());
-    public static final List<PlacementModifier> defaultFloorModifiers = List.of(CountPlacement.of(16),
+            BiomeFilter.biome()
+    );
+    public static final List<PlacementModifier> defaultFloorModifiers = List.of(
+            CountPlacement.of(16),
             InSquarePlacement.spread(),
             OnEveryLayer.min4(),
-            BiomeFilter.biome());
+            BiomeFilter.biome()
+    );
 
-    public static final List<PlacementModifier> defaultDenseFloorModifiers = List.of(CountPlacement.of(64),
+    public static final List<PlacementModifier> defaultDenseFloorModifiers = List.of(
+            CountPlacement.of(64),
             InSquarePlacement.spread(),
             OnEveryLayer.min4(),
-            BiomeFilter.biome());
+            BiomeFilter.biome()
+    );
 
-    public static final List<PlacementModifier> defaultWallModifiers = List.of(CountPlacement.of(128),
+    public static final List<PlacementModifier> defaultWallModifiers = List.of(
+            CountPlacement.of(128),
             InSquarePlacement.spread(),
             PlacementUtils.RANGE_4_4,
             new FindSolidInDirection(PlaceFacingBlockConfig.HORIZONTAL, 12, false),
-            BiomeFilter.biome());
+            BiomeFilter.biome()
+    );
     public static final BCLFeature MAGMA_LAND_FLOOR = floorFromWeighted("magma_land", List.of(
             new WeightedPlacedFeature(FloorFeatures.GEYSER.getPlacedFeature(), 0.02f),
             new WeightedPlacedFeature(FloorFeatures.MAGMA_FLOWER.getPlacedFeature(), 0.1f),
@@ -257,7 +267,8 @@ public class BiomeFeatures {
 
     public static final BCLFeature NETHER_WART_FORREST_CEIL = SOUL_PLAIN_CEIL;
 
-    public static final BCLFeature NETHER_WART_FORREST_EDGE_FLOOR = floorFromWeighted("nether_wart_forrest",
+    public static final BCLFeature NETHER_WART_FORREST_EDGE_FLOOR = floorFromWeighted(
+            "nether_wart_forrest",
             List.of(
                     new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.01f),
                     new WeightedPlacedFeature(FloorFeatures.NETHER_WART.getPlacedFeature(), 0.2f),
@@ -265,7 +276,8 @@ public class BiomeFeatures {
                     new WeightedPlacedFeature(FloorFeatures.SOUL_GRASS_PATCH.getPlacedFeature(), 0.1f),
                     new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
             ),
-            0);
+            0
+    );
 
     public static final BCLFeature OLD_FUNGIWOODS_FLOOR = denseFloorFromWeighted("old_fungiwoods", List.of(
             new WeightedPlacedFeature(TreeFeatures.OLD_RED_MUSHROOM_CLUSTER.getPlacedFeature(), 0.12f),
@@ -357,7 +369,8 @@ public class BiomeFeatures {
                     new WeightedPlacedFeature(FloorFeatures.FORREST_LITTER.getPlacedFeature(), 0.4f),
                     new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
             ),
-            0);
+            0
+    );
 
     public static final BCLFeature UPSIDE_DOWN_FORREST_CLEARED_CEIL = denseCeilFromWeighted(
             "upside_down_forrest_cleared",
@@ -367,12 +380,15 @@ public class BiomeFeatures {
                     new WeightedPlacedFeature(VineLikeFeatures.WHISPERING_GOURD.getPlacedFeature(), 0.04f),
                     new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
             ),
-            0);
+            0
+    );
 
 
-    public static BCLFeature denseFloorFromWeighted(String name,
-                                                    List<WeightedPlacedFeature> features,
-                                                    int defaultIndex) {
+    public static BCLFeature denseFloorFromWeighted(
+            String name,
+            List<WeightedPlacedFeature> features,
+            int defaultIndex
+    ) {
         return fromWeighted(name, features, defaultIndex, "floor", defaultDenseFloorModifiers);
     }
 
@@ -380,9 +396,11 @@ public class BiomeFeatures {
         return fromWeighted(name, features, defaultIndex, "floor", defaultFloorModifiers);
     }
 
-    public static BCLFeature denseCeilFromWeighted(String name,
-                                                   List<WeightedPlacedFeature> features,
-                                                   int defaultIndex) {
+    public static BCLFeature denseCeilFromWeighted(
+            String name,
+            List<WeightedPlacedFeature> features,
+            int defaultIndex
+    ) {
         return fromWeighted(name, features, defaultIndex, "ceil", defaultDenseCeilModifiers);
     }
 
@@ -394,18 +412,22 @@ public class BiomeFeatures {
         return fromWeighted(name, features, defaultIndex, "wall", defaultWallModifiers);
     }
 
-    public static BCLFeature fromWeighted(String name,
-                                          List<WeightedPlacedFeature> features,
-                                          int defaultIndex,
-                                          String postFix,
-                                          List<PlacementModifier> modifiers) {
+    public static BCLFeature fromWeighted(
+            String name,
+            List<WeightedPlacedFeature> features,
+            int defaultIndex,
+            String postFix,
+            List<PlacementModifier> modifiers
+    ) {
         return BCLFeatureBuilder
                 .start(BetterNether.makeID(name + "_" + postFix), BCLFeature.RANDOM_SELECTOR)
                 .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
                 .modifier(modifiers)
                 .buildAndRegister(features.size() == 1
-                        ? new RandomFeatureConfiguration(List.of(),
-                        features.get(0).feature)
+                        ? new RandomFeatureConfiguration(
+                        List.of(),
+                        features.get(0).feature
+                )
                         : new RandomFeatureConfiguration(features, features.get(defaultIndex).feature));
     }
 
@@ -425,11 +447,13 @@ public class BiomeFeatures {
         return fromChanced(name, features, defaultIndex, "wall", defaultWallModifiers);
     }
 
-    public static BCLFeature fromChanced(String name,
-                                         List<WeightedPlacedFeature> features,
-                                         int defaultIndex,
-                                         String postFix,
-                                         List<PlacementModifier> modifiers) {
+    public static BCLFeature fromChanced(
+            String name,
+            List<WeightedPlacedFeature> features,
+            int defaultIndex,
+            String postFix,
+            List<PlacementModifier> modifiers
+    ) {
         return BCLFeatureBuilder
                 .start(BetterNether.makeID(name + "_" + postFix), Feature.RANDOM_SELECTOR)
                 .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)

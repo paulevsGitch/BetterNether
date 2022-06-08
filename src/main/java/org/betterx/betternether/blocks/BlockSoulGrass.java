@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.interfaces.SurvivesOnSouldGround;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
@@ -9,8 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-
-import org.betterx.betternether.interfaces.SurvivesOnSouldGround;
 
 public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSouldGround {
     @Override
@@ -28,7 +28,8 @@ public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSo
                     pos.getZ() + random.nextDouble(),
                     random.nextDouble() * 0.05,
                     -1,
-                    random.nextDouble() * 0.05);
+                    random.nextDouble() * 0.05
+            );
         }
     }
 }

@@ -1,5 +1,13 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.bclib.blocks.BlockProperties;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.blocks.BlockAnchorTreeVine;
+import org.betterx.betternether.blocks.BlockPlantWall;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -8,14 +16,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-
-import org.betterx.bclib.blocks.BlockProperties;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.blocks.BlockAnchorTreeVine;
-import org.betterx.betternether.blocks.BlockPlantWall;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +28,14 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         if (pos.getY() < MAX_HEIGHT * 0.75) return false;
 
         double angle = random.nextDouble() * Math.PI * 2;
@@ -73,9 +75,11 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
                 BlocksHelper.setWithoutUpdate(world, bpos.above(), NetherBlocks.MOSS_COVER.defaultBlockState());
             }
 
-            if ((bpos.getY() & 3) == 0 && AnchorTreeFeature.NOISE.eval(bpos.getX() * 0.1,
+            if ((bpos.getY() & 3) == 0 && AnchorTreeFeature.NOISE.eval(
+                    bpos.getX() * 0.1,
                     bpos.getY() * 0.1,
-                    bpos.getZ() * 0.1) > 0) {
+                    bpos.getZ() * 0.1
+            ) > 0) {
                 if (random.nextInt(32) == 0 && !context.BLOCKS.contains(bpos.north()))
                     if (random.nextBoolean())
                         AnchorTreeFeature.makeMushroom(world, bpos.north(), random.nextDouble() + 1.5, blockBox);
@@ -123,14 +127,22 @@ public class AnchorTreeRootFeature extends ContextFeature<NoneFeatureConfigurati
                     for (int i = 0; i < length - 2; i++) {
                         BlocksHelper.setWithoutUpdate(world, bpos.below(i), vine);
                     }
-                    BlocksHelper.setWithoutUpdate(world,
+                    BlocksHelper.setWithoutUpdate(
+                            world,
                             bpos.below(length - 2),
-                            vine.setValue(BlockAnchorTreeVine.SHAPE,
-                                    BlockProperties.TripleShape.MIDDLE));
-                    BlocksHelper.setWithoutUpdate(world,
+                            vine.setValue(
+                                    BlockAnchorTreeVine.SHAPE,
+                                    BlockProperties.TripleShape.MIDDLE
+                            )
+                    );
+                    BlocksHelper.setWithoutUpdate(
+                            world,
                             bpos.below(length - 1),
-                            vine.setValue(BlockAnchorTreeVine.SHAPE,
-                                    BlockProperties.TripleShape.BOTTOM));
+                            vine.setValue(
+                                    BlockAnchorTreeVine.SHAPE,
+                                    BlockProperties.TripleShape.BOTTOM
+                            )
+                    );
                 }
             }
         }

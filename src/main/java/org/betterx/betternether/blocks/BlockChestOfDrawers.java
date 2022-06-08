@@ -1,5 +1,9 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blockentities.BlockEntityChestOfDrawers;
+import org.betterx.betternether.registry.NetherBlocks;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -26,9 +30,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blockentities.BlockEntityChestOfDrawers;
-import org.betterx.betternether.registry.NetherBlocks;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -39,7 +40,8 @@ public class BlockChestOfDrawers extends BaseEntityBlock {
             Direction.NORTH, Block.box(0, 0, 8, 16, 16, 16),
             Direction.SOUTH, Block.box(0, 0, 0, 16, 16, 8),
             Direction.WEST, Block.box(8, 0, 0, 16, 16, 16),
-            Direction.EAST, Block.box(0, 0, 0, 8, 16, 16)));
+            Direction.EAST, Block.box(0, 0, 0, 8, 16, 16)
+    ));
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty OPEN = BNBlockProperties.OPEN;
 
@@ -79,12 +81,14 @@ public class BlockChestOfDrawers extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state,
-                                 Level world,
-                                 BlockPos pos,
-                                 Player player,
-                                 InteractionHand hand,
-                                 BlockHitResult hit) {
+    public InteractionResult use(
+            BlockState state,
+            Level world,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hit
+    ) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {

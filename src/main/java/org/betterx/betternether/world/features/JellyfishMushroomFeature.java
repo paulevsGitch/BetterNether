@@ -1,13 +1,5 @@
 package org.betterx.betternether.world.features;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
 import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
@@ -16,18 +8,28 @@ import org.betterx.betternether.blocks.BlockJellyfishMushroom;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+
 public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
     public JellyfishMushroomFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
 
         final float scale_factor = MAX_HEIGHT / 128.0f;
         final int RANDOM_BOUND = (int) (6 * scale_factor);
@@ -71,9 +73,12 @@ public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfigur
         BlocksHelper.setWithUpdate(world, pos, NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
                                                                               .setValue(
                                                                                       BlockJellyfishMushroom.SHAPE,
-                                                                                      TripleShape.BOTTOM)
-                                                                              .setValue(BlockJellyfishMushroom.VISUAL,
-                                                                                      visual));
+                                                                                      TripleShape.BOTTOM
+                                                                              )
+                                                                              .setValue(
+                                                                                      BlockJellyfishMushroom.VISUAL,
+                                                                                      visual
+                                                                              ));
     }
 
     public void growMedium(ServerLevelAccessor world, BlockPos pos) {
@@ -83,25 +88,35 @@ public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfigur
                 : down == NetherBlocks.SEPIA_MUSHROOM_GRASS
                         ? BNBlockProperties.JellyShape.SEPIA
                         : BNBlockProperties.JellyShape.POOR;
-        BlocksHelper.setWithUpdate(world,
+        BlocksHelper.setWithUpdate(
+                world,
                 pos,
                 NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
-                                               .setValue(BlockJellyfishMushroom.SHAPE,
-                                                       TripleShape.MIDDLE)
-                                               .setValue(BlockJellyfishMushroom.VISUAL, visual));
-        BlocksHelper.setWithUpdate(world,
+                                               .setValue(
+                                                       BlockJellyfishMushroom.SHAPE,
+                                                       TripleShape.MIDDLE
+                                               )
+                                               .setValue(BlockJellyfishMushroom.VISUAL, visual)
+        );
+        BlocksHelper.setWithUpdate(
+                world,
                 pos.above(),
                 NetherBlocks.JELLYFISH_MUSHROOM.defaultBlockState()
-                                               .setValue(BlockJellyfishMushroom.SHAPE,
-                                                       TripleShape.TOP)
-                                               .setValue(BlockJellyfishMushroom.VISUAL, visual));
+                                               .setValue(
+                                                       BlockJellyfishMushroom.SHAPE,
+                                                       TripleShape.TOP
+                                               )
+                                               .setValue(BlockJellyfishMushroom.VISUAL, visual)
+        );
     }
 
     @Override
-    public boolean grow(ServerLevelAccessor level,
-                        BlockPos pos,
-                        RandomSource random,
-                        NoneFeatureConfiguration configuration) {
+    public boolean grow(
+            ServerLevelAccessor level,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration configuration
+    ) {
         grow(level, pos, random);
         return true;
     }

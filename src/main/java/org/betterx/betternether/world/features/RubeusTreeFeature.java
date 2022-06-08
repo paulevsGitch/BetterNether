@@ -1,15 +1,5 @@
 package org.betterx.betternether.world.features;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-
 import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.BlocksHelper;
@@ -20,6 +10,16 @@ import org.betterx.betternether.blocks.RubeusLog;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -40,12 +40,14 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NaturalTreeConfiguration config,
-                            final int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NaturalTreeConfiguration config,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         int length = BlocksHelper.upRay(world, pos, BlockStalagnateSeed.MAX_SEARCH_LENGTH + 2);
         if (length >= BlockStalagnateSeed.MAX_SEARCH_LENGTH)
             return super.place(world, pos, random, config, MAX_HEIGHT, context);
@@ -64,9 +66,11 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
                     final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
                     if (dist <= 7) {
                         final BlockPos blPos = bpos.offset(x, y, z);
-                        context.LOGS_DIST.merge(blPos,
+                        context.LOGS_DIST.merge(
+                                blPos,
                                 (byte) dist,
-                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist));
+                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist)
+                        );
                     }
                 }
             }
@@ -82,9 +86,11 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
             if (currentState.hasProperty(BlockStateProperties.DISTANCE)) {
                 int cDist = currentState.getValue(BlockStateProperties.DISTANCE);
                 if (dist < cDist) {
-                    BlocksHelper.setWithoutUpdate(world,
+                    BlocksHelper.setWithoutUpdate(
+                            world,
                             logPos,
-                            currentState.setValue(BlockStateProperties.DISTANCE, dist));
+                            currentState.setValue(BlockStateProperties.DISTANCE, dist)
+                    );
                     cDist = dist;
                 }
 
@@ -95,11 +101,13 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
         }
     }
 
-    public boolean grow(ServerLevelAccessor world,
-                        BlockPos pos,
-                        RandomSource random,
-                        NaturalTreeConfiguration config,
-                        StructureGeneratorThreadContext context) {
+    public boolean grow(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NaturalTreeConfiguration config,
+            StructureGeneratorThreadContext context
+    ) {
         final boolean natural = config.natural;
         context.clear();
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
@@ -111,13 +119,17 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
             float branchSize = MHelper.randRange(0.5F, 0.8F, random) * scale;
             float angle = n * MHelper.PI2 / count;
             float radius = CURVE_X[0] * branchSize;
-            int x1 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F,
+            int x1 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(
+                    -2F,
                     2F,
-                    random) * branchSize);
+                    random
+            ) * branchSize);
             int y1 = Math.round(pos.getY() + CURVE_Y[0] * branchSize + MHelper.randRange(-2F, 2F, random) * branchSize);
-            int z1 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F,
+            int z1 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(
+                    -2F,
                     2F,
-                    random) * branchSize);
+                    random
+            ) * branchSize);
             float crownR = 5 * branchSize;
             if (crownR < 1.5F)
                 crownR = 1.5F;
@@ -127,17 +139,23 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
             boolean generate = true;
             for (int i = 1; i < CURVE_X.length && generate; i++) {
                 radius = CURVE_X[i] * branchSize;
-                int x2 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(-2F,
+                int x2 = Math.round(pos.getX() + radius * (float) Math.cos(angle) + MHelper.randRange(
+                        -2F,
                         2F,
-                        random) * branchSize);
+                        random
+                ) * branchSize);
                 int y2 = Math.round(pos.getY() + CURVE_Y[i] * branchSize + (CURVE_Y[i] > 0
-                        ? MHelper.randRange(-2F,
+                        ? MHelper.randRange(
+                        -2F,
                         2F,
-                        random) * branchSize
+                        random
+                ) * branchSize
                         : 0));
-                int z2 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(-2F,
+                int z2 = Math.round(pos.getZ() + radius * (float) Math.sin(angle) + MHelper.randRange(
+                        -2F,
                         2F,
-                        random) * branchSize);
+                        random
+                ) * branchSize);
 
                 if (CURVE_Y[i] <= 0) {
                     if (!isGround(world.getBlockState(context.POS.set(x2, y2, z2)))) {
@@ -189,49 +207,61 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
             if (context.POINTS.contains(bpos.above()) && context.POINTS.contains(bpos.below())) {
                 state = NetherBlocks.MAT_RUBEUS.getLog().defaultBlockState();
                 if (context.MIDDLE.contains(bpos))
-                    setCondition(world,
+                    setCondition(
+                            world,
                             bpos,
                             pos.getY(),
                             state.setValue(RubeusLog.SHAPE, TripleShape.MIDDLE),
                             false,
-                            random);
+                            random
+                    );
                 else if (context.TOP.contains(bpos))
-                    setCondition(world,
+                    setCondition(
+                            world,
                             bpos,
                             pos.getY(),
                             state.setValue(RubeusLog.SHAPE, TripleShape.TOP),
                             false,
-                            random);
+                            random
+                    );
                 else
-                    setCondition(world,
+                    setCondition(
+                            world,
                             bpos,
                             pos.getY(),
                             state.setValue(RubeusLog.SHAPE, TripleShape.BOTTOM),
                             natural,
-                            random);
+                            random
+                    );
             } else {
                 state = NetherBlocks.MAT_RUBEUS.getBark().defaultBlockState();
                 if (context.MIDDLE.contains(bpos))
-                    setCondition(world,
+                    setCondition(
+                            world,
                             bpos,
                             pos.getY(),
                             state.setValue(RubeusLog.SHAPE, TripleShape.MIDDLE),
                             false,
-                            random);
+                            random
+                    );
                 else if (context.TOP.contains(bpos))
-                    setCondition(world,
+                    setCondition(
+                            world,
                             bpos,
                             pos.getY(),
                             state.setValue(RubeusLog.SHAPE, TripleShape.TOP),
                             false,
-                            random);
+                            random
+                    );
                 else
-                    setCondition(world,
+                    setCondition(
+                            world,
                             bpos,
                             pos.getY(),
                             state.setValue(RubeusLog.SHAPE, TripleShape.BOTTOM),
                             natural,
-                            random);
+                            random
+                    );
             }
             updateSDFFrom(bpos, context);
         }
@@ -247,15 +277,17 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
     }
 
 
-    private void line(LevelAccessor level,
-                      int x1,
-                      int y1,
-                      int z1,
-                      int x2,
-                      int y2,
-                      int z2,
-                      int middleY,
-                      StructureGeneratorThreadContext context) {
+    private void line(
+            LevelAccessor level,
+            int x1,
+            int y1,
+            int z1,
+            int x2,
+            int y2,
+            int z2,
+            int middleY,
+            StructureGeneratorThreadContext context
+    ) {
         int dx = x2 - x1;
         int dy = y2 - y1;
         int dz = z2 - z1;
@@ -325,12 +357,14 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
         }
     }
 
-    private void setCondition(LevelAccessor world,
-                              BlockPos pos,
-                              int y,
-                              BlockState state,
-                              boolean moss,
-                              RandomSource random) {
+    private void setCondition(
+            LevelAccessor world,
+            BlockPos pos,
+            int y,
+            BlockState state,
+            boolean moss,
+            RandomSource random
+    ) {
         if (pos.getY() > y)
             setIfAir(world, pos, state);
         else
@@ -366,14 +400,18 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
     }
 
     @Override
-    public boolean grow(ServerLevelAccessor level,
-                        BlockPos pos,
-                        RandomSource random,
-                        NaturalTreeConfiguration configuration) {
-        return grow(level,
+    public boolean grow(
+            ServerLevelAccessor level,
+            BlockPos pos,
+            RandomSource random,
+            NaturalTreeConfiguration configuration
+    ) {
+        return grow(
+                level,
                 pos,
                 random,
                 new NaturalTreeConfiguration(false, configuration.distance),
-                NetherChunkPopulatorFeature.generatorForThread().context);
+                NetherChunkPopulatorFeature.generatorForThread().context
+        );
     }
 }

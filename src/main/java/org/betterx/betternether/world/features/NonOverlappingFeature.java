@@ -1,14 +1,14 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-
-import com.mojang.serialization.Codec;
-import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 public abstract class NonOverlappingFeature<FC extends NaturalTreeConfiguration> extends ContextFeature<FC> {
     public NonOverlappingFeature(Codec<FC> codec) {
@@ -19,23 +19,27 @@ public abstract class NonOverlappingFeature<FC extends NaturalTreeConfiguration>
 
     protected abstract boolean isGround(BlockState state);
 
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            FC config,
-                            final int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            FC config,
+            final int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         if (isGround(world.getBlockState(pos.below())) && noObjNear(world, pos, config)) {
             return grow(world, pos, random, config, context);
         }
         return false;
     }
 
-    protected abstract boolean grow(ServerLevelAccessor world,
-                                    BlockPos pos,
-                                    RandomSource random,
-                                    FC config,
-                                    StructureGeneratorThreadContext context);
+    protected abstract boolean grow(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            FC config,
+            StructureGeneratorThreadContext context
+    );
 
 
     private boolean noObjNear(LevelAccessor world, BlockPos pos, FC config) {

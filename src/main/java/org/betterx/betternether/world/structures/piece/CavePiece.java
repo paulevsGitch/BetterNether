@@ -1,5 +1,9 @@
 package org.betterx.betternether.world.structures.piece;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.noise.OpenSimplexNoise;
+import org.betterx.betternether.registry.NetherStructurePieces;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -13,10 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.noise.OpenSimplexNoise;
-import org.betterx.betternether.registry.NetherStructurePieces;
 
 public class CavePiece extends CustomPiece {
     private static final BlockState LAVA = Blocks.LAVA.defaultBlockState();
@@ -41,20 +41,24 @@ public class CavePiece extends CustomPiece {
     }
 
     @Override
-    protected void addAdditionalSaveData(StructurePieceSerializationContext structurePieceSerializationContext,
-                                         CompoundTag tag) {
+    protected void addAdditionalSaveData(
+            StructurePieceSerializationContext structurePieceSerializationContext,
+            CompoundTag tag
+    ) {
         tag.put("center", NbtUtils.writeBlockPos(center));
         tag.putInt("radius", radius);
     }
 
     @Override
-    public void postProcess(WorldGenLevel world,
-                            StructureManager arg,
-                            ChunkGenerator chunkGenerator,
-                            RandomSource random,
-                            BoundingBox blockBox,
-                            ChunkPos chunkPos,
-                            BlockPos blockPos) {
+    public void postProcess(
+            WorldGenLevel world,
+            StructureManager arg,
+            ChunkGenerator chunkGenerator,
+            RandomSource random,
+            BoundingBox blockBox,
+            ChunkPos chunkPos,
+            BlockPos blockPos
+    ) {
         MutableBlockPos POS = new MutableBlockPos();
         BlockState bottom = LAVA;
         if (!(world.dimensionType().hasCeiling())) {

@@ -1,10 +1,10 @@
 package org.betterx.betternether.interfaces;
 
-import net.minecraft.locale.Language;
-import net.minecraft.world.level.block.state.BlockState;
-
 import org.betterx.bclib.interfaces.SurvivesOnSpecialGround;
 import org.betterx.betternether.BlocksHelper;
+
+import net.minecraft.locale.Language;
+import net.minecraft.world.level.block.state.BlockState;
 
 public interface SurvivesOnNetherGround extends SurvivesOnSpecialGround {
     @Override

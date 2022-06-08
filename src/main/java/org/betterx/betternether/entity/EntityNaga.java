@@ -1,5 +1,9 @@
 package org.betterx.betternether.entity;
 
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.registry.NetherEntities;
+import org.betterx.betternether.registry.SoundsRegistry;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -22,10 +26,6 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.SoundsRegistry;
 
 public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
     public EntityNaga(EntityType<? extends EntityNaga> type, Level world) {
@@ -58,9 +58,11 @@ public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
         projectile.absMoveTo(getX(), getEyeY(), getZ(), 0, 0);
         projectile.setParams(this, target);
         level.addFreshEntity(projectile);
-        this.playSound(SoundsRegistry.MOB_NAGA_ATTACK,
-                       MHelper.randRange(3F, 5F, random),
-                       MHelper.randRange(0.75F, 1.25F, random));
+        this.playSound(
+                SoundsRegistry.MOB_NAGA_ATTACK,
+                MHelper.randRange(3F, 5F, random),
+                MHelper.randRange(0.75F, 1.25F, random)
+        );
     }
 
     @Override
@@ -98,11 +100,13 @@ public class EntityNaga extends Monster implements RangedAttackMob, Enemy {
         return 1;
     }
 
-    public static boolean canSpawn(EntityType<? extends EntityNaga> type,
-                                   LevelAccessor world,
-                                   MobSpawnType spawnReason,
-                                   BlockPos pos,
-                                   RandomSource random) {
+    public static boolean canSpawn(
+            EntityType<? extends EntityNaga> type,
+            LevelAccessor world,
+            MobSpawnType spawnReason,
+            BlockPos pos,
+            RandomSource random
+    ) {
         return world.getDifficulty() != Difficulty.PEACEFUL && world.getMaxLocalRawBrightness(pos) < 8;
     }
 }

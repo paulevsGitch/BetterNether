@@ -1,5 +1,12 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BlockNetherGrass;
+import org.betterx.betternether.blocks.BlockWillowLeaves;
+import org.betterx.betternether.blocks.complex.WillowMaterial;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -9,25 +16,20 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockNetherGrass;
-import org.betterx.betternether.blocks.BlockWillowLeaves;
-import org.betterx.betternether.blocks.complex.WillowMaterial;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
-
 public class WillowBushFeature extends ContextFeature<NoneFeatureConfiguration> {
     public WillowBushFeature() {
         super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    protected boolean place(ServerLevelAccessor world,
-                            BlockPos pos,
-                            RandomSource random,
-                            NoneFeatureConfiguration config,
-                            int MAX_HEIGHT,
-                            StructureGeneratorThreadContext context) {
+    protected boolean place(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NoneFeatureConfiguration config,
+            int MAX_HEIGHT,
+            StructureGeneratorThreadContext context
+    ) {
         if (!world.isEmptyBlock(pos) || !world.isEmptyBlock(pos.above()) || !world.isEmptyBlock(pos.above(15)))
             return false;
 
@@ -63,19 +65,25 @@ public class WillowBushFeature extends ContextFeature<NoneFeatureConfiguration> 
                         int az = Math.abs(dz);
                         int max = Math.max(ax, Math.max(ay, az));
                         Direction dir;
-                        if (max == ax) dir = Direction.fromAxisAndDirection(Direction.Axis.X,
+                        if (max == ax) dir = Direction.fromAxisAndDirection(
+                                Direction.Axis.X,
                                 dx > 0
                                         ? Direction.AxisDirection.POSITIVE
-                                        : Direction.AxisDirection.NEGATIVE);
-                        else if (max == ay) dir = Direction.fromAxisAndDirection(Direction.Axis.Y,
+                                        : Direction.AxisDirection.NEGATIVE
+                        );
+                        else if (max == ay) dir = Direction.fromAxisAndDirection(
+                                Direction.Axis.Y,
                                 dy > 0
                                         ? Direction.AxisDirection.POSITIVE
-                                        : Direction.AxisDirection.NEGATIVE);
+                                        : Direction.AxisDirection.NEGATIVE
+                        );
                         else
-                            dir = Direction.fromAxisAndDirection(Direction.Axis.Z,
+                            dir = Direction.fromAxisAndDirection(
+                                    Direction.Axis.Z,
                                     dz > 0
                                             ? Direction.AxisDirection.POSITIVE
-                                            : Direction.AxisDirection.NEGATIVE);
+                                            : Direction.AxisDirection.NEGATIVE
+                            );
                         setIfAir(world, context.POS, NetherBlocks.WILLOW_LEAVES.defaultBlockState().setValue(
                                 BlockWillowLeaves.FACING, dir).setValue(LeavesBlock.PERSISTENT, true));
                     }
@@ -83,34 +91,46 @@ public class WillowBushFeature extends ContextFeature<NoneFeatureConfiguration> 
             }
         }
 
-        BlocksHelper.setWithoutUpdate(world,
+        BlocksHelper.setWithoutUpdate(
+                world,
                 pos,
-                NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK).defaultBlockState());
-        setIfAir(world,
+                NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_BARK).defaultBlockState()
+        );
+        setIfAir(
+                world,
                 pos.above(),
                 NetherBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.UP)
-                                          .setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world,
+                                          .setValue(LeavesBlock.DISTANCE, 1)
+        );
+        setIfAir(
+                world,
                 pos.north(),
                 NetherBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.NORTH)
-                                          .setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world,
+                                          .setValue(LeavesBlock.DISTANCE, 1)
+        );
+        setIfAir(
+                world,
                 pos.south(),
                 NetherBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.SOUTH)
-                                          .setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world,
+                                          .setValue(LeavesBlock.DISTANCE, 1)
+        );
+        setIfAir(
+                world,
                 pos.east(),
                 NetherBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.EAST)
-                                          .setValue(LeavesBlock.DISTANCE, 1));
-        setIfAir(world,
+                                          .setValue(LeavesBlock.DISTANCE, 1)
+        );
+        setIfAir(
+                world,
                 pos.west(),
                 NetherBlocks.WILLOW_LEAVES.defaultBlockState()
                                           .setValue(BlockWillowLeaves.FACING, Direction.WEST)
-                                          .setValue(LeavesBlock.DISTANCE, 1));
+                                          .setValue(LeavesBlock.DISTANCE, 1)
+        );
 
         return true;
     }

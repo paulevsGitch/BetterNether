@@ -1,5 +1,14 @@
 package org.betterx.betternether.world;
 
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+import org.betterx.bclib.util.MHelper;
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.registry.NetherEntities;
+import org.betterx.betternether.registry.NetherFeatures;
+import org.betterx.betternether.registry.NetherStructures;
+import org.betterx.betternether.registry.NetherTags;
+
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
@@ -18,28 +27,23 @@ import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
-import org.betterx.bclib.util.MHelper;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.registry.NetherStructures;
-import org.betterx.betternether.registry.NetherTags;
-
 public class NetherBiomeBuilder {
     private static final RandomSource RANDOM = new LegacyRandomSource(130520221830l);
     private static Biome BASE_BIOME;
     static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
     //(ResourceLocation randomName, VerticalAnchor trueAtAndBelow, VerticalAnchor falseAtAndAbove)
     static final SurfaceRules.VerticalGradientConditionSource BEDROCK_BOTTOM =
-            new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_floor"),
+            new SurfaceRules.VerticalGradientConditionSource(
+                    BetterNether.makeID("bedrock_floor"),
                     VerticalAnchor.bottom(),
-                    VerticalAnchor.aboveBottom(5));
+                    VerticalAnchor.aboveBottom(5)
+            );
     static final SurfaceRules.VerticalGradientConditionSource BEDROCK_TOP =
-            new SurfaceRules.VerticalGradientConditionSource(BetterNether.makeID("bedrock_roof"),
+            new SurfaceRules.VerticalGradientConditionSource(
+                    BetterNether.makeID("bedrock_roof"),
                     VerticalAnchor.belowTop(5),
-                    VerticalAnchor.top());
+                    VerticalAnchor.top()
+            );
 
     private static void addVanillaStructures(BCLBiomeBuilder builder) {
         builder.carver(GenerationStep.Carving.AIR, Carvers.NETHER_CAVE);
@@ -94,8 +98,10 @@ public class NetherBiomeBuilder {
                 .loop(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
                 .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
                 .edge(edgeBiome)
-                .addNetherClimateParamater(MHelper.randRange(-1.5F, 1.5F, RANDOM),
-                        MHelper.randRange(-1.5F, 1.5F, RANDOM))
+                .addNetherClimateParamater(
+                        MHelper.randRange(-1.5F, 1.5F, RANDOM),
+                        MHelper.randRange(-1.5F, 1.5F, RANDOM)
+                )
                 .feature(NetherFeatures.WART_CAP_FEATURE);
 
 

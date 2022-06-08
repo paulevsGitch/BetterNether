@@ -1,5 +1,7 @@
 package org.betterx.betternether.advancements;
 
+import org.betterx.betternether.BetterNether;
+
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -7,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
 import com.google.gson.JsonObject;
-import org.betterx.betternether.BetterNether;
 
 public class ConvertByLightningTrigger extends SimpleCriterionTrigger<ConvertByLightningTrigger.TriggerInstance> {
     static final ResourceLocation ID = BetterNether.makeID("convert_by_lightning");
@@ -16,9 +17,11 @@ public class ConvertByLightningTrigger extends SimpleCriterionTrigger<ConvertByL
         return ID;
     }
 
-    public ConvertByLightningTrigger.TriggerInstance createInstance(JsonObject jsonObject,
-                                                                    EntityPredicate.Composite composite,
-                                                                    DeserializationContext deserializationContext) {
+    public ConvertByLightningTrigger.TriggerInstance createInstance(
+            JsonObject jsonObject,
+            EntityPredicate.Composite composite,
+            DeserializationContext deserializationContext
+    ) {
         return new ConvertByLightningTrigger.TriggerInstance(composite, ItemPredicate.fromJson(jsonObject.get("item")));
     }
 

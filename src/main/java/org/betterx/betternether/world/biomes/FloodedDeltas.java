@@ -1,13 +1,5 @@
 package org.betterx.betternether.world.biomes;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
@@ -17,6 +9,14 @@ import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.registry.features.TerrainFeatures;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
+
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import java.util.List;
 
@@ -57,11 +57,13 @@ public class FloodedDeltas extends NetherBiome {
             return super
                     .surface()
                     .ceil(Blocks.DEEPSLATE.defaultBlockState())
-                    .rule(new SwitchRuleSource(NetherGrasslandsNumericProvider.DEFAULT,
+                    .rule(new SwitchRuleSource(
+                            NetherGrasslandsNumericProvider.DEFAULT,
                             List.of(
                                     SurfaceRules.state(Blocks.DEEPSLATE.defaultBlockState()),
                                     SurfaceRules.state(Blocks.BLACKSTONE.defaultBlockState())
-                            )));
+                            )
+                    ));
         }
     }
 

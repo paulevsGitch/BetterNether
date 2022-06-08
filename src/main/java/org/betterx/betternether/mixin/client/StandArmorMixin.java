@@ -1,5 +1,7 @@
 package org.betterx.betternether.mixin.client;
 
+import org.betterx.betternether.BetterNether;
+
 import net.minecraft.client.model.ArmorStandArmorModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.ArmorStandRenderer;
@@ -12,7 +14,6 @@ import net.minecraft.world.entity.decoration.ArmorStand;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import org.betterx.betternether.BetterNether;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -46,7 +47,7 @@ public abstract class StandArmorMixin extends LivingEntityRenderer<ArmorStand, A
                             new ArmorStandArmorModel(ctx.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)),
                             new ArmorStandArmorModel(ctx.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR))
                     )
-                           );
+            );
         }
     }
 }

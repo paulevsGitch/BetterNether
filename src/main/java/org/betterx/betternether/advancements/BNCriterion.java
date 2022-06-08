@@ -1,10 +1,10 @@
 package org.betterx.betternether.advancements;
 
+import org.betterx.betternether.BetterNether;
+
 import net.minecraft.advancements.critereon.PlayerTrigger;
 
 import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
-
-import org.betterx.betternether.BetterNether;
 
 public class BNCriterion {
     public static PlayerTrigger BREW_BLUE;

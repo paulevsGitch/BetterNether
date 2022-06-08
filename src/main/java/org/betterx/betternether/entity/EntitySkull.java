@@ -1,5 +1,8 @@
 package org.betterx.betternether.entity;
 
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.registry.SoundsRegistry;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,9 +31,6 @@ import net.minecraft.world.phys.Vec3;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.registry.SoundsRegistry;
 
 import java.util.List;
 
@@ -86,9 +86,11 @@ public class EntitySkull extends Monster implements FlyingAnimal {
 
             boolean shield = player.getUseItem().getItem() instanceof ShieldItem && player.isUsingItem();
             if (shield) {
-                player.playSound(SoundEvents.SHIELD_BLOCK,
-                                 MHelper.randRange(0.8F, 1.2F, random),
-                                 MHelper.randRange(0.8F, 1.2F, random));
+                player.playSound(
+                        SoundEvents.SHIELD_BLOCK,
+                        MHelper.randRange(0.8F, 1.2F, random),
+                        MHelper.randRange(0.8F, 1.2F, random)
+                );
                 this.setDeltaMovement(new Vec3(0, 0, 0).subtract(getDeltaMovement()));
             }
             if (player instanceof ServerPlayer) {
@@ -139,9 +141,11 @@ public class EntitySkull extends Monster implements FlyingAnimal {
                         .scale(EntitySkull.this.flyingSpeed);
                 setDeltaMovement(velocity);
                 this.lookAt(target, 360, 360);
-                this.playSound(SoundsRegistry.MOB_SKULL_FLIGHT,
-                               MHelper.randRange(0.15F, 0.3F, random),
-                               MHelper.randRange(0.9F, 1.5F, random));
+                this.playSound(
+                        SoundsRegistry.MOB_SKULL_FLIGHT,
+                        MHelper.randRange(0.15F, 0.3F, random),
+                        MHelper.randRange(0.9F, 1.5F, random)
+                );
             } else if (dirTickTick < 0) {
                 dirTickTick = MHelper.randRange(20, 60, random);
                 moveRandomDir();
@@ -186,9 +190,11 @@ public class EntitySkull extends Monster implements FlyingAnimal {
         dz /= l;
         setDeltaMovement(dx, dy, dz);
         lookAt(this.position().add(this.getDeltaMovement()));
-        this.playSound(SoundsRegistry.MOB_SKULL_FLIGHT,
-                       MHelper.randRange(0.15F, 0.3F, random),
-                       MHelper.randRange(0.75F, 1.25F, random));
+        this.playSound(
+                SoundsRegistry.MOB_SKULL_FLIGHT,
+                MHelper.randRange(0.15F, 0.3F, random),
+                MHelper.randRange(0.75F, 1.25F, random)
+        );
     }
 
     private void lookAt(Vec3 target) {
@@ -240,10 +246,12 @@ public class EntitySkull extends Monster implements FlyingAnimal {
     }
 
     @Override
-    protected void checkFallDamage(double heightDifference,
-                                   boolean onGround,
-                                   BlockState landedState,
-                                   BlockPos landedPosition) {
+    protected void checkFallDamage(
+            double heightDifference,
+            boolean onGround,
+            BlockState landedState,
+            BlockPos landedPosition
+    ) {
     }
 
     @Override
@@ -256,11 +264,13 @@ public class EntitySkull extends Monster implements FlyingAnimal {
         return false;
     }
 
-    public static boolean canSpawn(EntityType<? extends EntitySkull> type,
-                                   LevelAccessor world,
-                                   MobSpawnType spawnReason,
-                                   BlockPos pos,
-                                   RandomSource random) {
+    public static boolean canSpawn(
+            EntityType<? extends EntitySkull> type,
+            LevelAccessor world,
+            MobSpawnType spawnReason,
+            BlockPos pos,
+            RandomSource random
+    ) {
         try {
             if (world.getDifficulty() == Difficulty.PEACEFUL || world.getMaxLocalRawBrightness(pos) > 7)
                 return false;

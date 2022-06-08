@@ -1,5 +1,9 @@
 package org.betterx.betternether.world.structures.piece;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.MHelper;
+import org.betterx.betternether.registry.NetherStructurePieces;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -12,10 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
-import org.betterx.betternether.registry.NetherStructurePieces;
 
 public class DestructionPiece extends CustomPiece {
     private final MutableBlockPos POS = new MutableBlockPos();
@@ -33,7 +33,8 @@ public class DestructionPiece extends CustomPiece {
         center = new BlockPos(
                 MHelper.randRange(bounds.minX(), bounds.maxX(), random),
                 MHelper.randRange(bounds.minY(), bounds.maxY(), random),
-                MHelper.randRange(bounds.minZ(), bounds.maxZ(), random));
+                MHelper.randRange(bounds.minZ(), bounds.maxZ(), random)
+        );
         makeBoundingBox();
     }
 
@@ -46,20 +47,24 @@ public class DestructionPiece extends CustomPiece {
     }
 
     @Override
-    protected void addAdditionalSaveData(StructurePieceSerializationContext structurePieceSerializationContext,
-                                         CompoundTag tag) {
+    protected void addAdditionalSaveData(
+            StructurePieceSerializationContext structurePieceSerializationContext,
+            CompoundTag tag
+    ) {
         tag.put("center", NbtUtils.writeBlockPos(center));
         tag.putInt("radius", radius);
     }
 
     @Override
-    public void postProcess(WorldGenLevel world,
-                            StructureManager structureAccessor,
-                            ChunkGenerator chunkGenerator,
-                            RandomSource random,
-                            BoundingBox blockBox,
-                            ChunkPos chunkPos,
-                            BlockPos blockPos) {
+    public void postProcess(
+            WorldGenLevel world,
+            StructureManager structureAccessor,
+            ChunkGenerator chunkGenerator,
+            RandomSource random,
+            BoundingBox blockBox,
+            ChunkPos chunkPos,
+            BlockPos blockPos
+    ) {
         for (int x = blockBox.maxZ(); x <= blockBox.minZ(); x++) {
             int px = x - center.getX();
             px *= px;

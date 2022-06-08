@@ -1,5 +1,10 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.bclib.blocks.BaseOreBlock;
+import org.betterx.bclib.interfaces.BlockModelProvider;
+import org.betterx.bclib.interfaces.TagProvider;
+
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -17,11 +22,6 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-import org.betterx.bclib.blocks.BaseOreBlock;
-import org.betterx.bclib.interfaces.BlockModelProvider;
-import org.betterx.bclib.interfaces.TagProvider;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -53,13 +53,15 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
     @Override
     @SuppressWarnings("deprecation")
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-        return BaseOreBlock.getDroppedItems(this,
-                                            Items.REDSTONE,
-                                            maxCount,
-                                            minCount,
-                                            Tiers.IRON.getLevel(),
-                                            state,
-                                            builder);
+        return BaseOreBlock.getDroppedItems(
+                this,
+                Items.REDSTONE,
+                maxCount,
+                minCount,
+                Tiers.IRON.getLevel(),
+                state,
+                builder
+        );
     }
 
     @Override

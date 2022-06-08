@@ -1,5 +1,7 @@
 package org.betterx.betternether.entity.model;
 
+import org.betterx.betternether.entity.EntitySkull;
+
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -10,7 +12,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 import com.google.common.collect.ImmutableList;
-import org.betterx.betternether.entity.EntitySkull;
 
 public class ModelSkull extends AgeableListModel<EntitySkull> {
     private final ModelPart head;
@@ -20,11 +21,13 @@ public class ModelSkull extends AgeableListModel<EntitySkull> {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addOrReplaceChild(PartNames.HEAD,
-                                        CubeListBuilder.create()
-                                                       .texOffs(0, 0)
-                                                       .addBox(-4, -4, -4, 8, 8, 8),
-                                        PartPose.offset(0, 20, 0));
+        modelPartData.addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder.create()
+                               .texOffs(0, 0)
+                               .addBox(-4, -4, -4, 8, 8, 8),
+                PartPose.offset(0, 20, 0)
+        );
 		/*head = ModelPart new (this, 0, 0);
 		head.setPivot(0, 20, 0);
 		head.addCuboid(-4, -4, -4, 8, 8, 8);*/
@@ -55,12 +58,14 @@ public class ModelSkull extends AgeableListModel<EntitySkull> {
     }
 
     @Override
-    public void setupAnim(EntitySkull entity,
-                          float limbAngle,
-                          float limbDistance,
-                          float animationProgress,
-                          float headYaw,
-                          float headPitch) {
+    public void setupAnim(
+            EntitySkull entity,
+            float limbAngle,
+            float limbDistance,
+            float animationProgress,
+            float headYaw,
+            float headPitch
+    ) {
         // head.pitch = (float) Math.toRadians(headPitch);
 
         boolean rollTooBig = entity.getFallFlyingTicks() > 4;

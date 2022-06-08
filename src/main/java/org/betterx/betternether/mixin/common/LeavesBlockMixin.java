@@ -1,5 +1,7 @@
 package org.betterx.betternether.mixin.common;
 
+import org.betterx.bclib.items.tool.BaseShearsItem;
+
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -7,7 +9,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
-import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Collections;

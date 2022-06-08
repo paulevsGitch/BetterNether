@@ -1,5 +1,12 @@
 package org.betterx.betternether.world.features;
 
+import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BlockWartSeed;
+import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
+import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -9,13 +16,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockWartSeed;
-import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
-import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,13 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
     }
 
     @Override
-    protected boolean grow(ServerLevelAccessor world,
-                           BlockPos pos,
-                           RandomSource random,
-                           NaturalTreeConfiguration config,
-                           StructureGeneratorThreadContext context) {
+    protected boolean grow(
+            ServerLevelAccessor world,
+            BlockPos pos,
+            RandomSource random,
+            NaturalTreeConfiguration config,
+            StructureGeneratorThreadContext context
+    ) {
         if (world.isEmptyBlock(pos.above(1)) && world.isEmptyBlock(pos.above(2))) {
             if (world.isEmptyBlock(pos.above(2).north())
                     && world.isEmptyBlock(pos.above(2).south())
@@ -63,13 +65,17 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
                                 context.POS.set(px, py, pz);
                                 if (isReplaceable(world.getBlockState(context.POS))) {
                                     if (y == 0 && !isReplaceable(world.getBlockState(context.POS.below())))
-                                        BlocksHelper.setWithUpdate(world,
+                                        BlocksHelper.setWithUpdate(
+                                                world,
                                                 context.POS,
-                                                NetherBlocks.MAT_WART.getRoot().defaultBlockState());
+                                                NetherBlocks.MAT_WART.getRoot().defaultBlockState()
+                                        );
                                     else if (y < h2)
-                                        BlocksHelper.setWithUpdate(world,
+                                        BlocksHelper.setWithUpdate(
+                                                world,
                                                 context.POS,
-                                                NetherBlocks.MAT_WART.getLog().defaultBlockState());
+                                                NetherBlocks.MAT_WART.getLog().defaultBlockState()
+                                        );
                                     else
                                         BlocksHelper.setWithUpdate(world, context.POS, WART_BLOCK);
                                     if (random.nextInt(8) == 0) {
@@ -90,13 +96,17 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
                                 context.POS.set(px, py, pz);
                                 if (isReplaceable(world.getBlockState(context.POS))) {
                                     if (isReplaceable(world.getBlockState(context.POS.below())))
-                                        BlocksHelper.setWithUpdate(world,
+                                        BlocksHelper.setWithUpdate(
+                                                world,
                                                 context.POS,
-                                                NetherBlocks.MAT_WART.getLog().defaultBlockState());
+                                                NetherBlocks.MAT_WART.getLog().defaultBlockState()
+                                        );
                                     else {
-                                        BlocksHelper.setWithUpdate(world,
+                                        BlocksHelper.setWithUpdate(
+                                                world,
                                                 context.POS,
-                                                NetherBlocks.MAT_WART.getRoot().defaultBlockState());
+                                                NetherBlocks.MAT_WART.getRoot().defaultBlockState()
+                                        );
                                         break;
                                     }
                                 }
@@ -179,14 +189,18 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
     }
 
     @Override
-    public boolean grow(ServerLevelAccessor level,
-                        BlockPos pos,
-                        RandomSource random,
-                        NaturalTreeConfiguration configuration) {
-        return grow(level,
+    public boolean grow(
+            ServerLevelAccessor level,
+            BlockPos pos,
+            RandomSource random,
+            NaturalTreeConfiguration configuration
+    ) {
+        return grow(
+                level,
                 pos,
                 random,
                 new NaturalTreeConfiguration(false, configuration.distance),
-                NetherChunkPopulatorFeature.generatorForThread().context);
+                NetherChunkPopulatorFeature.generatorForThread().context
+        );
     }
 }

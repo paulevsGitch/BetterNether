@@ -1,5 +1,9 @@
 package org.betterx.betternether.blockentities;
 
+import org.betterx.betternether.BlocksHelper;
+import org.betterx.betternether.blocks.BlockChestOfDrawers;
+import org.betterx.betternether.registry.BlockEntitiesRegistry;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
@@ -17,10 +21,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.blocks.BlockChestOfDrawers;
-import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
 import java.util.List;
 
@@ -102,13 +102,17 @@ public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity 
         Block block = state.getBlock();
         if (block instanceof BlockChestOfDrawers && !level.isClientSide) {
             if (watchers > 0 && !state.getValue(BlockChestOfDrawers.OPEN)) {
-                BlocksHelper.setWithoutUpdate(level,
-                                              worldPosition,
-                                              state.setValue(BlockChestOfDrawers.OPEN, true));
+                BlocksHelper.setWithoutUpdate(
+                        level,
+                        worldPosition,
+                        state.setValue(BlockChestOfDrawers.OPEN, true)
+                );
             } else if (watchers == 0 && state.getValue(BlockChestOfDrawers.OPEN)) {
-                BlocksHelper.setWithoutUpdate(level,
-                                              worldPosition,
-                                              state.setValue(BlockChestOfDrawers.OPEN, false));
+                BlocksHelper.setWithoutUpdate(
+                        level,
+                        worldPosition,
+                        state.setValue(BlockChestOfDrawers.OPEN, false)
+                );
             }
         }
     }
@@ -118,14 +122,16 @@ public class BlockEntityChestOfDrawers extends RandomizableContainerBlockEntity 
         double d = (double) this.worldPosition.getX() + 0.5D + (double) vec3i.getX() / 2.0D;
         double e = (double) this.worldPosition.getY() + 0.5D + (double) vec3i.getY() / 2.0D;
         double f = (double) this.worldPosition.getZ() + 0.5D + (double) vec3i.getZ() / 2.0D;
-        this.level.playSound(null,
-                             d,
-                             e,
-                             f,
-                             soundEvent,
-                             SoundSource.BLOCKS,
-                             0.5F,
-                             this.level.random.nextFloat() * 0.1F + 0.9F);
+        this.level.playSound(
+                null,
+                d,
+                e,
+                f,
+                soundEvent,
+                SoundSource.BLOCKS,
+                0.5F,
+                this.level.random.nextFloat() * 0.1F + 0.9F
+        );
     }
 
     public void addItemsToList(List<ItemStack> items) {

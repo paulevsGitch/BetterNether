@@ -1,8 +1,9 @@
 package org.betterx.betternether.config;
 
+import org.betterx.betternether.BetterNether;
+
 import com.google.common.collect.Lists;
 import com.google.gson.*;
-import org.betterx.betternether.BetterNether;
 
 import java.io.*;
 import java.util.ArrayList;
