@@ -1,13 +1,19 @@
 package org.betterx.betternether.enchantments;
 
+import org.betterx.bclib.api.v2.DiggerItemSpeed;
 import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.NetherEnchantments;
 
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Optional;
 
 public class ObsidianBreaker extends Enchantment {
     public ObsidianBreaker() {
@@ -53,5 +59,22 @@ public class ObsidianBreaker extends Enchantment {
             return speed;
         }
         return baseSpeed;
+    }
+
+    private static Optional<Float> calculateSpeed(
+            ItemStack stack,
+            BlockState state,
+            float initialSpeed,
+            float currentSpeed
+    ) {
+        final int obsidianLevel = EnchantmentHelper.getItemEnchantmentLevel(NetherEnchantments.OBSIDIAN_BREAKER, stack);
+        if (obsidianLevel > 0) {
+            return Optional.of(ObsidianBreaker.getDestroySpeedMultiplier(state, currentSpeed, obsidianLevel));
+        }
+        return Optional.empty();
+    }
+
+    public static void register() {
+        DiggerItemSpeed.addModifier(ObsidianBreaker::calculateSpeed);
     }
 }

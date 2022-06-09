@@ -13,7 +13,6 @@
     "CraftingScreenHandlerMixin",
     "DefaultAttributeRegistryMixin",
     "DeltaFeatureMixin",
-    "DiggerItemMixin",
     "FlatLevelGeneratorPresetsMixin",
     "ItemStackMixin",
     "LeavesBlockMixin",
