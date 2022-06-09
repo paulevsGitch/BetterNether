@@ -50,7 +50,7 @@
     },
     "waila:plugins": {
       "id": "betternether:global",
-      "initializer": "paulevs.betternether.integrations.wthit.WailaPlugin"
+      "initializer": "org.betterx.betternether.integrations.wthit.WailaPlugin"
     }
   }
 }
