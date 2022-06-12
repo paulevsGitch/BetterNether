@@ -25,6 +25,7 @@
     "MushroomMixin",
     "NetherWartMixin",
     "PlayerEntityMixin",
+    "PortalShapeMixin",
     "RecipeManagerAccessor",
     "RecipeManagerMixin"
   ],
