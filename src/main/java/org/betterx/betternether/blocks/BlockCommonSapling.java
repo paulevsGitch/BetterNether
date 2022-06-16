@@ -23,10 +23,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
+import org.jetbrains.annotations.NotNull;
+
 public class BlockCommonSapling extends BaseBlockCommonSapling implements SurvivesOnNetherGround {
 
 
-    public BlockCommonSapling(Block plant, MaterialColor color) {
+    public BlockCommonSapling(@NotNull Block plant, MaterialColor color) {
         super(plant, color);
     }
 
@@ -40,7 +42,7 @@ abstract class BaseBlockCommonSapling extends BlockBaseNotFull implements Boneme
     private static final VoxelShape SHAPE = box(4, 0, 4, 12, 14, 12);
     private final Block plant;
 
-    public BaseBlockCommonSapling(Block plant, MaterialColor color) {
+    public BaseBlockCommonSapling(@NotNull Block plant, MaterialColor color) {
         super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
                                  .mapColor(color)
                                  .sounds(SoundType.CROP)

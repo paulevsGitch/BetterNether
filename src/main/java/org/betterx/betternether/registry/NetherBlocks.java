@@ -429,7 +429,6 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BASALT_BRICKS_SLAB = registerSlab("basalt_bricks_slab", BASALT_BRICKS, false);
     public static final Block BASALT_BRICKS_WALL = registerWall("basalt_bricks_wall", BASALT_BRICKS);
     public static final Block BASALT_SLAB = registerSlab("basalt_slab", Blocks.BASALT, false);
-    public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", new BlockSoulLilySapling());
     public static final Block ORANGE_MUSHROOM = registerBlock("orange_mushroom", new BlockOrangeMushroom());
     public static final Block RED_MOLD = registerBlock("red_mold", new BlockRedMold());
     public static final Block GRAY_MOLD = registerBlock("gray_mold", new BlockGrayMold());
@@ -476,9 +475,11 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block SOUL_VEIN = registerBlock("soul_vein", new BlockSoulVein());
     public static final Block BONE_MUSHROOM = registerBlock("bone_mushroom", new BlockBoneMushroom());
     public static final Block BLACK_BUSH = registerBlock("black_bush", new BlockBlackBush());
+    public static final Block INK_BUSH = registerBlockNI("ink_bush", new BlockInkBush());
     public static final Block INK_BUSH_SEED = registerBlock("ink_bush_seed", new BlockInkBushSeed());
     public static final Block SMOKER = registerBlock("smoker", new BlockSmoker());
     public static final Block EGG_PLANT = registerBlock("egg_plant", new BlockEggPlant());
+    public static final Block BLACK_APPLE = registerBlockNI("black_apple", new BlockBlackApple());
     public static final Block BLACK_APPLE_SEED = registerBlock("black_apple_seed", new BlockBlackAppleSeed());
     public static final Block MAGMA_FLOWER = registerBlock("magma_flower", new BlockMagmaFlower());
     public static final Block FEATHER_FERN = registerBlock("feather_fern", new BlockFeatherFern());
@@ -708,6 +709,7 @@ public class NetherBlocks extends BlockRegistry {
     );
     // Soul lily //
     public static final Block SOUL_LILY = registerBlockNI("soul_lily", new BlockSoulLily());
+    public static final Block SOUL_LILY_SAPLING = registerBlock("soul_lily_sapling", new BlockSoulLilySapling());
     // Large & Small Mushrooms //
     public static final Block RED_LARGE_MUSHROOM = registerBlockNI("red_large_mushroom", new BlockRedLargeMushroom());
     public static final Block BROWN_LARGE_MUSHROOM = registerBlockNI(
@@ -727,8 +729,7 @@ public class NetherBlocks extends BlockRegistry {
             new BlockEyeVine(),
             NamedBlockTags.CLIMBABLE
     );
-    public static final Block INK_BUSH = registerBlockNI("ink_bush", new BlockInkBush());
-    public static final Block BLACK_APPLE = registerBlockNI("black_apple", new BlockBlackApple());
+
     public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
     public static final Block VEINED_SAND = registerBlockNI(
             "veined_sand",
