@@ -16,6 +16,8 @@ import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.features.*;
+import org.betterx.betternether.registry.features.configured.NetherVegetation;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityFeature;
 
@@ -317,6 +319,8 @@ public class NetherFeatures {
     }
 
     public static void register() {
+        NetherVegetation.ensureStaticInitialization();
+        NetherVegetationPlaced.ensureStaticInitialization();
         FloorFeatures.ensureStaticInitialization();
         VineLikeFeatures.ensureStaticInitialization();
         WallFeatures.ensureStaticInitialization();
