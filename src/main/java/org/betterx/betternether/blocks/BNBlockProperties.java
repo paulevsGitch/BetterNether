@@ -1,16 +1,13 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 import java.util.function.Supplier;
 
@@ -33,7 +30,6 @@ public class BNBlockProperties {
     );
     public static final EnumProperty<EnumLucisShape> LUCIS_SHAPE = EnumProperty.create("shape", EnumLucisShape.class);
     public static final EnumProperty<PottedPlantShape> PLANT = EnumProperty.create("plant", PottedPlantShape.class);
-    public static final EnumProperty<BlockProperties.TripleShape> TRIPLE_SHAPE = BlockProperties.TRIPLE_SHAPE;
     public static final EnumProperty<FoodShape> FOOD = EnumProperty.create("food", FoodShape.class);
 
     public static final BooleanProperty DESTRUCTED = BooleanProperty.create("destructed");
@@ -41,9 +37,6 @@ public class BNBlockProperties {
     public static final BooleanProperty FLOOR = BooleanProperty.create("floor");
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
     public static final BooleanProperty FIRE = BooleanProperty.create("fire");
-
-    public static final IntegerProperty AGE_THREE = BlockStateProperties.AGE_2; //IntegerProperty.create("age", 0, 2);
-    public static final IntegerProperty AGE_FOUR = BlockStateProperties.AGE_3; //IntegerProperty.create("age", 0, 3);
 
     public enum CincinnasitPillarShape implements StringRepresentable {
         SMALL("small"),

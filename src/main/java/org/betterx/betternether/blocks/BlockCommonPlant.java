@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BCLBlockProperties;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -25,7 +26,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import java.util.function.Function;
 
 public abstract class BlockCommonPlant extends BlockBaseNotFull implements BonemealableBlock {
-    public static final IntegerProperty AGE = BNBlockProperties.AGE_FOUR;
+    public static final IntegerProperty AGE = BCLBlockProperties.AGE_FOUR;
 
     public BlockCommonPlant(MaterialColor color) {
         this(color, p -> p);

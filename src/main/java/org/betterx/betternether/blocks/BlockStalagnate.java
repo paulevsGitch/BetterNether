@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BCLBlockProperties;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -21,7 +22,7 @@ import net.fabricmc.api.Environment;
 public class BlockStalagnate extends BlockBaseNotFull {
     private static final VoxelShape SELECT_SHAPE = box(4, 0, 4, 12, 16, 12);
     private static final VoxelShape COLLISION_SHAPE = box(5, 0, 5, 11, 16, 11);
-    public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BCLBlockProperties.TRIPLE_SHAPE;
 
     public BlockStalagnate() {
         super(Materials.makeWood(MaterialColor.TERRACOTTA_LIGHT_GREEN).noOcclusion());

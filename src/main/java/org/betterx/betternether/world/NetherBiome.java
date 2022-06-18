@@ -2,7 +2,6 @@ package org.betterx.betternether.world;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
-import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.world.structures.IStructure;
@@ -123,30 +122,6 @@ public abstract class NetherBiome extends BCLBiome {
         return SCATTER.eval(pos.getX() * 0.1, pos.getY() * 0.1 + id * 10, pos.getZ() * 0.1);
     }
 
-
-    protected void addStructure(
-            String name,
-            IStructure structure,
-            StructurePlacementType type,
-            float density,
-            boolean useNoise
-    ) {
-        String group = configGroup() + ".structures." + type.getName() + "." + name;
-        float dens = Configs.BIOMES.getFloat(group, "density", density);
-        boolean limit = Configs.BIOMES.getBoolean(group, "limit", useNoise);
-        this.addStructure(structure, type, dens, limit);
-    }
-
-    private void addStructure(IStructure structure, StructurePlacementType type, float density, boolean useNoise) {
-        switch (type) {
-            case CEIL -> generatorsCeil.add(new StructureInfo(structure, density, useNoise));
-            case FLOOR -> generatorsFloor.add(new StructureInfo(structure, density, useNoise));
-            case WALL -> generatorsWall.add(new StructureInfo(structure, density, useNoise));
-            case LAVA -> generatorsLava.add(new StructureInfo(structure, density, useNoise));
-            default -> {
-            }
-        }
-    }
 
     protected class StructureInfo {
         final IStructure structure;

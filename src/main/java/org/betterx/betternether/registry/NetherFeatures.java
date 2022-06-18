@@ -13,10 +13,13 @@ import org.betterx.bclib.api.v2.levelgen.features.features.ScatterFeature;
 import org.betterx.bclib.api.v2.levelgen.features.features.TemplateFeature;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
+import org.betterx.bclib.api.v3.levelgen.features.BCLPlacedFeatureBuilder;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.features.*;
+import org.betterx.betternether.registry.features.configured.NetherObjects;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityFeature;
@@ -32,6 +35,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.OreFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
@@ -65,49 +70,49 @@ public class NetherFeatures {
             .buildAndRegister();
 
     // Ores //
-    public static final BCLFeature CINCINNASITE_ORE =
+    public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> CINCINNASITE_ORE =
             registerOre("cincinnasite", NetherBlocks.CINCINNASITE_ORE,
                     10, 8, 0.0f,
                     PlacementUtils.RANGE_10_10,
                     false
             );
 
-    public static final BCLFeature NETHER_RUBY_ORE =
+    public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> NETHER_RUBY_ORE =
             registerOre("nether_ruby", NetherBlocks.NETHER_RUBY_ORE,
                     3, 8, 0, //0.6f,
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(32)),
                     false
             );
 
-    public static final BCLFeature NETHER_RUBY_ORE_SOUL =
+    public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> NETHER_RUBY_ORE_SOUL =
             registerOre("nether_ruby_soul", NetherBlocks.NETHER_RUBY_ORE, Blocks.SOUL_SOIL,
                     16, 12, 0, //0.6f,
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
                     false
             );
 
-    public static final BCLFeature NETHER_RUBY_ORE_LARGE =
+    public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> NETHER_RUBY_ORE_LARGE =
             registerOre("nether_ruby_large", NetherBlocks.NETHER_RUBY_ORE,
                     16, 12, 0, //0.6f,
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
                     false
             );
 
-    public static final BCLFeature NETHER_RUBY_ORE_RARE =
+    public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> NETHER_RUBY_ORE_RARE =
             registerOre("nether_ruby_rare", NetherBlocks.NETHER_RUBY_ORE,
                     2, 12, 0.0f,
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(70), VerticalAnchor.top()),
                     true
             );
 
-    public static final BCLFeature NETHER_LAPIS_ORE =
+    public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> NETHER_LAPIS_ORE =
             registerOre("nether_lapis", NetherBlocks.NETHER_LAPIS_ORE,
                     18, 4, 0.0f,
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(10)),
                     false
             );
 
-    public static final BCLFeature NETHER_REDSTONE_ORE =
+    public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> NETHER_REDSTONE_ORE =
             registerOre("nether_redstone", NetherBlocks.NETHER_REDSTONE_ORE,
                     1, 16, 0.3f,
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(8), VerticalAnchor.aboveBottom(40)),
@@ -177,7 +182,7 @@ public class NetherFeatures {
         );
     }
 
-    private static BCLFeature registerOre(
+    private static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> registerOre(
             String name,
             Block blockOre,
             Block baseBlock,
@@ -199,7 +204,7 @@ public class NetherFeatures {
         );
     }
 
-    private static BCLFeature registerOre(
+    private static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> registerOre(
             String name,
             Block blockOre,
             int veins,
@@ -220,7 +225,7 @@ public class NetherFeatures {
         );
     }
 
-    private static BCLFeature _registerOre(
+    private static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> _registerOre(
             String name,
             Block blockOre,
             Block baseBlock,
@@ -230,7 +235,7 @@ public class NetherFeatures {
             PlacementModifier placementModifier,
             boolean rare
     ) {
-        return BCLCommonFeatures.makeOreFeature(
+        return makeOreFeature(
                 BetterNether.makeID(name),
                 blockOre,
                 baseBlock,
@@ -240,6 +245,36 @@ public class NetherFeatures {
                 placementModifier,
                 rare
         );
+    }
+
+    public static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> makeOreFeature(
+            ResourceLocation id,
+            Block blockOre,
+            Block hostBlock,
+            int veins,
+            int veinSize,
+            float airDiscardChance,
+            PlacementModifier placement,
+            boolean rare
+    ) {
+        BCLPlacedFeatureBuilder<OreFeature, OreConfiguration> builder = org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder
+                .startOre(id)
+                .add(hostBlock, blockOre)
+                .veinSize(veinSize)
+                .discardChanceOnAirExposure(airDiscardChance)
+                .buildAndRegister()
+                .place()
+                .decoration(Decoration.UNDERGROUND_DECORATION);
+
+        if (rare) {
+            builder.onceEvery(veins);
+        } else {
+            builder.count(veins);
+        }
+
+        builder.modifier(placement).squarePlacement().onlyInBiome();
+
+        return builder.buildAndRegister();
     }
 
     // MANAGE DEFAULT FEATURES //
@@ -321,6 +356,8 @@ public class NetherFeatures {
     public static void register() {
         NetherVegetation.ensureStaticInitialization();
         NetherVegetationPlaced.ensureStaticInitialization();
+        NetherObjects.ensureStaticInitialization();
+        NetherObjectsPlaced.ensureStaticInitialization();
         FloorFeatures.ensureStaticInitialization();
         VineLikeFeatures.ensureStaticInitialization();
         WallFeatures.ensureStaticInitialization();

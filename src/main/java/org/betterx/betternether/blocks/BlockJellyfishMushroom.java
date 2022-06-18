@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BCLBlockProperties;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BNBlockProperties.JellyShape;
@@ -40,7 +41,7 @@ import java.util.List;
 public class BlockJellyfishMushroom extends BlockBaseNotFull {
     private static final VoxelShape TOP_SHAPE = box(1, 0, 1, 15, 16, 15);
     private static final VoxelShape MIDDLE_SHAPE = box(5, 0, 5, 11, 16, 11);
-    public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<TripleShape> SHAPE = BCLBlockProperties.TRIPLE_SHAPE;
     public static final EnumProperty<JellyShape> VISUAL = BNBlockProperties.JELLY_MUSHROOM_VISUAL;
 
     public BlockJellyfishMushroom() {

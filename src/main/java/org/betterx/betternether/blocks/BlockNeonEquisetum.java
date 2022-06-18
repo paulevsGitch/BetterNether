@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BCLBlockProperties;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;
@@ -45,7 +46,7 @@ import java.util.List;
 
 public class BlockNeonEquisetum extends BlockBaseNotFull implements BonemealableBlock, SurvivesOnNetherrack {
     protected static final VoxelShape SHAPE_SELECTION = box(2, 0, 2, 14, 16, 14);
-    public static final EnumProperty<TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<TripleShape> SHAPE = BCLBlockProperties.TRIPLE_SHAPE;
 
     public BlockNeonEquisetum() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)

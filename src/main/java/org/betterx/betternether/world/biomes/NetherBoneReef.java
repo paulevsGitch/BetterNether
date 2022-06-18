@@ -6,6 +6,7 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.TerrainFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
@@ -31,9 +32,13 @@ public class NetherBoneReef extends NetherBiome {
                    .particles(ParticleTypes.WARPED_SPORE, 0.01F)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(TerrainFeatures.LAVA_PITS_SPARE)
-                   .feature(NetherVegetationPlaced.BONE_GRASS)
-            //.feature(BiomeFeatures.BONE_REEF_CEIL)
-            //.feature(BiomeFeatures.BONE_REEF_FLOOR)
+                   .feature(NetherVegetationPlaced.NETHER_REED)
+                   .feature(NetherObjectsPlaced.BONES)
+                   .feature(NetherObjectsPlaced.BONE_STALACMITE)
+                   .feature(NetherVegetationPlaced.BONE_REEF_VEGETATION)
+                   .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
+                   .feature(NetherVegetationPlaced.LUMABUS_VINE)
+                   .feature(NetherObjectsPlaced.STALACTITE)
             ;
         }
 

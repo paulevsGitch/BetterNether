@@ -13,7 +13,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfiguration> implements UserGrowableFeature<NoneFeatureConfiguration> {
@@ -30,27 +29,8 @@ public class JellyfishMushroomFeature extends ContextFeature<NoneFeatureConfigur
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
-
-        final float scale_factor = MAX_HEIGHT / 128.0f;
-        final int RANDOM_BOUND = (int) (6 * scale_factor);
-
-        BlockState under;
-        if (world.getBlockState(pos.below()).is(BlockTags.NYLIUM)) {
-            for (int i = 0; i < 10; i++) {
-                int x = pos.getX() + (int) (random.nextGaussian() * 2);
-                int z = pos.getZ() + (int) (random.nextGaussian() * 2);
-                int y = pos.getY() + random.nextInt(RANDOM_BOUND);
-                for (int j = 0; j < RANDOM_BOUND; j++) {
-                    context.POS.set(x, y - j, z);
-                    if (context.POS.getY() > 32) {
-                        under = world.getBlockState(context.POS.below());
-                        if (under.is(BlockTags.NYLIUM) && world.isEmptyBlock(context.POS)) {
-                            grow(world, context.POS, random);
-                        }
-                    } else
-                        break;
-                }
-            }
+        if (world.isEmptyBlock(pos) && world.getBlockState(pos.below()).is(BlockTags.NYLIUM)) {
+            grow(world, pos, random);
             return true;
         }
         return false;

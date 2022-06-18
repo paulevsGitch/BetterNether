@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BCLBlockProperties;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -21,7 +23,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import javax.annotation.Nullable;
 
 public class BlockStalactite extends BlockBaseNotFull {
-    public static final IntegerProperty SIZE = IntegerProperty.create("size", 0, 7);
+
+    public static final IntegerProperty SIZE = BCLBlockProperties.SIZE;
     private static final VoxelShape[] SHAPES;
 
     public BlockStalactite(Block source) {

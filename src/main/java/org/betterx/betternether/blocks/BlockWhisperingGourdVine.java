@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BCLBlockProperties;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.interfaces.tools.AddMineableShears;
 import org.betterx.bclib.items.tool.BaseShearsItem;
@@ -47,7 +48,7 @@ import java.util.List;
 
 public class BlockWhisperingGourdVine extends BlockBaseNotFull implements BonemealableBlock, AddMineableShears {
     private static final VoxelShape SELECTION = box(2, 0, 2, 14, 16, 14);
-    public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BNBlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<BlockProperties.TripleShape> SHAPE = BCLBlockProperties.TRIPLE_SHAPE;
 
     public BlockWhisperingGourdVine() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)

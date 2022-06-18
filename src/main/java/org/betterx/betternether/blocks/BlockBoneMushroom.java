@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BCLBlockProperties;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnBoneBlocks;
@@ -33,7 +34,7 @@ public class BlockBoneMushroom extends BlockBaseNotFull implements SurvivesOnBon
     private static final VoxelShape SHAPE_EAST = box(0, 1, 1, 8, 15, 15);
     private static final VoxelShape SHAPE_UP = box(1, 0, 1, 15, 12, 15);
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
-    public static final IntegerProperty AGE = BNBlockProperties.AGE_THREE;
+    public static final IntegerProperty AGE = BCLBlockProperties.AGE_THREE;
 
     public BlockBoneMushroom() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)

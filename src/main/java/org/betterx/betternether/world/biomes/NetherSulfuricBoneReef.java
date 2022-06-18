@@ -5,7 +5,8 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -29,8 +30,13 @@ public class NetherSulfuricBoneReef extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .particles(ParticleTypes.ASH, 0.01F)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(BiomeFeatures.SULFURIC_BONE_REEF_FLOOR)
-                   .feature(BiomeFeatures.SULFURIC_BONE_REEF_CEIL)
+                   .feature(NetherVegetationPlaced.NETHER_REED)
+                   .feature(NetherObjectsPlaced.BONES)
+                   .feature(NetherObjectsPlaced.BONE_STALACMITE)
+                   .feature(NetherVegetationPlaced.SULFURIC_BONE_REEF_VEGETATION)
+                   .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
+                   .feature(NetherVegetationPlaced.GOLDEN_LUMABUS_VINE)
+                   .feature(NetherObjectsPlaced.STALACTITE)
                    .genChance(0.3f);
         }
 

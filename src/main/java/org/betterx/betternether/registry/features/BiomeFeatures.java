@@ -21,6 +21,7 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import java.util.List;
 
 public class BiomeFeatures {
+
     public static final List<PlacementModifier> defaultCeilModifiers = List.of(
             CountPlacement.of(16),
             InSquarePlacement.spread(),
@@ -69,19 +70,6 @@ public class BiomeFeatures {
     ), 0);
     public static final BCLFeature CRIMSON_GLOWING_WOODS_CEIL = MAGMA_LAND_CEIL;
     public static final BCLFeature CRIMSON_PINEWOOD_CEIL = CRIMSON_GLOWING_WOODS_CEIL;
-
-    public static final BCLFeature BONE_REEF_FLOOR = floorFromWeighted("bone_reef", List.of(
-            new WeightedPlacedFeature(FloorFeatures.BONES.getPlacedFeature(), 0.015f),
-            new WeightedPlacedFeature(FloorFeatures.BONE_GRASS_PATCH.getPlacedFeature(), 0.10f),
-            new WeightedPlacedFeature(FloorFeatures.FEATHER_FERN_PATCH.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.JELLYFISH_MUSHROOM.getPlacedFeature(), 0.01f),
-            new WeightedPlacedFeature(VineLikeFeatures.NETHER_REED.getPlacedFeature(), 0.03f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_BONE_CLUSTER.getPlacedFeature(), 0.01f)
-    ), 1);
-
-    public static final BCLFeature BONE_REEF_CEIL = ceilFromWeighted("bone_reef", List.of(
-            new WeightedPlacedFeature(VineLikeFeatures.LUMABUS_VINE.getPlacedFeature(), 1f)
-    ), 0);
 
     public static final BCLFeature SOUL_PLAIN_FLOOR = floorFromWeighted("soul_plain", List.of(
             new WeightedPlacedFeature(VineLikeFeatures.SOUL_VEIN.getPlacedFeature(), 0.3f),
