@@ -72,7 +72,7 @@ public class NetherVegetation {
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_MAGMA_LAND_VEGETATION = BCLFeatureBuilder
             .startWeighted(BN.id("temp_magma_land_vegetation"))
             .add(NetherBlocks.GEYSER, 40)
-            .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.MAGMA_FLOWER, 90)
+            .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.MAGMA_FLOWER, 160)
             .inlinePlace()
             .isEmptyAndOnNetherGround()
             .inRandomPatch(BN.id("patch_magma_land_vegetation"))
