@@ -67,9 +67,14 @@ public class ObsidianBreaker extends Enchantment {
             float initialSpeed,
             float currentSpeed
     ) {
-        final int obsidianLevel = EnchantmentHelper.getItemEnchantmentLevel(NetherEnchantments.OBSIDIAN_BREAKER, stack);
-        if (obsidianLevel > 0) {
-            return Optional.of(ObsidianBreaker.getDestroySpeedMultiplier(state, currentSpeed, obsidianLevel));
+        if (stack != null) {
+            final int obsidianLevel = EnchantmentHelper.getItemEnchantmentLevel(
+                    NetherEnchantments.OBSIDIAN_BREAKER,
+                    stack
+            );
+            if (obsidianLevel > 0) {
+                return Optional.of(ObsidianBreaker.getDestroySpeedMultiplier(state, currentSpeed, obsidianLevel));
+            }
         }
         return Optional.empty();
     }
