@@ -49,10 +49,33 @@ public class NetherVegetation {
             .tries(64)
             .spreadXZ(6)
             .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_GOLDEN_VINE = BCLFeatureBuilder
+            .startColumn(BN.id("temp_patch_golden_vine"))
+            .direction(Direction.DOWN)
+            .addBottomShapeUpsideDown(
+                    NetherBlocks.GOLDEN_VINE.defaultBlockState(),
+                    ClampedNormalInt.of(12, 3, 3, 23)
+            )
+            .inlinePlace()
+            .isEmptyAndUnderNetherGround()
+            .inRandomPatch(BN.id("patch_golden_vine"))
+            .tries(64)
+            .spreadXZ(6)
+            .buildAndRegister();
     public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> PATCH_BONE_REEF_VEGETATION = BCLFeatureBuilder
             .startNetherVegetation(BN.id("patch_bone_reef_vegetation"))
             .add(NetherBlocks.BONE_GRASS, 180)
             .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_MAGMA_LAND_VEGETATION = BCLFeatureBuilder
+            .startWeighted(BN.id("temp_magma_land_vegetation"))
+            .add(NetherBlocks.GEYSER, 40)
+            .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.MAGMA_FLOWER, 90)
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("patch_magma_land_vegetation"))
             .buildAndRegister();
 
     public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> PATCH_SULFURIC_BONE_REEF_VEGETATION = BCLFeatureBuilder
@@ -69,6 +92,14 @@ public class NetherVegetation {
             .tries(6)
             .spreadXZ(6)
             .spreadY(4)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BLACK_BUSH = BCLFeatureBuilder
+            .start(BN.id("temp_black_bush"), NetherBlocks.BLACK_BUSH)
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("patch_back_bush"))
+            .likeDefaultNetherVegetation()
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_NETHER_REED = BCLFeatureBuilder

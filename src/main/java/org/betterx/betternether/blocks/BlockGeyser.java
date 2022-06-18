@@ -1,5 +1,7 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -119,7 +121,8 @@ public class BlockGeyser extends BlockBaseNotFull {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return world.getBlockState(pos.below()).isFaceSturdy(world, pos.below(), Direction.UP);
+        return world.getBlockState(pos.below())
+                    .is(CommonBlockTags.TERRAIN);//.isFaceSturdy(world, pos.below(), Direction.UP);
     }
 
     @Override

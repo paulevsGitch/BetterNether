@@ -5,8 +5,9 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
-import org.betterx.betternether.registry.features.BiomeFeatures;
-import org.betterx.betternether.registry.features.TerrainFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -30,10 +31,14 @@ public class NetherMagmaLand extends NetherBiome {
                    .additions(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS)
                    .mood(SoundEvents.AMBIENT_NETHER_WASTES_MOOD)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(TerrainFeatures.LAVA_PITS)
-                   .feature(TerrainFeatures.MAGMA_BLOBS)
-                   .feature(BiomeFeatures.MAGMA_LAND_FLOOR)
-                   .feature(BiomeFeatures.MAGMA_LAND_CEIL)
+                   .feature(NetherTerrainPlaced.LAVA_PITS_DENSE)
+                   .feature(NetherTerrainPlaced.MAGMA_BLOBS)
+                   .feature(NetherObjectsPlaced.OBSIDIAN_CRYSTAL)
+                   .feature(NetherObjectsPlaced.STALAGMITE)
+                   .feature(NetherVegetationPlaced.MAGMA_LAND_VEGETATION)
+                   .feature(NetherVegetationPlaced.BLACK_BUSH)
+                   .feature(NetherVegetationPlaced.GOLDEN_VINE)
+                   .feature(NetherObjectsPlaced.STALACTITE)
             ;
         }
 

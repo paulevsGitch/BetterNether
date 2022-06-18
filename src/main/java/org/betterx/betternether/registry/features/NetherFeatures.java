@@ -2,6 +2,7 @@ package org.betterx.betternether.registry.features;
 
 import org.betterx.bclib.BCLib;
 import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.betternether.world.features.CrystalFeature;
 import org.betterx.betternether.world.features.JellyfishMushroomFeature;
 
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -11,5 +12,10 @@ public class NetherFeatures {
     public static final Feature<NoneFeatureConfiguration> JELLYFISH_MUSHROOM = BCLFeature.register(
             BCLib.makeID("jellyfish_mushroom"),
             new JellyfishMushroomFeature()
+    );
+
+    public static final Feature<NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = BCLFeature.register(
+            BCLib.makeID("obsidian_crystal"),
+            new CrystalFeature()
     );
 }

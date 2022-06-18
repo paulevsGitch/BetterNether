@@ -211,18 +211,6 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_BROWN.getPlacedFeature(), 0.8f)
     ), 1);
 
-    public static final BCLFeature SULFURIC_BONE_REEF_FLOOR = denseFloorFromWeighted("sulfuric_bone_reef", List.of(
-            new WeightedPlacedFeature(FloorFeatures.BONES.getPlacedFeature(), 0.015f),
-            new WeightedPlacedFeature(FloorFeatures.SEPIA_BONE_GRASS_PATCH.getPlacedFeature(), 0.10f),
-            new WeightedPlacedFeature(FloorFeatures.JELLYFISH_MUSHROOM.getPlacedFeature(), 0.01f),
-            new WeightedPlacedFeature(VineLikeFeatures.NETHER_REED.getPlacedFeature(), 0.03f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_BONE_CLUSTER.getPlacedFeature(), 0.01f)
-    ), 1);
-
-    public static final BCLFeature SULFURIC_BONE_REEF_CEIL = ceilFromWeighted("sulfuric_bone_reef", List.of(
-            new WeightedPlacedFeature(VineLikeFeatures.GOLDEN_LUMABUS_VINE.getPlacedFeature(), 1f)
-    ), 0);
-
     public static final BCLFeature NETHER_SWAMPLAND_FLOOR = denseFloorFromWeighted("nether_swampland", List.of(
             new WeightedPlacedFeature(TreeFeatures.WILLOW.getPlacedFeature(), 0.05f),
             new WeightedPlacedFeature(FloorFeatures.WILLOW_BUSH_PATCH.getPlacedFeature(), 0.10f),

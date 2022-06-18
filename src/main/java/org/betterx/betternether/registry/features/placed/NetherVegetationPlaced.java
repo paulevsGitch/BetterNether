@@ -21,6 +21,13 @@ public class NetherVegetationPlaced {
             .vanillaNetherGround(8)
             .buildAndRegister();
 
+    public static final BCLFeature MAGMA_LAND_VEGETATION = NetherVegetation
+            .PATCH_MAGMA_LAND_VEGETATION
+            .place()
+            .betterNetherGround(8)
+            .isEmptyAndOnNetherGround()
+            .buildAndRegister();
+
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> JELLYFISH_MUSHROOM = NetherVegetation
             .PATCH_JELLYFISH_MUSHROOM
             .place()
@@ -46,6 +53,22 @@ public class NetherVegetationPlaced {
             .betterNetherCeiling(4)
             .onceEvery(2)
             .buildAndRegister();
+
+
+    public static final BCLFeature GOLDEN_VINE = NetherVegetation
+            .PATCH_GOLDEN_VINE
+            .place()
+            .betterNetherCeiling(4)
+            .onceEvery(2)
+            .buildAndRegister();
+
+    public static final BCLFeature BLACK_BUSH = NetherVegetation
+            .PATCH_BLACK_BUSH
+            .place()
+            .vanillaNetherGround(4)
+            .onceEvery(3)
+            .buildAndRegister();
+
 
     public static void ensureStaticInitialization() {
     }

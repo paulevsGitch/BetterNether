@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.blocks.BCLBlockProperties;
+import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.blocks.BlockProperties.TripleShape;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -15,7 +15,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockWillowTrunk extends BlockBaseNotFull {
-    public static final EnumProperty<TripleShape> SHAPE = BCLBlockProperties.TRIPLE_SHAPE;
+    public static final EnumProperty<TripleShape> SHAPE = BlockProperties.TRIPLE_SHAPE;
     private static final VoxelShape SHAPE_BOTTOM = box(4, 0, 4, 12, 16, 12);
     private static final VoxelShape SHAPE_TOP = box(4, 0, 4, 12, 12, 12);
 

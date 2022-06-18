@@ -10,6 +10,7 @@ import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v3.levelgen.features.BlockPredicates;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.registry.NetherBlocks;
+import org.betterx.betternether.registry.features.NetherFeatures;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -18,10 +19,15 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class NetherObjects {
+
+    public static final BCLConfigureFeature<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = BCLFeatureBuilder
+            .start(BN.id("obsidian_crystal"), NetherFeatures.OBSIDIAN_CRYSTAL)
+            .buildAndRegister();
     public static final BCLConfigureFeature<Feature<TemplateFeatureConfig>, TemplateFeatureConfig> BONES = BCLFeatureBuilder
             .startWithTemplates(BN.id("bones"))
             .add(BN.id("bone_01"), 0, StructurePlacementType.FLOOR, 1.0f)
@@ -57,6 +63,16 @@ public class NetherObjects {
             .inlinePlace()
             .isEmptyAndUnderNetherGround()
             .inRandomPatch(BN.id("patch_stalactite"))
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_STALAGMITE = BCLFeatureBuilder
+            .startPillar(BN.id("temp_patch_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+            .direction(Direction.UP)
+            .blockState(NetherBlocks.NETHERRACK_STALACTITE)
+            .height(BiasedToBottomInt.of(2, 7))
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("patch_stalagmite"))
             .buildAndRegister();
 
 

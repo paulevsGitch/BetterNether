@@ -5,8 +5,8 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.features.TerrainFeatures;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
@@ -31,7 +31,7 @@ public class NetherBoneReef extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .particles(ParticleTypes.WARPED_SPORE, 0.01F)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(TerrainFeatures.LAVA_PITS_SPARE)
+                   .feature(NetherTerrainPlaced.LAVA_PITS_SPARSE)
                    .feature(NetherVegetationPlaced.NETHER_REED)
                    .feature(NetherObjectsPlaced.BONES)
                    .feature(NetherObjectsPlaced.BONE_STALACMITE)
