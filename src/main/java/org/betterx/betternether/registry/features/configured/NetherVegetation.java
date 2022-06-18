@@ -5,13 +5,13 @@ import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v3.levelgen.features.BlockPredicates;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.blocks.BlockFeatherFern;
+import org.betterx.betternether.blocks.BlockMagmaFlower;
 import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.NetherFeatures;
 
 import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
-import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.NetherForestVegetationFeature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
@@ -25,62 +25,31 @@ public class NetherVegetation {
             .start(BN.id("debug"), Blocks.YELLOW_CONCRETE)
             .buildAndRegister();
 
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_LUMABUS_VINE = BCLFeatureBuilder
-            .startColumn(BN.id("temp_patch_lumabus_vine"))
-            .direction(Direction.DOWN)
-            .addTripleShapeUpsideDown(NetherBlocks.LUMABUS_VINE.defaultBlockState(), ClampedNormalInt.of(10, 3, 3, 21))
-            .inlinePlace()
-            .isEmptyAndUnderNetherGround()
-            .inRandomPatch(BN.id("patch_lumabus_vine"))
-            .tries(48)
-            .spreadXZ(5)
-            .buildAndRegister();
-
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_GOLDEN_LUMABUS_VINE = BCLFeatureBuilder
-            .startColumn(BN.id("temp_patch_golden_lumabus_vine"))
-            .direction(Direction.DOWN)
-            .addTripleShapeUpsideDown(
-                    NetherBlocks.GOLDEN_LUMABUS_VINE.defaultBlockState(),
-                    ClampedNormalInt.of(12, 3, 3, 23)
-            )
-            .inlinePlace()
-            .isEmptyAndUnderNetherGround()
-            .inRandomPatch(BN.id("patch_golden_lumabus_vine"))
-            .tries(64)
-            .spreadXZ(6)
-            .buildAndRegister();
-
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_GOLDEN_VINE = BCLFeatureBuilder
-            .startColumn(BN.id("temp_patch_golden_vine"))
-            .direction(Direction.DOWN)
-            .addBottomShapeUpsideDown(
-                    NetherBlocks.GOLDEN_VINE.defaultBlockState(),
-                    ClampedNormalInt.of(12, 3, 3, 23)
-            )
-            .inlinePlace()
-            .isEmptyAndUnderNetherGround()
-            .inRandomPatch(BN.id("patch_golden_vine"))
-            .tries(64)
-            .spreadXZ(6)
-            .buildAndRegister();
-    public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> PATCH_BONE_REEF_VEGETATION = BCLFeatureBuilder
-            .startNetherVegetation(BN.id("patch_bone_reef_vegetation"))
+    public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> VEGETATION_BONE_REEF = BCLFeatureBuilder
+            .startNetherVegetation(BN.id("vegetation_bone_reef"))
             .add(NetherBlocks.BONE_GRASS, 180)
             .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
             .buildAndRegister();
 
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_MAGMA_LAND_VEGETATION = BCLFeatureBuilder
-            .startWeighted(BN.id("temp_magma_land_vegetation"))
-            .add(NetherBlocks.GEYSER, 40)
-            .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.MAGMA_FLOWER, 160)
-            .inlinePlace()
-            .isEmptyAndOnNetherGround()
-            .inRandomPatch(BN.id("patch_magma_land_vegetation"))
+    public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> VEGETATION_SULFURIC_BONE_REEF = BCLFeatureBuilder
+            .startNetherVegetation(BN.id("vegetation_sulfuric_bone_reef"))
+            .add(NetherBlocks.SEPIA_BONE_GRASS, 180)
             .buildAndRegister();
 
-    public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> PATCH_SULFURIC_BONE_REEF_VEGETATION = BCLFeatureBuilder
-            .startNetherVegetation(BN.id("patch_sulfuric_bone_reef_vegetation"))
-            .add(NetherBlocks.SEPIA_BONE_GRASS, 180)
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_MAGMA_LAND = BCLFeatureBuilder
+            .startWeighted(BN.id("temp_vegetation_magma_land"))
+            .add(NetherBlocks.GEYSER, 40)
+            .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 120)
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("vegetation_magma_land"))
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> VEGETATION_CRIMSON_GLOWING_WOODS = BCLFeatureBuilder
+            .startNetherVegetation(BN.id("vegetation_crimson_glowing_woods"))
+            .add(Blocks.CRIMSON_ROOTS, 120)
+            .add(Blocks.CRIMSON_FUNGUS, 80)
+            .add(NetherBlocks.MAT_WART.getSeed(), 80)
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_JELLYFISH_MUSHROOM = BCLFeatureBuilder
@@ -100,6 +69,26 @@ public class NetherVegetation {
             .isEmptyAndOnNetherGround()
             .inRandomPatch(BN.id("patch_back_bush"))
             .likeDefaultNetherVegetation()
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_WART_BUSH = BCLFeatureBuilder
+            .start(BN.id("temp_wart_bush"), NetherFeatures.WART_BUSH)
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("patch_wart_bush"))
+            .likeDefaultNetherVegetation()
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_WALL_MUSHROOM_RED_WITH_MOSS = BCLFeatureBuilder
+            .startFacing(BN.id("temp_wall_mushroom_red_with_moss"))
+            .add(NetherBlocks.WALL_MUSHROOM_RED, 40)
+            .add(NetherBlocks.WALL_MOSS, 20)
+            .allHorizontal()
+            .inlinePlace()
+            .inRandomPatch(BN.id("patch_wall_mushroom_red_with_moss"))
+            .tries(120)
+            .spreadXZ(4)
+            .spreadY(7)
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_NETHER_REED = BCLFeatureBuilder

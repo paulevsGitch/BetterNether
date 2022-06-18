@@ -23,26 +23,6 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import java.util.List;
 
 public class TreeFeatures {
-    public static final BCLFeature CRIMSON_GLOWING = BCLFeatureBuilder
-            .start(BetterNether.makeID("crimson_glowing_tree"), BCLFeature.TEMPLATE)
-            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-            .buildAndRegister(new TemplateFeatureConfig(List.of(
-                    cfg(BetterNether.makeID("trees/crimson_glow_tree_01"), 0, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/crimson_glow_tree_02"), 0, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/crimson_glow_tree_03"), 0, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/crimson_glow_tree_04"), 0, StructurePlacementType.FLOOR, 1.0f)
-            )));
-    public static final BCLFeature CRIMSON_PINEWOOD = BCLFeatureBuilder
-            .start(BetterNether.makeID("crimson_pine_tree"), BCLFeature.TEMPLATE)
-            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-            .buildAndRegister(new TemplateFeatureConfig(List.of(
-                    cfg(BetterNether.makeID("trees/crimson_pine_01"), -1, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/crimson_pine_02"), -1, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/crimson_pine_03"), -1, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/crimson_pine_04"), 0, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/crimson_pine_05"), 0, StructurePlacementType.FLOOR, 1.0f)
-            )));
-
     public static final BCLFeature WART_DEADWOOD = BCLFeatureBuilder
             .start(BetterNether.makeID("wart_deadwood"), BCLFeature.TEMPLATE)
             .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))

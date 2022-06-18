@@ -8,7 +8,10 @@ import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -34,9 +37,13 @@ public class CrimsonPinewood extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .particles(ParticleTypes.CRIMSON_SPORE, 0.025F)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
-                   .feature(BiomeFeatures.CRIMSON_PINEWOOD_FLOOR)
-                   .feature(BiomeFeatures.CRIMSON_PINEWOOD_CEIL)
-                   .feature(BiomeFeatures.CRIMSON_PINEWOOD_WALL)
+                   .feature(NetherTreesPlaced.CRIMSON_PINE)
+                   .feature(NetherObjectsPlaced.STALAGMITE)
+                   .feature(NetherVegetationPlaced.WART_BUSH)
+                   .feature(NetherVegetationPlaced.VEGETATION_CRIMSON_GLOWING_WOODS)
+                   .feature(NetherVinesPlaced.GOLDEN_VINE)
+                   .feature(NetherObjectsPlaced.STALACTITE)
+                   .feature(NetherVegetationPlaced.WALL_MUSHROOM_RED_WITH_MOSS)
                    .genChance(0.3f)
             ;
         }

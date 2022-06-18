@@ -3,7 +3,6 @@ package org.betterx.betternether.registry.features;
 import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
-import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
@@ -11,8 +10,10 @@ import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BlockCommonPlant;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.world.features.*;
+import org.betterx.betternether.world.features.JellyfishMushroomFeature;
+import org.betterx.betternether.world.features.NetherSakuraBushFeature;
+import org.betterx.betternether.world.features.RubeusBushFeature;
+import org.betterx.betternether.world.features.WillowBushFeature;
 
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -62,11 +63,6 @@ public class FloorFeatures {
 
     public static final BCLFeature HOOK_MUSHROOM
             = FastFeatures.patch(BetterNether.makeID("hook_mushroom"), NetherBlocks.HOOK_MUSHROOM);
-    public static final BCLFeature BONE_GRASS_PATCH
-            = FastFeatures.patch(BetterNether.makeID("bone_grass"), NetherBlocks.BONE_GRASS);
-
-    public static final BCLFeature SEPIA_BONE_GRASS_PATCH
-            = FastFeatures.patch(BetterNether.makeID("sepia_bone_grass"), NetherBlocks.SEPIA_BONE_GRASS);
     public static final BCLFeature SOUL_GRASS_PATCH
             = FastFeatures.patch(BetterNether.makeID("soul_grass"), NetherBlocks.SOUL_GRASS);
 
@@ -112,8 +108,6 @@ public class FloorFeatures {
     public static final BCLFeature WART_SEED_PATCH
             = FastFeatures.patch(BetterNether.makeID("wart_seed"), NetherBlocks.MAT_WART.getSeed(), 32, 2, 1);
 
-    public static final BCLFeature WART_BUSH_PATCH
-            = FastFeatures.patch(BetterNether.makeID("wart_bush"), 16, 5, 3, new WartBushFeature());
 
     public static final BCLFeature RUBEUS_BUSH_PATCH
             = FastFeatures.patch(BetterNether.makeID("rubeus_bush"), 16, 5, 3, new RubeusBushFeature());
@@ -125,12 +119,6 @@ public class FloorFeatures {
             = FastFeatures.patch(BetterNether.makeID("nether_sakura_bush"), 2, 5, 3, new NetherSakuraBushFeature());
 
 
-    public static final BCLFeature CRIMSON_FUNGUS
-            = FastFeatures.patch(BetterNether.makeID("crimson_fungus"), Blocks.CRIMSON_FUNGUS, 32, 7, 2);
-
-    public static final BCLFeature CRIMSON_ROOTS
-            = FastFeatures.patch(BetterNether.makeID("crimson_roots"), Blocks.CRIMSON_ROOTS, 32, 7, 2);
-
     public static final BCLFeature BARREL_CACTUS
             = FastFeatures.patch(BetterNether.makeID("barrel_cactus"), NetherBlocks.BARREL_CACTUS, 12, 2, 2);
 
@@ -138,13 +126,15 @@ public class FloorFeatures {
             = FastFeatures.patch(BetterNether.makeID("jungle_plant"), NetherBlocks.JUNGLE_PLANT, 20, 4, 3);
 
 
-    public static final BCLFeature GEYSER
-            = FastFeatures.patch(BetterNether.makeID("geyser"), NetherBlocks.GEYSER, 32, 3, 3);
-
     public static final BCLFeature JELLYFISH_MUSHROOM_SINGLE
-            = FastFeatures.simple(BetterNether.makeID("jellyfish_mushroom"), 3, false, new JellyfishMushroomFeature());
+            = FastFeatures.simple(
+            BetterNether.makeID("jellyfish_mushroom_old"),
+            3,
+            false,
+            new JellyfishMushroomFeature()
+    );
     public static final BCLFeature JELLYFISH_MUSHROOM
-            = FastFeatures.patch(BetterNether.makeID("jellyfish_mushroom"), 64, 5, 3, JELLYFISH_MUSHROOM_SINGLE);
+            = FastFeatures.patch(BetterNether.makeID("jellyfish_mushroom_old"), 64, 5, 3, JELLYFISH_MUSHROOM_SINGLE);
 
     public static final BCLFeature RED_MOLD
             = FastFeatures.patch(BetterNether.makeID("red_mold"), NetherBlocks.RED_MOLD, 32, 5, 3);
@@ -153,16 +143,6 @@ public class FloorFeatures {
             = FastFeatures.patch(BetterNether.makeID("gray_mold"), NetherBlocks.GRAY_MOLD, 32, 5, 3);
 
 
-    public static final BCLFeature CRYSTAL
-            = FastFeatures.simple(BetterNether.makeID("crystal"), 3, true, new CrystalFeature());
-
-    public static final BCLFeature BONES = BCLFeatureBuilder
-            .start(BetterNether.makeID("bones"), BCLFeature.TEMPLATE)
-            .buildAndRegister(new TemplateFeatureConfig(List.of(
-                    cfg(BetterNether.makeID("bone_01"), 0, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("bone_02"), 0, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("bone_03"), 0, StructurePlacementType.FLOOR, 1.0f)
-            )));
     public static final BCLFeature JUNGLE_BONES = BCLFeatureBuilder
             .start(BetterNether.makeID("jungle_bones"), BCLFeature.TEMPLATE)
             .buildAndRegister(new TemplateFeatureConfig(List.of(
@@ -238,12 +218,4 @@ public class FloorFeatures {
         return TemplateFeatureConfig.cfg(location, offsetY, type, chance);
     }
 
-    static BCLFeature agedCluster(
-            ResourceLocation location,
-            boolean onFloor,
-            boolean sparse,
-            ScatterFeatureConfig.Builder builder
-    ) {
-        return FastFeatures.scatter(location, onFloor, sparse, builder, NetherFeatures.SCATTER_WITH_PLANT_AGE);
-    }
 }

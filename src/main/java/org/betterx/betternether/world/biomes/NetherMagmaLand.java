@@ -8,6 +8,7 @@ import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -35,9 +36,9 @@ public class NetherMagmaLand extends NetherBiome {
                    .feature(NetherTerrainPlaced.MAGMA_BLOBS)
                    .feature(NetherObjectsPlaced.OBSIDIAN_CRYSTAL)
                    .feature(NetherObjectsPlaced.STALAGMITE)
-                   .feature(NetherVegetationPlaced.MAGMA_LAND_VEGETATION)
                    .feature(NetherVegetationPlaced.BLACK_BUSH)
-                   .feature(NetherVegetationPlaced.GOLDEN_VINE)
+                   .feature(NetherVegetationPlaced.VEGETATION_MAGMA_LAND)
+                   .feature(NetherVinesPlaced.GOLDEN_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
             ;
         }

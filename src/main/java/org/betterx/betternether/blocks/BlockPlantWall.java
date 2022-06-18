@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -59,7 +60,7 @@ public class BlockPlantWall extends BlockBaseNotFull {
         Direction direction = state.getValue(FACING);
         BlockPos blockPos = pos.relative(direction.getOpposite());
         BlockState blockState = world.getBlockState(blockPos);
-        return blockState.isFaceSturdy(world, blockPos, direction);
+        return blockState.is(CommonBlockTags.TERRAIN); //blockState.isFaceSturdy(world, blockPos, direction);
     }
 
     @Override

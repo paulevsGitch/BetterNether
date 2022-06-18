@@ -207,21 +207,6 @@ public class VineLikeFeatures {
                     .spread(3, 0f, ClampedNormalInt.of(7, 1.2f, 3, 12))
     );
 
-    public static final BCLFeature STALAGMITE_BONE_CLUSTER = sizedCluster(
-            BetterNether.makeID("stalagmite_bone_cluster"), true, false,
-            ScatterFeatureConfigs.WithSize.startWithSize()
-                                          .block(NetherBlocks.BONE_STALACTITE)
-                                          .generateBaseBlock(
-                                                  NetherBlocks.BONE_BLOCK.defaultBlockState(),
-                                                  0.95f,
-                                                  0.3f,
-                                                  0.75f,
-                                                  0.5f
-                                          )
-                                          .heightRange(2, 7)
-                                          .spread(3, 0f, UniformInt.of(3, 16))
-    );
-
     public static final BCLFeature STALAGMITE_BLACKSTONE_CLUSTER = sizedCluster(
             BetterNether.makeID("stalagmite_blackstone_cluster"), true, false,
             ScatterFeatureConfigs.WithSize.startWithSize()

@@ -8,6 +8,7 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -35,9 +36,9 @@ public class NetherBoneReef extends NetherBiome {
                    .feature(NetherVegetationPlaced.NETHER_REED)
                    .feature(NetherObjectsPlaced.BONES)
                    .feature(NetherObjectsPlaced.BONE_STALACMITE)
-                   .feature(NetherVegetationPlaced.BONE_REEF_VEGETATION)
+                   .feature(NetherVegetationPlaced.VEGETATION_BONE_REEF)
                    .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
-                   .feature(NetherVegetationPlaced.LUMABUS_VINE)
+                   .feature(NetherVinesPlaced.LUMABUS_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
             ;
         }

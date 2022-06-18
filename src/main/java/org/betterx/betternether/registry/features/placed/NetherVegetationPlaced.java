@@ -9,22 +9,29 @@ import net.minecraft.world.level.levelgen.feature.configurations.NetherForestVeg
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 
 public class NetherVegetationPlaced {
-    public static final BCLFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> BONE_REEF_VEGETATION = NetherVegetation
-            .PATCH_BONE_REEF_VEGETATION
+    public static final BCLFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> VEGETATION_BONE_REEF = NetherVegetation
+            .VEGETATION_BONE_REEF
             .place()
             .vanillaNetherGround(8)
             .buildAndRegister();
 
-    public static final BCLFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> SULFURIC_BONE_REEF_VEGETATION = NetherVegetation
-            .PATCH_SULFURIC_BONE_REEF_VEGETATION
+    public static final BCLFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> VEGETATION_SULFURIC_BONE_REEF = NetherVegetation
+            .VEGETATION_SULFURIC_BONE_REEF
             .place()
             .vanillaNetherGround(8)
             .buildAndRegister();
 
-    public static final BCLFeature MAGMA_LAND_VEGETATION = NetherVegetation
-            .PATCH_MAGMA_LAND_VEGETATION
+    public static final BCLFeature VEGETATION_MAGMA_LAND = NetherVegetation
+            .VEGETATION_MAGMA_LAND
             .place()
             .betterNetherGround(8)
+            .isEmptyAndOnNetherGround()
+            .buildAndRegister();
+
+    public static final BCLFeature VEGETATION_CRIMSON_GLOWING_WOODS = NetherVegetation
+            .VEGETATION_CRIMSON_GLOWING_WOODS
+            .place()
+            .betterNetherGround(12)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 
@@ -35,35 +42,27 @@ public class NetherVegetationPlaced {
             .onceEvery(4)
             .buildAndRegister();
 
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_MUSHROOM_RED_WITH_MOSS = NetherVegetation
+            .PATCH_WALL_MUSHROOM_RED_WITH_MOSS
+            .place()
+            .betterNetherWall(5)
+            .buildAndRegister();
+
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> NETHER_REED = NetherVegetation
             .PATCH_NETHER_REED
             .place()
             .vanillaNetherGround(6)
             .buildAndRegister();
-    public static final BCLFeature LUMABUS_VINE = NetherVegetation
-            .PATCH_LUMABUS_VINE
-            .place()
-            .betterNetherCeiling(4)
-            .onceEvery(2)
-            .buildAndRegister();
 
-    public static final BCLFeature GOLDEN_LUMABUS_VINE = NetherVegetation
-            .PATCH_GOLDEN_LUMABUS_VINE
-            .place()
-            .betterNetherCeiling(4)
-            .onceEvery(2)
-            .buildAndRegister();
-
-
-    public static final BCLFeature GOLDEN_VINE = NetherVegetation
-            .PATCH_GOLDEN_VINE
-            .place()
-            .betterNetherCeiling(4)
-            .onceEvery(2)
-            .buildAndRegister();
 
     public static final BCLFeature BLACK_BUSH = NetherVegetation
             .PATCH_BLACK_BUSH
+            .place()
+            .vanillaNetherGround(6)
+            .buildAndRegister();
+
+    public static final BCLFeature WART_BUSH = NetherVegetation
+            .PATCH_WART_BUSH
             .place()
             .vanillaNetherGround(4)
             .onceEvery(3)

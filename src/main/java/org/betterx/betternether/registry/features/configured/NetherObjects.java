@@ -4,6 +4,7 @@ import org.betterx.bclib.api.v2.levelgen.features.config.PillarFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.features.config.SequenceFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.features.features.SequenceFeature;
+import org.betterx.bclib.api.v2.levelgen.features.features.TemplateFeature;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
@@ -28,7 +29,7 @@ public class NetherObjects {
     public static final BCLConfigureFeature<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = BCLFeatureBuilder
             .start(BN.id("obsidian_crystal"), NetherFeatures.OBSIDIAN_CRYSTAL)
             .buildAndRegister();
-    public static final BCLConfigureFeature<Feature<TemplateFeatureConfig>, TemplateFeatureConfig> BONES = BCLFeatureBuilder
+    public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> BONES = BCLFeatureBuilder
             .startWithTemplates(BN.id("bones"))
             .add(BN.id("bone_01"), 0, StructurePlacementType.FLOOR, 1.0f)
             .add(BN.id("bone_02"), 0, StructurePlacementType.FLOOR, 1.0f)

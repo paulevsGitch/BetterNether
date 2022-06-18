@@ -56,20 +56,6 @@ public class BiomeFeatures {
             new FindSolidInDirection(PlaceFacingBlockConfig.HORIZONTAL, 12, false),
             BiomeFilter.biome()
     );
-    public static final BCLFeature MAGMA_LAND_FLOOR = floorFromWeighted("magma_land", List.of(
-            new WeightedPlacedFeature(FloorFeatures.GEYSER.getPlacedFeature(), 0.02f),
-            new WeightedPlacedFeature(FloorFeatures.MAGMA_FLOWER.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(FloorFeatures.CRYSTAL.getPlacedFeature(), 0.03f),
-            new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.03f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
-    ), 2);
-
-    public static final BCLFeature MAGMA_LAND_CEIL = ceilFromWeighted("magma_land", List.of(
-            new WeightedPlacedFeature(VineLikeFeatures.GOLDEN_VINE.getPlacedFeature(), 1f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.3f)
-    ), 0);
-    public static final BCLFeature CRIMSON_GLOWING_WOODS_CEIL = MAGMA_LAND_CEIL;
-    public static final BCLFeature CRIMSON_PINEWOOD_CEIL = CRIMSON_GLOWING_WOODS_CEIL;
 
     public static final BCLFeature SOUL_PLAIN_FLOOR = floorFromWeighted("soul_plain", List.of(
             new WeightedPlacedFeature(VineLikeFeatures.SOUL_VEIN.getPlacedFeature(), 0.3f),
@@ -89,27 +75,11 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
     ), 0);
 
-    public static final BCLFeature CRIMSON_GLOWING_WOODS_FLOOR = floorFromWeighted("crimson_glowing_woods", List.of(
-            new WeightedPlacedFeature(TreeFeatures.CRIMSON_GLOWING.getPlacedFeature(), 0.50f),
-            new WeightedPlacedFeature(FloorFeatures.CRIMSON_ROOTS.getPlacedFeature(), 0.30f),
-            new WeightedPlacedFeature(FloorFeatures.CRIMSON_FUNGUS.getPlacedFeature(), 0.20f),
-            new WeightedPlacedFeature(FloorFeatures.WART_BUSH_PATCH.getPlacedFeature(), 0.15f),
-            new WeightedPlacedFeature(FloorFeatures.WART_SEED_PATCH.getPlacedFeature(), 0.15f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
-    ), 1);
     public static final BCLFeature CRIMSON_GLOWING_WOODS_WALL = wallFromWeighted("crimson_glowing_woods", List.of(
             new WeightedPlacedFeature(WallFeatures.WALL_MOSS.getPlacedFeature(), 0.4f),
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_RED.getPlacedFeature(), 0.6f)
     ), 1);
-    public static final BCLFeature CRIMSON_PINEWOOD_WALL = CRIMSON_GLOWING_WOODS_WALL;
-    public static final BCLFeature CRIMSON_PINEWOOD_FLOOR = floorFromWeighted("crimson_pinewood", List.of(
-            new WeightedPlacedFeature(TreeFeatures.CRIMSON_PINEWOOD.getPlacedFeature(), 0.50f),
-            new WeightedPlacedFeature(FloorFeatures.CRIMSON_ROOTS.getPlacedFeature(), 0.30f),
-            new WeightedPlacedFeature(FloorFeatures.CRIMSON_FUNGUS.getPlacedFeature(), 0.20f),
-            new WeightedPlacedFeature(FloorFeatures.WART_BUSH_PATCH.getPlacedFeature(), 0.15f),
-            new WeightedPlacedFeature(FloorFeatures.WART_SEED_PATCH.getPlacedFeature(), 0.15f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
-    ), 1);
+
 
     public static final BCLFeature NETHER_GRASSLANDS_FLOOR = floorFromWeighted("nether_grasslands", List.of(
             new WeightedPlacedFeature(FloorFeatures.MAGMA_FLOWER.getPlacedFeature(), 0.05f),
@@ -413,10 +383,6 @@ public class BiomeFeatures {
 
     public static BCLFeature ceilFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
         return fromChanced(name, features, defaultIndex, "ceil", defaultCeilModifiers);
-    }
-
-    public static BCLFeature denseCeilFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
-        return fromChanced(name, features, defaultIndex, "ceil", defaultDenseCeilModifiers);
     }
 
     public static BCLFeature wallFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {

@@ -3,6 +3,7 @@ package org.betterx.betternether.registry.features.placed;
 import org.betterx.bclib.api.v2.levelgen.features.config.SequenceFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.features.features.SequenceFeature;
+import org.betterx.bclib.api.v2.levelgen.features.features.TemplateFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.betternether.registry.features.configured.NetherObjects;
 
@@ -12,7 +13,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 
 public class NetherObjectsPlaced {
-    public static final BCLFeature<Feature<TemplateFeatureConfig>, TemplateFeatureConfig> BONES = NetherObjects
+    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> BONES = NetherObjects
             .BONES
             .place()
             .vanillaNetherGround(1)

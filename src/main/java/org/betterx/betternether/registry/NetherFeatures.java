@@ -17,12 +17,8 @@ import org.betterx.bclib.api.v3.levelgen.features.BCLPlacedFeatureBuilder;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.features.*;
-import org.betterx.betternether.registry.features.configured.NetherObjects;
-import org.betterx.betternether.registry.features.configured.NetherTerrain;
-import org.betterx.betternether.registry.features.configured.NetherVegetation;
-import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
-import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
-import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.betternether.registry.features.configured.*;
+import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.features.*;
 import org.betterx.betternether.world.structures.city.CityFeature;
 
@@ -356,8 +352,13 @@ public class NetherFeatures {
     }
 
     public static void register() {
+        org.betterx.betternether.registry.features.NetherFeatures.ensureStaticInitialization();
         NetherVegetation.ensureStaticInitialization();
         NetherVegetationPlaced.ensureStaticInitialization();
+        NetherVines.ensureStaticInitialization();
+        NetherVinesPlaced.ensureStaticInitialization();
+        NetherTrees.ensureStaticInitialization();
+        NetherTreesPlaced.ensureStaticInitialization();
         NetherObjects.ensureStaticInitialization();
         NetherObjectsPlaced.ensureStaticInitialization();
         NetherTerrain.ensureStaticInitialization();

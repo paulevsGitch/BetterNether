@@ -7,6 +7,7 @@ import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -33,9 +34,9 @@ public class NetherSulfuricBoneReef extends NetherBiome {
                    .feature(NetherVegetationPlaced.NETHER_REED)
                    .feature(NetherObjectsPlaced.BONES)
                    .feature(NetherObjectsPlaced.BONE_STALACMITE)
-                   .feature(NetherVegetationPlaced.SULFURIC_BONE_REEF_VEGETATION)
+                   .feature(NetherVegetationPlaced.VEGETATION_SULFURIC_BONE_REEF)
                    .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
-                   .feature(NetherVegetationPlaced.GOLDEN_LUMABUS_VINE)
+                   .feature(NetherVinesPlaced.GOLDEN_LUMABUS_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .genChance(0.3f);
         }
