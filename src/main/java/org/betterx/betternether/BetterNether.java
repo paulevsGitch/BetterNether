@@ -1,6 +1,5 @@
 package org.betterx.betternether;
 
-import org.betterx.bclib.api.v2.WorldDataAPI;
 import org.betterx.bclib.api.v2.dataexchange.DataExchangeAPI;
 import org.betterx.bclib.util.Logger;
 import org.betterx.betternether.advancements.BNCriterion;
@@ -13,6 +12,7 @@ import org.betterx.betternether.recipes.IntegrationRecipes;
 import org.betterx.betternether.recipes.ItemRecipes;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.world.BNWorldGenerator;
+import org.betterx.worlds.together.world.WorldConfig;
 
 import net.minecraft.resources.ResourceLocation;
 
@@ -54,7 +54,7 @@ public class BetterNether implements ModInitializer {
         BNCriterion.register();
 
         Configs.saveConfigs();
-        WorldDataAPI.registerModCache(MOD_ID);
+        WorldConfig.registerModCache(MOD_ID);
         DataExchangeAPI.registerMod(BetterNether.MOD_ID);
         Patcher.register();
     }

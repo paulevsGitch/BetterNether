@@ -1,8 +1,8 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.bclib.interfaces.TagProvider;
 import org.betterx.betternether.blocks.materials.Materials;
+import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
