@@ -10,12 +10,14 @@ import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v3.levelgen.features.BlockPredicates;
 import org.betterx.betternether.BN;
+import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.NetherFeatures;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
+import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -144,6 +146,18 @@ public class NetherObjects {
             .add(PATCH_BLACKSTONE_STALACTITE)
             .buildAndRegister();
 
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_SMOKER = BCLFeatureBuilder
+            .startColumn(BN.id("temp_smoker"))
+            .direction(Direction.UP)
+            .addTripleShape(NetherBlocks.SMOKER.defaultBlockState(), BiasedToBottomInt.of(0, 4))
+            .prioritizeTip()
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("patch_smoker"))
+            .tries(18)
+            .spreadXZ(4)
+            .spreadY(3)
+            .buildAndRegister();
     public static void ensureStaticInitialization() {
     }
 }

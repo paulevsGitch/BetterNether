@@ -81,21 +81,7 @@ public class BiomeFeatures {
     ), 1);
 
 
-    public static final BCLFeature NETHER_GRASSLANDS_FLOOR = floorFromWeighted("nether_grasslands", List.of(
-            new WeightedPlacedFeature(FloorFeatures.MAGMA_FLOWER.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.BLACK_BUSH_PATCH.getPlacedFeature(), 0.01f),
-            new WeightedPlacedFeature(VineLikeFeatures.NETHER_REED.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.INK_BUSH.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.NETHER_GRASS_PATCH.getPlacedFeature(), 0.3f),
-            new WeightedPlacedFeature(FloorFeatures.NETHER_WART.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.BLACK_APPLE.getPlacedFeature(), 0.01f),
-            new WeightedPlacedFeature(FloorFeatures.WART_SEED_PATCH.getPlacedFeature(), 0.02f),
-            new WeightedPlacedFeature(VineLikeFeatures.SMOKER.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
-    ), 4);
-    public static final BCLFeature NETHER_GRASSLANDS_CEIL = SOUL_PLAIN_CEIL;
-
-    public static final BCLFeature NETHER_GRASSLANDS_WALL = wallFromWeighted("nether_grasslands", List.of(
+    public static final BCLFeature NETHER_GRASSLANDS_WALL = wallFromWeighted("nether_ggrasslands", List.of(
             new WeightedPlacedFeature(WallFeatures.WALL_MOSS.getPlacedFeature(), 0.5f),
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_RED.getPlacedFeature(), 0.25f),
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_BROWN.getPlacedFeature(), 0.25f)

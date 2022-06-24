@@ -4,15 +4,15 @@ import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v3.levelgen.features.BlockPredicates;
 import org.betterx.betternether.BN;
-import org.betterx.betternether.blocks.BlockFeatherFern;
-import org.betterx.betternether.blocks.BlockMagmaFlower;
-import org.betterx.betternether.blocks.BlockNetherReed;
+import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.NetherFeatures;
 
 import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.NetherWartBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.NetherForestVegetationFeature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
 import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
@@ -52,6 +52,19 @@ public class NetherVegetation {
             .add(NetherBlocks.MAT_WART.getSeed(), 80)
             .buildAndRegister();
 
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_GRASSLANDS = BCLFeatureBuilder
+            .startWeighted(BN.id("temp_vegetation_nether_grasslands"))
+            .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
+            .addAllStatesFor(BlockInkBush.AGE, NetherBlocks.INK_BUSH, 80)
+            .addAllStatesFor(NetherWartBlock.AGE, Blocks.NETHER_WART, 40)
+            .add(NetherBlocks.NETHER_GRASS, 200)
+            .addAllStatesFor(BlockBlackApple.AGE, NetherBlocks.BLACK_APPLE, 50)
+            .add(NetherBlocks.MAT_WART.getSeed(), 60)
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("vegetation_nether_grasslands"))
+            .buildAndRegister();
+
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_JELLYFISH_MUSHROOM = BCLFeatureBuilder
             .start(BN.id("temp_jellyfish_mushroom"), NetherFeatures.JELLYFISH_MUSHROOM)
             .inlinePlace()
@@ -86,6 +99,19 @@ public class NetherVegetation {
             .allHorizontal()
             .inlinePlace()
             .inRandomPatch(BN.id("patch_wall_mushroom_red_with_moss"))
+            .tries(120)
+            .spreadXZ(4)
+            .spreadY(7)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_WALL_MUSHROOMS_WITH_MOSS = BCLFeatureBuilder
+            .startFacing(BN.id("temp_wall_mushrooms_with_moss"))
+            .add(NetherBlocks.WALL_MUSHROOM_RED, 40)
+            .add(NetherBlocks.WALL_MUSHROOM_BROWN, 35)
+            .add(NetherBlocks.WALL_MOSS, 20)
+            .allHorizontal()
+            .inlinePlace()
+            .inRandomPatch(BN.id("patch_wall_mushrooms_with_moss"))
             .tries(120)
             .spreadXZ(4)
             .spreadY(7)

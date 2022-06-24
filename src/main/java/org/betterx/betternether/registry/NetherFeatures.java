@@ -20,7 +20,7 @@ import org.betterx.betternether.registry.features.*;
 import org.betterx.betternether.registry.features.configured.*;
 import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.features.*;
-import org.betterx.betternether.world.structures.city.CityFeature;
+import org.betterx.betternether.world.structures.city.CityStructure;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -376,7 +376,7 @@ public class NetherFeatures {
         CavesFeature.onLoad(seed);
         PathsFeature.onLoad(seed);
 
-        CityFeature.initGenerator();
+        CityStructure.initGenerator();
     }
 
 }

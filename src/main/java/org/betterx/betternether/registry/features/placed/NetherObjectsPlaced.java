@@ -84,6 +84,14 @@ public class NetherObjectsPlaced {
             .onceEvery(2)
             .buildAndRegister();
 
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> SMOKER = NetherObjects
+            .PATCH_SMOKER
+            .place()
+            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
+            .vanillaNetherGround(3)
+            .onceEvery(2)
+            .buildAndRegister();
+
     public static void ensureStaticInitialization() {
 
     }

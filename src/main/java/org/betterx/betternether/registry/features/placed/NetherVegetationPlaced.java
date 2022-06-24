@@ -1,6 +1,7 @@
 package org.betterx.betternether.registry.features.placed;
 
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
+import org.betterx.betternether.BN;
 import org.betterx.betternether.registry.features.configured.NetherVegetation;
 
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -24,7 +25,7 @@ public class NetherVegetationPlaced {
             .vanillaNetherGround(8)
             .buildAndRegister();
 
-    public static final BCLFeature VEGETATION_MAGMA_LAND = NetherVegetation
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_MAGMA_LAND = NetherVegetation
             .VEGETATION_MAGMA_LAND
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
@@ -32,8 +33,16 @@ public class NetherVegetationPlaced {
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 
-    public static final BCLFeature VEGETATION_CRIMSON_GLOWING_WOODS = NetherVegetation
+    public static final BCLFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> VEGETATION_CRIMSON_GLOWING_WOODS = NetherVegetation
             .VEGETATION_CRIMSON_GLOWING_WOODS
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .betterNetherGround(12)
+            .isEmptyAndOnNetherGround()
+            .buildAndRegister();
+
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_GRASSLANDS = NetherVegetation
+            .VEGETATION_GRASSLANDS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherGround(12)
@@ -53,6 +62,15 @@ public class NetherVegetationPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherWall(5)
+            .isEmpty()
+            .buildAndRegister();
+
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_MUSHROOMS_WITH_MOSS = NetherVegetation
+            .PATCH_WALL_MUSHROOMS_WITH_MOSS
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .betterNetherWall(5)
+            .isEmpty()
             .buildAndRegister();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> NETHER_REED = NetherVegetation
@@ -63,14 +81,22 @@ public class NetherVegetationPlaced {
             .buildAndRegister();
 
 
-    public static final BCLFeature BLACK_BUSH = NetherVegetation
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BLACK_BUSH = NetherVegetation
             .PATCH_BLACK_BUSH
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(6)
             .buildAndRegister();
 
-    public static final BCLFeature WART_BUSH = NetherVegetation
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> BLACK_BUSH_SPARSE = NetherVegetation
+            .PATCH_BLACK_BUSH
+            .place(BN.id("patch_black_bush_sparse"))
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .vanillaNetherGround(3)
+            .onceEvery(2)
+            .buildAndRegister();
+
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WART_BUSH = NetherVegetation
             .PATCH_WART_BUSH
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)

@@ -7,10 +7,11 @@ import org.betterx.bclib.api.v2.levelgen.structures.BCLStructureBuilder;
 import org.betterx.bclib.api.v2.tag.TagAPI;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.world.structures.city.CityFeature;
+import org.betterx.betternether.world.structures.city.CityStructure;
 import org.betterx.betternether.world.structures.templates.*;
 
 import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.Structures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -19,8 +20,8 @@ import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 public class NetherStructures {
     public static final int CITY_SPACING = Configs.GENERATOR.getInt("generator.world.cities", "distance", 64);
     // Nether City
-    public static final BCLStructure<CityFeature> CITY_STRUCTURE = BCLStructureBuilder
-            .start(BetterNether.makeID("nether_city"), CityFeature::new)
+    public static final BCLStructure<CityStructure> CITY_STRUCTURE = BCLStructureBuilder
+            .start(BetterNether.makeID("nether_city"), CityStructure::new)
             .step(Decoration.STRONGHOLDS)
             .randomPlacement(CITY_SPACING, CITY_SPACING >> 1)
             .build();
