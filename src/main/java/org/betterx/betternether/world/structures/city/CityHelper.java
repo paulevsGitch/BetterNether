@@ -85,7 +85,7 @@ public class CityHelper {
         for (ChunkPos p : POSITIONS) {
             int dx = p.x - chunkX;
             int dz = p.z - chunkZ;
-            if (dx * dx + dz * dz < CityFeature.RADIUS)
+            if (dx * dx + dz * dz < CityStructure.RADIUS)
                 return true;
         }
         return false;

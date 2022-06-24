@@ -1,6 +1,7 @@
 package org.betterx.betternether.world.structures.city;
 
 import org.betterx.bclib.api.v2.levelgen.structures.BCLStructure;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherStructures;
@@ -24,11 +25,11 @@ import java.util.List;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
-public class CityFeature extends Structure {
+public class CityStructure extends Structure {
     private static CityGenerator generator;
     public static final int RADIUS = 8 * 8;
 
-    public CityFeature(Structure.StructureSettings structureSettings) {
+    public CityStructure(Structure.StructureSettings structureSettings) {
         super(structureSettings);
     }
 
@@ -90,7 +91,7 @@ public class CityFeature extends Structure {
         }
         buildings.forEach(b -> structurePiecesBuilder.addPiece(b));
 
-        //BetterNether.LOGGER.info("BBox after Cave:" + structurePiecesBuilder.getBoundingBox().toString());
+        BetterNether.LOGGER.info("BBox:" + structurePiecesBuilder.getBoundingBox().toString());
     }
 
     @NotNull

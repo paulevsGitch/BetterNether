@@ -11,7 +11,6 @@ import org.betterx.betternether.world.structures.city.CityStructure;
 import org.betterx.betternether.world.structures.templates.*;
 
 import net.minecraft.core.Holder;
-import net.minecraft.data.worldgen.Structures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -22,7 +21,7 @@ public class NetherStructures {
     // Nether City
     public static final BCLStructure<CityStructure> CITY_STRUCTURE = BCLStructureBuilder
             .start(BetterNether.makeID("nether_city"), CityStructure::new)
-            .step(Decoration.STRONGHOLDS)
+            .step(Decoration.SURFACE_STRUCTURES)
             .randomPlacement(CITY_SPACING, CITY_SPACING >> 1)
             .build();
 

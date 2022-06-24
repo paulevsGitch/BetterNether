@@ -115,7 +115,7 @@ public class CityPiece extends CustomPiece {
                     }
                 }
 
-                // POS.set(x - clamped.minX, clamped.minY - clamped.minZ, z);
+                POS.set(x - clamped.minX(), clamped.minY(), z - clamped.minZ());
                 for (int y = clamped.minY(); y <= clamped.maxY(); y++) {
                     POS.setY(y);
                     chunk.markPosForPostprocessing(POS);

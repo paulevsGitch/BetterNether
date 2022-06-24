@@ -12,7 +12,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NetherWartBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.NetherForestVegetationFeature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
 import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
@@ -111,6 +110,7 @@ public class NetherVegetation {
             .add(NetherBlocks.WALL_MOSS, 20)
             .allHorizontal()
             .inlinePlace()
+            .isEmpty()
             .inRandomPatch(BN.id("patch_wall_mushrooms_with_moss"))
             .tries(120)
             .spreadXZ(4)
