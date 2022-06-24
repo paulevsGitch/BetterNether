@@ -12,6 +12,8 @@ import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -92,9 +94,12 @@ public class NetherGrasslands extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_NETHER_WASTES)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(BiomeFeatures.NETHER_GRASSLANDS_FLOOR)
-                   .feature(BiomeFeatures.NETHER_GRASSLANDS_CEIL)
-                   .feature(BiomeFeatures.NETHER_GRASSLANDS_WALL)
+                   .feature(NetherVegetationPlaced.NETHER_REED)
+                   .feature(NetherVegetationPlaced.BLACK_BUSH_SPARSE)
+                   .feature(NetherVegetationPlaced.VEGETATION_GRASSLANDS)
+                   .feature(NetherObjectsPlaced.SMOKER)
+                   .feature(NetherObjectsPlaced.STALACTITE)
+                   .feature(NetherVegetationPlaced.WALL_MUSHROOMS_WITH_MOSS)
             ;
         }
 
@@ -111,12 +116,12 @@ public class NetherGrasslands extends NetherBiome {
                                         SurfaceRules.ON_FLOOR,
                                         new SwitchRuleSource(
                                                 NetherGrasslandsNumericProvider.DEFAULT,
-                                                List.of(SOUL_SOIL, SOUL_SAND, NETHERRACK)
+                                                List.of(SOUL_SOIL, SOUL_SAND,  MOSS, NETHERRACK)
                                         )
                                 ),
                                 new SwitchRuleSource(
                                         NetherGrasslandsNumericProvider.DEFAULT,
-                                        List.of(SOUL_SOIL, SOUL_SAND, MOSS, NETHERRACK)
+                                        List.of(SOUL_SOIL, SOUL_SAND,NETHERRACK)
                                 )
                         ));
         }
