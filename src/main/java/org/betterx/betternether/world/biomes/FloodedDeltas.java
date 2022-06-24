@@ -7,6 +7,9 @@ import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
 import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.registry.features.TerrainFeatures;
+import org.betterx.betternether.registry.features.configured.NetherObjects;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -35,9 +38,11 @@ public class FloodedDeltas extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_BASALT_DELTAS)
                    .particles(ParticleTypes.WHITE_ASH, 0.12F)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(TerrainFeatures.FLOODED_LAVA_PIT)
-                   .feature(BiomeFeatures.FLOODED_DELTAS_FLOOR)
-                   .feature(BiomeFeatures.FLOODED_DELTAS_CEIL)
+                   .feature(NetherTerrainPlaced.FLOODED_LAVA_PIT)
+                   .feature(NetherObjectsPlaced.BASALT_STALAGMITE)
+                   .feature(NetherObjectsPlaced.BLACKSTONE_STALAGMITE)
+                   .feature(NetherObjectsPlaced.BASALT_STALACTITE)
+                   .feature(NetherObjectsPlaced.BLACKSTONE_STALACTITE)
                    .genChance(0.3f)
             ;
         }

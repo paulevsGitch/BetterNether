@@ -100,50 +100,6 @@ public class TerrainFeatures {
             .is(BlockPredicate.matchesBlocks(NetherBlocks.SOUL_SANDSTONE))
             .buildAndRegister();
 
-    public static final BCLFeature MARK = BCLFeatureBuilder
-            .start(BetterNether.makeID("mark"), BCLFeature.MARK_POSTPROCESSING)
-            .is(BlockPredicate.matchesBlocks(Blocks.LAVA))
-            .buildAndRegister();
-
-    public static final BCLFeature LAVA = FastFeatures.single(BetterNether.makeID("lava"), Blocks.LAVA);
-    public static final BCLFeature BASALT_OR_AIR = BCLFeatureBuilder
-            .start(BetterNether.makeID("basalt_or_air"), new WeightedStateProvider(SimpleWeightedRandomList
-                    .<BlockState>builder()
-                    .add(Blocks.BASALT.defaultBlockState(), 15)
-                    .add(Blocks.AIR.defaultBlockState(), 15)
-            )).buildAndRegister();
-
-    public static final BCLFeature EXTEND_BASALT = BCLFeatureBuilder
-            .start(BetterNether.makeID("extend_basalt"), Blocks.BASALT)
-            .offset(Direction.DOWN)
-            .extendDown(1, 3)
-            .buildAndRegister();
-
-    public static final BCLFeature FLOODED_LAVA_PIT_SURFACE = BCLFeatureBuilder
-            .start(BetterNether.makeID("flooded_lava_pit_surface"), BCLFeature.CONDITION)
-            .buildAndRegister(new ConditionFeatureConfig(
-                            IsBasin.simple(
-                                    BlockPredicate.anyOf(
-                                            BlockPredicate.matchesBlocks(Blocks.LAVA),
-                                            IsFullShape.HERE
-                                    )
-                            ),
-                            LAVA,
-                            BASALT_OR_AIR
-                    )
-            );
-
-
-    public static final BCLFeature FLOODED_LAVA_PIT = BCLFeatureBuilder
-            .start(BetterNether.makeID("flooded_lava_pit"), BCLFeature.SEQUENCE)
-            .decoration(GenerationStep.Decoration.LAKES)
-            .all()
-            .onEveryLayer()
-            .offset(Direction.DOWN)
-            .onlyInBiome()
-            .buildAndRegister(
-                    SequenceFeatureConfig.create(List.of(EXTEND_BASALT, FLOODED_LAVA_PIT_SURFACE, MARK))
-            );
 
     public static void ensureStaticInitialization() {
     }

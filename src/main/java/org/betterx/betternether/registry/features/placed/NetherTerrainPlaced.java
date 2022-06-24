@@ -29,6 +29,7 @@ public class NetherTerrainPlaced {
     public static BCLFeature LAVA_PITS_SPARSE = NetherTerrain
             .LAVA_PITS
             .place(BN.id("lava_pits_sparse"))
+            .decoration(GenerationStep.Decoration.LAKES)
             .onEveryLayer()
             .stencil()
             .findSolidFloor(3)
@@ -41,6 +42,7 @@ public class NetherTerrainPlaced {
     public static BCLFeature LAVA_PITS_DENSE = NetherTerrain
             .LAVA_PITS
             .place(BN.id("lava_pits_dense"))
+            .decoration(GenerationStep.Decoration.LAKES)
             .onEveryLayer()
             .stencil()
             .findSolidFloor(3)
@@ -50,6 +52,15 @@ public class NetherTerrainPlaced {
             .onlyInBiome()
             .buildAndRegister();
 
+    public static BCLFeature FLOODED_LAVA_PIT = NetherTerrain
+            .FLOODED_LAVA_PIT
+            .place()
+            .decoration(GenerationStep.Decoration.LAKES)
+            .all()
+            .onEveryLayer()
+            .offset(Direction.DOWN)
+            .onlyInBiome()
+            .buildAndRegister();
     public static void ensureStaticInitialization() {
     }
 }

@@ -43,6 +43,13 @@ public class NetherObjects {
             .is(BlockPredicates.ONLY_NETHER_GROUND)
             .build();
 
+    public static final Holder<PlacedFeature> PATCH_TERRACOTTA_CLUMP = BCLFeatureBuilder
+            .start(BN.id("temp_terracotta_clump"), Blocks.BLACK_GLAZED_TERRACOTTA)
+            .inlinePlace()
+            .extendXYZ(3, 3)
+            .is(BlockPredicate.matchesBlocks(Blocks.BASALT))
+            .build();
+
     public static final Holder<PlacedFeature> PATCH_BONE_STALAGMITE = BCLFeatureBuilder
             .startPillar(BN.id("temp_patch_bone_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.UP)
@@ -76,11 +83,65 @@ public class NetherObjects {
             .inRandomPatch(BN.id("patch_stalagmite"))
             .buildAndRegister();
 
+    public static final  Holder<PlacedFeature> PATCH_BLACKSTONE_STALACTITE = BCLFeatureBuilder
+            .startPillar(BN.id("temp_patch_blackstone_stalactite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+            .direction(Direction.DOWN)
+            .blockState(NetherBlocks.BLACKSTONE_STALACTITE)
+            .height(BiasedToBottomInt.of(3, 9))
+            .inlinePlace()
+            .isOn(BlockPredicate.matchesBlocks(Blocks.BLACK_GLAZED_TERRACOTTA, Blocks.BASALT))
+            .inRandomPatch(BN.id("patch_blackstone_stalactite"))
+            .inlinePlace()
+            .build();
+
+    public static final Holder<PlacedFeature> PATCH_BLACKSTONE_STALAGMITE = BCLFeatureBuilder
+            .startPillar(BN.id("temp_patch_blackstone_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+            .direction(Direction.UP)
+            .blockState(NetherBlocks.BLACKSTONE_STALACTITE)
+            .height(BiasedToBottomInt.of(3, 8))
+            .inlinePlace()
+            .isOn(BlockPredicate.matchesBlocks(Blocks.BLACK_GLAZED_TERRACOTTA, Blocks.BASALT))
+            .inRandomPatch(BN.id("patch_blackstone_stalagmite"))
+            .inlinePlace()
+            .build();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BASALT_STALACTITE = BCLFeatureBuilder
+            .startPillar(BN.id("temp_patch_basalt_stalactite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+            .direction(Direction.DOWN)
+            .blockState(NetherBlocks.BASALT_STALACTITE)
+            .height(BiasedToBottomInt.of(4, 11))
+            .inlinePlace()
+            .isEmptyAndUnderNetherGround()
+            .inRandomPatch(BN.id("patch_basalt_stalactite"))
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BASALT_STALAGMITE = BCLFeatureBuilder
+            .startPillar(BN.id("temp_patch_basalt_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
+            .direction(Direction.UP)
+            .blockState(NetherBlocks.BASALT_STALACTITE)
+            .height(BiasedToBottomInt.of(3, 9))
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("patch_basalt_stalagmite"))
+            .buildAndRegister();
+
 
     public static final BCLConfigureFeature<SequenceFeature, SequenceFeatureConfig> PATCH_BONE_STALAGMITE_ON_GROUND = BCLFeatureBuilder
             .startSequence(BN.id("patch_bone_stalagmite_on_ground"))
             .add(PATCH_BONE_CLUMP)
             .add(PATCH_BONE_STALAGMITE)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<SequenceFeature, SequenceFeatureConfig> PATCH_BLACKSTONE_STALAGMITE_ON_GROUND = BCLFeatureBuilder
+            .startSequence(BN.id("patch_blackstone_stalagmite_on_ground"))
+            .add(PATCH_TERRACOTTA_CLUMP)
+            .add(PATCH_BLACKSTONE_STALAGMITE)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<SequenceFeature, SequenceFeatureConfig> PATCH_BLACKSTONE_STALACTITE_ON_CEIL = BCLFeatureBuilder
+            .startSequence(BN.id("patch_blackstone_stalactite_on_ceil"))
+            .add(PATCH_TERRACOTTA_CLUMP)
+            .add(PATCH_BLACKSTONE_STALACTITE)
             .buildAndRegister();
 
     public static void ensureStaticInitialization() {

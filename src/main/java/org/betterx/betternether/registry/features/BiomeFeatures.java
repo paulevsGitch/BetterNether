@@ -101,16 +101,6 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_BROWN.getPlacedFeature(), 0.25f)
     ), 1);
 
-    public static final BCLFeature FLOODED_DELTAS_FLOOR = floorFromChanced("flooded_deltas", List.of(
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_BASALT_CLUSTER.getPlacedFeature(), 0.3f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_BLACKSTONE_CLUSTER.getPlacedFeature(), 0.3f)
-    ), 0);
-
-    public static final BCLFeature FLOODED_DELTAS_CEIL = ceilFromChanced("flooded_deltas", List.of(
-            new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_BASALT_CLUSTER.getPlacedFeature(), 0.3f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_BLACKSTONE_CLUSTER.getPlacedFeature(), 0.3f)
-    ), 0);
-
     public static final BCLFeature MUSHROOM_FORREST_FLOOR = floorFromWeighted("mushroom_forrest", List.of(
             new WeightedPlacedFeature(TreeFeatures.BIG_RED_MUSHROOM_CLUSTER.getPlacedFeature(), 0.2f),
             new WeightedPlacedFeature(TreeFeatures.BIG_BROWN_MUSHROOM_CLUSTER.getPlacedFeature(), 0.12f),
