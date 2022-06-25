@@ -155,7 +155,7 @@ public class CommandRegistry {
         final BlockPos currentPosition = new BlockPos(source.getPosition());
         final BlockPos biomePosition = source.getLevel()
                                              .findClosestBiome3d(
-                                                     b -> b.equals(biome.getBiome()),
+                                                     b -> b.unwrapKey().orElseThrow().location().equals(biome.getID()),
                                                      currentPosition,
                                                      MAX_SEARCH_RADIUS,
                                                      SAMPLE_RESOLUTION_HORIZONTAL,
