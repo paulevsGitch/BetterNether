@@ -6,10 +6,7 @@ import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.builders.*;
 
 import com.google.common.collect.ImmutableList;
 
@@ -66,7 +63,8 @@ public class ModelEntityFirefly extends AgeableListModel<EntityFirefly> {
                 GLOW,
                 CubeListBuilder.create()
                                .texOffs(0, 10)
-                               .addBox(0F, 0F, 0F, 5.2F, 5.2F, 5.2F),
+                               .addBox(0F, 0F, 0F, 5F, 5F, 5F, new CubeDeformation(0.2f)),
+
                 PartPose.offset(-2.6F, 18.1F, -2.6F)
         );
 		/*glow = new ModelPart(this, 0, 10);

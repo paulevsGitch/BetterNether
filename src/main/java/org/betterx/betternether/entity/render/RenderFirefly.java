@@ -61,17 +61,30 @@ class FireflyGlowFeatureRenderer extends RenderLayer<EntityFirefly, AgeableListM
 
             addViewAlignedGlow(matrices, vertexConsumer, red, green, blue);
 
+
             ((ModelEntityFirefly) model).getGlowPart()
                                         .render(
                                                 matrices,
                                                 vertexConsumer,
                                                 light,
                                                 OverlayTexture.NO_OVERLAY,
-                                                red,
-                                                green,
-                                                blue,
+                                                red * 2,
+                                                green * 2,
+                                                blue * 2,
                                                 1f
                                         );
+            ((ModelEntityFirefly) model).getGlowPart()
+                                        .render(
+                                                matrices,
+                                                vertexConsumer,
+                                                light,
+                                                OverlayTexture.NO_OVERLAY,
+                                                red * 2,
+                                                green * 2,
+                                                blue * 2,
+                                                1f
+                                        );
+
         }
     }
 
