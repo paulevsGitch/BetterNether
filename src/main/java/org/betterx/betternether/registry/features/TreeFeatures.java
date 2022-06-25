@@ -57,7 +57,7 @@ public class TreeFeatures {
             .spreadHorizontal(UniformInt.of(-16, 16))
             .findSolidFloor(3)
             .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
-            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
+            .isAbove(BlockPredicate.matchesTag(org.betterx.worlds.together.tag.v3.CommonBlockTags.MYCELIUM))
             .buildAndRegister(OLD_RED_MUSHROOM.getConfiguration());
 
     public static final BCLFeature OLD_BROWN_MUSHROOM = BCLFeatureBuilder
@@ -79,7 +79,7 @@ public class TreeFeatures {
             .spreadHorizontal(UniformInt.of(-16, 16))
             .findSolidFloor(3)
             .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
-            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
+            .isAbove(BlockPredicate.matchesTag(org.betterx.worlds.together.tag.v3.CommonBlockTags.MYCELIUM))
             .buildAndRegister(OLD_BROWN_MUSHROOM.getConfiguration());
 
     public static final BCLFeature BIG_WARPED_TREE = BCLFeatureBuilder
@@ -126,7 +126,7 @@ public class TreeFeatures {
             .count(10)
             .spreadHorizontal(UniformInt.of(-12, 12))
             .findSolidFloor(3)
-            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
+            .isAbove(BlockPredicate.matchesTag(org.betterx.worlds.together.tag.v3.CommonBlockTags.MYCELIUM))
             .buildAndRegister();
 
     public static final BCLFeature MUSHROOM_FIR
@@ -137,7 +137,7 @@ public class TreeFeatures {
             4,
             BCLFeatureBuilder
                     .start(BetterNether.makeID("mushroom_fir_single"), new MushroomFirFeature())
-                    .isAbove(BlockPredicate.matchesTag(CommonBlockTags.MYCELIUM))
+                    .isAbove(BlockPredicate.matchesTag(org.betterx.worlds.together.tag.v3.CommonBlockTags.MYCELIUM))
                     .buildAndRegister()
     );
 

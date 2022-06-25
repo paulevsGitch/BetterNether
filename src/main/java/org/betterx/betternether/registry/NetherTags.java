@@ -2,16 +2,16 @@ package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v2.BonemealAPI;
 import org.betterx.bclib.api.v2.ComposterAPI;
-import org.betterx.bclib.api.v2.tag.NamedBlockTags;
-import org.betterx.bclib.api.v2.tag.NamedMineableTags;
-import org.betterx.bclib.api.v2.tag.TagAPI;
 import org.betterx.bclib.blocks.SimpleLeavesBlock;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BlockTerrain;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
 import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
+import org.betterx.worlds.together.tag.v3.MineableTags;
+import org.betterx.worlds.together.tag.v3.TagManager;
 
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
@@ -27,23 +27,23 @@ public class NetherTags {
 //	public static final Tag<Block> MYCELIUM = TagAPI.makeCommonBlockTag("nether_mycelium");
     //public static final TagAPI.TagKey<Block> NYLIUM = TagAPI.BLOCK_NYLIUM;
 
-    public static final TagKey<Biome> BETTER_NETHER_DECORATIONS = TagAPI.makeStructureTag(
+    public static final TagKey<Biome> BETTER_NETHER_DECORATIONS = TagManager.BIOMES.makeStructureTag(
             BetterNether.MOD_ID,
             "nether_decorations"
     );
 
-    public static final TagKey<Item> SOUL_GROUND_ITEM = TagAPI.makeCommonItemTag("soul_ground");
+    public static final TagKey<Item> SOUL_GROUND_ITEM = TagManager.ITEMS.makeCommonTag("soul_ground");
 
-    public static final TagKey<Block> NETHER_FARMLAND = TagAPI.makeCommonBlockTag("nether_farmland");
-    public static final TagKey<Block> NETHER_FARMLAND_LOCATION = TagAPI.makeCommonBlockTag("nether_farmland");
+    public static final TagKey<Block> NETHER_FARMLAND = TagManager.BLOCKS.makeCommonTag("nether_farmland");
+    public static final TagKey<Block> NETHER_FARMLAND_LOCATION = TagManager.BLOCKS.makeCommonTag("nether_farmland");
 
 
-    public static final TagKey<Block> NETHER_SAND = TagAPI.makeCommonBlockTag("nether_sand");
-    public static final TagKey<Block> NETHER_SAND_LOCATION = TagAPI.makeCommonBlockTag("nether_sand");
-    public static final TagKey<Biome> BETTER_NETHER = TagAPI.makeBiomeTag(BetterNether.MOD_ID, "biome");
+    public static final TagKey<Block> NETHER_SAND = TagManager.BLOCKS.makeCommonTag("nether_sand");
+    public static final TagKey<Block> NETHER_SAND_LOCATION = TagManager.BLOCKS.makeCommonTag("nether_sand");
+    public static final TagKey<Biome> BETTER_NETHER = TagManager.BIOMES.makeTag(BetterNether.MOD_ID, "biome");
 
     public static void register() {
-        TagAPI.addBlockTag(NETHER_SAND_LOCATION, Blocks.SOUL_SAND);
+        TagManager.BLOCKS.add(NETHER_SAND_LOCATION, Blocks.SOUL_SAND);
 
 
         NetherBlocks.getModBlocks().forEach(block -> {
@@ -52,22 +52,22 @@ public class NetherTags {
             Item item = block.asItem();
 
             if (material.equals(Material.STONE) || material.equals(Material.METAL)) {
-                TagAPI.addBlockTag(NamedMineableTags.PICKAXE, block);
+                TagManager.BLOCKS.add(MineableTags.PICKAXE, block);
             } else if (material.equals(Material.WOOD) || material.equals(Material.NETHER_WOOD)) {
-                TagAPI.addBlockTag(NamedMineableTags.AXE, block);
+                TagManager.BLOCKS.add(MineableTags.AXE, block);
             } else if (material.equals(Material.LEAVES) || material.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || material.equals(
                     Material.WATER_PLANT)) {
-                TagAPI.addBlockTag(NamedMineableTags.HOE, block);
-                TagAPI.addBlockTag(NamedBlockTags.LEAVES, block);
+                TagManager.BLOCKS.add(MineableTags.HOE, block);
+                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
                 ComposterAPI.allowCompost(0.3f, item);
             } else if (material.equals(Material.SAND)) {
-                TagAPI.addBlockTag(NamedMineableTags.SHOVEL, block);
+                TagManager.BLOCKS.add(MineableTags.SHOVEL, block);
             }
 
             if (block instanceof BlockTerrain) {
                 BonemealAPI.addSpreadableBlock(block, Blocks.NETHERRACK);
             } else if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
-                TagAPI.addBlockTag(NamedBlockTags.LEAVES, block);
+                TagManager.BLOCKS.add(BlockTags.LEAVES, block);
                 ComposterAPI.allowCompost(0.3f, item);
             }
 			/*else if (block instanceof BlockCincinnasitePedestal) {

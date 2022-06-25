@@ -41,7 +41,7 @@ public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemPro
     @Override
     public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
         blockTags.add(CommonBlockTags.NETHERRACK);
-        blockTags.add(CommonBlockTags.NETHER_ORES);
+        blockTags.add(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_ORES);
     }
 
     @Override

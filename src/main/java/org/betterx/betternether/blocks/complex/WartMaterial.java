@@ -1,11 +1,11 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.api.v2.tag.NamedBlockTags;
-import org.betterx.bclib.api.v2.tag.NamedItemTags;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.betternether.blocks.BlockWartRoots;
 import org.betterx.betternether.blocks.BlockWartSeed;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
 
@@ -30,7 +30,7 @@ public class WartMaterial extends RoofMaterial {
         super.initDefault(blockSettings, itemSettings);
         addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> {
             return new BlockWartSeed();
-        }).setBlockTags(NamedBlockTags.SAPLINGS).setItemTags(NamedItemTags.SAPLINGS));
+        }).setBlockTags(BlockTags.SAPLINGS).setItemTags(ItemTags.SAPLINGS));
 
         addBlockEntry(new BlockEntry(BLOCK_ROOTS, false, (complexMaterial, settings) -> {
             return new BlockWartRoots();

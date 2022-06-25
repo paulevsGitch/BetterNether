@@ -50,6 +50,6 @@ public class BlockTerrain extends BlockBase implements TagProvider {
     @Override
     public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
         blockTags.add(CommonBlockTags.NETHERRACK);
-        blockTags.add(CommonBlockTags.NETHER_STONES);
+        blockTags.add(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_STONES);
     }
 }

@@ -1,7 +1,6 @@
 package org.betterx.betternether.world.features;
 
 import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockMushroomFir;
 import org.betterx.betternether.blocks.BlockNetherMycelium;
@@ -107,7 +106,8 @@ public class MushroomFirFeature extends ContextFeature<NoneFeatureConfiguration>
             int MAX_HEIGHT,
             StructureGeneratorThreadContext context
     ) {
-        if (!level.getBlockState(pos.below()).is(CommonBlockTags.MYCELIUM)) return false;
+        if (!level.getBlockState(pos.below()).is(org.betterx.worlds.together.tag.v3.CommonBlockTags.MYCELIUM))
+            return false;
 
         final float scale_factor = MAX_HEIGHT / 128.0f;
 

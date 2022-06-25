@@ -1,7 +1,5 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.api.v2.tag.CommonItemTags;
-import org.betterx.bclib.api.v2.tag.TagAPI;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.bclib.registry.ItemRegistry;
 import org.betterx.betternether.BetterNether;
@@ -13,6 +11,7 @@ import org.betterx.betternether.items.*;
 import org.betterx.betternether.items.materials.BNArmorMaterial;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.tab.CreativeTabs;
+import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
@@ -63,7 +62,7 @@ public class NetherItems extends ItemRegistry {
 
     public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
     public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()),
-            CommonItemTags.IRON_INGOTS
+            org.betterx.worlds.together.tag.v3.CommonItemTags.IRON_INGOTS
     );
 
     public static final Item CINCINNASITE_PICKAXE = registerTool("cincinnasite_pickaxe", new NetherPickaxe(
@@ -279,7 +278,7 @@ public class NetherItems extends ItemRegistry {
         if (item != Items.AIR) {
             getItemRegistry().registerTool(BetterNether.makeID(name), item);
             if (tags.length > 0)
-                TagAPI.addItemTags(item, tags);
+                TagManager.ITEMS.add(item, tags);
 
             MOD_ITEMS.add(item);
         }
@@ -293,7 +292,7 @@ public class NetherItems extends ItemRegistry {
             getItemRegistry().register(BetterNether.makeID(name), item);
             //item = Registry.register(Registry.ITEM, new ResourceLocation(BetterNether.MOD_ID, name), item);
             if (tags.length > 0)
-                TagAPI.addItemTags(item, tags);
+                TagManager.ITEMS.add(item, tags);
 
             if (item instanceof BlockItem)
                 MOD_BLOCKS.add(item);

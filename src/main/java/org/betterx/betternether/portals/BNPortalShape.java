@@ -1,7 +1,5 @@
 package org.betterx.betternether.portals;
 
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -112,7 +110,7 @@ public class BNPortalShape {
     }
 
     private static boolean isFrame(BlockState blockState) {
-        return blockState.is(Blocks.OBSIDIAN) || blockState.is(CommonBlockTags.NETHER_PORTAL_FRAME);
+        return blockState.is(Blocks.OBSIDIAN) || blockState.is(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME);
     }
 
     private static boolean isEmpty(BlockState blockState) {

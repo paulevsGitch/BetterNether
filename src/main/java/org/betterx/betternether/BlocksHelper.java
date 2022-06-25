@@ -88,7 +88,8 @@ public class BlocksHelper {
     }
 
     public static boolean isNetherGround(BlockState state) {
-        return state.is(CommonBlockTags.NETHER_STONES) || isSoulSand(state) || isNetherMycelium(state) || isNylium(state);
+        return state.is(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_STONES) || isSoulSand(state) || isNetherMycelium(
+                state) || isNylium(state);
     }
 
     public static boolean isNetherGroundMagma(BlockState state) {
@@ -96,7 +97,7 @@ public class BlocksHelper {
     }
 
     public static boolean isNetherMycelium(BlockState state) {
-        return state.is(CommonBlockTags.NETHER_MYCELIUM);
+        return state.is(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_MYCELIUM);
     }
 
     public static void setWithUpdate(LevelAccessor world, BlockPos pos, BlockState state, BoundingBox bounds) {

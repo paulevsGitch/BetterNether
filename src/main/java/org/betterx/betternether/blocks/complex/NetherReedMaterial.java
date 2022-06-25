@@ -1,7 +1,5 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.api.v2.tag.NamedBlockTags;
-import org.betterx.bclib.api.v2.tag.NamedItemTags;
 import org.betterx.bclib.blocks.BaseLadderBlock;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
@@ -9,6 +7,8 @@ import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.blocks.BlockReedsBlock;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
@@ -41,47 +41,47 @@ public class NetherReedMaterial extends RoofMaterial {
     protected void _initBase(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
         addBlockEntry(new BlockEntry(BLOCK_PLANKS, (complexMaterial, settings) -> {
             return new BlockReedsBlock();
-        }).setBlockTags(NamedBlockTags.PLANKS).setItemTags(NamedItemTags.PLANKS));
+        }).setBlockTags(BlockTags.PLANKS).setItemTags(ItemTags.PLANKS));
 
         addBlockEntry(new BlockEntry(BLOCK_STAIRS, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.BaseStairsBlock(getBlock(BLOCK_PLANKS), false);
-        }).setBlockTags(NamedBlockTags.WOODEN_STAIRS, NamedBlockTags.STAIRS)
-          .setItemTags(NamedItemTags.WOODEN_STAIRS, NamedItemTags.STAIRS));
+        }).setBlockTags(BlockTags.WOODEN_STAIRS, BlockTags.STAIRS)
+          .setItemTags(ItemTags.WOODEN_STAIRS, ItemTags.STAIRS));
         addBlockEntry(new BlockEntry(BLOCK_SLAB, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.BaseSlabBlock(getBlock(BLOCK_PLANKS), false);
-        }).setBlockTags(NamedBlockTags.WOODEN_SLABS, NamedBlockTags.SLABS)
-          .setItemTags(NamedItemTags.WOODEN_SLABS, NamedItemTags.SLABS));
+        }).setBlockTags(BlockTags.WOODEN_SLABS, BlockTags.SLABS)
+          .setItemTags(ItemTags.WOODEN_SLABS, ItemTags.SLABS));
         addBlockEntry(new BlockEntry(BLOCK_FENCE, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.BaseFenceBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(NamedBlockTags.FENCES, NamedBlockTags.WOODEN_FENCES)
-          .setItemTags(NamedItemTags.FENCES, NamedItemTags.WOODEN_FENCES));
+        }).setBlockTags(BlockTags.FENCES, BlockTags.WOODEN_FENCES)
+          .setItemTags(ItemTags.FENCES, ItemTags.WOODEN_FENCES));
         addBlockEntry(new BlockEntry(BLOCK_GATE, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.BaseGateBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(NamedBlockTags.FENCE_GATES));
+        }).setBlockTags(BlockTags.FENCE_GATES));
         addBlockEntry(new BlockEntry(BLOCK_BUTTON, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.BaseWoodenButtonBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(NamedBlockTags.BUTTONS, NamedBlockTags.WOODEN_BUTTONS)
-          .setItemTags(NamedItemTags.BUTTONS, NamedItemTags.WOODEN_BUTTONS));
+        }).setBlockTags(BlockTags.BUTTONS, BlockTags.WOODEN_BUTTONS)
+          .setItemTags(ItemTags.BUTTONS, ItemTags.WOODEN_BUTTONS));
         addBlockEntry(new BlockEntry(BLOCK_PRESSURE_PLATE, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.WoodenPressurePlateBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(NamedBlockTags.PRESSURE_PLATES, NamedBlockTags.WOODEN_PRESSURE_PLATES)
-          .setItemTags(NamedItemTags.WOODEN_PRESSURE_PLATES));
+        }).setBlockTags(BlockTags.PRESSURE_PLATES, BlockTags.WOODEN_PRESSURE_PLATES)
+          .setItemTags(ItemTags.WOODEN_PRESSURE_PLATES));
         addBlockEntry(new BlockEntry(BLOCK_TRAPDOOR, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.BaseTrapdoorBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(NamedBlockTags.TRAPDOORS, NamedBlockTags.WOODEN_TRAPDOORS)
-          .setItemTags(NamedItemTags.TRAPDOORS, NamedItemTags.WOODEN_TRAPDOORS));
+        }).setBlockTags(BlockTags.TRAPDOORS, BlockTags.WOODEN_TRAPDOORS)
+          .setItemTags(ItemTags.TRAPDOORS, ItemTags.WOODEN_TRAPDOORS));
         addBlockEntry(new BlockEntry(BLOCK_DOOR, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.BaseDoorBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(NamedBlockTags.DOORS, NamedBlockTags.WOODEN_DOORS)
-          .setItemTags(NamedItemTags.DOORS, NamedItemTags.WOODEN_DOORS));
+        }).setBlockTags(BlockTags.DOORS, BlockTags.WOODEN_DOORS)
+          .setItemTags(ItemTags.DOORS, ItemTags.WOODEN_DOORS));
 
 
         addBlockEntry(new BlockEntry(BLOCK_LADDER, (complexMaterial, settings) -> {
             return new BaseLadderBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(NamedBlockTags.CLIMBABLE));
+        }).setBlockTags(BlockTags.CLIMBABLE));
         addBlockEntry(new BlockEntry(BLOCK_SIGN, (complexMaterial, settings) -> {
             return new org.betterx.bclib.blocks.BaseSignBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(NamedBlockTags.SIGNS).setItemTags(NamedItemTags.SIGNS));
+        }).setBlockTags(BlockTags.SIGNS).setItemTags(ItemTags.SIGNS));
     }
 
     @Override

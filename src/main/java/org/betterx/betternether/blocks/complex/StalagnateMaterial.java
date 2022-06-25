@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks.complex;
 
-import org.betterx.bclib.api.v2.tag.NamedBlockTags;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.recipes.GridRecipe;
@@ -9,6 +8,7 @@ import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
 import org.betterx.betternether.blocks.BlockStem;
 
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
 
@@ -39,7 +39,7 @@ public class StalagnateMaterial extends RoofMaterial {
                 BLOCK_TRUNK,
                 false,
                 (complexMaterial, settings) -> new BlockStalagnate()
-        ).setBlockTags(NamedBlockTags.CLIMBABLE));
+        ).setBlockTags(BlockTags.CLIMBABLE));
         addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> new BlockStalagnateSeed()));
         addBlockEntry(new BlockEntry(
                 BLOCK_BOWL,

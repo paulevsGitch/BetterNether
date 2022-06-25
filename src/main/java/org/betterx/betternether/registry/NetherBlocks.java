@@ -2,8 +2,6 @@ package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.bclib.api.v2.tag.CommonItemTags;
-import org.betterx.bclib.api.v2.tag.NamedBlockTags;
-import org.betterx.bclib.api.v2.tag.TagAPI;
 import org.betterx.bclib.blocks.BaseLadderBlock;
 import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.bclib.registry.BlockRegistry;
@@ -14,8 +12,10 @@ import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.VineLikeFeatures;
 import org.betterx.betternether.tab.CreativeTabs;
+import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -207,82 +207,82 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BLUE_WEEPING_OBSIDIAN = registerBlock(
             "blue_weeping_obsidian",
             new BlueWeepingObsidianBlock(),
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block WEEPING_OBSIDIAN = registerBlock(
             "weeping_obsidian",
             new VanillaWeepingObsidianBlock(),
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_CRYING_OBSIDIAN = registerBlock(
             "blue_crying_obsidian",
             new BlueCryingObsidianBlock(),
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block OBSIDIAN_BRICKS = registerBlock(
             "obsidian_bricks",
             new BNObsidian(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block OBSIDIAN_BRICKS_STAIRS = registerStairs(
             "obsidian_bricks_stairs",
             OBSIDIAN_BRICKS,
             false,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block OBSIDIAN_BRICKS_SLAB = registerSlab(
             "obsidian_bricks_slab",
             OBSIDIAN_BRICKS,
             false,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block OBSIDIAN_TILE = registerBlock(
             "obsidian_tile",
             new BNObsidian(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block OBSIDIAN_TILE_SMALL = registerBlock(
             "obsidian_tile_small",
             new BNObsidian(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block OBSIDIAN_TILE_STAIRS = registerStairs(
             "obsidian_tile_stairs",
             OBSIDIAN_TILE_SMALL,
             false,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block OBSIDIAN_TILE_SLAB = registerSlab(
             "obsidian_tile_slab",
             OBSIDIAN_TILE_SMALL,
             false,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block OBSIDIAN_ROD_TILES = registerBlock(
             "obsidian_rod_tiles",
             new BNObsidian(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block OBSIDIAN_GLASS = registerBlock(
             "obsidian_glass",
             new BlockObsidianGlass(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE
     );
     public static final Block OBSIDIAN_GLASS_PANE = registerBlock(
             "obsidian_glass_pane",
@@ -291,71 +291,71 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BLUE_OBSIDIAN = registerBlock(
             "blue_obsidian",
             new BNObsidian(BLUE_CRYING_OBSIDIAN),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_OBSIDIAN_BRICKS = registerBlock(
             "blue_obsidian_bricks",
             new BNObsidian(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_OBSIDIAN_BRICKS_STAIRS = registerStairs(
             "blue_obsidian_bricks_stairs",
             BLUE_OBSIDIAN_BRICKS,
             false,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_OBSIDIAN_BRICKS_SLAB = registerSlab(
             "blue_obsidian_bricks_slab",
             BLUE_OBSIDIAN_BRICKS,
             false,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_OBSIDIAN_TILE = registerBlock(
             "blue_obsidian_tile",
             new BNObsidian(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_OBSIDIAN_TILE_SMALL = registerBlock(
             "blue_obsidian_tile_small",
             new BNObsidian(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_OBSIDIAN_TILE_STAIRS = registerStairs(
             "blue_obsidian_tile_stairs",
             BLUE_OBSIDIAN_TILE_SMALL,
             false,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_OBSIDIAN_TILE_SLAB = registerSlab(
             "blue_obsidian_tile_slab",
             BLUE_OBSIDIAN_TILE_SMALL,
             false,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_OBSIDIAN_ROD_TILES = registerBlock(
             "blue_obsidian_rod_tiles",
             new BNObsidian(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE,
-            CommonBlockTags.IS_OBSIDIAN
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IS_OBSIDIAN
     );
     public static final Block BLUE_OBSIDIAN_GLASS = registerBlock(
             "blue_obsidian_glass",
             new BlockObsidianGlass(),
-            CommonBlockTags.NETHER_PORTAL_FRAME,
-            CommonBlockTags.IMMOBILE
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_PORTAL_FRAME,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.IMMOBILE
     );
     public static final Block BLUE_OBSIDIAN_GLASS_PANE = registerBlock(
             "blue_obsidian_glass_pane",
@@ -378,8 +378,8 @@ public class NetherBlocks extends BlockRegistry {
             "soul_sandstone_cut_stairs",
             SOUL_SANDSTONE_CUT,
             false,
-            NamedBlockTags.SOUL_SPEED_BLOCKS,
-            NamedBlockTags.SOUL_FIRE_BASE_BLOCKS
+            BlockTags.SOUL_SPEED_BLOCKS,
+            BlockTags.SOUL_FIRE_BASE_BLOCKS
     );
     public static final Block SOUL_SANDSTONE_CUT_SLAB = registerSlab(
             "soul_sandstone_cut_slab",
@@ -402,15 +402,15 @@ public class NetherBlocks extends BlockRegistry {
             "soul_sandstone_stairs",
             SOUL_SANDSTONE,
             false,
-            NamedBlockTags.SOUL_SPEED_BLOCKS,
-            NamedBlockTags.SOUL_FIRE_BASE_BLOCKS
+            BlockTags.SOUL_SPEED_BLOCKS,
+            BlockTags.SOUL_FIRE_BASE_BLOCKS
     );
     public static final Block SOUL_SANDSTONE_SMOOTH_STAIRS = registerStairs(
             "soul_sandstone_smooth_stairs",
             SOUL_SANDSTONE_SMOOTH,
             false,
-            NamedBlockTags.SOUL_SPEED_BLOCKS,
-            NamedBlockTags.SOUL_FIRE_BASE_BLOCKS
+            BlockTags.SOUL_SPEED_BLOCKS,
+            BlockTags.SOUL_FIRE_BASE_BLOCKS
     );
     public static final Block SOUL_SANDSTONE_SLAB = registerSlab("soul_sandstone_slab", SOUL_SANDSTONE, false);
     public static final Block SOUL_SANDSTONE_SMOOTH_SLAB = registerSlab(
@@ -451,17 +451,17 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block BLACK_VINE = registerBlock(
             "black_vine",
             new BlockBlackVine(),
-            NamedBlockTags.CLIMBABLE
+            BlockTags.CLIMBABLE
     );
     public static final Block BLOOMING_VINE = registerBlock(
             "blooming_vine",
             new BlockBlackVine(),
-            NamedBlockTags.CLIMBABLE
+            BlockTags.CLIMBABLE
     );
     public static final Block GOLDEN_VINE = registerBlock(
             "golden_vine",
             new BlockGoldenVine(),
-            NamedBlockTags.CLIMBABLE
+            BlockTags.CLIMBABLE
     );
 
     public static final BlockLumabusVine LUMABUS_VINE = registerBlockNI("lumabus_vine", new BlockLumabusVine());
@@ -565,23 +565,23 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block NETHER_MYCELIUM = registerBlock(
             "nether_mycelium",
             new BlockNetherMycelium(),
-            NamedBlockTags.NYLIUM,
-            CommonBlockTags.NETHER_MYCELIUM
+            BlockTags.NYLIUM,
+            org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_MYCELIUM
     );
     public static final Block JUNGLE_GRASS = registerBlock(
             "jungle_grass",
             new BlockTerrain(),
-            NamedBlockTags.NYLIUM
+            BlockTags.NYLIUM
     );
     public static final Block MUSHROOM_GRASS = registerBlock(
             "mushroom_grass",
             new BlockTerrain(),
-            NamedBlockTags.NYLIUM
+            BlockTags.NYLIUM
     );
     public static final Block SEPIA_MUSHROOM_GRASS = registerBlock(
             "sepia_mushroom_grass",
             new BlockTerrain(),
-            NamedBlockTags.NYLIUM
+            BlockTags.NYLIUM
     );
     public static final Block FARMLAND = registerBlock(
             "farmland",
@@ -591,7 +591,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block SWAMPLAND_GRASS = registerBlock(
             "swampland_grass",
             new BlockTerrain(),
-            NamedBlockTags.NYLIUM
+            BlockTags.NYLIUM
     );
     public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
     // Roofs //
@@ -626,7 +626,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block CINCINNASITE_ANVIL = registerBlock(
             "cincinnasite_anvil",
             new BlockCincinnasiteAnvil(),
-            NamedBlockTags.ANVIL
+            BlockTags.ANVIL
     );
     public static final Block CRAFTING_TABLE_CRIMSON = registerCraftingTable(
             "crafting_table_crimson",
@@ -699,7 +699,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block ANCHOR_TREE_VINE = registerBlockNI(
             "anchor_tree_vine",
             new BlockAnchorTreeVine(),
-            NamedBlockTags.CLIMBABLE
+            BlockTags.CLIMBABLE
     );
     // Nether Sakura
     public static final NetherSakuraMaterial MAT_NETHER_SAKURA = new NetherSakuraMaterial().init();
@@ -727,7 +727,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block EYE_VINE = registerBlockNI(
             "eye_vine",
             new BlockEyeVine(),
-            NamedBlockTags.CLIMBABLE
+            BlockTags.CLIMBABLE
     );
 
     public static final Block POTTED_PLANT = registerBlockNI("potted_plant", new BlockPottedPlant());
@@ -773,7 +773,7 @@ public class NetherBlocks extends BlockRegistry {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             if (tags.length > 0) {
-                TagAPI.addBlockTags(block, tags);
+                TagManager.BLOCKS.add(block, tags);
             }
         }
         return block;
@@ -799,7 +799,7 @@ public class NetherBlocks extends BlockRegistry {
             blockRegistry.registerBlockOnly(location, block);
         }
         if (tags.length > 0) {
-            TagAPI.addBlockTags(block, tags);
+            TagManager.BLOCKS.add(block, tags);
         }
         return block;
     }
@@ -817,7 +817,7 @@ public class NetherBlocks extends BlockRegistry {
             addFuel(source, stairs);
             RecipesHelper.makeStairsRecipe(source, stairs);
             if (tags.length > 0) {
-                TagAPI.addBlockTags(stairs, tags);
+                TagManager.BLOCKS.add(stairs, tags);
             }
         }
         return stairs;
@@ -830,7 +830,7 @@ public class NetherBlocks extends BlockRegistry {
             addFuel(source, slab);
             RecipesHelper.makeSlabRecipe(source, slab);
             if (tags.length > 0) {
-                TagAPI.addBlockTags(slab, tags);
+                TagManager.BLOCKS.add(slab, tags);
             }
         }
         return slab;
@@ -880,17 +880,17 @@ public class NetherBlocks extends BlockRegistry {
         return registerBlock(
                 name,
                 block,
-                NamedBlockTags.SOUL_FIRE_BASE_BLOCKS,
-                NamedBlockTags.SOUL_SPEED_BLOCKS
+                BlockTags.SOUL_FIRE_BASE_BLOCKS,
+                BlockTags.SOUL_SPEED_BLOCKS
         );
     }
 
     public static Block registerMakeable2X2Soul(String name, Block result, String group, Block... sources) {
         final Block block = registerMakeable2X2(name, result, group, sources);
-        TagAPI.addBlockTags(
+        TagManager.BLOCKS.add(
                 block,
-                NamedBlockTags.SOUL_FIRE_BASE_BLOCKS,
-                NamedBlockTags.SOUL_SPEED_BLOCKS
+                BlockTags.SOUL_FIRE_BASE_BLOCKS,
+                BlockTags.SOUL_SPEED_BLOCKS
         );
         return block;
     }
@@ -909,7 +909,7 @@ public class NetherBlocks extends BlockRegistry {
         Block wall = new BNWall(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, wall);
-            TagAPI.addBlockTags(wall, NamedBlockTags.WALLS);
+            TagManager.BLOCKS.add(wall, BlockTags.WALLS);
             RecipesHelper.makeWallRecipe(source, wall);
         }
         return wall;
@@ -919,8 +919,8 @@ public class NetherBlocks extends BlockRegistry {
         Block block = new org.betterx.bclib.blocks.BaseCraftingTableBlock(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            TagAPI.addBlockTags(block, CommonBlockTags.WORKBENCHES);
-            TagAPI.addItemTags(block, CommonItemTags.WORKBENCHES);
+            TagManager.BLOCKS.add(block, org.betterx.worlds.together.tag.v3.CommonBlockTags.WORKBENCHES);
+            TagManager.ITEMS.add(block.asItem(), org.betterx.worlds.together.tag.v3.CommonItemTags.WORKBENCHES);
 
             GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
                       .checkConfig(Configs.RECIPES)
@@ -939,8 +939,8 @@ public class NetherBlocks extends BlockRegistry {
         Block chest = new org.betterx.bclib.blocks.BaseChestBlock(planks);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, chest);
-            TagAPI.addBlockTags(chest, CommonBlockTags.CHEST);
-            TagAPI.addItemTags(chest, CommonItemTags.CHEST);
+            TagManager.BLOCKS.add(chest, CommonBlockTags.CHEST);
+            TagManager.ITEMS.add(chest, CommonItemTags.CHEST);
             addFuel(planks, chest);
             //RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
             GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), chest)
@@ -980,7 +980,7 @@ public class NetherBlocks extends BlockRegistry {
         Block block = new BaseLadderBlock(source);
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
-            TagAPI.addBlockTags(block, NamedBlockTags.CLIMBABLE);
+            TagManager.BLOCKS.add(block, BlockTags.CLIMBABLE);
 
             addFuel(source, block);
             //RecipesHelper.makeLadderRecipe(source, block);
