@@ -84,6 +84,20 @@ public class NetherVegetation {
             .inRandomPatch(BN.id("vegetation_nether_jungle"))
             .buildAndRegister();
 
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_MUSHROOM_FORREST = BCLFeatureBuilder
+            .startWeighted(BN.id("temp_vegetation_mushroom_forrest"))
+            .add(Blocks.RED_MUSHROOM, 60)
+            .add(Blocks.CRIMSON_FUNGUS, 80)
+            .add(Blocks.WARPED_FUNGUS, 80)
+            .add(Blocks.BROWN_MUSHROOM, 60)
+            .addAllStatesFor(BlockCommonPlant.AGE, NetherBlocks.ORANGE_MUSHROOM, 100)
+            .add(NetherBlocks.RED_MOLD, 120)
+            .add(NetherBlocks.GRAY_MOLD, 120)
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("vegetation_mushroom_forrest"))
+            .buildAndRegister();
+
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_JELLYFISH_MUSHROOM = BCLFeatureBuilder
             .start(BN.id("temp_jellyfish_mushroom"), NetherFeatures.JELLYFISH_MUSHROOM)
             .inlinePlace()
@@ -139,6 +153,19 @@ public class NetherVegetation {
             .inlinePlace()
             .isEmpty()
             .inRandomPatch(BN.id("patch_wall_mushrooms_with_moss"))
+            .tries(120)
+            .spreadXZ(4)
+            .spreadY(7)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_WALL_MUSHROOMS = BCLFeatureBuilder
+            .startFacing(BN.id("temp_wall_mushrooms"))
+            .add(NetherBlocks.WALL_MUSHROOM_RED, 20)
+            .add(NetherBlocks.WALL_MUSHROOM_BROWN, 15)
+            .allHorizontal()
+            .inlinePlace()
+            .isEmpty()
+            .inRandomPatch(BN.id("patch_wall_mushrooms"))
             .tries(120)
             .spreadXZ(4)
             .spreadY(7)

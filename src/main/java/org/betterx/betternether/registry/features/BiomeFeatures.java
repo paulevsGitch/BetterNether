@@ -80,25 +80,6 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_BROWN.getPlacedFeature(), 0.25f)
     ), 1);
 
-    public static final BCLFeature MUSHROOM_FORREST_FLOOR = floorFromWeighted("mushroom_forrest", List.of(
-            new WeightedPlacedFeature(TreeFeatures.BIG_RED_MUSHROOM_CLUSTER.getPlacedFeature(), 0.2f),
-            new WeightedPlacedFeature(TreeFeatures.BIG_BROWN_MUSHROOM_CLUSTER.getPlacedFeature(), 0.12f),
-            new WeightedPlacedFeature(FloorFeatures.VANILLA_MUSHROOM.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(TreeFeatures.GIANT_MOLD.getPlacedFeature(), 0.12f),
-            new WeightedPlacedFeature(TreeFeatures.MUSHROOM_FIR.getPlacedFeature(), 0.2f),
-            new WeightedPlacedFeature(FloorFeatures.ORANGE_MUSHROOM.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.RED_MOLD.getPlacedFeature(), 0.5f),
-            new WeightedPlacedFeature(FloorFeatures.GRAY_MOLD.getPlacedFeature(), 0.5f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
-    ), 0);
-    public static final BCLFeature MUSHROOM_FORREST_CEIL = SOUL_PLAIN_CEIL;
-
-    public static final BCLFeature MUSHROOM_FORREST_WALL = wallFromChanced("mushroom_forrest", List.of(
-            new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_RED.getPlacedFeature(), 0.3f),
-            new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_BROWN.getPlacedFeature(), 0.25f),
-            new WeightedPlacedFeature(WallFeatures.LUCIS_FEATURE.getPlacedFeature(), 0.4f)
-    ), 1);
-
     public static final BCLFeature MUSHROOM_FORREST_EDGE_FLOOR = floorFromChanced("mushroom_forrest_edge", List.of(
             new WeightedPlacedFeature(FloorFeatures.ORANGE_MUSHROOM.getPlacedFeature(), 0.05f),
             new WeightedPlacedFeature(FloorFeatures.VANILLA_MUSHROOM.getPlacedFeature(), 0.1f),

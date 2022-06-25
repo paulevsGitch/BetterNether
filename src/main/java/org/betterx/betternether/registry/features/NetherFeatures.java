@@ -28,6 +28,16 @@ public class NetherFeatures {
             new RubeusTreeFeature()
     );
 
+    public static final MushroomFirFeature MUSHROOM_FIR = BCLFeature.register(
+            BN.id("mushroom_fir"),
+            new MushroomFirFeature()
+    );
+
+    public static final BigBrownMushroomFeature BIG_BROWN_MUSHROOM = BCLFeature.register(
+            BN.id("big_brown_mushroom"),
+            new BigBrownMushroomFeature()
+    );
+
     public static final Feature<NoneFeatureConfiguration> RUBEUS_BUSH = BCLFeature.register(
             BN.id("rubeus_bush"),
             new RubeusBushFeature()

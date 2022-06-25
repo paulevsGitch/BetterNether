@@ -9,10 +9,13 @@ import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.NetherFeatures;
+import org.betterx.betternether.world.features.MushroomFirFeature;
 import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 
 import net.minecraft.core.Direction;
+import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 
 public class NetherTrees {
@@ -39,8 +42,12 @@ public class NetherTrees {
             .configuration(NaturalTreeConfiguration.natural())
             .buildAndRegister();
 
+    public static final BCLConfigureFeature<MushroomFirFeature, NoneFeatureConfiguration> MUSHROOM_FIR = BCLFeatureBuilder
+            .start(BN.id("tree_mushroom_fir"), NetherFeatures.MUSHROOM_FIR)
+            .buildAndRegister();
+
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_STALAGNATE = BCLFeatureBuilder
-            .startPillar(BN.id("temp_patch_stalagnate"), PillarFeatureConfig.KnownTransformers.TRIPLE_SHAPE_FILL)
+            .startPillar(BN.id("temp_stalagnate"), PillarFeatureConfig.KnownTransformers.TRIPLE_SHAPE_FILL)
             .direction(Direction.UP)
             .blockState(NetherBlocks.MAT_STALAGNATE.getTrunk())
             .minHeight(3)
@@ -50,6 +57,38 @@ public class NetherTrees {
             .inRandomPatch(BN.id("patch_stalagnate"))
             .tries(30)
             .spreadXZ(6)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_GIANT_MOLD = BCLFeatureBuilder
+            .startColumn(BN.id("temp_giant_mold"))
+            .direction(Direction.UP)
+            .addTripleShape(NetherBlocks.GIANT_MOLD.defaultBlockState(), ClampedNormalInt.of(5, 1.3f, 3, 8))
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("patch_giant_mold"))
+            .tries(30)
+            .spreadXZ(6)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BIG_RED_MUSHROOM = BCLFeatureBuilder
+            .startColumn(BN.id("temp_big_red_mushroom"))
+            .direction(Direction.UP)
+            .addTripleShape(NetherBlocks.RED_LARGE_MUSHROOM.defaultBlockState(), ClampedNormalInt.of(6, 2.1f, 3, 9))
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("patch_big_red_mushroom"))
+            .tries(30)
+            .spreadXZ(6)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BIG_BROWN_MUSHROOM = BCLFeatureBuilder
+            .start(BN.id("temp_big_brown_mushroom"), NetherFeatures.BIG_BROWN_MUSHROOM)
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("patch_big_brown_mushroom"))
+            .likeDefaultNetherVegetation()
+            .tries(30)
+            .spreadXZ(7)
             .buildAndRegister();
 
     public static void ensureStaticInitialization() {

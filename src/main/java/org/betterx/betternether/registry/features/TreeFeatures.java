@@ -118,7 +118,7 @@ public class TreeFeatures {
     );
 
     public static final BCLFeature BIG_BROWN_MUSHROOM
-            = FastFeatures.simple(BetterNether.makeID("big_brown_mushroom"), new BigBrownMushroomFeature());
+            = FastFeatures.simple(BetterNether.makeID("sbig_brown_mushroom"), new BigBrownMushroomFeature());
 
 
     public static final BCLFeature BIG_BROWN_MUSHROOM_CLUSTER = BCLFeatureBuilder
