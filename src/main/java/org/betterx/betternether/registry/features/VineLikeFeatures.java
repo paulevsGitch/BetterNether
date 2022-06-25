@@ -226,7 +226,7 @@ public class VineLikeFeatures {
     public static final BCLFeature TWISTED_VINES = FastFeatures.patch(BetterNether.makeID("twisted_vines"),
             10, 8, 4,
             BCLFeatureBuilder
-                    .start(BetterNether.makeID("twisted_vines"), new TwistedVinesFeature())
+                    .start(BetterNether.makeID("stwisted_vines"), new TwistedVinesFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
                     .buildAndRegister(NaturalTreeConfiguration.naturalLarge())
     );
