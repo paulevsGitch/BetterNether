@@ -10,14 +10,12 @@ import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v3.levelgen.features.BlockPredicates;
 import org.betterx.betternether.BN;
-import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.NetherFeatures;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
-import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -38,6 +36,13 @@ public class NetherObjects {
             .add(BN.id("bone_03"), 0, StructurePlacementType.FLOOR, 1.0f)
             .buildAndRegister();
 
+    public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> JUNGLE_BONES = BCLFeatureBuilder
+            .startWithTemplates(BN.id("jungle_bones"))
+            .add(BN.id("jungle_bones_3"), 0, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("jungle_bones_2"), 0, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("jungle_bones_1"), 0, StructurePlacementType.FLOOR, 1.0f)
+            .buildAndRegister();
+
     public static final Holder<PlacedFeature> PATCH_BONE_CLUMP = BCLFeatureBuilder
             .start(BN.id("temp_bone_clump"), NetherBlocks.BONE_BLOCK)
             .inlinePlace()
@@ -56,7 +61,7 @@ public class NetherObjects {
             .startPillar(BN.id("temp_patch_bone_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.UP)
             .blockState(NetherBlocks.BONE_STALACTITE)
-            .height(BiasedToBottomInt.of(2, 7))
+            .maxHeight(BiasedToBottomInt.of(2, 7))
             .inlinePlace()
             .isEmpty()
             .isOn(BlockPredicate.matchesBlocks(NetherBlocks.BONE_BLOCK, Blocks.BONE_BLOCK))
@@ -69,7 +74,7 @@ public class NetherObjects {
             .startPillar(BN.id("temp_patch_stalactite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.DOWN)
             .blockState(NetherBlocks.NETHERRACK_STALACTITE)
-            .height(BiasedToBottomInt.of(2, 7))
+            .maxHeight(BiasedToBottomInt.of(2, 7))
             .inlinePlace()
             .isEmptyAndUnderNetherGround()
             .inRandomPatch(BN.id("patch_stalactite"))
@@ -79,17 +84,17 @@ public class NetherObjects {
             .startPillar(BN.id("temp_patch_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.UP)
             .blockState(NetherBlocks.NETHERRACK_STALACTITE)
-            .height(BiasedToBottomInt.of(2, 7))
+            .maxHeight(BiasedToBottomInt.of(2, 7))
             .inlinePlace()
             .isEmptyAndOnNetherGround()
             .inRandomPatch(BN.id("patch_stalagmite"))
             .buildAndRegister();
 
-    public static final  Holder<PlacedFeature> PATCH_BLACKSTONE_STALACTITE = BCLFeatureBuilder
+    public static final Holder<PlacedFeature> PATCH_BLACKSTONE_STALACTITE = BCLFeatureBuilder
             .startPillar(BN.id("temp_patch_blackstone_stalactite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.DOWN)
             .blockState(NetherBlocks.BLACKSTONE_STALACTITE)
-            .height(BiasedToBottomInt.of(3, 9))
+            .maxHeight(BiasedToBottomInt.of(3, 9))
             .inlinePlace()
             .isOn(BlockPredicate.matchesBlocks(Blocks.BLACK_GLAZED_TERRACOTTA, Blocks.BASALT))
             .inRandomPatch(BN.id("patch_blackstone_stalactite"))
@@ -100,7 +105,7 @@ public class NetherObjects {
             .startPillar(BN.id("temp_patch_blackstone_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.UP)
             .blockState(NetherBlocks.BLACKSTONE_STALACTITE)
-            .height(BiasedToBottomInt.of(3, 8))
+            .maxHeight(BiasedToBottomInt.of(3, 8))
             .inlinePlace()
             .isOn(BlockPredicate.matchesBlocks(Blocks.BLACK_GLAZED_TERRACOTTA, Blocks.BASALT))
             .inRandomPatch(BN.id("patch_blackstone_stalagmite"))
@@ -111,7 +116,7 @@ public class NetherObjects {
             .startPillar(BN.id("temp_patch_basalt_stalactite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.DOWN)
             .blockState(NetherBlocks.BASALT_STALACTITE)
-            .height(BiasedToBottomInt.of(4, 11))
+            .maxHeight(BiasedToBottomInt.of(4, 11))
             .inlinePlace()
             .isEmptyAndUnderNetherGround()
             .inRandomPatch(BN.id("patch_basalt_stalactite"))
@@ -121,7 +126,7 @@ public class NetherObjects {
             .startPillar(BN.id("temp_patch_basalt_stalagmite"), PillarFeatureConfig.KnownTransformers.SIZE_DECREASE)
             .direction(Direction.UP)
             .blockState(NetherBlocks.BASALT_STALACTITE)
-            .height(BiasedToBottomInt.of(3, 9))
+            .maxHeight(BiasedToBottomInt.of(3, 9))
             .inlinePlace()
             .isEmptyAndOnNetherGround()
             .inRandomPatch(BN.id("patch_basalt_stalagmite"))
@@ -158,6 +163,7 @@ public class NetherObjects {
             .spreadXZ(4)
             .spreadY(3)
             .buildAndRegister();
+
     public static void ensureStaticInitialization() {
     }
 }

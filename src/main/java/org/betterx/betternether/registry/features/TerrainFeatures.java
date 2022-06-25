@@ -2,27 +2,19 @@ package org.betterx.betternether.registry.features;
 
 import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.v2.levelgen.features.FastFeatures;
-import org.betterx.bclib.api.v2.levelgen.features.blockpredicates.IsFullShape;
-import org.betterx.bclib.api.v2.levelgen.features.config.ConditionFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.config.SequenceFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.placement.IsBasin;
 import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;

@@ -10,9 +10,7 @@ public class WallFeatures {
 
     public static final BCLFeature WALL_MOSS
             = FastFeatures.wallPatch(BetterNether.makeID("wall_moss"), NetherBlocks.WALL_MOSS, 4, 2, 8);
-    public static final BCLFeature JUNGLE_MOSS
-            = FastFeatures.wallPatch(BetterNether.makeID("jungle_moss"), NetherBlocks.JUNGLE_MOSS, 4, 2, 8);
-
+    
     public static final BCLFeature WALL_MUSHROOM_RED
             = FastFeatures.wallPatch(
             BetterNether.makeID("wall_mushroom_red"),
@@ -32,7 +30,7 @@ public class WallFeatures {
     );
 
     public static final BCLFeature LUCIS_FEATURE = FastFeatures.simple(
-            BetterNether.makeID("lucis"),
+            BetterNether.makeID("slucis"),
             new LucisFeature()
     );
     public static final BCLFeature JUNGLE_MOSS_COVER

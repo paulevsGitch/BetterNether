@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -39,6 +40,7 @@ import java.util.List;
 
 public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 16, 14);
+    private static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
 
     public BlockBlackVine() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)
@@ -49,12 +51,12 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
                                  .noOcclusion());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
-        this.registerDefaultState(getStateDefinition().any().setValue(BlockProperties.BOTTOM, true));
+        this.registerDefaultState(getStateDefinition().any().setValue(BOTTOM, true));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
-        stateManager.add(BlockProperties.BOTTOM);
+        stateManager.add(BOTTOM);
     }
 
     @Override
@@ -89,8 +91,8 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
     ) {
         if (canSurvive(state, world, pos))
             return world.getBlockState(pos.below()).getBlock() == this
-                    ? state.setValue(BlockProperties.BOTTOM, false)
-                    : state.setValue(BlockProperties.BOTTOM, true);
+                    ? state.setValue(BOTTOM, false)
+                    : state.setValue(BOTTOM, true);
         else
             return Blocks.AIR.defaultBlockState();
     }
@@ -122,9 +124,9 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
         BlocksHelper.setWithoutUpdate(
                 world,
                 blockPos.above(),
-                defaultBlockState().setValue(BlockProperties.BOTTOM, false)
+                defaultBlockState().setValue(BOTTOM, false)
         );
-        BlocksHelper.setWithoutUpdate(world, blockPos, defaultBlockState().setValue(BlockProperties.BOTTOM, true));
+        BlocksHelper.setWithoutUpdate(world, blockPos, defaultBlockState().setValue(BOTTOM, true));
     }
 
     @Override

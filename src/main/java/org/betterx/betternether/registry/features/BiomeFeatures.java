@@ -68,13 +68,6 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
     ), 0);
 
-    public static final BCLFeature GRAVEL_DESERT_FLOOR = floorFromWeighted("gravel_desert", List.of(
-            new WeightedPlacedFeature(FloorFeatures.AGAVE.getPlacedFeature(), 0.5f),
-            new WeightedPlacedFeature(FloorFeatures.BARREL_CACTUS.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(VineLikeFeatures.NETHER_CACTUS.getPlacedFeature(), 0.2f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
-    ), 0);
-
     public static final BCLFeature CRIMSON_GLOWING_WOODS_WALL = wallFromWeighted("crimson_glowing_woods", List.of(
             new WeightedPlacedFeature(WallFeatures.WALL_MOSS.getPlacedFeature(), 0.4f),
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_RED.getPlacedFeature(), 0.6f)
@@ -126,36 +119,6 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(FloorFeatures.NETHER_GRASS_PATCH.getPlacedFeature(), 0.04f)
     ), 0);
 
-    public static final BCLFeature JUNGLE_FLOOR = denseFloorFromWeighted("jungle", List.of(
-            new WeightedPlacedFeature(FloorFeatures.JUNGLE_BONES.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.EGG_PLANT.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.JUNGLE_PLANT.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(VineLikeFeatures.NETHER_REED.getPlacedFeature(), 0.5f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGNATE_FLOOR.getPlacedFeature(), 0.2f),
-            new WeightedPlacedFeature(TreeFeatures.RUBEUS.getPlacedFeature(), 0.6f),
-            new WeightedPlacedFeature(FloorFeatures.RUBEUS_BUSH_PATCH.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(FloorFeatures.MAGMA_FLOWER.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(FloorFeatures.FEATHER_FERN_PATCH.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(FloorFeatures.JELLYFISH_MUSHROOM.getPlacedFeature(), 0.03f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.1f)
-    ), 5);
-
-    public static final BCLFeature JUNGLE_CEIL = ceilFromWeighted("jungle", List.of(
-            new WeightedPlacedFeature(VineLikeFeatures.EYE.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(VineLikeFeatures.BLACK_VINE.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(VineLikeFeatures.GOLDEN_VINE.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(VineLikeFeatures.BLOOMING_VINE.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGNATE_CEIL.getPlacedFeature(), 0.2f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.1f)
-    ), 0);
-
-    public static final BCLFeature JUNGLE_WALL = wallFromChanced("jungle", List.of(
-            new WeightedPlacedFeature(WallFeatures.LUCIS_FEATURE.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(WallFeatures.JUNGLE_MOSS.getPlacedFeature(), 0.8f),
-            new WeightedPlacedFeature(WallFeatures.WALL_MOSS.getPlacedFeature(), 0.2f),
-            new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_RED.getPlacedFeature(), 0.8f),
-            new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_BROWN.getPlacedFeature(), 0.8f)
-    ), 1);
 
     public static final BCLFeature NETHER_SWAMPLAND_FLOOR = denseFloorFromWeighted("nether_swampland", List.of(
             new WeightedPlacedFeature(TreeFeatures.WILLOW.getPlacedFeature(), 0.05f),

@@ -22,6 +22,14 @@ public class NetherObjectsPlaced {
             .onceEvery(2)
             .buildAndRegister();
 
+    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> JUNGLE_BONES = NetherObjects
+            .JUNGLE_BONES
+            .place()
+            .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
+            .vanillaNetherGround(1)
+            .onceEvery(2)
+            .buildAndRegister();
+
     public static final BCLFeature<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = NetherObjects
             .OBSIDIAN_CRYSTAL
             .place()

@@ -154,18 +154,18 @@ public class TreeFeatures {
 
     public static final BCLFeature RUBEUS
             = FastFeatures.patch(
-            BetterNether.makeID("rubeus_tree"),
+            BetterNether.makeID("srubeus_tree"),
             2,
             2,
             4,
             BCLFeatureBuilder
-                    .start(BetterNether.makeID("rubeus_tree"), new RubeusTreeFeature())
+                    .start(BetterNether.makeID("srubeus_tree"), new RubeusTreeFeature())
                     .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
                     .buildAndRegister(NaturalTreeConfiguration.natural())
     );
 
     public static final BCLFeature WILLOW
-            = FastFeatures.patch(BetterNether.makeID("willow_tree"),
+            = FastFeatures.patch(BetterNether.makeID("swillow_tree"),
             2, 2, 4,
             BCLFeatureBuilder
                     .start(BetterNether.makeID("willow_tree"), new WillowTreeFeature())
@@ -174,7 +174,7 @@ public class TreeFeatures {
     );
 
     public static final BCLFeature OLD_WILLOW
-            = FastFeatures.patch(BetterNether.makeID("old_willow_tree"),
+            = FastFeatures.patch(BetterNether.makeID("sold_willow_tree"),
             4, 8, 4,
             BCLFeatureBuilder
                     .start(BetterNether.makeID("old_willow_tree"), new OldWillowTree())
@@ -183,7 +183,7 @@ public class TreeFeatures {
     );
 
     public static final BCLFeature WART
-            = FastFeatures.patch(BetterNether.makeID("wart_tree"),
+            = FastFeatures.patch(BetterNether.makeID("swart_tree"),
             32, 7, 3,
             BCLFeatureBuilder
                     .start(BetterNether.makeID("wart_tree"), new WartTreeFeature())
@@ -192,7 +192,7 @@ public class TreeFeatures {
     );
 
     public static final BCLFeature SOUL_LILY
-            = FastFeatures.patch(BetterNether.makeID("soul_lily"),
+            = FastFeatures.patch(BetterNether.makeID("ssoul_lily"),
             16, 3, 3,
             BCLFeatureBuilder
                     .start(BetterNether.makeID("soul_lily"), new SoulLilyFeature())
@@ -201,7 +201,7 @@ public class TreeFeatures {
     );
 
     public static final BCLFeature ANCHOR_TREE
-            = FastFeatures.patch(BetterNether.makeID("anchor_tree"),
+            = FastFeatures.patch(BetterNether.makeID("sanchor_tree"),
             2, 16, 8,
             BCLFeatureBuilder
                     .start(BetterNether.makeID("anchor_tree"), new AnchorTreeFeature())
@@ -213,24 +213,24 @@ public class TreeFeatures {
     );
 
     public static final BCLFeature ANCHOR_TREE_ROOT = BCLFeatureBuilder
-            .start(BetterNether.makeID("anchor_tree_root"), new AnchorTreeRootFeature())
+            .start(BetterNether.makeID("sanchor_tree_root"), new AnchorTreeRootFeature())
             .onceEvery(4)
             .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
             .isUnder(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
             .buildAndRegister();
 
     public static final BCLFeature ANCHOR_TREE_BRANCH = BCLFeatureBuilder
-            .start(BetterNether.makeID("anchor_tree_branch"), new AnchorTreeBranchFeature())
+            .start(BetterNether.makeID("sanchor_tree_branch"), new AnchorTreeBranchFeature())
             .onceEvery(8)
             .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
             .isUnder(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
             .buildAndRegister();
 
     public static final BCLFeature NETHER_SAKURA
-            = FastFeatures.patch(BetterNether.makeID("nether_sakura"),
+            = FastFeatures.patch(BetterNether.makeID("snether_sakura"),
             3, 16, 4,
             BCLFeatureBuilder
-                    .start(BetterNether.makeID("nether_sakura"), new NetherSakuraFeature())
+                    .start(BetterNether.makeID("snether_sakura"), new NetherSakuraFeature())
                     .onceEvery(3)
                     .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                     .isUnder(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))

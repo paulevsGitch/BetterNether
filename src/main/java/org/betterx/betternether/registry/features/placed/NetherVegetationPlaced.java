@@ -58,6 +58,14 @@ public class NetherVegetationPlaced {
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_JUNGLE = NetherVegetation
+            .VEGETATION_JUNGLE
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .vanillaNetherGround(18)
+            .isEmptyAndOnNetherGround()
+            .buildAndRegister();
+
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> JELLYFISH_MUSHROOM = NetherVegetation
             .PATCH_JELLYFISH_MUSHROOM
             .place()
@@ -87,6 +95,23 @@ public class NetherVegetationPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherWall(5)
+            .isEmpty()
+            .buildAndRegister();
+
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_JUNGLE = NetherVegetation
+            .PATCH_WALL_JUNGLE
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .betterNetherWall(5)
+            .isEmpty()
+            .buildAndRegister();
+
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_LUCIS = NetherVegetation
+            .PATCH_WALL_LUCIS
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .betterNetherWall(5)
+            .onceEvery(2)
             .isEmpty()
             .buildAndRegister();
 
@@ -121,6 +146,13 @@ public class NetherVegetationPlaced {
             .onceEvery(3)
             .buildAndRegister();
 
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> RUBEUS_BUSH = NetherVegetation
+            .PATCH_RUBEUS_BUSH
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .vanillaNetherGround(4)
+            .onceEvery(2)
+            .buildAndRegister();
 
     public static void ensureStaticInitialization() {
     }

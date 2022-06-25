@@ -27,19 +27,7 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 
 public class VineLikeFeatures {
-    public static final BCLFeature GOLDEN_VINE
-            = FastFeatures.vine(
-            BetterNether.makeID("golden_vine"), false, false,
-            ScatterFeatureConfig
-                    .startOnSolid()
-                    .block(NetherBlocks.GOLDEN_VINE.defaultBlockState()
-                                                   .setValue(BlockProperties.BOTTOM, false))
-                    .tipBlock(NetherBlocks.GOLDEN_VINE.defaultBlockState()
-                                                      .setValue(BlockProperties.BOTTOM, true))
-                    .heightRange(2, 12)
-                    .spread(3, 0.75f)
-                    .growWhileFree()
-    );
+
     public static final BCLFeature LUMABUS_VINE
             = FastFeatures.vine(
             BetterNether.makeID("lumabus_vine"), false, true,
@@ -53,7 +41,7 @@ public class VineLikeFeatures {
 
     public static final BCLFeature GOLDEN_LUMABUS_VINE
             = FastFeatures.vine(
-            BetterNether.makeID("golden_lumabus_vine"), false, true,
+            BetterNether.makeID("sgolden_lumabus_vine"), false, true,
             ScatterFeatureConfig
                     .startOnSolid()
                     .tripleShapeCeil(NetherBlocks.GOLDEN_LUMABUS_VINE)
@@ -63,7 +51,7 @@ public class VineLikeFeatures {
     );
     public static final BCLFeature BLACK_VINE
             = FastFeatures.vine(
-            BetterNether.makeID("black_vine"), false, false,
+            BetterNether.makeID("sblack_vine"), false, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .singleBlock(NetherBlocks.BLACK_VINE)
@@ -73,7 +61,7 @@ public class VineLikeFeatures {
     );
     public static final BCLFeature BLOOMING_VINE
             = FastFeatures.vine(
-            BetterNether.makeID("blooming_vine"), false, false,
+            BetterNether.makeID("sblooming_vine"), false, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .singleBlock(NetherBlocks.BLOOMING_VINE)
@@ -84,7 +72,7 @@ public class VineLikeFeatures {
 
     public static final BCLFeature SOUL_VEIN
             = FastFeatures.vine(
-            BetterNether.makeID("soul_vein"), true, false,
+            BetterNether.makeID("ssoul_vein"), true, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .singleBlock(NetherBlocks.SOUL_VEIN)
@@ -94,7 +82,7 @@ public class VineLikeFeatures {
 
     public static final BCLFeature NETHER_REED
             = FastFeatures.vine(
-            BetterNether.makeID("nether_reed"), true, false,
+            BetterNether.makeID("snether_reed"), true, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .block(NetherBlocks.MAT_REED.getStem().defaultBlockState().setValue(BlockNetherReed.TOP, false))
@@ -105,7 +93,7 @@ public class VineLikeFeatures {
 
     public static final BCLFeature NETHER_CACTUS
             = FastFeatures.vine(
-            BetterNether.makeID("nether_cactus"), true, false,
+            BetterNether.makeID("snether_cactus"), true, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .block(NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, false))
@@ -115,7 +103,7 @@ public class VineLikeFeatures {
 
     public static final BCLFeature SMOKER
             = FastFeatures.vine(
-            BetterNether.makeID("smoker"), true, false,
+            BetterNether.makeID("ssmoker"), true, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .tripleShape(NetherBlocks.SMOKER)
@@ -125,7 +113,7 @@ public class VineLikeFeatures {
 
     public static final BCLFeature EYE
             = FastFeatures.vine(
-            BetterNether.makeID("eye"), false, false,
+            BetterNether.makeID("seye"), false, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .block(NetherBlocks.EYE_VINE)
@@ -140,7 +128,7 @@ public class VineLikeFeatures {
 
 
     public static final BCLFeature NEON_EQUISETUM = FastFeatures.scatter(
-            BetterNether.makeID("neon_equisetum"), false, false,
+            BetterNether.makeID("sneon_equisetum"), false, false,
             ScatterFeatureConfig
                     .startExtendBottom()
                     .block(NetherBlocks.NEON_EQUISETUM.defaultBlockState().setValue(
@@ -161,7 +149,7 @@ public class VineLikeFeatures {
     );
 
     public static final BCLFeature WHISPERING_GOURD = FastFeatures.vine(
-            BetterNether.makeID("whispering_gourd"), false, false,
+            BetterNether.makeID("swhispering_gourd"), false, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .block(new WeightedStateProvider(SimpleWeightedRandomList
@@ -187,7 +175,7 @@ public class VineLikeFeatures {
 
     public static final BCLFeature STALAGNATE_FLOOR
             = FastFeatures.vine(
-            BetterNether.makeID("stalagnate"), true, false,
+            BetterNether.makeID("sstalagnate"), true, false,
             ScatterFeatureConfig
                     .startOnSolid()
                     .tripleShape(NetherBlocks.MAT_STALAGNATE.getTrunk())
@@ -197,25 +185,13 @@ public class VineLikeFeatures {
     );
     public static final BCLFeature STALAGNATE_CEIL
             = FastFeatures.vine(
-            BetterNether.makeID("stalagnate_ceil"), false, false,
+            BetterNether.makeID("sstalagnate_ceil"), false, false,
             ScatterFeatureConfig.OnSolid
                     .startOnSolid()
                     .tripleShapeCeil(NetherBlocks.MAT_STALAGNATE.getTrunk())
                     .heightRange(3, 27)
                     .growWhileFree()
                     .spread(3, 0f, ClampedNormalInt.of(7, 1.2f, 3, 12))
-    );
-
-    public static final BCLFeature STALAGMITE_BLACKSTONE_CLUSTER = sizedCluster(
-            BetterNether.makeID("stalagmite_blackstone_cluster"), true, false,
-            ScatterFeatureConfigs.WithSize.startWithSize()
-                                          .block(NetherBlocks.BLACKSTONE_STALACTITE)
-                                          .generateBaseBlock(
-                                                  Blocks.BLACK_GLAZED_TERRACOTTA.defaultBlockState(),
-                                                  0.95f, 0.3f, 0.75f, 0.5f
-                                          )
-                                          .heightRange(2, 7)
-                                          .spread(2, 0.2f, UniformInt.of(5, 6))
     );
 
     public static final BCLFeature STALAGMITE_BASALT_CLUSTER = sizedCluster(
@@ -238,29 +214,6 @@ public class VineLikeFeatures {
                                           .spread(4, 0.3f, ClampedNormalInt.of(8, 1.4f, 4, 10))
     );
 
-    public static final BCLFeature STALACTITE_BLACKSTONE_CLUSTER = sizedCluster(
-            BetterNether.makeID("stalactite_blackstone_cluster"), false, false,
-            ScatterFeatureConfigs.WithSize.startWithSize()
-                                          .block(NetherBlocks.BLACKSTONE_STALACTITE)
-                                          .generateBaseBlock(
-                                                  Blocks.BLACK_GLAZED_TERRACOTTA.defaultBlockState(),
-                                                  0.95f, 0.3f, 0.75f, 0.5f
-                                          )
-                                          .heightRange(2, 7)
-                                          .spread(2, 0.2f, UniformInt.of(5, 6))
-    );
-
-    public static final BCLFeature STALACTITE_BASALT_CLUSTER = sizedCluster(
-            BetterNether.makeID("stalactite_basalt_cluster"), false, false,
-            ScatterFeatureConfigs.WithSize.startWithSize()
-                                          .block(NetherBlocks.BASALT_STALACTITE)
-                                          .generateBaseBlock(
-                                                  Blocks.DEEPSLATE.defaultBlockState(),
-                                                  1, 0.6f, 0.75f, 0.5f
-                                          )
-                                          .heightRange(2, 7)
-                                          .spread(2, 0.2f, UniformInt.of(5, 6))
-    );
 
     public static final BCLFeature STALACTITE_NETHERRACK_CLUSTER = sizedCluster(
             BetterNether.makeID("stalactite_netherrack_cluster"), false, false,

@@ -8,7 +8,10 @@ import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.registry.SoundsRegistry;
-import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -33,9 +36,21 @@ public class NetherJungle extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_WARPED_FOREST)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(NetherStructures.JUNGLE_TEMPLES)
-                   .feature(BiomeFeatures.JUNGLE_FLOOR)
-                   .feature(BiomeFeatures.JUNGLE_CEIL)
-                   .feature(BiomeFeatures.JUNGLE_WALL)
+                   .feature(NetherVegetationPlaced.NETHER_REED)
+                   .feature(NetherObjectsPlaced.BONES)
+                   .feature(NetherTreesPlaced.RUBEUS_TREE)
+                   .feature(NetherTreesPlaced.STALAGNATE)
+                   .feature(NetherObjectsPlaced.STALAGMITE)
+                   .feature(NetherVegetationPlaced.RUBEUS_BUSH)
+                   .feature(NetherVegetationPlaced.VEGETATION_JUNGLE)
+                   .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
+                   .feature(NetherVinesPlaced.BLACK_VINE)
+                   .feature(NetherVinesPlaced.BLOOMING_VINE)
+                   .feature(NetherVinesPlaced.EYE_VINE)
+                   .feature(NetherVinesPlaced.GOLDEN_VINE_SPARSE)
+                   .feature(NetherObjectsPlaced.STALACTITE)
+                   .feature(NetherVegetationPlaced.WALL_LUCIS)
+                   .feature(NetherVegetationPlaced.WALL_JUNGLE)
             ;
         }
 
