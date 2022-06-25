@@ -48,7 +48,7 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
                                  .noOcclusion()
                                  .destroyTime(0.4F)
                                  .randomTicks()
-
+                                 .instabreak()
                                  .dynamicShape()
                                  .offsetType(Block.OffsetType.XYZ)
         );

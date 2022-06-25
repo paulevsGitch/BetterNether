@@ -7,7 +7,6 @@ import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
 import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockNetherCactus;
 import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.blocks.BlockWhisperingGourdVine;
@@ -34,9 +33,9 @@ public class VineLikeFeatures {
             ScatterFeatureConfig
                     .startOnSolid()
                     .block(NetherBlocks.GOLDEN_VINE.defaultBlockState()
-                                                   .setValue(BNBlockProperties.BOTTOM, false))
+                                                   .setValue(BlockProperties.BOTTOM, false))
                     .tipBlock(NetherBlocks.GOLDEN_VINE.defaultBlockState()
-                                                      .setValue(BNBlockProperties.BOTTOM, true))
+                                                      .setValue(BlockProperties.BOTTOM, true))
                     .heightRange(2, 12)
                     .spread(3, 0.75f)
                     .growWhileFree()

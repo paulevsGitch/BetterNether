@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
@@ -39,7 +40,7 @@ import java.util.List;
 
 public class BlockGoldenVine extends BlockBaseNotFull implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(2, 0, 2, 14, 16, 14);
-    public static final BooleanProperty BOTTOM = BNBlockProperties.BOTTOM;
+    public static final BooleanProperty BOTTOM = BlockProperties.BOTTOM;
 
     public BlockGoldenVine() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)

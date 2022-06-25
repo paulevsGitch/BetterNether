@@ -49,12 +49,29 @@ public class NetherVegetationPlaced {
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_GRAVEL_DESERT = NetherVegetation
+            .VEGETATION_GRAVEL_DESERT
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .vanillaNetherGround(9)
+            .onceEvery(5)
+            .isEmptyAndOnNetherGround()
+            .buildAndRegister();
+
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> JELLYFISH_MUSHROOM = NetherVegetation
             .PATCH_JELLYFISH_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(2)
             .onceEvery(4)
+            .buildAndRegister();
+
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> NETHER_CACTUS = NetherVegetation
+            .PATCH_NETHER_CACTUS
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .betterNetherGround(4)
+            .onceEvery(5)
             .buildAndRegister();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_MUSHROOM_RED_WITH_MOSS = NetherVegetation

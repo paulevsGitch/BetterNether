@@ -47,6 +47,7 @@ public class BlockAgave extends BlockCommonPlant implements AddMineableShears, A
                                  .noCollission()
                                  .destroyTime(0.4F)
                                  .randomTicks()
+                                 .instabreak()
                                  .offsetType(Block.OffsetType.XZ)
         );
         this.setRenderLayer(BNRenderLayer.CUTOUT);

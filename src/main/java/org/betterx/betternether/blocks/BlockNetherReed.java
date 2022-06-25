@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -23,7 +24,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockNetherReed extends BlockBase {
-    public static final BooleanProperty TOP = BooleanProperty.create("top");
+    public static final BooleanProperty TOP = BlockProperties.TOP;
 
     public BlockNetherReed() {
         super(FabricBlockSettings.of(Materials.NETHER_PLANT)

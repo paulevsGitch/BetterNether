@@ -64,6 +64,15 @@ public class NetherVegetation {
             .inRandomPatch(BN.id("vegetation_nether_grasslands"))
             .buildAndRegister();
 
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_GRAVEL_DESERT = BCLFeatureBuilder
+            .startWeighted(BN.id("temp_vegetation_nether_gravel_desert"))
+            .addAllStatesFor(BlockAgave.AGE, NetherBlocks.AGAVE, 80)
+            .addAllStatesFor(BlockBarrelCactus.AGE, NetherBlocks.BARREL_CACTUS, 20)
+            .inlinePlace()
+            .isEmptyAndOnNetherGround()
+            .inRandomPatch(BN.id("vegetation_nether_gravel_desert"))
+            .buildAndRegister();
+
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_JELLYFISH_MUSHROOM = BCLFeatureBuilder
             .start(BN.id("temp_jellyfish_mushroom"), NetherFeatures.JELLYFISH_MUSHROOM)
             .inlinePlace()
@@ -121,15 +130,22 @@ public class NetherVegetation {
             .startColumn(BN.id("temp_patch_nether_reed"))
             .direction(Direction.UP)
             .prioritizeTip()
-            .add(
-                    BiasedToBottomInt.of(0, 3),
-                    NetherBlocks.MAT_REED.getStem().defaultBlockState().setValue(BlockNetherReed.TOP, false)
-            )
-            .add(1, NetherBlocks.MAT_REED.getStem().defaultBlockState().setValue(BlockNetherReed.TOP, true))
+            .addTopShape(NetherBlocks.MAT_REED.getStem().defaultBlockState(), BiasedToBottomInt.of(0, 3))
             .inlinePlace()
             .isEmptyAndOnNetherGround()
             .belowIsNextTo(BlockPredicates.ONLY_LAVA)
             .inRandomPatch(BN.id("patch_nether_reed"))
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_NETHER_CACTUS = BCLFeatureBuilder
+            .startColumn(BN.id("temp_patch_nether_cactus"))
+            .direction(Direction.UP)
+            .prioritizeTip()
+            .addTopShape(NetherBlocks.NETHER_CACTUS.defaultBlockState(), BiasedToBottomInt.of(1, 4))
+            .inlinePlace()
+            .isEmptyAndOn(BlockPredicates.ONLY_GRAVEL_OR_SAND)
+            .inRandomPatch(BN.id("patch_nether_cactus"))
+            .tries(16)
             .buildAndRegister();
 
     public static void ensureStaticInitialization() {

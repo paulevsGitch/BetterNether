@@ -33,7 +33,6 @@ public class BNBlockProperties {
     public static final EnumProperty<FoodShape> FOOD = EnumProperty.create("food", FoodShape.class);
 
     public static final BooleanProperty DESTRUCTED = BooleanProperty.create("destructed");
-    public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
     public static final BooleanProperty FLOOR = BooleanProperty.create("floor");
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
     public static final BooleanProperty FIRE = BooleanProperty.create("fire");

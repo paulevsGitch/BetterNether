@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
@@ -48,12 +49,12 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
                                  .noOcclusion());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
-        this.registerDefaultState(getStateDefinition().any().setValue(BNBlockProperties.BOTTOM, true));
+        this.registerDefaultState(getStateDefinition().any().setValue(BlockProperties.BOTTOM, true));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
-        stateManager.add(BNBlockProperties.BOTTOM);
+        stateManager.add(BlockProperties.BOTTOM);
     }
 
     @Override
@@ -88,8 +89,8 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
     ) {
         if (canSurvive(state, world, pos))
             return world.getBlockState(pos.below()).getBlock() == this
-                    ? state.setValue(BNBlockProperties.BOTTOM, false)
-                    : state.setValue(BNBlockProperties.BOTTOM, true);
+                    ? state.setValue(BlockProperties.BOTTOM, false)
+                    : state.setValue(BlockProperties.BOTTOM, true);
         else
             return Blocks.AIR.defaultBlockState();
     }
@@ -121,9 +122,9 @@ public class BlockBlackVine extends BlockBaseNotFull implements BonemealableBloc
         BlocksHelper.setWithoutUpdate(
                 world,
                 blockPos.above(),
-                defaultBlockState().setValue(BNBlockProperties.BOTTOM, false)
+                defaultBlockState().setValue(BlockProperties.BOTTOM, false)
         );
-        BlocksHelper.setWithoutUpdate(world, blockPos, defaultBlockState().setValue(BNBlockProperties.BOTTOM, true));
+        BlocksHelper.setWithoutUpdate(world, blockPos, defaultBlockState().setValue(BlockProperties.BOTTOM, true));
     }
 
     @Override

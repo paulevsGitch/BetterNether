@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnGravel;
 
@@ -29,7 +30,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 public class BlockNetherCactus extends BlockBaseNotFull implements SurvivesOnGravel {
     private static final VoxelShape TOP_SHAPE = box(4, 0, 4, 12, 8, 12);
     private static final VoxelShape SIDE_SHAPE = box(5, 0, 5, 11, 16, 11);
-    public static final BooleanProperty TOP = BooleanProperty.create("top");
+    public static final BooleanProperty TOP = BlockProperties.TOP;
 
     public BlockNetherCactus() {
         super(FabricBlockSettings.of(Material.CACTUS)
