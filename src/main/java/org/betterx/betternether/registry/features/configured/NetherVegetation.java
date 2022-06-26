@@ -14,8 +14,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.levelgen.feature.NetherForestVegetationFeature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
+import net.minecraft.world.level.levelgen.feature.RandomSelectorFeature;
 import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NetherForestVegetationConfig;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 
@@ -84,19 +86,40 @@ public class NetherVegetation {
             .inRandomPatch(BN.id("vegetation_nether_jungle"))
             .buildAndRegister();
 
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_MUSHROOM_FORREST = BCLFeatureBuilder
-            .startWeighted(BN.id("temp_vegetation_mushroom_forrest"))
-            .add(Blocks.RED_MUSHROOM, 60)
-            .add(Blocks.CRIMSON_FUNGUS, 80)
-            .add(Blocks.WARPED_FUNGUS, 80)
-            .add(Blocks.BROWN_MUSHROOM, 60)
+    private static final int GRAY_MOLD_ID = 42;
+    private static final int MUSHROOM_ID = 23;
+    public static final BCLConfigureFeature<RandomSelectorFeature, RandomFeatureConfiguration> VEGETATION_MUSHROOM_FORREST = BCLFeatureBuilder
+            .startRandomSelect(
+                    BN.id("vegetation_mushroom_forrest"),
+                    (placer, id) -> placer
+                            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
+                            .inRandomPatch(BN.id("temp"))
+                            .tries(id == GRAY_MOLD_ID ? 120 : 96)
+                            .spreadXZ(id == GRAY_MOLD_ID ? 10 : 7)
+                            .spreadY(id == MUSHROOM_ID ? 6 : 3)
+                            .inlinePlace()
+                            .build()
+            )
+            .add(NetherBlocks.GRAY_MOLD, 200, GRAY_MOLD_ID)
+            .add(NetherBlocks.RED_MOLD, 180)
             .addAllStatesFor(BlockCommonPlant.AGE, NetherBlocks.ORANGE_MUSHROOM, 100)
-            .add(NetherBlocks.RED_MOLD, 120)
-            .add(NetherBlocks.GRAY_MOLD, 120)
-            .inlinePlace()
-            .isEmptyAndOnNetherGround()
-            .inRandomPatch(BN.id("vegetation_mushroom_forrest"))
+            .addAll(60, MUSHROOM_ID, Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM)
+            .addAll(80, MUSHROOM_ID, Blocks.CRIMSON_FUNGUS, Blocks.WARPED_FUNGUS)
             .buildAndRegister();
+
+//    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_MUSHROOM_FORREST_2 = BCLFeatureBuilder
+//            .startWeighted(BN.id("temp_vegetation_mushroom_forrest"))
+//            .add(Blocks.RED_MUSHROOM, 60)
+//            .add(Blocks.CRIMSON_FUNGUS, 80)
+//            .add(Blocks.WARPED_FUNGUS, 80)
+//            .add(Blocks.BROWN_MUSHROOM, 60)
+//            .addAllStatesFor(BlockCommonPlant.AGE, NetherBlocks.ORANGE_MUSHROOM, 100)
+//            .add(NetherBlocks.RED_MOLD, 180)
+//            .add(NetherBlocks.GRAY_MOLD, 60)
+//            .inlinePlace()
+//            .isEmptyAndOnNetherGround()
+//            .inRandomPatch(BN.id("vegetation_mushroom_forrest_2"))
+//            .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_JELLYFISH_MUSHROOM = BCLFeatureBuilder
             .start(BN.id("temp_jellyfish_mushroom"), NetherFeatures.JELLYFISH_MUSHROOM)

@@ -66,6 +66,7 @@ public class NetherTreesPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(6)
+            .onceEvery(2)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 

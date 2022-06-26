@@ -76,6 +76,7 @@ public class NetherTrees {
     public static final BCLConfigureFeature<BlockColumnFeature, BlockColumnConfiguration> BIG_RED_MUSHROOM = BCLFeatureBuilder
             .startColumn(BN.id("big_red_mushroom"))
             .direction(Direction.UP)
+            .prioritizeTip()
             .addTripleShape(NetherBlocks.RED_LARGE_MUSHROOM.defaultBlockState(), ClampedNormalInt.of(6, 2.1f, 3, 9))
             .buildAndRegister();
 

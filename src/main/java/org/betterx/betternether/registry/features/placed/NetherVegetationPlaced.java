@@ -7,7 +7,9 @@ import org.betterx.betternether.registry.features.configured.NetherVegetation;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.NetherForestVegetationFeature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
+import net.minecraft.world.level.levelgen.feature.RandomSelectorFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NetherForestVegetationConfig;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 
 public class NetherVegetationPlaced {
@@ -66,19 +68,19 @@ public class NetherVegetationPlaced {
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_MUSHROOM_FORREST = NetherVegetation
+    public static final BCLFeature<RandomSelectorFeature, RandomFeatureConfiguration> VEGETATION_MUSHROOM_FORREST = NetherVegetation
             .VEGETATION_MUSHROOM_FORREST
             .place(BN.id("vegetation_mushroom_forrest_edge"))
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(10)
+            .vanillaNetherGround(8)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 
-    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_MUSHROOM_FORREST_EDGE = NetherVegetation
+    public static final BCLFeature<RandomSelectorFeature, RandomFeatureConfiguration> VEGETATION_MUSHROOM_FORREST_EDGE = NetherVegetation
             .VEGETATION_MUSHROOM_FORREST
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(10)
+            .vanillaNetherGround(8)
             .onceEvery(2)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
