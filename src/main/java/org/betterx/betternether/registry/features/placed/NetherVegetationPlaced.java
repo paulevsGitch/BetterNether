@@ -68,9 +68,18 @@ public class NetherVegetationPlaced {
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_MUSHROOM_FORREST = NetherVegetation
             .VEGETATION_MUSHROOM_FORREST
+            .place(BN.id("vegetation_mushroom_forrest_edge"))
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .vanillaNetherGround(10)
+            .isEmptyAndOnNetherGround()
+            .buildAndRegister();
+
+    public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> VEGETATION_MUSHROOM_FORREST_EDGE = NetherVegetation
+            .VEGETATION_MUSHROOM_FORREST
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .vanillaNetherGround(10)
+            .onceEvery(2)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 

@@ -6,6 +6,7 @@ import org.betterx.bclib.api.v2.levelgen.features.features.TemplateFeature;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v3.levelgen.features.BlockPredicates;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.NetherFeatures;
@@ -14,7 +15,9 @@ import org.betterx.betternether.world.features.configs.NaturalTreeConfiguration;
 
 import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.ClampedNormalInt;
+import net.minecraft.world.level.levelgen.feature.BlockColumnFeature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 
@@ -70,11 +73,14 @@ public class NetherTrees {
             .spreadXZ(6)
             .buildAndRegister();
 
-    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BIG_RED_MUSHROOM = BCLFeatureBuilder
-            .startColumn(BN.id("temp_big_red_mushroom"))
+    public static final BCLConfigureFeature<BlockColumnFeature, BlockColumnConfiguration> BIG_RED_MUSHROOM = BCLFeatureBuilder
+            .startColumn(BN.id("big_red_mushroom"))
             .direction(Direction.UP)
             .addTripleShape(NetherBlocks.RED_LARGE_MUSHROOM.defaultBlockState(), ClampedNormalInt.of(6, 2.1f, 3, 9))
-            .inlinePlace()
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BIG_RED_MUSHROOM = BIG_RED_MUSHROOM
+            .place()
             .isEmptyAndOnNetherGround()
             .inRandomPatch(BN.id("patch_big_red_mushroom"))
             .tries(30)
@@ -89,6 +95,52 @@ public class NetherTrees {
             .likeDefaultNetherVegetation()
             .tries(30)
             .spreadXZ(7)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> OLD_RED_MUSHROOM = BCLFeatureBuilder
+            .startWithTemplates(BN.id("old_red_mushroom"))
+            .add(BN.id("trees/red_mushroom_01"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/red_mushroom_02"), -0, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/red_mushroom_03"), -0, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/red_mushroom_04"), -3, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/red_mushroom_05"), -3, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/red_mushroom_06"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/red_mushroom_07"), -4, StructurePlacementType.FLOOR, 1.0f)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_OLD_RED_MUSHROOM = OLD_RED_MUSHROOM
+            .place(BN.id("temp_big_old_red_mushroom"))
+            .findSolidFloor(3)
+            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
+            .inRandomPatch(BN.id("patch_big_old_red_mushroom"))
+            .tries(3)
+            .spreadXZ(16)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> OLD_BROWN_MUSHROOM = BCLFeatureBuilder
+            .startWithTemplates(BN.id("old_brown_mushroom"))
+            .add(BN.id("trees/brown_mushroom_02"), -3, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/brown_mushroom_03"), -2, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/brown_mushroom_01"), -2, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/brown_mushroom_04"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_OLD_BROWN_MUSHROOM = OLD_BROWN_MUSHROOM
+            .place(BN.id("temp_big_old_brown_mushroom"))
+            .findSolidFloor(3)
+            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
+            .inRandomPatch(BN.id("patch_big_old_brown_mushroom"))
+            .tries(3)
+            .spreadXZ(16)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> BIG_WARPED_TREE = BCLFeatureBuilder
+            .startWithTemplates(BN.id("big_warped_tree"))
+            .add(BN.id("trees/warped_tree_01"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/warped_tree_02"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/warped_tree_03"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/warped_tree_04"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("trees/warped_tree_05"), -3, StructurePlacementType.FLOOR, 1.0f)
             .buildAndRegister();
 
     public static void ensureStaticInitialization() {

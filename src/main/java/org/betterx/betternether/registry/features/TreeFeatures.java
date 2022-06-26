@@ -36,52 +36,6 @@ public class TreeFeatures {
                     cfg(BetterNether.makeID("trees/wart_fallen_log"), 0, StructurePlacementType.FLOOR, 1.0f)
             )));
 
-    public static final BCLFeature OLD_RED_MUSHROOM = BCLFeatureBuilder
-            .start(BetterNether.makeID("old_red_mushroom"), BCLFeature.TEMPLATE)
-            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
-            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-            .offset(Direction.DOWN)
-            .buildAndRegister(new TemplateFeatureConfig(List.of(
-                    cfg(BetterNether.makeID("trees/red_mushroom_02"), -0, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/red_mushroom_03"), -0, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/red_mushroom_01"), -1, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/red_mushroom_04"), -3, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/red_mushroom_05"), -3, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/red_mushroom_06"), -1, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/red_mushroom_07"), -4, StructurePlacementType.FLOOR, 1.0f)
-            )));
-
-    public static final BCLFeature OLD_RED_MUSHROOM_CLUSTER = BCLFeatureBuilder
-            .start(BetterNether.makeID("old_red_mushroom_cluster"), OLD_RED_MUSHROOM.getFeature())
-            .countRange(2, 4)
-            .spreadHorizontal(UniformInt.of(-16, 16))
-            .findSolidFloor(3)
-            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
-            .isAbove(BlockPredicate.matchesTag(org.betterx.worlds.together.tag.v3.CommonBlockTags.MYCELIUM))
-            .buildAndRegister(OLD_RED_MUSHROOM.getConfiguration());
-
-    public static final BCLFeature OLD_BROWN_MUSHROOM = BCLFeatureBuilder
-            .start(BetterNether.makeID("old_brown_mushroom"), BCLFeature.TEMPLATE)
-            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
-            .isAbove(BlockPredicate.matchesTag(CommonBlockTags.TERRAIN))
-            .offset(Direction.DOWN)
-            .buildAndRegister(new TemplateFeatureConfig(List.of(
-                    cfg(BetterNether.makeID("trees/brown_mushroom_02"), -3, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/brown_mushroom_03"), -2, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/brown_mushroom_01"), -2, StructurePlacementType.FLOOR, 1.0f),
-                    cfg(BetterNether.makeID("trees/brown_mushroom_04"), -1, StructurePlacementType.FLOOR, 1.0f)
-
-            )));
-
-    public static final BCLFeature OLD_BROWN_MUSHROOM_CLUSTER = BCLFeatureBuilder
-            .start(BetterNether.makeID("old_brown_mushroom_cluster"), OLD_BROWN_MUSHROOM.getFeature())
-            .countRange(2, 4)
-            .spreadHorizontal(UniformInt.of(-16, 16))
-            .findSolidFloor(3)
-            .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
-            .isAbove(BlockPredicate.matchesTag(org.betterx.worlds.together.tag.v3.CommonBlockTags.MYCELIUM))
-            .buildAndRegister(OLD_BROWN_MUSHROOM.getConfiguration());
-
     public static final BCLFeature BIG_WARPED_TREE = BCLFeatureBuilder
             .start(BetterNether.makeID("big_warped_tree"), BCLFeature.TEMPLATE)
             .is(BlockPredicate.ONLY_IN_AIR_PREDICATE)
@@ -119,15 +73,6 @@ public class TreeFeatures {
 
     public static final BCLFeature BIG_BROWN_MUSHROOM
             = FastFeatures.simple(BetterNether.makeID("sbig_brown_mushroom"), new BigBrownMushroomFeature());
-
-
-    public static final BCLFeature BIG_BROWN_MUSHROOM_CLUSTER = BCLFeatureBuilder
-            .start(BetterNether.makeID("big_brown_mushroom_cluster"), BIG_BROWN_MUSHROOM.getFeature())
-            .count(10)
-            .spreadHorizontal(UniformInt.of(-12, 12))
-            .findSolidFloor(3)
-            .isAbove(BlockPredicate.matchesTag(org.betterx.worlds.together.tag.v3.CommonBlockTags.MYCELIUM))
-            .buildAndRegister();
 
     public static final BCLFeature MUSHROOM_FIR
             = FastFeatures.patch(

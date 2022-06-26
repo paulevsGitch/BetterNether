@@ -7,7 +7,6 @@ import org.betterx.bclib.api.v2.levelgen.features.config.ScatterFeatureConfig;
 import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.BlockNetherCactus;
 import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.blocks.BlockWhisperingGourdVine;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -89,16 +88,6 @@ public class VineLikeFeatures {
                     .tipBlock(NetherBlocks.MAT_REED.getStem().defaultBlockState())
                     .spread(4, 0f, ConstantInt.of(64))
                     .heightRange(1, 3)
-    );
-
-    public static final BCLFeature NETHER_CACTUS
-            = FastFeatures.vine(
-            BetterNether.makeID("snether_cactus"), true, false,
-            ScatterFeatureConfig
-                    .startOnSolid()
-                    .block(NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, false))
-                    .tipBlock(NetherBlocks.NETHER_CACTUS.defaultBlockState().setValue(BlockNetherCactus.TOP, true))
-                    .heightRange(2, 5)
     );
 
     public static final BCLFeature SMOKER

@@ -22,34 +22,11 @@ import net.minecraft.world.level.block.SculkShriekerBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
-import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
 
 public class FloorFeatures {
 
-    public static final BlockStateProvider VANILLA_MUSHROOM_PROVIDER =
-            new NoiseThresholdProvider(
-                    2345L,
-                    new NormalNoise.NoiseParameters(0, 1.0),
-                    0.005f,
-                    -0.8f,
-                    0.33333334f,
-                    Blocks.DANDELION.defaultBlockState(),
-                    List.of(
-                            Blocks.RED_MUSHROOM.defaultBlockState(),
-                            Blocks.CRIMSON_FUNGUS.defaultBlockState()
-                    ),
-                    List.of(
-                            Blocks.BROWN_MUSHROOM.defaultBlockState(),
-                            Blocks.WARPED_FUNGUS.defaultBlockState()
-                    )
-            );
-    public static final BCLFeature VANILLA_MUSHROOM
-            = FastFeatures.patch(BetterNether.makeID("vanilla_red_mushroom"),
-            VANILLA_MUSHROOM_PROVIDER, 8, 6, 3
-    );
 
     public static final BCLFeature VANILLA_WARPED_FUNGUS
             = FastFeatures.patch(BetterNether.makeID("vanilla_warped_fungus"), Blocks.WARPED_FUNGUS, 8, 7, 3);
@@ -113,10 +90,6 @@ public class FloorFeatures {
     public static final BCLFeature NETHER_SAKURA_BUSH_PATCH
             = FastFeatures.patch(BetterNether.makeID("snether_sakura_bush"), 2, 5, 3, new NetherSakuraBushFeature());
 
-
-    public static final BCLFeature BARREL_CACTUS
-            = FastFeatures.patch(BetterNether.makeID("barrel_cactus"), NetherBlocks.BARREL_CACTUS, 12, 2, 2);
-
     public static final BCLFeature JELLYFISH_MUSHROOM_SINGLE
             = FastFeatures.simple(
             BetterNether.makeID("jellyfish_mushroom_old"),
@@ -127,11 +100,6 @@ public class FloorFeatures {
     public static final BCLFeature JELLYFISH_MUSHROOM
             = FastFeatures.patch(BetterNether.makeID("jellyfish_mushroom_old"), 64, 5, 3, JELLYFISH_MUSHROOM_SINGLE);
 
-    public static final BCLFeature RED_MOLD
-            = FastFeatures.patch(BetterNether.makeID("red_mold"), NetherBlocks.RED_MOLD, 32, 5, 3);
-
-    public static final BCLFeature GRAY_MOLD
-            = FastFeatures.patch(BetterNether.makeID("gray_mold"), NetherBlocks.GRAY_MOLD, 32, 5, 3);
 
     public static final BCLFeature FORREST_LITTER = BCLFeatureBuilder
             .start(BetterNether.makeID("forrest_litter"), BCLFeature.TEMPLATE)
@@ -168,18 +136,6 @@ public class FloorFeatures {
             BetterNether.makeID("black_apple"),
             NetherBlocks.BLACK_APPLE, BlockCommonPlant.AGE,
             8, 7, 2
-    );
-
-    public static final BCLFeature AGAVE = FastFeatures.patchWitRandomInt(
-            BetterNether.makeID("agave"),
-            NetherBlocks.AGAVE, BlockCommonPlant.AGE,
-            16, 4, 2
-    );
-
-    public static final BCLFeature ORANGE_MUSHROOM = FastFeatures.patchWitRandomInt(
-            BetterNether.makeID("orange_mushroom"),
-            NetherBlocks.ORANGE_MUSHROOM, BlockCommonPlant.AGE,
-            12, 4, 2
     );
 
     public static void ensureStaticInitialization() {

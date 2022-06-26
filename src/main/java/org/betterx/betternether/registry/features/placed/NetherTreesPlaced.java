@@ -1,6 +1,9 @@
 package org.betterx.betternether.registry.features.placed;
 
+import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
+import org.betterx.bclib.api.v2.levelgen.features.features.TemplateFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v3.levelgen.features.BlockPredicates;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -36,7 +39,7 @@ public class NetherTreesPlaced {
             .MUSHROOM_FIR
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(12)
+            .vanillaNetherGround(14)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 
@@ -62,7 +65,7 @@ public class NetherTreesPlaced {
             .PATCH_BIG_RED_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(8)
+            .vanillaNetherGround(6)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 
@@ -70,8 +73,27 @@ public class NetherTreesPlaced {
             .PATCH_BIG_BROWN_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(7)
+            .vanillaNetherGround(6)
+            .onceEvery(2)
             .isEmptyAndOnNetherGround()
+            .buildAndRegister();
+
+    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> OLD_RED_MUSHROOM = NetherTrees
+            .OLD_RED_MUSHROOM
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .vanillaNetherGround(5)
+            .onceEvery(3)
+            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
+            .buildAndRegister();
+
+    public static final BCLFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> OLD_BROWN_MUSHROOM = NetherTrees
+            .OLD_BROWN_MUSHROOM
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .vanillaNetherGround(4)
+            .onceEvery(3)
+            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
             .buildAndRegister();
 
     public static void ensureStaticInitialization() {

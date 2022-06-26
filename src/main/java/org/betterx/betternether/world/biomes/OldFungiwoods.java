@@ -7,7 +7,9 @@ import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.SoundsRegistry;
-import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -34,9 +36,14 @@ public class OldFungiwoods extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
-                   .feature(BiomeFeatures.OLD_FUNGIWOODS_FLOOR)
-                   .feature(BiomeFeatures.OLD_FUNGIWOODS_CEIL)
-                   .feature(BiomeFeatures.OLD_FUNGIWOODS_WALL)
+                   .feature(NetherTreesPlaced.OLD_RED_MUSHROOM)
+                   .feature(NetherTreesPlaced.OLD_BROWN_MUSHROOM)
+                   .feature(NetherTreesPlaced.BIG_RED_MUSHROOM)
+                   .feature(NetherTreesPlaced.BIG_BROWN_MUSHROOM)
+                   .feature(NetherObjectsPlaced.STALAGMITE)
+                   .feature(NetherVegetationPlaced.VEGETATION_MUSHROOM_FORREST)
+                   .feature(NetherObjectsPlaced.STALACTITE)
+                   .feature(NetherVegetationPlaced.WALL_MUSHROOM_RED_WITH_MOSS)
                    .genChance(0.3f)
             ;
         }

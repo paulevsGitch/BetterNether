@@ -68,25 +68,12 @@ public class BiomeFeatures {
             new WeightedPlacedFeature(VineLikeFeatures.STALACTITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
     ), 0);
 
-    public static final BCLFeature CRIMSON_GLOWING_WOODS_WALL = wallFromWeighted("crimson_glowing_woods", List.of(
-            new WeightedPlacedFeature(WallFeatures.WALL_MOSS.getPlacedFeature(), 0.4f),
-            new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_RED.getPlacedFeature(), 0.6f)
-    ), 1);
-
 
     public static final BCLFeature NETHER_GRASSLANDS_WALL = wallFromWeighted("nether_ggrasslands", List.of(
             new WeightedPlacedFeature(WallFeatures.WALL_MOSS.getPlacedFeature(), 0.5f),
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_RED.getPlacedFeature(), 0.25f),
             new WeightedPlacedFeature(WallFeatures.WALL_MUSHROOM_BROWN.getPlacedFeature(), 0.25f)
     ), 1);
-
-    public static final BCLFeature MUSHROOM_FORREST_EDGE_FLOOR = floorFromChanced("mushroom_forrest_edge", List.of(
-            new WeightedPlacedFeature(FloorFeatures.ORANGE_MUSHROOM.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.VANILLA_MUSHROOM.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(FloorFeatures.RED_MOLD.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(FloorFeatures.GRAY_MOLD.getPlacedFeature(), 0.05f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.01f)
-    ), 0);
 
     public static final BCLFeature POOR_GRASSLAND_FLOOR = floorFromChanced("poor_grassland", List.of(
             new WeightedPlacedFeature(FloorFeatures.NETHER_WART.getPlacedFeature(), 0.005f),
@@ -144,21 +131,6 @@ public class BiomeFeatures {
             ),
             0
     );
-
-    public static final BCLFeature OLD_FUNGIWOODS_FLOOR = denseFloorFromWeighted("old_fungiwoods", List.of(
-            new WeightedPlacedFeature(TreeFeatures.OLD_RED_MUSHROOM_CLUSTER.getPlacedFeature(), 0.12f),
-            new WeightedPlacedFeature(TreeFeatures.OLD_BROWN_MUSHROOM_CLUSTER.getPlacedFeature(), 0.12f),
-            new WeightedPlacedFeature(TreeFeatures.BIG_RED_MUSHROOM_CLUSTER.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(TreeFeatures.BIG_BROWN_MUSHROOM_CLUSTER.getPlacedFeature(), 0.1f),
-            new WeightedPlacedFeature(FloorFeatures.VANILLA_MUSHROOM.getPlacedFeature(), 0.5f),
-            new WeightedPlacedFeature(FloorFeatures.RED_MOLD.getPlacedFeature(), 0.9f),
-            new WeightedPlacedFeature(FloorFeatures.GRAY_MOLD.getPlacedFeature(), 0.9f),
-            new WeightedPlacedFeature(VineLikeFeatures.STALAGMITE_NETHERRACK_CLUSTER.getPlacedFeature(), 0.05f)
-    ), 0);
-
-    public static final BCLFeature OLD_FUNGIWOODS_CEIL = SOUL_PLAIN_CEIL;
-
-    public static final BCLFeature OLD_FUNGIWOODS_WALL = CRIMSON_GLOWING_WOODS_WALL;
 
     public static final BCLFeature OLD_SWAMPLAND_SCULK = BCLFeatureBuilder
             .start(BetterNether.makeID("old_swampland_sculk"), Feature.RANDOM_SELECTOR)
@@ -303,10 +275,6 @@ public class BiomeFeatures {
 
     public static BCLFeature ceilFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
         return fromChanced(name, features, defaultIndex, "ceil", defaultCeilModifiers);
-    }
-
-    public static BCLFeature wallFromChanced(String name, List<WeightedPlacedFeature> features, int defaultIndex) {
-        return fromChanced(name, features, defaultIndex, "wall", defaultWallModifiers);
     }
 
     public static BCLFeature fromChanced(
