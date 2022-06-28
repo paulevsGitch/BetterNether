@@ -1,6 +1,6 @@
 package org.betterx.betternether.world.features;
 
-import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
+import org.betterx.bclib.api.v3.levelgen.features.UserGrowableFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BNBlockProperties;
 import org.betterx.betternether.blocks.BlockLucisMushroom;
@@ -30,9 +30,9 @@ public class LucisFeature extends ContextFeature<NoneFeatureConfiguration> imple
                                                                       );
     private static final BlockState CORNER = NetherBlocks.LUCIS_MUSHROOM.defaultBlockState()
                                                                         .setValue(
-                                                                          BlockLucisMushroom.SHAPE,
-                                                                          BNBlockProperties.EnumLucisShape.CORNER
-                                                                  );
+                                                                                BlockLucisMushroom.SHAPE,
+                                                                                BNBlockProperties.EnumLucisShape.CORNER
+                                                                        );
 
     public LucisFeature() {
         super(NoneFeatureConfiguration.CODEC);

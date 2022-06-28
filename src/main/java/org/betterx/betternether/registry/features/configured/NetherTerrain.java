@@ -1,12 +1,12 @@
 package org.betterx.betternether.registry.features.configured;
 
-import org.betterx.bclib.api.v2.levelgen.features.blockpredicates.IsFullShape;
-import org.betterx.bclib.api.v2.levelgen.features.config.ConditionFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.config.SequenceFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.placement.IsBasin;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.IsFullShape;
+import org.betterx.bclib.api.v3.levelgen.features.config.ConditionFeatureConfig;
+import org.betterx.bclib.api.v3.levelgen.features.config.SequenceFeatureConfig;
+import org.betterx.bclib.api.v3.levelgen.features.placement.IsBasin;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
 

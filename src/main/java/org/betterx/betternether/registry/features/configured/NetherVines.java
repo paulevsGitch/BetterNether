@@ -1,8 +1,8 @@
 package org.betterx.betternether.registry.features.configured;
 
-import org.betterx.bclib.api.v2.levelgen.features.config.PillarFeatureConfig;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v3.levelgen.features.config.PillarFeatureConfig;
 import org.betterx.bclib.blocks.BlockProperties;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.blocks.BlockNeonEquisetum;

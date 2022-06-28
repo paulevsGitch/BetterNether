@@ -1,6 +1,6 @@
 package org.betterx.betternether.world.features;
 
-import org.betterx.bclib.api.v2.levelgen.features.UserGrowableFeature;
+import org.betterx.bclib.api.v3.levelgen.features.UserGrowableFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.BlockWartSeed;
 import org.betterx.betternether.registry.NetherBlocks;

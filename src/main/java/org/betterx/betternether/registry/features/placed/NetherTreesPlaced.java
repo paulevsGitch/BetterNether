@@ -1,9 +1,9 @@
 package org.betterx.betternether.registry.features.placed;
 
-import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.features.TemplateFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v3.levelgen.features.BlockPredicates;
+import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
+import org.betterx.bclib.api.v3.levelgen.features.config.TemplateFeatureConfig;
+import org.betterx.bclib.api.v3.levelgen.features.features.TemplateFeature;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.registry.features.configured.NetherTrees;
 
