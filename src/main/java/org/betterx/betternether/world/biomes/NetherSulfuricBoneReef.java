@@ -33,7 +33,7 @@ public class NetherSulfuricBoneReef extends NetherBiome {
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherVegetationPlaced.NETHER_REED)
                    .feature(NetherObjectsPlaced.BONES)
-                   .feature(NetherObjectsPlaced.BONE_STALACMITE)
+                   .feature(NetherObjectsPlaced.BONE_STALAGMITE)
                    .feature(NetherVegetationPlaced.VEGETATION_SULFURIC_BONE_REEF)
                    .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
                    .feature(NetherVinesPlaced.GOLDEN_LUMABUS_VINE)

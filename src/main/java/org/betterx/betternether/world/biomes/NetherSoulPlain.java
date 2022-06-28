@@ -8,7 +8,9 @@ import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -43,9 +45,12 @@ public class NetherSoulPlain extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY)
                    .particles(ParticleTypes.PORTAL, 0.02F)
                    .structure(BiomeTags.HAS_NETHER_FOSSIL)
+                   .feature(NetherTerrainPlaced.REPLACE_SOUL_SANDSTONE)
                    .feature(NetherFeatures.NETHER_RUBY_ORE_SOUL)
-                   .feature(BiomeFeatures.SOUL_PLAIN_FLOOR)
-                   .feature(BiomeFeatures.SOUL_PLAIN_CEIL)
+                   .feature(NetherObjectsPlaced.BASALT_STALAGMITE_SPARSE)
+                   .feature(NetherVegetationPlaced.BLACK_BUSH)
+                   .feature(NetherVegetationPlaced.VEGETATION_SOUL_PLAIN)
+                   .feature(NetherObjectsPlaced.BASALT_STALACTITE_SPARSE)
             ;
         }
 

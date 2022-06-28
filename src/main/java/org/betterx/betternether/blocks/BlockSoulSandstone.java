@@ -1,7 +1,12 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.interfaces.TagProvider;
+import org.betterx.worlds.together.tag.v3.CommonBlockTags;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -12,7 +17,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
-public class BlockSoulSandstone extends BlockBase {
+import java.util.List;
+
+public class BlockSoulSandstone extends BlockBase implements TagProvider {
     public static final BooleanProperty UP = BooleanProperty.create("up");
 
     public BlockSoulSandstone() {
@@ -40,5 +47,10 @@ public class BlockSoulSandstone extends BlockBase {
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return this.defaultBlockState()
                    .setValue(UP, ctx.getLevel().getBlockState(ctx.getClickedPos().above()).getBlock() != this);
+    }
+
+    @Override
+    public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
+        blockTags.add(CommonBlockTags.NETHER_TERRAIN);
     }
 }

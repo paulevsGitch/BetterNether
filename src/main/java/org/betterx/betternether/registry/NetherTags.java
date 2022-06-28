@@ -35,16 +35,13 @@ public class NetherTags {
     public static final TagKey<Item> SOUL_GROUND_ITEM = TagManager.ITEMS.makeCommonTag("soul_ground");
 
     public static final TagKey<Block> NETHER_FARMLAND = TagManager.BLOCKS.makeCommonTag("nether_farmland");
-    public static final TagKey<Block> NETHER_FARMLAND_LOCATION = TagManager.BLOCKS.makeCommonTag("nether_farmland");
 
 
     public static final TagKey<Block> NETHER_SAND = TagManager.BLOCKS.makeCommonTag("nether_sand");
-    public static final TagKey<Block> NETHER_SAND_LOCATION = TagManager.BLOCKS.makeCommonTag("nether_sand");
     public static final TagKey<Biome> BETTER_NETHER = TagManager.BIOMES.makeTag(BetterNether.MOD_ID, "biome");
 
     public static void register() {
-        TagManager.BLOCKS.add(NETHER_SAND_LOCATION, Blocks.SOUL_SAND);
-
+        TagManager.BLOCKS.add(NETHER_SAND, Blocks.SOUL_SAND);
 
         NetherBlocks.getModBlocks().forEach(block -> {
             BlockBehaviour.Properties properties = ((BlockBehaviourAccessor) block).getProperties();

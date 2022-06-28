@@ -5,11 +5,11 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
+import org.betterx.bclib.api.v2.levelgen.surface.rules.RoughNoiseCondition;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.SoundsRegistry;
-import org.betterx.betternether.registry.features.BiomeFeatures;
-import org.betterx.betternether.registry.features.TerrainFeatures;
+import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -19,6 +19,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
 public class OldSwampland extends NetherBiome {
@@ -36,11 +37,23 @@ public class OldSwampland extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(TerrainFeatures.LAVA_PITS)
-                   .feature(BiomeFeatures.OLD_SWAMPLAND_SCULK)
-                   .feature(BiomeFeatures.OLD_SWAMPLAND_FLOOR)
-                   .feature(BiomeFeatures.OLD_SWAMPLAND_CEIL)
-                   .feature(BiomeFeatures.OLD_SWAMPLAND_WALL)
+                   .feature(NetherTerrainPlaced.LAVA_PITS_SPARSE)
+                   .feature(NetherVegetationPlaced.NETHER_REED)
+                   .feature(NetherTreesPlaced.OLD_WILLOW_TREE)
+                   .feature(NetherTreesPlaced.WILLOW_TREE)
+                   .feature(NetherVegetationPlaced.WILLOW_BUSH)
+                   .feature(NetherVegetationPlaced.BLACK_BUSH_SPARSE)
+                   .feature(NetherObjectsPlaced.STALAGMITE)
+                   .feature(NetherVegetationPlaced.VEGETATION_OLD_SWAMPLAND)
+                   .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM_DENSE)
+                   .feature(NetherObjectsPlaced.SMOKER)
+                   .feature(NetherVinesPlaced.BLACK_VINE)
+                   .feature(NetherVinesPlaced.BLOOMING_VINE)
+                   .feature(NetherObjectsPlaced.STALACTITE)
+                   .feature(NetherVegetationPlaced.WALL_MUSHROOMS_WITH_MOSS)
+                   .feature(NetherObjectsPlaced.SCULK_TOP)
+                   .feature(NetherObjectsPlaced.SCULK_HIDDEN)
+                   .feature(NetherVegetationPlaced.SCULK_VEGETATION)
             ;
         }
 
@@ -66,19 +79,16 @@ public class OldSwampland extends NetherBiome {
                     .rule(SurfaceRules.sequence(
                             SurfaceRules.ifTrue(
                                     SurfaceRules.ON_FLOOR,
-                                    SurfaceRules.sequence(
-                                            SurfaceRules.ifTrue(
-                                                    Conditions.NETHER_VOLUME_NOISE,
-                                                    SurfaceRules.state(NetherBlocks.SWAMPLAND_GRASS.defaultBlockState())
-                                            ),
-                                            SurfaceRules.state(Blocks.SCULK.defaultBlockState())
+                                    SurfaceRules.ifTrue(
+                                            new RoughNoiseCondition(Noises.NETHERRACK, 0.19),
+                                            SurfaceRules.state(NetherBlocks.SWAMPLAND_GRASS.defaultBlockState())
                                     )
                             ),
                             SurfaceRules.ifTrue(
                                     Conditions.NETHER_SURFACE_NOISE_LARGE,
-                                    SurfaceRules.state(Blocks.SCULK.defaultBlockState())
+                                    NetherGrasslands.SOUL_SAND
                             ),
-                            NetherGrasslands.SOUL_SAND
+                            SurfaceRules.state(Blocks.SCULK.defaultBlockState())
                     ));
         }
     }

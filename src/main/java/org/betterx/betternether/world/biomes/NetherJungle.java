@@ -37,7 +37,7 @@ public class NetherJungle extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(NetherStructures.JUNGLE_TEMPLES)
                    .feature(NetherVegetationPlaced.NETHER_REED)
-                   .feature(NetherObjectsPlaced.BONES)
+                   .feature(NetherObjectsPlaced.JUNGLE_BONES)
                    .feature(NetherTreesPlaced.RUBEUS_TREE)
                    .feature(NetherTreesPlaced.STALAGNATE)
                    .feature(NetherObjectsPlaced.STALAGMITE)

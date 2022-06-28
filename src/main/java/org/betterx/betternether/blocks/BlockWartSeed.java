@@ -3,7 +3,7 @@ package org.betterx.betternether.blocks;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnSouldSand;
-import org.betterx.betternether.registry.features.TreeFeatures;
+import org.betterx.betternether.registry.features.configured.NetherTrees;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -100,7 +100,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        TreeFeatures.WART.place(world, pos, random);
+        NetherTrees.WART_TREE.placeInWorld(world, pos, random);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnNetherrackAndNylium;
+import org.betterx.betternether.interfaces.SurvivesOnNetherrackNyliumAndSculk;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,7 +26,7 @@ import net.fabricmc.api.Environment;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOnNetherrackAndNylium {
+public class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOnNetherrackNyliumAndSculk {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {

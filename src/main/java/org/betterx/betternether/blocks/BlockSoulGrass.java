@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.betternether.interfaces.SurvivesOnSouldGround;
+import org.betterx.betternether.interfaces.SurvivesOnSoulGroundAndSculk;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSouldGround {
+public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSoulGroundAndSculk {
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         return canSurviveOnTop(state, world, pos);

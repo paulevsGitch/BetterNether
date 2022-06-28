@@ -1,6 +1,6 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.world.features.DeferedSeedBlock;
 
@@ -24,9 +24,9 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBlock {
     private static final VoxelShape SHAPE = box(4, 6, 4, 12, 16, 12);
-    private final BCLFeature feature;
+    private final BCLConfigureFeature feature;
 
-    public BlockLumabusSeed(DeferedSeedBlock parent, BCLFeature feature) {
+    public BlockLumabusSeed(DeferedSeedBlock parent, BCLConfigureFeature feature) {
         super(FabricBlockSettings.of(Materials.NETHER_SAPLING)
                                  .mapColor(MaterialColor.COLOR_RED)
                                  .sounds(SoundType.CROP)
@@ -56,7 +56,7 @@ public class BlockLumabusSeed extends BlockBaseNotFull implements BonemealableBl
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        feature.place(level, pos, random);
+        feature.placeInWorld(level, pos, random);
     }
 
     @Override

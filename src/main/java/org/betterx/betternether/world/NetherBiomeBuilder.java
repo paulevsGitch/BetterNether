@@ -8,6 +8,7 @@ import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
 import org.betterx.betternether.registry.NetherStructures;
 import org.betterx.betternether.registry.NetherTags;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
@@ -102,7 +103,7 @@ public class NetherBiomeBuilder {
                         MHelper.randRange(-1.5F, 1.5F, RANDOM),
                         MHelper.randRange(-1.5F, 1.5F, RANDOM)
                 )
-                .feature(NetherFeatures.WART_CAP_FEATURE);
+                .feature(NetherVegetationPlaced.WART_CAP);
 
 
         if (data.hasVanillaStructures()) addVanillaStructures(builder);

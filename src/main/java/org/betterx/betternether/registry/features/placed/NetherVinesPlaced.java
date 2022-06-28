@@ -60,6 +60,30 @@ public class NetherVinesPlaced {
             .onceEvery(2)
             .buildAndRegister();
 
+    public static final BCLFeature TWISTING_VINES = NetherVines
+            .PATCH_TWISTING_VINES
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .vanillaNetherGround(12)
+            .onceEvery(2)
+            .buildAndRegister();
+
+    public static final BCLFeature NEON_EQUISETUM = NetherVines
+            .PATCH_NEON_EQUISETUM
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .betterNetherCeiling(12)
+            .onceEvery(2)
+            .buildAndRegister();
+
+    public static final BCLFeature WHISPERING_GOURD_VINE = NetherVines
+            .PATCH_WHISPERING_GOURD_VINE
+            .place()
+            .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
+            .betterNetherCeiling(4)
+            .onceEvery(2)
+            .buildAndRegister();
+
     public static void ensureStaticInitialization() {
     }
 }

@@ -6,7 +6,10 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -34,8 +37,12 @@ public class OldWarpedWoods extends NetherBiome {
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
-                   .feature(BiomeFeatures.OLD_WARPED_WOOD_FLOOR)
-                   .feature(BiomeFeatures.OLD_WARPED_WOOD_CEIL)
+                   .feature(NetherTreesPlaced.BIG_WARPED_TREE)
+                   .feature(NetherObjectsPlaced.STALAGMITE)
+                   .feature(NetherVegetationPlaced.VEGETATION_OLD_WARPED_WOODS)
+                   .feature(NetherVinesPlaced.BLACK_VINE)
+                   .feature(NetherVinesPlaced.TWISTING_VINES)
+                   .feature(NetherObjectsPlaced.STALACTITE)
             ;
         }
 

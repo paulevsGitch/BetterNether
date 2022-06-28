@@ -6,7 +6,8 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
-import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -33,7 +34,10 @@ public class NetherPoorGrasslands extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(BiomeFeatures.POOR_GRASSLAND_FLOOR)
+                   .feature(NetherVegetationPlaced.NETHER_REED)
+                   .feature(NetherVegetationPlaced.BLACK_BUSH_SPARSE)
+                   .feature(NetherVegetationPlaced.VEGETATION_POOR_GRASSLANDS)
+                   .feature(NetherObjectsPlaced.SMOKER_SPARSE)
                    .genChance(0.3F)
             ;
         }

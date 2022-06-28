@@ -1,7 +1,7 @@
 package org.betterx.betternether.mixin.common;
 
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.registry.features.TreeFeatures;
+import org.betterx.betternether.registry.features.configured.NetherTrees;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -37,10 +37,10 @@ public abstract class MushroomMixin {
     ) {
         if (BlocksHelper.isNetherMycelium(world.getBlockState(pos.below()))) {
             if (state.getBlock() == Blocks.RED_MUSHROOM) {
-                TreeFeatures.BIG_RED_MUSHROOM_CLUSTER.place(world, pos, random);
+                NetherTrees.PATCH_BIG_RED_MUSHROOM.placeInWorld(world, pos, random);
                 info.cancel();
             } else if (state.getBlock() == Blocks.BROWN_MUSHROOM) {
-                TreeFeatures.BIG_BROWN_MUSHROOM.place(world, pos, random);
+                NetherTrees.PATCH_BIG_BROWN_MUSHROOM.placeInWorld(world, pos, random);
                 info.cancel();
             }
         }

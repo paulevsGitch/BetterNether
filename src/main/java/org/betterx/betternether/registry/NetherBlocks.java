@@ -10,7 +10,7 @@ import org.betterx.betternether.blocks.*;
 import org.betterx.betternether.blocks.complex.*;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
-import org.betterx.betternether.registry.features.VineLikeFeatures;
+import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.betternether.tab.CreativeTabs;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
@@ -586,7 +586,7 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block FARMLAND = registerBlock(
             "farmland",
             new BlockFarmland(),
-            NetherTags.NETHER_FARMLAND_LOCATION
+            NetherTags.NETHER_FARMLAND
     );
     public static final Block SWAMPLAND_GRASS = registerBlock(
             "swampland_grass",
@@ -734,19 +734,19 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block VEINED_SAND = registerBlockNI(
             "veined_sand",
             new BlockVeinedSand(),
-            NetherTags.NETHER_SAND_LOCATION
+            NetherTags.NETHER_SAND
     );
 
 
     // DEFERED BLOCKS //
     public static final Block LUMABUS_SEED = registerBlock(
             "lumabus_seed",
-            new BlockLumabusSeed(LUMABUS_VINE, VineLikeFeatures.LUMABUS_VINE)
+            new BlockLumabusSeed(LUMABUS_VINE, NetherVines.LUMABUS_VINE)
     );
 
     public static final Block GOLDEN_LUMABUS_SEED = registerBlock(
             "golden_lumabus_seed",
-            new BlockLumabusSeed(GOLDEN_LUMABUS_VINE, VineLikeFeatures.GOLDEN_LUMABUS_VINE)
+            new BlockLumabusSeed(GOLDEN_LUMABUS_VINE, NetherVines.GOLDEN_LUMABUS_VINE)
     );
 
     protected NetherBlocks(CreativeModeTab creativeTab) {

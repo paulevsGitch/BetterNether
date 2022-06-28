@@ -3,20 +3,15 @@ package org.betterx.betternether.registry;
 import org.betterx.bclib.api.v2.LifeCycleAPI;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
-import org.betterx.bclib.api.v2.levelgen.features.BCLCommonFeatures;
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
-import org.betterx.bclib.api.v2.levelgen.features.config.PlaceFacingBlockConfig;
 import org.betterx.bclib.api.v2.levelgen.features.config.TemplateFeatureConfig;
-import org.betterx.bclib.api.v2.levelgen.features.features.DefaultFeature;
 import org.betterx.bclib.api.v2.levelgen.features.features.ScatterFeature;
-import org.betterx.bclib.api.v2.levelgen.features.features.TemplateFeature;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
+import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLPlacedFeatureBuilder;
+import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
-import org.betterx.betternether.registry.features.*;
 import org.betterx.betternether.registry.features.configured.*;
 import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.features.*;
@@ -34,6 +29,7 @@ import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.OreFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
@@ -41,9 +37,88 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import com.google.common.collect.Lists;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class NetherFeatures {
+    public static final Feature<NoneFeatureConfiguration> JELLYFISH_MUSHROOM = BCLFeature.register(
+            BN.id("jellyfish_mushroom"),
+            new JellyfishMushroomFeature()
+    );
+    public static final Feature<NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = BCLFeature.register(
+            BN.id("obsidian_crystal"),
+            new CrystalFeature()
+    );
+    public static final Feature<NoneFeatureConfiguration> WART_BUSH = BCLFeature.register(
+            BN.id("wart_bush"),
+            new WartBushFeature()
+    );
+    public static final RubeusTreeFeature RUBEUS_TREE = BCLFeature.register(
+            BN.id("rubeus_tree"),
+            new RubeusTreeFeature()
+    );
+    public static final MushroomFirFeature MUSHROOM_FIR = BCLFeature.register(
+            BN.id("mushroom_fir"),
+            new MushroomFirFeature()
+    );
+    public static final BigBrownMushroomFeature BIG_BROWN_MUSHROOM = BCLFeature.register(
+            BN.id("big_brown_mushroom"),
+            new BigBrownMushroomFeature()
+    );
+    public static final Feature<NoneFeatureConfiguration> RUBEUS_BUSH = BCLFeature.register(
+            BN.id("rubeus_bush"),
+            new RubeusBushFeature()
+    );
+    public static final Feature<NoneFeatureConfiguration> LUCIS = BCLFeature.register(
+            BN.id("lucis"),
+            new LucisFeature()
+    );
+    public static final SoulLilyFeature SOUL_LILY = BCLFeature.register(
+            BN.id("soul_lily"),
+            new SoulLilyFeature()
+    );
+    public static final WartTreeFeature WART_TREE = BCLFeature.register(
+            BN.id("wart_tree"),
+            new WartTreeFeature()
+    );
+    public static final WillowBushFeature WILLOW_BUSH = BCLFeature.register(
+            BN.id("willow_bush"),
+            new WillowBushFeature()
+    );
+    public static final WillowTreeFeature WILLOW_TREE = BCLFeature.register(
+            BN.id("willow_tree"),
+            new WillowTreeFeature()
+    );
+    public static final OldWillowTree OLD_WILLOW_TREE = BCLFeature.register(
+            BN.id("old_willow_tree"),
+            new OldWillowTree()
+    );
+    public static final NetherSakuraFeature SAKURA_TREE = BCLFeature.register(
+            BN.id("sakura_tree"),
+            new NetherSakuraFeature()
+    );
+    public static final NetherSakuraBushFeature SAKURA_BUSH = BCLFeature.register(
+            BN.id("sakura_bush"),
+            new NetherSakuraBushFeature()
+    );
+    public static final AnchorTreeBranchFeature ANCHOR_TREE_BRANCH = BCLFeature.register(
+            BN.id("anchor_tree_branch"),
+            new AnchorTreeBranchFeature()
+    );
+    public static final AnchorTreeFeature ANCHOR_TREE = BCLFeature.register(
+            BN.id("anchor_tree"),
+            new AnchorTreeFeature()
+    );
+    public static final AnchorTreeRootFeature ANCHOR_TREE_ROOT = BCLFeature.register(
+            BN.id("anchor_tree_root"),
+            new AnchorTreeRootFeature()
+    );
+    public static final WartCapFeature WART_CAP = BCLFeature.register(
+            BN.id("wart_cap"),
+            new WartCapFeature()
+    );
+    public static final TwistedVinesFeature TWISTING_VINES = BCLFeature.register(
+            BN.id("twisting_vines"),
+            new TwistedVinesFeature()
+    );
     private static final List<BCLFeature> defaultFeatures = Lists.newArrayList();
 
     // Surface Features //
@@ -52,20 +127,6 @@ public class NetherFeatures {
             new ScatterFeature<>(ScatterFeatureConfigs.WithSize.CODEC)
     );
 
-
-    public static final Feature<ScatterFeatureConfigs.WithPlantAge> SCATTER_WITH_PLANT_AGE = BCLFeature.register(
-            BetterNether.makeID("scatter_with_age"),
-            new ScatterFeature<>(ScatterFeatureConfigs.WithPlantAge.CODEC)
-    );
-
-    // Landscape //
-    public static final BCLFeature WART_CAP_FEATURE = BCLFeatureBuilder
-            .start(BetterNether.makeID("wart_cap"), new WartCapFeature())
-            .count(32)
-            .squarePlacement()
-            .randomHeight10FromFloorCeil()
-            .findSolidSurface(PlaceFacingBlockConfig.HORIZONTAL, 12, false)
-            .buildAndRegister();
 
     // Ores //
     public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> CINCINNASITE_ORE =
@@ -117,68 +178,6 @@ public class NetherFeatures {
                     true
             );
 
-    // Maintainance //
-    public static final BCLFeature CLEANUP_FEATURE = registerChunkFeature(
-            "nether_clean",
-            Decoration.RAW_GENERATION,
-            CleanupFeature::new
-    );
-    public static final BCLFeature FIX_FEATURE = registerChunkFeature(
-            "nether_fix",
-            Decoration.TOP_LAYER_MODIFICATION,
-            BlockFixFeature::new
-    );
-
-    // Terrain //
-    public static final BCLFeature CAVES_FEATURE = registerChunkFeature(
-            "nether_caves",
-            Decoration.UNDERGROUND_STRUCTURES,
-            CavesFeature::new
-    );
-    public static final BCLFeature PATHS_FEATURE = registerChunkFeature(
-            "nether_paths",
-            Decoration.LAKES,
-            PathsFeature::new
-    );
-    public static final BCLFeature POPULATOR_FEATURE = registerChunkFeature(
-            "nether_populator",
-            Decoration.VEGETAL_DECORATION,
-            NetherChunkPopulatorFeature::new
-    );
-
-    // Cached Config data //
-    public static final boolean HAS_CLEANING_PASS = Configs.GENERATOR.getBoolean(
-            "generator.world.terrain",
-            "terrain_cleaning_pass",
-            true
-    );
-    public static final boolean HAS_CAVES = Configs.GENERATOR.getBoolean(
-            "generator.world.environment",
-            "generate_caves",
-            true
-    );
-    public static final boolean HAS_PATHS = Configs.GENERATOR.getBoolean(
-            "generator.world.environment",
-            "generate_paths",
-            true
-    );
-    public static final boolean HAS_FIXING_PASS = Configs.GENERATOR.getBoolean(
-            "generator.world.terrain",
-            "world_fixing_pass",
-            true
-    );
-
-    private static <T extends DefaultFeature> BCLFeature registerChunkFeature(
-            String name,
-            Decoration step,
-            Supplier<T> feature
-    ) {
-        return BCLCommonFeatures.makeChunkFeature(
-                BetterNether.makeID("feature_" + name),
-                step,
-                feature.get()
-        );
-    }
 
     private static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> registerOre(
             String name,
@@ -190,89 +189,50 @@ public class NetherFeatures {
             PlacementModifier placement,
             boolean rare
     ) {
-        return _registerOre(
-                name + "_ore",
-                blockOre,
-                baseBlock,
-                Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_count", veins),
-                Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_size", veinSize),
-                Configs.GENERATOR.getFloat("generator.world.ores." + name, "air_discard_chance", airDiscardChance),
-                placement,
-                rare
-        );
-    }
-
-    private static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> registerOre(
-            String name,
-            Block blockOre,
-            int veins,
-            int veinSize,
-            float airDiscardChance,
-            PlacementModifier placement,
-            boolean rare
-    ) {
-        return _registerOre(
-                name + "_ore",
-                blockOre,
-                Blocks.NETHERRACK,
-                Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_count", veins),
-                Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_size", veinSize),
-                Configs.GENERATOR.getFloat("generator.world.ores." + name, "air_discard_chance", airDiscardChance),
-                placement,
-                rare
-        );
-    }
-
-    private static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> _registerOre(
-            String name,
-            Block blockOre,
-            Block baseBlock,
-            int veins,
-            int veinSize,
-            float airDiscardChance,
-            PlacementModifier placementModifier,
-            boolean rare
-    ) {
-        return makeOreFeature(
-                BetterNether.makeID(name),
-                blockOre,
-                baseBlock,
-                veins,
-                veinSize,
-                airDiscardChance,
-                placementModifier,
-                rare
-        );
-    }
-
-    public static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> makeOreFeature(
-            ResourceLocation id,
-            Block blockOre,
-            Block hostBlock,
-            int veins,
-            int veinSize,
-            float airDiscardChance,
-            PlacementModifier placement,
-            boolean rare
-    ) {
+        int veins1 = Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_count", veins);
         BCLPlacedFeatureBuilder<OreFeature, OreConfiguration> builder = org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder
-                .startOre(id)
-                .add(hostBlock, blockOre)
-                .veinSize(veinSize)
-                .discardChanceOnAirExposure(airDiscardChance)
+                .startOre(BetterNether.makeID(name + "_ore"))
+                .add(baseBlock, blockOre)
+                .veinSize(Configs.GENERATOR.getInt("generator.world.ores." + name, "vein_size", veinSize))
+                .discardChanceOnAirExposure(Configs.GENERATOR.getFloat(
+                        "generator.world.ores." + name,
+                        "air_discard_chance",
+                        airDiscardChance
+                ))
                 .buildAndRegister()
                 .place()
                 .decoration(Decoration.UNDERGROUND_DECORATION);
 
         if (rare) {
-            builder.onceEvery(veins);
+            builder.onceEvery(veins1);
         } else {
-            builder.count(veins);
+            builder.count(veins1);
         }
 
         builder.modifier(placement).squarePlacement().onlyInBiome();
 
         return builder.buildAndRegister();
+    }
+
+    private static org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> registerOre(
+            String name,
+            Block blockOre,
+            int veins,
+            int veinSize,
+            float airDiscardChance,
+            PlacementModifier placement,
+            boolean rare
+    ) {
+        return registerOre(
+                name,
+                blockOre,
+                Blocks.NETHERRACK,
+                veins,
+                veinSize,
+                airDiscardChance,
+                placement,
+                rare
+        );
     }
 
     // MANAGE DEFAULT FEATURES //
@@ -285,31 +245,8 @@ public class NetherFeatures {
         return TemplateFeatureConfig.cfg(location, offsetY, type, chance);
     }
 
-    private static BCLFeature registerDefault(BCLFeature f) {
-        defaultFeatures.add(f);
-        return f;
-    }
-
-    private static BCLFeature registerDefault(
-            ResourceLocation location,
-            List<StructureWorldNBT> structures,
-            int onceEveryChunk
-    ) {
-        return registerDefault(TemplateFeature.createAndRegister(
-                location,
-                new TemplateFeatureConfig(structures),
-                onceEveryChunk
-        ));
-    }
 
     public static BCLBiomeBuilder addDefaultFeatures(BCLBiomeBuilder builder) {
-        //if (NetherFeatures.HAS_CLEANING_PASS) builder.feature(CLEANUP_FEATURE);
-        //if (NetherFeatures.HAS_CAVES) builder.feature(CAVES_FEATURE);
-        //if (NetherFeatures.HAS_PATHS) builder.feature(PATHS_FEATURE);
-        //if (NetherFeatures.HAS_FIXING_PASS) builder.feature(FIX_FEATURE);
-
-        //builder.feature(POPULATOR_FEATURE);
-
         return builder;
     }
 
@@ -328,15 +265,6 @@ public class NetherFeatures {
     }
 
     public static void modifyNonBNBiome(ResourceLocation biomeID, Holder<Biome> biome) {
-//        if (NetherFeatures.HAS_CAVES) {
-//            BiomeAPI.addBiomeFeature(biome, CAVES_FEATURE);
-//        }
-//        if (NetherFeatures.HAS_PATHS) {
-//            BiomeAPI.addBiomeFeature(biome, PATHS_FEATURE);
-//        }
-
-        //BiomeAPI.addBiomeFeature(biome, POPULATOR_FEATURE);
-
         BiomeAPI.addBiomeFeature(biome, CINCINNASITE_ORE);
         BiomeAPI.addBiomeFeature(biome, NETHER_RUBY_ORE_RARE);
         BiomeAPI.addBiomeFeature(biome, NETHER_LAPIS_ORE);
@@ -352,7 +280,6 @@ public class NetherFeatures {
     }
 
     public static void register() {
-        org.betterx.betternether.registry.features.NetherFeatures.ensureStaticInitialization();
         NetherVegetation.ensureStaticInitialization();
         NetherVegetationPlaced.ensureStaticInitialization();
         NetherVines.ensureStaticInitialization();
@@ -363,12 +290,6 @@ public class NetherFeatures {
         NetherObjectsPlaced.ensureStaticInitialization();
         NetherTerrain.ensureStaticInitialization();
         NetherTerrainPlaced.ensureStaticInitialization();
-        FloorFeatures.ensureStaticInitialization();
-        VineLikeFeatures.ensureStaticInitialization();
-        WallFeatures.ensureStaticInitialization();
-        TreeFeatures.ensureStaticInitialization();
-        TerrainFeatures.ensureStaticInitialization();
-        BiomeFeatures.ensureStaticInitialization();
         LifeCycleAPI.onLevelLoad(NetherFeatures::onWorldLoad);
     }
 

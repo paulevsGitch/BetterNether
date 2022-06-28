@@ -3,7 +3,7 @@ package org.betterx.betternether.blocks;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.features.WallFeatures;
+import org.betterx.betternether.registry.features.configured.NetherVegetation;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -73,7 +73,7 @@ public class BlockLucisSpore extends BlockBaseNotFull implements BonemealableBlo
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        WallFeatures.LUCIS_FEATURE.place(world, pos, random);
+        NetherVegetation.WALL_LUCIS.placeInWorld(world, pos, random);
     }
 
     @Override

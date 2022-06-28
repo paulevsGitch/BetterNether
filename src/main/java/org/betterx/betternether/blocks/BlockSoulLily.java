@@ -3,7 +3,7 @@ package org.betterx.betternether.blocks;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.materials.Materials;
-import org.betterx.betternether.interfaces.SurvivesOnSouldGround;
+import org.betterx.betternether.interfaces.SurvivesOnSoulGround;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.world.features.SoulLilyFeature;
 
@@ -36,7 +36,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSouldGround {
+public class BlockSoulLily extends BlockBaseNotFull implements SurvivesOnSoulGround {
     public static final EnumProperty<SoulLilyShape> SHAPE = EnumProperty.create("shape", SoulLilyShape.class);
 
     private static final VoxelShape SHAPE_SMALL = box(6, 0, 6, 10, 16, 10);

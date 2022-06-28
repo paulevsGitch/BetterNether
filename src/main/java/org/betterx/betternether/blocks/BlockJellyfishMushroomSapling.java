@@ -3,7 +3,7 @@ package org.betterx.betternether.blocks;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNylium;
-import org.betterx.betternether.registry.features.FloorFeatures;
+import org.betterx.betternether.registry.features.configured.NetherVegetation;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -78,7 +78,7 @@ public class BlockJellyfishMushroomSapling extends BlockBaseNotFull implements B
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        FloorFeatures.JELLYFISH_MUSHROOM.place(world, pos, random);
+        NetherVegetation.JELLYFISH_MUSHROOM.placeInWorld(world, pos, random);
     }
 
     @Override

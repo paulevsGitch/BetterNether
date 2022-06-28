@@ -11,7 +11,6 @@ import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
-import org.betterx.betternether.registry.features.BiomeFeatures;
 import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
@@ -116,12 +115,12 @@ public class NetherGrasslands extends NetherBiome {
                                         SurfaceRules.ON_FLOOR,
                                         new SwitchRuleSource(
                                                 NetherGrasslandsNumericProvider.DEFAULT,
-                                                List.of(SOUL_SOIL, SOUL_SAND,  MOSS, NETHERRACK)
+                                                List.of(SOUL_SOIL, SOUL_SAND, MOSS, NETHERRACK)
                                         )
                                 ),
                                 new SwitchRuleSource(
                                         NetherGrasslandsNumericProvider.DEFAULT,
-                                        List.of(SOUL_SOIL, SOUL_SAND,NETHERRACK)
+                                        List.of(SOUL_SOIL, SOUL_SAND, NETHERRACK)
                                 )
                         ));
         }

@@ -1,25 +1,21 @@
 package org.betterx.betternether.registry.features.configured;
 
-import org.betterx.bclib.api.v2.levelgen.features.features.SequenceFeature;
-import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v2.levelgen.features.blockpredicates.IsFullShape;
 import org.betterx.bclib.api.v2.levelgen.features.config.ConditionFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.features.config.SequenceFeatureConfig;
 import org.betterx.bclib.api.v2.levelgen.features.placement.IsBasin;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
+import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
 
 import net.minecraft.core.Direction;
-import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 
 import java.util.List;
 
@@ -34,8 +30,8 @@ public class NetherTerrain {
     public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> BASALT_OR_AIR = BCLFeatureBuilder
             .startWeighted(BN.id("basalt_or_air"))
 
-                    .add(Blocks.BASALT, 15)
-                    .add(Blocks.AIR, 15)
+            .add(Blocks.BASALT, 15)
+            .add(Blocks.AIR, 15)
             .buildAndRegister();
 
     public static final BCLFeature MARK = BCLFeatureBuilder
@@ -53,7 +49,7 @@ public class NetherTerrain {
             .extendDown(1, 3)
             .buildAndRegister();
 
-    public static final BCLFeature FLOODED_LAVA_PIT_SURFACE = BCLFeatureBuilder
+    public static final BCLFeature<Feature<ConditionFeatureConfig>, ConditionFeatureConfig> FLOODED_LAVA_PIT_SURFACE = BCLFeatureBuilder
             .start(BN.id("flooded_lava_pit_surface"), BCLFeature.CONDITION)
             .configuration(new ConditionFeatureConfig(
                     IsBasin.simple(
@@ -68,11 +64,15 @@ public class NetherTerrain {
             .build()
             .place()
             .buildAndRegister();
-
-    public static final BCLConfigureFeature<SequenceFeature, SequenceFeatureConfig> FLOODED_LAVA_PIT = BCLFeatureBuilder
+    public static final BCLConfigureFeature<Feature<SequenceFeatureConfig>, SequenceFeatureConfig> FLOODED_LAVA_PIT = BCLFeatureBuilder
             .start(BN.id("flooded_lava_pit"), BCLFeature.SEQUENCE)
             .configuration(SequenceFeatureConfig.createSequence(List.of(EXTEND_BASALT, FLOODED_LAVA_PIT_SURFACE, MARK)))
             .buildAndRegister();
+
+    public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> SOUL_SAND = BCLFeatureBuilder
+            .start(BN.id("soul_sand"), Blocks.SOUL_SAND)
+            .buildAndRegister();
+
 
     public static void ensureStaticInitialization() {
     }

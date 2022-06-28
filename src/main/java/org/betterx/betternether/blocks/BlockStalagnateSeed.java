@@ -1,10 +1,10 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrack;
-import org.betterx.betternether.registry.features.VineLikeFeatures;
+import org.betterx.betternether.registry.features.configured.NetherTrees;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,7 +31,9 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
     public static final BooleanProperty TOP = BooleanProperty.create("top");
 
     public BlockStalagnateSeed() {
-        super((state) -> growsDownward(state) ? VineLikeFeatures.STALAGNATE_CEIL : VineLikeFeatures.STALAGNATE_FLOOR);
+        super((BlockState state) -> growsDownward(state)
+                ? NetherTrees.STALAGNATE_DOWN
+                : NetherTrees.STALAGNATE);
         this.registerDefaultState(getStateDefinition().any().setValue(TOP, true));
     }
 
@@ -93,11 +95,11 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
     }
 
     @Override
-    protected BCLFeature getFeature(BlockState state) {
+    protected BCLConfigureFeature getConfiguredFeature(BlockState state) {
         if (growsDownward(state)) {
-            return VineLikeFeatures.STALAGNATE_CEIL;
+            return NetherTrees.STALAGNATE_DOWN;
         } else {
-            return VineLikeFeatures.STALAGNATE_FLOOR;
+            return NetherTrees.STALAGNATE;
         }
     }
 }

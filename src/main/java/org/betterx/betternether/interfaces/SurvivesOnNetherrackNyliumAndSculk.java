@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 
-public interface SurvivesOnNetherrackAndNylium extends SurvivesOnTags {
-    List<TagKey<Block>> TAGS = List.of(CommonBlockTags.NETHERRACK, BlockTags.NYLIUM
+public interface SurvivesOnNetherrackNyliumAndSculk extends SurvivesOnTags {
+    List<TagKey<Block>> TAGS = List.of(CommonBlockTags.NETHERRACK, BlockTags.NYLIUM, CommonBlockTags.SCULK_LIKE
     );
 
     @Override
@@ -18,3 +18,4 @@ public interface SurvivesOnNetherrackAndNylium extends SurvivesOnTags {
         return TAGS;
     }
 }
+

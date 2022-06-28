@@ -3,7 +3,7 @@ package org.betterx.betternether.blocks;
 import org.betterx.bclib.blocks.FeatureSaplingBlock;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.interfaces.SurvivesOnNetherMycelium;
-import org.betterx.betternether.registry.features.TreeFeatures;
+import org.betterx.betternether.registry.features.configured.NetherTrees;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BlockMushroomFirSapling extends FeatureSaplingBlock implements BonemealableBlock, SurvivesOnNetherMycelium {
 
     public BlockMushroomFirSapling() {
-        super((state) -> TreeFeatures.MUSHROOM_FIR);
+        super((BlockState state) -> NetherTrees.MUSHROOM_FIR);
     }
 
     @Override

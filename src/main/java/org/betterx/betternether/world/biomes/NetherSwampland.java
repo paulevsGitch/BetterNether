@@ -4,12 +4,11 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
-import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
+import org.betterx.bclib.api.v2.levelgen.surface.rules.RoughNoiseCondition;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.SoundsRegistry;
-import org.betterx.betternether.registry.features.BiomeFeatures;
-import org.betterx.betternether.registry.features.TerrainFeatures;
+import org.betterx.betternether.registry.features.placed.*;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -18,6 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
 public class NetherSwampland extends NetherBiome {
@@ -35,15 +35,24 @@ public class NetherSwampland extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .structure(BiomeTags.HAS_BASTION_REMNANT)
                    .structure(BiomeTags.HAS_NETHER_FORTRESS)
-                   .feature(BiomeFeatures.NETHER_SWAMPLAND_FLOOR)
-                   .feature(BiomeFeatures.NETHER_SWAMPLAND_CEIL)
-                   .feature(BiomeFeatures.NETHER_SWAMPLAND_WALL)
+                   .feature(NetherVegetationPlaced.NETHER_REED)
+                   .feature(NetherTreesPlaced.WILLOW_TREE)
+                   .feature(NetherVegetationPlaced.WILLOW_BUSH)
+                   .feature(NetherVegetationPlaced.BLACK_BUSH_SPARSE)
+                   .feature(NetherObjectsPlaced.STALAGMITE)
+                   .feature(NetherVegetationPlaced.VEGETATION_SWAMPLAND)
+                   .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
+                   .feature(NetherObjectsPlaced.SMOKER)
+                   .feature(NetherVinesPlaced.BLACK_VINE)
+                   .feature(NetherVinesPlaced.BLOOMING_VINE)
+                   .feature(NetherObjectsPlaced.STALACTITE)
+                   .feature(NetherVegetationPlaced.WALL_MUSHROOMS_WITH_MOSS)
             ;
             this.addCustomSwamplandBuildData(builder);
         }
 
         protected void addCustomSwamplandBuildData(BCLBiomeBuilder builder) {
-            builder.feature(TerrainFeatures.LAVA_SWAMP);
+            builder.feature(NetherTerrainPlaced.LAVA_SWAMP);
         }
 
         @Override
@@ -73,15 +82,15 @@ public class NetherSwampland extends NetherBiome {
                             SurfaceRules.ifTrue(
                                     SurfaceRules.ON_FLOOR,
                                     SurfaceRules.ifTrue(
-                                            Conditions.NETHER_VOLUME_NOISE_LARGE,
+                                            new RoughNoiseCondition(Noises.NETHERRACK, 0.14),
                                             SurfaceRules.state(NetherBlocks.SWAMPLAND_GRASS.defaultBlockState())
                                     )
                             ),
                             SurfaceRules.ifTrue(
-                                    Conditions.NETHER_SURFACE_NOISE_LARGE,
-                                    NetherGrasslands.SOUL_SOIL
+                                    new RoughNoiseCondition(Noises.NETHER_WART, 0.19),
+                                    NetherGrasslands.SOUL_SAND
                             ),
-                            NetherGrasslands.SOUL_SAND
+                            NetherGrasslands.SOUL_SOIL
                     ));
         }
     }

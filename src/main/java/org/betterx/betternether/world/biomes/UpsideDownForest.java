@@ -5,55 +5,22 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder.BiomeSupplier;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
-import org.betterx.bclib.api.v2.levelgen.surface.rules.SurfaceNoiseCondition;
-import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
-import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.MHelper;
+import org.betterx.bclib.api.v2.levelgen.surface.rules.RoughNoiseCondition;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTreesPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVinesPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
-import com.mojang.serialization.Codec;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
-
-class UpsideDownFloorCondition extends SurfaceNoiseCondition {
-    public static final UpsideDownFloorCondition DEFAULT = new UpsideDownFloorCondition();
-    public static final Codec<UpsideDownFloorCondition> CODEC = Codec.BYTE.fieldOf("nether_noise")
-                                                                          .xmap(
-                                                                                  UpsideDownFloorCondition::create,
-                                                                                  obj -> (byte) 0
-                                                                          )
-                                                                          .codec();
-    private static final KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> KEY_CODEC = KeyDispatchDataCodec.of(
-            CODEC);
-
-    private static UpsideDownFloorCondition create(byte dummy) {
-        return DEFAULT;
-    }
-
-    @Override
-    public KeyDispatchDataCodec<? extends SurfaceRules.ConditionSource> codec() {
-        return UpsideDownFloorCondition.KEY_CODEC;
-    }
-
-    @Override
-    public boolean test(SurfaceRulesContextAccessor context) {
-        return MHelper.RANDOM.nextInt(3) == 0;
-    }
-
-    static {
-        Registry.register(Registry.CONDITION, BetterNether.makeID("upside_down_floor"), UpsideDownFloorCondition.CODEC);
-    }
-}
 
 public class UpsideDownForest extends NetherBiome {
     static final SurfaceRules.RuleSource CEILEING_MOSS = SurfaceRules.state(NetherBlocks.CEILING_MUSHROOMS.defaultBlockState());
@@ -77,9 +44,20 @@ public class UpsideDownForest extends NetherBiome {
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .structure(BiomeTags.HAS_NETHER_FOSSIL)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
-                   .feature(BiomeFeatures.UPSIDE_DOWN_FORREST_FLOOR)
-                   .feature(BiomeFeatures.UPSIDE_DOWN_FORREST_CEIL)
-                   .feature(BiomeFeatures.UPSIDE_DOWN_FORREST_WALL)
+                   .feature(NetherTreesPlaced.ANCHOR_TREE)
+                   .feature(NetherTreesPlaced.SAKURA_TREE)
+                   .feature(NetherTreesPlaced.ANCHOR_TREE_BRANCH)
+                   .feature(NetherTreesPlaced.ANCHOR_TREE_ROOT)
+                   .feature(NetherObjectsPlaced.FOREST_LITTER)
+                   .feature(NetherObjectsPlaced.STALAGMITE)
+                   .feature(NetherVegetationPlaced.SAKURA_BUSH)
+                   .feature(NetherVegetationPlaced.MOSS_COVER)
+                   .feature(NetherVinesPlaced.NEON_EQUISETUM)
+                   .feature(NetherVinesPlaced.WHISPERING_GOURD_VINE)
+                   .feature(NetherVegetationPlaced.HOOK_MUSHROOM)
+                   .feature(NetherObjectsPlaced.STALACTITE)
+                   .feature(NetherVegetationPlaced.WALL_LUCIS)
+                   .feature(NetherVegetationPlaced.WALL_UPSIDE_DOWN)
                    .vertical()
                    .genChance(0.25f);
         }
@@ -121,9 +99,10 @@ public class UpsideDownForest extends NetherBiome {
                     SurfaceRules.ifTrue(
                             SurfaceRules.ON_FLOOR,
                             SurfaceRules.sequence(SurfaceRules.ifTrue(
-                                    UpsideDownFloorCondition.DEFAULT,
+                                    new RoughNoiseCondition(Noises.NETHERRACK, 0.021),
                                     NETHERRACK_MOSS
-                            ), NETHERRACK)
+                            ), SurfaceRules.state(
+                                    NetherBlocks.MUSHROOM_GRASS.defaultBlockState()))
                     )
             );
         }

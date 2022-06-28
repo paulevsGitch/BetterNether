@@ -10,18 +10,22 @@ import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
 import org.betterx.bclib.api.v3.levelgen.features.BlockPredicates;
 import org.betterx.betternether.BN;
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
-import org.betterx.betternether.registry.features.NetherFeatures;
+import org.betterx.betternether.registry.NetherFeatures;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SculkShriekerBlock;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
+import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class NetherObjects {
@@ -162,6 +166,32 @@ public class NetherObjects {
             .tries(18)
             .spreadXZ(4)
             .spreadY(3)
+            .buildAndRegister();
+    public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> WART_DEADWOOD = BCLFeatureBuilder
+            .startWithTemplates(BN.id("war_deadwood"))
+            .add(BetterNether.makeID("trees/wart_root_01"), -0, StructurePlacementType.FLOOR, 1.0f)
+            .add(BetterNether.makeID("trees/wart_root_02"), -0, StructurePlacementType.FLOOR, 1.0f)
+            .add(BetterNether.makeID("trees/wart_root_03"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BetterNether.makeID("trees/wart_fallen_log"), 0, StructurePlacementType.FLOOR, 1.0f)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> SCULK_HIDDEN = BCLFeatureBuilder
+            .startWeighted(BN.id("sculk_hidden"))
+            .add(Blocks.SCULK_CATALYST, 30)
+            .add(Blocks.SCULK_SHRIEKER.defaultBlockState().setValue(SculkShriekerBlock.CAN_SUMMON, true), 10)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<SimpleBlockFeature, SimpleBlockConfiguration> SCULK_TOP = BCLFeatureBuilder
+            .start(BN.id("sculk_top"), Blocks.SCULK_SENSOR)
+            .buildAndRegister();
+
+    public static final BCLConfigureFeature<TemplateFeature<TemplateFeatureConfig>, TemplateFeatureConfig> FOREST_LITTER = BCLFeatureBuilder
+            .startWithTemplates(BN.id("forest_litter"))
+            .add(BN.id("upside_down_forest/tree_fallen"), 1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("upside_down_forest/tree_needle"), 1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("upside_down_forest/tree_root"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("upside_down_forest/tree_stump"), -1, StructurePlacementType.FLOOR, 1.0f)
+            .add(BN.id("upside_down_forest/tree_small_branch"), 1, StructurePlacementType.FLOOR, 1.0f)
             .buildAndRegister();
 
     public static void ensureStaticInitialization() {

@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 
-public interface SurvivesOnSouldGround extends SurvivesOnTags {
+public interface SurvivesOnSoulGround extends SurvivesOnTags {
     List<TagKey<Block>> TAGS = List.of(CommonBlockTags.SOUL_GROUND);
 
     @Override

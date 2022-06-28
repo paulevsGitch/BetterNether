@@ -35,7 +35,7 @@ public class NetherBoneReef extends NetherBiome {
                    .feature(NetherTerrainPlaced.LAVA_PITS_SPARSE)
                    .feature(NetherVegetationPlaced.NETHER_REED)
                    .feature(NetherObjectsPlaced.BONES)
-                   .feature(NetherObjectsPlaced.BONE_STALACMITE)
+                   .feature(NetherObjectsPlaced.BONE_STALAGMITE)
                    .feature(NetherVegetationPlaced.VEGETATION_BONE_REEF)
                    .feature(NetherVegetationPlaced.JELLYFISH_MUSHROOM)
                    .feature(NetherVinesPlaced.LUMABUS_VINE)

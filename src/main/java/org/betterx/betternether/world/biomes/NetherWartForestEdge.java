@@ -8,7 +8,9 @@ import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
 import org.betterx.betternether.registry.NetherEntities;
 import org.betterx.betternether.registry.NetherFeatures;
-import org.betterx.betternether.registry.features.BiomeFeatures;
+import org.betterx.betternether.registry.features.placed.NetherObjectsPlaced;
+import org.betterx.betternether.registry.features.placed.NetherTerrainPlaced;
+import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
@@ -34,7 +36,11 @@ public class NetherWartForestEdge extends NetherBiome {
                    .mood(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD)
                    .music(SoundEvents.MUSIC_BIOME_CRIMSON_FOREST)
                    .feature(NetherFeatures.NETHER_RUBY_ORE)
-                   .feature(BiomeFeatures.NETHER_WART_FORREST_EDGE_FLOOR);
+                   .feature(NetherTerrainPlaced.REPLACE_SOUL_SANDSTONE)
+                   .feature(NetherObjectsPlaced.BASALT_STALAGMITE)
+                   .feature(NetherVegetationPlaced.BLACK_BUSH)
+                   .feature(NetherVegetationPlaced.VEGETATION_WART_FOREST_EDGE)
+            ;
         }
 
         @Override
