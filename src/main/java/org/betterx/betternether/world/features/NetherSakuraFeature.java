@@ -105,14 +105,12 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
                 for (int z = -7; z <= 7; z++) {
                     if (x == 0 && y == 0 && z == 0) continue;
                     final int dist = Math.abs(x) + Math.abs(y) + Math.abs(z);
-                    if (dist <= 7) {
-                        final BlockPos blPos = bpos.offset(x, y, z);
-                        context.LOGS_DIST.merge(
-                                blPos,
-                                (byte) dist,
-                                (oldDist, newDist) -> (byte) Math.min(oldDist, dist)
-                        );
-                    }
+                    final BlockPos blPos = bpos.offset(x, y, z);
+                    context.LOGS_DIST.merge(
+                            blPos,
+                            (byte) dist,
+                            (oldDist, newDist) -> (byte) Math.min(oldDist, dist)
+                    );
                 }
             }
         }
@@ -120,22 +118,23 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
 
     private void updateDistances(ServerLevelAccessor world, StructureGeneratorThreadContext context) {
         for (Map.Entry<BlockPos, Byte> entry : context.LOGS_DIST.entrySet()) {
-            final int dist = entry.getValue();
+            int dist = entry.getValue();
             final BlockPos logPos = entry.getKey();
 
             BlockState currentState = world.getBlockState(logPos);
             if (currentState.hasProperty(BlockStateProperties.DISTANCE)) {
                 int cDist = currentState.getValue(BlockStateProperties.DISTANCE);
-                if (dist < cDist) {
+                if (dist < cDist && dist <= 7) {
                     BlocksHelper.setWithoutUpdate(
                             world,
                             logPos,
                             currentState.setValue(BlockStateProperties.DISTANCE, dist)
                     );
-                    cDist = dist;
+                } else {
+                    dist = cDist;
                 }
 
-                if (cDist >= 7) {
+                if (dist > 7) {
                     BlocksHelper.setWithoutUpdate(world, logPos, Blocks.AIR.defaultBlockState());
                 }
             }
@@ -169,6 +168,7 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
                 }
             }
         }
+
         BlockState state;
         for (int cy = 0; cy <= height; cy++) {
             r2 = radius * (1 - (double) cy / height);
