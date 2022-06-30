@@ -1,17 +1,16 @@
 {
-	"required": true,
-	"package": "org.betterx.betternether.mixin.client",
-	"compatibilityLevel": "JAVA_17",
-	"client": [
-      "BackgroundRenderMixin",
-      "LavaFluidMixin",
-      "MinecraftClientMixin",
-      "PlayerArmorMixin",
-      "RenderLayerMixin",
-      "StandArmorMixin",
-      "TexturedModelDataMixin"
-    ],
-	"injectors": {
-		"defaultRequire": 1
-	}
+  "required": true,
+  "package": "org.betterx.betternether.mixin.client",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "LavaFluidMixin",
+    "MinecraftClientMixin",
+    "PlayerArmorMixin",
+    "RenderLayerMixin",
+    "StandArmorMixin",
+    "TexturedModelDataMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
