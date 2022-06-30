@@ -246,6 +246,7 @@ public class NetherVegetation {
             .add(NetherBlocks.WALL_MOSS, 20)
             .allHorizontal()
             .inlinePlace()
+            .is(BlockPredicate.solid())
             .inRandomPatch(BN.id("patch_wall_mushroom_red_with_moss"))
             .tries(120)
             .spreadXZ(4)
@@ -259,7 +260,7 @@ public class NetherVegetation {
             .add(NetherBlocks.WALL_MOSS, 20)
             .allHorizontal()
             .inlinePlace()
-            .isEmpty()
+            .is(BlockPredicate.solid())
             .inRandomPatch(BN.id("patch_wall_mushrooms_with_moss"))
             .tries(120)
             .spreadXZ(4)
@@ -272,12 +273,13 @@ public class NetherVegetation {
             .add(NetherBlocks.WALL_MUSHROOM_BROWN, 15)
             .allHorizontal()
             .inlinePlace()
-            .isEmpty()
+            .is(BlockPredicate.solid())
             .inRandomPatch(BN.id("patch_wall_mushrooms"))
             .tries(120)
             .spreadXZ(4)
             .spreadY(7)
             .buildAndRegister();
+
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_WALL_JUNGLE = BCLFeatureBuilder
             .startFacing(BN.id("temp_wall_jungle"))
@@ -287,10 +289,9 @@ public class NetherVegetation {
             .add(NetherBlocks.WALL_MOSS, 40)
             .allHorizontal()
             .inlinePlace()
-            .isEmpty()
             .inRandomPatch(BN.id("patch_wall_jungle"))
             .tries(120)
-            .spreadXZ(4)
+            .spreadXZ(7)
             .spreadY(7)
             .buildAndRegister();
 
@@ -301,7 +302,7 @@ public class NetherVegetation {
             .add(NetherBlocks.JUNGLE_MOSS, 90)
             .allHorizontal()
             .inlinePlace()
-            .isEmpty()
+            .is(BlockPredicate.solid())
             .inRandomPatch(BN.id("patch_upside_down"))
             .tries(120)
             .spreadXZ(4)

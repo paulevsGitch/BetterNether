@@ -33,7 +33,7 @@ public class NetherObjectsPlaced {
             .place()
             .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
             .vanillaNetherGround(1)
-            .onceEvery(2)
+            .onceEvery(4)
             .buildAndRegister();
 
     public static final BCLFeature<Feature<NoneFeatureConfiguration>, NoneFeatureConfiguration> OBSIDIAN_CRYSTAL = NetherObjects

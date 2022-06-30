@@ -176,7 +176,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_MUSHROOM_RED_WITH_MOSS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherWall(5)
+            .betterNetherInWall(25)
             .isEmpty()
             .buildAndRegister();
 
@@ -184,7 +184,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_MUSHROOMS_WITH_MOSS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherWall(5)
+            .betterNetherInWall(25)
             .isEmpty()
             .buildAndRegister();
 
@@ -192,7 +192,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_MUSHROOMS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherWall(5)
+            .betterNetherInWall(25)
             .isEmpty()
             .buildAndRegister();
 
@@ -200,15 +200,14 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_JUNGLE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherWall(5)
-            .isEmpty()
+            .betterNetherInWall(50)
             .buildAndRegister();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_UPSIDE_DOWN = NetherVegetation
             .PATCH_WALL_UPSIDE_DOWN
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherWall(5)
+            .betterNetherInWall(50)
             .isEmpty()
             .buildAndRegister();
 
@@ -216,7 +215,7 @@ public class NetherVegetationPlaced {
             .PATCH_WALL_LUCIS
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherWall(5)
+            .betterNetherOnWall(5)
             .onceEvery(2)
             .isEmpty()
             .buildAndRegister();

@@ -1,6 +1,5 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.blocks.materials.Materials;
 
@@ -36,7 +35,7 @@ public class BlockPlantWall extends BlockBaseNotFull {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockPlantWall(MaterialColor color) {
-        super(Materials.makeGrass(color));
+        super(Materials.makeGrass(color).offsetType(OffsetType.NONE));
         this.setRenderLayer(BNRenderLayer.CUTOUT);
     }
 
@@ -56,11 +55,11 @@ public class BlockPlantWall extends BlockBaseNotFull {
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         Direction direction = state.getValue(FACING);
-        BlockPos blockPos = pos.relative(direction.getOpposite());
-        BlockState blockState = world.getBlockState(blockPos);
-        return blockState.is(CommonBlockTags.TERRAIN); //blockState.isFaceSturdy(world, blockPos, direction);
+        BlockPos targetPos = pos.relative(direction.getOpposite());
+        BlockState targetState = level.getBlockState(targetPos);
+        return targetState.isFaceSturdy(level, targetPos, direction);
     }
 
     @Override
