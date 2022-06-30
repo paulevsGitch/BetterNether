@@ -3,6 +3,7 @@ package org.betterx.betternether.registry.features.configured;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v3.levelgen.features.BCLConfigureFeature;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeatureBuilder;
+import org.betterx.bclib.api.v3.levelgen.features.blockpredicates.BlockPredicates;
 import org.betterx.bclib.api.v3.levelgen.features.config.PillarFeatureConfig;
 import org.betterx.bclib.api.v3.levelgen.features.config.TemplateFeatureConfig;
 import org.betterx.bclib.api.v3.levelgen.features.features.PillarFeature;
@@ -79,7 +80,7 @@ public class NetherTrees {
             .buildAndRegister();
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_GIANT_MOLD = GIANT_MOLD
             .place()
-            .isEmptyAndOnNetherGround()
+            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
             .inRandomPatch(BN.id("patch_giant_mold"))
             .tries(30)
             .spreadXZ(6)
@@ -94,7 +95,7 @@ public class NetherTrees {
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_BIG_RED_MUSHROOM = BIG_RED_MUSHROOM
             .place()
-            .isEmptyAndOnNetherGround()
+            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
             .inRandomPatch(BN.id("patch_big_red_mushroom"))
             .tries(30)
             .spreadXZ(6)
@@ -106,7 +107,7 @@ public class NetherTrees {
                     org.betterx.betternether.registry.NetherFeatures.BIG_BROWN_MUSHROOM
             )
             .inlinePlace()
-            .isEmptyAndOnNetherGround()
+            .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
             .inRandomPatch(BN.id("patch_big_brown_mushroom"))
             .likeDefaultNetherVegetation()
             .tries(30)

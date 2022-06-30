@@ -122,7 +122,7 @@ public class NetherObjects {
             .blockState(NetherBlocks.BASALT_STALACTITE)
             .maxHeight(BiasedToBottomInt.of(4, 11))
             .inlinePlace()
-            .isEmptyAndUnderNetherGround()
+            .isEmptyAndUnder(BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
             .inRandomPatch(BN.id("patch_basalt_stalactite"))
             .buildAndRegister();
 
@@ -132,7 +132,7 @@ public class NetherObjects {
             .blockState(NetherBlocks.BASALT_STALACTITE)
             .maxHeight(BiasedToBottomInt.of(3, 9))
             .inlinePlace()
-            .isEmptyAndOnNetherGround()
+            .isEmptyAndOn(BlockPredicates.ONLY_NETHER_GROUND_AND_BASALT)
             .inRandomPatch(BN.id("patch_basalt_stalagmite"))
             .buildAndRegister();
 
