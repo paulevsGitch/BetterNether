@@ -1,6 +1,5 @@
 package org.betterx.betternether;
 
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.betternether.blocks.BlockFarmland;
 
 import net.minecraft.core.BlockPos;
@@ -80,11 +79,11 @@ public class BlocksHelper {
     }
 
     public static boolean isNetherrack(BlockState state) {
-        return state.is(CommonBlockTags.NETHERRACK);
+        return state.is(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHERRACK);
     }
 
     public static boolean isSoulSand(BlockState state) {
-        return state.is(CommonBlockTags.SOUL_GROUND);
+        return state.is(org.betterx.worlds.together.tag.v3.CommonBlockTags.SOUL_GROUND);
     }
 
     public static boolean isNetherGround(BlockState state) {

@@ -1,9 +1,9 @@
 package org.betterx.betternether.blocks;
 
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
 import org.betterx.bclib.blocks.BaseOreBlock;
 import org.betterx.bclib.interfaces.CustomItemProvider;
 import org.betterx.bclib.interfaces.TagProvider;
+import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -41,7 +41,7 @@ public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemPro
     @Override
     public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
         blockTags.add(CommonBlockTags.NETHERRACK);
-        blockTags.add(org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_ORES);
+        blockTags.add(CommonBlockTags.NETHER_ORES);
     }
 
     @Override

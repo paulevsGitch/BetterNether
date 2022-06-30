@@ -1,8 +1,5 @@
 package org.betterx.betternether.world.features;
 
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
-import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
-import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -15,20 +12,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.dimension.DimensionDefaults;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.phys.Vec3;
 
 public class CrystalFeature extends NetherSurfaceFeature {
-    public static BCLFeature createAndRegister() {
-        return BCLFeatureBuilder.start(BetterNether.makeID("old_nether_crystal"), new CrystalFeature())
-                                .decoration(GenerationStep.Decoration.LOCAL_MODIFICATIONS)
-                                .onceEvery(1)
-                                .squarePlacement()
-                                .randomHeight10FromFloorCeil()
-                                .onlyInBiome()
-                                .buildAndRegister();
-    }
-
     private static final Block[] PALETTES = new Block[]{
             NetherBlocks.OBSIDIAN_GLASS,
             Blocks.OBSIDIAN,

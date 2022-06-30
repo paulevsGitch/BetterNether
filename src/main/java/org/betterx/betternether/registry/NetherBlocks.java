@@ -1,7 +1,5 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
-import org.betterx.bclib.api.v2.tag.CommonItemTags;
 import org.betterx.bclib.blocks.BaseLadderBlock;
 import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.bclib.registry.BlockRegistry;
@@ -12,6 +10,8 @@ import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.recipes.RecipesHelper;
 import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.betternether.tab.CreativeTabs;
+import org.betterx.worlds.together.tag.v3.CommonBlockTags;
+import org.betterx.worlds.together.tag.v3.CommonItemTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.resources.ResourceLocation;

@@ -3,7 +3,6 @@ package org.betterx.betternether.registry;
 import org.betterx.bclib.api.v2.LifeCycleAPI;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
-import org.betterx.bclib.api.v2.levelgen.features.features.ScatterFeature;
 import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v2.levelgen.structures.StructureWorldNBT;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
@@ -120,12 +119,6 @@ public class NetherFeatures {
             new TwistedVinesFeature()
     );
     private static final List<BCLFeature> defaultFeatures = Lists.newArrayList();
-
-    // Surface Features //
-    public static final Feature<ScatterFeatureConfigs.WithSize> SCATTER_WITH_SIZE = BCLFeature.register(
-            BetterNether.makeID("scatter_with_size"),
-            new ScatterFeature<>(ScatterFeatureConfigs.WithSize.CODEC)
-    );
 
 
     // Ores //
