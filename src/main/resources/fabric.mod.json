@@ -40,7 +40,7 @@
     "bclib": "2.0.x"
   },
   "breaks": {
-    "bclib": "<2.0.5"
+    "bclib": "<2.0.6"
   },
   "custom": {
     "extrapieces:piecepack": "extrapieces.betternether.json",
