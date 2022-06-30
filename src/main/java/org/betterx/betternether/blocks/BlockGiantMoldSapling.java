@@ -45,7 +45,7 @@ public class BlockGiantMoldSapling extends BlockBaseNotFull implements Bonemeala
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return canSurviveOnTop(state, level, pos);
+        return canSurviveOnTop(level, pos);
     }
 
     @Override

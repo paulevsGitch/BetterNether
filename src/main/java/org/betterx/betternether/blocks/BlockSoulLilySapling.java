@@ -15,6 +15,6 @@ public class BlockSoulLilySapling extends BaseBlockCommonSapling implements Surv
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(state, world, pos);
+        return canSurviveOnTop(world, pos);
     }
 }

@@ -1,6 +1,7 @@
 package org.betterx.betternether.blocks;
 
 import org.betterx.betternether.config.Configs;
+import org.betterx.betternether.interfaces.SurvivesOnNetherGround;
 import org.betterx.betternether.registry.NetherEntities;
 
 import net.minecraft.core.BlockPos;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,7 +37,7 @@ import net.fabricmc.api.Environment;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockEggPlant extends BlockCommonPlant {
+public class BlockEggPlant extends BlockCommonPlant implements SurvivesOnNetherGround {
     private static final VoxelShape SHAPE = box(0, 0, 0, 16, 8, 16);
     public static final BooleanProperty DESTRUCTED = BNBlockProperties.DESTRUCTED;
 
@@ -53,6 +55,11 @@ public class BlockEggPlant extends BlockCommonPlant {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
         super.createBlockStateDefinition(stateManager);
         stateManager.add(DESTRUCTED);
+    }
+
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+        return canSurviveOnTop(world, pos);
     }
 
     @Override

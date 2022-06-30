@@ -29,13 +29,12 @@ public class BlockOrangeMushroom extends BlockCommonPlant implements SurvivesOnN
                                  .sounds(SoundType.CROP)
                                  .noOcclusion()
                                  .destroyTime(0.5F)
-                                 .randomTicks()
                                  .noCollission());
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(state, world, pos);
+        return canSurviveOnTop(world, pos);
     }
 
     @Override

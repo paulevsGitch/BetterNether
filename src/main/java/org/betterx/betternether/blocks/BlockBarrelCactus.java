@@ -47,16 +47,15 @@ public class BlockBarrelCactus extends BlockCommonPlant implements AddMineableSh
                                  .sounds(SoundType.WOOL)
                                  .noOcclusion()
                                  .destroyTime(0.4F)
-                                 .randomTicks()
                                  .instabreak()
                                  .dynamicShape()
-                                 .offsetType(Block.OffsetType.XYZ)
+                                 .offsetType(Block.OffsetType.XZ)
         );
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(state, world, pos);
+        return canSurviveOnTop(world, pos);
     }
 
     @Override

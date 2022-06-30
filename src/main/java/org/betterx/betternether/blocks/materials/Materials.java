@@ -1,6 +1,9 @@
 package org.betterx.betternether.blocks.materials;
 
+import org.betterx.bclib.blocks.BasePlantBlock;
+
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
@@ -22,13 +25,11 @@ public class Materials {
                                   .hardness(1);
     }
 
-    public static FabricBlockSettings makeGrass(MaterialColor color) {
-        return FabricBlockSettings.of(NETHER_GRASS)
-                                  .allowsSpawning((state, world, pos, type) -> true)
-                                  .sounds(SoundType.GRASS)
-                                  .mapColor(color)
-                                  .noCollision()
-                                  .nonOpaque()
-                                  .breakInstantly();
+    public static BlockBehaviour.Properties makeGrass(MaterialColor color) {
+        return BasePlantBlock.basePlantSettings(NETHER_GRASS, 0)
+                             .isValidSpawn((state, world, pos, type) -> true)
+                             .color(color)
+                             .noOcclusion()
+                             .instabreak();
     }
 }

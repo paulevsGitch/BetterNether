@@ -12,17 +12,13 @@ import net.minecraft.world.level.material.MaterialColor;
 public class BlockHookMushroom extends BaseBlockMold implements SurvivesOnNetherrack {
     public BlockHookMushroom() {
         super(Materials.makeGrass(MaterialColor.COLOR_PINK)
-                       .luminance(13)
-                       .sounds(SoundType.CROP)
-                       .noOcclusion()
-                       .noCollission()
-                       .instabreak()
-                       .randomTicks()
+                       .lightLevel(s -> 13)
+                       .sound(SoundType.CROP)
         );
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnBottom(state, world, pos);
+        return canSurviveOnBottom(world, pos);
     }
 }

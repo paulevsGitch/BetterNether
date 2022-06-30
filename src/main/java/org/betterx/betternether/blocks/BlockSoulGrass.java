@@ -14,8 +14,8 @@ import net.fabricmc.api.Environment;
 
 public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSoulGroundAndSculk {
     @Override
-    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(state, world, pos);
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return canSurviveOnTop(level, pos);
     }
 
     @Environment(EnvType.CLIENT)
@@ -31,5 +31,10 @@ public class BlockSoulGrass extends BaseBlockNetherGrass implements SurvivesOnSo
                     random.nextDouble() * 0.05
             );
         }
+    }
+
+    @Override
+    public boolean isTerrain(BlockState state) {
+        return SurvivesOnSoulGroundAndSculk.super.isTerrain(state);
     }
 }

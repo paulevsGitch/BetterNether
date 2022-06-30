@@ -46,7 +46,6 @@ public class BlockAgave extends BlockCommonPlant implements AddMineableShears, A
                                  .noOcclusion()
                                  .noCollission()
                                  .destroyTime(0.4F)
-                                 .randomTicks()
                                  .instabreak()
                                  .offsetType(Block.OffsetType.XZ)
         );
@@ -90,6 +89,6 @@ public class BlockAgave extends BlockCommonPlant implements AddMineableShears, A
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(state, world, pos);
+        return canSurviveOnTop(world, pos);
     }
 }

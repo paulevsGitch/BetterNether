@@ -84,7 +84,7 @@ public class BlockWartSeed extends BlockBaseNotFull implements BonemealableBlock
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         Direction direction = state.getValue(FACING);
         BlockPos blockPos = pos.relative(direction.getOpposite());
-        return canSupportCenter(world, blockPos, direction) || canSurviveOnTop(state, world, pos);
+        return canSupportCenter(world, blockPos, direction) || canSurviveOnTop(world, pos);
     }
 
     @Override

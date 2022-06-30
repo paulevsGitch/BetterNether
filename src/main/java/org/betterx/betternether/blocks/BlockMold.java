@@ -13,7 +13,6 @@ import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,13 +32,9 @@ public class BlockMold extends BaseBlockMold implements SurvivesOnNetherMycelium
         super(color);
     }
 
-    public BlockMold(Properties settings) {
-        super(settings);
-    }
-
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(state, world, pos);
+        return canSurviveOnTop(world, pos);
     }
 }
 
@@ -50,12 +45,8 @@ class BaseBlockMold extends BlockBaseNotFull {
 
     public BaseBlockMold(MaterialColor color, Function<Properties, Properties> adaptProperties) {
         super(adaptProperties.apply(Materials.makeGrass(color)
-                                             .sounds(SoundType.CROP)
-                                             .noOcclusion()
-                                             .noCollission()
-                                             .instabreak()
-                                             .randomTicks()
-                                             .offsetType(Block.OffsetType.XZ)));
+                                             .sound(SoundType.CROP))
+        );
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
     }

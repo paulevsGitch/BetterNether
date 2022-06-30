@@ -45,7 +45,7 @@ public abstract class BlockCommonPlant extends BlockBaseNotFull implements Bonem
     }
 
     public BlockCommonPlant(Properties settings) {
-        super(settings);
+        super(settings.randomTicks());
         this.setRenderLayer(BNRenderLayer.CUTOUT);
         this.setDropItself(false);
     }
@@ -64,9 +64,7 @@ public abstract class BlockCommonPlant extends BlockBaseNotFull implements Bonem
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return BlocksHelper.isNetherGround(world.getBlockState(pos.below()));
-    }
+    public abstract boolean canSurvive(BlockState state, LevelReader world, BlockPos pos);
 
     @Override
     public BlockState updateShape(

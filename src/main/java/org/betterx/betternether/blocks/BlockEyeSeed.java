@@ -58,7 +58,7 @@ public class BlockEyeSeed extends BlockBaseNotFull implements BonemealableBlock,
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return canSurviveOnBottom(state, level, pos);
+        return canSurviveOnBottom(level, pos);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.betterx.betternether.blocks;
 
+import org.betterx.bclib.blocks.BasePlantBlock;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.interfaces.SurvivesOnNetherrackNyliumAndSculk;
 
@@ -29,18 +30,21 @@ import java.util.List;
 public class BlockNetherGrass extends BaseBlockNetherGrass implements SurvivesOnNetherrackNyliumAndSculk {
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(state, world, pos);
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return canSurviveOnTop(level, pos);
+    }
+
+    @Override
+    public boolean isTerrain(BlockState state) {
+        return SurvivesOnNetherrackNyliumAndSculk.super.isTerrain(state);
     }
 }
 
-class BaseBlockNetherGrass extends BlockBase {
-    private static final VoxelShape SHAPE = box(2, 0, 2, 14, 12, 14);
+abstract class BaseBlockNetherGrass extends BasePlantBlock {
+    private static final VoxelShape SHAPE = box(4, 0, 4, 14, 12, 14);
 
     public BaseBlockNetherGrass() {
-        super(Materials.makeGrass(MaterialColor.TERRACOTTA_GRAY).randomTicks().offsetType(Block.OffsetType.XZ));
-        this.setRenderLayer(BNRenderLayer.CUTOUT);
-        this.setDropItself(false);
+        super(Materials.makeGrass(MaterialColor.TERRACOTTA_GRAY).offsetType(Block.OffsetType.XZ));
     }
 
     @Environment(EnvType.CLIENT)

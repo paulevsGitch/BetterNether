@@ -51,7 +51,7 @@ public class BlockSoulVein extends BlockBaseNotFull implements BonemealableBlock
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return canSurviveOnTop(state, world, pos);
+        return canSurviveOnTop(world, pos);
     }
 
     @Override
