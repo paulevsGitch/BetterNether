@@ -55,6 +55,11 @@ public class FloodedDeltas extends NetherBiome {
         }
 
         @Override
+        public boolean hasNetherCity() {
+            return false;
+        }
+
+        @Override
         public SurfaceRuleBuilder surface() {
             return super
                     .surface()

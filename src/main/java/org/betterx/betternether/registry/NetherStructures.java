@@ -1,6 +1,5 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.bclib.api.v2.levelgen.structures.BCLStructure;
 import org.betterx.bclib.api.v2.levelgen.structures.BCLStructureBuilder;
@@ -118,9 +117,5 @@ public class NetherStructures {
         }
     }
 
-
-    public static void addDefaultStructures(BCLBiomeBuilder builder) {
-        builder.structure(CITY_STRUCTURE);
-    }
 
 }

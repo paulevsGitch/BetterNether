@@ -120,7 +120,8 @@ public class NetherBiomeBuilder {
         NetherFeatures.addDefaultFeatures(builder);
 
         if (data.hasDefaultOres()) NetherFeatures.addDefaultOres(builder);
-        NetherStructures.addDefaultStructures(builder);
+        if (data.hasNetherCity()) builder.structure(NetherStructures.CITY_STRUCTURE);
+
 
         data.addCustomBuildData(builder);
 
