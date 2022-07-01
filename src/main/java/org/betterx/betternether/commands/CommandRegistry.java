@@ -1,24 +1,20 @@
 package org.betterx.betternether.commands;
 
-import org.betterx.bclib.BCLib;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
-import org.betterx.bclib.api.v2.levelgen.structures.StructurePlacementType;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
 import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
 import org.betterx.betternether.registry.NetherBiomes;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
-import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
-import org.betterx.betternether.world.structures.NetherStructureWorld;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
@@ -76,10 +72,7 @@ public class CommandRegistry {
             (object) -> {
                 return Component.literal("The next biome (" + object + ") was not found.");
             });
-    private static final DynamicCommandExceptionType ERROR_NBT_STRUCTURE_NOT_FOUND = new DynamicCommandExceptionType(
-            (object) -> {
-                return Component.literal("The nbt-structure (" + object + ") was not found.");
-            });
+
 
     private static final int MAX_SEARCH_RADIUS = 6400 * 2;
     private static final int SAMPLE_RESOLUTION_HORIZONTAL = 32;
@@ -94,9 +87,12 @@ public class CommandRegistry {
             CommandBuildContext commandBuildContext,
             Commands.CommandSelection commandSelection
     ) {
+        LiteralArgumentBuilder<CommandSourceStack> bnContext = Commands.literal("bn")
+                                                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS));
+
+        bnContext = PlaceCommand.register(bnContext);
         dispatcher.register(
-                Commands.literal("bn")
-                        .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
+                bnContext
                         .then(Commands.literal("test_place")
                                       .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
                                       .executes(ctx -> testPlace(ctx))
@@ -121,17 +117,6 @@ public class CommandRegistry {
                                                             StringArgumentType.getString(
                                                                     ctx,
                                                                     "type"
-                                                            )
-                                                    )))
-                        )
-                        .then(Commands.literal("place_nbt")
-                                      .requires(source -> source.hasPermission(Commands.LEVEL_OWNERS))
-                                      .then(Commands.argument("name", StringArgumentType.string())
-                                                    .executes(ctx -> placeNbt(
-                                                            ctx,
-                                                            StringArgumentType.getString(
-                                                                    ctx,
-                                                                    "name"
                                                             )
                                                     )))
                         )
@@ -259,31 +244,6 @@ public class CommandRegistry {
         final String bs = Registry.BLOCK.getKey(b)
                                         .getPath();
         return as.compareTo(bs);
-    }
-
-    private static int placeNbt(CommandContext<CommandSourceStack> ctx, String type) throws CommandSyntaxException {
-        final CommandSourceStack source = ctx.getSource();
-        final ServerPlayer player = source.getPlayerOrException();
-        Vec3 pos = source.getPosition();
-        final ServerLevel level = source.getLevel();
-        try {
-            NetherStructureWorld structure = new NetherStructureWorld(type, 0, StructurePlacementType.FLOOR);
-            if (structure == null) {
-                throw ERROR_NBT_STRUCTURE_NOT_FOUND.create(type);
-            }
-            structure.generate(
-                    level,
-                    new BlockPos(pos),
-                    MHelper.RANDOM,
-                    128,
-                    NetherChunkPopulatorFeature.generatorForThread().context
-            );
-        } catch (Throwable t) {
-            BCLib.LOGGER.error("Error loading from nbt: " + type);
-            BCLib.LOGGER.error(t.toString());
-            throw ERROR_NBT_STRUCTURE_NOT_FOUND.create(type);
-        }
-        return Command.SINGLE_SUCCESS;
     }
 
     private static int placeMapIdx = 0;
