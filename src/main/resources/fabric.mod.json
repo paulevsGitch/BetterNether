@@ -17,7 +17,7 @@
     "sources": "https://github.com/quiqueck/BetterNether/tree/snapshots",
     "issues": "https://github.com/quiqueck/BetterNether/issues"
   },
-  "license": "GPLv3",
+  "license": "MIT",
   "icon": "assets/betternether/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -40,7 +40,7 @@
     "bclib": "2.0.x"
   },
   "breaks": {
-    "bclib": "<2.0.7"
+    "bclib": "<2.0.10"
   },
   "custom": {
     "extrapieces:piecepack": "extrapieces.betternether.json",
