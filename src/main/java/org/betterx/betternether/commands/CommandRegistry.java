@@ -1,7 +1,6 @@
 package org.betterx.betternether.commands;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
-import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.bclib.api.v3.levelgen.features.BCLFeature;
 import org.betterx.betternether.BlocksHelper;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
@@ -182,7 +181,7 @@ public class CommandRegistry {
             ResourceOrTagLocationArgument.Result result = new ResourceOrTagLocationArgument.Result() {
                 @Override
                 public Either<ResourceKey, TagKey> unwrap() {
-                    return Either.left(BiomeAPI.getBiomeKey(biome.getBiome()));
+                    return Either.left(biome.getBiomeKey());
                 }
 
                 @Override
@@ -200,7 +199,7 @@ public class CommandRegistry {
                     return false;
                 }
             };
-            ResourceKey<Biome> a = BiomeAPI.getBiomeKey(biome.getBiome());
+            ResourceKey<Biome> a = biome.getBiomeKey();
             Holder<Biome> h = BuiltinRegistries.BIOME.getHolder(a).orElseThrow();
             return LocateCommand.showLocateResult(
                     source,
