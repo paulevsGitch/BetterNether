@@ -62,10 +62,4 @@ public class NetherMushroomForest extends NetherBiome {
     public NetherMushroomForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-        this.setNoiseDensity(0.5F);
-    }
-
 }

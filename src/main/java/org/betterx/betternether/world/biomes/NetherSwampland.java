@@ -98,8 +98,4 @@ public class NetherSwampland extends NetherBiome {
     public NetherSwampland(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-    }
 }

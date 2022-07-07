@@ -2,23 +2,64 @@ package org.betterx.betternether.world;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
-import org.betterx.betternether.config.Configs;
+import org.betterx.bclib.util.WeightedList;
 import org.betterx.betternether.noise.OpenSimplexNoise;
 import org.betterx.betternether.world.structures.IStructure;
 import org.betterx.betternether.world.structures.StructureGeneratorThreadContext;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Climate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public abstract class NetherBiome extends BCLBiome {
+public class NetherBiome extends BCLBiome {
+    public static final Codec<NetherBiome> CODEC = RecordCodecBuilder.create(instance ->
+            codecWithSettings(instance).apply(instance, NetherBiome::new)
+    );
+    public static final KeyDispatchDataCodec<NetherBiome> KEY_CODEC = KeyDispatchDataCodec.of(CODEC);
 
+    @Override
+    public KeyDispatchDataCodec<? extends BCLBiome> codec() {
+        return KEY_CODEC;
+    }
+
+    protected NetherBiome(
+            float terrainHeight,
+            float fogDensity,
+            float genChance,
+            int edgeSize,
+            boolean vertical,
+            Optional<ResourceLocation> edge,
+            ResourceLocation biomeID,
+            Optional<List<Climate.ParameterPoint>> parameterPoints,
+            Optional<ResourceLocation> biomeParent,
+            Optional<WeightedList<ResourceLocation>> subbiomes,
+            Optional<String> intendedType
+    ) {
+        super(
+                terrainHeight,
+                fogDensity,
+                genChance,
+                edgeSize,
+                vertical,
+                edge,
+                biomeID,
+                parameterPoints,
+                biomeParent,
+                subbiomes,
+                intendedType
+        );
+    }
 
     private static final OpenSimplexNoise SCATTER = new OpenSimplexNoise(1337);
     private static int structureID = 0;
@@ -39,16 +80,7 @@ public abstract class NetherBiome extends BCLBiome {
 
     protected NetherBiome(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
-
-
-        onInit();
-
-        final String group = configGroup();
-        setPlantDensity(Configs.BIOMES.getFloat(group, "plants_and_structures_density", getPlantDensity()));
-        setNoiseDensity(Configs.BIOMES.getFloat(group, "noise_density", getNoiseDensity()));
     }
-
-    protected abstract void onInit();
 
 
     public void setPlantDensity(float density) {

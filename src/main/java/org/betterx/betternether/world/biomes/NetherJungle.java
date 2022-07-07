@@ -83,9 +83,4 @@ public class NetherJungle extends NetherBiome {
     public NetherJungle(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-
-    }
 }

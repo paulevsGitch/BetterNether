@@ -81,8 +81,4 @@ public class CrimsonPinewood extends NetherBiome {
         super(biomeID, biome, settings);
     }
 
-    @Override
-    protected void onInit() {
-    }
-
 }

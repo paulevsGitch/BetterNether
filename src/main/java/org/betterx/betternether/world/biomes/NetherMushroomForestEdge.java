@@ -95,9 +95,4 @@ public class NetherMushroomForestEdge extends NetherBiome {
     public NetherMushroomForestEdge(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-    }
-
 }

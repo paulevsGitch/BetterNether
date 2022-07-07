@@ -130,10 +130,6 @@ public class NetherWartForest extends NetherBiome {
     }
 
     @Override
-    protected void onInit() {
-    }
-
-    @Override
     public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
         final MutableBlockPos POS = new MutableBlockPos();
         switch (random.nextInt(4)) {

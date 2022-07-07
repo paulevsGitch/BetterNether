@@ -70,9 +70,4 @@ public class OldWarpedWoods extends NetherBiome {
     public OldWarpedWoods(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-    }
-
 }

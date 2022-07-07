@@ -96,8 +96,4 @@ public class OldSwampland extends NetherBiome {
     public OldSwampland(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-    }
 }

@@ -60,9 +60,4 @@ public class NetherSulfuricBoneReef extends NetherBiome {
     public NetherSulfuricBoneReef(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-    }
-
 }

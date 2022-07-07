@@ -1,7 +1,9 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeRegistry;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.betternether.BN;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeBuilder;
@@ -95,6 +97,7 @@ public class NetherBiomes {
     public static final BCLBiome OLD_SWAMPLAND = registerSubBiome(Config.OLD_SWAMPLAND, NETHER_SWAMPLAND);
 
     public static void register() {
+        BCLBiomeRegistry.registerBiomeCodec(BN.id("biome"), NetherBiome.KEY_CODEC);
         BiomeAPI.registerNetherBiomeModification((biomeID, biome) -> {
             if (!biomeID.getNamespace().equals(BetterNether.MOD_ID)) {
                 NetherEntities.modifyNonBNBiome(biomeID, biome);

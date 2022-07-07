@@ -63,8 +63,4 @@ public class OldFungiwoods extends NetherBiome {
         super(biomeID, biome, settings);
     }
 
-    @Override
-    protected void onInit() {
-    }
-
 }

@@ -73,8 +73,4 @@ public class NetherGravelDesert extends NetherBiome {
     public NetherGravelDesert(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-    }
 }

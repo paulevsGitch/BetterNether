@@ -87,8 +87,4 @@ public class CrimsonGlowingWoods extends NetherBiome {
     public CrimsonGlowingWoods(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-    }
 }

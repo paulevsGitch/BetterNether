@@ -138,8 +138,4 @@ public class NetherGrasslands extends NetherBiome {
     public NetherGrasslands(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-    }
 }

@@ -112,8 +112,4 @@ public class UpsideDownForest extends NetherBiome {
     public UpsideDownForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
     }
-
-    @Override
-    protected void onInit() {
-    }
 }
