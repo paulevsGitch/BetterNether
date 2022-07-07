@@ -23,7 +23,7 @@ public class PathsFeature extends DefaultFeature {
                 new BlockPos(sx, 0, sz),
                 random,
                 featurePlaceContext.chunkGenerator().getGenDepth(),
-                NetherChunkPopulatorFeature.generatorForThread().context
+                NetherThreadDataStorage.generatorForThread().context
         );
         return true;
     }

@@ -6,8 +6,6 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeSettings;
 import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.Conditions;
 import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
-import org.betterx.betternether.BlocksHelper;
-import org.betterx.betternether.MHelper;
 import org.betterx.betternether.blocks.BlockSoulSandstone;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherEntities;
@@ -19,16 +17,11 @@ import org.betterx.betternether.registry.features.placed.NetherVegetationPlaced;
 import org.betterx.betternether.world.NetherBiome;
 import org.betterx.betternether.world.NetherBiomeConfig;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
@@ -127,56 +120,5 @@ public class NetherWartForest extends NetherBiome {
 
     public NetherWartForest(ResourceLocation biomeID, Biome biome, BCLBiomeSettings settings) {
         super(biomeID, biome, settings);
-    }
-
-    @Override
-    public void genSurfColumn(LevelAccessor world, BlockPos pos, RandomSource random) {
-        final MutableBlockPos POS = new MutableBlockPos();
-        switch (random.nextInt(4)) {
-            case 0:
-                super.genSurfColumn(world, pos, random);
-                break;
-            case 1:
-                BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.defaultBlockState());
-                break;
-            case 2:
-                BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
-                break;
-            case 3:
-                BlocksHelper.setWithoutUpdate(world, pos, NetherBlocks.NETHERRACK_MOSS.defaultBlockState());
-                break;
-        }
-
-        int d1 = MHelper.randRange(2, 4, random);
-        POS.setX(pos.getX());
-        POS.setZ(pos.getZ());
-
-        for (int i = 1; i < d1; i++) {
-            POS.setY(pos.getY() - i);
-            if (BlocksHelper.isNetherGround(world.getBlockState(POS))) {
-                switch (random.nextInt(3)) {
-                    case 0:
-                        BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SAND.defaultBlockState());
-                        break;
-                    case 1:
-                        BlocksHelper.setWithoutUpdate(world, pos, Blocks.SOUL_SOIL.defaultBlockState());
-                        break;
-                    case 2:
-                        BlocksHelper.setWithoutUpdate(world, pos, Blocks.NETHERRACK.defaultBlockState());
-                        break;
-                }
-            } else
-                return;
-        }
-
-        int d2 = MHelper.randRange(5, 7, random);
-        for (int i = d1; i < d2; i++) {
-            POS.setY(pos.getY() - i);
-            if (BlocksHelper.isNetherGround(world.getBlockState(POS)))
-                BlocksHelper.setWithoutUpdate(world, POS, NetherBlocks.SOUL_SANDSTONE.defaultBlockState().setValue(
-                        BlockSoulSandstone.UP, i == d1));
-            else
-                return;
-        }
     }
 }

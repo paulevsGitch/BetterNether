@@ -328,7 +328,7 @@ public class OldWillowTree extends NonOverlappingFeature<NaturalTreeConfiguratio
                 pos,
                 random,
                 new NaturalTreeConfiguration(false, configuration.distance),
-                NetherChunkPopulatorFeature.generatorForThread().context
+                NetherThreadDataStorage.generatorForThread().context
         );
     }
 }

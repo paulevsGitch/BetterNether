@@ -205,6 +205,6 @@ public class NetherSakuraFeature extends ContextFeature<NoneFeatureConfiguration
             RandomSource random,
             NoneFeatureConfiguration configuration
     ) {
-        return grow(level, pos, random, 128, NetherChunkPopulatorFeature.generatorForThread().context);
+        return grow(level, pos, random, 128, NetherThreadDataStorage.generatorForThread().context);
     }
 }

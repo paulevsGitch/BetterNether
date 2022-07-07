@@ -420,7 +420,7 @@ public class RubeusTreeFeature extends NonOverlappingFeature<NaturalTreeConfigur
                 pos,
                 random,
                 new NaturalTreeConfiguration(false, configuration.distance),
-                NetherChunkPopulatorFeature.generatorForThread().context
+                NetherThreadDataStorage.generatorForThread().context
         );
     }
 }

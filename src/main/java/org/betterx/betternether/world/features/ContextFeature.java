@@ -23,7 +23,7 @@ public abstract class ContextFeature<FC extends FeatureConfiguration> extends Fe
                 ctx.random(),
                 ctx.config(),
                 ctx.chunkGenerator().getGenDepth(),
-                NetherChunkPopulatorFeature.generatorForThread().context
+                NetherThreadDataStorage.generatorForThread().context
         );
     }
 

@@ -200,7 +200,7 @@ public class WartTreeFeature extends NonOverlappingFeature<NaturalTreeConfigurat
                 pos,
                 random,
                 new NaturalTreeConfiguration(false, configuration.distance),
-                NetherChunkPopulatorFeature.generatorForThread().context
+                NetherThreadDataStorage.generatorForThread().context
         );
     }
 }

@@ -24,7 +24,7 @@ public class CleanupFeature extends DefaultFeature {
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> featurePlaceContext) {
         if (!NetherBiomes.useLegacyGeneration) return false;
-        final StructureGeneratorThreadContext ctx = NetherChunkPopulatorFeature.generatorForThread().context;
+        final StructureGeneratorThreadContext ctx = NetherThreadDataStorage.generatorForThread().context;
         final int MAX_HEIGHT = featurePlaceContext.chunkGenerator().getGenDepth();
         final MutableBlockPos popPos = ctx.POS;
         final BlockPos worldPos = featurePlaceContext.origin();

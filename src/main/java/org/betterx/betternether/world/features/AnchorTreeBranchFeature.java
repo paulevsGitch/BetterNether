@@ -434,6 +434,6 @@ public class AnchorTreeBranchFeature extends ContextFeature<NoneFeatureConfigura
 
     @Override
     public boolean grow(ServerLevelAccessor level, BlockPos pos, RandomSource random, NoneFeatureConfiguration cfg) {
-        return grow(level, pos, random, 1, NetherChunkPopulatorFeature.generatorForThread().context);
+        return grow(level, pos, random, 1, NetherThreadDataStorage.generatorForThread().context);
     }
 }

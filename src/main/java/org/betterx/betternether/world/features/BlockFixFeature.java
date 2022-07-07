@@ -27,7 +27,7 @@ public class BlockFixFeature extends DefaultFeature {
     }
 
     private static void fixBlocks(WorldGenLevel world, int x1, int y1, int z1, int x2, int y2, int z2) {
-        final StructureGeneratorThreadContext ctx = NetherChunkPopulatorFeature.generatorForThread().context;
+        final StructureGeneratorThreadContext ctx = NetherThreadDataStorage.generatorForThread().context;
         final MutableBlockPos popPos = ctx.POS;
         final MutableBlockPos abovePos = ctx.POS2;
         final MutableBlockPos belowPos = ctx.POS3;

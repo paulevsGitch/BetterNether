@@ -28,7 +28,7 @@ public abstract class NetherSurfaceFeature extends Feature<NoneFeatureConfigurat
                 centerPos,
                 ctx.random(),
                 ctx.chunkGenerator().getGenDepth(),
-                NetherChunkPopulatorFeature.generatorForThread().context
+                NetherThreadDataStorage.generatorForThread().context
         );
     }
 

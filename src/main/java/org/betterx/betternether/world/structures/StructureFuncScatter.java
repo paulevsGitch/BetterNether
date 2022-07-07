@@ -1,6 +1,6 @@
 package org.betterx.betternether.world.structures;
 
-import org.betterx.betternether.world.features.NetherChunkPopulatorFeature;
+import org.betterx.betternether.world.features.NetherThreadDataStorage;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -32,7 +32,7 @@ public abstract class StructureFuncScatter implements IStructure {
     }
 
     public void grow(ServerLevelAccessor world, BlockPos pos, RandomSource random) {
-        grow(world, pos, random, false, NetherChunkPopulatorFeature.generatorForThread().context);
+        grow(world, pos, random, false, NetherThreadDataStorage.generatorForThread().context);
     }
 
     public abstract void grow(

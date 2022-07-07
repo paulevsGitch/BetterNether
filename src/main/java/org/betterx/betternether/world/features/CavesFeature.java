@@ -23,7 +23,7 @@ public class CavesFeature extends DefaultFeature {
                 new BlockPos(sx, 0, sz),
                 random,
                 featurePlaceContext.chunkGenerator().getGenDepth(),
-                NetherChunkPopulatorFeature.generatorForThread().context
+                NetherThreadDataStorage.generatorForThread().context
         );
         return true;
     }
@@ -35,6 +35,6 @@ public class CavesFeature extends DefaultFeature {
     }
 
     public static boolean isInCave(int x, int y, int z) {
-        return caves.isInCave(x, y, z, NetherChunkPopulatorFeature.generatorForThread().context);
+        return caves.isInCave(x, y, z, NetherThreadDataStorage.generatorForThread().context);
     }
 }

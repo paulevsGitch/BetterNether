@@ -219,6 +219,6 @@ public class MushroomFirFeature extends ContextFeature<NoneFeatureConfiguration>
             RandomSource random,
             NoneFeatureConfiguration configuration
     ) {
-        return grow(level, pos, random, 1, NetherChunkPopulatorFeature.generatorForThread().context);
+        return grow(level, pos, random, 1, NetherThreadDataStorage.generatorForThread().context);
     }
 }
