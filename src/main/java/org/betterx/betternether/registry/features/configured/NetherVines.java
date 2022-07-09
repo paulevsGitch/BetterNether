@@ -25,6 +25,7 @@ public class NetherVines {
     public static final BCLConfigureFeature<BlockColumnFeature, BlockColumnConfiguration> LUMABUS_VINE = BCLFeatureBuilder
             .startColumn(BN.id("lumabus_vine"))
             .direction(Direction.DOWN)
+            .prioritizeTip()
             .addTripleShapeUpsideDown(NetherBlocks.LUMABUS_VINE.defaultBlockState(), ClampedNormalInt.of(10, 3, 3, 21))
             .buildAndRegister();
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_LUMABUS_VINE = LUMABUS_VINE
@@ -37,6 +38,7 @@ public class NetherVines {
     public static final BCLConfigureFeature<BlockColumnFeature, BlockColumnConfiguration> GOLDEN_LUMABUS_VINE = BCLFeatureBuilder
             .startColumn(BN.id("golden_lumabus_vine"))
             .direction(Direction.DOWN)
+            .prioritizeTip()
             .addTripleShapeUpsideDown(
                     NetherBlocks.GOLDEN_LUMABUS_VINE.defaultBlockState(),
                     ClampedNormalInt.of(12, 3.3f, 2, 23)
@@ -52,6 +54,7 @@ public class NetherVines {
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_GOLDEN_VINE = BCLFeatureBuilder
             .startColumn(BN.id("temp_patch_golden_vine"))
             .direction(Direction.DOWN)
+            .prioritizeTip()
             .addBottomShapeUpsideDown(
                     NetherBlocks.GOLDEN_VINE.defaultBlockState(),
                     ClampedNormalInt.of(12, 3, 3, 23)
@@ -79,6 +82,7 @@ public class NetherVines {
 
     public static final BCLConfigureFeature<BlockColumnFeature, BlockColumnConfiguration> EYE_VINE = BCLFeatureBuilder
             .startColumn(BN.id("eye_vine"))
+            .prioritizeTip()
             .direction(Direction.DOWN)
             .add(ClampedNormalInt.of(6, 3, 3, 16), NetherBlocks.EYE_VINE.defaultBlockState())
             .addRandom(1, NetherBlocks.EYEBALL.defaultBlockState(), NetherBlocks.EYEBALL_SMALL.defaultBlockState())

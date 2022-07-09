@@ -18,7 +18,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 
@@ -51,9 +50,6 @@ public class OldSwampland extends NetherBiome {
                    .feature(NetherVinesPlaced.BLOOMING_VINE)
                    .feature(NetherObjectsPlaced.STALACTITE)
                    .feature(NetherVegetationPlaced.WALL_MUSHROOMS_WITH_MOSS)
-                   .feature(NetherObjectsPlaced.SCULK_TOP)
-                   .feature(NetherObjectsPlaced.SCULK_HIDDEN)
-                   .feature(NetherVegetationPlaced.SCULK_VEGETATION)
             ;
         }
 
@@ -88,7 +84,7 @@ public class OldSwampland extends NetherBiome {
                                     Conditions.NETHER_SURFACE_NOISE_LARGE,
                                     NetherGrasslands.SOUL_SAND
                             ),
-                            SurfaceRules.state(Blocks.SCULK.defaultBlockState())
+                            NetherGrasslands.SOUL_SOIL
                     ));
         }
     }

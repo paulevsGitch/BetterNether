@@ -108,8 +108,8 @@ public class NetherVegetation {
                     (placer, id) -> placer
                             .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
                             .inRandomPatch(BN.id("temp"))
-                            .tries(id == GRAY_MOLD_ID ? 120 : 96)
-                            .spreadXZ(id == GRAY_MOLD_ID ? 10 : 7)
+                            .tries(id == GRAY_MOLD_ID ? 140 : 96)
+                            .spreadXZ(id == GRAY_MOLD_ID ? 8 : 7)
                             .spreadY(id == MUSHROOM_ID ? 6 : 3)
                             .inlinePlace()
                             .build()
@@ -118,7 +118,9 @@ public class NetherVegetation {
             .add(NetherBlocks.RED_MOLD, 180)
             .addAllStatesFor(BlockCommonPlant.AGE, NetherBlocks.ORANGE_MUSHROOM, 100)
             .addAll(60, MUSHROOM_ID, Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM)
-            .addAll(80, MUSHROOM_ID, Blocks.CRIMSON_FUNGUS, Blocks.WARPED_FUNGUS)
+            .add(Blocks.CRIMSON_FUNGUS, 80, MUSHROOM_ID)
+            .add(Blocks.WARPED_FUNGUS, 80, MUSHROOM_ID)
+            .addAll(30, MUSHROOM_ID, NetherBlocks.SEPIA_BONE_GRASS, NetherBlocks.BONE_GRASS, NetherBlocks.JUNGLE_PLANT)
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomSelectorFeature, RandomFeatureConfiguration> VEGETATION_POOR_GRASSLAND = BCLFeatureBuilder

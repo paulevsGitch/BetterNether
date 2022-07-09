@@ -23,7 +23,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_BONE_REEF
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(8)
+            .vanillaNetherGround(24)
             .buildAndRegister();
 
     public static final BCLFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> VEGETATION_SULFURIC_BONE_REEF = NetherVegetation
@@ -78,7 +78,7 @@ public class NetherVegetationPlaced {
             .VEGETATION_MUSHROOM_FORREST
             .place(BN.id("vegetation_mushroom_forrest_edge"))
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(8)
+            .vanillaNetherGround(12)
             .isEmptyAndOnNetherGround()
             .buildAndRegister();
 
@@ -152,7 +152,7 @@ public class NetherVegetationPlaced {
             .PATCH_JELLYFISH_MUSHROOM
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .vanillaNetherGround(2)
+            .vanillaNetherGround(6)
             .onceEvery(4)
             .buildAndRegister();
 

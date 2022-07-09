@@ -10,14 +10,14 @@ public class NetherVinesPlaced {
             .PATCH_LUMABUS_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherCeiling(4)
+            .betterNetherCeiling(12)
             .onceEvery(2)
             .buildAndRegister();
     public static final BCLFeature GOLDEN_LUMABUS_VINE = NetherVines
             .PATCH_GOLDEN_LUMABUS_VINE
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
-            .betterNetherCeiling(4)
+            .betterNetherCeiling(8)
             .onceEvery(2)
             .buildAndRegister();
     public static final BCLFeature GOLDEN_VINE = NetherVines

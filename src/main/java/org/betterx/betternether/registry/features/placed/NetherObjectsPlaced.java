@@ -24,7 +24,7 @@ public class NetherObjectsPlaced {
             .BONES
             .place()
             .decoration(GenerationStep.Decoration.SURFACE_STRUCTURES)
-            .vanillaNetherGround(1)
+            .vanillaNetherGround(3)
             .onceEvery(2)
             .buildAndRegister();
 
