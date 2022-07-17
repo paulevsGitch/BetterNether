@@ -1,7 +1,6 @@
 package org.betterx.betternether;
 
 import org.betterx.bclib.api.v2.dataexchange.DataExchangeAPI;
-import org.betterx.bclib.util.Logger;
 import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.commands.CommandRegistry;
 import org.betterx.betternether.config.Config;
@@ -12,6 +11,7 @@ import org.betterx.betternether.recipes.IntegrationRecipes;
 import org.betterx.betternether.recipes.ItemRecipes;
 import org.betterx.betternether.registry.*;
 import org.betterx.betternether.world.BNWorldGenerator;
+import org.betterx.worlds.together.util.Logger;
 import org.betterx.worlds.together.world.WorldConfig;
 
 import net.minecraft.resources.ResourceLocation;

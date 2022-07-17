@@ -5,11 +5,11 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
 import org.betterx.bclib.entity.BCLEntityWrapper;
 import org.betterx.bclib.interfaces.SpawnRule;
-import org.betterx.bclib.util.ColorUtil;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.entity.*;
 import org.betterx.betternether.world.NetherBiomeConfig;
+import org.betterx.ui.ColorUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
