@@ -4,6 +4,7 @@ import org.betterx.betternether.MHelper;
 import org.betterx.betternether.items.NetherArmor;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.registry.NetherEnchantments;
+import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
@@ -174,6 +176,11 @@ public class RubyFire extends Enchantment {
         for (BlastingRecipe r : recipes) {
             for (Ingredient ingredient : r.getIngredients()) {
                 for (ItemStack stack : ingredient.getItems()) {
+                    if (stack.getItem() instanceof BlockItem blitem) {
+                        if (blitem.getBlock().defaultBlockState().is(CommonBlockTags.IS_OBSIDIAN)) {
+                            continue;
+                        }
+                    }
                     FIRE_CONVERSIONS.put(stack.getItem(), r);
                 }
             }
