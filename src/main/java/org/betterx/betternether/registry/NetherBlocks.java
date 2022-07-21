@@ -971,6 +971,7 @@ public class NetherBlocks extends BlockRegistry {
                       .build();
 
             FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
+            TagManager.BLOCKS.add(block, CommonBlockTags.WOODEN_BARREL, CommonBlockTags.BARREL);
         }
 
         return block;
