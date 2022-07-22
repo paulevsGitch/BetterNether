@@ -26,6 +26,9 @@
     ],
     "client": [
       "org.betterx.betternether.client.BetterNetherClient"
+    ],
+    "bclib": [
+      "org.betterx.betternether.BetterNether"
     ]
   },
   "accessWidener": "betternether.accesswidener",
