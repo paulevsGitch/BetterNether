@@ -1,7 +1,6 @@
 package org.betterx.betternether;
 
 import org.betterx.bclib.api.v2.dataexchange.DataExchangeAPI;
-import org.betterx.bclib.networking.VersionCheckEntryPoint;
 import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.commands.CommandRegistry;
 import org.betterx.betternether.config.Config;
@@ -19,7 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import net.fabricmc.api.ModInitializer;
 
-public class BetterNether implements ModInitializer, VersionCheckEntryPoint {
+public class BetterNether implements ModInitializer {
     public static final String MOD_ID = "betternether";
     public static final Logger LOGGER = new Logger(MOD_ID);
     private static boolean thinArmor = true;
@@ -94,14 +93,6 @@ public class BetterNether implements ModInitializer, VersionCheckEntryPoint {
 
     public static ResourceLocation makeID(String path) {
         return new ResourceLocation(MOD_ID, path);
-    }
-
-    @Override
-    public ResourceLocation updaterIcon(String modID) {
-        if (modID.equals(MOD_ID))
-            return makeID("icon_update.png");
-        
-        return null;
     }
 }
 

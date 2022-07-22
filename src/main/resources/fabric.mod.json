@@ -26,9 +26,6 @@
     ],
     "client": [
       "org.betterx.betternether.client.BetterNetherClient"
-    ],
-    "bclib": [
-      "org.betterx.betternether.BetterNether"
     ]
   },
   "accessWidener": "betternether.accesswidener",
@@ -49,6 +46,9 @@
     "bclib": "<2.0.16"
   },
   "custom": {
+    "bclib": {
+      "updater_icon": "icon_updater.png"
+    },
     "extrapieces:piecepack": "extrapieces.betternether.json",
     "modupdater": {
       "strategy": "curseforge",
