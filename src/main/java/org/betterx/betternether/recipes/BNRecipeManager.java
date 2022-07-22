@@ -6,6 +6,7 @@ import org.betterx.betternether.config.Configs;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
@@ -19,7 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class BNRecipeManager extends BCLRecipeManager {
-    public static void addRecipe(RecipeType<?> type, Recipe<?> recipe) {
+    public static <C extends Container, T extends Recipe<C>> void addRecipe(RecipeType<T> type, T recipe) {
         if (Configs.RECIPES.getBoolean("recipes", recipe.getId().getPath(), true)) {
             BCLRecipeManager.addRecipe(type, recipe);
         }
