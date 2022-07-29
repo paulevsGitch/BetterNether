@@ -794,6 +794,7 @@ public class NetherBlocks extends BlockRegistry {
         return BlockRegistry.getModBlockItems(BetterNether.MOD_ID);
     }
 
+    @SafeVarargs
     public static Block registerBlock(String name, Block block, TagKey<Block>... tags) {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
@@ -804,6 +805,7 @@ public class NetherBlocks extends BlockRegistry {
         return block;
     }
 
+    @SafeVarargs
     private static <B extends Block> B registerBlockNI(String name, B block, TagKey<Block>... tags) {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             return registerBlock(name, block, false, tags);
@@ -811,10 +813,12 @@ public class NetherBlocks extends BlockRegistry {
         return block;
     }
 
-    public static Block registerBlockDirectly(String name, Block block) {
-        return registerBlock(name, block, true);
+
+    public static void registerBlockDirectly(String name, Block block) {
+        registerBlock(name, block, true);
     }
 
+    @SafeVarargs
     private static <B extends Block> B registerBlock(String name, B block, boolean hasItem, TagKey<Block>... tags) {
         final BlockRegistry blockRegistry = getBlockRegistry();
         final ResourceLocation location = new ResourceLocation(BetterNether.MOD_ID, name);

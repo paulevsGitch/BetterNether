@@ -4,9 +4,11 @@ import org.betterx.bclib.blocks.BaseRotatedPillarBlock;
 import org.betterx.bclib.complexmaterials.ComplexMaterial;
 import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
+import org.betterx.bclib.complexmaterials.entry.ItemEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.config.Configs;
 import org.betterx.bclib.config.PathConfig;
+import org.betterx.bclib.items.boat.BoatTypeOverride;
 import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.bclib.registry.BlockRegistry;
 import org.betterx.bclib.registry.ItemRegistry;
@@ -46,6 +48,10 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     public final static String BLOCK_TABURET = "taburet";
     public final static String BLOCK_CHAIR = "chair";
     public final static String BLOCK_BAR_STOOL = "bar_stool";
+    public final static String ITEM_BOAT = "boat";
+    public final static String ITEM_CHEST_BOAT = "chest_boat";
+
+    private BoatTypeOverride BOAT_TYPE;
 
     public NetherWoodenMaterial(String name, MaterialColor woodColor, MaterialColor planksColor) {
         super(BetterNether.MOD_ID, name, "nether", woodColor, planksColor);
@@ -114,21 +120,33 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
         );
     }
 
+    protected void initBoats(FabricItemSettings itemSettings) {
+        BOAT_TYPE = BoatTypeOverride.create(BetterNether.MOD_ID, baseName, this.getPlanks());
+
+        addItemEntry(new ItemEntry(ITEM_BOAT, (cmx, settings) -> BOAT_TYPE.createItem(false)));
+        addItemEntry(new ItemEntry(ITEM_CHEST_BOAT, (cmx, settings) -> BOAT_TYPE.createItem(true)));
+    }
+
     @Override
     protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
         _initBase(blockSettings, itemSettings);
         super.initStorage(blockSettings, itemSettings);
         initDecorations(blockSettings, itemSettings);
 
-        addBlockEntry(new BlockEntry(BLOCK_TABURET, (complexMaterial, settings) -> {
-            return new BNTaburet(getBlock(BLOCK_SLAB));
-        }));
-        addBlockEntry(new BlockEntry(BLOCK_CHAIR, (complexMaterial, settings) -> {
-            return new BNNormalChair(getBlock(BLOCK_SLAB));
-        }));
-        addBlockEntry(new BlockEntry(BLOCK_BAR_STOOL, (complexMaterial, settings) -> {
-            return new BNBarStool(getBlock(BLOCK_SLAB));
-        }));
+        addBlockEntry(new BlockEntry(
+                BLOCK_TABURET,
+                (complexMaterial, settings) -> new BNTaburet(getBlock(BLOCK_SLAB))
+        ));
+        addBlockEntry(new BlockEntry(
+                BLOCK_CHAIR,
+                (complexMaterial, settings) -> new BNNormalChair(getBlock(BLOCK_SLAB))
+        ));
+        addBlockEntry(new BlockEntry(
+                BLOCK_BAR_STOOL,
+                (complexMaterial, settings) -> new BNBarStool(getBlock(BLOCK_SLAB))
+        ));
+
+        initBoats(itemSettings);
     }
 
     public static void makeTaburetRecipe(PathConfig config, ResourceLocation id, Block taburet, Block planks) {
