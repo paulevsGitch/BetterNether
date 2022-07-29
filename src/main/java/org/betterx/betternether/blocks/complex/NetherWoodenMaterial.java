@@ -18,6 +18,7 @@ import org.betterx.betternether.blocks.BNNormalChair;
 import org.betterx.betternether.blocks.BNTaburet;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
+import org.betterx.worlds.together.tag.v3.CommonItemTags;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -124,7 +125,10 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
         BOAT_TYPE = BoatTypeOverride.create(BetterNether.MOD_ID, baseName, this.getPlanks());
 
         addItemEntry(new ItemEntry(ITEM_BOAT, (cmx, settings) -> BOAT_TYPE.createItem(false)));
-        addItemEntry(new ItemEntry(ITEM_CHEST_BOAT, (cmx, settings) -> BOAT_TYPE.createItem(true)));
+        addItemEntry(new ItemEntry(
+                ITEM_CHEST_BOAT,
+                (cmx, settings) -> BOAT_TYPE.createItem(true)
+        ).setItemTags(new TagKey[]{ItemTags.CHEST_BOATS}));
     }
 
     @Override
@@ -179,6 +183,32 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
                   .build();
     }
 
+    public static void makeBoatRecipe(
+            PathConfig config,
+            ResourceLocation id,
+            Block planks,
+            Item boat,
+            Item chestBoat,
+            boolean hasChest
+    ) {
+        if (hasChest) {
+            GridRecipe.make(id, chestBoat)
+                      .checkConfig(config)
+                      .setList("C#")
+                      .addMaterial('C', CommonItemTags.CHEST)
+                      .addMaterial('#', boat)
+                      .setGroup("nether" + "_chest_boat")
+                      .build();
+        } else {
+            GridRecipe.make(id, boat)
+                      .checkConfig(config)
+                      .setShape("# #", "###")
+                      .addMaterial('#', planks)
+                      .setGroup("nether" + "_boat")
+                      .build();
+        }
+    }
+
     protected void initDefaultFurniture() {
         final Block slab = getSlab();
 
@@ -193,6 +223,14 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
 
             addRecipeEntry(new RecipeEntry(BLOCK_BAR_STOOL, (material, config, id) -> {
                 makeBarStoolRecipe(config, id, getBlock(BLOCK_BAR_STOOL), slab);
+            }));
+
+            addRecipeEntry(new RecipeEntry(ITEM_BOAT, (material, config, id) -> {
+                makeBoatRecipe(config, id, getPlanks(), getItem(ITEM_BOAT), getItem(ITEM_CHEST_BOAT), false);
+            }));
+
+            addRecipeEntry(new RecipeEntry(ITEM_CHEST_BOAT, (material, config, id) -> {
+                makeBoatRecipe(config, id, getPlanks(), getItem(ITEM_BOAT), getItem(ITEM_CHEST_BOAT), true);
             }));
         }
     }

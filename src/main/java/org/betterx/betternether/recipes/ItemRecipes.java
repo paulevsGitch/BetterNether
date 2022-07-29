@@ -1,5 +1,8 @@
 package org.betterx.betternether.recipes;
 
+import org.betterx.bclib.config.Configs;
+import org.betterx.betternether.BetterNether;
+import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
@@ -8,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -125,6 +129,32 @@ public class ItemRecipes {
         // RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
         // RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_WART.getStrippedLog(), NetherBlocks.MAT_WART.getStrippedBark(), 3, "nether_bark_striped");
         // RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
+
+        if (itemExists(NetherItems.CRIMSON_BOAT)) {
+            NetherWoodenMaterial.makeBoatRecipe(
+                    Configs.RECIPE_CONFIG, BetterNether.makeID("crimson_boat"),
+                    Blocks.CRIMSON_PLANKS, NetherItems.CRIMSON_BOAT, NetherItems.CRIMSON_CHEST_BOAT, false
+            );
+        }
+        if (itemExists(NetherItems.CRIMSON_CHEST_BOAT)) {
+            NetherWoodenMaterial.makeBoatRecipe(
+                    Configs.RECIPE_CONFIG, BetterNether.makeID("crimson_chest_boat"),
+                    Blocks.CRIMSON_PLANKS, NetherItems.CRIMSON_BOAT, NetherItems.CRIMSON_CHEST_BOAT, true
+            );
+        }
+
+        if (itemExists(NetherItems.WARPED_BOAT)) {
+            NetherWoodenMaterial.makeBoatRecipe(
+                    Configs.RECIPE_CONFIG, BetterNether.makeID("warped_boat"),
+                    Blocks.WARPED_PLANKS, NetherItems.WARPED_BOAT, NetherItems.WARPED_CHEST_BOAT, false
+            );
+        }
+        if (itemExists(NetherItems.WARPED_CHEST_BOAT)) {
+            NetherWoodenMaterial.makeBoatRecipe(
+                    Configs.RECIPE_CONFIG, BetterNether.makeID("warped_chest_boat"),
+                    Blocks.WARPED_PLANKS, NetherItems.WARPED_BOAT, NetherItems.WARPED_CHEST_BOAT, true
+            );
+        }
     }
 
     private static boolean itemExists(Item item) {

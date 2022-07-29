@@ -12,6 +12,7 @@ import org.betterx.worlds.together.tag.v3.MineableTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
@@ -75,6 +76,8 @@ public class NetherTags {
             if (mat.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || mat.equals(Material.REPLACEABLE_PLANT)) {
                 ComposterAPI.allowCompost(0.1f, item);
             }
+
+            TagManager.ITEMS.add(ItemTags.CHEST_BOATS, NetherItems.WARPED_CHEST_BOAT, NetherItems.CRIMSON_CHEST_BOAT);
         });
     }
 }
