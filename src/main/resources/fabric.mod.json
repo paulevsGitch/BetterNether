@@ -5,11 +5,10 @@
   "name": "Better Nether",
   "description": "Mod that improves Nether",
   "authors": [
-    "quiqueck"
+    "quiqueck",
+    "paulevs (original author)"
   ],
   "contributors": [
-    "quiqueck (programming, porting, fixes and improvements)",
-    "paulevs (original author, art, ideas, ru/en translations)",
     "edos_ (builder, design help)"
   ],
   "contact": {
@@ -17,7 +16,7 @@
     "sources": "https://github.com/quiqueck/BetterNether/tree/snapshots",
     "issues": "https://github.com/quiqueck/BetterNether/issues"
   },
-  "license": "MIT",
+  "license": "MIT (CC BY-NC-SA 4.0 for some Assets)",
   "icon": "assets/betternether/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -26,6 +25,9 @@
     ],
     "client": [
       "org.betterx.betternether.client.BetterNetherClient"
+    ],
+    "emi": [
+      "org.betterx.betternether.integrations.emi.EMIPlugin"
     ]
   },
   "accessWidener": "betternether.accesswidener",

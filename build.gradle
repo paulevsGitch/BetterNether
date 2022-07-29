@@ -97,6 +97,7 @@ java {
 
 jar {
     from "LICENSE"
+    from "LICENSE.ASSETS"
 }
 
 // configure the maven publication
