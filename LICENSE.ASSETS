@@ -1,4 +1,4 @@
-Some of our Assets (see List below) is licensed under CC BY-NC-SA 4.0
+Some of our Assets (see List below) are licensed under CC BY-NC-SA 4.0
 See https://creativecommons.org/licenses/by-nc-sa/4.0/ for Details.
 
 Please use the Attribution "Team BetterX".
@@ -6,6 +6,10 @@ Please use the Attribution "Team BetterX".
 The following Files are distributed under this License:
  * src/main/resources/assets/betternether/lang/de_de.json
  * src/main/resources/assets/betternether/icon_updater.png
+ * src/main/resources/assets/betternether/textures/entity/boat/*
+ * src/main/resources/assets/betternether/textures/entity/chest_boat/*
+ * src/main/resources/assets/betternether/textures/item/*_boat.png
+ * src/main/resources/assets/betternether/textures/item/*_chest_boat.png
  * src/main/resources/assets/betternether/textures/block/*_bookshelf.png
  * src/main/resources/assets/betternether/textures/block/*_composter_*.png
  * src/main/resources/assets/betternether/textures/block/blue_crying_obsidian.png
