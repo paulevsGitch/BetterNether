@@ -6,6 +6,8 @@ Please use the Attribution "Team BetterX".
 The following Files are distributed under this License:
  * src/main/resources/assets/betternether/lang/de_de.json
  * src/main/resources/assets/betternether/icon_updater.png
+ * src/main/resources/assets/betternether/textures/block/*_bookshelf.png
+ * src/main/resources/assets/betternether/textures/block/*_composter_*.png
  * src/main/resources/assets/betternether/textures/block/blue_crying_obsidian.png
  * src/main/resources/assets/betternether/textures/block/weeping_obsidian.png
  * src/main/resources/assets/betternether/textures/block/blue_weeping_obsidian.png

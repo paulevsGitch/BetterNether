@@ -1,20 +1,51 @@
 package org.betterx.betternether.blocks.complex;
 
+import org.betterx.bclib.blocks.BaseBookshelfBlock;
+import org.betterx.bclib.blocks.BaseComposterBlock;
+import org.betterx.bclib.blocks.BaseCraftingTableBlock;
 import org.betterx.bclib.blocks.BaseLadderBlock;
+import org.betterx.bclib.client.models.ModelsHelper;
+import org.betterx.bclib.client.models.PatternsHelper;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.blocks.BlockReedsBlock;
+import org.betterx.betternether.client.block.Patterns;
+import org.betterx.worlds.together.tag.v3.CommonBlockTags;
+import org.betterx.worlds.together.tag.v3.CommonItemTags;
+import org.betterx.worlds.together.tag.v3.CommonPoiTags;
 
+import net.minecraft.client.renderer.block.model.BlockModel;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+
+import java.util.Optional;
+import org.jetbrains.annotations.Nullable;
+
+class ReedBookshelfBlock extends BaseBookshelfBlock {
+
+    public ReedBookshelfBlock(Block source) {
+        super(source);
+    }
+
+    @Override
+    @Environment(EnvType.CLIENT)
+    public @Nullable BlockModel getBlockModel(ResourceLocation blockId, BlockState blockState) {
+        Optional<String> pattern = PatternsHelper.createJson(Patterns.REED_BLOCK_BOOKSHELF, replacePath(blockId));
+        return ModelsHelper.fromPattern(pattern);
+    }
+}
 
 public class NetherReedMaterial extends RoofMaterial {
     public final static String BLOCK_STEM = BLOCK_OPTIONAL_STEM;
@@ -35,6 +66,29 @@ public class NetherReedMaterial extends RoofMaterial {
         addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) -> {
             return new BlockNetherReed();
         }));
+    }
+
+    @Override
+    protected void initDecorations(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
+        addBlockEntry(new BlockEntry(
+                        BLOCK_CRAFTING_TABLE,
+                        (cmx, settings) -> new BaseCraftingTableBlock(getBlock(BLOCK_PLANKS))
+                )
+                        .setBlockTags(CommonBlockTags.WORKBENCHES)
+                        .setItemTags(CommonItemTags.WORKBENCHES)
+        );
+
+        addBlockEntry(new BlockEntry(
+                BLOCK_BOOKSHELF,
+                (cmx, settings) -> new ReedBookshelfBlock(getBlock(BLOCK_PLANKS))
+        )
+                .setBlockTags(CommonBlockTags.BOOKSHELVES));
+
+        addBlockEntry(new BlockEntry(
+                BLOCK_COMPOSTER,
+                (complexMaterial, settings) -> new BaseComposterBlock(getBlock(BLOCK_PLANKS))
+        )
+                .setBlockTags(CommonPoiTags.FARMER_WORKSTATION));
     }
 
     @Override

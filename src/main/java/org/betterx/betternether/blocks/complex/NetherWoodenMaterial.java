@@ -118,11 +118,7 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
         _initBase(blockSettings, itemSettings);
         super.initStorage(blockSettings, itemSettings);
-
-        addBlockEntry(new BlockEntry(BLOCK_CRAFTING_TABLE, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseCraftingTableBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(org.betterx.worlds.together.tag.v3.CommonBlockTags.WORKBENCHES)
-          .setItemTags(org.betterx.worlds.together.tag.v3.CommonItemTags.WORKBENCHES));
+        initDecorations(blockSettings, itemSettings);
 
         addBlockEntry(new BlockEntry(BLOCK_TABURET, (complexMaterial, settings) -> {
             return new BNTaburet(getBlock(BLOCK_SLAB));

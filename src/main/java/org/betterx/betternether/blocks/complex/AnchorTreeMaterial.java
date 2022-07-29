@@ -25,9 +25,7 @@ public class AnchorTreeMaterial extends NetherWoodenMaterial {
     protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
         super.initDefault(blockSettings, itemSettings);
 
-        addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> {
-            return new BlockAnchorTreeSapling();
-        }));
+        addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> new BlockAnchorTreeSapling()));
     }
 
     public Block getSapling() {

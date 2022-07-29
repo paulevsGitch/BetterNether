@@ -28,13 +28,10 @@ public class WartMaterial extends RoofMaterial {
     @Override
     protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
         super.initDefault(blockSettings, itemSettings);
-        addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> {
-            return new BlockWartSeed();
-        }).setBlockTags(BlockTags.SAPLINGS).setItemTags(ItemTags.SAPLINGS));
+        addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> new BlockWartSeed()).setBlockTags(
+                BlockTags.SAPLINGS).setItemTags(ItemTags.SAPLINGS));
 
-        addBlockEntry(new BlockEntry(BLOCK_ROOTS, false, (complexMaterial, settings) -> {
-            return new BlockWartRoots();
-        }));
+        addBlockEntry(new BlockEntry(BLOCK_ROOTS, false, (complexMaterial, settings) -> new BlockWartRoots()));
     }
 
     public Block getRoot() {

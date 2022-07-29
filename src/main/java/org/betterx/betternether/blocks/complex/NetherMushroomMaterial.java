@@ -38,49 +38,64 @@ public class NetherMushroomMaterial extends NetherWoodenMaterial {
 
     @Override
     protected void _initBase(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
-        addBlockEntry(new BlockEntry(BLOCK_PLANKS, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseBlock(settings);
-        }).setBlockTags(BlockTags.PLANKS).setItemTags(ItemTags.PLANKS));
+        addBlockEntry(new BlockEntry(
+                BLOCK_PLANKS,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseBlock(settings)
+        ).setBlockTags(BlockTags.PLANKS).setItemTags(ItemTags.PLANKS));
 
-        addBlockEntry(new BlockEntry(BLOCK_STAIRS, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseStairsBlock(getBlock(BLOCK_PLANKS), false);
-        }).setBlockTags(BlockTags.WOODEN_STAIRS, BlockTags.STAIRS)
-          .setItemTags(ItemTags.WOODEN_STAIRS, ItemTags.STAIRS));
-        addBlockEntry(new BlockEntry(BLOCK_SLAB, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseSlabBlock(getBlock(BLOCK_PLANKS), false);
-        }).setBlockTags(BlockTags.WOODEN_SLABS, BlockTags.SLABS)
-          .setItemTags(ItemTags.WOODEN_SLABS, ItemTags.SLABS));
-        addBlockEntry(new BlockEntry(BLOCK_FENCE, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseFenceBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(BlockTags.FENCES, BlockTags.WOODEN_FENCES)
-          .setItemTags(ItemTags.FENCES, ItemTags.WOODEN_FENCES));
-        addBlockEntry(new BlockEntry(BLOCK_GATE, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseGateBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(BlockTags.FENCE_GATES));
-        addBlockEntry(new BlockEntry(BLOCK_BUTTON, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseWoodenButtonBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(BlockTags.BUTTONS, BlockTags.WOODEN_BUTTONS)
-          .setItemTags(ItemTags.BUTTONS, ItemTags.WOODEN_BUTTONS));
-        addBlockEntry(new BlockEntry(BLOCK_PRESSURE_PLATE, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.WoodenPressurePlateBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(BlockTags.PRESSURE_PLATES, BlockTags.WOODEN_PRESSURE_PLATES)
-          .setItemTags(ItemTags.WOODEN_PRESSURE_PLATES));
-        addBlockEntry(new BlockEntry(BLOCK_TRAPDOOR, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseTrapdoorBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(BlockTags.TRAPDOORS, BlockTags.WOODEN_TRAPDOORS)
-          .setItemTags(ItemTags.TRAPDOORS, ItemTags.WOODEN_TRAPDOORS));
-        addBlockEntry(new BlockEntry(BLOCK_DOOR, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseDoorBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(BlockTags.DOORS, BlockTags.WOODEN_DOORS)
-          .setItemTags(ItemTags.DOORS, ItemTags.WOODEN_DOORS));
+        addBlockEntry(new BlockEntry(
+                BLOCK_STAIRS,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseStairsBlock(
+                        getBlock(BLOCK_PLANKS),
+                        false
+                )
+        ).setBlockTags(BlockTags.WOODEN_STAIRS, BlockTags.STAIRS)
+         .setItemTags(ItemTags.WOODEN_STAIRS, ItemTags.STAIRS));
+        addBlockEntry(new BlockEntry(
+                BLOCK_SLAB,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseSlabBlock(getBlock(BLOCK_PLANKS), false)
+        ).setBlockTags(BlockTags.WOODEN_SLABS, BlockTags.SLABS)
+         .setItemTags(ItemTags.WOODEN_SLABS, ItemTags.SLABS));
+        addBlockEntry(new BlockEntry(
+                BLOCK_FENCE,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseFenceBlock(getBlock(BLOCK_PLANKS))
+        ).setBlockTags(BlockTags.FENCES, BlockTags.WOODEN_FENCES)
+         .setItemTags(ItemTags.FENCES, ItemTags.WOODEN_FENCES));
+        addBlockEntry(new BlockEntry(
+                BLOCK_GATE,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseGateBlock(getBlock(BLOCK_PLANKS))
+        ).setBlockTags(BlockTags.FENCE_GATES));
+        addBlockEntry(new BlockEntry(
+                BLOCK_BUTTON,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseWoodenButtonBlock(getBlock(BLOCK_PLANKS))
+        ).setBlockTags(BlockTags.BUTTONS, BlockTags.WOODEN_BUTTONS)
+         .setItemTags(ItemTags.BUTTONS, ItemTags.WOODEN_BUTTONS));
+        addBlockEntry(new BlockEntry(
+                BLOCK_PRESSURE_PLATE,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.WoodenPressurePlateBlock(getBlock(
+                        BLOCK_PLANKS))
+        ).setBlockTags(BlockTags.PRESSURE_PLATES, BlockTags.WOODEN_PRESSURE_PLATES)
+         .setItemTags(ItemTags.WOODEN_PRESSURE_PLATES));
+        addBlockEntry(new BlockEntry(
+                BLOCK_TRAPDOOR,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseTrapdoorBlock(getBlock(BLOCK_PLANKS))
+        ).setBlockTags(BlockTags.TRAPDOORS, BlockTags.WOODEN_TRAPDOORS)
+         .setItemTags(ItemTags.TRAPDOORS, ItemTags.WOODEN_TRAPDOORS));
+        addBlockEntry(new BlockEntry(
+                BLOCK_DOOR,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseDoorBlock(getBlock(BLOCK_PLANKS))
+        ).setBlockTags(BlockTags.DOORS, BlockTags.WOODEN_DOORS)
+         .setItemTags(ItemTags.DOORS, ItemTags.WOODEN_DOORS));
 
 
-        addBlockEntry(new BlockEntry(BLOCK_LADDER, (complexMaterial, settings) -> {
-            return new BaseLadderBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(BlockTags.CLIMBABLE));
-        addBlockEntry(new BlockEntry(BLOCK_SIGN, (complexMaterial, settings) -> {
-            return new org.betterx.bclib.blocks.BaseSignBlock(getBlock(BLOCK_PLANKS));
-        }).setBlockTags(BlockTags.SIGNS).setItemTags(ItemTags.SIGNS));
+        addBlockEntry(new BlockEntry(
+                BLOCK_LADDER,
+                (complexMaterial, settings) -> new BaseLadderBlock(getBlock(BLOCK_PLANKS))
+        ).setBlockTags(BlockTags.CLIMBABLE));
+        addBlockEntry(new BlockEntry(
+                BLOCK_SIGN,
+                (complexMaterial, settings) -> new org.betterx.bclib.blocks.BaseSignBlock(getBlock(BLOCK_PLANKS))
+        ).setBlockTags(BlockTags.SIGNS).setItemTags(ItemTags.SIGNS));
     }
 
     @Override

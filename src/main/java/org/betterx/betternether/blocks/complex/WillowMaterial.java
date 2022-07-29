@@ -32,21 +32,13 @@ public class WillowMaterial extends RoofMaterial {
     protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
         super.initDefault(blockSettings, itemSettings);
 
-        addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> {
-            return new BlockWillowTrunk();
-        }));
+        addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> new BlockWillowTrunk()));
 
-        addBlockEntry(new BlockEntry(BLOCK_BRANCH, false, (complexMaterial, settings) -> {
-            return new BlockWillowBranch();
-        }));
+        addBlockEntry(new BlockEntry(BLOCK_BRANCH, false, (complexMaterial, settings) -> new BlockWillowBranch()));
 
-        addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> {
-            return new BlockWillowSapling();
-        }));
+        addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> new BlockWillowSapling()));
 
-        addBlockEntry(new BlockEntry(BLOCK_TORCH, (complexMaterial, settings) -> {
-            return new BlockWillowTorch();
-        }));
+        addBlockEntry(new BlockEntry(BLOCK_TORCH, (complexMaterial, settings) -> new BlockWillowTorch()));
     }
 
     public Block getTrunk() {

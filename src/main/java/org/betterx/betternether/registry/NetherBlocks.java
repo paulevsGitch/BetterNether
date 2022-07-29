@@ -1,5 +1,7 @@
 package org.betterx.betternether.registry;
 
+import org.betterx.bclib.blocks.BaseBookshelfBlock;
+import org.betterx.bclib.blocks.BaseComposterBlock;
 import org.betterx.bclib.blocks.BaseLadderBlock;
 import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.bclib.registry.BlockRegistry;
@@ -12,6 +14,7 @@ import org.betterx.betternether.registry.features.configured.NetherVines;
 import org.betterx.betternether.tab.CreativeTabs;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 import org.betterx.worlds.together.tag.v3.CommonItemTags;
+import org.betterx.worlds.together.tag.v3.CommonPoiTags;
 import org.betterx.worlds.together.tag.v3.TagManager;
 
 import net.minecraft.resources.ResourceLocation;
@@ -635,6 +638,28 @@ public class NetherBlocks extends BlockRegistry {
     public static final Block CRAFTING_TABLE_WARPED = registerCraftingTable(
             "crafting_table_warped",
             Blocks.WARPED_PLANKS
+    );
+
+    public static final Block CRIMSON_BOOKSHELF = registerBlock(
+            "crimson_bookshelf",
+            new BaseBookshelfBlock.WithVanillaWood(Blocks.CRIMSON_PLANKS),
+            CommonBlockTags.BOOKSHELVES
+    );
+    public static final Block WARPED_BOOKSHELF = registerBlock(
+            "warped_bookshelf",
+            new BaseBookshelfBlock.WithVanillaWood(Blocks.WARPED_PLANKS),
+            CommonBlockTags.BOOKSHELVES
+    );
+
+    public static final Block CRIMSON_COMPOSTER = registerBlock(
+            "crimson_composter",
+            new BaseComposterBlock(Blocks.CRIMSON_PLANKS),
+            CommonPoiTags.FARMER_WORKSTATION
+    );
+    public static final Block WARPED_COMPOSTER = registerBlock(
+            "warped_composter",
+            new BaseComposterBlock(Blocks.WARPED_PLANKS),
+            CommonPoiTags.FARMER_WORKSTATION
     );
     // Storage
     public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());

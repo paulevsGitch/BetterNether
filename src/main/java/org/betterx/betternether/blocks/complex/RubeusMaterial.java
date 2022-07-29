@@ -35,26 +35,18 @@ public class RubeusMaterial extends NetherWoodenMaterial {
         final TagKey<Block> tagBlockLog = getBlockTag(TAG_LOGS);
         final TagKey<Item> tagItemLog = getItemTag(TAG_LOGS);
 
-        addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> {
-            return new BlockRubeusSapling();
-        }));
+        addBlockEntry(new BlockEntry(BLOCK_SAPLING, (complexMaterial, settings) -> new BlockRubeusSapling()));
 
-        addBlockEntry(new BlockEntry(BLOCK_CONE, (complexMaterial, settings) -> {
-            return new BlockRubeusCone();
-        }));
+        addBlockEntry(new BlockEntry(BLOCK_CONE, (complexMaterial, settings) -> new BlockRubeusCone()));
 
         replaceOrAddBlockEntry(
-                new BlockEntry(BLOCK_LOG, (complexMaterial, settings) -> {
-                    return new RubeusLog(woodColor, getStrippedLog());
-                })
+                new BlockEntry(BLOCK_LOG, (complexMaterial, settings) -> new RubeusLog(woodColor, getStrippedLog()))
                         .setBlockTags(BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, tagBlockLog)
                         .setItemTags(ItemTags.LOGS, ItemTags.LOGS_THAT_BURN, tagItemLog)
         );
 
         replaceOrAddBlockEntry(
-                new BlockEntry(BLOCK_BARK, (complexMaterial, settings) -> {
-                    return new RubeusBark(woodColor, getStrippedBark());
-                })
+                new BlockEntry(BLOCK_BARK, (complexMaterial, settings) -> new RubeusBark(woodColor, getStrippedBark()))
                         .setBlockTags(BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, tagBlockLog)
                         .setItemTags(ItemTags.LOGS, ItemTags.LOGS_THAT_BURN, tagItemLog)
         );
