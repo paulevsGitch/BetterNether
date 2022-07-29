@@ -624,5 +624,6 @@
   "enchantment.betternether.ruby_fire": "Rubinfeuer",
   "enchantment.betternether.ruby_fire.desc": "Automatische Schmelzen von Erzen mit Spitzhacke / Flamme und Rückstoß bei Rüstung und Schwertern.",
   "betternether.survive.nethergound": "Netherböden",
-  "flat_world_preset.betternether.flat": "Flaches Nether"
+  "flat_world_preset.betternether.flat": "Flaches Nether",
+  "emi.category.betternether.forge": "Schmieden"
 }

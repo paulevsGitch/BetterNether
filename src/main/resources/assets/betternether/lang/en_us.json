@@ -624,5 +624,6 @@
   "enchantment.betternether.ruby_fire": "Rubys' Fire",
   "enchantment.betternether.ruby_fire.desc": "Auto-Smelts ores (Pickaxe) \n Flame and Knockback (Armor and Sword)",
   "betternether.survive.nethergound": "Nether Ground",
-  "flat_world_preset.betternether.flat": "Flat Nether"
+  "flat_world_preset.betternether.flat": "Flat Nether",
+  "emi.category.betternether.forge": "Forges"
 }

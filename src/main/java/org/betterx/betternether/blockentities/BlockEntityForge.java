@@ -13,6 +13,8 @@ import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockEntityForge extends AbstractFurnaceBlockEntity implements ChangebleCookTime {
+    public static final int SPEEDUP = 2;
+
     public BlockEntityForge(BlockPos pos, BlockState state) {
         super(BlockEntitiesRegistry.CINCINNASITE_FORGE, pos, state, RecipeType.SMELTING);
     }
@@ -29,11 +31,11 @@ public class BlockEntityForge extends AbstractFurnaceBlockEntity implements Chan
 
     @Override
     protected int getBurnDuration(ItemStack fuel) {
-        return super.getBurnDuration(fuel) / 2;
+        return super.getBurnDuration(fuel) / SPEEDUP;
     }
 
     @Override
     public int changeCookTime(int cookTime) {
-        return cookTime / 2;
+        return cookTime / SPEEDUP;
     }
 }
