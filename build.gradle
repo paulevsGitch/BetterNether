@@ -39,7 +39,7 @@ dependencies {
         modImplementation "com.github.quiqueck:BCLib:${project.bclib_version}"
     }
 
-    modImplementation "dev.emi:emi:${emi_version}"
+    modCompileOnly "dev.emi:emi:${emi_version}"
 }
 
 repositories {
