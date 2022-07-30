@@ -129,7 +129,7 @@ public class NetherBlocks extends BlockRegistry {
                     1,
                     2,
                     5,
-                    Tiers.NETHERITE.getLevel(),
+                    Tiers.DIAMOND.getLevel(),
                     true
             )
     );
