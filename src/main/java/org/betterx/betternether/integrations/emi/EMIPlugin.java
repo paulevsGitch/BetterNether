@@ -28,6 +28,7 @@ public class EMIPlugin implements EmiPlugin {
     public void register(EmiRegistry emiRegistry) {
         final RecipeManager manager = emiRegistry.getRecipeManager();
 
+        emiRegistry.addCategory(FORGE);
         emiRegistry.addWorkstation(VanillaEmiRecipeCategories.SMELTING, BLACKSTONE_FURNACE_WORKSTATION);
         emiRegistry.addWorkstation(VanillaEmiRecipeCategories.SMELTING, NETHERRACK_FURNACE_WORKSTATION);
         emiRegistry.addWorkstation(VanillaEmiRecipeCategories.SMELTING, BASALT_FURNACE_WORKSTATION);

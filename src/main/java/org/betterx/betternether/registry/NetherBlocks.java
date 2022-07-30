@@ -640,26 +640,18 @@ public class NetherBlocks extends BlockRegistry {
             Blocks.WARPED_PLANKS
     );
 
-    public static final Block CRIMSON_BOOKSHELF = registerBlock(
-            "crimson_bookshelf",
-            new BaseBookshelfBlock.WithVanillaWood(Blocks.CRIMSON_PLANKS),
-            CommonBlockTags.BOOKSHELVES
-    );
-    public static final Block WARPED_BOOKSHELF = registerBlock(
-            "warped_bookshelf",
-            new BaseBookshelfBlock.WithVanillaWood(Blocks.WARPED_PLANKS),
-            CommonBlockTags.BOOKSHELVES
-    );
+    public static final Block CRIMSON_BOOKSHELF = registerBookshelf("crimson_bookshelf", Blocks.CRIMSON_PLANKS);
+    public static final Block WARPED_BOOKSHELF = registerBookshelf("warped_bookshelf", Blocks.WARPED_PLANKS);
 
-    public static final Block CRIMSON_COMPOSTER = registerBlock(
+    public static final Block CRIMSON_COMPOSTER = registerComposter(
             "crimson_composter",
-            new BaseComposterBlock(Blocks.CRIMSON_PLANKS),
-            CommonPoiTags.FARMER_WORKSTATION
+            Blocks.CRIMSON_PLANKS,
+            Blocks.CRIMSON_SLAB
     );
-    public static final Block WARPED_COMPOSTER = registerBlock(
+    public static final Block WARPED_COMPOSTER = registerComposter(
             "warped_composter",
-            new BaseComposterBlock(Blocks.WARPED_PLANKS),
-            CommonPoiTags.FARMER_WORKSTATION
+            Blocks.WARPED_PLANKS,
+            Blocks.WARPED_SLAB
     );
     // Storage
     public static final Block CHEST_OF_DRAWERS = registerBlock("chest_of_drawers", new BlockChestOfDrawers());
@@ -792,6 +784,34 @@ public class NetherBlocks extends BlockRegistry {
 
     public static List<Item> getModBlockItems() {
         return BlockRegistry.getModBlockItems(BetterNether.MOD_ID);
+    }
+
+    public static Block registerBookshelf(String name, Block baseBlock) {
+        Block shelf = new BaseBookshelfBlock.WithVanillaWood(baseBlock);
+        registerBlock(name, shelf, CommonBlockTags.BOOKSHELVES);
+
+        GridRecipe.make(BetterNether.makeID(name), shelf)
+                  .checkConfig(Configs.RECIPES)
+                  .setShape("###", "BBB", "###")
+                  .addMaterial('#', baseBlock)
+                  .addMaterial('B', Items.BOOK)
+                  .setGroup("nether" + "_bookshelf")
+                  .build();
+
+        return shelf;
+    }
+
+    public static Block registerComposter(String name, Block baseBlock, Block baseSlab) {
+        Block composter = new BaseComposterBlock(baseBlock);
+        registerBlock(name, composter, CommonPoiTags.FARMER_WORKSTATION);
+
+        GridRecipe.make(BetterNether.makeID(name), composter)
+                  .checkConfig(Configs.RECIPES)
+                  .setShape("# #", "# #", "###")
+                  .addMaterial('#', baseSlab)
+                  .setGroup("nether" + "_composter")
+                  .build();
+        return composter;
     }
 
     @SafeVarargs

@@ -268,6 +268,22 @@ public class NetherReedMaterial extends RoofMaterial {
                       .setGroup(receipGroupPrefix + "_barrels")
                       .build();
         }));
+        addRecipeEntry(new RecipeEntry(BLOCK_BOOKSHELF, (material, config, id) -> {
+            GridRecipe.make(id, getBlock(BLOCK_BOOKSHELF))
+                      .checkConfig(config)
+                      .setShape("###", "PPP", "###")
+                      .addMaterial('#', planks)
+                      .addMaterial('P', Items.BOOK)
+                      .setGroup(receipGroupPrefix + "_bookshelves")
+                      .build();
+        }));
+        addRecipeEntry(new RecipeEntry(BLOCK_COMPOSTER, (material, config, id) -> {
+            GridRecipe.make(id, getBlock(BLOCK_COMPOSTER))
+                      .checkConfig(config)
+                      .setShape("# #", "# #", "###")
+                      .addMaterial('#', getBlock(BLOCK_SLAB))
+                      .build();
+        }));
 
         initDefaultFurniture();
         initRoofRecipes();
