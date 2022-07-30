@@ -669,5 +669,14 @@
   "block.betternether.warped_composter": "Warped Composter",
   "block.betternether.warped_bookshelf": "Warped Bookshelf",
   "item.betternether.warped_boat": "Warped Boat",
-  "item.betternether.warped_chest_boat": "Warped Boat with Chest"
+  "item.betternether.warped_chest_boat": "Warped Boat with Chest",
+  "tag.betternether.nether_sakura_logs": "Nether Sakura Logs",
+  "tag.betternether.wart_logs": "Wart Logs",
+  "tag.betternether.willow_logs": "Willow Logs",
+  "tag.betternether.mushroom_fir_logs": "Mushroom Fir Logs",
+  "tag.betternether.stalagnate_logs": "Stalagnate Logs",
+  "tag.betternether.rubeus_logs": "Rubeus Logs",
+  "tag.betternether.anchor_tree_logs": "Anchor Tree Logs",
+  "tag.betternether.nether_reed_logs": "Nether Reed Logs",
+  "tag.betternether.nether_mushroom_logs": "Nether Mushroom Logs"
 }

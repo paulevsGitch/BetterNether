@@ -669,5 +669,14 @@
   "item.betternether.crimson_boat": "Karmesinboot",
   "item.betternether.crimson_chest_boat": "Karmesinboot mit Kiste",
   "item.betternether.warped_boat": "Wirrboot",
-  "item.betternether.warped_chest_boat": "Wirrboot mit Kiste"
+  "item.betternether.warped_chest_boat": "Wirrboot mit Kiste",
+  "tag.betternether.nether_sakura_logs": "Nether Sakura Stämme",
+  "tag.betternether.wart_logs": "Warzentämme",
+  "tag.betternether.willow_logs": "Weidenstämme",
+  "tag.betternether.mushroom_fir_logs": "Pilztannenstämme",
+  "tag.betternether.stalagnate_logs": "Stalagnatstämme",
+  "tag.betternether.rubeus_logs": "Rubeusstämme",
+  "tag.betternether.anchor_tree_logs": "Ankerbaumstämme",
+  "tag.betternether.nether_reed_logs": "Schilfstämme",
+  "tag.betternether.nether_mushroom_logs": "Pilzstämme"
 }
