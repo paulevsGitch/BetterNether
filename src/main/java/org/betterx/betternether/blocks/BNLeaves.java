@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricMaterialBuilder;
 
 import java.util.function.Consumer;
@@ -28,7 +27,7 @@ public class BNLeaves extends BaseLeavesBlock {
         });
     }
 
-    public BNLeaves(Block sapling, MaterialColor color, Consumer<FabricBlockSettings> customizeProperties) {
+    public BNLeaves(Block sapling, MaterialColor color, Consumer<Block.Properties> customizeProperties) {
         super(sapling, color, (settings) -> {
             customizeProperties.accept(settings);
             BlockBehaviourPropertiesAccessor accessor = (BlockBehaviourPropertiesAccessor) settings;

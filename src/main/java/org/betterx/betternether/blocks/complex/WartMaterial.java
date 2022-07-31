@@ -6,11 +6,10 @@ import org.betterx.betternether.blocks.BlockWartSeed;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
-
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class WartMaterial extends RoofMaterial {
     public final static String BLOCK_SEED = BLOCK_OPTIONAL_SEED;
@@ -26,7 +25,7 @@ public class WartMaterial extends RoofMaterial {
     }
 
     @Override
-    protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
+    protected void initDefault(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
         super.initDefault(blockSettings, itemSettings);
         addBlockEntry(new BlockEntry(BLOCK_SEED, (complexMaterial, settings) -> new BlockWartSeed()).setBlockTags(
                 BlockTags.SAPLINGS).setItemTags(ItemTags.SAPLINGS));

@@ -6,11 +6,10 @@ import org.betterx.betternether.blocks.BlockWillowSapling;
 import org.betterx.betternether.blocks.BlockWillowTorch;
 import org.betterx.betternether.blocks.BlockWillowTrunk;
 
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
-
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 public class WillowMaterial extends RoofMaterial {
     public final static String BLOCK_TORCH = "torch";
@@ -29,7 +28,7 @@ public class WillowMaterial extends RoofMaterial {
     }
 
     @Override
-    protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
+    protected void initDefault(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
         super.initDefault(blockSettings, itemSettings);
 
         addBlockEntry(new BlockEntry(BLOCK_TRUNK, false, (complexMaterial, settings) -> new BlockWillowTrunk()));

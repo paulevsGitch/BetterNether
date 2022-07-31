@@ -29,9 +29,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 
@@ -77,7 +77,7 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
                                   .mapColor(planksColor);
     }
 
-    protected void _initBase(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
+    protected void _initBase(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
         super.initBase(blockSettings, itemSettings);
         final TagKey<Block> tagBlockLog = getBlockTag(TAG_LOGS);
         final TagKey<Item> tagItemLog = getItemTag(TAG_LOGS);
@@ -121,7 +121,7 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
         );
     }
 
-    protected void initBoats(FabricItemSettings itemSettings) {
+    protected void initBoats(Item.Properties itemSettings) {
         BOAT_TYPE = BoatTypeOverride.create(BetterNether.MOD_ID, baseName, this.getPlanks());
 
         addItemEntry(new ItemEntry(ITEM_BOAT, (cmx, settings) -> BOAT_TYPE.createItem(false)));
@@ -132,7 +132,7 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     }
 
     @Override
-    protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
+    protected void initDefault(BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
         _initBase(blockSettings, itemSettings);
         super.initStorage(blockSettings, itemSettings);
         initDecorations(blockSettings, itemSettings);

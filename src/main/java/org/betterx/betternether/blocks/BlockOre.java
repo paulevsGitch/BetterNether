@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 
 import java.util.List;
@@ -46,8 +45,8 @@ public class BlockOre extends BaseOreBlock implements TagProvider, CustomItemPro
     }
 
     @Override
-    public BlockItem getCustomItem(ResourceLocation blockID, FabricItemSettings settings) {
-        if (fireproof) settings = settings.fireproof();
+    public BlockItem getCustomItem(ResourceLocation blockID, Item.Properties settings) {
+        if (fireproof) settings = settings.fireResistant();
         return new BlockItem(this, settings);
     }
 }
