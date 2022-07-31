@@ -37,6 +37,10 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class NetherBlocks extends BlockRegistry {
+    // Reed //
+    public static final Block NETHER_REED_STEM = registerBlock("nether_reed_stem", new BlockNetherReed());
+    public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
+
     // Stalagnate //
     public static final StalagnateMaterial MAT_STALAGNATE = new StalagnateMaterial().init();
 
@@ -46,8 +50,7 @@ public class NetherBlocks extends BlockRegistry {
             "willow_leaves",
             new BlockWillowLeaves(MAT_WILLOW.getSapling())
     );
-    // Reed //
-    public static final NetherReedMaterial MAT_REED = new NetherReedMaterial().init();
+
     // Wart //
     public static final WartMaterial MAT_WART = new WartMaterial(
             "wart",

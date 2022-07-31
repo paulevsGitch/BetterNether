@@ -22,7 +22,7 @@ import java.util.Set;
 public class BNRecipeManager extends BCLRecipeManager {
     public static <C extends Container, T extends Recipe<C>> void addRecipe(RecipeType<T> type, T recipe) {
         if (Configs.RECIPES.getBoolean("recipes", recipe.getId().getPath(), true)) {
-            BCLRecipeManager.addRecipe(type, recipe);
+            BCLRecipeManager.addRecipeAndCreateAdvancement(type, recipe);
         }
     }
 

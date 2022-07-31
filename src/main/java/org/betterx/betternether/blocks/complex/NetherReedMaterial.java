@@ -9,9 +9,9 @@ import org.betterx.bclib.client.models.PatternsHelper;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.recipes.GridRecipe;
-import org.betterx.betternether.blocks.BlockNetherReed;
 import org.betterx.betternether.blocks.BlockReedsBlock;
 import org.betterx.betternether.client.block.Patterns;
+import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 import org.betterx.worlds.together.tag.v3.CommonItemTags;
 import org.betterx.worlds.together.tag.v3.CommonPoiTags;
@@ -48,7 +48,6 @@ class ReedBookshelfBlock extends BaseBookshelfBlock {
 }
 
 public class NetherReedMaterial extends RoofMaterial {
-    public final static String BLOCK_STEM = BLOCK_OPTIONAL_STEM;
 
     public NetherReedMaterial() {
         super("nether_reed", MaterialColor.COLOR_CYAN, MaterialColor.COLOR_CYAN);
@@ -62,10 +61,6 @@ public class NetherReedMaterial extends RoofMaterial {
     @Override
     protected void initDefault(FabricBlockSettings blockSettings, FabricItemSettings itemSettings) {
         super.initDefault(blockSettings, itemSettings);
-
-        addBlockEntry(new BlockEntry(BLOCK_STEM, (complexMaterial, settings) -> {
-            return new BlockNetherReed();
-        }));
     }
 
     @Override
@@ -290,6 +285,6 @@ public class NetherReedMaterial extends RoofMaterial {
     }
 
     public Block getStem() {
-        return getBlock(BLOCK_STEM);
+        return NetherBlocks.NETHER_REED_STEM;
     }
 }

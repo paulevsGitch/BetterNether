@@ -1,14 +1,16 @@
 package org.betterx.betternether.registry;
 
 import org.betterx.bclib.items.boat.BoatTypeOverride;
-import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.bclib.registry.ItemRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.BNBlockProperties.FoodShape;
 import org.betterx.betternether.config.Configs;
 import org.betterx.betternether.integrations.VanillaExcavatorsIntegration;
 import org.betterx.betternether.integrations.VanillaHammersIntegration;
-import org.betterx.betternether.items.*;
+import org.betterx.betternether.items.ItemBlackApple;
+import org.betterx.betternether.items.ItemBowlFood;
+import org.betterx.betternether.items.complex.DiamondSet;
+import org.betterx.betternether.items.complex.NetherSet;
 import org.betterx.betternether.items.materials.BNArmorMaterial;
 import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.tab.CreativeTabs;
@@ -20,7 +22,10 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
@@ -36,8 +41,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class NetherItems extends ItemRegistry {
     private static final List<String> ITEMS = new ArrayList<String>();
-    public static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
-    public static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
+    private static final ArrayList<Item> MOD_BLOCKS = new ArrayList<Item>();
+    private static final ArrayList<Item> MOD_ITEMS = new ArrayList<Item>();
 
     public static final Item BLACK_APPLE = registerItem("black_apple", new ItemBlackApple());
 
@@ -66,132 +71,29 @@ public class NetherItems extends ItemRegistry {
     public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()),
             org.betterx.worlds.together.tag.v3.CommonItemTags.IRON_INGOTS
     );
-
-    public static final Item CINCINNASITE_PICKAXE = registerTool("cincinnasite_pickaxe", new NetherPickaxe(
-            BNToolMaterial.CINCINNASITE));
-    public static final Item CINCINNASITE_PICKAXE_DIAMOND = registerTool(
-            "cincinnasite_pickaxe_diamond",
-            new NetherPickaxe(BNToolMaterial.CINCINNASITE_DIAMOND)
-    );
-    public static final Item CINCINNASITE_AXE = registerTool(
-            "cincinnasite_axe",
-            new NetherAxe(BNToolMaterial.CINCINNASITE)
-    );
-    public static final Item CINCINNASITE_AXE_DIAMOND = registerTool(
-            "cincinnasite_axe_diamond",
-            new NetherAxe(BNToolMaterial.CINCINNASITE_DIAMOND)
-    );
-    public static final Item CINCINNASITE_SHOVEL = registerTool(
-            "cincinnasite_shovel",
-            new NetherShovel(BNToolMaterial.CINCINNASITE)
-    );
-    public static final Item CINCINNASITE_SHOVEL_DIAMOND = registerTool(
-            "cincinnasite_shovel_diamond",
-            new NetherShovel(BNToolMaterial.CINCINNASITE_DIAMOND)
-    );
-    public static final Item CINCINNASITE_HOE = registerTool(
-            "cincinnasite_hoe",
-            new NetherHoe(BNToolMaterial.CINCINNASITE)
-    );
-    public static final Item CINCINNASITE_HOE_DIAMOND = registerTool(
-            "cincinnasite_hoe_diamond",
-            new NetherHoe(BNToolMaterial.CINCINNASITE_DIAMOND)
-    );
-    public static final Item CINCINNASITE_SHEARS = registerShears(
-            "cincinnasite_shears",
-            new BaseShearsItem(defaultSettings().durability(380))
-    );
-
-    public static final Item CINCINNASITE_HELMET = registerItem(
-            "cincinnasite_helmet",
-            new NetherArmor(
-                    BNArmorMaterial.CINCINNASITE,
-                    EquipmentSlot.HEAD
-            )
-    );
-    public static final Item CINCINNASITE_CHESTPLATE = registerItem(
-            "cincinnasite_chestplate",
-            new NetherArmor(
-                    BNArmorMaterial.CINCINNASITE,
-                    EquipmentSlot.CHEST
-            )
-    );
-    public static final Item CINCINNASITE_LEGGINGS = registerItem(
-            "cincinnasite_leggings",
-            new NetherArmor(
-                    BNArmorMaterial.CINCINNASITE,
-                    EquipmentSlot.LEGS
-            )
-    );
-    public static final Item CINCINNASITE_BOOTS = registerItem(
-            "cincinnasite_boots",
-            new NetherArmor(
-                    BNArmorMaterial.CINCINNASITE,
-                    EquipmentSlot.FEET
-            )
-    );
-    public static final Item CINCINNASITE_SWORD = registerItem(
-            "cincinnasite_sword",
-            new NetherSword(BNToolMaterial.CINCINNASITE, 3, -2.4F)
-    );
-    public static final Item CINCINNASITE_SWORD_DIAMOND = registerItem(
-            "cincinnasite_sword_diamond",
-            new NetherSword(
-                    BNToolMaterial.CINCINNASITE_DIAMOND,
-                    3,
-                    -2.4F
-            )
-    );
-
     public static final Item NETHER_RUBY = registerItem("nether_ruby", new Item(defaultSettings()));
-    public static final Item NETHER_RUBY_PICKAXE = registerTool(
-            "nether_ruby_pickaxe",
-            new NetherPickaxe(BNToolMaterial.NETHER_RUBY)
-    );
-    public static final Item NETHER_RUBY_AXE = registerTool(
-            "nether_ruby_axe",
-            new NetherAxe(BNToolMaterial.NETHER_RUBY)
-    );
-    public static final Item NETHER_RUBY_SHOVEL = registerTool(
-            "nether_ruby_shovel",
-            new NetherShovel(BNToolMaterial.NETHER_RUBY)
-    );
-    public static final Item NETHER_RUBY_HOE = registerTool(
-            "nether_ruby_hoe",
-            new NetherHoe(BNToolMaterial.NETHER_RUBY)
-    );
-    public static final Item NETHER_RUBY_SWORD = registerItem(
-            "nether_ruby_sword",
-            new NetherSword(BNToolMaterial.NETHER_RUBY, 3, -2.4F)
-    );
-    public static final Item NETHER_RUBY_HELMET = registerItem(
-            "nether_ruby_helmet",
-            new NetherArmor(
-                    BNArmorMaterial.NETHER_RUBY,
-                    EquipmentSlot.HEAD
-            )
-    );
-    public static final Item NETHER_RUBY_CHESTPLATE = registerItem(
-            "nether_ruby_chestplate",
-            new NetherArmor(
-                    BNArmorMaterial.NETHER_RUBY,
-                    EquipmentSlot.CHEST
-            )
-    );
-    public static final Item NETHER_RUBY_LEGGINGS = registerItem(
-            "nether_ruby_leggings",
-            new NetherArmor(
-                    BNArmorMaterial.NETHER_RUBY,
-                    EquipmentSlot.LEGS
-            )
-    );
-    public static final Item NETHER_RUBY_BOOTS = registerItem(
-            "nether_ruby_boots",
-            new NetherArmor(
-                    BNArmorMaterial.NETHER_RUBY,
-                    EquipmentSlot.FEET
-            )
-    );
+
+    public static final NetherSet CINCINNASITE_SET = new NetherSet(
+            "cincinnasite",
+            BNToolMaterial.CINCINNASITE,
+            BNArmorMaterial.CINCINNASITE,
+            3,
+            -2.4F,
+            true
+    ).init();
+    public static final DiamondSet CINCINNASITE_DIAMOND_SET = new DiamondSet(
+            CINCINNASITE_SET,
+            4,
+            -2.4F
+    ).init();
+
+
+    public static final NetherSet NETHER_RUBY_SET = new NetherSet(
+            "nether_ruby",
+            BNToolMaterial.NETHER_RUBY,
+            BNArmorMaterial.NETHER_RUBY,
+            4, -2.0F, false
+    ).init();
 
     public static final Item CINCINNASITE_HAMMER = registerItem(
             "cincinnasite_hammer",
@@ -223,7 +125,7 @@ public class NetherItems extends ItemRegistry {
             VanillaExcavatorsIntegration.makeExcavator(
                     BNToolMaterial.CINCINNASITE,
                     4,
-                    -2.0F
+                    -1.6F
             )
     );
     public static final Item CINCINNASITE_EXCAVATOR_DIAMOND = registerItem(
@@ -394,9 +296,5 @@ public class NetherItems extends ItemRegistry {
         } else {
             return Items.AIR;
         }
-    }
-
-    public static List<String> getPossibleItems() {
-        return ITEMS;
     }
 }
