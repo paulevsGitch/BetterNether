@@ -1,5 +1,6 @@
 package org.betterx.betternether.items.complex;
 
+import org.betterx.bclib.api.v2.advancement.AdvancementManager;
 import org.betterx.bclib.items.complex.EquipmentDescription;
 import org.betterx.bclib.items.complex.EquipmentSet;
 import org.betterx.bclib.items.tool.BaseShearsItem;
@@ -31,7 +32,7 @@ public class NetherSet extends EquipmentSet {
 
         add(HELMET_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.HEAD)));
         add(CHESTPLATE_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.CHEST)));
-        add(LEGGINS_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.LEGS)));
+        add(LEGGINGS_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.LEGS)));
         add(BOOTS_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.FEET)));
 
         if (withShears) {
@@ -50,5 +51,13 @@ public class NetherSet extends EquipmentSet {
     public NetherSet init() {
         super.init(NetherItems.getItemRegistry());
         return this;
+    }
+
+    public AdvancementManager.Builder addArmorSet(AdvancementManager.Builder builder) {
+        return builder
+                .addInventoryChangedCriterion(baseName + "_" + HELMET_SLOT, getSlot(HELMET_SLOT))
+                .addInventoryChangedCriterion(baseName + "_" + CHESTPLATE_SLOT, getSlot(CHESTPLATE_SLOT))
+                .addInventoryChangedCriterion(baseName + "_" + LEGGINGS_SLOT, getSlot(LEGGINGS_SLOT))
+                .addInventoryChangedCriterion(baseName + "_" + BOOTS_SLOT, getSlot(BOOTS_SLOT));
     }
 }

@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class DiamondSet extends EquipmentSet {
     public DiamondSet(EquipmentSet set, int attackDamage, float attackSpeed) {
-        super(set.material, BetterNether.MOD_ID, set.prefix, NetherBlocks.NETHER_REED_STEM);
+        super(set.material, BetterNether.MOD_ID, set.baseName, NetherBlocks.NETHER_REED_STEM);
 
         add(PICKAXE_SLOT, new DiamondDescriptor<>(set.getSlot(PICKAXE_SLOT), NetherPickaxe::new));
         add(AXE_SLOT, new DiamondDescriptor<>(set.getSlot(AXE_SLOT), NetherAxe::new));
@@ -32,7 +32,7 @@ public class DiamondSet extends EquipmentSet {
 
     @Override
     protected @NotNull ResourceLocation buildID(Map.Entry<String, EquipmentDescription<?>> desc) {
-        return new ResourceLocation(modID, prefix + "_" + desc.getKey() + "_diamond");
+        return new ResourceLocation(modID, baseName + "_" + desc.getKey() + "_diamond");
     }
 
     public DiamondSet init() {

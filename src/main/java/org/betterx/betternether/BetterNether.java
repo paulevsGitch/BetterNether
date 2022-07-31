@@ -52,6 +52,7 @@ public class BetterNether implements ModInitializer {
         ItemRecipes.register();
         BNLoot.register();
         BNCriterion.register();
+        NetherAdvancements.register();
 
         Configs.saveConfigs();
         WorldConfig.registerModCache(MOD_ID);

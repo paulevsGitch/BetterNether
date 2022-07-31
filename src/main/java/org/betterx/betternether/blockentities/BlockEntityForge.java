@@ -1,9 +1,11 @@
 package org.betterx.betternether.blockentities;
 
+import org.betterx.betternether.advancements.BNCriterion;
 import org.betterx.betternether.registry.BlockEntitiesRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.FurnaceMenu;
@@ -37,5 +39,11 @@ public class BlockEntityForge extends AbstractFurnaceBlockEntity implements Chan
     @Override
     public int changeCookTime(int cookTime) {
         return cookTime / SPEEDUP;
+    }
+
+    @Override
+    public void awardUsedRecipesAndPopExperience(ServerPlayer serverPlayer) {
+        BNCriterion.USED_FORGE.trigger(serverPlayer);
+        super.awardUsedRecipesAndPopExperience(serverPlayer);
     }
 }

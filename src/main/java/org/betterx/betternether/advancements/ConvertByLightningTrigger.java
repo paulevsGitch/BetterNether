@@ -31,6 +31,10 @@ public class ConvertByLightningTrigger extends SimpleCriterionTrigger<ConvertByL
         });
     }
 
+    public TriggerInstance match(ItemLike item) {
+        return new TriggerInstance(EntityPredicate.Composite.ANY, ItemPredicate.Builder.item().of(item).build());
+    }
+
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
         private final ItemPredicate item;
 
