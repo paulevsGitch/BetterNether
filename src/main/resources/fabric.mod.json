@@ -36,16 +36,16 @@
     "betternether.mixins.client.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.6",
-    "fabric": ">=0.55.2",
+    "fabricloader": ">=0.14.8",
+    "fabric": ">=0.58.0",
     "minecraft": [
       "1.19",
       "1.19.1"
     ],
-    "bclib": "2.0.x"
+    "bclib": "2.1.x"
   },
   "breaks": {
-    "bclib": "<2.0.18"
+    "bclib": "<2.1.0"
   },
   "custom": {
     "bclib": {
