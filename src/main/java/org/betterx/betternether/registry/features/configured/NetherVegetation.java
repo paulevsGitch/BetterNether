@@ -271,8 +271,8 @@ public class NetherVegetation {
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> PATCH_WALL_MUSHROOMS = BCLFeatureBuilder
             .startFacing(BN.id("temp_wall_mushrooms"))
-            .add(NetherBlocks.WALL_MUSHROOM_RED, 20)
-            .add(NetherBlocks.WALL_MUSHROOM_BROWN, 15)
+            .add(NetherBlocks.WALL_MUSHROOM_RED, 40)
+            .add(NetherBlocks.WALL_MUSHROOM_BROWN, 35)
             .allHorizontal()
             .inlinePlace()
             .is(BlockPredicate.solid())

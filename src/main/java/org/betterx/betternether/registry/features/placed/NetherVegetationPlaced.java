@@ -177,7 +177,6 @@ public class NetherVegetationPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherInWall(25)
-            .isEmpty()
             .buildAndRegister();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_MUSHROOMS_WITH_MOSS = NetherVegetation
@@ -185,7 +184,6 @@ public class NetherVegetationPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherInWall(25)
-            .isEmpty()
             .buildAndRegister();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_MUSHROOMS = NetherVegetation
@@ -193,7 +191,6 @@ public class NetherVegetationPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherInWall(25)
-            .isEmpty()
             .buildAndRegister();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_JUNGLE = NetherVegetation
@@ -208,7 +205,6 @@ public class NetherVegetationPlaced {
             .place()
             .decoration(GenerationStep.Decoration.VEGETAL_DECORATION)
             .betterNetherInWall(50)
-            .isEmpty()
             .buildAndRegister();
 
     public static final BCLFeature<RandomPatchFeature, RandomPatchConfiguration> WALL_LUCIS = NetherVegetation
