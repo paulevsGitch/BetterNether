@@ -65,7 +65,7 @@ public class NetherItems extends ItemRegistry {
             "stalagnate_bowl_apple",
             new ItemBowlFood(Foods.APPLE, FoodShape.APPLE)
     );
-    public static final Item HOOK_MUSHROOM = registerFood("hook_mushroom_cooked", 4, 0.4F);
+    public static final Item HOOK_MUSHROOM_COOKED = registerFood("hook_mushroom_cooked", 4, 0.4F);
 
     public static final Item CINCINNASITE = registerItem("cincinnasite", new Item(defaultSettings()));
     public static final Item CINCINNASITE_INGOT = registerItem("cincinnasite_ingot", new Item(defaultSettings()),

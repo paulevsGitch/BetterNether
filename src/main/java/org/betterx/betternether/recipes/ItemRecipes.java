@@ -261,6 +261,44 @@ public class ItemRecipes {
                   .setGroup("nether_stalagnate_bowl")
                   .setOutputCount(3)
                   .build();
+
+        GridRecipe.make(BetterNether.makeID("agave_medicine"), NetherItems.AGAVE_MEDICINE)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .addMaterial('#', NetherItems.STALAGNATE_BOWL)
+                  .addMaterial('A', NetherItems.AGAVE_LEAF)
+                  .addMaterial('B', NetherItems.AGAVE_LEAF)
+                  .addMaterial('C', NetherItems.AGAVE_LEAF)
+                  .setList("#ABC")
+                  .setGroup("nether_agave_medicine")
+                  .build();
+        GridRecipe.make(BetterNether.makeID("herbal_medicine"), NetherItems.HERBAL_MEDICINE)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .addMaterial('#', NetherItems.STALAGNATE_BOWL)
+                  .addMaterial('A', NetherItems.AGAVE_LEAF)
+                  .addMaterial('B', NetherItems.BLACK_APPLE)
+                  .addMaterial('C', NetherItems.HOOK_MUSHROOM_COOKED)
+                  .addMaterial('D', Items.NETHER_WART)
+                  .setList("#ABCD")
+                  .setGroup("nether_herbal_medicine")
+                  .build();
+        GridRecipe.make(BetterNether.makeID("stalagnate_bowl_mushroom"), NetherItems.STALAGNATE_BOWL_MUSHROOM)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .addMaterial('#', Items.BROWN_MUSHROOM)
+                  .addMaterial('A', Items.RED_MUSHROOM)
+                  .addMaterial('B', NetherItems.STALAGNATE_BOWL)
+                  .setList("#AB")
+                  .setGroup("nether_stalagnate_bowl_mushroom")
+                  .build();
+        
+        GridRecipe.make(BetterNether.makeID("stalagnate_bowl_wart"), NetherItems.STALAGNATE_BOWL_WART)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .addMaterial('#', NetherItems.STALAGNATE_BOWL)
+                  .addMaterial('A', Items.NETHER_WART)
+                  .addMaterial('B', Items.NETHER_WART)
+                  .addMaterial('C', Items.NETHER_WART)
+                  .setList("#ABC")
+                  .setGroup("nether_stalagnate_bowl_wart")
+                  .build();
     }
 
     private static boolean itemExists(Item item) {

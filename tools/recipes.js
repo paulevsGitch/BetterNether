@@ -35,6 +35,22 @@ function printShaped(name, json){
 
     console.log(res);
 }
+const letters = "#ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+function printShapeless(name, json){
+    let shape =""
+    let res = `GridRecipe.make(BetterNether.makeID("${name}"), ${itemRef(json.result)})\n`+
+    ".checkConfig(Configs.RECIPE_CONFIG)\n"+
+    json.ingredients.map((k, nr)=>`.addMaterial('${letters[nr]}', ${itemRef(k)})\n`).join("")+    
+    '.setList("'+json.ingredients.map((k, nr)=>letters[nr]).join("")+'")\n'+
+    '.setGroup("nether_'+name+'")\n';
+    
+    if (+json.result.count>1){
+        res += `.setOutputCount(${json.result.count})\n`
+    }
+    res += ".build();";
+
+    console.log(res);
+}
 
 function findFiles(dir, indent=""){
     console.log(`${indent}|-- ${dir}`)
@@ -54,9 +70,13 @@ function findFiles(dir, indent=""){
                     if (json.type == "minecraft:crafting_shaped" || json.type == "crafting_shaped"){
                         //console.log(`${indent}  |       SHAPED`)   
                         //printShaped(name, json)
+                        //fs.unlinkSync(path.join(dir, file));
+                    } else if (json.type == "minecraft:crafting_shapeless" || json.type == "crafting_shapeless"){
+                        //console.log(`${indent}  |       SHAPELESS`)   
+                        //printShapeless(name, json)
                         fs.unlinkSync(path.join(dir, file));
                     } else{
-                        //console.log(`${indent}  |       Unknown Type`, json.type)   
+                        console.log(`${indent}  |       Unknown Type`, json.type)   
                     }                       
                 } catch (e) {
                     console.error(e.message)
