@@ -59,8 +59,7 @@ public class BlockStalagnateSeed extends FeatureSaplingBlock implements Bonemeal
     }
 
     private static boolean growsDownward(BlockState state) {
-        return state.getValue(TOP)
-                    .booleanValue();
+        return state.getValue(TOP);
     }
 
     @Override
