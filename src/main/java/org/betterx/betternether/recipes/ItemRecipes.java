@@ -1,12 +1,14 @@
 package org.betterx.betternether.recipes;
 
 import org.betterx.bclib.config.Configs;
+import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.core.Registry;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -124,12 +126,6 @@ public class ItemRecipes {
             );
         }
 
-        // RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_MUSHROOM_FIR.getLog(), NetherBlocks.MAT_MUSHROOM_FIR.getBark(), 3, "nether_bark_striped");
-        // RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_RUBEUS.getStrippedLog(), NetherBlocks.MAT_RUBEUS.getStrippedBark(), 3, "nether_bark_striped");
-        // RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_STALAGNATE.getBlock(NetherWoodenMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
-        // RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_WART.getStrippedLog(), NetherBlocks.MAT_WART.getStrippedBark(), 3, "nether_bark_striped");
-        // RecipesHelper.makeSimpleRecipe2(NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_LOG), NetherBlocks.MAT_WILLOW.getBlock(WillowMaterial.BLOCK_STRIPPED_BARK), 3, "nether_bark_striped");
-
         if (itemExists(NetherItems.CRIMSON_BOAT)) {
             NetherWoodenMaterial.makeBoatRecipe(
                     Configs.RECIPE_CONFIG, BetterNether.makeID("crimson_boat"),
@@ -155,6 +151,116 @@ public class ItemRecipes {
                     Blocks.WARPED_PLANKS, NetherItems.WARPED_BOAT, NetherItems.WARPED_CHEST_BOAT, true
             );
         }
+
+        GridRecipe.make(BetterNether.makeID("cincinnasite_ingot"), NetherItems.CINCINNASITE_INGOT)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("#")
+                  .addMaterial('#', NetherBlocks.CINCINNASITE_FORGED)
+                  .setGroup("nether_cincinnasite_ingot")
+                  .setOutputCount(4)
+                  .build();
+
+        GridRecipe.make(BetterNether.makeID("detector_rail"), Items.DETECTOR_RAIL)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("X X", "X#X", "XRX")
+                  .addMaterial('R', Items.REDSTONE)
+                  .addMaterial('#', Items.STONE_PRESSURE_PLATE)
+                  .addMaterial('X', NetherItems.CINCINNASITE_INGOT)
+                  .setGroup("nether_detector_rail")
+                  .setOutputCount(6)
+                  .build();
+
+        GridRecipe.make(BetterNether.makeID("glass_bottle"), Items.GLASS_BOTTLE)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("# #", " # ")
+                  .addMaterial('#', NetherBlocks.QUARTZ_GLASS)
+                  .setGroup("nether_glass_bottle")
+                  .setOutputCount(3)
+                  .build();
+        GridRecipe.make(BetterNether.makeID("gray_dye"), Items.GRAY_DYE)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("#")
+                  .addMaterial('#', NetherBlocks.GRAY_MOLD)
+                  .setGroup("nether_gray_dye")
+                  .build();
+
+        GridRecipe.make(BetterNether.makeID("nether_ruby_from_block"), NetherItems.NETHER_RUBY)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("#")
+                  .addMaterial('#', NetherBlocks.NETHER_RUBY_BLOCK)
+                  .setGroup("nether_nether_ruby_from_block")
+                  .setOutputCount(9)
+                  .build();
+        GridRecipe.make(BetterNether.makeID("paper"), Items.PAPER)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("###")
+                  .addMaterial('#', NetherBlocks.NETHER_REED_STEM)
+                  .setGroup("nether_paper")
+                  .setOutputCount(3)
+                  .build();
+        GridRecipe.make(BetterNether.makeID("rail"), Items.RAIL)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("X X", "X#X", "X X")
+                  .addMaterial('#', Items.STICK)
+                  .addMaterial('X', NetherItems.CINCINNASITE_INGOT)
+                  .setGroup("nether_rail")
+                  .setOutputCount(16)
+                  .build();
+        GridRecipe.make(BetterNether.makeID("red_dye"), Items.RED_DYE)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("#")
+                  .addMaterial('#', NetherBlocks.RED_MOLD)
+                  .setGroup("nether_red_dye")
+                  .setOutputCount(2)
+                  .build();
+        GridRecipe.make(BetterNether.makeID("stalagnate_bowl_apple"), NetherItems.STALAGNATE_BOWL_APPLE)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("W", "#")
+                  .addMaterial('#', NetherItems.STALAGNATE_BOWL)
+                  .addMaterial('W', NetherItems.BLACK_APPLE)
+                  .setGroup("nether_stalagnate_bowl_apple")
+                  .build();
+
+        GridRecipe.make(BetterNether.makeID("stick"), Items.STICK)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("#", "#")
+                  .addMaterial('#', NetherBlocks.NETHER_REED_STEM)
+                  .setGroup("nether_stick")
+                  .setOutputCount(2)
+                  .build();
+
+        GridRecipe.make(BetterNether.makeID("sugar"), Items.SUGAR)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("#")
+                  .addMaterial('#', NetherBlocks.NETHER_REED_STEM)
+                  .setGroup("nether_sugar")
+                  .build();
+
+        GridRecipe.make(BetterNether.makeID("shield"), Items.SHIELD)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("WoW", "WWW", " W ")
+                  .addMaterial('W', ItemTags.PLANKS)
+                  .addMaterial('o', NetherItems.CINCINNASITE_INGOT)
+                  .setGroup("nether_shield")
+                  .build();
+
+        GridRecipe.make(BetterNether.makeID("piston"), Items.PISTON)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("TTT", "#X#", "#R#")
+                  .addMaterial('R', Items.REDSTONE)
+                  .addMaterial('#', Items.COBBLESTONE)
+                  .addMaterial('T', ItemTags.PLANKS)
+                  .addMaterial('X', NetherItems.CINCINNASITE_INGOT)
+                  .setGroup("nether_piston")
+                  .build();
+
+        GridRecipe.make(BetterNether.makeID("stalagnate_bowl"), NetherItems.STALAGNATE_BOWL)
+                  .checkConfig(Configs.RECIPE_CONFIG)
+                  .setShape("# #", " # ")
+                  .addMaterial('#', NetherBlocks.MAT_STALAGNATE.getStem())
+                  .setGroup("nether_stalagnate_bowl")
+                  .setOutputCount(3)
+                  .build();
     }
 
     private static boolean itemExists(Item item) {
