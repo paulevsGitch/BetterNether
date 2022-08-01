@@ -262,6 +262,10 @@ public class ItemRecipes {
                   .setOutputCount(3)
                   .build();
 
+        registerShapeLess();
+    }
+
+    private static void registerShapeLess() {
         GridRecipe.make(BetterNether.makeID("agave_medicine"), NetherItems.AGAVE_MEDICINE)
                   .checkConfig(Configs.RECIPE_CONFIG)
                   .addMaterial('#', NetherItems.STALAGNATE_BOWL)
@@ -289,7 +293,7 @@ public class ItemRecipes {
                   .setList("#AB")
                   .setGroup("nether_stalagnate_bowl_mushroom")
                   .build();
-        
+
         GridRecipe.make(BetterNether.makeID("stalagnate_bowl_wart"), NetherItems.STALAGNATE_BOWL_WART)
                   .checkConfig(Configs.RECIPE_CONFIG)
                   .addMaterial('#', NetherItems.STALAGNATE_BOWL)

@@ -21,6 +21,16 @@ function itemRef(value){
     }
     return value.item;
 }
+function blockRef(value){
+    if (value.item==undefined) return tagRef(value)
+    let parts = value.item.split(':')
+    if (parts.length==2){
+        if (parts[0] == 'minecraft') return "Blocks." + parts[1].toUpperCase();
+        if (parts[0] == 'betternether') return "NetherBlocks." + parts[1].toUpperCase();
+        if (parts[0] == 'betterend') return "EndBlocks." + parts[1].toUpperCase();
+    }
+    return value.item;
+}
 function printShaped(name, json){
     let res = `GridRecipe.make(BetterNether.makeID("${name}"), ${itemRef(json.result)})\n`+
     ".checkConfig(Configs.RECIPE_CONFIG)\n"+
@@ -51,6 +61,19 @@ function printShapeless(name, json){
 
     console.log(res);
 }
+function printStoneCutting(name, json){    
+    let res = `StoneCutterRecipe\n.make(BetterNether.makeID("${name}"), ${blockRef({item:json.result})})\n`+
+    ".checkConfig(Configs.RECIPE_CONFIG)\n"+
+    ".setInput("+blockRef(json.ingredient)+")\n"+
+    '.setGroup("nether_'+name+'")\n';
+
+    if (+json.count>1){
+        res += `.setOutputCount(${json.count})\n`
+    }
+    res += ".build();";
+
+    console.log(res);
+}
 
 function findFiles(dir, indent=""){
     console.log(`${indent}|-- ${dir}`)
@@ -74,7 +97,11 @@ function findFiles(dir, indent=""){
                     } else if (json.type == "minecraft:crafting_shapeless" || json.type == "crafting_shapeless"){
                         //console.log(`${indent}  |       SHAPELESS`)   
                         //printShapeless(name, json)
-                        fs.unlinkSync(path.join(dir, file));
+                        //fs.unlinkSync(path.join(dir, file));
+                    } else if (json.type == "minecraft:stonecutting" || json.type == "stonecutting"){
+                        //console.log(`${indent}  |       STONECUTTING`)   
+                        //printStoneCutting(name, json)
+                        //fs.unlinkSync(path.join(dir, file));
                     } else{
                         console.log(`${indent}  |       Unknown Type`, json.type)   
                     }                       

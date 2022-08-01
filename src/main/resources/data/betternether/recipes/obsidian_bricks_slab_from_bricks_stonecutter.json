@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-      "item": "betternether:obsidian_bricks"
-    },
-    "result": "betternether:obsidian_bricks_slab",
-    "count": 2
-  }

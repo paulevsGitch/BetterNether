@@ -2,11 +2,13 @@ package org.betterx.betternether.recipes;
 
 import org.betterx.bclib.config.Configs;
 import org.betterx.bclib.recipes.GridRecipe;
+import org.betterx.bclib.recipes.StoneCutterRecipe;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 public class BlockRecipes {
     public static void register() {
@@ -355,5 +357,256 @@ public class BlockRecipes {
                   .addMaterial('#', NetherBlocks.MAT_REED.getPlanks())
                   .setGroup("nether_chest_of_drawers")
                   .build();
+
+        registerStoneCutting();
+    }
+
+    private static void registerStoneCutting() {
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_bricks_from_tile_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_BRICKS
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN_TILE)
+                .setGroup("nether_blue_obsidian_bricks_from_tile_stonecutter")
+                .build();
+        
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_bricks_slab_from_bricks_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_BRICKS_SLAB
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
+                .setGroup("nether_blue_obsidian_bricks_slab_from_bricks_stonecutter")
+                .setOutputCount(2)
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_bricks_slab_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_BRICKS_SLAB
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setGroup("nether_blue_obsidian_bricks_slab_stonecutter")
+                .setOutputCount(2)
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_bricks_stairs_from_bricks_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_BRICKS_STAIRS
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
+                .setGroup("nether_blue_obsidian_bricks_stairs_from_bricks_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_bricks_stairs_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_BRICKS_STAIRS
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setGroup("nether_blue_obsidian_bricks_stairs_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("blue_obsidian_bricks_stonecutter"), NetherBlocks.BLUE_OBSIDIAN_BRICKS)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setGroup("nether_blue_obsidian_bricks_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("blue_obsidian_rod_tiles_stonecutter"), NetherBlocks.BLUE_OBSIDIAN_ROD_TILES)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setGroup("nether_blue_obsidian_rod_tiles_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_tile_slab_from_tile_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_TILE_SLAB
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN_TILE)
+                .setGroup("nether_blue_obsidian_tile_slab_from_tile_stonecutter")
+                .setOutputCount(2)
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("blue_obsidian_tile_slab_stonecutter"), NetherBlocks.BLUE_OBSIDIAN_TILE_SLAB)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setGroup("nether_blue_obsidian_tile_slab_stonecutter")
+                .setOutputCount(2)
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_tile_small_from_bricks_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_TILE_SMALL
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN_BRICKS)
+                .setGroup("nether_blue_obsidian_tile_small_from_bricks_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_tile_small_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_TILE_SMALL
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setGroup("nether_blue_obsidian_tile_small_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_tile_stairs_from_tile_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_TILE_STAIRS
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN_TILE)
+                .setGroup("nether_blue_obsidian_tile_stairs_from_tile_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("blue_obsidian_tile_stairs_stonecutter"),
+                        NetherBlocks.BLUE_OBSIDIAN_TILE_STAIRS
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setGroup("nether_blue_obsidian_tile_stairs_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("blue_obsidian_tile_stonecutter"), NetherBlocks.BLUE_OBSIDIAN_TILE)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setGroup("nether_blue_obsidian_tile_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_bricks_from_tile_stonecutter"), NetherBlocks.OBSIDIAN_BRICKS)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.OBSIDIAN_TILE)
+                .setGroup("nether_obsidian_bricks_from_tile_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("obsidian_bricks_slab_from_bricks_stonecutter"),
+                        NetherBlocks.OBSIDIAN_BRICKS_SLAB
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.OBSIDIAN_BRICKS)
+                .setGroup("nether_obsidian_bricks_slab_from_bricks_stonecutter")
+                .setOutputCount(2)
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_bricks_slab_stonecutter"), NetherBlocks.OBSIDIAN_BRICKS_SLAB)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Blocks.OBSIDIAN)
+                .setGroup("nether_obsidian_bricks_slab_stonecutter")
+                .setOutputCount(2)
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("obsidian_bricks_stairs_from_bricks_stonecutter"),
+                        NetherBlocks.OBSIDIAN_BRICKS_STAIRS
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.OBSIDIAN_BRICKS)
+                .setGroup("nether_obsidian_bricks_stairs_from_bricks_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_bricks_stairs_stonecutter"), NetherBlocks.OBSIDIAN_BRICKS_STAIRS)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Blocks.OBSIDIAN)
+                .setGroup("nether_obsidian_bricks_stairs_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_bricks_stonecutter"), NetherBlocks.OBSIDIAN_BRICKS)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Blocks.OBSIDIAN)
+                .setGroup("nether_obsidian_bricks_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_rod_tiles_stonecutting"), NetherBlocks.OBSIDIAN_ROD_TILES)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Blocks.OBSIDIAN)
+                .setGroup("nether_obsidian_rod_tiles_stonecutting")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_tile_slab_from_tile_stonecutter"), NetherBlocks.OBSIDIAN_TILE_SLAB)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.OBSIDIAN_TILE)
+                .setGroup("nether_obsidian_tile_slab_from_tile_stonecutter")
+                .setOutputCount(2)
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_tile_slab_stonecutter"), NetherBlocks.OBSIDIAN_TILE_SLAB)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Blocks.OBSIDIAN)
+                .setGroup("nether_obsidian_tile_slab_stonecutter")
+                .setOutputCount(2)
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("obsidian_tile_small_from_bricks_stonecutter"),
+                        NetherBlocks.OBSIDIAN_TILE_SMALL
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.OBSIDIAN_BRICKS)
+                .setGroup("nether_obsidian_tile_small_from_bricks_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_tile_small_stonecutter"), NetherBlocks.OBSIDIAN_TILE_SMALL)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Blocks.OBSIDIAN)
+                .setGroup("nether_obsidian_tile_small_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(
+                        BetterNether.makeID("obsidian_tile_stairs_from_tile_stonecutter"),
+                        NetherBlocks.OBSIDIAN_TILE_STAIRS
+                )
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.OBSIDIAN_TILE)
+                .setGroup("nether_obsidian_tile_stairs_from_tile_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_tile_stairs_stonecutter"), NetherBlocks.OBSIDIAN_TILE_STAIRS)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Blocks.OBSIDIAN)
+                .setGroup("nether_obsidian_tile_stairs_stonecutter")
+                .build();
+
+        StoneCutterRecipe
+                .make(BetterNether.makeID("obsidian_tile_stonecutter"), NetherBlocks.OBSIDIAN_TILE)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Blocks.OBSIDIAN)
+                .setGroup("nether_obsidian_tile_stonecutter")
+                .build();
+
     }
 }
