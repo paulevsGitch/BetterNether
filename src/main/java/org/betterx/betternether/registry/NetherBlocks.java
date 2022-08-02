@@ -3,7 +3,7 @@ package org.betterx.betternether.registry;
 import org.betterx.bclib.blocks.BaseBookshelfBlock;
 import org.betterx.bclib.blocks.BaseComposterBlock;
 import org.betterx.bclib.blocks.BaseLadderBlock;
-import org.betterx.bclib.recipes.GridRecipe;
+import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.bclib.registry.BlockRegistry;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.*;
@@ -793,13 +793,13 @@ public class NetherBlocks extends BlockRegistry {
         Block shelf = new BaseBookshelfBlock.WithVanillaWood(baseBlock);
         registerBlock(name, shelf, CommonBlockTags.BOOKSHELVES);
 
-        GridRecipe.make(BetterNether.makeID(name), shelf)
-                  .checkConfig(Configs.RECIPES)
-                  .setShape("###", "BBB", "###")
-                  .addMaterial('#', baseBlock)
-                  .addMaterial('B', Items.BOOK)
-                  .setGroup("nether" + "_bookshelf")
-                  .build();
+        BCLRecipeBuilder.crafting(BetterNether.makeID(name), shelf)
+                        .checkConfig(Configs.RECIPES)
+                        .setShape("###", "BBB", "###")
+                        .addMaterial('#', baseBlock)
+                        .addMaterial('B', Items.BOOK)
+                        .setGroup("nether" + "_bookshelf")
+                        .build();
 
         return shelf;
     }
@@ -808,12 +808,12 @@ public class NetherBlocks extends BlockRegistry {
         Block composter = new BaseComposterBlock(baseBlock);
         registerBlock(name, composter, CommonPoiTags.FARMER_WORKSTATION);
 
-        GridRecipe.make(BetterNether.makeID(name), composter)
-                  .checkConfig(Configs.RECIPES)
-                  .setShape("# #", "# #", "###")
-                  .addMaterial('#', baseSlab)
-                  .setGroup("nether" + "_composter")
-                  .build();
+        BCLRecipeBuilder.crafting(BetterNether.makeID(name), composter)
+                        .checkConfig(Configs.RECIPES)
+                        .setShape("# #", "# #", "###")
+                        .addMaterial('#', baseSlab)
+                        .setGroup("nether" + "_composter")
+                        .build();
         return composter;
     }
 
@@ -974,12 +974,12 @@ public class NetherBlocks extends BlockRegistry {
             TagManager.BLOCKS.add(block, org.betterx.worlds.together.tag.v3.CommonBlockTags.WORKBENCHES);
             TagManager.ITEMS.add(block.asItem(), org.betterx.worlds.together.tag.v3.CommonItemTags.WORKBENCHES);
 
-            GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
-                      .checkConfig(Configs.RECIPES)
-                      .setShape("##", "##")
-                      .addMaterial('#', source)
-                      .setGroup("nether" + "_tables")
-                      .build();
+            BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
+                            .checkConfig(Configs.RECIPES)
+                            .setShape("##", "##")
+                            .addMaterial('#', source)
+                            .setGroup("nether" + "_tables")
+                            .build();
 
             FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
         }
@@ -995,12 +995,12 @@ public class NetherBlocks extends BlockRegistry {
             TagManager.ITEMS.add(chest, CommonItemTags.CHEST);
             addFuel(planks, chest);
             //RecipesHelper.makeRoundRecipe(planks, chest, "nether_chest");
-            GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), chest)
-                      .checkConfig(Configs.RECIPES)
-                      .setShape("###", "# #", "###")
-                      .addMaterial('#', planks)
-                      .setGroup("nether" + "_chests")
-                      .build();
+            BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), chest)
+                            .checkConfig(Configs.RECIPES)
+                            .setShape("###", "# #", "###")
+                            .addMaterial('#', planks)
+                            .setGroup("nether" + "_chests")
+                            .build();
 
             FlammableBlockRegistry.getDefaultInstance().add(chest, 5, 20);
         }
@@ -1014,13 +1014,13 @@ public class NetherBlocks extends BlockRegistry {
             registerBlockDirectly(name, block);
             addFuel(source, block);
             //RecipesHelper.makeBarrelRecipe(source, slab, block);
-            GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
-                      .checkConfig(Configs.RECIPES)
-                      .setShape("#S#", "# #", "#S#")
-                      .addMaterial('#', source)
-                      .addMaterial('S', slab)
-                      .setGroup("nether" + "_barrels")
-                      .build();
+            BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
+                            .checkConfig(Configs.RECIPES)
+                            .setShape("#S#", "# #", "#S#")
+                            .addMaterial('#', source)
+                            .addMaterial('S', slab)
+                            .setGroup("nether" + "_barrels")
+                            .build();
 
             FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
             TagManager.BLOCKS.add(block, CommonBlockTags.WOODEN_BARREL, CommonBlockTags.BARREL);
@@ -1038,14 +1038,14 @@ public class NetherBlocks extends BlockRegistry {
             addFuel(source, block);
             //RecipesHelper.makeLadderRecipe(source, block);
 
-            GridRecipe.make(new ResourceLocation(BetterNether.MOD_ID, name), block)
-                      .checkConfig(Configs.RECIPES)
-                      .setOutputCount(3)
-                      .setShape("I I", "I#I", "I I")
-                      .addMaterial('#', source)
-                      .addMaterial('I', Items.STICK)
-                      .setGroup("nether" + "_ladders")
-                      .build();
+            BCLRecipeBuilder.crafting(new ResourceLocation(BetterNether.MOD_ID, name), block)
+                            .checkConfig(Configs.RECIPES)
+                            .setOutputCount(3)
+                            .setShape("I I", "I#I", "I I")
+                            .addMaterial('#', source)
+                            .addMaterial('I', Items.STICK)
+                            .setGroup("nether" + "_ladders")
+                            .build();
             FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
         }
 

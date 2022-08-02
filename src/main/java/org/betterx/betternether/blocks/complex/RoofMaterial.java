@@ -5,7 +5,7 @@ import org.betterx.bclib.blocks.BaseSlabBlock;
 import org.betterx.bclib.blocks.BaseStairsBlock;
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
-import org.betterx.bclib.recipes.GridRecipe;
+import org.betterx.bclib.recipes.BCLRecipeBuilder;
 
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.Item;
@@ -57,33 +57,33 @@ public class RoofMaterial extends NetherWoodenMaterial {
 
         if (Registry.BLOCK.getKey(slab) != Registry.BLOCK.getDefaultKey()) {
             addRecipeEntry(new RecipeEntry(BLOCK_ROOF, (material, config, id) -> {
-                GridRecipe.make(id, getBlock(BLOCK_ROOF))
-                          .checkConfig(config)
-                          .setOutputCount(4)
-                          .setShape("# #", "###", " # ")
-                          .addMaterial('#', planks)
-                          .setGroup(receipGroupPrefix + "_planks_roof")
-                          .build();
+                BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF))
+                                .checkConfig(config)
+                                .setOutputCount(4)
+                                .setShape("# #", "###", " # ")
+                                .addMaterial('#', planks)
+                                .setGroup(receipGroupPrefix + "_planks_roof")
+                                .build();
             }));
 
             addRecipeEntry(new RecipeEntry(BLOCK_ROOF_STAIRS, (material, config, id) -> {
-                GridRecipe.make(id, getBlock(BLOCK_ROOF_STAIRS))
-                          .checkConfig(config)
-                          .setOutputCount(4)
-                          .setShape("#  ", "## ", "###")
-                          .addMaterial('#', roof)
-                          .setGroup(receipGroupPrefix + "_planks_roof_stairs")
-                          .build();
+                BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF_STAIRS))
+                                .checkConfig(config)
+                                .setOutputCount(4)
+                                .setShape("#  ", "## ", "###")
+                                .addMaterial('#', roof)
+                                .setGroup(receipGroupPrefix + "_planks_roof_stairs")
+                                .build();
             }));
 
             addRecipeEntry(new RecipeEntry(BLOCK_ROOF_SLAB, (material, config, id) -> {
-                GridRecipe.make(id, getBlock(BLOCK_ROOF_SLAB))
-                          .checkConfig(config)
-                          .setOutputCount(6)
-                          .setShape("###")
-                          .addMaterial('#', roof)
-                          .setGroup(receipGroupPrefix + "_planks_roof_slabs")
-                          .build();
+                BCLRecipeBuilder.crafting(id, getBlock(BLOCK_ROOF_SLAB))
+                                .checkConfig(config)
+                                .setOutputCount(6)
+                                .setShape("###")
+                                .addMaterial('#', roof)
+                                .setGroup(receipGroupPrefix + "_planks_roof_slabs")
+                                .build();
             }));
         }
     }

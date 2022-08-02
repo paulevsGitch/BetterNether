@@ -2,7 +2,7 @@ package org.betterx.betternether.blocks.complex;
 
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
-import org.betterx.bclib.recipes.GridRecipe;
+import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.BlockMushroomFir;
 import org.betterx.betternether.blocks.BlockMushroomFirSapling;
 import org.betterx.betternether.blocks.BlockStem;
@@ -49,13 +49,13 @@ public class MushroomFirMaterial extends NetherWoodenMaterial {
             final Block log = getBlock(BLOCK_LOG);
             final Block stem = getBlock(BLOCK_STEM);
 
-            GridRecipe.make(id, log)
-                      .checkConfig(config)
-                      .setOutputCount(1)
-                      .setShape("##", "##")
-                      .addMaterial('#', stem)
-                      .setGroup(receipGroupPrefix + "_planks")
-                      .build();
+            BCLRecipeBuilder.crafting(id, log)
+                            .checkConfig(config)
+                            .setOutputCount(1)
+                            .setShape("##", "##")
+                            .addMaterial('#', stem)
+                            .setGroup(receipGroupPrefix + "_planks")
+                            .build();
         }));
 
         initDefaultFurniture();

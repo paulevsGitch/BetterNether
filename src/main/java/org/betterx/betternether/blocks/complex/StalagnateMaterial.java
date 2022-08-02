@@ -2,7 +2,7 @@ package org.betterx.betternether.blocks.complex;
 
 import org.betterx.bclib.complexmaterials.entry.BlockEntry;
 import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
-import org.betterx.bclib.recipes.GridRecipe;
+import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.betternether.blocks.BlockStalagnate;
 import org.betterx.betternether.blocks.BlockStalagnateBowl;
 import org.betterx.betternether.blocks.BlockStalagnateSeed;
@@ -55,13 +55,13 @@ public class StalagnateMaterial extends RoofMaterial {
         addRecipeEntry(new RecipeEntry(BLOCK_LOG, (material, config, id) -> {
             Block stem = getStem();
 
-            GridRecipe.make(id, getBlock(BLOCK_LOG))
-                      .checkConfig(config)
-                      .setOutputCount(1)
-                      .setShape("##", "##")
-                      .addMaterial('#', stem)
-                      .setGroup(receipGroupPrefix + "_logs")
-                      .build();
+            BCLRecipeBuilder.crafting(id, getBlock(BLOCK_LOG))
+                            .checkConfig(config)
+                            .setOutputCount(1)
+                            .setShape("##", "##")
+                            .addMaterial('#', stem)
+                            .setGroup(receipGroupPrefix + "_logs")
+                            .build();
         }));
     }
 

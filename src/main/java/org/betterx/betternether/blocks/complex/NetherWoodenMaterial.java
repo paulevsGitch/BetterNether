@@ -9,7 +9,7 @@ import org.betterx.bclib.complexmaterials.entry.RecipeEntry;
 import org.betterx.bclib.config.Configs;
 import org.betterx.bclib.config.PathConfig;
 import org.betterx.bclib.items.boat.BoatTypeOverride;
-import org.betterx.bclib.recipes.GridRecipe;
+import org.betterx.bclib.recipes.BCLRecipeBuilder;
 import org.betterx.bclib.registry.BlockRegistry;
 import org.betterx.bclib.registry.ItemRegistry;
 import org.betterx.betternether.BetterNether;
@@ -154,33 +154,33 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
     }
 
     public static void makeTaburetRecipe(PathConfig config, ResourceLocation id, Block taburet, Block planks) {
-        GridRecipe.make(id, taburet)
-                  .checkConfig(config)
-                  .setShape("##", "II")
-                  .addMaterial('#', planks)
-                  .addMaterial('I', Items.STICK)
-                  .setGroup("nether" + "_taburet")
-                  .build();
+        BCLRecipeBuilder.crafting(id, taburet)
+                        .checkConfig(config)
+                        .setShape("##", "II")
+                        .addMaterial('#', planks)
+                        .addMaterial('I', Items.STICK)
+                        .setGroup("nether" + "_taburet")
+                        .build();
     }
 
     public static void makeChairRecipe(PathConfig config, ResourceLocation id, Block chair, Block planks) {
-        GridRecipe.make(id, chair)
-                  .checkConfig(config)
-                  .setShape("I ", "##", "II")
-                  .addMaterial('#', planks)
-                  .addMaterial('I', Items.STICK)
-                  .setGroup("nether" + "_chair")
-                  .build();
+        BCLRecipeBuilder.crafting(id, chair)
+                        .checkConfig(config)
+                        .setShape("I ", "##", "II")
+                        .addMaterial('#', planks)
+                        .addMaterial('I', Items.STICK)
+                        .setGroup("nether" + "_chair")
+                        .build();
     }
 
     public static void makeBarStoolRecipe(PathConfig config, ResourceLocation id, Block barStool, Block planks) {
-        GridRecipe.make(id, barStool)
-                  .checkConfig(config)
-                  .setShape("##", "II", "II")
-                  .addMaterial('#', planks)
-                  .addMaterial('I', Items.STICK)
-                  .setGroup("nether" + "_bar_stool")
-                  .build();
+        BCLRecipeBuilder.crafting(id, barStool)
+                        .checkConfig(config)
+                        .setShape("##", "II", "II")
+                        .addMaterial('#', planks)
+                        .addMaterial('I', Items.STICK)
+                        .setGroup("nether" + "_bar_stool")
+                        .build();
     }
 
     public static void makeBoatRecipe(
@@ -192,20 +192,20 @@ public class NetherWoodenMaterial extends WoodenComplexMaterial {
             boolean hasChest
     ) {
         if (hasChest) {
-            GridRecipe.make(id, chestBoat)
-                      .checkConfig(config)
-                      .setList("C#")
-                      .addMaterial('C', CommonItemTags.CHEST)
-                      .addMaterial('#', boat)
-                      .setGroup("nether" + "_chest_boat")
-                      .build();
+            BCLRecipeBuilder.crafting(id, chestBoat)
+                            .checkConfig(config)
+                            .setList("C#")
+                            .addMaterial('C', CommonItemTags.CHEST)
+                            .addMaterial('#', boat)
+                            .setGroup("nether" + "_chest_boat")
+                            .build();
         } else {
-            GridRecipe.make(id, boat)
-                      .checkConfig(config)
-                      .setShape("# #", "###")
-                      .addMaterial('#', planks)
-                      .setGroup("nether" + "_boat")
-                      .build();
+            BCLRecipeBuilder.crafting(id, boat)
+                            .checkConfig(config)
+                            .setShape("# #", "###")
+                            .addMaterial('#', planks)
+                            .setGroup("nether" + "_boat")
+                            .build();
         }
     }
 
