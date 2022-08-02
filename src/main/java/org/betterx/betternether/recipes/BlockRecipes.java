@@ -1,6 +1,7 @@
 package org.betterx.betternether.recipes;
 
 import org.betterx.bclib.config.Configs;
+import org.betterx.bclib.recipes.BlastFurnaceRecipe;
 import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.bclib.recipes.StoneCutterRecipe;
 import org.betterx.betternether.BetterNether;
@@ -359,6 +360,17 @@ public class BlockRecipes {
                   .build();
 
         registerStoneCutting();
+        registerBlasting();
+    }
+
+    private static void registerBlasting() {
+        BlastFurnaceRecipe
+                .make(BetterNether.makeID("cincinnasite_forged_blasting"), NetherBlocks.CINCINNASITE_FORGED)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.CINCINNASITE_BLOCK)
+                .setGroup("nether_cincinnasite_forged_blasting")
+                .setCookingTime(100)
+                .build();
     }
 
     private static void registerStoneCutting() {
@@ -371,7 +383,7 @@ public class BlockRecipes {
                 .setInput(NetherBlocks.BLUE_OBSIDIAN_TILE)
                 .setGroup("nether_blue_obsidian_bricks_from_tile_stonecutter")
                 .build();
-        
+
         StoneCutterRecipe
                 .make(
                         BetterNether.makeID("blue_obsidian_bricks_slab_from_bricks_stonecutter"),

@@ -1,6 +1,7 @@
 package org.betterx.betternether.recipes;
 
 import org.betterx.bclib.config.Configs;
+import org.betterx.bclib.recipes.BlastFurnaceRecipe;
 import org.betterx.bclib.recipes.GridRecipe;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
@@ -263,6 +264,7 @@ public class ItemRecipes {
                   .build();
 
         registerShapeLess();
+        registerBlasting();
     }
 
     private static void registerShapeLess() {
@@ -303,6 +305,24 @@ public class ItemRecipes {
                   .setList("#ABC")
                   .setGroup("nether_stalagnate_bowl_wart")
                   .build();
+    }
+
+    private static void registerBlasting() {
+        BlastFurnaceRecipe
+                .make(BetterNether.makeID("cincinnasite_ingot_from_ore_blasting"), NetherItems.CINCINNASITE_INGOT)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.CINCINNASITE_ORE)
+                .setGroup("nether_cincinnasite_ingot_from_ore_blasting")
+                .setCookingTime(100)
+                .build();
+        BlastFurnaceRecipe
+                .make(BetterNether.makeID("cincinnasite_ingot_from_shard_blasting"), NetherItems.CINCINNASITE_INGOT)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherItems.CINCINNASITE)
+                .setGroup("nether_cincinnasite_ingot_from_shard_blasting")
+                .setCookingTime(100)
+                .setExperience(0.5f)
+                .build();
     }
 
     private static boolean itemExists(Item item) {

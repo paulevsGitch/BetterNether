@@ -75,6 +75,24 @@ function printStoneCutting(name, json){
     console.log(res);
 }
 
+function printBlasting(name, json){    
+    let res = `BlastFurnaceRecipe\n.make(BetterNether.makeID("${name}"), ${blockRef({item:json.result})})\n`+
+    ".checkConfig(Configs.RECIPE_CONFIG)\n"+
+    ".setInput("+blockRef(json.ingredient)+")\n"+
+    '.setGroup("nether_'+name+'")\n'+    
+    `.setCookingTime(${+json.cookingtime})\n`;
+
+    if (+json.experience>0){
+        res += `.setExperience(${+json.experience})\n`;
+    }
+    if (+json.count>1){
+        res += `.setOutputCount(${json.count})\n`
+    }
+    res += ".build();";
+
+    console.log(res);
+}
+
 function findFiles(dir, indent=""){
     console.log(`${indent}|-- ${dir}`)
     files = fs.readdirSync(dir)
@@ -102,8 +120,12 @@ function findFiles(dir, indent=""){
                         //console.log(`${indent}  |       STONECUTTING`)   
                         //printStoneCutting(name, json)
                         //fs.unlinkSync(path.join(dir, file));
+                    }  else if (json.type == "minecraft:blasting" || json.type == "blasting"){
+                        //console.log(`${indent}  |       BLASTING`)   
+                        //printBlasting(name, json)
+                        fs.unlinkSync(path.join(dir, file));
                     } else{
-                        console.log(`${indent}  |       Unknown Type`, json.type)   
+                        //console.log(`${indent}  |       Unknown Type`, json.type)   
                     }                       
                 } catch (e) {
                     console.error(e.message)
