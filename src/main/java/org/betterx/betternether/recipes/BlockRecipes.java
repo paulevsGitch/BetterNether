@@ -3,6 +3,7 @@ package org.betterx.betternether.recipes;
 import org.betterx.bclib.config.Configs;
 import org.betterx.bclib.recipes.BlastFurnaceRecipe;
 import org.betterx.bclib.recipes.GridRecipe;
+import org.betterx.bclib.recipes.SmelterRecipe;
 import org.betterx.bclib.recipes.StoneCutterRecipe;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -361,6 +362,46 @@ public class BlockRecipes {
 
         registerStoneCutting();
         registerBlasting();
+        registerSmelting();
+    }
+
+    private static void registerSmelting() {
+        SmelterRecipe
+                .make(BetterNether.makeID("blue_obsidian_glass"), NetherBlocks.BLUE_OBSIDIAN_GLASS)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.BLUE_OBSIDIAN)
+                .setGroup("nether_blue_obsidian_glass")
+                .setCookingTime(200)
+                .build();
+        SmelterRecipe
+                .make(BetterNether.makeID("cincinnasite_forged"), NetherBlocks.CINCINNASITE_FORGED)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.CINCINNASITE_BLOCK)
+                .setGroup("nether_cincinnasite_forged")
+                .setCookingTime(200)
+                .build();
+        SmelterRecipe
+                .make(BetterNether.makeID("obsidian_glass"), NetherBlocks.OBSIDIAN_GLASS)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Blocks.OBSIDIAN)
+                .setGroup("nether_obsidian_glass")
+                .setCookingTime(200)
+                .build();
+        SmelterRecipe
+                .make(BetterNether.makeID("quartz_glass"), NetherBlocks.QUARTZ_GLASS)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(Items.QUARTZ)
+                .setGroup("nether_quartz_glass")
+                .setCookingTime(200)
+                .build();
+        SmelterRecipe
+                .make(BetterNether.makeID("soul_sandstone"), NetherBlocks.SOUL_SANDSTONE_SMOOTH)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.SOUL_SANDSTONE)
+                .setGroup("nether_soul_sandstone")
+                .setCookingTime(200)
+                .setExperience(0.1f)
+                .build();
     }
 
     private static void registerBlasting() {

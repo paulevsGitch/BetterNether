@@ -3,6 +3,7 @@ package org.betterx.betternether.recipes;
 import org.betterx.bclib.config.Configs;
 import org.betterx.bclib.recipes.BlastFurnaceRecipe;
 import org.betterx.bclib.recipes.GridRecipe;
+import org.betterx.bclib.recipes.SmelterRecipe;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.blocks.complex.NetherWoodenMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
@@ -265,6 +266,7 @@ public class ItemRecipes {
 
         registerShapeLess();
         registerBlasting();
+        registerSmelting();
     }
 
     private static void registerShapeLess() {
@@ -323,6 +325,43 @@ public class ItemRecipes {
                 .setCookingTime(100)
                 .setExperience(0.5f)
                 .build();
+    }
+
+    private static void registerSmelting() {
+        SmelterRecipe
+                .make(BetterNether.makeID("black_dye"), Items.BLACK_DYE)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.INK_BUSH_SEED)
+                .setGroup("nether_black_dye")
+                .setCookingTime(200)
+                .build();
+
+        SmelterRecipe
+                .make(BetterNether.makeID("hook_mushroom_cooked"), NetherItems.HOOK_MUSHROOM_COOKED)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.HOOK_MUSHROOM)
+                .setGroup("nether_hook_mushroom_cooked")
+                .setCookingTime(200)
+                .setExperience(0.1f)
+                .build();
+
+        SmelterRecipe
+                .make(BetterNether.makeID("cincinnasite_ingot_from_shard"), NetherItems.CINCINNASITE_INGOT)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherItems.CINCINNASITE)
+                .setGroup("nether_cincinnasite_ingot_from_shard")
+                .setCookingTime(200)
+                .setExperience(0.5f)
+                .build();
+        SmelterRecipe
+                .make(BetterNether.makeID("cincinnasite_ingot_from_ore"), NetherItems.CINCINNASITE_INGOT)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setInput(NetherBlocks.CINCINNASITE_ORE)
+                .setGroup("nether_cincinnasite_ingot_from_ore")
+                .setCookingTime(200)
+                .setExperience(0.5f)
+                .build();
+
     }
 
     private static boolean itemExists(Item item) {

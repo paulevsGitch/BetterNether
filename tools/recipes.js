@@ -83,7 +83,25 @@ function printBlasting(name, json){
     `.setCookingTime(${+json.cookingtime})\n`;
 
     if (+json.experience>0){
-        res += `.setExperience(${+json.experience})\n`;
+        res += `.setExperience(${+json.experience}f)\n`;
+    }
+    if (+json.count>1){
+        res += `.setOutputCount(${json.count})\n`
+    }
+    res += ".build();";
+
+    console.log(res);
+}
+
+function printSmelting(name, json){    
+    let res = `SmelterRecipe\n.make(BetterNether.makeID("${name}"), ${blockRef({item:json.result})})\n`+
+    ".checkConfig(Configs.RECIPE_CONFIG)\n"+
+    ".setInput("+blockRef(json.ingredient)+")\n"+
+    '.setGroup("nether_'+name+'")\n'+    
+    `.setCookingTime(${+json.cookingtime})\n`;
+
+    if (+json.experience>0){
+        res += `.setExperience(${+json.experience}f)\n`;
     }
     if (+json.count>1){
         res += `.setOutputCount(${json.count})\n`
@@ -123,6 +141,10 @@ function findFiles(dir, indent=""){
                     }  else if (json.type == "minecraft:blasting" || json.type == "blasting"){
                         //console.log(`${indent}  |       BLASTING`)   
                         //printBlasting(name, json)
+                        //fs.unlinkSync(path.join(dir, file));
+                    } else if (json.type == "minecraft:smelting" || json.type == "smelting"){
+                        //console.log(`${indent}  |       SMELTING`)   
+                        //printSmelting(name, json)
                         fs.unlinkSync(path.join(dir, file));
                     } else{
                         //console.log(`${indent}  |       Unknown Type`, json.type)   
