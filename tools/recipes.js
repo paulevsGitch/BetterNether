@@ -1,7 +1,7 @@
 const   fs = require("fs"),
         path = require("path");
 
-const PATH = "/Users/sifrbaue/Documents/Minecraft/BetterNether/src/main/resources/data/betternether/recipes";
+const PATH = "~/Documents/Minecraft/BetterNether/src/main/resources/data/betternether/recipes";
 function tagRef(value){
     let parts = value.tag.split(':')
     if (parts.length==2){
@@ -111,6 +111,20 @@ function printSmelting(name, json){
     console.log(res);
 }
 
+function printSmithing(name, json){    
+    let res = `SmithingTableRecipe\n.make(BetterNether.makeID("${name}"), ${blockRef(json.result)})\n`+
+    ".checkConfig(Configs.RECIPE_CONFIG)\n"+
+    ".setBase("+blockRef(json.base)+")\n"+
+    ".setAddon("+blockRef(json.addition)+")\n"+
+    '.setGroup("nether_'+name+'")\n';
+    if (+json.count>1){
+        res += `.setOutputCount(${json.count})\n`
+    }
+    res += ".build();";
+
+    console.log(res);
+}
+
 function findFiles(dir, indent=""){
     console.log(`${indent}|-- ${dir}`)
     files = fs.readdirSync(dir)
@@ -125,29 +139,33 @@ function findFiles(dir, indent=""){
             if (ext === '.json'){
                 try {
                     const json = JSON.parse(fs.readFileSync(path.join(dir, file)).toString());
-                    //console.log(`${indent}  |   - ${name}${ext}`)   
+                    console.log(`${indent}  |   - ${name}${ext}`)   
                     if (json.type == "minecraft:crafting_shaped" || json.type == "crafting_shaped"){
-                        //console.log(`${indent}  |       SHAPED`)   
-                        //printShaped(name, json)
+                        console.log(`${indent}  |       SHAPED`)   
+                        printShaped(name, json)
                         //fs.unlinkSync(path.join(dir, file));
                     } else if (json.type == "minecraft:crafting_shapeless" || json.type == "crafting_shapeless"){
-                        //console.log(`${indent}  |       SHAPELESS`)   
-                        //printShapeless(name, json)
+                        console.log(`${indent}  |       SHAPELESS`)   
+                        printShapeless(name, json)
                         //fs.unlinkSync(path.join(dir, file));
                     } else if (json.type == "minecraft:stonecutting" || json.type == "stonecutting"){
-                        //console.log(`${indent}  |       STONECUTTING`)   
-                        //printStoneCutting(name, json)
+                        console.log(`${indent}  |       STONECUTTING`)   
+                        printStoneCutting(name, json)
                         //fs.unlinkSync(path.join(dir, file));
                     }  else if (json.type == "minecraft:blasting" || json.type == "blasting"){
-                        //console.log(`${indent}  |       BLASTING`)   
-                        //printBlasting(name, json)
+                        console.log(`${indent}  |       BLASTING`)   
+                        printBlasting(name, json)
                         //fs.unlinkSync(path.join(dir, file));
                     } else if (json.type == "minecraft:smelting" || json.type == "smelting"){
-                        //console.log(`${indent}  |       SMELTING`)   
-                        //printSmelting(name, json)
-                        fs.unlinkSync(path.join(dir, file));
+                        console.log(`${indent}  |       SMELTING`)   
+                        printSmelting(name, json)
+                        //fs.unlinkSync(path.join(dir, file));
+                    } else if (json.type == "minecraft:smithing" || json.type == "smithing"){
+                        console.log(`${indent}  |       SMITHING`)   
+                        printSmithing(name, json)
+                        //fs.unlinkSync(path.join(dir, file));
                     } else{
-                        //console.log(`${indent}  |       Unknown Type`, json.type)   
+                        console.log(`${indent}  |       Unknown Type`, json.type)   
                     }                       
                 } catch (e) {
                     console.error(e.message)

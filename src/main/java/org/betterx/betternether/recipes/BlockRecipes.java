@@ -1,10 +1,7 @@
 package org.betterx.betternether.recipes;
 
 import org.betterx.bclib.config.Configs;
-import org.betterx.bclib.recipes.BlastFurnaceRecipe;
-import org.betterx.bclib.recipes.GridRecipe;
-import org.betterx.bclib.recipes.SmelterRecipe;
-import org.betterx.bclib.recipes.StoneCutterRecipe;
+import org.betterx.bclib.recipes.*;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
@@ -363,6 +360,25 @@ public class BlockRecipes {
         registerStoneCutting();
         registerBlasting();
         registerSmelting();
+        registerSmithing();
+    }
+
+    private static void registerSmithing() {
+        SmithingTableRecipe
+                .make(BetterNether.makeID("netherite_fire_bowl"), NetherBlocks.NETHERITE_FIRE_BOWL)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setBase(NetherBlocks.CINCINNASITE_FIRE_BOWL)
+                .setAddon(Items.NETHERITE_INGOT)
+                .setGroup("nether_netherite_fire_bowl")
+                .build();
+
+        SmithingTableRecipe
+                .make(BetterNether.makeID("netherite_fire_bowl_soul"), NetherBlocks.NETHERITE_FIRE_BOWL_SOUL)
+                .checkConfig(Configs.RECIPE_CONFIG)
+                .setBase(NetherBlocks.CINCINNASITE_FIRE_BOWL_SOUL)
+                .setAddon(Items.NETHERITE_INGOT)
+                .setGroup("nether_netherite_fire_bowl_soul")
+                .build();
     }
 
     private static void registerSmelting() {
