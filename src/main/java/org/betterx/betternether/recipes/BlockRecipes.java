@@ -392,7 +392,7 @@ public class BlockRecipes {
                 .smithing(BetterNether.makeID("netherite_fire_bowl"), NetherBlocks.NETHERITE_FIRE_BOWL)
                 .checkConfig(Configs.RECIPE_CONFIG)
                 .setBase(NetherBlocks.CINCINNASITE_FIRE_BOWL)
-                .setAddon(Items.NETHERITE_INGOT)
+                .setAddition(Items.NETHERITE_INGOT)
                 .setGroup("nether_netherite_fire_bowl")
                 .build();
 
@@ -400,7 +400,7 @@ public class BlockRecipes {
                 .smithing(BetterNether.makeID("netherite_fire_bowl_soul"), NetherBlocks.NETHERITE_FIRE_BOWL_SOUL)
                 .checkConfig(Configs.RECIPE_CONFIG)
                 .setBase(NetherBlocks.CINCINNASITE_FIRE_BOWL_SOUL)
-                .setAddon(Items.NETHERITE_INGOT)
+                .setAddition(Items.NETHERITE_INGOT)
                 .setGroup("nether_netherite_fire_bowl_soul")
                 .build();
     }
