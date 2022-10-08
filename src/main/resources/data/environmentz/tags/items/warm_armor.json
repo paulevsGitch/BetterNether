@@ -1,0 +1,13 @@
+{
+    "replace": false,
+    "values": [
+        "betternether:nether_ruby_helmet",
+        "betternether:nether_ruby_chestplate",
+        "betternether:nether_ruby_leggings",
+        "betternether:nether_ruby_boots",
+        "betternether:cincinnasite_helmet",
+        "betternether:cincinnasite_helmet_chestplate",
+        "betternether:cincinnasite_helmet_leggings",
+        "betternether:cincinnasite_helmet_boots"
+    ]
+}
