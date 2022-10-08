@@ -138,14 +138,14 @@ public class NetherFeatures {
 
     public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> NETHER_RUBY_ORE_SOUL =
             registerOre("nether_ruby_soul", NetherBlocks.NETHER_RUBY_ORE, Blocks.SOUL_SOIL,
-                    16, 12, 0, //0.6f,
+                    5, 5, 0.1f, //0.6f,
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
                     false
             );
 
     public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> NETHER_RUBY_ORE_LARGE =
             registerOre("nether_ruby_large", NetherBlocks.NETHER_RUBY_ORE,
-                    16, 12, 0, //0.6f,
+                    5, 5, 0.1f, //0.6f,
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.top()),
                     false
             );
@@ -159,7 +159,7 @@ public class NetherFeatures {
 
     public static final org.betterx.bclib.api.v3.levelgen.features.BCLFeature<OreFeature, OreConfiguration> NETHER_LAPIS_ORE =
             registerOre("nether_lapis", NetherBlocks.NETHER_LAPIS_ORE,
-                    18, 4, 0.0f,
+                    14, 4, 0.0f,
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(10)),
                     false
             );
