@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom' version "${loom_version}"
     id 'maven-publish'
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -119,4 +120,100 @@ publishing {
         // uncomment to publish to the local maven
         // mavenLocal()
     }
+}
+
+//from https://lowcarbrob.medium.com/android-pro-tip-generating-your-apps-changelog-from-git-inside-build-gradle-19a07533eec4
+String generateChangelog() {
+    println "Assembeling Changelog ..."
+    def lastTag = "git describe --tags --abbrev=0".execute().text.trim()
+    def gitLogCmd = "git log $lastTag..HEAD --oneline --no-merges --pretty=format:\"%s\"".execute().text.trim()
+
+    def features = ""
+    def fixes = ""
+    def changes = ""
+    gitLogCmd.eachLine { gitLine ->
+        def line = gitLine.substring(1, gitLine.length() - 1)
+        if (line.trim().startsWith("[")) {
+            def sline = line.split("]", 2)
+            if (sline.length == 2) {
+                def type = sline[0].trim().toLowerCase().substring(1)
+                def comment = sline[1].trim()
+
+                //filter issue links
+                if (comment.contains("(")) {
+                    def cline = comment.split("\\(", 2)
+                    if (cline.length == 2 && cline[1].contains("#")) {
+                        comment = cline[0].trim()
+                    }
+                }
+
+                if (type == "fix" || type == "fixes" || type == "fixed") {
+                    fixes += "- $comment \n"
+                } else if (type == "feature" || type == "features") {
+                    features += "- $comment \n"
+                } else if (type == "change" || type == "changes" || type == "changed") {
+                    changes += "- $comment \n"
+                } else {
+                    println "Unknown Type: $type ($line)"
+                }
+            }
+        }
+
+    }
+    def changelog = ""
+    if (!features.isEmpty()) {
+        changelog += "#### Features\n"
+        changelog += features.trim()
+        changelog += "\n\n"
+    }
+    if (!changes.isEmpty()) {
+        changelog += "#### Changes\n"
+        changelog += changes.trim()
+        changelog += "\n\n"
+    }
+    if (!fixes.isEmpty()) {
+        changelog += "#### Fixes\n"
+        changelog += fixes.trim()
+        changelog += "\n\n"
+    }
+
+    println "Changelog since $lastTag:\n$changelog"
+    return changelog
+}
+
+task changelog() {
+    doLast {
+        new File(projectDir, "CHANGES.md").text = generateChangelog()
+    }
+}
+
+modrinth {
+    def changes = new File(projectDir, "CHANGES.md")
+    if (changes.exists()) {
+        changes = changes.getText('UTF-8')
+    } else {
+        changes = ""
+    }
+    def modrinth_token = new File(projectDir, "../MODRINTH_TOKEN")
+    if (modrinth_token.exists()) {
+        modrinth_token = modrinth_token.text
+    } else {
+        modrinth_token = ""
+    }
+    def slurper = new groovy.json.JsonSlurper()
+    token = modrinth_token
+    projectId = project.modrinth_id
+    versionNumber = project.mod_version
+    versionType = project.release_channel
+    uploadFile = remapJar
+    gameVersions = slurper.parseText(project.modrinth_versions)
+    loaders = ["fabric"]
+    changelog = changes
+    dependencies {
+        required.project "fabric-api"
+        required.project "bclib"
+        optional.project "emi"
+        optional.project "wthit"
+    }
+    debugMode = false
 }
