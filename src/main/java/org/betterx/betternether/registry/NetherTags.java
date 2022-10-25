@@ -76,8 +76,9 @@ public class NetherTags {
             if (mat.equals(Material.PLANT) || material.equals(Materials.NETHER_PLANT) || mat.equals(Material.REPLACEABLE_PLANT)) {
                 ComposterAPI.allowCompost(0.1f, item);
             }
-
-            TagManager.ITEMS.add(ItemTags.CHEST_BOATS, NetherItems.WARPED_CHEST_BOAT, NetherItems.CRIMSON_CHEST_BOAT);
         });
+
+        TagManager.ITEMS.add(ItemTags.CHEST_BOATS, NetherItems.WARPED_CHEST_BOAT, NetherItems.CRIMSON_CHEST_BOAT);
+        TagManager.BLOCKS.add(BlockTags.BEACON_BASE_BLOCKS, NetherBlocks.NETHER_RUBY_BLOCK);
     }
 }
