@@ -1,5 +1,6 @@
 package org.betterx.betternether.enchantments;
 
+import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.MHelper;
 import org.betterx.betternether.items.NetherArmor;
 import org.betterx.betternether.items.materials.BNToolMaterial;
@@ -133,20 +134,27 @@ public class RubyFire extends Enchantment {
 
             boolean didConvert = false;
             int xpDrop = 0;
-            final List<ItemStack> drops = Block.getDrops(brokenBlock, level, blockPos, null, player, breakingItem);
-            convertedDrops.get().clear();
+            try {
+                final List<ItemStack> drops = Block.getDrops(brokenBlock, level, blockPos, null, player, breakingItem);
+                convertedDrops.get().clear();
 
-            for (ItemStack stack : drops) {
-                BlastingRecipe result = FIRE_CONVERSIONS.get(stack.getItem());
-                if (result != null) {
-                    didConvert = true;
-                    final ItemStack resultStack = result.getResultItem();
-                    xpDrop += result.getExperience();
-                    convertedDrops.get()
-                                  .add(new ItemStack(resultStack.getItem(), resultStack.getCount() * stack.getCount()));
-                } else {
-                    convertedDrops.get().add(stack);
+                for (ItemStack stack : drops) {
+                    BlastingRecipe result = FIRE_CONVERSIONS.get(stack.getItem());
+                    if (result != null) {
+                        didConvert = true;
+                        final ItemStack resultStack = result.getResultItem();
+                        xpDrop += result.getExperience();
+                        convertedDrops.get()
+                                      .add(new ItemStack(
+                                              resultStack.getItem(),
+                                              resultStack.getCount() * stack.getCount()
+                                      ));
+                    } else {
+                        convertedDrops.get().add(stack);
+                    }
                 }
+            } catch (Exception e) {
+                BetterNether.LOGGER.error("Unable to get Drops for " + breakingItem, e);
             }
 
             if (didConvert) {
