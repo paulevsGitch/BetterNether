@@ -9,27 +9,18 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
 public enum BNToolMaterial implements Tier {
-    CINCINNASITE(2, 512, 6F, 2.0F, 16, NetherItems.CINCINNASITE_INGOT,
-            EquipmentSet.AttackSpeed.IRON_LEVEL, EquipmentSet.AttackDamage.IRON_LEVEL
+    CINCINNASITE(2, 512, 6.2F, 2.5F, 16, NetherItems.CINCINNASITE_INGOT,
+            EquipmentSet.AttackDamage.IRON_LEVEL,
+            EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.IRON_LEVEL, 0.2f)
     ),
-    CINCINNASITE_DIAMOND(3, 1800, 8F, 3.5F, 14, Items.DIAMOND,
-            EquipmentSet.AttackSpeed.DIAMOND_LEVEL, EquipmentSet.AttackDamage.DIAMOND_LEVEL
+    CINCINNASITE_DIAMOND(3, 2061, 8.2F, 3.7F, 14, Items.DIAMOND,
+            EquipmentSet.AttackDamage.DIAMOND_LEVEL,
+            EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.DIAMOND_LEVEL, 0.3f)
     ),
 
-    NETHER_RUBY(4, 1300, 9F, 4.0F, 22, NetherItems.NETHER_RUBY,
-            EquipmentSet.SetValues.create()
-                                  .add(EquipmentSet.SWORD_SLOT, 4)
-                                  .add(EquipmentSet.AXE_SLOT, 5)
-                                  .add(EquipmentSet.SHOVEL_SLOT, 2.5f)
-                                  .add(EquipmentSet.PICKAXE_SLOT, 2)
-                                  .add(EquipmentSet.HOE_SLOT, -3)
-            ,
-            EquipmentSet.SetValues.create()
-                                  .add(EquipmentSet.SWORD_SLOT, -1.4f)
-                                  .add(EquipmentSet.AXE_SLOT, -2.0f)
-                                  .add(EquipmentSet.SHOVEL_SLOT, -2.0f)
-                                  .add(EquipmentSet.PICKAXE_SLOT, -1.8f)
-                                  .add(EquipmentSet.HOE_SLOT, 1.0f)
+    NETHER_RUBY(4, 2561, 9.2F, 5.0F, 22, NetherItems.NETHER_RUBY,
+            EquipmentSet.AttackDamage.NETHERITE_LEVEL,
+            EquipmentSet.SetValues.copy(EquipmentSet.AttackSpeed.NETHERITE_LEVEL, 0.4f)
     );
 
     /* Vanilla Settings
