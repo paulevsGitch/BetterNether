@@ -10,8 +10,8 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 public class NetherSword extends BaseSwordItem implements InitialStackStateProvider {
-    public NetherSword(Tier material, int attackDamage, float attackSpeed) {
-        super(material, attackDamage, attackSpeed, NetherItems.defaultSettings().fireResistant());
+    public NetherSword(Tier material, float attackDamage, float attackSpeed) {
+        super(material, (int) attackDamage, attackSpeed, NetherItems.defaultSettings().fireResistant());
     }
 
     @Override

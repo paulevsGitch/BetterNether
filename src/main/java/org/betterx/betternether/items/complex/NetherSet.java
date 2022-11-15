@@ -6,29 +6,34 @@ import org.betterx.bclib.items.complex.EquipmentSet;
 import org.betterx.bclib.items.tool.BaseShearsItem;
 import org.betterx.betternether.BetterNether;
 import org.betterx.betternether.items.*;
+import org.betterx.betternether.items.materials.BNToolMaterial;
 import org.betterx.betternether.registry.NetherBlocks;
 import org.betterx.betternether.registry.NetherItems;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Tier;
 
 public class NetherSet extends EquipmentSet {
     public NetherSet(
             String prefix,
-            Tier material,
+            BNToolMaterial material,
             ArmorMaterial armor,
-            int attackDamage,
-            float attackSpeed,
             boolean withShears
     ) {
-        super(material, BetterNether.MOD_ID, prefix, NetherBlocks.NETHER_REED_STEM);
+        super(
+                material,
+                BetterNether.MOD_ID,
+                prefix,
+                NetherBlocks.NETHER_REED_STEM,
+                material.attackDamages,
+                material.attackSpeeds
+        );
 
-        add(PICKAXE_SLOT, new EquipmentDescription<>(NetherPickaxe::new));
-        add(AXE_SLOT, new EquipmentDescription<>(NetherAxe::new));
-        add(SHOVEL_SLOT, new EquipmentDescription<>(NetherShovel::new));
-        add(HOE_SLOT, new EquipmentDescription<>(NetherHoe::new));
-        add(SWORD_SLOT, new EquipmentDescription<>((tier) -> new NetherSword(tier, attackDamage, attackSpeed)));
+        add(PICKAXE_SLOT, EquipmentDescription::new, NetherPickaxe::new);
+        add(AXE_SLOT, EquipmentDescription::new, NetherAxe::new);
+        add(SHOVEL_SLOT, EquipmentDescription::new, NetherShovel::new);
+        add(HOE_SLOT, EquipmentDescription::new, NetherHoe::new);
+        add(SWORD_SLOT, EquipmentDescription::new, NetherSword::new);
 
         add(HELMET_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.HEAD)));
         add(CHESTPLATE_SLOT, new EquipmentDescription<>(tier -> new NetherArmor(armor, EquipmentSlot.CHEST)));

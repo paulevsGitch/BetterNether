@@ -11,9 +11,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class NetherHoe extends BaseHoeItem implements InitialStackStateProvider {
-
-    public NetherHoe(Tier material) {
-        super(material, 1, -2.8F, NetherItems.defaultSettings().fireResistant());
+    public NetherHoe(Tier material, float attackDamage, float attackSpeed) {
+        super(material, (int) attackDamage, attackSpeed, NetherItems.defaultSettings().fireResistant());
     }
 
     @Override

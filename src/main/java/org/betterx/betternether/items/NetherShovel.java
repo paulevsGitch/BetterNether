@@ -11,8 +11,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class NetherShovel extends BaseShovelItem implements InitialStackStateProvider {
-    public NetherShovel(Tier material) {
-        super(material, 1, -2.8F, NetherItems.defaultSettings().fireResistant());
+    public NetherShovel(Tier material, float attackDamage, float attackSpeed) {
+        super(material, attackDamage, attackSpeed, NetherItems.defaultSettings().fireResistant());
     }
 
     @Override

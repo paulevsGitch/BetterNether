@@ -14,20 +14,21 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
 public class DiamondSet extends EquipmentSet {
-    public DiamondSet(EquipmentSet set, int attackDamage, float attackSpeed) {
-        super(BNToolMaterial.CINCINNASITE_DIAMOND, BetterNether.MOD_ID, set.baseName, NetherBlocks.NETHER_REED_STEM);
-
-        add(PICKAXE_SLOT, new DiamondDescriptor<>(set.getSlot(PICKAXE_SLOT), NetherPickaxe::new));
-        add(AXE_SLOT, new DiamondDescriptor<>(set.getSlot(AXE_SLOT), NetherAxe::new));
-        add(SHOVEL_SLOT, new DiamondDescriptor<>(set.getSlot(SHOVEL_SLOT), NetherShovel::new));
-        add(HOE_SLOT, new DiamondDescriptor<>(set.getSlot(HOE_SLOT), NetherHoe::new));
-        add(
-                SWORD_SLOT,
-                new DiamondDescriptor<>(
-                        set.getSlot(SWORD_SLOT),
-                        tier -> new NetherSword(tier, attackDamage, attackSpeed)
-                )
+    public DiamondSet(EquipmentSet set) {
+        super(
+                BNToolMaterial.CINCINNASITE_DIAMOND,
+                BetterNether.MOD_ID,
+                set.baseName,
+                NetherBlocks.NETHER_REED_STEM,
+                BNToolMaterial.CINCINNASITE_DIAMOND.attackDamages,
+                BNToolMaterial.CINCINNASITE_DIAMOND.attackSpeeds
         );
+
+        add(PICKAXE_SLOT, set, DiamondDescriptor::new, NetherPickaxe::new);
+        add(AXE_SLOT, set, DiamondDescriptor::new, NetherAxe::new);
+        add(SHOVEL_SLOT, set, DiamondDescriptor::new, NetherShovel::new);
+        add(HOE_SLOT, set, DiamondDescriptor::new, NetherHoe::new);
+        add(SWORD_SLOT, set, DiamondDescriptor::new, NetherSword::new);
 
     }
 

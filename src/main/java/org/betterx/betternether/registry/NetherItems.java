@@ -77,22 +77,16 @@ public class NetherItems extends ItemRegistry {
             "cincinnasite",
             BNToolMaterial.CINCINNASITE,
             BNArmorMaterial.CINCINNASITE,
-            3,
-            -2.4F,
             true
     ).init();
-    public static final DiamondSet CINCINNASITE_DIAMOND_SET = new DiamondSet(
-            CINCINNASITE_SET,
-            4,
-            -2.4F
-    ).init();
+    public static final DiamondSet CINCINNASITE_DIAMOND_SET = new DiamondSet(CINCINNASITE_SET).init();
 
 
     public static final NetherSet NETHER_RUBY_SET = new NetherSet(
             "nether_ruby",
             BNToolMaterial.NETHER_RUBY,
             BNArmorMaterial.NETHER_RUBY,
-            4, -2.0F, false
+            false
     ).init();
 
     public static final Item CINCINNASITE_HAMMER = registerItem(
