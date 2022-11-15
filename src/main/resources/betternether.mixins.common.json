@@ -8,7 +8,6 @@
     "BlockBehaviourAccessor",
     "BlockBehaviourMixin",
     "BlockBehaviourPropertiesAccessor",
-    "BoneMealMixin",
     "BrewingRecipeRegistryMixin",
     "CraftingScreenHandlerMixin",
     "DefaultAttributeRegistryMixin",

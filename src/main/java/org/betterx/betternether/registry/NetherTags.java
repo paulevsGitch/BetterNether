@@ -1,10 +1,8 @@
 package org.betterx.betternether.registry;
 
-import org.betterx.bclib.api.v2.BonemealAPI;
 import org.betterx.bclib.api.v2.ComposterAPI;
 import org.betterx.bclib.blocks.SimpleLeavesBlock;
 import org.betterx.betternether.BetterNether;
-import org.betterx.betternether.blocks.BlockTerrain;
 import org.betterx.betternether.blocks.materials.Materials;
 import org.betterx.betternether.mixin.common.BlockBehaviourAccessor;
 import org.betterx.betternether.mixin.common.BlockBehaviourPropertiesAccessor;
@@ -62,9 +60,7 @@ public class NetherTags {
                 TagManager.BLOCKS.add(MineableTags.SHOVEL, block);
             }
 
-            if (block instanceof BlockTerrain) {
-                BonemealAPI.addSpreadableBlock(block, Blocks.NETHERRACK);
-            } else if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
+            if (block instanceof LeavesBlock || block instanceof SimpleLeavesBlock) {
                 TagManager.BLOCKS.add(BlockTags.LEAVES, block);
                 ComposterAPI.allowCompost(0.3f, item);
             }

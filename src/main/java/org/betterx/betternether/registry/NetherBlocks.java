@@ -1,5 +1,6 @@
 package org.betterx.betternether.registry;
 
+import org.betterx.bclib.api.v3.tag.BCLBlockTags;
 import org.betterx.bclib.blocks.BaseBookshelfBlock;
 import org.betterx.bclib.blocks.BaseComposterBlock;
 import org.betterx.bclib.blocks.BaseLadderBlock;
@@ -567,39 +568,53 @@ public class NetherBlocks extends BlockRegistry {
             Items.NETHERITE_INGOT
     );
     // Terrain //
-    public static final Block NETHERRACK_MOSS = registerBlock("netherrack_moss", new BlockTerrain());
-    public static final Block NETHER_MYCELIUM = registerBlock(
+    public static final BlockTerrain NETHERRACK_MOSS = registerBlock(
+            "netherrack_moss",
+            new BlockTerrain(),
+            BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
+    );
+    public static final BlockNetherMycelium NETHER_MYCELIUM = registerBlock(
             "nether_mycelium",
             new BlockNetherMycelium(),
-            BlockTags.NYLIUM,
+            CommonBlockTags.MYCELIUM,
+            CommonBlockTags.NETHER_MYCELIUM,
+            BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK,
             org.betterx.worlds.together.tag.v3.CommonBlockTags.NETHER_MYCELIUM
     );
-    public static final Block JUNGLE_GRASS = registerBlock(
+    public static final BlockTerrain JUNGLE_GRASS = registerBlock(
             "jungle_grass",
             new BlockTerrain(),
-            BlockTags.NYLIUM
+            BlockTags.NYLIUM,
+            BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
-    public static final Block MUSHROOM_GRASS = registerBlock(
+    public static final BlockTerrain MUSHROOM_GRASS = registerBlock(
             "mushroom_grass",
             new BlockTerrain(),
-            BlockTags.NYLIUM
+            BlockTags.NYLIUM,
+            BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
-    public static final Block SEPIA_MUSHROOM_GRASS = registerBlock(
+    public static final BlockTerrain SEPIA_MUSHROOM_GRASS = registerBlock(
             "sepia_mushroom_grass",
             new BlockTerrain(),
-            BlockTags.NYLIUM
+            BlockTags.NYLIUM,
+            BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
+    );
+    public static final BlockTerrain SWAMPLAND_GRASS = registerBlock(
+            "swampland_grass",
+            new BlockTerrain(),
+            BlockTags.NYLIUM,
+            BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
     public static final Block FARMLAND = registerBlock(
             "farmland",
             new BlockFarmland(),
             NetherTags.NETHER_FARMLAND
     );
-    public static final Block SWAMPLAND_GRASS = registerBlock(
-            "swampland_grass",
+    public static final BlockTerrain CEILING_MUSHROOMS = registerBlock(
+            "ceiling_mushrooms",
             new BlockTerrain(),
-            BlockTags.NYLIUM
+            BCLBlockTags.BONEMEAL_SOURCE_NETHERRACK
     );
-    public static final Block CEILING_MUSHROOMS = registerBlock("ceiling_mushrooms", new BlockTerrain());
     // Roofs //
     public static final Block ROOF_TILE_NETHER_BRICKS = registerRoof("roof_tile_nether_bricks", Blocks.NETHER_BRICKS);
     public static final Block ROOF_TILE_NETHER_BRICKS_STAIRS = registerStairs(
@@ -818,7 +833,7 @@ public class NetherBlocks extends BlockRegistry {
     }
 
     @SafeVarargs
-    public static Block registerBlock(String name, Block block, TagKey<Block>... tags) {
+    public static <T extends Block> T registerBlock(String name, T block, TagKey<Block>... tags) {
         if (Configs.BLOCKS.getBoolean("blocks", name, true)) {
             registerBlockDirectly(name, block);
             if (tags.length > 0) {
