@@ -50,7 +50,11 @@
   },
   "custom": {
     "bclib": {
-      "updater_icon": "icon_updater.png"
+      "updater_icon": "icon_updater.png",
+      "downloads": {
+        "modrinth": "https://modrinth.com/mod/betternether",
+        "curseforge": "https://www.curseforge.com/minecraft/mc-mods/betternether"
+      }
     },
     "extrapieces:piecepack": "extrapieces.betternether.json",
     "modupdater": {
