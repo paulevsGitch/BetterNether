@@ -2,6 +2,7 @@ plugins {
     id 'fabric-loom' version "${loom_version}"
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.+"
+    id "com.matthewprenger.cursegradle" version "1.4.0"
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -216,4 +217,54 @@ modrinth {
         optional.project "wthit"
     }
     debugMode = false
+}
+
+curseforge {
+    def slurper = new groovy.json.JsonSlurper()
+    apiKey = new File(projectDir, "../CURSEFORGE_TOKEN")
+    if (apiKey.exists()) {
+        apiKey = apiKey.text
+    } else {
+        apiKey = ""
+    }
+
+    def changes = new File(projectDir, "CHANGES.md")
+    if (changes.exists()) {
+        changes = changes.getText('UTF-8')
+    } else {
+        changes = ""
+    }
+
+    project {
+        id = '311377'
+        changelogType = 'markdown'
+        changelog = changes
+        releaseType = project.release_channel
+        def versions = slurper.parseText(project.modrinth_versions);
+        def latestVersion = ''
+        for (v in versions) {
+            addGameVersion v
+            latestVersion = "[$v]"
+        }
+        addGameVersion 'Fabric'
+        addGameVersion 'Java 17'
+        relations {
+            requiredDependency 'fabric-api'
+            requiredDependency 'bclib'
+            optionalDependency 'emi'
+            optionalDependency 'rei'
+            optionalDependency 'wthit'
+        }
+        mainArtifact(remapJar) {
+            displayName = "$project.modrinth_id-$project.version $latestVersion"
+        }
+        afterEvaluate {
+            mainArtifact(remapJar.outputs)
+        }
+    }
+
+    options {
+        debug = false
+        forgeGradleIntegration = false
+    }
 }
