@@ -252,7 +252,7 @@ curseforge {
             requiredDependency 'fabric-api'
             requiredDependency 'bclib'
             optionalDependency 'emi'
-            optionalDependency 'rei'
+            optionalDependency 'roughly-enough-items'
             optionalDependency 'wthit'
         }
         mainArtifact(remapJar) {
