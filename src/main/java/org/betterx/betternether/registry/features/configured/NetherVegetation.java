@@ -368,20 +368,17 @@ public class NetherVegetation {
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_NETHERRACK_MOSS = BCLFeatureBuilder
-            .startWeighted(BN.id("temp_bonemeal_netherrack_moss"))
+            .startBonemealPatch(BN.id("bonemeal_netherrack_moss"))
             .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
             .addAllStatesFor(BlockInkBush.AGE, NetherBlocks.INK_BUSH, 80)
             .addAllStatesFor(NetherWartBlock.AGE, Blocks.NETHER_WART, 40)
             .add(NetherBlocks.NETHER_GRASS, 200)
             .addAllStatesFor(BlockBlackApple.AGE, NetherBlocks.BLACK_APPLE, 50)
             .add(NetherBlocks.MAT_WART.getSeed(), 60)
-            .inlinePlace()
-            .isEmptyAndOnNetherGround()
-            .randomBonemealDistribution(BN.id("bonemeal_netherrack_moss"))
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_NETHER_MYCELIUM = BCLFeatureBuilder
-            .startWeighted(BN.id("temp_bonemeal_nether_mycelium"))
+            .startBonemealPatch(BN.id("temp_bonemeal_nether_mycelium"))
             .add(NetherBlocks.GRAY_MOLD, 200)
             .add(NetherBlocks.RED_MOLD, 180)
             .addAllStatesFor(BlockCommonPlant.AGE, NetherBlocks.ORANGE_MUSHROOM, 40)
@@ -392,20 +389,15 @@ public class NetherVegetation {
             .add(NetherBlocks.SEPIA_BONE_GRASS, 30)
             .add(NetherBlocks.BONE_GRASS, 30)
             .add(NetherBlocks.JUNGLE_PLANT, 30)
-            .inlinePlace()
             .isEmptyAndOn(BlockPredicates.ONLY_MYCELIUM)
-            .randomBonemealDistribution(BN.id("bonemeal_nether_mycelium"))
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_JUNGLE_GRASS = BCLFeatureBuilder
-            .startWeighted(BN.id("temp_bonemeal_jungle_grass"))
+            .startBonemealPatch(BN.id("bonemeal_jungle_grass"))
             .addAllStatesFor(BlockEggPlant.AGE, NetherBlocks.EGG_PLANT, 80)
             .add(NetherBlocks.JUNGLE_PLANT, 80)
             .addAllStatesFor(BlockMagmaFlower.AGE, NetherBlocks.MAGMA_FLOWER, 30)
             .addAllStatesFor(BlockFeatherFern.AGE, NetherBlocks.FEATHER_FERN, 20)
-            .inlinePlace()
-            .isEmptyAndOnNetherGround()
-            .randomBonemealDistribution(BN.id("bonemeal_jungle_grass"))
             .buildAndRegister();
 
     public static final BCLConfigureFeature<NetherForestVegetationFeature, NetherForestVegetationConfig> BONEMEAL_MUSHROOM_GRASS = BCLFeatureBuilder
@@ -420,30 +412,22 @@ public class NetherVegetation {
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_SWAMPLAND_GRASS = BCLFeatureBuilder
-            .startWeighted(BN.id("temp_bonemeal_swampland_grass"))
+            .startBonemealPatch(BN.id("bonemeal_swampland_grass"))
             .add(NetherBlocks.SOUL_VEIN, 80)
             .add(NetherBlocks.SWAMP_GRASS, 200)
             .add(NetherBlocks.FEATHER_FERN, 80)
-            .inlinePlace()
-            .isEmptyAndOnNetherGround()
-            .randomBonemealDistribution(BN.id("bonemeal_swampland_grass"))
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_CEILING_MUSHROOMS = BCLFeatureBuilder
-            .startWeighted(BN.id("temp_bonemeal_ceiling_mushrooms"))
+            .startBonemealPatch(BN.id("bonemeal_ceiling_mushrooms"))
             .add(NetherBlocks.NETHER_GRASS, 80)
-            .inlinePlace()
-            .isEmptyAndOnNetherGround()
-            .randomBonemealDistribution(BN.id("bonemeal_ceiling_mushrooms"))
             .buildAndRegister();
 
     public static final BCLConfigureFeature<RandomPatchFeature, RandomPatchConfiguration> BONEMEAL_SOUL_SOIL = BCLFeatureBuilder
-            .startWeighted(BN.id("temp_bonemeal_soul_soil"))
+            .startBonemealPatch(BN.id("temp_bonemeal_soul_soil"))
             .add(NetherBlocks.SOUL_VEIN, 150)
             .add(NetherBlocks.SOUL_GRASS, 200)
-            .inlinePlace()
             .isEmptyAndOn(BlockPredicates.ONLY_SOUL_GROUND)
-            .randomBonemealDistribution(BN.id("bonemeal_soul_soil"))
             .buildAndRegister();
 
     public static void ensureStaticInitialization() {
