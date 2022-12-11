@@ -72,5 +72,6 @@ public class RedstoneOreBlock extends RedStoneOreBlock implements BlockModelProv
     @Override
     public void addTags(List<TagKey<Block>> blockTags, List<TagKey<Item>> itemTags) {
         blockTags.add(CommonBlockTags.NETHERRACK);
+        blockTags.add(CommonBlockTags.ORES);
     }
 }
