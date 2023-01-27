@@ -377,6 +377,7 @@
 	"biome.betternether.poor_nether_grasslands": "贫瘠的下界草原",
 	"biome.betternether.upside_down_forest": "倒转森林",
 	"biome.betternether.old_swampland": "古老的沼泽",
+	"biome.betternether.flooded_deltas": "熔岩三角洲",
 	
 	"block.betternether.mushroom_fir": "下界冷杉菇木",
 	"block.betternether.mushroom_fir_sapling": "下界冷杉菇木幼苗",
@@ -723,4 +724,9 @@
 	"advancements.betternether.city.description":"找到一座被遗弃已久的下界城",
 
 	"biome.betternether.upside_down_forest_cleared": "被清除的反转森林"
+	"enchantment.betternether.obsidian_breaker": "黑曜石破坏者",
+	"enchantment.betternether.obsidian_breaker.desc": "增加对黑曜石的挖掘速度",
+	"enchantment.betternether.ruby_fire": "红宝石之火",
+	"enchantment.betternether.ruby_fire.desc": "自动熔炼矿物 (镐子) \n 火焰附加与击退 (护甲和武器)",
+
 }
