@@ -32,3 +32,4 @@ libs/modmenu-2.0.4.jar
 run-client/
 CurseForge/
 /run-server/
+/src/main/generated/.cache/
