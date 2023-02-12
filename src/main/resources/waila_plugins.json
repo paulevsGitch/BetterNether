@@ -1,0 +1,10 @@
+{
+  "betternether:plugin": {
+    "initializer": "org.betterx.betternether.integrations.wthit.WailaPlugin",
+    "side": "*",
+    "required": [
+      "betternether",
+      "bclib"
+    ]
+  }
+}
