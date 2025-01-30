@@ -10,7 +10,7 @@
 	"item.betternether.cincinnasite_axe": "Cyncenazytowa siekiera",
 	"item.betternether.cincinnasite_axe_diamond": "Cyncenazytowo-diamentowa siekiera",
 	"item.betternether.cincinnasite_pickaxe": "Cyncenazytowy kilof",
-	"item.betternether.cincinnasite_pickaxe_diamond": "Cyncenazytowo-diamentowy kilof"",
+	"item.betternether.cincinnasite_pickaxe_diamond": "Cyncenazytowo-diamentowy kilof",
 
 	"item.betternether.stalagnate_bowl": "Stalagnatowa miska",
 	"item.betternether.stalagnate_bowl_apple": "Czarne jabłko",
@@ -155,8 +155,8 @@
 
 	"block.betternether.stalagnate": "Stalagnatowiec",
 	"block.betternether.stalagnate_stem": "Stalagnatowiec",
-  "block.betternether.stalagnate_bark": "Stalagnatowcowy pień",
-	"block.betternether.stalagnate_bark": "Stalagnatowcowe drewno",
+        "block.betternether.stalagnate_bark": "Stalagnatowcowy pień",
+
 	"block.betternether.stalagnate_bowl_placed": "Stalagnatowcowa miska",
 	"block.betternether.stalagnate_planks": "Stalagnatowcowe deski",
 	"block.betternether.stalagnate_button": "Stalagnatowcowy przycisk",
